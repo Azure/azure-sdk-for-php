@@ -147,7 +147,7 @@ class Entry extends AtomBase
      *
      * @param string $xmlString A string representing an ATOM entry instance.
      *
-     * @return none
+     * @return void
      */
     public function parseXml($xmlString)
     {
@@ -161,7 +161,7 @@ class Entry extends AtomBase
      *
      * @param \SimpleXMLElement $entryXml xml element of ATOM ENTRY
      *
-     * @return none
+     * @return void
      */
     public function fromXml($entryXml) {
         Validate::notNull($entryXml, 'entryXml');
@@ -237,7 +237,7 @@ class Entry extends AtomBase
      *
      * @param Person $author The author of the entry.
      *
-     * @return none
+     * @return void
      */
     public function setAuthor($author)
     {
@@ -259,7 +259,7 @@ class Entry extends AtomBase
      *
      * @param string $category The category of the entry.
      *
-     * @return none
+     * @return void
      */
     public function setCategory($category)
     {
@@ -281,7 +281,7 @@ class Entry extends AtomBase
      *
      * @param Content $content Sets the content of the entry.
      *
-     * @return none
+     * @return void
      */
     public function setContent($content)
     {
@@ -303,7 +303,7 @@ class Entry extends AtomBase
      *
      * @param string $contributor The contributor of the entry.
      *
-     * @return none
+     * @return void
      */
     public function setContributor($contributor)
     {
@@ -325,7 +325,7 @@ class Entry extends AtomBase
      *
      * @param string $id The id of the entry.
      *
-     * @return none
+     * @return void
      */
     public function setId($id)
     {
@@ -347,7 +347,7 @@ class Entry extends AtomBase
      *
      * @param string $link The link of the entry.
      *
-     * @return none
+     * @return void
      */
     public function setLink($link)
     {
@@ -369,7 +369,7 @@ class Entry extends AtomBase
      *
      * @param boolean $published Is the entry published.
      *
-     * @return none
+     * @return void
      */
     public function setPublished($published)
     {
@@ -391,7 +391,7 @@ class Entry extends AtomBase
      *
      * @param string $rights The rights of the entry.
      *
-     * @return none
+     * @return void
      */
     public function setRights($rights)
     {
@@ -413,7 +413,7 @@ class Entry extends AtomBase
      *
      * @param string $source The source of the entry.
      *
-     * @return none
+     * @return void
      */
     public function setSource($source)
     {
@@ -435,7 +435,7 @@ class Entry extends AtomBase
      *
      * @param string $summary The summary of the entry.
      *
-     * @return none
+     * @return void
      */
     public function setSummary($summary)
     {
@@ -457,7 +457,7 @@ class Entry extends AtomBase
      *
      * @param string $title The title of the entry.
      *
-     * @return none
+     * @return void
      */
     public function setTitle($title)
     {
@@ -479,7 +479,7 @@ class Entry extends AtomBase
      *
      * @param \DateTime $updated updated.
      *
-     * @return none
+     * @return void
      */
     public function setUpdated($updated)
     {
@@ -501,7 +501,7 @@ class Entry extends AtomBase
      *
      * @param string $extensionElement The extension element of the entry.
      *
-     * @return none
+     * @return void
      */
     public function setExtensionElement($extensionElement)
     {
@@ -513,7 +513,7 @@ class Entry extends AtomBase
      *
      * @param \XMLWriter $xmlWriter The XML writer.
      *
-     * @return none
+     * @return void
      */
     public function writeXml($xmlWriter)
     {
@@ -532,7 +532,7 @@ class Entry extends AtomBase
      *
      * @param \XMLWriter $xmlWriter The XML writer.
      *
-     * @return none
+     * @return void
      */
     public function writeInnerXml($xmlWriter)
     {

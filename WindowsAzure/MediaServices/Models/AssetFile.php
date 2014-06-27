@@ -173,7 +173,7 @@ class AssetFile
      *
      * @param array $options Array containing values for object properties
      *
-     * @return none
+     * @return void
      */
     public function fromArray($options)
     {
@@ -290,7 +290,7 @@ class AssetFile
      *
      * @param string $value Content check sum
      *
-     * @return none
+     * @return void
      */
     public function setContentCheckSum($value)
     {
@@ -312,7 +312,7 @@ class AssetFile
      *
      * @param string $value Mime type
      *
-     * @return none
+     * @return void
      */
     public function setMimeType($value)
     {
@@ -354,7 +354,7 @@ class AssetFile
      *
      * @param bool $value Is primary
      *
-     * @return none
+     * @return void
      */
     public function setIsPrimary($value)
     {
@@ -376,7 +376,7 @@ class AssetFile
      *
      * @param string $value Initialization vector
      *
-     * @return none
+     * @return void
      */
     public function setInitializationVector($value)
     {
@@ -398,7 +398,7 @@ class AssetFile
      *
      * @param string $value Encryption key id
      *
-     * @return none
+     * @return void
      */
     public function setEncryptionKeyId($value)
     {
@@ -420,7 +420,7 @@ class AssetFile
      *
      * @param bool $value Is encrypted
      *
-     * @return none
+     * @return void
      */
     public function setIsEncrypted($value)
     {
@@ -442,7 +442,7 @@ class AssetFile
      *
      * @param string $value Encryption scheme
      *
-     * @return none
+     * @return void
      */
     public function setEncryptionScheme($value)
     {
@@ -464,7 +464,7 @@ class AssetFile
      *
      * @param string $value Encryption version
      *
-     * @return none
+     * @return void
      */
     public function setEncryptionVersion($value)
     {
@@ -486,7 +486,7 @@ class AssetFile
      *
      * @param string $value Parent asset id
      *
-     * @return none
+     * @return void
      */
     public function setParentAssetId($value)
     {
@@ -508,7 +508,7 @@ class AssetFile
      *
      * @param int $value Content file size
      *
-     * @return none
+     * @return void
      */
     public function setContentFileSize($value)
     {
@@ -530,7 +530,7 @@ class AssetFile
      *
      * @param string $value Name
      *
-     * @return none
+     * @return void
      */
     public function setName($value)
     {

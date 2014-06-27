@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
@@ -41,10 +41,10 @@ use WindowsAzure\ServiceManagement\Internal\WindowsAzureService;
 class HostedService extends WindowsAzureService
 {
     /**
-     * @var array 
+     * @var array
      */
     private $_deployments;
-    
+
     /**
      * Constructs new hosted service object.
      */
@@ -52,7 +52,7 @@ class HostedService extends WindowsAzureService
     {
         $sources = func_get_args();
         parent::__construct($sources);
-        
+
         $this->_deployments = array();
         foreach ($sources as $source) {
             $deployments = Utilities::tryGetKeysChainValue(
@@ -60,7 +60,7 @@ class HostedService extends WindowsAzureService
                 Resources::XTAG_DEPLOYMENTS,
                 Resources::XTAG_DEPLOYMENT
             );
-            
+
             if (!empty($deployments)) {
                 $this->_deployments = Utilities::createInstanceList(
                     Utilities::getArray($deployments),
@@ -69,10 +69,10 @@ class HostedService extends WindowsAzureService
             }
         }
     }
-    
+
     /**
      * Converts the current object into ordered array representation.
-     * 
+     *
      * @return array
      */
     protected function toArray()
@@ -87,26 +87,26 @@ class HostedService extends WindowsAzureService
             Resources::XTAG_AFFINITY_GROUP
         );
         $ordered = Utilities::orderArray($arr, $order);
-        
+
         return $ordered;
     }
-    
+
     /**
      * Gets the deployments array.
-     * 
+     *
      * @return array
      */
     public function getDeployments()
     {
         return $this->_deployments;
     }
-    
+
     /**
      * Sets the deployments array.
-     * 
+     *
      * @param array $deployments The deployments array.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setDeployments($deployments)
     {

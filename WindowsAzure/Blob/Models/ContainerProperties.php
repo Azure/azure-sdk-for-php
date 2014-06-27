@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 
 /**
@@ -41,12 +41,12 @@ class ContainerProperties
      * @var \DateTime
      */
     private $_lastModified;
-    
+
     /**
      * @var string
      */
     private $_etag;
-    
+
     /**
      * Gets container lastModified.
      *
@@ -61,14 +61,14 @@ class ContainerProperties
      * Sets container lastModified.
      *
      * @param \DateTime $lastModified value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setLastModified($lastModified)
     {
         $this->_lastModified = $lastModified;
     }
-    
+
     /**
      * Gets container etag.
      *
@@ -83,8 +83,8 @@ class ContainerProperties
      * Sets container etag.
      *
      * @param string $etag value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setETag($etag)
     {

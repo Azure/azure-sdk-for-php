@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Validate;
 
@@ -42,88 +42,88 @@ class CreateServiceOptions
      * @var string
      */
     private $_location;
-    
+
     /**
      * @var string
      */
     private $_affinityGroup;
-    
+
     /**
      * @var string
      */
     private $_description;
-    
+
     /**
      * Gets the location.
-     * 
+     *
      * @return string
      */
     public function getLocation()
     {
         return $this->_location;
     }
-    
+
     /**
      * Sets the location.
-     * 
+     *
      * @param string $location The location.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setLocation($location)
     {
         Validate::isString($location, 'location');
         Validate::notNullOrEmpty($location, 'location');
-        
+
         $this->_location = $location;
     }
-    
+
     /**
      * Gets the affinityGroup.
-     * 
+     *
      * @return string
      */
     public function getAffinityGroup()
     {
         return $this->_affinityGroup;
     }
-    
+
     /**
      * Sets the affinityGroup.
-     * 
+     *
      * @param string $affinityGroup The affinityGroup.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setAffinityGroup($affinityGroup)
     {
         Validate::isString($affinityGroup, 'affinityGroup');
         Validate::notNullOrEmpty($affinityGroup, 'affinityGroup');
-        
+
         $this->_affinityGroup = $affinityGroup;
     }
-    
+
     /**
      * Gets the description.
-     * 
+     *
      * @return string
      */
     public function getDescription()
     {
         return $this->_description;
     }
-    
+
     /**
      * Sets the description.
-     * 
+     *
      * @param string $description The description.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setDescription($description)
     {
         Validate::isString($description, 'description');
-        
+
         $this->_description = $description;
     }
 }

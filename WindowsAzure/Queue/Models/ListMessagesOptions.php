@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Queue\Models;
 
 /**
@@ -38,65 +38,65 @@ namespace WindowsAzure\Queue\Models;
 class ListMessagesOptions extends QueueServiceOptions
 {
     /**
-     * A nonzero integer value that specifies the number of messages to retrieve 
-     * from the queue, up to a maximum of 32. If fewer are visible, 
-     * the visible messages are returned. By default, a single message is retrieved 
+     * A nonzero integer value that specifies the number of messages to retrieve
+     * from the queue, up to a maximum of 32. If fewer are visible,
+     * the visible messages are returned. By default, a single message is retrieved
      * from the queue with this operation.
-     * 
+     *
      * @var integer
      */
     private $_numberOfMessages;
-    
+
     /**
-     * Specifies the new visibility timeout value, in seconds, 
-     * relative to server time. The new value must be larger than or equal to 
-     * 1 second, and cannot be larger than 7 days, or larger than 2 hours on 
-     * REST protocol versions prior to version 2011-08-18. 
-     * The visibility timeout of a message can be set to a value later than the 
+     * Specifies the new visibility timeout value, in seconds,
+     * relative to server time. The new value must be larger than or equal to
+     * 1 second, and cannot be larger than 7 days, or larger than 2 hours on
+     * REST protocol versions prior to version 2011-08-18.
+     * The visibility timeout of a message can be set to a value later than the
      * expiry time.
-     * 
+     *
      * @var integer
      */
     private $_visibilityTimeoutInSeconds;
-    
+
     /**
      * Gets visibilityTimeoutInSeconds field.
-     * 
+     *
      * @return integer
      */
     public function getVisibilityTimeoutInSeconds()
     {
         return $this->_visibilityTimeoutInSeconds;
     }
-    
+
     /**
      * Sets visibilityTimeoutInSeconds field.
-     * 
+     *
      * @param integer $visibilityTimeoutInSeconds value to use.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setVisibilityTimeoutInSeconds($visibilityTimeoutInSeconds)
     {
         $this->_visibilityTimeoutInSeconds = $visibilityTimeoutInSeconds;
     }
-    
+
     /**
      * Gets numberOfMessages field.
-     * 
+     *
      * @return integer
      */
     public function getNumberOfMessages()
     {
         return $this->_numberOfMessages;
     }
-    
+
     /**
      * Sets numberOfMessages field.
-     * 
+     *
      * @param integer $numberOfMessages value to use.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setNumberOfMessages($numberOfMessages)
     {

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Common\Internal\Validate;
 
@@ -42,32 +42,32 @@ class ListBlobsOptions extends BlobServiceOptions
      * @var string
      */
     private $_prefix;
-    
+
     /**
      * @var string
      */
     private $_marker;
-    
+
     /**
      * @var string
      */
     private $_delimiter;
-    
+
     /**
      * @var integer
      */
     private $_maxResults;
-    
+
     /**
      * @var boolean
      */
     private $_includeMetadata;
-    
+
     /**
      * @var boolean
      */
     private $_includeSnapshots;
-    
+
     /**
      * @var boolean
      */
@@ -87,15 +87,15 @@ class ListBlobsOptions extends BlobServiceOptions
      * Sets prefix.
      *
      * @param string $prefix value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setPrefix($prefix)
     {
         Validate::isString($prefix, 'prefix');
         $this->_prefix = $prefix;
     }
-    
+
     /**
      * Gets delimiter.
      *
@@ -110,8 +110,8 @@ class ListBlobsOptions extends BlobServiceOptions
      * Sets prefix.
      *
      * @param string $delimiter value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setDelimiter($delimiter)
     {
@@ -121,7 +121,7 @@ class ListBlobsOptions extends BlobServiceOptions
 
     /**
      * Gets marker.
-     * 
+     *
      * @return string.
      */
     public function getMarker()
@@ -133,8 +133,8 @@ class ListBlobsOptions extends BlobServiceOptions
      * Sets marker.
      *
      * @param string $marker value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setMarker($marker)
     {
@@ -144,7 +144,7 @@ class ListBlobsOptions extends BlobServiceOptions
 
     /**
      * Gets max results.
-     * 
+     *
      * @return integer.
      */
     public function getMaxResults()
@@ -156,8 +156,8 @@ class ListBlobsOptions extends BlobServiceOptions
      * Sets max results.
      *
      * @param integer $maxResults value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setMaxResults($maxResults)
     {
@@ -167,7 +167,7 @@ class ListBlobsOptions extends BlobServiceOptions
 
     /**
      * Indicates if metadata is included or not.
-     * 
+     *
      * @return boolean.
      */
     public function getIncludeMetadata()
@@ -179,18 +179,18 @@ class ListBlobsOptions extends BlobServiceOptions
      * Sets the include metadata flag.
      *
      * @param bool $includeMetadata value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setIncludeMetadata($includeMetadata)
     {
         Validate::isBoolean($includeMetadata);
         $this->_includeMetadata = $includeMetadata;
     }
-    
+
     /**
      * Indicates if snapshots is included or not.
-     * 
+     *
      * @return boolean.
      */
     public function getIncludeSnapshots()
@@ -202,18 +202,18 @@ class ListBlobsOptions extends BlobServiceOptions
      * Sets the include snapshots flag.
      *
      * @param bool $includeSnapshots value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setIncludeSnapshots($includeSnapshots)
     {
         Validate::isBoolean($includeSnapshots);
         $this->_includeSnapshots = $includeSnapshots;
     }
-    
+
     /**
      * Indicates if uncommittedBlobs is included or not.
-     * 
+     *
      * @return boolean.
      */
     public function getIncludeUncommittedBlobs()
@@ -225,8 +225,8 @@ class ListBlobsOptions extends BlobServiceOptions
      * Sets the include uncommittedBlobs flag.
      *
      * @param bool $includeUncommittedBlobs value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setIncludeUncommittedBlobs($includeUncommittedBlobs)
     {

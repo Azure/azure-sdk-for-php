@@ -93,7 +93,7 @@ class OAuthAccessToken
      *
      * @param string $accessToken OAuth access token
      *
-     * @return none
+     * @return void
      */
     public function setAccessToken($accessToken)
     {
@@ -118,7 +118,7 @@ class OAuthAccessToken
      *
      * @param int $expiresIn OAuth access token expire date
      *
-     * @return none
+     * @return void
      */
     public function setExpiresIn($expiresIn)
     {
@@ -142,7 +142,7 @@ class OAuthAccessToken
      *
      * @param string $scope OAuth access token scope
      *
-     * @return none
+     * @return void
      */
     public function setScope($scope)
     {

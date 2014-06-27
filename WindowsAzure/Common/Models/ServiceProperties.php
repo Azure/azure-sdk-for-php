@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Common\Models;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Models\Logging;
@@ -44,12 +44,12 @@ class ServiceProperties
     private $_logging;
     private $_metrics;
     public static $xmlRootName = 'StorageServiceProperties';
-    
+
     /**
      * Creates ServiceProperties object from parsed XML response.
      *
      * @param array $parsedResponse XML response parsed into array.
-     * 
+     *
      * @return WindowsAzure\Common\Models\ServiceProperties.
      */
     public static function create($parsedResponse)
@@ -57,10 +57,10 @@ class ServiceProperties
         $result = new ServiceProperties();
         $result->setLogging(Logging::create($parsedResponse['Logging']));
         $result->setMetrics(Metrics::create($parsedResponse['Metrics']));
-        
+
         return $result;
     }
-    
+
     /**
      * Gets logging element.
      *
@@ -70,19 +70,19 @@ class ServiceProperties
     {
         return $this->_logging;
     }
-    
+
     /**
      * Sets logging element.
      *
-     * @param WindowsAzure\Common\Models\Logging $logging new element.
-     * 
-     * @return none.
+     * @param \WindowsAzure\Common\Models\Logging $logging new element.
+     *
+     * @return void.
      */
     public function setLogging($logging)
     {
         $this->_logging = clone $logging;
     }
-    
+
     /**
      * Gets metrics element.
      *
@@ -92,23 +92,23 @@ class ServiceProperties
     {
         return $this->_metrics;
     }
-    
+
     /**
      * Sets metrics element.
      *
-     * @param WindowsAzure\Common\Models\Metrics $metrics new element.
-     * 
-     * @return none.
+     * @param \WindowsAzure\Common\Models\Metrics $metrics new element.
+     *
+     * @return void.
      */
     public function setMetrics($metrics)
     {
         $this->_metrics = clone $metrics;
     }
-    
+
     /**
      * Converts this object to array with XML tags
-     * 
-     * @return array. 
+     *
+     * @return array.
      */
     public function toArray()
     {
@@ -117,18 +117,18 @@ class ServiceProperties
             'Metrics' => !empty($this->_metrics) ? $this->_metrics->toArray() : null
         );
     }
-    
+
     /**
      * Converts this current object to XML representation.
-     * 
+     *
      * @param XmlSerializer $xmlSerializer The XML serializer.
-     * 
+     *
      * @return string
      */
     public function toXml($xmlSerializer)
     {
         $properties = array(XmlSerializer::ROOT_NAME => self::$xmlRootName);
-        
+
         return $xmlSerializer->serialize($this->toArray(), $properties);
     }
 }

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Common\Models;
 use WindowsAzure\Common\Internal\Utilities;
 
@@ -40,26 +40,26 @@ class RetentionPolicy
 {
     /**
      * Indicates whether a retention policy is enabled for the storage service
-     * 
+     *
      * @var bool.
      */
     private $_enabled;
-    
+
     /**
      * If $_enabled is true then this field indicates the number of days that metrics
-     * or logging data should be retained. All data older than this value will be 
-     * deleted. The minimum value you can specify is 1; 
+     * or logging data should be retained. All data older than this value will be
+     * deleted. The minimum value you can specify is 1;
      * the largest value is 365 (one year)
-     * 
+     *
      * @var int
      */
     private $_days;
-    
+
     /**
      * Creates object from $parsedResponse.
-     * 
+     *
      * @param array $parsedResponse XML response parsed into array.
-     * 
+     *
      * @return WindowsAzure\Common\Models\RetentionPolicy
      */
     public static function create($parsedResponse)
@@ -69,58 +69,58 @@ class RetentionPolicy
         if ($result->getEnabled()) {
             $result->setDays(intval($parsedResponse['Days']));
         }
-        
+
         return $result;
     }
-    
+
     /**
      * Gets enabled.
-     * 
-     * @return bool. 
+     *
+     * @return bool.
      */
     public function getEnabled()
     {
         return $this->_enabled;
     }
-    
+
     /**
      * Sets enabled.
-     * 
+     *
      * @param bool $enabled value to use.
-     * 
-     * @return none. 
+     *
+     * @return void.
      */
     public function setEnabled($enabled)
     {
         $this->_enabled = $enabled;
     }
-    
+
     /**
      * Gets days field.
-     * 
+     *
      * @return int
      */
     public function getDays()
     {
         return $this->_days;
     }
-    
+
     /**
      * Sets days field.
-     * 
+     *
      * @param int $days value to use.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setDays($days)
     {
         $this->_days = $days;
     }
-    
+
     /**
      * Converts this object to array with XML tags
-     * 
-     * @return array. 
+     *
+     * @return array.
      */
     public function toArray()
     {
@@ -128,7 +128,7 @@ class RetentionPolicy
         if (isset($this->_days)) {
             $array['Days'] = strval($this->_days);
         }
-        
+
         return $array;
     }
 }

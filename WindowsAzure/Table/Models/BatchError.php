@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Table\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
@@ -42,22 +42,22 @@ use WindowsAzure\Common\ServiceException;
 class BatchError
 {
     /**
-     * @var WindowsAzure\Common\ServiceException 
+     * @var WindowsAzure\Common\ServiceException
      */
     private $_error;
-    
+
     /**
      * @var integer
      */
     private $_contentId;
-    
+
     /**
      * Creates BatchError object.
-     * 
-     * @param WindowsAzure\Common\ServiceException $error   The error object.
+     *
+     * @param \WindowsAzure\Common\ServiceException $error   The error object.
      * @param array                                $headers The response headers.
-     * 
-     * @return \WindowsAzure\Table\Models\BatchError 
+     *
+     * @return \WindowsAzure\Table\Models\BatchError
      */
     public static function create($error, $headers)
     {
@@ -66,55 +66,55 @@ class BatchError
             Resources::INVALID_EXC_OBJ_MSG
         );
         Validate::isArray($headers, 'headers');
-        
+
         $result = new BatchError();
         $clean  = array_change_key_case($headers);
-        
+
         $result->setError($error);
         $contentId = Utilities::tryGetValue($clean, Resources::CONTENT_ID);
         $result->setContentId(is_null($contentId) ? null : intval($contentId));
-        
+
         return $result;
     }
-    
+
     /**
      * Gets the error.
-     * 
+     *
      * @return WindowsAzure\Common\ServiceException
      */
     public function getError()
     {
         return $this->_error;
     }
-    
+
     /**
      * Sets the error.
-     * 
-     * @param WindowsAzure\Common\ServiceException $error The error object.
-     * 
-     * @return none
+     *
+     * @param \WindowsAzure\Common\ServiceException $error The error object.
+     *
+     * @return void
      */
     public function setError($error)
     {
         $this->_error = $error;
     }
-    
+
     /**
      * Gets the contentId.
-     * 
+     *
      * @return integer
      */
     public function getContentId()
     {
         return $this->_contentId;
     }
-    
+
     /**
      * Sets the contentId.
-     * 
+     *
      * @param integer $contentId The contentId object.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setContentId($contentId)
     {

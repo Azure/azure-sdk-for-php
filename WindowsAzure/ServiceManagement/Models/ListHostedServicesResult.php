@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
@@ -43,12 +43,12 @@ class ListHostedServicesResult
      * @var array
      */
     private $_hostedServices;
-    
+
     /**
      * Creates new ListHostedServicesResult from parsed response body.
-     * 
+     *
      * @param array $parsed The parsed response body.
-     * 
+     *
      * @return ListHostedServicesResult
      */
     public static function create($parsed)
@@ -59,7 +59,7 @@ class ListHostedServicesResult
             Resources::XTAG_HOSTED_SERVICE,
             $parsed
         );
-        
+
         foreach ($rowHostedServices as $rowHostedService) {
             $properties                = Utilities::tryGetArray(
                 Resources::XTAG_HOSTED_SERVICE_PROPERTIES,
@@ -71,26 +71,26 @@ class ListHostedServicesResult
             );
             $result->_hostedServices[] = $hostedService;
         }
-        
+
         return $result;
     }
-    
+
     /**
      * Gets hosted services.
-     * 
+     *
      * @return array
      */
     public function getHostedServices()
     {
         return $this->_hostedServices;
     }
-    
+
     /**
      * Sets hosted services.
-     * 
+     *
      * @param array $hostedServices The hosted services.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setHostedServices($hostedServices)
     {

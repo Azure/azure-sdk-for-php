@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
@@ -44,33 +44,33 @@ class GetOperationStatusResult
      * @var string
      */
     private $_id;
-    
+
     /**
      * @var string
      */
     private $_status;
-    
+
     /**
      * @var string
      */
     private $_httpStatusCode;
-    
+
     /**
      * @var ServiceException
      */
     private $_error;
-    
+
     /**
      * Creates GetOperationStatusResult object from parsed response.
-     * 
+     *
      * @param array $parsed The parsed response.
-     * 
+     *
      * @return GetOperationStatusResult
      */
     public static function create($parsed)
     {
         $result = new GetOperationStatusResult();
-        
+
         $result->_id             = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_ID
@@ -87,99 +87,99 @@ class GetOperationStatusResult
             $parsed,
             Resources::XTAG_ERROR
         );
-        
+
         if (!empty($error)) {
             $code    = Utilities::tryGetValue($error, Resources::XTAG_CODE);
             $message = Utilities::tryGetValue($error, Resources::XTAG_MESSAGE);
-            
+
             $result->_error = new ServiceException($code, $message);
-        }        
-        
+        }
+
         return $result;
     }
-    
+
     /**
      * Gets the id.
-     * 
+     *
      * @return string
      */
     public function getId()
     {
         return $this->_id;
     }
-    
+
     /**
      * Sets the id.
-     * 
+     *
      * @param string $id The id.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setId($id)
     {
         $this->_id = $id;
     }
-    
+
     /**
      * Gets the status.
-     * 
+     *
      * @return string
      */
     public function getStatus()
     {
         return $this->_status;
     }
-    
+
     /**
      * Sets the status.
-     * 
+     *
      * @param string $status The status.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setStatus($status)
     {
         $this->_status = $status;
     }
-    
+
     /**
      * Gets the httpStatusCode.
-     * 
+     *
      * @return string
      */
     public function getHttpStatusCode()
     {
         return $this->_httpStatusCode;
     }
-    
+
     /**
      * Sets the httpStatusCode.
-     * 
+     *
      * @param string $httpStatusCode The httpStatusCode.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setHttpStatusCode($httpStatusCode)
     {
         $this->_httpStatusCode = $httpStatusCode;
     }
-    
+
     /**
      * Gets the error.
-     * 
+     *
      * @return ServiceException
      */
     public function getError()
     {
         return $this->_error;
     }
-    
+
     /**
      * Sets the error.
-     * 
+     *
      * @param ServiceException $error The error.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setError($error)
     {

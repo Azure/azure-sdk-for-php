@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 
 /**
@@ -41,61 +41,61 @@ class GetBlobMetadataOptions extends BlobServiceOptions
      * @var string
      */
     private $_leaseId;
-    
+
     /**
      * @var string
      */
     private $_snapshot;
-    
+
     /**
      * @var AccessCondition
      */
     private $_accessCondition;
-    
+
     /**
      * Gets lease Id for the blob
-     * 
+     *
      * @return string
      */
     public function getLeaseId()
     {
         return $this->_leaseId;
     }
-    
+
     /**
      * Sets lease Id for the blob
-     * 
+     *
      * @param string $leaseId the blob lease id.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setLeaseId($leaseId)
     {
         $this->_leaseId = $leaseId;
     }
-    
+
     /**
      * Gets access condition
-     * 
+     *
      * @return AccessCondition
      */
     public function getAccessCondition()
     {
         return $this->_accessCondition;
     }
-    
+
     /**
      * Sets access condition
-     * 
+     *
      * @param AccessCondition $accessCondition value to use.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setAccessCondition($accessCondition)
     {
         $this->_accessCondition = $accessCondition;
     }
-    
+
     /**
      * Gets blob snapshot.
      *
@@ -110,8 +110,8 @@ class GetBlobMetadataOptions extends BlobServiceOptions
      * Sets blob snapshot.
      *
      * @param string $snapshot value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setSnapshot($snapshot)
     {

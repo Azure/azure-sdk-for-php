@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Table\Models;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
@@ -43,23 +43,23 @@ class UpdateEntityResult
      * @var string
      */
     private $_etag;
-    
+
     /**
      * Creates UpdateEntityResult from HTTP response headers.
-     * 
+     *
      * @param array $headers The HTTP response headers.
-     * 
-     * @return \WindowsAzure\Table\Models\UpdateEntityResult 
+     *
+     * @return \WindowsAzure\Table\Models\UpdateEntityResult
      */
     public static function create($headers)
     {
         $result = new UpdateEntityResult();
         $clean  = array_change_key_case($headers);
         $result->setETag($clean[Resources::ETAG]);
-        
+
         return $result;
     }
-    
+
     /**
      * Gets entity etag.
      *
@@ -75,7 +75,7 @@ class UpdateEntityResult
      *
      * @param string $etag The entity ETag.
      *
-     * @return none
+     * @return void
      */
     public function setETag($etag)
     {

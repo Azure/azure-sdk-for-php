@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
@@ -43,12 +43,12 @@ class ListStorageServicesResult
      * @var array
      */
     private $_storageServices;
-    
+
     /**
      * Creates new ListStorageServicesResult from parsed response body.
-     * 
+     *
      * @param array $parsed The parsed response body.
-     * 
+     *
      * @return ListStorageServicesResult
      */
     public static function create($parsed)
@@ -58,30 +58,30 @@ class ListStorageServicesResult
             Resources::XTAG_STORAGE_SERVICE,
             $parsed
         );
-        
+
         foreach ($rowStorageServices as $rowStorageService) {
             $result->_storageServices[] = new StorageService($rowStorageService);
         }
-        
+
         return $result;
     }
-    
+
     /**
      * Gets storage accounts.
-     * 
+     *
      * @return array
      */
     public function getStorageServices()
     {
         return $this->_storageServices;
     }
-    
+
     /**
      * Sets storage accounts.
-     * 
+     *
      * @param array $storageServices The storage accounts.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setStorageServices($storageServices)
     {

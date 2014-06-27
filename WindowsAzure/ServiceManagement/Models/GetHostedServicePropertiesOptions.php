@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Validate;
 
@@ -42,7 +42,7 @@ class GetHostedServicePropertiesOptions
      * @var boolean
      */
     private $_embedDetail;
-    
+
     /**
      * Constructs new GetHostedServicePropertiesOptions instance.
      */
@@ -50,25 +50,25 @@ class GetHostedServicePropertiesOptions
     {
         $this->_embedDetail = false;
     }
-    
+
     /**
      * Sets the embed detail flag.
-     * 
+     *
      * @param boolean $embedDetail The embed detail flag.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setEmbedDetail($embedDetail)
     {
         Validate::isBoolean($embedDetail);
-        
+
         $this->_embedDetail = $embedDetail;
     }
-    
+
     /**
      * Gets the embed detail flag.
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function getEmbedDetail()
     {

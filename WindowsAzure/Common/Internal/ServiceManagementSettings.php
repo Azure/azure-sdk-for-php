@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,12 +21,12 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Common\Internal;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Represents the settings used to sign and access a request against the service 
+ * Represents the settings used to sign and access a request against the service
  * management. For more information about service management connection strings check
  * this page: http://msdn.microsoft.com/en-us/library/windowsazure/gg466228.aspx
  *
@@ -44,54 +44,54 @@ class ServiceManagementSettings extends ServiceSettings
      * @var string
      */
     private $_subscriptionId;
-    
+
     /**
      * @var string
      */
     private $_certificatePath;
-    
+
     /**
      * @var string
      */
     private $_endpointUri;
-    
+
     /**
      * Validator for the ServiceManagementEndpoint setting. Must be a valid Uri.
-     * 
+     *
      * @var array
      */
     private static $_endpointSetting;
-    
+
     /**
      * Validator for the CertificatePath setting. It has to be provided.
-     * 
+     *
      * @var array
      */
     private static $_certificatePathSetting;
-    
+
     /**
      * Validator for the SubscriptionId setting. It has to be provided.
-     * 
+     *
      * @var array
      */
     private static $_subscriptionIdSetting;
-    
+
     /**
      * @var boolean
      */
     protected static $isInitialized = false;
-    
+
     /**
      * Holds the expected setting keys.
-     * 
+     *
      * @var array
      */
     protected static $validSettingKeys = array();
-    
+
     /**
      * Initializes static members of the class.
-     * 
-     * @return none
+     *
+     * @return void
      */
     protected static function init()
     {
@@ -99,23 +99,23 @@ class ServiceManagementSettings extends ServiceSettings
             Resources::SERVICE_MANAGEMENT_ENDPOINT_NAME,
             Validate::getIsValidUri()
         );
-        
+
         self::$_certificatePathSetting = self::setting(
             Resources::CERTIFICATE_PATH_NAME
         );
-        
+
         self::$_subscriptionIdSetting = self::setting(
             Resources::SUBSCRIPTION_ID_NAME
         );
-        
+
         self::$validSettingKeys[] = Resources::SUBSCRIPTION_ID_NAME;
         self::$validSettingKeys[] = Resources::CERTIFICATE_PATH_NAME;
         self::$validSettingKeys[] = Resources::SERVICE_MANAGEMENT_ENDPOINT_NAME;
     }
-    
+
     /**
      * Creates new service management settings instance.
-     * 
+     *
      * @param string $subscriptionId  The user provided subscription id.
      * @param string $endpointUri     The service management endpoint uri.
      * @param string $certificatePath The management certificate path.
@@ -126,18 +126,18 @@ class ServiceManagementSettings extends ServiceSettings
         $this->_endpointUri     = $endpointUri;
         $this->_subscriptionId  = $subscriptionId;
     }
-    
+
     /**
      * Creates a ServiceManagementSettings object from the given connection string.
-     * 
+     *
      * @param string $connectionString The storage settings connection string.
-     * 
-     * @return ServiceManagementSettings 
+     *
+     * @return ServiceManagementSettings
      */
     public static function createFromConnectionString($connectionString)
     {
         $tokenizedSettings = self::parseAndValidateKeys($connectionString);
-        
+
         $matchedSpecs = self::matchedSpecification(
             $tokenizedSettings,
             self::allRequired(
@@ -162,41 +162,41 @@ class ServiceManagementSettings extends ServiceSettings
                 Resources::CERTIFICATE_PATH_NAME,
                 $tokenizedSettings
             );
-            
+
             return new ServiceManagementSettings(
                 $subscriptionId,
                 $endpointUri,
                 $certificatePath
             );
         }
-        
+
         self::noMatch($connectionString);
     }
-    
+
     /**
      * Gets service management endpoint uri.
-     * 
+     *
      * @return string
      */
     public function getEndpointUri()
     {
         return $this->_endpointUri;
     }
-    
+
     /**
      * Gets the subscription id.
-     * 
+     *
      * @return string
      */
     public function getSubscriptionId()
     {
         return $this->_subscriptionId;
     }
-    
+
     /**
      * Gets the certificate path.
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getCertificatePath()
     {

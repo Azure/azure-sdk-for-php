@@ -177,7 +177,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Extract media service entity from Atom Entry object
      *
-     * @param WindowsAzure\Common\Internal\Atom\Entry $entry Atom Entry containing
+     * @param \WindowsAzure\Common\Internal\Atom\Entry $entry Atom Entry containing
      * properties of media services object
      *
      * @return array
@@ -331,7 +331,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param object $entity Entity data
      * @param string $path   REST path
      *
-     * @return none
+     * @return void
      */
     private function _updateEntity($entity, $path)
     {
@@ -358,7 +358,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @param string $path REST path
      *
-     * @return none
+     * @return void
      */
     private function _deleteEntity($path)
     {
@@ -381,7 +381,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create new asset
      *
-     * @param WindowsAzure\MediaServices\Models\Asset $asset Asset data
+     * @param \WindowsAzure\MediaServices\Models\Asset $asset Asset data
      *
      * @return WindowsAzure\MediaServices\Models\Asset Created asset
      */
@@ -395,7 +395,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get asset
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
+     * @param \WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
      * asset Id
      *
      * @return WindowsAzure\MediaServices\Models\Asset
@@ -430,7 +430,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get asset locators
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
+     * @param \WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
      * asset Id
      *
      * @return array
@@ -455,7 +455,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get parent assets of asset
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
+     * @param \WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
      * asset Id
      *
      * @return array
@@ -480,7 +480,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get assetFiles of asset
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
+     * @param \WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
      * asset Id
      *
      * @return array
@@ -505,7 +505,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get storage account of asset
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
+     * @param \WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
      * asset Id
      *
      * @return WindowsAzure\MediaServices\Models\StorageAccount
@@ -525,10 +525,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update asset
      *
-     * @param WindowsAzure\MediaServices\Models\Asset $asset New asset data with
+     * @param \WindowsAzure\MediaServices\Models\Asset $asset New asset data with
      * valid id
      *
-     * @return none
+     * @return void
      */
     public function updateAsset($asset)
     {
@@ -540,10 +540,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Delete asset
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
+     * @param \WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
      * asset Id
      *
-     * @return none
+     * @return void
      */
     public function deleteAsset($asset)
     {
@@ -558,7 +558,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create new access policy
      *
-     * @param WindowsAzure\MediaServices\Models\AccessPolicy $accessPolicy Access
+     * @param \WindowsAzure\MediaServices\Models\AccessPolicy $accessPolicy Access
      * policy data
      *
      * @return WindowsAzure\MediaServices\Models\AccessPolicy
@@ -579,7 +579,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get AccessPolicy.
      *
-     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string $accessPolicy A
+     * @param \WindowsAzure\MediaServices\Models\AccessPolicy|string $accessPolicy A
      * AccessPolicy data or AccessPolicy Id
      *
      * @return WindowsAzure\MediaServices\Models\AccessPolicy
@@ -616,10 +616,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Delete access policy
      *
-     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string $accessPolicy A
+     * @param \WindowsAzure\MediaServices\Models\AccessPolicy|string $accessPolicy A
      * Access policy data or access policy Id
      *
-     * @return none
+     * @return void
      */
     public function deleteAccessPolicy($accessPolicy)
     {
@@ -634,7 +634,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create new locator
      *
-     * @param WindowsAzure\MediaServices\Models\Locator $locator Locator data
+     * @param \WindowsAzure\MediaServices\Models\Locator $locator Locator data
      *
      * @return WindowsAzure\MediaServices\Models\Locator
      */
@@ -654,7 +654,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get Locator.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator|string $locator Locator data
+     * @param \WindowsAzure\MediaServices\Models\Locator|string $locator Locator data
      * or locator Id
      *
      * @return WindowsAzure\MediaServices\Models\Locator
@@ -674,7 +674,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get Locator access policy.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator|string $locator Locator data
+     * @param \WindowsAzure\MediaServices\Models\Locator|string $locator Locator data
      * or locator Id
      *
      * @return WindowsAzure\MediaServices\Models\Locator
@@ -694,7 +694,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get Locator asset.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator|string $locator Locator data
+     * @param \WindowsAzure\MediaServices\Models\Locator|string $locator Locator data
      * or locator Id
      *
      * @return WindowsAzure\MediaServices\Models\Locator
@@ -731,10 +731,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update locator
      *
-     * @param WindowsAzure\MediaServices\Models\Locator $locator New locator data
+     * @param \WindowsAzure\MediaServices\Models\Locator $locator New locator data
      * with valid id
      *
-     * @return none
+     * @return void
      */
     public function updateLocator($locator)
     {
@@ -750,10 +750,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Delete locator
      *
-     * @param WindowsAzure\MediaServices\Models\Locator|string $locator Asset data
+     * @param \WindowsAzure\MediaServices\Models\Locator|string $locator Asset data
      * or asset Id
      *
-     * @return none
+     * @return void
      */
     public function deleteLocator($locator)
     {
@@ -768,10 +768,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Generate file info for all files in asset
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
+     * @param \WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
      * asset Id
      *
-     * @return none
+     * @return void
      */
     public function createFileInfos($asset)
     {
@@ -801,7 +801,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get asset file.
      *
-     * @param WindowsAzure\MediaServices\Models\AssetFile|string $assetFile AssetFile
+     * @param \WindowsAzure\MediaServices\Models\AssetFile|string $assetFile AssetFile
      *  data or assetFile Id
      *
      * @return WindowsAzure\MediaServices\Models\AssetFile
@@ -839,10 +839,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update asset file
      *
-     * @param WindowsAzure\MediaServices\Models\AssetFile $assetFile New AssetFile
+     * @param \WindowsAzure\MediaServices\Models\AssetFile $assetFile New AssetFile
      * data
      *
-     * @return none
+     * @return void
      */
     public function updateAssetFile($assetFile)
     {
@@ -858,13 +858,13 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Upload asset file to storage.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator $locator Write locator for
+     * @param \WindowsAzure\MediaServices\Models\Locator $locator Write locator for
      * file upload
      *
      * @param string                                    $name    Uploading filename
      * @param string                                    $body    Uploading content
      *
-     * @return none
+     * @return void
      */
     public function uploadAssetFile($locator, $name, $body)
     {
@@ -898,7 +898,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create a job HTTP call context.
      *
-     * @param WindowsAzure\MediaServices\Models\Job $job         Job data
+     * @param \WindowsAzure\MediaServices\Models\Job $job         Job data
      * @param array                                 $inputAssets Input assets list
      *
      * @return WindowsAzure\Common\Internal\Http\HttpCallContext
@@ -942,7 +942,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create task HTTP call context
      *
-     * @param WindowsAzure\MediaServices\Models\Task $task Task object to be created
+     * @param \WindowsAzure\MediaServices\Models\Task $task Task object to be created
      *
      * @return WindowsAzure\Common\Internal\Http\HttpCallContext
      */
@@ -964,7 +964,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create a job.
      *
-     * @param WindowsAzure\MediaServices\Models\Job $job         Job data
+     * @param \WindowsAzure\MediaServices\Models\Job $job         Job data
      * @param array                                 $inputAssets Input assets list
      * @param array                                 $tasks       Performed tasks
      * array (optional)
@@ -1019,9 +1019,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get Job.
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     * @param \WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
-     * @return WindowsAzure\MediaServices\Models\Job
+     * @return \WindowsAzure\MediaServices\Models\Job
      */
     public function getJob($job)
     {
@@ -1053,7 +1053,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get status of a job
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     * @param \WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
      * @return string
      */
@@ -1087,7 +1087,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get job tasks.
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     * @param \WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
      * @return array
      */
@@ -1112,7 +1112,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get job input assets.
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     * @param \WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
      * @return array
      */
@@ -1136,7 +1136,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get job output assets.
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     * @param \WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
      * @return array
      */
@@ -1160,9 +1160,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Cancel a job
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     * @param \WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
-     * @return none
+     * @return void
      */
     public function cancelJob($job)
     {
@@ -1192,9 +1192,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Delete job
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     * @param \WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
      *
-     * @return none
+     * @return void
      */
     public function deleteJob($job)
     {
@@ -1226,7 +1226,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create a job HTTP call context.
      *
-     * @param WindowsAzure\MediaServices\Models\Job $jobTemplate JobTemplate data
+     * @param \WindowsAzure\MediaServices\Models\Job $jobTemplate JobTemplate data
      *
      * @return WindowsAzure\Common\Internal\Http\HttpCallContext
      */
@@ -1253,7 +1253,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create task template HTTP call context
      *
-     * @param WindowsAzure\MediaServices\Models\TaskTemplate $taskTemplate Task
+     * @param \WindowsAzure\MediaServices\Models\TaskTemplate $taskTemplate Task
      * template object to be created
      *
      * @return WindowsAzure\Common\Internal\Http\HttpCallContext
@@ -1280,7 +1280,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create a job.
      *
-     * @param WindowsAzure\MediaServices\Models\JobTemplate $jobTemplate   Job
+     * @param \WindowsAzure\MediaServices\Models\JobTemplate $jobTemplate   Job
      * template data
      *
      * @param array                                         $taskTemplates Performed
@@ -1344,7 +1344,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get job template.
      *
-     * @param WindowsAzure\MediaServices\Models\JobTemplate|string $jobTemplate Job
+     * @param \WindowsAzure\MediaServices\Models\JobTemplate|string $jobTemplate Job
      * template data or jobTemplate Id
      *
      * @return WindowsAzure\MediaServices\Models\JobTemplate
@@ -1381,7 +1381,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get task templates for job template.
      *
-     * @param WindowsAzure\MediaServices\Models\JobTemplate|string $jobTemplate Job
+     * @param \WindowsAzure\MediaServices\Models\JobTemplate|string $jobTemplate Job
      * template data or jobTemplate Id
      *
      * @return array
@@ -1409,10 +1409,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Delete job template
      *
-     * @param WindowsAzure\MediaServices\Models\JobTemplate|string $jobTemplate Job
+     * @param \WindowsAzure\MediaServices\Models\JobTemplate|string $jobTemplate Job
      * template data or job template Id
      *
-     * @return none
+     * @return void
      */
     public function deleteJobTemplate($jobTemplate)
     {

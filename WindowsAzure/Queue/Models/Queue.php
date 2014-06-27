@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Queue\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
@@ -45,10 +45,10 @@ class Queue
 
     /**
      * Constructor
-     * 
+     *
      * @param string $name queue name.
      * @param string $url  queue url.
-     * 
+     *
      * @return WindowsAzure\Queue\Models\Queue.
      */
     function __construct($name, $url)
@@ -71,8 +71,8 @@ class Queue
      * Sets queue name.
      *
      * @param string $name value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setName($name)
     {
@@ -93,8 +93,8 @@ class Queue
      * Sets queue url.
      *
      * @param string $url value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setUrl($url)
     {
@@ -115,8 +115,8 @@ class Queue
      * Sets queue metadata.
      *
      * @param string $metadata value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setMetadata($metadata)
     {

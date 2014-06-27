@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -41,103 +41,103 @@ use WindowsAzure\Common\Internal\Resources;
 class Source extends AtomBase
 {
     // @codingStandardsIgnoreStart
-    
+
     /**
-     * The author the source. 
-     * 
+     * The author the source.
+     *
      * @var array
      */
     protected $author;
 
     /**
-     * The category of the source. 
-     * 
+     * The category of the source.
+     *
      * @var array
      */
     protected $category;
 
     /**
-     * The contributor of the source. 
-     * 
+     * The contributor of the source.
+     *
      * @var array
      */
     protected $contributor;
 
     /**
-     * The generator of the source. 
-     * 
+     * The generator of the source.
+     *
      * @var Generator
      */
     protected $generator;
 
     /**
-     * The icon of the source. 
-     * 
+     * The icon of the source.
+     *
      * @var string
      */
     protected $icon;
 
     /**
-     * The ID of the source. 
-     * 
+     * The ID of the source.
+     *
      * @var string
      */
     protected $id;
 
     /**
-     * The link of the source. 
-     * 
+     * The link of the source.
+     *
      * @var AtomLink
      */
     protected $link;
 
     /**
-     * The logo of the source. 
-     * 
+     * The logo of the source.
+     *
      * @var string
      */
     protected $logo;
 
     /**
-     * The rights of the source. 
-     * 
+     * The rights of the source.
+     *
      * @var string
      */
     protected $rights;
 
     /**
-     * The subtitle of the source. 
-     * 
+     * The subtitle of the source.
+     *
      * @var string
      */
     protected $subtitle;
 
     /**
-     * The title of the source. 
-     * 
+     * The title of the source.
+     *
      * @var string
      */
     protected $title;
 
     /**
-     * The update of the source. 
-     * 
+     * The update of the source.
+     *
      * @var \DateTime
      */
     protected $updated;
 
     /**
-     * The extension element of the source. 
-     * 
+     * The extension element of the source.
+     *
      * @var string
      */
     protected $extensionElement;
 
     /**
-     * Creates an ATOM FEED object with default parameters. 
-     */ 
+     * Creates an ATOM FEED object with default parameters.
+     */
     public function __construct()
-    {   
+    {
         $this->attributes  = array();
         $this->category    = array();
         $this->contributor = array();
@@ -145,11 +145,11 @@ class Source extends AtomBase
     }
 
     /**
-     * Creates a source object with specified XML string. 
-     * 
+     * Creates a source object with specified XML string.
+     *
      * @param string $xmlString The XML string representing a source.
      *
-     * @return none
+     * @return void
      */
     public function parseXml($xmlString)
     {
@@ -173,7 +173,7 @@ class Source extends AtomBase
             $generator = new Generator();
             $generator->setText((string)$sourceArray['generator']->asXML());
             $this->generator = $generator;
-        } 
+        }
 
         if (array_key_exists('icon', $sourceArray)) {
             $this->icon = (string)$sourceArray['icon'];
@@ -212,7 +212,7 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the author of the source. 
+     * Gets the author of the source.
      *
      * @return array
      */
@@ -222,20 +222,20 @@ class Source extends AtomBase
     }
 
     /**
-     * Sets the author of the source. 
+     * Sets the author of the source.
      *
-     * @param array $author An array of authors of the sources. 
-     * 
-     * @return none
+     * @param array $author An array of authors of the sources.
+     *
+     * @return void
      */
-    public function setAuthor($author) 
+    public function setAuthor($author)
     {
         $this->author = $author;
     }
 
     /**
      * Gets the category of the source.
-     *  
+     *
      * @return array
      */
     public function getCategory()
@@ -245,16 +245,16 @@ class Source extends AtomBase
 
     /**
      * Sets the category of the source.
-     *  
-     * @param array $category The category of the source. 
      *
-     * @return none
+     * @param array $category The category of the source.
+     *
+     * @return void
      */
     public function setCategory($category)
     {
         $this->category = $category;
     }
-   
+
     /**
      * Gets contributor.
      *
@@ -267,10 +267,10 @@ class Source extends AtomBase
 
     /**
      * Sets contributor.
-     * 
-     * @param array $contributor The contributors of the source. 
-     * 
-     * @return none
+     *
+     * @param array $contributor The contributors of the source.
+     *
+     * @return void
      */
     public function setContributor($contributor)
     {
@@ -279,7 +279,7 @@ class Source extends AtomBase
 
     /**
      * Gets generator.
-     * 
+     *
      * @return Generator
      */
     public function getGenerator()
@@ -288,11 +288,11 @@ class Source extends AtomBase
     }
 
     /**
-     * Sets the generator. 
-     * 
-     * @param Generator $generator Sets the generator of the source. 
-     * 
-     * @return none
+     * Sets the generator.
+     *
+     * @param Generator $generator Sets the generator of the source.
+     *
+     * @return void
      */
     public function setGenerator($generator)
     {
@@ -300,9 +300,9 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the icon of the source. 
-     * 
-     * @return string 
+     * Gets the icon of the source.
+     *
+     * @return string
      */
     public function getIcon()
     {
@@ -310,11 +310,11 @@ class Source extends AtomBase
     }
 
     /**
-     * Sets the icon of the source. 
-     * 
-     * @param string $icon The icon of the source. 
-     * 
-     * @return string   
+     * Sets the icon of the source.
+     *
+     * @param string $icon The icon of the source.
+     *
+     * @return string
      */
     public function setIcon($icon)
     {
@@ -322,21 +322,21 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the ID of the source. 
-     * 
-     * @return string   
-     */ 
+     * Gets the ID of the source.
+     *
+     * @return string
+     */
     public function getId()
-    {   
+    {
         return $this->id;
     }
 
     /**
      * Sets the ID of the source.
-     * 
-     * @param string $id The ID of the source. 
-     * 
-     * @return string   
+     *
+     * @param string $id The ID of the source.
+     *
+     * @return string
      */
     public function setId($id)
     {
@@ -344,8 +344,8 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the link of the source. 
-     * 
+     * Gets the link of the source.
+     *
      * @return array
      */
     public function getLink()
@@ -354,11 +354,11 @@ class Source extends AtomBase
     }
 
     /**
-     * Sets the link of the source. 
-     * 
-     * @param array $link The link of the source. 
+     * Sets the link of the source.
      *
-     * @return none
+     * @param array $link The link of the source.
+     *
+     * @return void
      */
     public function setLink($link)
     {
@@ -366,9 +366,9 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the logo of the source. 
-     * 
-     * @return string 
+     * Gets the logo of the source.
+     *
+     * @return string
      */
     public function getLogo()
     {
@@ -376,11 +376,11 @@ class Source extends AtomBase
     }
 
     /**
-     * Sets the logo of the source. 
-     * 
-     * @param string $logo The logo of the source. 
-     * 
-     * @return none
+     * Sets the logo of the source.
+     *
+     * @param string $logo The logo of the source.
+     *
+     * @return void
      */
     public function setLogo($logo)
     {
@@ -388,21 +388,21 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the rights of the source. 
-     * 
-     * @return string 
+     * Gets the rights of the source.
+     *
+     * @return string
      */
     public function getRights()
-    {   
+    {
         return $this->rights;
     }
 
-    /** 
-     * Sets the rights of the source. 
-     * 
-     * @param string $rights The rights of the source. 
-     * 
-     * @return none 
+    /**
+     * Sets the rights of the source.
+     *
+     * @param string $rights The rights of the source.
+     *
+     * @return void
      */
     public function setRights($rights)
     {
@@ -410,21 +410,21 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the sub title.  
-     * 
-     * @return string 
+     * Gets the sub title.
+     *
+     * @return string
      */
     public function getSubtitle()
-    {   
+    {
         return $this->subtitle;
     }
 
     /**
-     * Sets the sub title of the source. 
+     * Sets the sub title of the source.
      *
-     * @param string $subtitle Sets the sub title of the source. 
-     * 
-     * @return none
+     * @param string $subtitle Sets the sub title of the source.
+     *
+     * @return void
      */
     public function setSubtitle($subtitle)
     {
@@ -432,21 +432,21 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the title of the source. 
+     * Gets the title of the source.
      *
-     * @return string. 
+     * @return string.
      */
-    public function getTitle() 
-    {   
+    public function getTitle()
+    {
         return $this->title;
     }
 
     /**
-     * Sets the title of the source. 
+     * Sets the title of the source.
      *
-     * @param string $title The title of the source. 
+     * @param string $title The title of the source.
      *
-     * @return none
+     * @return void
      */
     public function setTitle($title)
     {
@@ -454,73 +454,73 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the updated. 
-     * 
+     * Gets the updated.
+     *
      * @return \DateTime
      */
     public function getUpdated()
-    {   
+    {
         return $this->updated;
     }
 
     /**
-     * Sets the updated. 
-     * 
+     * Sets the updated.
+     *
      * @param \DateTime $updated updated
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setUpdated($updated)
     {
         $this->updated = $updated;
     }
 
-    /** 
-     * Gets the extension element. 
-     * 
-     * @return string 
+    /**
+     * Gets the extension element.
+     *
+     * @return string
      */
     public function getExtensionElement()
-    {   
+    {
         return $this->extensionElement;
     }
 
     /**
-     * Sets the extension element. 
-     * 
-     * @param string $extensionElement The extension element. 
-     * 
-     * @return none
+     * Sets the extension element.
+     *
+     * @param string $extensionElement The extension element.
+     *
+     * @return void
      */
     public function setExtensionElement($extensionElement)
     {
         $this->extensionElement = $extensionElement;
     }
 
-    /** 
+    /**
      * Writes an XML representing the source object.
-     * 
+     *
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function writeXml($xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
         $xmlWriter->startElementNS(
-            'atom', 
-            'source', 
+            'atom',
+            'source',
             Resources::ATOM_NAMESPACE
         );
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
-    /** 
+    /**
      * Writes a inner XML representing the source object.
-     * 
+     *
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function writeInnerXml($xmlWriter)
     {
@@ -532,17 +532,17 @@ class Source extends AtomBase
                 }
             }
         }
-         
+
         if (!is_null($this->author)) {
             Validate::isArray($this->author, Resources::AUTHOR);
             $this->writeArrayItem($xmlWriter, $this->author, Resources::AUTHOR);
-        } 
+        }
 
         if (!is_null($this->category)) {
             Validate::isArray($this->category, Resources::CATEGORY);
             $this->writeArrayItem(
-                $xmlWriter, 
-                $this->category, 
+                $xmlWriter,
+                $this->category,
                 Resources::CATEGORY
             );
         }
@@ -550,7 +550,7 @@ class Source extends AtomBase
         if (!is_null($this->contributor)) {
             Validate::isArray($this->contributor, Resources::CONTRIBUTOR);
             $this->writeArrayItem(
-                $xmlWriter, 
+                $xmlWriter,
                 $this->contributor,
                 Resources::CONTRIBUTOR
             );
@@ -558,12 +558,12 @@ class Source extends AtomBase
 
         if (!is_null($this->generator)) {
             $this->generator->writeXml($xmlWriter);
-        } 
+        }
 
         if (!is_null($this->icon)) {
             $xmlWriter->writeElementNS(
                 'atom',
-                'icon', 
+                'icon',
                 Resources::ATOM_NAMESPACE,
                 $this->icon
             );
@@ -572,7 +572,7 @@ class Source extends AtomBase
         $this->writeOptionalElementNS(
             $xmlWriter,
             'atom',
-            'logo', 
+            'logo',
             Resources::ATOM_NAMESPACE,
             $this->logo
         );
@@ -580,7 +580,7 @@ class Source extends AtomBase
         $this->writeOptionalElementNS(
             $xmlWriter,
             'atom',
-            'id', 
+            'id',
             Resources::ATOM_NAMESPACE,
             $this->id
         );
@@ -588,7 +588,7 @@ class Source extends AtomBase
         if (!is_null($this->link)) {
             Validate::isArray($this->link, Resources::LINK);
             $this->writeArrayItem(
-                $xmlWriter, 
+                $xmlWriter,
                 $this->link,
                 Resources::LINK
             );
@@ -597,7 +597,7 @@ class Source extends AtomBase
         $this->writeOptionalElementNS(
             $xmlWriter,
             'atom',
-            'rights', 
+            'rights',
             Resources::ATOM_NAMESPACE,
             $this->rights
         );
@@ -605,7 +605,7 @@ class Source extends AtomBase
         $this->writeOptionalElementNS(
             $xmlWriter,
             'atom',
-            'subtitle', 
+            'subtitle',
             Resources::ATOM_NAMESPACE,
             $this->subtitle
         );
@@ -613,7 +613,7 @@ class Source extends AtomBase
         $this->writeOptionalElementNS(
             $xmlWriter,
             'atom',
-            'title', 
+            'title',
             Resources::ATOM_NAMESPACE,
             $this->title
         );
@@ -621,7 +621,7 @@ class Source extends AtomBase
         if (!is_null($this->updated)) {
             $xmlWriter->writeElementNS(
                 'atom',
-                'updated', 
+                'updated',
                 Resources::ATOM_NAMESPACE,
                 $this->updated->format(\DateTime::ATOM)
             );

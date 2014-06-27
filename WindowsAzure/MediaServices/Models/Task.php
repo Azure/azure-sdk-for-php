@@ -244,7 +244,7 @@ class Task
      *
      * @param array $options Array containing values for object properties
      *
-     * @return none
+     * @return void
      */
     public function fromArray($options)
     {
@@ -389,7 +389,7 @@ class Task
      *
      * @param string $value Name
      *
-     * @return none
+     * @return void
      */
     public function setName($value)
     {
@@ -451,7 +451,7 @@ class Task
      *
      * @param int $value Priority
      *
-     * @return none
+     * @return void
      */
     public function setPriority($value)
     {
@@ -483,7 +483,7 @@ class Task
      *
      * @param string $value Initialization vector
      *
-     * @return none
+     * @return void
      */
     public function setInitializationVector($value)
     {
@@ -505,7 +505,7 @@ class Task
      *
      * @param string $value Encryption version
      *
-     * @return none
+     * @return void
      */
     public function setEncryptionVersion($value)
     {
@@ -527,7 +527,7 @@ class Task
      *
      * @param string $value Encryption scheme
      *
-     * @return none
+     * @return void
      */
     public function setEncryptionScheme($value)
     {
@@ -549,7 +549,7 @@ class Task
      *
      * @param string $value Encription key id
      *
-     * @return none
+     * @return void
      */
     public function setEncryptionKeyId($value)
     {
@@ -581,7 +581,7 @@ class Task
      *
      * @param string $value Task body
      *
-     * @return none
+     * @return void
      */
     public function setTaskBody($value)
     {
@@ -623,7 +623,7 @@ class Task
      *
      * @param string $value Media procesot id
      *
-     * @return none
+     * @return void
      */
     public function setMediaProcessorId($value)
     {
@@ -645,7 +645,7 @@ class Task
      *
      * @param string $value Configuration
      *
-     * @return none
+     * @return void
      */
     public function setConfiguration($value)
     {

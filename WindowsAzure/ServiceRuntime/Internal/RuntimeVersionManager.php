@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -40,46 +40,47 @@ class RuntimeVersionManager
 {
     /**
      * The protocol client.
-     * 
+     *
      * @var RuntimeVersionProtocolClient
      */
     private $_protocolClient;
-    
+
     /**
      * The supported versions list.
-     * 
+     *
      * @var array
      */
     private $_supportedVersionList;
-    
+
     /**
      * Constructor
-     * 
-     * @param RuntimeVersionProtocolClient $protocolClient The runtime version 
+     *
+     * @param RuntimeVersionProtocolClient $protocolClient The runtime version
      * protocol client.
      */
     public function __construct($protocolClient)
     {
         $this->_protocolClient = $protocolClient;
-        
+
         $this->_supportedVersionList = array();
         array_push(
             $this->_supportedVersionList,
             new Protocol1RuntimeClientFactory()
         );
     }
-    
+
     /**
      * Gets the runtime client.
-     * 
+     *
      * @param string $versionEndpoint The endpoint's version.
      *
+     * @throws \RuntimeException
      * @return Protocol1RuntimeClient
      */
     public function getRuntimeClient($versionEndpoint)
     {
         $versionMap = $this->_protocolClient->getVersionMap($versionEndpoint);
-        
+
         foreach ($this->_supportedVersionList as $factory) {
             if (array_key_exists($factory->getVersion(), $versionMap)) {
                 return $factory->createRuntimeClient(
@@ -87,7 +88,7 @@ class RuntimeVersionManager
                 );
             }
         }
-        
+
         throw new \RuntimeException(Resources::INVALID_VERSION_MSG);
     }
 }

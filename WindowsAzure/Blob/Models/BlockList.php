@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Resources;
@@ -46,32 +46,32 @@ class BlockList
      */
     private $_entries;
     public static $xmlRootName = 'BlockList';
-    
+
     /**
      * Creates block list from array of blocks.
-     * 
+     *
      * @param array $array The blocks array.
-     * 
+     *
      * @return BlockList
      */
     public static function create($array)
     {
         $blockList = new BlockList();
-        
+
         foreach ($array as $value) {
             $blockList->addEntry($value->getBlockId(), $value->getType());
         }
-        
+
         return $blockList;
     }
-    
+
     /**
      * Adds new entry to the block list entries.
-     * 
+     *
      * @param string $blockId The block id.
      * @param string $type    The entry type, you can use BlobBlockType.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function addEntry($blockId, $type)
     {
@@ -83,51 +83,51 @@ class BlockList
         $block = new Block();
         $block->setBlockId($blockId);
         $block->setType($type);
-        
+
         $this->_entries[] = $block;
     }
-    
+
     /**
      * Addds committed block entry.
-     * 
+     *
      * @param string $blockId The block id.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function addCommittedEntry($blockId)
     {
         $this->addEntry($blockId, BlobBlockType::COMMITTED_TYPE);
     }
-    
+
     /**
      * Addds uncommitted block entry.
-     * 
+     *
      * @param string $blockId The block id.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function addUncommittedEntry($blockId)
     {
         $this->addEntry($blockId, BlobBlockType::UNCOMMITTED_TYPE);
     }
-    
+
     /**
      * Addds latest block entry.
-     * 
+     *
      * @param string $blockId The block id.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function addLatestEntry($blockId)
     {
         $this->addEntry($blockId, BlobBlockType::LATEST_TYPE);
     }
-    
+
     /**
      * Gets blob block entry.
-     * 
+     *
      * @param string $blockId The id of the block.
-     * 
+     *
      * @return Block
      */
     public function getEntry($blockId)
@@ -137,38 +137,38 @@ class BlockList
                 return $value;
             }
         }
-        
+
         return null;
     }
-    
+
     /**
      * Gets all blob block entries.
-     * 
+     *
      * @return string
      */
     public function getEntries()
     {
         return $this->_entries;
     }
-    
+
     /**
      * Converts the  BlockList object to XML representation
-     * 
+     *
      * @param XmlSerializer $xmlSerializer The XML serializer.
-     * 
+     *
      * @return string
      */
     public function toXml($xmlSerializer)
     {
         $properties = array(XmlSerializer::ROOT_NAME => self::$xmlRootName);
         $array      = array();
-        
+
         foreach ($this->_entries as $value) {
             $array[] = array(
                 $value->getType() => base64_encode($value->getBlockId())
             );
         }
-        
+
         return $xmlSerializer->serialize($array, $properties);
     }
 }

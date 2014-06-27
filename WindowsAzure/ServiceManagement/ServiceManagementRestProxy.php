@@ -23,15 +23,20 @@
  */
 
 namespace WindowsAzure\ServiceManagement;
+use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Serialization\ISerializer;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\RestProxy;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\ServiceManagement\Internal\IServiceManagement;
+use WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions;
 use WindowsAzure\ServiceManagement\Models\CreateAffinityGroupOptions;
 use WindowsAzure\ServiceManagement\Models\AffinityGroup;
+use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
+use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
 use WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult;
 use WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult;
 use WindowsAzure\ServiceManagement\Models\ListLocationsResult;
@@ -51,6 +56,7 @@ use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
 use WindowsAzure\ServiceManagement\Models\GetDeploymentResult;
 use WindowsAzure\ServiceManagement\Models\DeploymentStatus;
 use WindowsAzure\ServiceManagement\Models\Mode;
+use WindowsAzure\ServiceManagement\Models\UpgradeDeploymentOptions;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service
@@ -507,7 +513,7 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @param string $name The storage account name.
      *
-     * @return none
+     * @return void
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264517.aspx
      */
@@ -531,7 +537,7 @@ class ServiceManagementRestProxy extends RestProxy
      * @param string               $name    The storage account name.
      * @param UpdateServiceOptions $options The optional parameters.
      *
-     * @return none
+     * @return void
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264516.aspx
      */
@@ -597,7 +603,7 @@ class ServiceManagementRestProxy extends RestProxy
      * listLocations API.
      * @param CreateAffinityGroupOptions $options  The optional parameters.
      *
-     * @return none
+     * @return void
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg715317.aspx
      */
@@ -642,7 +648,7 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @param string $name The affinity group name.
      *
-     * @return none
+     * @return void
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg715314.aspx
      */
@@ -667,7 +673,7 @@ class ServiceManagementRestProxy extends RestProxy
      * @param string                     $label   The affinity group label.
      * @param CreateAffinityGroupOptions $options The optional parameters.
      *
-     * @return none
+     * @return void
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg715316.aspx
      */
@@ -808,7 +814,7 @@ class ServiceManagementRestProxy extends RestProxy
      * your tracking purposes.
      * @param CreateServiceOptions $options The optional parameters.
      *
-     * @return none
+     * @return void
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441304.aspx
      */
@@ -860,7 +866,7 @@ class ServiceManagementRestProxy extends RestProxy
      * unique within Windows Azure.
      * @param UpdateServiceOptions $options The optional parameters.
      *
-     * @return none
+     * @return void
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441303.aspx
      */
@@ -906,7 +912,7 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @param string $name The name for the hosted service.
      *
-     * @return none
+     * @return void
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441305.aspx
      */
@@ -1490,7 +1496,7 @@ class ServiceManagementRestProxy extends RestProxy
      * rollback should fail.
      * @param GetDeploymentOptions $options The optional parameters.
      *
-     * @return none
+     * @return void
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh403977.aspx
      */

@@ -178,7 +178,7 @@ class Job
      *
      * @param array $options Array containing values for object properties
      *
-     * @return none
+     * @return void
      */
     public function fromArray($options)
     {
@@ -254,7 +254,7 @@ class Job
      *
      * @param string $value Name
      *
-     * @return none
+     * @return void
      */
     public function setName($value)
     {
@@ -316,7 +316,7 @@ class Job
      *
      * @param string $value Template id
      *
-     * @return none
+     * @return void
      */
     public function setTemplateId($value)
     {
@@ -358,7 +358,7 @@ class Job
      *
      * @param int $value Priority
      *
-     * @return none
+     * @return void
      */
     public function setPriority($value)
     {

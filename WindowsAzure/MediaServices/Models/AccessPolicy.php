@@ -149,7 +149,7 @@ class AccessPolicy
      *
      * @param array $options Array containing values for object properties
      *
-     * @return none
+     * @return void
      */
     public function fromArray($options)
     {
@@ -208,7 +208,7 @@ class AccessPolicy
      *
      * @param int $value Permissions
      *
-     * @return none
+     * @return void
      */
     public function setPermissions($value)
     {
@@ -230,7 +230,7 @@ class AccessPolicy
      *
      * @param double $value Duration in minutes
      *
-     * @return none
+     * @return void
      */
     public function setDurationInMinutes($value)
     {
@@ -252,7 +252,7 @@ class AccessPolicy
      *
      * @param string $value Name
      *
-     * @return none
+     * @return void
      */
     public function setName($value)
     {

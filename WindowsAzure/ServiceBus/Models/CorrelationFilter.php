@@ -10,7 +10,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -44,8 +44,8 @@ class CorrelationFilter extends Filter
      */
     private $_correlationId;
 
-    /** 
-     * Creates a correlation filter with default parameter. 
+    /**
+     * Creates a correlation filter with default parameter.
      */
     public function __construct()
     {
@@ -54,9 +54,9 @@ class CorrelationFilter extends Filter
     }
 
     /**
-     * Gets the ID of the correlation. 
+     * Gets the ID of the correlation.
      *
-     * @return string 
+     * @return string
      */
     public function getCorrelationId()
     {
@@ -65,10 +65,10 @@ class CorrelationFilter extends Filter
 
     /**
      * Sets the ID of the correlation.
-     * 
+     *
      * @param string $correlationId The ID of the correlation.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setCorrelationId($correlationId)
     {

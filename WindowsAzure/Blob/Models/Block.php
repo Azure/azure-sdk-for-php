@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 
 /**
@@ -41,49 +41,49 @@ class Block
      * @var string
      */
     private $_blockId;
-    
+
     /**
      * @var string
      */
     private $_type;
-    
+
     /**
      * Sets the blockId.
-     * 
+     *
      * @param string $blockId The id of the block.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setBlockId($blockId)
     {
         $this->_blockId = $blockId;
     }
-    
+
     /**
      * Gets the blockId.
-     * 
+     *
      * @return string
      */
     public function getBlockId()
     {
         return $this->_blockId;
     }
-    
+
     /**
      * Sets the type.
-     * 
+     *
      * @param string $type The type of the block.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setType($type)
     {
         $this->_type = $type;
     }
-    
+
     /**
      * Gets the type.
-     * 
+     *
      * @return string
      */
     public function getType()

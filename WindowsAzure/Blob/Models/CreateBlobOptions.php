@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Common\Internal\Validate;
 
@@ -42,72 +42,72 @@ class CreateBlobOptions extends BlobServiceOptions
      * @var string
      */
     private $_contentType;
-    
+
     /**
      * @var string
      */
     private $_contentEncoding;
-    
+
     /**
      * @var string
      */
     private $_contentLanguage;
-    
+
     /**
      * @var string
      */
     private $_contentMD5;
-    
+
     /**
      * @var string
      */
     private $_cacheControl;
-    
+
     /**
      * @var string
      */
     private $_blobContentType;
-    
+
     /**
      * @var string
      */
     private $_blobContentEncoding;
-    
+
     /**
      * @var string
      */
     private $_blobContentLanguage;
-    
+
     /**
      * @var string
      */
     private $_blobContentMD5;
-    
+
     /**
      * @var string
      */
     private $_blobCacheControl;
-    
+
     /**
      * @var array
      */
     private $_metadata;
-    
+
     /**
      * @var string
      */
     private $_leaseId;
-    
+
     /**
      * @var integer
      */
     private $_sequenceNumber;
-    
+
     /**
      * @var AccessCondition
      */
     private $_accessCondition;
-    
+
     /**
      * Gets blob ContentType.
      *
@@ -123,13 +123,13 @@ class CreateBlobOptions extends BlobServiceOptions
      *
      * @param string $blobContentType value.
      *
-     * @return none.
+     * @return void.
      */
     public function setBlobContentType($blobContentType)
     {
         $this->_blobContentType = $blobContentType;
     }
-    
+
     /**
      * Gets blob ContentEncoding.
      *
@@ -145,13 +145,13 @@ class CreateBlobOptions extends BlobServiceOptions
      *
      * @param string $blobContentEncoding value.
      *
-     * @return none.
+     * @return void.
      */
     public function setBlobContentEncoding($blobContentEncoding)
     {
         $this->_blobContentEncoding = $blobContentEncoding;
     }
-    
+
     /**
      * Gets blob ContentLanguage.
      *
@@ -167,13 +167,13 @@ class CreateBlobOptions extends BlobServiceOptions
      *
      * @param string $blobContentLanguage value.
      *
-     * @return none.
+     * @return void.
      */
     public function setBlobContentLanguage($blobContentLanguage)
     {
         $this->_blobContentLanguage = $blobContentLanguage;
     }
-    
+
     /**
      * Gets blob ContentMD5.
      *
@@ -189,13 +189,13 @@ class CreateBlobOptions extends BlobServiceOptions
      *
      * @param string $blobContentMD5 value.
      *
-     * @return none.
+     * @return void.
      */
     public function setBlobContentMD5($blobContentMD5)
     {
         $this->_blobContentMD5 = $blobContentMD5;
     }
-    
+
     /**
      * Gets blob cache control.
      *
@@ -205,19 +205,19 @@ class CreateBlobOptions extends BlobServiceOptions
     {
         return $this->_blobCacheControl;
     }
-    
+
     /**
      * Sets blob cacheControl.
      *
      * @param string $blobCacheControl value to use.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setBlobCacheControl($blobCacheControl)
     {
         $this->_blobCacheControl = $blobCacheControl;
     }
-    
+
     /**
      * Gets blob contentType.
      *
@@ -233,13 +233,13 @@ class CreateBlobOptions extends BlobServiceOptions
      *
      * @param string $contentType value.
      *
-     * @return none.
+     * @return void.
      */
     public function setContentType($contentType)
     {
         $this->_contentType = $contentType;
     }
-    
+
     /**
      * Gets contentEncoding.
      *
@@ -255,13 +255,13 @@ class CreateBlobOptions extends BlobServiceOptions
      *
      * @param string $contentEncoding value.
      *
-     * @return none.
+     * @return void.
      */
     public function setContentEncoding($contentEncoding)
     {
         $this->_contentEncoding = $contentEncoding;
     }
-    
+
     /**
      * Gets contentLanguage.
      *
@@ -277,13 +277,13 @@ class CreateBlobOptions extends BlobServiceOptions
      *
      * @param string $contentLanguage value.
      *
-     * @return none.
+     * @return void.
      */
     public function setContentLanguage($contentLanguage)
     {
         $this->_contentLanguage = $contentLanguage;
     }
-    
+
     /**
      * Gets contentMD5.
      *
@@ -299,13 +299,13 @@ class CreateBlobOptions extends BlobServiceOptions
      *
      * @param string $contentMD5 value.
      *
-     * @return none.
+     * @return void.
      */
     public function setContentMD5($contentMD5)
     {
         $this->_contentMD5 = $contentMD5;
     }
-    
+
     /**
      * Gets cacheControl.
      *
@@ -315,41 +315,41 @@ class CreateBlobOptions extends BlobServiceOptions
     {
         return $this->_cacheControl;
     }
-    
+
     /**
      * Sets cacheControl.
      *
      * @param string $cacheControl value to use.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setCacheControl($cacheControl)
     {
         $this->_cacheControl = $cacheControl;
     }
-    
+
     /**
      * Gets access condition
-     * 
+     *
      * @return AccessCondition
      */
     public function getAccessCondition()
     {
         return $this->_accessCondition;
     }
-    
+
     /**
      * Sets access condition
-     * 
+     *
      * @param AccessCondition $accessCondition value to use.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setAccessCondition($accessCondition)
     {
         $this->_accessCondition = $accessCondition;
     }
-    
+
     /**
      * Gets blob metadata.
      *
@@ -364,14 +364,14 @@ class CreateBlobOptions extends BlobServiceOptions
      * Sets blob metadata.
      *
      * @param string $metadata value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setMetadata($metadata)
     {
         $this->_metadata = $metadata;
     }
-    
+
     /**
      * Gets blob sequenceNumber.
      *
@@ -387,30 +387,30 @@ class CreateBlobOptions extends BlobServiceOptions
      *
      * @param int $sequenceNumber value.
      *
-     * @return none.
+     * @return void.
      */
     public function setSequenceNumber($sequenceNumber)
     {
         Validate::isInteger($sequenceNumber, 'sequenceNumber');
         $this->_sequenceNumber = $sequenceNumber;
     }
-    
+
     /**
      * Gets lease Id for the blob
-     * 
+     *
      * @return string
      */
     public function getLeaseId()
     {
         return $this->_leaseId;
     }
-    
+
     /**
      * Sets lease Id for the blob
-     * 
+     *
      * @param string $leaseId the blob lease id.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setLeaseId($leaseId)
     {

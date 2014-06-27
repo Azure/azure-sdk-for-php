@@ -103,7 +103,7 @@ class MediaServicesSettings extends ServiceSettings
     /**
      * Initializes static members of the class.
      *
-     * @return none
+     * @return void
      */
     protected static function init()
     {

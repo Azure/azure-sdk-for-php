@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 
 /**
@@ -41,12 +41,12 @@ class GetBlobPropertiesResult
      * @var BlobProperties
      */
     private $_properties;
-    
+
     /**
      * @var array
      */
     private $_metadata;
-    
+
     /**
      * Gets blob metadata.
      *
@@ -61,14 +61,14 @@ class GetBlobPropertiesResult
      * Sets blob metadata.
      *
      * @param string $metadata value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setMetadata($metadata)
     {
         $this->_metadata = $metadata;
     }
-    
+
     /**
      * Gets blob properties.
      *
@@ -83,8 +83,8 @@ class GetBlobPropertiesResult
      * Sets blob properties.
      *
      * @param BlobProperties $properties value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setProperties($properties)
     {

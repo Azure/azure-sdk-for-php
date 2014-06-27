@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 
 /**
@@ -41,20 +41,20 @@ class GetContainerPropertiesResult
      * @var \DateTime
      */
     private $_lastModified;
-    
+
     /**
      * @var string
      */
     private $_etag;
-    
+
     /**
      * @var array
      */
-    private $_metadata; 
-    
+    private $_metadata;
+
     /**
-     * Any operation that modifies the container or its properties or metadata 
-     * updates the last modified time. Operations on blobs do not affect the last 
+     * Any operation that modifies the container or its properties or metadata
+     * updates the last modified time. Operations on blobs do not affect the last
      * modified time of the container.
      *
      * @return \DateTime.
@@ -68,16 +68,16 @@ class GetContainerPropertiesResult
      * Sets container lastModified.
      *
      * @param \DateTime $lastModified value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setLastModified($lastModified)
     {
         $this->_lastModified = $lastModified;
     }
-    
+
     /**
-     * The entity tag for the container. If the request version is 2011-08-18 or 
+     * The entity tag for the container. If the request version is 2011-08-18 or
      * newer, the ETag value will be in quotes.
      *
      * @return string.
@@ -91,31 +91,31 @@ class GetContainerPropertiesResult
      * Sets container etag.
      *
      * @param string $etag value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setETag($etag)
     {
         $this->_etag = $etag;
     }
-    
+
     /**
      * Gets user defined metadata.
-     * 
+     *
      * @return array.
      */
     public function getMetadata()
     {
         return $this->_metadata;
     }
-    
+
     /**
      * Sets user defined metadata. This metadata should be added without the header
      * prefix (x-ms-meta-*).
-     * 
+     *
      * @param array $metadata user defined metadata object in array form.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setMetadata($metadata)
     {

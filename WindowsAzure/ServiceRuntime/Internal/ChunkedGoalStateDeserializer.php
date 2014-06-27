@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -46,7 +46,7 @@ class ChunkedGoalStateDeserializer implements IGoalStateDeserializer
      * @var resource
      */
     private $_inputStream;
-    
+
     /**
      * Constructor
      */
@@ -54,23 +54,23 @@ class ChunkedGoalStateDeserializer implements IGoalStateDeserializer
     {
         $this->_deserializer = new XmlGoalStateDeserializer();
     }
-    
+
     /**
      * Initializes the goal state deserializer with the input stream.
-     * 
+     *
      * @param Stream $inputStream The input stream.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function initialize($inputStream)
     {
         $this->_inputStream = $inputStream;
     }
-    
+
     /**
      * Deserializes a goal state document.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function deserialize()
     {
@@ -81,7 +81,7 @@ class ChunkedGoalStateDeserializer implements IGoalStateDeserializer
         );
 
         $intLengthString = hexdec(trim($lengthString));
-        
+
         $chunkData = stream_get_contents($this->_inputStream, $intLengthString);
         $goalState = $this->_deserializer->deserialize($chunkData);
 

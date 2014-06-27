@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -41,58 +41,58 @@ class PeekMessagesResult
 {
     /**
      * Holds all message entries.
-     * 
+     *
      * @var array.
      */
     private $_queueMessages;
-    
+
     /**
      * Creates PeekMessagesResult object from parsed XML response.
      *
      * @param array $parsedResponse XML response parsed into array.
-     * 
+     *
      * @return WindowsAzure\Queue\Models\PeekMessagesResult.
      */
     public static function create($parsedResponse)
     {
         $result        = new PeekMessagesResult();
         $queueMessages = array();
-        
+
         if (!empty($parsedResponse)) {
             $rawMessages = Utilities::getArray($parsedResponse['QueueMessage']);
             foreach ($rawMessages as $value) {
                 $message = WindowsAzureQueueMessage::createFromPeekMessages($value);
-                
+
                 $queueMessages[] = $message;
             }
         }
         $result->setQueueMessages($queueMessages);
-        
+
         return $result;
     }
-    
+
     /**
      * Gets queueMessages field.
-     * 
+     *
      * @return integer
      */
     public function getQueueMessages()
     {
         $clonedMessages = array();
-        
+
         foreach ($this->_queueMessages as $value) {
             $clonedMessages[] = clone $value;
         }
-        
+
         return $clonedMessages;
     }
-    
+
     /**
      * Sets queueMessages field.
-     * 
+     *
      * @param integer $queueMessages value to use.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setQueueMessages($queueMessages)
     {

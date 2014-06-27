@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
@@ -43,17 +43,17 @@ class Container
      * @var string
      */
     private $_name;
-    
+
     /**
      * @var string
      */
     private $_url;
-    
+
     /**
      * @var array
      */
     private $_metadata;
-    
+
     /**
      * @var ContainerProperties
      */
@@ -73,8 +73,8 @@ class Container
      * Sets container name.
      *
      * @param string $name value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setName($name)
     {
@@ -95,8 +95,8 @@ class Container
      * Sets container url.
      *
      * @param string $url value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setUrl($url)
     {
@@ -117,30 +117,30 @@ class Container
      * Sets container metadata.
      *
      * @param array $metadata value.
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setMetadata($metadata)
     {
         $this->_metadata = $metadata;
     }
-    
+
     /**
      * Gets container properties
-     * 
+     *
      * @return ContainerProperties
      */
     public function getProperties()
     {
         return $this->_properties;
     }
-    
+
     /**
      * Sets container properties
-     * 
+     *
      * @param ContainerProperties $properties container properties
-     * 
-     * @return none.
+     *
+     * @return void.
      */
     public function setProperties($properties)
     {

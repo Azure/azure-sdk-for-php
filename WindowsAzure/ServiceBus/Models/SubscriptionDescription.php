@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
@@ -41,83 +41,83 @@ use WindowsAzure\Common\Internal\Utilities;
 class SubscriptionDescription
 {
     /**
-     * The duration of the lock. 
-     * 
+     * The duration of the lock.
+     *
      * @var string
      */
     private $_lockDuration;
 
     /**
      * Requires session.
-     * 
-     * @var boolean 
+     *
+     * @var boolean
      */
     private $_requiresSession;
 
     /**
-     * The default message time to live. 
-     * 
-     * @var string 
-     */ 
+     * The default message time to live.
+     *
+     * @var string
+     */
     private $_defaultMessageTimeToLive;
 
     /**
-     * The dead lettering on message expiration. 
-     * 
+     * The dead lettering on message expiration.
+     *
      * @var string
      */
     private $_deadLetteringOnMessageExpiration;
 
     /**
-     * The dead lettering on filter evaluation exception. 
-     * 
-     * @var string 
+     * The dead lettering on filter evaluation exception.
+     *
+     * @var string
      */
     private $_deadLetteringOnFilterEvaluationExceptions;
 
     /**
-     * The description of the default rule. 
-     * 
+     * The description of the default rule.
+     *
      * @var string
      */
     private $_defaultRuleDescription;
 
     /**
-     * The count of the message. 
-     * 
+     * The count of the message.
+     *
      * @var integer
      */
     private $_messageCount;
 
     /**
-     * The count of the delivery 
-     * 
+     * The count of the delivery
+     *
      * @var integer
      */
     private $_maxDeliveryCount;
-    
+
     /**
-     * Enables Batched operations. 
-     * 
-     * @var boolean 
+     * Enables Batched operations.
+     *
+     * @var boolean
      */
     private $_enableBatchedOperations;
 
     /**
-     * Creates a subscription description instance with default 
-     * parameter. 
+     * Creates a subscription description instance with default
+     * parameter.
      */
     public function __construct()
     {
     }
 
     /**
-     * Creates a subscription description with specified XML string. 
+     * Creates a subscription description with specified XML string.
      *
      * @param string $subscriptionDescriptionXml An XML based subscription
      * description.
      *
-     * @return none
+     * @return void
      */
     public static function create($subscriptionDescriptionXml)
     {
@@ -139,7 +139,7 @@ class SubscriptionDescription
         }
 
         if (array_key_exists(
-            'DefaultMessageTimeToLive', 
+            'DefaultMessageTimeToLive',
             $subscriptionDescriptionArray
         )
         ) {
@@ -149,7 +149,7 @@ class SubscriptionDescription
         }
 
         if (array_key_exists(
-            'DeadLetteringOnMessageExpiration', 
+            'DeadLetteringOnMessageExpiration',
             $subscriptionDescriptionArray
         )
         ) {
@@ -161,7 +161,7 @@ class SubscriptionDescription
         }
 
         if (array_key_exists(
-            'DeadLetteringOnFilterEvaluationException', 
+            'DeadLetteringOnFilterEvaluationException',
             $subscriptionDescriptionArray
         )
         ) {
@@ -173,7 +173,7 @@ class SubscriptionDescription
         }
 
         if (array_key_exists(
-            'DefaultRuleDescription', 
+            'DefaultRuleDescription',
             $subscriptionDescriptionArray
         )
         ) {
@@ -195,7 +195,7 @@ class SubscriptionDescription
         }
 
         if (array_key_exists(
-            'EnableBatchedOperations', 
+            'EnableBatchedOperations',
             $subscriptionDescriptionArray
         )
         ) {
@@ -216,13 +216,13 @@ class SubscriptionDescription
     {
         return $this->_lockDuration;
     }
-    
+
     /**
      * Sets the lock duration.
      *
-     * @param string $lockDuration The duration of the lock. 
-     * 
-     * @return none
+     * @param string $lockDuration The duration of the lock.
+     *
+     * @return void
      */
     public function setLockDuration($lockDuration)
     {
@@ -231,7 +231,7 @@ class SubscriptionDescription
 
     /**
      * Gets requires session.
-     * 
+     *
      * @return boolean
      */
     public function getRequiresSession()
@@ -241,10 +241,10 @@ class SubscriptionDescription
 
     /**
      * Sets the requires session.
-     * 
-     * @param boolean $requiresSession The requires session. 
-     * 
-     * @return none
+     *
+     * @param boolean $requiresSession The requires session.
+     *
+     * @return void
      */
     public function setRequiresSession($requiresSession)
     {
@@ -252,9 +252,9 @@ class SubscriptionDescription
     }
 
     /**
-     * Gets default message time to live. 
-     * 
-     * @return string 
+     * Gets default message time to live.
+     *
+     * @return string
      */
     public function getDefaultMessageTimeToLive()
     {
@@ -262,20 +262,20 @@ class SubscriptionDescription
     }
 
     /**
-     * Sets default message time to live. 
-     * 
-     * @param string $defaultMessageTimeToLive The default message time to live. 
-     * 
-     * @return none
+     * Sets default message time to live.
+     *
+     * @param string $defaultMessageTimeToLive The default message time to live.
+     *
+     * @return void
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
-    {   
+    {
         $this->_defaultMessageTimeToLive = $defaultMessageTimeToLive;
     }
 
     /**
-     * Gets dead lettering on message expiration. 
-     * 
+     * Gets dead lettering on message expiration.
+     *
      * @return string
      */
     public function getDeadLetteringOnMessageExpiration()
@@ -283,13 +283,13 @@ class SubscriptionDescription
         return $this->_deadLetteringOnMessageExpiration;
     }
 
-    /** 
+    /**
      * Sets dead lettering on message expiration.
-     * 
-     * @param string $deadLetteringOnMessageExpiration The dead lettering 
+     *
+     * @param string $deadLetteringOnMessageExpiration The dead lettering
      * on message expiration.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setDeadLetteringOnMessageExpiration(
         $deadLetteringOnMessageExpiration
@@ -298,9 +298,9 @@ class SubscriptionDescription
     }
 
     /**
-     * Gets dead lettering on filter evaluation exceptions. 
-     * 
-     * @return string 
+     * Gets dead lettering on filter evaluation exceptions.
+     *
+     * @return string
      */
     public function getDeadLetteringOnFilterEvaluationExceptions()
     {
@@ -308,25 +308,25 @@ class SubscriptionDescription
     }
 
     /**
-     * Sets dead lettering on filter evaluation exceptions. 
-     * 
-     * @param string $deadLetteringOnFilterEvaluationExceptions Sets dead lettering 
-     * on filter evaluation exceptions. 
-     * 
-     * @return none
+     * Sets dead lettering on filter evaluation exceptions.
+     *
+     * @param string $deadLetteringOnFilterEvaluationExceptions Sets dead lettering
+     * on filter evaluation exceptions.
+     *
+     * @return void
      */
     public function setDeadLetteringOnFilterEvaluationExceptions(
         $deadLetteringOnFilterEvaluationExceptions
     ) {
         $value = $deadLetteringOnFilterEvaluationExceptions;
-        
+
         $this->_deadLetteringOnFilterEvaluationExceptions = $value;
     }
 
     /**
-     * Gets the default rule description. 
-     * 
-     * @return RuleDescription 
+     * Gets the default rule description.
+     *
+     * @return RuleDescription
      */
     public function getDefaultRuleDescription()
     {
@@ -335,10 +335,10 @@ class SubscriptionDescription
 
     /**
      * Sets the default rule description.
-     * 
-     * @param string $defaultRuleDescription The default rule description. 
      *
-     * @return none
+     * @param string $defaultRuleDescription The default rule description.
+     *
+     * @return void
      */
     public function setDefaultRuleDescription($defaultRuleDescription)
     {
@@ -346,21 +346,21 @@ class SubscriptionDescription
     }
 
     /**
-     * Gets the count of the message. 
-     * 
+     * Gets the count of the message.
+     *
      * @return integer
      */
     public function getMessageCount()
     {
         return $this->_messageCount;
-    } 
+    }
 
     /**
      * Sets the count of the message.
-     * 
-     * @param string $messageCount The count of the message. 
      *
-     * @return none
+     * @param string $messageCount The count of the message.
+     *
+     * @return void
      */
     public function setMessageCount($messageCount)
     {
@@ -369,7 +369,7 @@ class SubscriptionDescription
 
     /**
      * Gets maximum delivery count.
-     * 
+     *
      * @return integer
      */
     public function getMaxDeliveryCount()
@@ -378,11 +378,11 @@ class SubscriptionDescription
     }
 
     /**
-     * Sets maximum delivery count. 
-     * 
-     * @param integer $maxDeliveryCount The maximum delivery count. 
+     * Sets maximum delivery count.
      *
-     * @return none
+     * @param integer $maxDeliveryCount The maximum delivery count.
+     *
+     * @return void
      */
     public function setMaxDeliveryCount($maxDeliveryCount)
     {
@@ -390,8 +390,8 @@ class SubscriptionDescription
     }
 
     /**
-     * Gets enable batched operations. 
-     * 
+     * Gets enable batched operations.
+     *
      * @return boolean
      */
     public function getEnableBatchedOperations()
@@ -400,15 +400,15 @@ class SubscriptionDescription
     }
 
     /**
-     * Sets enable batched operations. 
-     * 
-     * @param boolean $enableBatchedOperations Enable batched operations. 
-     * 
-     * @return none
+     * Sets enable batched operations.
+     *
+     * @param boolean $enableBatchedOperations Enable batched operations.
+     *
+     * @return void
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {
-        $this->_enableBatchedOperations = $enableBatchedOperations; 
+        $this->_enableBatchedOperations = $enableBatchedOperations;
     }
 }
 

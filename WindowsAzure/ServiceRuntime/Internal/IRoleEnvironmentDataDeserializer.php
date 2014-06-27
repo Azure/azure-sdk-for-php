@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -39,10 +39,10 @@ interface IRoleEnvironmentDataDeserializer
 {
     /**
      * Deserializes the role environment data.
-     * 
+     *
      * @param string $document The document to deserialize.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function deserialize($document);
 }

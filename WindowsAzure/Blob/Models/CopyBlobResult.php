@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
@@ -43,17 +43,17 @@ class CopyBlobResult
      * @var string
      */
     private $_etag;
-    
+
     /**
      * @var \DateTime
      */
     private $_lastModified;
-    
+
     /**
      * Creates CopyBlobResult object from the response of the copy blob request.
-     * 
+     *
      * @param array $headers The HTTP response headers in array representation.
-     * 
+     *
      * @return CopyBlobResult
      */
     public static function create($headers)
@@ -68,13 +68,13 @@ class CopyBlobResult
                 $headers);
             $result->setLastModified(Utilities::rfc1123ToDateTime($lastModified));
         }
-        
+
         return $result;
     }
-    
+
     /**
      * Gets ETag.
-     * 
+     *
      * @return string
      */
     public function getETag()
@@ -87,13 +87,13 @@ class CopyBlobResult
      *
      * @param string $etag value.
      *
-     * @return none
+     * @return void
      */
     public function setETag($etag)
     {
         $this->_etag = $etag;
     }
-    
+
     /**
      * Gets blob lastModified.
      *
@@ -109,7 +109,7 @@ class CopyBlobResult
      *
      * @param \DateTime $lastModified value.
      *
-     * @return none
+     * @return void
      */
     public function setLastModified($lastModified)
     {

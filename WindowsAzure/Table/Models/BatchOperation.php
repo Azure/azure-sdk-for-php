@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Table\Models;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Resources;
@@ -44,18 +44,18 @@ class BatchOperation
      * @var string
      */
     private $_type;
-    
+
     /**
      * @var array
      */
     private $_params;
-    
+
     /**
      * Sets operation type.
-     * 
+     *
      * @param string $type The operation type. Must be valid type.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setType($type)
     {
@@ -63,27 +63,27 @@ class BatchOperation
             BatchOperationType::isValid($type),
             Resources::INVALID_BO_TYPE_MSG
         );
-        
+
         $this->_type = $type;
     }
-    
+
     /**
      * Gets operation type.
-     * 
+     *
      * @return string
      */
     public function getType()
     {
         return $this->_type;
     }
-    
+
     /**
      * Adds or sets parameter for the operation.
-     * 
+     *
      * @param string $name  The param name. Must be valid name.
-     * @param mix    $value The param value.
-     * 
-     * @return none
+     * @param mixed   $value The param value.
+     *
+     * @return void
      */
     public function addParameter($name, $value)
     {
@@ -93,13 +93,13 @@ class BatchOperation
         );
         $this->_params[$name] = $value;
     }
-    
+
     /**
      * Gets parameter value and if the name doesn't exist, return null.
-     * 
+     *
      * @param string $name The parameter name.
-     * 
-     * @return mix
+     *
+     * @return mixed
      */
     public function getParameter($name)
     {

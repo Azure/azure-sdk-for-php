@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
@@ -43,41 +43,41 @@ class AcquireLeaseResult
      * @var string
      */
     private $_leaseId;
-    
+
     /**
      * Creates AcquireLeaseResult from response headers
-     * 
+     *
      * @param array $headers response headers
-     * 
+     *
      * @return AcquireLeaseResult
      */
     public static function create($headers)
     {
         $result = new AcquireLeaseResult();
-        
+
         $result->setLeaseId(
             Utilities::tryGetValue($headers, Resources::X_MS_LEASE_ID)
         );
-        
+
         return $result;
     }
-    
+
     /**
      * Gets lease Id for the blob
-     * 
+     *
      * @return string
      */
     public function getLeaseId()
     {
         return $this->_leaseId;
     }
-    
+
     /**
      * Sets lease Id for the blob
-     * 
+     *
      * @param string $leaseId the blob lease id.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setLeaseId($leaseId)
     {

@@ -108,7 +108,7 @@ class MediaProcessor
      *
      * @param array $options Array containing values for object properties
      *
-     * @return none
+     * @return void
      */
     public function fromArray($options)
     {

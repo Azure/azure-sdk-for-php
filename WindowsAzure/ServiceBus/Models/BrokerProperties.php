@@ -10,7 +10,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -25,7 +25,7 @@ use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * The properties of the broker of a brokered message. 
+ * The properties of the broker of a brokered message.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceBus\Models
@@ -85,7 +85,7 @@ class BrokerProperties
      *
      * @var string
      */
-    private $_label;    
+    private $_label;
 
     /**
      * The reply to.
@@ -109,14 +109,14 @@ class BrokerProperties
     private $_timeToLive;
 
     /**
-     * The to. 
+     * The to.
      *
      * @var string
      */
     private $_to;
 
     /**
-     * The scheduled enqueue time. 
+     * The scheduled enqueue time.
      *
      * @var \DateTime
      */
@@ -142,33 +142,33 @@ class BrokerProperties
      * @var string
      */
     private $_lockLocation;
- 
+
 
     /**
-     * Creates a broker properties instance with default parameters. 
+     * Creates a broker properties instance with default parameters.
      */
     public function __construct()
     {
     }
 
     // @codingStandardsIgnoreStart
-    
+
     /**
-     * Creates a broker properties instance with specified JSON message.  
+     * Creates a broker properties instance with specified JSON message.
      *
-     * @param string $brokerPropertiesJson A JSON message representing a 
+     * @param string $brokerPropertiesJson A JSON message representing a
      * broker properties.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public static function create($brokerPropertiesJson)
-    {        
+    {
         Validate::isString($brokerPropertiesJson, 'brokerPropertiesJson');
 
         $brokerProperties = new BrokerProperties();
 
         $brokerPropertiesArray = (array)json_decode($brokerPropertiesJson);
-        
+
         if (array_key_exists('CorrelationId', $brokerPropertiesArray)) {
             $brokerProperties->setCorrelationId(
                 $brokerPropertiesArray['CorrelationId']
@@ -233,7 +233,7 @@ class BrokerProperties
         }
 
         if (array_key_exists(
-            'ScheduledEnqueueTimeUtc', 
+            'ScheduledEnqueueTimeUtc',
             $brokerPropertiesArray
         )
         ) {
@@ -265,13 +265,13 @@ class BrokerProperties
 
         return $brokerProperties;
     }
-    
+
     // @codingStandardsIgnoreEnd
 
     /**
-     * Gets the correlation ID. 
+     * Gets the correlation ID.
      *
-     * @return string 
+     * @return string
      */
     public function getCorrelationId()
     {
@@ -280,20 +280,20 @@ class BrokerProperties
 
     /**
      * Sets the correlation ID.
-     * 
-     * @param string $correlationId The correlation ID. 
-     * 
-     * @return none
-     */ 
+     *
+     * @param string $correlationId The correlation ID.
+     *
+     * @return void
+     */
     public function setCorrelationId($correlationId)
     {
         $this->_correlationId = $correlationId;
     }
 
     /**
-     * Gets the session ID. 
-     * 
-     * @return string 
+     * Gets the session ID.
+     *
+     * @return string
      */
     public function getSessionId()
     {
@@ -301,20 +301,20 @@ class BrokerProperties
     }
 
     /**
-     * Sets the session ID. 
-     * 
-     * @param string $sessionId The ID of the session. 
-     * 
-     * @return none
+     * Sets the session ID.
+     *
+     * @param string $sessionId The ID of the session.
+     *
+     * @return void
      */
     public function setSessionId($sessionId)
     {
         $this->_sessionId = $sessionId;
     }
 
-    /** 
-     * Gets the delivery count. 
-     * 
+    /**
+     * Gets the delivery count.
+     *
      * @return integer
      */
     public function getDeliveryCount()
@@ -322,12 +322,12 @@ class BrokerProperties
         return $this->_deliveryCount;
     }
 
-    /** 
-     * Sets the delivery count. 
-     * 
-     * @param integer $deliveryCount The count of the delivery. 
-     * 
-     * @return none
+    /**
+     * Sets the delivery count.
+     *
+     * @param integer $deliveryCount The count of the delivery.
+     *
+     * @return void
      */
     public function setDeliveryCount($deliveryCount)
     {
@@ -335,8 +335,8 @@ class BrokerProperties
     }
 
     /**
-     * Gets the locked until time. 
-     * 
+     * Gets the locked until time.
+     *
      * @return string
      */
     public function getLockedUntilUtc()
@@ -345,21 +345,21 @@ class BrokerProperties
     }
 
     /**
-     * Sets the locked until time. 
-     * 
-     * @param string $lockedUntilUtc The locked until time. 
-     * 
-     * @return none
+     * Sets the locked until time.
+     *
+     * @param string $lockedUntilUtc The locked until time.
+     *
+     * @return void
      */
     public function setLockedUntilUtc($lockedUntilUtc)
     {
         $this->_lockedUntilUtc = $lockedUntilUtc;
     }
 
-    /** 
-     * Gets lock token. 
-     * 
-     * @return string. 
+    /**
+     * Gets lock token.
+     *
+     * @return string.
      */
     public function getLockToken()
     {
@@ -367,11 +367,11 @@ class BrokerProperties
     }
 
     /**
-     * Sets the lock token. 
-     * 
-     * @param string $lockToken The lock token. 
-     * 
-     * @return none
+     * Sets the lock token.
+     *
+     * @param string $lockToken The lock token.
+     *
+     * @return void
      */
     public function setLockToken($lockToken)
     {
@@ -379,8 +379,8 @@ class BrokerProperties
     }
 
     /**
-     * Gets the message ID. 
-     * 
+     * Gets the message ID.
+     *
      * @return string
      */
     public function getMessageId()
@@ -390,10 +390,10 @@ class BrokerProperties
 
     /**
      * Sets the message ID.
-     * 
-     * @param string $messageId The ID of the message. 
-     * 
-     * @return none
+     *
+     * @param string $messageId The ID of the message.
+     *
+     * @return void
      */
     public function setMessageId($messageId)
     {
@@ -401,9 +401,9 @@ class BrokerProperties
     }
 
     /**
-     * Gets the label. 
-     * 
-     * @return string 
+     * Gets the label.
+     *
+     * @return string
      */
     public function getLabel()
     {
@@ -411,11 +411,11 @@ class BrokerProperties
     }
 
     /**
-     * Sets the label. 
-     * 
-     * @param string $label The label of the broker property. 
-     * 
-     * @return none
+     * Sets the label.
+     *
+     * @param string $label The label of the broker property.
+     *
+     * @return void
      */
     public function setLabel($label)
     {
@@ -423,21 +423,21 @@ class BrokerProperties
     }
 
     /**
-     * Gets the reply to. 
-     * 
-     * @return string 
+     * Gets the reply to.
+     *
+     * @return string
      */
     public function getReplyTo()
     {
         return $this->_replyTo;
     }
 
-    /** 
-     * Sets the reply to. 
+    /**
+     * Sets the reply to.
      *
-     * @param string $replyTo The reply to. 
-     * 
-     * @return none
+     * @param string $replyTo The reply to.
+     *
+     * @return void
      */
     public function setReplyTo($replyTo)
     {
@@ -445,8 +445,8 @@ class BrokerProperties
     }
 
     /**
-     * Gets the sequence number. 
-     * 
+     * Gets the sequence number.
+     *
      * @return integer
      */
     public function getSequenceNumber()
@@ -455,11 +455,11 @@ class BrokerProperties
     }
 
     /**
-     * Sets the sequence number. 
-     * 
-     * @param integer $sequenceNumber The sequence number. 
-     * 
-     * @return none
+     * Sets the sequence number.
+     *
+     * @param integer $sequenceNumber The sequence number.
+     *
+     * @return void
      */
     public function setSequenceNumber($sequenceNumber)
     {
@@ -467,9 +467,9 @@ class BrokerProperties
     }
 
     /**
-     * Gets time to live. 
-     * 
-     * @return string 
+     * Gets time to live.
+     *
+     * @return string
      */
     public function getTimeToLive()
     {
@@ -477,33 +477,33 @@ class BrokerProperties
     }
 
     /**
-     * Sets time to live. 
-     * 
-     * @param string $timeToLive The time to live. 
-     * 
-     * @return none
+     * Sets time to live.
+     *
+     * @param string $timeToLive The time to live.
+     *
+     * @return void
      */
     public function setTimeToLive($timeToLive)
     {
         $this->_timeToLive = $timeToLive;
     }
 
-    /** 
-     * Gets to. 
-     * 
-     * @return string 
+    /**
+     * Gets to.
+     *
+     * @return string
      */
     public function getTo()
     {
         return $this->_to;
     }
 
-    /** 
-     * Sets to. 
-     * 
+    /**
+     * Sets to.
+     *
      * @param string $to To.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setTo($to)
     {
@@ -511,8 +511,8 @@ class BrokerProperties
     }
 
     /**
-     * Gets scheduled enqueue time UTC. 
-     * 
+     * Gets scheduled enqueue time UTC.
+     *
      * @return string
      */
     public function getScheduledEnqueueTimeUtc()
@@ -521,20 +521,20 @@ class BrokerProperties
     }
 
     /**
-     * Sets scheduled enqueue time UTC. 
-     * 
-     * @param string $scheduledEnqueueTimeUtc The scheduled enqueue time. 
-     * 
-     * @return none
+     * Sets scheduled enqueue time UTC.
+     *
+     * @param string $scheduledEnqueueTimeUtc The scheduled enqueue time.
+     *
+     * @return void
      */
     public function setScheduledEnqueueTimeUtc($scheduledEnqueueTimeUtc)
     {
         $this->_scheduledEnqueueTimeUtc = $scheduledEnqueueTimeUtc;
     }
 
-    /** 
-     * Gets reply to session ID. 
-     * 
+    /**
+     * Gets reply to session ID.
+     *
      * @return string
      */
     public function getReplyToSessionId()
@@ -543,11 +543,11 @@ class BrokerProperties
     }
 
     /**
-     * Sets reply to session. 
-     * 
-     * @param string $replyToSessionId reply to session. 
-     * 
-     * @return none
+     * Sets reply to session.
+     *
+     * @param string $replyToSessionId reply to session.
+     *
+     * @return void
      */
     public function setReplyToSessionId($replyToSessionId)
     {
@@ -555,31 +555,31 @@ class BrokerProperties
     }
 
     /**
-     * Gets message location. 
-     * 
-     * @return string 
+     * Gets message location.
+     *
+     * @return string
      */
     public function getMessageLocation()
     {
         return $this->_messageLocation;
     }
 
-    /** 
-     * Sets the location of the message. 
-     * 
-     * @param string $messageLocation The location of the message. 
-     * 
-     * @return none
+    /**
+     * Sets the location of the message.
+     *
+     * @param string $messageLocation The location of the message.
+     *
+     * @return void
      */
     public function setMessageLocation($messageLocation)
     {
         $this->_messageLocation = $messageLocation;
     }
 
-    /** 
-     * Gets the location of the lock. 
-     * 
-     * @return string 
+    /**
+     * Gets the location of the lock.
+     *
+     * @return string
      */
     public function getLockLocation()
     {
@@ -588,45 +588,45 @@ class BrokerProperties
 
     /**
      * Sets the location of the lock.
-     * 
+     *
      * @param string $lockLocation The location of the lock.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setLockLocation($lockLocation)
     {
         $this->_lockLocation = $lockLocation;
     }
-    
+
     /**
-     * Gets a string representing the broker property. 
+     * Gets a string representing the broker property.
      *
      * @return string
      */
     public function toString()
     {
         $value = array();
-        
+
         $this->setValueArrayString(
-            $value, 
+            $value,
             'CorrelationId',
             $this->_correlationId
         );
 
         $this->setValueArrayString(
-            $value, 
+            $value,
             'SessionId',
             $this->_sessionId
         );
 
         $this->setValueArrayInt(
-            $value, 
+            $value,
             'DeliveryCount',
             $this->_deliveryCount
         );
 
         $this->setValueArrayDateTime(
-            $value, 
+            $value,
             'LockedUntilUtc',
             $this->_lockedUntilUtc
         );
@@ -698,17 +698,17 @@ class BrokerProperties
         );
 
         $result = json_encode($value);
-        return $result; 
-    }    
+        return $result;
+    }
 
-    /** 
-     * Sets a string in an array. 
+    /**
+     * Sets a string in an array.
      *
-     * @param array  &$valueArray The array of a set of values. 
-     * @param string $key         The key of the key value pair. 
-     * @param string $value       The value of the key value pair. 
-     * 
-     * @return none
+     * @param array  &$valueArray The array of a set of values.
+     * @param string $key         The key of the key value pair.
+     * @param string $value       The value of the key value pair.
+     *
+     * @return void
      */
     public function setValueArrayString(&$valueArray, $key, $value)
     {
@@ -721,14 +721,14 @@ class BrokerProperties
         }
     }
 
-    /** 
-     * Sets an integer value in an array. 
+    /**
+     * Sets an integer value in an array.
      *
-     * @param array  &$valueArray The array of a set of values. 
-     * @param string $key         The key of the key value pair. 
-     * @param int    $value       The value of the key value pair. 
-     * 
-     * @return none
+     * @param array  &$valueArray The array of a set of values.
+     * @param string $key         The key of the key value pair.
+     * @param int    $value       The value of the key value pair.
+     *
+     * @return void
      */
     public function setValueArrayInt(&$valueArray, $key, $value)
     {
@@ -742,13 +742,13 @@ class BrokerProperties
     }
 
     /**
-     * Sets a float value in an array. 
+     * Sets a float value in an array.
      *
-     * @param array  &$valueArray The array of a set of values. 
-     * @param string $key         The key of the key value pair. 
-     * @param float  $value       The value of the key value pair. 
-     * 
-     * @return none
+     * @param array  &$valueArray The array of a set of values.
+     * @param string $key         The key of the key value pair.
+     * @param float  $value       The value of the key value pair.
+     *
+     * @return void
      */
     public function setValueArrayFloat(&$valueArray, $key, $value)
     {
@@ -762,13 +762,13 @@ class BrokerProperties
     }
 
     /**
-     * Sets a DateTime value in an array. 
+     * Sets a DateTime value in an array.
      *
-     * @param array     &$valueArray The array of a set of values. 
-     * @param string    $key         The key of the key value pair. 
-     * @param \DateTime $value       The value of the key value pair. 
-     * 
-     * @return none
+     * @param array     &$valueArray The array of a set of values.
+     * @param string    $key         The key of the key value pair.
+     * @param \DateTime $value       The value of the key value pair.
+     *
+     * @return void
      */
     public function setValueArrayDateTime(&$valueArray, $key, $value)
     {
@@ -778,7 +778,7 @@ class BrokerProperties
         if (!empty($value)) {
             Validate::isDate($value, 'value');
             $valueArray[$key] = gmdate(
-                Resources::AZURE_DATE_FORMAT, 
+                Resources::AZURE_DATE_FORMAT,
                 $value->getTimestamp()
             );
         }

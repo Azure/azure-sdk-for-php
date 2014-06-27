@@ -174,7 +174,7 @@ class Asset
      *
      * @param int $options Asset encrytion options.
      *
-     * @return none
+     * @return void
      */
     public function __construct($options)
     {
@@ -186,7 +186,7 @@ class Asset
      *
      * @param array $options Array containing values for object properties
      *
-     * @return none
+     * @return void
      */
     public function fromArray($options)
     {
@@ -277,7 +277,7 @@ class Asset
      *
      * @param int    $value Options
      *
-     * @return none
+     * @return void
      */
     public function setOptions($value)
     {
@@ -299,7 +299,7 @@ class Asset
      *
      * @param string $value Name
      *
-     * @return none
+     * @return void
      */
     public function setName($value)
     {
@@ -321,7 +321,7 @@ class Asset
      *
      * @param string $value Alternate id
      *
-     * @return none
+     * @return void
      */
     public function setAlternateId($value)
     {

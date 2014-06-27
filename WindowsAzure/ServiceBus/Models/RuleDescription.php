@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -10,7 +10,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -20,7 +20,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
@@ -41,43 +41,43 @@ use WindowsAzure\ServiceBus\Internal\Filter;
 class RuleDescription
 {
     /**
-     * The filter of the rule. 
-     * 
+     * The filter of the rule.
+     *
      * @var Filter
      */
     private $_filter;
-    
+
     /**
-     * The action of the rule. 
-     * 
+     * The action of the rule.
+     *
      * @var Action
      */
     private $_action;
 
     /**
-     * The name of the rule. 
-     * 
-     * @var string 
+     * The name of the rule.
+     *
+     * @var string
      */
     private $_name;
 
 
     /**
-     * Creates a rule description instance with default parameters. 
+     * Creates a rule description instance with default parameters.
      */
     public function __construct()
-    {   
+    {
     }
 
     // @codingStandardsIgnoreStart
-    
+
     /**
-     * Creates a rule description instance with specified XML string. 
-     * 
-     * @param string $ruleDescriptionXml A XML string representing the 
+     * Creates a rule description instance with specified XML string.
+     *
+     * @param string $ruleDescriptionXml A XML string representing the
      * rule description.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public static function create($ruleDescriptionXml)
     {
@@ -92,7 +92,7 @@ class RuleDescription
             $filterAttributes = $filterItem->attributes('i', true);
             $filterItemArray  = (array)$filterItem;
             $filterType       = (string)$filterAttributes['type'];
-            $filter           = null; 
+            $filter           = null;
             switch ($filterType) {
             case 'TrueFilter'  :
                 $filter = new TrueFilter();
@@ -105,7 +105,7 @@ class RuleDescription
             case 'CorrelationFilter' :
                 $filter = new CorrelationFilter();
 
-                if (array_key_exists('CorrelationId', $filterItemArray)) {   
+                if (array_key_exists('CorrelationId', $filterItemArray)) {
                     $filter->setCorrelationId(
                         (string)$filterItemArray['CorrelationId']
                     );
@@ -115,7 +115,7 @@ class RuleDescription
             case 'SqlFilter' :
                 $filter = new SqlFilter();
 
-                if (array_key_exists('SqlExpression', $filterItemArray)) {   
+                if (array_key_exists('SqlExpression', $filterItemArray)) {
                     $filter->setSqlExpression(
                         (string)$filterItemArray['SqlExpression']
                     );
@@ -127,19 +127,19 @@ class RuleDescription
                 }
 
                 break;
-               
+
             default :
-                $filter = new Filter();                
+                $filter = new Filter();
             }
 
             $ruleDescription->setFilter($filter);
-        } 
+        }
 
         if (array_key_exists('Action', $ruleDescriptionArray)) {
             $actionItem       = $ruleDescriptionArray['Action'];
             $actionAttributes = $actionItem->attributes('i', true);
             $actionType       = (string)$actionAttributes['type'];
-            $action           = null; 
+            $action           = null;
 
             switch ($actionType) {
             case 'EmptyRuleAction'  :
@@ -149,29 +149,29 @@ class RuleDescription
             case 'SqlRuleAction' :
                 $action = new SqlRuleAction();
 
-                if (array_key_exists('SqlExpression', $actionItem)) {   
+                if (array_key_exists('SqlExpression', $actionItem)) {
                     $action->setSqlExpression((string)$actionItem['SqlExpression']);
                 }
                 break;
-               
+
             default :
-                $action = new Action();                
+                $action = new Action();
             }
 
             $ruleDescription->setAction($action);
-        } 
+        }
 
         if (array_key_exists('Name', $ruleDescriptionArray)) {
             $ruleDescription->setName((string)$ruleDescriptionArray['Name']);
-        } 
-       
+        }
+
         return $ruleDescription;
     }
-    
+
     // @codingStandardsIgnoreEnd
-    
+
     /**
-     * Gets the filter. 
+     * Gets the filter.
      *
      * @return Filter
      */
@@ -181,11 +181,11 @@ class RuleDescription
     }
 
     /**
-     * Sets the filter of the rule description. 
-     * 
-     * @param Filter $filter The filter of the rule description. 
-     * 
-     * @return none
+     * Sets the filter of the rule description.
+     *
+     * @param Filter $filter The filter of the rule description.
+     *
+     * @return void
      */
     public function setFilter($filter)
     {
@@ -193,7 +193,7 @@ class RuleDescription
     }
 
     /**
-     * Gets the action. 
+     * Gets the action.
      *
      * @return Action
      */
@@ -204,11 +204,11 @@ class RuleDescription
     }
 
     /**
-     * Sets the action of the rule description. 
-     * 
-     * @param Action $action The action of the rule description. 
-     * 
-     * @return none
+     * Sets the action of the rule description.
+     *
+     * @param Action $action The action of the rule description.
+     *
+     * @return void
      */
     public function setAction($action)
     {
@@ -216,7 +216,7 @@ class RuleDescription
     }
 
     /**
-     * Gets the name of the rule description. 
+     * Gets the name of the rule description.
      *
      * @return string
      */
@@ -226,11 +226,11 @@ class RuleDescription
     }
 
     /**
-     * Sets the name of the rule description. 
-     * 
-     * @param string $name The name of the rule description. 
-     * 
-     * @return none
+     * Sets the name of the rule description.
+     *
+     * @param string $name The name of the rule description.
+     *
+     * @return void
      */
     public function setName($name)
     {

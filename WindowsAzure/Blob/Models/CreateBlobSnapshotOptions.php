@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Blob\Models;
 
 /**
@@ -41,17 +41,17 @@ class CreateBlobSnapshotOptions extends BlobServiceOptions
      * @var array
      */
     private $_metadata;
-    
+
     /**
      * @var AccessCondition
      */
     private $_accessCondition;
-    
+
     /**
      * @var string
      */
     private $_leaseId;
-    
+
     /**
      * Gets metadata.
      *
@@ -67,35 +67,35 @@ class CreateBlobSnapshotOptions extends BlobServiceOptions
      *
      * @param array $metadata The metadata array.
      *
-     * @return none
+     * @return void
      */
     public function setMetadata($metadata)
     {
         $this->_metadata = $metadata;
     }
-    
+
     /**
      * Gets access condition.
-     * 
+     *
      * @return AccessCondition
      */
     public function getAccessCondition()
     {
         return $this->_accessCondition;
     }
-    
+
     /**
      * Sets access condition.
-     * 
+     *
      * @param AccessCondition $accessCondition The access condition object.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setAccessCondition($accessCondition)
     {
         $this->_accessCondition = $accessCondition;
     }
-    
+
     /**
      * Gets lease Id.
      *
@@ -110,8 +110,8 @@ class CreateBlobSnapshotOptions extends BlobServiceOptions
      * Sets lease Id.
      *
      * @param string $leaseId The lease Id.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setLeaseId($leaseId)
     {

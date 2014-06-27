@@ -86,7 +86,7 @@ class OAuthScheme implements IAuthScheme
      * @param string                                      $scope        scope for
      * OAurh request.
      *
-     * @param WindowsAzure\Common\Internal\OAuthRestProxy $oauthService account
+     * @param \WindowsAzure\Common\Internal\OAuthRestProxy $oauthService account
      * primary or secondary key.
      */
     public function __construct(

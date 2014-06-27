@@ -24,6 +24,8 @@
 
 namespace WindowsAzure\Common\Internal;
 
+use XMLWriter;
+
 /**
  * Utilities for the project
  *
@@ -42,12 +44,12 @@ class Utilities
      * this $key doesn't exist, the default value is returned.
      *
      * @param array $array   The array to be used.
-     * @param mix   $key     The array key.
-     * @param mix   $default The value to return if $key is not found in $array.
+     * @param mixed  $key     The array key.
+     * @param mixed  $default The value to return if $key is not found in $array.
      *
      * @static
      *
-     * @return mix
+     * @return mixed
      */
     public static function tryGetValue($array, $key, $default = null)
     {
@@ -106,7 +108,7 @@ class Utilities
      *
      * @static
      *
-     * @return none
+     * @return void
      */
     public static function addIfNotEmpty($key, $value, &$array)
     {
@@ -127,7 +129,7 @@ class Utilities
      *
      * @static
      *
-     * @return mix
+     * @return mixed
      */
     public static function tryGetKeysChainValue($array)
     {
@@ -510,11 +512,11 @@ class Utilities
      *
      * @param string $key      The array key.
      * @param array  $haystack The array to be used.
-     * @param mix    $default  The value to return if $key is not found in $array.
+     * @param mixed   $default  The value to return if $key is not found in $array.
      *
      * @static
      *
-     * @return mix
+     * @return mixed
      */
     public static function tryGetValueInsensitive($key, $haystack, $default = null)
     {

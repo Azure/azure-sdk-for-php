@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,11 +21,11 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\Common\Internal;
 
 /**
- * ServceFilter is called when the sending the request and after receiving the 
+ * ServceFilter is called when the sending the request and after receiving the
  * response.
  *
  * @category  Microsoft
@@ -41,19 +41,19 @@ interface IServiceFilter
     /**
      * Processes HTTP request before send.
      *
-     * @param mix $request HTTP request object.
-     * 
-     * @return mix processed HTTP request object.
+     * @param mixed $request HTTP request object.
+     *
+     * @return mixedprocessed HTTP request object.
      */
     public function handleRequest($request);
 
     /**
      * Processes HTTP response after send.
      *
-     * @param mix $request  HTTP request object.
-     * @param mix $response HTTP response object.
-     * 
-     * @return mix processed HTTP response object.
+     * @param mixed$request  HTTP request object.
+     * @param mixed$response HTTP response object.
+     *
+     * @return mixedprocessed HTTP response object.
      */
     public function handleResponse($request, $response);
 }

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -21,7 +21,7 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
@@ -44,22 +44,22 @@ class StorageService extends WindowsAzureService
      * @var string
      */
     private $_blobEndpointUri;
-    
+
     /**
      * @var string
      */
     private $_queueEndpointUri;
-    
+
     /**
      * @var string
      */
     private $_tableEndpointUri;
-    
+
     /**
      * @var string
      */
     private $_status;
-    
+
     /**
      * Constructs new storage service object.
      */
@@ -67,7 +67,7 @@ class StorageService extends WindowsAzureService
     {
         $sources = func_get_args();
         parent::__construct($sources);
-        
+
         foreach ($sources as $source) {
             $this->setStatus(
                 Utilities::tryGetValue(
@@ -76,7 +76,7 @@ class StorageService extends WindowsAzureService
                     $this->getStatus()
                 )
             );
-            
+
             $endpoints = Utilities::tryGetKeysChainValue(
                 $source,
                 Resources::XTAG_ENDPOINTS,
@@ -87,10 +87,10 @@ class StorageService extends WindowsAzureService
             $this->setTableEndpointUri(Utilities::tryGetValue($endpoints, 2));
         }
     }
-    
+
     /**
      * Converts the current object into ordered array representation.
-     * 
+     *
      * @return array
      */
     protected function toArray()
@@ -105,45 +105,45 @@ class StorageService extends WindowsAzureService
             Resources::XTAG_LOCATION
         );
         $ordered = Utilities::orderArray($arr, $order);
-        
+
         return $ordered;
     }
-    
+
     /**
      * Gets the status.
-     * 
+     *
      * @return string
      */
     public function getStatus()
     {
         return $this->_status;
     }
-    
+
     /**
      * Sets the status.
-     * 
+     *
      * @param string $status The status.
-     * 
-     * @return none
+     *
+     * @return void
      */
     public function setStatus($status)
     {
         $this->_status = $status;
     }
-    
+
     /**
      * Gets storage service blob endpoint uri.
-     * 
+     *
      * @return string
      */
     public function getBlobEndpointUri()
     {
         return $this->_blobEndpointUri;
     }
-    
+
     /**
      * Gets storage service queue endpoint uri.
-     * 
+     *
      * @return string
      */
     public function getQueueEndpointUri()
@@ -153,31 +153,31 @@ class StorageService extends WindowsAzureService
 
     /**
      * Gets storage service table endpoint uri.
-     * 
+     *
      * @return string
      */
     public function getTableEndpointUri()
     {
         return $this->_tableEndpointUri;
     }
-    
+
     /**
      * Gets storage service blob endpoint uri.
-     * 
+     *
      * @param string $blobEndpointUri The endpoint URI.
-     * 
+     *
      * @return string
      */
     public function setBlobEndpointUri($blobEndpointUri)
     {
         $this->_blobEndpointUri = $blobEndpointUri;
     }
-    
+
     /**
      * Gets storage service queue endpoint uri.
-     * 
+     *
      * @param string $queueEndpointUri The endpoint URI.
-     * 
+     *
      * @return string
      */
     public function setQueueEndpointUri($queueEndpointUri)
@@ -187,9 +187,9 @@ class StorageService extends WindowsAzureService
 
     /**
      * Gets storage service table endpoint uri.
-     * 
+     *
      * @param string $tableEndpointUri The endpoint URI.
-     * 
+     *
      * @return string
      */
     public function setTableEndpointUri($tableEndpointUri)
