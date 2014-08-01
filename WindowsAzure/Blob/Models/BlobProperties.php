@@ -159,27 +159,6 @@ class BlobProperties
         
         return $result;
     }
-    
-    /**
-     * Makes deep copy from the current object.
-     * 
-     * @return BlobProperties
-     */
-    public function __clone()
-    {
-        $this->_blobType        = $this->_blobType;
-        $this->_cacheControl    = $this->_cacheControl;
-        $this->_contentEncoding = $this->_contentEncoding;
-        $this->_contentLanguage = $this->_contentLanguage;
-        $this->_contentLength   = $this->_contentLength;
-        $this->_contentMD5      = $this->_contentMD5;
-        $this->_contentRange    = $this->_contentRange;
-        $this->_contentType     = $this->_contentType;
-        $this->_etag            = $this->_etag;
-        $this->_lastModified    = $this->_lastModified;
-        $this->_leaseStatus     = $this->_leaseStatus;
-        $this->_sequenceNumber  = $this->_sequenceNumber;
-    }
 
     /**
      * Gets blob lastModified.
