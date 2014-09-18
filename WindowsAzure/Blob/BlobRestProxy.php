@@ -1270,7 +1270,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         }
 
         // if we have a size we can try to one shot this, else failsafe on block upload
-        if ($bodySize && $bodySize <= $this->_SingleBlobUploadThresholdInBytes) {
+        if ($bodySize <= $this->_SingleBlobUploadThresholdInBytes) {
             $headers = $this->_addCreateBlobOptionalHeaders($options, $headers);
             
             $this->addOptionalHeader(
