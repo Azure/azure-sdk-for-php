@@ -45,6 +45,7 @@ use WindowsAzure\MediaServices\Models\IngestManifestStatistics;
 use WindowsAzure\MediaServices\Models\ContentKey;
 use WindowsAzure\MediaServices\Models\ProtectionKeyTypes;
 use WindowsAzure\MediaServices\Models\ContentKeyTypes;
+use Tests\Framework\VirtualFileSystem;
 
 /**
  * Unit tests for class MediaServicesRestProxy
@@ -1460,5 +1461,79 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Assert
         $contentKeyFromAsset = $this->restProxy->getAssetContentKeys($asset);
         $this->assertEmpty($contentKeyFromAsset);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::uploadAssetFile
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileFromString
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileSingle
+     */
+    public function testUploadSmallFileFromContent()
+    {
+        // Setup
+        $fileContent = TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT;
+
+        // Test
+        $actual = $this->uploadFile(TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME, $fileContent);
+
+        // Assert
+        $this->assertEquals(TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT, $actual);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::uploadAssetFile
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileFromString
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadBlock
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_commitBlocks
+     */
+    public function testUploadLargeFileFromContent()
+    {
+        // Setup
+        $fileContent = $this->createLargeFile();
+
+        // Test
+        $actual = $this->uploadFile(TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME, $fileContent);
+
+        // Assert
+        $this->assertEquals($fileContent, $actual);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::uploadAssetFile
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileFromResource
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileSingle
+     */
+    public function testUploadSmallFileFromResource()
+    {
+        // Setup
+        $fileContent = TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT;
+
+        $resource = fopen(VirtualFileSystem::newFile($fileContent), 'r');
+
+        // Test
+        $actual = $this->uploadFile(TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME, $resource);
+
+        // Assert
+        $this->assertEquals($fileContent, $actual);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::uploadAssetFile
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileFromResource
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadBlock
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_commitBlocks
+     */
+    public function testUploadLargeFileFromResource()
+    {
+        // Setup
+        $fileContent = $this->createLargeFile();
+
+        $resource = fopen(VirtualFileSystem::newFile($fileContent), 'r');
+
+        // Test
+        $actual = $this->uploadFile(TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME, $resource);
+
+        // Assert
+        $this->assertEquals($fileContent, $actual);
     }
 }

@@ -47,6 +47,7 @@ use WindowsAzure\MediaServices\Models\ContentKeyTypes;
 use WindowsAzure\MediaServices\Models\EncryptionSchemes;
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Http\HttpClient;
+use Tests\Framework\VirtualFileSystem;
 
 /**
  * Unit tests for class MediaServicesRestProxy
@@ -96,7 +97,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $assetOptions           = Asset::OPTIONS_NONE;
 
         $accessPolicyName       = TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix();
-        $accessPolicyDiration   = 30;
+        $accessPolicyDuration   = 30;
         $accessPolicyPermission = AccessPolicy::PERMISSIONS_WRITE;
 
         $locatorStartTime       = new \DateTime('now -5 minutes');
@@ -111,7 +112,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $asset = $this->createAsset($asset);
 
         $access = new AccessPolicy($accessPolicyName);
-        $access->setDurationInMinutes($accessPolicyDiration);
+        $access->setDurationInMinutes($accessPolicyDuration);
         $access->setPermissions($accessPolicyPermission);
         $access = $this->createAccessPolicy($access);
 
@@ -132,7 +133,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $this->assertNotNull($asset->getCreated());
 
         $this->assertEquals($accessPolicyName, $access->getName());
-        $this->assertEquals($accessPolicyDiration, $access->getDurationInMinutes());
+        $this->assertEquals($accessPolicyDuration, $access->getDurationInMinutes());
         $this->assertEquals($accessPolicyPermission, $access->getPermissions());
         $this->assertNotNull($asset->getId());
         $this->assertNotNull($asset->getCreated());
@@ -1099,6 +1100,211 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());
         $this->assertContains($fileName, $resultFileNames);
         $this->assertEquals($asset->getId(), $assetFiles[1]->getParentAssetId());
+    }
+
+    public function testUploadSmallFileFromContent()
+    {
+        // Setup
+        $assetName                  = TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix();
+        $assetOptions               = Asset::OPTIONS_NONE;
+
+        $accessPolicyName           = TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix();
+        $accessPolicyNameRead           = TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix();
+
+        $accessPolicyDuration       = 30;
+        $accessPolicyDurationRead   = 300;
+
+        $accessPolicyPermission     = AccessPolicy::PERMISSIONS_WRITE;
+        $accessPolicyPermissionRead = AccessPolicy::PERMISSIONS_READ;
+
+        $locatorStartTime           = new \DateTime('now -5 minutes');
+        $locatorType                = Locator::TYPE_SAS;
+        $locatorStartTimeRead       = new \DateTime('now -5 minutes');
+        $locatorTypeRead            = Locator::TYPE_SAS;
+
+        $fileName                   = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+        $fileContent                = TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT;
+
+        // Test
+        $asset = new Asset($assetOptions);
+        $asset->setName($assetName);
+        $asset = $this->createAsset($asset);
+
+        $access = new AccessPolicy($accessPolicyName);
+        $access->setDurationInMinutes($accessPolicyDuration);
+        $access->setPermissions($accessPolicyPermission);
+        $access = $this->createAccessPolicy($access);
+
+        $locator = new Locator($asset,  $access, $locatorType);
+        $locator->setStartTime($locatorStartTime);
+        $locator = $this->createLocator($locator);
+
+        $this->restProxy->uploadAssetFile($locator, $fileName, $fileContent);
+
+        $this->restProxy->createFileInfos($asset);
+        $assetFiles = $this->restProxy->getAssetFileList();
+
+        $accessRead = new AccessPolicy($accessPolicyNameRead);
+        $accessRead->setDurationInMinutes($accessPolicyDurationRead);
+        $accessRead->setPermissions($accessPolicyPermissionRead);
+        $accessRead = $this->createAccessPolicy($accessRead);
+
+        $locatorRead = new Locator($asset, $accessRead, $locatorTypeRead);
+        $locatorRead->setStartTime($locatorStartTimeRead);
+        $locatorRead = $this->createLocator($locatorRead);
+
+        // without sleep() Locator hasn't enough time to create URL, so that's why we have to use at least sleep(30)
+        sleep(40);
+
+        $method      = Resources::HTTP_GET;
+        $url         = new Url($locatorRead->getBaseUri() . '/' . $fileName . $locatorRead->getContentAccessComponent());
+        $filters     = array();
+        $statusCode  = Resources::STATUS_OK;
+
+        $httpClient = new HttpClient();
+        $httpClient->setMethod($method);
+        $httpClient->setExpectedStatusCode($statusCode);
+
+        $downloadedFileContent = $httpClient->send($filters, $url);
+
+        // Assert
+        $this->assertEquals($assetName, $asset->getName());
+        $this->assertEquals($assetOptions, $asset->getOptions());
+        $this->assertNotNull($asset->getId());
+        $this->assertNotNull($asset->getCreated());
+
+        $this->assertEquals($accessPolicyName, $access->getName());
+        $this->assertEquals($accessPolicyDuration, $access->getDurationInMinutes());
+        $this->assertEquals($accessPolicyPermission, $access->getPermissions());
+
+        $this->assertEquals($accessPolicyNameRead, $accessRead->getName());
+        $this->assertEquals($accessPolicyDurationRead, $accessRead->getDurationInMinutes());
+        $this->assertEquals($accessPolicyPermissionRead, $accessRead->getPermissions());
+
+        $this->assertNotNull($asset->getId());
+        $this->assertNotNull($asset->getCreated());
+
+        $this->assertEquals($locatorType, $locator->getType());
+        $this->assertEquals($locatorStartTime->getTimestamp(), $locator->getStartTime()->getTimestamp());
+
+        $this->assertEquals($locatorTypeRead, $locatorRead->getType());
+        $this->assertEquals($locatorStartTimeRead->getTimestamp(), $locatorRead->getStartTime()->getTimestamp());
+
+        $this->assertEquals($asset->getId(), $locator->getAssetId());
+        $this->assertEquals($access->getId(), $locator->getAccessPolicyId());
+
+        $this->assertEquals($asset->getId(), $locatorRead->getAssetId());
+        $this->assertEquals($accessRead->getId(), $locatorRead->getAccessPolicyId());
+
+        $this->assertEquals(1, count($assetFiles));
+
+        $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());
+        $this->assertEquals($fileName, $assetFiles[0]->getName());
+
+        $this->assertEquals($fileContent, $downloadedFileContent);
+    }
+
+    public function testUploadLargeFileFromResource()
+    {
+        // Setup
+        $assetName                  = TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix();
+        $assetOptions               = Asset::OPTIONS_NONE;
+
+        $accessPolicyName           = TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix();
+        $accessPolicyNameRead       = TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix();
+
+        $accessPolicyDuration       = 30;
+        $accessPolicyDurationRead   = 300;
+
+        $accessPolicyPermission     = AccessPolicy::PERMISSIONS_WRITE;
+        $accessPolicyPermissionRead = AccessPolicy::PERMISSIONS_READ;
+
+        $locatorStartTime           = new \DateTime('now -5 minutes');
+        $locatorType                = Locator::TYPE_SAS;
+        $locatorStartTimeRead       = new \DateTime('now -5 minutes');
+        $locatorTypeRead            = Locator::TYPE_SAS;
+
+        $fileName                   = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+        $fileContent                = $this->createLargeFile();
+        $resource                   = fopen(VirtualFileSystem::newFile($fileContent), 'r');
+
+        // Test
+        $asset = new Asset($assetOptions);
+        $asset->setName($assetName);
+        $asset = $this->createAsset($asset);
+
+        $access = new AccessPolicy($accessPolicyName);
+        $access->setDurationInMinutes($accessPolicyDuration);
+        $access->setPermissions($accessPolicyPermission);
+        $access = $this->createAccessPolicy($access);
+
+        $locator = new Locator($asset,  $access, $locatorType);
+        $locator->setStartTime($locatorStartTime);
+        $locator = $this->createLocator($locator);
+
+        $this->restProxy->uploadAssetFile($locator, $fileName, $resource);
+
+        $this->restProxy->createFileInfos($asset);
+        $assetFiles = $this->restProxy->getAssetFileList();
+
+        $accessRead = new AccessPolicy($accessPolicyNameRead);
+        $accessRead->setDurationInMinutes($accessPolicyDurationRead);
+        $accessRead->setPermissions($accessPolicyPermissionRead);
+        $accessRead = $this->createAccessPolicy($accessRead);
+
+        $locatorRead = new Locator($asset, $accessRead, $locatorTypeRead);
+        $locatorRead->setStartTime($locatorStartTimeRead);
+        $locatorRead = $this->createLocator($locatorRead);
+
+        // without sleep() Locator hasn't enough time to create URL, so that's why we have to use at least sleep(30)
+        sleep(40);
+
+        $method      = Resources::HTTP_GET;
+        $url         = new Url($locatorRead->getBaseUri() . '/' . $fileName . $locatorRead->getContentAccessComponent());
+        $filters     = array();
+        $statusCode  = Resources::STATUS_OK;
+
+        $httpClient = new HttpClient();
+        $httpClient->setMethod($method);
+        $httpClient->setExpectedStatusCode($statusCode);
+
+        $downloadedFileContent = $httpClient->send($filters, $url);
+
+        // Assert
+        $this->assertEquals($assetName, $asset->getName());
+        $this->assertEquals($assetOptions, $asset->getOptions());
+        $this->assertNotNull($asset->getId());
+        $this->assertNotNull($asset->getCreated());
+
+        $this->assertEquals($accessPolicyName, $access->getName());
+        $this->assertEquals($accessPolicyDuration, $access->getDurationInMinutes());
+        $this->assertEquals($accessPolicyPermission, $access->getPermissions());
+
+        $this->assertEquals($accessPolicyNameRead, $accessRead->getName());
+        $this->assertEquals($accessPolicyDurationRead, $accessRead->getDurationInMinutes());
+        $this->assertEquals($accessPolicyPermissionRead, $accessRead->getPermissions());
+
+        $this->assertNotNull($asset->getId());
+        $this->assertNotNull($asset->getCreated());
+
+        $this->assertEquals($locatorType, $locator->getType());
+        $this->assertEquals($locatorStartTime->getTimestamp(), $locator->getStartTime()->getTimestamp());
+
+        $this->assertEquals($locatorTypeRead, $locatorRead->getType());
+        $this->assertEquals($locatorStartTimeRead->getTimestamp(), $locatorRead->getStartTime()->getTimestamp());
+
+        $this->assertEquals($asset->getId(), $locator->getAssetId());
+        $this->assertEquals($access->getId(), $locator->getAccessPolicyId());
+
+        $this->assertEquals($asset->getId(), $locatorRead->getAssetId());
+        $this->assertEquals($accessRead->getId(), $locatorRead->getAccessPolicyId());
+
+        $this->assertEquals(1, count($assetFiles));
+
+        $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());
+        $this->assertEquals($fileName, $assetFiles[0]->getName());
+
+        $this->assertEquals($fileContent, $downloadedFileContent);
     }
 }
 
