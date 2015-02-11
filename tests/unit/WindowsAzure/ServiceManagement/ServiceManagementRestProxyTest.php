@@ -1184,6 +1184,8 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testRollbackUpgradeOrUpdate()
     {
+        $this->markTestSkipped(ServiceRestProxyTestBase::TAKE_TOO_LONG);
+
         $attempt = 0;
         $maxAttempts = 10;
         $isPassed = false;

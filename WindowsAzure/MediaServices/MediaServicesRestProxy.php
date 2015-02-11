@@ -69,6 +69,10 @@ use WindowsAzure\MediaServices\Models\ContentKey;
  */
 class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 {
+    const BLOCK_ID_PREFIX = 'block-';
+    const MAX_BLOCK_SIZE = 4194304; // 4 Mb
+    const BLOCK_ID_PADDING = 6;
+
     /**
      * Headers used in batch requests
      *
@@ -976,12 +980,12 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param WindowsAzure\MediaServices\Models\Locator $locator Write locator for
      * file upload
      *
-     * @param string                                    $name    Uploading filename
-     * @param string                                    $body    Uploading content
+     * @param string            $name Uploading filename
+     * @param string | resource $file Uploading content or file handle
      *
      * @return none
      */
-    public function uploadAssetFile($locator, $name, $body)
+    public function uploadAssetFile($locator, $name, $file)
     {
         Validate::isA(
             $locator,
@@ -989,11 +993,121 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             'locator'
         );
         Validate::isString($name, 'name');
-        Validate::notNull($body, 'body');
+        Validate::notNull($file, 'body');
 
-        $method     = Resources::HTTP_PUT;
         $urlFile    = $locator->getBaseUri() . '/' . $name;
-        $url        = new Url($urlFile . $locator->getContentAccessComponent());
+        $url        = $urlFile . $locator->getContentAccessComponent();
+
+        if (is_resource($file)) {
+            $this->_uploadAssetFileFromResource($url, $file);
+        }
+        else {
+            $this->_uploadAssetFileFromString($url, $file);
+        }
+    }
+
+    /***
+     * Generates ID for uploading block
+     *
+     * @param int $blockCount Count of existing blocks
+     *
+     * @return string
+     */
+    private function _generateBlockId($blockCount)
+    {
+        return base64_encode (self::BLOCK_ID_PREFIX . str_pad($blockCount, self::BLOCK_ID_PADDING, '0', STR_PAD_LEFT));
+    }
+
+    /***
+     * Upload asset file from resource
+     *
+     * @param string   $url      Url for upload
+     * @param resource $resource Handle of uploading file
+     *
+     * @return none
+     */
+    private function _uploadAssetFileFromResource($url, $resource)
+    {
+        $blockSize = self::MAX_BLOCK_SIZE;
+        $blockIds = array();
+
+        $blockContent = fread($resource, $blockSize);
+        if (feof($resource)) {
+            $this->_uploadAssetFileSingle($url, $blockContent);
+
+            return;
+        }
+
+        $blockId = $this->_generateBlockId(count($blockIds));
+
+        $blockIds[] = $blockId;
+        $this->_uploadBlock($url, $blockId, $blockContent);
+
+        while (!feof($resource)) {
+            $blockContent = fread($resource, $blockSize);
+
+            $blockId = $this->_generateBlockId(count($blockIds));
+
+            $blockIds[] = $blockId;
+            $this->_uploadBlock($url, $blockId, $blockContent);
+        }
+
+        $this->_commitBlocks($url, $blockIds);
+    }
+
+    /***
+     * Upload asset file from string
+     *
+     * @param string $url  Url for upload
+     * @param string $body File content
+     *
+     * @return none
+     */
+    private function _uploadAssetFileFromString($url, $body)
+    {
+        $blockSize = self::MAX_BLOCK_SIZE;
+        $blockIds = array();
+
+        $fileSize = strlen($body);
+
+        if ($fileSize < $blockSize) {
+            $this->_uploadAssetFileSingle($url, $body);
+
+            return;
+        }
+
+        $totalBytesRemaining = $fileSize;
+        $uploadedBytes = 0;
+
+        while ($totalBytesRemaining > 0) {
+            $blockContent = substr($body, $uploadedBytes, $blockSize);
+
+            $blockId = $this->_generateBlockId(count($blockIds));
+
+            $blockIds[] = $blockId;
+            $this->_uploadBlock($url, $blockId, $blockContent);
+            $uploadedBytes += $blockSize;
+
+            $totalBytesRemaining -= $blockSize;
+            if ($totalBytesRemaining < $blockSize) {
+                $blockSize = $totalBytesRemaining;
+            }
+        }
+
+        $this->_commitBlocks($url, $blockIds);
+    }
+
+    /***
+     * Upload asset file via single request
+     *
+     * @param string $url  Url for upload
+     * @param string $body File content
+     *
+     * @return none
+     */
+    private function _uploadAssetFileSingle($url, $body)
+    {
+        $method     = Resources::HTTP_PUT;
         $filters    = array();
         $statusCode = Resources::STATUS_CREATED;
         $headers    = array(
@@ -1007,7 +1121,87 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $httpClient->setHeaders($headers);
         $httpClient->setExpectedStatusCode($statusCode);
         $httpClient->setBody($body);
-        $httpClient->send($filters, $url);
+        $httpClient->send($filters, new Url($url));
+    }
+
+    /***
+     * Upload a new block to be committed as part of a block blob
+     *
+     * @param string $url          Url for upload
+     * @param string $blockId      Block Id
+     * @param string $blockContent Uploading content
+     *
+     * @return none
+     */
+    private function _uploadBlock($url, $blockId, $blockContent) {
+       $baseUrl = new Url($url);
+       $baseUrl->setQueryVariable(Resources::QP_COMP, 'block');
+       $baseUrl->setQueryVariable(Resources::QP_BLOCKID, $blockId);
+
+       $method     = Resources::HTTP_PUT;
+       $filters    = array();
+       $statusCode = Resources::STATUS_CREATED;
+
+       $headers    = array(
+           Resources::CONTENT_TYPE   => Resources::BINARY_FILE_TYPE,
+           Resources::X_MS_VERSION   => Resources::STORAGE_API_LATEST_VERSION,
+           Resources::X_MS_BLOB_TYPE => BlobType::BLOCK_BLOB,
+       );
+
+       $httpClient = new HttpClient();
+       $httpClient->setMethod($method);
+       $httpClient->setHeaders($headers);
+       $httpClient->setExpectedStatusCode($statusCode);
+       $httpClient->setBody($blockContent);
+
+       $httpClient->send($filters, $baseUrl);
+    }
+
+    /***
+     * Commit block blob
+     *
+     * @param string $url      Url for commit
+     * @param array  $blockIds Blocks identifiers
+     *
+     * @return none
+     */
+    private function _commitBlocks($url, $blockIds) {
+        $baseUrl = new Url($url);
+        $baseUrl->setQueryVariable(Resources::QP_COMP, 'blocklist');
+
+        $xml = new \XMLWriter();
+
+        $xml->openMemory();
+        $xml->setIndent(true);
+
+        $xml->startDocument('1.0','UTF-8');
+
+        $xml->startElement('BlockList');
+
+        foreach ($blockIds as $blockId) {
+            $xml->writeElement('Latest', $blockId);
+        }
+
+        $xml->endElement();
+
+        $xml->endDocument();
+
+        $xmlContent = $xml->outputMemory();
+
+        $method     = Resources::HTTP_PUT;
+        $filters    = array();
+        $statusCode = Resources::STATUS_CREATED;
+        $headers    = array(
+            Resources::CONTENT_TYPE   => Resources::BINARY_FILE_TYPE,
+            Resources::X_MS_VERSION   => Resources::STORAGE_API_LATEST_VERSION,
+        );
+
+        $httpClient = new HttpClient();
+        $httpClient->setMethod($method);
+        $httpClient->setHeaders($headers);
+        $httpClient->setExpectedStatusCode($statusCode);
+        $httpClient->setBody($xmlContent);
+        $httpClient->send($filters, $baseUrl);
     }
 
     /**

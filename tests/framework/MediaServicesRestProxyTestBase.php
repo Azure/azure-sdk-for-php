@@ -35,6 +35,9 @@ use WindowsAzure\MediaServices\Models\Task;
 use WindowsAzure\MediaServices\Models\TaskOptions;
 use WindowsAzure\MediaServices\Models\JobTemplate;
 use WindowsAzure\MediaServices\Models\TaskTemplate;
+use WindowsAzure\Common\Internal\Http\Url;
+use WindowsAzure\Common\Internal\Http\HttpClient;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * TestBase class for each unit test class.
@@ -59,6 +62,8 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     protected $ingestManifestAssets = array();
     protected $ingestManifestFiles = array();
     protected $contentKeys = array();
+
+    const LARGE_FILE_SIZE_MB = 7;
 
     public function setUp()
     {
@@ -231,7 +236,6 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         return $jobTempl;
     }
 
-
     protected function tearDown()
     {
         parent::tearDown();
@@ -296,6 +300,18 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         return sprintf('-%04x', mt_rand(0, 65535));
     }
 
+    protected function createLargeFile() {
+        $fileContent = TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT;
+
+        $targetFileSize = self::LARGE_FILE_SIZE_MB * 1024 * 1024;
+
+        while (strlen($fileContent) < $targetFileSize) {
+            $fileContent .= TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT;
+        }
+
+        return $fileContent;
+    }
+
     public function waitJobStatus($job, $statusArray) {
         $status = $this->restProxy->getJobStatus($job);
         while (!in_array($status, $statusArray)) {
@@ -320,5 +336,48 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
             $attempt++;
             sleep(1);
         }
+    }
+
+    public function uploadFile($fileName, $fileContent){
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $access = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
+        $access->setDurationInMinutes(30);
+        $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
+        $access = $this->createAccessPolicy($access);
+
+        $locator = new Locator($asset, $access, Locator::TYPE_SAS);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+
+        $this->restProxy->uploadAssetFile($locator, $fileName, $fileContent);
+        $this->restProxy->createFileInfos($asset);
+
+        $accessPolicy = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
+        $accessPolicy->setDurationInMinutes(300);
+        $accessPolicy->setPermissions(AccessPolicy::PERMISSIONS_READ);
+        $accessPolicy = $this->createAccessPolicy($accessPolicy);
+
+        $locator = new Locator($asset, $accessPolicy, Locator::TYPE_SAS);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+
+        // without sleep() Locator hasn't enough time to create URL, so that's why we have to use at least sleep(30)
+        sleep(40);
+
+        $method      = Resources::HTTP_GET;
+        $url         = new Url($locator->getBaseUri() . '/' . $fileName . $locator->getContentAccessComponent());
+        $filters     = array();
+        $statusCode  = Resources::STATUS_OK;
+
+        $httpClient = new HttpClient();
+        $httpClient->setMethod($method);
+        $httpClient->setExpectedStatusCode($statusCode);
+
+        return $httpClient->send($filters, $url);
     }
 }
