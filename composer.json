@@ -10,9 +10,9 @@
         }
     ],
     "require": {
-        "pear-pear/HTTP_Request2":   "*",
-        "pear-pear/Mail_Mime":       "*",
-        "pear-pear/Mail_mimeDecode": "*"
+        "pear-pear2.php.net/HTTP_Request2":   "*",
+        "pear-pear2.php.net/Mail_Mime":       "*",
+        "pear-pear2.php.net/Mail_mimeDecode": "*"
     },
     
     "repositories": [
