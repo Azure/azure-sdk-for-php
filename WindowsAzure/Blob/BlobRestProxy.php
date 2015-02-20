@@ -134,8 +134,9 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     private function _getCopyBlobSourceName($containerName, $blobName, $options)
     {
-        $sourceName  = '/' . $this->getAccountName();
-        $sourceName .= '/' . $this->_createPath($containerName, $blobName);
+        //$sourceName  = '/' . $this->getAccountName();
+        //$sourceName .= '/' . $this->_createPath($containerName, $blobName);
+        $sourceName = _getBlobUrl($containerName, $blobName);
 
         if (!is_null($options->getSourceSnapshot())) {
             $sourceName .= '?snapshot=' . $options->getSourceSnapshot();
@@ -168,6 +169,34 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         } else {
             return $container . '/' . $encodedBlob;
         }
+    }
+	
+	/**
+     * Creates full URI to the given blob.
+     * 
+     * @param string $container The container name.
+     * @param string $blob      The blob name.
+     * 
+     * @return string
+     */
+    private function _getBlobUrl($container, $blob)
+    {
+        $encodedBlob = urlencode($blob);
+        // Unencode the forward slashes to match what the server expects.
+        $encodedBlob = str_replace('%2F', '/', $encodedBlob);
+        // Unencode the backward slashes to match what the server expects.
+        $encodedBlob = str_replace('%5C', '/', $encodedBlob);
+        // Re-encode the spaces (encoded as space) to the % encoding.
+        $encodedBlob = str_replace('+', '%20', $encodedBlob);
+        
+        // Empty container means accessing default container
+        if (empty($container)) {
+            $encodedBlob = $encodedBlob;
+        } else {
+            $encodedBlob = $container . '/' . $encodedBlob;
+        }
+        
+        return $this->_uri . '/' . $encodedBlob;
     }
     
     /**
