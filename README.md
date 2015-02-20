@@ -346,10 +346,13 @@ try {
 ### Add a message to a queue
 
 To add a message to a queue, use **QueueRestProxy->createMessage**. The method takes the queue name, the message text, and message options (which are optional).
+For compatability with other you may need to base64 encode message.
 
 ```PHP
 try {
   // Create message.
+  $msg = "Hello World!";
+  // optional: $msg = base64_encode($msg);
   $queueRestProxy->createMessage("myqueue", "Hello World!");
 } catch(ServiceException $e){
   $code = $e->getCode();
