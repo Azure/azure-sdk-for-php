@@ -136,7 +136,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
     {
         //$sourceName  = '/' . $this->getAccountName();
         //$sourceName .= '/' . $this->_createPath($containerName, $blobName);
-        $sourceName = _getBlobUrl($containerName, $blobName);
+        $sourceName = $this->_getBlobUrl($containerName, $blobName);
 
         if (!is_null($options->getSourceSnapshot())) {
             $sourceName .= '?snapshot=' . $options->getSourceSnapshot();
