@@ -143,6 +143,7 @@ class Resources
     const X_MS_COPY_SOURCE                   = 'x-ms-copy-source';
     const X_MS_RANGE                         = 'x-ms-range';
     const X_MS_RANGE_GET_CONTENT_MD5         = 'x-ms-range-get-content-md5';
+    const X_MS_LEASE_DURATION                = 'x-ms-lease-duration';
     const X_MS_LEASE_ID                      = 'x-ms-lease-id';
     const X_MS_LEASE_TIME                    = 'x-ms-lease-time';
     const X_MS_LEASE_STATUS                  = 'x-ms-lease-status';

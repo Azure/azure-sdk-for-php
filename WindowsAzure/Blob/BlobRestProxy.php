@@ -417,6 +417,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         switch ($leaseAction) {
         case LeaseMode::ACQUIRE_ACTION:
+            $this->addOptionalHeader($headers, Resources::X_MS_LEASE_DURATION, -1);
             $statusCode = Resources::STATUS_CREATED;
             break;
         case LeaseMode::RENEW_ACTION:
