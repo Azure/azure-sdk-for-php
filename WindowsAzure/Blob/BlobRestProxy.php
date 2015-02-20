@@ -1251,7 +1251,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $headers     = array();
         $postParams  = array();
         $queryParams = array();
-        $bodySize    = 0;
+        $bodySize    = false;
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
         
@@ -1270,7 +1270,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         }
 
         // if we have a size we can try to one shot this, else failsafe on block upload
-        if ($bodySize && $bodySize <= $this->_SingleBlobUploadThresholdInBytes) {
+        if (is_int($bodySize) && $bodySize <= $this->_SingleBlobUploadThresholdInBytes) {
             $headers = $this->_addCreateBlobOptionalHeaders($options, $headers);
             
             $this->addOptionalHeader(

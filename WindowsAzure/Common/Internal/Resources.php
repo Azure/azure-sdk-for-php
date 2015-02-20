@@ -88,6 +88,7 @@ class Resources
     const BATCH_ENTITY_DEL_MSG = 'The entity was deleted successfully.';
     const INVALID_PROP_VAL_MSG = "'%s' property value must satisfy %s.";
     const INVALID_PARAM_MSG = "The provided variable '%s' should be of type '%s'";
+    const INVALID_STRING_LENGTH = "The provided variable '%s' should be of %s characters long";
     const INVALID_BTE_MSG = "The blob block type must exist in %s";
     const INVALID_BLOB_PAT_MSG = 'The provided access type is invalid.';
     const INVALID_SVC_PROP_MSG = 'The provided service properties is invalid.';
@@ -448,6 +449,8 @@ class Resources
     const MEDIA_SERVICES_OAUTH_URL = 'https://wamsprodglobal001acs.accesscontrol.windows.net/v2/OAuth2-13';
     const MEDIA_SERVICES_OAUTH_SCOPE = 'urn:WindowsAzureMediaServices';
     const MEDIA_SERVICES_INPUT_ASSETS_REL  = 'http://schemas.microsoft.com/ado/2007/08/dataservices/related/InputMediaAssets';
+    const MEDIA_SERVICES_ASSET_REL  = 'http://schemas.microsoft.com/ado/2007/08/dataservices/related/Asset';
+    const MEDIA_SERVICES_ENCRYPTION_VERSION = '1.0';
 
 
     // @codingStandardsIgnoreEnd

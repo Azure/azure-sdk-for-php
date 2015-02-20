@@ -28,69 +28,41 @@ use WindowsAzure\Common\Internal\Validate;
 
 
 /**
- * Represents asset object used in media services
+ * Represents IngestManifest object used in media services
  *
  * @category  Microsoft
  * @package   WindowsAzure\MediaServices\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.0_2014-01
+ * @version   Release: 0.3.1_2011-08
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class Asset
+class IngestManifest
 {
     /**
-     * The state of the asset "initialized"
+     * The state of the manifest "inactive"
      *
      * @var int
      */
-    const STATE_INITIALIZED = 0;
+    const STATE_INACTIVE = 0;
 
     /**
-     * The state of the asset "published"
+     * The state of the manifest "activating"
      *
      * @var int
      */
-    const STATE_PUBLISHED = 1;
+    const STATE_ACTIVATING = 1;
 
     /**
-     * The state of the asset "deleted"
+     * The state of the manifest "active"
      *
      * @var int
      */
-    const STATE_DELETED = 2;
+    const STATE_ACTIVE = 2;
 
     /**
-     * The encryption options "none"
-     *
-     * @var int
-     */
-    const OPTIONS_NONE = 0;
-
-    /**
-     * The encryption options "storage encrypted"
-     *
-     * @var int
-     */
-    const OPTIONS_STORAGE_ENCRYPTED = 1;
-
-    /**
-     * The encryption options "common encryption protected"
-     *
-     * @var int
-     */
-    const OPTIONS_COMMON_ENCRYPTION_PROTECTED = 2;
-
-    /**
-     * The encryption options "envelope encryption protected"
-     *
-     * @var int
-     */
-    const OPTIONS_ENVELOPE_ENCRYPTION_PROTECTED = 4;
-
-    /**
-     * Asset id
+     * Manifest id
      *
      * @var string
      */
@@ -118,32 +90,11 @@ class Asset
     private $_lastModified;
 
     /**
-     * Alternate id
-     *
-     * @var string
-     */
-    private $_alternateId;
-
-    /**
      * Name
      *
      * @var string
      */
     private $_name;
-
-    /**
-     * Options
-     *
-     * @var int
-     */
-    private $_options;
-
-    /**
-     * URI
-     *
-     * @var string
-     */
-    private $_uri;
 
     /**
      * Storage account name
@@ -153,36 +104,36 @@ class Asset
     private $_storageAccountName;
 
     /**
-     * Create asset from array
+     * BlobStorageUriForUpload
+     *
+     * @var string
+     */
+    private $_blobStorageUriForUpload;
+
+    /**
+     * Statistics
+     *
+     * @var array
+     */
+    private $_statistics;
+
+    /**
+     * Create manifest from array
      *
      * @param array $options Array containing values for object properties
      *
-     * @return WindowsAzure\MediaServices\Models\Asset
+     * @return WindowsAzure\MediaServices\Models\IngestManifest
      */
     public static function createFromOptions($options)
     {
-        Validate::notNull($options['Options'], 'options[Options]');
+        $manifest = new IngestManifest();
+        $manifest->fromArray($options);
 
-        $asset = new Asset($options['Options']);
-        $asset->fromArray($options);
-
-        return $asset;
+        return $manifest;
     }
 
     /**
-     * Create asset
-     *
-     * @param int $options Asset encrytion options.
-     *
-     * @return none
-     */
-    public function __construct($options)
-    {
-        $this->_options = $options;
-    }
-
-    /**
-     * Fill asset from array
+     * Fill manifest from array
      *
      * @param array $options Array containing values for object properties
      *
@@ -213,24 +164,26 @@ class Asset
             $this->_lastModified = new \DateTime($options['LastModified']);
         }
 
-        if (isset($options['AlternateId'])) {
-            Validate::isString($options['AlternateId'], 'options[AlternateId]');
-            $this->_alternateId = $options['AlternateId'];
-        }
-
         if (isset($options['Name'])) {
             Validate::isString($options['Name'], 'options[Name]');
             $this->_name = $options['Name'];
         }
 
-        if (isset($options['Options'])) {
-            Validate::isInteger($options['Options'], 'options[Options]');
-            $this->_options = $options['Options'];
+        if (isset($options['BlobStorageUriForUpload'])) {
+            Validate::isValidUri(
+                $options['BlobStorageUriForUpload'],
+                'options[BlobStorageUriForUpload]'
+            );
+            $this->_blobStorageUriForUpload = $options['BlobStorageUriForUpload'];
         }
 
-        if (isset($options['Uri'])) {
-            Validate::isValidUri($options['Uri'], 'options[Uri]');
-            $this->_uri = $options['Uri'];
+        if (isset($options['Statistics'])) {
+            $this->_statistics = null;
+            if (is_array($options['Statistics'])) {
+                $this->_statistics = IngestManifestStatistics::createFromOptions(
+                    $options['Statistics']
+                );
+            }
         }
 
         if (isset($options['StorageAccountName'])) {
@@ -243,6 +196,26 @@ class Asset
     }
 
     /**
+     * Get "Statistics"
+     *
+     * @return WindowsAzure\MediaServices\Models\IngestManifestStatistics
+     */
+    public function getStatistics()
+    {
+        return $this->_statistics;
+    }
+
+    /**
+     * Get "BlobStorageUriForUpload"
+     *
+     * @return string
+     */
+    public function getBlobStorageUriForUpload()
+    {
+        return $this->_blobStorageUriForUpload;
+    }
+
+    /**
      * Get "Storage account name"
      *
      * @return string
@@ -250,38 +223,6 @@ class Asset
     public function getStorageAccountName()
     {
         return $this->_storageAccountName;
-    }
-
-    /**
-     * Get "URI"
-     *
-     * @return string
-     */
-    public function getUri()
-    {
-        return $this->_uri;
-    }
-
-    /**
-     * Get "Options"
-     *
-     * @return int
-     */
-    public function getOptions()
-    {
-        return $this->_options;
-    }
-
-    /**
-     * Set "Options"
-     *
-     * @param int $value Options
-     *
-     * @return none
-     */
-    public function setOptions($value)
-    {
-        $this->_options = $value;
     }
 
     /**
@@ -304,28 +245,6 @@ class Asset
     public function setName($value)
     {
         $this->_name = $value;
-    }
-
-    /**
-     * Get "Alternate id"
-     *
-     * @return string
-     */
-    public function getAlternateId()
-    {
-        return $this->_alternateId;
-    }
-
-    /**
-     * Set "Alternate id"
-     *
-     * @param string $value Alternate id
-     *
-     * @return none
-     */
-    public function setAlternateId($value)
-    {
-        $this->_alternateId = $value;
     }
 
     /**
@@ -359,7 +278,7 @@ class Asset
     }
 
     /**
-     * Get "Asset id"
+     * Get "Manifest id"
      *
      * @return string
      */

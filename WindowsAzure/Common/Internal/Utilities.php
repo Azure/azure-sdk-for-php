@@ -632,4 +632,91 @@ class Utilities
         }
     }
 
+    /**
+     * Generate a pseudo-random string of bytes using a cryptographically strong 
+     * algorithm.
+     *
+     * @param int $length Length of the string in bytes
+     *
+     * @return string|boolean Generated string of bytes on success, or FALSE on 
+     *                        failure.
+     */
+    public static function generateCryptoKey($length)
+    {
+        return openssl_random_pseudo_bytes($length);
+    }
+    
+    
+    /**
+     * Encrypts $data with CTR encryption
+     * 
+     * @param string $data                 Data to be encrypted
+     * @param string $key                  AES Encryption key
+     * @param string $initializationVector Initialization vector
+     * 
+     * @return string Encrypted data
+     */
+    public static function ctrCrypt($data, $key, $initializationVector) 
+    {
+        Validate::isString($data, 'data');
+        Validate::isString($key, 'key');
+        Validate::isString($initializationVector, 'initializationVector');
+        
+        Validate::isTrue(
+            (strlen($key) == 16 || strlen($key) == 24 || strlen($key) == 32), 
+            sprintf(Resources::INVALID_STRING_LENGTH, 'key', '16, 24, 32')
+        );
+        
+        Validate::isTrue(
+            (strlen($initializationVector) == 16), 
+            sprintf(Resources::INVALID_STRING_LENGTH, 'initializationVector', '16')
+        );
+        
+        $blockCount = ceil(strlen($data) / 16);
+    
+        $ctrData = '';
+        for ($i = 0; $i < $blockCount; ++$i) {
+            $ctrData .= $initializationVector;
+    
+            // increment Initialization Vector
+            $j = 15;
+            do {
+                $digit                    = ord($initializationVector[$j]) + 1;
+                $initializationVector[$j] = chr($digit & 0xFF);
+                
+                $j--;
+            } while (($digit == 0x100) && ($j >= 0));
+        }
+    
+        $encryptCtrData = mcrypt_encrypt(
+            MCRYPT_RIJNDAEL_128, 
+            $key, 
+            $ctrData, 
+            MCRYPT_MODE_ECB
+        );
+        
+        return $data ^ $encryptCtrData;
+    }
+    
+    /**
+     * Convert base 256 number to decimal number. 
+     * 
+     * @param string $number Base 256 number
+     * 
+     * @return string Decimal number
+     */
+    public static function base256ToDec($number) 
+    {
+        Validate::isString($number, 'number');
+        
+        $result = 0;
+        $base   = 1;
+        for ($i = strlen($number) - 1; $i >= 0; $i--) {
+            $result = bcadd($result, bcmul(ord($number[$i]), $base));
+            $base   = bcmul($base, 256);
+        }
+    
+        return $result;
+    }
+
 }

@@ -31,6 +31,7 @@ use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\MediaServices\Models\Asset;
 
+
 /**
  * Unit tests for class Utilities
  *
@@ -568,5 +569,156 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
 
         //Assert
         $this->assertEquals($assetArray[$idKey], $result);
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::generateCryptoKey
+     */
+    public function testGenerateCryptoKey(){
+
+        // Setup
+        $length = 32;
+
+        // Test
+        $result = Utilities::generateCryptoKey($length);
+
+        // Assert
+        $this->assertEquals($length, strlen($result));
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::ctrCrypt
+     */
+    public function testCtrCrypt(){
+    
+        // Setup
+        $data = 'Test data more than 16 bytes';
+        $key = Utilities::generateCryptoKey(32);
+        $efectiveInitializationVector = Utilities::generateCryptoKey(8);
+        $initializationVector = str_pad($efectiveInitializationVector, 16, chr(255));
+    
+        // Test
+        $ecnrypted = Utilities::ctrCrypt($data, $key, $initializationVector);
+        $decrypted = Utilities::ctrCrypt($ecnrypted, $key, $initializationVector);
+    
+        // Assert
+        $this->assertEquals($data, $decrypted);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::ctrCrypt
+     */
+    public function testCtrCryptFixedKeys(){
+    
+        // Setup
+        $data = 'Test data more than 16 bytes';
+        $key = base64_decode('QNhZJajWRH3fmCKDJtMluj6PUBvkADwJ7dX4KQGI99o=');
+        $efectiveInitializationVector = base64_decode('k3AmLEGFubw=');
+        $expected = base64_decode('j3+9MFQVctoWlUvqbn/xReun0XnWqwJ3tpvbpw==');
+        
+        $initializationVector = str_pad($efectiveInitializationVector, 16, chr(255));
+        
+        // Test
+        $actual = Utilities::ctrCrypt($data, $key, $initializationVector);
+    
+        // Assert
+        $this->assertEquals($actual, $expected);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::ctrCrypt
+     */
+    public function testCtrCryptInvalidKeyLength(){
+    
+        // Setup
+        $data = 'Test data more than 16 bytes';
+        $key = '12345';
+        $efectiveInitializationVector = Utilities::generateCryptoKey(8);
+        $this->setExpectedException(get_class(new \InvalidArgumentException('')));
+        
+        $initializationVector = str_pad($efectiveInitializationVector, 16, chr(255));
+        
+        // Test
+        $actual = Utilities::ctrCrypt($data, $key, $initializationVector);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::ctrCrypt
+     */
+    public function testCtrCryptInvalidInitializationVectorLength(){
+    
+        // Setup
+        $data = 'Test data more than 16 bytes';
+        $key = Utilities::generateCryptoKey(32);
+        $initializationVector = '1234';
+        $this->setExpectedException(get_class(new \InvalidArgumentException('')));
+        
+        // Test
+        $actual = Utilities::ctrCrypt($data, $key, $initializationVector);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::base256ToDec
+     */
+    public function testBase256ToDecF(){
+    
+        // Setup
+        $data = pack('C*', 255, 255, 255, 255);
+        $expected = 4294967295;
+    
+        // Test
+        $actual = Utilities::base256ToDec($data);
+    
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::base256ToDec
+     */
+    public function testBase256ToDec0(){
+    
+        // Setup
+        $data = pack('C*', 0, 0, 0, 0);
+        $expected = 0;
+    
+        // Test
+        $actual = Utilities::base256ToDec($data);
+    
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::base256ToDec
+     */
+    public function testBase256ToDec(){
+    
+        // Setup
+        $data = pack('C*', 34, 78, 27, 55);
+        $expected = 575544119;
+    
+        // Test
+        $actual = Utilities::base256ToDec($data);
+    
+        // Assert
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @covers WindowsAzure\Common\Internal\Utilities::base256ToDec
+     */
+    public function testBase256ToDecBig(){
+    
+        // Setup
+        $data = pack('C*', 81, 35, 29, 39, 236, 104, 105, 144); //51 23 1D 27 EC 68 69 90
+        $expected = '5846548798564231568';
+    
+        // Test
+        $actual = Utilities::base256ToDec($data);
+    
+        // Assert
+        $this->assertEquals($expected, $actual);
     }
 }
