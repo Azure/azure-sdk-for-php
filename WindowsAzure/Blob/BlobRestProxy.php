@@ -196,7 +196,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $encodedBlob = $container . '/' . $encodedBlob;
         }
         
-        return $this->_uri . '/' . $encodedBlob;
+        return $this->getUri() . '/' . $encodedBlob;
     }
     
     /**
@@ -2301,7 +2301,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $destinationContainer,
             $destinationBlob
         );
-        $statusCode          = Resources::STATUS_CREATED;
+        $statusCode          = Resources::STATUS_ACCEPTED;
         
         if (is_null($options)) {
             $options = new CopyBlobOptions();
