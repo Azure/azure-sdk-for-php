@@ -353,7 +353,7 @@ try {
   // Create message.
   $msg = "Hello World!";
   // optional: $msg = base64_encode($msg);
-  $queueRestProxy->createMessage("myqueue", "Hello World!");
+  $queueRestProxy->createMessage("myqueue", $msg);
 } catch(ServiceException $e){
   $code = $e->getCode();
   $error_message = $e->getMessage();
