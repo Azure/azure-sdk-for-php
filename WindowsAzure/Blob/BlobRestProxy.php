@@ -134,8 +134,6 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     private function _getCopyBlobSourceName($containerName, $blobName, $options)
     {
-        //$sourceName  = '/' . $this->getAccountName();
-        //$sourceName .= '/' . $this->_createPath($containerName, $blobName);
         $sourceName = $this->_getBlobUrl($containerName, $blobName);
 
         if (!is_null($options->getSourceSnapshot())) {
