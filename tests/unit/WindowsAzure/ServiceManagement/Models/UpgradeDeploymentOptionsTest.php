@@ -33,7 +33,7 @@ use WindowsAzure\ServiceManagement\Models\UpgradeDeploymentOptions;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.0_2014-01
+ * @version   Release: 0.4.1_2015-02
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class UpgradeDeploymentOptionsTest extends \PHPUnit_Framework_TestCase

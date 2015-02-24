@@ -32,8 +32,8 @@ const CHANNEL_MAIN_CONTAINER = '$root';
 const CHANNEL_GET_CONTAINER = 'get';
 const CHANNEL_REST_CONTAINER = 'rest';
 const PACKAGE_NAME = 'WindowsAzure';
-const PACKAGE_RELEASE_VERSION = '0.4.0';
-const PACKAGE_API_VERSION = '0.4.0';
+const PACKAGE_RELEASE_VERSION = '0.4.1';
+const PACKAGE_API_VERSION = '0.4.1';
 const PACKAGE_RELEASE_STATE = 'beta';
 const PACKAGE_API_STATE = 'beta';
 const PACKAGE_MIN_PHP_VERSION = '5.3.0';
@@ -47,26 +47,23 @@ Queues, Service Runtime, Service Management, Service Bus (Queues, Topics) and Me
 It is build as a thin REST call wrapper where each server call maps to a single method call within the library.
 ';
 const PACKAGE_RELEASE_NOTES = '
-- Added API support for Media Services:
-    * Operations on Assets, Access policies, Locators, FileAssets, Jobs, Jobs templates, Tasks and Task templates
-        > create, update, delete, list, get properties
-    * Uploading files to Media Services storage
+- Implemented uploading of large files to Media Services
 ';
 $dependencies = array(
     array('required', 'HTTP_Request2',            'pear.php.net'),
     array('required', 'Mail_Mime',                'pear.php.net'),
     array('required', 'Mail_mimeDecode',          'pear.php.net'),
     array('optional', 'PEAR_PackageFileManager2', 'pear.php.net'),
-	array('optional', 'Pirum', 					  'pear.pirum-project.org')
+    array('optional', 'Pirum',                    'pear.pirum-project.org')
 );
 $ignore = array(
     'build/',
-	'tests/',
-	'channel/'
+    'tests/',
+    'channel/'
 );
 $include = array(
     'README.md',
-	'LICENSE.txt',
-	'WindowsAzure/'
+    'LICENSE.txt',
+    'WindowsAzure/'
 );
 

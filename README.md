@@ -97,7 +97,7 @@ To install the PHP Client Libraries for Microsoft Azure as a PEAR package, follo
     pear channel-discover pear.windowsazure.com
 3. Install the PEAR package:
 
-    pear install pear.windowsazure.com/WindowsAzure-0.4.0
+    pear install pear.windowsazure.com/WindowsAzure-0.4.1
 
 
 # Usage
