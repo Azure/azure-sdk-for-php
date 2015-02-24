@@ -47,7 +47,10 @@ Queues, Service Runtime, Service Management, Service Bus (Queues, Topics) and Me
 It is build as a thin REST call wrapper where each server call maps to a single method call within the library.
 ';
 const PACKAGE_RELEASE_NOTES = '
-- Implemented uploading of large files to Media Services
+- Improved API support for Media Services:
+    * Encrypting assets
+    * Bulk ingesting
+    * Uploading of large files
 ';
 $dependencies = array(
     array('required', 'HTTP_Request2',            'pear.php.net'),

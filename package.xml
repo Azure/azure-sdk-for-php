@@ -15,7 +15,7 @@ It is build as a thin REST call wrapper where each server call maps to a single 
   <active>yes</active>
  </lead>
  <date>2015-02-24</date>
- <time>03:59:02</time>
+ <time>09:02:29</time>
  <version>
   <release>0.4.1</release>
   <api>0.4.1</api>
@@ -26,7 +26,10 @@ It is build as a thin REST call wrapper where each server call maps to a single 
  </stability>
  <license uri="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</license>
  <notes>
-- Implemented uploading of large files to Media Services
+- Improved API support for Media Services:
+    * Encrypting assets
+    * Bulk ingesting
+    * Uploading of large files
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -378,7 +381,10 @@ It is build as a thin REST call wrapper where each server call maps to a single 
    <date>2015-02-24</date>
    <license uri="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</license>
    <notes>
-- Implemented uploading of large files to Media Services
+- Improved API support for Media Services:
+    * Encrypting assets
+    * Bulk ingesting
+    * Uploading of large files
    </notes>
   </release>
   <release>
