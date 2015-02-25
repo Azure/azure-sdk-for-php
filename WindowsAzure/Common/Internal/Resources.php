@@ -143,6 +143,7 @@ class Resources
     const X_MS_COPY_SOURCE                   = 'x-ms-copy-source';
     const X_MS_RANGE                         = 'x-ms-range';
     const X_MS_RANGE_GET_CONTENT_MD5         = 'x-ms-range-get-content-md5';
+    const X_MS_LEASE_DURATION                = 'x-ms-lease-duration';
     const X_MS_LEASE_ID                      = 'x-ms-lease-id';
     const X_MS_LEASE_TIME                    = 'x-ms-lease-time';
     const X_MS_LEASE_STATUS                  = 'x-ms-lease-status';
@@ -246,7 +247,7 @@ class Resources
 
     // Header values
     const SDK_USER_AGENT                                = 'Azure-SDK-For-PHP/0.4.0';
-    const STORAGE_API_LATEST_VERSION                    = '2011-08-18';
+    const STORAGE_API_LATEST_VERSION                    = '2012-02-12';
     const SM_API_LATEST_VERSION                         = '2011-10-01';
     const DATA_SERVICE_VERSION_VALUE                    = '1.0;NetFx';
     const MAX_DATA_SERVICE_VERSION_VALUE                = '2.0;NetFx';
