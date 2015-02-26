@@ -1164,7 +1164,7 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
         $this->assertInstanceOf('WindowsAzure\Blob\Models\BreakLeaseResult', $result);
         $this->assertNotNull($result->getLeaseTime());
         $result = $this->restProxy->acquireLease($name, $blob);
-		$this->assertNotNull($result->getLeaseId());
+        $this->assertNotNull($result->getLeaseId());
     }
     
     /**
