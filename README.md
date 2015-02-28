@@ -62,7 +62,7 @@ To get the source code from GitHub, type
 ##Install via Composer
 
 1. Create a file named **composer.json** in the root of your project and add the following code to it:
-
+```
     {
       "require": {
         "microsoft/windowsazure": "*"
@@ -75,7 +75,7 @@ To get the source code from GitHub, type
       ],
       "minimum-stability": "dev"
     }
-
+```
 2. Download **[composer.phar](http://getcomposer.org/composer.phar)** in your project root.
 
 3. Open a command prompt and execute this in your project root
