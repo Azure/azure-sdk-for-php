@@ -34,7 +34,7 @@ use Tests\Framework\TestResources;
  * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version    Release: 0.3.1_2011-08
+ * @version    Release: 0.4.1_2015-03
  * @link       https://github.com/windowsazure/azure-sdk-for-php
  */
 class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
@@ -96,7 +96,7 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
         $headers = array(Resources::X_MS_VERSION => $apiVersion, Resources::X_MS_DATE => $date1);
         $queryParams = array(Resources::QP_COMP => 'list');
         $httpMethod = 'GET';
-        $expected = 'SharedKey ' . $accountName . ':tPIT33PrvWHsSXTbzvT93R4YmP13c5H6WB7lGKO3E2M=';
+        $expected = 'SharedKey ' . $accountName . ':7O9UOMTnAEF+cuwZzo1BlDj2qJm8yNywajta5he6Qig=';
 
         $mock = new SharedKeyAuthSchemeMock($accountName, $accountKey);
 

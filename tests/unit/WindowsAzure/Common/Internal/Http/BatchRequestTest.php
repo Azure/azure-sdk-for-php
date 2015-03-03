@@ -34,7 +34,7 @@ use WindowsAzure\Common\Internal\Http\HttpCallContext;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.0_2014-01
+ * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class BatchRequestTest extends \PHPUnit_Framework_TestCase
@@ -87,6 +87,23 @@ class BatchRequestTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals(1, count($resultHeader));
         $this->assertContains('multipart/mixed', $resultHeader['Content-Type']);
+    }
+
+    /**
+     * @covers WindowsAzure\Common\Internal\Http\batchRequest::getContexts
+     */
+    public function testGetContexts(){
+
+        //  Setup
+        $batchReq = new BatchRequest();
+        $context = new HttpCallContext();
+        $batchReq->appendContext($context);
+
+        // Test
+        $result = $batchReq->getContexts();
+
+        // Assert
+        $this->assertEquals($context, $result[0]);
     }
 
 }

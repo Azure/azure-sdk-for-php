@@ -35,6 +35,9 @@ use WindowsAzure\MediaServices\Models\Task;
 use WindowsAzure\MediaServices\Models\TaskOptions;
 use WindowsAzure\MediaServices\Models\JobTemplate;
 use WindowsAzure\MediaServices\Models\TaskTemplate;
+use WindowsAzure\Common\Internal\Http\Url;
+use WindowsAzure\Common\Internal\Http\HttpClient;
+use WindowsAzure\Common\Internal\Resources;
 
 /**
  * TestBase class for each unit test class.
@@ -44,7 +47,7 @@ use WindowsAzure\MediaServices\Models\TaskTemplate;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.0_2014-01
+ * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
@@ -55,6 +58,12 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     protected $jobTemplate = array();
     protected $job = array();
     protected $outputAssets = array();
+    protected $ingestManifests = array();
+    protected $ingestManifestAssets = array();
+    protected $ingestManifestFiles = array();
+    protected $contentKeys = array();
+
+    const LARGE_FILE_SIZE_MB = 7;
 
     public function setUp()
     {
@@ -67,35 +76,49 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createAsset($asset) {
         $result = $this->restProxy->createAsset($asset);
-
         $this->assets[$result->getId()] = $result;
-
         return $result;
     }
 
     public function createAccessPolicy($accessPolicy) {
         $result = $this->restProxy->createAccessPolicy($accessPolicy);
-
         $this->accessPolicy[$result->getId()] = $result;
-
         return $result;
     }
 
     public function createLocator($loc) {
-
         $result = $this->restProxy->createLocator($loc);
-
         $this->locator[$result->getId()] = $result;
-
         return $result;
     }
 
     public function createJob($job, $inputAssets, $tasks = null) {
-
         $result = $this->restProxy->createJob($job, $inputAssets, $tasks);
-
         $this->job[$result->getId()] = $result;
+        return $result;
+    }
 
+    public function createIngestManifest($ingestManifest) {
+        $result = $this->restProxy->createIngestManifest($ingestManifest);
+        $this->ingestManifests[$result->getId()] = $result;
+        return $result;
+    }
+
+    public function createIngestManifestAsset($ingestManifestAsset, $asset) {
+        $result = $this->restProxy->createIngestManifestAsset($ingestManifestAsset, $asset);
+        $this->ingestManifestAssets[$result->getId()] = $result;
+        return $result;
+    }
+
+    public function createIngestManifestFile($ingestManifestFile) {
+        $result = $this->restProxy->createIngestManifestFile($ingestManifestFile);
+        $this->ingestManifestFiles[$result->getId()] = $result;
+        return $result;
+    }
+
+    public function createContentKey($contentKey) {
+        $result = $this->restProxy->createContentKey($contentKey);
+        $this->contentKeys[$result->getId()] = $result;
         return $result;
     }
 
@@ -119,6 +142,22 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $this->restProxy->createFileInfos($asset);
 
         return $asset;
+    }
+
+    public function uploadFileToAsset($asset) {
+        $access = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
+        $access->setDurationInMinutes(30);
+        $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
+        $access = $this->createAccessPolicy($access);
+
+        $locator = new Locator($asset, $access, Locator::TYPE_SAS);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+
+        $fileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
+        $this->restProxy->uploadAssetFile($locator, $fileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT);
+        $this->restProxy->createFileInfos($asset);
     }
 
     public function createAssetWithFilesForStream() {
@@ -168,7 +207,6 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $job->setName($name);
 
         $jobResult = $this->createJob($job, array($inputAsset), array($task));
-        $this->job[$jobResult->getId()] = $jobResult;
 
         return $jobResult;
     }
@@ -198,17 +236,44 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         return $jobTempl;
     }
 
-
     protected function tearDown()
     {
         parent::tearDown();
+
+        foreach($this->ingestManifestFiles as $ingestManifestFile) {
+            $this->restProxy->deleteIngestManifestFile($ingestManifestFile);
+        }
+
+        foreach($this->ingestManifestAssets as $ingestManifestAsset) {
+            $this->restProxy->deleteIngestManifestAsset($ingestManifestAsset);
+        }
+
+        foreach($this->ingestManifests as $ingestManifest) {
+            $this->restProxy->deleteIngestManifest($ingestManifest);
+        }
 
         foreach($this->locator as $loc) {
             $this->restProxy->deleteLocator($loc);
         }
 
         foreach($this->assets as $asset) {
+            $contentKeyList = $this->restProxy->getAssetContentKeys($asset);
+            foreach($contentKeyList as $contentKey) {
+                unset($this->contentKeys[$contentKey->getId()]);
+            }
+        
             $this->restProxy->deleteAsset($asset);
+        }
+        
+        $availableContentKeyList = $this->restProxy->getContentKeyList();
+        $availableContentKeyIds = array();
+        foreach($availableContentKeyList as $availableContentKey) {
+            $availableContentKeyIds[] = $availableContentKey->getId();
+        }
+        foreach($this->contentKeys as $contentKey) {
+            if (in_array($contentKey->getId(), $availableContentKeyIds)) {
+                $this->restProxy->deleteContentKey($contentKey);
+            }
         }
 
         foreach($this->accessPolicy as $access) {
@@ -235,13 +300,84 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         return sprintf('-%04x', mt_rand(0, 65535));
     }
 
-    public function deleteJob($job){
+    protected function createLargeFile() {
+        $fileContent = TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT;
+
+        $targetFileSize = self::LARGE_FILE_SIZE_MB * 1024 * 1024;
+
+        while (strlen($fileContent) < $targetFileSize) {
+            $fileContent .= TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT;
+        }
+
+        return $fileContent;
+    }
+
+    public function waitJobStatus($job, $statusArray) {
         $status = $this->restProxy->getJobStatus($job);
-        while ($status != Job::STATE_FINISHED && $status != Job::STATE_ERROR && $status != Job::STATE_CANCELED) {
+        while (!in_array($status, $statusArray)) {
             sleep(1);
             $status = $this->restProxy->getJobStatus($job);
         }
+    }
+    
+    public function deleteJob($job){
+        $this->waitJobStatus($job, array(Job::STATE_FINISHED, Job::STATE_ERROR, Job::STATE_CANCELED));
         $this->restProxy->deleteJob($job->getId());
         unset($this->job[$job->getId()]);
+    }
+
+    public function waitIngestManifestFinishedFiles($manifest, $fileCount, $threshold = 40) {
+        $stat = $this->restProxy->getIngestManifest($manifest);
+        $attempt = 0;
+        while (($stat->getStatistics()->getFinishedFilesCount() < $fileCount)
+            && ($attempt < $threshold)
+        ) {
+            $stat = $this->restProxy->getIngestManifest($manifest);
+            $attempt++;
+            sleep(1);
+        }
+    }
+
+    public function uploadFile($fileName, $fileContent){
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $access = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
+        $access->setDurationInMinutes(30);
+        $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
+        $access = $this->createAccessPolicy($access);
+
+        $locator = new Locator($asset, $access, Locator::TYPE_SAS);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+
+        $this->restProxy->uploadAssetFile($locator, $fileName, $fileContent);
+        $this->restProxy->createFileInfos($asset);
+
+        $accessPolicy = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME . $this->createSuffix());
+        $accessPolicy->setDurationInMinutes(300);
+        $accessPolicy->setPermissions(AccessPolicy::PERMISSIONS_READ);
+        $accessPolicy = $this->createAccessPolicy($accessPolicy);
+
+        $locator = new Locator($asset, $accessPolicy, Locator::TYPE_SAS);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME . $this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+
+        // without sleep() Locator hasn't enough time to create URL, so that's why we have to use at least sleep(30)
+        sleep(40);
+
+        $method      = Resources::HTTP_GET;
+        $url         = new Url($locator->getBaseUri() . '/' . $fileName . $locator->getContentAccessComponent());
+        $filters     = array();
+        $statusCode  = Resources::STATUS_OK;
+
+        $httpClient = new HttpClient();
+        $httpClient->setMethod($method);
+        $httpClient->setExpectedStatusCode($statusCode);
+
+        return $httpClient->send($filters, $url);
     }
 }

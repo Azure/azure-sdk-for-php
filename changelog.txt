@@ -1,3 +1,14 @@
+Windows Azure SDK For PHP 0.4.0, 2014-01-23
+-------------------------------------------
+- Added additional API support for Media Services:
+	* Connection
+	* Ingest asset, upload files
+	* Encoding / process asset, create job, job templates
+	* Manage media services entities: create / update / read / delete / get list
+	* Delivery SAS and Streaming media content
+	* REST API Version: 2.2
+
+
 Windows Azure SDK For PHP 0.3.1, 2012-08-17
 -------------------------------------------
 - Added additional API support for Service Management:

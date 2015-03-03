@@ -35,7 +35,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version    Release: 0.3.1_2011-08
+ * @version    Release: 0.4.1_2015-03
  * @link       https://github.com/windowsazure/azure-sdk-for-php
  */
 class TestResources
@@ -73,6 +73,7 @@ class TestResources
     const MEDIA_SERVICES_JOB_TEMPLATE_ID_PREFIX = 'nb:jtid:UUID:';
     const MEDIA_SERVICES_TASK_COFIGURATION      = 'H.264 HD 720p VBR';
     const MEDIA_SERVICES_PROCESSOR_NAME         = 'Windows Azure Media Encoder';
+    const MEDIA_SERVICES_DECODE_PROCESSOR_NAME  = 'Storage Decryption';
     const MEDIA_SERVICES_PROCESSOR_ID_PREFIX    = 'nb:mpid:UUID:';
     const MEDIA_SERVICES_DUMMY_FILE_NAME        = 'simple.avi';
     const MEDIA_SERVICES_DUMMY_FILE_CONTENT     = 'test file content';
@@ -81,6 +82,8 @@ class TestResources
     const MEDIA_SERVICES_ISM_FILE_NAME          = 'small.ism';
     const MEDIA_SERVICES_ISMC_FILE_NAME         = 'small.ismc';
     const MEDIA_SERVICES_STREAM_APPEND          = 'Manifest';
+    const MEDIA_SERVICES_INGEST_MANIFEST        = 'TestIngestManifest';
+    const MEDIA_SERVICES_INGEST_MANIFEST_ASSET  = 'TestIngestManifestAsset';
 
     // See https://tools.ietf.org/html/rfc2616
     const STATUS_NOT_MODIFIED          = 304;

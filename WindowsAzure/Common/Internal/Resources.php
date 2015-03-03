@@ -32,7 +32,7 @@ namespace WindowsAzure\Common\Internal;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.0_2014-01
+ * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Resources
@@ -88,6 +88,7 @@ class Resources
     const BATCH_ENTITY_DEL_MSG = 'The entity was deleted successfully.';
     const INVALID_PROP_VAL_MSG = "'%s' property value must satisfy %s.";
     const INVALID_PARAM_MSG = "The provided variable '%s' should be of type '%s'";
+    const INVALID_STRING_LENGTH = "The provided variable '%s' should be of %s characters long";
     const INVALID_BTE_MSG = "The blob block type must exist in %s";
     const INVALID_BLOB_PAT_MSG = 'The provided access type is invalid.';
     const INVALID_SVC_PROP_MSG = 'The provided service properties is invalid.';
@@ -142,6 +143,7 @@ class Resources
     const X_MS_COPY_SOURCE                   = 'x-ms-copy-source';
     const X_MS_RANGE                         = 'x-ms-range';
     const X_MS_RANGE_GET_CONTENT_MD5         = 'x-ms-range-get-content-md5';
+    const X_MS_LEASE_DURATION                = 'x-ms-lease-duration';
     const X_MS_LEASE_ID                      = 'x-ms-lease-id';
     const X_MS_LEASE_TIME                    = 'x-ms-lease-time';
     const X_MS_LEASE_STATUS                  = 'x-ms-lease-status';
@@ -244,8 +246,8 @@ class Resources
 
 
     // Header values
-    const SDK_USER_AGENT                                = 'Azure-SDK-For-PHP/0.4.0';
-    const STORAGE_API_LATEST_VERSION                    = '2011-08-18';
+    const SDK_USER_AGENT                                = 'Azure-SDK-For-PHP/0.4.1';
+    const STORAGE_API_LATEST_VERSION                    = '2012-02-12';
     const SM_API_LATEST_VERSION                         = '2011-10-01';
     const DATA_SERVICE_VERSION_VALUE                    = '1.0;NetFx';
     const MAX_DATA_SERVICE_VERSION_VALUE                = '2.0;NetFx';
@@ -448,6 +450,8 @@ class Resources
     const MEDIA_SERVICES_OAUTH_URL = 'https://wamsprodglobal001acs.accesscontrol.windows.net/v2/OAuth2-13';
     const MEDIA_SERVICES_OAUTH_SCOPE = 'urn:WindowsAzureMediaServices';
     const MEDIA_SERVICES_INPUT_ASSETS_REL  = 'http://schemas.microsoft.com/ado/2007/08/dataservices/related/InputMediaAssets';
+    const MEDIA_SERVICES_ASSET_REL  = 'http://schemas.microsoft.com/ado/2007/08/dataservices/related/Asset';
+    const MEDIA_SERVICES_ENCRYPTION_VERSION = '1.0';
 
 
     // @codingStandardsIgnoreEnd

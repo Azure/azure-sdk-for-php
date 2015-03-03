@@ -84,7 +84,7 @@ use WindowsAzure\Blob\Models\BreakLeaseResult;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.0_2014-01
+ * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class BlobRestProxy extends ServiceRestProxy implements IBlob
@@ -134,8 +134,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
      */
     private function _getCopyBlobSourceName($containerName, $blobName, $options)
     {
-        $sourceName  = '/' . $this->getAccountName();
-        $sourceName .= '/' . $this->_createPath($containerName, $blobName);
+        $sourceName = $this->_getBlobUrl($containerName, $blobName);
 
         if (!is_null($options->getSourceSnapshot())) {
             $sourceName .= '?snapshot=' . $options->getSourceSnapshot();
@@ -168,6 +167,34 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         } else {
             return $container . '/' . $encodedBlob;
         }
+    }
+	
+	/**
+     * Creates full URI to the given blob.
+     * 
+     * @param string $container The container name.
+     * @param string $blob      The blob name.
+     * 
+     * @return string
+     */
+    private function _getBlobUrl($container, $blob)
+    {
+        $encodedBlob = urlencode($blob);
+        // Unencode the forward slashes to match what the server expects.
+        $encodedBlob = str_replace('%2F', '/', $encodedBlob);
+        // Unencode the backward slashes to match what the server expects.
+        $encodedBlob = str_replace('%5C', '/', $encodedBlob);
+        // Re-encode the spaces (encoded as space) to the % encoding.
+        $encodedBlob = str_replace('+', '%20', $encodedBlob);
+        
+        // Empty container means accessing default container
+        if (empty($container)) {
+            $encodedBlob = $encodedBlob;
+        } else {
+            $encodedBlob = $container . '/' . $encodedBlob;
+        }
+        
+        return $this->getUri() . '/' . $encodedBlob;
     }
     
     /**
@@ -417,6 +444,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         
         switch ($leaseAction) {
         case LeaseMode::ACQUIRE_ACTION:
+            $this->addOptionalHeader($headers, Resources::X_MS_LEASE_DURATION, -1);
             $statusCode = Resources::STATUS_CREATED;
             break;
         case LeaseMode::RENEW_ACTION:
@@ -1251,7 +1279,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         $headers     = array();
         $postParams  = array();
         $queryParams = array();
-        $bodySize    = 0;
+        $bodySize    = false;
         $path        = $this->_createPath($container, $blob);
         $statusCode  = Resources::STATUS_CREATED;
         
@@ -1270,7 +1298,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
         }
 
         // if we have a size we can try to one shot this, else failsafe on block upload
-        if ($bodySize && $bodySize <= $this->_SingleBlobUploadThresholdInBytes) {
+        if (is_int($bodySize) && $bodySize <= $this->_SingleBlobUploadThresholdInBytes) {
             $headers = $this->_addCreateBlobOptionalHeaders($options, $headers);
             
             $this->addOptionalHeader(
@@ -2271,7 +2299,7 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $destinationContainer,
             $destinationBlob
         );
-        $statusCode          = Resources::STATUS_CREATED;
+        $statusCode          = Resources::STATUS_ACCEPTED;
         
         if (is_null($options)) {
             $options = new CopyBlobOptions();

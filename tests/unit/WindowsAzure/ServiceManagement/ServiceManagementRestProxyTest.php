@@ -50,7 +50,7 @@ use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.0_2014-01
+ * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
@@ -1184,6 +1184,8 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testRollbackUpgradeOrUpdate()
     {
+        $this->markTestSkipped(ServiceRestProxyTestBase::TAKE_TOO_LONG);
+
         $attempt = 0;
         $maxAttempts = 10;
         $isPassed = false;
