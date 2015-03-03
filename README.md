@@ -10,16 +10,16 @@ Microsoft Azure tables, blobs, queues, service bus (queues and topics), service 
   * create and delete tables
   * create, query, insert, update, merge, and delete entities
   * batch operations
-  * REST API Version: 2011-08-18
+  * REST API Version: 2012-02-12
 * Blobs
   * create, list, and delete containers, work with container metadata and permissions, list blobs in container
   * create block and page blobs (from a stream or a string), work with blob blocks and pages, delete blobs
   * work with blob properties, metadata, leases, snapshot a blob
-  * REST API Version: 2011-08-18 
+  * REST API Version: 2012-02-12
 * Storage Queues
   * create, list, and delete queues, and work with queue metadata and properties
   * create, get, peek, update, delete messages
-  * REST API Version: 2011-08-18 
+  * REST API Version: 2012-02-12
 * Service Bus
   * Queues: create, list and delete queues; send, receive, unlock and delete messages
   * Topics: create, list, and delete topics; create, list, and delete subscriptions; send, receive, unlock and delete messages; create, list, and delete rules

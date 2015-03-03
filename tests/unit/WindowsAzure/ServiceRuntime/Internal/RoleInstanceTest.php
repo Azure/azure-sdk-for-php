@@ -34,7 +34,7 @@ use WindowsAzure\ServiceRuntime\Internal\RoleInstance;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.1_2015-02
+ * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class RoleInstanceTest extends \PHPUnit_Framework_TestCase

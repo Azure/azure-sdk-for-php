@@ -32,7 +32,7 @@ namespace WindowsAzure\Common\Internal;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.1_2015-02
+ * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Resources
@@ -246,7 +246,7 @@ class Resources
 
 
     // Header values
-    const SDK_USER_AGENT                                = 'Azure-SDK-For-PHP/0.4.0';
+    const SDK_USER_AGENT                                = 'Azure-SDK-For-PHP/0.4.1';
     const STORAGE_API_LATEST_VERSION                    = '2012-02-12';
     const SM_API_LATEST_VERSION                         = '2011-10-01';
     const DATA_SERVICE_VERSION_VALUE                    = '1.0;NetFx';

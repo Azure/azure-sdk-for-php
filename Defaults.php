@@ -51,6 +51,7 @@ const PACKAGE_RELEASE_NOTES = '
     * Encrypting assets
     * Bulk ingesting
     * Uploading of large files
+- Updated storage API version to 2012-02-12
 ';
 $dependencies = array(
     array('required', 'HTTP_Request2',            'pear.php.net'),
