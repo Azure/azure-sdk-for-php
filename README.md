@@ -51,8 +51,8 @@ Windows Azure tables, blobs, queues, service bus (queues and topics), service ru
 
 To get the source code from GitHub, type
 
-    git clone https://github.com/WindowsAzure/azure-sdk-for-php.git
-    cd ./azure-sdk-for-php
+	git clone https://github.com/WindowsAzure/azure-sdk-for-php.git
+	cd ./azure-sdk-for-php
 
 > **Note**
 >
@@ -66,10 +66,10 @@ To get the source code from GitHub, type
 		{
 			"require": {
 				"pear-pear.php.net/HTTP_Request2":   "*",
-        		"pear-pear.php.net/Mail_Mime":       "*",
-        		"pear-pear.php.net/Mail_mimeDecode": "*"
+				"pear-pear.php.net/Mail_Mime":       "*",
+				"pear-pear.php.net/Mail_mimeDecode": "*"
 				"microsoft/windowsazure": "*"
-    		},
+			},
 
 			"repositories": [
 				{
@@ -102,7 +102,7 @@ To install the PHP Client Libraries for Windows Azure as a PEAR package, follow 
 		pear channel-discover pear.windowsazure.com
 3. Install the PEAR package:
 
-		pear install pear.windowsazure.com/WindowsAzure-0.4.1
+		pear install pear.windowsazure.com/WindowsAzure-0.4.0
 
 
 # Usage
@@ -582,7 +582,7 @@ To create the .cer certificate, execute this:
 $serviceManagementRestProxy->listLocations();
 $locations = $result->getLocations();
 foreach($locations as $location){
-      echo $location->getName()."<br />";
+	  echo $location->getName()."<br />";
 }
 ```
 
