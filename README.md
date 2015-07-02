@@ -15,11 +15,11 @@ Windows Azure tables, blobs, queues, service bus (queues and topics), service ru
 	* create, list, and delete containers, work with container metadata and permissions, list blobs in container
 	* create block and page blobs (from a stream or a string), work with blob blocks and pages, delete blobs
 	* work with blob properties, metadata, leases, snapshot a blob
-	* REST API Version: 2011-08-18 
+	* REST API Version: 2011-08-18
 * Storage Queues
 	* create, list, and delete queues, and work with queue metadata and properties
 	* create, get, peek, update, delete messages
-	* REST API Version: 2011-08-18 
+	* REST API Version: 2011-08-18
 * Service Bus
 	* Queues: create, list and delete queues; send, receive, unlock and delete messages
 	* Topics: create, list, and delete topics; create, list, and delete subscriptions; send, receive, unlock and delete messages; create, list, and delete rules
@@ -37,7 +37,7 @@ Windows Azure tables, blobs, queues, service bus (queues and topics), service ru
 	* deployment: create, get, delete, swap, change configuration, update status, upgrade, rollback
 	* role instance: reboot, reimage
 	* REST API Version: 2011-10-01
-* Media Services 
+* Media Services
 	* Connection
 	* Ingest asset, upload files
 	* Encoding / process asset, create job, job templates
@@ -45,17 +45,17 @@ Windows Azure tables, blobs, queues, service bus (queues and topics), service ru
 	* Delivery SAS and Streaming media content
 	* REST API Version: 2.2
 
-	
+
 # Getting Started
 ## Download Source Code
 
 To get the source code from GitHub, type
 
-    git clone https://github.com/WindowsAzure/azure-sdk-for-php.git
-    cd ./azure-sdk-for-php
+	git clone https://github.com/WindowsAzure/azure-sdk-for-php.git
+	cd ./azure-sdk-for-php
 
 > **Note**
-> 
+>
 > The PHP Client Libraries for Windows Azure have a dependency on the [HTTP_Request2](http://pear.php.net/package/HTTP_Request2), [Mail_mime](http://pear.php.net/package/Mail_mime), and [Mail_mimeDecode](http://pear.php.net/package/Mail_mimeDecode) PEAR packages. The recommended way to resolve these dependencies is to install them using the [PEAR package manager](http://pear.php.net/manual/en/installation.php).
 
 
@@ -65,14 +65,19 @@ To get the source code from GitHub, type
 
 		{
 			"require": {
+				"pear-pear.php.net/HTTP_Request2":   "*",
+				"pear-pear.php.net/Mail_Mime":       "*",
+				"pear-pear.php.net/Mail_mimeDecode": "*"
 				"microsoft/windowsazure": "*"
-			},			
+			},
+
 			"repositories": [
 				{
 					"type": "pear",
 					"url": "http://pear.php.net"
 				}
 			],
+
 			"minimum-stability": "dev"
 		}
 
@@ -104,18 +109,18 @@ To install the PHP Client Libraries for Windows Azure as a PEAR package, follow 
 
 ## Getting Started
 
-There are four basic steps that have to be performed before you can make a call to any Windows Azure API when using the libraries. 
+There are four basic steps that have to be performed before you can make a call to any Windows Azure API when using the libraries.
 
 * First, include the autoloader script:
 
 	If installed via PEAR or Git:
 
-		require_once "WindowsAzure/WindowsAzure.php"; 
+		require_once "WindowsAzure/WindowsAzure.php";
 
 	If installed via Composer:
-		
-		require_once "vendor/autoload.php"; 
-	
+
+		require_once "vendor/autoload.php";
+
 * Include the namespaces you are going to use.
 
 	To create any Windows Azure service client you need to use the **ServicesBuilder** class:
@@ -126,15 +131,15 @@ There are four basic steps that have to be performed before you can make a call 
 
 		use WindowsAzure\Common\ServiceException;
 
-	
-* To instantiate the service client you will also need a valid connection string. The format is: 
+
+* To instantiate the service client you will also need a valid connection string. The format is:
 
 	* For accessing a live storage service (tables, blobs, queues):
-	
+
 			DefaultEndpointsProtocol=[http|https];AccountName=[yourAccount];AccountKey=[yourKey]
-	
+
 	* For accessing the emulator storage:
-	
+
 			UseDevelopmentStorage=true
 
 	* For accessing the Service Bus:
@@ -245,9 +250,9 @@ The following are examples of common operations performed with the Blob serivce.
 ```PHP
 // OPTIONAL: Set public access policy and metadata.
 // Create container options object.
-$createContainerOptions = new CreateContainerOptions();	
+$createContainerOptions = new CreateContainerOptions();
 
-// Set public access policy. Possible values are 
+// Set public access policy. Possible values are
 // PublicAccessType::CONTAINER_AND_BLOBS and PublicAccessType::BLOBS_ONLY.
 // CONTAINER_AND_BLOBS: full public read access for container and blob data.
 // BLOBS_ONLY: public read access for blobs. Container data not available.
@@ -301,7 +306,7 @@ try	{
 	// List blobs.
 	$blob_list = $blobRestProxy->listBlobs("mycontainer");
 	$blobs = $blob_list->getBlobs();
-	
+
 	foreach($blobs as $blob)
 	{
 		echo $blob->getName().": ".$blob->getUrl()."<br />";
@@ -341,7 +346,7 @@ try	{
 ```
 
 [Error Codes and Messages for Queues](http://msdn.microsoft.com/en-us/library/windowsazure/dd179446.aspx)
-	
+
 
 ### Add a message to a queue
 
@@ -425,7 +430,7 @@ try	{
 ```PHP
 try	{
 	$queueInfo = new QueueInfo("myqueue");
-	
+
 	// Create queue.
 	$serviceBusRestProxy->createQueue($queueInfo);
 } catch(ServiceException $e){
@@ -468,14 +473,14 @@ try	{
 	// Set the receive mode to PeekLock (default is ReceiveAndDelete).
 	$options = new ReceiveMessageOptions();
 	$options->setPeekLock(true);
-	
+
 	// Receive message.
 	$message = $serviceBusRestProxy->receiveQueueMessage("myqueue", $options);
 	echo "Body: ".$message->getBody()."<br />";
 	echo "MessageID: ".$message->getMessageId()."<br />";
-	
+
 	// *** Process message here ***
-	
+
 	// Delete message.
 	$serviceBusRestProxy->deleteMessage($message);
 } catch(ServiceException $e){
@@ -490,7 +495,7 @@ try	{
 ### Create a Topic
 
 ```PHP
-try	{		
+try	{
 	// Create topic.
 	$topicInfo = new TopicInfo("mytopic");
 	$serviceBusRestProxy->createTopic($topicInfo);
@@ -538,7 +543,7 @@ try	{
 
 The primary way to receive messages from a subscription is to use a **ServiceBusRestProxy->receiveSubscriptionMessage** method. Received messages can work in two different modes: **ReceiveAndDelete** (the default) and **PeekLock** similarly to Service Bus Queues.
 
-The example below demonstrates how a message can be received and processed using **ReceiveAndDelete** mode (the default mode). 
+The example below demonstrates how a message can be received and processed using **ReceiveAndDelete** mode (the default mode).
 
 ```PHP
 try	{
@@ -547,8 +552,8 @@ try	{
 	$options->setReceiveAndDelete();
 
 	// Get message.
-	$message = $serviceBusRestProxy->receiveSubscriptionMessage("mytopic", 
-																"mysubscription", 
+	$message = $serviceBusRestProxy->receiveSubscriptionMessage("mytopic",
+																"mysubscription",
 																$options);
 	echo "Body: ".$message->getBody()."<br />";
 	echo "MessageID: ".$message->getMessageId()."<br />";
@@ -563,21 +568,21 @@ try	{
 
 ### Set-up certificates
 
-You  need to create two certificates, one for the server (a .cer file) and one for the client (a .pem file). To create the .pem file using [OpenSSL](http://www.openssl.org), execute this: 
+You  need to create two certificates, one for the server (a .cer file) and one for the client (a .pem file). To create the .pem file using [OpenSSL](http://www.openssl.org), execute this:
 
 	openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
 
-To create the .cer certificate, execute this: 
+To create the .cer certificate, execute this:
 
 	openssl x509 -inform pem -in mycert.pem -outform der -out mycert.cer
 
 ### List Available Locations
 
-```PHP	
+```PHP
 $serviceManagementRestProxy->listLocations();
 $locations = $result->getLocations();
 foreach($locations as $location){
-      echo $location->getName()."<br />";
+	  echo $location->getName()."<br />";
 }
 ```
 
@@ -593,11 +598,11 @@ $options->setLocation('West US');
 
 $result = $serviceManagementRestProxy->createStorageService($name, $label, $options);
 ```
-	
-	
+
+
 ### Create a Cloud Service
 
-A cloud service is also known as a hosted service (from earlier versions of Windows Azure).  The **createHostedServices** method allows you to create a new hosted service by providing a hosted service name (which must be unique in Windows Azure), a label (the base 64-endcoded hosted service name), and a **CreateServiceOptions** object which allows you to set the location *or* the affinity group for your service. 
+A cloud service is also known as a hosted service (from earlier versions of Windows Azure).  The **createHostedServices** method allows you to create a new hosted service by providing a hosted service name (which must be unique in Windows Azure), a label (the base 64-endcoded hosted service name), and a **CreateServiceOptions** object which allows you to set the location *or* the affinity group for your service.
 
 ```PHP
 $name = "myhostedservice";
@@ -688,11 +693,11 @@ $url = $locator->getBaseUri() . '/' . '[File name]' . $locator->getContentAccess
 
 ###Manage media services entities
 
-Media services CRUD operations are performed through media services rest proxy class. It has methods like “createAsset”, “createLocator”, “createJob” and etc. for entities creations. 
+Media services CRUD operations are performed through media services rest proxy class. It has methods like “createAsset”, “createLocator”, “createJob” and etc. for entities creations.
 
-To retrieve all entities list you may use methods “getAssetList”, “getAccessPolicyList”, “getLocatorList”, “getJobList” and etc. For getting single entity data use methods “getAsset”, “getJob”, “getTask” and etc. passing the entity identifier or entity data model object with non-empty identifier as a parameter. 
+To retrieve all entities list you may use methods “getAssetList”, “getAccessPolicyList”, “getLocatorList”, “getJobList” and etc. For getting single entity data use methods “getAsset”, “getJob”, “getTask” and etc. passing the entity identifier or entity data model object with non-empty identifier as a parameter.
 
-Update entities with methods like “updateLocator”, “updateAsset”, “updateAssetFile” and etc. passing the entity data model object as a parameter. It is important to have valid entity identifier specified in data model object. 
+Update entities with methods like “updateLocator”, “updateAsset”, “updateAssetFile” and etc. passing the entity data model object as a parameter. It is important to have valid entity identifier specified in data model object.
 
 Erase entities with methods like “deleteAsset”, “deleteAccessPolicy”, “deleteJob” and etc. passing the entity identifier or entity data model object with non-empty identifier as a parameter.
 
