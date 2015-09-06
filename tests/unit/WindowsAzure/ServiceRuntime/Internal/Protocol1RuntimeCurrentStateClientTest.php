@@ -31,6 +31,10 @@ use WindowsAzure\ServiceRuntime\Internal\FileOutputChannel;
 use WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeCurrentStateClient;
 use WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer;
 
+use \org\bovigo\vfs\vfsStream;
+use \org\bovigo\vfs\vfsStreamWrapper;
+use \org\bovigo\vfs\vfsStreamDirectory;
+
 /**
  * Unit tests for class Protocol1RuntimeCurrentStateClient.
  *

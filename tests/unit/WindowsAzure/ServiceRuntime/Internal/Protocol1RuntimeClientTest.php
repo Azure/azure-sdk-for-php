@@ -36,6 +36,10 @@ use WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient;
 use WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer;
 use WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer;
 
+use \org\bovigo\vfs\vfsStream;
+use \org\bovigo\vfs\vfsStreamWrapper;
+use \org\bovigo\vfs\vfsStreamDirectory;
+
 /**
  * Unit tests for class Protocol1RuntimeClient.
  *

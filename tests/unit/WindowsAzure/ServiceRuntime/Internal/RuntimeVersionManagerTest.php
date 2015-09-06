@@ -29,6 +29,10 @@ use WindowsAzure\ServiceRuntime\Internal\RuntimeVersionProtocolClient;
 use WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager;
 use WindowsAzure\Common\Internal\Resources;
 
+use \org\bovigo\vfs\vfsStream;
+use \org\bovigo\vfs\vfsStreamWrapper;
+use \org\bovigo\vfs\vfsStreamDirectory;
+
 /**
  * Unit tests for class RuntimeVersionManager.
  *
