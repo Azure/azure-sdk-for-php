@@ -26,7 +26,10 @@ use Tests\Framework\TestResources;
 use WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer;
 use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
 
-require_once 'vfsStream/vfsStream.php';
+use \org\bovigo\vfs\vfsStream;
+use \org\bovigo\vfs\vfsStreamWrapper;
+use \org\bovigo\vfs\vfsStreamDirectory;
+
 
 /**
  * Unit tests for class ChunkedGoalStateDeserializer.
@@ -51,8 +54,8 @@ class ChunkedGoalStateDeserializerTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $roleEnvironmentPath = 'mypath';
         $currentStateEndpoint = 'endpoint';
@@ -80,14 +83,14 @@ class ChunkedGoalStateDeserializerTest extends \PHPUnit_Framework_TestCase
         
         $fileContent = dechex(strlen($fileContent)) . "\n" . $fileContent;
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $fileInputChannel = new FileInputChannel();
         $fileInputStream = $fileInputChannel->getInputStream(
-            \vfsStream::url($rootDirectory . '/' . $fileName)
+            vfsStream::url($rootDirectory . '/' . $fileName)
         );
         
         $chunkedGoalStateDeserializer = new ChunkedGoalStateDeserializer();
@@ -113,8 +116,8 @@ class ChunkedGoalStateDeserializerTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $roleEnvironmentPath = 'mypath';
         $currentStateEndpoint = 'endpoint';
@@ -142,14 +145,14 @@ class ChunkedGoalStateDeserializerTest extends \PHPUnit_Framework_TestCase
         
         $fileContent = dechex(strlen($fileContent)) . "\n" . $fileContent . "\n";
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $fileInputChannel = new FileInputChannel();
         $fileInputStream = $fileInputChannel->getInputStream(
-            \vfsStream::url($rootDirectory . '/' . $fileName)
+            vfsStream::url($rootDirectory . '/' . $fileName)
         );
         
         $chunkedGoalStateDeserializer = new ChunkedGoalStateDeserializer();
@@ -175,8 +178,8 @@ class ChunkedGoalStateDeserializerTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $roleEnvironmentPath = 'mypath';
         $currentStateEndpoint = 'endpoint';
@@ -204,14 +207,14 @@ class ChunkedGoalStateDeserializerTest extends \PHPUnit_Framework_TestCase
         
         $fileContent = "\n" . dechex(strlen($fileContent)) . "\n" . $fileContent;
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $fileInputChannel = new FileInputChannel();
         $fileInputStream = $fileInputChannel->getInputStream(
-            \vfsStream::url($rootDirectory . '/' . $fileName)
+            vfsStream::url($rootDirectory . '/' . $fileName)
         );
         
         $chunkedGoalStateDeserializer = new ChunkedGoalStateDeserializer();
