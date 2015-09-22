@@ -27,8 +27,7 @@ use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Represents the settings used to sign and access a request against the service
- * management. For more information about service management connection strings check
- * this page: http://msdn.microsoft.com/en-us/library/windowsazure/gg466228.aspx
+ * management.
  *
  * @category  Microsoft
  * @package   WindowsAzure\Common\Internal
