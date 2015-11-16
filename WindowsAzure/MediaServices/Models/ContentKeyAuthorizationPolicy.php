@@ -110,7 +110,7 @@ class ContentKeyAuthorizationPolicy
     }
 
     /**
-     * Set "ContentKeyContentKeyAuthorizationPolicy id"
+     * Set "ContentKeyAuthorizationPolicy id"
      *
      * @param string $value ContentKey id
      *
