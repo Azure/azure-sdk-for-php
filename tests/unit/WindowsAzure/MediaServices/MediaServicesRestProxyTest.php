@@ -45,6 +45,7 @@ use WindowsAzure\MediaServices\Models\IngestManifestStatistics;
 use WindowsAzure\MediaServices\Models\ContentKey;
 use WindowsAzure\MediaServices\Models\ProtectionKeyTypes;
 use WindowsAzure\MediaServices\Models\ContentKeyTypes;
+use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy;
 use Tests\Framework\VirtualFileSystem;
 
 /**
@@ -1535,5 +1536,71 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertEquals($fileContent, $actual);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createContentKeyAuthorizationPolicy
+     */
+    public function testCreateContentKeyAuthorizationPolicy()
+    {
+        // Setup
+        $name = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME . $this->createSuffix();
+        $policy = new ContentKeyAuthorizationPolicy();
+        $policy->setName($name);
+        
+
+        // Test
+        $result = $this->createContentKeyAuthorizationPolicy($policy);
+
+        // Assert
+        $this->assertEquals($policy->getName(), $result->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createContentKeyAuthorizationPolicy
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::updateContentKeyAuthorizationPolicy
+     */
+    public function testUpdateContentKeyAuthorizationPolicy()
+    {
+        // Setup
+        $name = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME . $this->createSuffix();
+        $newname = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME . $this->createSuffix();
+        $policy = new ContentKeyAuthorizationPolicy();
+        $policy->setName($name);
+        $result = $this->createContentKeyAuthorizationPolicy($policy);
+
+        // Test
+        $result->setName($newname);
+        $this->restProxy->updateContentKeyAuthorizationPolicy($result);
+
+        $result = $this->restProxy->getContentKeyAuthorizationPolicy($result->getId());
+
+        // Assert
+        $this->assertEquals($newname, $result->getName());
+    }
+     
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createContentKeyAuthorizationPolicy
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::updateContentKeyAuthorizationPolicy
+     */
+    public function testDeleteContentKeyAuthorizationPolicy()
+    {
+        // Setup
+        $countBefore = count($this->restProxy->getContentKeyAuthorizationPoliciesList());
+        $name = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME . $this->createSuffix();
+        $policy = new ContentKeyAuthorizationPolicy();
+        $policy->setName($name);
+        $result = $this->restProxy->createContentKeyAuthorizationPolicy($policy);
+
+        $countMiddle = count($this->restProxy->getContentKeyAuthorizationPoliciesList());
+
+        // Test
+        $this->restProxy->deleteContentKeyAuthorizationPolicy($result);
+        $countAfter = count($this->restProxy->getContentKeyAuthorizationPoliciesList());
+
+        // Assert
+        $this->assertEquals($countMiddle - 1, $countBefore);
+        $this->assertEquals($countBefore, $countAfter);
+        $this->assertEquals($countMiddle - 1, $countAfter);
     }
 }

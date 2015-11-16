@@ -54,6 +54,7 @@ use WindowsAzure\MediaServices\Models\IngestManifest;
 use WindowsAzure\MediaServices\Models\IngestManifestAsset;
 use WindowsAzure\MediaServices\Models\IngestManifestFile;
 use WindowsAzure\MediaServices\Models\ContentKey;
+use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for media services
@@ -2351,5 +2352,87 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $encoded .= "\n-----END CERTIFICATE-----";
 
         return $encoded;
+    }
+
+    /**
+     * Create new content key authorization policy
+     *
+     * @param Models\ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy ContentKeyAuthorizationPolicy data
+     *
+     * @return Models\ContentKeyAuthorizationPolicy Created ContentKeyAuthorizationPolicy
+     */
+    public function createContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy)
+    {
+        Validate::isA($contentKeyAuthorizationPolicy, 'WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy', 'contentKeyAuthorizationPolicy');
+
+        return ContentKeyAuthorizationPolicy::createFromOptions($this->_createEntity($contentKeyAuthorizationPolicy, 'ContentKeyAuthorizationPolicies'));
+    }
+
+    /**
+     * Get content key authorization policy
+     *
+     * @param Models\ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationPolicy ContentKeyAuthorizationPolicies data or
+     * content key authorization policy Id
+     *
+     * @return Models\ContentKeyAuthorizationPolicy
+     */
+    public function getContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy)
+    {
+        $contentKeyAuthorizationPolicyId = Utilities::getEntityId(
+            $contentKeyAuthorizationPolicy,
+            'WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy'
+        );
+
+        return ContentKeyAuthorizationPolicy::createFromOptions($this->_getEntity("ContentKeyAuthorizationPolicies('{$contentKeyAuthorizationPolicyId}')"));
+    }
+
+    /**
+     * Get content key authorization policies list
+     *
+     * @return array of Models\ContentKeyAuthorizationPolicy
+     */
+    public function getContentKeyAuthorizationPoliciesList()
+    {
+        $propertyList = $this->_getEntityList("ContentKeyAuthorizationPolicies");
+        $result       = array();
+
+        foreach ($propertyList as $properties) {
+            $result[] = ContentKeyAuthorizationPolicy::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Update content key authorization policy
+     *
+     * @param Models\ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy New content key authorization policy data with
+     * valid id
+     *
+     * @return void
+     */
+    public function updateContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy)
+    {
+        Validate::isA($contentKeyAuthorizationPolicy, 'WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy', 'contentKeyAuthorizationPolicy');
+
+        $this->_updateEntity($contentKeyAuthorizationPolicy, "ContentKeyAuthorizationPolicies('{$contentKeyAuthorizationPolicy->getId()}')");
+    }
+
+    /**
+     * Delete content key authorization policy
+     *
+     * @param Models\ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationPolicy Models\ContentKeyAuthorizationPolicy data or
+     * content key authorization policy Id
+     *
+     * @return void
+     */
+    public function deleteContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy)
+    {
+        $contentKeyAuthorizationPolicyId = Utilities::getEntityId(
+            $contentKeyAuthorizationPolicy,
+            'WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy'
+        );
+
+        $this->_deleteEntity("ContentKeyAuthorizationPolicies('{$contentKeyAuthorizationPolicyId}')");
     }
 }

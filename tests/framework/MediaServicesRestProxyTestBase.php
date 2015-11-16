@@ -62,6 +62,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     protected $ingestManifestAssets = array();
     protected $ingestManifestFiles = array();
     protected $contentKeys = array();
+    protected $contentKeyAuthorizationPolicies = array();
 
     const LARGE_FILE_SIZE_MB = 7;
 
@@ -119,6 +120,12 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     public function createContentKey($contentKey) {
         $result = $this->restProxy->createContentKey($contentKey);
         $this->contentKeys[$result->getId()] = $result;
+        return $result;
+    }
+
+    public function createContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy) {
+        $result = $this->restProxy->createContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy);
+        $this->contentKeyAuthorizationPolicies[$result->getId()] = $result;
         return $result;
     }
 
@@ -254,6 +261,10 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
         foreach($this->locator as $loc) {
             $this->restProxy->deleteLocator($loc);
+        }
+
+        foreach($this->contentKeyAuthorizationPolicies as $contentKeyAuthorizationPolicy) {
+            $this->restProxy->deleteContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy);
         }
 
         foreach($this->assets as $asset) {
