@@ -48,6 +48,9 @@ use WindowsAzure\MediaServices\Models\ContentKeyTypes;
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy;
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption;
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction;
+use WindowsAzure\MediaServices\Models\AssetDeliveryPolicy;
+use WindowsAzure\MediaServices\Models\AssetDeliveryProtocol;
+use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyType;
 use Tests\Framework\VirtualFileSystem;
 
 /**
@@ -1809,5 +1812,188 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEmpty($optionsFromPolicy);
     }
 
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAssetDeliveryPolicy
+     */
+    public function testCreateAssetDeliveryPolicy()
+    {
+        // Setup
+        $name = TestResources::MEDIA_SERVICES_ASSET_DELIVERY_POLICY_NAME . $this->createSuffix();
+        $policy = new AssetDeliveryPolicy();
+        $policy->setName($name);
+        $policy->setAssetDeliveryProtocol(AssetDeliveryProtocol::ALL);
+        $policy->setAssetDeliveryPolicyType(AssetDeliveryPolicyType::BLOCKED);
+        
+        // Test
+        $result = $this->createAssetDeliveryPolicy($policy);
+
+        // Assert
+        $this->assertEquals($policy->getName(), $result->getName());
+        $this->assertEquals(AssetDeliveryProtocol::ALL, $result->getAssetDeliveryProtocol());
+        $this->assertEquals(AssetDeliveryPolicyType::BLOCKED, $result->getAssetDeliveryPolicyType());
+
+        return $result->getId();
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetDeliveryPolicy
+     * 
+     */
+    public function testGetAssetDeliveryPolicy()
+    {
+        // Setup
+        $id = $this->testCreateAssetDeliveryPolicy();
+
+        // Test
+        $result = $this->restProxy->getAssetDeliveryPolicy($id);
+
+        // Assert
+        $this->assertEquals($id, $result->getId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetDeliveryPolicyList
+     * 
+     */
+    public function testGetAssetDeliveryPolicyList()
+    {
+        // Setup
+        $id1 = $this->testCreateAssetDeliveryPolicy();
+        $id2 = $this->testCreateAssetDeliveryPolicy();
+
+        // Test
+        $result = $this->restProxy->getAssetDeliveryPolicyList();
+
+        // Assert
+        $this->assertContainsEntityById($id1, $result);
+        $this->assertContainsEntityById($id2, $result);
+    }
+
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAssetDeliveryPolicy
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::updateAssetDeliveryPolicy
+     */
+    public function testUpdateAssetDeliveryPolicy()
+    {
+        // Setup
+        $name = TestResources::MEDIA_SERVICES_ASSET_DELIVERY_POLICY_NAME . $this->createSuffix();
+        $newname = TestResources::MEDIA_SERVICES_ASSET_DELIVERY_POLICY_NAME . $this->createSuffix();
+        $policy = new AssetDeliveryPolicy();
+        $policy->setName($name);
+        $policy->setAssetDeliveryProtocol(AssetDeliveryProtocol::ALL);
+        $policy->setAssetDeliveryPolicyType(AssetDeliveryPolicyType::BLOCKED);
+
+        $result = $this->createAssetDeliveryPolicy($policy);
+
+        // Test
+        $result->setName($newname);
+        $this->restProxy->updateAssetDeliveryPolicy($result);
+
+        $result = $this->restProxy->getAssetDeliveryPolicy($result->getId());
+
+        // Assert
+        $this->assertEquals($newname, $result->getName());
+    }
     
+    /**
+     * 
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAssetDeliveryPolicy
+     */
+    public function testDeleteAssetDeliveryPolicy()
+    {
+        // Setup
+        $countBefore = count($this->restProxy->getAssetDeliveryPolicyList());
+        $name = TestResources::MEDIA_SERVICES_ASSET_DELIVERY_POLICY_NAME . $this->createSuffix();
+        $policy = new AssetDeliveryPolicy();
+        $policy->setName($name);
+        $policy->setAssetDeliveryProtocol(AssetDeliveryProtocol::ALL);
+        $policy->setAssetDeliveryPolicyType(AssetDeliveryPolicyType::BLOCKED);
+
+        $result = $this->restProxy->createAssetDeliveryPolicy($policy);
+
+        $countMiddle = count($this->restProxy->getAssetDeliveryPolicyList());
+
+        // Test
+        $this->restProxy->deleteAssetDeliveryPolicy($result);
+        $countAfter = count($this->restProxy->getAssetDeliveryPolicyList());
+
+        // Assert
+        $this->assertEquals($countMiddle - 1, $countBefore);
+        $this->assertEquals($countBefore, $countAfter);
+        $this->assertEquals($countMiddle - 1, $countAfter);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetLinkedDeliveryPolicy
+     */
+    public function testGetAssetLinkedDeliveryPolicies()
+    {
+
+        // Setup
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME + $this->createSuffix());
+
+        $asset = $this->createAsset($asset);
+        $policyId = $this->testCreateAssetDeliveryPolicy();
+
+        $this->restProxy->linkDeliveryPolicyToAsset($asset, $policyId);
+
+        // Test
+        $result = $this->restProxy->getAssetLinkedDeliveryPolicy($asset);
+
+        // Assert
+        $this->assertCount(1, $result);
+        $this->assertEquals($policyId, $result[0]->getId());
+
+        // Cleanup
+        $this->restProxy->removeDeliveryPolicyFromAsset($asset, $policyId);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::linkDeliveryPolicyToAsset
+     */
+    public function testLinkDeliveryPolicyToAsset()
+    {
+        // Setup
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME + $this->createSuffix());
+
+        $asset = $this->createAsset($asset);
+        $policyId = $this->testCreateAssetDeliveryPolicy();
+
+        // Test
+        $this->restProxy->linkDeliveryPolicyToAsset($asset, $policyId);
+
+        // Assert
+        $result = $this->restProxy->getAssetLinkedDeliveryPolicy($asset);
+        $this->assertCount(1, $result);
+        $this->assertEquals($policyId, $result[0]->getId());
+
+        // Cleanup
+        $this->restProxy->removeDeliveryPolicyFromAsset($asset, $policyId);
+
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::removeDeliveryPolicyFromAsset
+     */
+    public function testRemoveDeliveryPolicyFromAsset()
+    { 
+        // Setup
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME + $this->createSuffix());
+
+        $asset = $this->createAsset($asset);
+        $policyId = $this->testCreateAssetDeliveryPolicy();
+
+        $this->restProxy->linkDeliveryPolicyToAsset($asset, $policyId);
+
+        // Test
+        $this->restProxy->removeDeliveryPolicyFromAsset($asset, $policyId);
+
+        // Assert
+        $optionsFromPolicy = $this->restProxy->getAssetLinkedDeliveryPolicy($asset);
+        $this->assertEmpty($optionsFromPolicy);
+    }
 }

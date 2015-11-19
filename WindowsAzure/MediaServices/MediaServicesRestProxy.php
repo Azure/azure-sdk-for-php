@@ -56,6 +56,7 @@ use WindowsAzure\MediaServices\Models\IngestManifestFile;
 use WindowsAzure\MediaServices\Models\ContentKey;
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy;
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption;
+use WindowsAzure\MediaServices\Models\AssetDeliveryPolicy;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for media services
@@ -2621,6 +2622,209 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $method      = Resources::HTTP_DELETE;
         $path        = "ContentKeyAuthorizationPolicies('{$policyId}')/\$links/Options('{$optionsId}')";
+        $headers     = array();
+        $postParams  = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+
+        $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode
+        );
+    }
+
+    /**
+     * Create new asset delivery policy
+     *
+     * @param Models\AssetDeliveryPolicy $assetDeliveryPolicy AssetDeliveryPolicy data
+     *
+     * @return Models\AssetDeliveryPolicy Created AssetDeliveryPolicy
+     */
+    public function createAssetDeliveryPolicy($assetDeliveryPolicy)
+    {
+        Validate::isA($assetDeliveryPolicy, 'WindowsAzure\MediaServices\Models\AssetDeliveryPolicy', 'assetDeliveryPolicy');
+
+        return AssetDeliveryPolicy::createFromOptions($this->_createEntity($assetDeliveryPolicy, 'AssetDeliveryPolicies'));
+    }
+
+    /**
+     * Get asset delivery policy
+     *
+     * @param Models\ContentKeyAuthorizationPolicy|string $assetDeliveryPolicy ContentKeyAuthorizationPolicies data or
+     * content key authorization policy Id
+     *
+     * @return Models\AssetDeliveryPolicy
+     */
+    public function getAssetDeliveryPolicy($assetDeliveryPolicy)
+    {
+        $assetDeliveryPolicyId = Utilities::getEntityId(
+            $assetDeliveryPolicy,
+            'WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy'
+        );
+
+        return AssetDeliveryPolicy::createFromOptions($this->_getEntity("AssetDeliveryPolicies('{$assetDeliveryPolicyId}')"));
+    }
+
+    /**
+     * Get asset delivery policies list
+     *
+     * @return array of Models\AssetDeliveryPolicy
+     */
+    public function getAssetDeliveryPolicyList()
+    {
+        $propertyList = $this->_getEntityList("AssetDeliveryPolicies");
+        $result       = array();
+
+        foreach ($propertyList as $properties) {
+            $result[] = AssetDeliveryPolicy::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Update asset delivery policy
+     *
+     * @param Models\AssetDeliveryPolicy $assetDeliveryPolicy New asset delivery policy data with
+     * valid id
+     *
+     * @return void
+     */
+    public function updateAssetDeliveryPolicy($assetDeliveryPolicy)
+    {
+        Validate::isA($assetDeliveryPolicy, 'WindowsAzure\MediaServices\Models\AssetDeliveryPolicy', 'assetDeliveryPolicy');
+
+        $this->_updateEntity($assetDeliveryPolicy, "AssetDeliveryPolicies('{$assetDeliveryPolicy->getId()}')");
+    }
+
+    /**
+     * Delete asset delivery policy
+     *
+     * @param Models\AssetDeliveryPolicy|string $assetDeliveryPolicy Models\AssetDeliveryPolicy data or
+     * asset delivery policy Id
+     *
+     * @return void
+     */
+    public function deleteAssetDeliveryPolicy($assetDeliveryPolicy)
+    {
+        $assetDeliveryPolicyId = Utilities::getEntityId(
+            $assetDeliveryPolicy,
+            'WindowsAzure\MediaServices\Models\AssetDeliveryPolicy'
+        );
+
+        $this->_deleteEntity("AssetDeliveryPolicies('{$assetDeliveryPolicyId}')");
+    }
+
+    /**
+     * Get AssetDeliveryPolicy list linked to an Asset 
+     *
+     * @param \WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
+     * Asset Id to retrieve the linked delivery policies.
+     *
+     * @return array
+     */
+    public function getAssetLinkedDeliveryPolicy($asset)
+    {
+        $assetId = Utilities::getEntityId(
+            $asset,
+            'WindowsAzure\MediaServices\Models\Asset'
+        );
+
+        $propertyList = $this->_getEntityList("Assets('{$assetId}')/DeliveryPolicies");
+        $result       = array();                                   
+
+        foreach ($propertyList as $properties) {
+            $result[] = AssetDeliveryPolicy::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Link AssetDeliveryPolicy to Asset
+     *
+     * @param Models\Asset|string      $asset      Asset to link a AssetDeliveryPolicy or
+     * Asset id
+     *
+     * @param Models\AssetDeliveryPolicy|string $policy DeliveryPolicy to link or
+     * DeliveryPolicy id
+     *
+     * @return void
+     */
+    public function linkDeliveryPolicyToAsset($asset, $policy)
+    {
+        $assetId = Utilities::getEntityId(
+            $asset,
+            'WindowsAzure\MediaServices\Models\Asset'
+        );
+        $assetId = urlencode($assetId);
+
+        $policyId = Utilities::getEntityId(
+            $policy,
+            'WindowsAzure\MediaServices\Models\AssetDeliveryPolicy'
+        );
+
+        $policyId = urlencode($policyId);
+
+        $contentWriter = new \XMLWriter();
+        $contentWriter->openMemory();
+        $contentWriter->writeElementNS(
+            'data',
+            'uri',
+            Resources::DS_XML_NAMESPACE,
+            $this->getUri() . "AssetDeliveryPolicies('{$policyId}')"
+        );
+
+        $method      = Resources::HTTP_POST;
+        $path        = "Assets('{$assetId}')/\$links/DeliveryPolicies";
+        $headers     = array(
+            Resources::CONTENT_TYPE => Resources::XML_CONTENT_TYPE,
+        );
+        $postParams  = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_NO_CONTENT;
+        $body        = $contentWriter->outputMemory();
+
+        $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode,
+            $body
+        );
+    }
+
+    /**
+     * Remove AssetDeliveryPolicy from Asset
+     *
+     * @param Models\Asset|string      $asset      Asset to remove a AssetDeliveryPolicy or
+     * Asset id
+     *
+     * @param Models\AssetDeliveryPolicy|string $contentKey DeliveryPolicy to remove or
+     * DeliveryPolicy id
+     *
+     * @return void
+     */
+    public function removeDeliveryPolicyFromAsset($asset, $policy)
+    {
+        $assetId = Utilities::getEntityId(
+            $asset,
+            'WindowsAzure\MediaServices\Models\Asset'
+        );
+
+        $policyId = Utilities::getEntityId(
+            $policy,
+            'WindowsAzure\MediaServices\Models\AssetDeliveryPolicy'
+        );
+
+        $method      = Resources::HTTP_DELETE;
+        $path        = "Assets('{$assetId}')/\$links/DeliveryPolicies('{$policyId}')";
         $headers     = array();
         $postParams  = array();
         $queryParams = array();
