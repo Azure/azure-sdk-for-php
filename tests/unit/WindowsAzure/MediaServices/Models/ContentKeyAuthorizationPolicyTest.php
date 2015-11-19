@@ -80,8 +80,8 @@ class ContentKeyAuthorizationPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covxers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::getId
-     * @covxers WindowsAzure\MediaServices\Models\ContentKeyContentKeyAuthorizationPolicy::setId
+     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::getId
+     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::setId
      */
     public function testGetSetId() {
 
