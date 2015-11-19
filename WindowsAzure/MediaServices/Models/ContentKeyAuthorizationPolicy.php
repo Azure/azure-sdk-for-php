@@ -27,7 +27,6 @@ use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
 
 
-
 /**
  * Represents ContentKeyAuthorizationPolicy object used in media services
  *

@@ -85,6 +85,8 @@ class TestResources
     const MEDIA_SERVICES_INGEST_MANIFEST        = 'TestIngestManifest';
     const MEDIA_SERVICES_INGEST_MANIFEST_ASSET  = 'TestIngestManifestAsset';
     const MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME     = 'TestContentKeyAuthorizationPolicy';
+    const MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_OPTIONS_NAME    = 'TestContentKeyAuthorizationPolicyOption';
+    const MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_RESTRICTION_NAME = 'TestContentKeyAuthorizationPolicyRestriction';
 
     // See https://tools.ietf.org/html/rfc2616
     const STATUS_NOT_MODIFIED          = 304;

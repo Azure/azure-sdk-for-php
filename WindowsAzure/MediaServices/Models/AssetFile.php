@@ -169,6 +169,14 @@ class AssetFile
     }
 
     /**
+     * Return a list of fields that must be sent (even if null)
+     * @return string[]
+     */
+    public function requiredFields() {
+        return ['Name', 'ParentAssetId'];
+    }
+
+    /**
      * Fill asset file from array
      *
      * @param array $options Array containing values for object properties
