@@ -59,5 +59,12 @@ class ContentKeyTypes
      * @var int
      */
     const CONFIGURATION_ENCRYPTION = 2;
+
+    /**
+     * The content key type "ConfigurationEncryption"
+     *
+     * @var int
+     */
+    const ENVELOPE_ENCRYPTION = 4;
 }
 
