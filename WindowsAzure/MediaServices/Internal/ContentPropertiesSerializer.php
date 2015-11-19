@@ -155,7 +155,7 @@ class ContentPropertiesSerializer
                             $xmlWriter->startElementNS(
                                 'data',
                                 Resources::ELEMENT,
-                                Resources::DSM_XML_NAMESPACE
+                                Resources::DS_XML_NAMESPACE
                             );
 
                             ContentPropertiesSerializer::_serializeRecursive(
