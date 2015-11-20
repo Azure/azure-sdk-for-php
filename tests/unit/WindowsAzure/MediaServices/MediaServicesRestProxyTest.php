@@ -48,6 +48,8 @@ use WindowsAzure\MediaServices\Models\ContentKeyTypes;
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy;
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption;
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction;
+use WindowsAzure\MediaServices\Models\ContentKeyDeliveryType;
+use WindowsAzure\MediaServices\Models\ContentKeyRestrictionType;
 use WindowsAzure\MediaServices\Models\AssetDeliveryPolicy;
 use WindowsAzure\MediaServices\Models\AssetDeliveryProtocol;
 use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyType;
@@ -1242,7 +1244,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $contentKey->setContentKey($aesKey, $protectionKey);
         $contentKey->setProtectionKeyId($protectionKeyId);
         $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
-        $contentKey->setContentKeyType(ContentKeyTypes::STORAGE_ENCRYPTION);
+        $contentKey->setContentKeyType(ContentKeyTypes::ENVELOPE_ENCRYPTION);
 
         // Test
         $result = $this->createContentKey($contentKey);
@@ -1254,6 +1256,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEquals($contentKey->getProtectionKeyId(), $result->getProtectionKeyId());
         $this->assertEquals($contentKey->getProtectionKeyType(), $result->getProtectionKeyType());
         $this->assertEquals($contentKey->getContentKeyType(), $result->getContentKeyType());
+
+        return $result;
     }
 
      /**
@@ -1657,12 +1661,12 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $restrictionName = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_RESTRICTION_NAME . $this->createSuffix();
         $restriction = new ContentKeyAuthorizationPolicyRestriction();
         $restriction->setName($restrictionName);
-        $restriction->setKeyRestrictionType(ContentKeyAuthorizationPolicyRestriction::RESTRICTION_TYPE_OPEN);
+        $restriction->setKeyRestrictionType(ContentKeyRestrictionType::OPEN);
         $restrictions = array($restriction);
         
         $options = new ContentKeyAuthorizationPolicyOption();
         $options->setName($name);
-        $options->setKeyDeliveryType(ContentKeyAuthorizationPolicyOption::DELIVERY_TYPE_BASELINE_HTTP);
+        $options->setKeyDeliveryType(ContentKeyDeliveryType::BASELINE_HTTP);
         $options->setRestrictions($restrictions);
 
         // Test
@@ -1741,7 +1745,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $name = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_OPTIONS_NAME . $this->createSuffix();
         $options = new ContentKeyAuthorizationPolicyOption();
         $options->setName($name);
-        $options->setKeyDeliveryType(ContentKeyAuthorizationPolicyOption::DELIVERY_TYPE_BASELINE_HTTP);
+        $options->setKeyDeliveryType(ContentKeyDeliveryType::BASELINE_HTTP);
         $options = $this->restProxy->createContentKeyAuthorizationPolicyOption($options);
         $countMiddle = count($this->restProxy->getContentKeyAuthorizationPolicyOptionList());
 
@@ -1995,5 +1999,27 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Assert
         $optionsFromPolicy = $this->restProxy->getAssetLinkedDeliveryPolicy($asset);
         $this->assertEmpty($optionsFromPolicy);
+    }
+
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getKeyDeliveryUrl
+     */
+    public function testGetKeyDeliveryUrl()
+    { 
+        // Setup
+        $contentKey = $this->testCreateContentKey();
+        $policyId   = $this->testCreateContentKeyAuthorizationPolicy();
+        $optionsId  = $this->testCreateContentKeyAuthorizationPolicyOption();
+        $this->restProxy->linkOptionsToContentKeyAuthorizationPolicy($optionsId, $policyId);
+        $contentKey->setAuthorizationPolicyId($policyId);
+        $this->restProxy->updateContentKey($contentKey); // new method, TODO: integration test
+        $contentKey = $this->restProxy->getContentKey($contentKey);
+
+        // Test
+        $result = $this->restProxy->getKeyDeliveryUrl($contentKey, ContentKeyDeliveryType::BASELINE_HTTP);
+
+        // Assert
+        $this->assertRegexp('/keydelivery.mediaservices.windows.net/', $result);        
     }
 }

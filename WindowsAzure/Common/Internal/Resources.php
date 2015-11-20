@@ -302,6 +302,7 @@ class Resources
     // Request body content types
     const URL_ENCODED_CONTENT_TYPE = 'application/x-www-form-urlencoded';
     const XML_CONTENT_TYPE         = 'application/xml';
+    const JSON_CONTENT_TYPE        = 'application/json';
     const BINARY_FILE_TYPE         = 'application/octet-stream';
     const XML_ATOM_CONTENT_TYPE    = 'application/atom+xml';
     const HTTP_TYPE                = 'application/http';

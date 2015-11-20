@@ -40,28 +40,6 @@ use WindowsAzure\Common\Internal\Utilities;
  */
 class ContentKeyAuthorizationPolicyOption
 {
-
-    /**
-     * KeyDeliveryType - None - The default enumeration value
-     *
-     * @var int
-     */
-    const DELIVERY_TYPE_NONE = 0;
-
-    /**
-     * KeyDeliveryType - PlayReadyLicense 
-     *
-     * @var int
-     */
-    const DELIVERY_TYPE_PLAYREADY_LICENSE = 1;
-
-    /**
-     * KeyDeliveryType - BaselineHttp
-     *
-     * @var int
-     */
-    const DELIVERY_TYPE_BASELINE_HTTP = 2;
-
     /**
      * ContentKeyAuthorizationPolicyOption id
      *

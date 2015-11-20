@@ -40,28 +40,6 @@ use WindowsAzure\Common\Internal\Utilities;
  */
 class ContentKeyAuthorizationPolicyRestriction
 {
-
-    /**
-     * KeyRestrictionType - Open - The default enumeration value
-     *
-     * @var int
-     */
-    const RESTRICTION_TYPE_OPEN = 0;
-
-    /**
-     * KeyRestrictionType - Token Restricted
-     *
-     * @var int
-     */
-    const RESTRICTION_TYPE_TOKEN_RESTRICTED = 1;
-
-    /**
-     * KeyRestrictionType - IP Restricted
-     *
-     * @var int
-     */
-    const RESTRICTION_TYPE_IP_RESTRICTED = 2;
-
     /**
      * ContentKeyAuthorizationPolicyRestriction Name
      *

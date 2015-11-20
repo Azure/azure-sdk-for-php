@@ -25,6 +25,8 @@ namespace Tests\Unit\WindowsAzure\MediaServices\Models;
 use Tests\Framework\TestResources;
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption;
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction;
+use WindowsAzure\MediaServices\Models\ContentKeyDeliveryType;
+use WindowsAzure\MediaServices\Models\ContentKeyRestrictionType;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
@@ -165,12 +167,12 @@ class ContentKeyAuthorizationPolicyOptionTest extends \PHPUnit_Framework_TestCas
         $restrictionName = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_RESTRICTION_NAME;
         $restriction = new ContentKeyAuthorizationPolicyRestriction();
         $restriction->setName($restrictionName);
-        $restriction->setKeyRestrictionType(ContentKeyAuthorizationPolicyRestriction::RESTRICTION_TYPE_OPEN);
+        $restriction->setKeyRestrictionType(ContentKeyRestrictionType::OPEN);
         $restrictions = array($restriction);
         
         $options = new ContentKeyAuthorizationPolicyOption();
         $options->setName($name);
-        $options->setKeyDeliveryType(ContentKeyAuthorizationPolicyOption::DELIVERY_TYPE_BASELINE_HTTP);
+        $options->setKeyDeliveryType(ContentKeyDeliveryType::BASELINE_HTTP);
         $options->setRestrictions($restrictions);
         // Test
 

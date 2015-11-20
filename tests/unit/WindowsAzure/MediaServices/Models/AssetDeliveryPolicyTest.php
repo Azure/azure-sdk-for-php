@@ -25,6 +25,7 @@ namespace Tests\Unit\WindowsAzure\MediaServices\Models;
 use WindowsAzure\MediaServices\Models\AssetDeliveryPolicy;
 use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyType;
 use WindowsAzure\MediaServices\Models\AssetDeliveryProtocol;
+use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
@@ -164,5 +165,23 @@ class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::strignifyAssetDeliveryPolicyConfiguartionKey
+     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::parseAssetDeliveryPolicyConfiguartionKey
+     */
+    public function testStrignifyParseDeliveryPolicyConfiguartionKey() {
+
+        // Setup
+        $configuration = [AssetDeliveryPolicyConfigurationKey::ENVELOPE_KEY_ACQUISITION_URL => 'http://testurl/path',
+                          AssetDeliveryPolicyConfigurationKey::ENVELOPE_ENCRYPTION_IV_AS_BASE64 => 'base64='];
+
+        // Test
+        $json = AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfiguartionKey($configuration);
+        $result = AssetDeliveryPolicyConfigurationKey::parseAssetDeliveryPolicyConfiguartionKey($json);
+
+        // Assert
+        $this->assertEquals($configuration, $result);
     }
 }

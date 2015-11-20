@@ -2226,6 +2226,24 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
+     * Update ContentKey
+     *
+     * @param Models\ContentKey $contentKey ContentKey data
+     *
+     * @return Models\ContentKey Updated ContentKey
+     */
+    public function updateContentKey($contentKey)
+    {
+        Validate::isA(
+            $contentKey,
+            'WindowsAzure\Mediaservices\Models\ContentKey',
+            'contentKey'
+        );
+
+        $this->_updateEntity($contentKey, "ContentKeys('{$contentKey->getId()}')");
+    }
+
+    /**
      * Rebind ContentKey.
      *
      * @param Models\ContentKey|string $contentKey      An ContentKey data or
@@ -2839,4 +2857,49 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $statusCode
         );
     }
+
+    /**
+     * Link AssetDeliveryPolicy to Asset
+     *
+     * @param Models\Asset|string      $asset      Asset to link a AssetDeliveryPolicy or
+     * Asset id
+     *
+     * @param Models\AssetDeliveryPolicy|string $policy DeliveryPolicy to link or
+     * DeliveryPolicy id
+     *
+     * //@return void
+     */
+    public function getKeyDeliveryUrl($contentKey, $contentKeyDeliveryType)
+    {
+        $contentKeyId = Utilities::getEntityId(
+            $contentKey,
+            'WindowsAzure\MediaServices\Models\ContentKey'
+        );
+        $contentKeyId = urlencode($contentKeyId);
+        
+        $body        = json_encode(['keyDeliveryType' => $contentKeyDeliveryType]);
+
+        $method      = Resources::HTTP_POST;
+        $path        = "ContentKeys('{$contentKeyId}')/GetKeyDeliveryUrl";
+        $headers     = array(
+            Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
+        );
+        $postParams  = array();
+        $queryParams = array();
+        $statusCode  = Resources::STATUS_OK;
+
+        $response = $this->send(
+            $method,
+            $headers,
+            $postParams,
+            $queryParams,
+            $path,
+            $statusCode,
+            $body
+        );
+
+        return simplexml_load_string($response->getBody())->__toString();
+
+    }
+
 }
