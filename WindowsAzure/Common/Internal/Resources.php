@@ -243,7 +243,7 @@ class Resources
     const DS_XML_NAMESPACE   = 'http://schemas.microsoft.com/ado/2007/08/dataservices';
     const DSM_XML_NAMESPACE  = 'http://schemas.microsoft.com/ado/2007/08/dataservices/metadata';
     const XSI_XML_NAMESPACE  = 'http://www.w3.org/2001/XMLSchema-instance';
-
+    const TRT_XML_NAMESPACE  = 'http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/TokenRestrictionTemplate/v1';
 
     // Header values
     const SDK_USER_AGENT                                = 'Azure-SDK-For-PHP/0.4.1';
