@@ -23,11 +23,9 @@
  */
 
 namespace WindowsAzure\MediaServices\Models;
-use WindowsAzure\Common\Internal\Validate;
-
 
 /**
- * Represents ContentKey type enum used in media services
+ * Represents AssetDeliveryProtocol type enum used in media services
  *
  * @category  Microsoft
  * @package   WindowsAzure\MediaServices\Models
@@ -37,34 +35,48 @@ use WindowsAzure\Common\Internal\Validate;
  * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ContentKeyTypes
+class AssetDeliveryProtocol
 {
     /**
-     * The content key type "CommonEncryption"
+     * No protocols
      *
      * @var int
      */
-    const COMMON_ENCRYPTION = 0;
+    const NONE = 0;
 
     /**
-     * The content key type "StorageEncryption"
+     * Smooth streaming protocol
      *
      * @var int
      */
-    const STORAGE_ENCRYPTION = 1;
+    const SMOOTH_STREAMING = 1;
 
     /**
-     * The content key type "ConfigurationEncryption"
+     * MPEG Dynamic Adaptive Streaming over HTTP (DASH)
      *
      * @var int
      */
-    const CONFIGURATION_ENCRYPTION = 2;
+    const DASH = 2;
 
     /**
-     * The content key type "ConfigurationEncryption"
+     * Apple HTTP Live Streaming protocol
      *
      * @var int
      */
-    const ENVELOPE_ENCRYPTION = 4;
+    const HLS = 4;
+
+    /**
+     * Adobe HTTP Dynamic Streaming (HDS)
+     *
+     * @var int
+     */
+    const HDS = 4;
+    
+    /**
+     * Include all protocols
+     *
+     * @var int
+     */
+    const ALL = 0xFFFF;
 }
 

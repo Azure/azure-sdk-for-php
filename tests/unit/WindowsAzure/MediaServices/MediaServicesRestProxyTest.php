@@ -45,6 +45,14 @@ use WindowsAzure\MediaServices\Models\IngestManifestStatistics;
 use WindowsAzure\MediaServices\Models\ContentKey;
 use WindowsAzure\MediaServices\Models\ProtectionKeyTypes;
 use WindowsAzure\MediaServices\Models\ContentKeyTypes;
+use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy;
+use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption;
+use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction;
+use WindowsAzure\MediaServices\Models\ContentKeyDeliveryType;
+use WindowsAzure\MediaServices\Models\ContentKeyRestrictionType;
+use WindowsAzure\MediaServices\Models\AssetDeliveryPolicy;
+use WindowsAzure\MediaServices\Models\AssetDeliveryProtocol;
+use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyType;
 use Tests\Framework\VirtualFileSystem;
 
 /**
@@ -1236,7 +1244,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $contentKey->setContentKey($aesKey, $protectionKey);
         $contentKey->setProtectionKeyId($protectionKeyId);
         $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
-        $contentKey->setContentKeyType(ContentKeyTypes::STORAGE_ENCRYPTION);
+        $contentKey->setContentKeyType(ContentKeyTypes::ENVELOPE_ENCRYPTION);
 
         // Test
         $result = $this->createContentKey($contentKey);
@@ -1248,6 +1256,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEquals($contentKey->getProtectionKeyId(), $result->getProtectionKeyId());
         $this->assertEquals($contentKey->getProtectionKeyType(), $result->getProtectionKeyType());
         $this->assertEquals($contentKey->getContentKeyType(), $result->getContentKeyType());
+
+        return $result;
     }
 
      /**
@@ -1535,5 +1545,481 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertEquals($fileContent, $actual);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createContentKeyAuthorizationPolicy
+     */
+    public function testCreateContentKeyAuthorizationPolicy()
+    {
+        // Setup
+        $name = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME . $this->createSuffix();
+        $policy = new ContentKeyAuthorizationPolicy();
+        $policy->setName($name);
+        
+
+        // Test
+        $result = $this->createContentKeyAuthorizationPolicy($policy);
+
+        // Assert
+        $this->assertEquals($policy->getName(), $result->getName());
+
+        return $result->getId();
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicy
+     * 
+     */
+    public function testGetContentKeyAuthorizationPolicy()
+    {
+        // Setup
+        $id = $this->testCreateContentKeyAuthorizationPolicy();
+
+        // Test
+        $result = $this->restProxy->getContentKeyAuthorizationPolicy($id);
+
+        // Assert
+        $this->assertEquals($id, $result->getId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyList
+     * 
+     */
+    public function testGetContentKeyAuthorizationPolicyList()
+    {
+        // Setup
+        $id1 = $this->testCreateContentKeyAuthorizationPolicy();
+        $id2 = $this->testCreateContentKeyAuthorizationPolicy();
+
+        // Test
+        $result = $this->restProxy->getContentKeyAuthorizationPolicyList();
+
+        // Assert
+        $this->assertContainsEntityById($id1, $result);
+        $this->assertContainsEntityById($id2, $result);
+    }
+
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createContentKeyAuthorizationPolicy
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::updateContentKeyAuthorizationPolicy
+     */
+    public function testUpdateContentKeyAuthorizationPolicy()
+    {
+        // Setup
+        $name = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME . $this->createSuffix();
+        $newname = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME . $this->createSuffix();
+        $policy = new ContentKeyAuthorizationPolicy();
+        $policy->setName($name);
+        $result = $this->createContentKeyAuthorizationPolicy($policy);
+
+        // Test
+        $result->setName($newname);
+        $this->restProxy->updateContentKeyAuthorizationPolicy($result);
+
+        $result = $this->restProxy->getContentKeyAuthorizationPolicy($result->getId());
+
+        // Assert
+        $this->assertEquals($newname, $result->getName());
+    }
+     
+    /**
+     * 
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteContentKeyAuthorizationPolicy
+     */
+    public function testDeleteContentKeyAuthorizationPolicy()
+    {
+        // Setup
+        $countBefore = count($this->restProxy->getContentKeyAuthorizationPolicyList());
+        $name = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME . $this->createSuffix();
+        $policy = new ContentKeyAuthorizationPolicy();
+        $policy->setName($name);
+        $result = $this->restProxy->createContentKeyAuthorizationPolicy($policy);
+
+        $countMiddle = count($this->restProxy->getContentKeyAuthorizationPolicyList());
+
+        // Test
+        $this->restProxy->deleteContentKeyAuthorizationPolicy($result);
+        $countAfter = count($this->restProxy->getContentKeyAuthorizationPolicyList());
+
+        // Assert
+        $this->assertEquals($countMiddle - 1, $countBefore);
+        $this->assertEquals($countBefore, $countAfter);
+        $this->assertEquals($countMiddle - 1, $countAfter);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createContentKeyAuthorizationPolicyOption
+     * 
+     */
+    public function testCreateContentKeyAuthorizationPolicyOption()
+    {
+        // Setup
+        $name = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_OPTIONS_NAME . $this->createSuffix();
+        $restrictionName = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_RESTRICTION_NAME . $this->createSuffix();
+        $restriction = new ContentKeyAuthorizationPolicyRestriction();
+        $restriction->setName($restrictionName);
+        $restriction->setKeyRestrictionType(ContentKeyRestrictionType::OPEN);
+        $restrictions = array($restriction);
+        
+        $options = new ContentKeyAuthorizationPolicyOption();
+        $options->setName($name);
+        $options->setKeyDeliveryType(ContentKeyDeliveryType::BASELINE_HTTP);
+        $options->setRestrictions($restrictions);
+
+        // Test
+        $result = $this->createContentKeyAuthorizationPolicyOption($options);
+
+        // Assert
+        $this->assertEquals($options->getName(), $result->getName());
+        $this->assertEquals($options->getKeyDeliveryType(), $result->getKeyDeliveryType());
+        $this->assertEquals($options->getRestrictions(), $result->getRestrictions());
+
+        return $result->getId();
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyOption
+     * 
+     */
+    public function testGetContentKeyAuthorizationPolicyOption()
+    {
+        // Setup
+        $id = $this->testCreateContentKeyAuthorizationPolicyOption();
+
+        // Test
+        $result = $this->restProxy->getContentKeyAuthorizationPolicyOption($id);
+
+        // Assert
+        $this->assertEquals($id, $result->getId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyOption
+     * 
+     */
+    public function testGetContentKeyAuthorizationPolicyOptionList()
+    {
+        // Setup
+        $id1 = $this->testCreateContentKeyAuthorizationPolicyOption();
+        $id2 = $this->testCreateContentKeyAuthorizationPolicyOption();
+
+        // Test
+        $result = $this->restProxy->getContentKeyAuthorizationPolicyOptionList();
+
+        // Assert
+        $this->assertContainsEntityById($id1, $result);
+        $this->assertContainsEntityById($id2, $result);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::updateContentKeyAuthorizationPolicyOption
+     */
+    public function testUpdateContentKeyAuthorizationPolicyOption()
+    {
+        // Setup
+        $id = $this->testCreateContentKeyAuthorizationPolicyOption();
+        $newname = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME . $this->createSuffix();
+        $options = $this->restProxy->getContentKeyAuthorizationPolicyOption($id);
+
+        // Test
+        $options->setName($newname);
+        $this->restProxy->updateContentKeyAuthorizationPolicyOption($options);
+
+        $options = $this->restProxy->getContentKeyAuthorizationPolicyOption($options->getId());
+
+        // Assert
+        $this->assertEquals($newname, $options->getName());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteContentKeyAuthorizationPolicyOption
+     * 
+     */
+    public function testDeleteContentKeyAuthorizationPolicyOption()
+    {
+        // Setup
+        $countBefore = count($this->restProxy->getContentKeyAuthorizationPolicyOptionList());
+        $name = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_OPTIONS_NAME . $this->createSuffix();
+        $options = new ContentKeyAuthorizationPolicyOption();
+        $options->setName($name);
+        $options->setKeyDeliveryType(ContentKeyDeliveryType::BASELINE_HTTP);
+        $options = $this->restProxy->createContentKeyAuthorizationPolicyOption($options);
+        $countMiddle = count($this->restProxy->getContentKeyAuthorizationPolicyOptionList());
+
+        // Test
+        $this->restProxy->deleteContentKeyAuthorizationPolicyOption($options);
+        $countAfter = count($this->restProxy->getContentKeyAuthorizationPolicyOptionList());
+
+        // Assert
+        $this->assertEquals($countMiddle - 1, $countBefore);
+        $this->assertEquals($countBefore, $countAfter);
+        $this->assertEquals($countMiddle - 1, $countAfter);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetContentKeys
+     */
+    public function testGetContentKeyAuthorizationPolicyLinkedOptions()
+    {
+
+        // Setup
+        $policyId = $this->testCreateContentKeyAuthorizationPolicy();
+        $optionsId = $this->testCreateContentKeyAuthorizationPolicyOption();
+
+        $this->restProxy->linkOptionsToContentKeyAuthorizationPolicy($optionsId, $policyId);
+
+        // Test
+        $result = $this->restProxy->getContentKeyAuthorizationPolicyLinkedOptions($policyId);
+
+        // Assert
+        $this->assertCount(1, $result);
+        $this->assertEquals($optionsId, $result[0]->getId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::linkContentKeyToAsset
+     */
+    public function testLinkOptionsToContentKeyAuthorizationPolicy()
+    {
+        // Setup
+        $policyId = $this->testCreateContentKeyAuthorizationPolicy();
+        $optionsId = $this->testCreateContentKeyAuthorizationPolicyOption();
+
+        // Test
+        $this->restProxy->linkOptionsToContentKeyAuthorizationPolicy($optionsId, $policyId);
+
+        // Assert
+        $result = $this->restProxy->getContentKeyAuthorizationPolicyLinkedOptions($policyId);
+        $this->assertCount(1, $result);
+        $this->assertEquals($optionsId, $result[0]->getId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::removeContentKeyFromAsset
+     */
+    public function testRemoveOptionsFromContentKeyAuthorizationPolicy()
+    { 
+
+        // Setup
+        $policyId = $this->testCreateContentKeyAuthorizationPolicy();
+        $optionsId = $this->testCreateContentKeyAuthorizationPolicyOption();
+        $this->restProxy->linkOptionsToContentKeyAuthorizationPolicy($optionsId, $policyId);
+
+        // Test
+        $this->restProxy->removeOptionsFromContentKeyAuthorizationPolicy($optionsId, $policyId);
+
+        // Assert
+        $optionsFromPolicy = $this->restProxy->getContentKeyAuthorizationPolicyLinkedOptions($policyId);
+        $this->assertEmpty($optionsFromPolicy);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAssetDeliveryPolicy
+     */
+    public function testCreateAssetDeliveryPolicy()
+    {
+        // Setup
+        $name = TestResources::MEDIA_SERVICES_ASSET_DELIVERY_POLICY_NAME . $this->createSuffix();
+        $policy = new AssetDeliveryPolicy();
+        $policy->setName($name);
+        $policy->setAssetDeliveryProtocol(AssetDeliveryProtocol::ALL);
+        $policy->setAssetDeliveryPolicyType(AssetDeliveryPolicyType::BLOCKED);
+        
+        // Test
+        $result = $this->createAssetDeliveryPolicy($policy);
+
+        // Assert
+        $this->assertEquals($policy->getName(), $result->getName());
+        $this->assertEquals(AssetDeliveryProtocol::ALL, $result->getAssetDeliveryProtocol());
+        $this->assertEquals(AssetDeliveryPolicyType::BLOCKED, $result->getAssetDeliveryPolicyType());
+
+        return $result->getId();
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetDeliveryPolicy
+     * 
+     */
+    public function testGetAssetDeliveryPolicy()
+    {
+        // Setup
+        $id = $this->testCreateAssetDeliveryPolicy();
+
+        // Test
+        $result = $this->restProxy->getAssetDeliveryPolicy($id);
+
+        // Assert
+        $this->assertEquals($id, $result->getId());
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetDeliveryPolicyList
+     * 
+     */
+    public function testGetAssetDeliveryPolicyList()
+    {
+        // Setup
+        $id1 = $this->testCreateAssetDeliveryPolicy();
+        $id2 = $this->testCreateAssetDeliveryPolicy();
+
+        // Test
+        $result = $this->restProxy->getAssetDeliveryPolicyList();
+
+        // Assert
+        $this->assertContainsEntityById($id1, $result);
+        $this->assertContainsEntityById($id2, $result);
+    }
+
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAssetDeliveryPolicy
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::updateAssetDeliveryPolicy
+     */
+    public function testUpdateAssetDeliveryPolicy()
+    {
+        // Setup
+        $name = TestResources::MEDIA_SERVICES_ASSET_DELIVERY_POLICY_NAME . $this->createSuffix();
+        $newname = TestResources::MEDIA_SERVICES_ASSET_DELIVERY_POLICY_NAME . $this->createSuffix();
+        $policy = new AssetDeliveryPolicy();
+        $policy->setName($name);
+        $policy->setAssetDeliveryProtocol(AssetDeliveryProtocol::ALL);
+        $policy->setAssetDeliveryPolicyType(AssetDeliveryPolicyType::BLOCKED);
+
+        $result = $this->createAssetDeliveryPolicy($policy);
+
+        // Test
+        $result->setName($newname);
+        $this->restProxy->updateAssetDeliveryPolicy($result);
+
+        $result = $this->restProxy->getAssetDeliveryPolicy($result->getId());
+
+        // Assert
+        $this->assertEquals($newname, $result->getName());
+    }
+    
+    /**
+     * 
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAssetDeliveryPolicy
+     */
+    public function testDeleteAssetDeliveryPolicy()
+    {
+        // Setup
+        $countBefore = count($this->restProxy->getAssetDeliveryPolicyList());
+        $name = TestResources::MEDIA_SERVICES_ASSET_DELIVERY_POLICY_NAME . $this->createSuffix();
+        $policy = new AssetDeliveryPolicy();
+        $policy->setName($name);
+        $policy->setAssetDeliveryProtocol(AssetDeliveryProtocol::ALL);
+        $policy->setAssetDeliveryPolicyType(AssetDeliveryPolicyType::BLOCKED);
+
+        $result = $this->restProxy->createAssetDeliveryPolicy($policy);
+
+        $countMiddle = count($this->restProxy->getAssetDeliveryPolicyList());
+
+        // Test
+        $this->restProxy->deleteAssetDeliveryPolicy($result);
+        $countAfter = count($this->restProxy->getAssetDeliveryPolicyList());
+
+        // Assert
+        $this->assertEquals($countMiddle - 1, $countBefore);
+        $this->assertEquals($countBefore, $countAfter);
+        $this->assertEquals($countMiddle - 1, $countAfter);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetLinkedDeliveryPolicy
+     */
+    public function testGetAssetLinkedDeliveryPolicies()
+    {
+
+        // Setup
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME + $this->createSuffix());
+
+        $asset = $this->createAsset($asset);
+        $policyId = $this->testCreateAssetDeliveryPolicy();
+
+        $this->restProxy->linkDeliveryPolicyToAsset($asset, $policyId);
+
+        // Test
+        $result = $this->restProxy->getAssetLinkedDeliveryPolicy($asset);
+
+        // Assert
+        $this->assertCount(1, $result);
+        $this->assertEquals($policyId, $result[0]->getId());
+
+        // Cleanup
+        $this->restProxy->removeDeliveryPolicyFromAsset($asset, $policyId);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::linkDeliveryPolicyToAsset
+     */
+    public function testLinkDeliveryPolicyToAsset()
+    {
+        // Setup
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME + $this->createSuffix());
+
+        $asset = $this->createAsset($asset);
+        $policyId = $this->testCreateAssetDeliveryPolicy();
+
+        // Test
+        $this->restProxy->linkDeliveryPolicyToAsset($asset, $policyId);
+
+        // Assert
+        $result = $this->restProxy->getAssetLinkedDeliveryPolicy($asset);
+        $this->assertCount(1, $result);
+        $this->assertEquals($policyId, $result[0]->getId());
+
+        // Cleanup
+        $this->restProxy->removeDeliveryPolicyFromAsset($asset, $policyId);
+
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::removeDeliveryPolicyFromAsset
+     */
+    public function testRemoveDeliveryPolicyFromAsset()
+    { 
+        // Setup
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME + $this->createSuffix());
+
+        $asset = $this->createAsset($asset);
+        $policyId = $this->testCreateAssetDeliveryPolicy();
+
+        $this->restProxy->linkDeliveryPolicyToAsset($asset, $policyId);
+
+        // Test
+        $this->restProxy->removeDeliveryPolicyFromAsset($asset, $policyId);
+
+        // Assert
+        $optionsFromPolicy = $this->restProxy->getAssetLinkedDeliveryPolicy($asset);
+        $this->assertEmpty($optionsFromPolicy);
+    }
+
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getKeyDeliveryUrl
+     */
+    public function testGetKeyDeliveryUrl()
+    { 
+        // Setup
+        $contentKey = $this->testCreateContentKey();
+        $policyId   = $this->testCreateContentKeyAuthorizationPolicy();
+        $optionsId  = $this->testCreateContentKeyAuthorizationPolicyOption();
+        $this->restProxy->linkOptionsToContentKeyAuthorizationPolicy($optionsId, $policyId);
+        $contentKey->setAuthorizationPolicyId($policyId);
+        $this->restProxy->updateContentKey($contentKey); // new method, TODO: integration test
+        $contentKey = $this->restProxy->getContentKey($contentKey);
+
+        // Test
+        $result = $this->restProxy->getKeyDeliveryUrl($contentKey, ContentKeyDeliveryType::BASELINE_HTTP);
+
+        // Assert
+        $this->assertRegexp('/keydelivery.mediaservices.windows.net/', $result);        
     }
 }

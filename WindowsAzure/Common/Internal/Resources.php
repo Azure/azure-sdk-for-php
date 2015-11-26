@@ -256,7 +256,7 @@ class Resources
     const ATOM_FEED_CONTENT_TYPE                        = 'application/atom+xml;type=feed;charset=utf-8';
     const ACCEPT_CHARSET_VALUE                          = 'utf-8';
     const INT32_MAX                                     = 2147483647;
-    const MEDIA_SERVICES_API_LATEST_VERSION             = '2.2';
+    const MEDIA_SERVICES_API_LATEST_VERSION             = '2.11';
     const MEDIA_SERVICES_DATA_SERVICE_VERSION_VALUE     = '3.0;NetFx';
     const MEDIA_SERVICES_MAX_DATA_SERVICE_VERSION_VALUE = '3.0;NetFx';
 
@@ -302,6 +302,7 @@ class Resources
     // Request body content types
     const URL_ENCODED_CONTENT_TYPE = 'application/x-www-form-urlencoded';
     const XML_CONTENT_TYPE         = 'application/xml';
+    const JSON_CONTENT_TYPE        = 'application/json';
     const BINARY_FILE_TYPE         = 'application/octet-stream';
     const XML_ATOM_CONTENT_TYPE    = 'application/atom+xml';
     const HTTP_TYPE                = 'application/http';

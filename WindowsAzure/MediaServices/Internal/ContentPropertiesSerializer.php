@@ -119,6 +119,20 @@ class ContentPropertiesSerializer
     }
 
     /**
+     * Returns true if the specified filed y requierd for the specified entity.
+     * @param mixed $object the entity
+     * @param string $fieldName the property name to verify if it's required or not.
+     * @return bool
+     */
+    private static function _isRequired($object, $fieldName) {
+        $reflectionClass = new \ReflectionClass($object);
+        if ($reflectionClass->hasMethod('requiredFields')) {
+            return in_array($fieldName, $object->requiredFields());
+        }
+        return false;
+    }
+
+    /**
      * Get object properties as array
      *
      * @param object     $object    Source object
@@ -140,7 +154,7 @@ class ContentPropertiesSerializer
             ) {
                 $variableName  = substr($method->name, 3);
                 $variableValue = $method->invoke($object);
-                if (!empty($variableValue)) {
+                if (!empty($variableValue) || ContentPropertiesSerializer::_isRequired($object, $variableName)) {
                     if (is_a($variableValue, '\DateTime')) {
                         $variableValue = $variableValue->format(\DateTime::ATOM);
                     }
@@ -155,7 +169,7 @@ class ContentPropertiesSerializer
                             $xmlWriter->startElementNS(
                                 'data',
                                 Resources::ELEMENT,
-                                Resources::DSM_XML_NAMESPACE
+                                Resources::DS_XML_NAMESPACE
                             );
 
                             ContentPropertiesSerializer::_serializeRecursive(

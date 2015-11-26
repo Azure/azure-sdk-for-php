@@ -23,11 +23,9 @@
  */
 
 namespace WindowsAzure\MediaServices\Models;
-use WindowsAzure\Common\Internal\Validate;
-
 
 /**
- * Represents ContentKey type enum used in media services
+ * Represents AssetDeliveryPolicyType type enum used in media services
  *
  * @category  Microsoft
  * @package   WindowsAzure\MediaServices\Models
@@ -37,34 +35,41 @@ use WindowsAzure\Common\Internal\Validate;
  * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ContentKeyTypes
+class AssetDeliveryPolicyType
 {
     /**
-     * The content key type "CommonEncryption"
+     * The asset delivery policy type "None"
      *
      * @var int
      */
-    const COMMON_ENCRYPTION = 0;
+    const NONE = 0;
 
     /**
-     * The content key type "StorageEncryption"
+     * The asset delivery policy type "Blocked"
      *
      * @var int
      */
-    const STORAGE_ENCRYPTION = 1;
+    const BLOCKED = 1;
 
     /**
-     * The content key type "ConfigurationEncryption"
+     * The asset delivery policy type "NoDynamicEncryption"
      *
      * @var int
      */
-    const CONFIGURATION_ENCRYPTION = 2;
+    const NO_DYNAMIC_ENCRYPTION = 2;
 
     /**
-     * The content key type "ConfigurationEncryption"
+     * The asset delivery policy type "DynamicEnvelopeEncryption"
      *
      * @var int
      */
-    const ENVELOPE_ENCRYPTION = 4;
+    const DYNAMIC_ENVELOPE_ENCRYPTION = 3;    
+
+    /**
+     * The asset delivery policy type "DynamicCommonEncryption"
+     *
+     * @var int
+     */
+    const DYNAMIC_COMMON_ENCRYPTION = 4;
 }
 

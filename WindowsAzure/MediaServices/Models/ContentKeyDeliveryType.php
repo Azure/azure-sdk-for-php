@@ -23,11 +23,9 @@
  */
 
 namespace WindowsAzure\MediaServices\Models;
-use WindowsAzure\Common\Internal\Validate;
-
 
 /**
- * Represents ContentKey type enum used in media services
+ * Represents ContentKeyDeliveryType type enum used in media services
  *
  * @category  Microsoft
  * @package   WindowsAzure\MediaServices\Models
@@ -37,34 +35,35 @@ use WindowsAzure\Common\Internal\Validate;
  * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ContentKeyTypes
+class ContentKeyDeliveryType
 {
     /**
-     * The content key type "CommonEncryption"
+     * None
      *
      * @var int
      */
-    const COMMON_ENCRYPTION = 0;
+    const NONE = 0;
 
     /**
-     * The content key type "StorageEncryption"
+     * Use PlayReady License acquistion protocol
      *
      * @var int
      */
-    const STORAGE_ENCRYPTION = 1;
+    const PLAYREADY_LICENSE = 1;
 
     /**
-     * The content key type "ConfigurationEncryption"
+     * Use MPEG Baseline HTTP key protocol
      *
      * @var int
      */
-    const CONFIGURATION_ENCRYPTION = 2;
+    const BASELINE_HTTP = 2;
 
     /**
-     * The content key type "ConfigurationEncryption"
+     * Use Widevine license server
      *
      * @var int
      */
-    const ENVELOPE_ENCRYPTION = 4;
+    const WIDEVINE = 3;
+    
 }
 

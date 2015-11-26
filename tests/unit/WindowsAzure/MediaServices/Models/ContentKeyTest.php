@@ -61,7 +61,8 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
                 'Name'                     => 'testNameForContentKey',
                 'ProtectionKeyId'          => 'protection-key-id-36589',
                 'ProtectionKeyType'        => ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT,
-                'Checksum'                 => 'checksum-of-content-key'
+                'Checksum'                 => 'checksum-of-content-key',
+                'AuthorizationPolicyId'    => 'authorization-policy-id'
         );
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
@@ -79,6 +80,7 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($options['ProtectionKeyId'], $contentKey->getProtectionKeyId());
         $this->assertEquals($options['ProtectionKeyType'], $contentKey->getProtectionKeyType());
         $this->assertEquals($options['Checksum'], $contentKey->getChecksum());
+        $this->assertEquals($options['AuthorizationPolicyId'], $contentKey->getAuthorizationPolicyId());
     }
 
     /**
@@ -243,6 +245,24 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals($newContentKeyId, $result);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Models\ContentKey::getAuthorizationPolicyId
+     * @covers WindowsAzure\MediaServices\Models\ContentKey::setAuthorizationPolicyId
+     */
+    public function testGetSetAuthorizationPolicyId(){
+
+        // Setup
+        $newAuthorizationPolicyId = 'authorization-policy-id';
+        $contentKey = new ContentKey();
+
+        // Test
+        $contentKey->setAuthorizationPolicyId($newAuthorizationPolicyId);
+        $result = $contentKey->getAuthorizationPolicyId();
+
+        // Assert
+        $this->assertEquals($newAuthorizationPolicyId, $result);
     }
 
     /**

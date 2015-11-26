@@ -23,11 +23,9 @@
  */
 
 namespace WindowsAzure\MediaServices\Models;
-use WindowsAzure\Common\Internal\Validate;
-
 
 /**
- * Represents ContentKey type enum used in media services
+ * Represents ContentKeyRestrictionType type enum used in media services
  *
  * @category  Microsoft
  * @package   WindowsAzure\MediaServices\Models
@@ -37,34 +35,27 @@ use WindowsAzure\Common\Internal\Validate;
  * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ContentKeyTypes
+class ContentKeyRestrictionType
 {
     /**
-     * The content key type "CommonEncryption"
+     * No restrictions
      *
      * @var int
      */
-    const COMMON_ENCRYPTION = 0;
+    const OPEN = 0;
 
     /**
-     * The content key type "StorageEncryption"
+     * Restrict by a token
      *
      * @var int
      */
-    const STORAGE_ENCRYPTION = 1;
+    const TOKEN_RESTRICTED = 1;
 
     /**
-     * The content key type "ConfigurationEncryption"
+     * Restrict by IP
      *
      * @var int
      */
-    const CONFIGURATION_ENCRYPTION = 2;
-
-    /**
-     * The content key type "ConfigurationEncryption"
-     *
-     * @var int
-     */
-    const ENVELOPE_ENCRYPTION = 4;
+    const IP_RESTRICTED = 2;
 }
 

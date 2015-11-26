@@ -281,11 +281,11 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
                 <data:' . $taskBodyKey . ' xmlns:data="http://schemas.microsoft.com/ado/2007/08/dataservices">' . $taskBody . '</data:' . $taskBodyKey . '>
                 <data:' . $mediaProcessorIdKey . ' xmlns:data="http://schemas.microsoft.com/ado/2007/08/dataservices">' . $mediaProcessorId . '</data:' . $mediaProcessorIdKey . '>
                 <data:' . $errorKey . ' xmlns:data="http://schemas.microsoft.com/ado/2007/08/dataservices">
-                    <data:element xmlns:data="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+                    <data:element xmlns:data="http://schemas.microsoft.com/ado/2007/08/dataservices">
                         <data:' . $errorMessageKey . ' xmlns:data="http://schemas.microsoft.com/ado/2007/08/dataservices">' . $errorMessage . '</data:' . $errorMessageKey . '>
                         <data:' . $errorCodeKey . ' xmlns:data="http://schemas.microsoft.com/ado/2007/08/dataservices">' . $errorCode . '</data:' . $errorCodeKey . '>
                     </data:element>
-                    <data:element xmlns:data="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+                    <data:element xmlns:data="http://schemas.microsoft.com/ado/2007/08/dataservices">
                         <data:' . $errorMessageKey . ' xmlns:data="http://schemas.microsoft.com/ado/2007/08/dataservices">' . $errorMessage . '</data:' . $errorMessageKey . '>
                         <data:' . $errorCodeKey . ' xmlns:data="http://schemas.microsoft.com/ado/2007/08/dataservices">' . $errorCode . '</data:' . $errorCodeKey . '>
                     </data:element>

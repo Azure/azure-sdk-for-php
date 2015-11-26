@@ -105,6 +105,13 @@ class ContentKey
     private $_checksum;
 
     /**
+     * AuthorizationPolicyId
+     *
+     * @var string
+     */
+    private $_authorizationPolicyId;
+
+    /**
      * Create ContentKey from array
      *
      * @param array $options Array containing values for object properties
@@ -196,6 +203,11 @@ class ContentKey
         if (isset($options['Checksum'])) {
             Validate::isString($options['Checksum'], 'options[Checksum]');
             $this->_checksum = $options['Checksum'];
+        }
+
+        if (isset($options['AuthorizationPolicyId'])) {
+            Validate::isString($options['AuthorizationPolicyId'], 'options[AuthorizationPolicyId]');
+            $this->_authorizationPolicyId = $options['AuthorizationPolicyId'];
         }
     }
 
@@ -429,6 +441,28 @@ class ContentKey
         $this->_generateEncryptedContentKey($value, $protectionKey);
 
         $this->_generateChecksum($value);
+    }   
+
+    /**
+     * Get "AuthorizationPolicyId"
+     *
+     * @return string
+     */
+    public function getAuthorizationPolicyId()
+    {
+        return $this->_authorizationPolicyId;
+    }
+
+    /**
+     * Set "AuthorizationPolicyId"
+     *
+     * @param string $value AuthorizationPolicyId id
+     *
+     * @return none
+     */
+    public function setAuthorizationPolicyId($value)
+    {
+        $this->_authorizationPolicyId = $value;
     }
 }
 

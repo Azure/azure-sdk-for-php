@@ -62,6 +62,9 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     protected $ingestManifestAssets = array();
     protected $ingestManifestFiles = array();
     protected $contentKeys = array();
+    protected $contentKeyAuthorizationPolicies = array();
+    protected $contentKeyAuthorizationOptions = array();
+    protected $assetDeliveryPolicies = array();
 
     const LARGE_FILE_SIZE_MB = 7;
 
@@ -119,6 +122,24 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     public function createContentKey($contentKey) {
         $result = $this->restProxy->createContentKey($contentKey);
         $this->contentKeys[$result->getId()] = $result;
+        return $result;
+    }
+
+    public function createContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy) {
+        $result = $this->restProxy->createContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy);
+        $this->contentKeyAuthorizationPolicies[$result->getId()] = $result;
+        return $result;
+    }
+
+    public function createContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOption) {
+        $result = $this->restProxy->createContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOption);
+        $this->contentKeyAuthorizationOptions[$result->getId()] = $result;
+        return $result;
+    }
+
+    public function createAssetDeliveryPolicy($assetDeliveryPolicy) {
+        $result = $this->restProxy->createAssetDeliveryPolicy($assetDeliveryPolicy);
+        $this->assetDeliveryPolicies[$result->getId()] = $result;
         return $result;
     }
 
@@ -256,6 +277,18 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
             $this->restProxy->deleteLocator($loc);
         }
 
+        foreach($this->contentKeyAuthorizationPolicies as $contentKeyAuthorizationPolicy) {
+            $this->restProxy->deleteContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy);
+        }
+
+        foreach($this->contentKeyAuthorizationOptions as $contentKeyAuthorizationOption) {
+            $this->restProxy->deleteContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOption);
+        }
+
+        foreach($this->assetDeliveryPolicies as $assetDeliveryPolicy) {
+            $this->restProxy->deleteAssetDeliveryPolicy($assetDeliveryPolicy);
+        }
+        
         foreach($this->assets as $asset) {
             $contentKeyList = $this->restProxy->getAssetContentKeys($asset);
             foreach($contentKeyList as $contentKey) {
@@ -379,5 +412,24 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $httpClient->setExpectedStatusCode($statusCode);
 
         return $httpClient->send($filters, $url);
+    }
+
+    /**
+     * Verifies if $array contains an entity with id $id
+     * @param mixed $id the id to lookup into the array
+     * @param mixed $array the array 
+     */
+    public static function assertContainsEntityById($id, $array) {
+        $found = false;
+        foreach($array as $entity) {
+            $reflect = new \ReflectionClass($entity);
+            if ($reflect->hasMethod('getId')) {
+                if ($id == $entity->getId()) {
+                    $found = true;
+                }
+            }
+        }
+        self::assertThat($found, self::isTrue(), "The entity with ID=$id was not found in the provided array");
+        
     }
 }
