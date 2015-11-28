@@ -10,9 +10,13 @@
         }
     ],
     "require": {
-        "pear-pear2.php.net/HTTP_Request2":   "*",
-        "pear-pear2.php.net/Mail_Mime":       "*",
-        "pear-pear2.php.net/Mail_mimeDecode": "*"
+        "pear-pear.php.net/mail_mime" : "*",
+        "pear-pear.php.net/http_request2" : "*",
+        "pear-pear.php.net/mail_mimedecode" : "*"
+    },
+    "require-dev": {
+        "pear-pear.php.net/pear" : "*",
+        "mikey179/vfsStream": "*"
     },
     
     "repositories": [

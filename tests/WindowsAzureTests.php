@@ -23,6 +23,7 @@
  */
 
 require dirname(__DIR__) . '/WindowsAzure/WindowsAzure.php';
+require dirname(__DIR__) . '/vendor/autoload.php';
 
 spl_autoload_register(
    function($class) {

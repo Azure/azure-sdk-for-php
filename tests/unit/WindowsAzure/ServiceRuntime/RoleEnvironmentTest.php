@@ -30,7 +30,9 @@ use WindowsAzure\ServiceRuntime\Internal\ChannelNotAvailableException;
 use WindowsAzure\ServiceRuntime\Internal\RoleInstanceStatus;
 use WindowsAzure\ServiceRuntime\Internal\RuntimeKernel;
 
-require_once 'vfsStream/vfsStream.php';
+use \org\bovigo\vfs\vfsStream;
+use \org\bovigo\vfs\vfsStreamWrapper;
+use \org\bovigo\vfs\vfsStreamDirectory;
 
 /**
  * Unit tests for class RoleEnvironment.
@@ -118,8 +120,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -138,10 +140,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Roles />' .
             '</RoleEnvironment>';
         
-        $file = \vfsStream::newFile($roleEnvironmentFileName);
+        $file = vfsStream::newFile($roleEnvironmentFileName);
         $file->setContent($roleEnvironmentFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -150,7 +152,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' . 
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>\\.\pipe\WindowsAzureRuntime.CurrentState</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
@@ -158,10 +160,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
         
-        $file = \vfsStream::newFile($goalStateFileName);
+        $file = vfsStream::newFile($goalStateFileName);
         $file->setContent($goalStateFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $fileName = 'versionendpoint';
         $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -169,17 +171,17 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
             '<RuntimeServerEndpoints>' .
             '<RuntimeServerEndpoint version="2011-03-08" path="' . 
-            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
+            vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
             '" />' .
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
-        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        putenv('WaRuntimeEndpoint=' . vfsStream::url($rootDirectory . '/' . $fileName));
         
         // Test
         $this->assertEquals(true, RoleEnvironment::isAvailable());
@@ -194,8 +196,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -214,10 +216,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Roles />' .
             '</RoleEnvironment>';
         
-        $file = \vfsStream::newFile($roleEnvironmentFileName);
+        $file = vfsStream::newFile($roleEnvironmentFileName);
         $file->setContent($roleEnvironmentFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -226,7 +228,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' . 
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>\\.\pipe\WindowsAzureRuntime.CurrentState</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
@@ -234,10 +236,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
         
-        $file = \vfsStream::newFile($goalStateFileName);
+        $file = vfsStream::newFile($goalStateFileName);
         $file->setContent($goalStateFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $fileName = 'versionendpoint';
         $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -245,17 +247,17 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
             '<RuntimeServerEndpoints>' .
             '<RuntimeServerEndpoint version="2011-03-08" path="' . 
-            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
+            vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
             '" />' .
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
-        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        putenv('WaRuntimeEndpoint=' . vfsStream::url($rootDirectory . '/' . $fileName));
         
         // Test
         $this->assertEquals('deploymentId', RoleEnvironment::getDeploymentId());
@@ -270,8 +272,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -290,10 +292,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Roles />' .
             '</RoleEnvironment>';
         
-        $file = \vfsStream::newFile($roleEnvironmentFileName);
+        $file = vfsStream::newFile($roleEnvironmentFileName);
         $file->setContent($roleEnvironmentFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -302,7 +304,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' . 
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>\\.\pipe\WindowsAzureRuntime.CurrentState</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
@@ -310,10 +312,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
         
-        $file = \vfsStream::newFile($goalStateFileName);
+        $file = vfsStream::newFile($goalStateFileName);
         $file->setContent($goalStateFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $fileName = 'versionendpoint';
         $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -321,17 +323,17 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
             '<RuntimeServerEndpoints>' .
             '<RuntimeServerEndpoint version="2011-03-08" path="' . 
-            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
+            vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
             '" />' .
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
-        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        putenv('WaRuntimeEndpoint=' . vfsStream::url($rootDirectory . '/' . $fileName));
         
         // Test
         $currentRoleInstance = RoleEnvironment::getCurrentRoleInstance();
@@ -355,8 +357,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         // Setup - is not emulated
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -375,10 +377,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Roles />' .
             '</RoleEnvironment>';
         
-        $roleEnvironmentFile = \vfsStream::newFile($roleEnvironmentFileName);
+        $roleEnvironmentFile = vfsStream::newFile($roleEnvironmentFileName);
         $roleEnvironmentFile->setContent($roleEnvironmentFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
+        vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
         
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -387,7 +389,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' . 
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>\\.\pipe\WindowsAzureRuntime.CurrentState</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
@@ -395,10 +397,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
         
-        $file = \vfsStream::newFile($goalStateFileName);
+        $file = vfsStream::newFile($goalStateFileName);
         $file->setContent($goalStateFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $fileName = 'versionendpoint';
         $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -406,17 +408,17 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
             '<RuntimeServerEndpoints>' .
             '<RuntimeServerEndpoint version="2011-03-08" path="' . 
-            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
+            vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
             '" />' .
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
-        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        putenv('WaRuntimeEndpoint=' . vfsStream::url($rootDirectory . '/' . $fileName));
         
         // Test
         $this->assertEquals(false, RoleEnvironment::isEmulated());
@@ -451,8 +453,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -489,10 +491,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '</Roles>' .
             '</RoleEnvironment>';
         
-        $file = \vfsStream::newFile($roleEnvironmentFileName);
+        $file = vfsStream::newFile($roleEnvironmentFileName);
         $file->setContent($roleEnvironmentFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -501,7 +503,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' . 
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>\\.\pipe\WindowsAzureRuntime.CurrentState</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
@@ -509,10 +511,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
         
-        $file = \vfsStream::newFile($goalStateFileName);
+        $file = vfsStream::newFile($goalStateFileName);
         $file->setContent($goalStateFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $fileName = 'versionendpoint';
         $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -520,17 +522,17 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
             '<RuntimeServerEndpoints>' .
             '<RuntimeServerEndpoint version="2011-03-08" path="' . 
-            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
+            vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
             '" />' .
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
-        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        putenv('WaRuntimeEndpoint=' . vfsStream::url($rootDirectory . '/' . $fileName));
         
         // Test
         $roles = RoleEnvironment::getRoles();
@@ -577,8 +579,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -593,10 +595,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Roles />' .
             '</RoleEnvironment>';
         
-        $roleEnvironmentFile = \vfsStream::newFile($roleEnvironmentFileName);
+        $roleEnvironmentFile = vfsStream::newFile($roleEnvironmentFileName);
         $roleEnvironmentFile->setContent($roleEnvironmentFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
+        vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
         
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -605,7 +607,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' . 
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>\\.\pipe\WindowsAzureRuntime.CurrentState</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
@@ -613,10 +615,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
         
-        $file = \vfsStream::newFile($goalStateFileName);
+        $file = vfsStream::newFile($goalStateFileName);
         $file->setContent($goalStateFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $fileName = 'versionendpoint';
         $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -624,17 +626,17 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
             '<RuntimeServerEndpoints>' .
             '<RuntimeServerEndpoint version="2011-03-08" path="' . 
-            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
+            vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
             '" />' .
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
-        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        putenv('WaRuntimeEndpoint=' . vfsStream::url($rootDirectory . '/' . $fileName));
         
         // Test
         $configurationSettings = RoleEnvironment::getConfigurationSettings();
@@ -650,8 +652,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -666,10 +668,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Roles />' .
             '</RoleEnvironment>';
         
-        $roleEnvironmentFile = \vfsStream::newFile($roleEnvironmentFileName);
+        $roleEnvironmentFile = vfsStream::newFile($roleEnvironmentFileName);
         $roleEnvironmentFile->setContent($roleEnvironmentFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
+        vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
         
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -678,7 +680,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' . 
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>\\.\pipe\WindowsAzureRuntime.CurrentState</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
@@ -686,10 +688,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
         
-        $file = \vfsStream::newFile($goalStateFileName);
+        $file = vfsStream::newFile($goalStateFileName);
         $file->setContent($goalStateFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $fileName = 'versionendpoint';
         $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -697,17 +699,17 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
             '<RuntimeServerEndpoints>' .
             '<RuntimeServerEndpoint version="2011-03-08" path="' . 
-            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
+            vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
             '" />' .
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
-        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        putenv('WaRuntimeEndpoint=' . vfsStream::url($rootDirectory . '/' . $fileName));
         
         // Test
         $localResources = RoleEnvironment::getLocalResources();
@@ -724,8 +726,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $currentStateFileName = 'test';
         $fileContents = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
@@ -739,8 +741,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '</StatusLease>' .
             '</CurrentState>';
         
-        $currentStateFile = \vfsStream::newFile($currentStateFileName);
-        \vfsStreamWrapper::getRoot()->addChild($currentStateFile);
+        $currentStateFile = vfsStream::newFile($currentStateFileName);
+        vfsStreamWrapper::getRoot()->addChild($currentStateFile);
         
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -755,10 +757,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Roles />' .
             '</RoleEnvironment>';
         
-        $roleEnvironmentFile = \vfsStream::newFile($roleEnvironmentFileName);
+        $roleEnvironmentFile = vfsStream::newFile($roleEnvironmentFileName);
         $roleEnvironmentFile->setContent($roleEnvironmentFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
+        vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
         
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -767,20 +769,20 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' . 
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>' .
-            \vfsStream::url($rootDirectory . '/' . $currentStateFileName) . 
+            vfsStream::url($rootDirectory . '/' . $currentStateFileName) . 
             '</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
             '</GoalState>';
         
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
         
-        $file = \vfsStream::newFile($goalStateFileName);
+        $file = vfsStream::newFile($goalStateFileName);
         $file->setContent($goalStateFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $fileName = 'versionendpoint';
         $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -788,24 +790,24 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
             '<RuntimeServerEndpoints>' .
             '<RuntimeServerEndpoint version="2011-03-08" path="' . 
-            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
+            vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
             '" />' .
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
-        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        putenv('WaRuntimeEndpoint=' . vfsStream::url($rootDirectory . '/' . $fileName));
         
         // Test
         RoleEnvironment::requestRecycle();
 
         $fileInputChannel = new FileInputChannel();
         $fileInputStream = $fileInputChannel->getInputStream(
-            \vfsStream::url($rootDirectory . '/' . $currentStateFileName)
+            vfsStream::url($rootDirectory . '/' . $currentStateFileName)
         );
         
         $inputChannelContents = stream_get_contents($fileInputStream);
@@ -820,8 +822,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $currentStateFileName = 'test';
         $fileContents = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
@@ -831,8 +833,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '</StatusLease>' .
             '</CurrentState>';
         
-        $currentStateFile = \vfsStream::newFile($currentStateFileName);
-        \vfsStreamWrapper::getRoot()->addChild($currentStateFile);
+        $currentStateFile = vfsStream::newFile($currentStateFileName);
+        vfsStreamWrapper::getRoot()->addChild($currentStateFile);
         
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -847,10 +849,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Roles />' .
             '</RoleEnvironment>';
         
-        $roleEnvironmentFile = \vfsStream::newFile($roleEnvironmentFileName);
+        $roleEnvironmentFile = vfsStream::newFile($roleEnvironmentFileName);
         $roleEnvironmentFile->setContent($roleEnvironmentFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
+        vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
         
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -859,20 +861,20 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' . 
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>' .
-            \vfsStream::url($rootDirectory . '/' . $currentStateFileName) . 
+            vfsStream::url($rootDirectory . '/' . $currentStateFileName) . 
             '</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
             '</GoalState>';
         
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
         
-        $file = \vfsStream::newFile($goalStateFileName);
+        $file = vfsStream::newFile($goalStateFileName);
         $file->setContent($goalStateFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $fileName = 'versionendpoint';
         $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -880,24 +882,24 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
             '<RuntimeServerEndpoints>' .
             '<RuntimeServerEndpoint version="2011-03-08" path="' . 
-            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
+            vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
             '" />' .
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
-        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        putenv('WaRuntimeEndpoint=' . vfsStream::url($rootDirectory . '/' . $fileName));
         
         // Test
         RoleEnvironment::clearStatus();
 
         $fileInputChannel = new FileInputChannel();
         $fileInputStream = $fileInputChannel->getInputStream(
-            \vfsStream::url($rootDirectory . '/' . $currentStateFileName)
+            vfsStream::url($rootDirectory . '/' . $currentStateFileName)
         );
         
         $inputChannelContents = stream_get_contents($fileInputStream);
@@ -912,8 +914,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $currentStateFileName = 'test';
         $fileContents = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
@@ -927,8 +929,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '</StatusLease>' .
             '</CurrentState>';
         
-        $currentStateFile = \vfsStream::newFile($currentStateFileName);
-        \vfsStreamWrapper::getRoot()->addChild($currentStateFile);
+        $currentStateFile = vfsStream::newFile($currentStateFileName);
+        vfsStreamWrapper::getRoot()->addChild($currentStateFile);
         
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -943,10 +945,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Roles />' .
             '</RoleEnvironment>';
         
-        $roleEnvironmentFile = \vfsStream::newFile($roleEnvironmentFileName);
+        $roleEnvironmentFile = vfsStream::newFile($roleEnvironmentFileName);
         $roleEnvironmentFile->setContent($roleEnvironmentFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
+        vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
         
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -955,20 +957,20 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' . 
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>' .
-            \vfsStream::url($rootDirectory . '/' . $currentStateFileName) . 
+            vfsStream::url($rootDirectory . '/' . $currentStateFileName) . 
             '</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
             '</GoalState>';
         
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
         
-        $file = \vfsStream::newFile($goalStateFileName);
+        $file = vfsStream::newFile($goalStateFileName);
         $file->setContent($goalStateFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $fileName = 'versionendpoint';
         $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -976,17 +978,17 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
             '<RuntimeServerEndpoints>' .
             '<RuntimeServerEndpoint version="2011-03-08" path="' . 
-            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
+            vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
             '" />' .
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
-        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        putenv('WaRuntimeEndpoint=' . vfsStream::url($rootDirectory . '/' . $fileName));
         
         // Test
         RoleEnvironment::setStatus(
@@ -999,7 +1001,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
 
         $fileInputChannel = new FileInputChannel();
         $fileInputStream = $fileInputChannel->getInputStream(
-            \vfsStream::url($rootDirectory . '/' . $currentStateFileName)
+            vfsStream::url($rootDirectory . '/' . $currentStateFileName)
         );
         
         $inputChannelContents = stream_get_contents($fileInputStream);
@@ -1014,8 +1016,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $currentStateFileName = 'test';
         $fileContents = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
@@ -1029,8 +1031,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '</StatusLease>' .
             '</CurrentState>';
         
-        $currentStateFile = \vfsStream::newFile($currentStateFileName);
-        \vfsStreamWrapper::getRoot()->addChild($currentStateFile);
+        $currentStateFile = vfsStream::newFile($currentStateFileName);
+        vfsStreamWrapper::getRoot()->addChild($currentStateFile);
         
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -1045,10 +1047,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Roles />' .
             '</RoleEnvironment>';
         
-        $roleEnvironmentFile = \vfsStream::newFile($roleEnvironmentFileName);
+        $roleEnvironmentFile = vfsStream::newFile($roleEnvironmentFileName);
         $roleEnvironmentFile->setContent($roleEnvironmentFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
+        vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
         
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -1057,20 +1059,20 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' . 
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>' .
-            \vfsStream::url($rootDirectory . '/' . $currentStateFileName) . 
+            vfsStream::url($rootDirectory . '/' . $currentStateFileName) . 
             '</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
             '</GoalState>';
         
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
         
-        $file = \vfsStream::newFile($goalStateFileName);
+        $file = vfsStream::newFile($goalStateFileName);
         $file->setContent($goalStateFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $fileName = 'versionendpoint';
         $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -1078,17 +1080,17 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
             '<RuntimeServerEndpoints>' .
             '<RuntimeServerEndpoint version="2011-03-08" path="' . 
-            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
+            vfsStream::url($rootDirectory . '/' . $goalStateFileName) . 
             '" />' .
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
-        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        putenv('WaRuntimeEndpoint=' . vfsStream::url($rootDirectory . '/' . $fileName));
         
         // Test
         RoleEnvironment::setStatus(
@@ -1101,7 +1103,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
 
         $fileInputChannel = new FileInputChannel();
         $fileInputStream = $fileInputChannel->getInputStream(
-            \vfsStream::url($rootDirectory . '/' . $currentStateFileName)
+            vfsStream::url($rootDirectory . '/' . $currentStateFileName)
         );
         
         $inputChannelContents = stream_get_contents($fileInputStream);
@@ -1202,8 +1204,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register();
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register();
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -1218,10 +1220,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Roles />' .
             '</RoleEnvironment>';
         
-        $roleEnvironmentFile = \vfsStream::newFile($roleEnvironmentFileName);
+        $roleEnvironmentFile = vfsStream::newFile($roleEnvironmentFileName);
         $roleEnvironmentFile->setContent($roleEnvironmentFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
+        vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
         
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -1230,7 +1232,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' .
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) .
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) .
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>none</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
@@ -1238,10 +1240,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
         
-        $file = \vfsStream::newFile($goalStateFileName);
+        $file = vfsStream::newFile($goalStateFileName);
         $file->setContent($goalStateFileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $fileName = 'versionendpoint';
         $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -1249,17 +1251,17 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
             '<RuntimeServerEndpoints>' .
             '<RuntimeServerEndpoint version="2011-03-08" path="' .
-            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) .
+            vfsStream::url($rootDirectory . '/' . $goalStateFileName) .
             '" />' .
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
-        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        putenv('WaRuntimeEndpoint=' . vfsStream::url($rootDirectory . '/' . $fileName));
         
         // Test
         $this->assertEquals(
@@ -1681,8 +1683,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register();
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register();
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -1697,14 +1699,14 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Roles />' .
             '</RoleEnvironment>';
         
-        $roleEnvironmentFile = \vfsStream::newFile($roleEnvironmentFileName);
+        $roleEnvironmentFile = vfsStream::newFile($roleEnvironmentFileName);
         $roleEnvironmentFile->setContent($roleEnvironmentFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
+        vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
         
         $currentGoalStateFileName = 'currentGoalStateFile';
-        $currentGoalStateFile = \vfsStream::newFile($currentGoalStateFileName);
-        \vfsStreamWrapper::getRoot()->addChild($currentGoalStateFile);
+        $currentGoalStateFile = vfsStream::newFile($currentGoalStateFileName);
+        vfsStreamWrapper::getRoot()->addChild($currentGoalStateFile);
         
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -1713,20 +1715,20 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' .
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) .
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) .
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>' .
-            \vfsStream::url($rootDirectory . '/' . $currentGoalStateFileName) .
+            vfsStream::url($rootDirectory . '/' . $currentGoalStateFileName) .
             '</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
             '</GoalState>';
         
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
         
-        $file = \vfsStream::newFile($goalStateFileName);
+        $file = vfsStream::newFile($goalStateFileName);
         $file->setContent($goalStateFileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $fileName = 'versionendpoint';
         $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -1734,17 +1736,17 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
             '<RuntimeServerEndpoints>' .
             '<RuntimeServerEndpoint version="2011-03-08" path="' .
-            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) .
+            vfsStream::url($rootDirectory . '/' . $goalStateFileName) .
             '" />' .
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
-        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        putenv('WaRuntimeEndpoint=' . vfsStream::url($rootDirectory . '/' . $fileName));
         
         // Test
         $this->assertEquals('state1', RoleEnvironment::getDeploymentId());
@@ -1788,8 +1790,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register();
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register();
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -1804,14 +1806,14 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Roles />' .
             '</RoleEnvironment>';
         
-        $roleEnvironmentFile = \vfsStream::newFile($roleEnvironmentFileName);
+        $roleEnvironmentFile = vfsStream::newFile($roleEnvironmentFileName);
         $roleEnvironmentFile->setContent($roleEnvironmentFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
+        vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
         
         $currentGoalStateFileName = 'currentGoalStateFile';
-        $currentGoalStateFile = \vfsStream::newFile($currentGoalStateFileName);
-        \vfsStreamWrapper::getRoot()->addChild($currentGoalStateFile);
+        $currentGoalStateFile = vfsStream::newFile($currentGoalStateFileName);
+        vfsStreamWrapper::getRoot()->addChild($currentGoalStateFile);
         
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -1820,20 +1822,20 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' .
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) .
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) .
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>' .
-            \vfsStream::url($rootDirectory . '/' . $currentGoalStateFileName) .
+            vfsStream::url($rootDirectory . '/' . $currentGoalStateFileName) .
             '</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
             '</GoalState>';
         
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
         
-        $goalStateFile = \vfsStream::newFile($goalStateFileName);
+        $goalStateFile = vfsStream::newFile($goalStateFileName);
         $goalStateFile->setContent($goalStateFileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($goalStateFile);
+        vfsStreamWrapper::getRoot()->addChild($goalStateFile);
         
         $fileName = 'versionendpoint';
         $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -1841,17 +1843,17 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
             '<RuntimeServerEndpoints>' .
             '<RuntimeServerEndpoint version="2011-03-08" path="' .
-            \vfsStream::url($rootDirectory . '/' . $goalStateFileName) .
+            vfsStream::url($rootDirectory . '/' . $goalStateFileName) .
             '" />' .
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
-        putenv('WaRuntimeEndpoint=' . \vfsStream::url($rootDirectory . '/' . $fileName));
+        putenv('WaRuntimeEndpoint=' . vfsStream::url($rootDirectory . '/' . $fileName));
         
         // Test
         $this->assertEquals('state1', RoleEnvironment::getDeploymentId());
@@ -1871,10 +1873,10 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Stopped</ExpectedState>' .
             '<RoleEnvironmentPath>' .
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) .
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) .
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>' .
-            \vfsStream::url($rootDirectory . '/' . $currentGoalStateFileName) .
+            vfsStream::url($rootDirectory . '/' . $currentGoalStateFileName) .
             '</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
             '</GoalState>';

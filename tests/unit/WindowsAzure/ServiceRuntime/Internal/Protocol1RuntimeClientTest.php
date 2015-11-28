@@ -36,6 +36,10 @@ use WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient;
 use WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer;
 use WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer;
 
+use \org\bovigo\vfs\vfsStream;
+use \org\bovigo\vfs\vfsStreamWrapper;
+use \org\bovigo\vfs\vfsStreamDirectory;
+
 /**
  * Unit tests for class Protocol1RuntimeClient.
  *
@@ -81,8 +85,8 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register();
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register();
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
 
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -94,10 +98,10 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
             '<Roles />' .
             '</RoleEnvironment>';
 
-        $roleEnvironmentFile = \vfsStream::newFile($roleEnvironmentFileName);
+        $roleEnvironmentFile = vfsStream::newFile($roleEnvironmentFileName);
         $roleEnvironmentFile->setContent($roleEnvironmentFileContent); 
 
-        \vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
+        vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
 
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -106,7 +110,7 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' .
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) .
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) .
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>none</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
@@ -114,10 +118,10 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
 
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
 
-        $file = \vfsStream::newFile($goalStateFileName);
+        $file = vfsStream::newFile($goalStateFileName);
         $file->setContent($goalStateFileContent);
 
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
 
         $protocol1RuntimeCurrentStateClient =
             new Protocol1RuntimeCurrentStateClient(null, null);
@@ -134,7 +138,7 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
                 $inputChannel
             );
 
-        $endpoint = \vfsStream::url($rootDirectory . '/' . $goalStateFileName);
+        $endpoint = vfsStream::url($rootDirectory . '/' . $goalStateFileName);
 
         $protocol1RuntimeClient = new Protocol1RuntimeClient(
             $protocol1RuntimeGoalStateClient,
@@ -157,8 +161,8 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register();
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register();
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
 
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -170,10 +174,10 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
             '<Roles />' .
             '</RoleEnvironment>';
 
-        $roleEnvironmentFile = \vfsStream::newFile($roleEnvironmentFileName);
+        $roleEnvironmentFile = vfsStream::newFile($roleEnvironmentFileName);
         $roleEnvironmentFile->setContent($roleEnvironmentFileContent); 
 
-        \vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
+        vfsStreamWrapper::getRoot()->addChild($roleEnvironmentFile);
 
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -182,7 +186,7 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' .
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) .
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) .
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>none</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
@@ -190,10 +194,10 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
 
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
 
-        $file = \vfsStream::newFile($goalStateFileName);
+        $file = vfsStream::newFile($goalStateFileName);
         $file->setContent($goalStateFileContent);
 
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
 
         $protocol1RuntimeCurrentStateClient =
             new Protocol1RuntimeCurrentStateClient(null, null);
@@ -210,7 +214,7 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
                 $inputChannel
             );
 
-        $endpoint = \vfsStream::url($rootDirectory . '/' . $goalStateFileName);
+        $endpoint = vfsStream::url($rootDirectory . '/' . $goalStateFileName);
 
         $protocol1RuntimeClient = new Protocol1RuntimeClient(
             $protocol1RuntimeGoalStateClient,
@@ -244,11 +248,11 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
             '</StatusLease>' .
             '</CurrentState>';
         
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
-        $file = \vfsStream::newFile($fileName);
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        $file = vfsStream::newFile($fileName);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $serializer = new XmlCurrentStateSerializer();
         $fileOutputChannel = new FileOutputChannel();
@@ -260,7 +264,7 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
             );
 
         $protocol1RuntimeCurrentStateClient->setEndpoint(
-            \vfsStream::url($rootDirectory . '/' . $fileName)
+            vfsStream::url($rootDirectory . '/' . $fileName)
         );
         
         $goalStateDeserializer       = new ChunkedGoalStateDeserializer();
@@ -294,7 +298,7 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
         
         $fileInputChannel = new FileInputChannel();
         $fileInputStream = $fileInputChannel->getInputStream(
-            \vfsStream::url($rootDirectory . '/' . $fileName)
+            vfsStream::url($rootDirectory . '/' . $fileName)
         );
         
         $inputChannelContents = stream_get_contents($fileInputStream);
