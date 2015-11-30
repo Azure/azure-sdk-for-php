@@ -27,7 +27,7 @@ use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * Represents X509CertTokenVerificationKey object used in media services
+ * Represents AsymmetricTokenVerificationKey object used in media services
  *
  * @category  Microsoft
  * @package   WindowsAzure\MediaServices\Templates
@@ -37,27 +37,45 @@ use WindowsAzure\Common\Internal\Utilities;
  * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class X509CertTokenVerificationKey extends AsymmetricTokenVerificationKey
+class ContentEncryptionKeyFromKeyIdentifier extends PlayReadyContentKey
 {
     /**
-     * Create X509CertTokenVerificationKey
+     * ContentEncryptionKeyFromKeyIdentifier KeyIdentifier
+     *
+     * @var string
+     */
+    protected  $_keyIdentifier;
+
+    /**
+     * Create ContentEncryptionKeyFromKeyIdentifier
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($keyIdentifier = null)
     {
+        $this->_keyIdentifier = $keyIdentifier;
     }
 
     /**
-     * Set "X509CertTokenVerificationKey RawBody"
+     * Get "ContentEncryptionKeyFromKeyIdentifier KeyIdentifier"
      *
-     * @param string $value RawBody
+     * @return string KeyIdentifier
+     */
+    public function getKeyIdentifier()
+    {
+        return $this->_keyIdentifier;
+    }
+
+    /**
+     * Set "ContentEncryptionKeyFromKeyIdentifier KeyIdentifier"
+     *
+     * @param string $value KeyIdentifier
      *
      * @return void
      */
-    public function setRawBody($value)
+    public function setKeyIdentifier($value)
     {
-        $this->_rawBody = $value;
+        $this->_keyIdentifier = $value;
     }
 }
 

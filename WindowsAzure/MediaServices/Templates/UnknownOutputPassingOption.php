@@ -23,42 +23,40 @@
  */
 
 namespace WindowsAzure\MediaServices\Templates;
-use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * Represents X509CertTokenVerificationKey object used in media services
+ * Represents UnknownOutputPassingOption type enumeration used in media services
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Templates
+ * @package   WindowsAzure\MediaServices\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class X509CertTokenVerificationKey extends AsymmetricTokenVerificationKey
+class UnknownOutputPassingOption
 {
     /**
-     * Create X509CertTokenVerificationKey
+     * Passing the video portion of protected content to an Unknown Output is not allowed.
      *
-     * @return void
+     * @var string
      */
-    public function __construct()
-    {
-    }
+    const NOT_ALLOWED = "NotAllowed";
 
     /**
-     * Set "X509CertTokenVerificationKey RawBody"
+     * Passing the video portion of protected content to an Unknown Output is allowed.
      *
-     * @param string $value RawBody
-     *
-     * @return void
+     * @var string
      */
-    public function setRawBody($value)
-    {
-        $this->_rawBody = $value;
-    }
-}
+    const ALLOWED = "Allowed";
 
+    /**
+     * Passing the video portion of protected content to an Unknown Output is allowed but the client must 
+     * constrain the resolution of the video content.
+     *
+     * @var string
+     */
+    const ALLOWED_WITH_VIDEO_CONSTRICTION = "AllowedWithVideoConstriction";
+}
 

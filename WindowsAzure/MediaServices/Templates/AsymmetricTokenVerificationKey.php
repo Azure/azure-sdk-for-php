@@ -42,7 +42,7 @@ class AsymmetricTokenVerificationKey extends TokenVerificationKey
     /**
      * AsymmetricTokenVerificationKey RawBody
      *
-     * @var int[]
+     * @var string
      */
     protected  $_rawBody;
 
@@ -58,7 +58,7 @@ class AsymmetricTokenVerificationKey extends TokenVerificationKey
     /**
      * Get "AsymmetricTokenVerificationKey RawBody"
      *
-     * @return int[] RawBody
+     * @return string RawBody
      */
     public function getRawBody()
     {
@@ -68,7 +68,7 @@ class AsymmetricTokenVerificationKey extends TokenVerificationKey
     /**
      * Set "AsymmetricTokenVerificationKey RawBody"
      *
-     * @param int[] $value RawBody
+     * @param string $value RawBody
      *
      * @return void
      */

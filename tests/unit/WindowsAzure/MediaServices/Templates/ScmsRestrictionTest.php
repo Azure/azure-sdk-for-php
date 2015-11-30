@@ -23,12 +23,13 @@
 
 namespace Tests\Unit\WindowsAzure\MediaServices\Templates;
 use Tests\Framework\TestResources;
-use WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey;
+use WindowsAzure\MediaServices\Templates\ScmsRestriction;
+use WindowsAzure\MediaServices\Templates\ErrorMessages;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * Unit Tests for X509CertTokenVerificationKey
+ * Unit Tests for ScmsRestriction
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\MediaServices\Templates
@@ -38,23 +39,49 @@ use WindowsAzure\Common\Internal\Utilities;
  * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class X509CertTokenVerificationKeyTest extends \PHPUnit_Framework_TestCase
+class ScmsRestrictionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey::getRawBody
-     * @covers WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey::setRawBody
+     * @covers WindowsAzure\MediaServices\Templates\ScmsRestriction::__construct
+     * @covers WindowsAzure\MediaServices\Templates\ScmsRestriction::getConfigurationData
      */
-    public function testGetSetRawBody() {
+    public function testCreateScmsRestriction() {
         // Setup
-        $entity = new X509CertTokenVerificationKey();
-        $payload = "payload string";
+        $payload = 1;
+        $entity = new ScmsRestriction($payload);
 
         // Test
-        $entity->setRawBody($payload);
-        $result = $entity->getRawBody();
+        $result = $entity->getConfigurationData();
 
         // Assert
         $this->assertEquals($payload, $result);
-        
-    }    
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Templates\ScmsRestriction::__construct
+     */
+    public function testCreateScmsRestrictionWithBadConfDataShouldThrown() {
+        // Setup
+        $payload = 5;
+        $this->setExpectedException('InvalidArgumentException', ErrorMessages::INVALID_TWO_BIT_CONFIGURATION_DATA);
+        new ScmsRestriction($payload);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Templates\ScmsRestriction::getConfigurationData
+     * @covers WindowsAzure\MediaServices\Templates\ScmsRestriction::setConfigurationData
+     */
+    public function testGetSetConfigurationData() {
+        // Setup
+        $payload = 1;
+        $entity = new ScmsRestriction($payload);
+        $payload2 = 2;
+
+        // Test
+        $entity->setConfigurationData($payload2);
+        $result = $entity->getConfigurationData();
+
+        // Assert
+        $this->assertEquals($payload2, $result);
+    }  
 }

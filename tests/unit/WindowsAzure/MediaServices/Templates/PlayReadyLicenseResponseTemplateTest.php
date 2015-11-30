@@ -23,12 +23,14 @@
 
 namespace Tests\Unit\WindowsAzure\MediaServices\Templates;
 use Tests\Framework\TestResources;
-use WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey;
+use WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate;
+use WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate;
+use WindowsAzure\MediaServices\Templates\ErrorMessages;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * Unit Tests for X509CertTokenVerificationKey
+ * Unit Tests for PlayReadyLicenseTemplate
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\MediaServices\Templates
@@ -38,23 +40,39 @@ use WindowsAzure\Common\Internal\Utilities;
  * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class X509CertTokenVerificationKeyTest extends \PHPUnit_Framework_TestCase
+class PlayReadyLicenseResponseTemplateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey::getRawBody
-     * @covers WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey::setRawBody
+     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::getLicenseTemplates
+     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::setLicenseTemplates
      */
-    public function testGetSetRawBody() {
+    public function testGetSetLicenseTemplates() {
         // Setup
-        $entity = new X509CertTokenVerificationKey();
-        $payload = "payload string";
+        $entity = new PlayReadyLicenseResponseTemplate();
+        $payload = array();
 
         // Test
-        $entity->setRawBody($payload);
-        $result = $entity->getRawBody();
+        $entity->setLicenseTemplates($payload);
+        $result = $entity->getLicenseTemplates();
 
         // Assert
         $this->assertEquals($payload, $result);
-        
-    }    
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::getResponseCustomData
+     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::setResponseCustomData
+     */
+    public function testGetSetResponseCustomData() {
+        // Setup
+        $entity = new PlayReadyLicenseResponseTemplate();
+        $payload = "custom data";
+
+        // Test
+        $entity->setResponseCustomData($payload);
+        $result = $entity->getResponseCustomData();
+
+        // Assert
+        $this->assertEquals($payload, $result);
+    }   
 }

@@ -32,7 +32,7 @@ use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
 use WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey;
 
 /**
- * Represents TokenClaim object used in media services
+ * Represents TokenRestrictionTemplate serializer helper class used in media services
  *
  * @category  Microsoft
  * @package   WindowsAzure\MediaServices\Models

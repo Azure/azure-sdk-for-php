@@ -23,12 +23,12 @@
 
 namespace Tests\Unit\WindowsAzure\MediaServices\Templates;
 use Tests\Framework\TestResources;
-use WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey;
+use WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * Unit Tests for X509CertTokenVerificationKey
+ * Unit Tests for ContentEncryptionKeyFromKeyIdentifier
  *
  * @category  Microsoft
  * @package   Tests\Unit\WindowsAzure\MediaServices\Templates
@@ -38,23 +38,38 @@ use WindowsAzure\Common\Internal\Utilities;
  * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class X509CertTokenVerificationKeyTest extends \PHPUnit_Framework_TestCase
+class ContentEncryptionKeyFromKeyIdentifierTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey::getRawBody
-     * @covers WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey::setRawBody
+     * @covers WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier::__construct
+     * @covers WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier::getKeyIdentifier
      */
-    public function testGetSetRawBody() {
+    public function testCreateWithKeyIdentifier() {
         // Setup
-        $entity = new X509CertTokenVerificationKey();
+        $payload = "payload string";
+        $entity = new ContentEncryptionKeyFromKeyIdentifier($payload);        
+
+        // Test
+        $result = $entity->getKeyIdentifier();
+
+        // Assert
+        $this->assertEquals($payload, $result);        
+    }    
+
+    /**
+     * @covers WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier::getKeyIdentifier
+     * @covers WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier::setKeyIdentifier
+     */
+    public function testGetSetKeyIdentifier() {
+        // Setup
+        $entity = new ContentEncryptionKeyFromKeyIdentifier();
         $payload = "payload string";
 
         // Test
-        $entity->setRawBody($payload);
-        $result = $entity->getRawBody();
+        $entity->setKeyIdentifier($payload);
+        $result = $entity->getKeyIdentifier();
 
         // Assert
-        $this->assertEquals($payload, $result);
-        
+        $this->assertEquals($payload, $result);        
     }    
 }

@@ -27,7 +27,7 @@ use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * Represents X509CertTokenVerificationKey object used in media services
+ * Represents AgcAndColorStripeRestriction object used in media services
  *
  * @category  Microsoft
  * @package   WindowsAzure\MediaServices\Templates
@@ -37,27 +37,48 @@ use WindowsAzure\Common\Internal\Utilities;
  * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class X509CertTokenVerificationKey extends AsymmetricTokenVerificationKey
+class AgcAndColorStripeRestriction
 {
     /**
-     * Create X509CertTokenVerificationKey
+     * AgcAndColorStripeRestriction ConfigurationData
+     *
+     * @var int
+     */
+    private $_configurationData;
+
+    /**
+     * Create ScmsRestriction
+     * 
+     * @param int $configurationData 
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($configurationData)
+    {        
+        $this->setConfigurationData($configurationData);
+    }
+    
+    /**
+     * Configures the Automatic Gain Control (AGC) and Color Stripe control bits. For further details see the PlayReady Compliance Rules.
+     *
+     * @return int ConfigurationData
+     */
+    public function getConfigurationData()
     {
+        return $this->_configurationData;
     }
 
     /**
-     * Set "X509CertTokenVerificationKey RawBody"
+     * Configures the Automatic Gain Control (AGC) and Color Stripe control bits. For further details see the PlayReady Compliance Rules.
      *
-     * @param string $value RawBody
+     * @param int $value ConfigurationData
      *
      * @return void
      */
-    public function setRawBody($value)
+    public function setConfigurationData($value)
     {
-        $this->_rawBody = $value;
+        ScmsRestriction::verifyTwoBitConfigurationData($value);
+        $this->_configurationData = $value;
     }
 }
 

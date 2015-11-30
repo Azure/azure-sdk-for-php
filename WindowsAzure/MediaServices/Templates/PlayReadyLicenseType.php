@@ -23,42 +23,30 @@
  */
 
 namespace WindowsAzure\MediaServices\Templates;
-use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * Represents X509CertTokenVerificationKey object used in media services
+ * Represents PlayReadyLicenseType type enumeration used in media services
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Templates
+ * @package   WindowsAzure\MediaServices\Models
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class X509CertTokenVerificationKey extends AsymmetricTokenVerificationKey
+class PlayReadyLicenseType
 {
     /**
-     * Create X509CertTokenVerificationKey
      *
-     * @return void
+     * @var string
      */
-    public function __construct()
-    {
-    }
+    const NON_PERSISTENT = "Nonpersistent";
 
     /**
-     * Set "X509CertTokenVerificationKey RawBody"
      *
-     * @param string $value RawBody
-     *
-     * @return void
+     * @var string
      */
-    public function setRawBody($value)
-    {
-        $this->_rawBody = $value;
-    }
+    const PERSISTENT = "Persistent";
 }
-
 
