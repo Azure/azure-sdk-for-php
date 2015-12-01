@@ -53,6 +53,24 @@ use WindowsAzure\MediaServices\Models\ContentKeyRestrictionType;
 use WindowsAzure\MediaServices\Models\AssetDeliveryPolicy;
 use WindowsAzure\MediaServices\Models\AssetDeliveryProtocol;
 use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyType;
+use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplateSerializer;
+use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate;
+use WindowsAzure\MediaServices\Templates\TokenType;
+use WindowsAzure\MediaServices\Templates\TokenClaim;
+use WindowsAzure\MediaServices\Templates\OpenIdConnectDiscoveryDocument;
+use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
+use WindowsAzure\MediaServices\Templates\MediaServicesLicenseTemplateSerializer;
+use WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate;
+use WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate;
+use WindowsAzure\MediaServices\Templates\PlayReadyPlayRight;
+use WindowsAzure\MediaServices\Templates\ScmsRestriction;
+use WindowsAzure\MediaServices\Templates\AgcAndColorStripeRestriction;
+use WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromHeader;
+use WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier;
+use WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction;
+use WindowsAzure\MediaServices\Templates\PlayReadyLicenseType;
+use WindowsAzure\MediaServices\Templates\UnknownOutputPassingOption;
+use WindowsAzure\MediaServices\Templates\ErrorMessages;
 use Tests\Framework\VirtualFileSystem;
 
 /**
@@ -2021,5 +2039,191 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertRegexp('/keydelivery.mediaservices.windows.net/', $result);        
+    }
+
+
+    public function testCreateContentKeyAuthorizationPolicyOptionWithTokenRestrictions()
+    {
+        // Setup Token
+        $template = new TokenRestrictionTemplate(TokenType::SWT);
+
+        $template->setPrimaryVerificationKey(new SymmetricVerificationKey());
+        $template->setAlternateVerificationKeys(array(new SymmetricVerificationKey()));
+        $template->setAudience("http://sampleaudience/");
+        $template->setIssuer("http://sampleissuerurl/");
+
+        $claims = array();
+        $claims[] = new TokenClaim(TokenClaim::CONTENT_KEY_ID_CLAIM_TYPE);
+        $claims[] = new TokenClaim("Rental","true");
+
+        $template->setRequiredClaims($claims);
+
+        $serializedTemplate = TokenRestrictionTemplateSerializer::serialize($template);
+
+        // Setup Options
+        $name = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_OPTIONS_NAME . $this->createSuffix();
+        $restrictionName = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_RESTRICTION_NAME . $this->createSuffix();
+        $restriction = new ContentKeyAuthorizationPolicyRestriction();
+        $restriction->setName($restrictionName);
+        $restriction->setKeyRestrictionType(ContentKeyRestrictionType::TOKEN_RESTRICTED);
+        $restriction->setRequirements($serializedTemplate);
+        $restrictions = array($restriction);
+        
+        $options = new ContentKeyAuthorizationPolicyOption();
+        $options->setName($name);
+        $options->setKeyDeliveryType(ContentKeyDeliveryType::BASELINE_HTTP);
+        $options->setRestrictions($restrictions);
+
+        // Test
+        $result = $this->createContentKeyAuthorizationPolicyOption($options);
+
+        // Retrieve the CKAPO again.
+        $result = $this->restProxy->getContentKeyAuthorizationPolicyOption($result->getId());
+
+        // Assert Options
+        $this->assertEquals($options->getName(), $result->getName());
+        $this->assertEquals($options->getKeyDeliveryType(), $result->getKeyDeliveryType());
+        $this->assertEquals($options->getRestrictions(), $result->getRestrictions());
+
+        $receivedTemplate = $result->getRestrictions()[0]->getRequirements();
+
+        // Assert Restrictions
+        $template2 = TokenRestrictionTemplateSerializer::deserialize($receivedTemplate);
+        $this->assertNotNull($template2);
+        $this->assertEquals($template->getIssuer(), $template2->getIssuer());
+        $this->assertEquals($template->getAudience(), $template2->getAudience());
+        $this->assertEquals($template->getTokenType(), TokenType::SWT);
+        
+        $fromTemplate = $template->getPrimaryVerificationKey();
+        $fromTemplate2 = $template2->getPrimaryVerificationKey();
+
+        $this->assertEquals($fromTemplate->getKeyValue(), $fromTemplate2->getKeyValue());
+
+        $this->assertEquals(1, count($template->getAlternateVerificationKeys()));
+        $this->assertEquals(1, count($template2->getAlternateVerificationKeys()));
+
+        $fromTemplate = $template->getAlternateVerificationKeys()[0];
+        $fromTemplate2 = $template2->getAlternateVerificationKeys()[0];
+
+        $this->assertEquals($fromTemplate->getKeyValue(), $fromTemplate2->getKeyValue());
+
+        $claims2 = $template2->getRequiredClaims();
+
+        $this->assertEquals(2, count($claims2));
+
+        $this->assertEquals($claims[0]->getClaimType(), $claims2[0]->getClaimType());
+        $this->assertEquals($claims[1]->getClaimType(), $claims2[1]->getClaimType());
+        $this->assertEquals($claims[1]->getClaimValue(), $claims2[1]->getClaimValue());
+
+        return $result->getId();
+    }
+
+    public function testCreateContentKeyAuthorizationPolicyOptionForPlayReady()
+    {
+        // Setup Token
+        $template = new TokenRestrictionTemplate(TokenType::SWT);
+
+        $template->setPrimaryVerificationKey(new SymmetricVerificationKey());
+        $template->setAlternateVerificationKeys(array(new SymmetricVerificationKey()));
+        $template->setAudience("http://sampleaudience/");
+        $template->setIssuer("http://sampleissuerurl/");
+
+        $claims = array();
+        $claims[] = new TokenClaim(TokenClaim::CONTENT_KEY_ID_CLAIM_TYPE);
+        $claims[] = new TokenClaim("Rental","true");
+
+        $template->setRequiredClaims($claims);
+
+        $serializedTemplate = TokenRestrictionTemplateSerializer::serialize($template);
+
+        // Setup Options
+        $name = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_OPTIONS_NAME . $this->createSuffix();
+        $restrictionName = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_RESTRICTION_NAME . $this->createSuffix();
+        $restriction = new ContentKeyAuthorizationPolicyRestriction();
+        $restriction->setName($restrictionName);
+        $restriction->setKeyRestrictionType(ContentKeyRestrictionType::TOKEN_RESTRICTED);
+        $restriction->setRequirements($serializedTemplate);
+        $restrictions = array($restriction);
+        
+        $options = new ContentKeyAuthorizationPolicyOption();
+        $options->setName($name);
+        $options->setKeyDeliveryType(ContentKeyDeliveryType::PLAYREADY_LICENSE);
+        $options->setKeyDeliveryConfiguration($this->getPlayReadyTemplate());
+        $options->setRestrictions($restrictions);
+
+        // Test
+        $result = $this->createContentKeyAuthorizationPolicyOption($options);
+
+        // Retrieve the CKAPO again.
+        $result = $this->restProxy->getContentKeyAuthorizationPolicyOption($result->getId());
+
+        // Assert Options
+        $this->assertEquals($options->getName(), $result->getName());
+        $this->assertEquals($options->getKeyDeliveryType(), $result->getKeyDeliveryType());
+        $this->assertEquals($options->getRestrictions(), $result->getRestrictions());
+
+        $receivedTemplate = $result->getRestrictions()[0]->getRequirements();
+
+        // Assert Restrictions
+        $template2 = TokenRestrictionTemplateSerializer::deserialize($receivedTemplate);
+        $this->assertNotNull($template2);
+        $this->assertEquals($template->getIssuer(), $template2->getIssuer());
+        $this->assertEquals($template->getAudience(), $template2->getAudience());
+        $this->assertEquals($template->getTokenType(), TokenType::SWT);
+        
+        $fromTemplate = $template->getPrimaryVerificationKey();
+        $fromTemplate2 = $template2->getPrimaryVerificationKey();
+
+        $this->assertEquals($fromTemplate->getKeyValue(), $fromTemplate2->getKeyValue());
+
+        $this->assertEquals(1, count($template->getAlternateVerificationKeys()));
+        $this->assertEquals(1, count($template2->getAlternateVerificationKeys()));
+
+        $fromTemplate = $template->getAlternateVerificationKeys()[0];
+        $fromTemplate2 = $template2->getAlternateVerificationKeys()[0];
+
+        $this->assertEquals($fromTemplate->getKeyValue(), $fromTemplate2->getKeyValue());
+
+        $claims2 = $template2->getRequiredClaims();
+
+        $this->assertEquals(2, count($claims2));
+
+        $this->assertEquals($claims[0]->getClaimType(), $claims2[0]->getClaimType());
+        $this->assertEquals($claims[1]->getClaimType(), $claims2[1]->getClaimType());
+        $this->assertEquals($claims[1]->getClaimValue(), $claims2[1]->getClaimValue());
+
+        return $result->getId();
+    }
+
+
+    private function getPlayReadyTemplate() {
+        $template = new PlayReadyLicenseResponseTemplate();
+        $template->setResponseCustomData("test custom data");
+
+        $licenseTemplate = new PlayReadyLicenseTemplate();
+        $template->setLicenseTemplates(array($licenseTemplate));
+    
+        $licenseTemplate->setLicenseType(PlayReadyLicenseType::PERSISTENT);
+        $licenseTemplate->setBeginDate(new \DateTime('now'));
+        $licenseTemplate->setRelativeExpirationDate(new \DateInterval('PT6H'));
+        $licenseTemplate->setContentKey(new ContentEncryptionKeyFromKeyIdentifier("test custom id"));
+    
+    
+        $playRight = new PlayReadyPlayRight();
+        $licenseTemplate->setPlayRight($playRight);
+
+        $playRight->setAgcAndColorStripeRestriction(new AgcAndColorStripeRestriction(1));
+        $playRight->setAllowPassingVideoContentToUnknownOutput(UnknownOutputPassingOption::ALLOWED);
+        $playRight->setAnalogVideoOpl(100);
+        $playRight->setCompressedDigitalAudioOpl(300);
+        $playRight->setCompressedDigitalVideoOpl(400);
+        $playRight->setExplicitAnalogTelevisionOutputRestriction(new ExplicitAnalogTelevisionRestriction(0, true));
+        $playRight->setImageConstraintForAnalogComponentVideoRestriction(true);
+        $playRight->setImageConstraintForAnalogComputerMonitorRestriction(true);
+        $playRight->setScmsRestriction(new ScmsRestriction(2));
+        $playRight->setUncompressedDigitalAudioOpl(250);
+        $playRight->setUncompressedDigitalVideoOpl(270);
+
+        return MediaServicesLicenseTemplateSerializer::serialize($template);     
     }
 }
