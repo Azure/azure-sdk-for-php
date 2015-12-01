@@ -235,7 +235,7 @@ class TokenRestrictionTemplateSerializer
 
         $token["iss"] = $template->getIssuer();
         $token["aud"] = $template->getAudience();
-        $token["iat"] = $tokenExpiration;
+        $token["exp"] = $tokenExpiration;
         if (!empty($notBefore)) {
             $token["nbf"] = $notBefore;
         }
