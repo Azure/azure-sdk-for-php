@@ -14,13 +14,13 @@ $reservedUnitsType = EncodingReservedUnitType::S3;
 
 print "Azure SDK for PHP - Scale Encoding Units Sample\r\n";
 
-// 1. set up the MediaServicesService object to call into the Media Services REST API.
+// 1. set up the MediaServicesService object to call into the Media Services REST API
 $restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($account, $secret));
 
 // 2. retrieve the current configuration of Encoding Units
 $encodingUntis = $restProxy->getEncodingReservedUnit();
 
-// 3. set up the new encoding units settings.
+// 3. set up the new encoding units settings
 $encodingUntis->setCurrentReservedUnits($reservedUnits);
 $encodingUntis->setReservedUnitType($reservedUnitsType);
 
