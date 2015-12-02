@@ -50,6 +50,7 @@ use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate;
 use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
 use WindowsAzure\MediaServices\Templates\TokenClaim;
 use WindowsAzure\MediaServices\Templates\TokenType;
+use WindowsAzure\MediaServices\Templates\WidevineMessageSerializer;
 
 // Settings
 $account = "<your media services account name>";
@@ -408,7 +409,7 @@ function configureWidevineLicenseTemplate() {
     $policyOverrides->can_renew = false;
     $template->policy_overrides = $policyOverrides;
 
-    return json_encode($template);
+    return WidevineMessageSerializer::serialize($template);
 }
 
 function generateTokenRequirements($tokenType) {

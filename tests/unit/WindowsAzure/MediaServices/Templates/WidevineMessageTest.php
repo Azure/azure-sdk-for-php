@@ -130,26 +130,25 @@ class WidevineMessageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Assertion that both Widevine messages are equals.
-     * @param \PHPUnit_Framework_TestCase $test 
      * @param WidevineMessage $expected 
      * @param WidevineMessage $actual 
      */
-    public static function assertEqualsWidevineMessage($test, $expected, $actual) {
-        $test->assertEquals($expected->allowed_track_types, $actual->allowed_track_types);
-        $test->assertEquals(count($expected->content_key_specs), count($actual->content_key_specs));
+    public function assertEqualsWidevineMessage($expected, $actual) {
+        $this->assertEquals($expected->allowed_track_types, $actual->allowed_track_types);
+        $this->assertEquals(count($expected->content_key_specs), count($actual->content_key_specs));
         for($i = 0; $i < count($expected->content_key_specs); $i++) {
             $expectedCks = $expected->content_key_specs[$i];
             $actualCks = $actual->content_key_specs[$i];
-            $test->assertEquals($expectedCks->track_type, $actualCks->track_type);
-            $test->assertEquals($expectedCks->key_id, $actualCks->key_id);
-            $test->assertEquals($expectedCks->security_level, $actualCks->security_level);
-            $test->assertEquals($expectedCks->required_output_protection, $actualCks->required_output_protection);
+            $this->assertEquals($expectedCks->track_type, $actualCks->track_type);
+            $this->assertEquals($expectedCks->key_id, $actualCks->key_id);
+            $this->assertEquals($expectedCks->security_level, $actualCks->security_level);
+            $this->assertEquals($expectedCks->required_output_protection, $actualCks->required_output_protection);
             if (isset($expectedCks->required_output_protection) &&
                 isset($actualCks->required_output_protection)) {
-                $test->assertEquals($expectedCks->required_output_protection->hdcp, $actualCks->required_output_protection->hdcp);
+                $this->assertEquals($expectedCks->required_output_protection->hdcp, $actualCks->required_output_protection->hdcp);
             }
         }
-        $test->assertEquals($expected->policy_overrides, $actual->policy_overrides);
+        $this->assertEquals($expected->policy_overrides, $actual->policy_overrides);
     }
    
 }

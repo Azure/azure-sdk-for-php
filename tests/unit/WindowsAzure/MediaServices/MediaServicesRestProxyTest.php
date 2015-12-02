@@ -71,7 +71,14 @@ use WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction;
 use WindowsAzure\MediaServices\Templates\PlayReadyLicenseType;
 use WindowsAzure\MediaServices\Templates\UnknownOutputPassingOption;
 use WindowsAzure\MediaServices\Templates\ErrorMessages;
+use WindowsAzure\MediaServices\Templates\WidevineMessageSerializer;
+use WindowsAzure\MediaServices\Templates\WidevineMessage;
+use WindowsAzure\MediaServices\Templates\AllowedTrackTypes;
+use WindowsAzure\MediaServices\Templates\ContentKeySpecs;
+use WindowsAzure\MediaServices\Templates\Hdcp;
+use WindowsAzure\MediaServices\Templates\RequiredOutputProtection;
 use Tests\Framework\VirtualFileSystem;
+use Tests\Unit\WindowsAzure\MediaServices\Templates\WidevineMessageTest;
 
 /**
  * Unit tests for class MediaServicesRestProxy
@@ -2195,6 +2202,73 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         return $result->getId();
     }
 
+    public function testCreateContentKeyAuthorizationPolicyOptionForWidevine()
+    {
+        // Setup Token
+
+        $widevine = new WidevineMessage();
+        $widevine->allowed_track_types = AllowedTrackTypes::SD_HD;
+        $contentKeySpecs = new ContentKeySpecs();
+        $contentKeySpecs->required_output_protection = new RequiredOutputProtection();
+        $contentKeySpecs->required_output_protection->hdcp = Hdcp::HDCP_NONE;
+        $contentKeySpecs->security_level = 1;
+        $contentKeySpecs->track_type = "SD";
+        $widevine->content_key_specs = array($contentKeySpecs);
+        $policyOverrides  = new \stdClass();
+        $policyOverrides->can_play = true;
+        $policyOverrides->can_persist = true;
+        $policyOverrides->can_renew = false;
+        $widevine->policy_overrides = $policyOverrides;
+
+        $jsonWidevine = WidevineMessageSerializer::serialize($widevine);
+
+        $template = new TokenRestrictionTemplate(TokenType::SWT);
+
+        $template->setPrimaryVerificationKey(new SymmetricVerificationKey());
+        $template->setAlternateVerificationKeys(array(new SymmetricVerificationKey()));
+        $template->setAudience("http://sampleaudience/");
+        $template->setIssuer("http://sampleissuerurl/");
+
+        $claims = array();
+        $claims[] = new TokenClaim(TokenClaim::CONTENT_KEY_ID_CLAIM_TYPE);
+        $claims[] = new TokenClaim("Rental","true");
+
+        $template->setRequiredClaims($claims);
+
+        $serializedTemplate = TokenRestrictionTemplateSerializer::serialize($template);
+
+        // Setup Options
+        $name = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_OPTIONS_NAME . $this->createSuffix();
+        $restrictionName = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_RESTRICTION_NAME . $this->createSuffix();
+        $restriction = new ContentKeyAuthorizationPolicyRestriction();
+        $restriction->setName($restrictionName);
+        $restriction->setKeyRestrictionType(ContentKeyRestrictionType::TOKEN_RESTRICTED);
+        $restriction->setRequirements($serializedTemplate);
+        $restrictions = array($restriction);
+        
+        $options = new ContentKeyAuthorizationPolicyOption();
+        $options->setName($name);
+        $options->setKeyDeliveryType(ContentKeyDeliveryType::WIDEVINE);
+        $options->setKeyDeliveryConfiguration($jsonWidevine);
+        $options->setRestrictions($restrictions);
+
+        // Test
+        $result = $this->createContentKeyAuthorizationPolicyOption($options);
+
+        // Retrieve the CKAPO again.
+        $result = $this->restProxy->getContentKeyAuthorizationPolicyOption($result->getId());
+
+        // Assert Options
+        $this->assertEquals($options->getName(), $result->getName());
+        $this->assertEquals($options->getKeyDeliveryType(), $result->getKeyDeliveryType());
+        $this->assertJsonStringEqualsJsonString($jsonWidevine, $result->getKeyDeliveryConfiguration());
+
+        $actualWidevine = WidevineMessageSerializer::deserialize($result->getKeyDeliveryConfiguration());
+        $this->assertEqualsWidevineMessage($widevine, $actualWidevine);
+
+        return $result->getId();
+    }
+
 
     private function getPlayReadyTemplate() {
         $template = new PlayReadyLicenseResponseTemplate();
@@ -2225,5 +2299,29 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $playRight->setUncompressedDigitalVideoOpl(270);
 
         return MediaServicesLicenseTemplateSerializer::serialize($template);     
+    }
+
+    
+    /**
+     * Assertion that both Widevine messages are equals.
+     * @param WidevineMessage $expected 
+     * @param WidevineMessage $actual 
+     */
+    public function assertEqualsWidevineMessage($expected, $actual) {
+        $this->assertEquals($expected->allowed_track_types, $actual->allowed_track_types);
+        $this->assertEquals(count($expected->content_key_specs), count($actual->content_key_specs));
+        for($i = 0; $i < count($expected->content_key_specs); $i++) {
+            $expectedCks = $expected->content_key_specs[$i];
+            $actualCks = $actual->content_key_specs[$i];
+            $this->assertEquals($expectedCks->track_type, $actualCks->track_type);
+            $this->assertEquals($expectedCks->key_id, $actualCks->key_id);
+            $this->assertEquals($expectedCks->security_level, $actualCks->security_level);
+            $this->assertEquals($expectedCks->required_output_protection, $actualCks->required_output_protection);
+            if (isset($expectedCks->required_output_protection) &&
+                isset($actualCks->required_output_protection)) {
+                $this->assertEquals($expectedCks->required_output_protection->hdcp, $actualCks->required_output_protection->hdcp);
+            }
+        }
+        $this->assertEquals($expected->policy_overrides, $actual->policy_overrides);
     }
 }
