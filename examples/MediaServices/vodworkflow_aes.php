@@ -47,7 +47,7 @@ $account = "<your media services account name>";
 $secret = "<your media services account key>";
 $mezzanineFileName = "Azure-Video.wmv";
 $tokenRestriction = true;
-$tokenType = TokenType::SWT;
+$tokenType = TokenType::JWT;
 
 print "Azure SDK for PHP - AES Dynamic Encryption Sample\r\n";
 

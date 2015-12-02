@@ -25,12 +25,12 @@ namespace Tests\Unit\WindowsAzure\MediaServices\Templates;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplateSerializer;
-use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate;
-use WindowsAzure\MediaServices\Templates\TokenType;
-use WindowsAzure\MediaServices\Templates\TokenClaim;
-use WindowsAzure\MediaServices\Templates\OpenIdConnectDiscoveryDocument;
-use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
+use WindowsAzure\MediaServices\Templates\WidevineMessageSerializer;
+use WindowsAzure\MediaServices\Templates\WidevineMessage;
+use WindowsAzure\MediaServices\Templates\AllowedTrackTypes;
+use WindowsAzure\MediaServices\Templates\ContentKeySpecs;
+use WindowsAzure\MediaServices\Templates\Hdcp;
+use WindowsAzure\MediaServices\Templates\RequiredOutputProtection;
 
 /**
  * Unit Tests for WidevineMessage
@@ -46,10 +46,110 @@ use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
 class WidevineMessageTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @covers WindowsAzure\MediaServices\Templates\WidevineMessageSerializer::serialize
+     * @covers WindowsAzure\MediaServices\Templates\WidevineMessageSerializer::deserialize
      */
-    public function testKnownGoodInput() {        
+    public function testRoundTrip() {
         // Setup
+        $expected = new WidevineMessage();
+        $expected->allowed_track_types = AllowedTrackTypes::SD_HD;
+        $contentKeySpecs = new ContentKeySpecs();
+        $contentKeySpecs->required_output_protection = new RequiredOutputProtection();
+        $contentKeySpecs->required_output_protection->hdcp = Hdcp::HDCP_NONE;
+        $contentKeySpecs->security_level = 1;
+        $contentKeySpecs->track_type = "SD";
+        $expected->content_key_specs = array($contentKeySpecs);
+        $policyOverrides  = new \stdClass();
+        $policyOverrides->can_play = true;
+        $policyOverrides->can_persist = true;
+        $policyOverrides->can_renew = false;
+        $expected->policy_overrides = $policyOverrides;
+
+        $json = WidevineMessageSerializer::serialize($expected);
         
+        $actual = WidevineMessageSerializer::deserialize($json);
+
+        self::assertEqualsWidevineMessage($this, $expected, $actual);          
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Templates\WidevineMessageSerializer::deserialize
+     */
+    public function testFromJson() {
+        // Setup
+        $expected = new WidevineMessage();
+        $expected->allowed_track_types = AllowedTrackTypes::SD_HD;
+        $contentKeySpecs = new ContentKeySpecs();
+        $contentKeySpecs->required_output_protection = new RequiredOutputProtection();
+        $contentKeySpecs->required_output_protection->hdcp = Hdcp::HDCP_NONE;
+        $contentKeySpecs->security_level = 1;
+        $contentKeySpecs->track_type = "SD";
+        $expected->content_key_specs = array($contentKeySpecs);
+        $policyOverrides  = new \stdClass();
+        $policyOverrides->can_play = true;
+        $policyOverrides->can_persist = true;
+        $policyOverrides->can_renew = false;
+        $expected->policy_overrides = $policyOverrides;
+        
+        $json = '{"allowed_track_types":"SD_HD","content_key_specs":[{"track_type":"SD","key_id":null,"security_level":1,"required_output_protection":{"hdcp":"HDCP_NONE"}}],"policy_overrides":{"can_play":true,"can_persist":true,"can_renew":false}}';
+        
+        // Test
+        $actual = WidevineMessageSerializer::deserialize($json);
+        
+        // Assert
+        self::assertEqualsWidevineMessage($this, $expected, $actual);  
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\Templates\WidevineMessageSerializer::serialize
+     */
+    public function testToJson() {
+        // Setup
+        $template = new WidevineMessage();
+        $template->allowed_track_types = AllowedTrackTypes::SD_HD;
+        $contentKeySpecs = new ContentKeySpecs();
+        $contentKeySpecs->required_output_protection = new RequiredOutputProtection();
+        $contentKeySpecs->required_output_protection->hdcp = Hdcp::HDCP_NONE;
+        $contentKeySpecs->security_level = 1;
+        $contentKeySpecs->track_type = "SD";
+        $template->content_key_specs = array($contentKeySpecs);
+        $policyOverrides  = new \stdClass();
+        $policyOverrides->can_play = true;
+        $policyOverrides->can_persist = true;
+        $policyOverrides->can_renew = false;
+        $template->policy_overrides = $policyOverrides;
+        
+        $expected = '{"allowed_track_types":"SD_HD","content_key_specs":[{"track_type":"SD","key_id":null,"security_level":1,"required_output_protection":{"hdcp":"HDCP_NONE"}}],"policy_overrides":{"can_play":true,"can_persist":true,"can_renew":false}}';
+        
+        // Test
+        $actual = WidevineMessageSerializer::serialize($template);
+        
+        // Assert
+        $this->assertJsonStringEqualsJsonString($expected, $actual);  
+    }
+
+    /**
+     * Assertion that both Widevine messages are equals.
+     * @param \PHPUnit_Framework_TestCase $test 
+     * @param WidevineMessage $expected 
+     * @param WidevineMessage $actual 
+     */
+    public static function assertEqualsWidevineMessage($test, $expected, $actual) {
+        $test->assertEquals($expected->allowed_track_types, $actual->allowed_track_types);
+        $test->assertEquals(count($expected->content_key_specs), count($actual->content_key_specs));
+        for($i = 0; $i < count($expected->content_key_specs); $i++) {
+            $expectedCks = $expected->content_key_specs[$i];
+            $actualCks = $actual->content_key_specs[$i];
+            $test->assertEquals($expectedCks->track_type, $actualCks->track_type);
+            $test->assertEquals($expectedCks->key_id, $actualCks->key_id);
+            $test->assertEquals($expectedCks->security_level, $actualCks->security_level);
+            $test->assertEquals($expectedCks->required_output_protection, $actualCks->required_output_protection);
+            if (isset($expectedCks->required_output_protection) &&
+                isset($actualCks->required_output_protection)) {
+                $test->assertEquals($expectedCks->required_output_protection->hdcp, $actualCks->required_output_protection->hdcp);
+            }
+        }
+        $test->assertEquals($expected->policy_overrides, $actual->policy_overrides);
     }
    
 }

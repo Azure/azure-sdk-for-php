@@ -25,7 +25,7 @@
 namespace WindowsAzure\MediaServices\Templates;
 
 /**
- * Represents ContentKeySpecs type used in media services
+ * Represents RequiredOutputProtection type used in media services
  *
  * @category  Microsoft
  * @package   WindowsAzure\MediaServices\Models
