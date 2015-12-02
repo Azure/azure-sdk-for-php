@@ -53,6 +53,8 @@ use WindowsAzure\MediaServices\Models\ContentKeyRestrictionType;
 use WindowsAzure\MediaServices\Models\AssetDeliveryPolicy;
 use WindowsAzure\MediaServices\Models\AssetDeliveryProtocol;
 use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyType;
+use WindowsAzure\MediaServices\Models\EncodingReservedUnit;
+use WindowsAzure\MediaServices\Models\EncodingReservedUnitType;
 use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplateSerializer;
 use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate;
 use WindowsAzure\MediaServices\Templates\TokenType;
@@ -1794,7 +1796,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $policyId = $this->testCreateContentKeyAuthorizationPolicy();
         $optionsId = $this->testCreateContentKeyAuthorizationPolicyOption();
 
-        $this->restProxy->linkOptionsToContentKeyAuthorizationPolicy($optionsId, $policyId);
+        $this->restProxy->linkOptionToContentKeyAuthorizationPolicy($optionsId, $policyId);
 
         // Test
         $result = $this->restProxy->getContentKeyAuthorizationPolicyLinkedOptions($policyId);
@@ -1814,7 +1816,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $optionsId = $this->testCreateContentKeyAuthorizationPolicyOption();
 
         // Test
-        $this->restProxy->linkOptionsToContentKeyAuthorizationPolicy($optionsId, $policyId);
+        $this->restProxy->linkOptionToContentKeyAuthorizationPolicy($optionsId, $policyId);
 
         // Assert
         $result = $this->restProxy->getContentKeyAuthorizationPolicyLinkedOptions($policyId);
@@ -1831,7 +1833,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Setup
         $policyId = $this->testCreateContentKeyAuthorizationPolicy();
         $optionsId = $this->testCreateContentKeyAuthorizationPolicyOption();
-        $this->restProxy->linkOptionsToContentKeyAuthorizationPolicy($optionsId, $policyId);
+        $this->restProxy->linkOptionToContentKeyAuthorizationPolicy($optionsId, $policyId);
 
         // Test
         $this->restProxy->removeOptionsFromContentKeyAuthorizationPolicy($optionsId, $policyId);
@@ -2036,7 +2038,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $contentKey = $this->testCreateContentKey();
         $policyId   = $this->testCreateContentKeyAuthorizationPolicy();
         $optionsId  = $this->testCreateContentKeyAuthorizationPolicyOption();
-        $this->restProxy->linkOptionsToContentKeyAuthorizationPolicy($optionsId, $policyId);
+        $this->restProxy->linkOptionToContentKeyAuthorizationPolicy($optionsId, $policyId);
         $contentKey->setAuthorizationPolicyId($policyId);
         $this->restProxy->updateContentKey($contentKey); // new method, TODO: integration test
         $contentKey = $this->restProxy->getContentKey($contentKey);
@@ -2324,4 +2326,44 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         }
         $this->assertEquals($expected->policy_overrides, $actual->policy_overrides);
     }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyOption
+     * 
+     */
+    public function testGetEncodingReservedUnitType()
+    {
+        // Test
+        $result = $this->restProxy->getEncodingReservedUnit();
+
+        // Assert
+        $this->assertNotNull($result);
+    }
+
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyOption
+     * 
+     */
+    public function testUpdateEncodingReservedUnitType()
+    {
+        // Setup
+        $original = $this->restProxy->getEncodingReservedUnit();
+        $toUpdate = $this->restProxy->getEncodingReservedUnit();
+
+        // Test
+        $toUpdate->setReservedUnitType(EncodingReservedUnitType::S3);
+        $toUpdate->setCurrentReservedUnits(2);
+        $this->restProxy->updateEncodingReservedUnit($toUpdate);
+
+        // Assert
+        $updated = $this->restProxy->getEncodingReservedUnit();
+
+        $this->assertEquals(EncodingReservedUnitType::S3, $updated->getReservedUnitType());
+        $this->assertEquals(2, $updated->getCurrentReservedUnits());
+
+        // restore initial conditions
+        $this->restProxy->updateEncodingReservedUnit($original);
+    }
+
 }

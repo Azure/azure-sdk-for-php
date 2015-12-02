@@ -152,7 +152,6 @@ class Entry extends AtomBase
     public function parseXml($xmlString)
     {
         Validate::notNull($xmlString, 'xmlString');
-
         $this->fromXml(simplexml_load_string($xmlString));
     }
 

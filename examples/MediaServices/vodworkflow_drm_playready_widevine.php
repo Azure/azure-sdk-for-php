@@ -235,8 +235,8 @@ function addOpenAuthorizationPolicy($restProxy, $contentKey) {
     $ckapolicy = $restProxy->createContentKeyAuthorizationPolicy($ckapolicy);
 
     // 4.6 Link the ContentKeyAuthorizationPolicyOption to the ContentKeyAuthorizationPolicy
-    $restProxy->linkOptionsToContentKeyAuthorizationPolicy($playReadyOption, $ckapolicy);
-    $restProxy->linkOptionsToContentKeyAuthorizationPolicy($widevineOption, $ckapolicy);
+    $restProxy->linkOptionToContentKeyAuthorizationPolicy($playReadyOption, $ckapolicy);
+    $restProxy->linkOptionToContentKeyAuthorizationPolicy($widevineOption, $ckapolicy);
 
     // 4.7 Associate the ContentKeyAuthorizationPolicy with the ContentKey
     $contentKey->setAuthorizationPolicyId($ckapolicy->getId());
@@ -279,8 +279,8 @@ function addTokenRestrictedAuthorizationPolicy($restProxy, $contentKey, $tokenTy
     $ckapolicy = $restProxy->createContentKeyAuthorizationPolicy($ckapolicy);
 
     // 4.6 Link the ContentKeyAuthorizationPolicyOption to the ContentKeyAuthorizationPolicy
-    $restProxy->linkOptionsToContentKeyAuthorizationPolicy($playReadyOption, $ckapolicy);
-    $restProxy->linkOptionsToContentKeyAuthorizationPolicy($widevineOption, $ckapolicy);
+    $restProxy->linkOptionToContentKeyAuthorizationPolicy($playReadyOption, $ckapolicy);
+    $restProxy->linkOptionToContentKeyAuthorizationPolicy($widevineOption, $ckapolicy);
 
     // 4.7 Associate the ContentKeyAuthorizationPolicy with the ContentKey
     $contentKey->setAuthorizationPolicyId($ckapolicy->getId());
@@ -434,8 +434,7 @@ function generateTestToken($tokenTemplateString, $contentKey) {
     print "Token Type {$template->getTokenType()}\r\nBearer={$token}\r\n";
 }
 
-function endsWith($haystack, $needle)
-{
+function endsWith($haystack, $needle) {
     $length = strlen($needle);
     if ($length == 0) {
         return true;
