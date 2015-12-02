@@ -1,31 +1,24 @@
 {
-  "name": "microsoft/windowsazure",
-  "description": "This project provides a set of PHP client libraries that make it easy to access Windows Azure tables, blobs, queues, service runtime and service management APIs.",
-  "keywords": [ "php", "azure", "sdk" ],
-  "license": "Apache-2.0",
-  "authors": [
-    {
-      "name": "Azure PHP SDK",
-      "email": "azurephpsdk@microsoft.com"
+    "name": "microsoft/windowsazure",
+    "description": "This project provides a set of PHP client libraries that make it easy to access Windows Azure tables, blobs, queues, service runtime and service management APIs.",
+    "keywords": [ "php", "azure", "sdk" ],
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Azure PHP SDK",
+            "email": "azurephpsdk@microsoft.com"
+        }
+    ],
+    "require": {
+        "pear/http_request2": "^2.2",
+        "pear/mail_mime": "^1.10",
+        "pear/mail_mime-decode": "^1.5",
+        "firebase/php-jwt": "^3.0"
+    },
+    "require-dev": {
+        "mikey179/vfsStream": "^1.6"
+    },
+    "autoload": {
+        "psr-0": { "WindowsAzure\\": "" }
     }
-  ],
-  "require": {
-    "pear-pear.php.net/HTTP_Request2": "*",
-    "pear-pear.php.net/Mail_Mime": "*",
-    "pear-pear.php.net/Mail_mimeDecode": "*",
-    "firebase/php-jwt": "^3.0"
-  },
-  "require-dev": {
-    "mikey179/vfsStream": "^1.6"
-  },
-  "repositories": [
-    {
-      "type": "pear",
-      "url": "http://pear.php.net"
-    }
-  ],
-  "autoload": {
-    "psr-0": { "WindowsAzure\\": "" }
-  }
-
 }
