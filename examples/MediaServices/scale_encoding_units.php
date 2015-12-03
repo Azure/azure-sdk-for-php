@@ -9,8 +9,9 @@ use WindowsAzure\MediaServices\Models\EncodingReservedUnitType;
 
 $account = "<your media services account name>";
 $secret = "<your media services account key>";
-$reservedUnits = 2; 
-$reservedUnitsType = EncodingReservedUnitType::S3; 
+
+$reservedUnits = 1; 
+$reservedUnitsType = EncodingReservedUnitType::S1; 
 $types = array("S1", "S2", "S3");
 
 print "Azure SDK for PHP - Scale Encoding Units Sample\r\n";
@@ -21,8 +22,8 @@ $restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new Medi
 // 2. retrieve the current configuration of Encoding Units
 $encodingUntis = $restProxy->getEncodingReservedUnit();
 
-echo("Current Encoding Reseverd Units Type: " . $types[$encodingUntis->getReservedUnitType()] . " (" . $encodingUntis->getCurrentReservedUnits() . " units)\r\n");
-echo("Updating to Type: " . $types[$reservedUnitsType] . " (" . $reservedUnits . " units) ...");
+echo("Current Encoding Reseverd Units: " . $encodingUntis->getCurrentReservedUnits() . " units (" . $types[$encodingUntis->getReservedUnitType()] . ")\r\n");
+echo("Updating to: " . $reservedUnits . " units (" . $types[$reservedUnitsType] . ") ...");
 
 // 3. set up the new encoding units settings
 $encodingUntis->setCurrentReservedUnits($reservedUnits);
@@ -34,6 +35,6 @@ $restProxy->updateEncodingReservedUnit($encodingUntis);
 // 5. reload the current configuration and show the results
 $encodingUntis = $restProxy->getEncodingReservedUnit();
 
-echo("\r\nUpdated Encoding Reseverd Units Type: " . $types[$encodingUntis->getReservedUnitType()] . " (" . $encodingUntis->getCurrentReservedUnits() . " units)\r\n");
+echo("\r\nUpdated Encoding Reseverd Units: " . $encodingUntis->getCurrentReservedUnits() . " units (" . $types[$encodingUntis->getReservedUnitType()] . ")\r\n");
 
 ?>
