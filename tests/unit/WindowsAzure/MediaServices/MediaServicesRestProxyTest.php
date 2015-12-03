@@ -2352,14 +2352,14 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $toUpdate = $this->restProxy->getEncodingReservedUnit();
 
         // Test
-        $toUpdate->setReservedUnitType(EncodingReservedUnitType::S3);
+        $toUpdate->setReservedUnitType(EncodingReservedUnitType::S1);
         $toUpdate->setCurrentReservedUnits(2);
         $this->restProxy->updateEncodingReservedUnit($toUpdate);
 
         // Assert
         $updated = $this->restProxy->getEncodingReservedUnit();
 
-        $this->assertEquals(EncodingReservedUnitType::S3, $updated->getReservedUnitType());
+        $this->assertEquals(EncodingReservedUnitType::S1, $updated->getReservedUnitType());
         $this->assertEquals(2, $updated->getCurrentReservedUnits());
 
         // restore initial conditions

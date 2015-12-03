@@ -91,19 +91,28 @@ class EncodingReservedUnit
 
         if (isset($options['ReservedUnitType'])) {
             Validate::isInteger($options['ReservedUnitType'], 'options[ReservedUnitType]');
-            $this->_reservedUnitType = $options['ReservedUnitType'];
+            $this->_reservedUnitType = intval($options['ReservedUnitType']);
         }
 
         if (isset($options['MaxReservableUnits'])) {
             Validate::isInteger($options['MaxReservableUnits'], 'options[MaxReservableUnits]');
-            $this->_maxReservableUnits = $options['MaxReservableUnits'];
+            $this->_maxReservableUnits = intval($options['MaxReservableUnits']);
         }
         
         if (isset($options['CurrentReservedUnits'])) {
             Validate::isString($options['CurrentReservedUnits'], 'options[CurrentReservedUnits]');
-            $this->_currentReservedUnits = $options['CurrentReservedUnits'];
+            $this->_currentReservedUnits = intval($options['CurrentReservedUnits']);
         }
     }
+
+    /**
+     * Return a list of fields that must be sent (even if null)
+     * @return string[]
+     */
+    public function requiredFields() {
+        return ['ReservedUnitType', 'CurrentReservedUnits'];
+    }
+
 
     /**
      * @return string the accountId
