@@ -91,6 +91,13 @@ if ($tokenRestriction) {
     generateTestToken($tokenTemplateString, $contentKey);
 }
 
+// Done
+print "Done!";
+
+////////////////////
+// Helper methods //
+////////////////////
+
 function uploadFileAndCreateAsset($restProxy, $mezzanineFileName) {
     // 1.1. create an empty "Asset" by specifying the name
     $asset = new Asset(Asset::OPTIONS_NONE);
@@ -345,7 +352,7 @@ function publishEncodedAsset($restProxy, $encodedAsset) {
     // 6.4 Create a Smooth Streaming base URL
     $stremingUrl = $locator->getPath() . $manifestFile->getName() . "/manifest";
 
-    print "Done! Streaming URL: {$stremingUrl}\r\n";
+    print "Streaming URL: {$stremingUrl}\r\n";
 }
 
 function configurePlayReadyLicenseTemplate() {
