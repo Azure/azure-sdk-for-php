@@ -22,7 +22,7 @@ $restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new Medi
 // 2. retrieve the current configuration of Encoding Units
 $encodingUntis = $restProxy->getEncodingReservedUnit();
 
-echo("Current Encoding Reseverd Units: " . $encodingUntis->getCurrentReservedUnits() . " units (" . $types[$encodingUntis->getReservedUnitType()] . ")\r\n");
+echo("Current Encoding Reserved Units: " . $encodingUntis->getCurrentReservedUnits() . " units (" . $types[$encodingUntis->getReservedUnitType()] . ")\r\n");
 echo("Updating to: " . $reservedUnits . " units (" . $types[$reservedUnitsType] . ") ...");
 
 // 3. set up the new encoding units settings
@@ -35,6 +35,6 @@ $restProxy->updateEncodingReservedUnit($encodingUntis);
 // 5. reload the current configuration and show the results
 $encodingUntis = $restProxy->getEncodingReservedUnit();
 
-echo("\r\nUpdated Encoding Reseverd Units: " . $encodingUntis->getCurrentReservedUnits() . " units (" . $types[$encodingUntis->getReservedUnitType()] . ")\r\n");
+echo("\r\nUpdated Encoding Reserved Units: " . $encodingUntis->getCurrentReservedUnits() . " units (" . $types[$encodingUntis->getReservedUnitType()] . ")\r\n");
 
 ?>

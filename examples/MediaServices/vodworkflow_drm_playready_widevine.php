@@ -338,7 +338,7 @@ function publishEncodedAsset($restProxy, $encodedAsset) {
         exit(-1);
     }
 
-    // 6.2 Create a 30-day readonly AccessPolicy
+    // 6.2 Create a 30-day read-only AccessPolicy
     $access = new AccessPolicy("Streaming Access Policy");
     $access->setDurationInMinutes(60 * 24 * 30);
     $access->setPermissions(AccessPolicy::PERMISSIONS_READ);
