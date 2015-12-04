@@ -172,22 +172,68 @@ class MediaServicesLicenseTemplateSerializerTest extends \PHPUnit_Framework_Test
 
         $playreadyLicense = MediaServicesLicenseTemplateSerializer::deserialize($result);
 
-        $this->assertNotNull($playreadyLicense);
-        $this->assertEquals(1, count($playreadyLicense->getLicenseTemplates()));
-        $licence = $playreadyLicense->getLicenseTemplates()[0];
-        $this->assertEquals(null, $licence->getAllowTestDevices());
-        $this->assertEquals(PlayReadyLicenseType::PERSISTENT, $licence->getLicenseType());
-        $this->assertEquals("test custom data", $playreadyLicense->getResponseCustomData());
-        $this->assertNotNull($licence->getBeginDate());
-        $this->assertNull($licence->getExpirationDate());
-        $right = $licence->getPlayRight();
-        $this->assertNotNull($right);
-        $this->assertEquals(1, $right->getAgcAndColorStripeRestriction()->getConfigurationData());
-        $this->assertEquals(UnknownOutputPassingOption::ALLOWED, $right->getAllowPassingVideoContentToUnknownOutput());
-        $this->assertEquals(100, $right->getAnalogVideoOpl());
-        $this->assertEquals(300, $right->getCompressedDigitalAudioOpl());
-        $this->assertEquals(false, $right->getDigitalVideoOnlyContentRestriction());
-        $this->assertEquals(true, $right->getExplicitAnalogTelevisionOutputRestriction()->getBestEffort());
-        $this->assertEquals(0, $right->getExplicitAnalogTelevisionOutputRestriction()->getConfigurationData());   
+        $this->assertEqualsLicenseResponseTemplate($template, $playreadyLicense);
+    }
+
+    public function assertEqualsLicenseResponseTemplate($expected, $actual) {
+        $this->assertEquals(count($expected->getLicenseTemplates()), count($actual->getLicenseTemplates()));
+        for($i = 0; $i < count($expected->getLicenseTemplates()); $i++) {
+            $this->assertEqualsLicenseTemplate($expected->getLicenseTemplates()[$i], $actual->getLicenseTemplates()[$i]);
+        }
+        $this->assertEquals($expected->getResponseCustomData(), $actual->getResponseCustomData());
+    }
+
+    public function assertEqualsLicenseTemplate($expected, $actual) {
+        $this->assertEquals($expected->getAllowTestDevices(), $actual->getAllowTestDevices());
+        $this->assertEquals($expected->getLicenseType(), $actual->getLicenseType());
+        $this->assertEquals($expected->getBeginDate(), $actual->getBeginDate());
+        $this->assertEquals($expected->getExpirationDate(), $actual->getExpirationDate());
+        $this->assertEquals($expected->getRelativeBeginDate(), $actual->getRelativeBeginDate());
+        $this->assertEquals($expected->getRelativeExpirationDate(), $actual->getRelativeExpirationDate());
+        $this->assertEquals($expected->getGracePeriod(), $actual->getGracePeriod());
+        $this->assertEquals($expected->getLicenseType(), $actual->getLicenseType());
+        $this->assertEqualsPlayRight($expected->getPlayRight(), $actual->getPlayRight());
+        $this->assertEqualsContentKey($expected->getContentKey(), $actual->getContentKey());
+    }
+
+    public function assertEqualsContentKey($expected, $actual)  {
+        if ($expected instanceof ContentEncryptionKeyFromHeader) {
+            $this->assertTrue($actual instanceof ContentEncryptionKeyFromHeader);
+        }
+
+        if ($expected instanceof ContentEncryptionKeyFromKeyIdentifier) {
+            $this->assertTrue($actual instanceof ContentEncryptionKeyFromKeyIdentifier);
+            $this->assertEquals($expected->getKeyIdentifier(), $actual->getKeyIdentifier());
+        }
+    }
+
+    public function assertEqualsPlayRight($expected, $actual) {
+        $this->assertNotNull($expected);
+        $this->assertNotNull($actual);
+
+        $this->assertEquals($expected->getAllowPassingVideoContentToUnknownOutput(), $actual->getAllowPassingVideoContentToUnknownOutput());
+        $this->assertEquals($expected->getDigitalVideoOnlyContentRestriction(), $actual->getDigitalVideoOnlyContentRestriction());
+        $this->assertEquals($expected->getAnalogVideoOpl(), $actual->getAnalogVideoOpl());
+        $this->assertEquals($expected->getCompressedDigitalAudioOpl(), $actual->getCompressedDigitalAudioOpl());
+        $this->assertEquals($expected->getImageConstraintForAnalogComponentVideoRestriction(), $actual->getImageConstraintForAnalogComponentVideoRestriction());
+        $this->assertEquals($expected->getImageConstraintForAnalogComputerMonitorRestriction(), $actual->getImageConstraintForAnalogComputerMonitorRestriction());
+        $this->assertEquals($expected->getCompressedDigitalVideoOpl(), $actual->getCompressedDigitalVideoOpl());
+        $this->assertEquals($expected->getUncompressedDigitalAudioOpl(), $actual->getUncompressedDigitalAudioOpl());
+
+        if ($expected->getScmsRestriction() != null) {
+            $this->assertNotNull($actual->getScmsRestriction());
+            $this->assertEquals($expected->getScmsRestriction()->getConfigurationData(), $actual->getScmsRestriction()->getConfigurationData());
+        }
+
+        if ($expected->getAgcAndColorStripeRestriction() != null) {
+            $this->assertNotNull($actual->getAgcAndColorStripeRestriction());
+            $this->assertEquals($expected->getAgcAndColorStripeRestriction()->getConfigurationData(), $actual->getAgcAndColorStripeRestriction()->getConfigurationData());
+        }
+
+        if ($expected->getExplicitAnalogTelevisionOutputRestriction() != null) {
+            $this->assertNotNull($actual->getExplicitAnalogTelevisionOutputRestriction());
+            $this->assertEquals($expected->getExplicitAnalogTelevisionOutputRestriction()->getBestEffort(), $actual->getExplicitAnalogTelevisionOutputRestriction()->getBestEffort());
+            $this->assertEquals($expected->getExplicitAnalogTelevisionOutputRestriction()->getConfigurationData(), $actual->getExplicitAnalogTelevisionOutputRestriction()->getConfigurationData());
+        }   
     }
 }

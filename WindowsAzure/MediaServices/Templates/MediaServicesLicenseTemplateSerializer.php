@@ -317,7 +317,7 @@ class MediaServicesLicenseTemplateSerializer
 
         if ($contentKey instanceof ContentEncryptionKeyFromKeyIdentifier) {
             $writer->startElement('ContentKey');
-            $writer->writeAttributeNS('i', 'type', null, "ContentEncryptionKeyFromHeader");
+            $writer->writeAttributeNS('i', 'type', null, "ContentEncryptionKeyFromKeyIdentifier");
             $writer->writeElement("KeyIdentifier", $contentKey->getKeyIdentifier());
             $writer->endElement();            
         }

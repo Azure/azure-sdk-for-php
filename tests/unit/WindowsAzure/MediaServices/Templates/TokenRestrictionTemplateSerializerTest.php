@@ -23,6 +23,7 @@
 
 namespace Tests\Unit\WindowsAzure\MediaServices\Templates;
 use Tests\Framework\TestResources;
+use Tests\Unit\WindowsAzure\MediaServices\Templates\TemplateSerializerAsserts;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplateSerializer;
@@ -31,6 +32,7 @@ use WindowsAzure\MediaServices\Templates\TokenType;
 use WindowsAzure\MediaServices\Templates\TokenClaim;
 use WindowsAzure\MediaServices\Templates\OpenIdConnectDiscoveryDocument;
 use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
+use WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey;
 
 /**
  * Unit Tests for TokenRestrictionTemplateSerializer
@@ -177,31 +179,7 @@ class TokenRestrictionTemplateSerializerTest extends \PHPUnit_Framework_TestCase
 
 
         $template2 = TokenRestrictionTemplateSerializer::deserialize($serializedTemplate);
-        $this->assertNotNull($template2);
-        $this->assertEquals($template->getIssuer(), $template2->getIssuer());
-        $this->assertEquals($template->getAudience(), $template2->getAudience());
-        $this->assertEquals($template->getTokenType(), TokenType::SWT);
-       
-        $fromTemplate = $template->getPrimaryVerificationKey();
-        $fromTemplate2 = $template2->getPrimaryVerificationKey();
-
-        $this->assertEquals($fromTemplate->getKeyValue(), $fromTemplate2->getKeyValue());
-
-        $this->assertEquals(1, count($template->getAlternateVerificationKeys()));
-        $this->assertEquals(1, count($template2->getAlternateVerificationKeys()));
-
-        $fromTemplate = $template->getAlternateVerificationKeys()[0];
-        $fromTemplate2 = $template2->getAlternateVerificationKeys()[0];
-
-        $this->assertEquals($fromTemplate->getKeyValue(), $fromTemplate2->getKeyValue());
-
-        $claims2 = $template2->getRequiredClaims();
-
-        $this->assertEquals(2, count($claims2));
-
-        $this->assertEquals($claims[0]->getClaimType(), $claims2[0]->getClaimType());
-        $this->assertEquals($claims[1]->getClaimType(), $claims2[1]->getClaimType());
-        $this->assertEquals($claims[1]->getClaimValue(), $claims2[1]->getClaimValue());
+        self::assertEqualsTokenRestrictionTemplate($this, $template, $template2);   
     }
 
     public function testKnownGoodGenerateTestTokenSWT()
@@ -254,5 +232,54 @@ class TokenRestrictionTemplateSerializerTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals($expectedToken, $resultsToken);
+    }
+
+    /// Assertion
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     * @param TokenRestrictionTemplate $expected
+     * @param TokenRestrictionTemplate $actual
+     */
+    public static function assertEqualsTokenRestrictionTemplate($test, $expected, $actual) {        
+        // Assert
+        $test->assertNotNull($expected);
+        $test->assertNotNull($actual);
+        $test->assertEquals($expected->getTokenType(), $actual->getTokenType());
+        $test->assertEquals($expected->getAudience(), $actual->getAudience());
+        $test->assertEquals($expected->getIssuer(), $actual->getIssuer());        
+        $test->assertEqualsVerificationKey($test, $expected->getPrimaryVerificationKey(), $actual->getPrimaryVerificationKey());
+        $test->assertEquals(count($expected->getAlternateVerificationKeys()), count($actual->getAlternateVerificationKeys()));
+        for($i = 0; $i < count($expected->getAlternateVerificationKeys()); $i++) {
+            self::assertEqualsVerificationKey($test, $expected->getAlternateVerificationKeys()[$i], $actual->getAlternateVerificationKeys()[$i]);
+        }
+        $test->assertEquals(count($expected->getRequiredClaims()), count($actual->getRequiredClaims()));
+        for($i = 0; $i < count($expected->getRequiredClaims()); $i++) {
+            self::assertEqualsRequiredClaim($test, $expected->getRequiredClaims()[$i], $actual->getRequiredClaims()[$i]);
+        }
+        if ($expected->getOpenIdConnectDiscoveryDocument() != null) {
+            $test->assertNotNull($actual->getOpenIdConnectDiscoveryDocument());
+            $test->assertEquals($expected->getOpenIdConnectDiscoveryDocument()->getOpenIdDiscoveryUri(), $actual->getOpenIdConnectDiscoveryDocument()->getOpenIdDiscoveryUri());
+        } else {
+            $test->assertNull($actual->getOpenIdConnectDiscoveryDocument());
+        }
+        
+    }
+    
+    public static function assertEqualsVerificationKey($test, $expected, $actual)  {
+        if ($expected instanceof SymmetricVerificationKey) {
+            $test->assertTrue($actual instanceof SymmetricVerificationKey);
+            $test->assertEquals($expected->getKeyValue(), $actual->getKeyValue());
+        }
+
+        if ($expected instanceof X509CertTokenVerificationKey) {
+            $test->assertTrue($actual instanceof X509CertTokenVerificationKey);
+            $test->assertEquals($expected->getRawBody(), $actual->getRawBody());
+        }
+    }
+
+    public static function assertEqualsRequiredClaim($test, $expected, $actual)  {
+        $test->assertEquals($expected->getClaimType(), $actual->getClaimType());
+        $test->assertEquals($expected->getClaimValue(), $actual->getClaimValue());
     }
 }

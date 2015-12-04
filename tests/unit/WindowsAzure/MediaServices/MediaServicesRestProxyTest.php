@@ -2098,32 +2098,9 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Assert Restrictions
         $template2 = TokenRestrictionTemplateSerializer::deserialize($receivedTemplate);
-        $this->assertNotNull($template2);
-        $this->assertEquals($template->getIssuer(), $template2->getIssuer());
-        $this->assertEquals($template->getAudience(), $template2->getAudience());
-        $this->assertEquals($template->getTokenType(), TokenType::SWT);
+
+        $this->assertEqualsTokenRestrictionTemplate($template, $template2);
         
-        $fromTemplate = $template->getPrimaryVerificationKey();
-        $fromTemplate2 = $template2->getPrimaryVerificationKey();
-
-        $this->assertEquals($fromTemplate->getKeyValue(), $fromTemplate2->getKeyValue());
-
-        $this->assertEquals(1, count($template->getAlternateVerificationKeys()));
-        $this->assertEquals(1, count($template2->getAlternateVerificationKeys()));
-
-        $fromTemplate = $template->getAlternateVerificationKeys()[0];
-        $fromTemplate2 = $template2->getAlternateVerificationKeys()[0];
-
-        $this->assertEquals($fromTemplate->getKeyValue(), $fromTemplate2->getKeyValue());
-
-        $claims2 = $template2->getRequiredClaims();
-
-        $this->assertEquals(2, count($claims2));
-
-        $this->assertEquals($claims[0]->getClaimType(), $claims2[0]->getClaimType());
-        $this->assertEquals($claims[1]->getClaimType(), $claims2[1]->getClaimType());
-        $this->assertEquals($claims[1]->getClaimValue(), $claims2[1]->getClaimValue());
-
         return $result->getId();
     }
 
@@ -2157,7 +2134,9 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $options = new ContentKeyAuthorizationPolicyOption();
         $options->setName($name);
         $options->setKeyDeliveryType(ContentKeyDeliveryType::PLAYREADY_LICENSE);
-        $options->setKeyDeliveryConfiguration($this->getPlayReadyTemplate());
+        $playReadytemplate = $this->getPlayReadyTemplate();
+        $deliveryConfiguration = MediaServicesLicenseTemplateSerializer::serialize($playReadytemplate);
+        $options->setKeyDeliveryConfiguration($deliveryConfiguration);
         $options->setRestrictions($restrictions);
 
         // Test
@@ -2172,34 +2151,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEquals($options->getRestrictions(), $result->getRestrictions());
 
         $receivedTemplate = $result->getRestrictions()[0]->getRequirements();
-
+        $receivedPlayReadyTemplate = $options->getKeyDeliveryConfiguration();
+        $playReadyTemplate2 = MediaServicesLicenseTemplateSerializer::deserialize($receivedPlayReadyTemplate);
         // Assert Restrictions
         $template2 = TokenRestrictionTemplateSerializer::deserialize($receivedTemplate);
-        $this->assertNotNull($template2);
-        $this->assertEquals($template->getIssuer(), $template2->getIssuer());
-        $this->assertEquals($template->getAudience(), $template2->getAudience());
-        $this->assertEquals($template->getTokenType(), TokenType::SWT);
-        
-        $fromTemplate = $template->getPrimaryVerificationKey();
-        $fromTemplate2 = $template2->getPrimaryVerificationKey();
 
-        $this->assertEquals($fromTemplate->getKeyValue(), $fromTemplate2->getKeyValue());
-
-        $this->assertEquals(1, count($template->getAlternateVerificationKeys()));
-        $this->assertEquals(1, count($template2->getAlternateVerificationKeys()));
-
-        $fromTemplate = $template->getAlternateVerificationKeys()[0];
-        $fromTemplate2 = $template2->getAlternateVerificationKeys()[0];
-
-        $this->assertEquals($fromTemplate->getKeyValue(), $fromTemplate2->getKeyValue());
-
-        $claims2 = $template2->getRequiredClaims();
-
-        $this->assertEquals(2, count($claims2));
-
-        $this->assertEquals($claims[0]->getClaimType(), $claims2[0]->getClaimType());
-        $this->assertEquals($claims[1]->getClaimType(), $claims2[1]->getClaimType());
-        $this->assertEquals($claims[1]->getClaimValue(), $claims2[1]->getClaimValue());
+        $this->assertEqualsTokenRestrictionTemplate($template, $template2);
+        $this->assertEqualsLicenseResponseTemplate($playReadytemplate, $playReadyTemplate2);        
 
         return $result->getId();
     }
@@ -2282,7 +2240,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $licenseTemplate->setLicenseType(PlayReadyLicenseType::PERSISTENT);
         $licenseTemplate->setBeginDate(new \DateTime('now'));
         $licenseTemplate->setRelativeExpirationDate(new \DateInterval('PT6H'));
-        $licenseTemplate->setContentKey(new ContentEncryptionKeyFromKeyIdentifier("test custom id"));
+        $licenseTemplate->setContentKey(new ContentEncryptionKeyFromHeader());
     
     
         $playRight = new PlayReadyPlayRight();
@@ -2300,33 +2258,9 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $playRight->setUncompressedDigitalAudioOpl(250);
         $playRight->setUncompressedDigitalVideoOpl(270);
 
-        return MediaServicesLicenseTemplateSerializer::serialize($template);     
+        return $template;     
     }
-
     
-    /**
-     * Assertion that both Widevine messages are equals.
-     * @param WidevineMessage $expected 
-     * @param WidevineMessage $actual 
-     */
-    public function assertEqualsWidevineMessage($expected, $actual) {
-        $this->assertEquals($expected->allowed_track_types, $actual->allowed_track_types);
-        $this->assertEquals(count($expected->content_key_specs), count($actual->content_key_specs));
-        for($i = 0; $i < count($expected->content_key_specs); $i++) {
-            $expectedCks = $expected->content_key_specs[$i];
-            $actualCks = $actual->content_key_specs[$i];
-            $this->assertEquals($expectedCks->track_type, $actualCks->track_type);
-            $this->assertEquals($expectedCks->key_id, $actualCks->key_id);
-            $this->assertEquals($expectedCks->security_level, $actualCks->security_level);
-            $this->assertEquals($expectedCks->required_output_protection, $actualCks->required_output_protection);
-            if (isset($expectedCks->required_output_protection) &&
-                isset($actualCks->required_output_protection)) {
-                $this->assertEquals($expectedCks->required_output_protection->hdcp, $actualCks->required_output_protection->hdcp);
-            }
-        }
-        $this->assertEquals($expected->policy_overrides, $actual->policy_overrides);
-    }
-
     /**
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyOption
      * 
@@ -2366,4 +2300,142 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->restProxy->updateEncodingReservedUnit($original);
     }
 
+    /// Assertion
+
+    /**
+     * @param TokenRestrictionTemplate $expected
+     * @param TokenRestrictionTemplate $actual
+     */
+    public function assertEqualsTokenRestrictionTemplate($expected, $actual) {        
+        // Assert
+        $this->assertNotNull($expected);
+        $this->assertNotNull($actual);
+        $this->assertEquals($expected->getTokenType(), $actual->getTokenType());
+        $this->assertEquals($expected->getAudience(), $actual->getAudience());
+        $this->assertEquals($expected->getIssuer(), $actual->getIssuer());        
+        $this->assertEqualsVerificationKey($expected->getPrimaryVerificationKey(), $actual->getPrimaryVerificationKey());
+        $this->assertEquals(count($expected->getAlternateVerificationKeys()), count($actual->getAlternateVerificationKeys()));
+        for($i = 0; $i < count($expected->getAlternateVerificationKeys()); $i++) {
+            $this->assertEqualsVerificationKey($expected->getAlternateVerificationKeys()[$i], $actual->getAlternateVerificationKeys()[$i]);
+        }
+        $this->assertEquals(count($expected->getRequiredClaims()), count($actual->getRequiredClaims()));
+        for($i = 0; $i < count($expected->getRequiredClaims()); $i++) {
+            $this->assertEqualsRequiredClaim($expected->getRequiredClaims()[$i], $actual->getRequiredClaims()[$i]);
+        }
+        if ($expected->getOpenIdConnectDiscoveryDocument() != null) {
+            $this->assertNotNull($actual->getOpenIdConnectDiscoveryDocument());
+            $this->assertEquals($expected->getOpenIdConnectDiscoveryDocument()->getOpenIdDiscoveryUri(), $actual->getOpenIdConnectDiscoveryDocument()->getOpenIdDiscoveryUri());
+        } else {
+            $this->assertNull($actual->getOpenIdConnectDiscoveryDocument());
+        }
+        
+    }
+    
+    public function assertEqualsVerificationKey($expected, $actual)  {
+        if ($expected instanceof SymmetricVerificationKey) {
+            $this->assertTrue($actual instanceof SymmetricVerificationKey);
+            $this->assertEquals($expected->getKeyValue(), $actual->getKeyValue());
+        }
+
+        if ($expected instanceof X509CertTokenVerificationKey) {
+            $this->assertTrue($actual instanceof X509CertTokenVerificationKey);
+            $this->assertEquals($expected->getRawBody(), $actual->getRawBody());
+        }
+    }
+
+    public function assertEqualsRequiredClaim($expected, $actual)  {
+        $this->assertEquals($expected->getClaimType(), $actual->getClaimType());
+        $this->assertEquals($expected->getClaimValue(), $actual->getClaimValue());
+    }
+
+
+    /**
+     * Assert that both PlayReadyLicenceResponseTemplate are equal
+     * @param PlayReadyLicenceResponseTemplate $expected 
+     * @param PlayReadyLicenceResponseTemplate $actual
+     */
+    public function assertEqualsLicenseResponseTemplate($expected, $actual) {
+        $this->assertEquals(count($expected->getLicenseTemplates()), count($actual->getLicenseTemplates()));
+        for($i = 0; $i < count($expected->getLicenseTemplates()); $i++) {
+            $this->assertEqualsLicenseTemplate($expected->getLicenseTemplates()[$i], $actual->getLicenseTemplates()[$i]);
+        }
+        $this->assertEquals($expected->getResponseCustomData(), $actual->getResponseCustomData());
+    }
+
+    public function assertEqualsLicenseTemplate($expected, $actual) {
+        $this->assertEquals($expected->getAllowTestDevices(), $actual->getAllowTestDevices());
+        $this->assertEquals($expected->getLicenseType(), $actual->getLicenseType());
+        $this->assertEquals($expected->getBeginDate(), $actual->getBeginDate());
+        $this->assertEquals($expected->getExpirationDate(), $actual->getExpirationDate());
+        $this->assertEquals($expected->getRelativeBeginDate(), $actual->getRelativeBeginDate());
+        $this->assertEquals($expected->getRelativeExpirationDate(), $actual->getRelativeExpirationDate());
+        $this->assertEquals($expected->getGracePeriod(), $actual->getGracePeriod());
+        $this->assertEquals($expected->getLicenseType(), $actual->getLicenseType());
+        $this->assertEqualsPlayRight($expected->getPlayRight(), $actual->getPlayRight());
+        $this->assertEqualsContentKey($expected->getContentKey(), $actual->getContentKey());
+    }
+
+    public function assertEqualsContentKey($expected, $actual)  {
+        if ($expected instanceof ContentEncryptionKeyFromHeader) {
+            $this->assertTrue($actual instanceof ContentEncryptionKeyFromHeader);
+        }
+
+        if ($expected instanceof ContentEncryptionKeyFromKeyIdentifier) {
+            $this->assertTrue($actual instanceof ContentEncryptionKeyFromKeyIdentifier);
+            $this->assertEquals($expected->getKeyIdentifier(), $actual->getKeyIdentifier());
+        }
+    }
+
+    public function assertEqualsPlayRight($expected, $actual) {
+        $this->assertNotNull($expected);
+        $this->assertNotNull($actual);
+
+        $this->assertEquals($expected->getAllowPassingVideoContentToUnknownOutput(), $actual->getAllowPassingVideoContentToUnknownOutput());
+        $this->assertEquals($expected->getDigitalVideoOnlyContentRestriction(), $actual->getDigitalVideoOnlyContentRestriction());
+        $this->assertEquals($expected->getAnalogVideoOpl(), $actual->getAnalogVideoOpl());
+        $this->assertEquals($expected->getCompressedDigitalAudioOpl(), $actual->getCompressedDigitalAudioOpl());
+        $this->assertEquals($expected->getImageConstraintForAnalogComponentVideoRestriction(), $actual->getImageConstraintForAnalogComponentVideoRestriction());
+        $this->assertEquals($expected->getImageConstraintForAnalogComputerMonitorRestriction(), $actual->getImageConstraintForAnalogComputerMonitorRestriction());
+        $this->assertEquals($expected->getCompressedDigitalVideoOpl(), $actual->getCompressedDigitalVideoOpl());
+        $this->assertEquals($expected->getUncompressedDigitalAudioOpl(), $actual->getUncompressedDigitalAudioOpl());
+
+        if ($expected->getScmsRestriction() != null) {
+            $this->assertNotNull($actual->getScmsRestriction());
+            $this->assertEquals($expected->getScmsRestriction()->getConfigurationData(), $actual->getScmsRestriction()->getConfigurationData());
+        }
+
+        if ($expected->getAgcAndColorStripeRestriction() != null) {
+            $this->assertNotNull($actual->getAgcAndColorStripeRestriction());
+            $this->assertEquals($expected->getAgcAndColorStripeRestriction()->getConfigurationData(), $actual->getAgcAndColorStripeRestriction()->getConfigurationData());
+        }
+
+        if ($expected->getExplicitAnalogTelevisionOutputRestriction() != null) {
+            $this->assertNotNull($actual->getExplicitAnalogTelevisionOutputRestriction());
+            $this->assertEquals($expected->getExplicitAnalogTelevisionOutputRestriction()->getBestEffort(), $actual->getExplicitAnalogTelevisionOutputRestriction()->getBestEffort());
+            $this->assertEquals($expected->getExplicitAnalogTelevisionOutputRestriction()->getConfigurationData(), $actual->getExplicitAnalogTelevisionOutputRestriction()->getConfigurationData());
+        }   
+    }
+
+    /**
+     * Assertion that both Widevine messages are equals.
+     * @param WidevineMessage $expected 
+     * @param WidevineMessage $actual 
+     */
+    public function assertEqualsWidevineMessage($expected, $actual) {
+        $this->assertEquals($expected->allowed_track_types, $actual->allowed_track_types);
+        $this->assertEquals(count($expected->content_key_specs), count($actual->content_key_specs));
+        for($i = 0; $i < count($expected->content_key_specs); $i++) {
+            $expectedCks = $expected->content_key_specs[$i];
+            $actualCks = $actual->content_key_specs[$i];
+            $this->assertEquals($expectedCks->track_type, $actualCks->track_type);
+            $this->assertEquals($expectedCks->key_id, $actualCks->key_id);
+            $this->assertEquals($expectedCks->security_level, $actualCks->security_level);
+            $this->assertEquals($expectedCks->required_output_protection, $actualCks->required_output_protection);
+            if (isset($expectedCks->required_output_protection) &&
+                isset($actualCks->required_output_protection)) {
+                $this->assertEquals($expectedCks->required_output_protection->hdcp, $actualCks->required_output_protection->hdcp);
+            }
+        }
+        $this->assertEquals($expected->policy_overrides, $actual->policy_overrides);
+    }
 }
