@@ -494,7 +494,7 @@ class ServicesBuilder
      */
     public static function getInstance()
     {
-        if (!isset(self::$instance)) {
+        if (!isset(self::$_instance)) {
             self::$_instance = new ServicesBuilder();
         }
 
