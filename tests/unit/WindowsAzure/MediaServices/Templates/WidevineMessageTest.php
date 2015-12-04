@@ -69,7 +69,7 @@ class WidevineMessageTest extends \PHPUnit_Framework_TestCase
         
         $actual = WidevineMessageSerializer::deserialize($json);
 
-        self::assertEqualsWidevineMessage($this, $expected, $actual);          
+        $this->assertEqualsWidevineMessage($expected, $actual);
     }
 
     /**
@@ -97,7 +97,7 @@ class WidevineMessageTest extends \PHPUnit_Framework_TestCase
         $actual = WidevineMessageSerializer::deserialize($json);
         
         // Assert
-        self::assertEqualsWidevineMessage($this, $expected, $actual);  
+        $this->assertEqualsWidevineMessage($expected, $actual);          
     }
 
     /**

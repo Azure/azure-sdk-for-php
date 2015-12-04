@@ -211,7 +211,7 @@ class TokenRestrictionTemplateSerializerTest extends \PHPUnit_Framework_TestCase
     {
 
         // Arrange
-        $expectedToken    = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cm46bWljcm9zb2Z0OmF6dXJlOm1lZGlhc2VydmljZXM6Y29udGVudGtleWlkZW50aWZpZXIiOiIwOTE0NDM1ZC0xNTAwLTgwYzQtNmMyYi1mMWU1MmZkYTQ3YWUiLCJpc3MiOiJodHRwczpcL1wvdHN0LmNvbnRvc28uY29tIiwiYXVkIjoidXJuOmNvbnRvc28iLCJpYXQiOjE0NTE2MDY0MDAsIm5iZiI6MTQ1MTYwNjQwMH0.9wJi4tlQ0poa206zamQXizSQqBvUgmD3rUBLL1TYk6w";
+        $expectedToken    = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cm46bWljcm9zb2Z0OmF6dXJlOm1lZGlhc2VydmljZXM6Y29udGVudGtleWlkZW50aWZpZXIiOiIwOTE0NDM1ZC0xNTAwLTgwYzQtNmMyYi1mMWU1MmZkYTQ3YWUiLCJpc3MiOiJodHRwczpcL1wvdHN0LmNvbnRvc28uY29tIiwiYXVkIjoidXJuOmNvbnRvc28iLCJleHAiOjE0NTE2MDY0MDAsIm5iZiI6MTQ1MTYwNjQwMH0.voBCckYtSgVq6Z1Y8gwOBJO8DfH4-dX9ACmvSSHADso";
         $knownSymetricKey = "64bytes6RNhi8EsxcYsdYQ9zpFuNR1Ks9milykbxYWGILaK0LKzd5dCtYonsr456";
         $knownGuid        = "0914435d-1500-80c4-6c2b-f1e52fda47ae";
         $knownExpireOn    = 1451606400; // 2016-01-01 as Unix Epoch;
