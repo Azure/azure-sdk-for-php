@@ -43,7 +43,9 @@ Microsoft Azure tables, blobs, queues, service bus (queues and topics), service 
   * Encoding / process asset, create job, job templates
   * Manage media services entities: create / update / read / delete / get list
   * Delivery SAS and Streaming media content
-  * REST API Version: 2.2
+  * Dynamic encryption: AES and DRM (PlayReady/Widevine) with and without Token restriction
+  * Scale encoding reserved unit type
+  * REST API Version: 2.11
 
   
 # Getting Started
@@ -646,11 +648,11 @@ $access->setDurationInMinutes([Munites AccessPolicy is valid]);
 $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
 $access = $restProxy->createAccessPolicy($access);
 
-$locator = new Locator($asset,  $access, Locator::TYPE_SAS);
-$locator->setStartTime(new \DateTime('now -5 minutes'));
-$locator = $restProxy->createLocator($locator);
+$sasLocator = new Locator($asset,  $access, Locator::TYPE_SAS);
+$sasLocator->setStartTime(new \DateTime('now -5 minutes'));
+$sasLocator = $restProxy->createLocator($sasLocator);
 
-$restProxy->uploadAssetFile($locator, '[file name]', '[file content]');
+$restProxy->uploadAssetFile($sasLocator, '[file name]', '[file content]');
 $restProxy->createFileInfos($asset);
 ```
 
@@ -668,7 +670,7 @@ $restProxy->createJob(new Job(), array($inputAsset), array($task));
 
 ###Get public URL to encoded asset
 
-After you’ve uploaded a media file and encode it you can get a download URL for that file. Create a new access policy with read permission and link it with job output asset via locator.
+After you’ve uploaded a media file and encode it you can get a download URL for that file or a streaming URL for multiple bitrate files. Create a new access policy with read permission and link it with job output asset via locator.
 
 ```PHP
 $accessPolicy = new AccessPolicy('[Some access policy name]');
@@ -676,14 +678,24 @@ $accessPolicy->setDurationInMinutes([Munites AccessPolicy is valid]);
 $accessPolicy->setPermissions(AccessPolicy::PERMISSIONS_READ);
 $accessPolicy = $restProxy->createAccessPolicy($accessPolicy);
 
-$locator = new Locator($asset, $accessPolicy, Locator::TYPE_SAS);
-$locator->setStartTime(new \DateTime('now -5 minutes'));
-$locator = $restProxy->createLocator($locator);
+// Download URL
+$sasLocator = new Locator($asset, $accessPolicy, Locator::TYPE_SAS);
+$sasLocator->setStartTime(new \DateTime('now -5 minutes'));
+$sasLocator = $restProxy->createLocator($sasLocator);
 
 // Azure needs time to publish media
 sleep(30);
 
-$url = $locator->getBaseUri() . '/' . '[File name]' . $locator->getContentAccessComponent()
+$downloadUrl = $sasLocator->getBaseUri() . '/' . '[File name]' . $sasLocator->getContentAccessComponent()
+
+// Streaming URL
+$originLocator = new Locator($asset, $accessPolicy, Locator::TYPE_ON_DEMAND_ORIGIN);
+$originLocator = $restProxy->createLocator($originLocator);
+
+// Azure needs time to publish media
+sleep(30);
+
+$streamingUrl = $originLocator->getPath() . '[Manifest file name]' . "/manifest";
 ```
 
 ###Manage media services entities
@@ -698,7 +710,7 @@ Erase entities with methods like “deleteAsset”, “deleteAccessPolicy”, �
 
 Also you could get linked entities with methods “getAssetLocators”, “getAssetParentAssets”, “getAssetStorageAccount”, “getLocatorAccessPolicy”, “getJobTasks” and etc. passing the entity identifier or entity data model object with non-empty identifier as a parameter.
 
-The complete list of all methods available you could find in IMediaServices interface.
+The complete list of all methods available you could find in [IMediaServices](WindowsAzure/MediaServices/Internal/IMediaServices.php) interface.
 
 **For more examples please see the [Microsoft Azure PHP Developer Center](http://www.windowsazure.com/en-us/develop/php)**
 

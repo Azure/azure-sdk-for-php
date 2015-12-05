@@ -605,5 +605,239 @@ interface IMediaServices extends FilterableService
      * @return none
      */
     public function deleteIngestManifestFile($ingestManifestFile);
+
+        /**
+     * Create new content key authorization policy
+     *
+     * @param Models\ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy ContentKeyAuthorizationPolicy data
+     *
+     * @return Models\ContentKeyAuthorizationPolicy Created ContentKeyAuthorizationPolicy
+     */
+    public function createContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy);
+
+    /**
+     * Get content key authorization policy
+     *
+     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationPolicy ContentKeyAuthorizationPolicies data or
+     * content key authorization policy Id
+     *
+     * @return \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy
+     */
+    public function getContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy);
+
+    /**
+     * Get content key authorization policies list
+     *
+     * @return array of Models\ContentKeyAuthorizationPolicy
+     */
+    public function getContentKeyAuthorizationPolicyList();
+
+    /**
+     * Update content key authorization policy
+     *
+     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy New content key authorization policy data with
+     * valid id
+     *
+     * @return void
+     */
+    public function updateContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy);
+    
+    /**
+     * Delete content key authorization policy
+     *
+     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationPolicy Models\ContentKeyAuthorizationPolicy data or
+     * content key authorization policy Id
+     *
+     * @return void
+     */
+    public function deleteContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy);
+    
+    /**
+     * Create new content key authorization options
+     *
+     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption ContentKeyAuthorizationPolicyOption ContentKeyAuthorizationPolicyOption data
+     *
+     * @return \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption Created ContentKeyAuthorizationPolicyOption
+     */
+    public function createContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOptions);
+
+    /**
+     * Get content key authorization option by id
+     *
+     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationPolicy ContentKeyAuthorizationPolicies data or
+     * content key authorization policy Id
+     *
+     * @return \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption
+     */
+    public function getContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOptions);
+    
+    /**
+     * Get content key authorization options
+     *
+     * @return array of Models\ContentKeyAuthorizationPolicyOption
+     */
+    public function getContentKeyAuthorizationPolicyOptionList();
+
+    /**
+     * Update content key authorization options
+     *
+     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions New content key authorization options data with
+     * valid id
+     *
+     * @return void
+     */
+    public function updateContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOptions);
+    
+    /**
+     * Delete content key authorization policy
+     *
+     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationPolicy Models\ContentKeyAuthorizationPolicy data or
+     * content key authorization policy Id
+     *
+     * @return void
+     */
+    public function deleteContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOptions);
+
+    /**
+     * Get ContentKeyAuthorizationPolicy linked Options
+     *
+     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy|string $asset ContentKeyAuthorizationPolicy data or
+     * ContentKeyAuthorizationPolicy Id
+     *
+     * @return array
+     */
+    public function getContentKeyAuthorizationPolicyLinkedOptions($policy);
+
+    /**
+     * Link ContentKeyAuthorizationPolicyOption to ContentKeyAuthorizationPolicy
+     *
+     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption|string        $options        ContentKeyAuthorizationPolicyOption to link a ContentKeyAuthorizationPolicy or ContentKeyAuthorizationPolicyOption id
+     *
+     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy|string               $policy         ContentKeyAuthorizationPolicy to link or ContentKeyAuthorizationPolicy id
+     *
+     * @return void
+     */
+    public function linkOptionToContentKeyAuthorizationPolicy($options, $policy);
+    
+    /**
+     * Remove ContentKeyAuthorizationPolicyOption from ContentKeyAuthorizationPolicy
+     *
+     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption|string        $options        ContentKeyAuthorizationPolicyOption to remove from ContentKeyAuthorizationPolicy or ContentKeyAuthorizationPolicyOption id
+     *
+     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy|string               $policy         ContentKeyAuthorizationPolicy to remove or ContentKeyAuthorizationPolicy id
+     *
+     * @return void
+     */
+    public function removeOptionsFromContentKeyAuthorizationPolicy($options, $policy);
+    
+    /**
+     * Create new asset delivery policy
+     *
+     * @param \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy $assetDeliveryPolicy AssetDeliveryPolicy data
+     *
+     * @return \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy Created AssetDeliveryPolicy
+     */
+    public function createAssetDeliveryPolicy($assetDeliveryPolicy);
+    
+    /**
+     * Get asset delivery policy
+     *
+     * @return \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy
+     */
+    public function getAssetDeliveryPolicy($assetDeliveryPolicy);
+
+    /**
+     * Get asset delivery policies list
+     *
+     * @return array of Models\AssetDeliveryPolicy
+     */
+    public function getAssetDeliveryPolicyList();
+    
+    /**
+     * Update asset delivery policy
+     *
+     * @param \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy $assetDeliveryPolicy New asset delivery policy data with
+     * valid id
+     *
+     * @return void
+     */
+    public function updateAssetDeliveryPolicy($assetDeliveryPolicy);
+    
+    /**
+     * Delete asset delivery policy
+     *
+     * @param \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy|string $assetDeliveryPolicy Models\AssetDeliveryPolicy data or
+     * asset delivery policy Id
+     *
+     * @return void
+     */
+    public function deleteAssetDeliveryPolicy($assetDeliveryPolicy);
+    
+    /**
+     * Get AssetDeliveryPolicy list linked to an Asset 
+     *
+     * @param \WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
+     * Asset Id to retrieve the linked delivery policies.
+     *
+     * @return array
+     */
+    public function getAssetLinkedDeliveryPolicy($asset);
+
+    /**
+     * Link AssetDeliveryPolicy to Asset
+     *
+     * @param \WindowsAzure\MediaServices\Models\Asset|string      $asset      Asset to link a AssetDeliveryPolicy or
+     * Asset id
+     *
+     * @param \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy|string $policy DeliveryPolicy to link or
+     * DeliveryPolicy id
+     *
+     * @return void
+     */
+    public function linkDeliveryPolicyToAsset($asset, $policy);
+    
+    /**
+     * Remove AssetDeliveryPolicy from Asset
+     *
+     * @param \MediaServices\Models\Asset|string      $asset      Asset to remove a AssetDeliveryPolicy or
+     * Asset id
+     *
+     * @param \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy|string $contentKey DeliveryPolicy to remove or
+     * DeliveryPolicy id
+     *
+     * @return void
+     */
+    public function removeDeliveryPolicyFromAsset($asset, $policy);
+    
+    /**
+     * Link AssetDeliveryPolicy to Asset
+     *
+     * @param \WindowsAzure\MediaServices\Models\Asset|string      $asset      Asset to link a AssetDeliveryPolicy or
+     * Asset id
+     *
+     * @param \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy|string $policy DeliveryPolicy to link or
+     * DeliveryPolicy id
+     *
+     * //@return void
+     */
+    public function getKeyDeliveryUrl($contentKey, $contentKeyDeliveryType);
+
+    /**
+     * Get encoding reserved units settings.
+     *
+     *
+     * @return \WindowsAzure\MediaServices\Models\EncodingReservedUnit
+     */
+    public function getEncodingReservedUnit();
+
+    /**
+     * Update encoding reserved units settings.
+     *
+     * @param \WindowsAzure\MediaServices\Models\EncodingReservedUnit $encodingReservedUnit Update data
+     * valid idli
+     *
+     * @return void
+     */
+    public function updateEncodingReservedUnit($encodingReservedUnit);
 }
 

@@ -57,6 +57,8 @@ use WindowsAzure\MediaServices\Models\ContentKey;
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy;
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption;
 use WindowsAzure\MediaServices\Models\AssetDeliveryPolicy;
+use WindowsAzure\MediaServices\Models\EncodingReservedUnit;
+use WindowsAzure\MediaServices\Models\EncodingReservedUnitType;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for media services
@@ -353,7 +355,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $body
         );
     }
-
+    
     /**
      * Delete entity
      *
@@ -2572,7 +2574,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return void
      */
-    public function linkOptionsToContentKeyAuthorizationPolicy($options, $policy)
+    public function linkOptionToContentKeyAuthorizationPolicy($options, $policy)
     {
         $optionsId = Utilities::getEntityId(
             $options,
@@ -2671,9 +2673,6 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
     /**
      * Get asset delivery policy
-     *
-     * @param Models\ContentKeyAuthorizationPolicy|string $assetDeliveryPolicy ContentKeyAuthorizationPolicies data or
-     * content key authorization policy Id
      *
      * @return Models\AssetDeliveryPolicy
      */
@@ -2902,4 +2901,35 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
     }
 
+    /**
+     * Get encoding reserved units settings.
+     *
+     *
+     * @return Models\EncodingReservedUnit
+     */
+    public function getEncodingReservedUnit()
+    {
+        $units = $this->_getEntityList("EncodingReservedUnitTypes");
+        if (isset($units) && count($units) > 0) {
+            return EncodingReservedUnit::createFromOptions($units[0]);
+        }
+        return null;        
+    }
+
+    /**
+     * Update encoding reserved units settings.
+     *
+     * @param Models\EncodingReservedUnit $encodingReservedUnit Update data
+     * valid idli
+     *
+     * @return void
+     */
+    public function updateEncodingReservedUnit($encodingReservedUnit)
+    {
+        Validate::isA($encodingReservedUnit, 'WindowsAzure\MediaServices\Models\EncodingReservedUnit', 'encodingReservedUnit');
+        $accountID = $encodingReservedUnit->getAccountId();
+        $encodingReservedUnit->setAccountId(null); // never send account Id
+        $this->_updateEntity($encodingReservedUnit, "EncodingReservedUnitTypes(guid'{$accountID}')");
+        $encodingReservedUnit->setAccountId($accountID);
+    }
 }
