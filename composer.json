@@ -23,6 +23,6 @@
         "psr-0": { "WindowsAzure\\": "" }
     },
 	"include-path": [
-		"../pear/http_request2"
+		"../../pear/http_request2"
 	]
 }
