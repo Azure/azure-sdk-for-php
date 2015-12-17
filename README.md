@@ -67,15 +67,17 @@ To get the source code from GitHub, type
 ```json
     {
       "require": {
-        "microsoft/windowsazure": "*"
+        "microsoft/windowsazure": "dev-dev",
+        "pear-pear.php.net/http_request2": "*",
+        "pear-pear.php.net/mail_mime": "*",
+        "pear-pear.php.net/mail_mimedecode": "*"
       },      
       "repositories": [
         {
           "type": "pear",
           "url": "http://pear.php.net"
         }
-      ],
-      "minimum-stability": "dev"
+      ]
     }
 ```
 2. Download **[composer.phar](http://getcomposer.org/composer.phar)** in your project root.
