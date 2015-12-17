@@ -319,6 +319,20 @@ try	{
 ```
 
 
+### Using a Stream Wrapper
+
+You can use the PHP Stream Wrapper API to interact with Windows Azure Blob Storage:
+
+```PHP
+use WindowsAzure\Blob\Stream;
+
+Stream::register($blobRestProxy, 'azure');
+
+$fp = fopen('azure://container_name/file.txt');
+fwrite($fp, 'Hello Windows Azure!');
+fclose($fp);
+```
+
 ## Storage Queues
 
 To get started using the Queue service you must include the `QueueService` and `QueueSettings` namespaces and set the `ACCOUNT_NAME` and `ACCOUNT_KEY` configuration settings for your credentials. Then you instantiate the wrapper using the `QueueService` factory.

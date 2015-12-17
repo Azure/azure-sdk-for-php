@@ -28,6 +28,7 @@ spl_autoload_register(
       if ($classes === null) {
          $classes = array(
             'windowsazure\\blob\\blobrestproxy' => '/Blob/BlobRestProxy.php',
+            'windowsazure\\blob\\stream' => '/Blob/Stream.php',
             'windowsazure\\blob\\internal\\iblob' => '/Blob/Internal/IBlob.php',
             'windowsazure\\blob\\models\\accesscondition' => '/Blob/Models/AccessCondition.php',
             'windowsazure\\blob\\models\\accesspolicy' => '/Blob/Models/AccessPolicy.php',
