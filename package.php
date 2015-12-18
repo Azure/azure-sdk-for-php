@@ -29,13 +29,14 @@ PEAR::setErrorHandling(PEAR_ERROR_DIE);
 $p = &PEAR_PackageFileManager2::importOptions(
     dirname(__FILE__) . DIRECTORY_SEPARATOR . 'package.xml',
     array(
-      'packagefile' => 'package.xml',
-	  'ignore' => $ignore,
-      'filelistgenerator' => 'file',
-      'packagedirectory' => dirname(__FILE__),
-      'changelogoldtonew' => false,
-      'simpleoutput' => false
-      ));
+        'packagefile' => 'package.xml',
+        'ignore' => $ignore,
+        'filelistgenerator' => 'file',
+        'packagedirectory' => dirname(__FILE__),
+        'changelogoldtonew' => false,
+        'simpleoutput' => false
+    )
+);
 $p->addInclude($include);
 $p->setPackage(PACKAGE_NAME);
 $p->setSummary(PACKAGE_SUMMARY);
@@ -62,7 +63,7 @@ foreach($dependencies as $dependency) {
 $p->generateContents();
 
 if (isset($_GET['make']) || (isset($_SERVER['argv']) && @$_SERVER['argv'][1] == 'make')) {
-	$p->writePackageFile();
+    $p->writePackageFile();
 } else {
     $p->debugPackageFile();
 }
