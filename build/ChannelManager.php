@@ -104,32 +104,32 @@ class ChannelManager
     {
         $answer = self::_promptMsg('Create new channel? [n]:', true);
         switch ($answer) {
-        case 'y':
-            self::_createNewChannel();
-            self::_uploadChannel();
-            self::_executeCommand('pear channel-discover ' . CHANNEL_NAME);
-            break;
-        case 'n':
-        case '':
-            self::_downloadChannel();
-            break;
+            case 'y':
+                self::_createNewChannel();
+                self::_uploadChannel();
+                self::_executeCommand('pear channel-discover ' . CHANNEL_NAME);
+                break;
+            case 'n':
+            case '':
+                self::_downloadChannel();
+                break;
         }
 
         do {
-        $answer = self::_promptMsg('Want to remove exisitng package? [n]:', true);
-        switch ($answer) {
-        case 'y':
-            self::_removePackage();
-            break;
-        }
+            $answer = self::_promptMsg('Want to remove exisitng package? [n]:', true);
+            switch ($answer) {
+                case 'y':
+                    self::_removePackage();
+                    break;
+            }
         } while ($answer == 'y');
 
         $answer = self::_promptMsg('Want to add current package? [y]:', true);
         switch ($answer) {
-        case 'y':
-        case '':
-            self::_addPackage();
-            break;
+            case 'y':
+            case '':
+                self::_addPackage();
+                break;
         }
 
         self::_uploadChannel();
@@ -450,4 +450,3 @@ class ChannelManager
 }
 
 ChannelManager::main();
-
