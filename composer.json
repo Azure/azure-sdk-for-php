@@ -24,7 +24,12 @@
     "autoload": {
         "psr-0": { "WindowsAzure\\": "" }
     },
-	"include-path": [
-		"../../pear/http_request2"
-	]
+    "include-path": [
+        "../../pear/http_request2"
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.4-dev"
+        }
+    }
 }
