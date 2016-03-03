@@ -2876,7 +2876,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         );
         $contentKeyId = urlencode($contentKeyId);
         
-        $body        = json_encode(['keyDeliveryType' => $contentKeyDeliveryType]);
+        $body        = json_encode(array('keyDeliveryType' => $contentKeyDeliveryType));
 
         $method      = Resources::HTTP_POST;
         $path        = "ContentKeys('{$contentKeyId}')/GetKeyDeliveryUrl";

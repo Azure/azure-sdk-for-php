@@ -173,7 +173,7 @@ class AssetFile
      * @return string[]
      */
     public function requiredFields() {
-        return ['Name', 'ParentAssetId'];
+        return array('Name', 'ParentAssetId');
     }
 
     /**
