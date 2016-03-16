@@ -79,6 +79,11 @@ class CreateBlobOptions extends BlobServiceOptions
     private $_blobContentLanguage;
     
     /**
+     * @var integer
+     */
+    private $_blobContentLength;
+
+    /**
      * @var string
      */
     private $_blobContentMD5;
@@ -103,6 +108,11 @@ class CreateBlobOptions extends BlobServiceOptions
      */
     private $_sequenceNumber;
     
+    /**
+     * @var string
+     */
+    private $_sequenceNumberAction;
+
     /**
      * @var AccessCondition
      */
@@ -174,6 +184,28 @@ class CreateBlobOptions extends BlobServiceOptions
         $this->_blobContentLanguage = $blobContentLanguage;
     }
     
+    /**
+     * Gets blob ContentLength.
+     *
+     * @return integer.
+     */
+    public function getBlobContentLength()
+    {
+        return $this->_blobContentLength;
+    }
+
+    /**
+     * Sets blob ContentLength.
+     *
+     * @param integer $blobContentLength value.
+     *
+     * @return none.
+     */
+    public function setBlobContentLength($blobContentLength)
+    {
+        $this->_blobContentLength = blobContentLength;
+    }
+
     /**
      * Gets blob ContentMD5.
      *
@@ -395,6 +427,28 @@ class CreateBlobOptions extends BlobServiceOptions
         $this->_sequenceNumber = $sequenceNumber;
     }
     
+    /**
+     * Gets blob sequenceNumberAction.
+     *
+     * @return string.
+     */
+    public function getSequenceNumberAction()
+    {
+        return $this->_sequenceNumberAction;
+    }
+
+    /**
+     * Sets blob sequenceNumberAction.
+     *
+     * @param string $sequenceNumberAction value.
+     *
+     * @return none.
+     */
+    public function setSequenceNumberAction($sequenceNumberAction)
+    {
+        $this->_sequenceNumberAction = $sequenceNumberAction;
+    }
+
     /**
      * Gets lease Id for the blob
      * 
