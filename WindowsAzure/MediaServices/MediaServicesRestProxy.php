@@ -431,6 +431,32 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
+    * Get asset list by params
+    *
+    * @param array of parameters to be added to request URL as query string
+    * such as $skip, $filter, $top, and so on
+    * 
+    * @return array of Models\Asset
+    */
+    public function getAssetListByParams($params)
+    {
+
+        $p = array();
+        foreach($params as $k => $v){
+            $p[] = $k.'='.$v;
+        }
+        $paramstr = implode('&', $p);
+        $propertyList = $this->_getEntityList("Assets()?" . $paramstr );
+        $result       = array();
+
+        foreach ($propertyList as $properties) {
+            $result[] = Asset::createFromOptions($properties);
+        }
+
+        return $result;
+    }
+
+    /**
      * Get asset locators
      *
      * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
