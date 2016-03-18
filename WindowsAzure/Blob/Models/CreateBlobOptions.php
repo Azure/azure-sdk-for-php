@@ -204,7 +204,7 @@ class CreateBlobOptions extends BlobServiceOptions
     public function setBlobContentLength($blobContentLength)
     {
         Validate::isInteger($blobContentLength, 'blobContentLength');
-        $this->_blobContentLength = blobContentLength;
+        $this->_blobContentLength = $blobContentLength;
     }
 
     /**
