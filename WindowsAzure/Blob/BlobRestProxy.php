@@ -1349,16 +1349,11 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
                 }
                 if (!empty($body)) {
                     $block = new Block();
-                    $block->setBlockId(base64_encode(str_pad($counter++, '0', 6)));
+                    $block->setBlockId(base64_encode(str_pad($counter++, 6, '0',STR_PAD_LEFT)));
                     $block->setType('Uncommitted');
                     array_push($blockIds, $block);
                     $this->createBlobBlock($container, $blob, $block->getBlockId(), $body);
-                }
-                $block = new Block();
-                $block->setBlockId(base64_encode(str_pad($counter++, 6, '0',STR_PAD_LEFT)));
-                $block->setType('Uncommitted');
-                array_push($blockIds, $block);
-                $this->createBlobBlock($container, $blob, $block->getBlockId(), $body);
+                }    
             }
             $response = $this->commitBlobBlocks($container, $blob, $blockIds, $options);
         }
