@@ -241,7 +241,7 @@ class AtomReaderWriter implements IAtomReaderWriter
             
             $entity->addProperty(
                 (string)$key,
-                is_null($type) ? null : (string)$type,
+                is_null($type) ? EdmType::STRING : (string)$type,
                 $isnull ? null : $value
             );
         }
