@@ -18,6 +18,7 @@
         "firebase/php-jwt": "^3.0"
     },
     "require-dev": {
+        "phing/phing": "2.*",
         "mikey179/vfsStream": "^1.6",
         "phpunit/phpunit": "^4.7"
     },
