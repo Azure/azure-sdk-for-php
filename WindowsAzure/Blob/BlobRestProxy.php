@@ -194,7 +194,11 @@ class BlobRestProxy extends ServiceRestProxy implements IBlob
             $encodedBlob = $container . '/' . $encodedBlob;
         }
         
-        return $this->getUri() . '/' . $encodedBlob;
+        if (substr($encodedBlob, 0, 1) != '/' && substr($this->getUri(), -1, 1) != '/')
+        {
+            $encodedBlob =  '/' .  $encodedBlob;
+        }
+        return $this->getUri() . $encodedBlob;
     }
     
     /**
