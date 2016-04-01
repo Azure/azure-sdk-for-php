@@ -22,12 +22,13 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceRuntime\Internal\ChannelNotAvailableException;
 use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
-
-require_once 'vfsStream/vfsStream.php';
 
 /**
  * Unit tests for class FileInputChannel.
@@ -53,17 +54,17 @@ class FileInputChannelTest extends \PHPUnit_Framework_TestCase
         $fileContent = 'somecontent';
 
         // Setup
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         // Test
         $fileInputChannel = new FileInputChannel();
-        $inputStream = $fileInputChannel->getInputStream(\vfsStream::url($rootDirectory . '/' . $fileName));
+        $inputStream = $fileInputChannel->getInputStream(vfsStream::url($rootDirectory . '/' . $fileName));
         
         $inputChannelContents = stream_get_contents($inputStream);
         $this->assertEquals($fileContent, $inputChannelContents);
@@ -72,7 +73,7 @@ class FileInputChannelTest extends \PHPUnit_Framework_TestCase
         
         // invalid file
         $this->setExpectedException(get_class(new ChannelNotAvailableException()));
-        $fileInputChannel->getInputStream(\vfsStream::url($rootDirectory . '/' . 'fakeinput'));
+        $fileInputChannel->getInputStream(vfsStream::url($rootDirectory . '/' . 'fakeinput'));
     }
 }
 

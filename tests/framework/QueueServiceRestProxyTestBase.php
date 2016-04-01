@@ -68,7 +68,8 @@ class QueueServiceRestProxyTestBase extends ServiceRestProxyTestBase
         catch (\Exception $e)
         {
             // Ignore exception and continue, will assume that this queue doesn't exist in the sotrage account
-            error_log($e->getMessage());
+            // no need to show the error messages here.
+            //error_log($e->getMessage());
         }
     }
     

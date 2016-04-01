@@ -4,7 +4,6 @@
 <phpunit bootstrap="tests/WindowsAzureTests.php"
          backupGlobals="false"
          backupStaticAttributes="false"
-         strict="true"
          verbose="true">
   <testsuites>
     <testsuite name="azure-sdk-for-php">

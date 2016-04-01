@@ -49,6 +49,7 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function setUp()
     {
+        $this->skipIfEmulated();
         parent::setUp();
         $serviceBusWrapper = $this->builder->createServiceBusService(TestResources::getServiceBusConnectionString());
         $this->_createdTopics = array();
@@ -92,7 +93,8 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
         }
         catch (\Exception $e)
         {
-            error_log($e->getMessage());
+            // no need to show the error messages here. They are benign. 
+            //error_log($e->getMessage());
         }
     }
 
@@ -104,7 +106,8 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
         }
         catch (\Exception $e)
         {
-            error_log($e->getMessage());
+            // no need to show the error messages here. They are benign.
+            //error_log($e->getMessage());
         }
     }
 
@@ -116,7 +119,8 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
         }
         catch (\Exception $e)
         {
-            error_log($e->getMessage());
+            // no need to show the error messages here. They are benign.
+            //error_log($e->getMessage());
         }
     }
 
@@ -128,7 +132,8 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
         }
         catch (\Exception $e)
         {
-            error_log($e->getMessage());
+            // no need to show the error messages here. They are benign.
+            //error_log($e->getMessage());
         } 
     }
     

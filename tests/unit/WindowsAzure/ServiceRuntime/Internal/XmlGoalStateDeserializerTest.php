@@ -22,11 +22,12 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
 use Tests\Framework\TestResources;
 use WindowsAzure\ServiceRuntime\Internal\GoalState;
 use WindowsAzure\ServiceRuntime\Internal\XmlGoalStateDeserializer;
-
-require_once 'vfsStream/vfsStream.php';
 
 /**
  * Unit tests for class XmlGoalStateDeserializer.

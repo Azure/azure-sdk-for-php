@@ -10,10 +10,6 @@
       <directory suffix="Test.php">tests/unit</directory>
     </testsuite>
   </testsuites>
-  
-  <php>
-    <includePath>Tests\Unit\WindowsAzure\MediaServices\Templates\</includePath>
-  </php>
 
   <logging>
     <log type="coverage-html" target="build/coverage" title="azure-sdk-for-php"

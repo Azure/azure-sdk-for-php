@@ -22,6 +22,9 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState;
@@ -83,11 +86,11 @@ class Protocol1RuntimeCurrentStateClientTest extends \PHPUnit_Framework_TestCase
             '</StatusLease>' .
             '</CurrentState>';
         
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
-        $file = \vfsStream::newFile($fileName);
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        $file = vfsStream::newFile($fileName);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $serializer = new XmlCurrentStateSerializer();
         $fileOutputChannel = new FileOutputChannel();
@@ -99,7 +102,7 @@ class Protocol1RuntimeCurrentStateClientTest extends \PHPUnit_Framework_TestCase
             );
         
         $protocol1RuntimeCurrentStateClient->setEndpoint(
-            \vfsStream::url($rootDirectory . '/' . $fileName)
+            vfsStream::url($rootDirectory . '/' . $fileName)
         );
         
         // Test
@@ -114,7 +117,7 @@ class Protocol1RuntimeCurrentStateClientTest extends \PHPUnit_Framework_TestCase
         
         $fileInputChannel = new FileInputChannel();
         $fileInputStream = $fileInputChannel->getInputStream(
-            \vfsStream::url($rootDirectory . '/' . $fileName)
+            vfsStream::url($rootDirectory . '/' . $fileName)
         );
         
         $inputChannelContents = stream_get_contents($fileInputStream);

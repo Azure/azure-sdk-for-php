@@ -53,8 +53,8 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
         // Test
         $request = $filter->handleRequest($channel);
         
-        // Assert
-        $this->assertCount(0, $request->getHeaders());
+        // Assert. there is one header returned back
+        $this->assertCount(1, $request->getHeaders());
     }
     
     /**

@@ -905,8 +905,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $result = $this->restProxy->batch($operations);
         
         // Assert
-        $entries = $result->getEntries();
-        $actual = $entries[0]->getEntity();
+        $result = $this->restProxy->getEntity($name, $partitionKey, $rowKey);
+        $actual = $result->getEntity();
         $this->assertEquals($expected->getPartitionKey(), $actual->getPartitionKey());
         $this->assertEquals($expected->getRowKey(), $actual->getRowKey());
         // Increase the properties count to include Timestamp property.
@@ -980,7 +980,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $result = $this->restProxy->batch($operations);
         
         // Assert
-        $entries = $result->getEntries();
+        $result = $this->restProxy->getEntity($name, $partitionKey, $rowKey);
+        $entries[] = $result->getEntity();
         $this->assertNotNull($entries[0]->getETag());
         $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
@@ -1023,7 +1024,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $result = $this->restProxy->batch($operations);
         
         // Assert
-        $entries = $result->getEntries();
+        $result = $this->restProxy->getEntity($name, $partitionKey, $rowKey);
+        $entries[] = $result->getEntity();
         $this->assertNotNull($entries[0]->getETag());
         $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
@@ -1049,7 +1051,7 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
     public function testBatchWithInsertOrReplace()
     {
         $this->skipIfEmulated();
-        
+
         // Setup
         $name = 'batchwithinsertorreplace';
         $this->createTable($name);
@@ -1068,7 +1070,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $result = $this->restProxy->batch($operations);
         
         // Assert
-        $entries = $result->getEntries();
+        $result = $this->restProxy->getEntity($name, $partitionKey, $rowKey);
+        $entries[] = $result->getEntity();
         $this->assertNotNull($entries[0]->getETag());
         $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
@@ -1113,7 +1116,8 @@ class TableRestProxyTest extends TableServiceRestProxyTestBase
         $result = $this->restProxy->batch($operations);
         
         // Assert
-        $entries = $result->getEntries();
+        $result = $this->restProxy->getEntity($name, $partitionKey, $rowKey);
+        $entries[] = $result->getEntity();
         $this->assertNotNull($entries[0]->getETag());
         $result = $this->restProxy->queryEntities($name);
         $entities = $result->getEntities();
