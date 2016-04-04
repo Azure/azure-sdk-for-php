@@ -22,13 +22,14 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceRuntime\Internal\ChannelNotAvailableException;
 use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
 use WindowsAzure\ServiceRuntime\Internal\FileOutputChannel;
-
-require_once 'vfsStream/vfsStream.php';
 
 /**
  * Unit tests for class FileOutputChannel.
@@ -53,15 +54,15 @@ class FileOutputChannelTest extends \PHPUnit_Framework_TestCase
         $fileContents = 'Hello World!';
         
         // Setup
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
-        $file = \vfsStream::newFile($fileName);
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        $file = vfsStream::newFile($fileName);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         // Test
         $fileOutputChannel = new FileOutputChannel();
-        $outputStream = $fileOutputChannel->getOutputStream(\vfsStream::url($rootDirectory . '/' . $fileName));
+        $outputStream = $fileOutputChannel->getOutputStream(vfsStream::url($rootDirectory . '/' . $fileName));
 
         // Write content to file
         fwrite($outputStream, $fileContents);
@@ -69,7 +70,7 @@ class FileOutputChannelTest extends \PHPUnit_Framework_TestCase
 
         // Test file content
         $fileInputChannel = new FileInputChannel();
-        $fileInputStream = $fileInputChannel->getInputStream(\vfsStream::url($rootDirectory . '/' . $fileName));
+        $fileInputStream = $fileInputChannel->getInputStream(vfsStream::url($rootDirectory . '/' . $fileName));
         
         $inputChannelContents = stream_get_contents($fileInputStream);
         $this->assertEquals($fileContents, $inputChannelContents);

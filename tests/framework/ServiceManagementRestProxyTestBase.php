@@ -41,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
  * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServiceManagementRestProxyTestBase extends RestProxyTestBase
+class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
 {
     protected $createdStorageServices;
     protected $createdHostedServices;
@@ -55,10 +55,12 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
 
     public function setUp()
     {
+        $this->skipIfEmulated();
+
         parent::setUp();
         $serviceManagementRestProxy = $this->builder->createServiceManagementService(TestResources::getServiceManagementConnectionString());
         parent::setProxy($serviceManagementRestProxy);
-        
+
         $result = $serviceManagementRestProxy->listLocations();
         $locations = $result->getLocations();
         $firstLocation = $locations[0];
@@ -171,7 +173,8 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         catch (\Exception $e)
         {
             // Ignore exception and continue, will assume that this storage account doesn't exist 
-            error_log($e->getMessage());
+            // The errors are benign, no need to show them
+            //error_log($e->getMessage());
         }
     }
     
@@ -213,7 +216,8 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         catch (\Exception $e)
         {
             // Ignore exception and continue, will assume that this hosted account doesn't exist 
-            error_log($e->getMessage());
+            // The errors are benign, no need to show them
+            // error_log($e->getMessage());
         }
     }
     
@@ -357,7 +361,8 @@ class ServiceManagementRestProxyTestBase extends RestProxyTestBase
         catch (\Exception $e)
         {
             // Ignore exception and continue, will assume that this hosted account doesn't exist 
-            error_log($e->getMessage());
+            // The errors are benign, no need to show them
+            //error_log($e->getMessage());
         }
     }
 

@@ -27,6 +27,7 @@ use WindowsAzure\Common\Internal\OAuthRestProxy;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
+use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
 
 /**
@@ -40,7 +41,7 @@ use Tests\Framework\TestResources;
  * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class OAuthRestProxyTest extends \PHPUnit_Framework_TestCase
+class OAuthRestProxyTest extends ServiceRestProxyTestBase
 {
     /**
      * @covers WindowsAzure\Common\Internal\OAuthRestProxy::getAccessToken
@@ -48,6 +49,8 @@ class OAuthRestProxyTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAccessToken()
     {
+        $this->skipIfEmulated();
+
         // Setup
         $channel            = new HttpClient();
         $uri                = Resources::MEDIA_SERVICES_OAUTH_URL;

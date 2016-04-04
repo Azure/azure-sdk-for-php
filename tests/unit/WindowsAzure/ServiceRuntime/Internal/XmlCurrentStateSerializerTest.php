@@ -22,6 +22,9 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
 use Tests\Framework\TestResources;
 use WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState;
 use WindowsAzure\ServiceRuntime\Internal\CurrentStatus;
@@ -29,8 +32,6 @@ use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
 use WindowsAzure\ServiceRuntime\Internal\FileOutputChannel;
 use WindowsAzure\ServiceRuntime\Internal\ReleaseCurrentState;
 use WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer;
-
-require_once 'vfsStream/vfsStream.php';
 
 /**
  * Unit tests for class XmlCurrentStateSerializer.
@@ -65,16 +66,16 @@ class XmlCurrentStateSerializerTest extends \PHPUnit_Framework_TestCase
             '</CurrentState>';
         
         // Setup
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
-        $file = \vfsStream::newFile($fileName);
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        $file = vfsStream::newFile($fileName);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         // Test
         $fileOutputChannel = new FileOutputChannel();
         $outputStream = $fileOutputChannel->getOutputStream(
-            \vfsStream::url($rootDirectory . '/' . $fileName)
+            vfsStream::url($rootDirectory . '/' . $fileName)
         );
         
         $recycleState = new AcquireCurrentState(
@@ -90,7 +91,7 @@ class XmlCurrentStateSerializerTest extends \PHPUnit_Framework_TestCase
         
         $fileInputChannel = new FileInputChannel();
         $fileInputStream = $fileInputChannel->getInputStream(
-            \vfsStream::url($rootDirectory . '/' . $fileName)
+            vfsStream::url($rootDirectory . '/' . $fileName)
         );
         
         $inputChannelContents = stream_get_contents($fileInputStream);
@@ -113,16 +114,16 @@ class XmlCurrentStateSerializerTest extends \PHPUnit_Framework_TestCase
             '</CurrentState>';
         
         // Setup
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
-        $file = \vfsStream::newFile($fileName);
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        $file = vfsStream::newFile($fileName);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         // Test
         $fileOutputChannel = new FileOutputChannel();
         $outputStream = $fileOutputChannel->getOutputStream(
-            \vfsStream::url($rootDirectory . '/' . $fileName)
+            vfsStream::url($rootDirectory . '/' . $fileName)
         );
         
         $recycleState = new ReleaseCurrentState('clientId');
@@ -132,7 +133,7 @@ class XmlCurrentStateSerializerTest extends \PHPUnit_Framework_TestCase
         
         $fileInputChannel = new FileInputChannel();
         $fileInputStream = $fileInputChannel->getInputStream(
-            \vfsStream::url($rootDirectory . '/' . $fileName)
+            vfsStream::url($rootDirectory . '/' . $fileName)
         );
         
         $inputChannelContents = stream_get_contents($fileInputStream);

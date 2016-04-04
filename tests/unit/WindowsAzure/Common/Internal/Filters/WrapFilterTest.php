@@ -23,6 +23,7 @@
  */
 
 namespace Tests\Unit\WindowsAzure\Common\Internal\Filters;
+use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Filters\WrapFilter;
 use WindowsAzure\Common\Internal\Http\HttpClient;
@@ -43,12 +44,14 @@ use WindowsAzure\Common\Internal\ServiceBusSettings;
  * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class WrapFilterTest extends \PHPUnit_Framework_TestCase
+class WrapFilterTest extends ServiceRestProxyTestBase
 {
     private $_wrapRestProxy;
     
     public function setUp()
     {
+        $this->skipIfEmulated();
+
         $builder = new ServicesBuilder();
         $settings = ServiceBusSettings::createFromConnectionString(
             TestResources::getServiceBusConnectionString()

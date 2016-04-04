@@ -791,6 +791,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testGetDeploymentWithMultipleRoles()
     {
+        $this->markTestSkipped("Skip it. Complex package not set up yet.");
         // Setup
         $name = $this->getTestName();
         $label = base64_encode($name);
@@ -895,6 +896,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testSwapDeployment()
     {
+        $this->markTestSkipped("Skip it. Complex package not set up yet.");
         // Setup
         $name = $this->getTestName();
         $staging = 'stagingdeployment';
@@ -1000,6 +1002,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testUpgradeDeployment()
     {
+        $this->markTestSkipped("Skip it. Complex package not set up yet.");
         // Setup
         $name = $this->getTestName();
         $this->createDeployment($name);
@@ -1044,6 +1047,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testWalkUpgradeDomain()
     {
+        $this->markTestSkipped("Skip it. Complex package not set up yet.");
         // Setup
         $name = $this->getTestName();
         $this->createDeployment($name);
@@ -1097,7 +1101,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testRebootRoleInstance()
     {
         $this->markTestSkipped(ServiceRestProxyTestBase::TAKE_TOO_LONG);
-
         // Setup
         $name = $this->getTestName();
         $roleName = 'WebRole1_IN_0';
@@ -1142,7 +1145,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testReimageRoleInstance()
     {
         $this->markTestSkipped(ServiceRestProxyTestBase::TAKE_TOO_LONG);
-
         // Setup
         $name = $this->getTestName();
         $roleName = 'WebRole1_IN_0';
@@ -1185,7 +1187,6 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testRollbackUpgradeOrUpdate()
     {
         $this->markTestSkipped(ServiceRestProxyTestBase::TAKE_TOO_LONG);
-
         $attempt = 0;
         $maxAttempts = 10;
         $isPassed = false;

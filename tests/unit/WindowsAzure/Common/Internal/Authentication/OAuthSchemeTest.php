@@ -26,6 +26,7 @@ namespace Tests\Unit\WindowsAzure\Common\Internal\Authentication;
 use Tests\Mock\WindowsAzure\Common\Internal\Authentication\OAuthSchemeMock;
 use WindowsAzure\Common\Internal\Authentication\OAuthScheme;
 use WindowsAzure\Common\Internal\Resources;
+use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
@@ -41,7 +42,7 @@ use WindowsAzure\Common\Internal\OAuthRestProxy;
  * @version    Release: 0.4.1_2015-03
  * @link       https://github.com/windowsazure/azure-sdk-for-php
  */
-class OAuthSchemeTest extends \PHPUnit_Framework_TestCase
+class OAthSchemeTest extends ServiceRestProxyTestBase
 {
     /**
     * @covers WindowsAzure\Common\Internal\Authentication\OAuthScheme::__construct
@@ -72,6 +73,8 @@ class OAuthSchemeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAuthorizationHeader()
     {
+        $this->skipIfEmulated();
+
         // Setup
         // OAuth REST setup
         $channel            = new HttpClient();
@@ -102,6 +105,8 @@ class OAuthSchemeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAuthorizationHeaderMultiple()
     {
+        $this->skipIfEmulated();
+
         // Setup
         // OAuth REST setup
         $channel            = new HttpClient();
@@ -127,6 +132,6 @@ class OAuthSchemeTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals($token, $actual);
-    }
+    }    
 }
 
