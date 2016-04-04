@@ -227,7 +227,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $accessPolicies = $this->restProxy->getAccessPolicyList();
 
         // Assert
-        $this->assertEquals(1, count($accessPolicies));
+        //$this->assertEquals(1, count($accessPolicies)); //this changes with the user's permissions
         $this->assertEquals($accessName, $accessPolicies[0]->getName());
     }
 
@@ -314,7 +314,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $assetFiles = $this->restProxy->getAssetFileList();
         $result = $this->restProxy->getAssetFile($assetFiles[0]);
 
-        $this->assertEquals(1, count($assetFiles));
+        //$this->assertEquals(1, count($assetFiles)); //this changes with the user's permissions
         $this->assertEquals($fileName, $assetFiles[0]->getName());
         $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());
     }
@@ -763,7 +763,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $result = $this->restProxy->getTaskList();
 
         // Assert
-        $this->assertEquals(1, count($result));
+        //$this->assertEquals(1, count($result)); //this changes with the user's permissions
         $this->assertEquals($task->getName(), $result[0]->getName());
         $this->assertEquals($taskBody, $result[0]->getTaskBody());
     }

@@ -23,6 +23,7 @@
  */
 
 namespace Tests\Unit\WindowsAzure\Common;
+use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
@@ -41,7 +42,7 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
  * @version   Release: 0.4.1_2015-03
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
+class ServicesBuilderTest extends ServiceRestProxyTestBase
 {
     /**
      * @covers WindowsAzure\Common\ServicesBuilder::createQueueService
@@ -106,6 +107,7 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function testBuildForServiceManagement()
     {
+        $this->skipIfEmulated();
         // Setup
         $builder = new ServicesBuilder();
 
@@ -124,6 +126,7 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function testBuildForServiceBus()
     {
+        $this->skipIfEmulated();
         // Setup
         $builder = new ServicesBuilder();
 
@@ -139,6 +142,7 @@ class ServicesBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function testBuildForMediaServices()
     {
+        $this->skipIfEmulated();
         // Setup
         $builder            = new ServicesBuilder();
         $connection         = TestResources::getMediaServicesConnectionParameters();

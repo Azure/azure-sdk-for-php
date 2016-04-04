@@ -22,6 +22,9 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
@@ -64,8 +67,8 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
                 
         // Fake version will force the exception
         $fileName = 'versionendpoint';
@@ -77,10 +80,10 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent); 
 
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $runtimeVersionProtocolClient =
             new RuntimeVersionProtocolClient(new FileInputChannel());
@@ -92,7 +95,7 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
         // Test
         $this->setExpectedException(get_class(new \RuntimeException()));
         $runtimeVersionManager->getRuntimeClient(
-            \vfsStream::url($rootDirectory . '/' . $fileName)
+            vfsStream::url($rootDirectory . '/' . $fileName)
         );
     }
     
@@ -104,8 +107,8 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
                 
         $fileName = 'versionendpoint';
         $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -116,10 +119,10 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent); 
 
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $runtimeVersionProtocolClient =
             new RuntimeVersionProtocolClient(new FileInputChannel());
@@ -129,7 +132,7 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
         );
         
         $runtimeClient = $runtimeVersionManager->getRuntimeClient(
-            \vfsStream::url($rootDirectory . '/' . $fileName)
+            vfsStream::url($rootDirectory . '/' . $fileName)
         );
         
         // Test

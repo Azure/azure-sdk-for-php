@@ -23,7 +23,9 @@
  */
  
 namespace Tests\Framework;
-require_once 'vfsStream/vfsStream.php';
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
 
 /**
  * Represents virtual file system for testing purpose.
@@ -43,14 +45,14 @@ class VirtualFileSystem
         $root = is_null($root) ? 'root' : $root;
         $fileName = is_null($fileName) ? 'test.txt' : $fileName;
 
-        \vfsStreamWrapper::register();
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($root));
+        vfsStreamWrapper::register();
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($root));
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($contents);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
-        $virtualPath = \vfsStream::url($root . '/' . $fileName);
+        vfsStreamWrapper::getRoot()->addChild($file);
+        $virtualPath = vfsStream::url($root . '/' . $fileName);
         
         return $virtualPath;
     }

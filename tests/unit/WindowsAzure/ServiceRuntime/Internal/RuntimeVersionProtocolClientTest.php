@@ -22,13 +22,14 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
 use WindowsAzure\ServiceRuntime\Internal\RuntimeVersionProtocolClient;
 use WindowsAzure\Common\Internal\Resources;
-
-require_once 'vfsStream/vfsStream.php';
 
 /**
  * Unit tests for class RuntimeVersionProtocolClient.
@@ -66,8 +67,8 @@ class RuntimeVersionProtocolClientTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
                 
         $fileName = 'versionendpoint';
         $fileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -79,17 +80,17 @@ class RuntimeVersionProtocolClientTest extends \PHPUnit_Framework_TestCase
             '</RuntimeServerEndpoints>' .
             '</RuntimeServerDiscovery>';
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($fileContent); 
 
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $runtimeVersionProtocolClient =
             new RuntimeVersionProtocolClient(new FileInputChannel());
         
         // Test
         $versions = $runtimeVersionProtocolClient->getVersionMap(
-            \vfsStream::url($rootDirectory . '/' . $fileName)
+            vfsStream::url($rootDirectory . '/' . $fileName)
         );
         
         $this->assertEquals('myPath1', $versions['2011-03-08']);
@@ -107,7 +108,7 @@ class RuntimeVersionProtocolClientTest extends \PHPUnit_Framework_TestCase
         $file->setContent($fileContent); 
         
         $versions = $runtimeVersionProtocolClient->getVersionMap(
-            \vfsStream::url($rootDirectory . '/' . $fileName)
+            vfsStream::url($rootDirectory . '/' . $fileName)
         );
         
         $this->assertEquals('myPath1', $versions['2011-03-08']);

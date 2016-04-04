@@ -22,6 +22,9 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer;
@@ -29,8 +32,6 @@ use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
 use WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeCurrentStateClient;
 use WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient;
 use WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer;
-
-require_once 'vfsStream/vfsStream.php';
 
 /**
  * Unit tests for class Protocol1RuntimeGoalStateClient.
@@ -69,13 +70,13 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
         
         // Setup
-        \vfsStreamWrapper::register(); 
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
-        $file = \vfsStream::newFile($fileName);
+        $file = vfsStream::newFile($fileName);
         $file->setContent($goalStateFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         // Test
         $fileInputChannel = new FileInputChannel();
@@ -88,7 +89,7 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
             $fileInputChannel
         );
         
-        $runtimeGoalStateClient->setEndpoint(\vfsStream::url($rootDirectory . '/' . $fileName));
+        $runtimeGoalStateClient->setEndpoint(vfsStream::url($rootDirectory . '/' . $fileName));
         
         // Test
         $this->assertNotEquals(null, $runtimeGoalStateClient->getCurrentGoalState());
@@ -105,8 +106,8 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
 
-        \vfsStreamWrapper::register();
-        \vfsStreamWrapper::setRoot(new \vfsStreamDirectory($rootDirectory));
+        vfsStreamWrapper::register();
+        vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
         
         $roleEnvironmentFileName = 'roleEnvironment';
         $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -125,10 +126,10 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
             '<Roles />' .
             '</RoleEnvironment>';
         
-        $file = \vfsStream::newFile($roleEnvironmentFileName);
+        $file = vfsStream::newFile($roleEnvironmentFileName);
         $file->setContent($roleEnvironmentFileContent);
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         $goalStateFileName = 'goalstate';
         $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
@@ -137,7 +138,7 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
             '<Incarnation>1</Incarnation>' .
             '<ExpectedState>Started</ExpectedState>' .
             '<RoleEnvironmentPath>' . 
-            \vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
+            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
             '</RoleEnvironmentPath>' .
             '<CurrentStateEndpoint>\\.\pipe\WindowsAzureRuntime.CurrentState</CurrentStateEndpoint>' .
             '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
@@ -145,10 +146,10 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
 
         $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
         
-        $file = \vfsStream::newFile($goalStateFileName);
+        $file = vfsStream::newFile($goalStateFileName);
         $file->setContent($goalStateFileContent); 
         
-        \vfsStreamWrapper::getRoot()->addChild($file);
+        vfsStreamWrapper::getRoot()->addChild($file);
         
         // Test
         $fileInputChannel = new FileInputChannel();
@@ -162,7 +163,7 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
             $fileInputChannel
         );
         
-        $runtimeGoalStateClient->setEndpoint(\vfsStream::url($rootDirectory . '/' . $goalStateFileName));
+        $runtimeGoalStateClient->setEndpoint(vfsStream::url($rootDirectory . '/' . $goalStateFileName));
         
         // Test
         $this->assertNotEquals(null, $runtimeGoalStateClient->getRoleEnvironmentData());
