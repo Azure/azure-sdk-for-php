@@ -25,7 +25,7 @@
         "psr-0": { "WindowsAzure\\": "" }
     },
     "include-path": [
-        "../../pear/http_request2"
+        "./vendor/pear/http_request2"
     ],
     "extra": {
         "branch-alias": {

@@ -11,3 +11,4 @@ cache.properties
 vendor
 nbproject
 phpcs-checkstyle.tmp
+composer.phar

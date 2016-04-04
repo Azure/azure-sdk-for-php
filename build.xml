@@ -2,12 +2,17 @@
 
 <project name="azure-sdk-for-php" default="build">
  <target name="build"
+   depends="prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdoc,phpunit,phpcb"/>
+   <!--
    depends="prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdoc,phpunit,phpcb,pear-package"/>
-
+   -->
  <target name="build-parallel"
    depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
+   
+<!--  
  <target name="pear-package"
    depends="discover-channel,pear-package-xml,pear-package-file"/>
+-->
 
  <target name="tools-parallel"
          description="Run tools in parallel">
@@ -169,6 +174,7 @@
   </exec>
  </target>
  
+ <!--
  <target name="discover-channel" description="Discovers Windows Azure Channel">
   <exec executable="pear.bat">
   <arg value="channel-discover" />
@@ -195,4 +201,6 @@
   <arg value="release" />
   </exec>
  </target>
+ -->
+ 
 </project>

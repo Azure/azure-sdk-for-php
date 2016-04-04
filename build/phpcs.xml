@@ -23,7 +23,7 @@
  <rule ref="Generic.PHP.NoSilencedErrors"/>
 
  <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
-
+<!--
  <rule ref="PEAR"/>
- 
+--> 
  </ruleset>
