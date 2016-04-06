@@ -41,7 +41,7 @@ $output = '';
 
 foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(start_dir)) as $filename => $cur)
 {
-    if (is_dir($filename))
+    if (is_dir($filename) || strpos($filename, 'release_tools.php') !== false)
     {
         continue;
     }
