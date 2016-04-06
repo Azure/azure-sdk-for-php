@@ -63,7 +63,7 @@ To get the source code from GitHub, type
 
 ##Install via Composer
 
-1. Create a file named **composer.json** in the root of your project and add the following code to it:
+* Create a file named **composer.json** in the root of your project and add the following code to it:
 ```json
     {
         "_comment": "php >= 5.5 is ONLY needed when using Media Services API",    
@@ -75,9 +75,9 @@ To get the source code from GitHub, type
     }
 ```
 
-2. Download **[composer.phar](http://getcomposer.org/composer.phar)** in your project root.
+* Download **[composer.phar](http://getcomposer.org/composer.phar)** in your project root.
 
-3. Open a command prompt and execute this in your project root
+* Open a command prompt and execute this in your project root
 
     php composer.phar install
 
