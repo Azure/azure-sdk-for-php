@@ -74,6 +74,7 @@ To get the source code from GitHub, type
         "minimum-stability": "dev"
     }
 ```
+
 2. Download **[composer.phar](http://getcomposer.org/composer.phar)** in your project root.
 
 3. Open a command prompt and execute this in your project root
@@ -402,9 +403,10 @@ try {
 ## Service Bus Queues
 The current PHP Service Bus APIs only support ACS connection strings. You need to use PowerShell to create a new ACS Service Bus namespace at the present time.  
 First, make sure you have Azure PowerShell installed, then in a PowerShell command prompt, run 
+```
 Add-AzureAccount # this will sign you in
 New-AzureSBNamespace -CreateACSNamespace $true -Name ‘mytestbusname' -Location ‘West US’ -NamespaceType 'Messaging'
-
+```
 If it is sucessful, you will get the connection string from PowerShell output.
  
 ### Create a Queue
