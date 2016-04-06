@@ -405,7 +405,7 @@ The current PHP Service Bus APIs only support ACS connection strings. You need t
 First, make sure you have Azure PowerShell installed, then in a PowerShell command prompt, run 
 ```
 Add-AzureAccount # this will sign you in
-New-AzureSBNamespace -CreateACSNamespace $true -Name ‘mytestbusname' -Location ‘West US’ -NamespaceType 'Messaging'
+New-AzureSBNamespace -CreateACSNamespace $true -Name 'mytestbusname' -Location 'West US' -NamespaceType 'Messaging'
 ```
 If it is sucessful, you will get the connection string from PowerShell output.
  
