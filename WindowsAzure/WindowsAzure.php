@@ -14,19 +14,15 @@
  *
  * PHP version 5
  *
- * @category  Microsoft
- * @package   WindowsAzure
- * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
- * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link      https://github.com/windowsazure/azure-sdk-for-php
+ * @category   Microsoft
+ * @package    WindowsAzure
+ * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
+ * @copyright  2012 Microsoft Corporation
+ * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link       https://github.com/windowsazure/azure-sdk-for-php
+ * @deprecated deprecated since version 0.4.2 and replaced by vendor/autoload.php
  */
 
-/**
- *
- * @deprecated deprecated since version 0.4.2 and replaced by vendor/autoload.php
- *
- */
 trigger_error(sprintf("Usage of '%s' has been deprecated since version 0.4.2 and will be removed in later versions. Please use 'vendor/autoload.php'" . 
    " instead, which is generated during the install process by Composer.", __FILE__), E_USER_DEPRECATED);
 spl_autoload_register(
