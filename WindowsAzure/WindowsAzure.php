@@ -14,14 +14,17 @@
  *
  * PHP version 5
  *
- * @category  Microsoft
- * @package   WindowsAzure
- * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
- * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @link      https://github.com/windowsazure/azure-sdk-for-php
+ * @category   Microsoft
+ * @package    WindowsAzure
+ * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
+ * @copyright  2012 Microsoft Corporation
+ * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link       https://github.com/windowsazure/azure-sdk-for-php
+ * @deprecated deprecated since version 0.4.2 and replaced by vendor/autoload.php
  */
 
+trigger_error(sprintf('Usage of `%s` has been deprecated since version 0.4.2 and will be removed in 0.5.0. ' .
+   'Please use `vendor/autoload.php` instead, which is generated during the install process by Composer.', __FILE__), E_USER_DEPRECATED);
 spl_autoload_register(
    function($class) {
       static $classes = null;
@@ -120,7 +123,6 @@ spl_autoload_register(
             'windowsazure\\common\\internal\\logger' => '/Common/Internal/Logger.php',
             'windowsazure\\common\\internal\\mediaservicessettings' => '/Common/Internal/MediaServicesSettings.php',
             'windowsazure\\common\\internal\\oauthrestproxy' => '/Common/Internal/OAuthRestProxy.php',
-            'windowsazure\\common\\internal\\parserstate' => '/Common/Internal/ConnectionStringParser.php',
             'windowsazure\\common\\internal\\resources' => '/Common/Internal/Resources.php',
             'windowsazure\\common\\internal\\restproxy' => '/Common/Internal/RestProxy.php',
             'windowsazure\\common\\internal\\serialization\\iserializer' => '/Common/Internal/Serialization/ISerializer.php',
@@ -146,9 +148,20 @@ spl_autoload_register(
             'windowsazure\\mediaservices\\mediaservicesrestproxy' => '/MediaServices/MediaServicesRestProxy.php',
             'windowsazure\\mediaservices\\models\\accesspolicy' => '/MediaServices/Models/AccessPolicy.php',
             'windowsazure\\mediaservices\\models\\asset' => '/MediaServices/Models/Asset.php',
+            'windowsazure\\mediaservices\\models\\assetdeliverypolicy' => '/MediaServices/Models/AssetDeliveryPolicy.php',
+            'windowsazure\\mediaservices\\models\\assetdeliverypolicyconfigurationkey' => '/MediaServices/Models/AssetDeliveryPolicyConfigurationKey.php',
+            'windowsazure\\mediaservices\\models\\assetdeliverypolicytype' => '/MediaServices/Models/AssetDeliveryPolicyType.php',
+            'windowsazure\\mediaservices\\models\\assetdeliveryprotocol' => '/MediaServices/Models/AssetDeliveryProtocol.php',
             'windowsazure\\mediaservices\\models\\assetfile' => '/MediaServices/Models/AssetFile.php',
             'windowsazure\\mediaservices\\models\\contentkey' => '/MediaServices/Models/ContentKey.php',
+            'windowsazure\\mediaservices\\models\\contentkeyauthorizationpolicy' => '/MediaServices/Models/ContentKeyAuthorizationPolicy.php',
+            'windowsazure\\mediaservices\\models\\contentkeyauthorizationpolicyoption' => '/MediaServices/Models/ContentKeyAuthorizationPolicyOption.php',
+            'windowsazure\\mediaservices\\models\\contentkeyauthorizationpolicyrestriction' => '/MediaServices/Models/ContentKeyAuthorizationPolicyRestriction.php',
+            'windowsazure\\mediaservices\\models\\contentkeydeliverytype' => '/MediaServices/Models/ContentKeyDeliveryType.php',
+            'windowsazure\\mediaservices\\models\\contentkeyrestrictiontype' => '/MediaServices/Models/ContentKeyRestrictionType.php',
             'windowsazure\\mediaservices\\models\\contentkeytypes' => '/MediaServices/Models/ContentKeyTypes.php',
+            'windowsazure\\mediaservices\\models\\encodingreservedunit' => '/MediaServices/Models/EncodingReservedUnit.php',
+            'windowsazure\\mediaservices\\models\\encodingreservedunittype' => '/MediaServices/Models/EncodingReservedUnitType.php',
             'windowsazure\\mediaservices\\models\\encryptionschemes' => '/MediaServices/Models/EncryptionSchemes.php',
             'windowsazure\\mediaservices\\models\\errordetail' => '/MediaServices/Models/ErrorDetail.php',
             'windowsazure\\mediaservices\\models\\ingestmanifest' => '/MediaServices/Models/IngestManifest.php',
@@ -165,6 +178,34 @@ spl_autoload_register(
             'windowsazure\\mediaservices\\models\\taskhistoricalevent' => '/MediaServices/Models/TaskHistoricalEvent.php',
             'windowsazure\\mediaservices\\models\\taskoptions' => '/MediaServices/Models/TaskOptions.php',
             'windowsazure\\mediaservices\\models\\tasktemplate' => '/MediaServices/Models/TaskTemplate.php',
+            'windowsazure\\mediaservices\\templates\\agcandcolorstriperestriction' => '/MediaServices/Templates/AgcAndColorStripeRestriction.php',
+            'windowsazure\\mediaservices\\templates\\allowedtracktypes' => '/MediaServices/Templates/AllowedTrackTypes.php',
+            'windowsazure\\mediaservices\\templates\\asymmetrictokenverificationkey' => '/MediaServices/Templates/AsymmetricTokenVerificationKey.php',
+            'windowsazure\\mediaservices\\templates\\contentencryptionkeyfromheader' => '/MediaServices/Templates/ContentEncryptionKeyFromHeader.php',
+            'windowsazure\\mediaservices\\templates\\contentencryptionkeyfromkeyidentifier' => '/MediaServices/Templates/ContentEncryptionKeyFromKeyIdentifier.php',
+            'windowsazure\\mediaservices\\templates\\contentkeyspecs' => '/MediaServices/Templates/ContentKeySpecs.php',
+            'windowsazure\\mediaservices\\templates\\errormessages' => '/MediaServices/Templates/ErrorMessages.php',
+            'windowsazure\\mediaservices\\templates\\explicitanalogtelevisionrestriction' => '/MediaServices/Templates/ExplicitAnalogTelevisionRestriction.php',
+            'windowsazure\\mediaservices\\templates\\hdcp' => '/MediaServices/Templates/Hdcp.php',
+            'windowsazure\\mediaservices\\templates\\mediaserviceslicensetemplateserializer' => '/MediaServices/Templates/MediaServicesLicenseTemplateSerializer.php',
+            'windowsazure\\mediaservices\\templates\\openidconnectdiscoverydocument' => '/MediaServices/Templates/OpenIdConnectDiscoveryDocument.php',
+            'windowsazure\\mediaservices\\templates\\playreadycontentkey' => '/MediaServices/Templates/PlayReadyContentKey.php',
+            'windowsazure\\mediaservices\\templates\\playreadylicenseresponsetemplate' => '/MediaServices/Templates/PlayReadyLicenseResponseTemplate.php',
+            'windowsazure\\mediaservices\\templates\\playreadylicensetemplate' => '/MediaServices/Templates/PlayReadyLicenseTemplate.php',
+            'windowsazure\\mediaservices\\templates\\playreadylicensetype' => '/MediaServices/Templates/PlayReadyLicenseType.php',
+            'windowsazure\\mediaservices\\templates\\playreadyplayright' => '/MediaServices/Templates/PlayReadyPlayRight.php',
+            'windowsazure\\mediaservices\\templates\\requiredoutputprotection' => '/MediaServices/Templates/RequiredOutputProtection.php',
+            'windowsazure\\mediaservices\\templates\\scmsrestriction' => '/MediaServices/Templates/ScmsRestriction.php',
+            'windowsazure\\mediaservices\\templates\\symmetricverificationkey' => '/MediaServices/Templates/SymmetricVerificationKey.php',
+            'windowsazure\\mediaservices\\templates\\tokenclaim' => '/MediaServices/Templates/TokenClaim.php',
+            'windowsazure\\mediaservices\\templates\\tokenrestrictiontemplate' => '/MediaServices/Templates/TokenRestrictionTemplate.php',
+            'windowsazure\\mediaservices\\templates\\tokenrestrictiontemplateserializer' => '/MediaServices/Templates/TokenRestrictionTemplateSerializer.php',
+            'windowsazure\\mediaservices\\templates\\tokentype' => '/MediaServices/Templates/TokenType.php',
+            'windowsazure\\mediaservices\\templates\\tokenverificationkey' => '/MediaServices/Templates/TokenVerificationKey.php',
+            'windowsazure\\mediaservices\\templates\\unknownoutputpassingoption' => '/MediaServices/Templates/UnknownOutputPassingOption.php',
+            'windowsazure\\mediaservices\\templates\\widevinemessage' => '/MediaServices/Templates/WidevineMessage.php',
+            'windowsazure\\mediaservices\\templates\\widevinemessageserializer' => '/MediaServices/Templates/WidevineMessageSerializer.php',
+            'windowsazure\\mediaservices\\templates\\x509certtokenverificationkey' => '/MediaServices/Templates/X509CertTokenVerificationKey.php',
             'windowsazure\\queue\\internal\\iqueue' => '/Queue/Internal/IQueue.php',
             'windowsazure\\queue\\models\\createmessageoptions' => '/Queue/Models/CreateMessageOptions.php',
             'windowsazure\\queue\\models\\createqueueoptions' => '/Queue/Models/CreateQueueOptions.php',
