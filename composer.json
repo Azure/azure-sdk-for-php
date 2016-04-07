@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "^5.4",
+        "php": ">=5.4",
         "pear/http_request2": "^2.2",
         "pear/net_url2": "<2.2",
         "pear/mail_mime": "^1.10",
