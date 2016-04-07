@@ -23,8 +23,8 @@
  * @deprecated deprecated since version 0.4.2 and replaced by vendor/autoload.php
  */
 
-trigger_error(sprintf("Usage of '%s' has been deprecated since version 0.4.2 and will be removed in later versions. " .
-   "Please use 'vendor/autoload.php' instead, which is generated during the install process by Composer.", __FILE__), E_USER_DEPRECATED);
+trigger_error(sprintf('Usage of `%s` has been deprecated since version 0.4.2 and will be removed in later versions. ' .
+   'Please use `vendor/autoload.php` instead, which is generated during the install process by Composer.', __FILE__), E_USER_DEPRECATED);
 spl_autoload_register(
    function($class) {
       static $classes = null;
