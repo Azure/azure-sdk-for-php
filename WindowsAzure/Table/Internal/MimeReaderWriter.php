@@ -23,9 +23,6 @@
  */
  
 namespace WindowsAzure\Table\Internal;
-require_once 'PEAR.php';
-require_once 'Mail/mimePart.php';
-require_once 'Mail/mimeDecode.php';
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 

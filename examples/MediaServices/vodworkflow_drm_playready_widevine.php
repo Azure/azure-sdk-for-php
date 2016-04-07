@@ -1,4 +1,5 @@
 <?php
+
 /**
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -10,10 +11,18 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * PHP version 5
+ *
+ * @category  Microsoft
+ * @package   Client
+ * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
 require_once 'vendor/autoload.php';
-require_once "WindowsAzure/WindowsAzure.php";
 
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
@@ -53,6 +62,8 @@ use WindowsAzure\MediaServices\Templates\TokenType;
 use WindowsAzure\MediaServices\Templates\WidevineMessageSerializer;
 
 // Settings
+date_default_timezone_set('America/Los_Angeles');
+
 $account = "<your media services account name>";
 $secret = "<your media services account key>";
 $mezzanineFileName = "Azure-Video.wmv";
@@ -387,7 +398,7 @@ function configurePlayReadyLicenseTemplate() {
     // any restrictions that must be put in place when using a given output.
     // For example, if the DigitalVideoOnlyContentRestriction is enabled,
     //then the DRM runtime will only allow the video to be displayed over digital outputs
-    //(analog video outputs won’t be allowed to pass the content).
+    //(analog video outputs won't be allowed to pass the content).
 
     //IMPORTANT: These types of restrictions can be very powerful but can also affect the consumer experience.
     // If the output protections are configured too restrictive,
