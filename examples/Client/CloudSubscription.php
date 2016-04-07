@@ -87,14 +87,14 @@ class CloudSubscription
      * 
      * @param string $name     The storage service name.
      * @param string $execType The execution type for this call.
-     * @param type $location   The storage service location. By default West US.
+     * @param type $location   The storage service location. By default East US.
      * 
      * @return CloudStorageService
      */
     public function createStorageService(
         $name,
         $execType = self:: SYNCHRONOUS,
-        $location = 'West US'
+        $location = 'East US'
     ) {
         $newStorageService   = false;
         $cloudStorageService = null;
@@ -107,12 +107,13 @@ class CloudSubscription
                 base64_encode($name),
                 $options
             );
+
             if ($execType == self::SYNCHRONOUS) {
-                $this->_blockUntilAsyncFinish($result->getRequestId());
+                $this->_blockUntilAsyncFinish($result);
             }
             $newStorageService = true;
         }
-        
+
         if (!$newStorageService && $execType != self::ASYNCHRONOUS) {
             $keys       = $this->_proxy->getStorageServiceKeys($name);
             $properties = $this->_proxy->getStorageServiceProperties($name);
@@ -120,9 +121,9 @@ class CloudSubscription
             $cloudStorageService = new CloudStorageService(
                 $name,
                 $keys->getPrimary(),
-                $properties->getBlobEndpointUri(),
-                $properties->getQueueEndpointUri(),
-                $properties->getTableEndpointUri()
+                $properties->getStorageService()->getBlobEndpointUri(),
+                $properties->getStorageService()->getQueueEndpointUri(),
+                $properties->getStorageService()->getTableEndpointUri()
             );
         }
         
@@ -133,19 +134,19 @@ class CloudSubscription
      * Blocks asynchronous operation until it succeeds. Throws exception if the
      * operation failed.
      * 
-     * @param string $requestId The asynchronous operation request id.
+     * @param string $requestInfo The asynchronous operation request AsynchronousOperationResult.
      * 
      * @throws WindowsAzure\Common\ServiceException
      * 
      * @return none
      */
-    private function _blockUntilAsyncFinish($requestId)
+    private function _blockUntilAsyncFinish($requestInfo)
     {
         $status = null;
         
         do {
             sleep(5);
-            $result = $this->_proxy->getOperationStatus($requestId);
+            $result = $this->_proxy->getOperationStatus($requestInfo);
             $status = $result->getStatus();
         } while(OperationStatus::IN_PROGRESS == $status);
         
