@@ -407,7 +407,7 @@ First, make sure you have Azure PowerShell installed, then in a PowerShell comma
 Add-AzureAccount # this will sign you in
 New-AzureSBNamespace -CreateACSNamespace $true -Name 'mytestbusname' -Location 'West US' -NamespaceType 'Messaging'
 ```
-If it is sucessful, you will get the connection string from PowerShell output.
+If it is sucessful, you will get the connection string in the PowerShell output. If you get connection errors with it and the conection string looks like Endpoint=sb://..., change it to **Endpoint=https://...**
  
 ### Create a Queue
 
