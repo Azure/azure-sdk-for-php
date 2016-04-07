@@ -22,6 +22,11 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
+/**
+ * @deprecated deprecated since version 0.4.2 and replaced by vendor/autoload.php
+*/
+trigger_error('WindowsAzure.php has been deprecated since version 0.4.2 and is replaced by the Composer generated vendor/autoload.php', E_USER_DEPRECATED);
+
 spl_autoload_register(
    function($class) {
       static $classes = null;
