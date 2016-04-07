@@ -411,6 +411,7 @@ class Resources
     const XMLNS_ATOM              = 'xmlns:atom';
     const XMLNS                   = 'xmlns';
     const ATOM_NAMESPACE          = 'http://www.w3.org/2005/Atom';
+    const AUTHORITY_FORMAT        = 'grant_type=client_credentials&client_id={0}&client_secret={1}';
 
     // ATOM string
     const AUTHOR      = 'author';

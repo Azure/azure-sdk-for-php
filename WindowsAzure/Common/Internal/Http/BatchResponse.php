@@ -23,9 +23,6 @@
  */
 
 namespace WindowsAzure\Common\Internal\Http;
-require_once 'PEAR.php';
-require_once 'Mail/mimeDecode.php';
-require_once 'HTTP/Request2/Response.php';
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\ServiceException;

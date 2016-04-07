@@ -26,7 +26,6 @@
             <td>Complete</td>
         </tr>
 
-
 <?php
 
 require_once '..\client\client.php';
@@ -34,6 +33,8 @@ use Client\CloudSubscription;
 use Client\CloudTable;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Table\Models\EdmType;
+
+date_default_timezone_set('America/Los_Angeles');
 
 $subscriptionId      = 'Your subscription';
 $certificatePath     = 'Certificate path';
@@ -96,8 +97,7 @@ function listEntries($cloudTable)
     }
 }
 
-
-
+?>
     </table>
     <hr>
     <form action="index.php" method="post">

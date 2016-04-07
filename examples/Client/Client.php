@@ -21,9 +21,9 @@
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
-require_once 'WindowsAzure.php';
 
+require_once '../vendor/autoload.php';
+ 
 spl_autoload_register(
    function($class) {
       static $classes = null;
