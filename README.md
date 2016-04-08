@@ -70,8 +70,7 @@ To get the source code from GitHub, type
         "require": {        
             "php": ">=5.5",
             "microsoft/windowsazure": "^0.4"
-        },  
-        "minimum-stability": "dev"
+        }  
     }
 ```
 
