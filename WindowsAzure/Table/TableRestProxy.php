@@ -62,7 +62,7 @@ use WindowsAzure\Table\Models\BatchResult;
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.1_2015-03
+ * @version   Release: 0.4.2_2016-04
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class TableRestProxy extends ServiceRestProxy implements ITable

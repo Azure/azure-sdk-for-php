@@ -1,3 +1,11 @@
+Windows Azure SDK For PHP 0.4.2, 2016-04-08
+-------------------------------------------
+- Removed support for PEAR as package manager. Only support Composer from now on
+- Updated composer.json file
+- Fixed broken unit tests and code examples
+- Other bug fixes
+
+
 Windows Azure SDK For PHP 0.4.0, 2014-01-23
 -------------------------------------------
 - Added additional API support for Media Services:
@@ -41,4 +49,4 @@ First Official Release
 	* Storage Queues
 	* Service Runtime
 	* Service Management for Storage Services only
-	
+
