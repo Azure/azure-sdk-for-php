@@ -11,8 +11,8 @@
     ],
     "require": {
         "php": ">=5.4",
-        "pear/http_request2": "^2.2",
-        "pear/net_url2": "<2.2",
+        "pear/http_request2": "^2.3",
+        "pear/net_url2": "^2.2",
         "pear/mail_mime": "^1.10",
         "pear/mail_mime-decode": "^1.5",
         "firebase/php-jwt": "^3.0"
@@ -24,9 +24,6 @@
     "autoload": {
         "psr-0": { "WindowsAzure\\": "" }
     },
-    "include-path": [
-        "./vendor/pear/http_request2"
-    ],
     "extra": {
         "branch-alias": {
             "dev-master": "0.4-dev"
