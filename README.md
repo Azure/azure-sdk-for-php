@@ -69,7 +69,7 @@ To get the source code from GitHub, type
         "_comment": "php >= 5.5 is ONLY needed when using Media Services API",    
         "require": {        
             "php": ">=5.5",
-            "microsoft/windowsazure": "*"
+            "microsoft/windowsazure": "^0.4"
         },  
         "minimum-stability": "dev"
     }
