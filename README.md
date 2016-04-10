@@ -66,9 +66,7 @@ To get the source code from GitHub, type
 * Create a file named **composer.json** in the root of your project and add the following code to it:
 ```json
     {
-        "_comment": "php >= 5.5 is ONLY needed when using Media Services API",    
         "require": {        
-            "php": ">=5.5",
             "microsoft/windowsazure": "^0.4"
         }  
     }
@@ -621,7 +619,10 @@ echo "Operation status: ".$status->getStatus()."<br />";
 ```
 
 ##Media Services
-
+> **Note**
+> 
+>The current Media Services API only works with PHP 5.5 and above.
+ 
 ###Create new asset with file
 
 To create an asset with a file you need to create an empty asset, create access policy with write permission, create a locator joining your asset and access policy, perform actual upload and generate file info.
