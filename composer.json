@@ -22,7 +22,10 @@
         "phpunit/phpunit": "^4.7"
     },
     "autoload": {
-        "psr-0": { "WindowsAzure\\": "" }
+        "psr-4": { "WindowsAzure\\": "WindowsAzure/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Tests\\": "tests/" }
     },
     "extra": {
         "branch-alias": {
