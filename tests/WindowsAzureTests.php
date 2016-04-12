@@ -20,7 +20,11 @@
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @link      https://github.com/windowsazure/azure-sdk-for-php
+ * @deprecated since version 0.4.2 , to be removed in 0.5.0. Please use `vendor/autoload.php` instead.
  */
+
+trigger_error(sprintf('Usage of `%s` has been deprecated since version 0.4.2 and will be removed in 0.5.0. ' .
+   'Please use `vendor/autoload.php` instead, which is generated during the install process by Composer.', __FILE__), E_USER_DEPRECATED);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
