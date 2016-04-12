@@ -72,10 +72,6 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     public function setUp()
     {
         $this->skipIfEmulated();
-        if (phpversion() < "5.5")
-        {
-               $this->markTestSkipped(sprintf(self::VERSION_NOT_SUPPORTED, phpversion()));
-        }
         parent::setUp();
         $connection         = TestResources::getMediaServicesConnectionParameters();
         $settings           = new MediaServicesSettings($connection['accountName'], $connection['accessKey'], $connection['endpointUri'], $connection['oauthEndopointUri']);

@@ -105,17 +105,17 @@ class TokenRestrictionTemplateSerializer
      */
     public static function serialize($tokenRestriction) {
 
-        if (empty($tokenRestriction->getPrimaryVerificationKey()) &&
+        if (Utilities::empty54($tokenRestriction->getPrimaryVerificationKey()) &&
             ($tokenRestriction->getOpenIdConnectDiscoveryDocument() == null ||
-             empty($tokenRestriction->getOpenIdConnectDiscoveryDocument()->getOpenIdDiscoveryUri()))) {
+             Utilities::empty54($tokenRestriction->getOpenIdConnectDiscoveryDocument()->getOpenIdDiscoveryUri()))) {
             throw new \RuntimeException("Both PrimaryVerificationKey and OpenIdConnectDiscoveryDocument are null");
         }
 
-        if (empty($tokenRestriction->getAudience())) {
+        if (Utilities::empty54($tokenRestriction->getAudience())) {
             throw new \RuntimeException("TokenRestrictionTemplate Serialize: Audience is required");
         }
 
-        if (empty($tokenRestriction->getIssuer())) {
+        if (Utilities::empty54($tokenRestriction->getIssuer())) {
             throw new \RuntimeException("TokenRestrictionTemplate Serialize: Issuer is required");
         }
 
@@ -125,28 +125,28 @@ class TokenRestrictionTemplateSerializer
         $writer->startElementNS(null, 'TokenRestrictionTemplate', Resources::TRT_XML_NAMESPACE);
         $writer->writeAttributeNS('xmlns','i', null, Resources::XSI_XML_NAMESPACE);
 
-        if (!empty($tokenRestriction->getAlternateVerificationKeys())) {
+        if (!Utilities::empty54($tokenRestriction->getAlternateVerificationKeys())) {
             TokenRestrictionTemplateSerializer::serializeAlternateVerificationKeys($writer, $tokenRestriction->getAlternateVerificationKeys());
         }
 
         $writer->writeElement("Audience", $tokenRestriction->getAudience());
         $writer->writeElement("Issuer", $tokenRestriction->getIssuer());
 
-        if (!empty($tokenRestriction->getPrimaryVerificationKey())) {
+        if (!Utilities::empty54($tokenRestriction->getPrimaryVerificationKey())) {
             $writer->startElement('PrimaryVerificationKey');
             TokenRestrictionTemplateSerializer::serializeTokenVerificationKey($writer, $tokenRestriction->getPrimaryVerificationKey());
             $writer->endElement();
         }
 
-        if (!empty($tokenRestriction->getRequiredClaims())) {
+        if (!Utilities::empty54($tokenRestriction->getRequiredClaims())) {
             TokenRestrictionTemplateSerializer::serializeRequiredClaims($writer, $tokenRestriction->getRequiredClaims());
         }
 
-        if (!empty($tokenRestriction->getTokenType())) {
+        if (!Utilities::empty54($tokenRestriction->getTokenType())) {
             $writer->writeElement('TokenType', $tokenRestriction->getTokenType());
         }
 
-        if (!empty($tokenRestriction->getOpenIdConnectDiscoveryDocument())) {
+        if (!Utilities::empty54($tokenRestriction->getOpenIdConnectDiscoveryDocument())) {
             TokenRestrictionTemplateSerializer::serializeOpenIdConnectDiscoveryDocument($writer, $tokenRestriction->getOpenIdConnectDiscoveryDocument());
         }
 
@@ -266,7 +266,7 @@ class TokenRestrictionTemplateSerializer
      * @param OpenIdConnectDiscoveryDocument $openid
      */
     private static function serializeOpenIdConnectDiscoveryDocument($writer, $openid) {
-        if (empty($openid->getOpenIdDiscoveryUri())) {
+        if (Utilities::empty54($openid->getOpenIdDiscoveryUri())) {
             throw new \RuntimeException("OpenIdDiscoveryUri must not be empty.");
         }
 
@@ -299,11 +299,11 @@ class TokenRestrictionTemplateSerializer
         $writer->startElement('RequiredClaims');
         foreach($claims as $claim) {
             $writer->startElement('TokenClaim');
-            if (empty($claim->getClaimType())) {
+            if (Utilities::empty54($claim->getClaimType())) {
                 throw new \RuntimeException("ClaimType must not be empty.");
             }
             $writer->writeElement('ClaimType', $claim->getClaimType());
-            if (!empty($claim->getClaimValue())) {
+            if (!Utilities::empty54($claim->getClaimValue())) {
                 $writer->writeElement('ClaimValue', $claim->getClaimValue());
             }
             $writer->endElement();
@@ -395,7 +395,7 @@ class TokenRestrictionTemplateSerializer
         $result->setOpenIdDiscoveryUri((string)$xmlElement->OpenIdDiscoveryUri);
 
         return $result;
-    }
+    }    
 }
 
 

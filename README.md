@@ -619,9 +619,6 @@ echo "Operation status: ".$status->getStatus()."<br />";
 ```
 
 ##Media Services
-> **Note**
-> 
->The current Media Services API only works with PHP 5.5 and above.
  
 ###Create new asset with file
 
