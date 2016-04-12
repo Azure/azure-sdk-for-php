@@ -58,49 +58,29 @@ To get the source code from GitHub, type
 
 > **Note**
 > 
-> The PHP Client Libraries for Microsoft Azure have a dependency on the [HTTP_Request2](http://pear.php.net/package/HTTP_Request2), [Mail_mime](http://pear.php.net/package/Mail_mime), and [Mail_mimeDecode](http://pear.php.net/package/Mail_mimeDecode) PEAR packages. The recommended way to resolve these dependencies is to install them using the [PEAR package manager](http://pear.php.net/manual/en/installation.php).
+> The PHP Client Libraries for Microsoft Azure have a dependency on the [HTTP_Request2](http://pear.php.net/package/HTTP_Request2), [Mail_mime](http://pear.php.net/package/Mail_mime), and [Mail_mimeDecode](http://pear.php.net/package/Mail_mimeDecode) PEAR packages. The recommended way to resolve these dependencies is to install them using the [Composer package manager](http://getcomposer.org).
 
 
 ##Install via Composer
 
-1. Create a file named **composer.json** in the root of your project and add the following code to it:
+* Create a file named **composer.json** in the root of your project and add the following code to it:
 ```json
     {
-      "require": {
-        "microsoft/windowsazure": "*"
-      },      
-      "repositories": [
-        {
-          "type": "pear",
-          "url": "http://pear.php.net"
-        }
-      ],
-      "minimum-stability": "dev"
+        "require": {        
+            "microsoft/windowsazure": "^0.4"
+        }  
     }
 ```
-2. Download **[composer.phar](http://getcomposer.org/composer.phar)** in your project root.
 
-3. Open a command prompt and execute this in your project root
+* Download **[composer.phar](http://getcomposer.org/composer.phar)** in your project root.
+
+* Open a command prompt and execute this in your project root
 
     php composer.phar install
 
   > **Note**
   >
   > On Windows, you will also need to add the Git executable to your PATH environment variable.
-
-
-##Install as a PEAR package
-
-To install the PHP Client Libraries for Microsoft Azure as a PEAR package, follow these steps:
-
-1. [Install PEAR](http://pear.php.net/manual/en/installation.getting.php).
-2. Set-up the Microsoft Azure PEAR channel:
-
-    pear channel-discover pear.windowsazure.com
-3. Install the PEAR package:
-
-    pear install pear.windowsazure.com/WindowsAzure-0.4.1
-
 
 # Usage
 
@@ -110,12 +90,6 @@ There are four basic steps that have to be performed before you can make a call 
 
 * First, include the autoloader script:
 
-  If installed via PEAR or Git:
-
-    require_once "WindowsAzure/WindowsAzure.php"; 
-
-  If installed via Composer:
-    
     require_once "vendor/autoload.php"; 
   
 * Include the namespaces you are going to use.
@@ -424,7 +398,14 @@ try {
 ```
 
 ## Service Bus Queues
-
+The current PHP Service Bus APIs only support ACS connection strings. You need to use PowerShell to create a new ACS Service Bus namespace at the present time.  
+First, make sure you have Azure PowerShell installed, then in a PowerShell command prompt, run 
+```
+Add-AzureAccount # this will sign you in
+New-AzureSBNamespace -CreateACSNamespace $true -Name 'mytestbusname' -Location 'West US' -NamespaceType 'Messaging'
+```
+If it is sucessful, you will get the connection string in the PowerShell output. If you get connection errors with it and the conection string looks like Endpoint=sb://..., change it to **Endpoint=https://...**
+ 
 ### Create a Queue
 
 ```PHP
@@ -638,7 +619,10 @@ echo "Operation status: ".$status->getStatus()."<br />";
 ```
 
 ##Media Services
-
+> **Note**
+> 
+>The current Media Services API only works with PHP 5.5 and above.
+ 
 ###Create new asset with file
 
 To create an asset with a file you need to create an empty asset, create access policy with write permission, create a locator joining your asset and access policy, perform actual upload and generate file info.
