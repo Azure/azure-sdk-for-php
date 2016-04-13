@@ -64,7 +64,24 @@ To get the source code from GitHub, type
 1. Make sure you have installed **[Compoeser](https://getcomposer.org/doc/00-intro.md#introduction)** in your system.
 It can be installed locally or globally depending on your own needs.
 
-2. Execute the following command in order to get this package:
+2. You can edit your `composer.json` file manually or directly add the requirement via CLI:
+
+###Manually edit
+Create or edit your **composer.json** in the root of your project and add the following code to it:
+```json
+{
+    "require": {
+        "microsoft/windowsazure": "^0.4"
+    }
+}
+```
+
+* Open a command prompt and execute this in your project root
+
+    php composer install
+
+###Add requirement and install with one command
+Execute the following command in order to get this package:
 
     php composer create-project microsoft/windowsazure /path/to/install/dir ^0.4
 
