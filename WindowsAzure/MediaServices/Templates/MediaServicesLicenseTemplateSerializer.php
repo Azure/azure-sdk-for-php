@@ -496,9 +496,7 @@ class MediaServicesLicenseTemplateSerializer
         
         if(count($time)>0) $spec .= 'T' . implode('', $time);
         return $spec;        
-    }
- 
-    
+    }     
 }
 
 

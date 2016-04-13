@@ -395,7 +395,7 @@ class TokenRestrictionTemplateSerializer
         $result->setOpenIdDiscoveryUri((string)$xmlElement->OpenIdDiscoveryUri);
 
         return $result;
-    }    
+    }
 }
 
 
