@@ -53,6 +53,13 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
             $this->markTestSkipped(self::NOT_SUPPORTED);
         }
     }
+    
+    protected function skipIfOSX()
+    {
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'DAR') {
+            $this->markTestSkipped('This test does not run on OS X at this time');
+        }
+    }
 
     protected function isEmulated()
     {
