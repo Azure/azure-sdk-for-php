@@ -137,7 +137,7 @@ class ContentKeyAuthorizationPolicyOption
             $this->_keyDeliveryConfiguration = $options['KeyDeliveryConfiguration'];
         }  
 
-        if (!Utilities::empty54($options['Restrictions'])) {
+        if ($options['Restrictions']) {
             Validate::isArray($options['Restrictions'], 'options[Restrictions]');
             foreach ($options['Restrictions'] as $restriction) {
                 $this->_restrictions[] = ContentKeyAuthorizationPolicyRestriction::createFromOptions($restriction);

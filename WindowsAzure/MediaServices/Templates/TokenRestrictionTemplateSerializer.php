@@ -105,17 +105,17 @@ class TokenRestrictionTemplateSerializer
      */
     public static function serialize($tokenRestriction) {
 
-        if (Utilities::empty54($tokenRestriction->getPrimaryVerificationKey()) &&
+        if (!$tokenRestriction->getPrimaryVerificationKey() &&
             ($tokenRestriction->getOpenIdConnectDiscoveryDocument() == null ||
-             Utilities::empty54($tokenRestriction->getOpenIdConnectDiscoveryDocument()->getOpenIdDiscoveryUri()))) {
+             !$tokenRestriction->getOpenIdConnectDiscoveryDocument()->getOpenIdDiscoveryUri())) {
             throw new \RuntimeException("Both PrimaryVerificationKey and OpenIdConnectDiscoveryDocument are null");
         }
 
-        if (Utilities::empty54($tokenRestriction->getAudience())) {
+        if (!$tokenRestriction->getAudience()) {
             throw new \RuntimeException("TokenRestrictionTemplate Serialize: Audience is required");
         }
 
-        if (Utilities::empty54($tokenRestriction->getIssuer())) {
+        if (!$tokenRestriction->getIssuer()) {
             throw new \RuntimeException("TokenRestrictionTemplate Serialize: Issuer is required");
         }
 
@@ -125,28 +125,28 @@ class TokenRestrictionTemplateSerializer
         $writer->startElementNS(null, 'TokenRestrictionTemplate', Resources::TRT_XML_NAMESPACE);
         $writer->writeAttributeNS('xmlns','i', null, Resources::XSI_XML_NAMESPACE);
 
-        if (!Utilities::empty54($tokenRestriction->getAlternateVerificationKeys())) {
+        if ($tokenRestriction->getAlternateVerificationKeys()) {
             TokenRestrictionTemplateSerializer::serializeAlternateVerificationKeys($writer, $tokenRestriction->getAlternateVerificationKeys());
         }
 
         $writer->writeElement("Audience", $tokenRestriction->getAudience());
         $writer->writeElement("Issuer", $tokenRestriction->getIssuer());
 
-        if (!Utilities::empty54($tokenRestriction->getPrimaryVerificationKey())) {
+        if ($tokenRestriction->getPrimaryVerificationKey()) {
             $writer->startElement('PrimaryVerificationKey');
             TokenRestrictionTemplateSerializer::serializeTokenVerificationKey($writer, $tokenRestriction->getPrimaryVerificationKey());
             $writer->endElement();
         }
 
-        if (!Utilities::empty54($tokenRestriction->getRequiredClaims())) {
+        if ($tokenRestriction->getRequiredClaims()) {
             TokenRestrictionTemplateSerializer::serializeRequiredClaims($writer, $tokenRestriction->getRequiredClaims());
         }
 
-        if (!Utilities::empty54($tokenRestriction->getTokenType())) {
+        if ($tokenRestriction->getTokenType()) {
             $writer->writeElement('TokenType', $tokenRestriction->getTokenType());
         }
 
-        if (!Utilities::empty54($tokenRestriction->getOpenIdConnectDiscoveryDocument())) {
+        if ($tokenRestriction->getOpenIdConnectDiscoveryDocument()) {
             TokenRestrictionTemplateSerializer::serializeOpenIdConnectDiscoveryDocument($writer, $tokenRestriction->getOpenIdConnectDiscoveryDocument());
         }
 
@@ -266,7 +266,7 @@ class TokenRestrictionTemplateSerializer
      * @param OpenIdConnectDiscoveryDocument $openid
      */
     private static function serializeOpenIdConnectDiscoveryDocument($writer, $openid) {
-        if (Utilities::empty54($openid->getOpenIdDiscoveryUri())) {
+        if (!$openid->getOpenIdDiscoveryUri()) {
             throw new \RuntimeException("OpenIdDiscoveryUri must not be empty.");
         }
 
@@ -299,11 +299,11 @@ class TokenRestrictionTemplateSerializer
         $writer->startElement('RequiredClaims');
         foreach($claims as $claim) {
             $writer->startElement('TokenClaim');
-            if (Utilities::empty54($claim->getClaimType())) {
+            if (!$claim->getClaimType()) {
                 throw new \RuntimeException("ClaimType must not be empty.");
             }
             $writer->writeElement('ClaimType', $claim->getClaimType());
-            if (!Utilities::empty54($claim->getClaimValue())) {
+            if ($claim->getClaimValue()) {
                 $writer->writeElement('ClaimValue', $claim->getClaimValue());
             }
             $writer->endElement();

@@ -718,17 +718,4 @@ class Utilities
     
         return $result;
     }
-    
-    /**
-    * This function is used to override empty() which does not accept expression as parameter in PHP 5.4.
-    * Will delete this function and replace it with the built-in empty() once we stop supporting PHP 5.4
-    *
-    * @param mixed $exp
-    * 
-    * @return bool 
-    */
-    public static function empty54($exp)
-    {
-        return empty($exp);
-    }
 }
