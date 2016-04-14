@@ -468,16 +468,16 @@
         },
         {
             "name": "mikey179/vfsStream",
-            "version": "v1.6.2",
+            "version": "v1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mikey179/vfsStream.git",
-                "reference": "fefd182fa739d4e23d9dc7c80d3344f528d600ab"
+                "reference": "c19925cd0390d3c436a0203ae859afa460d0474b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mikey179/vfsStream/zipball/fefd182fa739d4e23d9dc7c80d3344f528d600ab",
-                "reference": "fefd182fa739d4e23d9dc7c80d3344f528d600ab",
+                "url": "https://api.github.com/repos/mikey179/vfsStream/zipball/c19925cd0390d3c436a0203ae859afa460d0474b",
+                "reference": "c19925cd0390d3c436a0203ae859afa460d0474b",
                 "shasum": ""
             },
             "require": {
@@ -510,7 +510,7 @@
             ],
             "description": "Virtual file system to mock the real file system in unit tests.",
             "homepage": "http://vfs.bovigo.org/",
-            "time": "2016-01-13 09:41:49"
+            "time": "2016-04-09 09:42:01"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -1364,25 +1364,25 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.0.4",
+            "version": "v2.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "0047c8366744a16de7516622c5b7355336afae96"
+                "reference": "584e52cb8f788a887553ba82db6caacb1d6260bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/0047c8366744a16de7516622c5b7355336afae96",
-                "reference": "0047c8366744a16de7516622c5b7355336afae96",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/584e52cb8f788a887553ba82db6caacb1d6260bb",
+                "reference": "584e52cb8f788a887553ba82db6caacb1d6260bb",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.9"
+                "php": ">=5.3.9"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -1409,7 +1409,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-04 07:55:57"
+            "time": "2016-03-04 07:54:35"
         }
     ],
     "aliases": [],
