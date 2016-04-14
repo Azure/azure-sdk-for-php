@@ -67,15 +67,10 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     protected $assetDeliveryPolicies = array();
 
     const LARGE_FILE_SIZE_MB = 7;
-    const VERSION_NOT_SUPPORTED = 'The lowest PHP version supported for Media Services is 5.5. The current version is %s';
 
     public function setUp()
     {
         $this->skipIfEmulated();
-        if (phpversion() < "5.5")
-        {
-               $this->markTestSkipped(sprintf(self::VERSION_NOT_SUPPORTED, phpversion()));
-        }
         parent::setUp();
         $connection         = TestResources::getMediaServicesConnectionParameters();
         $settings           = new MediaServicesSettings($connection['accountName'], $connection['accessKey'], $connection['endpointUri'], $connection['oauthEndopointUri']);

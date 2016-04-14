@@ -217,7 +217,7 @@ class MediaServicesLicenseTemplateSerializer
             $writer->writeElement('GracePeriod', MediaServicesLicenseTemplateSerializer::getSpecString($template->getGracePeriod()));
         }
         
-        if (!empty($template->getLicenseType())) {
+        if ($template->getLicenseType()) {
             $writer->writeElement('LicenseType', (string)$template->getLicenseType());
         }
 
@@ -247,7 +247,7 @@ class MediaServicesLicenseTemplateSerializer
             $writer->endElement();
         }
 
-        if (!empty($playright->getAllowPassingVideoContentToUnknownOutput())) {
+        if ($playright->getAllowPassingVideoContentToUnknownOutput()) {
             $writer->writeElement('AllowPassingVideoContentToUnknownOutput', $playright->getAllowPassingVideoContentToUnknownOutput());
         }
 
@@ -496,7 +496,7 @@ class MediaServicesLicenseTemplateSerializer
         
         if(count($time)>0) $spec .= 'T' . implode('', $time);
         return $spec;        
-    }   
+    }
 }
 
 

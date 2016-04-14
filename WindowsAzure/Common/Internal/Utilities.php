@@ -718,5 +718,4 @@ class Utilities
     
         return $result;
     }
-
 }
