@@ -67,7 +67,6 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     protected $assetDeliveryPolicies = array();
 
     const LARGE_FILE_SIZE_MB = 7;
-    const VERSION_NOT_SUPPORTED = 'The lowest PHP version supported for Media Services is 5.5. The current version is %s';
 
     public function setUp()
     {
