@@ -56,7 +56,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
     public function setUp()
     {
         $this->skipIfEmulated();
-
+        $this->skipIfOSX();
         parent::setUp();
         $serviceManagementRestProxy = $this->builder->createServiceManagementService(TestResources::getServiceManagementConnectionString());
         parent::setProxy($serviceManagementRestProxy);

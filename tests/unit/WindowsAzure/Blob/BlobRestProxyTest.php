@@ -1617,55 +1617,60 @@ class BlobRestProxyTest extends BlobServiceRestProxyTestBase
     **/
     public function testCreateBlobLargerThanSingleBlock()
     {
+        $this->skipIfOSX();
         // First step, lets set the value for automagic splitting to somethign very small
-	$max_size = 50;
+        $max_size = 50;
         $this->restProxy->setSingleBlobUploadThresholdInBytes( $max_size );
         $this->assertEquals($this->restProxy->getSingleBlobUploadThresholdInBytes(), $max_size);
         $name = 'createbloblargerthansingleblock' . $this->createSuffix();
         $this->createContainer($name);
         $contentType = 'text/plain; charset=UTF-8';
-	$content = "This is a really long section of text needed for this test.";
-	// Note this grows fast, each loop doubles the last run. Do not make too big
+        $content = "This is a really long section of text needed for this test.";
+
+        // Note this grows fast, each loop doubles the last run. Do not make too big
         // This results in a 1888 byte string, divided by 50 results in 38 blocks
-	for($i = 0; $i < 5; $i++){
-		$content .= $content;
-	}
+        for($i = 0; $i < 5; $i++) {
+            $content .= $content;
+        }
+
         $options = new CreateBlobOptions();
         $options->setContentType($contentType);
         $this->restProxy->createBlockBlob($name, 'little_split', $content, $options);
 
-	// Block specific
-	$boptions = new ListBlobBlocksOptions();
-	$boptions->setIncludeUncommittedBlobs(true);
-	$boptions->setIncludeCommittedBlobs(true);
+        // Block specific
+        $boptions = new ListBlobBlocksOptions();
+        $boptions->setIncludeUncommittedBlobs(true);
+        $boptions->setIncludeCommittedBlobs(true);
         $result = $this->restProxy->listBlobBlocks($name, 'little_split', $boptions);
-	$blocks = $result->getUnCommittedBlocks();
+        $blocks = $result->getUnCommittedBlocks();
         $this->assertEquals(count($blocks), 0);
-	$blocks = $result->getCommittedBlocks();
-	$this->assertEquals(count($blocks), ceil(strlen($content) / $max_size));
+        $blocks = $result->getCommittedBlocks();
+        $this->assertEquals(count($blocks), ceil(strlen($content) / $max_size));
 
         // Setting back to default value for one shot test
         $this->restProxy->setSingleBlobUploadThresholdInBytes( 0 );
         $this->restProxy->createBlockBlob($name, 'oneshot', $content, $options);
         $result = $this->restProxy->listBlobBlocks($name, 'oneshot', $boptions);
-	$blocks = $result->getUnCommittedBlocks();
+        $blocks = $result->getUnCommittedBlocks();
         $this->assertEquals(count($blocks), 0);
-	$blocks = $result->getCommittedBlocks();
+        $blocks = $result->getCommittedBlocks();
+
         // this one doesn't make sense. On emulator, there is no block created, 
         // so relying on content size to be final approval
-	$this->assertEquals(count($blocks), 0);
+        $this->assertEquals(count($blocks), 0);
         $this->assertEquals($result->getContentLength(), strlen($content));
 
         // make string even larger for automagic splitting
         // This should result in a string longer than 32M, and force the blob into 2 blocks
-	for($i = 0; $i < 15; $i++){
-		$content .= $content;
-	}
+        for($i = 0; $i < 15; $i++) {
+            $content .= $content;
+        }
+
         $this->restProxy->createBlockBlob($name, 'bigsplit', $content, $options);
         $result = $this->restProxy->listBlobBlocks($name, 'bigsplit', $boptions);
-	$blocks = $result->getUnCommittedBlocks();
+        $blocks = $result->getUnCommittedBlocks();
         $this->assertEquals(count($blocks), 0);
-	$blocks = $result->getCommittedBlocks();
-	$this->assertEquals(count($blocks), ceil(strlen($content)/(4*1024*1024)));
+        $blocks = $result->getCommittedBlocks();
+        $this->assertEquals(count($blocks), ceil(strlen($content)/(4*1024*1024)));
     }
 }
