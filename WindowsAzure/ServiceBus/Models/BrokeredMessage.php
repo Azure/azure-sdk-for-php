@@ -176,7 +176,7 @@ class BrokeredMessage
     {
         $this->_date = $date;
     }
-    
+
     /**
      * Gets the value of a custom property. 
      *
@@ -187,8 +187,10 @@ class BrokeredMessage
     public function getProperty($propertyName)
     {
         Validate::isString($propertyName, 'propertyName');
-        return $this->_customProperties[strtolower($propertyName)];
+        $propertyName = strtolower(Utilities::urlencode_once($propertyName));
+        return $this->_customProperties[$propertyName];
     } 
+    
 
     /**
      * Sets the value of a custom property. 
@@ -202,8 +204,8 @@ class BrokeredMessage
     {
         Validate::isString($propertyName, 'propertyName');
         Validate::notNull($propertyValue, 'propertyValue');
-
-        $this->_customProperties[strtolower($propertyName)] = $propertyValue;
+        $propertyName = strtolower(Utilities::urlencode_once($propertyName));
+        $this->_customProperties[$propertyName] = $propertyValue;
     }
 
     /**
