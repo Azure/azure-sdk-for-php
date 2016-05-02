@@ -45,21 +45,21 @@ print "Azure SDK for PHP - Scale Encoding Units Sample\r\n";
 $restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($account, $secret));
 
 // 2. retrieve the current configuration of Encoding Units
-$encodingUntis = $restProxy->getEncodingReservedUnit();
+$encodingUnits = $restProxy->getEncodingReservedUnit();
 
-echo("Current Encoding Reserved Units: " . $encodingUntis->getCurrentReservedUnits() . " units (" . $types[$encodingUntis->getReservedUnitType()] . ")\r\n");
+echo("Current Encoding Reserved Units: " . $encodingUnits->getCurrentReservedUnits() . " units (" . $types[$encodingUnits->getReservedUnitType()] . ")\r\n");
 echo("Updating to: " . $reservedUnits . " units (" . $types[$reservedUnitsType] . ") ...");
 
 // 3. set up the new encoding units settings
-$encodingUntis->setCurrentReservedUnits($reservedUnits);
-$encodingUntis->setReservedUnitType($reservedUnitsType);
+$encodingUnits->setCurrentReservedUnits($reservedUnits);
+$encodingUnits->setReservedUnitType($reservedUnitsType);
 
 // 4. update the encoding reserved units
-$restProxy->updateEncodingReservedUnit($encodingUntis);
+$restProxy->updateEncodingReservedUnit($encodingUnits);
 
 // 5. reload the current configuration and show the results
-$encodingUntis = $restProxy->getEncodingReservedUnit();
+$encodingUnits = $restProxy->getEncodingReservedUnit();
 
-echo("\r\nUpdated Encoding Reserved Units: " . $encodingUntis->getCurrentReservedUnits() . " units (" . $types[$encodingUntis->getReservedUnitType()] . ")\r\n");
+echo("\r\nUpdated Encoding Reserved Units: " . $encodingUnits->getCurrentReservedUnits() . " units (" . $types[$encodingUnits->getReservedUnitType()] . ")\r\n");
 
 ?>
