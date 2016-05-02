@@ -718,4 +718,25 @@ class Utilities
     
         return $result;
     }
+
+    /**
+     * urlencode the input string if it is not already encoded
+     * 
+     * @param string $data input string
+     * 
+     * @return urlencoded string if the input string was not already encoded, 
+     * otherwise, the original string
+     */
+    public static function urlencode_once($data)
+    {
+        if (urldecode($data) !== $data)
+        {
+            return $data;
+        }
+        else 
+        {
+            return urlencode($data);
+        }
+    }
+
 }
