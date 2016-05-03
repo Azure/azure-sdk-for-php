@@ -811,11 +811,11 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 
         $blobUrl = $manifest->getBlobStorageUriForUpload();
         $blobUrlParts = explode('/', $blobUrl);
-        $blob = array_pop($blobUrlParts);
+        $container = array_pop($blobUrlParts);
 
-        $blobRestProxy = $this->builder->createBlobService($this->connectionString);
+        $blobRestProxy = $this->builder->createBlobService(TestResources::getMediaStorageServicesConnectionString());
         $blobRestProxy->createBlockBlob(
-            $blob,
+            $container,
             $fileName,
             TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT
         );
@@ -823,9 +823,8 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $this->waitIngestManifestFinishedFiles($manifest, 1);
         $finishedFirstStat = $this->restProxy->getIngestManifest($manifest);
 
-        $blobRestProxy = $this->builder->createBlobService($this->connectionString);
         $blobRestProxy->createBlockBlob(
-            $blob,
+            $container,
             $otherFileName,
             TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT_1
         );
@@ -1046,11 +1045,11 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 
         $blobUrl = $manifest->getBlobStorageUriForUpload();
         $blobUrlParts = explode('/', $blobUrl);
-        $blob = array_pop($blobUrlParts);
+        $container = array_pop($blobUrlParts);
 
-        $blobRestProxy = $this->builder->createBlobService($this->connectionString);
+        $blobRestProxy = $this->builder->createBlobService(TestResources::getMediaStorageServicesConnectionString());
         $blobRestProxy->createBlockBlob(
-                $blob,
+                $container,
                 $fileName,
                 TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT
         );
@@ -1059,7 +1058,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $finishedFirstStat = $this->restProxy->getIngestManifest($manifest);
 
         $blobRestProxy->createBlockBlob(
-                $blob,
+                $container,
                 $otherFileName,
                 TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT_1
         );

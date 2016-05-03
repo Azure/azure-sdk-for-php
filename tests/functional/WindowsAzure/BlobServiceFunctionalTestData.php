@@ -22,29 +22,29 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Functional\WindowsAzure\Blob;
+namespace Tests\Functional\WindowsAzure;
 
-use WindowsAzure\Blob\Models\AccessCondition;
-use WindowsAzure\Blob\Models\ContainerAcl;
-use WindowsAzure\Blob\Models\CopyBlobOptions;
-use WindowsAzure\Blob\Models\CreateBlobOptions;
-use WindowsAzure\Blob\Models\CreateBlobSnapshotOptions;
-use WindowsAzure\Blob\Models\CreateContainerOptions;
-use WindowsAzure\Blob\Models\DeleteBlobOptions;
-use WindowsAzure\Blob\Models\DeleteContainerOptions;
-use WindowsAzure\Blob\Models\GetBlobOptions;
-use WindowsAzure\Blob\Models\GetBlobPropertiesOptions;
-use WindowsAzure\Blob\Models\ListBlobsOptions;
-use WindowsAzure\Blob\Models\ListContainersOptions;
-use WindowsAzure\Blob\Models\PublicAccessType;
-use WindowsAzure\Blob\Models\SetBlobMetadataOptions;
-use WindowsAzure\Blob\Models\SetBlobPropertiesOptions;
-use WindowsAzure\Blob\Models\SetContainerMetadataOptions;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Models\Logging;
-use WindowsAzure\Common\Models\Metrics;
-use WindowsAzure\Common\Models\RetentionPolicy;
-use WindowsAzure\Common\Models\ServiceProperties;
+use MicrosoftAzure\Storage\Blob\Models\AccessCondition;
+use MicrosoftAzure\Storage\Blob\Models\ContainerAcl;
+use MicrosoftAzure\Storage\Blob\Models\CopyBlobOptions;
+use MicrosoftAzure\Storage\Blob\Models\CreateBlobOptions;
+use MicrosoftAzure\Storage\Blob\Models\CreateBlobSnapshotOptions;
+use MicrosoftAzure\Storage\Blob\Models\CreateContainerOptions;
+use MicrosoftAzure\Storage\Blob\Models\DeleteBlobOptions;
+use MicrosoftAzure\Storage\Blob\Models\DeleteContainerOptions;
+use MicrosoftAzure\Storage\Blob\Models\GetBlobOptions;
+use MicrosoftAzure\Storage\Blob\Models\GetBlobPropertiesOptions;
+use MicrosoftAzure\Storage\Blob\Models\ListBlobsOptions;
+use MicrosoftAzure\Storage\Blob\Models\ListContainersOptions;
+use MicrosoftAzure\Storage\Blob\Models\PublicAccessType;
+use MicrosoftAzure\Storage\Blob\Models\SetBlobMetadataOptions;
+use MicrosoftAzure\Storage\Blob\Models\SetBlobPropertiesOptions;
+use MicrosoftAzure\Storage\Blob\Models\SetContainerMetadataOptions;
+use MicrosoftAzure\Storage\Common\Internal\Resources;
+use MicrosoftAzure\Storage\Common\Models\Logging;
+use MicrosoftAzure\Storage\Common\Models\Metrics;
+use MicrosoftAzure\Storage\Common\Models\RetentionPolicy;
+use MicrosoftAzure\Storage\Common\Models\ServiceProperties;
 
 class BlobServiceFunctionalTestData
 {
