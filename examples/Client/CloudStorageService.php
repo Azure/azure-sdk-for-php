@@ -24,7 +24,7 @@
  
 namespace Client;
 use WindowsAzure\Common\ServicesBuilder;
-use WindowsAzure\Table\Models\QueryTablesOptions;
+use MicrosoftAzure\Storage\Table\Models\QueryTablesOptions;
 
 /**
  * Encapsulates Windows Azure storage service operations.
