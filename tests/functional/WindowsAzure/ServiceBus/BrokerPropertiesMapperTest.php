@@ -25,7 +25,7 @@
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
 use Tests\Framework\ServiceBusRestProxyTestBase;
-use Tests\Functional\WindowsAzure\Blob\BlobServiceFunctionalTestData;
+use Tests\Functional\WindowsAzure\BlobServiceFunctionalTestData;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
 
 class BrokerPropertiesMapperTest extends ServiceBusRestProxyTestBase
