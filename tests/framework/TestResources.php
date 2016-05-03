@@ -110,6 +110,17 @@ class TestResources
         return $connectionString;
     }
 
+    public static function getMediaStorageServicesConnectionString()
+    {
+        $connectionString = getenv('AZURE_MEDIA_STORAGE_CONNECTION_STRING');
+
+        if (empty($connectionString)) {
+            throw new \Exception('AZURE_MEDIA_STORAGE_CONNECTION_STRING envionment variable is missing');
+        }
+
+        return $connectionString;
+    }
+
     public static function getEmulatorStorageServicesConnectionString()
     {
         $developmentStorageConnectionString = 'UseDevelopmentStorage=true';
