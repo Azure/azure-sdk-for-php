@@ -23,12 +23,12 @@
  */
 
 namespace Tests\Unit\WindowsAzure\Common\Internal;
+use Tests\Mock\WindowsAzure\Common\Internal\Filters\SimpleFilterMock;
+use MicrosoftAzure\Storage\Blob\Models\AccessCondition;
 use WindowsAzure\Common\Internal\ServiceRestProxy;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Http\Url;
-use Tests\Mock\WindowsAzure\Common\Internal\Filters\SimpleFilterMock;
-use WindowsAzure\Blob\Models\AccessCondition;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 
 /**

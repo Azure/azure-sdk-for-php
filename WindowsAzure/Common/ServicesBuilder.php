@@ -23,7 +23,12 @@
  */
 
 namespace WindowsAzure\Common;
-use WindowsAzure\Blob\BlobRestProxy;
+use MicrosoftAzure\Storage\Blob\BlobRestProxy;
+use MicrosoftAzure\Storage\Queue\QueueRestProxy;
+use MicrosoftAzure\Storage\Table\TableRestProxy;
+use MicrosoftAzure\Storage\Table\Internal\AtomReaderWriter;
+use MicrosoftAzure\Storage\Table\Internal\MimeReaderWriter;
+use MicrosoftAzure\Storage\Common\ServicesBuilder as StorageServiceBuilder;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
@@ -40,13 +45,9 @@ use WindowsAzure\Common\Internal\StorageServiceSettings;
 use WindowsAzure\Common\Internal\ServiceManagementSettings;
 use WindowsAzure\Common\Internal\ServiceBusSettings;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
-use WindowsAzure\Queue\QueueRestProxy;
 use WindowsAzure\ServiceBus\ServiceBusRestProxy;
 use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
 use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
-use WindowsAzure\Table\TableRestProxy;
-use WindowsAzure\Table\Internal\AtomReaderWriter;
-use WindowsAzure\Table\Internal\MimeReaderWriter;
 use WindowsAzure\MediaServices\MediaServicesRestProxy;
 use WindowsAzure\Common\Internal\OAuthRestProxy;
 use WindowsAzure\Common\Internal\Authentication\OAuthScheme;
@@ -173,48 +174,7 @@ class ServicesBuilder
      */
     public function createQueueService($connectionString)
     {
-        $settings = StorageServiceSettings::createFromConnectionString(
-            $connectionString
-        );
-
-        $httpClient = $this->httpClient();
-        $serializer = $this->serializer();
-        $uri        = Utilities::tryAddUrlScheme(
-            $settings->getQueueEndpointUri()
-        );
-
-        $queueWrapper = new QueueRestProxy(
-            $httpClient,
-            $uri,
-            $settings->getName(),
-            $serializer
-        );
-
-        // Adding headers filter
-        $headers = array(
-            Resources::USER_AGENT => Resources::SDK_USER_AGENT,
-        );
-
-        $headers[Resources::X_MS_VERSION] = Resources::STORAGE_API_LATEST_VERSION;
-
-        $headersFilter = new HeadersFilter($headers);
-        $queueWrapper  = $queueWrapper->withFilter($headersFilter);
-
-        // Adding date filter
-        $dateFilter   = new DateFilter();
-        $queueWrapper = $queueWrapper->withFilter($dateFilter);
-
-        // Adding authentication filter
-        $authFilter = new AuthenticationFilter(
-            $this->queueAuthenticationScheme(
-                $settings->getName(),
-                $settings->getKey()
-            )
-        );
-
-        $queueWrapper = $queueWrapper->withFilter($authFilter);
-
-        return $queueWrapper;
+        return StorageServiceBuilder::getInstance()->createQueueService($connectionString);
     }
 
     /**
@@ -226,47 +186,7 @@ class ServicesBuilder
      */
     public function createBlobService($connectionString)
     {
-        $settings = StorageServiceSettings::createFromConnectionString(
-            $connectionString
-        );
-
-        $httpClient = $this->httpClient();
-        $serializer = $this->serializer();
-        $uri        = Utilities::tryAddUrlScheme(
-            $settings->getBlobEndpointUri()
-        );
-
-        $blobWrapper = new BlobRestProxy(
-            $httpClient,
-            $uri,
-            $settings->getName(),
-            $serializer
-        );
-
-        // Adding headers filter
-        $headers = array(
-            Resources::USER_AGENT => Resources::SDK_USER_AGENT,
-        );
-
-        $headers[Resources::X_MS_VERSION] = Resources::STORAGE_API_LATEST_VERSION;
-
-        $headersFilter = new HeadersFilter($headers);
-        $blobWrapper   = $blobWrapper->withFilter($headersFilter);
-
-        // Adding date filter
-        $dateFilter  = new DateFilter();
-        $blobWrapper = $blobWrapper->withFilter($dateFilter);
-
-        $authFilter = new AuthenticationFilter(
-            $this->blobAuthenticationScheme(
-                $settings->getName(),
-                $settings->getKey()
-            )
-        );
-
-        $blobWrapper = $blobWrapper->withFilter($authFilter);
-
-        return $blobWrapper;
+        return StorageServiceBuilder::getInstance()->createBlobService($connectionString);
     }
 
     /**
@@ -278,61 +198,7 @@ class ServicesBuilder
      */
     public function createTableService($connectionString)
     {
-        $settings = StorageServiceSettings::createFromConnectionString(
-            $connectionString
-        );
-
-        $httpClient     = $this->httpClient();
-        $atomSerializer = $this->atomSerializer();
-        $mimeSerializer = $this->mimeSerializer();
-        $serializer     = $this->serializer();
-        $uri            = Utilities::tryAddUrlScheme(
-            $settings->getTableEndpointUri()
-        );
-
-        $tableWrapper = new TableRestProxy(
-            $httpClient,
-            $uri,
-            $atomSerializer,
-            $mimeSerializer,
-            $serializer
-        );
-
-        // Adding headers filter
-        $headers               = array();
-        $latestServicesVersion = Resources::STORAGE_API_LATEST_VERSION;
-        $currentVersion        = Resources::DATA_SERVICE_VERSION_VALUE;
-        $maxVersion            = Resources::MAX_DATA_SERVICE_VERSION_VALUE;
-        $accept                = Resources::ACCEPT_HEADER_VALUE;
-        $acceptCharset         = Resources::ACCEPT_CHARSET_VALUE;
-        $userAgent             = Resources::SDK_USER_AGENT;
-
-        $headers[Resources::X_MS_VERSION]             = $latestServicesVersion;
-        $headers[Resources::DATA_SERVICE_VERSION]     = $currentVersion;
-        $headers[Resources::MAX_DATA_SERVICE_VERSION] = $maxVersion;
-        $headers[Resources::MAX_DATA_SERVICE_VERSION] = $maxVersion;
-        $headers[Resources::ACCEPT_HEADER]            = $accept;
-        $headers[Resources::ACCEPT_CHARSET]           = $acceptCharset;
-        $headers[Resources::USER_AGENT]               = $userAgent;
-
-        $headersFilter = new HeadersFilter($headers);
-        $tableWrapper  = $tableWrapper->withFilter($headersFilter);
-
-        // Adding date filter
-        $dateFilter   = new DateFilter();
-        $tableWrapper = $tableWrapper->withFilter($dateFilter);
-
-        // Adding authentication filter
-        $authFilter = new AuthenticationFilter(
-            $this->tableAuthenticationScheme(
-                $settings->getName(),
-                $settings->getKey()
-            )
-        );
-
-        $tableWrapper = $tableWrapper->withFilter($authFilter);
-
-        return $tableWrapper;
+        return StorageServiceBuilder::getInstance()->createTableService($connectionString);
     }
 
     /**

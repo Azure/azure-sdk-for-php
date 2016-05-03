@@ -82,6 +82,11 @@ class RestProxyTestBase extends \PHPUnit_Framework_TestCase
         $this->tearDown();
         throw $e;
     }
+
+    public function testDummy()
+    {
+        // dummy test to get rid of warning "No tests found in class 'Tests\Framework\RestProxyTestBase' "
+    }
 }
 
 

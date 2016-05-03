@@ -23,6 +23,7 @@
  */
 
 namespace WindowsAzure\MediaServices;
+use MicrosoftAzure\Storage\Blob\Models\BlobType;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
@@ -44,7 +45,6 @@ use WindowsAzure\Common\Internal\Atom\Feed;
 use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Atom\Content;
 use WindowsAzure\Common\Internal\Atom\AtomLink;
-use WindowsAzure\Blob\Models\BlobType;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Http\BatchRequest;
