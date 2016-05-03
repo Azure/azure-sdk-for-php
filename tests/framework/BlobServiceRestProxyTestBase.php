@@ -24,9 +24,9 @@
 
 namespace Tests\Framework;
 use Tests\Framework\ServiceRestProxyTestBase;
-use WindowsAzure\Blob\Models\CreateContainerOptions;
-use WindowsAzure\Blob\Models\ListContainersOptions;
-use WindowsAzure\Common\ServiceException;
+use MicrosoftAzure\Storage\Blob\Models\CreateContainerOptions;
+use MicrosoftAzure\Storage\Blob\Models\ListContainersOptions;
+use MicrosoftAzure\Storage\Common\ServiceException;
 
 /**
  * TestBase class for each unit test class.

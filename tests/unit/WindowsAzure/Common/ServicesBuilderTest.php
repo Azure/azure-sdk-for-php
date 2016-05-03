@@ -59,7 +59,7 @@ class ServicesBuilderTest extends ServiceRestProxyTestBase
         $queueRestProxy = $builder->createQueueService(TestResources::getWindowsAzureStorageServicesConnectionString());
 
         // Assert
-        $this->assertInstanceOf('WindowsAzure\Queue\Internal\IQueue', $queueRestProxy);
+        $this->assertInstanceOf('MicrosoftAzure\Storage\Queue\Internal\IQueue', $queueRestProxy);
     }
 
     /**
@@ -77,7 +77,7 @@ class ServicesBuilderTest extends ServiceRestProxyTestBase
         $blobRestProxy = $builder->createBlobService(TestResources::getWindowsAzureStorageServicesConnectionString());
 
         // Assert
-        $this->assertInstanceOf('WindowsAzure\Blob\Internal\IBlob', $blobRestProxy);
+        $this->assertInstanceOf('MicrosoftAzure\Storage\Blob\Internal\IBlob', $blobRestProxy);
     }
 
     /**
@@ -97,7 +97,7 @@ class ServicesBuilderTest extends ServiceRestProxyTestBase
         $tableRestProxy = $builder->createTableService(TestResources::getWindowsAzureStorageServicesConnectionString());
 
         // Assert
-        $this->assertInstanceOf('WindowsAzure\Table\Internal\ITable', $tableRestProxy);
+        $this->assertInstanceOf('MicrosoftAzure\Storage\Table\Internal\ITable', $tableRestProxy);
     }
 
     /**

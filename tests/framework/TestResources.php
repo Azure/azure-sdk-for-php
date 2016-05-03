@@ -23,8 +23,8 @@
  */
 
 namespace Tests\Framework;
-use WindowsAzure\Table\Models\EdmType;
-use WindowsAzure\Table\Models\Entity;
+use MicrosoftAzure\Storage\Table\Models\EdmType;
+use MicrosoftAzure\Storage\Table\Models\Entity;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 
