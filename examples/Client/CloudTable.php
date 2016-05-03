@@ -23,7 +23,7 @@
  */
  
 namespace Client;
-use WindowsAzure\Table\Models\Entity;
+use MicrosoftAzure\Storage\Table\Models\Entity;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
@@ -136,11 +136,11 @@ class CloudTable
      * 
      * @return none
      */
-    public function deleteEntity($rowKey)
+    public function deleteEntity($paritionKey, $rowKey)
     {
         $this->_proxy->deleteEntity(
             $this->_name,
-            $this->_defaultParitionKey,
+            $paritionKey,
             $rowKey
         );
     }
