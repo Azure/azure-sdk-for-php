@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,21 +15,21 @@
  * PHP version 5
  *
  * @category   Microsoft
- * @package    WindowsAzure
+ *
  * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link       https://github.com/windowsazure/azure-sdk-for-php
  * @deprecated deprecated since version 0.4.2 and replaced by vendor/autoload.php
  */
-
-trigger_error(sprintf('Usage of `%s` has been deprecated since version 0.4.2 and will be removed in 0.5.0. ' .
+trigger_error(sprintf('Usage of `%s` has been deprecated since version 0.4.2 and will be removed in 0.5.0. '.
    'Please use `vendor/autoload.php` instead, which is generated during the install process by Composer.', __FILE__), E_USER_DEPRECATED);
 spl_autoload_register(
-   function($class) {
+   function ($class) {
       static $classes = null;
       if ($classes === null) {
-         $classes = array(
+          $classes = array(
             'windowsazure\\blob\\blobrestproxy' => '/Blob/BlobRestProxy.php',
             'windowsazure\\blob\\internal\\iblob' => '/Blob/Internal/IBlob.php',
             'windowsazure\\blob\\models\\accesscondition' => '/Blob/Models/AccessCondition.php',
@@ -365,12 +365,12 @@ spl_autoload_register(
             'windowsazure\\table\\models\\querytablesresult' => '/Table/Models/QueryTablesResult.php',
             'windowsazure\\table\\models\\tableserviceoptions' => '/Table/Models/TableServiceOptions.php',
             'windowsazure\\table\\models\\updateentityresult' => '/Table/Models/UpdateEntityResult.php',
-            'windowsazure\\table\\tablerestproxy' => '/Table/TableRestProxy.php'
+            'windowsazure\\table\\tablerestproxy' => '/Table/TableRestProxy.php',
           );
       }
       $cn = strtolower($class);
       if (isset($classes[$cn])) {
-         require __DIR__ . $classes[$cn];
+          require __DIR__.$classes[$cn];
       }
    }
 );

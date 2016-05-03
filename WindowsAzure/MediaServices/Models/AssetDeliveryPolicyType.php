@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,61 +15,62 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
 
 /**
- * Represents AssetDeliveryPolicyType type enum used in media services
+ * Represents AssetDeliveryPolicyType type enum used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class AssetDeliveryPolicyType
 {
     /**
-     * The asset delivery policy type "None"
+     * The asset delivery policy type "None".
      *
      * @var int
      */
     const NONE = 0;
 
     /**
-     * The asset delivery policy type "Blocked"
+     * The asset delivery policy type "Blocked".
      *
      * @var int
      */
     const BLOCKED = 1;
 
     /**
-     * The asset delivery policy type "NoDynamicEncryption"
+     * The asset delivery policy type "NoDynamicEncryption".
      *
      * @var int
      */
     const NO_DYNAMIC_ENCRYPTION = 2;
 
     /**
-     * The asset delivery policy type "DynamicEnvelopeEncryption"
+     * The asset delivery policy type "DynamicEnvelopeEncryption".
      *
      * @var int
      */
-    const DYNAMIC_ENVELOPE_ENCRYPTION = 3;    
+    const DYNAMIC_ENVELOPE_ENCRYPTION = 3;
 
     /**
-     * The asset delivery policy type "DynamicCommonEncryption"
+     * The asset delivery policy type "DynamicCommonEncryption".
      *
      * @var int
      */
     const DYNAMIC_COMMON_ENCRYPTION = 4;
 }
-

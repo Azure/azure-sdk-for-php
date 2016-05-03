@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,24 +15,26 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\Common\Internal;
 
 /**
  * Project resources.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Resources
@@ -89,7 +91,7 @@ class Resources
     const INVALID_PROP_VAL_MSG = "'%s' property value must satisfy %s.";
     const INVALID_PARAM_MSG = "The provided variable '%s' should be of type '%s'";
     const INVALID_STRING_LENGTH = "The provided variable '%s' should be of %s characters long";
-    const INVALID_BTE_MSG = "The blob block type must exist in %s";
+    const INVALID_BTE_MSG = 'The blob block type must exist in %s';
     const INVALID_BLOB_PAT_MSG = 'The provided access type is invalid.';
     const INVALID_SVC_PROP_MSG = 'The provided service properties is invalid.';
     const UNKNOWN_SRILZER_MSG = 'The provided serializer type is unknown';
@@ -105,12 +107,12 @@ class Resources
     const INVALID_CONNECTION_STRING_SETTING_KEY = "The setting key '%s' is not found in the expected configuration setting keys:\n%s";
     const INVALID_CERTIFICATE_PATH = "The provided certificate path '%s' is invalid.";
     const INSTANCE_TYPE_VALIDATION_MSG = 'The type of %s is %s but is expected to be %s.';
-    const MISSING_CONNECTION_STRING_CHAR = "Missing %s character";
+    const MISSING_CONNECTION_STRING_CHAR = 'Missing %s character';
     const ERROR_PARSING_STRING = "'%s' at position %d.";
     const INVALID_CONNECTION_STRING = "Argument '%s' is not a valid connection string: '%s'";
     const ERROR_CONNECTION_STRING_MISSING_KEY = 'Missing key name';
     const ERROR_CONNECTION_STRING_EMPTY_KEY = 'Empty key name';
-    const ERROR_CONNECTION_STRING_MISSING_CHARACTER = "Missing %s character";
+    const ERROR_CONNECTION_STRING_MISSING_CHARACTER = 'Missing %s character';
     const ERROR_EMPTY_SETTINGS = 'No keys were found in the connection string';
     const MISSING_LOCK_LOCATION_MSG = 'The lock location of the brokered message is missing.';
     const INVALID_SLOT = "The provided deployment slot '%s' is not valid. Only 'staging' and 'production' are accepted.";
@@ -123,178 +125,178 @@ class Resources
     const ERROR_INVALID_DATE_STRING = 'Parameter \'%s\' is not a date formatted string \'%s\'';
 
     // HTTP Headers
-    const X_MS_HEADER_PREFIX                 = 'x-ms-';
-    const X_MS_META_HEADER_PREFIX            = 'x-ms-meta-';
-    const X_MS_APPROXIMATE_MESSAGES_COUNT    = 'x-ms-approximate-messages-count';
-    const X_MS_POPRECEIPT                    = 'x-ms-popreceipt';
-    const X_MS_TIME_NEXT_VISIBLE             = 'x-ms-time-next-visible';
-    const X_MS_BLOB_PUBLIC_ACCESS            = 'x-ms-blob-public-access';
-    const X_MS_VERSION                       = 'x-ms-version';
-    const X_MS_DATE                          = 'x-ms-date';
-    const X_MS_BLOB_SEQUENCE_NUMBER          = 'x-ms-blob-sequence-number';
-    const X_MS_BLOB_SEQUENCE_NUMBER_ACTION   = 'x-ms-sequence-number-action';
-    const X_MS_BLOB_TYPE                     = 'x-ms-blob-type';
-    const X_MS_BLOB_CONTENT_TYPE             = 'x-ms-blob-content-type';
-    const X_MS_BLOB_CONTENT_ENCODING         = 'x-ms-blob-content-encoding';
-    const X_MS_BLOB_CONTENT_LANGUAGE         = 'x-ms-blob-content-language';
-    const X_MS_BLOB_CONTENT_MD5              = 'x-ms-blob-content-md5';
-    const X_MS_BLOB_CACHE_CONTROL            = 'x-ms-blob-cache-control';
-    const X_MS_BLOB_CONTENT_LENGTH           = 'x-ms-blob-content-length';
-    const X_MS_COPY_SOURCE                   = 'x-ms-copy-source';
-    const X_MS_RANGE                         = 'x-ms-range';
-    const X_MS_RANGE_GET_CONTENT_MD5         = 'x-ms-range-get-content-md5';
-    const X_MS_LEASE_DURATION                = 'x-ms-lease-duration';
-    const X_MS_LEASE_ID                      = 'x-ms-lease-id';
-    const X_MS_LEASE_TIME                    = 'x-ms-lease-time';
-    const X_MS_LEASE_STATUS                  = 'x-ms-lease-status';
-    const X_MS_LEASE_ACTION                  = 'x-ms-lease-action';
-    const X_MS_DELETE_SNAPSHOTS              = 'x-ms-delete-snapshots';
-    const X_MS_PAGE_WRITE                    = 'x-ms-page-write';
-    const X_MS_SNAPSHOT                      = 'x-ms-snapshot';
-    const X_MS_SOURCE_IF_MODIFIED_SINCE      = 'x-ms-source-if-modified-since';
-    const X_MS_SOURCE_IF_UNMODIFIED_SINCE    = 'x-ms-source-if-unmodified-since';
-    const X_MS_SOURCE_IF_MATCH               = 'x-ms-source-if-match';
-    const X_MS_SOURCE_IF_NONE_MATCH          = 'x-ms-source-if-none-match';
-    const X_MS_SOURCE_LEASE_ID               = 'x-ms-source-lease-id';
-    const X_MS_CONTINUATION_NEXTTABLENAME    = 'x-ms-continuation-nexttablename';
+    const X_MS_HEADER_PREFIX = 'x-ms-';
+    const X_MS_META_HEADER_PREFIX = 'x-ms-meta-';
+    const X_MS_APPROXIMATE_MESSAGES_COUNT = 'x-ms-approximate-messages-count';
+    const X_MS_POPRECEIPT = 'x-ms-popreceipt';
+    const X_MS_TIME_NEXT_VISIBLE = 'x-ms-time-next-visible';
+    const X_MS_BLOB_PUBLIC_ACCESS = 'x-ms-blob-public-access';
+    const X_MS_VERSION = 'x-ms-version';
+    const X_MS_DATE = 'x-ms-date';
+    const X_MS_BLOB_SEQUENCE_NUMBER = 'x-ms-blob-sequence-number';
+    const X_MS_BLOB_SEQUENCE_NUMBER_ACTION = 'x-ms-sequence-number-action';
+    const X_MS_BLOB_TYPE = 'x-ms-blob-type';
+    const X_MS_BLOB_CONTENT_TYPE = 'x-ms-blob-content-type';
+    const X_MS_BLOB_CONTENT_ENCODING = 'x-ms-blob-content-encoding';
+    const X_MS_BLOB_CONTENT_LANGUAGE = 'x-ms-blob-content-language';
+    const X_MS_BLOB_CONTENT_MD5 = 'x-ms-blob-content-md5';
+    const X_MS_BLOB_CACHE_CONTROL = 'x-ms-blob-cache-control';
+    const X_MS_BLOB_CONTENT_LENGTH = 'x-ms-blob-content-length';
+    const X_MS_COPY_SOURCE = 'x-ms-copy-source';
+    const X_MS_RANGE = 'x-ms-range';
+    const X_MS_RANGE_GET_CONTENT_MD5 = 'x-ms-range-get-content-md5';
+    const X_MS_LEASE_DURATION = 'x-ms-lease-duration';
+    const X_MS_LEASE_ID = 'x-ms-lease-id';
+    const X_MS_LEASE_TIME = 'x-ms-lease-time';
+    const X_MS_LEASE_STATUS = 'x-ms-lease-status';
+    const X_MS_LEASE_ACTION = 'x-ms-lease-action';
+    const X_MS_DELETE_SNAPSHOTS = 'x-ms-delete-snapshots';
+    const X_MS_PAGE_WRITE = 'x-ms-page-write';
+    const X_MS_SNAPSHOT = 'x-ms-snapshot';
+    const X_MS_SOURCE_IF_MODIFIED_SINCE = 'x-ms-source-if-modified-since';
+    const X_MS_SOURCE_IF_UNMODIFIED_SINCE = 'x-ms-source-if-unmodified-since';
+    const X_MS_SOURCE_IF_MATCH = 'x-ms-source-if-match';
+    const X_MS_SOURCE_IF_NONE_MATCH = 'x-ms-source-if-none-match';
+    const X_MS_SOURCE_LEASE_ID = 'x-ms-source-lease-id';
+    const X_MS_CONTINUATION_NEXTTABLENAME = 'x-ms-continuation-nexttablename';
     const X_MS_CONTINUATION_NEXTPARTITIONKEY = 'x-ms-continuation-nextpartitionkey';
-    const X_MS_CONTINUATION_NEXTROWKEY       = 'x-ms-continuation-nextrowkey';
-    const X_MS_REQUEST_ID                    = 'x-ms-request-id';
-    const ETAG                               = 'etag';
-    const LAST_MODIFIED                      = 'last-modified';
-    const DATE                               = 'date';
-    const AUTHENTICATION                     = 'authorization';
-    const WRAP_AUTHORIZATION                 = 'WRAP access_token="%s"';
-    const CONTENT_ENCODING                   = 'content-encoding';
-    const CONTENT_LANGUAGE                   = 'content-language';
-    const CONTENT_LENGTH                     = 'content-length';
-    const CONTENT_LENGTH_NO_SPACE            = 'contentlength';
-    const CONTENT_MD5                        = 'content-md5';
-    const CONTENT_TYPE                       = 'content-type';
-    const CONTENT_ID                         = 'content-id';
-    const CONTENT_RANGE                      = 'content-range';
-    const CACHE_CONTROL                      = 'cache-control';
-    const IF_MODIFIED_SINCE                  = 'if-modified-since';
-    const IF_MATCH                           = 'if-match';
-    const IF_NONE_MATCH                      = 'if-none-match';
-    const IF_UNMODIFIED_SINCE                = 'if-unmodified-since';
-    const RANGE                              = 'range';
-    const DATA_SERVICE_VERSION               = 'dataserviceversion';
-    const MAX_DATA_SERVICE_VERSION           = 'maxdataserviceversion';
-    const ACCEPT_HEADER                      = 'accept';
-    const ACCEPT_CHARSET                     = 'accept-charset';
-    const USER_AGENT                         = 'User-Agent';
+    const X_MS_CONTINUATION_NEXTROWKEY = 'x-ms-continuation-nextrowkey';
+    const X_MS_REQUEST_ID = 'x-ms-request-id';
+    const ETAG = 'etag';
+    const LAST_MODIFIED = 'last-modified';
+    const DATE = 'date';
+    const AUTHENTICATION = 'authorization';
+    const WRAP_AUTHORIZATION = 'WRAP access_token="%s"';
+    const CONTENT_ENCODING = 'content-encoding';
+    const CONTENT_LANGUAGE = 'content-language';
+    const CONTENT_LENGTH = 'content-length';
+    const CONTENT_LENGTH_NO_SPACE = 'contentlength';
+    const CONTENT_MD5 = 'content-md5';
+    const CONTENT_TYPE = 'content-type';
+    const CONTENT_ID = 'content-id';
+    const CONTENT_RANGE = 'content-range';
+    const CACHE_CONTROL = 'cache-control';
+    const IF_MODIFIED_SINCE = 'if-modified-since';
+    const IF_MATCH = 'if-match';
+    const IF_NONE_MATCH = 'if-none-match';
+    const IF_UNMODIFIED_SINCE = 'if-unmodified-since';
+    const RANGE = 'range';
+    const DATA_SERVICE_VERSION = 'dataserviceversion';
+    const MAX_DATA_SERVICE_VERSION = 'maxdataserviceversion';
+    const ACCEPT_HEADER = 'accept';
+    const ACCEPT_CHARSET = 'accept-charset';
+    const USER_AGENT = 'User-Agent';
 
     // Type
-    const QUEUE_TYPE_NAME              = 'IQueue';
-    const BLOB_TYPE_NAME               = 'IBlob';
-    const TABLE_TYPE_NAME              = 'ITable';
+    const QUEUE_TYPE_NAME = 'IQueue';
+    const BLOB_TYPE_NAME = 'IBlob';
+    const TABLE_TYPE_NAME = 'ITable';
     const SERVICE_MANAGEMENT_TYPE_NAME = 'IServiceManagement';
-    const SERVICE_BUS_TYPE_NAME        = 'IServiceBus';
-    const WRAP_TYPE_NAME               = 'IWrap';
+    const SERVICE_BUS_TYPE_NAME = 'IServiceBus';
+    const WRAP_TYPE_NAME = 'IWrap';
 
     // WRAP
-    const WRAP_ACCESS_TOKEN            = 'wrap_access_token';
+    const WRAP_ACCESS_TOKEN = 'wrap_access_token';
     const WRAP_ACCESS_TOKEN_EXPIRES_IN = 'wrap_access_token_expires_in';
-    const WRAP_NAME                    = 'wrap_name';
-    const WRAP_PASSWORD                = 'wrap_password';
-    const WRAP_SCOPE                   = 'wrap_scope';
+    const WRAP_NAME = 'wrap_name';
+    const WRAP_PASSWORD = 'wrap_password';
+    const WRAP_SCOPE = 'wrap_scope';
 
     // OAuth
-    const OAUTH_GRANT_TYPE              = 'grant_type';
-    const OAUTH_CLIENT_ID               = 'client_id';
-    const OAUTH_CLIENT_SECRET           = 'client_secret';
-    const OAUTH_SCOPE                   = 'scope';
-    const OAUTH_GT_CLIENT_CREDENTIALS   = 'client_credentials';
-    const OAUTH_ACCESS_TOKEN            = 'access_token';
-    const OAUTH_EXPIRES_IN              = 'expires_in';
-    const OAUTH_ACCESS_TOKEN_PREFIX     = 'Bearer ';
+    const OAUTH_GRANT_TYPE = 'grant_type';
+    const OAUTH_CLIENT_ID = 'client_id';
+    const OAUTH_CLIENT_SECRET = 'client_secret';
+    const OAUTH_SCOPE = 'scope';
+    const OAUTH_GT_CLIENT_CREDENTIALS = 'client_credentials';
+    const OAUTH_ACCESS_TOKEN = 'access_token';
+    const OAUTH_EXPIRES_IN = 'expires_in';
+    const OAUTH_ACCESS_TOKEN_PREFIX = 'Bearer ';
 
     // HTTP Methods
-    const HTTP_GET    = 'GET';
-    const HTTP_PUT    = 'PUT';
-    const HTTP_POST   = 'POST';
-    const HTTP_HEAD   = 'HEAD';
+    const HTTP_GET = 'GET';
+    const HTTP_PUT = 'PUT';
+    const HTTP_POST = 'POST';
+    const HTTP_HEAD = 'HEAD';
     const HTTP_DELETE = 'DELETE';
-    const HTTP_MERGE  = 'MERGE';
+    const HTTP_MERGE = 'MERGE';
 
     // Misc
-    const EMPTY_STRING           = '';
-    const SEPARATOR              = ',';
-    const AZURE_DATE_FORMAT      = 'D, d M Y H:i:s T';
-    const TIMESTAMP_FORMAT       = 'Y-m-d H:i:s';
-    const EMULATED               = 'EMULATED';
-    const EMULATOR_BLOB_URI      = '127.0.0.1:10000';
-    const EMULATOR_QUEUE_URI     = '127.0.0.1:10001';
-    const EMULATOR_TABLE_URI     = '127.0.0.1:10002';
-    const ASTERISK               = '*';
+    const EMPTY_STRING = '';
+    const SEPARATOR = ',';
+    const AZURE_DATE_FORMAT = 'D, d M Y H:i:s T';
+    const TIMESTAMP_FORMAT = 'Y-m-d H:i:s';
+    const EMULATED = 'EMULATED';
+    const EMULATOR_BLOB_URI = '127.0.0.1:10000';
+    const EMULATOR_QUEUE_URI = '127.0.0.1:10001';
+    const EMULATOR_TABLE_URI = '127.0.0.1:10002';
+    const ASTERISK = '*';
     const SERVICE_MANAGEMENT_URL = 'https://management.core.windows.net';
-    const HTTP_SCHEME            = 'http';
-    const HTTPS_SCHEME           = 'https';
+    const HTTP_SCHEME = 'http';
+    const HTTPS_SCHEME = 'https';
     const SETTING_NAME = 'SettingName';
     const SETTING_CONSTRAINT = 'SettingConstraint';
     const DEV_STORE_URI = 'http://127.0.0.1';
-    const SERVICE_URI_FORMAT = "%s://%s.%s";
-    const WRAP_ENDPOINT_URI_FORMAT = "https://%s-sb.accesscontrol.windows.net/WRAPv0.9";
+    const SERVICE_URI_FORMAT = '%s://%s.%s';
+    const WRAP_ENDPOINT_URI_FORMAT = 'https://%s-sb.accesscontrol.windows.net/WRAPv0.9';
 
     // Xml Namespaces
-    const WA_XML_NAMESPACE   = 'http://schemas.microsoft.com/windowsazure';
+    const WA_XML_NAMESPACE = 'http://schemas.microsoft.com/windowsazure';
     const ATOM_XML_NAMESPACE = 'http://www.w3.org/2005/Atom';
-    const DS_XML_NAMESPACE   = 'http://schemas.microsoft.com/ado/2007/08/dataservices';
-    const DSM_XML_NAMESPACE  = 'http://schemas.microsoft.com/ado/2007/08/dataservices/metadata';
-    const XSI_XML_NAMESPACE  = 'http://www.w3.org/2001/XMLSchema-instance';
-    const TRT_XML_NAMESPACE  = 'http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/TokenRestrictionTemplate/v1';
-    const PRL_XML_NAMESPACE  = 'http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1';
+    const DS_XML_NAMESPACE = 'http://schemas.microsoft.com/ado/2007/08/dataservices';
+    const DSM_XML_NAMESPACE = 'http://schemas.microsoft.com/ado/2007/08/dataservices/metadata';
+    const XSI_XML_NAMESPACE = 'http://www.w3.org/2001/XMLSchema-instance';
+    const TRT_XML_NAMESPACE = 'http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/TokenRestrictionTemplate/v1';
+    const PRL_XML_NAMESPACE = 'http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1';
 
     // Header values
-    const SDK_USER_AGENT                                = 'Azure-SDK-For-PHP/0.4.1';
-    const STORAGE_API_LATEST_VERSION                    = '2012-02-12';
-    const SM_API_LATEST_VERSION                         = '2011-10-01';
-    const DATA_SERVICE_VERSION_VALUE                    = '1.0;NetFx';
-    const MAX_DATA_SERVICE_VERSION_VALUE                = '2.0;NetFx';
-    const ACCEPT_HEADER_VALUE                           = 'application/atom+xml,application/xml';
-    const ATOM_ENTRY_CONTENT_TYPE                       = 'application/atom+xml;type=entry;charset=utf-8';
-    const ATOM_FEED_CONTENT_TYPE                        = 'application/atom+xml;type=feed;charset=utf-8';
-    const ACCEPT_CHARSET_VALUE                          = 'utf-8';
-    const INT32_MAX                                     = 2147483647;
-    const MEDIA_SERVICES_API_LATEST_VERSION             = '2.11';
-    const MEDIA_SERVICES_DATA_SERVICE_VERSION_VALUE     = '3.0;NetFx';
+    const SDK_USER_AGENT = 'Azure-SDK-For-PHP/0.4.1';
+    const STORAGE_API_LATEST_VERSION = '2012-02-12';
+    const SM_API_LATEST_VERSION = '2011-10-01';
+    const DATA_SERVICE_VERSION_VALUE = '1.0;NetFx';
+    const MAX_DATA_SERVICE_VERSION_VALUE = '2.0;NetFx';
+    const ACCEPT_HEADER_VALUE = 'application/atom+xml,application/xml';
+    const ATOM_ENTRY_CONTENT_TYPE = 'application/atom+xml;type=entry;charset=utf-8';
+    const ATOM_FEED_CONTENT_TYPE = 'application/atom+xml;type=feed;charset=utf-8';
+    const ACCEPT_CHARSET_VALUE = 'utf-8';
+    const INT32_MAX = 2147483647;
+    const MEDIA_SERVICES_API_LATEST_VERSION = '2.11';
+    const MEDIA_SERVICES_DATA_SERVICE_VERSION_VALUE = '3.0;NetFx';
     const MEDIA_SERVICES_MAX_DATA_SERVICE_VERSION_VALUE = '3.0;NetFx';
 
     // Query parameter names
-    const QP_PREFIX             = 'Prefix';
-    const QP_MAX_RESULTS        = 'MaxResults';
-    const QP_METADATA           = 'Metadata';
-    const QP_MARKER             = 'Marker';
-    const QP_NEXT_MARKER        = 'NextMarker';
-    const QP_COMP               = 'comp';
+    const QP_PREFIX = 'Prefix';
+    const QP_MAX_RESULTS = 'MaxResults';
+    const QP_METADATA = 'Metadata';
+    const QP_MARKER = 'Marker';
+    const QP_NEXT_MARKER = 'NextMarker';
+    const QP_COMP = 'comp';
     const QP_VISIBILITY_TIMEOUT = 'visibilitytimeout';
-    const QP_POPRECEIPT         = 'popreceipt';
-    const QP_NUM_OF_MESSAGES    = 'numofmessages';
-    const QP_PEEK_ONLY          = 'peekonly';
-    const QP_MESSAGE_TTL        = 'messagettl';
-    const QP_INCLUDE            = 'include';
-    const QP_TIMEOUT            = 'timeout';
-    const QP_DELIMITER          = 'Delimiter';
-    const QP_REST_TYPE          = 'restype';
-    const QP_SNAPSHOT           = 'snapshot';
-    const QP_BLOCKID            = 'blockid';
-    const QP_BLOCK_LIST_TYPE    = 'blocklisttype';
-    const QP_SELECT             = '$select';
-    const QP_TOP                = '$top';
-    const QP_SKIP               = '$skip';
-    const QP_FILTER             = '$filter';
-    const QP_NEXT_TABLE_NAME    = 'NextTableName';
-    const QP_NEXT_PK            = 'NextPartitionKey';
-    const QP_NEXT_RK            = 'NextRowKey';
-    const QP_ACTION             = 'action';
-    const QP_EMBED_DETAIL       = 'embed-detail';
+    const QP_POPRECEIPT = 'popreceipt';
+    const QP_NUM_OF_MESSAGES = 'numofmessages';
+    const QP_PEEK_ONLY = 'peekonly';
+    const QP_MESSAGE_TTL = 'messagettl';
+    const QP_INCLUDE = 'include';
+    const QP_TIMEOUT = 'timeout';
+    const QP_DELIMITER = 'Delimiter';
+    const QP_REST_TYPE = 'restype';
+    const QP_SNAPSHOT = 'snapshot';
+    const QP_BLOCKID = 'blockid';
+    const QP_BLOCK_LIST_TYPE = 'blocklisttype';
+    const QP_SELECT = '$select';
+    const QP_TOP = '$top';
+    const QP_SKIP = '$skip';
+    const QP_FILTER = '$filter';
+    const QP_NEXT_TABLE_NAME = 'NextTableName';
+    const QP_NEXT_PK = 'NextPartitionKey';
+    const QP_NEXT_RK = 'NextRowKey';
+    const QP_ACTION = 'action';
+    const QP_EMBED_DETAIL = 'embed-detail';
 
     // Query parameter values
     const QPV_REGENERATE = 'regenerate';
-    const QPV_CONFIG     = 'config';
-    const QPV_STATUS     = 'status';
-    const QPV_UPGRADE    = 'upgrade';
+    const QPV_CONFIG = 'config';
+    const QPV_STATUS = 'status';
+    const QPV_UPGRADE = 'upgrade';
     const QPV_WALK_UPGRADE_DOMAIN = 'walkupgradedomain';
     const QPV_REBOOT = 'reboot';
     const QPV_REIMAGE = 'reimage';
@@ -302,43 +304,43 @@ class Resources
 
     // Request body content types
     const URL_ENCODED_CONTENT_TYPE = 'application/x-www-form-urlencoded';
-    const XML_CONTENT_TYPE         = 'application/xml';
-    const JSON_CONTENT_TYPE        = 'application/json';
-    const BINARY_FILE_TYPE         = 'application/octet-stream';
-    const XML_ATOM_CONTENT_TYPE    = 'application/atom+xml';
-    const HTTP_TYPE                = 'application/http';
-    const MULTIPART_MIXED_TYPE     = 'multipart/mixed';
+    const XML_CONTENT_TYPE = 'application/xml';
+    const JSON_CONTENT_TYPE = 'application/json';
+    const BINARY_FILE_TYPE = 'application/octet-stream';
+    const XML_ATOM_CONTENT_TYPE = 'application/atom+xml';
+    const HTTP_TYPE = 'application/http';
+    const MULTIPART_MIXED_TYPE = 'multipart/mixed';
 
     // Common used XML tags
-    const XTAG_ATTRIBUTES                 = '@attributes';
-    const XTAG_NAMESPACE                  = '@namespace';
-    const XTAG_LABEL                      = 'Label';
-    const XTAG_NAME                       = 'Name';
-    const XTAG_DESCRIPTION                = 'Description';
-    const XTAG_LOCATION                   = 'Location';
-    const XTAG_AFFINITY_GROUP             = 'AffinityGroup';
-    const XTAG_HOSTED_SERVICES            = 'HostedServices';
-    const XTAG_STORAGE_SERVICES           = 'StorageServices';
-    const XTAG_STORAGE_SERVICE            = 'StorageService';
-    const XTAG_DISPLAY_NAME               = 'DisplayName';
-    const XTAG_SERVICE_NAME               = 'ServiceName';
-    const XTAG_URL                        = 'Url';
-    const XTAG_ID                         = 'ID';
-    const XTAG_STATUS                     = 'Status';
-    const XTAG_HTTP_STATUS_CODE           = 'HttpStatusCode';
-    const XTAG_CODE                       = 'Code';
-    const XTAG_MESSAGE                    = 'Message';
+    const XTAG_ATTRIBUTES = '@attributes';
+    const XTAG_NAMESPACE = '@namespace';
+    const XTAG_LABEL = 'Label';
+    const XTAG_NAME = 'Name';
+    const XTAG_DESCRIPTION = 'Description';
+    const XTAG_LOCATION = 'Location';
+    const XTAG_AFFINITY_GROUP = 'AffinityGroup';
+    const XTAG_HOSTED_SERVICES = 'HostedServices';
+    const XTAG_STORAGE_SERVICES = 'StorageServices';
+    const XTAG_STORAGE_SERVICE = 'StorageService';
+    const XTAG_DISPLAY_NAME = 'DisplayName';
+    const XTAG_SERVICE_NAME = 'ServiceName';
+    const XTAG_URL = 'Url';
+    const XTAG_ID = 'ID';
+    const XTAG_STATUS = 'Status';
+    const XTAG_HTTP_STATUS_CODE = 'HttpStatusCode';
+    const XTAG_CODE = 'Code';
+    const XTAG_MESSAGE = 'Message';
     const XTAG_STORAGE_SERVICE_PROPERTIES = 'StorageServiceProperties';
-    const XTAG_ENDPOINT                   = 'Endpoint';
-    const XTAG_ENDPOINTS                  = 'Endpoints';
-    const XTAG_PRIMARY                    = 'Primary';
-    const XTAG_SECONDARY                  = 'Secondary';
-    const XTAG_KEY_TYPE                   = 'KeyType';
-    const XTAG_STORAGE_SERVICE_KEYS       = 'StorageServiceKeys';
-    const XTAG_ERROR                      = 'Error';
-    const XTAG_HOSTED_SERVICE             = 'HostedService';
-    const XTAG_HOSTED_SERVICE_PROPERTIES  = 'HostedServiceProperties';
-    const XTAG_CREATE_HOSTED_SERVICE      = 'CreateHostedService';
+    const XTAG_ENDPOINT = 'Endpoint';
+    const XTAG_ENDPOINTS = 'Endpoints';
+    const XTAG_PRIMARY = 'Primary';
+    const XTAG_SECONDARY = 'Secondary';
+    const XTAG_KEY_TYPE = 'KeyType';
+    const XTAG_STORAGE_SERVICE_KEYS = 'StorageServiceKeys';
+    const XTAG_ERROR = 'Error';
+    const XTAG_HOSTED_SERVICE = 'HostedService';
+    const XTAG_HOSTED_SERVICE_PROPERTIES = 'HostedServiceProperties';
+    const XTAG_CREATE_HOSTED_SERVICE = 'CreateHostedService';
     const XTAG_CREATE_STORAGE_SERVICE_INPUT = 'CreateStorageServiceInput';
     const XTAG_UPDATE_STORAGE_SERVICE_INPUT = 'UpdateStorageServiceInput';
     const XTAG_CREATE_AFFINITY_GROUP = 'CreateAffinityGroup';
@@ -395,67 +397,66 @@ class Resources
     const XTAG_ACCOUNT_NAME = 'AccountName';
 
     // Service Bus
-    const LIST_TOPICS_PATH        = '$Resources/Topics';
-    const LIST_QUEUES_PATH        = '$Resources/Queues';
-    const LIST_RULES_PATH         = '%s/subscriptions/%s/rules';
+    const LIST_TOPICS_PATH = '$Resources/Topics';
+    const LIST_QUEUES_PATH = '$Resources/Queues';
+    const LIST_RULES_PATH = '%s/subscriptions/%s/rules';
     const LIST_SUBSCRIPTIONS_PATH = '%s/subscriptions';
-    const RECEIVE_MESSAGE_PATH    = '%s/messages/head';
+    const RECEIVE_MESSAGE_PATH = '%s/messages/head';
     const RECEIVE_SUBSCRIPTION_MESSAGE_PATH = '%s/subscriptions/%s/messages/head';
-    const SEND_MESSAGE_PATH       = '%s/messages';
-    const RULE_PATH               = '%s/subscriptions/%s/rules/%s';
-    const SUBSCRIPTION_PATH       = '%s/subscriptions/%s';
-    const DEFAULT_RULE_NAME       = '$Default';
-    const UNIQUE_ID_PREFIX        = 'urn:uuid:';
-    const SERVICE_BUS_NAMESPACE   = 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect';
-    const BROKER_PROPERTIES       = 'BrokerProperties';
-    const XMLNS_ATOM              = 'xmlns:atom';
-    const XMLNS                   = 'xmlns';
-    const ATOM_NAMESPACE          = 'http://www.w3.org/2005/Atom';
-    const AUTHORITY_FORMAT        = 'grant_type=client_credentials&client_id={0}&client_secret={1}';
+    const SEND_MESSAGE_PATH = '%s/messages';
+    const RULE_PATH = '%s/subscriptions/%s/rules/%s';
+    const SUBSCRIPTION_PATH = '%s/subscriptions/%s';
+    const DEFAULT_RULE_NAME = '$Default';
+    const UNIQUE_ID_PREFIX = 'urn:uuid:';
+    const SERVICE_BUS_NAMESPACE = 'http://schemas.microsoft.com/netservices/2010/10/servicebus/connect';
+    const BROKER_PROPERTIES = 'BrokerProperties';
+    const XMLNS_ATOM = 'xmlns:atom';
+    const XMLNS = 'xmlns';
+    const ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom';
+    const AUTHORITY_FORMAT = 'grant_type=client_credentials&client_id={0}&client_secret={1}';
 
     // ATOM string
-    const AUTHOR      = 'author';
-    const CATEGORY    = 'category';
+    const AUTHOR = 'author';
+    const CATEGORY = 'category';
     const CONTRIBUTOR = 'contributor';
-    const ENTRY       = 'entry';
-    const LINK        = 'link';
-    const PROPERTIES  = 'properties';
-    const ELEMENT     = 'element';
+    const ENTRY = 'entry';
+    const LINK = 'link';
+    const PROPERTIES = 'properties';
+    const ELEMENT = 'element';
 
     // PHP URL Keys
-    const PHP_URL_SCHEME   = 'scheme';
-    const PHP_URL_HOST     = 'host';
-    const PHP_URL_PORT     = 'port';
-    const PHP_URL_USER     = 'user';
-    const PHP_URL_PASS     = 'pass';
-    const PHP_URL_PATH     = 'path';
-    const PHP_URL_QUERY    = 'query';
+    const PHP_URL_SCHEME = 'scheme';
+    const PHP_URL_HOST = 'host';
+    const PHP_URL_PORT = 'port';
+    const PHP_URL_USER = 'user';
+    const PHP_URL_PASS = 'pass';
+    const PHP_URL_PATH = 'path';
+    const PHP_URL_QUERY = 'query';
     const PHP_URL_FRAGMENT = 'fragment';
 
     // Status Codes
-    const STATUS_OK                = 200;
-    const STATUS_CREATED           = 201;
-    const STATUS_ACCEPTED          = 202;
-    const STATUS_NO_CONTENT        = 204;
-    const STATUS_PARTIAL_CONTENT   = 206;
+    const STATUS_OK = 200;
+    const STATUS_CREATED = 201;
+    const STATUS_ACCEPTED = 202;
+    const STATUS_NO_CONTENT = 204;
+    const STATUS_PARTIAL_CONTENT = 206;
     const STATUS_MOVED_PERMANENTLY = 301;
 
     // HTTP_Request2 config parameter names
-    const USE_BRACKETS    = 'use_brackets';
+    const USE_BRACKETS = 'use_brackets';
     const SSL_VERIFY_PEER = 'ssl_verify_peer';
     const SSL_VERIFY_HOST = 'ssl_verify_host';
-    const SSL_LOCAL_CERT  = 'ssl_local_cert';
-    const SSL_CAFILE      = 'ssl_cafile';
+    const SSL_LOCAL_CERT = 'ssl_local_cert';
+    const SSL_CAFILE = 'ssl_cafile';
     const CONNECT_TIMEOUT = 'connect_timeout';
 
     // Media services
     const MEDIA_SERVICES_URL = 'https://media.windows.net/API/';
     const MEDIA_SERVICES_OAUTH_URL = 'https://wamsprodglobal001acs.accesscontrol.windows.net/v2/OAuth2-13';
     const MEDIA_SERVICES_OAUTH_SCOPE = 'urn:WindowsAzureMediaServices';
-    const MEDIA_SERVICES_INPUT_ASSETS_REL  = 'http://schemas.microsoft.com/ado/2007/08/dataservices/related/InputMediaAssets';
-    const MEDIA_SERVICES_ASSET_REL  = 'http://schemas.microsoft.com/ado/2007/08/dataservices/related/Asset';
+    const MEDIA_SERVICES_INPUT_ASSETS_REL = 'http://schemas.microsoft.com/ado/2007/08/dataservices/related/InputMediaAssets';
+    const MEDIA_SERVICES_ASSET_REL = 'http://schemas.microsoft.com/ado/2007/08/dataservices/related/Asset';
     const MEDIA_SERVICES_ENCRYPTION_VERSION = '1.0';
-
 
     // @codingStandardsIgnoreEnd
 }

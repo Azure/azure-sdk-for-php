@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,138 +15,128 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Templates;
-use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * Represents PlayReadyPlayRight object used in media services
+ * Represents PlayReadyPlayRight object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Templates
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class PlayReadyPlayRight
 {
     /**
-     * PlayReadyPlayRight FirstPlayExpiration 
+     * PlayReadyPlayRight FirstPlayExpiration.
      *
      * @var \DateInterval
      */
     private $_firstPlayExpiration;
 
     /**
-     * PlayReadyPlayRight ScmsRestriction 
+     * PlayReadyPlayRight ScmsRestriction.
      *
-     * @var ScmsRestriction 
+     * @var ScmsRestriction
      */
     private $_scmsRestriction;
 
     /**
-     * PlayReadyPlayRight AgcAndColorStripeRestriction  
+     * PlayReadyPlayRight AgcAndColorStripeRestriction.
      *
-     * @var AgcAndColorStripeRestriction  
+     * @var AgcAndColorStripeRestriction
      */
     private $_agcAndColorStripeRestriction;
 
-    
     /**
-     * PlayReadyPlayRight ExplicitAnalogTelevisionOutputRestriction 
+     * PlayReadyPlayRight ExplicitAnalogTelevisionOutputRestriction.
      *
-     * @var ExplicitAnalogTelevisionRestriction  
+     * @var ExplicitAnalogTelevisionRestriction
      */
     private $_explicitAnalogTelevisionOutputRestriction;
 
-    
     /**
-     * PlayReadyPlayRight DigitalVideoOnlyContentRestriction  
+     * PlayReadyPlayRight DigitalVideoOnlyContentRestriction.
      *
      * @var bool
      */
     private $_digitalVideoOnlyContentRestriction;
 
-    
     /**
-     * PlayReadyPlayRight ImageConstraintForAnalogComponentVideoRestriction   
+     * PlayReadyPlayRight ImageConstraintForAnalogComponentVideoRestriction.
      *
-     * @var bool  
+     * @var bool
      */
     private $_imageConstraintForAnalogComponentVideoRestriction;
 
-    
     /**
-     * PlayReadyPlayRight ImageConstraintForAnalogComputerMonitorRestriction   
+     * PlayReadyPlayRight ImageConstraintForAnalogComputerMonitorRestriction.
      *
-     * @var bool  
+     * @var bool
      */
     private $_imageConstraintForAnalogComputerMonitorRestriction;
 
-    
     /**
-     * PlayReadyPlayRight AllowPassingVideoContentToUnknownOutput  
+     * PlayReadyPlayRight AllowPassingVideoContentToUnknownOutput.
      *
-     * @var string   
+     * @var string
      */
     private $_allowPassingVideoContentToUnknownOutput;
 
-    
     /**
-     * PlayReadyPlayRight UncompressedDigitalVideoOpl  
+     * PlayReadyPlayRight UncompressedDigitalVideoOpl.
      *
-     * @var int  
+     * @var int
      */
     private $_uncompressedDigitalVideoOpl;
 
-    
     /**
-     * PlayReadyPlayRight CompressedDigitalVideoOpl  
+     * PlayReadyPlayRight CompressedDigitalVideoOpl.
      *
-     * @var int  
+     * @var int
      */
     private $_compressedDigitalVideoOpl;
 
-    
     /**
-     * PlayReadyPlayRight AnalogVideoOpl  
+     * PlayReadyPlayRight AnalogVideoOpl.
      *
-     * @var int  
+     * @var int
      */
     private $_analogVideoOpl;
 
     /**
-     * PlayReadyPlayRight CompressedDigitalAudioOpl  
+     * PlayReadyPlayRight CompressedDigitalAudioOpl.
      *
-     * @var int  
+     * @var int
      */
     private $_compressedDigitalAudioOpl;
 
     /**
-     * PlayReadyPlayRight UncompressedDigitalAudioOpl  
+     * PlayReadyPlayRight UncompressedDigitalAudioOpl.
      *
-     * @var int 
+     * @var int
      */
     private $_uncompressedDigitalAudioOpl;
 
     /**
-     * Create PlayReadyPlayRight    
-     *
-     * @return void
+     * Create PlayReadyPlayRight.
      */
     public function __construct()
-    {        
+    {
     }
-    
+
     /**
      * Specifies the amount of time that the license is valid after the license is first used to play content.
      *
@@ -161,8 +151,6 @@ class PlayReadyPlayRight
      * Specifies the amount of time that the license is valid after the license is first used to play content.
      *
      * @param \DateInterval $value FirstPlayExpiration
-     *
-     * @return void
      */
     public function setFirstPlayExpiration($value)
     {
@@ -185,8 +173,6 @@ class PlayReadyPlayRight
      * For further details see the PlayReady Compliance Rules.
      *
      * @param ScmsRestriction $value ScmsRestriction
-     *
-     * @return void
      */
     public function setScmsRestriction($value)
     {
@@ -209,8 +195,6 @@ class PlayReadyPlayRight
      * For further details see the PlayReady Compliance Rules.
      *
      * @param AgcAndColorStripeRestriction $value AgcAndColorStripeRestriction
-     *
-     * @return void
      */
     public function setAgcAndColorStripeRestriction($value)
     {
@@ -233,8 +217,6 @@ class PlayReadyPlayRight
      * For further details see the PlayReady Compliance Rules.  
      *
      * @param ExplicitAnalogTelevisionRestriction $value ExplicitAnalogTelevisionRestriction
-     *
-     * @return void
      */
     public function setExplicitAnalogTelevisionOutputRestriction($value)
     {
@@ -259,8 +241,6 @@ class PlayReadyPlayRight
      * details see the PlayReady Compliance Rules.
      *
      * @param bool $value DigitalVideoOnlyContentRestriction
-     *
-     * @return void
      */
     public function setDigitalVideoOnlyContentRestriction($value)
     {
@@ -285,8 +265,6 @@ class PlayReadyPlayRight
      * Component Video Output.  For further details see the PlayReady Compliance Rules. 
      *
      * @param bool $value ImageConstraintForAnalogComponentVideoRestriction
-     *
-     * @return void
      */
     public function setImageConstraintForAnalogComponentVideoRestriction($value)
     {
@@ -311,8 +289,6 @@ class PlayReadyPlayRight
      * Computer Monitor Output.  For further details see the PlayReady Compliance Rules.
      *
      * @param bool $value ImageConstraintForAnalogComputerMonitorRestriction
-     *
-     * @return void
      */
     public function setImageConstraintForAnalogComputerMonitorRestriction($value)
     {
@@ -335,8 +311,6 @@ class PlayReadyPlayRight
      * how it should handle unknown video outputs.  For further details see the PlayReady Compliance Rules.
      *
      * @param string $value AllowPassingVideoContentToUnknownOutput 
-     *
-     * @return void
      */
     public function setAllowPassingVideoContentToUnknownOutput($value)
     {
@@ -361,8 +335,6 @@ class PlayReadyPlayRight
      * of the specific value see the PlayReady Compliance Rules.
      *
      * @param int $value UncompressedDigitalVideoOpl
-     *
-     * @return void
      */
     public function setUncompressedDigitalVideoOpl($value)
     {
@@ -375,7 +347,7 @@ class PlayReadyPlayRight
     /**
      * Specifies the output protection level for compressed digital video.  Valid values are null, 400, and 500.
      * When the property is set to null, the output protection level is not set in the license.  For further details on the meaning
-     * of the specific value see the PlayReady Compliance Rules 
+     * of the specific value see the PlayReady Compliance Rules.
      *
      * @return int CompressedDigitalVideoOpl
      */
@@ -387,11 +359,9 @@ class PlayReadyPlayRight
     /**
      * Specifies the output protection level for compressed digital video.  Valid values are null, 400, and 500.
      * When the property is set to null, the output protection level is not set in the license.  For further details on the meaning
-     * of the specific value see the PlayReady Compliance Rules 
+     * of the specific value see the PlayReady Compliance Rules.
      *
      * @param int $value CompressedDigitalVideoOpl
-     *
-     * @return void
      */
     public function setCompressedDigitalVideoOpl($value)
     {
@@ -419,8 +389,6 @@ class PlayReadyPlayRight
      * of the specific value see the PlayReady Compliance Rules. 
      *
      * @param int $value AnalogVideoOpl
-     *
-     * @return void
      */
     public function setAnalogVideoOpl($value)
     {
@@ -448,8 +416,6 @@ class PlayReadyPlayRight
      * of the specific value see the PlayReady Compliance Rules.
      *
      * @param int $value CompressedDigitalAudioOpl
-     *
-     * @return void
      */
     public function setCompressedDigitalAudioOpl($value)
     {
@@ -477,8 +443,6 @@ class PlayReadyPlayRight
      * of the specific value see the PlayReady Compliance Rules.
      *
      * @param int $value UncompressedDigitalAudioOpl
-     *
-     * @return void
      */
     public function setUncompressedDigitalAudioOpl($value)
     {
@@ -488,5 +452,3 @@ class PlayReadyPlayRight
         $this->_uncompressedDigitalAudioOpl = $value;
     }
 }
-
-

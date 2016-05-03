@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,24 +15,26 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
 
 /**
- * Represents AssetDeliveryPolicyConfiguartionKey type enum used in media services
+ * Represents AssetDeliveryPolicyConfiguartionKey type enum used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class AssetDeliveryPolicyConfigurationKey
@@ -63,7 +65,7 @@ class AssetDeliveryPolicyConfigurationKey
      *
      * @var int
      */
-    const ENVELOPE_ENCRYPTION_IV_AS_BASE64 = 3;    
+    const ENVELOPE_ENCRYPTION_IV_AS_BASE64 = 3;
 
     /**
      * PlayReadyLicenseAcquisitionUrl, The PlayReady License Acquisition Url to use for common encryption.
@@ -87,36 +89,41 @@ class AssetDeliveryPolicyConfigurationKey
     const ENVELOPE_ENCRYPTION_IV = 6;
 
     /**
-     * WidevineLicenseAcquisitionUrl, Widevine DRM acquisition url
+     * WidevineLicenseAcquisitionUrl, Widevine DRM acquisition url.
      *
      * @var int
      */
     const WIDEVINE_LICENSE_ACQUISITION_URL = 7;
 
     /**
-     * Helper function to stringnify the AssetDeliveryPolicyConfigurationKey
-     * @param mixed $array 
+     * Helper function to stringnify the AssetDeliveryPolicyConfigurationKey.
+     *
+     * @param mixed $array
      */
-    public static function stringifyAssetDeliveryPolicyConfiguartionKey($array) {
+    public static function stringifyAssetDeliveryPolicyConfiguartionKey($array)
+    {
         $jsonArray = array();
-        foreach($array as $key => $value) {
+        foreach ($array as $key => $value) {
             $jsonArray[] = array('Key' => $key, 'Value' => $value);
         }
+
         return json_encode($jsonArray);
     }
 
     /**
-     * Helper function to pack the AssetDeliveryPolicyConfigurationKey
+     * Helper function to pack the AssetDeliveryPolicyConfigurationKey.
+     *
      * @return array the unpacked array
      */
-    public static function parseAssetDeliveryPolicyConfiguartionKey($json) {
+    public static function parseAssetDeliveryPolicyConfiguartionKey($json)
+    {
         $result = array();
         $array = json_decode($json, true);
-        foreach($array as $item) {
+        foreach ($array as $item) {
             $item = array_change_key_case($item, CASE_LOWER);
             $result[$item['key']] = $item['value'];
         }
+
         return $result;
     }
 }
-

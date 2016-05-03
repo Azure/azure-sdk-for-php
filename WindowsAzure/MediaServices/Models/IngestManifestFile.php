@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,158 +15,160 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
-use WindowsAzure\Common\Internal\Utilities;
+
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * Represents IngestManifestFile file object used in media services
+ * Represents IngestManifestFile file object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class IngestManifestFile
 {
     /**
-     * The state of the file "inactive"
+     * The state of the file "inactive".
      *
      * @var int
      */
     const STATE_PENDING = 0;
 
     /**
-     * The state of the file "finished"
+     * The state of the file "finished".
      *
      * @var int
      */
     const STATE_FINISHED = 1;
 
     /**
-     * The state of the file "error"
+     * The state of the file "error".
      *
      * @var int
      */
     const STATE_ERROR = 2;
 
     /**
-     * IngestManifestFile Id
+     * IngestManifestFile Id.
      *
      * @var string
      */
     private $_id;
 
     /**
-     * Name
+     * Name.
      *
      * @var string
      */
     private $_name;
 
     /**
-     * Encryption version
+     * Encryption version.
      *
      * @var string
      */
     private $_encryptionVersion;
 
     /**
-     * Encryption scheme
+     * Encryption scheme.
      *
      * @var string
      */
     private $_encryptionScheme;
 
     /**
-     * Is encrypted
+     * Is encrypted.
      *
      * @var bool
      */
     private $_isEncrypted;
 
     /**
-     * Encryption key id
+     * Encryption key id.
      *
      * @var string
      */
     private $_encryptionKeyId;
 
     /**
-     * Initialization vector
+     * Initialization vector.
      *
      * @var string
      */
     private $_initializationVector;
 
     /**
-     * Is primary
+     * Is primary.
      *
      * @var bool
      */
     private $_isPrimary;
 
     /**
-     * Last modified
+     * Last modified.
      *
      * @var \DateTime
      */
     private $_lastModified;
 
     /**
-     * Created
+     * Created.
      *
      * @var \DateTime
      */
     private $_created;
 
     /**
-     * Mime type
+     * Mime type.
      *
      * @var string
      */
     private $_mimeType;
 
     /**
-     * State
+     * State.
      *
      * @var int
      */
     private $_state;
 
     /**
-     * ParentIngestManifestId
+     * ParentIngestManifestId.
      *
      * @var string
      */
     private $_parentIngestManifestId;
 
     /**
-     * ParentIngestManifestAssetId
+     * ParentIngestManifestAssetId.
      *
      * @var string
      */
     private $_parentIngestManifestAssetId;
 
     /**
-     * ErrorDetail
+     * ErrorDetail.
      *
      * @var string
      */
     private $_errorDetail;
 
     /**
-     * Create manifest file from array
+     * Create manifest file from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -184,7 +186,7 @@ class IngestManifestFile
             'options[ParentIngestManifestAssetId]'
         );
 
-        $file = new IngestManifestFile(
+        $file = new self(
             $options['Name'],
             $options['ParentIngestManifestId'],
             $options['ParentIngestManifestAssetId']
@@ -196,29 +198,27 @@ class IngestManifestFile
     }
 
     /**
-     * Create manifest file
+     * Create manifest file.
      *
      * @param string $name                        Actual filename that will be
-     * uploaded.
-     *
+     *                                            uploaded.
      * @param string $parentIngestManifestId      IngestManifest Id of the manifest
-     * that contains this file.
-     *
+     *                                            that contains this file.
      * @param string $parentIngestManifestAssetId IngestManifestAsset Id of the
-     * IngestManifestAsset that this file is associated with.
+     *                                            IngestManifestAsset that this file is associated with.
      */
     public function __construct(
         $name,
         $parentIngestManifestId,
         $parentIngestManifestAssetId
     ) {
-        $this->_name                        = $name;
-        $this->_parentIngestManifestId      = $parentIngestManifestId;
+        $this->_name = $name;
+        $this->_parentIngestManifestId = $parentIngestManifestId;
         $this->_parentIngestManifestAssetId = $parentIngestManifestAssetId;
     }
 
     /**
-     * Fill manifest file from array
+     * Fill manifest file from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -326,7 +326,7 @@ class IngestManifestFile
     }
 
     /**
-     * Get "ErrorDetail"
+     * Get "ErrorDetail".
      *
      * @return string
      */
@@ -336,7 +336,7 @@ class IngestManifestFile
     }
 
     /**
-     * Get "ParentIngestManifestAssetId"
+     * Get "ParentIngestManifestAssetId".
      *
      * @return string
      */
@@ -346,7 +346,7 @@ class IngestManifestFile
     }
 
     /**
-     * Set "ParentIngestManifestAssetId"
+     * Set "ParentIngestManifestAssetId".
      *
      * @param string $value ParentIngestManifestAssetId
      *
@@ -358,7 +358,7 @@ class IngestManifestFile
     }
 
     /**
-     * Get "ParentIngestManifestId"
+     * Get "ParentIngestManifestId".
      *
      * @return string
      */
@@ -368,7 +368,7 @@ class IngestManifestFile
     }
 
     /**
-     * Set "ParentIngestManifestId"
+     * Set "ParentIngestManifestId".
      *
      * @param string $value ParentIngestManifestId
      *
@@ -380,7 +380,7 @@ class IngestManifestFile
     }
 
     /**
-     * Get "State"
+     * Get "State".
      *
      * @return int
      */
@@ -390,7 +390,7 @@ class IngestManifestFile
     }
 
     /**
-     * Get "Mime type"
+     * Get "Mime type".
      *
      * @return string
      */
@@ -400,7 +400,7 @@ class IngestManifestFile
     }
 
     /**
-     * Set "Mime type"
+     * Set "Mime type".
      *
      * @param string $value Mime type
      *
@@ -412,7 +412,7 @@ class IngestManifestFile
     }
 
     /**
-     * Get "Created"
+     * Get "Created".
      *
      * @return \DateTime
      */
@@ -422,7 +422,7 @@ class IngestManifestFile
     }
 
     /**
-     * Get "Last modified"
+     * Get "Last modified".
      *
      * @return \DateTime
      */
@@ -432,7 +432,7 @@ class IngestManifestFile
     }
 
     /**
-     * Get "Is primary"
+     * Get "Is primary".
      *
      * @return bool
      */
@@ -442,7 +442,7 @@ class IngestManifestFile
     }
 
     /**
-     * Set "Is primary"
+     * Set "Is primary".
      *
      * @param bool $value Is primary
      *
@@ -454,7 +454,7 @@ class IngestManifestFile
     }
 
     /**
-     * Get "Initialization vector"
+     * Get "Initialization vector".
      *
      * @return string
      */
@@ -464,7 +464,7 @@ class IngestManifestFile
     }
 
     /**
-     * Set "Initialization vector"
+     * Set "Initialization vector".
      *
      * @param string $value Initialization vector
      *
@@ -476,7 +476,7 @@ class IngestManifestFile
     }
 
     /**
-     * Get "Encryption key id"
+     * Get "Encryption key id".
      *
      * @return string
      */
@@ -486,7 +486,7 @@ class IngestManifestFile
     }
 
     /**
-     * Set "Encryption key id"
+     * Set "Encryption key id".
      *
      * @param string $value Encryption key id
      *
@@ -498,7 +498,7 @@ class IngestManifestFile
     }
 
     /**
-     * Get "Is encrypted"
+     * Get "Is encrypted".
      *
      * @return bool
      */
@@ -508,7 +508,7 @@ class IngestManifestFile
     }
 
     /**
-     * Set "Is encrypted"
+     * Set "Is encrypted".
      *
      * @param bool $value Is encrypted
      *
@@ -520,7 +520,7 @@ class IngestManifestFile
     }
 
     /**
-     * Get "Encryption scheme"
+     * Get "Encryption scheme".
      *
      * @return string
      */
@@ -530,7 +530,7 @@ class IngestManifestFile
     }
 
     /**
-     * Set "Encryption scheme"
+     * Set "Encryption scheme".
      *
      * @param string $value Encryption scheme
      *
@@ -542,7 +542,7 @@ class IngestManifestFile
     }
 
     /**
-     * Get "Encryption version"
+     * Get "Encryption version".
      *
      * @return string
      */
@@ -552,7 +552,7 @@ class IngestManifestFile
     }
 
     /**
-     * Set "Encryption version"
+     * Set "Encryption version".
      *
      * @param string $value Encryption version
      *
@@ -564,7 +564,7 @@ class IngestManifestFile
     }
 
     /**
-     * Get "Name"
+     * Get "Name".
      *
      * @return string
      */
@@ -574,7 +574,7 @@ class IngestManifestFile
     }
 
     /**
-     * Set "Name"
+     * Set "Name".
      *
      * @param string $value Name
      *
@@ -586,7 +586,7 @@ class IngestManifestFile
     }
 
     /**
-     * Get "Manifest file Id"
+     * Get "Manifest file Id".
      *
      * @return string
      */
@@ -595,5 +595,3 @@ class IngestManifestFile
         return $this->_id;
     }
 }
-
-

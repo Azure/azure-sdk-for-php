@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,39 +15,42 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * Represents locator object used in media services
+ * Represents locator object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Locator
 {
     /**
-     * Type of Locator - none - The default enumeration value
+     * Type of Locator - none - The default enumeration value.
      *
      * @var int
      */
     const TYPE_NONE = 0;
 
     /**
-     * Type of Locator - SAS - Specifies Shared Access Signature (Sas)
+     * Type of Locator - SAS - Specifies Shared Access Signature (Sas).
      *
      * @var int
      */
@@ -55,84 +58,84 @@ class Locator
 
     /**
      * Type of Locator - OnDemandOrigin - Specifies a locator type which refers to
-     * an Azure Media Service On Demand Origin streaming endpoint
+     * an Azure Media Service On Demand Origin streaming endpoint.
      *
      * @var int
      */
     const TYPE_ON_DEMAND_ORIGIN = 2;
 
     /**
-     * Locator id
+     * Locator id.
      *
      * @var string
      */
     private $_id;
 
     /**
-     * Name
+     * Name.
      *
      * @var string
      */
     private $_name;
 
     /**
-     * Expiration date time
+     * Expiration date time.
      *
      * @var \DateTime
      */
     private $_expirationDateTime;
 
     /**
-     * Type
+     * Type.
      *
      * @var int
      */
     private $_type;
 
     /**
-     * Path
+     * Path.
      *
      * @var string
      */
     private $_path;
 
     /**
-     * Base URI
+     * Base URI.
      *
      * @var string
      */
     private $_baseUri;
 
     /**
-     * Content access component
+     * Content access component.
      *
      * @var string
      */
     private $_contentAccessComponent;
 
     /**
-     * Access policy Id
+     * Access policy Id.
      *
      * @var string
      */
     private $_accessPolicyId;
 
     /**
-     * Asset id
+     * Asset id.
      *
      * @var string
      */
     private $_assetId;
 
     /**
-     * Start time
+     * Start time.
      *
      * @var \DateTime
      */
     private $_startTime;
 
     /**
-     * Create locator from array
+     * Create locator from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -144,7 +147,7 @@ class Locator
         Validate::notNull($options['AccessPolicyId'], 'options[AccessPolicyId]');
         Validate::notNull($options['Type'], 'options[Type]');
 
-        $locator = new Locator(
+        $locator = new self(
             $options['AssetId'],
             $options['AccessPolicyId'],
             $options['Type']
@@ -155,20 +158,18 @@ class Locator
     }
 
     /**
-     * Create locator
+     * Create locator.
      *
      * @param WindowsAzure\MediaServices\Models\Asset|string        $asset        A
-     * target asset
-     *
+     *                                                                            target asset
      * @param WindowsAzure\MediaServices\Models\AccessPolicy|string $accessPolicy A
-     * target access policy
-     *
+     *                                                                            target access policy
      * @param int                                                   $type         An
-     * enumeration value that describes the type of Locator.
+     *                                                                            enumeration value that describes the type of Locator.
      */
     public function __construct($asset, $accessPolicy, $type)
     {
-        $this->_assetId        = Utilities::getEntityId(
+        $this->_assetId = Utilities::getEntityId(
             $asset,
             'WindowsAzure\MediaServices\Models\Asset'
         );
@@ -176,11 +177,11 @@ class Locator
             $accessPolicy,
             'WindowsAzure\MediaServices\Models\AccessPolicy'
         );
-        $this->_type           = $type;
+        $this->_type = $type;
     }
 
     /**
-     * Fill locator from array
+     * Fill locator from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -251,7 +252,7 @@ class Locator
     }
 
     /**
-     * Get "Start time"
+     * Get "Start time".
      *
      * @return \DateTime
      */
@@ -261,7 +262,7 @@ class Locator
     }
 
     /**
-     * Set "Start time"
+     * Set "Start time".
      *
      * @param \DateTime $value Start time
      *
@@ -273,7 +274,7 @@ class Locator
     }
 
     /**
-     * Get "Asset id"
+     * Get "Asset id".
      *
      * @return string
      */
@@ -283,7 +284,7 @@ class Locator
     }
 
     /**
-     * Get "Access policy Id"
+     * Get "Access policy Id".
      *
      * @return string
      */
@@ -293,7 +294,7 @@ class Locator
     }
 
     /**
-     * Get "Content access component"
+     * Get "Content access component".
      *
      * @return string
      */
@@ -303,7 +304,7 @@ class Locator
     }
 
     /**
-     * Get "Base URI"
+     * Get "Base URI".
      *
      * @return string
      */
@@ -313,7 +314,7 @@ class Locator
     }
 
     /**
-     * Get "Path"
+     * Get "Path".
      *
      * @return string
      */
@@ -323,7 +324,7 @@ class Locator
     }
 
     /**
-     * Get "Type"
+     * Get "Type".
      *
      * @return int
      */
@@ -333,7 +334,7 @@ class Locator
     }
 
     /**
-     * Set "Type"
+     * Set "Type".
      *
      * @param int $value Type
      *
@@ -345,7 +346,7 @@ class Locator
     }
 
     /**
-     * Get "Expiration date time"
+     * Get "Expiration date time".
      *
      * @return \DateTime
      */
@@ -355,7 +356,7 @@ class Locator
     }
 
     /**
-     * Set "Expiration date time"
+     * Set "Expiration date time".
      *
      * @param \DateTime $value Expiration date time
      *
@@ -367,7 +368,7 @@ class Locator
     }
 
     /**
-     * Get "Name"
+     * Get "Name".
      *
      * @return string
      */
@@ -377,7 +378,7 @@ class Locator
     }
 
     /**
-     * Set "Name"
+     * Set "Name".
      *
      * @param string $value Name
      *
@@ -389,7 +390,7 @@ class Locator
     }
 
     /**
-     * Get "Locator id"
+     * Get "Locator id".
      *
      * @return string
      */
@@ -399,7 +400,7 @@ class Locator
     }
 
     /**
-     * Set "Locator id"
+     * Set "Locator id".
      *
      * @param string $value Locator id
      *
@@ -410,4 +411,3 @@ class Locator
         $this->_id = $value;
     }
 }
-

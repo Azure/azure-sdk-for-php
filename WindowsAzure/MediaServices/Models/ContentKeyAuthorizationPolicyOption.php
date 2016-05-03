@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,68 +15,69 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
-use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Utilities;
 
+use WindowsAzure\Common\Internal\Validate;
 
 /**
- * Represents ContentKeyAuthorizationPolicy object used in media services
+ * Represents ContentKeyAuthorizationPolicy object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ContentKeyAuthorizationPolicyOption
 {
     /**
-     * ContentKeyAuthorizationPolicyOption id
+     * ContentKeyAuthorizationPolicyOption id.
      *
      * @var string
      */
     private $_id;
 
     /**
-     * ContentKeyAuthorizationPolicyOption Name
+     * ContentKeyAuthorizationPolicyOption Name.
      *
      * @var string
      */
     private $_name;
 
     /**
-     * ContentKeyAuthorizationPolicyOption KeyDeliveryType
+     * ContentKeyAuthorizationPolicyOption KeyDeliveryType.
      *
      * @var int
      */
     private $_keyDeliveryType;
 
     /**
-     * ContentKeyAuthorizationPolicyOption KeyDeliveryConfiguration
+     * ContentKeyAuthorizationPolicyOption KeyDeliveryConfiguration.
      *
      * @var string
      */
     private $_keyDeliveryConfiguration;
 
     /**
-     * ContentKeyAuthorizationPolicyOption Restrictions
+     * ContentKeyAuthorizationPolicyOption Restrictions.
      *
      * @var array
      */
     private $_restrictions;
 
     /**
-     * Create ContentKeyAuthorizationPolicyOption from array
+     * Create ContentKeyAuthorizationPolicyOption from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -84,16 +85,14 @@ class ContentKeyAuthorizationPolicyOption
      */
     public static function createFromOptions($options)
     {
-        $contentKeyAuthorizationOptions = new ContentKeyAuthorizationPolicyOption();
+        $contentKeyAuthorizationOptions = new self();
         $contentKeyAuthorizationOptions->fromArray($options);
 
         return $contentKeyAuthorizationOptions;
     }
 
     /**
-     * Create ContentKeyAuthorizationPolicyOption
-     *
-     * @return void
+     * Create ContentKeyAuthorizationPolicyOption.
      */
     public function __construct()
     {
@@ -101,19 +100,19 @@ class ContentKeyAuthorizationPolicyOption
     }
 
     /**
-     * Return a list of fields that must be sent (even if null)
+     * Return a list of fields that must be sent (even if null).
+     *
      * @return string[]
      */
-    public function requiredFields() {
+    public function requiredFields()
+    {
         return ['KeyDeliveryType'];
     }
 
     /**
-     * Fill ContentKeyAuthorizationPolicyOption from array
+     * Fill ContentKeyAuthorizationPolicyOption from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return void
      */
     public function fromArray($options)
     {
@@ -125,8 +124,8 @@ class ContentKeyAuthorizationPolicyOption
         if (isset($options['Name'])) {
             Validate::isString($options['Name'], 'options[Name]');
             $this->_name = $options['Name'];
-        }       
-        
+        }
+
         if (isset($options['KeyDeliveryType'])) {
             Validate::isInteger($options['KeyDeliveryType'], 'options[KeyDeliveryType]');
             $this->_keyDeliveryType = $options['KeyDeliveryType'];
@@ -135,18 +134,18 @@ class ContentKeyAuthorizationPolicyOption
         if (isset($options['KeyDeliveryConfiguration'])) {
             Validate::isString($options['KeyDeliveryConfiguration'], 'options[KeyDeliveryConfiguration]');
             $this->_keyDeliveryConfiguration = $options['KeyDeliveryConfiguration'];
-        }  
+        }
 
         if (!empty($options['Restrictions'])) {
             Validate::isArray($options['Restrictions'], 'options[Restrictions]');
             foreach ($options['Restrictions'] as $restriction) {
                 $this->_restrictions[] = ContentKeyAuthorizationPolicyRestriction::createFromOptions($restriction);
-            }            
+            }
         }
     }
 
     /**
-     * Get "ContentKeyAuthorizationPolicyOption id"
+     * Get "ContentKeyAuthorizationPolicyOption id".
      *
      * @return string
      */
@@ -156,19 +155,17 @@ class ContentKeyAuthorizationPolicyOption
     }
 
     /**
-     * Set "ContentKeyAuthorizationPolicyOption id"
+     * Set "ContentKeyAuthorizationPolicyOption id".
      *
      * @param string $value ContentKey id
-     *
-     * @return void
      */
     public function setId($value)
     {
         $this->_id = $value;
     }
-    
+
     /**
-     * Get "ContentKeyAuthorizationPolicyOption Name"
+     * Get "ContentKeyAuthorizationPolicyOption Name".
      *
      * @return string
      */
@@ -178,19 +175,17 @@ class ContentKeyAuthorizationPolicyOption
     }
 
     /**
-     * Set "ContentKeyAuthorizationPolicyOption Name"
+     * Set "ContentKeyAuthorizationPolicyOption Name".
      *
      * @param string $value Name
-     *
-     * @return void
      */
     public function setName($value)
     {
         $this->_name = $value;
-    }    
+    }
 
     /**
-     * Get "ContentKeyAuthorizationPolicyOption KeyDeliveryType"
+     * Get "ContentKeyAuthorizationPolicyOption KeyDeliveryType".
      *
      * @return int
      */
@@ -200,19 +195,17 @@ class ContentKeyAuthorizationPolicyOption
     }
 
     /**
-     * Set "ContentKeyAuthorizationPolicyOption KeyDeliveryType"
+     * Set "ContentKeyAuthorizationPolicyOption KeyDeliveryType".
      *
      * @param int $value NameKeyDeliveryType
-     *
-     * @return void
      */
     public function setKeyDeliveryType($value)
     {
         $this->_keyDeliveryType = $value;
-    }    
+    }
 
     /**
-     * Get "ContentKeyAuthorizationPolicyOption KeyDeliveryConfiguration"
+     * Get "ContentKeyAuthorizationPolicyOption KeyDeliveryConfiguration".
      *
      * @return string
      */
@@ -222,11 +215,9 @@ class ContentKeyAuthorizationPolicyOption
     }
 
     /**
-     * Set "ContentKeyAuthorizationPolicyOption KeyDeliveryConfiguration"
+     * Set "ContentKeyAuthorizationPolicyOption KeyDeliveryConfiguration".
      *
      * @param string $value NameKeyDeliveryType
-     *
-     * @return void
      */
     public function setKeyDeliveryConfiguration($value)
     {
@@ -234,7 +225,7 @@ class ContentKeyAuthorizationPolicyOption
     }
 
     /**
-     * Get "ContentKeyAuthorizationPolicyOption Restrictions"
+     * Get "ContentKeyAuthorizationPolicyOption Restrictions".
      *
      * @return string
      */
@@ -244,16 +235,12 @@ class ContentKeyAuthorizationPolicyOption
     }
 
     /**
-     * Set "ContentKeyAuthorizationPolicyOption Restrictions"
+     * Set "ContentKeyAuthorizationPolicyOption Restrictions".
      *
      * @param array $value NameKeyDeliveryType
-     *
-     * @return void
      */
     public function setRestrictions($value)
     {
         $this->_restrictions = $value;
     }
 }
-
-

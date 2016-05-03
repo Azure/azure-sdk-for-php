@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,104 +15,102 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Templates;
-use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * Represents PlayReadyLicenseTemplate object used in media services
+ * Represents PlayReadyLicenseTemplate object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Templates
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class PlayReadyLicenseTemplate
 {
     /**
-     * PlayReadyLicenseTemplate AllowTestDevices 
+     * PlayReadyLicenseTemplate AllowTestDevices.
      *
      * @var bool
      */
     private $_allowTestDevices;
 
     /**
-     * PlayReadyLicenseTemplate BeginDate  
+     * PlayReadyLicenseTemplate BeginDate.
      *
      * @var \DateTime
      */
     private $_beginDate;
 
     /**
-     * PlayReadyLicenseTemplate ExpirationDate  
+     * PlayReadyLicenseTemplate ExpirationDate.
      *
      * @var \DateTime
      */
     private $_expirationDate;
 
     /**
-     * PlayReadyLicenseTemplate RelativeBeginDate  
+     * PlayReadyLicenseTemplate RelativeBeginDate.
      *
      * @var \DateInterval
      */
     private $_relativeBeginDate;
 
     /**
-     * PlayReadyLicenseTemplate RelativeExpirationDate   
+     * PlayReadyLicenseTemplate RelativeExpirationDate.
      *
      * @var \DateInterval
      */
-    private $_relativeExpirationDate ;
+    private $_relativeExpirationDate;
 
     /**
-     * PlayReadyLicenseTemplate GracePeriod    
+     * PlayReadyLicenseTemplate GracePeriod.
      *
      * @var \DateInterval
      */
     private $_gracePeriod;
 
     /**
-     * PlayReadyLicenseTemplate PlayRight  
+     * PlayReadyLicenseTemplate PlayRight.
      *
      * @var PlayReadyPlayRight
      */
     private $_playRight;
 
     /**
-     * PlayReadyLicenseTemplate LicenseType  
+     * PlayReadyLicenseTemplate LicenseType.
      *
-     * @var string 
+     * @var string
      */
     private $_playReadyLicenseType;
 
     /**
-     * PlayReadyLicenseTemplate ContentKey  
+     * PlayReadyLicenseTemplate ContentKey.
      *
-     * @var PlayReadyContentKey 
+     * @var PlayReadyContentKey
      */
     private $_playReadyContentKey;
 
     /**
-     * Create PlayReadyLicenseTemplate
-     *
-     * @return void
+     * Create PlayReadyLicenseTemplate.
      */
     public function __construct()
-    {        
+    {
         $this->_playReadyContentKey = new ContentEncryptionKeyFromHeader();
-        $this->_playRight = new PlayReadyPlayRight();  
+        $this->_playRight = new PlayReadyPlayRight();
     }
-    
+
     /**
      * Controls whether test devices can use the license or not.  If true, the MinimumSecurityLevel property of the license
      * is set to 150.  If false (the default), the MinimumSecurityLevel property of the license is set to 2000.
@@ -129,8 +127,6 @@ class PlayReadyLicenseTemplate
      * is set to 150.  If false (the default), the MinimumSecurityLevel property of the license is set to 2000.
      *
      * @param bool $value AllowTestDevices
-     *
-     * @return void
      */
     public function setAllowTestDevices($value)
     {
@@ -153,8 +149,6 @@ class PlayReadyLicenseTemplate
      * result in an error on the client.
      *
      * @param \DateTime $value BeginDate 
-     *
-     * @return void
      */
     public function setBeginDate($value)
     {
@@ -177,8 +171,6 @@ class PlayReadyLicenseTemplate
      * result in an error on the client.
      *
      * @param \DateTime $value ExpirationDate 
-     *
-     * @return void
      */
     public function setExpirationDate($value)
     {
@@ -188,7 +180,7 @@ class PlayReadyLicenseTemplate
     /**
      * Configures starting DateTime value when the license is valid.  Attempts to use the license before this date and time 
      * will result in an error on the client.  The DateTime value is calculated as DateTime.UtcNow + RelativeBeginDate when 
-     * the license is issued
+     * the license is issued.
      *
      * @return \DateInterval RelativeBeginDate
      */
@@ -200,11 +192,9 @@ class PlayReadyLicenseTemplate
     /**
      * Configures starting DateTime value when the license is valid.  Attempts to use the license before this date and time 
      * will result in an error on the client.  The DateTime value is calculated as DateTime.UtcNow + RelativeBeginDate when 
-     * the license is issued
+     * the license is issued.
      *
      * @param \DateInterval $value RelativeBeginDate 
-     *
-     * @return void
      */
     public function setRelativeBeginDate($value)
     {
@@ -214,7 +204,7 @@ class PlayReadyLicenseTemplate
     /**
      * Configures the DateTime value when the license expires.  Attempts to use the license after this date and time will result 
      * in an error on the client.  The DateTime value is calculated as DateTime.UtcNow + RelativeExpirationDate when the license 
-     * is issued
+     * is issued.
      *
      * @return \DateInterval RelativeExpirationDate
      */
@@ -226,11 +216,9 @@ class PlayReadyLicenseTemplate
     /**
      * Configures the DateTime value when the license expires.  Attempts to use the license after this date and time will result 
      * in an error on the client.  The DateTime value is calculated as DateTime.UtcNow + RelativeExpirationDate when the license 
-     * is issued
+     * is issued.
      *
      * @param \DateInterval $value RelativeExpirationDate
-     *
-     * @return void
      */
     public function setRelativeExpirationDate($value)
     {
@@ -253,8 +241,6 @@ class PlayReadyLicenseTemplate
      * evaluated on certain devices in the situation that the devices secure clock becomes unset.
      *
      * @param \DateInterval $value GracePeriod
-     *
-     * @return void
      */
     public function setGracePeriod($value)
     {
@@ -277,8 +263,6 @@ class PlayReadyLicenseTemplate
      * The PlayRight also allows configuring restrictions specific to playback.  This Right is required.
      *
      * @param PlayReadyPlayRight $value PlayReadyPlayRight
-     *
-     * @return void
      */
     public function setPlayRight($value)
     {
@@ -303,8 +287,6 @@ class PlayReadyLicenseTemplate
      * content.
      *
      * @param string $value LicenseType
-     *
-     * @return void
      */
     public function setLicenseType($value)
     {
@@ -329,13 +311,9 @@ class PlayReadyLicenseTemplate
      * server the exact key to embed in the license issued to the client.
      *
      * @param PlayReadyContentKey $value PlayReadyContentKey 
-     *
-     * @return void
      */
     public function setContentKey($value)
     {
-        $this->_playReadyContentKey  = $value;
+        $this->_playReadyContentKey = $value;
     }
 }
-
-

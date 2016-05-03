@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,151 +15,153 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\Common\Internal\Validate;
 
-
 /**
- * Represents job object used in media services
+ * Represents job object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Job
 {
     /**
-     * The state of the job "queued"
+     * The state of the job "queued".
      *
      * @var int
      */
     const STATE_QUEUED = 0;
 
     /**
-     * The state of the job "scheduled"
+     * The state of the job "scheduled".
      *
      * @var int
      */
     const STATE_SCHEDULED = 1;
 
     /**
-     * The state of the job "processing"
+     * The state of the job "processing".
      *
      * @var int
      */
     const STATE_PROCESSING = 2;
 
     /**
-     * The state of the job "finished"
+     * The state of the job "finished".
      *
      * @var int
      */
     const STATE_FINISHED = 3;
 
     /**
-     * The state of the job "error"
+     * The state of the job "error".
      *
      * @var int
      */
     const STATE_ERROR = 4;
 
     /**
-     * The state of the job "canceled"
+     * The state of the job "canceled".
      *
      * @var int
      */
     const STATE_CANCELED = 5;
 
     /**
-     * The state of the job "canceling"
+     * The state of the job "canceling".
      *
      * @var int
      */
     const STATE_CANCELING = 6;
 
     /**
-     * Job id
+     * Job id.
      *
      * @var string
      */
     private $_id;
 
     /**
-     * State
+     * State.
      *
      * @var int
      */
     private $_state;
 
     /**
-     * Created
+     * Created.
      *
      * @var \DateTime
      */
     private $_created;
 
     /**
-     * Last modified
+     * Last modified.
      *
      * @var \DateTime
      */
     private $_lastModified;
 
     /**
-     * Name
+     * Name.
      *
      * @var string
      */
     private $_name;
 
     /**
-     * End time
+     * End time.
      *
      * @var \DateTime
      */
     private $_endTime;
 
     /**
-     * Priority
+     * Priority.
      *
      * @var int
      */
     private $_priority;
 
     /**
-     * Running duration
+     * Running duration.
      *
-     * @var double
+     * @var float
      */
     private $_runningDuration;
 
     /**
-     * Start time
+     * Start time.
      *
      * @var \DateTime
      */
     private $_startTime;
 
     /**
-     * Template id
+     * Template id.
      *
      * @var string
      */
     private $_templateId;
 
     /**
-     * Create asset from array
+     * Create asset from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -167,14 +169,14 @@ class Job
      */
     public static function createFromOptions($options)
     {
-        $job = new Job();
+        $job = new self();
         $job->fromArray($options);
 
         return $job;
     }
 
     /**
-     * Fill asset from array
+     * Fill asset from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -240,7 +242,7 @@ class Job
     }
 
     /**
-     * Get "Name"
+     * Get "Name".
      *
      * @return string
      */
@@ -250,7 +252,7 @@ class Job
     }
 
     /**
-     * Set "Name"
+     * Set "Name".
      *
      * @param string $value Name
      *
@@ -262,7 +264,7 @@ class Job
     }
 
     /**
-     * Get "Last modified"
+     * Get "Last modified".
      *
      * @return \DateTime
      */
@@ -272,7 +274,7 @@ class Job
     }
 
     /**
-     * Get "Created"
+     * Get "Created".
      *
      * @return \DateTime
      */
@@ -282,7 +284,7 @@ class Job
     }
 
     /**
-     * Get "State"
+     * Get "State".
      *
      * @return int
      */
@@ -292,7 +294,7 @@ class Job
     }
 
     /**
-     * Get "Job id"
+     * Get "Job id".
      *
      * @return string
      */
@@ -302,7 +304,7 @@ class Job
     }
 
     /**
-     * Get "Template id"
+     * Get "Template id".
      *
      * @return string
      */
@@ -312,7 +314,7 @@ class Job
     }
 
     /**
-     * Set "Template id"
+     * Set "Template id".
      *
      * @param string $value Template id
      *
@@ -324,7 +326,7 @@ class Job
     }
 
     /**
-     * Get "Start time"
+     * Get "Start time".
      *
      * @return \DateTime
      */
@@ -334,9 +336,9 @@ class Job
     }
 
     /**
-     * Get "Running duration"
+     * Get "Running duration".
      *
-     * @return double
+     * @return float
      */
     public function getRunningDuration()
     {
@@ -344,7 +346,7 @@ class Job
     }
 
     /**
-     * Get "Priority"
+     * Get "Priority".
      *
      * @return int
      */
@@ -354,7 +356,7 @@ class Job
     }
 
     /**
-     * Set "Priority"
+     * Set "Priority".
      *
      * @param int $value Priority
      *
@@ -366,7 +368,7 @@ class Job
     }
 
     /**
-     * Get "End time"
+     * Get "End time".
      *
      * @return \DateTime
      */
@@ -375,5 +377,3 @@ class Job
         return $this->_endTime;
     }
 }
-
-

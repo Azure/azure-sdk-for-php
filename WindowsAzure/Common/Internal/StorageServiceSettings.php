@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,28 +15,28 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\Common\Internal;
-use WindowsAzure\Common\Internal\ConnectionStringParser;
-use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Represents the settings used to sign and access a request against the storage 
  * service. For more information about storage service connection strings check this
- * page: http://msdn.microsoft.com/en-us/library/ee758697
+ * page: http://msdn.microsoft.com/en-us/library/ee758697.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class StorageServiceSettings extends ServiceSettings
@@ -47,54 +47,54 @@ class StorageServiceSettings extends ServiceSettings
      * @var string
      */
     private $_name;
-    
+
     /**
      * A base64 representation.
      * 
      * @var string
      */
     private $_key;
-    
+
     /**
      * The endpoint for the blob service.
      * 
      * @var string
      */
     private $_blobEndpointUri;
-    
+
     /**
      * The endpoint for the queue service.
      * 
      * @var string
      */
     private $_queueEndpointUri;
-    
+
     /**
      * The endpoint for the table service.
      * 
      * @var string
      */
     private $_tableEndpointUri;
-    
+
     /**
      * @var StorageServiceSettings
      */
     private static $_devStoreAccount;
-    
+
     /**
      * Validator for the UseDevelopmentStorage setting. Must be "true".
      * 
      * @var array
      */
     private static $_useDevelopmentStorageSetting;
-    
+
     /**
      * Validator for the DevelopmentStorageProxyUri setting. Must be a valid Uri.
      * 
      * @var array
      */
     private static $_developmentStorageProxyUriSetting;
-    
+
     /**
      * Validator for the DefaultEndpointsProtocol setting. Must be either "http" 
      * or "https".
@@ -102,54 +102,54 @@ class StorageServiceSettings extends ServiceSettings
      * @var array
      */
     private static $_defaultEndpointsProtocolSetting;
-    
+
     /**
      * Validator for the AccountName setting. No restrictions.
      * 
      * @var array
      */
     private static $_accountNameSetting;
-    
+
     /**
      * Validator for the AccountKey setting. Must be a valid base64 string.
      * 
      * @var array
      */
     private static $_accountKeySetting;
-    
+
     /**
      * Validator for the BlobEndpoint setting. Must be a valid Uri.
      * 
      * @var array
      */
     private static $_blobEndpointSetting;
-    
+
     /**
      * Validator for the QueueEndpoint setting. Must be a valid Uri.
      * 
      * @var array
      */
     private static $_queueEndpointSetting;
-    
+
     /**
      * Validator for the TableEndpoint setting. Must be a valid Uri.
      * 
      * @var array
      */
     private static $_tableEndpointSetting;
-    
+
     /**
-     * @var boolean
+     * @var bool
      */
     protected static $isInitialized = false;
-    
+
     /**
      * Holds the expected setting keys.
      * 
      * @var array
      */
     protected static $validSettingKeys = array();
-    
+
     /**
      * Initializes static members of the class.
      * 
@@ -161,19 +161,19 @@ class StorageServiceSettings extends ServiceSettings
             Resources::USE_DEVELOPMENT_STORAGE_NAME,
             'true'
         );
-        
+
         self::$_developmentStorageProxyUriSetting = self::settingWithFunc(
             Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME,
             Validate::getIsValidUri()
         );
-        
+
         self::$_defaultEndpointsProtocolSetting = self::setting(
             Resources::DEFAULT_ENDPOINTS_PROTOCOL_NAME,
             'http', 'https'
         );
-        
+
         self::$_accountNameSetting = self::setting(Resources::ACCOUNT_NAME_NAME);
-        
+
         self::$_accountKeySetting = self::settingWithFunc(
             Resources::ACCOUNT_KEY_NAME,
             // base64_decode will return false if the $key is not in base64 format.
@@ -188,22 +188,22 @@ class StorageServiceSettings extends ServiceSettings
                 }
             }
         );
-        
+
         self::$_blobEndpointSetting = self::settingWithFunc(
             Resources::BLOB_ENDPOINT_NAME,
             Validate::getIsValidUri()
         );
-        
+
         self::$_queueEndpointSetting = self::settingWithFunc(
             Resources::QUEUE_ENDPOINT_NAME,
             Validate::getIsValidUri()
         );
-        
+
         self::$_tableEndpointSetting = self::settingWithFunc(
             Resources::TABLE_ENDPOINT_NAME,
             Validate::getIsValidUri()
         );
-        
+
         self::$validSettingKeys[] = Resources::USE_DEVELOPMENT_STORAGE_NAME;
         self::$validSettingKeys[] = Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME;
         self::$validSettingKeys[] = Resources::DEFAULT_ENDPOINTS_PROTOCOL_NAME;
@@ -213,7 +213,7 @@ class StorageServiceSettings extends ServiceSettings
         self::$validSettingKeys[] = Resources::QUEUE_ENDPOINT_NAME;
         self::$validSettingKeys[] = Resources::TABLE_ENDPOINT_NAME;
     }
-    
+
     /**
      * Creates new storage service settings instance.
      * 
@@ -230,13 +230,13 @@ class StorageServiceSettings extends ServiceSettings
         $queueEndpointUri,
         $tableEndpointUri
     ) {
-        $this->_name             = $name;
-        $this->_key              = $key;
-        $this->_blobEndpointUri  = $blobEndpointUri;
+        $this->_name = $name;
+        $this->_key = $key;
+        $this->_blobEndpointUri = $blobEndpointUri;
         $this->_queueEndpointUri = $queueEndpointUri;
         $this->_tableEndpointUri = $tableEndpointUri;
     }
-    
+
     /**
      * Returns a StorageServiceSettings with development storage credentials using 
      * the specified proxy Uri.
@@ -250,25 +250,25 @@ class StorageServiceSettings extends ServiceSettings
         if (is_null($proxyUri)) {
             return self::developmentStorageAccount();
         }
-        
+
         $scheme = parse_url($proxyUri, PHP_URL_SCHEME);
-        $host   = parse_url($proxyUri, PHP_URL_HOST);
-        $prefix = $scheme . "://" . $host;
-        
-        return new StorageServiceSettings(
+        $host = parse_url($proxyUri, PHP_URL_HOST);
+        $prefix = $scheme.'://'.$host;
+
+        return new self(
             Resources::DEV_STORE_NAME,
             Resources::DEV_STORE_KEY,
-            $prefix . ':10000/devstoreaccount1/',
-            $prefix . ':10001/devstoreaccount1/',
-            $prefix . ':10002/devstoreaccount1/'
+            $prefix.':10000/devstoreaccount1/',
+            $prefix.':10001/devstoreaccount1/',
+            $prefix.':10002/devstoreaccount1/'
         );
     }
-    
+
     /**
      * Gets a StorageServiceSettings object that references the development storage 
      * account.
      * 
-     * @return StorageServiceSettings 
+     * @return StorageServiceSettings
      */
     public static function developmentStorageAccount()
     {
@@ -277,10 +277,10 @@ class StorageServiceSettings extends ServiceSettings
                 Resources::DEV_STORE_URI
             );
         }
-        
+
         return self::$_devStoreAccount;
     }
-    
+
     /**
      * Gets the default service endpoint using the specified protocol and account 
      * name.
@@ -292,7 +292,7 @@ class StorageServiceSettings extends ServiceSettings
      */
     private static function _getDefaultServiceEndpoint($settings, $dns)
     {
-        $scheme      = Utilities::tryGetValueInsensitive(
+        $scheme = Utilities::tryGetValueInsensitive(
             Resources::DEFAULT_ENDPOINTS_PROTOCOL_NAME,
             $settings
         );
@@ -300,10 +300,10 @@ class StorageServiceSettings extends ServiceSettings
             Resources::ACCOUNT_NAME_NAME,
             $settings
         );
-        
+
         return sprintf(Resources::SERVICE_URI_FORMAT, $scheme, $accountName, $dns);
     }
-    
+
     /**
      * Creates StorageServiceSettings object given endpoints uri.
      * 
@@ -320,7 +320,7 @@ class StorageServiceSettings extends ServiceSettings
         $queueEndpointUri = null,
         $tableEndpointUri = null
     ) {
-        $blobEndpointUri  = Utilities::tryGetValueInsensitive(
+        $blobEndpointUri = Utilities::tryGetValueInsensitive(
             Resources::BLOB_ENDPOINT_NAME,
             $settings,
             $blobEndpointUri
@@ -335,16 +335,16 @@ class StorageServiceSettings extends ServiceSettings
             $settings,
             $tableEndpointUri
         );
-        $accountName      = Utilities::tryGetValueInsensitive(
+        $accountName = Utilities::tryGetValueInsensitive(
             Resources::ACCOUNT_NAME_NAME,
             $settings
         );
-        $accountKey       = Utilities::tryGetValueInsensitive(
+        $accountKey = Utilities::tryGetValueInsensitive(
             Resources::ACCOUNT_KEY_NAME,
             $settings
         );
-            
-        return new StorageServiceSettings(
+
+        return new self(
             $accountName,
             $accountKey,
             $blobEndpointUri,
@@ -358,12 +358,12 @@ class StorageServiceSettings extends ServiceSettings
      * 
      * @param string $connectionString The storage settings connection string.
      * 
-     * @return StorageServiceSettings 
+     * @return StorageServiceSettings
      */
     public static function createFromConnectionString($connectionString)
     {
         $tokenizedSettings = self::parseAndValidateKeys($connectionString);
-        
+
         // Devstore case
         $matchedSpecs = self::matchedSpecification(
             $tokenizedSettings,
@@ -375,10 +375,10 @@ class StorageServiceSettings extends ServiceSettings
                 Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME,
                 $tokenizedSettings
             );
-            
+
             return self::_getDevelopmentStorageAccount($proxyUri);
         }
-        
+
         // Automatic case
         $matchedSpecs = self::matchedSpecification(
             $tokenizedSettings,
@@ -410,7 +410,7 @@ class StorageServiceSettings extends ServiceSettings
                 )
             );
         }
-        
+
         // Explicit case
         $matchedSpecs = self::matchedSpecification(
             $tokenizedSettings,
@@ -427,10 +427,10 @@ class StorageServiceSettings extends ServiceSettings
         if ($matchedSpecs) {
             return self::_createStorageServiceSettings($tokenizedSettings);
         }
-        
+
         self::noMatch($connectionString);
     }
-    
+
     /**
      * Gets storage service name.
      * 
@@ -440,7 +440,7 @@ class StorageServiceSettings extends ServiceSettings
     {
         return $this->_name;
     }
-    
+
     /**
      * Gets storage service key.
      * 
@@ -450,7 +450,7 @@ class StorageServiceSettings extends ServiceSettings
     {
         return $this->_key;
     }
-    
+
     /**
      * Gets storage service blob endpoint uri.
      * 
@@ -460,7 +460,7 @@ class StorageServiceSettings extends ServiceSettings
     {
         return $this->_blobEndpointUri;
     }
-    
+
     /**
      * Gets storage service queue endpoint uri.
      * 
@@ -481,5 +481,3 @@ class StorageServiceSettings extends ServiceSettings
         return $this->_tableEndpointUri;
     }
 }
-
-

@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,38 +15,41 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * Represents access policy object used in media services
+ * Represents access policy object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class AccessPolicy
 {
     /**
-     * The access rights the client has when interacting with the Asset. (None)
+     * The access rights the client has when interacting with the Asset. (None).
      *
      * @var int
      */
     const PERMISSIONS_NONE = 0;
 
     /**
-     * The access rights the client has when interacting with the Asset. (Read)
+     * The access rights the client has when interacting with the Asset. (Read).
      *
      * @var int
      */
@@ -54,7 +57,7 @@ class AccessPolicy
 
     /**
      * The access rights the client has when interacting with the Asset.
-     * (Write)
+     * (Write).
      *
      * @var int
      */
@@ -62,63 +65,63 @@ class AccessPolicy
 
     /**
      * The access rights the client has when interacting with the Asset.
-     * (Delete)
+     * (Delete).
      *
      * @var int
      */
     const PERMISSIONS_DELETE = 4;
 
     /**
-     * The access rights the client has when interacting with the Asset. (List)
+     * The access rights the client has when interacting with the Asset. (List).
      *
      * @var int
      */
     const PERMISSIONS_LIST = 8;
 
     /**
-     * Access policy id
+     * Access policy id.
      *
      * @var string
      */
     private $_id;
 
     /**
-     * Created
+     * Created.
      *
      * @var \DateTime
      */
     private $_created;
 
     /**
-     * Last modified
+     * Last modified.
      *
      * @var \DateTime
      */
     private $_lastModified;
 
     /**
-     * Name
+     * Name.
      *
      * @var string
      */
     private $_name;
 
     /**
-     * Duration in minutes
+     * Duration in minutes.
      *
-     * @var double
+     * @var float
      */
     private $_durationInMinutes;
 
     /**
-     * Permissions
+     * Permissions.
      *
      * @var int
      */
     private $_permissions;
 
     /**
-     * Create access policy from array
+     * Create access policy from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -128,14 +131,14 @@ class AccessPolicy
     {
         Validate::notNull($options['Name'], 'options[Name]');
 
-        $accessPolicy = new AccessPolicy($options['Name']);
+        $accessPolicy = new self($options['Name']);
         $accessPolicy->fromArray($options);
 
         return $accessPolicy;
     }
 
     /**
-     * Create access policy
+     * Create access policy.
      *
      * @param string $name Entity name
      */
@@ -145,7 +148,7 @@ class AccessPolicy
     }
 
     /**
-     * Fill access policy from array
+     * Fill access policy from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -194,7 +197,7 @@ class AccessPolicy
     }
 
     /**
-     * Get "Permissions"
+     * Get "Permissions".
      *
      * @return int
      */
@@ -204,7 +207,7 @@ class AccessPolicy
     }
 
     /**
-     * Set "Permissions"
+     * Set "Permissions".
      *
      * @param int $value Permissions
      *
@@ -216,9 +219,9 @@ class AccessPolicy
     }
 
     /**
-     * Get "Duration in minutes"
+     * Get "Duration in minutes".
      *
-     * @return double
+     * @return float
      */
     public function getDurationInMinutes()
     {
@@ -226,9 +229,9 @@ class AccessPolicy
     }
 
     /**
-     * Set "Duration in minutes"
+     * Set "Duration in minutes".
      *
-     * @param double $value Duration in minutes
+     * @param float $value Duration in minutes
      *
      * @return none
      */
@@ -238,7 +241,7 @@ class AccessPolicy
     }
 
     /**
-     * Get "Name"
+     * Get "Name".
      *
      * @return string
      */
@@ -248,7 +251,7 @@ class AccessPolicy
     }
 
     /**
-     * Set "Name"
+     * Set "Name".
      *
      * @param string $value Name
      *
@@ -260,7 +263,7 @@ class AccessPolicy
     }
 
     /**
-     * Get "Last modified"
+     * Get "Last modified".
      *
      * @return \DateTime
      */
@@ -270,7 +273,7 @@ class AccessPolicy
     }
 
     /**
-     * Get "Created"
+     * Get "Created".
      *
      * @return \DateTime
      */
@@ -280,7 +283,7 @@ class AccessPolicy
     }
 
     /**
-     * Get "Access policy id"
+     * Get "Access policy id".
      *
      * @return string
      */
@@ -289,5 +292,3 @@ class AccessPolicy
         return $this->_id;
     }
 }
-
-

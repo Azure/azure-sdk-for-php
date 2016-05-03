@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,31 +15,32 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\ServiceBus\Models;
+
 use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Atom\Content;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
-use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\ServiceBus\Models\TopicDescription;
 
 /**
  * The description of a topic.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class TopicInfo extends Entry
@@ -63,26 +64,26 @@ class TopicInfo extends Entry
      *
      * @param string           $title            The name of the topic.
      * @param TopicDescription $topicDescription The description of the 
-     * topic.
+     *                                           topic.
      */
     public function __construct(
-        $title = Resources::EMPTY_STRING, 
+        $title = Resources::EMPTY_STRING,
         $topicDescription = null
     ) {
         Validate::isString($title, 'title');
         if (is_null($topicDescription)) {
             $topicDescription = new TopicDescription();
         }
-        $this->title             = $title;
+        $this->title = $title;
         $this->_topicDescription = $topicDescription;
-        $this->_entry            = new Entry();
+        $this->_entry = new Entry();
         $this->_entry->setTitle($title);
         $this->_entry->setAttribute(
             Resources::XMLNS,
             Resources::SERVICE_BUS_NAMESPACE
         );
     }
-    
+
     /**
      * Populates properties with a specified XML string. 
      * 
@@ -106,7 +107,7 @@ class TopicInfo extends Entry
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
      *
-     * @return string 
+     * @return string
      */
     public function writeXml($xmlWriter)
     {
@@ -200,7 +201,7 @@ class TopicInfo extends Entry
     {
         return $this->_topicDescription->getDefaultMessageTimeToLive();
     }
-    
+
     /**
      * Sets the default message to live.
      *
@@ -218,7 +219,7 @@ class TopicInfo extends Entry
     /**
      * Gets the msax size in mega bytes. 
      * 
-     * @return integer
+     * @return int
      */
     public function getMaxSizeInMegabytes()
     {
@@ -228,7 +229,7 @@ class TopicInfo extends Entry
     /**
      * Sets max size in mega bytes. 
      * 
-     * @param integer $maxSizeInMegabytes The maximum size in mega bytes. 
+     * @param int $maxSizeInMegabytes The maximum size in mega bytes. 
      * 
      * @return none
      */
@@ -240,7 +241,7 @@ class TopicInfo extends Entry
     /**
      * Gets requires duplicate detection.
      * 
-     * @return boolean 
+     * @return bool
      */
     public function getRequiresDuplicateDetection()
     {
@@ -250,7 +251,7 @@ class TopicInfo extends Entry
     /**
      * Sets requires duplicate detection. 
      * 
-     * @param boolean $requiresDuplicateDetection Sets requires duplicate detection.
+     * @param bool $requiresDuplicateDetection Sets requires duplicate detection.
      *
      * @return none
      */
@@ -275,7 +276,7 @@ class TopicInfo extends Entry
      * Sets duplicate detection history time window. 
      * 
      * @param string $duplicateDetectionHistoryTimeWindow The duplicate 
-     * detection history time window.
+     *                                                    detection history time window.
      *
      * @return none
      */
@@ -290,7 +291,7 @@ class TopicInfo extends Entry
     /**
      * Gets enable batched operations. 
      * 
-     * @return boolean
+     * @return bool
      */
     public function getEnableBatchedOperations()
     {
@@ -300,7 +301,7 @@ class TopicInfo extends Entry
     /**
      * Sets enable batched operations.
      * 
-     * @param boolean $enableBatchedOperations Enables batched operations.
+     * @param bool $enableBatchedOperations Enables batched operations.
      * 
      * @return none
      */
@@ -314,7 +315,7 @@ class TopicInfo extends Entry
     /**
      * Gets size in bytes. 
      * 
-     * @return integer 
+     * @return int
      */
     public function getSizeInBytes()
     {
@@ -324,7 +325,7 @@ class TopicInfo extends Entry
     /** 
      * Sets size in bytes.
      * 
-     * @param integer $sizeInBytes The size in bytes. 
+     * @param int $sizeInBytes The size in bytes. 
      *
      * @return none
      */
@@ -332,5 +333,4 @@ class TopicInfo extends Entry
     {
         $this->_topicDescription->setSizeInBytes($sizeInBytes);
     }
-
 }

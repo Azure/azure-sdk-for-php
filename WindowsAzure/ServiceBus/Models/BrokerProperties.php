@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,13 +14,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 namespace WindowsAzure\ServiceBus\Models;
+
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Resources;
 
@@ -28,14 +30,15 @@ use WindowsAzure\Common\Internal\Resources;
  * The properties of the broker of a brokered message. 
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 class BrokerProperties
 {
     /**
@@ -55,7 +58,7 @@ class BrokerProperties
     /**
      * The delivery count.
      *
-     * @var integer
+     * @var int
      */
     private $_deliveryCount;
 
@@ -85,7 +88,7 @@ class BrokerProperties
      *
      * @var string
      */
-    private $_label;    
+    private $_label;
 
     /**
      * The reply to.
@@ -142,7 +145,6 @@ class BrokerProperties
      * @var string
      */
     private $_lockLocation;
- 
 
     /**
      * Creates a broker properties instance with default parameters. 
@@ -152,23 +154,23 @@ class BrokerProperties
     }
 
     // @codingStandardsIgnoreStart
-    
+
     /**
      * Creates a broker properties instance with specified JSON message.  
      *
      * @param string $brokerPropertiesJson A JSON message representing a 
-     * broker properties.
+     *                                     broker properties.
      * 
      * @return none
      */
     public static function create($brokerPropertiesJson)
-    {        
+    {
         Validate::isString($brokerPropertiesJson, 'brokerPropertiesJson');
 
-        $brokerProperties = new BrokerProperties();
+        $brokerProperties = new self();
 
-        $brokerPropertiesArray = (array)json_decode($brokerPropertiesJson);
-        
+        $brokerPropertiesArray = (array) json_decode($brokerPropertiesJson);
+
         if (array_key_exists('CorrelationId', $brokerPropertiesArray)) {
             $brokerProperties->setCorrelationId(
                 $brokerPropertiesArray['CorrelationId']
@@ -233,7 +235,7 @@ class BrokerProperties
         }
 
         if (array_key_exists(
-            'ScheduledEnqueueTimeUtc', 
+            'ScheduledEnqueueTimeUtc',
             $brokerPropertiesArray
         )
         ) {
@@ -265,13 +267,13 @@ class BrokerProperties
 
         return $brokerProperties;
     }
-    
+
     // @codingStandardsIgnoreEnd
 
     /**
      * Gets the correlation ID. 
      *
-     * @return string 
+     * @return string
      */
     public function getCorrelationId()
     {
@@ -284,7 +286,7 @@ class BrokerProperties
      * @param string $correlationId The correlation ID. 
      * 
      * @return none
-     */ 
+     */
     public function setCorrelationId($correlationId)
     {
         $this->_correlationId = $correlationId;
@@ -293,7 +295,7 @@ class BrokerProperties
     /**
      * Gets the session ID. 
      * 
-     * @return string 
+     * @return string
      */
     public function getSessionId()
     {
@@ -315,7 +317,7 @@ class BrokerProperties
     /** 
      * Gets the delivery count. 
      * 
-     * @return integer
+     * @return int
      */
     public function getDeliveryCount()
     {
@@ -325,7 +327,7 @@ class BrokerProperties
     /** 
      * Sets the delivery count. 
      * 
-     * @param integer $deliveryCount The count of the delivery. 
+     * @param int $deliveryCount The count of the delivery. 
      * 
      * @return none
      */
@@ -359,7 +361,7 @@ class BrokerProperties
     /** 
      * Gets lock token. 
      * 
-     * @return string. 
+     * @return string.
      */
     public function getLockToken()
     {
@@ -403,7 +405,7 @@ class BrokerProperties
     /**
      * Gets the label. 
      * 
-     * @return string 
+     * @return string
      */
     public function getLabel()
     {
@@ -425,7 +427,7 @@ class BrokerProperties
     /**
      * Gets the reply to. 
      * 
-     * @return string 
+     * @return string
      */
     public function getReplyTo()
     {
@@ -447,7 +449,7 @@ class BrokerProperties
     /**
      * Gets the sequence number. 
      * 
-     * @return integer
+     * @return int
      */
     public function getSequenceNumber()
     {
@@ -457,7 +459,7 @@ class BrokerProperties
     /**
      * Sets the sequence number. 
      * 
-     * @param integer $sequenceNumber The sequence number. 
+     * @param int $sequenceNumber The sequence number. 
      * 
      * @return none
      */
@@ -469,7 +471,7 @@ class BrokerProperties
     /**
      * Gets time to live. 
      * 
-     * @return string 
+     * @return string
      */
     public function getTimeToLive()
     {
@@ -491,7 +493,7 @@ class BrokerProperties
     /** 
      * Gets to. 
      * 
-     * @return string 
+     * @return string
      */
     public function getTo()
     {
@@ -557,7 +559,7 @@ class BrokerProperties
     /**
      * Gets message location. 
      * 
-     * @return string 
+     * @return string
      */
     public function getMessageLocation()
     {
@@ -579,7 +581,7 @@ class BrokerProperties
     /** 
      * Gets the location of the lock. 
      * 
-     * @return string 
+     * @return string
      */
     public function getLockLocation()
     {
@@ -597,7 +599,7 @@ class BrokerProperties
     {
         $this->_lockLocation = $lockLocation;
     }
-    
+
     /**
      * Gets a string representing the broker property. 
      *
@@ -606,27 +608,27 @@ class BrokerProperties
     public function toString()
     {
         $value = array();
-        
+
         $this->setValueArrayString(
-            $value, 
+            $value,
             'CorrelationId',
             $this->_correlationId
         );
 
         $this->setValueArrayString(
-            $value, 
+            $value,
             'SessionId',
             $this->_sessionId
         );
 
         $this->setValueArrayInt(
-            $value, 
+            $value,
             'DeliveryCount',
             $this->_deliveryCount
         );
 
         $this->setValueArrayDateTime(
-            $value, 
+            $value,
             'LockedUntilUtc',
             $this->_lockedUntilUtc
         );
@@ -698,8 +700,9 @@ class BrokerProperties
         );
 
         $result = json_encode($value);
-        return $result; 
-    }    
+
+        return $result;
+    }
 
     /** 
      * Sets a string in an array. 
@@ -757,7 +760,7 @@ class BrokerProperties
 
         if (!empty($value)) {
             Validate::isDouble($value, 'value');
-            $valueArray[$key] = (double)$value;
+            $valueArray[$key] = (double) $value;
         }
     }
 
@@ -778,7 +781,7 @@ class BrokerProperties
         if (!empty($value)) {
             Validate::isDate($value, 'value');
             $valueArray[$key] = gmdate(
-                Resources::AZURE_DATE_FORMAT, 
+                Resources::AZURE_DATE_FORMAT,
                 $value->getTimestamp()
             );
         }

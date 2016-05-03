@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,82 +15,83 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
-use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Utilities;
 
+use WindowsAzure\Common\Internal\Validate;
 
 /**
- * Represents AssetDeliveryPolicy object used in media services
+ * Represents AssetDeliveryPolicy object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class AssetDeliveryPolicy
 {
     /**
-     * AssetDeliveryPolicy id
+     * AssetDeliveryPolicy id.
      *
      * @var string
      */
     private $_id;
 
     /**
-     * AssetDeliveryPolicy Name
+     * AssetDeliveryPolicy Name.
      *
      * @var string
      */
     private $_name;
 
     /**
-     * AssetDeliveryPolicy AssetDeliveryProtocol
+     * AssetDeliveryPolicy AssetDeliveryProtocol.
      *
      * @var int
      */
     private $_protocol;
 
     /**
-     * AssetDeliveryPolicy AssetDeliveryPolicyType
+     * AssetDeliveryPolicy AssetDeliveryPolicyType.
      *
      * @var int
      */
     private $_policyType;
 
     /**
-     * AssetDeliveryPolicy AssetDeliveryConfiguration
+     * AssetDeliveryPolicy AssetDeliveryConfiguration.
      *
      * @var int
      */
     private $_configuration;
 
     /**
-     * Created
+     * Created.
      *
      * @var \DateTime
      */
     private $_created;
 
     /**
-     * Last modified
+     * Last modified.
      *
      * @var \DateTime
      */
     private $_lastModified;
 
     /**
-     * Create AssetDeliveryPolicy from array
+     * Create AssetDeliveryPolicy from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -98,27 +99,23 @@ class AssetDeliveryPolicy
      */
     public static function createFromOptions($options)
     {
-        $assetDeliveryPolicy = new AssetDeliveryPolicy();
+        $assetDeliveryPolicy = new self();
         $assetDeliveryPolicy->fromArray($options);
 
         return $assetDeliveryPolicy;
     }
 
     /**
-     * Create AssetDeliveryPolicy
-     *
-     * @return void
+     * Create AssetDeliveryPolicy.
      */
     public function __construct()
     {
     }
 
     /**
-     * Fill AssetDeliveryPolicy from array
+     * Fill AssetDeliveryPolicy from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return void
      */
     public function fromArray($options)
     {
@@ -141,7 +138,7 @@ class AssetDeliveryPolicy
             Validate::isInteger($options['AssetDeliveryPolicyType'], 'options[AssetDeliveryPolicyType]');
             $this->_policyType = $options['AssetDeliveryPolicyType'];
         }
-        
+
         if (isset($options['AssetDeliveryConfiguration'])) {
             Validate::isString($options['AssetDeliveryConfiguration'], 'options[AssetDeliveryConfiguration]');
             $this->_configuration = $options['AssetDeliveryConfiguration'];
@@ -162,7 +159,7 @@ class AssetDeliveryPolicy
     }
 
     /**
-     * Get "AssetDeliveryPolicy id"
+     * Get "AssetDeliveryPolicy id".
      *
      * @return string
      */
@@ -172,19 +169,17 @@ class AssetDeliveryPolicy
     }
 
     /**
-     * Set "AssetDeliveryPolicy id"
+     * Set "AssetDeliveryPolicy id".
      *
      * @param string $value AssetDeliveryPolicy id
-     *
-     * @return void
      */
     public function setId($value)
     {
         $this->_id = $value;
     }
-    
+
     /**
-     * Get "AssetDeliveryPolicy Name"
+     * Get "AssetDeliveryPolicy Name".
      *
      * @return string
      */
@@ -194,11 +189,9 @@ class AssetDeliveryPolicy
     }
 
     /**
-     * Set "AssetDeliveryPolicy Name"
+     * Set "AssetDeliveryPolicy Name".
      *
      * @param string $value Name
-     *
-     * @return void
      */
     public function setName($value)
     {
@@ -206,7 +199,7 @@ class AssetDeliveryPolicy
     }
 
     /**
-     * Get "AssetDeliveryPolicy AssetDeliveryProtocol"
+     * Get "AssetDeliveryPolicy AssetDeliveryProtocol".
      *
      * @return int
      */
@@ -216,11 +209,9 @@ class AssetDeliveryPolicy
     }
 
     /**
-     * Set "AssetDeliveryPolicy AssetDeliveryProtocol"
+     * Set "AssetDeliveryPolicy AssetDeliveryProtocol".
      *
      * @param int $value Name
-     *
-     * @return void
      */
     public function setAssetDeliveryProtocol($value)
     {
@@ -228,7 +219,7 @@ class AssetDeliveryPolicy
     }
 
     /**
-     * Get "AssetDeliveryPolicy AssetDeliveryPolicyType"
+     * Get "AssetDeliveryPolicy AssetDeliveryPolicyType".
      *
      * @return int
      */
@@ -238,11 +229,9 @@ class AssetDeliveryPolicy
     }
 
     /**
-     * Set "AssetDeliveryPolicy AssetDeliveryPolicyType"
+     * Set "AssetDeliveryPolicy AssetDeliveryPolicyType".
      *
      * @param int $value AssetDeliveryPolicyType
-     *
-     * @return void
      */
     public function setAssetDeliveryPolicyType($value)
     {
@@ -250,7 +239,7 @@ class AssetDeliveryPolicy
     }
 
     /**
-     * Get "AssetDeliveryPolicy AssetDeliveryConfiguration"
+     * Get "AssetDeliveryPolicy AssetDeliveryConfiguration".
      *
      * @return string
      */
@@ -260,19 +249,17 @@ class AssetDeliveryPolicy
     }
 
     /**
-     * Set "AssetDeliveryPolicy AssetDeliveryConfiguration"
+     * Set "AssetDeliveryPolicy AssetDeliveryConfiguration".
      *
      * @param string $value NameAssetDeliveryConfiguration
-     *
-     * @return void
      */
     public function setAssetDeliveryConfiguration($value)
     {
         $this->_configuration = $value;
     }
-    
+
     /**
-     * Get "Last modified"
+     * Get "Last modified".
      *
      * @return \DateTime
      */
@@ -282,7 +269,7 @@ class AssetDeliveryPolicy
     }
 
     /**
-     * Get "Created"
+     * Get "Created".
      *
      * @return \DateTime
      */
@@ -291,5 +278,3 @@ class AssetDeliveryPolicy
         return $this->_created;
     }
 }
-
-

@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,195 +15,195 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
-use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\MediaServices\Models\TaskHistoricalEvent;
-use WindowsAzure\MediaServices\Models\ErrorDetail;
 
+use WindowsAzure\Common\Internal\Validate;
 
 /**
- * Represents task object used in media services
+ * Represents task object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Task
 {
     /**
-     * The state of the task "none"
+     * The state of the task "none".
      *
      * @var int
      */
     const STATE_NONE = 0;
 
     /**
-     * The state of the task "active"
+     * The state of the task "active".
      *
      * @var int
      */
     const STATE_ACTIVE = 1;
 
     /**
-     * The state of the task "running"
+     * The state of the task "running".
      *
      * @var int
      */
     const STATE_RUNNING = 2;
 
     /**
-     * The state of the task "completed"
+     * The state of the task "completed".
      *
      * @var int
      */
     const STATE_COMPLETED = 3;
 
     /**
-     * Task id
+     * Task id.
      *
      * @var string
      */
     private $_id;
 
     /**
-     * Configuration
+     * Configuration.
      *
      * @var string
      */
     private $_configuration;
 
     /**
-     * End tine
+     * End tine.
      *
      * @var \DateTime
      */
     private $_endTime;
 
     /**
-     * Media procesot id
+     * Media procesot id.
      *
      * @var string
      */
     private $_mediaProcessorId;
 
     /**
-     * Perfoemance message
+     * Perfoemance message.
      *
      * @var string
      */
     private $_perfMessage;
 
     /**
-     * Progress
+     * Progress.
      *
-     * @var double
+     * @var float
      */
     private $_progress;
 
     /**
-     * Running duration
+     * Running duration.
      *
-     * @var double
+     * @var float
      */
     private $_runningDuration;
 
     /**
-     * Task body
+     * Task body.
      *
      * @var string
      */
     private $_taskBody;
 
     /**
-     * Options
+     * Options.
      *
      * @var int
      */
     private $_options;
 
     /**
-     * Encription key id
+     * Encription key id.
      *
      * @var string
      */
     private $_encryptionKeyId;
 
     /**
-     * Encryption scheme
+     * Encryption scheme.
      *
      * @var string
      */
     private $_encryptionScheme;
 
     /**
-     * Encryption version
+     * Encryption version.
      *
      * @var string
      */
     private $_encryptionVersion;
 
     /**
-     * Initialization vector
+     * Initialization vector.
      *
      * @var string
      */
     private $_initializationVector;
 
     /**
-     * State
+     * State.
      *
      * @var int
      */
     private $_state;
 
     /**
-     * Name
+     * Name.
      *
      * @var string
      */
     private $_name;
 
     /**
-     * Priority
+     * Priority.
      *
      * @var int
      */
     private $_priority;
 
     /**
-     * Start time
+     * Start time.
      *
      * @var \DateTime
      */
     private $_startTime;
 
     /**
-     * HistoricalEvents
+     * HistoricalEvents.
      *
      * @var array
      */
     private $_historicalEvents;
 
     /**
-     * ErrorDetails
+     * ErrorDetails.
      *
      * @var array
      */
     private $_errorDetails;
 
     /**
-     * Create task from array
+     * Create task from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -215,7 +215,7 @@ class Task
         Validate::notNull($options['Options'], 'options[Options]');
         Validate::notNull($options['MediaProcessorId'], 'options[MediaProcessorId]');
 
-        $task = new Task(
+        $task = new self(
             $options['TaskBody'],
             $options['MediaProcessorId'],
             $options['Options']
@@ -226,7 +226,7 @@ class Task
     }
 
     /**
-     * Create task
+     * Create task.
      *
      * @param string $taskBody         Task body.
      * @param string $mediaProcessorId Media processor identifier.
@@ -234,13 +234,13 @@ class Task
      */
     public function __construct($taskBody, $mediaProcessorId, $options)
     {
-        $this->_taskBody         = $taskBody;
-        $this->_options          = $options;
+        $this->_taskBody = $taskBody;
+        $this->_options = $options;
         $this->_mediaProcessorId = $mediaProcessorId;
     }
 
     /**
-     * Fill task from array
+     * Fill task from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -372,11 +372,10 @@ class Task
                 }
             }
         }
-
     }
 
     /**
-     * Get "Name"
+     * Get "Name".
      *
      * @return string
      */
@@ -386,7 +385,7 @@ class Task
     }
 
     /**
-     * Set "Name"
+     * Set "Name".
      *
      * @param string $value Name
      *
@@ -398,7 +397,7 @@ class Task
     }
 
     /**
-     * Get "State"
+     * Get "State".
      *
      * @return int
      */
@@ -408,7 +407,7 @@ class Task
     }
 
     /**
-     * Get "Task id"
+     * Get "Task id".
      *
      * @return string
      */
@@ -418,7 +417,7 @@ class Task
     }
 
     /**
-     * Get "Start time"
+     * Get "Start time".
      *
      * @return \DateTime
      */
@@ -428,9 +427,9 @@ class Task
     }
 
     /**
-     * Get "Running duration"
+     * Get "Running duration".
      *
-     * @return double
+     * @return float
      */
     public function getRunningDuration()
     {
@@ -438,7 +437,7 @@ class Task
     }
 
     /**
-     * Get "Priority"
+     * Get "Priority".
      *
      * @return int
      */
@@ -448,7 +447,7 @@ class Task
     }
 
     /**
-     * Set "Priority"
+     * Set "Priority".
      *
      * @param int $value Priority
      *
@@ -460,7 +459,7 @@ class Task
     }
 
     /**
-     * Get "End time"
+     * Get "End time".
      *
      * @return \DateTime
      */
@@ -470,7 +469,7 @@ class Task
     }
 
     /**
-     * Get "Initialization vector"
+     * Get "Initialization vector".
      *
      * @return string
      */
@@ -480,7 +479,7 @@ class Task
     }
 
     /**
-     * Set "Initialization vector"
+     * Set "Initialization vector".
      *
      * @param string $value Initialization vector
      *
@@ -492,7 +491,7 @@ class Task
     }
 
     /**
-     * Get "Encryption version"
+     * Get "Encryption version".
      *
      * @return string
      */
@@ -502,7 +501,7 @@ class Task
     }
 
     /**
-     * Set "Encryption version"
+     * Set "Encryption version".
      *
      * @param string $value Encryption version
      *
@@ -514,7 +513,7 @@ class Task
     }
 
     /**
-     * Get "Encryption scheme"
+     * Get "Encryption scheme".
      *
      * @return string
      */
@@ -524,7 +523,7 @@ class Task
     }
 
     /**
-     * Set "Encryption scheme"
+     * Set "Encryption scheme".
      *
      * @param string $value Encryption scheme
      *
@@ -536,7 +535,7 @@ class Task
     }
 
     /**
-     * Get "Encription key id"
+     * Get "Encription key id".
      *
      * @return string
      */
@@ -546,7 +545,7 @@ class Task
     }
 
     /**
-     * Set "Encription key id"
+     * Set "Encription key id".
      *
      * @param string $value Encription key id
      *
@@ -558,7 +557,7 @@ class Task
     }
 
     /**
-     * Get "Options"
+     * Get "Options".
      *
      * @return int
      */
@@ -568,7 +567,7 @@ class Task
     }
 
     /**
-     * Get "Task body"
+     * Get "Task body".
      *
      * @return string
      */
@@ -578,7 +577,7 @@ class Task
     }
 
     /**
-     * Set "Task body"
+     * Set "Task body".
      *
      * @param string $value Task body
      *
@@ -590,9 +589,9 @@ class Task
     }
 
     /**
-     * Get "Progress"
+     * Get "Progress".
      *
-     * @return double
+     * @return float
      */
     public function getProgress()
     {
@@ -600,7 +599,7 @@ class Task
     }
 
     /**
-     * Get "Perfoemance message"
+     * Get "Perfoemance message".
      *
      * @return string
      */
@@ -610,7 +609,7 @@ class Task
     }
 
     /**
-     * Get "Media procesot id"
+     * Get "Media procesot id".
      *
      * @return string
      */
@@ -620,7 +619,7 @@ class Task
     }
 
     /**
-     * Set "Media procesot id"
+     * Set "Media procesot id".
      *
      * @param string $value Media procesot id
      *
@@ -632,7 +631,7 @@ class Task
     }
 
     /**
-     * Get "Configuration"
+     * Get "Configuration".
      *
      * @return string
      */
@@ -642,7 +641,7 @@ class Task
     }
 
     /**
-     * Set "Configuration"
+     * Set "Configuration".
      *
      * @param string $value Configuration
      *
@@ -654,7 +653,7 @@ class Task
     }
 
     /**
-     * Get "ErrorDetails"
+     * Get "ErrorDetails".
      *
      * @return array
      */
@@ -664,7 +663,7 @@ class Task
     }
 
     /**
-     * Get "HistoricalEvents"
+     * Get "HistoricalEvents".
      *
      * @return array
      */
@@ -673,4 +672,3 @@ class Task
         return $this->_historicalEvents;
     }
 }
-

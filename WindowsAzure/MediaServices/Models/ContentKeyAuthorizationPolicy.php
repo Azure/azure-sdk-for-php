@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,47 +15,48 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
-use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Utilities;
 
+use WindowsAzure\Common\Internal\Validate;
 
 /**
- * Represents ContentKeyAuthorizationPolicy object used in media services
+ * Represents ContentKeyAuthorizationPolicy object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ContentKeyAuthorizationPolicy
 {
     /**
-     * ContentKeyAuthorizationPolicy id
+     * ContentKeyAuthorizationPolicy id.
      *
      * @var string
      */
     private $_id;
 
     /**
-     * ContentKeyAuthorizationPolicy Name
+     * ContentKeyAuthorizationPolicy Name.
      *
      * @var string
      */
     private $_name;
 
     /**
-     * Create ContentKeyAuthorizationPolicy from array
+     * Create ContentKeyAuthorizationPolicy from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -63,27 +64,23 @@ class ContentKeyAuthorizationPolicy
      */
     public static function createFromOptions($options)
     {
-        $contentKeyAuthorizationPolicy = new ContentKeyAuthorizationPolicy();
+        $contentKeyAuthorizationPolicy = new self();
         $contentKeyAuthorizationPolicy->fromArray($options);
 
         return $contentKeyAuthorizationPolicy;
     }
 
     /**
-     * Create ContentKeyAuthorizationPolicy
-     *
-     * @return void
+     * Create ContentKeyAuthorizationPolicy.
      */
     public function __construct()
     {
     }
 
     /**
-     * Fill ContentKeyAuthorizationPolicy from array
+     * Fill ContentKeyAuthorizationPolicy from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return void
      */
     public function fromArray($options)
     {
@@ -95,11 +92,11 @@ class ContentKeyAuthorizationPolicy
         if (isset($options['Name'])) {
             Validate::isString($options['Name'], 'options[Name]');
             $this->_name = $options['Name'];
-        }        
+        }
     }
 
     /**
-     * Get "ContentKeyAuthorizationPolicy id"
+     * Get "ContentKeyAuthorizationPolicy id".
      *
      * @return string
      */
@@ -109,19 +106,17 @@ class ContentKeyAuthorizationPolicy
     }
 
     /**
-     * Set "ContentKeyAuthorizationPolicy id"
+     * Set "ContentKeyAuthorizationPolicy id".
      *
      * @param string $value ContentKey id
-     *
-     * @return void
      */
     public function setId($value)
     {
         $this->_id = $value;
     }
-    
+
     /**
-     * Get "ContentKeyAuthorizationPolicy Name"
+     * Get "ContentKeyAuthorizationPolicy Name".
      *
      * @return string
      */
@@ -131,16 +126,12 @@ class ContentKeyAuthorizationPolicy
     }
 
     /**
-     * Set "ContentKeyAuthorizationPolicy Name"
+     * Set "ContentKeyAuthorizationPolicy Name".
      *
      * @param string $value Name
-     *
-     * @return void
      */
     public function setName($value)
     {
         $this->_name = $value;
-    }    
+    }
 }
-
-

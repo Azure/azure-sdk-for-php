@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\ServiceManagement\Internal;
+
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
@@ -31,11 +32,13 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
  * Windows Azure service basic elements.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Service
@@ -44,27 +47,27 @@ class Service
      * @var string
      */
     private $_name;
-    
+
     /**
      * @var string
      */
     private $_label;
-    
+
     /**
      * @var string
      */
     private $_description;
-    
+
     /**
      * @var string
      */
     private $_location;
-    
+
     /**
-     * @var array 
+     * @var array
      */
     private $_serializationProperties;
-    
+
     /**
      * Creates Service object from the given raw array.
      * 
@@ -80,7 +83,7 @@ class Service
                     $this->getLabel()
                 )
             );
-            
+
             $this->setLocation(
                 Utilities::tryGetValue(
                     $source,
@@ -88,7 +91,7 @@ class Service
                     $this->getLocation()
                 )
             );
-            
+
             $this->setDescription(
                 Utilities::tryGetValue(
                     $source,
@@ -98,7 +101,7 @@ class Service
             );
         }
     }
-    
+
     /**
      * Gets the name.
      * 
@@ -108,7 +111,7 @@ class Service
     {
         return $this->_name;
     }
-    
+
     /**
      * Sets the name.
      * 
@@ -120,7 +123,7 @@ class Service
     {
         $this->_name = $name;
     }
-    
+
     /**
      * Gets the label.
      * 
@@ -130,7 +133,7 @@ class Service
     {
         return $this->_label;
     }
-    
+
     /**
      * Sets the label.
      * 
@@ -142,7 +145,7 @@ class Service
     {
         $this->_label = $label;
     }
-    
+
     /**
      * Gets the description.
      * 
@@ -152,7 +155,7 @@ class Service
     {
         return $this->_description;
     }
-    
+
     /**
      * Sets the description.
      * 
@@ -164,7 +167,7 @@ class Service
     {
         $this->_description = $description;
     }
-    
+
     /**
      * Gets the location.
      * 
@@ -174,7 +177,7 @@ class Service
     {
         return $this->_location;
     }
-    
+
     /**
      * Sets the location.
      * 
@@ -186,7 +189,7 @@ class Service
     {
         $this->_location = $location;
     }
-    
+
     /**
      * Adds serialization property.
      * 
@@ -199,7 +202,7 @@ class Service
     {
         $this->_serializationProperties[$key] = $value;
     }
-    
+
     /**
      * Gets serialization property value.
      * 
@@ -211,7 +214,7 @@ class Service
     {
         return Utilities::tryGetValue($this->_serializationProperties, $key);
     }
-    
+
     /**
      * Converts the current object into array representation.
      * 
@@ -219,11 +222,11 @@ class Service
      */
     protected function toArray()
     {
-        $arr                            = array();
+        $arr = array();
         $arr[Resources::XTAG_NAMESPACE] = array(
-            Resources::WA_XML_NAMESPACE => null
+            Resources::WA_XML_NAMESPACE => null,
         );
-        
+
         Utilities::addIfNotEmpty(Resources::XTAG_LABEL, $this->_label, $arr);
         Utilities::addIfNotEmpty(
             Resources::XTAG_DESCRIPTION,
@@ -235,10 +238,10 @@ class Service
             $this->_location,
             $arr
         );
-        
+
         return $arr;
     }
-    
+
     /**
      * Serializes the current object.
      * 
@@ -251,9 +254,9 @@ class Service
     public function serialize($serializer)
     {
         $serialized = Resources::EMPTY_STRING;
-        
+
         if ($serializer instanceof XmlSerializer) {
-            $arr        = $this->toArray();
+            $arr = $this->toArray();
             $serialized = $serializer->serialize(
                 $arr,
                 $this->_serializationProperties
@@ -261,7 +264,7 @@ class Service
         } else {
             throw new \InvalidArgumentException(Resources::UNKNOWN_SRILZER_MSG);
         }
-        
+
         return $serialized;
     }
 }

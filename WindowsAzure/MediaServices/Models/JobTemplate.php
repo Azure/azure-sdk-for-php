@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,95 +15,97 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\Common\Internal\Validate;
 
-
 /**
- * Represents job template object used in media services
+ * Represents job template object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class JobTemplate
 {
     /**
-     * The type of JobTemplate "system level"
+     * The type of JobTemplate "system level".
      *
      * @var int
      */
     const TYPE_SYSTEM_LEVEL = 0;
 
     /**
-     * The type of JobTemplate "account level"
+     * The type of JobTemplate "account level".
      *
      * @var int
      */
     const TYPE_ACCOUNT_LEVEL = 1;
 
     /**
-     * Job template id
+     * Job template id.
      *
      * @var string
      */
     private $_id;
 
     /**
-     * Name
+     * Name.
      *
      * @var string
      */
     private $_name;
 
     /**
-     * Created
+     * Created.
      *
      * @var \DateTime
      */
     private $_created;
 
     /**
-     * Last modified
+     * Last modified.
      *
      * @var \DateTime
      */
     private $_lastModified;
 
     /**
-     * Job template body
+     * Job template body.
      *
      * @var string
      */
     private $_jobTemplateBody;
 
     /**
-     * Number of input assets
+     * Number of input assets.
      *
      * @var int
      */
     private $_numberofInputAssets;
 
     /**
-     * Template type
+     * Template type.
      *
      * @var int
      */
     private $_templateType;
 
     /**
-     * Create asset from array
+     * Create asset from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -113,7 +115,7 @@ class JobTemplate
     {
         Validate::notNull($options['JobTemplateBody'], 'options[JobTemplateBody]');
 
-        $jobTemplate = new JobTemplate(
+        $jobTemplate = new self(
             $options['JobTemplateBody'],
             $options['TemplateType']
         );
@@ -123,21 +125,21 @@ class JobTemplate
     }
 
     /**
-     * Create job template
+     * Create job template.
      *
      * @param string $jobTemplateBody Job template XML body.
      * @param string $templateType    Template type default to AccountLevel.
      */
     public function __construct(
         $jobTemplateBody,
-        $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL
+        $templateType = self::TYPE_ACCOUNT_LEVEL
     ) {
         $this->_jobTemplateBody = $jobTemplateBody;
-        $this->_templateType    = $templateType;
+        $this->_templateType = $templateType;
     }
 
     /**
-     * Fill job template from array
+     * Fill job template from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -191,7 +193,7 @@ class JobTemplate
     }
 
     /**
-     * Get "Name"
+     * Get "Name".
      *
      * @return string
      */
@@ -201,7 +203,7 @@ class JobTemplate
     }
 
     /**
-     * Set "Name"
+     * Set "Name".
      *
      * @param string $value Name
      *
@@ -213,7 +215,7 @@ class JobTemplate
     }
 
     /**
-     * Get "Last modified"
+     * Get "Last modified".
      *
      * @return \DateTime
      */
@@ -223,7 +225,7 @@ class JobTemplate
     }
 
     /**
-     * Get "Created"
+     * Get "Created".
      *
      * @return \DateTime
      */
@@ -233,7 +235,7 @@ class JobTemplate
     }
 
     /**
-     * Get "job template id"
+     * Get "job template id".
      *
      * @return string
      */
@@ -243,7 +245,7 @@ class JobTemplate
     }
 
     /**
-     * Get "Template type"
+     * Get "Template type".
      *
      * @return int
      */
@@ -253,7 +255,7 @@ class JobTemplate
     }
 
     /**
-     * Set "Template type"
+     * Set "Template type".
      *
      * @param int $value Template type
      *
@@ -265,7 +267,7 @@ class JobTemplate
     }
 
     /**
-     * Get "Number of input assets"
+     * Get "Number of input assets".
      *
      * @return int
      */
@@ -275,7 +277,7 @@ class JobTemplate
     }
 
     /**
-     * Set "Number of input assets"
+     * Set "Number of input assets".
      *
      * @param int $value Number of input assets
      *
@@ -287,7 +289,7 @@ class JobTemplate
     }
 
     /**
-     * Get "Job template body"
+     * Get "Job template body".
      *
      * @return string
      */
@@ -297,7 +299,7 @@ class JobTemplate
     }
 
     /**
-     * Set "Job template body"
+     * Set "Job template body".
      *
      * @param string $value Job template body
      *
@@ -308,5 +310,3 @@ class JobTemplate
         $this->_jobTemplateBody = $value;
     }
 }
-
-

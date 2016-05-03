@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,30 +15,31 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal\Atom
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\Common\Internal\Atom;
+
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Atom\AtomLink;
 
 /**
  * The base class of ATOM library.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal\Atom
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 class AtomBase
 {
     /**
@@ -54,7 +55,7 @@ class AtomBase
     public function __construct()
     {
         $this->attributes = array();
-        $atomlink         = new AtomLink();
+        $atomlink = new AtomLink();
     }
 
     /**
@@ -129,7 +130,6 @@ class AtomBase
             $itemInstance->writeInnerXml($xmlWriter);
             $xmlWriter->endElement();
         }
-
     }
 
     /**
@@ -141,7 +141,7 @@ class AtomBase
      */
     protected function processAuthorNode($xmlArray)
     {
-        $author     = array();
+        $author = array();
         $authorItem = $xmlArray[Resources::AUTHOR];
 
         if (is_array($authorItem)) {
@@ -155,6 +155,7 @@ class AtomBase
             $authorInstance->parseXml($authorItem->asXML());
             $author[] = $authorInstance;
         }
+
         return $author;
     }
 
@@ -167,7 +168,7 @@ class AtomBase
      */
     protected function processEntryNode($xmlArray)
     {
-        $entry     = array();
+        $entry = array();
         $entryItem = $xmlArray[Resources::ENTRY];
 
         if (is_array($entryItem)) {
@@ -181,6 +182,7 @@ class AtomBase
             $entryInstance->fromXml($entryItem);
             $entry[] = $entryInstance;
         }
+
         return $entry;
     }
 
@@ -193,7 +195,7 @@ class AtomBase
      */
     protected function processCategoryNode($xmlArray)
     {
-        $category     = array();
+        $category = array();
         $categoryItem = $xmlArray[Resources::CATEGORY];
 
         if (is_array($categoryItem)) {
@@ -207,6 +209,7 @@ class AtomBase
             $categoryInstance->parseXml($categoryItem->asXML());
             $category[] = $categoryInstance;
         }
+
         return $category;
     }
 
@@ -219,7 +222,7 @@ class AtomBase
      */
     protected function processContributorNode($xmlArray)
     {
-        $category        = array();
+        $category = array();
         $contributorItem = $xmlArray[Resources::CONTRIBUTOR];
 
         if (is_array($contributorItem)) {
@@ -230,13 +233,14 @@ class AtomBase
             }
         } elseif (is_string($contributorItem)) {
             $contributorInstance = new Person();
-            $contributorInstance->setName((string)$contributorItem);
+            $contributorInstance->setName((string) $contributorItem);
             $contributor[] = $contributorInstance;
         } else {
             $contributorInstance = new Person();
             $contributorInstance->parseXml($contributorItem->asXML());
             $contributor[] = $contributorInstance;
         }
+
         return $contributor;
     }
 
@@ -249,7 +253,7 @@ class AtomBase
      */
     protected function processLinkNode($xmlArray)
     {
-        $link      = array();
+        $link = array();
         $linkValue = $xmlArray[Resources::LINK];
 
         if (is_array($linkValue)) {
@@ -323,4 +327,3 @@ class AtomBase
         }
     }
 }
-

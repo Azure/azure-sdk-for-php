@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,25 +15,28 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\ServiceManagement\Models;
+
 use WindowsAzure\Common\Internal\Validate;
 
 /**
  * Optional parameters for createStorageService API.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class CreateServiceOptions
@@ -42,17 +45,17 @@ class CreateServiceOptions
      * @var string
      */
     private $_location;
-    
+
     /**
      * @var string
      */
     private $_affinityGroup;
-    
+
     /**
      * @var string
      */
     private $_description;
-    
+
     /**
      * Gets the location.
      * 
@@ -62,7 +65,7 @@ class CreateServiceOptions
     {
         return $this->_location;
     }
-    
+
     /**
      * Sets the location.
      * 
@@ -74,10 +77,10 @@ class CreateServiceOptions
     {
         Validate::isString($location, 'location');
         Validate::notNullOrEmpty($location, 'location');
-        
+
         $this->_location = $location;
     }
-    
+
     /**
      * Gets the affinityGroup.
      * 
@@ -87,7 +90,7 @@ class CreateServiceOptions
     {
         return $this->_affinityGroup;
     }
-    
+
     /**
      * Sets the affinityGroup.
      * 
@@ -99,10 +102,10 @@ class CreateServiceOptions
     {
         Validate::isString($affinityGroup, 'affinityGroup');
         Validate::notNullOrEmpty($affinityGroup, 'affinityGroup');
-        
+
         $this->_affinityGroup = $affinityGroup;
     }
-    
+
     /**
      * Gets the description.
      * 
@@ -112,7 +115,7 @@ class CreateServiceOptions
     {
         return $this->_description;
     }
-    
+
     /**
      * Sets the description.
      * 
@@ -123,9 +126,7 @@ class CreateServiceOptions
     public function setDescription($description)
     {
         Validate::isString($description, 'description');
-        
+
         $this->_description = $description;
     }
 }
-
-

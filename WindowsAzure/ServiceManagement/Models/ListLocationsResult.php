@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\ServiceManagement\Models;
+
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 
@@ -30,11 +31,13 @@ use WindowsAzure\Common\Internal\Resources;
  * The result of calling listLocations API.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ListLocationsResult
@@ -43,7 +46,7 @@ class ListLocationsResult
      * @var array
      */
     private $_locations;
-    
+
     /**
      * Creates new ListLocationsResult from parsed response body.
      * 
@@ -53,15 +56,15 @@ class ListLocationsResult
      */
     public static function create($parsed)
     {
-        $result = new ListLocationsResult();
-        
+        $result = new self();
+
         $result->_locations = array();
-        $entries            = array();
-        
+        $entries = array();
+
         if (!empty($parsed)) {
             $entries = Utilities::getArray($parsed[Resources::XTAG_LOCATION]);
         }
-        
+
         foreach ($entries as $value) {
             $location = new Location();
             $location->setName(Utilities::tryGetValue($value, Resources::XTAG_NAME));
@@ -70,10 +73,10 @@ class ListLocationsResult
             );
             $result->_locations[] = $location;
         }
-        
+
         return $result;
     }
-    
+
     /**
      * Gets locations.
      * 
@@ -83,7 +86,7 @@ class ListLocationsResult
     {
         return $this->_locations;
     }
-    
+
     /**
      * Sets locations.
      * 
@@ -96,5 +99,3 @@ class ListLocationsResult
         $this->_locations = $locations;
     }
 }
-
-

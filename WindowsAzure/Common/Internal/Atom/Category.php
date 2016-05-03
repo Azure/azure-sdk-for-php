@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,60 +15,61 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal\Atom
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\Common\Internal\Atom;
+
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
  * The category class of the ATOM standard.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal\Atom
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 class Category extends AtomBase
 {
     /**
      * The term of the category. 
      *
-     * @var string  
+     * @var string
      */
     protected $term;
 
     /**
      * The scheme of the category. 
      *
-     * @var string  
+     * @var string
      */
     protected $scheme;
 
     /**
      * The label of the category. 
      * 
-     * @var string 
-     */ 
+     * @var string
+     */
     protected $label;
 
     /**
      * The undefined content of the category. 
      *  
-     * @var string 
+     * @var string
      */
     protected $undefinedContent;
-     
+
     /** 
      * Creates a Category instance with specified text.
      *
@@ -87,26 +88,26 @@ class Category extends AtomBase
      * @param string $xmlString an XML based string of ATOM CONTENT.
      * 
      * @return none
-     */ 
+     */
     public function parseXml($xmlString)
     {
         Validate::notNull($xmlString, 'xmlString');
         Validate::isString($xmlString, 'xmlString');
         $categoryXml = simplexml_load_string($xmlString);
-        $attributes  = $categoryXml->attributes();
+        $attributes = $categoryXml->attributes();
         if (!empty($attributes['term'])) {
-            $this->term = (string)$attributes['term'];
+            $this->term = (string) $attributes['term'];
         }
 
         if (!empty($attributes['scheme'])) {
-            $this->scheme = (string)$attributes['scheme'];
+            $this->scheme = (string) $attributes['scheme'];
         }
 
         if (!empty($attributes['label'])) {
-            $this->label = (string)$attributes['label'];
+            $this->label = (string) $attributes['label'];
         }
 
-        $this->undefinedContent =(string)$categoryXml;
+        $this->undefinedContent = (string) $categoryXml;
     }
 
     /** 
@@ -115,9 +116,9 @@ class Category extends AtomBase
      * @return string
      */
     public function getTerm()
-    {   
+    {
         return $this->term;
-    } 
+    }
 
     /**
      * Sets the term of the category.
@@ -128,7 +129,7 @@ class Category extends AtomBase
      */
     public function setTerm($term)
     {
-        $this->term = $term; 
+        $this->term = $term;
     }
 
     /**
@@ -169,7 +170,7 @@ class Category extends AtomBase
      * @param string $label The label of the category. 
      * 
      * @return none
-     */ 
+     */
     public function setLabel($label)
     {
         $this->label = $label;
@@ -196,7 +197,7 @@ class Category extends AtomBase
     {
         $this->undefinedContent = $undefinedContent;
     }
-    
+
     /** 
      * Writes an XML representing the category. 
      * 
@@ -208,7 +209,7 @@ class Category extends AtomBase
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
         $xmlWriter->startElementNS(
-            'atom', 
+            'atom',
             'category',
             Resources::ATOM_NAMESPACE
         );
@@ -228,26 +229,24 @@ class Category extends AtomBase
         Validate::notNull($xmlWriter, 'xmlWriter');
         $this->writeOptionalAttribute(
             $xmlWriter,
-            'term', 
+            'term',
             $this->term
         );
 
         $this->writeOptionalAttribute(
             $xmlWriter,
-            'scheme', 
+            'scheme',
             $this->scheme
         );
 
         $this->writeOptionalAttribute(
             $xmlWriter,
-            'label', 
+            'label',
             $this->label
         );
-             
+
         if (!empty($this->undefinedContent)) {
             $xmlWriter->WriteRaw($this->undefinedContent);
         }
-
     }
 }
-

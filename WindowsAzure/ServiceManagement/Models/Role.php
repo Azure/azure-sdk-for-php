@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\ServiceManagement\Models;
+
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
@@ -30,11 +31,13 @@ use WindowsAzure\Common\Internal\Utilities;
  * Represents a Windows Azure deployment role.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Role
@@ -43,12 +46,12 @@ class Role
      * @var string
      */
     private $_roleName;
-    
+
     /**
      * @var string
      */
     private $_osVersion;
-    
+
     /**
      * Creates a new Role from parsed response body.
      * 
@@ -58,8 +61,8 @@ class Role
      */
     public static function create($parsed)
     {
-        $role      = new Role();
-        $roleName  = Utilities::tryGetValue(
+        $role = new self();
+        $roleName = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_ROLE_NAME
         );
@@ -67,13 +70,13 @@ class Role
             $parsed,
             Resources::XTAG_OS_VERSION
         );
-        
+
         $role->setOsVersion($osVersion);
         $role->setRoleName($roleName);
-        
+
         return $role;
     }
-    
+
     /**
      * Gets the role name.
      * 
@@ -85,7 +88,7 @@ class Role
     {
         return $this->_roleName;
     }
-    
+
     /**
      * Sets the role name.
      * 
@@ -97,7 +100,7 @@ class Role
     {
         $this->_roleName = $roleName;
     }
-    
+
     /**
      * Gets the role OS version.
      * 
@@ -110,7 +113,7 @@ class Role
     {
         return $this->_osVersion;
     }
-    
+
     /**
      * Sets the role OS version.
      * 

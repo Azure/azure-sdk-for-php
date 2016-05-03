@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,21 +15,20 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\ServiceBus;
+
 use WindowsAzure\Common\Internal\ServiceRestProxy;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Common\Internal\Atom\Content;
 use WindowsAzure\Common\Internal\Atom\Entry;
-use WindowsAzure\Common\Internal\Atom\Feed;
-use WindowsAzure\Common\ServiceException;
 use WindowsAzure\ServiceBus\Internal\IServiceBus;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
@@ -42,7 +41,6 @@ use WindowsAzure\ServiceBus\Models\ListTopicsResult;
 use WindowsAzure\ServiceBus\Models\ListRulesOptions;
 use WindowsAzure\ServiceBus\Models\ListRulesResult;
 use WindowsAzure\ServiceBus\Models\ListOptions;
-use WindowsAzure\ServiceBus\Models\QueueDescription;
 use WindowsAzure\ServiceBus\Models\QueueInfo;
 use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
 use WindowsAzure\ServiceBus\Models\RuleDescription;
@@ -52,7 +50,6 @@ use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
 use WindowsAzure\ServiceBus\Models\TopicDescription;
 use WindowsAzure\ServiceBus\Models\TopicInfo;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
@@ -60,14 +57,15 @@ use WindowsAzure\Common\Internal\Validate;
  * for Service Bus.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 {
     /**
@@ -82,17 +80,18 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     public function __construct($channel, $uri, $dataSerializer)
     {
         parent::__construct(
-            $channel, 
-            $uri, 
-            Resources::EMPTY_STRING, 
+            $channel,
+            $uri,
+            Resources::EMPTY_STRING,
             $dataSerializer
         );
     }
-    
+
     /**
      * Sends a brokered message. 
      * 
      * Queues:
+     *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780775
      *
      * Topic Subscriptions:
@@ -117,21 +116,20 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
                 $contentType
             );
         }
-        
+
         $brokerProperties = $brokeredMessage->getBrokerProperties();
         if (!is_null($brokerProperties)) {
             $httpCallContext->addHeader(
                 Resources::BROKER_PROPERTIES,
                 $brokerProperties->toString()
             );
-        } 
+        }
         $customProperties = $brokeredMessage->getProperties();
 
         if (!empty($customProperties)) {
             foreach ($customProperties as $key => $value) {
                 $value = json_encode($value);
                 $httpCallContext->addHeader($key, $value);
-                    
             }
         }
 
@@ -154,7 +152,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $path = sprintf(Resources::SEND_MESSAGE_PATH, $queueName);
         $this->sendMessage($path, $brokeredMessage);
     }
-    
+
     /**
      * Receives a queue message. 
      *
@@ -162,27 +160,29 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780756 
      * 
      * @param string                $queueName             The name of the
-     * queue. 
+     *                                                     queue. 
      * @param ReceiveMessageOptions $receiveMessageOptions The options to 
-     * receive the message.
+     *                                                     receive the message.
      *
      * @return BrokeredMessage
      */
     public function receiveQueueMessage($queueName, $receiveMessageOptions = null)
     {
         $queueMessagePath = sprintf(Resources::RECEIVE_MESSAGE_PATH, $queueName);
+
         return $this->receiveMessage(
-            $queueMessagePath, 
+            $queueMessagePath,
             $receiveMessageOptions
         );
     }
 
     // @codingStandardsIgnoreStart
-    
+
     /**
      * Receives a message. 
      * 
      * Queues:
+     *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780735
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780756 
      *
@@ -191,9 +191,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780770
      *
      * @param string                 $path                  The path of the 
-     * message. 
+     *                                                      message. 
      * @param ReceivedMessageOptions $receiveMessageOptions The options to 
-     * receive the message. 
+     *                                                      receive the message. 
      * 
      * @return BrokeredMessage
      */
@@ -201,7 +201,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     {
         if (is_null($receiveMessageOptions)) {
             $receiveMessageOptions = new ReceiveMessageOptions();
-        } 
+        }
 
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setPath($path);
@@ -215,7 +215,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
         if ($receiveMessageOptions->getIsReceiveAndDelete()) {
             $httpCallContext->setMethod(Resources::HTTP_DELETE);
-        } else if ($receiveMessageOptions->getIsPeekLock()) {
+        } elseif ($receiveMessageOptions->getIsPeekLock()) {
             $httpCallContext->setMethod(Resources::HTTP_POST);
         } else {
             throw new \InvalidArgumentException(
@@ -227,7 +227,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         if ($response->getStatus() === Resources::STATUS_NO_CONTENT) {
             $brokeredMessage = null;
         } else {
-            $responseHeaders  = $response->getHeader(); 
+            $responseHeaders = $response->getHeader();
             $brokerProperties = new BrokerProperties();
 
             if (array_key_exists('brokerproperties', $responseHeaders)) {
@@ -242,7 +242,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
             $brokeredMessage = new BrokeredMessage();
             $brokeredMessage->setBrokerProperties($brokerProperties);
-        
+
             if (array_key_exists(Resources::CONTENT_TYPE, $responseHeaders)) {
                 $brokeredMessage->setContentType(
                     $responseHeaders[Resources::CONTENT_TYPE]
@@ -256,21 +256,20 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             $brokeredMessage->setBody($response->getBody());
 
             foreach (array_keys($responseHeaders) as $headerKey) {
-                $value        = $responseHeaders[$headerKey];
+                $value = $responseHeaders[$headerKey];
                 $decodedValue = json_decode($value);
                 if (is_scalar($decodedValue)) {
                     $brokeredMessage->setProperty(
-                        $headerKey, 
+                        $headerKey,
                         $decodedValue
                     );
                 }
-
             }
         }
-        
-        return $brokeredMessage; 
+
+        return $brokeredMessage;
     }
-    
+
     // @codingStandardsIgnoreEnd
 
     /**
@@ -287,7 +286,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     {
         $topicMessagePath = sprintf(Resources::SEND_MESSAGE_PATH, $topicName);
         $this->sendMessage($topicMessagePath, $brokeredMessage);
-    } 
+    }
 
     /**
      * Receives a subscription message. 
@@ -296,21 +295,21 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780770
      * 
      * @param string                $topicName             The name of the 
-     * topic.
+     *                                                     topic.
      * @param string                $subscriptionName      The name of the 
-     * subscription.
+     *                                                     subscription.
      * @param ReceiveMessageOptions $receiveMessageOptions The options to 
-     * receive the subscription message. 
+     *                                                     receive the subscription message. 
      *
-     * @return BrokeredMessage 
+     * @return BrokeredMessage
      */
     public function receiveSubscriptionMessage(
-        $topicName, 
-        $subscriptionName, 
+        $topicName,
+        $subscriptionName,
         $receiveMessageOptions = null
     ) {
         $messagePath = sprintf(
-            Resources::RECEIVE_SUBSCRIPTION_MESSAGE_PATH, 
+            Resources::RECEIVE_SUBSCRIPTION_MESSAGE_PATH,
             $topicName,
             $subscriptionName
         );
@@ -327,6 +326,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * Unlocks a brokered message. 
      *
      * Queues:
+     *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780723
      * 
      * Topic Subscriptions:
@@ -340,28 +340,29 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     {
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_PUT);
-        $lockLocation      = $brokeredMessage->getLockLocation();
+        $lockLocation = $brokeredMessage->getLockLocation();
         $lockLocationArray = parse_url($lockLocation);
-        $lockLocationPath  = Resources::EMPTY_STRING;
+        $lockLocationPath = Resources::EMPTY_STRING;
 
         if (array_key_exists(Resources::PHP_URL_PATH, $lockLocationArray)) {
             $lockLocationPath = $lockLocationArray[Resources::PHP_URL_PATH];
             $lockLocationPath = preg_replace(
-                '@^\/@', 
-                Resources::EMPTY_STRING, 
+                '@^\/@',
+                Resources::EMPTY_STRING,
                 $lockLocationPath
             );
-        } 
+        }
 
         $httpCallContext->setPath($lockLocationPath);
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
         $this->sendContext($httpCallContext);
     }
-    
+
     /**
      * Deletes a brokered message. 
      *
      * Queues:
+     *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780767
      * 
      * Topic Subscriptions:
@@ -375,19 +376,19 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     {
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_DELETE);
-        $lockLocation      = $brokeredMessage->getLockLocation();
+        $lockLocation = $brokeredMessage->getLockLocation();
         $lockLocationArray = parse_url($lockLocation);
-        $lockLocationPath  = Resources::EMPTY_STRING;
+        $lockLocationPath = Resources::EMPTY_STRING;
 
         if (array_key_exists(Resources::PHP_URL_PATH, $lockLocationArray)) {
             $lockLocationPath = $lockLocationArray[Resources::PHP_URL_PATH];
             $lockLocationPath = preg_replace(
-                '@^\/@', 
-                Resources::EMPTY_STRING, 
+                '@^\/@',
+                Resources::EMPTY_STRING,
                 $lockLocationPath
             );
         }
-        
+
         if (empty($lockLocationPath)) {
             throw new \InvalidArgumentException(
                 Resources::MISSING_LOCK_LOCATION_MSG
@@ -397,7 +398,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
         $this->sendContext($httpCallContext);
     }
-   
+
     /**
      * Creates a queue with a specified queue information. 
      * 
@@ -417,18 +418,19 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             Resources::ATOM_ENTRY_CONTENT_TYPE
         );
         $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
-        
+
         $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
-        $queueInfo->writeXml($xmlWriter); 
+        $queueInfo->writeXml($xmlWriter);
         $body = $xmlWriter->outputMemory();
         $httpCallContext->setBody($body);
 
-        $response  = $this->sendContext($httpCallContext);
+        $response = $this->sendContext($httpCallContext);
         $queueInfo = new QueueInfo();
         $queueInfo->parseXml($response->getBody());
+
         return $queueInfo;
-    } 
+    }
 
     /**
      * Deletes a queue. 
@@ -443,12 +445,12 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     {
         Validate::isString($queuePath, 'queuePath');
         Validate::notNullOrEmpty($queuePath, 'queuePath');
-        
+
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_DELETE);
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
         $httpCallContext->setPath($queuePath);
-        
+
         $this->sendContext($httpCallContext);
     }
 
@@ -467,9 +469,10 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setPath($queuePath);
         $httpCallContext->setMethod(Resources::HTTP_GET);
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
-        $response  = $this->sendContext($httpCallContext);
+        $response = $this->sendContext($httpCallContext);
         $queueInfo = new QueueInfo();
         $queueInfo->parseXml($response->getBody());
+
         return $queueInfo;
     }
 
@@ -479,19 +482,20 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780759
      * 
      * @param ListQueuesOptions $listQueuesOptions The options to list the 
-     * queues.
+     *                                             queues.
      *
      * @return ListQueuesResult;
      */
     public function listQueues($listQueuesOptions = null)
     {
         $response = $this->_listOptions(
-            $listQueuesOptions, 
+            $listQueuesOptions,
             Resources::LIST_QUEUES_PATH
         );
 
         $listQueuesResult = new ListQueuesResult();
         $listQueuesResult->parseXml($response->getBody());
+
         return $listQueuesResult;
     }
 
@@ -501,7 +505,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @param ListOptions $listOptions The options for list operation. 
      * @param string      $path        The path of the list operation.
      *
-     * @return none 
+     * @return none
      */
     private function _listOptions($listOptions, $path)
     {
@@ -513,14 +517,14 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setMethod(Resources::HTTP_GET);
         $httpCallContext->setPath($path);
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
-        $top  = $listOptions->getTop();
+        $top = $listOptions->getTop();
         $skip = $listOptions->getSkip();
 
         if (!empty($top)) {
             $httpCallContext->addQueryParameter(Resources::QP_TOP, $top);
-        } 
+        }
 
-        if (!empty($skip)) { 
+        if (!empty($skip)) {
             $httpCallContext->addQueryParameter(Resources::QP_SKIP, $skip);
         }
 
@@ -553,10 +557,10 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             'TopicDescription'
         );
 
-        $entry   = new Entry();
+        $entry = new Entry();
         $content = new Content($topicDescriptionXml);
         $content->setType(Resources::XML_CONTENT_TYPE);
-        $entry->setContent($content); 
+        $entry->setContent($content);
 
         $entry->setAttribute(
             Resources::XMLNS,
@@ -565,14 +569,15 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
         $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
-        $entry->writeXml($xmlWriter); 
+        $entry->writeXml($xmlWriter);
         $httpCallContext->setBody($xmlWriter->outputMemory());
 
-        $response  = $this->sendContext($httpCallContext);
+        $response = $this->sendContext($httpCallContext);
         $topicInfo = new TopicInfo();
         $topicInfo->parseXml($response->getBody());
+
         return $topicInfo;
-    } 
+    }
 
     /**
      * Deletes a topic with specified topic path.
@@ -587,12 +592,12 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     {
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_DELETE);
-        $httpCallContext->setPath($topicPath);     
+        $httpCallContext->setPath($topicPath);
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
-        
+
         $this->sendContext($httpCallContext);
     }
-    
+
     /**
      * Gets a topic.
      *
@@ -602,37 +607,39 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @return TopicInfo
      */
-    public function getTopic($topicPath) 
+    public function getTopic($topicPath)
     {
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_GET);
         $httpCallContext->setPath($topicPath);
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
-        $response  = $this->sendContext($httpCallContext);
+        $response = $this->sendContext($httpCallContext);
         $topicInfo = new TopicInfo();
         $topicInfo->parseXml($response->getBody());
-        return $topicInfo; 
+
+        return $topicInfo;
     }
-    
+
     /**
      * Lists topics. 
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780744
      * 
      * @param ListTopicsOptions $listTopicsOptions The options to list 
-     * the topics. 
+     *                                             the topics. 
      *
      * @return ListTopicsResults
      */
-    public function listTopics($listTopicsOptions = null) 
+    public function listTopics($listTopicsOptions = null)
     {
         $response = $this->_listOptions(
-            $listTopicsOptions, 
+            $listTopicsOptions,
             Resources::LIST_TOPICS_PATH
         );
 
         $listTopicsResult = new ListTopicsResult();
         $listTopicsResult->parseXml($response->getBody());
+
         return $listTopicsResult;
     }
 
@@ -643,24 +650,24 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780748
      * 
      * @param string           $topicPath        The path of
-     * the topic.
+     *                                           the topic.
      * @param SubscriptionInfo $subscriptionInfo The information
-     * of the subscription.
+     *                                           of the subscription.
      *
      * @return SubscriptionInfo
      */
-    public function createSubscription($topicPath, $subscriptionInfo) 
+    public function createSubscription($topicPath, $subscriptionInfo)
     {
-        $httpCallContext = new HttpCallContext(); 
+        $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_PUT);
         $subscriptionPath = sprintf(
-            Resources::SUBSCRIPTION_PATH, 
+            Resources::SUBSCRIPTION_PATH,
             $topicPath,
             $subscriptionInfo->getTitle()
         );
         $httpCallContext->setPath($subscriptionPath);
         $httpCallContext->addHeader(
-            Resources::CONTENT_TYPE,    
+            Resources::CONTENT_TYPE,
             Resources::ATOM_ENTRY_CONTENT_TYPE
         );
         $httpCallContext->addStatusCode(Resources::STATUS_CREATED);
@@ -670,7 +677,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             'SubscriptionDescription'
         );
 
-        $entry   = new Entry();
+        $entry = new Entry();
         $content = new Content($subscriptionDescriptionXml);
         $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content);
@@ -682,12 +689,13 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
         $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
-        $entry->writeXml($xmlWriter); 
+        $entry->writeXml($xmlWriter);
         $httpCallContext->setBody($xmlWriter->outputMemory());
 
-        $response         = $this->sendContext($httpCallContext);
+        $response = $this->sendContext($httpCallContext);
         $subscriptionInfo = new SubscriptionInfo();
         $subscriptionInfo->parseXml($response->getBody());
+
         return $subscriptionInfo;
     }
 
@@ -701,7 +709,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @return none
      */
-    public function deleteSubscription($topicPath, $subscriptionName) 
+    public function deleteSubscription($topicPath, $subscriptionName)
     {
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_DELETE);
@@ -714,7 +722,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $httpCallContext->setPath($subscriptionPath);
         $this->sendContext($httpCallContext);
     }
-    
+
     /**
      * Gets a subscription. 
      *
@@ -725,7 +733,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @return SubscriptionInfo
      */
-    public function getSubscription($topicPath, $subscriptionName) 
+    public function getSubscription($topicPath, $subscriptionName)
     {
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_GET);
@@ -736,9 +744,10 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             $subscriptionName
         );
         $httpCallContext->setPath($subscriptionPath);
-        $response         = $this->sendContext($httpCallContext);
+        $response = $this->sendContext($httpCallContext);
         $subscriptionInfo = new SubscriptionInfo();
-        $subscriptionInfo->parseXml($response->getBody()); 
+        $subscriptionInfo->parseXml($response->getBody());
+
         return $subscriptionInfo;
     }
 
@@ -748,28 +757,28 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780766
      * 
      * @param string                   $topicPath                The path of 
-     * the topic.
+     *                                                           the topic.
      * @param ListSubscriptionsOptions $listSubscriptionsOptions The options
-     * to list the subscription. 
+     *                                                           to list the subscription. 
      *
      * @return ListSubscriptionsResult
      */
     public function listSubscriptions(
-        $topicPath, 
+        $topicPath,
         $listSubscriptionsOptions = null
     ) {
-
-        $listSubscriptionsPath   = sprintf(
-            Resources::LIST_SUBSCRIPTIONS_PATH, 
+        $listSubscriptionsPath = sprintf(
+            Resources::LIST_SUBSCRIPTIONS_PATH,
             $topicPath
         );
-        $response                = $this->_listOptions(
-            $listSubscriptionsOptions, 
+        $response = $this->_listOptions(
+            $listSubscriptionsOptions,
             $listSubscriptionsPath
         );
         $listSubscriptionsResult = new ListSubscriptionsResult();
         $listSubscriptionsResult->parseXml($response->getBody());
-        return $listSubscriptionsResult; 
+
+        return $listSubscriptionsResult;
     }
 
     /**
@@ -804,7 +813,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
             'RuleDescription'
         );
 
-        $entry   = new Entry();
+        $entry = new Entry();
         $content = new Content($ruleDescriptionXml);
         $content->setType(Resources::XML_CONTENT_TYPE);
         $entry->setContent($content);
@@ -816,13 +825,14 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
 
         $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
-        $entry->writeXml($xmlWriter); 
+        $entry->writeXml($xmlWriter);
         $httpCallContext->setBody($xmlWriter->outputMemory());
 
         $httpCallContext->setPath($rulePath);
         $response = $this->sendContext($httpCallContext);
         $ruleInfo = new ruleInfo();
-        $ruleInfo->parseXml($response->getBody()); 
+        $ruleInfo->parseXml($response->getBody());
+
         return $ruleInfo;
     }
 
@@ -837,7 +847,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @return none
      */
-    public function deleteRule($topicPath, $subscriptionName, $ruleName) 
+    public function deleteRule($topicPath, $subscriptionName, $ruleName)
     {
         $httpCallContext = new HttpCallContext();
         $httpCallContext->addStatusCode(Resources::STATUS_OK);
@@ -863,7 +873,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @return RuleInfo
      */
-    public function getRule($topicPath, $subscriptionName, $ruleName) 
+    public function getRule($topicPath, $subscriptionName, $ruleName)
     {
         $httpCallContext = new HttpCallContext();
         $httpCallContext->setMethod(Resources::HTTP_GET);
@@ -878,6 +888,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $response = $this->sendContext($httpCallContext);
         $ruleInfo = new RuleInfo();
         $ruleInfo->parseXml($response->getBody());
+
         return $ruleInfo;
     }
 
@@ -893,8 +904,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @return ListRuleResult
      */
     public function listRules(
-        $topicPath, 
-        $subscriptionName, 
+        $topicPath,
+        $subscriptionName,
         $listRulesOptions = null
     ) {
         $listRulesPath = sprintf(
@@ -904,13 +915,13 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         );
 
         $response = $this->_listOptions(
-            $listRulesOptions, 
+            $listRulesOptions,
             $listRulesPath
         );
 
         $listRulesResult = new ListRulesResult();
         $listRulesResult->parseXml($response->getBody());
+
         return $listRulesResult;
     }
-
 }

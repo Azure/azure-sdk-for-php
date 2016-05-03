@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,46 +15,48 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\Common\Internal\Validate;
 
-
 /**
- * Represents error detail object used in media services
+ * Represents error detail object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ErrorDetail
 {
     /**
-     * Code
+     * Code.
      *
      * @var int
      */
     private $_code;
 
     /**
-     * Message
+     * Message.
      *
      * @var string
      */
     private $_message;
 
     /**
-     * Create error detail from array
+     * Create error detail from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -62,14 +64,14 @@ class ErrorDetail
      */
     public static function createFromOptions($options)
     {
-        $errorDetail = new ErrorDetail();
+        $errorDetail = new self();
         $errorDetail->fromArray($options);
 
         return $errorDetail;
     }
 
     /**
-     * Fill error detail from array
+     * Fill error detail from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -89,7 +91,7 @@ class ErrorDetail
     }
 
     /**
-     * Get "Message"
+     * Get "Message".
      *
      * @return string
      */
@@ -99,7 +101,7 @@ class ErrorDetail
     }
 
     /**
-     * Get "Code"
+     * Get "Code".
      *
      * @return int
      */
@@ -108,4 +110,3 @@ class ErrorDetail
         return $this->_code;
     }
 }
-

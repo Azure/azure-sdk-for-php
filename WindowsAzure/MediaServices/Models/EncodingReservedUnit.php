@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,26 +15,28 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * Represents AssetDeliveryPolicy object used in media services
+ * Represents AssetDeliveryPolicy object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class EncodingReservedUnit
@@ -52,7 +54,7 @@ class EncodingReservedUnit
     private $_currentReservedUnits;
 
     /**
-     * Create EncodingReservedUnitType from array
+     * Create EncodingReservedUnitType from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -60,27 +62,23 @@ class EncodingReservedUnit
      */
     public static function createFromOptions($options)
     {
-        $encodingReservedUnitType = new EncodingReservedUnit();
+        $encodingReservedUnitType = new self();
         $encodingReservedUnitType->fromArray($options);
 
         return $encodingReservedUnitType;
     }
 
     /**
-     * Create EncodingReservedUnitType
-     *
-     * @return void
+     * Create EncodingReservedUnitType.
      */
     public function __construct()
     {
     }
 
     /**
-     * Fill EncodingReservedUnitType from array
+     * Fill EncodingReservedUnitType from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return void
      */
     public function fromArray($options)
     {
@@ -98,7 +96,7 @@ class EncodingReservedUnit
             Validate::isInteger($options['MaxReservableUnits'], 'options[MaxReservableUnits]');
             $this->_maxReservableUnits = intval($options['MaxReservableUnits']);
         }
-        
+
         if (isset($options['CurrentReservedUnits'])) {
             Validate::isString($options['CurrentReservedUnits'], 'options[CurrentReservedUnits]');
             $this->_currentReservedUnits = intval($options['CurrentReservedUnits']);
@@ -106,69 +104,76 @@ class EncodingReservedUnit
     }
 
     /**
-     * Return a list of fields that must be sent (even if null)
+     * Return a list of fields that must be sent (even if null).
+     *
      * @return string[]
      */
-    public function requiredFields() {
+    public function requiredFields()
+    {
         return ['ReservedUnitType', 'CurrentReservedUnits'];
     }
-
 
     /**
      * @return string the accountId
      */
-    public function getAccountId() {
+    public function getAccountId()
+    {
         return $this->_accountId;
     }
 
     /**
      * @param string $accountId the accountId to set
      */
-    public function setAccountId($accountId) {
+    public function setAccountId($accountId)
+    {
         $this->_accountId = $accountId;
     }
 
     /**
      * @return int the reservedUnitType
      */
-    public function getReservedUnitType() {
+    public function getReservedUnitType()
+    {
         return $this->_reservedUnitType;
     }
 
     /**
      * @param int $reservedUnitType the reservedUnitType to set
      */
-    public function setReservedUnitType($reservedUnitType) {
+    public function setReservedUnitType($reservedUnitType)
+    {
         $this->_reservedUnitType = $reservedUnitType;
     }
 
     /**
      * @return int the maxReservableUnits
      */
-    public function getMaxReservableUnits() {
+    public function getMaxReservableUnits()
+    {
         return $this->_maxReservableUnits;
     }
 
     /**
      * @param int $maxReservableUnits the maxReservableUnits to set
      */
-    public function setMaxReservableUnits($maxReservableUnits) {
+    public function setMaxReservableUnits($maxReservableUnits)
+    {
         $this->_maxReservableUnits = $maxReservableUnits;
     }
 
     /**
      * @return int the currentReservedUnits
      */
-    public function getCurrentReservedUnits() {
+    public function getCurrentReservedUnits()
+    {
         return $this->_currentReservedUnits;
     }
 
     /**
      * @param int $currentReservedUnits the currentReservedUnits to set
      */
-    public function setCurrentReservedUnits($currentReservedUnits) {
+    public function setCurrentReservedUnits($currentReservedUnits)
+    {
         $this->_currentReservedUnits = $currentReservedUnits;
     }
 }
-
-

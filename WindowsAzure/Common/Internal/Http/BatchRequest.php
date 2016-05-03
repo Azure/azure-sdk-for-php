@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,53 +15,56 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\Common\Internal\Http;
+
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * Batch request marshaler
+ * Batch request marshaler.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class BatchRequest
 {
     /**
-     * Http call context list
+     * Http call context list.
      *
      * @var array
      */
     private $_contexts;
 
     /**
-     * Headers
+     * Headers.
      *
      * @var array
      */
     private $_headers;
 
     /**
-     * Request body
+     * Request body.
      *
      * @var string
      */
     private $_body;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -69,10 +72,10 @@ class BatchRequest
     }
 
     /**
-     * Append new context to batch request
+     * Append new context to batch request.
      *
      * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context Http call
-     * context to add to batch request
+     *                                                                   context to add to batch request
      *
      * @return none
      */
@@ -82,22 +85,22 @@ class BatchRequest
     }
 
     /**
-     * Encode contexts
+     * Encode contexts.
      *
      * @return none
      */
     public function encode()
     {
-        $mimeType      = Resources::MULTIPART_MIXED_TYPE;
-        $batchGuid     = Utilities::getGuid();
-        $batchId       = sprintf('batch_%s', $batchGuid);
-        $contentType1  = array('content_type' => "$mimeType");
+        $mimeType = Resources::MULTIPART_MIXED_TYPE;
+        $batchGuid = Utilities::getGuid();
+        $batchId = sprintf('batch_%s', $batchGuid);
+        $contentType1 = array('content_type' => "$mimeType");
         $changeSetGuid = Utilities::getGuid();
-        $changeSetId   = sprintf('changeset_%s', $changeSetGuid);
-        $contentType2  = array('content_type' => "$mimeType; boundary=$changeSetId");
-        $options       = array(
-            'encoding'     => 'binary',
-            'content_type' => Resources::HTTP_TYPE
+        $changeSetId = sprintf('changeset_%s', $changeSetGuid);
+        $contentType2 = array('content_type' => "$mimeType; boundary=$changeSetId");
+        $options = array(
+            'encoding' => 'binary',
+            'content_type' => Resources::HTTP_TYPE,
         );
 
         // Create changeset MIME part
@@ -106,9 +109,9 @@ class BatchRequest
         $i = 1;
         foreach ($this->_contexts as $context) {
             $context->addHeader(Resources::CONTENT_ID, $i);
-            $changeSet->addSubpart((string)$context, $options);
+            $changeSet->addSubpart((string) $context, $options);
 
-            $i++;
+            ++$i;
         }
 
         // Encode the changeset MIME part
@@ -124,11 +127,11 @@ class BatchRequest
         $batchEncoded = $batch->encode($batchId);
 
         $this->_headers = $batchEncoded['headers'];
-        $this->_body    = $batchEncoded['body'];
+        $this->_body = $batchEncoded['body'];
     }
 
     /**
-     * Get "Request body"
+     * Get "Request body".
      *
      * @return string
      */
@@ -138,7 +141,7 @@ class BatchRequest
     }
 
     /**
-     * Get "Headers"
+     * Get "Headers".
      *
      * @return array
      */
@@ -148,7 +151,7 @@ class BatchRequest
     }
 
     /**
-     * Get request contexts
+     * Get request contexts.
      *
      * @return array
      */
@@ -157,4 +160,3 @@ class BatchRequest
         return $this->_contexts;
     }
 }
-

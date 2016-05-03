@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\ServiceManagement\Internal;
+
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
@@ -30,11 +31,13 @@ use WindowsAzure\Common\Internal\Utilities;
  * Base class for all windows azure provided services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class WindowsAzureService extends Service
@@ -43,12 +46,12 @@ class WindowsAzureService extends Service
      * @var string
      */
     private $_affinityGroup;
-    
+
     /**
      * @var string
      */
     private $_url;
-    
+
     /**
      * Constructs new storage service object.
      * 
@@ -57,7 +60,7 @@ class WindowsAzureService extends Service
     public function __construct($sources = array())
     {
         parent::__construct($sources);
-        
+
         foreach ($sources as $source) {
             $this->setName(
                 Utilities::tryGetValue(
@@ -66,7 +69,7 @@ class WindowsAzureService extends Service
                     $this->getName()
                 )
             );
-            
+
             $this->setAffinityGroup(
                 Utilities::tryGetValue(
                     $source,
@@ -74,7 +77,7 @@ class WindowsAzureService extends Service
                     $this->getAffinityGroup()
                 )
             );
-            
+
             $this->setUrl(
                 Utilities::tryGetValue(
                     $source,
@@ -84,17 +87,17 @@ class WindowsAzureService extends Service
             );
         }
     }
-        
+
     /**
      * Gets the affinityGroup name.
      * 
-     * @return string 
+     * @return string
      */
     public function getAffinityGroup()
     {
         return $this->_affinityGroup;
     }
-    
+
     /**
      * Sets the affinityGroup name.
      * 
@@ -106,17 +109,17 @@ class WindowsAzureService extends Service
     {
         $this->_affinityGroup = $affinityGroup;
     }
-    
+
     /**
      * Gets the url name.
      * 
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
         return $this->_url;
     }
-    
+
     /**
      * Sets the url name.
      * 
@@ -128,7 +131,7 @@ class WindowsAzureService extends Service
     {
         $this->_url = $url;
     }
-    
+
     /**
      * Converts the current object into ordered array representation.
      * 

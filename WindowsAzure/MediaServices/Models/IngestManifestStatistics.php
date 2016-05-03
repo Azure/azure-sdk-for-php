@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,61 +15,62 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\Common\Internal\Validate;
 
-
-
 /**
- * Represents IngestManifestStatistics object used in media services
+ * Represents IngestManifestStatistics object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class IngestManifestStatistics
 {
     /**
-     * PendingFilesCount
+     * PendingFilesCount.
      *
      * @var int
      */
     private $_pendingFilesCount;
 
     /**
-     * FinishedFilesCount
+     * FinishedFilesCount.
      *
      * @var int
      */
     private $_finishedFilesCount;
 
     /**
-     * ErrorFilesCount
+     * ErrorFilesCount.
      *
      * @var int
      */
     private $_errorFilesCount;
 
     /**
-     * ErrorFilesDetails
+     * ErrorFilesDetails.
      *
      * @var string
      */
     private $_errorFilesDetails;
 
     /**
-     * Create ManifestStatistics from array
+     * Create ManifestStatistics from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -77,14 +78,14 @@ class IngestManifestStatistics
      */
     public static function createFromOptions($options)
     {
-        $statistics = new IngestManifestStatistics();
+        $statistics = new self();
         $statistics->fromArray($options);
 
         return $statistics;
     }
 
     /**
-     * Fill ManifestStatistics from array
+     * Fill ManifestStatistics from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -126,7 +127,7 @@ class IngestManifestStatistics
     }
 
     /**
-     * Get "ErrorFilesDetails"
+     * Get "ErrorFilesDetails".
      *
      * @return string
      */
@@ -136,7 +137,7 @@ class IngestManifestStatistics
     }
 
     /**
-     * Get "ErrorFilesCount"
+     * Get "ErrorFilesCount".
      *
      * @return int
      */
@@ -146,7 +147,7 @@ class IngestManifestStatistics
     }
 
     /**
-     * Get "FinishedFilesCount"
+     * Get "FinishedFilesCount".
      *
      * @return int
      */
@@ -156,7 +157,7 @@ class IngestManifestStatistics
     }
 
     /**
-     * Get "PendingFilesCount"
+     * Get "PendingFilesCount".
      *
      * @return int
      */
@@ -165,5 +166,3 @@ class IngestManifestStatistics
         return $this->_pendingFilesCount;
     }
 }
-
-

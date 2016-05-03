@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,26 +15,26 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\ServiceBus\Models;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * The description of a queue.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class QueueDescription
@@ -49,177 +49,177 @@ class QueueDescription
     /** 
      * The maximum size in mega bytes. 
      * 
-     * @var integer
+     * @var int
      */
     private $_maxSizeInMegabytes;
 
     /**
      * Requires duplicate detection for queue.
      * 
-     * @var boolean 
+     * @var bool
      */
     private $_requiresDuplicateDetection;
 
     /**
      * Requires session for the queue. 
      * 
-     * @var boolean 
+     * @var bool
      */
     private $_requiresSession;
 
     /**
      * The default message time to live. 
      * 
-     * @var string 
+     * @var string
      */
     private $_defaultMessageTimeToLive;
 
     /**
      * The dead lettering on message expiration. 
      *
-     * @var string 
-     */ 
+     * @var string
+     */
     private $_deadLetteringOnMessageExpiration;
 
     /** 
      * The duplicate detection history time window. 
      * 
-     * @var integer
+     * @var int
      */
     private $_duplicateDetectionHistoryTimeWindow;
 
     /**
      * The maximum delivery count. 
      * 
-     * @var integer
+     * @var int
      */
     private $_maxDeliveryCount;
 
     /**
      * Enables batched operations. 
      * 
-     * @var boolean 
+     * @var bool
      */
     private $_enableBatchedOperations;
 
     /**
      * The size in bytes. 
      * 
-     * @var integer 
+     * @var int
      */
     private $_sizeInBytes;
 
     /**
      * The count of the message. 
      * 
-     * @var integer 
-     */ 
-    private $_messageCount;    
+     * @var int
+     */
+    private $_messageCount;
 
     // @codingStandardsIgnoreStart
-    
+
     /**
      * Creates a queue description object with specified XML string.
      *
      * @param string $queueDescriptionXml A XML based string describing
-     * the queue. 
+     *                                    the queue. 
      * 
      * @return none
      */
     public static function create($queueDescriptionXml)
     {
-        $queueDescription      = new QueueDescription();
-        $root                  = simplexml_load_string(
+        $queueDescription = new self();
+        $root = simplexml_load_string(
             $queueDescriptionXml
         );
-        $queueDescriptionArray = (array)$root;
+        $queueDescriptionArray = (array) $root;
         if (array_key_exists('LockDuration', $queueDescriptionArray)) {
             $queueDescription->setLockDuration(
-                (string)$queueDescriptionArray['LockDuration']
+                (string) $queueDescriptionArray['LockDuration']
             );
         }
 
         if (array_key_exists('MaxSizeInMegabytes', $queueDescriptionArray)) {
             $queueDescription->setMaxSizeInMegabytes(
-                (integer)$queueDescriptionArray['MaxSizeInMegabytes']
+                (integer) $queueDescriptionArray['MaxSizeInMegabytes']
             );
         }
 
         if (array_key_exists(
-            'RequiresDuplicateDetection', 
+            'RequiresDuplicateDetection',
             $queueDescriptionArray
         )
         ) {
             $queueDescription->setRequiresDuplicateDetection(
-                (boolean)$queueDescriptionArray['RequiresDuplicateDetection']
+                (boolean) $queueDescriptionArray['RequiresDuplicateDetection']
             );
         }
-        
+
         if (array_key_exists('RequiresSession', $queueDescriptionArray)) {
             $queueDescription->setRequiresSession(
-                (boolean)$queueDescriptionArray['RequiresSession']
+                (boolean) $queueDescriptionArray['RequiresSession']
             );
         }
 
         if (array_key_exists(
-            'DefaultMessageTimeToLive', 
+            'DefaultMessageTimeToLive',
             $queueDescriptionArray
         )
         ) {
             $queueDescription->setDefaultMessageTimeToLive(
-                (string)$queueDescriptionArray['DefaultMessageTimeToLive']
+                (string) $queueDescriptionArray['DefaultMessageTimeToLive']
             );
         }
 
         if (array_key_exists(
-            'DeadLetteringOnMessageExpiration', 
+            'DeadLetteringOnMessageExpiration',
             $queueDescriptionArray
         )
         ) {
             $queueDescription->setDeadLetteringOnMessageExpiration(
-                (string)$queueDescriptionArray['DeadLetteringOnMessageExpiration']
+                (string) $queueDescriptionArray['DeadLetteringOnMessageExpiration']
             );
         }
 
         if (array_key_exists(
-            'DuplicateDetectionHistoryTimeWindow', 
+            'DuplicateDetectionHistoryTimeWindow',
             $queueDescriptionArray
         )
         ) {
             $queueDescription->setDuplicateDetectionHistoryTimeWindow(
-                (string)$queueDescriptionArray['DuplicateDetectionHistoryTimeWindow']
+                (string) $queueDescriptionArray['DuplicateDetectionHistoryTimeWindow']
             );
         }
 
         if (array_key_exists('MaxDeliveryCount', $queueDescriptionArray)) {
             $queueDescription->setMaxDeliveryCount(
-                (integer)$queueDescriptionArray['MaxDeliveryCount']
+                (integer) $queueDescriptionArray['MaxDeliveryCount']
             );
         }
 
         if (array_key_exists('EnableBatchedOperations', $queueDescriptionArray)) {
             $queueDescription->setEnableBatchedOperations(
-                (boolean)$queueDescriptionArray['EnableBatchedOperations']
+                (boolean) $queueDescriptionArray['EnableBatchedOperations']
             );
         }
 
         if (array_key_exists('SizeInBytes', $queueDescriptionArray)) {
             $queueDescription->setSizeInBytes(
-                (integer)$queueDescriptionArray['SizeInBytes']
+                (integer) $queueDescriptionArray['SizeInBytes']
             );
         }
 
         if (array_key_exists('MessageCount', $queueDescriptionArray)) {
             $queueDescription->setMessageCount(
-                (integer)$queueDescriptionArray['MessageCount']
+                (integer) $queueDescriptionArray['MessageCount']
             );
         }
 
         return $queueDescription;
     }
-    
+
     // @codingStandardsIgnoreEnd
-    
+
     /** 
      * Creates a queue description instance with default parameters. 
      */
@@ -230,13 +230,13 @@ class QueueDescription
     /**
      * Gets the lock duration.
      *
-     * @return string  
+     * @return string
      */
     public function getLockDuration()
     {
         return $this->_lockDuration;
     }
-    
+
     /**
      * Sets the lock duration.
      *
@@ -248,11 +248,11 @@ class QueueDescription
     {
         $this->_lockDuration = $lockDuration;
     }
-    
+
     /**
      * gets the maximum size in mega bytes. 
      * 
-     * @return integer 
+     * @return int
      */
     public function getMaxSizeInMegabytes()
     {
@@ -262,7 +262,7 @@ class QueueDescription
     /**
      * Sets the max size in mega bytes.
      *
-     * @param integer $maxSizeInMegabytes The max size in mega bytes.
+     * @param int $maxSizeInMegabytes The max size in mega bytes.
      * 
      * @return none
      */
@@ -274,7 +274,7 @@ class QueueDescription
     /**
      * Gets requires duplicate detection.
      * 
-     * @return boolean
+     * @return bool
      */
     public function getRequiresDuplicateDetection()
     {
@@ -284,7 +284,7 @@ class QueueDescription
     /**
      * Sets requires duplicate detection.
      *
-     * @param boolean $requiresDuplicateDetection If duplicate detection is required.
+     * @param bool $requiresDuplicateDetection If duplicate detection is required.
      * 
      * @return none
      */
@@ -296,8 +296,8 @@ class QueueDescription
     /**
      * Gets the requires session. 
      * 
-     * @return boolean
-     */ 
+     * @return bool
+     */
     public function getRequiresSession()
     {
         return $this->_requiresSession;
@@ -306,7 +306,7 @@ class QueueDescription
     /**
      * Sets the requires session.
      *
-     * @param boolean $requiresSession If session is required.
+     * @param bool $requiresSession If session is required.
      * 
      * @return none
      */
@@ -318,7 +318,7 @@ class QueueDescription
     /**
      * gets the default message time to live. 
      * 
-     * @return string 
+     * @return string
      */
     public function getDefaultMessageTimeToLive()
     {
@@ -333,14 +333,14 @@ class QueueDescription
      * @return none
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
-    {   
+    {
         $this->_defaultMessageTimeToLive = $defaultMessageTimeToLive;
     }
 
     /**
      * Gets dead lettering on message expiration.
      * 
-     * @return string 
+     * @return string
      */
     public function getDeadLetteringOnMessageExpiration()
     {
@@ -351,7 +351,7 @@ class QueueDescription
      * Sets dead lettering on message expiration.
      *
      * @param string $deadLetteringOnMessageExpiration The dead lettering on 
-     * message expiration.
+     *                                                 message expiration.
      * 
      * @return none
      */
@@ -364,7 +364,7 @@ class QueueDescription
     /**
      * Gets duplicate detection history time window. 
      * 
-     * @return string 
+     * @return string
      */
     public function getDuplicateDetectionHistoryTimeWindow()
     {
@@ -375,7 +375,7 @@ class QueueDescription
      * Sets the duplicate detection history time window.
      *
      * @param string $duplicateDetectionHistoryTimeWindow The duplicate
-     * detection history time window.
+     *                                                    detection history time window.
      * 
      * @return none
      */
@@ -383,14 +383,14 @@ class QueueDescription
         $duplicateDetectionHistoryTimeWindow
     ) {
         $value = $duplicateDetectionHistoryTimeWindow;
-        
+
         $this->_duplicateDetectionHistoryTimeWindow = $value;
     }
 
     /**
      * Gets maximum delivery count. 
      * 
-     * @return string 
+     * @return string
      */
     public function getMaxDeliveryCount()
     {
@@ -412,7 +412,7 @@ class QueueDescription
     /**
      * Gets enable batched operation.
      * 
-     * @return boolean
+     * @return bool
      */
     public function getEnableBatchedOperations()
     {
@@ -422,19 +422,19 @@ class QueueDescription
     /**
      * Sets enable batched operations.
      *
-     * @param boolean $enableBatchedOperations Enable batched operations.
+     * @param bool $enableBatchedOperations Enable batched operations.
      * 
      * @return none
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {
-        $this->_enableBatchedOperations = $enableBatchedOperations; 
+        $this->_enableBatchedOperations = $enableBatchedOperations;
     }
 
     /**
      * Gets the size in bytes. 
      * 
-     * @return integer
+     * @return int
      */
     public function getSizeInBytes()
     {
@@ -444,7 +444,7 @@ class QueueDescription
     /**
      * Sets the size in bytes.
      *
-     * @param integer $sizeInBytes The size in bytes.
+     * @param int $sizeInBytes The size in bytes.
      * 
      * @return none
      */
@@ -456,7 +456,7 @@ class QueueDescription
     /**
      * Gets the message count. 
      * 
-     * @return integer
+     * @return int
      */
     public function getMessageCount()
     {

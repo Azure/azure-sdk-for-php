@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,84 +15,79 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Templates;
-use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Utilities;
-
 
 /**
- * Represents TokenRestrictionTemplate object used in media services
+ * Represents TokenRestrictionTemplate object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class TokenRestrictionTemplate
 {
     /**
-     * TokenRestrictionTemplate AlternateVerificationKeys
+     * TokenRestrictionTemplate AlternateVerificationKeys.
      *
      * @var TokenVerificationKey[]
      */
     private $_alternateVerificationKeys;
 
     /**
-     * TokenRestrictionTemplate Audience
+     * TokenRestrictionTemplate Audience.
      *
      * @var string
      */
     private $_audience;
 
     /**
-     * TokenRestrictionTemplate Issuer
+     * TokenRestrictionTemplate Issuer.
      *
      * @var string
      */
     private $_issuer;
 
     /**
-     * TokenRestrictionTemplate PrimaryVerificationKey
+     * TokenRestrictionTemplate PrimaryVerificationKey.
      * 
      * @var TokenVerificationKey
      */
     private $_primaryVerificationKey;
 
     /**
-     * TokenRestrictionTemplate RequiredClaims
+     * TokenRestrictionTemplate RequiredClaims.
      * 
      * @var TokenClaim[]
      */
     private $_requiredClaims;
 
     /**
-     * TokenRestrictionTemplate TokenType
+     * TokenRestrictionTemplate TokenType.
      *
-     * @var string 
+     * @var string
      */
     private $_tokenType;
 
-
     /** TokenRestrictionTemplate OpenIdConnectDiscoveryDocument
-     *
      * @var OpenIdConnectDiscoveryDocument
      */
     private $_openIdConnectDiscoveryDocument;
 
     /**
-     * Create TokenRestrictionTemplate
-     *
-     * @return void
+     * Create TokenRestrictionTemplate.
      */
     public function __construct($type = null)
     {
@@ -100,7 +95,7 @@ class TokenRestrictionTemplate
     }
 
     /**
-     * Get "TokenRestrictionTemplate AlternateVerificationKeys"
+     * Get "TokenRestrictionTemplate AlternateVerificationKeys".
      *
      * @return TokenVerificationKey[] Array of TokenVerificationKey
      */
@@ -110,19 +105,17 @@ class TokenRestrictionTemplate
     }
 
     /**
-     * Set "TokenRestrictionTemplate AlternateVerificationKeys"
+     * Set "TokenRestrictionTemplate AlternateVerificationKeys".
      *
      * @param TokenVerificationKey[] $value Array of TokenVerificationKey
-     *
-     * @return void
      */
     public function setAlternateVerificationKeys($value)
     {
         $this->_alternateVerificationKeys = $value;
-    }  
+    }
 
     /**
-     * Get "TokenRestrictionTemplate Audience"
+     * Get "TokenRestrictionTemplate Audience".
      *
      * @return string Audience
      */
@@ -132,19 +125,17 @@ class TokenRestrictionTemplate
     }
 
     /**
-     * Set "TokenRestrictionTemplate Audience"
+     * Set "TokenRestrictionTemplate Audience".
      *
      * @param string $value Audience
-     *
-     * @return void
      */
     public function setAudience($value)
     {
         $this->_audience = $value;
-    }  
-    
+    }
+
     /**
-     * Get "TokenRestrictionTemplate Issuer"
+     * Get "TokenRestrictionTemplate Issuer".
      *
      * @return string Issuer
      */
@@ -154,11 +145,9 @@ class TokenRestrictionTemplate
     }
 
     /**
-     * Set "TokenRestrictionTemplate Issuer"
+     * Set "TokenRestrictionTemplate Issuer".
      *
      * @param string $value Issuer
-     *
-     * @return void
      */
     public function setIssuer($value)
     {
@@ -166,7 +155,7 @@ class TokenRestrictionTemplate
     }
 
     /**
-     * Get "TokenRestrictionTemplate PrimaryVerificationKey"
+     * Get "TokenRestrictionTemplate PrimaryVerificationKey".
      *
      * @return TokenVerificationKey PrimaryVerificationKey
      */
@@ -176,11 +165,9 @@ class TokenRestrictionTemplate
     }
 
     /**
-     * Set "TokenRestrictionTemplate PrimaryVerificationKey"
+     * Set "TokenRestrictionTemplate PrimaryVerificationKey".
      *
      * @param TokenVerificationKey $value PrimaryVerificationKey
-     *
-     * @return void
      */
     public function setPrimaryVerificationKey($value)
     {
@@ -188,7 +175,7 @@ class TokenRestrictionTemplate
     }
 
     /**
-     * Get "TokenRestrictionTemplate RequiredClaims"
+     * Get "TokenRestrictionTemplate RequiredClaims".
      *
      * @return TokenClaim[] Array of TokenClaim
      */
@@ -198,19 +185,17 @@ class TokenRestrictionTemplate
     }
 
     /**
-     * Set "TokenRestrictionTemplate RequiredClaims"
+     * Set "TokenRestrictionTemplate RequiredClaims".
      *
      * @param TokenClaim[] $value Array of TokenClaim
-     *
-     * @return void
      */
     public function setRequiredClaims($value)
     {
         $this->_requiredClaims = $value;
-    }    
+    }
 
     /**
-     * Get "TokenRestrictionTemplate TokenType"
+     * Get "TokenRestrictionTemplate TokenType".
      *
      * @return string TokenType
      */
@@ -220,11 +205,9 @@ class TokenRestrictionTemplate
     }
 
     /**
-     * Set "TokenRestrictionTemplate TokenType"
+     * Set "TokenRestrictionTemplate TokenType".
      *
      * @param string $value TokenType
-     *
-     * @return void
      */
     public function setTokenType($value)
     {
@@ -232,7 +215,7 @@ class TokenRestrictionTemplate
     }
 
     /**
-     * Get "TokenRestrictionTemplate OpenIdConnectDiscoveryDocument"
+     * Get "TokenRestrictionTemplate OpenIdConnectDiscoveryDocument".
      *
      * @return OpenIdConnectDiscoveryDocument TokenType
      */
@@ -242,16 +225,12 @@ class TokenRestrictionTemplate
     }
 
     /**
-     * Set "TokenRestrictionTemplate OpenIdConnectDiscoveryDocument"
+     * Set "TokenRestrictionTemplate OpenIdConnectDiscoveryDocument".
      *
      * @param OpenIdConnectDiscoveryDocument $value OpenIdConnectDiscoveryDocument
-     *
-     * @return void
      */
     public function setOpenIdConnectDiscoveryDocument($value)
     {
         $this->_openIdConnectDiscoveryDocument = $value;
-    } 
+    }
 }
-
-
