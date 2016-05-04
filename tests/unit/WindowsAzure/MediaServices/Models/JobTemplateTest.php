@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,35 +14,38 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices\Models;
+namespace Tests\unit\WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\MediaServices\Models\JobTemplate;
 
 /**
- * Represents access policy object used in media services
+ * Represents access policy object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 class JobTemplateTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @covers WindowsAzure\MediaServices\Models\JobTemplate::__construct
      */
-    public function test__construct(){
+    public function test__construct()
+    {
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
@@ -59,19 +62,20 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\JobTemplate::createFromOptions
      * @covers WindowsAzure\MediaServices\Models\JobTemplate::fromArray
      */
-    public function testCreateFromOptions(){
+    public function testCreateFromOptions()
+    {
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
         $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL;
         $options = array(
-                'Id'                  => 'sfgsfg34',
-                'Name'                => 'Some Name',
-                'Created'             => '2013-11-25',
-                'LastModified'        => '2013-11-25',
-                'JobTemplateBody'     => 'Some Body Of Job Template',
+                'Id' => 'sfgsfg34',
+                'Name' => 'Some Name',
+                'Created' => '2013-11-25',
+                'LastModified' => '2013-11-25',
+                'JobTemplateBody' => 'Some Body Of Job Template',
                 'NumberofInputAssets' => 6,
-                'TemplateType'        => JobTemplate::TYPE_SYSTEM_LEVEL
+                'TemplateType' => JobTemplate::TYPE_SYSTEM_LEVEL,
         );
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
@@ -93,7 +97,8 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\JobTemplate::getName
      * @covers WindowsAzure\MediaServices\Models\JobTemplate::setName
      */
-    public function testGetSetName(){
+    public function testGetSetName()
+    {
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
@@ -111,15 +116,16 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\JobTemplate::getLastModified
      */
-    public function testGetLastModified(){
+    public function testGetLastModified()
+    {
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
         $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL;
         $options = array(
-                'LastModified'        => '2013-11-25',
-                'JobTemplateBody'     => $jobTemplateBody,
-                'TemplateType'        => $templateType
+                'LastModified' => '2013-11-25',
+                'JobTemplateBody' => $jobTemplateBody,
+                'TemplateType' => $templateType,
         );
         $modified = new \Datetime($options['LastModified']);
         $jobTempl = JobTemplate::createFromOptions($options);
@@ -134,15 +140,16 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\JobTemplate::getCreated
      */
-    public function testGetCreated(){
+    public function testGetCreated()
+    {
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
         $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL;
         $options = array(
-                'Created'        => '2013-11-25',
-                'JobTemplateBody'     => $jobTemplateBody,
-                'TemplateType'        => $templateType
+                'Created' => '2013-11-25',
+                'JobTemplateBody' => $jobTemplateBody,
+                'TemplateType' => $templateType,
         );
         $created = new \Datetime($options['Created']);
         $jobTempl = JobTemplate::createFromOptions($options);
@@ -157,15 +164,16 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\JobTemplate::getId
      */
-    public function testGetId(){
+    public function testGetId()
+    {
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
         $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL;
         $options = array(
-                'Id'                  => 'sfdk567',
-                'JobTemplateBody'     => $jobTemplateBody,
-                'TemplateType'        => $templateType
+                'Id' => 'sfdk567',
+                'JobTemplateBody' => $jobTemplateBody,
+                'TemplateType' => $templateType,
         );
         $jobTempl = JobTemplate::createFromOptions($options);
 
@@ -180,7 +188,8 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\JobTemplate::getTemplateType
      * @covers WindowsAzure\MediaServices\Models\JobTemplate::setTemplateType
      */
-    public function testGetSetTemplateType(){
+    public function testGetSetTemplateType()
+    {
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
@@ -199,7 +208,8 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\JobTemplate::getNumberofInputAssets
      * @covers WindowsAzure\MediaServices\Models\JobTemplate::setNumberofInputAssets
      */
-    public function testGetSetNumberofInputAssets(){
+    public function testGetSetNumberofInputAssets()
+    {
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
@@ -218,7 +228,8 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\JobTemplate::getJobTemplateBody
      * @covers WindowsAzure\MediaServices\Models\JobTemplate::setJobTemplateBody
      */
-    public function testGetSetJobTemplateBody(){
+    public function testGetSetJobTemplateBody()
+    {
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';

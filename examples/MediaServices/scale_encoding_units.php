@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,31 +15,30 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Client
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
-use WindowsAzure\MediaServices\Models\EncodingReservedUnit;
 use WindowsAzure\MediaServices\Models\EncodingReservedUnitType;
 
 // Settings
 date_default_timezone_set('America/Los_Angeles');
 
-$account = "<your media services account name>";
-$secret = "<your media services account key>";
+$account = '<your media services account name>';
+$secret = '<your media services account key>';
 
-$reservedUnits = 1; 
-$reservedUnitsType = EncodingReservedUnitType::S1; 
-$types = array("S1", "S2", "S3");
+$reservedUnits = 1;
+$reservedUnitsType = EncodingReservedUnitType::S1;
+$types = array('S1', 'S2', 'S3');
 
-print "Azure SDK for PHP - Scale Encoding Units Sample\r\n";
+echo "Azure SDK for PHP - Scale Encoding Units Sample\r\n";
 
 // 1. set up the MediaServicesService object to call into the Media Services REST API
 $restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($account, $secret));
@@ -47,8 +46,8 @@ $restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new Medi
 // 2. retrieve the current configuration of Encoding Units
 $encodingUnits = $restProxy->getEncodingReservedUnit();
 
-echo("Current Encoding Reserved Units: " . $encodingUnits->getCurrentReservedUnits() . " units (" . $types[$encodingUnits->getReservedUnitType()] . ")\r\n");
-echo("Updating to: " . $reservedUnits . " units (" . $types[$reservedUnitsType] . ") ...");
+echo 'Current Encoding Reserved Units: '.$encodingUnits->getCurrentReservedUnits().' units ('.$types[$encodingUnits->getReservedUnitType()].")\r\n";
+echo 'Updating to: '.$reservedUnits.' units ('.$types[$reservedUnitsType].') ...';
 
 // 3. set up the new encoding units settings
 $encodingUnits->setCurrentReservedUnits($reservedUnits);
@@ -60,6 +59,4 @@ $restProxy->updateEncodingReservedUnit($encodingUnits);
 // 5. reload the current configuration and show the results
 $encodingUnits = $restProxy->getEncodingReservedUnit();
 
-echo("\r\nUpdated Encoding Reserved Units: " . $encodingUnits->getCurrentReservedUnits() . " units (" . $types[$encodingUnits->getReservedUnitType()] . ")\r\n");
-
-?>
+echo "\r\nUpdated Encoding Reserved Units: ".$encodingUnits->getCurrentReservedUnits().' units ('.$types[$encodingUnits->getReservedUnitType()].")\r\n";

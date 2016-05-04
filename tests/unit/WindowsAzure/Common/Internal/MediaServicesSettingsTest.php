@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,26 +15,30 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Common\Internal;
+namespace Tests\unit\WindowsAzure\Common\Internal;
+
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Unit tests for class MediaServicesSettings
+ * Unit tests for class MediaServicesSettings.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
@@ -97,7 +101,7 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
     public function testCreateFromConnectionStringWithMissingKeyFail()
     {
         // Setup
-        $connectionString = "AccountName=test";
+        $connectionString = 'AccountName=test';
         $expectedMsg = sprintf(Resources::MISSING_CONNECTION_STRING_SETTINGS, $connectionString);
         $this->setExpectedException('\RuntimeException', $expectedMsg);
 
@@ -120,7 +124,7 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
         $oauthEndpointSetting = Resources::MEDIA_SERVICES_OAUTH_ENDPOINT_URI_NAME;
 
         $connectionString = "$invalidKey=value;{$endpointUriSetting}=12345;{$accountNameSetting}=test;{$accessKeySetting}=testkey;"
-            . "{$endpointUriSetting}=https://custom.endpoint;{$oauthEndpointSetting}=https://custom.oauth.endpoint";
+            ."{$endpointUriSetting}=https://custom.endpoint;{$oauthEndpointSetting}=https://custom.oauth.endpoint";
         $expectedMsg = sprintf(
             Resources::INVALID_CONNECTION_STRING_SETTING_KEY,
             $invalidKey,
@@ -128,7 +132,7 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
                 Resources::MEDIA_SERVICES_ENDPOINT_URI_NAME,
                 Resources::MEDIA_SERVICES_OAUTH_ENDPOINT_URI_NAME,
                 Resources::MEDIA_SERVICES_ACCOUNT_NAME,
-                Resources::MEDIA_SERVICES_ACCESS_KEY
+                Resources::MEDIA_SERVICES_ACCESS_KEY,
             ))
         );
         $this->setExpectedException('\RuntimeException', $expectedMsg);
@@ -265,5 +269,3 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($data, $settings->getOAuthEndpointUri());
     }
 }
-
-

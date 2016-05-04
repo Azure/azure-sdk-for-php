@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,41 +14,43 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices\Models;
+namespace Tests\unit\WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\MediaServices\Models\Locator;
 
 /**
- * Represents access policy object used in media services
+ * Represents access policy object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 class LocatorTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @covers WindowsAzure\MediaServices\Models\Locator::__construct
      */
-    public function test__construct(){
+    public function test__construct()
+    {
 
         // Setup
         $assetId = 'uifygid75';
         $accessId = 'ljhsdfl45';
         $type = Locator::TYPE_NONE;
-
 
         // Test
         $result = new Locator($assetId, $accessId, $type);
@@ -63,7 +65,8 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Locator::getStartTime
      * @covers WindowsAzure\MediaServices\Models\Locator::setStartTime
      */
-    public function testGetStartTime(){
+    public function testGetStartTime()
+    {
 
         // Setup
         $assetId = 'uifygid75';
@@ -83,7 +86,8 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Locator::getAssetId
      */
-    public function testGetAssetId(){
+    public function testGetAssetId()
+    {
 
         // Setup
         $assetId = 'uifygid75';
@@ -101,7 +105,8 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Locator::getAccessPolicyId
      */
-    public function testGetAccessPolicyId(){
+    public function testGetAccessPolicyId()
+    {
 
         // Setup
         $assetId = 'uifygid75';
@@ -119,14 +124,15 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Locator::getContentAccessComponent
      */
-    public function testGetContentAccessComponent(){
+    public function testGetContentAccessComponent()
+    {
 
         // Setup
         $locatorArray = array(
-            'Type'                        => Locator::TYPE_NONE,
-            'ContentAccessComponent'      => 'AccessComponent',
-            'AccessPolicyId'              => 'ljhsdfl45',
-            'AssetId'                     => 'uifygid75'
+            'Type' => Locator::TYPE_NONE,
+            'ContentAccessComponent' => 'AccessComponent',
+            'AccessPolicyId' => 'ljhsdfl45',
+            'AssetId' => 'uifygid75',
         );
         $result = Locator::createFromOptions($locatorArray);
 
@@ -140,14 +146,15 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Locator::getBaseUri
      */
-    public function testGetBaseUri(){
+    public function testGetBaseUri()
+    {
 
        // Setup
         $locatorArray = array(
-            'Type'                => Locator::TYPE_NONE,
-            'BaseUri'             => 'http://someurl.com/uysfdu56y',
-            'AccessPolicyId'      => 'ljhsdfl45',
-            'AssetId'             => 'uifygid75'
+            'Type' => Locator::TYPE_NONE,
+            'BaseUri' => 'http://someurl.com/uysfdu56y',
+            'AccessPolicyId' => 'ljhsdfl45',
+            'AssetId' => 'uifygid75',
         );
         $result = Locator::createFromOptions($locatorArray);
 
@@ -161,14 +168,15 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Locator::getPath
      */
-    public function testGetPath(){
+    public function testGetPath()
+    {
 
         // Setup
         $locatorArray = array(
-            'Type'                => Locator::TYPE_NONE,
-            'Path'                => 'http://someurl.com/uysfdu56y',
-            'AccessPolicyId'      => 'ljhsdfl45',
-            'AssetId'             => 'uifygid75'
+            'Type' => Locator::TYPE_NONE,
+            'Path' => 'http://someurl.com/uysfdu56y',
+            'AccessPolicyId' => 'ljhsdfl45',
+            'AssetId' => 'uifygid75',
         );
         $result = Locator::createFromOptions($locatorArray);
 
@@ -183,7 +191,8 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Locator::getType
      * @covers WindowsAzure\MediaServices\Models\Locator::setType
      */
-    public function testGetType(){
+    public function testGetType()
+    {
 
         // Setup
         $assetId = 'uifygid75';
@@ -204,7 +213,8 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Locator::getExpirationDateTime
      * @covers WindowsAzure\MediaServices\Models\Locator::setExpirationDateTime
      */
-    public function testGetExpirationDateTime(){
+    public function testGetExpirationDateTime()
+    {
 
         // Setup
         $assetId = 'uifygid75';
@@ -225,7 +235,8 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Locator::getName
      * @covers WindowsAzure\MediaServices\Models\Locator::setName
      */
-    public function testGetName(){
+    public function testGetName()
+    {
 
         // Setup
         $assetId = 'uifygid75';
@@ -246,7 +257,8 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Locator::getId
      * @covers WindowsAzure\MediaServices\Models\Locator::setId
      */
-    public function testGetId(){
+    public function testGetId()
+    {
 
         // Setup
         $assetId = 'uifygid75';
@@ -267,20 +279,21 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Locator::createFromOptions
      * @covers WindowsAzure\MediaServices\Models\Locator::fromArray
      */
-    public function testLocatorFromOptions(){
+    public function testLocatorFromOptions()
+    {
 
         // Setup
         $locatorArray = array(
-            'Id'                           => 'kjshfs89',
-            'Name'                         => 'newLocator',
-            'ExpirationDateTime'           => '2013-11-30',
-            'Type'                         => Locator::TYPE_NONE,
-            'Path'                         => 'http://someurl.com/gdkf76r',
-            'BaseUri'                      => 'http://someurl.com/uysfdu56y',
-            'ContentAccessComponent'       => 'AccessComponent',
-            'AccessPolicyId'               => 'uifygid75',
-            'AssetId'                      => 'ljhsdfl45',
-            'StartTime'                    => '2013-11-19',
+            'Id' => 'kjshfs89',
+            'Name' => 'newLocator',
+            'ExpirationDateTime' => '2013-11-30',
+            'Type' => Locator::TYPE_NONE,
+            'Path' => 'http://someurl.com/gdkf76r',
+            'BaseUri' => 'http://someurl.com/uysfdu56y',
+            'ContentAccessComponent' => 'AccessComponent',
+            'AccessPolicyId' => 'uifygid75',
+            'AssetId' => 'ljhsdfl45',
+            'StartTime' => '2013-11-19',
         );
         $expiration = new \Datetime($locatorArray['ExpirationDateTime']);
         $start = new \Datetime($locatorArray['StartTime']);
@@ -300,5 +313,4 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($locatorArray['AssetId'], $resultLocator->getAssetId());
         $this->assertEquals($start->getTimestamp(), $resultLocator->getStartTime()->getTimestamp());
     }
-
 }

@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,25 +15,29 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
-use Tests\Framework\TestResources;
+
+namespace Tests\unit\WindowsAzure\ServiceRuntime\Internal;
+
 use WindowsAzure\ServiceRuntime\Internal\RuntimeKernel;
 
 /**
  * Unit tests for class RuntimeKernel.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
@@ -46,12 +50,12 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $runtimeKernel = RuntimeKernel::getKernel(true);
-        
+
         // Test
         $this->assertInstanceOf(
             'WindowsAzure\ServiceRuntime\Internal\RuntimeKernel', $runtimeKernel);
     }
-    
+
     /**
      * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getCurrentStateSerializer
      */
@@ -59,13 +63,13 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $runtimeKernel = RuntimeKernel::getKernel();
-        
+
         // Test
         $this->assertInstanceOf(
             'WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer',
             $runtimeKernel->getCurrentStateSerializer());
     }
-    
+
     /**
      * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getGoalStateDeserializer
      */
@@ -73,13 +77,13 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $runtimeKernel = RuntimeKernel::getKernel();
-        
+
         // Test
         $this->assertInstanceOf(
             'WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer',
             $runtimeKernel->getGoalStateDeserializer());
     }
-    
+
     /**
      * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getInputChannel
      */
@@ -87,13 +91,13 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $runtimeKernel = RuntimeKernel::getKernel();
-        
+
         // Test
         $this->assertInstanceOf(
             'WindowsAzure\ServiceRuntime\Internal\FileInputChannel',
             $runtimeKernel->getInputChannel());
     }
-    
+
     /**
      * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getOutputChannel
      */
@@ -101,13 +105,13 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $runtimeKernel = RuntimeKernel::getKernel();
-        
+
         // Test
         $this->assertInstanceOf(
             'WindowsAzure\ServiceRuntime\Internal\FileOutputChannel',
             $runtimeKernel->getOutputChannel());
     }
-    
+
     /**
      * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getProtocol1RuntimeCurrentStateClient
      */
@@ -115,13 +119,13 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $runtimeKernel = RuntimeKernel::getKernel();
-        
+
         // Test
         $this->assertInstanceOf(
             'WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeCurrentStateClient',
             $runtimeKernel->getProtocol1RuntimeCurrentStateClient());
     }
-    
+
     /**
      * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getRoleEnvironmentDataDeserializer
      */
@@ -129,13 +133,13 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $runtimeKernel = RuntimeKernel::getKernel();
-        
+
         // Test
         $this->assertInstanceOf(
             'WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer',
             $runtimeKernel->getRoleEnvironmentDataDeserializer());
     }
-    
+
     /**
      * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getProtocol1RuntimeGoalStateClient
      */
@@ -143,13 +147,13 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $runtimeKernel = RuntimeKernel::getKernel();
-        
+
         // Test
         $this->assertInstanceOf(
             'WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient',
             $runtimeKernel->getProtocol1RuntimeGoalStateClient());
     }
-    
+
     /**
      * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getRuntimeVersionProtocolClient
      */
@@ -157,7 +161,7 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $runtimeKernel = RuntimeKernel::getKernel();
-        
+
         // Test
         $this->assertInstanceOf(
             'WindowsAzure\ServiceRuntime\Internal\RuntimeVersionProtocolClient',
@@ -171,11 +175,10 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $runtimeKernel = RuntimeKernel::getKernel();
-        
+
         // Test
         $this->assertInstanceOf(
             'WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager',
             $runtimeKernel->getRuntimeVersionManager());
     }
 }
-

@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,16 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal\Authentication
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Common\Internal\Authentication;
+namespace Tests\unit\WindowsAzure\Common\Internal\Authentication;
+
 use Tests\Mock\WindowsAzure\Common\Internal\Authentication\SharedKeyAuthSchemeMock;
 use WindowsAzure\Common\Internal\Resources;
 use Tests\Framework\TestResources;
@@ -30,18 +32,19 @@ use Tests\Framework\TestResources;
 /**
  * Unit tests for SharedKeyAuthScheme class.
  *
- * @package    Tests\Unit\WindowsAzure\Common\Internal\Authentication
  * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link       https://github.com/windowsazure/azure-sdk-for-php
  */
 class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-    * @covers WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::__construct
-    */
+     * @covers WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::__construct
+     */
     public function test__construct()
     {
         $expected = array();
@@ -63,8 +66,8 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-    * @covers WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::computeSignature
-    */
+     * @covers WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::computeSignature
+     */
     public function testComputeSignatureSimple()
     {
         $httpMethod = 'GET';
@@ -74,8 +77,8 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
         $apiVersion = Resources::STORAGE_API_LATEST_VERSION;
         $accountName = TestResources::ACCOUNT_NAME;
         $headers = array(Resources::X_MS_DATE => $date, Resources::X_MS_VERSION => $apiVersion);
-        $expected = "GET\n\n\n\n\n\n\n\n\n\n\n\n" . Resources::X_MS_DATE . ":$date\n" . Resources::X_MS_VERSION . 
-                ":$apiVersion\n/$accountName" . parse_url($url, PHP_URL_PATH) . "\ncomp:list";
+        $expected = "GET\n\n\n\n\n\n\n\n\n\n\n\n".Resources::X_MS_DATE.":$date\n".Resources::X_MS_VERSION.
+                ":$apiVersion\n/$accountName".parse_url($url, PHP_URL_PATH)."\ncomp:list";
         $mock = new SharedKeyAuthSchemeMock($accountName, TestResources::KEY4);
 
         $actual = $mock->computeSignatureMock($headers, $url, $queryParams, $httpMethod);
@@ -96,7 +99,7 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
         $headers = array(Resources::X_MS_VERSION => $apiVersion, Resources::X_MS_DATE => $date1);
         $queryParams = array(Resources::QP_COMP => 'list');
         $httpMethod = 'GET';
-        $expected = 'SharedKey ' . $accountName . ':7O9UOMTnAEF+cuwZzo1BlDj2qJm8yNywajta5he6Qig=';
+        $expected = 'SharedKey '.$accountName.':7O9UOMTnAEF+cuwZzo1BlDj2qJm8yNywajta5he6Qig=';
 
         $mock = new SharedKeyAuthSchemeMock($accountName, $accountKey);
 
@@ -105,5 +108,3 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 }
-
-

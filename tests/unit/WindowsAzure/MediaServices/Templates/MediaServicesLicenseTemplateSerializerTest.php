@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,17 +14,16 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\MediaServices\Templates
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices\Templates;
-use Tests\Framework\TestResources;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Utilities;
+namespace Tests\unit\WindowsAzure\MediaServices\Templates;
+
 use WindowsAzure\MediaServices\Templates\MediaServicesLicenseTemplateSerializer;
 use WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate;
 use WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate;
@@ -38,16 +37,17 @@ use WindowsAzure\MediaServices\Templates\PlayReadyLicenseType;
 use WindowsAzure\MediaServices\Templates\UnknownOutputPassingOption;
 use WindowsAzure\MediaServices\Templates\ErrorMessages;
 
-
 /**
- * Unit Tests for MediaServicesLicenseTemplateSerializer 
+ * Unit Tests for MediaServicesLicenseTemplateSerializer.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\MediaServices\Templates
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class MediaServicesLicenseTemplateSerializerTest extends \PHPUnit_Framework_TestCase
@@ -55,20 +55,21 @@ class MediaServicesLicenseTemplateSerializerTest extends \PHPUnit_Framework_Test
     /**
      * @covers \WindowsAzure\MediaServices\Templates\MediaServicesLicenseTemplateSerializer::deserialize
      */
-    public function testKnownGoodInput() {        
+    public function testKnownGoodInput()
+    {
         // Setup
-        $template = "<PlayReadyLicenseResponseTemplate xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1\"><LicenseTemplates><PlayReadyLicenseTemplate><AllowTestDevices>true</AllowTestDevices><BeginDate i:nil=\"true\" /><ContentKey i:type=\"ContentEncryptionKeyFromHeader\" /><ContentType>Unspecified</ContentType><ExpirationDate i:nil=\"true\" /><LicenseType>Nonpersistent</LicenseType><PlayRight><AgcAndColorStripeRestriction><ConfigurationData>1</ConfigurationData></AgcAndColorStripeRestriction><AllowPassingVideoContentToUnknownOutput>Allowed</AllowPassingVideoContentToUnknownOutput><AnalogVideoOpl>100</AnalogVideoOpl><CompressedDigitalAudioOpl>300</CompressedDigitalAudioOpl><CompressedDigitalVideoOpl>400</CompressedDigitalVideoOpl><DigitalVideoOnlyContentRestriction>false</DigitalVideoOnlyContentRestriction><ExplicitAnalogTelevisionOutputRestriction><BestEffort>true</BestEffort><ConfigurationData>0</ConfigurationData></ExplicitAnalogTelevisionOutputRestriction><ImageConstraintForAnalogComponentVideoRestriction>true</ImageConstraintForAnalogComponentVideoRestriction><ImageConstraintForAnalogComputerMonitorRestriction>true</ImageConstraintForAnalogComputerMonitorRestriction><ScmsRestriction><ConfigurationData>2</ConfigurationData></ScmsRestriction><UncompressedDigitalAudioOpl>250</UncompressedDigitalAudioOpl><UncompressedDigitalVideoOpl>270</UncompressedDigitalVideoOpl></PlayRight></PlayReadyLicenseTemplate></LicenseTemplates><ResponseCustomData>This is my response custom data</ResponseCustomData></PlayReadyLicenseResponseTemplate>";
-        
+        $template = '<PlayReadyLicenseResponseTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1"><LicenseTemplates><PlayReadyLicenseTemplate><AllowTestDevices>true</AllowTestDevices><BeginDate i:nil="true" /><ContentKey i:type="ContentEncryptionKeyFromHeader" /><ContentType>Unspecified</ContentType><ExpirationDate i:nil="true" /><LicenseType>Nonpersistent</LicenseType><PlayRight><AgcAndColorStripeRestriction><ConfigurationData>1</ConfigurationData></AgcAndColorStripeRestriction><AllowPassingVideoContentToUnknownOutput>Allowed</AllowPassingVideoContentToUnknownOutput><AnalogVideoOpl>100</AnalogVideoOpl><CompressedDigitalAudioOpl>300</CompressedDigitalAudioOpl><CompressedDigitalVideoOpl>400</CompressedDigitalVideoOpl><DigitalVideoOnlyContentRestriction>false</DigitalVideoOnlyContentRestriction><ExplicitAnalogTelevisionOutputRestriction><BestEffort>true</BestEffort><ConfigurationData>0</ConfigurationData></ExplicitAnalogTelevisionOutputRestriction><ImageConstraintForAnalogComponentVideoRestriction>true</ImageConstraintForAnalogComponentVideoRestriction><ImageConstraintForAnalogComputerMonitorRestriction>true</ImageConstraintForAnalogComputerMonitorRestriction><ScmsRestriction><ConfigurationData>2</ConfigurationData></ScmsRestriction><UncompressedDigitalAudioOpl>250</UncompressedDigitalAudioOpl><UncompressedDigitalVideoOpl>270</UncompressedDigitalVideoOpl></PlayRight></PlayReadyLicenseTemplate></LicenseTemplates><ResponseCustomData>This is my response custom data</ResponseCustomData></PlayReadyLicenseResponseTemplate>';
+
         // Test
         $playreadyLicense = MediaServicesLicenseTemplateSerializer::deserialize($template);
-       
+
         // Assert
         $this->assertNotNull($playreadyLicense);
         $this->assertEquals(1, count($playreadyLicense->getLicenseTemplates()));
         $licence = $playreadyLicense->getLicenseTemplates()[0];
         $this->assertEquals(true, $licence->getAllowTestDevices());
         $this->assertEquals(PlayReadyLicenseType::NON_PERSISTENT, $licence->getLicenseType());
-        $this->assertEquals("This is my response custom data", $playreadyLicense->getResponseCustomData());
+        $this->assertEquals('This is my response custom data', $playreadyLicense->getResponseCustomData());
         $this->assertNull($licence->getBeginDate());
         $this->assertNull($licence->getExpirationDate());
         //$this->assertTrue(instanceof);
@@ -86,13 +87,14 @@ class MediaServicesLicenseTemplateSerializerTest extends \PHPUnit_Framework_Test
     /**
      * @covers \WindowsAzure\MediaServices\Templates\MediaServicesLicenseTemplateSerializer::deserialize
      */
-    public function testKnownGoodInputMinimalLicense() {        
+    public function testKnownGoodInputMinimalLicense()
+    {
         // Setup
-        $template = "<PlayReadyLicenseResponseTemplate xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1\"><LicenseTemplates><PlayReadyLicenseTemplate><ContentKey i:type=\"ContentEncryptionKeyFromHeader\" /><PlayRight /></PlayReadyLicenseTemplate></LicenseTemplates></PlayReadyLicenseResponseTemplate>";
-                
+        $template = '<PlayReadyLicenseResponseTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1"><LicenseTemplates><PlayReadyLicenseTemplate><ContentKey i:type="ContentEncryptionKeyFromHeader" /><PlayRight /></PlayReadyLicenseTemplate></LicenseTemplates></PlayReadyLicenseResponseTemplate>';
+
         // Test
         $playreadyLicense = MediaServicesLicenseTemplateSerializer::deserialize($template);
-        
+
         // Assert
         $this->assertNotNull($playreadyLicense);
         $this->assertEquals(1, count($playreadyLicense->getLicenseTemplates()));
@@ -101,9 +103,10 @@ class MediaServicesLicenseTemplateSerializerTest extends \PHPUnit_Framework_Test
     /**
      * @covers \WindowsAzure\MediaServices\Templates\MediaServicesLicenseTemplateSerializer::deserialize
      */
-    public function testInputMissingContentKeyShouldThrow() {        
+    public function testInputMissingContentKeyShouldThrow()
+    {
         // Setup
-        $template = "<PlayReadyLicenseResponseTemplate xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1\"><LicenseTemplates><PlayReadyLicenseTemplate><PlayRight /></PlayReadyLicenseTemplate></LicenseTemplates></PlayReadyLicenseResponseTemplate>";
+        $template = '<PlayReadyLicenseResponseTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1"><LicenseTemplates><PlayReadyLicenseTemplate><PlayRight /></PlayReadyLicenseTemplate></LicenseTemplates></PlayReadyLicenseResponseTemplate>';
         $this->setExpectedException('RuntimeException', "The PlayReadyLicenseTemplate must contains an 'ContentKey' element");
 
         // Test
@@ -113,9 +116,10 @@ class MediaServicesLicenseTemplateSerializerTest extends \PHPUnit_Framework_Test
     /**
      * @covers \WindowsAzure\MediaServices\Templates\MediaServicesLicenseTemplateSerializer::deserialize
      */
-    public function testInputMissingPlayRightShouldThrow() {        
+    public function testInputMissingPlayRightShouldThrow()
+    {
         // Setup
-        $template = "<PlayReadyLicenseResponseTemplate xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1\"><LicenseTemplates><PlayReadyLicenseTemplate><ContentKey i:type=\"ContentEncryptionKeyFromHeader\" /></PlayReadyLicenseTemplate></LicenseTemplates></PlayReadyLicenseResponseTemplate>";
+        $template = '<PlayReadyLicenseResponseTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1"><LicenseTemplates><PlayReadyLicenseTemplate><ContentKey i:type="ContentEncryptionKeyFromHeader" /></PlayReadyLicenseTemplate></LicenseTemplates></PlayReadyLicenseResponseTemplate>';
         $this->setExpectedException('RuntimeException', "The PlayReadyLicenseTemplate must contains an 'PlayRight' element");
 
         // Test
@@ -125,34 +129,33 @@ class MediaServicesLicenseTemplateSerializerTest extends \PHPUnit_Framework_Test
     /**
      * @covers \WindowsAzure\MediaServices\Templates\MediaServicesLicenseTemplateSerializer::deserialize
      */
-    public function testInputMissingLicenseTemplatesShouldThrow() {        
+    public function testInputMissingLicenseTemplatesShouldThrow()
+    {
         // Setup
-        $template = "<PlayReadyLicenseResponseTemplate xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1\"><LicenseTemplates></LicenseTemplates></PlayReadyLicenseResponseTemplate>";
+        $template = '<PlayReadyLicenseResponseTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1"><LicenseTemplates></LicenseTemplates></PlayReadyLicenseResponseTemplate>';
         $this->setExpectedException('RuntimeException', ErrorMessages::AT_LEAST_ONE_LICENSE_TEMPLATE_REQUIRED);
-        
+
         // Test
         MediaServicesLicenseTemplateSerializer::deserialize($template);
     }
-
 
     /**
      * @covers \WindowsAzure\MediaServices\Templates\MediaServicesLicenseTemplateSerializer::serialize
      * @covers \WindowsAzure\MediaServices\Templates\MediaServicesLicenseTemplateSerializer::deserialize
      */
-    public function testRoundTripTest() {
-    
+    public function testRoundTripTest()
+    {
         $template = new PlayReadyLicenseResponseTemplate();
-        $template->setResponseCustomData("test custom data");
+        $template->setResponseCustomData('test custom data');
 
         $licenseTemplate = new PlayReadyLicenseTemplate();
         $template->setLicenseTemplates(array($licenseTemplate));
-        
+
         $licenseTemplate->setLicenseType(PlayReadyLicenseType::PERSISTENT);
         $licenseTemplate->setBeginDate(new \DateTime('now'));
         $licenseTemplate->setRelativeExpirationDate(new \DateInterval('PT6H'));
-        $licenseTemplate->setContentKey(new ContentEncryptionKeyFromKeyIdentifier("test custom id"));
-        
-        
+        $licenseTemplate->setContentKey(new ContentEncryptionKeyFromKeyIdentifier('test custom id'));
+
         $playRight = new PlayReadyPlayRight();
         $licenseTemplate->setPlayRight($playRight);
 
@@ -175,15 +178,17 @@ class MediaServicesLicenseTemplateSerializerTest extends \PHPUnit_Framework_Test
         $this->assertEqualsLicenseResponseTemplate($template, $playreadyLicense);
     }
 
-    public function assertEqualsLicenseResponseTemplate($expected, $actual) {
+    public function assertEqualsLicenseResponseTemplate($expected, $actual)
+    {
         $this->assertEquals(count($expected->getLicenseTemplates()), count($actual->getLicenseTemplates()));
-        for($i = 0; $i < count($expected->getLicenseTemplates()); $i++) {
+        for ($i = 0; $i < count($expected->getLicenseTemplates()); ++$i) {
             $this->assertEqualsLicenseTemplate($expected->getLicenseTemplates()[$i], $actual->getLicenseTemplates()[$i]);
         }
         $this->assertEquals($expected->getResponseCustomData(), $actual->getResponseCustomData());
     }
 
-    public function assertEqualsLicenseTemplate($expected, $actual) {
+    public function assertEqualsLicenseTemplate($expected, $actual)
+    {
         $this->assertEquals($expected->getAllowTestDevices(), $actual->getAllowTestDevices());
         $this->assertEquals($expected->getLicenseType(), $actual->getLicenseType());
         $this->assertEquals($expected->getBeginDate(), $actual->getBeginDate());
@@ -196,7 +201,8 @@ class MediaServicesLicenseTemplateSerializerTest extends \PHPUnit_Framework_Test
         $this->assertEqualsContentKey($expected->getContentKey(), $actual->getContentKey());
     }
 
-    public function assertEqualsContentKey($expected, $actual)  {
+    public function assertEqualsContentKey($expected, $actual)
+    {
         if ($expected instanceof ContentEncryptionKeyFromHeader) {
             $this->assertTrue($actual instanceof ContentEncryptionKeyFromHeader);
         }
@@ -207,7 +213,8 @@ class MediaServicesLicenseTemplateSerializerTest extends \PHPUnit_Framework_Test
         }
     }
 
-    public function assertEqualsPlayRight($expected, $actual) {
+    public function assertEqualsPlayRight($expected, $actual)
+    {
         $this->assertNotNull($expected);
         $this->assertNotNull($actual);
 
@@ -234,6 +241,6 @@ class MediaServicesLicenseTemplateSerializerTest extends \PHPUnit_Framework_Test
             $this->assertNotNull($actual->getExplicitAnalogTelevisionOutputRestriction());
             $this->assertEquals($expected->getExplicitAnalogTelevisionOutputRestriction()->getBestEffort(), $actual->getExplicitAnalogTelevisionOutputRestriction()->getBestEffort());
             $this->assertEquals($expected->getExplicitAnalogTelevisionOutputRestriction()->getConfigurationData(), $actual->getExplicitAnalogTelevisionOutputRestriction()->getConfigurationData());
-        }   
+        }
     }
 }

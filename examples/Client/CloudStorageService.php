@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,16 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Client
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace Client;
+
 use WindowsAzure\Common\ServicesBuilder;
 use MicrosoftAzure\Storage\Table\Models\QueryTablesOptions;
 
@@ -30,11 +32,13 @@ use MicrosoftAzure\Storage\Table\Models\QueryTablesOptions;
  * Encapsulates Windows Azure storage service operations.
  *
  * @category  Microsoft
- * @package   Client
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class CloudStorageService
@@ -43,32 +47,32 @@ class CloudStorageService
      * @var IQueue
      */
     private $_queueProxy;
-    
+
     /**
      * @var IBlob
      */
     private $_blobProxy;
-    
+
     /**
      * @var ITable
      */
     private $_tableProxy;
-    
+
     /**
      * @var string
      */
     private $_blobEndpointUri;
-    
+
     /**
      * @var string
      */
     private $_queueEndpointUri;
-    
+
     /**
      * @var string
      */
     private $_tableEndpointUri;
-    
+
     /**
      * Constructs CloudStorageService using the provided parameters.
      * 
@@ -78,26 +82,26 @@ class CloudStorageService
      * @param array  $queueEndpointUri The queue endpoint URI.
      * @param array  $tableEndpointUri The queue endpoint URI.
      * 
-     * @throws \InvalidArgumentException 
+     * @throws \InvalidArgumentException
      */
     public function __construct($name, $key, $blobEndpointUri, $queueEndpointUri, $tableEndpointUri)
     {
         $this->_queueEndpointUri = $queueEndpointUri;
-        $this->_blobEndpointUri  = $blobEndpointUri;
+        $this->_blobEndpointUri = $blobEndpointUri;
         $this->_tableEndpointUri = $tableEndpointUri;
-        
-        $connectionString  = "DefaultEndpointsProtocol=http;AccountName=$name;AccountKey=$key";        
-        $this->_tableProxy = ServicesBuilder::getInstance()->createTableService($connectionString);;
-        $this->_blobProxy  = ServicesBuilder::getInstance()->createBlobService($connectionString);;
-        $this->_queueProxy = ServicesBuilder::getInstance()->createQueueService($connectionString);;
+
+        $connectionString = "DefaultEndpointsProtocol=http;AccountName=$name;AccountKey=$key";
+        $this->_tableProxy = ServicesBuilder::getInstance()->createTableService($connectionString);
+        $this->_blobProxy = ServicesBuilder::getInstance()->createBlobService($connectionString);
+        $this->_queueProxy = ServicesBuilder::getInstance()->createQueueService($connectionString);
     }
-    
+
     /**
      * Checks if a given table name exists or not.
      * 
      * @param string $name The table name.
      * 
-     * @return boolean 
+     * @return bool
      */
     public function tableExists($name)
     {
@@ -107,10 +111,10 @@ class CloudStorageService
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     /**
      * Lists all tables in this storage service.
      * 
@@ -119,19 +123,19 @@ class CloudStorageService
     public function listTables()
     {
         $nextTableName = null;
-        $tables        = array();
-        
+        $tables = array();
+
         do {
             $options = new QueryTablesOptions();
             $options->setNextTableName($nextTableName);
-            $result        = $this->_tableProxy->queryTables();
+            $result = $this->_tableProxy->queryTables();
             $nextTableName = $result->getNextTableName();
             $tables = array_merge($tables, $result->getTables());
-        } while(!is_null($nextTableName));
-        
+        } while (!is_null($nextTableName));
+
         return $tables;
     }
-    
+
     /**
      * Creates table if it does not exist.
      * 
@@ -142,7 +146,7 @@ class CloudStorageService
     public function createTable($name)
     {
         $cloudTable = null;
-        
+
         try {
             $this->_tableProxy->createTable($name);
             $cloudTable = new CloudTable($name, $this->_tableProxy);
@@ -151,27 +155,28 @@ class CloudStorageService
                 $cloudTable = new CloudTable($name, $this->_tableProxy);
             }
         }
-        
+
         return $cloudTable;
     }
-    
+
     /**
      * Deletes given table.
      * 
      * @param string $name The table name.
      * 
-     * @return boolean Indicates if the table was deleted or not.
+     * @return bool Indicates if the table was deleted or not.
      */
     public function deleteTable($name)
     {
         try {
             $this->_tableProxy->deleteTable($name);
+
             return true;
-        } catch(\Exception $ex) {
+        } catch (\Exception $ex) {
             return false;
         }
     }
-    
+
     /**
      * Gets storage service blob endpoint uri.
      * 
@@ -181,7 +186,7 @@ class CloudStorageService
     {
         return $this->_blobEndpointUri;
     }
-    
+
     /**
      * Gets storage service queue endpoint uri.
      * 

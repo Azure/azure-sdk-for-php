@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,49 +14,52 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices\Models;
+namespace Tests\unit\WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\MediaServices\Models\Job;
 
 /**
- * Represents access policy object used in media services
+ * Represents access policy object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 class JobTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @covers WindowsAzure\MediaServices\Models\Job::createFromOptions
      * @covers WindowsAzure\MediaServices\Models\Job::fromArray
      */
-    public function testCreateFromOptions(){
+    public function testCreateFromOptions()
+    {
 
         // Setup
         $options = array(
-            'Id'                  => 'sfgsfg34',
-            'Name'                => 'SomeName',
-            'Created'             => '2013-11-25',
-            'LastModified'        => '2013-11-25',
-            'EndTime'             => '2013-12-25',
-            'Priority'            => 1,
-            'RunningDuration'     => 26.30,
-            'StartTime'           => '2013-11-26',
-            'State'               => Job::STATE_QUEUED,
-            'TemplateId'          => 'yudgf78',
+            'Id' => 'sfgsfg34',
+            'Name' => 'SomeName',
+            'Created' => '2013-11-25',
+            'LastModified' => '2013-11-25',
+            'EndTime' => '2013-12-25',
+            'Priority' => 1,
+            'RunningDuration' => 26.30,
+            'StartTime' => '2013-11-26',
+            'State' => Job::STATE_QUEUED,
+            'TemplateId' => 'yudgf78',
         );
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
@@ -83,10 +86,11 @@ class JobTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Job::getName
      * @covers WindowsAzure\MediaServices\Models\Job::setName
      */
-    public function testGetSetName(){
+    public function testGetSetName()
+    {
 
         // Setup
-        $job= new Job();
+        $job = new Job();
         $name = 'New Name';
 
         // Test
@@ -101,10 +105,11 @@ class JobTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Job::getPriority
      * @covers WindowsAzure\MediaServices\Models\Job::setPriority
      */
-    public function testGetSetPriority(){
+    public function testGetSetPriority()
+    {
 
         // Setup
-        $job= new Job();
+        $job = new Job();
         $priority = 2;
 
         // Test
@@ -119,10 +124,11 @@ class JobTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Job::getTemplateId
      * @covers WindowsAzure\MediaServices\Models\Job::setTemplateId
      */
-    public function testGetSetTemplateId(){
+    public function testGetSetTemplateId()
+    {
 
         // Setup
-        $job= new Job();
+        $job = new Job();
         $templateId = 'sfgfg567';
 
         // Test
@@ -136,13 +142,14 @@ class JobTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Job::getId
      */
-    public function testGetId(){
+    public function testGetId()
+    {
 
         // Setup
         $options = array(
-                'Id'                  => 'sfgsfg34'
+                'Id' => 'sfgsfg34',
         );
-        $job= Job::createFromOptions($options);
+        $job = Job::createFromOptions($options);
 
         // Test
         $result = $job->getId();
@@ -154,14 +161,15 @@ class JobTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Job::getCreated
      */
-    public function testGetCreated(){
+    public function testGetCreated()
+    {
 
         // Setup
         $options = array(
-                'Created'             => '2013-11-25'
+                'Created' => '2013-11-25',
         );
         $created = new \Datetime($options['Created']);
-        $job= Job::createFromOptions($options);
+        $job = Job::createFromOptions($options);
 
         // Test
         $result = $job->getCreated();
@@ -173,14 +181,15 @@ class JobTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Job::getLastModified
      */
-    public function testGetLastModified(){
+    public function testGetLastModified()
+    {
 
         // Setup
         $options = array(
-                'LastModified'        => '2013-11-25'
+                'LastModified' => '2013-11-25',
         );
         $modified = new \Datetime($options['LastModified']);
-        $job= Job::createFromOptions($options);
+        $job = Job::createFromOptions($options);
 
         // Test
         $result = $job->getLastModified();
@@ -192,14 +201,15 @@ class JobTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Job::getEndTime
      */
-    public function testGetEndTime(){
+    public function testGetEndTime()
+    {
 
         // Setup
         $options = array(
-                'EndTime'             => '2013-12-25'
+                'EndTime' => '2013-12-25',
         );
         $endTime = new \Datetime($options['EndTime']);
-        $job= Job::createFromOptions($options);
+        $job = Job::createFromOptions($options);
 
         // Test
         $result = $job->getEndTime();
@@ -211,14 +221,15 @@ class JobTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Job::getStartTime
      */
-    public function testGetStartTime(){
+    public function testGetStartTime()
+    {
 
         // Setup
         $options = array(
-                'StartTime'           => '2013-11-25'
+                'StartTime' => '2013-11-25',
         );
         $startTime = new \Datetime($options['StartTime']);
-        $job= Job::createFromOptions($options);
+        $job = Job::createFromOptions($options);
 
         // Test
         $result = $job->getStartTime();
@@ -230,14 +241,15 @@ class JobTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Job::getRunningDuration
      */
-    public function testGetRunningDuration(){
+    public function testGetRunningDuration()
+    {
 
         // Setup
-        $job= new Job();
+        $job = new Job();
         $options = array(
-                'RunningDuration'     => 25.30
+                'RunningDuration' => 25.30,
         );
-        $job= Job::createFromOptions($options);
+        $job = Job::createFromOptions($options);
 
         // Test
         $result = $job->getRunningDuration();
@@ -249,14 +261,15 @@ class JobTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Job::getState
      */
-    public function testGetState(){
+    public function testGetState()
+    {
 
         // Setup
-        $job= new Job();
+        $job = new Job();
         $options = array(
-                'State'     => Job::STATE_QUEUED
+                'State' => Job::STATE_QUEUED,
         );
-        $job= Job::createFromOptions($options);
+        $job = Job::createFromOptions($options);
 
         // Test
         $result = $job->getState();

@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,18 +15,19 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-namespace Tests\Unit\WindowsAzure\ServiceRuntime\Internal;
+
+namespace Tests\unit\WindowsAzure\ServiceRuntime\Internal;
+
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamWrapper;
-use Tests\Framework\TestResources;
-use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer;
 use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
 use WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeCurrentStateClient;
@@ -37,11 +38,13 @@ use WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer;
  * Unit tests for class Protocol1RuntimeGoalStateClient.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceRuntime\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
@@ -57,27 +60,27 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
         // Setup
         $rootDirectory = 'root';
         $fileName = 'goalstate';
-        $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
-            '<GoalState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
-            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
-            '<Incarnation>1</Incarnation>' .
-            '<ExpectedState>Started</ExpectedState>' .
-            '<RoleEnvironmentPath></RoleEnvironmentPath>' .
-            '<CurrentStateEndpoint>\\.\pipe\WindowsAzureRuntime.CurrentState</CurrentStateEndpoint>' .
-            '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
+        $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>'.
+            '<GoalState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '.
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">'.
+            '<Incarnation>1</Incarnation>'.
+            '<ExpectedState>Started</ExpectedState>'.
+            '<RoleEnvironmentPath></RoleEnvironmentPath>'.
+            '<CurrentStateEndpoint>\\.\pipe\WindowsAzureRuntime.CurrentState</CurrentStateEndpoint>'.
+            '<Deadline>9999-12-31T23:59:59.9999999</Deadline>'.
             '</GoalState>';
 
-        $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
-        
+        $goalStateFileContent = dechex(strlen($goalStateFileContent))."\n".$goalStateFileContent;
+
         // Setup
-        vfsStreamWrapper::register(); 
+        vfsStreamWrapper::register();
         vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
-        
+
         $file = vfsStream::newFile($fileName);
-        $file->setContent($goalStateFileContent); 
-        
+        $file->setContent($goalStateFileContent);
+
         vfsStreamWrapper::getRoot()->addChild($file);
-        
+
         // Test
         $fileInputChannel = new FileInputChannel();
         $goalStateDeserializer = new ChunkedGoalStateDeserializer();
@@ -88,13 +91,13 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
             null,
             $fileInputChannel
         );
-        
-        $runtimeGoalStateClient->setEndpoint(vfsStream::url($rootDirectory . '/' . $fileName));
-        
+
+        $runtimeGoalStateClient->setEndpoint(vfsStream::url($rootDirectory.'/'.$fileName));
+
         // Test
         $this->assertNotEquals(null, $runtimeGoalStateClient->getCurrentGoalState());
     }
-    
+
     /**
      * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::__construct
      * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::getRoleEnvironmentData
@@ -108,49 +111,49 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
 
         vfsStreamWrapper::register();
         vfsStreamWrapper::setRoot(new vfsStreamDirectory($rootDirectory));
-        
+
         $roleEnvironmentFileName = 'roleEnvironment';
-        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
-            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
-            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
-            '<Deployment id="id1" emulated="false" />' .
-            '<CurrentInstance id="geophotoapp_IN_0" roleName="geophotoapp" faultDomain="0" updateDomain="0">' .
-            '<ConfigurationSettings />' .
-            '<LocalResources>' .
-            '<LocalResource name="DiagnosticStore" path="somepath.DiagnosticStore" sizeInMB="4096" />' .
-            '</LocalResources>' .
-            '<Endpoints>' .
-            '<Endpoint name="HttpIn" address="10.114.250.21" port="80" protocol="tcp" />' .
-            '</Endpoints>' .
-            '</CurrentInstance>' .
-            '<Roles />' .
+        $roleEnvironmentFileContent = '<?xml version="1.0" encoding="utf-8"?>'.
+            '<RoleEnvironment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '.
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">'.
+            '<Deployment id="id1" emulated="false" />'.
+            '<CurrentInstance id="geophotoapp_IN_0" roleName="geophotoapp" faultDomain="0" updateDomain="0">'.
+            '<ConfigurationSettings />'.
+            '<LocalResources>'.
+            '<LocalResource name="DiagnosticStore" path="somepath.DiagnosticStore" sizeInMB="4096" />'.
+            '</LocalResources>'.
+            '<Endpoints>'.
+            '<Endpoint name="HttpIn" address="10.114.250.21" port="80" protocol="tcp" />'.
+            '</Endpoints>'.
+            '</CurrentInstance>'.
+            '<Roles />'.
             '</RoleEnvironment>';
-        
+
         $file = vfsStream::newFile($roleEnvironmentFileName);
         $file->setContent($roleEnvironmentFileContent);
-        
+
         vfsStreamWrapper::getRoot()->addChild($file);
-        
+
         $goalStateFileName = 'goalstate';
-        $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>' .
-            '<GoalState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
-            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">' .
-            '<Incarnation>1</Incarnation>' .
-            '<ExpectedState>Started</ExpectedState>' .
-            '<RoleEnvironmentPath>' . 
-            vfsStream::url($rootDirectory . '/' . $roleEnvironmentFileName) . 
-            '</RoleEnvironmentPath>' .
-            '<CurrentStateEndpoint>\\.\pipe\WindowsAzureRuntime.CurrentState</CurrentStateEndpoint>' .
-            '<Deadline>9999-12-31T23:59:59.9999999</Deadline>' .
+        $goalStateFileContent = '<?xml version="1.0" encoding="utf-8"?>'.
+            '<GoalState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '.
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema">'.
+            '<Incarnation>1</Incarnation>'.
+            '<ExpectedState>Started</ExpectedState>'.
+            '<RoleEnvironmentPath>'.
+            vfsStream::url($rootDirectory.'/'.$roleEnvironmentFileName).
+            '</RoleEnvironmentPath>'.
+            '<CurrentStateEndpoint>\\.\pipe\WindowsAzureRuntime.CurrentState</CurrentStateEndpoint>'.
+            '<Deadline>9999-12-31T23:59:59.9999999</Deadline>'.
             '</GoalState>';
 
-        $goalStateFileContent = dechex(strlen($goalStateFileContent)) . "\n" . $goalStateFileContent;
-        
+        $goalStateFileContent = dechex(strlen($goalStateFileContent))."\n".$goalStateFileContent;
+
         $file = vfsStream::newFile($goalStateFileName);
-        $file->setContent($goalStateFileContent); 
-        
+        $file->setContent($goalStateFileContent);
+
         vfsStreamWrapper::getRoot()->addChild($file);
-        
+
         // Test
         $fileInputChannel = new FileInputChannel();
         $goalStateDeserializer = new ChunkedGoalStateDeserializer();
@@ -162,13 +165,13 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
             $roleEnvironmentDeserializer,
             $fileInputChannel
         );
-        
-        $runtimeGoalStateClient->setEndpoint(vfsStream::url($rootDirectory . '/' . $goalStateFileName));
-        
+
+        $runtimeGoalStateClient->setEndpoint(vfsStream::url($rootDirectory.'/'.$goalStateFileName));
+
         // Test
         $this->assertNotEquals(null, $runtimeGoalStateClient->getRoleEnvironmentData());
     }
-    
+
     /**
      * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::setKeepOpen
      * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::getKeepOpen
@@ -190,7 +193,7 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
         $runtimeGoalStateClient->setKeepOpen(false);
         $this->assertEquals(false, $runtimeGoalStateClient->getKeepOpen());
     }
-    
+
     /**
      * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::setEndpoint
      * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::getEndpoint
@@ -213,4 +216,3 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('endpoint2', $runtimeGoalStateClient->getEndpoint());
     }
 }
-

@@ -31,43 +31,40 @@
 
 require_once '..\client\client.php';
 use Client\CloudSubscription;
-use Client\CloudTable;
-use WindowsAzure\Common\Internal\Utilities;
-use MicrosoftAzure\Storage\Table\Models\EdmType;
 
 date_default_timezone_set('America/Los_Angeles');
 
-$subscriptionId      = 'Your subscription';
-$certificatePath     = 'Certificate path';
-$storageServiceName  = 'phpsdkexamples'; // the storage account will be created if it does not exist
+$subscriptionId = 'Your subscription';
+$certificatePath = 'Certificate path';
+$storageServiceName = 'phpsdkexamples'; // the storage account will be created if it does not exist
 
-$tasksTableName      = 'tasks';
-$cloudSubscription   = null;
+$tasksTableName = 'tasks';
+$cloudSubscription = null;
 $cloudStorageService = null;
-$cloudTable          = null;
+$cloudTable = null;
 
 // Initialize;
-$cloudSubscription   = new CloudSubscription($subscriptionId, $certificatePath);
+$cloudSubscription = new CloudSubscription($subscriptionId, $certificatePath);
 $cloudStorageService = $cloudSubscription->createStorageService($storageServiceName);
-$cloudTable          = $cloudStorageService->createTable($tasksTableName);
+$cloudTable = $cloudStorageService->createTable($tasksTableName);
 
 if (array_key_exists('Completed', $_POST)) {
     // Remove completed item.
     $completed = $_POST['Completed'];
     $cloudTable->deleteEntity($_POST['PartitionKey'], $completed);
-} else if (array_key_exists('AddItem', $_POST)) {
-    $item             = $_POST['item'];
+} elseif (array_key_exists('AddItem', $_POST)) {
+    $item = $_POST['item'];
     $item['Complete'] = '0';
     $cloudTable->insertTypelessEntity($item);
-} else if (array_key_exists('ClearList', $_POST)) {
+} elseif (array_key_exists('ClearList', $_POST)) {
     // Remove the table service.
-    $deleted    = $cloudStorageService->deleteTable($tasksTableName);
+    $deleted = $cloudStorageService->deleteTable($tasksTableName);
     $cloudTable = null;
     if ($deleted) {
         // Sleep until the table is deleted
         sleep(5);
     }
-} else if (array_key_exists('DestroyList', $_POST)) {
+} elseif (array_key_exists('DestroyList', $_POST)) {
     // Clean and remove the storage service.
     $cloudSubscription->deleteStorageService($storageServiceName);
     $cloudSubscription = null;
@@ -79,13 +76,13 @@ if (!is_null($cloudTable)) {
 
 function listEntries($cloudTable)
 {
-    $result         = $cloudTable->queryEntities();
-    $entities       = $result->getEntities();
+    $result = $cloudTable->queryEntities();
+    $entities = $result->getEntities();
 
     foreach ($entities as $entity) {
-        $name     = $entity->getPropertyValue('Name');
+        $name = $entity->getPropertyValue('Name');
         $category = $entity->getPropertyValue('Category');
-        $date     = $entity->getPropertyValue('Date');
+        $date = $entity->getPropertyValue('Date');
         $complete = $entity->getPropertyValue('RowKey');
         $partitionKey = $entity->getPropertyValue('PartitionKey');
         echo "<tr>

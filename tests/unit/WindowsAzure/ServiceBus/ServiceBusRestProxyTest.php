@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,25 +15,21 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceBus
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\ServiceBus;
+namespace Tests\unit\WindowsAzure\ServiceBus;
 
-use WindowsAzure\Common\Models\ServiceProperties;
-use Tests\Framework\TestResources;
 use Tests\Framework\ServiceBusRestProxyTestBase;
-use WindowsAzure\Common\Configuration;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceBus\ServiceBusRestProxy;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
-use WindowsAzure\ServiceBus\Models\BrokerProperties;
 use WindowsAzure\ServiceBus\Models\ListQueuesOptions;
 use WindowsAzure\ServiceBus\Models\ListRulesOptions;
 use WindowsAzure\ServiceBus\Models\ListTopicsOptions;
@@ -41,22 +37,21 @@ use WindowsAzure\ServiceBus\Models\ListSubscriptionsOptions;
 use WindowsAzure\ServiceBus\Models\QueueDescription;
 use WindowsAzure\ServiceBus\Models\QueueInfo;
 use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
-use WindowsAzure\ServiceBus\Models\RuleDescription;
 use WindowsAzure\ServiceBus\Models\RuleInfo;
-use WindowsAzure\ServiceBus\Models\SubscriptionDescription;
 use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
-use WindowsAzure\ServiceBus\Models\TopicDescription;
 use WindowsAzure\ServiceBus\Models\TopicInfo;
 
 /**
- * Unit tests for ServiceBusRestProxy class
+ * Unit tests for ServiceBusRestProxy class.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceBus
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
@@ -76,7 +71,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         // Assert
         $this->assertNotNull($queueInfo);
-    } 
+    }
 
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteQueue
@@ -95,7 +90,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         // Assert
         $this->assertNotNull($queueInfo);
     }
-    
+
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteQueue
      */
@@ -109,7 +104,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         // Test
         $this->restProxy->deleteQueue($queueName);
-        
+
         // Assert
     }
 
@@ -124,8 +119,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $listQueuesOptions = new ListQueuesOptions();
         $listQueuesResult = $this->restProxy->listQueues($listQueuesOptions);
 
-        foreach ($listQueuesResult->getQueueInfos() as $queueInfo)
-        {
+        foreach ($listQueuesResult->getQueueInfos() as $queueInfo) {
             $this->restProxy->deleteQueue($queueInfo->getTitle());
         }
 
@@ -141,7 +135,6 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             0,
             count($listQueuesResult->getQueueInfos())
         );
-        
     }
 
     /**
@@ -157,8 +150,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $listQueuesOptions = new ListQueuesOptions();
         $listQueuesResult = $this->restProxy->listQueues($listQueuesOptions);
 
-        foreach ($listQueuesResult->getQueueInfos() as $queueInfo)
-        {
+        foreach ($listQueuesResult->getQueueInfos() as $queueInfo) {
             $this->restProxy->deleteQueue($queueInfo->getTitle());
         }
         $this->restProxy->createQueue($createQueueInfo);
@@ -172,10 +164,8 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             1,
             count($listQueuesResult->getQueueInfos())
         );
-
-         
     }
-    
+
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::sendQueueMessage
      */
@@ -191,20 +181,19 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         // Test
         $this->restProxy->sendQueueMessage(
-            'sendQueueMessageWorksQueue', 
+            'sendQueueMessageWorksQueue',
             $brokeredMessage
         );
 
         // Assert
         $this->assertNotNull($brokeredMessage);
-        
     }
 
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveMessage
      */
     public function testReceiveMessageWorks()
-    {   
+    {
         // Setup
         $queueDescription = new QueueDescription();
         $queueName = 'testReceiveMessageWorksQueue';
@@ -253,11 +242,11 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->restProxy->sendQueueMessage($queueName, $brokeredMessage);
         $receiveMessageOptions = new ReceiveMessageOptions();
         $receiveMessageOptions->setTimeout(5);
-        $receiveMessageOptions->setPeekLock(); 
+        $receiveMessageOptions->setPeekLock();
 
         // Test
         $receivedMessage = $this->restProxy->receiveQueueMessage(
-            $queueName, 
+            $queueName,
             $receiveMessageOptions
         );
 
@@ -266,7 +255,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->assertEquals(
             $expectedMessage,
             $actualMessage
-        );         
+        );
     }
 
     /**
@@ -309,7 +298,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->restProxy->sendQueueMessage($queueName, $brokeredMessage);
         $receiveMessageOptions = new ReceiveMessageOptions();
         $receiveMessageOptions->setTimeout(5);
-        $receiveMessageOptions->setPeekLock(); 
+        $receiveMessageOptions->setPeekLock();
         $receivedMessage = $this->restProxy->receiveQueueMessage(
             $queueName,
             $receiveMessageOptions
@@ -323,7 +312,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveQueueMessage
      */
-    public function testPeekLockedMessageCanBeCompleted() 
+    public function testPeekLockedMessageCanBeCompleted()
     {
         // Setup
         $queueDescription = new QueueDescription();
@@ -336,7 +325,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $brokeredMessage->setBody($expectedMessage);
 
         $this->restProxy->sendQueueMessage(
-            $queueName, 
+            $queueName,
             $brokeredMessage
         );
 
@@ -346,7 +335,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         // Test
         $receivedMessage = $this->restProxy->receiveQueueMessage(
-            $queueName, 
+            $queueName,
             $receiveMessageOptions
         );
 
@@ -355,7 +344,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $lockedUntil = $receivedMessage->getLockedUntilUtc();
         $this->assertNotNull($lockToken);
         $this->assertNotNull($lockedUntil);
-    } 
+    }
 
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::unlockMessage
@@ -376,7 +365,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $receiveMessageOptions->setTimeout(5);
         $receiveMessageOptions->setPeekLock();
         $peekedMessage = $this->restProxy->receiveQueueMessage(
-            $queueName, 
+            $queueName,
             $receiveMessageOptions
         );
         $lockToken = $peekedMessage->getLockToken();
@@ -395,7 +384,6 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->assertNotNull($lockedUntilUtc);
         $this->assertNull($unlockedMessage->getLockToken());
         $this->assertNull($unlockedMessage->getLockedUntilUtc());
-        
     }
 
     /**
@@ -413,7 +401,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->createQueue($queueInfo);
         $expectedMessage = new BrokeredMessage();
         $expectedMessage->setBody('<data>testContentTypePassesThrough</data>');
-        $expectedMessage->setContentType(Resources::XML_CONTENT_TYPE); 
+        $expectedMessage->setContentType(Resources::XML_CONTENT_TYPE);
         $receiveMessageOptions = new ReceiveMessageOptions();
         $receiveMessageOptions->setTimeout(5);
         $receiveMessageOptions->setReceiveAndDelete();
@@ -421,7 +409,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         // Test
         $this->restProxy->sendQueueMessage($queueName, $expectedMessage);
         $actualMessage = $this->restProxy->receiveQueueMessage(
-            $queueName, 
+            $queueName,
             $receiveMessageOptions
         );
 
@@ -429,7 +417,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->assertEquals(
             $expectedMessage->getBody(),
             $actualMessage->getBody()
-        ); 
+        );
 
         $this->assertEquals(
             $expectedMessage->getContentType(),
@@ -451,8 +439,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $listTopicsOptions = new ListTopicsOptions();
         $listTopicsResult = $this->restProxy->listTopics($listTopicsOptions);
 
-        foreach ($listTopicsResult->getTopicInfos() as $topicInfo)
-        {
+        foreach ($listTopicsResult->getTopicInfos() as $topicInfo) {
             $this->restProxy->deleteTopic($topicInfo->getTitle());
         }
 
@@ -488,7 +475,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->safeDeleteSubscription($topicName, $subscriptionName);
         $this->safeDeleteTopic($topicName);
         $this->createTopic($topicInfo);
-         
+
         // Test
         $subscriptionInfo = $this->createSubscription(
             $topicName,
@@ -501,8 +488,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $subscriptionName,
             $subscriptionInfo->getTitle()
         );
-
-    } 
+    }
 
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listSubscriptions
@@ -516,7 +502,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $subscriptionInfo = new SubscriptionInfo($subscriptionName);
         $listSubscriptionOptions = new ListSubscriptionsOptions();
         $this->safeDeleteSubscription($topicName, $subscriptionName);
-        $this->safeDeleteTopic($topicName); 
+        $this->safeDeleteTopic($topicName);
         $this->createTopic($topicInfo);
         $this->createSubscription($topicName, $subscriptionInfo);
 
@@ -551,7 +537,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         // Test
         $subscriptionInfo = $this->restProxy->getSubscription(
-            $topicName, 
+            $topicName,
             $subscriptionName
         );
 
@@ -574,7 +560,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $subscriptionName = 'MySubscription';
         $subscriptionInfo = new SubscriptionInfo($subscriptionName);
         $listSubscriptionsOptions = new ListSubscriptionsOptions();
-        $this->safeDeleteSubscription($topicName, $subscriptionName); 
+        $this->safeDeleteSubscription($topicName, $subscriptionName);
         $this->safeDeleteTopic($topicName);
         $this->createTopic($topicInfo);
         $this->createSubscription($topicName, $subscriptionInfo);
@@ -592,8 +578,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->assertEquals(
             0,
             count($subscriptionInfo)
-        ); 
-        
+        );
     }
 
     /**
@@ -613,7 +598,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $secondSubscriptionInfo =
             new SubscriptionInfo($secondSubscriptionName);
         $listSubscriptionOptions = new ListSubscriptionsOptions();
-        
+
         $this->createTopic($topicInfo);
         $this->createSubscription($topicName, $subscriptionInfo);
         $this->createSubscription($topicName, $secondSubscriptionInfo);
@@ -635,7 +620,6 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         );
 
         $emptySubscriptionInfo = $emptyListSubscriptionsResult->getSubscriptionInfos();
-
 
         // Assert
         $this->assertNotNull($listSubscriptionsResult);
@@ -752,7 +736,6 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $ruleName,
             $ruleInfo->getTitle()
         );
-    
     }
 
     /**
@@ -786,7 +769,6 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         // Assert
         $this->assertNotNull($listRulesResult);
         $this->assertEquals(3, count($listRulesResult->getRuleInfos()));
-        
     }
 
     /**
@@ -801,15 +783,15 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $subscriptionInfo = new SubscriptionInfo($subscriptionName);
         $this->safeDeleteSubscription($topicName, $subscriptionName);
         $this->safeDeleteTopic($topicName);
-        $this->createTopic($topicInfo); 
+        $this->createTopic($topicInfo);
         $this->createSubscription($topicName, $subscriptionInfo);
 
         // Test
         $getRuleResult = $this->restProxy->getRule($topicName, $subscriptionName, Resources::DEFAULT_RULE_NAME);
-        
+
         // Assert
         $this->assertNotNull($getRuleResult);
-    } 
+    }
 
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getRule
@@ -822,13 +804,13 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $subscriptionName = 'sub';
         $firstRuleName = 'RuleNumberOne';
         $secondRuleName = 'RuleNumberTwo';
-        
+
         $topicInfo = new TopicInfo($topicName);
         $subscriptionInfo = new SubscriptionInfo($subscriptionName);
         $firstRuleInfo = new RuleInfo($firstRuleName);
         $secondRuleInfo = new RuleInfo($secondRuleName);
         $listRulesOptions = new ListRulesOptions();
-        
+
         $this->safeDeleteSubscription($topicName, $subscriptionName);
         $this->safeDeleteTopic($topicName);
 
@@ -840,7 +822,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         // Test
         $this->restProxy->deleteRule($topicName, $subscriptionName, $secondRuleName);
         $this->restProxy->deleteRule($topicName, $subscriptionName, $firstRuleName);
-        $this->restProxy->deleteRule($topicName, $subscriptionName, Resources::DEFAULT_RULE_NAME); 
+        $this->restProxy->deleteRule($topicName, $subscriptionName, Resources::DEFAULT_RULE_NAME);
 
         $listRulesResult = $this->restProxy->listRules($topicName, $subscriptionName, $listRulesOptions);
         $ruleInfo = $listRulesResult->getRuleInfos();
@@ -858,17 +840,17 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::create
      * @covers WindowsAzure\ServiceBus\Models\RuleInfo::parseXml
      * @covers WindowsAzure\ServiceBus\Models\RuleDescription::create
-     */ 
+     */
     public function testListRulesDeserializePropertiesOfSqlFilter()
     {
         // Setup
-        $topicName = 'testListRulesDeserializePropertiesOfSqlFilter';         
+        $topicName = 'testListRulesDeserializePropertiesOfSqlFilter';
         $subscriptionName = 'sub';
         $expected = 'OrderID=123';
 
         $topicInfo = new TopicInfo($topicName);
         $subscriptionInfo = new SubscriptionInfo($subscriptionName);
-        $this->safeDeleteSubscription($topicName, $subscriptionName); 
+        $this->safeDeleteSubscription($topicName, $subscriptionName);
         $this->safeDeleteTopic($topicName);
 
         $createTopicResult = $this->createTopic($topicInfo);
@@ -879,7 +861,6 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $rule = new RuleInfo('one');
         $rule->withSqlFilter('OrderID=123');
         $this->restProxy->createRule($topicName, $subscriptionName, $rule);
-
 
         // Test
         $listRulesResult = $this->restProxy->listRules($topicName, $subscriptionName);
@@ -893,9 +874,8 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $expected,
             $actual
         );
-        
     }
-   
+
     /**
      * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getRule
      */
@@ -907,11 +887,11 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         $topicInfo = new TopicInfo($topicName);
         $subscriptionInfo = new SubscriptionInfo($subscriptionName);
-        $this->safeDeleteSubscription($topicName, $subscriptionName); 
+        $this->safeDeleteSubscription($topicName, $subscriptionName);
         $this->safeDeleteTopic($topicName);
 
         $createTopicResult = $this->createTopic($topicInfo);
-        $subscriptionInfo  = $this->createSubscription(
+        $subscriptionInfo = $this->createSubscription(
             $topicName,
             $subscriptionInfo
         );
@@ -920,52 +900,52 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         $expectedRuleTwo = new RuleInfo('two');
         $expectedRuleTwo->withTrueFilter();
-        
+
         $expectedRuleThree = new RuleInfo('three');
         $expectedRuleThree->withFalseFilter();
 
         $expectedRuleFour = new RuleInfo('four');
         $expectedRuleFour->withEmptyRuleAction();
 
-        $expectedRuleFive = new RuleInfo('five'); 
+        $expectedRuleFive = new RuleInfo('five');
         $expectedRuleFive->withSqlRuleAction('SET x = 5');
 
         $expectedRuleSix = new RuleInfo('six');
         $expectedRuleSix->withSqlFilter('x != 5');
-        
+
         // Test
         $actualRuleOne = $this->restProxy->createRule(
-            $topicName, 
+            $topicName,
             $subscriptionName,
             $expectedRuleOne
-        ); 
-            
+        );
+
         $actualRuleTwo = $this->restProxy->createRule(
-            $topicName, 
+            $topicName,
             $subscriptionName,
             $expectedRuleTwo
         );
 
         $actualRuleThree = $this->restProxy->createRule(
-            $topicName, 
+            $topicName,
             $subscriptionName,
             $expectedRuleThree
         );
 
         $actualRuleFour = $this->restProxy->createRule(
-            $topicName, 
+            $topicName,
             $subscriptionName,
             $expectedRuleFour
         );
 
         $actualRuleFive = $this->restProxy->createRule(
-            $topicName, 
+            $topicName,
             $subscriptionName,
             $expectedRuleFive
         );
 
         $actualRuleSix = $this->restProxy->createRule(
-            $topicName, 
+            $topicName,
             $subscriptionName,
             $expectedRuleSix
         );
@@ -973,7 +953,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         // Assert
         $this->assertNotNull($createTopicResult);
         $this->assertNotNull($subscriptionInfo);
-        
+
         $this->assertInstanceOf(
             'WindowsAzure\ServiceBus\Models\CorrelationFilter',
             $actualRuleOne->getFilter()
@@ -998,7 +978,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             'WindowsAzure\ServiceBus\Models\SqlRuleAction',
             $actualRuleFive->getAction()
         );
-                  
+
         $this->assertInstanceOf(
             'WindowsAzure\ServiceBus\Models\SqlFilter',
             $actualRuleSix->getFilter()
@@ -1019,12 +999,12 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $expectedTestDoubleValue = 3.14159;
         $expectedTestBooleanValue = true;
         $expectedTestBooleanFalseValue = false;
-        $expectedTestArrayValue = array(2,3,5,7);
+        $expectedTestArrayValue = array(2, 3, 5, 7);
 
         $this->safeDeleteQueue($queueName);
         $this->createQueue($queueInfo);
         $brokeredMessage = new BrokeredMessage();
-        
+
         $brokeredMessage->setProperty('testString', $expectedTestStringValue);
         $brokeredMessage->setProperty('testInt', $expectedTestIntValue);
         $brokeredMessage->setProperty('testDouble', $expectedTestDoubleValue);
@@ -1038,7 +1018,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         // Test
         $receivedMessage = $this->restProxy->receiveQueueMessage(
-            $queueName, 
+            $queueName,
             $receiveMessageOptions
         );
 
@@ -1068,8 +1048,5 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
             $expectedTestBooleanFalseValue,
             $receivedMessage->getProperty('testBooleanFalse')
         );
-
     }
 }
-
-
