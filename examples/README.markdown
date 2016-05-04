@@ -24,6 +24,6 @@ see https://azure.microsoft.com/en-us/blog/introducing-the-windows-azure-service
 # Run the Media Services examples
 * Open MediaServices\userconfig.php, enter "Media Service Account Name" and "Primary Media Service access key" for your Media Service from the Azure portal. 
 
-* In the example directory, run
+* In the examples directory, run
 
    php MediaServices\%sample_name%.php
