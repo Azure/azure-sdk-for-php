@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,34 +14,38 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices\Models;
+namespace Tests\unit\WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\MediaServices\Models\AssetFile;
 
 /**
- * Represents access policy object used in media services
+ * Represents access policy object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 class AssetFileTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\MediaServices\Models\AssetFile::__construct
      */
-    public function test__construct(){
+    public function test__construct()
+    {
 
         // Setup
         $name = 'Name';
@@ -55,29 +59,31 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($assetId, $result->getParentAssetId());
     }
 
-    /**
-     * @covers WindowsAzure\MediaServices\Models\AssetFile::getContentCheckSum
-     * @covers WindowsAzure\MediaServices\Models\AssetFile::setContentCheckSum
-     */
-     public function testGetContentCheckSum(){
+     /**
+      * @covers WindowsAzure\MediaServices\Models\AssetFile::getContentCheckSum
+      * @covers WindowsAzure\MediaServices\Models\AssetFile::setContentCheckSum
+      */
+     public function testGetContentCheckSum()
+     {
 
       // Setup
       $assetFile = new AssetFile('Name', 'AssetId');
-      $expected = 'CheckSum';
-      $assetFile->setContentCheckSum($expected);
+         $expected = 'CheckSum';
+         $assetFile->setContentCheckSum($expected);
 
       // Test
       $actual = $assetFile->getContentCheckSum();
 
       // Assert
-      $this->assertEquals($expected,$actual);
-  }
+      $this->assertEquals($expected, $actual);
+     }
 
-     /**
-     * @covers WindowsAzure\MediaServices\Models\AssetFile::getMimeType
-     * @covers WindowsAzure\MediaServices\Models\AssetFile::setMimeType
-     */
-  public function testGetMimeType(){
+  /**
+   * @covers WindowsAzure\MediaServices\Models\AssetFile::getMimeType
+   * @covers WindowsAzure\MediaServices\Models\AssetFile::setMimeType
+   */
+  public function testGetMimeType()
+  {
 
       // Setup
       $assetFile = new AssetFile('Name', 'AssetId');
@@ -88,19 +94,20 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
       $actual = $assetFile->getMimeType();
 
       // Assert
-      $this->assertEquals($expected,$actual);
+      $this->assertEquals($expected, $actual);
   }
 
-   /**
+  /**
    * @covers WindowsAzure\MediaServices\Models\AssetFile::getLastModified
    */
-  public function testGetLastModified() {
+  public function testGetLastModified()
+  {
 
       // Setup
       $assetFileArray = array(
-          'Name'              => 'NameName',
-          'ParentAssetId'     => 'ksfg78',
-          'LastModified'           => '2013-11-21'
+          'Name' => 'NameName',
+          'ParentAssetId' => 'ksfg78',
+          'LastModified' => '2013-11-21',
       );
       $modified = new \Datetime($assetFileArray['LastModified']);
       $result = AssetFile::createFromOptions($assetFileArray);
@@ -115,13 +122,14 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   /**
    * @covers WindowsAzure\MediaServices\Models\AssetFile::getCreated
    */
-  public function testGetCreated() {
+  public function testGetCreated()
+  {
 
       // Setup
       $assetFileArray = array(
-          'Name'              => 'NameName',
-          'ParentAssetId'     => 'ksfg78',
-          'Created'           => '2013-11-21'
+          'Name' => 'NameName',
+          'ParentAssetId' => 'ksfg78',
+          'Created' => '2013-11-21',
       );
       $created = new \Datetime($assetFileArray['Created']);
       $result = AssetFile::createFromOptions($assetFileArray);
@@ -137,12 +145,13 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
    * @covers WindowsAzure\MediaServices\Models\AssetFile::getIsPrimary
    * @covers WindowsAzure\MediaServices\Models\AssetFile::setIsPrimary
    */
-  public function testGetIsPrimary() {
+  public function testGetIsPrimary()
+  {
 
       // Setup
       $assetFile = new AssetFile('Name', 'AssetId');
       $IsPrimary = true;
-      $assetFile ->setIsPrimary($IsPrimary);
+      $assetFile->setIsPrimary($IsPrimary);
 
       // Test
       $actual = $assetFile->getIsPrimary();
@@ -155,15 +164,16 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
    * @covers WindowsAzure\MediaServices\Models\AssetFile::getInitializationVector
    * @covers WindowsAzure\MediaServices\Models\AssetFile::setInitializationVector
    */
-  public function testGetInitializationVector(){
+  public function testGetInitializationVector()
+  {
 
       // Setup
-      $assetFile  = new AssetFile('Name', 'AssetId');
+      $assetFile = new AssetFile('Name', 'AssetId');
       $vector = 'vector';
-      $assetFile ->setInitializationVector($vector);
+      $assetFile->setInitializationVector($vector);
 
       // Test
-      $actual = $assetFile ->getInitializationVector();
+      $actual = $assetFile->getInitializationVector();
 
       // Assert
       $this->assertEquals($vector, $actual);
@@ -173,15 +183,16 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
    * @covers WindowsAzure\MediaServices\Models\AssetFile::getEncryptionKeyId
    * @covers WindowsAzure\MediaServices\Models\AssetFile::setEncryptionKeyId
    */
-  public function testGetEncryptionKeyId(){
+  public function testGetEncryptionKeyId()
+  {
 
       // Setup
-      $assetFile  = new AssetFile('Name', 'AssetId');
+      $assetFile = new AssetFile('Name', 'AssetId');
       $id = 'encrypted';
-      $assetFile ->setEncryptionKeyId($id);
+      $assetFile->setEncryptionKeyId($id);
 
       // Test
-      $actual = $assetFile ->getEncryptionKeyId();
+      $actual = $assetFile->getEncryptionKeyId();
 
       // Assert
       $this->assertEquals($id, $actual);
@@ -191,15 +202,16 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
    * @covers WindowsAzure\MediaServices\Models\AssetFile::getIsEncrypted
    * @covers WindowsAzure\MediaServices\Models\AssetFile::setIsEncrypted
    */
-  public function testGetIsEncrypted() {
+  public function testGetIsEncrypted()
+  {
 
       // Setup
-      $assetFile  = new AssetFile('Name', 'AssetId');
+      $assetFile = new AssetFile('Name', 'AssetId');
       $IsEncr = true;
-      $assetFile ->setIsEncrypted($IsEncr);
+      $assetFile->setIsEncrypted($IsEncr);
 
       // Test
-      $actual = $assetFile ->getIsEncrypted();
+      $actual = $assetFile->getIsEncrypted();
 
       // Assert
       $this->assertEquals($IsEncr, $actual);
@@ -209,15 +221,16 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
    * @covers WindowsAzure\MediaServices\Models\AssetFile::getEncryptionScheme
    * @covers WindowsAzure\MediaServices\Models\AssetFile::setEncryptionScheme
    */
-  public function testGetEncryptionScheme() {
+  public function testGetEncryptionScheme()
+  {
 
       // Setup
-      $assetFile  = new AssetFile('Name', 'AssetId');
+      $assetFile = new AssetFile('Name', 'AssetId');
       $scheme = 'scheme';
-      $assetFile ->setEncryptionScheme($scheme);
+      $assetFile->setEncryptionScheme($scheme);
 
       // Test
-      $actual = $assetFile ->getEncryptionScheme();
+      $actual = $assetFile->getEncryptionScheme();
 
       // Assert
       $this->assertEquals($scheme, $actual);
@@ -227,15 +240,16 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
    * @covers WindowsAzure\MediaServices\Models\AssetFile::getEncryptionVersion
    * @covers WindowsAzure\MediaServices\Models\AssetFile::setEncryptionVersion
    */
-  public function testGetEncryptionVersion() {
+  public function testGetEncryptionVersion()
+  {
 
       // Setup
-      $assetFile  = new AssetFile('Name', 'AssetId');
+      $assetFile = new AssetFile('Name', 'AssetId');
       $ver = '2.3.0';
-      $assetFile ->setEncryptionVersion($ver);
+      $assetFile->setEncryptionVersion($ver);
 
       // Test
-      $actual = $assetFile ->getEncryptionVersion();
+      $actual = $assetFile->getEncryptionVersion();
 
       // Assert
       $this->assertEquals($ver, $actual);
@@ -245,15 +259,16 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
    * @covers WindowsAzure\MediaServices\Models\AssetFile::getParentAssetId
    * @covers WindowsAzure\MediaServices\Models\AssetFile::setParentAssetId
    */
-  public function testGetParentAssetId() {
+  public function testGetParentAssetId()
+  {
 
        // Setup
-      $assetFile  = new AssetFile('Name', 'AssetId');
+      $assetFile = new AssetFile('Name', 'AssetId');
       $id = '256';
-      $assetFile ->setParentAssetId($id);
+      $assetFile->setParentAssetId($id);
 
       // Test
-      $actual = $assetFile ->getParentAssetId();
+      $actual = $assetFile->getParentAssetId();
 
       // Assert
       $this->assertEquals($id, $actual);
@@ -263,15 +278,16 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
    * @covers WindowsAzure\MediaServices\Models\AssetFile::getContentFileSize
    * @covers WindowsAzure\MediaServices\Models\AssetFile::setContentFileSize
    */
-  public function testGetContentFileSize() {
+  public function testGetContentFileSize()
+  {
 
       // Setup
-      $assetFile  = new AssetFile('Name', 'AssetId');
+      $assetFile = new AssetFile('Name', 'AssetId');
       $size = 256;
-      $assetFile ->setContentFileSize($size);
+      $assetFile->setContentFileSize($size);
 
       // Test
-      $actual = $assetFile ->getContentFileSize();
+      $actual = $assetFile->getContentFileSize();
 
       // Assert
       $this->assertEquals($size, $actual);
@@ -281,15 +297,16 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
    * @covers WindowsAzure\MediaServices\Models\AssetFile::getName
    * @covers WindowsAzure\MediaServices\Models\AssetFile::setName
    */
-  public function testGetName() {
+  public function testGetName()
+  {
 
       // Setup
-      $assetFile  = new AssetFile('Name', 'AssetId');
+      $assetFile = new AssetFile('Name', 'AssetId');
       $name = 'NewName';
-      $assetFile ->setName($name);
+      $assetFile->setName($name);
 
       // Test
-      $actual = $assetFile ->getName();
+      $actual = $assetFile->getName();
 
       // Assert
       $this->assertEquals($name, $actual);
@@ -298,13 +315,14 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   /**
    * @covers WindowsAzure\MediaServices\Models\AssetFile::getId
    */
-  public function testGetId() {
+  public function testGetId()
+  {
 
      // Setup
       $assetFileArray = array(
-          'Id'                => 'kjdfgh56',
-          'Name'              => 'NameName',
-          'ParentAssetId'     => 'ksfg78'
+          'Id' => 'kjdfgh56',
+          'Name' => 'NameName',
+          'ParentAssetId' => 'ksfg78',
       );
       $result = AssetFile::createFromOptions($assetFileArray);
 
@@ -319,24 +337,25 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
    * @covers WindowsAzure\MediaServices\Models\AssetFile::createFromOptions
    * @covers WindowsAzure\MediaServices\Models\AssetFile::fromArray
    */
-  public function testAssetFileFromOptions(){
+  public function testAssetFileFromOptions()
+  {
 
       // Setup
       $assetFileArray = array(
-          'Id'                           => 'dfhdgh56',
-          'Name'                         => 'newAssetFile',
-          'ContentFileSize'              => '20 mb',
-          'ParentAssetId'                => 'kdjfg67',
-          'EncryptionVersion'            => 'EncryptionVersion',
-          'EncryptionScheme'             => 'EnryptionScheme',
-          'IsEncrypted'                  => true,
-          'EncryptionKeyId'              => 'keyId896',
-          'InitializationVector'         => 'InitVector',
-          'IsPrimary'                    => true,
-          'LastModified'                 => '2013-11-19',
-          'Created'                      => '2013-11-19',
-          'MimeType'                     => 'type of mime',
-          'ContentChecksum'              => 'ContentChecksum'
+          'Id' => 'dfhdgh56',
+          'Name' => 'newAssetFile',
+          'ContentFileSize' => '20 mb',
+          'ParentAssetId' => 'kdjfg67',
+          'EncryptionVersion' => 'EncryptionVersion',
+          'EncryptionScheme' => 'EnryptionScheme',
+          'IsEncrypted' => true,
+          'EncryptionKeyId' => 'keyId896',
+          'InitializationVector' => 'InitVector',
+          'IsPrimary' => true,
+          'LastModified' => '2013-11-19',
+          'Created' => '2013-11-19',
+          'MimeType' => 'type of mime',
+          'ContentChecksum' => 'ContentChecksum',
       );
       $created = new \Datetime($assetFileArray['Created']);
       $modified = new \Datetime($assetFileArray['LastModified']);

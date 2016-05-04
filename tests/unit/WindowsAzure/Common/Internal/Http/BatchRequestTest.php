@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,39 +14,42 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal\Http
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Common\Internal\Http;
+namespace Tests\unit\WindowsAzure\Common\Internal\Http;
+
 use WindowsAzure\Common\Internal\Http\BatchRequest;
-use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
 
 /**
- * Unit tests for class HttpCallContext
+ * Unit tests for class HttpCallContext.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal\Http
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class BatchRequestTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @covers WindowsAzure\Common\Internal\Http\batchRequest::appendContext
      * @covers WindowsAzure\Common\Internal\Http\batchRequest::encode
      * @covers WindowsAzure\Common\Internal\Http\batchRequest::getBody
      * @covers WindowsAzure\Common\Internal\Http\batchRequest::__construct
      */
-    public function testAppendContext(){
+    public function testAppendContext()
+    {
 
         //  Setup
         $batchReq = new BatchRequest();
@@ -69,7 +72,8 @@ class BatchRequestTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\Common\Internal\Http\BatchRequest::getHeaders
      */
-    public function testGetHeaders(){
+    public function testGetHeaders()
+    {
 
         //  Setup
         $batchReq = new BatchRequest();
@@ -92,7 +96,8 @@ class BatchRequestTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\Common\Internal\Http\batchRequest::getContexts
      */
-    public function testGetContexts(){
+    public function testGetContexts()
+    {
 
         //  Setup
         $batchReq = new BatchRequest();
@@ -105,5 +110,4 @@ class BatchRequestTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($context, $result[0]);
     }
-
 }

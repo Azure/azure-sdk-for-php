@@ -22,6 +22,7 @@
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
+
 namespace WindowsAzure\Common\Internal\Authentication;
 
 use WindowsAzure\Common\Internal\Resources;

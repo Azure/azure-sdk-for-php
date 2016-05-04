@@ -261,7 +261,7 @@ spl_autoload_register(
             'windowsazure\\serviceruntime\\internal\\xmlcurrentstateserializer' => '/ServiceRuntime/Internal/XmlCurrentStateSerializer.php',
             'windowsazure\\serviceruntime\\internal\\xmlgoalstatedeserializer' => '/ServiceRuntime/Internal/XmlGoalStateDeserializer.php',
             'windowsazure\\serviceruntime\\internal\\xmlroleenvironmentdatadeserializer' => '/ServiceRuntime/Internal/XmlRoleEnvironmentDataDeserializer.php',
-            'windowsazure\\serviceruntime\\roleenvironment' => '/ServiceRuntime/RoleEnvironment.php'
+            'windowsazure\\serviceruntime\\roleenvironment' => '/ServiceRuntime/RoleEnvironment.php',
           );
       }
       $cn = strtolower($class);

@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,25 +15,29 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
+namespace Tests\unit\WindowsAzure\ServiceBus\models;
+
 use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
 
 /**
- * Unit tests for class WrapAccessTokenResult
+ * Unit tests for class WrapAccessTokenResult.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class ReceiveMessageOptionsTest extends \PHPUnit_Framework_TestCase
@@ -44,10 +48,10 @@ class ReceiveMessageOptionsTest extends \PHPUnit_Framework_TestCase
     public function testReceiveMessageOptionsConstructor()
     {
         // Setup
-        
+
         // Test
         $receiveMessageOptions = new ReceiveMessageOptions();
-        
+
         // Assert
         $this->assertNotNull($receiveMessageOptions);
     }
@@ -56,7 +60,8 @@ class ReceiveMessageOptionsTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::getTimeout
      * @covers WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::setTimeout
      */
-    public function testGetSetTimeout() {
+    public function testGetSetTimeout()
+    {
         // Setup
         $expected = 'testTimeout';
         $receiveMessageOptions = new ReceiveMessageOptions();
@@ -70,15 +75,14 @@ class ReceiveMessageOptionsTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
 
     /** 
      * @covers WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::getReceiveMode
      * @covers WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::setReceiveMode
      */
-    public function testGetSetReceiveMode() {
+    public function testGetSetReceiveMode()
+    {
         // Setup
         $expected = 'testReceiveMode';
         $receiveMessageOptions = new ReceiveMessageOptions();
@@ -92,9 +96,5 @@ class ReceiveMessageOptionsTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
 }
-
-

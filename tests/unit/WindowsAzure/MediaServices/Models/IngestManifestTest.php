@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,53 +14,56 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices\Models;
+namespace Tests\unit\WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\MediaServices\Models\IngestManifest;
 
 /**
- * Represents access policy object used in media services
+ * Represents access policy object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 class IngestManifestTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifest::createFromOptions
      * @covers WindowsAzure\MediaServices\Models\IngestManifest::fromArray
      */
-    public function testCreateFromOptions(){
+    public function testCreateFromOptions()
+    {
 
         // Setup
         $name = 'IngestManifest Name';
         $blobUri = 'http://blob-uri.com';
         $statistics = array(
-                'FinishedFilesCount'      => 2
+                'FinishedFilesCount' => 2,
         );
         $storageName = 'Storage Account Name-4236';
         $options = array(
-                'Id'                          => '46-jhgjh-589',
-                'State'                       => IngestManifest::STATE_ACTIVE,
-                'Created'                     => '2013-12-18',
-                'LastModified'                => '2013-12-18',
-                'Name'                        => $name,
-                'BlobStorageUriForUpload'     => $blobUri,
-                'Statistics'                  => $statistics,
-                'StorageAccountName'          => $storageName
+                'Id' => '46-jhgjh-589',
+                'State' => IngestManifest::STATE_ACTIVE,
+                'Created' => '2013-12-18',
+                'LastModified' => '2013-12-18',
+                'Name' => $name,
+                'BlobStorageUriForUpload' => $blobUri,
+                'Statistics' => $statistics,
+                'StorageAccountName' => $storageName,
         );
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
@@ -84,14 +87,15 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifest::getStatistics
      */
-    public function testGetStatistics(){
+    public function testGetStatistics()
+    {
 
         // Setup
         $statistics = array(
-                'FinishedFilesCount'      => 2
+                'FinishedFilesCount' => 2,
         );
         $options = array(
-                'Statistics'        => $statistics
+                'Statistics' => $statistics,
         );
         $ingestManifest = IngestManifest::createFromOptions($options);
 
@@ -105,12 +109,13 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifest::getBlobStorageUriForUpload
      */
-    public function testGetBlobStorageUriForUpload(){
+    public function testGetBlobStorageUriForUpload()
+    {
 
         // Setup
         $blobUri = 'http://blob-uri.com';
         $options = array(
-                'BlobStorageUriForUpload'     => $blobUri
+                'BlobStorageUriForUpload' => $blobUri,
         );
         $ingestManifest = IngestManifest::createFromOptions($options);
 
@@ -124,12 +129,13 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifest::getStorageAccountName
      */
-    public function testGetStorageAccountName(){
+    public function testGetStorageAccountName()
+    {
 
         // Setup
         $storageName = 'Storage-Account-Name-45236';
         $options = array(
-                'StorageAccountName'      => $storageName
+                'StorageAccountName' => $storageName,
         );
         $ingestManifest = IngestManifest::createFromOptions($options);
 
@@ -144,7 +150,8 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\IngestManifest::getName
      * @covers WindowsAzure\MediaServices\Models\IngestManifest::setName
      */
-    public function testSetGetName(){
+    public function testSetGetName()
+    {
 
         // Setup
         $name = 'Ingest Manifest Name-365';
@@ -161,11 +168,12 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifest::getLastModified
      */
-    public function testGetLastModified(){
+    public function testGetLastModified()
+    {
 
         // Setup
         $options = array(
-                'LastModified'      => '2013-12-18'
+                'LastModified' => '2013-12-18',
         );
         $modified = new \Datetime($options['LastModified']);
         $ingestManifest = IngestManifest::createFromOptions($options);
@@ -180,11 +188,12 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifest::getCreated
      */
-    public function testGetCreated(){
+    public function testGetCreated()
+    {
 
         // Setup
         $options = array(
-                'Created'     => '2013-12-18'
+                'Created' => '2013-12-18',
         );
         $created = new \Datetime($options['Created']);
         $ingestManifest = IngestManifest::createFromOptions($options);
@@ -199,12 +208,13 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifest::getState
      */
-    public function testGetState(){
+    public function testGetState()
+    {
 
         // Setup
         $state = IngestManifest::STATE_ACTIVE;
         $options = array(
-                'State'       => $state
+                'State' => $state,
         );
         $ingestManifest = IngestManifest::createFromOptions($options);
 
@@ -218,12 +228,13 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifest::getId
      */
-    public function testGetId(){
+    public function testGetId()
+    {
 
         // Setup
         $id = 'ingest-id-258';
         $options = array(
-                'Id'        => $id
+                'Id' => $id,
         );
         $ingestManifest = IngestManifest::createFromOptions($options);
 

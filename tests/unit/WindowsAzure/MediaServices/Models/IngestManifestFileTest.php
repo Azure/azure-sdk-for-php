@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,28 +14,31 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices\Models;
+namespace Tests\unit\WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\MediaServices\Models\IngestManifestFile;
 
 /**
- * Represents access policy object used in media services
+ * Represents access policy object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -43,7 +46,8 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::fromArray
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::__construct
      */
-    public function testCreateFromOptions(){
+    public function testCreateFromOptions()
+    {
 
         // Setup
         $id = 'manifest-file-id-897';
@@ -52,21 +56,21 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
         $options = array(
-                'Id'                              => $id,
-                'Name'                            => $name,
-                'EncryptionVersion'               => 'Encryption Version',
-                'EncryptionScheme'                => 'Encryption Scheme',
-                'IsEncrypted'                     => true,
-                'EncryptionKeyId'                 => $encryptionKeyId,
-                'InitializationVector'            => 'Initialization Vector',
-                'IsPrimary'                       => true,
-                'LastModified'                    => '2013-12-18',
-                'Created'                         => '2013-12-18',
-                'MimeType'                        => 'mime type',
-                'State'                           => IngestManifestFile::STATE_FINISHED,
-                'ParentIngestManifestId'          => $parentIngestManifestId,
-                'ParentIngestManifestAssetId'     => $parentIngestManifestAssetId,
-                'ErrorDetail'                     =>'Some error details'
+                'Id' => $id,
+                'Name' => $name,
+                'EncryptionVersion' => 'Encryption Version',
+                'EncryptionScheme' => 'Encryption Scheme',
+                'IsEncrypted' => true,
+                'EncryptionKeyId' => $encryptionKeyId,
+                'InitializationVector' => 'Initialization Vector',
+                'IsPrimary' => true,
+                'LastModified' => '2013-12-18',
+                'Created' => '2013-12-18',
+                'MimeType' => 'mime type',
+                'State' => IngestManifestFile::STATE_FINISHED,
+                'ParentIngestManifestId' => $parentIngestManifestId,
+                'ParentIngestManifestAssetId' => $parentIngestManifestAssetId,
+                'ErrorDetail' => 'Some error details',
         );
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
@@ -95,7 +99,8 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getId
      */
-    public function testGetId(){
+    public function testGetId()
+    {
 
         // Setup
         $id = 'manifest-file-id-897';
@@ -103,10 +108,10 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
         $options = array(
-                'Id'                              => $id,
-                'Name'                            => $name,
-                'ParentIngestManifestId'          => $parentIngestManifestId,
-                'ParentIngestManifestAssetId'     => $parentIngestManifestAssetId
+                'Id' => $id,
+                'Name' => $name,
+                'ParentIngestManifestId' => $parentIngestManifestId,
+                'ParentIngestManifestAssetId' => $parentIngestManifestAssetId,
         );
         $manifestFile = IngestManifestFile::createFromOptions($options);
 
@@ -120,17 +125,18 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getCreated
      */
-    public function testGetCreated(){
+    public function testGetCreated()
+    {
 
         // Setup
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
         $options = array(
-                'Name'                            => $name,
-                'Created'                         => '2013-12-18',
-                'ParentIngestManifestId'          => $parentIngestManifestId,
-                'ParentIngestManifestAssetId'     => $parentIngestManifestAssetId
+                'Name' => $name,
+                'Created' => '2013-12-18',
+                'ParentIngestManifestId' => $parentIngestManifestId,
+                'ParentIngestManifestAssetId' => $parentIngestManifestAssetId,
         );
         $created = new \Datetime($options['Created']);
         $manifestFile = IngestManifestFile::createFromOptions($options);
@@ -145,17 +151,18 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getLastModified
      */
-    public function testGetLastModified(){
+    public function testGetLastModified()
+    {
 
         // Setup
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
         $options = array(
-                'Name'                            => $name,
-                'LastModified'                    => '2013-12-18',
-                'ParentIngestManifestId'          => $parentIngestManifestId,
-                'ParentIngestManifestAssetId'     => $parentIngestManifestAssetId
+                'Name' => $name,
+                'LastModified' => '2013-12-18',
+                'ParentIngestManifestId' => $parentIngestManifestId,
+                'ParentIngestManifestAssetId' => $parentIngestManifestAssetId,
         );
         $modified = new \Datetime($options['LastModified']);
         $manifestFile = IngestManifestFile::createFromOptions($options);
@@ -170,7 +177,8 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getErrorDetail
      */
-    public function testGetErrorDetail(){
+    public function testGetErrorDetail()
+    {
 
         // Setup
         $errorDetail = 'Some error detail';
@@ -178,10 +186,10 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
         $options = array(
-                'Name'                            => $name,
-                'ParentIngestManifestId'          => $parentIngestManifestId,
-                'ParentIngestManifestAssetId'     => $parentIngestManifestAssetId,
-                'ErrorDetail'                     => $errorDetail
+                'Name' => $name,
+                'ParentIngestManifestId' => $parentIngestManifestId,
+                'ParentIngestManifestAssetId' => $parentIngestManifestAssetId,
+                'ErrorDetail' => $errorDetail,
         );
         $manifestFile = IngestManifestFile::createFromOptions($options);
 
@@ -195,7 +203,8 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getState
      */
-    public function testGetState(){
+    public function testGetState()
+    {
 
         // Setup
         $state = IngestManifestFile::STATE_FINISHED;
@@ -203,10 +212,10 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
         $options = array(
-                'Name'                            => $name,
-                'ParentIngestManifestId'          => $parentIngestManifestId,
-                'ParentIngestManifestAssetId'     => $parentIngestManifestAssetId,
-                'State'                           => $state
+                'Name' => $name,
+                'ParentIngestManifestId' => $parentIngestManifestId,
+                'ParentIngestManifestAssetId' => $parentIngestManifestAssetId,
+                'State' => $state,
         );
         $manifestFile = IngestManifestFile::createFromOptions($options);
 
@@ -221,13 +230,14 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getName
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setName
      */
-    public function testSetGetName(){
+    public function testSetGetName()
+    {
 
         // Setup
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
-        $manifestFile = new IngestManifestFile($name,$parentIngestManifestId,$parentIngestManifestAssetId);
+        $manifestFile = new IngestManifestFile($name, $parentIngestManifestId, $parentIngestManifestAssetId);
 
         // Test
         $manifestFile->setName($name);
@@ -241,14 +251,15 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getEncryptionVersion
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setEncryptionVersion
      */
-    public function testSetGetEncryptionVersion(){
+    public function testSetGetEncryptionVersion()
+    {
 
         // Setup
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
         $encryptionVersion = 'Encryption Version';
-        $manifestFile = new IngestManifestFile($name,$parentIngestManifestId,$parentIngestManifestAssetId);
+        $manifestFile = new IngestManifestFile($name, $parentIngestManifestId, $parentIngestManifestAssetId);
 
         // Test
         $manifestFile->setEncryptionVersion($encryptionVersion);
@@ -262,14 +273,15 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getEncryptionScheme
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setEncryptionScheme
      */
-    public function testSetGetEncryptionScheme(){
+    public function testSetGetEncryptionScheme()
+    {
 
         // Setup
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
         $encryptionScheme = 'Encryption Scheme';
-        $manifestFile = new IngestManifestFile($name,$parentIngestManifestId,$parentIngestManifestAssetId);
+        $manifestFile = new IngestManifestFile($name, $parentIngestManifestId, $parentIngestManifestAssetId);
 
         // Test
         $manifestFile->setEncryptionScheme($encryptionScheme);
@@ -283,14 +295,15 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getIsEncrypted
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setIsEncrypted
      */
-    public function testSetGetIsEncrypted(){
+    public function testSetGetIsEncrypted()
+    {
 
         // Setup
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
         $isEncrypted = false;
-        $manifestFile = new IngestManifestFile($name,$parentIngestManifestId,$parentIngestManifestAssetId);
+        $manifestFile = new IngestManifestFile($name, $parentIngestManifestId, $parentIngestManifestAssetId);
 
         // Test
         $manifestFile->setIsEncrypted($isEncrypted);
@@ -304,14 +317,15 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getEncryptionKeyId
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setEncryptionKeyId
      */
-    public function testSetGetEncryptionKeyId(){
+    public function testSetGetEncryptionKeyId()
+    {
 
         // Setup
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
         $encryptionKeyId = 'Encryption-Key-Id-56764';
-        $manifestFile = new IngestManifestFile($name,$parentIngestManifestId,$parentIngestManifestAssetId);
+        $manifestFile = new IngestManifestFile($name, $parentIngestManifestId, $parentIngestManifestAssetId);
 
         // Test
         $manifestFile->setEncryptionKeyId($encryptionKeyId);
@@ -325,14 +339,15 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getInitializationVector
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setInitializationVector
      */
-    public function testSetGetInitializationVector(){
+    public function testSetGetInitializationVector()
+    {
 
         // Setup
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
         $initializationVector = 'Initialization Vector';
-        $manifestFile = new IngestManifestFile($name,$parentIngestManifestId,$parentIngestManifestAssetId);
+        $manifestFile = new IngestManifestFile($name, $parentIngestManifestId, $parentIngestManifestAssetId);
 
         // Test
         $manifestFile->setInitializationVector($initializationVector);
@@ -346,14 +361,15 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getIsPrimary
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setIsprimary
      */
-    public function testSetGetIsPrimary(){
+    public function testSetGetIsPrimary()
+    {
 
         // Setup
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
         $isPrimary = false;
-        $manifestFile = new IngestManifestFile($name,$parentIngestManifestId,$parentIngestManifestAssetId);
+        $manifestFile = new IngestManifestFile($name, $parentIngestManifestId, $parentIngestManifestAssetId);
 
         // Test
         $manifestFile->setIsPrimary($isPrimary);
@@ -367,14 +383,15 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getMimeType
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setMimeType
      */
-    public function testSetGetMimeType(){
+    public function testSetGetMimeType()
+    {
 
         // Setup
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
         $mimeType = 'Mime type';
-        $manifestFile = new IngestManifestFile($name,$parentIngestManifestId,$parentIngestManifestAssetId);
+        $manifestFile = new IngestManifestFile($name, $parentIngestManifestId, $parentIngestManifestAssetId);
 
         // Test
         $manifestFile->setMimeType($mimeType);
@@ -388,13 +405,14 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getParentIngestManifestId
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setParentIngestManifestId
      */
-    public function testSetGetParentIngestManifestId(){
+    public function testSetGetParentIngestManifestId()
+    {
 
         // Setup
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
-        $manifestFile = new IngestManifestFile($name,$parentIngestManifestId,$parentIngestManifestAssetId);
+        $manifestFile = new IngestManifestFile($name, $parentIngestManifestId, $parentIngestManifestAssetId);
 
         // Test
         $manifestFile->setParentIngestManifestId($parentIngestManifestId);
@@ -408,13 +426,14 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getParentIngestManifestAssetId
      * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setParentIngestManifestAssetId
      */
-    public function testSetGetParentIngestManifestAssetId(){
+    public function testSetGetParentIngestManifestAssetId()
+    {
 
         // Setup
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
-        $manifestFile = new IngestManifestFile($name,$parentIngestManifestId,$parentIngestManifestAssetId);
+        $manifestFile = new IngestManifestFile($name, $parentIngestManifestId, $parentIngestManifestAssetId);
 
         // Test
         $manifestFile->setParentIngestManifestAssetId($parentIngestManifestAssetId);

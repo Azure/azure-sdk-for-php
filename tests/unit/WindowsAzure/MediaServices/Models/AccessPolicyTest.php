@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,35 +15,38 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices\Models;
+namespace Tests\unit\WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 
 /**
- * Represents access policy object used in media services
+ * Represents access policy object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 class AccessPolicyTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @covers WindowsAzure\MediaServices\Models\AccessPolicy::__construct
      */
-    public function test__construct(){
+    public function test__construct()
+    {
 
         // Setup
         $name = 'Name';
@@ -59,7 +62,8 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\AccessPolicy::getPermissions
      * @covers WindowsAzure\MediaServices\Models\AccessPolicy::setPermissions
      */
-    public function testGetPermissions() {
+    public function testGetPermissions()
+    {
 
         // Setup
         $name = 'newName';
@@ -74,31 +78,32 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    /**
-     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::getDurationInMinutes
-     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::setDurationInMinutes
-     */
-       public function testGetDurationInMinutes(){
+       /**
+        * @covers WindowsAzure\MediaServices\Models\AccessPolicy::getDurationInMinutes
+        * @covers WindowsAzure\MediaServices\Models\AccessPolicy::setDurationInMinutes
+        */
+       public function testGetDurationInMinutes()
+       {
 
         // Setup
         $name = 'newName';
-        $value = new AccessPolicy($name);
-        $expected = 25.21;
-        $value->setDurationInMinutes($expected);
+           $value = new AccessPolicy($name);
+           $expected = 25.21;
+           $value->setDurationInMinutes($expected);
 
         // Test
         $actual = $value->getDurationInMinutes();
 
         // Assert
         $this->assertEquals($expected, $actual);
-
-    }
+       }
 
     /**
      * @covers WindowsAzure\MediaServices\Models\AccessPolicy::setName
      * @covers WindowsAzure\MediaServices\Models\AccessPolicy::getName
      */
-    public function testGetName(){
+    public function testGetName()
+    {
         // Setup
         $name = 'newName';
         $value = new AccessPolicy($name);
@@ -115,12 +120,13 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\AccessPolicy::getLastModified
      */
-    public function testGetLastModified() {
+    public function testGetLastModified()
+    {
 
         // Setup
         $accesPolicyArray = array(
-            'Name'                     => 'newName',
-            'LastModified'             => '2013-11-21',
+            'Name' => 'newName',
+            'LastModified' => '2013-11-21',
         );
         $modified = new \Datetime($accesPolicyArray['LastModified']);
         $value = AccessPolicy::createFromOptions($accesPolicyArray);
@@ -130,18 +136,18 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals($modified->getTimestamp(), $actual->getTimestamp());
-
     }
 
     /**
      * @covers WindowsAzure\MediaServices\Models\AccessPolicy::getCreated
      */
-    public function testGetCreated() {
+    public function testGetCreated()
+    {
 
         // Setup
         $accesPolicyArray = array(
-            'Name'                     => 'newName',
-            'Created'                  => '2013-11-21',
+            'Name' => 'newName',
+            'Created' => '2013-11-21',
         );
         $created = new \Datetime($accesPolicyArray['Created']);
         $value = AccessPolicy::createFromOptions($accesPolicyArray);
@@ -156,12 +162,13 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\AccessPolicy::getId
      */
-    public function testGetId() {
+    public function testGetId()
+    {
 
         // Setup
         $accesPolicyArray = array(
-            'Id'                       => 'hjgd67',
-            'Name'                     => 'newName',
+            'Id' => 'hjgd67',
+            'Name' => 'newName',
         );
         $value = AccessPolicy::createFromOptions($accesPolicyArray);
 
@@ -176,17 +183,18 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\AccessPolicy::createFromOptions
      * @covers WindowsAzure\MediaServices\Models\AccessPolicy::fromArray
      */
-    public function testAccessPolicyFromOptions(){
+    public function testAccessPolicyFromOptions()
+    {
 
         // Setup
         $accessArray = array(
-            'Id'                  => '1',
-            'Created'             => '2013-11-19',
-            'LastModified'        => '2013-11-19',
-            'Name'                => 'newName',
-            'DurationInMinutes'   => 25,
-            'Permissions'         => AccessPolicy::PERMISSIONS_READ + AccessPolicy::PERMISSIONS_WRITE
-                + AccessPolicy::PERMISSIONS_DELETE + AccessPolicy::PERMISSIONS_LIST
+            'Id' => '1',
+            'Created' => '2013-11-19',
+            'LastModified' => '2013-11-19',
+            'Name' => 'newName',
+            'DurationInMinutes' => 25,
+            'Permissions' => AccessPolicy::PERMISSIONS_READ + AccessPolicy::PERMISSIONS_WRITE
+                + AccessPolicy::PERMISSIONS_DELETE + AccessPolicy::PERMISSIONS_LIST,
         );
         $created = new \Datetime($accessArray['Created']);
         $modified = new \Datetime($accessArray['LastModified']);

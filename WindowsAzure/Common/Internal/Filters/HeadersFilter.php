@@ -22,6 +22,7 @@
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
+
 namespace WindowsAzure\Common\Internal\Filters;
 
 use WindowsAzure\Common\Internal\IServiceFilter;

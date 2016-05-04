@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,24 +15,27 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Mock\WindowsAzure\Common\Internal\Authentication
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
-namespace Tests\Mock\WindowsAzure\Common\Internal\Authentication;
+
+namespace Tests\mock\WindowsAzure\Common\Internal\Authentication;
+
 use WindowsAzure\Common\Internal\Authentication\StorageAuthScheme;
 
 /**
  * Mock class to wrap StorageAuthScheme class.
  *
- * @package    WindowsAzure-sdk-for-php
  * @author     Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright  2012 Microsoft Corporation
  * @license    http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.3_2016-05
+ *
  * @link       https://github.com/windowsazure/azure-sdk-for-php
  */
 class StorageAuthSchemeMock extends StorageAuthScheme
@@ -51,7 +54,7 @@ class StorageAuthSchemeMock extends StorageAuthScheme
     {
         return parent::computeCanonicalizedResource($url, $queryParams);
     }
-    
+
     public function computeCanonicalizedResourceForTableMock($url, $queryParams)
     {
         return parent::computeCanonicalizedResourceForTable($url, $queryParams);
@@ -67,7 +70,7 @@ class StorageAuthSchemeMock extends StorageAuthScheme
         return $this->accountKey;
     }
 
-    protected function computeSignature($headers, $url, $queryParams, $httpMethod) 
+    protected function computeSignature($headers, $url, $queryParams, $httpMethod)
     {
         // Do nothing
     }
@@ -77,5 +80,3 @@ class StorageAuthSchemeMock extends StorageAuthScheme
         // Do nothing
     }
 }
-
-

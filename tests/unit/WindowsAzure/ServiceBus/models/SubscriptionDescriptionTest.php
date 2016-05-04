@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,25 +15,29 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
+namespace Tests\unit\WindowsAzure\ServiceBus\models;
+
 use WindowsAzure\ServiceBus\Models\SubscriptionDescription;
 
 /**
- * Unit tests for class WrapAccessTokenResult
+ * Unit tests for class WrapAccessTokenResult.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class SubscriptionDescriptionTest extends \PHPUnit_Framework_TestCase
@@ -44,10 +48,10 @@ class SubscriptionDescriptionTest extends \PHPUnit_Framework_TestCase
     public function testSubscriptionDescriptionConstructor()
     {
         // Setup
-        
+
         // Test
         $subscriptionDescription = new SubscriptionDescription();
-        
+
         // Assert
         $this->assertNotNull($subscriptionDescription);
     }
@@ -56,7 +60,8 @@ class SubscriptionDescriptionTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getLockDuration
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setLockDuration
      */
-    public function testGetSetLockDuration() {
+    public function testGetSetLockDuration()
+    {
         // Setup
         $expected = 'testLockDuration';
         $subscriptionDescription = new SubscriptionDescription();
@@ -70,15 +75,14 @@ class SubscriptionDescriptionTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
 
     /** 
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getRequiresSession
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setRequiresSession
      */
-    public function testGetSetRequiresSession() {
+    public function testGetSetRequiresSession()
+    {
         // Setup
         $expected = 'testRequiresSession';
         $subscriptionDescription = new SubscriptionDescription();
@@ -92,15 +96,14 @@ class SubscriptionDescriptionTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
 
     /** 
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getDefaultMessageTimeToLive
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setDefaultMessageTimeToLive
      */
-    public function testGetSetDefaultMessageTimeToLive() {
+    public function testGetSetDefaultMessageTimeToLive()
+    {
         // Setup
         $expected = 'testDefaultMessageTimeToLive';
         $subscriptionDescription = new SubscriptionDescription();
@@ -114,15 +117,14 @@ class SubscriptionDescriptionTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
 
     /** 
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getDeadLetteringOnMessageExpiration
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setDeadLetteringOnMessageExpiration
      */
-    public function testGetSetDeadLetteringOnMessageExpiration() {
+    public function testGetSetDeadLetteringOnMessageExpiration()
+    {
         // Setup
         $expected = 'testDeadLetteringOnMessageExpiration';
         $subscriptionDescription = new SubscriptionDescription();
@@ -136,15 +138,14 @@ class SubscriptionDescriptionTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
 
     /** 
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getDeadLetteringOnFilterEvaluationExceptions
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setDeadLetteringOnFilterEvaluationExceptions
      */
-    public function testGetSetDeadLetteringOnFilterEvaluationExceptions() {
+    public function testGetSetDeadLetteringOnFilterEvaluationExceptions()
+    {
         // Setup
         $expected = 'testDeadLetteringOnFilterEvaluationExceptions';
         $subscriptionDescription = new SubscriptionDescription();
@@ -158,15 +159,14 @@ class SubscriptionDescriptionTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
 
     /** 
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getDefaultRuleDescription
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setDefaultRuleDescription
      */
-    public function testGetSetDefaultRuleDescription() {
+    public function testGetSetDefaultRuleDescription()
+    {
         // Setup
         $expected = 'testDefaultRuleDescription';
         $subscriptionDescription = new SubscriptionDescription();
@@ -180,15 +180,14 @@ class SubscriptionDescriptionTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
 
     /** 
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getMessageCount
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setMessageCount
      */
-    public function testGetSetMessageCount() {
+    public function testGetSetMessageCount()
+    {
         // Setup
         $expected = 'testMessageCount';
         $subscriptionDescription = new SubscriptionDescription();
@@ -202,15 +201,14 @@ class SubscriptionDescriptionTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
 
     /** 
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getMaxDeliveryCount
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setMaxDeliveryCount
      */
-    public function testGetSetMaxDeliveryCount() {
+    public function testGetSetMaxDeliveryCount()
+    {
         // Setup
         $expected = 'testMaxDeliveryCount';
         $subscriptionDescription = new SubscriptionDescription();
@@ -224,15 +222,14 @@ class SubscriptionDescriptionTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
 
     /** 
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::getEnableBatchedOperations
      * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::setEnableBatchedOperations
      */
-    public function testGetSetEnableBatchedOperations() {
+    public function testGetSetEnableBatchedOperations()
+    {
         // Setup
         $expected = 'testEnableBatchedOperations';
         $subscriptionDescription = new SubscriptionDescription();
@@ -246,10 +243,5 @@ class SubscriptionDescriptionTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
-
 }
-
-

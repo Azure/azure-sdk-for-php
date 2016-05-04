@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,39 +15,42 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal\Filters
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Common\Internal\Filters;
+namespace Tests\unit\WindowsAzure\Common\Internal\Filters;
+
 use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Filters\WrapFilter;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\ServiceBusSettings;
 
 /**
- * Unit tests for class WrapFilterTest
+ * Unit tests for class WrapFilterTest.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal\Filters
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class WrapFilterTest extends ServiceRestProxyTestBase
 {
     private $_wrapRestProxy;
-    
+
     public function setUp()
     {
         $this->skipIfEmulated();
@@ -61,7 +64,7 @@ class WrapFilterTest extends ServiceRestProxyTestBase
         $wrapBuilder->setAccessible(true);
         $this->_wrapRestProxy = $wrapBuilder->invoke($builder, $wrapUri);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Filters\WrapFilter::handleRequest
      * @covers WindowsAzure\Common\Internal\Filters\WrapFilter::__construct
@@ -77,25 +80,24 @@ class WrapFilterTest extends ServiceRestProxyTestBase
         $wrapUri = $settings->getWrapEndpointUri();
 
         $channel->setUrl($url);
-        
+
         $wrapFilter = new WrapFilter(
             $wrapUri,
             $settings->getWrapName(),
             $settings->getWrapPassword(),
             $this->_wrapRestProxy
         );
-        
+
         // Test
         $request = $wrapFilter->handleRequest($channel);
-        
+
         // Assert
         $this->assertArrayHasKey(
-            strtolower(Resources::AUTHENTICATION), 
+            strtolower(Resources::AUTHENTICATION),
             $request->getHeaders()
         );
     }
-    
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Filters\WrapFilter::handleResponse
      */
@@ -111,7 +113,7 @@ class WrapFilterTest extends ServiceRestProxyTestBase
             TestResources::getServiceBusConnectionString()
         );
         $wrapUri = $settings->getWrapEndpointUri();
-        
+
         $wrapFilter = new WrapFilter(
             $wrapUri,
             $settings->getWrapName(),
@@ -120,10 +122,8 @@ class WrapFilterTest extends ServiceRestProxyTestBase
         );
         // Test
         $response = $wrapFilter->handleResponse($channel, $response);
-        
+
         // Assert
         $this->assertNull($response);
     }
 }
-
-

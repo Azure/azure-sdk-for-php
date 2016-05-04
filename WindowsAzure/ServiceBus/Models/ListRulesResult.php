@@ -22,6 +22,7 @@
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
+
 namespace WindowsAzure\ServiceBus\Models;
 
 use WindowsAzure\Common\Internal\Atom\Feed;

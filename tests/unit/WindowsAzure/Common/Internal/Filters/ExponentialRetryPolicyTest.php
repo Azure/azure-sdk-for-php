@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,25 +15,29 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal\Filters
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Common\Internal\Filters;
+namespace Tests\unit\WindowsAzure\Common\Internal\Filters;
+
 use WindowsAzure\Common\Internal\Filters\ExponentialRetryPolicy;
 
 /**
- * Unit tests for class ExponentialRetryPolicy
+ * Unit tests for class ExponentialRetryPolicy.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal\Filters
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ExponentialRetryPolicyTest extends \PHPUnit_Framework_TestCase
@@ -45,16 +49,16 @@ class ExponentialRetryPolicyTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expectedRetryableStatusCodes = array(200, 201);
-        
+
         // Test
         $actual = new ExponentialRetryPolicy($expectedRetryableStatusCodes);
-        
+
         // Assert
         $this->assertNotNull($actual);
-        
+
         return $actual;
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Filters\ExponentialRetryPolicy::shouldRetry
      * @depends test__construct
@@ -63,14 +67,14 @@ class ExponentialRetryPolicyTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = false;
-        
+
         // Test
         $actual = $retryPolicy->shouldRetry(1000, null);
-        
+
         // Assert
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Filters\ExponentialRetryPolicy::calculateBackoff
      * @depends test__construct
@@ -79,11 +83,8 @@ class ExponentialRetryPolicyTest extends \PHPUnit_Framework_TestCase
     {
         // Test
         $actual = $retryPolicy->calculateBackoff(2, null);
-        
+
         // Assert
         $this->assertTrue(is_integer($actual));
-        
     }
 }
-
-

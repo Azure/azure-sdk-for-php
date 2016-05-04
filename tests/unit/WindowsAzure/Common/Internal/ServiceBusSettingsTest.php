@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,26 +15,30 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Common\Internal;
+namespace Tests\unit\WindowsAzure\Common\Internal;
+
 use WindowsAzure\Common\Internal\ServiceBusSettings;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Unit tests for class ServiceBusSettings
+ * Unit tests for class ServiceBusSettings.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
@@ -45,7 +49,7 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
         $property->setAccessible(true);
         $property->setValue(false);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceBusSettings::createFromConnectionString
      * @covers WindowsAzure\Common\Internal\ServiceBusSettings::init
@@ -68,10 +72,10 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
         $expectedWrapPassword = 'mypassword';
         $expectedWrapEndpointUri = "https://$expectedNamespace-sb.accesscontrol.windows.net/WRAPv0.9";
         $connectionString = "Endpoint=$expectedServiceBusEndpoint;SharedSecretIssuer=$expectedWrapName;SharedSecretValue=$expectedWrapPassword";
-        
+
         // Test
         $actual = ServiceBusSettings::createFromConnectionString($connectionString);
-        
+
         // Assert
         $this->assertEquals($expectedNamespace, $actual->getNamespace());
         $this->assertEquals($expectedServiceBusEndpoint, $actual->getServiceBusEndpointUri());
@@ -79,7 +83,7 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedWrapPassword, $actual->getWrapPassword());
         $this->assertEquals($expectedWrapEndpointUri, $actual->getWrapEndpointUri());
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceBusSettings::createFromConnectionString
      * @covers WindowsAzure\Common\Internal\ServiceBusSettings::init
@@ -96,14 +100,14 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
     public function testCreateFromConnectionStringWithMissingServiceBusEndpointFail()
     {
         // Setup
-        $connectionString = "SharedSecretIssuer=name;SharedSecretValue=password";
+        $connectionString = 'SharedSecretIssuer=name;SharedSecretValue=password';
         $expectedMsg = sprintf(Resources::MISSING_CONNECTION_STRING_SETTINGS, $connectionString);
         $this->setExpectedException('\RuntimeException', $expectedMsg);
-        
+
         // Test
         ServiceBusSettings::createFromConnectionString($connectionString);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceBusSettings::createFromConnectionString
      * @covers WindowsAzure\Common\Internal\ServiceBusSettings::init
@@ -128,11 +132,11 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
             implode("\n", array('Endpoint', 'SharedSecretIssuer', 'SharedSecretValue'))
         );
         $this->setExpectedException('\RuntimeException', $expectedMsg);
-        
+
         // Test
         ServiceBusSettings::createFromConnectionString($connectionString);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceBusSettings::getServiceBusEndpointUri
      */
@@ -141,14 +145,14 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expected = 'serviceBusEndpointUri';
         $setting = new ServiceBusSettings($expected, null, null, null, null);
-        
+
         // Test
         $actual = $setting->getServiceBusEndpointUri();
-        
+
         // Assert
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceBusSettings::getNamespace
      */
@@ -157,14 +161,14 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expected = 'namespace';
         $setting = new ServiceBusSettings(null, $expected, null, null, null);
-        
+
         // Test
         $actual = $setting->getNamespace();
-        
+
         // Assert
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceBusSettings::getWrapName
      */
@@ -173,14 +177,14 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expected = 'wrapname';
         $setting = new ServiceBusSettings(null, null, null, $expected, null);
-        
+
         // Test
         $actual = $setting->getWrapName();
-        
+
         // Assert
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceBusSettings::getWrapPassword
      */
@@ -189,14 +193,14 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expected = 'wrappassword';
         $setting = new ServiceBusSettings(null, null, null, null, $expected);
-        
+
         // Test
         $actual = $setting->getWrapPassword();
-        
+
         // Assert
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceBusSettings::getWrapEndpointUri
      */
@@ -206,14 +210,14 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
         $namespace = 'wrapendpoint';
         $expected = "https://$namespace-sb.accesscontrol.windows.net/WRAPv0.9";
         $setting = new ServiceBusSettings(null, null, $expected, null, null);
-        
+
         // Test
         $actual = $setting->getWrapEndpointUri();
-        
+
         // Assert
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceBusSettings::createFromConnectionString
      * @covers WindowsAzure\Common\Internal\ServiceBusSettings::init
@@ -236,10 +240,10 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
         $expectedWrapPassword = 'mypassword';
         $expectedWrapEndpointUri = "https://$expectedNamespace-sb.accesscontrol.windows.net/WRAPv0.9";
         $connectionString = "eNdPoinT=$expectedServiceBusEndpoint;sHarEdsecRetiSsuer=$expectedWrapName;shArEdsecrEtvAluE=$expectedWrapPassword";
-        
+
         // Test
         $actual = ServiceBusSettings::createFromConnectionString($connectionString);
-        
+
         // Assert
         $this->assertEquals($expectedNamespace, $actual->getNamespace());
         $this->assertEquals($expectedServiceBusEndpoint, $actual->getServiceBusEndpointUri());
@@ -247,7 +251,7 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedWrapPassword, $actual->getWrapPassword());
         $this->assertEquals($expectedWrapEndpointUri, $actual->getWrapEndpointUri());
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceBusSettings::createFromConnectionString
      * @covers WindowsAzure\Common\Internal\ServiceBusSettings::init
@@ -268,12 +272,12 @@ class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
         $expectedServiceBusEndpoint = "https://$expectedNamespace.servicebus.windows.net";
         $expectedWrapName = 'myname';
         $expectedWrapPassword = 'mypassword';
-        $expectedWrapEndpointUri = "https://mysb-sb.accesscontrol.chinacloudapi.cn/";
+        $expectedWrapEndpointUri = 'https://mysb-sb.accesscontrol.chinacloudapi.cn/';
         $connectionString = "Endpoint=$expectedServiceBusEndpoint;StsEndpoint=$expectedWrapEndpointUri;SharedSecretIssuer=$expectedWrapName;SharedSecretValue=$expectedWrapPassword";
-        
+
         // Test
         $actual = ServiceBusSettings::createFromConnectionString($connectionString);
-        
+
         // Assert
         $this->assertEquals($expectedNamespace, $actual->getNamespace());
         $this->assertEquals($expectedServiceBusEndpoint, $actual->getServiceBusEndpointUri());

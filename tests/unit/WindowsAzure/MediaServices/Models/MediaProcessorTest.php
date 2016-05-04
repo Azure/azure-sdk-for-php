@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,45 +14,48 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices\Models;
+namespace Tests\unit\WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\MediaServices\Models\MediaProcessor;
 
 /**
- * Represents access policy object used in media services
+ * Represents access policy object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 class MediaProcessorTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @covers WindowsAzure\MediaServices\Models\MediaProcessor::createFromOptions
      * @covers WindowsAzure\MediaServices\Models\MediaProcessor::fromArray
      */
-    public function testCreateFromOptions(){
+    public function testCreateFromOptions()
+    {
 
         // Setup
         $options = array(
-                'Id'                  => 'sfgsfg34',
-                'Name'                => 'Some Name',
-                'Description'         => 'Description of media processor',
-                'Sku'                 => '456-123-789',
-                'Vendor'              => 'Vendors name',
-                'Version'             => '3.6.5',
+                'Id' => 'sfgsfg34',
+                'Name' => 'Some Name',
+                'Description' => 'Description of media processor',
+                'Sku' => '456-123-789',
+                'Vendor' => 'Vendors name',
+                'Version' => '3.6.5',
         );
 
         // Test
@@ -71,11 +74,12 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\MediaProcessor::getId
      * @covers WindowsAzure\MediaServices\Models\MediaProcessor::__construct
      */
-    public function testGetId(){
+    public function testGetId()
+    {
 
         // Setup
         $options = array(
-                'Id'             => 'sfgsfg34',
+                'Id' => 'sfgsfg34',
         );
         $mediaProc = MediaProcessor::createFromOptions($options);
 
@@ -89,11 +93,12 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\MediaProcessor::getName
      */
-    public function testGetName(){
+    public function testGetName()
+    {
 
         // Setup
         $options = array(
-                'Name'           => 'Some Name',
+                'Name' => 'Some Name',
         );
         $mediaProc = MediaProcessor::createFromOptions($options);
 
@@ -107,11 +112,12 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\MediaProcessor::getDescription
      */
-    public function testGetDescription(){
+    public function testGetDescription()
+    {
 
         // Setup
         $options = array(
-                'Description'          => 'Description of media processor'
+                'Description' => 'Description of media processor',
         );
         $mediaProc = MediaProcessor::createFromOptions($options);
 
@@ -125,11 +131,12 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\MediaProcessor::getSku
      */
-    public function testGetSku(){
+    public function testGetSku()
+    {
 
         // Setup
         $options = array(
-                'Sku'        => '123-456-789'
+                'Sku' => '123-456-789',
         );
         $mediaProc = MediaProcessor::createFromOptions($options);
 
@@ -143,11 +150,12 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\MediaProcessor::getVendor
      */
-    public function testGetVendor(){
+    public function testGetVendor()
+    {
 
         // Setup
         $options = array(
-                'Vendor'        => 'Vendors name'
+                'Vendor' => 'Vendors name',
         );
         $mediaProc = MediaProcessor::createFromOptions($options);
 
@@ -161,11 +169,12 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\MediaProcessor::getVersion
      */
-    public function testGetVersion(){
+    public function testGetVersion()
+    {
 
         // Setup
         $options = array(
-                'Version'        => '3.6.5'
+                'Version' => '3.6.5',
         );
         $mediaProc = MediaProcessor::createFromOptions($options);
 

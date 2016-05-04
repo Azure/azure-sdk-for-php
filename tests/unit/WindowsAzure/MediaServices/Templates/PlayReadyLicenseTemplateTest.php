@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,31 +14,31 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices\Templates;
-use Tests\Framework\TestResources;
+namespace Tests\unit\WindowsAzure\MediaServices\Templates;
+
 use WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate;
 use WindowsAzure\MediaServices\Templates\PlayReadyPlayRight;
 use WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier;
-use WindowsAzure\MediaServices\Templates\ErrorMessages;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * Unit Tests for PlayReadyLicenseTemplate
+ * Unit Tests for PlayReadyLicenseTemplate.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\MediaServices\Templates
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
@@ -47,7 +47,8 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getAllowTestDevices
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setAllowTestDevices
      */
-    public function testGetSetAllowTestDevices() {
+    public function testGetSetAllowTestDevices()
+    {
         // Setup
         $entity = new PlayReadyLicenseTemplate();
         $payload = true;
@@ -64,10 +65,11 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getBeginDate
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setBeginDate
      */
-    public function testGetSetBeginDate() {
+    public function testGetSetBeginDate()
+    {
         // Setup
         $entity = new PlayReadyLicenseTemplate();
-        $payload = new \DateTime("now");
+        $payload = new \DateTime('now');
 
         // Test
         $entity->setBeginDate($payload);
@@ -77,15 +79,15 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($payload, $result);
     }
 
-    
     /**
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getExpirationDate
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setExpirationDate
      */
-    public function testGetSetExpirationDate() {
+    public function testGetSetExpirationDate()
+    {
         // Setup
         $entity = new PlayReadyLicenseTemplate();
-        $payload = new \DateTime("now");
+        $payload = new \DateTime('now');
 
         // Test
         $entity->setExpirationDate($payload);
@@ -95,12 +97,12 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($payload, $result);
     }
 
-    
     /**
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getRelativeBeginDate
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setRelativeBeginDate
      */
-    public function testGetSetRelativeBeginDate() {
+    public function testGetSetRelativeBeginDate()
+    {
         // Setup
         $entity = new PlayReadyLicenseTemplate();
         $payload = new \DateInterval('PT30S');
@@ -113,12 +115,12 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($payload, $result);
     }
 
-    
     /**
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getRelativeExpirationDate
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setRelativeExpirationDate
      */
-    public function testGetSetRelativeExpirationDate() {
+    public function testGetSetRelativeExpirationDate()
+    {
         // Setup
         $entity = new PlayReadyLicenseTemplate();
         $payload = new \DateInterval('PT30S');
@@ -131,12 +133,12 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($payload, $result);
     }
 
-    
     /**
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getGracePeriod
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setGracePeriod
      */
-    public function testGetSetGracePeriod() {
+    public function testGetSetGracePeriod()
+    {
         // Setup
         $entity = new PlayReadyLicenseTemplate();
         $payload = new \DateInterval('PT30S');
@@ -149,12 +151,12 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($payload, $result);
     }
 
-    
     /**
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getPlayRight
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setPlayRight
      */
-    public function testGetSetPlayRight() {
+    public function testGetSetPlayRight()
+    {
         // Setup
         $entity = new PlayReadyLicenseTemplate();
         $payload = new PlayReadyPlayRight();
@@ -167,15 +169,15 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($payload, $result);
     }
 
-    
     /**
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getLicenseType
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setLicenseType
      */
-    public function testGetSetLicenseType() {
+    public function testGetSetLicenseType()
+    {
         // Setup
         $entity = new PlayReadyLicenseTemplate();
-        $payload = "payload";
+        $payload = 'payload';
 
         // Test
         $entity->setLicenseType($payload);
@@ -185,15 +187,15 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($payload, $result);
     }
 
-    
     /**
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getContentKey
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setContentKey
      */
-    public function testGetSetContentKey() {
+    public function testGetSetContentKey()
+    {
         // Setup
         $entity = new PlayReadyLicenseTemplate();
-        $payload = new ContentEncryptionKeyFromKeyIdentifier("key id");
+        $payload = new ContentEncryptionKeyFromKeyIdentifier('key id');
 
         // Test
         $entity->setContentKey($payload);

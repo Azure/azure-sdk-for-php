@@ -22,6 +22,7 @@
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
+
 namespace WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\Common\Internal\Validate;

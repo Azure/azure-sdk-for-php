@@ -22,8 +22,8 @@
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-namespace WindowsAzure\Common\Internal\Http;
 
+namespace WindowsAzure\Common\Internal\Http;
 
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\ServiceException;

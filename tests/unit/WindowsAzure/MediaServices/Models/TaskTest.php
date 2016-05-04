@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,34 +14,38 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices\Models;
+namespace Tests\unit\WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\MediaServices\Models\Task;
 
 /**
- * Represents access policy object used in media services
+ * Represents access policy object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 class TaskTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\MediaServices\Models\Task::__construct
      */
-    public function test__construct(){
+    public function test__construct()
+    {
 
         // Setup
         $mediaProcId = 'ksfjdgkd56';
@@ -61,38 +65,39 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Task::createFromOptions
      * @covers WindowsAzure\MediaServices\Models\Task::fromArray
      */
-    public function testCreateFromOptions(){
+    public function testCreateFromOptions()
+    {
 
         // Setup
         $errorDetail = array(
-             'Code'            => 404,
-             'Message'         => 'Required task not found'
+             'Code' => 404,
+             'Message' => 'Required task not found',
         );
         $historicalEvent = array(
-             'Code'            => 404,
-             'Message'         => 'Required task not found',
-             'TimeStamp'       => '2013-11-27'
+             'Code' => 404,
+             'Message' => 'Required task not found',
+             'TimeStamp' => '2013-11-27',
         );
         $options = array(
-                'Id'                    => 'jdfghrf78',
-                'Configuration'         => 'some configuration',
-                'EndTime'               => '2013-12-27',
-                'MediaProcessorId'      => 'uy47ytu',
-                'Name'                  => 'Task name',
-                'PerfMessage'           => 'performance message',
-                'Priority'              => 1,
-                'Progress'              => 99.62,
-                'RunningDuration'       => 32.12,
-                'StartTime'             => '2013-11-27',
-                'State'                 => Task::STATE_ACTIVE,
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42,
-                'EncryptionKeyId'       => '90key80',
-                'EncryptionScheme'      => 'encryption scheme',
-                'EncryptionVersion'     => 'version 2.1.1',
-                'InitializationVector'  => 'Initialization Vector',
-                'ErrorDetails'           => array($errorDetail),
-                'HistoricalEvents'      => array($historicalEvent)
+                'Id' => 'jdfghrf78',
+                'Configuration' => 'some configuration',
+                'EndTime' => '2013-12-27',
+                'MediaProcessorId' => 'uy47ytu',
+                'Name' => 'Task name',
+                'PerfMessage' => 'performance message',
+                'Priority' => 1,
+                'Progress' => 99.62,
+                'RunningDuration' => 32.12,
+                'StartTime' => '2013-11-27',
+                'State' => Task::STATE_ACTIVE,
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
+                'EncryptionKeyId' => '90key80',
+                'EncryptionScheme' => 'encryption scheme',
+                'EncryptionVersion' => 'version 2.1.1',
+                'InitializationVector' => 'Initialization Vector',
+                'ErrorDetails' => array($errorDetail),
+                'HistoricalEvents' => array($historicalEvent),
         );
         $endTime = new \Datetime($options['EndTime']);
         $startTime = new \Datetime($options['StartTime']);
@@ -132,14 +137,15 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Task::getId
      */
-    public function testGetId(){
+    public function testGetId()
+    {
 
         // Setup
         $options = array(
-                'Id'                    => 'jdfghrf78',
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42
+                'Id' => 'jdfghrf78',
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
         );
         $task = Task::createFromOptions($options);
 
@@ -154,13 +160,14 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Task::getConfiguration
      * @covers WindowsAzure\MediaServices\Models\Task::setConfiguration
      */
-    public function testGetSetConfiguration(){
+    public function testGetSetConfiguration()
+    {
 
         // Setup
         $options = array(
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
         );
         $task = Task::createFromOptions($options);
         $config = 'configuration of task';
@@ -176,14 +183,15 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Task::getEndTime
      */
-    public function testGetEndTime(){
+    public function testGetEndTime()
+    {
 
         // Setup
         $options = array(
-                'EndTime'               => '2013-12-27',
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42
+                'EndTime' => '2013-12-27',
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
         );
         $task = Task::createFromOptions($options);
         $endTime = new \Datetime($options['EndTime']);
@@ -199,13 +207,14 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Task::getMediaProcessorId
      * @covers WindowsAzure\MediaServices\Models\Task::setMediaProcessorId
      */
-    public function testGetSetMediaProcessorId(){
+    public function testGetSetMediaProcessorId()
+    {
 
         // Setup
         $options = array(
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
                );
         $task = Task::createFromOptions($options);
         $mediaProcId = 'kdfjg57';
@@ -222,13 +231,14 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Task::getName
      * @covers WindowsAzure\MediaServices\Models\Task::setName
      */
-    public function testGetSetName(){
+    public function testGetSetName()
+    {
 
         // Setup
         $options = array(
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
         );
         $task = Task::createFromOptions($options);
         $name = 'task name';
@@ -244,14 +254,15 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Task::getPerfMessage
      */
-    public function testGetPerfMessage(){
+    public function testGetPerfMessage()
+    {
 
         // Setup
         $options = array(
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42,
-                'PerfMessage'           => 'performance message'
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
+                'PerfMessage' => 'performance message',
         );
         $task = Task::createFromOptions($options);
 
@@ -266,13 +277,14 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Task::getPriority
      * @covers WindowsAzure\MediaServices\Models\Task::setPriority
      */
-    public function testGetSetPriority(){
+    public function testGetSetPriority()
+    {
 
         // Setup
         $options = array(
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
         );
         $task = Task::createFromOptions($options);
         $priority = 1;
@@ -288,14 +300,15 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Task::getProgress
      */
-    public function testGetProgress(){
+    public function testGetProgress()
+    {
 
         // Setup
         $options = array(
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42,
-                'Progress'              => 65.29
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
+                'Progress' => 65.29,
         );
         $task = Task::createFromOptions($options);
 
@@ -309,14 +322,15 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Task::getRunningDuration
      */
-    public function testGetRunningDuration(){
+    public function testGetRunningDuration()
+    {
 
         // Setup
         $options = array(
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42,
-                'RunningDuration'       => 5.3
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
+                'RunningDuration' => 5.3,
         );
         $task = Task::createFromOptions($options);
 
@@ -330,14 +344,15 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Task::getStartTime
      */
-    public function testGetStartTime(){
+    public function testGetStartTime()
+    {
 
         // Setup
         $options = array(
-                'StartTime'             => '2013-11-27',
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42
+                'StartTime' => '2013-11-27',
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
         );
         $task = Task::createFromOptions($options);
         $startTime = new \Datetime($options['StartTime']);
@@ -352,14 +367,15 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Task::getState
      */
-    public function testGetState(){
+    public function testGetState()
+    {
 
         // Setup
         $options = array(
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42,
-                'State'                 => Task::STATE_RUNNING
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
+                'State' => Task::STATE_RUNNING,
         );
         $task = Task::createFromOptions($options);
 
@@ -374,13 +390,14 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Task::getTaskBody
      * @covers WindowsAzure\MediaServices\Models\Task::setTaskBody
      */
-    public function testGetSetTaskBody(){
+    public function testGetSetTaskBody()
+    {
 
         // Setup
         $options = array(
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
         );
         $task = Task::createFromOptions($options);
         $taskBody = 'new body of task';
@@ -396,14 +413,15 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Task::getOptions
      */
-    public function testGetOptions(){
+    public function testGetOptions()
+    {
 
         // Setup
         $options = array(
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42,
-                'State'                 => Task::STATE_RUNNING
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
+                'State' => Task::STATE_RUNNING,
         );
         $task = Task::createFromOptions($options);
 
@@ -418,13 +436,14 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Task::getEncryptionKeyId
      * @covers WindowsAzure\MediaServices\Models\Task::setEncryptionKeyId
      */
-    public function testGetSetEncryptionKeyId(){
+    public function testGetSetEncryptionKeyId()
+    {
 
         // Setup
         $options = array(
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
         );
         $task = Task::createFromOptions($options);
         $encrKeyId = '45key89';
@@ -441,13 +460,14 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Task::getEncryptionScheme
      * @covers WindowsAzure\MediaServices\Models\Task::setEncryptionScheme
      */
-    public function testGetSetEncryptionScheme(){
+    public function testGetSetEncryptionScheme()
+    {
 
         // Setup
         $options = array(
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
         );
         $task = Task::createFromOptions($options);
         $encrScheme = 'encryption scheme';
@@ -464,13 +484,14 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Task::getEncryptionVersion
      * @covers WindowsAzure\MediaServices\Models\Task::setEncryptionVersion
      */
-    public function testGetSetEncryptionVersion(){
+    public function testGetSetEncryptionVersion()
+    {
 
         // Setup
         $options = array(
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
         );
         $task = Task::createFromOptions($options);
         $encrVersion = '3.6.1';
@@ -483,18 +504,18 @@ class TaskTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($encrVersion, $result);
     }
 
-
     /**
      * @covers WindowsAzure\MediaServices\Models\Task::getInitializationVector
      * @covers WindowsAzure\MediaServices\Models\Task::setInitializationVector
      */
-    public function testGetSetInitializationVector(){
+    public function testGetSetInitializationVector()
+    {
 
         // Setup
         $options = array(
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
         );
         $task = Task::createFromOptions($options);
         $initVector = 'initialization vector';
@@ -510,18 +531,19 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Task::getErrorDetails
      */
-    public function testGetErrorDetail(){
+    public function testGetErrorDetail()
+    {
 
         // Setup
         $errorDetail = array(
-                'Code'            => 404,
-                'Message'         => 'Required task not found'
+                'Code' => 404,
+                'Message' => 'Required task not found',
         );
         $options = array(
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42,
-                'ErrorDetails'          => array($errorDetail)
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
+                'ErrorDetails' => array($errorDetail),
         );
         $task = Task::createFromOptions($options);
 
@@ -536,22 +558,23 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Task::getHistoricalEvents
      */
-    public function testGetHistoricalEvents(){
+    public function testGetHistoricalEvents()
+    {
 
         // Setup
          $historicalEvent = array(
-             'Code'            => 404,
-             'Message'         => 'Required task not found',
-             'TimeStamp'       => '2013-12-10'
+             'Code' => 404,
+             'Message' => 'Required task not found',
+             'TimeStamp' => '2013-12-10',
         );
         $options = array(
-                'MediaProcessorId'      => 'uy47ytu',
-                'TaskBody'              => 'body of the task',
-                'Options'               => 42,
-                'HistoricalEvents'      => array($historicalEvent)
+                'MediaProcessorId' => 'uy47ytu',
+                'TaskBody' => 'body of the task',
+                'Options' => 42,
+                'HistoricalEvents' => array($historicalEvent),
         );
         $task = Task::createFromOptions($options);
-        $date = new \Datetime ($historicalEvent['TimeStamp']);
+        $date = new \Datetime($historicalEvent['TimeStamp']);
 
         // Test
         $result = $task->getHistoricalEvents();

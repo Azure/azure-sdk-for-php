@@ -22,6 +22,7 @@
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
+
 namespace WindowsAzure\Common\Internal\Atom;
 
 use WindowsAzure\Common\Internal\Resources;

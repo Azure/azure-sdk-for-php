@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,42 +14,46 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices\Models;
+namespace Tests\unit\WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\MediaServices\Models\IngestManifestAsset;
 
 /**
- * Represents access policy object used in media services
+ * Represents access policy object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 class IngestManifestAssetTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifestAsset::createFromOptions
      * @covers WindowsAzure\MediaServices\Models\IngestManifestAsset::fromArray
      */
-    public function testCreatefromOptions(){
+    public function testCreatefromOptions()
+    {
 
         // Setup
         $options = array(
-              'Id'                      => 'asset-id-4567',
-              'Created'                 => '2013-12-18',
-              'LastModified'            => '2013-12-18',
-              'ParentIngestManifestId'  => 'parent-manifest-id-3562'
+              'Id' => 'asset-id-4567',
+              'Created' => '2013-12-18',
+              'LastModified' => '2013-12-18',
+              'ParentIngestManifestId' => 'parent-manifest-id-3562',
         );
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
@@ -68,7 +72,8 @@ class IngestManifestAssetTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\IngestManifestAsset::__construct
      * @covers WindowsAzure\MediaServices\Models\IngestManifestAsset::getParentIngestManifestId
      */
-    public function test__construct(){
+    public function test__construct()
+    {
 
         // Setup
         $parentIngestManifestId = 'parent-manifest-id-3562';
@@ -83,12 +88,13 @@ class IngestManifestAssetTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifestAsset::getLastModified
      */
-    public function testGetLastModified(){
+    public function testGetLastModified()
+    {
 
         // Setup
         $options = array(
-                'LastModified'                => '2013-12-18',
-                'ParentIngestManifestId'      => 'parent-manifest-id-3562'
+                'LastModified' => '2013-12-18',
+                'ParentIngestManifestId' => 'parent-manifest-id-3562',
         );
         $modified = new \Datetime($options['LastModified']);
         $manifestAsset = IngestManifestAsset::createFromOptions($options);
@@ -103,12 +109,13 @@ class IngestManifestAssetTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifestAsset::getCreated
      */
-    public function testGetCreated(){
+    public function testGetCreated()
+    {
 
         // Setup
         $options = array(
-                'Created'                 => '2013-12-18',
-                'ParentIngestManifestId'  => 'parent-manifest-id-3562'
+                'Created' => '2013-12-18',
+                'ParentIngestManifestId' => 'parent-manifest-id-3562',
         );
         $created = new \Datetime($options['Created']);
         $manifestAsset = IngestManifestAsset::createFromOptions($options);
@@ -123,13 +130,14 @@ class IngestManifestAssetTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\IngestManifestAsset::getId
      */
-    public function testGetId(){
+    public function testGetId()
+    {
 
         // Setup
         $id = 'ingest-id-258';
         $options = array(
-                'Id'                      => $id,
-                'ParentIngestManifestId'  => 'parent-manifest-id-3562'
+                'Id' => $id,
+                'ParentIngestManifestId' => 'parent-manifest-id-3562',
         );
         $manifestAsset = IngestManifestAsset::createFromOptions($options);
 

@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,16 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Common\Internal;
+namespace Tests\unit\WindowsAzure\Common\Internal;
+
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Common\Internal\Resources;
@@ -30,14 +32,16 @@ use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\MediaServices\Models\Asset;
 
 /**
- * Unit tests for class ValidateTest
+ * Unit tests for class ValidateTest.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ValidateTest extends \PHPUnit_Framework_TestCase
@@ -272,7 +276,6 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         // Assert
     }
 
-
     /**
      * @covers WindowsAzure\Common\Internal\Validate::isInstanceOf
      */
@@ -488,7 +491,8 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\Common\Internal\Validate::methodExists
      */
-    public function testMethodExistsIfExists(){
+    public function testMethodExistsIfExists()
+    {
 
         // Setup
         $asset = new Asset(Asset::OPTIONS_NONE);
@@ -504,7 +508,8 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\Common\Internal\Validate::methodExists
      */
-    public function testMethodExistsIfNotExists(){
+    public function testMethodExistsIfNotExists()
+    {
 
         // Setup
         $this->setExpectedException('\InvalidArgumentException');
@@ -520,7 +525,8 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\Common\Internal\Validate::isDateString
      */
-    public function testIsDateStringValid(){
+    public function testIsDateStringValid()
+    {
 
         // Setup
         $value = '2013-11-25';
@@ -535,7 +541,8 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\Common\Internal\Validate::isDateString
      */
-    public function testIsDateStringNotValid(){
+    public function testIsDateStringNotValid()
+    {
 
         // Setup
         $this->setExpectedException('\InvalidArgumentException');
@@ -547,4 +554,3 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         // Assert
     }
 }
-
