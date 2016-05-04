@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,74 +15,76 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\Common\Internal\Validate;
 
-
 /**
- * Represents task historical event object used in media services
+ * Represents task historical event object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class MediaProcessor
 {
     /**
-     * id
+     * id.
      *
      * @var string
      */
     private $_id;
 
     /**
-     * Name
+     * Name.
      *
      * @var string
      */
     private $_name;
 
     /**
-     * Description
+     * Description.
      *
      * @var string
      */
     private $_description;
 
     /**
-     * SKU
+     * SKU.
      *
      * @var string
      */
     private $_sku;
 
     /**
-     * Vendor
+     * Vendor.
      *
      * @var string
      */
     private $_vendor;
 
     /**
-     * Version
+     * Version.
      *
      * @var string
      */
     private $_version;
 
     /**
-     * Create media processor from array
+     * Create media processor from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -90,21 +92,21 @@ class MediaProcessor
      */
     public static function createFromOptions($options)
     {
-        $mediaProcessor = new MediaProcessor();
+        $mediaProcessor = new self();
         $mediaProcessor->fromArray($options);
 
         return $mediaProcessor;
     }
 
     /**
-     * Create media processor
+     * Create media processor.
      */
     public function __construct()
     {
     }
 
     /**
-     * Fill media processor from array
+     * Fill media processor from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -141,11 +143,10 @@ class MediaProcessor
             Validate::isString($options['Version'], 'options[Version]');
             $this->_version = $options['Version'];
         }
-
     }
 
     /**
-     * Get "Version"
+     * Get "Version".
      *
      * @return string
      */
@@ -155,7 +156,7 @@ class MediaProcessor
     }
 
     /**
-     * Get "Vendor"
+     * Get "Vendor".
      *
      * @return string
      */
@@ -165,7 +166,7 @@ class MediaProcessor
     }
 
     /**
-     * Get "SKU"
+     * Get "SKU".
      *
      * @return string
      */
@@ -175,7 +176,7 @@ class MediaProcessor
     }
 
     /**
-     * Get "Description"
+     * Get "Description".
      *
      * @return string
      */
@@ -185,7 +186,7 @@ class MediaProcessor
     }
 
     /**
-     * Get "Name"
+     * Get "Name".
      *
      * @return string
      */
@@ -195,7 +196,7 @@ class MediaProcessor
     }
 
     /**
-     * Get "id"
+     * Get "id".
      *
      * @return string
      */
@@ -204,4 +205,3 @@ class MediaProcessor
         return $this->_id;
     }
 }
-

@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,24 +15,26 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\Common\Internal;
 
 /**
- * Utilities for the project
+ * Utilities for the project.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Utilities
@@ -71,7 +73,7 @@ class Utilities
         $urlScheme = parse_url($url, PHP_URL_SCHEME);
 
         if (empty($urlScheme)) {
-            $url = "$scheme://" . $url;
+            $url = "$scheme://".$url;
         }
 
         return $url;
@@ -91,7 +93,7 @@ class Utilities
      */
     public static function tryGetArray($key, $array)
     {
-        return Utilities::getArray(Utilities::tryGetValue($array, $key));
+        return self::getArray(self::tryGetValue($array, $key));
     }
 
     /**
@@ -131,19 +133,19 @@ class Utilities
      */
     public static function tryGetKeysChainValue($array)
     {
-        $arguments    = func_get_args();
+        $arguments = func_get_args();
         $numArguments = func_num_args();
 
         $currentArray = $array;
-        for ($i = 1; $i < $numArguments; $i++) {
+        for ($i = 1; $i < $numArguments; ++$i) {
             if (is_array($currentArray)) {
                 if (array_key_exists($arguments[$i], $currentArray)) {
                     $currentArray = $currentArray[$arguments[$i]];
                 } else {
-                    return null;
+                    return;
                 }
             } else {
-                return null;
+                return;
             }
         }
 
@@ -151,16 +153,16 @@ class Utilities
     }
 
     /**
-     * Checks if the passed $string starts with $prefix
+     * Checks if the passed $string starts with $prefix.
      *
-     * @param string  $string     word to seaech in
-     * @param string  $prefix     prefix to be matched
-     * @param boolean $ignoreCase true to ignore case during the comparison;
-     * otherwise, false
+     * @param string $string     word to seaech in
+     * @param string $prefix     prefix to be matched
+     * @param bool   $ignoreCase true to ignore case during the comparison;
+     *                           otherwise, false
      *
      * @static
      *
-     * @return boolean
+     * @return bool
      */
     public static function startsWith($string, $prefix, $ignoreCase = false)
     {
@@ -168,11 +170,12 @@ class Utilities
             $string = strtolower($string);
             $prefix = strtolower($prefix);
         }
-        return ($prefix == substr($string, 0, strlen($prefix)));
+
+        return $prefix == substr($string, 0, strlen($prefix));
     }
 
     /**
-     * Returns grouped items from passed $var
+     * Returns grouped items from passed $var.
      *
      * @param array $var item to group
      *
@@ -191,10 +194,9 @@ class Utilities
                 && (get_class($value) == 'SimpleXMLElement')
             ) {
                 return (array) $var;
-            } else if (!is_array($value)) {
+            } elseif (!is_array($value)) {
                 return array($var);
             }
-
         }
 
         return $var;
@@ -256,7 +258,7 @@ class Utilities
     public static function serialize($array, $rootName, $defaultTag = null,
         $standalone = null
     ) {
-        $xmlVersion  = '1.0';
+        $xmlVersion = '1.0';
         $xmlEncoding = 'UTF-8';
 
         if (!is_array($array)) {
@@ -280,13 +282,11 @@ class Utilities
      * Takes an array and produces XML based on it.
      *
      * @param XMLWriter $xmlw       XMLWriter object that was previously instanted
-     * and is used for creating the XML.
+     *                              and is used for creating the XML.
      * @param array     $data       Array to be converted to XML
      * @param string    $defaultTag Default XML tag to be used if none specified.
      *
      * @static
-     *
-     * @return void
      */
     private static function _arr2xml(\XMLWriter $xmlw, $data, $defaultTag = null)
     {
@@ -295,7 +295,7 @@ class Utilities
                 foreach ($value as $attributeName => $attributeValue) {
                     $xmlw->writeAttribute($attributeName, $attributeValue);
                 }
-            } else if (is_array($value)) {
+            } elseif (is_array($value)) {
                 if (!is_int($key)) {
                     if ($key != Resources::EMPTY_STRING) {
                         $xmlw->startElement($key);
@@ -345,7 +345,7 @@ class Utilities
     }
 
     /**
-     * Converts a given date string into \DateTime object
+     * Converts a given date string into \DateTime object.
      *
      * @param string $date windows azure date ins string represntation.
      *
@@ -356,16 +356,16 @@ class Utilities
     public static function rfc1123ToDateTime($date)
     {
         $timeZone = new \DateTimeZone('GMT');
-        $format   = Resources::AZURE_DATE_FORMAT;
+        $format = Resources::AZURE_DATE_FORMAT;
 
         return \DateTime::createFromFormat($format, $date, $timeZone);
     }
 
     /**
-     * Generate ISO 8601 compliant date string in UTC time zone
+     * Generate ISO 8601 compliant date string in UTC time zone.
      *
      * @param int $timestamp The unix timestamp to convert
-     *     (for DateTime check date_timestamp_get).
+     *                       (for DateTime check date_timestamp_get).
      *
      * @static
      *
@@ -384,6 +384,7 @@ class Utilities
             '+00:00', '.0000000Z', date('c', $timestamp)
         );
         date_default_timezone_set($tz);
+
         return $returnValue;
     }
 
@@ -404,13 +405,14 @@ class Utilities
         }
 
         if (is_string($value)) {
-            $value =  self::convertToDateTime($value);
+            $value = self::convertToDateTime($value);
         }
 
         Validate::isDate($value);
 
         $cloned = clone $value;
         $cloned->setTimezone(new \DateTimeZone('UTC'));
+
         return str_replace('+0000', 'Z', $cloned->format(\DateTime::ISO8601));
     }
 
@@ -447,7 +449,7 @@ class Utilities
      */
     public static function stringToStream($string)
     {
-        return fopen('data://text/plain,' . urlencode($string), 'rb');
+        return fopen('data://text/plain,'.urlencode($string), 'rb');
     }
 
     /**
@@ -480,7 +482,7 @@ class Utilities
      *
      * @static
      *
-     * @return boolean
+     * @return bool
      */
     public static function inArrayInsensitive($needle, $haystack)
     {
@@ -496,7 +498,7 @@ class Utilities
      *
      * @static
      *
-     * @return boolean
+     * @return bool
      */
     public static function arrayKeyExistsInsensitive($key, $search)
     {
@@ -519,7 +521,8 @@ class Utilities
     public static function tryGetValueInsensitive($key, $haystack, $default = null)
     {
         $array = array_change_key_case($haystack);
-        return Utilities::tryGetValue($array, strtolower($key), $default);
+
+        return self::tryGetValue($array, strtolower($key), $default);
     }
 
     /**
@@ -586,33 +589,33 @@ class Utilities
     /**
      * Takes a string and return if it ends with the specified character/string.
      *
-     * @param string  $haystack   The string to search in.
-     * @param string  $needle     postfix to match.
-     * @param boolean $ignoreCase Set true to ignore case during the comparison;
-     * otherwise, false
+     * @param string $haystack   The string to search in.
+     * @param string $needle     postfix to match.
+     * @param bool   $ignoreCase Set true to ignore case during the comparison;
+     *                           otherwise, false
      *
      * @static
      *
-     * @return boolean
+     * @return bool
      */
     public static function endsWith($haystack, $needle, $ignoreCase = false)
     {
         if ($ignoreCase) {
             $haystack = strtolower($haystack);
-            $needle   = strtolower($needle);
+            $needle = strtolower($needle);
         }
         $length = strlen($needle);
         if ($length == 0) {
             return true;
         }
 
-        return (substr($haystack, -$length) === $needle);
+        return substr($haystack, -$length) === $needle;
     }
 
     /**
      * Get id from entity object or string.
      * If entity is object than validate type and return $entity->$method()
-     * If entity is string than return this string
+     * If entity is string than return this string.
      *
      * @param object|string $entity Entity with id property
      * @param string        $type   Entity type to validate
@@ -638,17 +641,16 @@ class Utilities
      *
      * @param int $length Length of the string in bytes
      *
-     * @return string|boolean Generated string of bytes on success, or FALSE on 
-     *                        failure.
+     * @return string|bool Generated string of bytes on success, or FALSE on 
+     *                     failure.
      */
     public static function generateCryptoKey($length)
     {
         return openssl_random_pseudo_bytes($length);
     }
-    
-    
+
     /**
-     * Encrypts $data with CTR encryption
+     * Encrypts $data with CTR encryption.
      * 
      * @param string $data                 Data to be encrypted
      * @param string $key                  AES Encryption key
@@ -656,48 +658,48 @@ class Utilities
      * 
      * @return string Encrypted data
      */
-    public static function ctrCrypt($data, $key, $initializationVector) 
+    public static function ctrCrypt($data, $key, $initializationVector)
     {
         Validate::isString($data, 'data');
         Validate::isString($key, 'key');
         Validate::isString($initializationVector, 'initializationVector');
-        
+
         Validate::isTrue(
-            (strlen($key) == 16 || strlen($key) == 24 || strlen($key) == 32), 
+            (strlen($key) == 16 || strlen($key) == 24 || strlen($key) == 32),
             sprintf(Resources::INVALID_STRING_LENGTH, 'key', '16, 24, 32')
         );
-        
+
         Validate::isTrue(
-            (strlen($initializationVector) == 16), 
+            (strlen($initializationVector) == 16),
             sprintf(Resources::INVALID_STRING_LENGTH, 'initializationVector', '16')
         );
-        
+
         $blockCount = ceil(strlen($data) / 16);
-    
+
         $ctrData = '';
         for ($i = 0; $i < $blockCount; ++$i) {
             $ctrData .= $initializationVector;
-    
+
             // increment Initialization Vector
             $j = 15;
             do {
-                $digit                    = ord($initializationVector[$j]) + 1;
+                $digit = ord($initializationVector[$j]) + 1;
                 $initializationVector[$j] = chr($digit & 0xFF);
-                
-                $j--;
+
+                --$j;
             } while (($digit == 0x100) && ($j >= 0));
         }
-    
+
         $encryptCtrData = mcrypt_encrypt(
-            MCRYPT_RIJNDAEL_128, 
-            $key, 
-            $ctrData, 
+            MCRYPT_RIJNDAEL_128,
+            $key,
+            $ctrData,
             MCRYPT_MODE_ECB
         );
-        
+
         return $data ^ $encryptCtrData;
     }
-    
+
     /**
      * Convert base 256 number to decimal number. 
      * 
@@ -705,17 +707,17 @@ class Utilities
      * 
      * @return string Decimal number
      */
-    public static function base256ToDec($number) 
+    public static function base256ToDec($number)
     {
         Validate::isString($number, 'number');
-        
+
         $result = 0;
-        $base   = 1;
-        for ($i = strlen($number) - 1; $i >= 0; $i--) {
+        $base = 1;
+        for ($i = strlen($number) - 1; $i >= 0; --$i) {
             $result = bcadd($result, bcmul(ord($number[$i]), $base));
-            $base   = bcmul($base, 256);
+            $base = bcmul($base, 256);
         }
-    
+
         return $result;
     }
 }

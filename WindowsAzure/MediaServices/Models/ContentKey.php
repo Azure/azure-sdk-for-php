@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,104 +15,105 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
 
-
-
 /**
- * Represents ContentKey object used in media services
+ * Represents ContentKey object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ContentKey
 {
     /**
-     * ContentKey id
+     * ContentKey id.
      *
      * @var string
      */
     private $_id;
 
     /**
-     * Created
+     * Created.
      *
      * @var \DateTime
      */
     private $_created;
 
     /**
-     * Last modified
+     * Last modified.
      *
      * @var \DateTime
      */
     private $_lastModified;
 
     /**
-     * ContentKeyType
+     * ContentKeyType.
      *
      * @var int
      */
     private $_contentKeyType;
 
     /**
-     * EncryptedContentKey
+     * EncryptedContentKey.
      *
      * @var string
      */
     private $_encryptedContentKey;
 
     /**
-     * Name
+     * Name.
      *
      * @var string
      */
     private $_name;
 
     /**
-     * ProtectionKeyId
+     * ProtectionKeyId.
      *
      * @var string
      */
     private $_protectionKeyId;
 
     /**
-     * ProtectionKeyType
+     * ProtectionKeyType.
      *
      * @var int
      */
     private $_protectionKeyType;
 
     /**
-     * Checksum
+     * Checksum.
      *
      * @var string
      */
     private $_checksum;
 
     /**
-     * AuthorizationPolicyId
+     * AuthorizationPolicyId.
      *
      * @var string
      */
     private $_authorizationPolicyId;
 
     /**
-     * Create ContentKey from array
+     * Create ContentKey from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -120,24 +121,24 @@ class ContentKey
      */
     public static function createFromOptions($options)
     {
-        $contentKey = new ContentKey();
+        $contentKey = new self();
         $contentKey->fromArray($options);
 
         return $contentKey;
     }
 
     /**
-     * Create contentKey
+     * Create contentKey.
      *
      * @return none
      */
     public function __construct()
     {
-        $this->_id = 'nb:kid:UUID:' . Utilities::getGuid();
+        $this->_id = 'nb:kid:UUID:'.Utilities::getGuid();
     }
 
     /**
-     * Fill contentKey from array
+     * Fill contentKey from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -212,7 +213,7 @@ class ContentKey
     }
 
     /**
-     * Get "Checksum"
+     * Get "Checksum".
      *
      * @return string
      */
@@ -222,7 +223,7 @@ class ContentKey
     }
 
     /**
-     * Set "Checksum"
+     * Set "Checksum".
      *
      * @param string $value Checksum
      *
@@ -234,7 +235,7 @@ class ContentKey
     }
 
     /**
-     * Get "ProtectionKeyType"
+     * Get "ProtectionKeyType".
      *
      * @return int
      */
@@ -244,7 +245,7 @@ class ContentKey
     }
 
     /**
-     * Set "ProtectionKeyType"
+     * Set "ProtectionKeyType".
      *
      * @param int $value ProtectionKeyType
      *
@@ -256,7 +257,7 @@ class ContentKey
     }
 
     /**
-     * Get "ProtectionKeyId"
+     * Get "ProtectionKeyId".
      *
      * @return string
      */
@@ -266,7 +267,7 @@ class ContentKey
     }
 
     /**
-     * Set "ProtectionKeyId"
+     * Set "ProtectionKeyId".
      *
      * @param string $value ProtectionKeyId
      *
@@ -278,7 +279,7 @@ class ContentKey
     }
 
     /**
-     * Get "Name"
+     * Get "Name".
      *
      * @return string
      */
@@ -288,7 +289,7 @@ class ContentKey
     }
 
     /**
-     * Set "Name"
+     * Set "Name".
      *
      * @param string $value Name
      *
@@ -300,7 +301,7 @@ class ContentKey
     }
 
     /**
-     * Get "EncryptedContentKey"
+     * Get "EncryptedContentKey".
      *
      * @return string
      */
@@ -310,7 +311,7 @@ class ContentKey
     }
 
     /**
-     * Set "EncryptedContentKey"
+     * Set "EncryptedContentKey".
      *
      * @param string $value EncryptedContentKey
      *
@@ -322,7 +323,7 @@ class ContentKey
     }
 
     /**
-     * Get "ContentKeyType"
+     * Get "ContentKeyType".
      *
      * @return int
      */
@@ -332,7 +333,7 @@ class ContentKey
     }
 
     /**
-     * Set "ContentKeyType"
+     * Set "ContentKeyType".
      *
      * @param int $value ContentKeyType
      *
@@ -344,7 +345,7 @@ class ContentKey
     }
 
     /**
-     * Get "Last modified"
+     * Get "Last modified".
      *
      * @return \DateTime
      */
@@ -354,7 +355,7 @@ class ContentKey
     }
 
     /**
-     * Get "Created"
+     * Get "Created".
      *
      * @return \DateTime
      */
@@ -364,7 +365,7 @@ class ContentKey
     }
 
     /**
-     * Get "ContentKey id"
+     * Get "ContentKey id".
      *
      * @return string
      */
@@ -374,7 +375,7 @@ class ContentKey
     }
 
     /**
-     * Set "ContentKey id"
+     * Set "ContentKey id".
      *
      * @param string $value ContentKey id
      *
@@ -386,7 +387,7 @@ class ContentKey
     }
 
     /**
-     * Generate encryption content key. Encrypt aes key with protection key from WAMS
+     * Generate encryption content key. Encrypt aes key with protection key from WAMS.
      *
      * @param string $aesKey        Content key to encrypt
      * @param string $protectionKey Protection key (public key) from WAMS
@@ -399,9 +400,9 @@ class ContentKey
 
         $cryptedContentKey = '';
         openssl_public_encrypt(
-            $aesKey, 
-            $cryptedContentKey, 
-            $cert, 
+            $aesKey,
+            $cryptedContentKey,
+            $cert,
             OPENSSL_PKCS1_OAEP_PADDING
         );
 
@@ -429,7 +430,7 @@ class ContentKey
 
     /**
      * Set not encrypted content key. Automatically encrypted content key and
-     * set checksum
+     * set checksum.
      *
      * @param string $value         Content key
      * @param string $protectionKey Protection key (public key) from WAMS
@@ -441,10 +442,10 @@ class ContentKey
         $this->_generateEncryptedContentKey($value, $protectionKey);
 
         $this->_generateChecksum($value);
-    }   
+    }
 
     /**
-     * Get "AuthorizationPolicyId"
+     * Get "AuthorizationPolicyId".
      *
      * @return string
      */
@@ -454,7 +455,7 @@ class ContentKey
     }
 
     /**
-     * Set "AuthorizationPolicyId"
+     * Set "AuthorizationPolicyId".
      *
      * @param string $value AuthorizationPolicyId id
      *
@@ -465,5 +466,3 @@ class ContentKey
         $this->_authorizationPolicyId = $value;
     }
 }
-
-

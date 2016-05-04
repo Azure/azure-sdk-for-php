@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,46 +15,49 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\Common\Models;
+
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Holds elements of queue properties retention policy field.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class RetentionPolicy
 {
     /**
-     * Indicates whether a retention policy is enabled for the storage service
+     * Indicates whether a retention policy is enabled for the storage service.
      * 
      * @var bool.
      */
     private $_enabled;
-    
+
     /**
      * If $_enabled is true then this field indicates the number of days that metrics
      * or logging data should be retained. All data older than this value will be 
      * deleted. The minimum value you can specify is 1; 
-     * the largest value is 365 (one year)
+     * the largest value is 365 (one year).
      * 
      * @var int
      */
     private $_days;
-    
+
     /**
      * Creates object from $parsedResponse.
      * 
@@ -64,37 +67,37 @@ class RetentionPolicy
      */
     public static function create($parsedResponse)
     {
-        $result = new RetentionPolicy();
+        $result = new self();
         $result->setEnabled(Utilities::toBoolean($parsedResponse['Enabled']));
         if ($result->getEnabled()) {
             $result->setDays(intval($parsedResponse['Days']));
         }
-        
+
         return $result;
     }
-    
+
     /**
      * Gets enabled.
      * 
-     * @return bool. 
+     * @return bool.
      */
     public function getEnabled()
     {
         return $this->_enabled;
     }
-    
+
     /**
      * Sets enabled.
      * 
      * @param bool $enabled value to use.
      * 
-     * @return none. 
+     * @return none.
      */
     public function setEnabled($enabled)
     {
         $this->_enabled = $enabled;
     }
-    
+
     /**
      * Gets days field.
      * 
@@ -104,7 +107,7 @@ class RetentionPolicy
     {
         return $this->_days;
     }
-    
+
     /**
      * Sets days field.
      * 
@@ -116,11 +119,11 @@ class RetentionPolicy
     {
         $this->_days = $days;
     }
-    
+
     /**
-     * Converts this object to array with XML tags
+     * Converts this object to array with XML tags.
      * 
-     * @return array. 
+     * @return array.
      */
     public function toArray()
     {
@@ -128,9 +131,7 @@ class RetentionPolicy
         if (isset($this->_days)) {
             $array['Days'] = strval($this->_days);
         }
-        
+
         return $array;
     }
 }
-
-

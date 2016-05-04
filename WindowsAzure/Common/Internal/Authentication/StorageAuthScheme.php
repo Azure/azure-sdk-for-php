@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,28 +15,29 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal\Authentication
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\Common\Internal\Authentication;
+
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\Internal\Authentication\IAuthScheme;
-
 
 /**
  * Base class for azure authentication schemes.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal\Authentication
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 abstract class StorageAuthScheme implements IAuthScheme
@@ -55,7 +56,7 @@ abstract class StorageAuthScheme implements IAuthScheme
      */
     public function __construct($accountName, $accountKey)
     {
-        $this->accountKey  = $accountKey;
+        $this->accountKey = $accountKey;
         $this->accountName = $accountName;
     }
 
@@ -72,8 +73,8 @@ abstract class StorageAuthScheme implements IAuthScheme
     protected function computeCanonicalizedHeaders($headers)
     {
         $canonicalizedHeaders = array();
-        $normalizedHeaders    = array();
-        $validPrefix          =  Resources::X_MS_HEADER_PREFIX;
+        $normalizedHeaders = array();
+        $validPrefix = Resources::X_MS_HEADER_PREFIX;
 
         if (is_null($normalizedHeaders)) {
             return $canonicalizedHeaders;
@@ -92,7 +93,7 @@ abstract class StorageAuthScheme implements IAuthScheme
                 $value = str_replace("\r\n", ' ', $value);
 
                 // Trim any white space around the colon in the header.
-                $value  = ltrim($value);
+                $value = ltrim($value);
                 $header = rtrim($header);
 
                 $normalizedHeaders[$header] = $value;
@@ -104,14 +105,14 @@ abstract class StorageAuthScheme implements IAuthScheme
         ksort($normalizedHeaders);
 
         foreach ($normalizedHeaders as $key => $value) {
-            $canonicalizedHeaders[] = $key . ':' . $value;
+            $canonicalizedHeaders[] = $key.':'.$value;
         }
 
         return $canonicalizedHeaders;
     }
 
     /**
-     * Computes canonicalized resources from URL using Table formar
+     * Computes canonicalized resources from URL using Table formar.
      *
      * @param string $url         request url.
      * @param array  $queryParams request query variables.
@@ -127,7 +128,7 @@ abstract class StorageAuthScheme implements IAuthScheme
 
         // 1. Beginning with an empty string (""), append a forward slash (/),
         //    followed by the name of the account that owns the accessed resource.
-        $canonicalizedResource = '/' . $this->accountName;
+        $canonicalizedResource = '/'.$this->accountName;
 
         // 2. Append the resource's encoded URI path, without any query parameters.
         $canonicalizedResource .= parse_url($url, PHP_URL_PATH);
@@ -136,7 +137,7 @@ abstract class StorageAuthScheme implements IAuthScheme
         //    parameter (for example, ?comp=metadata). No other parameters should
         //    be included on the query string.
         if (array_key_exists(Resources::QP_COMP, $queryParams)) {
-            $canonicalizedResource .= '?' . Resources::QP_COMP . '=';
+            $canonicalizedResource .= '?'.Resources::QP_COMP.'=';
             $canonicalizedResource .= $queryParams[Resources::QP_COMP];
         }
 
@@ -160,7 +161,7 @@ abstract class StorageAuthScheme implements IAuthScheme
 
         // 1. Beginning with an empty string (""), append a forward slash (/),
         //    followed by the name of the account that owns the accessed resource.
-        $canonicalizedResource = '/' . $this->accountName;
+        $canonicalizedResource = '/'.$this->accountName;
 
         // 2. Append the resource's encoded URI path, without any query parameters.
         $canonicalizedResource .= parse_url($url, PHP_URL_PATH);
@@ -186,7 +187,7 @@ abstract class StorageAuthScheme implements IAuthScheme
             sort($values);
             $separated = implode(Resources::SEPARATOR, $values);
 
-            $canonicalizedResource .= "\n" . $key . ':' . $separated;
+            $canonicalizedResource .= "\n".$key.':'.$separated;
         }
 
         return $canonicalizedResource;
@@ -211,5 +212,3 @@ abstract class StorageAuthScheme implements IAuthScheme
         $httpMethod
     );
 }
-
-

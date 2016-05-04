@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,26 +15,26 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\Common\Internal;
-use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
-use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Validates aganist a condition and throws an exception in case of failure.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Validate
@@ -69,7 +69,7 @@ class Validate
     public static function isString($var, $name)
     {
         try {
-            (string)$var;
+            (string) $var;
         } catch (\Exception $e) {
             throw new InvalidArgumentTypeException(gettype(''), $name);
         }
@@ -86,7 +86,7 @@ class Validate
      */
     public static function isBoolean($var)
     {
-        (bool)$var;
+        (bool) $var;
     }
 
     /**
@@ -138,7 +138,7 @@ class Validate
     public static function isInteger($var, $name)
     {
         try {
-            (int)$var;
+            (int) $var;
         } catch (\Exception $e) {
             throw new InvalidArgumentTypeException(gettype(123), $name);
         }
@@ -149,17 +149,17 @@ class Validate
      *
      * @param string $var value.
      *
-     * @return boolean
+     * @return bool
      */
     public static function isNullOrEmptyString($var)
     {
         try {
-            (string)$var;
+            (string) $var;
         } catch (\Exception $e) {
             return false;
         }
 
-        return (!isset($var) || trim($var)==='');
+        return !isset($var) || trim($var) === '';
     }
 
     /**
@@ -180,7 +180,7 @@ class Validate
     }
 
     /**
-     * Throws exception if the provided $date is not of type \DateTime
+     * Throws exception if the provided $date is not of type \DateTime.
      *
      * @param mix $date variable to check against.
      *
@@ -217,7 +217,7 @@ class Validate
      *
      * @param mixed  $objectInstance An object that requires class type validation.
      * @param mixed  $classInstance  The instance of the class the the
-     * object instance should be.
+     *                               object instance should be.
      * @param string $name           The name of the object.
      *
      * @throws \InvalidArgumentException
@@ -226,13 +226,13 @@ class Validate
      */
     public static function isInstanceOf($objectInstance, $classInstance, $name)
     {
-        Validate::notNull($classInstance, 'classInstance');
+        self::notNull($classInstance, 'classInstance');
         if (is_null($objectInstance)) {
             return true;
         }
 
         $objectType = gettype($objectInstance);
-        $classType  = gettype($classInstance);
+        $classType = gettype($classInstance);
 
         if ($objectType === $classType) {
             return true;
@@ -267,7 +267,7 @@ class Validate
      *
      * @throws \InvalidArgumentException
      *
-     * @return boolean
+     * @return bool
      */
     public static function isValidUri($uri)
     {
@@ -290,7 +290,7 @@ class Validate
      *
      * @throws InvalidArgumentTypeException.
      *
-     * @return boolean
+     * @return bool
      */
     public static function isObject($var, $name)
     {
@@ -310,13 +310,13 @@ class Validate
      *
      * @throws \InvalidArgumentException
      *
-     * @return boolean
+     * @return bool
      */
     public static function isA($objectInstance, $class, $name)
     {
-        Validate::isString($class, 'class');
-        Validate::notNull($objectInstance, 'objectInstance');
-        Validate::isObject($objectInstance, 'objectInstance');
+        self::isString($class, 'class');
+        self::notNull($objectInstance, 'objectInstance');
+        self::isObject($objectInstance, 'objectInstance');
 
         $objectType = get_class($objectInstance);
 
@@ -335,20 +335,20 @@ class Validate
     }
 
     /**
-     * Validate if method exists in object
+     * Validate if method exists in object.
      *
      * @param object $objectInstance An object that requires method existing
      *                               validation
      * @param string $method         Method name
      * @param string $name           The parameter name
      *
-     * @return boolean
+     * @return bool
      */
     public static function methodExists($objectInstance, $method, $name)
     {
-        Validate::isString($method, 'method');
-        Validate::notNull($objectInstance, 'objectInstance');
-        Validate::isObject($objectInstance, 'objectInstance');
+        self::isString($method, 'method');
+        self::notNull($objectInstance, 'objectInstance');
+        self::isObject($objectInstance, 'objectInstance');
 
         if (method_exists($objectInstance, $method)) {
             return true;
@@ -364,24 +364,24 @@ class Validate
     }
 
     /**
-     * Validate if string is date formatted
+     * Validate if string is date formatted.
      *
      * @param string $value Value to validate
      * @param string $name  Name of parameter to insert in erro message
      *
      * @throws \InvalidArgumentException
      *
-     * @return boolean
+     * @return bool
      */
     public static function isDateString($value, $name)
     {
-        Validate::isString($value, 'value');
+        self::isString($value, 'value');
 
         try {
             new \DateTime($value);
+
             return true;
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             throw new \InvalidArgumentException(
                 sprintf(
                     Resources::ERROR_INVALID_DATE_STRING,
@@ -391,7 +391,4 @@ class Validate
             );
         }
     }
-
 }
-
-

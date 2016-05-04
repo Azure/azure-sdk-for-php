@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,53 +15,55 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\Common\Internal\Validate;
 
-
 /**
- * Represents task historical event object used in media services
+ * Represents task historical event object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class TaskHistoricalEvent
 {
     /**
-     * Code
+     * Code.
      *
      * @var int
      */
     private $_code;
 
     /**
-     * Message
+     * Message.
      *
      * @var string
      */
     private $_message;
 
     /**
-     * Time stamp
+     * Time stamp.
      *
      * @var \DateTime
      */
     private $_timeStamp;
 
     /**
-     * Create task historical event from array
+     * Create task historical event from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -69,21 +71,21 @@ class TaskHistoricalEvent
      */
     public static function createFromOptions($options)
     {
-        $taskHistoricalEvent = new TaskHistoricalEvent();
+        $taskHistoricalEvent = new self();
         $taskHistoricalEvent->fromArray($options);
 
         return $taskHistoricalEvent;
     }
 
     /**
-     * Create task historical event
+     * Create task historical event.
      */
     public function __construct()
     {
     }
 
     /**
-     * Fill task historical event from array
+     * Fill task historical event from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -108,7 +110,7 @@ class TaskHistoricalEvent
     }
 
     /**
-     * Get "Time stamp"
+     * Get "Time stamp".
      *
      * @return \DateTime
      */
@@ -118,7 +120,7 @@ class TaskHistoricalEvent
     }
 
     /**
-     * Get "Message"
+     * Get "Message".
      *
      * @return string
      */
@@ -128,7 +130,7 @@ class TaskHistoricalEvent
     }
 
     /**
-     * Get "Code"
+     * Get "Code".
      *
      * @return int
      */
@@ -137,4 +139,3 @@ class TaskHistoricalEvent
         return $this->_code;
     }
 }
-

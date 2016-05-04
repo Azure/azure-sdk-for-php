@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,15 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal\Atom
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\Common\Internal\Atom;
-use WindowsAzure\Common\Internal\Utilities;
+
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 
@@ -31,14 +31,15 @@ use WindowsAzure\Common\Internal\Validate;
  * The Entry class of ATOM standard.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal\Atom
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 class Entry extends AtomBase
 {
     // @codingStandardsIgnoreStart
@@ -88,7 +89,7 @@ class Entry extends AtomBase
     /**
      * Is the entry published.
      *
-     * @var boolean
+     * @var bool
      */
     protected $published;
 
@@ -156,18 +157,19 @@ class Entry extends AtomBase
     }
 
     /**
-     * Creates an ATOM ENTRY instance with specified simpleXML object
+     * Creates an ATOM ENTRY instance with specified simpleXML object.
      *
      * @param \SimpleXMLElement $entryXml xml element of ATOM ENTRY
      *
      * @return none
      */
-    public function fromXml($entryXml) {
+    public function fromXml($entryXml)
+    {
         Validate::notNull($entryXml, 'entryXml');
         Validate::isA($entryXml, '\SimpleXMLElement', 'entryXml');
 
-        $this->attributes = (array)$entryXml->attributes();
-        $entryArray       = (array)$entryXml;
+        $this->attributes = (array) $entryXml->attributes();
+        $entryArray = (array) $entryXml;
 
         if (array_key_exists(Resources::AUTHOR, $entryArray)) {
             $this->author = $this->processAuthorNode($entryArray);
@@ -188,7 +190,7 @@ class Entry extends AtomBase
         }
 
         if (array_key_exists('id', $entryArray)) {
-            $this->id = (string)$entryArray['id'];
+            $this->id = (string) $entryArray['id'];
         }
 
         if (array_key_exists(Resources::LINK, $entryArray)) {
@@ -216,7 +218,7 @@ class Entry extends AtomBase
         if (array_key_exists('updated', $entryArray)) {
             $this->updated = \DateTime::createFromFormat(
                 \DateTime::ATOM,
-                (string)$entryArray['updated']
+                (string) $entryArray['updated']
             );
         }
     }
@@ -356,7 +358,7 @@ class Entry extends AtomBase
     /**
      * Gets published of the entry.
      *
-     * @return boolean
+     * @return bool
      */
     public function getPublished()
     {
@@ -366,7 +368,7 @@ class Entry extends AtomBase
     /**
      * Sets published of the entry.
      *
-     * @param boolean $published Is the entry published.
+     * @param bool $published Is the entry published.
      *
      * @return none
      */
@@ -474,7 +476,7 @@ class Entry extends AtomBase
     }
 
     /**
-     * Sets updated
+     * Sets updated.
      *
      * @param \DateTime $updated updated.
      *

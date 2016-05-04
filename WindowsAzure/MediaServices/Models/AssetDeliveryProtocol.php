@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,68 +15,69 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
 
 /**
- * Represents AssetDeliveryProtocol type enum used in media services
+ * Represents AssetDeliveryProtocol type enum used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class AssetDeliveryProtocol
 {
     /**
-     * No protocols
+     * No protocols.
      *
      * @var int
      */
     const NONE = 0;
 
     /**
-     * Smooth streaming protocol
+     * Smooth streaming protocol.
      *
      * @var int
      */
     const SMOOTH_STREAMING = 1;
 
     /**
-     * MPEG Dynamic Adaptive Streaming over HTTP (DASH)
+     * MPEG Dynamic Adaptive Streaming over HTTP (DASH).
      *
      * @var int
      */
     const DASH = 2;
 
     /**
-     * Apple HTTP Live Streaming protocol
+     * Apple HTTP Live Streaming protocol.
      *
      * @var int
      */
     const HLS = 4;
 
     /**
-     * Adobe HTTP Dynamic Streaming (HDS)
+     * Adobe HTTP Dynamic Streaming (HDS).
      *
      * @var int
      */
     const HDS = 4;
-    
+
     /**
-     * Include all protocols
+     * Include all protocols.
      *
      * @var int
      */
     const ALL = 0xFFFF;
 }
-

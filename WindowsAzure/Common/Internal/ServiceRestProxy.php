@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,18 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\Common\Internal;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\Internal\RestProxy;
+
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
 
@@ -34,11 +31,13 @@ use WindowsAzure\Common\Internal\Http\HttpCallContext;
  * Base class for all services rest proxies.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ServiceRestProxy extends RestProxy
@@ -71,21 +70,22 @@ class ServiceRestProxy extends RestProxy
     {
         return $this->_accountName;
     }
-    
+
     /**
      * Sends HTTP request with the specified HTTP call context.
      * 
      * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context The HTTP 
-     * call context.
+     *                                                                   call context.
      * 
      * @return \HTTP_Request2_Response
      */
     protected function sendContext($context)
     {
         $context->setUri($this->getUri());
+
         return parent::sendContext($context);
     }
-    
+
     /**
      * Sends HTTP request with the specified parameters.
      * 
@@ -100,11 +100,11 @@ class ServiceRestProxy extends RestProxy
      * @return \HTTP_Request2_Response
      */
     protected function send(
-        $method, 
-        $headers, 
-        $queryParams, 
+        $method,
+        $headers,
+        $queryParams,
         $postParameters,
-        $path, 
+        $path,
         $statusCode,
         $body = Resources::EMPTY_STRING
     ) {
@@ -115,19 +115,18 @@ class ServiceRestProxy extends RestProxy
         $context->setPath($path);
         $context->setQueryParameters($queryParams);
         $context->setPostParameters($postParameters);
-        
+
         if (is_array($statusCode)) {
             $context->setStatusCodes($statusCode);
         } else {
             $context->addStatusCode($statusCode);
         }
-        
+
         return $this->sendContext($context);
     }
 
-    
     /**
-     * Adds optional header to headers if set
+     * Adds optional header to headers if set.
      * 
      * @param array           $headers         The array of request headers.
      * @param AccessCondition $accessCondition The access condition object.
@@ -138,7 +137,7 @@ class ServiceRestProxy extends RestProxy
     {
         if (!is_null($accessCondition)) {
             $header = $accessCondition->getHeader();
-            
+
             if ($header != Resources::EMPTY_STRING) {
                 $value = $accessCondition->getValue();
                 if ($value instanceof \DateTime) {
@@ -150,12 +149,12 @@ class ServiceRestProxy extends RestProxy
                 $headers[$header] = $value;
             }
         }
-        
+
         return $headers;
     }
-    
+
     /**
-     * Adds optional header to headers if set
+     * Adds optional header to headers if set.
      * 
      * @param array           $headers         The array of request headers.
      * @param AccessCondition $accessCondition The access condition object.
@@ -163,30 +162,30 @@ class ServiceRestProxy extends RestProxy
      * @return array
      */
     public function addOptionalSourceAccessConditionHeader(
-        $headers, 
+        $headers,
         $accessCondition
     ) {
         if (!is_null($accessCondition)) {
-            $header     = $accessCondition->getHeader();
+            $header = $accessCondition->getHeader();
             $headerName = null;
             if (!empty($header)) {
-                switch($header) {
+                switch ($header) {
                 case Resources::IF_MATCH:
                     $headerName = Resources::X_MS_SOURCE_IF_MATCH;
                     break;
-                
+
                 case Resources::IF_UNMODIFIED_SINCE:
                     $headerName = Resources::X_MS_SOURCE_IF_UNMODIFIED_SINCE;
                     break;
-                
+
                 case Resources::IF_MODIFIED_SINCE:
                     $headerName = Resources::X_MS_SOURCE_IF_MODIFIED_SINCE;
                     break;
-                
+
                 case Resources::IF_NONE_MATCH:
                     $headerName = Resources::X_MS_SOURCE_IF_NONE_MATCH;
                     break;
-                
+
                 default:
                     throw new \Exception(Resources::INVALID_ACH_MSG);
                     break;
@@ -199,15 +198,15 @@ class ServiceRestProxy extends RestProxy
                     $value->getTimestamp()
                 );
             }
-            
+
             $this->addOptionalHeader($headers, $headerName, $value);
         }
-        
+
         return $headers;
     }
-    
+
     /**
-     * Adds HTTP POST parameter to the specified 
+     * Adds HTTP POST parameter to the specified.
      * 
      * @param array  $postParameters An array of HTTP POST parameters.
      * @param string $key            The key of a HTTP POST parameter. 
@@ -222,11 +221,12 @@ class ServiceRestProxy extends RestProxy
     ) {
         Validate::isArray($postParameters, 'postParameters');
         $postParameters[$key] = $value;
-        return $postParameters; 
+
+        return $postParameters;
     }
-    
+
     /**
-     * Groups set of values into one value separated with Resources::SEPARATOR
+     * Groups set of values into one value separated with Resources::SEPARATOR.
      * 
      * @param array $values array of values to be grouped.
      * 
@@ -236,18 +236,18 @@ class ServiceRestProxy extends RestProxy
     {
         Validate::isArray($values, 'values');
         $joined = Resources::EMPTY_STRING;
-        
+
         foreach ($values as $value) {
             if (!is_null($value) && !empty($value)) {
-                $joined .= $value . Resources::SEPARATOR;
+                $joined .= $value.Resources::SEPARATOR;
             }
         }
-        
+
         return trim($joined, Resources::SEPARATOR);
     }
-    
+
     /**
-     * Adds metadata elements to headers array
+     * Adds metadata elements to headers array.
      * 
      * @param array $headers  HTTP request headers
      * @param array $metadata user specified metadata
@@ -257,13 +257,13 @@ class ServiceRestProxy extends RestProxy
     protected function addMetadataHeaders($headers, $metadata)
     {
         $this->validateMetadata($metadata);
-        
+
         $metadata = $this->generateMetadataHeaders($metadata);
-        $headers  = array_merge($headers, $metadata);
-        
+        $headers = array_merge($headers, $metadata);
+
         return $headers;
     }
-    
+
     /**
      * Generates metadata headers by prefixing each element with 'x-ms-meta'.
      *
@@ -274,24 +274,24 @@ class ServiceRestProxy extends RestProxy
     public function generateMetadataHeaders($metadata)
     {
         $metadataHeaders = array();
-        
+
         if (is_array($metadata) && !is_null($metadata)) {
             foreach ($metadata as $key => $value) {
                 $headerName = Resources::X_MS_META_HEADER_PREFIX;
-                if (   strpos($value, "\r") !== false
+                if (strpos($value, "\r") !== false
                     || strpos($value, "\n") !== false
                 ) {
                     throw new \InvalidArgumentException(Resources::INVALID_META_MSG);
                 }
-                
+
                 $headerName                  .= strtolower($key);
                 $metadataHeaders[$headerName] = $value;
             }
         }
-        
+
         return $metadataHeaders;
     }
-    
+
     /**
      * Gets metadata array by parsing them from given headers.
      *
@@ -307,21 +307,21 @@ class ServiceRestProxy extends RestProxy
                 strtolower($key),
                 Resources::X_MS_META_HEADER_PREFIX
             );
-            
+
             if ($isMetadataHeader) {
                 $MetadataName = str_replace(
                     Resources::X_MS_META_HEADER_PREFIX,
                     Resources::EMPTY_STRING,
                     strtolower($key)
                 );
-                
+
                 $metadata[$MetadataName] = $value;
             }
         }
-        
+
         return $metadata;
     }
-    
+
     /**
      * Validates the provided metadata array.
      * 
@@ -336,12 +336,10 @@ class ServiceRestProxy extends RestProxy
         } else {
             $metadata = array();
         }
-        
+
         foreach ($metadata as $key => $value) {
             Validate::isString($key, 'metadata key');
             Validate::isString($value, 'metadata value');
         }
     }
 }
-
-

@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,24 +15,26 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Templates;
 
 /**
- * Represents UnknownOutputPassingOption type enumeration used in media services
+ * Represents UnknownOutputPassingOption type enumeration used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class UnknownOutputPassingOption
@@ -42,14 +44,14 @@ class UnknownOutputPassingOption
      *
      * @var string
      */
-    const NOT_ALLOWED = "NotAllowed";
+    const NOT_ALLOWED = 'NotAllowed';
 
     /**
      * Passing the video portion of protected content to an Unknown Output is allowed.
      *
      * @var string
      */
-    const ALLOWED = "Allowed";
+    const ALLOWED = 'Allowed';
 
     /**
      * Passing the video portion of protected content to an Unknown Output is allowed but the client must 
@@ -57,6 +59,5 @@ class UnknownOutputPassingOption
      *
      * @var string
      */
-    const ALLOWED_WITH_VIDEO_CONSTRICTION = "AllowedWithVideoConstriction";
+    const ALLOWED_WITH_VIDEO_CONSTRICTION = 'AllowedWithVideoConstriction';
 }
-

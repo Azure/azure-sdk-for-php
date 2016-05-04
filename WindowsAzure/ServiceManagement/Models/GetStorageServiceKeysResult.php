@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\ServiceManagement\Models;
+
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
@@ -30,11 +31,13 @@ use WindowsAzure\Common\Internal\Utilities;
  * The result of calling getStorageServiceKeys and regenerateStorageServiceKeys API.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class GetStorageServiceKeysResult
@@ -43,17 +46,17 @@ class GetStorageServiceKeysResult
      * @var string
      */
     private $_url;
-    
+
     /**
      * @var string
      */
     private $_primary;
-    
+
     /**
      * @var string
      */
     private $_secondary;
-    
+
     /**
      * Creates new GetStorageServiceKeysResult object from parsed response.
      * 
@@ -63,13 +66,13 @@ class GetStorageServiceKeysResult
      */
     public static function create($parsed)
     {
-        $result             = new GetStorageServiceKeysResult();
-        $keys               = Utilities::tryGetValue(
+        $result = new self();
+        $keys = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_STORAGE_SERVICE_KEYS
         );
-        $result->_url       = Utilities::tryGetValue($parsed, Resources::XTAG_URL);
-        $result->_primary   = Utilities::tryGetValue(
+        $result->_url = Utilities::tryGetValue($parsed, Resources::XTAG_URL);
+        $result->_primary = Utilities::tryGetValue(
             $keys,
             Resources::XTAG_PRIMARY
         );
@@ -77,10 +80,10 @@ class GetStorageServiceKeysResult
             $keys,
             Resources::XTAG_SECONDARY
         );
-        
+
         return $result;
     }
-    
+
     /**
      * Gets the url.
      * 
@@ -90,7 +93,7 @@ class GetStorageServiceKeysResult
     {
         return $this->_url;
     }
-    
+
     /**
      * Sets the url.
      * 
@@ -102,7 +105,7 @@ class GetStorageServiceKeysResult
     {
         $this->_url = $url;
     }
-    
+
     /**
      * Gets the primary.
      * 
@@ -112,7 +115,7 @@ class GetStorageServiceKeysResult
     {
         return $this->_primary;
     }
-    
+
     /**
      * Sets the primary.
      * 
@@ -124,7 +127,7 @@ class GetStorageServiceKeysResult
     {
         $this->_primary = $primary;
     }
-    
+
     /**
      * Gets the secondary.
      * 
@@ -134,7 +137,7 @@ class GetStorageServiceKeysResult
     {
         return $this->_secondary;
     }
-    
+
     /**
      * Sets the secondary.
      * 
@@ -147,5 +150,3 @@ class GetStorageServiceKeysResult
         $this->_secondary = $secondary;
     }
 }
-
-

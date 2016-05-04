@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,51 +15,50 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Templates;
+
 use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * Represents TokenClaim object used in media services
+ * Represents TokenClaim object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Templates
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class TokenClaim
 {
-
-    const CONTENT_KEY_ID_CLAIM_TYPE = "urn:microsoft:azure:mediaservices:contentkeyidentifier";
+    const CONTENT_KEY_ID_CLAIM_TYPE = 'urn:microsoft:azure:mediaservices:contentkeyidentifier';
 
     /**
-     * TokenClaim claimType
+     * TokenClaim claimType.
      *
      * @var string
      */
     private $_claimType;
 
     /**
-     * TokenClaim claimValue
+     * TokenClaim claimValue.
      *
      * @var string
      */
     private $_claimValue;
 
     /**
-     * Create TokenClaim
-     *
-     * @return void
+     * Create TokenClaim.
      */
     public function __construct($type, $value = null)
     {
@@ -67,9 +66,9 @@ class TokenClaim
         $this->_claimType = $type;
         $this->_claimValue = $value;
     }
-    
+
     /**
-     * Get "TokenClaim ClaimType"
+     * Get "TokenClaim ClaimType".
      *
      * @return string
      */
@@ -79,19 +78,17 @@ class TokenClaim
     }
 
     /**
-     * Set "TokenClaim ClaimType"
+     * Set "TokenClaim ClaimType".
      *
      * @param string $value ClaimType
-     *
-     * @return void
      */
     public function setClaimType($value)
     {
         $this->_claimType = $value;
     }
-    
+
     /**
-     * Get "TokenClaim ClaimValue"
+     * Get "TokenClaim ClaimValue".
      *
      * @return string
      */
@@ -101,16 +98,12 @@ class TokenClaim
     }
 
     /**
-     * Set "TokenClaim ClaimValue"
+     * Set "TokenClaim ClaimValue".
      *
      * @param string $value ClaimValue
-     *
-     * @return void
      */
     public function setClaimValue($value)
     {
         $this->_claimValue = $value;
-    }    
+    }
 }
-
-

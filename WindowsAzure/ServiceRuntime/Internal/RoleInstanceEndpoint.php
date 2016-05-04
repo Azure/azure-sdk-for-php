@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,24 +15,26 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\ServiceRuntime\Internal;
 
 /**
  * The role instance endpoint data.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class RoleInstanceEndpoint
@@ -41,7 +43,7 @@ class RoleInstanceEndpoint
      * @var RoleInstance
      */
     private $_roleInstance;
-    
+
     /**
      * @var string
      */
@@ -51,14 +53,14 @@ class RoleInstanceEndpoint
      * @var string
      */
     private $_address;
-    
+
     /**
      * @var string
      */
     private $_port;
-    
+
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param string $protocol The protocol.
      * @param string $address  The Address.
@@ -67,10 +69,10 @@ class RoleInstanceEndpoint
     public function __construct($protocol, $address, $port)
     {
         $this->_protocol = $protocol;
-        $this->_address  = $address;
-        $this->_port     = $port;
+        $this->_address = $address;
+        $this->_port = $port;
     }
-    
+
     /**
      * Sets the role instance.
      * 
@@ -82,7 +84,7 @@ class RoleInstanceEndpoint
     {
         $this->_roleInstance = $roleInstance;
     }
-    
+
     /**
      * Returns the RoleInstance object associated with this endpoint.
      * 
@@ -92,7 +94,7 @@ class RoleInstanceEndpoint
     {
         return $this->_roleInstance;
     }
-    
+
     /**
      * Returns the protocol associated with the endpoint.
      * 
@@ -102,7 +104,7 @@ class RoleInstanceEndpoint
     {
         return $this->_protocol;
     }
-    
+
     /**
      * Return the address.
      * 
@@ -112,7 +114,7 @@ class RoleInstanceEndpoint
     {
         return $this->_address;
     }
-    
+
     /**
      * Return the port.
      * 
@@ -123,4 +125,3 @@ class RoleInstanceEndpoint
         return $this->_port;
     }
 }
-

@@ -23,6 +23,7 @@
             <td>Name</td>
             <td>Category</td>
             <td>Date</td>
+            <td>PartitionKey</td>
             <td>Complete</td>
         </tr>
 
@@ -32,13 +33,14 @@ require_once '..\client\client.php';
 use Client\CloudSubscription;
 use Client\CloudTable;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Table\Models\EdmType;
+use MicrosoftAzure\Storage\Table\Models\EdmType;
 
 date_default_timezone_set('America/Los_Angeles');
 
 $subscriptionId      = 'Your subscription';
 $certificatePath     = 'Certificate path';
-$storageServiceName  = 'phpsdkexamples'; // Storage account may change if it already exists in another subscription.
+$storageServiceName  = 'phpsdkexamples'; // the storage account will be created if it does not exist
+
 $tasksTableName      = 'tasks';
 $cloudSubscription   = null;
 $cloudStorageService = null;
@@ -52,7 +54,7 @@ $cloudTable          = $cloudStorageService->createTable($tasksTableName);
 if (array_key_exists('Completed', $_POST)) {
     // Remove completed item.
     $completed = $_POST['Completed'];
-    $cloudTable->deleteEntity($completed);
+    $cloudTable->deleteEntity($_POST['PartitionKey'], $completed);
 } else if (array_key_exists('AddItem', $_POST)) {
     $item             = $_POST['item'];
     $item['Complete'] = '0';
@@ -63,7 +65,7 @@ if (array_key_exists('Completed', $_POST)) {
     $cloudTable = null;
     if ($deleted) {
         // Sleep until the table is deleted
-        sleep(40);
+        sleep(5);
     }
 } else if (array_key_exists('DestroyList', $_POST)) {
     // Clean and remove the storage service.
@@ -85,11 +87,13 @@ function listEntries($cloudTable)
         $category = $entity->getPropertyValue('Category');
         $date     = $entity->getPropertyValue('Date');
         $complete = $entity->getPropertyValue('RowKey');
+        $partitionKey = $entity->getPropertyValue('PartitionKey');
         echo "<tr>
                 <td>$name</td>
                 <td>$category</td>
                 <td>$date</td>
                 <form action=\"index.php\" method=\"post\">
+                <td><input type=\"input\" name=\"PartitionKey\" value=\"$partitionKey\" </> </td>
                 <td><input type=\"checkbox\" name=\"Completed\" value=\"$complete\" 
                             onchange=\"form.submit()\"/></td>
                 </form>
@@ -126,7 +130,7 @@ function listEntries($cloudTable)
         <hr />
         Clean and remove storage service
         <br />
-        <input type="submit" value="Click me!" name="DestroyList" />
+        <input type="submit" value="Remove the Storage Account" name="DestroyList" />
     </form>
     
 </body>

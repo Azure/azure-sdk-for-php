@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,145 +15,146 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\Common\Internal\Validate;
 
-
-
 /**
- * Represents asset object used in media services
+ * Represents asset object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Asset
 {
     /**
-     * The state of the asset "initialized"
+     * The state of the asset "initialized".
      *
      * @var int
      */
     const STATE_INITIALIZED = 0;
 
     /**
-     * The state of the asset "published"
+     * The state of the asset "published".
      *
      * @var int
      */
     const STATE_PUBLISHED = 1;
 
     /**
-     * The state of the asset "deleted"
+     * The state of the asset "deleted".
      *
      * @var int
      */
     const STATE_DELETED = 2;
 
     /**
-     * The encryption options "none"
+     * The encryption options "none".
      *
      * @var int
      */
     const OPTIONS_NONE = 0;
 
     /**
-     * The encryption options "storage encrypted"
+     * The encryption options "storage encrypted".
      *
      * @var int
      */
     const OPTIONS_STORAGE_ENCRYPTED = 1;
 
     /**
-     * The encryption options "common encryption protected"
+     * The encryption options "common encryption protected".
      *
      * @var int
      */
     const OPTIONS_COMMON_ENCRYPTION_PROTECTED = 2;
 
     /**
-     * The encryption options "envelope encryption protected"
+     * The encryption options "envelope encryption protected".
      *
      * @var int
      */
     const OPTIONS_ENVELOPE_ENCRYPTION_PROTECTED = 4;
 
     /**
-     * Asset id
+     * Asset id.
      *
      * @var string
      */
     private $_id;
 
     /**
-     * State
+     * State.
      *
      * @var int
      */
     private $_state;
 
     /**
-     * Created
+     * Created.
      *
      * @var \DateTime
      */
     private $_created;
 
     /**
-     * Last modified
+     * Last modified.
      *
      * @var \DateTime
      */
     private $_lastModified;
 
     /**
-     * Alternate id
+     * Alternate id.
      *
      * @var string
      */
     private $_alternateId;
 
     /**
-     * Name
+     * Name.
      *
      * @var string
      */
     private $_name;
 
     /**
-     * Options
+     * Options.
      *
      * @var int
      */
     private $_options;
 
     /**
-     * URI
+     * URI.
      *
      * @var string
      */
     private $_uri;
 
     /**
-     * Storage account name
+     * Storage account name.
      *
      * @var string
      */
     private $_storageAccountName;
 
     /**
-     * Create asset from array
+     * Create asset from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -163,14 +164,14 @@ class Asset
     {
         Validate::notNull($options['Options'], 'options[Options]');
 
-        $asset = new Asset($options['Options']);
+        $asset = new self($options['Options']);
         $asset->fromArray($options);
 
         return $asset;
     }
 
     /**
-     * Create asset
+     * Create asset.
      *
      * @param int $options Asset encrytion options.
      *
@@ -182,7 +183,7 @@ class Asset
     }
 
     /**
-     * Fill asset from array
+     * Fill asset from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -243,7 +244,7 @@ class Asset
     }
 
     /**
-     * Get "Storage account name"
+     * Get "Storage account name".
      *
      * @return string
      */
@@ -253,7 +254,7 @@ class Asset
     }
 
     /**
-     * Get "URI"
+     * Get "URI".
      *
      * @return string
      */
@@ -263,7 +264,7 @@ class Asset
     }
 
     /**
-     * Get "Options"
+     * Get "Options".
      *
      * @return int
      */
@@ -273,7 +274,7 @@ class Asset
     }
 
     /**
-     * Set "Options"
+     * Set "Options".
      *
      * @param int $value Options
      *
@@ -285,7 +286,7 @@ class Asset
     }
 
     /**
-     * Get "Name"
+     * Get "Name".
      *
      * @return string
      */
@@ -295,7 +296,7 @@ class Asset
     }
 
     /**
-     * Set "Name"
+     * Set "Name".
      *
      * @param string $value Name
      *
@@ -307,7 +308,7 @@ class Asset
     }
 
     /**
-     * Get "Alternate id"
+     * Get "Alternate id".
      *
      * @return string
      */
@@ -317,7 +318,7 @@ class Asset
     }
 
     /**
-     * Set "Alternate id"
+     * Set "Alternate id".
      *
      * @param string $value Alternate id
      *
@@ -329,7 +330,7 @@ class Asset
     }
 
     /**
-     * Get "Last modified"
+     * Get "Last modified".
      *
      * @return \DateTime
      */
@@ -339,7 +340,7 @@ class Asset
     }
 
     /**
-     * Get "Created"
+     * Get "Created".
      *
      * @return \DateTime
      */
@@ -349,7 +350,7 @@ class Asset
     }
 
     /**
-     * Get "State"
+     * Get "State".
      *
      * @return int
      */
@@ -359,7 +360,7 @@ class Asset
     }
 
     /**
-     * Get "Asset id"
+     * Get "Asset id".
      *
      * @return string
      */
@@ -368,5 +369,3 @@ class Asset
         return $this->_id;
     }
 }
-
-

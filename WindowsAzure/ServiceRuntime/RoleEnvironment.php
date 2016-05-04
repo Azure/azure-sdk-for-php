@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\ServiceRuntime;
+
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceRuntime\Internal\RuntimeKernel;
 use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentNotAvailableException;
@@ -39,11 +40,13 @@ use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange;
  * running.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class RoleEnvironment
@@ -66,12 +69,12 @@ class RoleEnvironment
      * @var string
      */
     private static $_clientId;
-    
+
     /**
      * @var \DateTime
      */
     private static $_maxDateTime;
-    
+
     /**
      * @var IRuntimeClient
      */
@@ -94,7 +97,7 @@ class RoleEnvironment
 
     /**
      * @var array
-     */    
+     */
     private static $_changedListeners;
 
     /**
@@ -132,10 +135,10 @@ class RoleEnvironment
         self::$_maxDateTime = new \DateTime(
             date(Resources::TIMESTAMP_FORMAT, Resources::INT32_MAX)
         );
-        
+
         self::$_tracking = true;
     }
-    
+
     /**
      * Returns the client identifier.
      * 
@@ -147,12 +150,12 @@ class RoleEnvironment
     {
         return self::$_clientId;
     }
-    
+
     /**
      * Initializes the runtime client.
      * 
      * @param bool $keepOpen Boolean value indicating if the connection
-     *     should remain open.
+     *                       should remain open.
      * 
      * @static
      * 
@@ -213,9 +216,9 @@ class RoleEnvironment
 
             switch ($newGoalState->getExpectedState()) {
             case CurrentStatus::STARTED:
-                $newIncarnation     = $newGoalState->getIncarnation();
+                $newIncarnation = $newGoalState->getIncarnation();
                 $currentIncarnation = self::$_currentGoalState->getIncarnation();
-                
+
                 if ($newIncarnation > $currentIncarnation) {
                     self::_processGoalStateChange($newGoalState);
                 }
@@ -234,13 +237,13 @@ class RoleEnvironment
                 self::$_runtimeClient->setCurrentState($stoppedState);
                 break;
             }
-            
+
             if (is_int(self::$_tracking)) {
-                self::$_tracking--;
+                --self::$_tracking;
             }
         }
     }
-    
+
     /**
      * Processes a goal state change.
      * 
@@ -252,19 +255,19 @@ class RoleEnvironment
      */
     private static function _processGoalStateChange($newGoalState)
     {
-        $last    = self::$_lastState;
-        $changes = self::_calculateChanges(); 
-        
+        $last = self::$_lastState;
+        $changes = self::_calculateChanges();
+
         if (count($changes) == 0) {
             self::_acceptLatestIncarnation($newGoalState, $last);
         } else {
             self::_raiseChangingEvent($changes);
-            
+
             self::_acceptLatestIncarnation($newGoalState, $last);
-            
+
             self::$_currentEnvironmentData = self::$_runtimeClient
                 ->getRoleEnvironmentData();
-            
+
             self::_raiseChangedEvent($changes);
         }
     }
@@ -283,17 +286,17 @@ class RoleEnvironment
     {
         if (!is_null($last) && $last instanceof AcquireCurrentState) {
             $acquireState = $last;
-            
+
             $acceptState = new AcquireCurrentState(
                 self::$_clientId,
                 $newGoalState->getIncarnation(),
                 $acquireState->getStatus(),
                 $acquireState->getExpiration()
             );
-            
+
             self::$_runtimeClient->setCurrentState($acceptState);
         }
-        
+
         self::$_currentGoalState = $newGoalState;
     }
 
@@ -326,7 +329,7 @@ class RoleEnvironment
             call_user_func($callback, $changes);
         }
     }
-    
+
     /**
      * Raises a changed event.
      * 
@@ -342,7 +345,7 @@ class RoleEnvironment
             call_user_func($callback, $changes);
         }
     }
-    
+
     /**
      * Calculates changes.
      *
@@ -354,21 +357,21 @@ class RoleEnvironment
     {
         $current = self::$_currentEnvironmentData;
         $newData = self::$_runtimeClient->getRoleEnvironmentData();
-        
+
         $changes = self::_calculateConfigurationChanges($current, $newData);
 
-        $currentRoles   = $current->getRoles();
-        $newRoles       = $newData->getRoles();
+        $currentRoles = $current->getRoles();
+        $newRoles = $newData->getRoles();
         $changedRoleSet = array();
-        
+
         foreach ($currentRoles as $roleName => $role) {
             if (array_key_exists($roleName, $newRoles)) {
                 $currentRole = $currentRoles[$roleName];
-                $newRole     = $newRoles[$roleName];
+                $newRole = $newRoles[$roleName];
 
                 $currentRoleInstances = $currentRole->getInstances();
-                $newRoleInstances     = $newRole->getInstances();
-                    
+                $newRoleInstances = $newRole->getInstances();
+
                 $changedRoleSet = array_merge(
                     $changedRoleSet,
                     self::_calculateNewRoleInstanceChanges(
@@ -381,15 +384,15 @@ class RoleEnvironment
                 $changedRoleSet[] = $role;
             }
         }
-        
+
         foreach ($newRoles as $roleName => $role) {
             if (array_key_exists($roleName, $currentRoles)) {
                 $currentRole = $currentRoles[$roleName];
-                $newRole     = $newRoles[$roleName];
-                
+                $newRole = $newRoles[$roleName];
+
                 $currentRoleInstances = $currentRole->getInstances();
-                $newRoleInstances     = $newRole->getInstances();
-                    
+                $newRoleInstances = $newRole->getInstances();
+
                 $changedRoleSet = array_merge(
                     $changedRoleSet,
                     self::_calculateCurrentRoleInstanceChanges(
@@ -402,21 +405,21 @@ class RoleEnvironment
                 $changedRoleSet[] = $role;
             }
         }
-        
+
         foreach ($changedRoleSet as $role) {
             $changes[] = new RoleEnvironmentTopologyChange($role);
         }
-        
+
         return $changes;
     }
-    
+
     /**
      * Calculates the configuration changes.
      * 
      * @param RoleEnvironmentData $currentRoleEnvironment The current role 
-     *     environment data.
+     *                                                    environment data.
      * @param RoleEnvionrmentData $newRoleEnvironment     The new role 
-     *     environment data.
+     *                                                    environment data.
      * 
      * @static
      * 
@@ -424,11 +427,11 @@ class RoleEnvironment
      */
     private static function _calculateConfigurationChanges(
         $currentRoleEnvironment, $newRoleEnvironment
-    ) {  
-        $changes       = array();
+    ) {
+        $changes = array();
         $currentConfig = $currentRoleEnvironment->getConfigurationSettings();
-        $newConfig     = $newRoleEnvironment->getConfigurationSettings();
-        
+        $newConfig = $newRoleEnvironment->getConfigurationSettings();
+
         foreach ($currentConfig as $settingKey => $setting) {
             if (array_key_exists($settingKey, $newConfig)) {
                 if ($newConfig[$settingKey] != $currentConfig[$settingKey]) {
@@ -442,7 +445,7 @@ class RoleEnvironment
                 );
             }
         }
-        
+
         foreach ($newConfig as $settingKey => $setting) {
             if (!array_key_exists($settingKey, $currentConfig)) {
                 $changes[] = new RoleEnvironmentConfigurationSettingChange(
@@ -450,10 +453,10 @@ class RoleEnvironment
                 );
             }
         }
-        
+
         return $changes;
     }
-    
+
     /**
      * Calculates which instances / instance endpoints were added from the current
      * role to the new role.
@@ -470,23 +473,23 @@ class RoleEnvironment
         $role, $currentRoleInstances, $newRoleInstances
     ) {
         $changedRoleSet = array();
-        
+
         foreach ($currentRoleInstances as $instanceKey => $currentInstance) {
             if (array_key_exists($instanceKey, $newRoleInstances)) {
                 $newInstance = $newRoleInstances[$instanceKey];
 
                 $currentUpdateDomain = $currentInstance->getUpdateDomain();
-                $newUpdateDomain     = $newInstance->getUpdateDomain();
-                $currentFaultDomain  = $currentInstance->getFaultDomain();
-                $newFaultDomain      = $newInstance->getFaultDomain();
-                
+                $newUpdateDomain = $newInstance->getUpdateDomain();
+                $currentFaultDomain = $currentInstance->getFaultDomain();
+                $newFaultDomain = $newInstance->getFaultDomain();
+
                 if ($currentUpdateDomain == $newUpdateDomain
                     && $currentFaultDomain == $newFaultDomain
                 ) {
                     $currentInstanceEndpoints = $currentInstance
                         ->getInstanceEndpoints();
-                    $newInstanceEndpoints     = $newInstance->getInstanceEndpoints();
-                    
+                    $newInstanceEndpoints = $newInstance->getInstanceEndpoints();
+
                     $changedRoleSet = array_merge(
                         $changedRoleSet,
                         self::_calculateNewRoleInstanceEndpointsChanges(
@@ -505,7 +508,7 @@ class RoleEnvironment
 
         return $changedRoleSet;
     }
-    
+
     /**
      * Calculates which endpoints / endpoint were added from the current
      * role to the new role.
@@ -528,11 +531,11 @@ class RoleEnvironment
                 $newEndpoint = $newInstanceEndpoints[$endpointKey];
 
                 $currentProtocol = $currentEndpoint->getProtocol();
-                $newProtocol     = $newEndpoint->getProtocol();
-                $currentAddress  = $currentEndpoint->getAddress();
-                $newAddress      = $newEndpoint->getAddress();
-                $currentPort     = $currentEndpoint->getPort();
-                $newPort         = $newEndpoint->getPort();
+                $newProtocol = $newEndpoint->getProtocol();
+                $currentAddress = $currentEndpoint->getAddress();
+                $newAddress = $newEndpoint->getAddress();
+                $currentPort = $currentEndpoint->getPort();
+                $newPort = $newEndpoint->getPort();
                 if ($currentProtocol != $newProtocol
                     || $currentAddress != $newAddress
                     || $currentPort != $newPort
@@ -546,7 +549,7 @@ class RoleEnvironment
 
         return $changedRoleSet;
     }
-    
+
     /**
      * Calculates which instances / instance endpoints were removed from the current
      * role to the new role.
@@ -563,20 +566,20 @@ class RoleEnvironment
         $role, $currentRoleInstances, $newRoleInstances
     ) {
         $changedRoleSet = array();
-        
+
         foreach ($newRoleInstances as $instanceKey => $newInstance) {
             if (array_key_exists($instanceKey, $currentRoleInstances)) {
                 $currentInstance = $currentRoleInstances[$instanceKey];
-                
+
                 $currentUpdateDomain = $currentInstance->getUpdateDomain();
-                $newUpdateDomain     = $newInstance->getUpdateDomain();
-                $currentFaultDomain  = $currentInstance->getFaultDomain();
-                $newFaultDomain      = $newInstance->getFaultDomain();
-                
+                $newUpdateDomain = $newInstance->getUpdateDomain();
+                $currentFaultDomain = $currentInstance->getFaultDomain();
+                $newFaultDomain = $newInstance->getFaultDomain();
+
                 if ($currentUpdateDomain == $newUpdateDomain
                     && $currentFaultDomain == $newFaultDomain
                 ) {
-                    $newInstanceEndpoints     = $newInstance
+                    $newInstanceEndpoints = $newInstance
                         ->getInstanceEndpoints();
                     $currentInstanceEndpoints = $currentInstance
                         ->getInstanceEndpoints();
@@ -599,7 +602,7 @@ class RoleEnvironment
 
         return $changedRoleSet;
     }
-    
+
     /**
      * Calculates which endpoints / endpoint were removed from the current
      * role to the new role.
@@ -616,7 +619,7 @@ class RoleEnvironment
         $role, $currentInstanceEndpoints, $newInstanceEndpoints
     ) {
         $changedRoleSet = array();
-        
+
         foreach ($newInstanceEndpoints as $endpointKey => $newEndpoint) {
             if (!array_key_exists(
                 $endpointKey,
@@ -629,7 +632,7 @@ class RoleEnvironment
 
         return $changedRoleSet;
     }
-    
+
     /**
      * Returns a RoleInstance object that represents the role instance
      * in which this code is currently executing.
@@ -666,7 +669,7 @@ class RoleEnvironment
      * 
      * @static
      * 
-     * @return boolean
+     * @return bool
      */
     public static function isAvailable()
     {
@@ -686,7 +689,7 @@ class RoleEnvironment
      * 
      * @static
      * 
-     * @return boolean
+     * @return bool
      */
     public static function isEmulated()
     {
@@ -861,6 +864,7 @@ class RoleEnvironment
         foreach (self::$_changedListeners as $key => $changedListener) {
             if ($changedListener == $listener) {
                 unset(self::$_changedListeners[$key]);
+
                 return true;
             }
         }
@@ -914,6 +918,7 @@ class RoleEnvironment
         foreach (self::$_changingListeners as $key => $changingListener) {
             if ($changingListener == $listener) {
                 unset(self::$_changingListeners[$key]);
+
                 return true;
             }
         }
@@ -951,14 +956,14 @@ class RoleEnvironment
         foreach (self::$_stoppingListeners as $key => $stoppingListener) {
             if ($stoppingListener == $listener) {
                 unset(self::$_stoppingListeners[$key]);
+
                 return true;
             }
         }
-        
+
         return false;
     }
 }
 
 // Initialize static fields
 RoleEnvironment::init();
-

@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,31 +15,34 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\Common\Models;
+
 use WindowsAzure\Common\Internal\Resources;
 
 /**
  * Holds OAuth access token data.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class OAuthAccessToken
 {
     /**
-     * Access token itself
+     * Access token itself.
      *
      * @var string
      */
@@ -53,7 +56,7 @@ class OAuthAccessToken
     private $_expiresIn;
 
     /**
-     * Scope of access token
+     * Scope of access token.
      *
      * @var string.
      */
@@ -68,7 +71,7 @@ class OAuthAccessToken
      */
     public static function create($parsedResponse)
     {
-        $result = new OAuthAccessToken();
+        $result = new self();
 
         $result->setAccessToken($parsedResponse[Resources::OAUTH_ACCESS_TOKEN]);
         $result->setExpiresIn($parsedResponse[Resources::OAUTH_EXPIRES_IN] + time());
@@ -78,7 +81,7 @@ class OAuthAccessToken
     }
 
     /**
-     * Gets access token
+     * Gets access token.
      *
      * @return string
      */
@@ -87,9 +90,8 @@ class OAuthAccessToken
         return $this->_accessToken;
     }
 
-
     /**
-     * Sets access token
+     * Sets access token.
      *
      * @param string $accessToken OAuth access token
      *
@@ -100,21 +102,18 @@ class OAuthAccessToken
         $this->_accessToken = $accessToken;
     }
 
-
     /**
-     * Gets expired date of access token in unixdate
+     * Gets expired date of access token in unixdate.
      *
      * @return int
-     *
      */
     public function getExpiresIn()
     {
         return $this->_expiresIn;
     }
 
-
     /**
-     * Sets access token expires date
+     * Sets access token expires date.
      *
      * @param int $expiresIn OAuth access token expire date
      *
@@ -126,19 +125,17 @@ class OAuthAccessToken
     }
 
     /**
-     * Gets access token scope
+     * Gets access token scope.
      *
      * @return string
-     *
      */
     public function getScope()
     {
         return $this->_scope;
     }
 
-
     /**
-     * Sets access token scope
+     * Sets access token scope.
      *
      * @param string $scope OAuth access token scope
      *
@@ -149,5 +146,3 @@ class OAuthAccessToken
         $this->_scope = $scope;
     }
 }
-
-

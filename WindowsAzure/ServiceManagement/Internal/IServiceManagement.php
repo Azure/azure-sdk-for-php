@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,25 +15,28 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\ServiceManagement\Internal;
+
 use WindowsAzure\Common\Internal\FilterableService;
 
 /**
  * The Windows Azure service management REST API wrappers.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 interface IServiceManagement extends FilterableService
@@ -46,7 +49,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460787.aspx
      */
     public function listStorageServices();
-    
+
     /**
      * Returns the system properties for the specified storage account.
      * 
@@ -61,7 +64,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460802.aspx 
      */
     public function getStorageServiceProperties($name);
-    
+
     /**
      * Returns the primary and secondary access keys for the specified storage 
      * account.
@@ -73,8 +76,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460785.aspx 
      */
     public function getStorageServiceKeys($name);
-    
-    
+
     /**
      * Regenerates the primary or secondary access key for the specified storage 
      * account.
@@ -87,7 +89,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460795.aspx
      */
     public function regenerateStorageServiceKeys($name, $keyType);
-    
+
     /**
      * Creates a new storage account in Windows Azure.
      * 
@@ -100,9 +102,9 @@ interface IServiceManagement extends FilterableService
      * 
      * @param string               $name    The storage account name.
      * @param string               $label   Name for the storage
-     * account specified as a base64-encoded string. The name may be up to 100
-     * characters in length. The name can be used identify the storage account for
-     * your tracking purposes.
+     *                                      account specified as a base64-encoded string. The name may be up to 100
+     *                                      characters in length. The name can be used identify the storage account for
+     *                                      your tracking purposes.
      * @param CreateServiceOptions $options The optional parameters.
      * 
      * @return AsynchronousOperationResult
@@ -110,7 +112,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264518.aspx 
      */
     public function createStorageService($name, $label, $options);
-    
+
     /**
      * Deletes the specified storage account from Windows Azure.
      * 
@@ -121,7 +123,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264517.aspx 
      */
     public function deleteStorageService($name);
-    
+
     /**
      * Updates the label and/or the description for a storage account in Windows 
      * Azure.
@@ -134,7 +136,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264516.aspx 
      */
     public function updateStorageService($name, $options);
-    
+
     /**
      * Lists the affinity groups associated with the specified subscription.
      * 
@@ -143,16 +145,16 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460797.aspx
      */
     public function listAffinityGroups();
-    
+
     /**
      * Creates a new affinity group for the specified subscription.
      * 
      * @param string                     $name     The affinity group name.
      * @param string                     $label    A base-64 encoded name for
-     * the affinity group. The name can be up to 100 characters in length.
+     *                                             the affinity group. The name can be up to 100 characters in length.
      * @param string                     $location The data center location
-     * where the affinity group will be created. To list available locations, use 
-     * the listLocations API.
+     *                                             where the affinity group will be created. To list available locations, use 
+     *                                             the listLocations API.
      * @param CreateAffinityGroupOptions $options  The optional parameters.
      * 
      * @return none
@@ -160,7 +162,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg715317.aspx
      */
     public function createAffinityGroup($name, $label, $location, $options = null);
-    
+
     /**
      * Deletes an affinity group in the specified subscription.
      * 
@@ -171,7 +173,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg715314.aspx
      */
     public function deleteAffinityGroup($name);
-    
+
     /**
      * Updates the label and/or the description for an affinity group for the 
      * specified subscription.
@@ -185,7 +187,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg715316.aspx
      */
     public function updateAffinityGroup($name, $label, $options = null);
-    
+
     /**
      * Returns the system properties associated with the specified affinity group.
      * 
@@ -196,7 +198,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460789.aspx
      */
     public function getAffinityGroupProperties($name);
-    
+
     /**
      * Lists all of the data center locations that are valid for your subscription.
      * 
@@ -205,21 +207,21 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441293.aspx
      */
     public function listLocations();
-    
+
     /**
      * Returns the status of the specified operation. After calling an asynchronous 
      * operation, you can call Get Operation Status to determine whether the 
      * operation has succeeded, failed, or is still in progress.
      * 
      * @param AsynchronousOperationResult $requestInfo The request information for 
-     * the REST call you want to track.
+     *                                                 the REST call you want to track.
      * 
      * @return GetOperationStatusResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460783.aspx
      */
     public function getOperationStatus($requestInfo);
-    
+
     /**
      * Lists the hosted services available under the current subscription.
      * 
@@ -228,16 +230,16 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460781.aspx
      */
     public function listHostedServices();
-    
+
     /**
      * Creates a new hosted service in Windows Azure.
      * 
      * @param string               $name    The name for the hosted service
-     * that is unique within Windows Azure. This name is the DNS prefix name and can
-     * be used to access the hosted service.
+     *                                      that is unique within Windows Azure. This name is the DNS prefix name and can
+     *                                      be used to access the hosted service.
      * @param string               $label   The name for the hosted service
-     * that is base-64 encoded. The name can be used identify the storage account for
-     * your tracking purposes.
+     *                                      that is base-64 encoded. The name can be used identify the storage account for
+     *                                      your tracking purposes.
      * @param CreateServiceOptions $options The optional parameters.
      * 
      * @return none
@@ -245,13 +247,13 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441304.aspx
      */
     public function createHostedService($name, $label, $options);
-    
+
     /**
      * updates the label and/or the description for a hosted service in Windows 
      * Azure.
      * 
      * @param string               $name    The name for the hosted service that is
-     * unique within Windows Azure.
+     *                                      unique within Windows Azure.
      * @param UpdateServiceOptions $options The optional parameters.
      * 
      * @return none
@@ -259,7 +261,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441303.aspx
      */
     public function updateHostedService($name, $options);
-    
+
     /**
      * Deletes the specified hosted service from Windows Azure.
      * 
@@ -275,7 +277,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441305.aspx
      */
     public function deleteHostedService($name);
-    
+
     /**
      * Retrieves system properties for the specified hosted service. These properties
      * include the service name and service type; the name of the affinity group to
@@ -283,7 +285,7 @@ interface IServiceManagement extends FilterableService
      * group; and optionally, information on the service's deployments.
      * 
      * @param string                            $name    The name for the hosted 
-     * service.
+     *                                                   service.
      * @param GetHostedServicePropertiesOptions $options The optional parameters.
      * 
      * @return GetHostedServicePropertiesResult
@@ -291,7 +293,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460806.aspx
      */
     public function getHostedServiceProperties($name, $options = null);
-    
+
     /**
      * Uploads a new service package and creates a new deployment on staging or 
      * production.
@@ -301,21 +303,21 @@ interface IServiceManagement extends FilterableService
      * getOperationStatus API.
      * 
      * @param string                  $name           The name for the hosted service
-     * that is unique within Windows Azure.
+     *                                                that is unique within Windows Azure.
      * @param string                  $deploymentName The name for the deployment. 
-     * The deployment name must be unique among other deployments for the hosted
-     * service.
+     *                                                The deployment name must be unique among other deployments for the hosted
+     *                                                service.
      * @param string                  $slot           The name of the deployment slot
-     * This can be "production" or "staging".
+     *                                                This can be "production" or "staging".
      * @param string                  $packageUrl     The URL that refers to the
-     * location of the service package in the Blob service. The service package can
-     * be located in a storage account beneath the same subscription.
+     *                                                location of the service package in the Blob service. The service package can
+     *                                                be located in a storage account beneath the same subscription.
      * @param string                  $configuration  The base-64 encoded service 
-     * configuration file for the deployment.
+     *                                                configuration file for the deployment.
      * @param string                  $label          The name for the hosted service
-     * that is base-64 encoded. The name can be up to 100 characters in length. It is
-     * recommended that the label be unique within the subscription. The name can be
-     * used identify the hosted service for your tracking purposes.
+     *                                                that is base-64 encoded. The name can be up to 100 characters in length. It is
+     *                                                recommended that the label be unique within the subscription. The name can be
+     *                                                used identify the hosted service for your tracking purposes.
      * @param CreateDeploymentOptions $options        The optional parameters.
      * 
      * @return AsynchronousOperationResult
@@ -331,7 +333,7 @@ interface IServiceManagement extends FilterableService
         $label,
         $options = null
     );
-    
+
     /**
      * Returns configuration information, status, and system properties for a 
      * deployment.
@@ -350,7 +352,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460804.aspx
      */
     public function getDeployment($name, $options);
-    
+
     /**
      * Initiates a virtual IP swap between the staging and production deployment 
      * environments for a service. If the service is currently running in the staging
@@ -373,7 +375,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460814.aspx
      */
     public function swapDeployment($name, $source, $destination);
-    
+
     /**
      * Deletes the specified deployment.
      * 
@@ -389,7 +391,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460815.aspx
      */
     public function deleteDeployment($name, $options);
-    
+
     /**
      * Initiates a change to the deployment configuration.
      * 
@@ -398,18 +400,18 @@ interface IServiceManagement extends FilterableService
      * deployment's unique name.
      * 
      * @param string                               $name          The hosted service
-     * name.
+     *                                                            name.
      * @param string|resource                      $configuration The configuration
-     * file contents or file stream,
+     *                                                            file contents or file stream,
      * @param ChangeDeploymentConfigurationOptions $options       The optional 
-     * parameters.
+     *                                                            parameters.
      * 
      * @return AsynchronousOperationResult
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460809.aspx
      */
     public function changeDeploymentConfiguration($name, $configuration, $options);
-    
+
     /**
      * Initiates a change in deployment status.
      * 
@@ -419,8 +421,8 @@ interface IServiceManagement extends FilterableService
      * 
      * @param string               $name    The hosted service name.
      * @param string               $status  The change to initiate to the 
-     * deployment status. 
-     * Possible values include Running or Suspended.
+     *                                      deployment status. 
+     *                                      Possible values include Running or Suspended.
      * @param GetDeploymentOptions $options The optional parameters.
      * 
      * @return AsynchronousOperationResult
@@ -428,7 +430,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460808.aspx
      */
     public function updateDeploymentStatus($name, $status, $options);
-    
+
     /**
      * Initiates an upgrade to a deployment.
      * 
@@ -438,21 +440,21 @@ interface IServiceManagement extends FilterableService
      * 
      * @param string                   $name          The hosted service name.
      * @param string                   $mode          The type of upgrade to initiate
-     * If not specified the default value is Auto. If set to Manual, 
-     * walkUpgradeDomain API must be called to apply the update. If set to Auto, the
-     * Windows Azure platform will automatically apply the update to each Upgrade
-     * Domain in sequence.
+     *                                                If not specified the default value is Auto. If set to Manual, 
+     *                                                walkUpgradeDomain API must be called to apply the update. If set to Auto, the
+     *                                                Windows Azure platform will automatically apply the update to each Upgrade
+     *                                                Domain in sequence.
      * @param string                   $packageUrl    The URL that refers to the
-     * location of the service package in the Blob service. The service package can
-     * be located in a storage account beneath the same subscription.
+     *                                                location of the service package in the Blob service. The service package can
+     *                                                be located in a storage account beneath the same subscription.
      * @param string                   $configuration The base-64 encoded service
-     * configuration file for the deployment.
+     *                                                configuration file for the deployment.
      * @param string                   $label         The name for the hosted service
-     * that is base-64 encoded. The name may be up to 100 characters in length.
-     * @param boolean                  $force         Specifies whether the rollback
-     * should proceed even when it will cause local data to be lost from some role
-     * instances. True if the rollback should proceed; otherwise false if the
-     * rollback should fail.
+     *                                                that is base-64 encoded. The name may be up to 100 characters in length.
+     * @param bool                     $force         Specifies whether the rollback
+     *                                                should proceed even when it will cause local data to be lost from some role
+     *                                                instances. True if the rollback should proceed; otherwise false if the
+     *                                                rollback should fail.
      * @param UpgradeDeploymentOptions $options       The optional parameters.
      * 
      * @return AsynchronousOperationResult
@@ -468,7 +470,7 @@ interface IServiceManagement extends FilterableService
         $force,
         $options
     );
-    
+
     /**
      * Specifies the next upgrade domain to be walked during manual in-place upgrade
      * or configuration change.
@@ -478,10 +480,10 @@ interface IServiceManagement extends FilterableService
      * name.
      * 
      * @param string               $name          The hosted service name.
-     * @param integer              $upgradeDomain The integer value that 
-     * identifies the upgrade domain to walk. Upgrade domains are identified with a
-     * zero-based index: the first upgrade domain has an ID of 0, the second has an
-     * ID of 1, and so on.
+     * @param int                  $upgradeDomain The integer value that 
+     *                                            identifies the upgrade domain to walk. Upgrade domains are identified with a
+     *                                            zero-based index: the first upgrade domain has an ID of 0, the second has an
+     *                                            ID of 1, and so on.
      * @param GetDeploymentOptions $options       The optional parameters.
      * 
      * @return AsynchronousOperationResult
@@ -489,7 +491,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460800.aspx
      */
     public function walkUpgradeDomain($name, $upgradeDomain, $options);
-    
+
     /**
      * Requests a reboot of a role instance that is running in a deployment.
      * 
@@ -506,7 +508,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441298.aspx
      */
     public function rebootRoleInstance($name, $roleName, $options);
-    
+
     /**
      * Requests a reimage of a role instance that is running in a deployment.
      * 
@@ -523,7 +525,7 @@ interface IServiceManagement extends FilterableService
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441292.aspx
      */
     public function reimageRoleInstance($name, $roleName, $options);
-    
+
     /**
      * Cancels an in progress configuration change (update) or upgrade and returns 
      * the deployment to its state before the upgrade or configuration change was 
@@ -535,13 +537,13 @@ interface IServiceManagement extends FilterableService
      * 
      * @param string               $name    The hosted service name.
      * @param string               $mode    Specifies whether the rollback
-     * should proceed automatically or not. Auto, The rollback proceeds without
-     * further user input. Manual, You must call the walkUpgradeDomain API to apply
-     * the rollback to each upgrade domain.
-     * @param boolean              $force   Specifies whether the rollback 
-     * should proceed even when it will cause local data to be lost from some role 
-     * instances. True if the rollback should proceed; otherwise false if the 
-     * rollback should fail.
+     *                                      should proceed automatically or not. Auto, The rollback proceeds without
+     *                                      further user input. Manual, You must call the walkUpgradeDomain API to apply
+     *                                      the rollback to each upgrade domain.
+     * @param bool                 $force   Specifies whether the rollback 
+     *                                      should proceed even when it will cause local data to be lost from some role 
+     *                                      instances. True if the rollback should proceed; otherwise false if the 
+     *                                      rollback should fail.
      * @param GetDeploymentOptions $options The optional parameters.
      * 
      * @return none

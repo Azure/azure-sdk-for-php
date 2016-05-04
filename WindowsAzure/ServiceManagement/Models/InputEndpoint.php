@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\ServiceManagement\Models;
+
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
@@ -30,11 +31,13 @@ use WindowsAzure\Common\Internal\Utilities;
  * Represents a Windows Azure deployment input endpoint.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class InputEndpoint
@@ -43,17 +46,17 @@ class InputEndpoint
      * @var string
      */
     private $_roleName;
-    
+
     /**
      * @var string
      */
     private $_vip;
-    
+
     /**
      * @var string
      */
     private $_port;
-    
+
     /**
      * Creates a new InputEndpoint from parsed response body.
      * 
@@ -63,21 +66,21 @@ class InputEndpoint
      */
     public static function create($parsed)
     {
-        $inputEndpoint = new InputEndpoint();
-        $vip           = Utilities::tryGetValue($parsed, Resources::XTAG_VIP);
-        $port          = Utilities::tryGetValue($parsed, Resources::XTAG_PORT);
-        $roleName      = Utilities::tryGetValue(
+        $inputEndpoint = new self();
+        $vip = Utilities::tryGetValue($parsed, Resources::XTAG_VIP);
+        $port = Utilities::tryGetValue($parsed, Resources::XTAG_PORT);
+        $roleName = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_ROLE_NAME
         );
-        
+
         $inputEndpoint->setPort($port);
         $inputEndpoint->setRoleName($roleName);
         $inputEndpoint->setVip($vip);
-        
+
         return $inputEndpoint;
     }
-    
+
     /**
      * Gets the input endpoint role name.
      * 
@@ -89,7 +92,7 @@ class InputEndpoint
     {
         return $this->_roleName;
     }
-    
+
     /**
      * Sets the input endpoint role name.
      * 
@@ -101,7 +104,7 @@ class InputEndpoint
     {
         $this->_roleName = $roleName;
     }
-    
+
     /**
      * Gets the input endpoint VIP.
      * 
@@ -113,7 +116,7 @@ class InputEndpoint
     {
         return $this->_vip;
     }
-    
+
     /**
      * Sets the input endpoint VIP.
      * 
@@ -125,7 +128,7 @@ class InputEndpoint
     {
         $this->_vip = $vip;
     }
-    
+
     /**
      * Gets the input endpoint port.
      * 
@@ -137,7 +140,7 @@ class InputEndpoint
     {
         return $this->_port;
     }
-    
+
     /**
      * Sets the input endpoint port.
      * 
