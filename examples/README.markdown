@@ -4,6 +4,14 @@ The examples here demonstrate some of the basic functionalities of the Azure PHP
 
 * Download **[composer.phar](http://getcomposer.org/composer.phar)** to the examples directory
 
+* Create a file named composer.json in the examples directory and add the following code to it:
+
+    {
+        "require": {        
+            "microsoft/windowsazure": "^0.4"
+        }  
+    }
+
 * Open a command prompt and execute this in the examples directory
 
     php composer.phar install
