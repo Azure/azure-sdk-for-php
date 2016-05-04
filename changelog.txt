@@ -1,3 +1,26 @@
+Windows Azure SDK For PHP 0.4.3, 2016-05-10
+-------------------------------------------
+- Updated PHP version requirement to >=5.5 for PHP Storage SDK (https://github.com/Azure/azure-storage-php)
+- Updated SDK code for storage (Blob, Queue and Table) to use the new Storage SDK
+- Removed unit and functional tests for storage (Blob, Queue and Table) 
+- Fixed broken functional tests 
+- Updated code samples to use the new storage SDK
+- Adopted PSR-2 as coding standard (contributed by @phansys)
+- Other minor fixes
+
+To update your code for the new storage SDK, change 
+"use WindowsAzure\Blob" to "use MicrosoftAzure\Storage\Blob", 
+"use WindowsAzure\Queue" to "use MicrosoftAzure\Storage\Queue"
+"use WindowsAzure\Table" to "use MicrosoftAzure\Storage\Table"
+
+For the following calls,
+ServicesBuilder::getInstance()->createTableService($connectionString) 
+ServicesBuilder::getInstance()->createBlobService($connectionString) 
+ServicesBuilder::getInstance()->createQueueService($connectionString) 
+
+The new API will be called automatically. You have no need to update your code.
+
+
 Windows Azure SDK For PHP 0.4.2, 2016-04-08
 -------------------------------------------
 - Removed support for PEAR as package manager. Only support Composer from now on

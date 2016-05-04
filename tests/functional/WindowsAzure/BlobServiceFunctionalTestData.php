@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Functional\WindowsAzure\Blob
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Functional\WindowsAzure;
+namespace Tests\functional\WindowsAzure;
 
 use MicrosoftAzure\Storage\Blob\Models\AccessCondition;
 use MicrosoftAzure\Storage\Blob\Models\ContainerAcl;
@@ -61,11 +62,11 @@ class BlobServiceFunctionalTestData
     {
         $rint = mt_rand(0, 1000000);
         self::$_accountName = $accountName;
-        self::$testUniqueId = 'qa-' . $rint . '-';
-        self::$nonExistContainerPrefix = 'qa-' . ($rint . 1) . '-';
-        self::$nonExistBlobPrefix = 'qa-' . ($rint . 2) . '-';
-        self::$testContainerNames = array( self::$testUniqueId . 'a1', self::$testUniqueId . 'a2', self::$testUniqueId . 'b1' );
-        self::$testBlobNames = array( 'b' . self::$testUniqueId . 'a1', 'b' . self::$testUniqueId . 'a2', 'b' . self::$testUniqueId . 'b1' );
+        self::$testUniqueId = 'qa-'.$rint.'-';
+        self::$nonExistContainerPrefix = 'qa-'.($rint. 1).'-';
+        self::$nonExistBlobPrefix = 'qa-'.($rint. 2).'-';
+        self::$testContainerNames = array(self::$testUniqueId.'a1', self::$testUniqueId.'a2', self::$testUniqueId.'b1');
+        self::$testBlobNames = array('b'.self::$testUniqueId.'a1', 'b'.self::$testUniqueId.'a2', 'b'.self::$testUniqueId.'b1');
     }
 
     public static function getInterestingContainerName()
@@ -78,7 +79,7 @@ class BlobServiceFunctionalTestData
         // 4. Container names must be from 3 through 63 characters long.
         // 5. Container names cannot contain control characters: 0x00 to 0x1F
 
-        return self::$testUniqueId . 'con-' . (self::$tempBlobCounter++);
+        return self::$testUniqueId.'con-'.(self::$tempBlobCounter++);
     }
 
     public static function getInterestingBlobName($container)
@@ -95,18 +96,19 @@ class BlobServiceFunctionalTestData
         // 6. Avoid blob names containing a dot-slash sequence (./);
         //    the dot is removed by the server.
 
-        $uB2E4 = chr(0xEB) . chr(0x8B) . chr(0xA4); // UTF8 encoding of \uB2E4
-        $blobname = self::$testUniqueId . '/*\"\'&.({[<+ ' . chr(0x7D) . $uB2E4 . '_' . (self::$tempBlobCounter++);
+        $uB2E4 = chr(0xEB).chr(0x8B).chr(0xA4); // UTF8 encoding of \uB2E4
+        $blobname = self::$testUniqueId.'/*\"\'&.({[<+ '.chr(0x7D).$uB2E4.'_'.(self::$tempBlobCounter++);
         if (empty($container) || $container == '$root') {
             $blobname = str_replace('/', 'X', $blobname);
             $blobname = str_replace('\\', 'X', $blobname);
         }
+
         return $blobname;
     }
 
     public static function getSimpleMessageText()
     {
-        return 'simple message text #' . (self::$tempBlobCounter++);
+        return 'simple message text #'.(self::$tempBlobCounter++);
     }
 
     public static function getInterestingTimeoutValues()
@@ -116,8 +118,9 @@ class BlobServiceFunctionalTestData
         array_push($ret, -1);
         array_push($ret,  0);
         array_push($ret,  1);
-        array_push($ret,-2147483648);
+        array_push($ret, -2147483648);
         array_push($ret, 2147483647);
+
         return $ret;
     }
 
@@ -125,11 +128,12 @@ class BlobServiceFunctionalTestData
     {
         $diff = $date1->diff($date2);
         $sec = $diff->s
-                + 60 * ( $diff->i
-                + 60 * ( $diff->h
-                + 24 * ( $diff->d
-                + 30 * ( $diff->m
-                + 12 * ( $diff->y )))));
+                + 60 * ($diff->i
+                + 60 * ($diff->h
+                + 24 * ($diff->d
+                + 30 * ($diff->m
+                + 12 * ($diff->y)))));
+
         return abs($sec);
     }
 
@@ -143,7 +147,7 @@ class BlobServiceFunctionalTestData
 
         if ($ac->getHeader() == Resources::IF_UNMODIFIED_SINCE) {
             return $ac->getValue() > $now;
-        } else if ($ac->getHeader() == Resources::IF_MODIFIED_SINCE) {
+        } elseif ($ac->getHeader() == Resources::IF_MODIFIED_SINCE) {
             return $ac->getValue() < $now;
         } else {
             return true;
@@ -154,9 +158,9 @@ class BlobServiceFunctionalTestData
     {
         if (is_null($ac)) {
             return true;
-        } else if ($ac->getHeader() == Resources::IF_MATCH) {
+        } elseif ($ac->getHeader() == Resources::IF_MATCH) {
             return self::$badETag != $ac->getValue();
-        } else if ($ac->getHeader() == Resources::IF_NONE_MATCH) {
+        } elseif ($ac->getHeader() == Resources::IF_NONE_MATCH) {
             return self::$badETag == $ac->getValue();
         } else {
             return true;
@@ -178,8 +182,8 @@ class BlobServiceFunctionalTestData
     {
         $ret = array();
 
-        $past = new \DateTime("01/01/2010");
-        $future = new \DateTime("01/01/2020");
+        $past = new \DateTime('01/01/2010');
+        $future = new \DateTime('01/01/2020');
 
         array_push($ret, AccessCondition::ifModifiedSince($past));
         array_push($ret, AccessCondition::ifNotModifiedSince($past));
@@ -263,7 +267,7 @@ class BlobServiceFunctionalTestData
             $sp->setLogging($l);
             $sp->setMetrics($m);
 
-            array_push($ret,$sp);
+            array_push($ret, $sp);
         }
 
         {
@@ -291,7 +295,7 @@ class BlobServiceFunctionalTestData
             $sp->setLogging($l);
             $sp->setMetrics($m);
 
-            array_push($ret,$sp);
+            array_push($ret, $sp);
         }
 
         {
@@ -319,7 +323,7 @@ class BlobServiceFunctionalTestData
             $sp->setLogging($l);
             $sp->setMetrics($m);
 
-            array_push($ret,$sp);
+            array_push($ret, $sp);
         }
 
         return $ret;
@@ -329,17 +333,16 @@ class BlobServiceFunctionalTestData
     {
         $ret = array();
 
-
         $options = new ListContainersOptions();
         array_push($ret, $options);
 
         $options = new ListContainersOptions();
-        $marker = '/' . self::$_accountName . '/' . self::$testContainerNames[1];
+        $marker = '/'.self::$_accountName.'/'.self::$testContainerNames[1];
         $options->setMarker($marker);
         array_push($ret, $options);
 
         $options = new ListContainersOptions();
-        $marker = '/' . self::$_accountName . '/' . self::$nonExistContainerPrefix;
+        $marker = '/'.self::$_accountName.'/'.self::$nonExistContainerPrefix;
         $options->setMarker($marker);
         array_push($ret, $options);
 
@@ -379,7 +382,7 @@ class BlobServiceFunctionalTestData
         array_push($ret, $options);
 
         $options = new ListContainersOptions();
-        $marker = '/' . self::$_accountName . '/' . self::$testContainerNames[1];
+        $marker = '/'.self::$_accountName.'/'.self::$testContainerNames[1];
         $maxResults = 2;
         $prefix = self::$testUniqueId;
         $timeout = 60;
@@ -415,7 +418,7 @@ class BlobServiceFunctionalTestData
         return array(
             'key' => 'value',
             'foo' => 'bar',
-            'baz' => 'boo');
+            'baz' => 'boo', );
     }
 
     public static function getInterestingCreateBlobOptions()
@@ -437,7 +440,7 @@ class BlobServiceFunctionalTestData
         $metadata = array(
             'foo' => 'bar',
             'foo2' => 'bar2',
-            'foo3' => 'bar3');
+            'foo3' => 'bar3', );
         $options->setMetadata($metadata);
         $options->setTimeout(10);
         array_push($ret, $options);
@@ -540,8 +543,8 @@ class BlobServiceFunctionalTestData
     {
         $ret = array();
 
-             $past = new \DateTime("01/01/2010");
-        $future = new \DateTime("01/01/2020");
+        $past = new \DateTime('01/01/2010');
+        $future = new \DateTime('01/01/2020');
 
         $options = new DeleteContainerOptions();
         array_push($ret, $options);
@@ -590,7 +593,7 @@ class BlobServiceFunctionalTestData
 
         // Set Container Metadata only supports the If-Modified-Since access condition.
         // But easier to special-case If-Unmodified-Since in the test.
-        foreach(self::getTemporalAccessConditions() as $ac)  {
+        foreach (self::getTemporalAccessConditions() as $ac) {
             $options = new SetContainerMetadataOptions();
             $options->setAccessCondition($ac);
             array_push($ret, $options);
@@ -614,7 +617,7 @@ class BlobServiceFunctionalTestData
         $options->setTimeout(-10);
         array_push($ret, $options);
 
-        foreach(self::getAllAccessConditions() as $ac)  {
+        foreach (self::getAllAccessConditions() as $ac) {
             $options = new SetBlobMetadataOptions();
             $options->setAccessCondition($ac);
             array_push($ret, $options);
@@ -644,7 +647,7 @@ class BlobServiceFunctionalTestData
         array_push($ret, $options);
 
         // Get Blob Properties only supports the temporal access conditions.
-        foreach(self::getTemporalAccessConditions() as $ac)  {
+        foreach (self::getTemporalAccessConditions() as $ac) {
             $options = new GetBlobPropertiesOptions();
             $options->setAccessCondition($ac);
             array_push($ret, $options);
@@ -669,7 +672,7 @@ class BlobServiceFunctionalTestData
         array_push($ret, $options);
 
         // Get Blob Properties only supports the temporal access conditions.
-        foreach(self::getTemporalAccessConditions() as $ac)  {
+        foreach (self::getTemporalAccessConditions() as $ac) {
             $options = new SetBlobPropertiesOptions();
             $options->setAccessCondition($ac);
             array_push($ret, $options);
@@ -718,8 +721,8 @@ class BlobServiceFunctionalTestData
     {
         $ret = array();
 
-        $past = new \DateTime("01/01/2010");
-        $future = new \DateTime("01/01/2020");
+        $past = new \DateTime('01/01/2010');
+        $future = new \DateTime('01/01/2020');
 
         $acl = new ContainerAcl();
         array_push($ret, $acl);
@@ -759,7 +762,7 @@ class BlobServiceFunctionalTestData
         array_push($ret, $options);
 
         // Get Blob only supports the temporal access conditions.
-        foreach(self::getTemporalAccessConditions() as $ac)  {
+        foreach (self::getTemporalAccessConditions() as $ac) {
             $options = new GetBlobOptions();
             $options->setAccessCondition($ac);
             array_push($ret, $options);
@@ -820,7 +823,7 @@ class BlobServiceFunctionalTestData
         $options->setTimeout(-10);
         array_push($ret, $options);
 
-        foreach(self::getAllAccessConditions() as $ac)  {
+        foreach (self::getAllAccessConditions() as $ac) {
             $options = new DeleteBlobOptions();
             $options->setAccessCondition($ac);
             array_push($ret, $options);
@@ -861,7 +864,7 @@ class BlobServiceFunctionalTestData
         $options->setTimeout(-10);
         array_push($ret, $options);
 
-        foreach(self::getAllAccessConditions() as $ac)  {
+        foreach (self::getAllAccessConditions() as $ac) {
             $options = new CreateBlobSnapshotOptions();
             $options->setAccessCondition($ac);
             array_push($ret, $options);
@@ -894,13 +897,13 @@ class BlobServiceFunctionalTestData
         $options->setTimeout(-10);
         array_push($ret, $options);
 
-        foreach(self::getAllAccessConditions() as $ac)  {
+        foreach (self::getAllAccessConditions() as $ac) {
             $options = new CopyBlobOptions();
             $options->setSourceAccessCondition($ac);
             array_push($ret, $options);
         }
 
-        foreach(self::getAllAccessConditions() as $ac)  {
+        foreach (self::getAllAccessConditions() as $ac) {
             $options = new CopyBlobOptions();
             $options->setAccessCondition($ac);
             array_push($ret, $options);
@@ -910,7 +913,7 @@ class BlobServiceFunctionalTestData
         $metadata = array(
             'Xkey' => 'Avalue',
             'Yfoo' => 'Bbar',
-            'Zbaz' => 'Cboo');
+            'Zbaz' => 'Cboo', );
         $options->setMetadata($metadata);
         array_push($ret, $options);
 
@@ -930,4 +933,3 @@ class BlobServiceFunctionalTestData
         return $ret;
     }
 }
-

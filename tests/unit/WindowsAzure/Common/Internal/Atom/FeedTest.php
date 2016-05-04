@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,15 +15,16 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal\Atom
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Common\Internal\Atom;
-use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
+namespace Tests\unit\WindowsAzure\Common\Internal\Atom;
+
 use WindowsAzure\Common\Internal\Atom\Feed;
 use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Atom\Content;
@@ -32,16 +33,17 @@ use WindowsAzure\Common\Internal\Atom\Person;
 use WindowsAzure\Common\Internal\Atom\Generator;
 use WindowsAzure\Common\Internal\Atom\AtomLink;
 
-
 /**
- * Unit tests for class Feed
+ * Unit tests for class Feed.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal\Atom
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class FeedTest extends \PHPUnit_Framework_TestCase
@@ -55,7 +57,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $feed = new Feed();
-        
+
         // Assert
         $this->assertNotNull($feed);
     }
@@ -64,7 +66,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\Atom\Feed::getAttributes
      * @covers WindowsAzure\Common\Internal\Atom\Feed::setAttributes
      */
-    public function testGetSetAttributes() {
+    public function testGetSetAttributes()
+    {
         // Setup
         $expected = array();
         $expected['key'] = 'value';
@@ -79,14 +82,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
 
     /** 
      * @covers WindowsAzure\Common\Internal\Atom\Feed::getEntry
      * @covers WindowsAzure\Common\Internal\Atom\Feed::setEntry
      */
-    public function testGetSetEntry() {
+    public function testGetSetEntry()
+    {
         // Setup
         $expected = 'testEntry';
         $feed = new Feed();
@@ -100,14 +103,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
 
     /** 
      * @covers WindowsAzure\Common\Internal\Atom\Feed::getCategory
      * @covers WindowsAzure\Common\Internal\Atom\Feed::setCategory
      */
-    public function testGetSetCategory() {
+    public function testGetSetCategory()
+    {
         // Setup
         $expected = array();
         $expected[] = new Category();
@@ -122,14 +125,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
 
     /** 
      * @covers WindowsAzure\Common\Internal\Atom\Feed::getContributor
      * @covers WindowsAzure\Common\Internal\Atom\Feed::setContributor
      */
-    public function testGetSetContributor() {
+    public function testGetSetContributor()
+    {
         // Setup
         $expected = array();
         $expected[] = new Person();
@@ -144,14 +147,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
 
     /** 
      * @covers WindowsAzure\Common\Internal\Atom\Feed::getGenerator
      * @covers WindowsAzure\Common\Internal\Atom\Feed::setGenerator
      */
-    public function testGetSetGenerator() {
+    public function testGetSetGenerator()
+    {
         // Setup
         $expected = new Generator();
         $feed = new Feed();
@@ -165,14 +168,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
 
     /** 
      * @covers WindowsAzure\Common\Internal\Atom\Feed::getIcon
      * @covers WindowsAzure\Common\Internal\Atom\Feed::setIcon
      */
-    public function testGetSetIcon() {
+    public function testGetSetIcon()
+    {
         // Setup
         $expected = 'testIcon';
         $feed = new Feed();
@@ -186,14 +189,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
 
     /** 
      * @covers WindowsAzure\Common\Internal\Atom\Feed::getId
      * @covers WindowsAzure\Common\Internal\Atom\Feed::setId
      */
-    public function testGetSetId() {
+    public function testGetSetId()
+    {
         // Setup
         $expected = 'testId';
         $feed = new Feed();
@@ -207,14 +210,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
 
     /** 
      * @covers WindowsAzure\Common\Internal\Atom\Feed::getLink
      * @covers WindowsAzure\Common\Internal\Atom\Feed::setLink
      */
-    public function testGetSetLink() {
+    public function testGetSetLink()
+    {
         // Setup
         $expected = array();
         $expected[] = new AtomLink();
@@ -229,14 +232,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
 
     /** 
      * @covers WindowsAzure\Common\Internal\Atom\Feed::getLogo
      * @covers WindowsAzure\Common\Internal\Atom\Feed::setLogo
      */
-    public function testGetSetLogo() {
+    public function testGetSetLogo()
+    {
         // Setup
         $expected = 'testLogo';
         $feed = new Feed();
@@ -250,14 +253,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
 
     /** 
      * @covers WindowsAzure\Common\Internal\Atom\Feed::getRights
      * @covers WindowsAzure\Common\Internal\Atom\Feed::setRights
      */
-    public function testGetSetRights() {
+    public function testGetSetRights()
+    {
         // Setup
         $expected = 'testRights';
         $feed = new Feed();
@@ -271,14 +274,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
 
     /** 
      * @covers WindowsAzure\Common\Internal\Atom\Feed::getSubtitle
      * @covers WindowsAzure\Common\Internal\Atom\Feed::setSubtitle
      */
-    public function testGetSetSubtitle() {
+    public function testGetSetSubtitle()
+    {
         // Setup
         $expected = 'testSubtitle';
         $feed = new Feed();
@@ -292,14 +295,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
 
     /** 
      * @covers WindowsAzure\Common\Internal\Atom\Feed::getTitle
      * @covers WindowsAzure\Common\Internal\Atom\Feed::setTitle
      */
-    public function testGetSetTitle() {
+    public function testGetSetTitle()
+    {
         // Setup
         $expected = 'testTitle';
         $feed = new Feed();
@@ -313,14 +316,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
 
     /** 
      * @covers WindowsAzure\Common\Internal\Atom\Feed::getUpdated
      * @covers WindowsAzure\Common\Internal\Atom\Feed::setUpdated
      */
-    public function testGetSetUpdated() {
+    public function testGetSetUpdated()
+    {
         // Setup
         $expected = new \DateTime();
         $feed = new Feed();
@@ -334,14 +337,14 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
 
     /** 
      * @covers WindowsAzure\Common\Internal\Atom\Feed::getExtensionElement
      * @covers WindowsAzure\Common\Internal\Atom\Feed::setExtensionElement
      */
-    public function testGetSetExtensionElement() {
+    public function testGetSetExtensionElement()
+    {
         // Setup
         $expected = 'testExtensionElement';
         $feed = new Feed();
@@ -355,7 +358,6 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
 
     /** 
@@ -425,10 +427,10 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         // Setup
         $feed = new Feed();
         $this->setExpectedException(get_class(new \InvalidArgumentException()));
-        
+
         // Test
         $actual = $feed->writeXml(null);
-        
+
         // Assert
     }
 
@@ -466,7 +468,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $linkInstanceTwo->setHref('linkTwo');
         $link[] = $linkInstanceOne;
         $link[] = $linkInstanceTwo;
-        $expected->setLink($link); 
+        $expected->setLink($link);
         $xml = '<feed xmlns="http://www.w3.org/2005/Atom"><link href="linkOne"/><link href="linkTwo"/></feed>';
 
         // Test
@@ -524,7 +526,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $expected->setSubtitle($subtitle);
         $expected->setTitle($title);
         $expected->setUpdated($updated);
-        
+
         $actual = new Feed();
 
         $xml = '
@@ -553,7 +555,4 @@ class FeedTest extends \PHPUnit_Framework_TestCase
             $actual
         );
     }
-
 }
-
-

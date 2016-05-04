@@ -10,16 +10,16 @@ Microsoft Azure tables, blobs, queues, service bus (queues and topics), service 
   * create and delete tables
   * create, query, insert, update, merge, and delete entities
   * batch operations
-  * REST API Version: 2012-02-12
+  * REST API Version: see https://github.com/Azure/azure-storage-php
 * Blobs
   * create, list, and delete containers, work with container metadata and permissions, list blobs in container
   * create block and page blobs (from a stream or a string), work with blob blocks and pages, delete blobs
   * work with blob properties, metadata, leases, snapshot a blob
-  * REST API Version: 2012-02-12
+  * REST API Version: see https://github.com/Azure/azure-storage-php
 * Storage Queues
   * create, list, and delete queues, and work with queue metadata and properties
   * create, get, peek, update, delete messages
-  * REST API Version: 2012-02-12
+  * REST API Version: see https://github.com/Azure/azure-storage-php
 * Service Bus
   * Queues: create, list and delete queues; send, receive, unlock and delete messages
   * Topics: create, list, and delete topics; create, list, and delete subscriptions; send, receive, unlock and delete messages; create, list, and delete rules
@@ -170,8 +170,8 @@ try {
 To add an entity to a table, create a new **Entity** object and pass it to **TableRestProxy->insertEntity**. Note that when you create an entity you must specify a `PartitionKey` and `RowKey`. These are the unique identifiers for an entity and are values that can be queried much faster than other entity properties. The system uses `PartitionKey` to automatically distribute the table’s entities over many storage nodes.
 
 ```PHP
-use WindowsAzure\Table\Models\Entity;
-use WindowsAzure\Table\Models\EdmType;
+use MicrosoftAzure\Storage\Table\Models\Entity;
+use MicrosoftAzure\Storage\Table\Models\EdmType;
 
 $entity = new Entity();
 $entity->setPartitionKey("pk");

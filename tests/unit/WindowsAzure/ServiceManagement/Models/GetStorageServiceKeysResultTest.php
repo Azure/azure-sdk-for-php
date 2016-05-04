@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,25 +15,29 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
+
 use WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult;
 
 /**
- * Unit tests for class GetStorageServiceKeysResult
+ * Unit tests for class GetStorageServiceKeysResult.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class GetStorageServiceKeysResultTest extends \PHPUnit_Framework_TestCase
@@ -47,14 +51,14 @@ class GetStorageServiceKeysResultTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expected = 'Url';
         $result = new GetStorageServiceKeysResult();
-        
+
         // Test
         $result->setUrl($expected);
-        
+
         // Assert
         $this->assertEquals($expected, $result->getUrl());
     }
-    
+
     /**
      * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::setPrimary
      * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::getPrimary
@@ -64,14 +68,14 @@ class GetStorageServiceKeysResultTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expected = 'Primary';
         $result = new GetStorageServiceKeysResult();
-        
+
         // Test
         $result->setPrimary($expected);
-        
+
         // Assert
         $this->assertEquals($expected, $result->getPrimary());
     }
-    
+
     /**
      * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::setSecondary
      * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::getSecondary
@@ -81,13 +85,11 @@ class GetStorageServiceKeysResultTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expected = 'Secondary';
         $result = new GetStorageServiceKeysResult();
-        
+
         // Test
         $result->setSecondary($expected);
-        
+
         // Assert
         $this->assertEquals($expected, $result->getSecondary());
     }
 }
-
-

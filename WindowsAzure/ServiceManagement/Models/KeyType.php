@@ -22,6 +22,7 @@
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
+
 namespace WindowsAzure\ServiceManagement\Models;
 
 /**
@@ -33,7 +34,7 @@ namespace WindowsAzure\ServiceManagement\Models;
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  *
- * @version   Release: 0.4.2_2016-04
+ * @version   Release: 0.4.3_2016-05
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
