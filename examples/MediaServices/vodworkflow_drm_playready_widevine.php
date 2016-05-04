@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -22,7 +22,7 @@
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-require_once 'vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
@@ -61,12 +61,10 @@ use WindowsAzure\MediaServices\Templates\TokenClaim;
 use WindowsAzure\MediaServices\Templates\TokenType;
 use WindowsAzure\MediaServices\Templates\WidevineMessageSerializer;
 
-// Settings
-date_default_timezone_set('America/Los_Angeles');
+// read user settings from config
+include_once 'userconfig.php';
 
-$account = '<your media services account name>';
-$secret = '<your media services account key>';
-$mezzanineFileName = 'Azure-Video.wmv';
+$mezzanineFileName = __DIR__.'/Azure-Video.wmv';
 $tokenRestriction = true;
 $tokenType = TokenType::JWT;
 

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -22,17 +22,14 @@
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-require_once 'vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\MediaServices\Models\EncodingReservedUnitType;
 
-// Settings
-date_default_timezone_set('America/Los_Angeles');
-
-$account = '<your media services account name>';
-$secret = '<your media services account key>';
+// read user settings from config
+include_once 'userconfig.php';
 
 $reservedUnits = 1;
 $reservedUnitsType = EncodingReservedUnitType::S1;
