@@ -30,7 +30,7 @@
  *
  */
 const ver_token = ' * @version';    
-const new_ver = '   Release: 0.4.2_2016-04';
+const new_ver = '   Release: 0.4.3_2016-05';
 const start_dir = './';   //this will update SDK sources, test sources and examples.   
 
 $updateVersion = true;
@@ -80,7 +80,7 @@ foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(start_dir)
     if ($listClass)
     {
         $path_parts = pathinfo($filename);
-        if ($path_parts['extension'] == 'php')
+        if (array_key_exists('extension', $path_parts) && $path_parts['extension'] == 'php')
         {
             //remove leading . or ..    
             if (strpos($filename, '.') !== false && strpos($filename, '.') == 0)
