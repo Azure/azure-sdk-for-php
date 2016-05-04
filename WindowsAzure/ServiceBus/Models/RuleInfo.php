@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,18 +15,18 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\ServiceBus\Models;
+
 use WindowsAzure\Common\Internal\Atom\Content;
 use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 
@@ -34,14 +34,15 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
  * The information of a rule.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 class RuleInfo
 {
     /**
@@ -65,7 +66,7 @@ class RuleInfo
      * @param RuleDescription $ruleDescription The description of the rule.
      */
     public function __construct(
-        $title = Resources::EMPTY_STRING, 
+        $title = Resources::EMPTY_STRING,
         $ruleDescription = null
     ) {
         Validate::isString($title, 'title');
@@ -74,13 +75,12 @@ class RuleInfo
             $ruleDescription = new RuleDescription();
         }
         $this->_ruleDescription = $ruleDescription;
-        $this->_entry           = new Entry();
+        $this->_entry = new Entry();
         $this->_entry->setTitle($title);
         $this->_entry->setAttribute(
             Resources::XMLNS,
             Resources::SERVICE_BUS_NAMESPACE
         );
-        
     }
 
     /**
@@ -89,7 +89,7 @@ class RuleInfo
      * 
      * @param string $xmlString An XML string representing a rule info instance.
      * 
-     * @return none 
+     * @return none
      */
     public function parseXml($xmlString)
     {
@@ -111,7 +111,7 @@ class RuleInfo
      */
     public function writeXml($xmlWriter)
     {
-        $content = null;    
+        $content = null;
         if (!is_null($this->_ruleDescription)) {
             $content = new Content();
             $content->setText(
@@ -149,7 +149,7 @@ class RuleInfo
     /**
      * Gets the title. 
      * 
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -227,19 +227,19 @@ class RuleInfo
      * 
      * @param RuleDescription $ruleDescription The description of the rule. 
      * 
-     * @return none 
+     * @return none
      */
     public function setRuleDescription($ruleDescription)
     {
         $this->_ruleDescription = $ruleDescription;
     }
-    
+
     /**
      * With correlation ID filter. 
      * 
      * @param string $correlationId The ID of the correlation.
      * 
-     * @return none 
+     * @return none
      */
     public function withCorrelationFilter($correlationId)
     {
@@ -253,7 +253,7 @@ class RuleInfo
      * 
      * @param string $sqlExpression The SQL expression of the filter. 
      * 
-     * @return none 
+     * @return none
      */
     public function withSqlFilter($sqlExpression)
     {
@@ -266,7 +266,7 @@ class RuleInfo
     /**
      * With true filter. 
      * 
-     * @return none 
+     * @return none
      */
     public function withTrueFilter()
     {
@@ -277,9 +277,9 @@ class RuleInfo
     /**
      * With false filter. 
      * 
-     * @return none 
+     * @return none
      */
-    public function withFalseFilter() 
+    public function withFalseFilter()
     {
         $filter = new FalseFilter();
         $this->_ruleDescription->setFilter($filter);
@@ -300,7 +300,7 @@ class RuleInfo
      * With SQL rule action. 
      * 
      * @param string $sqlExpression The SQL expression 
-     * of the rule action.
+     *                              of the rule action.
      *
      * @return none
      */
@@ -333,5 +333,4 @@ class RuleInfo
     {
         $this->_ruleDescription->setName($name);
     }
-
 }

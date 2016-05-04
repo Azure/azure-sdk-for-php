@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,28 +15,29 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Templates;
-use \Firebase\JWT\JWT;
+
 use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Represents PlayReadyLicenseResponseTemplate serializer helper class used in media services
+ * Represents PlayReadyLicenseResponseTemplate serializer helper class used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class MediaServicesLicenseTemplateSerializer
@@ -62,49 +63,53 @@ class MediaServicesLicenseTemplateSerializer
         }
 
         // decoding
-        $result->setLicenseTemplates(MediaServicesLicenseTemplateSerializer::deserializeLicenseTemplates($xml->LicenseTemplates));
+        $result->setLicenseTemplates(self::deserializeLicenseTemplates($xml->LicenseTemplates));
 
         if (isset($xml->ResponseCustomData)) {
-            $result->setResponseCustomData((string)$xml->ResponseCustomData);
+            $result->setResponseCustomData((string) $xml->ResponseCustomData);
         }
 
-        MediaServicesLicenseTemplateSerializer::ValidateLicenseResponseTemplate($result);
-        
+        self::ValidateLicenseResponseTemplate($result);
+
         return $result;
     }
 
     /**
-     * Serialize a PlayReadyLicenseResponseTemplate object into a PlayReadyLicenseResponseTemplate XML
+     * Serialize a PlayReadyLicenseResponseTemplate object into a PlayReadyLicenseResponseTemplate XML.
+     *
      * @param PlayReadyLicenseResponseTemplate $template
+     *
      * @return string The PlayReadyLicenseResponseTemplate XML
      */
-    public static function serialize($template) {
-
-        MediaServicesLicenseTemplateSerializer::ValidateLicenseResponseTemplate($template);
+    public static function serialize($template)
+    {
+        self::ValidateLicenseResponseTemplate($template);
 
         $writer = new \XMLWriter();
 
         $writer->openMemory();
         $writer->startElementNS(null, 'PlayReadyLicenseResponseTemplate', Resources::PRL_XML_NAMESPACE);
-        $writer->writeAttributeNS('xmlns','i', null, Resources::XSI_XML_NAMESPACE);
+        $writer->writeAttributeNS('xmlns', 'i', null, Resources::XSI_XML_NAMESPACE);
 
-        MediaServicesLicenseTemplateSerializer::serializeLicenseTemplates($writer, $template->getLicenseTemplates());
+        self::serializeLicenseTemplates($writer, $template->getLicenseTemplates());
         $writer->writeElement('ResponseCustomData', $template->getResponseCustomData());
-        
+
         $writer->endElement();
+
         return $writer->outputMemory();
     }
 
     /**
      * @param PlayReadyLicenseResponseTemplate $template
      */
-    private static function ValidateLicenseResponseTemplate($template) {
+    private static function ValidateLicenseResponseTemplate($template)
+    {
         // Validate the PlayReadyLicenseResponseTemplate has at least one license
         if (count($template->getLicenseTemplates()) <= 0) {
             throw new \RuntimeException(ErrorMessages::AT_LEAST_ONE_LICENSE_TEMPLATE_REQUIRED);
         }
 
-        foreach($template->getLicenseTemplates() as $license) {
+        foreach ($template->getLicenseTemplates() as $license) {
             // This is actually enforced in the DataContract with the IsRequired attribute
             // so this check should never fail.
             if ($license->getContentKey() == null) {
@@ -125,20 +130,18 @@ class MediaServicesLicenseTemplateSerializer
                 if (($license->getPlayRight()->getAllowPassingVideoContentToUnknownOutput() == UnknownOutputPassingOption::ALLOWED) ||
                     ($license->getPlayRight()->getAllowPassingVideoContentToUnknownOutput() == UnknownOutputPassingOption::ALLOWED_WITH_VIDEO_CONSTRICTION)) {
                     throw new \RuntimeException(ErrorMessages::DIGITAL_VIDEO_ONLY_MUTUALLY_EXCLUSIVE_WITH_PASSING_TO_UNKNOWN_OUTPUT_ERROR);
-                }                
+                }
             }
 
             //  License template should not have both BeginDate and RelativeBeginDate set.
             //  Only one of these two values should be set.
-            if (($license->getBeginDate() != null) && ($license->getRelativeBeginDate() != null))
-            {
+            if (($license->getBeginDate() != null) && ($license->getRelativeBeginDate() != null)) {
                 throw new \RuntimeException(ErrorMessages::BEGIN_DATE_AND_RELATIVE_BEGIN_DATE_CANNOTBE_SET_SIMULTANEOUSLY_ERROR);
             }
-            
+
             //  License template should not have both ExpirationDate and RelativeExpirationDate set.
             //  Only one of these two values should be set.
-            if (($license->getExpirationDate() != null) && ($license->getRelativeExpirationDate() != null))
-            {
+            if (($license->getExpirationDate() != null) && ($license->getRelativeExpirationDate() != null)) {
                 throw new \RuntimeException(ErrorMessages::EXPIRATION_DATE_AND_RELATIVE_EXPIRATION_DATE_CANNOTBE_SET_SIMULTANEOUSLY_ERROR);
             }
 
@@ -179,24 +182,24 @@ class MediaServicesLicenseTemplateSerializer
     }
 
     /**
-     *
-     * @param \XMLWriter $writer XML writer
+     * @param \XMLWriter                 $writer    XML writer
      * @param PlayReadyLicenseTemplate[] $templates
      */
-    private static function serializeLicenseTemplates($writer, $templates) {
+    private static function serializeLicenseTemplates($writer, $templates)
+    {
         $writer->startElement('LicenseTemplates');
-        foreach($templates as $template) {           
-            MediaServicesLicenseTemplateSerializer::serializeLicenseTemplate($writer, $template);
+        foreach ($templates as $template) {
+            self::serializeLicenseTemplate($writer, $template);
         }
         $writer->endElement();
     }
 
     /**
-     *
-     * @param \XMLWriter $writer XML writer
+     * @param \XMLWriter               $writer   XML writer
      * @param PlayReadyLicenseTemplate $template
      */
-    private static function serializeLicenseTemplate($writer, $template) {
+    private static function serializeLicenseTemplate($writer, $template)
+    {
         $writer->startElement('PlayReadyLicenseTemplate');
 
         if ($template->getAllowTestDevices()) {
@@ -207,40 +210,41 @@ class MediaServicesLicenseTemplateSerializer
             $writer->writeElement('BeginDate', $template->getBeginDate()->format(\DateTime::ATOM));
         }
 
-        MediaServicesLicenseTemplateSerializer::serializeContentKey($writer, $template->getContentKey());
+        self::serializeContentKey($writer, $template->getContentKey());
 
         if ($template->getExpirationDate() != null) {
             $writer->writeElement('ExpirationDate', $template->getExpirationDate()->format(\DateTime::ATOM));
         }
 
         if ($template->getGracePeriod() != null) {
-            $writer->writeElement('GracePeriod', MediaServicesLicenseTemplateSerializer::getSpecString($template->getGracePeriod()));
-        }
-        
-        if ($template->getLicenseType()) {
-            $writer->writeElement('LicenseType', (string)$template->getLicenseType());
+            $writer->writeElement('GracePeriod', self::getSpecString($template->getGracePeriod()));
         }
 
-        MediaServicesLicenseTemplateSerializer::serializePlayRight($writer, $template->getPlayRight());
+        if ($template->getLicenseType()) {
+            $writer->writeElement('LicenseType', (string) $template->getLicenseType());
+        }
+
+        self::serializePlayRight($writer, $template->getPlayRight());
 
         if ($template->getRelativeBeginDate() != null) {
-            $writer->writeElement('RelativeBeginDate', MediaServicesLicenseTemplateSerializer::getSpecString($template->getRelativeBeginDate()));
+            $writer->writeElement('RelativeBeginDate', self::getSpecString($template->getRelativeBeginDate()));
         }
 
         if ($template->getRelativeExpirationDate() != null) {
-            $writer->writeElement('RelativeExpirationDate', MediaServicesLicenseTemplateSerializer::getSpecString($template->getRelativeExpirationDate()));
+            $writer->writeElement('RelativeExpirationDate', self::getSpecString($template->getRelativeExpirationDate()));
         }
-        
+
         $writer->endElement();
     }
 
     /**
-     * @param mixed $writer
+     * @param mixed              $writer
      * @param PlayReadyPlayRight $playright
      */
-    private static function serializePlayRight($writer, $playright) {
+    private static function serializePlayRight($writer, $playright)
+    {
         $writer->startElement('PlayRight');
-        
+
         if ($playright->getAgcAndColorStripeRestriction() != null) {
             $writer->startElement('AgcAndColorStripeRestriction');
             $writer->writeElement('ConfigurationData', $playright->getAgcAndColorStripeRestriction()->getConfigurationData());
@@ -276,7 +280,7 @@ class MediaServicesLicenseTemplateSerializer
         }
 
         if ($playright->getFirstPlayExpiration() != null) {
-            $writer->writeElement('FirstPlayExpiration', MediaServicesLicenseTemplateSerializer::getSpecString($playright->getFirstPlayExpiration()));
+            $writer->writeElement('FirstPlayExpiration', self::getSpecString($playright->getFirstPlayExpiration()));
         }
 
         if ($playright->getImageConstraintForAnalogComponentVideoRestriction()) {
@@ -301,37 +305,40 @@ class MediaServicesLicenseTemplateSerializer
             $writer->writeElement('UncompressedDigitalVideoOpl', $playright->getUncompressedDigitalVideoOpl());
         }
 
-        $writer->endElement();    
+        $writer->endElement();
     }
 
     /**
-     * @param mixed $writer
+     * @param mixed               $writer
      * @param PlayReadyContentKey $contentKey
      */
-    private static function serializeContentKey($writer, $contentKey) {
+    private static function serializeContentKey($writer, $contentKey)
+    {
         if ($contentKey instanceof ContentEncryptionKeyFromHeader) {
             $writer->startElement('ContentKey');
-            $writer->writeAttributeNS('i', 'type', null, "ContentEncryptionKeyFromHeader");
+            $writer->writeAttributeNS('i', 'type', null, 'ContentEncryptionKeyFromHeader');
             $writer->endElement();
         }
 
         if ($contentKey instanceof ContentEncryptionKeyFromKeyIdentifier) {
             $writer->startElement('ContentKey');
-            $writer->writeAttributeNS('i', 'type', null, "ContentEncryptionKeyFromKeyIdentifier");
-            $writer->writeElement("KeyIdentifier", $contentKey->getKeyIdentifier());
-            $writer->endElement();            
+            $writer->writeAttributeNS('i', 'type', null, 'ContentEncryptionKeyFromKeyIdentifier');
+            $writer->writeElement('KeyIdentifier', $contentKey->getKeyIdentifier());
+            $writer->endElement();
         }
     }
 
     /**
      * @param mixed $xmlElement
+     *
      * @return PlayReadyLicenseTemplate[]
      */
-    private static function deserializeLicenseTemplates($xmlElement) {
+    private static function deserializeLicenseTemplates($xmlElement)
+    {
         $result = array();
 
-        foreach($xmlElement->children() as $child) {
-            $result[] = MediaServicesLicenseTemplateSerializer::deserializePlayReadyLicenseTemplate($child);
+        foreach ($xmlElement->children() as $child) {
+            $result[] = self::deserializePlayReadyLicenseTemplate($child);
         }
 
         return $result;
@@ -339,10 +346,11 @@ class MediaServicesLicenseTemplateSerializer
 
     /**
      * @param mixed $xmlElement
+     *
      * @return PlayReadyLicenseTemplate
      */
-    private static function deserializePlayReadyLicenseTemplate($xmlElement) {
-
+    private static function deserializePlayReadyLicenseTemplate($xmlElement)
+    {
         if (!isset($xmlElement->PlayRight)) {
             throw new \RuntimeException("The PlayReadyLicenseTemplate must contains an 'PlayRight' element");
         }
@@ -350,117 +358,118 @@ class MediaServicesLicenseTemplateSerializer
         if (!isset($xmlElement->ContentKey)) {
             throw new \RuntimeException("The PlayReadyLicenseTemplate must contains an 'ContentKey' element");
         }
-        
+
         $result = new PlayReadyLicenseTemplate();
 
         if (isset($xmlElement->AllowTestDevices)) {
-            $result->setAllowTestDevices($xmlElement->AllowTestDevices == "true");
+            $result->setAllowTestDevices($xmlElement->AllowTestDevices == 'true');
         }
 
         if (isset($xmlElement->BeginDate)) {
             if (isset($xmlElement->BeginDate->attributes(Resources::XSI_XML_NAMESPACE)->nil) &&
-                $xmlElement->BeginDate->attributes(Resources::XSI_XML_NAMESPACE)->nil == "true") {
+                $xmlElement->BeginDate->attributes(Resources::XSI_XML_NAMESPACE)->nil == 'true') {
                 $result->setBeginDate(null);
             } else {
-                $result->setBeginDate(new \DateTime((string)$xmlElement->BeginDate));
-            }            
+                $result->setBeginDate(new \DateTime((string) $xmlElement->BeginDate));
+            }
         }
 
         if (isset($xmlElement->ExpirationDate)) {
             if (isset($xmlElement->ExpirationDate->attributes(Resources::XSI_XML_NAMESPACE)->nil) &&
-               $xmlElement->ExpirationDate->attributes(Resources::XSI_XML_NAMESPACE)->nil == "true") {
+               $xmlElement->ExpirationDate->attributes(Resources::XSI_XML_NAMESPACE)->nil == 'true') {
                 $result->setExpirationDate(null);
             } else {
-                $result->setExpirationDate(new \DateTime((string)$xmlElement->setExpirationDate));
-            }    
+                $result->setExpirationDate(new \DateTime((string) $xmlElement->setExpirationDate));
+            }
         }
 
         if (isset($xmlElement->RelativeBeginDate)) {
-            $result->setRelativeBeginDate(new \DateInterval((string)$xmlElement->RelativeBeginDate));
+            $result->setRelativeBeginDate(new \DateInterval((string) $xmlElement->RelativeBeginDate));
         }
 
         if (isset($xmlElement->RelativeExpirationDate)) {
-            $result->setRelativeExpirationDate(new \DateInterval((string)$xmlElement->RelativeExpirationDate));
+            $result->setRelativeExpirationDate(new \DateInterval((string) $xmlElement->RelativeExpirationDate));
         }
 
         if (isset($xmlElement->GracePeriod)) {
-            $result->setGracePeriod(new \DateInterval((string)$xmlElement->GracePeriod));
+            $result->setGracePeriod(new \DateInterval((string) $xmlElement->GracePeriod));
         }
 
-        $result->setPlayRight(MediaServicesLicenseTemplateSerializer::deserializePlayReadyPlayRight($xmlElement->PlayRight));
+        $result->setPlayRight(self::deserializePlayReadyPlayRight($xmlElement->PlayRight));
 
         if (isset($xmlElement->LicenseType)) {
-            $result->setLicenseType((string)$xmlElement->LicenseType);
+            $result->setLicenseType((string) $xmlElement->LicenseType);
         }
 
-        $result->setContentKey(MediaServicesLicenseTemplateSerializer::deserializePlayReadyContentKey($xmlElement->ContentKey));
+        $result->setContentKey(self::deserializePlayReadyContentKey($xmlElement->ContentKey));
 
-        return $result;  
+        return $result;
     }
 
     /**
      * @param mixed $xmlElement
+     *
      * @return PlayReadyPlayRight PlayReadyPlayRight
      */
-    private static function deserializePlayReadyPlayRight($xmlElement) {
-
+    private static function deserializePlayReadyPlayRight($xmlElement)
+    {
         $result = new PlayReadyPlayRight();
-        
+
         if (isset($xmlElement->FirstPlayExpiration)) {
-            $result->setFirstPlayExpiration(new \DateInterval((string)$xmlElement->FirstPlayExpiration));
+            $result->setFirstPlayExpiration(new \DateInterval((string) $xmlElement->FirstPlayExpiration));
         }
 
         if (isset($xmlElement->ScmsRestriction) && isset($xmlElement->ScmsRestriction->ConfigurationData)) {
-            $result->setScmsRestriction(new ScmsRestriction(intval((string)$xmlElement->ScmsRestriction->ConfigurationData)));
+            $result->setScmsRestriction(new ScmsRestriction(intval((string) $xmlElement->ScmsRestriction->ConfigurationData)));
         }
 
         if (isset($xmlElement->AgcAndColorStripeRestriction) && isset($xmlElement->AgcAndColorStripeRestriction->ConfigurationData)) {
-            $result->setAgcAndColorStripeRestriction(new AgcAndColorStripeRestriction(intval((string)$xmlElement->AgcAndColorStripeRestriction->ConfigurationData)));
+            $result->setAgcAndColorStripeRestriction(new AgcAndColorStripeRestriction(intval((string) $xmlElement->AgcAndColorStripeRestriction->ConfigurationData)));
         }
 
         if (isset($xmlElement->ExplicitAnalogTelevisionOutputRestriction) && isset($xmlElement->ExplicitAnalogTelevisionOutputRestriction->ConfigurationData)) {
             $bestEffort = false;
             if (isset($xmlElement->ExplicitAnalogTelevisionOutputRestriction->BestEffort)) {
-                $bestEffort = $xmlElement->ExplicitAnalogTelevisionOutputRestriction->BestEffort  == "true";
+                $bestEffort = $xmlElement->ExplicitAnalogTelevisionOutputRestriction->BestEffort  == 'true';
             }
-            $configurationData = intval((string)$xmlElement->ExplicitAnalogTelevisionOutputRestriction->ConfigurationData);
-            $result->setExplicitAnalogTelevisionOutputRestriction(new ExplicitAnalogTelevisionRestriction($configurationData, $bestEffort));            
+            $configurationData = intval((string) $xmlElement->ExplicitAnalogTelevisionOutputRestriction->ConfigurationData);
+            $result->setExplicitAnalogTelevisionOutputRestriction(new ExplicitAnalogTelevisionRestriction($configurationData, $bestEffort));
         }
 
         if (isset($xmlElement->DigitalVideoOnlyContentRestriction)) {
-            $result->setDigitalVideoOnlyContentRestriction($xmlElement->DigitalVideoOnlyContentRestriction == "true");
+            $result->setDigitalVideoOnlyContentRestriction($xmlElement->DigitalVideoOnlyContentRestriction == 'true');
         }
 
         if (isset($xmlElement->ImageConstraintForAnalogComponentVideoRestriction)) {
-            $result->setImageConstraintForAnalogComponentVideoRestriction($xmlElement->ImageConstraintForAnalogComponentVideoRestriction == "true");
+            $result->setImageConstraintForAnalogComponentVideoRestriction($xmlElement->ImageConstraintForAnalogComponentVideoRestriction == 'true');
         }
 
         if (isset($xmlElement->ImageConstraintForAnalogComputerMonitorRestriction)) {
-            $result->setImageConstraintForAnalogComputerMonitorRestriction($xmlElement->ImageConstraintForAnalogComputerMonitorRestriction == "true");
+            $result->setImageConstraintForAnalogComputerMonitorRestriction($xmlElement->ImageConstraintForAnalogComputerMonitorRestriction == 'true');
         }
 
         if (isset($xmlElement->AllowPassingVideoContentToUnknownOutput)) {
-            $result->setAllowPassingVideoContentToUnknownOutput((string)$xmlElement->AllowPassingVideoContentToUnknownOutput);
+            $result->setAllowPassingVideoContentToUnknownOutput((string) $xmlElement->AllowPassingVideoContentToUnknownOutput);
         }
 
         if (isset($xmlElement->UncompressedDigitalVideoOpl)) {
-            $result->setUncompressedDigitalVideoOpl((int)$xmlElement->UncompressedDigitalVideoOpl);
+            $result->setUncompressedDigitalVideoOpl((int) $xmlElement->UncompressedDigitalVideoOpl);
         }
 
         if (isset($xmlElement->CompressedDigitalVideoOpl)) {
-            $result->setCompressedDigitalVideoOpl((int)$xmlElement->CompressedDigitalVideoOpl);
+            $result->setCompressedDigitalVideoOpl((int) $xmlElement->CompressedDigitalVideoOpl);
         }
 
         if (isset($xmlElement->AnalogVideoOpl)) {
-            $result->setAnalogVideoOpl((int)$xmlElement->AnalogVideoOpl);
+            $result->setAnalogVideoOpl((int) $xmlElement->AnalogVideoOpl);
         }
 
         if (isset($xmlElement->CompressedDigitalAudioOpl)) {
-            $result->setCompressedDigitalAudioOpl((int)$xmlElement->CompressedDigitalAudioOpl);
+            $result->setCompressedDigitalAudioOpl((int) $xmlElement->CompressedDigitalAudioOpl);
         }
 
         if (isset($xmlElement->UncompressedDigitalAudioOpl)) {
-            $result->setUncompressedDigitalAudioOpl((int)$xmlElement->UncompressedDigitalAudioOpl);
+            $result->setUncompressedDigitalAudioOpl((int) $xmlElement->UncompressedDigitalAudioOpl);
         }
 
         return $result;
@@ -468,35 +477,42 @@ class MediaServicesLicenseTemplateSerializer
 
     /**
      * @param mixed $xmlElement
+     *
      * @return PlayReadyContentKey PlayReadyContentKey
      */
-    private static function deserializePlayReadyContentKey($xmlElement) {
+    private static function deserializePlayReadyContentKey($xmlElement)
+    {
         $type = $xmlElement->attributes(Resources::XSI_XML_NAMESPACE)->type;
 
-        if ($type == "ContentEncryptionKeyFromHeader") {
+        if ($type == 'ContentEncryptionKeyFromHeader') {
             return new ContentEncryptionKeyFromHeader();
         }
 
-        if ($type == "ContentEncryptionKeyFromKeyIdentifier") {
+        if ($type == 'ContentEncryptionKeyFromKeyIdentifier') {
             return new ContentEncryptionKeyFromKeyIdentifier($xmlElement->KeyIdentifier);
         }
-       
-        throw new \RuntimeException("Unknown PlayReadyContentKey type={$type}");        
+
+        throw new \RuntimeException("Unknown PlayReadyContentKey type={$type}");
     }
 
-
-    private static function getSpecString(\DateInterval $delta){
+    private static function getSpecString(\DateInterval $delta)
+    {
         $date = array_filter(array('Y' => $delta->y, 'M' => $delta->m, 'D' => $delta->d));
         $time = array_filter(array('H' => $delta->h, 'M' => $delta->i, 'S' => $delta->s));
 
-        foreach($date as $key => &$value) $value = $value.$key;
-        foreach($time as $key => &$value) $value = $value.$key;
+        foreach ($date as $key => &$value) {
+            $value = $value.$key;
+        }
+        foreach ($time as $key => &$value) {
+            $value = $value.$key;
+        }
 
-        $spec = 'P' . implode('', $date);            
-        
-        if(count($time)>0) $spec .= 'T' . implode('', $time);
-        return $spec;        
+        $spec = 'P'.implode('', $date);
+
+        if (count($time) > 0) {
+            $spec .= 'T'.implode('', $time);
+        }
+
+        return $spec;
     }
 }
-
-

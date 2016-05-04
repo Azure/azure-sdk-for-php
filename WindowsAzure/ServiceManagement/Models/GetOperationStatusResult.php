@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\ServiceManagement\Models;
+
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\ServiceException;
@@ -31,11 +32,13 @@ use WindowsAzure\Common\ServiceException;
  * The result of calling getOperationStatus API.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class GetOperationStatusResult
@@ -44,22 +47,22 @@ class GetOperationStatusResult
      * @var string
      */
     private $_id;
-    
+
     /**
      * @var string
      */
     private $_status;
-    
+
     /**
      * @var string
      */
     private $_httpStatusCode;
-    
+
     /**
      * @var ServiceException
      */
     private $_error;
-    
+
     /**
      * Creates GetOperationStatusResult object from parsed response.
      * 
@@ -69,13 +72,13 @@ class GetOperationStatusResult
      */
     public static function create($parsed)
     {
-        $result = new GetOperationStatusResult();
-        
-        $result->_id             = Utilities::tryGetValue(
+        $result = new self();
+
+        $result->_id = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_ID
         );
-        $result->_status         = Utilities::tryGetValue(
+        $result->_status = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_STATUS
         );
@@ -83,21 +86,21 @@ class GetOperationStatusResult
             $parsed,
             Resources::XTAG_HTTP_STATUS_CODE
         );
-        $error                   = Utilities::tryGetValue(
+        $error = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_ERROR
         );
-        
+
         if (!empty($error)) {
-            $code    = Utilities::tryGetValue($error, Resources::XTAG_CODE);
+            $code = Utilities::tryGetValue($error, Resources::XTAG_CODE);
             $message = Utilities::tryGetValue($error, Resources::XTAG_MESSAGE);
-            
+
             $result->_error = new ServiceException($code, $message);
-        }        
-        
+        }
+
         return $result;
     }
-    
+
     /**
      * Gets the id.
      * 
@@ -107,7 +110,7 @@ class GetOperationStatusResult
     {
         return $this->_id;
     }
-    
+
     /**
      * Sets the id.
      * 
@@ -119,7 +122,7 @@ class GetOperationStatusResult
     {
         $this->_id = $id;
     }
-    
+
     /**
      * Gets the status.
      * 
@@ -129,7 +132,7 @@ class GetOperationStatusResult
     {
         return $this->_status;
     }
-    
+
     /**
      * Sets the status.
      * 
@@ -141,7 +144,7 @@ class GetOperationStatusResult
     {
         $this->_status = $status;
     }
-    
+
     /**
      * Gets the httpStatusCode.
      * 
@@ -151,7 +154,7 @@ class GetOperationStatusResult
     {
         return $this->_httpStatusCode;
     }
-    
+
     /**
      * Sets the httpStatusCode.
      * 
@@ -163,7 +166,7 @@ class GetOperationStatusResult
     {
         $this->_httpStatusCode = $httpStatusCode;
     }
-    
+
     /**
      * Gets the error.
      * 
@@ -173,7 +176,7 @@ class GetOperationStatusResult
     {
         return $this->_error;
     }
-    
+
     /**
      * Sets the error.
      * 
@@ -186,5 +189,3 @@ class GetOperationStatusResult
         $this->_error = $error;
     }
 }
-
-

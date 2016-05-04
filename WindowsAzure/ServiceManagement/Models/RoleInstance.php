@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\ServiceManagement\Models;
+
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
@@ -30,11 +31,13 @@ use WindowsAzure\Common\Internal\Utilities;
  * Represents a Windows Azure deployment role instance.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class RoleInstance
@@ -43,42 +46,42 @@ class RoleInstance
      * @var string
      */
     private $_roleName;
-    
+
     /**
      * @var string
      */
     private $_instanceName;
-    
+
     /**
      * @var string
      */
     private $_instanceStatus;
-    
+
     /**
-     * @var integer
+     * @var int
      */
     private $_instanceUpgradeDomain;
-    
+
     /**
-     * @var integer
+     * @var int
      */
     private $_instanceFaultDomain;
-    
+
     /**
      * @var string
      */
     private $_instanceSize;
-    
+
     /**
      * @var string
      */
     private $_instanceStateDetails;
-    
+
     /**
      * @var string
      */
     private $_instanceErrorCode;
-    
+
     /**
      * Creates a new RoleInstance from parsed response body.
      * 
@@ -88,16 +91,16 @@ class RoleInstance
      */
     public static function create($parsed)
     {
-        $roleInstance          = new RoleInstance();
-        $roleName              = Utilities::tryGetValue(
+        $roleInstance = new self();
+        $roleName = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_ROLE_NAME
         );
-        $instanceName          = Utilities::tryGetValue(
+        $instanceName = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_INSTANCE_NAME
         );
-        $instanceStatus        = Utilities::tryGetValue(
+        $instanceStatus = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_INSTANCE_STATUS
         );
@@ -105,23 +108,23 @@ class RoleInstance
             $parsed,
             Resources::XTAG_INSTANCE_UPGRADE_DOMAIN
         );
-        $instanceFaultDomain   = Utilities::tryGetValue(
+        $instanceFaultDomain = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_INSTANCE_FAULT_DOMAIN
         );
-        $instanceSize          = Utilities::tryGetValue(
+        $instanceSize = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_INSTANCE_SIZE
         );
-        $instanceStateDetails  = Utilities::tryGetValue(
+        $instanceStateDetails = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_INSTANCE_STATE_DETAILS
         );
-        $instanceErrorCode     = Utilities::tryGetValue(
+        $instanceErrorCode = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_INSTANCE_ERROR_CODE
         );
-        
+
         $roleInstance->setInstanceErrorCode($instanceErrorCode);
         $roleInstance->setInstanceFaultDomain(intval($instanceFaultDomain));
         $roleInstance->setInstanceName($instanceName);
@@ -130,10 +133,10 @@ class RoleInstance
         $roleInstance->setInstanceStatus($instanceStatus);
         $roleInstance->setInstanceUpgradeDomain(intval($instanceUpgradeDomain));
         $roleInstance->setRoleName($roleName);
-        
+
         return $roleInstance;
     }
-    
+
     /**
      * Gets the role name.
      * 
@@ -145,7 +148,7 @@ class RoleInstance
     {
         return $this->_roleName;
     }
-    
+
     /**
      * Sets the role name.
      * 
@@ -157,7 +160,7 @@ class RoleInstance
     {
         $this->_roleName = $roleName;
     }
-    
+
     /**
      * Gets the instance name.
      * 
@@ -169,7 +172,7 @@ class RoleInstance
     {
         return $this->_instanceName;
     }
-    
+
     /**
      * Sets the instance name.
      * 
@@ -181,7 +184,7 @@ class RoleInstance
     {
         $this->_instanceName = $instanceName;
     }
-    
+
     /**
      * Gets the instance status.
      * 
@@ -193,7 +196,7 @@ class RoleInstance
     {
         return $this->_instanceStatus;
     }
-    
+
     /**
      * Sets the instance status.
      * 
@@ -205,7 +208,7 @@ class RoleInstance
     {
         $this->_instanceStatus = $instanceStatus;
     }
-    
+
     /**
      * Gets the instance upgrade domain.
      * 
@@ -213,17 +216,17 @@ class RoleInstance
      * deployment, all roles in the same upgrade domain are upgraded at the same 
      * time.
      * 
-     * @return integer
+     * @return int
      */
     public function getInstanceUpgradeDomain()
     {
         return $this->_instanceUpgradeDomain;
     }
-    
+
     /**
      * Sets the instance upgrade domain.
      * 
-     * @param integer $instanceUpgradeDomain The instance upgrade domain.
+     * @param int $instanceUpgradeDomain The instance upgrade domain.
      * 
      * @return none
      */
@@ -231,7 +234,7 @@ class RoleInstance
     {
         $this->_instanceUpgradeDomain = $instanceUpgradeDomain;
     }
-    
+
     /**
      * Gets the instance fault domain.
      * 
@@ -239,17 +242,17 @@ class RoleInstance
      * same fault domain may be vulnerable to the failure of a single piece of 
      * hardware.
      * 
-     * @return integer
+     * @return int
      */
     public function getInstanceFaultDomain()
     {
         return $this->_instanceFaultDomain;
     }
-    
+
     /**
      * Sets the instance fault domain.
      * 
-     * @param integer $instanceFaultDomain The instance fault domain.
+     * @param int $instanceFaultDomain The instance fault domain.
      * 
      * @return none
      */
@@ -257,7 +260,7 @@ class RoleInstance
     {
         $this->_instanceFaultDomain = $instanceFaultDomain;
     }
-    
+
     /**
      * Gets the instance size.
      * 
@@ -270,7 +273,7 @@ class RoleInstance
     {
         return $this->_instanceSize;
     }
-    
+
     /**
      * Sets the instance size.
      * 
@@ -282,7 +285,7 @@ class RoleInstance
     {
         $this->_instanceSize = $instanceSize;
     }
-    
+
     /**
      * Gets the instance state details.
      * 
@@ -297,7 +300,7 @@ class RoleInstance
     {
         return $this->_instanceStateDetails;
     }
-    
+
     /**
      * Sets the instance state details.
      * 
@@ -309,7 +312,7 @@ class RoleInstance
     {
         $this->_instanceStateDetails = $instanceStateDetails;
     }
-    
+
     /**
      * Gets the instance error code.
      * 
@@ -326,7 +329,7 @@ class RoleInstance
     {
         return $this->_instanceErrorCode;
     }
-    
+
     /**
      * Sets the instance error code.
      * 

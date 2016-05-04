@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,24 +15,26 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\Common\Internal;
 
 /**
  * Logger class for debugging purpose.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Logger
@@ -55,16 +57,16 @@ class Logger
     public static function log($var, $tip = Resources::EMPTY_STRING)
     {
         if (!empty($tip)) {
-            error_log($tip . "\n", 3, self::$_filePath);
+            error_log($tip."\n", 3, self::$_filePath);
         }
-        
+
         if (is_array($var) || is_object($var)) {
             error_log(print_r($var, true), 3, self::$_filePath);
         } else {
-            error_log($var . "\n", 3, self::$_filePath);
+            error_log($var."\n", 3, self::$_filePath);
         }
     }
-    
+
     /**
      * Sets file path to use.
      *
@@ -79,5 +81,3 @@ class Logger
         self::$_filePath = $filePath;
     }
 }
-
-

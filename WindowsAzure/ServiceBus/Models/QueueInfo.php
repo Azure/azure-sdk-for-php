@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,34 +15,34 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\ServiceBus\Models;
+
 use WindowsAzure\Common\Internal\Atom\Content;
 use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
-use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\ServiceBus\Models\QueueDescription;
 
 /**
  * The information of a queue.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 class QueueInfo
 {
     /** 
@@ -66,17 +66,16 @@ class QueueInfo
      * @param QueueDescription $queueDescription The description of the queue.
      */
     public function __construct(
-        $title = Resources::EMPTY_STRING, 
+        $title = Resources::EMPTY_STRING,
         $queueDescription = null
     ) {
-
         Validate::isString($title, 'title');
         if (is_null($queueDescription)) {
             $queueDescription = new QueueDescription();
         }
 
         $this->_queueDescription = $queueDescription;
-        $this->_entry            = new Entry();
+        $this->_entry = new Entry();
         $this->_entry->setTitle($title);
         $this->_entry->setAttribute(
             Resources::XMLNS,
@@ -119,7 +118,7 @@ class QueueInfo
                 XmlSerializer::objectSerialize(
                     $this->_queueDescription,
                     'QueueDescription'
-                ) 
+                )
             );
             $content->setType(Resources::XML_CONTENT_TYPE);
         }
@@ -170,7 +169,7 @@ class QueueInfo
     {
         $this->_entry->setTitle($title);
     }
-    
+
     /** 
      * Gets the entry. 
      * 
@@ -196,13 +195,13 @@ class QueueInfo
     /**
      * Gets the lock duration.
      *
-     * @return string  
+     * @return string
      */
     public function getLockDuration()
     {
         return $this->_queueDescription->getLockDuration();
     }
-    
+
     /**
      * Sets the lock duration.
      *
@@ -214,11 +213,11 @@ class QueueInfo
     {
         $this->_queueDescription->setLockDuration($lockDuration);
     }
-    
+
     /**
      * gets the maximum size in mega bytes. 
      * 
-     * @return integer 
+     * @return int
      */
     public function getMaxSizeInMegabytes()
     {
@@ -228,7 +227,7 @@ class QueueInfo
     /**
      * Sets the max size in mega bytes.
      *
-     * @param integer $maxSizeInMegabytes The max size in mega bytes.
+     * @param int $maxSizeInMegabytes The max size in mega bytes.
      * 
      * @return none
      */
@@ -240,7 +239,7 @@ class QueueInfo
     /**
      * Gets requires duplicate detection.
      * 
-     * @return boolean
+     * @return bool
      */
     public function getRequiresDuplicateDetection()
     {
@@ -250,7 +249,7 @@ class QueueInfo
     /**
      * Sets requires duplicate detection.
      *
-     * @param boolean $requiresDuplicateDetection If duplicate detection is required.
+     * @param bool $requiresDuplicateDetection If duplicate detection is required.
      * 
      * @return none
      */
@@ -264,8 +263,8 @@ class QueueInfo
     /**
      * Gets the requires session. 
      * 
-     * @return boolean
-     */ 
+     * @return bool
+     */
     public function getRequiresSession()
     {
         return $this->_queueDescription->getRequiresSession();
@@ -274,7 +273,7 @@ class QueueInfo
     /**
      * Sets the requires session.
      *
-     * @param boolean $requiresSession If session is required.
+     * @param bool $requiresSession If session is required.
      * 
      * @return none
      */
@@ -286,7 +285,7 @@ class QueueInfo
     /**
      * gets the default message time to live. 
      * 
-     * @return string 
+     * @return string
      */
     public function getDefaultMessageTimeToLive()
     {
@@ -301,7 +300,7 @@ class QueueInfo
      * @return none
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
-    {   
+    {
         $this->_queueDescription->setDefaultMessageTimeToLive(
             $defaultMessageTimeToLive
         );
@@ -310,7 +309,7 @@ class QueueInfo
     /**
      * Gets dead lettering on message expiration.
      * 
-     * @return string 
+     * @return string
      */
     public function getDeadLetteringOnMessageExpiration()
     {
@@ -321,7 +320,7 @@ class QueueInfo
      * Sets dead lettering on message expiration.
      *
      * @param string $deadLetteringOnMessageExpiration The dead lettering on 
-     * message expiration.
+     *                                                 message expiration.
      * 
      * @return none
      */
@@ -336,7 +335,7 @@ class QueueInfo
     /**
      * Gets duplicate detection history time window. 
      * 
-     * @return string 
+     * @return string
      */
     public function getDuplicateDetectionHistoryTimeWindow()
     {
@@ -347,7 +346,7 @@ class QueueInfo
      * Sets the duplicate detection history time window.
      *
      * @param string $duplicateDetectionHistoryTimeWindow The duplicate
-     * detection history time window.
+     *                                                    detection history time window.
      * 
      * @return none
      */
@@ -362,7 +361,7 @@ class QueueInfo
     /**
      * Gets maximum delivery count. 
      * 
-     * @return string 
+     * @return string
      */
     public function getMaxDeliveryCount()
     {
@@ -384,7 +383,7 @@ class QueueInfo
     /**
      * Gets enable batched operation.
      * 
-     * @return boolean
+     * @return bool
      */
     public function getEnableBatchedOperations()
     {
@@ -394,7 +393,7 @@ class QueueInfo
     /**
      * Sets enable batched operations.
      *
-     * @param boolean $enableBatchedOperations Enable batched operations.
+     * @param bool $enableBatchedOperations Enable batched operations.
      * 
      * @return none
      */
@@ -408,7 +407,7 @@ class QueueInfo
     /**
      * Gets the size in bytes. 
      * 
-     * @return integer
+     * @return int
      */
     public function getSizeInBytes()
     {
@@ -418,7 +417,7 @@ class QueueInfo
     /**
      * Sets the size in bytes.
      *
-     * @param integer $sizeInBytes The size in bytes.
+     * @param int $sizeInBytes The size in bytes.
      * 
      * @return none
      */
@@ -430,7 +429,7 @@ class QueueInfo
     /**
      * Gets the message count. 
      * 
-     * @return integer
+     * @return int
      */
     public function getMessageCount()
     {
@@ -449,4 +448,3 @@ class QueueInfo
         $this->_queueDescription->setMessageCount($messageCount);
     }
 }
-

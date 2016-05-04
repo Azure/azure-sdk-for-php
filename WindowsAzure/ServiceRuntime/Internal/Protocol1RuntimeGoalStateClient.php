@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,24 +15,26 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\ServiceRuntime\Internal;
 
 /**
  * An implementation for the protocol runtime goal state client.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceRuntime\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
@@ -78,30 +80,30 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
     private $_keepOpen;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param Protocol1RuntimeCurrentStateClient $currentStateClient          The
-     *      current state client.
+     *                                                                        current state client.
      * @param IGoalStateDeserializer             $goalStateDeserializer       The
-     *      goal state deserializer.
+     *                                                                        goal state deserializer.
      * @param IRoleEnvironmentDeserializer       $roleEnvironmentDeserializer The
-     *      role environment deserializer.
+     *                                                                        role environment deserializer.
      * @param IInputChannel                      $inputChannel                The
-     *      input channel.
+     *                                                                        input channel.
      */
     public function __construct($currentStateClient, $goalStateDeserializer,
         $roleEnvironmentDeserializer, $inputChannel
     ) {
-        $this->_currentStateClient          = $currentStateClient;
-        $this->_goalStateDeserializer       = $goalStateDeserializer;
+        $this->_currentStateClient = $currentStateClient;
+        $this->_goalStateDeserializer = $goalStateDeserializer;
         $this->_roleEnvironmentDeserializer = $roleEnvironmentDeserializer;
-        $this->_inputChannel                = $inputChannel;
+        $this->_inputChannel = $inputChannel;
 
         $this->_listeners = array();
 
-        $this->_currentGoalState       = null;
+        $this->_currentGoalState = null;
         $this->_currentEnvironmentData = null;
-        $this->_keepOpen               = false;
+        $this->_keepOpen = false;
     }
 
     /**
@@ -221,5 +223,3 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
         }
     }
 }
-
-

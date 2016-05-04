@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,27 +15,29 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\ServiceBus\Internal;
+
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\ServiceBus\Models;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Container to hold wrap accesss token response object.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class WrapAccessTokenResult
@@ -46,7 +48,7 @@ class WrapAccessTokenResult
     private $_accessToken;
 
     /** 
-     * @var integer
+     * @var int
      */
     private $_expiresIn;
 
@@ -59,7 +61,7 @@ class WrapAccessTokenResult
      */
     public static function create($response)
     {
-        $wrapAccessTokenResult = new WrapAccessTokenResult();
+        $wrapAccessTokenResult = new self();
         parse_str($response, $parsedResponse);
 
         $wrapAccessTokenResult->setAccessToken(
@@ -73,7 +75,7 @@ class WrapAccessTokenResult
                 $parsedResponse, Resources::WRAP_ACCESS_TOKEN_EXPIRES_IN
             )
         );
-        
+
         return $wrapAccessTokenResult;
     }
 
@@ -86,7 +88,7 @@ class WrapAccessTokenResult
     {
         return $this->_accessToken;
     }
-    
+
     /**
      * Sets access token.
      *
@@ -112,7 +114,7 @@ class WrapAccessTokenResult
     /**
      * Sets expires in.
      *
-     * @param integer $expiresIn value.
+     * @param int $expiresIn value.
      * 
      * @return none.
      */
@@ -121,4 +123,3 @@ class WrapAccessTokenResult
         $this->_expiresIn = $expiresIn;
     }
 }
-

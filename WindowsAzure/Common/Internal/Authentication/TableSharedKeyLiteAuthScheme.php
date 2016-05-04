@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,28 +15,30 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal\Authentication
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      http://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\Common\Internal\Authentication;
-use WindowsAzure\Common\Internal\Authentication\StorageAuthScheme;
+
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * Provides shared key authentication scheme for blob and queue. For more info
- * check: http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx
+ * check: http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal\Authentication
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      http://github.com/windowsazure/azure-sdk-for-php
  */
 class TableSharedKeyLiteAuthScheme extends StorageAuthScheme
@@ -55,7 +57,7 @@ class TableSharedKeyLiteAuthScheme extends StorageAuthScheme
     {
         parent::__construct($accountName, $accountKey);
 
-        $this->includedHeaders   = array();
+        $this->includedHeaders = array();
         $this->includedHeaders[] = Resources::DATE;
     }
 
@@ -77,7 +79,7 @@ class TableSharedKeyLiteAuthScheme extends StorageAuthScheme
         $canonicalizedResource = parent::computeCanonicalizedResourceForTable(
             $url, $queryParams
         );
-        
+
         $stringToSign = array();
 
         foreach ($this->includedHeaders as $header) {
@@ -85,11 +87,11 @@ class TableSharedKeyLiteAuthScheme extends StorageAuthScheme
         }
 
         $stringToSign[] = $canonicalizedResource;
-        $stringToSign   = implode("\n", $stringToSign);
-        
+        $stringToSign = implode("\n", $stringToSign);
+
         return $stringToSign;
     }
-    
+
     /**
      * Returns authorization header to be included in the request.
      *
@@ -109,10 +111,8 @@ class TableSharedKeyLiteAuthScheme extends StorageAuthScheme
             $headers, $url, $queryParams, $httpMethod
         );
 
-        return 'SharedKeyLite ' . $this->accountName . ':' . base64_encode(
+        return 'SharedKeyLite '.$this->accountName.':'.base64_encode(
             hash_hmac('sha256', $signature, base64_decode($this->accountKey), true)
         );
     }
 }
-
-

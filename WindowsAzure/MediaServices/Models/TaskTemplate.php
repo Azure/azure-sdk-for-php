@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,131 +15,133 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
 
-
 /**
- * Represents task template object used in media services
+ * Represents task template object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class TaskTemplate
 {
     /**
-     * Task template id
+     * Task template id.
      *
      * @var string
      */
     private $_id;
 
     /**
-     * Configuration
+     * Configuration.
      *
      * @var string
      */
     private $_configuration;
 
     /**
-     * Created
+     * Created.
      *
      * @var \DateTime
      */
     private $_created;
 
     /**
-     * Last modified date
+     * Last modified date.
      *
      * @var \DateTime
      */
     private $_lastModified;
 
     /**
-     * Description
+     * Description.
      *
      * @var string
      */
     private $_description;
 
     /**
-     * Media processor id
+     * Media processor id.
      *
      * @var string
      */
     private $_mediaProcessorId;
 
     /**
-     * Name
+     * Name.
      *
      * @var string
      */
     private $_name;
 
     /**
-     * Number of input assets
+     * Number of input assets.
      *
      * @var int
      */
     private $_numberofInputAssets;
 
     /**
-     * Number of output assets
+     * Number of output assets.
      *
      * @var int
      */
     private $_numberofOutputAssets;
 
     /**
-     * Options
+     * Options.
      *
      * @var int
      */
     private $_options;
 
     /**
-     * Encription key id
+     * Encription key id.
      *
      * @var string
      */
     private $_encryptionKeyId;
 
     /**
-     * Encryption scheme
+     * Encryption scheme.
      *
      * @var string
      */
     private $_encryptionScheme;
 
     /**
-     * Encryption version
+     * Encryption version.
      *
      * @var string
      */
     private $_encryptionVersion;
 
     /**
-     * Initialization vector
+     * Initialization vector.
      *
      * @var string
      */
     private $_initializationVector;
 
     /**
-     * Create task template from array
+     * Create task template from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -156,7 +158,7 @@ class TaskTemplate
             'options[NumberofOutputAssets]'
         );
 
-        $taskTemplate = new TaskTemplate(
+        $taskTemplate = new self(
             $options['NumberofInputAssets'],
             $options['NumberofOutputAssets']
         );
@@ -166,7 +168,7 @@ class TaskTemplate
     }
 
     /**
-     * Create task
+     * Create task.
      *
      * @param int $numberOfInputAssets  Number of input Assets the TaskTemplate
      *                                  must process.
@@ -175,13 +177,13 @@ class TaskTemplate
      */
     public function __construct($numberOfInputAssets, $numberOfOutputAssets)
     {
-        $this->_id                   = 'nb:ttid:UUID:' . Utilities::getGuid();
-        $this->_numberofInputAssets  = $numberOfInputAssets;
+        $this->_id = 'nb:ttid:UUID:'.Utilities::getGuid();
+        $this->_numberofInputAssets = $numberOfInputAssets;
         $this->_numberofOutputAssets = $numberOfOutputAssets;
     }
 
     /**
-     * Fill task template from array
+     * Fill task template from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -285,7 +287,7 @@ class TaskTemplate
     }
 
     /**
-     * Get "Name"
+     * Get "Name".
      *
      * @return string
      */
@@ -295,7 +297,7 @@ class TaskTemplate
     }
 
     /**
-     * Set "Name"
+     * Set "Name".
      *
      * @param string $value Name
      *
@@ -307,7 +309,7 @@ class TaskTemplate
     }
 
     /**
-     * Get "Task template id"
+     * Get "Task template id".
      *
      * @return string
      */
@@ -317,7 +319,7 @@ class TaskTemplate
     }
 
     /**
-     * Get "Initialization vector"
+     * Get "Initialization vector".
      *
      * @return string
      */
@@ -327,7 +329,7 @@ class TaskTemplate
     }
 
     /**
-     * Set "Initialization vector"
+     * Set "Initialization vector".
      *
      * @param string $value Initialization vector
      *
@@ -339,7 +341,7 @@ class TaskTemplate
     }
 
     /**
-     * Get "Encryption version"
+     * Get "Encryption version".
      *
      * @return string
      */
@@ -349,7 +351,7 @@ class TaskTemplate
     }
 
     /**
-     * Set "Encryption version"
+     * Set "Encryption version".
      *
      * @param string $value Encryption version
      *
@@ -361,7 +363,7 @@ class TaskTemplate
     }
 
     /**
-     * Get "Encryption scheme"
+     * Get "Encryption scheme".
      *
      * @return string
      */
@@ -371,7 +373,7 @@ class TaskTemplate
     }
 
     /**
-     * Set "Encryption scheme"
+     * Set "Encryption scheme".
      *
      * @param string $value Encryption scheme
      *
@@ -383,7 +385,7 @@ class TaskTemplate
     }
 
     /**
-     * Get "Encription key id"
+     * Get "Encription key id".
      *
      * @return string
      */
@@ -393,7 +395,7 @@ class TaskTemplate
     }
 
     /**
-     * Set "Encription key id"
+     * Set "Encription key id".
      *
      * @param string $value Encription key id
      *
@@ -405,7 +407,7 @@ class TaskTemplate
     }
 
     /**
-     * Get "Options"
+     * Get "Options".
      *
      * @return int
      */
@@ -415,7 +417,7 @@ class TaskTemplate
     }
 
     /**
-     * Get "Media processor id"
+     * Get "Media processor id".
      *
      * @return string
      */
@@ -425,7 +427,7 @@ class TaskTemplate
     }
 
     /**
-     * Set "Media processor id"
+     * Set "Media processor id".
      *
      * @param string $value Media procesot id
      *
@@ -437,7 +439,7 @@ class TaskTemplate
     }
 
     /**
-     * Get "Configuration"
+     * Get "Configuration".
      *
      * @return string
      */
@@ -447,7 +449,7 @@ class TaskTemplate
     }
 
     /**
-     * Set "Configuration"
+     * Set "Configuration".
      *
      * @param string $value Configuration
      *
@@ -459,7 +461,7 @@ class TaskTemplate
     }
 
     /**
-     * Get "Created"
+     * Get "Created".
      *
      * @return \DateTime
      */
@@ -469,7 +471,7 @@ class TaskTemplate
     }
 
     /**
-     * Get "Last modified date"
+     * Get "Last modified date".
      *
      * @return \DateTime
      */
@@ -479,7 +481,7 @@ class TaskTemplate
     }
 
     /**
-     * Get "Description"
+     * Get "Description".
      *
      * @return string
      */
@@ -489,7 +491,7 @@ class TaskTemplate
     }
 
     /**
-     * Set "Description"
+     * Set "Description".
      *
      * @param string $value Description
      *
@@ -501,7 +503,7 @@ class TaskTemplate
     }
 
     /**
-     * Get "Number of output assets"
+     * Get "Number of output assets".
      *
      * @return int
      */
@@ -511,7 +513,7 @@ class TaskTemplate
     }
 
     /**
-     * Set "Number of output assets"
+     * Set "Number of output assets".
      *
      * @param int $value Number of output assets
      *
@@ -523,7 +525,7 @@ class TaskTemplate
     }
 
     /**
-     * Get "Number of input assets"
+     * Get "Number of input assets".
      *
      * @return int
      */
@@ -533,7 +535,7 @@ class TaskTemplate
     }
 
     /**
-     * Set "Number of input assets"
+     * Set "Number of input assets".
      *
      * @param int $value Number of input assets
      *
@@ -544,4 +546,3 @@ class TaskTemplate
         $this->_numberofInputAssets = $value;
     }
 }
-

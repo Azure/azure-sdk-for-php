@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,28 +15,28 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\Common\Models;
-use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\Models\Logging;
-use WindowsAzure\Common\Models\Metrics;
+
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 
 /**
- * Encapsulates service properties
+ * Encapsulates service properties.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ServiceProperties
@@ -44,7 +44,7 @@ class ServiceProperties
     private $_logging;
     private $_metrics;
     public static $xmlRootName = 'StorageServiceProperties';
-    
+
     /**
      * Creates ServiceProperties object from parsed XML response.
      *
@@ -54,13 +54,13 @@ class ServiceProperties
      */
     public static function create($parsedResponse)
     {
-        $result = new ServiceProperties();
+        $result = new self();
         $result->setLogging(Logging::create($parsedResponse['Logging']));
         $result->setMetrics(Metrics::create($parsedResponse['Metrics']));
-        
+
         return $result;
     }
-    
+
     /**
      * Gets logging element.
      *
@@ -70,7 +70,7 @@ class ServiceProperties
     {
         return $this->_logging;
     }
-    
+
     /**
      * Sets logging element.
      *
@@ -82,7 +82,7 @@ class ServiceProperties
     {
         $this->_logging = clone $logging;
     }
-    
+
     /**
      * Gets metrics element.
      *
@@ -92,7 +92,7 @@ class ServiceProperties
     {
         return $this->_metrics;
     }
-    
+
     /**
      * Sets metrics element.
      *
@@ -104,20 +104,20 @@ class ServiceProperties
     {
         $this->_metrics = clone $metrics;
     }
-    
+
     /**
-     * Converts this object to array with XML tags
+     * Converts this object to array with XML tags.
      * 
-     * @return array. 
+     * @return array.
      */
     public function toArray()
     {
         return array(
             'Logging' => !empty($this->_logging) ? $this->_logging->toArray() : null,
-            'Metrics' => !empty($this->_metrics) ? $this->_metrics->toArray() : null
+            'Metrics' => !empty($this->_metrics) ? $this->_metrics->toArray() : null,
         );
     }
-    
+
     /**
      * Converts this current object to XML representation.
      * 
@@ -128,9 +128,7 @@ class ServiceProperties
     public function toXml($xmlSerializer)
     {
         $properties = array(XmlSerializer::ROOT_NAME => self::$xmlRootName);
-        
+
         return $xmlSerializer->serialize($this->toArray(), $properties);
     }
 }
-
-

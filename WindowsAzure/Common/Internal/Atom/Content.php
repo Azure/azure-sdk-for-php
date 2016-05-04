@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,30 +15,30 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal\Atom
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\Common\Internal\Atom;
+
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Atom\AtomProperties;
 /**
  * The content class of ATOM standard.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal\Atom
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 class Content extends AtomBase
 {
     /**
@@ -56,7 +56,7 @@ class Content extends AtomBase
     protected $type;
 
     /**
-     * Source XML object
+     * Source XML object.
      *
      * @var \SimpleXMLElement
      */
@@ -90,7 +90,7 @@ class Content extends AtomBase
     }
 
     /**
-     * Creates an ATOM CONTENT instance with specified simpleXML object
+     * Creates an ATOM CONTENT instance with specified simpleXML object.
      *
      * @param \SimpleXMLElement $contentXml xml element of ATOM CONTENT
      *
@@ -104,7 +104,7 @@ class Content extends AtomBase
         $attributes = $contentXml->attributes();
 
         if (!empty($attributes['type'])) {
-            $this->content = (string)$attributes['type'];
+            $this->content = (string) $attributes['type'];
         }
 
         $text = '';
@@ -210,4 +210,3 @@ class Content extends AtomBase
         $xmlWriter->writeRaw($this->text);
     }
 }
-

@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,27 +15,29 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal\Http
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\Common\Internal\Http;
+
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Http\IUrl;
 
 /**
  * Default IUrl implementation.
  *
  * @category  Microsoft
- * @package   WindowsAzure\Common\Internal\Http
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Url implements IUrl
@@ -44,9 +46,9 @@ class Url implements IUrl
      * @var \Net_URL2
      */
     private $_url;
-    
+
     /**
-     * Sets the url path to '/' if it's empty
+     * Sets the url path to '/' if it's empty.
      * 
      * @param string $url the url string
      * 
@@ -54,15 +56,15 @@ class Url implements IUrl
      */
     private function _setPathIfEmpty($url)
     {
-        $path =  parse_url($url, PHP_URL_PATH);
-        
+        $path = parse_url($url, PHP_URL_PATH);
+
         if (empty($path)) {
             $this->setUrlPath('/');
         }
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param string $url the url to set.
      * 
@@ -72,11 +74,11 @@ class Url implements IUrl
     {
         $errorMessage = Resources::INVALID_URL_MSG;
         Validate::isTrue(filter_var($url, FILTER_VALIDATE_URL), $errorMessage);
-        
+
         $this->_url = new \Net_URL2($url);
         $this->_setPathIfEmpty($url);
     }
-    
+
     /**
      * Makes deep copy from the current object.
      * 
@@ -86,9 +88,9 @@ class Url implements IUrl
     {
         $this->_url = clone $this->_url;
     }
-    
+
     /**
-     * Returns the query portion of the url
+     * Returns the query portion of the url.
      * 
      * @return string
      */
@@ -98,7 +100,7 @@ class Url implements IUrl
     }
 
     /**
-     * Returns the query portion of the url in array form
+     * Returns the query portion of the url in array form.
      * 
      * @return array
      */
@@ -120,10 +122,10 @@ class Url implements IUrl
     {
         Validate::isString($key, 'key');
         Validate::isString($value, 'value');
-        
+
         $this->_url->setQueryVariable($key, $value);
     }
-    
+
     /**
      * Gets actual URL string.
      * 
@@ -133,9 +135,9 @@ class Url implements IUrl
     {
         return $this->_url->getURL();
     }
-    
+
     /**
-     * Sets url path
+     * Sets url path.
      * 
      * @param string $urlPath url path to set.
      * 
@@ -144,12 +146,12 @@ class Url implements IUrl
     public function setUrlPath($urlPath)
     {
         Validate::isString($urlPath, 'urlPath');
-        
+
         $this->_url->setPath($urlPath);
     }
-    
+
     /**
-     * Appends url path
+     * Appends url path.
      * 
      * @param string $urlPath url path to append.
      * 
@@ -158,11 +160,11 @@ class Url implements IUrl
     public function appendUrlPath($urlPath)
     {
         Validate::isString($urlPath, 'urlPath');
-        
-        $newUrlPath = parse_url($this->_url, PHP_URL_PATH) . $urlPath;
+
+        $newUrlPath = parse_url($this->_url, PHP_URL_PATH).$urlPath;
         $this->_url->setPath($newUrlPath);
     }
-    
+
     /**
      * Gets actual URL string.
      * 
@@ -172,9 +174,9 @@ class Url implements IUrl
     {
         return $this->_url->getURL();
     }
-    
+
     /**
-     * Sets the query string to the specified variables in $array
+     * Sets the query string to the specified variables in $array.
      * 
      * @param array $array key/value representation of query variables.
      * 
@@ -187,5 +189,3 @@ class Url implements IUrl
         }
     }
 }
-
-

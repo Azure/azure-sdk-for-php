@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,130 +15,132 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\MediaServices\Models;
-use WindowsAzure\Common\Internal\Utilities;
+
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * Represents asset file object used in media services
+ * Represents asset file object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class AssetFile
 {
     /**
-     * Asset file Id
+     * Asset file Id.
      *
      * @var string
      */
     private $_id;
 
     /**
-     * Name
+     * Name.
      *
      * @var string
      */
     private $_name;
 
     /**
-     * Content file size
+     * Content file size.
      *
      * @var int
      */
     private $_contentFileSize;
 
     /**
-     * Parent asset id
+     * Parent asset id.
      *
      * @var string
      */
     private $_parentAssetId;
 
     /**
-     * Encryption version
+     * Encryption version.
      *
      * @var string
      */
     private $_encryptionVersion;
 
     /**
-     * Encryption scheme
+     * Encryption scheme.
      *
      * @var string
      */
     private $_encryptionScheme;
 
     /**
-     * Is encrypted
+     * Is encrypted.
      *
      * @var bool
      */
     private $_isEncrypted;
 
     /**
-     * Encryption key id
+     * Encryption key id.
      *
      * @var string
      */
     private $_encryptionKeyId;
 
     /**
-     * Initialization vector
+     * Initialization vector.
      *
      * @var string
      */
     private $_initializationVector;
 
     /**
-     * Is primary
+     * Is primary.
      *
      * @var bool
      */
     private $_isPrimary;
 
     /**
-     * Last modified
+     * Last modified.
      *
      * @var \DateTime
      */
     private $_lastModified;
 
     /**
-     * Created
+     * Created.
      *
      * @var \DateTime
      */
     private $_created;
 
     /**
-     * Mime type
+     * Mime type.
      *
      * @var string
      */
     private $_mimeType;
 
     /**
-     * Content check sum
+     * Content check sum.
      *
      * @var string
      */
     private $_contentCheckSum;
 
     /**
-     * Create asset file from array
+     * Create asset file from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -149,14 +151,14 @@ class AssetFile
         Validate::notNull($options['Name'], 'options[Name]');
         Validate::notNull($options['ParentAssetId'], 'options[ParentAssetId]');
 
-        $assetFile = new AssetFile($options['Name'], $options['ParentAssetId']);
+        $assetFile = new self($options['Name'], $options['ParentAssetId']);
         $assetFile->fromArray($options);
 
         return $assetFile;
     }
 
     /**
-     * Create asset file
+     * Create asset file.
      *
      * @param string $name          Friendly name for asset file.
      * @param string $parentAssetId Asset Id of the Asset that this file is
@@ -164,20 +166,22 @@ class AssetFile
      */
     public function __construct($name, $parentAssetId)
     {
-        $this->_name          = $name;
+        $this->_name = $name;
         $this->_parentAssetId = $parentAssetId;
     }
 
     /**
-     * Return a list of fields that must be sent (even if null)
+     * Return a list of fields that must be sent (even if null).
+     *
      * @return string[]
      */
-    public function requiredFields() {
+    public function requiredFields()
+    {
         return ['Name', 'ParentAssetId'];
     }
 
     /**
-     * Fill asset file from array
+     * Fill asset file from array.
      *
      * @param array $options Array containing values for object properties
      *
@@ -284,7 +288,7 @@ class AssetFile
     }
 
     /**
-     * Get "Content check sum"
+     * Get "Content check sum".
      *
      * @return string
      */
@@ -294,7 +298,7 @@ class AssetFile
     }
 
     /**
-     * Set "Content check sum"
+     * Set "Content check sum".
      *
      * @param string $value Content check sum
      *
@@ -306,7 +310,7 @@ class AssetFile
     }
 
     /**
-     * Get "Mime type"
+     * Get "Mime type".
      *
      * @return string
      */
@@ -316,7 +320,7 @@ class AssetFile
     }
 
     /**
-     * Set "Mime type"
+     * Set "Mime type".
      *
      * @param string $value Mime type
      *
@@ -328,7 +332,7 @@ class AssetFile
     }
 
     /**
-     * Get "Created"
+     * Get "Created".
      *
      * @return \DateTime
      */
@@ -338,7 +342,7 @@ class AssetFile
     }
 
     /**
-     * Get "Last modified"
+     * Get "Last modified".
      *
      * @return \DateTime
      */
@@ -348,7 +352,7 @@ class AssetFile
     }
 
     /**
-     * Get "Is primary"
+     * Get "Is primary".
      *
      * @return bool
      */
@@ -358,7 +362,7 @@ class AssetFile
     }
 
     /**
-     * Set "Is primary"
+     * Set "Is primary".
      *
      * @param bool $value Is primary
      *
@@ -370,7 +374,7 @@ class AssetFile
     }
 
     /**
-     * Get "Initialization vector"
+     * Get "Initialization vector".
      *
      * @return string
      */
@@ -380,7 +384,7 @@ class AssetFile
     }
 
     /**
-     * Set "Initialization vector"
+     * Set "Initialization vector".
      *
      * @param string $value Initialization vector
      *
@@ -392,7 +396,7 @@ class AssetFile
     }
 
     /**
-     * Get "Encryption key id"
+     * Get "Encryption key id".
      *
      * @return string
      */
@@ -402,7 +406,7 @@ class AssetFile
     }
 
     /**
-     * Set "Encryption key id"
+     * Set "Encryption key id".
      *
      * @param string $value Encryption key id
      *
@@ -414,7 +418,7 @@ class AssetFile
     }
 
     /**
-     * Get "Is encrypted"
+     * Get "Is encrypted".
      *
      * @return bool
      */
@@ -424,7 +428,7 @@ class AssetFile
     }
 
     /**
-     * Set "Is encrypted"
+     * Set "Is encrypted".
      *
      * @param bool $value Is encrypted
      *
@@ -436,7 +440,7 @@ class AssetFile
     }
 
     /**
-     * Get "Encryption scheme"
+     * Get "Encryption scheme".
      *
      * @return string
      */
@@ -446,7 +450,7 @@ class AssetFile
     }
 
     /**
-     * Set "Encryption scheme"
+     * Set "Encryption scheme".
      *
      * @param string $value Encryption scheme
      *
@@ -458,7 +462,7 @@ class AssetFile
     }
 
     /**
-     * Get "Encryption version"
+     * Get "Encryption version".
      *
      * @return string
      */
@@ -468,7 +472,7 @@ class AssetFile
     }
 
     /**
-     * Set "Encryption version"
+     * Set "Encryption version".
      *
      * @param string $value Encryption version
      *
@@ -480,7 +484,7 @@ class AssetFile
     }
 
     /**
-     * Get "Parent asset id"
+     * Get "Parent asset id".
      *
      * @return string
      */
@@ -490,7 +494,7 @@ class AssetFile
     }
 
     /**
-     * Set "Parent asset id"
+     * Set "Parent asset id".
      *
      * @param string $value Parent asset id
      *
@@ -502,7 +506,7 @@ class AssetFile
     }
 
     /**
-     * Get "Content file size"
+     * Get "Content file size".
      *
      * @return int
      */
@@ -512,7 +516,7 @@ class AssetFile
     }
 
     /**
-     * Set "Content file size"
+     * Set "Content file size".
      *
      * @param int $value Content file size
      *
@@ -524,7 +528,7 @@ class AssetFile
     }
 
     /**
-     * Get "Name"
+     * Get "Name".
      *
      * @return string
      */
@@ -534,7 +538,7 @@ class AssetFile
     }
 
     /**
-     * Set "Name"
+     * Set "Name".
      *
      * @param string $value Name
      *
@@ -546,7 +550,7 @@ class AssetFile
     }
 
     /**
-     * Get "Asset file Id"
+     * Get "Asset file Id".
      *
      * @return string
      */
@@ -555,5 +559,3 @@ class AssetFile
         return $this->_id;
     }
 }
-
-

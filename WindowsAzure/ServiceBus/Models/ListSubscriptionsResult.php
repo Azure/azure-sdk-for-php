@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,31 +15,30 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\ServiceBus\Models;
 
 use WindowsAzure\Common\Internal\Atom\Feed;
-use WindowsAzure\Common\Internal\Atom\Content;
-use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
 
 /**
  * The result of the list subscription request.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 class ListSubscriptionsResult extends Feed
 {
     /**
@@ -54,7 +53,7 @@ class ListSubscriptionsResult extends Feed
      * subscriptions request.
      * 
      * @param string $response The body of the response of the list 
-     * subscriptions request. 
+     *                         subscriptions request. 
      * 
      * @return none
      */
@@ -62,7 +61,7 @@ class ListSubscriptionsResult extends Feed
     {
         parent::parseXml($response);
         $listSubscriptionsResultXml = new \SimpleXMLElement($response);
-        $this->_subscriptionInfos   = array();
+        $this->_subscriptionInfos = array();
         foreach ($listSubscriptionsResultXml->entry as $entry) {
             $subscriptionInfo = new SubscriptionInfo();
             $subscriptionInfo->parseXml($entry->asXml());
@@ -76,7 +75,7 @@ class ListSubscriptionsResult extends Feed
     public function __construct()
     {
     }
-    
+
     /**
      * Gets the information of the subscription. 
      * 
@@ -91,14 +90,12 @@ class ListSubscriptionsResult extends Feed
      * Sets the information of the rule. 
      * 
      * @param array $subscriptionInfos The information of the
-     * subscription.
+     *                                 subscription.
      * 
-     * @return none 
+     * @return none
      */
     public function setSubscriptionInfos($subscriptionInfos)
     {
         $this->_subscriptionInfos = $subscriptionInfos;
     }
-
 }
-

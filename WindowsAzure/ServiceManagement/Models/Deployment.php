@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
 namespace WindowsAzure\ServiceManagement\Models;
+
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
@@ -30,11 +31,13 @@ use WindowsAzure\Common\Internal\Utilities;
  * Represents a Windows Azure deployment.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class Deployment
@@ -43,72 +46,72 @@ class Deployment
      * @var string
      */
     private $_name;
-    
+
     /**
      * @var string
      */
     private $_slot;
-    
+
     /**
      * @var string
      */
     private $_privateId;
-    
+
     /**
      * @var string
      */
     private $_status;
-    
+
     /**
      * @var string
      */
     private $_label;
-    
+
     /**
      * @var string
      */
     private $_configuration;
-    
+
     /**
      * @var array
      */
     private $_roleInstanceList;
-    
+
     /**
-     * @var integer
+     * @var int
      */
     private $_upgradeDomainCount;
-    
+
     /**
      * @var array
      */
     private $_roleList;
-    
+
     /**
      * @var string
      */
     private $_sdkVersion;
-    
+
     /**
      * @var array
      */
     private $_inputEndpointList;
-    
+
     /**
-     * @var boolean
+     * @var bool
      */
     private $_locked;
-    
+
     /**
-     * @var boolean
+     * @var bool
      */
     private $_rollbackAllowed;
-    
+
     /**
      * @var UpgradeStatus
      */
     private $_upgradeStatus;
-    
+
     /**
      * Creates a new Deployment from parsed response body.
      * 
@@ -118,50 +121,50 @@ class Deployment
      */
     public static function create($parsed)
     {
-        $result             = new Deployment();
-        $name               = Utilities::tryGetValue($parsed, Resources::XTAG_NAME);
-        $label              = Utilities::tryGetValue($parsed, Resources::XTAG_LABEL);
-        $url                = Utilities::tryGetValue($parsed, Resources::XTAG_URL);
-        $locked             = Utilities::tryGetValue(
+        $result = new self();
+        $name = Utilities::tryGetValue($parsed, Resources::XTAG_NAME);
+        $label = Utilities::tryGetValue($parsed, Resources::XTAG_LABEL);
+        $url = Utilities::tryGetValue($parsed, Resources::XTAG_URL);
+        $locked = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_LOCKED
         );
-        $rollbackAllowed    = Utilities::tryGetValue(
+        $rollbackAllowed = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_ROLLBACK_ALLOWED
         );
-        $sdkVersion         = Utilities::tryGetValue(
+        $sdkVersion = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_SDK_VERSION
         );
-        $inputEndpointList  = Utilities::tryGetKeysChainValue(
+        $inputEndpointList = Utilities::tryGetKeysChainValue(
             $parsed,
             Resources::XTAG_INPUT_ENDPOINT_LIST,
             Resources::XTAG_INPUT_ENDPOINT
         );
-        $roleList           = Utilities::tryGetKeysChainValue(
+        $roleList = Utilities::tryGetKeysChainValue(
             $parsed,
             Resources::XTAG_ROLE_LIST,
             Resources::XTAG_ROLE
         );
-        $roleInstanceList   = Utilities::tryGetKeysChainValue(
+        $roleInstanceList = Utilities::tryGetKeysChainValue(
             $parsed,
             Resources::XTAG_ROLE_INSTANCE_LIST,
             Resources::XTAG_ROLE_INSTANCE
         );
-        $status             = Utilities::tryGetValue(
+        $status = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_STATUS
         );
-        $slot               = Utilities::tryGetValue(
+        $slot = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_DEPLOYMENT_SLOT
         );
-        $privateId          = Utilities::tryGetValue(
+        $privateId = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_PRIVATE_ID
         );
-        $configuration      = Utilities::tryGetValue(
+        $configuration = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_CONFIGURATION
         );
@@ -169,11 +172,11 @@ class Deployment
             $parsed,
             Resources::XTAG_UPGRADE_DOMAIN_COUNT
         );
-        $upgradeStatus      = Utilities::tryGetValue(
+        $upgradeStatus = Utilities::tryGetValue(
             $parsed,
             Resources::XTAG_UPGRADE_STATUS
         );
-        
+
         $result->setConfiguration($configuration);
         $result->setLabel($label);
         $result->setLocked(Utilities::toBoolean($locked));
@@ -207,7 +210,7 @@ class Deployment
 
         return $result;
     }
-    
+
     /**
      * Gets the deployment name.
      * 
@@ -219,7 +222,7 @@ class Deployment
     {
         return $this->_name;
     }
-    
+
     /**
      * Sets the deployment name.
      * 
@@ -231,7 +234,7 @@ class Deployment
     {
         $this->_name = $name;
     }
-    
+
     /**
      * Gets the deployment slot.
      * 
@@ -244,7 +247,7 @@ class Deployment
     {
         return $this->_slot;
     }
-    
+
     /**
      * Sets the deployment slot.
      * 
@@ -256,7 +259,7 @@ class Deployment
     {
         $this->_slot = $slot;
     }
-    
+
     /**
      * Gets the deployment label.
      * 
@@ -269,7 +272,7 @@ class Deployment
     {
         return $this->_label;
     }
-    
+
     /**
      * Sets the deployment label.
      * 
@@ -281,7 +284,7 @@ class Deployment
     {
         $this->_label = $label;
     }
-    
+
     /**
      * Gets the deployment private Id.
      * 
@@ -293,7 +296,7 @@ class Deployment
     {
         return $this->_privateId;
     }
-    
+
     /**
      * Sets the deployment private Id.
      * 
@@ -305,7 +308,7 @@ class Deployment
     {
         $this->_privateId = $privateId;
     }
-    
+
     /**
      * Gets the deployment status.
      * 
@@ -319,7 +322,7 @@ class Deployment
     {
         return $this->_status;
     }
-    
+
     /**
      * Sets the deployment status.
      * 
@@ -331,7 +334,7 @@ class Deployment
     {
         $this->_status = $status;
     }
-    
+
     /**
      * Gets the deployment url.
      * 
@@ -343,7 +346,7 @@ class Deployment
     {
         return $this->_url;
     }
-    
+
     /**
      * Sets the deployment url.
      * 
@@ -355,7 +358,7 @@ class Deployment
     {
         $this->_url = $url;
     }
-    
+
     /**
      * Gets the deployment configuration.
      * 
@@ -367,7 +370,7 @@ class Deployment
     {
         return $this->_configuration;
     }
-    
+
     /**
      * Sets the configuration.
      * 
@@ -379,7 +382,7 @@ class Deployment
     {
         $this->_configuration = $configuration;
     }
-    
+
     /**
      * Gets the deployment role instance list.
      * 
@@ -389,7 +392,7 @@ class Deployment
     {
         return $this->_roleInstanceList;
     }
-    
+
     /**
      * Sets the deployment role instance list.
      * 
@@ -401,21 +404,21 @@ class Deployment
     {
         $this->_roleInstanceList = $roleInstanceList;
     }
-    
+
     /**
      * Gets the deployment upgrade domain count.
      * 
-     * @return integer
+     * @return int
      */
     public function getUpgradeDomainCount()
     {
         return $this->_upgradeDomainCount;
     }
-    
+
     /**
      * Sets the deployment upgradeDomainCount.
      * 
-     * @param integer $upgradeDomainCount The deployment upgrade domain count.
+     * @param int $upgradeDomainCount The deployment upgrade domain count.
      * 
      * @return none
      */
@@ -423,7 +426,7 @@ class Deployment
     {
         $this->_upgradeDomainCount = $upgradeDomainCount;
     }
-    
+
     /**
      * Gets the deployment role list.
      * 
@@ -435,7 +438,7 @@ class Deployment
     {
         return $this->_roleList;
     }
-    
+
     /**
      * Sets the deployment role list.
      * 
@@ -447,7 +450,7 @@ class Deployment
     {
         $this->_roleList = $roleList;
     }
-    
+
     /**
      * Gets the deployment SDK version.
      * 
@@ -457,7 +460,7 @@ class Deployment
     {
         return $this->_sdkVersion;
     }
-    
+
     /**
      * Sets the deployment SDK version.
      * 
@@ -469,7 +472,7 @@ class Deployment
     {
         $this->_sdkVersion = $sdkVersion;
     }
-    
+
     /**
      * Gets the deployment input endpoint list.
      * 
@@ -479,7 +482,7 @@ class Deployment
     {
         return $this->_inputEndpointList;
     }
-    
+
     /**
      * Sets the deployment input endpoint list.
      * 
@@ -491,21 +494,21 @@ class Deployment
     {
         $this->_inputEndpointList = $inputEndpointList;
     }
-    
+
     /**
      * Gets the deployment locked flag.
      * 
-     * @return boolean
+     * @return bool
      */
     public function getLocked()
     {
         return $this->_locked;
     }
-    
+
     /**
      * Sets the deployment locked flag.
      * 
-     * @param boolean $locked The deployment locked flag.
+     * @param bool $locked The deployment locked flag.
      * 
      * @return none
      */
@@ -513,21 +516,21 @@ class Deployment
     {
         $this->_locked = $locked;
     }
-    
+
     /**
      * Gets the deployment rollback allowed flag.
      * 
-     * @return boolean
+     * @return bool
      */
     public function getRollbackAllowed()
     {
         return $this->_rollbackAllowed;
     }
-    
+
     /**
      * Sets the deployment rollbackAllowed.
      * 
-     * @param boolean $rollbackAllowed The deployment rollback allowed flag.
+     * @param bool $rollbackAllowed The deployment rollback allowed flag.
      * 
      * @return none
      */
@@ -535,7 +538,7 @@ class Deployment
     {
         $this->_rollbackAllowed = $rollbackAllowed;
     }
-    
+
     /**
      * Gets the deployment upgrade status.
      * 
@@ -545,7 +548,7 @@ class Deployment
     {
         return $this->_upgradeStatus;
     }
-    
+
     /**
      * Sets the deployment upgrade status.
      * 

@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,27 +14,30 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 namespace WindowsAzure\ServiceBus\Models;
+
 use WindowsAzure\ServiceBus\Internal\Filter;
 
 /**
  * The base class for rule filter.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 class CorrelationFilter extends Filter
 {
     /**
@@ -56,7 +59,7 @@ class CorrelationFilter extends Filter
     /**
      * Gets the ID of the correlation. 
      *
-     * @return string 
+     * @return string
      */
     public function getCorrelationId()
     {
@@ -75,4 +78,3 @@ class CorrelationFilter extends Filter
         $this->_correlationId = $correlationId;
     }
 }
-

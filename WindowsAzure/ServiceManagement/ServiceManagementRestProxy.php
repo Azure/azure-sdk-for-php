@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,15 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 namespace WindowsAzure\ServiceManagement;
+
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
@@ -57,11 +58,13 @@ use WindowsAzure\ServiceManagement\Models\Mode;
  * management service layer.
  *
  * @category  Microsoft
- * @package   WindowsAzure\ServiceManagement
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @version   Release: 0.4.2_2016-04
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ServiceManagementRestProxy extends RestProxy
@@ -79,7 +82,7 @@ class ServiceManagementRestProxy extends RestProxy
      * @param string               $roleName The role instance name.
      * @param GetDeploymentOptions $options  The optional parameters.
      * @param string               $order    The order name which is used as value
-     * for query parameter 'comp'.
+     *                                       for query parameter 'comp'.
      *
      * @return AsynchronousOperationResult
      */
@@ -114,10 +117,10 @@ class ServiceManagementRestProxy extends RestProxy
      */
     private function _getPath($serviceManagementResource, $name)
     {
-        $path = $this->_subscriptionId . '/' . $serviceManagementResource;
+        $path = $this->_subscriptionId.'/'.$serviceManagementResource;
 
         if (!is_null($name)) {
-            $path .= '/' . $name;
+            $path .= '/'.$name;
         }
 
         return $path;
@@ -180,6 +183,7 @@ class ServiceManagementRestProxy extends RestProxy
     private function _getDeploymentPathUsingSlot($name, $slot)
     {
         $path = "services/hostedservices/$name/deploymentslots";
+
         return $this->_getPath($path, $slot);
     }
 
@@ -194,6 +198,7 @@ class ServiceManagementRestProxy extends RestProxy
     private function _getDeploymentPathUsingName($name, $deploymentName)
     {
         $path = "services/hostedservices/$name/deployments";
+
         return $this->_getPath($path, $deploymentName);
     }
 
@@ -208,7 +213,8 @@ class ServiceManagementRestProxy extends RestProxy
      */
     private function _getRoleInstancePath($name, $options, $roleName)
     {
-        $path = $this->_getDeploymentPath($name, $options) . '/roleinstances';
+        $path = $this->_getDeploymentPath($name, $options).'/roleinstances';
+
         return "$path/$roleName";
     }
 
@@ -222,9 +228,9 @@ class ServiceManagementRestProxy extends RestProxy
      */
     private function _getDeploymentPath($name, $options)
     {
-        $slot           = $options->getSlot();
+        $slot = $options->getSlot();
         $deploymentName = $options->getDeploymentName();
-        $path           = null;
+        $path = null;
 
         Validate::isTrue(
             !empty($slot) || !empty($deploymentName),
@@ -249,7 +255,7 @@ class ServiceManagementRestProxy extends RestProxy
      */
     private function _getStorageServiceKeysPath($name = null)
     {
-        return $this->_getPath('services/storageservices', $name) . '/keys';
+        return $this->_getPath('services/storageservices', $name).'/keys';
     }
 
     /**
@@ -275,7 +281,7 @@ class ServiceManagementRestProxy extends RestProxy
     private function _createRequestXml($xmlElements, $root)
     {
         $requestArray = array(
-            Resources::XTAG_NAMESPACE => array(Resources::WA_XML_NAMESPACE => null)
+            Resources::XTAG_NAMESPACE => array(Resources::WA_XML_NAMESPACE => null),
         );
 
         foreach ($xmlElements as $tagName => $value) {
@@ -290,13 +296,15 @@ class ServiceManagementRestProxy extends RestProxy
     }
 
     /**
-     * Prepare configuration XML for sending via REST API
+     * Prepare configuration XML for sending via REST API.
      *
-     * @param string|resource         $configuration  The configuration file contents
-     * or file stream.
+     * @param string|resource $configuration The configuration file contents
+     *                                       or file stream.
+     *
      * @return string
      */
-    private function _encodeConfiguration($value) {
+    private function _encodeConfiguration($value)
+    {
         $value = is_resource($value) ? stream_get_contents($value) : $value;
         $value = base64_encode($value);
 
@@ -340,7 +348,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getStorageServicePath());
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $response   = $this->sendContext($context);
+        $response = $this->sendContext($context);
         $serialized = $this->dataSerializer->unserialize($response->getBody());
 
         return ListStorageServicesResult::create($serialized);
@@ -370,7 +378,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->addStatusCode(Resources::STATUS_OK);
 
         $response = $this->sendContext($context);
-        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        $parsed = $this->dataSerializer->unserialize($response->getBody());
 
         return GetStorageServicePropertiesResult::create($parsed);
     }
@@ -396,7 +404,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->addStatusCode(Resources::STATUS_OK);
 
         $response = $this->sendContext($context);
-        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        $parsed = $this->dataSerializer->unserialize($response->getBody());
 
         return GetStorageServiceKeysResult::create($parsed);
     }
@@ -436,7 +444,7 @@ class ServiceManagementRestProxy extends RestProxy
         );
 
         $response = $this->sendContext($context);
-        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        $parsed = $this->dataSerializer->unserialize($response->getBody());
 
         return GetStorageServiceKeysResult::create($parsed);
     }
@@ -453,9 +461,9 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @param string               $name    The storage account name.
      * @param string               $label   The name for the storage account
-     * specified as a base64-encoded string. The name may be up to 100 characters
-     * in length. The name can be used identify the storage account for your tracking
-     * purposes.
+     *                                      specified as a base64-encoded string. The name may be up to 100 characters
+     *                                      in length. The name can be used identify the storage account for your tracking
+     *                                      purposes.
      * @param CreateServiceOptions $options The optional parameters.
      *
      * @return AsynchronousOperationResult
@@ -470,7 +478,7 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::notNullOrEmpty($label, 'label');
         Validate::notNullOrEmpty($options, 'options');
         $affinityGroup = $options->getAffinityGroup();
-        $location      = $options->getLocation();
+        $location = $options->getLocation();
         Validate::isTrue(
             !empty($location) || !empty($affinityGroup),
             Resources::INVALID_CREATE_SERVICE_OPTIONS_MSG
@@ -539,7 +547,7 @@ class ServiceManagementRestProxy extends RestProxy
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
-        $label       = $options->getLabel();
+        $label = $options->getLabel();
         $description = $options->getDescription();
         Validate::isTrue(
             !empty($label) || !empty($description),
@@ -580,7 +588,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getAffinityGroupPath());
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $response   = $this->sendContext($context);
+        $response = $this->sendContext($context);
         $serialized = $this->dataSerializer->unserialize($response->getBody());
 
         return ListAffinityGroupsResult::create($serialized);
@@ -591,10 +599,10 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @param string                     $name     The affinity group name.
      * @param string                     $label    The base-64 encoded name for the
-     * affinity group. The name can be up to 100 characters in length.
+     *                                             affinity group. The name can be up to 100 characters in length.
      * @param string                     $location The data center location where the
-     * affinity group will be created. To list available locations, use the
-     * listLocations API.
+     *                                             affinity group will be created. To list available locations, use the
+     *                                             listLocations API.
      * @param CreateAffinityGroupOptions $options  The optional parameters.
      *
      * @return none
@@ -723,7 +731,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->addStatusCode(Resources::STATUS_OK);
 
         $response = $this->sendContext($context);
-        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        $parsed = $this->dataSerializer->unserialize($response->getBody());
 
         return GetAffinityGroupPropertiesResult::create($parsed);
     }
@@ -742,7 +750,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getLocationPath());
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $response   = $this->sendContext($context);
+        $response = $this->sendContext($context);
         $serialized = $this->dataSerializer->unserialize($response->getBody());
 
         return ListLocationsResult::create($serialized);
@@ -754,7 +762,7 @@ class ServiceManagementRestProxy extends RestProxy
      * operation has succeeded, failed, or is still in progress.
      *
      * @param AsynchronousOperationResult $requestInfo The request information for
-     * the REST call you want to track.
+     *                                                 the REST call you want to track.
      *
      * @return GetOperationStatusResult
      *
@@ -765,13 +773,12 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::notNullOrEmpty($requestInfo, 'requestInfo');
         Validate::notNullOrEmpty($requestInfo->getrequestId(), 'requestId');
 
-
         $context = new HttpCallContext();
         $context->setMethod(Resources::HTTP_GET);
         $context->setPath($this->_getOperationPath($requestInfo->getrequestId()));
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $response   = $this->sendContext($context);
+        $response = $this->sendContext($context);
         $serialized = $this->dataSerializer->unserialize($response->getBody());
 
         return GetOperationStatusResult::create($serialized);
@@ -791,7 +798,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getHostedServicePath());
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $response   = $this->sendContext($context);
+        $response = $this->sendContext($context);
         $serialized = $this->dataSerializer->unserialize($response->getBody());
 
         return ListHostedServicesResult::create($serialized);
@@ -801,11 +808,11 @@ class ServiceManagementRestProxy extends RestProxy
      * Creates a new hosted service in Windows Azure.
      *
      * @param string               $name    The name for the hosted service
-     * that is unique within Windows Azure. This name is the DNS prefix name and can
-     * be used to access the hosted service.
+     *                                      that is unique within Windows Azure. This name is the DNS prefix name and can
+     *                                      be used to access the hosted service.
      * @param string               $label   The name for the hosted service
-     * that is base-64 encoded. The name can be used identify the storage account for
-     * your tracking purposes.
+     *                                      that is base-64 encoded. The name can be used identify the storage account for
+     *                                      your tracking purposes.
      * @param CreateServiceOptions $options The optional parameters.
      *
      * @return none
@@ -822,7 +829,7 @@ class ServiceManagementRestProxy extends RestProxy
 
         // User have to set affinity group or location.
         $affinityGroup = $options->getAffinityGroup();
-        $location      = $options->getLocation();
+        $location = $options->getLocation();
         Validate::isTrue(
             !empty($location) || !empty($affinityGroup),
             Resources::INVALID_CREATE_SERVICE_OPTIONS_MSG
@@ -857,7 +864,7 @@ class ServiceManagementRestProxy extends RestProxy
      * Azure.
      *
      * @param string               $name    The name for the hosted service that is
-     * unique within Windows Azure.
+     *                                      unique within Windows Azure.
      * @param UpdateServiceOptions $options The optional parameters.
      *
      * @return none
@@ -869,7 +876,7 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
         Validate::notNullOrEmpty($options, 'options');
-        $label       = $options->getLabel();
+        $label = $options->getLabel();
         $description = $options->getDescription();
         Validate::isTrue(
             !empty($label) || !empty($description),
@@ -930,7 +937,7 @@ class ServiceManagementRestProxy extends RestProxy
      * group; and optionally, information on the service's deployments.
      *
      * @param string                            $name    The name for the hosted
-     * service.
+     *                                                   service.
      * @param GetHostedServicePropertiesOptions $options The optional parameters.
      *
      * @return GetHostedServicePropertiesResult
@@ -956,7 +963,7 @@ class ServiceManagementRestProxy extends RestProxy
         );
 
         $response = $this->sendContext($context);
-        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        $parsed = $this->dataSerializer->unserialize($response->getBody());
 
         return GetHostedServicePropertiesResult::create($parsed);
     }
@@ -970,21 +977,21 @@ class ServiceManagementRestProxy extends RestProxy
      * getOperationStatus API.
      *
      * @param string                  $name           The name for the hosted service
-     * that is unique within Windows Azure.
+     *                                                that is unique within Windows Azure.
      * @param string                  $deploymentName The name for the deployment.
-     * The deployment name must be unique among other deployments for the hosted
-     * service.
+     *                                                The deployment name must be unique among other deployments for the hosted
+     *                                                service.
      * @param string                  $slot           The name of the deployment slot
-     * This can be "production" or "staging".
+     *                                                This can be "production" or "staging".
      * @param string                  $packageUrl     The URL that refers to the
-     * location of the service package in the Blob service. The service package can
-     * be located in a storage account beneath the same subscription.
+     *                                                location of the service package in the Blob service. The service package can
+     *                                                be located in a storage account beneath the same subscription.
      * @param string|resource         $configuration  The configuration file contents
-     * or file stream.
+     *                                                or file stream.
      * @param string                  $label          The name for the hosted service
-     * that is base-64 encoded. The name can be up to 100 characters in length. It is
-     * recommended that the label be unique within the subscription. The name can be
-     * used identify the hosted service for your tracking purposes.
+     *                                                that is base-64 encoded. The name can be up to 100 characters in length. It is
+     *                                                recommended that the label be unique within the subscription. The name can be
+     *                                                used identify the hosted service for your tracking purposes.
      * @param CreateDeploymentOptions $options        The optional parameters.
      *
      * @return AsynchronousOperationResult
@@ -1023,21 +1030,21 @@ class ServiceManagementRestProxy extends RestProxy
 
         $configuration = $this->_encodeConfiguration($configuration);
 
-        $startDeployment       = Utilities::booleanToString(
+        $startDeployment = Utilities::booleanToString(
             $options->getStartDeployment()
         );
         $treatWarningsAsErrors = Utilities::booleanToString(
             $options->getTreatWarningsAsErrors()
         );
-        $xmlElements           = array(
-            Resources::XTAG_NAME                    => $deploymentName,
-            Resources::XTAG_PACKAGE_URL             => $packageUrl,
-            Resources::XTAG_LABEL                   => $label,
-            Resources::XTAG_CONFIGURATION           => $configuration,
-            Resources::XTAG_START_DEPLOYMENT        => $startDeployment,
-            Resources::XTAG_TREAT_WARNINGS_AS_ERROR => $treatWarningsAsErrors
+        $xmlElements = array(
+            Resources::XTAG_NAME => $deploymentName,
+            Resources::XTAG_PACKAGE_URL => $packageUrl,
+            Resources::XTAG_LABEL => $label,
+            Resources::XTAG_CONFIGURATION => $configuration,
+            Resources::XTAG_START_DEPLOYMENT => $startDeployment,
+            Resources::XTAG_TREAT_WARNINGS_AS_ERROR => $treatWarningsAsErrors,
         );
-        $requestXml            = $this->_createRequestXml(
+        $requestXml = $this->_createRequestXml(
             $xmlElements,
             Resources::XTAG_CREATE_DEPLOYMENT
         );
@@ -1081,13 +1088,13 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::notNullOrEmpty($options, 'options');
 
         $context = new HttpCallContext();
-        $path    = $this->_getDeploymentPath($name, $options);
+        $path = $this->_getDeploymentPath($name, $options);
         $context->setMethod(Resources::HTTP_GET);
         $context->setPath($path);
         $context->addStatusCode(Resources::STATUS_OK);
 
         $response = $this->sendContext($context);
-        $parsed   = $this->dataSerializer->unserialize($response->getBody());
+        $parsed = $this->dataSerializer->unserialize($response->getBody());
 
         return GetDeploymentResult::create($parsed);
     }
@@ -1123,11 +1130,11 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::notNullOrEmpty($source, 'source');
 
         $xmlElements = array(
-            Resources::XTAG_PRODUCTION        => $destination,
-            Resources::XTAG_SOURCE_DEPLOYMENT => $source
+            Resources::XTAG_PRODUCTION => $destination,
+            Resources::XTAG_SOURCE_DEPLOYMENT => $source,
         );
-        $body        = $this->_createRequestXml($xmlElements, Resources::XTAG_SWAP);
-        $context     = new HttpCallContext();
+        $body = $this->_createRequestXml($xmlElements, Resources::XTAG_SWAP);
+        $context = new HttpCallContext();
         $context->setMethod(Resources::HTTP_POST);
         $context->setPath($this->_getHostedServicePath($name));
         $context->addStatusCode(Resources::STATUS_ACCEPTED);
@@ -1163,7 +1170,7 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::notNullOrEmpty($options, 'options');
 
         $context = new HttpCallContext();
-        $path    = $this->_getDeploymentPath($name, $options);
+        $path = $this->_getDeploymentPath($name, $options);
         $context->setMethod(Resources::HTTP_DELETE);
         $context->setPath($path);
         $context->addStatusCode(Resources::STATUS_ACCEPTED);
@@ -1181,11 +1188,11 @@ class ServiceManagementRestProxy extends RestProxy
      * deployment's unique name.
      *
      * @param string                               $name          The hosted service
-     * name.
+     *                                                            name.
      * @param string|resource                      $configuration The configuration
-     * file contents or file stream.
+     *                                                            file contents or file stream.
      * @param ChangeDeploymentConfigurationOptions $options       The optional
-     * parameters.
+     *                                                            parameters.
      *
      * @return AsynchronousOperationResult
      *
@@ -1203,18 +1210,18 @@ class ServiceManagementRestProxy extends RestProxy
         $warningsTreatment = Utilities::booleanToString(
             $options->getTreatWarningsAsErrors()
         );
-        $xmlElements       = array(
-            Resources::XTAG_CONFIGURATION           => $configuration,
+        $xmlElements = array(
+            Resources::XTAG_CONFIGURATION => $configuration,
             Resources::XTAG_TREAT_WARNINGS_AS_ERROR => $warningsTreatment,
-            Resources::XTAG_MODE                    => $options->getMode()
+            Resources::XTAG_MODE => $options->getMode(),
         );
-        $body              = $this->_createRequestXml(
+        $body = $this->_createRequestXml(
             $xmlElements,
             Resources::XTAG_CHANGE_CONFIGURATION
         );
-        $context           = new HttpCallContext();
+        $context = new HttpCallContext();
         $context->setMethod(Resources::HTTP_POST);
-        $context->setPath($this->_getDeploymentPath($name, $options) . '/');
+        $context->setPath($this->_getDeploymentPath($name, $options).'/');
         $context->addStatusCode(Resources::STATUS_ACCEPTED);
         $context->addQueryParameter(
             Resources::QP_COMP,
@@ -1241,8 +1248,8 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @param string               $name    The hosted service name.
      * @param string               $status  The change to initiate to the
-     * deployment status.
-     * Possible values include Running or Suspended.
+     *                                      deployment status.
+     *                                      Possible values include Running or Suspended.
      * @param GetDeploymentOptions $options The optional parameters.
      *
      * @return AsynchronousOperationResult
@@ -1259,13 +1266,13 @@ class ServiceManagementRestProxy extends RestProxy
         );
         Validate::notNullOrEmpty($options, 'options');
 
-        $body    = $this->_createRequestXml(
+        $body = $this->_createRequestXml(
             array(Resources::XTAG_STATUS => $status),
             Resources::XTAG_UPDATE_DEPLOYMENT_STATUS
         );
         $context = new HttpCallContext();
         $context->setMethod(Resources::HTTP_POST);
-        $context->setPath($this->_getDeploymentPath($name, $options) . '/');
+        $context->setPath($this->_getDeploymentPath($name, $options).'/');
         $context->addStatusCode(Resources::STATUS_ACCEPTED);
         $context->addQueryParameter(
             Resources::QP_COMP,
@@ -1292,21 +1299,21 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @param string                   $name          The hosted service name.
      * @param string                   $mode          The type of upgrade to initiate
-     * If not specified the default value is Auto. If set to Manual,
-     * walkUpgradeDomain API must be called to apply the update. If set to Auto, the
-     * Windows Azure platform will automatically apply the update to each Upgrade
-     * Domain in sequence.
+     *                                                If not specified the default value is Auto. If set to Manual,
+     *                                                walkUpgradeDomain API must be called to apply the update. If set to Auto, the
+     *                                                Windows Azure platform will automatically apply the update to each Upgrade
+     *                                                Domain in sequence.
      * @param string                   $packageUrl    The URL that refers to the
-     * location of the service package in the Blob service. The service package can
-     * be located in a storage account beneath the same subscription.
+     *                                                location of the service package in the Blob service. The service package can
+     *                                                be located in a storage account beneath the same subscription.
      * @param string|resource          $configuration The configuration file contents
-     * or file stream.
+     *                                                or file stream.
      * @param string                   $label         The name for the hosted service
-     * that is base-64 encoded. The name may be up to 100 characters in length.
-     * @param boolean                  $force         Specifies whether the rollback
-     * should proceed even when it will cause local data to be lost from some role
-     * instances. True if the rollback should proceed; otherwise false if the
-     * rollback should fail.
+     *                                                that is base-64 encoded. The name may be up to 100 characters in length.
+     * @param bool                     $force         Specifies whether the rollback
+     *                                                should proceed even when it will cause local data to be lost from some role
+     *                                                instances. True if the rollback should proceed; otherwise false if the
+     *                                                rollback should fail.
      * @param UpgradeDeploymentOptions $options       The optional parameters.
      *
      * @return AsynchronousOperationResult
@@ -1339,20 +1346,20 @@ class ServiceManagementRestProxy extends RestProxy
         $configuration = $this->_encodeConfiguration($configuration);
 
         $xmlElements = array(
-            Resources::XTAG_MODE            => $mode,
-            Resources::XTAG_PACKAGE_URL     => $packageUrl,
-            Resources::XTAG_CONFIGURATION   => $configuration,
-            Resources::XTAG_LABEL           => $label,
+            Resources::XTAG_MODE => $mode,
+            Resources::XTAG_PACKAGE_URL => $packageUrl,
+            Resources::XTAG_CONFIGURATION => $configuration,
+            Resources::XTAG_LABEL => $label,
             Resources::XTAG_ROLE_TO_UPGRADE => $options->getRoleToUpgrade(),
-            Resources::XTAG_FORCE           => Utilities::booleanToString($force),
+            Resources::XTAG_FORCE => Utilities::booleanToString($force),
         );
-        $body        = $this->_createRequestXml(
+        $body = $this->_createRequestXml(
             $xmlElements,
             Resources::XTAG_UPGRADE_DEPLOYMENT
         );
-        $context     = new HttpCallContext();
+        $context = new HttpCallContext();
         $context->setMethod(Resources::HTTP_POST);
-        $context->setPath($this->_getDeploymentPath($name, $options) . '/');
+        $context->setPath($this->_getDeploymentPath($name, $options).'/');
         $context->addStatusCode(Resources::STATUS_ACCEPTED);
         $context->addQueryParameter(
             Resources::QP_COMP,
@@ -1379,10 +1386,10 @@ class ServiceManagementRestProxy extends RestProxy
      * name.
      *
      * @param string               $name          The hosted service name.
-     * @param integer              $upgradeDomain The integer value that
-     * identifies the upgrade domain to walk. Upgrade domains are identified with a
-     * zero-based index: the first upgrade domain has an ID of 0, the second has an
-     * ID of 1, and so on.
+     * @param int                  $upgradeDomain The integer value that
+     *                                            identifies the upgrade domain to walk. Upgrade domains are identified with a
+     *                                            zero-based index: the first upgrade domain has an ID of 0, the second has an
+     *                                            ID of 1, and so on.
      * @param GetDeploymentOptions $options       The optional parameters.
      *
      * @return AsynchronousOperationResult
@@ -1396,13 +1403,13 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::isInteger($upgradeDomain, 'upgradeDomain');
         Validate::notNullOrEmpty($options, 'options');
 
-        $body    = $this->_createRequestXml(
+        $body = $this->_createRequestXml(
             array(Resources::XTAG_UPGRADE_DOMAIN => $upgradeDomain),
             Resources::XTAG_WALK_UPGRADE_DOMAIN
         );
         $context = new HttpCallContext();
         $context->setMethod(Resources::HTTP_POST);
-        $context->setPath($this->_getDeploymentPath($name, $options) . '/');
+        $context->setPath($this->_getDeploymentPath($name, $options).'/');
         $context->addStatusCode(Resources::STATUS_ACCEPTED);
         $context->addQueryParameter(
             Resources::QP_COMP,
@@ -1481,13 +1488,13 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @param string               $name    The hosted service name.
      * @param string               $mode    Specifies whether the rollback
-     * should proceed automatically or not. Auto, The rollback proceeds without
-     * further user input. Manual, You must call the walkUpgradeDomain API to apply
-     * the rollback to each upgrade domain.
-     * @param boolean              $force   Specifies whether the rollback
-     * should proceed even when it will cause local data to be lost from some role
-     * instances. True if the rollback should proceed; otherwise false if the
-     * rollback should fail.
+     *                                      should proceed automatically or not. Auto, The rollback proceeds without
+     *                                      further user input. Manual, You must call the walkUpgradeDomain API to apply
+     *                                      the rollback to each upgrade domain.
+     * @param bool                 $force   Specifies whether the rollback
+     *                                      should proceed even when it will cause local data to be lost from some role
+     *                                      instances. True if the rollback should proceed; otherwise false if the
+     *                                      rollback should fail.
      * @param GetDeploymentOptions $options The optional parameters.
      *
      * @return none
@@ -1505,16 +1512,16 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::notNullOrEmpty($options, 'options');
 
         $xmlElements = array(
-            Resources::XTAG_MODE  => $mode,
+            Resources::XTAG_MODE => $mode,
             Resources::XTAG_FORCE => Utilities::booleanToString($force),
         );
-        $body        = $this->_createRequestXml(
+        $body = $this->_createRequestXml(
             $xmlElements,
             Resources::XTAG_ROLLBACK_UPDATE_OR_UPGRADE
         );
-        $context     = new HttpCallContext();
+        $context = new HttpCallContext();
         $context->setMethod(Resources::HTTP_POST);
-        $context->setPath($this->_getDeploymentPath($name, $options) . '/');
+        $context->setPath($this->_getDeploymentPath($name, $options).'/');
         $context->addStatusCode(Resources::STATUS_ACCEPTED);
         $context->addQueryParameter(
             Resources::QP_COMP,
