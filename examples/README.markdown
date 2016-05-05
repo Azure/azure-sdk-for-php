@@ -1,10 +1,38 @@
-The examples tend to be clear from how to use the SDK and as usual to run them this requires specific PHP configuration which is listed here:
-###Include path has the following paths
+The examples here demonstrate some of the basic functionalities of the Azure PHP SDK.
 
-* Path to `src` folder which has `autoload.php` and `WindowsAzure` folder.
-* Path to `WindowsAzure` which has the actual SDK code.
-* Path to `PEAR` folder.
+# Getting Started
 
-###Long REST calls
-Some REST calls (like creating storage service) will take couple of minutes to finish, an update to the
-web server is required so it expects long operation time like that.
+* Download **[composer.phar](http://getcomposer.org/composer.phar)** to the examples directory
+
+* Create a file named composer.json in the examples directory and add the following code to it:
+
+```json
+    {
+        "require": {        
+            "microsoft/windowsazure": "^0.4"
+        }  
+    }
+```
+* Open a command prompt and execute this in the examples directory
+
+    php composer.phar install
+
+This will download all dependencies to the vendor sub directory.
+
+# Run the Task List example
+
+* Open tasklist\userconfig.php, enter you Azure subscription Id and the full path to your .pem cert file. 
+see https://azure.microsoft.com/en-us/blog/introducing-the-windows-azure-service-management-api/ for details on certificates.
+
+* In the example directory, run
+
+   php -S localhost:8000 
+
+* In a browser, navigate to http://localhost:8000/tasklist/index.php
+
+# Run the Media Services examples
+* Open MediaServices\userconfig.php, enter "Media Service Account Name" and "Primary Media Service access key" for your Media Service from the Azure portal. 
+
+* In the examples directory, run
+
+   php MediaServices\%sample_name%.php

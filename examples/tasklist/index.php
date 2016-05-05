@@ -5,7 +5,7 @@
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
   http://www.apache.org/licenses/LICENSE-2.0
- 
+
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,26 +32,22 @@
 require_once '..\client\client.php';
 use Client\CloudSubscription;
 
-date_default_timezone_set('America/Los_Angeles');
-
-$subscriptionId = 'Your subscription';
-$certificatePath = 'Certificate path';
-$storageServiceName = 'phpsdkexamples'; // the storage account will be created if it does not exist
+// read user setting from config
+include_once 'userconfig.php';
 
 $tasksTableName = 'tasks';
 $cloudSubscription = null;
 $cloudStorageService = null;
 $cloudTable = null;
 
-// Initialize;
+// Initialize. create the storage account if it does not exist
 $cloudSubscription = new CloudSubscription($subscriptionId, $certificatePath);
 $cloudStorageService = $cloudSubscription->createStorageService($storageServiceName);
 $cloudTable = $cloudStorageService->createTable($tasksTableName);
 
 if (array_key_exists('Completed', $_POST)) {
     // Remove completed item.
-    $completed = $_POST['Completed'];
-    $cloudTable->deleteEntity($_POST['PartitionKey'], $completed);
+    $cloudTable->deleteEntity($_POST['PartitionKey'], $_POST['Completed']);
 } elseif (array_key_exists('AddItem', $_POST)) {
     $item = $_POST['item'];
     $item['Complete'] = '0';
@@ -61,13 +57,15 @@ if (array_key_exists('Completed', $_POST)) {
     $deleted = $cloudStorageService->deleteTable($tasksTableName);
     $cloudTable = null;
     if ($deleted) {
-        // Sleep until the table is deleted
-        sleep(5);
+        // Sleep until the table is deleted, otherwise, the server may still be in the deleting process
+        sleep(25);
     }
 } elseif (array_key_exists('DestroyList', $_POST)) {
     // Clean and remove the storage service.
     $cloudSubscription->deleteStorageService($storageServiceName);
     $cloudSubscription = null;
+
+    return;
 }
 
 if (!is_null($cloudTable)) {
@@ -91,7 +89,7 @@ function listEntries($cloudTable)
                 <td>$date</td>
                 <form action=\"index.php\" method=\"post\">
                 <td><input type=\"input\" name=\"PartitionKey\" value=\"$partitionKey\" </> </td>
-                <td><input type=\"checkbox\" name=\"Completed\" value=\"$complete\" 
+                <td><input type=\"checkbox\" name=\"Completed\" value=\"$complete\"
                             onchange=\"form.submit()\"/></td>
                 </form>
             </tr>";
@@ -123,12 +121,12 @@ function listEntries($cloudTable)
             </tr>
         </table>
         <input type="submit" value="Add item" name="AddItem"/>
-        <input type="submit" value="Complete List" name="ClearList"/>
+        <input type="submit" value="Complete List (delete the table)" name="ClearList"/>
         <hr />
         Clean and remove storage service
         <br />
         <input type="submit" value="Remove the Storage Account" name="DestroyList" />
     </form>
-    
+
 </body>
 </html>
