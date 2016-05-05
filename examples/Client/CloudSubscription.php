@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -54,7 +54,7 @@ class CloudSubscription
 
     /**
      * Initializes new CloudSubscription object using the provided parameters.
-     * 
+     *
      * @param string $subscriptionId  The Windows Azure subscription id.
      * @param string $certificatePath The registered certificate.
      */
@@ -66,9 +66,9 @@ class CloudSubscription
 
     /**
      * Checks if a storage service exists or not.
-     * 
+     *
      * @param string $name Storage service name.
-     * 
+     *
      * @return bool
      */
     public function storageServiceExists($name)
@@ -87,11 +87,11 @@ class CloudSubscription
 
     /**
      * Creates a storage service if it does not exist and waits until it is created.
-     * 
+     *
      * @param string $name     The storage service name.
      * @param string $execType The execution type for this call.
      * @param type   $location The storage service location. By default East US.
-     * 
+     *
      * @return CloudStorageService
      */
     public function createStorageService(
@@ -99,7 +99,6 @@ class CloudSubscription
         $execType = self:: SYNCHRONOUS,
         $location = 'East US'
     ) {
-        $newStorageService = false;
         $cloudStorageService = null;
 
         if (!$this->storageServiceExists($name)) {
@@ -117,18 +116,16 @@ class CloudSubscription
             $newStorageService = true;
         }
 
-        if (!$newStorageService && $execType != self::ASYNCHRONOUS) {
-            $keys = $this->_proxy->getStorageServiceKeys($name);
-            $properties = $this->_proxy->getStorageServiceProperties($name);
+        $keys = $this->_proxy->getStorageServiceKeys($name);
+        $properties = $this->_proxy->getStorageServiceProperties($name);
 
-            $cloudStorageService = new CloudStorageService(
-                $name,
-                $keys->getPrimary(),
-                $properties->getStorageService()->getBlobEndpointUri(),
-                $properties->getStorageService()->getQueueEndpointUri(),
-                $properties->getStorageService()->getTableEndpointUri()
-            );
-        }
+        $cloudStorageService = new CloudStorageService(
+            $name,
+            $keys->getPrimary(),
+            $properties->getStorageService()->getBlobEndpointUri(),
+            $properties->getStorageService()->getQueueEndpointUri(),
+            $properties->getStorageService()->getTableEndpointUri()
+        );
 
         return $cloudStorageService;
     }
@@ -136,11 +133,11 @@ class CloudSubscription
     /**
      * Blocks asynchronous operation until it succeeds. Throws exception if the
      * operation failed.
-     * 
+     *
      * @param string $requestInfo The asynchronous operation request AsynchronousOperationResult.
-     * 
+     *
      * @throws WindowsAzure\Common\ServiceException
-     * 
+     *
      * @return none
      */
     private function _blockUntilAsyncFinish($requestInfo)
@@ -160,9 +157,9 @@ class CloudSubscription
 
     /**
      * Deletes a storage service from subscription.
-     * 
+     *
      * @param string $name The storage service name.
-     * 
+     *
      * @return none
      */
     public function deleteStorageService($name)
