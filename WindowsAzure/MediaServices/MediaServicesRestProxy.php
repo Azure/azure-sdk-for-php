@@ -260,8 +260,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $response = $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode,
             $body
@@ -291,8 +291,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $response = $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode
         );
@@ -304,25 +304,28 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
-     * Create entity list.
+     * Get entity list.
      *
-     * @param string $path REST path
+     * @param string $path        REST path
+     * @param array  $queryParams URL query parameters. An example is $queryParams = ['$top' => 20, '$skip' => 40] to support paging
      *
      * @return array Entities list data
      */
-    private function _getEntityList($path)
+    private function _getEntityList($path,  $queryParams = null)
     {
         $method = Resources::HTTP_GET;
         $headers = array();
         $postParams = array();
-        $queryParams = array();
+        if (is_null($queryParams)) {
+            $queryParams = array();
+        }
         $statusCode = Resources::STATUS_OK;
 
         $response = $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode
         );
@@ -350,8 +353,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode,
             $body
@@ -376,8 +379,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode
         );
@@ -418,11 +421,13 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get asset list.
      *
+     * @param array $queryParams. An example is $queryParams = ['$top' => 20, '$skip' => 40] to support paging
+     *
      * @return array of Models\Asset
      */
-    public function getAssetList()
+    public function getAssetList($queryParams = null)
     {
-        $propertyList = $this->_getEntityList('Assets');
+        $propertyList = $this->_getEntityList('Assets', $queryParams);
         $result = array();
 
         foreach ($propertyList as $properties) {
@@ -632,8 +637,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode,
             $body
@@ -672,8 +677,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode
         );
@@ -915,8 +920,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode
         );
@@ -1310,8 +1315,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $response = $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode,
             $body
@@ -1387,8 +1392,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $response = $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode
         );
@@ -1493,8 +1498,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode
         );
@@ -1632,8 +1637,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $response = $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode,
             $body
@@ -2269,8 +2274,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $response = $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode
         );
@@ -2321,8 +2326,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $response = $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode
         );
@@ -2352,8 +2357,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $response = $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode
         );
@@ -2590,8 +2595,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode,
             $body
@@ -2626,8 +2631,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode
         );
@@ -2778,8 +2783,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode,
             $body
@@ -2816,8 +2821,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode
         );
@@ -2855,8 +2860,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $response = $this->send(
             $method,
             $headers,
-            $postParams,
             $queryParams,
+            $postParams,
             $path,
             $statusCode,
             $body

@@ -424,9 +424,13 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         // Test
         $asset1 = $this->createAsset($asset1);
         $asset2 = $this->createAsset($asset2);
-        $result = $this->restProxy->getAssetList();
+
+        $queryParams = ['$top' => 1, '$skip' => 1];
+        $result = $this->restProxy->getAssetList($queryParams);
 
         // Assert
+        $this->assertCount(1, $result);
+        $result = $this->restProxy->getAssetList();
         $this->assertCount(2, $result);
         $names = array(
             $result[0]->getName(),
