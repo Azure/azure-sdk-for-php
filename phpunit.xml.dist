@@ -23,7 +23,7 @@
     <whitelist addUncoveredFilesFromWhitelist="true">
       <directory suffix=".php">WindowsAzure</directory>
       <exclude>
-        <file>WindowsAzure/WindowsAzure.php</file>
+        <file>src/WindowsAzure.php</file>
       </exclude>
     </whitelist>
   </filter>

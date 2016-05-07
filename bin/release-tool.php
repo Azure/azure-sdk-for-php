@@ -95,7 +95,7 @@ foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($startDir)
             }
             $filename = str_replace('\\', '/', $filename);
 
-            //'windowsazure\\table\\tablerestproxy' => '/Table/TableRestProxy.php'
+            //'src\\table\\tablerestproxy' => '/Table/TableRestProxy.php'
             $output = $output."            '$classname' => '$filename',\n";
         }
     }

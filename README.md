@@ -694,7 +694,7 @@ Erase entities with methods like “deleteAsset”, “deleteAccessPolicy”, �
 
 Also you could get linked entities with methods “getAssetLocators”, “getAssetParentAssets”, “getAssetStorageAccount”, “getLocatorAccessPolicy”, “getJobTasks” and etc. passing the entity identifier or entity data model object with non-empty identifier as a parameter.
 
-The complete list of all methods available you could find in [IMediaServices](WindowsAzure/MediaServices/Internal/IMediaServices.php) interface.
+The complete list of all methods available you could find in [IMediaServices](src/MediaServices/Internal/IMediaServices.php) interface.
 
 **For more examples please see the [Microsoft Azure PHP Developer Center](http://www.windowsazure.com/en-us/develop/php)**
 

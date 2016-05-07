@@ -31,7 +31,7 @@
         "fabpot/php-cs-fixer": "^1.11"
     },
     "autoload": {
-        "psr-4": { "WindowsAzure\\": "WindowsAzure/" }
+        "psr-4": { "WindowsAzure\\": "src/" }
     },
     "autoload-dev": {
         "psr-4": { "Tests\\": "tests/" }
