@@ -6,6 +6,7 @@ Windows Azure SDK For PHP 0.4.3, 2016-05-10
 - Fixed broken functional tests 
 - Updated code samples to use the new storage SDK
 - Adopted PSR-2 as coding standard (contributed by @phansys)
+- Added paging support for getAssetList() in Media Services
 - Other minor fixes
 
 To update your code for the new storage SDK, change 
