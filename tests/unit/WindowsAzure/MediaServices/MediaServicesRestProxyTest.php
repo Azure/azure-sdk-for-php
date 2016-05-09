@@ -219,6 +219,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $accessPolicies = $this->restProxy->getAccessPolicyList();
 
         // Assert
+        $this->assertGreaterThanOrEqual(1, count($accessPolicies)); //this changes with the user's permissions 
         $this->assertEquals($accessName, $accessPolicies[0]->getName());
     }
 
@@ -304,6 +305,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Assert
         $assetFiles = $this->restProxy->getAssetFileList();
         $result = $this->restProxy->getAssetFile($assetFiles[0]);
+        $this->assertGreaterThanOrEqual(1, count($assetFiles)); //this changes with the user's permissions
 
         $this->assertEquals($fileName, $assetFiles[0]->getName());
         $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());
@@ -766,6 +768,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $result = $this->restProxy->getTaskList();
 
         // Assert
+        $this->assertGreaterThanOrEqual(1, count($result)); //this changes with the user's permissions 
         $this->assertEquals($task->getName(), $result[0]->getName());
         $this->assertEquals($taskBody, $result[0]->getTaskBody());
     }
@@ -953,6 +956,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $result = $this->restProxy->getIngestManifestList();
 
         // Assert
+        $this->assertGreaterThanOrEqual(1, count($result));
         $this->assertEquals($name, $result[0]->getName());
     }
 
@@ -1139,6 +1143,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $result = $this->restProxy->getIngestManifestAssetList();
 
         // Assert
+        $this->assertGreaterThanOrEqual(1, count($result)); 
         $this->assertEquals($ingestManifestAsset->getId(), $result[0]->getId());
     }
 
@@ -1266,6 +1271,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $result = $this->restProxy->getIngestManifestFileList();
 
         // Assert
+        $this->assertGreaterThanOrEqual(1, count($result));
         $this->assertEquals($ingestManifestFile->getParentIngestManifestId(), $result[0]->getParentIngestManifestId());
         $this->assertEquals($ingestManifestFile->getParentIngestManifestAssetId(), $result[0]->getParentIngestManifestAssetId());
         $this->assertEquals($ingestManifestFile->getName(), $result[0]->getName());
