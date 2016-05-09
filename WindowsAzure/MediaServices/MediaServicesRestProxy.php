@@ -311,14 +311,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return array Entities list data
      */
-    private function _getEntityList($path,  $queryParams = null)
+    private function _getEntityList($path, array $queryParams = [])
     {
         $method = Resources::HTTP_GET;
         $headers = array();
         $postParams = array();
-        if (is_null($queryParams)) {
-            $queryParams = array();
-        }
         $statusCode = Resources::STATUS_OK;
 
         $response = $this->send(
@@ -425,7 +422,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return array of Models\Asset
      */
-    public function getAssetList($queryParams = null)
+    public function getAssetList(array $queryParams = [])
     {
         $propertyList = $this->_getEntityList('Assets', $queryParams);
         $result = array();
