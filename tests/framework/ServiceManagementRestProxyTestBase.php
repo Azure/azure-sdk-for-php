@@ -207,7 +207,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
     public function safeDeleteHostedService($name)
     {
         try {
-            $this->deleteHostedService($name);
+            $this->restProxy->deleteHostedService($name);
         } catch (\Exception $e) {
             // Ignore exception and continue, will assume that this hosted account doesn't exist 
             // The errors are benign, no need to show them
