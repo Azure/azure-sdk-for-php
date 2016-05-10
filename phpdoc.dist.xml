@@ -2,10 +2,10 @@
 <phpdoc>
   <title>Windows Azure SDK for PHP</title>
   <parser>
-    <target>build/api</target>
+    <target>bin/api</target>
   </parser>
   <transformer>
-    <target>build/api</target>
+    <target>bin/api</target>
   </transformer>
   <files>
     <directory>src/</directory>

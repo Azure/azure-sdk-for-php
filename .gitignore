@@ -1,9 +1,6 @@
-build/api
-build/code-browser
-build/coverage
-build/logs
-build/pdepend
-build/phpdox
+bin/api
+bin/logs
+bin/coverage
 channel/
 *.tgz
 phpunit.xml
