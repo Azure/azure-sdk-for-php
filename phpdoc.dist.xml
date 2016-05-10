@@ -8,6 +8,6 @@
     <target>build/api</target>
   </transformer>
   <files>
-    <directory>WindowsAzure/</directory>
+    <directory>src/</directory>
   </files>
 </phpdoc>

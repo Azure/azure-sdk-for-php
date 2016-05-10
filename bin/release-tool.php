@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /**
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,12 +26,12 @@
 /**
  * Update the version number of PHP files, and generate class list.
  *
- * 1. change the new_ver const to the correct new version string
+ * 1. change the NEW_VER const to the correct new version string
  * 2. run php .\build\release_tools.php in the root directory
  */
-const ver_token = ' * @version';
-const new_ver = '   Release: 0.4.3_2016-05';
-const start_dir = './';   //this will update SDK sources, test sources and examples.   
+const VER_TOKEN = ' * @version';
+const NEW_VER = '   Release: 0.4.3_2016-05';
+$startDir = __DIR__.'/../'; //this will update SDK sources, test sources and examples.
 
 $updateVersion = true;
 $listClass = false;
@@ -38,7 +39,7 @@ $listClass = false;
 $files_changed = 0;
 $output = '';
 
-foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(start_dir)) as $filename => $cur) {
+foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($startDir)) as $filename => $cur) {
     if (is_dir($filename) || strpos($filename, 'release_tools.php') !== false) {
         continue;
     }
@@ -50,8 +51,8 @@ foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(start_dir)
         $replaced = false;
 
         while (($buffer = fgets($rhandle, 4096)) !== false) {
-            if (strpos($buffer, ver_token) !== false) {
-                $buffer = ver_token.new_ver."\n";
+            if (strpos($buffer, VER_TOKEN) !== false) {
+                $buffer = VER_TOKEN.NEW_VER."\n";
                 $replaced = true;
             }
             fputs($whandle, $buffer);
@@ -71,7 +72,7 @@ foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(start_dir)
     if ($listClass) {
         $path_parts = pathinfo($filename);
         if (array_key_exists('extension', $path_parts) && $path_parts['extension'] == 'php') {
-            //remove leading . or ..    
+            //remove leading . or ..
             if (strpos($filename, '.') !== false && strpos($filename, '.') == 0) {
                 $filename = substr($filename, 1);
             }
@@ -79,7 +80,7 @@ foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(start_dir)
                 $filename = substr($filename, 2);
             }
             $filename = str_replace('/', '\\', $filename);
-            // remove leading \            
+            // remove leading \
             if (strpos($filename, '\\') !== false && strpos($filename, '\\') == 0) {
                 $filename = substr($filename, 1);
             }
@@ -94,7 +95,7 @@ foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(start_dir)
             }
             $filename = str_replace('\\', '/', $filename);
 
-            //'windowsazure\\table\\tablerestproxy' => '/Table/TableRestProxy.php'      
+            //'src\\table\\tablerestproxy' => '/Table/TableRestProxy.php'
             $output = $output."            '$classname' => '$filename',\n";
         }
     }
