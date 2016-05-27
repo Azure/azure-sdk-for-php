@@ -14,6 +14,9 @@ To update your code for the new storage SDK, change
 "use WindowsAzure\Queue" to "use MicrosoftAzure\Storage\Queue"
 "use WindowsAzure\Table" to "use MicrosoftAzure\Storage\Table"
 
+If you use ServiceException for Storage API, you need to change "use WindowsAzure\Common\ServiceException" to "use MicrosoftAzure\Storage\Common\ServiceException". 
+This does not apply if use ServiceExpception in other APIs such as Media Services.
+
 For the following calls,
 ServicesBuilder::getInstance()->createTableService($connectionString) 
 ServicesBuilder::getInstance()->createBlobService($connectionString) 
