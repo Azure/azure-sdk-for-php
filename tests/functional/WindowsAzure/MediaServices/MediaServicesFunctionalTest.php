@@ -532,7 +532,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $result = $this->restProxy->getAccessPolicyList();
 
         // Assert
-        $this->assertEquals(2, count($result));
+        $this->assertGreaterThanOrEqual(2, count($result));
         $names = array(
                 $result[0]->getName(),
                 $result[1]->getName(),
@@ -699,7 +699,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $access2->setDurationInMinutes(30);
 
         // Test
-       $access1 = $this->restProxy->createAccessPolicy($access1);
+        $access1 = $this->restProxy->createAccessPolicy($access1);
         $access2 = $this->restProxy->createAccessPolicy($access2);
 
         $result = $this->restProxy->getAccessPolicyList();
@@ -711,7 +711,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $after = count($this->restProxy->getAccessPolicyList());
 
         // Assert
-        $this->assertEquals(2, $before);
+        $this->assertGreaterThanOrEqual(2, $before);
         $this->assertEquals(0, $after);
     }
 
