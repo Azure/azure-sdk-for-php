@@ -111,7 +111,7 @@ function uploadFileAndCreateAsset($restProxy, $mezzanineFileName)
 {
     // 1.1. create an empty "Asset" by specifying the name
     $asset = new Asset(Asset::OPTIONS_NONE);
-    $asset->setName('Mezzanine '.$mezzanineFileName);
+    $asset->setName('Mezzanine ' . basename($mezzanineFileName));
     $asset = $restProxy->createAsset($asset);
     $assetId = $asset->getId();
 
@@ -134,7 +134,7 @@ function uploadFileAndCreateAsset($restProxy, $mezzanineFileName)
     echo "Uploading...\r\n";
 
     // 1.6. use the 'uploadAssetFile' to perform a multi-part upload using the Block Blobs REST API storage operations
-    $restProxy->uploadAssetFile($sasLocator, $mezzanineFileName, $fileContent);
+    $restProxy->uploadAssetFile($sasLocator, basename($mezzanineFileName), $fileContent);
 
     // 1.7. notify Media Services that the file upload operation is done to generate the asset file metadata
     $restProxy->createFileInfos($asset);
