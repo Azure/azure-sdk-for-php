@@ -66,5 +66,27 @@ class ContentKeyTypes
      * @var int
      */
     const ENVELOPE_ENCRYPTION = 4;
+
+    /**
+     * Specifies a content key for common encryption with CBCS.
+     *
+     * @var int
+     */
+    const COMMON_ENCRYPTION_CBCS = 6;
+
+    /**
+     * Application Secret key for FairPlay.
+     *
+     * @var int
+     */
+    const FAIRPLAY_ASK = 7;
+
+    /**
+     * Password for FairPlay application certificate.
+     *
+     * @var int
+     */
+    const FAIRPLAY_PFXPASSWORD = 8;
+
 }
 

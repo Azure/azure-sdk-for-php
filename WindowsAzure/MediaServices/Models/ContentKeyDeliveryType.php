@@ -64,6 +64,13 @@ class ContentKeyDeliveryType
      * @var int
      */
     const WIDEVINE = 3;
-    
+
+	/**
+	 * Send FairPlay SPC to Key Delivery server and get CKC back
+	 *
+	 * @var int
+	 */
+    const FAIRPLAY = 4;
+
 }
 

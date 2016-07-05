@@ -63,7 +63,7 @@ class AssetDeliveryPolicyType
      *
      * @var int
      */
-    const DYNAMIC_ENVELOPE_ENCRYPTION = 3;    
+    const DYNAMIC_ENVELOPE_ENCRYPTION = 3;
 
     /**
      * The asset delivery policy type "DynamicCommonEncryption"
@@ -71,5 +71,13 @@ class AssetDeliveryPolicyType
      * @var int
      */
     const DYNAMIC_COMMON_ENCRYPTION = 4;
+
+	/**
+	 * Apply Dynamic Common encryption with cbcs
+	 *
+	 * @var int
+	 */
+    const DYNAMIC_COMMON_ENCRYPTION_CBCS = 5;
+
 }
 

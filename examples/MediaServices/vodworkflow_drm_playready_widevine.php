@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -54,9 +54,9 @@ use WindowsAzure\MediaServices\Templates\AllowedTrackTypes;
 use WindowsAzure\MediaServices\Templates\ContentKeySpecs;
 use WindowsAzure\MediaServices\Templates\RequiredOutputProtection;
 use WindowsAzure\MediaServices\Templates\Hdcp;
+use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
 use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplateSerializer;
 use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate;
-use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
 use WindowsAzure\MediaServices\Templates\TokenClaim;
 use WindowsAzure\MediaServices\Templates\TokenType;
 use WindowsAzure\MediaServices\Templates\WidevineMessageSerializer;
@@ -66,7 +66,7 @@ date_default_timezone_set('America/Los_Angeles');
 
 $account = "<your media services account name>";
 $secret = "<your media services account key>";
-$mezzanineFileName = "Azure-Video.wmv";
+$mezzanineFileName = dirname(__FILE__) . "/Azure-Video.wmv";
 $tokenRestriction = true;
 $tokenType = TokenType::JWT;
 
@@ -112,7 +112,7 @@ print "Done!";
 function uploadFileAndCreateAsset($restProxy, $mezzanineFileName) {
     // 1.1. create an empty "Asset" by specifying the name
     $asset = new Asset(Asset::OPTIONS_NONE);
-    $asset->setName("Mezzanine " . $mezzanineFileName);
+    $asset->setName("Mezzanine " . basename($mezzanineFileName));
     $asset = $restProxy->createAsset($asset);
     $assetId = $asset->getId();
 
@@ -135,7 +135,7 @@ function uploadFileAndCreateAsset($restProxy, $mezzanineFileName) {
     print "Uploading...\r\n";
 
     // 1.6. use the 'uploadAssetFile' to perform a multi-part upload using the Block Blobs REST API storage operations
-    $restProxy->uploadAssetFile($sasLocator, $mezzanineFileName, $fileContent);
+    $restProxy->uploadAssetFile($sasLocator, basename($mezzanineFileName), $fileContent);
 
     // 1.7. notify Media Services that the file upload operation is done to generate the asset file metadata
     $restProxy->createFileInfos($asset);
@@ -311,11 +311,19 @@ function addTokenRestrictedAuthorizationPolicy($restProxy, $contentKey, $tokenTy
 function createAssetDeliveryPolicy($restProxy, $encodedAsset, $contentKey) {
     // 5.1 Get the acquisition URL
     $acquisitionUrl = $restProxy->getKeyDeliveryUrl($contentKey, ContentKeyDeliveryType::PLAYREADY_LICENSE);
-    $widevineURl = $restProxy->getKeyDeliveryUrl($contentKey, ContentKeyDeliveryType::WIDEVINE);
+    $widevineUrl = $restProxy->getKeyDeliveryUrl($contentKey, ContentKeyDeliveryType::WIDEVINE);
+
+    // remove query string
+    if (strpos($widevineUrl, '?') !== false) {
+        $widevineUrl = substr($widevineUrl, 0, strrpos($widevineUrl, "?"));
+    }
+
+    print "PlayReady acquisition URL: {$acquisitionUrl}\r\n";
+    print "Widevine acquisition URL: {$widevineUrl}\r\n";
 
     // 5.2 Generate the AssetDeliveryPolicy Configuration Key
     $configuration = [AssetDeliveryPolicyConfigurationKey::PLAYREADY_LICENSE_ACQUISITION_URL => $acquisitionUrl,
-                      AssetDeliveryPolicyConfigurationKey::WIDEVINE_LICENSE_ACQUISITION_URL => $widevineURl];
+                      AssetDeliveryPolicyConfigurationKey::WIDEVINE_BASE_LICENSE_ACQUISITION_URL => $widevineUrl];
     $confJson = AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfiguartionKey($configuration);
 
     // 5.3 Create the AssetDeliveryPolicy

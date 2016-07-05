@@ -419,12 +419,20 @@ class ContentKey
     {
         $encrypted = mcrypt_encrypt(
             MCRYPT_RIJNDAEL_128, // AES
-            $aesKey,
+            $this->pkcs5_pad($aesKey, 16),
             $this->_id,
             MCRYPT_MODE_ECB
         );
 
         $this->_checksum = base64_encode(substr($encrypted, 0, 8));
+    }
+
+    /**
+     * checksum padding 
+     */
+    private function pkcs5_pad ($text, $blocksize) { 
+        $pad = $blocksize - (strlen($text) % $blocksize); 
+        return $text . str_repeat(chr($pad), $pad); 
     }
 
     /**

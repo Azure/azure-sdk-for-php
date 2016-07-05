@@ -45,9 +45,9 @@ use WindowsAzure\MediaServices\Models\AssetDeliveryPolicy;
 use WindowsAzure\MediaServices\Models\AssetDeliveryProtocol;
 use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyType;
 use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey;
+use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
 use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplateSerializer;
 use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate;
-use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
 use WindowsAzure\MediaServices\Templates\TokenClaim;
 use WindowsAzure\MediaServices\Templates\TokenType;
 
@@ -56,7 +56,7 @@ date_default_timezone_set('America/Los_Angeles');
 
 $account = "<your media services account name>";
 $secret = "<your media services account key>";
-$mezzanineFileName = "Azure-Video.wmv";
+$mezzanineFileName = dirname(__FILE__) . "/Azure-Video.wmv";
 $tokenRestriction = true;
 $tokenType = TokenType::JWT;
 
@@ -103,7 +103,7 @@ print "Done!";
 function uploadFileAndCreateAsset($restProxy, $mezzanineFileName) {
     // 1.1. create an empty "Asset" by specifying the name
     $asset = new Asset(Asset::OPTIONS_NONE);
-    $asset->setName("Mezzanine " . $mezzanineFileName);
+    $asset->setName("Mezzanine " . basename($mezzanineFileName));
     $asset = $restProxy->createAsset($asset);
     $assetId = $asset->getId();
 
@@ -126,7 +126,7 @@ function uploadFileAndCreateAsset($restProxy, $mezzanineFileName) {
     print "Uploading...\r\n";
 
     // 1.6. use the 'uploadAssetFile' to perform a multi-part upload using the Block Blobs REST API storage operations
-    $restProxy->uploadAssetFile($sasLocator, $mezzanineFileName, $fileContent);
+    $restProxy->uploadAssetFile($sasLocator, basename($mezzanineFileName), $fileContent);
 
     // 1.7. notify Media Services that the file upload operation is done to generate the asset file metadata
     $restProxy->createFileInfos($asset);
@@ -243,6 +243,9 @@ function addOpenAuthorizationPolicy($restProxy, $contentKey) {
 function addTokenRestrictedAuthorizationPolicy($restProxy, $contentKey, $tokenType) {
     // 4.1 Create ContentKeyAuthorizationPolicyRestriction (Token Restricted)
     $tokenRestriction = generateTokenRequirements($tokenType);
+
+    print "Token Requirements {$tokenRestriction}\r\n";
+    
     $restriction = new ContentKeyAuthorizationPolicyRestriction();
     $restriction->setName('ContentKey Authorization Policy Restriction');
     $restriction->setKeyRestrictionType(ContentKeyRestrictionType::TOKEN_RESTRICTED);

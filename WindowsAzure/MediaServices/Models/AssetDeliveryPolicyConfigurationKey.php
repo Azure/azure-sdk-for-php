@@ -63,7 +63,7 @@ class AssetDeliveryPolicyConfigurationKey
      *
      * @var int
      */
-    const ENVELOPE_ENCRYPTION_IV_AS_BASE64 = 3;    
+    const ENVELOPE_ENCRYPTION_IV_AS_BASE64 = 3;
 
     /**
      * PlayReadyLicenseAcquisitionUrl, The PlayReady License Acquisition Url to use for common encryption.
@@ -93,9 +93,38 @@ class AssetDeliveryPolicyConfigurationKey
      */
     const WIDEVINE_LICENSE_ACQUISITION_URL = 7;
 
+	/**
+	 * WidevineBaseLicenseAcquisitionUrl, Base Widevine url that will have KID=<Guid> appended
+	 *
+	 * @var int
+	 */
+    const WIDEVINE_BASE_LICENSE_ACQUISITION_URL = 8;
+
+    /**
+	 * FairPlay license acquisition URL.
+	 *
+	 * @var int
+	 */
+    const FAIRPLAY_LICENSE_ACQUISITION_URL = 9;
+
+    /**
+	 * Base FairPlay license acquisition URL that will have KID=<Guid> appended.
+	 *
+	 * @var int
+	 */
+    const FAIRPLAY_BASE_LICENSE_ACQUISITION_URL = 10;
+
+    /**
+	 * Initialization Vector that will be used for encrypting the content. Must match
+	 * IV in the AssetDeliveryPolicy.
+	 *
+	 * @var int
+	 */
+    const COMMON_ENCRYPTION_IV_FOR_CBCS = 11;
+
     /**
      * Helper function to stringnify the AssetDeliveryPolicyConfigurationKey
-     * @param mixed $array 
+     * @param mixed $array
      */
     public static function stringifyAssetDeliveryPolicyConfiguartionKey($array) {
         $jsonArray = array();
