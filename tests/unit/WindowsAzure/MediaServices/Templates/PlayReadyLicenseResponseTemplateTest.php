@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,30 +14,30 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices\Templates;
-use Tests\Framework\TestResources;
+namespace Tests\unit\WindowsAzure\MediaServices\Templates;
+
 use WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate;
 use WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate;
-use WindowsAzure\MediaServices\Templates\ErrorMessages;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * Unit Tests for PlayReadyLicenseTemplate
+ * Unit Tests for PlayReadyLicenseTemplate.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\MediaServices\Templates
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class PlayReadyLicenseResponseTemplateTest extends \PHPUnit_Framework_TestCase
@@ -46,7 +46,8 @@ class PlayReadyLicenseResponseTemplateTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::getLicenseTemplates
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::setLicenseTemplates
      */
-    public function testGetSetLicenseTemplates() {
+    public function testGetSetLicenseTemplates()
+    {
         // Setup
         $entity = new PlayReadyLicenseResponseTemplate();
         $payload = array();
@@ -63,10 +64,11 @@ class PlayReadyLicenseResponseTemplateTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::getResponseCustomData
      * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::setResponseCustomData
      */
-    public function testGetSetResponseCustomData() {
+    public function testGetSetResponseCustomData()
+    {
         // Setup
         $entity = new PlayReadyLicenseResponseTemplate();
-        $payload = "custom data";
+        $payload = 'custom data';
 
         // Test
         $entity->setResponseCustomData($payload);
@@ -74,5 +76,5 @@ class PlayReadyLicenseResponseTemplateTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals($payload, $result);
-    }   
+    }
 }

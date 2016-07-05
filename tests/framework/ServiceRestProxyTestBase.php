@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,26 +15,30 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-namespace Tests\Framework;
+
+namespace Tests\framework;
+
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 
 /**
  * TestBase class for Storage Services test classes.
  *
  * @category  Microsoft
- * @package   Tests\Framework
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ServiceRestProxyTestBase extends RestProxyTestBase
@@ -43,9 +47,9 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
     protected $defaultProperties;
     protected $connectionString;
 
-    const NOT_SUPPORTED                     = 'The storage emulator doesn\'t support this API';
-    const TAKE_TOO_LONG                     = 'This test takes long time, skip.';
-    const SKIPPED_AFTER_SEVERAL_ATTEMPTS    = 'Test skipped after several fails.';
+    const NOT_SUPPORTED = 'The storage emulator doesn\'t support this API';
+    const TAKE_TOO_LONG = 'This test takes long time, skip.';
+    const SKIPPED_AFTER_SEVERAL_ATTEMPTS = 'Test skipped after several fails.';
 
     protected function skipIfEmulated()
     {
@@ -53,7 +57,7 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
             $this->markTestSkipped(self::NOT_SUPPORTED);
         }
     }
-    
+
     protected function skipIfOSX()
     {
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'DAR') {
@@ -63,7 +67,7 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
 
     protected function isEmulated()
     {
-        return (strpos($this->connectionString, Resources::USE_DEVELOPMENT_STORAGE_NAME) !== false);
+        return strpos($this->connectionString, Resources::USE_DEVELOPMENT_STORAGE_NAME) !== false;
     }
 
     public function __construct()
@@ -109,5 +113,3 @@ class ServiceRestProxyTestBase extends RestProxyTestBase
         }
     }
 }
-
-

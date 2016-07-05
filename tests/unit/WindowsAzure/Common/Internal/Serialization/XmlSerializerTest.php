@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,29 +15,31 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal\Serialization
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Common\Internal\Serialization;
+namespace Tests\unit\WindowsAzure\Common\Internal\Serialization;
+
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Models\ServiceProperties;
-use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 
-
 /**
- * Unit tests for class XmlSerializer
+ * Unit tests for class XmlSerializer.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal\Serialization
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class XmlSerializerTest extends \PHPUnit_Framework_TestCase
@@ -54,13 +56,13 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
         $properties = ServiceProperties::create($propertiesSample);
         $xml = $properties->toXml($xmlSerializer);
         $expected = $properties->toArray();
-        
+
         // Test
         $actual = $xmlSerializer->unserialize($xml);
-        
+
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::serialize
      * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::_arr2xml
@@ -74,10 +76,10 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
         $expected = $properties->toXml($xmlSerializer);
         $array = $properties->toArray();
         $serializerProperties = array(XmlSerializer::ROOT_NAME => ServiceProperties::$xmlRootName);
-        
+
         // Test
         $actual = $xmlSerializer->serialize($array, $serializerProperties);
-        
+
         $this->assertEquals($expected, $actual);
     }
 
@@ -92,13 +94,13 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
         $expected = false;
         $array = 'not an array';
         $serializerProperties = array(XmlSerializer::ROOT_NAME => ServiceProperties::$xmlRootName);
-        
+
         // Test
         $actual = $xmlSerializer->serialize($array, $serializerProperties);
-        
+
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::serialize
      * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::_arr2xml
@@ -107,20 +109,20 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $xmlSerializer = new XmlSerializer();
-        $expected = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
-            '<Object field1="value1" field2="value2"/>' . "\n";
-        
+        $expected = '<?xml version="1.0" encoding="UTF-8"?>'."\n".
+            '<Object field1="value1" field2="value2"/>'."\n";
+
         $object = array(
             '@attributes' => array(
                 'field1' => 'value1',
-                'field2' => 'value2'
-            )
+                'field2' => 'value2',
+            ),
         );
         $serializerProperties = array(XmlSerializer::ROOT_NAME => 'Object');
-        
+
         // Test
         $actual = $xmlSerializer->serialize($object, $serializerProperties);
-        
+
         $this->assertEquals($expected, $actual);
     }
 
@@ -174,5 +176,4 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
         $actual = XmlSerializer::objectSerialize(null, null);
         // Assert
     }
-
 }

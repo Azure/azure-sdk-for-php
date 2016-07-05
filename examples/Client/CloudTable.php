@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,26 +15,29 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Client
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
- 
+
 namespace Client;
-use WindowsAzure\Table\Models\Entity;
-use WindowsAzure\Common\Internal\Utilities;
+
+use MicrosoftAzure\Storage\Table\Models\Entity;
 
 /**
  * The cloud table class.
  *
  * @category  Microsoft
- * @package   Client
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class CloudTable
@@ -43,32 +46,32 @@ class CloudTable
      * @var TableRestProxy
      */
     private $_proxy;
-    
+
     /**
      * @var string
      */
     private $_name;
-    
+
     /**
      * @var string
      */
     private $_defaultParitionKey;
-    
+
     /**
      * Initializes new CloudTable object using the provided parameters.
-	 * 
-	 * Sets default partition key by default using uniqid() function.
+     * 
+     * Sets default partition key by default using uniqid() function.
      * 
      * @param string                             $name  The table name.
      * @param WindowsAzure\Table\Internal\ITable $proxy The table REST proxy.
      */
     public function __construct($name, $proxy)
     {
-        $this->_name  			   = $name;
-        $this->_proxy 			   = $proxy;
+        $this->_name = $name;
+        $this->_proxy = $proxy;
         $this->_defaultParitionKey = uniqid();
     }
-    
+
     /**
      * Sets the default partition key for this table entities.
      * 
@@ -80,7 +83,7 @@ class CloudTable
     {
         $this->_defaultParitionKey = $paritionKey;
     }
-    
+
     /**
      * Gets the default partition key.
      * 
@@ -90,7 +93,7 @@ class CloudTable
     {
         return $this->_defaultParitionKey;
     }
-    
+
     /**
      * Quries entities for the given table name.
      * 
@@ -105,7 +108,7 @@ class CloudTable
     {
         return $this->_proxy->queryEntities($this->_name, $options);
     }
-    
+
     /**
      * Inserts new entity to the table.
      * 
@@ -121,14 +124,14 @@ class CloudTable
         $entity = new Entity();
         $entity->setPartitionKey($this->_defaultParitionKey);
         $entity->setRowKey(uniqid());
-        
+
         foreach ($entries as $columnName => $value) {
             $entity->addProperty($columnName, null, $value);
         }
-        
+
         $this->_proxy->insertEntity($this->_name, $entity, $options);
     }
-    
+
     /**
      * Deletes an entity using the default partition key and provided row key.
      * 
@@ -136,14 +139,12 @@ class CloudTable
      * 
      * @return none
      */
-    public function deleteEntity($rowKey)
+    public function deleteEntity($paritionKey, $rowKey)
     {
         $this->_proxy->deleteEntity(
             $this->_name,
-            $this->_defaultParitionKey,
+            $paritionKey,
             $rowKey
         );
     }
 }
-
-

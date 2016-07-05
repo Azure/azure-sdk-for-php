@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,32 +14,33 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices\Templates;
-use Tests\Framework\TestResources;
+namespace Tests\unit\WindowsAzure\MediaServices\Templates;
+
 use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate;
 use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
 use WindowsAzure\MediaServices\Templates\TokenClaim;
 use WindowsAzure\MediaServices\Templates\TokenType;
 use WindowsAzure\MediaServices\Templates\OpenIdConnectDiscoveryDocument;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * Unit Tests for TokenRestrictionTemplate
+ * Unit Tests for TokenRestrictionTemplate.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\MediaServices\Templates
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
@@ -48,7 +49,8 @@ class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getAlternateVerificationKeys
      * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setAlternateVerificationKeys
      */
-    public function testGetSetAlternateVerificationKeys() {
+    public function testGetSetAlternateVerificationKeys()
+    {
         // Setup
         $entity = new TokenRestrictionTemplate();
         $payload = array();
@@ -60,17 +62,17 @@ class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals($payload, $result);
-        
     }
 
     /**
      * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getAudience
      * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setAudience
      */
-    public function testGetSetAudience() {
+    public function testGetSetAudience()
+    {
         // Setup
         $entity = new TokenRestrictionTemplate();
-        $payload = "payload string";
+        $payload = 'payload string';
 
         // Test
         $entity->setAudience($payload);
@@ -84,10 +86,11 @@ class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getIssuer
      * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setIssuer
      */
-    public function testGetSetIssuer() {
+    public function testGetSetIssuer()
+    {
         // Setup
         $entity = new TokenRestrictionTemplate();
-        $payload = "payload string";
+        $payload = 'payload string';
 
         // Test
         $entity->setIssuer($payload);
@@ -101,7 +104,8 @@ class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getPrimaryVerificationKey
      * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setPrimaryVerificationKey
      */
-    public function testGetSetPrimaryVerificationKey() {
+    public function testGetSetPrimaryVerificationKey()
+    {
         // Setup
         $entity = new TokenRestrictionTemplate();
         $payload = new SymmetricVerificationKey();
@@ -118,7 +122,8 @@ class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getRequiredClaims
      * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setRequiredClaims
      */
-    public function testGetSetRequiredClaims() {
+    public function testGetSetRequiredClaims()
+    {
         // Setup
         $entity = new TokenRestrictionTemplate();
         $payload = array();
@@ -129,14 +134,15 @@ class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
         $result = $entity->getRequiredClaims();
 
         // Assert
-        $this->assertEquals($payload, $result);        
+        $this->assertEquals($payload, $result);
     }
 
     /**
      * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getTokenType
      * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setTokenType
      */
-    public function testGetSetTokenType() {
+    public function testGetSetTokenType()
+    {
         // Setup
         $entity = new TokenRestrictionTemplate();
         $payload = TokenType::JWT;
@@ -153,7 +159,8 @@ class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getOpenIdConnectDiscoveryDocument
      * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setOpenIdConnectDiscoveryDocument
      */
-    public function testGetSetOpenIdConnectDiscoveryDocument() {
+    public function testGetSetOpenIdConnectDiscoveryDocument()
+    {
         // Setup
         $entity = new TokenRestrictionTemplate();
         $payload = new OpenIdConnectDiscoveryDocument();

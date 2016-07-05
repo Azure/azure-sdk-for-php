@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,38 +14,41 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices\Models;
+namespace Tests\unit\WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\MediaServices\Models\Asset;
 
 /**
- * Represents access policy object used in media services
+ * Represents access policy object used in media services.
  *
  * @category  Microsoft
- * @package   WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-
 class AssetTest extends \PHPUnit_Framework_TestCase
 {
-     /**
-      * @covers WindowsAzure\MediaServices\Models\Asset::__construct
-      */
-    public function test__construct(){
+    /**
+     * @covers WindowsAzure\MediaServices\Models\Asset::__construct
+     */
+    public function test__construct()
+    {
 
         // Setup
         $option = Asset::OPTIONS_NONE;
-
 
         // Test
         $result = new Asset(Asset::OPTIONS_NONE);
@@ -57,12 +60,13 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Asset::getUri
      */
-    public function testGetUri(){
+    public function testGetUri()
+    {
 
        // Setup
-        $assetArray= array(
-            'Options'          => Asset::OPTIONS_NONE,
-            'Uri'              => 'http://someurl.com/asset'
+        $assetArray = array(
+            'Options' => Asset::OPTIONS_NONE,
+            'Uri' => 'http://someurl.com/asset',
         );
         $value = Asset::createFromOptions($assetArray);
 
@@ -77,7 +81,8 @@ class AssetTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Asset::getOptions
      * @covers WindowsAzure\MediaServices\Models\Asset::setOptions
      */
-    public function testGetOptions(){
+    public function testGetOptions()
+    {
 
         // Setup
         $asset = new Asset(Asset::OPTIONS_NONE);
@@ -95,7 +100,8 @@ class AssetTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Asset::getName
      * @covers WindowsAzure\MediaServices\Models\Asset::setName
      */
-    public function testGetName(){
+    public function testGetName()
+    {
 
         // Setup
         $asset = new Asset(Asset::OPTIONS_NONE);
@@ -113,7 +119,8 @@ class AssetTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Asset::getAlternateId
      * @covers WindowsAzure\MediaServices\Models\Asset::setAlternateId
      */
-    public function testGetAlternateId(){
+    public function testGetAlternateId()
+    {
 
         // Setup
         $asset = new Asset(Asset::OPTIONS_NONE);
@@ -130,12 +137,13 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Asset::getLastModified
      */
-    public function testGetLastModified() {
+    public function testGetLastModified()
+    {
 
          // Setup
-        $assetArray= array(
-            'Options'          => Asset::OPTIONS_NONE,
-            'LastModified'     => '2013-11-21'
+        $assetArray = array(
+            'Options' => Asset::OPTIONS_NONE,
+            'LastModified' => '2013-11-21',
         );
         $modified = new \Datetime($assetArray['LastModified']);
         $value = Asset::createFromOptions($assetArray);
@@ -150,12 +158,13 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Asset::getCreated
      */
-    public function testGetCreated() {
+    public function testGetCreated()
+    {
 
          // Setup
-        $assetArray= array(
-            'Options'          => Asset::OPTIONS_NONE,
-            'Created'          => '2013-11-21'
+        $assetArray = array(
+            'Options' => Asset::OPTIONS_NONE,
+            'Created' => '2013-11-21',
         );
         $created = new \Datetime($assetArray['Created']);
         $value = Asset::createFromOptions($assetArray);
@@ -170,12 +179,13 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Asset::getState
      */
-    public function testGetState() {
+    public function testGetState()
+    {
 
         // Setup
-        $assetArray= array(
-            'Options'          => Asset::OPTIONS_NONE,
-            'State'            => Asset::STATE_PUBLISHED
+        $assetArray = array(
+            'Options' => Asset::OPTIONS_NONE,
+            'State' => Asset::STATE_PUBLISHED,
         );
         $value = Asset::createFromOptions($assetArray);
 
@@ -189,12 +199,13 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Asset::getStorageAccountName
      */
-    public function testGetStorageAccountName() {
+    public function testGetStorageAccountName()
+    {
 
        // Setup
-        $assetArray= array(
-            'Options'             => Asset::OPTIONS_NONE,
-            'StorageAccountName'  => 'StorageAccountName'
+        $assetArray = array(
+            'Options' => Asset::OPTIONS_NONE,
+            'StorageAccountName' => 'StorageAccountName',
         );
         $value = Asset::createFromOptions($assetArray);
 
@@ -208,12 +219,13 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\MediaServices\Models\Asset::getId
      */
-    public function testGetId() {
+    public function testGetId()
+    {
 
         // Setup
-        $assetArray= array(
-            'Id'                  => 'kjgdfg57',
-            'Options'             => Asset::OPTIONS_NONE,
+        $assetArray = array(
+            'Id' => 'kjgdfg57',
+            'Options' => Asset::OPTIONS_NONE,
         );
         $value = Asset::createFromOptions($assetArray);
 
@@ -228,19 +240,20 @@ class AssetTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\Asset::createFromOptions
      * @covers WindowsAzure\MediaServices\Models\Asset::fromArray
      */
-    public function testAssetFromOptions(){
+    public function testAssetFromOptions()
+    {
 
         // Setup
         $assetArray = array(
-            'Id'                    => '1',
-            'State'                 => Asset::STATE_PUBLISHED,
-            'Created'               => '2013-11-19',
-            'LastModified'          => '2013-11-19',
-            'AlternateId'           => '2',
-            'Name'                  => 'newName',
-            'Options'               => Asset::OPTIONS_NONE,
-            'Uri'                   => 'http://en.wikipedia.org/wiki/Uniform_resource_locator',
-            'StorageAccountName'    => 'StorageName',
+            'Id' => '1',
+            'State' => Asset::STATE_PUBLISHED,
+            'Created' => '2013-11-19',
+            'LastModified' => '2013-11-19',
+            'AlternateId' => '2',
+            'Name' => 'newName',
+            'Options' => Asset::OPTIONS_NONE,
+            'Uri' => 'http://en.wikipedia.org/wiki/Uniform_resource_locator',
+            'StorageAccountName' => 'StorageName',
         );
         $created = new \Datetime($assetArray['Created']);
         $modified = new \Datetime($assetArray['LastModified']);
@@ -258,7 +271,5 @@ class AssetTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($assetArray['Options'], $resultAsset->getOptions());
         $this->assertEquals($assetArray['Uri'], $resultAsset->getUri());
         $this->assertEquals($assetArray['StorageAccountName'], $resultAsset->getStorageAccountName());
-
     }
-
 }

@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,25 +15,29 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\ServiceManagement\Models;
+namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
+
 use WindowsAzure\ServiceManagement\Models\Location;
 
 /**
- * Unit tests for class Location
+ * Unit tests for class Location.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class LocationTest extends \PHPUnit_Framework_TestCase
@@ -47,14 +51,14 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         // Setup
         $Location = new Location();
         $expected = 'Name';
-        
+
         // Test
         $Location->setName($expected);
-        
+
         // Assert
         $this->assertEquals($expected, $Location->getName());
     }
-    
+
     /**
      * @covers WindowsAzure\ServiceManagement\Models\Location::setDisplayName
      * @covers WindowsAzure\ServiceManagement\Models\Location::getDisplayName
@@ -64,13 +68,11 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         // Setup
         $Location = new Location();
         $expected = 'DisplayName';
-        
+
         // Test
         $Location->setDisplayName($expected);
-        
+
         // Assert
         $this->assertEquals($expected, $Location->getDisplayName());
     }
 }
-
-

@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,26 +15,30 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\Common\Internal;
+namespace Tests\unit\WindowsAzure\Common\Internal;
+
 use WindowsAzure\Common\Internal\ServiceManagementSettings;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * Unit tests for class ServiceManagementSettings
+ * Unit tests for class ServiceManagementSettings.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\Common\Internal
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
@@ -45,7 +49,7 @@ class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
         $property->setAccessible(true);
         $property->setValue(false);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::createFromConnectionString
      * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::init
@@ -66,16 +70,16 @@ class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
         $expectedCertificatePath = 'C:\path_to_my_cert.pem';
         $expectedEndpointUri = Resources::SERVICE_MANAGEMENT_URL;
         $connectionString = "SubscriptionID=$expectedSubscriptionId;CertificatePath=$expectedCertificatePath";
-        
+
         // Test
         $actual = ServiceManagementSettings::createFromConnectionString($connectionString);
-        
+
         // Assert
         $this->assertEquals($expectedEndpointUri, $actual->getEndpointUri());
         $this->assertEquals($expectedCertificatePath, $actual->getCertificatePath());
         $this->assertEquals($expectedEndpointUri, $actual->getEndpointUri());
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::createFromConnectionString
      * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::init
@@ -96,16 +100,16 @@ class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
         $expectedCertificatePath = 'C:\path_to_my_cert.pem';
         $expectedEndpointUri = 'http://myprivatedns.com';
         $connectionString = "SubscriptionID=$expectedSubscriptionId;CertificatePath=$expectedCertificatePath;ServiceManagementEndpoint=$expectedEndpointUri";
-        
+
         // Test
         $actual = ServiceManagementSettings::createFromConnectionString($connectionString);
-        
+
         // Assert
         $this->assertEquals($expectedEndpointUri, $actual->getEndpointUri());
         $this->assertEquals($expectedCertificatePath, $actual->getCertificatePath());
         $this->assertEquals($expectedEndpointUri, $actual->getEndpointUri());
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::createFromConnectionString
      * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::init
@@ -125,11 +129,11 @@ class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
         $connectionString = "CertificatePath=C:\path_to_my_cert.pem;ServiceManagementEndpoint=http://myprivatedns.com";
         $expectedMsg = sprintf(Resources::MISSING_CONNECTION_STRING_SETTINGS, $connectionString);
         $this->setExpectedException('\RuntimeException', $expectedMsg);
-        
+
         // Test
         ServiceManagementSettings::createFromConnectionString($connectionString);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::getSubscriptionId
      */
@@ -138,14 +142,14 @@ class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expected = 'subscriptionId';
         $setting = new ServiceManagementSettings($expected, null, null);
-        
+
         // Test
         $actual = $setting->getSubscriptionId();
-        
+
         // Assert
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::getEndpointUri
      */
@@ -154,14 +158,14 @@ class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expected = 'endpointUri';
         $setting = new ServiceManagementSettings(null, $expected, null);
-        
+
         // Test
         $actual = $setting->getEndpointUri();
-        
+
         // Assert
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::getCertificatePath
      */
@@ -170,14 +174,14 @@ class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expected = 'certificatePath';
         $setting = new ServiceManagementSettings(null, null, $expected);
-        
+
         // Test
         $actual = $setting->getCertificatePath();
-        
+
         // Assert
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::createFromConnectionString
      * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::init
@@ -202,11 +206,11 @@ class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
             implode("\n", array('SubscriptionID', 'CertificatePath', 'ServiceManagementEndpoint'))
         );
         $this->setExpectedException('\RuntimeException', $expectedMsg);
-        
+
         // Test
         ServiceManagementSettings::createFromConnectionString($connectionString);
     }
-    
+
     /**
      * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::createFromConnectionString
      * @covers WindowsAzure\Common\Internal\ServiceManagementSettings::init
@@ -227,15 +231,13 @@ class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
         $expectedCertificatePath = 'C:\path_to_my_cert.pem';
         $expectedEndpointUri = 'http://myprivatedns.com';
         $connectionString = "suBscriptIonId=$expectedSubscriptionId;ceRtiFicAtepAth=$expectedCertificatePath;ServiCemAnagemenTendPoinT=$expectedEndpointUri";
-        
+
         // Test
         $actual = ServiceManagementSettings::createFromConnectionString($connectionString);
-        
+
         // Assert
         $this->assertEquals($expectedEndpointUri, $actual->getEndpointUri());
         $this->assertEquals($expectedCertificatePath, $actual->getCertificatePath());
         $this->assertEquals($expectedEndpointUri, $actual->getEndpointUri());
     }
 }
-
-

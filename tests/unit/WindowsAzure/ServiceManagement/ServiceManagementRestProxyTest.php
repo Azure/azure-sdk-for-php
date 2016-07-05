@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,14 +15,16 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\ServiceManagement;
+namespace Tests\unit\WindowsAzure\ServiceManagement;
+
 use Tests\Framework\ServiceRestProxyTestBase;
 use Tests\Framework\ServiceManagementRestProxyTestBase;
 use Tests\Framework\TestResources;
@@ -43,14 +45,16 @@ use WindowsAzure\ServiceManagement\Models\UpgradeDeploymentOptions;
 use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
 
 /**
- * Unit tests for class ServiceManagementRestProxy
+ * Unit tests for class ServiceManagementRestProxy.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceManagement
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
@@ -485,9 +489,9 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         foreach ($actual as $hostedService) {
             if ($hostedService->getName() === $name1) {
                 $service1Exists = true;
-            } else if ($hostedService->getName() === $name2) {
+            } elseif ($hostedService->getName() === $name2) {
                 $service2Exists = true;
-            } else if ($hostedService->getName() === $name3) {
+            } elseif ($hostedService->getName() === $name3) {
                 $service3Exists = true;
             }
         }
@@ -602,7 +606,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     {
         // Setup
         $name = $this->getTestName();
-        $stagingName = $name . 'staging';
+        $stagingName = $name.'staging';
         $options = new GetHostedServicePropertiesOptions();
         $options->setEmbedDetail(true);
         $this->createDeployment($name);
@@ -791,7 +795,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testGetDeploymentWithMultipleRoles()
     {
-        $this->markTestSkipped("Skip it. Complex package not set up yet.");
+        $this->markTestSkipped('Skip it. Complex package not set up yet.');
         // Setup
         $name = $this->getTestName();
         $label = base64_encode($name);
@@ -857,7 +861,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $mode = Mode::AUTO;
         $configuration = $this->complexConfiguration;
         $packageUrl = TestResources::complexPackageUrl();
-        $label = base64_encode($name . 'upgraded');
+        $label = base64_encode($name.'upgraded');
         $force = true;
         $options = new UpgradeDeploymentOptions();
         $options->setDeploymentName($name);
@@ -896,7 +900,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testSwapDeployment()
     {
-        $this->markTestSkipped("Skip it. Complex package not set up yet.");
+        $this->markTestSkipped('Skip it. Complex package not set up yet.');
         // Setup
         $name = $this->getTestName();
         $staging = 'stagingdeployment';
@@ -1002,14 +1006,14 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testUpgradeDeployment()
     {
-        $this->markTestSkipped("Skip it. Complex package not set up yet.");
+        $this->markTestSkipped('Skip it. Complex package not set up yet.');
         // Setup
         $name = $this->getTestName();
         $this->createDeployment($name);
         $mode = Mode::AUTO;
         $configuration = $this->complexConfiguration;
         $packageUrl = TestResources::complexPackageUrl();
-        $label = base64_encode($name . 'upgraded');
+        $label = base64_encode($name.'upgraded');
         $force = true;
         $options = new UpgradeDeploymentOptions();
         $options->setDeploymentName($name);
@@ -1047,7 +1051,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
      */
     public function testWalkUpgradeDomain()
     {
-        $this->markTestSkipped("Skip it. Complex package not set up yet.");
+        $this->markTestSkipped('Skip it. Complex package not set up yet.');
         // Setup
         $name = $this->getTestName();
         $this->createDeployment($name);
@@ -1055,7 +1059,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $mode = Mode::MANUAL;
         $configuration = $this->complexConfiguration;
         $packageUrl = TestResources::complexPackageUrl();
-        $label = base64_encode($name . 'upgraded');
+        $label = base64_encode($name.'upgraded');
         $force = true;
         $options = new UpgradeDeploymentOptions();
         $options->setDeploymentName($name);
@@ -1230,13 +1234,11 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
                 $this->assertCount($expectedInstanceCount, $deployment->getRoleInstanceList());
 
                 $isPassed = true;
-            }
-            catch (\Exception $e) {
+            } catch (\Exception $e) {
                 if (($e->getCode() == 400) && ($e->getErrorText() == 'Bad Request')
                    && (strpos($e->getErrorReason(), 'The previous update has completed and so rollback is not allowed.'))) {
-                    $attempt++;
-                }
-                else {
+                    ++$attempt;
+                } else {
                     throw $e;
                 }
             }

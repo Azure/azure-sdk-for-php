@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,17 +15,18 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Functional\WindowsAzure\ServiceBus
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Functional\WindowsAzure\ServiceBus;
+namespace Tests\functional\WindowsAzure\ServiceBus;
 
 use Tests\Framework\ServiceBusRestProxyTestBase;
-use Tests\Functional\WindowsAzure\Blob\BlobServiceFunctionalTestData;
+use Tests\Functional\WindowsAzure\BlobServiceFunctionalTestData;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
 
 class BrokerPropertiesMapperTest extends ServiceBusRestProxyTestBase
@@ -57,30 +58,30 @@ class BrokerPropertiesMapperTest extends ServiceBusRestProxyTestBase
     public function testDeserializingAllPossibleValues()
     {
         // Arrange
-        $schedTimeUtc = new \DateTime("Sun, 06 Nov 1994 08:49:37 GMT");
+        $schedTimeUtc = new \DateTime('Sun, 06 Nov 1994 08:49:37 GMT');
         $schedTimeUtc->setTimezone(new \DateTimeZone('UTC'));
 
-        $lockedUntilUtc = new \DateTime("Fri, 14 Oct 2011 12:34:56 GMT");
+        $lockedUntilUtc = new \DateTime('Fri, 14 Oct 2011 12:34:56 GMT');
         $lockedUntilUtc->setTimezone(new \DateTimeZone('UTC'));
 
         // Act
         $jsonValue =
-            '{' .
-            '"CorrelationId":"corid",' .
-            '"SessionId":"sesid",' .
-            '"DeliveryCount":5,' .
-            '"LockedUntilUtc":"Fri, 14 Oct 2011 12:34:56 GMT",' .
-            '"LockToken":"loctok",' .
-            '"MessageId":"mesid",' .
-            '"Label":"lab",' .
-            '"ReplyTo":"repto",' .
-            '"SequenceNumber":7,' .
-            '"TimeToLive":8.123,' .
-            '"To":"to",' .
-            '"ScheduledEnqueueTimeUtc":"Sun, 06 Nov 1994 08:49:37 GMT",' .
-            '"ReplyToSessionId":"reptosesid",' .
-            '"MessageLocation":"mesloc",' .
-            '"LockLocation":"locloc"' . '}';
+            '{'.
+            '"CorrelationId":"corid",'.
+            '"SessionId":"sesid",'.
+            '"DeliveryCount":5,'.
+            '"LockedUntilUtc":"Fri, 14 Oct 2011 12:34:56 GMT",'.
+            '"LockToken":"loctok",'.
+            '"MessageId":"mesid",'.
+            '"Label":"lab",'.
+            '"ReplyTo":"repto",'.
+            '"SequenceNumber":7,'.
+            '"TimeToLive":8.123,'.
+            '"To":"to",'.
+            '"ScheduledEnqueueTimeUtc":"Sun, 06 Nov 1994 08:49:37 GMT",'.
+            '"ReplyToSessionId":"reptosesid",'.
+            '"MessageLocation":"mesloc",'.
+            '"LockLocation":"locloc"'.'}';
 
         $properties = BrokerProperties::create($jsonValue);
 
@@ -124,4 +125,3 @@ class BrokerPropertiesMapperTest extends ServiceBusRestProxyTestBase
         $this->assertNull($properties->getScheduledEnqueueTimeUtc(), '$properties->getScheduledEnqueueTimeUtc()');
     }
 }
-

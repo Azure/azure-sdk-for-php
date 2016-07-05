@@ -4,7 +4,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,26 +15,30 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
+namespace Tests\unit\WindowsAzure\ServiceBus\models;
+
 use WindowsAzure\ServiceBus\Models\TopicInfo;
 use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 
 /**
- * Unit tests for class WrapAccessTokenResult
+ * Unit tests for class WrapAccessTokenResult.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\ServiceBus\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
 class TopicInfoTest extends \PHPUnit_Framework_TestCase
@@ -45,10 +49,10 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
     public function testTopicInfoConstructor()
     {
         // Setup
-        
+
         // Test
         $topicInfo = new TopicInfo('testNameOfTopic');
-        
+
         // Assert
         $this->assertNotNull($topicInfo);
     }
@@ -57,7 +61,8 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getTopicDescription
      * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setTopicDescription
      */
-    public function testGetSetTopicDescription() {
+    public function testGetSetTopicDescription()
+    {
         // Setup
         $expected = 'testTopicDescription';
         $topicInfo = new TopicInfo();
@@ -71,14 +76,14 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
 
     /** 
      * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getDefaultMessageTimeToLive
      * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setDefaultMessageTimeToLive
      */
-    public function testGetSetDefaultMessageTimeToLive() {
+    public function testGetSetDefaultMessageTimeToLive()
+    {
         // Setup
         $expected = 'testDefaultMessageTimeToLive';
         $topicInfo = new TopicInfo();
@@ -92,15 +97,14 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
 
     /** 
      * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getMaxSizeInMegabytes
      * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setMaxSizeInMegabytes
      */
-    public function testGetSetMaxSizeInMegabytes() {
+    public function testGetSetMaxSizeInMegabytes()
+    {
         // Setup
         $expected = 'testMaxSizeInMegabytes';
         $topicInfo = new TopicInfo();
@@ -114,15 +118,14 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
 
     /** 
      * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getRequiresDuplicateDetection
      * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setRequiresDuplicateDetection
      */
-    public function testGetSetRequiresDuplicateDetection() {
+    public function testGetSetRequiresDuplicateDetection()
+    {
         // Setup
         $expected = 'testRequiresDuplicateDetection';
         $topicInfo = new TopicInfo();
@@ -136,15 +139,14 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
 
     /** 
      * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getDuplicateDetectionHistoryTimeWindow
      * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setDuplicateDetectionHistoryTimeWindow
      */
-    public function testGetSetDuplicateDetectionHistoryTimeWindow() {
+    public function testGetSetDuplicateDetectionHistoryTimeWindow()
+    {
         // Setup
         $expected = 'testDuplicateDetectionHistoryTimeWindow';
         $topicInfo = new TopicInfo();
@@ -158,15 +160,14 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
 
     /** 
      * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getEnableBatchedOperations
      * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setEnableBatchedOperations
      */
-    public function testGetSetEnableBatchedOperations() {
+    public function testGetSetEnableBatchedOperations()
+    {
         // Setup
         $expected = 'testEnableBatchedOperations';
         $topicInfo = new TopicInfo();
@@ -180,15 +181,14 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
 
     /** 
      * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getSizeInBytes
      * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setSizeInBytes
      */
-    public function testGetSetSizeInBytes() {
+    public function testGetSetSizeInBytes()
+    {
         // Setup
         $expected = 'testSizeInBytes';
         $topicInfo = new TopicInfo();
@@ -202,10 +202,5 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
             $expected,
             $actual
         );
-
     }
-
 }
-
-
-

@@ -51,11 +51,9 @@ use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate;
 use WindowsAzure\MediaServices\Templates\TokenClaim;
 use WindowsAzure\MediaServices\Templates\TokenType;
 
-// Settings
-date_default_timezone_set('America/Los_Angeles');
+// read user settings from config
+include_once 'userconfig.php';
 
-$account = "<your media services account name>";
-$secret = "<your media services account key>";
 $mezzanineFileName = dirname(__FILE__) . "/Azure-Video.wmv";
 $tokenRestriction = true;
 $tokenType = TokenType::JWT;

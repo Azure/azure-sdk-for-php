@@ -3,7 +3,7 @@
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,28 +14,30 @@
  * PHP version 5
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace Tests\Unit\WindowsAzure\MediaServices\Models;
+namespace Tests\unit\WindowsAzure\MediaServices\Models;
+
 use WindowsAzure\MediaServices\Models\EncodingReservedUnitType;
 use WindowsAzure\MediaServices\Models\EncodingReservedUnit;
-use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Utilities;
 
 /**
- * Unit Tests for EncodingReservedUnitType 
+ * Unit Tests for EncodingReservedUnitType.
  *
  * @category  Microsoft
- * @package   Tests\Unit\WindowsAzure\MediaServices\Models
+ *
  * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- * @version   Release: 0.4.2_2016-04
+ *
+ * @version   Release: 0.4.3_2016-05
+ *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 class EncodingReservedUnitTypeTest extends \PHPUnit_Framework_TestCase
@@ -45,15 +47,16 @@ class EncodingReservedUnitTypeTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::fromArray
      * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::__construct
      */
-    public function testCreateFromOptions() {
-        
+    public function testCreateFromOptions()
+    {
+
         // Setup
         $testAccountId = 'testAccountId';
         $options = array(
-                'AccountId'                  => $testAccountId,
-                'ReservedUnitType'           => EncodingReservedUnitType::S1,
-                'MaxReservableUnits'         => 30,
-                'CurrentReservedUnits'       => 5
+                'AccountId' => $testAccountId,
+                'ReservedUnitType' => EncodingReservedUnitType::S1,
+                'MaxReservableUnits' => 30,
+                'CurrentReservedUnits' => 5,
         );
 
         // Test
@@ -61,17 +64,18 @@ class EncodingReservedUnitTypeTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals($testAccountId, $encodingReservedUnitType->getAccountId());
-        $this->assertEquals($options['AccountId'], $encodingReservedUnitType->getAccountId());     
-        $this->assertEquals($options['ReservedUnitType'], $encodingReservedUnitType->getReservedUnitType());     
-        $this->assertEquals($options['MaxReservableUnits'], $encodingReservedUnitType->getMaxReservableUnits());  
-        $this->assertEquals($options['CurrentReservedUnits'], $encodingReservedUnitType->getCurrentReservedUnits());  
+        $this->assertEquals($options['AccountId'], $encodingReservedUnitType->getAccountId());
+        $this->assertEquals($options['ReservedUnitType'], $encodingReservedUnitType->getReservedUnitType());
+        $this->assertEquals($options['MaxReservableUnits'], $encodingReservedUnitType->getMaxReservableUnits());
+        $this->assertEquals($options['CurrentReservedUnits'], $encodingReservedUnitType->getCurrentReservedUnits());
     }
 
     /**
      * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::getAccountId
      * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::setAccountId
      */
-    public function testGetSetAccountId() {
+    public function testGetSetAccountId()
+    {
 
         // Setup
         $expected = 'testNameForAssetDeliveryPolicy';
@@ -89,7 +93,8 @@ class EncodingReservedUnitTypeTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::getReservedUnitType
      * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::setReservedUnitType
      */
-    public function testGetSetReservedUnitType() {
+    public function testGetSetReservedUnitType()
+    {
 
         // Setup
         $expected = EncodingReservedUnitType::S3;
@@ -107,7 +112,8 @@ class EncodingReservedUnitTypeTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::getMaxReservableUnits
      * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::setMaxReservableUnits
      */
-    public function testGetSetMaxReservableUnits() {
+    public function testGetSetMaxReservableUnits()
+    {
 
         // Setup
         $expected = 10;
@@ -125,7 +131,8 @@ class EncodingReservedUnitTypeTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::getCurrentReservedUnits
      * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::setCurrentReservedUnits
      */
-    public function testGetSetCurrentReservedUnits() {
+    public function testGetSetCurrentReservedUnits()
+    {
 
         // Setup
         $expected = 5;
@@ -138,6 +145,4 @@ class EncodingReservedUnitTypeTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals($expected, $result);
     }
-
-    
 }
