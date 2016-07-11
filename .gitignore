@@ -9,4 +9,3 @@ vendor
 nbproject
 phpcs-checkstyle.tmp
 composer.phar
-.vscode/
