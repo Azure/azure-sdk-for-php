@@ -96,7 +96,7 @@ class AssetDeliveryPolicyConfigurationKey
      */
     const WIDEVINE_LICENSE_ACQUISITION_URL = 7;
 
-	/**
+    /**
 	 * WidevineBaseLicenseAcquisitionUrl, Base Widevine url that will have KID=<Guid> appended
 	 *
 	 * @var int

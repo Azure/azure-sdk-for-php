@@ -52,7 +52,7 @@ class FairPlayConfiguration
      */
     public $FairPlayPfx;
 
-	/**
+    /**
      * @var string
      */
     public $ContentEncryptionIV;
@@ -71,6 +71,3 @@ class FairPlayConfiguration
     }
    
 }
-
-
-

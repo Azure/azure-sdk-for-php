@@ -331,7 +331,7 @@ function publishEncodedAsset($restProxy, $encodedAsset)
     $locator = $restProxy->createLocator($locator);
 
     // 6.4 Create a Smooth Streaming base URL
-    $stremingUrl = $locator->getPath().$manifestFile->getName()."/manifest";
+    $stremingUrl = $locator->getPath().$manifestFile->getName().'/manifest';
 
     echo "Streaming URL: {$stremingUrl}\r\n";
 }
