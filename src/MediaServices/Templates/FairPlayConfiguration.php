@@ -64,8 +64,8 @@ class FairPlayConfiguration
         $template = new FairPlayConfiguration();
         $template->ASkId = $askId;
         $template->ContentEncryptionIV = $contentIv;
-		$template->FairPlayPfx = $certString;
-		$template->FairPlayPfxPasswordId = $pfxPasswordKeyId;
+        $template->FairPlayPfx = $certString;
+        $template->FairPlayPfxPasswordId = $pfxPasswordKeyId;
     
         return json_encode($template);
     }
