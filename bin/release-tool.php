@@ -23,17 +23,23 @@
 //const NEW_VER = '   Release: 0.4.3_2016-05';
 //$startDir = __DIR__.'/../'; //this will update SDK sources, test sources and examples.
 
-const OLD_TOKEN = '';
-const NEW_TOKEN = '';
+const OLD_TOKEN = '
+';
+const NEW_TOKEN = '
+';
 
  const OLD_TOKEN_MULTI_LINE =
-'
-  */';
+'* @license     https://github.com/yaqiyang/php-sdk-dev/blob/master/LICENSE
+ *
+ * @link        https://github.com/Azure/azure-sdk-for-php
+';
 
 
  const NEW_TOKEN_MULTI_LINE =
-'
- */';
+'* @license     https://github.com/Azure/azure-sdk-for-php/blob/arm/LICENSE
+ *
+ * @link        https://github.com/Azure/azure-sdk-for-php/tree/arm
+';
 
 $startDir = __DIR__.'/../src';
 

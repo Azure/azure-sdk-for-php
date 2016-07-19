@@ -11,9 +11,9 @@
  *
  * @author      Azure PHP SDK <azurephpsdk@microsoft.com>
  * @copyright   2016 Microsoft Corporation
- * @license     https://github.com/yaqiyang/php-sdk-dev/blob/master/LICENSE
+ * @license     https://github.com/Azure/azure-sdk-for-php/blob/arm/LICENSE
  *
- * @link        https://github.com/Azure/azure-sdk-for-php
+ * @link        https://github.com/Azure/azure-sdk-for-php/tree/arm
  *
  * @version     Release: 0.10.0_2016, API Version: 2015-07-01-preview
  */
