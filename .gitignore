@@ -1,0 +1,12 @@
+.idea
+.project
+.vscode
+.settings
+bin/logs
+doc
+vendor
+composer.phar
+privatesettings.php
+phpcs-checkstyle.tmp
+phpdoc.dist.xml
+phpunit.xml

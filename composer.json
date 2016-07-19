@@ -1,0 +1,33 @@
+{
+  "name": "microsoft/azure-sdk",
+  "description": "This SDK provides a set of PHP client libraries to access Microsoft Azure Storage Resource Provider APIs (and other APIs in the future).",
+  "keywords": [ "php", "azure", "sdk" ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Azure PHP SDK",
+      "email": "azurephpsdk@microsoft.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5",
+    "guzzlehttp/guzzle": "~6.0"
+  },
+  "require-dev": {
+    "mikey179/vfsStream": "^1.6",
+    "phpunit/phpunit": "^4.8",
+    "friendsofphp/php-cs-fixer": "^1.11",
+    "phpdocumentor/phpdocumentor": "2.*"
+  },
+  "autoload": {
+    "psr-4": { "MicrosoftAzure\\": "src/" }
+  },
+  "autoload-dev": {
+    "psr-4": { "Tests\\": "tests/" }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.10-dev"
+    }
+  }
+}
