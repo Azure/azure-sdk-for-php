@@ -384,7 +384,7 @@ function createFairPlayAskTypeContentKey($restProxy, $fairPlayASK)
     $protectionKey = $restProxy->getProtectionKey($protectionKeyId);
 
     $contentKey = new ContentKey();
-    $contentKey->setContentKey($askKey, $protectionKey);
+    $contentKey->setContentKey($askKey, $protectionKey, TRUE);
     $contentKey->setProtectionKeyId($protectionKeyId);
     $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
     $contentKey->setContentKeyType(ContentKeyTypes::FAIRPLAY_ASK);
@@ -405,7 +405,7 @@ function createFairPlayPfxPasswordTypeContentKey($restProxy, $fairPlayPfxPasswor
 
     // 3.2 Prepare the content key
     $contentKey = new ContentKey();
-    $contentKey->setContentKey($fairPlayPfxPassword, $protectionKey);
+    $contentKey->setContentKey($fairPlayPfxPassword, $protectionKey, TRUE);
     $contentKey->setProtectionKeyId($protectionKeyId);
     $contentKey->setProtectionKeyType(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
     $contentKey->setContentKeyType(ContentKeyTypes::FAIRPLAY_PFXPASSWORD);
