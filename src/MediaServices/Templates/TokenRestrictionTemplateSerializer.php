@@ -129,9 +129,7 @@ class TokenRestrictionTemplateSerializer
 
         if ($tokenRestriction->getAlternateVerificationKeys()) {
             self::serializeAlternateVerificationKeys($writer, $tokenRestriction->getAlternateVerificationKeys());
-        } else {
-            $writer->writeElement('AlternateVerificationKeys');
-        }
+        } 
 
         $writer->writeElement('Audience', $tokenRestriction->getAudience());
         $writer->writeElement('Issuer', $tokenRestriction->getIssuer());
@@ -311,8 +309,6 @@ class TokenRestrictionTemplateSerializer
             $writer->writeElement('ClaimType', $claim->getClaimType());
             if ($claim->getClaimValue()) {
                 $writer->writeElement('ClaimValue', $claim->getClaimValue());
-            } else {
-                $writer->writeRaw('<ClaimValue i:nil="true"/>');
             }
             $writer->endElement();
         }
