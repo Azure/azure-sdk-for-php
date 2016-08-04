@@ -59,6 +59,7 @@ use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy;
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption;
 use WindowsAzure\MediaServices\Models\AssetDeliveryPolicy;
 use WindowsAzure\MediaServices\Models\EncodingReservedUnit;
+use WindowsAzure\MediaServices\Models\Operation;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for media services
@@ -2896,5 +2897,18 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $encodingReservedUnit->setAccountId(null); // never send account Id
         $this->_updateEntity($encodingReservedUnit, "EncodingReservedUnitTypes(guid'{$accountID}')");
         $encodingReservedUnit->setAccountId($accountID);
+    }
+
+    /**
+     * Get the Operation entity.
+     *
+     * @param string $operationId The operation id.
+     *
+     * @return mixing
+     */
+    public function getOperation($operationId)
+    {
+        // TODO: add validation and transformations.
+        return Operation::createFromOptions($this->_getEntity("Operations('{$operationId}')"));
     }
 }

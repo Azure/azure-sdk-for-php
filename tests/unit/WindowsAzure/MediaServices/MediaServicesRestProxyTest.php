@@ -28,6 +28,7 @@ namespace Tests\unit\WindowsAzure\MediaServices;
 use Tests\Framework\MediaServicesRestProxyTestBase;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\ServiceException;
 use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
@@ -2306,6 +2307,25 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // restore initial conditions
         $this->restProxy->updateEncodingReservedUnit($original);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyOption
+     * @group livefeatures
+     */
+    public function testGetOperationNotFound()
+    {
+        // Setup
+        $opId = "nb:opid:UUID:ab66eff9-8945-4323-9f91-d257a695899b";
+
+        // Test
+        try {
+            $op = $this->restProxy->getOperation($opId);
+        } catch (ServiceException $se) {
+            // Assert
+            $this->assertEquals($se->getCode(), 404);
+        }
+        
     }
 
     /// Assertion
