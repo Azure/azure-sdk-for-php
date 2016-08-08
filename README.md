@@ -43,9 +43,9 @@ Microsoft Azure tables, blobs, queues, service bus (queues and topics), service 
   * Encoding / process asset, create job, job templates
   * Manage media services entities: create / update / read / delete / get list
   * Delivery SAS and Streaming media content
-  * Dynamic encryption: AES and DRM (PlayReady/Widevine) with and without Token restriction
+  * Dynamic encryption: AES and DRM (PlayReady/Widevine/FairPlay) with and without Token restriction
   * Scale encoding reserved unit type
-  * REST API Version: 2.11
+  * REST API Version: 2.12
 
   
 # Getting Started

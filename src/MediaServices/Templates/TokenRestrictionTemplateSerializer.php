@@ -129,7 +129,7 @@ class TokenRestrictionTemplateSerializer
 
         if ($tokenRestriction->getAlternateVerificationKeys()) {
             self::serializeAlternateVerificationKeys($writer, $tokenRestriction->getAlternateVerificationKeys());
-        }
+        } 
 
         $writer->writeElement('Audience', $tokenRestriction->getAudience());
         $writer->writeElement('Issuer', $tokenRestriction->getIssuer());
