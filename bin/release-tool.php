@@ -27,10 +27,10 @@
  * Update the version number of PHP files, and generate class list.
  *
  * 1. change the NEW_VER const to the correct new version string
- * 2. run php .\build\release_tools.php in the root directory
+ * 2. run php .\bin\release-tool.php in the root directory
  */
 const VER_TOKEN = ' * @version';
-const NEW_VER = '   Release: 0.4.3_2016-05';
+const NEW_VER = '   Release: 0.4.4_2016-08';
 $startDir = __DIR__.'/../'; //this will update SDK sources, test sources and examples.
 
 $updateVersion = true;
@@ -40,7 +40,7 @@ $files_changed = 0;
 $output = '';
 
 foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($startDir)) as $filename => $cur) {
-    if (is_dir($filename) || strpos($filename, 'release_tools.php') !== false) {
+    if (is_dir($filename) || strpos($filename, 'release-tool.php') !== false) {
         continue;
     }
 
