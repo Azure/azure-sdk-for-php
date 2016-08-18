@@ -391,6 +391,17 @@ class Resources
     const XTAG_ROLLBACK_UPDATE_OR_UPGRADE = 'RollbackUpdateOrUpgrade';
     const XTAG_CONTAINER_NAME = 'ContainerName';
     const XTAG_ACCOUNT_NAME = 'AccountName';
+    const XTAG_SUBSCRIPTION_ID = 'SubscriptionID';
+    const XTAG_SUBSCRIPTION_NAME = 'SubscriptionName';
+    const XTAG_SUBSCRIPTION_STATUS = 'SubscriptionStatus';
+    const XTAG_ACCOUNT_ADMIN_LIVE_EMAIL_ID = 'AccountAdminLiveEmailId';
+    const XTAG_SERVICE_ADMIN_LIVE_EMAIL_ID = 'ServiceAdminLiveEmailId';
+    const XTAG_MAX_CORE_COUNT = 'MaxCoreCount';
+    const XTAG_MAX_STORAGE_ACCOUNTS = 'MaxStorageAccounts';
+    const XTAG_MAX_HOSTED_SERVICES = 'MaxHostedServices';
+    const XTAG_CURRENT_CORE_COUNT = 'CurrentCoreCount';
+    const XTAG_CURRENT_HOSTED_SERVICES = 'CurrentHostedServices';
+    const XTAG_CURRENT_STORAGE_ACCOUNTS = 'CurrentStorageAccounts';
 
     // Service Bus
     const LIST_TOPICS_PATH        = '$Resources/Topics';

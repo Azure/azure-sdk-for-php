@@ -237,6 +237,7 @@ spl_autoload_register(
             'windowsazure\\servicemanagement\\models\\getoperationstatusresult' => '/ServiceManagement/Models/GetOperationStatusResult.php',
             'windowsazure\\servicemanagement\\models\\getstorageservicekeysresult' => '/ServiceManagement/Models/GetStorageServiceKeysResult.php',
             'windowsazure\\servicemanagement\\models\\getstorageservicepropertiesresult' => '/ServiceManagement/Models/GetStorageServicePropertiesResult.php',
+            'windowsazure\\servicemanagement\\models\\getsubscriptionresult' => '/ServiceManagement/Models/GetSubscriptionResult.php',
             'windowsazure\\servicemanagement\\models\\hostedservice' => '/ServiceManagement/Models/HostedService.php',
             'windowsazure\\servicemanagement\\models\\inputendpoint' => '/ServiceManagement/Models/InputEndpoint.php',
             'windowsazure\\servicemanagement\\models\\keytype' => '/ServiceManagement/Models/KeyType.php',

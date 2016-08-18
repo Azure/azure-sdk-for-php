@@ -51,6 +51,7 @@ use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
 use WindowsAzure\ServiceManagement\Models\GetDeploymentResult;
 use WindowsAzure\ServiceManagement\Models\DeploymentStatus;
 use WindowsAzure\ServiceManagement\Models\Mode;
+use WindowsAzure\ServiceManagement\Models\GetSubscriptionResult;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service
@@ -1530,5 +1531,26 @@ class ServiceManagementRestProxy extends RestProxy
         $response = $this->sendContext($context);
 
         return AsynchronousOperationResult::create($response->getHeader());
+    }
+
+    /**
+     * Returns account and resource allocation information on the specified
+     * subscription.
+     *
+     * @return GetSubscriptionResult
+     *
+     * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh403995.aspx
+     */
+    public function getSubscription()
+    {
+        $context = new HttpCallContext();
+        $context->setMethod(Resources::HTTP_GET);
+        $context->setPath($this->_subscriptionId);
+        $context->addStatusCode(Resources::STATUS_OK);
+
+        $response   = $this->sendContext($context);
+        $serialised = $this->dataSerializer->unserialize($response->getBody());
+
+        return GetSubscriptionResult::create($serialised);
     }
 }

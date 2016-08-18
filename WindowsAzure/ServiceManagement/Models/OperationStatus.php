@@ -25,7 +25,7 @@
 namespace WindowsAzure\ServiceManagement\Models;
 
 /**
- * The possible staus values of asynchronous request.
+ * The possible status values of asynchronous request.
  *
  * @category  Microsoft
  * @package   WindowsAzure\ServiceManagement\Models
