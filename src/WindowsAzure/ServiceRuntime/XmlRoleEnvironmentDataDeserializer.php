@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * PHP version 5
+ *
+ * @category  Microsoft
+ * @package   PEAR2\WindowsAzure\ServiceRuntime
+ * @author    Microsoft Corporation
+ * @copyright 2012 Microsoft Corporation
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @link      http://pear.php.net/package/azure-sdk-for-php
+ */
+
+namespace PEAR2\WindowsAzure\ServiceRuntime;
+
+class XmlRoleEnvironmentDataDeserializer
+{
+    public function __construct()
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+    
+    public function deserialize($document)
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+    
+    private function translateConfigurationSettings($environmentInfo)
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+    
+    private function translateLocalResources($environmentInfo)
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+    
+    private function translateRoles($environmentInfo, $currentInstance, $currentRole)
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+    
+    private function translateRoleInstances($instancesInfo)
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+    
+    private function translateRoleInstanceEndpoints($endpointsInfo)
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+    
+    private function translateCurrentInstance($endpointsInfo)
+    {
+        throw new \Exception(Resources::NOT_IMPLEMENTED_MSG);
+    }
+}
+
+?>
