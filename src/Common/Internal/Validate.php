@@ -197,6 +197,25 @@ class Validate
     }
 
     /**
+     * Throws exception if the provided variable type is not DateInterval.
+     *
+     * @param mix    $var  The variable to check.
+     * @param string $name The parameter name.
+     *
+     * @throws InvalidArgumentTypeException
+     *
+     * @return none
+     */
+    public static function isDateInterval($var, $name)
+    {
+        try {
+            new \DateInterval($var);
+        } catch (\Exception $e) {
+            throw new InvalidArgumentTypeException("DateInterval", $name);
+        }
+    }
+
+    /**
      * Throws exception if the provided variable is set to null.
      *
      * @param mix    $var  The variable to check.

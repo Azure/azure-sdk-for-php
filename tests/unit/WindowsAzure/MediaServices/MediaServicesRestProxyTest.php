@@ -50,6 +50,26 @@ use WindowsAzure\MediaServices\Models\AssetDeliveryPolicy;
 use WindowsAzure\MediaServices\Models\AssetDeliveryProtocol;
 use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyType;
 use WindowsAzure\MediaServices\Models\EncodingReservedUnitType;
+use WindowsAzure\MediaServices\Models\Channel;
+use WindowsAzure\MediaServices\Models\ChannelInput;
+use WindowsAzure\MediaServices\Models\ChannelOutput;
+use WindowsAzure\MediaServices\Models\ChannelPreview;
+use WindowsAzure\MediaServices\Models\ChannelEncoding;
+use WindowsAzure\MediaServices\Models\ChannelEndpoint;
+use WindowsAzure\MediaServices\Models\ChannelInputAccessControl;
+use WindowsAzure\MediaServices\Models\ChannelPreviewAccessControl;
+use WindowsAzure\MediaServices\Models\ChannelOutputHls;
+use WindowsAzure\MediaServices\Models\ChannelSlate;
+use WindowsAzure\MediaServices\Models\ChannelState;
+use WindowsAzure\MediaServices\Models\StreamingProtocol;
+use WindowsAzure\MediaServices\Models\EncodingType;
+use WindowsAzure\MediaServices\Models\IPAccessControl;
+use WindowsAzure\MediaServices\Models\IPRange;
+use WindowsAzure\MediaServices\Models\Operation;
+use WindowsAzure\MediaServices\Models\OperationState;
+use WindowsAzure\MediaServices\Models\CrossSiteAccessPolicies;
+use WindowsAzure\MediaServices\Models\AudioStreams;
+use WindowsAzure\MediaServices\Models\VideoStreams;
 use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplateSerializer;
 use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate;
 use WindowsAzure\MediaServices\Templates\TokenType;
@@ -2325,7 +2345,480 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
             // Assert
             $this->assertEquals($se->getCode(), 404);
         }
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::sendCreateChannelOperation
+     * @group livefeatures
+     * @group channel
+     */
+    public function testCreateGetDeleteValidateChannel()
+    {
+        // Setup
+        $channelName = TestResources::MEDIA_SERVICES_CHANNEL_NAME . $this->createSuffix();
+        $channel = $this->makeChannelEncodingTypeNone($channelName);
+
+        // test
+        $operation = $this->restProxy->sendCreateChannelOperation($channel);
+
+        // waiting for create operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // get the created channel
+        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+
+        // assert #1, channel must exists
+        $channelId = $channelResult->getId();
+        $this->assertEquals($channelId, $operation->getTargetEntityId());
+        $this->assertEquals($channelResult->getState(), ChannelState::Stopped);
+
+        // assert #2 the list should contains the channel
+        $list = $this->restProxy->getChannelList();
+        $exists = false;
+        foreach($list as $channel) {
+            if ($channel->getId() == $channelId) {
+                $exists = true;
+            }
+        }
+        $this->assertTrue($exists);
+
+        // delete the channel
+        $operation = $this->restProxy->sendDeleteChannelOperation($channelResult->getId());
+
+        // waiting for delete operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // assert #3 the list should not contains the channel
+        $list = $this->restProxy->getChannelList();
+
+        foreach($list as $channel) {
+            $this->assertFalse($channel->getId() == $channelId);
+        }
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createChannel
+     * @group livefeatures
+     * @group channel
+     */
+    public function testCreateUpdateDeleteValidateChannel()
+    {
+        // Setup
+        $channelName = TestResources::MEDIA_SERVICES_CHANNEL_NAME . $this->createSuffix();
+        $channel = $this->makeChannelEncodingTypeNone($channelName);
+
+        // test
+        $operation = $this->restProxy->sendCreateChannelOperation($channel);
+
+        // waiting for create operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // get the created channel
+        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+
+        // assert #1, channel must exists
+        $channelId = $channelResult->getId();
+        $this->assertEquals($channelId, $operation->getTargetEntityId());
+        $this->assertEquals($channelResult->getState(), ChannelState::Stopped);
+
+        // assert #2 the list should contains the channel
+        $list = $this->restProxy->getChannelList();
+        $exists = false;
+        foreach($list as $channel) {
+            if ($channel->getId() == $channelId) {
+                $exists = true;
+            }
+        }
+        $this->assertTrue($exists);
+
+        // update channel description
+        $channelResult->setDescription("Alternative Description");
+
+        // update the channel
+        $operation = $this->restProxy->sendUpdateChannelOperation($channelResult);
+
+        // validate that the update was applied directly
+        $this->assertEquals($operation->getState(), OperationState::Succeeded);
+
+        // get the created updated
+        $channelResult = $this->restProxy->getChannel($channelResult);
+
+        // assert the description is updated
+        $this->assertEquals($channelResult->getDescription(), "Alternative Description");
+
+        // delete the channel
+        $operation = $this->restProxy->sendDeleteChannelOperation($channelResult->getId());
+
+        // waiting for delete operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // assert #3 the list should not contains the channel
+        $list = $this->restProxy->getChannelList();
+
+        foreach($list as $channel) {
+            $this->assertFalse($channel->getId() == $channelId);
+        }
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createChannel
+     * @group livefeatures
+     * @group channel
+     */
+    public function testCreateGetStartStopDeleteValidateChannel()
+    {
+        // Setup
+        $channelName = TestResources::MEDIA_SERVICES_CHANNEL_NAME . $this->createSuffix();
+        $channel = $this->makeChannelEncodingTypeNone($channelName);
+
+        // test
+        $operation = $this->restProxy->sendCreateChannelOperation($channel);
+
+        // waiting for create operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // get the created channel
+        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+
+        // assert #1, channel must exists
+        $channelId = $channelResult->getId();
+        $this->assertEquals($channelId, $operation->getTargetEntityId());
+        $this->assertEquals($channelResult->getState(), ChannelState::Stopped);
+
+        // assert #2 the list should contains the channel
+        $list = $this->restProxy->getChannelList();
+        $exists = false;
+        foreach($list as $channel) {
+            if ($channel->getId() == $channelId) {
+                $exists = true;
+            }
+        }
+        $this->assertTrue($exists);
+
+        // start the channel
+        $operation = $this->restProxy->sendStartChannelOperation($channelResult->getId());
+
+        // waiting for start channel operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // get the stared channel
+        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+
+        // assert that the channel is running
+        $this->assertEquals($channelResult->getState(), ChannelState::Running);
+
+        // stop the channel
+        $operation = $this->restProxy->sendStopChannelOperation($channelResult->getId());
+
+        // waiting for stop channel operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // delete the channel
+        $operation = $this->restProxy->sendDeleteChannelOperation($channelResult->getId());
+
+        // waiting for delete operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // assert #3 the list should not contains the channel
+        $list = $this->restProxy->getChannelList();
+
+        foreach($list as $channel) {
+            $this->assertFalse($channel->getId() == $channelId);
+        }
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createChannel
+     * @group livefeatures
+     * @group channel
+     */
+    public function testCreateGetStartUpdateStopDeleteValidateChannel()
+    {
+        // Setup
+        $channelName = TestResources::MEDIA_SERVICES_CHANNEL_NAME . $this->createSuffix();
+        $channel = $this->makeChannelEncodingTypeNone($channelName);
+
+        // test
+        $operation = $this->restProxy->sendCreateChannelOperation($channel);
+
+        // waiting for create operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // get the created channel
+        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+
+        // assert #1, channel must exists
+        $channelId = $channelResult->getId();
+        $this->assertEquals($channelId, $operation->getTargetEntityId());
+        $this->assertEquals($channelResult->getState(), ChannelState::Stopped);
+
+        // assert #2 the list should contains the channel
+        $list = $this->restProxy->getChannelList();
+        $exists = false;
+        foreach($list as $channel) {
+            if ($channel->getId() == $channelId) {
+                $exists = true;
+            }
+        }
+        $this->assertTrue($exists);
+
+        // start the channel
+        $operation = $this->restProxy->sendStartChannelOperation($channelResult->getId());
+
+        // waiting for start channel operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // get the stared channel
+        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+
+        // assert that the channel is running
+        $this->assertEquals($channelResult->getState(), ChannelState::Running);
+
+        // update channel description
+        $channelResult->setDescription("Alternative Description");
+
+        // update the channel
+        $operation = $this->restProxy->sendUpdateChannelOperation($channelResult);
         
+        // waiting for update channel operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // validate that the update was applied
+        $this->assertEquals($operation->getState(), OperationState::Succeeded);
+
+        // get the created updated
+        $channelResult = $this->restProxy->getChannel($channelResult);
+
+        // assert the description is updated
+        $this->assertEquals($channelResult->getDescription(), "Alternative Description");
+
+        // stop the channel
+        $operation = $this->restProxy->sendStopChannelOperation($channelResult->getId());
+
+        // waiting for stop channel operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // delete the channel
+        $operation = $this->restProxy->sendDeleteChannelOperation($channelResult->getId());
+
+        // waiting for delete operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // assert #3 the list should not contains the channel
+        $list = $this->restProxy->getChannelList();
+
+        foreach($list as $channel) {
+            $this->assertFalse($channel->getId() == $channelId);
+        }
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createChannel
+     * @group livefeatures
+     * @group channel
+     */
+    public function testCreateGetStartResetStopDeleteValidateChannel()
+    {
+	    // Setup
+        $channelName = TestResources::MEDIA_SERVICES_CHANNEL_NAME . $this->createSuffix();
+        $channel = $this->makeChannelEncodingTypeNone($channelName);
+
+        // test
+        $operation = $this->restProxy->sendCreateChannelOperation($channel);
+
+        // waiting for create operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // get the created channel
+        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+
+        // assert #1, channel must exists
+        $channelId = $channelResult->getId();
+        $this->assertEquals($channelId, $operation->getTargetEntityId());
+        $this->assertEquals($channelResult->getState(), ChannelState::Stopped);
+
+        // assert #2 the list should contains the channel
+        $list = $this->restProxy->getChannelList();
+        $exists = false;
+        foreach($list as $channel) {
+            if ($channel->getId() == $channelId) {
+                $exists = true;
+            }
+        }
+        $this->assertTrue($exists);
+
+        // start the channel
+        $operation = $this->restProxy->sendStartChannelOperation($channelResult->getId());
+
+        // waiting for start channel operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // get the stared channel
+        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+
+        // assert that the channel is running
+        $this->assertEquals($channelResult->getState(), ChannelState::Running);
+
+        // reset the channel
+        $operation = $this->restProxy->sendResetChannelOperation($channelResult->getId());
+
+        // waiting for reset channel operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // validate that the update was applied
+        $this->assertEquals($operation->getState(), OperationState::Succeeded);
+
+        // stop the channel
+        $operation = $this->restProxy->sendStopChannelOperation($channelResult->getId());
+
+        // waiting for stop channel operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // delete the channel
+        $operation = $this->restProxy->sendDeleteChannelOperation($channelResult->getId());
+
+        // waiting for delete operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // assert #3 the list should not contains the channel
+        $list = $this->restProxy->getChannelList();
+
+        foreach($list as $channel) {
+            $this->assertFalse($channel->getId() == $channelId);
+        }
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createChannel
+     * @group livefeatures
+     * @group channel
+     * @group current
+     */
+    public function testCreateGetStartAdStopDeleteValidateChannel()
+    {
+	    // Setup
+        $channelName = TestResources::MEDIA_SERVICES_CHANNEL_NAME . $this->createSuffix();
+        $channel = $this->makeChannelEncodingTypeNone($channelName);
+
+        // test
+        $operation = $this->restProxy->sendCreateChannelOperation($channel);
+
+        // waiting for create operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // get the created channel
+        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+
+        // assert #1, channel must exists
+        $channelId = $channelResult->getId();
+        $this->assertEquals($channelId, $operation->getTargetEntityId());
+        $this->assertEquals($channelResult->getState(), ChannelState::Stopped);
+
+        // assert #2 the list should contains the channel
+        $list = $this->restProxy->getChannelList();
+        $exists = false;
+        foreach($list as $channel) {
+            if ($channel->getId() == $channelId) {
+                $exists = true;
+            }
+        }
+        $this->assertTrue($exists);
+
+        // start the channel
+        $operation = $this->restProxy->sendStartChannelOperation($channelResult->getId());
+
+        // waiting for start channel operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // get the stared channel
+        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+
+        // assert that the channel is running
+        $this->assertEquals($channelResult->getState(), ChannelState::Running);
+
+        // start advertisement on the channel
+        $operation = $this->restProxy->
+                            sendStartAdvertisementChannelOperation($channelResult->getId(), "PT60S", "1234", "true");
+
+        // waiting for reset channel operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // validate that the operation is completed succesfully
+        $this->assertEquals($operation->getState(), OperationState::Succeeded);
+
+        // end advertisement on the channel
+        $operation = $this->restProxy->sendEndAdvertisementChannelOperation($channelResult->getId());
+
+        // waiting for end advertisement on channel operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // validate that the operation is completed succesfully
+        $this->assertEquals($operation->getState(), OperationState::Succeeded);
+
+        // stop the channel
+        $operation = $this->restProxy->sendStopChannelOperation($channelResult->getId());
+
+        // waiting for stop channel operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // delete the channel
+        $operation = $this->restProxy->sendDeleteChannelOperation($channelResult->getId());
+
+        // waiting for delete operation finishes
+        $operation = $this->restProxy->awaitOperation($operation);
+
+        // assert #3 the list should not contains the channel
+        $list = $this->restProxy->getChannelList();
+
+        foreach($list as $channel) {
+            $this->assertFalse($channel->getId() == $channelId);
+        }
+    }
+
+    /// Utils
+    private function makeChannelEncodingTypeNone($name) {
+        $channel = new Channel();
+        $channel->setName($name);
+        $channel->setDescription("Description of channel {$name}");
+
+        // channel Input
+        $channelInput = new ChannelInput();
+        //$channelInput->setKeyFrameInterval(new \DateInterval("PT2S"));
+        $channelInput->setStreamingProtocol(StreamingProtocol::FragmentedMP4);
+
+        // channel Input\ChannelInputAccessControl
+        $channelInputAccessControl = new ChannelInputAccessControl();
+        $ciacIPAccessControl = new IPAccessControl();
+        $ciacIPRange = new IPRange();
+        $ciacIPRange->setName("default");
+        $ciacIPRange->setAddress("0.0.0.0");
+        $ciacIPRange->setSubnetPrefixLength("0");
+        $ciacIPAccessControl->setAllow(array($ciacIPRange));
+        $channelInputAccessControl->setIP($ciacIPAccessControl);
+        $channelInput->setAccessControl($channelInputAccessControl);
+        $channel->setInput($channelInput);
+
+        // channel Preview
+        $channelPreview = new ChannelPreview();
+
+        // channel Preview\ChannelPreviewAccessControl
+        $channelPreviewAccessControl = new ChannelPreviewAccessControl();
+        $cpacIPAccessControl = new IPAccessControl();
+        $cpacIPRange = new IPRange();
+        $cpacIPRange->setName("default");
+        $cpacIPRange->setAddress("0.0.0.0");
+        $cpacIPRange->setSubnetPrefixLength("0");
+        $cpacIPAccessControl->setAllow(array($cpacIPRange));
+        $channelPreviewAccessControl->setIP($cpacIPAccessControl);
+        $channelPreview->setAccessControl($channelPreviewAccessControl);
+        $channel->setPreview($channelPreview);
+
+        // encoding type
+        $channel->setEncodingType(EncodingType::None);
+
+        // cors rules
+        $channel->setCrossSiteAccessPolicies(new CrossSiteAccessPolicies());
+        return $channel;
     }
 
     /// Assertion

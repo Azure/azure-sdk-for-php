@@ -28,7 +28,7 @@ namespace WindowsAzure\MediaServices\Models;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * Represents Operation object used in media services.
+ * Represents IPRange ComplexType object used in media services.
  *
  * @category  Microsoft
  *
@@ -40,49 +40,35 @@ use WindowsAzure\Common\Internal\Validate;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class Operation
+class IPRange
 {
     /**
-     * Operation id.
+     * IPRange Name.
      *
      * @var string
      */
-    private $_id;
+    private $_name;
 
     /**
-     * Operation ErrorCode.
+     * IPRange Address.
      *
      * @var string
      */
-    private $_errorCode;
+    private $_address;
 
     /**
-     * Operation ErrorMessage.
+     * IPRange SubnetPrefixLength.
      *
      * @var string
      */
-    private $_errorMessage;
+    private $_subnetPrefixLength;
 
     /**
-     * Operation State.
-     *
-     * @var string
-     */
-    private $_state;
-
-    /**
-     * Operation TargetEntityId.
-     *
-     * @var string
-     */
-    private $_targetEntityId;
-
-    /**
-     * Create Operation from array.
+     * Create IPRange from array.
      *
      * @param array $options Array containing values for object properties
      *
-     * @return Operation
+     * @return IPRange
      */
     public static function createFromOptions($options)
     {
@@ -93,92 +79,102 @@ class Operation
     }
 
     /**
-     * Create Operation.
+     * Create IPRange.
      */
     public function __construct()
     {
     }
 
     /**
-     * Fill Operation from array.
+     * Fill IPRange from array.
      *
      * @param array $options Array containing values for object properties
      */
     public function fromArray($options)
     {
-        if (isset($options['Id'])) {
-            Validate::isString($options['Id'], 'options[Id]');
-            $this->_id = $options['Id'];
+        if (isset($options['Name'])) {
+            Validate::isString($options['Name'], 'options[Name]');
+            $this->_name = $options['Name'];
         }
 
-        if (isset($options['ErrorCode'])) {
-            Validate::isString($options['ErrorCode'], 'options[ErrorCode]');
-            $this->_errorCode = $options['ErrorCode'];
+        if (isset($options['Address'])) {
+            Validate::isString($options['Address'], 'options[Address]');
+            $this->_address = $options['Address'];
         }
 
-        if (isset($options['ErrorMessage'])) {
-            Validate::isString($options['ErrorMessage'], 'options[ErrorMessage]');
-            $this->_errorMessage = $options['ErrorMessage'];
-        }
-
-        if (isset($options['State'])) {
-            Validate::isString($options['State'], 'options[State]');
-            $this->_state = $options['State'];
-        }
-
-        if (isset($options['TargetEntityId'])) {
-            Validate::isString($options['TargetEntityId'], 'options[TargetEntityId]');
-            $this->_targetEntityId = $options['TargetEntityId'];
+        if (isset($options['SubnetPrefixLength'])) {
+            Validate::isString($options['SubnetPrefixLength'], 'options[SubnetPrefixLength]');
+            $this->_subnetPrefixLength = $options['SubnetPrefixLength'];
         }
     }
 
     /**
-     * Get the operation identifier.
+     * Return a list of fields that must be sent (even if null).
+     *
+     * @return string[]
+     */
+    public function requiredFields()
+    {
+        return ['SubnetPrefixLength'];
+    }
+
+    /**
+     * Get the ip range Name.
      *
      * @return string
      */
-    public function getId()
+    public function getName()
     {
-        return $this->_id;
+        return $this->_name;
     }
 
     /**
-     * Get the Operation ErrorCode.
+     * Set the ip range Name.
+     *
+     * @param string $value ip range Name
+     */
+    public function setName($value)
+    {
+        $this->_name = $value;
+    }
+
+    /**
+     * Get the ip range Address.
      *
      * @return string
      */
-    public function getErrorCode()
+    public function getAddress()
     {
-        return $this->_errorCode;
+        return $this->_address;
     }
 
     /**
-     * Get the Operation ErrorMessage.
+     * Set the ip range Address.
      *
-     * @return string ErrorMessage
+     * @param string $value ip range Address.
      */
-    public function getErrorMessage()
+    public function setAddress($value)
     {
-        return $this->_errorMessage;
+        $this->_address = $value;
     }
 
     /**
-     * Get the Operation State.
+     * Get the ip range SubnetPrefixLength.
      *
-     * @return string State
+     * @return string
      */
-    public function getState()
+    public function getSubnetPrefixLength()
     {
-        return $this->_state;
+        return $this->_subnetPrefixLength;
     }
 
     /**
-     * Get the Operation TargetEntityId.
+     * Set the ip range SubnetPrefixLength.
      *
-     * @return string TargetEntityId
+     * @param string $value ip range SubnetPrefixLength.
      */
-    public function getTargetEntityId()
+    public function setSubnetPrefixLength($value)
     {
-        return $this->_targetEntityId;
+        $this->_subnetPrefixLength = $value;
     }
 }

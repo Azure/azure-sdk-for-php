@@ -91,6 +91,7 @@ class TestResources
     const MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_OPTIONS_NAME = 'TestContentKeyAuthorizationPolicyOption';
     const MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_RESTRICTION_NAME = 'TestContentKeyAuthorizationPolicyRestriction';
     const MEDIA_SERVICES_ASSET_DELIVERY_POLICY_NAME = 'AssetDeliveryPolicyName';
+    const MEDIA_SERVICES_CHANNEL_NAME = 'PHPSDK-CHANNEL-UNITTEST';
 
     // See https://tools.ietf.org/html/rfc2616
     const STATUS_NOT_MODIFIED = 304;

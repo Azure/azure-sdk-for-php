@@ -28,7 +28,7 @@ namespace WindowsAzure\MediaServices\Models;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * Represents Operation object used in media services.
+ * Represents AudioStreams ComplexType object used in media services.
  *
  * @category  Microsoft
  *
@@ -40,49 +40,35 @@ use WindowsAzure\Common\Internal\Validate;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class Operation
+class AudioStreams
 {
     /**
-     * Operation id.
+     * AudioStreams Index.
+     *
+     * @var int
+     */
+    private $_index;
+
+	/**
+     * AudioStreams Name
      *
      * @var string
      */
-    private $_id;
+    private $_name;
 
     /**
-     * Operation ErrorCode.
+     * AudioStreams Language
      *
      * @var string
      */
-    private $_errorCode;
+    private $_language;
 
     /**
-     * Operation ErrorMessage.
-     *
-     * @var string
-     */
-    private $_errorMessage;
-
-    /**
-     * Operation State.
-     *
-     * @var string
-     */
-    private $_state;
-
-    /**
-     * Operation TargetEntityId.
-     *
-     * @var string
-     */
-    private $_targetEntityId;
-
-    /**
-     * Create Operation from array.
+     * Create AudioStreams from array.
      *
      * @param array $options Array containing values for object properties
      *
-     * @return Operation
+     * @return VideoStream
      */
     public static function createFromOptions($options)
     {
@@ -93,92 +79,93 @@ class Operation
     }
 
     /**
-     * Create Operation.
+     * Create AudioStreams.
      */
     public function __construct()
     {
     }
 
     /**
-     * Fill Operation from array.
+     * Fill AudioStreams from array.
      *
      * @param array $options Array containing values for object properties
      */
     public function fromArray($options)
     {
-        if (isset($options['Id'])) {
-            Validate::isString($options['Id'], 'options[Id]');
-            $this->_id = $options['Id'];
+        if (isset($options['Index'])) {
+            Validate::isInteger($options['Index'], 'options[Index]');
+            $this->_index = (int) $options['Index'];
         }
 
-        if (isset($options['ErrorCode'])) {
-            Validate::isString($options['ErrorCode'], 'options[ErrorCode]');
-            $this->_errorCode = $options['ErrorCode'];
+	    if (isset($options['Name'])) {
+            Validate::isString($options['Name'], 'options[Name]');
+            $this->_name = $options['Name'];
         }
 
-        if (isset($options['ErrorMessage'])) {
-            Validate::isString($options['ErrorMessage'], 'options[ErrorMessage]');
-            $this->_errorMessage = $options['ErrorMessage'];
-        }
-
-        if (isset($options['State'])) {
-            Validate::isString($options['State'], 'options[State]');
-            $this->_state = $options['State'];
-        }
-
-        if (isset($options['TargetEntityId'])) {
-            Validate::isString($options['TargetEntityId'], 'options[TargetEntityId]');
-            $this->_targetEntityId = $options['TargetEntityId'];
+        if (isset($options['Language'])) {
+            Validate::isString($options['Language'], 'options[Language]');
+            $this->_language = $options['Language'];
         }
     }
 
     /**
-     * Get the operation identifier.
+     * Get the AudioStreams Index.
      *
      * @return string
      */
-    public function getId()
+    public function getIndex()
     {
-        return $this->_id;
+        return $this->_index;
     }
 
     /**
-     * Get the Operation ErrorCode.
+     * Set the AudioStreams Index.
+     *
+     * @param string $value AudioStreams Index.
+     */
+    public function setIndex($value)
+    {
+        $this->_index = $value;
+    }
+
+    /**
+     * Get the AudioStreams Name.
      *
      * @return string
      */
-    public function getErrorCode()
+    public function getName()
     {
-        return $this->_errorCode;
+        return $this->_name;
     }
 
     /**
-     * Get the Operation ErrorMessage.
+     * Set the AudioStreams Name.
      *
-     * @return string ErrorMessage
+     * @param string $value AudioStreams Name.
      */
-    public function getErrorMessage()
+    public function setName($value)
     {
-        return $this->_errorMessage;
+        $this->_name = $value;
     }
 
     /**
-     * Get the Operation State.
+     * Get the AudioStreams Language.
      *
-     * @return string State
+     * @return string
      */
-    public function getState()
+    public function getLanguage()
     {
-        return $this->_state;
+        return $this->_language;
     }
 
     /**
-     * Get the Operation TargetEntityId.
+     * Set the AudioStreams Language.
      *
-     * @return string TargetEntityId
+     * @param string $value AudioStreams Language.
      */
-    public function getTargetEntityId()
+    public function setLanguage($value)
     {
-        return $this->_targetEntityId;
+        $this->_language = $value;
     }
 }
+

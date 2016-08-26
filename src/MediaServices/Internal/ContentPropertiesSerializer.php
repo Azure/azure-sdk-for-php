@@ -163,6 +163,9 @@ class ContentPropertiesSerializer
                     if (is_a($variableValue, '\DateTime')) {
                         $variableValue = $variableValue->format(\DateTime::ATOM);
                     }
+                    if (is_a($variableValue, '\DateInterval')) {
+                        $variableValue = self::dateIntervalToString($variableValue);
+                    }
                     if (gettype($variableValue) == 'array') {
                         $xmlWriter->startElementNS(
                             'data',
@@ -212,5 +215,42 @@ class ContentPropertiesSerializer
         }
 
         return $result;
+    }
+
+    /**
+    * @param \DateInterval $interval
+    *
+    * @return string
+    */
+    private static function dateIntervalToString(\DateInterval $interval) {
+
+        // Reading all non-zero date parts.
+        $date = array_filter(array(
+            'Y' => $interval->y,
+            'M' => $interval->m,
+            'D' => $interval->d
+        ));
+
+        // Reading all non-zero time parts.
+        $time = array_filter(array(
+            'H' => $interval->h,
+            'M' => $interval->i,
+            'S' => $interval->s
+        ));
+
+        $specString = 'P';
+
+        // Adding each part to the spec-string.
+        foreach ($date as $key => $value) {
+            $specString .= $value . $key;
+        }
+        if (count($time) > 0) {
+            $specString .= 'T';
+            foreach ($time as $key => $value) {
+                $specString .= $value . $key;
+            }
+        }
+
+        return $specString;
     }
 }
