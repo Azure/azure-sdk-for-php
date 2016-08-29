@@ -62,6 +62,7 @@ use WindowsAzure\MediaServices\Models\EncodingReservedUnit;
 use WindowsAzure\MediaServices\Models\Operation;
 use WindowsAzure\MediaServices\Models\OperationState;
 use WindowsAzure\MediaServices\Models\Channel;
+use WindowsAzure\MediaServices\Models\Program;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for media services
@@ -3033,9 +3034,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get existing channel.
      *
-     * @param Models\AssetDeliveryPolicy $assetDeliveryPolicy AssetDeliveryPolicy data
+     * @param Models\Channel $channel Channel data
      *
-     * @return Models\AssetDeliveryPolicy Created AssetDeliveryPolicy
+     * @return Models\Channel Created Channel
      */
     public function getChannel($channel)
     {
@@ -3259,6 +3260,28 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
+     * Update a Channel.
+     *
+     * @param WindowsAzure\MediaServices\Models\Channel $channel Channel data
+     *
+     * @return WindowsAzure\MediaServices\Models\Channel the updated channel
+     */
+    public function updateChannel($channel)
+    {
+        $op = $this->sendUpdateChannelOperation($channel);
+
+        // waiting for create operation finishes
+        $op = $this->awaitOperation($op);
+
+        if ($operation->getState() != OperationState::Succeeded) {
+            return null;
+        }
+
+        // get and return the createChannel
+        return $this->getChannel($op->getTargetEntityId());
+    }
+
+    /**
      * Delete a Channel.
      *
      * @param WindowsAzure\MediaServices\Models\Channel|string $channel Channel data or channel Id
@@ -3396,6 +3419,211 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->sendHideSlateChannelOperation($channel);
 
         // waiting for create operation finishes
+        $op = $this->awaitOperation($op);
+
+        // true if succeeded
+        return ($operation->getState() == OperationState::Succeeded);
+    }
+
+    /**
+     * Get existing program.
+     *
+     * @param Models\Program $program Program data
+     *
+     * @return Models\Program Created Program
+     */
+    public function getProgram($program)
+    {
+        $programId = Utilities::getEntityId(
+            $program,
+            'WindowsAzure\MediaServices\Models\Program'
+        );
+
+        return Program::createFromOptions($this->_getEntity("Programs('{$programId}')"));
+    }
+
+    /**
+     * Create new Program.
+     *
+     * @param WindowsAzure\MediaServices\Models\Program $program Program data
+     *
+     * @return WindowsAzure\MediaServices\Models\Program Created Program
+     */
+    public function createProgram($program)
+    {
+        Validate::isA($program, 'WindowsAzure\Mediaservices\Models\Program', 'program');
+
+        return Program::createFromOptions($this->_createEntity($program, 'Programs'));
+    }
+
+    /**
+     * Get the list of Programs, if channel (or channel id) is provided, then
+     * returns the Programs associated to that Channel.
+     *
+     * @return array
+     */
+    public function getProgramList($channel = null)
+    {
+        if (is_null($channel)) {
+            $entityList = $this->_getEntityList('Programs');
+        } else {
+            $channelId = Utilities::getEntityId($channel, 'WindowsAzure\MediaServices\Models\Channel');
+            $entityList = $this->_getEntityList("Channels('{$channelId}')/Programs");
+        }
+
+        $result = array();
+
+        foreach ($entityList as $program) {
+            $result[] = Program::createFromOptions($program);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Start a Program.
+     *
+     * @param WindowsAzure\MediaServices\Models\Program|string $program Program data or Program Id
+     *
+     * @return none
+     */
+    public function sendStartProgramOperation($program)
+    {
+        $programId = Utilities::getEntityId(
+            $program,
+            'WindowsAzure\MediaServices\Models\Program'
+        );
+        $headers = array(
+            Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
+        );
+        return $this->_sendOperation(null, "Programs('{$programId}')/Start",
+                    Resources::HTTP_POST, Resources::STATUS_ACCEPTED, $headers);
+    }
+
+    /**
+     * Stop a Program.
+     *
+     * @param WindowsAzure\MediaServices\Models\Program|string $program Program data or program Id
+     *
+     * @return none
+     */
+    public function sendStopProgramOperation($program)
+    {
+        $programId = Utilities::getEntityId(
+            $program,
+            'WindowsAzure\MediaServices\Models\Program'
+        );
+        $headers = array(
+            Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
+        );
+        return $this->_sendOperation(null, "Programs('{$programId}')/Stop",
+                    Resources::HTTP_POST, Resources::STATUS_ACCEPTED, $headers);
+    }
+
+    /**
+     * Start a Program.
+     *
+     * @param WindowsAzure\MediaServices\Models\Program|string $program Program data or program Id
+     *
+     * @return bool true if succeeded
+     */
+    public function startProgram($program)
+    {
+        $op = $this->sendStartProgramOperation($program);
+
+        // waiting for create operation finishes
+        $op = $this->awaitOperation($op);
+
+        // true if succeeded
+        return ($operation->getState() == OperationState::Succeeded);
+    }
+
+    /**
+     * Stop a Program.
+     *
+     * @param WindowsAzure\MediaServices\Models\Program|string $program Program data or program Id
+     *
+     * @return bool true if succeeded
+     */
+    public function stopProgram($program)
+    {
+        $op = $this->sendStopProgramOperation($program);
+
+        // waiting for create operation finishes
+        $op = $this->awaitOperation($op);
+
+        // true if succeeded
+        return ($operation->getState() == OperationState::Succeeded);
+    }
+
+    /**
+     * Send Update Program operation
+     *
+     * @param Models\Programs $program Programs data
+     *
+     * @return Models\Operation The operation to track the program update.
+     */
+    public function sendUpdateProgramOperation($program)
+    {
+        Validate::isA($program, 'WindowsAzure\MediaServices\Models\Program', 'program');
+        $programId = $program->getId();
+        Validate::notNull($programId, "programId");
+
+        return $this->_sendOperation($program, "Programs('{$programId}')",
+                    Resources::HTTP_MERGE, [Resources::STATUS_ACCEPTED, Resources::STATUS_NO_CONTENT]);
+    }
+
+    /**
+     * Update a Program.
+     *
+     * @param WindowsAzure\MediaServices\Models\Program $program Program data
+     *
+     * @return WindowsAzure\MediaServices\Models\Program the updated program
+     */
+    public function updateProgram($program)
+    {
+        $op = $this->sendUpdateProgramOperation($program);
+
+        // waiting for create operation finishes
+        $op = $this->awaitOperation($op);
+
+        if ($operation->getState() != OperationState::Succeeded) {
+            return null;
+        }
+
+        // get and return the createProgram
+        return $this->getProgram($op->getTargetEntityId());
+    }
+
+    /**
+     * Delete Program.
+     *
+     * @param WindowsAzure\MediaServices\Models\Program|string $program Program data or program Id
+     *
+     * @return none
+     */
+    public function sendDeleteProgramOperation($program)
+    {
+        $programId = Utilities::getEntityId(
+            $program,
+            'WindowsAzure\MediaServices\Models\Program'
+        );
+
+        return $this->_sendOperation(null, "Programs('{$programId}')", Resources::HTTP_DELETE);
+    }
+
+    /**
+     * Delete a Program.
+     *
+     * @param WindowsAzure\MediaServices\Models\Program|string $program Program data or program Id
+     *
+     * @return bool true if succeeded
+     */
+    public function deleteProgram($program)
+    {
+        $op = $this->sendDeleteProgramOperation($program);
+
+        // waiting for delete operation finishes
         $op = $this->awaitOperation($op);
 
         // true if succeeded
