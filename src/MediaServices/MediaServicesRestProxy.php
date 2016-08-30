@@ -3164,7 +3164,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $body = json_encode([
             'duration' => $duration,
             'cueId' => $cueId,
-            'showSlate' => $showSlate
+            'showSlate' => ($showSlate) ? 'true' : 'false'
         ]);
         return $this->_sendOperation($body, "Channels('{$channelId}')/StartAdvertisement",
                     Resources::HTTP_POST, Resources::STATUS_ACCEPTED, $headers);
@@ -3177,7 +3177,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return none
      */
-    public function sendEndAdvertisementChannelOperation($channel)
+    public function sendEndAdvertisementChannelOperation($channel, $cueId)
     {
         $channelId = Utilities::getEntityId(
             $channel,
@@ -3186,7 +3186,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $headers = array(
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
         );
-        return $this->_sendOperation(null, "Channels('{$channelId}')/EndAdvertisement",
+        $body = json_encode([
+            'cueId' => $cueId
+        ]);
+        return $this->_sendOperation($body, "Channels('{$channelId}')/EndAdvertisement",
                     Resources::HTTP_POST, Resources::STATUS_ACCEPTED, $headers);
     }
 
@@ -3251,7 +3254,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         // waiting for create operation finishes
         $op = $this->awaitOperation($op);
 
-        if ($operation->getState() != OperationState::Succeeded) {
+        if ($op->getState() != OperationState::Succeeded) {
             return null;
         }
 
@@ -3273,12 +3276,12 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         // waiting for create operation finishes
         $op = $this->awaitOperation($op);
 
-        if ($operation->getState() != OperationState::Succeeded) {
+        if ($op->getState() != OperationState::Succeeded) {
             return null;
         }
 
         // get and return the createChannel
-        return $this->getChannel($op->getTargetEntityId());
+        return $this->getChannel($channel->getId());
     }
 
     /**
@@ -3296,7 +3299,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($operation->getState() == OperationState::Succeeded);
+        return ($op->getState() == OperationState::Succeeded);
     }
 
     /**
@@ -3314,7 +3317,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($operation->getState() == OperationState::Succeeded);
+        return ($op->getState() == OperationState::Succeeded);
     }
 
     /**
@@ -3332,7 +3335,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($operation->getState() == OperationState::Succeeded);
+        return ($op->getState() == OperationState::Succeeded);
     }
 
     /**
@@ -3350,7 +3353,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($operation->getState() == OperationState::Succeeded);
+        return ($op->getState() == OperationState::Succeeded);
     }
 
     /**
@@ -3368,7 +3371,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($operation->getState() == OperationState::Succeeded);
+        return ($op->getState() == OperationState::Succeeded);
     }
 
     /**
@@ -3378,15 +3381,15 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return bool true if succeeded
      */
-    public function endAdvertisementChannel($channel)
+    public function endAdvertisementChannel($channe, $cueIdl)
     {
-        $op = $this->sendEndAdvertisementChannelOperation($channel);
+        $op = $this->sendEndAdvertisementChannelOperation($channel, $cueId);
 
         // waiting for create operation finishes
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($operation->getState() == OperationState::Succeeded);
+        return ($op->getState() == OperationState::Succeeded);
     }
 
     /**
@@ -3404,7 +3407,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($operation->getState() == OperationState::Succeeded);
+        return ($op->getState() == OperationState::Succeeded);
     }
 
     /**
@@ -3422,7 +3425,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($operation->getState() == OperationState::Succeeded);
+        return ($op->getState() == OperationState::Succeeded);
     }
 
     /**
@@ -3535,7 +3538,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($operation->getState() == OperationState::Succeeded);
+        return ($op->getState() == OperationState::Succeeded);
     }
 
     /**
@@ -3553,7 +3556,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($operation->getState() == OperationState::Succeeded);
+        return ($op->getState() == OperationState::Succeeded);
     }
 
     /**
@@ -3587,7 +3590,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         // waiting for create operation finishes
         $op = $this->awaitOperation($op);
 
-        if ($operation->getState() != OperationState::Succeeded) {
+        if ($op->getState() != OperationState::Succeeded) {
             return null;
         }
 
@@ -3627,6 +3630,6 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($operation->getState() == OperationState::Succeeded);
+        return ($op->getState() == OperationState::Succeeded);
     }
 }

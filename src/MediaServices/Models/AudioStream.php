@@ -28,7 +28,7 @@ namespace WindowsAzure\MediaServices\Models;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * Represents AudioStreams ComplexType object used in media services.
+ * Represents AudioStream ComplexType object used in media services.
  *
  * @category  Microsoft
  *
@@ -40,7 +40,7 @@ use WindowsAzure\Common\Internal\Validate;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class AudioStreams
+class AudioStream
 {
     /**
      * AudioStreams Index.
@@ -48,13 +48,6 @@ class AudioStreams
      * @var int
      */
     private $_index;
-
-	/**
-     * AudioStreams Name
-     *
-     * @var string
-     */
-    private $_name;
 
     /**
      * AudioStreams Language
@@ -86,6 +79,16 @@ class AudioStreams
     }
 
     /**
+     * Return a list of fields that must be sent (even if it's null or zero).
+     *
+     * @return string[]
+     */
+    public function requiredFields()
+    {
+        return ['Index'];
+    }
+
+    /**
      * Fill AudioStreams from array.
      *
      * @param array $options Array containing values for object properties
@@ -95,11 +98,6 @@ class AudioStreams
         if (isset($options['Index'])) {
             Validate::isInteger($options['Index'], 'options[Index]');
             $this->_index = (int) $options['Index'];
-        }
-
-	    if (isset($options['Name'])) {
-            Validate::isString($options['Name'], 'options[Name]');
-            $this->_name = $options['Name'];
         }
 
         if (isset($options['Language'])) {
@@ -126,26 +124,6 @@ class AudioStreams
     public function setIndex($value)
     {
         $this->_index = $value;
-    }
-
-    /**
-     * Get the AudioStreams Name.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-
-    /**
-     * Set the AudioStreams Name.
-     *
-     * @param string $value AudioStreams Name.
-     */
-    public function setName($value)
-    {
-        $this->_name = $value;
     }
 
     /**

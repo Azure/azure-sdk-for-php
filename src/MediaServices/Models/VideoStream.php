@@ -49,13 +49,6 @@ class VideoStream
      */
     private $_index;
 
-	/**
-     * VideoStream Name.
-     *
-     * @var string
-     */
-    private $_name;
-
     /**
      * Create VideoStream from array.
      *
@@ -79,6 +72,16 @@ class VideoStream
     }
 
     /**
+     * Return a list of fields that must be sent (even if it's null or zero).
+     *
+     * @return string[]
+     */
+    public function requiredFields()
+    {
+        return ['Index'];
+    }
+
+    /**
      * Fill VideoStream from array.
      *
      * @param array $options Array containing values for object properties
@@ -88,10 +91,6 @@ class VideoStream
         if (isset($options['Index'])) {
             Validate::isInteger($options['Index'], 'options[Index]');
             $this->_index = (int) $options['Index'];
-        }
-	    if (isset($options['Name'])) {
-            Validate::isString($options['Name'], 'options[Name]');
-            $this->_name = $options['Name'];
         }
     }
 
@@ -113,26 +112,6 @@ class VideoStream
     public function setIndex($value)
     {
         $this->_index = $value;
-    }
-
-    /**
-     * Get the VideoStream Name.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->_name;
-    }
-
-    /**
-     * Set the VideoStream Name.
-     *
-     * @param string $value VideoStream Name.
-     */
-    public function setName($value)
-    {
-        $this->_name = $value;
     }
 }
 

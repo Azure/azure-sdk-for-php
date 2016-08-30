@@ -572,4 +572,30 @@ class TestResources
                 </StreamIndex>
                 </SmoothStreamingMedia>';
     }
+
+    public static function getClientAccessPolicy()
+    {
+        return '<?xml version="1.0" encoding="utf-8"?>
+                <access-policy>
+                <cross-domain-access>
+                    <policy>
+                    <allow-from http-request-headers="*">
+                        <domain uri="http://*" />
+                    </allow-from>
+                    <grant-to>
+                        <resource path="/" include-subpaths="false" />
+                    </grant-to>
+                    </policy>
+                </cross-domain-access>
+                </access-policy>';
+    }
+
+    public static function getCrossDomainPolicy()
+    {
+        return '<?xml version="1.0" ?>
+                <!DOCTYPE cross-domain-policy SYSTEM "http://www.macromedia.com/xml/dtds/cross-domain-policy.dtd">
+                <cross-domain-policy>
+                <allow-access-from domain="*" />
+                </cross-domain-policy>';
+    }
 }

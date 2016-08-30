@@ -169,12 +169,6 @@ class Channel
      */
     public function fromArray($options)
     {
-        // if (isset($options['operation-id'])) {
-        //     print "OPERATION ID " . $options['operation-id'];
-        //     Validate::isString($options['operation-id'], 'options[operation-id]');
-        //     $this->_operation_id = $options['operation-id'];
-        // }
-
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
             $this->_id = $options['Id'];
@@ -224,8 +218,6 @@ class Channel
             Validate::isArray($options['CrossSiteAccessPolicies'], 'options[CrossSiteAccessPolicies]');
             $this->_crossSiteAccessPolicies = CrossSiteAccessPolicies::createFromOptions($options['CrossSiteAccessPolicies']);
         }
-
-        //TODO: Programs -- navigation property
 
         if (isset($options['EncodingType'])) {
             Validate::isString($options['EncodingType'], 'options[EncodingType]');
@@ -317,6 +309,28 @@ class Channel
     public function setDescription($value)
     {
         $this->_description = $value;
+    }
+
+    /**
+     * Get channel EncodingType.
+     *
+     * @return string
+     */
+    public function getEncodingType()
+    {
+        return $this->_encodingType;
+    }
+
+    /**
+     * Set channel EncodingType.
+     *
+     * @param string $value CrossSiteAccessPolicies
+     *
+     * @return none
+     */
+    public function setEncodingType($value)
+    {
+        $this->_encodingType = $value;
     }
 
 	/**
@@ -425,28 +439,6 @@ class Channel
     public function setCrossSiteAccessPolicies($value)
     {
         $this->_crossSiteAccessPolicies = $value;
-    }
-
-    /**
-     * Get channel EncodingType.
-     *
-     * @return string
-     */
-    public function getEncodingType()
-    {
-        return $this->_encodingType;
-    }
-
-    /**
-     * Set channel EncodingType.
-     *
-     * @param string $value CrossSiteAccessPolicies
-     *
-     * @return none
-     */
-    public function setEncodingType($value)
-    {
-        $this->_encodingType = $value;
     }
 
     /**

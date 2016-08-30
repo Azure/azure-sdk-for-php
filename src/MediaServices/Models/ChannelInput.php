@@ -101,8 +101,8 @@ class ChannelInput
     public function fromArray($options)
     {
         if (!empty($options['KeyFrameInterval'])) {
-            Validate::isDateInterval($options['KeyFrameInterval'], 'options[KeyFrameInterval]');
-            $this->_keyFrameInterval = new \DateInterval($options['KeyFrameInterval']);
+            Validate::isString($options['KeyFrameInterval'], 'options[KeyFrameInterval]');
+            $this->_keyFrameInterval = $options['KeyFrameInterval'];
         }
 
         if (isset($options['StreamingProtocol'])) {
@@ -124,9 +124,29 @@ class ChannelInput
     }
 
     /**
+     * Get the channel input AccessControl.
+     *
+     * @return mixing AccessControl
+     */
+    public function getAccessControl()
+    {
+        return $this->_accessControl;
+    }
+
+    /**
+     * Set the channel input AccessControl.
+     *
+     * @param mixing $value AccessControl 
+     */
+    public function setAccessControl($value)
+    {
+        $this->_accessControl = $value;
+    }
+
+    /**
      * Get the channel input KeyFrameInterval.
      *
-     * @return \DateInterval
+     * @return string
      */
     public function getKeyFrameInterval()
     {
@@ -136,7 +156,7 @@ class ChannelInput
     /**
      * Set the channel input KeyFrameInterval.
      *
-     * @param \DateInterval $value channel input KeyFrameInterval
+     * @param string $value channel input KeyFrameInterval
      */
     public function setKeyFrameInterval($value)
     {
@@ -161,26 +181,6 @@ class ChannelInput
     public function setStreamingProtocol($value)
     {
         $this->_streamingProtocol = $value;
-    }
-
-    /**
-     * Get the channel input AccessControl.
-     *
-     * @return mixing AccessControl
-     */
-    public function getAccessControl()
-    {
-        return $this->_accessControl;
-    }
-
-    /**
-     * Set the channel input AccessControl.
-     *
-     * @param mixing $value AccessControl 
-     */
-    public function setAccessControl($value)
-    {
-        $this->_accessControl = $value;
     }
 
     /**

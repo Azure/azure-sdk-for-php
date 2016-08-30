@@ -54,7 +54,7 @@ class ChannelEncoding
      *
      * @var bool
      */
-    private $_ignoreCea708ClosedCaptions;
+    private $_ignoreCea708ClosedCaptions = false;
 
 	/**
      * Encoding VideoStreams.
@@ -102,6 +102,16 @@ class ChannelEncoding
     }
 
     /**
+     * Return a list of fields that must be sent (even if it's null or zero).
+     *
+     * @return string[]
+     */
+    public function requiredFields()
+    {
+        return ['IgnoreCea708ClosedCaptions'];
+    }
+
+    /**
      * Fill Encoding from array.
      *
      * @param array $options Array containing values for object properties
@@ -114,21 +124,21 @@ class ChannelEncoding
         }
 
 	    if (isset($options['IgnoreCea708ClosedCaptions'])) {
-            Validate::isBoolean($options['IgnoreCea708ClosedCaptions'], 'options[IgnoreCea708ClosedCaptions]');
+            Validate::isString($options['IgnoreCea708ClosedCaptions'], 'options[IgnoreCea708ClosedCaptions]');
             $this->_ignoreCea708ClosedCaptions = (bool) $options['IgnoreCea708ClosedCaptions'];
         }
 
         if (!empty($options['VideoStreams'])) {
             Validate::isArray($options['VideoStreams'], 'options[VideoStreams]');
             foreach ($options['VideoStreams'] as $videoStream) {
-                $this->_videoStream[] = VideoStreams::createFromOptions($videoStream);
+                $this->_videoStreams[] = VideoStream::createFromOptions($videoStream);
             }
         }
 
         if (!empty($options['AudioStreams'])) {
             Validate::isArray($options['AudioStreams'], 'options[AudioStreams]');
             foreach ($options['AudioStreams'] as $audioStream) {
-                $this->_audiostreams[] = AudioStream::createFromOptions($audioStream);
+                $this->_audioStreams[] = AudioStream::createFromOptions($audioStream);
             }
         }
 
@@ -161,7 +171,7 @@ class ChannelEncoding
     /**
      * Get the Encoding IgnoreCea708ClosedCaptions.
      *
-     * @return bool
+     * @return string
      */
     public function getIgnoreCea708ClosedCaptions()
     {
@@ -171,7 +181,7 @@ class ChannelEncoding
     /**
      * Set the Encoding IgnoreCea708ClosedCaptions.
      *
-     * @param bool $value Encoding IgnoreCea708ClosedCaptions.
+     * @param string $value Encoding IgnoreCea708ClosedCaptions.
      */
     public function setIgnoreCea708ClosedCaptions($value)
     {

@@ -450,6 +450,35 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         return $httpClient->send($filters, $url);
     }
 
+    public function uploadSingleFile($fileName, $fileContent)
+    {
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName($fileName);
+        $asset = $this->createAsset($asset);
+
+        $access = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME.$this->createSuffix());
+        $access->setDurationInMinutes(30);
+        $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
+        $access = $this->createAccessPolicy($access);
+        
+        $locator = new Locator($asset, $access, Locator::TYPE_SAS);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME.$this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+        
+        $this->restProxy->uploadAssetFile($locator, $fileName, $fileContent); 
+        $this->restProxy->createFileInfos($asset);
+
+        $list = $this->restProxy->getAssetAssetFileList($asset);
+        if (isset($list[0])) {
+            $list[0]->setIsPrimary(true);
+            $this->restProxy->updateAssetFile($list[0]);
+        } else {
+            throw new Exception("unable to find the asset file");
+        }
+        return $asset;
+    }
+
     /**
      * Verifies if $array contains an entity with id $id.
      *
