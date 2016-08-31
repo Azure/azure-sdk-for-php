@@ -3381,7 +3381,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return bool true if succeeded
      */
-    public function endAdvertisementChannel($channe, $cueIdl)
+    public function endAdvertisementChannel($channel, $cueIdl)
     {
         $op = $this->sendEndAdvertisementChannelOperation($channel, $cueId);
 
@@ -3595,7 +3595,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         }
 
         // get and return the createProgram
-        return $this->getProgram($op->getTargetEntityId());
+        return $this->getProgram($program->getId());
     }
 
     /**
@@ -3612,7 +3612,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             'WindowsAzure\MediaServices\Models\Program'
         );
 
-        return $this->_sendOperation(null, "Programs('{$programId}')", Resources::HTTP_DELETE);
+        return $this->_sendOperation(null, "Programs('{$programId}')", Resources::HTTP_DELETE,
+                                        Resources::STATUS_NO_CONTENT);
     }
 
     /**

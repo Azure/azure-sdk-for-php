@@ -46,26 +46,26 @@ class ProgramState
      *
      * @var int
      */
-    const Stopped = 0;
+    const Stopped = "Stopped";
 
     /**
      * Program state "Starting". Program is starting.
      *
      * @var int
      */
-    const Starting = 1;
+    const Starting = "Starting";
 
     /**
      * Program state "Running". Program is running.
      *
      * @var int
      */
-    const Running = 2;
+    const Running = "Running";
 
     /**
      * Program state "Stopping". Program is stopping.
      *
      * @var int
      */
-    const Stopping = 3;
+    const Stopping = "Stopping";
 }

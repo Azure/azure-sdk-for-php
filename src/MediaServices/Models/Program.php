@@ -339,4 +339,24 @@ class Program
     {
         return $this->_state;
     }
+
+    /**
+     * Get the program parent channel Id
+     *
+     * @return string channel Id
+     */
+    public function getChannelId()
+    {
+        return $this->_channelId;
+    }
+
+    /**
+     * Set the program parent channel Id
+     *
+     * @param string $value channel Id
+     */
+    public function setChannelId($value)
+    {
+        $this->_channelId = $value;
+    }
 }

@@ -72,6 +72,8 @@ use WindowsAzure\MediaServices\Models\AudioStream;
 use WindowsAzure\MediaServices\Models\VideoStream;
 use WindowsAzure\MediaServices\Models\ChannelEncodingPresets;
 use WindowsAzure\MediaServices\Models\AdMarkerSources;
+use WindowsAzure\MediaServices\Models\Program;
+use WindowsAzure\MediaServices\Models\ProgramState;
 use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplateSerializer;
 use WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate;
 use WindowsAzure\MediaServices\Templates\TokenType;
@@ -2332,7 +2334,6 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyOption
      * @group livefeatures
      */
     public function testGetOperationNotFound()
@@ -2350,7 +2351,6 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::sendCreateChannelOperation
      * @group livefeatures
      * @group channel
      */
@@ -2400,7 +2400,6 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::sendCreateChannelOperation
      * @group livefeatures
      * @group channel
      */
@@ -2460,7 +2459,6 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createChannel
      * @group livefeatures
      * @group channel
      */
@@ -2525,7 +2523,6 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createChannel
      * @group livefeatures
      * @group channel
      */
@@ -2593,7 +2590,6 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createChannel
      * @group livefeatures
      * @group channel
      */
@@ -2679,7 +2675,6 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createChannel
      * @group livefeatures
      * @group channel
      */
@@ -2756,7 +2751,6 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createChannel
      * @group livefeatures
      * @group channel
      */
@@ -2847,7 +2841,6 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createChannel
      * @group livefeatures
      * @group channel
      */
@@ -2941,11 +2934,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::sendCreateChannelOperation
      * @group livefeatures
      * @group channel
-     * @group livesync
-     * @group current
      */
     public function testSyncCreateGetDeleteValidateChannel()
     {
@@ -2979,7 +2969,6 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createChannel
      * @group livefeatures
      * @group channel
      * @group livesync
@@ -3031,9 +3020,16 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // assert that the channel is running
         $this->assertEquals($channelResult->getState(), ChannelState::Running);
 
+        // wait for 5 seconds before to reset the channel
+        sleep(5);
+
+        // reset the channel
+        $this->restProxy->resetChannel($channelResult);
+
         // show slate on the channel
         $operation = $this->restProxy->showSlateChannel($channelResult->getId(), 
                                             "PT30S", $slateAsset->getId());
+
         // wait for 5 seconds before to send the end advertisement signal.
         sleep(5);
 
@@ -3067,7 +3063,130 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         }
     }
 
+    /**
+     * @group livefeatures
+     * @group program
+     */
+    public function testUpdatetProgramOperations()
+    {
+	    // Setup
+        $channelName = TestResources::MEDIA_SERVICES_CHANNEL_NAME . $this->createSuffix();
+        $channel = $this->makeChannelEncodingTypeStandard($channelName);
+
+        $channel = $this->restProxy->createChannel($channel);
+        $program = $this->restProxy->createProgram($this->makeProgram("Prog", $channel));
+
+        // test
+        $program->setDescription("Alternate Description");
+        $programResult = $this->restProxy->updateProgram($program);
+
+        // assert
+        $this->assertEqualsProgram($program, $programResult);
+
+        // teardown
+        $this->restProxy->deleteProgram($program);
+        $this->restProxy->stopChannel($channel);
+        $this->restProxy->deleteChannel($channel);
+    }
+
+    /**
+     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createChannel
+     * @group livefeatures
+     * @group channel
+     * @group program
+     */
+    public function testRoundTripProgramOperations()
+    {
+        // Upload image
+        $resource = fopen(__DIR__."/resources/default_slate_image_media_services.jpg", 'r');
+        $slateAsset = $this->uploadSingleFile("slate_program.jpg", $resource);
+
+	    // Setup
+        $channelName = TestResources::MEDIA_SERVICES_CHANNEL_NAME . $this->createSuffix();
+        $channel = $this->makeChannelEncodingTypeStandard($channelName);
+        $channelResult = $this->restProxy->createChannel($channel);
+        $this->restProxy->startChannel($channelResult);
+        $channelResult = $this->restProxy->getChannel($channelResult);
+
+        // assert that the channel is running
+        $this->assertEquals($channelResult->getState(), ChannelState::Running);
+
+        // wait for 5 seconds before to create a program
+        sleep(5);
+
+        // Test
+        $program = $this->makeProgram("Progname", $channelResult);
+        $program = $this->restProxy->createProgram($program);
+
+        // wait for 5 seconds before to start the program
+        sleep(5);
+
+        $this->restProxy->startProgram($program);
+
+        // assert that the program is in running state
+        $program = $this->restProxy->getProgram($program);
+        $this->assertEquals($program->getState(), ProgramState::Running);
+
+        // assert that the channel has only one program and it is the created one
+        $programList = $this->restProxy->getProgramList($channelResult);
+        $this->assertEquals(1, count($programList));
+        foreach($programList as $p) {
+            $this->assertEquals($program->getId(), $p->getId());
+        }
+
+        // wait for 5 seconds before to stop the program
+        sleep(5);
+
+        $this->restProxy->stopProgram($program);
+
+        // assert that the program is in running state
+        $program = $this->restProxy->getProgram($program);
+        $this->assertEquals($program->getState(), ProgramState::Stopped);
+
+        // wait for 5 seconds before to delete the program
+        sleep(5);
+
+        $program = $this->restProxy->deleteProgram($program);
+
+        // assert that the channel has no programs
+        $programList = $this->restProxy->getProgramList($channelResult);
+        $this->assertEquals(0, count($programList));
+
+        // teardown
+        // stop & delete the channel
+        $this->restProxy->stopChannel($channelResult);
+        $this->restProxy->deleteChannel($channelResult);
+
+        // assert the list should not contains the channel
+        $list = $this->restProxy->getChannelList();
+        foreach($list as $channel) {
+            $this->assertFalse($channel->getId() == $channelId);
+        }
+    }
+
     /// Utils
+    private function makeProgram($name, $channel) {
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME.$this->createSuffix());
+        $asset = $this->createAsset($asset);
+
+        $policy = new AssetDeliveryPolicy();
+        $policy->setName("Clear Policy");
+        $policy->setAssetDeliveryProtocol(AssetDeliveryProtocol::SMOOTH_STREAMING | AssetDeliveryProtocol::DASH | AssetDeliveryProtocol::HLS);
+        $policy->setAssetDeliveryPolicyType(AssetDeliveryPolicyType::NO_DYNAMIC_ENCRYPTION);
+
+        $policy = $this->createAssetDeliveryPolicy($policy);
+        $this->restProxy->linkDeliveryPolicyToAsset($asset, $policy);
+
+        $program = new Program();
+        $program->setName($name);
+        $program->setAssetId($asset->getId());
+        $program->setArchiveWindowLength(new \DateInterval("PT1H"));
+        $program->setChannelId($channel->getId());
+
+        return $program;
+    }
+
     private function makeChannelEncodingTypeNone($name) {
         $channel = new Channel();
         $channel->setName($name);
@@ -3415,5 +3534,15 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEqualsEncoding($expected->getEncoding(), $actual->getEncoding());
         $this->assertEqualsSlate($expected->getSlate(), $actual->getSlate());
     }
-     
+
+    public function assertEqualsProgram($expected, $actual) {
+        // server side generated values are not verified
+        $this->assertEquals($expected->getName(), $actual->getName());
+        $this->assertEquals($expected->getDescription(), $actual->getDescription());
+        $this->assertEquals($expected->getAssetId(), $actual->getAssetId());
+        $this->assertEquals($expected->getChannelId(), $actual->getChannelId());
+        $this->assertEquals($expected->getArchiveWindowLength(), $actual->getArchiveWindowLength());
+        $this->assertEquals($expected->getManifestName(), $actual->getManifestName());
+        $this->assertEquals($expected->getState(), $actual->getState());
+    }
 }

@@ -146,6 +146,8 @@ class ChannelInput
     /**
      * Get the channel input KeyFrameInterval.
      *
+     * Use ISO 8601 duration format. Allowed values are in the range from "PT1.9S" to "PT6.1S" 
+     *
      * @return string
      */
     public function getKeyFrameInterval()
