@@ -45,6 +45,7 @@ $language = 'English';
 $captionFormats = 'ttml;sami;webvtt';
 $generateAIB = 'true';
 $generateKeywords = 'true';
+$destinationPath = __DIR__.'/IndexerOutput';
 
 echo "Azure SDK for PHP - Media Analytics Sample (Indexer)\r\n";
 
@@ -59,6 +60,9 @@ $taskConfiguration = sprintf($indexerTaskPresetTemplate, $title, $description, $
 
 // 3 - Run indexing job to generate output asset
 $outputAsset = runIndexingJob($restProxy, $sourceAsset, $taskConfiguration);
+
+// 4 - Download output asset files
+downloadAssetFiles($restProxy, $outputAsset, $destinationPath);
 
 // Done
 echo 'Done!';
@@ -155,6 +159,38 @@ function runIndexingJob($restProxy, $asset, $taskConfiguration)
     echo "Output asset: name={$outputAsset->getName()} id={$outputAsset->getId()}\r\n";
 
     return $outputAsset;
+}
+
+function downloadAssetFiles($restProxy, $asset, $destinationPath)
+{
+    // Create destination directory if does not exist
+    if (!file_exists($destinationPath)) {
+        mkdir($destinationPath);
+    }
+
+    // Create an Access Policy with Read permissions
+    $accessPolicy = new AccessPolicy('DownloadAccessPolicy');
+    $accessPolicy->setDurationInMinutes(60.0);
+    $accessPolicy->setPermissions(AccessPolicy::PERMISSIONS_READ);
+    $accessPolicy = $restProxy->createAccessPolicy($accessPolicy);
+
+    // Create a SAS Locator for the Asset
+    $sasLocator = new Locator($asset, $accessPolicy, Locator::TYPE_SAS);
+    $sasLocator->setStartTime(new \DateTime('now -5 minutes'));
+    $sasLocator = $restProxy->createLocator($sasLocator);
+
+    $files = $restProxy->getAssetAssetFileList($asset);
+
+    // Download Asset Files
+    foreach ($files as $file) {
+        echo "Downloading {$file->getName()} output file...";
+        $restProxy->downloadAssetFile($file, $sasLocator, $destinationPath);
+        echo "Done!\r\n";
+    }
+
+    // Clean up Locator and Access Policy
+    $restProxy->deleteLocator($sasLocator);
+    $restProxy->deleteAccessPolicy($accessPolicy);
 }
 
 ?>

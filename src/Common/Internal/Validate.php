@@ -232,6 +232,22 @@ class Validate
         }
     }
 
+     /**
+     * Throws exception if the provided path does not exist.
+     *
+     * @param string $path The path to check.
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return none
+     */
+    public static function pathExists($path)
+    {
+        if (!file_exists($path)) {
+            throw new \InvalidArgumentException(sprintf(Resources::INVALID_PATH_MSG, $path));
+        }
+    }
+
     /**
      * Throws exception if the object is not of the specified class type.
      *

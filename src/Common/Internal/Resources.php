@@ -77,6 +77,7 @@ class Resources
     const NOT_IMPLEMENTED_MSG = 'This method is not implemented.';
     const NULL_OR_EMPTY_MSG = "'%s' can't be NULL or empty.";
     const NULL_MSG = "'%s' can't be NULL.";
+    const INVALID_PATH_MSG = "Provided path does not exist: '%s'.";
     const INVALID_URL_MSG = 'Provided URL is invalid.';
     const INVALID_HT_MSG = 'The header type provided is invalid.';
     const INVALID_EDM_MSG = 'The provided EDM type is invalid.';

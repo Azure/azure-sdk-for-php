@@ -1065,7 +1065,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             'locator'
         );
         Validate::isString($name, 'name');
-        Validate::notNull($file, 'body');
+        Validate::notNull($file, 'file');
 
         $urlFile = $locator->getBaseUri().'/'.$name;
         $url = $urlFile.$locator->getContentAccessComponent();
@@ -1075,6 +1075,37 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         } else {
             $this->_uploadAssetFileFromString($url, $file);
         }
+    }
+
+     /**
+     * Download asset file to a local path.
+     *
+     * @param WindowsAzure\MediaServices\Models\AssetFile $assetFile Asset file to download
+     * @param WindowsAzure\MediaServices\Models\Locator   $locator   Read locator for
+     *                                                               downloading the asset file
+     * @param string                                      $path      Destination root path
+     *
+     * @return none
+     */
+    public function downloadAssetFile($assetFile, $locator, $path)
+    {
+        Validate::isA(
+            $assetFile,
+            'WindowsAzure\MediaServices\Models\AssetFile',
+            'assetFile'
+        );
+        Validate::isA(
+            $locator,
+            'WindowsAzure\Mediaservices\Models\Locator',
+            'locator'
+        );
+        Validate::isString($path, 'path');
+        Validate::pathExists($path);
+
+        $urlFile = $locator->getBaseUri().'/'.$assetFile->getName();
+        $url = $urlFile.$locator->getContentAccessComponent();
+
+        //TODO
     }
 
     /***
