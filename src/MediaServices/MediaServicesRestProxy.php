@@ -1102,10 +1102,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         Validate::isString($path, 'path');
         Validate::pathExists($path);
 
-        $urlFile = $locator->getBaseUri().'/'.$assetFile->getName();
-        $url = $urlFile.$locator->getContentAccessComponent();
+        $downloadUrl = $locator->getBaseUri().'/'.$assetFile->getName().$locator->getContentAccessComponent();
+        $filePath = $path.'/'.$assetFile->getName();
 
-        //TODO
+        return file_put_contents($filePath, fopen($downloadUrl, 'r'));
     }
 
     /***

@@ -34,28 +34,30 @@ use WindowsAzure\MediaServices\Models\Task;
 use WindowsAzure\MediaServices\Models\Job;
 use WindowsAzure\MediaServices\Models\TaskOptions;
 
-// read user settings from config
+// Read user settings from config
 include_once 'userconfig.php';
 
 $mediaFileName = __DIR__.'/Azure-Video.wmv';
+$destinationPath = __DIR__.'/IndexerOutput';
 $indexerTaskPresetTemplate = file_get_contents(__DIR__.'/indexerTaskPresetTemplate.xml');
+
+// Configuration parameters for Indexer task
 $title = '';
 $description = '';
 $language = 'English';
 $captionFormats = 'ttml;sami;webvtt';
 $generateAIB = 'true';
 $generateKeywords = 'true';
-$destinationPath = __DIR__.'/IndexerOutput';
 
 echo "Azure SDK for PHP - Media Analytics Sample (Indexer)\r\n";
 
-// 0 - set up the MediaServicesService object to call into the Media Services REST API.
+// 0 - Set up the MediaServicesService object to call into the Media Services REST API.
 $restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($account, $secret));
 
 // 1 - Upload the mezzanine
 $sourceAsset = uploadFileAndCreateAsset($restProxy, $mediaFileName);
 
-// 2 - Create indexing task configuration 
+// 2 - Create indexing task configuration based on parameters
 $taskConfiguration = sprintf($indexerTaskPresetTemplate, $title, $description, $language, $captionFormats, $generateAIB, $generateKeywords);
 
 // 3 - Run indexing job to generate output asset
