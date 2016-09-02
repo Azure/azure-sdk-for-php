@@ -22,7 +22,7 @@
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-require_once __DIR__.'/../../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
@@ -35,7 +35,7 @@ $reservedUnits = 1;
 $reservedUnitsType = EncodingReservedUnitType::S1;
 $types = array('S1', 'S2', 'S3');
 
-echo "Azure SDK for PHP - Scale Encoding Units Sample\r\n";
+echo "Azure SDK for PHP - Scale Encoding Units Sample".PHP_EOL;
 
 // 1. set up the MediaServicesService object to call into the Media Services REST API
 $restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($account, $secret));
@@ -43,7 +43,7 @@ $restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new Medi
 // 2. retrieve the current configuration of Encoding Units
 $encodingUnits = $restProxy->getEncodingReservedUnit();
 
-echo 'Current Encoding Reserved Units: '.$encodingUnits->getCurrentReservedUnits().' units ('.$types[$encodingUnits->getReservedUnitType()].")\r\n";
+echo 'Current Encoding Reserved Units: '.$encodingUnits->getCurrentReservedUnits().' units ('.$types[$encodingUnits->getReservedUnitType()].")".PHP_EOL;
 echo 'Updating to: '.$reservedUnits.' units ('.$types[$reservedUnitsType].') ...';
 
 // 3. set up the new encoding units settings
@@ -56,4 +56,4 @@ $restProxy->updateEncodingReservedUnit($encodingUnits);
 // 5. reload the current configuration and show the results
 $encodingUnits = $restProxy->getEncodingReservedUnit();
 
-echo "\r\nUpdated Encoding Reserved Units: ".$encodingUnits->getCurrentReservedUnits().' units ('.$types[$encodingUnits->getReservedUnitType()].")\r\n";
+echo PHP_EOL."Updated Encoding Reserved Units: ".$encodingUnits->getCurrentReservedUnits().' units ('.$types[$encodingUnits->getReservedUnitType()].")".PHP_EOL;

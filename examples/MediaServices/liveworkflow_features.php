@@ -22,7 +22,7 @@
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-require_once __DIR__.'/../../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
@@ -80,7 +80,7 @@ use WindowsAzure\MediaServices\Templates\TokenType;
 // read user settings from config
 include_once 'userconfig.php';
 
-// allow the script to run longer than 600 seconds (php default)
+// allow the script to run longer than 600 seconds (overrides userconfig.php)
 set_time_limit(0);
 
 $options = new StdClass();
@@ -90,7 +90,8 @@ $options->channelName = 'phpsdk-sample';
 $options->programName = 'program-sample';
 
 // Encoding Options
-$options->encodingType = EncodingType::None;
+$options->encodingType = EncodingType::Standard;
+$options->ingestProtocol = StreamingProtocol::RTMP;
 
 // Encoding Standard Options 
 $options->archiveWindowLenght = new \DateInterval("PT1H");
@@ -108,37 +109,42 @@ echo "Azure SDK for PHP - Live Features".PHP_EOL;
 // 0 - set up the MediaServicesService object to call into the Media Services REST API.
 $restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($account, $secret));
 
-// 1 - Create and Start new channel.
+// 1 - Create and Start new Channel.
 $channel = createAndStartChannel($restProxy, $options);
 
-// 2 - Create and Start new program, also apply AES encryption if setted.
-$program = createAndStartProgram($restProxy, $channel, $options);
+// 2 - Create the Live Streaming Asset
+$assetResult = createAsset($restProxy, $options);
 
-// 3 - Display the ingest URL and the preview URL.
+// 3 - Create and Start new Program, also apply AES encryption (if set)
+$program = createAndStartProgram($restProxy, $assetResult->asset, $channel, $options);
+
+// 4 - Publish the Live Streaming Asset
+$assetResult->streamingUrl = publishLiveAsset($restProxy, $assetResult->asset);
+
+// 5 - Display the ingest URL, the preview URL, the token (if applies) and the Streaming URL
 echo "Ingest URL: {$channel->getInput()->getEndpoints()[0]->getUrl()}".PHP_EOL;
 echo "Preview URL: {$channel->getPreview()->getEndpoints()[0]->getUrl()}".PHP_EOL;
-if (isset($options->generatedTestToken)) {
-    echo "Token: Bearer {$options->generatedTestToken}".PHP_EOL;
+echo "Streaming URL: {$assetResult->streamingUrl}".PHP_EOL;
+if (isset($assetResult->generatedTestToken)) {
+    echo "Token: Bearer {$assetResult->generatedTestToken}".PHP_EOL;
 }
 
-// 4 - Publish the asset
-publishLiveAsset($restProxy, getAssetByProgram($restProxy, $program));
-
-// 5 - Wait for user decide to shutdown.
-echo "Press ENTER to shutdown the live stream and cleanup resources.".PHP_EOL;
+// 6 - Wait for user decide to shutdown.
+echo PHP_EOL."Press ENTER to shutdown the live stream and cleanup resources.".PHP_EOL;
 $handle = fopen ("php://stdin","r");
 $line = fgets($handle);
 
-// 6 - Cleanup the entities.
-doCleanup($restProxy, $channel, $program, $options);
+// 7 - Cleanup the entities.
+cleanup($restProxy, $channel, $program, $options);
 
-exit(1);
+exit(0);
 
 ////////////////////
 // Main methods   //
 ////////////////////
 
-function createAndStartChannel($restProxy, $options) {
+function createAndStartChannel($restProxy, $options)
+{
     // 1 - prepare the channel template 
     $channelData = createChannelData($options);
 
@@ -155,20 +161,30 @@ function createAndStartChannel($restProxy, $options) {
     return $restProxy->getChannel($channel);
 }
 
-function createAndStartProgram($restProxy, $channel, $options) {
-    // 1 - prepare the program asset 
-    $asset = new Asset(Asset::OPTIONS_NONE);
-    $asset->setName($options->programName);
-    $asset = $restProxy->createAsset($asset);
+function createAsset($restProxy, $options)
+{
+    $result = new StdClass();
 
-    // 2 - create & apply asset delivey policy
+    // 1 - prepare the program asset 
+    $result->asset = new Asset(Asset::OPTIONS_NONE);
+    $result->asset->setName($options->programName);
+    $result->asset = $restProxy->createAsset($result->asset);
+
+    // 2 - create & apply asset delivey policy + AES encryption
     if ($options->aesDynamicEncription) {
-        applyAesDynamicEncription($restProxy, $asset, $options);
+        echo "Applying AES Dynamic Encryption... ";
+        $result->generatedTestToken = applyAesDynamicEncryption($restProxy, $result->asset, $options);
+        echo "Done!".PHP_EOL;
     } else {
-        applyNonDynamicEncription($restProxy, $asset);
+        applyNonDynamicEncription($restProxy, $result->asset);
     }
 
-    // 3 - create a new program and link to the asset and channel
+    return $result;
+}
+
+function createAndStartProgram($restProxy, $asset, $channel, $options)
+{
+    // 1 - create a new program and link to the asset and channel
     $program = new Program();
     $program->setName($options->programName);
     $program->setAssetId($asset->getId());
@@ -178,7 +194,7 @@ function createAndStartProgram($restProxy, $channel, $options) {
     echo "Creating program... ";
     $program = $restProxy->createProgram($program);
 
-    // 4 - start the program
+    // 2 - start the program
     echo "Done!".PHP_EOL."Starting program... ";
     $restProxy->startProgram($program);
     
@@ -186,7 +202,8 @@ function createAndStartProgram($restProxy, $channel, $options) {
     return $restProxy->getProgram($program);
 }
 
-function doCleanup($restProxy, $channel, $program, $options) {
+function cleanup($restProxy, $channel, $program, $options)
+{
     // cleanup program
     echo "Stopping program... ";
     $restProxy->stopProgram($program);
@@ -241,39 +258,44 @@ function doCleanup($restProxy, $channel, $program, $options) {
 // Helper methods //
 ////////////////////
 
-function applyAesDynamicEncription ($restProxy, $asset, $options) {
+function applyAesDynamicEncryption ($restProxy, $asset, $options)
+{
+    $testToken = null;
+
     // 1 - Create Content Key
     $contentKey = createEnvelopeTypeContentKey($restProxy, $asset);
 
     // 2 - Create the ContentKey Authorization Policy and Options
-    $tokenTemplateString = null;
     if ($options->tokenRestriction) {
-        $tokenTemplateString = 
-            addTokenRestrictedAuthorizationPolicy($restProxy, $contentKey, $options->tokenType);
+        // 2.1 - Apply Token restriction
+        $template = addTokenRestrictedAuthorizationPolicy($restProxy, $contentKey, $options->tokenType);
+        
+        // 2.2 - Generate Test Token
+        $testToken = generateTestToken($template, $contentKey);
     } else {
+        // 2.1 - Apply Open restriction
         addOpenAuthorizationPolicy($restProxy, $contentKey);
     }
 
     // 3 - Create the AssetDeliveryPolicy
     createAssetDeliveryPolicy($restProxy, $asset, $contentKey);
 
-    // 4 - Generate Test Token
-    if ($options->tokenRestriction) {
-        $options->generatedTestToken = generateTestToken($tokenTemplateString, $contentKey);
-    }
+    return $testToken;
 }
 
-function applyNonDynamicEncription ($restProxy, $asset) {
+function applyNonDynamicEncription ($restProxy, $asset)
+{
     $policy = new AssetDeliveryPolicy();
     $policy->setName("Clear Policy");
     $policy->setAssetDeliveryProtocol(AssetDeliveryProtocol::SMOOTH_STREAMING | AssetDeliveryProtocol::DASH | AssetDeliveryProtocol::HLS);
     $policy->setAssetDeliveryPolicyType(AssetDeliveryPolicyType::NO_DYNAMIC_ENCRYPTION);
 
     $policy = $restProxy->createAssetDeliveryPolicy($policy);
-    $restProxy->linkDeliveryPolicyToAsset($asset, $policy);
+    $restProxy->linkDeliveryPolicyToAsset($asset, $policy);    
 }
 
-function createChannelData($options) { 
+function createChannelData($options)
+{ 
 
     $channel = new Channel();
     $channel->setName($options->channelName);
@@ -283,7 +305,7 @@ function createChannelData($options) {
     $channelAccessControl = new ChannelInputAccessControl();
     $channelAccessControl->setIP(createOpenIPAccessControl());
     $channelInput->setAccessControl($channelAccessControl);
-    $channelInput->setStreamingProtocol(StreamingProtocol::RTMP);
+    $channelInput->setStreamingProtocol($options->ingestProtocol);
     $channel->setInput($channelInput);
 
     // 2 - Channel Preview
@@ -309,7 +331,8 @@ function createChannelData($options) {
     return $channel;
 }
 
-function createOpenIPAccessControl() {
+function createOpenIPAccessControl()
+{
     $iPAccessControl = new IPAccessControl();
     $iPRange = new IPRange();
     $iPRange->setName("default");
@@ -319,13 +342,10 @@ function createOpenIPAccessControl() {
     return $iPAccessControl;
 }
 
-function getAssetByProgram($restProxy, $program) {
-    return $restProxy->getAsset($program->getAssetId());
-}
-
 function publishLiveAsset($restProxy, $asset)
 {
     // 1 Get the .ISM AssetFile
+    echo "Publishing Asset...";
     $files = $restProxy->getAssetAssetFileList($asset);
     $manifestFile = null;
 
@@ -351,10 +371,9 @@ function publishLiveAsset($restProxy, $asset)
     $locator->setName('Live Locator');
     $locator = $restProxy->createLocator($locator);
 
-    // 4 Create a Smooth Streaming base URL
-    $streamingUrl = $locator->getPath().$manifestFile->getName().'/manifest';
-
-    echo "Streaming URL: {$streamingUrl}".PHP_EOL;
+    echo "Done!".PHP_EOL;
+    // 4 Return the Smooth Streaming base URL
+    return $locator->getPath().$manifestFile->getName().'/manifest';
 }
 
 function createEnvelopeTypeContentKey($restProxy, $encodedAsset)

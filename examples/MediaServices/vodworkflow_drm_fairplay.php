@@ -22,7 +22,7 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-require_once __DIR__.'/../../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
@@ -65,7 +65,7 @@ $fairPlayPFXFile = '<path to the pfx file>';
 $fairPlayPFXPassword = '<password of the pfx file>';
 $fairPlayIV = bin2hex(openssl_random_pseudo_bytes(16));
 
-echo "Azure SDK for PHP - FairPlay Dynamic Encryption Sample\r\n";
+echo "Azure SDK for PHP - FairPlay Dynamic Encryption Sample".PHP_EOL;
 
 // 0 - set up the MediaServicesService object to call into the Media Services REST API.
 $restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($account, $secret));
@@ -113,7 +113,7 @@ function uploadFileAndCreateAsset($restProxy, $mezzanineFileName)
     $asset = $restProxy->createAsset($asset);
     $assetId = $asset->getId();
 
-    echo "Asset created: name={$asset->getName()} id={$assetId}\r\n";
+    echo "Asset created: name={$asset->getName()} id={$assetId}".PHP_EOL;
 
     // 1.3. create an Access Policy with Write permissions
     $accessPolicy = new AccessPolicy('UploadAccessPolicy');
@@ -129,7 +129,7 @@ function uploadFileAndCreateAsset($restProxy, $mezzanineFileName)
     // 1.5. get the mezzanine file content
     $fileContent = file_get_contents($mezzanineFileName);
 
-    echo "Uploading...\r\n";
+    echo "Uploading...".PHP_EOL;
 
     // 1.6. use the 'uploadAssetFile' to perform a multi-part upload using the Block Blobs REST API storage operations
     $restProxy->uploadAssetFile($sasLocator, basename($mezzanineFileName), $fileContent);
@@ -137,7 +137,7 @@ function uploadFileAndCreateAsset($restProxy, $mezzanineFileName)
     // 1.7. notify Media Services that the file upload operation is done to generate the asset file metadata
     $restProxy->createFileInfos($asset);
 
-    echo "File uploaded: size=" . strlen($fileContent) . "\r\n";
+    echo "File uploaded: size=".strlen($fileContent).PHP_EOL;
 
     // 1.8. delete the SAS Locator (and Access Policy) for the Asset since we are done uploading files
     $restProxy->deleteLocator($sasLocator);
@@ -150,7 +150,7 @@ function encodeToAdaptiveBitrateMP4Set($restProxy, $asset)
     // 2.1 retrieve the latest 'Media Encoder Standard' processor version
     $mediaProcessor = $restProxy->getLatestMediaProcessor('Media Encoder Standard');
 
-    echo "Using Media Processor: {$mediaProcessor->getName()} version {$mediaProcessor->getVersion()}\r\n";
+    echo "Using Media Processor: {$mediaProcessor->getName()} version {$mediaProcessor->getVersion()}".PHP_EOL;
 
     // 2.2 Create the Job; this automatically schedules and runs it
     $outputAssetName = "Encoded " . $asset->getName();
@@ -165,7 +165,7 @@ function encodeToAdaptiveBitrateMP4Set($restProxy, $asset)
 
     $job = $restProxy->createJob($job, array($asset), array($task));
 
-    echo "Created Job with Id: {$job->getId()}\r\n";
+    echo "Created Job with Id: {$job->getId()}".PHP_EOL;
 
     // 2.3 Check to see if the Job has completed
     $result = $restProxy->getJobStatus($job);
@@ -173,23 +173,23 @@ function encodeToAdaptiveBitrateMP4Set($restProxy, $asset)
     $jobStatusMap = array('Queued', 'Scheduled', 'Processing', 'Finished', 'Error', 'Canceled', 'Canceling');
 
     while($result != Job::STATE_FINISHED && $result != Job::STATE_ERROR && $result != Job::STATE_CANCELED) {
-        echo "Job status: {$jobStatusMap[$result]}\r\n";
+        echo "Job status: {$jobStatusMap[$result]}".PHP_EOL;
         sleep(5);
         $result = $restProxy->getJobStatus($job);
     }
 
     if ($result != Job::STATE_FINISHED) {
-        echo "The job has finished with a wrong status: {$jobStatusMap[$result]}\r\n";
+        echo "The job has finished with a wrong status: {$jobStatusMap[$result]}".PHP_EOL;
         exit(-1);
     }
 
-    echo "Job Finished!\r\n";
+    echo "Job Finished!".PHP_EOL;
 
     // 2.4 Get output asset
     $outputAssets = $restProxy->getJobOutputMediaAssets($job);
     $encodedAsset = $outputAssets[0];
 
-    echo "Asset encoded: name={$encodedAsset->getName()} id={$encodedAsset->getId()}\r\n";
+    echo "Asset encoded: name={$encodedAsset->getName()} id={$encodedAsset->getId()}".PHP_EOL;
 
     return $encodedAsset;
 }
@@ -212,7 +212,7 @@ function createCommonCBCTypeContentKey($restProxy, $encodedAsset)
     // 3.3 Create the ContentKey
     $contentKey = $restProxy->createContentKey($contentKey);
 
-    echo "Content Key id={$contentKey->getId()}\r\n";
+    echo "Content Key id={$contentKey->getId()}".PHP_EOL;
 
     // 3.4 Associate the ContentKey with the Asset
     $restProxy->linkContentKeyToAsset($encodedAsset, $contentKey);
@@ -250,7 +250,7 @@ function addOpenAuthorizationPolicy($restProxy, $contentKey, $fairPlayASK, $fair
     $contentKey->setAuthorizationPolicyId($ckapolicy->getId());
     $restProxy->updateContentKey($contentKey);
 
-    echo "Added Content Key Authorization Policy: name={$ckapolicy->getName()} id={$ckapolicy->getId()}\r\n";
+    echo "Added Content Key Authorization Policy: name={$ckapolicy->getName()} id={$ckapolicy->getId()}".PHP_EOL;
 }
 
 function addTokenRestrictedAuthorizationPolicy($restProxy, $contentKey, $tokenType, $fairPlayASK, $fairPlayPfxPassword, $fairPlayPfxFile, $fairPlayIV)
@@ -285,7 +285,7 @@ function addTokenRestrictedAuthorizationPolicy($restProxy, $contentKey, $tokenTy
     $contentKey->setAuthorizationPolicyId($ckapolicy->getId());
     $restProxy->updateContentKey($contentKey);
 
-    echo "Added Content Key Authorization Policy: name={$ckapolicy->getName()} id={$ckapolicy->getId()}\r\n";
+    echo "Added Content Key Authorization Policy: name={$ckapolicy->getName()} id={$ckapolicy->getId()}".PHP_EOL;
     return $tokenRestriction;
 }
 
@@ -318,7 +318,7 @@ function createAssetDeliveryPolicy($restProxy, $encodedAsset, $contentKey, $fair
     // 5.4 Link the AssetDeliveryPolicy to the Asset
     $restProxy->linkDeliveryPolicyToAsset($encodedAsset, $adpolicy->getId());
 
-    echo "Added Asset Delivery Policy: name={$adpolicy->getName()} id={$adpolicy->getId()}\r\n";
+    echo "Added Asset Delivery Policy: name={$adpolicy->getName()} id={$adpolicy->getId()}".PHP_EOL;
 }
 
 function publishEncodedAsset($restProxy, $encodedAsset)
@@ -334,7 +334,7 @@ function publishEncodedAsset($restProxy, $encodedAsset)
     }
 
     if ($manifestFile == null) {
-        echo "Unable to found the manifest file\r\n";
+        echo "Unable to found the manifest file".PHP_EOL;
         exit(-1);
     }
 
@@ -352,7 +352,7 @@ function publishEncodedAsset($restProxy, $encodedAsset)
     // 6.4 Create a Smooth Streaming base URL
     $stremingUrl = $locator->getPath() . $manifestFile->getName() . "/manifest(format=m3u8-aapl)";
 
-    echo "Streaming URL: {$stremingUrl}\r\n";
+    echo "Streaming URL: {$stremingUrl}".PHP_EOL;
 }
 
 function configureFairPlayPolicyOptions($restProxy, $fairPlayASK, $fairPlayPfxPassword, $fairPlayPfxFile, $fairPlayIV)
@@ -392,7 +392,7 @@ function createFairPlayAskTypeContentKey($restProxy, $fairPlayASK)
     // 3.3 Create the ContentKey
     $contentKey = $restProxy->createContentKey($contentKey);
 
-    echo "FairPlay ASK Content Key id={$contentKey->getId()}\r\n";
+    echo "FairPlay ASK Content Key id={$contentKey->getId()}".PHP_EOL;
 
     return $contentKey;
 }
@@ -413,7 +413,7 @@ function createFairPlayPfxPasswordTypeContentKey($restProxy, $fairPlayPfxPasswor
     // 3.3 Create the ContentKey
     $contentKey = $restProxy->createContentKey($contentKey);
 
-    echo "FairPlay PFX Password Content Key id={$contentKey->getId()}\r\n";
+    echo "FairPlay PFX Password Content Key id={$contentKey->getId()}".PHP_EOL;
 
     return $contentKey;
 }
@@ -439,7 +439,7 @@ function generateTestToken($tokenTemplateString, $contentKey)
     $expiration = strtotime("+12 hour");
     $token = TokenRestrictionTemplateSerializer::generateTestToken($template, null, $contentKeyUUID, $expiration);
 
-    echo "Token Type {$template->getTokenType()}\r\nBearer={$token}\r\n";
+    echo "Token Type {$template->getTokenType()}\r\nBearer={$token}".PHP_EOL;
 }
 
 function endsWith($haystack, $needle)
