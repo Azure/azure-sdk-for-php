@@ -333,7 +333,7 @@ class Channel
         $this->_encodingType = $value;
     }
 
-	/**
+    /**
      * Get channel last modification date.
      *
      * @return \DateTime

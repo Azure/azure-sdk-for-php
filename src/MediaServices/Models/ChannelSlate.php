@@ -49,7 +49,7 @@ class ChannelSlate
      */
     private $_insertSlateOnAdMarker;
 
-	/**
+    /**
      * ChannelSlate DefaultSlateAssetId.
      *
      * @var string

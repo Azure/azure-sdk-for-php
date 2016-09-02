@@ -2978,7 +2978,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $resource = fopen(__DIR__."/resources/default_slate_image_media_services.jpg", 'r');
         $slateAsset = $this->uploadSingleFile("slate3.jpg", $resource);
 
-	    // Setup
+        // Setup
         $channelName = TestResources::MEDIA_SERVICES_CHANNEL_NAME . $this->createSuffix();
         $channel = $this->makeChannelEncodingTypeStandard($channelName);
 
@@ -3068,7 +3068,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
      */
     public function testUpdateProgramOperations()
     {
-	    // Setup
+        // Setup
         $channelName = TestResources::MEDIA_SERVICES_CHANNEL_NAME . $this->createSuffix();
         $channel = $this->makeChannelEncodingTypeStandard($channelName);
 
@@ -3098,7 +3098,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $resource = fopen(__DIR__."/resources/default_slate_image_media_services.jpg", 'r');
         $slateAsset = $this->uploadSingleFile("slate_program.jpg", $resource);
 
-	    // Setup
+        // Setup
         $channelName = TestResources::MEDIA_SERVICES_CHANNEL_NAME . $this->createSuffix();
         $channel = $this->makeChannelEncodingTypeStandard($channelName);
         $channelResult = $this->restProxy->createChannel($channel);

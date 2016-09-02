@@ -49,7 +49,7 @@ class CrossSiteAccessPolicies
      */
     private $_clientAccessPolicy;
 
-	/**
+    /**
      * CrossSiteAccessPolicies CrossDomainPolicy.
      *
      * @var array

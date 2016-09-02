@@ -49,7 +49,7 @@ class ChannelEndpoint
      */
     private $_protocol;
 
-	/**
+    /**
      * ChannelEndpoint Url.
      *
      * @var string

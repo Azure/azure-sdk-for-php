@@ -112,7 +112,6 @@ class Program
      */
     private $_channelId;
 
-
     /**
      * Create Program from array.
      *
@@ -203,7 +202,6 @@ class Program
         return $this->_id;
     }
 
-
     /**
      * Get the program name.
      *
@@ -223,7 +221,6 @@ class Program
     {
         $this->_name = $value;
     }
-
 
     /**
      * Get the program asset id.
@@ -245,7 +242,6 @@ class Program
         $this->_assetId = $value;
     }
 
-
     /**
      * Get the program creation date.
      *
@@ -255,7 +251,6 @@ class Program
     {
         return $this->_created;
     }
-
 
     /**
      * Get the program description.
@@ -277,7 +272,6 @@ class Program
         $this->_description = $value;
     }
 
-
     /**
      * Get the program archive window length.
      *
@@ -298,7 +292,6 @@ class Program
         $this->_archiveWindowLength = $value;
     }
 
-
     /**
      * Get the program last modified date.
      *
@@ -308,7 +301,6 @@ class Program
     {
         return $this->_lastModified;
     }
-
 
     /**
      * Get the program streaming manifest name.

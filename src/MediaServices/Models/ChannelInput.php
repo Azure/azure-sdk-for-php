@@ -175,7 +175,7 @@ class ChannelInput
         return $this->_streamingProtocol;
     }
 
-	/**
+    /**
      * Set the channel input StreamingProtocol.
      *
      * @param mixing $value StreamingProtocol 

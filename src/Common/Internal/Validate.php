@@ -232,7 +232,7 @@ class Validate
         }
     }
 
-     /**
+    /**
      * Throws exception if the provided path does not exist.
      *
      * @param string $path The path to check.

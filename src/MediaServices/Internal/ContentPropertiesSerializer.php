@@ -218,10 +218,10 @@ class ContentPropertiesSerializer
     }
 
     /**
-    * @param \DateInterval $interval
-    *
-    * @return string
-    */
+     * @param \DateInterval $interval
+     *
+     * @return string
+     */
     private static function dateIntervalToString(\DateInterval $interval) {
 
         // Reading all non-zero date parts.

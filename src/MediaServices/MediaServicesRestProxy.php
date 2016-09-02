@@ -1102,7 +1102,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         }
     }
 
-     /**
+    /**
      * Download asset file to a local path.
      *
      * @param WindowsAzure\MediaServices\Models\AssetFile $assetFile Asset file to download

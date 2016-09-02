@@ -49,28 +49,28 @@ class ChannelEncoding
      */
     private $_adMarkerSource;
 
-	/**
+    /**
      * Encoding IgnoreCea708ClosedCaptions.
      *
      * @var bool
      */
     private $_ignoreCea708ClosedCaptions = false;
 
-	/**
+    /**
      * Encoding VideoStreams.
      *
      * @var mixing
      */
     private $_videoStreams;
 
-	/**
+    /**
      * Encoding AudioStreams.
      *
      * @var array
      */
     private $_audioStreams;
 
-	/**
+    /**
      * Encoding SystemPreset.
      *
      * @var string
@@ -178,7 +178,7 @@ class ChannelEncoding
         $this->_ignoreCea708ClosedCaptions = $value;
     }
 
-	/**
+    /**
      * Get the Encoding VideoStream.
      *
      * @return mixing
@@ -198,7 +198,7 @@ class ChannelEncoding
         $this->_videoStreams = $value;
     }
 
-	/**
+    /**
      * Get the Encoding AudioStreams.
      *
      * @return mixing

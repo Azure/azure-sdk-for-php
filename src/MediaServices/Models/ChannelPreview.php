@@ -49,7 +49,7 @@ class ChannelPreview
      */
     private $_accessControl;
 
-	/**
+    /**
      * ChannelPreview Endpoints.
      *
      * @var array
