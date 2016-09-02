@@ -90,7 +90,7 @@ $options->channelName = 'phpsdk-sample';
 $options->programName = 'program-sample';
 
 // Encoding Options
-$options->encodingType = EncodingType::Standard;
+$options->encodingType = EncodingType::None;
 $options->ingestProtocol = StreamingProtocol::RTMP;
 
 // Encoding Standard Options 
@@ -98,7 +98,7 @@ $options->archiveWindowLenght = new \DateInterval("PT1H");
 
 // AES Dynamic Encription Options 
 $options->aesDynamicEncription = true;
-$options->tokenRestriction = false;
+$options->tokenRestriction = true;
 $options->tokenType = TokenType::JWT;
 
 // Archive options
