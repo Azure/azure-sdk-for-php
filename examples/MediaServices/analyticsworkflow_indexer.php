@@ -75,7 +75,7 @@ echo 'Done!';
 
 function uploadFileAndCreateAsset($restProxy, $mediaFileName)
 {
-    // 1.1. create an empty "Asset" by specifying the name
+    // Create an empty "Asset" by specifying the name
     $asset = new Asset(Asset::OPTIONS_NONE);
     $asset->setName('Media File ' . basename($mediaFileName));
     $asset = $restProxy->createAsset($asset);
@@ -83,31 +83,31 @@ function uploadFileAndCreateAsset($restProxy, $mediaFileName)
 
     echo "Asset created: name={$asset->getName()} id={$assetId}\r\n";
 
-    // 1.3. create an Access Policy with Write permissions
+    // Create an Access Policy with Write permissions
     $accessPolicy = new AccessPolicy('UploadAccessPolicy');
     $accessPolicy->setDurationInMinutes(60.0);
     $accessPolicy->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
     $accessPolicy = $restProxy->createAccessPolicy($accessPolicy);
 
-    // 1.4. create a SAS Locator for the Asset
+    // Create a SAS Locator for the Asset
     $sasLocator = new Locator($asset,  $accessPolicy, Locator::TYPE_SAS);
     $sasLocator->setStartTime(new \DateTime('now -5 minutes'));
     $sasLocator = $restProxy->createLocator($sasLocator);
 
-    // 1.5. get the mezzanine file content
+    // Get the mezzanine file content
     $fileContent = file_get_contents($mediaFileName);
 
     echo "Uploading...\r\n";
 
-    // 1.6. use the 'uploadAssetFile' to perform a multi-part upload using the Block Blobs REST API storage operations
+    // Use the 'uploadAssetFile' to perform a multi-part upload using the Block Blobs REST API storage operations
     $restProxy->uploadAssetFile($sasLocator, basename($mediaFileName), $fileContent);
 
-    // 1.7. notify Media Services that the file upload operation is done to generate the asset file metadata
+    // Notify Media Services that the file upload operation is done to generate the asset file metadata
     $restProxy->createFileInfos($asset);
 
     echo 'File uploaded: size='.strlen($fileContent)."\r\n";
 
-    // 1.8. delete the SAS Locator (and Access Policy) for the Asset since we are done uploading files
+    // Delete the SAS Locator (and Access Policy) for the Asset since we are done uploading files
     $restProxy->deleteLocator($sasLocator);
     $restProxy->deleteAccessPolicy($accessPolicy);
 
@@ -116,17 +116,18 @@ function uploadFileAndCreateAsset($restProxy, $mediaFileName)
 
 function runIndexingJob($restProxy, $asset, $taskConfiguration)
 {
-    // 2.1 retrieve the latest 'Azure Media Indexer' processor version
+    // Retrieve the latest 'Azure Media Indexer' processor version
     $mediaProcessor = $restProxy->getLatestMediaProcessor('Azure Media Indexer');
 
     echo "Using Media Processor: {$mediaProcessor->getName()} version {$mediaProcessor->getVersion()}\r\n";
 
-    // 2.2 Create the Job; this automatically schedules and runs it
+    // Create the Job; this automatically schedules and runs it
     $outputAssetName = 'Indexer Results '.$asset->getName();
     $outputAssetCreationOption = Asset::OPTIONS_NONE;
     $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="'.$outputAssetCreationOption.'" assetName="'.$outputAssetName.'">JobOutputAsset(0)</outputAsset></taskBody>';
 
     $task = new Task($taskBody, $mediaProcessor->getId(), TaskOptions::NONE);
+    $task->setName('Indexing Task');
     $task->setConfiguration($taskConfiguration);
 
     $job = new Job();
@@ -136,7 +137,7 @@ function runIndexingJob($restProxy, $asset, $taskConfiguration)
 
     echo "Created Job with Id: {$job->getId()}\r\n";
 
-    // 2.3 Check to see if the Job has completed
+    // Check to see if the Job has completed
     $result = $restProxy->getJobStatus($job);
 
     $jobStatusMap = array('Queued', 'Scheduled', 'Processing', 'Finished', 'Error', 'Canceled', 'Canceling');
@@ -154,7 +155,7 @@ function runIndexingJob($restProxy, $asset, $taskConfiguration)
 
     echo "Job Finished!\r\n";
 
-    // 2.4 Get output asset
+    // Get output asset
     $outputAssets = $restProxy->getJobOutputMediaAssets($job);
     $outputAsset = $outputAssets[0];
 
