@@ -102,16 +102,6 @@ class ChannelEncoding
     }
 
     /**
-     * Return a list of fields that must be sent (even if it's null or zero).
-     *
-     * @return string[]
-     */
-    public function requiredFields()
-    {
-        return ['IgnoreCea708ClosedCaptions'];
-    }
-
-    /**
      * Fill Encoding from array.
      *
      * @param array $options Array containing values for object properties

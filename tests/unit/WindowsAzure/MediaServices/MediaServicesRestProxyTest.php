@@ -2971,7 +2971,6 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     /**
      * @group livefeatures
      * @group channel
-     * @group livesync
      */
     public function testRoundTripChannelSyncOperations()
     {
@@ -3067,7 +3066,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
      * @group livefeatures
      * @group program
      */
-    public function testUpdatetProgramOperations()
+    public function testUpdateProgramOperations()
     {
 	    // Setup
         $channelName = TestResources::MEDIA_SERVICES_CHANNEL_NAME . $this->createSuffix();
@@ -3085,14 +3084,12 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // teardown
         $this->restProxy->deleteProgram($program);
-        $this->restProxy->stopChannel($channel);
         $this->restProxy->deleteChannel($channel);
     }
 
     /**
      * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createChannel
      * @group livefeatures
-     * @group channel
      * @group program
      */
     public function testRoundTripProgramOperations()

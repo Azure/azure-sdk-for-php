@@ -55,7 +55,7 @@ use WindowsAzure\MediaServices\Templates\FairPlayConfiguration;
 // read user settings from config
 include_once 'userconfig.php';
 
-$mezzanineFileName = __DIR__.'/Azure-Video.wmv';
+$mezzanineFileName = __DIR__.'/resources/Azure-Video.wmv';
 $tokenRestriction = true;
 $tokenType = TokenType::JWT;
 

@@ -37,9 +37,9 @@ use WindowsAzure\MediaServices\Models\TaskOptions;
 // Read user settings from config
 include_once 'userconfig.php';
 
-$mediaFileName = __DIR__.'/Azure-Video.wmv';
+$mediaFileName = __DIR__.'/resources/Azure-Video.wmv';
 $destinationPath = __DIR__.'/IndexerOutput';
-$indexerTaskPresetTemplate = file_get_contents(__DIR__.'/indexerTaskPresetTemplate.xml');
+$indexerTaskPresetTemplate = file_get_contents(__DIR__.'/resources/indexerTaskPresetTemplate.xml');
 
 // Configuration parameters for Indexer task
 $title = '';
@@ -49,7 +49,7 @@ $captionFormats = 'ttml;sami;webvtt';
 $generateAIB = 'true';
 $generateKeywords = 'true';
 
-echo "Azure SDK for PHP - Media Analytics Sample (Indexer)\r\n";
+echo "Azure SDK for PHP - Media Analytics Sample (Indexer)".PHP_EOL;
 
 // 0 - Set up the MediaServicesService object to call into the Media Services REST API.
 $restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($account, $secret));
@@ -81,7 +81,7 @@ function uploadFileAndCreateAsset($restProxy, $mediaFileName)
     $asset = $restProxy->createAsset($asset);
     $assetId = $asset->getId();
 
-    echo "Asset created: name={$asset->getName()} id={$assetId}\r\n";
+    echo "Asset created: name={$asset->getName()} id={$assetId}".PHP_EOL;
 
     // Create an Access Policy with Write permissions
     $accessPolicy = new AccessPolicy('UploadAccessPolicy');
@@ -97,7 +97,7 @@ function uploadFileAndCreateAsset($restProxy, $mediaFileName)
     // Get the mezzanine file content
     $fileContent = file_get_contents($mediaFileName);
 
-    echo "Uploading...\r\n";
+    echo "Uploading...".PHP_EOL;
 
     // Use the 'uploadAssetFile' to perform a multi-part upload using the Block Blobs REST API storage operations
     $restProxy->uploadAssetFile($sasLocator, basename($mediaFileName), $fileContent);
@@ -105,7 +105,7 @@ function uploadFileAndCreateAsset($restProxy, $mediaFileName)
     // Notify Media Services that the file upload operation is done to generate the asset file metadata
     $restProxy->createFileInfos($asset);
 
-    echo 'File uploaded: size='.strlen($fileContent)."\r\n";
+    echo 'File uploaded: size='.strlen($fileContent).PHP_EOL;
 
     // Delete the SAS Locator (and Access Policy) for the Asset since we are done uploading files
     $restProxy->deleteLocator($sasLocator);
@@ -119,7 +119,7 @@ function runIndexingJob($restProxy, $asset, $taskConfiguration)
     // Retrieve the latest 'Azure Media Indexer' processor version
     $mediaProcessor = $restProxy->getLatestMediaProcessor('Azure Media Indexer');
 
-    echo "Using Media Processor: {$mediaProcessor->getName()} version {$mediaProcessor->getVersion()}\r\n";
+    echo "Using Media Processor: {$mediaProcessor->getName()} version {$mediaProcessor->getVersion()}".PHP_EOL;
 
     // Create the Job; this automatically schedules and runs it
     $outputAssetName = 'Indexer Results '.$asset->getName();
@@ -135,7 +135,7 @@ function runIndexingJob($restProxy, $asset, $taskConfiguration)
 
     $job = $restProxy->createJob($job, array($asset), array($task));
 
-    echo "Created Job with Id: {$job->getId()}\r\n";
+    echo "Created Job with Id: {$job->getId()}".PHP_EOL;
 
     // Check to see if the Job has completed
     $result = $restProxy->getJobStatus($job);
@@ -143,23 +143,23 @@ function runIndexingJob($restProxy, $asset, $taskConfiguration)
     $jobStatusMap = array('Queued', 'Scheduled', 'Processing', 'Finished', 'Error', 'Canceled', 'Canceling');
 
     while ($result != Job::STATE_FINISHED && $result != Job::STATE_ERROR && $result != Job::STATE_CANCELED) {
-        echo "Job status: {$jobStatusMap[$result]}\r\n";
+        echo "Job status: {$jobStatusMap[$result]}".PHP_EOL;
         sleep(5);
         $result = $restProxy->getJobStatus($job);
     }
 
     if ($result != Job::STATE_FINISHED) {
-        echo "The job has finished with a wrong status: {$jobStatusMap[$result]}\r\n";
+        echo "The job has finished with a wrong status: {$jobStatusMap[$result]}".PHP_EOL;
         exit(-1);
     }
 
-    echo "Job Finished!\r\n";
+    echo "Job Finished!".PHP_EOL;
 
     // Get output asset
     $outputAssets = $restProxy->getJobOutputMediaAssets($job);
     $outputAsset = $outputAssets[0];
 
-    echo "Output asset: name={$outputAsset->getName()} id={$outputAsset->getId()}\r\n";
+    echo "Output asset: name={$outputAsset->getName()} id={$outputAsset->getId()}".PHP_EOL;
 
     return $outputAsset;
 }
@@ -188,7 +188,7 @@ function downloadAssetFiles($restProxy, $asset, $destinationPath)
     foreach ($files as $file) {
         echo "Downloading {$file->getName()} output file...";
         $restProxy->downloadAssetFile($file, $sasLocator, $destinationPath);
-        echo "Done!\r\n";
+        echo "Done!".PHP_EOL;
     }
 
     // Clean up Locator and Access Policy

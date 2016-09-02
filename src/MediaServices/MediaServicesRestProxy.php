@@ -905,6 +905,31 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
+     * Get asset locators
+     *
+     * @param WindowsAzure\MediaServices\Models\Asset |string $asset Asset or AssetId
+     *
+     * @return WindowsAzure\MediaServices\Models\Locator
+     */
+    public function getAssetLocatorList($asset)
+    {
+        $assetId = Utilities::getEntityId(
+            $asset,
+            'WindowsAzure\Mediaservices\Models\Asset'
+        );
+
+        $locatorsList = $this->_getEntityList("Assets('{$assetId}')/Locators");
+
+        $result = array();
+
+        foreach ($locatorsList as $locator) {
+            $result[] = Locator::createFromOptions($locator);
+        }
+
+        return $result;
+    }
+
+    /**
      * Get list of Locators.
      *
      * @return array of Models\Locator
@@ -3412,7 +3437,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return bool true if succeeded
      */
-    public function endAdvertisementChannel($channel, $cueIdl)
+    public function endAdvertisementChannel($channel, $cueId)
     {
         $op = $this->sendEndAdvertisementChannelOperation($channel, $cueId);
 
