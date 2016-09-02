@@ -45,7 +45,8 @@ Microsoft Azure tables, blobs, queues, service bus (queues and topics), service 
   * Delivery SAS and Streaming media content
   * Dynamic encryption: AES and DRM (PlayReady/Widevine/FairPlay) with and without Token restriction
   * Scale encoding reserved unit type
-  * REST API Version: 2.12
+  * Live streaming: live encoding and pass-through channels, programs and all their operations
+  * REST API Version: 2.13
 
   
 # Getting Started
