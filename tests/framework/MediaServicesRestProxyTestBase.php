@@ -35,6 +35,10 @@ use WindowsAzure\MediaServices\Models\Task;
 use WindowsAzure\MediaServices\Models\TaskOptions;
 use WindowsAzure\MediaServices\Models\JobTemplate;
 use WindowsAzure\MediaServices\Models\TaskTemplate;
+use WindowsAzure\MediaServices\Models\Channel;
+use WindowsAzure\MediaServices\Models\Program;
+use WindowsAzure\MediaServices\Models\ChannelState;
+use WindowsAzure\MediaServices\Models\ProgramState;
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Resources;
@@ -287,6 +291,25 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     {
         parent::tearDown();
 
+        $channels = $this->restProxy->getChannelList();
+        foreach ($channels as $ch) {
+            if ($this->startsWith($ch->getName(), TestResources::MEDIA_SERVICES_CHANNEL_NAME)) {
+
+                $programs = $this->restProxy->getProgramList($ch);
+
+                foreach($programs as $prog) {
+                    if ($prog->getState() == ProgramState::Running) {
+                        $this->restProxy->stopProgram($prog);
+                    }
+                    $this->restProxy->deleteProgram($prog);
+                }
+                if ($ch->getState() == ChannelState::Running) {
+                    $this->restProxy->stopChannel($ch);
+                }
+                $this->restProxy->deleteChannel($ch);
+            }
+        }
+
         foreach ($this->ingestManifestFiles as $ingestManifestFile) {
             $this->restProxy->deleteIngestManifestFile($ingestManifestFile);
         }
@@ -309,6 +332,13 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
         foreach ($this->contentKeyAuthorizationOptions as $contentKeyAuthorizationOption) {
             $this->restProxy->deleteContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOption);
+        }
+
+        foreach ($this->assets as $asset) {
+            $assetDeliveryPolicies = $this->restProxy->getAssetLinkedDeliveryPolicy($asset);
+            foreach ($assetDeliveryPolicies as $dp) {
+                $this->restProxy->removeDeliveryPolicyFromAsset($asset, $dp);
+            }
         }
 
         foreach ($this->assetDeliveryPolicies as $assetDeliveryPolicy) {
@@ -357,6 +387,10 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
                 $this->restProxy->deleteAsset($asset);
             }
         }
+    }
+
+    function startsWith($haystack, $needle) {
+        return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;
     }
 
     protected function createSuffix()
@@ -448,6 +482,35 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $httpClient->setExpectedStatusCode($statusCode);
 
         return $httpClient->send($filters, $url);
+    }
+
+    public function uploadSingleFile($fileName, $fileContent)
+    {
+        $asset = new Asset(Asset::OPTIONS_NONE);
+        $asset->setName($fileName);
+        $asset = $this->createAsset($asset);
+
+        $access = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME.$this->createSuffix());
+        $access->setDurationInMinutes(30);
+        $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
+        $access = $this->createAccessPolicy($access);
+        
+        $locator = new Locator($asset, $access, Locator::TYPE_SAS);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME.$this->createSuffix());
+        $locator->setStartTime(new \DateTime('now -5 minutes'));
+        $locator = $this->createLocator($locator);
+        
+        $this->restProxy->uploadAssetFile($locator, $fileName, $fileContent); 
+        $this->restProxy->createFileInfos($asset);
+
+        $list = $this->restProxy->getAssetAssetFileList($asset);
+        if (isset($list[0])) {
+            $list[0]->setIsPrimary(true);
+            $this->restProxy->updateAssetFile($list[0]);
+        } else {
+            throw new Exception("unable to find the asset file");
+        }
+        return $asset;
     }
 
     /**

@@ -15,7 +15,9 @@ The examples here demonstrate some of the basic functionalities of the Azure PHP
 ```
 * Open a command prompt and execute this in the examples directory
 
+```
     php composer.phar install
+```
 
 This will download all dependencies to the vendor sub directory.
 
@@ -26,7 +28,9 @@ see https://azure.microsoft.com/en-us/blog/introducing-the-windows-azure-service
 
 * In the example directory, run
 
+```
    php -S localhost:8000 
+```
 
 * In a browser, navigate to http://localhost:8000/tasklist/index.php
 
@@ -35,4 +39,6 @@ see https://azure.microsoft.com/en-us/blog/introducing-the-windows-azure-service
 
 * In the examples directory, run
 
+```
    php MediaServices\%sample_name%.php
+```

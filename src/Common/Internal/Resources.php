@@ -77,6 +77,7 @@ class Resources
     const NOT_IMPLEMENTED_MSG = 'This method is not implemented.';
     const NULL_OR_EMPTY_MSG = "'%s' can't be NULL or empty.";
     const NULL_MSG = "'%s' can't be NULL.";
+    const INVALID_PATH_MSG = "Provided path does not exist: '%s'.";
     const INVALID_URL_MSG = 'Provided URL is invalid.';
     const INVALID_HT_MSG = 'The header type provided is invalid.';
     const INVALID_EDM_MSG = 'The provided EDM type is invalid.';
@@ -260,7 +261,7 @@ class Resources
     const ATOM_FEED_CONTENT_TYPE = 'application/atom+xml;type=feed;charset=utf-8';
     const ACCEPT_CHARSET_VALUE = 'utf-8';
     const INT32_MAX = 2147483647;
-    const MEDIA_SERVICES_API_LATEST_VERSION = '2.12';
+    const MEDIA_SERVICES_API_LATEST_VERSION = '2.13';
     const MEDIA_SERVICES_DATA_SERVICE_VERSION_VALUE = '3.0;NetFx';
     const MEDIA_SERVICES_MAX_DATA_SERVICE_VERSION_VALUE = '3.0;NetFx';
 
