@@ -84,6 +84,8 @@ class HttpClient implements IHttpClient
             Resources::USE_BRACKETS => true,
             Resources::SSL_VERIFY_PEER => false,
             Resources::SSL_VERIFY_HOST => false,
+            'proxy_host' => "localhost",
+            'proxy_port' => 8888,
         );
 
         if (!empty($certificatePath)) {
