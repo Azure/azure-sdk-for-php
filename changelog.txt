@@ -1,30 +1,32 @@
+- Updated packages: firebase/php-jwt 3.0 => 4.0, fabpot/php-cs-fixer => friendofphp/php-cs-fixer.
+
 Windows Azure SDK For PHP 0.4.4, 2016-08-16
 -------------------------------------------
-Added Widevine Base License Acquisition + FairPlay support 
+Added Widevine Base License Acquisition + FairPlay support
 
 Windows Azure SDK For PHP 0.4.3, 2016-05-10
 -------------------------------------------
 - Updated PHP version requirement to >=5.5 for PHP Storage SDK (https://github.com/Azure/azure-storage-php)
 - Updated SDK code for storage (Blob, Queue and Table) to use the new Storage SDK
-- Removed unit and functional tests for storage (Blob, Queue and Table) 
-- Fixed broken functional tests 
+- Removed unit and functional tests for storage (Blob, Queue and Table)
+- Fixed broken functional tests
 - Updated code samples to use the new storage SDK
 - Adopted PSR-2 as coding standard (contributed by @phansys)
 - Added paging support for getAssetList() in Media Services
 - Other minor fixes
 
-To update your code for the new storage SDK, change 
-"use WindowsAzure\Blob" to "use MicrosoftAzure\Storage\Blob", 
+To update your code for the new storage SDK, change
+"use WindowsAzure\Blob" to "use MicrosoftAzure\Storage\Blob",
 "use WindowsAzure\Queue" to "use MicrosoftAzure\Storage\Queue"
 "use WindowsAzure\Table" to "use MicrosoftAzure\Storage\Table"
 
-If you use ServiceException for Storage API, you need to change "use WindowsAzure\Common\ServiceException" to "use MicrosoftAzure\Storage\Common\ServiceException". 
+If you use ServiceException for Storage API, you need to change "use WindowsAzure\Common\ServiceException" to "use MicrosoftAzure\Storage\Common\ServiceException".
 This does not apply if use ServiceExpception in other APIs such as Media Services.
 
 For the following calls,
-ServicesBuilder::getInstance()->createTableService($connectionString) 
-ServicesBuilder::getInstance()->createBlobService($connectionString) 
-ServicesBuilder::getInstance()->createQueueService($connectionString) 
+ServicesBuilder::getInstance()->createTableService($connectionString)
+ServicesBuilder::getInstance()->createBlobService($connectionString)
+ServicesBuilder::getInstance()->createQueueService($connectionString)
 
 The new API will be called automatically. You have no need to update your code.
 
