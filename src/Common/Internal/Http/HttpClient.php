@@ -88,6 +88,14 @@ class HttpClient implements IHttpClient
             // 'proxy_host' => "localhost",
             // 'proxy_port' => 8888,
         );
+        $proxy = getenv("HTTP_PROXY");
+        if ($proxy) {
+            $proxyStruct = parse_url($proxy);
+            if ($proxyStruct) {
+                $config["proxy_host"] = $proxyStruct->host;
+                $config["proxy_port"] = $proxyStruct->port;
+            }
+        }
 
         if (!empty($certificatePath)) {
             $config[Resources::SSL_LOCAL_CERT] = $certificatePath;
