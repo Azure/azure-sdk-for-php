@@ -96,12 +96,12 @@ class HttpClient implements IHttpClient
         //
         //     set HTTP_PROXY=http://localhost:8888
         //     php my_program.php
-        $proxy = getenv("HTTP_PROXY");
+        $proxy = getenv('HTTP_PROXY');
         if ($proxy) {
             $proxyStruct = parse_url($proxy);
             if ($proxyStruct) {
-                $config["proxy_host"] = $proxyStruct["host"];
-                $config["proxy_port"] = $proxyStruct["port"];
+                $config['proxy_host'] = $proxyStruct['host'];
+                $config['proxy_port'] = $proxyStruct['port'];
             }
         }
 
