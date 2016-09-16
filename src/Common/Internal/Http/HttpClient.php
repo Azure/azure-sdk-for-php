@@ -100,8 +100,8 @@ class HttpClient implements IHttpClient
         if ($proxy) {
             $proxyStruct = parse_url($proxy);
             if ($proxyStruct) {
-                $config['proxy_host'] = $proxyStruct["host"];
-                $config['proxy_port'] = $proxyStruct["port"];
+                $config["proxy_host"] = $proxyStruct["host"];
+                $config["proxy_port"] = $proxyStruct["port"];
             }
         }
 
