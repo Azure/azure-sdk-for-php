@@ -1,4 +1,4 @@
-- Support for HTTP_PROXY environment variable
+- Support for HTTP_PROXY environment variable for logging with Fiddler
 - Support for LiveStreaming in Media Services - AMS SDK Live Features & Samples
 
 Windows Azure SDK For PHP 0.4.4, 2016-08-16
