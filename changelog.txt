@@ -1,3 +1,4 @@
+- Updated packages: firebase/php-jwt 3.0 => 4.0, fabpot/php-cs-fixer => friendofphp/php-cs-fixer.
 - Support for HTTP_PROXY environment variable for logging with Fiddler
 - Support for LiveStreaming in Media Services - AMS SDK Live Features & Samples
 
