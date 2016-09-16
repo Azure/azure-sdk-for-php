@@ -44,8 +44,6 @@ use WindowsAzure\Common\Internal\Validate;
  */
 class HttpClient implements IHttpClient
 {
-    private static $_proxy;
-
     /**
      * @var \HTTP_Request2
      */
@@ -72,9 +70,6 @@ class HttpClient implements IHttpClient
 
     static function initProxy()
     {
-        // read HTTP_PROXY enviroment variable, if any
-        $proxy = getenv("HTTP_PROXY");
-        HttpClient::$_proxy = $proxy ? parse_url($proxy) : FALSE;
     }
 
     /**
@@ -95,9 +90,19 @@ class HttpClient implements IHttpClient
             Resources::SSL_VERIFY_HOST => false,
         );
 
-        if (HttpClient::$_proxy) {
-            $config['proxy_host'] = HttpClient::$_proxy["host"];
-            $config['proxy_port'] = HttpClient::$_proxy["port"];
+        // Read HTTP_PROXY enviroment variable, if any.
+        // To use it with Fiddler, set the environment variable HTTP_PROXY
+        // to http://localhost:8888. E.g.
+        //
+        //     set HTTP_PROXY=http://localhost:8888
+        //     php my_program.php
+        $proxy = getenv("HTTP_PROXY");
+        if ($proxy) {
+            $proxyStruct = parse_url($proxy);
+            if ($proxyStruct) {
+                $config['proxy_host'] = $proxyStruct["host"];
+                $config['proxy_port'] = $proxyStruct["port"];
+            }
         }
 
         if (!empty($certificatePath)) {
@@ -399,6 +404,3 @@ class HttpClient implements IHttpClient
         }
     }
 }
-
-// read HTTP_PROXY enviroment variable, if any
-HttpClient::initProxy();
