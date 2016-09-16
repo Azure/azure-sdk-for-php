@@ -44,6 +44,8 @@ use WindowsAzure\Common\Internal\Validate;
  */
 class HttpClient implements IHttpClient
 {
+    private static $_proxy;
+
     /**
      * @var \HTTP_Request2
      */
@@ -68,6 +70,13 @@ class HttpClient implements IHttpClient
      */
     private $_expectedStatusCodes;
 
+    static function initProxy()
+    {
+        // read HTTP_PROXY enviroment variable, if any
+        $proxy = getenv("HTTP_PROXY");
+        HttpClient::$_proxy = $proxy ? parse_url($proxy) : FALSE;
+    }
+
     /**
      * Initializes new HttpClient object.
      *
@@ -84,17 +93,11 @@ class HttpClient implements IHttpClient
             Resources::USE_BRACKETS => true,
             Resources::SSL_VERIFY_PEER => false,
             Resources::SSL_VERIFY_HOST => false,
-            // uncomment next two lines to work with Fiddler.
-            // 'proxy_host' => "localhost",
-            // 'proxy_port' => 8888,
         );
-        $proxy = getenv("HTTP_PROXY");
-        if ($proxy) {
-            $proxyStruct = parse_url($proxy);
-            if ($proxyStruct) {
-                $config["proxy_host"] = $proxyStruct->host;
-                $config["proxy_port"] = $proxyStruct->port;
-            }
+
+        if (HttpClient::$_proxy) {
+            $config['proxy_host'] = HttpClient::$_proxy["host"];
+            $config['proxy_port'] = HttpClient::$_proxy["port"];
         }
 
         if (!empty($certificatePath)) {
@@ -396,3 +399,6 @@ class HttpClient implements IHttpClient
         }
     }
 }
+
+// read HTTP_PROXY enviroment variable, if any
+HttpClient::initProxy();
