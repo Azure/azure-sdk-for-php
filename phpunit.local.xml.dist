@@ -7,11 +7,11 @@
          verbose="true">
   <testsuites>
     <testsuite name="azure-sdk-for-php">
-      <directory suffix="Test.php">tests/unit/WindowsAzure/Common/Internal/</directory>
+      <directory suffix="Test.php">tests/unit/WindowsAzure/Common/</directory>
       <exclude>tests/unit/WindowsAzure/Common/Internal/Authentication/OAuthSchemeTest.php</exclude>
       <exclude>tests/unit/WindowsAzure/Common/Internal/Filters/WrapFilterTest.php</exclude>
       <exclude>tests/unit/WindowsAzure/Common/Internal/OAuthRestProxyTest.php</exclude>
-      <directory suffix="Test.php">tests/unit/WindowsAzure/Common/Models/</directory>
+      <exclude>tests/unit/WindowsAzure/Common/ServicesBuilderTest.php</exclude>
     </testsuite>
   </testsuites>
 
