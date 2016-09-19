@@ -7,11 +7,7 @@
          verbose="true">
   <testsuites>
     <testsuite name="azure-sdk-for-php">
-      <directory suffix="Test.php">tests/unit/WindowsAzure/Common/</directory>
-      <directory suffix="Test.php">tests/unit/WindowsAzure/MediaServices/</directory>
-      <directory suffix="Test.php">tests/unit/WindowsAzure/ServiceBus/</directory>
-      <directory suffix="Test.php">tests/unit/WindowsAzure/ServiceManagement/</directory>
-      <directory suffix="Test.php">tests/unit/WindowsAzure/ServiceRuntime/</directory>
+      <directory suffix="Test.php">tests/unit/</directory>
       <exclude>tests/unit/WindowsAzure/Common/Internal/Authentication/OAuthSchemeTest.php</exclude>
       <exclude>tests/unit/WindowsAzure/Common/Internal/Filters/WrapFilterTest.php</exclude>
       <exclude>tests/unit/WindowsAzure/Common/Internal/OAuthRestProxyTest.php</exclude>
