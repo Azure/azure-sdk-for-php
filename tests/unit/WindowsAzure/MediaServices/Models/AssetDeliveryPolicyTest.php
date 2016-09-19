@@ -176,7 +176,7 @@ class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::strignifyAssetDeliveryPolicyConfiguartionKey
+     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfiguartionKey
      * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::parseAssetDeliveryPolicyConfiguartionKey
      */
     public function testStrignifyParseDeliveryPolicyConfiguartionKey()
