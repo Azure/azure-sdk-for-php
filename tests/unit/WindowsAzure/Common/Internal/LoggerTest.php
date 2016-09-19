@@ -27,7 +27,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal;
 
 use WindowsAzure\Common\Internal\Logger;
 use WindowsAzure\Common\Internal\Resources;
-use Tests\Framework\VirtualFileSystem;
+use Tests\framework\VirtualFileSystem;
 
 /**
  * Unit tests for class Logger.
