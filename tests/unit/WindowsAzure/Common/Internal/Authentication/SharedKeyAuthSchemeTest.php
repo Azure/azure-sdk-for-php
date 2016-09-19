@@ -27,7 +27,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal\Authentication;
 
 use Tests\mock\WindowsAzure\Common\Internal\Authentication\SharedKeyAuthSchemeMock;
 use WindowsAzure\Common\Internal\Resources;
-use Tests\Framework\TestResources;
+use Tests\framework\TestResources;
 
 /**
  * Unit tests for SharedKeyAuthScheme class.
