@@ -25,7 +25,7 @@
 
 namespace Tests\unit\WindowsAzure\ServiceBus;
 
-use Tests\Framework\ServiceBusRestProxyTestBase;
+use Tests\framework\ServiceBusRestProxyTestBase;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceBus\ServiceBusRestProxy;
