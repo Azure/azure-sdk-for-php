@@ -8,18 +8,7 @@
   <testsuites>
     <testsuite name="azure-sdk-for-php">
       <directory suffix="Test.php">tests/unit/</directory>
-<!--
-      <exclude>tests/unit/WindowsAzure/Common/Internal/Authentication/OAuthSchemeTest.php</exclude>
--->
-      <exclude>tests/unit/WindowsAzure/Common/Internal/Filters/WrapFilterTest.php</exclude>
-      <exclude>tests/unit/WindowsAzure/Common/Internal/OAuthRestProxyTest.php</exclude>
-      <exclude>tests/unit/WindowsAzure/Common/ServicesBuilderTest.php</exclude>
       <exclude>tests/unit/WindowsAzure/MediaServices/MediaServicesRestProxyTest.php</exclude>
-      <exclude>tests/unit/WindowsAzure/MediaServices/MediaServicesRestProxyTest.php</exclude>
-      <exclude>tests/unit/WindowsAzure/ServiceBus/Internal/WrapTokenManagerTest.php</exclude>
-      <exclude>tests/unit/WindowsAzure/ServiceBus/ServiceBusRestProxyTest.php</exclude>
-      <exclude>tests/unit/WindowsAzure/ServiceBus/WrapRestProxyTest.php</exclude>
-      <exclude>tests/unit/WindowsAzure/ServiceManagement/ServiceManagementRestProxyTest.php</exclude>
     </testsuite>
   </testsuites>
 
