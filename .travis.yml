@@ -3,7 +3,7 @@ language: php
 sudo: false
 
 env:
-  - AZURE_STORAGE_CONNECTION_STRING="UseDevelopmentStorage=true;DevelopmentStorageProxyUri=http://127.0.0.1;"
+  - AZURE_STORAGE_CONNECTION_STRING="UseDevelopmentStorage=true;"
 
 matrix:
     include:
