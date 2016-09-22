@@ -219,9 +219,7 @@ class ServicesBuilder
         );
 
         // Adding headers filter
-        $headers = array(
-            Resources::USER_AGENT => Resources::SDK_USER_AGENT,
-        );
+        $headers = array();
 
         $headersFilter = new HeadersFilter($headers);
         $serviceBusWrapper = $serviceBusWrapper->withFilter($headersFilter);
@@ -265,9 +263,7 @@ class ServicesBuilder
         );
 
         // Adding headers filter
-        $headers = array(
-            Resources::USER_AGENT => Resources::SDK_USER_AGENT,
-        );
+        $headers = array();
 
         $headers[Resources::X_MS_VERSION] = Resources::SM_API_LATEST_VERSION;
 
@@ -315,7 +311,6 @@ class ServicesBuilder
         $dataMaxVersion = Resources::MEDIA_SERVICES_MAX_DATA_SERVICE_VERSION_VALUE;
         $accept = Resources::ACCEPT_HEADER_VALUE;
         $contentType = Resources::ATOM_ENTRY_CONTENT_TYPE;
-        $userAgent = Resources::SDK_USER_AGENT;
 
         $headers = array(
             Resources::X_MS_VERSION => $xMSVersion,
@@ -323,7 +318,6 @@ class ServicesBuilder
             Resources::MAX_DATA_SERVICE_VERSION => $dataMaxVersion,
             Resources::ACCEPT_HEADER => $accept,
             Resources::CONTENT_TYPE => $contentType,
-            Resources::USER_AGENT => $userAgent,
         );
 
         $headersFilter = new HeadersFilter($headers);
