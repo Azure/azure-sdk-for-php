@@ -119,10 +119,9 @@ class HttpClient implements IHttpClient
             null, null, $config
         );
 
-        $this->setHeaders(array(
-            'user-agent' => null,
-            'expect' => '',
-        ));
+        // Replace User-Agent.
+        $this->setHeader(Resources::USER_AGENT, Resources::SDK_USER_AGENT, true);
+        $this->setHeader('expect', '');
 
         $this->_requestUrl = null;
         $this->_response = null;

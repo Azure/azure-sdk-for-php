@@ -56,8 +56,9 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
         // Test
         $request = $filter->handleRequest($channel);
 
-        // Assert. there is one header returned back
-        $this->assertCount(1, $request->getHeaders());
+        // Assert. there are two header returned back
+        // 'User-Agent' and 'expect'.
+        $this->assertCount(2, $request->getHeaders());
     }
 
     /**

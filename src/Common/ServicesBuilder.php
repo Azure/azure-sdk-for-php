@@ -220,7 +220,7 @@ class ServicesBuilder
 
         // Adding headers filter
         $headers = array(
-            Resources::USER_AGENT => Resources::SDK_USER_AGENT,
+//            Resources::USER_AGENT => Resources::SDK_USER_AGENT,
         );
 
         $headersFilter = new HeadersFilter($headers);

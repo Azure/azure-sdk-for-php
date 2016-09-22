@@ -144,8 +144,8 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $channel->setHeaders($headers);
 
         // Assert
-        $channelHeaders = $channel->getHeaders();
-        $this->assertCount(3, $channelHeaders);
+        $channelHeaders = $channel->getHeaders();    
+        $this->assertCount(4, $channelHeaders);
         $this->assertEquals($value1, $channelHeaders[$header1]);
         $this->assertEquals($value2, $channelHeaders[$header2]);
     }
@@ -168,7 +168,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $headers = $channel->getHeaders();
 
         // Assert
-        $this->assertCount(3, $headers);
+        $this->assertCount(4, $headers);
         $this->assertEquals($value1, $headers[$header1]);
         $this->assertEquals($value2, $headers[$header2]);
     }
@@ -186,7 +186,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $headers = $channel->getHeaders();
-        $this->assertCount(2, $headers);
+        $this->assertCount(3, $headers);
         $this->assertEquals(TestResources::HEADER1_VALUE, $headers[TestResources::HEADER1]);
     }
 
@@ -204,7 +204,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $headers = $channel->getHeaders();
-        $this->assertCount(2, $headers);
+        $this->assertCount(3, $headers);
         $this->assertEquals(TestResources::HEADER2_VALUE, $headers[TestResources::HEADER1]);
     }
 
@@ -223,7 +223,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $headers = $channel->getHeaders();
-        $this->assertCount(2, $headers);
+        $this->assertCount(3, $headers);
         $this->assertEquals($expected, $headers[TestResources::HEADER1]);
     }
 
