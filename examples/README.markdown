@@ -46,8 +46,11 @@ see https://azure.microsoft.com/en-us/blog/introducing-the-windows-azure-service
 # Using Fiddler to Debug HTTP/HTTPS Requests
 
 * Install [Fiddler](http://www.telerik.com/fiddler).
+
 * Set the `HTTP_PROXY` enviroment variable to `http://localhost:8888`. For example
+
     ```bat
     set HTTP_PROXY=http://localhost:8888
     ```
+
 * Start your program.

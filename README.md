@@ -401,7 +401,7 @@ try {
 ## Service Bus Queues
 The current PHP Service Bus APIs only support ACS connection strings. You need to use PowerShell to create a new ACS Service Bus namespace at the present time.  
 First, make sure you have Azure PowerShell installed, then in a PowerShell command prompt, run 
-```
+```PowerShell
 Add-AzureAccount # this will sign you in
 New-AzureSBNamespace -CreateACSNamespace $true -Name 'mytestbusname' -Location 'West US' -NamespaceType 'Messaging'
 ```
@@ -551,12 +551,13 @@ try {
 ### Set-up certificates
 
 You  need to create two certificates, one for the server (a .cer file) and one for the client (a .pem file). To create the .pem file using [OpenSSL](http://www.openssl.org), execute this: 
-
-  openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
-
+```
+openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
+```
 To create the .cer certificate, execute this: 
-
-  openssl x509 -inform pem -in mycert.pem -outform der -out mycert.cer
+```
+openssl x509 -inform pem -in mycert.pem -outform der -out mycert.cer
+```
 
 ### List Available Locations
 
