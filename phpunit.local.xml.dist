@@ -9,19 +9,16 @@
       <directory suffix="Test.php">tests/unit/</directory>
 
       <!-- requires HTTP connection -->
-<!--
       <exclude>tests/unit/WindowsAzure/Common/Internal/Http/HttpClientTest.php</exclude>
--->
 
       <!-- Test that requires AZURE_STORAGE_CONNECTION_STRING -->
-
       <exclude>tests/unit/WindowsAzure/Common/Internal/Authentication/OAuthSchemeTest.php</exclude>
       <exclude>tests/unit/WindowsAzure/Common/Internal/OAuthRestProxyTest.php</exclude>
-
       <exclude>tests/unit/WindowsAzure/Common/Internal/Filters/WrapFilterTest.php</exclude>
 
+<!--
       <exclude>tests/unit/WindowsAzure/MediaServices/MediaServicesRestProxyTest.php</exclude>
-
+-->
       <exclude>tests/unit/WindowsAzure/ServiceBus/Internal/WrapTokenManagerTest.php</exclude>
       <exclude>tests/unit/WindowsAzure/ServiceBus/ServiceBusRestProxyTest.php</exclude>
       <exclude>tests/unit/WindowsAzure/ServiceBus/WrapRestProxyTest.php</exclude>
