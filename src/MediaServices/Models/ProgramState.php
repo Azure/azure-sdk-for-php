@@ -35,7 +35,7 @@ namespace WindowsAzure\MediaServices\Models;
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  *
- * @version   Release: 0.4.3_2016-05
+ * @version   Release: 0.4.5_2016-09
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */

@@ -34,7 +34,7 @@ namespace WindowsAzure\Common\Internal;
  * @copyright 2012 Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  *
- * @version   Release: 0.4.4_2016-08
+ * @version   Release: 0.4.5_2016-09
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
@@ -251,7 +251,7 @@ class Resources
     const PRL_XML_NAMESPACE = 'http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1';
 
     // Header values
-    const SDK_USER_AGENT = 'Azure-SDK-For-PHP/0.4.1';
+    const SDK_USER_AGENT = 'Azure-SDK-For-PHP/0.4.5';
     const STORAGE_API_LATEST_VERSION = '2012-02-12';
     const SM_API_LATEST_VERSION = '2011-10-01';
     const DATA_SERVICE_VERSION_VALUE = '1.0;NetFx';
