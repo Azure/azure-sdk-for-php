@@ -25,8 +25,8 @@
 
 namespace Tests\unit\WindowsAzure\Common\Internal\Http;
 
-use Tests\Framework\TestResources;
-use Tests\Mock\WindowsAzure\Common\Internal\Filters\SimpleFilterMock;
+use Tests\framework\TestResources;
+use Tests\mock\WindowsAzure\Common\Internal\Filters\SimpleFilterMock;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Http\Url;

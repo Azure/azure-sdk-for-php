@@ -26,8 +26,8 @@
 namespace Tests\unit\WindowsAzure\Common\Internal\Authentication;
 
 use WindowsAzure\Common\Internal\Authentication\StorageAuthScheme;
-use Tests\Mock\WindowsAzure\Common\Internal\Authentication\StorageAuthSchemeMock;
-use Tests\Framework\TestResources;
+use Tests\mock\WindowsAzure\Common\Internal\Authentication\StorageAuthSchemeMock;
+use Tests\framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
 
 /**

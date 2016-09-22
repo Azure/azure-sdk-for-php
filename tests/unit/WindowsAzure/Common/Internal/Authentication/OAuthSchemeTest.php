@@ -25,11 +25,11 @@
 
 namespace Tests\unit\WindowsAzure\Common\Internal\Authentication;
 
-use Tests\Mock\WindowsAzure\Common\Internal\Authentication\OAuthSchemeMock;
+use Tests\mock\WindowsAzure\Common\Internal\Authentication\OAuthSchemeMock;
 use WindowsAzure\Common\Internal\Authentication\OAuthScheme;
 use WindowsAzure\Common\Internal\Resources;
-use Tests\Framework\ServiceRestProxyTestBase;
-use Tests\Framework\TestResources;
+use Tests\framework\ServiceRestProxyTestBase;
+use Tests\framework\TestResources;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Common\Internal\OAuthRestProxy;

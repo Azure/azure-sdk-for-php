@@ -25,9 +25,9 @@
 
 namespace Tests\unit\WindowsAzure\ServiceManagement;
 
-use Tests\Framework\ServiceRestProxyTestBase;
-use Tests\Framework\ServiceManagementRestProxyTestBase;
-use Tests\Framework\TestResources;
+use Tests\framework\ServiceRestProxyTestBase;
+use Tests\framework\ServiceManagementRestProxyTestBase;
+use Tests\framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
