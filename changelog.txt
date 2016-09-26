@@ -1,3 +1,5 @@
+Windows Azure SDK For PHP 0.4.5, 2016-09-26
+-------------------------------------------
 - All HTTP(S) requests have the same 'User-Agent' header.
 - Updated packages: firebase/php-jwt 3.0 => 4.0, fabpot/php-cs-fixer => friendofphp/php-cs-fixer.
 - Support for HTTP_PROXY environment variable for logging with Fiddler
