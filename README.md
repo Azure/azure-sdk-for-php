@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Azure/azure-sdk-for-php.svg?branch=master)](https://travis-ci.org/Azure/azure-sdk-for-php)
+
 # Microsoft Azure SDK for PHP
 
 This project provides a set of PHP client libraries that make it easy to access
