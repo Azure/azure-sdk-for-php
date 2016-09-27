@@ -271,19 +271,17 @@ class HttpClient implements IHttpClient
 
         $contentLength = Resources::EMPTY_STRING;
 
-        {
-            $method = strtoupper($this->getMethod());
-            if ($method != Resources::HTTP_GET
-                && $method != Resources::HTTP_DELETE
-                && $method != Resources::HTTP_HEAD
-            ) {
-                $contentLength = 0;
+        $method = strtoupper($this->getMethod());
+        if ($method != Resources::HTTP_GET
+           && $method != Resources::HTTP_DELETE
+           && $method != Resources::HTTP_HEAD
+        ) {
+            $contentLength = 0;
 
-                if (!is_null($this->getBody())) {
-                    $contentLength = strlen($this->getBody());
-                }
-                $this->_request->setHeader(Resources::CONTENT_LENGTH, $contentLength);
+            if (!is_null($this->getBody())) {
+                $contentLength = strlen($this->getBody());
             }
+            $this->_request->setHeader(Resources::CONTENT_LENGTH, $contentLength);
         }
 
         foreach ($filters as $filter) {
@@ -291,6 +289,12 @@ class HttpClient implements IHttpClient
         }
 
         $this->_response = $this->_request->send();
+
+        $response = $this->_client->send(new \GuzzleHttp\Psr7\Request(
+            $method, 
+            $this->_request->getUrl()->getURL(),
+            $this->_request->getHeaders(),
+            $this->_request->getBody()));
 
         $start = count($filters) - 1;
         for ($index = $start; $index >= 0; --$index) {
