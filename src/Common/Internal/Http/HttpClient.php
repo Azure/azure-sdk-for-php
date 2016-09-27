@@ -45,6 +45,11 @@ use WindowsAzure\Common\Internal\Validate;
 class HttpClient implements IHttpClient
 {
     /**
+     * @var \GuzzleHttp\Client
+     */
+    private $_client;
+
+    /**
      * @var \HTTP_Request2
      */
     private $_request;
@@ -114,6 +119,8 @@ class HttpClient implements IHttpClient
             $config[Resources::SSL_CAFILE] = $certificateAuthorityPath;
             $config[Resources::SSL_VERIFY_PEER] = true;
         }
+
+        $this->_client = new \GuzzleHttp\Client($config);
 
         $this->_request = new \HTTP_Request2(
             null, null, $config
