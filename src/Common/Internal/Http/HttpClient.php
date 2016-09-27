@@ -263,16 +263,20 @@ class HttpClient implements IHttpClient
         }
 
         $contentLength = Resources::EMPTY_STRING;
-        if (strtoupper($this->getMethod()) != Resources::HTTP_GET
-            && strtoupper($this->getMethod()) != Resources::HTTP_DELETE
-            && strtoupper($this->getMethod()) != Resources::HTTP_HEAD
-        ) {
-            $contentLength = 0;
 
-            if (!is_null($this->getBody())) {
-                $contentLength = strlen($this->getBody());
+        {
+            $method = strtoupper($this->getMethod());
+            if ($method != Resources::HTTP_GET
+                && $method != Resources::HTTP_DELETE
+                && $method != Resources::HTTP_HEAD
+            ) {
+                $contentLength = 0;
+
+                if (!is_null($this->getBody())) {
+                    $contentLength = strlen($this->getBody());
+                }
+                $this->_request->setHeader(Resources::CONTENT_LENGTH, $contentLength);
             }
-            $this->_request->setHeader(Resources::CONTENT_LENGTH, $contentLength);
         }
 
         foreach ($filters as $filter) {
