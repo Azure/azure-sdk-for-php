@@ -73,10 +73,6 @@ class HttpClient implements IHttpClient
      */
     private $_expectedStatusCodes;
 
-    static function initProxy()
-    {
-    }
-
     /**
      * Initializes new HttpClient object.
      *
