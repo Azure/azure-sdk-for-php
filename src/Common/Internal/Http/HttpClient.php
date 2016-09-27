@@ -284,7 +284,7 @@ class HttpClient implements IHttpClient
             $this->_request = $filter->handleRequest($this)->_request;
         }
 
-        $this->_response = $this->_request->send();
+        // $this->_response = $this->_request->send();
 
         $response = $this->_client->send(new \GuzzleHttp\Psr7\Request(
             $method, 
