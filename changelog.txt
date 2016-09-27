@@ -1,3 +1,5 @@
+- Switch to PHP 5.6.
+
 Windows Azure SDK For PHP 0.4.5, 2016-09-26
 -------------------------------------------
 - All HTTP(S) requests have the same 'User-Agent' header.
