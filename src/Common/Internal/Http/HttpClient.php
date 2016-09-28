@@ -54,6 +54,8 @@ class HttpClient implements IHttpClient
      */
     private $_request;
 
+    private $_postParams = array();
+
     /**
      * @var WindowsAzure\Common\Internal\Http\IUrl
      */
@@ -244,6 +246,9 @@ class HttpClient implements IHttpClient
     public function setPostParameters($postParameters)
     {
         $this->_request->addPostParameter($postParameters);
+        foreach ($postParameters as $k => $v) { 
+            $this->_postParams[$k] = $v;
+        }         
     }
 
     /**
@@ -286,11 +291,16 @@ class HttpClient implements IHttpClient
 
         // $this->_response = $this->_request->send();
 
-        $response = $this->_client->send(new \GuzzleHttp\Psr7\Request(
-            $method, 
+        $newRequest = new \GuzzleHttp\Psr7\Request(
+            $method,
             $this->_request->getUrl()->getURL(),
             $this->_request->getHeaders(),
-            $this->_request->getBody()));
+            $this->_request->getBody());
+
+        $response = $this->_client->send($newRequest, $this->_postParams);
+
+        $this->_response = new \HTTP_Request2_Response(
+            'HTTP/1.1 ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase());
 
         $start = count($filters) - 1;
         for ($index = $start; $index >= 0; --$index) {
