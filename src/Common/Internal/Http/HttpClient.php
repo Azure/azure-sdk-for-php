@@ -93,21 +93,6 @@ class HttpClient implements IHttpClient
             Resources::SSL_VERIFY_HOST => false,
         );
 
-        // Read HTTP_PROXY enviroment variable, if any.
-        // To use it with Fiddler, set the environment variable HTTP_PROXY
-        // to http://localhost:8888. E.g.
-        //
-        //     set HTTP_PROXY=http://localhost:8888
-        //     php my_program.php
-        $proxy = getenv('HTTP_PROXY');
-        if ($proxy) {
-            $proxyStruct = parse_url($proxy);
-            if ($proxyStruct) {
-                $config['proxy_host'] = $proxyStruct['host'];
-                $config['proxy_port'] = $proxyStruct['port'];
-            }
-        }
-
         if (!empty($certificatePath)) {
             $config[Resources::SSL_LOCAL_CERT] = $certificatePath;
             $config[Resources::SSL_VERIFY_HOST] = true;
