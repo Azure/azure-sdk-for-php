@@ -116,6 +116,14 @@ class HttpClient implements IHttpClient
         $this->_requestUrl = null;
         $this->_response = null;
         $this->_expectedStatusCodes = array();
+
+        // Since PHP 5.6, a default value for certificate validation is 'true'.
+        // We set it back to false if an enviroment variable 'HTTPS_PROXY' is 
+        // defined.
+        if ($proxy = getenv('HTTPS_PROXY'))
+        {
+            $this->_postParams['verify'] = false;
+        }
     }
 
     /**
@@ -282,7 +290,6 @@ class HttpClient implements IHttpClient
             $this->_request->getHeaders(),
             $this->_request->getBody());
 
-        $this->_postParams['verify'] = false;
         $response = $this->_client->send($newRequest, $this->_postParams);
 
         $this->_response = new \HTTP_Request2_Response(
