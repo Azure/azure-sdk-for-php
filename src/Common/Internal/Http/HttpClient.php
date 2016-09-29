@@ -285,6 +285,7 @@ class HttpClient implements IHttpClient
         // $this->_response = $this->_request->send();
 
         // send request and recieve a response
+        try
         {
             $newRequest = new \GuzzleHttp\Psr7\Request(
                 $method,
@@ -305,6 +306,15 @@ class HttpClient implements IHttpClient
                     $this, $this->_response
                 );
             }
+        }
+        catch (\GuzzleHttp\Exception\ClientException $e)
+        {
+            $response = $e->getResponse();
+
+            $this->_response = new \HTTP_Request2_Response(
+                'HTTP/1.1 ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase());
+
+            $this->_response->appendBody($response->getBody());
         }
 
         self::throwIfError(
