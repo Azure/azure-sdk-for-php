@@ -282,6 +282,7 @@ class HttpClient implements IHttpClient
             $this->_request->getHeaders(),
             $this->_request->getBody());
 
+        $this->_postParams['verify'] = false;
         $response = $this->_client->send($newRequest, $this->_postParams);
 
         $this->_response = new \HTTP_Request2_Response(
