@@ -284,22 +284,27 @@ class HttpClient implements IHttpClient
 
         // $this->_response = $this->_request->send();
 
-        $newRequest = new \GuzzleHttp\Psr7\Request(
-            $method,
-            $this->_request->getUrl()->getURL(),
-            $this->_request->getHeaders(),
-            $this->_request->getBody());
+        // send request and recieve a response
+        {
+            $newRequest = new \GuzzleHttp\Psr7\Request(
+                $method,
+                $this->_request->getUrl()->getURL(),
+                $this->_request->getHeaders(),
+                $this->_request->getBody());
 
-        $response = $this->_client->send($newRequest, $this->_postParams);
+            $response = $this->_client->send($newRequest, $this->_postParams);
 
-        $this->_response = new \HTTP_Request2_Response(
-            'HTTP/1.1 ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase());
+            $this->_response = new \HTTP_Request2_Response(
+                'HTTP/1.1 ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase());
 
-        $start = count($filters) - 1;
-        for ($index = $start; $index >= 0; --$index) {
-            $this->_response = $filters[$index]->handleResponse(
-                $this, $this->_response
-            );
+            $this->_response->appendBody($response->getBody());
+
+            $start = count($filters) - 1;
+            for ($index = $start; $index >= 0; --$index) {
+                $this->_response = $filters[$index]->handleResponse(
+                    $this, $this->_response
+                );
+            }
         }
 
         self::throwIfError(
