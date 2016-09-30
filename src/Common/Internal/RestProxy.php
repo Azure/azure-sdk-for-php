@@ -140,9 +140,7 @@ class RestProxy
         $url->setQueryVariables($queryParams);
         $url->appendUrlPath($path);
 
-        $channel->send($this->_filters, $url);
-
-        return $channel->getResponse();
+        return $channel->sendAndGetResponse($this->_filters, $url);
     }
 
     /**

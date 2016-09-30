@@ -242,18 +242,18 @@ class HttpClient implements IHttpClient
     }
 
     /**
-     * Processes the reuqest through HTTP pipeline with passed $filters,
+     * Processes the reuqest through HTTP pipeline with passed $filters, 
      * sends HTTP request to the wire and process the response in the HTTP pipeline.
-     *
+     * 
      * @param array $filters HTTP filters which will be applied to the request before
      *                       send and then applied to the response.
      * @param IUrl  $url     Request url.
      *
      * @throws WindowsAzure\Common\ServiceException
-     *
-     * @return string The response body
+     * 
+     * @return \HTTP_Request2_Response The response.
      */
-    public function send($filters, $url = null)
+    public function sendAndGetResponse($filters, $url = null)
     {
         if (isset($url)) {
             $this->setUrl($url);
@@ -297,7 +297,24 @@ class HttpClient implements IHttpClient
             $this->_expectedStatusCodes
         );
 
-        return $this->_response->getBody();
+        return $this->_response;
+    }
+
+    /**
+     * Processes the reuqest through HTTP pipeline with passed $filters,
+     * sends HTTP request to the wire and process the response in the HTTP pipeline.
+     *
+     * @param array $filters HTTP filters which will be applied to the request before
+     *                       send and then applied to the response.
+     * @param IUrl  $url     Request url.
+     *
+     * @throws WindowsAzure\Common\ServiceException
+     *
+     * @return string The response body
+     */
+    public function send($filters, $url = null)
+    {
+        return $this->sendAndGetResponse($filters, $url)->getBody();
     }
 
     /**
@@ -372,16 +389,6 @@ class HttpClient implements IHttpClient
     public function getBody()
     {
         return $this->_request->getBody();
-    }
-
-    /**
-     * Gets the response object.
-     *
-     * @return \HTTP_Request2_Response
-     */
-    public function getResponse()
-    {
-        return $this->_response;
     }
 
     /**
