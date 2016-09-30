@@ -62,13 +62,6 @@ class HttpClient implements IHttpClient
     private $_requestUrl;
 
     /**
-     * Holds the latest response object.
-     *
-     * @var \HTTP_Request2_Response
-     */
-    private $_response;
-
-    /**
      * Holds expected status code after sending the request.
      *
      * @var array
@@ -114,11 +107,10 @@ class HttpClient implements IHttpClient
         $this->setHeader('expect', '');
 
         $this->_requestUrl = null;
-        $this->_response = null;
         $this->_expectedStatusCodes = array();
 
         // Since PHP 5.6, a default value for certificate validation is 'true'.
-        // We set it back to false if an enviroment variable 'HTTPS_PROXY' is 
+        // We set it back to false if an enviroment variable 'HTTPS_PROXY' is
         // defined.
         if ($proxy = getenv('HTTPS_PROXY'))
         {
@@ -239,9 +231,9 @@ class HttpClient implements IHttpClient
     public function setPostParameters($postParameters)
     {
         $this->_request->addPostParameter($postParameters);
-        foreach ($postParameters as $k => $v) { 
+        foreach ($postParameters as $k => $v) {
             $this->_postParams[$k] = $v;
-        }         
+        }
     }
 
     /**
@@ -254,9 +246,9 @@ class HttpClient implements IHttpClient
      *
      * @throws WindowsAzure\Common\ServiceException
      *
-     * @return string The response body
+     * @return \HTTP_Request2_Response The response.
      */
-    public function send($filters, $url = null)
+    public function sendAndGetResponse($filters, $url = null)
     {
         if (isset($url)) {
             $this->setUrl($url);
@@ -282,9 +274,8 @@ class HttpClient implements IHttpClient
             $this->_request = $filter->handleRequest($this)->_request;
         }
 
-        // $this->_response = $this->_request->send();
-
         // send request and recieve a response
+        $response = null;
         try
         {
             $newRequest = new \GuzzleHttp\Psr7\Request(
@@ -293,38 +284,53 @@ class HttpClient implements IHttpClient
                 $this->_request->getHeaders(),
                 $this->_request->getBody());
 
-            $response = $this->_client->send($newRequest, $this->_postParams);
+            $newResponse = $this->_client->send($newRequest, $this->_postParams);
 
-            $this->_response = new \HTTP_Request2_Response(
-                'HTTP/1.1 ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase());
+            $response = new \HTTP_Request2_Response(
+                'HTTP/1.1 ' . $newResponse->getStatusCode() . ' ' . $newResponse->getReasonPhrase());
 
-            $this->_response->appendBody($response->getBody());
+            $response->appendBody($newResponse->getBody());
 
             $start = count($filters) - 1;
             for ($index = $start; $index >= 0; --$index) {
-                $this->_response = $filters[$index]->handleResponse(
-                    $this, $this->_response
-                );
+                $response = $filters[$index]->handleResponse($this, $response);
             }
         }
         catch (\GuzzleHttp\Exception\ClientException $e)
         {
-            $response = $e->getResponse();
+            $newResponse = $e->getResponse();
 
-            $this->_response = new \HTTP_Request2_Response(
-                'HTTP/1.1 ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase());
+            $response = new \HTTP_Request2_Response(
+                'HTTP/1.1 ' . $newResponse->getStatusCode() . ' ' . $newResponse->getReasonPhrase());
 
-            $this->_response->appendBody($response->getBody());
+            $response->appendBody($newResponse->getBody());
         }
 
         self::throwIfError(
-            $this->_response->getStatus(),
-            $this->_response->getReasonPhrase(),
-            $this->_response->getBody(),
+            $response->getStatus(),
+            $response->getReasonPhrase(),
+            $response->getBody(),
             $this->_expectedStatusCodes
         );
 
-        return $this->_response->getBody();
+        return $response;
+    }
+
+    /**
+     * Processes the reuqest through HTTP pipeline with passed $filters,
+     * sends HTTP request to the wire and process the response in the HTTP pipeline.
+     *
+     * @param array $filters HTTP filters which will be applied to the request before
+     *                       send and then applied to the response.
+     * @param IUrl  $url     Request url.
+     *
+     * @throws WindowsAzure\Common\ServiceException
+     *
+     * @return string The response body
+     */
+    public function send($filters, $url = null)
+    {
+        return $this->sendAndGetResponse($filters, $url)->getBody();
     }
 
     /**
@@ -399,16 +405,6 @@ class HttpClient implements IHttpClient
     public function getBody()
     {
         return $this->_request->getBody();
-    }
-
-    /**
-     * Gets the response object.
-     *
-     * @return \HTTP_Request2_Response
-     */
-    public function getResponse()
-    {
-        return $this->_response;
     }
 
     /**
