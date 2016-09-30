@@ -230,7 +230,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers WindowsAzure\Common\Internal\Http\HttpClient::sendAndGetResponse
      */
-    public function testGetResponse()
+    public function testSendAndGetResponse()
     {
         // Setup
         $channel = new HttpClient();
