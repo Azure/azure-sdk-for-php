@@ -55,13 +55,6 @@ class HttpClient implements IHttpClient
     private $_requestUrl;
 
     /**
-     * Holds the latest response object.
-     *
-     * @var \HTTP_Request2_Response
-     */
-    private $_response;
-
-    /**
      * Holds expected status code after sending the request.
      *
      * @var array
@@ -122,7 +115,6 @@ class HttpClient implements IHttpClient
         $this->setHeader('expect', '');
 
         $this->_requestUrl = null;
-        $this->_response = null;
         $this->_expectedStatusCodes = array();
     }
 
@@ -281,23 +273,21 @@ class HttpClient implements IHttpClient
             $this->_request = $filter->handleRequest($this)->_request;
         }
 
-        $this->_response = $this->_request->send();
+        $response = $this->_request->send();
 
         $start = count($filters) - 1;
         for ($index = $start; $index >= 0; --$index) {
-            $this->_response = $filters[$index]->handleResponse(
-                $this, $this->_response
-            );
+            $response = $filters[$index]->handleResponse($this, $response);
         }
 
         self::throwIfError(
-            $this->_response->getStatus(),
-            $this->_response->getReasonPhrase(),
-            $this->_response->getBody(),
+            $response->getStatus(),
+            $response->getReasonPhrase(),
+            $response->getBody(),
             $this->_expectedStatusCodes
         );
 
-        return $this->_response;
+        return $response;
     }
 
     /**
