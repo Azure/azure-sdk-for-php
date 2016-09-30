@@ -228,6 +228,23 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::sendAndGetResponse
+     */
+    public function testSendAndGetResponse()
+    {
+        // Setup
+        $channel = new HttpClient();
+        $url = new Url('http://example.com/');
+        $channel->setExpectedStatusCode('200');
+        
+        // Test
+        $response = $channel->sendAndGetResponse(array(), $url);
+
+        // Assert
+        $this->assertInstanceOf('\HTTP_Request2_Response', $response);
+    }
+
+    /**
      * @covers WindowsAzure\Common\Internal\Http\HttpClient::send
      */
     public function testSendSimple()
@@ -462,24 +479,6 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         // Assert
         $this->assertNotEquals($channel->getHeaders(), $actual->getHeaders());
         $this->assertNotEquals($channel->getUrl()->getUrl(), $actual->getUrl()->getUrl());
-    }
-
-    /**
-     * @covers WindowsAzure\Common\Internal\Http\HttpClient::getResponse
-     */
-    public function testGetResponse()
-    {
-        // Setup
-        $channel = new HttpClient();
-        $url = new Url('http://example.com/');
-        $channel->setExpectedStatusCode('200');
-        $channel->send(array(), $url);
-
-        // Test
-        $response = $channel->getResponse();
-
-        // Assert
-        $this->assertInstanceOf('\HTTP_Request2_Response', $response);
     }
 
     /**
