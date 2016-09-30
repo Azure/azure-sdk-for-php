@@ -56,8 +56,10 @@ Microsoft Azure tables, blobs, queues, service bus (queues and topics), service 
 
 To get the source code from GitHub, type
 
-    git clone https://github.com/Azure/azure-sdk-for-php.git
-    cd ./azure-sdk-for-php
+```
+git clone https://github.com/Azure/azure-sdk-for-php.git
+cd ./azure-sdk-for-php
+```
 
 > **Note**
 > 
@@ -67,19 +69,22 @@ To get the source code from GitHub, type
 ##Install via Composer
 
 * Create a file named **composer.json** in the root of your project and add the following code to it:
-```json
-    {
-        "require": {        
-            "microsoft/windowsazure": "^0.4"
-        }  
-    }
-```
+
+  ```json
+  {
+      "require": {        
+          "microsoft/windowsazure": "^0.4"
+      }  
+  }
+  ```
 
 * Download **[composer.phar](http://getcomposer.org/composer.phar)** in your project root.
 
 * Open a command prompt and execute this in your project root
 
-    php composer.phar install
+  ```
+  php composer.phar install
+  ```
 
   > **Note**
   >
@@ -93,59 +98,80 @@ There are four basic steps that have to be performed before you can make a call 
 
 * First, include the autoloader script:
 
-    require_once "vendor/autoload.php"; 
+  ```PHP
+  require_once "vendor/autoload.php";
+  ```
   
 * Include the namespaces you are going to use.
 
   To create any Microsoft Azure service client you need to use the **ServicesBuilder** class:
 
-    use WindowsAzure\Common\ServicesBuilder;
+  ```PHP
+  use WindowsAzure\Common\ServicesBuilder;
+  ```
 
   To process exceptions you need:
 
-    use WindowsAzure\Common\ServiceException;
-
+  ```PHP
+  use WindowsAzure\Common\ServiceException;
+  ```
   
 * To instantiate the service client you will also need a valid connection string. The format is: 
 
   * For accessing a live storage service (tables, blobs, queues):
   
-      DefaultEndpointsProtocol=[http|https];AccountName=[yourAccount];AccountKey=[yourKey]
+    ```
+    DefaultEndpointsProtocol=[http|https];AccountName=[yourAccount];AccountKey=[yourKey]
+    ```
   
   * For accessing the emulator storage:
   
-      UseDevelopmentStorage=true
+    ```
+    UseDevelopmentStorage=true
+    ```
 
   * For accessing the Service Bus:
 
-      Endpoint=[yourEndpoint];SharedSecretIssuer=[yourWrapAuthenticationName];SharedSecretValue=[yourWrapPassword]
+    ```
+    Endpoint=[yourEndpoint];SharedSecretIssuer=[yourWrapAuthenticationName];SharedSecretValue=[yourWrapPassword]
+    ```
 
     Where the Endpoint is typically of the format `https://[yourNamespace].servicebus.windows.net`.
 
   * For accessing Service Management APIs:
 
-      SubscriptionID=[yourSubscriptionId];CertificatePath=[filePathToYourCertificate]
+    ```
+    SubscriptionID=[yourSubscriptionId];CertificatePath=[filePathToYourCertificate]
+    ```
 
 
 * Instantiate a "REST Proxy" - a wrapper around the available calls for the given service.
 
   * For the Storage services:
 
-      $tableRestProxy = ServicesBuilder::getInstance()->createTableService($connectionString);
-      $blobRestProxy = ServicesBuilder::getInstance()->createBlobService($connectionString);
-      $queueRestProxy = ServicesBuilder::getInstance()->createQueueService($connectionString);
+    ```PHP
+    $tableRestProxy = ServicesBuilder::getInstance()->createTableService($connectionString);
+    $blobRestProxy = ServicesBuilder::getInstance()->createBlobService($connectionString);
+    $queueRestProxy = ServicesBuilder::getInstance()->createQueueService($connectionString);
+    ```
 
   * For Service Bus:
 
-      $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
+    ```PHP
+    $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
+    ```
 
   * For Service Management:
 
-      $serviceManagementRestProxy = ServicesBuilder::getInstance()->createServiceManagementService($connectionString);
+    ```PHP
+    $serviceManagementRestProxy = ServicesBuilder::getInstance()->createServiceManagementService($connectionString);
+    ```
 
   * For Media Services:
 
-      $mediaServicesRestProxy = ServicesBuilder->getInstance()->createMediaServicesService(new MediaServicesSettings([YourAccountName], [YourPrimaryOrSecondaryAccessKey]));
+    ```PHP
+    $mediaServicesRestProxy = ServicesBuilder->getInstance()->createMediaServicesService(new MediaServicesSettings([YourAccountName], [YourPrimaryOrSecondaryAccessKey]));
+    ```
 
 ## Table Storage
 
@@ -582,8 +608,7 @@ $options = new CreateStorageServiceOptions();
 $options->setLocation('West US');
 
 $result = $serviceManagementRestProxy->createStorageService($name, $label, $options);
-```
-  
+```  
   
 ### Create a Cloud Service
 
@@ -622,9 +647,9 @@ $status = $serviceManagementRestProxy->getOperationStatus($result);
 echo "Operation status: ".$status->getStatus()."<br />";
 ```
 
-##Media Services
+## Media Services
  
-###Create new asset with file
+### Create new asset with file
 
 To create an asset with a file you need to create an empty asset, create access policy with write permission, create a locator joining your asset and access policy, perform actual upload and generate file info.
 ```PHP
@@ -644,7 +669,7 @@ $restProxy->uploadAssetFile($sasLocator, '[file name]', '[file content]');
 $restProxy->createFileInfos($asset);
 ```
 
-###Encode asset
+### Encode asset
 
 To perform media file encoding you will need input asset ($inputAsset) with a file in it (something like in previous chapter). Also you need to create an array of task data objects and a job data object. To create a task object use a media processor, task XML body and configuration name.
 ```PHP
@@ -656,7 +681,7 @@ $task->setConfiguration('[Configuration name]');
 $restProxy->createJob(new Job(), array($inputAsset), array($task));
 ```
 
-###Get public URL to encoded asset
+### Get public URL to encoded asset
 
 After you’ve uploaded a media file and encode it you can get a download URL for that file or a streaming URL for multiple bitrate files. Create a new access policy with read permission and link it with job output asset via locator.
 
@@ -686,7 +711,7 @@ sleep(30);
 $streamingUrl = $originLocator->getPath() . '[Manifest file name]' . "/manifest";
 ```
 
-###Manage media services entities
+### Manage media services entities
 
 Media services CRUD operations are performed through media services rest proxy class. It has methods like “createAsset”, “createLocator”, “createJob” and etc. for entities creations. 
 
