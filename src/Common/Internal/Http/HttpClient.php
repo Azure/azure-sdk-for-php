@@ -290,9 +290,13 @@ class HttpClient implements IHttpClient
         {
             $newResponse = $e->getResponse();
         }
-
+ 
         $response = new \HTTP_Request2_Response(
             'HTTP/1.1 ' . $newResponse->getStatusCode() . ' ' . $newResponse->getReasonPhrase());
+
+        foreach ($newResponse->getHeaders() as $name => $values) {
+            $response->parseHeaderLine($name . ': ' . implode(', ', $values));
+        }
 
         $response->appendBody($newResponse->getBody());
 
