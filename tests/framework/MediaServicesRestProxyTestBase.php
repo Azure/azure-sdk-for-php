@@ -274,6 +274,8 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     {
         $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
 
+        $this->assertNotNull($mediaProcessor);
+
         $taskTemplate = new TaskTemplate(1, 1);
         $taskTemplate->setMediaProcessorId($mediaProcessor->getId());
         $taskTemplate->setConfiguration(TestResources::MEDIA_SERVICES_TASK_COFIGURATION);
