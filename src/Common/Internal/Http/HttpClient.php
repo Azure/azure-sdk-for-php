@@ -89,6 +89,7 @@ class HttpClient implements IHttpClient
         if (!empty($certificatePath)) {
             $config[Resources::SSL_LOCAL_CERT] = $certificatePath;
             $config[Resources::SSL_VERIFY_HOST] = true;
+            $this->_postParams[\GuzzleHttp\RequestOptions::CERT] = $certificatePath;
         }
 
         if (!empty($certificateAuthorityPath)) {
