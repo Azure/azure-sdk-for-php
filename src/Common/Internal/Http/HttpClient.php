@@ -45,11 +45,6 @@ use WindowsAzure\Common\Internal\Validate;
 class HttpClient implements IHttpClient
 {
     /**
-     * @var \GuzzleHttp\Client
-     */
-    private $_client;
-
-    /**
      * @var \HTTP_Request2
      */
     private $_request;
@@ -101,8 +96,6 @@ class HttpClient implements IHttpClient
             $this->_config[Resources::SSL_CAFILE] = $certificateAuthorityPath;
             $this->_config[Resources::SSL_VERIFY_PEER] = true;
         }
-
-        $this->_client = new \GuzzleHttp\Client($this->_config);
 
         $this->_request = new \HTTP_Request2(
             null, null, $this->_config
@@ -283,6 +276,8 @@ class HttpClient implements IHttpClient
             $this->_request = $filter->handleRequest($this)->_request;
         }
 
+        $client = new \GuzzleHttp\Client($this->_config);
+
         // send request and recieve a response
         $newResponse = null;
         try
@@ -293,7 +288,7 @@ class HttpClient implements IHttpClient
                 $this->_request->getHeaders(),
                 $this->_request->getBody());
 
-            $newResponse = $this->_client->send($newRequest, $this->_postParams);
+            $newResponse = $client->send($newRequest, $this->_postParams);
         }
         catch (\GuzzleHttp\Exception\ClientException $e)
         {
