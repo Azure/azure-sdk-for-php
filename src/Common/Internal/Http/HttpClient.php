@@ -49,6 +49,11 @@ class HttpClient implements IHttpClient
      */
     private $_request;
 
+    /**
+     * @var string
+     */
+    private $_method;
+
     private $_postParams = array();
 
     /**
@@ -168,6 +173,7 @@ class HttpClient implements IHttpClient
     public function setMethod($method)
     {
         $this->_request->setMethod($method);
+        $this->_method = strtoupper($method);
     }
 
     /**
@@ -177,7 +183,7 @@ class HttpClient implements IHttpClient
      */
     public function getMethod()
     {
-        return $this->_request->getMethod();
+        return $this->_method;
     }
 
     /**
@@ -259,10 +265,9 @@ class HttpClient implements IHttpClient
 
         $contentLength = Resources::EMPTY_STRING;
 
-        $method = strtoupper($this->getMethod());
-        if ($method != Resources::HTTP_GET
-           && $method != Resources::HTTP_DELETE
-           && $method != Resources::HTTP_HEAD
+        if ($this->_method != Resources::HTTP_GET
+           && $this->_method != Resources::HTTP_DELETE
+           && $this->_method != Resources::HTTP_HEAD
         ) {
             $contentLength = 0;
 
@@ -283,7 +288,7 @@ class HttpClient implements IHttpClient
         try
         {
             $newRequest = new \GuzzleHttp\Psr7\Request(
-                $method,
+                $this->_method,
                 $this->_request->getUrl()->getURL(),
                 $this->_request->getHeaders(),
                 $this->_request->getBody());
