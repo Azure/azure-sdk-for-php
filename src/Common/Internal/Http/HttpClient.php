@@ -62,6 +62,11 @@ class HttpClient implements IHttpClient
     private $_requestUrl;
 
     /**
+     * @var array
+     */
+    private $_config;
+
+    /**
      * Holds expected status code after sending the request.
      *
      * @var array
@@ -80,27 +85,27 @@ class HttpClient implements IHttpClient
         $certificatePath = Resources::EMPTY_STRING,
         $certificateAuthorityPath = Resources::EMPTY_STRING
     ) {
-        $config = array(
+        $this->_config = array(
             Resources::USE_BRACKETS => true,
             Resources::SSL_VERIFY_PEER => false,
             Resources::SSL_VERIFY_HOST => false,
         );
 
         if (!empty($certificatePath)) {
-            $config[Resources::SSL_LOCAL_CERT] = $certificatePath;
-            $config[Resources::SSL_VERIFY_HOST] = true;
+            $this->_config[Resources::SSL_LOCAL_CERT] = $certificatePath;
+            $this->_config[Resources::SSL_VERIFY_HOST] = true;
             $this->_postParams[\GuzzleHttp\RequestOptions::CERT] = $certificatePath;
         }
 
         if (!empty($certificateAuthorityPath)) {
-            $config[Resources::SSL_CAFILE] = $certificateAuthorityPath;
-            $config[Resources::SSL_VERIFY_PEER] = true;
+            $this->_config[Resources::SSL_CAFILE] = $certificateAuthorityPath;
+            $this->_config[Resources::SSL_VERIFY_PEER] = true;
         }
 
-        $this->_client = new \GuzzleHttp\Client($config);
+        $this->_client = new \GuzzleHttp\Client($this->_config);
 
         $this->_request = new \HTTP_Request2(
-            null, null, $config
+            null, null, $this->_config
         );
 
         // Replace User-Agent.
@@ -373,6 +378,7 @@ class HttpClient implements IHttpClient
     public function setConfig($name, $value = null)
     {
         $this->_request->setConfig($name, $value);
+        $this->_config[$name] = $value;
     }
 
     /**
@@ -385,6 +391,7 @@ class HttpClient implements IHttpClient
     public function getConfig($name)
     {
         return $this->_request->getConfig($name);
+        return $this->_config[$name];
     }
 
     /**
