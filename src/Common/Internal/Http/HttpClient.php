@@ -110,6 +110,9 @@ class HttpClient implements IHttpClient
         $this->_requestUrl = null;
         $this->_expectedStatusCodes = array();
 
+        // Don't allow redirect.
+        $this->_postParams['allow_redirects'] = false;
+
         // Since PHP 5.6, a default value for certificate validation is 'true'.
         // We set it back to false if an enviroment variable 'HTTPS_PROXY' is
         // defined.
@@ -291,7 +294,7 @@ class HttpClient implements IHttpClient
         {
             $newResponse = $e->getResponse();
         }
- 
+
         $response = new \HTTP_Request2_Response(
             'HTTP/1.1 ' . $newResponse->getStatusCode() . ' ' . $newResponse->getReasonPhrase());
 
