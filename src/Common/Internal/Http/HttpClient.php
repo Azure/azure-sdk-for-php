@@ -75,6 +75,11 @@ class HttpClient implements IHttpClient
     private $_config;
 
     /**
+     * @var string
+     */
+    private $_body;
+
+    /**
      * Holds expected status code after sending the request.
      *
      * @var array
@@ -283,8 +288,8 @@ class HttpClient implements IHttpClient
         ) {
             $contentLength = 0;
 
-            if (!is_null($this->getBody())) {
-                $contentLength = strlen($this->getBody());
+            if (!is_null($this->_body)) {
+                $contentLength = strlen($this->_body);
             }
             $this->setHeader(Resources::CONTENT_LENGTH, $contentLength, true);
         }
@@ -303,7 +308,7 @@ class HttpClient implements IHttpClient
                 $this->_method,
                 $this->_request->getUrl()->getURL(),
                 $this->_headers,
-                $this->_request->getBody());
+                $this->_body);
 
             $newResponse = $client->send($newRequest, $this->_postParams);
         }
@@ -414,7 +419,7 @@ class HttpClient implements IHttpClient
     public function setBody($body)
     {
         Validate::isString($body, 'body');
-        $this->_request->setBody($body);
+        $this->_body = $body;
     }
 
     /**
@@ -424,7 +429,7 @@ class HttpClient implements IHttpClient
      */
     public function getBody()
     {
-        return $this->_request->getBody();
+        return $this->_body;
     }
 
     /**
