@@ -278,7 +278,7 @@ class HttpClient implements IHttpClient
         }
 
         foreach ($filters as $filter) {
-            $this->_request = $filter->handleRequest($this)->_request;
+            $filter->handleRequest($this);
         }
 
         $client = new \GuzzleHttp\Client($this->_config);
