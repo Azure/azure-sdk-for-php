@@ -110,9 +110,7 @@ class HttpClient implements IHttpClient
             $this->_config[Resources::SSL_VERIFY_PEER] = true;
         }
 
-        $this->_request = new \HTTP_Request2(
-            null, null, $this->_config
-        );
+        $this->_request = new \HTTP_Request2();
 
         // Replace User-Agent.
         $this->setHeader(Resources::USER_AGENT, Resources::SDK_USER_AGENT, true);
@@ -391,7 +389,6 @@ class HttpClient implements IHttpClient
      */
     public function setConfig($name, $value = null)
     {
-        $this->_request->setConfig($name, $value);
         $this->_config[$name] = $value;
     }
 
@@ -404,7 +401,6 @@ class HttpClient implements IHttpClient
      */
     public function getConfig($name)
     {
-        return $this->_request->getConfig($name);
         return $this->_config[$name];
     }
 
