@@ -52,7 +52,7 @@ class HttpClient implements IHttpClient
     /**
      * @var string
      */
-    private $_method;
+    private $_method = Resources::HTTP_GET;
 
     private $_postParams = array();
 
