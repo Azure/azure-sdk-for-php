@@ -62,7 +62,7 @@ class HeadersFilter implements IServiceFilter
     /**
      * Adds static header(s) to the HTTP request headers.
      *
-     * @param HttpClient $request HTTP channel object.
+     * @param IHttpClient $request HTTP channel object.
      * 
      * @return \HTTP_Request2
      */
@@ -81,7 +81,7 @@ class HeadersFilter implements IServiceFilter
     /**
      * Does nothing with the response.
      *
-     * @param HttpClient              $request  HTTP channel object.
+     * @param IHttpClient              $request  HTTP channel object.
      * @param \HTTP_Request2_Response $response HTTP response object.
      * 
      * @return \HTTP_Request2_Response

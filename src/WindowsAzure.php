@@ -52,7 +52,6 @@ spl_autoload_register(
             'src\\common\\internal\\filters\\datefilter' => '/Common/Internal/Filters/DateFilter.php',
             'src\\common\\internal\\filters\\exponentialretrypolicy' => '/Common/Internal/Filters/ExponentialRetryPolicy.php',
             'src\\common\\internal\\filters\\headersfilter' => '/Common/Internal/Filters/HeadersFilter.php',
-            'src\\common\\internal\\filters\\retrypolicy' => '/Common/Internal/Filters/RetryPolicy.php',
             'src\\common\\internal\\filters\\retrypolicyfilter' => '/Common/Internal/Filters/RetryPolicyFilter.php',
             'src\\common\\internal\\filters\\wrapfilter' => '/Common/Internal/Filters/WrapFilter.php',
             'src\\common\\internal\\http\\batchrequest' => '/Common/Internal/Http/BatchRequest.php',

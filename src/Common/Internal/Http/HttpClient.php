@@ -234,15 +234,15 @@ class HttpClient implements IHttpClient
     }
 
     /**
-     * Processes the reuqest through HTTP pipeline with passed $filters, 
+     * Processes the reuqest through HTTP pipeline with passed $filters,
      * sends HTTP request to the wire and process the response in the HTTP pipeline.
-     * 
+     *
      * @param array $filters HTTP filters which will be applied to the request before
      *                       send and then applied to the response.
      * @param IUrl  $url     Request url.
      *
      * @throws WindowsAzure\Common\ServiceException
-     * 
+     *
      * @return \HTTP_Request2_Response The response.
      */
     public function sendAndGetResponse($filters, $url = null)
@@ -270,7 +270,7 @@ class HttpClient implements IHttpClient
         }
 
         foreach ($filters as $filter) {
-            $this->_request = $filter->handleRequest($this)->_request;
+            $filter->handleRequest($this);
         }
 
         $response = $this->_request->send();
