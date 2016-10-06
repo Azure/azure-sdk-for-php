@@ -54,7 +54,15 @@ class HttpClient implements IHttpClient
      */
     private $_method = Resources::HTTP_GET;
 
+    /**
+     * @var array
+     */
     private $_postParams = array();
+
+    /**
+     * @var array
+     */
+    private $_headers = array();
 
     /**
      * @var WindowsAzure\Common\Internal\Http\IUrl
@@ -194,7 +202,7 @@ class HttpClient implements IHttpClient
      */
     public function getHeaders()
     {
-        return $this->_request->getHeaders();
+        return $this->_headers;
     }
 
     /**
@@ -212,7 +220,13 @@ class HttpClient implements IHttpClient
     {
         Validate::isString($value, 'value');
 
-        $this->_request->setHeader($header, $value, $replace);
+        // Header names are case insensitive
+        $header = strtolower($header);
+        if (!isset($this->_headers[$header]) || $replace) {
+            $this->_headers[$header] = $value;
+        } else {
+            $this->_headers[$header] .= ', ' . $value;
+        }
     }
 
     /**
@@ -274,7 +288,7 @@ class HttpClient implements IHttpClient
             if (!is_null($this->getBody())) {
                 $contentLength = strlen($this->getBody());
             }
-            $this->_request->setHeader(Resources::CONTENT_LENGTH, $contentLength);
+            $this->setHeader(Resources::CONTENT_LENGTH, $contentLength, true);
         }
 
         foreach ($filters as $filter) {
@@ -290,7 +304,7 @@ class HttpClient implements IHttpClient
             $newRequest = new \GuzzleHttp\Psr7\Request(
                 $this->_method,
                 $this->_request->getUrl()->getURL(),
-                $this->_request->getHeaders(),
+                $this->_headers,
                 $this->_request->getBody());
 
             $newResponse = $client->send($newRequest, $this->_postParams);
