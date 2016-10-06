@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -47,8 +47,8 @@ class DateFilter implements IServiceFilter
      * Adds date (in GMT format) header to the request headers.
      *
      * @param IHttpClient $request HTTP channel object.
-     * 
-     * @return \HTTP_Request2
+     *
+     * @return IHttpClient
      */
     public function handleRequest($request)
     {
@@ -63,7 +63,7 @@ class DateFilter implements IServiceFilter
      *
      * @param IHttpClient             $request  HTTP channel object.
      * @param \HTTP_Request2_Response $response HTTP response object.
-     * 
+     *
      * @return \HTTP_Request2_Response
      */
     public function handleResponse($request, $response)

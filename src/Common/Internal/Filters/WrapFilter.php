@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -53,7 +53,7 @@ class WrapFilter implements IServiceFilter
     /**
      * Creates a WrapFilter with specified WRAP parameters.
      *
-     * @param string $wrapUri       The URI of the WRAP service. 
+     * @param string $wrapUri       The URI of the WRAP service.
      * @param string $wrapUsername  The user name of the WRAP account.
      * @param string $wrapPassword  The password of the WRAP account.
      * @param IWrap  $wrapRestProxy The WRAP service REST proxy.
@@ -75,9 +75,9 @@ class WrapFilter implements IServiceFilter
     /**
      * Adds WRAP authentication header to the request headers.
      *
-     * @param HttpClient $request HTTP channel object.
-     * 
-     * @return \HTTP_Request2
+     * @param IHttpClient $request HTTP channel object.
+     *
+     * @return IHttpClient
      */
     public function handleRequest($request)
     {
@@ -99,9 +99,9 @@ class WrapFilter implements IServiceFilter
     /**
      * Returns the original response.
      *
-     * @param HttpClient              $request  A HTTP channel object.
+     * @param IHttpClient             $request  A HTTP channel object.
      * @param \HTTP_Request2_Response $response A HTTP response object.
-     * 
+     *
      * @return \HTTP_Request2_Response
      */
     public function handleResponse($request, $response)
