@@ -1,4 +1,7 @@
-- Breaking changes: the `getResponse()` function from 
+- Breaking changes:
+  - src/WindowsAzure.php has been removed,
+  - src/Common/InternalFilter/RetryPolicyFilter.php has been removed.
+- Breaking changes: the `getResponse()` function from
   `\WindowsAzure\Common\Internal\Http\IHttpClient` is replaced by `sendAndGetResponse()`.
 - Switch to PHP 5.6.
 

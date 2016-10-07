@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -50,7 +50,7 @@ class AuthenticationFilter implements IServiceFilter
 
     /**
      * Creates AuthenticationFilter with the passed scheme.
-     * 
+     *
      * @param StorageAuthScheme $authenticationScheme The authentication scheme.
      */
     public function __construct($authenticationScheme)
@@ -61,9 +61,9 @@ class AuthenticationFilter implements IServiceFilter
     /**
      * Adds authentication header to the request headers.
      *
-     * @param HttpClient $request HTTP channel object.
-     * 
-     * @return \HTTP_Request2
+     * @param IHttpClient $request HTTP channel object.
+     *
+     * @return IHttpClient
      */
     public function handleRequest($request)
     {
@@ -79,9 +79,9 @@ class AuthenticationFilter implements IServiceFilter
     /**
      * Does nothing with the response.
      *
-     * @param HttpClient              $request  HTTP channel object.
+     * @param IHttpClient             $request  HTTP channel object.
      * @param \HTTP_Request2_Response $response HTTP response object.
-     * 
+     *
      * @return \HTTP_Request2_Response
      */
     public function handleResponse($request, $response)
