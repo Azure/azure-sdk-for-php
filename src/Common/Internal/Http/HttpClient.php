@@ -57,12 +57,25 @@ class HttpClient implements IHttpClient
     /**
      * @var array
      */
+    private $_requestOptions = [
+        // Don't allow redirect.
+        \GuzzleHttp\RequestOptions::ALLOW_REDIRECTS => false,
+    ];
+
+    /**
+     * @var array
+     */
     private $_postParams = array();
 
     /**
      * @var array
      */
     private $_headers = array();
+
+    /**
+     * @var string
+     */
+    private $_body = '';
 
     /**
      * @var WindowsAzure\Common\Internal\Http\IUrl
@@ -102,7 +115,7 @@ class HttpClient implements IHttpClient
         if (!empty($certificatePath)) {
             $this->_config[Resources::SSL_LOCAL_CERT] = $certificatePath;
             $this->_config[Resources::SSL_VERIFY_HOST] = true;
-            $this->_postParams[\GuzzleHttp\RequestOptions::CERT] = $certificatePath;
+            $this->_requestOptions[\GuzzleHttp\RequestOptions::CERT] = $certificatePath;
         }
 
         if (!empty($certificateAuthorityPath)) {
@@ -118,17 +131,6 @@ class HttpClient implements IHttpClient
 
         $this->_requestUrl = null;
         $this->_expectedStatusCodes = array();
-
-        // Don't allow redirect.
-        $this->_postParams['allow_redirects'] = false;
-
-        // Since PHP 5.6, a default value for certificate validation is 'true'.
-        // We set it back to false if an enviroment variable 'HTTPS_PROXY' is
-        // defined.
-        if ($proxy = getenv('HTTPS_PROXY'))
-        {
-            $this->_postParams['verify'] = false;
-        }
     }
 
     /**
@@ -285,13 +287,26 @@ class HttpClient implements IHttpClient
         $newResponse = null;
         try
         {
+            $options = $this->_requestOptions;
+
+            if (!empty($this->_postParams)) {
+                $options[\GuzzleHttp\RequestOptions::FORM_PARAMS] = $this->_postParams;
+            }
+
+            // Since PHP 5.6, a default value for certificate validation is 'true'.
+            // We set it back to false if an enviroment variable 'HTTPS_PROXY' is
+            // defined.
+            if (getenv('HTTPS_PROXY') ) {
+                $options[\GuzzleHttp\RequestOptions::VERIFY] = false;
+            }
+
             $newRequest = new \GuzzleHttp\Psr7\Request(
                 $this->_method,
                 $this->_request->getUrl()->getURL(),
                 $this->_headers,
-                $this->_request->getBody());
+                $this->_body);
 
-            $newResponse = $client->send($newRequest, $this->_postParams);
+            $newResponse = $client->send($newRequest, $options);
         }
         catch (\GuzzleHttp\Exception\ClientException $e)
         {
@@ -400,7 +415,7 @@ class HttpClient implements IHttpClient
     public function setBody($body)
     {
         Validate::isString($body, 'body');
-        $this->_request->setBody($body);
+        $this->_body = $body;
     }
 
     /**
@@ -410,7 +425,7 @@ class HttpClient implements IHttpClient
      */
     public function getBody()
     {
-        return $this->_request->getBody();
+        return $this->_body;
     }
 
     /**
