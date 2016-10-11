@@ -293,6 +293,8 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     {
         parent::tearDown();
 
+        $this->assertNotNull($this->restProxy);
+
         $channels = $this->restProxy->getChannelList();
         foreach ($channels as $ch) {
             if ($this->startsWith($ch->getName(), TestResources::MEDIA_SERVICES_CHANNEL_NAME)) {
