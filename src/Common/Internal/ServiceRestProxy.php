@@ -27,6 +27,9 @@ namespace WindowsAzure\Common\Internal;
 
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
+use WindowsAzure\Common\Internal\Http\IHttpClient;
+use WindowsAzure\Common\Internal\Serialization\ISerializer;
+use MicrosoftAzure\Storage\Blob\Models\AccessCondition;
 
 /**
  * Base class for all services rest proxies.
@@ -56,7 +59,7 @@ class ServiceRestProxy extends RestProxy
      * @param string      $accountName    The name of the account.
      * @param ISerializer $dataSerializer The data serializer.
      */
-    public function __construct($channel, $uri, $accountName, $dataSerializer)
+    public function __construct(IHttpClient $channel, $uri, $accountName, ISerializer $dataSerializer)
     {
         parent::__construct($channel, $dataSerializer, $uri);
         $this->_accountName = $accountName;
@@ -74,13 +77,12 @@ class ServiceRestProxy extends RestProxy
 
     /**
      * Sends HTTP request with the specified HTTP call context.
-     *
-     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context The HTTP
-     *                                                                   call context.
+     * 
+     * @param HttpCallContext $context The HTTP call context.
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    protected function sendHttpContext($context)
+    protected function sendHttpContext(HttpCallContext $context)
     {
         $context->setUri($this->getUri());
 
@@ -102,9 +104,9 @@ class ServiceRestProxy extends RestProxy
      */
     protected function sendHttp(
         $method,
-        $headers,
-        $queryParams,
-        $postParameters,
+        array $headers,
+        array $queryParams,
+        array $postParameters,
         $path,
         $statusCode,
         $body = Resources::EMPTY_STRING
@@ -134,7 +136,7 @@ class ServiceRestProxy extends RestProxy
      *
      * @return array
      */
-    public function addOptionalAccessConditionHeader($headers, $accessCondition)
+    public function addOptionalAccessConditionHeader(array $headers, AccessCondition $accessCondition)
     {
         if (!is_null($accessCondition)) {
             $header = $accessCondition->getHeader();
@@ -163,8 +165,8 @@ class ServiceRestProxy extends RestProxy
      * @return array
      */
     public function addOptionalSourceAccessConditionHeader(
-        $headers,
-        $accessCondition
+        array $headers,
+        AccessCondition $accessCondition
     ) {
         if (!is_null($accessCondition)) {
             $header = $accessCondition->getHeader();
@@ -216,7 +218,7 @@ class ServiceRestProxy extends RestProxy
      * @return array
      */
     public function addPostParameter(
-        $postParameters,
+        array $postParameters,
         $key,
         $value
     ) {
@@ -233,7 +235,7 @@ class ServiceRestProxy extends RestProxy
      *
      * @return string
      */
-    public function groupQueryValues($values)
+    public function groupQueryValues(array $values)
     {
         Validate::isArray($values, 'values');
         $joined = Resources::EMPTY_STRING;
@@ -255,7 +257,7 @@ class ServiceRestProxy extends RestProxy
      *
      * @return array
      */
-    protected function addMetadataHeaders($headers, $metadata)
+    protected function addMetadataHeaders(array $headers, array $metadata)
     {
         $this->validateMetadata($metadata);
 
@@ -272,7 +274,7 @@ class ServiceRestProxy extends RestProxy
      *
      * @return array.
      */
-    public function generateMetadataHeaders($metadata)
+    public function generateMetadataHeaders(array $metadata)
     {
         $metadataHeaders = array();
 
@@ -300,7 +302,7 @@ class ServiceRestProxy extends RestProxy
      *
      * @return array.
      */
-    public function getMetadataArray($headers)
+    public function getMetadataArray(array $headers)
     {
         $metadata = array();
         foreach ($headers as $key => $value) {
