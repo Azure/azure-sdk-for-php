@@ -269,7 +269,7 @@ class HttpClient implements IHttpClient
      *                       send and then applied to the response.
      * @param IUrl  $url     Request url.
      *
-     * @throws WindowsAzure\Common\ServiceException
+     * @throws ServiceException
      *
      * @return ResponseInterface The response.
      */
@@ -339,7 +339,7 @@ class HttpClient implements IHttpClient
      *                       send and then applied to the response.
      * @param IUrl  $url     Request url.
      *
-     * @throws WindowsAzure\Common\ServiceException
+     * @throws ServiceException
      *
      * @return string The response body
      */
