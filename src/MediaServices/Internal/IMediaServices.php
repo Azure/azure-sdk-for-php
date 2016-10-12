@@ -27,6 +27,7 @@ namespace WindowsAzure\MediaServices\Internal;
 
 use WindowsAzure\Common\Internal\FilterableService;
 use WindowsAzure\MediaServices\Models\Asset;
+use WindowsAzure\MediaServices\Models\Access;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
 use WindowsAzure\MediaServices\Models\AssetFile;
