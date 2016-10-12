@@ -29,6 +29,8 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Http\IUrl;
+use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\RequestOptions;
 
 /**
  * HTTP client which sends and receives HTTP requests and responses.
@@ -60,7 +62,7 @@ class HttpClient implements IHttpClient
      */
     private $_requestOptions = [
         // Don't allow redirect.
-        \GuzzleHttp\RequestOptions::ALLOW_REDIRECTS => false,
+        RequestOptions::ALLOW_REDIRECTS => false,
     ];
 
     /**
@@ -79,7 +81,7 @@ class HttpClient implements IHttpClient
     private $_body = '';
 
     /**
-     * @var WindowsAzure\Common\Internal\Http\IUrl
+     * @var IUrl
      */
     private $_requestUrl;
 
@@ -101,7 +103,7 @@ class HttpClient implements IHttpClient
      * @param string $certificatePath          The certificate path.
      * @param string $certificateAuthorityPath The path of the certificate authority.
      *
-     * @return WindowsAzure\Common\Internal\Http\HttpClient
+     * @return HttpClient
      */
     public function __construct(
         $certificatePath = Resources::EMPTY_STRING,
@@ -269,7 +271,7 @@ class HttpClient implements IHttpClient
      *
      * @throws WindowsAzure\Common\ServiceException
      *
-     * @return \Psr\Http\Message\ResponseInterface The response.
+     * @return ResponseInterface The response.
      */
     public function sendAndGetHttpResponse(array $filters, IUrl $url = null)
     {
@@ -291,14 +293,14 @@ class HttpClient implements IHttpClient
             $options = $this->_requestOptions;
 
             if (!empty($this->_postParams)) {
-                $options[\GuzzleHttp\RequestOptions::FORM_PARAMS] = $this->_postParams;
+                $options[RequestOptions::FORM_PARAMS] = $this->_postParams;
             }
 
             // Since PHP 5.6, a default value for certificate validation is 'true'.
             // We set it back to false if an enviroment variable 'HTTPS_PROXY' is
             // defined.
             if (getenv('HTTPS_PROXY') ) {
-                $options[\GuzzleHttp\RequestOptions::VERIFY] = false;
+                $options[RequestOptions::VERIFY] = false;
             }
 
             $newRequest = new \GuzzleHttp\Psr7\Request(
@@ -442,11 +444,11 @@ class HttpClient implements IHttpClient
     }
 
     /**
-     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param ResponseInterface $response
      *
      * @return array an array of headers.
      */
-    public static function getResponseHeaders($response)
+    public static function getResponseHeaders(ResponseInterface $response)
     {
         $responseHeaderArray = $response->getHeaders();
 
