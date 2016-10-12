@@ -2,7 +2,8 @@
   - [Type declarations](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration) for
     - `\WindowsAzure\Common\Internal\IServiceFilter`, 
 	- `\WindowsAzure\Common\Internal\Http\HttpClient`,
-	- `\WindowsAzure\Common\Internal\RestProxy`.
+	- `\WindowsAzure\Common\Internal\RestProxy`,
+	- `\WindowsAzure\Common\Internal\ServiceRestProxy`.
   - src/WindowsAzure.php has been removed,
   - src/Common/InternalFilter/RetryPolicyFilter.php has been removed.
   - the `getResponse()` function from `\WindowsAzure\Common\Internal\Http\IHttpClient` is replaced by `sendAndGetResponse()`.
