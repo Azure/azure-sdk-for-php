@@ -125,7 +125,7 @@ interface IMediaServices extends FilterableService
      *
      * @return none
      */
-    public function updateAsset(AccessPolicy $asset);
+    public function updateAsset(Access $asset);
 
     /**
      * Delete asset.
