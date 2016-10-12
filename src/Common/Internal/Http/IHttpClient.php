@@ -26,6 +26,7 @@
 namespace WindowsAzure\Common\Internal\Http;
 
 use WindowsAzure\Common\Internal\Http\IUrl;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Defines required methods for a HTTP client proxy.
@@ -120,7 +121,7 @@ interface IHttpClient
      *                       send and then applied to the response.
      * @param IUrl  $url     Request url.
      *
-     * @return \Psr\Http\Message\ResponseInterface The response.
+     * @return ResponseInterface The response.
      */
     public function sendAndGetHttpResponse(array $filters, IUrl $url = null);
 

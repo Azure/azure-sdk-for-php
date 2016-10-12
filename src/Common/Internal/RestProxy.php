@@ -26,6 +26,7 @@
 namespace WindowsAzure\Common\Internal;
 
 use WindowsAzure\Common\Internal\Http\Url;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Base class for all REST proxies.
@@ -115,7 +116,7 @@ class RestProxy
      * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context The HTTP
      *                                                                   call context.
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     protected function sendHttpContext($context)
     {
