@@ -26,6 +26,16 @@
 namespace WindowsAzure\MediaServices\Internal;
 
 use WindowsAzure\Common\Internal\FilterableService;
+use WindowsAzure\MediaServices\Models\Asset;
+use WindowsAzure\MediaServices\Models\AccessPolicy;
+use WindowsAzure\MediaServices\Models\Locator;
+use WindowsAzure\MediaServices\Models\AssetFile;
+use WindowsAzure\MediaServices\Models\IngestManifest;
+use WindowsAzure\MediaServices\Models\IngestManifestFile;
+use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy;
+use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption;
+use WindowsAzure\MediaServices\Models\AssetDeliveryPolicy;
+use WindowsAzure\MediaServices\Models\EncodingReservedUnit;
 
 /**
  * This interface has all REST APIs provided by Windows Azure for Media Services.
@@ -45,11 +55,11 @@ interface IMediaServices extends FilterableService
     /**
      * Create new asset.
      *
-     * @param WindowsAzure\MediaServices\Models\Asset $asset Asset data
+     * @param Asset $asset Asset data
      *
-     * @return WindowsAzure\MediaServices\Models\Asset Created asset
+     * @return Asset Created asset
      */
-    public function createAsset($asset);
+    public function createAsset(Asset $asset);
 
     /**
      * Get asset.
@@ -111,12 +121,11 @@ interface IMediaServices extends FilterableService
     /**
      * Update asset.
      *
-     * @param WindowsAzure\MediaServices\Models\Asset $asset New asset data with
-     *                                                       valid id
+     * @param Asset $asset New asset data with valid id
      *
      * @return none
      */
-    public function updateAsset($asset);
+    public function updateAsset(AccessPolicy $asset);
 
     /**
      * Delete asset.
@@ -131,12 +140,11 @@ interface IMediaServices extends FilterableService
     /**
      * Create new access policy.
      *
-     * @param WindowsAzure\MediaServices\Models\AccessPolicy $accessPolicy Access
-     *                                                                     policy data
+     * @param AccessPolicy $accessPolicy Access  policy data
      *
-     * @return WindowsAzure\MediaServices\Models\AccessPolicy
+     * @return AccessPolicy
      */
-    public function createAccessPolicy($accessPolicy);
+    public function createAccessPolicy(AccessPolicy $accessPolicy);
 
     /**
      * Get AccessPolicy.
@@ -168,11 +176,11 @@ interface IMediaServices extends FilterableService
     /**
      * Create new locator.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator $locator Locator data
+     * @param Locator $locator Locator data
      *
-     * @return WindowsAzure\MediaServices\Models\Locator
+     * @return Locator
      */
-    public function createLocator($locator);
+    public function createLocator(Locator $locator);
 
     /**
      * Get Locator.
@@ -214,12 +222,11 @@ interface IMediaServices extends FilterableService
     /**
      * Update locator.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator $locator New locator data
-     *                                                           with valid id
+     * @param Locator $locator New locator data with valid id
      *
      * @return none
      */
-    public function updateLocator($locator);
+    public function updateLocator(Locator $locator);
 
     /**
      * Delete locator.
@@ -261,36 +268,33 @@ interface IMediaServices extends FilterableService
     /**
      * Update asset file.
      *
-     * @param WindowsAzure\MediaServices\Models\AssetFile $assetFile New AssetFile
-     *                                                               data
+     * @param AssetFile $assetFile New AssetFile data
      *
      * @return none
      */
-    public function updateAssetFile($assetFile);
+    public function updateAssetFile(AssetFile $assetFile);
 
     /**
      * Upload asset file to storage.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator $locator Write locator for
-     *                                                           file upload
-     * @param string                                    $name    Uploading filename
-     * @param string                                    $body    Uploading content
+     * @param Locator $locator Write locator for file upload
+     * @param string  $name    Uploading filename
+     * @param string  $body    Uploading content
      *
      * @return none
      */
-    public function uploadAssetFile($locator, $name, $body);
+    public function uploadAssetFile(Locator $locator, $name, $body);
 
     /**
      * Create a job.
      *
-     * @param WindowsAzure\MediaServices\Models\Job $job         Job data
-     * @param array                                 $inputAssets Input assets list
-     * @param array                                 $tasks       Performed tasks
-     *                                                           array (optional)
+     * @param Job   $job         Job data
+     * @param array $inputAssets Input assets list
+     * @param array $tasks       Performed tasks array (optional)
      *
      * @return Models\Job
      */
-    public function createJob($job, $inputAssets, $tasks = null);
+    public function createJob(Job $job, array $inputAssets, array $tasks = null);
 
     /**
      * Get Job.
@@ -372,14 +376,12 @@ interface IMediaServices extends FilterableService
     /**
      * Create a job.
      *
-     * @param WindowsAzure\MediaServices\Models\JobTemplate $jobTemplate   Job
-     *                                                                     template data
-     * @param array                                         $taskTemplates Performed
-     *                                                                     tasks template array
+     * @param JobTemplate $jobTemplate   Job template data
+     * @param array       $taskTemplates Performed tasks template array
      *
      * @return Models\JobTemplate
      */
-    public function createJobTemplate($jobTemplate, $taskTemplates);
+    public function createJobTemplate(JobTemplate $jobTemplate, array $taskTemplates);
 
     /**
      * Get job template.
@@ -444,11 +446,11 @@ interface IMediaServices extends FilterableService
     /**
      * Create new IngestManifest.
      *
-     * @param Models\IngestManifest $ingestManifest An IngestManifest data
+     * @param IngestManifest $ingestManifest An IngestManifest data
      *
      * @return WindowsAzure\MediaServices\Models\IngestManifest
      */
-    public function createIngestManifest($ingestManifest);
+    public function createIngestManifest(IngestManifest $ingestManifest);
 
     /**
      * Get IngestManifest.
@@ -500,12 +502,11 @@ interface IMediaServices extends FilterableService
     /**
      * Update IngestManifest.
      *
-     * @param Models\IngestManifest $ingestManifest New IngestManifest data with
-     *                                              valid id
+     * @param IngestManifest $ingestManifest New IngestManifest data with valid id
      *
      * @return none
      */
-    public function updateIngestManifest($ingestManifest);
+    public function updateIngestManifest(IngestManifest $ingestManifest);
 
     /**
      * Delete IngestManifest.
@@ -520,14 +521,12 @@ interface IMediaServices extends FilterableService
     /**
      * Create new IngestManifestAsset.
      *
-     * @param Models\IngestManifestAsset $ingestManifestAsset An IngestManifestAsset
-     *                                                        data
-     * @param Models\Asset               $asset               An Asset data to be
-     *                                                        linked with IngestManifestAsset
+     * @param IngestManifestAsset $ingestManifestAsset An IngestManifestAsset data
+     * @param Asset               $asset               An Asset data to be linked with IngestManifestAsset
      *
-     * @return WindowsAzure\MediaServices\Models\IngestManifestAsset
+     * @return IngestManifestAsset
      */
-    public function createIngestManifestAsset($ingestManifestAsset, $asset);
+    public function createIngestManifestAsset(IngestManifestAsset $ingestManifestAsset, Asset $asset);
 
     /**
      * Get IngestManifestAsset.
@@ -569,12 +568,11 @@ interface IMediaServices extends FilterableService
     /**
      * Create new IngestManifestFile.
      *
-     * @param Models\IngestManifestFile $ingestManifestFile An IngestManifestFile
-     *                                                      data
+     * @param IngestManifestFile $ingestManifestFile An IngestManifestFile data
      *
      * @return WindowsAzure\MediaServices\Models\IngestManifestFile
      */
-    public function createIngestManifestFile($ingestManifestFile);
+    public function createIngestManifestFile(IngestManifestFile $ingestManifestFile);
 
     /**
      * Get IngestManifestFile.
@@ -606,11 +604,11 @@ interface IMediaServices extends FilterableService
     /**
      * Create new content key authorization policy.
      *
-     * @param Models\ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy ContentKeyAuthorizationPolicy data
+     * @param ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy ContentKeyAuthorizationPolicy data
      *
-     * @return Models\ContentKeyAuthorizationPolicy Created ContentKeyAuthorizationPolicy
+     * @return ContentKeyAuthorizationPolicy Created ContentKeyAuthorizationPolicy
      */
-    public function createContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy);
+    public function createContentKeyAuthorizationPolicy(ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy);
 
     /**
      * Get content key authorization policy.
@@ -632,10 +630,9 @@ interface IMediaServices extends FilterableService
     /**
      * Update content key authorization policy.
      *
-     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy New content key authorization policy data with
-     *                                                                                                        valid id
+     * @param ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy New content key authorization policy data with valid id
      */
-    public function updateContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy);
+    public function updateContentKeyAuthorizationPolicy(ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy);
 
     /**
      * Delete content key authorization policy.
@@ -648,11 +645,11 @@ interface IMediaServices extends FilterableService
     /**
      * Create new content key authorization options.
      *
-     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption ContentKeyAuthorizationPolicyOption ContentKeyAuthorizationPolicyOption data
+     * @param ContentKeyAuthorizationPolicyOption ContentKeyAuthorizationPolicyOption ContentKeyAuthorizationPolicyOption data
      *
-     * @return \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption Created ContentKeyAuthorizationPolicyOption
+     * @return ContentKeyAuthorizationPolicyOption Created ContentKeyAuthorizationPolicyOption
      */
-    public function createContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOptions);
+    public function createContentKeyAuthorizationPolicyOption(ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions);
 
     /**
      * Get content key authorization option by id.
@@ -674,10 +671,10 @@ interface IMediaServices extends FilterableService
     /**
      * Update content key authorization options.
      *
-     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions New content key authorization options data with
+     * @param ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions New content key authorization options data with
      *                                                                                                               valid id
      */
-    public function updateContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOptions);
+    public function updateContentKeyAuthorizationPolicyOption(ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions);
 
     /**
      * Delete content key authorization policy.
@@ -716,11 +713,11 @@ interface IMediaServices extends FilterableService
     /**
      * Create new asset delivery policy.
      *
-     * @param \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy $assetDeliveryPolicy AssetDeliveryPolicy data
+     * @param AssetDeliveryPolicy $assetDeliveryPolicy AssetDeliveryPolicy data
      *
-     * @return \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy Created AssetDeliveryPolicy
+     * @return AssetDeliveryPolicy Created AssetDeliveryPolicy
      */
-    public function createAssetDeliveryPolicy($assetDeliveryPolicy);
+    public function createAssetDeliveryPolicy(AssetDeliveryPolicy $assetDeliveryPolicy);
 
     /**
      * Get asset delivery policy.
@@ -739,10 +736,9 @@ interface IMediaServices extends FilterableService
     /**
      * Update asset delivery policy.
      *
-     * @param \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy $assetDeliveryPolicy New asset delivery policy data with
-     *                                                                                    valid id
+     * @param AssetDeliveryPolicy $assetDeliveryPolicy New asset delivery policy data with valid id
      */
-    public function updateAssetDeliveryPolicy($assetDeliveryPolicy);
+    public function updateAssetDeliveryPolicy(AssetDeliveryPolicy $assetDeliveryPolicy);
 
     /**
      * Delete asset delivery policy.
@@ -805,8 +801,7 @@ interface IMediaServices extends FilterableService
     /**
      * Update encoding reserved units settings.
      *
-     * @param \WindowsAzure\MediaServices\Models\EncodingReservedUnit $encodingReservedUnit Update data
-     *                                                                                      valid idli
+     * @param EncodingReservedUnit $encodingReservedUnit Update data valid idli
      */
-    public function updateEncodingReservedUnit($encodingReservedUnit);
+    public function updateEncodingReservedUnit(EncodingReservedUnit $encodingReservedUnit);
 }
