@@ -107,7 +107,7 @@ class WrapFilterTest extends ServiceRestProxyTestBase
         $channel = new HttpClient();
         $url = new Url('http://microsoft.com');
         $channel->setUrl($url);
-        $response = null;
+        $response = new \GuzzleHttp\Psr7\Response();
 
         $settings = ServiceBusSettings::createFromConnectionString(
             TestResources::getServiceBusConnectionString()
@@ -124,6 +124,6 @@ class WrapFilterTest extends ServiceRestProxyTestBase
         $response = $wrapFilter->handleResponse($channel, $response);
 
         // Assert
-        $this->assertNull($response);
+        $this->assertNotNull($response);
     }
 }
