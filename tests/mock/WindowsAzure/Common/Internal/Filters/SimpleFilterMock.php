@@ -26,6 +26,7 @@
 namespace Tests\mock\WindowsAzure\Common\Internal\Filters;
 
 use WindowsAzure\Common\Internal\Http\IHttpClient;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Alters request headers and response to mock real filter.
@@ -63,7 +64,7 @@ class SimpleFilterMock implements \WindowsAzure\Common\Internal\IServiceFilter
         return $request;
     }
 
-    public function handleResponse(IHttpClient $request, $response)
+    public function handleResponse(IHttpClient $request, ResponseInterface $response)
     {
         $newData = ((string)$response->getBody()).$this->_data;
         return $response->withBody(\GuzzleHttp\Psr7\stream_for($newData));
