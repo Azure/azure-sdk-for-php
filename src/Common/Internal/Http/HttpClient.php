@@ -51,7 +51,7 @@ class HttpClient implements IHttpClient
     private $_request;
 
     /**
-     * @var WindowsAzure\Common\Internal\Http\IUrl
+     * @var IUrl
      */
     private $_requestUrl;
 
@@ -68,7 +68,7 @@ class HttpClient implements IHttpClient
      * @param string $certificatePath          The certificate path.
      * @param string $certificateAuthorityPath The path of the certificate authority.
      *
-     * @return WindowsAzure\Common\Internal\Http\HttpClient
+     * @return HttpClient
      */
     public function __construct(
         $certificatePath = Resources::EMPTY_STRING,
@@ -242,7 +242,7 @@ class HttpClient implements IHttpClient
      *                       send and then applied to the response.
      * @param IUrl  $url     Request url.
      *
-     * @throws WindowsAzure\Common\ServiceException
+     * @throws ServiceException
      *
      * @return \HTTP_Request2_Response The response.
      */
@@ -299,7 +299,7 @@ class HttpClient implements IHttpClient
      *                       send and then applied to the response.
      * @param IUrl  $url     Request url.
      *
-     * @throws WindowsAzure\Common\ServiceException
+     * @throws ServiceException
      *
      * @return string The response body
      */
