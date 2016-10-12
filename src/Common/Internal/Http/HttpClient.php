@@ -28,6 +28,7 @@ namespace WindowsAzure\Common\Internal\Http;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Internal\Http\IUrl;
 
 /**
  * HTTP client which sends and receives HTTP requests and responses.
@@ -50,7 +51,7 @@ class HttpClient implements IHttpClient
     private $_request;
 
     /**
-     * @var WindowsAzure\Common\Internal\Http\IUrl
+     * @var IUrl
      */
     private $_requestUrl;
 
@@ -67,7 +68,7 @@ class HttpClient implements IHttpClient
      * @param string $certificatePath          The certificate path.
      * @param string $certificateAuthorityPath The path of the certificate authority.
      *
-     * @return WindowsAzure\Common\Internal\Http\HttpClient
+     * @return HttpClient
      */
     public function __construct(
         $certificatePath = Resources::EMPTY_STRING,
@@ -121,7 +122,7 @@ class HttpClient implements IHttpClient
     /**
      * Makes deep copy from the current object.
      *
-     * @return WindowsAzure\Common\Internal\Http\HttpClient
+     * @return HttpClient
      */
     public function __clone()
     {
@@ -135,11 +136,11 @@ class HttpClient implements IHttpClient
     /**
      * Sets the request url.
      *
-     * @param WindowsAzure\Common\Internal\Http\IUrl $url request url.
+     * @param IUrl $url request url.
      *
      * @return none.
      */
-    public function setUrl($url)
+    public function setUrl(IUrl $url)
     {
         $this->_requestUrl = $url;
     }
@@ -148,7 +149,7 @@ class HttpClient implements IHttpClient
      * Gets request url. Note that you must check if the returned object is null or
      * not.
      *
-     * @return WindowsAzure\Common\Internal\Http\IUrl
+     * @return IUrl
      */
     public function getUrl()
     {
@@ -214,7 +215,7 @@ class HttpClient implements IHttpClient
      *
      * @return none
      */
-    public function setHeaders($headers)
+    public function setHeaders(array $headers)
     {
         foreach ($headers as $key => $value) {
             $this->setHeader($key, $value);
@@ -228,7 +229,7 @@ class HttpClient implements IHttpClient
      *
      * @return none
      */
-    public function setPostParameters($postParameters)
+    public function setPostParameters(array $postParameters)
     {
         $this->_request->addPostParameter($postParameters);
     }
@@ -241,11 +242,11 @@ class HttpClient implements IHttpClient
      *                       send and then applied to the response.
      * @param IUrl  $url     Request url.
      *
-     * @throws WindowsAzure\Common\ServiceException
+     * @throws ServiceException
      *
      * @return \HTTP_Request2_Response The response.
      */
-    public function sendAndGetResponse($filters, $url = null)
+    public function sendAndGetResponse(array $filters, IUrl $url = null)
     {
         if (isset($url)) {
             $this->setUrl($url);
@@ -298,11 +299,11 @@ class HttpClient implements IHttpClient
      *                       send and then applied to the response.
      * @param IUrl  $url     Request url.
      *
-     * @throws WindowsAzure\Common\ServiceException
+     * @throws ServiceException
      *
      * @return string The response body
      */
-    public function send($filters, $url = null)
+    public function send(array $filters, IUrl $url = null)
     {
         return $this->sendAndGetResponse($filters, $url)->getBody();
     }
@@ -395,7 +396,7 @@ class HttpClient implements IHttpClient
      *
      * @throws ServiceException
      */
-    public static function throwIfError($actual, $reason, $message, $expected)
+    public static function throwIfError($actual, $reason, $message, array $expected)
     {
         if (!in_array($actual, $expected)) {
             throw new ServiceException($actual, $reason, $message);
