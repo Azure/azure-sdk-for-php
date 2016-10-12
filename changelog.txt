@@ -3,7 +3,8 @@
     - `\WindowsAzure\Common\Internal\IServiceFilter`, 
 	- `\WindowsAzure\Common\Internal\Http\HttpClient`,
 	- `\WindowsAzure\Common\Internal\RestProxy`,
-	- `\WindowsAzure\Common\Internal\ServiceRestProxy`.
+	- `\WindowsAzure\Common\Internal\ServiceRestProxy`,
+	- `\WindowsAzure\MediaServices\MediaServicesRestProxy`.
   - src/WindowsAzure.php has been removed,
   - src/Common/InternalFilter/RetryPolicyFilter.php has been removed.
   - the `getResponse()` function from `\WindowsAzure\Common\Internal\Http\IHttpClient` is replaced by `sendAndGetResponse()`.
