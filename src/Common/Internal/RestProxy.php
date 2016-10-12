@@ -26,6 +26,10 @@
 namespace WindowsAzure\Common\Internal;
 
 use WindowsAzure\Common\Internal\Http\Url;
+use WindowsAzure\Common\Internal\Http\IHttpClient;
+use WindowsAzure\Common\Internal\Http\HttpCallContext;
+use WindowsAzure\Common\Internal\Serialization\ISerializer;
+use WindowsAzure\Common\Internal\IServiceFilter;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -44,7 +48,7 @@ use Psr\Http\Message\ResponseInterface;
 class RestProxy
 {
     /**
-     * @var WindowsAzure\Common\Internal\Http\IHttpClient
+     * @var IHttpClient
      */
     private $_channel;
 
@@ -54,7 +58,7 @@ class RestProxy
     private $_filters;
 
     /**
-     * @var WindowsAzure\Common\Internal\Serialization\ISerializer
+     * @var ISerializer
      */
     protected $dataSerializer;
 
@@ -70,7 +74,7 @@ class RestProxy
      * @param ISerializer $dataSerializer The data serializer.
      * @param string      $uri            The uri of the service.
      */
-    public function __construct($channel, $dataSerializer, $uri)
+    public function __construct(IHttpClient $channel, ISerializer $dataSerializer, $uri)
     {
         $this->_channel = $channel;
         $this->_filters = array();
@@ -112,13 +116,12 @@ class RestProxy
 
     /**
      * Sends HTTP request with the specified HTTP call context.
-     *
-     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context The HTTP
-     *                                                                   call context.
+     * 
+     * @param HttpCallContext $context The HTTP call context.
      *
      * @return ResponseInterface
      */
-    protected function sendHttpContext($context)
+    protected function sendHttpContext(HttpCallContext $context)
     {
         $channel = clone $this->_channel;
         $contextUrl = $context->getUri();
@@ -147,12 +150,11 @@ class RestProxy
     /**
      * Adds new filter to new service rest proxy object and returns that object back.
      *
-     * @param WindowsAzure\Common\Internal\IServiceFilter $filter Filter to add for
-     *                                                            the pipeline.
-     *
+     * @param IServiceFilter $filter Filter to add for the pipeline.
+     * 
      * @return RestProxy.
      */
-    public function withFilter($filter)
+    public function withFilter(IServiceFilter $filter)
     {
         $serviceProxyWithFilter = clone $this;
         $serviceProxyWithFilter->_filters[] = $filter;
@@ -171,7 +173,7 @@ class RestProxy
      *
      * @return none
      */
-    protected function addOptionalQueryParam(&$queryParameters, $key, $value)
+    protected function addOptionalQueryParam(array &$queryParameters, $key, $value)
     {
         Validate::isArray($queryParameters, 'queryParameters');
         Validate::isString($key, 'key');
@@ -193,7 +195,7 @@ class RestProxy
      *
      * @return none
      */
-    protected function addOptionalHeader(&$headers, $key, $value)
+    protected function addOptionalHeader(array &$headers, $key, $value)
     {
         Validate::isArray($headers, 'headers');
         Validate::isString($key, 'key');
