@@ -627,7 +627,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return none
      */
-    public function updateAsset($asset)
+    public function updateAsset(Asset $asset)
     {
         Validate::isA($asset, 'WindowsAzure\MediaServices\Models\Asset', 'asset');
 
