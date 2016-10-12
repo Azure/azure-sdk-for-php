@@ -27,6 +27,7 @@ namespace WindowsAzure\Common\Internal\Filters;
 
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\IServiceFilter;
+use WindowsAzure\Common\Internal\Http\IHttpClient;
 
 /**
  * Adds date header to the http request.
@@ -50,7 +51,7 @@ class DateFilter implements IServiceFilter
      *
      * @return IHttpClient
      */
-    public function handleRequest($request)
+    public function handleRequest(IHttpClient $request)
     {
         $date = gmdate(Resources::AZURE_DATE_FORMAT, time());
         $request->setHeader(Resources::DATE, $date);
@@ -66,7 +67,7 @@ class DateFilter implements IServiceFilter
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function handleResponse($request, $response)
+    public function handleResponse(IHttpClient $request, $response)
     {
         // Do nothing with the response.
         return $response;

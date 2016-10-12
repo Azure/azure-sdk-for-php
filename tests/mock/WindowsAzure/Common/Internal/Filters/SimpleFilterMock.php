@@ -25,6 +25,8 @@
 
 namespace Tests\mock\WindowsAzure\Common\Internal\Filters;
 
+use WindowsAzure\Common\Internal\Http\IHttpClient;
+
 /**
  * Alters request headers and response to mock real filter.
  *
@@ -53,7 +55,7 @@ class SimpleFilterMock implements \WindowsAzure\Common\Internal\IServiceFilter
         $this->_headerName = $headerName;
     }
 
-    public function handleRequest($request)
+    public function handleRequest(IHttpClient $request)
     {
         $request->setHeader($this->_headerName, $this->_data);
         $request->setHeader('Accept-Encoding', 'identity', true);
@@ -61,7 +63,7 @@ class SimpleFilterMock implements \WindowsAzure\Common\Internal\IServiceFilter
         return $request;
     }
 
-    public function handleResponse($request, $response)
+    public function handleResponse(IHttpClient $request, $response)
     {
         $newData = ((string)$response->getBody()).$this->_data;
         return $response->withBody(\GuzzleHttp\Psr7\stream_for($newData));

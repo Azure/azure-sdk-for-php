@@ -25,6 +25,8 @@
 
 namespace WindowsAzure\Common\Internal\Http;
 
+use WindowsAzure\Common\Internal\Http\IUrl;
+
 /**
  * Defines required methods for a HTTP client proxy.
  *
@@ -43,16 +45,20 @@ interface IHttpClient
     /**
      * Sets the request url.
      *
+<<<<<<< HEAD
      * @param WindowsAzure\Common\Internal\Http\IUrl $url request url.
+=======
+     * @param IUrl $url request url.
+>>>>>>> refs/remotes/sergey/sergey-shandar-types
      *
      * @return none.
      */
-    public function setUrl($url);
+    public function setUrl(IUrl $url);
 
     /**
      * Gets request url.
      *
-     * @return WindowsAzure\Common\Internal\Http\IUrl
+     * @return IUrl
      */
     public function getUrl();
 
@@ -99,7 +105,7 @@ interface IHttpClient
      *
      * @return none.
      */
-    public function setHeaders($headers);
+    public function setHeaders(array $headers);
 
     /**
      * Sets HTTP POST parameters.
@@ -108,7 +114,7 @@ interface IHttpClient
      *
      * @return none
      */
-    public function setPostParameters($postParameters);
+    public function setPostParameters(array $postParameters);
 
     /**
      * Processes the reuqest through HTTP pipeline with passed $filters,
@@ -118,9 +124,15 @@ interface IHttpClient
      *                       send and then applied to the response.
      * @param IUrl  $url     Request url.
      *
+<<<<<<< HEAD
      * @return \Psr\Http\Message\ResponseInterface The response.
      */
     public function sendAndGetHttpResponse($filters, $url = null);
+=======
+     * @return \HTTP_Request2_Response The response.
+     */
+    public function sendAndGetResponse(array $filters, IUrl $url = null);
+>>>>>>> refs/remotes/sergey/sergey-shandar-types
 
     /**
      * Processes the reuqest through HTTP pipeline with passed $filters,
@@ -132,7 +144,7 @@ interface IHttpClient
      *
      * @return string The response body.
      */
-    public function send($filters, $url = null);
+    public function send(array $filters, IUrl $url = null);
 
     /**
      * Sets successful status code.
@@ -188,7 +200,11 @@ interface IHttpClient
     /**
      * Makes deep copy from the current object.
      *
+<<<<<<< HEAD
      * @return WindowsAzure\Common\Internal\Http\HttpClient
+=======
+     * @return HttpClient
+>>>>>>> refs/remotes/sergey/sergey-shandar-types
      */
     public function __clone();
 
@@ -206,5 +222,5 @@ interface IHttpClient
      *
      * @throws ServiceException
      */
-    public static function throwIfError($actual, $reason, $message, $expected);
+    public static function throwIfError($actual, $reason, $message, array $expected);
 }
