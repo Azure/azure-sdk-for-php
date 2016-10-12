@@ -287,7 +287,7 @@ class HttpClient implements IHttpClient
         $client = new \GuzzleHttp\Client($this->_config);
 
         // send request and recieve a response
-        $newResponse = null;
+        $response = null;
         try
         {
             $options = $this->_requestOptions;
@@ -303,32 +303,32 @@ class HttpClient implements IHttpClient
                 $options[RequestOptions::VERIFY] = false;
             }
 
-            $newRequest = new \GuzzleHttp\Psr7\Request(
+            $request = new \GuzzleHttp\Psr7\Request(
                 $this->_method,
                 $this->_request->getUrl()->getURL(),
                 $this->_headers,
                 $this->_body);
 
-            $newResponse = $client->send($newRequest, $options);
+            $response = $client->send($request, $options);
         }
         catch (\GuzzleHttp\Exception\ClientException $e)
         {
-            $newResponse = $e->getResponse();
+            $response = $e->getResponse();
         }
 
         $start = count($filters) - 1;
         for ($index = $start; $index >= 0; --$index) {
-            $newResponse = $filters[$index]->handleResponse($this, $newResponse);
+            $response = $filters[$index]->handleResponse($this, $response);
         }
 
         self::throwIfError(
-            $newResponse->getStatusCode(),
-            $newResponse->getReasonPhrase(),
-            $newResponse->getBody(),
+            $response->getStatusCode(),
+            $response->getReasonPhrase(),
+            $response->getBody(),
             $this->_expectedStatusCodes
         );
 
-        return $newResponse;
+        return $response;
     }
 
     /**
