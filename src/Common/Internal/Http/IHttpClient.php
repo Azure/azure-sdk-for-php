@@ -45,11 +45,7 @@ interface IHttpClient
     /**
      * Sets the request url.
      *
-<<<<<<< HEAD
-     * @param WindowsAzure\Common\Internal\Http\IUrl $url request url.
-=======
      * @param IUrl $url request url.
->>>>>>> refs/remotes/sergey/sergey-shandar-types
      *
      * @return none.
      */
@@ -124,15 +120,9 @@ interface IHttpClient
      *                       send and then applied to the response.
      * @param IUrl  $url     Request url.
      *
-<<<<<<< HEAD
      * @return \Psr\Http\Message\ResponseInterface The response.
      */
-    public function sendAndGetHttpResponse($filters, $url = null);
-=======
-     * @return \HTTP_Request2_Response The response.
-     */
-    public function sendAndGetResponse(array $filters, IUrl $url = null);
->>>>>>> refs/remotes/sergey/sergey-shandar-types
+    public function sendAndGetHttpResponse(array $filters, IUrl $url = null);
 
     /**
      * Processes the reuqest through HTTP pipeline with passed $filters,
@@ -200,11 +190,7 @@ interface IHttpClient
     /**
      * Makes deep copy from the current object.
      *
-<<<<<<< HEAD
-     * @return WindowsAzure\Common\Internal\Http\HttpClient
-=======
      * @return HttpClient
->>>>>>> refs/remotes/sergey/sergey-shandar-types
      */
     public function __clone();
 

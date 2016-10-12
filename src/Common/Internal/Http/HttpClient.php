@@ -271,11 +271,7 @@ class HttpClient implements IHttpClient
      *
      * @return \Psr\Http\Message\ResponseInterface The response.
      */
-<<<<<<< HEAD
-    public function sendAndGetHttpResponse($filters, $url = null)
-=======
-    public function sendAndGetResponse(array $filters, IUrl $url = null)
->>>>>>> refs/remotes/sergey/sergey-shandar-types
+    public function sendAndGetHttpResponse(array $filters, IUrl $url = null)
     {
         if (isset($url)) {
             $this->setUrl($url);
