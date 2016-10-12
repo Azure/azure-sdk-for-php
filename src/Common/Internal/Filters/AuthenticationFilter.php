@@ -29,6 +29,7 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\IServiceFilter;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\Authentication\IAuthScheme;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Adds authentication header to the http request object.
@@ -81,12 +82,12 @@ class AuthenticationFilter implements IServiceFilter
     /**
      * Does nothing with the response.
      *
-     * @param IHttpClient                        $request  HTTP channel object.
-     * @param \Psr\Http\Message\ResponseInterface $response HTTP response object.
+     * @param IHttpClient       $request  HTTP channel object.
+     * @param ResponseInterface $response HTTP response object.
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
-    public function handleResponse(IHttpClient $request, $response)
+    public function handleResponse(IHttpClient $request, ResponseInterface $response)
     {
         // Do nothing with the response.
         return $response;

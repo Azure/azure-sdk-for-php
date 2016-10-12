@@ -27,6 +27,7 @@ namespace WindowsAzure\Common\Internal\Filters;
 
 use WindowsAzure\Common\Internal\IServiceFilter;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Adds all passed headers to the HTTP request headers.
@@ -82,12 +83,12 @@ class HeadersFilter implements IServiceFilter
     /**
      * Does nothing with the response.
      *
-     * @param IHttpClient                         $request  HTTP channel object.
-     * @param \Psr\Http\Message\ResponseInterface $response HTTP response object.
+     * @param IHttpClient       $request  HTTP channel object.
+     * @param ResponseInterface $response HTTP response object.
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
-    public function handleResponse(IHttpClient $request, $response)
+    public function handleResponse(IHttpClient $request, ResponseInterface $response)
     {
         // Do nothing with the response.
         return $response;
