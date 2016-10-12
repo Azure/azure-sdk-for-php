@@ -4,6 +4,7 @@
 	- `\WindowsAzure\Common\Internal\Http\HttpClient`,
 	- `\WindowsAzure\Common\Internal\RestProxy`,
 	- `\WindowsAzure\Common\Internal\ServiceRestProxy`,
+	- `\WindwosAzure\Common\Internal\FilterableService`,	
 	- `\WindowsAzure\MediaServices\MediaServicesRestProxy`.
   - src/WindowsAzure.php has been removed,
   - src/Common/InternalFilter/RetryPolicyFilter.php has been removed.
