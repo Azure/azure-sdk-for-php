@@ -48,11 +48,6 @@ use GuzzleHttp\RequestOptions;
 class HttpClient implements IHttpClient
 {
     /**
-     * @var \HTTP_Request2
-     */
-    private $_request;
-
-    /**
      * @var string
      */
     private $_method = Resources::HTTP_GET;
@@ -126,8 +121,6 @@ class HttpClient implements IHttpClient
             $this->_config[Resources::SSL_VERIFY_PEER] = true;
         }
 
-        $this->_request = new \HTTP_Request2();
-
         // Replace User-Agent.
         $this->setHeader(Resources::USER_AGENT, Resources::SDK_USER_AGENT, true);
         $this->setHeader('expect', '');
@@ -142,9 +135,7 @@ class HttpClient implements IHttpClient
      * @return HttpClient
      */
     public function __clone()
-    {
-        $this->_request = clone $this->_request;
-
+    {        
         if (!is_null($this->_requestUrl)) {
             $this->_requestUrl = clone $this->_requestUrl;
         }
@@ -183,7 +174,6 @@ class HttpClient implements IHttpClient
      */
     public function setMethod($method)
     {
-        $this->_request->setMethod($method);
         $this->_method = strtoupper($method);
     }
 
@@ -255,7 +245,6 @@ class HttpClient implements IHttpClient
      */
     public function setPostParameters(array $postParameters)
     {
-        $this->_request->addPostParameter($postParameters);
         foreach ($postParameters as $k => $v) {
             $this->_postParams[$k] = $v;
         }
@@ -277,7 +266,6 @@ class HttpClient implements IHttpClient
     {
         if (isset($url)) {
             $this->setUrl($url);
-            $this->_request->setUrl($this->_requestUrl->getUrl());
         }
 
         foreach ($filters as $filter) {
@@ -305,7 +293,7 @@ class HttpClient implements IHttpClient
 
             $request = new \GuzzleHttp\Psr7\Request(
                 $this->_method,
-                $this->_request->getUrl()->getURL(),
+                $this->getUrl()->getURL(),
                 $this->_headers,
                 $this->_body);
 
