@@ -27,7 +27,6 @@ namespace WindowsAzure\MediaServices\Internal;
 
 use WindowsAzure\Common\Internal\FilterableService;
 use WindowsAzure\MediaServices\Models\Asset;
-use WindowsAzure\MediaServices\Models\Access;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
 use WindowsAzure\MediaServices\Models\AssetFile;
@@ -126,7 +125,7 @@ interface IMediaServices extends FilterableService
      *
      * @return none
      */
-    public function updateAsset(Access $asset);
+    public function updateAsset(Asset $asset);
 
     /**
      * Delete asset.

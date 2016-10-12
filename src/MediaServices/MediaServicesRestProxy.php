@@ -33,7 +33,6 @@ use WindowsAzure\Common\Internal\Http\HttpCallContext;
 use WindowsAzure\Common\Internal\ServiceRestProxy;
 use WindowsAzure\MediaServices\Internal\IMediaServices;
 use WindowsAzure\MediaServices\Models\Asset;
-use WindowsAzure\MediaServices\Models\Access;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
 use WindowsAzure\MediaServices\Models\AssetFile;
