@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -63,7 +63,7 @@ class ServiceRestProxy extends RestProxy
     }
 
     /**
-     * Gets the account name. 
+     * Gets the account name.
      *
      * @return string
      */
@@ -74,22 +74,22 @@ class ServiceRestProxy extends RestProxy
 
     /**
      * Sends HTTP request with the specified HTTP call context.
-     * 
-     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context The HTTP 
+     *
+     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context The HTTP
      *                                                                   call context.
-     * 
-     * @return \HTTP_Request2_Response
+     *
+     * @return \Psr\Http\Message\ResponseInterface
      */
-    protected function sendContext($context)
+    protected function sendHttpContext($context)
     {
         $context->setUri($this->getUri());
 
-        return parent::sendContext($context);
+        return parent::sendHttpContext($context);
     }
 
     /**
      * Sends HTTP request with the specified parameters.
-     * 
+     *
      * @param string $method         HTTP method used in the request
      * @param array  $headers        HTTP headers.
      * @param array  $queryParams    URL query parameters.
@@ -97,10 +97,10 @@ class ServiceRestProxy extends RestProxy
      * @param string $path           URL path
      * @param int    $statusCode     Expected status code received in the response
      * @param string $body           Request body
-     * 
-     * @return \HTTP_Request2_Response
+     *
+     * @return \Psr\Http\Message\ResponseInterface
      */
-    protected function send(
+    protected function sendHttp(
         $method,
         $headers,
         $queryParams,
@@ -123,15 +123,15 @@ class ServiceRestProxy extends RestProxy
             $context->addStatusCode($statusCode);
         }
 
-        return $this->sendContext($context);
+        return $this->sendHttpContext($context);
     }
 
     /**
      * Adds optional header to headers if set.
-     * 
+     *
      * @param array           $headers         The array of request headers.
      * @param AccessCondition $accessCondition The access condition object.
-     * 
+     *
      * @return array
      */
     public function addOptionalAccessConditionHeader($headers, $accessCondition)
@@ -156,10 +156,10 @@ class ServiceRestProxy extends RestProxy
 
     /**
      * Adds optional header to headers if set.
-     * 
+     *
      * @param array           $headers         The array of request headers.
      * @param AccessCondition $accessCondition The access condition object.
-     * 
+     *
      * @return array
      */
     public function addOptionalSourceAccessConditionHeader(
@@ -208,11 +208,11 @@ class ServiceRestProxy extends RestProxy
 
     /**
      * Adds HTTP POST parameter to the specified.
-     * 
+     *
      * @param array  $postParameters An array of HTTP POST parameters.
-     * @param string $key            The key of a HTTP POST parameter. 
-     * @param string $value          the value of a HTTP POST parameter. 
-     * 
+     * @param string $key            The key of a HTTP POST parameter.
+     * @param string $value          the value of a HTTP POST parameter.
+     *
      * @return array
      */
     public function addPostParameter(
@@ -228,9 +228,9 @@ class ServiceRestProxy extends RestProxy
 
     /**
      * Groups set of values into one value separated with Resources::SEPARATOR.
-     * 
+     *
      * @param array $values array of values to be grouped.
-     * 
+     *
      * @return string
      */
     public function groupQueryValues($values)
@@ -249,10 +249,10 @@ class ServiceRestProxy extends RestProxy
 
     /**
      * Adds metadata elements to headers array.
-     * 
+     *
      * @param array $headers  HTTP request headers
      * @param array $metadata user specified metadata
-     * 
+     *
      * @return array
      */
     protected function addMetadataHeaders($headers, $metadata)
@@ -269,7 +269,7 @@ class ServiceRestProxy extends RestProxy
      * Generates metadata headers by prefixing each element with 'x-ms-meta'.
      *
      * @param array $metadata user defined metadata.
-     * 
+     *
      * @return array.
      */
     public function generateMetadataHeaders($metadata)
@@ -297,7 +297,7 @@ class ServiceRestProxy extends RestProxy
      * Gets metadata array by parsing them from given headers.
      *
      * @param array $headers HTTP headers containing metadata elements.
-     * 
+     *
      * @return array.
      */
     public function getMetadataArray($headers)
@@ -325,9 +325,9 @@ class ServiceRestProxy extends RestProxy
 
     /**
      * Validates the provided metadata array.
-     * 
+     *
      * @param mix $metadata The metadata array.
-     * 
+     *
      * @return none
      */
     public function validateMetadata($metadata)

@@ -268,9 +268,9 @@ class HttpClient implements IHttpClient
      *
      * @throws WindowsAzure\Common\ServiceException
      *
-     * @return \HTTP_Request2_Response The response.
+     * @return \Psr\Http\Message\ResponseInterface The response.
      */
-    public function sendAndGetResponse($filters, $url = null)
+    public function sendAndGetHttpResponse($filters, $url = null)
     {
         if (isset($url)) {
             $this->setUrl($url);
@@ -313,28 +313,19 @@ class HttpClient implements IHttpClient
             $newResponse = $e->getResponse();
         }
 
-        $response = new \HTTP_Request2_Response(
-            'HTTP/1.1 ' . $newResponse->getStatusCode() . ' ' . $newResponse->getReasonPhrase());
-
-        foreach ($newResponse->getHeaders() as $name => $values) {
-            $response->parseHeaderLine($name . ': ' . implode(', ', $values));
-        }
-
-        $response->appendBody($newResponse->getBody());
-
         $start = count($filters) - 1;
         for ($index = $start; $index >= 0; --$index) {
-            $response = $filters[$index]->handleResponse($this, $response);
+            $newResponse = $filters[$index]->handleResponse($this, $newResponse);
         }
 
         self::throwIfError(
-            $response->getStatus(),
-            $response->getReasonPhrase(),
-            $response->getBody(),
+            $newResponse->getStatusCode(),
+            $newResponse->getReasonPhrase(),
+            $newResponse->getBody(),
             $this->_expectedStatusCodes
         );
 
-        return $response;
+        return $newResponse;
     }
 
     /**
@@ -351,7 +342,7 @@ class HttpClient implements IHttpClient
      */
     public function send($filters, $url = null)
     {
-        return $this->sendAndGetResponse($filters, $url)->getBody();
+        return (string)($this->sendAndGetHttpResponse($filters, $url)->getBody());
     }
 
     /**
@@ -447,5 +438,23 @@ class HttpClient implements IHttpClient
         if (!in_array($actual, $expected)) {
             throw new ServiceException($actual, $reason, $message);
         }
+    }
+
+    /**
+     * @param \Psr\Http\Message\ResponseInterface $response
+     *
+     * @return array an array of headers.
+     */
+    public static function getResponseHeaders($response)
+    {
+        $responseHeaderArray = $response->getHeaders();
+
+        $responseHeaders = array();
+
+        foreach($responseHeaderArray as $key => $value) {
+            $responseHeaders[strtolower($key)] = implode(',', $value);
+        }
+
+        return $responseHeaders;
     }
 }

@@ -79,10 +79,10 @@ class AuthenticationFilter implements IServiceFilter
     /**
      * Does nothing with the response.
      *
-     * @param IHttpClient             $request  HTTP channel object.
-     * @param \HTTP_Request2_Response $response HTTP response object.
+     * @param IHttpClient                        $request  HTTP channel object.
+     * @param \Psr\Http\Message\ResponseInterface $response HTTP response object.
      *
-     * @return \HTTP_Request2_Response
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function handleResponse($request, $response)
     {

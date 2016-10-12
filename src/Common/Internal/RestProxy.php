@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -79,7 +79,7 @@ class RestProxy
 
     /**
      * Gets HTTP filters that will process each request.
-     * 
+     *
      * @return array
      */
     public function getFilters()
@@ -89,7 +89,7 @@ class RestProxy
 
     /**
      * Gets the Uri of the service.
-     * 
+     *
      * @return string
      */
     public function getUri()
@@ -97,11 +97,11 @@ class RestProxy
         return $this->_uri;
     }
 
-    /** 
-     * Sets the Uri of the service. 
+    /**
+     * Sets the Uri of the service.
      *
      * @param string $uri The URI of the request.
-     * 
+     *
      * @return none
      */
     public function setUri($uri)
@@ -111,13 +111,13 @@ class RestProxy
 
     /**
      * Sends HTTP request with the specified HTTP call context.
-     * 
-     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context The HTTP 
+     *
+     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context The HTTP
      *                                                                   call context.
-     * 
-     * @return \HTTP_Request2_Response
+     *
+     * @return \Psr\Http\Message\ResponseInterface
      */
-    protected function sendContext($context)
+    protected function sendHttpContext($context)
     {
         $channel = clone $this->_channel;
         $contextUrl = $context->getUri();
@@ -140,15 +140,15 @@ class RestProxy
         $url->setQueryVariables($queryParams);
         $url->appendUrlPath($path);
 
-        return $channel->sendAndGetResponse($this->_filters, $url);
+        return $channel->sendAndGetHttpResponse($this->_filters, $url);
     }
 
     /**
      * Adds new filter to new service rest proxy object and returns that object back.
      *
-     * @param WindowsAzure\Common\Internal\IServiceFilter $filter Filter to add for 
+     * @param WindowsAzure\Common\Internal\IServiceFilter $filter Filter to add for
      *                                                            the pipeline.
-     * 
+     *
      * @return RestProxy.
      */
     public function withFilter($filter)
@@ -161,13 +161,13 @@ class RestProxy
 
     /**
      * Adds optional query parameter.
-     * 
+     *
      * Doesn't add the value if it satisfies empty().
-     * 
+     *
      * @param array  &$queryParameters The query parameters.
      * @param string $key              The query variable name.
      * @param string $value            The query variable value.
-     * 
+     *
      * @return none
      */
     protected function addOptionalQueryParam(&$queryParameters, $key, $value)
@@ -183,13 +183,13 @@ class RestProxy
 
     /**
      * Adds optional header.
-     * 
+     *
      * Doesn't add the value if it satisfies empty().
-     * 
+     *
      * @param array  &$headers The HTTP header parameters.
      * @param string $key      The HTTP header name.
      * @param string $value    The HTTP header value.
-     * 
+     *
      * @return none
      */
     protected function addOptionalHeader(&$headers, $key, $value)

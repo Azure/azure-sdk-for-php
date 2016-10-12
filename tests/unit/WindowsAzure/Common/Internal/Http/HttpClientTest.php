@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -144,7 +144,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $channel->setHeaders($headers);
 
         // Assert
-        $channelHeaders = $channel->getHeaders();    
+        $channelHeaders = $channel->getHeaders();
         $this->assertCount(4, $channelHeaders);
         $this->assertEquals($value1, $channelHeaders[$header1]);
         $this->assertEquals($value2, $channelHeaders[$header2]);
@@ -228,20 +228,20 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\HttpClient::sendAndGetResponse
+     * @covers WindowsAzure\Common\Internal\Http\HttpClient::sendAndGetHttpResponse
      */
-    public function testSendAndGetResponse()
+    public function testSendAndGetHttpResponse()
     {
         // Setup
         $channel = new HttpClient();
         $url = new Url('http://example.com/');
         $channel->setExpectedStatusCode('200');
-        
+
         // Test
-        $response = $channel->sendAndGetResponse(array(), $url);
+        $response = $channel->sendAndGetHttpResponse(array(), $url);
 
         // Assert
-        $this->assertInstanceOf('\HTTP_Request2_Response', $response);
+        $this->assertInstanceOf('\Psr\Http\Message\ResponseInterface', $response);
     }
 
     /**

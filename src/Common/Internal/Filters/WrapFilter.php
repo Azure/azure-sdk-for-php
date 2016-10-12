@@ -99,10 +99,10 @@ class WrapFilter implements IServiceFilter
     /**
      * Returns the original response.
      *
-     * @param IHttpClient             $request  A HTTP channel object.
-     * @param \HTTP_Request2_Response $response A HTTP response object.
+     * @param IHttpClient                         $request  A HTTP channel object.
+     * @param \Psr\Http\Message\ResponseInterface $response A HTTP response object.
      *
-     * @return \HTTP_Request2_Response
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function handleResponse($request, $response)
     {

@@ -96,7 +96,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
      */
     public function testDeleteQueueNonExistQueueFail()
     {
-        // Setup 
+        // Setup
         $queueName = 'IDoNotExist';
         $this->setExpectedException(get_class(
             new ServiceException(''))
@@ -113,7 +113,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
      */
     public function testDeleteQueueSuccess()
     {
-        // Setup 
+        // Setup
         $queueName = 'testDeleteQueueSuccess';
         $createQueueInfo = new QueueInfo($queueName);
         $listQueuesOptions = new ListQueuesOptions();
@@ -144,7 +144,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
      */
     public function testListQueueSuccess()
     {
-        // Setup 
+        // Setup
         $queueName = 'testListQueueSuccess';
         $createQueueInfo = new QueueInfo($queueName);
         $listQueuesOptions = new ListQueuesOptions();
@@ -263,7 +263,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
      */
     public function testDeleteMessageInvalidMessage()
     {
-        // Setup 
+        // Setup
         $queueDescription = new QueueDescription();
         $queueName = 'testDeleteMessageInvalidMessage';
         $queueInfo = new QueueInfo($queueName, $queueDescription);
@@ -284,7 +284,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
      */
     public function testDeleteMessageSuccess()
     {
-        // Setup 
+        // Setup
         $queueDescription = new QueueDescription();
         $queueName = 'testDeleteMessageSuccess';
         $expectedMessage = 'testDeleteMessageSuccess';
@@ -467,7 +467,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
      */
     public function testSubscriptionCanBeCreatedOnTopics()
     {
-        // Setup        
+        // Setup
         $topicName = 'testCreateSubscriptionWorksTopic';
         $subscriptionName = 'testCreateSubscriptionWorksSubscription';
         $topicInfo = new TopicInfo($topicName);

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -43,6 +43,10 @@ class SimpleFilterMock implements \WindowsAzure\Common\Internal\IServiceFilter
     private $_headerName;
     private $_data;
 
+    /**
+     * @param string $headerName
+     * @param string $data
+     */
     public function __construct($headerName, $data)
     {
         $this->_data = $data;
@@ -59,8 +63,7 @@ class SimpleFilterMock implements \WindowsAzure\Common\Internal\IServiceFilter
 
     public function handleResponse($request, $response)
     {
-        $response->appendBody($this->_data);
-
-        return $response;
+        $newData = ((string)$response->getBody()).$this->_data;
+        return $response->withBody(\GuzzleHttp\Psr7\stream_for($newData));
     }
 }

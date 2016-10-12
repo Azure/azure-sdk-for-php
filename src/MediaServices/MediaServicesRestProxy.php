@@ -107,9 +107,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param int    $statusCode     Expected status code received in the response
      * @param string $body           Request body
      *
-     * @return \HTTP_Request2_Response
+     * @return \Psr\Http\Message\ResponseInterface
      */
-    protected function send(
+    protected function sendHttp(
         $method,
         $headers,
         $queryParams,
@@ -124,7 +124,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         }
         array_push($statusCode, Resources::STATUS_MOVED_PERMANENTLY);
 
-        $response = parent::send(
+        $response = parent::sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -135,11 +135,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         );
 
         // Set new URI endpoint if we get redirect response and perform query
-        if ($response->getStatus() == Resources::STATUS_MOVED_PERMANENTLY) {
+        if ($response->getStatusCode() == Resources::STATUS_MOVED_PERMANENTLY) {
             $this->setUri($response->getHeader('location'));
             array_pop($statusCode);
 
-            $response = parent::send(
+            $response = parent::sendHttp(
                 $method,
                 $headers,
                 $queryParams,
@@ -261,7 +261,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $statusCode = Resources::STATUS_CREATED;
         $body = $this->wrapAtomEntry($entity, $links);
 
-        $response = $this->send(
+        $response = $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -299,7 +299,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $body = $entity;
         }
 
-        $response = $this->send(
+        $response = $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -318,7 +318,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         }
 
         $options = array();
-        $headers = $response->getHeader();
+        $headers = HttpClient::getResponseHeaders($response);
 
         // fill the operation identifier if present
         if (isset($headers['operation-id'])) {
@@ -331,7 +331,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         }
 
         // set the operation to Succeeded or InProgress depending on the response status code
-        if ($response->getStatus() == Resources::STATUS_NO_CONTENT) {
+        if ($response->getStatusCode() == Resources::STATUS_NO_CONTENT) {
             $options['State'] = OperationState::Succeeded;
         } else {
             $options['State'] = OperationState::InProgress;
@@ -355,7 +355,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $queryParams = array();
         $statusCode = Resources::STATUS_OK;
 
-        $response = $this->send(
+        $response = $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -385,7 +385,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $postParams = array();
         $statusCode = Resources::STATUS_OK;
 
-        $response = $this->send(
+        $response = $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -414,7 +414,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $statusCode = Resources::STATUS_NO_CONTENT;
         $body = $this->wrapAtomEntry($entity);
 
-        $this->send(
+        $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -440,7 +440,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $queryParams = array();
         $statusCode = Resources::STATUS_NO_CONTENT;
 
-        $this->send(
+        $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -698,7 +698,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $statusCode = Resources::STATUS_NO_CONTENT;
         $body = $contentWriter->outputMemory();
 
-        $this->send(
+        $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -738,7 +738,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $queryParams = array();
         $statusCode = Resources::STATUS_NO_CONTENT;
 
-        $this->send(
+        $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -1006,7 +1006,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $path = "CreateFileInfos?assetid='{$assetIdEncoded}'";
         $statusCode = Resources::STATUS_NO_CONTENT;
 
-        $this->send(
+        $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -1432,7 +1432,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $statusCode = Resources::STATUS_ACCEPTED;
         $body = $batch->getBody();
 
-        $response = $this->send(
+        $response = $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -1509,7 +1509,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $path = "Jobs('{$jobIdEncoded}')/State";
         $statusCode = Resources::STATUS_OK;
 
-        $response = $this->send(
+        $response = $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -1615,7 +1615,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $path = "CancelJob?jobid='{$jobIdEncoded}'";
         $statusCode = Resources::STATUS_NO_CONTENT;
 
-        $this->send(
+        $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -1754,7 +1754,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $statusCode = Resources::STATUS_ACCEPTED;
         $body = $batch->getBody();
 
-        $response = $this->send(
+        $response = $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -2391,7 +2391,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $path = "RebindContentKey?id='{$contentKeyId}'".
             "&x509Certificate='{$x509Certificate}'";
 
-        $response = $this->send(
+        $response = $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -2443,7 +2443,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $queryParams = array();
         $statusCode = Resources::STATUS_OK;
 
-        $response = $this->send(
+        $response = $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -2474,7 +2474,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $queryParams = array();
         $statusCode = Resources::STATUS_OK;
 
-        $response = $this->send(
+        $response = $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -2712,7 +2712,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $statusCode = Resources::STATUS_NO_CONTENT;
         $body = $contentWriter->outputMemory();
 
-        $this->send(
+        $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -2748,7 +2748,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $queryParams = array();
         $statusCode = Resources::STATUS_NO_CONTENT;
 
-        $this->send(
+        $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -2900,7 +2900,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $statusCode = Resources::STATUS_NO_CONTENT;
         $body = $contentWriter->outputMemory();
 
-        $this->send(
+        $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -2938,7 +2938,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $queryParams = array();
         $statusCode = Resources::STATUS_NO_CONTENT;
 
-        $this->send(
+        $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -2977,7 +2977,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $queryParams = array();
         $statusCode = Resources::STATUS_OK;
 
-        $response = $this->send(
+        $response = $this->sendHttp(
             $method,
             $headers,
             $queryParams,
@@ -3204,7 +3204,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param WindowsAzure\MediaServices\Models\Channel|string $channel Channel data or channel Id
      * @param string $duration The duration, in seconds, of the commercial break.
      * @param string $cueId Unique ID for the commercial break
-     * @param string $showSlate Indicates to the live encoder within the Channel that it needs to switch to the default slate image during the commercial break      
+     * @param string $showSlate Indicates to the live encoder within the Channel that it needs to switch to the default slate image during the commercial break
      *
      * @return none
      */
@@ -3255,7 +3255,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param WindowsAzure\MediaServices\Models\Channel|string $channel Channel data or channel Id
      * @param string $duration The duration, in seconds, of the commercial break.
      * @param string $cueId Unique ID for the commercial break
-     * @param string $showSlate Indicates to the live encoder within the Channel that it needs to switch to the default slate image during the commercial break      
+     * @param string $showSlate Indicates to the live encoder within the Channel that it needs to switch to the default slate image during the commercial break
      *
      * @return none
      */
