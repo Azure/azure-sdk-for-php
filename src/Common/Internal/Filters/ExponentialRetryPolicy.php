@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -67,12 +67,13 @@ class ExponentialRetryPolicy extends RetryPolicy
 
     /**
      * Initializes new object from ExponentialRetryPolicy.
-     * 
+     *
      * @param array $retryableStatusCodes The retryable status codes.
      * @param int   $deltaBackoff         The backoff time delta.
      * @param int   $maximumAttempts      The number of max attempts.
      */
-    public function __construct($retryableStatusCodes,
+    public function __construct(
+        $retryableStatusCodes,
         $deltaBackoff = parent::DEFAULT_CLIENT_BACKOFF,
         $maximumAttempts = parent::DEFAULT_CLIENT_RETRY_COUNT
     ) {
@@ -86,10 +87,10 @@ class ExponentialRetryPolicy extends RetryPolicy
 
     /**
      * Indicates if there should be a retry or not.
-     * 
+     *
      * @param int                     $retryCount The retry count.
      * @param \HTTP_Request2_Response $response   The HTTP response object.
-     * 
+     *
      * @return bool
      */
     public function shouldRetry($retryCount, $response)
@@ -106,10 +107,10 @@ class ExponentialRetryPolicy extends RetryPolicy
 
     /**
      * Calculates the backoff for the retry policy.
-     * 
+     *
      * @param int                     $retryCount The retry count.
      * @param \HTTP_Request2_Response $response   The HTTP response object.
-     * 
+     *
      * @return int
      */
     public function calculateBackoff($retryCount, $response)

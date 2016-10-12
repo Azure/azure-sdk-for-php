@@ -27,6 +27,8 @@ namespace WindowsAzure\Common\Internal\Filters;
 
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\IServiceFilter;
+use WindowsAzure\Common\Internal\Http\IHttpClient;
+use WindowsAzure\Common\Internal\Authentication\IAuthScheme;
 
 /**
  * Adds authentication header to the http request object.
@@ -44,16 +46,16 @@ use WindowsAzure\Common\Internal\IServiceFilter;
 class AuthenticationFilter implements IServiceFilter
 {
     /**
-     * @var WindowsAzure\Common\Internal\Authentication\StorageAuthScheme
+     * @var IAuthScheme
      */
     private $_authenticationScheme;
 
     /**
      * Creates AuthenticationFilter with the passed scheme.
      *
-     * @param StorageAuthScheme $authenticationScheme The authentication scheme.
+     * @param IAuthScheme $authenticationScheme The authentication scheme.
      */
-    public function __construct($authenticationScheme)
+    public function __construct(IAuthScheme $authenticationScheme)
     {
         $this->_authenticationScheme = $authenticationScheme;
     }
@@ -65,7 +67,7 @@ class AuthenticationFilter implements IServiceFilter
      *
      * @return IHttpClient
      */
-    public function handleRequest($request)
+    public function handleRequest(IHttpClient $request)
     {
         $signedKey = $this->_authenticationScheme->getAuthorizationHeader(
             $request->getHeaders(), $request->getUrl(),
@@ -84,7 +86,7 @@ class AuthenticationFilter implements IServiceFilter
      *
      * @return \HTTP_Request2_Response
      */
-    public function handleResponse($request, $response)
+    public function handleResponse(IHttpClient $request, $response)
     {
         // Do nothing with the response.
         return $response;

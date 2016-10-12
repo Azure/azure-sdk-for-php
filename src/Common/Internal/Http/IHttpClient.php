@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -24,6 +24,8 @@
  */
 
 namespace WindowsAzure\Common\Internal\Http;
+
+use WindowsAzure\Common\Internal\Http\IUrl;
 
 /**
  * Defines required methods for a HTTP client proxy.
@@ -43,24 +45,24 @@ interface IHttpClient
     /**
      * Sets the request url.
      *
-     * @param WindowsAzure\Common\Internal\Http\IUrl $url request url.
-     * 
+     * @param IUrl $url request url.
+     *
      * @return none.
      */
-    public function setUrl($url);
+    public function setUrl(IUrl $url);
 
     /**
      * Gets request url.
      *
-     * @return WindowsAzure\Common\Internal\Http\IUrl
+     * @return IUrl
      */
     public function getUrl();
 
     /**
      * Sets request's HTTP method.
-     * 
+     *
      * @param string $method request's HTTP method.
-     * 
+     *
      * @return none.
      */
     public function setMethod($method);
@@ -82,24 +84,24 @@ interface IHttpClient
     /**
      * Sets a an existing request header to value or creates a new one if the $header
      * doesn't exist.
-     * 
+     *
      * @param string $header  header name.
      * @param string $value   header value.
      * @param bool   $replace whether to replace previous header with the same name
      *                        or append to its value (comma separated)
-     * 
+     *
      * @return none.
      */
     public function setHeader($header, $value, $replace = false);
 
     /**
      * Sets request headers using array.
-     * 
+     *
      * @param array $headers headers key-value array
-     * 
+     *
      * @return none.
      */
-    public function setHeaders($headers);
+    public function setHeaders(array $headers);
 
     /**
      * Sets HTTP POST parameters.
@@ -108,103 +110,103 @@ interface IHttpClient
      *
      * @return none
      */
-    public function setPostParameters($postParameters);
+    public function setPostParameters(array $postParameters);
 
     /**
-     * Processes the reuqest through HTTP pipeline with passed $filters, 
+     * Processes the reuqest through HTTP pipeline with passed $filters,
      * sends HTTP request to the wire and process the response in the HTTP pipeline.
-     * 
+     *
      * @param array $filters HTTP filters which will be applied to the request before
      *                       send and then applied to the response.
      * @param IUrl  $url     Request url.
-     * 
+     *
      * @return \HTTP_Request2_Response The response.
      */
-    public function sendAndGetResponse($filters, $url = null);
+    public function sendAndGetResponse(array $filters, IUrl $url = null);
 
     /**
-     * Processes the reuqest through HTTP pipeline with passed $filters, 
+     * Processes the reuqest through HTTP pipeline with passed $filters,
      * sends HTTP request to the wire and process the response in the HTTP pipeline.
-     * 
+     *
      * @param array $filters HTTP filters which will be applied to the request before
      *                       send and then applied to the response.
      * @param IUrl  $url     Request url.
-     * 
+     *
      * @return string The response body.
      */
-    public function send($filters, $url = null);
+    public function send(array $filters, IUrl $url = null);
 
     /**
      * Sets successful status code.
-     * 
+     *
      * @param array|string $statusCodes successful status code.
-     * 
+     *
      * @return none.
      */
     public function setExpectedStatusCode($statusCodes);
 
     /**
      * Gets successful status code.
-     * 
+     *
      * @return array.
      */
     public function getSuccessfulStatusCode();
 
     /**
      * Sets a configuration element for the request.
-     * 
+     *
      * @param string $name  configuration parameter name.
      * @param mix    $value configuration parameter value.
-     * 
+     *
      * @return none.
      */
     public function setConfig($name, $value = null);
 
     /**
      * Gets value for configuration parameter.
-     * 
+     *
      * @param string $name configuration parameter name.
-     * 
+     *
      * @return string.
      */
     public function getConfig($name);
 
     /**
      * Sets the request body.
-     * 
+     *
      * @param string $body body to use.
-     * 
+     *
      * @return none.
      */
     public function setBody($body);
 
     /**
      * Gets the request body.
-     * 
+     *
      * @return string.
      */
     public function getBody();
 
     /**
      * Makes deep copy from the current object.
-     * 
-     * @return WindowsAzure\Common\Internal\Http\HttpClient
+     *
+     * @return HttpClient
      */
     public function __clone();
 
     /**
      * Throws ServiceException if the recieved status code is not expected.
-     * 
+     *
      * @param string $actual   The received status code.
      * @param string $reason   The reason phrase.
      * @param string $message  The detailed message (if any).
      * @param array  $expected The expected status codes.
-     * 
+     *
      * @return none
-     * 
+     *
      * @static
-     * 
+     *
      * @throws ServiceException
      */
-    public static function throwIfError($actual, $reason, $message, $expected);
+    public static function throwIfError($actual, $reason, $message, array $expected);
 }

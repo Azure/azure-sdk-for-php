@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -24,6 +24,8 @@
  */
 
 namespace Tests\mock\WindowsAzure\Common\Internal\Filters;
+
+use WindowsAzure\Common\Internal\Http\IHttpClient;
 
 /**
  * Alters request headers and response to mock real filter.
@@ -49,7 +51,7 @@ class SimpleFilterMock implements \WindowsAzure\Common\Internal\IServiceFilter
         $this->_headerName = $headerName;
     }
 
-    public function handleRequest($request)
+    public function handleRequest(IHttpClient $request)
     {
         $request->setHeader($this->_headerName, $this->_data);
         $request->setHeader('Accept-Encoding', 'identity', true);
@@ -57,7 +59,7 @@ class SimpleFilterMock implements \WindowsAzure\Common\Internal\IServiceFilter
         return $request;
     }
 
-    public function handleResponse($request, $response)
+    public function handleResponse(IHttpClient $request, $response)
     {
         $response->appendBody($this->_data);
 

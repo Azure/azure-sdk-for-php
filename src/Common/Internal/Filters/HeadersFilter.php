@@ -26,6 +26,7 @@
 namespace WindowsAzure\Common\Internal\Filters;
 
 use WindowsAzure\Common\Internal\IServiceFilter;
+use WindowsAzure\Common\Internal\Http\IHttpClient;
 
 /**
  * Adds all passed headers to the HTTP request headers.
@@ -54,7 +55,7 @@ class HeadersFilter implements IServiceFilter
      *
      * @return HeadersFilter
      */
-    public function __construct($headers)
+    public function __construct(array $headers)
     {
         $this->_headers = $headers;
     }
@@ -66,7 +67,7 @@ class HeadersFilter implements IServiceFilter
      *
      * @return IHttpClient
      */
-    public function handleRequest($request)
+    public function handleRequest(IHttpClient $request)
     {
         foreach ($this->_headers as $key => $value) {
             $headers = $request->getHeaders();
@@ -86,7 +87,7 @@ class HeadersFilter implements IServiceFilter
      *
      * @return \HTTP_Request2_Response
      */
-    public function handleResponse($request, $response)
+    public function handleResponse(IHttpClient $request, $response)
     {
         // Do nothing with the response.
         return $response;

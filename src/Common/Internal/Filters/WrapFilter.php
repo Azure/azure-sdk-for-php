@@ -28,7 +28,9 @@ namespace WindowsAzure\Common\Internal\Filters;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\IServiceFilter;
+use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\ServiceBus\Internal\WrapTokenManager;
+use WindowsAzure\ServiceBus\Internal\IWrap;
 
 /**
  * Adds WRAP authentication header to the http request object.
@@ -62,7 +64,7 @@ class WrapFilter implements IServiceFilter
         $wrapUri,
         $wrapUsername,
         $wrapPassword,
-        $wrapRestProxy
+        IWrap $wrapRestProxy
     ) {
         $this->_wrapTokenManager = new WrapTokenManager(
             $wrapUri,
@@ -79,7 +81,7 @@ class WrapFilter implements IServiceFilter
      *
      * @return IHttpClient
      */
-    public function handleRequest($request)
+    public function handleRequest(IHttpClient $request)
     {
         Validate::notNull($request, 'request');
         $wrapAccessToken = $this->_wrapTokenManager->getAccessToken(
@@ -104,7 +106,7 @@ class WrapFilter implements IServiceFilter
      *
      * @return \HTTP_Request2_Response
      */
-    public function handleResponse($request, $response)
+    public function handleResponse(IHttpClient $request, $response)
     {
         return $response;
     }
