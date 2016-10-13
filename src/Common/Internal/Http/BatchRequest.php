@@ -27,6 +27,7 @@ namespace WindowsAzure\Common\Internal\Http;
 
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Http\HttpCallContext;
 
 /**
  * Batch request marshaler.
@@ -48,7 +49,7 @@ class BatchRequest
      *
      * @var array
      */
-    private $_contexts;
+    private $_contexts = array();
 
     /**
      * Headers.
@@ -65,22 +66,13 @@ class BatchRequest
     private $_body;
 
     /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->_contexts = array();
-    }
-
-    /**
      * Append new context to batch request.
      *
-     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context Http call
-     *                                                                   context to add to batch request
+     * @param HttpCallContext $context Http call context to add to batch request
      *
      * @return none
      */
-    public function appendContext($context)
+    public function appendContext(HttpCallContext $context)
     {
         $this->_contexts[] = $context;
     }

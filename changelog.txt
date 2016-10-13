@@ -2,6 +2,8 @@
   - [Type declarations](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration) for
     - `\WindowsAzure\Common\Internal\IServiceFilter`, 
 	- `\WindowsAzure\Common\Internal\Http\HttpClient`,
+	- `\WindowsAzure\Common\Internal\Http\BatchRequest`,
+	- `\WindowsAzure\Common\Internal\Http\BatchResponse`,
 	- `\WindowsAzure\Common\Internal\RestProxy`,
 	- `\WindowsAzure\Common\Internal\ServiceRestProxy`,
 	- `\WindwosAzure\Common\Internal\FilterableService`,	

@@ -27,6 +27,7 @@ namespace WindowsAzure\Common\Internal\Http;
 
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\ServiceException;
+use WindowsAzure\Common\Internal\Http\BatchRequest;
 
 /**
  * Batch response parser.
@@ -53,12 +54,10 @@ class BatchResponse
     /**
      * Constructor.
      *
-     * @param string                                         $content Http response
-     *                                                                as string
-     * @param WindowsAzure\Common\Internal\Http\BatchRequest $request Source batch
-     *                                                                request object
+     * @param string       $content Http response as string
+     * @param BatchRequest $request Source batch request object
      */
-    public function __construct($content, $request = null)
+    public function __construct($content, BatchRequest $request = null)
     {
         $params['include_bodies'] = true;
         $params['input'] = $content;
