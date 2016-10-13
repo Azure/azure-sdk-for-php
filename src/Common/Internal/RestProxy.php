@@ -58,7 +58,7 @@ class RestProxy
     private $_filters;
 
     /**
-     * @var ISerializer
+     * @var ISerializer|null
      */
     protected $dataSerializer;
 
@@ -70,11 +70,11 @@ class RestProxy
     /**
      * Initializes new RestProxy object.
      *
-     * @param IHttpClient $channel        The HTTP client used to send HTTP requests.
-     * @param ISerializer $dataSerializer The data serializer.
-     * @param string      $uri            The uri of the service.
+     * @param IHttpClient      $channel        The HTTP client used to send HTTP requests.
+     * @param ISerializer|null $dataSerializer The data serializer.
+     * @param string           $uri            The uri of the service.
      */
-    public function __construct(IHttpClient $channel, ISerializer $dataSerializer, $uri)
+    public function __construct(IHttpClient $channel, $dataSerializer, $uri)
     {
         $this->_channel = $channel;
         $this->_filters = array();
@@ -116,7 +116,7 @@ class RestProxy
 
     /**
      * Sends HTTP request with the specified HTTP call context.
-     * 
+     *
      * @param HttpCallContext $context The HTTP call context.
      *
      * @return ResponseInterface
@@ -151,7 +151,7 @@ class RestProxy
      * Adds new filter to new service rest proxy object and returns that object back.
      *
      * @param IServiceFilter $filter Filter to add for the pipeline.
-     * 
+     *
      * @return RestProxy.
      */
     public function withFilter(IServiceFilter $filter)

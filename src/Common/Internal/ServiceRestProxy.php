@@ -55,12 +55,12 @@ class ServiceRestProxy extends RestProxy
     /**
      * Initializes new ServiceRestProxy object.
      *
-     * @param IHttpClient $channel        The HTTP client used to send HTTP requests.
-     * @param string      $uri            The storage account uri.
-     * @param string      $accountName    The name of the account.
-     * @param ISerializer $dataSerializer The data serializer.
+     * @param IHttpClient      $channel        The HTTP client used to send HTTP requests.
+     * @param string           $uri            The storage account uri.
+     * @param string           $accountName    The name of the account.
+     * @param ISerializer|null $dataSerializer The data serializer.
      */
-    public function __construct(IHttpClient $channel, $uri, $accountName, ISerializer $dataSerializer)
+    public function __construct(IHttpClient $channel, $uri, $accountName, $dataSerializer)
     {
         parent::__construct($channel, $dataSerializer, $uri);
         $this->_accountName = $accountName;
@@ -78,7 +78,7 @@ class ServiceRestProxy extends RestProxy
 
     /**
      * Sends HTTP request with the specified HTTP call context.
-     * 
+     *
      * @param HttpCallContext $context The HTTP call context.
      *
      * @return ResponseInterface

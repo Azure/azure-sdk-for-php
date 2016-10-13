@@ -76,7 +76,6 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\common\\internal\\connectionstringsourcetest' => '/unit/WindowsAzure/Common/Internal/ConnectionStringSourceTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\filters\\authenticationfiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/AuthenticationFilterTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\filters\\datefiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/DateFilterTest.php',
-            'tests\\unit\\windowsazure\\common\\internal\\filters\\exponentialretrypolicytest' => '/unit/WindowsAzure/Common/Internal/Filters/ExponentialRetryPolicyTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\filters\\headersfiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/HeadersFilterTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\filters\\wrapfiltertest' => '/unit/WindowsAzure/Common/Internal/Filters/WrapFilterTest.php',
             'tests\\unit\\windowsazure\\common\\internal\\http\\batchrequesttest' => '/unit/WindowsAzure/Common/Internal/Http/BatchRequestTest.php',
