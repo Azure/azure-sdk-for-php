@@ -30,6 +30,7 @@ use WindowsAzure\Common\Internal\Http\HttpCallContext;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\Serialization\ISerializer;
 use MicrosoftAzure\Storage\Blob\Models\AccessCondition;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Base class for all services rest proxies.
@@ -80,7 +81,7 @@ class ServiceRestProxy extends RestProxy
      * 
      * @param HttpCallContext $context The HTTP call context.
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     protected function sendHttpContext(HttpCallContext $context)
     {
@@ -100,7 +101,7 @@ class ServiceRestProxy extends RestProxy
      * @param int    $statusCode     Expected status code received in the response
      * @param string $body           Request body
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     protected function sendHttp(
         $method,
