@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -57,7 +57,7 @@ class RestProxy
     private $_filters;
 
     /**
-     * @var ISerializer
+     * @var ISerializer|null
      */
     protected $dataSerializer;
 
@@ -69,11 +69,11 @@ class RestProxy
     /**
      * Initializes new RestProxy object.
      *
-     * @param IHttpClient $channel        The HTTP client used to send HTTP requests.
-     * @param ISerializer $dataSerializer The data serializer.
-     * @param string      $uri            The uri of the service.
+     * @param IHttpClient      $channel        The HTTP client used to send HTTP requests.
+     * @param ISerializer|null $dataSerializer The data serializer.
+     * @param string           $uri            The uri of the service.
      */
-    public function __construct(IHttpClient $channel, ISerializer $dataSerializer, $uri)
+    public function __construct(IHttpClient $channel, $dataSerializer, $uri)
     {
         $this->_channel = $channel;
         $this->_filters = array();
@@ -83,7 +83,7 @@ class RestProxy
 
     /**
      * Gets HTTP filters that will process each request.
-     * 
+     *
      * @return array
      */
     public function getFilters()
@@ -93,7 +93,7 @@ class RestProxy
 
     /**
      * Gets the Uri of the service.
-     * 
+     *
      * @return string
      */
     public function getUri()
@@ -101,11 +101,11 @@ class RestProxy
         return $this->_uri;
     }
 
-    /** 
-     * Sets the Uri of the service. 
+    /**
+     * Sets the Uri of the service.
      *
      * @param string $uri The URI of the request.
-     * 
+     *
      * @return none
      */
     public function setUri($uri)
@@ -115,9 +115,9 @@ class RestProxy
 
     /**
      * Sends HTTP request with the specified HTTP call context.
-     * 
+     *
      * @param HttpCallContext $context The HTTP call context.
-     * 
+     *
      * @return \HTTP_Request2_Response
      */
     protected function sendContext(HttpCallContext $context)
@@ -150,7 +150,7 @@ class RestProxy
      * Adds new filter to new service rest proxy object and returns that object back.
      *
      * @param IServiceFilter $filter Filter to add for the pipeline.
-     * 
+     *
      * @return RestProxy.
      */
     public function withFilter(IServiceFilter $filter)
@@ -163,13 +163,13 @@ class RestProxy
 
     /**
      * Adds optional query parameter.
-     * 
+     *
      * Doesn't add the value if it satisfies empty().
-     * 
+     *
      * @param array  &$queryParameters The query parameters.
      * @param string $key              The query variable name.
      * @param string $value            The query variable value.
-     * 
+     *
      * @return none
      */
     protected function addOptionalQueryParam(array &$queryParameters, $key, $value)
@@ -185,13 +185,13 @@ class RestProxy
 
     /**
      * Adds optional header.
-     * 
+     *
      * Doesn't add the value if it satisfies empty().
-     * 
+     *
      * @param array  &$headers The HTTP header parameters.
      * @param string $key      The HTTP header name.
      * @param string $value    The HTTP header value.
-     * 
+     *
      * @return none
      */
     protected function addOptionalHeader(array &$headers, $key, $value)

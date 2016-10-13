@@ -1645,11 +1645,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create a job HTTP call context.
      *
-     * @param Job $jobTemplate JobTemplate data
+     * @param JobTemplate $jobTemplate JobTemplate data
      *
      * @return HttpCallContext
      */
-    private function _getCreateEmptyJobTemplateContext(Job $jobTemplate)
+    private function _getCreateEmptyJobTemplateContext(JobTemplate $jobTemplate)
     {
         Validate::isA(
             $jobTemplate,
@@ -3068,11 +3068,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get existing channel.
      *
-     * @param Models\Channel $channel Channel data
+     * @param Channel|string $channel Channel data
      *
-     * @return Models\Channel Created Channel
+     * @return Channel Created Channel
      */
-    public function getChannel(Channel $channel)
+    public function getChannel($channel)
     {
         $channelId = Utilities::getEntityId(
             $channel,
