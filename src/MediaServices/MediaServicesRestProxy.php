@@ -1702,7 +1702,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return Models\JobTemplate
      */
-    public function createJobTemplate(JobTemlate $jobTemplate, array $taskTemplates)
+    public function createJobTemplate(JobTemplate $jobTemplate, array $taskTemplates)
     {
         Validate::isA(
             $jobTemplate,
