@@ -28,6 +28,7 @@ namespace WindowsAzure\MediaServices\Internal;
 use WindowsAzure\Common\Internal\FilterableService;
 use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\Job;
+use WindowsAzure\MediaServices\Models\JobTemplate;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
 use WindowsAzure\MediaServices\Models\AssetFile;
