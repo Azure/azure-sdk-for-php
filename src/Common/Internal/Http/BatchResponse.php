@@ -47,7 +47,7 @@ class BatchResponse
     /**
      * Http responses list.
      *
-     * @var array
+     * @var array of HTTP_Request2_Response
      */
     private $_contexts;
 
