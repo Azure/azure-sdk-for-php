@@ -50,7 +50,7 @@ class BatchResponse
      *
      * @var array of Response
      */
-    private $_contexts;
+    private $_responses;
 
     /**
      * Constructor.
@@ -81,31 +81,18 @@ class BatchResponse
         $i = 0;
         foreach ($parts as $part) {
             if (!empty($part->body)) {
-                $headerEndPos = strpos($part->body, "\r\n\r\n");
-
-                $header = substr($part->body, 0, $headerEndPos);
-                $body = substr($part->body, $headerEndPos + 4);
-                $headerStrings = explode("\r\n", $header);
-
-                $statusLine = array_shift($headerStrings);
-                $response = new \HTTP_Request2_Response($statusLine);
-                foreach ($headerStrings as $headerString) {
-                    $response->parseHeaderLine($headerString);
-                }
-                $response->appendBody($body);
-
-                $newResponse = new Response();
+                $response = parse_response($part->body);
 
                 $this->_contexts[] = $response;
 
                 if (is_array($requestContexts)) {
                     $expectedCodes = $requestContexts[$i]->getStatusCodes();
-                    $statusCode = $response->getStatus();
+                    $statusCode = $response->getStatusCode();
 
                     if (!in_array($statusCode, $expectedCodes)) {
                         $reason = $response->getReasonPhrase();
 
-                        throw new ServiceException($statusCode, $reason, $body);
+                        throw new ServiceException($statusCode, $reason, $response->getBody());
                     }
                 }
 
@@ -117,10 +104,10 @@ class BatchResponse
     /**
      * Get parsed contexts as array.
      *
-     * @return array
+     * @return array of Response.
      */
-    public function getContexts()
+    public function getResponses()
     {
-        return $this->_contexts;
+        return $this->_responses;
     }
 }
