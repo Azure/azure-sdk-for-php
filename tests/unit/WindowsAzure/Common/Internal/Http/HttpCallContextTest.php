@@ -43,9 +43,6 @@ use WindowsAzure\Common\Internal\Http\Url;
  */
 class HttpCallContextTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @covers WindowsAzure\Common\Internal\Http\HttpCallContext::__construct
-     */
     public function test__construct()
     {
         // Test
