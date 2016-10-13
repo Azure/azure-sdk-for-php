@@ -63,6 +63,7 @@ use WindowsAzure\MediaServices\Models\Operation;
 use WindowsAzure\MediaServices\Models\OperationState;
 use WindowsAzure\MediaServices\Models\Channel;
 use WindowsAzure\MediaServices\Models\Program;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for media services
@@ -107,7 +108,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param int    $statusCode     Expected status code received in the response
      * @param string $body           Request body
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     protected function sendHttp(
         $method,
