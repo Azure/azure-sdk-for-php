@@ -3465,6 +3465,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get existing program.
      *
+     * @param Program|string $program Program data
      *
      * @return Program Created Program
      */
