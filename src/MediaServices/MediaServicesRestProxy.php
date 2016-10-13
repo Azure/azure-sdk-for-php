@@ -1389,7 +1389,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param array $inputAssets Input assets list
      * @param array $tasks       Performed tasks array (optional)
      *
-     * @return Models\Job
+     * @return Job
      */
     public function createJob(Job $job, array $inputAssets, array $tasks = null)
     {
