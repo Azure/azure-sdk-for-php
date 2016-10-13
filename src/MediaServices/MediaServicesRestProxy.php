@@ -111,9 +111,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      */
     protected function sendHttp(
         $method,
-        $headers,
-        $queryParams,
-        $postParameters,
+        array $headers,
+        array $queryParams,
+        array $postParameters,
         $path,
         $statusCode,
         $body = Resources::EMPTY_STRING
@@ -161,7 +161,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return XML string representing Atom Entry
      */
-    protected function wrapAtomEntry($entity, $links = null)
+    protected function wrapAtomEntry($entity, array $links = null)
     {
         Validate::notNull($entity, 'entity');
 
@@ -188,12 +188,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Extract media service entity from Atom Entry object.
      *
-     * @param WindowsAzure\Common\Internal\Atom\Entry $entry Atom Entry containing
-     *                                                       properties of media services object
+     * @param Entry $entry Atom Entry containing properties of media services object
      *
      * @return array of properties name => value
      */
-    protected function getPropertiesFromAtomEntry($entry)
+    protected function getPropertiesFromAtomEntry(Entry $entry)
     {
         Validate::notNull($entry, 'entry');
         Validate::isA($entry, 'WindowsAzure\Common\Internal\Atom\Entry', 'entry');
@@ -252,7 +251,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return array Created entity data
      */
-    private function _createEntity($entity, $path, $links = null)
+    private function _createEntity($entity, $path, array $links = null)
     {
         $method = Resources::HTTP_POST;
         $headers = array();
@@ -280,14 +279,20 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Send live operation (Channel, Program or Streaming Endpoint)
      *
-     * @param object $entity Entity data
-     * @param string $path   REST path
-     * @param array  $links  AtomLinks to other media services entities
+     * @param object $entity     Entity data
+     * @param string $path       REST path
+     * @param string $method     HTTP method,
+     * @param int    $statusCode HTTP status code,
+     * @param array  $headers    HTTP headers
      *
      * @return array Created entity data
      */
-    private function _sendOperation($entity, $path, $method = Resources::HTTP_POST,
-                    $statusCode = Resources::STATUS_ACCEPTED, $headers = array())
+    private function _sendOperation(
+        $entity,
+        $path,
+        $method = Resources::HTTP_POST,
+        $statusCode = Resources::STATUS_ACCEPTED,
+        array $headers = array())
     {
         $postParams = array();
         $queryParams = array();
@@ -453,11 +458,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create new asset.
      *
-     * @param WindowsAzure\MediaServices\Models\Asset $asset Asset data
+     * @param Asset $asset Asset data
      *
-     * @return WindowsAzure\MediaServices\Models\Asset Created asset
+     * @return Asset Created asset
      */
-    public function createAsset($asset)
+    public function createAsset(Asset $asset)
     {
         Validate::isA($asset, 'WindowsAzure\Mediaservices\Models\Asset', 'asset');
 
@@ -467,10 +472,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get asset.
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
-     *                                                              asset Id
+     * @param Asset|string $asset Asset data or asset Id
      *
-     * @return WindowsAzure\MediaServices\Models\Asset
+     * @return Asset
      */
     public function getAsset($asset)
     {
@@ -504,8 +508,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get asset locators.
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
-     *                                                              asset Id
+     * @param Asset|string $asset Asset data or asset Id
      *
      * @return array of Models\Locator
      */
@@ -529,8 +532,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get asset ContentKeys.
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
-     *                                                              asset Id
+     * @param Asset|string $asset Asset data or asset Id
      *
      * @return array
      */
@@ -554,8 +556,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get parent assets of asset.
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
-     *                                                              asset Id
+     * @param Asset|string $asset Asset data or asset Id
      *
      * @return array of Models\Asset
      */
@@ -579,8 +580,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get assetFiles of asset.
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
-     *                                                              asset Id
+     * @param Asset|string $asset Asset data or asset Id
      *
      * @return array of Models\AssetFile
      */
@@ -604,10 +604,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get storage account of asset.
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
-     *                                                              asset Id
+     * @param Asset|string $asset Asset data or asset Id
      *
-     * @return WindowsAzure\MediaServices\Models\StorageAccount
+     * @return StorageAccount
      */
     public function getAssetStorageAccount($asset)
     {
@@ -624,12 +623,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update asset.
      *
-     * @param WindowsAzure\MediaServices\Models\Asset $asset New asset data with
-     *                                                       valid id
+     * @param Asset $asset New asset data with valid id
      *
      * @return none
      */
-    public function updateAsset($asset)
+    public function updateAsset(Asset $asset)
     {
         Validate::isA($asset, 'WindowsAzure\MediaServices\Models\Asset', 'asset');
 
@@ -639,8 +637,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Delete asset.
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
-     *                                                              asset Id
+     * @param Asset|string $asset Asset data or asset Id
      *
      * @return none
      */
@@ -751,12 +748,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create new access policy.
      *
-     * @param WindowsAzure\MediaServices\Models\AccessPolicy $accessPolicy Access
-     *                                                                     policy data
+     * @param AccessPolicy $accessPolicy Access policy data
      *
-     * @return WindowsAzure\MediaServices\Models\AccessPolicy
+     * @return AccessPolicy
      */
-    public function createAccessPolicy($accessPolicy)
+    public function createAccessPolicy(AccessPolicy $accessPolicy)
     {
         Validate::isA(
             $accessPolicy,
@@ -772,10 +768,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get AccessPolicy.
      *
-     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string $accessPolicy A
-     *                                                                            AccessPolicy data or AccessPolicy Id
+     * @param AccessPolicy|string $accessPolicy AccessPolicy data or AccessPolicy Id
      *
-     * @return WindowsAzure\MediaServices\Models\AccessPolicy
+     * @return AccessPolicy
      */
     public function getAccessPolicy($accessPolicy)
     {
@@ -809,8 +804,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Delete access policy.
      *
-     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string $accessPolicy A
-     *                                                                            Access policy data or access policy Id
+     * @param AccessPolicy|string $accessPolicy Access policy data or access policy Id
      *
      * @return none
      */
@@ -827,11 +821,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create new locator.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator $locator Locator data
+     * @param Locator $locator Locator data
      *
-     * @return WindowsAzure\MediaServices\Models\Locator
+     * @return Locator
      */
-    public function createLocator($locator)
+    public function createLocator(Locator $locator)
     {
         Validate::isA(
             $locator,
@@ -847,10 +841,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get Locator.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator|string $locator Locator data
-     *                                                                  or locator Id
+     * @param Locator|string $locator Locator data or locator Id
      *
-     * @return WindowsAzure\MediaServices\Models\Locator
+     * @return Locator
      */
     public function getLocator($locator)
     {
@@ -867,10 +860,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get Locator access policy.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator|string $locator Locator data
-     *                                                                  or locator Id
+     * @param Locator|string $locator Locator data or locator Id
      *
-     * @return WindowsAzure\MediaServices\Models\Locator
+     * @return Locator
      */
     public function getLocatorAccessPolicy($locator)
     {
@@ -887,10 +879,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get Locator asset.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator|string $locator Locator data
-     *                                                                  or locator Id
+     * @param Locator|string $locator Locator data or locator Id
      *
-     * @return WindowsAzure\MediaServices\Models\Locator
+     * @return Locator
      */
     public function getLocatorAsset($locator)
     {
@@ -907,9 +898,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get asset locators
      *
-     * @param WindowsAzure\MediaServices\Models\Asset |string $asset Asset or AssetId
+     * @param Asset|string $asset Asset or AssetId
      *
-     * @return WindowsAzure\MediaServices\Models\Locator
+     * @return Locator
      */
     public function getAssetLocatorList($asset)
     {
@@ -949,12 +940,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update locator.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator $locator New locator data
-     *                                                           with valid id
+     * @param Locator $locator New locator data with valid id
      *
      * @return none
      */
-    public function updateLocator($locator)
+    public function updateLocator(Locator $locator)
     {
         Validate::isA(
             $locator,
@@ -968,8 +958,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Delete locator.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator|string $locator Asset data
-     *                                                                  or asset Id
+     * @param Locator|string $locator Asset data or asset Id
      *
      * @return none
      */
@@ -986,8 +975,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Generate file info for all files in asset.
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
-     *                                                              asset Id
+     * @param Asset|string $asset Asset data or asset Id
      *
      * @return none
      */
@@ -1019,10 +1007,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get asset file.
      *
-     * @param WindowsAzure\MediaServices\Models\AssetFile|string $assetFile AssetFile
-     *                                                                      data or assetFile Id
+     * @param AssetFile|string $assetFile AssetFile data or assetFile Id
      *
-     * @return WindowsAzure\MediaServices\Models\AssetFile
+     * @return AssetFile
      */
     public function getAssetFile($assetFile)
     {
@@ -1056,12 +1043,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update asset file.
      *
-     * @param WindowsAzure\MediaServices\Models\AssetFile $assetFile New AssetFile
-     *                                                               data
+     * @param AssetFile $assetFile New AssetFile data
      *
      * @return none
      */
-    public function updateAssetFile($assetFile)
+    public function updateAssetFile(AssetFile $assetFile)
     {
         Validate::isA(
             $assetFile,
@@ -1075,14 +1061,13 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Upload asset file to storage.
      *
-     * @param WindowsAzure\MediaServices\Models\Locator $locator Write locator for
-     *                                                           file upload
-     * @param string                                    $name    Uploading filename
-     * @param string | resource                         $file    Uploading content or file handle
+     * @param Locator            $locator Write locator for file upload
+     * @param string             $name    Uploading filename
+     * @param string | resource  $file    Uploading content or file handle
      *
      * @return none
      */
-    public function uploadAssetFile($locator, $name, $file)
+    public function uploadAssetFile(Locator $locator, $name, $file)
     {
         Validate::isA(
             $locator,
@@ -1105,14 +1090,13 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Download asset file to a local path.
      *
-     * @param WindowsAzure\MediaServices\Models\AssetFile $assetFile Asset file to download
-     * @param WindowsAzure\MediaServices\Models\Locator   $locator   Read locator for
-     *                                                               downloading the asset file
-     * @param string                                      $path      Destination root path
+     * @param AssetFile $assetFile Asset file to download
+     * @param Locator   $locator   Read locator for downloading the asset file
+     * @param string    $path      Destination root path
      *
      * @return none
      */
-    public function downloadAssetFile($assetFile, $locator, $path)
+    public function downloadAssetFile(AssetFile $assetFile, Locator $locator, $path)
     {
         Validate::isA(
             $assetFile,
@@ -1336,12 +1320,12 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create a job HTTP call context.
      *
-     * @param WindowsAzure\MediaServices\Models\Job $job         Job data
-     * @param array                                 $inputAssets Input assets list
+     * @param Job   $job         Job data
+     * @param array $inputAssets Input assets list
      *
-     * @return WindowsAzure\Common\Internal\Http\HttpCallContext
+     * @return HttpCallContext
      */
-    private function _getCreateEmptyJobContext($job, $inputAssets)
+    private function _getCreateEmptyJobContext(Job $job, array $inputAssets)
     {
         Validate::isA($job, 'WindowsAzure\MediaServices\Models\Job', 'job');
         Validate::isArray($inputAssets, 'inputAssets');
@@ -1379,11 +1363,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create task HTTP call context.
      *
-     * @param WindowsAzure\MediaServices\Models\Task $task Task object to be created
+     * @param Task $task Task object to be created
      *
-     * @return WindowsAzure\Common\Internal\Http\HttpCallContext
+     * @return HttpCallContext
      */
-    private function _getCreateTaskContext($task)
+    private function _getCreateTaskContext(Task $task)
     {
         Validate::isA($task, 'WindowsAzure\MediaServices\Models\Task', 'task');
 
@@ -1401,14 +1385,13 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create a job.
      *
-     * @param WindowsAzure\MediaServices\Models\Job $job         Job data
-     * @param array                                 $inputAssets Input assets list
-     * @param array                                 $tasks       Performed tasks
-     *                                                           array (optional)
+     * @param Job   $job         Job data
+     * @param array $inputAssets Input assets list
+     * @param array $tasks       Performed tasks array (optional)
      *
-     * @return Models\Job
+     * @return Job
      */
-    public function createJob($job, $inputAssets, $tasks = null)
+    public function createJob(Job $job, array $inputAssets, array $tasks = null)
     {
         Validate::isA($job, 'WindowsAzure\MediaServices\Models\Job', 'job');
         Validate::isArray($inputAssets, 'inputAssets');
@@ -1456,9 +1439,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get Job.
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     * @param Job|string $job Job data or job Id
      *
-     * @return WindowsAzure\MediaServices\Models\Job
+     * @return Job
      */
     public function getJob($job)
     {
@@ -1490,7 +1473,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get status of a job.
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     * @param Job|string $job Job data or job Id
      *
      * @return string
      */
@@ -1524,7 +1507,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get job tasks.
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     * @param Job|string $job Job data or job Id
      *
      * @return array of Models\Task
      */
@@ -1548,7 +1531,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get job input assets.
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     * @param Job|string $job Job data or job Id
      *
      * @return array of Models\Asset
      */
@@ -1572,7 +1555,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get job output assets.
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     * @param Job|string $job Job data or job Id
      *
      * @return array of Models\Asset
      */
@@ -1596,7 +1579,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Cancel a job.
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     * @param Job|string $job Job data or job Id
      *
      * @return none
      */
@@ -1628,7 +1611,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Delete job.
      *
-     * @param WindowsAzure\MediaServices\Models\Job|string $job Job data or job Id
+     * @param Job|string $job Job data or job Id
      *
      * @return none
      */
@@ -1662,11 +1645,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create a job HTTP call context.
      *
-     * @param WindowsAzure\MediaServices\Models\Job $jobTemplate JobTemplate data
+     * @param Job $jobTemplate JobTemplate data
      *
-     * @return WindowsAzure\Common\Internal\Http\HttpCallContext
+     * @return HttpCallContext
      */
-    private function _getCreateEmptyJobTemplateContext($jobTemplate)
+    private function _getCreateEmptyJobTemplateContext(Job $jobTemplate)
     {
         Validate::isA(
             $jobTemplate,
@@ -1688,12 +1671,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create task template HTTP call context.
      *
-     * @param WindowsAzure\MediaServices\Models\TaskTemplate $taskTemplate Task
-     *                                                                     template object to be created
+     * @param TaskTemplate $taskTemplate Task template object to be created
      *
-     * @return WindowsAzure\Common\Internal\Http\HttpCallContext
+     * @return HttpCallContext
      */
-    private function _getCreateTaskTemplateContext($taskTemplate)
+    private function _getCreateTaskTemplateContext(TaskTemplate $taskTemplate)
     {
         Validate::isA(
             $taskTemplate,
@@ -1715,14 +1697,12 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create a job.
      *
-     * @param WindowsAzure\MediaServices\Models\JobTemplate $jobTemplate   Job
-     *                                                                     template data
-     * @param array                                         $taskTemplates Performed
-     *                                                                     tasks template array
+     * @param JobTemplate $jobTemplate   Job template data
+     * @param array       $taskTemplates Performed tasks template array
      *
      * @return Models\JobTemplate
      */
-    public function createJobTemplate($jobTemplate, $taskTemplates)
+    public function createJobTemplate(JobTemplate $jobTemplate, array $taskTemplates)
     {
         Validate::isA(
             $jobTemplate,
@@ -1778,10 +1758,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get job template.
      *
-     * @param WindowsAzure\MediaServices\Models\JobTemplate|string $jobTemplate Job
-     *                                                                          template data or jobTemplate Id
+     * @param JobTemplate|string $jobTemplate Job template data or jobTemplate Id
      *
-     * @return WindowsAzure\MediaServices\Models\JobTemplate
+     * @return JobTemplate
      */
     public function getJobTemplate($jobTemplate)
     {
@@ -1815,8 +1794,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get task templates for job template.
      *
-     * @param WindowsAzure\MediaServices\Models\JobTemplate|string $jobTemplate Job
-     *                                                                          template data or jobTemplate Id
+     * @param JobTemplate|string $jobTemplate Job template data or jobTemplate Id
      *
      * @return array of Models\TaskTemplate
      */
@@ -1842,8 +1820,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Delete job template.
      *
-     * @param WindowsAzure\MediaServices\Models\JobTemplate|string $jobTemplate Job
-     *                                                                          template data or job template Id
+     * @param JobTemplate|string $jobTemplate Job template data or job template Id
      *
      * @return none
      */
@@ -1919,11 +1896,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create new IngestManifest.
      *
-     * @param Models\IngestManifest $ingestManifest An IngestManifest data
+     * @param IngestManifest $ingestManifest An IngestManifest data
      *
-     * @return WindowsAzure\MediaServices\Models\IngestManifest
+     * @return IngestManifest
      */
-    public function createIngestManifest($ingestManifest)
+    public function createIngestManifest(IngestManifest $ingestManifest)
     {
         Validate::isA(
             $ingestManifest,
@@ -1941,7 +1918,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param Models\IngestManifest|string $ingestManifest An IngestManifest data or
      *                                                     IngestManifest Id
      *
-     * @return WindowsAzure\MediaServices\Models\IngestManifest
+     * @return IngestManifest
      */
     public function getIngestManifest($ingestManifest)
     {
@@ -2051,12 +2028,12 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update IngestManifest.
      *
-     * @param Models\IngestManifest $ingestManifest New IngestManifest data with
+     * @param IngestManifest $ingestManifest New IngestManifest data with
      *                                              valid id
      *
      * @return none
      */
-    public function updateIngestManifest($ingestManifest)
+    public function updateIngestManifest(IngestManifest $ingestManifest)
     {
         Validate::isA(
             $ingestManifest,
@@ -2091,14 +2068,13 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create new IngestManifestAsset.
      *
-     * @param Models\IngestManifestAsset $ingestManifestAsset An IngestManifestAsset
-     *                                                        data
-     * @param Models\Asset               $asset               An Asset data to be
-     *                                                        linked with IngestManifestAsset
+     * @param IngestManifestAsset $ingestManifestAsset An IngestManifestAsset data
+     * @param Asset               $asset               An Asset data to be linked with IngestManifestAsset
      *
-     * @return WindowsAzure\MediaServices\Models\IngestManifestAsset
+     * @return IngestManifestAsset
      */
-    public function createIngestManifestAsset($ingestManifestAsset, $asset)
+    public function createIngestManifestAsset(
+        IngestManifestAsset $ingestManifestAsset, Asset $asset)
     {
         Validate::isA(
             $ingestManifestAsset,
@@ -2217,9 +2193,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param Models\IngestManifestFile $ingestManifestFile An IngestManifestFile
      *                                                      data
      *
-     * @return WindowsAzure\MediaServices\Models\IngestManifestFile
+     * @return IngestManifestFile
      */
-    public function createIngestManifestFile($ingestManifestFile)
+    public function createIngestManifestFile(IngestManifestFile $ingestManifestFile)
     {
         Validate::isA(
             $ingestManifestFile,
@@ -2294,7 +2270,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return Models\ContentKey Created ContentKey
      */
-    public function createContentKey($contentKey)
+    public function createContentKey(ContentKey $contentKey)
     {
         Validate::isA(
             $contentKey,
@@ -2351,7 +2327,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return Models\ContentKey Updated ContentKey
      */
-    public function updateContentKey($contentKey)
+    public function updateContentKey(ContentKey $contentKey)
     {
         Validate::isA(
             $contentKey,
@@ -2498,7 +2474,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return Models\ContentKeyAuthorizationPolicy Created ContentKeyAuthorizationPolicy
      */
-    public function createContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy)
+    public function createContentKeyAuthorizationPolicy(
+        ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy)
     {
         Validate::isA($contentKeyAuthorizationPolicy, 'WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy', 'contentKeyAuthorizationPolicy');
 
@@ -2543,10 +2520,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update content key authorization policy.
      *
-     * @param Models\ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy New content key authorization policy data with
-     *                                                                            valid id
+     * @param ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy New content key authorization policy data with
+     *                                                                     valid id
      */
-    public function updateContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy)
+    public function updateContentKeyAuthorizationPolicy(ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy)
     {
         Validate::isA($contentKeyAuthorizationPolicy, 'WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy', 'contentKeyAuthorizationPolicy');
 
@@ -2572,11 +2549,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create new content key authorization options.
      *
-     * @param Models\ContentKeyAuthorizationPolicyOption ContentKeyAuthorizationPolicyOption ContentKeyAuthorizationPolicyOption data
+     * @param ContentKeyAuthorizationPolicyOption ContentKeyAuthorizationPolicyOption ContentKeyAuthorizationPolicyOption data
      *
-     * @return Models\ContentKeyAuthorizationPolicyOption Created ContentKeyAuthorizationPolicyOption
+     * @return ContentKeyAuthorizationPolicyOption Created ContentKeyAuthorizationPolicyOption
      */
-    public function createContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOptions)
+    public function createContentKeyAuthorizationPolicyOption(ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions)
     {
         Validate::isA($contentKeyAuthorizationOptions, 'WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption', 'contentKeyAuthorizationOptions');
 
@@ -2621,10 +2598,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update content key authorization options.
      *
-     * @param Models\ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions New content key authorization options data with
+     * @param ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions New content key authorization options data with
      *                                                                                   valid id
      */
-    public function updateContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOptions)
+    public function updateContentKeyAuthorizationPolicyOption(
+        ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions)
     {
         Validate::isA($contentKeyAuthorizationOptions, 'WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption', 'contentKeyAuthorizationOptions');
 
@@ -2761,11 +2739,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create new asset delivery policy.
      *
-     * @param Models\AssetDeliveryPolicy $assetDeliveryPolicy AssetDeliveryPolicy data
+     * @param AssetDeliveryPolicy $assetDeliveryPolicy AssetDeliveryPolicy data
      *
-     * @return Models\AssetDeliveryPolicy Created AssetDeliveryPolicy
+     * @return AssetDeliveryPolicy Created AssetDeliveryPolicy
      */
-    public function createAssetDeliveryPolicy($assetDeliveryPolicy)
+    public function createAssetDeliveryPolicy(AssetDeliveryPolicy $assetDeliveryPolicy)
     {
         Validate::isA($assetDeliveryPolicy, 'WindowsAzure\MediaServices\Models\AssetDeliveryPolicy', 'assetDeliveryPolicy');
 
@@ -2807,10 +2785,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update asset delivery policy.
      *
-     * @param Models\AssetDeliveryPolicy $assetDeliveryPolicy New asset delivery policy data with
-     *                                                        valid id
+     * @param AssetDeliveryPolicy $assetDeliveryPolicy New asset delivery policy data with
+     *                                                 valid id
      */
-    public function updateAssetDeliveryPolicy($assetDeliveryPolicy)
+    public function updateAssetDeliveryPolicy(AssetDeliveryPolicy $assetDeliveryPolicy)
     {
         Validate::isA($assetDeliveryPolicy, 'WindowsAzure\MediaServices\Models\AssetDeliveryPolicy', 'assetDeliveryPolicy');
 
@@ -3009,10 +2987,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update encoding reserved units settings.
      *
-     * @param Models\EncodingReservedUnit $encodingReservedUnit Update data
+     * @param EncodingReservedUnit $encodingReservedUnit Update data
      *                                                          valid idli
      */
-    public function updateEncodingReservedUnit($encodingReservedUnit)
+    public function updateEncodingReservedUnit(EncodingReservedUnit $encodingReservedUnit)
     {
         Validate::isA($encodingReservedUnit, 'WindowsAzure\MediaServices\Models\EncodingReservedUnit', 'encodingReservedUnit');
         $accountID = $encodingReservedUnit->getAccountId();
@@ -3063,7 +3041,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return Models\Operation The operation to track the channel create.
      */
-    public function sendCreateChannelOperation($channel)
+    public function sendCreateChannelOperation(Channel $channel)
     {
         Validate::isA($channel, 'WindowsAzure\MediaServices\Models\Channel', 'channel');
 
@@ -3077,7 +3055,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return Models\Operation The operation to track the channel update.
      */
-    public function sendUpdateChannelOperation($channel)
+    public function sendUpdateChannelOperation(Channel $channel)
     {
         Validate::isA($channel, 'WindowsAzure\MediaServices\Models\Channel', 'channel');
         $channelId = $channel->getId();
@@ -3094,7 +3072,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return Models\Channel Created Channel
      */
-    public function getChannel($channel)
+    public function getChannel(Channel $channel)
     {
         $channelId = Utilities::getEntityId(
             $channel,
@@ -3299,11 +3277,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create a Channel.
      *
-     * @param WindowsAzure\MediaServices\Models\Channel $channel Channel data
+     * @param Channel $channel Channel data
      *
-     * @return WindowsAzure\MediaServices\Models\Channel the created channel
+     * @return Channel the created channel
      */
-    public function createChannel($channel)
+    public function createChannel(Channel $channel)
     {
         $op = $this->sendCreateChannelOperation($channel);
 
@@ -3321,11 +3299,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update a Channel.
      *
-     * @param WindowsAzure\MediaServices\Models\Channel $channel Channel data
+     * @param Channel $channel Channel data
      *
-     * @return WindowsAzure\MediaServices\Models\Channel the updated channel
+     * @return Channel the updated channel
      */
-    public function updateChannel($channel)
+    public function updateChannel(Channel $channel)
     {
         $op = $this->sendUpdateChannelOperation($channel);
 
@@ -3487,11 +3465,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get existing program.
      *
-     * @param Models\Program $program Program data
+     * @param Program $program Program data
      *
-     * @return Models\Program Created Program
+     * @return Program Created Program
      */
-    public function getProgram($program)
+    public function getProgram(Program $program)
     {
         $programId = Utilities::getEntityId(
             $program,
@@ -3504,11 +3482,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create new Program.
      *
-     * @param WindowsAzure\MediaServices\Models\Program $program Program data
+     * @param Program $program Program data
      *
-     * @return WindowsAzure\MediaServices\Models\Program Created Program
+     * @return Program Created Program
      */
-    public function createProgram($program)
+    public function createProgram(Program $program)
     {
         Validate::isA($program, 'WindowsAzure\Mediaservices\Models\Program', 'program');
 
@@ -3618,11 +3596,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Send Update Program operation
      *
-     * @param Models\Programs $program Programs data
+     * @param Program $program Programs data
      *
-     * @return Models\Operation The operation to track the program update.
+     * @return Operation The operation to track the program update.
      */
-    public function sendUpdateProgramOperation($program)
+    public function sendUpdateProgramOperation(Program $program)
     {
         Validate::isA($program, 'WindowsAzure\MediaServices\Models\Program', 'program');
         $programId = $program->getId();
@@ -3635,11 +3613,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update a Program.
      *
-     * @param WindowsAzure\MediaServices\Models\Program $program Program data
+     * @param Program $program Program data
      *
-     * @return WindowsAzure\MediaServices\Models\Program the updated program
+     * @return Program the updated program
      */
-    public function updateProgram($program)
+    public function updateProgram(Program $program)
     {
         $op = $this->sendUpdateProgramOperation($program);
 

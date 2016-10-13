@@ -52,7 +52,7 @@ class WrapRestProxy extends ServiceRestProxy implements IWrap
      *
      * @return none
      */
-    public function __construct($channel, $uri)
+    public function __construct(IHttpClient $channel, $uri)
     {
         parent::__construct($channel, $uri, Resources::EMPTY_STRING, null);
     }
