@@ -282,7 +282,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param object $entity     Entity data
      * @param string $path       REST path
      * @param string $method     HTTP method,
-     * @param int    $statusCode HTTP status code,     
+     * @param int    $statusCode HTTP status code,
      * @param array  $headers    HTTP headers
      *
      * @return array Created entity data
@@ -291,7 +291,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $entity,
         $path,
         $method = Resources::HTTP_POST,
-        $statusCode = Resources::STATUS_ACCEPTED, 
+        $statusCode = Resources::STATUS_ACCEPTED,
         array $headers = array())
     {
         $postParams = array();
@@ -1896,7 +1896,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create new IngestManifest.
      *
-     * @param Models\IngestManifest $ingestManifest An IngestManifest data
+     * @param IngestManifest $ingestManifest An IngestManifest data
      *
      * @return IngestManifest
      */
@@ -2068,12 +2068,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create new IngestManifestAsset.
      *
-     * @param Models\IngestManifestAsset $ingestManifestAsset An IngestManifestAsset
-     *                                                        data
-     * @param Models\Asset               $asset               An Asset data to be
-     *                                                        linked with IngestManifestAsset
+     * @param IngestManifestAsset $ingestManifestAsset An IngestManifestAsset data
+     * @param Asset               $asset               An Asset data to be linked with IngestManifestAsset
      *
-     * @return WindowsAzure\MediaServices\Models\IngestManifestAsset
+     * @return IngestManifestAsset
      */
     public function createIngestManifestAsset(
         IngestManifestAsset $ingestManifestAsset, Asset $asset)
@@ -3184,7 +3182,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param WindowsAzure\MediaServices\Models\Channel|string $channel Channel data or channel Id
      * @param string $duration The duration, in seconds, of the commercial break.
      * @param string $cueId Unique ID for the commercial break
-     * @param string $showSlate Indicates to the live encoder within the Channel that it needs to switch to the default slate image during the commercial break      
+     * @param string $showSlate Indicates to the live encoder within the Channel that it needs to switch to the default slate image during the commercial break
      *
      * @return none
      */
@@ -3235,7 +3233,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param WindowsAzure\MediaServices\Models\Channel|string $channel Channel data or channel Id
      * @param string $duration The duration, in seconds, of the commercial break.
      * @param string $cueId Unique ID for the commercial break
-     * @param string $showSlate Indicates to the live encoder within the Channel that it needs to switch to the default slate image during the commercial break      
+     * @param string $showSlate Indicates to the live encoder within the Channel that it needs to switch to the default slate image during the commercial break
      *
      * @return none
      */

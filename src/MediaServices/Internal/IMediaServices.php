@@ -33,6 +33,7 @@ use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
 use WindowsAzure\MediaServices\Models\AssetFile;
 use WindowsAzure\MediaServices\Models\IngestManifest;
+use WindowsAzure\MediaServices\Models\IngestManifestAsset;
 use WindowsAzure\MediaServices\Models\IngestManifestFile;
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy;
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption;
