@@ -28,6 +28,7 @@ namespace WindowsAzure\Common\Internal\Http;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Http\BatchRequest;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * Batch response parser.
@@ -47,7 +48,7 @@ class BatchResponse
     /**
      * Http responses list.
      *
-     * @var array of HTTP_Request2_Response
+     * @var array of Response
      */
     private $_contexts;
 
@@ -73,6 +74,7 @@ class BatchResponse
                 'WindowsAzure\Common\Internal\Http\BatchRequest',
                 'request'
             );
+            // array of HttpCallContext
             $requestContexts = $request->getContexts();
         }
 
@@ -91,6 +93,8 @@ class BatchResponse
                     $response->parseHeaderLine($headerString);
                 }
                 $response->appendBody($body);
+
+                $newResponse = new Response();
 
                 $this->_contexts[] = $response;
 
