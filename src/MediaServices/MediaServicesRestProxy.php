@@ -3465,11 +3465,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get existing program.
      *
-     * @param Program $program Program data
      *
      * @return Program Created Program
      */
-    public function getProgram(Program $program)
+    public function getProgram($program)
     {
         $programId = Utilities::getEntityId(
             $program,
