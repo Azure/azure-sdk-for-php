@@ -49,69 +49,54 @@ class HttpCallContext
      * 
      * @var string
      */
-    private $_method;
+    private $_method = null;
 
     /**
      * HTTP request headers.
      * 
      * @var array
      */
-    private $_headers;
+    private $_headers = array();
 
     /**
      * The URI query parameters.
      * 
      * @var array
      */
-    private $_queryParams;
+    private $_queryParams = array();
 
     /** 
      * The HTTP POST parameters.
      * 
      * @var array.
      */
-    private $_postParameters;
+    private $_postParameters = array();
 
     /**
      * @var string
      */
-    private $_uri;
+    private $_uri = null;
 
     /**
      * The URI path.
      * 
      * @var string
      */
-    private $_path;
+    private $_path = null;
 
     /**
      * The expected status codes.
      * 
      * @var array
      */
-    private $_statusCodes;
+    private $_statusCodes = array();
 
     /**
      * The HTTP request body.
      * 
      * @var string
      */
-    private $_body;
-
-    /**
-     * Default constructor.
-     */
-    public function __construct()
-    {
-        $this->_method = null;
-        $this->_body = null;
-        $this->_path = null;
-        $this->_uri = null;
-        $this->_queryParams = array();
-        $this->_postParameters = array();
-        $this->_statusCodes = array();
-        $this->_headers = array();
-    }
+    private $_body = null
 
     /**
      * Gets method.
@@ -156,7 +141,7 @@ class HttpCallContext
      * 
      * @return none
      */
-    public function setHeaders($headers)
+    public function setHeaders(array $headers)
     {
         $this->_headers = array();
         foreach ($headers as $key => $value) {
@@ -183,7 +168,7 @@ class HttpCallContext
      * 
      * @return none
      */
-    public function setQueryParameters($queryParams)
+    public function setQueryParameters(array $queryParams)
     {
         $this->_queryParams = array();
         foreach ($queryParams as $key => $value) {
@@ -256,7 +241,7 @@ class HttpCallContext
      * 
      * @return none
      */
-    public function setStatusCodes($statusCodes)
+    public function setStatusCodes(array $statusCodes)
     {
         $this->_statusCodes = array();
         foreach ($statusCodes as $value) {
@@ -372,7 +357,7 @@ class HttpCallContext
      * 
      * @return none
      */
-    public function setPostParameters($postParameters)
+    public function setPostParameters(array $postParameters)
     {
         Validate::isArray($postParameters, 'postParameters');
         $this->_postParameters = $postParameters;
