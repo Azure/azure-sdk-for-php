@@ -46,7 +46,6 @@ class BatchRequestTest extends \PHPUnit_Framework_TestCase
      * @covers WindowsAzure\Common\Internal\Http\batchRequest::appendContext
      * @covers WindowsAzure\Common\Internal\Http\batchRequest::encode
      * @covers WindowsAzure\Common\Internal\Http\batchRequest::getBody
-     * @covers WindowsAzure\Common\Internal\Http\batchRequest::__construct
      */
     public function testAppendContext()
     {

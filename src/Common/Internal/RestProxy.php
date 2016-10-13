@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -26,6 +26,10 @@
 namespace WindowsAzure\Common\Internal;
 
 use WindowsAzure\Common\Internal\Http\Url;
+use WindowsAzure\Common\Internal\Http\IHttpClient;
+use WindowsAzure\Common\Internal\Http\HttpCallContext;
+use WindowsAzure\Common\Internal\Serialization\ISerializer;
+use WindowsAzure\Common\Internal\IServiceFilter;
 
 /**
  * Base class for all REST proxies.
@@ -43,7 +47,7 @@ use WindowsAzure\Common\Internal\Http\Url;
 class RestProxy
 {
     /**
-     * @var WindowsAzure\Common\Internal\Http\IHttpClient
+     * @var IHttpClient
      */
     private $_channel;
 
@@ -53,7 +57,7 @@ class RestProxy
     private $_filters;
 
     /**
-     * @var WindowsAzure\Common\Internal\Serialization\ISerializer
+     * @var ISerializer|null
      */
     protected $dataSerializer;
 
@@ -65,11 +69,11 @@ class RestProxy
     /**
      * Initializes new RestProxy object.
      *
-     * @param IHttpClient $channel        The HTTP client used to send HTTP requests.
-     * @param ISerializer $dataSerializer The data serializer.
-     * @param string      $uri            The uri of the service.
+     * @param IHttpClient      $channel        The HTTP client used to send HTTP requests.
+     * @param ISerializer|null $dataSerializer The data serializer.
+     * @param string           $uri            The uri of the service.
      */
-    public function __construct($channel, $dataSerializer, $uri)
+    public function __construct(IHttpClient $channel, $dataSerializer, $uri)
     {
         $this->_channel = $channel;
         $this->_filters = array();
@@ -79,7 +83,7 @@ class RestProxy
 
     /**
      * Gets HTTP filters that will process each request.
-     * 
+     *
      * @return array
      */
     public function getFilters()
@@ -89,7 +93,7 @@ class RestProxy
 
     /**
      * Gets the Uri of the service.
-     * 
+     *
      * @return string
      */
     public function getUri()
@@ -97,11 +101,11 @@ class RestProxy
         return $this->_uri;
     }
 
-    /** 
-     * Sets the Uri of the service. 
+    /**
+     * Sets the Uri of the service.
      *
      * @param string $uri The URI of the request.
-     * 
+     *
      * @return none
      */
     public function setUri($uri)
@@ -111,13 +115,12 @@ class RestProxy
 
     /**
      * Sends HTTP request with the specified HTTP call context.
-     * 
-     * @param WindowsAzure\Common\Internal\Http\HttpCallContext $context The HTTP 
-     *                                                                   call context.
-     * 
+     *
+     * @param HttpCallContext $context The HTTP call context.
+     *
      * @return \HTTP_Request2_Response
      */
-    protected function sendContext($context)
+    protected function sendContext(HttpCallContext $context)
     {
         $channel = clone $this->_channel;
         $contextUrl = $context->getUri();
@@ -146,12 +149,11 @@ class RestProxy
     /**
      * Adds new filter to new service rest proxy object and returns that object back.
      *
-     * @param WindowsAzure\Common\Internal\IServiceFilter $filter Filter to add for 
-     *                                                            the pipeline.
-     * 
+     * @param IServiceFilter $filter Filter to add for the pipeline.
+     *
      * @return RestProxy.
      */
-    public function withFilter($filter)
+    public function withFilter(IServiceFilter $filter)
     {
         $serviceProxyWithFilter = clone $this;
         $serviceProxyWithFilter->_filters[] = $filter;
@@ -161,16 +163,16 @@ class RestProxy
 
     /**
      * Adds optional query parameter.
-     * 
+     *
      * Doesn't add the value if it satisfies empty().
-     * 
+     *
      * @param array  &$queryParameters The query parameters.
      * @param string $key              The query variable name.
      * @param string $value            The query variable value.
-     * 
+     *
      * @return none
      */
-    protected function addOptionalQueryParam(&$queryParameters, $key, $value)
+    protected function addOptionalQueryParam(array &$queryParameters, $key, $value)
     {
         Validate::isArray($queryParameters, 'queryParameters');
         Validate::isString($key, 'key');
@@ -183,16 +185,16 @@ class RestProxy
 
     /**
      * Adds optional header.
-     * 
+     *
      * Doesn't add the value if it satisfies empty().
-     * 
+     *
      * @param array  &$headers The HTTP header parameters.
      * @param string $key      The HTTP header name.
      * @param string $value    The HTTP header value.
-     * 
+     *
      * @return none
      */
-    protected function addOptionalHeader(&$headers, $key, $value)
+    protected function addOptionalHeader(array &$headers, $key, $value)
     {
         Validate::isArray($headers, 'headers');
         Validate::isString($key, 'key');

@@ -27,6 +27,7 @@ namespace WindowsAzure\Common\Internal\Http;
 
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\ServiceException;
+use WindowsAzure\Common\Internal\Http\BatchRequest;
 
 /**
  * Batch response parser.
@@ -46,19 +47,17 @@ class BatchResponse
     /**
      * Http responses list.
      *
-     * @var array
+     * @var array of HTTP_Request2_Response
      */
     private $_contexts;
 
     /**
      * Constructor.
      *
-     * @param string                                         $content Http response
-     *                                                                as string
-     * @param WindowsAzure\Common\Internal\Http\BatchRequest $request Source batch
-     *                                                                request object
+     * @param string       $content Http response as string
+     * @param BatchRequest $request Source batch request object
      */
-    public function __construct($content, $request = null)
+    public function __construct($content, BatchRequest $request = null)
     {
         $params['include_bodies'] = true;
         $params['input'] = $content;
@@ -86,7 +85,8 @@ class BatchResponse
                 $body = substr($part->body, $headerEndPos + 4);
                 $headerStrings = explode("\r\n", $header);
 
-                $response = new \HTTP_Request2_Response(array_shift($headerStrings));
+                $statusLine = array_shift($headerStrings);
+                $response = new \HTTP_Request2_Response($statusLine);
                 foreach ($headerStrings as $headerString) {
                     $response->parseHeaderLine($headerString);
                 }

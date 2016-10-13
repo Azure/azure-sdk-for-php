@@ -25,6 +25,8 @@
 
 namespace WindowsAzure\Common\Internal;
 
+use WindowsAzure\Common\Internal\IServiceFilter;
+
 /**
  * Interface for service with filers.
  *
@@ -44,10 +46,9 @@ interface FilterableService
      * Adds new filter to proxy object and returns new BlobRestProxy with
      * that filter.
      *
-     * @param WindowsAzure\Common\Internal\IServiceFilter $filter Filter to add for 
-     *                                                            the pipeline.
+     * @param IServiceFilter $filter Filter to add for the pipeline.
      * 
      * @return mix.
      */
-    public function withFilter($filter);
+    public function withFilter(IServiceFilter $filter);
 }
