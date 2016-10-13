@@ -165,7 +165,7 @@ class HttpClient implements IHttpClient
     }
 
     /**
-     * Sets request's HTTP method. You can use \HTTP_Request2 constants like
+     * Sets request's HTTP method. You can use constants like 
      * Resources::HTTP_GET or strings like 'GET'.
      *
      * @param string $method request's HTTP method.
