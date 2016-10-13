@@ -85,7 +85,8 @@ class BatchResponse
                 $body = substr($part->body, $headerEndPos + 4);
                 $headerStrings = explode("\r\n", $header);
 
-                $response = new \HTTP_Request2_Response(array_shift($headerStrings));
+                $statusLine = array_shift($headerStrings);
+                $response = new \HTTP_Request2_Response($statusLine);
                 foreach ($headerStrings as $headerString) {
                     $response->parseHeaderLine($headerString);
                 }
