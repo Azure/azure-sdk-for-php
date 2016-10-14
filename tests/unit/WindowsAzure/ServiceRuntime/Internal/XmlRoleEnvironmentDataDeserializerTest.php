@@ -47,7 +47,7 @@ use WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer;
 class XmlRoleEnvironmentDataDeserializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::deserialize
+     * @covers XmlRoleEnvironmentDataDeserializer::deserialize
      */
     public function testDeserialize()
     {
@@ -95,7 +95,7 @@ class XmlRoleEnvironmentDataDeserializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::_translateConfigurationSettings
+     * @covers XmlRoleEnvironmentDataDeserializer::_translateConfigurationSettings
      */
     public function testTranslateConfigurationSettings_NoSettings()
     {
@@ -136,7 +136,7 @@ class XmlRoleEnvironmentDataDeserializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::_translateConfigurationSettings
+     * @covers XmlRoleEnvironmentDataDeserializer::_translateConfigurationSettings
      */
     public function testTranslateConfigurationSettings_OneSetting()
     {

@@ -40,7 +40,7 @@ use WindowsAzure\Common\Internal\Utilities;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class XmlRoleEnvironmentDataDeserializer
+class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserializer
 {
     /**
      * Deserializes the role environment data.
@@ -49,7 +49,7 @@ class XmlRoleEnvironmentDataDeserializer
      * 
      * @return RoleEnvironmentData
      */
-    public function deserialize(resource $inputChannel)
+    public function deserialize($inputChannel)
     {
         $document = stream_get_contents($inputChannel);
 

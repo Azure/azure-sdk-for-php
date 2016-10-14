@@ -287,9 +287,9 @@ class ServiceManagementRestProxy extends RestProxy
      */
     private function _createRequestXml($xmlElements, $root)
     {
-        $requestArray = array(
-            Resources::XTAG_NAMESPACE => array(Resources::WA_XML_NAMESPACE => null),
-        );
+        $requestArray = [
+            Resources::XTAG_NAMESPACE => [Resources::WA_XML_NAMESPACE => null],
+        ];
 
         foreach ($xmlElements as $tagName => $value) {
             if (!empty($value)) {
@@ -297,7 +297,7 @@ class ServiceManagementRestProxy extends RestProxy
             }
         }
 
-        $properties = array(XmlSerializer::ROOT_NAME => $root);
+        $properties = [XmlSerializer::ROOT_NAME => $root];
 
         return $this->dataSerializer->serialize($requestArray, $properties);
     }

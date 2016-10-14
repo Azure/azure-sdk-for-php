@@ -25,6 +25,7 @@
 
 namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
+use WindowsAzure\ServiceBus\Models\SubscriptionDescription;
 use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
 
 /**
@@ -63,13 +64,13 @@ class SubscriptionInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::getSubscriptionDescription
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::setSubscriptionDescription
+     * @covers SubscriptionInfo::getSubscriptionDescription
+     * @covers SubscriptionInfo::setSubscriptionDescription
      */
     public function testGetSetSubscriptionDescription()
     {
         // Setup
-        $expected = 'testSubscriptionDescription';
+        $expected = new SubscriptionDescription('testSubscriptionDescription');
         $SubscriptionInfo = new SubscriptionInfo();
 
         // Test
@@ -84,8 +85,8 @@ class SubscriptionInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::getLockDuration
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::setLockDuration
+     * @covers SubscriptionInfo::getLockDuration
+     * @covers SubscriptionInfo::setLockDuration
      */
     public function testGetSetLockDuration()
     {

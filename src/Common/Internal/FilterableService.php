@@ -25,8 +25,6 @@
 
 namespace WindowsAzure\Common\Internal;
 
-use WindowsAzure\Common\Internal\IServiceFilter;
-
 /**
  * Interface for service with filers.
  *

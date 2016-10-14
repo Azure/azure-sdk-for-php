@@ -47,7 +47,7 @@ class BatchRequest
     /**
      * Http call context list.
      *
-     * @var array of HttpCallContext
+     * @var HttpCallContext[]
      */
     private $_contexts = array();
 

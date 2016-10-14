@@ -27,6 +27,7 @@ namespace WindowsAzure\ServiceBus\Internal;
 
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\Common\Internal\Validate;
 
 /**
  * Container to hold wrap accesss token response object.
@@ -56,12 +57,14 @@ class WrapAccessTokenResult
     /**
      * Creates WrapAccesTokenResult object from parsed XML response.
      *
-     * @param array $response The get WRAP access token response.
+     * @param string $response The get WRAP access token response.
      * 
      * @return WrapAccessTokenResult.
      */
-    public static function create(array $response)
+    public static function create($response)
     {
+        Validate::isString($response, 'response');
+
         $wrapAccessTokenResult = new self();
         parse_str($response, $parsedResponse);
 

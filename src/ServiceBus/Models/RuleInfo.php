@@ -218,7 +218,7 @@ class RuleInfo
      * 
      * @param RuleDescription $ruleDescription The description of the rule. 
      */
-    public function setRuleDescription($ruleDescription)
+    public function setRuleDescription(RuleDescription $ruleDescription)
     {
         $this->_ruleDescription = $ruleDescription;
     }

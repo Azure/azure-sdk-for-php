@@ -58,11 +58,11 @@ class Protocol1RuntimeCurrentStateClient implements IRuntimeCurrentStateClient
     /**
      * Constructor.
      * 
-     * @param ICurrentStateSerializer $serializer    The current state
-     *                                               serializer.
-     * @param IOutputChannel          $outputChannel The output channel.
+     * @param ICurrentStateSerializer|null $serializer    The current state
+     *                                                    serializer.
+     * @param IOutputChannel|null          $outputChannel The output channel.
      */
-    public function __construct(ICurrentStateSerializer $serializer, IOutputChannel $outputChannel)
+    public function __construct(ICurrentStateSerializer $serializer = null, IOutputChannel $outputChannel = null)
     {
         $this->_serializer = $serializer;
         $this->_outputChannel = $outputChannel;

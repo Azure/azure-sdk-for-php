@@ -83,13 +83,13 @@ class SourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\Common\Internal\Atom\Source::getAuthor
-     * @covers WindowsAzure\Common\Internal\Atom\Source::setAuthor
+     * @covers Source::getAuthor
+     * @covers Source::setAuthor
      */
     public function testGetSetAuthor()
     {
         // Setup
-        $expected = 'testAuthor';
+        $expected = ['testAuthor'];
         $source = new Source();
 
         // Test
@@ -104,13 +104,13 @@ class SourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\Common\Internal\Atom\Source::getCategory
-     * @covers WindowsAzure\Common\Internal\Atom\Source::setCategory
+     * @covers Source::getCategory
+     * @covers Source::setCategory
      */
     public function testGetSetCategory()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $category = new Category();
         $category->setTerm('testTerm');
         $expected[] = $category;
@@ -128,13 +128,13 @@ class SourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\Common\Internal\Atom\Source::getContributor
-     * @covers WindowsAzure\Common\Internal\Atom\Source::setContributor
+     * @covers Source::getContributor
+     * @covers Source::setContributor
      */
     public function testGetSetContributor()
     {
         // Setup
-        $expected = 'testContributor';
+        $expected = ['testContributor'];
         $source = new Source();
 
         // Test
@@ -149,13 +149,13 @@ class SourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\Common\Internal\Atom\Source::getGenerator
-     * @covers WindowsAzure\Common\Internal\Atom\Source::setGenerator
+     * @covers Source::getGenerator
+     * @covers Source::setGenerator
      */
     public function testGetSetGenerator()
     {
         // Setup
-        $expected = 'testGenerator';
+        $expected = new Generator();
         $source = new Source();
 
         // Test
@@ -170,8 +170,8 @@ class SourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\Common\Internal\Atom\Source::getIcon
-     * @covers WindowsAzure\Common\Internal\Atom\Source::setIcon
+     * @covers Source::getIcon
+     * @covers Source::setIcon
      */
     public function testGetSetIcon()
     {
@@ -191,8 +191,8 @@ class SourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\Common\Internal\Atom\Source::getId
-     * @covers WindowsAzure\Common\Internal\Atom\Source::setId
+     * @covers Source::getId
+     * @covers Source::setId
      */
     public function testGetSetId()
     {

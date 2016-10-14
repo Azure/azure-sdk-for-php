@@ -25,8 +25,6 @@
 
 namespace WindowsAzure\ServiceRuntime\Internal;
 
-use WindowsAzure\Common\Internal\Validate;
-
 /**
  * The goal state representation.
  *

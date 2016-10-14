@@ -145,11 +145,12 @@ class AssetDeliveryPolicyConfigurationKey
     /**
      * Helper function to pack the AssetDeliveryPolicyConfigurationKey.
      *
+     * @param string $json
      * @return array the unpacked array
      */
-    public static function parseAssetDeliveryPolicyConfiguartionKey(array $json)
+    public static function parseAssetDeliveryPolicyConfiguartionKey($json)
     {
-        $result = array();
+        $result = [];
         $array = json_decode($json, true);
         foreach ($array as $item) {
             $item = array_change_key_case($item, CASE_LOWER);

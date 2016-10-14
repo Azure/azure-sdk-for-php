@@ -200,7 +200,7 @@ abstract class ServiceSettings
      */
     protected static function settingWithFunc($name, $predicate)
     {
-        $requirement = array();
+        $requirement = [];
         $requirement[Resources::SETTING_NAME] = $name;
         $requirement[Resources::SETTING_CONSTRAINT] = $predicate;
 

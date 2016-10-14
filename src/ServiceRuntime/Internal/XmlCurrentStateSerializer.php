@@ -40,7 +40,7 @@ use WindowsAzure\Common\Internal\Utilities;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class XmlCurrentStateSerializer
+class XmlCurrentStateSerializer implements ICurrentStateSerializer
 {
     /**
      * Serializes the current state.
@@ -48,7 +48,7 @@ class XmlCurrentStateSerializer
      * @param CurrentState  $state        The current state.
      * @param resource      $outputStream The output stream.
      */
-    public function serialize(CurrentState $state, resource $outputStream)
+    public function serialize(CurrentState $state, $outputStream)
     {
         $statusLeaseInfo = array(
             'StatusLease' => array(

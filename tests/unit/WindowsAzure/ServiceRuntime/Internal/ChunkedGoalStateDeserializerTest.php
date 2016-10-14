@@ -47,9 +47,9 @@ use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
 class ChunkedGoalStateDeserializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer::__construct
-     * @covers WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer::initialize
-     * @covers WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer::deserialize
+     * @covers ChunkedGoalStateDeserializer::__construct
+     * @covers ChunkedGoalStateDeserializer::initialize
+     * @covers ChunkedGoalStateDeserializer::deserialize
      */
     public function testDeserialize()
     {
@@ -109,9 +109,9 @@ class ChunkedGoalStateDeserializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer::__construct
-     * @covers WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer::initialize
-     * @covers WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer::deserialize
+     * @covers ChunkedGoalStateDeserializer::__construct
+     * @covers ChunkedGoalStateDeserializer::initialize
+     * @covers ChunkedGoalStateDeserializer::deserialize
      */
     public function testDeserializeWithNewLineEnd()
     {

@@ -58,9 +58,9 @@ class ActiveToken
      * Creates an ActiveToken with specified WRAP 
      * access token result.
      *
-     * @param array $wrapAccessTokenResult A WRAP access token result.
+     * @param WrapAccessTokenResult $wrapAccessTokenResult A WRAP access token result.
      */
-    public function __construct($wrapAccessTokenResult)
+    public function __construct(WrapAccessTokenResult $wrapAccessTokenResult)
     {
         $this->_wrapAccessTokenResult = $wrapAccessTokenResult;
     }
@@ -78,7 +78,7 @@ class ActiveToken
     /**
      * Sets WRAP access token.
      *
-     * @param string $wrapAccessTokenResult The WRAP access token result.
+     * @param WrapAccessTokenResult $wrapAccessTokenResult The WRAP access token result.
      */
     public function setWrapAccessTokenResult($wrapAccessTokenResult)
     {

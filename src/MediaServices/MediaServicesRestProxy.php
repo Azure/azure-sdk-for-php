@@ -2199,18 +2199,12 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update ContentKey.
      *
-     * @param Models\ContentKey $contentKey ContentKey data
+     * @param ContentKey $contentKey ContentKey data
      *
-     * @return Models\ContentKey Updated ContentKey
+     * @return ContentKey Updated ContentKey
      */
     public function updateContentKey(ContentKey $contentKey)
     {
-        Validate::isA(
-            $contentKey,
-            'WindowsAzure\Mediaservices\Models\ContentKey',
-            'contentKey'
-        );
-
         $this->_updateEntity($contentKey, "ContentKeys('{$contentKey->getId()}')");
     }
 

@@ -45,7 +45,7 @@ interface IGoalStateDeserializer
      * 
      * @param resource $inputStream The input stream.
      */
-    public function initialize(resource $inputStream);
+    public function initialize($inputStream);
 
     /**
      * Deserializes a goal state.

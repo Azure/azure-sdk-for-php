@@ -48,7 +48,7 @@ use WindowsAzure\Common\Internal\OAuthRestProxy;
 class OAuthSchemeTest extends ServiceRestProxyTestBase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Authentication\OAuthScheme::__construct
+     * @covers OAuthScheme::__construct
      */
     public function test__construct()
     {
@@ -57,7 +57,7 @@ class OAuthSchemeTest extends ServiceRestProxyTestBase
         $accountKey = TestResources::KEY1;
         $grantType = Resources::OAUTH_GT_CLIENT_CREDENTIALS;
         $scope = Resources::MEDIA_SERVICES_OAUTH_SCOPE;
-        $oauthService = new \stdClass();
+        $oauthService = new OAuthRestProxy(new HttpClient(), '');
 
         // Test
         $actual = new OAuthSchemeMock($accountName, $accountKey, $grantType, $scope, $oauthService);
@@ -71,7 +71,7 @@ class OAuthSchemeTest extends ServiceRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Authentication\OAuthScheme::getAuthorizationHeader
+     * @covers OAuthScheme::getAuthorizationHeader
      */
     public function testGetAuthorizationHeader()
     {
@@ -103,7 +103,7 @@ class OAuthSchemeTest extends ServiceRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Authentication\OAuthScheme::getAuthorizationHeader
+     * @covers OAuthScheme::getAuthorizationHeader
      */
     public function testGetAuthorizationHeaderMultiple()
     {

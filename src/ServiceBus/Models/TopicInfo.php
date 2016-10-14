@@ -105,10 +105,8 @@ class TopicInfo extends Entry
      * Writes an XML string.
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
-     *
-     * @return string
      */
-    public function writeXml($xmlWriter)
+    public function writeXml(\XMLWriter $xmlWriter)
     {
         $content = null;
         if (!is_null($this->_topicDescription)) {

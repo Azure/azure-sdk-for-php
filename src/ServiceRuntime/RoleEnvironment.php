@@ -29,6 +29,7 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceRuntime\Internal\CurrentState;
 use WindowsAzure\ServiceRuntime\Internal\GoalState;
 use WindowsAzure\ServiceRuntime\Internal\IRuntimeClient;
+use WindowsAzure\ServiceRuntime\Internal\Role;
 use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData;
 use WindowsAzure\ServiceRuntime\Internal\RoleInstance;
 use WindowsAzure\ServiceRuntime\Internal\RuntimeKernel;
@@ -353,7 +354,7 @@ class RoleEnvironment
 
         $currentRoles = $current->getRoles();
         $newRoles = $newData->getRoles();
-        $changedRoleSet = array();
+        $changedRoleSet = [];
 
         foreach ($currentRoles as $roleName => $role) {
             if (array_key_exists($roleName, $newRoles)) {
@@ -453,20 +454,20 @@ class RoleEnvironment
      * Calculates which instances / instance endpoints were added from the current
      * role to the new role.
      * 
-     * @param RoleInstance $role                 The current role.
-     * @param array        $currentRoleInstances The current role instances.
-     * @param array        $newRoleInstances     The new role instances.
+     * @param Role  $role                 The current role.
+     * @param array $currentRoleInstances The current role instances.
+     * @param array $newRoleInstances     The new role instances.
      * 
      * @static
      * 
      * @return array
      */
     private static function _calculateNewRoleInstanceChanges(
-        RoleInstance $role,
+        Role $role,
         array $currentRoleInstances,
         array $newRoleInstances
     ) {
-        $changedRoleSet = array();
+        $changedRoleSet = [];
 
         foreach ($currentRoleInstances as $instanceKey => $currentInstance) {
             if (array_key_exists($instanceKey, $newRoleInstances)) {
@@ -507,20 +508,20 @@ class RoleEnvironment
      * Calculates which endpoints / endpoint were added from the current
      * role to the new role.
      * 
-     * @param RoleInstance $role                     The current role.
-     * @param array        $currentInstanceEndpoints The current instance endpoints.
-     * @param array        $newInstanceEndpoints     The new instance endpoints.
+     * @param Role  $role                     The current role.
+     * @param array $currentInstanceEndpoints The current instance endpoints.
+     * @param array $newInstanceEndpoints     The new instance endpoints.
      * 
      * @static
      * 
      * @return array
      */
     private static function _calculateNewRoleInstanceEndpointsChanges(
-        RoleInstance $role,
+        Role $role,
         array $currentInstanceEndpoints,
         array $newInstanceEndpoints
     ) {
-        $changedRoleSet = array();
+        $changedRoleSet = [];
 
         foreach ($currentInstanceEndpoints as $endpointKey => $currentEndpoint) {
             if (array_key_exists($endpointKey, $newInstanceEndpoints)) {
@@ -550,20 +551,20 @@ class RoleEnvironment
      * Calculates which instances / instance endpoints were removed from the current
      * role to the new role.
      * 
-     * @param RoleInstance $role                 The current role.
-     * @param array        $currentRoleInstances The current role instances.
-     * @param array        $newRoleInstances     The new role instances.
+     * @param Role  $role                 The current role.
+     * @param array $currentRoleInstances The current role instances.
+     * @param array $newRoleInstances     The new role instances.
      * 
      * @static
      * 
      * @return array
      */
     private static function _calculateCurrentRoleInstanceChanges(
-        RoleInstance $role,
+        Role $role,
         array $currentRoleInstances,
         array $newRoleInstances
     ) {
-        $changedRoleSet = array();
+        $changedRoleSet = [];
 
         foreach ($newRoleInstances as $instanceKey => $newInstance) {
             if (array_key_exists($instanceKey, $currentRoleInstances)) {
@@ -605,20 +606,20 @@ class RoleEnvironment
      * Calculates which endpoints / endpoint were removed from the current
      * role to the new role.
      * 
-     * @param RoleInstance $role                     The current changed role set.
-     * @param array        $currentInstanceEndpoints The current instance endpoints.
-     * @param array        $newInstanceEndpoints     The new instance endpoints.
+     * @param Role  $role                     The current changed role set.
+     * @param array $currentInstanceEndpoints The current instance endpoints.
+     * @param array $newInstanceEndpoints     The new instance endpoints.
      * 
      * @static
      * 
      * @return array
      */
     private static function _calculateCurrentRoleInstanceEndpointsChanges(
-        RoleInstance $role,
+        Role  $role,
         array $currentInstanceEndpoints,
         array $newInstanceEndpoints
     ) {
-        $changedRoleSet = array();
+        $changedRoleSet = [];
 
         foreach ($newInstanceEndpoints as $endpointKey => $newEndpoint) {
             if (!array_key_exists(
@@ -778,12 +779,12 @@ class RoleEnvironment
      * the load balancer. If the instance's state is Busy, it will not receive
      * requests from the load balancer.
      * 
-     * @param RoleInstanceStatus $status        The new role status.
-     * @param \DateTime          $expirationUtc The expiration UTC time.
+     * @param int       $status he new role status.
+     * @param \DateTime $expirationUtc The expiration UTC time.
      * 
      * @static
      */
-    public static function setStatus($status, $expirationUtc)
+    public static function setStatus($status, \DateTime $expirationUtc)
     {
         self::_initialize();
 
@@ -837,7 +838,7 @@ class RoleEnvironment
      * 
      * @param callable $listener The changed listener.
      */
-    public static function addRoleEnvironmentChangedListener(callable $listener)
+    public static function addRoleEnvironmentChangedListener($listener)
     {
         self::$_changedListeners[] = $listener;
     }
@@ -851,7 +852,7 @@ class RoleEnvironment
      * 
      * @return bool
      */
-    public static function removeRoleEnvironmentChangedListener(callable $listener)
+    public static function removeRoleEnvironmentChangedListener($listener)
     {
         foreach (self::$_changedListeners as $key => $changedListener) {
             if ($changedListener == $listener) {
@@ -889,7 +890,7 @@ class RoleEnvironment
      * 
      * @static
      */
-    public static function addRoleEnvironmentChangingListener(callable $listener)
+    public static function addRoleEnvironmentChangingListener($listener)
     {
         self::$_changingListeners[] = $listener;
     }
@@ -903,7 +904,7 @@ class RoleEnvironment
      * 
      * @return bool
      */
-    public static function removeRoleEnvironmentChangingListener(callable $listener)
+    public static function removeRoleEnvironmentChangingListener($listener)
     {
         foreach (self::$_changingListeners as $key => $changingListener) {
             if ($changingListener == $listener) {
@@ -925,7 +926,7 @@ class RoleEnvironment
      * 
      * @static
      */
-    public static function addRoleEnvironmentStoppingListener(callable $listener)
+    public static function addRoleEnvironmentStoppingListener($listener)
     {
         self::$_stoppingListeners[] = $listener;
     }
@@ -939,7 +940,7 @@ class RoleEnvironment
      * 
      * @return bool
      */
-    public static function removeRoleEnvironmentStoppingListener(callable $listener)
+    public static function removeRoleEnvironmentStoppingListener($listener)
     {
         foreach (self::$_stoppingListeners as $key => $stoppingListener) {
             if ($stoppingListener == $listener) {

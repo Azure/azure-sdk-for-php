@@ -63,7 +63,7 @@ class ChunkedGoalStateDeserializer implements IGoalStateDeserializer
      * 
      * @param resource $inputStream The input stream.
      */
-    public function initialize(resource $inputStream)
+    public function initialize($inputStream)
     {
         $this->_inputStream = $inputStream;
     }

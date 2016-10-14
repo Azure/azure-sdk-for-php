@@ -1013,7 +1013,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::setStatus
+     * @covers RoleEnvironment::setStatus
      */
     public function testSetStatusReady()
     {
@@ -1115,8 +1115,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::addRoleEnvironmentChangedListener
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::removeRoleEnvironmentChangedListener
+     * @covers RoleEnvironment::addRoleEnvironmentChangedListener
+     * @covers RoleEnvironment::removeRoleEnvironmentChangedListener
      */
     public function testAddRemoveRoleEnvironmentChangedListener()
     {

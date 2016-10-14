@@ -28,7 +28,6 @@ namespace WindowsAzure\Common\Internal\Http;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Http\IUrl;
 
 /**
  * HTTP client which sends and receives HTTP requests and responses.
@@ -67,18 +66,16 @@ class HttpClient implements IHttpClient
      *
      * @param string $certificatePath          The certificate path.
      * @param string $certificateAuthorityPath The path of the certificate authority.
-     *
-     * @return HttpClient
      */
     public function __construct(
         $certificatePath = Resources::EMPTY_STRING,
         $certificateAuthorityPath = Resources::EMPTY_STRING
     ) {
-        $config = array(
+        $config = [
             Resources::USE_BRACKETS => true,
             Resources::SSL_VERIFY_PEER => false,
             Resources::SSL_VERIFY_HOST => false,
-        );
+        ];
 
         // Read HTTP_PROXY enviroment variable, if any.
         // To use it with Fiddler, set the environment variable HTTP_PROXY
@@ -116,13 +113,11 @@ class HttpClient implements IHttpClient
         $this->setHeader('expect', '');
 
         $this->_requestUrl = null;
-        $this->_expectedStatusCodes = array();
+        $this->_expectedStatusCodes = [];
     }
 
     /**
      * Makes deep copy from the current object.
-     *
-     * @return HttpClient
      */
     public function __clone()
     {

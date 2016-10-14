@@ -44,15 +44,15 @@ class Utilities
      * Returns the specified value of the $key passed from $array and in case that
      * this $key doesn't exist, the default value is returned.
      *
-     * @param array $array   The array to be used.
-     * @param mixed $key     The array key.
-     * @param mixed $default The value to return if $key is not found in $array.
+     * @param array|null $array   The array to be used.
+     * @param mixed      $key     The array key.
+     * @param mixed      $default The value to return if $key is not found in $array.
      *
      * @static
      *
      * @return mixed
      */
-    public static function tryGetValue(array $array, $key, $default = null)
+    public static function tryGetValue(array $array = null, $key, $default = null)
     {
         return is_array($array) && array_key_exists($key, $array)
             ? $array[$key]

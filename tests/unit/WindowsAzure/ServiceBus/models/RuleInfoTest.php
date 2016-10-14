@@ -25,6 +25,9 @@
 
 namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
+use WindowsAzure\ServiceBus\Internal\Action;
+use WindowsAzure\ServiceBus\Internal\Filter;
+use WindowsAzure\ServiceBus\Models\RuleDescription;
 use WindowsAzure\ServiceBus\Models\RuleInfo;
 
 /**
@@ -63,13 +66,13 @@ class RuleInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::getRuleDescription
-     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::setRuleDescription
+     * @covers RuleInfo::getRuleDescription
+     * @covers RuleInfo::setRuleDescription
      */
     public function testGetSetRuleDescription()
     {
         // Setup
-        $expected = 'testRuleDescription';
+        $expected = new RuleDescription();
         $ruleInfo = new RuleInfo();
 
         // Test
@@ -84,13 +87,13 @@ class RuleInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::getFilter
-     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::setFilter
+     * @covers RuleInfo::getFilter
+     * @covers RuleInfo::setFilter
      */
     public function testGetSetFilter()
     {
         // Setup
-        $expected = 'testFilter';
+        $expected = new Filter();
         $ruleInfo = new RuleInfo();
 
         // Test
@@ -105,13 +108,13 @@ class RuleInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::getAction
-     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::setAction
+     * @covers RuleInfo::getAction
+     * @covers RuleInfo::setAction
      */
     public function testGetSetAction()
     {
         // Setup
-        $expected = 'testAction';
+        $expected = new Action();
         $ruleInfo = new RuleInfo();
 
         // Test
@@ -126,8 +129,8 @@ class RuleInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::getName
-     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::setName
+     * @covers RuleInfo::getName
+     * @covers RuleInfo::setName
      */
     public function testGetSetName()
     {

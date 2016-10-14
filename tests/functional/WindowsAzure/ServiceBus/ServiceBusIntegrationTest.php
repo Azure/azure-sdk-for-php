@@ -25,6 +25,7 @@
 
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
+use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\IServiceFilter;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
@@ -643,12 +644,12 @@ class CustomServiceFilter implements IServiceFilter
     public $requests = array();
     public $responses = array();
 
-    public function handleRequest($request)
+    public function handleRequest(IHttpClient $request)
     {
         return $request;
     }
 
-    public function handleResponse($request, $response)
+    public function handleResponse(IHttpClient $request, $response)
     {
         array_push($this->requests, $request);
         array_push($this->responses, $response);

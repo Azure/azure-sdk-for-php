@@ -25,6 +25,7 @@
 
 namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
+use WindowsAzure\ServiceBus\Models\TopicDescription;
 use WindowsAzure\ServiceBus\Models\TopicInfo;
 use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 
@@ -58,13 +59,13 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getTopicDescription
-     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setTopicDescription
+     * @covers TopicInfo::getTopicDescription
+     * @covers TopicInfo::setTopicDescription
      */
     public function testGetSetTopicDescription()
     {
         // Setup
-        $expected = 'testTopicDescription';
+        $expected = new TopicDescription('testTopicDescription');
         $topicInfo = new TopicInfo();
 
         // Test
@@ -79,8 +80,8 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getDefaultMessageTimeToLive
-     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setDefaultMessageTimeToLive
+     * @covers TopicInfo::getDefaultMessageTimeToLive
+     * @covers TopicInfo::setDefaultMessageTimeToLive
      */
     public function testGetSetDefaultMessageTimeToLive()
     {

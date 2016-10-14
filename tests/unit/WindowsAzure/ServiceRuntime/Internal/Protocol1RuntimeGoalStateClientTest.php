@@ -50,10 +50,10 @@ use WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer;
 class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::__construct
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::getCurrentGoalState
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::setEndpoint
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::_ensureGoalStateRetrieved
+     * @covers Protocol1RuntimeGoalStateClient::__construct
+     * @covers Protocol1RuntimeGoalStateClient::getCurrentGoalState
+     * @covers Protocol1RuntimeGoalStateClient::setEndpoint
+     * @covers Protocol1RuntimeGoalStateClient::_ensureGoalStateRetrieved
      */
     public function testGetCurrentGoalState()
     {
@@ -99,10 +99,10 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::__construct
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::getRoleEnvironmentData
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::setEndpoint
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::_ensureGoalStateRetrieved
+     * @covers Protocol1RuntimeGoalStateClient::__construct
+     * @covers Protocol1RuntimeGoalStateClient::getRoleEnvironmentData
+     * @covers Protocol1RuntimeGoalStateClient::setEndpoint
+     * @covers Protocol1RuntimeGoalStateClient::_ensureGoalStateRetrieved
      */
     public function testGetRoleEnvironmentData()
     {
@@ -173,8 +173,8 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::setKeepOpen
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::getKeepOpen
+     * @covers Protocol1RuntimeGoalStateClient::setKeepOpen
+     * @covers Protocol1RuntimeGoalStateClient::getKeepOpen
      */
     public function testSetKeepOpen()
     {
@@ -195,8 +195,8 @@ class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::setEndpoint
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::getEndpoint
+     * @covers Protocol1RuntimeGoalStateClient::setEndpoint
+     * @covers Protocol1RuntimeGoalStateClient::getEndpoint
      */
     public function testSetGetEndpoint()
     {

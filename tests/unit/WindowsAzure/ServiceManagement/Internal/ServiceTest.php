@@ -25,6 +25,7 @@
 
 namespace Tests\unit\WindowsAzure\ServiceManagement\Internal;
 
+use WindowsAzure\Common\Internal\Serialization\JsonSerializer;
 use WindowsAzure\ServiceManagement\Internal\Service;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Common\Internal\Resources;
@@ -168,7 +169,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::serialize
+     * @covers Service::serialize
      */
     public function testSerializeWithInvalidSerializer()
     {
@@ -177,6 +178,6 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $service = new Service();
 
         // Test
-        $service->serialize(new Service());
+        $service->serialize(new JsonSerializer());
     }
 }

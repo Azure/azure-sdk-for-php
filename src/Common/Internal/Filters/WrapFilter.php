@@ -83,7 +83,6 @@ class WrapFilter implements IServiceFilter
      */
     public function handleRequest(IHttpClient $request)
     {
-        Validate::notNull($request, 'request');
         $wrapAccessToken = $this->_wrapTokenManager->getAccessToken(
             $request->getUrl()
         );

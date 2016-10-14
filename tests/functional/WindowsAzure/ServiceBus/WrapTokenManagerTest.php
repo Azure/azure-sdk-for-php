@@ -26,6 +26,7 @@
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
 use Tests\Framework\ServiceBusRestProxyTestBase;
+use WindowsAzure\Common\Internal\IServiceFilter;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\ServiceBus\Internal\IWrap;
 use WindowsAzure\ServiceBus\Internal\WrapTokenManager;
@@ -138,7 +139,7 @@ class WrapTokenManagerTest_MockWrapRestProxy implements IWrap
         return $wrapResponse;
     }
 
-    public function withFilter($filter)
+    public function withFilter(IServiceFilter $filter)
     {
         return $this;
     }

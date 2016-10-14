@@ -130,7 +130,7 @@ class JsonSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\JsonSerializer::serialize
+     * @covers JsonSerializer::serialize
      */
     public function testSerialize()
     {
@@ -144,20 +144,5 @@ class JsonSerializerTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * @covers WindowsAzure\Common\Internal\Serialization\JsonSerializer::serialize
-     */
-    public function testSerializeNull()
-    {
-        // Setup
-        $jsonSerializer = new JsonSerializer();
-        $testData = null;
-        $expected = '';
-        $this->setExpectedException('WindowsAzure\Common\Internal\InvalidArgumentTypeException', sprintf(Resources::INVALID_PARAM_MSG, 'array', 'array'));
-
-        // Test
-        $actual = $jsonSerializer->serialize($testData);
     }
 }

@@ -290,7 +290,6 @@ class AtomLink extends AtomBase
      */
     public function writeXml(\XMLWriter $xmlWriter)
     {
-        Validate::notNull($xmlWriter, 'xmlWriter');
         $xmlWriter->startElementNs(
             'atom',
             Resources::LINK,

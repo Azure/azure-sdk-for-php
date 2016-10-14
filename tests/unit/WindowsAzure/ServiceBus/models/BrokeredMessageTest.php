@@ -44,7 +44,7 @@ use WindowsAzure\ServiceBus\Models\BrokerProperties;
 class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::__construct
+     * @covers BrokeredMessage::__construct
      */
     public function testBrokeredMessageConstructor()
     {
@@ -58,7 +58,7 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getBrokerProperties
+     * @covers BrokeredMessage::getBrokerProperties
      */
     public function testBrokeredMessageConstructorWithMessage()
     {
@@ -77,8 +77,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getBrokerProperties
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setBrokerProperties
+     * @covers BrokeredMessage::getBrokerProperties
+     * @covers BrokeredMessage::setBrokerProperties
      */
     public function testGetSetBrokerProperties()
     {
@@ -98,8 +98,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getBody
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setBody
+     * @covers BrokeredMessage::getBody
+     * @covers BrokeredMessage::setBody
      */
     public function testGetSetBody()
     {
@@ -119,8 +119,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getContentType
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setContentType
+     * @covers BrokeredMessage::getContentType
+     * @covers BrokeredMessage::setContentType
      */
     public function testGetSetContentType()
     {
@@ -140,13 +140,13 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getDate
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setDate
+     * @covers BrokeredMessage::getDate
+     * @covers BrokeredMessage::setDate
      */
     public function testGetSetDate()
     {
         // Setup
-        $expected = 'testDate';
+        $expected = new \DateTime();
         $brokeredMessage = new BrokeredMessage();
 
         // Test
@@ -161,8 +161,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getProperties
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setProperty
+     * @covers BrokeredMessage::getProperties
+     * @covers BrokeredMessage::setProperty
      */
     public function testGetSetCustomProperties()
     {
@@ -184,8 +184,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getCorrelationId
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setCorrelationId
+     * @covers BrokeredMessage::getCorrelationId
+     * @covers BrokeredMessage::setCorrelationId
      */
     public function testGetSetCorrelationId()
     {
@@ -205,8 +205,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getSessionId
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setSessionId
+     * @covers BrokeredMessage::getSessionId
+     * @covers BrokeredMessage::setSessionId
      */
     public function testGetSetSessionId()
     {
@@ -226,8 +226,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getDeliveryCount
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setDeliveryCount
+     * @covers BrokeredMessage::getDeliveryCount
+     * @covers BrokeredMessage::setDeliveryCount
      */
     public function testGetSetDeliveryCount()
     {
@@ -247,8 +247,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getLockedUntilUtc
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setLockedUntilUtc
+     * @covers BrokeredMessage::getLockedUntilUtc
+     * @covers BrokeredMessage::setLockedUntilUtc
      */
     public function testGetSetLockedUntilUtc()
     {
@@ -268,8 +268,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getLockToken
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setLockToken
+     * @covers BrokeredMessage::getLockToken
+     * @covers BrokeredMessage::setLockToken
      */
     public function testGetSetLockToken()
     {
@@ -289,8 +289,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getMessageId
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setMessageId
+     * @covers BrokeredMessage::getMessageId
+     * @covers BrokeredMessage::setMessageId
      */
     public function testGetSetMessageId()
     {
@@ -310,8 +310,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getLabel
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setLabel
+     * @covers BrokeredMessage::getLabel
+     * @covers BrokeredMessage::setLabel
      */
     public function testGetSetLabel()
     {
@@ -331,8 +331,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getReplyTo
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setReplyTo
+     * @covers BrokeredMessage::getReplyTo
+     * @covers BrokeredMessage::setReplyTo
      */
     public function testGetSetReplyTo()
     {
@@ -352,8 +352,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getSequenceNumber
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setSequenceNumber
+     * @covers BrokeredMessage::getSequenceNumber
+     * @covers BrokeredMessage::setSequenceNumber
      */
     public function testGetSetSequenceNumber()
     {
@@ -373,8 +373,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getTimeToLive
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setTimeToLive
+     * @covers BrokeredMessage::getTimeToLive
+     * @covers BrokeredMessage::setTimeToLive
      */
     public function testGetSetTimeToLive()
     {
@@ -394,8 +394,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getTo
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setTo
+     * @covers BrokeredMessage::getTo
+     * @covers BrokeredMessage::setTo
      */
     public function testGetSetTo()
     {
@@ -415,8 +415,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getScheduledEnqueueTimeUtc
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setScheduledEnqueueTimeUtc
+     * @covers BrokeredMessage::getScheduledEnqueueTimeUtc
+     * @covers BrokeredMessage::setScheduledEnqueueTimeUtc
      */
     public function testGetSetScheduledEnqueueTimeUtc()
     {
@@ -436,8 +436,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getReplyToSessionId
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setReplyToSessionId
+     * @covers BrokeredMessage::getReplyToSessionId
+     * @covers BrokeredMessage::setReplyToSessionId
      */
     public function testGetSetReplyToSessionId()
     {
@@ -457,8 +457,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getMessageLocation
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setMessageLocation
+     * @covers BrokeredMessage::getMessageLocation
+     * @covers BrokeredMessage::setMessageLocation
      */
     public function testGetSetMessageLocation()
     {
@@ -478,8 +478,8 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::getLockLocation
-     * @covers WindowsAzure\ServiceBus\Models\BrokeredMessage::setLockLocation
+     * @covers BrokeredMessage::getLockLocation
+     * @covers BrokeredMessage::setLockLocation
      */
     public function testGetSetLockLocation()
     {

@@ -83,27 +83,27 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
     /**
      * Constructor.
      * 
-     * @param Protocol1RuntimeCurrentStateClient $currentStateClient          The
-     *                                                                        current state client.
-     * @param IGoalStateDeserializer             $goalStateDeserializer       The
-     *                                                                        goal state deserializer.
-     * @param IRoleEnvironmentDataDeserializer   $roleEnvironmentDeserializer The
-     *                                                                        role environment deserializer.
-     * @param IInputChannel                      $inputChannel                The
-     *                                                                        input channel.
+     * @param Protocol1RuntimeCurrentStateClient|null $currentStateClient          The
+     *                                                                             current state client.
+     * @param IGoalStateDeserializer|null             $goalStateDeserializer       The
+     *                                                                             goal state deserializer.
+     * @param IRoleEnvironmentDataDeserializer|null   $roleEnvironmentDeserializer The
+     *                                                                             role environment deserializer.
+     * @param IInputChannel|null                      $inputChannel                The
+     *                                                                             input channel.
      */
     public function __construct(
-        Protocol1RuntimeCurrentStateClient $currentStateClient,
-        IGoalStateDeserializer $goalStateDeserializer,
-        IRoleEnvironmentDataDeserializer $roleEnvironmentDeserializer,
-        IInputChannel $inputChannel
+        Protocol1RuntimeCurrentStateClient $currentStateClient = null,
+        IGoalStateDeserializer $goalStateDeserializer = null,
+        IRoleEnvironmentDataDeserializer $roleEnvironmentDeserializer = null,
+        IInputChannel $inputChannel = null
     ) {
         $this->_currentStateClient = $currentStateClient;
         $this->_goalStateDeserializer = $goalStateDeserializer;
         $this->_roleEnvironmentDeserializer = $roleEnvironmentDeserializer;
         $this->_inputChannel = $inputChannel;
 
-        $this->_listeners = array();
+        $this->_listeners = [];
 
         $this->_currentGoalState = null;
         $this->_currentEnvironmentData = null;

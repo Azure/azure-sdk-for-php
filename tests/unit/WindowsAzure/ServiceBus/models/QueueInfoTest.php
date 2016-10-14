@@ -25,6 +25,7 @@
 
 namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
+use WindowsAzure\ServiceBus\Models\QueueDescription;
 use WindowsAzure\ServiceBus\Models\QueueInfo;
 use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 
@@ -64,13 +65,13 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::getQueueDescription
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::setQueueDescription
+     * @covers QueueInfo::getQueueDescription
+     * @covers QueueInfo::setQueueDescription
      */
     public function testGetSetQueueDescription()
     {
         // Setup
-        $expected = 'testQueueDescription';
+        $expected = new QueueDescription('testQueueDescription');
         $queueInfo = new QueueInfo();
 
         // Test
@@ -85,8 +86,8 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::getLockDuration
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::setLockDuration
+     * @covers QueueInfo::getLockDuration
+     * @covers QueueInfo::setLockDuration
      */
     public function testGetSetLockDuration()
     {
