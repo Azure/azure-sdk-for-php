@@ -157,12 +157,12 @@ class BrokerProperties
     // @codingStandardsIgnoreStart
 
     /**
-     * Creates a broker properties instance with specified JSON message.  
+     * Creates a broker properties instance with specified JSON message.
      *
-     * @param string $brokerPropertiesJson A JSON message representing a 
+     * @param string $brokerPropertiesJson A JSON message representing a
      *                                     broker properties.
-     * 
-     * @return none
+     *
+     * @return BrokerProperties
      */
     public static function create($brokerPropertiesJson)
     {
@@ -285,8 +285,6 @@ class BrokerProperties
      * Sets the correlation ID.
      * 
      * @param string $correlationId The correlation ID. 
-     * 
-     * @return none
      */
     public function setCorrelationId($correlationId)
     {
@@ -307,8 +305,6 @@ class BrokerProperties
      * Sets the session ID. 
      * 
      * @param string $sessionId The ID of the session. 
-     * 
-     * @return none
      */
     public function setSessionId($sessionId)
     {
@@ -329,8 +325,6 @@ class BrokerProperties
      * Sets the delivery count. 
      * 
      * @param int $deliveryCount The count of the delivery. 
-     * 
-     * @return none
      */
     public function setDeliveryCount($deliveryCount)
     {
@@ -351,8 +345,6 @@ class BrokerProperties
      * Sets the locked until time. 
      * 
      * @param string $lockedUntilUtc The locked until time. 
-     * 
-     * @return none
      */
     public function setLockedUntilUtc($lockedUntilUtc)
     {
@@ -373,8 +365,6 @@ class BrokerProperties
      * Sets the lock token. 
      * 
      * @param string $lockToken The lock token. 
-     * 
-     * @return none
      */
     public function setLockToken($lockToken)
     {
@@ -395,8 +385,6 @@ class BrokerProperties
      * Sets the message ID.
      * 
      * @param string $messageId The ID of the message. 
-     * 
-     * @return none
      */
     public function setMessageId($messageId)
     {
@@ -417,8 +405,6 @@ class BrokerProperties
      * Sets the label. 
      * 
      * @param string $label The label of the broker property. 
-     * 
-     * @return none
      */
     public function setLabel($label)
     {
@@ -439,8 +425,6 @@ class BrokerProperties
      * Sets the reply to. 
      *
      * @param string $replyTo The reply to. 
-     * 
-     * @return none
      */
     public function setReplyTo($replyTo)
     {
@@ -461,8 +445,6 @@ class BrokerProperties
      * Sets the sequence number. 
      * 
      * @param int $sequenceNumber The sequence number. 
-     * 
-     * @return none
      */
     public function setSequenceNumber($sequenceNumber)
     {
@@ -483,8 +465,6 @@ class BrokerProperties
      * Sets time to live. 
      * 
      * @param string $timeToLive The time to live. 
-     * 
-     * @return none
      */
     public function setTimeToLive($timeToLive)
     {
@@ -505,8 +485,6 @@ class BrokerProperties
      * Sets to. 
      * 
      * @param string $to To.
-     * 
-     * @return none
      */
     public function setTo($to)
     {
@@ -527,8 +505,6 @@ class BrokerProperties
      * Sets scheduled enqueue time UTC. 
      * 
      * @param string $scheduledEnqueueTimeUtc The scheduled enqueue time. 
-     * 
-     * @return none
      */
     public function setScheduledEnqueueTimeUtc($scheduledEnqueueTimeUtc)
     {
@@ -549,8 +525,6 @@ class BrokerProperties
      * Sets reply to session. 
      * 
      * @param string $replyToSessionId reply to session. 
-     * 
-     * @return none
      */
     public function setReplyToSessionId($replyToSessionId)
     {
@@ -571,8 +545,6 @@ class BrokerProperties
      * Sets the location of the message. 
      * 
      * @param string $messageLocation The location of the message. 
-     * 
-     * @return none
      */
     public function setMessageLocation($messageLocation)
     {
@@ -593,8 +565,6 @@ class BrokerProperties
      * Sets the location of the lock.
      * 
      * @param string $lockLocation The location of the lock.
-     * 
-     * @return none
      */
     public function setLockLocation($lockLocation)
     {
@@ -710,13 +680,10 @@ class BrokerProperties
      *
      * @param array  &$valueArray The array of a set of values. 
      * @param string $key         The key of the key value pair. 
-     * @param string $value       The value of the key value pair. 
-     * 
-     * @return none
+     * @param string $value       The value of the key value pair.
      */
-    public function setValueArrayString(&$valueArray, $key, $value)
+    public function setValueArrayString(array &$valueArray, $key, $value)
     {
-        Validate::isArray($valueArray, 'valueArray');
         Validate::isString($key, 'key');
 
         if (!empty($value)) {
@@ -730,13 +697,10 @@ class BrokerProperties
      *
      * @param array  &$valueArray The array of a set of values. 
      * @param string $key         The key of the key value pair. 
-     * @param int    $value       The value of the key value pair. 
-     * 
-     * @return none
+     * @param int    $value       The value of the key value pair.
      */
-    public function setValueArrayInt(&$valueArray, $key, $value)
+    public function setValueArrayInt(array &$valueArray, $key, $value)
     {
-        Validate::isArray($valueArray, 'valueArray');
         Validate::isString($key, 'key');
 
         if (!empty($value)) {
@@ -750,13 +714,10 @@ class BrokerProperties
      *
      * @param array  &$valueArray The array of a set of values. 
      * @param string $key         The key of the key value pair. 
-     * @param float  $value       The value of the key value pair. 
-     * 
-     * @return none
+     * @param float  $value       The value of the key value pair.
      */
-    public function setValueArrayFloat(&$valueArray, $key, $value)
+    public function setValueArrayFloat(array &$valueArray, $key, $value)
     {
-        Validate::isArray($valueArray, 'valueArray');
         Validate::isString($key, 'key');
 
         if (!empty($value)) {
@@ -770,13 +731,10 @@ class BrokerProperties
      *
      * @param array     &$valueArray The array of a set of values. 
      * @param string    $key         The key of the key value pair. 
-     * @param \DateTime $value       The value of the key value pair. 
-     * 
-     * @return none
+     * @param \DateTime $value       The value of the key value pair.
      */
-    public function setValueArrayDateTime(&$valueArray, $key, $value)
+    public function setValueArrayDateTime(array &$valueArray, $key, $value)
     {
-        Validate::isArray($valueArray, 'valueArray');
         Validate::isString($key, 'key');
 
         if (!empty($value)) {

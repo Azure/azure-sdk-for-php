@@ -64,9 +64,9 @@ class RetentionPolicy
      * 
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return WindowsAzure\Common\Models\RetentionPolicy
+     * @return RetentionPolicy
      */
-    public static function create($parsedResponse)
+    public static function create(array $parsedResponse)
     {
         $result = new self();
         $result->setEnabled(Utilities::toBoolean($parsedResponse['Enabled']));
@@ -91,8 +91,6 @@ class RetentionPolicy
      * Sets enabled.
      * 
      * @param bool $enabled value to use.
-     * 
-     * @return none.
      */
     public function setEnabled($enabled)
     {
@@ -113,8 +111,6 @@ class RetentionPolicy
      * Sets days field.
      * 
      * @param int $days value to use.
-     * 
-     * @return none
      */
     public function setDays($days)
     {

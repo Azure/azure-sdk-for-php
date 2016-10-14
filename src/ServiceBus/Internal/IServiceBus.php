@@ -25,7 +25,17 @@
 
 namespace WindowsAzure\ServiceBus\Internal;
 
+use Exception;
 use WindowsAzure\Common\Internal\FilterableService;
+use WindowsAzure\ServiceBus\Models\BrokeredMessage;
+use WindowsAzure\ServiceBus\Models\ListRulesOptions;
+use WindowsAzure\ServiceBus\Models\ListSubscriptionsOptions;
+use WindowsAzure\ServiceBus\Models\ListTopicsOptions;
+use WindowsAzure\ServiceBus\Models\QueueInfo;
+use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
+use WindowsAzure\ServiceBus\Models\RuleInfo;
+use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
+use WindowsAzure\ServiceBus\Models\TopicInfo;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for Service Bus.
@@ -45,120 +55,102 @@ interface IServiceBus extends FilterableService
     /**
      * Sends a brokered message. 
      * 
-     * @param type $path            The path to send message. 
-     * @param type $brokeredMessage The brokered message. 
+     * @param string          $path            The path to send message.
+     * @param BrokeredMessage $brokeredMessage The brokered message.
      *
      * @throws Exception
-     *
-     * @return none
      */
-    public function sendMessage($path, $brokeredMessage);
+    public function sendMessage($path, BrokeredMessage $brokeredMessage);
 
     /**
      * Sends a queue message. 
      * 
      * @param string           $queueName       The name of the queue to send 
      *                                          message.
-     * @param \BrokeredMessage $brokeredMessage The brokered message. 
+     * @param BrokeredMessage $brokeredMessage The brokered message.
      *
      * @throws Exception
-     *
-     * @return none
      */
-    public function sendQueueMessage($queueName, $brokeredMessage);
+    public function sendQueueMessage($queueName, BrokeredMessage $brokeredMessage);
 
     /**
      * Receives a queue message. 
      * 
-     * @param string                  $queueName              The name of the
-     *                                                        queue. 
-     * @param \ReceivedMessageOptions $receivedMessageOptions The options to 
-     *                                                        receive the message. 
+     * @param string                $queueName              The name of the
+     *                                                      queue.
+     * @param ReceiveMessageOptions $receivedMessageOptions The options to
+     *                                                      receive the message.
      *
      * @throws Exception
-     *
-     * @return none
      */
-    public function receiveQueueMessage($queueName, $receivedMessageOptions);
+    public function receiveQueueMessage($queueName, ReceiveMessageOptions $receivedMessageOptions);
 
     /**
      * Receives a message. 
      * 
-     * @param string                  $path                  The path of the 
-     *                                                       message. 
-     * @param \ReceivedMessageOptions $receiveMessageOptions The options to 
-     *                                                       receive the message. 
+     * @param string                $path                  The path of the
+     *                                                     message.
+     * @param ReceiveMessageOptions $receiveMessageOptions The options to
+     *                                                     receive the message.
      *
      * @throws Exception
-     *
-     * @return none
      */
-    public function receiveMessage($path, $receiveMessageOptions);
+    public function receiveMessage($path, ReceiveMessageOptions $receiveMessageOptions);
 
     /**
      * Sends a brokered message to a specified topic. 
      * 
      * @param string           $topicName       The name of the topic. 
-     * @param \BrokeredMessage $brokeredMessage The brokered message. 
+     * @param BrokeredMessage $brokeredMessage The brokered message.
      *
      * @throws Exception
-     *
-     * @return none
      */
-    public function sendTopicMessage($topicName, $brokeredMessage);
+    public function sendTopicMessage($topicName, BrokeredMessage $brokeredMessage);
 
     /**
      * Receives a subscription message. 
      * 
-     * @param string                 $topicName             The name of the 
-     *                                                      topic.
-     * @param string                 $subscriptionName      The name of the 
-     *                                                      subscription.
-     * @param \ReceiveMessageOptions $receiveMessageOptions The options to 
-     *                                                      receive the subscription message. 
+     * @param string                $topicName             The name of the
+     *                                                     topic.
+     * @param string                $subscriptionName      The name of the
+     *                                                     subscription.
+     * @param ReceiveMessageOptions $receiveMessageOptions The options to
+     *                                                     receive the subscription message.
      *
      * @throws Exception
-     *
-     * @return none
      */
     public function receiveSubscriptionMessage(
         $topicName,
         $subscriptionName,
-        $receiveMessageOptions
+        ReceiveMessageOptions $receiveMessageOptions
     );
 
     /**
      * Unlocks a brokered message. 
      * 
-     * @param \BrokeredMessage $brokeredMessage The brokered message. 
+     * @param BrokeredMessage $brokeredMessage The brokered message.
      *
      * @throws Exception
-     *
-     * @return none
      */
-    public function unlockMessage($brokeredMessage);
+    public function unlockMessage(BrokeredMessage $brokeredMessage);
 
     /**
      * Deletes a brokered message. 
      * 
-     * @param \BrokeredMessage $brokeredMessage The borkered message.
+     * @param BrokeredMessage $brokeredMessage The borkered message.
      *
      * @throws Exception
-     *
-     * @return none
      */
-    public function deleteMessage($brokeredMessage);
+    public function deleteMessage(BrokeredMessage $brokeredMessage);
 
     /**
      * Creates a queue with specified queue info. 
      * 
-     * @param \QueueInfo $queueInfo The information of the queue.
+     * @param QueueInfo $queueInfo The information of the queue.
      *
      * @throws Exception
-     *
-     * @return none
      */
-    public function createQueue($queueInfo);
+    public function createQueue(QueueInfo $queueInfo);
 
     /**
      * Deletes a queue. 
@@ -166,8 +158,6 @@ interface IServiceBus extends FilterableService
      * @param string $queuePath The path of the queue.
      *
      * @throws Exception
-     *
-     * @return none
      */
     public function deleteQueue($queuePath);
 
@@ -177,33 +167,27 @@ interface IServiceBus extends FilterableService
      * @param string $queuePath The path of the queue.
      *
      * @throws Exception
-     *
-     * @return none
      */
     public function getQueue($queuePath);
 
     /**
      * Lists a queue. 
      * 
-     * @param \ListQueueOptions $listQueueOptions The options to list the 
+     * @param ListQueueOptions $listQueueOptions The options to list the
      *                                            queues.
      *
      * @throws Exception
-     *
-     * @return none
      */
     public function listQueues($listQueueOptions);
 
     /**
      * Creates a topic with specified topic info.  
      * 
-     * @param \TopicInfo $topicInfo The information of the topic. 
+     * @param TopicInfo $topicInfo The information of the topic.
      *
      * @throws Exception
-     *
-     * @return none
      */
-    public function createTopic($topicInfo);
+    public function createTopic(TopicInfo $topicInfo);
 
     /**
      * Deletes a topic with specified topic path. 
@@ -211,8 +195,6 @@ interface IServiceBus extends FilterableService
      * @param string $topicPath The path of the topic.
      *
      * @throws Exception
-     *
-     * @return none
      */
     public function deleteTopic($topicPath);
 
@@ -222,36 +204,30 @@ interface IServiceBus extends FilterableService
      * @param string $topicPath The path of the topic.
      *
      * @throws Exception
-     *
-     * @return none
      */
     public function getTopic($topicPath);
 
     /**
      * Lists topics. 
      * 
-     * @param \ListTopicsOptions $listTopicsOptions The options to list 
+     * @param ListTopicsOptions $listTopicsOptions The options to list
      *                                              the topics. 
      *
      * @throws Exception
-     *
-     * @return none
      */
-    public function listTopics($listTopicsOptions);
+    public function listTopics(ListTopicsOptions $listTopicsOptions);
 
     /**
      * Creates a subscription with specified topic path and 
      * subscription info. 
      * 
-     * @param string            $topicPath        The path of the topic.
-     * @param \SubscriptionInfo $subscriptionInfo The information of the 
-     *                                            subscription.
+     * @param string           $topicPath        The path of the topic.
+     * @param SubscriptionInfo $subscriptionInfo The information of the
+     *                                           subscription.
      *
      * @throws Exception
-     *
-     * @return none
      */
-    public function createSubscription($topicPath, $subscriptionInfo);
+    public function createSubscription($topicPath, SubscriptionInfo $subscriptionInfo);
 
     /**
      * Deletes a subscription. 
@@ -260,8 +236,6 @@ interface IServiceBus extends FilterableService
      * @param string $subscriptionName The name of the subscription.
      *
      * @throws Exception
-     *
-     * @return none
      */
     public function deleteSubscription($topicPath, $subscriptionName);
 
@@ -272,8 +246,6 @@ interface IServiceBus extends FilterableService
      * @param string $subscriptionName The name of the subscription.
      *
      * @throws Exception
-     *
-     * @return none
      */
     public function getSubscription($topicPath, $subscriptionName);
 
@@ -286,23 +258,19 @@ interface IServiceBus extends FilterableService
      *                                                           to list the subscriptions. 
      *
      * @throws Exception
-     *
-     * @return none
      */
-    public function listSubscriptions($topicPath, $listSubscriptionsOptions);
+    public function listSubscriptions($topicPath, ListSubscriptionsOptions $listSubscriptionsOptions);
 
     /**
      * Creates a rule. 
      * 
-     * @param string    $topicPath        The path of the topic.
-     * @param string    $subscriptionName The name of the subscription. 
-     * @param \RuleInfo $ruleInfo         The info of the rule.
+     * @param string   $topicPath        The path of the topic.
+     * @param string   $subscriptionName The name of the subscription.
+     * @param RuleInfo $ruleInfo         The info of the rule.
      *
      * @throws Exception
-     *
-     * @return none
      */
-    public function createRule($topicPath, $subscriptionName, $ruleInfo);
+    public function createRule($topicPath, $subscriptionName, RuleInfo $ruleInfo);
 
     /**
      * Deletes a rule. 
@@ -312,8 +280,6 @@ interface IServiceBus extends FilterableService
      * @param string $ruleName         The name of the rule.
      *
      * @throws Exception
-     *
-     * @return none
      */
     public function deleteRule($topicPath, $subscriptionName, $ruleName);
 
@@ -325,21 +291,17 @@ interface IServiceBus extends FilterableService
      * @param string $ruleName         The name of the rule.
      *
      * @throws Exception
-     *
-     * @return none
      */
     public function getRule($topicPath, $subscriptionName, $ruleName);
 
     /**
      * Lists rules. 
      * 
-     * @param string            $topicPath        The path of the topic.
-     * @param string            $subscriptionName The name of the subscription.
-     * @param \ListRulesOptions $listRulesOptions The options to list the rules.
+     * @param string           $topicPath        The path of the topic.
+     * @param string           $subscriptionName The name of the subscription.
+     * @param ListRulesOptions $listRulesOptions The options to list the rules.
      *
      * @throws Exception
-     *
-     * @return none
      */
-    public function listRules($topicPath, $subscriptionName, $listRulesOptions);
+    public function listRules($topicPath, $subscriptionName, ListRulesOptions $listRulesOptions);
 }

@@ -77,8 +77,6 @@ class GetDeploymentResult
      * Sets the deployment.
      * 
      * @param Deployment $deployment The deployment instance.
-     * 
-     * @return none
      */
     public function setDeployment($deployment)
     {

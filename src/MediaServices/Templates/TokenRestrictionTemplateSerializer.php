@@ -47,7 +47,7 @@ class TokenRestrictionTemplateSerializer
     /**
      * Deserialize a TokenRestrictionTemplate xml into a TokenRestrictionTemplate object.
      *
-     * @param string $options Array containing values for object properties
+     * @param string $template Array containing values for object properties
      *
      * @return TokenRestrictionTemplate
      */

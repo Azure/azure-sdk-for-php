@@ -94,8 +94,6 @@ class Role
      * Sets the role name.
      * 
      * @param string $roleName The role name.
-     * 
-     * @return none
      */
     public function setRoleName($roleName)
     {
@@ -119,8 +117,6 @@ class Role
      * Sets the role OS version.
      * 
      * @param string $osVersion The role OS version.
-     * 
-     * @return none
      */
     public function setOsVersion($osVersion)
     {

@@ -45,11 +45,11 @@ class XmlRoleEnvironmentDataDeserializer
     /**
      * Deserializes the role environment data.
      * 
-     * @param IInputChannel $inputChannel The input Channel.
+     * @param resource $inputChannel The input Channel.
      * 
      * @return RoleEnvironmentData
      */
-    public function deserialize($inputChannel)
+    public function deserialize(resource $inputChannel)
     {
         $document = stream_get_contents($inputChannel);
 
@@ -157,7 +157,9 @@ class XmlRoleEnvironmentDataDeserializer
      * 
      * @return array
      */
-    private function _translateRoles($environmentInfo, $currentInstance,
+    private function _translateRoles(
+        $environmentInfo,
+        RoleInstance $currentInstance,
         $currentRole
     ) {
         $rolesMap = array();

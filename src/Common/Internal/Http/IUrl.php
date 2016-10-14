@@ -60,8 +60,6 @@ interface IUrl
      * 
      * @param string $key   query parameter name.
      * @param string $value query value.
-     * 
-     * @return none.
      */
     public function setQueryVariable($key, $value);
 
@@ -76,8 +74,6 @@ interface IUrl
      * Sets url path.
      * 
      * @param string $urlPath url path to set.
-     * 
-     * @return none.
      */
     public function setUrlPath($urlPath);
 
@@ -85,8 +81,6 @@ interface IUrl
      * Appends url path.
      * 
      * @param string $urlPath url path to append.
-     * 
-     * @return none.
      */
     public function appendUrlPath($urlPath);
 
@@ -100,7 +94,7 @@ interface IUrl
     /**
      * Makes deep copy from the current object.
      * 
-     * @return WindowsAzure\Common\Internal\Http\Url
+     * @return Url
      */
     public function __clone();
 
@@ -108,8 +102,6 @@ interface IUrl
      * Sets the query string to the specified variables in $array.
      * 
      * @param array $array key/value representation of query variables.
-     * 
-     * @return none.
      */
-    public function setQueryVariables($array);
+    public function setQueryVariables(array $array);
 }

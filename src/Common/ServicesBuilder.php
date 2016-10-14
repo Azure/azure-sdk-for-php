@@ -25,10 +25,19 @@
 
 namespace WindowsAzure\Common;
 
+use MicrosoftAzure\Storage\Blob\Internal\IBlob;
+use MicrosoftAzure\Storage\Queue\Internal\IQueue;
 use MicrosoftAzure\Storage\Table\Internal\AtomReaderWriter;
+use MicrosoftAzure\Storage\Table\Internal\IAtomReaderWriter;
+use MicrosoftAzure\Storage\Table\Internal\IMimeReaderWriter;
+use MicrosoftAzure\Storage\Table\Internal\ITable;
 use MicrosoftAzure\Storage\Table\Internal\MimeReaderWriter;
 use MicrosoftAzure\Storage\Common\ServicesBuilder as StorageServiceBuilder;
+use WindowsAzure\Common\Internal\Authentication\StorageAuthScheme;
+use WindowsAzure\Common\Internal\Http\IHttpClient;
+use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Serialization\ISerializer;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Http\HttpClient;
@@ -40,8 +49,12 @@ use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
 use WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme;
 use WindowsAzure\Common\Internal\ServiceManagementSettings;
 use WindowsAzure\Common\Internal\ServiceBusSettings;
+use WindowsAzure\MediaServices\Internal\IMediaServices;
+use WindowsAzure\ServiceBus\Internal\IServiceBus;
+use WindowsAzure\ServiceBus\Internal\IWrap;
 use WindowsAzure\ServiceBus\ServiceBusRestProxy;
 use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
+use WindowsAzure\ServiceManagement\Internal\IServiceManagement;
 use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
 use WindowsAzure\MediaServices\MediaServicesRestProxy;
 use WindowsAzure\Common\Internal\OAuthRestProxy;
@@ -70,7 +83,7 @@ class ServicesBuilder
     /**
      * Gets the HTTP client used in the REST services construction.
      *
-     * @return WindowsAzure\Common\Internal\Http\IHttpClient
+     * @return IHttpClient
      */
     protected function httpClient()
     {
@@ -80,7 +93,7 @@ class ServicesBuilder
     /**
      * Gets the serializer used in the REST services construction.
      *
-     * @return WindowsAzure\Common\Internal\Serialization\ISerializer
+     * @return ISerializer
      */
     protected function serializer()
     {
@@ -90,7 +103,7 @@ class ServicesBuilder
     /**
      * Gets the MIME serializer used in the REST services construction.
      *
-     * @return \WindowsAzure\Table\Internal\IMimeReaderWriter
+     * @return IMimeReaderWriter
      */
     protected function mimeSerializer()
     {
@@ -100,7 +113,7 @@ class ServicesBuilder
     /**
      * Gets the Atom serializer used in the REST services construction.
      *
-     * @return \WindowsAzure\Table\Internal\IAtomReaderWriter
+     * @return IAtomReaderWriter
      */
     protected function atomSerializer()
     {
@@ -113,7 +126,7 @@ class ServicesBuilder
      * @param string $accountName The account name.
      * @param string $accountKey  The account key.
      *
-     * @return \WindowsAzure\Common\Internal\Authentication\StorageAuthScheme
+     * @return StorageAuthScheme
      */
     protected function queueAuthenticationScheme($accountName, $accountKey)
     {
@@ -151,7 +164,7 @@ class ServicesBuilder
      *
      * @param string $wrapEndpointUri The WRAP endpoint uri.
      *
-     * @return WindowsAzure\ServiceBus\Internal\IWrap
+     * @return IWrap
      */
     protected function createWrapService($wrapEndpointUri)
     {
@@ -166,7 +179,7 @@ class ServicesBuilder
      *
      * @param string $connectionString The configuration connection string.
      *
-     * @return WindowsAzure\Queue\Internal\IQueue
+     * @return IQueue
      */
     public function createQueueService($connectionString)
     {
@@ -178,7 +191,7 @@ class ServicesBuilder
      *
      * @param string $connectionString The configuration connection string.
      *
-     * @return WindowsAzure\Blob\Internal\IBlob
+     * @return IBlob
      */
     public function createBlobService($connectionString)
     {
@@ -190,7 +203,7 @@ class ServicesBuilder
      *
      * @param string $connectionString The configuration connection string.
      *
-     * @return WindowsAzure\Table\Internal\ITable
+     * @return ITable
      */
     public function createTableService($connectionString)
     {
@@ -202,7 +215,7 @@ class ServicesBuilder
      *
      * @param string $connectionString The configuration connection string.
      *
-     * @return WindowsAzure\ServiceBus\Internal\IServiceBus
+     * @return IServiceBus
      */
     public function createServiceBusService($connectionString)
     {
@@ -239,7 +252,7 @@ class ServicesBuilder
      *
      * @param string $connectionString The configuration connection string.
      *
-     * @return WindowsAzure\ServiceManagement\Internal\IServiceManagement
+     * @return IServiceManagement
      */
     public function createServiceManagementService($connectionString)
     {
@@ -278,19 +291,12 @@ class ServicesBuilder
     /**
      * Builds a media services object.
      *
-     * @param WindowsAzure\Common\Internal\MediaServicesSettings $settings The media
-     *                                                                     services configuration settings.
+     * @param MediaServicesSettings $settings The media services configuration settings.
      *
-     * @return WindowsAzure\MediaServices\Internal\IMediaServices
+     * @return IMediaServices
      */
-    public function createMediaServicesService($settings)
+    public function createMediaServicesService(MediaServicesSettings $settings)
     {
-        Validate::isA(
-            $settings,
-            'WindowsAzure\Common\Internal\MediaServicesSettings',
-            'settings'
-        );
-
         $httpClient = new HttpClient();
         $serializer = $this->serializer();
         $uri = Utilities::tryAddUrlScheme(

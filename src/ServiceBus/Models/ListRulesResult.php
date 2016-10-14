@@ -54,8 +54,6 @@ class ListRulesResult extends Feed
      * Populates the properties with the response from the list rules request.
      * 
      * @param string $response The body of the response of the list rules request. 
-     * 
-     * @return none
      */
     public function parseXml($response)
     {
@@ -91,8 +89,6 @@ class ListRulesResult extends Feed
      * Sets the information of the rule. 
      * 
      * @param array $ruleInfos The information of the rule. 
-     * 
-     * @return none
      */
     public function setRuleInfos($ruleInfos)
     {

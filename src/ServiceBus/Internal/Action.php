@@ -72,8 +72,6 @@ class Action
      *
      * @param string $key   The key of the attribute.
      * @param string $value The value of the attribute.
-     * 
-     * @return none
      */
     protected function setAttribute($key, $value)
     {

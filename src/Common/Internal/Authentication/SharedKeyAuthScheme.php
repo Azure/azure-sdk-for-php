@@ -52,8 +52,7 @@ class SharedKeyAuthScheme extends StorageAuthScheme
      * @param string $accountName storage account name.
      * @param string $accountKey  storage account primary or secondary key.
      * 
-     * @return 
-     * WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme
+     * @return SharedKeyAuthScheme
      */
     public function __construct($accountName, $accountKey)
     {

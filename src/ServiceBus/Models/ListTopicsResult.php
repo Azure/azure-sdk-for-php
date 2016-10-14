@@ -53,9 +53,7 @@ class ListTopicsResult extends Feed
     /**
      * Populates the properties with a the response from the list topics request.
      * 
-     * @param string $response The body of the response of the list topics request. 
-     * 
-     * @return none
+     * @param string $response The body of the response of the list topics request.
      */
     public function parseXml($response)
     {
@@ -90,10 +88,8 @@ class ListTopicsResult extends Feed
      * Sets the topic information.
      *
      * @param array $topicInfos The information of the topics. 
-     * 
-     * @return none
      */
-    public function setTopicInfos($topicInfos)
+    public function setTopicInfos(array $topicInfos)
     {
         $this->_topicInfos = $topicInfos;
     }

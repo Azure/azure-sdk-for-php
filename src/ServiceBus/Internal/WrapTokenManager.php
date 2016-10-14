@@ -86,7 +86,7 @@ class WrapTokenManager
      * @param string $wrapPassword  The password of the WRAP service.
      * @param IWrap  $wrapRestProxy The WRAP service REST proxy.
      */
-    public function __construct($wrapUri, $wrapName, $wrapPassword, $wrapRestProxy)
+    public function __construct($wrapUri, $wrapName, $wrapPassword, IWrap $wrapRestProxy)
     {
         Validate::isString($wrapUri, 'wrapUri');
         Validate::isString($wrapName, 'wrapName');
@@ -141,9 +141,7 @@ class WrapTokenManager
     }
 
     /** 
-     * Removes the expired WRAP access tokens. 
-     * 
-     * @return none
+     * Removes the expired WRAP access tokens.
      */
     private function _sweepExpiredTokens()
     {

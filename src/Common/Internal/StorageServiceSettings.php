@@ -153,8 +153,6 @@ class StorageServiceSettings extends ServiceSettings
 
     /**
      * Initializes static members of the class.
-     * 
-     * @return none
      */
     protected static function init()
     {

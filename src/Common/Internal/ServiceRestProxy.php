@@ -159,10 +159,10 @@ class ServiceRestProxy extends RestProxy
     /**
      * Adds optional header to headers if set.
      *
-     * @param array           $headers         The array of request headers.
+     * @param array $headers The array of request headers.
      * @param AccessCondition $accessCondition The access condition object.
-     *
      * @return array
+     * @throws \Exception
      */
     public function addOptionalSourceAccessConditionHeader(
         array $headers,
@@ -222,7 +222,6 @@ class ServiceRestProxy extends RestProxy
         $key,
         $value
     ) {
-        Validate::isArray($postParameters, 'postParameters');
         $postParameters[$key] = $value;
 
         return $postParameters;
@@ -237,7 +236,6 @@ class ServiceRestProxy extends RestProxy
      */
     public function groupQueryValues(array $values)
     {
-        Validate::isArray($values, 'values');
         $joined = Resources::EMPTY_STRING;
 
         foreach ($values as $value) {
@@ -328,9 +326,7 @@ class ServiceRestProxy extends RestProxy
     /**
      * Validates the provided metadata array.
      *
-     * @param mix $metadata The metadata array.
-     *
-     * @return none
+     * @param array|null $metadata The metadata array.
      */
     public function validateMetadata($metadata)
     {

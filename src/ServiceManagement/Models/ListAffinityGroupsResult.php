@@ -86,10 +86,8 @@ class ListAffinityGroupsResult
      * Sets affinity groups.
      * 
      * @param array $affinityGroups The affinity groups.
-     * 
-     * @return none
      */
-    public function setAffinityGroups($affinityGroups)
+    public function setAffinityGroups(array $affinityGroups)
     {
         $this->_affinityGroups = $affinityGroups;
     }

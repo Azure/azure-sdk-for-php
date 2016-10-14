@@ -46,11 +46,9 @@ class XmlCurrentStateSerializer
      * Serializes the current state.
      * 
      * @param CurrentState  $state        The current state.
-     * @param IOutputStream $outputStream The output stream.
-     * 
-     * @return none
+     * @param resource      $outputStream The output stream.
      */
-    public function serialize($state, $outputStream)
+    public function serialize(CurrentState $state, resource $outputStream)
     {
         $statusLeaseInfo = array(
             'StatusLease' => array(

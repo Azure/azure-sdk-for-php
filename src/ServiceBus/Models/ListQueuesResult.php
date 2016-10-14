@@ -54,8 +54,6 @@ class ListQueuesResult extends Feed
      * Populates the properties with the response from the list queues request.
      * 
      * @param string $response The body of the response of the list queues request. 
-     * 
-     * @return none
      */
     public function parseXml($response)
     {
@@ -90,8 +88,6 @@ class ListQueuesResult extends Feed
      * Sets the information of the queue. 
      * 
      * @param array $queueInfos The information of the queue. 
-     * 
-     * @return none
      */
     public function setQueueInfos($queueInfos)
     {

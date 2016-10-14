@@ -26,6 +26,7 @@
 namespace WindowsAzure\ServiceManagement\Internal;
 
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Serialization\ISerializer;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 
@@ -117,8 +118,6 @@ class Service
      * Sets the name.
      * 
      * @param string $name The name.
-     * 
-     * @return none
      */
     public function setName($name)
     {
@@ -139,8 +138,6 @@ class Service
      * Sets the label.
      * 
      * @param string $label The label.
-     * 
-     * @return none
      */
     public function setLabel($label)
     {
@@ -161,8 +158,6 @@ class Service
      * Sets the description.
      * 
      * @param string $description The description.
-     * 
-     * @return none
      */
     public function setDescription($description)
     {
@@ -183,8 +178,6 @@ class Service
      * Sets the location.
      * 
      * @param string $location The location.
-     * 
-     * @return none
      */
     public function setLocation($location)
     {
@@ -196,8 +189,6 @@ class Service
      * 
      * @param string $key   The property name.
      * @param string $value The property value.
-     * 
-     * @return none
      */
     public function addSerializationProperty($key, $value)
     {
@@ -252,7 +243,7 @@ class Service
      * 
      * @throws \InvalidArgumentException
      */
-    public function serialize($serializer)
+    public function serialize(ISerializer $serializer)
     {
         $serialized = Resources::EMPTY_STRING;
 

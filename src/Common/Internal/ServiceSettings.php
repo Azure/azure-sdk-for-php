@@ -53,9 +53,7 @@ abstract class ServiceSettings
      * Throws an exception if the connection string format does not match any of the
      * available formats.
      * 
-     * @param type $connectionString The invalid formatted connection string.
-     * 
-     * @return none
+     * @param string $connectionString The invalid formatted connection string.
      * 
      * @throws \RuntimeException
      */
@@ -249,9 +247,6 @@ abstract class ServiceSettings
                     implode("\n", $validValues)
                 )
             );
-
-            // $settingValue is missing in valid values set, fail.
-            return false;
         };
 
         return self::settingWithFunc($name, $predicate);

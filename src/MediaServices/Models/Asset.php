@@ -159,9 +159,9 @@ class Asset
      *
      * @param array $options Array containing values for object properties
      *
-     * @return WindowsAzure\MediaServices\Models\Asset
+     * @return Asset
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         Validate::notNull($options['Options'], 'options[Options]');
 
@@ -175,8 +175,6 @@ class Asset
      * Create asset.
      *
      * @param int $options Asset encrytion options.
-     *
-     * @return none
      */
     public function __construct($options)
     {
@@ -187,10 +185,8 @@ class Asset
      * Fill asset from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return none
      */
-    public function fromArray($options)
+    public function fromArray(array $options)
     {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
@@ -278,8 +274,6 @@ class Asset
      * Set "Options".
      *
      * @param int $value Options
-     *
-     * @return none
      */
     public function setOptions($value)
     {
@@ -300,8 +294,6 @@ class Asset
      * Set "Name".
      *
      * @param string $value Name
-     *
-     * @return none
      */
     public function setName($value)
     {
@@ -322,8 +314,6 @@ class Asset
      * Set "Alternate id".
      *
      * @param string $value Alternate id
-     *
-     * @return none
      */
     public function setAlternateId($value)
     {

@@ -92,10 +92,8 @@ class ListLocationsResult
      * Sets locations.
      * 
      * @param array $locations The locations.
-     * 
-     * @return none
      */
-    public function setLocations($locations)
+    public function setLocations(array $locations)
     {
         $this->_locations = $locations;
     }

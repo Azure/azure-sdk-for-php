@@ -78,8 +78,6 @@ class SqlRuleAction extends Action
      * Sets the SQL expression. 
      * 
      * @param string $sqlExpression Sets the SQL expression. 
-     * 
-     * @return none
      */
     public function setSqlExpression($sqlExpression)
     {
@@ -100,8 +98,6 @@ class SqlRuleAction extends Action
      * Sets the compatibility level.
      * 
      * @param string $compatibilityLevel The level of compatibility.
-     *
-     * @return none
      */
     public function setCompatibilityLevel($compatibilityLevel)
     {

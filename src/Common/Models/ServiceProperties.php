@@ -51,9 +51,9 @@ class ServiceProperties
      *
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return WindowsAzure\Common\Models\ServiceProperties.
+     * @return ServiceProperties
      */
-    public static function create($parsedResponse)
+    public static function create(array $parsedResponse)
     {
         $result = new self();
         $result->setLogging(Logging::create($parsedResponse['Logging']));
@@ -65,7 +65,7 @@ class ServiceProperties
     /**
      * Gets logging element.
      *
-     * @return WindowsAzure\Common\Models\Logging.
+     * @return Logging.
      */
     public function getLogging()
     {
@@ -75,11 +75,9 @@ class ServiceProperties
     /**
      * Sets logging element.
      *
-     * @param WindowsAzure\Common\Models\Logging $logging new element.
-     * 
-     * @return none.
+     * @param Logging $logging new element.
      */
-    public function setLogging($logging)
+    public function setLogging(Logging $logging)
     {
         $this->_logging = clone $logging;
     }
@@ -87,7 +85,7 @@ class ServiceProperties
     /**
      * Gets metrics element.
      *
-     * @return WindowsAzure\Common\Models\Metrics.
+     * @return Metrics.
      */
     public function getMetrics()
     {
@@ -97,11 +95,9 @@ class ServiceProperties
     /**
      * Sets metrics element.
      *
-     * @param WindowsAzure\Common\Models\Metrics $metrics new element.
-     * 
-     * @return none.
+     * @param Metrics $metrics new element.
      */
-    public function setMetrics($metrics)
+    public function setMetrics(Metrics $metrics)
     {
         $this->_metrics = clone $metrics;
     }

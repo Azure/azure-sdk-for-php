@@ -30,6 +30,8 @@ use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
+use WindowsAzure\ServiceBus\Internal\Action;
+use WindowsAzure\ServiceBus\Internal\Filter;
 
 /**
  * The information of a rule.
@@ -89,8 +91,6 @@ class RuleInfo
      * ENTRY schema. 
      * 
      * @param string $xmlString An XML string representing a rule info instance.
-     * 
-     * @return none
      */
     public function parseXml($xmlString)
     {
@@ -106,11 +106,9 @@ class RuleInfo
     /**
      * Writes an XML string representing the rule info instance. 
      * 
-     * @param XMLWriter $xmlWriter The XML writer. 
-     * 
-     * @return none
+     * @param \XMLWriter $xmlWriter The XML writer.
      */
-    public function writeXml($xmlWriter)
+    public function writeXml(\XMLWriter $xmlWriter)
     {
         $content = null;
         if (!is_null($this->_ruleDescription)) {
@@ -139,8 +137,6 @@ class RuleInfo
      * Sets the entry.
      *
      * @param Entry $entry The entry of the queue info.
-     * 
-     * @return none
      */
     public function setEntry($entry)
     {
@@ -161,8 +157,6 @@ class RuleInfo
      * Sets the title. 
      * 
      * @param string $title The title of the rule info.
-     * 
-     * @return none
      */
     public function setTitle($title)
     {
@@ -182,11 +176,9 @@ class RuleInfo
     /**
      * Sets the filter. 
      * 
-     * @param Filter $filter The filter. 
-     *
-     * @return none
+     * @param Filter $filter The filter.
      */
-    public function setFilter($filter)
+    public function setFilter(Filter $filter)
     {
         $this->_ruleDescription->setFilter($filter);
     }
@@ -204,11 +196,9 @@ class RuleInfo
     /**
      * Sets the action. 
      * 
-     * @param Action $action The action. 
-     * 
-     * @return none
+     * @param Action $action The action.
      */
-    public function setAction($action)
+    public function setAction(Action $action)
     {
         $this->_ruleDescription->setAction($action);
     }
@@ -227,8 +217,6 @@ class RuleInfo
      * Sets the rule description. 
      * 
      * @param RuleDescription $ruleDescription The description of the rule. 
-     * 
-     * @return none
      */
     public function setRuleDescription($ruleDescription)
     {
@@ -239,8 +227,6 @@ class RuleInfo
      * With correlation ID filter. 
      * 
      * @param string $correlationId The ID of the correlation.
-     * 
-     * @return none
      */
     public function withCorrelationFilter($correlationId)
     {
@@ -253,8 +239,6 @@ class RuleInfo
      * With sql expression filter. 
      * 
      * @param string $sqlExpression The SQL expression of the filter. 
-     * 
-     * @return none
      */
     public function withSqlFilter($sqlExpression)
     {
@@ -266,8 +250,6 @@ class RuleInfo
 
     /**
      * With true filter. 
-     * 
-     * @return none
      */
     public function withTrueFilter()
     {
@@ -277,8 +259,6 @@ class RuleInfo
 
     /**
      * With false filter. 
-     * 
-     * @return none
      */
     public function withFalseFilter()
     {
@@ -288,8 +268,6 @@ class RuleInfo
 
     /**
      * With empty rule action. 
-     * 
-     * @return none
      */
     public function withEmptyRuleAction()
     {
@@ -302,8 +280,6 @@ class RuleInfo
      * 
      * @param string $sqlExpression The SQL expression 
      *                              of the rule action.
-     *
-     * @return none
      */
     public function withSqlRuleAction($sqlExpression)
     {
@@ -327,8 +303,6 @@ class RuleInfo
      * Sets the name of the rule description. 
      * 
      * @param string $name The name of the rule description. 
-     * 
-     * @return none
      */
     public function setName($name)
     {

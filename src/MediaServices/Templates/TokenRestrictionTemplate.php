@@ -89,6 +89,7 @@ class TokenRestrictionTemplate
 
     /**
      * Create TokenRestrictionTemplate.
+     * @param null $type
      */
     public function __construct($type = null)
     {

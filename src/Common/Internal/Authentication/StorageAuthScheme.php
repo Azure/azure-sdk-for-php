@@ -52,8 +52,7 @@ abstract class StorageAuthScheme implements IAuthScheme
      * @param string $accountName storage account name.
      * @param string $accountKey  storage account primary or secondary key.
      *
-     * @return
-     * WindowsAzure\Common\Internal\Authentication\StorageAuthScheme
+     * @return StorageAuthScheme
      */
     public function __construct($accountName, $accountKey)
     {

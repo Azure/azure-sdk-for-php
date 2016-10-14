@@ -109,10 +109,8 @@ class HostedService extends WindowsAzureService
      * Sets the deployments array.
      * 
      * @param array $deployments The deployments array.
-     * 
-     * @return none
      */
-    public function setDeployments($deployments)
+    public function setDeployments(array $deployments)
     {
         $this->_deployments = $deployments;
     }

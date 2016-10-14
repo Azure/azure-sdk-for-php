@@ -58,10 +58,8 @@ class Role
      * @param string $name      The role name.
      * @param array  $instances The role instances.
      */
-    public function __construct($name, $instances)
+    public function __construct($name, array $instances)
     {
-        Validate::isArray($instances, 'instances');
-
         $this->_name = $name;
         $this->_instances = $instances;
     }

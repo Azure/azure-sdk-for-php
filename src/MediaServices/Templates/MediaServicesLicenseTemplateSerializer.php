@@ -46,7 +46,7 @@ class MediaServicesLicenseTemplateSerializer
     /**
      * Deserialize a PlayReadyLicenseResponseTemplate xml into a PlayReadyLicenseResponseTemplate object.
      *
-     * @param string $options Array containing values for object properties
+     * @param string $template Array containing values for object properties
      *
      * @return PlayReadyLicenseResponseTemplate
      */
@@ -102,8 +102,9 @@ class MediaServicesLicenseTemplateSerializer
 
     /**
      * @param PlayReadyLicenseResponseTemplate $template
+     * @return bool
      */
-    private static function ValidateLicenseResponseTemplate($template)
+    private static function ValidateLicenseResponseTemplate(PlayReadyLicenseResponseTemplate $template)
     {
         // Validate the PlayReadyLicenseResponseTemplate has at least one license
         if (count($template->getLicenseTemplates()) <= 0) {

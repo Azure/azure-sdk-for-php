@@ -49,6 +49,7 @@ class ScmsRestriction
 
     /**
      * Create ScmsRestriction.
+     * @param $configurationData
      */
     public function __construct($configurationData)
     {
@@ -77,7 +78,7 @@ class ScmsRestriction
     }
 
     /**
-     * @param int $value ConfigurationData
+     * @param int $configurationData ConfigurationData
      */
     public static function verifyTwoBitConfigurationData($configurationData)
     {

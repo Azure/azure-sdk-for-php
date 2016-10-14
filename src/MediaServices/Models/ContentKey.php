@@ -118,9 +118,9 @@ class ContentKey
      *
      * @param array $options Array containing values for object properties
      *
-     * @return WindowsAzure\MediaServices\Models\ContentKey
+     * @return ContentKey
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         $contentKey = new self();
         $contentKey->fromArray($options);
@@ -130,8 +130,6 @@ class ContentKey
 
     /**
      * Create contentKey.
-     *
-     * @return none
      */
     public function __construct()
     {
@@ -142,10 +140,8 @@ class ContentKey
      * Fill contentKey from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return none
      */
-    public function fromArray($options)
+    public function fromArray(array $options)
     {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
@@ -227,8 +223,6 @@ class ContentKey
      * Set "Checksum".
      *
      * @param string $value Checksum
-     *
-     * @return none
      */
     public function setChecksum($value)
     {
@@ -249,8 +243,6 @@ class ContentKey
      * Set "ProtectionKeyType".
      *
      * @param int $value ProtectionKeyType
-     *
-     * @return none
      */
     public function setProtectionKeyType($value)
     {
@@ -271,8 +263,6 @@ class ContentKey
      * Set "ProtectionKeyId".
      *
      * @param string $value ProtectionKeyId
-     *
-     * @return none
      */
     public function setProtectionKeyId($value)
     {
@@ -293,8 +283,6 @@ class ContentKey
      * Set "Name".
      *
      * @param string $value Name
-     *
-     * @return none
      */
     public function setName($value)
     {
@@ -315,8 +303,6 @@ class ContentKey
      * Set "EncryptedContentKey".
      *
      * @param string $value EncryptedContentKey
-     *
-     * @return none
      */
     public function setEncryptedContentKey($value)
     {
@@ -337,8 +323,6 @@ class ContentKey
      * Set "ContentKeyType".
      *
      * @param int $value ContentKeyType
-     *
-     * @return none
      */
     public function setContentKeyType($value)
     {
@@ -379,8 +363,6 @@ class ContentKey
      * Set "ContentKey id".
      *
      * @param string $value ContentKey id
-     *
-     * @return none
      */
     public function setId($value)
     {
@@ -392,8 +374,6 @@ class ContentKey
      *
      * @param string $aesKey        Content key to encrypt
      * @param string $protectionKey Protection key (public key) from WAMS
-     *
-     * @return none
      */
     private function _generateEncryptedContentKey($aesKey, $protectionKey)
     {
@@ -414,8 +394,7 @@ class ContentKey
      * Generate checksum for content key.
      *
      * @param string $aesKey Content key
-     *
-     * @return none
+     * @param bool $usePadding
      */
     private function _generateChecksum($aesKey, $usePadding = FALSE)
     {
@@ -434,7 +413,10 @@ class ContentKey
     }
 
     /**
-     * checksum padding 
+     * checksum padding
+     * @param string $text
+     * @param int $blocksize
+     * @return string
      */
     private function pkcs5_pad ($text, $blocksize) { 
         $pad = $blocksize - (strlen($text) % $blocksize); 
@@ -448,8 +430,6 @@ class ContentKey
      * @param string $value         Content key
      * @param string $protectionKey Protection key (public key) from WAMS
      * @param boolean $usePadding   Set to true to automatically use padding while is generating the checksum
-     *
-     * @return none
      */
     public function setContentKey($value, $protectionKey, $usePadding = FALSE)   
     {
@@ -472,8 +452,6 @@ class ContentKey
      * Set "AuthorizationPolicyId".
      *
      * @param string $value AuthorizationPolicyId id
-     *
-     * @return none
      */
     public function setAuthorizationPolicyId($value)
     {

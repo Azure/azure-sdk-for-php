@@ -200,8 +200,6 @@ class ConnectionStringParser
 
     /**
      * Skips whitespaces at the current position.
-     * 
-     * @return none
      */
     private function _skipWhiteSpaces()
     {
@@ -329,9 +327,7 @@ class ConnectionStringParser
      * Skips specified operator.
      * 
      * @param string $operatorChar The operator character.
-     * 
-     * @return none
-     * 
+     *
      * @throws \RuntimeException
      */
     private function _skipOperator($operatorChar)

@@ -61,8 +61,6 @@ class CreateAffinityGroupOptions
      * Sets the description.
      * 
      * @param string $description The description.
-     * 
-     * @return none
      */
     public function setDescription($description)
     {

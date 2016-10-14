@@ -55,8 +55,6 @@ class ListSubscriptionsResult extends Feed
      * 
      * @param string $response The body of the response of the list 
      *                         subscriptions request. 
-     * 
-     * @return none
      */
     public function parseXml($response)
     {
@@ -92,10 +90,8 @@ class ListSubscriptionsResult extends Feed
      * 
      * @param array $subscriptionInfos The information of the
      *                                 subscription.
-     * 
-     * @return none
      */
-    public function setSubscriptionInfos($subscriptionInfos)
+    public function setSubscriptionInfos(array $subscriptionInfos)
     {
         $this->_subscriptionInfos = $subscriptionInfos;
     }

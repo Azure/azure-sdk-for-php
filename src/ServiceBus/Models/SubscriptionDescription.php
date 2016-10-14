@@ -117,7 +117,7 @@ class SubscriptionDescription
      * @param string $subscriptionDescriptionXml An XML based subscription
      *                                           description.
      *
-     * @return none
+     * @return SubscriptionDescription
      */
     public static function create($subscriptionDescriptionXml)
     {
@@ -221,8 +221,6 @@ class SubscriptionDescription
      * Sets the lock duration.
      *
      * @param string $lockDuration The duration of the lock. 
-     * 
-     * @return none
      */
     public function setLockDuration($lockDuration)
     {
@@ -243,8 +241,6 @@ class SubscriptionDescription
      * Sets the requires session.
      * 
      * @param bool $requiresSession The requires session. 
-     * 
-     * @return none
      */
     public function setRequiresSession($requiresSession)
     {
@@ -265,8 +261,6 @@ class SubscriptionDescription
      * Sets default message time to live. 
      * 
      * @param string $defaultMessageTimeToLive The default message time to live. 
-     * 
-     * @return none
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {
@@ -288,8 +282,6 @@ class SubscriptionDescription
      * 
      * @param string $deadLetteringOnMessageExpiration The dead lettering 
      *                                                 on message expiration.
-     * 
-     * @return none
      */
     public function setDeadLetteringOnMessageExpiration(
         $deadLetteringOnMessageExpiration
@@ -312,8 +304,6 @@ class SubscriptionDescription
      * 
      * @param string $deadLetteringOnFilterEvaluationExceptions Sets dead lettering 
      *                                                          on filter evaluation exceptions. 
-     * 
-     * @return none
      */
     public function setDeadLetteringOnFilterEvaluationExceptions(
         $deadLetteringOnFilterEvaluationExceptions
@@ -326,7 +316,7 @@ class SubscriptionDescription
     /**
      * Gets the default rule description. 
      * 
-     * @return RuleDescription
+     * @return string
      */
     public function getDefaultRuleDescription()
     {
@@ -336,9 +326,7 @@ class SubscriptionDescription
     /**
      * Sets the default rule description.
      * 
-     * @param string $defaultRuleDescription The default rule description. 
-     *
-     * @return none
+     * @param string $defaultRuleDescription The default rule description.
      */
     public function setDefaultRuleDescription($defaultRuleDescription)
     {
@@ -359,8 +347,6 @@ class SubscriptionDescription
      * Sets the count of the message.
      * 
      * @param string $messageCount The count of the message. 
-     *
-     * @return none
      */
     public function setMessageCount($messageCount)
     {
@@ -381,8 +367,6 @@ class SubscriptionDescription
      * Sets maximum delivery count. 
      * 
      * @param int $maxDeliveryCount The maximum delivery count. 
-     *
-     * @return none
      */
     public function setMaxDeliveryCount($maxDeliveryCount)
     {
@@ -403,8 +387,6 @@ class SubscriptionDescription
      * Sets enable batched operations. 
      * 
      * @param bool $enableBatchedOperations Enable batched operations. 
-     * 
-     * @return none
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {

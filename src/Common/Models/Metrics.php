@@ -64,7 +64,7 @@ class Metrics
     private $_includeAPIs;
 
     /**
-     * @var WindowsAzure\Common\Models\RetentionPolicy
+     * @var RetentionPolicy
      */
     private $_retentionPolicy;
 
@@ -73,9 +73,9 @@ class Metrics
      * 
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return WindowsAzure\Common\Models\Metrics
+     * @return Metrics
      */
-    public static function create($parsedResponse)
+    public static function create(array $parsedResponse)
     {
         $result = new self();
         $result->setVersion($parsedResponse['Version']);
@@ -95,7 +95,7 @@ class Metrics
     /**
      * Gets retention policy.
      * 
-     * @return WindowsAzure\Common\Models\RetentionPolicy
+     * @return RetentionPolicy
      */
     public function getRetentionPolicy()
     {
@@ -106,10 +106,8 @@ class Metrics
      * Sets retention policy.
      * 
      * @param RetentionPolicy $policy object to use
-     * 
-     * @return none.
      */
-    public function setRetentionPolicy($policy)
+    public function setRetentionPolicy(RetentionPolicy $policy)
     {
         $this->_retentionPolicy = $policy;
     }
@@ -126,10 +124,8 @@ class Metrics
 
     /**
      * Sets include APIs.
-     * 
-     * @param $bool $includeAPIs value to use.
-     * 
-     * @return none.
+     *
+     * @param bool $includeAPIs value to use.
      */
     public function setIncludeAPIs($includeAPIs)
     {
@@ -150,8 +146,6 @@ class Metrics
      * Sets enabled.
      * 
      * @param bool $enabled value to use.
-     * 
-     * @return none.
      */
     public function setEnabled($enabled)
     {
@@ -172,8 +166,6 @@ class Metrics
      * Sets version.
      * 
      * @param string $version new value.
-     * 
-     * @return none.
      */
     public function setVersion($version)
     {

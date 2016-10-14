@@ -108,8 +108,6 @@ class ServiceBusSettings extends ServiceSettings
 
     /**
      * Initializes static members of the class.
-     * 
-     * @return none
      */
     protected static function init()
     {
@@ -139,11 +137,12 @@ class ServiceBusSettings extends ServiceSettings
 
     /**
      * Creates new Service Bus settings instance.
-     * 
+     *
      * @param string $serviceBusEndpoint The Service Bus endpoint uri.
-     * @param string $namespace          The service namespace.
-     * @param string $wrapName           The wrap name.
-     * @param string $wrapPassword       The wrap password.
+     * @param string $namespace The service namespace.
+     * @param $wrapEndpointUri
+     * @param string $wrapName The wrap name.
+     * @param string $wrapPassword The wrap password.
      */
     public function __construct(
         $serviceBusEndpoint,

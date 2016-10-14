@@ -103,8 +103,6 @@ class AtomLink extends AtomBase
      * Parse an ATOM Link xml. 
      * 
      * @param string $xmlString an XML based string of ATOM Link.
-     * 
-     * @return none
      */
     public function parseXml($xmlString)
     {
@@ -159,8 +157,6 @@ class AtomLink extends AtomBase
      * Sets the href of the link.
      * 
      * @param string $href The href of the link.
-     *
-     * @return none
      */
     public function setHref($href)
     {
@@ -181,8 +177,6 @@ class AtomLink extends AtomBase
      * Sets the rel of the link. 
      * 
      * @param string $rel The rel of the atomLink.
-     *
-     * @return none
      */
     public function setRel($rel)
     {
@@ -203,8 +197,6 @@ class AtomLink extends AtomBase
      * Sets the type of the link.
      * 
      * @param string $type The type of the link. 
-     *
-     * @return none
      */
     public function setType($type)
     {
@@ -225,8 +217,6 @@ class AtomLink extends AtomBase
      * Sets the language of the href. 
      * 
      * @param string $hrefLang The language of the href.
-     *
-     * @return none
      */
     public function setHrefLang($hrefLang)
     {
@@ -247,8 +237,6 @@ class AtomLink extends AtomBase
      * Sets the title of the link. 
      * 
      * @param string $title The title of the link. 
-     *
-     * @return none
      */
     public function setTitle($title)
     {
@@ -269,8 +257,6 @@ class AtomLink extends AtomBase
      * Sets the length of the link. 
      * 
      * @param string $length The length of the link. 
-     *
-     * @return none
      */
     public function setLength($length)
     {
@@ -291,8 +277,6 @@ class AtomLink extends AtomBase
      * Sets the undefined content. 
      * 
      * @param string $undefinedContent The undefined content. 
-     *
-     * @return none
      */
     public function setUndefinedContent($undefinedContent)
     {
@@ -303,13 +287,11 @@ class AtomLink extends AtomBase
      * Writes an XML representing the ATOM link item.
      * 
      * @param \XMLWriter $xmlWriter The xml writer.
-     *
-     * @return none
      */
-    public function writeXml($xmlWriter)
+    public function writeXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->startElementNS(
+        $xmlWriter->startElementNs(
             'atom',
             Resources::LINK,
             Resources::ATOM_NAMESPACE
@@ -322,10 +304,8 @@ class AtomLink extends AtomBase
      * Writes the inner XML representing the ATOM link item.
      * 
      * @param \XMLWriter $xmlWriter The xml writer.
-     * 
-     * @return none
      */
-    public function writeInnerXml($xmlWriter)
+    public function writeInnerXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
 

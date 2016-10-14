@@ -59,16 +59,16 @@ class ChannelInput
     /**
      * ChannelInput AccessControl.
      *
-     * @var mixing
+     * @var ChannelInputAccessControl
      */
     private $_accessControl;
 
     /**
      * ChannelInput Endpoints.
      *
-     * @var mixing
+     * @var array
      */
-    private $_endpoints;
+    private $_endpoints = array();
 
     /**
      * Create ChannelInput from array.
@@ -83,14 +83,6 @@ class ChannelInput
         $operation->fromArray($options);
 
         return $operation;
-    }
-
-    /**
-     * Create ChannelInput.
-     */
-    public function __construct()
-    {
-        $this->_endpoints = array();
     }
 
     /**
@@ -126,7 +118,7 @@ class ChannelInput
     /**
      * Get the channel input AccessControl.
      *
-     * @return mixing AccessControl
+     * @return ChannelInputAccessControl AccessControl
      */
     public function getAccessControl()
     {
@@ -136,9 +128,9 @@ class ChannelInput
     /**
      * Set the channel input AccessControl.
      *
-     * @param mixing $value AccessControl 
+     * @param ChannelInputAccessControl $value AccessControl
      */
-    public function setAccessControl($value)
+    public function setAccessControl(ChannelInputAccessControl $value)
     {
         $this->_accessControl = $value;
     }
@@ -178,7 +170,7 @@ class ChannelInput
     /**
      * Set the channel input StreamingProtocol.
      *
-     * @param mixing $value StreamingProtocol 
+     * @param string $value StreamingProtocol
      */
     public function setStreamingProtocol($value)
     {
@@ -188,7 +180,7 @@ class ChannelInput
     /**
      * Get the channel input Endpoints.
      *
-     * @return mixing Endpoints
+     * @return array Endpoints
      */
     public function getEndpoints()
     {

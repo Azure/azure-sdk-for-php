@@ -26,6 +26,11 @@
 namespace WindowsAzure\ServiceRuntime;
 
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\ServiceRuntime\Internal\CurrentState;
+use WindowsAzure\ServiceRuntime\Internal\GoalState;
+use WindowsAzure\ServiceRuntime\Internal\IRuntimeClient;
+use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData;
+use WindowsAzure\ServiceRuntime\Internal\RoleInstance;
 use WindowsAzure\ServiceRuntime\Internal\RuntimeKernel;
 use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentNotAvailableException;
 use WindowsAzure\ServiceRuntime\Internal\ChannelNotAvailableException;
@@ -92,17 +97,17 @@ class RoleEnvironment
     private static $_currentEnvironmentData;
 
     /**
-     * @var array
+     * @var callable[]
      */
     private static $_changingListeners;
 
     /**
-     * @var array
+     * @var callable[]
      */
     private static $_changedListeners;
 
     /**
-     * @var array
+     * @var callable[]
      */
     private static $_stoppingListeners;
 
@@ -117,7 +122,7 @@ class RoleEnvironment
     private static $_versionEndpoint;
 
     /**
-     * @var mix
+     * @var mixed
      */
     private static $_tracking;
 
@@ -125,8 +130,6 @@ class RoleEnvironment
      * Initializes the role environment.
      * 
      * @static
-     * 
-     * @return none
      */
     public static function init()
     {
@@ -154,13 +157,12 @@ class RoleEnvironment
 
     /**
      * Initializes the runtime client.
-     * 
+     *
      * @param bool $keepOpen Boolean value indicating if the connection
      *                       should remain open.
-     * 
+     *
+     * @throws RoleEnvironmentNotAvailableException
      * @static
-     * 
-     * @return none
      */
     private static function _initialize($keepOpen = false)
     {
@@ -205,8 +207,6 @@ class RoleEnvironment
      * This method is blocking and can/should be called in a separate fork.
      * 
      * @static
-     * 
-     * @return none
      */
     public static function trackChanges()
     {
@@ -251,8 +251,6 @@ class RoleEnvironment
      * @param GoalState $newGoalState The new goal state.
      * 
      * @static
-     * 
-     * @return none
      */
     private static function _processGoalStateChange($newGoalState)
     {
@@ -280,10 +278,8 @@ class RoleEnvironment
      * @param CurrentState $last         The last state.
      * 
      * @static
-     * 
-     * @return none
      */
-    private static function _acceptLatestIncarnation($newGoalState, $last)
+    private static function _acceptLatestIncarnation(GoalState $newGoalState, CurrentState $last)
     {
         if (!is_null($last) && $last instanceof AcquireCurrentState) {
             $acquireState = $last;
@@ -305,8 +301,6 @@ class RoleEnvironment
      * Raises a stopping event.
      * 
      * @static
-     * 
-     * @return none
      */
     private static function _raiseStoppingEvent()
     {
@@ -321,10 +315,8 @@ class RoleEnvironment
      * @param array $changes The changes.
      * 
      * @static
-     * 
-     * @return none
      */
-    private static function _raiseChangingEvent($changes)
+    private static function _raiseChangingEvent(array $changes)
     {
         foreach (self::$_changingListeners as $callback) {
             call_user_func($callback, $changes);
@@ -337,10 +329,8 @@ class RoleEnvironment
      * @param array $changes The changes.
      * 
      * @static
-     * 
-     * @return none
      */
-    private static function _raiseChangedEvent($changes)
+    private static function _raiseChangedEvent(array $changes)
     {
         foreach (self::$_changedListeners as $callback) {
             call_user_func($callback, $changes);
@@ -419,7 +409,7 @@ class RoleEnvironment
      * 
      * @param RoleEnvironmentData $currentRoleEnvironment The current role 
      *                                                    environment data.
-     * @param RoleEnvionrmentData $newRoleEnvironment     The new role 
+     * @param RoleEnvironmentData $newRoleEnvironment     The new role
      *                                                    environment data.
      * 
      * @static
@@ -427,7 +417,8 @@ class RoleEnvironment
      * @return array
      */
     private static function _calculateConfigurationChanges(
-        $currentRoleEnvironment, $newRoleEnvironment
+        RoleEnvironmentData $currentRoleEnvironment,
+        RoleEnvironmentData $newRoleEnvironment
     ) {
         $changes = array();
         $currentConfig = $currentRoleEnvironment->getConfigurationSettings();
@@ -471,7 +462,9 @@ class RoleEnvironment
      * @return array
      */
     private static function _calculateNewRoleInstanceChanges(
-        $role, $currentRoleInstances, $newRoleInstances
+        RoleInstance $role,
+        array $currentRoleInstances,
+        array $newRoleInstances
     ) {
         $changedRoleSet = array();
 
@@ -523,7 +516,9 @@ class RoleEnvironment
      * @return array
      */
     private static function _calculateNewRoleInstanceEndpointsChanges(
-        $role, $currentInstanceEndpoints, $newInstanceEndpoints
+        RoleInstance $role,
+        array $currentInstanceEndpoints,
+        array $newInstanceEndpoints
     ) {
         $changedRoleSet = array();
 
@@ -564,7 +559,9 @@ class RoleEnvironment
      * @return array
      */
     private static function _calculateCurrentRoleInstanceChanges(
-        $role, $currentRoleInstances, $newRoleInstances
+        RoleInstance $role,
+        array $currentRoleInstances,
+        array $newRoleInstances
     ) {
         $changedRoleSet = array();
 
@@ -617,7 +614,9 @@ class RoleEnvironment
      * @return array
      */
     private static function _calculateCurrentRoleInstanceEndpointsChanges(
-        $role, $currentInstanceEndpoints, $newInstanceEndpoints
+        RoleInstance $role,
+        array $currentInstanceEndpoints,
+        array $newInstanceEndpoints
     ) {
         $changedRoleSet = array();
 
@@ -756,8 +755,6 @@ class RoleEnvironment
      * is restarting.
      * 
      * @static
-     * 
-     * @return none
      */
     public static function requestRecycle()
     {
@@ -785,8 +782,6 @@ class RoleEnvironment
      * @param \DateTime          $expirationUtc The expiration UTC time.
      * 
      * @static
-     * 
-     * @return none
      */
     public static function setStatus($status, $expirationUtc)
     {
@@ -822,8 +817,6 @@ class RoleEnvironment
      * calling this method.
      * 
      * @static
-     * 
-     * @return none
      */
     public static function clearStatus()
     {
@@ -842,11 +835,9 @@ class RoleEnvironment
      * 
      * To listen for events, one should call trackChanges.
      * 
-     * @param function $listener The changed listener.
-     * 
-     * @return none
+     * @param callable $listener The changed listener.
      */
-    public static function addRoleEnvironmentChangedListener($listener)
+    public static function addRoleEnvironmentChangedListener(callable $listener)
     {
         self::$_changedListeners[] = $listener;
     }
@@ -854,13 +845,13 @@ class RoleEnvironment
     /**
      * Removes an event listener for the Changed event.
      * 
-     * @param function $listener The changed listener.
+     * @param callable $listener The changed listener.
      * 
      * @static
      * 
      * @return bool
      */
-    public static function removeRoleEnvironmentChangedListener($listener)
+    public static function removeRoleEnvironmentChangedListener(callable $listener)
     {
         foreach (self::$_changedListeners as $key => $changedListener) {
             if ($changedListener == $listener) {
@@ -894,13 +885,11 @@ class RoleEnvironment
      * 
      * To listen for events, one should call trackChanges.
      * 
-     * @param function $listener The changing listener.
+     * @param callable $listener The changing listener.
      * 
      * @static
-     * 
-     * @return none
      */
-    public static function addRoleEnvironmentChangingListener($listener)
+    public static function addRoleEnvironmentChangingListener(callable $listener)
     {
         self::$_changingListeners[] = $listener;
     }
@@ -908,13 +897,13 @@ class RoleEnvironment
     /** 
      * Removes an event listener for the Changing event.
      * 
-     * @param function $listener The changing listener.
+     * @param callable $listener The changing listener.
      * 
      * @static
      * 
      * @return bool
      */
-    public static function removeRoleEnvironmentChangingListener($listener)
+    public static function removeRoleEnvironmentChangingListener(callable $listener)
     {
         foreach (self::$_changingListeners as $key => $changingListener) {
             if ($changingListener == $listener) {
@@ -932,13 +921,11 @@ class RoleEnvironment
      * when the role is stopping.
      * To listen for events, one should call trackChanges.
      * 
-     * @param function $listener The stopping listener.
+     * @param callable $listener The stopping listener.
      * 
      * @static
-     * 
-     * @return none
      */
-    public static function addRoleEnvironmentStoppingListener($listener)
+    public static function addRoleEnvironmentStoppingListener(callable $listener)
     {
         self::$_stoppingListeners[] = $listener;
     }
@@ -946,13 +933,13 @@ class RoleEnvironment
     /**
      * Removes an event listener for the Stopping event.
      * 
-     * @param function $listener The stopping listener.
+     * @param callable $listener The stopping listener.
      * 
      * @static
      * 
      * @return bool
      */
-    public static function removeRoleEnvironmentStoppingListener($listener)
+    public static function removeRoleEnvironmentStoppingListener(callable $listener)
     {
         foreach (self::$_stoppingListeners as $key => $stoppingListener) {
             if ($stoppingListener == $listener) {

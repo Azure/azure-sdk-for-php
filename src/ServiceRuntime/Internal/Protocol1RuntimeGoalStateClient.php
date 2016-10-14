@@ -51,7 +51,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
     private $_goalStateDeserializer;
 
     /**
-     * @var IGoalStateDeserializer
+     * @var IRoleEnvironmentDataDeserializer
      */
     private $_roleEnvironmentDeserializer;
 
@@ -66,7 +66,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
     private $_endpoint;
 
     /**
-     * @var CurrentGoalState
+     * @var GoalState
      */
     private $_currentGoalState;
 
@@ -87,13 +87,16 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
      *                                                                        current state client.
      * @param IGoalStateDeserializer             $goalStateDeserializer       The
      *                                                                        goal state deserializer.
-     * @param IRoleEnvironmentDeserializer       $roleEnvironmentDeserializer The
+     * @param IRoleEnvironmentDataDeserializer   $roleEnvironmentDeserializer The
      *                                                                        role environment deserializer.
      * @param IInputChannel                      $inputChannel                The
      *                                                                        input channel.
      */
-    public function __construct($currentStateClient, $goalStateDeserializer,
-        $roleEnvironmentDeserializer, $inputChannel
+    public function __construct(
+        Protocol1RuntimeCurrentStateClient $currentStateClient,
+        IGoalStateDeserializer $goalStateDeserializer,
+        IRoleEnvironmentDataDeserializer $roleEnvironmentDeserializer,
+        IInputChannel $inputChannel
     ) {
         $this->_currentStateClient = $currentStateClient;
         $this->_goalStateDeserializer = $goalStateDeserializer;
@@ -121,8 +124,8 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
     /**
      * Gets the role environment data.
-     * 
      * @return RoleEnvironmentData
+     * @throws RoleEnvironmentNotAvailableException
      */
     public function getRoleEnvironmentData()
     {
@@ -152,8 +155,6 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
      * Sets the endpoint.
      *
      * @param string $endpoint Sets the endpoint.
-     * 
-     * @return none
      */
     public function setEndpoint($endpoint)
     {
@@ -174,8 +175,6 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
      * Sets the keep open state.
      *
      * @param string $keepOpen Sets the keep open state.
-     * 
-     * @return none
      */
     public function setKeepOpen($keepOpen)
     {
@@ -194,8 +193,6 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
     /**
      * Ensures that the goal state is retrieved.
-     * 
-     * @return none
      */
     private function _ensureGoalStateRetrieved()
     {

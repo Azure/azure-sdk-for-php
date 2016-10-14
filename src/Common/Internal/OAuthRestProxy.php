@@ -25,6 +25,7 @@
 
 namespace WindowsAzure\Common\Internal;
 
+use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Models\OAuthAccessToken;
 use WindowsAzure\Common\Internal\Serialization\JsonSerializer;
 
@@ -49,7 +50,7 @@ class OAuthRestProxy extends ServiceRestProxy
      * @param IHttpClient $channel The HTTP client used to send HTTP requests.
      * @param string      $uri     The storage account uri.
      */
-    public function __construct($channel, $uri)
+    public function __construct(IHttpClient $channel, $uri)
     {
         parent::__construct(
             $channel,
@@ -67,7 +68,7 @@ class OAuthRestProxy extends ServiceRestProxy
      * @param string $clientSecret OAuth request clent_secret field value.
      * @param string $scope        OAuth request scope field value.
      *
-     * @return WindowsAzure\Common\Internal\Models\OAuthAccessToken
+     * @return OAuthAccessToken
      */
     public function getAccessToken($grantType, $clientId, $clientSecret, $scope)
     {

@@ -65,8 +65,6 @@ class CloudConfigurationManager
 
     /**
      * Initializes the connection string source providers.
-     * 
-     * @return none
      */
     private static function _init()
     {
@@ -117,8 +115,6 @@ class CloudConfigurationManager
      * @param bool     $prepend  When true, the $provider is processed first when 
      *                           calling getConnectionString. When false (the default) the $provider is 
      *                           processed after the existing callbacks.
-     * 
-     * @return none
      */
     public static function registerSource($name, $provider = null, $prepend = false)
     {

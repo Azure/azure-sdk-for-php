@@ -48,7 +48,7 @@ interface FilterableService
      *
      * @param IServiceFilter $filter Filter to add for the pipeline.
      * 
-     * @return mix.
+     * @return mixed
      */
     public function withFilter(IServiceFilter $filter);
 }

@@ -58,9 +58,9 @@ class WrapAccessTokenResult
      *
      * @param array $response The get WRAP access token response.
      * 
-     * @return WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult.
+     * @return WrapAccessTokenResult.
      */
-    public static function create($response)
+    public static function create(array $response)
     {
         $wrapAccessTokenResult = new self();
         parse_str($response, $parsedResponse);
@@ -94,8 +94,6 @@ class WrapAccessTokenResult
      * Sets access token.
      *
      * @param string $accessToken The access token.
-     * 
-     * @return none.
      */
     public function setAccessToken($accessToken)
     {
@@ -116,8 +114,6 @@ class WrapAccessTokenResult
      * Sets expires in.
      *
      * @param int $expiresIn value.
-     * 
-     * @return none.
      */
     public function setExpiresIn($expiresIn)
     {

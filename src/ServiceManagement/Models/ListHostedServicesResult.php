@@ -93,10 +93,8 @@ class ListHostedServicesResult
      * Sets hosted services.
      * 
      * @param array $hostedServices The hosted services.
-     * 
-     * @return none
      */
-    public function setHostedServices($hostedServices)
+    public function setHostedServices(array $hostedServices)
     {
         $this->_hostedServices = $hostedServices;
     }

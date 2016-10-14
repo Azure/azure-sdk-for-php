@@ -61,11 +61,9 @@ class ChunkedGoalStateDeserializer implements IGoalStateDeserializer
     /**
      * Initializes the goal state deserializer with the input stream.
      * 
-     * @param Stream $inputStream The input stream.
-     * 
-     * @return none
+     * @param resource $inputStream The input stream.
      */
-    public function initialize($inputStream)
+    public function initialize(resource $inputStream)
     {
         $this->_inputStream = $inputStream;
     }
@@ -73,7 +71,7 @@ class ChunkedGoalStateDeserializer implements IGoalStateDeserializer
     /**
      * Deserializes a goal state document.
      * 
-     * @return none
+     * @return GoalState
      */
     public function deserialize()
     {

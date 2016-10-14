@@ -89,8 +89,6 @@ class TopicInfo extends Entry
      * Populates properties with a specified XML string. 
      * 
      * @param string $xmlString An XML string representing the topic information. 
-     * 
-     * @return none
      */
     public function parseXml($xmlString)
     {
@@ -141,8 +139,6 @@ class TopicInfo extends Entry
      * Sets the title.
      *
      * @param string $title The title of the queue info.
-     *
-     * @return none
      */
     public function setTitle($title)
     {
@@ -163,10 +159,8 @@ class TopicInfo extends Entry
      * Sets the entry.
      *
      * @param Entry $entry The entry of the queue info.
-     *
-     * @return none
      */
-    public function setEntry($entry)
+    public function setEntry(Entry $entry)
     {
         $this->_entry = $entry;
     }
@@ -185,10 +179,8 @@ class TopicInfo extends Entry
      * Sets the descriptions of the topic. 
      * 
      * @param TopicDescription $topicDescription The description of the topic. 
-     * 
-     * @return none
      */
-    public function setTopicDescription($topicDescription)
+    public function setTopicDescription(TopicDescription $topicDescription)
     {
         $this->_topicDescription = $topicDescription;
     }
@@ -207,8 +199,6 @@ class TopicInfo extends Entry
      * Sets the default message to live.
      *
      * @param string $defaultMessageTimeToLive The default message time to live.
-     * 
-     * @return none
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {
@@ -230,9 +220,7 @@ class TopicInfo extends Entry
     /**
      * Sets max size in mega bytes. 
      * 
-     * @param int $maxSizeInMegabytes The maximum size in mega bytes. 
-     * 
-     * @return none
+     * @param int $maxSizeInMegabytes The maximum size in mega bytes.
      */
     public function setMaxSizeInMegabytes($maxSizeInMegabytes)
     {
@@ -253,12 +241,10 @@ class TopicInfo extends Entry
      * Sets requires duplicate detection. 
      * 
      * @param bool $requiresDuplicateDetection Sets requires duplicate detection.
-     *
-     * @return none
      */
     public function setRequiresDuplicateDetection($requiresDuplicateDetection)
     {
-        $this->_topicDescription->setrequiresDuplicateDetection(
+        $this->_topicDescription->setRequiresDuplicateDetection(
             $requiresDuplicateDetection
         );
     }
@@ -278,13 +264,11 @@ class TopicInfo extends Entry
      * 
      * @param string $duplicateDetectionHistoryTimeWindow The duplicate 
      *                                                    detection history time window.
-     *
-     * @return none
      */
     public function setDuplicateDetectionHistoryTimeWindow(
         $duplicateDetectionHistoryTimeWindow
     ) {
-        $this->_topicDescription->setduplicateDetectionHistoryTimeWindow(
+        $this->_topicDescription->setDuplicateDetectionHistoryTimeWindow(
             $duplicateDetectionHistoryTimeWindow
         );
     }
@@ -303,12 +287,10 @@ class TopicInfo extends Entry
      * Sets enable batched operations.
      * 
      * @param bool $enableBatchedOperations Enables batched operations.
-     * 
-     * @return none
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {
-        $this->_topicDescription->setenableBatchedOperations(
+        $this->_topicDescription->setEnableBatchedOperations(
             $enableBatchedOperations
         );
     }
@@ -327,8 +309,6 @@ class TopicInfo extends Entry
      * Sets size in bytes.
      * 
      * @param int $sizeInBytes The size in bytes. 
-     *
-     * @return none
      */
     public function setSizeInBytes($sizeInBytes)
     {

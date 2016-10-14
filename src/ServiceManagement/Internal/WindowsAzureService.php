@@ -103,8 +103,6 @@ class WindowsAzureService extends Service
      * Sets the affinityGroup name.
      * 
      * @param string $affinityGroup The affinityGroup name.
-     * 
-     * @return none
      */
     public function setAffinityGroup($affinityGroup)
     {
@@ -125,8 +123,6 @@ class WindowsAzureService extends Service
      * Sets the url name.
      * 
      * @param string $url The url name.
-     * 
-     * @return none
      */
     public function setUrl($url)
     {

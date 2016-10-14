@@ -25,6 +25,7 @@
 
 namespace WindowsAzure\MediaServices\Internal;
 
+use SimpleXMLElement;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 
@@ -46,11 +47,11 @@ class ContentPropertiesSerializer
     /**
      * Parse a Properties xml.
      *
-     * @param \SimpleXML $xmlContent XML object to parse
+     * @param SimpleXMLElement $xmlContent XML object to parse
      *
      * @return array
      */
-    public static function unserialize($xmlContent)
+    public static function unserialize(SimpleXMLElement $xmlContent)
     {
         Validate::notNull($xmlContent, 'xmlContent');
 
@@ -71,7 +72,7 @@ class ContentPropertiesSerializer
         $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
 
-        $xmlWriter->startElementNS(
+        $xmlWriter->startElementNs(
             'meta',
             Resources::PROPERTIES,
             Resources::DSM_XML_NAMESPACE
@@ -85,11 +86,11 @@ class ContentPropertiesSerializer
     /**
      * Parse properties recursively.
      *
-     * @param \SimpleXML $xml XML object to parse
+     * @param SimpleXMLElement $xml XML object to parse
      *
      * @return array
      */
-    private static function _unserializeRecursive($xml)
+    private static function _unserializeRecursive(SimpleXMLElement $xml)
     {
         $result = array();
         $dataNamespace = Resources::DS_XML_NAMESPACE;
@@ -145,7 +146,7 @@ class ContentPropertiesSerializer
      *
      * @return array
      */
-    private static function _serializeRecursive($object, $xmlWriter)
+    private static function _serializeRecursive($object, \XMLWriter $xmlWriter)
     {
         Validate::notNull($object, 'object');
 
@@ -167,14 +168,14 @@ class ContentPropertiesSerializer
                         $variableValue = self::dateIntervalToString($variableValue);
                     }
                     if (gettype($variableValue) == 'array') {
-                        $xmlWriter->startElementNS(
+                        $xmlWriter->startElementNs(
                             'data',
                             $variableName,
                             Resources::DS_XML_NAMESPACE
                         );
 
                         foreach ($variableValue as $item) {
-                            $xmlWriter->startElementNS(
+                            $xmlWriter->startElementNs(
                                 'data',
                                 Resources::ELEMENT,
                                 Resources::DS_XML_NAMESPACE
@@ -190,7 +191,7 @@ class ContentPropertiesSerializer
 
                         $xmlWriter->endElement();
                     } elseif (gettype($variableValue) == 'object') {
-                        $xmlWriter->startElementNS(
+                        $xmlWriter->startElementNs(
                             'data',
                             $variableName,
                             Resources::DS_XML_NAMESPACE
@@ -203,7 +204,7 @@ class ContentPropertiesSerializer
 
                         $xmlWriter->endElement();
                     } else {
-                        $xmlWriter->writeElementNS(
+                        $xmlWriter->writeElementNs(
                             'data',
                             $variableName,
                             Resources::DS_XML_NAMESPACE,

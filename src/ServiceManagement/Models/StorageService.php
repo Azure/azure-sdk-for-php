@@ -127,8 +127,6 @@ class StorageService extends WindowsAzureService
      * Sets the status.
      * 
      * @param string $status The status.
-     * 
-     * @return none
      */
     public function setStatus($status)
     {

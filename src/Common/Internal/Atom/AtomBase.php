@@ -73,12 +73,9 @@ class AtomBase
      * Sets the attributes of the ATOM class.
      *
      * @param array $attributes The attributes of the array.
-     *
-     * @return array
      */
-    public function setAttributes($attributes)
+    public function setAttributes(array $attributes)
     {
-        Validate::isArray($attributes, 'attributes');
         $this->attributes = $attributes;
     }
 
@@ -87,8 +84,6 @@ class AtomBase
      *
      * @param string $attributeKey   The key of the attribute.
      * @param mixed  $attributeValue The value of the attribute.
-     *
-     * @return none
      */
     public function setAttribute($attributeKey, $attributeValue)
     {
@@ -100,7 +95,7 @@ class AtomBase
      *
      * @param string $attributeKey The key of the attribute.
      *
-     * @return none
+     * @return mixed
      */
     public function getAttribute($attributeKey)
     {
@@ -110,20 +105,16 @@ class AtomBase
     /**
      * Processes author node.
      *
-     * @param array $xmlWriter   The XML writer.
-     * @param array $itemArray   An array of item to write.
-     * @param array $elementName The name of the element.
-     *
-     * @return array
+     * @param \XMLWriter $xmlWriter   The XML writer.
+     * @param array      $itemArray   An array of item to write.
+     * @param string     $elementName The name of the element.
      */
-    protected function writeArrayItem($xmlWriter, $itemArray, $elementName)
+    protected function writeArrayItem(\XMLWriter $xmlWriter, array $itemArray, $elementName)
     {
-        Validate::notNull($xmlWriter, 'xmlWriter');
-        Validate::isArray($itemArray, 'itemArray');
         Validate::isString($elementName, 'elementName');
 
         foreach ($itemArray as $itemInstance) {
-            $xmlWriter->startElementNS(
+            $xmlWriter->startElementNs(
                 'atom',
                 $elementName,
                 Resources::ATOM_NAMESPACE
@@ -138,7 +129,7 @@ class AtomBase
      *
      * @param array $xmlArray An array of simple xml elements.
      *
-     * @return array
+     * @return Person[]
      */
     protected function processAuthorNode($xmlArray)
     {
@@ -278,11 +269,9 @@ class AtomBase
      * @param \XMLWriter $xmlWriter      The XML writer.
      * @param string     $attributeName  The name of the attribute.
      * @param mixed      $attributeValue The value of the attribute.
-     *
-     * @return none
      */
     protected function writeOptionalAttribute(
-        $xmlWriter,
+        \XMLWriter $xmlWriter,
         $attributeName,
         $attributeValue
     ) {
@@ -300,16 +289,14 @@ class AtomBase
     /**
      * Writes the optional elements namespaces.
      *
-     * @param \XmlWriter $xmlWriter    The XML writer.
+     * @param \XMLWriter $xmlWriter    The XML writer.
      * @param string     $prefix       The prefix.
      * @param string     $elementName  The element name.
      * @param string     $namespace    The namespace name.
      * @param string     $elementValue The element value.
-     *
-     * @return none
      */
     protected function writeOptionalElementNS(
-        $xmlWriter,
+        \XMLWriter $xmlWriter,
         $prefix,
         $elementName,
         $namespace,
@@ -319,7 +306,7 @@ class AtomBase
         Validate::isString($elementName, 'elementName');
 
         if (!empty($elementValue)) {
-            $xmlWriter->writeElementNS(
+            $xmlWriter->writeElementNs(
                 $prefix,
                 $elementName,
                 $namespace,

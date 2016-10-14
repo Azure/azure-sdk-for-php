@@ -45,7 +45,7 @@ class ChannelPreview
     /**
      * ChannelPreview AccessControl.
      *
-     * @var mixing
+     * @var ChannelPreviewAccessControl
      */
     private $_accessControl;
 
@@ -102,7 +102,7 @@ class ChannelPreview
     /**
      * Get the ChannelPreview AccessControl.
      *
-     * @return string
+     * @return ChannelPreviewAccessControl
      */
     public function getAccessControl()
     {
@@ -112,9 +112,9 @@ class ChannelPreview
     /**
      * Set the ChannelPreview AccessControl.
      *
-     * @param string $value ChannelPreview AccessControl.
+     * @param ChannelPreviewAccessControl $value ChannelPreview AccessControl.
      */
-    public function setAccessControl($value)
+    public function setAccessControl(ChannelPreviewAccessControl $value)
     {
         $this->_accessControl = $value;
     }

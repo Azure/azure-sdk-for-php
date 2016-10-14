@@ -146,9 +146,9 @@ class TaskTemplate
      *
      * @param array $options Array containing values for object properties
      *
-     * @return WindowsAzure\MediaServices\Models\TaskTemplate
+     * @return TaskTemplate
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         Validate::notNull(
             $options['NumberofInputAssets'],
@@ -187,10 +187,8 @@ class TaskTemplate
      * Fill task template from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return none
      */
-    public function fromArray($options)
+    public function fromArray(array $options)
     {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
@@ -301,8 +299,6 @@ class TaskTemplate
      * Set "Name".
      *
      * @param string $value Name
-     *
-     * @return none
      */
     public function setName($value)
     {
@@ -333,8 +329,6 @@ class TaskTemplate
      * Set "Initialization vector".
      *
      * @param string $value Initialization vector
-     *
-     * @return none
      */
     public function setInitializationVector($value)
     {
@@ -355,8 +349,6 @@ class TaskTemplate
      * Set "Encryption version".
      *
      * @param string $value Encryption version
-     *
-     * @return none
      */
     public function setEncryptionVersion($value)
     {
@@ -377,8 +369,6 @@ class TaskTemplate
      * Set "Encryption scheme".
      *
      * @param string $value Encryption scheme
-     *
-     * @return none
      */
     public function setEncryptionScheme($value)
     {
@@ -399,8 +389,6 @@ class TaskTemplate
      * Set "Encription key id".
      *
      * @param string $value Encription key id
-     *
-     * @return none
      */
     public function setEncryptionKeyId($value)
     {
@@ -431,8 +419,6 @@ class TaskTemplate
      * Set "Media processor id".
      *
      * @param string $value Media procesot id
-     *
-     * @return none
      */
     public function setMediaProcessorId($value)
     {
@@ -453,8 +439,6 @@ class TaskTemplate
      * Set "Configuration".
      *
      * @param string $value Configuration
-     *
-     * @return none
      */
     public function setConfiguration($value)
     {
@@ -495,8 +479,6 @@ class TaskTemplate
      * Set "Description".
      *
      * @param string $value Description
-     *
-     * @return none
      */
     public function setDescription($value)
     {
@@ -517,8 +499,6 @@ class TaskTemplate
      * Set "Number of output assets".
      *
      * @param int $value Number of output assets
-     *
-     * @return none
      */
     public function setNumberofOutputAssets($value)
     {
@@ -539,8 +519,6 @@ class TaskTemplate
      * Set "Number of input assets".
      *
      * @param int $value Number of input assets
-     *
-     * @return none
      */
     public function setNumberofInputAssets($value)
     {

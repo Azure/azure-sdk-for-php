@@ -69,8 +69,6 @@ class BatchRequest
      * Append new context to batch request.
      *
      * @param HttpCallContext $context Http call context to add to batch request
-     *
-     * @return none
      */
     public function appendContext(HttpCallContext $context)
     {
@@ -79,8 +77,6 @@ class BatchRequest
 
     /**
      * Encode contexts.
-     *
-     * @return none
      */
     public function encode()
     {

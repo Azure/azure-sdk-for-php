@@ -43,7 +43,7 @@ class ConnectionStringSource
     /**
      * The list of all sources which comes as default.
      * 
-     * @var type
+     * @var array
      */
     private static $_defaultSources;
 
@@ -59,8 +59,6 @@ class ConnectionStringSource
 
     /**
      * Initializes the default sources.
-     * 
-     * @return none
      */
     private static function _init()
     {

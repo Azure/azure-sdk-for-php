@@ -137,8 +137,6 @@ class HttpClient implements IHttpClient
      * Sets the request url.
      *
      * @param IUrl $url request url.
-     *
-     * @return none.
      */
     public function setUrl(IUrl $url)
     {
@@ -161,8 +159,6 @@ class HttpClient implements IHttpClient
      * Resources::HTTP_GET or strings like 'GET'.
      *
      * @param string $method request's HTTP method.
-     *
-     * @return none
      */
     public function setMethod($method)
     {
@@ -198,8 +194,6 @@ class HttpClient implements IHttpClient
      * @param string $value   header value.
      * @param bool   $replace whether to replace previous header with the same name
      *                        or append to its value (comma separated)
-     *
-     * @return none
      */
     public function setHeader($header, $value, $replace = false)
     {
@@ -212,8 +206,6 @@ class HttpClient implements IHttpClient
      * Sets request headers using array.
      *
      * @param array $headers headers key-value array
-     *
-     * @return none
      */
     public function setHeaders(array $headers)
     {
@@ -226,8 +218,6 @@ class HttpClient implements IHttpClient
      * Sets HTTP POST parameters.
      *
      * @param array $postParameters The HTTP POST parameters.
-     *
-     * @return none
      */
     public function setPostParameters(array $postParameters)
     {
@@ -312,8 +302,6 @@ class HttpClient implements IHttpClient
      * Sets successful status code.
      *
      * @param array|string $statusCodes successful status code.
-     *
-     * @return none
      */
     public function setExpectedStatusCode($statusCodes)
     {
@@ -338,9 +326,7 @@ class HttpClient implements IHttpClient
      * Sets configuration parameter.
      *
      * @param string $name  The configuration parameter name.
-     * @param mix    $value The configuration parameter value.
-     *
-     * @return none
+     * @param mixed  $value The configuration parameter value.
      */
     public function setConfig($name, $value = null)
     {
@@ -363,8 +349,6 @@ class HttpClient implements IHttpClient
      * Sets the request body.
      *
      * @param string $body body to use.
-     *
-     * @return none
      */
     public function setBody($body)
     {
@@ -389,8 +373,6 @@ class HttpClient implements IHttpClient
      * @param string $reason   The reason phrase.
      * @param string $message  The detailed message (if any).
      * @param array  $expected The expected status codes.
-     *
-     * @return none
      *
      * @static
      *

@@ -79,8 +79,6 @@ class ActiveToken
      * Sets WRAP access token.
      *
      * @param string $wrapAccessTokenResult The WRAP access token result.
-     * 
-     * @return none
      */
     public function setWrapAccessTokenResult($wrapAccessTokenResult)
     {
@@ -101,8 +99,6 @@ class ActiveToken
      * Sets expiration time.
      *
      * @param \DateTime $expirationDateTime value.
-     * 
-     * @return none
      */
     public function setExpirationDateTime($expirationDateTime)
     {

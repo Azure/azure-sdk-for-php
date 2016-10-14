@@ -45,7 +45,7 @@ class ChannelOutputHls
     /**
      * ChannelOutputHls FragmentsPerSegment.
      *
-     * @var mixing
+     * @var int
      */
     private $_fragmentsPerSegment;
 
@@ -87,7 +87,7 @@ class ChannelOutputHls
     /**
      * Get the ChannelOutputHls FragmentsPerSegment.
      *
-     * @return mixing
+     * @return int
      */
     public function getFragmentsPerSegment()
     {
@@ -97,7 +97,7 @@ class ChannelOutputHls
     /**
      * Set the ChannelOutputHls FragmentsPerSegment.
      *
-     * @param mixing $value ChannelOutputHls FragmentsPerSegment.
+     * @param int $value ChannelOutputHls FragmentsPerSegment.
      */
     public function setFragmentsPerSegment($value)
     {
