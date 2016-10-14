@@ -79,8 +79,6 @@ class Person extends AtomBase
      * 
      * @param string $xmlString An XML based string representing 
      *                          the Person instance. 
-     * 
-     * @return none
      */
     public function parseXml($xmlString)
     {
@@ -115,8 +113,6 @@ class Person extends AtomBase
      * Sets the name of the person.
      * 
      * @param string $name The name of the person.
-     * 
-     * @return none
      */
     public function setName($name)
     {
@@ -137,8 +133,6 @@ class Person extends AtomBase
      * Sets the URI of the person. 
      * 
      * @param string $uri The URI of the person.
-     * 
-     * @return none
      */
     public function setUri($uri)
     {
@@ -159,8 +153,6 @@ class Person extends AtomBase
      * Sets the email of the person. 
      * 
      * @param string $email The email of the person.
-     * 
-     * @return none
      */
     public function setEmail($email)
     {
@@ -171,13 +163,11 @@ class Person extends AtomBase
      * Writes an XML representing the person. 
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
-     * @return none
      */
-    public function writeXml($xmlWriter)
+    public function writeXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->startElementNS(
+        $xmlWriter->startElementNs(
             'atom',
             'person',
             Resources::ATOM_NAMESPACE
@@ -190,13 +180,11 @@ class Person extends AtomBase
      * Writes a inner XML representing the person. 
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
-     * @return none
      */
-    public function writeInnerXml($xmlWriter)
+    public function writeInnerXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->writeElementNS(
+        $xmlWriter->writeElementNs(
             'atom',
             'name',
             Resources::ATOM_NAMESPACE,

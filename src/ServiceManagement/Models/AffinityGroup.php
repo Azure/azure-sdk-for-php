@@ -71,13 +71,13 @@ class AffinityGroup extends Service
     protected function toArray()
     {
         $arr = parent::toArray();
-        $order = array(
+        $order = [
             Resources::XTAG_NAMESPACE,
             Resources::XTAG_NAME,
             Resources::XTAG_LABEL,
             Resources::XTAG_DESCRIPTION,
             Resources::XTAG_LOCATION,
-        );
+        ];
         Utilities::addIfNotEmpty(Resources::XTAG_NAME, $this->getName(), $arr);
         $ordered = Utilities::orderArray($arr, $order);
 

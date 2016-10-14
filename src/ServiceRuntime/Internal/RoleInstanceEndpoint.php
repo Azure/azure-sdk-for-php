@@ -78,10 +78,8 @@ class RoleInstanceEndpoint
      * Sets the role instance.
      * 
      * @param RoleInstance $roleInstance The role instance.
-     * 
-     * @return none
      */
-    public function setRoleInstance($roleInstance)
+    public function setRoleInstance(RoleInstance $roleInstance)
     {
         $this->_roleInstance = $roleInstance;
     }

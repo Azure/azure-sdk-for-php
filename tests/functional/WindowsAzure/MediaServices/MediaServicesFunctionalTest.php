@@ -64,7 +64,7 @@ use Tests\Framework\VirtualFileSystem;
 class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 {
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
      */
     public function testCreatEmptyAsset()
     {
@@ -85,11 +85,11 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createFileInfos
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetFileList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createFileInfos
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetFileList
      */
     public function testCreateAssetWithFiles()
     {
@@ -158,8 +158,8 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
      */
     public function testCreateJobWithTasks()
     {
@@ -195,8 +195,8 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJobTemplate
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createJobTemplate
      */
     public function testCreateJobTemplateWithTasks()
     {
@@ -233,9 +233,9 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJobTemplate
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createJobTemplate
      */
     public function testCreateJobUsingTemplate()
     {
@@ -277,10 +277,10 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::cancelJob
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobStatus
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::cancelJob
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getJobStatus
      */
     public function testCancelJob()
     {
@@ -322,9 +322,9 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobStatus
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getJobStatus
      */
     public function testMonitorProcessing()
     {
@@ -361,8 +361,8 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetList
      */
     public function testGetAnAssetReference()
     {
@@ -382,8 +382,8 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getJobList
      */
     public function testGetJobReference()
     {
@@ -408,8 +408,8 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetList
      */
     public function testListAllAssets()
     {
@@ -448,11 +448,11 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobList
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobInputMediaAssets
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobOutputMediaAssets
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getJobList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getJobInputMediaAssets
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getJobOutputMediaAssets
      */
     public function testListAllJobsAndAssets()
     {
@@ -507,8 +507,8 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAccessPolicyList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAccessPolicyList
      */
     public function testListAllAccessPolicy()
     {
@@ -549,10 +549,10 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLocatorList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getLocatorList
      */
     public function testListAllLocators()
     {
@@ -620,9 +620,9 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetList
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAsset
      */
     public function testDeleteAsset()
     {
@@ -653,8 +653,8 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getJobList
      */
     public function testDeleteJob()
     {
@@ -680,9 +680,9 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAccessPolicyList
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAccessPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAccessPolicyList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAccessPolicy
      */
     public function testDeleteAccessPolicy()
     {
@@ -716,9 +716,9 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
      */
     public function testCreatingSASUrlForDownloadingContent()
     {
@@ -755,9 +755,9 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
      */
     public function testCreatingOriginUrlForStreamingContent()
     {

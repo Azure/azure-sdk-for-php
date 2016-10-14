@@ -55,7 +55,7 @@ use WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer;
 class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClient::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClient::__construct
      */
     public function testConstruct()
     {
@@ -231,7 +231,7 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClient::setCurrentState
+     * @covers \WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClient::setCurrentState
      */
     public function testSetCurrentState()
     {

@@ -45,7 +45,12 @@ interface IInputChannel
      * 
      * @param string $name The input stream path.
      * 
-     * @return none
+     * @return resource
      */
     public function getInputStream($name);
+
+    /**
+     * Closes the input stream.
+     */
+    public function closeInputStream();
 }

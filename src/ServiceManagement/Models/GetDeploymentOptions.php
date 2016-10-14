@@ -67,8 +67,6 @@ class GetDeploymentOptions
      * Sets the deployment slot.
      * 
      * @param string $slot The deployment slot name.
-     * 
-     * @return none
      */
     public function setSlot($slot)
     {
@@ -96,8 +94,6 @@ class GetDeploymentOptions
      * Sets the deployment name.
      * 
      * @param string $deploymentName The deployment name.
-     * 
-     * @return none
      */
     public function setDeploymentName($deploymentName)
     {

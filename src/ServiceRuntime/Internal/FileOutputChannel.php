@@ -44,10 +44,10 @@ class FileOutputChannel implements IOutputChannel
 
     /**
      * Gets the output stream.
-     * 
+     *
      * @param string $name The output channel path.
-     * 
-     * @return none
+     * @return resource
+     * @throws ChannelNotAvailableException
      */
     public function getOutputStream($name)
     {

@@ -45,8 +45,8 @@ use WindowsAzure\Common\Internal\Resources;
 class HeadersFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Filters\HeadersFilter::handleRequest
-     * @covers WindowsAzure\Common\Internal\Filters\HeadersFilter::__construct
+     * @covers \WindowsAzure\Common\Internal\Filters\HeadersFilter::handleRequest
+     * @covers \WindowsAzure\Common\Internal\Filters\HeadersFilter::__construct
      */
     public function testHandleRequestEmptyHeaders()
     {
@@ -65,8 +65,8 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Filters\HeadersFilter::handleRequest
-     * @covers WindowsAzure\Common\Internal\Filters\HeadersFilter::__construct
+     * @covers \WindowsAzure\Common\Internal\Filters\HeadersFilter::handleRequest
+     * @covers \WindowsAzure\Common\Internal\Filters\HeadersFilter::__construct
      */
     public function testHandleRequestOneHeader()
     {
@@ -86,8 +86,8 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Filters\HeadersFilter::handleRequest
-     * @covers WindowsAzure\Common\Internal\Filters\HeadersFilter::__construct
+     * @covers \WindowsAzure\Common\Internal\Filters\HeadersFilter::handleRequest
+     * @covers \WindowsAzure\Common\Internal\Filters\HeadersFilter::__construct
      */
     public function testHandleRequestMultipleHeaders()
     {
@@ -110,7 +110,7 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Filters\HeadersFilter::handleResponse
+     * @covers \WindowsAzure\Common\Internal\Filters\HeadersFilter::handleResponse
      */
     public function testHandleResponse()
     {

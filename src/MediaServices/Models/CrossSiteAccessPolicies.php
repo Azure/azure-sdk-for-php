@@ -45,7 +45,7 @@ class CrossSiteAccessPolicies
     /**
      * CrossSiteAccessPolicies ClientAccessPolicy.
      *
-     * @var mixing
+     * @var string
      */
     private $_clientAccessPolicy;
 

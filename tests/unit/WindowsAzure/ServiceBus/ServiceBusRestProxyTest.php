@@ -138,9 +138,9 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listQueues
-     * @covers WindowsAzure\ServiceBus\Models\ListQueuesResult::parseXml
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::create
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::listQueues
+     * @covers \MicrosoftAzure\Storage\Queue\Models\ListQueuesResult::parseXml
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::create
      */
     public function testListQueueSuccess()
     {
@@ -708,9 +708,9 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::createRule
-     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::parseXml
-     * @covers WindowsAzure\ServiceBus\Models\RuleDescription::create
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::createRule
+     * @covers \WindowsAzure\ServiceBus\Models\RuleInfo::parseXml
+     * @covers \WindowsAzure\ServiceBus\Models\RuleDescription::create
      */
     public function testRulesCanBeCreatedOnSubscription()
     {
@@ -833,13 +833,13 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listRules
-     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::parseXml
-     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::create
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::parseXml
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionDescription::create
-     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::parseXml
-     * @covers WindowsAzure\ServiceBus\Models\RuleDescription::create
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::listRules
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::parseXml
+     * @covers \WindowsAzure\ServiceBus\Models\TopicDescription::create
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::parseXml
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionDescription::create
+     * @covers \WindowsAzure\ServiceBus\Models\RuleInfo::parseXml
+     * @covers \WindowsAzure\ServiceBus\Models\RuleDescription::create
      */
     public function testListRulesDeserializePropertiesOfSqlFilter()
     {

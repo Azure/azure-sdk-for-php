@@ -228,8 +228,6 @@ class Deployment
      * Sets the deployment name.
      * 
      * @param string $name The deployment name.
-     * 
-     * @return none
      */
     public function setName($name)
     {
@@ -253,8 +251,6 @@ class Deployment
      * Sets the deployment slot.
      * 
      * @param string $slot The deployment slot.
-     * 
-     * @return none
      */
     public function setSlot($slot)
     {
@@ -278,8 +274,6 @@ class Deployment
      * Sets the deployment label.
      * 
      * @param string $label The deployment label.
-     * 
-     * @return none
      */
     public function setLabel($label)
     {
@@ -302,8 +296,6 @@ class Deployment
      * Sets the deployment private Id.
      * 
      * @param string $privateId The deployment privateId.
-     * 
-     * @return none
      */
     public function setPrivateId($privateId)
     {
@@ -328,8 +320,6 @@ class Deployment
      * Sets the deployment status.
      * 
      * @param string $status The deployment status.
-     * 
-     * @return none
      */
     public function setStatus($status)
     {
@@ -352,8 +342,6 @@ class Deployment
      * Sets the deployment url.
      * 
      * @param string $url The deployment url.
-     * 
-     * @return none
      */
     public function setUrl($url)
     {
@@ -376,8 +364,6 @@ class Deployment
      * Sets the configuration.
      * 
      * @param string $configuration The deployment configuration.
-     * 
-     * @return none
      */
     public function setConfiguration($configuration)
     {
@@ -398,8 +384,6 @@ class Deployment
      * Sets the deployment role instance list.
      * 
      * @param array $roleInstanceList The deployment role instance list.
-     * 
-     * @return none
      */
     public function setRoleInstanceList($roleInstanceList)
     {
@@ -420,8 +404,6 @@ class Deployment
      * Sets the deployment upgradeDomainCount.
      * 
      * @param int $upgradeDomainCount The deployment upgrade domain count.
-     * 
-     * @return none
      */
     public function setUpgradeDomainCount($upgradeDomainCount)
     {
@@ -444,8 +426,6 @@ class Deployment
      * Sets the deployment role list.
      * 
      * @param array $roleList The deployment role list.
-     * 
-     * @return none
      */
     public function setRoleList($roleList)
     {
@@ -466,8 +446,6 @@ class Deployment
      * Sets the deployment SDK version.
      * 
      * @param string $sdkVersion The deployment SDK version.
-     * 
-     * @return none
      */
     public function setSdkVersion($sdkVersion)
     {
@@ -488,8 +466,6 @@ class Deployment
      * Sets the deployment input endpoint list.
      * 
      * @param array $inputEndpointList The deployment input endpoint list.
-     * 
-     * @return none
      */
     public function setInputEndpointList($inputEndpointList)
     {
@@ -510,8 +486,6 @@ class Deployment
      * Sets the deployment locked flag.
      * 
      * @param bool $locked The deployment locked flag.
-     * 
-     * @return none
      */
     public function setLocked($locked)
     {
@@ -532,8 +506,6 @@ class Deployment
      * Sets the deployment rollbackAllowed.
      * 
      * @param bool $rollbackAllowed The deployment rollback allowed flag.
-     * 
-     * @return none
      */
     public function setRollbackAllowed($rollbackAllowed)
     {
@@ -554,8 +526,6 @@ class Deployment
      * Sets the deployment upgrade status.
      * 
      * @param UpgradeStatus $upgradeStatus The deployment upgrade status.
-     * 
-     * @return none
      */
     public function setUpgradeStatus($upgradeStatus)
     {

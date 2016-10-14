@@ -59,12 +59,10 @@ class GetHostedServicePropertiesOptions
      * Sets the embed detail flag.
      * 
      * @param bool $embedDetail The embed detail flag.
-     * 
-     * @return none
      */
     public function setEmbedDetail($embedDetail)
     {
-        Validate::isBoolean($embedDetail);
+        Validate::isBoolean($embedDetail, 'embedDetail');
 
         $this->_embedDetail = $embedDetail;
     }

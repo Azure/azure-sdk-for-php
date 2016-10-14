@@ -68,8 +68,6 @@ class Content extends AtomBase
      * Creates a Content instance with specified text.
      *
      * @param string $text The text of the content.
-     *
-     * @return none
      */
     public function __construct($text = null)
     {
@@ -80,8 +78,6 @@ class Content extends AtomBase
      * Creates an ATOM CONTENT instance with specified xml string.
      *
      * @param string $xmlString an XML based string of ATOM CONTENT.
-     *
-     * @return none
      */
     public function parseXml($xmlString)
     {
@@ -95,13 +91,10 @@ class Content extends AtomBase
      * Creates an ATOM CONTENT instance with specified simpleXML object.
      *
      * @param \SimpleXMLElement $contentXml xml element of ATOM CONTENT
-     *
-     * @return none
      */
-    public function fromXml($contentXml)
+    public function fromXml(\SimpleXMLElement $contentXml)
     {
         Validate::notNull($contentXml, 'contentXml');
-        Validate::isA($contentXml, '\SimpleXMLElement', 'contentXml');
 
         $attributes = $contentXml->attributes();
 
@@ -110,6 +103,7 @@ class Content extends AtomBase
         }
 
         $text = '';
+        /** @var \SimpleXMLElement $child */
         foreach ($contentXml->children() as $child) {
             $text .= $child->asXML();
         }
@@ -133,8 +127,6 @@ class Content extends AtomBase
      * Sets the text of the content.
      *
      * @param string $text The text of the content.
-     *
-     * @return none
      */
     public function setText($text)
     {
@@ -165,8 +157,6 @@ class Content extends AtomBase
      * Sets the type of the content.
      *
      * @param string $type The type of the content.
-     *
-     * @return none
      */
     public function setType($type)
     {
@@ -177,13 +167,11 @@ class Content extends AtomBase
      * Writes an XML representing the content.
      *
      * @param \XMLWriter $xmlWriter The XML writer.
-     *
-     * @return none
      */
-    public function writeXml($xmlWriter)
+    public function writeXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->startElementNS(
+        $xmlWriter->startElementNs(
             'atom',
             'content',
             Resources::ATOM_NAMESPACE
@@ -203,10 +191,8 @@ class Content extends AtomBase
      * Writes an inner XML representing the content.
      *
      * @param \XMLWriter $xmlWriter The XML writer.
-     *
-     * @return none
      */
-    public function writeInnerXml($xmlWriter)
+    public function writeInnerXml(\XMLWriter  $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
         $xmlWriter->writeRaw($this->text);

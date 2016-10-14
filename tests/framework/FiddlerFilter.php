@@ -25,6 +25,7 @@
 
 namespace Tests\framework;
 
+use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\IServiceFilter;
 
 class FiddlerFilter implements IServiceFilter
@@ -52,7 +53,7 @@ class FiddlerFilter implements IServiceFilter
         }
     }
 
-    public function handleRequest($request)
+    public function handleRequest(IHttpClient $request)
     {
         if (self::$isFiddlerOn) {
             $request->setConfig('proxy_host', $this->site);
@@ -62,7 +63,7 @@ class FiddlerFilter implements IServiceFilter
         return $request;
     }
 
-    public function handleResponse($request, $response)
+    public function handleResponse(IHttpClient $request, $response)
     {
         return $response;
     }

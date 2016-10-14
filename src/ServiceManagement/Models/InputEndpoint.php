@@ -98,8 +98,6 @@ class InputEndpoint
      * Sets the input endpoint role name.
      * 
      * @param string $roleName The input endpoint role name.
-     * 
-     * @return none
      */
     public function setRoleName($roleName)
     {
@@ -122,8 +120,6 @@ class InputEndpoint
      * Sets the input endpoint VIP.
      * 
      * @param string $vip The input endpoint VIP.
-     * 
-     * @return none
      */
     public function setVip($vip)
     {
@@ -146,8 +142,6 @@ class InputEndpoint
      * Sets the input endpoint port.
      * 
      * @param string $port The input endpoint port.
-     * 
-     * @return none
      */
     public function setPort($port)
     {

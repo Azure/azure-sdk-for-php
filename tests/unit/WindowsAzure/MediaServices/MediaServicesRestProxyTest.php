@@ -1996,7 +1996,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetLinkedDeliveryPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetLinkedDeliveryPolicy
      */
     public function testGetAssetLinkedDeliveryPolicies()
     {
@@ -2022,7 +2022,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::linkDeliveryPolicyToAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::linkDeliveryPolicyToAsset
      */
     public function testLinkDeliveryPolicyToAsset()
     {
@@ -3340,10 +3340,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     /**
      * Assert that both PlayReadyLicenceResponseTemplate are equal.
      *
-     * @param PlayReadyLicenceResponseTemplate $expected
-     * @param PlayReadyLicenceResponseTemplate $actual
+     * @param PlayReadyLicenseResponseTemplate $expected
+     * @param PlayReadyLicenseResponseTemplate $actual
      */
-    public function assertEqualsLicenseResponseTemplate($expected, $actual)
+    public function assertEqualsLicenseResponseTemplate(
+        PlayReadyLicenseResponseTemplate $expected, PlayReadyLicenseResponseTemplate$actual)
     {
         $this->assertEquals(count($expected->getLicenseTemplates()), count($actual->getLicenseTemplates()));
         for ($i = 0; $i < count($expected->getLicenseTemplates()); ++$i) {

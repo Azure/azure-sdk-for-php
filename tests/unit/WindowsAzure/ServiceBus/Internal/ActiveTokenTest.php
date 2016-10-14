@@ -44,7 +44,7 @@ use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 class ActiveTokenTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Internal\ActiveToken::__construct
+     * @covers \WindowsAzure\ServiceBus\Internal\ActiveToken::__construct
      */
     public function testActiveTokenConstructor()
     {
@@ -59,8 +59,8 @@ class ActiveTokenTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Internal\ActiveToken::getWrapAccessTokenResult
-     * @covers WindowsAzure\ServiceBus\Internal\ActiveToken::setWrapAccessTokenResult
+     * @covers \WindowsAzure\ServiceBus\Internal\ActiveToken::getWrapAccessTokenResult
+     * @covers \WindowsAzure\ServiceBus\Internal\ActiveToken::setWrapAccessTokenResult
      */
     public function testActiveTokenGetSetWrapAccessTokenResult()
     {
@@ -80,8 +80,8 @@ class ActiveTokenTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Internal\ActiveToken::getExpirationDateTime
-     * @covers WindowsAzure\ServiceBus\Internal\ActiveToken::setExpirationDateTime
+     * @covers \WindowsAzure\ServiceBus\Internal\ActiveToken::getExpirationDateTime
+     * @covers \WindowsAzure\ServiceBus\Internal\ActiveToken::setExpirationDateTime
      */
     public function testActiveTokenGetSetExpirationDateTimeResult()
     {

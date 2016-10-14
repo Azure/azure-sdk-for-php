@@ -44,9 +44,7 @@ interface ICurrentStateSerializer
      * Serializes the current state.
      * 
      * @param CurrentState $state  The current state.
-     * @param string       $stream The output stream.
-     * 
-     * @return none
+     * @param resource     $stream The output stream.
      */
-    public function serialize($state, $stream);
+    public function serialize(CurrentState $state, $stream);
 }

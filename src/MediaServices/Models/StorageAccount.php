@@ -61,9 +61,9 @@ class StorageAccount
      *
      * @param array $options Array containing values for object properties
      *
-     * @return WindowsAzure\MediaServices\Models\StorageAccount
+     * @return StorageAccount
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         $storageAccount = new self();
         $storageAccount->fromArray($options);
@@ -82,10 +82,8 @@ class StorageAccount
      * Fill storage account from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return none
      */
-    public function fromArray($options)
+    public function fromArray(array $options)
     {
         if (isset($options['Name'])) {
             Validate::isString($options['Name'], 'options[Name]');

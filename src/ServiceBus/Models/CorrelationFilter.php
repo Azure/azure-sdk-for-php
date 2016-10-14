@@ -71,8 +71,6 @@ class CorrelationFilter extends Filter
      * Sets the ID of the correlation.
      * 
      * @param string $correlationId The ID of the correlation.
-     * 
-     * @return none
      */
     public function setCorrelationId($correlationId)
     {

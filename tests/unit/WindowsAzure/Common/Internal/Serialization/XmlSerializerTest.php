@@ -84,26 +84,8 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::serialize
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::_arr2xml
-     */
-    public function testSerializeNoArray()
-    {
-        // Setup
-        $xmlSerializer = new XmlSerializer();
-        $expected = false;
-        $array = 'not an array';
-        $serializerProperties = array(XmlSerializer::ROOT_NAME => ServiceProperties::$xmlRootName);
-
-        // Test
-        $actual = $xmlSerializer->serialize($array, $serializerProperties);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::serialize
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::_arr2xml
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::serialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::_arr2xml
      */
     public function testSerializeAttribute()
     {
@@ -112,13 +94,13 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
         $expected = '<?xml version="1.0" encoding="UTF-8"?>'."\n".
             '<Object field1="value1" field2="value2"/>'."\n";
 
-        $object = array(
-            '@attributes' => array(
+        $object = [
+            '@attributes' => [
                 'field1' => 'value1',
                 'field2' => 'value2',
-            ),
-        );
-        $serializerProperties = array(XmlSerializer::ROOT_NAME => 'Object');
+            ],
+        ];
+        $serializerProperties = [XmlSerializer::ROOT_NAME => 'Object'];
 
         // Test
         $actual = $xmlSerializer->serialize($object, $serializerProperties);

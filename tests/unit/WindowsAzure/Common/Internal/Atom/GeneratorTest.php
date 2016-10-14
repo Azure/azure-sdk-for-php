@@ -43,7 +43,7 @@ use WindowsAzure\Common\Internal\Atom\Generator;
 class GeneratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Generator::__construct
+     * @covers \WindowsAzure\Common\Internal\Atom\Generator::__construct
      */
     public function testGeneratorConstructor()
     {
@@ -63,8 +63,8 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Generator::getText
-     * @covers WindowsAzure\Common\Internal\Atom\Generator::setText
+     * @covers \WindowsAzure\Common\Internal\Atom\Generator::getText
+     * @covers \WindowsAzure\Common\Internal\Atom\Generator::setText
      */
     public function testGeneratorGetSetText()
     {
@@ -84,8 +84,8 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Generator::getUri
-     * @covers WindowsAzure\Common\Internal\Atom\Generator::setUri
+     * @covers \WindowsAzure\Common\Internal\Atom\Generator::getUri
+     * @covers \WindowsAzure\Common\Internal\Atom\Generator::setUri
      */
     public function testGeneratorGetSetUri()
     {
@@ -105,8 +105,8 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Generator::getVersion
-     * @covers WindowsAzure\Common\Internal\Atom\Generator::setVersion
+     * @covers \WindowsAzure\Common\Internal\Atom\Generator::getVersion
+     * @covers \WindowsAzure\Common\Internal\Atom\Generator::setVersion
      */
     public function testGeneratorGetSetVersion()
     {
@@ -126,8 +126,8 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\Common\Internal\Atom\Generator::getText
-     * @covers WindowsAzure\Common\Internal\Atom\Generator::setText
+     * @covers \WindowsAzure\Common\Internal\Atom\Generator::getText
+     * @covers \WindowsAzure\Common\Internal\Atom\Generator::setText
      */
     public function testGetSetText()
     {
@@ -147,8 +147,8 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\Common\Internal\Atom\Generator::getUri
-     * @covers WindowsAzure\Common\Internal\Atom\Generator::setUri
+     * @covers \WindowsAzure\Common\Internal\Atom\Generator::getUri
+     * @covers \WindowsAzure\Common\Internal\Atom\Generator::setUri
      */
     public function testGetSetUri()
     {
@@ -168,8 +168,8 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\Common\Internal\Atom\Generator::getVersion
-     * @covers WindowsAzure\Common\Internal\Atom\Generator::setVersion
+     * @covers \WindowsAzure\Common\Internal\Atom\Generator::getVersion
+     * @covers \WindowsAzure\Common\Internal\Atom\Generator::setVersion
      */
     public function testGetSetVersion()
     {

@@ -60,6 +60,8 @@ class TokenClaim
 
     /**
      * Create TokenClaim.
+     * @param $type
+     * @param null $value
      */
     public function __construct($type, $value = null)
     {

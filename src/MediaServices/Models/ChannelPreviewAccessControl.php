@@ -45,7 +45,7 @@ class ChannelPreviewAccessControl
     /**
      * ChannelPreviewAccessControl IP.
      *
-     * @var mixing
+     * @var IPAccessControl
      */
     private $_ip;
 
@@ -56,7 +56,7 @@ class ChannelPreviewAccessControl
      *
      * @return ChannelPreviewAccessControl
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         $operation = new self();
         $operation->fromArray($options);
@@ -76,7 +76,7 @@ class ChannelPreviewAccessControl
      *
      * @param array $options Array containing values for object properties
      */
-    public function fromArray($options)
+    public function fromArray(array $options)
     {
         if (!empty($options['IP'])) {
             Validate::isArray($options['IP'], 'options[IP]');
@@ -87,7 +87,7 @@ class ChannelPreviewAccessControl
     /**
      * Get the ChannelPreviewAccessControl IP.
      *
-     * @return mixing
+     * @return IPAccessControl
      */
     public function getIP()
     {
@@ -97,9 +97,9 @@ class ChannelPreviewAccessControl
     /**
      * Set the ChannelPreviewAccessControl IP.
      *
-     * @param mixing $value ChannelPreviewAccessControl IP.
+     * @param IPAccessControl $value ChannelPreviewAccessControl IP.
      */
-    public function setIP($value)
+    public function setIP(IPAccessControl $value)
     {
         $this->_ip = $value;
     }

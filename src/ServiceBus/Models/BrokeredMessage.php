@@ -86,7 +86,7 @@ class BrokeredMessage
         Validate::isString($body, 'body');
         $this->_body = $body;
         $this->_brokerProperties = new BrokerProperties();
-        $this->_customProperties = array();
+        $this->_customProperties = [];
     }
 
     /** 
@@ -103,10 +103,8 @@ class BrokeredMessage
      * Sets the broker properties.
      * 
      * @param BrokerProperties $brokerProperties The properties of broker.
-     * 
-     * @return none
      */
-    public function setBrokerProperties($brokerProperties)
+    public function setBrokerProperties(BrokerProperties $brokerProperties)
     {
         $this->_brokerProperties = $brokerProperties;
     }
@@ -125,8 +123,6 @@ class BrokeredMessage
      * Sets the body of the brokered message. 
      * 
      * @param string $body The body of the brokered message.
-     *
-     * @return none
      */
     public function setBody($body)
     {
@@ -148,8 +144,6 @@ class BrokeredMessage
      * 
      * @param string $contentType The content type of 
      *                            the brokered message. 
-     * 
-     * @return none
      */
     public function setContentType($contentType)
     {
@@ -170,10 +164,8 @@ class BrokeredMessage
      * Sets the date of the brokered message. 
      * 
      * @param \DateTime $date Sets the date of the brokered message. 
-     * 
-     * @return none
      */
-    public function setDate($date)
+    public function setDate(\DateTime $date)
     {
         $this->_date = $date;
     }
@@ -197,8 +189,6 @@ class BrokeredMessage
      * 
      * @param string $propertyName  The name of the property.
      * @param mixed  $propertyValue The value of the property.
-     * 
-     * @return none
      */
     public function setProperty($propertyName, $propertyValue)
     {
@@ -232,8 +222,6 @@ class BrokeredMessage
      * Sets the delivery count.
      * 
      * @param int $deliveryCount The times that the message has been delivered. 
-     * 
-     * @return none
      */
     public function setDeliveryCount($deliveryCount)
     {
@@ -254,8 +242,6 @@ class BrokeredMessage
      * Sets the ID of the message. 
      * 
      * @param string $messageId The ID of the message. 
-     *
-     * @return none
      */
     public function setMessageId($messageId)
     {
@@ -276,8 +262,6 @@ class BrokeredMessage
      * Sets the sequence number. 
      * 
      * @param int $sequenceNumber The sequence number. 
-     * 
-     * @return none
      */
     public function setSequenceNumber($sequenceNumber)
     {
@@ -298,8 +282,6 @@ class BrokeredMessage
      * Sets the time to live. 
      * 
      * @param string $timeToLive The time to live. 
-     *
-     * @return none
      */
     public function setTimeToLive($timeToLive)
     {
@@ -320,8 +302,6 @@ class BrokeredMessage
      * Sets the lock token. 
      * 
      * @param string $lockToken The token of the lock. 
-     * 
-     * @return none
      */
     public function setLockToken($lockToken)
     {
@@ -342,8 +322,6 @@ class BrokeredMessage
      * Sets the time of locked until UTC. 
      * 
      * @param string $lockedUntilUtc The time of locked until UTC.
-     * 
-     * @return none
      */
     public function setLockedUntilUtc($lockedUntilUtc)
     {
@@ -364,8 +342,6 @@ class BrokeredMessage
      * Sets the correlation ID.
      * 
      * @param string $correlationId The ID of the correlation.
-     * 
-     * @return none
      */
     public function setCorrelationId($correlationId)
     {
@@ -386,8 +362,6 @@ class BrokeredMessage
      * Sets the session ID.
      * 
      * @param string $sessionId The ID of the session. 
-     * 
-     * @return none
      */
     public function setSessionId($sessionId)
     {
@@ -408,8 +382,6 @@ class BrokeredMessage
      * Sets the label. 
      * 
      * @param string $label The label of the broker properties. 
-     *
-     * @return none
      */
     public function setLabel($label)
     {
@@ -430,8 +402,6 @@ class BrokeredMessage
      * Sets the reply to. 
      * 
      * @param string $replyTo The reply to value. 
-     *
-     * @return none
      */
     public function setReplyTo($replyTo)
     {
@@ -452,8 +422,6 @@ class BrokeredMessage
      * Sets the to.
      * 
      * @param string $to to.
-     *
-     * @return none
      */
     public function setTo($to)
     {
@@ -474,8 +442,6 @@ class BrokeredMessage
      * Sets the scheduled enqueue time. 
      * 
      * @param string $scheduledEnqueueTime The date/time of the message.
-     *
-     * @return none
      */
     public function setScheduledEnqueueTimeUtc($scheduledEnqueueTime)
     {
@@ -496,8 +462,6 @@ class BrokeredMessage
      * Sets the reply to session ID.
      * 
      * @param string $replyToSessionId The session ID of the reply to recipient. 
-     * 
-     * @return none
      */
     public function setReplyToSessionId($replyToSessionId)
     {
@@ -518,8 +482,6 @@ class BrokeredMessage
      * Sets the message location.
      *
      * @param string $messageLocation The location of the message. 
-     *
-     * @return none
      */
     public function setMessageLocation($messageLocation)
     {
@@ -540,8 +502,6 @@ class BrokeredMessage
      * Sets the location of the lock.
      * 
      * @param string $lockLocation The location of the lock.
-     * 
-     * @return none
      */
     public function setLockLocation($lockLocation)
     {

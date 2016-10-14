@@ -99,8 +99,6 @@ class GetStorageServiceKeysResult
      * Sets the url.
      * 
      * @param string $url The url.
-     * 
-     * @return none
      */
     public function setUrl($url)
     {
@@ -121,8 +119,6 @@ class GetStorageServiceKeysResult
      * Sets the primary.
      * 
      * @param string $primary The primary.
-     * 
-     * @return none
      */
     public function setPrimary($primary)
     {
@@ -143,8 +139,6 @@ class GetStorageServiceKeysResult
      * Sets the secondary.
      * 
      * @param string $secondary The secondary.
-     * 
-     * @return none
      */
     public function setSecondary($secondary)
     {

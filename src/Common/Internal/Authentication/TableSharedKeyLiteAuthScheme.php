@@ -51,14 +51,12 @@ class TableSharedKeyLiteAuthScheme extends StorageAuthScheme
      *
      * @param string $accountName storage account name.
      * @param string $accountKey  storage account primary or secondary key.
-     * 
-     * @return TableSharedKeyLiteAuthScheme
      */
     public function __construct($accountName, $accountKey)
     {
         parent::__construct($accountName, $accountKey);
 
-        $this->includedHeaders = array();
+        $this->includedHeaders = [];
         $this->includedHeaders[] = Resources::DATE;
     }
 
@@ -81,7 +79,7 @@ class TableSharedKeyLiteAuthScheme extends StorageAuthScheme
             $url, $queryParams
         );
 
-        $stringToSign = array();
+        $stringToSign = [];
 
         foreach ($this->includedHeaders as $header) {
             $stringToSign[] = Utilities::tryGetValue($headers, $header);

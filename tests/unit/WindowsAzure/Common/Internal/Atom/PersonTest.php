@@ -43,7 +43,7 @@ use WindowsAzure\Common\Internal\Atom\Person;
 class PersonTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Person::__construct
+     * @covers \WindowsAzure\Common\Internal\Atom\Person::__construct
      */
     public function testPersonConstructor()
     {
@@ -57,8 +57,8 @@ class PersonTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\Common\Internal\Atom\Person::getName
-     * @covers WindowsAzure\Common\Internal\Atom\Person::setName
+     * @covers \WindowsAzure\Common\Internal\Atom\Person::getName
+     * @covers \WindowsAzure\Common\Internal\Atom\Person::setName
      */
     public function testGetSetName()
     {
@@ -78,8 +78,8 @@ class PersonTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\Common\Internal\Atom\Person::getUri
-     * @covers WindowsAzure\Common\Internal\Atom\Person::setUri
+     * @covers \WindowsAzure\Common\Internal\Atom\Person::getUri
+     * @covers \WindowsAzure\Common\Internal\Atom\Person::setUri
      */
     public function testGetSetUri()
     {
@@ -99,8 +99,8 @@ class PersonTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\Common\Internal\Atom\Person::getEmail
-     * @covers WindowsAzure\Common\Internal\Atom\Person::setEmail
+     * @covers \WindowsAzure\Common\Internal\Atom\Person::getEmail
+     * @covers \WindowsAzure\Common\Internal\Atom\Person::setEmail
      */
     public function testGetSetEmail()
     {

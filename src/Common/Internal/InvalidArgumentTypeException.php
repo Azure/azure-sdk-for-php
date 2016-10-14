@@ -45,8 +45,6 @@ class InvalidArgumentTypeException extends \InvalidArgumentException
      *
      * @param string $validType The valid type that should be provided by the user.
      * @param string $name      The parameter name.
-     * 
-     * @return WindowsAzure\Common\Internal\InvalidArgumentTypeException
      */
     public function __construct($validType, $name = null)
     {

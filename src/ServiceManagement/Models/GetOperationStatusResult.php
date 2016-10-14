@@ -116,8 +116,6 @@ class GetOperationStatusResult
      * Sets the id.
      * 
      * @param string $id The id.
-     * 
-     * @return none
      */
     public function setId($id)
     {
@@ -138,8 +136,6 @@ class GetOperationStatusResult
      * Sets the status.
      * 
      * @param string $status The status.
-     * 
-     * @return none
      */
     public function setStatus($status)
     {
@@ -160,8 +156,6 @@ class GetOperationStatusResult
      * Sets the httpStatusCode.
      * 
      * @param string $httpStatusCode The httpStatusCode.
-     * 
-     * @return none
      */
     public function setHttpStatusCode($httpStatusCode)
     {
@@ -182,8 +176,6 @@ class GetOperationStatusResult
      * Sets the error.
      * 
      * @param ServiceException $error The error.
-     * 
-     * @return none
      */
     public function setError($error)
     {

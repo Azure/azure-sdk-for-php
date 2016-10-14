@@ -48,7 +48,7 @@ class Entry extends AtomBase
     /**
      * The author of the entry.
      *
-     * @var Person
+     * @var Person[]
      */
     protected $author;
 
@@ -62,7 +62,7 @@ class Entry extends AtomBase
     /**
      * The content of the entry.
      *
-     * @var string
+     * @var Content
      */
     protected $content;
 
@@ -141,15 +141,13 @@ class Entry extends AtomBase
      */
     public function __construct()
     {
-        $this->attributes = array();
+        $this->attributes = [];
     }
 
     /**
      * Populate the properties of an ATOM Entry instance with specified XML..
      *
      * @param string $xmlString A string representing an ATOM entry instance.
-     *
-     * @return none
      */
     public function parseXml($xmlString)
     {
@@ -161,13 +159,10 @@ class Entry extends AtomBase
      * Creates an ATOM ENTRY instance with specified simpleXML object.
      *
      * @param \SimpleXMLElement $entryXml xml element of ATOM ENTRY
-     *
-     * @return none
      */
-    public function fromXml($entryXml)
+    public function fromXml(\SimpleXMLElement $entryXml)
     {
         Validate::notNull($entryXml, 'entryXml');
-        Validate::isA($entryXml, '\SimpleXMLElement', 'entryXml');
 
         $this->attributes = (array) $entryXml->attributes();
         $entryArray = (array) $entryXml;
@@ -227,7 +222,7 @@ class Entry extends AtomBase
     /**
      * Gets the author of the entry.
      *
-     * @return Person
+     * @return Person[]
      */
     public function getAuthor()
     {
@@ -237,11 +232,9 @@ class Entry extends AtomBase
     /**
      * Sets the author of the entry.
      *
-     * @param Person $author The author of the entry.
-     *
-     * @return none
+     * @param Person[] $author The author of the entry.
      */
-    public function setAuthor($author)
+    public function setAuthor(array $author)
     {
         $this->author = $author;
     }
@@ -260,8 +253,6 @@ class Entry extends AtomBase
      * Sets the category.
      *
      * @param string $category The category of the entry.
-     *
-     * @return none
      */
     public function setCategory($category)
     {
@@ -282,10 +273,8 @@ class Entry extends AtomBase
      * Sets the content.
      *
      * @param Content $content Sets the content of the entry.
-     *
-     * @return none
      */
-    public function setContent($content)
+    public function setContent(Content $content)
     {
         $this->content = $content;
     }
@@ -304,8 +293,6 @@ class Entry extends AtomBase
      * Sets the contributor.
      *
      * @param string $contributor The contributor of the entry.
-     *
-     * @return none
      */
     public function setContributor($contributor)
     {
@@ -326,8 +313,6 @@ class Entry extends AtomBase
      * Sets the ID of the entry.
      *
      * @param string $id The id of the entry.
-     *
-     * @return none
      */
     public function setId($id)
     {
@@ -348,8 +333,6 @@ class Entry extends AtomBase
      * Sets the link of the entry.
      *
      * @param string $link The link of the entry.
-     *
-     * @return none
      */
     public function setLink($link)
     {
@@ -370,8 +353,6 @@ class Entry extends AtomBase
      * Sets published of the entry.
      *
      * @param bool $published Is the entry published.
-     *
-     * @return none
      */
     public function setPublished($published)
     {
@@ -392,8 +373,6 @@ class Entry extends AtomBase
      * Sets the rights of the entry.
      *
      * @param string $rights The rights of the entry.
-     *
-     * @return none
      */
     public function setRights($rights)
     {
@@ -414,8 +393,6 @@ class Entry extends AtomBase
      * Sets the source of the entry.
      *
      * @param string $source The source of the entry.
-     *
-     * @return none
      */
     public function setSource($source)
     {
@@ -436,8 +413,6 @@ class Entry extends AtomBase
      * Sets the summary of the entry.
      *
      * @param string $summary The summary of the entry.
-     *
-     * @return none
      */
     public function setSummary($summary)
     {
@@ -458,8 +433,6 @@ class Entry extends AtomBase
      * Sets the title of the entry.
      *
      * @param string $title The title of the entry.
-     *
-     * @return none
      */
     public function setTitle($title)
     {
@@ -480,10 +453,8 @@ class Entry extends AtomBase
      * Sets updated.
      *
      * @param \DateTime $updated updated.
-     *
-     * @return none
      */
-    public function setUpdated($updated)
+    public function setUpdated(\DateTime $updated)
     {
         $this->updated = $updated;
     }
@@ -502,8 +473,6 @@ class Entry extends AtomBase
      * Sets extension element.
      *
      * @param string $extensionElement The extension element of the entry.
-     *
-     * @return none
      */
     public function setExtensionElement($extensionElement)
     {
@@ -514,13 +483,11 @@ class Entry extends AtomBase
      * Writes a inner XML string representing the entry.
      *
      * @param \XMLWriter $xmlWriter The XML writer.
-     *
-     * @return none
      */
-    public function writeXml($xmlWriter)
+    public function writeXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->startElementNS(
+        $xmlWriter->startElementNs(
             'atom',
             Resources::ENTRY,
             Resources::ATOM_NAMESPACE
@@ -533,10 +500,8 @@ class Entry extends AtomBase
      * Writes a inner XML string representing the entry.
      *
      * @param \XMLWriter $xmlWriter The XML writer.
-     *
-     * @return none
      */
-    public function writeInnerXml($xmlWriter)
+    public function writeInnerXml(\XMLWriter $xmlWriter)
     {
         if (!is_null($this->attributes)) {
             if (is_array($this->attributes)) {
@@ -634,7 +599,7 @@ class Entry extends AtomBase
         );
 
         if (!is_null($this->updated)) {
-            $xmlWriter->writeElementNS(
+            $xmlWriter->writeElementNs(
                 'atom',
                 'updated',
                 Resources::ATOM_NAMESPACE,

@@ -207,10 +207,9 @@ class Task
      * Create task from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return WindowsAzure\MediaServices\Models\Task
+     * @return Task
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         Validate::notNull($options['TaskBody'], 'options[TaskBody]');
         Validate::notNull($options['Options'], 'options[Options]');
@@ -244,10 +243,8 @@ class Task
      * Fill task from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return none
      */
-    public function fromArray($options)
+    public function fromArray(array $options)
     {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
@@ -353,7 +350,7 @@ class Task
         }
 
         if (isset($options['ErrorDetails'])) {
-            $this->_errorDetails = array();
+            $this->_errorDetails = [];
             if (is_array($options['ErrorDetails'])) {
                 foreach ($options['ErrorDetails'] as $errorDetail) {
                     $this->_errorDetails[] = ErrorDetail::createFromOptions(
@@ -364,7 +361,7 @@ class Task
         }
 
         if (isset($options['HistoricalEvents'])) {
-            $this->_historicalEvents = array();
+            $this->_historicalEvents = [];
             if (is_array($options['HistoricalEvents'])) {
                 foreach ($options['HistoricalEvents'] as $historicalEvent) {
                     $evnt = TaskHistoricalEvent::createFromOptions($historicalEvent);
@@ -389,8 +386,6 @@ class Task
      * Set "Name".
      *
      * @param string $value Name
-     *
-     * @return none
      */
     public function setName($value)
     {
@@ -451,8 +446,6 @@ class Task
      * Set "Priority".
      *
      * @param int $value Priority
-     *
-     * @return none
      */
     public function setPriority($value)
     {
@@ -483,8 +476,6 @@ class Task
      * Set "Initialization vector".
      *
      * @param string $value Initialization vector
-     *
-     * @return none
      */
     public function setInitializationVector($value)
     {
@@ -505,8 +496,6 @@ class Task
      * Set "Encryption version".
      *
      * @param string $value Encryption version
-     *
-     * @return none
      */
     public function setEncryptionVersion($value)
     {
@@ -527,8 +516,6 @@ class Task
      * Set "Encryption scheme".
      *
      * @param string $value Encryption scheme
-     *
-     * @return none
      */
     public function setEncryptionScheme($value)
     {
@@ -549,8 +536,6 @@ class Task
      * Set "Encription key id".
      *
      * @param string $value Encription key id
-     *
-     * @return none
      */
     public function setEncryptionKeyId($value)
     {
@@ -581,8 +566,6 @@ class Task
      * Set "Task body".
      *
      * @param string $value Task body
-     *
-     * @return none
      */
     public function setTaskBody($value)
     {
@@ -623,8 +606,6 @@ class Task
      * Set "Media procesot id".
      *
      * @param string $value Media procesot id
-     *
-     * @return none
      */
     public function setMediaProcessorId($value)
     {
@@ -645,8 +626,6 @@ class Task
      * Set "Configuration".
      *
      * @param string $value Configuration
-     *
-     * @return none
      */
     public function setConfiguration($value)
     {

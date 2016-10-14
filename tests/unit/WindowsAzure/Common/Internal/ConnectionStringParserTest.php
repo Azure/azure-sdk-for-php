@@ -69,15 +69,15 @@ class ConnectionStringParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::parseConnectionString 
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::__construct
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_parse
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_createException
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_skipWhiteSpaces
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_extractKey
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_extractString
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_skipOperator
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_extractValue
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::parseConnectionString 
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::__construct
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_parse
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_createException
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_skipWhiteSpaces
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_extractKey
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_extractString
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_skipOperator
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_extractValue
      */
     public function testKeyNames()
     {
@@ -99,15 +99,15 @@ class ConnectionStringParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::parseConnectionString 
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::__construct
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_parse
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_createException
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_skipWhiteSpaces
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_extractKey
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_extractString
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_skipOperator
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_extractValue
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::parseConnectionString 
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::__construct
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_parse
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_createException
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_skipWhiteSpaces
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_extractKey
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_extractString
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_skipOperator
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_extractValue
      */
     public function testAssignments()
     {
@@ -117,15 +117,15 @@ class ConnectionStringParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::parseConnectionString 
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::__construct
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_parse
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_createException
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_skipWhiteSpaces
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_extractKey
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_extractString
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_skipOperator
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_extractValue
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::parseConnectionString 
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::__construct
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_parse
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_createException
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_skipWhiteSpaces
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_extractKey
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_extractString
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_skipOperator
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_extractValue
      */
     public function testValues()
     {
@@ -154,15 +154,15 @@ class ConnectionStringParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::parseConnectionString 
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::__construct
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_parse
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_createException
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_skipWhiteSpaces
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_extractKey
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_extractString
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_skipOperator
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_extractValue
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::parseConnectionString 
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::__construct
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_parse
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_createException
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_skipWhiteSpaces
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_extractKey
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_extractString
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_skipOperator
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_extractValue
      */
     public function testSeparators()
     {
@@ -174,15 +174,15 @@ class ConnectionStringParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::parseConnectionString 
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::__construct
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_parse
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_createException
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_skipWhiteSpaces
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_extractKey
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_extractString
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_skipOperator
-     * @covers WindowsAzure\Common\Internal\ConnectionStringParser::_extractValue
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::parseConnectionString 
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::__construct
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_parse
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_createException
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_skipWhiteSpaces
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_extractKey
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_extractString
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_skipOperator
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringParser::_extractValue
      */
     public function testInvalidInputFail()
     {

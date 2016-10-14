@@ -61,9 +61,9 @@ class AudioStream
      *
      * @param array $options Array containing values for object properties
      *
-     * @return VideoStream
+     * @return AudioStream
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         $operation = new self();
         $operation->fromArray($options);

@@ -105,8 +105,6 @@ class UpgradeStatus
      * Sets the deployment upgrade type.
      * 
      * @param string $upgradeType The deployment upgrade type.
-     * 
-     * @return none
      */
     public function setUpgradeType($upgradeType)
     {
@@ -131,8 +129,6 @@ class UpgradeStatus
      * 
      * @param string $currentUpgradeDomainState The deployment current upgrade domain
      *                                          state.
-     * 
-     * @return none
      */
     public function setCurrentUpgradeDomainState($currentUpgradeDomainState)
     {
@@ -157,8 +153,6 @@ class UpgradeStatus
      * Sets the deployment current upgrade domain.
      * 
      * @param int $currentUpgradeDomain The deployment current upgrade domain.
-     * 
-     * @return none
      */
     public function setCurrentUpgradeDomain($currentUpgradeDomain)
     {
