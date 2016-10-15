@@ -47,7 +47,7 @@ use WindowsAzure\MediaServices\Models\Asset;
 class ValidateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Validate::isArray
+     * @covers \WindowsAzure\Common\Internal\Validate::isArray
      */
     public function testIsArrayWithArray()
     {
@@ -57,7 +57,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isArray
+     * @covers \WindowsAzure\Common\Internal\Validate::isArray
      */
     public function testIsArrayWithNonArray()
     {
@@ -66,7 +66,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isString
+     * @covers \WindowsAzure\Common\Internal\Validate::isString
      */
     public function testIsStringWithString()
     {
@@ -76,7 +76,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isString
+     * @covers \WindowsAzure\Common\Internal\Validate::isString
      */
     public function testIsStringWithNonString()
     {
@@ -85,7 +85,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isBoolean
+     * @covers \WindowsAzure\Common\Internal\Validate::isBoolean
      */
     public function testIsBooleanWithBoolean()
     {
@@ -95,7 +95,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isInteger
+     * @covers \WindowsAzure\Common\Internal\Validate::isInteger
      */
     public function testIsIntegerWithInteger()
     {
@@ -105,7 +105,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isInteger
+     * @covers \WindowsAzure\Common\Internal\Validate::isInteger
      */
     public function testIsIntegerWithNonInteger()
     {
@@ -114,7 +114,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isTrue
+     * @covers \WindowsAzure\Common\Internal\Validate::isTrue
      */
     public function testIsTrueWithTrue()
     {
@@ -124,7 +124,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isTrue
+     * @covers \WindowsAzure\Common\Internal\Validate::isTrue
      */
     public function testIsTrueWithFalse()
     {
@@ -133,7 +133,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isDate
+     * @covers \WindowsAzure\Common\Internal\Validate::isDate
      */
     public function testIsDateWithDate()
     {
@@ -144,7 +144,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isDate
+     * @covers \WindowsAzure\Common\Internal\Validate::isDate
      */
     public function testIsDateWithNonDate()
     {
@@ -153,7 +153,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::notNullOrEmpty
+     * @covers \WindowsAzure\Common\Internal\Validate::notNullOrEmpty
      */
     public function testNotNullOrEmptyWithNonEmpty()
     {
@@ -163,7 +163,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::notNullOrEmpty
+     * @covers \WindowsAzure\Common\Internal\Validate::notNullOrEmpty
      */
     public function testNotNullOrEmptyWithEmpty()
     {
@@ -172,7 +172,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::notNull
+     * @covers \WindowsAzure\Common\Internal\Validate::notNull
      */
     public function testNotNullWithNull()
     {
@@ -181,7 +181,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isInstanceOf
+     * @covers \WindowsAzure\Common\Internal\Validate::isInstanceOf
      */
     public function testIsInstanceOfStringPasses()
     {
@@ -197,7 +197,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isInstanceOf
+     * @covers \WindowsAzure\Common\Internal\Validate::isInstanceOf
      */
     public function testIsInstanceOfStringFail()
     {
@@ -213,7 +213,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isInstanceOf
+     * @covers \WindowsAzure\Common\Internal\Validate::isInstanceOf
      */
     public function testIsInstanceOfArrayPasses()
     {
@@ -229,7 +229,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isInstanceOf
+     * @covers \WindowsAzure\Common\Internal\Validate::isInstanceOf
      */
     public function testIsInstanceOfArrayFail()
     {
@@ -245,7 +245,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isInstanceOf
+     * @covers \WindowsAzure\Common\Internal\Validate::isInstanceOf
      */
     public function testIsInstanceOfIntPasses()
     {
@@ -261,7 +261,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isInstanceOf
+     * @covers \WindowsAzure\Common\Internal\Validate::isInstanceOf
      */
     public function testIsInstanceOfIntFail()
     {
@@ -277,7 +277,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isInstanceOf
+     * @covers \WindowsAzure\Common\Internal\Validate::isInstanceOf
      */
     public function testIsInstanceOfNullValue()
     {
@@ -293,7 +293,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isDouble
+     * @covers \WindowsAzure\Common\Internal\Validate::isDouble
      */
     public function testIsDoubleSuccess()
     {
@@ -308,7 +308,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isDouble
+     * @covers \WindowsAzure\Common\Internal\Validate::isDouble
      */
     public function testIsDoubleFail()
     {
@@ -323,7 +323,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isDouble
+     * @covers \WindowsAzure\Common\Internal\Validate::isDouble
      */
     public function testGetValidateUri()
     {
@@ -335,7 +335,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isValidUri
+     * @covers \WindowsAzure\Common\Internal\Validate::isValidUri
      */
     public function testIsValidUriPass()
     {
@@ -350,7 +350,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isValidUri
+     * @covers \WindowsAzure\Common\Internal\Validate::isValidUri
      */
     public function testIsValidUriNull()
     {
@@ -365,7 +365,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isValidUri
+     * @covers \WindowsAzure\Common\Internal\Validate::isValidUri
      */
     public function testIsValidUriNotUri()
     {
@@ -380,7 +380,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isObject
+     * @covers \WindowsAzure\Common\Internal\Validate::isObject
      */
     public function testIsObjectPass()
     {
@@ -395,7 +395,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isObject
+     * @covers \WindowsAzure\Common\Internal\Validate::isObject
      */
     public function testIsObjectNull()
     {
@@ -410,7 +410,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isObject
+     * @covers \WindowsAzure\Common\Internal\Validate::isObject
      */
     public function testIsObjectNotObject()
     {
@@ -425,7 +425,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isA
+     * @covers \WindowsAzure\Common\Internal\Validate::isA
      */
     public function testIsAResourcesPasses()
     {
@@ -441,7 +441,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isA
+     * @covers \WindowsAzure\Common\Internal\Validate::isA
      */
     public function testIsANull()
     {
@@ -457,7 +457,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isA
+     * @covers \WindowsAzure\Common\Internal\Validate::isA
      */
     public function testIsAInvalidClass()
     {
@@ -473,7 +473,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isA
+     * @covers \WindowsAzure\Common\Internal\Validate::isA
      */
     public function testIsANotAClass()
     {
@@ -489,7 +489,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::methodExists
+     * @covers \WindowsAzure\Common\Internal\Validate::methodExists
      */
     public function testMethodExistsIfExists()
     {
@@ -506,7 +506,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::methodExists
+     * @covers \WindowsAzure\Common\Internal\Validate::methodExists
      */
     public function testMethodExistsIfNotExists()
     {
@@ -523,7 +523,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isDateString
+     * @covers \WindowsAzure\Common\Internal\Validate::isDateString
      */
     public function testIsDateStringValid()
     {
@@ -539,7 +539,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Validate::isDateString
+     * @covers \WindowsAzure\Common\Internal\Validate::isDateString
      */
     public function testIsDateStringNotValid()
     {

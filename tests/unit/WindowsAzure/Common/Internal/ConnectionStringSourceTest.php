@@ -50,7 +50,7 @@ class ConnectionStringSourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\ConnectionStringSource::environmentSource
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringSource::environmentSource
      */
     public function testEnvironmentSource()
     {
@@ -70,8 +70,8 @@ class ConnectionStringSourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\ConnectionStringSource::getDefaultSources
-     * @covers WindowsAzure\Common\Internal\ConnectionStringSource::_init
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringSource::getDefaultSources
+     * @covers \WindowsAzure\Common\Internal\ConnectionStringSource::_init
      */
     public function testGetDefaultSources()
     {

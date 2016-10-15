@@ -43,7 +43,7 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 class InvalidArgumentTypeExceptionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\InvalidArgumentTypeException::__construct
+     * @covers \WindowsAzure\Common\Internal\InvalidArgumentTypeException::__construct
      */
     public function test__construct()
     {
