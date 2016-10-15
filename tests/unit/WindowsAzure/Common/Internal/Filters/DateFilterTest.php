@@ -45,7 +45,7 @@ use WindowsAzure\Common\Internal\Resources;
 class DateFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Filters\DateFilter::handleRequest
+     * @covers \WindowsAzure\Common\Internal\Filters\DateFilter::handleRequest
      */
     public function testHandleRequest()
     {
@@ -61,7 +61,7 @@ class DateFilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Filters\DateFilter::handleResponse
+     * @covers \WindowsAzure\Common\Internal\Filters\DateFilter::handleResponse
      */
     public function testHandleResponse()
     {

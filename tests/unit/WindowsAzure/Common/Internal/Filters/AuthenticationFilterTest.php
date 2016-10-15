@@ -47,8 +47,8 @@ use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
 class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers AuthenticationFilter::handleRequest
-     * @covers AuthenticationFilter::__construct
+     * @covers \WindowsAzure\Common\Internal\Filters\AuthenticationFilter::handleRequest
+     * @covers \WindowsAzure\Common\Internal\Filters\AuthenticationFilter::__construct
      */
     public function testHandleRequest()
     {
@@ -67,8 +67,8 @@ class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers AuthenticationFilter::handleRequest
-     * @covers AuthenticationFilter::__construct
+     * @covers \WindowsAzure\Common\Internal\Filters\AuthenticationFilter::handleRequest
+     * @covers \WindowsAzure\Common\Internal\Filters\AuthenticationFilter::__construct
      */
     public function testHandleRequestWithTable()
     {
@@ -87,7 +87,7 @@ class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers AuthenticationFilter::handleResponse
+     * @covers \WindowsAzure\Common\Internal\Filters\AuthenticationFilter::handleResponse
      */
     public function testHandleResponse()
     {
