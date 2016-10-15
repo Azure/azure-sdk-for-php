@@ -48,7 +48,7 @@ use WindowsAzure\Common\Internal\OAuthRestProxy;
 class OAuthSchemeTest extends ServiceRestProxyTestBase
 {
     /**
-     * @covers OAuthScheme::__construct
+     * @covers \WindowsAzure\Common\Internal\Authentication\OAuthScheme::__construct
      */
     public function test__construct()
     {
@@ -71,7 +71,7 @@ class OAuthSchemeTest extends ServiceRestProxyTestBase
     }
 
     /**
-     * @covers OAuthScheme::getAuthorizationHeader
+     * @covers \WindowsAzure\Common\Internal\Authentication\OAuthScheme::getAuthorizationHeader
      */
     public function testGetAuthorizationHeader()
     {
@@ -103,7 +103,7 @@ class OAuthSchemeTest extends ServiceRestProxyTestBase
     }
 
     /**
-     * @covers OAuthScheme::getAuthorizationHeader
+     * @covers \WindowsAzure\Common\Internal\Authentication\OAuthScheme::getAuthorizationHeader
      */
     public function testGetAuthorizationHeaderMultiple()
     {

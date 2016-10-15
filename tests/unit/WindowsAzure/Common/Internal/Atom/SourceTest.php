@@ -47,7 +47,7 @@ use WindowsAzure\Common\Internal\Atom\Category;
 class SourceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Source::__construct
+     * @covers \WindowsAzure\Common\Internal\Atom\Source::__construct
      */
     public function testSourceConstructor()
     {
@@ -61,8 +61,8 @@ class SourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\Common\Internal\Atom\Source::getAttributes
-     * @covers WindowsAzure\Common\Internal\Atom\Source::setAttributes
+     * @covers \WindowsAzure\Common\Internal\Atom\Source::getAttributes
+     * @covers \WindowsAzure\Common\Internal\Atom\Source::setAttributes
      */
     public function testGetSetAttributes()
     {
@@ -83,8 +83,8 @@ class SourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Source::getAuthor
-     * @covers Source::setAuthor
+     * @covers \WindowsAzure\Common\Internal\Atom\Source::getAuthor
+     * @covers \WindowsAzure\Common\Internal\Atom\Source::setAuthor
      */
     public function testGetSetAuthor()
     {
@@ -104,8 +104,8 @@ class SourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Source::getCategory
-     * @covers Source::setCategory
+     * @covers \WindowsAzure\Common\Internal\Atom\Source::getCategory
+     * @covers \WindowsAzure\Common\Internal\Atom\Source::setCategory
      */
     public function testGetSetCategory()
     {
@@ -128,8 +128,8 @@ class SourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Source::getContributor
-     * @covers Source::setContributor
+     * @covers \WindowsAzure\Common\Internal\Atom\Source::getContributor
+     * @covers \WindowsAzure\Common\Internal\Atom\Source::setContributor
      */
     public function testGetSetContributor()
     {
@@ -149,8 +149,8 @@ class SourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Source::getGenerator
-     * @covers Source::setGenerator
+     * @covers \WindowsAzure\Common\Internal\Atom\Source::getGenerator
+     * @covers \WindowsAzure\Common\Internal\Atom\Source::setGenerator
      */
     public function testGetSetGenerator()
     {
@@ -170,8 +170,8 @@ class SourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Source::getIcon
-     * @covers Source::setIcon
+     * @covers \WindowsAzure\Common\Internal\Atom\Source::getIcon
+     * @covers \WindowsAzure\Common\Internal\Atom\Source::setIcon
      */
     public function testGetSetIcon()
     {
@@ -191,8 +191,8 @@ class SourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Source::getId
-     * @covers Source::setId
+     * @covers \WindowsAzure\Common\Internal\Atom\Source::getId
+     * @covers \WindowsAzure\Common\Internal\Atom\Source::setId
      */
     public function testGetSetId()
     {
