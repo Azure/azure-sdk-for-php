@@ -84,8 +84,8 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers XmlSerializer::serialize
-     * @covers XmlSerializer::_arr2xml
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::serialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::_arr2xml
      */
     public function testSerializeAttribute()
     {

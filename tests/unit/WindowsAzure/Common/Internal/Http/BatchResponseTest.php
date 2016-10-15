@@ -44,8 +44,8 @@ use WindowsAzure\Common\Internal\Http\HttpCallContext;
 class BatchResponseTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Http\BatchResponse::__construct
-     * @covers WindowsAzure\Common\Internal\Http\BatchResponse::getContexts
+     * @covers \WindowsAzure\Common\Internal\Http\BatchResponse::__construct
+     * @covers \WindowsAzure\Common\Internal\Http\BatchResponse::getContexts
      */
     public function test__construct()
     {
@@ -76,8 +76,8 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\BatchResponse::__construct
-     * @covers WindowsAzure\Common\Internal\Http\BatchResponse::getContexts
+     * @covers \WindowsAzure\Common\Internal\Http\BatchResponse::__construct
+     * @covers \WindowsAzure\Common\Internal\Http\BatchResponse::getContexts
      */
     public function test__constructWithRequestSuccess()
     {
@@ -116,8 +116,8 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\BatchResponse::__construct
-     * @covers WindowsAzure\Common\Internal\Http\BatchResponse::getContexts
+     * @covers \WindowsAzure\Common\Internal\Http\BatchResponse::__construct
+     * @covers \WindowsAzure\Common\Internal\Http\BatchResponse::getContexts
      */
     public function test__constructWithRequestException()
     {
