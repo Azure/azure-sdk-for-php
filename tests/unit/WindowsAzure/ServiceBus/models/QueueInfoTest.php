@@ -65,8 +65,8 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers QueueInfo::getQueueDescription
-     * @covers QueueInfo::setQueueDescription
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::getQueueDescription
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::setQueueDescription
      */
     public function testGetSetQueueDescription()
     {
@@ -86,8 +86,8 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers QueueInfo::getLockDuration
-     * @covers QueueInfo::setLockDuration
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::getLockDuration
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::setLockDuration
      */
     public function testGetSetLockDuration()
     {
