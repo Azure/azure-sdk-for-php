@@ -64,8 +64,8 @@ class SubscriptionInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers SubscriptionInfo::getSubscriptionDescription
-     * @covers SubscriptionInfo::setSubscriptionDescription
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::getSubscriptionDescription
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::setSubscriptionDescription
      */
     public function testGetSetSubscriptionDescription()
     {
@@ -85,8 +85,8 @@ class SubscriptionInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers SubscriptionInfo::getLockDuration
-     * @covers SubscriptionInfo::setLockDuration
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::getLockDuration
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::setLockDuration
      */
     public function testGetSetLockDuration()
     {

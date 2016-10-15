@@ -833,11 +833,11 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listRules
-     * @covers TopicInfo::parseXml
-     * @covers TopicDescription::create
-     * @covers SubscriptionInfo::parseXml
-     * @covers SubscriptionDescription::create
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::listRules
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::parseXml
+     * @covers \WindowsAzure\ServiceBus\Models\TopicDescription::create
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::parseXml
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionDescription::create
      * @covers \WindowsAzure\ServiceBus\Models\RuleInfo::parseXml
      * @covers \WindowsAzure\ServiceBus\Models\RuleDescription::create
      */

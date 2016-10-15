@@ -169,7 +169,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Service::serialize
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::serialize
      */
     public function testSerializeWithInvalidSerializer()
     {
