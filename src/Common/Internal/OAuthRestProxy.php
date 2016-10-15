@@ -73,9 +73,9 @@ class OAuthRestProxy extends ServiceRestProxy
     public function getAccessToken($grantType, $clientId, $clientSecret, $scope)
     {
         $method = Resources::HTTP_POST;
-        $headers = array();
-        $queryParams = array();
-        $postParameters = array();
+        $headers = [];
+        $queryParams = [];
+        $postParameters = [];
         $statusCode = Resources::STATUS_OK;
 
         $postParameters = $this->addPostParameter(

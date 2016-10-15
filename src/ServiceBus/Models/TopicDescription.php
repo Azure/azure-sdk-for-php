@@ -104,7 +104,7 @@ class TopicDescription
         $topicDescriptionArray = (array) $root;
 
         if (array_key_exists('DefaultMessageToLive', $topicDescriptionArray)) {
-            $topicDescription->setDefaultMessageToLive(
+            $topicDescription->setDefaultMessageTimeToLive(
                 (string) $topicDescriptionArray['DefaultMessageToLive']
             );
         }

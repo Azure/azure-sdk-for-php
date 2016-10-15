@@ -438,7 +438,7 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::notNullOrEmpty($keyType, 'keyType');
 
         $body = $this->_createRequestXml(
-            array(Resources::XTAG_KEY_TYPE => $keyType),
+            [Resources::XTAG_KEY_TYPE => $keyType],
             Resources::XTAG_REGENERATE_KEYS
         );
 
@@ -1030,14 +1030,14 @@ class ServiceManagementRestProxy extends RestProxy
         $treatWarningsAsErrors = Utilities::booleanToString(
             $options->getTreatWarningsAsErrors()
         );
-        $xmlElements = array(
+        $xmlElements = [
             Resources::XTAG_NAME => $deploymentName,
             Resources::XTAG_PACKAGE_URL => $packageUrl,
             Resources::XTAG_LABEL => $label,
             Resources::XTAG_CONFIGURATION => $configuration,
             Resources::XTAG_START_DEPLOYMENT => $startDeployment,
             Resources::XTAG_TREAT_WARNINGS_AS_ERROR => $treatWarningsAsErrors,
-        );
+        ];
         $requestXml = $this->_createRequestXml(
             $xmlElements,
             Resources::XTAG_CREATE_DEPLOYMENT
@@ -1123,10 +1123,10 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::isString($source, 'source');
         Validate::notNullOrEmpty($source, 'source');
 
-        $xmlElements = array(
+        $xmlElements = [
             Resources::XTAG_PRODUCTION => $destination,
             Resources::XTAG_SOURCE_DEPLOYMENT => $source,
-        );
+        ];
         $body = $this->_createRequestXml($xmlElements, Resources::XTAG_SWAP);
         $context = new HttpCallContext();
         $context->setMethod(Resources::HTTP_POST);
@@ -1205,11 +1205,11 @@ class ServiceManagementRestProxy extends RestProxy
         $warningsTreatment = Utilities::booleanToString(
             $options->getTreatWarningsAsErrors()
         );
-        $xmlElements = array(
+        $xmlElements = [
             Resources::XTAG_CONFIGURATION => $configuration,
             Resources::XTAG_TREAT_WARNINGS_AS_ERROR => $warningsTreatment,
             Resources::XTAG_MODE => $options->getMode(),
-        );
+        ];
         $body = $this->_createRequestXml(
             $xmlElements,
             Resources::XTAG_CHANGE_CONFIGURATION
@@ -1262,7 +1262,7 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::notNullOrEmpty($options, 'options');
 
         $body = $this->_createRequestXml(
-            array(Resources::XTAG_STATUS => $status),
+            [Resources::XTAG_STATUS => $status],
             Resources::XTAG_UPDATE_DEPLOYMENT_STATUS
         );
         $context = new HttpCallContext();
@@ -1340,14 +1340,14 @@ class ServiceManagementRestProxy extends RestProxy
 
         $configuration = $this->_encodeConfiguration($configuration);
 
-        $xmlElements = array(
+        $xmlElements = [
             Resources::XTAG_MODE => $mode,
             Resources::XTAG_PACKAGE_URL => $packageUrl,
             Resources::XTAG_CONFIGURATION => $configuration,
             Resources::XTAG_LABEL => $label,
             Resources::XTAG_ROLE_TO_UPGRADE => $options->getRoleToUpgrade(),
             Resources::XTAG_FORCE => Utilities::booleanToString($force),
-        );
+        ];
         $body = $this->_createRequestXml(
             $xmlElements,
             Resources::XTAG_UPGRADE_DEPLOYMENT
@@ -1400,7 +1400,7 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::notNullOrEmpty($options, 'options');
 
         $body = $this->_createRequestXml(
-            array(Resources::XTAG_UPGRADE_DOMAIN => $upgradeDomain),
+            [Resources::XTAG_UPGRADE_DOMAIN => $upgradeDomain],
             Resources::XTAG_WALK_UPGRADE_DOMAIN
         );
         $context = new HttpCallContext();
@@ -1507,10 +1507,10 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::notNullOrEmpty($force, 'force');
         Validate::notNullOrEmpty($options, 'options');
 
-        $xmlElements = array(
+        $xmlElements = [
             Resources::XTAG_MODE => $mode,
             Resources::XTAG_FORCE => Utilities::booleanToString($force),
-        );
+        ];
         $body = $this->_createRequestXml(
             $xmlElements,
             Resources::XTAG_ROLLBACK_UPDATE_OR_UPGRADE

@@ -51,7 +51,7 @@ class Validate
     public static function isArray($var, $name)
     {
         if (!is_array($var)) {
-            throw new InvalidArgumentTypeException(gettype(array()), $name);
+            throw new InvalidArgumentTypeException(gettype([]), $name);
         }
     }
 
@@ -76,10 +76,9 @@ class Validate
      * Throws exception if the provided variable type is not boolean.
      *
      * @param mixed $var variable to check against.
-     *
-     * @throws InvalidArgumentTypeException
+     * @param $name
      */
-    public static function isBoolean($var)
+    public static function isBoolean($var, $name)
     {
         (bool) $var;
     }
@@ -170,10 +169,9 @@ class Validate
      * Throws exception if the provided $date is not of type \DateTime.
      *
      * @param mixed $date variable to check against.
-     *
-     * @throws InvalidArgumentTypeException
+     * @param string $name
      */
-    public static function isDate($date)
+    public static function isDate($date, $name)
     {
         if (gettype($date) != 'object' || get_class($date) != 'DateTime') {
             throw new InvalidArgumentTypeException('DateTime');
@@ -270,7 +268,7 @@ class Validate
     public static function getIsValidUri()
     {
         return function ($uri) {
-            return Validate::isValidUri($uri);
+            return Validate::isValidUri($uri, 'uri');
         };
     }
 
@@ -278,12 +276,10 @@ class Validate
      * Throws exception if the string is not of a valid uri.
      *
      * @param string $uri String to check.
-     *
-     * @throws \InvalidArgumentException
-     *
+     * @param string $name
      * @return bool
      */
-    public static function isValidUri($uri)
+    public static function isValidUri($uri, $name)
     {
         $isValid = filter_var($uri, FILTER_VALIDATE_URL);
 

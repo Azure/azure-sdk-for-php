@@ -57,7 +57,7 @@ class HostedService extends WindowsAzureService
         $sources = func_get_args();
         parent::__construct($sources);
 
-        $this->_deployments = array();
+        $this->_deployments = [];
         foreach ($sources as $source) {
             $deployments = Utilities::tryGetKeysChainValue(
                 $source,
@@ -82,14 +82,14 @@ class HostedService extends WindowsAzureService
     protected function toArray()
     {
         $arr = parent::toArray();
-        $order = array(
+        $order = [
             Resources::XTAG_NAMESPACE,
             Resources::XTAG_SERVICE_NAME,
             Resources::XTAG_LABEL,
             Resources::XTAG_DESCRIPTION,
             Resources::XTAG_LOCATION,
             Resources::XTAG_AFFINITY_GROUP,
-        );
+        ];
         $ordered = Utilities::orderArray($arr, $order);
 
         return $ordered;

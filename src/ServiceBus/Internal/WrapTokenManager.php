@@ -97,7 +97,7 @@ class WrapTokenManager
         $this->_wrapName = $wrapName;
         $this->_wrapPassword = $wrapPassword;
         $this->_wrapRestProxy = $wrapRestProxy;
-        $this->_activeTokens = array();
+        $this->_activeTokens = [];
     }
 
     /** 

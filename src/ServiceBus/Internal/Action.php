@@ -53,7 +53,7 @@ class Action
      */
     public function __construct()
     {
-        $this->attributes = array();
+        $this->attributes = [];
         $this->attributes['xmlns:xsi'] = Resources::XSI_XML_NAMESPACE;
     }
 

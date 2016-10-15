@@ -48,4 +48,9 @@ interface IInputChannel
      * @return resource
      */
     public function getInputStream($name);
+
+    /**
+     * Closes the input stream.
+     */
+    public function closeInputStream();
 }

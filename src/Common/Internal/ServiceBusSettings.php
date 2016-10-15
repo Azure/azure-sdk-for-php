@@ -104,7 +104,7 @@ class ServiceBusSettings extends ServiceSettings
      * 
      * @var array
      */
-    protected static $validSettingKeys = array();
+    protected static $validSettingKeys = [];
 
     /**
      * Initializes static members of the class.

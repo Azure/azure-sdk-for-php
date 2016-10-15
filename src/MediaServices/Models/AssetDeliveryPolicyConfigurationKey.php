@@ -134,9 +134,9 @@ class AssetDeliveryPolicyConfigurationKey
      */
     public static function stringifyAssetDeliveryPolicyConfiguartionKey(array $array)
     {
-        $jsonArray = array();
+        $jsonArray = [];
         foreach ($array as $key => $value) {
-            $jsonArray[] = array('Key' => $key, 'Value' => $value);
+            $jsonArray[] = ['Key' => $key, 'Value' => $value];
         }
 
         return json_encode($jsonArray);

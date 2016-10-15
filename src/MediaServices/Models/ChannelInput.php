@@ -68,7 +68,7 @@ class ChannelInput
      *
      * @var array
      */
-    private $_endpoints = array();
+    private $_endpoints = [];
 
     /**
      * Create ChannelInput from array.

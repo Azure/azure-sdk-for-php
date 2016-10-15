@@ -28,6 +28,7 @@ namespace WindowsAzure\ServiceBus\Internal;
 use Exception;
 use WindowsAzure\Common\Internal\FilterableService;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
+use WindowsAzure\ServiceBus\Models\ListQueuesOptions;
 use WindowsAzure\ServiceBus\Models\ListRulesOptions;
 use WindowsAzure\ServiceBus\Models\ListSubscriptionsOptions;
 use WindowsAzure\ServiceBus\Models\ListTopicsOptions;
@@ -173,12 +174,12 @@ interface IServiceBus extends FilterableService
     /**
      * Lists a queue. 
      * 
-     * @param ListQueueOptions $listQueueOptions The options to list the
-     *                                            queues.
+     * @param ListQueuesOptions|null $listQueueOptions The options to list the
+     *                                                 queues.
      *
      * @throws Exception
      */
-    public function listQueues($listQueueOptions);
+    public function listQueues(ListQueuesOptions $listQueueOptions = null);
 
     /**
      * Creates a topic with specified topic info.  

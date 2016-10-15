@@ -148,7 +148,7 @@ class Feed extends AtomBase
      */
     public function __construct()
     {
-        $this->attributes = array();
+        $this->attributes = [];
     }
 
     /**
@@ -676,7 +676,7 @@ class Feed extends AtomBase
         );
 
         if (!is_null($this->updated)) {
-            $xmlWriter->writeElementNS(
+            $xmlWriter->writeElementNs(
                 'atom',
                 'updated',
                 Resources::ATOM_NAMESPACE,

@@ -97,8 +97,8 @@ class ChannelEncoding
      */
     public function __construct()
     {
-        $this->_videoStreams = array();
-        $this->_audioStreams = array();
+        $this->_videoStreams = [];
+        $this->_audioStreams = [];
     }
 
     /**

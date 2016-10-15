@@ -28,7 +28,7 @@ namespace WindowsAzure\Common\Internal\Serialization;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
-use XmlWriter;
+use XMLWriter;
 
 /**
  * Short description.
@@ -220,7 +220,7 @@ class XmlSerializer implements ISerializer
             $xmlw->startElement($rootName);
         } else {
             foreach ($docNamespace as $uri => $prefix) {
-                $xmlw->startElementNS($prefix, $rootName, $uri);
+                $xmlw->startElementNs($prefix, $rootName, $uri);
                 break;
             }
         }

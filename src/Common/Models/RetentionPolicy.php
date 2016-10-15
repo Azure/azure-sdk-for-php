@@ -124,7 +124,7 @@ class RetentionPolicy
      */
     public function toArray()
     {
-        $array = array('Enabled' => Utilities::booleanToString($this->_enabled));
+        $array = ['Enabled' => Utilities::booleanToString($this->_enabled)];
         if (isset($this->_days)) {
             $array['Days'] = strval($this->_days);
         }

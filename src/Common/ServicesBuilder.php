@@ -38,7 +38,7 @@ use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Serialization\ISerializer;
-use WindowsAzure\Common\Internal\Validate;
+
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Filters\HeadersFilter;
@@ -232,7 +232,7 @@ class ServicesBuilder
         );
 
         // Adding headers filter
-        $headers = array();
+        $headers = [];
 
         $headersFilter = new HeadersFilter($headers);
         $serviceBusWrapper = $serviceBusWrapper->withFilter($headersFilter);
@@ -276,7 +276,7 @@ class ServicesBuilder
         );
 
         // Adding headers filter
-        $headers = array();
+        $headers = [];
 
         $headers[Resources::X_MS_VERSION] = Resources::SM_API_LATEST_VERSION;
 
@@ -318,13 +318,13 @@ class ServicesBuilder
         $accept = Resources::ACCEPT_HEADER_VALUE;
         $contentType = Resources::ATOM_ENTRY_CONTENT_TYPE;
 
-        $headers = array(
+        $headers = [
             Resources::X_MS_VERSION => $xMSVersion,
             Resources::DATA_SERVICE_VERSION => $dataVersion,
             Resources::MAX_DATA_SERVICE_VERSION => $dataMaxVersion,
             Resources::ACCEPT_HEADER => $accept,
             Resources::CONTENT_TYPE => $contentType,
-        );
+        ];
 
         $headersFilter = new HeadersFilter($headers);
         $mediaServicesWrapper = $mediaServicesWrapper->withFilter($headersFilter);

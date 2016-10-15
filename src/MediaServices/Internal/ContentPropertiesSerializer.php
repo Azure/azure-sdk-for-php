@@ -92,12 +92,14 @@ class ContentPropertiesSerializer
      */
     private static function _unserializeRecursive(SimpleXMLElement $xml)
     {
-        $result = array();
+        $result = [];
         $dataNamespace = Resources::DS_XML_NAMESPACE;
+        /** @var SimpleXMLElement $child */
         foreach ($xml->children($dataNamespace) as $child) {
             if (count($child->children($dataNamespace)) > 0) {
-                $value = array();
+                $value = [];
                 $children = $child->children($dataNamespace);
+                /** @var SimpleXMLElement $firstChild */
                 $firstChild = $children[0];
                 if ($firstChild->getName() == 'element') {
                     foreach ($children as $subChild) {
@@ -153,7 +155,7 @@ class ContentPropertiesSerializer
         $reflectionClass = new \ReflectionClass($object);
         $methodArray = $reflectionClass->getMethods();
 
-        $result = array();
+        $result = [];
         foreach ($methodArray as $method) {
             if ((strpos($method->name, 'get') === 0)
                 && $method->isPublic()
@@ -226,18 +228,18 @@ class ContentPropertiesSerializer
     private static function dateIntervalToString(\DateInterval $interval) {
 
         // Reading all non-zero date parts.
-        $date = array_filter(array(
+        $date = array_filter([
             'Y' => $interval->y,
             'M' => $interval->m,
             'D' => $interval->d
-        ));
+        ]);
 
         // Reading all non-zero time parts.
-        $time = array_filter(array(
+        $time = array_filter([
             'H' => $interval->h,
             'M' => $interval->i,
             'S' => $interval->s
-        ));
+        ]);
 
         $specString = 'P';
 

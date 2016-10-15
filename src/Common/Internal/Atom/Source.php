@@ -141,10 +141,10 @@ class Source extends AtomBase
      */
     public function __construct()
     {
-        $this->attributes = array();
-        $this->category = array();
-        $this->contributor = array();
-        $this->author = array();
+        $this->attributes = [];
+        $this->category = [];
+        $this->contributor = [];
+        $this->author = [];
     }
 
     /**
@@ -305,9 +305,7 @@ class Source extends AtomBase
     /**
      * Sets the icon of the source. 
      * 
-     * @param string $icon The icon of the source. 
-     * 
-     * @return string
+     * @param string $icon The icon of the source.
      */
     public function setIcon($icon)
     {
@@ -327,9 +325,7 @@ class Source extends AtomBase
     /**
      * Sets the ID of the source.
      * 
-     * @param string $id The ID of the source. 
-     * 
-     * @return string
+     * @param string $id The ID of the source.
      */
     public function setId($id)
     {
@@ -390,8 +386,6 @@ class Source extends AtomBase
      * Sets the rights of the source. 
      * 
      * @param string $rights The rights of the source. 
-     * 
-     * @return none
      */
     public function setRights($rights)
     {
@@ -596,7 +590,7 @@ class Source extends AtomBase
         );
 
         if (!is_null($this->updated)) {
-            $xmlWriter->writeElementNS(
+            $xmlWriter->writeElementNs(
                 'atom',
                 'updated',
                 Resources::ATOM_NAMESPACE,

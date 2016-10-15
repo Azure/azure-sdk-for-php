@@ -87,7 +87,7 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
      */
     private function _translateConfigurationSettings($environmentInfo)
     {
-        $configurationSettings = array();
+        $configurationSettings = [];
 
         $settingsInfo = Utilities::tryGetKeysChainValue(
             $environmentInfo,
@@ -98,7 +98,7 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
 
         if (!is_null($settingsInfo)) {
             if (array_key_exists('@attributes', $settingsInfo)) {
-                $settingsInfo = array(0 => $settingsInfo);
+                $settingsInfo = [0 => $settingsInfo];
             }
 
             foreach ($settingsInfo as $settingInfo) {
@@ -120,7 +120,7 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
      */
     private function _translateLocalResources($environmentInfo)
     {
-        $localResourcesMap = array();
+        $localResourcesMap = [];
 
         $localResourcesInfo = Utilities::tryGetKeysChainValue(
             $environmentInfo,
@@ -131,7 +131,7 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
 
         if (!is_null($localResourcesInfo)) {
             if (array_key_exists('@attributes', $localResourcesInfo)) {
-                $localResourcesInfo = array(0 => $localResourcesInfo);
+                $localResourcesInfo = [0 => $localResourcesInfo];
             }
 
             foreach ($localResourcesInfo as $localResourceInfo) {
@@ -162,7 +162,7 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
         RoleInstance $currentInstance,
         $currentRole
     ) {
-        $rolesMap = array();
+        $rolesMap = [];
 
         $rolesInfo = Utilities::tryGetKeysChainValue(
             $environmentInfo,
@@ -172,7 +172,7 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
 
         if (!is_null($rolesInfo)) {
             if (array_key_exists('@attributes', $rolesInfo)) {
-                $rolesInfo = array(0 => $rolesInfo);
+                $rolesInfo = [0 => $rolesInfo];
             }
 
             foreach ($rolesInfo as $roleInfo) {
@@ -193,7 +193,7 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
         }
 
         if (!array_key_exists($currentRole, $rolesMap)) {
-            $roleInstances = array();
+            $roleInstances = [];
             $roleInstances[$currentInstance->getId()] = $currentInstance;
 
             $singleRole = new Role($currentRole, $roleInstances);
@@ -214,7 +214,7 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
      */
     private function _translateRoleInstances($instancesInfo)
     {
-        $roleInstanceMap = array();
+        $roleInstanceMap = [];
 
         $instances = Utilities::tryGetKeysChainValue(
             $instancesInfo,
@@ -224,7 +224,7 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
 
         if (!is_null($instances)) {
             if (array_key_exists('@attributes', $instances)) {
-                $instances = array(0 => $instances);
+                $instances = [0 => $instances];
             }
 
             foreach ($instances as $instanceInfo) {
@@ -252,15 +252,15 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
      * 
      * @param string $endpointsInfo The endpoints info.
      * 
-     * @return array
+     * @return RoleInstanceEndpoint[]
      */
     private function _translateRoleInstanceEndpoints($endpointsInfo)
     {
-        $endpointsMap = array();
+        $endpointsMap = [];
 
         $endpoints = $endpointsInfo;
         if (array_key_exists('@attributes', $endpoints)) {
-            $endpoints = array(0 => $endpointsInfo);
+            $endpoints = [0 => $endpointsInfo];
         }
 
         foreach ($endpoints as $endpoint) {
@@ -285,7 +285,7 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
      */
     private function _translateCurrentInstance($environmentInfo)
     {
-        $endpoints = array();
+        $endpoints = [];
 
         $endpointsInfo = Utilities::tryGetKeysChainValue(
             $environmentInfo,

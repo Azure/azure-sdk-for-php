@@ -89,12 +89,12 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @var array
      */
-    private $_batchHeaders = array(
+    private $_batchHeaders = [
         Resources::DATA_SERVICE_VERSION => Resources::MEDIA_SERVICES_DATA_SERVICE_VERSION_VALUE,
         Resources::MAX_DATA_SERVICE_VERSION => Resources::MEDIA_SERVICES_MAX_DATA_SERVICE_VERSION_VALUE,
         Resources::ACCEPT_HEADER => Resources::ACCEPT_HEADER_VALUE,
         Resources::CONTENT_TYPE => Resources::XML_ATOM_CONTENT_TYPE,
-    );
+    ];
 
     /**
      * Sends HTTP request with the specified parameters.
@@ -120,7 +120,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     ) {
         // Add redirect to expected results
         if (!is_array($statusCode)) {
-            $statusCode = array($statusCode);
+            $statusCode = [$statusCode];
         }
         array_push($statusCode, Resources::STATUS_MOVED_PERMANENTLY);
 
@@ -195,7 +195,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         Validate::notNull($entry, 'entry');
         Validate::isA($entry, 'WindowsAzure\Common\Internal\Atom\Entry', 'entry');
 
-        $result = array();
+        $result = [];
         $content = $entry->getContent();
         if (!empty($content)) {
             $result = ContentPropertiesSerializer::unserialize(
@@ -220,14 +220,14 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         if ($xml->getName() == Resources::ENTRY) {
             $entry = new Entry();
             $entry->fromXml($xml);
-            $entries = array($entry);
+            $entries = [$entry];
         } else {
             $feed = new Feed();
             $feed->parseXml($xmlString);
             $entries = $feed->getEntry();
         }
 
-        $result = array();
+        $result = [];
         if (is_array($entries)) {
             foreach ($entries as $entry) {
                 $properties = $this->getPropertiesFromAtomEntry($entry);
@@ -252,9 +252,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     private function _createEntity($entity, $path, array $links = null)
     {
         $method = Resources::HTTP_POST;
-        $headers = array();
-        $postParams = array();
-        $queryParams = array();
+        $headers = [];
+        $postParams = [];
+        $queryParams = [];
         $statusCode = Resources::STATUS_CREATED;
         $body = $this->wrapAtomEntry($entity, $links);
 
@@ -290,10 +290,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $path,
         $method = Resources::HTTP_POST,
         $statusCode = Resources::STATUS_ACCEPTED,
-        array $headers = array())
+        array $headers = [])
     {
-        $postParams = array();
-        $queryParams = array();
+        $postParams = [];
+        $queryParams = [];
 
         $body = Resources::EMPTY_STRING;
         if (!is_string($entity) && !is_null($entity)) {
@@ -320,7 +320,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $entity = null;
         }
 
-        $options = array();
+        $options = [];
         $headers = $response->getHeader();
 
         // fill the operation identifier if present
@@ -353,9 +353,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     private function _getEntity($path)
     {
         $method = Resources::HTTP_GET;
-        $headers = array();
-        $postParams = array();
-        $queryParams = array();
+        $headers = [];
+        $postParams = [];
+        $queryParams = [];
         $statusCode = Resources::STATUS_OK;
 
         $response = $this->send(
@@ -384,8 +384,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     private function _getEntityList($path, array $queryParams = [])
     {
         $method = Resources::HTTP_GET;
-        $headers = array();
-        $postParams = array();
+        $headers = [];
+        $postParams = [];
         $statusCode = Resources::STATUS_OK;
 
         $response = $this->send(
@@ -409,9 +409,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     private function _updateEntity($entity, $path)
     {
         $method = Resources::HTTP_MERGE;
-        $headers = array();
-        $postParams = array();
-        $queryParams = array();
+        $headers = [];
+        $postParams = [];
+        $queryParams = [];
         $statusCode = Resources::STATUS_NO_CONTENT;
         $body = $this->wrapAtomEntry($entity);
 
@@ -434,9 +434,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     private function _deleteEntity($path)
     {
         $method = Resources::HTTP_DELETE;
-        $headers = array();
-        $postParams = array();
-        $queryParams = array();
+        $headers = [];
+        $postParams = [];
+        $queryParams = [];
         $statusCode = Resources::STATUS_NO_CONTENT;
 
         $this->send(
@@ -490,7 +490,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getAssetList(array $queryParams = [])
     {
         $propertyList = $this->_getEntityList('Assets', $queryParams);
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = Asset::createFromOptions($properties);
@@ -514,7 +514,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         );
 
         $propertyList = $this->_getEntityList("Assets('{$assetId}')/Locators");
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = Locator::createFromOptions($properties);
@@ -538,7 +538,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         );
 
         $propertyList = $this->_getEntityList("Assets('{$assetId}')/ContentKeys");
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = ContentKey::createFromOptions($properties);
@@ -562,7 +562,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         );
 
         $propertyList = $this->_getEntityList("Assets('{$assetId}')/ParentAssets");
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = Asset::createFromOptions($properties);
@@ -586,7 +586,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         );
 
         $propertyList = $this->_getEntityList("Assets('{$assetId}')/Files");
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = AssetFile::createFromOptions($properties);
@@ -664,7 +664,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $contentWriter = new \XMLWriter();
         $contentWriter->openMemory();
-        $contentWriter->writeElementNS(
+        $contentWriter->writeElementNs(
             'data',
             'uri',
             Resources::DS_XML_NAMESPACE,
@@ -673,11 +673,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $method = Resources::HTTP_POST;
         $path = "Assets('{$assetId}')/\$links/ContentKeys";
-        $headers = array(
+        $headers = [
             Resources::CONTENT_TYPE => Resources::XML_CONTENT_TYPE,
-        );
-        $postParams = array();
-        $queryParams = array();
+        ];
+        $postParams = [];
+        $queryParams = [];
         $statusCode = Resources::STATUS_NO_CONTENT;
         $body = $contentWriter->outputMemory();
 
@@ -714,9 +714,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $method = Resources::HTTP_DELETE;
         $path = "Assets('{$assetId}')/\$links/ContentKeys('{$contentKeyId}')";
-        $headers = array();
-        $postParams = array();
-        $queryParams = array();
+        $headers = [];
+        $postParams = [];
+        $queryParams = [];
         $statusCode = Resources::STATUS_NO_CONTENT;
 
         $this->send(
@@ -776,7 +776,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getAccessPolicyList()
     {
         $propertyList = $this->_getEntityList('AccessPolicies');
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = AccessPolicy::createFromOptions($properties);
@@ -888,7 +888,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $locatorsList = $this->_getEntityList("Assets('{$assetId}')/Locators");
 
-        $result = array();
+        $result = [];
 
         foreach ($locatorsList as $locator) {
             $result[] = Locator::createFromOptions($locator);
@@ -905,7 +905,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getLocatorList()
     {
         $propertyList = $this->_getEntityList('Locators');
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = Locator::createFromOptions($properties);
@@ -953,9 +953,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $assetIdEncoded = urlencode($assetId);
 
         $method = Resources::HTTP_GET;
-        $headers = array();
-        $postParams = array();
-        $queryParams = array();
+        $headers = [];
+        $postParams = [];
+        $queryParams = [];
         $path = "CreateFileInfos?assetid='{$assetIdEncoded}'";
         $statusCode = Resources::STATUS_NO_CONTENT;
 
@@ -996,7 +996,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getAssetFileList()
     {
         $propertyList = $this->_getEntityList('Files');
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = AssetFile::createFromOptions($properties);
@@ -1078,7 +1078,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     private function _uploadAssetFileFromResource($url, $resource)
     {
         $blockSize = self::MAX_BLOCK_SIZE;
-        $blockIds = array();
+        $blockIds = [];
 
         $blockContent = fread($resource, $blockSize);
         if (feof($resource)) {
@@ -1113,7 +1113,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     private function _uploadAssetFileFromString($url, $body)
     {
         $blockSize = self::MAX_BLOCK_SIZE;
-        $blockIds = array();
+        $blockIds = [];
 
         $fileSize = strlen($body);
 
@@ -1153,13 +1153,13 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     private function _uploadAssetFileSingle($url, $body)
     {
         $method = Resources::HTTP_PUT;
-        $filters = array();
+        $filters = [];
         $statusCode = Resources::STATUS_CREATED;
-        $headers = array(
+        $headers = [
             Resources::CONTENT_TYPE => Resources::BINARY_FILE_TYPE,
             Resources::X_MS_VERSION => Resources::STORAGE_API_LATEST_VERSION,
             Resources::X_MS_BLOB_TYPE => BlobType::BLOCK_BLOB,
-        );
+        ];
 
         $httpClient = new HttpClient();
         $httpClient->setMethod($method);
@@ -1183,14 +1183,14 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $baseUrl->setQueryVariable(Resources::QP_BLOCKID, $blockId);
 
         $method = Resources::HTTP_PUT;
-        $filters = array();
+        $filters = [];
         $statusCode = Resources::STATUS_CREATED;
 
-        $headers = array(
+        $headers = [
            Resources::CONTENT_TYPE => Resources::BINARY_FILE_TYPE,
            Resources::X_MS_VERSION => Resources::STORAGE_API_LATEST_VERSION,
            Resources::X_MS_BLOB_TYPE => BlobType::BLOCK_BLOB,
-       );
+        ];
 
         $httpClient = new HttpClient();
         $httpClient->setMethod($method);
@@ -1232,12 +1232,12 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $xmlContent = $xml->outputMemory();
 
         $method = Resources::HTTP_PUT;
-        $filters = array();
+        $filters = [];
         $statusCode = Resources::STATUS_CREATED;
-        $headers = array(
+        $headers = [
             Resources::CONTENT_TYPE => Resources::BINARY_FILE_TYPE,
             Resources::X_MS_VERSION => Resources::STORAGE_API_LATEST_VERSION,
-        );
+        ];
 
         $httpClient = new HttpClient();
         $httpClient->setMethod($method);
@@ -1257,7 +1257,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      */
     private function _getCreateEmptyJobContext(Job $job, array $inputAssets)
     {
-        $atomLinks = array();
+        $atomLinks = [];
         foreach ($inputAssets as $inputAsset) {
             Validate::isA(
                 $inputAsset,
@@ -1333,8 +1333,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $method = Resources::HTTP_POST;
         $headers = $batch->getHeaders();
-        $postParams = array();
-        $queryParams = array();
+        $postParams = [];
+        $queryParams = [];
         $path = '$batch';
         $statusCode = Resources::STATUS_ACCEPTED;
         $body = $batch->getBody();
@@ -1386,7 +1386,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getJobList()
     {
         $propertyList = $this->_getEntityList('Jobs');
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = Job::createFromOptions($properties);
@@ -1411,9 +1411,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $jobIdEncoded = urlencode($jobId);
 
         $method = Resources::HTTP_GET;
-        $headers = array();
-        $postParams = array();
-        $queryParams = array();
+        $headers = [];
+        $postParams = [];
+        $queryParams = [];
         $path = "Jobs('{$jobIdEncoded}')/State";
         $statusCode = Resources::STATUS_OK;
 
@@ -1444,7 +1444,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         );
 
         $propertyList = $this->_getEntityList("Jobs('{$jobId}')/Tasks");
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = Task::createFromOptions($properties);
@@ -1468,7 +1468,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         );
 
         $propertyList = $this->_getEntityList("Jobs('{$jobId}')/InputMediaAssets");
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = Asset::createFromOptions($properties);
@@ -1492,7 +1492,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         );
 
         $propertyList = $this->_getEntityList("Jobs('{$jobId}')/OutputMediaAssets");
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = Asset::createFromOptions($properties);
@@ -1515,9 +1515,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $jobIdEncoded = urlencode($jobId);
 
         $method = Resources::HTTP_GET;
-        $headers = array();
-        $postParams = array();
-        $queryParams = array();
+        $headers = [];
+        $postParams = [];
+        $queryParams = [];
         $path = "CancelJob?jobid='{$jobIdEncoded}'";
         $statusCode = Resources::STATUS_NO_CONTENT;
 
@@ -1554,7 +1554,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getTaskList()
     {
         $propertyList = $this->_getEntityList('Tasks');
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = Task::createFromOptions($properties);
@@ -1642,8 +1642,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $method = Resources::HTTP_POST;
         $headers = $batch->getHeaders();
-        $postParams = array();
-        $queryParams = array();
+        $postParams = [];
+        $queryParams = [];
         $path = '$batch';
         $statusCode = Resources::STATUS_ACCEPTED;
         $body = $batch->getBody();
@@ -1697,7 +1697,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getJobTemplateList()
     {
         $propertyList = $this->_getEntityList('JobTemplates');
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = JobTemplate::createFromOptions($properties);
@@ -1723,7 +1723,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $propertyList = $this->_getEntityList(
             "JobTemplates('{$jobTemplateId}')/TaskTemplates"
         );
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = TaskTemplate::createFromOptions($properties);
@@ -1755,7 +1755,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getTaskTemplateList()
     {
         $propertyList = $this->_getEntityList('TaskTemplates');
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = TaskTemplate::createFromOptions($properties);
@@ -1772,7 +1772,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getMediaProcessors()
     {
         $propertyList = $this->_getEntityList('MediaProcessors');
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = MediaProcessor::createFromOptions($properties);
@@ -1848,7 +1848,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getIngestManifestList()
     {
         $propertyList = $this->_getEntityList('IngestManifests');
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = IngestManifest::createFromOptions($properties);
@@ -1875,7 +1875,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $propertyList = $this->_getEntityList(
             "IngestManifests('{$ingestManifestId}')/IngestManifestAssets"
         );
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = IngestManifestAsset::createFromOptions($properties);
@@ -1902,7 +1902,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $propertyList = $this->_getEntityList(
             "IngestManifests('{$ingestManifestId}')/PendingIngestManifestAssets"
         );
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = IngestManifestAsset::createFromOptions($properties);
@@ -1992,7 +1992,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $this->_createEntity(
                 $ingestManifestAsset,
                 'IngestManifestAssets',
-                array($atomLink)
+                [$atomLink]
             )
         );
     }
@@ -2025,7 +2025,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getIngestManifestAssetList()
     {
         $propertyList = $this->_getEntityList('IngestManifestAssets');
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = IngestManifestAsset::createFromOptions($properties);
@@ -2052,10 +2052,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $propertyList = $this->_getEntityList(
             "IngestManifestAssets('{$ingestManifestAssetId}')/IngestManifestFiles"
         );
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
-            $result[] = ingestManifestFile::createFromOptions($properties);
+            $result[] = IngestManifestFile::createFromOptions($properties);
         }
 
         return $result;
@@ -2120,7 +2120,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getIngestManifestFileList()
     {
         $propertyList = $this->_getEntityList('IngestManifestFiles');
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = IngestManifestFile::createFromOptions($properties);
@@ -2167,7 +2167,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getContentKeyList()
     {
         $propertyList = $this->_getEntityList('ContentKeys');
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = ContentKey::createFromOptions($properties);
@@ -2200,8 +2200,6 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * Update ContentKey.
      *
      * @param ContentKey $contentKey ContentKey data
-     *
-     * @return ContentKey Updated ContentKey
      */
     public function updateContentKey(ContentKey $contentKey)
     {
@@ -2230,9 +2228,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $x509Certificate = urlencode($x509Certificate);
 
         $method = Resources::HTTP_GET;
-        $headers = array();
-        $postParams = array();
-        $queryParams = array();
+        $headers = [];
+        $postParams = [];
+        $queryParams = [];
         $statusCode = Resources::STATUS_OK;
         $path = "RebindContentKey?id='{$contentKeyId}'".
             "&x509Certificate='{$x509Certificate}'";
@@ -2282,9 +2280,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $method = Resources::HTTP_GET;
         $path = "GetProtectionKeyId?contentKeyType={$contentKeyType}";
-        $headers = array();
-        $postParams = array();
-        $queryParams = array();
+        $headers = [];
+        $postParams = [];
+        $queryParams = [];
         $statusCode = Resources::STATUS_OK;
 
         $response = $this->send(
@@ -2313,9 +2311,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $method = Resources::HTTP_GET;
         $path = "GetProtectionKey?ProtectionKeyId='{$protectionKeyId}'";
-        $headers = array();
-        $postParams = array();
-        $queryParams = array();
+        $headers = [];
+        $postParams = [];
+        $queryParams = [];
         $statusCode = Resources::STATUS_OK;
 
         $response = $this->send(
@@ -2376,7 +2374,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getContentKeyAuthorizationPolicyList()
     {
         $propertyList = $this->_getEntityList('ContentKeyAuthorizationPolicies');
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = ContentKeyAuthorizationPolicy::createFromOptions($properties);
@@ -2453,7 +2451,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getContentKeyAuthorizationPolicyOptionList()
     {
         $propertyList = $this->_getEntityList('ContentKeyAuthorizationPolicyOptions');
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = ContentKeyAuthorizationPolicyOption::createFromOptions($properties);
@@ -2508,7 +2506,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         );
 
         $propertyList = $this->_getEntityList("ContentKeyAuthorizationPolicies('{$policyId}')/Options");
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = ContentKeyAuthorizationPolicyOption::createFromOptions($properties);
@@ -2540,7 +2538,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $contentWriter = new \XMLWriter();
         $contentWriter->openMemory();
-        $contentWriter->writeElementNS(
+        $contentWriter->writeElementNs(
             'd',
             'uri',
             Resources::DS_XML_NAMESPACE,
@@ -2549,11 +2547,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $method = Resources::HTTP_POST;
         $path = "ContentKeyAuthorizationPolicies('{$policyId}')/\$links/Options";
-        $headers = array(
+        $headers = [
             Resources::CONTENT_TYPE => Resources::XML_CONTENT_TYPE,
-        );
-        $postParams = array();
-        $queryParams = array();
+        ];
+        $postParams = [];
+        $queryParams = [];
         $statusCode = Resources::STATUS_NO_CONTENT;
         $body = $contentWriter->outputMemory();
 
@@ -2588,9 +2586,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $method = Resources::HTTP_DELETE;
         $path = "ContentKeyAuthorizationPolicies('{$policyId}')/\$links/Options('{$optionsId}')";
-        $headers = array();
-        $postParams = array();
-        $queryParams = array();
+        $headers = [];
+        $postParams = [];
+        $queryParams = [];
         $statusCode = Resources::STATUS_NO_CONTENT;
 
         $this->send(
@@ -2641,7 +2639,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getAssetDeliveryPolicyList()
     {
         $propertyList = $this->_getEntityList('AssetDeliveryPolicies');
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = AssetDeliveryPolicy::createFromOptions($properties);
@@ -2695,7 +2693,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         );
 
         $propertyList = $this->_getEntityList("Assets('{$assetId}')/DeliveryPolicies");
-        $result = array();
+        $result = [];
 
         foreach ($propertyList as $properties) {
             $result[] = AssetDeliveryPolicy::createFromOptions($properties);
@@ -2729,7 +2727,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $contentWriter = new \XMLWriter();
         $contentWriter->openMemory();
-        $contentWriter->writeElementNS(
+        $contentWriter->writeElementNs(
             'data',
             'uri',
             Resources::DS_XML_NAMESPACE,
@@ -2738,11 +2736,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $method = Resources::HTTP_POST;
         $path = "Assets('{$assetId}')/\$links/DeliveryPolicies";
-        $headers = array(
+        $headers = [
             Resources::CONTENT_TYPE => Resources::XML_CONTENT_TYPE,
-        );
-        $postParams = array();
-        $queryParams = array();
+        ];
+        $postParams = [];
+        $queryParams = [];
         $statusCode = Resources::STATUS_NO_CONTENT;
         $body = $contentWriter->outputMemory();
 
@@ -2779,9 +2777,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $method = Resources::HTTP_DELETE;
         $path = "Assets('{$assetId}')/\$links/DeliveryPolicies('{$policyId}')";
-        $headers = array();
-        $postParams = array();
-        $queryParams = array();
+        $headers = [];
+        $postParams = [];
+        $queryParams = [];
         $statusCode = Resources::STATUS_NO_CONTENT;
 
         $this->send(
@@ -2815,11 +2813,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $method = Resources::HTTP_POST;
         $path = "ContentKeys('{$contentKeyId}')/GetKeyDeliveryUrl";
-        $headers = array(
+        $headers = [
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
-        );
-        $postParams = array();
-        $queryParams = array();
+        ];
+        $postParams = [];
+        $queryParams = [];
         $statusCode = Resources::STATUS_OK;
 
         $response = $this->send(
@@ -2977,7 +2975,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function getChannelList()
     {
         $entityList = $this->_getEntityList('Channels');
-        $result = array();
+        $result = [];
 
         foreach ($entityList as $channel) {
             $result[] = Channel::createFromOptions($channel);
@@ -2999,9 +2997,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $channel,
             'WindowsAzure\MediaServices\Models\Channel'
         );
-        $headers = array(
+        $headers = [
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
-        );
+        ];
         return $this->_sendOperation(
             null,
             "Channels('{$channelId}')/Start",
@@ -3023,9 +3021,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $channel,
             'WindowsAzure\MediaServices\Models\Channel'
         );
-        $headers = array(
+        $headers = [
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
-        );
+        ];
         return $this->_sendOperation(
             null,
             "Channels('{$channelId}')/Stop",
@@ -3046,9 +3044,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $channel,
             'WindowsAzure\MediaServices\Models\Channel'
         );
-        $headers = array(
+        $headers = [
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
-        );
+        ];
         return $this->_sendOperation(
             null,
             "Channels('{$channelId}')/Reset",
@@ -3073,9 +3071,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $channel,
             'WindowsAzure\MediaServices\Models\Channel'
         );
-        $headers = array(
+        $headers = [
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
-        );
+        ];
         $body = json_encode([
             'duration' => $duration,
             'cueId' => $cueId,
@@ -3103,9 +3101,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $channel,
             'WindowsAzure\MediaServices\Models\Channel'
         );
-        $headers = array(
+        $headers = [
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
-        );
+        ];
         $body = json_encode([
             'cueId' => $cueId
         ]);
@@ -3131,9 +3129,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $channel,
             'WindowsAzure\MediaServices\Models\Channel'
         );
-        $headers = array(
+        $headers = [
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
-        );
+        ];
         $body = json_encode([
             'duration' => $duration,
             'assetId' => $assetId
@@ -3159,9 +3157,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $channel,
             'WindowsAzure\MediaServices\Models\Channel'
         );
-        $headers = array(
+        $headers = [
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
-        );
+        ];
         return $this->_sendOperation(
             null,
             "Channels('{$channelId}')/HideSlate",
@@ -3410,7 +3408,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $entityList = $this->_getEntityList("Channels('{$channelId}')/Programs");
         }
 
-        $result = array();
+        $result = [];
 
         foreach ($entityList as $program) {
             $result[] = Program::createFromOptions($program);
@@ -3432,9 +3430,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $program,
             'WindowsAzure\MediaServices\Models\Program'
         );
-        $headers = array(
+        $headers = [
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
-        );
+        ];
         return $this->_sendOperation(
             null,
             "Programs('{$programId}')/Start",
@@ -3456,9 +3454,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $program,
             'WindowsAzure\MediaServices\Models\Program'
         );
-        $headers = array(
+        $headers = [
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
-        );
+        ];
         return $this->_sendOperation(
             null,
             "Programs('{$programId}')/Stop",

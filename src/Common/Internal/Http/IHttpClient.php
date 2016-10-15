@@ -25,7 +25,7 @@
 
 namespace WindowsAzure\Common\Internal\Http;
 
-use WindowsAzure\Common\Internal\Http\IUrl;
+
 use WindowsAzure\Common\ServiceException;
 
 /**

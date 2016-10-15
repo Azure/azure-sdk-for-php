@@ -58,7 +58,7 @@ class ListHostedServicesResult
     public static function create($parsed)
     {
         $result = new self();
-        $result->_hostedServices = array();
+        $result->_hostedServices = [];
         $rowHostedServices = Utilities::tryGetArray(
             Resources::XTAG_HOSTED_SERVICE,
             $parsed

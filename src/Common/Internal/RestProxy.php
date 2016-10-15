@@ -75,7 +75,7 @@ class RestProxy
     public function __construct(IHttpClient $channel, $dataSerializer, $uri)
     {
         $this->_channel = $channel;
-        $this->_filters = array();
+        $this->_filters = [];
         $this->dataSerializer = $dataSerializer;
         $this->_uri = $uri;
     }

@@ -60,19 +60,12 @@ class ListSubscriptionsResult extends Feed
     {
         parent::parseXml($response);
         $listSubscriptionsResultXml = new \SimpleXMLElement($response);
-        $this->_subscriptionInfos = array();
+        $this->_subscriptionInfos = [];
         foreach ($listSubscriptionsResultXml->entry as $entry) {
             $subscriptionInfo = new SubscriptionInfo();
-            $subscriptionInfo->parseXml($entry->asXml());
+            $subscriptionInfo->parseXml($entry->asXML());
             $this->_subscriptionInfos[] = $subscriptionInfo;
         }
-    }
-
-    /**
-     * Creates a list subscriptions result with default parameters. 
-     */
-    public function __construct()
-    {
     }
 
     /**

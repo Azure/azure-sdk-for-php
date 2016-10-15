@@ -222,7 +222,7 @@ class TopicInfo extends Entry
      */
     public function setMaxSizeInMegabytes($maxSizeInMegabytes)
     {
-        $this->_topicDescription->setmaxSizeInMegabytes($maxSizeInMegabytes);
+        $this->_topicDescription->setMaxSizeInMegabytes($maxSizeInMegabytes);
     }
 
     /**

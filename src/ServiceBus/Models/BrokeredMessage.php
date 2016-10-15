@@ -86,7 +86,7 @@ class BrokeredMessage
         Validate::isString($body, 'body');
         $this->_body = $body;
         $this->_brokerProperties = new BrokerProperties();
-        $this->_customProperties = array();
+        $this->_customProperties = [];
     }
 
     /** 

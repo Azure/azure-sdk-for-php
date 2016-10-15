@@ -179,10 +179,10 @@ class Metrics
      */
     public function toArray()
     {
-        $array = array(
+        $array = [
             'Version' => $this->_version,
             'Enabled' => Utilities::booleanToString($this->_enabled),
-        );
+        ];
         if ($this->_enabled) {
             $array['IncludeAPIs'] = Utilities::booleanToString($this->_includeAPIs);
         }

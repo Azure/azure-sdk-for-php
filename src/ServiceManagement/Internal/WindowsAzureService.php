@@ -58,7 +58,7 @@ class WindowsAzureService extends Service
      * 
      * @param array $sources The list of sources that has the row XML.
      */
-    public function __construct($sources = array())
+    public function __construct($sources = [])
     {
         parent::__construct($sources);
 

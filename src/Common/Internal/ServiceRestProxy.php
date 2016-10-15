@@ -25,7 +25,7 @@
 
 namespace WindowsAzure\Common\Internal;
 
-use WindowsAzure\Common\Internal\Http\Url;
+
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\Serialization\ISerializer;
@@ -274,7 +274,7 @@ class ServiceRestProxy extends RestProxy
      */
     public function generateMetadataHeaders(array $metadata)
     {
-        $metadataHeaders = array();
+        $metadataHeaders = [];
 
         if (is_array($metadata) && !is_null($metadata)) {
             foreach ($metadata as $key => $value) {
@@ -302,7 +302,7 @@ class ServiceRestProxy extends RestProxy
      */
     public function getMetadataArray(array $headers)
     {
-        $metadata = array();
+        $metadata = [];
         foreach ($headers as $key => $value) {
             $isMetadataHeader = Utilities::startsWith(
                 strtolower($key),
@@ -333,7 +333,7 @@ class ServiceRestProxy extends RestProxy
         if (!is_null($metadata)) {
             Validate::isArray($metadata, 'metadata');
         } else {
-            $metadata = array();
+            $metadata = [];
         }
 
         foreach ($metadata as $key => $value) {

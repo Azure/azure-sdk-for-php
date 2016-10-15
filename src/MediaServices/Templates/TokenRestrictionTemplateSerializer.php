@@ -124,8 +124,8 @@ class TokenRestrictionTemplateSerializer
         $writer = new \XMLWriter();
 
         $writer->openMemory();
-        $writer->startElementNS(null, 'TokenRestrictionTemplate', Resources::TRT_XML_NAMESPACE);
-        $writer->writeAttributeNS('xmlns', 'i', null, Resources::XSI_XML_NAMESPACE);
+        $writer->startElementNs(null, 'TokenRestrictionTemplate', Resources::TRT_XML_NAMESPACE);
+        $writer->writeAttributeNs('xmlns', 'i', null, Resources::XSI_XML_NAMESPACE);
 
         if ($tokenRestriction->getAlternateVerificationKeys()) {
             self::serializeAlternateVerificationKeys($writer, $tokenRestriction->getAlternateVerificationKeys());
@@ -157,7 +157,20 @@ class TokenRestrictionTemplateSerializer
         return $writer->outputMemory();
     }
 
-    public static function generateTestToken($template, $verificationKey, $contentKeyUUID, $tokenExpiration = null, $notBefore = null)
+    /**
+     * @param TokenRestrictionTemplate $template
+     * @param SymmetricVerificationKey $verificationKey
+     * @param $contentKeyUUID
+     * @param null $tokenExpiration
+     * @param null $notBefore
+     * @return mixed|string
+     */
+    public static function generateTestToken(
+        TokenRestrictionTemplate $template,
+        SymmetricVerificationKey $verificationKey,
+        $contentKeyUUID,
+        $tokenExpiration = null,
+        $notBefore = null)
     {
         Validate::notNull($template, 'template');
         Validate::isA($template, 'WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate', 'template');
@@ -165,9 +178,6 @@ class TokenRestrictionTemplateSerializer
         if ($verificationKey == null) {
             $verificationKey = $template->getPrimaryVerificationKey();
         }
-
-        Validate::notNull($verificationKey, 'verificationKey');
-        Validate::isA($verificationKey, 'WindowsAzure\MediaServices\Templates\SymmetricVerificationKey', 'verificationKey');
 
         if ($tokenExpiration == null) {
             $tokenExpiration = time() + 60 * 10;
@@ -184,7 +194,18 @@ class TokenRestrictionTemplateSerializer
         }
     }
 
-    private static function generateTestTokenSWT($template, $verificationKey, $contentKeyUUID, $tokenExpiration)
+    /**
+     * @param $template
+     * @param $verificationKey
+     * @param $contentKeyUUID
+     * @param $tokenExpiration
+     * @return mixed|string
+     */
+    private static function generateTestTokenSWT(
+        TokenRestrictionTemplate $template,
+        SymmetricVerificationKey $verificationKey,
+        $contentKeyUUID,
+        $tokenExpiration)
     {
         $token = '';
 
@@ -224,9 +245,22 @@ class TokenRestrictionTemplateSerializer
         return $token;
     }
 
-    private static function generateTestTokenJWT($template, $verificationKey, $contentKeyUUID, $tokenExpiration, $notBefore)
+    /**
+     * @param $template
+     * @param $verificationKey
+     * @param $contentKeyUUID
+     * @param $tokenExpiration
+     * @param $notBefore
+     * @return string
+     */
+    private static function generateTestTokenJWT(
+        TokenRestrictionTemplate $template,
+        SymmetricVerificationKey $verificationKey,
+        $contentKeyUUID,
+        $tokenExpiration,
+        $notBefore)
     {
-        $token = array();
+        $token = [];
 
         foreach ($template->getRequiredClaims() as $claim) {
             $claimValue = $claim->getClaimValue();
@@ -322,7 +356,7 @@ class TokenRestrictionTemplateSerializer
      */
     private static function deserializeAlternateVerificationKeys($xmlElement)
     {
-        $result = array();
+        $result = [];
 
         foreach ($xmlElement->children() as $child) {
             $result[] = self::deserializeTokenVerificationKey($child);
@@ -376,7 +410,7 @@ class TokenRestrictionTemplateSerializer
      */
     private static function deserializeRequiredClaims($xmlElement)
     {
-        $result = array();
+        $result = [];
 
         foreach ($xmlElement->children() as $child) {
             if (!isset($child->ClaimType)) {

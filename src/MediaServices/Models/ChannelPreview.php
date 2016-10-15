@@ -76,7 +76,7 @@ class ChannelPreview
      */
     public function __construct()
     {
-        $this->_endpoints = array();
+        $this->_endpoints = [];
     }
 
     /**

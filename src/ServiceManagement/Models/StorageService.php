@@ -100,14 +100,14 @@ class StorageService extends WindowsAzureService
     protected function toArray()
     {
         $arr = parent::toArray();
-        $order = array(
+        $order = [
             Resources::XTAG_NAMESPACE,
             Resources::XTAG_SERVICE_NAME,
             Resources::XTAG_DESCRIPTION,
             Resources::XTAG_LABEL,
             Resources::XTAG_AFFINITY_GROUP,
             Resources::XTAG_LOCATION,
-        );
+        ];
         $ordered = Utilities::orderArray($arr, $order);
 
         return $ordered;
@@ -167,8 +167,6 @@ class StorageService extends WindowsAzureService
      * Gets storage service blob endpoint uri.
      * 
      * @param string $blobEndpointUri The endpoint URI.
-     * 
-     * @return string
      */
     public function setBlobEndpointUri($blobEndpointUri)
     {
@@ -179,8 +177,6 @@ class StorageService extends WindowsAzureService
      * Gets storage service queue endpoint uri.
      * 
      * @param string $queueEndpointUri The endpoint URI.
-     * 
-     * @return string
      */
     public function setQueueEndpointUri($queueEndpointUri)
     {
@@ -191,8 +187,6 @@ class StorageService extends WindowsAzureService
      * Gets storage service table endpoint uri.
      * 
      * @param string $tableEndpointUri The endpoint URI.
-     * 
-     * @return string
      */
     public function setTableEndpointUri($tableEndpointUri)
     {

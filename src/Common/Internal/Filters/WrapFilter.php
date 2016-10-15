@@ -26,7 +26,7 @@
 namespace WindowsAzure\Common\Internal\Filters;
 
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Validate;
+
 use WindowsAzure\Common\Internal\IServiceFilter;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\ServiceBus\Internal\WrapTokenManager;

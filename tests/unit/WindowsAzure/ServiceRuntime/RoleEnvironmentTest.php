@@ -63,8 +63,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::init
+     * @covers RoleEnvironment::_initialize
+     * @covers RoleEnvironment::init
      */
     public function testValidEndpoint()
     {
@@ -94,8 +94,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::init
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::getClientId
+     * @covers RoleEnvironment::init
+     * @covers RoleEnvironment::getClientId
      */
     public function testGetClientId()
     {
@@ -104,7 +104,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::isAvailable
+     * @covers RoleEnvironment::isAvailable
      */
     public function testIsNotAvailable()
     {
@@ -116,8 +116,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::isAvailable
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
+     * @covers RoleEnvironment::isAvailable
+     * @covers RoleEnvironment::_initialize
      */
     public function testIsAvailable()
     {

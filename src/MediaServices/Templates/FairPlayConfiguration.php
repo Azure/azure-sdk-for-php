@@ -57,7 +57,18 @@ class FairPlayConfiguration
      */
     public $ContentEncryptionIV;
 
-    public static function createSerializedFairPlayOptionConfiguration($cert, $pkey, $pfxPassword, $pfxPasswordKeyId, $askId, $contentIv) {
+    /**
+     * @param $cert
+     * @param $pkey
+     * @param $pfxPassword
+     * @param $pfxPasswordKeyId
+     * @param $askId
+     * @param $contentIv
+     * @return string
+     */
+    public static function createSerializedFairPlayOptionConfiguration(
+        $cert, $pkey, $pfxPassword, $pfxPasswordKeyId, $askId, $contentIv
+    ) {
 
         openssl_pkcs12_export($cert, $certBytes, $pkey, $pfxPassword);
         $certString = base64_encode($certBytes);

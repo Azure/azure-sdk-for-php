@@ -28,7 +28,7 @@ namespace WindowsAzure\Common\Internal\Http;
 use HTTP_Request2_Response;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Internal\Http\BatchRequest;
+
 
 /**
  * Batch response parser.
@@ -65,7 +65,7 @@ class BatchResponse
         $mimeDecoder = new \Mail_mimeDecode($content);
         $structure = $mimeDecoder->decode($params);
         $parts = $structure->parts;
-        $this->_contexts = array();
+        $this->_contexts = [];
         $requestContexts = null;
 
         if ($request != null) {

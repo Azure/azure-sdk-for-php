@@ -68,9 +68,9 @@ class WrapRestProxy extends ServiceRestProxy implements IWrap
     public function wrapAccessToken($uri, $name, $password, $scope)
     {
         $method = Resources::HTTP_POST;
-        $headers = array();
-        $queryParams = array();
-        $postParameters = array();
+        $headers = [];
+        $queryParams = [];
+        $postParameters = [];
         $statusCode = Resources::STATUS_OK;
 
         $postParameters = $this->addPostParameter(

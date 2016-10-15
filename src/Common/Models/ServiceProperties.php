@@ -42,8 +42,16 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
  */
 class ServiceProperties
 {
+    /**
+     * @var Logging
+     */
     private $_logging;
+
+    /**
+     * @var Metrics
+     */
     private $_metrics;
+
     public static $xmlRootName = 'StorageServiceProperties';
 
     /**
@@ -109,10 +117,10 @@ class ServiceProperties
      */
     public function toArray()
     {
-        return array(
+        return [
             'Logging' => !empty($this->_logging) ? $this->_logging->toArray() : null,
             'Metrics' => !empty($this->_metrics) ? $this->_metrics->toArray() : null,
-        );
+        ];
     }
 
     /**
@@ -124,7 +132,7 @@ class ServiceProperties
      */
     public function toXml($xmlSerializer)
     {
-        $properties = array(XmlSerializer::ROOT_NAME => self::$xmlRootName);
+        $properties = [XmlSerializer::ROOT_NAME => self::$xmlRootName];
 
         return $xmlSerializer->serialize($this->toArray(), $properties);
     }

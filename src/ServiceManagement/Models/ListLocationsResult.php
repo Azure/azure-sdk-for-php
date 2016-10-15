@@ -59,8 +59,8 @@ class ListLocationsResult
     {
         $result = new self();
 
-        $result->_locations = array();
-        $entries = array();
+        $result->_locations = [];
+        $entries = [];
 
         if (!empty($parsed)) {
             $entries = Utilities::getArray($parsed[Resources::XTAG_LOCATION]);

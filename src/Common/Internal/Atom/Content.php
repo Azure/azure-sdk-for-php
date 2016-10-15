@@ -103,6 +103,7 @@ class Content extends AtomBase
         }
 
         $text = '';
+        /** @var \SimpleXMLElement $child */
         foreach ($contentXml->children() as $child) {
             $text .= $child->asXML();
         }

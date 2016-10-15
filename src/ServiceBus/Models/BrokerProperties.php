@@ -578,7 +578,7 @@ class BrokerProperties
      */
     public function toString()
     {
-        $value = array();
+        $value = [];
 
         $this->setValueArrayString(
             $value,

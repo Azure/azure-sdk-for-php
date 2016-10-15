@@ -51,8 +51,6 @@ class ServiceException extends \LogicException
      * @param string $errorCode status error code.
      * @param string $error     string value of the error code.
      * @param string $reason    detailed message for the error.
-     * 
-     * @return ServiceException
      */
     public function __construct($errorCode, $error = null, $reason = null)
     {

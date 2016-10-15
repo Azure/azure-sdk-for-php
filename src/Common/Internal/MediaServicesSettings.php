@@ -99,7 +99,7 @@ class MediaServicesSettings extends ServiceSettings
      *
      * @var array
      */
-    protected static $validSettingKeys = array();
+    protected static $validSettingKeys = [];
 
     /**
      * Initializes static members of the class.
@@ -150,13 +150,13 @@ class MediaServicesSettings extends ServiceSettings
         Validate::isString($accessKey, 'accountKey');
 
         if ($endpointUri != null) {
-            Validate::isValidUri($endpointUri);
+            Validate::isValidUri($endpointUri, 'endpointUri');
         } else {
             $endpointUri = Resources::MEDIA_SERVICES_URL;
         }
 
         if ($oauthEndpointUri != null) {
-            Validate::isValidUri($oauthEndpointUri);
+            Validate::isValidUri($oauthEndpointUri, 'oauthEndpointUri');
         } else {
             $oauthEndpointUri = Resources::MEDIA_SERVICES_OAUTH_URL;
         }

@@ -50,24 +50,24 @@ class XmlCurrentStateSerializer implements ICurrentStateSerializer
      */
     public function serialize(CurrentState $state, $outputStream)
     {
-        $statusLeaseInfo = array(
-            'StatusLease' => array(
-                '@attributes' => array(
+        $statusLeaseInfo = [
+            'StatusLease' => [
+                '@attributes' => [
                     'ClientId' => $state->getClientId(),
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         if ($state instanceof AcquireCurrentState) {
-            $statusLeaseInfo['StatusLease']['Acquire'] = array(
+            $statusLeaseInfo['StatusLease']['Acquire'] = [
                 'Incarnation' => $state->getIncarnation(),
                 'Status' => $state->getStatus(),
                 'Expiration' => Utilities::isoDate(
                     date_timestamp_get($state->getExpiration())
                 ),
-            );
+            ];
         } elseif ($state instanceof ReleaseCurrentState) {
-            $statusLeaseInfo['StatusLease']['Release'] = array();
+            $statusLeaseInfo['StatusLease']['Release'] = [];
         }
 
         $currentState = Utilities::serialize($statusLeaseInfo, 'CurrentState');

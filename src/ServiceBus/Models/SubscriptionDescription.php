@@ -165,9 +165,9 @@ class SubscriptionDescription
             $subscriptionDescriptionArray
         )
         ) {
-            $subscriptionDescription->setDeadLetteringOnFilterEvaluationException(
+            $subscriptionDescription->setDeadLetteringOnFilterEvaluationExceptions(
                 (string) $subscriptionDescriptionArray[
-                'DeadLetteringOnFilterEvaluationException'
+                    'DeadLetteringOnFilterEvaluationException'
                 ]
             );
         }

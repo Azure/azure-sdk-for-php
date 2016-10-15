@@ -350,7 +350,7 @@ class Task
         }
 
         if (isset($options['ErrorDetails'])) {
-            $this->_errorDetails = array();
+            $this->_errorDetails = [];
             if (is_array($options['ErrorDetails'])) {
                 foreach ($options['ErrorDetails'] as $errorDetail) {
                     $this->_errorDetails[] = ErrorDetail::createFromOptions(
@@ -361,7 +361,7 @@ class Task
         }
 
         if (isset($options['HistoricalEvents'])) {
-            $this->_historicalEvents = array();
+            $this->_historicalEvents = [];
             if (is_array($options['HistoricalEvents'])) {
                 foreach ($options['HistoricalEvents'] as $historicalEvent) {
                     $evnt = TaskHistoricalEvent::createFromOptions($historicalEvent);

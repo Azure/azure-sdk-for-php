@@ -421,7 +421,7 @@ class RoleEnvironment
         RoleEnvironmentData $currentRoleEnvironment,
         RoleEnvironmentData $newRoleEnvironment
     ) {
-        $changes = array();
+        $changes = [];
         $currentConfig = $currentRoleEnvironment->getConfigurationSettings();
         $newConfig = $newRoleEnvironment->getConfigurationSettings();
 

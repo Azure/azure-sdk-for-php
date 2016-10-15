@@ -59,7 +59,7 @@ class ListAffinityGroupsResult
     {
         $result = new self();
 
-        $result->_affinityGroups = array();
+        $result->_affinityGroups = [];
         $entries = Utilities::tryGetArray(
             Resources::XTAG_AFFINITY_GROUP,
             $parsed

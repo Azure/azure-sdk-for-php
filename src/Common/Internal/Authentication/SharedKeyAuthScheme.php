@@ -51,14 +51,12 @@ class SharedKeyAuthScheme extends StorageAuthScheme
      *
      * @param string $accountName storage account name.
      * @param string $accountKey  storage account primary or secondary key.
-     * 
-     * @return SharedKeyAuthScheme
      */
     public function __construct($accountName, $accountKey)
     {
         parent::__construct($accountName, $accountKey);
 
-        $this->includedHeaders = array();
+        $this->includedHeaders = [];
         $this->includedHeaders[] = Resources::CONTENT_ENCODING;
         $this->includedHeaders[] = Resources::CONTENT_LANGUAGE;
         $this->includedHeaders[] = Resources::CONTENT_LENGTH;
@@ -93,7 +91,7 @@ class SharedKeyAuthScheme extends StorageAuthScheme
             $url, $queryParams
         );
 
-        $stringToSign = array();
+        $stringToSign = [];
         $stringToSign[] = strtoupper($httpMethod);
 
         foreach ($this->includedHeaders as $header) {

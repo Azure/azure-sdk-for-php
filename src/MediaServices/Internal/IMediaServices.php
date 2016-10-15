@@ -612,8 +612,8 @@ interface IMediaServices extends FilterableService
     /**
      * Get content key authorization option by id.
      *
-     * @param ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationPolicy ContentKeyAuthorizationPolicies data or
-     *                                                                            content key authorization policy Id
+     * @param ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationOptions ContentKeyAuthorizationPolicies data or
+     *                                                                             content key authorization policy Id
      *
      * @return ContentKeyAuthorizationPolicyOption
      */
@@ -680,6 +680,7 @@ interface IMediaServices extends FilterableService
     /**
      * Get asset delivery policy.
      *
+     * @param $assetDeliveryPolicy
      * @return AssetDeliveryPolicy
      */
     public function getAssetDeliveryPolicy($assetDeliveryPolicy);

@@ -185,7 +185,7 @@ class Utilities
     public static function getArray($var)
     {
         if (is_null($var) || empty($var)) {
-            return array();
+            return [];
         }
 
         foreach ($var as $value) {
@@ -194,7 +194,7 @@ class Utilities
             ) {
                 return (array) $var;
             } elseif (!is_array($value)) {
-                return array($var);
+                return [$var];
             }
         }
 
@@ -264,7 +264,7 @@ class Utilities
             return false;
         }
 
-        $xmlw = new \XmlWriter();
+        $xmlw = new \XMLWriter();
         $xmlw->openMemory();
         $xmlw->startDocument($xmlVersion, $xmlEncoding, $standalone);
 
@@ -407,7 +407,7 @@ class Utilities
             $value = self::convertToDateTime($value);
         }
 
-        Validate::isDate($value);
+        Validate::isDate($value, 'value');
 
         $cloned = clone $value;
         $cloned->setTimezone(new \DateTimeZone('UTC'));
@@ -461,7 +461,7 @@ class Utilities
      */
     public static function orderArray($array, $order)
     {
-        $ordered = array();
+        $ordered = [];
 
         foreach ($order as $key) {
             if (array_key_exists($key, $array)) {
@@ -576,7 +576,7 @@ class Utilities
      */
     public static function createInstanceList($parsed, $class)
     {
-        $list = array();
+        $list = [];
 
         foreach ($parsed as $value) {
             $list[] = $class::create($value);

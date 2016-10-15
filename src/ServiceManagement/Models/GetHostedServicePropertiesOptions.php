@@ -62,7 +62,7 @@ class GetHostedServicePropertiesOptions
      */
     public function setEmbedDetail($embedDetail)
     {
-        Validate::isBoolean($embedDetail);
+        Validate::isBoolean($embedDetail, 'embedDetail');
 
         $this->_embedDetail = $embedDetail;
     }

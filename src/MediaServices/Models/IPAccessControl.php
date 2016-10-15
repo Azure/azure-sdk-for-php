@@ -69,7 +69,7 @@ class IPAccessControl
      */
     public function __construct()
     {
-        $this->_allow = array();
+        $this->_allow = [];
     }
 
     /**

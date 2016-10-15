@@ -69,7 +69,7 @@ class CloudConfigurationManager
     private static function _init()
     {
         if (!self::$_isInitialized) {
-            self::$_sources = array();
+            self::$_sources = [];
 
             // Get list of default connection string sources.
             $default = ConnectionStringSource::getDefaultSources();
@@ -96,7 +96,7 @@ class CloudConfigurationManager
         $value = null;
 
         foreach (self::$_sources as $source) {
-            $value = call_user_func_array($source, array($key));
+            $value = call_user_func_array($source, [$key]);
 
             if (!empty($value)) {
                 break;
@@ -131,7 +131,7 @@ class CloudConfigurationManager
 
         if ($prepend) {
             self::$_sources = array_merge(
-                array($name => $provider),
+                [$name => $provider],
                 self::$_sources
             );
         } else {

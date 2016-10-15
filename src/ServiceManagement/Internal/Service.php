@@ -75,7 +75,7 @@ class Service
      * 
      * @param array $sources The list of sources that has the row XML.
      */
-    public function __construct($sources = array())
+    public function __construct($sources = [])
     {
         foreach ($sources as $source) {
             $this->setLabel(
@@ -214,10 +214,10 @@ class Service
      */
     protected function toArray()
     {
-        $arr = array();
-        $arr[Resources::XTAG_NAMESPACE] = array(
+        $arr = [];
+        $arr[Resources::XTAG_NAMESPACE] = [
             Resources::WA_XML_NAMESPACE => null,
-        );
+        ];
 
         Utilities::addIfNotEmpty(Resources::XTAG_LABEL, $this->_label, $arr);
         Utilities::addIfNotEmpty(

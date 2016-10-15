@@ -56,21 +56,21 @@ class HttpCallContext
      *
      * @var array
      */
-    private $_headers = array();
+    private $_headers = [];
 
     /**
      * The URI query parameters.
      *
      * @var array
      */
-    private $_queryParams = array();
+    private $_queryParams = [];
 
     /**
      * The HTTP POST parameters.
      *
      * @var array.
      */
-    private $_postParameters = array();
+    private $_postParameters = [];
 
     /**
      * @var string
@@ -89,7 +89,7 @@ class HttpCallContext
      *
      * @var array
      */
-    private $_statusCodes = array();
+    private $_statusCodes = [];
 
     /**
      * The HTTP request body.
@@ -139,7 +139,7 @@ class HttpCallContext
      */
     public function setHeaders(array $headers)
     {
-        $this->_headers = array();
+        $this->_headers = [];
         foreach ($headers as $key => $value) {
             $this->addHeader($key, $value);
         }
@@ -164,7 +164,7 @@ class HttpCallContext
      */
     public function setQueryParameters(array $queryParams)
     {
-        $this->_queryParams = array();
+        $this->_queryParams = [];
         foreach ($queryParams as $key => $value) {
             $this->addQueryParameter($key, $value);
         }
@@ -231,7 +231,7 @@ class HttpCallContext
      */
     public function setStatusCodes(array $statusCodes)
     {
-        $this->_statusCodes = array();
+        $this->_statusCodes = [];
         foreach ($statusCodes as $value) {
             $this->addStatusCode($value);
         }

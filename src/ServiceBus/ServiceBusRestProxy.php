@@ -46,11 +46,11 @@ use WindowsAzure\ServiceBus\Models\ListRulesResult;
 use WindowsAzure\ServiceBus\Models\ListOptions;
 use WindowsAzure\ServiceBus\Models\QueueInfo;
 use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
-use WindowsAzure\ServiceBus\Models\RuleDescription;
+
 use WindowsAzure\ServiceBus\Models\RuleInfo;
-use WindowsAzure\ServiceBus\Models\SubscriptionDescription;
+
 use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
-use WindowsAzure\ServiceBus\Models\TopicDescription;
+
 use WindowsAzure\ServiceBus\Models\TopicInfo;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
@@ -472,12 +472,12 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780759
      * 
-     * @param ListQueuesOptions $listQueuesOptions The options to list the 
-     *                                             queues.
+     * @param ListQueuesOptions|null $listQueuesOptions The options to list the
+     *                                                  queues.
      *
      * @return ListQueuesResult;
      */
-    public function listQueues($listQueuesOptions = null)
+    public function listQueues(ListQueuesOptions $listQueuesOptions = null)
     {
         $response = $this->_listOptions(
             $listQueuesOptions,

@@ -26,7 +26,7 @@
 namespace WindowsAzure\ServiceBus\Models;
 
 use WindowsAzure\Common\Internal\Atom\Feed;
-use WindowsAzure\Common\Internal\Atom\Entry;
+
 
 /**
  * The result of a list topics request. 
@@ -59,19 +59,12 @@ class ListTopicsResult extends Feed
     {
         parent::parseXml($response);
         $listTopicsResultXml = new \SimpleXMLElement($response);
-        $this->_topicInfos = array();
+        $this->_topicInfos = [];
         foreach ($listTopicsResultXml->entry as $entry) {
             $topicInfo = new TopicInfo();
-            $topicInfo->parseXml($entry->asXml());
+            $topicInfo->parseXml($entry->asXML());
             $this->_topicInfos[] = $topicInfo;
         }
-    }
-
-    /**
-     * Creates a list topics result with default parameters. 
-     */
-    public function __construct()
-    {
     }
 
     /**

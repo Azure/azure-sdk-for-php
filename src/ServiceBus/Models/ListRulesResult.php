@@ -26,7 +26,7 @@
 namespace WindowsAzure\ServiceBus\Models;
 
 use WindowsAzure\Common\Internal\Atom\Feed;
-use WindowsAzure\Common\Internal\Atom\Entry;
+
 
 /**
  * The result of the list rules request.
@@ -59,20 +59,13 @@ class ListRulesResult extends Feed
     {
         parent::parseXml($response);
         $listRulesResultXml = new \SimpleXMLElement($response);
-        $this->_ruleInfos = array();
+        $this->_ruleInfos = [];
 
         foreach ($listRulesResultXml->entry as $entry) {
             $ruleInfo = new RuleInfo();
-            $ruleInfo->parseXml($entry->asXml());
+            $ruleInfo->parseXml($entry->asXML());
             $this->_ruleInfos[] = $ruleInfo;
         }
-    }
-
-    /**
-     * Creates a list rules result instance with default parameters. 
-     */
-    public function __construct()
-    {
     }
 
     /**
