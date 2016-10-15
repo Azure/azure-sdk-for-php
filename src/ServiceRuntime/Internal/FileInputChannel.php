@@ -51,8 +51,10 @@ class FileInputChannel implements IInputChannel
      * Gets the input stream.
      * 
      * @param string $name The input stream path.
-     * 
-     * @return none
+     *
+     * @return resource
+     *
+     * @throws ChannelNotAvailableException
      */
     public function getInputStream($name)
     {
@@ -66,8 +68,6 @@ class FileInputChannel implements IInputChannel
 
     /**
      * Closes the input stream.
-     * 
-     * @return none
      */
     public function closeInputStream()
     {

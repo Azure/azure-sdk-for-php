@@ -25,6 +25,7 @@
 
 namespace WindowsAzure\MediaServices\Internal;
 
+use SimpleXMLElement;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 
@@ -46,11 +47,11 @@ class ContentPropertiesSerializer
     /**
      * Parse a Properties xml.
      *
-     * @param \SimpleXML $xmlContent XML object to parse
+     * @param SimpleXMLElement $xmlContent XML object to parse
      *
      * @return array
      */
-    public static function unserialize($xmlContent)
+    public static function unserialize(SimpleXMLElement $xmlContent)
     {
         Validate::notNull($xmlContent, 'xmlContent');
 
@@ -71,7 +72,7 @@ class ContentPropertiesSerializer
         $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
 
-        $xmlWriter->startElementNS(
+        $xmlWriter->startElementNs(
             'meta',
             Resources::PROPERTIES,
             Resources::DSM_XML_NAMESPACE
@@ -85,18 +86,20 @@ class ContentPropertiesSerializer
     /**
      * Parse properties recursively.
      *
-     * @param \SimpleXML $xml XML object to parse
+     * @param SimpleXMLElement $xml XML object to parse
      *
      * @return array
      */
-    private static function _unserializeRecursive($xml)
+    private static function _unserializeRecursive(SimpleXMLElement $xml)
     {
-        $result = array();
+        $result = [];
         $dataNamespace = Resources::DS_XML_NAMESPACE;
+        /** @var SimpleXMLElement $child */
         foreach ($xml->children($dataNamespace) as $child) {
             if (count($child->children($dataNamespace)) > 0) {
-                $value = array();
+                $value = [];
                 $children = $child->children($dataNamespace);
+                /** @var SimpleXMLElement $firstChild */
                 $firstChild = $children[0];
                 if ($firstChild->getName() == 'element') {
                     foreach ($children as $subChild) {
@@ -145,14 +148,14 @@ class ContentPropertiesSerializer
      *
      * @return array
      */
-    private static function _serializeRecursive($object, $xmlWriter)
+    private static function _serializeRecursive($object, \XMLWriter $xmlWriter)
     {
         Validate::notNull($object, 'object');
 
         $reflectionClass = new \ReflectionClass($object);
         $methodArray = $reflectionClass->getMethods();
 
-        $result = array();
+        $result = [];
         foreach ($methodArray as $method) {
             if ((strpos($method->name, 'get') === 0)
                 && $method->isPublic()
@@ -167,14 +170,14 @@ class ContentPropertiesSerializer
                         $variableValue = self::dateIntervalToString($variableValue);
                     }
                     if (gettype($variableValue) == 'array') {
-                        $xmlWriter->startElementNS(
+                        $xmlWriter->startElementNs(
                             'data',
                             $variableName,
                             Resources::DS_XML_NAMESPACE
                         );
 
                         foreach ($variableValue as $item) {
-                            $xmlWriter->startElementNS(
+                            $xmlWriter->startElementNs(
                                 'data',
                                 Resources::ELEMENT,
                                 Resources::DS_XML_NAMESPACE
@@ -190,7 +193,7 @@ class ContentPropertiesSerializer
 
                         $xmlWriter->endElement();
                     } elseif (gettype($variableValue) == 'object') {
-                        $xmlWriter->startElementNS(
+                        $xmlWriter->startElementNs(
                             'data',
                             $variableName,
                             Resources::DS_XML_NAMESPACE
@@ -203,7 +206,7 @@ class ContentPropertiesSerializer
 
                         $xmlWriter->endElement();
                     } else {
-                        $xmlWriter->writeElementNS(
+                        $xmlWriter->writeElementNs(
                             'data',
                             $variableName,
                             Resources::DS_XML_NAMESPACE,
@@ -225,18 +228,18 @@ class ContentPropertiesSerializer
     private static function dateIntervalToString(\DateInterval $interval) {
 
         // Reading all non-zero date parts.
-        $date = array_filter(array(
+        $date = array_filter([
             'Y' => $interval->y,
             'M' => $interval->m,
             'D' => $interval->d
-        ));
+        ]);
 
         // Reading all non-zero time parts.
-        $time = array_filter(array(
+        $time = array_filter([
             'H' => $interval->h,
             'M' => $interval->i,
             'S' => $interval->s
-        ));
+        ]);
 
         $specString = 'P';
 

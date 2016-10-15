@@ -40,36 +40,34 @@ use WindowsAzure\Common\Internal\Utilities;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class XmlCurrentStateSerializer
+class XmlCurrentStateSerializer implements ICurrentStateSerializer
 {
     /**
      * Serializes the current state.
      * 
      * @param CurrentState  $state        The current state.
-     * @param IOutputStream $outputStream The output stream.
-     * 
-     * @return none
+     * @param resource      $outputStream The output stream.
      */
-    public function serialize($state, $outputStream)
+    public function serialize(CurrentState $state, $outputStream)
     {
-        $statusLeaseInfo = array(
-            'StatusLease' => array(
-                '@attributes' => array(
+        $statusLeaseInfo = [
+            'StatusLease' => [
+                '@attributes' => [
                     'ClientId' => $state->getClientId(),
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         if ($state instanceof AcquireCurrentState) {
-            $statusLeaseInfo['StatusLease']['Acquire'] = array(
+            $statusLeaseInfo['StatusLease']['Acquire'] = [
                 'Incarnation' => $state->getIncarnation(),
                 'Status' => $state->getStatus(),
                 'Expiration' => Utilities::isoDate(
                     date_timestamp_get($state->getExpiration())
                 ),
-            );
+            ];
         } elseif ($state instanceof ReleaseCurrentState) {
-            $statusLeaseInfo['StatusLease']['Release'] = array();
+            $statusLeaseInfo['StatusLease']['Release'] = [];
         }
 
         $currentState = Utilities::serialize($statusLeaseInfo, 'CurrentState');

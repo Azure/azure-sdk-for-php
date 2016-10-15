@@ -148,15 +148,13 @@ class Feed extends AtomBase
      */
     public function __construct()
     {
-        $this->attributes = array();
+        $this->attributes = [];
     }
 
     /**
      * Creates a feed object with specified XML string. 
      *
      * @param string $xmlString An XML string representing the feed object.
-     *
-     * @return none
      */
     public function parseXml($xmlString)
     {
@@ -244,13 +242,10 @@ class Feed extends AtomBase
     /**
      * Sets the attributes of the feed. 
      *
-     * @param array $attributes The attributes of the array. 
-     *
-     * @return array
+     * @param array $attributes The attributes of the array.
      */
-    public function setAttributes($attributes)
+    public function setAttributes(array $attributes)
     {
-        Validate::isArray($attributes, 'attributes');
         $this->attributes = $attributes;
     }
 
@@ -259,8 +254,6 @@ class Feed extends AtomBase
      * 
      * @param string $attributeKey   The key of the attribute. 
      * @param mixed  $attributeValue The value of the attribute.
-     *
-     * @return none
      */
     public function addAttribute($attributeKey, $attributeValue)
     {
@@ -270,7 +263,7 @@ class Feed extends AtomBase
     /**
      * Gets the author of the feed. 
      * 
-     * @return Person
+     * @return array
      */
     public function getAuthor()
     {
@@ -280,13 +273,10 @@ class Feed extends AtomBase
     /**
      * Sets the author of the feed. 
      * 
-     * @param Person $author The author of the feed. 
-     *
-     * @return none
+     * @param array $author The author of the feed.
      */
-    public function setAuthor($author)
+    public function setAuthor(array $author)
     {
-        Validate::isArray($author, 'author');
         $person = new Person();
         foreach ($author as $authorInstance) {
             Validate::isInstanceOf($authorInstance, $person, 'author');
@@ -297,7 +287,7 @@ class Feed extends AtomBase
     /**
      * Gets the category of the feed.
      *  
-     * @return Category
+     * @return array
      */
     public function getCategory()
     {
@@ -307,13 +297,10 @@ class Feed extends AtomBase
     /**
      * Sets the category of the feed.
      *  
-     * @param Category $category The category of the feed. 
-     * 
-     * @return none
+     * @param array $category The category of the feed.
      */
-    public function setCategory($category)
+    public function setCategory(array $category)
     {
-        Validate::isArray($category, 'category');
         $categoryClassInstance = new Category();
         foreach ($category as $categoryInstance) {
             Validate::isInstanceOf(
@@ -338,13 +325,10 @@ class Feed extends AtomBase
     /**
      * Sets contributor.
      * 
-     * @param string $contributor The contributor of the feed. 
-     * 
-     * @return none
+     * @param array $contributor The contributor of the feed.
      */
-    public function setContributor($contributor)
+    public function setContributor(array $contributor)
     {
-        Validate::isArray($contributor, 'contributor');
         $person = new Person();
         foreach ($contributor as $contributorInstance) {
             Validate::isInstanceOf($contributorInstance, $person, 'contributor');
@@ -366,8 +350,6 @@ class Feed extends AtomBase
      * Sets the generator. 
      * 
      * @param string $generator Sets the generator of the feed. 
-     * 
-     * @return none
      */
     public function setGenerator($generator)
     {
@@ -388,8 +370,6 @@ class Feed extends AtomBase
      * Sets the icon of the feed. 
      * 
      * @param string $icon The icon of the feed. 
-     * 
-     * @return none
      */
     public function setIcon($icon)
     {
@@ -410,8 +390,6 @@ class Feed extends AtomBase
      * Sets the ID of the feed.
      * 
      * @param string $id The ID of the feed. 
-     * 
-     * @return none
      */
     public function setId($id)
     {
@@ -431,13 +409,10 @@ class Feed extends AtomBase
     /**
      * Sets the link of the feed. 
      * 
-     * @param array $link The link of the feed. 
-     * 
-     * @return none
+     * @param array $link The link of the feed.
      */
-    public function setLink($link)
+    public function setLink(array $link)
     {
-        Validate::isArray($link, 'link');
         $this->link = $link;
     }
 
@@ -455,8 +430,6 @@ class Feed extends AtomBase
      * Sets the logo of the feed. 
      * 
      * @param string $logo The logo of the feed. 
-     * 
-     * @return none
      */
     public function setLogo($logo)
     {
@@ -477,8 +450,6 @@ class Feed extends AtomBase
      * Sets the rights of the feed. 
      * 
      * @param string $rights The rights of the feed. 
-     * 
-     * @return none
      */
     public function setRights($rights)
     {
@@ -499,8 +470,6 @@ class Feed extends AtomBase
      * Sets the sub title of the feed. 
      *
      * @param string $subtitle Sets the sub title of the feed. 
-     * 
-     * @return none
      */
     public function setSubtitle($subtitle)
     {
@@ -521,8 +490,6 @@ class Feed extends AtomBase
      * Sets the title of the feed. 
      *
      * @param string $title The title of the feed. 
-     * 
-     * @return none
      */
     public function setTitle($title)
     {
@@ -543,8 +510,6 @@ class Feed extends AtomBase
      * Sets the updated. 
      * 
      * @param \DateTime $updated updated
-     * 
-     * @return none
      */
     public function setUpdated($updated)
     {
@@ -566,8 +531,6 @@ class Feed extends AtomBase
      * Sets the extension element. 
      * 
      * @param string $extensionElement The extension element. 
-     * 
-     * @return none
      */
     public function setExtensionElement($extensionElement)
     {
@@ -577,7 +540,7 @@ class Feed extends AtomBase
     /**
      * Gets the entry of the feed. 
      * 
-     * @return Entry
+     * @return array
      */
     public function getEntry()
     {
@@ -587,9 +550,7 @@ class Feed extends AtomBase
     /**
      * Sets the entry of the feed.
      * 
-     * @param Entry $entry The entry of the feed. 
-     * 
-     * @return none
+     * @param array $entry The entry of the feed.
      */
     public function setEntry($entry)
     {
@@ -600,14 +561,12 @@ class Feed extends AtomBase
      * Writes an XML representing the feed object.
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
-     * @return none
      */
-    public function writeXml($xmlWriter)
+    public function writeXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
 
-        $xmlWriter->startElementNS('atom', 'feed', Resources::ATOM_NAMESPACE);
+        $xmlWriter->startElementNs('atom', 'feed', Resources::ATOM_NAMESPACE);
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
@@ -616,10 +575,8 @@ class Feed extends AtomBase
      * Writes an XML representing the feed object.
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
-     * @return none
      */
-    public function writeInnerXml($xmlWriter)
+    public function writeInnerXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
 
@@ -719,7 +676,7 @@ class Feed extends AtomBase
         );
 
         if (!is_null($this->updated)) {
-            $xmlWriter->writeElementNS(
+            $xmlWriter->writeElementNs(
                 'atom',
                 'updated',
                 Resources::ATOM_NAMESPACE,

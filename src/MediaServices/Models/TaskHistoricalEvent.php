@@ -68,9 +68,9 @@ class TaskHistoricalEvent
      *
      * @param array $options Array containing values for object properties
      *
-     * @return WindowsAzure\MediaServices\Models\TaskHistoricalEvent
+     * @return TaskHistoricalEvent
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         $taskHistoricalEvent = new self();
         $taskHistoricalEvent->fromArray($options);
@@ -89,10 +89,8 @@ class TaskHistoricalEvent
      * Fill task historical event from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return none
      */
-    public function fromArray($options)
+    public function fromArray(array $options)
     {
         if (isset($options['Code'])) {
             Validate::isInteger($options['Code'], 'options[Code]');

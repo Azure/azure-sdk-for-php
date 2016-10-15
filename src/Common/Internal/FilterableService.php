@@ -25,8 +25,6 @@
 
 namespace WindowsAzure\Common\Internal;
 
-use WindowsAzure\Common\Internal\IServiceFilter;
-
 /**
  * Interface for service with filers.
  *
@@ -48,7 +46,7 @@ interface FilterableService
      *
      * @param IServiceFilter $filter Filter to add for the pipeline.
      * 
-     * @return mix.
+     * @return mixed
      */
     public function withFilter(IServiceFilter $filter);
 }

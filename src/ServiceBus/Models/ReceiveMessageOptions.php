@@ -74,8 +74,6 @@ class ReceiveMessageOptions
      * Sets the timeout of the receive message request. 
      *
      * @param int $timeout The timeout of the receive message request. 
-     *
-     * @return none
      */
     public function setTimeout($timeout)
     {
@@ -96,8 +94,6 @@ class ReceiveMessageOptions
      * Sets the receive mode. 
      * 
      * @param int $receiveMode The mode of receiving the message. 
-     * 
-     * @return none
      */
     public function setReceiveMode($receiveMode)
     {
@@ -115,9 +111,7 @@ class ReceiveMessageOptions
     }
 
     /**
-     * Sets whether the mode of receiving is receive and delete. 
-     * 
-     * @return none
+     * Sets whether the mode of receiving is receive and delete.
      */
     public function setReceiveAndDelete()
     {
@@ -136,8 +130,6 @@ class ReceiveMessageOptions
 
     /**
      * Sets peek lock. 
-     * 
-     * @return none
      */
     public function setPeekLock()
     {

@@ -45,7 +45,7 @@ class ChannelInputAccessControl
     /**
      * ChannelInputAccessControl IP.
      *
-     * @var mixing
+     * @var IPAccessControl
      */
     private $_ip;
 
@@ -87,7 +87,7 @@ class ChannelInputAccessControl
     /**
      * Get the ChannelInputAccessControl IP.
      *
-     * @return mixing
+     * @return IPAccessControl
      */
     public function getIP()
     {
@@ -97,9 +97,9 @@ class ChannelInputAccessControl
     /**
      * Set the ChannelInputAccessControl IP.
      *
-     * @param mixing $value ChannelInputAccessControl IP.
+     * @param IPAccessControl $value ChannelInputAccessControl IP.
      */
-    public function setIP($value)
+    public function setIP(IPAccessControl $value)
     {
         $this->_ip = $value;
     }

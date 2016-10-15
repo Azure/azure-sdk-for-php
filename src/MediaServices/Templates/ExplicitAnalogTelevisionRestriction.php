@@ -56,6 +56,8 @@ class ExplicitAnalogTelevisionRestriction
 
     /**
      * Create ExplicitAnalogTelevisionRestriction.
+     * @param int $configurationData
+     * @param bool $bestEffort
      */
     public function __construct($configurationData, $bestEffort = false)
     {

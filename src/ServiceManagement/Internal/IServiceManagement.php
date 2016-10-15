@@ -26,6 +26,25 @@
 namespace WindowsAzure\ServiceManagement\Internal;
 
 use WindowsAzure\Common\Internal\FilterableService;
+use WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult;
+use WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions;
+use WindowsAzure\ServiceManagement\Models\CreateAffinityGroupOptions;
+use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
+use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
+use WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult;
+use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
+use WindowsAzure\ServiceManagement\Models\GetDeploymentResult;
+use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions;
+use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult;
+use WindowsAzure\ServiceManagement\Models\GetOperationStatusResult;
+use WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult;
+use WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult;
+use WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult;
+use WindowsAzure\ServiceManagement\Models\ListHostedServicesResult;
+use WindowsAzure\ServiceManagement\Models\ListLocationsResult;
+use WindowsAzure\ServiceManagement\Models\ListStorageServicesResult;
+use WindowsAzure\ServiceManagement\Models\UpdateServiceOptions;
+use WindowsAzure\ServiceManagement\Models\UpgradeDeploymentOptions;
 
 /**
  * The Windows Azure service management REST API wrappers.
@@ -112,14 +131,12 @@ interface IServiceManagement extends FilterableService
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264518.aspx 
      */
-    public function createStorageService($name, $label, $options);
+    public function createStorageService($name, $label, CreateServiceOptions $options);
 
     /**
      * Deletes the specified storage account from Windows Azure.
      * 
      * @param string $name The storage account name.
-     * 
-     * @return none
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264517.aspx 
      */
@@ -131,12 +148,10 @@ interface IServiceManagement extends FilterableService
      * 
      * @param string               $name    The storage account name.
      * @param UpdateServiceOptions $options The optional parameters.
-     * 
-     * @return none
-     * 
+     *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264516.aspx 
      */
-    public function updateStorageService($name, $options);
+    public function updateStorageService($name, UpdateServiceOptions $options);
 
     /**
      * Lists the affinity groups associated with the specified subscription.
@@ -157,20 +172,16 @@ interface IServiceManagement extends FilterableService
      *                                             where the affinity group will be created. To list available locations, use 
      *                                             the listLocations API.
      * @param CreateAffinityGroupOptions $options  The optional parameters.
-     * 
-     * @return none
-     * 
+     *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg715317.aspx
      */
-    public function createAffinityGroup($name, $label, $location, $options = null);
+    public function createAffinityGroup($name, $label, $location, CreateAffinityGroupOptions $options = null);
 
     /**
      * Deletes an affinity group in the specified subscription.
      * 
      * @param string $name The affinity group name.
-     * 
-     * @return none
-     * 
+     *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg715314.aspx
      */
     public function deleteAffinityGroup($name);
@@ -183,11 +194,9 @@ interface IServiceManagement extends FilterableService
      * @param string                     $label   The affinity group label.
      * @param CreateAffinityGroupOptions $options The optional parameters.
      * 
-     * @return none
-     * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg715316.aspx
      */
-    public function updateAffinityGroup($name, $label, $options = null);
+    public function updateAffinityGroup($name, $label, CreateAffinityGroupOptions $options = null);
 
     /**
      * Returns the system properties associated with the specified affinity group.
@@ -221,7 +230,7 @@ interface IServiceManagement extends FilterableService
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460783.aspx
      */
-    public function getOperationStatus($requestInfo);
+    public function getOperationStatus(AsynchronousOperationResult $requestInfo);
 
     /**
      * Lists the hosted services available under the current subscription.
@@ -242,12 +251,10 @@ interface IServiceManagement extends FilterableService
      *                                      that is base-64 encoded. The name can be used identify the storage account for
      *                                      your tracking purposes.
      * @param CreateServiceOptions $options The optional parameters.
-     * 
-     * @return none
-     * 
+     *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441304.aspx
      */
-    public function createHostedService($name, $label, $options);
+    public function createHostedService($name, $label, CreateServiceOptions $options);
 
     /**
      * updates the label and/or the description for a hosted service in Windows 
@@ -256,12 +263,10 @@ interface IServiceManagement extends FilterableService
      * @param string               $name    The name for the hosted service that is
      *                                      unique within Windows Azure.
      * @param UpdateServiceOptions $options The optional parameters.
-     * 
-     * @return none
-     * 
+     *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441303.aspx
      */
-    public function updateHostedService($name, $options);
+    public function updateHostedService($name, UpdateServiceOptions $options);
 
     /**
      * Deletes the specified hosted service from Windows Azure.
@@ -272,9 +277,7 @@ interface IServiceManagement extends FilterableService
      * deployments.
      * 
      * @param string $name The name for the hosted service.
-     * 
-     * @return none
-     * 
+     *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441305.aspx
      */
     public function deleteHostedService($name);
@@ -293,7 +296,7 @@ interface IServiceManagement extends FilterableService
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460806.aspx
      */
-    public function getHostedServiceProperties($name, $options = null);
+    public function getHostedServiceProperties($name, GetHostedServicePropertiesOptions $options = null);
 
     /**
      * Uploads a new service package and creates a new deployment on staging or 
@@ -332,7 +335,7 @@ interface IServiceManagement extends FilterableService
         $packageUrl,
         $configuration,
         $label,
-        $options = null
+        CreateDeploymentOptions $options = null
     );
 
     /**
@@ -352,7 +355,7 @@ interface IServiceManagement extends FilterableService
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460804.aspx
      */
-    public function getDeployment($name, $options);
+    public function getDeployment($name, GetDeploymentOptions $options);
 
     /**
      * Initiates a virtual IP swap between the staging and production deployment 
@@ -391,7 +394,7 @@ interface IServiceManagement extends FilterableService
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460815.aspx
      */
-    public function deleteDeployment($name, $options);
+    public function deleteDeployment($name, GetDeploymentOptions $options);
 
     /**
      * Initiates a change to the deployment configuration.
@@ -411,7 +414,8 @@ interface IServiceManagement extends FilterableService
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460809.aspx
      */
-    public function changeDeploymentConfiguration($name, $configuration, $options);
+    public function changeDeploymentConfiguration(
+        $name, $configuration, ChangeDeploymentConfigurationOptions $options);
 
     /**
      * Initiates a change in deployment status.
@@ -430,7 +434,7 @@ interface IServiceManagement extends FilterableService
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460808.aspx
      */
-    public function updateDeploymentStatus($name, $status, $options);
+    public function updateDeploymentStatus($name, $status, GetDeploymentOptions $options);
 
     /**
      * Initiates an upgrade to a deployment.
@@ -469,7 +473,7 @@ interface IServiceManagement extends FilterableService
         $configuration,
         $label,
         $force,
-        $options
+        UpgradeDeploymentOptions $options
     );
 
     /**
@@ -491,7 +495,7 @@ interface IServiceManagement extends FilterableService
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460800.aspx
      */
-    public function walkUpgradeDomain($name, $upgradeDomain, $options);
+    public function walkUpgradeDomain($name, $upgradeDomain, GetDeploymentOptions $options);
 
     /**
      * Requests a reboot of a role instance that is running in a deployment.
@@ -546,10 +550,8 @@ interface IServiceManagement extends FilterableService
      *                                      instances. True if the rollback should proceed; otherwise false if the 
      *                                      rollback should fail.
      * @param GetDeploymentOptions $options The optional parameters.
-     * 
-     * @return none
-     * 
+     *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh403977.aspx
      */
-    public function rollbackUpdateOrUpgrade($name, $mode, $force, $options);
+    public function rollbackUpdateOrUpgrade($name, $mode, $force, GetDeploymentOptions $options);
 }

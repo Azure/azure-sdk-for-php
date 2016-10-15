@@ -64,8 +64,6 @@ class Location
      * Sets the name.
      * 
      * @param string $name The name.
-     * 
-     * @return none
      */
     public function setName($name)
     {
@@ -86,8 +84,6 @@ class Location
      * Sets the displayName.
      * 
      * @param string $displayName The displayName.
-     * 
-     * @return none
      */
     public function setDisplayName($displayName)
     {

@@ -26,7 +26,7 @@
 namespace WindowsAzure\ServiceBus\Models;
 
 use WindowsAzure\Common\Internal\Atom\Feed;
-use WindowsAzure\Common\Internal\Atom\Entry;
+
 
 /**
  * The results of list queues request. 
@@ -54,26 +54,17 @@ class ListQueuesResult extends Feed
      * Populates the properties with the response from the list queues request.
      * 
      * @param string $response The body of the response of the list queues request. 
-     * 
-     * @return none
      */
     public function parseXml($response)
     {
         parent::parseXml($response);
         $listQueuesResultXml = new \SimpleXMLElement($response);
-        $this->_queueInfos = array();
+        $this->_queueInfos = [];
         foreach ($listQueuesResultXml->entry as $entry) {
             $queueInfo = new QueueInfo();
-            $queueInfo->parseXml($entry->asXml());
+            $queueInfo->parseXml($entry->asXML());
             $this->_queueInfos[] = $queueInfo;
         }
-    }
-
-    /**
-     * Creates a queue with default parameters. 
-     */
-    public function __construct()
-    {
     }
 
     /**
@@ -90,8 +81,6 @@ class ListQueuesResult extends Feed
      * Sets the information of the queue. 
      * 
      * @param array $queueInfos The information of the queue. 
-     * 
-     * @return none
      */
     public function setQueueInfos($queueInfos)
     {

@@ -70,7 +70,7 @@ class WidevineMessageSerializer
         $template = new WidevineMessage();
         foreach ($data as $key => $value) {
             if ($key == 'content_key_specs') {
-                $specs = array();
+                $specs = [];
                 foreach ($value as $child) {
                     $spec = new ContentKeySpecs();
                     foreach ($child as $ckey => $cvalue) {

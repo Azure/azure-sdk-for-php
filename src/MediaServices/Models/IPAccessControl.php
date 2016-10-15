@@ -56,7 +56,7 @@ class IPAccessControl
      *
      * @return IPAccessControl
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         $operation = new self();
         $operation->fromArray($options);
@@ -69,7 +69,7 @@ class IPAccessControl
      */
     public function __construct()
     {
-        $this->_allow = array();
+        $this->_allow = [];
     }
 
     /**
@@ -77,7 +77,7 @@ class IPAccessControl
      *
      * @param array $options Array containing values for object properties
      */
-    public function fromArray($options)
+    public function fromArray(array $options)
     {
         if (isset($options['Allow'])) {
             Validate::isArray($options['Allow'], 'options[Allow]');

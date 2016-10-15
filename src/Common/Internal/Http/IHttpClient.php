@@ -25,7 +25,8 @@
 
 namespace WindowsAzure\Common\Internal\Http;
 
-use WindowsAzure\Common\Internal\Http\IUrl;
+
+use WindowsAzure\Common\ServiceException;
 
 /**
  * Defines required methods for a HTTP client proxy.
@@ -46,8 +47,6 @@ interface IHttpClient
      * Sets the request url.
      *
      * @param IUrl $url request url.
-     *
-     * @return none.
      */
     public function setUrl(IUrl $url);
 
@@ -62,8 +61,6 @@ interface IHttpClient
      * Sets request's HTTP method.
      *
      * @param string $method request's HTTP method.
-     *
-     * @return none.
      */
     public function setMethod($method);
 
@@ -89,8 +86,6 @@ interface IHttpClient
      * @param string $value   header value.
      * @param bool   $replace whether to replace previous header with the same name
      *                        or append to its value (comma separated)
-     *
-     * @return none.
      */
     public function setHeader($header, $value, $replace = false);
 
@@ -98,8 +93,6 @@ interface IHttpClient
      * Sets request headers using array.
      *
      * @param array $headers headers key-value array
-     *
-     * @return none.
      */
     public function setHeaders(array $headers);
 
@@ -107,8 +100,6 @@ interface IHttpClient
      * Sets HTTP POST parameters.
      *
      * @param array $postParameters The HTTP POST parameters.
-     *
-     * @return none
      */
     public function setPostParameters(array $postParameters);
 
@@ -140,8 +131,6 @@ interface IHttpClient
      * Sets successful status code.
      *
      * @param array|string $statusCodes successful status code.
-     *
-     * @return none.
      */
     public function setExpectedStatusCode($statusCodes);
 
@@ -156,9 +145,7 @@ interface IHttpClient
      * Sets a configuration element for the request.
      *
      * @param string $name  configuration parameter name.
-     * @param mix    $value configuration parameter value.
-     *
-     * @return none.
+     * @param mixed  $value configuration parameter value.
      */
     public function setConfig($name, $value = null);
 
@@ -175,8 +162,6 @@ interface IHttpClient
      * Sets the request body.
      *
      * @param string $body body to use.
-     *
-     * @return none.
      */
     public function setBody($body);
 
@@ -201,8 +186,6 @@ interface IHttpClient
      * @param string $reason   The reason phrase.
      * @param string $message  The detailed message (if any).
      * @param array  $expected The expected status codes.
-     *
-     * @return none
      *
      * @static
      *

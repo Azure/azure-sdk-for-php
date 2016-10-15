@@ -44,7 +44,7 @@ use WindowsAzure\Common\Internal\Resources;
 class StorageAuthSchemeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Authentication\StorageAuthScheme::__construct
+     * @covers \WindowsAzure\Common\Internal\Authentication\StorageAuthScheme::__construct
      */
     public function test__construct()
     {
@@ -54,7 +54,7 @@ class StorageAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Authentication\StorageAuthScheme::computeCanonicalizedHeaders
+     * @covers \WindowsAzure\Common\Internal\Authentication\StorageAuthScheme::computeCanonicalizedHeaders
      */
     public function testComputeCanonicalizedHeadersMock()
     {
@@ -73,7 +73,7 @@ class StorageAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Authentication\StorageAuthScheme::computeCanonicalizedResource
+     * @covers \WindowsAzure\Common\Internal\Authentication\StorageAuthScheme::computeCanonicalizedResource
      */
     public function testComputeCanonicalizedResourceMockSimple()
     {
@@ -90,7 +90,7 @@ class StorageAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Authentication\StorageAuthScheme::computeCanonicalizedResource
+     * @covers \WindowsAzure\Common\Internal\Authentication\StorageAuthScheme::computeCanonicalizedResource
      */
     public function testComputeCanonicalizedResourceMockMultipleValues()
     {
@@ -109,7 +109,7 @@ class StorageAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Authentication\StorageAuthScheme::computeCanonicalizedResourceForTable
+     * @covers \WindowsAzure\Common\Internal\Authentication\StorageAuthScheme::computeCanonicalizedResourceForTable
      */
     public function testComputeCanonicalizedResourceForTableMock()
     {

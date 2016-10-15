@@ -84,10 +84,8 @@ class ListStorageServicesResult
      * Sets storage accounts.
      * 
      * @param array $storageServices The storage accounts.
-     * 
-     * @return none
      */
-    public function setStorageServices($storageServices)
+    public function setStorageServices(array $storageServices)
     {
         $this->_storageServices = $storageServices;
     }

@@ -25,7 +25,7 @@
 
 namespace WindowsAzure\MediaServices\Templates;
 
-use WindowsAzure\Common\Internal\Validate;
+
 use WindowsAzure\Common\Internal\Resources;
 
 /**
@@ -46,7 +46,7 @@ class MediaServicesLicenseTemplateSerializer
     /**
      * Deserialize a PlayReadyLicenseResponseTemplate xml into a PlayReadyLicenseResponseTemplate object.
      *
-     * @param string $options Array containing values for object properties
+     * @param string $template Array containing values for object properties
      *
      * @return PlayReadyLicenseResponseTemplate
      */
@@ -89,8 +89,8 @@ class MediaServicesLicenseTemplateSerializer
         $writer = new \XMLWriter();
 
         $writer->openMemory();
-        $writer->startElementNS(null, 'PlayReadyLicenseResponseTemplate', Resources::PRL_XML_NAMESPACE);
-        $writer->writeAttributeNS('xmlns', 'i', null, Resources::XSI_XML_NAMESPACE);
+        $writer->startElementNs(null, 'PlayReadyLicenseResponseTemplate', Resources::PRL_XML_NAMESPACE);
+        $writer->writeAttributeNs('xmlns', 'i', null, Resources::XSI_XML_NAMESPACE);
 
         self::serializeLicenseTemplates($writer, $template->getLicenseTemplates());
         $writer->writeElement('ResponseCustomData', $template->getResponseCustomData());
@@ -102,8 +102,9 @@ class MediaServicesLicenseTemplateSerializer
 
     /**
      * @param PlayReadyLicenseResponseTemplate $template
+     * @return bool
      */
-    private static function ValidateLicenseResponseTemplate($template)
+    private static function ValidateLicenseResponseTemplate(PlayReadyLicenseResponseTemplate $template)
     {
         // Validate the PlayReadyLicenseResponseTemplate has at least one license
         if (count($template->getLicenseTemplates()) <= 0) {
@@ -336,7 +337,7 @@ class MediaServicesLicenseTemplateSerializer
      */
     private static function deserializeLicenseTemplates($xmlElement)
     {
-        $result = array();
+        $result = [];
 
         foreach ($xmlElement->children() as $child) {
             $result[] = self::deserializePlayReadyLicenseTemplate($child);
@@ -496,10 +497,14 @@ class MediaServicesLicenseTemplateSerializer
         throw new \RuntimeException("Unknown PlayReadyContentKey type={$type}");
     }
 
+    /**
+     * @param \DateInterval $delta
+     * @return string
+     */
     private static function getSpecString(\DateInterval $delta)
     {
-        $date = array_filter(array('Y' => $delta->y, 'M' => $delta->m, 'D' => $delta->d));
-        $time = array_filter(array('H' => $delta->h, 'M' => $delta->i, 'S' => $delta->s));
+        $date = array_filter(['Y' => $delta->y, 'M' => $delta->m, 'D' => $delta->d]);
+        $time = array_filter(['H' => $delta->h, 'M' => $delta->i, 'S' => $delta->s]);
 
         foreach ($date as $key => &$value) {
             $value = $value.$key;

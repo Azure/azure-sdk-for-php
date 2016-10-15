@@ -65,11 +65,9 @@ class SqlFilter extends Filter
         $this->attributes['xsi:type'] = 'SqlFilter';
     }
     /**
-     * Gets the SQL expression. 
+     * Gets the SQL expression.
      * 
-     * @var string
-     * 
-     * @return none
+     * @return string
      */
     public function getSqlExpression()
     {
@@ -79,9 +77,7 @@ class SqlFilter extends Filter
     /**
      * Sets the SQL expression. 
      * 
-     * @param string $sqlExpression The SQL expression of the filter. 
-     * 
-     * @return none
+     * @param string $sqlExpression The SQL expression of the filter.
      */
     public function setSqlExpression($sqlExpression)
     {
@@ -102,8 +98,6 @@ class SqlFilter extends Filter
      * Sets the compatibility level. 
      * 
      * @param string $compatibilityLevel The compatibility level. 
-     * 
-     * @return none
      */
     public function setCompatibilityLevel($compatibilityLevel)
     {

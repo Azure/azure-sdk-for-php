@@ -55,26 +55,24 @@ class JsonSerializer implements ISerializer
         Validate::notNull($targetObject, 'targetObject');
         Validate::isString($rootName, 'rootName');
 
-        $contianer = new \stdClass();
+        $container = new \stdClass();
 
-        $contianer->$rootName = $targetObject;
+        $container->$rootName = $targetObject;
 
-        return json_encode($contianer);
+        return json_encode($container);
     }
 
     /**
      * Serializes given array. The array indices must be string to use them as
      * as element name.
      *
-     * @param array $array      The object to serialize represented in array.
-     * @param array $properties The used properties in the serialization process.
+     * @param array      $array      The object to serialize represented in array.
+     * @param array|null $properties The used properties in the serialization process.
      *
      * @return string
      */
-    public function serialize($array, $properties = null)
+    public function serialize(array $array, array $properties = null)
     {
-        Validate::isArray($array, 'array');
-
         return json_encode($array);
     }
 

@@ -126,9 +126,9 @@ class AccessPolicy
      *
      * @param array $options Array containing values for object properties
      *
-     * @return WindowsAzure\MediaServices\Models\AccessPolicy
+     * @return AccessPolicy
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         Validate::notNull($options['Name'], 'options[Name]');
 
@@ -152,10 +152,8 @@ class AccessPolicy
      * Fill access policy from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return none
      */
-    public function fromArray($options)
+    public function fromArray(array $options)
     {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
@@ -211,8 +209,6 @@ class AccessPolicy
      * Set "Permissions".
      *
      * @param int $value Permissions
-     *
-     * @return none
      */
     public function setPermissions($value)
     {
@@ -233,8 +229,6 @@ class AccessPolicy
      * Set "Duration in minutes".
      *
      * @param float $value Duration in minutes
-     *
-     * @return none
      */
     public function setDurationInMinutes($value)
     {
@@ -255,8 +249,6 @@ class AccessPolicy
      * Set "Name".
      *
      * @param string $value Name
-     *
-     * @return none
      */
     public function setName($value)
     {

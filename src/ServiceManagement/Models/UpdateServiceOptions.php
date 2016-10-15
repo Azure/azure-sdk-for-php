@@ -66,8 +66,6 @@ class UpdateServiceOptions
      * Sets the label.
      * 
      * @param string $label The label.
-     * 
-     * @return none
      */
     public function setLabel($label)
     {
@@ -90,8 +88,6 @@ class UpdateServiceOptions
      * Sets the description.
      * 
      * @param string $description The description.
-     * 
-     * @return none
      */
     public function setDescription($description)
     {

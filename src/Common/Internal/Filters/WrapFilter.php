@@ -26,7 +26,7 @@
 namespace WindowsAzure\Common\Internal\Filters;
 
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\Common\Internal\Validate;
+
 use WindowsAzure\Common\Internal\IServiceFilter;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\ServiceBus\Internal\WrapTokenManager;
@@ -83,7 +83,6 @@ class WrapFilter implements IServiceFilter
      */
     public function handleRequest(IHttpClient $request)
     {
-        Validate::notNull($request, 'request');
         $wrapAccessToken = $this->_wrapTokenManager->getAccessToken(
             $request->getUrl()
         );

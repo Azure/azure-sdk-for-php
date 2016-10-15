@@ -71,8 +71,6 @@ class CreateServiceOptions
      * Sets the location.
      * 
      * @param string $location The location.
-     * 
-     * @return none
      */
     public function setLocation($location)
     {
@@ -96,8 +94,6 @@ class CreateServiceOptions
      * Sets the affinityGroup.
      * 
      * @param string $affinityGroup The affinityGroup.
-     * 
-     * @return none
      */
     public function setAffinityGroup($affinityGroup)
     {
@@ -121,8 +117,6 @@ class CreateServiceOptions
      * Sets the description.
      * 
      * @param string $description The description.
-     * 
-     * @return none
      */
     public function setDescription($description)
     {

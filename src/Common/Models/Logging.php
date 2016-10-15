@@ -74,7 +74,7 @@ class Logging
     private $_write;
 
     /**
-     * @var WindowsAzure\Common\Models\RetentionPolicy
+     * @var RetentionPolicy
      */
     private $_retentionPolicy;
 
@@ -83,9 +83,9 @@ class Logging
      * 
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return WindowsAzure\Common\Models\Logging
+     * @return Logging
      */
-    public static function create($parsedResponse)
+    public static function create(array $parsedResponse)
     {
         $result = new self();
         $result->setVersion($parsedResponse['Version']);
@@ -102,7 +102,7 @@ class Logging
     /**
      * Gets retention policy.
      * 
-     * @return WindowsAzure\Common\Models\RetentionPolicy
+     * @return RetentionPolicy
      */
     public function getRetentionPolicy()
     {
@@ -113,10 +113,8 @@ class Logging
      * Sets retention policy.
      * 
      * @param RetentionPolicy $policy object to use
-     * 
-     * @return none.
      */
-    public function setRetentionPolicy($policy)
+    public function setRetentionPolicy(RetentionPolicy $policy)
     {
         $this->_retentionPolicy = $policy;
     }
@@ -135,8 +133,6 @@ class Logging
      * Sets write.
      * 
      * @param bool $write new value.
-     * 
-     * @return none.
      */
     public function setWrite($write)
     {
@@ -157,8 +153,6 @@ class Logging
      * Sets read.
      * 
      * @param bool $read new value.
-     * 
-     * @return none.
      */
     public function setRead($read)
     {
@@ -179,8 +173,6 @@ class Logging
      * Sets delete.
      * 
      * @param bool $delete new value.
-     * 
-     * @return none.
      */
     public function setDelete($delete)
     {
@@ -201,8 +193,6 @@ class Logging
      * Sets version.
      * 
      * @param string $version new value.
-     * 
-     * @return none.
      */
     public function setVersion($version)
     {
@@ -216,7 +206,7 @@ class Logging
      */
     public function toArray()
     {
-        return array(
+        return [
             'Version' => $this->_version,
             'Delete' => Utilities::booleanToString($this->_delete),
             'Read' => Utilities::booleanToString($this->_read),
@@ -224,6 +214,6 @@ class Logging
             'RetentionPolicy' => !empty($this->_retentionPolicy)
                 ? $this->_retentionPolicy->toArray()
                 : null,
-        );
+        ];
     }
 }

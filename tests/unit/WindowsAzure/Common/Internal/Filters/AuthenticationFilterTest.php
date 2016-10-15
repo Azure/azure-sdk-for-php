@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal\Filters;
 
 use WindowsAzure\Common\Internal\Filters\AuthenticationFilter;
 use WindowsAzure\Common\Internal\Http\HttpClient;
+use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
 
@@ -46,14 +47,14 @@ use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
 class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Filters\AuthenticationFilter::handleRequest
-     * @covers WindowsAzure\Common\Internal\Filters\AuthenticationFilter::__construct
+     * @covers \WindowsAzure\Common\Internal\Filters\AuthenticationFilter::handleRequest
+     * @covers \WindowsAzure\Common\Internal\Filters\AuthenticationFilter::__construct
      */
     public function testHandleRequest()
     {
         // Setup
         $channel = new HttpClient();
-        $url = new \WindowsAzure\Common\Internal\Http\Url('http://microsoft.com');
+        $url = new Url('http://microsoft.com');
         $channel->setUrl($url);
         $scheme = new SharedKeyAuthScheme('acount', 'key');
         $filter = new AuthenticationFilter($scheme);
@@ -66,14 +67,14 @@ class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Filters\AuthenticationFilter::handleRequest
-     * @covers WindowsAzure\Common\Internal\Filters\AuthenticationFilter::__construct
+     * @covers \WindowsAzure\Common\Internal\Filters\AuthenticationFilter::handleRequest
+     * @covers \WindowsAzure\Common\Internal\Filters\AuthenticationFilter::__construct
      */
     public function testHandleRequestWithTable()
     {
         // Setup
         $channel = new HttpClient();
-        $url = new \WindowsAzure\Common\Internal\Http\Url('http://microsoft.com');
+        $url = new Url('http://microsoft.com');
         $channel->setUrl($url);
         $scheme = new SharedKeyAuthScheme('acount', 'key');
         $filter = new AuthenticationFilter($scheme);
@@ -86,13 +87,13 @@ class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Filters\AuthenticationFilter::handleResponse
+     * @covers \WindowsAzure\Common\Internal\Filters\AuthenticationFilter::handleResponse
      */
     public function testHandleResponse()
     {
         // Setup
         $channel = new HttpClient();
-        $url = new \WindowsAzure\Common\Internal\Http\Url('http://microsoft.com');
+        $url = new Url('http://microsoft.com');
         $channel->setUrl($url);
         $response = null;
         $scheme = new SharedKeyAuthScheme('acount', 'key');

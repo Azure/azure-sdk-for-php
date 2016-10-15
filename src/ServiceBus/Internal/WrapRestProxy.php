@@ -49,8 +49,6 @@ class WrapRestProxy extends ServiceRestProxy implements IWrap
      * 
      * @param IHttpClient $channel The channel to send the WRAP request. 
      * @param string      $uri     The Uri of the WRAP service. 
-     * 
-     * @return none
      */
     public function __construct(IHttpClient $channel, $uri)
     {
@@ -65,14 +63,14 @@ class WrapRestProxy extends ServiceRestProxy implements IWrap
      * @param string $password The password of the WRAP service. 
      * @param string $scope    The scope of the WRAP service. 
      * 
-     * @return WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult
+     * @return WrapAccessTokenResult
      */
     public function wrapAccessToken($uri, $name, $password, $scope)
     {
         $method = Resources::HTTP_POST;
-        $headers = array();
-        $queryParams = array();
-        $postParameters = array();
+        $headers = [];
+        $queryParams = [];
+        $postParameters = [];
         $statusCode = Resources::STATUS_OK;
 
         $postParameters = $this->addPostParameter(

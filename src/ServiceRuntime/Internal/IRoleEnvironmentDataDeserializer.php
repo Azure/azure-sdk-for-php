@@ -43,9 +43,9 @@ interface IRoleEnvironmentDataDeserializer
     /**
      * Deserializes the role environment data.
      * 
-     * @param string $document The document to deserialize.
-     * 
-     * @return none
+     * @param resource $document The document to deserialize.
+     *
+     * @return RoleEnvironmentData
      */
     public function deserialize($document);
 }

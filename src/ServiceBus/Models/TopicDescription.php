@@ -104,7 +104,7 @@ class TopicDescription
         $topicDescriptionArray = (array) $root;
 
         if (array_key_exists('DefaultMessageToLive', $topicDescriptionArray)) {
-            $topicDescription->setDefaultMessageToLive(
+            $topicDescription->setDefaultMessageTimeToLive(
                 (string) $topicDescriptionArray['DefaultMessageToLive']
             );
         }
@@ -161,8 +161,6 @@ class TopicDescription
      * Sets the default message to live.
      *
      * @param string $defaultMessageTimeToLive The default message time to live.
-     * 
-     * @return none
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {
@@ -183,8 +181,6 @@ class TopicDescription
      * Sets max size in mega bytes. 
      * 
      * @param int $maxSizeInMegabytes The maximum size in mega bytes. 
-     * 
-     * @return none
      */
     public function setMaxSizeInMegabytes($maxSizeInMegabytes)
     {
@@ -205,8 +201,6 @@ class TopicDescription
      * Sets requires duplicate detection. 
      * 
      * @param bool $requiresDuplicateDetection Sets requires duplicate detection.
-     *
-     * @return none
      */
     public function setRequiresDuplicateDetection($requiresDuplicateDetection)
     {
@@ -228,8 +222,6 @@ class TopicDescription
      * 
      * @param string $duplicateDetectionHistoryTimeWindow The duplicate 
      *                                                    detection history time window.
-     *
-     * @return none
      */
     public function setDuplicateDetectionHistoryTimeWindow(
         $duplicateDetectionHistoryTimeWindow
@@ -253,8 +245,6 @@ class TopicDescription
      * Sets enable batched operations.
      * 
      * @param bool $enableBatchedOperations Enables batched operations.
-     * 
-     * @return none
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {
@@ -275,8 +265,6 @@ class TopicDescription
      * Sets size in bytes.
      * 
      * @param int $sizeInBytes The size in bytes. 
-     *
-     * @return none
      */
     public function setSizeInBytes($sizeInBytes)
     {

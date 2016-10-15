@@ -68,7 +68,7 @@ class RuntimeVersionProtocolClient
      */
     public function getVersionMap($connectionPath)
     {
-        $versions = array();
+        $versions = [];
 
         $input = $this->_inputChannel->getInputStream($connectionPath);
         $contents = stream_get_contents($input);
@@ -79,7 +79,7 @@ class RuntimeVersionProtocolClient
             ['RuntimeServerEndpoint'];
 
         if (array_key_exists('@attributes', $endpoints)) {
-            $endpoints = array();
+            $endpoints = [];
             $endpoints[] = $discoveryInfo
                 ['RuntimeServerEndpoints']['RuntimeServerEndpoint'];
         }

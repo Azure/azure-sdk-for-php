@@ -51,9 +51,6 @@ abstract class StorageAuthScheme implements IAuthScheme
      *
      * @param string $accountName storage account name.
      * @param string $accountKey  storage account primary or secondary key.
-     *
-     * @return
-     * WindowsAzure\Common\Internal\Authentication\StorageAuthScheme
      */
     public function __construct($accountName, $accountKey)
     {
@@ -73,8 +70,8 @@ abstract class StorageAuthScheme implements IAuthScheme
      */
     protected function computeCanonicalizedHeaders($headers)
     {
-        $canonicalizedHeaders = array();
-        $normalizedHeaders = array();
+        $canonicalizedHeaders = [];
+        $normalizedHeaders = [];
         $validPrefix = Resources::X_MS_HEADER_PREFIX;
 
         if (is_null($normalizedHeaders)) {

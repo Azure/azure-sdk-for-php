@@ -43,7 +43,7 @@ class ConnectionStringSource
     /**
      * The list of all sources which comes as default.
      * 
-     * @var type
+     * @var array
      */
     private static $_defaultSources;
 
@@ -59,15 +59,13 @@ class ConnectionStringSource
 
     /**
      * Initializes the default sources.
-     * 
-     * @return none
      */
     private static function _init()
     {
         if (!self::$_isInitialized) {
-            self::$_defaultSources = array(
-                self::ENVIRONMENT_SOURCE => array(__CLASS__, 'environmentSource'),
-            );
+            self::$_defaultSources = [
+                self::ENVIRONMENT_SOURCE => [__CLASS__, 'environmentSource'],
+            ];
             self::$_isInitialized = true;
         }
     }

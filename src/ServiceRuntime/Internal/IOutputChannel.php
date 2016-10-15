@@ -44,8 +44,6 @@ interface IOutputChannel
      * Gets the output stream.
      * 
      * @param string $name The output channel path.
-     * 
-     * @return none
      */
     public function getOutputStream($name);
 }
