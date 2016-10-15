@@ -66,8 +66,8 @@ class RuleInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers RuleInfo::getRuleDescription
-     * @covers RuleInfo::setRuleDescription
+     * @covers \WindowsAzure\ServiceBus\Models\RuleInfo::getRuleDescription
+     * @covers \WindowsAzure\ServiceBus\Models\RuleInfo::setRuleDescription
      */
     public function testGetSetRuleDescription()
     {
@@ -87,8 +87,8 @@ class RuleInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers RuleInfo::getFilter
-     * @covers RuleInfo::setFilter
+     * @covers \WindowsAzure\ServiceBus\Models\RuleInfo::getFilter
+     * @covers \WindowsAzure\ServiceBus\Models\RuleInfo::setFilter
      */
     public function testGetSetFilter()
     {
@@ -108,8 +108,8 @@ class RuleInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers RuleInfo::getAction
-     * @covers RuleInfo::setAction
+     * @covers \WindowsAzure\ServiceBus\Models\RuleInfo::getAction
+     * @covers \WindowsAzure\ServiceBus\Models\RuleInfo::setAction
      */
     public function testGetSetAction()
     {
@@ -129,8 +129,8 @@ class RuleInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers RuleInfo::getName
-     * @covers RuleInfo::setName
+     * @covers \WindowsAzure\ServiceBus\Models\RuleInfo::getName
+     * @covers \WindowsAzure\ServiceBus\Models\RuleInfo::setName
      */
     public function testGetSetName()
     {

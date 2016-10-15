@@ -1996,7 +1996,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers MediaServicesRestProxy::getAssetLinkedDeliveryPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetLinkedDeliveryPolicy
      */
     public function testGetAssetLinkedDeliveryPolicies()
     {
@@ -2022,7 +2022,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers MediaServicesRestProxy::linkDeliveryPolicyToAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::linkDeliveryPolicyToAsset
      */
     public function testLinkDeliveryPolicyToAsset()
     {

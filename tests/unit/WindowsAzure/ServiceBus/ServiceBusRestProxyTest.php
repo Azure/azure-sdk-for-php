@@ -708,9 +708,9 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::createRule
-     * @covers RuleInfo::parseXml
-     * @covers RuleDescription::create
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::createRule
+     * @covers \WindowsAzure\ServiceBus\Models\RuleInfo::parseXml
+     * @covers \WindowsAzure\ServiceBus\Models\RuleDescription::create
      */
     public function testRulesCanBeCreatedOnSubscription()
     {
@@ -838,8 +838,8 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
      * @covers TopicDescription::create
      * @covers SubscriptionInfo::parseXml
      * @covers SubscriptionDescription::create
-     * @covers RuleInfo::parseXml
-     * @covers RuleDescription::create
+     * @covers \WindowsAzure\ServiceBus\Models\RuleInfo::parseXml
+     * @covers \WindowsAzure\ServiceBus\Models\RuleDescription::create
      */
     public function testListRulesDeserializePropertiesOfSqlFilter()
     {
