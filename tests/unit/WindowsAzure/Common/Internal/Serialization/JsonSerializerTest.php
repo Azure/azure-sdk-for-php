@@ -45,7 +45,7 @@ use WindowsAzure\Common\Internal\Resources;
 class JsonSerializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\JsonSerializer::objectSerialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\JsonSerializer::objectSerialize
      */
     public function testObjectSerialize()
     {
@@ -62,7 +62,7 @@ class JsonSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\JsonSerializer::unserialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\JsonSerializer::unserialize
      */
     public function testUnserializeArray()
     {
@@ -79,7 +79,7 @@ class JsonSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\JsonSerializer::unserialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\JsonSerializer::unserialize
      */
     public function testUnserializeObject()
     {
@@ -96,7 +96,7 @@ class JsonSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\JsonSerializer::unserialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\JsonSerializer::unserialize
      */
     public function testUnserializeEmptyString()
     {
@@ -113,7 +113,7 @@ class JsonSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\JsonSerializer::unserialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\JsonSerializer::unserialize
      */
     public function testUnserializeInvalidString()
     {
@@ -130,7 +130,7 @@ class JsonSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JsonSerializer::serialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\JsonSerializer::serialize
      */
     public function testSerialize()
     {

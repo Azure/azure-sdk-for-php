@@ -66,8 +66,8 @@ class WrapFilterTest extends ServiceRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Filters\WrapFilter::handleRequest
-     * @covers WindowsAzure\Common\Internal\Filters\WrapFilter::__construct
+     * @covers \WindowsAzure\Common\Internal\Filters\WrapFilter::handleRequest
+     * @covers \WindowsAzure\Common\Internal\Filters\WrapFilter::__construct
      */
     public function testHandleRequest()
     {
@@ -99,7 +99,7 @@ class WrapFilterTest extends ServiceRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Filters\WrapFilter::handleResponse
+     * @covers \WindowsAzure\Common\Internal\Filters\WrapFilter::handleResponse
      */
     public function testHandleResponse()
     {
