@@ -44,6 +44,7 @@ use WindowsAzure\Common\Internal\Atom\AtomLink;
 class AtomLinkTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::__constructor
      */
     public function testAtomLinkConstructor()
     {
@@ -57,8 +58,8 @@ class AtomLinkTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers AtomLink::getUndefinedContent
-     * @covers AtomLink::setUndefinedContent
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::getUndefinedContent
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::setUndefinedContent
      */
     public function testGetSetUndefinedContent()
     {
@@ -78,8 +79,8 @@ class AtomLinkTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers AtomLink::getHref
-     * @covers AtomLink::setHref
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::getHref
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::setHref
      */
     public function testGetSetHref()
     {
@@ -99,8 +100,8 @@ class AtomLinkTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers AtomLink::getRel
-     * @covers AtomLink::setRel
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::getRel
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::setRel
      */
     public function testGetSetRel()
     {
@@ -120,8 +121,8 @@ class AtomLinkTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers AtomLink::getType
-     * @covers AtomLink::setType
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::getType
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::setType
      */
     public function testGetSetType()
     {
@@ -141,8 +142,8 @@ class AtomLinkTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers AtomLink::getHreflang
-     * @covers AtomLink::setHreflang
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::getHreflang
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::setHreflang
      */
     public function testGetSetHreflang()
     {
@@ -162,8 +163,8 @@ class AtomLinkTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers AtomLink::getTitle
-     * @covers AtomLink::setTitle
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::getTitle
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::setTitle
      */
     public function testGetSetTitle()
     {
@@ -183,8 +184,8 @@ class AtomLinkTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers AtomLink::getLength
-     * @covers AtomLink::setLength
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::getLength
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::setLength
      */
     public function testGetSetLength()
     {
@@ -204,7 +205,7 @@ class AtomLinkTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\Common\Internal\Atom\AtomLink::parseXml
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::parseXml
      */
     public function testParseXmlSuccess()
     {
@@ -225,7 +226,7 @@ class AtomLinkTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers AtomLink::parseXml
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::parseXml
      */
     public function testParseXmlInvalidArgument()
     {
@@ -240,7 +241,7 @@ class AtomLinkTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers AtomLink::writeXml
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::writeXml
      */
     public function testWriteXmlSuccess()
     {

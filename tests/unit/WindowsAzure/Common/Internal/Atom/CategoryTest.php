@@ -44,7 +44,7 @@ use XMLWriter;
 class CategoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Category::__construct
+     * @covers \WindowsAzure\Common\Internal\Atom\Category::__construct
      */
     public function testCategoryConstructor()
     {
