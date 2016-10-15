@@ -59,8 +59,8 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers TopicInfo::getTopicDescription
-     * @covers TopicInfo::setTopicDescription
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::getTopicDescription
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::setTopicDescription
      */
     public function testGetSetTopicDescription()
     {
@@ -80,8 +80,8 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers TopicInfo::getDefaultMessageTimeToLive
-     * @covers TopicInfo::setDefaultMessageTimeToLive
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::getDefaultMessageTimeToLive
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::setDefaultMessageTimeToLive
      */
     public function testGetSetDefaultMessageTimeToLive()
     {

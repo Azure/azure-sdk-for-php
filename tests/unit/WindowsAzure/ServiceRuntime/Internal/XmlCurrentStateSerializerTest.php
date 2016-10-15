@@ -51,7 +51,7 @@ use WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer;
 class XmlCurrentStateSerializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers XmlCurrentStateSerializer::serialize
+     * @covers \WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer::serialize
      */
     public function testSerializeAcquire()
     {
