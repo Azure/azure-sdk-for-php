@@ -44,7 +44,7 @@ use XMLWriter;
 class ContentTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Content::__construct
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::__construct
      */
     public function testContentConstructor()
     {
@@ -64,8 +64,8 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Content::getText
-     * @covers Content::setText
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::getText
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::setText
      */
     public function testGetSetText()
     {
@@ -85,8 +85,8 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Content::getType
-     * @covers Content::setType
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::getType
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::setType
      */
     public function testGetSetType()
     {
@@ -106,7 +106,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Content::writeXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::writeXml
      */
     public function testWriteXml()
     {
@@ -132,7 +132,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Content::parseXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::parseXml
      */
     public function testParseXmlSuccess()
     {
@@ -152,7 +152,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Content::parseXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::parseXml
      */
     public function testParseXmlInvalidParameter()
     {
@@ -165,7 +165,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Content::parseXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::parseXml
      */
     public function testWriteXmlSuccess()
     {
@@ -187,7 +187,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Content::getXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::getXml
      */
     public function testGetXml()
     {
@@ -206,7 +206,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Content::fromXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::fromXml
      */
     public function testFromXml()
     {
