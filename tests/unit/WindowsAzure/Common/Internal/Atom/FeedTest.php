@@ -49,7 +49,7 @@ use WindowsAzure\Common\Internal\Atom\AtomLink;
 class FeedTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Feed::__construct
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::__construct
      */
     public function testFeedConstructor()
     {
@@ -63,8 +63,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::getAttributes
-     * @covers Feed::setAttributes
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::getAttributes
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::setAttributes
      */
     public function testGetSetAttributes()
     {
@@ -85,8 +85,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::getEntry
-     * @covers Feed::setEntry
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::getEntry
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::setEntry
      */
     public function testGetSetEntry()
     {
@@ -106,8 +106,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::getCategory
-     * @covers Feed::setCategory
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::getCategory
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::setCategory
      */
     public function testGetSetCategory()
     {
@@ -128,8 +128,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::getContributor
-     * @covers Feed::setContributor
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::getContributor
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::setContributor
      */
     public function testGetSetContributor()
     {
@@ -150,8 +150,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::getGenerator
-     * @covers Feed::setGenerator
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::getGenerator
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::setGenerator
      */
     public function testGetSetGenerator()
     {
@@ -171,8 +171,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::getIcon
-     * @covers Feed::setIcon
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::getIcon
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::setIcon
      */
     public function testGetSetIcon()
     {
@@ -192,8 +192,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::getId
-     * @covers Feed::setId
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::getId
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::setId
      */
     public function testGetSetId()
     {
@@ -213,8 +213,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::getLink
-     * @covers Feed::setLink
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::getLink
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::setLink
      */
     public function testGetSetLink()
     {
@@ -235,8 +235,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::getLogo
-     * @covers Feed::setLogo
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::getLogo
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::setLogo
      */
     public function testGetSetLogo()
     {
@@ -256,8 +256,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::getRights
-     * @covers Feed::setRights
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::getRights
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::setRights
      */
     public function testGetSetRights()
     {
@@ -277,8 +277,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::getSubtitle
-     * @covers Feed::setSubtitle
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::getSubtitle
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::setSubtitle
      */
     public function testGetSetSubtitle()
     {
@@ -298,8 +298,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::getTitle
-     * @covers Feed::setTitle
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::getTitle
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::setTitle
      */
     public function testGetSetTitle()
     {
@@ -319,8 +319,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::getUpdated
-     * @covers Feed::setUpdated
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::getUpdated
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::setUpdated
      */
     public function testGetSetUpdated()
     {
@@ -340,8 +340,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::getExtensionElement
-     * @covers Feed::setExtensionElement
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::getExtensionElement
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::setExtensionElement
      */
     public function testGetSetExtensionElement()
     {
@@ -361,7 +361,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::writeXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::writeXml
      */
     public function testWriteXmlWorks()
     {
@@ -383,7 +383,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Feed::writeXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::writeXml
      */
     public function testWriteXmlWorksWithNamespace()
     {
@@ -405,7 +405,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::parseXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::parseXml
      */
     public function testParseXmlSuccess()
     {
@@ -425,7 +425,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::parseXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::parseXml
      */
     public function testFeedParseXmlMultipleLinks()
     {
@@ -454,7 +454,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers Feed::parseXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Feed::parseXml
      */
     public function testFeedParseXmlAllProperties()
     {
