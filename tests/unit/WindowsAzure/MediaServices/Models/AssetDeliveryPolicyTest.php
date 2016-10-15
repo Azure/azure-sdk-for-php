@@ -45,9 +45,9 @@ use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey;
 class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers AssetDeliveryPolicy::createFromOptions
-     * @covers AssetDeliveryPolicy::fromArray
-     * @covers AssetDeliveryPolicy::__construct
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::__construct
      */
     public function testCreateFromOptions()
     {
@@ -176,8 +176,8 @@ class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfiguartionKey
-     * @covers AssetDeliveryPolicyConfigurationKey::parseAssetDeliveryPolicyConfiguartionKey
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfiguartionKey
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::parseAssetDeliveryPolicyConfiguartionKey
      */
     public function testStrignifyParseDeliveryPolicyConfiguartionKey()
     {
