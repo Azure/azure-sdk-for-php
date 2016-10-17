@@ -63,8 +63,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::init
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::init
      */
     public function testValidEndpoint()
     {
@@ -94,8 +94,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::init
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::getClientId
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::init
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::getClientId
      */
     public function testGetClientId()
     {
@@ -104,7 +104,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::isAvailable
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::isAvailable
      */
     public function testIsNotAvailable()
     {
@@ -116,8 +116,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::isAvailable
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::isAvailable
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
      */
     public function testIsAvailable()
     {
@@ -192,8 +192,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::getDeploymentId
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::getDeploymentId
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
      */
     public function testGetDeploymentId()
     {
@@ -268,8 +268,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::getCurrentRoleInstance
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::getCurrentRoleInstance
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
      */
     public function testGetCurrentRoleInstance()
     {
@@ -354,7 +354,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::isEmulated
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::isEmulated
      */
     public function testIsEmulated()
     {
@@ -449,8 +449,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::getRoles
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::getRoles
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_initialize
      */
     public function testGetRoles()
     {
@@ -576,7 +576,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::getConfigurationSettings
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::getConfigurationSettings
      */
     public function testGetConfigurationSettings()
     {
@@ -649,7 +649,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::getLocalResources
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::getLocalResources
      */
     public function testGetLocalResources()
     {
@@ -723,7 +723,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::requestRecycle
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::requestRecycle
      */
     public function testRequestRecycle()
     {
@@ -819,7 +819,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::clearStatus
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::clearStatus
      */
     public function testClearStatus()
     {
@@ -911,7 +911,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::setStatus
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::setStatus
      */
     public function testSetStatusBusy()
     {
@@ -1013,7 +1013,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::setStatus
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::setStatus
      */
     public function testSetStatusReady()
     {
@@ -1115,8 +1115,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::addRoleEnvironmentChangedListener
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::removeRoleEnvironmentChangedListener
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::addRoleEnvironmentChangedListener
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::removeRoleEnvironmentChangedListener
      */
     public function testAddRemoveRoleEnvironmentChangedListener()
     {
@@ -1142,8 +1142,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::addRoleEnvironmentChangingListener
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::removeRoleEnvironmentChangingListener
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::addRoleEnvironmentChangingListener
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::removeRoleEnvironmentChangingListener
      */
     public function testAddRemoveRoleEnvironmentChangingListener()
     {
@@ -1169,8 +1169,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::addRoleEnvironmentStoppingListener
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::removeRoleEnvironmentStoppingListener
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::addRoleEnvironmentStoppingListener
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::removeRoleEnvironmentStoppingListener
      */
     public function testAddRemoveRoleEnvironmentStoppingListener()
     {
@@ -1196,12 +1196,12 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateChanges
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateConfigurationChanges
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateNewRoleInstanceChanges
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateNewRoleInstanceEndpointsChanges
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateCurrentRoleInstanceChanges
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateCurrentRoleInstanceEndpointsChanges
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateChanges
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateConfigurationChanges
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateNewRoleInstanceChanges
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateNewRoleInstanceEndpointsChanges
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateCurrentRoleInstanceChanges
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_calculateCurrentRoleInstanceEndpointsChanges
      */
     public function testCalculateChanges()
     {
@@ -1676,11 +1676,11 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_processGoalStateChange
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_acceptLatestIncarnation
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseStoppingEvent
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseChangingEvent
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseChangedEvent
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_processGoalStateChange
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_acceptLatestIncarnation
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseStoppingEvent
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseChangingEvent
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseChangedEvent
      */
     public function testProcessGoalStateChange()
     {
@@ -1786,8 +1786,8 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::trackChanges
-     * @covers WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseStoppingEvent
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::trackChanges
+     * @covers \WindowsAzure\ServiceRuntime\RoleEnvironment::_raiseStoppingEvent
      */
     public function testTrackChanges()
     {

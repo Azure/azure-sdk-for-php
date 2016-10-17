@@ -45,7 +45,7 @@ class ChannelOutput
     /**
      * ChannelOutput Hls, The HLS specific settings.
      *
-     * @var mixing
+     * @var ChannelOutputHls
      */
     private $_hls;
 
@@ -87,7 +87,7 @@ class ChannelOutput
     /**
      * Get the ChannelOutput Hls.
      *
-     * @return mixing
+     * @return ChannelOutputHls
      */
     public function getHls()
     {
@@ -97,9 +97,9 @@ class ChannelOutput
     /**
      * Set the ChannelOutput Hls.
      *
-     * @param mixing $value ChannelInputAccessControl Hls.
+     * @param ChannelOutputHls $value ChannelInputAccessControl Hls.
      */
-    public function setHls($value)
+    public function setHls(ChannelOutputHls $value)
     {
         $this->_hls = $value;
     }

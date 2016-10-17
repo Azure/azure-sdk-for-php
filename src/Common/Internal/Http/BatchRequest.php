@@ -25,9 +25,10 @@
 
 namespace WindowsAzure\Common\Internal\Http;
 
+use Mail_mimePart;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
-use WindowsAzure\Common\Internal\Http\HttpCallContext;
+
 
 /**
  * Batch request marshaler.
@@ -47,9 +48,9 @@ class BatchRequest
     /**
      * Http call context list.
      *
-     * @var array of HttpCallContext
+     * @var HttpCallContext[]
      */
-    private $_contexts = array();
+    private $_contexts = [];
 
     /**
      * Headers.
@@ -69,8 +70,6 @@ class BatchRequest
      * Append new context to batch request.
      *
      * @param HttpCallContext $context Http call context to add to batch request
-     *
-     * @return none
      */
     public function appendContext(HttpCallContext $context)
     {
@@ -79,25 +78,23 @@ class BatchRequest
 
     /**
      * Encode contexts.
-     *
-     * @return none
      */
     public function encode()
     {
         $mimeType = Resources::MULTIPART_MIXED_TYPE;
         $batchGuid = Utilities::getGuid();
         $batchId = sprintf('batch_%s', $batchGuid);
-        $contentType1 = array('content_type' => "$mimeType");
+        $contentType1 = ['content_type' => "$mimeType"];
         $changeSetGuid = Utilities::getGuid();
         $changeSetId = sprintf('changeset_%s', $changeSetGuid);
-        $contentType2 = array('content_type' => "$mimeType; boundary=$changeSetId");
-        $options = array(
+        $contentType2 = ['content_type' => "$mimeType; boundary=$changeSetId"];
+        $options = [
             'encoding' => 'binary',
             'content_type' => Resources::HTTP_TYPE,
-        );
+        ];
 
         // Create changeset MIME part
-        $changeSet = new \Mail_mimePart();
+        $changeSet = new Mail_mimePart();
 
         $i = 1;
         foreach ($this->_contexts as $context) {
@@ -111,7 +108,7 @@ class BatchRequest
         $changeSetEncoded = $changeSet->encode($changeSetId);
 
         // Create the batch MIME part
-        $batch = new \Mail_mimePart(Resources::EMPTY_STRING, $contentType1);
+        $batch = new Mail_mimePart(Resources::EMPTY_STRING, $contentType1);
 
         // Add changeset encoded to batch MIME part
         $batch->addSubpart($changeSetEncoded['body'], $contentType2);

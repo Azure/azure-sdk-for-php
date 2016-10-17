@@ -56,7 +56,7 @@ class RoleInstance
     private $_updateDomain;
 
     /**
-     * @var array
+     * @var RoleInstanceEndpoint[]|null
      */
     private $_endpoints;
 
@@ -68,12 +68,12 @@ class RoleInstance
     /**
      * Constructor.
      * 
-     * @param string $id           The identifier.
-     * @param int    $faultDomain  The fault domain.
-     * @param int    $updateDomain The update domain.
-     * @param array  $endpoints    The endpoints.
+     * @param string                      $id           The identifier.
+     * @param int                         $faultDomain  The fault domain.
+     * @param int                         $updateDomain The update domain.
+     * @param RoleInstanceEndpoint[]|null $endpoints    The endpoints.
      */
-    public function __construct($id, $faultDomain, $updateDomain, $endpoints)
+    public function __construct($id, $faultDomain, $updateDomain, array $endpoints = null)
     {
         $this->_id = $id;
         $this->_faultDomain = $faultDomain;
@@ -132,8 +132,6 @@ class RoleInstance
      * Sets the Role object associated with this instance.
      * 
      * @param Role $role The role object.
-     * 
-     * @return Role
      */
     public function setRole($role)
     {
@@ -143,7 +141,7 @@ class RoleInstance
     /**
      * Returns the set of endpoints associated with this role instance.
      * 
-     * @return array
+     * @return RoleInstanceEndpoint[]
      */
     public function getInstanceEndpoints()
     {

@@ -59,7 +59,7 @@ class ChannelEncoding
     /**
      * Encoding VideoStreams.
      *
-     * @var mixing
+     * @var array
      */
     private $_videoStreams;
 
@@ -82,9 +82,9 @@ class ChannelEncoding
      *
      * @param array $options Array containing values for object properties
      *
-     * @return Encoding
+     * @return ChannelEncoding
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         $operation = new self();
         $operation->fromArray($options);
@@ -97,8 +97,8 @@ class ChannelEncoding
      */
     public function __construct()
     {
-        $this->_videoStreams = array();
-        $this->_audioStreams = array();
+        $this->_videoStreams = [];
+        $this->_audioStreams = [];
     }
 
     /**
@@ -181,7 +181,7 @@ class ChannelEncoding
     /**
      * Get the Encoding VideoStream.
      *
-     * @return mixing
+     * @return array
      */
     public function getVideoStreams()
     {
@@ -191,9 +191,9 @@ class ChannelEncoding
     /**
      * Set the Encoding VideoStreams.
      *
-     * @param mixing $value Encoding VideoStreams.
+     * @param array $value Encoding VideoStreams.
      */
-    public function setVideoStreams($value)
+    public function setVideoStreams(array $value)
     {
         $this->_videoStreams = $value;
     }
@@ -201,7 +201,7 @@ class ChannelEncoding
     /**
      * Get the Encoding AudioStreams.
      *
-     * @return mixing
+     * @return mixed
      */
     public function getAudioStreams()
     {
@@ -211,9 +211,9 @@ class ChannelEncoding
     /**
      * Set the Encoding AudioStreams.
      *
-     * @param mixing $value Encoding AudioStreams.
+     * @param array $value Encoding AudioStreams.
      */
-    public function setAudioStreams($value)
+    public function setAudioStreams(array $value)
     {
         $this->_audioStreams = $value;
     }

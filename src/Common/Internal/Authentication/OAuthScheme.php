@@ -25,8 +25,10 @@
 
 namespace WindowsAzure\Common\Internal\Authentication;
 
+use WindowsAzure\Common\Internal\OAuthRestProxy;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
+use WindowsAzure\Common\Models\OAuthAccessToken;
 
 /**
  * Provides shared key authentication scheme for OAuth.
@@ -54,12 +56,12 @@ class OAuthScheme implements IAuthScheme
     protected $accountKey;
 
     /**
-     * @var WindowsAzure\Common\Models\OAuthAccessToken
+     * @var OAuthAccessToken
      */
     protected $accessToken;
 
     /**
-     * @var WindowsAzure\Common\Internal\OAuthRestProxy
+     * @var OAuthRestProxy
      */
     protected $oauthService;
 
@@ -76,22 +78,18 @@ class OAuthScheme implements IAuthScheme
     /**
      * Constructor.
      *
-     * @param string                                      $accountName  account name.
-     * @param string                                      $accountKey   account
-     *                                                                  secondary key.
-     * @param string                                      $grantType    grant type
-     *                                                                  for OAuth request.
-     * @param string                                      $scope        scope for
-     *                                                                  OAurh request.
-     * @param WindowsAzure\Common\Internal\OAuthRestProxy $oauthService account
-     *                                                                  primary or secondary key.
+     * @param string         $accountName  account name.
+     * @param string         $accountKey   account secondary key.
+     * @param string         $grantType    grant type for OAuth request.
+     * @param string         $scope        scope for OAurh request.
+     * @param OAuthRestProxy $oauthService account primary or secondary key.
      */
     public function __construct(
         $accountName,
         $accountKey,
         $grantType,
         $scope,
-        $oauthService
+        OAuthRestProxy $oauthService
     ) {
         Validate::isString($accountName, 'accountName');
         Validate::isString($accountKey, 'accountKey');

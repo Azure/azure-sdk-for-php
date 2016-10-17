@@ -68,9 +68,9 @@ class OAuthAccessToken
      *
      * @param array $parsedResponse JSON response parsed into array.
      *
-     * @return WindowsAzure\Common\Models\OAuthAccessToken
+     * @return OAuthAccessToken
      */
-    public static function create($parsedResponse)
+    public static function create(array $parsedResponse)
     {
         $result = new self();
 
@@ -95,8 +95,6 @@ class OAuthAccessToken
      * Sets access token.
      *
      * @param string $accessToken OAuth access token
-     *
-     * @return none
      */
     public function setAccessToken($accessToken)
     {
@@ -117,8 +115,6 @@ class OAuthAccessToken
      * Sets access token expires date.
      *
      * @param int $expiresIn OAuth access token expire date
-     *
-     * @return none
      */
     public function setExpiresIn($expiresIn)
     {
@@ -139,8 +135,6 @@ class OAuthAccessToken
      * Sets access token scope.
      *
      * @param string $scope OAuth access token scope
-     *
-     * @return none
      */
     public function setScope($scope)
     {

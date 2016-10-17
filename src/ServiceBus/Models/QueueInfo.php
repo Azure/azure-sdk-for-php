@@ -89,8 +89,6 @@ class QueueInfo
      * ATOM ENTRY XML string. 
      * 
      * @param string $entryXml An ATOM entry based XML string.
-     * 
-     * @return none
      */
     public function parseXml($entryXml)
     {
@@ -107,10 +105,8 @@ class QueueInfo
      * Returns a XML string based on ATOM ENTRY schema. 
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
-     *
-     * @return none
      */
-    public function writeXml($xmlWriter)
+    public function writeXml(\XMLWriter $xmlWriter)
     {
         $content = null;
         if (!is_null($this->_queueDescription)) {
@@ -130,7 +126,7 @@ class QueueInfo
     /**
      * Gets the description of the queue. 
      * 
-     * @return none
+     * @return QueueDescription
      */
     public function getQueueDescription()
     {
@@ -141,10 +137,8 @@ class QueueInfo
      * Sets the description of the queue. 
      *
      * @param QueueDescription $queueDescription The description of the queue.
-     * 
-     * @return none
      */
-    public function setQueueDescription($queueDescription)
+    public function setQueueDescription(QueueDescription $queueDescription)
     {
         $this->_queueDescription = $queueDescription;
     }
@@ -162,9 +156,7 @@ class QueueInfo
     /**
      * Sets the title.
      *
-     * @param string $title The title of the queue info. 
-     *
-     * @return none
+     * @param string $title The title of the queue info.
      */
     public function setTitle($title)
     {
@@ -185,8 +177,6 @@ class QueueInfo
      * Sets the entry. 
      * 
      * @param Entry $entry The entry of the queue info. 
-     *
-     * @return none
      */
     public function setEntry($entry)
     {
@@ -207,8 +197,6 @@ class QueueInfo
      * Sets the lock duration.
      *
      * @param string $lockDuration The lock duration.
-     * 
-     * @return none
      */
     public function setLockDuration($lockDuration)
     {
@@ -229,8 +217,6 @@ class QueueInfo
      * Sets the max size in mega bytes.
      *
      * @param int $maxSizeInMegabytes The max size in mega bytes.
-     * 
-     * @return none
      */
     public function setMaxSizeInMegabytes($maxSizeInMegabytes)
     {
@@ -251,8 +237,6 @@ class QueueInfo
      * Sets requires duplicate detection.
      *
      * @param bool $requiresDuplicateDetection If duplicate detection is required.
-     * 
-     * @return none
      */
     public function setRequiresDuplicateDetection($requiresDuplicateDetection)
     {
@@ -275,8 +259,6 @@ class QueueInfo
      * Sets the requires session.
      *
      * @param bool $requiresSession If session is required.
-     * 
-     * @return none
      */
     public function setRequiresSession($requiresSession)
     {
@@ -297,8 +279,6 @@ class QueueInfo
      * Sets the default message time to live. 
      *
      * @param string $defaultMessageTimeToLive The default message time to live.
-     * 
-     * @return none
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {
@@ -322,8 +302,6 @@ class QueueInfo
      *
      * @param string $deadLetteringOnMessageExpiration The dead lettering on 
      *                                                 message expiration.
-     * 
-     * @return none
      */
     public function setDeadLetteringOnMessageExpiration(
         $deadLetteringOnMessageExpiration
@@ -348,8 +326,6 @@ class QueueInfo
      *
      * @param string $duplicateDetectionHistoryTimeWindow The duplicate
      *                                                    detection history time window.
-     * 
-     * @return none
      */
     public function setDuplicateDetectionHistoryTimeWindow(
         $duplicateDetectionHistoryTimeWindow
@@ -373,8 +349,6 @@ class QueueInfo
      * Sets the maximum delivery count.
      *
      * @param string $maxDeliveryCount The maximum delivery count.
-     * 
-     * @return none
      */
     public function setMaxDeliveryCount($maxDeliveryCount)
     {
@@ -395,8 +369,6 @@ class QueueInfo
      * Sets enable batched operations.
      *
      * @param bool $enableBatchedOperations Enable batched operations.
-     * 
-     * @return none
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {
@@ -419,8 +391,6 @@ class QueueInfo
      * Sets the size in bytes.
      *
      * @param int $sizeInBytes The size in bytes.
-     * 
-     * @return none
      */
     public function setSizeInBytes($sizeInBytes)
     {
@@ -441,8 +411,6 @@ class QueueInfo
      * Sets the message count.
      *
      * @param string $messageCount The count of the message.
-     * 
-     * @return none
      */
     public function setMessageCount($messageCount)
     {

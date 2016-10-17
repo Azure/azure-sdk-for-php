@@ -89,9 +89,9 @@ class MediaProcessor
      *
      * @param array $options Array containing values for object properties
      *
-     * @return WindowsAzure\MediaServices\Models\MediaProcessor
+     * @return MediaProcessor
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         $mediaProcessor = new self();
         $mediaProcessor->fromArray($options);
@@ -110,10 +110,8 @@ class MediaProcessor
      * Fill media processor from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return none
      */
-    public function fromArray($options)
+    public function fromArray(array $options)
     {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');

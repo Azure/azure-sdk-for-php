@@ -47,9 +47,9 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::createQueue
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteQueue
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveQueueMessage
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::createQueue
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteQueue
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveQueueMessage
      */
     private function doOneTimeSetup()
     {

@@ -43,9 +43,9 @@ use WindowsAzure\Common\Internal\Http\HttpCallContext;
 class BatchRequestTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Http\batchRequest::appendContext
-     * @covers WindowsAzure\Common\Internal\Http\batchRequest::encode
-     * @covers WindowsAzure\Common\Internal\Http\batchRequest::getBody
+     * @covers \WindowsAzure\Common\Internal\Http\batchRequest::appendContext
+     * @covers \WindowsAzure\Common\Internal\Http\batchRequest::encode
+     * @covers \WindowsAzure\Common\Internal\Http\batchRequest::getBody
      */
     public function testAppendContext()
     {
@@ -93,7 +93,7 @@ class BatchRequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\batchRequest::getContexts
+     * @covers \WindowsAzure\Common\Internal\Http\batchRequest::getContexts
      */
     public function testGetContexts()
     {

@@ -81,10 +81,8 @@ class GetStorageServicePropertiesResult
      * Sets the storageService.
      * 
      * @param StorageService $storageService The storageService.
-     * 
-     * @return none
      */
-    public function setStorageService($storageService)
+    public function setStorageService(StorageService $storageService)
     {
         $this->_storageService = $storageService;
     }

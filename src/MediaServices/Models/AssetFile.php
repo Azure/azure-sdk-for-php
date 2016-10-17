@@ -145,9 +145,9 @@ class AssetFile
      *
      * @param array $options Array containing values for object properties
      *
-     * @return WindowsAzure\MediaServices\Models\AssetFile
+     * @return AssetFile
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         Validate::notNull($options['Name'], 'options[Name]');
         Validate::notNull($options['ParentAssetId'], 'options[ParentAssetId]');
@@ -185,10 +185,8 @@ class AssetFile
      * Fill asset file from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return none
      */
-    public function fromArray($options)
+    public function fromArray(array $options)
     {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
@@ -302,8 +300,6 @@ class AssetFile
      * Set "Content check sum".
      *
      * @param string $value Content check sum
-     *
-     * @return none
      */
     public function setContentCheckSum($value)
     {
@@ -324,8 +320,6 @@ class AssetFile
      * Set "Mime type".
      *
      * @param string $value Mime type
-     *
-     * @return none
      */
     public function setMimeType($value)
     {
@@ -366,8 +360,6 @@ class AssetFile
      * Set "Is primary".
      *
      * @param bool $value Is primary
-     *
-     * @return none
      */
     public function setIsPrimary($value)
     {
@@ -388,8 +380,6 @@ class AssetFile
      * Set "Initialization vector".
      *
      * @param string $value Initialization vector
-     *
-     * @return none
      */
     public function setInitializationVector($value)
     {
@@ -410,8 +400,6 @@ class AssetFile
      * Set "Encryption key id".
      *
      * @param string $value Encryption key id
-     *
-     * @return none
      */
     public function setEncryptionKeyId($value)
     {
@@ -432,8 +420,6 @@ class AssetFile
      * Set "Is encrypted".
      *
      * @param bool $value Is encrypted
-     *
-     * @return none
      */
     public function setIsEncrypted($value)
     {
@@ -454,8 +440,6 @@ class AssetFile
      * Set "Encryption scheme".
      *
      * @param string $value Encryption scheme
-     *
-     * @return none
      */
     public function setEncryptionScheme($value)
     {
@@ -476,8 +460,6 @@ class AssetFile
      * Set "Encryption version".
      *
      * @param string $value Encryption version
-     *
-     * @return none
      */
     public function setEncryptionVersion($value)
     {
@@ -498,8 +480,6 @@ class AssetFile
      * Set "Parent asset id".
      *
      * @param string $value Parent asset id
-     *
-     * @return none
      */
     public function setParentAssetId($value)
     {
@@ -520,8 +500,6 @@ class AssetFile
      * Set "Content file size".
      *
      * @param int $value Content file size
-     *
-     * @return none
      */
     public function setContentFileSize($value)
     {
@@ -542,8 +520,6 @@ class AssetFile
      * Set "Name".
      *
      * @param string $value Name
-     *
-     * @return none
      */
     public function setName($value)
     {

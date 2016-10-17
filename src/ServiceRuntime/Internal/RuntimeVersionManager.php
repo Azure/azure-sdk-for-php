@@ -66,7 +66,7 @@ class RuntimeVersionManager
     {
         $this->_protocolClient = $protocolClient;
 
-        $this->_supportedVersionList = array();
+        $this->_supportedVersionList = [];
         array_push(
             $this->_supportedVersionList,
             new Protocol1RuntimeClientFactory()

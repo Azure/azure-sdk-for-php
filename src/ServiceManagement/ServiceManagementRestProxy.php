@@ -25,7 +25,9 @@
 
 namespace WindowsAzure\ServiceManagement;
 
+use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Serialization\ISerializer;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\RestProxy;
@@ -33,8 +35,11 @@ use WindowsAzure\Common\Internal\Http\HttpCallContext;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\ServiceManagement\Internal\IServiceManagement;
+use WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions;
 use WindowsAzure\ServiceManagement\Models\CreateAffinityGroupOptions;
 use WindowsAzure\ServiceManagement\Models\AffinityGroup;
+use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
+use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
 use WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult;
 use WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult;
 use WindowsAzure\ServiceManagement\Models\ListLocationsResult;
@@ -54,6 +59,7 @@ use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
 use WindowsAzure\ServiceManagement\Models\GetDeploymentResult;
 use WindowsAzure\ServiceManagement\Models\DeploymentStatus;
 use WindowsAzure\ServiceManagement\Models\Mode;
+use WindowsAzure\ServiceManagement\Models\UpgradeDeploymentOptions;
 
 /**
  * This class constructs HTTP requests and receive HTTP responses for service
@@ -88,7 +94,7 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @return AsynchronousOperationResult
      */
-    private function _sendRoleInstanceOrder($name, $roleName, $options, $order)
+    private function _sendRoleInstanceOrder($name, $roleName, GetDeploymentOptions $options, $order)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -213,7 +219,7 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @return string
      */
-    private function _getRoleInstancePath($name, $options, $roleName)
+    private function _getRoleInstancePath($name, GetDeploymentOptions $options, $roleName)
     {
         $path = $this->_getDeploymentPath($name, $options).'/roleinstances';
 
@@ -228,7 +234,7 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @return string
      */
-    private function _getDeploymentPath($name, $options)
+    private function _getDeploymentPath($name, GetDeploymentOptions $options)
     {
         $slot = $options->getSlot();
         $deploymentName = $options->getDeploymentName();
@@ -282,9 +288,9 @@ class ServiceManagementRestProxy extends RestProxy
      */
     private function _createRequestXml($xmlElements, $root)
     {
-        $requestArray = array(
-            Resources::XTAG_NAMESPACE => array(Resources::WA_XML_NAMESPACE => null),
-        );
+        $requestArray = [
+            Resources::XTAG_NAMESPACE => [Resources::WA_XML_NAMESPACE => null],
+        ];
 
         foreach ($xmlElements as $tagName => $value) {
             if (!empty($value)) {
@@ -292,7 +298,7 @@ class ServiceManagementRestProxy extends RestProxy
             }
         }
 
-        $properties = array(XmlSerializer::ROOT_NAME => $root);
+        $properties = [XmlSerializer::ROOT_NAME => $root];
 
         return $this->dataSerializer->serialize($requestArray, $properties);
     }
@@ -300,8 +306,8 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Prepare configuration XML for sending via REST API.
      *
-     * @param string|resource $configuration The configuration file contents
-     *                                       or file stream.
+     * @param string|resource $value The configuration file contents
+     *                               or file stream.
      *
      * @return string
      */
@@ -321,12 +327,15 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Initializes new ServiceManagementRestProxy object.
      *
-     * @param IHttpClient $channel        The HTTP channel.
-     * @param string      $subscriptionId The user subscription id.
-     * @param string      $uri            The service URI.
-     * @param ISerializer $dataSerializer The data serializer.
+     * @param IHttpClient      $channel        The HTTP channel.
+     * @param string           $subscriptionId The user subscription id.
+     * @param string           $uri            The service URI.
+     * @param ISerializer|null $dataSerializer The data serializer.
      */
-    public function __construct($channel, $subscriptionId, $uri, $dataSerializer)
+    public function __construct(
+        IHttpClient $channel,
+        $subscriptionId, $uri,
+        ISerializer $dataSerializer = null)
     {
         parent::__construct(
             $channel,
@@ -430,7 +439,7 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::notNullOrEmpty($keyType, 'keyType');
 
         $body = $this->_createRequestXml(
-            array(Resources::XTAG_KEY_TYPE => $keyType),
+            [Resources::XTAG_KEY_TYPE => $keyType],
             Resources::XTAG_REGENERATE_KEYS
         );
 
@@ -472,7 +481,7 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264518.aspx
      */
-    public function createStorageService($name, $label, $options)
+    public function createStorageService($name, $label, CreateServiceOptions $options)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -517,8 +526,6 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @param string $name The storage account name.
      *
-     * @return none
-     *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264517.aspx
      */
     public function deleteStorageService($name)
@@ -541,11 +548,9 @@ class ServiceManagementRestProxy extends RestProxy
      * @param string               $name    The storage account name.
      * @param UpdateServiceOptions $options The optional parameters.
      *
-     * @return none
-     *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264516.aspx
      */
-    public function updateStorageService($name, $options)
+    public function updateStorageService($name, UpdateServiceOptions $options)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -607,11 +612,9 @@ class ServiceManagementRestProxy extends RestProxy
      *                                             listLocations API.
      * @param CreateAffinityGroupOptions $options  The optional parameters.
      *
-     * @return none
-     *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg715317.aspx
      */
-    public function createAffinityGroup($name, $label, $location, $options = null)
+    public function createAffinityGroup($name, $label, $location, CreateAffinityGroupOptions $options = null)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -652,8 +655,6 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @param string $name The affinity group name.
      *
-     * @return none
-     *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg715314.aspx
      */
     public function deleteAffinityGroup($name)
@@ -677,11 +678,9 @@ class ServiceManagementRestProxy extends RestProxy
      * @param string                     $label   The affinity group label.
      * @param CreateAffinityGroupOptions $options The optional parameters.
      *
-     * @return none
-     *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg715316.aspx
      */
-    public function updateAffinityGroup($name, $label, $options = null)
+    public function updateAffinityGroup($name, $label, CreateAffinityGroupOptions $options = null)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -770,7 +769,7 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460783.aspx
      */
-    public function getOperationStatus($requestInfo)
+    public function getOperationStatus(AsynchronousOperationResult $requestInfo)
     {
         Validate::notNullOrEmpty($requestInfo, 'requestInfo');
         Validate::notNullOrEmpty($requestInfo->getrequestId(), 'requestId');
@@ -817,11 +816,9 @@ class ServiceManagementRestProxy extends RestProxy
      *                                      your tracking purposes.
      * @param CreateServiceOptions $options The optional parameters.
      *
-     * @return none
-     *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441304.aspx
      */
-    public function createHostedService($name, $label, $options)
+    public function createHostedService($name, $label, CreateServiceOptions $options)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -869,11 +866,9 @@ class ServiceManagementRestProxy extends RestProxy
      *                                      unique within Windows Azure.
      * @param UpdateServiceOptions $options The optional parameters.
      *
-     * @return none
-     *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441303.aspx
      */
-    public function updateHostedService($name, $options)
+    public function updateHostedService($name, UpdateServiceOptions $options)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -915,8 +910,6 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @param string $name The name for the hosted service.
      *
-     * @return none
-     *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441305.aspx
      */
     public function deleteHostedService($name)
@@ -946,7 +939,7 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460806.aspx
      */
-    public function getHostedServiceProperties($name, $options = null)
+    public function getHostedServiceProperties($name, GetHostedServicePropertiesOptions $options = null)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -1007,7 +1000,7 @@ class ServiceManagementRestProxy extends RestProxy
         $packageUrl,
         $configuration,
         $label,
-        $options = null
+        CreateDeploymentOptions $options = null
     ) {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -1038,14 +1031,14 @@ class ServiceManagementRestProxy extends RestProxy
         $treatWarningsAsErrors = Utilities::booleanToString(
             $options->getTreatWarningsAsErrors()
         );
-        $xmlElements = array(
+        $xmlElements = [
             Resources::XTAG_NAME => $deploymentName,
             Resources::XTAG_PACKAGE_URL => $packageUrl,
             Resources::XTAG_LABEL => $label,
             Resources::XTAG_CONFIGURATION => $configuration,
             Resources::XTAG_START_DEPLOYMENT => $startDeployment,
             Resources::XTAG_TREAT_WARNINGS_AS_ERROR => $treatWarningsAsErrors,
-        );
+        ];
         $requestXml = $this->_createRequestXml(
             $xmlElements,
             Resources::XTAG_CREATE_DEPLOYMENT
@@ -1083,7 +1076,7 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460804.aspx
      */
-    public function getDeployment($name, $options)
+    public function getDeployment($name, GetDeploymentOptions $options)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -1131,10 +1124,10 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::isString($source, 'source');
         Validate::notNullOrEmpty($source, 'source');
 
-        $xmlElements = array(
+        $xmlElements = [
             Resources::XTAG_PRODUCTION => $destination,
             Resources::XTAG_SOURCE_DEPLOYMENT => $source,
-        );
+        ];
         $body = $this->_createRequestXml($xmlElements, Resources::XTAG_SWAP);
         $context = new HttpCallContext();
         $context->setMethod(Resources::HTTP_POST);
@@ -1165,7 +1158,7 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460815.aspx
      */
-    public function deleteDeployment($name, $options)
+    public function deleteDeployment($name, GetDeploymentOptions $options)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -1200,7 +1193,8 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460809.aspx
      */
-    public function changeDeploymentConfiguration($name, $configuration, $options)
+    public function changeDeploymentConfiguration(
+        $name, $configuration, ChangeDeploymentConfigurationOptions $options)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -1212,11 +1206,11 @@ class ServiceManagementRestProxy extends RestProxy
         $warningsTreatment = Utilities::booleanToString(
             $options->getTreatWarningsAsErrors()
         );
-        $xmlElements = array(
+        $xmlElements = [
             Resources::XTAG_CONFIGURATION => $configuration,
             Resources::XTAG_TREAT_WARNINGS_AS_ERROR => $warningsTreatment,
             Resources::XTAG_MODE => $options->getMode(),
-        );
+        ];
         $body = $this->_createRequestXml(
             $xmlElements,
             Resources::XTAG_CHANGE_CONFIGURATION
@@ -1258,7 +1252,7 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460808.aspx
      */
-    public function updateDeploymentStatus($name, $status, $options)
+    public function updateDeploymentStatus($name, $status, GetDeploymentOptions $options)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -1269,7 +1263,7 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::notNullOrEmpty($options, 'options');
 
         $body = $this->_createRequestXml(
-            array(Resources::XTAG_STATUS => $status),
+            [Resources::XTAG_STATUS => $status],
             Resources::XTAG_UPDATE_DEPLOYMENT_STATUS
         );
         $context = new HttpCallContext();
@@ -1329,7 +1323,7 @@ class ServiceManagementRestProxy extends RestProxy
         $configuration,
         $label,
         $force,
-        $options
+        UpgradeDeploymentOptions $options
     ) {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -1347,14 +1341,14 @@ class ServiceManagementRestProxy extends RestProxy
 
         $configuration = $this->_encodeConfiguration($configuration);
 
-        $xmlElements = array(
+        $xmlElements = [
             Resources::XTAG_MODE => $mode,
             Resources::XTAG_PACKAGE_URL => $packageUrl,
             Resources::XTAG_CONFIGURATION => $configuration,
             Resources::XTAG_LABEL => $label,
             Resources::XTAG_ROLE_TO_UPGRADE => $options->getRoleToUpgrade(),
             Resources::XTAG_FORCE => Utilities::booleanToString($force),
-        );
+        ];
         $body = $this->_createRequestXml(
             $xmlElements,
             Resources::XTAG_UPGRADE_DEPLOYMENT
@@ -1398,7 +1392,8 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/ee460800.aspx
      */
-    public function walkUpgradeDomain($name, $upgradeDomain, $options)
+    public function walkUpgradeDomain(
+        $name, $upgradeDomain, GetDeploymentOptions $options)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -1406,7 +1401,7 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::notNullOrEmpty($options, 'options');
 
         $body = $this->_createRequestXml(
-            array(Resources::XTAG_UPGRADE_DOMAIN => $upgradeDomain),
+            [Resources::XTAG_UPGRADE_DOMAIN => $upgradeDomain],
             Resources::XTAG_WALK_UPGRADE_DOMAIN
         );
         $context = new HttpCallContext();
@@ -1499,11 +1494,11 @@ class ServiceManagementRestProxy extends RestProxy
      *                                      rollback should fail.
      * @param GetDeploymentOptions $options The optional parameters.
      *
-     * @return none
+     * @return AsynchronousOperationResult
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh403977.aspx
      */
-    public function rollbackUpdateOrUpgrade($name, $mode, $force, $options)
+    public function rollbackUpdateOrUpgrade($name, $mode, $force, GetDeploymentOptions $options)
     {
         Validate::isString($name, 'name');
         Validate::notNullOrEmpty($name, 'name');
@@ -1513,10 +1508,10 @@ class ServiceManagementRestProxy extends RestProxy
         Validate::notNullOrEmpty($force, 'force');
         Validate::notNullOrEmpty($options, 'options');
 
-        $xmlElements = array(
+        $xmlElements = [
             Resources::XTAG_MODE => $mode,
             Resources::XTAG_FORCE => Utilities::booleanToString($force),
-        );
+        ];
         $body = $this->_createRequestXml(
             $xmlElements,
             Resources::XTAG_ROLLBACK_UPDATE_OR_UPGRADE

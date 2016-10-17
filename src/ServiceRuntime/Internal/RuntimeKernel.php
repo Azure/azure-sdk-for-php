@@ -43,21 +43,21 @@ class RuntimeKernel
     /**
      * The singleton instance of the runtime kernel.
      * 
-     * @var type
+     * @var self
      */
     private static $_theKernel;
 
     /**
      * The current state serializer.
      * 
-     * @var type
+     * @var ICurrentStateSerializer
      */
     private $_currentStateSerializer;
 
     /**
      * The goal state deserializer.
      * 
-     * @var type
+     * @var IGoalStateDeserializer
      */
     private $_goalStateDeserializer;
 

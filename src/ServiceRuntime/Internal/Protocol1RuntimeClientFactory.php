@@ -55,7 +55,7 @@ class Protocol1RuntimeClientFactory
      * 
      * @param string $path The goal state path.
      * 
-     * @return IRuntimeClient
+     * @return Protocol1RuntimeClient
      */
     public function createRuntimeClient($path)
     {

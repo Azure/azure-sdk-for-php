@@ -43,11 +43,11 @@ use Tests\framework\TestResources;
 class TableSharedKeyLiteAuthSchemeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme::__construct
+     * @covers \WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme::__construct
      */
     public function test__construct()
     {
-        $expected = array();
+        $expected = [];
         $expected[] = Resources::DATE;
 
         $mock = new TableSharedKeyLiteAuthSchemeMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
@@ -56,7 +56,7 @@ class TableSharedKeyLiteAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme::computeSignature
+     * @covers \WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme::computeSignature
      */
     public function testComputeSignatureSimple()
     {
@@ -76,7 +76,7 @@ class TableSharedKeyLiteAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme::getAuthorizationHeader
+     * @covers \WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme::getAuthorizationHeader
      */
     public function testGetAuthorizationHeaderSimple()
     {

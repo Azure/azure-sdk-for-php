@@ -28,6 +28,7 @@ namespace WindowsAzure\Common\Internal\Serialization;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
+use XMLWriter;
 
 /**
  * Short description.
@@ -78,7 +79,7 @@ class XmlSerializer implements ISerializer
      * @param array     $data       Array to be converted to XML.
      * @param string    $defaultTag Default XML tag to be used if none specified.
      */
-    private function _arr2xml(\XMLWriter $xmlw, $data, $defaultTag = null)
+    private function _arr2xml(XMLWriter $xmlw, array $data, $defaultTag = null)
     {
         foreach ($data as $key => $value) {
             if ($key === Resources::XTAG_ATTRIBUTES) {
@@ -139,7 +140,7 @@ class XmlSerializer implements ISerializer
     {
         Validate::notNull($targetObject, 'targetObject');
         Validate::isString($rootName, 'rootName');
-        $xmlWriter = new \XmlWriter();
+        $xmlWriter = new XMLWriter();
         $xmlWriter->openMemory();
         $xmlWriter->setIndent(true);
         $reflectionClass = new \ReflectionClass($targetObject);
@@ -188,12 +189,12 @@ class XmlSerializer implements ISerializer
      * Serializes given array. The array indices must be string to use them as
      * as element name.
      * 
-     * @param array $array      The object to serialize represented in array.
-     * @param array $properties The used properties in the serialization process.
+     * @param array      $array      The object to serialize represented in array.
+     * @param array|null $properties The used properties in the serialization process.
      * 
      * @return string
      */
-    public function serialize($array, $properties = null)
+    public function serialize(array $array, array $properties = null)
     {
         $xmlVersion = '1.0';
         $xmlEncoding = 'UTF-8';
@@ -210,7 +211,7 @@ class XmlSerializer implements ISerializer
             return false;
         }
 
-        $xmlw = new \XmlWriter();
+        $xmlw = new XMLWriter();
         $xmlw->openMemory();
         $xmlw->setIndent(true);
         $xmlw->startDocument($xmlVersion, $xmlEncoding, $standalone);
@@ -219,7 +220,7 @@ class XmlSerializer implements ISerializer
             $xmlw->startElement($rootName);
         } else {
             foreach ($docNamespace as $uri => $prefix) {
-                $xmlw->startElementNS($prefix, $rootName, $uri);
+                $xmlw->startElementNs($prefix, $rootName, $uri);
                 break;
             }
         }

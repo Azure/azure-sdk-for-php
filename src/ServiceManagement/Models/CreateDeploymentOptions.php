@@ -80,8 +80,6 @@ class CreateDeploymentOptions
      * 
      * @param bool $startDeployment Indicates whether to start the deployment 
      *                              immediately after it is created.
-     * 
-     * @return none
      */
     public function setStartDeployment($startDeployment)
     {
@@ -105,8 +103,6 @@ class CreateDeploymentOptions
      * 
      * @param bool $treatWarningsAsErrors Indicates whether to treat package 
      *                                    validation warnings as errors.
-     * 
-     * @return none
      */
     public function setTreatWarningsAsErrors($treatWarningsAsErrors)
     {

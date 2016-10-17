@@ -77,7 +77,7 @@ class RestProxy
     public function __construct(IHttpClient $channel, $dataSerializer, $uri)
     {
         $this->_channel = $channel;
-        $this->_filters = array();
+        $this->_filters = [];
         $this->dataSerializer = $dataSerializer;
         $this->_uri = $uri;
     }
@@ -106,8 +106,6 @@ class RestProxy
      * Sets the Uri of the service.
      *
      * @param string $uri The URI of the request.
-     *
-     * @return none
      */
     public function setUri($uri)
     {
@@ -170,12 +168,9 @@ class RestProxy
      * @param array  &$queryParameters The query parameters.
      * @param string $key              The query variable name.
      * @param string $value            The query variable value.
-     *
-     * @return none
      */
     protected function addOptionalQueryParam(array &$queryParameters, $key, $value)
     {
-        Validate::isArray($queryParameters, 'queryParameters');
         Validate::isString($key, 'key');
         Validate::isString($value, 'value');
 
@@ -192,12 +187,9 @@ class RestProxy
      * @param array  &$headers The HTTP header parameters.
      * @param string $key      The HTTP header name.
      * @param string $value    The HTTP header value.
-     *
-     * @return none
      */
     protected function addOptionalHeader(array &$headers, $key, $value)
     {
-        Validate::isArray($headers, 'headers');
         Validate::isString($key, 'key');
         Validate::isString($value, 'value');
 

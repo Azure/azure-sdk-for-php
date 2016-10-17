@@ -26,6 +26,7 @@
 namespace Tests\mock\WindowsAzure\Common\Internal\Authentication;
 
 use WindowsAzure\Common\Internal\Authentication\OAuthScheme;
+use WindowsAzure\Common\Internal\OAuthRestProxy;
 
 /**
  * Mock class to wrap OAuthScheme class.
@@ -40,7 +41,7 @@ use WindowsAzure\Common\Internal\Authentication\OAuthScheme;
  */
 class OAuthSchemeMock extends OAuthScheme
 {
-    public function __construct($accountName, $accountKey, $grantType, $scope, $oauthService)
+    public function __construct($accountName, $accountKey, $grantType, $scope, OAuthRestProxy $oauthService)
     {
         parent::__construct($accountName, $accountKey, $grantType, $scope, $oauthService);
     }

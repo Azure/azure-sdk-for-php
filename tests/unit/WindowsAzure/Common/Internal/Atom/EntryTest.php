@@ -48,7 +48,7 @@ use WindowsAzure\Common\Internal\Atom\Source;
 class EntryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::__construct
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::__construct
      */
     public function testEntryConstructor()
     {
@@ -62,8 +62,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getAuthor
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setAuthor
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getAuthor
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setAuthor
      */
     public function testEntryGetSetAuthor()
     {
@@ -73,8 +73,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry();
 
         // Test
-        $entry->setAuthor($expected);
-        $actual = $entry->getAuthor();
+        $entry->setAuthor(array($expected));
+        $actual = $entry->getAuthor()[0];
 
         // Assert
         $this->assertEquals(
@@ -84,8 +84,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getCategory
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setCategory
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getCategory
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setCategory
      */
     public function testEntryGetSetCategory()
     {
@@ -106,8 +106,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getContent
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setContent
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getContent
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setContent
      */
     public function testEntryGetSetContent()
     {
@@ -128,8 +128,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getContributor
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setContributor
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getContributor
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setContributor
      */
     public function testEntryGetSetContributor()
     {
@@ -150,8 +150,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getId
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setId
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getId
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setId
      */
     public function testEntryGetSetId()
     {
@@ -171,8 +171,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getLink
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setLink
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getLink
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setLink
      */
     public function testEntryGetSetLink()
     {
@@ -192,8 +192,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getPublished
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setPublished
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getPublished
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setPublished
      */
     public function testEntryGetSetPublished()
     {
@@ -213,8 +213,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getRights
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setRights
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getRights
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setRights
      */
     public function testEntryGetSetRights()
     {
@@ -234,8 +234,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getSource
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setSource
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getSource
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setSource
      */
     public function testEntryGetSetSource()
     {
@@ -255,8 +255,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getSummary
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setSummary
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getSummary
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setSummary
      */
     public function testEntryGetSetSummary()
     {
@@ -276,8 +276,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getTitle
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setTitle
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getTitle
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setTitle
      */
     public function testEntryGetSetTitle()
     {
@@ -297,13 +297,13 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getUpdated
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setUpdated
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getUpdated
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setUpdated
      */
     public function testEntryGetSetUpdated()
     {
         // Setup
-        $expected = true;
+        $expected = new \DateTime();
         $entry = new Entry();
 
         // Test
@@ -318,8 +318,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getExtensionElement
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setExtensionElement
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getExtensionElement
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setExtensionElement
      */
     public function testEntryGetSetExtensionElement()
     {
@@ -339,7 +339,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::writeXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::writeXml
      */
     public function testEntryToXml()
     {
@@ -361,8 +361,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getAttributes
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setAttributes
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getAttributes
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setAttributes
      */
     public function testGetSetAttributes()
     {
@@ -383,18 +383,18 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getAuthor
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setAuthor
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getAuthor
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setAuthor
      */
     public function testGetSetAuthor()
     {
         // Setup
-        $expected = 'testAuthor';
+        $expected = new Person('testAuthor');
         $entry = new Entry();
 
         // Test
-        $entry->setAuthor($expected);
-        $actual = $entry->getAuthor();
+        $entry->setAuthor(array($expected));
+        $actual = $entry->getAuthor()[0];
 
         // Assert
         $this->assertEquals(
@@ -404,8 +404,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getCategory
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setCategory
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getCategory
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setCategory
      */
     public function testGetSetCategory()
     {
@@ -425,13 +425,13 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getContent
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setContent
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getContent
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setContent
      */
     public function testGetSetContent()
     {
         // Setup
-        $expected = 'testContent';
+        $expected = new Content('testContent');
         $entry = new Entry();
 
         // Test
@@ -446,8 +446,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getContributor
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setContributor
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getContributor
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setContributor
      */
     public function testGetSetContributor()
     {
@@ -467,8 +467,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getId
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setId
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getId
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setId
      */
     public function testGetSetId()
     {
@@ -488,8 +488,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getLink
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setLink
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getLink
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setLink
      */
     public function testGetSetLink()
     {
@@ -509,8 +509,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getPublished
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setPublished
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getPublished
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setPublished
      */
     public function testGetSetPublished()
     {
@@ -530,8 +530,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getRights
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setRights
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getRights
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setRights
      */
     public function testGetSetRights()
     {
@@ -551,8 +551,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getSource
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setSource
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getSource
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setSource
      */
     public function testGetSetSource()
     {
@@ -572,8 +572,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getSummary
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setSummary
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getSummary
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setSummary
      */
     public function testGetSetSummary()
     {
@@ -593,8 +593,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getTitle
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setTitle
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getTitle
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setTitle
      */
     public function testGetSetTitle()
     {
@@ -614,13 +614,13 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getUpdated
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setUpdated
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getUpdated
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setUpdated
      */
     public function testGetSetUpdated()
     {
         // Setup
-        $expected = 'testUpdated';
+        $expected = new \DateTime('now');
         $entry = new Entry();
 
         // Test
@@ -635,8 +635,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::getExtensionElement
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::setExtensionElement
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::getExtensionElement
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::setExtensionElement
      */
     public function testGetSetExtensionElement()
     {
@@ -656,7 +656,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Entry::fromXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Entry::fromXml
      */
     public function testFromXml()
     {

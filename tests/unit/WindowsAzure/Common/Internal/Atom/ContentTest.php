@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\Common\Internal\Atom;
 
 use WindowsAzure\Common\Internal\Atom\Content;
+use XMLWriter;
 
 /**
  * Unit tests for class WrapAccessTokenResult.
@@ -43,7 +44,7 @@ use WindowsAzure\Common\Internal\Atom\Content;
 class ContentTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Content::__construct
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::__construct
      */
     public function testContentConstructor()
     {
@@ -63,8 +64,8 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Content::getText
-     * @covers WindowsAzure\Common\Internal\Atom\Content::setText
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::getText
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::setText
      */
     public function testGetSetText()
     {
@@ -84,8 +85,8 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Content::getType
-     * @covers WindowsAzure\Common\Internal\Atom\Content::setType
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::getType
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::setType
      */
     public function testGetSetType()
     {
@@ -105,7 +106,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Content::writeXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::writeXml
      */
     public function testWriteXml()
     {
@@ -131,7 +132,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Content::parseXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::parseXml
      */
     public function testParseXmlSuccess()
     {
@@ -151,7 +152,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Content::parseXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::parseXml
      */
     public function testParseXmlInvalidParameter()
     {
@@ -164,7 +165,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Content::parseXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::parseXml
      */
     public function testWriteXmlSuccess()
     {
@@ -186,22 +187,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Content::writeXml
-     */
-    public function testWriteXmlFailed()
-    {
-        // Setup
-        $this->setExpectedException(get_class(new \InvalidArgumentException()));
-        $expected = new Content();
-
-        // Test
-        $expected->writeXml(null);
-
-        // Assert
-    }
-
-    /**
-     * @covers WindowsAzure\Common\Internal\Atom\Content::getXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::getXml
      */
     public function testGetXml()
     {
@@ -220,7 +206,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Atom\Content::fromXml
+     * @covers \WindowsAzure\Common\Internal\Atom\Content::fromXml
      */
     public function testFromXml()
     {

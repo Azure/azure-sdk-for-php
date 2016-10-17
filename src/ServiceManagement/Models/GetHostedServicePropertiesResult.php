@@ -81,8 +81,6 @@ class GetHostedServicePropertiesResult
      * Sets the hostedService.
      * 
      * @param HostedService $hostedService The hostedService.
-     * 
-     * @return none
      */
     public function setHostedService($hostedService)
     {

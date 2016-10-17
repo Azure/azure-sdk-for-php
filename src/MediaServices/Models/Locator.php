@@ -140,9 +140,9 @@ class Locator
      *
      * @param array $options Array containing values for object properties
      *
-     * @return WindowsAzure\MediaServices\Models\Locator
+     * @return Locator
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         Validate::notNull($options['AssetId'], 'options[AssetId]');
         Validate::notNull($options['AccessPolicyId'], 'options[AccessPolicyId]');
@@ -161,12 +161,9 @@ class Locator
     /**
      * Create locator.
      *
-     * @param WindowsAzure\MediaServices\Models\Asset|string        $asset        A
-     *                                                                            target asset
-     * @param WindowsAzure\MediaServices\Models\AccessPolicy|string $accessPolicy A
-     *                                                                            target access policy
-     * @param int                                                   $type         An
-     *                                                                            enumeration value that describes the type of Locator.
+     * @param Asset|string        $asset        A target asset
+     * @param AccessPolicy|string $accessPolicy A target access policy
+     * @param int                 $type         An enumeration value that describes the type of Locator.
      */
     public function __construct($asset, $accessPolicy, $type)
     {
@@ -185,10 +182,8 @@ class Locator
      * Fill locator from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return none
      */
-    public function fromArray($options)
+    public function fromArray(array $options)
     {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
@@ -266,10 +261,8 @@ class Locator
      * Set "Start time".
      *
      * @param \DateTime $value Start time
-     *
-     * @return none
      */
-    public function setStartTime($value)
+    public function setStartTime(\DateTime $value)
     {
         $this->_startTime = $value;
     }
@@ -338,8 +331,6 @@ class Locator
      * Set "Type".
      *
      * @param int $value Type
-     *
-     * @return none
      */
     public function setType($value)
     {
@@ -360,8 +351,6 @@ class Locator
      * Set "Expiration date time".
      *
      * @param \DateTime $value Expiration date time
-     *
-     * @return none
      */
     public function setExpirationDateTime($value)
     {
@@ -382,8 +371,6 @@ class Locator
      * Set "Name".
      *
      * @param string $value Name
-     *
-     * @return none
      */
     public function setName($value)
     {
@@ -404,8 +391,6 @@ class Locator
      * Set "Locator id".
      *
      * @param string $value Locator id
-     *
-     * @return none
      */
     public function setId($value)
     {

@@ -53,8 +53,6 @@ class HeadersFilter implements IServiceFilter
      * Constructor.
      *
      * @param array $headers static headers to be added.
-     *
-     * @return HeadersFilter
      */
     public function __construct(array $headers)
     {

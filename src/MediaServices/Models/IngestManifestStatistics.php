@@ -75,9 +75,9 @@ class IngestManifestStatistics
      *
      * @param array $options Array containing values for object properties
      *
-     * @return WindowsAzure\MediaServices\Models\IngestManifestStatistics
+     * @return IngestManifestStatistics
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         $statistics = new self();
         $statistics->fromArray($options);
@@ -89,10 +89,8 @@ class IngestManifestStatistics
      * Fill ManifestStatistics from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return none
      */
-    public function fromArray($options)
+    public function fromArray(array $options)
     {
         if (isset($options['PendingFilesCount'])) {
             Validate::isInteger(

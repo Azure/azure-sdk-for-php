@@ -51,7 +51,7 @@ use WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer;
 class Protocol1RuntimeCurrentStateClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeCurrentStateClient::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeCurrentStateClient::__construct
      */
     public function testConstruct()
     {
@@ -70,8 +70,8 @@ class Protocol1RuntimeCurrentStateClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeCurrentStateClient::setEndpoint
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeCurrentStateClient::setCurrentState
+     * @covers \WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeCurrentStateClient::setEndpoint
+     * @covers \WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeCurrentStateClient::setCurrentState
      */
     public function testSetCurrentState()
     {

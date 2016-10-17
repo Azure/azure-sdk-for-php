@@ -154,8 +154,6 @@ class RoleInstance
      * Sets the role name.
      * 
      * @param string $roleName The role name.
-     * 
-     * @return none
      */
     public function setRoleName($roleName)
     {
@@ -178,8 +176,6 @@ class RoleInstance
      * Sets the instance name.
      * 
      * @param string $instanceName The instance name.
-     * 
-     * @return none
      */
     public function setInstanceName($instanceName)
     {
@@ -202,8 +198,6 @@ class RoleInstance
      * Sets the instance status.
      * 
      * @param string $instanceStatus The instance status.
-     * 
-     * @return none
      */
     public function setInstanceStatus($instanceStatus)
     {
@@ -228,8 +222,6 @@ class RoleInstance
      * Sets the instance upgrade domain.
      * 
      * @param int $instanceUpgradeDomain The instance upgrade domain.
-     * 
-     * @return none
      */
     public function setInstanceUpgradeDomain($instanceUpgradeDomain)
     {
@@ -254,8 +246,6 @@ class RoleInstance
      * Sets the instance fault domain.
      * 
      * @param int $instanceFaultDomain The instance fault domain.
-     * 
-     * @return none
      */
     public function setInstanceFaultDomain($instanceFaultDomain)
     {
@@ -279,8 +269,6 @@ class RoleInstance
      * Sets the instance size.
      * 
      * @param string $instanceSize The instance size.
-     * 
-     * @return none
      */
     public function setInstanceSize($instanceSize)
     {
@@ -306,8 +294,6 @@ class RoleInstance
      * Sets the instance state details.
      * 
      * @param string $instanceStateDetails The instance state details.
-     * 
-     * @return none
      */
     public function setInstanceStateDetails($instanceStateDetails)
     {
@@ -335,8 +321,6 @@ class RoleInstance
      * Sets the instance error code.
      * 
      * @param string $instanceErrorCode The instance error code.
-     * 
-     * @return none
      */
     public function setInstanceErrorCode($instanceErrorCode)
     {

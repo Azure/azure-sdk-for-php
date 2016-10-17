@@ -43,7 +43,7 @@ use Tests\framework\TestResources;
 class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::__construct
+     * @covers \WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::__construct
      */
     public function test__construct()
     {

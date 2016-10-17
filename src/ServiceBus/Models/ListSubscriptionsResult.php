@@ -55,26 +55,17 @@ class ListSubscriptionsResult extends Feed
      * 
      * @param string $response The body of the response of the list 
      *                         subscriptions request. 
-     * 
-     * @return none
      */
     public function parseXml($response)
     {
         parent::parseXml($response);
         $listSubscriptionsResultXml = new \SimpleXMLElement($response);
-        $this->_subscriptionInfos = array();
+        $this->_subscriptionInfos = [];
         foreach ($listSubscriptionsResultXml->entry as $entry) {
             $subscriptionInfo = new SubscriptionInfo();
-            $subscriptionInfo->parseXml($entry->asXml());
+            $subscriptionInfo->parseXml($entry->asXML());
             $this->_subscriptionInfos[] = $subscriptionInfo;
         }
-    }
-
-    /**
-     * Creates a list subscriptions result with default parameters. 
-     */
-    public function __construct()
-    {
     }
 
     /**
@@ -92,10 +83,8 @@ class ListSubscriptionsResult extends Feed
      * 
      * @param array $subscriptionInfos The information of the
      *                                 subscription.
-     * 
-     * @return none
      */
-    public function setSubscriptionInfos($subscriptionInfos)
+    public function setSubscriptionInfos(array $subscriptionInfos)
     {
         $this->_subscriptionInfos = $subscriptionInfos;
     }

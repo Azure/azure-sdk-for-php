@@ -128,13 +128,15 @@ class AssetDeliveryPolicyConfigurationKey
     /**
      * Helper function to stringnify the AssetDeliveryPolicyConfigurationKey.
      *
-     * @param mixed $array
+     * @param array $array
+     *
+     * @return string
      */
-    public static function stringifyAssetDeliveryPolicyConfiguartionKey($array)
+    public static function stringifyAssetDeliveryPolicyConfiguartionKey(array $array)
     {
-        $jsonArray = array();
+        $jsonArray = [];
         foreach ($array as $key => $value) {
-            $jsonArray[] = array('Key' => $key, 'Value' => $value);
+            $jsonArray[] = ['Key' => $key, 'Value' => $value];
         }
 
         return json_encode($jsonArray);
@@ -143,11 +145,12 @@ class AssetDeliveryPolicyConfigurationKey
     /**
      * Helper function to pack the AssetDeliveryPolicyConfigurationKey.
      *
+     * @param string $json
      * @return array the unpacked array
      */
     public static function parseAssetDeliveryPolicyConfiguartionKey($json)
     {
-        $result = array();
+        $result = [];
         $array = json_decode($json, true);
         foreach ($array as $item) {
             $item = array_change_key_case($item, CASE_LOWER);
