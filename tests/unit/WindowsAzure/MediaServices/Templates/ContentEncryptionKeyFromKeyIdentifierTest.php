@@ -42,8 +42,8 @@ use WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier;
 class ContentEncryptionKeyFromKeyIdentifierTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier::__construct
-     * @covers WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier::getKeyIdentifier
+     * @covers \WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier::__construct
+     * @covers \WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier::getKeyIdentifier
      */
     public function testCreateWithKeyIdentifier()
     {
@@ -59,8 +59,8 @@ class ContentEncryptionKeyFromKeyIdentifierTest extends \PHPUnit_Framework_TestC
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier::getKeyIdentifier
-     * @covers WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier::setKeyIdentifier
+     * @covers \WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier::getKeyIdentifier
+     * @covers \WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier::setKeyIdentifier
      */
     public function testGetSetKeyIdentifier()
     {

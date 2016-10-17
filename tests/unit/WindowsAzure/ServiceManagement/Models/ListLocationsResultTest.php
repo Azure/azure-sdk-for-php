@@ -43,8 +43,8 @@ use WindowsAzure\ServiceManagement\Models\ListLocationsResult;
 class ListLocationsResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\ListLocationsResult::setLocations
-     * @covers WindowsAzure\ServiceManagement\Models\ListLocationsResult::getLocations
+     * @covers \WindowsAzure\ServiceManagement\Models\ListLocationsResult::setLocations
+     * @covers \WindowsAzure\ServiceManagement\Models\ListLocationsResult::getLocations
      */
     public function testSetLocations()
     {

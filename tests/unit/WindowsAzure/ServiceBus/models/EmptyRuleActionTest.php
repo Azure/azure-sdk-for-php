@@ -43,7 +43,7 @@ use WindowsAzure\ServiceBus\Models\EmptyRuleAction;
 class EmptyRuleActionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\EmptyRuleAction::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\EmptyRuleAction::__construct
      */
     public function testEmptyRuleActionConstructor()
     {

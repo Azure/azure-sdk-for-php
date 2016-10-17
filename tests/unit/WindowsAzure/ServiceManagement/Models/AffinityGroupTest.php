@@ -44,8 +44,8 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 class AffinityGroupTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::toArray
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::__construct
+     * @covers \WindowsAzure\ServiceManagement\Models\AffinityGroup::toArray
+     * @covers \WindowsAzure\ServiceManagement\Models\AffinityGroup::__construct
      */
     public function testSerialize()
     {

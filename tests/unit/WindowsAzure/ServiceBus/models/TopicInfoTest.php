@@ -45,7 +45,7 @@ use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 class TopicInfoTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::__construct
      */
     public function testTopicInfoConstructor()
     {
@@ -101,8 +101,8 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getMaxSizeInMegabytes
-     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setMaxSizeInMegabytes
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::getMaxSizeInMegabytes
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::setMaxSizeInMegabytes
      */
     public function testGetSetMaxSizeInMegabytes()
     {
@@ -122,8 +122,8 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getRequiresDuplicateDetection
-     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setRequiresDuplicateDetection
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::getRequiresDuplicateDetection
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::setRequiresDuplicateDetection
      */
     public function testGetSetRequiresDuplicateDetection()
     {
@@ -143,8 +143,8 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getDuplicateDetectionHistoryTimeWindow
-     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setDuplicateDetectionHistoryTimeWindow
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::getDuplicateDetectionHistoryTimeWindow
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::setDuplicateDetectionHistoryTimeWindow
      */
     public function testGetSetDuplicateDetectionHistoryTimeWindow()
     {
@@ -164,8 +164,8 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getEnableBatchedOperations
-     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setEnableBatchedOperations
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::getEnableBatchedOperations
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::setEnableBatchedOperations
      */
     public function testGetSetEnableBatchedOperations()
     {
@@ -185,8 +185,8 @@ class TopicInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::getSizeInBytes
-     * @covers WindowsAzure\ServiceBus\Models\TopicInfo::setSizeInBytes
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::getSizeInBytes
+     * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::setSizeInBytes
      */
     public function testGetSetSizeInBytes()
     {

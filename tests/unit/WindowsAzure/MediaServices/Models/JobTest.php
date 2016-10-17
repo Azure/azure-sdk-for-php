@@ -42,8 +42,8 @@ use WindowsAzure\MediaServices\Models\Job;
 class JobTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\Job::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\Job::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\Job::fromArray
      */
     public function testCreateFromOptions()
     {
@@ -83,8 +83,8 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getName
-     * @covers WindowsAzure\MediaServices\Models\Job::setName
+     * @covers \WindowsAzure\MediaServices\Models\Job::getName
+     * @covers \WindowsAzure\MediaServices\Models\Job::setName
      */
     public function testGetSetName()
     {
@@ -102,8 +102,8 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getPriority
-     * @covers WindowsAzure\MediaServices\Models\Job::setPriority
+     * @covers \WindowsAzure\MediaServices\Models\Job::getPriority
+     * @covers \WindowsAzure\MediaServices\Models\Job::setPriority
      */
     public function testGetSetPriority()
     {
@@ -121,8 +121,8 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getTemplateId
-     * @covers WindowsAzure\MediaServices\Models\Job::setTemplateId
+     * @covers \WindowsAzure\MediaServices\Models\Job::getTemplateId
+     * @covers \WindowsAzure\MediaServices\Models\Job::setTemplateId
      */
     public function testGetSetTemplateId()
     {
@@ -140,7 +140,7 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getId
+     * @covers \WindowsAzure\MediaServices\Models\Job::getId
      */
     public function testGetId()
     {
@@ -159,7 +159,7 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getCreated
+     * @covers \WindowsAzure\MediaServices\Models\Job::getCreated
      */
     public function testGetCreated()
     {
@@ -179,7 +179,7 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getLastModified
+     * @covers \WindowsAzure\MediaServices\Models\Job::getLastModified
      */
     public function testGetLastModified()
     {
@@ -199,7 +199,7 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getEndTime
+     * @covers \WindowsAzure\MediaServices\Models\Job::getEndTime
      */
     public function testGetEndTime()
     {
@@ -219,7 +219,7 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getStartTime
+     * @covers \WindowsAzure\MediaServices\Models\Job::getStartTime
      */
     public function testGetStartTime()
     {
@@ -239,7 +239,7 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getRunningDuration
+     * @covers \WindowsAzure\MediaServices\Models\Job::getRunningDuration
      */
     public function testGetRunningDuration()
     {
@@ -259,7 +259,7 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getState
+     * @covers \WindowsAzure\MediaServices\Models\Job::getState
      */
     public function testGetState()
     {

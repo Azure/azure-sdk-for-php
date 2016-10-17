@@ -43,7 +43,7 @@ use WindowsAzure\ServiceBus\Models\ListSubscriptionsResult;
 class ListSubscriptionsResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\ListSubscriptionsResult::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\ListSubscriptionsResult::__construct
      */
     public function testListSubscriptionsResultConstructor()
     {

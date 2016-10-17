@@ -44,7 +44,7 @@ use WindowsAzure\Common\Internal\Resources;
 class StorageServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\StorageService::__construct
+     * @covers \WindowsAzure\ServiceManagement\Models\StorageService::__construct
      */
     public function test__construct()
     {
@@ -67,8 +67,8 @@ class StorageServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\StorageService::setAffinityGroup
-     * @covers WindowsAzure\ServiceManagement\Models\StorageService::getAffinityGroup
+     * @covers \WindowsAzure\ServiceManagement\Models\StorageService::setAffinityGroup
+     * @covers \WindowsAzure\ServiceManagement\Models\StorageService::getAffinityGroup
      */
     public function testSetAffinityGroup()
     {
@@ -84,8 +84,8 @@ class StorageServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\StorageService::setBlobEndpointUri
-     * @covers WindowsAzure\ServiceManagement\Models\StorageService::getBlobEndpointUri
+     * @covers \WindowsAzure\ServiceManagement\Models\StorageService::setBlobEndpointUri
+     * @covers \WindowsAzure\ServiceManagement\Models\StorageService::getBlobEndpointUri
      */
     public function testSetBlobEndpointUri()
     {
@@ -101,8 +101,8 @@ class StorageServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\StorageService::setQueueEndpointUri
-     * @covers WindowsAzure\ServiceManagement\Models\StorageService::getQueueEndpointUri
+     * @covers \WindowsAzure\ServiceManagement\Models\StorageService::setQueueEndpointUri
+     * @covers \WindowsAzure\ServiceManagement\Models\StorageService::getQueueEndpointUri
      */
     public function testSetQueueEndpointUri()
     {
@@ -118,8 +118,8 @@ class StorageServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\StorageService::setTableEndpointUri
-     * @covers WindowsAzure\ServiceManagement\Models\StorageService::getTableEndpointUri
+     * @covers \WindowsAzure\ServiceManagement\Models\StorageService::setTableEndpointUri
+     * @covers \WindowsAzure\ServiceManagement\Models\StorageService::getTableEndpointUri
      */
     public function testSetTableEndpointUri()
     {
@@ -135,8 +135,8 @@ class StorageServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\StorageService::setStatus
-     * @covers WindowsAzure\ServiceManagement\Models\StorageService::getStatus
+     * @covers \WindowsAzure\ServiceManagement\Models\StorageService::setStatus
+     * @covers \WindowsAzure\ServiceManagement\Models\StorageService::getStatus
      */
     public function testSetStatus()
     {

@@ -42,8 +42,8 @@ use WindowsAzure\MediaServices\Models\TaskHistoricalEvent;
 class TaskHistoricalEventTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskHistoricalEvent::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\TaskHistoricalEvent::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\TaskHistoricalEvent::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\TaskHistoricalEvent::fromArray
      */
     public function testCreateFromOptions()
     {
@@ -66,8 +66,8 @@ class TaskHistoricalEventTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskHistoricalEvent::getTimeStamp
-     * @covers WindowsAzure\MediaServices\Models\TaskHistoricalEvent::__construct
+     * @covers \WindowsAzure\MediaServices\Models\TaskHistoricalEvent::getTimeStamp
+     * @covers \WindowsAzure\MediaServices\Models\TaskHistoricalEvent::__construct
      */
     public function testGetTimeStamp()
     {
@@ -87,7 +87,7 @@ class TaskHistoricalEventTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskHistoricalEvent::getMessage
+     * @covers \WindowsAzure\MediaServices\Models\TaskHistoricalEvent::getMessage
      */
     public function testGetMessage()
     {
@@ -106,7 +106,7 @@ class TaskHistoricalEventTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskHistoricalEvent::getCode
+     * @covers \WindowsAzure\MediaServices\Models\TaskHistoricalEvent::getCode
      */
     public function testGetCode()
     {

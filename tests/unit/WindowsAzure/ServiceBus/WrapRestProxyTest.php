@@ -63,8 +63,8 @@ class WrapRestProxyTest extends ServiceRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Internal\WrapRestProxy::__construct
-     * @covers WindowsAzure\ServiceBus\Internal\WrapRestProxy::wrapAccessToken
+     * @covers \WindowsAzure\ServiceBus\Internal\WrapRestProxy::__construct
+     * @covers \WindowsAzure\ServiceBus\Internal\WrapRestProxy::wrapAccessToken
      */
     public function testWrapAccessToken()
     {

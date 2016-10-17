@@ -43,8 +43,8 @@ use WindowsAzure\ServiceRuntime\Internal\RuntimeKernel;
 class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::__construct
-     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getKernel
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getKernel
      */
     public function testGetKernel()
     {
@@ -57,7 +57,7 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getCurrentStateSerializer
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getCurrentStateSerializer
      */
     public function testGetCurrentStateSerializer()
     {
@@ -71,7 +71,7 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getGoalStateDeserializer
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getGoalStateDeserializer
      */
     public function testGetGoalStateDeserializer()
     {
@@ -85,7 +85,7 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getInputChannel
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getInputChannel
      */
     public function testGetInputChannel()
     {
@@ -99,7 +99,7 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getOutputChannel
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getOutputChannel
      */
     public function testGetOutputChannel()
     {
@@ -113,7 +113,7 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getProtocol1RuntimeCurrentStateClient
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getProtocol1RuntimeCurrentStateClient
      */
     public function testGetProtocol1RuntimeCurrentStateClient()
     {
@@ -127,7 +127,7 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getRoleEnvironmentDataDeserializer
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getRoleEnvironmentDataDeserializer
      */
     public function testGetRoleEnvironmentDataDeserializer()
     {
@@ -141,7 +141,7 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getProtocol1RuntimeGoalStateClient
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getProtocol1RuntimeGoalStateClient
      */
     public function testGetProtocol1RuntimeGoalStateClient()
     {
@@ -155,7 +155,7 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getRuntimeVersionProtocolClient
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getRuntimeVersionProtocolClient
      */
     public function testGetRuntimeVersionProtocolClient()
     {
@@ -169,7 +169,7 @@ class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getRuntimeVersionManager
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::getRuntimeVersionManager
      */
     public function testGetRuntimeVersionManager()
     {

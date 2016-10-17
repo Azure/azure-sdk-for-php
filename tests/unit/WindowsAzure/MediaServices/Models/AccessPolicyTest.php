@@ -43,7 +43,7 @@ use WindowsAzure\MediaServices\Models\AccessPolicy;
 class AccessPolicyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::__construct
+     * @covers \WindowsAzure\MediaServices\Models\AccessPolicy::__construct
      */
     public function test__construct()
     {
@@ -59,8 +59,8 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::getPermissions
-     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::setPermissions
+     * @covers \WindowsAzure\MediaServices\Models\AccessPolicy::getPermissions
+     * @covers \WindowsAzure\MediaServices\Models\AccessPolicy::setPermissions
      */
     public function testGetPermissions()
     {
@@ -79,8 +79,8 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
        /**
-        * @covers WindowsAzure\MediaServices\Models\AccessPolicy::getDurationInMinutes
-        * @covers WindowsAzure\MediaServices\Models\AccessPolicy::setDurationInMinutes
+        * @covers \WindowsAzure\MediaServices\Models\AccessPolicy::getDurationInMinutes
+        * @covers \WindowsAzure\MediaServices\Models\AccessPolicy::setDurationInMinutes
         */
        public function testGetDurationInMinutes()
        {
@@ -99,8 +99,8 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
        }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::setName
-     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::getName
+     * @covers \WindowsAzure\MediaServices\Models\AccessPolicy::setName
+     * @covers \WindowsAzure\MediaServices\Models\AccessPolicy::getName
      */
     public function testGetName()
     {
@@ -118,7 +118,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::getLastModified
+     * @covers \WindowsAzure\MediaServices\Models\AccessPolicy::getLastModified
      */
     public function testGetLastModified()
     {
@@ -139,7 +139,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::getCreated
+     * @covers \WindowsAzure\MediaServices\Models\AccessPolicy::getCreated
      */
     public function testGetCreated()
     {
@@ -160,7 +160,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::getId
+     * @covers \WindowsAzure\MediaServices\Models\AccessPolicy::getId
      */
     public function testGetId()
     {
@@ -180,8 +180,8 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\AccessPolicy::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\AccessPolicy::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\AccessPolicy::fromArray
      */
     public function testAccessPolicyFromOptions()
     {

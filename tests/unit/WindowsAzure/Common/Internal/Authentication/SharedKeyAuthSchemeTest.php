@@ -66,7 +66,7 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::computeSignature
+     * @covers \WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::computeSignature
      */
     public function testComputeSignatureSimple()
     {
@@ -87,7 +87,7 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::getAuthorizationHeader
+     * @covers \WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::getAuthorizationHeader
      */
     public function testGetAuthorizationHeaderSimple()
     {

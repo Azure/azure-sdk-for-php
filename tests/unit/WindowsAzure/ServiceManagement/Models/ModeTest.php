@@ -43,7 +43,7 @@ use WindowsAzure\ServiceManagement\Models\Mode;
 class ModeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Mode::isValid
+     * @covers \WindowsAzure\ServiceManagement\Models\Mode::isValid
      */
     public function testIsValidWithValid()
     {
@@ -58,7 +58,7 @@ class ModeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Mode::isValid
+     * @covers \WindowsAzure\ServiceManagement\Models\Mode::isValid
      */
     public function testIsValidWithInvalid()
     {

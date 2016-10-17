@@ -42,7 +42,7 @@ use WindowsAzure\MediaServices\Templates\TokenClaim;
 class TokenClaimsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Templates\TokenClaim::__construct
+     * @covers \WindowsAzure\MediaServices\Templates\TokenClaim::__construct
      */
     public function testNullTypeShouldThrown()
     {
@@ -52,8 +52,8 @@ class TokenClaimsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\TokenClaim::getClaimType
-     * @covers WindowsAzure\MediaServices\Templates\TokenClaim::setClaimType
+     * @covers \WindowsAzure\MediaServices\Templates\TokenClaim::getClaimType
+     * @covers \WindowsAzure\MediaServices\Templates\TokenClaim::setClaimType
      */
     public function testGetSetClaimType()
     {
@@ -70,8 +70,8 @@ class TokenClaimsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\TokenClaim::getClaimValue
-     * @covers WindowsAzure\MediaServices\Templates\TokenClaim::setClaimValue
+     * @covers \WindowsAzure\MediaServices\Templates\TokenClaim::getClaimValue
+     * @covers \WindowsAzure\MediaServices\Templates\TokenClaim::setClaimValue
      */
     public function testGetSetClaimValue()
     {

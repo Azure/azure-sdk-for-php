@@ -46,9 +46,9 @@ use WindowsAzure\Common\Internal\Resources;
 class ServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::setName
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::getName
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::__construct
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::setName
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::getName
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::__construct
      */
     public function testSetName()
     {
@@ -64,9 +64,9 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::setLabel
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::getLabel
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::__construct
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::setLabel
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::getLabel
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::__construct
      */
     public function testSetLabel()
     {
@@ -82,9 +82,9 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::setDescription
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::getDescription
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::__construct
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::setDescription
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::getDescription
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::__construct
      */
     public function testSetDescription()
     {
@@ -100,9 +100,9 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::setLocation
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::getLocation
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::__construct
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::setLocation
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::getLocation
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::__construct
      */
     public function testSetLocation()
     {
@@ -118,9 +118,9 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::addSerializationProperty
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::getSerializationPropertyValue
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::__construct
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::addSerializationProperty
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::getSerializationPropertyValue
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::__construct
      */
     public function testAddSerializationProperty()
     {
@@ -137,9 +137,9 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::serialize
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::__construct
-     * @covers WindowsAzure\ServiceManagement\Internal\Service::toArray
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::serialize
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::__construct
+     * @covers \WindowsAzure\ServiceManagement\Internal\Service::toArray
      */
     public function testSerialize()
     {

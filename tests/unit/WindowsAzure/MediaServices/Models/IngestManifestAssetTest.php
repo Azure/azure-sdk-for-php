@@ -42,8 +42,8 @@ use WindowsAzure\MediaServices\Models\IngestManifestAsset;
 class IngestManifestAssetTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestAsset::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestAsset::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestAsset::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestAsset::fromArray
      */
     public function testCreatefromOptions()
     {
@@ -69,8 +69,8 @@ class IngestManifestAssetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestAsset::__construct
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestAsset::getParentIngestManifestId
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestAsset::__construct
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestAsset::getParentIngestManifestId
      */
     public function test__construct()
     {
@@ -86,7 +86,7 @@ class IngestManifestAssetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestAsset::getLastModified
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestAsset::getLastModified
      */
     public function testGetLastModified()
     {
@@ -107,7 +107,7 @@ class IngestManifestAssetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestAsset::getCreated
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestAsset::getCreated
      */
     public function testGetCreated()
     {
@@ -128,7 +128,7 @@ class IngestManifestAssetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestAsset::getId
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestAsset::getId
      */
     public function testGetId()
     {

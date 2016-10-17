@@ -44,8 +44,8 @@ use WindowsAzure\ServiceManagement\Models\Deployment;
 class GetDeploymentResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentResult::setDeployment
-     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentResult::getDeployment
+     * @covers \WindowsAzure\ServiceManagement\Models\GetDeploymentResult::setDeployment
+     * @covers \WindowsAzure\ServiceManagement\Models\GetDeploymentResult::getDeployment
      */
     public function testSetDeployment()
     {

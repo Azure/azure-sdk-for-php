@@ -45,8 +45,8 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 class XmlSerializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::unserialize
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::_sxml2arr
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::unserialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::_sxml2arr
      */
     public function testUnserialize()
     {
@@ -64,8 +64,8 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::serialize
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::_arr2xml
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::serialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::_arr2xml
      */
     public function testSerialize()
     {
@@ -109,7 +109,7 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
      */
     public function testObjectSerializeSucceess()
     {
@@ -128,7 +128,7 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
      */
     public function testObjectSerializeSucceessWithAttributes()
     {
@@ -148,7 +148,7 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
      */
     public function testObjectSerializeInvalidObject()
     {

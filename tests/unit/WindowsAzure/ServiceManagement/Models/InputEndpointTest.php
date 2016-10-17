@@ -43,8 +43,8 @@ use WindowsAzure\ServiceManagement\Models\InputEndpoint;
 class InputEndpointTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\InputEndpoint::setRoleName
-     * @covers WindowsAzure\ServiceManagement\Models\InputEndpoint::getRoleName
+     * @covers \WindowsAzure\ServiceManagement\Models\InputEndpoint::setRoleName
+     * @covers \WindowsAzure\ServiceManagement\Models\InputEndpoint::getRoleName
      */
     public function testSetRoleName()
     {
@@ -60,8 +60,8 @@ class InputEndpointTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\InputEndpoint::setVip
-     * @covers WindowsAzure\ServiceManagement\Models\InputEndpoint::getVip
+     * @covers \WindowsAzure\ServiceManagement\Models\InputEndpoint::setVip
+     * @covers \WindowsAzure\ServiceManagement\Models\InputEndpoint::getVip
      */
     public function testSetVip()
     {
@@ -77,8 +77,8 @@ class InputEndpointTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\InputEndpoint::setPort
-     * @covers WindowsAzure\ServiceManagement\Models\InputEndpoint::getPort
+     * @covers \WindowsAzure\ServiceManagement\Models\InputEndpoint::setPort
+     * @covers \WindowsAzure\ServiceManagement\Models\InputEndpoint::getPort
      */
     public function testSetPort()
     {

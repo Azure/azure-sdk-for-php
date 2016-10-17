@@ -46,7 +46,7 @@ use WindowsAzure\ServiceBus\Models\RuleInfo;
 class RuleInfoTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\RuleInfo::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\RuleInfo::__construct
      */
     public function testRuleInfoConstructor()
     {

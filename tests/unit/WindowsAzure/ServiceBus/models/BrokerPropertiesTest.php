@@ -44,7 +44,7 @@ use WindowsAzure\Common\Internal\Resources;
 class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::__construct
      */
     public function testBrokerPropertiesConstructor()
     {
@@ -56,7 +56,7 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::create
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::create
      */
     public function testCreateBrokerPropertiesSuccess()
     {
@@ -84,7 +84,7 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::create
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::create
      */
     public function testCreateBrokerPropertiesAllPropertiesSuccess()
     {
@@ -189,7 +189,7 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::toString
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::toString
      */
     public function testSerializeBrokerPropertiesSuccess()
     {
@@ -210,7 +210,7 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::toString
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::toString
      */
     public function testSerializeBrokerPropertiesAllPropertiesSuccess()
     {
@@ -247,8 +247,8 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getCorrelationId
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setCorrelationId
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getCorrelationId
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setCorrelationId
      */
     public function testGetSetCorrelationId()
     {
@@ -268,8 +268,8 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getSessionId
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setSessionId
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getSessionId
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setSessionId
      */
     public function testGetSetSessionId()
     {
@@ -289,8 +289,8 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getDeliveryCount
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setDeliveryCount
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getDeliveryCount
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setDeliveryCount
      */
     public function testGetSetDeliveryCount()
     {
@@ -310,8 +310,8 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getLockedUntilUtc
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setLockedUntilUtc
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getLockedUntilUtc
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setLockedUntilUtc
      */
     public function testGetSetLockedUntilUtc()
     {
@@ -331,8 +331,8 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getLockToken
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setLockToken
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getLockToken
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setLockToken
      */
     public function testGetSetLockToken()
     {
@@ -352,8 +352,8 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getMessageId
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setMessageId
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getMessageId
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setMessageId
      */
     public function testGetSetMessageId()
     {
@@ -373,8 +373,8 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getLabel
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setLabel
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getLabel
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setLabel
      */
     public function testGetSetLabel()
     {
@@ -394,8 +394,8 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getReplyTo
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setReplyTo
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getReplyTo
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setReplyTo
      */
     public function testGetSetReplyTo()
     {
@@ -415,8 +415,8 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getSequenceNumber
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setSequenceNumber
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getSequenceNumber
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setSequenceNumber
      */
     public function testGetSetSequenceNumber()
     {
@@ -436,8 +436,8 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getTimeToLive
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setTimeToLive
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getTimeToLive
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setTimeToLive
      */
     public function testGetSetTimeToLive()
     {
@@ -457,8 +457,8 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getTo
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setTo
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getTo
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setTo
      */
     public function testGetSetTo()
     {
@@ -478,8 +478,8 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getScheduledEnqueueTimeUtc
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setScheduledEnqueueTimeUtc
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getScheduledEnqueueTimeUtc
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setScheduledEnqueueTimeUtc
      */
     public function testGetSetScheduledEnqueueTimeUtc()
     {
@@ -499,8 +499,8 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getReplyToSessionId
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setReplyToSessionId
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getReplyToSessionId
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setReplyToSessionId
      */
     public function testGetSetReplyToSessionId()
     {
@@ -520,8 +520,8 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getMessageLocation
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setMessageLocation
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getMessageLocation
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setMessageLocation
      */
     public function testGetSetMessageLocation()
     {
@@ -541,8 +541,8 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::getLockLocation
-     * @covers WindowsAzure\ServiceBus\Models\BrokerProperties::setLockLocation
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getLockLocation
+     * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setLockLocation
      */
     public function testGetSetLockLocation()
     {

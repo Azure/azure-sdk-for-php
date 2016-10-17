@@ -43,7 +43,7 @@ use WindowsAzure\ServiceManagement\Models\DeploymentStatus;
 class DeploymentStatusTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\DeploymentStatus::isValid
+     * @covers \WindowsAzure\ServiceManagement\Models\DeploymentStatus::isValid
      */
     public function testIsValidWithValid()
     {
@@ -58,7 +58,7 @@ class DeploymentStatusTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\DeploymentStatus::isValid
+     * @covers \WindowsAzure\ServiceManagement\Models\DeploymentStatus::isValid
      */
     public function testIsValidWithInvalid()
     {

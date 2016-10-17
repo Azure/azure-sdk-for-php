@@ -47,8 +47,8 @@ use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
 class FileInputChannelTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\FileInputChannel::getInputStream
-     * @covers WindowsAzure\ServiceRuntime\Internal\FileInputChannel::closeInputStream
+     * @covers \WindowsAzure\ServiceRuntime\Internal\FileInputChannel::getInputStream
+     * @covers \WindowsAzure\ServiceRuntime\Internal\FileInputChannel::closeInputStream
      */
     public function testGetInputStream()
     {

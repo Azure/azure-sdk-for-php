@@ -44,8 +44,8 @@ use WindowsAzure\ServiceRuntime\Internal\RoleInstance;
 class RoleInstanceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleInstance::__construct
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleInstance::getId
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleInstance::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleInstance::getId
      */
     public function testGetId()
     {
@@ -59,7 +59,7 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleInstance::getFaultDomain
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleInstance::getFaultDomain
      */
     public function testGetFaultDomain()
     {
@@ -73,7 +73,7 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleInstance::getUpdateDomain
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleInstance::getUpdateDomain
      */
     public function testGetUpdateDomain()
     {
@@ -87,7 +87,7 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleInstance::getInstanceEndpoints
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleInstance::getInstanceEndpoints
      */
     public function testGetInstanceEndpoints()
     {
@@ -102,8 +102,8 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleInstance::getRole
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleInstance::setRole
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleInstance::getRole
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleInstance::setRole
      */
     public function testGetSetRole()
     {

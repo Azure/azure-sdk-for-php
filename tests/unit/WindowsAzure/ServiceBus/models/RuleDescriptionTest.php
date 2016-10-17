@@ -46,7 +46,7 @@ use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 class RuleDescriptionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\RuleDescription::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\RuleDescription::__construct
      */
     public function testRuleDescriptionConstructor()
     {

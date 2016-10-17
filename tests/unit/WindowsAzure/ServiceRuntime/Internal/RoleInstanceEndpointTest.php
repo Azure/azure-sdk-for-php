@@ -44,9 +44,9 @@ use WindowsAzure\ServiceRuntime\Internal\RoleInstanceEndpoint;
 class RoleInstanceEndpointTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleInstanceEndpoint::__construct
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleInstanceEndpoint::setRoleInstance
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleInstanceEndpoint::getRoleInstance
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleInstanceEndpoint::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleInstanceEndpoint::setRoleInstance
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleInstanceEndpoint::getRoleInstance
      */
     public function testRoleInstance()
     {
@@ -63,7 +63,7 @@ class RoleInstanceEndpointTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleInstanceEndpoint::getProtocol
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleInstanceEndpoint::getProtocol
      */
     public function testGetProtocol()
     {
@@ -78,7 +78,7 @@ class RoleInstanceEndpointTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleInstanceEndpoint::getAddress
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleInstanceEndpoint::getAddress
      */
     public function testGetAddress()
     {
@@ -93,7 +93,7 @@ class RoleInstanceEndpointTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleInstanceEndpoint::getPort
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleInstanceEndpoint::getPort
      */
     public function testGetPort()
     {

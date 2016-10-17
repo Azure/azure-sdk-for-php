@@ -43,8 +43,8 @@ use WindowsAzure\ServiceManagement\Models\HostedService;
 class HostedServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\HostedService::setDeployments
-     * @covers WindowsAzure\ServiceManagement\Models\HostedService::getDeployments
+     * @covers \WindowsAzure\ServiceManagement\Models\HostedService::setDeployments
+     * @covers \WindowsAzure\ServiceManagement\Models\HostedService::getDeployments
      */
     public function testSetDeployments()
     {

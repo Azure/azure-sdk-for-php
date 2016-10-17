@@ -42,8 +42,8 @@ use WindowsAzure\MediaServices\Models\MediaProcessor;
 class MediaProcessorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\MediaProcessor::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\MediaProcessor::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\MediaProcessor::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\MediaProcessor::fromArray
      */
     public function testCreateFromOptions()
     {
@@ -71,8 +71,8 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\MediaProcessor::getId
-     * @covers WindowsAzure\MediaServices\Models\MediaProcessor::__construct
+     * @covers \WindowsAzure\MediaServices\Models\MediaProcessor::getId
+     * @covers \WindowsAzure\MediaServices\Models\MediaProcessor::__construct
      */
     public function testGetId()
     {
@@ -91,7 +91,7 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\MediaProcessor::getName
+     * @covers \WindowsAzure\MediaServices\Models\MediaProcessor::getName
      */
     public function testGetName()
     {
@@ -110,7 +110,7 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\MediaProcessor::getDescription
+     * @covers \WindowsAzure\MediaServices\Models\MediaProcessor::getDescription
      */
     public function testGetDescription()
     {
@@ -129,7 +129,7 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\MediaProcessor::getSku
+     * @covers \WindowsAzure\MediaServices\Models\MediaProcessor::getSku
      */
     public function testGetSku()
     {
@@ -148,7 +148,7 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\MediaProcessor::getVendor
+     * @covers \WindowsAzure\MediaServices\Models\MediaProcessor::getVendor
      */
     public function testGetVendor()
     {
@@ -167,7 +167,7 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\MediaProcessor::getVersion
+     * @covers \WindowsAzure\MediaServices\Models\MediaProcessor::getVersion
      */
     public function testGetVersion()
     {
