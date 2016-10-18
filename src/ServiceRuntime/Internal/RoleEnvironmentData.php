@@ -61,7 +61,7 @@ class RoleEnvironmentData
     private $_currentInstance;
 
     /**
-     * @var array
+     * @var Role[]
      */
     private $_roles;
 
@@ -77,12 +77,17 @@ class RoleEnvironmentData
      * @param array        $configurationSettings The configuration settings.
      * @param array        $localResources        The local resources.
      * @param RoleInstance $currentInstance       The current instance information.
-     * @param array        $roles                 The instance roles.
+     * @param Role[]       $roles                 The instance roles.
      * @param bool         $isEmulated            Boolean value indicating if
      *                                            the instance is running in the emulator.
      */
-    public function __construct($deploymentId, $configurationSettings,
-        $localResources, $currentInstance, $roles, $isEmulated
+    public function __construct(
+        $deploymentId,
+        $configurationSettings,
+        $localResources,
+        $currentInstance,
+        array $roles,
+        $isEmulated
     ) {
         $this->_deploymentId = $deploymentId;
         $this->_configurationSettings = $configurationSettings;
@@ -125,7 +130,7 @@ class RoleEnvironmentData
     /**
      * Gets the roles.
      * 
-     * @return array
+     * @return Role[]
      */
     public function getRoles()
     {

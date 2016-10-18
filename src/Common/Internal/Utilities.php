@@ -44,15 +44,15 @@ class Utilities
      * Returns the specified value of the $key passed from $array and in case that
      * this $key doesn't exist, the default value is returned.
      *
-     * @param array $array   The array to be used.
-     * @param mix   $key     The array key.
-     * @param mix   $default The value to return if $key is not found in $array.
+     * @param array|null $array   The array to be used.
+     * @param mixed      $key     The array key.
+     * @param mixed      $default The value to return if $key is not found in $array.
      *
      * @static
      *
-     * @return mix
+     * @return mixed
      */
-    public static function tryGetValue($array, $key, $default = null)
+    public static function tryGetValue(array $array = null, $key, $default = null)
     {
         return is_array($array) && array_key_exists($key, $array)
             ? $array[$key]
@@ -103,13 +103,11 @@ class Utilities
      * This function just validates that the given $array is actually array. If it's
      * NULL the function treats it as array.
      *
-     * @param string $key    The key.
-     * @param string $value  The value.
-     * @param array  &$array The array. If NULL will be used as array.
+     * @param string      $key    The key.
+     * @param string      $value  The value.
+     * @param array|null &$array The array. If NULL will be used as array.
      *
      * @static
-     *
-     * @return none
      */
     public static function addIfNotEmpty($key, $value, &$array)
     {
@@ -130,7 +128,7 @@ class Utilities
      *
      * @static
      *
-     * @return mix
+     * @return mixed
      */
     public static function tryGetKeysChainValue($array)
     {
@@ -143,10 +141,10 @@ class Utilities
                 if (array_key_exists($arguments[$i], $currentArray)) {
                     $currentArray = $currentArray[$arguments[$i]];
                 } else {
-                    return;
+                    return null;
                 }
             } else {
-                return;
+                return null;
             }
         }
 
@@ -187,7 +185,7 @@ class Utilities
     public static function getArray($var)
     {
         if (is_null($var) || empty($var)) {
-            return array();
+            return [];
         }
 
         foreach ($var as $value) {
@@ -196,7 +194,7 @@ class Utilities
             ) {
                 return (array) $var;
             } elseif (!is_array($value)) {
-                return array($var);
+                return [$var];
             }
         }
 
@@ -266,7 +264,7 @@ class Utilities
             return false;
         }
 
-        $xmlw = new \XmlWriter();
+        $xmlw = new \XMLWriter();
         $xmlw->openMemory();
         $xmlw->startDocument($xmlVersion, $xmlEncoding, $standalone);
 
@@ -282,14 +280,14 @@ class Utilities
     /**
      * Takes an array and produces XML based on it.
      *
-     * @param XMLWriter $xmlw       XMLWriter object that was previously instanted
-     *                              and is used for creating the XML.
-     * @param array     $data       Array to be converted to XML
-     * @param string    $defaultTag Default XML tag to be used if none specified.
+     * @param \XMLWriter $xmlw       XMLWriter object that was previously instanted
+     *                               and is used for creating the XML.
+     * @param array      $data       Array to be converted to XML
+     * @param string     $defaultTag Default XML tag to be used if none specified.
      *
      * @static
      */
-    private static function _arr2xml(\XMLWriter $xmlw, $data, $defaultTag = null)
+    private static function _arr2xml(\XMLWriter $xmlw, array $data, $defaultTag = null)
     {
         foreach ($data as $key => $value) {
             if (strcmp($key, '@attributes') == 0) {
@@ -409,7 +407,7 @@ class Utilities
             $value = self::convertToDateTime($value);
         }
 
-        Validate::isDate($value);
+        Validate::isDate($value, 'value');
 
         $cloned = clone $value;
         $cloned->setTimezone(new \DateTimeZone('UTC'));
@@ -442,7 +440,7 @@ class Utilities
     /**
      * Converts string to stream handle.
      *
-     * @param type $string The string contents.
+     * @param string $string The string contents.
      *
      * @static
      *
@@ -463,7 +461,7 @@ class Utilities
      */
     public static function orderArray($array, $order)
     {
-        $ordered = array();
+        $ordered = [];
 
         foreach ($order as $key) {
             if (array_key_exists($key, $array)) {
@@ -513,13 +511,13 @@ class Utilities
      *
      * @param string $key      The array key.
      * @param array  $haystack The array to be used.
-     * @param mix    $default  The value to return if $key is not found in $array.
+     * @param mixed  $default  The value to return if $key is not found in $array.
      *
      * @static
      *
-     * @return mix
+     * @return mixed
      */
-    public static function tryGetValueInsensitive($key, $haystack, $default = null)
+    public static function tryGetValueInsensitive($key, array $haystack, $default = null)
     {
         $array = array_change_key_case($haystack);
 
@@ -578,7 +576,7 @@ class Utilities
      */
     public static function createInstanceList($parsed, $class)
     {
-        $list = array();
+        $list = [];
 
         foreach ($parsed as $value) {
             $list[] = $class::create($value);

@@ -111,7 +111,7 @@ class ConnectionStringParser
     {
         $key = null;
         $value = null;
-        $connectionStringValues = array();
+        $connectionStringValues = [];
 
         while (true) {
             $this->_skipWhiteSpaces();
@@ -200,8 +200,6 @@ class ConnectionStringParser
 
     /**
      * Skips whitespaces at the current position.
-     * 
-     * @return none
      */
     private function _skipWhiteSpaces()
     {
@@ -329,9 +327,7 @@ class ConnectionStringParser
      * Skips specified operator.
      * 
      * @param string $operatorChar The operator character.
-     * 
-     * @return none
-     * 
+     *
      * @throws \RuntimeException
      */
     private function _skipOperator($operatorChar)
@@ -347,25 +343,4 @@ class ConnectionStringParser
 
         ++$this->_pos;
     }
-}
-
-/**
- * State of the connection string parser.
- *
- * @category  Microsoft
- *
- * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
- * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- *
- * @version   Release: 0.4.5_2016-09
- *
- * @link      https://github.com/windowsazure/azure-sdk-for-php
- */
-class ParserState
-{
-    const EXPECT_KEY = 'ExpectKey';
-    const EXPECT_ASSIGNMENT = 'ExpectAssignment';
-    const EXPECT_VALUE = 'ExpectValue';
-    const EXPECT_SEPARATOR = 'ExpectSeparator';
 }

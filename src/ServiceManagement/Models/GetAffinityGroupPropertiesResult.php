@@ -106,8 +106,6 @@ class GetAffinityGroupPropertiesResult
      * Sets the affinityGroup.
      * 
      * @param AffinityGroup $affinityGroup The affinityGroup.
-     * 
-     * @return none
      */
     public function setAffinityGroup($affinityGroup)
     {
@@ -128,8 +126,6 @@ class GetAffinityGroupPropertiesResult
      * Sets the hostedServices.
      * 
      * @param array $hostedServices The hostedServices.
-     * 
-     * @return none
      */
     public function setHostedServices($hostedServices)
     {
@@ -150,8 +146,6 @@ class GetAffinityGroupPropertiesResult
      * Sets the storageServices.
      * 
      * @param array $storageServices The storageServices.
-     * 
-     * @return none
      */
     public function setStorageServices($storageServices)
     {

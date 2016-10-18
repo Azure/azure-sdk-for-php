@@ -166,9 +166,9 @@ class Job
      *
      * @param array $options Array containing values for object properties
      *
-     * @return WindowsAzure\MediaServices\Models\Job
+     * @return Job
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         $job = new self();
         $job->fromArray($options);
@@ -180,10 +180,8 @@ class Job
      * Fill asset from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return none
      */
-    public function fromArray($options)
+    public function fromArray(array $options)
     {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
@@ -256,8 +254,6 @@ class Job
      * Set "Name".
      *
      * @param string $value Name
-     *
-     * @return none
      */
     public function setName($value)
     {
@@ -318,8 +314,6 @@ class Job
      * Set "Template id".
      *
      * @param string $value Template id
-     *
-     * @return none
      */
     public function setTemplateId($value)
     {
@@ -360,8 +354,6 @@ class Job
      * Set "Priority".
      *
      * @param int $value Priority
-     *
-     * @return none
      */
     public function setPriority($value)
     {

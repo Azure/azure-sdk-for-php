@@ -80,8 +80,6 @@ class AsynchronousOperationResult
      * Sets the requestId.
      * 
      * @param string $requestId The request Id of the asynchronous operation.
-     * 
-     * @return none
      */
     public function setrequestId($requestId)
     {

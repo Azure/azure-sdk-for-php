@@ -87,37 +87,30 @@ class Channel
     /**
      * Channel Input.
      *
-     * @var mixing
+     * @var ChannelInput
      */
     private $_input;
 
     /**
      * Channel Output.
      *
-     * @var mixing
+     * @var ChannelOutput
      */
     private $_output;
 
     /**
      * Channel Preview.
      *
-     * @var mixing
+     * @var ChannelPreview
      */
     private $_preview;
 
     /**
      * Channel CrossSiteAccessPolicies.
      *
-     * @var mixing
+     * @var CrossSiteAccessPolicies
      */
     private $_crossSiteAccessPolicies;
-
-    /**
-     * Channel Programs.
-     *
-     * @var mixing
-     */
-    private $_programs;
 
 	/**
      * Channel EncodingType.
@@ -129,14 +122,14 @@ class Channel
     /**
      * Channel Encoding.
      *
-     * @var mixing
+     * @var ChannelEncoding
      */
     private $_encoding;
 
     /**
      * Channel Slate.
      *
-     * @var mixing
+     * @var ChannelSlate
      */
     private $_slate;
 
@@ -249,8 +242,6 @@ class Channel
      * Set channel identifier
      *
      * @param string $value Operation id
-     *
-     * @return none
      */
     public function setId($value)
     {
@@ -271,8 +262,6 @@ class Channel
      * Set channel Name.
      *
      * @param string $value Description
-     *
-     * @return none
      */
     public function setName($value)
     {
@@ -303,8 +292,6 @@ class Channel
      * Set channel Description.
      *
      * @param string $value Description
-     *
-     * @return none
      */
     public function setDescription($value)
     {
@@ -324,9 +311,7 @@ class Channel
     /**
      * Set channel EncodingType.
      *
-     * @param string $value CrossSiteAccessPolicies
-     *
-     * @return none
+     * @param string $value Encoding type
      */
     public function setEncodingType($value)
     {
@@ -356,7 +341,7 @@ class Channel
     /**
      * Get channel Input.
      *
-     * @return mixing
+     * @return ChannelInput
      */
     public function getInput()
     {
@@ -366,9 +351,7 @@ class Channel
     /**
      * Set channel Input.
      *
-     * @param mixing $value Input
-     *
-     * @return none
+     * @param ChannelInput $value Input
      */
     public function setInput($value)
     {
@@ -378,7 +361,7 @@ class Channel
     /**
      * Get channel Output.
      *
-     * @return mixing
+     * @return ChannelOutput
      */
     public function getOutput()
     {
@@ -388,11 +371,9 @@ class Channel
     /**
      * Set channel Output.
      *
-     * @param mixing $value Output
-     *
-     * @return none
+     * @param ChannelOutput $value Output
      */
-    public function setOutput($value)
+    public function setOutput(ChannelOutput $value)
     {
         $this->_output = $value;
     }
@@ -400,7 +381,7 @@ class Channel
     /**
      * Get channel Preview.
      *
-     * @return mixing
+     * @return ChannelPreview
      */
     public function getPreview()
     {
@@ -410,11 +391,9 @@ class Channel
     /**
      * Set channel Preview.
      *
-     * @param mixing $value Preview
-     *
-     * @return none
+     * @param ChannelPreview $value Preview
      */
-    public function setPreview($value)
+    public function setPreview(ChannelPreview $value)
     {
         $this->_preview = $value;
     }
@@ -422,7 +401,7 @@ class Channel
     /**
      * Get channel CrossSiteAccessPolicies.
      *
-     * @return mixing
+     * @return CrossSiteAccessPolicies
      */
     public function getCrossSiteAccessPolicies()
     {
@@ -432,11 +411,9 @@ class Channel
     /**
      * Set channel CrossSiteAccessPolicies.
      *
-     * @param mixing $value CrossSiteAccessPolicies
-     *
-     * @return none
+     * @param CrossSiteAccessPolicies $value CrossSiteAccessPolicies
      */
-    public function setCrossSiteAccessPolicies($value)
+    public function setCrossSiteAccessPolicies(CrossSiteAccessPolicies $value)
     {
         $this->_crossSiteAccessPolicies = $value;
     }
@@ -444,7 +421,7 @@ class Channel
     /**
      * Get channel Encoding.
      *
-     * @return mixing
+     * @return ChannelEncoding
      */
     public function getEncoding()
     {
@@ -454,11 +431,9 @@ class Channel
     /**
      * Set channel Encoding.
      *
-     * @param mixing $value Encoding
-     *
-     * @return none
+     * @param ChannelEncoding $value Encoding
      */
-    public function setEncoding($value)
+    public function setEncoding(ChannelEncoding $value)
     {
         $this->_encoding = $value;
     }
@@ -466,7 +441,7 @@ class Channel
     /**
      * Get channel Slate.
      *
-     * @return mixing
+     * @return ChannelSlate
      */
     public function getSlate()
     {
@@ -476,11 +451,9 @@ class Channel
     /**
      * Set channel Slate.
      *
-     * @param mixing $value Slate
-     *
-     * @return none
+     * @param ChannelSlate $value Slate
      */
-    public function setSlate($value)
+    public function setSlate(ChannelSlate $value)
     {
         $this->_slate = $value;
     }

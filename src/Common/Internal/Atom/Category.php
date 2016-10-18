@@ -75,8 +75,6 @@ class Category extends AtomBase
      * Creates a Category instance with specified text.
      *
      * @param string $undefinedContent The undefined content of the category.
-     *
-     * @return none
      */
     public function __construct($undefinedContent = Resources::EMPTY_STRING)
     {
@@ -87,8 +85,6 @@ class Category extends AtomBase
      * Creates an ATOM Category instance with specified xml string. 
      * 
      * @param string $xmlString an XML based string of ATOM CONTENT.
-     * 
-     * @return none
      */
     public function parseXml($xmlString)
     {
@@ -125,8 +121,6 @@ class Category extends AtomBase
      * Sets the term of the category.
      * 
      * @param string $term The term of the category.
-     * 
-     * @return none
      */
     public function setTerm($term)
     {
@@ -147,8 +141,6 @@ class Category extends AtomBase
      * Sets the scheme of the category. 
      * 
      * @param string $scheme The scheme of the category.
-     * 
-     * @return none
      */
     public function setScheme($scheme)
     {
@@ -169,8 +161,6 @@ class Category extends AtomBase
      * Sets the label of the category. 
      * 
      * @param string $label The label of the category. 
-     * 
-     * @return none
      */
     public function setLabel($label)
     {
@@ -191,8 +181,6 @@ class Category extends AtomBase
      * Sets the undefined content of the category. 
      * 
      * @param string $undefinedContent The undefined content of the category. 
-     *
-     * @return none
      */
     public function setUndefinedContent($undefinedContent)
     {
@@ -203,10 +191,8 @@ class Category extends AtomBase
      * Writes an XML representing the category. 
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
-     * @return none
      */
-    public function writeXml($xmlWriter)
+    public function writeXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
         $xmlWriter->startElementNS(
@@ -222,10 +208,8 @@ class Category extends AtomBase
      * Writes an XML representing the category. 
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
-     * @return none
      */
-    public function writeInnerXml($xmlWriter)
+    public function writeInnerXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
         $this->writeOptionalAttribute(
@@ -247,7 +231,7 @@ class Category extends AtomBase
         );
 
         if (!empty($this->undefinedContent)) {
-            $xmlWriter->WriteRaw($this->undefinedContent);
+            $xmlWriter->writeRaw($this->undefinedContent);
         }
     }
 }

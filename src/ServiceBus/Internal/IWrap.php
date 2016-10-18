@@ -51,7 +51,7 @@ interface IWrap extends FilterableService
      * @param string $password The password of the WRAP service. 
      * @param string $scope    The scope of the WRAP service. 
      *
-     * @return WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult
+     * @return WrapAccessTokenResult
      */
     public function wrapAccessToken($uri, $name, $password, $scope);
 }

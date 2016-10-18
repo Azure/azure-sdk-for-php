@@ -40,6 +40,9 @@ namespace WindowsAzure\Common\Models;
  */
 class GetServicePropertiesResult
 {
+    /**
+     * @var ServiceProperties
+     */
     private $_serviceProperties;
 
     /**
@@ -47,9 +50,9 @@ class GetServicePropertiesResult
      * 
      * @param array $parsedResponse XML response parsed into array.
      * 
-     * @return WindowsAzure\Common\Models\GetServicePropertiesResult
+     * @return GetServicePropertiesResult
      */
-    public static function create($parsedResponse)
+    public static function create(array $parsedResponse)
     {
         $result = new self();
         $result->_serviceProperties = ServiceProperties::create($parsedResponse);
@@ -60,7 +63,7 @@ class GetServicePropertiesResult
     /**
      * Gets service properties object.
      * 
-     * @return WindowsAzure\Common\Models\ServiceProperties
+     * @return ServiceProperties
      */
     public function getValue()
     {
@@ -71,10 +74,8 @@ class GetServicePropertiesResult
      * Sets service properties object.
      * 
      * @param ServiceProperties $serviceProperties object to use.
-     * 
-     * @return none
      */
-    public function setValue($serviceProperties)
+    public function setValue(ServiceProperties $serviceProperties)
     {
         $this->_serviceProperties = clone $serviceProperties;
     }

@@ -25,6 +25,8 @@
 namespace WindowsAzure\ServiceBus\Internal;
 
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\ServiceBus\Models\FalseFilter;
+use WindowsAzure\ServiceBus\Models\TrueFilter;
 
 /**
  * The base class for rule filter.
@@ -53,7 +55,7 @@ class Filter
      */
     public function __construct()
     {
-        $this->attributes = array();
+        $this->attributes = [];
         $this->attributes['xmlns:xsi'] = Resources::XSI_XML_NAMESPACE;
     }
 
@@ -62,7 +64,7 @@ class Filter
      * 
      * @param string $filterXmlString An XML based filter string. 
      *
-     * @return Filter
+     * @return Filter|null
      */
     public static function create($filterXmlString)
     {
@@ -81,6 +83,7 @@ class Filter
 
             return new self();
         }
+        return null;
     }
 
     /**
@@ -98,8 +101,6 @@ class Filter
      *
      * @param string $key   The key of the attribute.
      * @param string $value The value of the attribute.
-     * 
-     * @return none
      */
     protected function setAttribute($key, $value)
     {

@@ -63,8 +63,6 @@ class UpgradeDeploymentOptions extends GetDeploymentOptions
      * Sets the role to upgrade name.
      * 
      * @param string $roleToUpgrade The role to upgrade name.
-     * 
-     * @return none
      */
     public function setRoleToUpgrade($roleToUpgrade)
     {

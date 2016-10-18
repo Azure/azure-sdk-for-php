@@ -173,9 +173,9 @@ class IngestManifestFile
      *
      * @param array $options Array containing values for object properties
      *
-     * @return WindowsAzure\MediaServices\Models\IngestManifestFile
+     * @return IngestManifestFile
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         Validate::notNull($options['Name'], 'options[Name]');
         Validate::notNull(
@@ -222,10 +222,8 @@ class IngestManifestFile
      * Fill manifest file from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return none
      */
-    public function fromArray($options)
+    public function fromArray(array $options)
     {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
@@ -350,8 +348,6 @@ class IngestManifestFile
      * Set "ParentIngestManifestAssetId".
      *
      * @param string $value ParentIngestManifestAssetId
-     *
-     * @return none
      */
     public function setParentIngestManifestAssetId($value)
     {
@@ -372,8 +368,6 @@ class IngestManifestFile
      * Set "ParentIngestManifestId".
      *
      * @param string $value ParentIngestManifestId
-     *
-     * @return none
      */
     public function setParentIngestManifestId($value)
     {
@@ -404,8 +398,6 @@ class IngestManifestFile
      * Set "Mime type".
      *
      * @param string $value Mime type
-     *
-     * @return none
      */
     public function setMimeType($value)
     {
@@ -446,8 +438,6 @@ class IngestManifestFile
      * Set "Is primary".
      *
      * @param bool $value Is primary
-     *
-     * @return none
      */
     public function setIsPrimary($value)
     {
@@ -468,8 +458,6 @@ class IngestManifestFile
      * Set "Initialization vector".
      *
      * @param string $value Initialization vector
-     *
-     * @return none
      */
     public function setInitializationVector($value)
     {
@@ -490,8 +478,6 @@ class IngestManifestFile
      * Set "Encryption key id".
      *
      * @param string $value Encryption key id
-     *
-     * @return none
      */
     public function setEncryptionKeyId($value)
     {
@@ -512,8 +498,6 @@ class IngestManifestFile
      * Set "Is encrypted".
      *
      * @param bool $value Is encrypted
-     *
-     * @return none
      */
     public function setIsEncrypted($value)
     {
@@ -534,8 +518,6 @@ class IngestManifestFile
      * Set "Encryption scheme".
      *
      * @param string $value Encryption scheme
-     *
-     * @return none
      */
     public function setEncryptionScheme($value)
     {
@@ -556,8 +538,6 @@ class IngestManifestFile
      * Set "Encryption version".
      *
      * @param string $value Encryption version
-     *
-     * @return none
      */
     public function setEncryptionVersion($value)
     {
@@ -578,8 +558,6 @@ class IngestManifestFile
      * Set "Name".
      *
      * @param string $value Name
-     *
-     * @return none
      */
     public function setName($value)
     {

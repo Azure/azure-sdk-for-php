@@ -89,10 +89,8 @@ class Protocol1RuntimeClient
      * Sets the current state.
      * 
      * @param CurrentState $state The current state.
-     * 
-     * @return none
      */
-    public function setCurrentState($state)
+    public function setCurrentState(CurrentState $state)
     {
         $this->_currentStateClient->setCurrentState($state);
     }

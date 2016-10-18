@@ -125,7 +125,7 @@ class QueueDescription
      * @param string $queueDescriptionXml A XML based string describing
      *                                    the queue. 
      * 
-     * @return none
+     * @return QueueDescription
      */
     public static function create($queueDescriptionXml)
     {
@@ -242,8 +242,6 @@ class QueueDescription
      * Sets the lock duration.
      *
      * @param string $lockDuration The lock duration.
-     * 
-     * @return none
      */
     public function setLockDuration($lockDuration)
     {
@@ -264,8 +262,6 @@ class QueueDescription
      * Sets the max size in mega bytes.
      *
      * @param int $maxSizeInMegabytes The max size in mega bytes.
-     * 
-     * @return none
      */
     public function setMaxSizeInMegabytes($maxSizeInMegabytes)
     {
@@ -286,8 +282,6 @@ class QueueDescription
      * Sets requires duplicate detection.
      *
      * @param bool $requiresDuplicateDetection If duplicate detection is required.
-     * 
-     * @return none
      */
     public function setRequiresDuplicateDetection($requiresDuplicateDetection)
     {
@@ -308,8 +302,6 @@ class QueueDescription
      * Sets the requires session.
      *
      * @param bool $requiresSession If session is required.
-     * 
-     * @return none
      */
     public function setRequiresSession($requiresSession)
     {
@@ -330,8 +322,6 @@ class QueueDescription
      * Sets the default message time to live. 
      *
      * @param string $defaultMessageTimeToLive The default message time to live.
-     * 
-     * @return none
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {
@@ -353,8 +343,6 @@ class QueueDescription
      *
      * @param string $deadLetteringOnMessageExpiration The dead lettering on 
      *                                                 message expiration.
-     * 
-     * @return none
      */
     public function setDeadLetteringOnMessageExpiration(
         $deadLetteringOnMessageExpiration
@@ -377,8 +365,6 @@ class QueueDescription
      *
      * @param string $duplicateDetectionHistoryTimeWindow The duplicate
      *                                                    detection history time window.
-     * 
-     * @return none
      */
     public function setDuplicateDetectionHistoryTimeWindow(
         $duplicateDetectionHistoryTimeWindow
@@ -402,8 +388,6 @@ class QueueDescription
      * Sets the maximum delivery count.
      *
      * @param string $maxDeliveryCount The maximum delivery count.
-     * 
-     * @return none
      */
     public function setMaxDeliveryCount($maxDeliveryCount)
     {
@@ -424,8 +408,6 @@ class QueueDescription
      * Sets enable batched operations.
      *
      * @param bool $enableBatchedOperations Enable batched operations.
-     * 
-     * @return none
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {
@@ -446,8 +428,6 @@ class QueueDescription
      * Sets the size in bytes.
      *
      * @param int $sizeInBytes The size in bytes.
-     * 
-     * @return none
      */
     public function setSizeInBytes($sizeInBytes)
     {
@@ -468,8 +448,6 @@ class QueueDescription
      * Sets the message count.
      *
      * @param string $messageCount The count of the message.
-     * 
-     * @return none
      */
     public function setMessageCount($messageCount)
     {

@@ -25,6 +25,7 @@
 
 namespace WindowsAzure\Common\Internal\Atom;
 
+use SimpleXMLElement;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Resources;
 
@@ -55,8 +56,8 @@ class AtomBase
      */
     public function __construct()
     {
-        $this->attributes = array();
-        $atomlink = new AtomLink();
+        $this->attributes = [];
+        new AtomLink();
     }
 
     /**
@@ -73,12 +74,9 @@ class AtomBase
      * Sets the attributes of the ATOM class.
      *
      * @param array $attributes The attributes of the array.
-     *
-     * @return array
      */
-    public function setAttributes($attributes)
+    public function setAttributes(array $attributes)
     {
-        Validate::isArray($attributes, 'attributes');
         $this->attributes = $attributes;
     }
 
@@ -87,8 +85,6 @@ class AtomBase
      *
      * @param string $attributeKey   The key of the attribute.
      * @param mixed  $attributeValue The value of the attribute.
-     *
-     * @return none
      */
     public function setAttribute($attributeKey, $attributeValue)
     {
@@ -100,7 +96,7 @@ class AtomBase
      *
      * @param string $attributeKey The key of the attribute.
      *
-     * @return none
+     * @return mixed
      */
     public function getAttribute($attributeKey)
     {
@@ -110,16 +106,12 @@ class AtomBase
     /**
      * Processes author node.
      *
-     * @param array $xmlWriter   The XML writer.
-     * @param array $itemArray   An array of item to write.
-     * @param array $elementName The name of the element.
-     *
-     * @return array
+     * @param \XMLWriter $xmlWriter   The XML writer.
+     * @param array      $itemArray   An array of item to write.
+     * @param string     $elementName The name of the element.
      */
-    protected function writeArrayItem($xmlWriter, $itemArray, $elementName)
+    protected function writeArrayItem(\XMLWriter $xmlWriter, array $itemArray, $elementName)
     {
-        Validate::notNull($xmlWriter, 'xmlWriter');
-        Validate::isArray($itemArray, 'itemArray');
         Validate::isString($elementName, 'elementName');
 
         foreach ($itemArray as $itemInstance) {
@@ -136,16 +128,17 @@ class AtomBase
     /**
      * Processes author node.
      *
-     * @param array $xmlArray An array of simple xml elements.
+     * @param SimpleXMLElement[] $xmlArray An array of simple xml elements.
      *
-     * @return array
+     * @return Person[]
      */
-    protected function processAuthorNode($xmlArray)
+    protected function processAuthorNode(array $xmlArray)
     {
-        $author = array();
+        $author = [];
         $authorItem = $xmlArray[Resources::AUTHOR];
 
         if (is_array($authorItem)) {
+            /** @var SimpleXMLElement $authorXmlInstance */
             foreach ($xmlArray[Resources::AUTHOR] as $authorXmlInstance) {
                 $authorInstance = new Person();
                 $authorInstance->parseXml($authorXmlInstance->asXML());
@@ -169,7 +162,7 @@ class AtomBase
      */
     protected function processEntryNode($xmlArray)
     {
-        $entry = array();
+        $entry = [];
         $entryItem = $xmlArray[Resources::ENTRY];
 
         if (is_array($entryItem)) {
@@ -196,10 +189,11 @@ class AtomBase
      */
     protected function processCategoryNode($xmlArray)
     {
-        $category = array();
+        $category = [];
         $categoryItem = $xmlArray[Resources::CATEGORY];
 
         if (is_array($categoryItem)) {
+            /** @var SimpleXMLElement $categoryXmlInstance */
             foreach ($xmlArray[Resources::CATEGORY] as $categoryXmlInstance) {
                 $categoryInstance = new Category();
                 $categoryInstance->parseXml($categoryXmlInstance->asXML());
@@ -223,10 +217,11 @@ class AtomBase
      */
     protected function processContributorNode($xmlArray)
     {
-        $category = array();
+        $contributor = [];
         $contributorItem = $xmlArray[Resources::CONTRIBUTOR];
 
         if (is_array($contributorItem)) {
+            /** @var SimpleXMLElement $contributorXmlInstance */
             foreach ($xmlArray[Resources::CONTRIBUTOR] as $contributorXmlInstance) {
                 $contributorInstance = new Person();
                 $contributorInstance->parseXml($contributorXmlInstance->asXML());
@@ -254,10 +249,11 @@ class AtomBase
      */
     protected function processLinkNode($xmlArray)
     {
-        $link = array();
+        $link = [];
         $linkValue = $xmlArray[Resources::LINK];
 
         if (is_array($linkValue)) {
+            /** @var SimpleXMLElement $linkValueInstance */
             foreach ($xmlArray[Resources::LINK] as $linkValueInstance) {
                 $linkInstance = new AtomLink();
                 $linkInstance->parseXml($linkValueInstance->asXML());
@@ -278,11 +274,9 @@ class AtomBase
      * @param \XMLWriter $xmlWriter      The XML writer.
      * @param string     $attributeName  The name of the attribute.
      * @param mixed      $attributeValue The value of the attribute.
-     *
-     * @return none
      */
     protected function writeOptionalAttribute(
-        $xmlWriter,
+        \XMLWriter $xmlWriter,
         $attributeName,
         $attributeValue
     ) {
@@ -300,22 +294,19 @@ class AtomBase
     /**
      * Writes the optional elements namespaces.
      *
-     * @param \XmlWriter $xmlWriter    The XML writer.
+     * @param \XMLWriter $xmlWriter    The XML writer.
      * @param string     $prefix       The prefix.
      * @param string     $elementName  The element name.
      * @param string     $namespace    The namespace name.
      * @param string     $elementValue The element value.
-     *
-     * @return none
      */
     protected function writeOptionalElementNS(
-        $xmlWriter,
+        \XMLWriter $xmlWriter,
         $prefix,
         $elementName,
         $namespace,
         $elementValue
     ) {
-        Validate::notNull($xmlWriter, 'xmlWriter');
         Validate::isString($elementName, 'elementName');
 
         if (!empty($elementValue)) {

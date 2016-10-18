@@ -86,8 +86,6 @@ class ChangeDeploymentConfigurationOptions extends GetDeploymentOptions
      * 
      * @param bool $treatWarningsAsErrors Indicates whether to treat package 
      *                                    validation warnings as errors.
-     * 
-     * @return none
      */
     public function setTreatWarningsAsErrors($treatWarningsAsErrors)
     {
@@ -115,8 +113,6 @@ class ChangeDeploymentConfigurationOptions extends GetDeploymentOptions
      * Sets mode.
      * 
      * @param string $mode The change mode.
-     * 
-     * @return none
      */
     public function setMode($mode)
     {

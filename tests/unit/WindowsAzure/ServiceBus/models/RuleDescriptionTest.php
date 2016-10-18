@@ -25,6 +25,8 @@
 
 namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
+use WindowsAzure\ServiceBus\Internal\Action;
+use WindowsAzure\ServiceBus\Internal\Filter;
 use WindowsAzure\ServiceBus\Models\RuleDescription;
 use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 
@@ -58,13 +60,13 @@ class RuleDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\RuleDescription::getFilter
-     * @covers WindowsAzure\ServiceBus\Models\RuleDescription::setFilter
+     * @covers \WindowsAzure\ServiceBus\Models\RuleDescription::getFilter
+     * @covers \WindowsAzure\ServiceBus\Models\RuleDescription::setFilter
      */
     public function testGetSetFilter()
     {
         // Setup
-        $expected = 'testFilter';
+        $expected = new Filter();
         $ruleDescription = new RuleDescription();
 
         // Test
@@ -79,13 +81,13 @@ class RuleDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\RuleDescription::getAction
-     * @covers WindowsAzure\ServiceBus\Models\RuleDescription::setAction
+     * @covers \WindowsAzure\ServiceBus\Models\RuleDescription::getAction
+     * @covers \WindowsAzure\ServiceBus\Models\RuleDescription::setAction
      */
     public function testGetSetAction()
     {
         // Setup
-        $expected = 'testAction';
+        $expected = new Action();
         $ruleDescription = new RuleDescription();
 
         // Test
@@ -100,8 +102,8 @@ class RuleDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\RuleDescription::getName
-     * @covers WindowsAzure\ServiceBus\Models\RuleDescription::setName
+     * @covers \WindowsAzure\ServiceBus\Models\RuleDescription::getName
+     * @covers \WindowsAzure\ServiceBus\Models\RuleDescription::setName
      */
     public function testGetSetName()
     {

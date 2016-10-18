@@ -25,8 +25,6 @@
 
 namespace WindowsAzure\ServiceRuntime\Internal;
 
-use WindowsAzure\Common\Internal\Validate;
-
 /**
  * The goal state representation.
  *
@@ -76,11 +74,13 @@ class GoalState
      * @param \DateTime $deadline             The deadline.
      * @param string    $currentStateEndpoint The current state endpoint.
      */
-    public function __construct($incarnation, $expectedState, $environmentPath,
-        $deadline, $currentStateEndpoint
+    public function __construct(
+        $incarnation,
+        $expectedState,
+        $environmentPath,
+        \DateTime $deadline,
+        $currentStateEndpoint
     ) {
-        Validate::isDate($deadline);
-
         $this->_incarnation = $incarnation;
         $this->_expectedState = $expectedState;
         $this->_environmentPath = $environmentPath;

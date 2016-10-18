@@ -45,16 +45,16 @@ use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey;
 class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::fromArray
-     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::__construct
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::__construct
      */
     public function testCreateFromOptions()
     {
 
         // Setup
         $assetDeliveryPolicyTestId = 'AssetDeliveryPolicyTest-12563';
-        $options = array(
+        $options = [
                 'Id' => $assetDeliveryPolicyTestId,
                 'Name' => 'testNameForAssetDeliveryPolicyTest',
                 'AssetDeliveryProtocol' => AssetDeliveryProtocol::SMOOTH_STREAMING,
@@ -62,7 +62,7 @@ class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
                 'AssetDeliveryConfiguration' => '<root>sample configuration</root>',
                 'Created' => '1975-12-14',
                 'LastModified' => '2015-12-14',
-        );
+        ];
 
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
@@ -176,8 +176,8 @@ class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfiguartionKey
-     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::parseAssetDeliveryPolicyConfiguartionKey
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfiguartionKey
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::parseAssetDeliveryPolicyConfiguartionKey
      */
     public function testStrignifyParseDeliveryPolicyConfiguartionKey()
     {

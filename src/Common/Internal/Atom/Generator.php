@@ -68,10 +68,8 @@ class Generator extends AtomBase
      * 
      * @param string $xmlString A string representing a generator 
      *                          instance.
-     * 
-     * @return none
      */
-    public static function parseXml($xmlString)
+    public function parseXml($xmlString)
     {
         $generatorXml = new \SimpleXMLElement($xmlString);
         $generatorArray = (array) $generatorXml;
@@ -91,8 +89,6 @@ class Generator extends AtomBase
      * Creates an ATOM generator instance with specified name.
      *
      * @param string $text The text content of the generator.
-     * 
-     * @return none
      */
     public function __construct($text = null)
     {
@@ -115,8 +111,6 @@ class Generator extends AtomBase
      * Sets the text of the generator.
      * 
      * @param string $text The text of the generator.
-     * 
-     * @return none
      */
     public function setText($text)
     {
@@ -137,8 +131,6 @@ class Generator extends AtomBase
      * Sets the URI of the generator. 
      * 
      * @param string $uri The URI of the generator.
-     * 
-     * @return none
      */
     public function setUri($uri)
     {
@@ -159,8 +151,6 @@ class Generator extends AtomBase
      * Sets the version of the generator. 
      * 
      * @param string $version The version of the generator.
-     * 
-     * @return none
      */
     public function setVersion($version)
     {
@@ -171,8 +161,6 @@ class Generator extends AtomBase
      * Writes an XML representing the generator. 
      * 
      * @param \XMLWriter $xmlWriter The XML writer.
-     * 
-     * @return none
      */
     public function writeXml($xmlWriter)
     {

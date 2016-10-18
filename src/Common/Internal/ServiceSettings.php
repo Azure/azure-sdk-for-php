@@ -53,10 +53,10 @@ abstract class ServiceSettings
      * Throws an exception if the connection string format does not match any of the
      * available formats.
      * 
-     * @param type $connectionString The invalid formatted connection string.
-     * 
-     * @return none
-     * 
+     * @param string $connectionString The invalid formatted connection string.
+     *
+     * @return null
+     *
      * @throws \RuntimeException
      */
     protected static function noMatch($connectionString)
@@ -140,7 +140,7 @@ abstract class ServiceSettings
                 } else {
                     // If required then fail because the setting does not exist
                     if ($isRequired) {
-                        return;
+                        return null;
                     }
                 }
             }
@@ -202,7 +202,7 @@ abstract class ServiceSettings
      */
     protected static function settingWithFunc($name, $predicate)
     {
-        $requirement = array();
+        $requirement = [];
         $requirement[Resources::SETTING_NAME] = $name;
         $requirement[Resources::SETTING_CONSTRAINT] = $predicate;
 
@@ -249,9 +249,6 @@ abstract class ServiceSettings
                     implode("\n", $validValues)
                 )
             );
-
-            // $settingValue is missing in valid values set, fail.
-            return false;
         };
 
         return self::settingWithFunc($name, $predicate);

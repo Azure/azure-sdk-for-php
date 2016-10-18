@@ -59,7 +59,7 @@ class PlayReadyLicenseResponseTemplate
      */
     public function __construct()
     {
-        $this->_licenseTemplates = array();
+        $this->_licenseTemplates = [];
     }
 
     /**

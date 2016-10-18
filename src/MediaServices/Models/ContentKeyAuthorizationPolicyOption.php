@@ -97,7 +97,7 @@ class ContentKeyAuthorizationPolicyOption
      */
     public function __construct()
     {
-        $this->_restrictions = array();
+        $this->_restrictions = [];
     }
 
     /**

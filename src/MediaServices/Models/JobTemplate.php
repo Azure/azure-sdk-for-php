@@ -110,9 +110,9 @@ class JobTemplate
      *
      * @param array $options Array containing values for object properties
      *
-     * @return WindowsAzure\MediaServices\Models\JobTemplate
+     * @return JobTemplate
      */
-    public static function createFromOptions($options)
+    public static function createFromOptions(array $options)
     {
         Validate::notNull($options['JobTemplateBody'], 'options[JobTemplateBody]');
 
@@ -128,8 +128,8 @@ class JobTemplate
     /**
      * Create job template.
      *
-     * @param string $jobTemplateBody Job template XML body.
-     * @param string $templateType    Template type default to AccountLevel.
+     * @param string     $jobTemplateBody Job template XML body.
+     * @param int|string $templateType    Template type default to AccountLevel.
      */
     public function __construct(
         $jobTemplateBody,
@@ -143,10 +143,8 @@ class JobTemplate
      * Fill job template from array.
      *
      * @param array $options Array containing values for object properties
-     *
-     * @return none
      */
-    public function fromArray($options)
+    public function fromArray(array $options)
     {
         if (isset($options['Id'])) {
             Validate::isString($options['Id'], 'options[Id]');
@@ -207,8 +205,6 @@ class JobTemplate
      * Set "Name".
      *
      * @param string $value Name
-     *
-     * @return none
      */
     public function setName($value)
     {
@@ -259,8 +255,6 @@ class JobTemplate
      * Set "Template type".
      *
      * @param int $value Template type
-     *
-     * @return none
      */
     public function setTemplateType($value)
     {
@@ -281,8 +275,6 @@ class JobTemplate
      * Set "Number of input assets".
      *
      * @param int $value Number of input assets
-     *
-     * @return none
      */
     public function setNumberofInputAssets($value)
     {
@@ -303,8 +295,6 @@ class JobTemplate
      * Set "Job template body".
      *
      * @param string $value Job template body
-     *
-     * @return none
      */
     public function setJobTemplateBody($value)
     {

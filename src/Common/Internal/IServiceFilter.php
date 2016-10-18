@@ -56,9 +56,9 @@ interface IServiceFilter
      * Processes HTTP response after send.
      *
      * @param IHttpClient $request  HTTP request object.
-     * @param mix         $response HTTP response object.
+     * @param mixed       $response HTTP response object.
      *
-     * @return mix processed HTTP response object.
+     * @return mixed processed HTTP response object.
      */
     public function handleResponse(IHttpClient $request, $response);
 }
