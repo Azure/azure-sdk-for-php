@@ -44,7 +44,6 @@ use WindowsAzure\Common\Internal\Atom\AtomLink;
 class AtomLinkTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::__construct
      */
     public function testAtomLinkConstructor()
     {
