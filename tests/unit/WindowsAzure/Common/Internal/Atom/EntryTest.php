@@ -48,7 +48,6 @@ use WindowsAzure\Common\Internal\Atom\Source;
 class EntryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers \WindowsAzure\Common\Internal\Atom\Entry::__construct
      */
     public function testEntryConstructor()
     {
