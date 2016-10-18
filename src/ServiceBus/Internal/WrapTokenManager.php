@@ -164,7 +164,6 @@ class WrapTokenManager
     {
         $targetUriComponents = parse_url($targetUri);
 
-        $scopeUri = Resources::EMPTY_STRING;
         $authority = Resources::EMPTY_STRING;
         if ($this->_containsValidAuthority($targetUriComponents)) {
             $authority = $this->_createAuthority($targetUriComponents);

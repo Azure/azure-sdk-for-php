@@ -111,7 +111,7 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
      */
-    public function testObjectSerializeSucceess()
+    public function testObjectSerializeSuccess()
     {
         // Setup
         $expected = "<DummyClass/>\n";
@@ -130,7 +130,7 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
      */
-    public function testObjectSerializeSucceessWithAttributes()
+    public function testObjectSerializeSuccessWithAttributes()
     {
         // Setup 
         $expected = "<DummyClass testAttribute=\"testAttributeValue\"/>\n";

@@ -201,19 +201,19 @@ class AtomLink extends AtomBase
      * 
      * @return string
      */
-    public function getHrefLang()
+    public function getHreflang()
     {
-        return $this->hrefLang;
+        return $this->hreflang;
     }
 
     /**
      * Sets the language of the href. 
      * 
-     * @param string $hrefLang The language of the href.
+     * @param string $hreflang The language of the href.
      */
-    public function setHrefLang($hrefLang)
+    public function setHreflang($hreflang)
     {
-        $this->hrefLang = $hrefLang;
+        $this->hreflang = $hreflang;
     }
 
     /** 

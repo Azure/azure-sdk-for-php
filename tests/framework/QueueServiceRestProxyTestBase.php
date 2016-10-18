@@ -68,7 +68,7 @@ class QueueServiceRestProxyTestBase extends ServiceRestProxyTestBase
         try {
             $this->deleteQueue($queueName);
         } catch (\Exception $e) {
-            // Ignore exception and continue, will assume that this queue doesn't exist in the sotrage account
+            // Ignore exception and continue, will assume that this queue doesn't exist in the storage account
             // no need to show the error messages here.
             //error_log($e->getMessage());
         }

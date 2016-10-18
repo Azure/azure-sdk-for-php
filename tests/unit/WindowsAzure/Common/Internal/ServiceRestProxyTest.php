@@ -70,7 +70,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::withFilter
+     * @covers  \WindowsAzure\Common\Internal\ServiceRestProxy::withFilter
      * @depends test__construct
      */
     public function testWithFilter($restRestProxy)
@@ -87,7 +87,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::getFilters
+     * @covers  \WindowsAzure\Common\Internal\ServiceRestProxy::getFilters
      * @depends test__construct
      */
     public function testGetFilters($restRestProxy)
@@ -106,10 +106,10 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::addOptionalAccessConditionHeader
+     * @covers  \WindowsAzure\Common\Internal\ServiceRestProxy::addOptionalAccessConditionHeader
      * @depends test__construct
      */
-    public function testAddOptionalAccessContitionHeader($restRestProxy)
+    public function testAddOptionalAccessConditionHeader($restRestProxy)
     {
         // Setup
         $expectedHeader = Resources::IF_MATCH;
@@ -126,10 +126,10 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::addOptionalSourceAccessConditionHeader
+     * @covers  \WindowsAzure\Common\Internal\ServiceRestProxy::addOptionalSourceAccessConditionHeader
      * @depends test__construct
      */
-    public function testAddOptionalSourceAccessContitionHeader($restRestProxy)
+    public function testAddOptionalSourceAccessConditionHeader($restRestProxy)
     {
         // Setup
         $expectedHeader = Resources::X_MS_SOURCE_IF_MATCH;
@@ -146,7 +146,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::groupQueryValues
+     * @covers  \WindowsAzure\Common\Internal\ServiceRestProxy::groupQueryValues
      * @depends test__construct
      */
     public function testGroupQueryValues($restRestProxy)
@@ -163,7 +163,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::groupQueryValues
+     * @covers  \WindowsAzure\Common\Internal\ServiceRestProxy::groupQueryValues
      * @depends test__construct
      */
     public function testGroupQueryValuesWithNulls($restRestProxy)
@@ -179,7 +179,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers  WindowsAzure\Common\Internal\ServiceRestProxy::groupQueryValues
+     * @covers  \WindowsAzure\Common\Internal\ServiceRestProxy::groupQueryValues
      * @depends test__construct
      */
     public function testGroupQueryValuesWithMix($restRestProxy)

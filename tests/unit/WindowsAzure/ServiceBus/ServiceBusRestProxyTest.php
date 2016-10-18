@@ -394,7 +394,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     public function testContentTypePassesThrough()
     {
         // Setup
-        $queueName = 'testContnetTypePassesThrough';
+        $queueName = 'testContentTypePassesThrough';
         $queueDescription = new QueueDescription();
         $queueInfo = new QueueInfo($queueName, $queueDescription);
         $this->safeDeleteQueue($queueName);

@@ -25,6 +25,7 @@
 
 namespace Tests\framework;
 
+use Exception;
 use Tests\Framework\ServiceRestProxyTestBase;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\MediaServices\Models\Asset;
@@ -79,7 +80,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $this->skipIfEmulated();
         parent::setUp();
         $connection = TestResources::getMediaServicesConnectionParameters();
-        $settings = new MediaServicesSettings($connection['accountName'], $connection['accessKey'], $connection['endpointUri'], $connection['oauthEndopointUri']);
+        $settings = new MediaServicesSettings($connection['accountName'], $connection['accessKey'], $connection['endpointUri'], $connection['oauthEndpointUri']);
         $mediaServicesWrapper = $this->builder->createMediaServicesService($settings);
         parent::setProxy($mediaServicesWrapper);
     }
@@ -252,7 +253,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
         $taskBody = TestResources::getMediaServicesTask($this->getOutputAssetName());
         $task = new Task($taskBody, $mediaProcessor->getId(), TaskOptions::NONE);
-        $task->setConfiguration(TestResources::MEDIA_SERVICES_TASK_COFIGURATION);
+        $task->setConfiguration(TestResources::MEDIA_SERVICES_TASK_CONFIGURATION);
 
         $job = new Job();
         $job->setName($name);
@@ -278,7 +279,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
         $taskTemplate = new TaskTemplate(1, 1);
         $taskTemplate->setMediaProcessorId($mediaProcessor->getId());
-        $taskTemplate->setConfiguration(TestResources::MEDIA_SERVICES_TASK_COFIGURATION);
+        $taskTemplate->setConfiguration(TestResources::MEDIA_SERVICES_TASK_CONFIGURATION);
 
         $jobTemplateBody = TestResources::getMediaServicesJobTemplate($taskTemplate->getId(), $this->getOutputAssetName());
         $jobTemplate = new JobTemplate($jobTemplateBody);
@@ -301,11 +302,11 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
                 $programs = $this->restProxy->getProgramList($ch);
 
-                foreach($programs as $prog) {
-                    if ($prog->getState() == ProgramState::Running) {
-                        $this->restProxy->stopProgram($prog);
+                foreach($programs as $program) {
+                    if ($program->getState() == ProgramState::Running) {
+                        $this->restProxy->stopProgram($program);
                     }
-                    $this->restProxy->deleteProgram($prog);
+                    $this->restProxy->deleteProgram($program);
                 }
                 if ($ch->getState() == ChannelState::Running) {
                     $this->restProxy->stopChannel($ch);

@@ -39,18 +39,18 @@ class ScenarioTestBase extends IntegrationTestBase
         $this->assertEquals($expectedMessage->getContentType(), $actualMessage->getContentType(), 'getContentType');
         $this->assertEquals($expectedMessage->getCorrelationId(), $actualMessage->getCorrelationId(), 'getCorrelationId');
         $this->assertEquals($expectedMessage->getDate(), $actualMessage->getDate(), 'getDate');
-        // Note: The DeliveryCount property is controled by the server, so cannot compare it.
+        // Note: The DeliveryCount property is controlled by the server, so cannot compare it.
         $this->assertTrue(is_int($actualMessage->getDeliveryCount()), 'is_int($actualMessage->getDeliveryCount)');
         $this->assertEquals($expectedMessage->getLabel(), $actualMessage->getLabel(), 'getLabel');
-        // Note: The LockLocation property is controled by the server, so cannot compare it.
+        // Note: The LockLocation property is controlled by the server, so cannot compare it.
         $this->assertTrue(
                 is_null($actualMessage->getLockLocation()) ||
                 is_string($actualMessage->getLockLocation()), 'is_string/numm($actualMessage->getLockLocation)');
-        // Note: The LockToken property is controled by the server, so cannot compare it.
+        // Note: The LockToken property is controlled by the server, so cannot compare it.
         $this->assertTrue(
                 is_null($actualMessage->getLockToken()) ||
                 is_string($actualMessage->getLockToken()), 'is_string/null($actualMessage->getLockToken)');
-        // Note: The LockedUntilUtc property is controled by the server, so cannot compare it.
+        // Note: The LockedUntilUtc property is controlled by the server, so cannot compare it.
         $this->assertTrue(
                 is_null($actualMessage->getLockedUntilUtc()) ||
                 $actualMessage->getLockedUntilUtc() instanceof \DateTime, '$is_null/DateTime(actualMessage->getLockedUntilUtc)');
@@ -77,7 +77,7 @@ class ScenarioTestBase extends IntegrationTestBase
 
         $this->assertEquals(count($customProperties), count($actualProperties), 'count(getProperties)');
         foreach ($customProperties as $key => $value) {
-            // Guids from the server cannot be known in advance
+            // GUIDs from the server cannot be known in advance
             if ($value != 'GUID') {
                 $this->assertEquals(
                     $value,

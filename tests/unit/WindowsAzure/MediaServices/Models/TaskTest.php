@@ -48,15 +48,15 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $mediaProcId = 'ksfjdgkd56';
+        $mediaProcessorId = 'ksfjdgkd56';
         $taskBody = 'task body';
         $options = 42;
 
         // Test
-        $task = new Task($taskBody, $mediaProcId, $options);
+        $task = new Task($taskBody, $mediaProcessorId, $options);
 
         // Assert
-        $this->assertEquals($mediaProcId, $task->getMediaProcessorId());
+        $this->assertEquals($mediaProcessorId, $task->getMediaProcessorId());
         $this->assertEquals($taskBody, $task->getTaskBody());
         $this->assertEquals($options, $task->getOptions());
     }

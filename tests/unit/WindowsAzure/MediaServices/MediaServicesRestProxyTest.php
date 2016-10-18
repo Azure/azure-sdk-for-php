@@ -97,6 +97,7 @@ use WindowsAzure\MediaServices\Templates\ContentKeySpecs;
 use WindowsAzure\MediaServices\Templates\Hdcp;
 use WindowsAzure\MediaServices\Templates\RequiredOutputProtection;
 use Tests\Framework\VirtualFileSystem;
+use WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey;
 
 /**
  * Unit tests for class MediaServicesRestProxy.
@@ -288,14 +289,14 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $access->setPermissions(AccessPolicy::PERMISSIONS_READ + AccessPolicy::PERMISSIONS_WRITE + AccessPolicy::PERMISSIONS_DELETE + AccessPolicy::PERMISSIONS_LIST);
         $access = $this->createAccessPolicy($access);
 
-        $locat = new Locator($asset, $access, 1);
-        $locat->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME.$this->createSuffix());
+        $locator = new Locator($asset, $access, 1);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME.$this->createSuffix());
 
         // Test
-        $result = $this->createLocator($locat);
+        $result = $this->createLocator($locator);
 
         // Assert
-        $this->assertEquals($locat->getName(), $result->getName());
+        $this->assertEquals($locator->getName(), $result->getName());
     }
 
     /**
@@ -844,10 +845,10 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $configuration = 'H.264 HD 720p VBR';
         $name = TestResources::MEDIA_SERVICES_JOB_TEMPLATE_NAME.$this->createSuffix();
 
-        $jobTempl = $this->createJobTemplateWithTasks($name);
+        $jobTemplate = $this->createJobTemplateWithTasks($name);
 
         // Test
-        $result = $this->restProxy->getJobTemplateTaskTemplateList($jobTempl);
+        $result = $this->restProxy->getJobTemplateTaskTemplateList($jobTemplate);
 
         // Assert
         $this->assertEquals(1, count($result));
@@ -866,7 +867,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
         $configuration = 'H.264 HD 720p VBR';
 
-        $jobTempl = $this->createJobTemplateWithTasks($name);
+        $jobTemplate = $this->createJobTemplateWithTasks($name);
 
         // Test
         $result = $this->restProxy->getTaskTemplateList();
@@ -1686,19 +1687,19 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     {
         // Setup
         $name = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME.$this->createSuffix();
-        $newname = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME.$this->createSuffix();
+        $newName = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME.$this->createSuffix();
         $policy = new ContentKeyAuthorizationPolicy();
         $policy->setName($name);
         $result = $this->createContentKeyAuthorizationPolicy($policy);
 
         // Test
-        $result->setName($newname);
+        $result->setName($newName);
         $this->restProxy->updateContentKeyAuthorizationPolicy($result);
 
         $result = $this->restProxy->getContentKeyAuthorizationPolicy($result->getId());
 
         // Assert
-        $this->assertEquals($newname, $result->getName());
+        $this->assertEquals($newName, $result->getName());
     }
 
     /**
@@ -1793,17 +1794,17 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     {
         // Setup
         $id = $this->testCreateContentKeyAuthorizationPolicyOption();
-        $newname = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME.$this->createSuffix();
+        $newName = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME.$this->createSuffix();
         $options = $this->restProxy->getContentKeyAuthorizationPolicyOption($id);
 
         // Test
-        $options->setName($newname);
+        $options->setName($newName);
         $this->restProxy->updateContentKeyAuthorizationPolicyOption($options);
 
         $options = $this->restProxy->getContentKeyAuthorizationPolicyOption($options->getId());
 
         // Assert
-        $this->assertEquals($newname, $options->getName());
+        $this->assertEquals($newName, $options->getName());
     }
 
     /**
@@ -1950,7 +1951,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     {
         // Setup
         $name = TestResources::MEDIA_SERVICES_ASSET_DELIVERY_POLICY_NAME.$this->createSuffix();
-        $newname = TestResources::MEDIA_SERVICES_ASSET_DELIVERY_POLICY_NAME.$this->createSuffix();
+        $newName = TestResources::MEDIA_SERVICES_ASSET_DELIVERY_POLICY_NAME.$this->createSuffix();
         $policy = new AssetDeliveryPolicy();
         $policy->setName($name);
         $policy->setAssetDeliveryProtocol(AssetDeliveryProtocol::ALL);
@@ -1959,13 +1960,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $result = $this->createAssetDeliveryPolicy($policy);
 
         // Test
-        $result->setName($newname);
+        $result->setName($newName);
         $this->restProxy->updateAssetDeliveryPolicy($result);
 
         $result = $this->restProxy->getAssetDeliveryPolicy($result->getId());
 
         // Assert
-        $this->assertEquals($newname, $result->getName());
+        $this->assertEquals($newName, $result->getName());
     }
 
     /**
@@ -2171,8 +2172,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $options = new ContentKeyAuthorizationPolicyOption();
         $options->setName($name);
         $options->setKeyDeliveryType(ContentKeyDeliveryType::PLAYREADY_LICENSE);
-        $playReadytemplate = $this->getPlayReadyTemplate();
-        $deliveryConfiguration = MediaServicesLicenseTemplateSerializer::serialize($playReadytemplate);
+        $playReadyTemplate = $this->getPlayReadyTemplate();
+        $deliveryConfiguration = MediaServicesLicenseTemplateSerializer::serialize($playReadyTemplate);
         $options->setKeyDeliveryConfiguration($deliveryConfiguration);
         $options->setRestrictions($restrictions);
 
@@ -2194,7 +2195,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $template2 = TokenRestrictionTemplateSerializer::deserialize($receivedTemplate);
 
         $this->assertEqualsTokenRestrictionTemplate($template, $template2);
-        $this->assertEqualsLicenseResponseTemplate($playReadytemplate, $playReadyTemplate2);
+        $this->assertEqualsLicenseResponseTemplate($playReadyTemplate, $playReadyTemplate2);
 
         return $result->getId();
     }
@@ -2807,7 +2808,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // waiting for reset channel operation finishes
         $operation = $this->restProxy->awaitOperation($operation);
 
-        // validate that the operation is completed succesfully
+        // validate that the operation is completed successfully
         $this->assertEquals($operation->getState(), OperationState::Succeeded);
 
         // wait for 5 seconds before to send the end advertisement signal.
@@ -2819,7 +2820,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // waiting for end advertisement on channel operation finishes
         $operation = $this->restProxy->awaitOperation($operation);
 
-        // validate that the operation is completed succesfully
+        // validate that the operation is completed successfully
         $this->assertEquals($operation->getState(), OperationState::Succeeded);
 
         // stop the channel
@@ -2900,7 +2901,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // waiting for reset channel operation finishes
         $operation = $this->restProxy->awaitOperation($operation);
 
-        // validate that the operation is completed succesfully
+        // validate that the operation is completed successfully
         $this->assertEquals($operation->getState(), OperationState::Succeeded);
 
         // wait for 5 seconds before to send the end advertisement signal.
@@ -2912,7 +2913,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // waiting for end advertisement on channel operation finishes
         $operation = $this->restProxy->awaitOperation($operation);
 
-        // validate that the operation is completed succesfully
+        // validate that the operation is completed successfully
         $this->assertEquals($operation->getState(), OperationState::Succeeded);
 
         // stop the channel

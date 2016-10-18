@@ -25,6 +25,7 @@
 
 namespace Tests\functional\WindowsAzure;
 
+use DateTime;
 use MicrosoftAzure\Storage\Blob\Models\AccessCondition;
 use MicrosoftAzure\Storage\Blob\Models\ContainerAcl;
 use MicrosoftAzure\Storage\Blob\Models\CopyBlobOptions;
@@ -124,7 +125,7 @@ class BlobServiceFunctionalTestData
         return $ret;
     }
 
-    public static function diffInTotalSeconds($date1, $date2)
+    public static function diffInTotalSeconds(DateTime $date1, DateTime $date2)
     {
         $diff = $date1->diff($date2);
         $sec = $diff->s
@@ -137,7 +138,7 @@ class BlobServiceFunctionalTestData
         return abs($sec);
     }
 
-    public static function passTemporalAccessCondition($ac)
+    public static function passTemporalAccessCondition(AccessCondition $ac = null)
     {
         if (is_null($ac)) {
             return true;
@@ -154,7 +155,7 @@ class BlobServiceFunctionalTestData
         }
     }
 
-    public static function passETagAccessCondition($ac)
+    public static function passETagAccessCondition(AccessCondition $ac = null)
     {
         if (is_null($ac)) {
             return true;
@@ -167,7 +168,7 @@ class BlobServiceFunctionalTestData
         }
     }
 
-    public static function fixETagAccessCondition($ac, $etag)
+    public static function fixETagAccessCondition(AccessCondition $ac = null, $etag)
     {
         if (!is_null($ac)) {
             if ($ac->getHeader() == Resources::IF_MATCH || $ac->getHeader() == Resources::IF_NONE_MATCH) {

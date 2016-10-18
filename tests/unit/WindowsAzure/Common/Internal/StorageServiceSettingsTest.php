@@ -545,7 +545,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers \WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers \WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
-    public function testCreateFromConnectionStringWithQueueEndpointSpecfied()
+    public function testCreateFromConnectionStringWithQueueEndpointSpecified2()
     {
         // Setup
         $expectedName = $this->_accountName;
@@ -581,7 +581,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers \WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers \WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
-    public function testCreateFromConnectionStringWithQueueAndBlobEndpointSpecfied()
+    public function testCreateFromConnectionStringWithQueueAndBlobEndpointSpecified2()
     {
         // Setup
         $expectedName = $this->_accountName;

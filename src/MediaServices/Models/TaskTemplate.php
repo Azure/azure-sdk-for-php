@@ -97,7 +97,7 @@ class TaskTemplate
      *
      * @var int
      */
-    private $_numberofInputAssets;
+    private $_numberOfInputAssets;
 
     /**
      * Number of output assets.
@@ -179,7 +179,7 @@ class TaskTemplate
     public function __construct($numberOfInputAssets, $numberOfOutputAssets)
     {
         $this->_id = 'nb:ttid:UUID:'.Utilities::getGuid();
-        $this->_numberofInputAssets = $numberOfInputAssets;
+        $this->_numberOfInputAssets = $numberOfInputAssets;
         $this->_numberOfOutputAssets = $numberOfOutputAssets;
     }
 
@@ -236,7 +236,7 @@ class TaskTemplate
                 $options['NumberofInputAssets'],
                 'options[NumberofInputAssets]'
             );
-            $this->_numberofInputAssets = $options['NumberofInputAssets'];
+            $this->_numberOfInputAssets = $options['NumberofInputAssets'];
         }
 
         if (isset($options['NumberofOutputAssets'])) {
@@ -510,9 +510,9 @@ class TaskTemplate
      *
      * @return int
      */
-    public function getNumberofInputAssets()
+    public function getNumberOfInputAssets()
     {
-        return $this->_numberofInputAssets;
+        return $this->_numberOfInputAssets;
     }
 
     /**
@@ -520,8 +520,8 @@ class TaskTemplate
      *
      * @param int $value Number of input assets
      */
-    public function setNumberofInputAssets($value)
+    public function setNumberOfInputAssets($value)
     {
-        $this->_numberofInputAssets = $value;
+        $this->_numberOfInputAssets = $value;
     }
 }

@@ -74,7 +74,7 @@ class TestResources
     const MEDIA_SERVICES_JOB_ID_PREFIX = 'nb:jid:UUID:';
     const MEDIA_SERVICES_JOB_TEMPLATE_NAME = 'TestJobTemplate';
     const MEDIA_SERVICES_JOB_TEMPLATE_ID_PREFIX = 'nb:jtid:UUID:';
-    const MEDIA_SERVICES_TASK_COFIGURATION = 'H.264 HD 720p VBR';
+    const MEDIA_SERVICES_TASK_CONFIGURATION = 'H.264 HD 720p VBR';
     const MEDIA_SERVICES_PROCESSOR_NAME = 'Windows Azure Media Encoder';
     const MEDIA_SERVICES_DECODE_PROCESSOR_NAME = 'Storage Decryption';
     const MEDIA_SERVICES_PROCESSOR_ID_PREFIX = 'nb:mpid:UUID:';
@@ -108,7 +108,7 @@ class TestResources
         $connectionString = getenv('AZURE_STORAGE_CONNECTION_STRING');
 
         if (empty($connectionString)) {
-            throw new \Exception('AZURE_STORAGE_CONNECTION_STRING envionment variable is missing');
+            throw new \Exception('AZURE_STORAGE_CONNECTION_STRING environment variable is missing');
         }
 
         return $connectionString;
@@ -119,7 +119,7 @@ class TestResources
         $connectionString = getenv('AZURE_MEDIA_STORAGE_CONNECTION_STRING');
 
         if (empty($connectionString)) {
-            throw new \Exception('AZURE_MEDIA_STORAGE_CONNECTION_STRING envionment variable is missing');
+            throw new \Exception('AZURE_MEDIA_STORAGE_CONNECTION_STRING environment variable is missing');
         }
 
         return $connectionString;
@@ -137,7 +137,7 @@ class TestResources
         $connectionString = getenv('AZURE_SERVICE_MANAGEMENT_CONNECTION_STRING');
 
         if (empty($connectionString)) {
-            throw new \Exception('AZURE_SERVICE_MANAGEMENT_CONNECTION_STRING envionment variable is missing');
+            throw new \Exception('AZURE_SERVICE_MANAGEMENT_CONNECTION_STRING environment variable is missing');
         }
 
         return $connectionString;
@@ -148,7 +148,7 @@ class TestResources
         $connectionString = getenv('AZURE_SERVICE_BUS_CONNECTION_STRING');
 
         if (empty($connectionString)) {
-            throw new \Exception('AZURE_SERVICE_BUS_CONNECTION_STRING enviroment variable is missing.');
+            throw new \Exception('AZURE_SERVICE_BUS_CONNECTION_STRING environment variable is missing.');
         }
 
         return $connectionString;
@@ -159,7 +159,7 @@ class TestResources
         $name = getenv('SERVICE_MANAGEMENT_SIMPLE_PACKAGE_URL');
 
         if (empty($name)) {
-            throw new \Exception('SERVICE_MANAGEMENT_SIMPLE_PACKAGE_URL envionment variable is missing');
+            throw new \Exception('SERVICE_MANAGEMENT_SIMPLE_PACKAGE_URL environment variable is missing');
         }
 
         return $name;
@@ -170,7 +170,7 @@ class TestResources
         $name = getenv('SERVICE_MANAGEMENT_SIMPLE_PACKAGE_CONFIGURATION');
 
         if (empty($name)) {
-            throw new \Exception('SERVICE_MANAGEMENT_SIMPLE_PACKAGE_CONFIGURATION envionment variable is missing');
+            throw new \Exception('SERVICE_MANAGEMENT_SIMPLE_PACKAGE_CONFIGURATION environment variable is missing');
         }
 
         return $name;
@@ -181,7 +181,7 @@ class TestResources
         $name = getenv('SERVICE_MANAGEMENT_COMPLEX_PACKAGE_URL');
 
         if (empty($name)) {
-            throw new \Exception('SERVICE_MANAGEMENT_COMPLEX_PACKAGE_URL envionment variable is missing');
+            throw new \Exception('SERVICE_MANAGEMENT_COMPLEX_PACKAGE_URL environment variable is missing');
         }
 
         return $name;
@@ -192,7 +192,7 @@ class TestResources
         $name = getenv('SERVICE_MANAGEMENT_COMPLEX_PACKAGE_CONFIGURATION');
 
         if (empty($name)) {
-            throw new \Exception('SERVICE_MANAGEMENT_COMPLEX_PACKAGE_CONFIGURATION envionment variable is missing');
+            throw new \Exception('SERVICE_MANAGEMENT_COMPLEX_PACKAGE_CONFIGURATION environment variable is missing');
         }
 
         return $name;
@@ -204,7 +204,7 @@ class TestResources
             'accountName' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ACCOUNT_NAME'),
             'accessKey' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ACCESS_KEY'),
             'endpointUri' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ENDPOINT_URI', false),
-            'oauthEndopointUri' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_OAUTH_ENDPOINT_URI', false),
+            'oauthEndpointUri' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_OAUTH_ENDPOINT_URI', false),
         ];
     }
 
@@ -213,7 +213,7 @@ class TestResources
         $value = getenv($name);
 
         if (empty($value) && $required) {
-            throw new \Exception("{$name} enviroment variable is missing.");
+            throw new \Exception("{$name} environment variable is missing.");
         }
 
         return $value;

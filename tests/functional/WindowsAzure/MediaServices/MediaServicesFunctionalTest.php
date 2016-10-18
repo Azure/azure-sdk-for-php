@@ -66,7 +66,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     /**
      * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
      */
-    public function testCreatEmptyAsset()
+    public function testCreateEmptyAsset()
     {
         // Setup
         $assetName = TestResources::MEDIA_SERVICES_ASSET_NAME.$this->createSuffix();
@@ -169,7 +169,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $inputAsset = $this->createAssetWithFile();
 
         $taskBody = TestResources::getMediaServicesTask($this->getOutputAssetName());
-        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+        $configuration = TestResources::MEDIA_SERVICES_TASK_CONFIGURATION;
 
         $name = TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix();
 
@@ -205,7 +205,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
         $inputAsset = $this->createAssetWithFile();
 
-        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+        $configuration = TestResources::MEDIA_SERVICES_TASK_CONFIGURATION;
         $name = TestResources::MEDIA_SERVICES_JOB_TEMPLATE_NAME.$this->createSuffix();
 
         $taskTemplate = new TaskTemplate(1, 1);
@@ -244,9 +244,9 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
         $inputAsset = $this->createAssetWithFile();
 
-        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+        $configuration = TestResources::MEDIA_SERVICES_TASK_CONFIGURATION;
         $name = TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix();
-        $nameTempl = TestResources::MEDIA_SERVICES_JOB_TEMPLATE_NAME.$this->createSuffix();
+        $nameTemplate = TestResources::MEDIA_SERVICES_JOB_TEMPLATE_NAME.$this->createSuffix();
 
         $taskTemplate = new TaskTemplate(1, 1);
         $jobTemplateBody = TestResources::getMediaServicesJobTemplate($taskTemplate->getId(), $this->getOutputAssetName());
@@ -256,7 +256,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $taskTemplate->setConfiguration($configuration);
 
         $jobTemplate = new JobTemplate($jobTemplateBody);
-        $jobTemplate->setName($nameTempl);
+        $jobTemplate->setName($nameTemplate);
         $jobTemplate = $this->createJobTemplate($jobTemplate, [$taskTemplate]);
 
         $jobTemplateWithTasks = new Job();
@@ -266,7 +266,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertEquals($jobTemplateBody, $jobTemplate->getJobTemplateBody());
-        $this->assertEquals($nameTempl, $jobTemplate->getName());
+        $this->assertEquals($nameTemplate, $jobTemplate->getName());
 
         $this->assertEquals($name, $jobTemplateWithTasks->getName());
 
@@ -294,7 +294,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         ];
 
         $taskBody = TestResources::getMediaServicesTask($this->getOutputAssetName());
-        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+        $configuration = TestResources::MEDIA_SERVICES_TASK_CONFIGURATION;
 
         $name = TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix();
 
@@ -334,7 +334,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $inputAsset = $this->createAssetWithFile();
 
         $taskBody = TestResources::getMediaServicesTask($this->getOutputAssetName());
-        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+        $configuration = TestResources::MEDIA_SERVICES_TASK_CONFIGURATION;
 
         $name = TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix();
 

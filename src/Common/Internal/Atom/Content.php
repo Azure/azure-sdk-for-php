@@ -99,7 +99,7 @@ class Content extends AtomBase
         $attributes = $contentXml->attributes();
 
         if (!empty($attributes['type'])) {
-            $this->content = (string) $attributes['type'];
+            $this->type = (string) $attributes['type'];
         }
 
         $text = '';

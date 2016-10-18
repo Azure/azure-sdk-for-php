@@ -72,7 +72,6 @@ class Generator extends AtomBase
     public function parseXml($xmlString)
     {
         $generatorXml = new \SimpleXMLElement($xmlString);
-        $generatorArray = (array) $generatorXml;
         $attributes = $generatorXml->attributes();
         if (!empty($attributes['uri'])) {
             $this->uri = (string) $attributes['uri'];

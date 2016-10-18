@@ -334,7 +334,7 @@ class BrokerProperties
     /**
      * Gets the locked until time. 
      * 
-     * @return string
+     * @return \DateTime
      */
     public function getLockedUntilUtc()
     {
@@ -344,9 +344,9 @@ class BrokerProperties
     /**
      * Sets the locked until time. 
      * 
-     * @param string $lockedUntilUtc The locked until time. 
+     * @param \DateTime $lockedUntilUtc The locked until time.
      */
-    public function setLockedUntilUtc($lockedUntilUtc)
+    public function setLockedUntilUtc(\DateTime $lockedUntilUtc)
     {
         $this->_lockedUntilUtc = $lockedUntilUtc;
     }

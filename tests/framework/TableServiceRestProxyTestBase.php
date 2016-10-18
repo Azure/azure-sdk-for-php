@@ -68,7 +68,7 @@ class TableServiceRestProxyTestBase extends ServiceRestProxyTestBase
         try {
             $this->deleteTable($tableName);
         } catch (\Exception $e) {
-            // Ignore exception and continue, will assume that this table doesn't exist in the sotrage account
+            // Ignore exception and continue, will assume that this table doesn't exist in the storage account
             error_log($e->getMessage());
         }
     }

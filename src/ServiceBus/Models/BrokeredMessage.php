@@ -311,7 +311,7 @@ class BrokeredMessage
     /**
      * Gets the time of locked until UTC.
      * 
-     * @return string
+     * @return \DateTime
      */
     public function getLockedUntilUtc()
     {
@@ -321,9 +321,9 @@ class BrokeredMessage
     /**
      * Sets the time of locked until UTC. 
      * 
-     * @param string $lockedUntilUtc The time of locked until UTC.
+     * @param \DateTime $lockedUntilUtc The time of locked until UTC.
      */
-    public function setLockedUntilUtc($lockedUntilUtc)
+    public function setLockedUntilUtc(\DateTime $lockedUntilUtc)
     {
         $this->_brokerProperties->setLockedUntilUtc($lockedUntilUtc);
     }
