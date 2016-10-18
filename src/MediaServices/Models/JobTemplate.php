@@ -96,7 +96,7 @@ class JobTemplate
      *
      * @var int
      */
-    private $_numberofInputAssets;
+    private $_numberOfInputAssets;
 
     /**
      * Template type.
@@ -182,7 +182,7 @@ class JobTemplate
                 $options['NumberofInputAssets'],
                 'options[NumberofInputAssets]'
             );
-            $this->_numberofInputAssets = $options['NumberofInputAssets'];
+            $this->_numberOfInputAssets = $options['NumberofInputAssets'];
         }
 
         if (isset($options['TemplateType'])) {
@@ -266,9 +266,9 @@ class JobTemplate
      *
      * @return int
      */
-    public function getNumberofInputAssets()
+    public function getNumberOfInputAssets()
     {
-        return $this->_numberofInputAssets;
+        return $this->_numberOfInputAssets;
     }
 
     /**
@@ -276,9 +276,9 @@ class JobTemplate
      *
      * @param int $value Number of input assets
      */
-    public function setNumberofInputAssets($value)
+    public function setNumberOfInputAssets($value)
     {
-        $this->_numberofInputAssets = $value;
+        $this->_numberOfInputAssets = $value;
     }
 
     /**

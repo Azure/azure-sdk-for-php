@@ -79,7 +79,7 @@ class AtomLink extends AtomBase
     protected $hreflang;
 
     /**
-     * The titile of the link. 
+     * The title of the link.
      * 
      * @var string
      */
@@ -91,13 +91,6 @@ class AtomLink extends AtomBase
      * @var int
      */
     protected $length;
-
-    /** 
-     * Creates a AtomLink instance with specified text.
-     */
-    public function __construct()
-    {
-    }
 
     /**
      * Parse an ATOM Link xml. 

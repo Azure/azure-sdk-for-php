@@ -230,26 +230,6 @@ class Feed extends AtomBase
     }
 
     /**
-     * Gets the attributes of the feed. 
-     *
-     * @return array
-     */
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
-
-    /**
-     * Sets the attributes of the feed. 
-     *
-     * @param array $attributes The attributes of the array.
-     */
-    public function setAttributes(array $attributes)
-    {
-        $this->attributes = $attributes;
-    }
-
-    /**
      * Adds an attribute to the feed object instance. 
      * 
      * @param string $attributeKey   The key of the attribute. 

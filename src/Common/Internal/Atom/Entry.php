@@ -74,7 +74,7 @@ class Entry extends AtomBase
     protected $contributor;
 
     /**
-     * An unqiue ID representing the entry.
+     * An unique ID representing the entry.
      *
      * @var string
      */
@@ -135,14 +135,6 @@ class Entry extends AtomBase
      * @var string
      */
     protected $extensionElement;
-
-    /**
-     * Creates an ATOM Entry instance with default parameters.
-     */
-    public function __construct()
-    {
-        $this->attributes = [];
-    }
 
     /**
      * Populate the properties of an ATOM Entry instance with specified XML..

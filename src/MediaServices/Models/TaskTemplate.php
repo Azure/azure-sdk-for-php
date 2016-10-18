@@ -104,7 +104,7 @@ class TaskTemplate
      *
      * @var int
      */
-    private $_numberofOutputAssets;
+    private $_numberOfOutputAssets;
 
     /**
      * Options.
@@ -114,7 +114,7 @@ class TaskTemplate
     private $_options;
 
     /**
-     * Encription key id.
+     * Encryption key id.
      *
      * @var string
      */
@@ -180,7 +180,7 @@ class TaskTemplate
     {
         $this->_id = 'nb:ttid:UUID:'.Utilities::getGuid();
         $this->_numberofInputAssets = $numberOfInputAssets;
-        $this->_numberofOutputAssets = $numberOfOutputAssets;
+        $this->_numberOfOutputAssets = $numberOfOutputAssets;
     }
 
     /**
@@ -244,7 +244,7 @@ class TaskTemplate
                 $options['NumberofOutputAssets'],
                 'options[NumberofOutputAssets]'
             );
-            $this->_numberofOutputAssets = $options['NumberofOutputAssets'];
+            $this->_numberOfOutputAssets = $options['NumberofOutputAssets'];
         }
 
         if (isset($options['Options'])) {
@@ -376,7 +376,7 @@ class TaskTemplate
     }
 
     /**
-     * Get "Encription key id".
+     * Get "Encryption key id".
      *
      * @return string
      */
@@ -386,7 +386,7 @@ class TaskTemplate
     }
 
     /**
-     * Set "Encription key id".
+     * Set "Encryption key id".
      *
      * @param string $value Encription key id
      */
@@ -490,9 +490,9 @@ class TaskTemplate
      *
      * @return int
      */
-    public function getNumberofOutputAssets()
+    public function getNumberOfOutputAssets()
     {
-        return $this->_numberofOutputAssets;
+        return $this->_numberOfOutputAssets;
     }
 
     /**
@@ -500,9 +500,9 @@ class TaskTemplate
      *
      * @param int $value Number of output assets
      */
-    public function setNumberofOutputAssets($value)
+    public function setNumberOfOutputAssets($value)
     {
-        $this->_numberofOutputAssets = $value;
+        $this->_numberOfOutputAssets = $value;
     }
 
     /**

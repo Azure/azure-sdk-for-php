@@ -71,7 +71,7 @@ class AsynchronousOperationResult
      * 
      * @return string
      */
-    public function getrequestId()
+    public function getRequestId()
     {
         return $this->_requestId;
     }
@@ -81,7 +81,7 @@ class AsynchronousOperationResult
      * 
      * @param string $requestId The request Id of the asynchronous operation.
      */
-    public function setrequestId($requestId)
+    public function setRequestId($requestId)
     {
         $this->_requestId = $requestId;
     }

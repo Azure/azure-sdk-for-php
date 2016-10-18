@@ -245,18 +245,14 @@ class Service
      */
     public function serialize(ISerializer $serializer)
     {
-        $serialized = Resources::EMPTY_STRING;
-
         if ($serializer instanceof XmlSerializer) {
             $arr = $this->toArray();
-            $serialized = $serializer->serialize(
+            return $serializer->serialize(
                 $arr,
                 $this->_serializationProperties
             );
         } else {
             throw new \InvalidArgumentException(Resources::UNKNOWN_SRILZER_MSG);
         }
-
-        return $serialized;
     }
 }

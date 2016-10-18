@@ -43,7 +43,7 @@ use WindowsAzure\Common\Internal\Validate;
 class IngestManifestAsset
 {
     /**
-     * MainfestAsset id.
+     * ManifestAsset id.
      *
      * @var string
      */

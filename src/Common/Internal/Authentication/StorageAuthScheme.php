@@ -110,7 +110,7 @@ abstract class StorageAuthScheme implements IAuthScheme
     }
 
     /**
-     * Computes canonicalized resources from URL using Table formar.
+     * Computes canonicalized resources from URL using Table format.
      *
      * @param string $url         request url.
      * @param array  $queryParams request query variables.
@@ -195,7 +195,7 @@ abstract class StorageAuthScheme implements IAuthScheme
      * Computes the authorization signature.
      *
      * @param array  $headers     request headers.
-     * @param string $url         reuqest url.
+     * @param string $url         request URL.
      * @param array  $queryParams query variables.
      * @param string $httpMethod  request http method.
      *

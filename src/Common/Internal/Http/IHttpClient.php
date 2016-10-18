@@ -104,7 +104,7 @@ interface IHttpClient
     public function setPostParameters(array $postParameters);
 
     /**
-     * Processes the reuqest through HTTP pipeline with passed $filters,
+     * Processes the request through HTTP pipeline with passed $filters,
      * sends HTTP request to the wire and process the response in the HTTP pipeline.
      *
      * @param array $filters HTTP filters which will be applied to the request before
@@ -116,7 +116,7 @@ interface IHttpClient
     public function sendAndGetResponse(array $filters, IUrl $url = null);
 
     /**
-     * Processes the reuqest through HTTP pipeline with passed $filters,
+     * Processes the request through HTTP pipeline with passed $filters,
      * sends HTTP request to the wire and process the response in the HTTP pipeline.
      *
      * @param array $filters HTTP filters which will be applied to the request before
@@ -180,7 +180,7 @@ interface IHttpClient
     public function __clone();
 
     /**
-     * Throws ServiceException if the recieved status code is not expected.
+     * Throws ServiceException if the received status code is not expected.
      *
      * @param string $actual   The received status code.
      * @param string $reason   The reason phrase.

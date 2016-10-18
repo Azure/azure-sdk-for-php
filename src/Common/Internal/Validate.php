@@ -26,7 +26,7 @@
 namespace WindowsAzure\Common\Internal;
 
 /**
- * Validates aganist a condition and throws an exception in case of failure.
+ * Validates against a condition and throws an exception in case of failure.
  *
  * @category  Microsoft
  *
@@ -377,7 +377,7 @@ class Validate
      * Validate if string is date formatted.
      *
      * @param string $value Value to validate
-     * @param string $name  Name of parameter to insert in erro message
+     * @param string $name  Name of parameter to insert in error message
      *
      * @throws \InvalidArgumentException
      *

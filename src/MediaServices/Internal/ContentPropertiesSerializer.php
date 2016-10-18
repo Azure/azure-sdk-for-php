@@ -123,7 +123,7 @@ class ContentPropertiesSerializer
     }
 
     /**
-     * Returns true if the specified filed y requierd for the specified entity.
+     * Returns true if the specified filed y required for the specified entity.
      *
      * @param mixed  $object    the entity
      * @param string $fieldName the property name to verify if it's required or not.

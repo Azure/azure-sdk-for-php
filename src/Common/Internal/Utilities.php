@@ -346,7 +346,7 @@ class Utilities
     /**
      * Converts a given date string into \DateTime object.
      *
-     * @param string $date windows azure date ins string represntation.
+     * @param string $date windows azure date ins string representation.
      *
      * @static
      *

@@ -101,7 +101,7 @@ class WrapTokenManager
     }
 
     /** 
-     * Gets WRAP access token with sepcified target Uri. 
+     * Gets WRAP access token with specified target Uri.
      * 
      * @param string $targetUri The target Uri of the WRAP access Token. 
      * 

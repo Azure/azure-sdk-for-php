@@ -49,16 +49,7 @@ class AtomBase
      *
      * @var array
      */
-    protected $attributes;
-
-    /**
-     * Creates an ATOM base object with default parameters.
-     */
-    public function __construct()
-    {
-        $this->attributes = [];
-        new AtomLink();
-    }
+    protected $attributes = [];
 
     /**
      * Gets the attributes of the ATOM class.

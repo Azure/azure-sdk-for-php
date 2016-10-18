@@ -217,8 +217,8 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
         $numberofInputAssets = 5;
 
         // Test
-        $jobTempl->setNumberofInputAssets($numberofInputAssets);
-        $result = $jobTempl->getNumberofInputAssets();
+        $jobTempl->setNumberOfInputAssets($numberofInputAssets);
+        $result = $jobTempl->getNumberOfInputAssets();
 
         // Assert
         $this->assertEquals($numberofInputAssets, $result);

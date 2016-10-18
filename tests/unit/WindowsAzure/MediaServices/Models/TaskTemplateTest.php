@@ -56,7 +56,7 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals($numberofInputAssets, $taskTempl->getNumberofInputAssets());
-        $this->assertEquals($numberofOutputAssets, $taskTempl->getNumberofOutputAssets());
+        $this->assertEquals($numberofOutputAssets, $taskTempl->getNumberOfOutputAssets());
         $this->assertContains('nb:ttid:UUID:', $taskTempl->getId());
     }
 
@@ -98,7 +98,7 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($options['Name'], $task->getName());
         $this->assertEquals($options['Description'], $task->getDescription());
         $this->assertEquals($options['NumberofInputAssets'], $task->getNumberofInputAssets());
-        $this->assertEquals($options['NumberofOutputAssets'], $task->getNumberofOutputAssets());
+        $this->assertEquals($options['NumberofOutputAssets'], $task->getNumberOfOutputAssets());
         $this->assertEquals($modified->getTimestamp(), $task->getLastModified()->getTimestamp());
         $this->assertEquals($options['Options'], $task->getOptions());
         $this->assertEquals($options['EncryptionKeyId'], $task->getEncryptionKeyId());
@@ -397,8 +397,8 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
         $numberofOutputAssets = 6;
 
         // Test
-        $task->setNumberofOutputAssets($numberofOutputAssets);
-        $result = $task->getNumberofOutputAssets();
+        $task->setNumberOfOutputAssets($numberofOutputAssets);
+        $result = $task->getNumberOfOutputAssets();
 
         // Assert
         $this->assertEquals($numberofOutputAssets, $result);

@@ -40,20 +40,4 @@ namespace WindowsAzure\MediaServices\Templates;
  */
 class X509CertTokenVerificationKey extends AsymmetricTokenVerificationKey
 {
-    /**
-     * Create X509CertTokenVerificationKey.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
-     * Set "X509CertTokenVerificationKey RawBody".
-     *
-     * @param string $value RawBody
-     */
-    public function setRawBody($value)
-    {
-        $this->_rawBody = $value;
-    }
 }
