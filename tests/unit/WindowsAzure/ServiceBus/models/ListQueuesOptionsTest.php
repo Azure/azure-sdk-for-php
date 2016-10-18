@@ -44,7 +44,7 @@ use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 class ListQueuesOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\ListQueuesOptions::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\ListQueuesOptions::__construct
      */
     public function testListQueuesOptionsConstructor()
     {

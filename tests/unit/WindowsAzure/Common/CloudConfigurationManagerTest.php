@@ -58,8 +58,8 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\CloudConfigurationManager::getConnectionString
-     * @covers WindowsAzure\Common\CloudConfigurationManager::_init
+     * @covers \WindowsAzure\Common\CloudConfigurationManager::getConnectionString
+     * @covers \WindowsAzure\Common\CloudConfigurationManager::_init
      */
     public function testGetConnectionStringFromEnvironmentVariable()
     {
@@ -77,7 +77,7 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\CloudConfigurationManager::getConnectionString
+     * @covers \WindowsAzure\Common\CloudConfigurationManager::getConnectionString
      */
     public function testGetConnectionStringDoesNotExist()
     {
@@ -89,8 +89,8 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\CloudConfigurationManager::registerSource
-     * @covers WindowsAzure\Common\CloudConfigurationManager::_init
+     * @covers \WindowsAzure\Common\CloudConfigurationManager::registerSource
+     * @covers \WindowsAzure\Common\CloudConfigurationManager::_init
      */
     public function testRegisterSource()
     {
@@ -114,8 +114,8 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\CloudConfigurationManager::registerSource
-     * @covers WindowsAzure\Common\CloudConfigurationManager::_init
+     * @covers \WindowsAzure\Common\CloudConfigurationManager::registerSource
+     * @covers \WindowsAzure\Common\CloudConfigurationManager::_init
      */
     public function testRegisterSourceWithPrepend()
     {
@@ -144,8 +144,8 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\CloudConfigurationManager::unregisterSource
-     * @covers WindowsAzure\Common\CloudConfigurationManager::_init
+     * @covers \WindowsAzure\Common\CloudConfigurationManager::unregisterSource
+     * @covers \WindowsAzure\Common\CloudConfigurationManager::_init
      */
     public function testUnRegisterSource()
     {
@@ -172,8 +172,8 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\CloudConfigurationManager::registerSource
-     * @covers WindowsAzure\Common\CloudConfigurationManager::_init
+     * @covers \WindowsAzure\Common\CloudConfigurationManager::registerSource
+     * @covers \WindowsAzure\Common\CloudConfigurationManager::_init
      */
     public function testRegisterSourceWithDefaultSource()
     {
@@ -195,8 +195,8 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\CloudConfigurationManager::unregisterSource
-     * @covers WindowsAzure\Common\CloudConfigurationManager::_init
+     * @covers \WindowsAzure\Common\CloudConfigurationManager::unregisterSource
+     * @covers \WindowsAzure\Common\CloudConfigurationManager::_init
      */
     public function testUnRegisterSourceWithDefaultSource()
     {

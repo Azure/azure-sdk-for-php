@@ -46,7 +46,7 @@ use WindowsAzure\Common\Models\RetentionPolicy;
 class MetricsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Models\Metrics::create
+     * @covers \WindowsAzure\Common\Models\Metrics::create
      */
     public function testCreate()
     {
@@ -64,7 +64,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Metrics::getRetentionPolicy
+     * @covers \WindowsAzure\Common\Models\Metrics::getRetentionPolicy
      */
     public function testGetRetentionPolicy()
     {
@@ -82,7 +82,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Metrics::setRetentionPolicy
+     * @covers \WindowsAzure\Common\Models\Metrics::setRetentionPolicy
      */
     public function testSetRetentionPolicy()
     {
@@ -100,7 +100,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Metrics::getVersion
+     * @covers \WindowsAzure\Common\Models\Metrics::getVersion
      */
     public function testGetVersion()
     {
@@ -118,7 +118,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Metrics::setVersion
+     * @covers \WindowsAzure\Common\Models\Metrics::setVersion
      */
     public function testSetVersion()
     {
@@ -136,7 +136,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Metrics::getEnabled
+     * @covers \WindowsAzure\Common\Models\Metrics::getEnabled
      */
     public function testGetEnabled()
     {
@@ -154,7 +154,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Metrics::setEnabled
+     * @covers \WindowsAzure\Common\Models\Metrics::setEnabled
      */
     public function testSetEnabled()
     {
@@ -172,7 +172,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Metrics::getIncludeAPIs
+     * @covers \WindowsAzure\Common\Models\Metrics::getIncludeAPIs
      */
     public function testGetIncludeAPIs()
     {
@@ -190,7 +190,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Metrics::setIncludeAPIs
+     * @covers \WindowsAzure\Common\Models\Metrics::setIncludeAPIs
      */
     public function testSetIncludeAPIs()
     {
@@ -208,7 +208,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Metrics::toArray
+     * @covers \WindowsAzure\Common\Models\Metrics::toArray
      */
     public function testToArray()
     {
@@ -230,7 +230,7 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Metrics::toArray
+     * @covers \WindowsAzure\Common\Models\Metrics::toArray
      */
     public function testToArrayWithNotEnabled()
     {

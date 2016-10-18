@@ -45,8 +45,8 @@ use Tests\framework\VirtualFileSystem;
 class LoggerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Logger::log
-     * @covers WindowsAzure\Common\Internal\Logger::setLogFile
+     * @covers \WindowsAzure\Common\Internal\Logger::log
+     * @covers \WindowsAzure\Common\Internal\Logger::setLogFile
      */
     public function testLogWithArray()
     {
@@ -65,8 +65,8 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Logger::log
-     * @covers WindowsAzure\Common\Internal\Logger::setLogFile
+     * @covers \WindowsAzure\Common\Internal\Logger::log
+     * @covers \WindowsAzure\Common\Internal\Logger::setLogFile
      */
     public function testLogWithString()
     {

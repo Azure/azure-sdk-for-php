@@ -43,7 +43,7 @@ use WindowsAzure\ServiceBus\Internal\Filter;
 class FilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Internal\Filter::__construct
+     * @covers \WindowsAzure\ServiceBus\Internal\Filter::__construct
      */
     public function testFilterConstructor()
     {

@@ -48,7 +48,7 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::generateMetadataHeaders
+     * @covers \WindowsAzure\Common\Internal\ServiceRestProxy::generateMetadataHeaders
      */
     public function test__construct()
     {
@@ -196,7 +196,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::addPostParameter
+     * @covers \WindowsAzure\Common\Internal\ServiceRestProxy::addPostParameter
      * @depends test__construct
      */
     public function testPostParameter($restRestProxy)
@@ -218,7 +218,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::generateMetadataHeaders
+     * @covers \WindowsAzure\Common\Internal\ServiceRestProxy::generateMetadataHeaders
      * @depends test__construct
      */
     public function testGenerateMetadataHeader($proxy)
@@ -238,7 +238,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::generateMetadataHeaders
+     * @covers \WindowsAzure\Common\Internal\ServiceRestProxy::generateMetadataHeaders
      * @depends test__construct
      */
     public function testGenerateMetadataHeaderInvalidNameFail($proxy)
@@ -252,7 +252,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::getMetadataArray
+     * @covers \WindowsAzure\Common\Internal\ServiceRestProxy::getMetadataArray
      * @depends test__construct
      */
     public function testGetMetadataArray($proxy)
@@ -272,7 +272,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\ServiceRestProxy::getMetadataArray
+     * @covers \WindowsAzure\Common\Internal\ServiceRestProxy::getMetadataArray
      * @depends test__construct
      */
     public function testGetMetadataArrayWithMsHeaders($proxy)

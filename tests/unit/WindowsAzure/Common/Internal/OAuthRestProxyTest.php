@@ -48,8 +48,8 @@ use Tests\Framework\TestResources;
 class OAuthRestProxyTest extends ServiceRestProxyTestBase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\OAuthRestProxy::getAccessToken
-     * @covers WindowsAzure\Common\Internal\OAuthRestProxy::__construct
+     * @covers \WindowsAzure\Common\Internal\OAuthRestProxy::getAccessToken
+     * @covers \WindowsAzure\Common\Internal\OAuthRestProxy::__construct
      */
     public function testGetAccessToken()
     {

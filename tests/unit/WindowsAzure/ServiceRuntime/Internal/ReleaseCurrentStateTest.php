@@ -43,7 +43,7 @@ use WindowsAzure\ServiceRuntime\Internal\ReleaseCurrentState;
 class ReleaseCurrentStateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\ReleaseCurrentState::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\ReleaseCurrentState::__construct
      */
     public function testConstruct()
     {

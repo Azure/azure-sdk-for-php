@@ -44,7 +44,7 @@ use WindowsAzure\ServiceRuntime\Internal\XmlGoalStateDeserializer;
 class XmlGoalStateDeserializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\XmlGoalStateDeserializer::deserialize
+     * @covers \WindowsAzure\ServiceRuntime\Internal\XmlGoalStateDeserializer::deserialize
      */
     public function testDeserialize()
     {

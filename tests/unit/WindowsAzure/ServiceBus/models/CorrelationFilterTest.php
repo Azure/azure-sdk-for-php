@@ -43,7 +43,7 @@ use WindowsAzure\ServiceBus\Models\CorrelationFilter;
 class CorrelationFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\CorrelationFilter::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\CorrelationFilter::__construct
      */
     public function testCorrelationFilterConstructor()
     {
@@ -57,8 +57,8 @@ class CorrelationFilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\CorrelationFilter::getCorrelationId
-     * @covers WindowsAzure\ServiceBus\Models\CorrelationFilter::setCorrelationId
+     * @covers \WindowsAzure\ServiceBus\Models\CorrelationFilter::getCorrelationId
+     * @covers \WindowsAzure\ServiceBus\Models\CorrelationFilter::setCorrelationId
      */
     public function testGetSetCorrelationId()
     {

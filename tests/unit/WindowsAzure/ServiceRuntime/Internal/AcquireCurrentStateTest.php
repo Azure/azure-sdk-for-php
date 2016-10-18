@@ -44,10 +44,10 @@ use WindowsAzure\ServiceRuntime\Internal\CurrentStatus;
 class AcquireCurrentStateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::__construct
-     * @covers WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::getIncarnation
-     * @covers WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::getStatus
-     * @covers WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::getExpiration
+     * @covers \WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::getIncarnation
+     * @covers \WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::getStatus
+     * @covers \WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::getExpiration
      */
     public function testConstruct()
     {

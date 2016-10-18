@@ -43,8 +43,8 @@ use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 class CreateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\CreateServiceOptions::setDescription
-     * @covers WindowsAzure\ServiceManagement\Models\CreateServiceOptions::getDescription
+     * @covers \WindowsAzure\ServiceManagement\Models\CreateServiceOptions::setDescription
+     * @covers \WindowsAzure\ServiceManagement\Models\CreateServiceOptions::getDescription
      */
     public function testSetDescription()
     {
@@ -60,8 +60,8 @@ class CreateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\CreateServiceOptions::setLocation
-     * @covers WindowsAzure\ServiceManagement\Models\CreateServiceOptions::getLocation
+     * @covers \WindowsAzure\ServiceManagement\Models\CreateServiceOptions::setLocation
+     * @covers \WindowsAzure\ServiceManagement\Models\CreateServiceOptions::getLocation
      */
     public function testSetLocation()
     {
@@ -77,8 +77,8 @@ class CreateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\CreateServiceOptions::setAffinityGroup
-     * @covers WindowsAzure\ServiceManagement\Models\CreateServiceOptions::getAffinityGroup
+     * @covers \WindowsAzure\ServiceManagement\Models\CreateServiceOptions::setAffinityGroup
+     * @covers \WindowsAzure\ServiceManagement\Models\CreateServiceOptions::getAffinityGroup
      */
     public function testSetAffinityGroup()
     {

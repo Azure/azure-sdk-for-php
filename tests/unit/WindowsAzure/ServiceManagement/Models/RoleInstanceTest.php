@@ -43,8 +43,8 @@ use WindowsAzure\ServiceManagement\Models\RoleInstance;
 class RoleInstanceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::setRoleName
-     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::getRoleName
+     * @covers \WindowsAzure\ServiceManagement\Models\RoleInstance::setRoleName
+     * @covers \WindowsAzure\ServiceManagement\Models\RoleInstance::getRoleName
      */
     public function testSetRoleName()
     {
@@ -60,8 +60,8 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::setInstanceName
-     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::getInstanceName
+     * @covers \WindowsAzure\ServiceManagement\Models\RoleInstance::setInstanceName
+     * @covers \WindowsAzure\ServiceManagement\Models\RoleInstance::getInstanceName
      */
     public function testSetInstanceName()
     {
@@ -77,8 +77,8 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::setInstanceStatus
-     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::getInstanceStatus
+     * @covers \WindowsAzure\ServiceManagement\Models\RoleInstance::setInstanceStatus
+     * @covers \WindowsAzure\ServiceManagement\Models\RoleInstance::getInstanceStatus
      */
     public function testSetInstanceStatus()
     {
@@ -94,8 +94,8 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::setInstanceUpgradeDomain
-     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::getInstanceUpgradeDomain
+     * @covers \WindowsAzure\ServiceManagement\Models\RoleInstance::setInstanceUpgradeDomain
+     * @covers \WindowsAzure\ServiceManagement\Models\RoleInstance::getInstanceUpgradeDomain
      */
     public function testSetInstanceUpgradeDomain()
     {
@@ -111,8 +111,8 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::setInstanceFaultDomain
-     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::getInstanceFaultDomain
+     * @covers \WindowsAzure\ServiceManagement\Models\RoleInstance::setInstanceFaultDomain
+     * @covers \WindowsAzure\ServiceManagement\Models\RoleInstance::getInstanceFaultDomain
      */
     public function testSetInstanceFaultDomain()
     {
@@ -128,8 +128,8 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::setInstanceSize
-     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::getInstanceSize
+     * @covers \WindowsAzure\ServiceManagement\Models\RoleInstance::setInstanceSize
+     * @covers \WindowsAzure\ServiceManagement\Models\RoleInstance::getInstanceSize
      */
     public function testSetInstanceSize()
     {
@@ -145,8 +145,8 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::setInstanceStateDetails
-     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::getInstanceStateDetails
+     * @covers \WindowsAzure\ServiceManagement\Models\RoleInstance::setInstanceStateDetails
+     * @covers \WindowsAzure\ServiceManagement\Models\RoleInstance::getInstanceStateDetails
      */
     public function testSetInstanceStateDetails()
     {
@@ -162,8 +162,8 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::setInstanceErrorCode
-     * @covers WindowsAzure\ServiceManagement\Models\RoleInstance::getInstanceErrorCode
+     * @covers \WindowsAzure\ServiceManagement\Models\RoleInstance::setInstanceErrorCode
+     * @covers \WindowsAzure\ServiceManagement\Models\RoleInstance::getInstanceErrorCode
      */
     public function testSetInstanceErrorCode()
     {

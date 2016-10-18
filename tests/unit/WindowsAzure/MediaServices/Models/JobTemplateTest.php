@@ -42,7 +42,7 @@ use WindowsAzure\MediaServices\Models\JobTemplate;
 class JobTemplateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::__construct
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::__construct
      */
     public function test__construct()
     {
@@ -59,8 +59,8 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::fromArray
      */
     public function testCreateFromOptions()
     {
@@ -94,8 +94,8 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::getName
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::setName
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::getName
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::setName
      */
     public function testGetSetName()
     {
@@ -114,7 +114,7 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::getLastModified
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::getLastModified
      */
     public function testGetLastModified()
     {
@@ -138,7 +138,7 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::getCreated
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::getCreated
      */
     public function testGetCreated()
     {
@@ -162,7 +162,7 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::getId
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::getId
      */
     public function testGetId()
     {
@@ -185,8 +185,8 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::getTemplateType
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::setTemplateType
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::getTemplateType
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::setTemplateType
      */
     public function testGetSetTemplateType()
     {
@@ -205,8 +205,8 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::getNumberofInputAssets
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::setNumberofInputAssets
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::getNumberofInputAssets
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::setNumberofInputAssets
      */
     public function testGetSetNumberofInputAssets()
     {
@@ -225,8 +225,8 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::getJobTemplateBody
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::setJobTemplateBody
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::getJobTemplateBody
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::setJobTemplateBody
      */
     public function testGetSetJobTemplateBody()
     {

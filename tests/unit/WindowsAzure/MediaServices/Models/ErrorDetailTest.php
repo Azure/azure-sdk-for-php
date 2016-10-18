@@ -42,8 +42,8 @@ use WindowsAzure\MediaServices\Models\ErrorDetail;
 class ErrorDetailTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\ErrorDetail::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\ErrorDetail::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\ErrorDetail::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\ErrorDetail::fromArray
      */
     public function testCreateFromOptions()
     {
@@ -63,7 +63,7 @@ class ErrorDetailTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ErrorDetail::getCode
+     * @covers \WindowsAzure\MediaServices\Models\ErrorDetail::getCode
      */
     public function testGetCode()
     {
@@ -83,7 +83,7 @@ class ErrorDetailTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ErrorDetail::getMessage
+     * @covers \WindowsAzure\MediaServices\Models\ErrorDetail::getMessage
      */
     public function testGetMessage()
     {

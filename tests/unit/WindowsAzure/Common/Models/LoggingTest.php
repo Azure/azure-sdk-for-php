@@ -46,7 +46,7 @@ use WindowsAzure\Common\Internal\Utilities;
 class LoggingTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Models\Logging::create
+     * @covers \WindowsAzure\Common\Models\Logging::create
      */
     public function testCreate()
     {
@@ -65,7 +65,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Logging::getRetentionPolicy
+     * @covers \WindowsAzure\Common\Models\Logging::getRetentionPolicy
      */
     public function testGetRetentionPolicy()
     {
@@ -83,7 +83,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Logging::setRetentionPolicy
+     * @covers \WindowsAzure\Common\Models\Logging::setRetentionPolicy
      */
     public function testSetRetentionPolicy()
     {
@@ -101,7 +101,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Logging::getWrite
+     * @covers \WindowsAzure\Common\Models\Logging::getWrite
      */
     public function testGetWrite()
     {
@@ -119,7 +119,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Logging::setWrite
+     * @covers \WindowsAzure\Common\Models\Logging::setWrite
      */
     public function testSetWrite()
     {
@@ -137,7 +137,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Logging::getRead
+     * @covers \WindowsAzure\Common\Models\Logging::getRead
      */
     public function testGetRead()
     {
@@ -155,7 +155,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Logging::setRead
+     * @covers \WindowsAzure\Common\Models\Logging::setRead
      */
     public function testSetRead()
     {
@@ -173,7 +173,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Logging::getDelete
+     * @covers \WindowsAzure\Common\Models\Logging::getDelete
      */
     public function testGetDelete()
     {
@@ -191,7 +191,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Logging::setDelete
+     * @covers \WindowsAzure\Common\Models\Logging::setDelete
      */
     public function testSetDelete()
     {
@@ -209,7 +209,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Logging::getVersion
+     * @covers \WindowsAzure\Common\Models\Logging::getVersion
      */
     public function testGetVersion()
     {
@@ -227,7 +227,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Logging::setVersion
+     * @covers \WindowsAzure\Common\Models\Logging::setVersion
      */
     public function testSetVersion()
     {
@@ -245,7 +245,7 @@ class LoggingTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\Logging::toArray
+     * @covers \WindowsAzure\Common\Models\Logging::toArray
      */
     public function testToArray()
     {

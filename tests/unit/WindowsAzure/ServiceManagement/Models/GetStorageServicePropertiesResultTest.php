@@ -44,8 +44,8 @@ use WindowsAzure\ServiceManagement\Models\StorageService;
 class GetStorageServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::setStorageService
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::getStorageService
+     * @covers \WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::setStorageService
+     * @covers \WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::getStorageService
      */
     public function testSetStorageService()
     {

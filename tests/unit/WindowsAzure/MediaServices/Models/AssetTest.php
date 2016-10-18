@@ -42,7 +42,7 @@ use WindowsAzure\MediaServices\Models\Asset;
 class AssetTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\Asset::__construct
+     * @covers \WindowsAzure\MediaServices\Models\Asset::__construct
      */
     public function test__construct()
     {
@@ -58,7 +58,7 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Asset::getUri
+     * @covers \WindowsAzure\MediaServices\Models\Asset::getUri
      */
     public function testGetUri()
     {
@@ -78,8 +78,8 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Asset::getOptions
-     * @covers WindowsAzure\MediaServices\Models\Asset::setOptions
+     * @covers \WindowsAzure\MediaServices\Models\Asset::getOptions
+     * @covers \WindowsAzure\MediaServices\Models\Asset::setOptions
      */
     public function testGetOptions()
     {
@@ -97,8 +97,8 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Asset::getName
-     * @covers WindowsAzure\MediaServices\Models\Asset::setName
+     * @covers \WindowsAzure\MediaServices\Models\Asset::getName
+     * @covers \WindowsAzure\MediaServices\Models\Asset::setName
      */
     public function testGetName()
     {
@@ -116,8 +116,8 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Asset::getAlternateId
-     * @covers WindowsAzure\MediaServices\Models\Asset::setAlternateId
+     * @covers \WindowsAzure\MediaServices\Models\Asset::getAlternateId
+     * @covers \WindowsAzure\MediaServices\Models\Asset::setAlternateId
      */
     public function testGetAlternateId()
     {
@@ -135,7 +135,7 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Asset::getLastModified
+     * @covers \WindowsAzure\MediaServices\Models\Asset::getLastModified
      */
     public function testGetLastModified()
     {
@@ -156,7 +156,7 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Asset::getCreated
+     * @covers \WindowsAzure\MediaServices\Models\Asset::getCreated
      */
     public function testGetCreated()
     {
@@ -177,7 +177,7 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Asset::getState
+     * @covers \WindowsAzure\MediaServices\Models\Asset::getState
      */
     public function testGetState()
     {
@@ -197,7 +197,7 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Asset::getStorageAccountName
+     * @covers \WindowsAzure\MediaServices\Models\Asset::getStorageAccountName
      */
     public function testGetStorageAccountName()
     {
@@ -217,7 +217,7 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Asset::getId
+     * @covers \WindowsAzure\MediaServices\Models\Asset::getId
      */
     public function testGetId()
     {
@@ -237,8 +237,8 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Asset::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\Asset::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\Asset::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\Asset::fromArray
      */
     public function testAssetFromOptions()
     {

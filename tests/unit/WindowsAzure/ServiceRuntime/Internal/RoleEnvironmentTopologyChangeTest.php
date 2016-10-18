@@ -43,8 +43,8 @@ use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange;
 class RoleEnvironmentTopologyChangeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange::__construct
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange::getRoleName
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange::getRoleName
      */
     public function testGetRoleName()
     {

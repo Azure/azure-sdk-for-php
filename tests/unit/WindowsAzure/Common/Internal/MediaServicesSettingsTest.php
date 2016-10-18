@@ -44,9 +44,9 @@ use WindowsAzure\Common\Internal\Resources;
 class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::init
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::__construct
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::init
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
      */
     public function testCreateFromConnectionStringWithAutomaticCase()
     {
@@ -68,9 +68,9 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::init
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::__construct
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::init
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
      */
     public function testCreateFromConnectionStringWithExplicitCase()
     {
@@ -94,9 +94,9 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::init
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::__construct
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::init
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
      */
     public function testCreateFromConnectionStringWithMissingKeyFail()
     {
@@ -110,9 +110,9 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::init
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::__construct
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::init
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
      */
     public function testCreateFromConnectionStringWithInvalidServiceManagementKeyFail()
     {
@@ -142,9 +142,9 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::init
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::__construct
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::init
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
      */
     public function testCreateFromConnectionStringWithCaseInsensitive()
     {
@@ -170,7 +170,7 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::__construct
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
      */
     public function testCreateDefaults()
     {
@@ -191,7 +191,7 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::__construct
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
      */
     public function testCreateCustom()
     {
@@ -212,7 +212,7 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::getAccountName
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::getAccountName
      */
     public function testGetAccountName()
     {
@@ -227,7 +227,7 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::getAccessKey
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::getAccessKey
      */
     public function testGetAccessKey()
     {
@@ -241,7 +241,7 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($data, $settings->getAccessKey());
     }
     /**
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::getEndpointUri
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::getEndpointUri
      */
     public function testGetEndpointUri()
     {
@@ -255,7 +255,7 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($data, $settings->getEndpointUri());
     }
     /**
-     * @covers WindowsAzure\Common\Internal\MediaServicesSettings::getOAuthEndpointUri
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::getOAuthEndpointUri
      */
     public function testGetOAuthEndpointUri()
     {

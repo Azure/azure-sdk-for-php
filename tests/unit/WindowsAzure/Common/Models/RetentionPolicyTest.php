@@ -45,7 +45,7 @@ use WindowsAzure\Common\Internal\Utilities;
 class RetentionPolicyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Models\RetentionPolicy::create
+     * @covers \WindowsAzure\Common\Models\RetentionPolicy::create
      */
     public function testCreate()
     {
@@ -63,7 +63,7 @@ class RetentionPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\RetentionPolicy::getEnabled
+     * @covers \WindowsAzure\Common\Models\RetentionPolicy::getEnabled
      */
     public function testGetEnabled()
     {
@@ -81,7 +81,7 @@ class RetentionPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\RetentionPolicy::setEnabled
+     * @covers \WindowsAzure\Common\Models\RetentionPolicy::setEnabled
      */
     public function testSetEnabled()
     {
@@ -99,7 +99,7 @@ class RetentionPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\RetentionPolicy::getDays
+     * @covers \WindowsAzure\Common\Models\RetentionPolicy::getDays
      */
     public function testGetDays()
     {
@@ -117,7 +117,7 @@ class RetentionPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\RetentionPolicy::setDays
+     * @covers \WindowsAzure\Common\Models\RetentionPolicy::setDays
      */
     public function testSetDays()
     {
@@ -135,7 +135,7 @@ class RetentionPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\RetentionPolicy::toArray
+     * @covers \WindowsAzure\Common\Models\RetentionPolicy::toArray
      */
     public function testToArray()
     {
@@ -155,7 +155,7 @@ class RetentionPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\RetentionPolicy::toArray
+     * @covers \WindowsAzure\Common\Models\RetentionPolicy::toArray
      */
     public function testToArrayWithoutDays()
     {

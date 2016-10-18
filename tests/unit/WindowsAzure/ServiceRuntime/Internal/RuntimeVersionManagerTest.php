@@ -48,7 +48,7 @@ use WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager;
 class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager::__construct
      */
     public function testConstruct()
     {
@@ -62,7 +62,7 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager::getRuntimeClient
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager::getRuntimeClient
      */
     public function testGetRuntimeClientInvalid()
     {
@@ -102,7 +102,7 @@ class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager::getRuntimeClient
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager::getRuntimeClient
      */
     public function testGetRuntimeClient()
     {

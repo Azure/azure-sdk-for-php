@@ -44,7 +44,7 @@ use WindowsAzure\ServiceManagement\Models\AffinityGroup;
 class GetAffinityGroupPropertiesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::create
+     * @covers \WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::create
      */
     public function testCreate()
     {
@@ -69,8 +69,8 @@ class GetAffinityGroupPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setAffinityGroup
-     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getAffinityGroup
+     * @covers \WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setAffinityGroup
+     * @covers \WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getAffinityGroup
      */
     public function testSetAffinityGroup()
     {
@@ -86,8 +86,8 @@ class GetAffinityGroupPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setHostedServices
-     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getHostedServices
+     * @covers \WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setHostedServices
+     * @covers \WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getHostedServices
      */
     public function testSetHostedServices()
     {
@@ -103,8 +103,8 @@ class GetAffinityGroupPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setStorageServices
-     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getStorageServices
+     * @covers \WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setStorageServices
+     * @covers \WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getStorageServices
      */
     public function testSetStorageServices()
     {

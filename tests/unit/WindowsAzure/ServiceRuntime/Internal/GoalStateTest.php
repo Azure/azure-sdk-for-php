@@ -44,7 +44,7 @@ use WindowsAzure\ServiceRuntime\Internal\GoalState;
 class GoalStateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\GoalState::getDeadline
+     * @covers \WindowsAzure\ServiceRuntime\Internal\GoalState::getDeadline
      */
     public function testGetDeadline()
     {
@@ -58,7 +58,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\GoalState::getCurrentStateEndpoint
+     * @covers \WindowsAzure\ServiceRuntime\Internal\GoalState::getCurrentStateEndpoint
      */
     public function testGetCurrentStateEndpoint()
     {
@@ -73,7 +73,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\GoalState::getEnvironmentPath
+     * @covers \WindowsAzure\ServiceRuntime\Internal\GoalState::getEnvironmentPath
      */
     public function testGetEnvironmentPath()
     {
@@ -88,7 +88,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\GoalState::getExpectedState
+     * @covers \WindowsAzure\ServiceRuntime\Internal\GoalState::getExpectedState
      */
     public function testGetExpectedState()
     {
@@ -103,7 +103,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\GoalState::getIncarnation
+     * @covers \WindowsAzure\ServiceRuntime\Internal\GoalState::getIncarnation
      */
     public function testGetIncarnation()
     {
@@ -118,7 +118,7 @@ class GoalStateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\GoalState::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\GoalState::__construct
      */
     public function testConstructor()
     {

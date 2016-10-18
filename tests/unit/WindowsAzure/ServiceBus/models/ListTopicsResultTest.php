@@ -44,7 +44,7 @@ use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 class ListTopicsResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\ListTopicsResult::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\ListTopicsResult::__construct
      */
     public function testListTopicsResultConstructor()
     {

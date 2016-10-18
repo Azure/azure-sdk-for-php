@@ -103,7 +103,7 @@ class XmlCurrentStateSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer::serialize
+     * @covers \WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer::serialize
      */
     public function testSerializeRelease()
     {

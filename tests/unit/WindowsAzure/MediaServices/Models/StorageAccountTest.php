@@ -42,9 +42,9 @@ use WindowsAzure\MediaServices\Models\StorageAccount;
 class StorageAccountTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\StorageAccount::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\StorageAccount::fromArray
-     * @covers WindowsAzure\MediaServices\Models\StorageAccount::__construct
+     * @covers \WindowsAzure\MediaServices\Models\StorageAccount::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\StorageAccount::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\StorageAccount::__construct
      */
     public function testCreateFromArray()
     {
@@ -65,7 +65,7 @@ class StorageAccountTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\StorageAccount::getName
+     * @covers \WindowsAzure\MediaServices\Models\StorageAccount::getName
      */
     public function testGetName()
     {
@@ -84,7 +84,7 @@ class StorageAccountTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\StorageAccount::getIsDefault
+     * @covers \WindowsAzure\MediaServices\Models\StorageAccount::getIsDefault
      */
     public function testGetIsDefault()
     {

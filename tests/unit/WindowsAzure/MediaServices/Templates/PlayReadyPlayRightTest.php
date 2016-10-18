@@ -47,8 +47,8 @@ use WindowsAzure\MediaServices\Templates\ErrorMessages;
 class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getFirstPlayExpiration
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setFirstPlayExpiration
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getFirstPlayExpiration
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setFirstPlayExpiration
      */
     public function testGetSetFirstPlayExpiration()
     {
@@ -65,8 +65,8 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getScmsRestriction
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setScmsRestriction
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getScmsRestriction
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setScmsRestriction
      */
     public function testGetSetScmsRestriction()
     {
@@ -83,8 +83,8 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getAgcAndColorStripeRestriction
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setAgcAndColorStripeRestriction
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getAgcAndColorStripeRestriction
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setAgcAndColorStripeRestriction
      */
     public function testGetSetAgcAndColorStripeRestriction()
     {
@@ -101,8 +101,8 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getExplicitAnalogTelevisionOutputRestriction
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setExplicitAnalogTelevisionOutputRestriction
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getExplicitAnalogTelevisionOutputRestriction
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setExplicitAnalogTelevisionOutputRestriction
      */
     public function testGetSetExplicitAnalogTelevisionOutputRestriction()
     {
@@ -119,8 +119,8 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getDigitalVideoOnlyContentRestriction
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setDigitalVideoOnlyContentRestriction
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getDigitalVideoOnlyContentRestriction
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setDigitalVideoOnlyContentRestriction
      */
     public function testGetSetDigitalVideoOnlyContentRestriction()
     {
@@ -137,8 +137,8 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getImageConstraintForAnalogComponentVideoRestriction
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setImageConstraintForAnalogComponentVideoRestriction
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getImageConstraintForAnalogComponentVideoRestriction
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setImageConstraintForAnalogComponentVideoRestriction
      */
     public function testGetSetImageConstraintForAnalogComponentVideoRestriction()
     {
@@ -155,8 +155,8 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getImageConstraintForAnalogComputerMonitorRestriction
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setImageConstraintForAnalogComputerMonitorRestriction
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getImageConstraintForAnalogComputerMonitorRestriction
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setImageConstraintForAnalogComputerMonitorRestriction
      */
     public function testGetSetImageConstraintForAnalogComputerMonitorRestriction()
     {
@@ -173,8 +173,8 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getAllowPassingVideoContentToUnknownOutput
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setAllowPassingVideoContentToUnknownOutput
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getAllowPassingVideoContentToUnknownOutput
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setAllowPassingVideoContentToUnknownOutput
      */
     public function testGetSetAllowPassingVideoContentToUnknownOutput()
     {
@@ -191,8 +191,8 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getUncompressedDigitalVideoOpl
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setUncompressedDigitalVideoOpl
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getUncompressedDigitalVideoOpl
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setUncompressedDigitalVideoOpl
      */
     public function testGetSetUncompressedDigitalVideoOpl()
     {
@@ -209,7 +209,7 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setUncompressedDigitalVideoOpl
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setUncompressedDigitalVideoOpl
      */
     public function testSetInvalidUncompressedDigitalVideoOplShouldThrown()
     {
@@ -223,8 +223,8 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getCompressedDigitalVideoOpl
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setCompressedDigitalVideoOpl
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getCompressedDigitalVideoOpl
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setCompressedDigitalVideoOpl
      */
     public function testGetSetCompressedDigitalVideoOpl()
     {
@@ -241,7 +241,7 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setCompressedDigitalVideoOpl
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setCompressedDigitalVideoOpl
      */
     public function testSetInvalidCompressedDigitalVideoOplShouldThrown()
     {
@@ -255,8 +255,8 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getAnalogVideoOpl
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setAnalogVideoOpl
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getAnalogVideoOpl
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setAnalogVideoOpl
      */
     public function testGetSetAnalogVideoOpl()
     {
@@ -273,7 +273,7 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setAnalogVideoOpl
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setAnalogVideoOpl
      */
     public function testSetInvalidAnalogVideoOplShouldThrown()
     {
@@ -287,8 +287,8 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getCompressedDigitalAudioOpl
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setCompressedDigitalAudioOpl
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getCompressedDigitalAudioOpl
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setCompressedDigitalAudioOpl
      */
     public function testGetSetCompressedDigitalAudioOpl()
     {
@@ -305,7 +305,7 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setCompressedDigitalAudioOpl
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setCompressedDigitalAudioOpl
      */
     public function testSetInvalidCompressedDigitalAudioOplShouldThrown()
     {
@@ -319,8 +319,8 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getUncompressedDigitalAudioOpl
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setUncompressedDigitalAudioOpl
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getUncompressedDigitalAudioOpl
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setUncompressedDigitalAudioOpl
      */
     public function testGetSetUncompressedDigitalAudioOpl()
     {
@@ -337,7 +337,7 @@ class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setUncompressedDigitalAudioOpl
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::setUncompressedDigitalAudioOpl
      */
     public function testSetInvalidUncompressedDigitalAudioOplShouldThrown()
     {
