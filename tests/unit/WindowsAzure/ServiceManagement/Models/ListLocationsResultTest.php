@@ -50,7 +50,7 @@ class ListLocationsResultTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $result = new ListLocationsResult();
-        $expected = array('Anywhere US', 'West US');
+        $expected = ['Anywhere US', 'West US'];
 
         // Test
         $result->setLocations($expected);

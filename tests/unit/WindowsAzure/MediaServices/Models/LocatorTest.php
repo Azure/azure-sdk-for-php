@@ -128,12 +128,12 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $locatorArray = array(
+        $locatorArray = [
             'Type' => Locator::TYPE_NONE,
             'ContentAccessComponent' => 'AccessComponent',
             'AccessPolicyId' => 'ljhsdfl45',
             'AssetId' => 'uifygid75',
-        );
+        ];
         $result = Locator::createFromOptions($locatorArray);
 
         // Test
@@ -150,12 +150,12 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     {
 
        // Setup
-        $locatorArray = array(
+        $locatorArray = [
             'Type' => Locator::TYPE_NONE,
             'BaseUri' => 'http://someurl.com/uysfdu56y',
             'AccessPolicyId' => 'ljhsdfl45',
             'AssetId' => 'uifygid75',
-        );
+        ];
         $result = Locator::createFromOptions($locatorArray);
 
         // Test
@@ -172,12 +172,12 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $locatorArray = array(
+        $locatorArray = [
             'Type' => Locator::TYPE_NONE,
             'Path' => 'http://someurl.com/uysfdu56y',
             'AccessPolicyId' => 'ljhsdfl45',
             'AssetId' => 'uifygid75',
-        );
+        ];
         $result = Locator::createFromOptions($locatorArray);
 
         // Test
@@ -283,7 +283,7 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $locatorArray = array(
+        $locatorArray = [
             'Id' => 'kjshfs89',
             'Name' => 'newLocator',
             'ExpirationDateTime' => '2013-11-30',
@@ -294,7 +294,7 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
             'AccessPolicyId' => 'uifygid75',
             'AssetId' => 'ljhsdfl45',
             'StartTime' => '2013-11-19',
-        );
+        ];
         $expiration = new \Datetime($locatorArray['ExpirationDateTime']);
         $start = new \Datetime($locatorArray['StartTime']);
 

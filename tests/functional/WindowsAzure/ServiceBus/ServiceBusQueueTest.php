@@ -108,7 +108,7 @@ class ServiceBusQueueTest extends ScenarioTestBase
      */
     private function sendMessages()
     {
-        $messages = array();
+        $messages = [];
         $messages[] = $this->createIssueMessage('1', 'First  message information', 'label1', 'location1');
         $messages[] = $this->createIssueMessage('2', 'Second message information', 'label2', 'location2');
         $messages[] = $this->createIssueMessage('3', 'Third  message information', 'label3', 'location3');

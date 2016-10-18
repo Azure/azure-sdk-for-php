@@ -676,7 +676,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         $job = new Job();
         $job->setName(TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix());
-        $job = $this->createJob($job, array($asset), array($task));
+        $job = $this->createJob($job, [$asset], [$task]);
 
         // Test
         $result = $this->restProxy->getJobTasks($job);
@@ -703,7 +703,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         $job = new Job();
         $job->setName(TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix());
-        $job = $this->createJob($job, array($asset), array($task));
+        $job = $this->createJob($job, [$asset], [$task]);
 
         // Test
         $result = $this->restProxy->getJobInputMediaAssets($job);
@@ -759,7 +759,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         $job = new Job();
         $job->setName(TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix());
-        $job = $this->createJob($job, array($asset), array($task));
+        $job = $this->createJob($job, [$asset], [$task]);
 
         // Test
         $result = $this->restProxy->getJobOutputMediaAssets($job);
@@ -787,7 +787,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         $job = new Job();
         $job->setName(TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix());
-        $job = $this->createJob($job, array($asset), array($task));
+        $job = $this->createJob($job, [$asset], [$task]);
 
         // Test
         $result = $this->restProxy->getTaskList();
@@ -812,7 +812,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertEquals($name, $result->getName());
-        $this->assertequals($jobTemplate->getId(), $result->getId());
+        $this->assertEquals($jobTemplate->getId(), $result->getId());
     }
 
     /**
@@ -830,7 +830,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Assert
         $this->assertEquals(1, count($result));
         $this->assertEquals($name, $result[0]->getName());
-        $this->assertequals($jobTemplate->getId(), $result[0]->getId());
+        $this->assertEquals($jobTemplate->getId(), $result[0]->getId());
     }
 
     /**
@@ -851,8 +851,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertEquals(1, count($result));
-        $this->assertequals($configuration, $result[0]->getConfiguration());
-        $this->assertequals($mediaProcessor->getId(), $result[0]->getMediaProcessorId());
+        $this->assertEquals($configuration, $result[0]->getConfiguration());
+        $this->assertEquals($mediaProcessor->getId(), $result[0]->getMediaProcessorId());
     }
 
     /**
@@ -911,7 +911,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         $job = new Job();
         $job->setName($name);
-        $job = $this->createJob($job, array($inputAsset), array($task));
+        $job = $this->createJob($job, [$inputAsset], [$task]);
 
         $assetList = $this->restProxy->getAssetList();
 
@@ -1736,7 +1736,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $restriction = new ContentKeyAuthorizationPolicyRestriction();
         $restriction->setName($restrictionName);
         $restriction->setKeyRestrictionType(ContentKeyRestrictionType::OPEN);
-        $restrictions = array($restriction);
+        $restrictions = [$restriction];
 
         $options = new ContentKeyAuthorizationPolicyOption();
         $options->setName($name);
@@ -2085,7 +2085,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $result = $this->restProxy->getKeyDeliveryUrl($contentKey, ContentKeyDeliveryType::BASELINE_HTTP);
 
         // Assert
-        $this->assertRegexp('/keydelivery.mediaservices.windows.net/', $result);
+        $this->assertRegExp('/keydelivery.mediaservices.windows.net/', $result);
     }
 
     public function testCreateContentKeyAuthorizationPolicyOptionWithTokenRestrictions()
@@ -2094,11 +2094,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $template = new TokenRestrictionTemplate(TokenType::SWT);
 
         $template->setPrimaryVerificationKey(new SymmetricVerificationKey());
-        $template->setAlternateVerificationKeys(array(new SymmetricVerificationKey()));
+        $template->setAlternateVerificationKeys([new SymmetricVerificationKey()]);
         $template->setAudience('http://sampleaudience/');
         $template->setIssuer('http://sampleissuerurl/');
 
-        $claims = array();
+        $claims = [];
         $claims[] = new TokenClaim(TokenClaim::CONTENT_KEY_ID_CLAIM_TYPE);
         $claims[] = new TokenClaim('Rental', 'true');
 
@@ -2113,7 +2113,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $restriction->setName($restrictionName);
         $restriction->setKeyRestrictionType(ContentKeyRestrictionType::TOKEN_RESTRICTED);
         $restriction->setRequirements($serializedTemplate);
-        $restrictions = array($restriction);
+        $restrictions = [$restriction];
 
         $options = new ContentKeyAuthorizationPolicyOption();
         $options->setName($name);
@@ -2147,11 +2147,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $template = new TokenRestrictionTemplate(TokenType::SWT);
 
         $template->setPrimaryVerificationKey(new SymmetricVerificationKey());
-        $template->setAlternateVerificationKeys(array(new SymmetricVerificationKey()));
+        $template->setAlternateVerificationKeys([new SymmetricVerificationKey()]);
         $template->setAudience('http://sampleaudience/');
         $template->setIssuer('http://sampleissuerurl/');
 
-        $claims = array();
+        $claims = [];
         $claims[] = new TokenClaim(TokenClaim::CONTENT_KEY_ID_CLAIM_TYPE);
         $claims[] = new TokenClaim('Rental', 'true');
 
@@ -2166,7 +2166,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $restriction->setName($restrictionName);
         $restriction->setKeyRestrictionType(ContentKeyRestrictionType::TOKEN_RESTRICTED);
         $restriction->setRequirements($serializedTemplate);
-        $restrictions = array($restriction);
+        $restrictions = [$restriction];
 
         $options = new ContentKeyAuthorizationPolicyOption();
         $options->setName($name);
@@ -2210,7 +2210,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $contentKeySpecs->required_output_protection->hdcp = Hdcp::HDCP_NONE;
         $contentKeySpecs->security_level = 1;
         $contentKeySpecs->track_type = 'SD';
-        $widevine->content_key_specs = array($contentKeySpecs);
+        $widevine->content_key_specs = [$contentKeySpecs];
         $policyOverrides = new \stdClass();
         $policyOverrides->can_play = true;
         $policyOverrides->can_persist = true;
@@ -2222,11 +2222,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $template = new TokenRestrictionTemplate(TokenType::SWT);
 
         $template->setPrimaryVerificationKey(new SymmetricVerificationKey());
-        $template->setAlternateVerificationKeys(array(new SymmetricVerificationKey()));
+        $template->setAlternateVerificationKeys([new SymmetricVerificationKey()]);
         $template->setAudience('http://sampleaudience/');
         $template->setIssuer('http://sampleissuerurl/');
 
-        $claims = array();
+        $claims = [];
         $claims[] = new TokenClaim(TokenClaim::CONTENT_KEY_ID_CLAIM_TYPE);
         $claims[] = new TokenClaim('Rental', 'true');
 
@@ -2241,7 +2241,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $restriction->setName($restrictionName);
         $restriction->setKeyRestrictionType(ContentKeyRestrictionType::TOKEN_RESTRICTED);
         $restriction->setRequirements($serializedTemplate);
-        $restrictions = array($restriction);
+        $restrictions = [$restriction];
 
         $options = new ContentKeyAuthorizationPolicyOption();
         $options->setName($name);
@@ -2272,7 +2272,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $template->setResponseCustomData('test custom data');
 
         $licenseTemplate = new PlayReadyLicenseTemplate();
-        $template->setLicenseTemplates(array($licenseTemplate));
+        $template->setLicenseTemplates([$licenseTemplate]);
 
         $licenseTemplate->setLicenseType(PlayReadyLicenseType::PERSISTENT);
         $licenseTemplate->setBeginDate(new \DateTime('now'));
@@ -3203,7 +3203,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $ciacIPRange->setName("default");
         $ciacIPRange->setAddress("0.0.0.0");
         $ciacIPRange->setSubnetPrefixLength("0");
-        $ciacIPAccessControl->setAllow(array($ciacIPRange));
+        $ciacIPAccessControl->setAllow([$ciacIPRange]);
         $channelInputAccessControl->setIP($ciacIPAccessControl);
         $channelInput->setAccessControl($channelInputAccessControl);
         $channel->setInput($channelInput);
@@ -3218,7 +3218,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $cpacIPRange->setName("default");
         $cpacIPRange->setAddress("0.0.0.0");
         $cpacIPRange->setSubnetPrefixLength("0");
-        $cpacIPAccessControl->setAllow(array($cpacIPRange));
+        $cpacIPAccessControl->setAllow([$cpacIPRange]);
         $channelPreviewAccessControl->setIP($cpacIPAccessControl);
         $channelPreview->setAccessControl($channelPreviewAccessControl);
         $channel->setPreview($channelPreview);
@@ -3247,7 +3247,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $ciacIPRange->setName("default");
         $ciacIPRange->setAddress("0.0.0.0");
         $ciacIPRange->setSubnetPrefixLength("0");
-        $ciacIPAccessControl->setAllow(array($ciacIPRange));
+        $ciacIPAccessControl->setAllow([$ciacIPRange]);
         $channelInputAccessControl->setIP($ciacIPAccessControl);
         $channelInput->setAccessControl($channelInputAccessControl);
         $channel->setInput($channelInput);
@@ -3262,7 +3262,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $cpacIPRange->setName("default");
         $cpacIPRange->setAddress("0.0.0.0");
         $cpacIPRange->setSubnetPrefixLength("0");
-        $cpacIPAccessControl->setAllow(array($cpacIPRange));
+        $cpacIPAccessControl->setAllow([$cpacIPRange]);
         $channelPreviewAccessControl->setIP($cpacIPAccessControl);
         $channelPreview->setAccessControl($channelPreviewAccessControl);
         $channel->setPreview($channelPreview);
@@ -3275,11 +3275,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $channelEncoding->setIgnoreCea708ClosedCaptions(true);
         $vs = new VideoStream();
         $vs->setIndex(0);
-        $channelEncoding->setVideoStreams(array($vs));
+        $channelEncoding->setVideoStreams([$vs]);
         $as = new AudioStream();
         $as->setIndex(0);
         $as->setLanguage("eng");
-        $channelEncoding->setAudioStreams(array($as));
+        $channelEncoding->setAudioStreams([$as]);
         $channel->setEncoding($channelEncoding);
 
         // cors rules

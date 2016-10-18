@@ -51,7 +51,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
         $name = 'roleName';
 
         // Setup
-        $role = new Role($name, array());
+        $role = new Role($name, []);
 
         // Test
         $this->assertEquals($name, $role->getName());
@@ -62,7 +62,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetInstances()
     {
-        $instances = array();
+        $instances = [];
 
         // Setup
         $role = new Role(null, $instances);

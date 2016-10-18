@@ -69,16 +69,16 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $errorDetail = array(
+        $errorDetail = [
              'Code' => 404,
              'Message' => 'Required task not found',
-        );
-        $historicalEvent = array(
+        ];
+        $historicalEvent = [
              'Code' => 404,
              'Message' => 'Required task not found',
              'TimeStamp' => '2013-11-27',
-        );
-        $options = array(
+        ];
+        $options = [
                 'Id' => 'jdfghrf78',
                 'Configuration' => 'some configuration',
                 'EndTime' => '2013-12-27',
@@ -96,9 +96,9 @@ class TaskTest extends \PHPUnit_Framework_TestCase
                 'EncryptionScheme' => 'encryption scheme',
                 'EncryptionVersion' => 'version 2.1.1',
                 'InitializationVector' => 'Initialization Vector',
-                'ErrorDetails' => array($errorDetail),
-                'HistoricalEvents' => array($historicalEvent),
-        );
+                'ErrorDetails' => [$errorDetail],
+                'HistoricalEvents' => [$historicalEvent],
+        ];
         $endTime = new \Datetime($options['EndTime']);
         $startTime = new \Datetime($options['StartTime']);
         $timeStamp = new \DateTime($historicalEvent['TimeStamp']);
@@ -141,12 +141,12 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Id' => 'jdfghrf78',
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
-        );
+        ];
         $task = Task::createFromOptions($options);
 
         // Test
@@ -164,11 +164,11 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
-        );
+        ];
         $task = Task::createFromOptions($options);
         $config = 'configuration of task';
 
@@ -187,12 +187,12 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'EndTime' => '2013-12-27',
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
-        );
+        ];
         $task = Task::createFromOptions($options);
         $endTime = new \Datetime($options['EndTime']);
 
@@ -211,11 +211,11 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
-               );
+        ];
         $task = Task::createFromOptions($options);
         $mediaProcId = 'kdfjg57';
 
@@ -235,11 +235,11 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
-        );
+        ];
         $task = Task::createFromOptions($options);
         $name = 'task name';
 
@@ -258,12 +258,12 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
                 'PerfMessage' => 'performance message',
-        );
+        ];
         $task = Task::createFromOptions($options);
 
         // Test
@@ -281,11 +281,11 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
-        );
+        ];
         $task = Task::createFromOptions($options);
         $priority = 1;
 
@@ -304,12 +304,12 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
                 'Progress' => 65.29,
-        );
+        ];
         $task = Task::createFromOptions($options);
 
         // Test
@@ -326,12 +326,12 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
                 'RunningDuration' => 5.3,
-        );
+        ];
         $task = Task::createFromOptions($options);
 
         // Test
@@ -348,12 +348,12 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'StartTime' => '2013-11-27',
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
-        );
+        ];
         $task = Task::createFromOptions($options);
         $startTime = new \Datetime($options['StartTime']);
 
@@ -371,12 +371,12 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
                 'State' => Task::STATE_RUNNING,
-        );
+        ];
         $task = Task::createFromOptions($options);
 
         // Test
@@ -394,11 +394,11 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
-        );
+        ];
         $task = Task::createFromOptions($options);
         $taskBody = 'new body of task';
 
@@ -417,12 +417,12 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
                 'State' => Task::STATE_RUNNING,
-        );
+        ];
         $task = Task::createFromOptions($options);
 
         // Test
@@ -440,11 +440,11 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
-        );
+        ];
         $task = Task::createFromOptions($options);
         $encrKeyId = '45key89';
 
@@ -464,11 +464,11 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
-        );
+        ];
         $task = Task::createFromOptions($options);
         $encrScheme = 'encryption scheme';
 
@@ -488,11 +488,11 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
-        );
+        ];
         $task = Task::createFromOptions($options);
         $encrVersion = '3.6.1';
 
@@ -512,11 +512,11 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
-        );
+        ];
         $task = Task::createFromOptions($options);
         $initVector = 'initialization vector';
 
@@ -535,16 +535,16 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $errorDetail = array(
+        $errorDetail = [
                 'Code' => 404,
                 'Message' => 'Required task not found',
-        );
-        $options = array(
+        ];
+        $options = [
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
-                'ErrorDetails' => array($errorDetail),
-        );
+                'ErrorDetails' => [$errorDetail],
+        ];
         $task = Task::createFromOptions($options);
 
         // Test
@@ -562,17 +562,17 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-         $historicalEvent = array(
+         $historicalEvent = [
              'Code' => 404,
              'Message' => 'Required task not found',
              'TimeStamp' => '2013-12-10',
-        );
-        $options = array(
+         ];
+        $options = [
                 'MediaProcessorId' => 'uy47ytu',
                 'TaskBody' => 'body of the task',
                 'Options' => 42,
-                'HistoricalEvents' => array($historicalEvent),
-        );
+                'HistoricalEvents' => [$historicalEvent],
+        ];
         $task = Task::createFromOptions($options);
         $date = new \Datetime($historicalEvent['TimeStamp']);
 

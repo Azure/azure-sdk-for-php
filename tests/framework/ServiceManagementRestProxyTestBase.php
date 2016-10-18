@@ -67,10 +67,10 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
         $result = $serviceManagementRestProxy->listLocations();
         $locations = $result->getLocations();
         $firstLocation = $locations[0];
-        $this->createdStorageServices = array();
-        $this->createdAffinityGroups = array();
-        $this->createdHostedServices = array();
-        $this->createdDeployments = array();
+        $this->createdStorageServices = [];
+        $this->createdAffinityGroups = [];
+        $this->createdHostedServices = [];
+        $this->createdDeployments = [];
         $this->defaultLocation = $firstLocation->getName();
         $this->defaultSlot = DeploymentSlot::PRODUCTION;
         $this->defaultDeploymentConfiguration = file_get_contents(TestResources::simplePackageConfiguration());
@@ -103,7 +103,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
             }
         }
 
-        return;
+        return null;
     }
 
     public function deleteAffinityGroup($name)

@@ -89,7 +89,7 @@ class ScenarioTestBase extends IntegrationTestBase
 
     protected function getCustomProperties($i)
     {
-        $customProperties = array();
+        $customProperties = [];
         $customProperties['i'] = $i;
         $date = new \DateTime('01/0'.$i.'/2001');
         $customProperties['test'] = gmdate(Resources::AZURE_DATE_FORMAT,

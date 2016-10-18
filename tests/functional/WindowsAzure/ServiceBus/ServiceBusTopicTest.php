@@ -69,11 +69,11 @@ class ServiceBusTopicTest extends ScenarioTestBase
         $this->getMessageCounts();
 
         $expSub1Messages = $messages;
-        $expSub2Messages = array($messages[0], $messages[1]);
-        $expSub3Messages = array($messages[1], $messages[2], $messages[3]);
+        $expSub2Messages = [$messages[0], $messages[1]];
+        $expSub3Messages = [$messages[1], $messages[2], $messages[3]];
         // The rules for subscription 4 add and remove custom properties.
-        $expCustomProps4 = array();
-        $expSub4Messages = array();
+        $expCustomProps4 = [];
+        $expSub4Messages = [];
         for ($i = 1; $i <= 4; ++$i) {
             $tmp = $this->getCustomProperties($i);
             $tmp['trueRuleA'] = true;
@@ -252,7 +252,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
      */
     private function sendMessages()
     {
-        $messages = array();
+        $messages = [];
         $messages[] = $this->createIssueMessage('1', 'First  message information', 'label1', 1);
         $messages[] = $this->createIssueMessage('2', 'Second message information', 'label2', 2);
         $messages[] = $this->createIssueMessage('3', 'Third  message information', 'label3', 3);
@@ -325,7 +325,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
     {
         $expectedCount = count($expectedMessages);
         if (is_null($expCustomProps)) {
-            $expCustomProps = array();
+            $expCustomProps = [];
             while (count($expCustomProps) < $expectedCount) {
                 $expCustomProps[] = null;
             }

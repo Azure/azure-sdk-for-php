@@ -115,7 +115,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
         $expectedHeader = Resources::IF_MATCH;
         $expectedValue = '0x8CAFB82EFF70C46';
         $accessCondition = AccessCondition::ifMatch($expectedValue);
-        $headers = array('Header1' => 'Value1', 'Header2' => 'Value2');
+        $headers = ['Header1' => 'Value1', 'Header2' => 'Value2'];
 
         // Test
         $actual = $restRestProxy->addOptionalAccessConditionHeader($headers, $accessCondition);
@@ -135,7 +135,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
         $expectedHeader = Resources::X_MS_SOURCE_IF_MATCH;
         $expectedValue = '0x8CAFB82EFF70C46';
         $accessCondition = AccessCondition::ifMatch($expectedValue);
-        $headers = array('Header1' => 'Value1', 'Header2' => 'Value2');
+        $headers = ['Header1' => 'Value1', 'Header2' => 'Value2'];
 
         // Test
         $actual = $restRestProxy->addOptionalSourceAccessConditionHeader($headers, $accessCondition);
@@ -152,7 +152,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     public function testGroupQueryValues($restRestProxy)
     {
         // Setup
-        $values = array('A', 'B', 'C');
+        $values = ['A', 'B', 'C'];
         $expected = 'A,B,C';
 
         // Test
@@ -169,7 +169,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     public function testGroupQueryValuesWithNulls($restRestProxy)
     {
         // Setup
-        $values = array(null, '', null);
+        $values = [null, '', null];
 
         // Test
         $actual = $restRestProxy->groupQueryValues($values);
@@ -185,7 +185,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     public function testGroupQueryValuesWithMix($restRestProxy)
     {
         // Setup
-        $values = array(null, 'B', 'C', '');
+        $values = [null, 'B', 'C', ''];
         $expected = 'B,C';
 
         // Test
@@ -202,7 +202,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     public function testPostParameter($restRestProxy)
     {
         // Setup
-        $postParameters = array();
+        $postParameters = [];
         $key = 'a';
         $expected = 'b';
 
@@ -224,8 +224,8 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     public function testGenerateMetadataHeader($proxy)
     {
         // Setup
-        $metadata = array('key1' => 'value1', 'MyName' => 'WindowsAzure', 'MyCompany' => 'Microsoft_');
-        $expected = array();
+        $metadata = ['key1' => 'value1', 'MyName' => 'WindowsAzure', 'MyCompany' => 'Microsoft_'];
+        $expected = [];
         foreach ($metadata as $key => $value) {
             $expected[Resources::X_MS_META_HEADER_PREFIX.strtolower($key)] = $value;
         }
@@ -244,7 +244,7 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     public function testGenerateMetadataHeaderInvalidNameFail($proxy)
     {
         // Setup
-        $metadata = array('key1' => "value1\n", 'MyName' => "\rAzurr", 'MyCompany' => "Micr\r\nosoft_");
+        $metadata = ['key1' => "value1\n", 'MyName' => "\rAzurr", 'MyCompany' => "Micr\r\nosoft_"];
         $this->setExpectedException(get_class(new \InvalidArgumentException(Resources::INVALID_META_MSG)));
 
         // Test
@@ -258,8 +258,8 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
     public function testGetMetadataArray($proxy)
     {
         // Setup
-        $expected = array('key1' => 'value1', 'myname' => 'azure', 'mycompany' => 'microsoft_');
-        $metadataHeaders = array();
+        $expected = ['key1' => 'value1', 'myname' => 'azure', 'mycompany' => 'microsoft_'];
+        $metadataHeaders = [];
         foreach ($expected as $key => $value) {
             $metadataHeaders[Resources::X_MS_META_HEADER_PREFIX.strtolower($key)] = $value;
         }
@@ -281,8 +281,8 @@ class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
         $key = 'name';
         $validMetadataKey = Resources::X_MS_META_HEADER_PREFIX.$key;
         $value = 'correct';
-        $metadataHeaders = array('x-ms-key1' => 'value1', 'myname' => 'x-ms-date',
-                          $validMetadataKey => $value, 'mycompany' => 'microsoft_', );
+        $metadataHeaders = ['x-ms-key1' => 'value1', 'myname' => 'x-ms-date',
+                          $validMetadataKey => $value, 'mycompany' => 'microsoft_',];
 
         // Test
         $actual = $proxy->getMetadataArray($metadataHeaders);

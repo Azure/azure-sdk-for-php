@@ -49,16 +49,16 @@ class GetAffinityGroupPropertiesResultTest extends \PHPUnit_Framework_TestCase
     public function testCreate()
     {
         // Setup
-        $array = array(
-            'HostedServices' => array(
+        $array = [
+            'HostedServices' => [
                 'Url' => 'url',
                 'ServiceName' => 'name',
-            ),
-            'StorageServices' => array(
+            ],
+            'StorageServices' => [
                 'Url' => 'url',
                 'ServiceName' => 'name',
-            ),
-        );
+            ],
+        ];
 
         // Test
         $actual = GetAffinityGroupPropertiesResult::create($array);
@@ -92,7 +92,7 @@ class GetAffinityGroupPropertiesResultTest extends \PHPUnit_Framework_TestCase
     public function testSetHostedServices()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $result = new GetAffinityGroupPropertiesResult();
 
         // Test
@@ -109,7 +109,7 @@ class GetAffinityGroupPropertiesResultTest extends \PHPUnit_Framework_TestCase
     public function testSetStorageServices()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $result = new GetAffinityGroupPropertiesResult();
 
         // Test

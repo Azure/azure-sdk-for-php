@@ -32,7 +32,7 @@ spl_autoload_register(
    function ($class) {
       static $classes = null;
       if ($classes === null) {
-          $classes = array(
+          $classes = [
             'tests\\framework\\blobservicerestproxytestbase' => '/framework/BlobServiceRestProxyTestBase.php',
             'tests\\framework\\fiddlerfilter' => '/framework/FiddlerFilter.php',
             'tests\\framework\\mediaservicesrestproxytestbase' => '/framework/MediaServicesRestProxyTestBase.php',
@@ -235,7 +235,7 @@ spl_autoload_register(
             'tests\\unit\\windowsazure\\serviceruntime\\internal\\xmlgoalstatedeserializertest' => '/unit/WindowsAzure/ServiceRuntime/Internal/XmlGoalStateDeserializerTest.php',
             'tests\\unit\\windowsazure\\serviceruntime\\internal\\xmlroleenvironmentdatadeserializertest' => '/unit/WindowsAzure/ServiceRuntime/Internal/XmlRoleEnvironmentDataDeserializerTest.php',
             'tests\\unit\\windowsazure\\serviceruntime\\roleenvironmenttest' => '/unit/WindowsAzure/ServiceRuntime/RoleEnvironmentTest.php',
-          );
+          ];
       }
       $cn = strtolower($class);
       if (isset($classes[$cn])) {

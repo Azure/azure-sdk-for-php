@@ -52,12 +52,12 @@ class EncodingReservedUnitTypeTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $testAccountId = 'testAccountId';
-        $options = array(
+        $options = [
                 'AccountId' => $testAccountId,
                 'ReservedUnitType' => EncodingReservedUnitType::S1,
                 'MaxReservableUnits' => 30,
                 'CurrentReservedUnits' => 5,
-        );
+        ];
 
         // Test
         $encodingReservedUnitType = EncodingReservedUnit::createFromOptions($options);

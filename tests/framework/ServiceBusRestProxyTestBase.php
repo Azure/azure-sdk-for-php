@@ -52,10 +52,10 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
         $this->skipIfEmulated();
         parent::setUp();
         $serviceBusWrapper = $this->builder->createServiceBusService(TestResources::getServiceBusConnectionString());
-        $this->_createdTopics = array();
-        $this->_createdSubscriptions = array();
-        $this->_createdRules = array();
-        $this->_createdQueues = array();
+        $this->_createdTopics = [];
+        $this->_createdSubscriptions = [];
+        $this->_createdRules = [];
+        $this->_createdQueues = [];
         parent::setProxy($serviceBusWrapper);
     }
 
@@ -75,7 +75,7 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createSubscription($topicName, $subscriptionInfo)
     {
-        $topicSubscriptionNameArray = array($topicName, $subscriptionInfo->getTitle());
+        $topicSubscriptionNameArray = [$topicName, $subscriptionInfo->getTitle()];
         $this->_createdSubscriptions[] = implode('::', $topicSubscriptionNameArray);
 
         return $this->restProxy->createSubscription($topicName, $subscriptionInfo);
@@ -83,7 +83,7 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createRule($topicName, $subscriptionName, $ruleInfo)
     {
-        $topicSubscriptionRuleArray = array($topicName, $subscriptionName, $ruleInfo->getTitle());
+        $topicSubscriptionRuleArray = [$topicName, $subscriptionName, $ruleInfo->getTitle()];
         $this->_createdRules[] = implode('::', $topicSubscriptionRuleArray);
 
         return $this->restProxy->createRule($topicName, $subscriptionName, $ruleInfo);

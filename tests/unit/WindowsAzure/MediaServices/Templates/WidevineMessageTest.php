@@ -60,7 +60,7 @@ class WidevineMessageTest extends \PHPUnit_Framework_TestCase
         $contentKeySpecs->required_output_protection->hdcp = Hdcp::HDCP_NONE;
         $contentKeySpecs->security_level = 1;
         $contentKeySpecs->track_type = 'SD';
-        $expected->content_key_specs = array($contentKeySpecs);
+        $expected->content_key_specs = [$contentKeySpecs];
         $policyOverrides = new \stdClass();
         $policyOverrides->can_play = true;
         $policyOverrides->can_persist = true;
@@ -87,7 +87,7 @@ class WidevineMessageTest extends \PHPUnit_Framework_TestCase
         $contentKeySpecs->required_output_protection->hdcp = Hdcp::HDCP_NONE;
         $contentKeySpecs->security_level = 1;
         $contentKeySpecs->track_type = 'SD';
-        $expected->content_key_specs = array($contentKeySpecs);
+        $expected->content_key_specs = [$contentKeySpecs];
         $policyOverrides = new \stdClass();
         $policyOverrides->can_play = true;
         $policyOverrides->can_persist = true;
@@ -116,7 +116,7 @@ class WidevineMessageTest extends \PHPUnit_Framework_TestCase
         $contentKeySpecs->required_output_protection->hdcp = Hdcp::HDCP_NONE;
         $contentKeySpecs->security_level = 1;
         $contentKeySpecs->track_type = 'SD';
-        $template->content_key_specs = array($contentKeySpecs);
+        $template->content_key_specs = [$contentKeySpecs];
         $policyOverrides = new \stdClass();
         $policyOverrides->can_play = true;
         $policyOverrides->can_persist = true;

@@ -55,10 +55,10 @@ class RoleEnvironmentDataTest extends \PHPUnit_Framework_TestCase
     public function testGetters()
     {
         $deploymentId = 'deploymentId';
-        $configurationSettings = array();
-        $localResources = array();
+        $configurationSettings = [];
+        $localResources = [];
         $currentInstance = new RoleInstance(null, null, null, null);
-        $roles = array();
+        $roles = [];
         $isEmulated = false;
 
         // Setup

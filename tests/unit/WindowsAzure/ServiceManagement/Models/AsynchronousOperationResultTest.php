@@ -49,7 +49,7 @@ class AsynchronousOperationResultTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $requestId = '1sqwsqe34';
-        $headers = array('x-ms-request-id' => $requestId);
+        $headers = ['x-ms-request-id' => $requestId];
 
         // Test
         $actual = AsynchronousOperationResult::create($headers);

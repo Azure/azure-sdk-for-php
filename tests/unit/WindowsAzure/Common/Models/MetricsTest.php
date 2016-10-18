@@ -215,12 +215,12 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
         // Setup
         $sample = TestResources::getServicePropertiesSample();
         $metrics = Metrics::create($sample['Metrics']);
-        $expected = array(
+        $expected = [
             'Version' => $sample['Metrics']['Version'],
             'Enabled' => $sample['Metrics']['Enabled'],
             'IncludeAPIs' => $sample['Metrics']['IncludeAPIs'],
             'RetentionPolicy' => $metrics->getRetentionPolicy()->toArray(),
-        );
+        ];
 
         // Test
         $actual = $metrics->toArray();
@@ -238,11 +238,11 @@ class MetricsTest extends \PHPUnit_Framework_TestCase
         $sample = TestResources::getServicePropertiesSample();
         $sample['Metrics']['Enabled'] = 'false';
         $metrics = Metrics::create($sample['Metrics']);
-        $expected = array(
+        $expected = [
             'Version' => $sample['Metrics']['Version'],
             'Enabled' => $sample['Metrics']['Enabled'],
             'RetentionPolicy' => $metrics->getRetentionPolicy()->toArray(),
-        );
+        ];
 
         // Test
         $actual = $metrics->toArray();

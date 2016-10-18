@@ -54,7 +54,7 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
 
         $sources = new \ReflectionProperty('WindowsAzure\Common\CloudConfigurationManager', '_sources');
         $sources->setAccessible(true);
-        $sources->setValue(array());
+        $sources->setValue([]);
     }
 
     /**
@@ -105,6 +105,7 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
                 if ($key == $expectedKey) {
                     return $expectedValue;
                 }
+                return null;
             }
         );
 
@@ -131,6 +132,7 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
                 if ($key == $expectedKey) {
                     return $expectedValue;
                 }
+                return null;
             },
             true
         );
@@ -159,6 +161,7 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
                 if ($key == $expectedKey) {
                     return $expectedValue;
                 }
+                return null;
             }
         );
 
@@ -210,6 +213,7 @@ class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
                 if ($key == $expectedKey) {
                     return $expectedValue;
                 }
+                return null;
             }
         );
 

@@ -50,7 +50,7 @@ class PlayReadyLicenseResponseTemplateTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $entity = new PlayReadyLicenseResponseTemplate();
-        $payload = array();
+        $payload = [];
 
         // Test
         $entity->setLicenseTemplates($payload);

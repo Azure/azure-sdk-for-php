@@ -200,12 +200,12 @@ class TestResources
 
     public static function getMediaServicesConnectionParameters()
     {
-        return array(
+        return [
             'accountName' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ACCOUNT_NAME'),
             'accessKey' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ACCESS_KEY'),
             'endpointUri' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ENDPOINT_URI', false),
             'oauthEndopointUri' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_OAUTH_ENDPOINT_URI', false),
-        );
+        ];
     }
 
     private static function getEnvironmentVariable($name, $required = true)
@@ -221,7 +221,7 @@ class TestResources
 
     public static function getServicePropertiesSample()
     {
-        $sample = array();
+        $sample = [];
         $sample['Logging']['Version'] = '1.0';
         $sample['Logging']['Delete'] = 'true';
         $sample['Logging']['Read'] = 'false';
@@ -239,7 +239,7 @@ class TestResources
 
     public static function setServicePropertiesSample()
     {
-        $sample = array();
+        $sample = [];
         $sample['Logging']['Version'] = '1.0';
         $sample['Logging']['Delete'] = 'true';
         $sample['Logging']['Read'] = 'false';
@@ -257,7 +257,7 @@ class TestResources
 
     public static function listMessagesSample()
     {
-        $sample = array();
+        $sample = [];
         $sample['QueueMessage']['MessageId'] = '5974b586-0df3-4e2d-ad0c-18e3892bfca2';
         $sample['QueueMessage']['InsertionTime'] = 'Fri, 09 Oct 2009 21:04:30 GMT';
         $sample['QueueMessage']['ExpirationTime'] = 'Fri, 16 Oct 2009 21:04:30 GMT';
@@ -271,7 +271,7 @@ class TestResources
 
     public static function listMessagesMultipleMessagesSample()
     {
-        $sample = array();
+        $sample = [];
         $sample['QueueMessage'][0]['MessageId'] = '5974b586-0df3-4e2d-ad0c-18e3892bfca2';
         $sample['QueueMessage'][0]['InsertionTime'] = 'Fri, 09 Oct 2009 21:04:30 GMT';
         $sample['QueueMessage'][0]['ExpirationTime'] = 'Fri, 16 Oct 2009 21:04:30 GMT';
@@ -293,7 +293,7 @@ class TestResources
 
     public static function listQueuesEmpty()
     {
-        $sample = array();
+        $sample = [];
         $sample['Queues'] = '';
         $sample['NextMarker'] = '';
 
@@ -302,10 +302,10 @@ class TestResources
 
     public static function listQueuesOneEntry()
     {
-        $sample = array();
+        $sample = [];
         $sample['Marker'] = '/account/listqueueswithnextmarker3';
         $sample['MaxResults'] = '2';
-        $sample['Queues'] = array('Queue' => array('Name' => 'myqueue', 'Url' => 'http://account.queue.core.windows.net/myqueue'));
+        $sample['Queues'] = ['Queue' => ['Name' => 'myqueue', 'Url' => 'http://account.queue.core.windows.net/myqueue']];
         $sample['NextMarker'] = '';
 
         return $sample;
@@ -313,12 +313,12 @@ class TestResources
 
     public static function listQueuesMultipleEntries()
     {
-        $sample = array();
+        $sample = [];
         $sample['MaxResults'] = '2';
-        $sample['Queues'] = array('Queue' => array(
-          0 => array('Name' => 'myqueue1', 'Url' => 'http://account.queue.core.windows.net/myqueue1'),
-          1 => array('Name' => 'myqueue2', 'Url' => 'http://account.queue.core.windows.net/myqueue2'),
-        ));
+        $sample['Queues'] = ['Queue' => [
+          0 => ['Name' => 'myqueue1', 'Url' => 'http://account.queue.core.windows.net/myqueue1'],
+          1 => ['Name' => 'myqueue2', 'Url' => 'http://account.queue.core.windows.net/myqueue2'],
+        ]];
         $sample['NextMarker'] = '/account/myqueue3';
 
         return $sample;
@@ -326,7 +326,7 @@ class TestResources
 
     public static function listContainersEmpty()
     {
-        $sample = array();
+        $sample = [];
         $sample['Containers'] = '';
         $sample['NextMarker'] = '';
 
@@ -335,17 +335,17 @@ class TestResources
 
     public static function listContainersOneEntry()
     {
-        $sample = array();
+        $sample = [];
         $sample['Marker'] = '/account/listqueueswithnextmarker3';
         $sample['MaxResults'] = '2';
-        $sample['Containers'] = array('Container' => array(
+        $sample['Containers'] = ['Container' => [
             'Name' => 'audio',
             'Url' => 'http://myaccount.blob.core.windows.net/audio',
-            'Properties' => array(
+            'Properties' => [
                 'Last-Modified' => 'Wed, 12 Aug 2009 20:39:39 GMT',
                 'Etag' => '0x8CACB9BD7C6B1B2',
-            ),
-            ));
+            ],
+        ]];
         $sample['NextMarker'] = '';
 
         return $sample;
@@ -353,26 +353,26 @@ class TestResources
 
     public static function listContainersMultipleEntries()
     {
-        $sample = array();
+        $sample = [];
         $sample['MaxResults'] = '3';
-        $sample['Containers'] = array('Container' => array(
-          0 => array(
+        $sample['Containers'] = ['Container' => [
+          0 => [
             'Name' => 'audio',
             'Url' => 'http://myaccount.blob.core.windows.net/audio',
-            'Properties' => array(
+            'Properties' => [
                 'Last-Modified' => 'Wed, 12 Aug 2009 20:39:39 GMT',
                 'Etag' => '0x8CACB9BD7C6B1B2',
-            ),
-            ),
-          1 => array(
+            ],
+          ],
+          1 => [
             'Name' => 'images',
             'Url' => 'http://myaccount.blob.core.windows.net/images',
-            'Properties' => array(
+            'Properties' => [
                 'Last-Modified' => 'Wed, 12 Aug 2009 20:39:39 GMT',
                 'Etag' => '0x8CACB9BD7C1EEEC',
-            ),
-            ),
-        ));
+            ],
+          ],
+        ]];
         $sample['NextMarker'] = 'video';
 
         return $sample;
@@ -380,40 +380,40 @@ class TestResources
 
     public static function getContainerAclOneEntrySample()
     {
-        $sample = array();
-        $sample['SignedIdentifiers'] = array('SignedIdentifier' => array(
+        $sample = [];
+        $sample['SignedIdentifiers'] = ['SignedIdentifier' => [
             'Id' => 'MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=',
-            'AccessPolicy' => array(
+            'AccessPolicy' => [
                 'Start' => '2009-09-28T08%3A49%3A37.0000000Z',
                 'Expiry' => '2009-09-29T08%3A49%3A37.0000000Z',
-                'Permission' => 'rwd', ),
-            ));
+                'Permission' => 'rwd',],
+        ]];
 
         return $sample;
     }
 
     public static function getContainerAclMultipleEntriesSample()
     {
-        $sample = array();
-        $sample['SignedIdentifiers'] = array('SignedIdentifier' => array(
-            0 => array('Id' => 'HYQzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=',
-            'AccessPolicy' => array(
+        $sample = [];
+        $sample['SignedIdentifiers'] = ['SignedIdentifier' => [
+            0 => ['Id' => 'HYQzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=',
+            'AccessPolicy' => [
                 'Start' => '2010-09-28T08%3A49%3A37.0000000Z',
                 'Expiry' => '2010-09-29T08%3A49%3A37.0000000Z',
-                'Permission' => 'wd', ), ),
-            1 => array('Id' => 'MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=',
-            'AccessPolicy' => array(
+                'Permission' => 'wd',],],
+            1 => ['Id' => 'MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=',
+            'AccessPolicy' => [
                 'Start' => '2009-09-28T08%3A49%3A37.0000000Z',
                 'Expiry' => '2009-09-29T08%3A49%3A37.0000000Z',
-                'Permission' => 'rwd', ), ),
-            ));
+                'Permission' => 'rwd',],],
+        ]];
 
         return $sample;
     }
 
     public static function listBlobsEmpty()
     {
-        $sample = array();
+        $sample = [];
         $sample['Blobs'] = '';
         $sample['NextMarker'] = '';
 
@@ -422,19 +422,19 @@ class TestResources
 
     public static function listBlobsOneEntry()
     {
-        $sample = array();
+        $sample = [];
         $sample['Marker'] = '/account/listblobswithnextmarker3';
         $sample['MaxResults'] = '2';
         $sample['Delimiter'] = 'mydelimiter';
         $sample['Prefix'] = 'myprefix';
-        $sample['Blobs'] = array(
-            'BlobPrefix' => array('Name' => 'myblobprefix'),
-            'Blob' => array(
+        $sample['Blobs'] = [
+            'BlobPrefix' => ['Name' => 'myblobprefix'],
+            'Blob' => [
                 'Name' => 'myblob',
                 'Url' => 'http://account.blob.core.windows.net/myblob',
                 'Snapshot' => '10-12-2011',
-                'Metadata' => array('Name1' => 'Value1', 'Name2' => 'Value2'),
-                'Properties' => array(
+                'Metadata' => ['Name1' => 'Value1', 'Name2' => 'Value2'],
+                'Properties' => [
                     'Last-Modified' => 'Sat, 04 Sep 2011 12:43:08 GMT',
                     'Etag' => '0x8CAFB82EFF70C46',
                     'Content-Length' => '10',
@@ -446,9 +446,9 @@ class TestResources
                     'x-ms-blob-sequence-number' => '0',
                     'BlobType' => 'BlockBlob',
                     'LeaseStatus' => 'locked',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $sample['NextMarker'] = '';
 
@@ -457,19 +457,19 @@ class TestResources
 
     public static function listBlobsMultipleEntries()
     {
-        $sample = array();
+        $sample = [];
         $sample['Marker'] = '/account/listblobswithnextmarker3';
         $sample['MaxResults'] = '2';
-        $sample['Blobs'] = array(
-            'BlobPrefix' => array(
-                0 => array('Name' => 'myblobprefix'),
-                1 => array('Name' => 'myblobprefix2'), ),
-            'Blob' => array(0 => array(
+        $sample['Blobs'] = [
+            'BlobPrefix' => [
+                0 => ['Name' => 'myblobprefix'],
+                1 => ['Name' => 'myblobprefix2'],],
+            'Blob' => [0 => [
                 'Name' => 'myblob',
                 'Url' => 'http://account.blob.core.windows.net/myblob',
                 'Snapshot' => '10-12-2011',
-                'Metadata' => array('Name1' => 'Value1', 'Name2' => 'Value2'),
-                'Properties' => array(
+                'Metadata' => ['Name1' => 'Value1', 'Name2' => 'Value2'],
+                'Properties' => [
                     'Last-Modified' => 'Sat, 04 Sep 2011 12:43:08 GMT',
                     'Etag' => '0x8CAFB82EFF70C46',
                     'Content-Length' => '10',
@@ -481,15 +481,15 @@ class TestResources
                     'x-ms-blob-sequence-number' => '0',
                     'BlobType' => 'BlockBlob',
                     'LeaseStatus' => 'locked',
-                ),
-            ),
+                ],
+            ],
 
-            1 => array(
+            1 => [
                 'Name' => 'myblob2',
                 'Url' => 'http://account.blob.core.windows.net/myblob2',
                 'Snapshot' => '10-12-2011',
-                'Metadata' => array('Name1' => 'Value1', 'Name2' => 'Value2'),
-                'Properties' => array(
+                'Metadata' => ['Name1' => 'Value1', 'Name2' => 'Value2'],
+                'Properties' => [
                     'Last-Modified' => 'Sun, 26 Feb 2010 12:43:08 GMT',
                     'Etag' => '0x7CQWER2EFF70C46',
                     'Content-Length' => '20',
@@ -501,8 +501,8 @@ class TestResources
                     'x-ms-blob-sequence-number' => '1',
                     'BlobType' => 'PageBlob',
                     'LeaseStatus' => 'unlocked',
-                ),
-            ), ), );
+                ],
+            ],],];
 
         $sample['NextMarker'] = 'value';
 
@@ -524,24 +524,24 @@ class TestResources
 
     public static function getTestOAuthAccessToken()
     {
-        $token = array(
+        $token = [
             Resources::OAUTH_ACCESS_TOKEN => 'http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=client_id&http%3a%2f%2fschemas.microsoft.com%2f'
                 .'accesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindows'
                 .'AzureMediaServices&ExpiresOn=1326498007&Issuer=https%3a%2f%2f wamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=hV1WF7sTe%2ffoHqzK%2ftm'
                 .'nwQY22NRPaDytcOOpC9Nv4DA%3d","token_type":"http://schemas.xmlsoap.org/ws/2009/11/swt-token-profile-1.0',
             Resources::OAUTH_EXPIRES_IN => '3599',
             Resources::OAUTH_SCOPE => 'urn:WindowsAzureMediaServices',
-        );
+        ];
 
         return $token;
     }
 
     public static function getSimpleJson()
     {
-        $data['dataArray'] = array('test1', 'test2', 'test3');
+        $data['dataArray'] = ['test1', 'test2', 'test3'];
         $data['jsonArray'] = '["test1","test2","test3"]';
 
-        $data['dataObject'] = array('k1' => 'test1', 'k2' => 'test2', 'k3' => 'test3');
+        $data['dataObject'] = ['k1' => 'test1', 'k2' => 'test2', 'k3' => 'test3'];
         $data['jsonObject'] = '{"k1":"test1","k2":"test2","k3":"test3"}';
 
         return $data;

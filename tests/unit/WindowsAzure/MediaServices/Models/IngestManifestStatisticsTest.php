@@ -53,12 +53,12 @@ class IngestManifestStatisticsTest extends \PHPUnit_Framework_TestCase
         $finishedFilesCount = 3;
         $errorFilesCount = 1;
         $errorFilesDetails = 'error Files Details';
-        $options = array(
+        $options = [
                 'PendingFilesCount' => $pendingFilesCount,
                 'FinishedFilesCount' => $finishedFilesCount,
                 'ErrorFilesCount' => $errorFilesCount,
                 'ErrorFilesDetails' => $errorFilesDetails,
-        );
+        ];
 
         // Test
         $manifestStatistics = IngestManifestStatistics::createFromOptions($options);
@@ -78,9 +78,9 @@ class IngestManifestStatisticsTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $errorFilesDetails = 'error Files Details';
-        $options = array(
+        $options = [
                 'ErrorFilesDetails' => $errorFilesDetails,
-        );
+        ];
         $manifestStatistics = IngestManifestStatistics::createFromOptions($options);
 
         // Test
@@ -98,9 +98,9 @@ class IngestManifestStatisticsTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $errorFilesCount = 2;
-        $options = array(
+        $options = [
                 'ErrorFilesCount' => $errorFilesCount,
-        );
+        ];
         $manifestStatistics = IngestManifestStatistics::createFromOptions($options);
 
         // Test
@@ -118,9 +118,9 @@ class IngestManifestStatisticsTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $finishedFilesCount = 2;
-        $options = array(
+        $options = [
                 'FinishedFilesCount' => $finishedFilesCount,
-        );
+        ];
         $manifestStatistics = IngestManifestStatistics::createFromOptions($options);
 
         // Test
@@ -138,9 +138,9 @@ class IngestManifestStatisticsTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $pendingFilesCount = 2;
-        $options = array(
+        $options = [
                 'PendingFilesCount' => $pendingFilesCount,
-        );
+        ];
         $manifestStatistics = IngestManifestStatistics::createFromOptions($options);
 
         // Test

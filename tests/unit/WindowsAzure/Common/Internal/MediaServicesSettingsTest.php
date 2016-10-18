@@ -128,12 +128,12 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
         $expectedMsg = sprintf(
             Resources::INVALID_CONNECTION_STRING_SETTING_KEY,
             $invalidKey,
-            implode("\n", array(
+            implode("\n", [
                 Resources::MEDIA_SERVICES_ENDPOINT_URI_NAME,
                 Resources::MEDIA_SERVICES_OAUTH_ENDPOINT_URI_NAME,
                 Resources::MEDIA_SERVICES_ACCOUNT_NAME,
                 Resources::MEDIA_SERVICES_ACCESS_KEY,
-            ))
+            ])
         );
         $this->setExpectedException('\RuntimeException', $expectedMsg);
 
@@ -187,7 +187,7 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($accountName, $settings->getAccountName());
         $this->assertEquals($accessKey, $settings->getAccessKey());
         $this->assertEquals($endpointUri, $settings->getEndpointUri());
-        $this->assertEquals($oauthEndpointUri, $settings->getOauthEndpointUri());
+        $this->assertEquals($oauthEndpointUri, $settings->getOAuthEndpointUri());
     }
 
     /**
@@ -208,7 +208,7 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($accountName, $settings->getAccountName());
         $this->assertEquals($accessKey, $settings->getAccessKey());
         $this->assertEquals($endpointUri, $settings->getEndpointUri());
-        $this->assertEquals($oauthEndpointUri, $settings->getOauthEndpointUri());
+        $this->assertEquals($oauthEndpointUri, $settings->getOAuthEndpointUri());
     }
 
     /**

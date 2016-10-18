@@ -49,10 +49,10 @@ class ErrorDetailTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Code' => 404,
                 'Message' => 'Not found',
-        );
+        ];
 
         // Test
         $error = ErrorDetail::createFromOptions($options);
@@ -69,10 +69,10 @@ class ErrorDetailTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Code' => 404,
                 'Message' => 'Not found',
-        );
+        ];
         $error = ErrorDetail::createFromOptions($options);
 
         // Test
@@ -89,10 +89,10 @@ class ErrorDetailTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Code' => 404,
                 'Message' => 'Not found',
-        );
+        ];
         $error = ErrorDetail::createFromOptions($options);
 
         // Test

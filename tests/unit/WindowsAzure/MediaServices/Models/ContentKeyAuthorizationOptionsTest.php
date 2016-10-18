@@ -55,14 +55,14 @@ class ContentKeyAuthorizationOptionsTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $contentKeyAuthorizationOptionsId = 'content-key-authorization-options-id-12563';
-        $options = array(
+        $options = [
                 'Id' => $contentKeyAuthorizationOptionsId,
                 'Name' => 'testNameForContentKeyAuthorizationPolicyOption',
                 'KeyDeliveryType' => 2,
                 'KeyDeliveryConfiguration' => 'testKeyDeliveryConfiguration',
-                'Restrictions' => array(),
+                'Restrictions' => [],
 
-        );
+        ];
 
         // Test
         $contentKeyAuthorizationOptions = ContentKeyAuthorizationPolicyOption::createFromOptions($options);
@@ -177,7 +177,7 @@ class ContentKeyAuthorizationOptionsTest extends \PHPUnit_Framework_TestCase
         $restriction = new ContentKeyAuthorizationPolicyRestriction();
         $restriction->setName($restrictionName);
         $restriction->setKeyRestrictionType(ContentKeyRestrictionType::OPEN);
-        $restrictions = array($restriction);
+        $restrictions = [$restriction];
 
         $options = new ContentKeyAuthorizationPolicyOption();
         $options->setName($name);

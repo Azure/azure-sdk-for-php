@@ -141,8 +141,8 @@ class AtomLinkTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::getHreflang
-     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::setHreflang
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::getHrefLang
+     * @covers \WindowsAzure\Common\Internal\Atom\AtomLink::setHrefLang
      */
     public function testGetSetHreflang()
     {
@@ -151,8 +151,8 @@ class AtomLinkTest extends \PHPUnit_Framework_TestCase
         $atomLink = new AtomLink();
 
         // Test
-        $atomLink->setHreflang($expected);
-        $actual = $atomLink->getHreflang();
+        $atomLink->setHrefLang($expected);
+        $actual = $atomLink->getHrefLang();
 
         // Assert 
         $this->assertEquals(

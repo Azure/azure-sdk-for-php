@@ -50,7 +50,7 @@ class ListAffinityGroupsResultTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $result = new ListAffinityGroupsResult();
-        $expected = array();
+        $expected = [];
 
         // Test
         $result->setAffinityGroups($expected);

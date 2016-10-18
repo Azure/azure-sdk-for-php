@@ -52,10 +52,10 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
         // Setup
         $id = 'manifest-file-id-897';
         $name = 'Manifest File Name 4634';
-        $encryptionKeyId = 'Encription-key-id-345';
+        $encryptionKeyId = 'Encryption-key-id-345';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
-        $options = array(
+        $options = [
                 'Id' => $id,
                 'Name' => $name,
                 'EncryptionVersion' => 'Encryption Version',
@@ -71,7 +71,7 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
                 'ParentIngestManifestId' => $parentIngestManifestId,
                 'ParentIngestManifestAssetId' => $parentIngestManifestAssetId,
                 'ErrorDetail' => 'Some error details',
-        );
+        ];
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
 
@@ -107,12 +107,12 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
-        $options = array(
+        $options = [
                 'Id' => $id,
                 'Name' => $name,
                 'ParentIngestManifestId' => $parentIngestManifestId,
                 'ParentIngestManifestAssetId' => $parentIngestManifestAssetId,
-        );
+        ];
         $manifestFile = IngestManifestFile::createFromOptions($options);
 
         // Test
@@ -132,12 +132,12 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
-        $options = array(
+        $options = [
                 'Name' => $name,
                 'Created' => '2013-12-18',
                 'ParentIngestManifestId' => $parentIngestManifestId,
                 'ParentIngestManifestAssetId' => $parentIngestManifestAssetId,
-        );
+        ];
         $created = new \Datetime($options['Created']);
         $manifestFile = IngestManifestFile::createFromOptions($options);
 
@@ -158,12 +158,12 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
-        $options = array(
+        $options = [
                 'Name' => $name,
                 'LastModified' => '2013-12-18',
                 'ParentIngestManifestId' => $parentIngestManifestId,
                 'ParentIngestManifestAssetId' => $parentIngestManifestAssetId,
-        );
+        ];
         $modified = new \Datetime($options['LastModified']);
         $manifestFile = IngestManifestFile::createFromOptions($options);
 
@@ -185,12 +185,12 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
-        $options = array(
+        $options = [
                 'Name' => $name,
                 'ParentIngestManifestId' => $parentIngestManifestId,
                 'ParentIngestManifestAssetId' => $parentIngestManifestAssetId,
                 'ErrorDetail' => $errorDetail,
-        );
+        ];
         $manifestFile = IngestManifestFile::createFromOptions($options);
 
         // Test
@@ -211,12 +211,12 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
         $name = 'Manifest File Name 4634';
         $parentIngestManifestId = 'parent-ingest-manifest-id-345';
         $parentIngestManifestAssetId = 'parent-ingest-manifest-asset-id-347';
-        $options = array(
+        $options = [
                 'Name' => $name,
                 'ParentIngestManifestId' => $parentIngestManifestId,
                 'ParentIngestManifestAssetId' => $parentIngestManifestAssetId,
                 'State' => $state,
-        );
+        ];
         $manifestFile = IngestManifestFile::createFromOptions($options);
 
         // Test

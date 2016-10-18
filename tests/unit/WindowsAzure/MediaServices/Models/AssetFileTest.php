@@ -104,11 +104,11 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   {
 
       // Setup
-      $assetFileArray = array(
+      $assetFileArray = [
           'Name' => 'NameName',
           'ParentAssetId' => 'ksfg78',
           'LastModified' => '2013-11-21',
-      );
+      ];
       $modified = new \Datetime($assetFileArray['LastModified']);
       $result = AssetFile::createFromOptions($assetFileArray);
 
@@ -126,11 +126,11 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   {
 
       // Setup
-      $assetFileArray = array(
+      $assetFileArray = [
           'Name' => 'NameName',
           'ParentAssetId' => 'ksfg78',
           'Created' => '2013-11-21',
-      );
+      ];
       $created = new \Datetime($assetFileArray['Created']);
       $result = AssetFile::createFromOptions($assetFileArray);
 
@@ -207,14 +207,14 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
 
       // Setup
       $assetFile = new AssetFile('Name', 'AssetId');
-      $IsEncr = true;
-      $assetFile->setIsEncrypted($IsEncr);
+      $isEncr = true;
+      $assetFile->setIsEncrypted($isEncr);
 
       // Test
       $actual = $assetFile->getIsEncrypted();
 
       // Assert
-      $this->assertEquals($IsEncr, $actual);
+      $this->assertEquals($isEncr, $actual);
   }
 
   /**
@@ -319,11 +319,11 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   {
 
      // Setup
-      $assetFileArray = array(
+      $assetFileArray = [
           'Id' => 'kjdfgh56',
           'Name' => 'NameName',
           'ParentAssetId' => 'ksfg78',
-      );
+      ];
       $result = AssetFile::createFromOptions($assetFileArray);
 
       // Test
@@ -341,13 +341,13 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   {
 
       // Setup
-      $assetFileArray = array(
+      $assetFileArray = [
           'Id' => 'dfhdgh56',
           'Name' => 'newAssetFile',
           'ContentFileSize' => '20 mb',
           'ParentAssetId' => 'kdjfg67',
           'EncryptionVersion' => 'EncryptionVersion',
-          'EncryptionScheme' => 'EnryptionScheme',
+          'EncryptionScheme' => 'EncryptionScheme',
           'IsEncrypted' => true,
           'EncryptionKeyId' => 'keyId896',
           'InitializationVector' => 'InitVector',
@@ -356,7 +356,7 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
           'Created' => '2013-11-19',
           'MimeType' => 'type of mime',
           'ContentChecksum' => 'ContentChecksum',
-      );
+      ];
       $created = new \Datetime($assetFileArray['Created']);
       $modified = new \Datetime($assetFileArray['LastModified']);
 

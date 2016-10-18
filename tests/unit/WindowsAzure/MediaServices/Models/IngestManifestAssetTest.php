@@ -45,16 +45,16 @@ class IngestManifestAssetTest extends \PHPUnit_Framework_TestCase
      * @covers \WindowsAzure\MediaServices\Models\IngestManifestAsset::createFromOptions
      * @covers \WindowsAzure\MediaServices\Models\IngestManifestAsset::fromArray
      */
-    public function testCreatefromOptions()
+    public function testCreateFromOptions()
     {
 
         // Setup
-        $options = array(
+        $options = [
               'Id' => 'asset-id-4567',
               'Created' => '2013-12-18',
               'LastModified' => '2013-12-18',
               'ParentIngestManifestId' => 'parent-manifest-id-3562',
-        );
+        ];
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
 
@@ -92,10 +92,10 @@ class IngestManifestAssetTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'LastModified' => '2013-12-18',
                 'ParentIngestManifestId' => 'parent-manifest-id-3562',
-        );
+        ];
         $modified = new \Datetime($options['LastModified']);
         $manifestAsset = IngestManifestAsset::createFromOptions($options);
 
@@ -113,10 +113,10 @@ class IngestManifestAssetTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Created' => '2013-12-18',
                 'ParentIngestManifestId' => 'parent-manifest-id-3562',
-        );
+        ];
         $created = new \Datetime($options['Created']);
         $manifestAsset = IngestManifestAsset::createFromOptions($options);
 
@@ -135,10 +135,10 @@ class IngestManifestAssetTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $id = 'ingest-id-258';
-        $options = array(
+        $options = [
                 'Id' => $id,
                 'ParentIngestManifestId' => 'parent-manifest-id-3562',
-        );
+        ];
         $manifestAsset = IngestManifestAsset::createFromOptions($options);
 
         // Test

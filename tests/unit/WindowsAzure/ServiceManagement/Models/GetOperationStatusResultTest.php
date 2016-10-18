@@ -51,12 +51,12 @@ class GetOperationStatusResultTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = new ServiceException('400', 'error message');
-        $input = array(
-          'Error' => array(
+        $input = [
+          'Error' => [
               'Code' => '400',
               'Message' => 'error message',
-          ),
-        );
+          ],
+        ];
 
         // Test
         $result = GetOperationStatusResult::create($input);

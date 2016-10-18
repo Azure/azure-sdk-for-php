@@ -56,7 +56,7 @@ class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
         $channel = new HttpClient();
         $url = new Url('http://microsoft.com');
         $channel->setUrl($url);
-        $scheme = new SharedKeyAuthScheme('acount', 'key');
+        $scheme = new SharedKeyAuthScheme('account', 'key');
         $filter = new AuthenticationFilter($scheme);
 
         // Test
@@ -76,7 +76,7 @@ class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
         $channel = new HttpClient();
         $url = new Url('http://microsoft.com');
         $channel->setUrl($url);
-        $scheme = new SharedKeyAuthScheme('acount', 'key');
+        $scheme = new SharedKeyAuthScheme('account', 'key');
         $filter = new AuthenticationFilter($scheme);
 
         // Test
@@ -96,7 +96,7 @@ class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
         $url = new Url('http://microsoft.com');
         $channel->setUrl($url);
         $response = null;
-        $scheme = new SharedKeyAuthScheme('acount', 'key');
+        $scheme = new SharedKeyAuthScheme('account', 'key');
         $filter = new AuthenticationFilter($scheme);
 
         // Test

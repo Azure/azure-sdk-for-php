@@ -68,7 +68,7 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Id' => 'jdfghrf78',
                 'Configuration' => 'some configuration',
                 'Created' => '2013-11-27',
@@ -83,7 +83,7 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
                 'EncryptionScheme' => 'encryption scheme',
                 'EncryptionVersion' => 'version 2.1.1',
                 'InitializationVector' => 'Initialization Vector',
-        );
+        ];
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
 
@@ -114,11 +114,11 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Id' => 'jdfghrf78',
                 'NumberofInputAssets' => 4,
                 'NumberofOutputAssets' => 3,
-        );
+        ];
         $task = TaskTemplate::createFromOptions($options);
 
         // Test
@@ -198,12 +198,12 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'NumberofInputAssets' => 4,
                 'NumberofOutputAssets' => 3,
                 'Options' => 42,
 
-        );
+        ];
         $task = TaskTemplate::createFromOptions($options);
 
         // Test
@@ -304,11 +304,11 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'NumberofInputAssets' => 4,
                 'NumberofOutputAssets' => 3,
                 'Created' => '2013-11-27',
-        );
+        ];
         $task = TaskTemplate::createFromOptions($options);
         $created = new \Datetime($options['Created']);
 
@@ -326,11 +326,11 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'NumberofInputAssets' => 4,
                 'NumberofOutputAssets' => 3,
                 'LastModified' => '2013-11-27',
-        );
+        ];
         $task = TaskTemplate::createFromOptions($options);
         $modified = new \Datetime($options['LastModified']);
 

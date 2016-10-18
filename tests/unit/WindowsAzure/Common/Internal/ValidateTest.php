@@ -218,8 +218,8 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     public function testIsInstanceOfArrayPasses()
     {
         // Setup
-        $value = array();
-        $arrayObject = array();
+        $value = [];
+        $arrayObject = [];
 
         // Test
         $result = Validate::isInstanceOf($value, $arrayObject, 'value');
@@ -235,7 +235,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $this->setExpectedException('\InvalidArgumentException');
-        $value = array();
+        $value = [];
         $stringObject = 'testString';
 
         // Test
@@ -283,7 +283,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $value = null;
-        $arrayObject = array();
+        $arrayObject = [];
 
         // Test
         $result = Validate::isInstanceOf($value, $arrayObject, 'value');

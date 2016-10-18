@@ -124,12 +124,12 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $accesPolicyArray = array(
+        $accessPolicyArray = [
             'Name' => 'newName',
             'LastModified' => '2013-11-21',
-        );
-        $modified = new \Datetime($accesPolicyArray['LastModified']);
-        $value = AccessPolicy::createFromOptions($accesPolicyArray);
+        ];
+        $modified = new \Datetime($accessPolicyArray['LastModified']);
+        $value = AccessPolicy::createFromOptions($accessPolicyArray);
 
         // Test
         $actual = $value->getLastModified();
@@ -145,10 +145,10 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $accesPolicyArray = array(
+        $accesPolicyArray = [
             'Name' => 'newName',
             'Created' => '2013-11-21',
-        );
+        ];
         $created = new \Datetime($accesPolicyArray['Created']);
         $value = AccessPolicy::createFromOptions($accesPolicyArray);
 
@@ -166,10 +166,10 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $accesPolicyArray = array(
+        $accesPolicyArray = [
             'Id' => 'hjgd67',
             'Name' => 'newName',
-        );
+        ];
         $value = AccessPolicy::createFromOptions($accesPolicyArray);
 
         // Test
@@ -187,7 +187,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $accessArray = array(
+        $accessArray = [
             'Id' => '1',
             'Created' => '2013-11-19',
             'LastModified' => '2013-11-19',
@@ -195,7 +195,7 @@ class AccessPolicyTest extends \PHPUnit_Framework_TestCase
             'DurationInMinutes' => 25,
             'Permissions' => AccessPolicy::PERMISSIONS_READ + AccessPolicy::PERMISSIONS_WRITE
                 + AccessPolicy::PERMISSIONS_DELETE + AccessPolicy::PERMISSIONS_LIST,
-        );
+        ];
         $created = new \Datetime($accessArray['Created']);
         $modified = new \Datetime($accessArray['LastModified']);
 

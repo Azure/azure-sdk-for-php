@@ -61,12 +61,12 @@ class TableSharedKeyLiteAuthSchemeTest extends \PHPUnit_Framework_TestCase
     public function testComputeSignatureSimple()
     {
         $httpMethod = 'GET';
-        $queryParams = array(Resources::QP_COMP => 'list');
+        $queryParams = [Resources::QP_COMP => 'list'];
         $url = TestResources::URI1;
         $date = TestResources::DATE1;
         $apiVersion = Resources::STORAGE_API_LATEST_VERSION;
         $accountName = TestResources::ACCOUNT_NAME;
-        $headers = array(Resources::X_MS_DATE => $date, Resources::X_MS_VERSION => $apiVersion);
+        $headers = [Resources::X_MS_DATE => $date, Resources::X_MS_VERSION => $apiVersion];
         $expected = "\n/$accountName".parse_url($url, PHP_URL_PATH).'?comp=list';
         $mock = new TableSharedKeyLiteAuthSchemeMock($accountName, TestResources::KEY4);
 
@@ -85,8 +85,8 @@ class TableSharedKeyLiteAuthSchemeTest extends \PHPUnit_Framework_TestCase
         $accountKey = TestResources::KEY4;
         $url = TestResources::URI2;
         $date1 = TestResources::DATE2;
-        $headers = array(Resources::X_MS_VERSION => $apiVersion, Resources::X_MS_DATE => $date1);
-        $queryParams = array(Resources::QP_COMP => 'list');
+        $headers = [Resources::X_MS_VERSION => $apiVersion, Resources::X_MS_DATE => $date1];
+        $queryParams = [Resources::QP_COMP => 'list'];
         $httpMethod = 'GET';
         $expected = 'SharedKeyLite '.$accountName.':KB+TK3FPHLADYwd0/b3PcZgK/fYXUSlwsoOIf80l2co=';
 

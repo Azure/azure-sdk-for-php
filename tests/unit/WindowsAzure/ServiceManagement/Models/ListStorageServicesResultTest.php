@@ -49,8 +49,8 @@ class ListStorageServicesResultTest extends \PHPUnit_Framework_TestCase
     public function testSetStorageServices()
     {
         // Setup
-        $expected = array();
-        $result = new ListStorageServicesResult(array(), 'tag');
+        $expected = [];
+        $result = new ListStorageServicesResult([], 'tag');
 
         // Test
         $result->setStorageServices($expected);

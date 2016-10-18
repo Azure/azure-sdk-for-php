@@ -59,10 +59,10 @@ class StorageAuthSchemeTest extends \PHPUnit_Framework_TestCase
     public function testComputeCanonicalizedHeadersMock()
     {
         $date = TestResources::DATE1;
-        $headers = array();
+        $headers = [];
         $headers[Resources::X_MS_DATE] = $date;
         $headers[Resources::X_MS_VERSION] = Resources::STORAGE_API_LATEST_VERSION;
-        $expected = array();
+        $expected = [];
         $expected[] = Resources::X_MS_DATE.':'.$date;
         $expected[] = Resources::X_MS_VERSION.':'.Resources::STORAGE_API_LATEST_VERSION;
         $mock = new StorageAuthSchemeMock(TestResources::ACCOUNT_NAME, TestResources::KEY4);
@@ -77,7 +77,7 @@ class StorageAuthSchemeTest extends \PHPUnit_Framework_TestCase
      */
     public function testComputeCanonicalizedResourceMockSimple()
     {
-        $queryVariables = array();
+        $queryVariables = [];
         $queryVariables['COMP'] = 'list';
         $accountName = TestResources::ACCOUNT_NAME;
         $url = TestResources::URI1;
@@ -94,7 +94,7 @@ class StorageAuthSchemeTest extends \PHPUnit_Framework_TestCase
      */
     public function testComputeCanonicalizedResourceMockMultipleValues()
     {
-        $queryVariables = array();
+        $queryVariables = [];
         $queryVariables['COMP'] = 'list';
         $queryVariables[Resources::QP_INCLUDE] = 'snapshots,metadata,uncommittedblobs';
         $expectedQueryPart = "comp:list\ninclude:metadata,snapshots,uncommittedblobs";
@@ -113,7 +113,7 @@ class StorageAuthSchemeTest extends \PHPUnit_Framework_TestCase
      */
     public function testComputeCanonicalizedResourceForTableMock()
     {
-        $queryVariables = array();
+        $queryVariables = [];
         $queryVariables['COMP'] = 'list';
         $accountName = TestResources::ACCOUNT_NAME;
         $url = TestResources::URI1;

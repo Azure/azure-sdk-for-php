@@ -49,14 +49,14 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Id' => 'sfgsfg34',
                 'Name' => 'Some Name',
                 'Description' => 'Description of media processor',
                 'Sku' => '456-123-789',
                 'Vendor' => 'Vendors name',
                 'Version' => '3.6.5',
-        );
+        ];
 
         // Test
         $mediaProc = MediaProcessor::createFromOptions($options);
@@ -78,9 +78,9 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Id' => 'sfgsfg34',
-        );
+        ];
         $mediaProc = MediaProcessor::createFromOptions($options);
 
         // Test
@@ -97,9 +97,9 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Name' => 'Some Name',
-        );
+        ];
         $mediaProc = MediaProcessor::createFromOptions($options);
 
         // Test
@@ -116,9 +116,9 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Description' => 'Description of media processor',
-        );
+        ];
         $mediaProc = MediaProcessor::createFromOptions($options);
 
         // Test
@@ -135,9 +135,9 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Sku' => '123-456-789',
-        );
+        ];
         $mediaProc = MediaProcessor::createFromOptions($options);
 
         // Test
@@ -154,9 +154,9 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Vendor' => 'Vendors name',
-        );
+        ];
         $mediaProc = MediaProcessor::createFromOptions($options);
 
         // Test
@@ -173,9 +173,9 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Version' => '3.6.5',
-        );
+        ];
         $mediaProc = MediaProcessor::createFromOptions($options);
 
         // Test

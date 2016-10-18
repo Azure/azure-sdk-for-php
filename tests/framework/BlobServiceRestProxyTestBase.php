@@ -52,11 +52,11 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
         parent::setUp();
         $blobRestProxy = $this->builder->createBlobService($this->connectionString);
         parent::setProxy($blobRestProxy);
-        $this->_createdContainers = array();
+        $this->_createdContainers = [];
 
         // delete all existing blob containers
-        $containerlist = $this->restProxy->listContainers();
-        $containers = $containerlist->getcontainers();
+        $containerList = $this->restProxy->listContainers();
+        $containers = $containerList->getcontainers();
         foreach ($containers as $container) {
             $this->restProxy->deleteContainer($container->getName());
         }
@@ -134,7 +134,7 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function listContainers($containerPrefix = null)
     {
-        $result = array();
+        $result = [];
         $opts = new ListContainersOptions();
         if (!is_null($containerPrefix)) {
             $opts->setPrefix($containerPrefix);
@@ -156,7 +156,7 @@ class BlobServiceRestProxyTestBase extends ServiceRestProxyTestBase
             try {
                 $this->deleteContainer($value);
             } catch (\Exception $e) {
-                // Ignore exception and continue, will assume that this container doesn't exist in the sotrage account
+                // Ignore exception and continue, will assume that this container doesn't exist in the storage account
                 error_log($e->getMessage());
             }
         }

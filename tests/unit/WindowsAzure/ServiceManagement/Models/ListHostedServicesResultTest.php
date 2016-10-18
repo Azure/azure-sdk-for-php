@@ -49,8 +49,8 @@ class ListHostedServicesResultTest extends \PHPUnit_Framework_TestCase
     public function testSetHostedServices()
     {
         // Setup
-        $expected = array();
-        $result = new ListHostedServicesResult(array(), 'tag');
+        $expected = [];
+        $result = new ListHostedServicesResult([], 'tag');
 
         // Test
         $result->setHostedServices($expected);

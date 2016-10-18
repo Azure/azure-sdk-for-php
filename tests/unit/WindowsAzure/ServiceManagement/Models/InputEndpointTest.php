@@ -50,13 +50,13 @@ class InputEndpointTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = 'rolename';
-        $inputendpoint = new InputEndpoint();
+        $inputEndPoint = new InputEndpoint();
 
         // Test
-        $inputendpoint->setRoleName($expected);
+        $inputEndPoint->setRoleName($expected);
 
         // Assert
-        $this->assertEquals($expected, $inputendpoint->getRoleName());
+        $this->assertEquals($expected, $inputEndPoint->getRoleName());
     }
 
     /**
@@ -67,13 +67,13 @@ class InputEndpointTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = 'vip';
-        $inputendpoint = new InputEndpoint();
+        $inputEndPoint = new InputEndpoint();
 
         // Test
-        $inputendpoint->setVip($expected);
+        $inputEndPoint->setVip($expected);
 
         // Assert
-        $this->assertEquals($expected, $inputendpoint->getVip());
+        $this->assertEquals($expected, $inputEndPoint->getVip());
     }
 
     /**
@@ -84,12 +84,12 @@ class InputEndpointTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = 'port';
-        $inputendpoint = new InputEndpoint();
+        $inputEndPoint = new InputEndpoint();
 
         // Test
-        $inputendpoint->setPort($expected);
+        $inputEndPoint->setPort($expected);
 
         // Assert
-        $this->assertEquals($expected, $inputendpoint->getPort());
+        $this->assertEquals($expected, $inputEndPoint->getPort());
     }
 }

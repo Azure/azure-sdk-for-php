@@ -49,11 +49,11 @@ class ContentKeyAuthorizationRestrictionsTest extends \PHPUnit_Framework_TestCas
     public function testCreateFromOptions()
     {
         // Setup
-        $options = array(
+        $options = [
                 'Name' => 'restrictionName',
                 'KeyRestrictionType' => 2,
                 'Requirements' => 'testRequirements',
-        );
+        ];
 
         // Test
         $contentKeyAuthorizationRestriction = ContentKeyAuthorizationPolicyRestriction::createFromOptions($options);

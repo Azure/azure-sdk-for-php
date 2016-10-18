@@ -999,7 +999,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $expectedTestDoubleValue = 3.14159;
         $expectedTestBooleanValue = true;
         $expectedTestBooleanFalseValue = false;
-        $expectedTestArrayValue = array(2, 3, 5, 7);
+        $expectedTestArrayValue = [2, 3, 5, 7];
 
         $this->safeDeleteQueue($queueName);
         $this->createQueue($queueInfo);

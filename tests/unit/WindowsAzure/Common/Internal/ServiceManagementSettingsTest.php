@@ -203,7 +203,7 @@ class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
         $expectedMsg = sprintf(
             Resources::INVALID_CONNECTION_STRING_SETTING_KEY,
             $invalidKey,
-            implode("\n", array('SubscriptionID', 'CertificatePath', 'ServiceManagementEndpoint'))
+            implode("\n", ['SubscriptionID', 'CertificatePath', 'ServiceManagementEndpoint'])
         );
         $this->setExpectedException('\RuntimeException', $expectedMsg);
 
