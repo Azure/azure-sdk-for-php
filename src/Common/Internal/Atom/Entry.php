@@ -55,7 +55,7 @@ class Entry extends AtomBase
     /**
      * The category of the entry.
      *
-     * @var array
+     * @var Category[]
      */
     protected $category;
 
@@ -234,7 +234,7 @@ class Entry extends AtomBase
     /**
      * Gets the category.
      *
-     * @return array
+     * @return Category[]
      */
     public function getCategory()
     {
@@ -244,9 +244,9 @@ class Entry extends AtomBase
     /**
      * Sets the category.
      *
-     * @param string $category The category of the entry.
+     * @param Category[] $category The category of the entry.
      */
-    public function setCategory($category)
+    public function setCategory(array $category)
     {
         $this->category = $category;
     }

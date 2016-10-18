@@ -72,7 +72,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry();
 
         // Test
-        $entry->setAuthor(array($expected));
+        $entry->setAuthor([$expected]);
         $actual = $entry->getAuthor()[0];
 
         // Assert
@@ -94,8 +94,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry();
 
         // Test
-        $entry->setCategory($expected);
-        $actual = $entry->getCategory();
+        $entry->setCategory([$expected]);
+        $actual = $entry->getCategory()[0];
 
         // Assert
         $this->assertEquals(
