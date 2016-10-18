@@ -1639,15 +1639,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $path = '$batch';
         $statusCode = Resources::STATUS_ACCEPTED;
         $body = $batch->getBody();
-
-        print_r([
-            $method,
-            $headers,
-            $queryParams,
-            $postParams,
-            $path,
-            $statusCode,
-            $body]);
+        
         $response = $this->send(
             $method,
             $headers,
