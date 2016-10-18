@@ -115,7 +115,7 @@ class AtomBase
         Validate::isString($elementName, 'elementName');
 
         foreach ($itemArray as $itemInstance) {
-            $xmlWriter->startElementNs(
+            $xmlWriter->startElementNS(
                 'atom',
                 $elementName,
                 Resources::ATOM_NAMESPACE
@@ -310,7 +310,7 @@ class AtomBase
         Validate::isString($elementName, 'elementName');
 
         if (!empty($elementValue)) {
-            $xmlWriter->writeElementNs(
+            $xmlWriter->writeElementNS(
                 $prefix,
                 $elementName,
                 $namespace,

@@ -125,7 +125,7 @@ class XmlSerializer implements ISerializer
             }
         }
 
-        return;
+        return null;
     }
 
     /** 
@@ -220,7 +220,7 @@ class XmlSerializer implements ISerializer
             $xmlw->startElement($rootName);
         } else {
             foreach ($docNamespace as $uri => $prefix) {
-                $xmlw->startElementNs($prefix, $rootName, $uri);
+                $xmlw->startElementNS($prefix, $rootName, $uri);
                 break;
             }
         }

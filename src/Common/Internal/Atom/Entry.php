@@ -487,7 +487,7 @@ class Entry extends AtomBase
     public function writeXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->startElementNs(
+        $xmlWriter->startElementNS(
             'atom',
             Resources::ENTRY,
             Resources::ATOM_NAMESPACE
@@ -599,7 +599,7 @@ class Entry extends AtomBase
         );
 
         if (!is_null($this->updated)) {
-            $xmlWriter->writeElementNs(
+            $xmlWriter->writeElementNS(
                 'atom',
                 'updated',
                 Resources::ATOM_NAMESPACE,

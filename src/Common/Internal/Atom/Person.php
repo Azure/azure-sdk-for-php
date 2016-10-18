@@ -167,7 +167,7 @@ class Person extends AtomBase
     public function writeXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->startElementNs(
+        $xmlWriter->startElementNS(
             'atom',
             'person',
             Resources::ATOM_NAMESPACE
@@ -184,7 +184,7 @@ class Person extends AtomBase
     public function writeInnerXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->writeElementNs(
+        $xmlWriter->writeElementNS(
             'atom',
             'name',
             Resources::ATOM_NAMESPACE,

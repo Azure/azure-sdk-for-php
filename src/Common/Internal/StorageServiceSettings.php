@@ -427,7 +427,7 @@ class StorageServiceSettings extends ServiceSettings
             return self::_createStorageServiceSettings($tokenizedSettings);
         }
 
-        self::noMatch($connectionString);
+        return self::noMatch($connectionString);
     }
 
     /**

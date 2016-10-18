@@ -211,7 +211,7 @@ class ServiceBusSettings extends ServiceSettings
             );
         }
 
-        self::noMatch($connectionString);
+        return self::noMatch($connectionString);
     }
 
     /**

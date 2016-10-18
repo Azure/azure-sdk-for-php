@@ -566,7 +566,7 @@ class Feed extends AtomBase
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
 
-        $xmlWriter->startElementNs('atom', 'feed', Resources::ATOM_NAMESPACE);
+        $xmlWriter->startElementNS('atom', 'feed', Resources::ATOM_NAMESPACE);
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
@@ -676,7 +676,7 @@ class Feed extends AtomBase
         );
 
         if (!is_null($this->updated)) {
-            $xmlWriter->writeElementNs(
+            $xmlWriter->writeElementNS(
                 'atom',
                 'updated',
                 Resources::ATOM_NAMESPACE,

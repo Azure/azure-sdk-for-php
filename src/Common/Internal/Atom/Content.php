@@ -171,7 +171,7 @@ class Content extends AtomBase
     public function writeXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->startElementNs(
+        $xmlWriter->startElementNS(
             'atom',
             'content',
             Resources::ATOM_NAMESPACE

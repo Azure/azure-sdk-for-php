@@ -480,7 +480,7 @@ class Source extends AtomBase
     public function writeXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->startElementNs(
+        $xmlWriter->startElementNS(
             'atom',
             'source',
             Resources::ATOM_NAMESPACE
@@ -532,7 +532,7 @@ class Source extends AtomBase
         }
 
         if (!is_null($this->icon)) {
-            $xmlWriter->writeElementNs(
+            $xmlWriter->writeElementNS(
                 'atom',
                 'icon',
                 Resources::ATOM_NAMESPACE,
@@ -590,7 +590,7 @@ class Source extends AtomBase
         );
 
         if (!is_null($this->updated)) {
-            $xmlWriter->writeElementNs(
+            $xmlWriter->writeElementNS(
                 'atom',
                 'updated',
                 Resources::ATOM_NAMESPACE,

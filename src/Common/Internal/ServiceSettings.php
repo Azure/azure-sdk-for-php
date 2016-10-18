@@ -54,7 +54,9 @@ abstract class ServiceSettings
      * available formats.
      * 
      * @param string $connectionString The invalid formatted connection string.
-     * 
+     *
+     * @return null
+     *
      * @throws \RuntimeException
      */
     protected static function noMatch($connectionString)
@@ -138,7 +140,7 @@ abstract class ServiceSettings
                 } else {
                     // If required then fail because the setting does not exist
                     if ($isRequired) {
-                        return;
+                        return null;
                     }
                 }
             }

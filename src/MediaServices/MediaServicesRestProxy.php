@@ -664,7 +664,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $contentWriter = new \XMLWriter();
         $contentWriter->openMemory();
-        $contentWriter->writeElementNs(
+        $contentWriter->writeElementNS(
             'data',
             'uri',
             Resources::DS_XML_NAMESPACE,
@@ -2538,7 +2538,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $contentWriter = new \XMLWriter();
         $contentWriter->openMemory();
-        $contentWriter->writeElementNs(
+        $contentWriter->writeElementNS(
             'd',
             'uri',
             Resources::DS_XML_NAMESPACE,
@@ -2727,7 +2727,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         $contentWriter = new \XMLWriter();
         $contentWriter->openMemory();
-        $contentWriter->writeElementNs(
+        $contentWriter->writeElementNS(
             'data',
             'uri',
             Resources::DS_XML_NAMESPACE,
@@ -2837,7 +2837,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * Get encoding reserved units settings.
      *
      *
-     * @return EncodingReservedUnit
+     * @return EncodingReservedUnit|null
      */
     public function getEncodingReservedUnit()
     {
@@ -2846,7 +2846,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             return EncodingReservedUnit::createFromOptions($units[0]);
         }
 
-        return;
+        return null;
     }
 
     /**
