@@ -55,8 +55,8 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
         $taskTemplate = new TaskTemplate($numberOfInputAssets, $numberOfOutputAssets);
 
         // Assert
-        $this->assertEquals($numberOfInputAssets, $taskTemplate->getNumberOfInputAssets());
-        $this->assertEquals($numberOfOutputAssets, $taskTemplate->getNumberOfOutputAssets());
+        $this->assertEquals($numberOfInputAssets, $taskTemplate->getNumberofInputAssets());
+        $this->assertEquals($numberOfOutputAssets, $taskTemplate->getNumberofOutputAssets());
         $this->assertContains('nb:ttid:UUID:', $taskTemplate->getId());
     }
 
@@ -97,8 +97,8 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($options['MediaProcessorId'], $task->getMediaProcessorId());
         $this->assertEquals($options['Name'], $task->getName());
         $this->assertEquals($options['Description'], $task->getDescription());
-        $this->assertEquals($options['NumberofInputAssets'], $task->getNumberOfInputAssets());
-        $this->assertEquals($options['NumberofOutputAssets'], $task->getNumberOfOutputAssets());
+        $this->assertEquals($options['NumberofInputAssets'], $task->getNumberofInputAssets());
+        $this->assertEquals($options['NumberofOutputAssets'], $task->getNumberofOutputAssets());
         $this->assertEquals($modified->getTimestamp(), $task->getLastModified()->getTimestamp());
         $this->assertEquals($options['Options'], $task->getOptions());
         $this->assertEquals($options['EncryptionKeyId'], $task->getEncryptionKeyId());
@@ -363,8 +363,8 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getNumberOfInputAssets
-     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::setNumberOfInputAssets
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getNumberofInputAssets
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::setNumberofInputAssets
      */
     public function testGetSetNumberOfInputAssets()
     {
@@ -376,16 +376,16 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
         $numberOfInputAssets = 6;
 
         // Test
-        $task->setNumberOfInputAssets($numberOfInputAssets);
-        $result = $task->getNumberOfInputAssets();
+        $task->setNumberofInputAssets($numberOfInputAssets);
+        $result = $task->getNumberofInputAssets();
 
         // Assert
         $this->assertEquals($numberOfInputAssets, $result);
     }
 
     /**
-     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getNumberOfOutputAssets
-     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::setNumberOfOutputAssets
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getNumberofOutputAssets
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::setNumberofOutputAssets
      */
     public function testGetSetNumberOfOutputAssets()
     {
@@ -397,8 +397,8 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
         $numberOfOutputAssets = 6;
 
         // Test
-        $task->setNumberOfOutputAssets($numberOfOutputAssets);
-        $result = $task->getNumberOfOutputAssets();
+        $task->setNumberofOutputAssets($numberOfOutputAssets);
+        $result = $task->getNumberofOutputAssets();
 
         // Assert
         $this->assertEquals($numberOfOutputAssets, $result);

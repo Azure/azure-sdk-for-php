@@ -97,14 +97,14 @@ class TaskTemplate
      *
      * @var int
      */
-    private $_numberOfInputAssets;
+    private $_numberofInputAssets;
 
     /**
      * Number of output assets.
      *
      * @var int
      */
-    private $_numberOfOutputAssets;
+    private $_numberofOutputAssets;
 
     /**
      * Options.
@@ -171,16 +171,16 @@ class TaskTemplate
     /**
      * Create task.
      *
-     * @param int $numberOfInputAssets  Number of input Assets the TaskTemplate
+     * @param int $numberofInputAssets  Number of input Assets the TaskTemplate
      *                                  must process.
-     * @param int $numberOfOutputAssets Number of output Assets the TaskTemplate
+     * @param int $numberofOutputAssets Number of output Assets the TaskTemplate
      *                                  must process.
      */
-    public function __construct($numberOfInputAssets, $numberOfOutputAssets)
+    public function __construct($numberofInputAssets, $numberofOutputAssets)
     {
         $this->_id = 'nb:ttid:UUID:'.Utilities::getGuid();
-        $this->_numberOfInputAssets = $numberOfInputAssets;
-        $this->_numberOfOutputAssets = $numberOfOutputAssets;
+        $this->_numberofInputAssets = $numberofInputAssets;
+        $this->_numberofOutputAssets = $numberofOutputAssets;
     }
 
     /**
@@ -236,7 +236,7 @@ class TaskTemplate
                 $options['NumberofInputAssets'],
                 'options[NumberofInputAssets]'
             );
-            $this->_numberOfInputAssets = $options['NumberofInputAssets'];
+            $this->_numberofInputAssets = $options['NumberofInputAssets'];
         }
 
         if (isset($options['NumberofOutputAssets'])) {
@@ -244,7 +244,7 @@ class TaskTemplate
                 $options['NumberofOutputAssets'],
                 'options[NumberofOutputAssets]'
             );
-            $this->_numberOfOutputAssets = $options['NumberofOutputAssets'];
+            $this->_numberofOutputAssets = $options['NumberofOutputAssets'];
         }
 
         if (isset($options['Options'])) {
@@ -490,9 +490,9 @@ class TaskTemplate
      *
      * @return int
      */
-    public function getNumberOfOutputAssets()
+    public function getNumberofOutputAssets()
     {
-        return $this->_numberOfOutputAssets;
+        return $this->_numberofOutputAssets;
     }
 
     /**
@@ -500,9 +500,9 @@ class TaskTemplate
      *
      * @param int $value Number of output assets
      */
-    public function setNumberOfOutputAssets($value)
+    public function setNumberofOutputAssets($value)
     {
-        $this->_numberOfOutputAssets = $value;
+        $this->_numberofOutputAssets = $value;
     }
 
     /**
@@ -510,9 +510,9 @@ class TaskTemplate
      *
      * @return int
      */
-    public function getNumberOfInputAssets()
+    public function getNumberofInputAssets()
     {
-        return $this->_numberOfInputAssets;
+        return $this->_numberofInputAssets;
     }
 
     /**
@@ -520,8 +520,8 @@ class TaskTemplate
      *
      * @param int $value Number of input assets
      */
-    public function setNumberOfInputAssets($value)
+    public function setNumberofInputAssets($value)
     {
-        $this->_numberOfInputAssets = $value;
+        $this->_numberofInputAssets = $value;
     }
 }

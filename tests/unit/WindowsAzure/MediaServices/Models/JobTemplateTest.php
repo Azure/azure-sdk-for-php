@@ -89,7 +89,7 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($created->getTimestamp(), $jobTemplate->getCreated()->getTimestamp());
         $this->assertEquals($modified->getTimestamp(), $jobTemplate->getLastModified()->getTimestamp());
         $this->assertEquals($options['JobTemplateBody'], $jobTemplate->getJobTemplateBody());
-        $this->assertEquals($options['NumberofInputAssets'], $jobTemplate->getNumberOfInputAssets());
+        $this->assertEquals($options['NumberofInputAssets'], $jobTemplate->getNumberofInputAssets());
         $this->assertEquals($options['TemplateType'], $jobTemplate->getTemplateType());
     }
 
@@ -205,8 +205,8 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::getNumberOfInputAssets
-     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::setNumberOfInputAssets
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::getNumberofInputAssets
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::setNumberofInputAssets
      */
     public function testGetSetNumberOfInputAssets()
     {
@@ -217,8 +217,8 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
         $numberOfInputAssets = 5;
 
         // Test
-        $jobTemplate->setNumberOfInputAssets($numberOfInputAssets);
-        $result = $jobTemplate->getNumberOfInputAssets();
+        $jobTemplate->setNumberofInputAssets($numberOfInputAssets);
+        $result = $jobTemplate->getNumberofInputAssets();
 
         // Assert
         $this->assertEquals($numberOfInputAssets, $result);
