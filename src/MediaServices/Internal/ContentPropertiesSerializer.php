@@ -72,7 +72,7 @@ class ContentPropertiesSerializer
         $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
 
-        $xmlWriter->startElementNs(
+        $xmlWriter->startElementNS(
             'meta',
             Resources::PROPERTIES,
             Resources::DSM_XML_NAMESPACE
@@ -170,14 +170,14 @@ class ContentPropertiesSerializer
                         $variableValue = self::dateIntervalToString($variableValue);
                     }
                     if (gettype($variableValue) == 'array') {
-                        $xmlWriter->startElementNs(
+                        $xmlWriter->startElementNS(
                             'data',
                             $variableName,
                             Resources::DS_XML_NAMESPACE
                         );
 
                         foreach ($variableValue as $item) {
-                            $xmlWriter->startElementNs(
+                            $xmlWriter->startElementNS(
                                 'data',
                                 Resources::ELEMENT,
                                 Resources::DS_XML_NAMESPACE
@@ -193,7 +193,7 @@ class ContentPropertiesSerializer
 
                         $xmlWriter->endElement();
                     } elseif (gettype($variableValue) == 'object') {
-                        $xmlWriter->startElementNs(
+                        $xmlWriter->startElementNS(
                             'data',
                             $variableName,
                             Resources::DS_XML_NAMESPACE
@@ -206,7 +206,7 @@ class ContentPropertiesSerializer
 
                         $xmlWriter->endElement();
                     } else {
-                        $xmlWriter->writeElementNs(
+                        $xmlWriter->writeElementNS(
                             'data',
                             $variableName,
                             Resources::DS_XML_NAMESPACE,

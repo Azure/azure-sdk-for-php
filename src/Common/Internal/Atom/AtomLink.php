@@ -290,7 +290,7 @@ class AtomLink extends AtomBase
      */
     public function writeXml(\XMLWriter $xmlWriter)
     {
-        $xmlWriter->startElementNs(
+        $xmlWriter->startElementNS(
             'atom',
             Resources::LINK,
             Resources::ATOM_NAMESPACE

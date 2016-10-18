@@ -164,7 +164,7 @@ class Generator extends AtomBase
      */
     public function writeXml($xmlWriter)
     {
-        $xmlWriter->startElementNs(
+        $xmlWriter->startElementNS(
             'atom',
             Resources::CATEGORY,
             Resources::ATOM_NAMESPACE

@@ -170,7 +170,7 @@ class ServiceManagementSettings extends ServiceSettings
             );
         }
 
-        self::noMatch($connectionString);
+        return self::noMatch($connectionString);
     }
 
     /**

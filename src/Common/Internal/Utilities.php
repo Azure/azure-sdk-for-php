@@ -141,10 +141,10 @@ class Utilities
                 if (array_key_exists($arguments[$i], $currentArray)) {
                     $currentArray = $currentArray[$arguments[$i]];
                 } else {
-                    return;
+                    return null;
                 }
             } else {
-                return;
+                return null;
             }
         }
 
