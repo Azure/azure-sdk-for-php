@@ -44,7 +44,7 @@ use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 class ListOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\ListOptions::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\ListOptions::__construct
      */
     public function testListOptionsConstructor()
     {
@@ -58,8 +58,8 @@ class ListOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\ListOptions::getSkip
-     * @covers WindowsAzure\ServiceBus\Models\ListOptions::setSkip
+     * @covers \WindowsAzure\ServiceBus\Models\ListOptions::getSkip
+     * @covers \WindowsAzure\ServiceBus\Models\ListOptions::setSkip
      */
     public function testGetSetSkip()
     {
@@ -79,8 +79,8 @@ class ListOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\ListOptions::getTop
-     * @covers WindowsAzure\ServiceBus\Models\ListOptions::setTop
+     * @covers \WindowsAzure\ServiceBus\Models\ListOptions::getTop
+     * @covers \WindowsAzure\ServiceBus\Models\ListOptions::setTop
      */
     public function testGetSetTop()
     {

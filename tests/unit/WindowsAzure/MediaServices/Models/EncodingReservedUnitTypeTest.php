@@ -43,9 +43,9 @@ use WindowsAzure\MediaServices\Models\EncodingReservedUnit;
 class EncodingReservedUnitTypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::fromArray
-     * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::__construct
+     * @covers \WindowsAzure\MediaServices\Models\EncodingReservedUnit::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\EncodingReservedUnit::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\EncodingReservedUnit::__construct
      */
     public function testCreateFromOptions()
     {
@@ -71,8 +71,8 @@ class EncodingReservedUnitTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::getAccountId
-     * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::setAccountId
+     * @covers \WindowsAzure\MediaServices\Models\EncodingReservedUnit::getAccountId
+     * @covers \WindowsAzure\MediaServices\Models\EncodingReservedUnit::setAccountId
      */
     public function testGetSetAccountId()
     {
@@ -90,8 +90,8 @@ class EncodingReservedUnitTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::getReservedUnitType
-     * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::setReservedUnitType
+     * @covers \WindowsAzure\MediaServices\Models\EncodingReservedUnit::getReservedUnitType
+     * @covers \WindowsAzure\MediaServices\Models\EncodingReservedUnit::setReservedUnitType
      */
     public function testGetSetReservedUnitType()
     {
@@ -109,8 +109,8 @@ class EncodingReservedUnitTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::getMaxReservableUnits
-     * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::setMaxReservableUnits
+     * @covers \WindowsAzure\MediaServices\Models\EncodingReservedUnit::getMaxReservableUnits
+     * @covers \WindowsAzure\MediaServices\Models\EncodingReservedUnit::setMaxReservableUnits
      */
     public function testGetSetMaxReservableUnits()
     {
@@ -128,8 +128,8 @@ class EncodingReservedUnitTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::getCurrentReservedUnits
-     * @covers WindowsAzure\MediaServices\Models\EncodingReservedUnit::setCurrentReservedUnits
+     * @covers \WindowsAzure\MediaServices\Models\EncodingReservedUnit::getCurrentReservedUnits
+     * @covers \WindowsAzure\MediaServices\Models\EncodingReservedUnit::setCurrentReservedUnits
      */
     public function testGetSetCurrentReservedUnits()
     {

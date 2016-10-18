@@ -45,7 +45,7 @@ use Tests\Framework\TestResources;
 class OAuthAccessTokenTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Models\OAuthAccessToken::create
+     * @covers \WindowsAzure\Common\Models\OAuthAccessToken::create
      */
     public function testCreate()
     {
@@ -63,8 +63,8 @@ class OAuthAccessTokenTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\OAuthAccessToken::getAccessToken
-     * @covers WindowsAzure\Common\Models\OAuthAccessToken::setAccessToken
+     * @covers \WindowsAzure\Common\Models\OAuthAccessToken::getAccessToken
+     * @covers \WindowsAzure\Common\Models\OAuthAccessToken::setAccessToken
      */
     public function testGetSetAccessToken()
     {
@@ -80,8 +80,8 @@ class OAuthAccessTokenTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\OAuthAccessToken::getExpiresIn
-     * @covers WindowsAzure\Common\Models\OAuthAccessToken::setExpiresIn
+     * @covers \WindowsAzure\Common\Models\OAuthAccessToken::getExpiresIn
+     * @covers \WindowsAzure\Common\Models\OAuthAccessToken::setExpiresIn
      */
     public function testGetSetExpiresIn()
     {
@@ -97,8 +97,8 @@ class OAuthAccessTokenTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\OAuthAccessToken::getScope
-     * @covers WindowsAzure\Common\Models\OAuthAccessToken::setScope
+     * @covers \WindowsAzure\Common\Models\OAuthAccessToken::getScope
+     * @covers \WindowsAzure\Common\Models\OAuthAccessToken::setScope
      */
     public function testGetSetScope()
     {

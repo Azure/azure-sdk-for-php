@@ -43,7 +43,7 @@ use WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult;
 class AsynchronousOperationResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::create
+     * @covers \WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::create
      */
     public function testCreate()
     {
@@ -59,8 +59,8 @@ class AsynchronousOperationResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::setRequestId
-     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::getRequestId
+     * @covers \WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::setRequestId
+     * @covers \WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::getRequestId
      */
     public function testSetRequestId()
     {

@@ -43,8 +43,8 @@ use WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult;
 class ListAffinityGroupsResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult::setAffinityGroups
-     * @covers WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult::getAffinityGroups
+     * @covers \WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult::setAffinityGroups
+     * @covers \WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult::getAffinityGroups
      */
     public function testSetAffinityGroups()
     {

@@ -44,7 +44,7 @@ use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 class SqlRuleActionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\SqlRuleAction::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\SqlRuleAction::__construct
      */
     public function testSqlRuleActionConstructor()
     {
@@ -58,8 +58,8 @@ class SqlRuleActionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\SqlRuleAction::getSqlExpression
-     * @covers WindowsAzure\ServiceBus\Models\SqlRuleAction::setSqlExpression
+     * @covers \WindowsAzure\ServiceBus\Models\SqlRuleAction::getSqlExpression
+     * @covers \WindowsAzure\ServiceBus\Models\SqlRuleAction::setSqlExpression
      */
     public function testGetSetSqlExpression()
     {

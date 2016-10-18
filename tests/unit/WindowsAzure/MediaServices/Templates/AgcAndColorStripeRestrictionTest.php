@@ -43,8 +43,8 @@ use WindowsAzure\MediaServices\Templates\ErrorMessages;
 class AgcAndColorStripeRestrictionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Templates\AgcAndColorStripeRestriction::__construct
-     * @covers WindowsAzure\MediaServices\Templates\AgcAndColorStripeRestriction::getConfigurationData
+     * @covers \WindowsAzure\MediaServices\Templates\AgcAndColorStripeRestriction::__construct
+     * @covers \WindowsAzure\MediaServices\Templates\AgcAndColorStripeRestriction::getConfigurationData
      */
     public function testCreateAgcAndColorStripeRestriction()
     {
@@ -60,7 +60,7 @@ class AgcAndColorStripeRestrictionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\AgcAndColorStripeRestriction::__construct
+     * @covers \WindowsAzure\MediaServices\Templates\AgcAndColorStripeRestriction::__construct
      */
     public function testCreateAgcAndColorStripeRestrictionWithBadConfDataShouldThrown()
     {
@@ -71,8 +71,8 @@ class AgcAndColorStripeRestrictionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\AgcAndColorStripeRestriction::getConfigurationData
-     * @covers WindowsAzure\MediaServices\Templates\AgcAndColorStripeRestriction::setConfigurationData
+     * @covers \WindowsAzure\MediaServices\Templates\AgcAndColorStripeRestriction::getConfigurationData
+     * @covers \WindowsAzure\MediaServices\Templates\AgcAndColorStripeRestriction::setConfigurationData
      */
     public function testGetSetConfigurationData()
     {

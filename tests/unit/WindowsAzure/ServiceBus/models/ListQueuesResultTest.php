@@ -43,7 +43,7 @@ use WindowsAzure\ServiceBus\Models\ListQueuesResult;
 class ListQueuesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\ListQueuesResult::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\ListQueuesResult::__construct
      */
     public function testListQueuesResultConstructor()
     {

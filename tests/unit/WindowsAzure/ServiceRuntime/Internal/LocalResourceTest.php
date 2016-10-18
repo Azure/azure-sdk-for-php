@@ -43,8 +43,8 @@ use WindowsAzure\ServiceRuntime\Internal\LocalResource;
 class LocalResourceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\LocalResource::__construct
-     * @covers WindowsAzure\ServiceRuntime\Internal\LocalResource::getMaximumSizeInMegabytes
+     * @covers \WindowsAzure\ServiceRuntime\Internal\LocalResource::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\LocalResource::getMaximumSizeInMegabytes
      */
     public function testGetMaximumSizeInMegabytes()
     {
@@ -56,7 +56,7 @@ class LocalResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\LocalResource::getName
+     * @covers \WindowsAzure\ServiceRuntime\Internal\LocalResource::getName
      */
     public function testGetName()
     {
@@ -68,7 +68,7 @@ class LocalResourceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\LocalResource::getRootPath
+     * @covers \WindowsAzure\ServiceRuntime\Internal\LocalResource::getRootPath
      */
     public function testGetRootPath()
     {

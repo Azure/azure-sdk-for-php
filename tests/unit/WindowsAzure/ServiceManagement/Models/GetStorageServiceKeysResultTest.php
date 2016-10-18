@@ -43,8 +43,8 @@ use WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult;
 class GetStorageServiceKeysResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::setUrl
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::getUrl
+     * @covers \WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::setUrl
+     * @covers \WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::getUrl
      */
     public function testSetUrl()
     {
@@ -60,8 +60,8 @@ class GetStorageServiceKeysResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::setPrimary
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::getPrimary
+     * @covers \WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::setPrimary
+     * @covers \WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::getPrimary
      */
     public function testSetPrimary()
     {
@@ -77,8 +77,8 @@ class GetStorageServiceKeysResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::setSecondary
-     * @covers WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::getSecondary
+     * @covers \WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::setSecondary
+     * @covers \WindowsAzure\ServiceManagement\Models\GetStorageServiceKeysResult::getSecondary
      */
     public function testSetSecondary()
     {

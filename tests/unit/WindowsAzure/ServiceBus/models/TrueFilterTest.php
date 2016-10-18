@@ -43,7 +43,7 @@ use WindowsAzure\ServiceBus\Models\TrueFilter;
 class TrueFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\TrueFilter::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\TrueFilter::__construct
      */
     public function testTrueFilterConstructor()
     {

@@ -44,9 +44,9 @@ use WindowsAzure\MediaServices\Models\ProtectionKeyTypes;
 class ContentKeyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::fromArray
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::__construct
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::__construct
      */
     public function testCreateFromOptions()
     {
@@ -86,8 +86,8 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::getChecksum
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::setChecksum
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::getChecksum
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::setChecksum
      */
     public function testGetSetChecksum()
     {
@@ -105,8 +105,8 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::getProtectionKeyType
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::setProtectionKeyType
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::getProtectionKeyType
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::setProtectionKeyType
      */
     public function testGetSetProtectionKeyType()
     {
@@ -124,8 +124,8 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::getProtectionKeyId
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::setProtectionKeyId
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::getProtectionKeyId
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::setProtectionKeyId
      */
     public function testGetSetProtectionKeyId()
     {
@@ -143,8 +143,8 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::getName
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::setName
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::getName
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::setName
      */
     public function testGetSetName()
     {
@@ -162,8 +162,8 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::getEncryptedContentKey
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::setEncryptedContentKey
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::getEncryptedContentKey
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::setEncryptedContentKey
      */
     public function testGetSetEncryptedContentKey()
     {
@@ -181,8 +181,8 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::getContentKeyType
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::setContentKeyType
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::getContentKeyType
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::setContentKeyType
      */
     public function testGetSetContentKeyType()
     {
@@ -200,7 +200,7 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::getCreated
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::getCreated
      */
     public function testGetCreated()
     {
@@ -220,7 +220,7 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::getLastModified
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::getLastModified
      */
     public function testGetLastModified()
     {
@@ -240,8 +240,8 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::getId
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::setId
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::getId
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::setId
      */
     public function testGetSetId()
     {
@@ -259,8 +259,8 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::getAuthorizationPolicyId
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::setAuthorizationPolicyId
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::getAuthorizationPolicyId
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::setAuthorizationPolicyId
      */
     public function testGetSetAuthorizationPolicyId()
     {
@@ -278,9 +278,9 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::setContentKey
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::_generateChecksum
-     * @covers WindowsAzure\MediaServices\Models\ContentKey::_generateEncryptedContentKey
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::setContentKey
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::_generateChecksum
+     * @covers \WindowsAzure\MediaServices\Models\ContentKey::_generateEncryptedContentKey
      */
     public function testSetContentKey()
     {

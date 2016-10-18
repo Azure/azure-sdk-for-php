@@ -43,7 +43,7 @@ use WindowsAzure\ServiceRuntime\Internal\CurrentState;
 class CurrentStateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\CurrentState::getClientId
+     * @covers \WindowsAzure\ServiceRuntime\Internal\CurrentState::getClientId
      */
     public function testGetClientId()
     {
@@ -55,7 +55,7 @@ class CurrentStateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\CurrentState::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\CurrentState::__construct
      */
     public function testConstruct()
     {

@@ -43,8 +43,8 @@ use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentConfigurationSettingChan
 class RoleEnvironmentConfigurationSettingChangeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentConfigurationSettingChange::__construct
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentConfigurationSettingChange::getConfigurationSettingName
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentConfigurationSettingChange::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentConfigurationSettingChange::getConfigurationSettingName
      */
     public function testGetConfigurationSettingName()
     {

@@ -43,7 +43,7 @@ use WindowsAzure\ServiceBus\Internal\Action;
 class ActionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Internal\Action::__construct
+     * @covers \WindowsAzure\ServiceBus\Internal\Action::__construct
      */
     public function testActionConstructor()
     {

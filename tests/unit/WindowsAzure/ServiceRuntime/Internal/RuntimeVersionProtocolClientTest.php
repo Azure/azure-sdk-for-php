@@ -47,7 +47,7 @@ use WindowsAzure\ServiceRuntime\Internal\RuntimeVersionProtocolClient;
 class RuntimeVersionProtocolClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeVersionProtocolClient::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeVersionProtocolClient::__construct
      */
     public function testConstruct()
     {
@@ -62,7 +62,7 @@ class RuntimeVersionProtocolClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RuntimeVersionProtocolClient::getVersionMap
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeVersionProtocolClient::getVersionMap
      */
     public function testGetVersionMap()
     {

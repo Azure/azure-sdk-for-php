@@ -47,8 +47,8 @@ use WindowsAzure\MediaServices\Models\TaskOptions;
 class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::unserialize
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_unserializeRecursive
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::unserialize
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_unserializeRecursive
      */
     public function testUnserializeSimple()
     {
@@ -70,8 +70,8 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::unserialize
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_unserializeRecursive
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::unserialize
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_unserializeRecursive
      */
     public function testUnserializeElement()
     {
@@ -100,8 +100,8 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::unserialize
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_unserializeRecursive
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::unserialize
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_unserializeRecursive
      */
     public function testUnserializeCollection()
     {
@@ -139,8 +139,8 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
      */
     public function testSerializeSimple()
     {
@@ -171,8 +171,8 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
      */
     public function testSerializeDate()
     {
@@ -207,8 +207,8 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
      */
     public function testSerializeElement()
     {
@@ -249,8 +249,8 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
      */
     public function testSerializeCollection()
     {

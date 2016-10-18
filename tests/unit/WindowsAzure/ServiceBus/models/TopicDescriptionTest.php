@@ -44,7 +44,7 @@ use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 class TopicDescriptionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\TopicDescription::__construct
      */
     public function testTopicDescriptionConstructor()
     {
@@ -58,8 +58,8 @@ class TopicDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::getDefaultMessageTimeToLive
-     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::setDefaultMessageTimeToLive
+     * @covers \WindowsAzure\ServiceBus\Models\TopicDescription::getDefaultMessageTimeToLive
+     * @covers \WindowsAzure\ServiceBus\Models\TopicDescription::setDefaultMessageTimeToLive
      */
     public function testGetSetDefaultMessageTimeToLive()
     {
@@ -79,8 +79,8 @@ class TopicDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::getMaxSizeInMegabytes
-     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::setMaxSizeInMegabytes
+     * @covers \WindowsAzure\ServiceBus\Models\TopicDescription::getMaxSizeInMegabytes
+     * @covers \WindowsAzure\ServiceBus\Models\TopicDescription::setMaxSizeInMegabytes
      */
     public function testGetSetMaxSizeInMegabytes()
     {
@@ -100,8 +100,8 @@ class TopicDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::getRequiresDuplicateDetection
-     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::setRequiresDuplicateDetection
+     * @covers \WindowsAzure\ServiceBus\Models\TopicDescription::getRequiresDuplicateDetection
+     * @covers \WindowsAzure\ServiceBus\Models\TopicDescription::setRequiresDuplicateDetection
      */
     public function testGetSetRequiresDuplicateDetection()
     {
@@ -121,8 +121,8 @@ class TopicDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::getDuplicateDetectionHistoryTimeWindow
-     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::setDuplicateDetectionHistoryTimeWindow
+     * @covers \WindowsAzure\ServiceBus\Models\TopicDescription::getDuplicateDetectionHistoryTimeWindow
+     * @covers \WindowsAzure\ServiceBus\Models\TopicDescription::setDuplicateDetectionHistoryTimeWindow
      */
     public function testGetSetDuplicateDetectionHistoryTimeWindow()
     {
@@ -142,8 +142,8 @@ class TopicDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::getEnableBatchedOperations
-     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::setEnableBatchedOperations
+     * @covers \WindowsAzure\ServiceBus\Models\TopicDescription::getEnableBatchedOperations
+     * @covers \WindowsAzure\ServiceBus\Models\TopicDescription::setEnableBatchedOperations
      */
     public function testGetSetEnableBatchedOperations()
     {
@@ -163,8 +163,8 @@ class TopicDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::getSizeInBytes
-     * @covers WindowsAzure\ServiceBus\Models\TopicDescription::setSizeInBytes
+     * @covers \WindowsAzure\ServiceBus\Models\TopicDescription::getSizeInBytes
+     * @covers \WindowsAzure\ServiceBus\Models\TopicDescription::setSizeInBytes
      */
     public function testGetSetSizeInBytes()
     {

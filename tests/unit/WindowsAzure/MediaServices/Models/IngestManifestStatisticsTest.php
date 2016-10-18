@@ -42,8 +42,8 @@ use WindowsAzure\MediaServices\Models\IngestManifestStatistics;
 class IngestManifestStatisticsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestStatistics::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestStatistics::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestStatistics::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestStatistics::fromArray
      */
     public function testCreateFromOptions()
     {
@@ -71,7 +71,7 @@ class IngestManifestStatisticsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestStatistics::getErrorFilesDetails
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestStatistics::getErrorFilesDetails
      */
     public function testGetErrorFilesDetails()
     {
@@ -91,7 +91,7 @@ class IngestManifestStatisticsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestStatistics::getErrorFilesCount
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestStatistics::getErrorFilesCount
      */
     public function testGetErrorFilesCount()
     {
@@ -111,7 +111,7 @@ class IngestManifestStatisticsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestStatistics::getFinishedFilesCount
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestStatistics::getFinishedFilesCount
      */
     public function testGetFinishedFilesCount()
     {
@@ -131,7 +131,7 @@ class IngestManifestStatisticsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestStatistics::getPendingFilesCount
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestStatistics::getPendingFilesCount
      */
     public function testGetPendingFilesCount()
     {

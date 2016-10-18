@@ -42,7 +42,7 @@ use WindowsAzure\MediaServices\Models\TaskTemplate;
 class TaskTemplateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::__construct
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::__construct
      */
     public function test__construct()
     {
@@ -61,8 +61,8 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::fromArray
      */
     public function testCreateFromOptions()
     {
@@ -108,7 +108,7 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::getId
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getId
      */
     public function testGetId()
     {
@@ -129,8 +129,8 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::getConfiguration
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::setConfiguration
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getConfiguration
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::setConfiguration
      */
     public function testGetSetConfiguration()
     {
@@ -150,8 +150,8 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::getMediaProcessorId
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::setMediaProcessorId
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getMediaProcessorId
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::setMediaProcessorId
      */
     public function testGetSetMediaProcessorId()
     {
@@ -171,8 +171,8 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::getName
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::setName
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getName
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::setName
      */
     public function testGetSetName()
     {
@@ -192,7 +192,7 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::getOptions
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getOptions
      */
     public function testGetOptions()
     {
@@ -214,8 +214,8 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::getEncryptionKeyId
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::setEncryptionKeyId
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getEncryptionKeyId
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::setEncryptionKeyId
      */
     public function testGetSetEncryptionKeyId()
     {
@@ -235,8 +235,8 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::getEncryptionScheme
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::setEncryptionScheme
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getEncryptionScheme
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::setEncryptionScheme
      */
     public function testGetSetEncryptionScheme()
     {
@@ -256,8 +256,8 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::getEncryptionVersion
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::setEncryptionVersion
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getEncryptionVersion
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::setEncryptionVersion
      */
     public function testGetSetEncryptionVersion()
     {
@@ -277,8 +277,8 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::getInitializationVector
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::setInitializationVector
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getInitializationVector
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::setInitializationVector
      */
     public function testGetSetInitializationVector()
     {
@@ -298,7 +298,7 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::getCreated
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getCreated
      */
     public function testGetCreated()
     {
@@ -320,7 +320,7 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::getLastModified
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getLastModified
      */
     public function testGetLastModified()
     {
@@ -342,8 +342,8 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::getDescription
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::setDescription
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getDescription
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::setDescription
      */
     public function testGetDescription()
     {
@@ -363,8 +363,8 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::getNumberofInputAssets
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::setNumberofInputAssets
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getNumberofInputAssets
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::setNumberofInputAssets
      */
     public function testGetSetNumberofInputAssets()
     {
@@ -384,8 +384,8 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::getNumberofOutputAssets
-     * @covers WindowsAzure\MediaServices\Models\TaskTemplate::setNumberofOutputAssets
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getNumberofOutputAssets
+     * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::setNumberofOutputAssets
      */
     public function testGetSetNumberofOutputAssets()
     {

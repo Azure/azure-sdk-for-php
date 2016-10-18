@@ -43,7 +43,7 @@ use WindowsAzure\ServiceBus\Models\ListRulesOptions;
 class ListRulesOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\ListRulesOptions::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\ListRulesOptions::__construct
      */
     public function testListRulesOptionsConstructor()
     {

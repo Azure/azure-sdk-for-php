@@ -44,13 +44,13 @@ use WindowsAzure\ServiceRuntime\Internal\RoleInstance;
 class RoleEnvironmentDataTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData::__construct
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData::getDeploymentId
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData::getConfigurationSettings
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData::getLocalResources
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData::getCurrentInstance
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData::getRoles
-     * @covers WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData::isEmulated
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData::getDeploymentId
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData::getConfigurationSettings
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData::getLocalResources
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData::getCurrentInstance
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData::getRoles
+     * @covers \WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData::isEmulated
      */
     public function testGetters()
     {

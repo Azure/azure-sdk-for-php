@@ -43,7 +43,7 @@ use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 class WrapAccessTokenResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult::create
+     * @covers \WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult::create
      */
     public function testCreateWrapAccessTokenSuccess()
     {
@@ -76,8 +76,8 @@ class WrapAccessTokenResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult::getAccessToken
-     * @covers WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult::setAccessToken
+     * @covers \WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult::getAccessToken
+     * @covers \WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult::setAccessToken
      */
     public function testGetAccessToken()
     {
@@ -94,8 +94,8 @@ class WrapAccessTokenResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult::getExpiresIn
-     * @covers WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult::setExpiresIn
+     * @covers \WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult::getExpiresIn
+     * @covers \WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult::setExpiresIn
      */
     public function testGetExpiresIn()
     {

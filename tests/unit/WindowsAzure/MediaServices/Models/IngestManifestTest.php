@@ -42,8 +42,8 @@ use WindowsAzure\MediaServices\Models\IngestManifest;
 class IngestManifestTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::fromArray
      */
     public function testCreateFromOptions()
     {
@@ -85,7 +85,7 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::getStatistics
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::getStatistics
      */
     public function testGetStatistics()
     {
@@ -107,7 +107,7 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::getBlobStorageUriForUpload
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::getBlobStorageUriForUpload
      */
     public function testGetBlobStorageUriForUpload()
     {
@@ -127,7 +127,7 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::getStorageAccountName
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::getStorageAccountName
      */
     public function testGetStorageAccountName()
     {
@@ -147,8 +147,8 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::getName
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::setName
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::getName
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::setName
      */
     public function testSetGetName()
     {
@@ -166,7 +166,7 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::getLastModified
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::getLastModified
      */
     public function testGetLastModified()
     {
@@ -186,7 +186,7 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::getCreated
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::getCreated
      */
     public function testGetCreated()
     {
@@ -206,7 +206,7 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::getState
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::getState
      */
     public function testGetState()
     {
@@ -226,7 +226,7 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::getId
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::getId
      */
     public function testGetId()
     {

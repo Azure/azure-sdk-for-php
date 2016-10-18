@@ -44,8 +44,8 @@ use WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier;
 class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getAllowTestDevices
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setAllowTestDevices
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getAllowTestDevices
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setAllowTestDevices
      */
     public function testGetSetAllowTestDevices()
     {
@@ -62,8 +62,8 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getBeginDate
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setBeginDate
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getBeginDate
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setBeginDate
      */
     public function testGetSetBeginDate()
     {
@@ -80,8 +80,8 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getExpirationDate
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setExpirationDate
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getExpirationDate
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setExpirationDate
      */
     public function testGetSetExpirationDate()
     {
@@ -98,8 +98,8 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getRelativeBeginDate
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setRelativeBeginDate
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getRelativeBeginDate
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setRelativeBeginDate
      */
     public function testGetSetRelativeBeginDate()
     {
@@ -116,8 +116,8 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getRelativeExpirationDate
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setRelativeExpirationDate
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getRelativeExpirationDate
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setRelativeExpirationDate
      */
     public function testGetSetRelativeExpirationDate()
     {
@@ -134,8 +134,8 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getGracePeriod
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setGracePeriod
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getGracePeriod
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setGracePeriod
      */
     public function testGetSetGracePeriod()
     {
@@ -152,8 +152,8 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getPlayRight
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setPlayRight
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getPlayRight
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setPlayRight
      */
     public function testGetSetPlayRight()
     {
@@ -170,8 +170,8 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getLicenseType
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setLicenseType
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getLicenseType
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setLicenseType
      */
     public function testGetSetLicenseType()
     {
@@ -188,8 +188,8 @@ class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getContentKey
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setContentKey
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getContentKey
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::setContentKey
      */
     public function testGetSetContentKey()
     {

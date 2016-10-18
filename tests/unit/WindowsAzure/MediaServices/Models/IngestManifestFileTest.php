@@ -42,9 +42,9 @@ use WindowsAzure\MediaServices\Models\IngestManifestFile;
 class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::fromArray
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::__construct
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::__construct
      */
     public function testCreateFromOptions()
     {
@@ -97,7 +97,7 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getId
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::getId
      */
     public function testGetId()
     {
@@ -123,7 +123,7 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getCreated
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::getCreated
      */
     public function testGetCreated()
     {
@@ -149,7 +149,7 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getLastModified
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::getLastModified
      */
     public function testGetLastModified()
     {
@@ -175,7 +175,7 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getErrorDetail
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::getErrorDetail
      */
     public function testGetErrorDetail()
     {
@@ -201,7 +201,7 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getState
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::getState
      */
     public function testGetState()
     {
@@ -227,8 +227,8 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getName
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setName
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::getName
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::setName
      */
     public function testSetGetName()
     {
@@ -248,8 +248,8 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getEncryptionVersion
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setEncryptionVersion
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::getEncryptionVersion
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::setEncryptionVersion
      */
     public function testSetGetEncryptionVersion()
     {
@@ -270,8 +270,8 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getEncryptionScheme
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setEncryptionScheme
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::getEncryptionScheme
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::setEncryptionScheme
      */
     public function testSetGetEncryptionScheme()
     {
@@ -292,8 +292,8 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getIsEncrypted
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setIsEncrypted
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::getIsEncrypted
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::setIsEncrypted
      */
     public function testSetGetIsEncrypted()
     {
@@ -314,8 +314,8 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getEncryptionKeyId
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setEncryptionKeyId
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::getEncryptionKeyId
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::setEncryptionKeyId
      */
     public function testSetGetEncryptionKeyId()
     {
@@ -336,8 +336,8 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getInitializationVector
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setInitializationVector
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::getInitializationVector
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::setInitializationVector
      */
     public function testSetGetInitializationVector()
     {
@@ -358,8 +358,8 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getIsPrimary
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setIsprimary
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::getIsPrimary
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::setIsprimary
      */
     public function testSetGetIsPrimary()
     {
@@ -380,8 +380,8 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getMimeType
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setMimeType
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::getMimeType
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::setMimeType
      */
     public function testSetGetMimeType()
     {
@@ -402,8 +402,8 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getParentIngestManifestId
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setParentIngestManifestId
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::getParentIngestManifestId
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::setParentIngestManifestId
      */
     public function testSetGetParentIngestManifestId()
     {
@@ -423,8 +423,8 @@ class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::getParentIngestManifestAssetId
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestFile::setParentIngestManifestAssetId
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::getParentIngestManifestAssetId
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::setParentIngestManifestAssetId
      */
     public function testSetGetParentIngestManifestAssetId()
     {

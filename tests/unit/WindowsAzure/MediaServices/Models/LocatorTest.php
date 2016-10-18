@@ -42,7 +42,7 @@ use WindowsAzure\MediaServices\Models\Locator;
 class LocatorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\Locator::__construct
+     * @covers \WindowsAzure\MediaServices\Models\Locator::__construct
      */
     public function test__construct()
     {
@@ -62,8 +62,8 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Locator::getStartTime
-     * @covers WindowsAzure\MediaServices\Models\Locator::setStartTime
+     * @covers \WindowsAzure\MediaServices\Models\Locator::getStartTime
+     * @covers \WindowsAzure\MediaServices\Models\Locator::setStartTime
      */
     public function testGetStartTime()
     {
@@ -84,7 +84,7 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Locator::getAssetId
+     * @covers \WindowsAzure\MediaServices\Models\Locator::getAssetId
      */
     public function testGetAssetId()
     {
@@ -103,7 +103,7 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Locator::getAccessPolicyId
+     * @covers \WindowsAzure\MediaServices\Models\Locator::getAccessPolicyId
      */
     public function testGetAccessPolicyId()
     {
@@ -122,7 +122,7 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Locator::getContentAccessComponent
+     * @covers \WindowsAzure\MediaServices\Models\Locator::getContentAccessComponent
      */
     public function testGetContentAccessComponent()
     {
@@ -144,7 +144,7 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Locator::getBaseUri
+     * @covers \WindowsAzure\MediaServices\Models\Locator::getBaseUri
      */
     public function testGetBaseUri()
     {
@@ -166,7 +166,7 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Locator::getPath
+     * @covers \WindowsAzure\MediaServices\Models\Locator::getPath
      */
     public function testGetPath()
     {
@@ -188,8 +188,8 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Locator::getType
-     * @covers WindowsAzure\MediaServices\Models\Locator::setType
+     * @covers \WindowsAzure\MediaServices\Models\Locator::getType
+     * @covers \WindowsAzure\MediaServices\Models\Locator::setType
      */
     public function testGetType()
     {
@@ -210,8 +210,8 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Locator::getExpirationDateTime
-     * @covers WindowsAzure\MediaServices\Models\Locator::setExpirationDateTime
+     * @covers \WindowsAzure\MediaServices\Models\Locator::getExpirationDateTime
+     * @covers \WindowsAzure\MediaServices\Models\Locator::setExpirationDateTime
      */
     public function testGetExpirationDateTime()
     {
@@ -232,8 +232,8 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Locator::getName
-     * @covers WindowsAzure\MediaServices\Models\Locator::setName
+     * @covers \WindowsAzure\MediaServices\Models\Locator::getName
+     * @covers \WindowsAzure\MediaServices\Models\Locator::setName
      */
     public function testGetName()
     {
@@ -254,8 +254,8 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Locator::getId
-     * @covers WindowsAzure\MediaServices\Models\Locator::setId
+     * @covers \WindowsAzure\MediaServices\Models\Locator::getId
+     * @covers \WindowsAzure\MediaServices\Models\Locator::setId
      */
     public function testGetId()
     {
@@ -276,8 +276,8 @@ class LocatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Locator::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\Locator::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\Locator::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\Locator::fromArray
      */
     public function testLocatorFromOptions()
     {

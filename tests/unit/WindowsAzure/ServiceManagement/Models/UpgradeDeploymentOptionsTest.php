@@ -43,8 +43,8 @@ use WindowsAzure\ServiceManagement\Models\UpgradeDeploymentOptions;
 class UpgradeDeploymentOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\UpgradeDeploymentOptions::setRoleToUpgrade
-     * @covers WindowsAzure\ServiceManagement\Models\UpgradeDeploymentOptions::getRoleToUpgrade
+     * @covers \WindowsAzure\ServiceManagement\Models\UpgradeDeploymentOptions::setRoleToUpgrade
+     * @covers \WindowsAzure\ServiceManagement\Models\UpgradeDeploymentOptions::getRoleToUpgrade
      */
     public function testSetRoleToUpgrade()
     {

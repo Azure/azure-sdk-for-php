@@ -43,8 +43,8 @@ use WindowsAzure\MediaServices\Templates\ErrorMessages;
 class ScmsRestrictionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Templates\ScmsRestriction::__construct
-     * @covers WindowsAzure\MediaServices\Templates\ScmsRestriction::getConfigurationData
+     * @covers \WindowsAzure\MediaServices\Templates\ScmsRestriction::__construct
+     * @covers \WindowsAzure\MediaServices\Templates\ScmsRestriction::getConfigurationData
      */
     public function testCreateScmsRestriction()
     {
@@ -60,7 +60,7 @@ class ScmsRestrictionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\ScmsRestriction::__construct
+     * @covers \WindowsAzure\MediaServices\Templates\ScmsRestriction::__construct
      */
     public function testCreateScmsRestrictionWithBadConfDataShouldThrown()
     {
@@ -71,8 +71,8 @@ class ScmsRestrictionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\ScmsRestriction::getConfigurationData
-     * @covers WindowsAzure\MediaServices\Templates\ScmsRestriction::setConfigurationData
+     * @covers \WindowsAzure\MediaServices\Templates\ScmsRestriction::getConfigurationData
+     * @covers \WindowsAzure\MediaServices\Templates\ScmsRestriction::setConfigurationData
      */
     public function testGetSetConfigurationData()
     {

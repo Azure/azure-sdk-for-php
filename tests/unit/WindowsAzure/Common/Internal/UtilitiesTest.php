@@ -48,7 +48,7 @@ use WindowsAzure\MediaServices\Models\Asset;
 class UtilitiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::tryGetValue
+     * @covers \WindowsAzure\Common\Internal\Utilities::tryGetValue
      */
     public function testTryGetValue()
     {
@@ -64,7 +64,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::tryGetValue
+     * @covers \WindowsAzure\Common\Internal\Utilities::tryGetValue
      */
     public function testTryGetValueUsingDefault()
     {
@@ -80,7 +80,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::tryGetValue
+     * @covers \WindowsAzure\Common\Internal\Utilities::tryGetValue
      */
     public function testTryGetValueWithNull()
     {
@@ -95,7 +95,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::tryGetKeysChainValue
+     * @covers \WindowsAzure\Common\Internal\Utilities::tryGetKeysChainValue
      */
     public function testTryGetKeysChainValue()
     {
@@ -121,7 +121,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::startsWith
+     * @covers \WindowsAzure\Common\Internal\Utilities::startsWith
      */
     public function testStartsWith()
     {
@@ -136,7 +136,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::startsWith
+     * @covers \WindowsAzure\Common\Internal\Utilities::startsWith
      */
     public function testStartsWithDoesNotStartWithPrefix()
     {
@@ -151,7 +151,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::getArray
+     * @covers \WindowsAzure\Common\Internal\Utilities::getArray
      */
     public function testGetArray()
     {
@@ -165,7 +165,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::getArray
+     * @covers \WindowsAzure\Common\Internal\Utilities::getArray
      */
     public function testGetArrayWithFlatValue()
     {
@@ -180,7 +180,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::getArray
+     * @covers \WindowsAzure\Common\Internal\Utilities::getArray
      */
     public function testGetArrayWithMixtureValue()
     {
@@ -195,7 +195,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::getArray
+     * @covers \WindowsAzure\Common\Internal\Utilities::getArray
      */
     public function testGetArrayWithEmptyValue()
     {
@@ -210,8 +210,8 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::unserialize
-     * @covers WindowsAzure\Common\Internal\Utilities::_sxml2arr
+     * @covers \WindowsAzure\Common\Internal\Utilities::unserialize
+     * @covers \WindowsAzure\Common\Internal\Utilities::_sxml2arr
      */
     public function testUnserialize()
     {
@@ -229,8 +229,8 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::serialize
-     * @covers WindowsAzure\Common\Internal\Utilities::_arr2xml
+     * @covers \WindowsAzure\Common\Internal\Utilities::serialize
+     * @covers \WindowsAzure\Common\Internal\Utilities::_arr2xml
      */
     public function testSerialize()
     {
@@ -252,8 +252,8 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::serialize
-     * @covers WindowsAzure\Common\Internal\Utilities::_arr2xml
+     * @covers \WindowsAzure\Common\Internal\Utilities::serialize
+     * @covers \WindowsAzure\Common\Internal\Utilities::_arr2xml
      */
     public function testSerializeNoArray()
     {
@@ -268,8 +268,8 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::serialize
-     * @covers WindowsAzure\Common\Internal\Utilities::_arr2xml
+     * @covers \WindowsAzure\Common\Internal\Utilities::serialize
+     * @covers \WindowsAzure\Common\Internal\Utilities::_arr2xml
      */
     public function testSerializeAttribute()
     {
@@ -291,7 +291,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::toBoolean
+     * @covers \WindowsAzure\Common\Internal\Utilities::toBoolean
      */
     public function testToBoolean()
     {
@@ -308,7 +308,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::booleanToString
+     * @covers \WindowsAzure\Common\Internal\Utilities::booleanToString
      */
     public function testBooleanToString()
     {
@@ -324,7 +324,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::isoDate
+     * @covers \WindowsAzure\Common\Internal\Utilities::isoDate
      */
     public function testIsoDate()
     {
@@ -336,7 +336,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::convertToEdmDateTime
+     * @covers \WindowsAzure\Common\Internal\Utilities::convertToEdmDateTime
      */
     public function testConvertToEdmDateTime()
     {
@@ -348,7 +348,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::convertToDateTime
+     * @covers \WindowsAzure\Common\Internal\Utilities::convertToDateTime
      */
     public function testConvertToDateTime()
     {
@@ -363,7 +363,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::convertToDateTime
+     * @covers \WindowsAzure\Common\Internal\Utilities::convertToDateTime
      */
     public function testConvertToDateTimeWithDate()
     {
@@ -378,7 +378,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::stringToStream
+     * @covers \WindowsAzure\Common\Internal\Utilities::stringToStream
      */
     public function testStringToStream()
     {
@@ -393,7 +393,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::rfc1123ToDateTime
+     * @covers \WindowsAzure\Common\Internal\Utilities::rfc1123ToDateTime
      */
     public function testWindowsAzureDateToDateTime()
     {
@@ -408,7 +408,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::tryAddUrlScheme
+     * @covers \WindowsAzure\Common\Internal\Utilities::tryAddUrlScheme
      */
     public function testTryAddUrlSchemeWithScheme()
     {
@@ -423,7 +423,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::tryAddUrlScheme
+     * @covers \WindowsAzure\Common\Internal\Utilities::tryAddUrlScheme
      */
     public function testTryAddUrlSchemeWithoutScheme()
     {
@@ -439,7 +439,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::startsWith
+     * @covers \WindowsAzure\Common\Internal\Utilities::startsWith
      */
     public function testStartsWithIgnoreCase()
     {
@@ -455,7 +455,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::inArrayInsensitive
+     * @covers \WindowsAzure\Common\Internal\Utilities::inArrayInsensitive
      */
     public function testInArrayInsensitive()
     {
@@ -471,7 +471,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::inArrayInsensitive
+     * @covers \WindowsAzure\Common\Internal\Utilities::inArrayInsensitive
      */
     public function testArrayKeyExistsInsensitive()
     {
@@ -487,7 +487,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::tryGetValueInsensitive
+     * @covers \WindowsAzure\Common\Internal\Utilities::tryGetValueInsensitive
      */
     public function testTryGetValueInsensitive()
     {
@@ -504,7 +504,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::getGuid
+     * @covers \WindowsAzure\Common\Internal\Utilities::getGuid
      */
     public function testGetGuid()
     {
@@ -521,7 +521,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::endsWith
+     * @covers \WindowsAzure\Common\Internal\Utilities::endsWith
      */
     public function testEndsWith()
     {
@@ -538,7 +538,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::getEntityId
+     * @covers \WindowsAzure\Common\Internal\Utilities::getEntityId
      */
     public function testGetEntityIdWithString()
     {
@@ -554,7 +554,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::getEntityId
+     * @covers \WindowsAzure\Common\Internal\Utilities::getEntityId
      */
     public function testGetEntityIdWithObject()
     {
@@ -576,7 +576,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::generateCryptoKey
+     * @covers \WindowsAzure\Common\Internal\Utilities::generateCryptoKey
      */
     public function testGenerateCryptoKey()
     {
@@ -592,7 +592,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::ctrCrypt
+     * @covers \WindowsAzure\Common\Internal\Utilities::ctrCrypt
      */
     public function testCtrCrypt()
     {
@@ -612,7 +612,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::ctrCrypt
+     * @covers \WindowsAzure\Common\Internal\Utilities::ctrCrypt
      */
     public function testCtrCryptFixedKeys()
     {
@@ -633,7 +633,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::ctrCrypt
+     * @covers \WindowsAzure\Common\Internal\Utilities::ctrCrypt
      */
     public function testCtrCryptInvalidKeyLength()
     {
@@ -651,7 +651,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::ctrCrypt
+     * @covers \WindowsAzure\Common\Internal\Utilities::ctrCrypt
      */
     public function testCtrCryptInvalidInitializationVectorLength()
     {
@@ -667,7 +667,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::base256ToDec
+     * @covers \WindowsAzure\Common\Internal\Utilities::base256ToDec
      */
     public function testBase256ToDecF()
     {
@@ -684,7 +684,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::base256ToDec
+     * @covers \WindowsAzure\Common\Internal\Utilities::base256ToDec
      */
     public function testBase256ToDec0()
     {
@@ -701,7 +701,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::base256ToDec
+     * @covers \WindowsAzure\Common\Internal\Utilities::base256ToDec
      */
     public function testBase256ToDec()
     {
@@ -718,7 +718,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Utilities::base256ToDec
+     * @covers \WindowsAzure\Common\Internal\Utilities::base256ToDec
      */
     public function testBase256ToDecBig()
     {

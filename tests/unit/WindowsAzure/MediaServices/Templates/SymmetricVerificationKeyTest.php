@@ -42,8 +42,8 @@ use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
 class SymmetricVerificationKeyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Templates\SymmetricVerificationKey::getKeyValue
-     * @covers WindowsAzure\MediaServices\Templates\SymmetricVerificationKey::setKeyValue
+     * @covers \WindowsAzure\MediaServices\Templates\SymmetricVerificationKey::getKeyValue
+     * @covers \WindowsAzure\MediaServices\Templates\SymmetricVerificationKey::setKeyValue
      */
     public function testGetSetKeyValue()
     {

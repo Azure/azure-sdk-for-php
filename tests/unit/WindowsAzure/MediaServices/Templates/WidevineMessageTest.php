@@ -47,8 +47,8 @@ use WindowsAzure\MediaServices\Templates\RequiredOutputProtection;
 class WidevineMessageTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Templates\WidevineMessageSerializer::serialize
-     * @covers WindowsAzure\MediaServices\Templates\WidevineMessageSerializer::deserialize
+     * @covers \WindowsAzure\MediaServices\Templates\WidevineMessageSerializer::serialize
+     * @covers \WindowsAzure\MediaServices\Templates\WidevineMessageSerializer::deserialize
      */
     public function testRoundTrip()
     {
@@ -75,7 +75,7 @@ class WidevineMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\WidevineMessageSerializer::deserialize
+     * @covers \WindowsAzure\MediaServices\Templates\WidevineMessageSerializer::deserialize
      */
     public function testFromJson()
     {
@@ -104,7 +104,7 @@ class WidevineMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\WidevineMessageSerializer::serialize
+     * @covers \WindowsAzure\MediaServices\Templates\WidevineMessageSerializer::serialize
      */
     public function testToJson()
     {

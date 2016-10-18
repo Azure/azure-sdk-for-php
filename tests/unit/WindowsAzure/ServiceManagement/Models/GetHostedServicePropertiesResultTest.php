@@ -44,8 +44,8 @@ use WindowsAzure\ServiceManagement\Models\HostedService;
 class GetHostedServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult::getHostedService 
-     * @covers WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult::setHostedService 
+     * @covers \WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult::getHostedService 
+     * @covers \WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult::setHostedService 
      */
     public function testGetHostedService()
     {

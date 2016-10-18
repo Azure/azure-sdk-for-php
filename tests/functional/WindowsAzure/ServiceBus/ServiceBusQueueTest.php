@@ -40,8 +40,8 @@ class ServiceBusQueueTest extends ScenarioTestBase
     private $PEEK_LOCK;
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteQueue
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listQueues
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteQueue
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::listQueues
      */
     public function testSendMessage()
     {
@@ -67,10 +67,10 @@ class ServiceBusQueueTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::createQueue
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteQueue
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getQueue
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listQueues
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::createQueue
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteQueue
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::getQueue
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::listQueues
      */
     private function setupQueue()
     {
@@ -104,7 +104,7 @@ class ServiceBusQueueTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::sendQueueMessage
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::sendQueueMessage
      */
     private function sendMessages()
     {
@@ -153,10 +153,10 @@ class ServiceBusQueueTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteMessage
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getQueue
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveQueueMessage
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::unlockMessage
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteMessage
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::getQueue
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveQueueMessage
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::unlockMessage
      */
     private function peeklocktest($expectedMessages)
     {

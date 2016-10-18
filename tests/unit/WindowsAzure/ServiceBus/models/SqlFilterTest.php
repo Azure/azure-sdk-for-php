@@ -44,7 +44,7 @@ use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 class SqlFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\SqlFilter::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\SqlFilter::__construct
      */
     public function testSqlFilterConstructor()
     {
@@ -58,8 +58,8 @@ class SqlFilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\SqlFilter::getSqlExpression
-     * @covers WindowsAzure\ServiceBus\Models\SqlFilter::setSqlExpression
+     * @covers \WindowsAzure\ServiceBus\Models\SqlFilter::getSqlExpression
+     * @covers \WindowsAzure\ServiceBus\Models\SqlFilter::setSqlExpression
      */
     public function testGetSetSqlExpression()
     {
@@ -79,8 +79,8 @@ class SqlFilterTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\SqlFilter::getCompatibilityLevel
-     * @covers WindowsAzure\ServiceBus\Models\SqlFilter::setCompatibilityLevel
+     * @covers \WindowsAzure\ServiceBus\Models\SqlFilter::getCompatibilityLevel
+     * @covers \WindowsAzure\ServiceBus\Models\SqlFilter::setCompatibilityLevel
      */
     public function testGetSetCompatibilityLevel()
     {

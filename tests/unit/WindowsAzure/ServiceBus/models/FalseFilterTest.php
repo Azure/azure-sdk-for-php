@@ -43,7 +43,7 @@ use WindowsAzure\ServiceBus\Models\FalseFilter;
 class FalseFilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\FalseFilter::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\FalseFilter::__construct
      */
     public function testFalseFilterConstructor()
     {

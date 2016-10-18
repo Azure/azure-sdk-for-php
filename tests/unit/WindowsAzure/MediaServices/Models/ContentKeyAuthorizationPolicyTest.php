@@ -42,9 +42,9 @@ use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy;
 class ContentKeyAuthorizationPolicyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::fromArray
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::__construct
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::__construct
      */
     public function testCreateFromOptions()
     {
@@ -65,8 +65,8 @@ class ContentKeyAuthorizationPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::getName
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::setName
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::getName
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::setName
      */
     public function testGetSetName()
     {
@@ -84,8 +84,8 @@ class ContentKeyAuthorizationPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::getId
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::setId
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::getId
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy::setId
      */
     public function testGetSetId()
     {

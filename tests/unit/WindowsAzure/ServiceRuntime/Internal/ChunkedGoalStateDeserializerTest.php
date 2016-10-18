@@ -171,9 +171,9 @@ class ChunkedGoalStateDeserializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer::__construct
-     * @covers WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer::initialize
-     * @covers WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer::deserialize
+     * @covers \WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer::initialize
+     * @covers \WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer::deserialize
      */
     public function testDeserializeWithNewLineStart()
     {

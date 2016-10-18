@@ -43,8 +43,8 @@ use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
 class CreateDeploymentOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::setStartDeployment
-     * @covers WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::getStartDeployment
+     * @covers \WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::setStartDeployment
+     * @covers \WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::getStartDeployment
      */
     public function testSetStartDeployment()
     {
@@ -60,8 +60,8 @@ class CreateDeploymentOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::setTreatWarningsAsErrors
-     * @covers WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::getTreatWarningsAsErrors
+     * @covers \WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::setTreatWarningsAsErrors
+     * @covers \WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::getTreatWarningsAsErrors
      */
     public function testSetTreatWarningsAsErrors()
     {

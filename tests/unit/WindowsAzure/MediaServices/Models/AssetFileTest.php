@@ -42,7 +42,7 @@ use WindowsAzure\MediaServices\Models\AssetFile;
 class AssetFileTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\AssetFile::__construct
+     * @covers \WindowsAzure\MediaServices\Models\AssetFile::__construct
      */
     public function test__construct()
     {
@@ -60,8 +60,8 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
     }
 
      /**
-      * @covers WindowsAzure\MediaServices\Models\AssetFile::getContentCheckSum
-      * @covers WindowsAzure\MediaServices\Models\AssetFile::setContentCheckSum
+      * @covers \WindowsAzure\MediaServices\Models\AssetFile::getContentCheckSum
+      * @covers \WindowsAzure\MediaServices\Models\AssetFile::setContentCheckSum
       */
      public function testGetContentCheckSum()
      {
@@ -79,8 +79,8 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
      }
 
   /**
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::getMimeType
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::setMimeType
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::getMimeType
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::setMimeType
    */
   public function testGetMimeType()
   {
@@ -98,7 +98,7 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::getLastModified
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::getLastModified
    */
   public function testGetLastModified()
   {
@@ -120,7 +120,7 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::getCreated
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::getCreated
    */
   public function testGetCreated()
   {
@@ -142,8 +142,8 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::getIsPrimary
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::setIsPrimary
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::getIsPrimary
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::setIsPrimary
    */
   public function testGetIsPrimary()
   {
@@ -161,8 +161,8 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::getInitializationVector
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::setInitializationVector
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::getInitializationVector
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::setInitializationVector
    */
   public function testGetInitializationVector()
   {
@@ -180,8 +180,8 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::getEncryptionKeyId
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::setEncryptionKeyId
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::getEncryptionKeyId
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::setEncryptionKeyId
    */
   public function testGetEncryptionKeyId()
   {
@@ -199,8 +199,8 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::getIsEncrypted
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::setIsEncrypted
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::getIsEncrypted
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::setIsEncrypted
    */
   public function testGetIsEncrypted()
   {
@@ -218,8 +218,8 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::getEncryptionScheme
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::setEncryptionScheme
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::getEncryptionScheme
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::setEncryptionScheme
    */
   public function testGetEncryptionScheme()
   {
@@ -237,8 +237,8 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::getEncryptionVersion
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::setEncryptionVersion
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::getEncryptionVersion
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::setEncryptionVersion
    */
   public function testGetEncryptionVersion()
   {
@@ -256,8 +256,8 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::getParentAssetId
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::setParentAssetId
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::getParentAssetId
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::setParentAssetId
    */
   public function testGetParentAssetId()
   {
@@ -275,8 +275,8 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::getContentFileSize
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::setContentFileSize
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::getContentFileSize
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::setContentFileSize
    */
   public function testGetContentFileSize()
   {
@@ -294,8 +294,8 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::getName
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::setName
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::getName
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::setName
    */
   public function testGetName()
   {
@@ -313,7 +313,7 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::getId
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::getId
    */
   public function testGetId()
   {
@@ -334,8 +334,8 @@ class AssetFileTest extends \PHPUnit_Framework_TestCase
   }
 
   /**
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::createFromOptions
-   * @covers WindowsAzure\MediaServices\Models\AssetFile::fromArray
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::createFromOptions
+   * @covers \WindowsAzure\MediaServices\Models\AssetFile::fromArray
    */
   public function testAssetFileFromOptions()
   {

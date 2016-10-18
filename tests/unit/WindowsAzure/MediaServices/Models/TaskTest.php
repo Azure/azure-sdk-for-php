@@ -42,7 +42,7 @@ use WindowsAzure\MediaServices\Models\Task;
 class TaskTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::__construct
+     * @covers \WindowsAzure\MediaServices\Models\Task::__construct
      */
     public function test__construct()
     {
@@ -62,8 +62,8 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\Task::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\Task::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\Task::fromArray
      */
     public function testCreateFromOptions()
     {
@@ -135,7 +135,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getId
+     * @covers \WindowsAzure\MediaServices\Models\Task::getId
      */
     public function testGetId()
     {
@@ -157,8 +157,8 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getConfiguration
-     * @covers WindowsAzure\MediaServices\Models\Task::setConfiguration
+     * @covers \WindowsAzure\MediaServices\Models\Task::getConfiguration
+     * @covers \WindowsAzure\MediaServices\Models\Task::setConfiguration
      */
     public function testGetSetConfiguration()
     {
@@ -181,7 +181,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getEndTime
+     * @covers \WindowsAzure\MediaServices\Models\Task::getEndTime
      */
     public function testGetEndTime()
     {
@@ -204,8 +204,8 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getMediaProcessorId
-     * @covers WindowsAzure\MediaServices\Models\Task::setMediaProcessorId
+     * @covers \WindowsAzure\MediaServices\Models\Task::getMediaProcessorId
+     * @covers \WindowsAzure\MediaServices\Models\Task::setMediaProcessorId
      */
     public function testGetSetMediaProcessorId()
     {
@@ -228,8 +228,8 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getName
-     * @covers WindowsAzure\MediaServices\Models\Task::setName
+     * @covers \WindowsAzure\MediaServices\Models\Task::getName
+     * @covers \WindowsAzure\MediaServices\Models\Task::setName
      */
     public function testGetSetName()
     {
@@ -252,7 +252,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getPerfMessage
+     * @covers \WindowsAzure\MediaServices\Models\Task::getPerfMessage
      */
     public function testGetPerfMessage()
     {
@@ -274,8 +274,8 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getPriority
-     * @covers WindowsAzure\MediaServices\Models\Task::setPriority
+     * @covers \WindowsAzure\MediaServices\Models\Task::getPriority
+     * @covers \WindowsAzure\MediaServices\Models\Task::setPriority
      */
     public function testGetSetPriority()
     {
@@ -298,7 +298,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getProgress
+     * @covers \WindowsAzure\MediaServices\Models\Task::getProgress
      */
     public function testGetProgress()
     {
@@ -320,7 +320,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getRunningDuration
+     * @covers \WindowsAzure\MediaServices\Models\Task::getRunningDuration
      */
     public function testGetRunningDuration()
     {
@@ -342,7 +342,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getStartTime
+     * @covers \WindowsAzure\MediaServices\Models\Task::getStartTime
      */
     public function testGetStartTime()
     {
@@ -365,7 +365,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getState
+     * @covers \WindowsAzure\MediaServices\Models\Task::getState
      */
     public function testGetState()
     {
@@ -387,8 +387,8 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getTaskBody
-     * @covers WindowsAzure\MediaServices\Models\Task::setTaskBody
+     * @covers \WindowsAzure\MediaServices\Models\Task::getTaskBody
+     * @covers \WindowsAzure\MediaServices\Models\Task::setTaskBody
      */
     public function testGetSetTaskBody()
     {
@@ -411,7 +411,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getOptions
+     * @covers \WindowsAzure\MediaServices\Models\Task::getOptions
      */
     public function testGetOptions()
     {
@@ -433,8 +433,8 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getEncryptionKeyId
-     * @covers WindowsAzure\MediaServices\Models\Task::setEncryptionKeyId
+     * @covers \WindowsAzure\MediaServices\Models\Task::getEncryptionKeyId
+     * @covers \WindowsAzure\MediaServices\Models\Task::setEncryptionKeyId
      */
     public function testGetSetEncryptionKeyId()
     {
@@ -457,8 +457,8 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getEncryptionScheme
-     * @covers WindowsAzure\MediaServices\Models\Task::setEncryptionScheme
+     * @covers \WindowsAzure\MediaServices\Models\Task::getEncryptionScheme
+     * @covers \WindowsAzure\MediaServices\Models\Task::setEncryptionScheme
      */
     public function testGetSetEncryptionScheme()
     {
@@ -481,8 +481,8 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getEncryptionVersion
-     * @covers WindowsAzure\MediaServices\Models\Task::setEncryptionVersion
+     * @covers \WindowsAzure\MediaServices\Models\Task::getEncryptionVersion
+     * @covers \WindowsAzure\MediaServices\Models\Task::setEncryptionVersion
      */
     public function testGetSetEncryptionVersion()
     {
@@ -505,8 +505,8 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getInitializationVector
-     * @covers WindowsAzure\MediaServices\Models\Task::setInitializationVector
+     * @covers \WindowsAzure\MediaServices\Models\Task::getInitializationVector
+     * @covers \WindowsAzure\MediaServices\Models\Task::setInitializationVector
      */
     public function testGetSetInitializationVector()
     {
@@ -529,7 +529,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getErrorDetails
+     * @covers \WindowsAzure\MediaServices\Models\Task::getErrorDetails
      */
     public function testGetErrorDetail()
     {
@@ -556,7 +556,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Task::getHistoricalEvents
+     * @covers \WindowsAzure\MediaServices\Models\Task::getHistoricalEvents
      */
     public function testGetHistoricalEvents()
     {

@@ -43,8 +43,8 @@ use WindowsAzure\ServiceManagement\Models\UpgradeStatus;
 class UpgradeStatusTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\UpgradeStatus::setUpgradeType
-     * @covers WindowsAzure\ServiceManagement\Models\UpgradeStatus::getUpgradeType
+     * @covers \WindowsAzure\ServiceManagement\Models\UpgradeStatus::setUpgradeType
+     * @covers \WindowsAzure\ServiceManagement\Models\UpgradeStatus::getUpgradeType
      */
     public function testSetUpgradeType()
     {
@@ -60,8 +60,8 @@ class UpgradeStatusTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\UpgradeStatus::setCurrentUpgradeDomainState
-     * @covers WindowsAzure\ServiceManagement\Models\UpgradeStatus::getCurrentUpgradeDomainState
+     * @covers \WindowsAzure\ServiceManagement\Models\UpgradeStatus::setCurrentUpgradeDomainState
+     * @covers \WindowsAzure\ServiceManagement\Models\UpgradeStatus::getCurrentUpgradeDomainState
      */
     public function testSetCurrentUpgradeDomainState()
     {
@@ -77,8 +77,8 @@ class UpgradeStatusTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\UpgradeStatus::setCurrentUpgradeDomain
-     * @covers WindowsAzure\ServiceManagement\Models\UpgradeStatus::getCurrentUpgradeDomain
+     * @covers \WindowsAzure\ServiceManagement\Models\UpgradeStatus::setCurrentUpgradeDomain
+     * @covers \WindowsAzure\ServiceManagement\Models\UpgradeStatus::getCurrentUpgradeDomain
      */
     public function testSetCurrentUpgradeDomain()
     {

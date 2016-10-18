@@ -43,9 +43,9 @@ use WindowsAzure\ServiceManagement\Internal\WindowsAzureService;
 class WindowsAzureServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::setAffinityGroup
-     * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::getAffinityGroup
-     * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::__construct
+     * @covers \WindowsAzure\ServiceManagement\Internal\WindowsAzureService::setAffinityGroup
+     * @covers \WindowsAzure\ServiceManagement\Internal\WindowsAzureService::getAffinityGroup
+     * @covers \WindowsAzure\ServiceManagement\Internal\WindowsAzureService::__construct
      */
     public function testSetAffinityGroup()
     {
@@ -61,9 +61,9 @@ class WindowsAzureServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::setUrl
-     * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::getUrl
-     * @covers WindowsAzure\ServiceManagement\Internal\WindowsAzureService::__construct
+     * @covers \WindowsAzure\ServiceManagement\Internal\WindowsAzureService::setUrl
+     * @covers \WindowsAzure\ServiceManagement\Internal\WindowsAzureService::getUrl
+     * @covers \WindowsAzure\ServiceManagement\Internal\WindowsAzureService::__construct
      */
     public function testSetUrl()
     {

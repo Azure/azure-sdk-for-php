@@ -46,7 +46,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
     private $PEEK_LOCK;
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteTopic
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteTopic
      */
     public function testSubscriptionTopic()
     {
@@ -113,10 +113,10 @@ class ServiceBusTopicTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::createTopic
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteTopic
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getTopic
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listTopics
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::createTopic
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteTopic
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::getTopic
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::listTopics
      */
     private function setupTopic()
     {
@@ -149,7 +149,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::createSubscription
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::createSubscription
      */
     private function setupSubscriptions()
     {
@@ -167,9 +167,9 @@ class ServiceBusTopicTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::createRule
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteRule
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listRules
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::createRule
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteRule
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::listRules
      */
     private function setupRules()
     {
@@ -231,7 +231,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listRules
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::listRules
      */
     private function showRules($subName)
     {
@@ -248,7 +248,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::sendTopicMessage
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::sendTopicMessage
      */
     private function sendMessages()
     {
@@ -287,8 +287,8 @@ class ServiceBusTopicTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getSubscription
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getTopic
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::getSubscription
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::getTopic
      */
     private function getMessageCounts()
     {
@@ -317,9 +317,9 @@ class ServiceBusTopicTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getSubscription
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveSubscriptionMessage
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::unlockMessage
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::getSubscription
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveSubscriptionMessage
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::unlockMessage
      */
     private function getMessageFromSub($expectedMessages, $subscriptionName, $expCustomProps = null)
     {
