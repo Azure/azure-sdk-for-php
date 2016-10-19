@@ -68,7 +68,7 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $batchResp = new BatchResponse($encodedBody);
-        $result = $batchResp->getContexts();
+        $result = $batchResp->getResponses();
 
         // Assert
         $this->assertEquals(1, count($result));
@@ -108,7 +108,7 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $batchResp = new BatchResponse($encodedBody, $batchReq);
-        $result = $batchResp->getContexts();
+        $result = $batchResp->getResponses();
 
         // Assert
         $this->assertEquals(1, count($result));
@@ -151,6 +151,6 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $batchResp = new BatchResponse($encodedBody, $batchReq);
-        $result = $batchResp->getContexts();
+        $result = $batchResp->getResponses();
     }
 }
