@@ -63,7 +63,7 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     public function testBrokeredMessageConstructorWithMessage()
     {
         // Setup
-        $expected = new \DateTime();
+        $expected = 'testMessage';
 
         // Test
         $brokeredMessage = new BrokeredMessage($expected);
@@ -253,7 +253,7 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     public function testGetSetLockedUntilUtc()
     {
         // Setup
-        $expected = 'testLockedUntilUtc';
+        $expected = new \DateTime();
         $brokeredMessage = new BrokeredMessage();
 
         // Test
