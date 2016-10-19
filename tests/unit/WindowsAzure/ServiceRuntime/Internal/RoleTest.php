@@ -43,26 +43,26 @@ use WindowsAzure\ServiceRuntime\Internal\Role;
 class RoleTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\Role::__construct
-     * @covers WindowsAzure\ServiceRuntime\Internal\Role::getName
+     * @covers \WindowsAzure\ServiceRuntime\Internal\Role::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\Role::getName
      */
     public function testGetName()
     {
         $name = 'roleName';
 
         // Setup
-        $role = new Role($name, array());
+        $role = new Role($name, []);
 
         // Test
         $this->assertEquals($name, $role->getName());
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\Role::getInstances
+     * @covers \WindowsAzure\ServiceRuntime\Internal\Role::getInstances
      */
     public function testGetInstances()
     {
-        $instances = array();
+        $instances = [];
 
         // Setup
         $role = new Role(null, $instances);

@@ -45,18 +45,18 @@ use WindowsAzure\ServiceManagement\Models\OperationStatus;
 class GetOperationStatusResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::create
+     * @covers \WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::create
      */
     public function testCreateWithError()
     {
         // Setup
         $expected = new ServiceException('400', 'error message');
-        $input = array(
-          'Error' => array(
+        $input = [
+          'Error' => [
               'Code' => '400',
               'Message' => 'error message',
-          ),
-        );
+          ],
+        ];
 
         // Test
         $result = GetOperationStatusResult::create($input);
@@ -66,8 +66,8 @@ class GetOperationStatusResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::setId
-     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::getId
+     * @covers \WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::setId
+     * @covers \WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::getId
      */
     public function testSetId()
     {
@@ -83,8 +83,8 @@ class GetOperationStatusResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::setStatus
-     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::getStatus
+     * @covers \WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::setStatus
+     * @covers \WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::getStatus
      */
     public function testSetStatus()
     {
@@ -100,8 +100,8 @@ class GetOperationStatusResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::setHttpStatusCode
-     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::getHttpStatusCode
+     * @covers \WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::setHttpStatusCode
+     * @covers \WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::getHttpStatusCode
      */
     public function testSetHttpStatusCode()
     {
@@ -117,8 +117,8 @@ class GetOperationStatusResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::setError
-     * @covers WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::getError
+     * @covers \WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::setError
+     * @covers \WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::getError
      */
     public function testSetError()
     {

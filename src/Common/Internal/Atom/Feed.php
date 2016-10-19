@@ -230,26 +230,6 @@ class Feed extends AtomBase
     }
 
     /**
-     * Gets the attributes of the feed. 
-     *
-     * @return array
-     */
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
-
-    /**
-     * Sets the attributes of the feed. 
-     *
-     * @param array $attributes The attributes of the array.
-     */
-    public function setAttributes(array $attributes)
-    {
-        $this->attributes = $attributes;
-    }
-
-    /**
      * Adds an attribute to the feed object instance. 
      * 
      * @param string $attributeKey   The key of the attribute. 
@@ -566,7 +546,7 @@ class Feed extends AtomBase
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
 
-        $xmlWriter->startElementNs('atom', 'feed', Resources::ATOM_NAMESPACE);
+        $xmlWriter->startElementNS('atom', 'feed', Resources::ATOM_NAMESPACE);
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
@@ -676,7 +656,7 @@ class Feed extends AtomBase
         );
 
         if (!is_null($this->updated)) {
-            $xmlWriter->writeElementNs(
+            $xmlWriter->writeElementNS(
                 'atom',
                 'updated',
                 Resources::ATOM_NAMESPACE,

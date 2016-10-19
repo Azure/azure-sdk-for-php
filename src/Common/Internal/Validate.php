@@ -26,7 +26,7 @@
 namespace WindowsAzure\Common\Internal;
 
 /**
- * Validates aganist a condition and throws an exception in case of failure.
+ * Validates against a condition and throws an exception in case of failure.
  *
  * @category  Microsoft
  *
@@ -76,11 +76,12 @@ class Validate
      * Throws exception if the provided variable type is not boolean.
      *
      * @param mixed $var variable to check against.
-     * @param $name
+     * @param string $name
      */
     public static function isBoolean($var, $name)
     {
         (bool) $var;
+        $name;
     }
 
     /**
@@ -176,6 +177,7 @@ class Validate
         if (gettype($date) != 'object' || get_class($date) != 'DateTime') {
             throw new InvalidArgumentTypeException('DateTime');
         }
+        $name;
     }
 
     /**
@@ -286,6 +288,7 @@ class Validate
         if ($isValid) {
             return true;
         } else {
+            $name;
             throw new \RuntimeException(
                 sprintf(Resources::INVALID_CONFIG_URI, $uri)
             );
@@ -377,7 +380,7 @@ class Validate
      * Validate if string is date formatted.
      *
      * @param string $value Value to validate
-     * @param string $name  Name of parameter to insert in erro message
+     * @param string $name  Name of parameter to insert in error message
      *
      * @throws \InvalidArgumentException
      *

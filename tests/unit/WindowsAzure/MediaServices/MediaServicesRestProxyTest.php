@@ -97,6 +97,7 @@ use WindowsAzure\MediaServices\Templates\ContentKeySpecs;
 use WindowsAzure\MediaServices\Templates\Hdcp;
 use WindowsAzure\MediaServices\Templates\RequiredOutputProtection;
 use Tests\Framework\VirtualFileSystem;
+use WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey;
 
 /**
  * Unit tests for class MediaServicesRestProxy.
@@ -114,13 +115,13 @@ use Tests\Framework\VirtualFileSystem;
 class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 {
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAsset
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_createEntity
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_deleteEntity
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_createEntity
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_deleteEntity
      */
     public function testCreateAsset()
     {
@@ -136,11 +137,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAsset
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_getEntity
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_getEntity
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
      */
     public function testGetAsset()
     {
@@ -158,12 +159,12 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetList
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_getEntityList
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getEntryList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_getEntityList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getEntryList
      */
     public function testGetAssetList()
     {
@@ -181,11 +182,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::updateAsset
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_updateEntity
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::updateAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_updateEntity
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
      */
     public function testUpdateAsset()
     {
@@ -205,11 +206,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAccessPolicy
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAccessPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAccessPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
      */
     public function testCreateAccessPolicy()
     {
@@ -227,8 +228,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAccessPolicyList
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAccessPolicyList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::send
      */
     public function testGetAccessPolicyList()
     {
@@ -249,8 +250,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAccessPolicy
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAccessPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::send
      */
     public function testGetAccessPolicy()
     {
@@ -270,11 +271,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteLocator
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createLocator
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::deleteLocator
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
      */
     public function testCreateLocator()
     {
@@ -288,21 +289,21 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $access->setPermissions(AccessPolicy::PERMISSIONS_READ + AccessPolicy::PERMISSIONS_WRITE + AccessPolicy::PERMISSIONS_DELETE + AccessPolicy::PERMISSIONS_LIST);
         $access = $this->createAccessPolicy($access);
 
-        $locat = new Locator($asset, $access, 1);
-        $locat->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME.$this->createSuffix());
+        $locator = new Locator($asset, $access, 1);
+        $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME.$this->createSuffix());
 
         // Test
-        $result = $this->createLocator($locat);
+        $result = $this->createLocator($locator);
 
         // Assert
-        $this->assertEquals($locat->getName(), $result->getName());
+        $this->assertEquals($locator->getName(), $result->getName());
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createFileInfos
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::uploadAssetFile
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createFileInfos
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::uploadAssetFile
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
      */
     public function testCreateFileInfos()
     {
@@ -337,12 +338,12 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteJob
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_getCreateEmptyJobContext
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_getCreateTaskContext
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createJob
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::deleteJob
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_getCreateEmptyJobContext
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_getCreateTaskContext
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
      */
     public function testCreateJobWithTasks()
     {
@@ -357,8 +358,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobStatus
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getJobStatus
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::send
      */
     public function testGetJobStatus()
     {
@@ -375,8 +376,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::cancelJob
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::cancelJob
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::send
      */
     public function testCancelJob()
     {
@@ -392,12 +393,12 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createJobTemplate
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteJobTemplate
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_getCreateEmptyJobTemplateContext
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_getCreateTaskTemplateContext
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createJobTemplate
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::deleteJobTemplate
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_getCreateEmptyJobTemplateContext
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_getCreateTaskTemplateContext
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
      */
     public function testCreateJobTemplate()
     {
@@ -412,7 +413,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetLocators
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetLocators
      */
     public function testGetAssetLocators()
     {
@@ -440,7 +441,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetStorageAccount
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetStorageAccount
      */
     public function testGetAssetStorageAccount()
     {
@@ -459,7 +460,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLocator
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getLocator
      */
     public function testGetLocator()
     {
@@ -488,7 +489,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLocatorAccessPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getLocatorAccessPolicy
      */
     public function testGetLocatorAccessPolicy()
     {
@@ -515,7 +516,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLocatorAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getLocatorAsset
      */
     public function testGetLocatorAsset()
     {
@@ -542,7 +543,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLocatorList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getLocatorList
      */
     public function testGetLocatorList()
     {
@@ -571,7 +572,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::updateLocator
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::updateLocator
      */
     public function testUpdateLocator()
     {
@@ -600,11 +601,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetFileList
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetFile
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetFileList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::wrapAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getPropertiesFromAtomEntry
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetFile
      */
     public function testGetAssetFile()
     {
@@ -621,7 +622,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::updateAssetFile
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::updateAssetFile
      */
     public function testUpdateAssetFile()
     {
@@ -641,8 +642,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJob
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getJob
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getJobList
      */
     public function testGetJob()
     {
@@ -660,7 +661,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobTasks
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getJobTasks
      */
     public function testGetJobTasks()
     {
@@ -676,7 +677,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         $job = new Job();
         $job->setName(TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix());
-        $job = $this->createJob($job, array($asset), array($task));
+        $job = $this->createJob($job, [$asset], [$task]);
 
         // Test
         $result = $this->restProxy->getJobTasks($job);
@@ -687,7 +688,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobInputMediaAssets
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getJobInputMediaAssets
      */
     public function testGetJobInputMediaAssets()
     {
@@ -703,7 +704,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         $job = new Job();
         $job->setName(TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix());
-        $job = $this->createJob($job, array($asset), array($task));
+        $job = $this->createJob($job, [$asset], [$task]);
 
         // Test
         $result = $this->restProxy->getJobInputMediaAssets($job);
@@ -714,8 +715,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getMediaProcessors
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::send
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getMediaProcessors
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::send
      */
     public function testGetMediaProcessors()
     {
@@ -727,7 +728,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getLatestMediaProcessor
      */
     public function testGetLatestMediaProcessor()
     {
@@ -743,7 +744,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobOutputMediaAssets
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getJobOutputMediaAssets
      */
     public function testGetJobOutputMediaAssets()
     {
@@ -759,7 +760,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         $job = new Job();
         $job->setName(TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix());
-        $job = $this->createJob($job, array($asset), array($task));
+        $job = $this->createJob($job, [$asset], [$task]);
 
         // Test
         $result = $this->restProxy->getJobOutputMediaAssets($job);
@@ -770,8 +771,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getTaskList
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_getEntityList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getTaskList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_getEntityList
      */
     public function testGetTaskList()
     {
@@ -787,7 +788,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         $job = new Job();
         $job->setName(TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix());
-        $job = $this->createJob($job, array($asset), array($task));
+        $job = $this->createJob($job, [$asset], [$task]);
 
         // Test
         $result = $this->restProxy->getTaskList();
@@ -799,7 +800,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobTemplate
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getJobTemplate
      */
     public function testGetJobTemplate()
     {
@@ -812,11 +813,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertEquals($name, $result->getName());
-        $this->assertequals($jobTemplate->getId(), $result->getId());
+        $this->assertEquals($jobTemplate->getId(), $result->getId());
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobTemplateList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getJobTemplateList
      */
     public function testGetJobTemplateList()
     {
@@ -830,11 +831,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Assert
         $this->assertEquals(1, count($result));
         $this->assertEquals($name, $result[0]->getName());
-        $this->assertequals($jobTemplate->getId(), $result[0]->getId());
+        $this->assertEquals($jobTemplate->getId(), $result[0]->getId());
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getJobTemplateTaskTemplateList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getJobTemplateTaskTemplateList
      */
     public function testGetJobTemplateTaskTemplateList()
     {
@@ -844,19 +845,19 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $configuration = 'H.264 HD 720p VBR';
         $name = TestResources::MEDIA_SERVICES_JOB_TEMPLATE_NAME.$this->createSuffix();
 
-        $jobTempl = $this->createJobTemplateWithTasks($name);
+        $jobTemplate = $this->createJobTemplateWithTasks($name);
 
         // Test
-        $result = $this->restProxy->getJobTemplateTaskTemplateList($jobTempl);
+        $result = $this->restProxy->getJobTemplateTaskTemplateList($jobTemplate);
 
         // Assert
         $this->assertEquals(1, count($result));
-        $this->assertequals($configuration, $result[0]->getConfiguration());
-        $this->assertequals($mediaProcessor->getId(), $result[0]->getMediaProcessorId());
+        $this->assertEquals($configuration, $result[0]->getConfiguration());
+        $this->assertEquals($mediaProcessor->getId(), $result[0]->getMediaProcessorId());
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getTaskTemplateList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getTaskTemplateList
      */
     public function testGetTaskTemplateList()
     {
@@ -866,7 +867,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
         $configuration = 'H.264 HD 720p VBR';
 
-        $jobTempl = $this->createJobTemplateWithTasks($name);
+        $jobTemplate = $this->createJobTemplateWithTasks($name);
 
         // Test
         $result = $this->restProxy->getTaskTemplateList();
@@ -878,7 +879,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetAssetFileList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetAssetFileList
      */
     public function testGetAssetAssetFileList()
     {
@@ -895,7 +896,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetParentAssets
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetParentAssets
      */
     public function testGetAssetParentAsset()
     {
@@ -911,7 +912,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         $job = new Job();
         $job->setName($name);
-        $job = $this->createJob($job, array($inputAsset), array($task));
+        $job = $this->createJob($job, [$inputAsset], [$task]);
 
         $assetList = $this->restProxy->getAssetList();
 
@@ -928,8 +929,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createIngestManifest
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteIngestManifest
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createIngestManifest
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::deleteIngestManifest
      */
     public function testCreateIngestManifest()
     {
@@ -947,7 +948,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifest
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifest
      */
     public function testGetIngestManifest()
     {
@@ -966,7 +967,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestList
      */
     public function testGetIngestManifestList()
     {
@@ -986,7 +987,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestAssets
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestAssets
      */
     public function testGetIngestManifestAssets()
     {
@@ -1018,7 +1019,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getPendingIngestManifestAssets
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getPendingIngestManifestAssets
      */
     public function testGetPendingIngestManifestAssets()
     {
@@ -1050,7 +1051,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestStorageAccount
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestStorageAccount
      */
     public function testGetIngestManifestStorageAccount()
     {
@@ -1072,7 +1073,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::updateIngestManifest
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::updateIngestManifest
      */
     public function testUpdateIngestManifest()
     {
@@ -1093,8 +1094,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createIngestManifestAsset
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteIngestManifestAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createIngestManifestAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::deleteIngestManifestAsset
      */
     public function testCreateIngestManifestAsset()
     {
@@ -1119,7 +1120,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestAsset
      */
     public function testGetIngestManifestAsset()
     {
@@ -1146,7 +1147,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestAssetList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestAssetList
      */
     public function testGetIngestManifestAssetList()
     {
@@ -1173,7 +1174,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestAssetFiles
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestAssetFiles
      */
     public function testGetIngestManifestAssetFiles()
     {
@@ -1206,8 +1207,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createIngestManifestFile
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteIngestManifestFile
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createIngestManifestFile
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::deleteIngestManifestFile
      */
     public function testCreateIngestManifestFile()
     {
@@ -1238,7 +1239,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestFile
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestFile
      */
     public function testGetIngestManifestFile()
     {
@@ -1270,7 +1271,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestFileList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getIngestManifestFileList
      */
     public function testGetIngestManifestFileList()
     {
@@ -1303,8 +1304,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createContentKey
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteContentKey
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createContentKey
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::deleteContentKey
      */
     public function testCreateContentKey()
     {
@@ -1336,7 +1337,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyList
      */
     public function testGetContentKeyList()
     {
@@ -1366,7 +1367,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKey
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKey
      */
     public function testGetContentKey()
     {
@@ -1395,7 +1396,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::rebindContentKey
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::rebindContentKey
      */
     public function testRebindContentKey()
     {
@@ -1421,7 +1422,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getProtectionKeyId
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getProtectionKeyId
      */
     public function testGetProtectionKeyId()
     {
@@ -1437,7 +1438,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getProtectionKey
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getProtectionKey
      */
     public function testGetProtectionKey()
     {
@@ -1454,7 +1455,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetContentKeys
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetContentKeys
      */
     public function testGetAssetContentKeys()
     {
@@ -1488,7 +1489,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::linkContentKeyToAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::linkContentKeyToAsset
      */
     public function testLinkContentKeyToAsset()
     {
@@ -1521,7 +1522,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::removeContentKeyFromAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::removeContentKeyFromAsset
      */
     public function testRemoveContentKeyFromAsset()
     {
@@ -1554,9 +1555,9 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::uploadAssetFile
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileFromString
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileSingle
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::uploadAssetFile
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileFromString
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileSingle
      */
     public function testUploadSmallFileFromContent()
     {
@@ -1571,10 +1572,10 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::uploadAssetFile
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileFromString
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadBlock
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_commitBlocks
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::uploadAssetFile
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileFromString
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadBlock
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_commitBlocks
      */
     public function testUploadLargeFileFromContent()
     {
@@ -1589,9 +1590,9 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::uploadAssetFile
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileFromResource
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileSingle
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::uploadAssetFile
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileFromResource
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileSingle
      */
     public function testUploadSmallFileFromResource()
     {
@@ -1608,10 +1609,10 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::uploadAssetFile
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileFromResource
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadBlock
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::_commitBlocks
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::uploadAssetFile
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadAssetFileFromResource
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_uploadBlock
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::_commitBlocks
      */
     public function testUploadLargeFileFromResource()
     {
@@ -1628,7 +1629,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createContentKeyAuthorizationPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createContentKeyAuthorizationPolicy
      */
     public function testCreateContentKeyAuthorizationPolicy()
     {
@@ -1647,7 +1648,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicy
      */
     public function testGetContentKeyAuthorizationPolicy()
     {
@@ -1662,7 +1663,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyList
      */
     public function testGetContentKeyAuthorizationPolicyList()
     {
@@ -1679,30 +1680,30 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createContentKeyAuthorizationPolicy
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::updateContentKeyAuthorizationPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createContentKeyAuthorizationPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::updateContentKeyAuthorizationPolicy
      */
     public function testUpdateContentKeyAuthorizationPolicy()
     {
         // Setup
         $name = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME.$this->createSuffix();
-        $newname = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME.$this->createSuffix();
+        $newName = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME.$this->createSuffix();
         $policy = new ContentKeyAuthorizationPolicy();
         $policy->setName($name);
         $result = $this->createContentKeyAuthorizationPolicy($policy);
 
         // Test
-        $result->setName($newname);
+        $result->setName($newName);
         $this->restProxy->updateContentKeyAuthorizationPolicy($result);
 
         $result = $this->restProxy->getContentKeyAuthorizationPolicy($result->getId());
 
         // Assert
-        $this->assertEquals($newname, $result->getName());
+        $this->assertEquals($newName, $result->getName());
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteContentKeyAuthorizationPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::deleteContentKeyAuthorizationPolicy
      */
     public function testDeleteContentKeyAuthorizationPolicy()
     {
@@ -1726,7 +1727,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createContentKeyAuthorizationPolicyOption
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createContentKeyAuthorizationPolicyOption
      */
     public function testCreateContentKeyAuthorizationPolicyOption()
     {
@@ -1736,7 +1737,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $restriction = new ContentKeyAuthorizationPolicyRestriction();
         $restriction->setName($restrictionName);
         $restriction->setKeyRestrictionType(ContentKeyRestrictionType::OPEN);
-        $restrictions = array($restriction);
+        $restrictions = [$restriction];
 
         $options = new ContentKeyAuthorizationPolicyOption();
         $options->setName($name);
@@ -1755,7 +1756,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyOption
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyOption
      */
     public function testGetContentKeyAuthorizationPolicyOption()
     {
@@ -1770,7 +1771,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyOption
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyOption
      */
     public function testGetContentKeyAuthorizationPolicyOptionList()
     {
@@ -1787,27 +1788,27 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::updateContentKeyAuthorizationPolicyOption
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::updateContentKeyAuthorizationPolicyOption
      */
     public function testUpdateContentKeyAuthorizationPolicyOption()
     {
         // Setup
         $id = $this->testCreateContentKeyAuthorizationPolicyOption();
-        $newname = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME.$this->createSuffix();
+        $newName = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME.$this->createSuffix();
         $options = $this->restProxy->getContentKeyAuthorizationPolicyOption($id);
 
         // Test
-        $options->setName($newname);
+        $options->setName($newName);
         $this->restProxy->updateContentKeyAuthorizationPolicyOption($options);
 
         $options = $this->restProxy->getContentKeyAuthorizationPolicyOption($options->getId());
 
         // Assert
-        $this->assertEquals($newname, $options->getName());
+        $this->assertEquals($newName, $options->getName());
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteContentKeyAuthorizationPolicyOption
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::deleteContentKeyAuthorizationPolicyOption
      */
     public function testDeleteContentKeyAuthorizationPolicyOption()
     {
@@ -1831,7 +1832,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetContentKeys
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetContentKeys
      */
     public function testGetContentKeyAuthorizationPolicyLinkedOptions()
     {
@@ -1851,7 +1852,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::linkContentKeyToAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::linkContentKeyToAsset
      */
     public function testLinkOptionsToContentKeyAuthorizationPolicy()
     {
@@ -1869,7 +1870,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::removeContentKeyFromAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::removeContentKeyFromAsset
      */
     public function testRemoveOptionsFromContentKeyAuthorizationPolicy()
     {
@@ -1888,7 +1889,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAssetDeliveryPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAssetDeliveryPolicy
      */
     public function testCreateAssetDeliveryPolicy()
     {
@@ -1911,7 +1912,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetDeliveryPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetDeliveryPolicy
      */
     public function testGetAssetDeliveryPolicy()
     {
@@ -1926,7 +1927,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetDeliveryPolicyList
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getAssetDeliveryPolicyList
      */
     public function testGetAssetDeliveryPolicyList()
     {
@@ -1943,14 +1944,14 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createAssetDeliveryPolicy
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::updateAssetDeliveryPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAssetDeliveryPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::updateAssetDeliveryPolicy
      */
     public function testUpdateAssetDeliveryPolicy()
     {
         // Setup
         $name = TestResources::MEDIA_SERVICES_ASSET_DELIVERY_POLICY_NAME.$this->createSuffix();
-        $newname = TestResources::MEDIA_SERVICES_ASSET_DELIVERY_POLICY_NAME.$this->createSuffix();
+        $newName = TestResources::MEDIA_SERVICES_ASSET_DELIVERY_POLICY_NAME.$this->createSuffix();
         $policy = new AssetDeliveryPolicy();
         $policy->setName($name);
         $policy->setAssetDeliveryProtocol(AssetDeliveryProtocol::ALL);
@@ -1959,17 +1960,17 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $result = $this->createAssetDeliveryPolicy($policy);
 
         // Test
-        $result->setName($newname);
+        $result->setName($newName);
         $this->restProxy->updateAssetDeliveryPolicy($result);
 
         $result = $this->restProxy->getAssetDeliveryPolicy($result->getId());
 
         // Assert
-        $this->assertEquals($newname, $result->getName());
+        $this->assertEquals($newName, $result->getName());
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAssetDeliveryPolicy
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::deleteAssetDeliveryPolicy
      */
     public function testDeleteAssetDeliveryPolicy()
     {
@@ -2046,7 +2047,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::removeDeliveryPolicyFromAsset
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::removeDeliveryPolicyFromAsset
      */
     public function testRemoveDeliveryPolicyFromAsset()
     {
@@ -2068,7 +2069,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getKeyDeliveryUrl
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getKeyDeliveryUrl
      */
     public function testGetKeyDeliveryUrl()
     {
@@ -2085,7 +2086,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $result = $this->restProxy->getKeyDeliveryUrl($contentKey, ContentKeyDeliveryType::BASELINE_HTTP);
 
         // Assert
-        $this->assertRegexp('/keydelivery.mediaservices.windows.net/', $result);
+        $this->assertRegExp('/keydelivery.mediaservices.windows.net/', $result);
     }
 
     public function testCreateContentKeyAuthorizationPolicyOptionWithTokenRestrictions()
@@ -2094,11 +2095,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $template = new TokenRestrictionTemplate(TokenType::SWT);
 
         $template->setPrimaryVerificationKey(new SymmetricVerificationKey());
-        $template->setAlternateVerificationKeys(array(new SymmetricVerificationKey()));
+        $template->setAlternateVerificationKeys([new SymmetricVerificationKey()]);
         $template->setAudience('http://sampleaudience/');
         $template->setIssuer('http://sampleissuerurl/');
 
-        $claims = array();
+        $claims = [];
         $claims[] = new TokenClaim(TokenClaim::CONTENT_KEY_ID_CLAIM_TYPE);
         $claims[] = new TokenClaim('Rental', 'true');
 
@@ -2113,7 +2114,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $restriction->setName($restrictionName);
         $restriction->setKeyRestrictionType(ContentKeyRestrictionType::TOKEN_RESTRICTED);
         $restriction->setRequirements($serializedTemplate);
-        $restrictions = array($restriction);
+        $restrictions = [$restriction];
 
         $options = new ContentKeyAuthorizationPolicyOption();
         $options->setName($name);
@@ -2147,11 +2148,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $template = new TokenRestrictionTemplate(TokenType::SWT);
 
         $template->setPrimaryVerificationKey(new SymmetricVerificationKey());
-        $template->setAlternateVerificationKeys(array(new SymmetricVerificationKey()));
+        $template->setAlternateVerificationKeys([new SymmetricVerificationKey()]);
         $template->setAudience('http://sampleaudience/');
         $template->setIssuer('http://sampleissuerurl/');
 
-        $claims = array();
+        $claims = [];
         $claims[] = new TokenClaim(TokenClaim::CONTENT_KEY_ID_CLAIM_TYPE);
         $claims[] = new TokenClaim('Rental', 'true');
 
@@ -2166,13 +2167,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $restriction->setName($restrictionName);
         $restriction->setKeyRestrictionType(ContentKeyRestrictionType::TOKEN_RESTRICTED);
         $restriction->setRequirements($serializedTemplate);
-        $restrictions = array($restriction);
+        $restrictions = [$restriction];
 
         $options = new ContentKeyAuthorizationPolicyOption();
         $options->setName($name);
         $options->setKeyDeliveryType(ContentKeyDeliveryType::PLAYREADY_LICENSE);
-        $playReadytemplate = $this->getPlayReadyTemplate();
-        $deliveryConfiguration = MediaServicesLicenseTemplateSerializer::serialize($playReadytemplate);
+        $playReadyTemplate = $this->getPlayReadyTemplate();
+        $deliveryConfiguration = MediaServicesLicenseTemplateSerializer::serialize($playReadyTemplate);
         $options->setKeyDeliveryConfiguration($deliveryConfiguration);
         $options->setRestrictions($restrictions);
 
@@ -2194,7 +2195,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $template2 = TokenRestrictionTemplateSerializer::deserialize($receivedTemplate);
 
         $this->assertEqualsTokenRestrictionTemplate($template, $template2);
-        $this->assertEqualsLicenseResponseTemplate($playReadytemplate, $playReadyTemplate2);
+        $this->assertEqualsLicenseResponseTemplate($playReadyTemplate, $playReadyTemplate2);
 
         return $result->getId();
     }
@@ -2210,7 +2211,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $contentKeySpecs->required_output_protection->hdcp = Hdcp::HDCP_NONE;
         $contentKeySpecs->security_level = 1;
         $contentKeySpecs->track_type = 'SD';
-        $widevine->content_key_specs = array($contentKeySpecs);
+        $widevine->content_key_specs = [$contentKeySpecs];
         $policyOverrides = new \stdClass();
         $policyOverrides->can_play = true;
         $policyOverrides->can_persist = true;
@@ -2222,11 +2223,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $template = new TokenRestrictionTemplate(TokenType::SWT);
 
         $template->setPrimaryVerificationKey(new SymmetricVerificationKey());
-        $template->setAlternateVerificationKeys(array(new SymmetricVerificationKey()));
+        $template->setAlternateVerificationKeys([new SymmetricVerificationKey()]);
         $template->setAudience('http://sampleaudience/');
         $template->setIssuer('http://sampleissuerurl/');
 
-        $claims = array();
+        $claims = [];
         $claims[] = new TokenClaim(TokenClaim::CONTENT_KEY_ID_CLAIM_TYPE);
         $claims[] = new TokenClaim('Rental', 'true');
 
@@ -2241,7 +2242,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $restriction->setName($restrictionName);
         $restriction->setKeyRestrictionType(ContentKeyRestrictionType::TOKEN_RESTRICTED);
         $restriction->setRequirements($serializedTemplate);
-        $restrictions = array($restriction);
+        $restrictions = [$restriction];
 
         $options = new ContentKeyAuthorizationPolicyOption();
         $options->setName($name);
@@ -2272,7 +2273,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $template->setResponseCustomData('test custom data');
 
         $licenseTemplate = new PlayReadyLicenseTemplate();
-        $template->setLicenseTemplates(array($licenseTemplate));
+        $template->setLicenseTemplates([$licenseTemplate]);
 
         $licenseTemplate->setLicenseType(PlayReadyLicenseType::PERSISTENT);
         $licenseTemplate->setBeginDate(new \DateTime('now'));
@@ -2298,7 +2299,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyOption
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyOption
      */
     public function testGetEncodingReservedUnitType()
     {
@@ -2310,7 +2311,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyOption
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::getContentKeyAuthorizationPolicyOption
      */
     public function testUpdateEncodingReservedUnitType()
     {
@@ -2807,7 +2808,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // waiting for reset channel operation finishes
         $operation = $this->restProxy->awaitOperation($operation);
 
-        // validate that the operation is completed succesfully
+        // validate that the operation is completed successfully
         $this->assertEquals($operation->getState(), OperationState::Succeeded);
 
         // wait for 5 seconds before to send the end advertisement signal.
@@ -2819,7 +2820,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // waiting for end advertisement on channel operation finishes
         $operation = $this->restProxy->awaitOperation($operation);
 
-        // validate that the operation is completed succesfully
+        // validate that the operation is completed successfully
         $this->assertEquals($operation->getState(), OperationState::Succeeded);
 
         // stop the channel
@@ -2900,7 +2901,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // waiting for reset channel operation finishes
         $operation = $this->restProxy->awaitOperation($operation);
 
-        // validate that the operation is completed succesfully
+        // validate that the operation is completed successfully
         $this->assertEquals($operation->getState(), OperationState::Succeeded);
 
         // wait for 5 seconds before to send the end advertisement signal.
@@ -2912,7 +2913,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // waiting for end advertisement on channel operation finishes
         $operation = $this->restProxy->awaitOperation($operation);
 
-        // validate that the operation is completed succesfully
+        // validate that the operation is completed successfully
         $this->assertEquals($operation->getState(), OperationState::Succeeded);
 
         // stop the channel
@@ -3090,7 +3091,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\MediaServicesRestProxy::createChannel
+     * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createChannel
      * @group livefeatures
      * @group program
      */
@@ -3203,7 +3204,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $ciacIPRange->setName("default");
         $ciacIPRange->setAddress("0.0.0.0");
         $ciacIPRange->setSubnetPrefixLength("0");
-        $ciacIPAccessControl->setAllow(array($ciacIPRange));
+        $ciacIPAccessControl->setAllow([$ciacIPRange]);
         $channelInputAccessControl->setIP($ciacIPAccessControl);
         $channelInput->setAccessControl($channelInputAccessControl);
         $channel->setInput($channelInput);
@@ -3218,7 +3219,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $cpacIPRange->setName("default");
         $cpacIPRange->setAddress("0.0.0.0");
         $cpacIPRange->setSubnetPrefixLength("0");
-        $cpacIPAccessControl->setAllow(array($cpacIPRange));
+        $cpacIPAccessControl->setAllow([$cpacIPRange]);
         $channelPreviewAccessControl->setIP($cpacIPAccessControl);
         $channelPreview->setAccessControl($channelPreviewAccessControl);
         $channel->setPreview($channelPreview);
@@ -3247,7 +3248,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $ciacIPRange->setName("default");
         $ciacIPRange->setAddress("0.0.0.0");
         $ciacIPRange->setSubnetPrefixLength("0");
-        $ciacIPAccessControl->setAllow(array($ciacIPRange));
+        $ciacIPAccessControl->setAllow([$ciacIPRange]);
         $channelInputAccessControl->setIP($ciacIPAccessControl);
         $channelInput->setAccessControl($channelInputAccessControl);
         $channel->setInput($channelInput);
@@ -3262,7 +3263,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $cpacIPRange->setName("default");
         $cpacIPRange->setAddress("0.0.0.0");
         $cpacIPRange->setSubnetPrefixLength("0");
-        $cpacIPAccessControl->setAllow(array($cpacIPRange));
+        $cpacIPAccessControl->setAllow([$cpacIPRange]);
         $channelPreviewAccessControl->setIP($cpacIPAccessControl);
         $channelPreview->setAccessControl($channelPreviewAccessControl);
         $channel->setPreview($channelPreview);
@@ -3275,11 +3276,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $channelEncoding->setIgnoreCea708ClosedCaptions(true);
         $vs = new VideoStream();
         $vs->setIndex(0);
-        $channelEncoding->setVideoStreams(array($vs));
+        $channelEncoding->setVideoStreams([$vs]);
         $as = new AudioStream();
         $as->setIndex(0);
         $as->setLanguage("eng");
-        $channelEncoding->setAudioStreams(array($as));
+        $channelEncoding->setAudioStreams([$as]);
         $channel->setEncoding($channelEncoding);
 
         // cors rules

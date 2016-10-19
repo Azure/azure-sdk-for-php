@@ -42,8 +42,8 @@ use WindowsAzure\MediaServices\Templates\OpenIdConnectDiscoveryDocument;
 class OpenIdConnectDiscoveryDocumentTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Templates\OpenIdConnectDiscoveryDocument::getOpenIdDiscoveryUri
-     * @covers WindowsAzure\MediaServices\Templates\OpenIdConnectDiscoveryDocument::setOpenIdDiscoveryUri
+     * @covers \WindowsAzure\MediaServices\Templates\OpenIdConnectDiscoveryDocument::getOpenIdDiscoveryUri
+     * @covers \WindowsAzure\MediaServices\Templates\OpenIdConnectDiscoveryDocument::setOpenIdDiscoveryUri
      */
     public function testGetSetOpenIdDiscoveryUri()
     {

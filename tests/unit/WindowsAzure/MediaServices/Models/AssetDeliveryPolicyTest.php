@@ -81,8 +81,8 @@ class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::getName
-     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::setName
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::getName
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::setName
      */
     public function testGetSetName()
     {
@@ -100,8 +100,8 @@ class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::getId
-     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::setId
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::getId
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::setId
      */
     public function testGetSetId()
     {
@@ -119,8 +119,8 @@ class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::getAssetDeliveryProtocol
-     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::setAssetDeliveryProtocol
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::getAssetDeliveryProtocol
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::setAssetDeliveryProtocol
      */
     public function testGetSetAssetDeliveryProtocol()
     {
@@ -138,8 +138,8 @@ class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::getAssetDeliveryPolicyType
-     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::setAssetDeliveryPolicyType
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::getAssetDeliveryPolicyType
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::setAssetDeliveryPolicyType
      */
     public function testGetSetAssetDeliveryPolicyType()
     {
@@ -157,8 +157,8 @@ class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::getAssetDeliveryConfiguration
-     * @covers WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::setAssetDeliveryConfiguration
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::getAssetDeliveryConfiguration
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::setAssetDeliveryConfiguration
      */
     public function testGetSetAssetDeliveryConfiguration()
     {
@@ -176,10 +176,10 @@ class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfiguartionKey
-     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::parseAssetDeliveryPolicyConfiguartionKey
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfigurationKey
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::parseAssetDeliveryPolicyConfigurationKey
      */
-    public function testStrignifyParseDeliveryPolicyConfiguartionKey()
+    public function testStringifyParseDeliveryPolicyConfigurationKey()
     {
 
         // Setup
@@ -187,8 +187,8 @@ class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
                           AssetDeliveryPolicyConfigurationKey::ENVELOPE_ENCRYPTION_IV_AS_BASE64 => 'base64=', ];
 
         // Test
-        $json = AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfiguartionKey($configuration);
-        $result = AssetDeliveryPolicyConfigurationKey::parseAssetDeliveryPolicyConfiguartionKey($json);
+        $json = AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfigurationKey($configuration);
+        $result = AssetDeliveryPolicyConfigurationKey::parseAssetDeliveryPolicyConfigurationKey($json);
 
         // Assert
         $this->assertEquals($configuration, $result);

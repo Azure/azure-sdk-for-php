@@ -44,7 +44,7 @@ use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 class ListSubscriptionsOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\ListSubscriptionsOptions::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\ListSubscriptionsOptions::__construct
      */
     public function testListSubscriptionsOptionsConstructor()
     {

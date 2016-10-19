@@ -42,17 +42,17 @@ use WindowsAzure\MediaServices\Models\ErrorDetail;
 class ErrorDetailTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\ErrorDetail::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\ErrorDetail::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\ErrorDetail::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\ErrorDetail::fromArray
      */
     public function testCreateFromOptions()
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Code' => 404,
                 'Message' => 'Not found',
-        );
+        ];
 
         // Test
         $error = ErrorDetail::createFromOptions($options);
@@ -63,16 +63,16 @@ class ErrorDetailTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ErrorDetail::getCode
+     * @covers \WindowsAzure\MediaServices\Models\ErrorDetail::getCode
      */
     public function testGetCode()
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Code' => 404,
                 'Message' => 'Not found',
-        );
+        ];
         $error = ErrorDetail::createFromOptions($options);
 
         // Test
@@ -83,16 +83,16 @@ class ErrorDetailTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ErrorDetail::getMessage
+     * @covers \WindowsAzure\MediaServices\Models\ErrorDetail::getMessage
      */
     public function testGetMessage()
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Code' => 404,
                 'Message' => 'Not found',
-        );
+        ];
         $error = ErrorDetail::createFromOptions($options);
 
         // Test

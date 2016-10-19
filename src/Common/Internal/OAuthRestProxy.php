@@ -64,8 +64,8 @@ class OAuthRestProxy extends ServiceRestProxy
      * Get OAuth access token.
      *
      * @param string $grantType    OAuth request grant_type field value.
-     * @param string $clientId     OAuth request clent_id field value.
-     * @param string $clientSecret OAuth request clent_secret field value.
+     * @param string $clientId     OAuth request client_id field value.
+     * @param string $clientSecret OAuth request client_secret field value.
      * @param string $scope        OAuth request scope field value.
      *
      * @return OAuthAccessToken

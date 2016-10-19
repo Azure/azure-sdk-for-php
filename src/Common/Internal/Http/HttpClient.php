@@ -237,7 +237,7 @@ class HttpClient implements IHttpClient
     }
 
     /**
-     * Processes the reuqest through HTTP pipeline with passed $filters,
+     * Processes the request through HTTP pipeline with passed $filters,
      * sends HTTP request to the wire and process the response in the HTTP pipeline.
      *
      * @param array $filters HTTP filters which will be applied to the request before
@@ -306,7 +306,7 @@ class HttpClient implements IHttpClient
     }
 
     /**
-     * Processes the reuqest through HTTP pipeline with passed $filters,
+     * Processes the request through HTTP pipeline with passed $filters,
      * sends HTTP request to the wire and process the response in the HTTP pipeline.
      *
      * @param array $filters HTTP filters which will be applied to the request before
@@ -391,7 +391,7 @@ class HttpClient implements IHttpClient
     }
 
     /**
-     * Throws ServiceException if the recieved status code is not expected.
+     * Throws ServiceException if the received status code is not expected.
      *
      * @param string $actual   The received status code.
      * @param string $reason   The reason phrase.

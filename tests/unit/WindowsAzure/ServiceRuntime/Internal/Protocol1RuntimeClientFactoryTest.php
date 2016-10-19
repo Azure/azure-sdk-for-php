@@ -43,7 +43,7 @@ use WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClientFactory;
 class Protocol1RuntimeClientFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClientFactory::getVersion
+     * @covers \WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClientFactory::getVersion
      */
     public function testGetVersion()
     {
@@ -56,7 +56,7 @@ class Protocol1RuntimeClientFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClientFactory::createRuntimeClient
+     * @covers \WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClientFactory::createRuntimeClient
      */
     public function testCreateRuntimeClient()
     {

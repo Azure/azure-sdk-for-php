@@ -48,7 +48,7 @@ class Source extends AtomBase
     /**
      * The author the source. 
      * 
-     * @var array
+     * @var Person[]
      */
     protected $author;
 
@@ -155,11 +155,10 @@ class Source extends AtomBase
     public function parseXml($xmlString)
     {
         $sourceXml = new \SimpleXMLElement($xmlString);
-        $attributes = $sourceXml->attributes();
         $sourceArray = (array) $sourceXml;
 
         if (array_key_exists(Resources::AUTHOR, $sourceArray)) {
-            $this->content = $this->processAuthorNode($sourceArray);
+            $this->author = $this->processAuthorNode($sourceArray);
         }
 
         if (array_key_exists(Resources::CATEGORY, $sourceArray)) {
@@ -480,7 +479,7 @@ class Source extends AtomBase
     public function writeXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->startElementNs(
+        $xmlWriter->startElementNS(
             'atom',
             'source',
             Resources::ATOM_NAMESPACE
@@ -532,7 +531,7 @@ class Source extends AtomBase
         }
 
         if (!is_null($this->icon)) {
-            $xmlWriter->writeElementNs(
+            $xmlWriter->writeElementNS(
                 'atom',
                 'icon',
                 Resources::ATOM_NAMESPACE,
@@ -590,7 +589,7 @@ class Source extends AtomBase
         );
 
         if (!is_null($this->updated)) {
-            $xmlWriter->writeElementNs(
+            $xmlWriter->writeElementNS(
                 'atom',
                 'updated',
                 Resources::ATOM_NAMESPACE,

@@ -43,9 +43,9 @@ use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions;
 class GetHostedServicePropertiesOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions::setEmbedDetail
-     * @covers WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions::getEmbedDetail
-     * @covers WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions::__construct
+     * @covers \WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions::setEmbedDetail
+     * @covers \WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions::getEmbedDetail
+     * @covers \WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions::__construct
      */
     public function testSetEmbedDetail()
     {

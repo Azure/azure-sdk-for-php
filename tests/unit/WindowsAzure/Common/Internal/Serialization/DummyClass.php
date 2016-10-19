@@ -44,7 +44,7 @@ class DummyClass
 
     public function __construct()
     {
-        $this->_attributes = array();
+        $this->_attributes = [];
     }
 
     public function addAttribute($attributeKey, $attributeValue)

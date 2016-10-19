@@ -30,7 +30,7 @@ use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * Container to hold wrap accesss token response object.
+ * Container to hold wrap access token response object.
  *
  * @category  Microsoft
  *
@@ -55,7 +55,7 @@ class WrapAccessTokenResult
     private $_expiresIn;
 
     /**
-     * Creates WrapAccesTokenResult object from parsed XML response.
+     * Creates WrapAccessTokenResult object from parsed XML response.
      *
      * @param string $response The get WRAP access token response.
      * 

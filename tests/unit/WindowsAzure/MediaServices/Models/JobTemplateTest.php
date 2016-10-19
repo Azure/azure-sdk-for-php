@@ -42,7 +42,7 @@ use WindowsAzure\MediaServices\Models\JobTemplate;
 class JobTemplateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::__construct
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::__construct
      */
     public function test__construct()
     {
@@ -51,16 +51,16 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
         $jobTemplateBody = 'JobTemplateBody';
 
         // Test
-        $jobTempl = new JobTemplate($jobTemplateBody);
+        $jobTemplate = new JobTemplate($jobTemplateBody);
 
         //Assert
-        $this->assertEquals($jobTemplateBody, $jobTempl->getJobTemplateBody());
-        $this->assertEquals(JobTemplate::TYPE_ACCOUNT_LEVEL, $jobTempl->getTemplateType());
+        $this->assertEquals($jobTemplateBody, $jobTemplate->getJobTemplateBody());
+        $this->assertEquals(JobTemplate::TYPE_ACCOUNT_LEVEL, $jobTemplate->getTemplateType());
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::fromArray
      */
     public function testCreateFromOptions()
     {
@@ -68,7 +68,7 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
         $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL;
-        $options = array(
+        $options = [
                 'Id' => 'sfgsfg34',
                 'Name' => 'Some Name',
                 'Created' => '2013-11-25',
@@ -76,45 +76,45 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
                 'JobTemplateBody' => 'Some Body Of Job Template',
                 'NumberofInputAssets' => 6,
                 'TemplateType' => JobTemplate::TYPE_SYSTEM_LEVEL,
-        );
+        ];
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
 
         // Test
-        $jobTempl = JobTemplate::createFromOptions($options);
+        $jobTemplate = JobTemplate::createFromOptions($options);
 
         // Assert
-        $this->assertEquals($options['Id'], $jobTempl->getId());
-        $this->assertEquals($options['Name'], $jobTempl->getName());
-        $this->assertEquals($created->getTimestamp(), $jobTempl->getCreated()->getTimestamp());
-        $this->assertEquals($modified->getTimestamp(), $jobTempl->getLastModified()->getTimestamp());
-        $this->assertEquals($options['JobTemplateBody'], $jobTempl->getJobTemplateBody());
-        $this->assertEquals($options['NumberofInputAssets'], $jobTempl->getNumberOfInputAssets());
-        $this->assertEquals($options['TemplateType'], $jobTempl->getTemplateType());
+        $this->assertEquals($options['Id'], $jobTemplate->getId());
+        $this->assertEquals($options['Name'], $jobTemplate->getName());
+        $this->assertEquals($created->getTimestamp(), $jobTemplate->getCreated()->getTimestamp());
+        $this->assertEquals($modified->getTimestamp(), $jobTemplate->getLastModified()->getTimestamp());
+        $this->assertEquals($options['JobTemplateBody'], $jobTemplate->getJobTemplateBody());
+        $this->assertEquals($options['NumberofInputAssets'], $jobTemplate->getNumberofInputAssets());
+        $this->assertEquals($options['TemplateType'], $jobTemplate->getTemplateType());
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::getName
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::setName
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::getName
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::setName
      */
     public function testGetSetName()
     {
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
-        $jobTempl = new JobTemplate($jobTemplateBody);
+        $jobTemplate = new JobTemplate($jobTemplateBody);
         $name = 'New Name';
 
         // Test
-        $jobTempl->setName($name);
-        $result = $jobTempl->getName();
+        $jobTemplate->setName($name);
+        $result = $jobTemplate->getName();
 
         // Assert
         $this->assertEquals($name, $result);
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::getLastModified
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::getLastModified
      */
     public function testGetLastModified()
     {
@@ -122,23 +122,23 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
         $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL;
-        $options = array(
+        $options = [
                 'LastModified' => '2013-11-25',
                 'JobTemplateBody' => $jobTemplateBody,
                 'TemplateType' => $templateType,
-        );
+        ];
         $modified = new \Datetime($options['LastModified']);
-        $jobTempl = JobTemplate::createFromOptions($options);
+        $jobTemplate = JobTemplate::createFromOptions($options);
 
         // Test
-        $result = $jobTempl->getLastModified();
+        $result = $jobTemplate->getLastModified();
 
         // Assert
         $this->assertEquals($modified, $result);
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::getCreated
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::getCreated
      */
     public function testGetCreated()
     {
@@ -146,23 +146,23 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
         $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL;
-        $options = array(
+        $options = [
                 'Created' => '2013-11-25',
                 'JobTemplateBody' => $jobTemplateBody,
                 'TemplateType' => $templateType,
-        );
+        ];
         $created = new \Datetime($options['Created']);
-        $jobTempl = JobTemplate::createFromOptions($options);
+        $jobTemplate = JobTemplate::createFromOptions($options);
 
         // Test
-        $result = $jobTempl->getCreated();
+        $result = $jobTemplate->getCreated();
 
         // Assert
         $this->assertEquals($created, $result);
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::getId
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::getId
      */
     public function testGetId()
     {
@@ -170,23 +170,23 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
         $templateType = JobTemplate::TYPE_ACCOUNT_LEVEL;
-        $options = array(
+        $options = [
                 'Id' => 'sfdk567',
                 'JobTemplateBody' => $jobTemplateBody,
                 'TemplateType' => $templateType,
-        );
-        $jobTempl = JobTemplate::createFromOptions($options);
+        ];
+        $jobTemplate = JobTemplate::createFromOptions($options);
 
         // Test
-        $result = $jobTempl->getId();
+        $result = $jobTemplate->getId();
 
         // Assert
         $this->assertEquals($options['Id'], $result);
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::getTemplateType
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::setTemplateType
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::getTemplateType
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::setTemplateType
      */
     public function testGetSetTemplateType()
     {
@@ -205,40 +205,40 @@ class JobTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::getNumberofInputAssets
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::setNumberofInputAssets
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::getNumberofInputAssets
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::setNumberofInputAssets
      */
-    public function testGetSetNumberofInputAssets()
+    public function testGetSetNumberOfInputAssets()
     {
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
-        $jobTempl = new JobTemplate($jobTemplateBody);
-        $numberofInputAssets = 5;
+        $jobTemplate = new JobTemplate($jobTemplateBody);
+        $numberOfInputAssets = 5;
 
         // Test
-        $jobTempl->setNumberofInputAssets($numberofInputAssets);
-        $result = $jobTempl->getNumberofInputAssets();
+        $jobTemplate->setNumberofInputAssets($numberOfInputAssets);
+        $result = $jobTemplate->getNumberofInputAssets();
 
         // Assert
-        $this->assertEquals($numberofInputAssets, $result);
+        $this->assertEquals($numberOfInputAssets, $result);
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::getJobTemplateBody
-     * @covers WindowsAzure\MediaServices\Models\JobTemplate::setJobTemplateBody
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::getJobTemplateBody
+     * @covers \WindowsAzure\MediaServices\Models\JobTemplate::setJobTemplateBody
      */
     public function testGetSetJobTemplateBody()
     {
 
         // Setup
         $jobTemplateBody = 'JobTemplateBody';
-        $jobTempl = new JobTemplate($jobTemplateBody);
+        $jobTemplate = new JobTemplate($jobTemplateBody);
         $jobTemplateBody = 'New job Template Body';
 
         // Test
-        $jobTempl->setJobTemplateBody($jobTemplateBody);
-        $result = $jobTempl->getJobTemplateBody();
+        $jobTemplate->setJobTemplateBody($jobTemplateBody);
+        $result = $jobTemplate->getJobTemplateBody();
 
         // Assert
         $this->assertEquals($jobTemplateBody, $result);

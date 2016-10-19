@@ -44,21 +44,21 @@ use WindowsAzure\ServiceManagement\Models\AffinityGroup;
 class GetAffinityGroupPropertiesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::create
+     * @covers \WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::create
      */
     public function testCreate()
     {
         // Setup
-        $array = array(
-            'HostedServices' => array(
+        $array = [
+            'HostedServices' => [
                 'Url' => 'url',
                 'ServiceName' => 'name',
-            ),
-            'StorageServices' => array(
+            ],
+            'StorageServices' => [
                 'Url' => 'url',
                 'ServiceName' => 'name',
-            ),
-        );
+            ],
+        ];
 
         // Test
         $actual = GetAffinityGroupPropertiesResult::create($array);
@@ -69,8 +69,8 @@ class GetAffinityGroupPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setAffinityGroup
-     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getAffinityGroup
+     * @covers \WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setAffinityGroup
+     * @covers \WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getAffinityGroup
      */
     public function testSetAffinityGroup()
     {
@@ -86,13 +86,13 @@ class GetAffinityGroupPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setHostedServices
-     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getHostedServices
+     * @covers \WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setHostedServices
+     * @covers \WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getHostedServices
      */
     public function testSetHostedServices()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $result = new GetAffinityGroupPropertiesResult();
 
         // Test
@@ -103,13 +103,13 @@ class GetAffinityGroupPropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setStorageServices
-     * @covers WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getStorageServices
+     * @covers \WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::setStorageServices
+     * @covers \WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::getStorageServices
      */
     public function testSetStorageServices()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $result = new GetAffinityGroupPropertiesResult();
 
         // Test

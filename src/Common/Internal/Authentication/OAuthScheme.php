@@ -81,7 +81,7 @@ class OAuthScheme implements IAuthScheme
      * @param string         $accountName  account name.
      * @param string         $accountKey   account secondary key.
      * @param string         $grantType    grant type for OAuth request.
-     * @param string         $scope        scope for OAurh request.
+     * @param string         $scope        scope for OAuth request.
      * @param OAuthRestProxy $oauthService account primary or secondary key.
      */
     public function __construct(
@@ -108,7 +108,7 @@ class OAuthScheme implements IAuthScheme
      * Returns authorization header to be included in the request.
      *
      * @param array  $headers     request headers.
-     * @param string $url         reuqest url.
+     * @param string $url         request url.
      * @param array  $queryParams query variables.
      * @param string $httpMethod  request http method.
      *

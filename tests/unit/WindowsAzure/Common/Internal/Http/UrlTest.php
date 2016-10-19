@@ -46,8 +46,8 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 class UrlTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::__construct
-     * @covers WindowsAzure\Common\Internal\Http\Url::_setPathIfEmpty
+     * @covers \WindowsAzure\Common\Internal\Http\Url::__construct
+     * @covers \WindowsAzure\Common\Internal\Http\Url::_setPathIfEmpty
      */
     public function test__construct()
     {
@@ -62,7 +62,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::__construct
+     * @covers \WindowsAzure\Common\Internal\Http\Url::__construct
      */
     public function test__constructEmptyUrlFail()
     {
@@ -75,7 +75,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::__construct
+     * @covers \WindowsAzure\Common\Internal\Http\Url::__construct
      */
     public function test__constructNonStringUrlFail()
     {
@@ -88,7 +88,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::__construct
+     * @covers \WindowsAzure\Common\Internal\Http\Url::__construct
      */
     public function test__constructInvalidUrlFail()
     {
@@ -101,7 +101,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::__construct
+     * @covers \WindowsAzure\Common\Internal\Http\Url::__construct
      */
     public function test__constructWithUrlPath()
     {
@@ -115,7 +115,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::getQuery
+     * @covers \WindowsAzure\Common\Internal\Http\Url::getQuery
      */
     public function testGetQuery()
     {
@@ -132,13 +132,13 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::getQueryVariables
+     * @covers \WindowsAzure\Common\Internal\Http\Url::getQueryVariables
      */
     public function testGetQueryVariables()
     {
         // Setup
         $urlString = TestResources::VALID_URL;
-        $expectedQueryVariables = array(TestResources::HEADER1 => TestResources::HEADER1_VALUE);
+        $expectedQueryVariables = [TestResources::HEADER1 => TestResources::HEADER1_VALUE];
         $url = new Url($urlString);
         $url->setQueryVariable(TestResources::HEADER1, TestResources::HEADER1_VALUE);
 
@@ -149,13 +149,13 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::setQueryVariable
+     * @covers \WindowsAzure\Common\Internal\Http\Url::setQueryVariable
      */
     public function testSetQueryVariable()
     {
         // Setup
         $urlString = TestResources::VALID_URL;
-        $expectedQueryVariables = array(TestResources::HEADER1 => TestResources::HEADER1_VALUE);
+        $expectedQueryVariables = [TestResources::HEADER1 => TestResources::HEADER1_VALUE];
         $url = new Url($urlString);
 
         // Test
@@ -166,7 +166,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::setQueryVariable
+     * @covers \WindowsAzure\Common\Internal\Http\Url::setQueryVariable
      */
     public function testSetQueryVariableInvalidKeyFail()
     {
@@ -182,7 +182,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::setQueryVariable
+     * @covers \WindowsAzure\Common\Internal\Http\Url::setQueryVariable
      */
     public function testSetQueryVariableEmptyKeyFail()
     {
@@ -198,7 +198,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::setQueryVariable
+     * @covers \WindowsAzure\Common\Internal\Http\Url::setQueryVariable
      */
     public function testSetQueryVariableInvalidValueFail()
     {
@@ -214,7 +214,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::setQueryVariable
+     * @covers \WindowsAzure\Common\Internal\Http\Url::setQueryVariable
      */
     public function testSetQueryVariableSetEmptyValue()
     {
@@ -232,8 +232,8 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::getUrl
-     * @covers WindowsAzure\Common\Internal\Http\Url::_setPathIfEmpty
+     * @covers \WindowsAzure\Common\Internal\Http\Url::getUrl
+     * @covers \WindowsAzure\Common\Internal\Http\Url::_setPathIfEmpty
      */
     public function testGetUrl()
     {
@@ -249,7 +249,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::setUrlPath
+     * @covers \WindowsAzure\Common\Internal\Http\Url::setUrlPath
      */
     public function testSetUrlPath()
     {
@@ -266,7 +266,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::appendUrlPath
+     * @covers \WindowsAzure\Common\Internal\Http\Url::appendUrlPath
      */
     public function testAppendUrlPath()
     {
@@ -284,8 +284,8 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::__toString
-     * @covers WindowsAzure\Common\Internal\Http\Url::_setPathIfEmpty
+     * @covers \WindowsAzure\Common\Internal\Http\Url::__toString
+     * @covers \WindowsAzure\Common\Internal\Http\Url::_setPathIfEmpty
      */
     public function test__toString()
     {
@@ -301,7 +301,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::__clone
+     * @covers \WindowsAzure\Common\Internal\Http\Url::__clone
      */
     public function test__clone()
     {
@@ -318,14 +318,14 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\Url::setQueryVariables
+     * @covers \WindowsAzure\Common\Internal\Http\Url::setQueryVariables
      */
     public function testSetQueryVariables()
     {
         // Setup
         $urlString = TestResources::VALID_URL;
-        $expectedQueryVariables = array(TestResources::HEADER1 => TestResources::HEADER1_VALUE,
-                                        TestResources::HEADER2 => TestResources::HEADER2_VALUE, );
+        $expectedQueryVariables = [TestResources::HEADER1 => TestResources::HEADER1_VALUE,
+                                        TestResources::HEADER2 => TestResources::HEADER2_VALUE,];
         $url = new Url($urlString);
 
         // Test

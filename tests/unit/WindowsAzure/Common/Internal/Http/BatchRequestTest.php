@@ -69,7 +69,7 @@ class BatchRequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Http\BatchRequest::getHeaders
+     * @covers \WindowsAzure\Common\Internal\Http\BatchRequest::getHeaders
      */
     public function testGetHeaders()
     {

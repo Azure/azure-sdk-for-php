@@ -47,7 +47,7 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        $expected = array();
+        $expected = [];
         $expected[] = Resources::CONTENT_ENCODING;
         $expected[] = Resources::CONTENT_LANGUAGE;
         $expected[] = Resources::CONTENT_LENGTH;
@@ -66,17 +66,17 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::computeSignature
+     * @covers \WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::computeSignature
      */
     public function testComputeSignatureSimple()
     {
         $httpMethod = 'GET';
-        $queryParams = array(Resources::QP_COMP => 'list');
+        $queryParams = [Resources::QP_COMP => 'list'];
         $url = TestResources::URI1;
         $date = TestResources::DATE1;
         $apiVersion = Resources::STORAGE_API_LATEST_VERSION;
         $accountName = TestResources::ACCOUNT_NAME;
-        $headers = array(Resources::X_MS_DATE => $date, Resources::X_MS_VERSION => $apiVersion);
+        $headers = [Resources::X_MS_DATE => $date, Resources::X_MS_VERSION => $apiVersion];
         $expected = "GET\n\n\n\n\n\n\n\n\n\n\n\n".Resources::X_MS_DATE.":$date\n".Resources::X_MS_VERSION.
                 ":$apiVersion\n/$accountName".parse_url($url, PHP_URL_PATH)."\ncomp:list";
         $mock = new SharedKeyAuthSchemeMock($accountName, TestResources::KEY4);
@@ -87,7 +87,7 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::getAuthorizationHeader
+     * @covers \WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::getAuthorizationHeader
      */
     public function testGetAuthorizationHeaderSimple()
     {
@@ -96,8 +96,8 @@ class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
         $accountKey = TestResources::KEY4;
         $url = TestResources::URI2;
         $date1 = TestResources::DATE2;
-        $headers = array(Resources::X_MS_VERSION => $apiVersion, Resources::X_MS_DATE => $date1);
-        $queryParams = array(Resources::QP_COMP => 'list');
+        $headers = [Resources::X_MS_VERSION => $apiVersion, Resources::X_MS_DATE => $date1];
+        $queryParams = [Resources::QP_COMP => 'list'];
         $httpMethod = 'GET';
         $expected = 'SharedKey '.$accountName.':7O9UOMTnAEF+cuwZzo1BlDj2qJm8yNywajta5he6Qig=';
 

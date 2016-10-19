@@ -43,14 +43,14 @@ use WindowsAzure\ServiceManagement\Models\ListHostedServicesResult;
 class ListHostedServicesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::setHostedServices
-     * @covers WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::getHostedServices
+     * @covers \WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::setHostedServices
+     * @covers \WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::getHostedServices
      */
     public function testSetHostedServices()
     {
         // Setup
-        $expected = array();
-        $result = new ListHostedServicesResult(array(), 'tag');
+        $expected = [];
+        $result = new ListHostedServicesResult([], 'tag');
 
         // Test
         $result->setHostedServices($expected);

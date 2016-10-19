@@ -220,7 +220,7 @@ class MediaServicesSettings extends ServiceSettings
             );
         }
 
-        self::noMatch($connectionString);
+        return self::noMatch($connectionString);
     }
 
     /**

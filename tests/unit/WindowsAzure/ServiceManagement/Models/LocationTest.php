@@ -43,8 +43,8 @@ use WindowsAzure\ServiceManagement\Models\Location;
 class LocationTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Location::setName
-     * @covers WindowsAzure\ServiceManagement\Models\Location::getName
+     * @covers \WindowsAzure\ServiceManagement\Models\Location::setName
+     * @covers \WindowsAzure\ServiceManagement\Models\Location::getName
      */
     public function testSetName()
     {
@@ -60,8 +60,8 @@ class LocationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Location::setDisplayName
-     * @covers WindowsAzure\ServiceManagement\Models\Location::getDisplayName
+     * @covers \WindowsAzure\ServiceManagement\Models\Location::setDisplayName
+     * @covers \WindowsAzure\ServiceManagement\Models\Location::getDisplayName
      */
     public function testSetDisplayName()
     {

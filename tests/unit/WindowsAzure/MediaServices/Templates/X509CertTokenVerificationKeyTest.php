@@ -42,8 +42,8 @@ use WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey;
 class X509CertTokenVerificationKeyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey::getRawBody
-     * @covers WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey::setRawBody
+     * @covers \WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey::getRawBody
+     * @covers \WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey::setRawBody
      */
     public function testGetSetRawBody()
     {

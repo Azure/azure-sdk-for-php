@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -23,24 +23,25 @@
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
 
-namespace WindowsAzure\ServiceManagement\Models;
+namespace WindowsAzure\Common\Internal;
 
 /**
- * The possible status values of asynchronous request.
- *
- * @category  Microsoft
- *
- * @author    Azure PHP SDK <azurephpsdk@microsoft.com>
- * @copyright 2012 Microsoft Corporation
- * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
- *
- * @version   Release: 0.4.5_2016-09
- *
- * @link      https://github.com/windowsazure/azure-sdk-for-php
- */
-class OperationStatus
+* State of the connection string parser.
+*
+* @category  Microsoft
+*
+* @author    Azure PHP SDK <azurephpsdk@microsoft.com>
+* @copyright 2012 Microsoft Corporation
+* @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+*
+* @version   Release: 0.4.5_2016-09
+*
+* @link      https://github.com/windowsazure/azure-sdk-for-php
+*/
+class ParserState
 {
-    const IN_PROGRESS = 'InProgress';
-    const SUCCEEDED = 'Succeeded';
-    const FAILED = 'Failed';
+const EXPECT_KEY = 'ExpectKey';
+const EXPECT_ASSIGNMENT = 'ExpectAssignment';
+const EXPECT_VALUE = 'ExpectValue';
+const EXPECT_SEPARATOR = 'ExpectSeparator';
 }

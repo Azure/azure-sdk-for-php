@@ -53,14 +53,14 @@ class XmlSerializer implements ISerializer
      * Converts a SimpleXML object to an Array recursively
      * ensuring all sub-elements are arrays as well.
      *
-     * @param string $sxml The SimpleXML object.
+     * @param string $sXml The SimpleXML object.
      * @param array  $arr  The array into which to store results.
      * 
      * @return array
      */
-    private function _sxml2arr($sxml, $arr = null)
+    private function _sxml2arr($sXml, $arr = null)
     {
-        foreach ((array) $sxml as $key => $value) {
+        foreach ((array) $sXml as $key => $value) {
             if (is_object($value) || (is_array($value))) {
                 $arr[$key] = $this->_sxml2arr($value);
             } else {
@@ -74,34 +74,34 @@ class XmlSerializer implements ISerializer
     /**
      * Takes an array and produces XML based on it.
      *
-     * @param XMLWriter $xmlw       XMLWriter object that was previously instanted
+     * @param XMLWriter $xmlW       XMLWriter object that was previously instanted
      *                              and is used for creating the XML.
      * @param array     $data       Array to be converted to XML.
      * @param string    $defaultTag Default XML tag to be used if none specified.
      */
-    private function _arr2xml(XMLWriter $xmlw, array $data, $defaultTag = null)
+    private function _arr2xml(XMLWriter $xmlW, array $data, $defaultTag = null)
     {
         foreach ($data as $key => $value) {
             if ($key === Resources::XTAG_ATTRIBUTES) {
                 foreach ($value as $attributeName => $attributeValue) {
-                    $xmlw->writeAttribute($attributeName, $attributeValue);
+                    $xmlW->writeAttribute($attributeName, $attributeValue);
                 }
             } elseif (is_array($value)) {
                 if (!is_int($key)) {
                     if ($key != Resources::EMPTY_STRING) {
-                        $xmlw->startElement($key);
+                        $xmlW->startElement($key);
                     } else {
-                        $xmlw->startElement($defaultTag);
+                        $xmlW->startElement($defaultTag);
                     }
                 }
 
-                $this->_arr2xml($xmlw, $value);
+                $this->_arr2xml($xmlW, $value);
 
                 if (!is_int($key)) {
-                    $xmlw->endElement();
+                    $xmlW->endElement();
                 }
             } else {
-                $xmlw->writeElement($key, $value);
+                $xmlW->writeElement($key, $value);
             }
         }
     }
@@ -125,7 +125,7 @@ class XmlSerializer implements ISerializer
             }
         }
 
-        return;
+        return null;
     }
 
     /** 
@@ -211,26 +211,26 @@ class XmlSerializer implements ISerializer
             return false;
         }
 
-        $xmlw = new XMLWriter();
-        $xmlw->openMemory();
-        $xmlw->setIndent(true);
-        $xmlw->startDocument($xmlVersion, $xmlEncoding, $standalone);
+        $xmlW = new XMLWriter();
+        $xmlW->openMemory();
+        $xmlW->setIndent(true);
+        $xmlW->startDocument($xmlVersion, $xmlEncoding, $standalone);
 
         if (is_null($docNamespace)) {
-            $xmlw->startElement($rootName);
+            $xmlW->startElement($rootName);
         } else {
             foreach ($docNamespace as $uri => $prefix) {
-                $xmlw->startElementNs($prefix, $rootName, $uri);
+                $xmlW->startElementNS($prefix, $rootName, $uri);
                 break;
             }
         }
 
         unset($array[Resources::XTAG_NAMESPACE]);
-        self::_arr2xml($xmlw, $array, $defaultTag);
+        self::_arr2xml($xmlW, $array, $defaultTag);
 
-        $xmlw->endElement();
+        $xmlW->endElement();
 
-        return $xmlw->outputMemory(true);
+        return $xmlW->outputMemory(true);
     }
 
     /**
@@ -242,8 +242,8 @@ class XmlSerializer implements ISerializer
      */
     public function unserialize($serialized)
     {
-        $sxml = new \SimpleXMLElement($serialized);
+        $sXml = new \SimpleXMLElement($serialized);
 
-        return $this->_sxml2arr($sxml);
+        return $this->_sxml2arr($sXml);
     }
 }

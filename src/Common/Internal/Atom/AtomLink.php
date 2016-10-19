@@ -79,7 +79,7 @@ class AtomLink extends AtomBase
     protected $hreflang;
 
     /**
-     * The titile of the link. 
+     * The title of the link.
      * 
      * @var string
      */
@@ -91,13 +91,6 @@ class AtomLink extends AtomBase
      * @var int
      */
     protected $length;
-
-    /** 
-     * Creates a AtomLink instance with specified text.
-     */
-    public function __construct()
-    {
-    }
 
     /**
      * Parse an ATOM Link xml. 
@@ -208,19 +201,19 @@ class AtomLink extends AtomBase
      * 
      * @return string
      */
-    public function getHrefLang()
+    public function getHreflang()
     {
-        return $this->hrefLang;
+        return $this->hreflang;
     }
 
     /**
      * Sets the language of the href. 
      * 
-     * @param string $hrefLang The language of the href.
+     * @param string $hreflang The language of the href.
      */
-    public function setHrefLang($hrefLang)
+    public function setHreflang($hreflang)
     {
-        $this->hrefLang = $hrefLang;
+        $this->hreflang = $hreflang;
     }
 
     /** 
@@ -290,7 +283,7 @@ class AtomLink extends AtomBase
      */
     public function writeXml(\XMLWriter $xmlWriter)
     {
-        $xmlWriter->startElementNs(
+        $xmlWriter->startElementNS(
             'atom',
             Resources::LINK,
             Resources::ATOM_NAMESPACE

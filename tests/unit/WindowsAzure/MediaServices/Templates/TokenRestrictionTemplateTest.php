@@ -46,14 +46,14 @@ use WindowsAzure\MediaServices\Templates\OpenIdConnectDiscoveryDocument;
 class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getAlternateVerificationKeys
-     * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setAlternateVerificationKeys
+     * @covers \WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getAlternateVerificationKeys
+     * @covers \WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setAlternateVerificationKeys
      */
     public function testGetSetAlternateVerificationKeys()
     {
         // Setup
         $entity = new TokenRestrictionTemplate();
-        $payload = array();
+        $payload = [];
         $payload[] = new SymmetricVerificationKey();
 
         // Test
@@ -65,8 +65,8 @@ class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getAudience
-     * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setAudience
+     * @covers \WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getAudience
+     * @covers \WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setAudience
      */
     public function testGetSetAudience()
     {
@@ -83,8 +83,8 @@ class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getIssuer
-     * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setIssuer
+     * @covers \WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getIssuer
+     * @covers \WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setIssuer
      */
     public function testGetSetIssuer()
     {
@@ -101,8 +101,8 @@ class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getPrimaryVerificationKey
-     * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setPrimaryVerificationKey
+     * @covers \WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getPrimaryVerificationKey
+     * @covers \WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setPrimaryVerificationKey
      */
     public function testGetSetPrimaryVerificationKey()
     {
@@ -119,14 +119,14 @@ class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getRequiredClaims
-     * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setRequiredClaims
+     * @covers \WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getRequiredClaims
+     * @covers \WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setRequiredClaims
      */
     public function testGetSetRequiredClaims()
     {
         // Setup
         $entity = new TokenRestrictionTemplate();
-        $payload = array();
+        $payload = [];
         $payload[] = new TokenClaim(TokenClaim::CONTENT_KEY_ID_CLAIM_TYPE);
 
         // Test
@@ -138,8 +138,8 @@ class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getTokenType
-     * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setTokenType
+     * @covers \WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getTokenType
+     * @covers \WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setTokenType
      */
     public function testGetSetTokenType()
     {
@@ -156,8 +156,8 @@ class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getOpenIdConnectDiscoveryDocument
-     * @covers WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setOpenIdConnectDiscoveryDocument
+     * @covers \WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getOpenIdConnectDiscoveryDocument
+     * @covers \WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::setOpenIdConnectDiscoveryDocument
      */
     public function testGetSetOpenIdConnectDiscoveryDocument()
     {

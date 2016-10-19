@@ -43,7 +43,7 @@ use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
 class DeploymentSlotTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\DeploymentSlot::isValid
+     * @covers \WindowsAzure\ServiceManagement\Models\DeploymentSlot::isValid
      */
     public function testIsValidWithValid()
     {
@@ -55,7 +55,7 @@ class DeploymentSlotTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\DeploymentSlot::isValid
+     * @covers \WindowsAzure\ServiceManagement\Models\DeploymentSlot::isValid
      */
     public function testIsValidWithInvalid()
     {

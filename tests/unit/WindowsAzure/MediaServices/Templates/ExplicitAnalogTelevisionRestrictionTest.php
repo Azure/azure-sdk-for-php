@@ -43,9 +43,9 @@ use WindowsAzure\MediaServices\Templates\ErrorMessages;
 class ExplicitAnalogTelevisionRestrictionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::__construct
-     * @covers WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::getBestEffort
-     * @covers WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::getConfigurationData
+     * @covers \WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::__construct
+     * @covers \WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::getBestEffort
+     * @covers \WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::getConfigurationData
      */
     public function testCreateExplicitAnalogTelevisionRestriction()
     {
@@ -66,7 +66,7 @@ class ExplicitAnalogTelevisionRestrictionTest extends \PHPUnit_Framework_TestCas
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::__construct
+     * @covers \WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::__construct
      */
     public function testCreateExplicitAnalogTelevisionWithBadConfDataShouldThrown()
     {
@@ -77,8 +77,8 @@ class ExplicitAnalogTelevisionRestrictionTest extends \PHPUnit_Framework_TestCas
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::getBestEffort
-     * @covers WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::setBestEffort
+     * @covers \WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::getBestEffort
+     * @covers \WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::setBestEffort
      */
     public function testGetSetBestEffort()
     {
@@ -95,8 +95,8 @@ class ExplicitAnalogTelevisionRestrictionTest extends \PHPUnit_Framework_TestCas
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::getConfigurationData
-     * @covers WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::setConfigurationData
+     * @covers \WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::getConfigurationData
+     * @covers \WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::setConfigurationData
      */
     public function testGetSetConfigurationData()
     {

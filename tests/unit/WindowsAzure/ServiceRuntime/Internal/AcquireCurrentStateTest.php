@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -44,10 +44,10 @@ use WindowsAzure\ServiceRuntime\Internal\CurrentStatus;
 class AcquireCurrentStateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::__construct
-     * @covers WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::getIncarnation
-     * @covers WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::getStatus
-     * @covers WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::getExpiration
+     * @covers \WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::__construct
+     * @covers \WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::getIncarnation
+     * @covers \WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::getStatus
+     * @covers \WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::getExpiration
      */
     public function testConstruct()
     {

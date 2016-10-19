@@ -43,14 +43,14 @@ use WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate;
 class PlayReadyLicenseResponseTemplateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::getLicenseTemplates
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::setLicenseTemplates
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::getLicenseTemplates
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::setLicenseTemplates
      */
     public function testGetSetLicenseTemplates()
     {
         // Setup
         $entity = new PlayReadyLicenseResponseTemplate();
-        $payload = array();
+        $payload = [];
 
         // Test
         $entity->setLicenseTemplates($payload);
@@ -61,8 +61,8 @@ class PlayReadyLicenseResponseTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::getResponseCustomData
-     * @covers WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::setResponseCustomData
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::getResponseCustomData
+     * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::setResponseCustomData
      */
     public function testGetSetResponseCustomData()
     {

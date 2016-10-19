@@ -45,8 +45,8 @@ use WindowsAzure\ServiceManagement\Models\UpgradeStatus;
 class DeploymentTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::setName
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::getName
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::setName
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::getName
      */
     public function testSetName()
     {
@@ -62,8 +62,8 @@ class DeploymentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::setSlot
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::getSlot
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::setSlot
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::getSlot
      */
     public function testSetSlot()
     {
@@ -79,8 +79,8 @@ class DeploymentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::setPrivateId
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::getPrivateId
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::setPrivateId
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::getPrivateId
      */
     public function testSetPrivateId()
     {
@@ -96,8 +96,8 @@ class DeploymentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::setStatus
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::getStatus
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::setStatus
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::getStatus
      */
     public function testSetStatus()
     {
@@ -113,8 +113,8 @@ class DeploymentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::setLabel
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::getLabel
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::setLabel
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::getLabel
      */
     public function testSetLabel()
     {
@@ -130,8 +130,8 @@ class DeploymentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::setConfiguration
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::getConfiguration
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::setConfiguration
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::getConfiguration
      */
     public function testSetConfiguration()
     {
@@ -147,13 +147,13 @@ class DeploymentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::setRoleInstanceList
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::getRoleInstanceList
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::setRoleInstanceList
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::getRoleInstanceList
      */
     public function testSetRoleInstanceList()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $deployment = new Deployment();
 
         // Test
@@ -164,8 +164,8 @@ class DeploymentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::setUpgradeDomainCount
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::getUpgradeDomainCount
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::setUpgradeDomainCount
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::getUpgradeDomainCount
      */
     public function testSetUpgradeDomainCount()
     {
@@ -181,13 +181,13 @@ class DeploymentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::setRoleList
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::getRoleList
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::setRoleList
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::getRoleList
      */
     public function testSetRoleList()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $deployment = new Deployment();
 
         // Test
@@ -198,8 +198,8 @@ class DeploymentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::setSdkVersion
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::getSdkVersion
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::setSdkVersion
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::getSdkVersion
      */
     public function testSetSdkVersion()
     {
@@ -215,13 +215,13 @@ class DeploymentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::setInputEndpointList
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::getInputEndpointList
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::setInputEndpointList
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::getInputEndpointList
      */
     public function testSetInputEndpointList()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $deployment = new Deployment();
 
         // Test
@@ -232,8 +232,8 @@ class DeploymentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::setLocked
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::getLocked
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::setLocked
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::getLocked
      */
     public function testSetLocked()
     {
@@ -249,8 +249,8 @@ class DeploymentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::setRollbackAllowed
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::getRollbackAllowed
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::setRollbackAllowed
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::getRollbackAllowed
      */
     public function testSetRollbackAllowed()
     {
@@ -266,8 +266,8 @@ class DeploymentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::setUpgradeStatus
-     * @covers WindowsAzure\ServiceManagement\Models\Deployment::getUpgradeStatus
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::setUpgradeStatus
+     * @covers \WindowsAzure\ServiceManagement\Models\Deployment::getUpgradeStatus
      */
     public function testSetUpgradeStatus()
     {

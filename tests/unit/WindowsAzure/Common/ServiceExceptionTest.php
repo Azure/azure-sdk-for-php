@@ -43,7 +43,7 @@ use WindowsAzure\Common\ServiceException;
 class ServiceExceptionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\ServiceException::__construct
+     * @covers \WindowsAzure\Common\ServiceException::__construct
      */
     public function test__construct()
     {
@@ -62,7 +62,7 @@ class ServiceExceptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\ServiceException::getErrorText
+     * @covers \WindowsAzure\Common\ServiceException::getErrorText
      */
     public function testGetErrorText()
     {
@@ -79,7 +79,7 @@ class ServiceExceptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\ServiceException::getErrorReason
+     * @covers \WindowsAzure\Common\ServiceException::getErrorReason
      */
     public function testGetErrorReason()
     {

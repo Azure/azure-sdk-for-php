@@ -25,7 +25,12 @@
 
 namespace Client;
 
+use MicrosoftAzure\Storage\Table\Internal\ITable;
 use MicrosoftAzure\Storage\Table\Models\Entity;
+use MicrosoftAzure\Storage\Table\Models\QueryEntitiesOptions;
+use MicrosoftAzure\Storage\Table\Models\QueryEntitiesResult;
+use MicrosoftAzure\Storage\Table\Models\TableServiceOptions;
+use MicrosoftAzure\Storage\Table\TableRestProxy;
 
 /**
  * The cloud table class.
@@ -62,8 +67,8 @@ class CloudTable
      * 
      * Sets default partition key by default using uniqid() function.
      * 
-     * @param string                             $name  The table name.
-     * @param WindowsAzure\Table\Internal\ITable $proxy The table REST proxy.
+     * @param string $name  The table name.
+     * @param ITable $proxy The table REST proxy.
      */
     public function __construct($name, $proxy)
     {
@@ -76,8 +81,6 @@ class CloudTable
      * Sets the default partition key for this table entities.
      * 
      * @param string $paritionKey The default partition key.
-     * 
-     * @return none
      */
     public function setDefaultPartitionKey($paritionKey)
     {
@@ -112,14 +115,12 @@ class CloudTable
     /**
      * Inserts new entity to the table.
      * 
-     * @param string                     $entries The entries values.
-     * @param Models\TableServiceOptions $options The optional parameters.
-     * 
-     * @return none
+     * @param array               $entries The entries values.
+     * @param TableServiceOptions $options The optional parameters.
      * 
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/dd179433.aspx
      */
-    public function insertTypelessEntity($entries, $options = null)
+    public function insertTypelessEntity(array $entries, $options = null)
     {
         $entity = new Entity();
         $entity->setPartitionKey($this->_defaultParitionKey);
@@ -136,8 +137,6 @@ class CloudTable
      * Deletes an entity using the default partition key and provided row key.
      * 
      * @param string $rowKey The entity row key.
-     * 
-     * @return none
      */
     public function deleteEntity($paritionKey, $rowKey)
     {

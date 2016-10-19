@@ -43,8 +43,8 @@ use WindowsAzure\ServiceManagement\Models\CreateAffinityGroupOptions;
 class CreateAffinityGroupOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\CreateAffinityGroupOptions::setDescription
-     * @covers WindowsAzure\ServiceManagement\Models\CreateAffinityGroupOptions::getDescription
+     * @covers \WindowsAzure\ServiceManagement\Models\CreateAffinityGroupOptions::setDescription
+     * @covers \WindowsAzure\ServiceManagement\Models\CreateAffinityGroupOptions::getDescription
      */
     public function testSetDescription()
     {

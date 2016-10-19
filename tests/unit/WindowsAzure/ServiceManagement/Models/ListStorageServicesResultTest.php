@@ -43,14 +43,14 @@ use WindowsAzure\ServiceManagement\Models\ListStorageServicesResult;
 class ListStorageServicesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::setStorageServices
-     * @covers WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::getStorageServices
+     * @covers \WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::setStorageServices
+     * @covers \WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::getStorageServices
      */
     public function testSetStorageServices()
     {
         // Setup
-        $expected = array();
-        $result = new ListStorageServicesResult(array(), 'tag');
+        $expected = [];
+        $result = new ListStorageServicesResult([], 'tag');
 
         // Test
         $result->setStorageServices($expected);

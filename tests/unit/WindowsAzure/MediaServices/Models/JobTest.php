@@ -42,14 +42,14 @@ use WindowsAzure\MediaServices\Models\Job;
 class JobTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\Job::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\Job::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\Job::fromArray
      */
     public function testCreateFromOptions()
     {
 
         // Setup
-        $options = array(
+        $options = [
             'Id' => 'sfgsfg34',
             'Name' => 'SomeName',
             'Created' => '2013-11-25',
@@ -60,7 +60,7 @@ class JobTest extends \PHPUnit_Framework_TestCase
             'StartTime' => '2013-11-26',
             'State' => Job::STATE_QUEUED,
             'TemplateId' => 'yudgf78',
-        );
+        ];
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
         $endTime = new \Datetime($options['EndTime']);
@@ -83,8 +83,8 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getName
-     * @covers WindowsAzure\MediaServices\Models\Job::setName
+     * @covers \WindowsAzure\MediaServices\Models\Job::getName
+     * @covers \WindowsAzure\MediaServices\Models\Job::setName
      */
     public function testGetSetName()
     {
@@ -102,8 +102,8 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getPriority
-     * @covers WindowsAzure\MediaServices\Models\Job::setPriority
+     * @covers \WindowsAzure\MediaServices\Models\Job::getPriority
+     * @covers \WindowsAzure\MediaServices\Models\Job::setPriority
      */
     public function testGetSetPriority()
     {
@@ -121,8 +121,8 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getTemplateId
-     * @covers WindowsAzure\MediaServices\Models\Job::setTemplateId
+     * @covers \WindowsAzure\MediaServices\Models\Job::getTemplateId
+     * @covers \WindowsAzure\MediaServices\Models\Job::setTemplateId
      */
     public function testGetSetTemplateId()
     {
@@ -140,15 +140,15 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getId
+     * @covers \WindowsAzure\MediaServices\Models\Job::getId
      */
     public function testGetId()
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Id' => 'sfgsfg34',
-        );
+        ];
         $job = Job::createFromOptions($options);
 
         // Test
@@ -159,15 +159,15 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getCreated
+     * @covers \WindowsAzure\MediaServices\Models\Job::getCreated
      */
     public function testGetCreated()
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Created' => '2013-11-25',
-        );
+        ];
         $created = new \Datetime($options['Created']);
         $job = Job::createFromOptions($options);
 
@@ -179,15 +179,15 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getLastModified
+     * @covers \WindowsAzure\MediaServices\Models\Job::getLastModified
      */
     public function testGetLastModified()
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'LastModified' => '2013-11-25',
-        );
+        ];
         $modified = new \Datetime($options['LastModified']);
         $job = Job::createFromOptions($options);
 
@@ -199,15 +199,15 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getEndTime
+     * @covers \WindowsAzure\MediaServices\Models\Job::getEndTime
      */
     public function testGetEndTime()
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'EndTime' => '2013-12-25',
-        );
+        ];
         $endTime = new \Datetime($options['EndTime']);
         $job = Job::createFromOptions($options);
 
@@ -219,15 +219,15 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getStartTime
+     * @covers \WindowsAzure\MediaServices\Models\Job::getStartTime
      */
     public function testGetStartTime()
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'StartTime' => '2013-11-25',
-        );
+        ];
         $startTime = new \Datetime($options['StartTime']);
         $job = Job::createFromOptions($options);
 
@@ -239,16 +239,16 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getRunningDuration
+     * @covers \WindowsAzure\MediaServices\Models\Job::getRunningDuration
      */
     public function testGetRunningDuration()
     {
 
         // Setup
         $job = new Job();
-        $options = array(
+        $options = [
                 'RunningDuration' => 25.30,
-        );
+        ];
         $job = Job::createFromOptions($options);
 
         // Test
@@ -259,16 +259,16 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\Job::getState
+     * @covers \WindowsAzure\MediaServices\Models\Job::getState
      */
     public function testGetState()
     {
 
         // Setup
         $job = new Job();
-        $options = array(
+        $options = [
                 'State' => Job::STATE_QUEUED,
-        );
+        ];
         $job = Job::createFromOptions($options);
 
         // Test

@@ -26,7 +26,7 @@
 namespace WindowsAzure\MediaServices\Models;
 
 /**
- * Represents AssetDeliveryPolicyConfiguartionKey type enum used in media services.
+ * Represents AssetDeliveryPolicyConfigurationKey type enum used in media services.
  *
  * @category  Microsoft
  *
@@ -126,13 +126,13 @@ class AssetDeliveryPolicyConfigurationKey
     const COMMON_ENCRYPTION_IV_FOR_CBCS = 11;
 
     /**
-     * Helper function to stringnify the AssetDeliveryPolicyConfigurationKey.
+     * Helper function to stringify the AssetDeliveryPolicyConfigurationKey.
      *
      * @param array $array
      *
      * @return string
      */
-    public static function stringifyAssetDeliveryPolicyConfiguartionKey(array $array)
+    public static function stringifyAssetDeliveryPolicyConfigurationKey(array $array)
     {
         $jsonArray = [];
         foreach ($array as $key => $value) {
@@ -148,7 +148,7 @@ class AssetDeliveryPolicyConfigurationKey
      * @param string $json
      * @return array the unpacked array
      */
-    public static function parseAssetDeliveryPolicyConfiguartionKey($json)
+    public static function parseAssetDeliveryPolicyConfigurationKey($json)
     {
         $result = [];
         $array = json_decode($json, true);

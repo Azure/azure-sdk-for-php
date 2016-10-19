@@ -42,19 +42,19 @@ use WindowsAzure\MediaServices\Models\StorageAccount;
 class StorageAccountTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\StorageAccount::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\StorageAccount::fromArray
-     * @covers WindowsAzure\MediaServices\Models\StorageAccount::__construct
+     * @covers \WindowsAzure\MediaServices\Models\StorageAccount::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\StorageAccount::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\StorageAccount::__construct
      */
     public function testCreateFromArray()
     {
         // Setup
         $name = 'SomeName-42';
         $isDefault = true;
-        $options = array(
+        $options = [
                 'Name' => $name,
                 'IsDefault' => $isDefault,
-        );
+        ];
 
         // Test
         $storageAccount = StorageAccount::createFromOptions($options);
@@ -65,15 +65,15 @@ class StorageAccountTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\StorageAccount::getName
+     * @covers \WindowsAzure\MediaServices\Models\StorageAccount::getName
      */
     public function testGetName()
     {
         // Setup
         $name = 'SomeName-42';
-        $options = array(
+        $options = [
                 'Name' => $name,
-        );
+        ];
         $storageAccount = StorageAccount::createFromOptions($options);
 
         // Test
@@ -84,15 +84,15 @@ class StorageAccountTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\StorageAccount::getIsDefault
+     * @covers \WindowsAzure\MediaServices\Models\StorageAccount::getIsDefault
      */
     public function testGetIsDefault()
     {
         // Setup
         $isDefault = true;
-        $options = array(
+        $options = [
                 'IsDefault' => $isDefault,
-        );
+        ];
         $storageAccount = StorageAccount::createFromOptions($options);
 
         // Test

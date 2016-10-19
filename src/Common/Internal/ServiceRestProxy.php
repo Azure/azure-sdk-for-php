@@ -329,7 +329,7 @@ class ServiceRestProxy extends RestProxy
      *
      * @param array|null $metadata The metadata array.
      */
-    public function validateMetadata($metadata)
+    public function validateMetadata(array $metadata = null)
     {
         if (!is_null($metadata)) {
             Validate::isArray($metadata, 'metadata');

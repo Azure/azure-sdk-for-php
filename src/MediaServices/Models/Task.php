@@ -99,7 +99,7 @@ class Task
     private $_mediaProcessorId;
 
     /**
-     * Perfoemance message.
+     * Performance message.
      *
      * @var string
      */
@@ -134,7 +134,7 @@ class Task
     private $_options;
 
     /**
-     * Encription key id.
+     * Encryption key id.
      *
      * @var string
      */
@@ -523,7 +523,7 @@ class Task
     }
 
     /**
-     * Get "Encription key id".
+     * Get "Encryption key id".
      *
      * @return string
      */
@@ -533,9 +533,9 @@ class Task
     }
 
     /**
-     * Set "Encription key id".
+     * Set "Encryption key id".
      *
-     * @param string $value Encription key id
+     * @param string $value Encryption key id
      */
     public function setEncryptionKeyId($value)
     {
@@ -583,7 +583,7 @@ class Task
     }
 
     /**
-     * Get "Perfoemance message".
+     * Get "Performance message".
      *
      * @return string
      */

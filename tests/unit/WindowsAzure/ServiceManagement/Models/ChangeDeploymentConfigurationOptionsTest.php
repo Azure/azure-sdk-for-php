@@ -43,9 +43,9 @@ use WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions;
 class ChangeDeploymentConfigurationOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::setTreatWarningsAsErrors
-     * @covers WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::getTreatWarningsAsErrors
-     * @covers WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::__construct
+     * @covers \WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::setTreatWarningsAsErrors
+     * @covers \WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::getTreatWarningsAsErrors
+     * @covers \WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::__construct
      */
     public function testSetTreatWarningsAsErrors()
     {
@@ -61,9 +61,9 @@ class ChangeDeploymentConfigurationOptionsTest extends \PHPUnit_Framework_TestCa
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::setMode
-     * @covers WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::getMode
-     * @covers WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::__construct
+     * @covers \WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::setMode
+     * @covers \WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::getMode
+     * @covers \WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::__construct
      */
     public function testSetMode()
     {

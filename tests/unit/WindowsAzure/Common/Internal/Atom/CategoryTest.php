@@ -399,7 +399,7 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers \WindowsAzure\Common\Internal\Atom\Category::parseXml
      */
-    public function testCategoryParseXmlInvlalidParameter()
+    public function testCategoryParseXmlInvalidParameter()
     {
         // Setup
         $actual = new Category();

@@ -60,11 +60,11 @@ class Filter
     }
 
     /**
-     * Creates a Filter with specifed XML based string. 
+     * Creates a Filter with specified XML based string.
      * 
      * @param string $filterXmlString An XML based filter string. 
      *
-     * @return Filter
+     * @return Filter|null
      */
     public static function create($filterXmlString)
     {
@@ -83,6 +83,7 @@ class Filter
 
             return new self();
         }
+        return null;
     }
 
     /**

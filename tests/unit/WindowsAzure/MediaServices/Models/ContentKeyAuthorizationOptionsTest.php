@@ -46,23 +46,23 @@ use WindowsAzure\MediaServices\Models\ContentKeyRestrictionType;
 class ContentKeyAuthorizationOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::fromArray
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::__construct
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::__construct
      */
     public function testCreateFromOptions()
     {
 
         // Setup
         $contentKeyAuthorizationOptionsId = 'content-key-authorization-options-id-12563';
-        $options = array(
+        $options = [
                 'Id' => $contentKeyAuthorizationOptionsId,
                 'Name' => 'testNameForContentKeyAuthorizationPolicyOption',
                 'KeyDeliveryType' => 2,
                 'KeyDeliveryConfiguration' => 'testKeyDeliveryConfiguration',
-                'Restrictions' => array(),
+                'Restrictions' => [],
 
-        );
+        ];
 
         // Test
         $contentKeyAuthorizationOptions = ContentKeyAuthorizationPolicyOption::createFromOptions($options);
@@ -76,7 +76,7 @@ class ContentKeyAuthorizationOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::requiredFields
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::requiredFields
      */
     public function testRequiredFields()
     {
@@ -92,8 +92,8 @@ class ContentKeyAuthorizationOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::getName
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::setName
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::getName
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::setName
      */
     public function testGetSetName()
     {
@@ -111,8 +111,8 @@ class ContentKeyAuthorizationOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::getId
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::setId
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::getId
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::setId
      */
     public function testGetSetId()
     {
@@ -130,8 +130,8 @@ class ContentKeyAuthorizationOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::getKeyDeliveryType
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::setKeyDeliveryType
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::getKeyDeliveryType
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::setKeyDeliveryType
      */
     public function testGetSetKeyDeliveryType()
     {
@@ -148,8 +148,8 @@ class ContentKeyAuthorizationOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::getKeyDeliveryConfiguration
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::setKeyDeliveryConfiguration
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::getKeyDeliveryConfiguration
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::setKeyDeliveryConfiguration
      */
     public function testGetSetKeyDeliveryConfiguration()
     {
@@ -166,8 +166,8 @@ class ContentKeyAuthorizationOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::getRestrictions
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::setRestrictions
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::getRestrictions
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::setRestrictions
      */
     public function testGetSetRestrictions()
     {
@@ -177,7 +177,7 @@ class ContentKeyAuthorizationOptionsTest extends \PHPUnit_Framework_TestCase
         $restriction = new ContentKeyAuthorizationPolicyRestriction();
         $restriction->setName($restrictionName);
         $restriction->setKeyRestrictionType(ContentKeyRestrictionType::OPEN);
-        $restrictions = array($restriction);
+        $restrictions = [$restriction];
 
         $options = new ContentKeyAuthorizationPolicyOption();
         $options->setName($name);

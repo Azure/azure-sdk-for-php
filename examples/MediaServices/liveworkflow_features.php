@@ -83,7 +83,7 @@ include_once 'userconfig.php';
 // allow the script to run longer than 600 seconds (overrides userconfig.php)
 set_time_limit(0);
 
-$options = new StdClass();
+$options = new stdClass();
 
 // General Options
 $options->channelName = 'phpsdk-sample';
@@ -163,7 +163,7 @@ function createAndStartChannel($restProxy, $options)
 
 function createAsset($restProxy, $options)
 {
-    $result = new StdClass();
+    $result = new stdClass();
 
     // 1 - prepare the program asset 
     $result->asset = new Asset(Asset::OPTIONS_NONE);
@@ -467,7 +467,7 @@ function createAssetDeliveryPolicy($restProxy, $asset, $contentKey)
     $randomKey = Utilities::generateCryptoKey(16);
     $configuration = [AssetDeliveryPolicyConfigurationKey::ENVELOPE_KEY_ACQUISITION_URL => $acquisitionUrl,
                       AssetDeliveryPolicyConfigurationKey::ENVELOPE_ENCRYPTION_IV_AS_BASE64 => base64_encode($randomKey)];
-    $confJson = AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfiguartionKey($configuration);
+    $confJson = AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfigurationKey($configuration);
 
     // 3 Create the AssetDeliveryPolicy
     $adpolicy = new AssetDeliveryPolicy();

@@ -103,8 +103,6 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
         $this->_roleEnvironmentDeserializer = $roleEnvironmentDeserializer;
         $this->_inputChannel = $inputChannel;
 
-        $this->_listeners = [];
-
         $this->_currentGoalState = null;
         $this->_currentEnvironmentData = null;
         $this->_keepOpen = false;

@@ -49,16 +49,7 @@ class AtomBase
      *
      * @var array
      */
-    protected $attributes;
-
-    /**
-     * Creates an ATOM base object with default parameters.
-     */
-    public function __construct()
-    {
-        $this->attributes = [];
-        new AtomLink();
-    }
+    protected $attributes = [];
 
     /**
      * Gets the attributes of the ATOM class.
@@ -115,7 +106,7 @@ class AtomBase
         Validate::isString($elementName, 'elementName');
 
         foreach ($itemArray as $itemInstance) {
-            $xmlWriter->startElementNs(
+            $xmlWriter->startElementNS(
                 'atom',
                 $elementName,
                 Resources::ATOM_NAMESPACE
@@ -183,11 +174,11 @@ class AtomBase
     /**
      * Processes category node.
      *
-     * @param array $xmlArray An array of simple xml elements.
+     * @param SimpleXMLElement[] $xmlArray An array of simple xml elements.
      *
-     * @return array
+     * @return Category[]
      */
-    protected function processCategoryNode($xmlArray)
+    protected function processCategoryNode(array $xmlArray)
     {
         $category = [];
         $categoryItem = $xmlArray[Resources::CATEGORY];
@@ -310,7 +301,7 @@ class AtomBase
         Validate::isString($elementName, 'elementName');
 
         if (!empty($elementValue)) {
-            $xmlWriter->writeElementNs(
+            $xmlWriter->writeElementNS(
                 $prefix,
                 $elementName,
                 $namespace,

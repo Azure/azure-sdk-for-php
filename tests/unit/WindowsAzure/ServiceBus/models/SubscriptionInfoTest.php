@@ -44,7 +44,7 @@ use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
 class SubscriptionInfoTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::__construct
      */
     public function testSubscriptionInfoConstructor()
     {
@@ -106,8 +106,8 @@ class SubscriptionInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::getRequiresSession
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::setRequiresSession
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::getRequiresSession
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::setRequiresSession
      */
     public function testGetSetRequiresSession()
     {
@@ -127,8 +127,8 @@ class SubscriptionInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::getDefaultMessageTimeToLive
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::setDefaultMessageTimeToLive
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::getDefaultMessageTimeToLive
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::setDefaultMessageTimeToLive
      */
     public function testGetSetDefaultMessageTimeToLive()
     {
@@ -148,8 +148,8 @@ class SubscriptionInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::getDeadLetteringOnMessageExpiration
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::setDeadLetteringOnMessageExpiration
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::getDeadLetteringOnMessageExpiration
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::setDeadLetteringOnMessageExpiration
      */
     public function testGetSetDeadLetteringOnMessageExpiration()
     {
@@ -169,8 +169,8 @@ class SubscriptionInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::getDeadLetteringOnFilterEvaluationExceptions
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::setDeadLetteringOnFilterEvaluationExceptions
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::getDeadLetteringOnFilterEvaluationExceptions
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::setDeadLetteringOnFilterEvaluationExceptions
      */
     public function testGetSetDeadLetteringOnFilterEvaluationExceptions()
     {
@@ -190,8 +190,8 @@ class SubscriptionInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::getDefaultRuleDescription
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::setDefaultRuleDescription
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::getDefaultRuleDescription
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::setDefaultRuleDescription
      */
     public function testGetSetDefaultRuleDescription()
     {
@@ -211,8 +211,8 @@ class SubscriptionInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::getMessageCount
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::setMessageCount
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::getMessageCount
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::setMessageCount
      */
     public function testGetSetMessageCount()
     {
@@ -232,8 +232,8 @@ class SubscriptionInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::getMaxDeliveryCount
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::setMaxDeliveryCount
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::getMaxDeliveryCount
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::setMaxDeliveryCount
      */
     public function testGetSetMaxDeliveryCount()
     {
@@ -253,8 +253,8 @@ class SubscriptionInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::getEnableBatchedOperations
-     * @covers WindowsAzure\ServiceBus\Models\SubscriptionInfo::setEnableBatchedOperations
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::getEnableBatchedOperations
+     * @covers \WindowsAzure\ServiceBus\Models\SubscriptionInfo::setEnableBatchedOperations
      */
     public function testGetSetEnableBatchedOperations()
     {

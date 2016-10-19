@@ -172,11 +172,11 @@ class TokenRestrictionTemplateSerializerTest extends \PHPUnit_Framework_TestCase
         $template = new TokenRestrictionTemplate(TokenType::SWT);
 
         $template->setPrimaryVerificationKey(new SymmetricVerificationKey());
-        $template->setAlternateVerificationKeys(array(new SymmetricVerificationKey()));
+        $template->setAlternateVerificationKeys([new SymmetricVerificationKey()]);
         $template->setAudience('http://sampleaudience/');
         $template->setIssuer('http://sampleissuerurl/');
 
-        $claims = array();
+        $claims = [];
         $claims[] = new TokenClaim(TokenClaim::CONTENT_KEY_ID_CLAIM_TYPE);
         $claims[] = new TokenClaim('Rental', 'true');
 
@@ -203,7 +203,7 @@ class TokenRestrictionTemplateSerializerTest extends \PHPUnit_Framework_TestCase
         $template->setPrimaryVerificationKey($key);
         $template->setAudience($knownAudience);
         $template->setIssuer($knownIssuer);
-        $template->setRequiredClaims(array(new TokenClaim(TokenClaim::CONTENT_KEY_ID_CLAIM_TYPE)));
+        $template->setRequiredClaims([new TokenClaim(TokenClaim::CONTENT_KEY_ID_CLAIM_TYPE)]);
 
         // Act
         $resultsToken = TokenRestrictionTemplateSerializer::generateTestToken($template,
@@ -230,7 +230,7 @@ class TokenRestrictionTemplateSerializerTest extends \PHPUnit_Framework_TestCase
         $template->setPrimaryVerificationKey($key);
         $template->setAudience($knownAudience);
         $template->setIssuer($knownIssuer);
-        $template->setRequiredClaims(array(new TokenClaim(TokenClaim::CONTENT_KEY_ID_CLAIM_TYPE)));
+        $template->setRequiredClaims([new TokenClaim(TokenClaim::CONTENT_KEY_ID_CLAIM_TYPE)]);
 
         // Act
         $resultsToken = TokenRestrictionTemplateSerializer::generateTestToken($template,

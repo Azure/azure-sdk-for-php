@@ -25,6 +25,7 @@
 
 namespace Tests\framework;
 
+use Exception;
 use Tests\Framework\ServiceRestProxyTestBase;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\MediaServices\Models\Asset;
@@ -58,19 +59,19 @@ use WindowsAzure\Common\Internal\Resources;
  */
 class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 {
-    protected $assets = array();
-    protected $accessPolicy = array();
-    protected $locator = array();
-    protected $jobTemplate = array();
-    protected $job = array();
-    protected $outputAssets = array();
-    protected $ingestManifests = array();
-    protected $ingestManifestAssets = array();
-    protected $ingestManifestFiles = array();
-    protected $contentKeys = array();
-    protected $contentKeyAuthorizationPolicies = array();
-    protected $contentKeyAuthorizationOptions = array();
-    protected $assetDeliveryPolicies = array();
+    protected $assets = [];
+    protected $accessPolicy = [];
+    protected $locator = [];
+    protected $jobTemplate = [];
+    protected $job = [];
+    protected $outputAssets = [];
+    protected $ingestManifests = [];
+    protected $ingestManifestAssets = [];
+    protected $ingestManifestFiles = [];
+    protected $contentKeys = [];
+    protected $contentKeyAuthorizationPolicies = [];
+    protected $contentKeyAuthorizationOptions = [];
+    protected $assetDeliveryPolicies = [];
 
     const LARGE_FILE_SIZE_MB = 7;
 
@@ -79,7 +80,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $this->skipIfEmulated();
         parent::setUp();
         $connection = TestResources::getMediaServicesConnectionParameters();
-        $settings = new MediaServicesSettings($connection['accountName'], $connection['accessKey'], $connection['endpointUri'], $connection['oauthEndopointUri']);
+        $settings = new MediaServicesSettings($connection['accountName'], $connection['accessKey'], $connection['endpointUri'], $connection['oauthEndpointUri']);
         $mediaServicesWrapper = $this->builder->createMediaServicesService($settings);
         parent::setProxy($mediaServicesWrapper);
     }
@@ -252,12 +253,12 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
         $taskBody = TestResources::getMediaServicesTask($this->getOutputAssetName());
         $task = new Task($taskBody, $mediaProcessor->getId(), TaskOptions::NONE);
-        $task->setConfiguration(TestResources::MEDIA_SERVICES_TASK_COFIGURATION);
+        $task->setConfiguration(TestResources::MEDIA_SERVICES_TASK_CONFIGURATION);
 
         $job = new Job();
         $job->setName($name);
 
-        $jobResult = $this->createJob($job, array($inputAsset), array($task));
+        $jobResult = $this->createJob($job, [$inputAsset], [$task]);
 
         return $jobResult;
     }
@@ -278,13 +279,13 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
         $taskTemplate = new TaskTemplate(1, 1);
         $taskTemplate->setMediaProcessorId($mediaProcessor->getId());
-        $taskTemplate->setConfiguration(TestResources::MEDIA_SERVICES_TASK_COFIGURATION);
+        $taskTemplate->setConfiguration(TestResources::MEDIA_SERVICES_TASK_CONFIGURATION);
 
         $jobTemplateBody = TestResources::getMediaServicesJobTemplate($taskTemplate->getId(), $this->getOutputAssetName());
         $jobTemplate = new JobTemplate($jobTemplateBody);
         $jobTemplate->setName($name);
 
-        $jobTempl = $this->createJobTemplate($jobTemplate, array($taskTemplate));
+        $jobTempl = $this->createJobTemplate($jobTemplate, [$taskTemplate]);
 
         return $jobTempl;
     }
@@ -301,11 +302,11 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
                 $programs = $this->restProxy->getProgramList($ch);
 
-                foreach($programs as $prog) {
-                    if ($prog->getState() == ProgramState::Running) {
-                        $this->restProxy->stopProgram($prog);
+                foreach($programs as $program) {
+                    if ($program->getState() == ProgramState::Running) {
+                        $this->restProxy->stopProgram($program);
                     }
-                    $this->restProxy->deleteProgram($prog);
+                    $this->restProxy->deleteProgram($program);
                 }
                 if ($ch->getState() == ChannelState::Running) {
                     $this->restProxy->stopChannel($ch);
@@ -363,7 +364,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
             $availableContentKeyList = $this->restProxy->getContentKeyList();
         }
 
-        $availableContentKeyIds = array();
+        $availableContentKeyIds = [];
         foreach ($availableContentKeyList as $availableContentKey) {
             $availableContentKeyIds[] = $availableContentKey->getId();
         }
@@ -426,7 +427,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function deleteJob($job)
     {
-        $this->waitJobStatus($job, array(Job::STATE_FINISHED, Job::STATE_ERROR, Job::STATE_CANCELED));
+        $this->waitJobStatus($job, [Job::STATE_FINISHED, Job::STATE_ERROR, Job::STATE_CANCELED]);
         $this->restProxy->deleteJob($job->getId());
         unset($this->job[$job->getId()]);
     }
@@ -478,7 +479,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
         $method = Resources::HTTP_GET;
         $url = new Url($locator->getBaseUri().'/'.$fileName.$locator->getContentAccessComponent());
-        $filters = array();
+        $filters = [];
         $statusCode = Resources::STATUS_OK;
 
         $httpClient = new HttpClient();

@@ -218,9 +218,9 @@ class StorageServiceSettings extends ServiceSettings
      * 
      * @param string $name             The storage service name.
      * @param string $key              The storage service key.
-     * @param string $blobEndpointUri  The sotrage service blob endpoint.
-     * @param string $queueEndpointUri The sotrage service queue endpoint.
-     * @param string $tableEndpointUri The sotrage service table endpoint.
+     * @param string $blobEndpointUri  The storage service blob endpoint.
+     * @param string $queueEndpointUri The storage service queue endpoint.
+     * @param string $tableEndpointUri The storage service table endpoint.
      */
     public function __construct(
         $name,
@@ -427,7 +427,7 @@ class StorageServiceSettings extends ServiceSettings
             return self::_createStorageServiceSettings($tokenizedSettings);
         }
 
-        self::noMatch($connectionString);
+        return self::noMatch($connectionString);
     }
 
     /**

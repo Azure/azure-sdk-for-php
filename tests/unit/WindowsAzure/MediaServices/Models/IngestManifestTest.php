@@ -42,8 +42,8 @@ use WindowsAzure\MediaServices\Models\IngestManifest;
 class IngestManifestTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::fromArray
      */
     public function testCreateFromOptions()
     {
@@ -51,11 +51,11 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
         // Setup
         $name = 'IngestManifest Name';
         $blobUri = 'http://blob-uri.com';
-        $statistics = array(
+        $statistics = [
                 'FinishedFilesCount' => 2,
-        );
+        ];
         $storageName = 'Storage Account Name-4236';
-        $options = array(
+        $options = [
                 'Id' => '46-jhgjh-589',
                 'State' => IngestManifest::STATE_ACTIVE,
                 'Created' => '2013-12-18',
@@ -64,7 +64,7 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
                 'BlobStorageUriForUpload' => $blobUri,
                 'Statistics' => $statistics,
                 'StorageAccountName' => $storageName,
-        );
+        ];
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
 
@@ -85,18 +85,18 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::getStatistics
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::getStatistics
      */
     public function testGetStatistics()
     {
 
         // Setup
-        $statistics = array(
+        $statistics = [
                 'FinishedFilesCount' => 2,
-        );
-        $options = array(
+        ];
+        $options = [
                 'Statistics' => $statistics,
-        );
+        ];
         $ingestManifest = IngestManifest::createFromOptions($options);
 
         // Test
@@ -107,16 +107,16 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::getBlobStorageUriForUpload
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::getBlobStorageUriForUpload
      */
     public function testGetBlobStorageUriForUpload()
     {
 
         // Setup
         $blobUri = 'http://blob-uri.com';
-        $options = array(
+        $options = [
                 'BlobStorageUriForUpload' => $blobUri,
-        );
+        ];
         $ingestManifest = IngestManifest::createFromOptions($options);
 
         // Test
@@ -127,16 +127,16 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::getStorageAccountName
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::getStorageAccountName
      */
     public function testGetStorageAccountName()
     {
 
         // Setup
         $storageName = 'Storage-Account-Name-45236';
-        $options = array(
+        $options = [
                 'StorageAccountName' => $storageName,
-        );
+        ];
         $ingestManifest = IngestManifest::createFromOptions($options);
 
         // Test
@@ -147,8 +147,8 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::getName
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::setName
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::getName
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::setName
      */
     public function testSetGetName()
     {
@@ -166,15 +166,15 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::getLastModified
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::getLastModified
      */
     public function testGetLastModified()
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'LastModified' => '2013-12-18',
-        );
+        ];
         $modified = new \Datetime($options['LastModified']);
         $ingestManifest = IngestManifest::createFromOptions($options);
 
@@ -186,15 +186,15 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::getCreated
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::getCreated
      */
     public function testGetCreated()
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Created' => '2013-12-18',
-        );
+        ];
         $created = new \Datetime($options['Created']);
         $ingestManifest = IngestManifest::createFromOptions($options);
 
@@ -206,16 +206,16 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::getState
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::getState
      */
     public function testGetState()
     {
 
         // Setup
         $state = IngestManifest::STATE_ACTIVE;
-        $options = array(
+        $options = [
                 'State' => $state,
-        );
+        ];
         $ingestManifest = IngestManifest::createFromOptions($options);
 
         // Test
@@ -226,16 +226,16 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifest::getId
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifest::getId
      */
     public function testGetId()
     {
 
         // Setup
         $id = 'ingest-id-258';
-        $options = array(
+        $options = [
                 'Id' => $id,
-        );
+        ];
         $ingestManifest = IngestManifest::createFromOptions($options);
 
         // Test

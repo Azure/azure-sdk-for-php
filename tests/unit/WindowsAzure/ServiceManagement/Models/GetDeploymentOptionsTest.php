@@ -43,8 +43,8 @@ use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
 class GetDeploymentOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::setSlot
-     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::getSlot
+     * @covers \WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::setSlot
+     * @covers \WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::getSlot
      */
     public function testSetSlot()
     {
@@ -60,8 +60,8 @@ class GetDeploymentOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::setDeploymentName
-     * @covers WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::getDeploymentName
+     * @covers \WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::setDeploymentName
+     * @covers \WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::getDeploymentName
      */
     public function testSetDeploymentName()
     {

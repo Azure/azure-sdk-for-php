@@ -55,7 +55,7 @@ class Entry extends AtomBase
     /**
      * The category of the entry.
      *
-     * @var array
+     * @var Category[]
      */
     protected $category;
 
@@ -74,7 +74,7 @@ class Entry extends AtomBase
     protected $contributor;
 
     /**
-     * An unqiue ID representing the entry.
+     * An unique ID representing the entry.
      *
      * @var string
      */
@@ -135,14 +135,6 @@ class Entry extends AtomBase
      * @var string
      */
     protected $extensionElement;
-
-    /**
-     * Creates an ATOM Entry instance with default parameters.
-     */
-    public function __construct()
-    {
-        $this->attributes = [];
-    }
 
     /**
      * Populate the properties of an ATOM Entry instance with specified XML..
@@ -242,7 +234,7 @@ class Entry extends AtomBase
     /**
      * Gets the category.
      *
-     * @return array
+     * @return Category[]
      */
     public function getCategory()
     {
@@ -252,9 +244,9 @@ class Entry extends AtomBase
     /**
      * Sets the category.
      *
-     * @param string $category The category of the entry.
+     * @param Category[] $category The category of the entry.
      */
-    public function setCategory($category)
+    public function setCategory(array $category)
     {
         $this->category = $category;
     }
@@ -487,7 +479,7 @@ class Entry extends AtomBase
     public function writeXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->startElementNs(
+        $xmlWriter->startElementNS(
             'atom',
             Resources::ENTRY,
             Resources::ATOM_NAMESPACE
@@ -599,7 +591,7 @@ class Entry extends AtomBase
         );
 
         if (!is_null($this->updated)) {
-            $xmlWriter->writeElementNs(
+            $xmlWriter->writeElementNS(
                 'atom',
                 'updated',
                 Resources::ATOM_NAMESPACE,

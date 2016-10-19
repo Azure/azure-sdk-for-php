@@ -43,8 +43,8 @@ use WindowsAzure\ServiceManagement\Models\UpdateServiceOptions;
 class UpdateServiceOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::setDescription
-     * @covers WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::getDescription
+     * @covers \WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::setDescription
+     * @covers \WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::getDescription
      */
     public function testSetDescription()
     {
@@ -60,8 +60,8 @@ class UpdateServiceOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::setLabel
-     * @covers WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::getLabel
+     * @covers \WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::setLabel
+     * @covers \WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::getLabel
      */
     public function testSetLabel()
     {

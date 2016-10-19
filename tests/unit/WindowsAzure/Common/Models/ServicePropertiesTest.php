@@ -49,7 +49,7 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Models\ServiceProperties::create
+     * @covers \WindowsAzure\Common\Models\ServiceProperties::create
      */
     public function testCreate()
     {
@@ -67,7 +67,7 @@ class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\ServiceProperties::setLogging
+     * @covers \WindowsAzure\Common\Models\ServiceProperties::setLogging
      */
     public function testSetLogging()
     {
@@ -84,7 +84,7 @@ class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\ServiceProperties::getLogging
+     * @covers \WindowsAzure\Common\Models\ServiceProperties::getLogging
      */
     public function testGetLogging()
     {
@@ -102,7 +102,7 @@ class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\ServiceProperties::setMetrics
+     * @covers \WindowsAzure\Common\Models\ServiceProperties::setMetrics
      */
     public function testSetMetrics()
     {
@@ -119,7 +119,7 @@ class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\ServiceProperties::getMetrics
+     * @covers \WindowsAzure\Common\Models\ServiceProperties::getMetrics
      */
     public function testGetMetrics()
     {
@@ -137,16 +137,16 @@ class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\ServiceProperties::toArray
+     * @covers \WindowsAzure\Common\Models\ServiceProperties::toArray
      */
     public function testToArray()
     {
         // Setup
         $properties = ServiceProperties::create(TestResources::getServicePropertiesSample());
-        $expected = array(
+        $expected = [
             'Logging' => $properties->getLogging()->toArray(),
             'Metrics' => $properties->getMetrics()->toArray(),
-        );
+        ];
 
         // Test
         $actual = $properties->toArray();
@@ -156,7 +156,7 @@ class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\ServiceProperties::toXml
+     * @covers \WindowsAzure\Common\Models\ServiceProperties::toXml
      */
     public function testToXml()
     {

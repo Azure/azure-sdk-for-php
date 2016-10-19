@@ -43,13 +43,13 @@ use WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult;
 class AsynchronousOperationResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::create
+     * @covers \WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::create
      */
     public function testCreate()
     {
         // Setup
         $requestId = '1sqwsqe34';
-        $headers = array('x-ms-request-id' => $requestId);
+        $headers = ['x-ms-request-id' => $requestId];
 
         // Test
         $actual = AsynchronousOperationResult::create($headers);
@@ -59,8 +59,8 @@ class AsynchronousOperationResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::setRequestId
-     * @covers WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::getRequestId
+     * @covers \WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::setRequestId
+     * @covers \WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::getRequestId
      */
     public function testSetRequestId()
     {

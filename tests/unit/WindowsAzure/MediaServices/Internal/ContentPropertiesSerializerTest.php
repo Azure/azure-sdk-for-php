@@ -47,8 +47,8 @@ use WindowsAzure\MediaServices\Models\TaskOptions;
 class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::unserialize
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_unserializeRecursive
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::unserialize
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_unserializeRecursive
      */
     public function testUnserializeSimple()
     {
@@ -70,8 +70,8 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::unserialize
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_unserializeRecursive
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::unserialize
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_unserializeRecursive
      */
     public function testUnserializeElement()
     {
@@ -100,8 +100,8 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::unserialize
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_unserializeRecursive
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::unserialize
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_unserializeRecursive
      */
     public function testUnserializeCollection()
     {
@@ -139,8 +139,8 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
      */
     public function testSerializeSimple()
     {
@@ -150,10 +150,10 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
         $nameKey = 'Name';
         $optionsKey = 'Options';
         $option = Asset::OPTIONS_STORAGE_ENCRYPTED;
-        $assetArray = array(
+        $assetArray = [
             $nameKey => $name,
             $optionsKey => $option,
-        );
+        ];
         $asset = Asset::createFromOptions($assetArray);
 
         $expected = '
@@ -171,8 +171,8 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
      */
     public function testSerializeDate()
     {
@@ -184,11 +184,11 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
         $option = Asset::OPTIONS_STORAGE_ENCRYPTED;
         $dateKey = 'Created';
         $date = '2013-12-31T01:16:25+01:00';
-        $assetArray = array(
+        $assetArray = [
             $nameKey => $name,
             $optionsKey => $option,
             $dateKey => $date,
-        );
+        ];
         $asset = Asset::createFromOptions($assetArray);
 
         $expected = '
@@ -207,8 +207,8 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
      */
     public function testSerializeElement()
     {
@@ -221,14 +221,14 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
         $statPendingFiles = 1;
         $statFinishedFilesKey = 'FinishedFilesCount';
         $statFinishedFiles = 2;
-        $stat = array(
+        $stat = [
             $statPendingFilesKey => $statPendingFiles,
             $statFinishedFilesKey => $statFinishedFiles,
-        );
-        $objArray = array(
+        ];
+        $objArray = [
             $nameKey => $name,
             $statKey => $stat,
-        );
+        ];
         $obj = IngestManifest::createFromOptions($objArray);
 
         $expected = '
@@ -249,8 +249,8 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
-     * @covers WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::serialize
+     * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::_serializeRecursive
      */
     public function testSerializeCollection()
     {
@@ -268,22 +268,22 @@ class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
         $errorCode = 1;
         $errorMessageKey = 'Message';
         $errorMessage = 'Error message';
-        $error = array(
-            array(
+        $error = [
+            [
                 $errorCodeKey => $errorCode,
                 $errorMessageKey => $errorMessage,
-            ),
-            array(
+            ],
+            [
                 $errorCodeKey => $errorCode,
                 $errorMessageKey => $errorMessage,
-            ),
-        );
-        $objArray = array(
+            ],
+        ];
+        $objArray = [
             $taskBodyKey => $taskBody,
             $optionsKey => $options,
             $mediaProcessorIdKey => $mediaProcessorId,
             $errorKey => $error,
-        );
+        ];
         $obj = Task::createFromOptions($objArray);
 
         $expected = '

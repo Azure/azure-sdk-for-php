@@ -42,18 +42,18 @@ use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction;
 class ContentKeyAuthorizationRestrictionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::fromArray
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::__construct
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::__construct
      */
     public function testCreateFromOptions()
     {
         // Setup
-        $options = array(
+        $options = [
                 'Name' => 'restrictionName',
                 'KeyRestrictionType' => 2,
                 'Requirements' => 'testRequirements',
-        );
+        ];
 
         // Test
         $contentKeyAuthorizationRestriction = ContentKeyAuthorizationPolicyRestriction::createFromOptions($options);
@@ -65,7 +65,7 @@ class ContentKeyAuthorizationRestrictionsTest extends \PHPUnit_Framework_TestCas
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::requiredFields
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::requiredFields
      */
     public function testRequiredFields()
     {
@@ -81,8 +81,8 @@ class ContentKeyAuthorizationRestrictionsTest extends \PHPUnit_Framework_TestCas
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::getName
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::setName
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::getName
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::setName
      */
     public function testGetSetName()
     {
@@ -99,8 +99,8 @@ class ContentKeyAuthorizationRestrictionsTest extends \PHPUnit_Framework_TestCas
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::getKeyRestrictionType
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::setKeyRestrictionType
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::getKeyRestrictionType
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::setKeyRestrictionType
      */
     public function testGetSetKeyRestrictionType()
     {
@@ -117,8 +117,8 @@ class ContentKeyAuthorizationRestrictionsTest extends \PHPUnit_Framework_TestCas
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::getRequirements
-     * @covers WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::setRequirements
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::getRequirements
+     * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::setRequirements
      */
     public function testGetSetRequirements()
     {

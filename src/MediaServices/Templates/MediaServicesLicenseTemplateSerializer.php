@@ -89,8 +89,8 @@ class MediaServicesLicenseTemplateSerializer
         $writer = new \XMLWriter();
 
         $writer->openMemory();
-        $writer->startElementNs(null, 'PlayReadyLicenseResponseTemplate', Resources::PRL_XML_NAMESPACE);
-        $writer->writeAttributeNs('xmlns', 'i', null, Resources::XSI_XML_NAMESPACE);
+        $writer->startElementNS(null, 'PlayReadyLicenseResponseTemplate', Resources::PRL_XML_NAMESPACE);
+        $writer->writeAttributeNS('xmlns', 'i', null, Resources::XSI_XML_NAMESPACE);
 
         self::serializeLicenseTemplates($writer, $template->getLicenseTemplates());
         $writer->writeElement('ResponseCustomData', $template->getResponseCustomData());

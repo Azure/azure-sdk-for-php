@@ -66,7 +66,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
     /**
      * @covers \WindowsAzure\MediaServices\MediaServicesRestProxy::createAsset
      */
-    public function testCreatEmptyAsset()
+    public function testCreateEmptyAsset()
     {
         // Setup
         $assetName = TestResources::MEDIA_SERVICES_ASSET_NAME.$this->createSuffix();
@@ -147,10 +147,10 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $this->assertEquals(2, count($assetFiles));
 
         // Files order is not static, so we don't know the index of each file and need to serve them as a set
-        $resultFileNames = array(
+        $resultFileNames = [
             $assetFiles[0]->getName(),
             $assetFiles[1]->getName(),
-        );
+        ];
         $this->assertContains($otherFileName, $resultFileNames);
         $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());
         $this->assertContains($fileName, $resultFileNames);
@@ -169,7 +169,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $inputAsset = $this->createAssetWithFile();
 
         $taskBody = TestResources::getMediaServicesTask($this->getOutputAssetName());
-        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+        $configuration = TestResources::MEDIA_SERVICES_TASK_CONFIGURATION;
 
         $name = TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix();
 
@@ -180,7 +180,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $job = new Job();
         $job->setName($name);
 
-        $jobWithTasks = $this->createJob($job, array($inputAsset), array($task));
+        $jobWithTasks = $this->createJob($job, [$inputAsset], [$task]);
 
         // Assert
         $this->assertEquals($taskBody, $task->getTaskBody());
@@ -205,7 +205,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
         $inputAsset = $this->createAssetWithFile();
 
-        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+        $configuration = TestResources::MEDIA_SERVICES_TASK_CONFIGURATION;
         $name = TestResources::MEDIA_SERVICES_JOB_TEMPLATE_NAME.$this->createSuffix();
 
         $taskTemplate = new TaskTemplate(1, 1);
@@ -218,7 +218,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $jobTemplate = new JobTemplate($jobTemplateBody);
         $jobTemplate->setName($name);
 
-        $jobTemplateWithTasks = $this->createJobTemplate($jobTemplate, array($taskTemplate));
+        $jobTemplateWithTasks = $this->createJobTemplate($jobTemplate, [$taskTemplate]);
 
         // Assert
         $this->assertEquals($configuration, $taskTemplate->getConfiguration());
@@ -244,9 +244,9 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
         $inputAsset = $this->createAssetWithFile();
 
-        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+        $configuration = TestResources::MEDIA_SERVICES_TASK_CONFIGURATION;
         $name = TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix();
-        $nameTempl = TestResources::MEDIA_SERVICES_JOB_TEMPLATE_NAME.$this->createSuffix();
+        $nameTemplate = TestResources::MEDIA_SERVICES_JOB_TEMPLATE_NAME.$this->createSuffix();
 
         $taskTemplate = new TaskTemplate(1, 1);
         $jobTemplateBody = TestResources::getMediaServicesJobTemplate($taskTemplate->getId(), $this->getOutputAssetName());
@@ -256,17 +256,17 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $taskTemplate->setConfiguration($configuration);
 
         $jobTemplate = new JobTemplate($jobTemplateBody);
-        $jobTemplate->setName($nameTempl);
-        $jobTemplate = $this->createJobTemplate($jobTemplate, array($taskTemplate));
+        $jobTemplate->setName($nameTemplate);
+        $jobTemplate = $this->createJobTemplate($jobTemplate, [$taskTemplate]);
 
         $jobTemplateWithTasks = new Job();
         $jobTemplateWithTasks->setName($name);
         $jobTemplateWithTasks->setTemplateId($jobTemplate->getId());
-        $jobTemplateWithTasks = $this->createJob($jobTemplateWithTasks, array($inputAsset));
+        $jobTemplateWithTasks = $this->createJob($jobTemplateWithTasks, [$inputAsset]);
 
         // Assert
         $this->assertEquals($jobTemplateBody, $jobTemplate->getJobTemplateBody());
-        $this->assertEquals($nameTempl, $jobTemplate->getName());
+        $this->assertEquals($nameTemplate, $jobTemplate->getName());
 
         $this->assertEquals($name, $jobTemplateWithTasks->getName());
 
@@ -288,13 +288,13 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         // Setup
         $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
         $inputAsset = $this->createAssetWithFile();
-        $expected = array(
+        $expected = [
                 Job::STATE_CANCELING,
                 Job::STATE_CANCELED,
-        );
+        ];
 
         $taskBody = TestResources::getMediaServicesTask($this->getOutputAssetName());
-        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+        $configuration = TestResources::MEDIA_SERVICES_TASK_CONFIGURATION;
 
         $name = TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix();
 
@@ -304,7 +304,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $job = new Job();
         $job->setName($name);
 
-        $jobWithTasks = $this->createJob($job, array($inputAsset), array($task));
+        $jobWithTasks = $this->createJob($job, [$inputAsset], [$task]);
 
         // Test
         $canceledJobWithTasks = $this->restProxy->cancelJob($jobWithTasks);
@@ -334,7 +334,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $inputAsset = $this->createAssetWithFile();
 
         $taskBody = TestResources::getMediaServicesTask($this->getOutputAssetName());
-        $configuration = TestResources::MEDIA_SERVICES_TASK_COFIGURATION;
+        $configuration = TestResources::MEDIA_SERVICES_TASK_CONFIGURATION;
 
         $name = TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix();
 
@@ -344,7 +344,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $job = new Job();
         $job->setName($name);
 
-        $jobWithTasks = $this->createJob($job, array($inputAsset), array($task));
+        $jobWithTasks = $this->createJob($job, [$inputAsset], [$task]);
 
         // Test
         $jobStatus = $this->restProxy->getJobStatus($jobWithTasks);
@@ -432,14 +432,14 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $this->assertCount(1, $result);
         $result = $this->restProxy->getAssetList();
         $this->assertCount(2, $result);
-        $names = array(
+        $names = [
             $result[0]->getName(),
             $result[1]->getName(),
-        );
-        $id = array(
+        ];
+        $id = [
                 $result[0]->getId(),
                 $result[1]->getId(),
-        );
+        ];
         $this->assertContains($asset1->getName(), $names);
         $this->assertContains($asset2->getName(), $names);
 
@@ -473,11 +473,11 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 
         $job1 = new Job();
         $job1->setName(TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix());
-        $jobResult1 = $this->createJob($job1, array($asset1), array($task1));
+        $jobResult1 = $this->createJob($job1, [$asset1], [$task1]);
 
         $job2 = new Job();
         $job2->setName(TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix());
-        $jobResult2 = $this->createJob($job2, array($asset2), array($task2));
+        $jobResult2 = $this->createJob($job2, [$asset2], [$task2]);
 
         // Test
         $jobList = $this->restProxy->getJobList();
@@ -533,14 +533,14 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 
         // Assert
         $this->assertGreaterThanOrEqual(2, count($result));
-        $names = array(
+        $names = [
                 $result[0]->getName(),
                 $result[1]->getName(),
-        );
-        $id = array(
+        ];
+        $id = [
                 $result[0]->getId(),
                 $result[1]->getId(),
-        );
+        ];
         $this->assertContains($accessName1, $names);
         $this->assertContains($accessName2, $names);
 
@@ -590,22 +590,22 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $result = $this->restProxy->getLocatorList();
 
         // Assert
-        $assetId = array(
+        $assetId = [
                 $result[0]->getAssetId(),
                 $result[1]->getAssetId(),
-        );
-        $accessId = array(
+        ];
+        $accessId = [
                 $result[0]->getAccessPolicyId(),
                 $result[1]->getAccessPolicyId(),
-        );
-        $locatorId = array(
+        ];
+        $locatorId = [
                 $result[0]->getId(),
                 $result[1]->getId(),
-        );
-        $locatorNames = array(
+        ];
+        $locatorNames = [
                 $result[0]->getName(),
                 $result[1]->getName(),
-        );
+        ];
         $this->assertContains($asset1->getId(), $assetId);
         $this->assertContains($access1->getId(), $accessId);
         $this->assertContains($locator1->getId(), $locatorId);
@@ -742,7 +742,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         // Test
         $method = Resources::HTTP_GET;
         $url = new Url($locator->getBaseUri().'/'.TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME.$locator->getContentAccessComponent());
-        $filters = array();
+        $filters = [];
         $statusCode = Resources::STATUS_OK;
 
         $httpClient = new HttpClient();
@@ -783,7 +783,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         // Test
         $method = Resources::HTTP_GET;
         $url = new Url($locator->getPath().'/'.TestResources::MEDIA_SERVICES_ISM_FILE_NAME.'/'.TestResources::MEDIA_SERVICES_STREAM_APPEND);
-        $filters = array();
+        $filters = [];
         $statusCode = Resources::STATUS_OK;
 
         $httpClient = new HttpClient();
@@ -861,10 +861,10 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $assetFiles = $this->restProxy->getAssetAssetFileList($asset);
 
         // Files order is not static, so we don't know the index of each file and need to serve them as a set
-        $resultFileNames = array(
+        $resultFileNames = [
             $assetFiles[0]->getName(),
             $assetFiles[1]->getName(),
-        );
+        ];
         $this->assertContains($otherFileName, $resultFileNames);
         $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());
         $this->assertContains($fileName, $resultFileNames);
@@ -966,9 +966,9 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $task = new Task(TestResources::getMediaServicesTask($this->getOutputAssetName()), $decodeProcessor->getId(), TaskOptions::NONE);
         $job = new Job();
         $job->setName(TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix());
-        $job = $this->createJob($job, array($asset), array($task));
+        $job = $this->createJob($job, [$asset], [$task]);
 
-        $this->waitJobStatus($job, array(Job::STATE_FINISHED, Job::STATE_ERROR));
+        $this->waitJobStatus($job, [Job::STATE_FINISHED, Job::STATE_ERROR]);
 
         $this->assertEquals($this->restProxy->getJobStatus($job), Job::STATE_FINISHED);
 
@@ -990,7 +990,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 
         $method = Resources::HTTP_GET;
         $url = new Url($locator->getBaseUri().'/'.TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME.$locator->getContentAccessComponent());
-        $filters = array();
+        $filters = [];
         $statusCode = Resources::STATUS_OK;
 
         $httpClient = new HttpClient();
@@ -1111,10 +1111,10 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $this->assertEquals(Resources::MEDIA_SERVICES_ENCRYPTION_VERSION, $manifestFile2->getEncryptionVersion());
 
         // Files order is not static, so we don't know the index of each file and need to serve them as a set
-        $resultFileNames = array(
+        $resultFileNames = [
                 $assetFiles[0]->getName(),
                 $assetFiles[1]->getName(),
-        );
+        ];
         $this->assertContains($otherFileName, $resultFileNames);
         $this->assertEquals($asset->getId(), $assetFiles[0]->getParentAssetId());
         $this->assertContains($fileName, $resultFileNames);
@@ -1177,7 +1177,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 
         $method = Resources::HTTP_GET;
         $url = new Url($locatorRead->getBaseUri().'/'.$fileName.$locatorRead->getContentAccessComponent());
-        $filters = array();
+        $filters = [];
         $statusCode = Resources::STATUS_OK;
 
         $httpClient = new HttpClient();
@@ -1280,7 +1280,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
 
         $method = Resources::HTTP_GET;
         $url = new Url($locatorRead->getBaseUri().'/'.$fileName.$locatorRead->getContentAccessComponent());
-        $filters = array();
+        $filters = [];
         $statusCode = Resources::STATUS_OK;
 
         $httpClient = new HttpClient();

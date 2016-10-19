@@ -43,8 +43,8 @@ use WindowsAzure\ServiceManagement\Models\Role;
 class RoleTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Role::setRoleName
-     * @covers WindowsAzure\ServiceManagement\Models\Role::getRoleName
+     * @covers \WindowsAzure\ServiceManagement\Models\Role::setRoleName
+     * @covers \WindowsAzure\ServiceManagement\Models\Role::getRoleName
      */
     public function testSetRoleName()
     {
@@ -60,8 +60,8 @@ class RoleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\Role::setOsVersion
-     * @covers WindowsAzure\ServiceManagement\Models\Role::getOsVersion
+     * @covers \WindowsAzure\ServiceManagement\Models\Role::setOsVersion
+     * @covers \WindowsAzure\ServiceManagement\Models\Role::getOsVersion
      */
     public function testSetOsVersion()
     {

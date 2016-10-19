@@ -44,8 +44,8 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 class AffinityGroupTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::toArray
-     * @covers WindowsAzure\ServiceManagement\Models\AffinityGroup::__construct
+     * @covers \WindowsAzure\ServiceManagement\Models\AffinityGroup::toArray
+     * @covers \WindowsAzure\ServiceManagement\Models\AffinityGroup::__construct
      */
     public function testSerialize()
     {
@@ -58,18 +58,18 @@ class AffinityGroupTest extends \PHPUnit_Framework_TestCase
         $expected .= ' <Description>Description</Description>'."\n";
         $expected .= ' <Location>Location</Location>'."\n";
         $expected .= '</CreateService>'."\n";
-        $affinitygroup = new AffinityGroup();
-        $affinitygroup->setName('Name');
-        $affinitygroup->setLabel('Label');
-        $affinitygroup->setLocation('Location');
-        $affinitygroup->setDescription('Description');
-        $affinitygroup->addSerializationProperty(
+        $affinityGroup = new AffinityGroup();
+        $affinityGroup->setName('Name');
+        $affinityGroup->setLabel('Label');
+        $affinityGroup->setLocation('Location');
+        $affinityGroup->setDescription('Description');
+        $affinityGroup->addSerializationProperty(
             XmlSerializer::ROOT_NAME,
             'CreateService'
         );
 
         // Test
-        $actual = $affinitygroup->serialize($serializer);
+        $actual = $affinityGroup->serialize($serializer);
 
         // Assert
         $this->assertEquals($expected, $actual);

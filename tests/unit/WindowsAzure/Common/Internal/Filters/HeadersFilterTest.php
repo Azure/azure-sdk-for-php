@@ -52,7 +52,7 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $channel = new HttpClient();
-        $filter = new HeadersFilter(array());
+        $filter = new HeadersFilter([]);
 
         // Test
         $request = $filter->handleRequest($channel);
@@ -74,7 +74,7 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
         $channel = new HttpClient();
         $header1 = 'header1';
         $value1 = 'value1';
-        $expected = array($header1 => $value1);
+        $expected = [$header1 => $value1];
         $filter = new HeadersFilter($expected);
 
         // Test
@@ -97,7 +97,7 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
         $value1 = 'value1';
         $header2 = 'header2';
         $value2 = 'value2';
-        $expected = array($header1 => $value1, $header2 => $value2);
+        $expected = [$header1 => $value1, $header2 => $value2];
         $filter = new HeadersFilter($expected);
 
         // Test
@@ -117,7 +117,7 @@ class HeadersFilterTest extends \PHPUnit_Framework_TestCase
         // Setup
         $channel = new HttpClient();
         $response = new \GuzzleHttp\Psr7\Response();
-        $filter = new HeadersFilter(array());
+        $filter = new HeadersFilter([]);
 
         // Test
         $response = $filter->handleResponse($channel, $response);

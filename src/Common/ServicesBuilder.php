@@ -334,16 +334,16 @@ class ServicesBuilder
             new HttpClient(),
             $settings->getOAuthEndpointUri()
         );
-        $authentification = new OAuthScheme(
+        $authentication = new OAuthScheme(
             $settings->getAccountName(),
             $settings->getAccessKey(),
             Resources::OAUTH_GT_CLIENT_CREDENTIALS,
             Resources::MEDIA_SERVICES_OAUTH_SCOPE,
             $oauthService
         );
-        $authentificationFilter = new AuthenticationFilter($authentification);
+        $authenticationFilter = new AuthenticationFilter($authentication);
         $mediaServicesWrapper = $mediaServicesWrapper->withFilter(
-            $authentificationFilter
+            $authenticationFilter
         );
 
         return $mediaServicesWrapper;

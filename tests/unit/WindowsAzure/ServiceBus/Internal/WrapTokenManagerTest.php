@@ -65,8 +65,8 @@ class WrapTokenManagerTest extends ServiceRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
-     * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::getAccessToken
+     * @covers \WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
+     * @covers \WindowsAzure\ServiceBus\Internal\WrapTokenManager::getAccessToken
      */
     public function testGetAccessTokenSuccess()
     {
@@ -95,8 +95,8 @@ class WrapTokenManagerTest extends ServiceRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
-     * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::getAccessToken
+     * @covers \WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
+     * @covers \WindowsAzure\ServiceBus\Internal\WrapTokenManager::getAccessToken
      */
     public function testGetAccessTokenFailedWithInvalidWrapUri()
     {
@@ -123,8 +123,8 @@ class WrapTokenManagerTest extends ServiceRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
-     * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::getAccessToken
+     * @covers \WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
+     * @covers \WindowsAzure\ServiceBus\Internal\WrapTokenManager::getAccessToken
      */
     public function testGetAccessTokenFailedWithInvalidUserName()
     {
@@ -151,10 +151,10 @@ class WrapTokenManagerTest extends ServiceRestProxyTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
-     * @covers WindowsAzure\ServiceBus\Internal\WrapTokenManager::getAccessToken
+     * @covers \WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
+     * @covers \WindowsAzure\ServiceBus\Internal\WrapTokenManager::getAccessToken
      */
-    public function testGetAccesTokenFailedWithInvalidPassword()
+    public function testGetAccessTokenFailedWithInvalidPassword()
     {
         $this->setExpectedException(get_class(
             new ServiceException(''))

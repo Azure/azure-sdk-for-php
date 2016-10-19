@@ -43,7 +43,7 @@ use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
 class ReceiveMessageOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::__construct
      */
     public function testReceiveMessageOptionsConstructor()
     {
@@ -57,8 +57,8 @@ class ReceiveMessageOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::getTimeout
-     * @covers WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::setTimeout
+     * @covers \WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::getTimeout
+     * @covers \WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::setTimeout
      */
     public function testGetSetTimeout()
     {
@@ -78,8 +78,8 @@ class ReceiveMessageOptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::getReceiveMode
-     * @covers WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::setReceiveMode
+     * @covers \WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::getReceiveMode
+     * @covers \WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::setReceiveMode
      */
     public function testGetSetReceiveMode()
     {

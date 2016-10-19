@@ -124,8 +124,8 @@ class TokenRestrictionTemplateSerializer
         $writer = new \XMLWriter();
 
         $writer->openMemory();
-        $writer->startElementNs(null, 'TokenRestrictionTemplate', Resources::TRT_XML_NAMESPACE);
-        $writer->writeAttributeNs('xmlns', 'i', null, Resources::XSI_XML_NAMESPACE);
+        $writer->startElementNS(null, 'TokenRestrictionTemplate', Resources::TRT_XML_NAMESPACE);
+        $writer->writeAttributeNS('xmlns', 'i', null, Resources::XSI_XML_NAMESPACE);
 
         if ($tokenRestriction->getAlternateVerificationKeys()) {
             self::serializeAlternateVerificationKeys($writer, $tokenRestriction->getAlternateVerificationKeys());
@@ -172,9 +172,6 @@ class TokenRestrictionTemplateSerializer
         $tokenExpiration = null,
         $notBefore = null)
     {
-        Validate::notNull($template, 'template');
-        Validate::isA($template, 'WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate', 'template');
-
         if ($verificationKey == null) {
             $verificationKey = $template->getPrimaryVerificationKey();
         }

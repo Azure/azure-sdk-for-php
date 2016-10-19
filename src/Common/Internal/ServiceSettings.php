@@ -54,7 +54,9 @@ abstract class ServiceSettings
      * available formats.
      * 
      * @param string $connectionString The invalid formatted connection string.
-     * 
+     *
+     * @return null
+     *
      * @throws \RuntimeException
      */
     protected static function noMatch($connectionString)
@@ -138,7 +140,7 @@ abstract class ServiceSettings
                 } else {
                     // If required then fail because the setting does not exist
                     if ($isRequired) {
-                        return;
+                        return null;
                     }
                 }
             }
@@ -232,7 +234,7 @@ abstract class ServiceSettings
 
             // Check to find if the $settingValue is valid or not. The index must
             // start from 1 as unset deletes the value but does not update the array
-            // indecies.
+            // indices.
             for ($index = 1; $index < $validValuesCount; ++$index) {
                 if ($settingValue == $validValues[$index]) {
                     // $settingValue is found in valid values set, succeed.

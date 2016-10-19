@@ -72,7 +72,7 @@ class ContentPropertiesSerializer
         $xmlWriter = new \XMLWriter();
         $xmlWriter->openMemory();
 
-        $xmlWriter->startElementNs(
+        $xmlWriter->startElementNS(
             'meta',
             Resources::PROPERTIES,
             Resources::DSM_XML_NAMESPACE
@@ -123,7 +123,7 @@ class ContentPropertiesSerializer
     }
 
     /**
-     * Returns true if the specified filed y requierd for the specified entity.
+     * Returns true if the specified filed y required for the specified entity.
      *
      * @param mixed  $object    the entity
      * @param string $fieldName the property name to verify if it's required or not.
@@ -170,14 +170,14 @@ class ContentPropertiesSerializer
                         $variableValue = self::dateIntervalToString($variableValue);
                     }
                     if (gettype($variableValue) == 'array') {
-                        $xmlWriter->startElementNs(
+                        $xmlWriter->startElementNS(
                             'data',
                             $variableName,
                             Resources::DS_XML_NAMESPACE
                         );
 
                         foreach ($variableValue as $item) {
-                            $xmlWriter->startElementNs(
+                            $xmlWriter->startElementNS(
                                 'data',
                                 Resources::ELEMENT,
                                 Resources::DS_XML_NAMESPACE
@@ -193,7 +193,7 @@ class ContentPropertiesSerializer
 
                         $xmlWriter->endElement();
                     } elseif (gettype($variableValue) == 'object') {
-                        $xmlWriter->startElementNs(
+                        $xmlWriter->startElementNS(
                             'data',
                             $variableName,
                             Resources::DS_XML_NAMESPACE
@@ -206,7 +206,7 @@ class ContentPropertiesSerializer
 
                         $xmlWriter->endElement();
                     } else {
-                        $xmlWriter->writeElementNs(
+                        $xmlWriter->writeElementNS(
                             'data',
                             $variableName,
                             Resources::DS_XML_NAMESPACE,

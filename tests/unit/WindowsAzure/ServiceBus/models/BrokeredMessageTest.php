@@ -25,6 +25,7 @@
 
 namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
+use Symfony\Component\Validator\Constraints\DateTime;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
 
@@ -253,7 +254,7 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     public function testGetSetLockedUntilUtc()
     {
         // Setup
-        $expected = 'testLockedUntilUtc';
+        $expected = new \DateTime();
         $brokeredMessage = new BrokeredMessage();
 
         // Test
@@ -421,7 +422,7 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     public function testGetSetScheduledEnqueueTimeUtc()
     {
         // Setup
-        $expected = 'testScheduledEnqueueTimeUtc';
+        $expected = new \DateTime();
         $brokeredMessage = new BrokeredMessage();
 
         // Test

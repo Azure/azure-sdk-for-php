@@ -48,7 +48,7 @@ class AgcAndColorStripeRestriction
     private $_configurationData;
 
     /**
-     * Create ScmsRestriction.
+     * Create AgcAndColorStripeRestriction.
      * 
      * @param int $configurationData
      */

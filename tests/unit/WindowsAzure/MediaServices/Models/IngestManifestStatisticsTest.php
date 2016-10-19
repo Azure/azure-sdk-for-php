@@ -42,8 +42,8 @@ use WindowsAzure\MediaServices\Models\IngestManifestStatistics;
 class IngestManifestStatisticsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestStatistics::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestStatistics::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestStatistics::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestStatistics::fromArray
      */
     public function testCreateFromOptions()
     {
@@ -53,12 +53,12 @@ class IngestManifestStatisticsTest extends \PHPUnit_Framework_TestCase
         $finishedFilesCount = 3;
         $errorFilesCount = 1;
         $errorFilesDetails = 'error Files Details';
-        $options = array(
+        $options = [
                 'PendingFilesCount' => $pendingFilesCount,
                 'FinishedFilesCount' => $finishedFilesCount,
                 'ErrorFilesCount' => $errorFilesCount,
                 'ErrorFilesDetails' => $errorFilesDetails,
-        );
+        ];
 
         // Test
         $manifestStatistics = IngestManifestStatistics::createFromOptions($options);
@@ -71,16 +71,16 @@ class IngestManifestStatisticsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestStatistics::getErrorFilesDetails
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestStatistics::getErrorFilesDetails
      */
     public function testGetErrorFilesDetails()
     {
 
         // Setup
         $errorFilesDetails = 'error Files Details';
-        $options = array(
+        $options = [
                 'ErrorFilesDetails' => $errorFilesDetails,
-        );
+        ];
         $manifestStatistics = IngestManifestStatistics::createFromOptions($options);
 
         // Test
@@ -91,16 +91,16 @@ class IngestManifestStatisticsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestStatistics::getErrorFilesCount
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestStatistics::getErrorFilesCount
      */
     public function testGetErrorFilesCount()
     {
 
         // Setup
         $errorFilesCount = 2;
-        $options = array(
+        $options = [
                 'ErrorFilesCount' => $errorFilesCount,
-        );
+        ];
         $manifestStatistics = IngestManifestStatistics::createFromOptions($options);
 
         // Test
@@ -111,16 +111,16 @@ class IngestManifestStatisticsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestStatistics::getFinishedFilesCount
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestStatistics::getFinishedFilesCount
      */
     public function testGetFinishedFilesCount()
     {
 
         // Setup
         $finishedFilesCount = 2;
-        $options = array(
+        $options = [
                 'FinishedFilesCount' => $finishedFilesCount,
-        );
+        ];
         $manifestStatistics = IngestManifestStatistics::createFromOptions($options);
 
         // Test
@@ -131,16 +131,16 @@ class IngestManifestStatisticsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\IngestManifestStatistics::getPendingFilesCount
+     * @covers \WindowsAzure\MediaServices\Models\IngestManifestStatistics::getPendingFilesCount
      */
     public function testGetPendingFilesCount()
     {
 
         // Setup
         $pendingFilesCount = 2;
-        $options = array(
+        $options = [
                 'PendingFilesCount' => $pendingFilesCount,
-        );
+        ];
         $manifestStatistics = IngestManifestStatistics::createFromOptions($options);
 
         // Test

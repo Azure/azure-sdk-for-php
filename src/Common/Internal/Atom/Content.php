@@ -99,7 +99,7 @@ class Content extends AtomBase
         $attributes = $contentXml->attributes();
 
         if (!empty($attributes['type'])) {
-            $this->content = (string) $attributes['type'];
+            $this->type = (string) $attributes['type'];
         }
 
         $text = '';
@@ -171,7 +171,7 @@ class Content extends AtomBase
     public function writeXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->startElementNs(
+        $xmlWriter->startElementNS(
             'atom',
             'content',
             Resources::ATOM_NAMESPACE

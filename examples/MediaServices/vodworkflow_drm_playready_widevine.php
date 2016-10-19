@@ -327,7 +327,7 @@ function createAssetDeliveryPolicy($restProxy, $encodedAsset, $contentKey)
     // 5.2 Generate the AssetDeliveryPolicy Configuration Key
     $configuration = [AssetDeliveryPolicyConfigurationKey::PLAYREADY_LICENSE_ACQUISITION_URL => $acquisitionUrl,
                       AssetDeliveryPolicyConfigurationKey::WIDEVINE_BASE_LICENSE_ACQUISITION_URL => $widevineUrl];
-    $confJson = AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfiguartionKey($configuration);
+    $confJson = AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfigurationKey($configuration);
 
     // 5.3 Create the AssetDeliveryPolicy
     $adpolicy = new AssetDeliveryPolicy();

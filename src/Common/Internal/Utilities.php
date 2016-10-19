@@ -109,7 +109,7 @@ class Utilities
      *
      * @static
      */
-    public static function addIfNotEmpty($key, $value, &$array)
+    public static function addIfNotEmpty($key, $value, array &$array = null)
     {
         if (!is_null($array)) {
             Validate::isArray($array, 'array');
@@ -141,10 +141,10 @@ class Utilities
                 if (array_key_exists($arguments[$i], $currentArray)) {
                     $currentArray = $currentArray[$arguments[$i]];
                 } else {
-                    return;
+                    return null;
                 }
             } else {
-                return;
+                return null;
             }
         }
 
@@ -346,7 +346,7 @@ class Utilities
     /**
      * Converts a given date string into \DateTime object.
      *
-     * @param string $date windows azure date ins string represntation.
+     * @param string $date windows azure date ins string representation.
      *
      * @static
      *

@@ -304,7 +304,7 @@ function createAssetDeliveryPolicy($restProxy, $encodedAsset, $contentKey, $fair
     // 5.2 Generate the AssetDeliveryPolicy Configuration Key
     $configuration = [AssetDeliveryPolicyConfigurationKey::FAIRPLAY_BASE_LICENSE_ACQUISITION_URL => $acquisitionUrl,
                       AssetDeliveryPolicyConfigurationKey::COMMON_ENCRYPTION_IV_FOR_CBCS => $fairPlayIV];
-    $confJson = AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfiguartionKey($configuration);
+    $confJson = AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfigurationKey($configuration);
 
     // 5.3 Create the AssetDeliveryPolicy
     $adpolicy = new AssetDeliveryPolicy();

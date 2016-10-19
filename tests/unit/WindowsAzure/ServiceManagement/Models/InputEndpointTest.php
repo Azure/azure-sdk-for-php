@@ -43,53 +43,53 @@ use WindowsAzure\ServiceManagement\Models\InputEndpoint;
 class InputEndpointTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\InputEndpoint::setRoleName
-     * @covers WindowsAzure\ServiceManagement\Models\InputEndpoint::getRoleName
+     * @covers \WindowsAzure\ServiceManagement\Models\InputEndpoint::setRoleName
+     * @covers \WindowsAzure\ServiceManagement\Models\InputEndpoint::getRoleName
      */
     public function testSetRoleName()
     {
         // Setup
         $expected = 'rolename';
-        $inputendpoint = new InputEndpoint();
+        $inputEndPoint = new InputEndpoint();
 
         // Test
-        $inputendpoint->setRoleName($expected);
+        $inputEndPoint->setRoleName($expected);
 
         // Assert
-        $this->assertEquals($expected, $inputendpoint->getRoleName());
+        $this->assertEquals($expected, $inputEndPoint->getRoleName());
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\InputEndpoint::setVip
-     * @covers WindowsAzure\ServiceManagement\Models\InputEndpoint::getVip
+     * @covers \WindowsAzure\ServiceManagement\Models\InputEndpoint::setVip
+     * @covers \WindowsAzure\ServiceManagement\Models\InputEndpoint::getVip
      */
     public function testSetVip()
     {
         // Setup
         $expected = 'vip';
-        $inputendpoint = new InputEndpoint();
+        $inputEndPoint = new InputEndpoint();
 
         // Test
-        $inputendpoint->setVip($expected);
+        $inputEndPoint->setVip($expected);
 
         // Assert
-        $this->assertEquals($expected, $inputendpoint->getVip());
+        $this->assertEquals($expected, $inputEndPoint->getVip());
     }
 
     /**
-     * @covers WindowsAzure\ServiceManagement\Models\InputEndpoint::setPort
-     * @covers WindowsAzure\ServiceManagement\Models\InputEndpoint::getPort
+     * @covers \WindowsAzure\ServiceManagement\Models\InputEndpoint::setPort
+     * @covers \WindowsAzure\ServiceManagement\Models\InputEndpoint::getPort
      */
     public function testSetPort()
     {
         // Setup
         $expected = 'port';
-        $inputendpoint = new InputEndpoint();
+        $inputEndPoint = new InputEndpoint();
 
         // Test
-        $inputendpoint->setPort($expected);
+        $inputEndPoint->setPort($expected);
 
         // Assert
-        $this->assertEquals($expected, $inputendpoint->getPort());
+        $this->assertEquals($expected, $inputEndPoint->getPort());
     }
 }

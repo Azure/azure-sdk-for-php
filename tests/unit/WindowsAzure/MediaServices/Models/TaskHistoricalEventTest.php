@@ -42,18 +42,18 @@ use WindowsAzure\MediaServices\Models\TaskHistoricalEvent;
 class TaskHistoricalEventTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskHistoricalEvent::createFromOptions
-     * @covers WindowsAzure\MediaServices\Models\TaskHistoricalEvent::fromArray
+     * @covers \WindowsAzure\MediaServices\Models\TaskHistoricalEvent::createFromOptions
+     * @covers \WindowsAzure\MediaServices\Models\TaskHistoricalEvent::fromArray
      */
     public function testCreateFromOptions()
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Code' => 123456,
                 'Message' => 'some message',
                 'TimeStamp' => '2013-11-27',
-        );
+        ];
         $time = new \Datetime($options['TimeStamp']);
 
         // Test
@@ -66,16 +66,16 @@ class TaskHistoricalEventTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskHistoricalEvent::getTimeStamp
-     * @covers WindowsAzure\MediaServices\Models\TaskHistoricalEvent::__construct
+     * @covers \WindowsAzure\MediaServices\Models\TaskHistoricalEvent::getTimeStamp
+     * @covers \WindowsAzure\MediaServices\Models\TaskHistoricalEvent::__construct
      */
     public function testGetTimeStamp()
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'TimeStamp' => '2013-11-27',
-        );
+        ];
         $time = new \Datetime($options['TimeStamp']);
         $histEvent = TaskHistoricalEvent::createFromOptions($options);
 
@@ -87,15 +87,15 @@ class TaskHistoricalEventTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskHistoricalEvent::getMessage
+     * @covers \WindowsAzure\MediaServices\Models\TaskHistoricalEvent::getMessage
      */
     public function testGetMessage()
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Message' => 'some message',
-        );
+        ];
         $histEvent = TaskHistoricalEvent::createFromOptions($options);
 
         // Test
@@ -106,15 +106,15 @@ class TaskHistoricalEventTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\MediaServices\Models\TaskHistoricalEvent::getCode
+     * @covers \WindowsAzure\MediaServices\Models\TaskHistoricalEvent::getCode
      */
     public function testGetCode()
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Code' => 654,
-        );
+        ];
         $histEvent = TaskHistoricalEvent::createFromOptions($options);
 
         // Test

@@ -114,7 +114,7 @@ class TaskTemplate
     private $_options;
 
     /**
-     * Encription key id.
+     * Encryption key id.
      *
      * @var string
      */
@@ -171,16 +171,16 @@ class TaskTemplate
     /**
      * Create task.
      *
-     * @param int $numberOfInputAssets  Number of input Assets the TaskTemplate
+     * @param int $numberofInputAssets  Number of input Assets the TaskTemplate
      *                                  must process.
-     * @param int $numberOfOutputAssets Number of output Assets the TaskTemplate
+     * @param int $numberofOutputAssets Number of output Assets the TaskTemplate
      *                                  must process.
      */
-    public function __construct($numberOfInputAssets, $numberOfOutputAssets)
+    public function __construct($numberofInputAssets, $numberofOutputAssets)
     {
         $this->_id = 'nb:ttid:UUID:'.Utilities::getGuid();
-        $this->_numberofInputAssets = $numberOfInputAssets;
-        $this->_numberofOutputAssets = $numberOfOutputAssets;
+        $this->_numberofInputAssets = $numberofInputAssets;
+        $this->_numberofOutputAssets = $numberofOutputAssets;
     }
 
     /**
@@ -376,7 +376,7 @@ class TaskTemplate
     }
 
     /**
-     * Get "Encription key id".
+     * Get "Encryption key id".
      *
      * @return string
      */
@@ -386,7 +386,7 @@ class TaskTemplate
     }
 
     /**
-     * Set "Encription key id".
+     * Set "Encryption key id".
      *
      * @param string $value Encription key id
      */

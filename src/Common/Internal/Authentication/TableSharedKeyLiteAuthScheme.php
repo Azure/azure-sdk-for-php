@@ -64,7 +64,7 @@ class TableSharedKeyLiteAuthScheme extends StorageAuthScheme
      * Computes the authorization signature for blob and queue shared key.
      *
      * @param array  $headers     request headers.
-     * @param string $url         reuqest url.
+     * @param string $url         request URL.
      * @param array  $queryParams query variables.
      * @param string $httpMethod  request http method.
      * 
@@ -95,7 +95,7 @@ class TableSharedKeyLiteAuthScheme extends StorageAuthScheme
      * Returns authorization header to be included in the request.
      *
      * @param array  $headers     request headers.
-     * @param string $url         reuqest url.
+     * @param string $url         request URL.
      * @param array  $queryParams query variables.
      * @param string $httpMethod  request http method.
      * 

@@ -83,7 +83,6 @@ class Person extends AtomBase
     public function parseXml($xmlString)
     {
         $personXml = simplexml_load_string($xmlString);
-        $attributes = $personXml->attributes();
         $personArray = (array) $personXml;
 
         if (array_key_exists('name', $personArray)) {
@@ -167,7 +166,7 @@ class Person extends AtomBase
     public function writeXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->startElementNs(
+        $xmlWriter->startElementNS(
             'atom',
             'person',
             Resources::ATOM_NAMESPACE
@@ -184,7 +183,7 @@ class Person extends AtomBase
     public function writeInnerXml(\XMLWriter $xmlWriter)
     {
         Validate::notNull($xmlWriter, 'xmlWriter');
-        $xmlWriter->writeElementNs(
+        $xmlWriter->writeElementNS(
             'atom',
             'name',
             Resources::ATOM_NAMESPACE,

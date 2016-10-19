@@ -45,7 +45,7 @@ use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 class QueueInfoTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::__construct
      */
     public function testQueueInfoConstructor()
     {
@@ -107,8 +107,8 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::getMaxSizeInMegabytes
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::setMaxSizeInMegabytes
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::getMaxSizeInMegabytes
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::setMaxSizeInMegabytes
      */
     public function testGetSetMaxSizeInMegabytes()
     {
@@ -128,8 +128,8 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::getRequiresDuplicateDetection
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::setRequiresDuplicateDetection
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::getRequiresDuplicateDetection
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::setRequiresDuplicateDetection
      */
     public function testGetSetRequiresDuplicateDetection()
     {
@@ -149,8 +149,8 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::getRequiresSession
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::setRequiresSession
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::getRequiresSession
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::setRequiresSession
      */
     public function testGetSetRequiresSession()
     {
@@ -170,8 +170,8 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::getDefaultMessageTimeToLive
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::setDefaultMessageTimeToLive
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::getDefaultMessageTimeToLive
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::setDefaultMessageTimeToLive
      */
     public function testGetSetDefaultMessageTimeToLive()
     {
@@ -191,8 +191,8 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::getDeadLetteringOnMessageExpiration
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::setDeadLetteringOnMessageExpiration
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::getDeadLetteringOnMessageExpiration
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::setDeadLetteringOnMessageExpiration
      */
     public function testGetSetDeadLetteringOnMessageExpiration()
     {
@@ -212,8 +212,8 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::getDuplicateDetectionHistoryTimeWindow
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::setDuplicateDetectionHistoryTimeWindow
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::getDuplicateDetectionHistoryTimeWindow
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::setDuplicateDetectionHistoryTimeWindow
      */
     public function testGetSetDuplicateDetectionHistoryTimeWindow()
     {
@@ -233,8 +233,8 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::getMaxDeliveryCount
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::setMaxDeliveryCount
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::getMaxDeliveryCount
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::setMaxDeliveryCount
      */
     public function testGetSetMaxDeliveryCount()
     {
@@ -254,8 +254,8 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::getEnableBatchedOperations
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::setEnableBatchedOperations
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::getEnableBatchedOperations
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::setEnableBatchedOperations
      */
     public function testGetSetEnableBatchedOperations()
     {
@@ -275,8 +275,8 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::getSizeInBytes
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::setSizeInBytes
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::getSizeInBytes
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::setSizeInBytes
      */
     public function testGetSetSizeInBytes()
     {
@@ -296,8 +296,8 @@ class QueueInfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::getMessageCount
-     * @covers WindowsAzure\ServiceBus\Models\QueueInfo::setMessageCount
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::getMessageCount
+     * @covers \WindowsAzure\ServiceBus\Models\QueueInfo::setMessageCount
      */
     public function testGetSetMessageCount()
     {

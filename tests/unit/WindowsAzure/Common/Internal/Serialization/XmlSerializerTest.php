@@ -45,8 +45,8 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 class XmlSerializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::unserialize
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::_sxml2arr
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::unserialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::_sxml2arr
      */
     public function testUnserialize()
     {
@@ -64,8 +64,8 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::serialize
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::_arr2xml
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::serialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::_arr2xml
      */
     public function testSerialize()
     {
@@ -75,7 +75,7 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
         $properties = ServiceProperties::create($propertiesSample);
         $expected = $properties->toXml($xmlSerializer);
         $array = $properties->toArray();
-        $serializerProperties = array(XmlSerializer::ROOT_NAME => ServiceProperties::$xmlRootName);
+        $serializerProperties = [XmlSerializer::ROOT_NAME => ServiceProperties::$xmlRootName];
 
         // Test
         $actual = $xmlSerializer->serialize($array, $serializerProperties);
@@ -109,9 +109,9 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
      */
-    public function testObjectSerializeSucceess()
+    public function testObjectSerializeSuccess()
     {
         // Setup
         $expected = "<DummyClass/>\n";
@@ -128,9 +128,9 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
      */
-    public function testObjectSerializeSucceessWithAttributes()
+    public function testObjectSerializeSuccessWithAttributes()
     {
         // Setup 
         $expected = "<DummyClass testAttribute=\"testAttributeValue\"/>\n";
@@ -148,7 +148,7 @@ class XmlSerializerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
+     * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::objectSerialize
      */
     public function testObjectSerializeInvalidObject()
     {

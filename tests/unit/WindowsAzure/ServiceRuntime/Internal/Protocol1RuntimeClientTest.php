@@ -79,7 +79,7 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClient::getCurrentGoalState
+     * @covers \WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClient::getCurrentGoalState
      */
     public function testGetCurrentGoalState()
     {
@@ -155,7 +155,7 @@ class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClient::getRoleEnvironmentData
+     * @covers \WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClient::getRoleEnvironmentData
      */
     public function testGetRoleEnvironmentData()
     {

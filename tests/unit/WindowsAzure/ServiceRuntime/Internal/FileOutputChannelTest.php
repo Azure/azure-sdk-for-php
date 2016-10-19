@@ -47,7 +47,7 @@ use WindowsAzure\ServiceRuntime\Internal\FileOutputChannel;
 class FileOutputChannelTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceRuntime\Internal\FileOutputChannel::getOutputStream
+     * @covers \WindowsAzure\ServiceRuntime\Internal\FileOutputChannel::getOutputStream
      */
     public function testGetOutputStream()
     {

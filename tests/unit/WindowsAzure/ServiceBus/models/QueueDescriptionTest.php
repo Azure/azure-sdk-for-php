@@ -43,7 +43,7 @@ use WindowsAzure\ServiceBus\Models\QueueDescription;
 class QueueDescriptionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::__construct
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::__construct
      */
     public function testQueueDescriptionConstructor()
     {
@@ -57,8 +57,8 @@ class QueueDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getLockDuration
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setLockDuration
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::getLockDuration
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::setLockDuration
      */
     public function testGetSetLockDuration()
     {
@@ -78,8 +78,8 @@ class QueueDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getMaxSizeInMegabytes
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setMaxSizeInMegabytes
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::getMaxSizeInMegabytes
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::setMaxSizeInMegabytes
      */
     public function testGetSetMaxSizeInMegabytes()
     {
@@ -99,8 +99,8 @@ class QueueDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getRequiresDuplicateDetection
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setRequiresDuplicateDetection
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::getRequiresDuplicateDetection
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::setRequiresDuplicateDetection
      */
     public function testGetSetRequiresDuplicateDetection()
     {
@@ -120,8 +120,8 @@ class QueueDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getRequiresSession
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setRequiresSession
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::getRequiresSession
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::setRequiresSession
      */
     public function testGetSetRequiresSession()
     {
@@ -141,8 +141,8 @@ class QueueDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getDefaultMessageTimeToLive
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setDefaultMessageTimeToLive
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::getDefaultMessageTimeToLive
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::setDefaultMessageTimeToLive
      */
     public function testGetSetDefaultMessageTimeToLive()
     {
@@ -162,8 +162,8 @@ class QueueDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getDeadLetteringOnMessageExpiration
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setDeadLetteringOnMessageExpiration
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::getDeadLetteringOnMessageExpiration
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::setDeadLetteringOnMessageExpiration
      */
     public function testGetSetDeadLetteringOnMessageExpiration()
     {
@@ -183,8 +183,8 @@ class QueueDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getDuplicateDetectionHistoryTimeWindow
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setDuplicateDetectionHistoryTimeWindow
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::getDuplicateDetectionHistoryTimeWindow
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::setDuplicateDetectionHistoryTimeWindow
      */
     public function testGetSetDuplicateDetectionHistoryTimeWindow()
     {
@@ -204,8 +204,8 @@ class QueueDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getMaxDeliveryCount
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setMaxDeliveryCount
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::getMaxDeliveryCount
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::setMaxDeliveryCount
      */
     public function testGetSetMaxDeliveryCount()
     {
@@ -225,8 +225,8 @@ class QueueDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getEnableBatchedOperations
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setEnableBatchedOperations
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::getEnableBatchedOperations
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::setEnableBatchedOperations
      */
     public function testGetSetEnableBatchedOperations()
     {
@@ -246,8 +246,8 @@ class QueueDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getSizeInBytes
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setSizeInBytes
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::getSizeInBytes
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::setSizeInBytes
      */
     public function testGetSetSizeInBytes()
     {
@@ -267,8 +267,8 @@ class QueueDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** 
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::getMessageCount
-     * @covers WindowsAzure\ServiceBus\Models\QueueDescription::setMessageCount
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::getMessageCount
+     * @covers \WindowsAzure\ServiceBus\Models\QueueDescription::setMessageCount
      */
     public function testGetSetMessageCount()
     {

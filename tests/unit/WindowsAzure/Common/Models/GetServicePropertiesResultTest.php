@@ -45,7 +45,7 @@ use Tests\Framework\TestResources;
 class GetServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers WindowsAzure\Common\Models\GetServicePropertiesResult::create
+     * @covers \WindowsAzure\Common\Models\GetServicePropertiesResult::create
      */
     public function testCreate()
     {
@@ -57,7 +57,7 @@ class GetServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\GetServicePropertiesResult::getValue
+     * @covers \WindowsAzure\Common\Models\GetServicePropertiesResult::getValue
      */
     public function testGetValue()
     {
@@ -73,7 +73,7 @@ class GetServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers WindowsAzure\Common\Models\GetServicePropertiesResult::setValue
+     * @covers \WindowsAzure\Common\Models\GetServicePropertiesResult::setValue
      */
     public function testSetValue()
     {

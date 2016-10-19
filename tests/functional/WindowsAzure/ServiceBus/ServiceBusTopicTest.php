@@ -46,7 +46,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
     private $PEEK_LOCK;
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteTopic
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteTopic
      */
     public function testSubscriptionTopic()
     {
@@ -69,11 +69,11 @@ class ServiceBusTopicTest extends ScenarioTestBase
         $this->getMessageCounts();
 
         $expSub1Messages = $messages;
-        $expSub2Messages = array($messages[0], $messages[1]);
-        $expSub3Messages = array($messages[1], $messages[2], $messages[3]);
+        $expSub2Messages = [$messages[0], $messages[1]];
+        $expSub3Messages = [$messages[1], $messages[2], $messages[3]];
         // The rules for subscription 4 add and remove custom properties.
-        $expCustomProps4 = array();
-        $expSub4Messages = array();
+        $expCustomProps4 = [];
+        $expSub4Messages = [];
         for ($i = 1; $i <= 4; ++$i) {
             $tmp = $this->getCustomProperties($i);
             $tmp['trueRuleA'] = true;
@@ -113,10 +113,10 @@ class ServiceBusTopicTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::createTopic
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteTopic
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getTopic
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listTopics
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::createTopic
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteTopic
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::getTopic
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::listTopics
      */
     private function setupTopic()
     {
@@ -149,7 +149,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::createSubscription
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::createSubscription
      */
     private function setupSubscriptions()
     {
@@ -167,9 +167,9 @@ class ServiceBusTopicTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::createRule
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteRule
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listRules
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::createRule
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::deleteRule
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::listRules
      */
     private function setupRules()
     {
@@ -231,7 +231,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::listRules
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::listRules
      */
     private function showRules($subName)
     {
@@ -248,11 +248,11 @@ class ServiceBusTopicTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::sendTopicMessage
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::sendTopicMessage
      */
     private function sendMessages()
     {
-        $messages = array();
+        $messages = [];
         $messages[] = $this->createIssueMessage('1', 'First  message information', 'label1', 1);
         $messages[] = $this->createIssueMessage('2', 'Second message information', 'label2', 2);
         $messages[] = $this->createIssueMessage('3', 'Third  message information', 'label3', 3);
@@ -287,8 +287,8 @@ class ServiceBusTopicTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getSubscription
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getTopic
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::getSubscription
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::getTopic
      */
     private function getMessageCounts()
     {
@@ -317,15 +317,15 @@ class ServiceBusTopicTest extends ScenarioTestBase
     }
 
     /**
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::getSubscription
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveSubscriptionMessage
-     * @covers WindowsAzure\ServiceBus\ServiceBusRestProxy::unlockMessage
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::getSubscription
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveSubscriptionMessage
+     * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::unlockMessage
      */
     private function getMessageFromSub($expectedMessages, $subscriptionName, $expCustomProps = null)
     {
         $expectedCount = count($expectedMessages);
         if (is_null($expCustomProps)) {
-            $expCustomProps = array();
+            $expCustomProps = [];
             while (count($expCustomProps) < $expectedCount) {
                 $expCustomProps[] = null;
             }
