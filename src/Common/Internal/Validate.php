@@ -76,11 +76,12 @@ class Validate
      * Throws exception if the provided variable type is not boolean.
      *
      * @param mixed $var variable to check against.
-     * @param $name
+     * @param string $name
      */
     public static function isBoolean($var, $name)
     {
         (bool) $var;
+        $name;
     }
 
     /**
@@ -176,6 +177,7 @@ class Validate
         if (gettype($date) != 'object' || get_class($date) != 'DateTime') {
             throw new InvalidArgumentTypeException('DateTime');
         }
+        $name;
     }
 
     /**
@@ -286,6 +288,7 @@ class Validate
         if ($isValid) {
             return true;
         } else {
+            $name;
             throw new \RuntimeException(
                 sprintf(Resources::INVALID_CONFIG_URI, $uri)
             );

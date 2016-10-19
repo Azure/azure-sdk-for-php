@@ -494,7 +494,7 @@ class BrokerProperties
     /**
      * Gets scheduled enqueue time UTC. 
      * 
-     * @return string
+     * @return \DateTime
      */
     public function getScheduledEnqueueTimeUtc()
     {
@@ -504,9 +504,9 @@ class BrokerProperties
     /**
      * Sets scheduled enqueue time UTC. 
      * 
-     * @param string $scheduledEnqueueTimeUtc The scheduled enqueue time. 
+     * @param \DateTime $scheduledEnqueueTimeUtc The scheduled enqueue time.
      */
-    public function setScheduledEnqueueTimeUtc($scheduledEnqueueTimeUtc)
+    public function setScheduledEnqueueTimeUtc(\DateTime $scheduledEnqueueTimeUtc)
     {
         $this->_scheduledEnqueueTimeUtc = $scheduledEnqueueTimeUtc;
     }

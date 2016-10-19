@@ -71,7 +71,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         // Setup
         $key = 10;
         $expected = 6;
-        $data = array(10, 20, 30);
+        $data = [10, 20, 30];
 
         // Test
         $actual = Utilities::tryGetValue($data, $key, $expected);
@@ -86,7 +86,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $key = 10;
-        $data = array(10, 20, 30);
+        $data = [10, 20, 30];
 
         // Test
         $actual = Utilities::tryGetValue($data, $key);
@@ -101,7 +101,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $array = [];
-        $array['a1'] = array();
+        $array['a1'] = [];
         $array['a2'] = 'value1';
         $array['a1']['b1'] = [];
         $array['a1']['b2'] = 'value2';

@@ -431,7 +431,7 @@ class BrokeredMessage
     /**
      * Gets the scheduled enqueue time. 
      * 
-     * @return string
+     * @return \DateTime
      */
     public function getScheduledEnqueueTimeUtc()
     {
@@ -441,9 +441,9 @@ class BrokeredMessage
     /**
      * Sets the scheduled enqueue time. 
      * 
-     * @param string $scheduledEnqueueTime The date/time of the message.
+     * @param \DateTime $scheduledEnqueueTime The date/time of the message.
      */
-    public function setScheduledEnqueueTimeUtc($scheduledEnqueueTime)
+    public function setScheduledEnqueueTimeUtc(\DateTime $scheduledEnqueueTime)
     {
         $this->_brokerProperties->setScheduledEnqueueTimeUtc($scheduledEnqueueTime);
     }

@@ -109,7 +109,7 @@ class Utilities
      *
      * @static
      */
-    public static function addIfNotEmpty($key, $value, &$array)
+    public static function addIfNotEmpty($key, $value, array &$array = null)
     {
         if (!is_null($array)) {
             Validate::isArray($array, 'array');

@@ -484,7 +484,7 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     public function testGetSetScheduledEnqueueTimeUtc()
     {
         // Setup
-        $expected = 'testScheduledEnqueueTimeUtc';
+        $expected = new \DateTime();
         $brokerProperties = new BrokerProperties();
 
         // Test

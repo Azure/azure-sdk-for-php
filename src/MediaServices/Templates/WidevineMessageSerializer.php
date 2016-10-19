@@ -25,8 +25,6 @@
 
 namespace WindowsAzure\MediaServices\Templates;
 
-use WindowsAzure\Common\Internal\Validate;
-
 /**
  * Represents WidevineMessageSerializer helper class used in media services.
  *
@@ -51,8 +49,6 @@ class WidevineMessageSerializer
      */
     public static function serialize($template)
     {
-        Validate::isA($template, 'WindowsAzure\MediaServices\Templates\WidevineMessage', 'template');
-
         return json_encode($template);
     }
 

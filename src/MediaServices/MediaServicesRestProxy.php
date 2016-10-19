@@ -193,9 +193,6 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      */
     protected function getPropertiesFromAtomEntry(Entry $entry)
     {
-        Validate::notNull($entry, 'entry');
-        Validate::isA($entry, 'WindowsAzure\Common\Internal\Atom\Entry', 'entry');
-
         $result = [];
         $content = $entry->getContent();
         if (!empty($content)) {
@@ -620,8 +617,6 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      */
     public function updateAsset(Asset $asset)
     {
-        Validate::isA($asset, 'WindowsAzure\MediaServices\Models\Asset', 'asset');
-
         $this->_updateEntity($asset, "Assets('{$asset->getId()}')");
     }
 
@@ -1243,13 +1238,14 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Create a job HTTP call context.
      *
-     * @param Job   $job         Job data
-     * @param array $inputAssets Input assets list
+     * @param Job     $job         Job data
+     * @param Asset[] $inputAssets Input assets list
      *
      * @return HttpCallContext
      */
     private function _getCreateEmptyJobContext(Job $job, array $inputAssets)
     {
+        /** @var AtomLink[] $atomLinks */
         $atomLinks = [];
         foreach ($inputAssets as $inputAsset) {
             Validate::isA(
@@ -1289,8 +1285,6 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      */
     private function _getCreateTaskContext(Task $task)
     {
-        Validate::isA($task, 'WindowsAzure\MediaServices\Models\Task', 'task');
-
         $result = new HttpCallContext();
         $result->setMethod(Resources::HTTP_POST);
         $result->setHeaders($this->_batchHeaders);
@@ -1564,12 +1558,6 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      */
     private function _getCreateEmptyJobTemplateContext(JobTemplate $jobTemplate)
     {
-        Validate::isA(
-            $jobTemplate,
-            'WindowsAzure\MediaServices\Models\JobTemplate',
-            'jobTemplate'
-        );
-
         $result = new HttpCallContext();
         $result->setMethod(Resources::HTTP_POST);
         $result->setHeaders($this->_batchHeaders);
@@ -1590,12 +1578,6 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      */
     private function _getCreateTaskTemplateContext(TaskTemplate $taskTemplate)
     {
-        Validate::isA(
-            $taskTemplate,
-            'WindowsAzure\MediaServices\Models\TaskTemplate',
-            'taskTemplate'
-        );
-
         $result = new HttpCallContext();
         $result->setMethod(Resources::HTTP_POST);
         $result->setHeaders($this->_batchHeaders);
@@ -2325,9 +2307,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function createContentKeyAuthorizationPolicy(
         ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy)
     {
-        Validate::isA($contentKeyAuthorizationPolicy, 'WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy', 'contentKeyAuthorizationPolicy');
-
-        return ContentKeyAuthorizationPolicy::createFromOptions($this->_createEntity($contentKeyAuthorizationPolicy, 'ContentKeyAuthorizationPolicies'));
+        return ContentKeyAuthorizationPolicy::createFromOptions(
+            $this->_createEntity($contentKeyAuthorizationPolicy, 'ContentKeyAuthorizationPolicies')
+        );
     }
 
     /**
@@ -2449,9 +2431,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function updateContentKeyAuthorizationPolicyOption(
         ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions)
     {
-        Validate::isA($contentKeyAuthorizationOptions, 'WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption', 'contentKeyAuthorizationOptions');
-
-        $this->_updateEntity($contentKeyAuthorizationOptions, "ContentKeyAuthorizationPolicyOptions('{$contentKeyAuthorizationOptions->getId()}')");
+        $this->_updateEntity(
+            $contentKeyAuthorizationOptions,
+            "ContentKeyAuthorizationPolicyOptions('{$contentKeyAuthorizationOptions->getId()}')"
+        );
     }
 
     /**
@@ -2633,8 +2616,6 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      */
     public function updateAssetDeliveryPolicy(AssetDeliveryPolicy $assetDeliveryPolicy)
     {
-        Validate::isA($assetDeliveryPolicy, 'WindowsAzure\MediaServices\Models\AssetDeliveryPolicy', 'assetDeliveryPolicy');
-
         $this->_updateEntity($assetDeliveryPolicy, "AssetDeliveryPolicies('{$assetDeliveryPolicy->getId()}')");
     }
 
@@ -2828,7 +2809,6 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      */
     public function updateEncodingReservedUnit(EncodingReservedUnit $encodingReservedUnit)
     {
-        Validate::isA($encodingReservedUnit, 'WindowsAzure\MediaServices\Models\EncodingReservedUnit', 'encodingReservedUnit');
         $accountID = $encodingReservedUnit->getAccountId();
         $encodingReservedUnit->setAccountId(null); // never send account Id
         $this->_updateEntity($encodingReservedUnit, "EncodingReservedUnitTypes(guid'{$accountID}')");
