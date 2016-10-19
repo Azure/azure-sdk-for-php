@@ -101,7 +101,7 @@ class WrapTokenManager
     }
 
     /** 
-     * Gets WRAP access token with sepcified target Uri. 
+     * Gets WRAP access token with specified target Uri.
      * 
      * @param string $targetUri The target Uri of the WRAP access Token. 
      * 
@@ -164,7 +164,6 @@ class WrapTokenManager
     {
         $targetUriComponents = parse_url($targetUri);
 
-        $scopeUri = Resources::EMPTY_STRING;
         $authority = Resources::EMPTY_STRING;
         if ($this->_containsValidAuthority($targetUriComponents)) {
             $authority = $this->_createAuthority($targetUriComponents);

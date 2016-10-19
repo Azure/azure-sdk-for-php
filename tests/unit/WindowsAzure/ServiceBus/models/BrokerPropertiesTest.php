@@ -316,14 +316,14 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     public function testGetSetLockedUntilUtc()
     {
         // Setup
-        $expected = 'testLockedUntilUtc';
+        $expected = new \DateTime();
         $brokerProperties = new BrokerProperties();
 
         // Test
         $brokerProperties->setLockedUntilUtc($expected);
         $actual = $brokerProperties->getLockedUntilUtc();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
             $expected,
             $actual
@@ -484,7 +484,7 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
     public function testGetSetScheduledEnqueueTimeUtc()
     {
         // Setup
-        $expected = 'testScheduledEnqueueTimeUtc';
+        $expected = new \DateTime();
         $brokerProperties = new BrokerProperties();
 
         // Test

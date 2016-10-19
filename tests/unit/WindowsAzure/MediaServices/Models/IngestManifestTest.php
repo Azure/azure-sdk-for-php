@@ -51,11 +51,11 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
         // Setup
         $name = 'IngestManifest Name';
         $blobUri = 'http://blob-uri.com';
-        $statistics = array(
+        $statistics = [
                 'FinishedFilesCount' => 2,
-        );
+        ];
         $storageName = 'Storage Account Name-4236';
-        $options = array(
+        $options = [
                 'Id' => '46-jhgjh-589',
                 'State' => IngestManifest::STATE_ACTIVE,
                 'Created' => '2013-12-18',
@@ -64,7 +64,7 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
                 'BlobStorageUriForUpload' => $blobUri,
                 'Statistics' => $statistics,
                 'StorageAccountName' => $storageName,
-        );
+        ];
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
 
@@ -91,12 +91,12 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $statistics = array(
+        $statistics = [
                 'FinishedFilesCount' => 2,
-        );
-        $options = array(
+        ];
+        $options = [
                 'Statistics' => $statistics,
-        );
+        ];
         $ingestManifest = IngestManifest::createFromOptions($options);
 
         // Test
@@ -114,9 +114,9 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $blobUri = 'http://blob-uri.com';
-        $options = array(
+        $options = [
                 'BlobStorageUriForUpload' => $blobUri,
-        );
+        ];
         $ingestManifest = IngestManifest::createFromOptions($options);
 
         // Test
@@ -134,9 +134,9 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $storageName = 'Storage-Account-Name-45236';
-        $options = array(
+        $options = [
                 'StorageAccountName' => $storageName,
-        );
+        ];
         $ingestManifest = IngestManifest::createFromOptions($options);
 
         // Test
@@ -172,9 +172,9 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'LastModified' => '2013-12-18',
-        );
+        ];
         $modified = new \Datetime($options['LastModified']);
         $ingestManifest = IngestManifest::createFromOptions($options);
 
@@ -192,9 +192,9 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Created' => '2013-12-18',
-        );
+        ];
         $created = new \Datetime($options['Created']);
         $ingestManifest = IngestManifest::createFromOptions($options);
 
@@ -213,9 +213,9 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $state = IngestManifest::STATE_ACTIVE;
-        $options = array(
+        $options = [
                 'State' => $state,
-        );
+        ];
         $ingestManifest = IngestManifest::createFromOptions($options);
 
         // Test
@@ -233,9 +233,9 @@ class IngestManifestTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $id = 'ingest-id-258';
-        $options = array(
+        $options = [
                 'Id' => $id,
-        );
+        ];
         $ingestManifest = IngestManifest::createFromOptions($options);
 
         // Test

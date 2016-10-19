@@ -54,7 +54,7 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
         // Setup
         $contentKeyId = 'content-key-id-12563';
         $aesKey = '7868CC14AE5FA7E974FAFFAF072DDE2D250334E9D647C086D088C621B28F9F28';
-        $options = array(
+        $options = [
                 'Id' => $contentKeyId,
                 'Created' => '2013-02-26',
                 'LastModified' => '2013-02-26',
@@ -65,7 +65,7 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
                 'ProtectionKeyType' => ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT,
                 'Checksum' => 'checksum-of-content-key',
                 'AuthorizationPolicyId' => 'authorization-policy-id',
-        );
+        ];
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
 
@@ -206,9 +206,9 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Created' => '2013-02-26',
-        );
+        ];
         $created = new \Datetime($options['Created']);
         $contentKey = ContentKey::createFromOptions($options);
 
@@ -226,9 +226,9 @@ class ContentKeyTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'LastModified' => '2013-02-26',
-        );
+        ];
         $modified = new \Datetime($options['LastModified']);
         $contentKey = ContentKey::createFromOptions($options);
 

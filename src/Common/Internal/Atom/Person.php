@@ -83,7 +83,6 @@ class Person extends AtomBase
     public function parseXml($xmlString)
     {
         $personXml = simplexml_load_string($xmlString);
-        $attributes = $personXml->attributes();
         $personArray = (array) $personXml;
 
         if (array_key_exists('name', $personArray)) {

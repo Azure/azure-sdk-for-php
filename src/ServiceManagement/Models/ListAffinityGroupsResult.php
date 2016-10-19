@@ -29,7 +29,7 @@ use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * The result of calling listAfinityGroups API.
+ * The result of calling listAffinityGroups API.
  *
  * @category  Microsoft
  *

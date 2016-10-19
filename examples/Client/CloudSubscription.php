@@ -26,6 +26,7 @@
 namespace Client;
 
 use WindowsAzure\Common\ServicesBuilder;
+use WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 
@@ -134,13 +135,11 @@ class CloudSubscription
      * Blocks asynchronous operation until it succeeds. Throws exception if the
      * operation failed.
      *
-     * @param string $requestInfo The asynchronous operation request AsynchronousOperationResult.
+     * @param AsynchronousOperationResult $requestInfo The asynchronous operation request AsynchronousOperationResult.
      *
-     * @throws WindowsAzure\Common\ServiceException
-     *
-     * @return none
+     * @throws \WindowsAzure\Common\ServiceException
      */
-    private function _blockUntilAsyncFinish($requestInfo)
+    private function _blockUntilAsyncFinish(AsynchronousOperationResult $requestInfo)
     {
         $status = null;
 
@@ -159,8 +158,6 @@ class CloudSubscription
      * Deletes a storage service from subscription.
      *
      * @param string $name The storage service name.
-     *
-     * @return none
      */
     public function deleteStorageService($name)
     {

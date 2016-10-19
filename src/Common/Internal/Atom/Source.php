@@ -48,7 +48,7 @@ class Source extends AtomBase
     /**
      * The author the source. 
      * 
-     * @var array
+     * @var Person[]
      */
     protected $author;
 
@@ -155,11 +155,10 @@ class Source extends AtomBase
     public function parseXml($xmlString)
     {
         $sourceXml = new \SimpleXMLElement($xmlString);
-        $attributes = $sourceXml->attributes();
         $sourceArray = (array) $sourceXml;
 
         if (array_key_exists(Resources::AUTHOR, $sourceArray)) {
-            $this->content = $this->processAuthorNode($sourceArray);
+            $this->author = $this->processAuthorNode($sourceArray);
         }
 
         if (array_key_exists(Resources::CATEGORY, $sourceArray)) {

@@ -48,16 +48,16 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $numberofInputAssets = 3;
-        $numberofOutputAssets = 4;
+        $numberOfInputAssets = 3;
+        $numberOfOutputAssets = 4;
 
         // Test
-        $taskTempl = new TaskTemplate($numberofInputAssets, $numberofOutputAssets);
+        $taskTemplate = new TaskTemplate($numberOfInputAssets, $numberOfOutputAssets);
 
         // Assert
-        $this->assertEquals($numberofInputAssets, $taskTempl->getNumberofInputAssets());
-        $this->assertEquals($numberofOutputAssets, $taskTempl->getNumberofOutputAssets());
-        $this->assertContains('nb:ttid:UUID:', $taskTempl->getId());
+        $this->assertEquals($numberOfInputAssets, $taskTemplate->getNumberofInputAssets());
+        $this->assertEquals($numberOfOutputAssets, $taskTemplate->getNumberofOutputAssets());
+        $this->assertContains('nb:ttid:UUID:', $taskTemplate->getId());
     }
 
     /**
@@ -68,7 +68,7 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Id' => 'jdfghrf78',
                 'Configuration' => 'some configuration',
                 'Created' => '2013-11-27',
@@ -83,7 +83,7 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
                 'EncryptionScheme' => 'encryption scheme',
                 'EncryptionVersion' => 'version 2.1.1',
                 'InitializationVector' => 'Initialization Vector',
-        );
+        ];
         $created = new \Datetime($options['Created']);
         $modified = new \Datetime($options['LastModified']);
 
@@ -114,11 +114,11 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Id' => 'jdfghrf78',
                 'NumberofInputAssets' => 4,
                 'NumberofOutputAssets' => 3,
-        );
+        ];
         $task = TaskTemplate::createFromOptions($options);
 
         // Test
@@ -136,9 +136,9 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $numberofInputAssets = 3;
-        $numberofOutputAssets = 4;
-        $task = new TaskTemplate($numberofInputAssets, $numberofOutputAssets);
+        $numberOfInputAssets = 3;
+        $numberOfOutputAssets = 4;
+        $task = new TaskTemplate($numberOfInputAssets, $numberOfOutputAssets);
         $config = 'configuration of task template';
 
         // Test
@@ -157,17 +157,17 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $numberofInputAssets = 3;
-        $numberofOutputAssets = 4;
-        $task = new TaskTemplate($numberofInputAssets, $numberofOutputAssets);
-        $mediaProcId = 'kdfjg57';
+        $numberOfInputAssets = 3;
+        $numberOfOutputAssets = 4;
+        $task = new TaskTemplate($numberOfInputAssets, $numberOfOutputAssets);
+        $mediaProcessorId = 'kdfjg57';
 
         // Test
-        $task->setMediaProcessorId($mediaProcId);
+        $task->setMediaProcessorId($mediaProcessorId);
         $result = $task->getMediaProcessorId();
 
         // Assert
-        $this->assertEquals($mediaProcId, $result);
+        $this->assertEquals($mediaProcessorId, $result);
     }
 
     /**
@@ -178,9 +178,9 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $numberofInputAssets = 3;
-        $numberofOutputAssets = 4;
-        $task = new TaskTemplate($numberofInputAssets, $numberofOutputAssets);
+        $numberOfInputAssets = 3;
+        $numberOfOutputAssets = 4;
+        $task = new TaskTemplate($numberOfInputAssets, $numberOfOutputAssets);
         $name = 'task name';
 
         // Test
@@ -198,12 +198,12 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'NumberofInputAssets' => 4,
                 'NumberofOutputAssets' => 3,
                 'Options' => 42,
 
-        );
+        ];
         $task = TaskTemplate::createFromOptions($options);
 
         // Test
@@ -221,9 +221,9 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $numberofInputAssets = 3;
-        $numberofOutputAssets = 4;
-        $task = new TaskTemplate($numberofInputAssets, $numberofOutputAssets);
+        $numberOfInputAssets = 3;
+        $numberOfOutputAssets = 4;
+        $task = new TaskTemplate($numberOfInputAssets, $numberOfOutputAssets);
         $encrKeyId = '45key89';
 
         // Test
@@ -242,9 +242,9 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $numberofInputAssets = 3;
-        $numberofOutputAssets = 4;
-        $task = new TaskTemplate($numberofInputAssets, $numberofOutputAssets);
+        $numberOfInputAssets = 3;
+        $numberOfOutputAssets = 4;
+        $task = new TaskTemplate($numberOfInputAssets, $numberOfOutputAssets);
         $encrScheme = 'encryption scheme';
 
         // Test
@@ -263,9 +263,9 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $numberofInputAssets = 3;
-        $numberofOutputAssets = 4;
-        $task = new TaskTemplate($numberofInputAssets, $numberofOutputAssets);
+        $numberOfInputAssets = 3;
+        $numberOfOutputAssets = 4;
+        $task = new TaskTemplate($numberOfInputAssets, $numberOfOutputAssets);
         $encrVersion = '1.1.5';
 
         // Test
@@ -284,9 +284,9 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $numberofInputAssets = 3;
-        $numberofOutputAssets = 4;
-        $task = new TaskTemplate($numberofInputAssets, $numberofOutputAssets);
+        $numberOfInputAssets = 3;
+        $numberOfOutputAssets = 4;
+        $task = new TaskTemplate($numberOfInputAssets, $numberOfOutputAssets);
         $initVector = 'initialization vector';
 
         // Test
@@ -304,11 +304,11 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'NumberofInputAssets' => 4,
                 'NumberofOutputAssets' => 3,
                 'Created' => '2013-11-27',
-        );
+        ];
         $task = TaskTemplate::createFromOptions($options);
         $created = new \Datetime($options['Created']);
 
@@ -326,11 +326,11 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'NumberofInputAssets' => 4,
                 'NumberofOutputAssets' => 3,
                 'LastModified' => '2013-11-27',
-        );
+        ];
         $task = TaskTemplate::createFromOptions($options);
         $modified = new \Datetime($options['LastModified']);
 
@@ -349,9 +349,9 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $numberofInputAssets = 3;
-        $numberofOutputAssets = 4;
-        $task = new TaskTemplate($numberofInputAssets, $numberofOutputAssets);
+        $numberOfInputAssets = 3;
+        $numberOfOutputAssets = 4;
+        $task = new TaskTemplate($numberOfInputAssets, $numberOfOutputAssets);
         $description = 'Description of task template';
 
         // Test
@@ -366,41 +366,41 @@ class TaskTemplateTest extends \PHPUnit_Framework_TestCase
      * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getNumberofInputAssets
      * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::setNumberofInputAssets
      */
-    public function testGetSetNumberofInputAssets()
+    public function testGetSetNumberOfInputAssets()
     {
 
         // Setup
-        $numberofInputAssets = 3;
-        $numberofOutputAssets = 4;
-        $task = new TaskTemplate($numberofInputAssets, $numberofOutputAssets);
-        $numberofInputAssets = 6;
+        $numberOfInputAssets = 3;
+        $numberOfOutputAssets = 4;
+        $task = new TaskTemplate($numberOfInputAssets, $numberOfOutputAssets);
+        $numberOfInputAssets = 6;
 
         // Test
-        $task->setNumberofInputAssets($numberofInputAssets);
+        $task->setNumberofInputAssets($numberOfInputAssets);
         $result = $task->getNumberofInputAssets();
 
         // Assert
-        $this->assertEquals($numberofInputAssets, $result);
+        $this->assertEquals($numberOfInputAssets, $result);
     }
 
     /**
      * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::getNumberofOutputAssets
      * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::setNumberofOutputAssets
      */
-    public function testGetSetNumberofOutputAssets()
+    public function testGetSetNumberOfOutputAssets()
     {
 
         // Setup
-        $numberofInputAssets = 3;
-        $numberofOutputAssets = 4;
-        $task = new TaskTemplate($numberofInputAssets, $numberofOutputAssets);
-        $numberofOutputAssets = 6;
+        $numberOfInputAssets = 3;
+        $numberOfOutputAssets = 4;
+        $task = new TaskTemplate($numberOfInputAssets, $numberOfOutputAssets);
+        $numberOfOutputAssets = 6;
 
         // Test
-        $task->setNumberofOutputAssets($numberofOutputAssets);
+        $task->setNumberofOutputAssets($numberOfOutputAssets);
         $result = $task->getNumberofOutputAssets();
 
         // Assert
-        $this->assertEquals($numberofOutputAssets, $result);
+        $this->assertEquals($numberOfOutputAssets, $result);
     }
 }

@@ -48,7 +48,6 @@ use WindowsAzure\Common\Internal\Atom\Source;
 class EntryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers \WindowsAzure\Common\Internal\Atom\Entry::__construct
      */
     public function testEntryConstructor()
     {
@@ -73,7 +72,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry();
 
         // Test
-        $entry->setAuthor(array($expected));
+        $entry->setAuthor([$expected]);
         $actual = $entry->getAuthor()[0];
 
         // Assert
@@ -95,8 +94,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry();
 
         // Test
-        $entry->setCategory($expected);
-        $actual = $entry->getCategory();
+        $entry->setCategory([$expected]);
+        $actual = $entry->getCategory()[0];
 
         // Assert
         $this->assertEquals(
@@ -367,7 +366,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     public function testGetSetAttributes()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $expected['testKey'] = 'testValue';
         $entry = new Entry();
 
@@ -393,7 +392,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry();
 
         // Test
-        $entry->setAuthor(array($expected));
+        $entry->setAuthor([$expected]);
         $actual = $entry->getAuthor()[0];
 
         // Assert
@@ -414,8 +413,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry();
 
         // Test
-        $entry->setCategory($expected);
-        $actual = $entry->getCategory();
+        $entry->setCategory([new Category($expected)]);
+        $actual = $entry->getCategory()[0]->getUndefinedContent();
 
         // Assert
         $this->assertEquals(

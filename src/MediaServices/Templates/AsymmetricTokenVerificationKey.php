@@ -48,13 +48,6 @@ class AsymmetricTokenVerificationKey extends TokenVerificationKey
     protected $_rawBody;
 
     /**
-     * Create AsymmetricTokenVerificationKey.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Get "AsymmetricTokenVerificationKey RawBody".
      *
      * @return string RawBody

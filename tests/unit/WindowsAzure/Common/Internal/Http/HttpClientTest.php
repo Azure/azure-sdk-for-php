@@ -138,7 +138,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $header2 = TestResources::HEADER2;
         $value1 = TestResources::HEADER1_VALUE;
         $value2 = TestResources::HEADER2_VALUE;
-        $headers = array($header1 => $value1, $header2 => $value2);
+        $headers = [$header1 => $value1, $header2 => $value2];
 
         // Test
         $channel->setHeaders($headers);
@@ -238,7 +238,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $channel->setExpectedStatusCode('200');
         
         // Test
-        $response = $channel->sendAndGetResponse(array(), $url);
+        $response = $channel->sendAndGetResponse([], $url);
 
         // Assert
         $this->assertInstanceOf('\HTTP_Request2_Response', $response);
@@ -255,7 +255,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $channel->setExpectedStatusCode('200');
 
         // Test
-        $response = $channel->send(array(), $url);
+        $response = $channel->send([], $url);
 
         // Assert
         $this->assertTrue(isset($response));
@@ -275,7 +275,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(get_class(new ServiceException('405')));
 
         // Test
-        $channel->send(array(), $url);
+        $channel->send([], $url);
     }
 
     /**
@@ -290,7 +290,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $expectedHeader = TestResources::HEADER1;
         $expectedResponseSubstring = TestResources::HEADER1_VALUE;
         $filter = new SimpleFilterMock($expectedHeader, $expectedResponseSubstring);
-        $filters = array($filter);
+        $filters = [$filter];
 
         // Test
         $response = $channel->send($filters, $url);
@@ -316,7 +316,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $expectedResponseSubstring2 = TestResources::HEADER2_VALUE;
         $filter1 = new SimpleFilterMock($expectedHeader1, $expectedResponseSubstring1);
         $filter2 = new SimpleFilterMock($expectedHeader2, $expectedResponseSubstring2);
-        $filters = array($filter1, $filter2);
+        $filters = [$filter1, $filter2];
 
         // Test
         $response = $channel->send($filters, $url);
@@ -341,7 +341,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(get_class(new ServiceException('200')));
 
         // Test
-        $channel->send(array(), $url);
+        $channel->send([], $url);
     }
 
     /**
@@ -367,7 +367,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $channel = new HttpClient();
-        $codes = array('200', '201', '202');
+        $codes = ['200', '201', '202'];
 
         // Test
         $channel->setExpectedStatusCode($codes);
@@ -383,7 +383,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $channel = new HttpClient();
-        $codes = array('200', '201', '202');
+        $codes = ['200', '201', '202'];
         $channel->setExpectedStatusCode($codes);
 
         // Test
@@ -489,6 +489,6 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
         // Setup
         $this->setExpectedException(get_class(new ServiceException('200')));
 
-        HttpClient::throwIfError(200, null, null, array(10));
+        HttpClient::throwIfError(200, null, null, [10]);
     }
 }

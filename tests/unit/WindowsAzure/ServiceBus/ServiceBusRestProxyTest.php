@@ -394,7 +394,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
     public function testContentTypePassesThrough()
     {
         // Setup
-        $queueName = 'testContnetTypePassesThrough';
+        $queueName = 'testContentTypePassesThrough';
         $queueDescription = new QueueDescription();
         $queueInfo = new QueueInfo($queueName, $queueDescription);
         $this->safeDeleteQueue($queueName);
@@ -999,7 +999,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $expectedTestDoubleValue = 3.14159;
         $expectedTestBooleanValue = true;
         $expectedTestBooleanFalseValue = false;
-        $expectedTestArrayValue = array(2, 3, 5, 7);
+        $expectedTestArrayValue = [2, 3, 5, 7];
 
         $this->safeDeleteQueue($queueName);
         $this->createQueue($queueInfo);

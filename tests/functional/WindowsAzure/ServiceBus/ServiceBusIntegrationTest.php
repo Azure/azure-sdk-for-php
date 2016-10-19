@@ -591,27 +591,27 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         // Assert
         $this->assertTrue(
                 $ruleOne->getFilter()
-                instanceof \WindowsAzure\ServiceBus\Models\CorrelationFilter,
+                instanceof CorrelationFilter,
                 '$ruleOne->getFilter() instanceof CorrelationFilter');
         $this->assertTrue(
                 $ruleTwo->getFilter()
-                instanceof \WindowsAzure\ServiceBus\Models\TrueFilter,
+                instanceof TrueFilter,
                 '$ruleTwo->getFilter() instanceof TrueFilter');
         $this->assertTrue(
                 $ruleThree->getFilter()
-                instanceof \WindowsAzure\ServiceBus\Models\FalseFilter,
+                instanceof FalseFilter,
                 '$ruleThree->getFilter() instanceof FalseFilter');
         $this->assertTrue(
                 $ruleFour->getAction()
-                instanceof \WindowsAzure\ServiceBus\Models\EmptyRuleAction,
+                instanceof EmptyRuleAction,
                 '$ruleFour->getAction() instanceof EmptyRuleAction');
         $this->assertTrue(
                 $ruleFive->getAction()
-                instanceof \WindowsAzure\ServiceBus\Models\SqlRuleAction,
+                instanceof SqlRuleAction,
                 '$ruleFive->getAction() instanceof SqlRuleAction');
         $this->assertTrue(
                 $ruleSix->getFilter()
-                instanceof \WindowsAzure\ServiceBus\Models\SqlFilter,
+                instanceof SqlFilter,
                 '$ruleSix->getFilter() instanceof SqlFilter');
     }
 
@@ -641,8 +641,8 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
 
 class CustomServiceFilter implements IServiceFilter
 {
-    public $requests = array();
-    public $responses = array();
+    public $requests = [];
+    public $responses = [];
 
     public function handleRequest(IHttpClient $request)
     {

@@ -58,8 +58,8 @@ class BrokerPropertiesMapperTest extends ServiceBusRestProxyTestBase
     public function testDeserializingAllPossibleValues()
     {
         // Arrange
-        $schedTimeUtc = new \DateTime('Sun, 06 Nov 1994 08:49:37 GMT');
-        $schedTimeUtc->setTimezone(new \DateTimeZone('UTC'));
+        $scheduledTimeUtc = new \DateTime('Sun, 06 Nov 1994 08:49:37 GMT');
+        $scheduledTimeUtc->setTimezone(new \DateTimeZone('UTC'));
 
         $lockedUntilUtc = new \DateTime('Fri, 14 Oct 2011 12:34:56 GMT');
         $lockedUntilUtc->setTimezone(new \DateTimeZone('UTC'));
@@ -93,9 +93,9 @@ class BrokerPropertiesMapperTest extends ServiceBusRestProxyTestBase
         $lockedUntilDelta = BlobServiceFunctionalTestData::diffInTotalSeconds(
                 $properties->getLockedUntilUtc(),
                 $lockedUntilUtc);
-        $schedTimeDelta = BlobServiceFunctionalTestData::diffInTotalSeconds(
+        $scheduledTimeDelta = BlobServiceFunctionalTestData::diffInTotalSeconds(
                 $properties->getScheduledEnqueueTimeUtc(),
-                $schedTimeUtc);
+                $scheduledTimeUtc);
 
         $this->assertEquals('corid', $properties->getCorrelationId(), '$properties->getCorrelationId()');
         $this->assertEquals('sesid', $properties->getSessionId(), '$properties->getSessionId()');
@@ -108,7 +108,7 @@ class BrokerPropertiesMapperTest extends ServiceBusRestProxyTestBase
         $this->assertEquals(7, $properties->getSequenceNumber(), '$properties->getSequenceNumber()');
         $this->assertEquals(8.123, $properties->getTimeToLive(), .001);
         $this->assertEquals('to', $properties->getTo(), '$properties->getTo()');
-        $this->assertTrue(abs($schedTimeDelta) < 2000, 'abs($schedTimeDelta) < 2000');
+        $this->assertTrue(abs($scheduledTimeDelta) < 2000, 'abs($scheduledTimeDelta) < 2000');
         $this->assertEquals('reptosesid', $properties->getReplyToSessionId(), '$properties->getReplyToSessionId()');
         $this->assertEquals('mesloc', $properties->getMessageLocation(), '$properties->getMessageLocation()');
         $this->assertEquals('locloc', $properties->getLockLocation(), '$properties->getLockLocation()');

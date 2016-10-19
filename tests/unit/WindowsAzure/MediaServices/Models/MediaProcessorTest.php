@@ -49,25 +49,25 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Id' => 'sfgsfg34',
                 'Name' => 'Some Name',
                 'Description' => 'Description of media processor',
                 'Sku' => '456-123-789',
                 'Vendor' => 'Vendors name',
                 'Version' => '3.6.5',
-        );
+        ];
 
         // Test
-        $mediaProc = MediaProcessor::createFromOptions($options);
+        $mediaProcessor = MediaProcessor::createFromOptions($options);
 
         // Assert
-        $this->assertEquals($options['Id'], $mediaProc->getId());
-        $this->assertEquals($options['Name'], $mediaProc->getName());
-        $this->assertEquals($options['Description'], $mediaProc->getDescription());
-        $this->assertEquals($options['Sku'], $mediaProc->getSku());
-        $this->assertEquals($options['Vendor'], $mediaProc->getVendor());
-        $this->assertEquals($options['Version'], $mediaProc->getVersion());
+        $this->assertEquals($options['Id'], $mediaProcessor->getId());
+        $this->assertEquals($options['Name'], $mediaProcessor->getName());
+        $this->assertEquals($options['Description'], $mediaProcessor->getDescription());
+        $this->assertEquals($options['Sku'], $mediaProcessor->getSku());
+        $this->assertEquals($options['Vendor'], $mediaProcessor->getVendor());
+        $this->assertEquals($options['Version'], $mediaProcessor->getVersion());
     }
 
     /**
@@ -78,13 +78,13 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Id' => 'sfgsfg34',
-        );
-        $mediaProc = MediaProcessor::createFromOptions($options);
+        ];
+        $mediaProcessor = MediaProcessor::createFromOptions($options);
 
         // Test
-        $result = $mediaProc->getId();
+        $result = $mediaProcessor->getId();
 
         // Assert
         $this->assertEquals($options['Id'], $result);
@@ -97,13 +97,13 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Name' => 'Some Name',
-        );
-        $mediaProc = MediaProcessor::createFromOptions($options);
+        ];
+        $mediaProcessor = MediaProcessor::createFromOptions($options);
 
         // Test
-        $result = $mediaProc->getName();
+        $result = $mediaProcessor->getName();
 
         // Assert
         $this->assertEquals($options['Name'], $result);
@@ -116,13 +116,13 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Description' => 'Description of media processor',
-        );
-        $mediaProc = MediaProcessor::createFromOptions($options);
+        ];
+        $mediaProcessor = MediaProcessor::createFromOptions($options);
 
         // Test
-        $result = $mediaProc->getDescription();
+        $result = $mediaProcessor->getDescription();
 
         // Assert
         $this->assertEquals($options['Description'], $result);
@@ -135,13 +135,13 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Sku' => '123-456-789',
-        );
-        $mediaProc = MediaProcessor::createFromOptions($options);
+        ];
+        $mediaProcessor = MediaProcessor::createFromOptions($options);
 
         // Test
-        $result = $mediaProc->getSku();
+        $result = $mediaProcessor->getSku();
 
         // Assert
         $this->assertEquals($options['Sku'], $result);
@@ -154,13 +154,13 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Vendor' => 'Vendors name',
-        );
-        $mediaProc = MediaProcessor::createFromOptions($options);
+        ];
+        $mediaProcessor = MediaProcessor::createFromOptions($options);
 
         // Test
-        $result = $mediaProc->getVendor();
+        $result = $mediaProcessor->getVendor();
 
         // Assert
         $this->assertEquals($options['Vendor'], $result);
@@ -173,13 +173,13 @@ class MediaProcessorTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Version' => '3.6.5',
-        );
-        $mediaProc = MediaProcessor::createFromOptions($options);
+        ];
+        $mediaProcessor = MediaProcessor::createFromOptions($options);
 
         // Test
-        $result = $mediaProc->getVersion();
+        $result = $mediaProcessor->getVersion();
 
         // Assert
         $this->assertEquals($options['Version'], $result);

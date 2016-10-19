@@ -149,7 +149,7 @@ class MediaServicesLicenseTemplateSerializerTest extends \PHPUnit_Framework_Test
         $template->setResponseCustomData('test custom data');
 
         $licenseTemplate = new PlayReadyLicenseTemplate();
-        $template->setLicenseTemplates(array($licenseTemplate));
+        $template->setLicenseTemplates([$licenseTemplate]);
 
         $licenseTemplate->setLicenseType(PlayReadyLicenseType::PERSISTENT);
         $licenseTemplate->setBeginDate(new \DateTime('now'));

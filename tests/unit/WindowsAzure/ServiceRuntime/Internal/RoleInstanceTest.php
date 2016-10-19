@@ -91,7 +91,7 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetInstanceEndpoints()
     {
-        $instanceEndpoints = array();
+        $instanceEndpoints = [];
 
         // Setup
         $roleInstance = new RoleInstance(null, null, null, $instanceEndpoints);
@@ -107,7 +107,7 @@ class RoleInstanceTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSetRole()
     {
-        $role = new Role(null, array());
+        $role = new Role(null, []);
 
         // Setup
         $roleInstance = new RoleInstance(null, null, null, null);

@@ -88,9 +88,9 @@ class OAuthSchemeTest extends ServiceRestProxyTestBase
         $rest = new OAuthRestProxy($channel, $uri);
 
         // Scheme setup
-        $headers = array();
+        $headers = [];
         $url = Resources::MEDIA_SERVICES_URL;
-        $queryParams = array();
+        $queryParams = [];
         $httpMethod = Resources::HTTP_GET;
 
         // Test
@@ -120,9 +120,9 @@ class OAuthSchemeTest extends ServiceRestProxyTestBase
         $rest = new OAuthRestProxy($channel, $uri);
 
         // Scheme setup
-        $headers = array();
+        $headers = [];
         $url = Resources::MEDIA_SERVICES_URL;
-        $queryParams = array();
+        $queryParams = [];
         $httpMethod = Resources::HTTP_GET;
 
         // Get access token

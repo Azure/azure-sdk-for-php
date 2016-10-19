@@ -176,10 +176,10 @@ class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfiguartionKey
-     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::parseAssetDeliveryPolicyConfiguartionKey
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfigurationKey
+     * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey::parseAssetDeliveryPolicyConfigurationKey
      */
-    public function testStrignifyParseDeliveryPolicyConfiguartionKey()
+    public function testStringifyParseDeliveryPolicyConfigurationKey()
     {
 
         // Setup
@@ -187,8 +187,8 @@ class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
                           AssetDeliveryPolicyConfigurationKey::ENVELOPE_ENCRYPTION_IV_AS_BASE64 => 'base64=', ];
 
         // Test
-        $json = AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfiguartionKey($configuration);
-        $result = AssetDeliveryPolicyConfigurationKey::parseAssetDeliveryPolicyConfiguartionKey($json);
+        $json = AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfigurationKey($configuration);
+        $result = AssetDeliveryPolicyConfigurationKey::parseAssetDeliveryPolicyConfigurationKey($json);
 
         // Assert
         $this->assertEquals($configuration, $result);

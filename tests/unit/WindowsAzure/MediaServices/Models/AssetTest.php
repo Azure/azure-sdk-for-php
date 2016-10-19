@@ -64,10 +64,10 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     {
 
        // Setup
-        $assetArray = array(
+        $assetArray = [
             'Options' => Asset::OPTIONS_NONE,
             'Uri' => 'http://someurl.com/asset',
-        );
+        ];
         $value = Asset::createFromOptions($assetArray);
 
         // Test
@@ -141,10 +141,10 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     {
 
          // Setup
-        $assetArray = array(
+        $assetArray = [
             'Options' => Asset::OPTIONS_NONE,
             'LastModified' => '2013-11-21',
-        );
+        ];
         $modified = new \Datetime($assetArray['LastModified']);
         $value = Asset::createFromOptions($assetArray);
 
@@ -162,10 +162,10 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     {
 
          // Setup
-        $assetArray = array(
+        $assetArray = [
             'Options' => Asset::OPTIONS_NONE,
             'Created' => '2013-11-21',
-        );
+        ];
         $created = new \Datetime($assetArray['Created']);
         $value = Asset::createFromOptions($assetArray);
 
@@ -183,10 +183,10 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $assetArray = array(
+        $assetArray = [
             'Options' => Asset::OPTIONS_NONE,
             'State' => Asset::STATE_PUBLISHED,
-        );
+        ];
         $value = Asset::createFromOptions($assetArray);
 
         // Test
@@ -203,10 +203,10 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     {
 
        // Setup
-        $assetArray = array(
+        $assetArray = [
             'Options' => Asset::OPTIONS_NONE,
             'StorageAccountName' => 'StorageAccountName',
-        );
+        ];
         $value = Asset::createFromOptions($assetArray);
 
         // Test
@@ -223,10 +223,10 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $assetArray = array(
+        $assetArray = [
             'Id' => 'kjgdfg57',
             'Options' => Asset::OPTIONS_NONE,
-        );
+        ];
         $value = Asset::createFromOptions($assetArray);
 
         // Test
@@ -244,7 +244,7 @@ class AssetTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $assetArray = array(
+        $assetArray = [
             'Id' => '1',
             'State' => Asset::STATE_PUBLISHED,
             'Created' => '2013-11-19',
@@ -254,7 +254,7 @@ class AssetTest extends \PHPUnit_Framework_TestCase
             'Options' => Asset::OPTIONS_NONE,
             'Uri' => 'http://en.wikipedia.org/wiki/Uniform_resource_locator',
             'StorageAccountName' => 'StorageName',
-        );
+        ];
         $created = new \Datetime($assetArray['Created']);
         $modified = new \Datetime($assetArray['LastModified']);
 

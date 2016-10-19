@@ -31,7 +31,7 @@ use WindowsAzure\Common\Internal\Utilities;
 
 
 /**
- * Batch request marshaler.
+ * Batch request marshaller.
  *
  * @category  Microsoft
  *

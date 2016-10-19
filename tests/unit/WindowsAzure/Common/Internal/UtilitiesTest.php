@@ -55,7 +55,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         // Setup
         $key = 0;
         $expected = 10;
-        $data = array(10, 20, 30);
+        $data = [10, 20, 30];
 
         // Test
         $actual = Utilities::tryGetValue($data, $key);
@@ -71,7 +71,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         // Setup
         $key = 10;
         $expected = 6;
-        $data = array(10, 20, 30);
+        $data = [10, 20, 30];
 
         // Test
         $actual = Utilities::tryGetValue($data, $key, $expected);
@@ -86,7 +86,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $key = 10;
-        $data = array(10, 20, 30);
+        $data = [10, 20, 30];
 
         // Test
         $actual = Utilities::tryGetValue($data, $key);
@@ -100,10 +100,10 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     public function testTryGetKeysChainValue()
     {
         // Setup
-        $array = array();
-        $array['a1'] = array();
+        $array = [];
+        $array['a1'] = [];
         $array['a2'] = 'value1';
-        $array['a1']['b1'] = array();
+        $array['a1']['b1'] = [];
         $array['a1']['b2'] = 'value2';
         $array['a1']['b1']['c1'] = 'value3';
 
@@ -156,7 +156,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     public function testGetArray()
     {
         // Setup
-        $expected = array(array(1, 2, 3, 4),  array(5, 6, 7, 8));
+        $expected = [[1, 2, 3, 4],  [5, 6, 7, 8]];
 
         // Test
         $actual = Utilities::getArray($expected);
@@ -170,8 +170,8 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     public function testGetArrayWithFlatValue()
     {
         // Setup
-        $flat = array(1, 2, 3, 4, 5, 6, 7, 8);
-        $expected = array(array(1, 2, 3, 4, 5, 6, 7, 8));
+        $flat = [1, 2, 3, 4, 5, 6, 7, 8];
+        $expected = [[1, 2, 3, 4, 5, 6, 7, 8]];
 
         // Test
         $actual = Utilities::getArray($flat);
@@ -185,8 +185,8 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     public function testGetArrayWithMixtureValue()
     {
         // Setup
-        $flat = array(array(10, 2), 1, 2, 3, 4, 5, 6, 7, 8);
-        $expected = array(array(array(10, 2), 1, 2, 3, 4, 5, 6, 7, 8));
+        $flat = [[10, 2], 1, 2, 3, 4, 5, 6, 7, 8];
+        $expected = [[[10, 2], 1, 2, 3, 4, 5, 6, 7, 8]];
 
         // Test
         $actual = Utilities::getArray($flat);
@@ -201,7 +201,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $empty = Resources::EMPTY_STRING;
-        $expected = array();
+        $expected = [];
 
         // Test
         $actual = Utilities::getArray($empty);
@@ -277,12 +277,12 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         $expected = '<?xml version="1.0" encoding="UTF-8"?>'."\n".
             '<Object field1="value1" field2="value2"/>';
 
-        $object = array(
-            '@attributes' => array(
+        $object = [
+            '@attributes' => [
                 'field1' => 'value1',
                 'field2' => 'value2',
-            ),
-        );
+            ],
+        ];
 
         // Test
         $actual = Utilities::serialize($object, 'Object');
@@ -461,7 +461,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $value = 'CaseInsensitiVe';
-        $array = array('caSeinSenSitivE');
+        $array = ['caSeinSenSitivE'];
 
         // Test
         $actual = Utilities::inArrayInsensitive($value, $array);
@@ -477,7 +477,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $key = 'CaseInsensitiVe';
-        $array = array('caSeinSenSitivE' => '123');
+        $array = ['caSeinSenSitivE' => '123'];
 
         // Test
         $actual = Utilities::arrayKeyExistsInsensitive($key, $array);
@@ -494,7 +494,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         // Setup
         $key = 'KEy';
         $value = 1;
-        $array = array($key => $value);
+        $array = [$key => $value];
 
         // Test
         $actual = Utilities::tryGetValueInsensitive('keY', $array);
@@ -547,7 +547,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         $id = 'kjgdfg57';
 
         // Test
-        $result = Utilities::GetEntityId($id, 'WindowsAzure\MediaServices\Models\Asset');
+        $result = Utilities::getEntityId($id, 'WindowsAzure\MediaServices\Models\Asset');
 
         //Assert
         $this->assertEquals($id, $result);
@@ -562,14 +562,14 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
         // Setup
         $idKey = 'Id';
         $optionKey = 'Options';
-        $assetArray = array(
+        $assetArray = [
                 $idKey => 'kjgdfg57',
                 $optionKey => Asset::OPTIONS_NONE,
-        );
+        ];
         $value = Asset::createFromOptions($assetArray);
 
         // Test
-        $result = Utilities::GetEntityId($value, 'WindowsAzure\MediaServices\Models\Asset');
+        $result = Utilities::getEntityId($value, 'WindowsAzure\MediaServices\Models\Asset');
 
         //Assert
         $this->assertEquals($assetArray[$idKey], $result);

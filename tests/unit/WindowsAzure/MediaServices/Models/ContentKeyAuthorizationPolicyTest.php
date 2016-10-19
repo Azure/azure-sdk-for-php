@@ -51,10 +51,10 @@ class ContentKeyAuthorizationPolicyTest extends \PHPUnit_Framework_TestCase
 
         // Setup
         $contentKeyAuthorizationPolicyId = 'content-key-authorization-policy-id-12563';
-        $options = array(
+        $options = [
                 'Id' => $contentKeyAuthorizationPolicyId,
                 'Name' => 'testNameForContentKeyAuthorizationPolicy',
-        );
+        ];
 
         // Test
         $contentKeyAuthorizationPolicy = ContentKeyAuthorizationPolicy::createFromOptions($options);

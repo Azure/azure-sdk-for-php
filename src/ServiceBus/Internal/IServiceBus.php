@@ -138,7 +138,7 @@ interface IServiceBus extends FilterableService
     /**
      * Deletes a brokered message. 
      * 
-     * @param BrokeredMessage $brokeredMessage The borkered message.
+     * @param BrokeredMessage $brokeredMessage The brokered message.
      *
      * @throws Exception
      */

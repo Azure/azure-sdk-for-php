@@ -154,7 +154,7 @@ class WrapTokenManagerTest extends ServiceRestProxyTestBase
      * @covers \WindowsAzure\ServiceBus\Internal\WrapTokenManager::__construct
      * @covers \WindowsAzure\ServiceBus\Internal\WrapTokenManager::getAccessToken
      */
-    public function testGetAccesTokenFailedWithInvalidPassword()
+    public function testGetAccessTokenFailedWithInvalidPassword()
     {
         $this->setExpectedException(get_class(
             new ServiceException(''))

@@ -49,10 +49,10 @@ class LocalResourceTest extends \PHPUnit_Framework_TestCase
     public function testGetMaximumSizeInMegabytes()
     {
         // Setup
-        $locaResource = new LocalResource(1, 'local', 'path');
+        $localResource = new LocalResource(1, 'local', 'path');
 
         // Test
-        $this->assertEquals(1, $locaResource->getMaximumSizeInMegabytes());
+        $this->assertEquals(1, $localResource->getMaximumSizeInMegabytes());
     }
 
     /**
@@ -61,10 +61,10 @@ class LocalResourceTest extends \PHPUnit_Framework_TestCase
     public function testGetName()
     {
         // Setup
-        $locaResource = new LocalResource(1, 'local', 'path');
+        $localResource = new LocalResource(1, 'local', 'path');
 
         // Test
-        $this->assertEquals('local', $locaResource->getName());
+        $this->assertEquals('local', $localResource->getName());
     }
 
     /**
@@ -73,9 +73,9 @@ class LocalResourceTest extends \PHPUnit_Framework_TestCase
     public function testGetRootPath()
     {
         // Setup
-        $locaResource = new LocalResource(1, 'local', 'path');
+        $localResource = new LocalResource(1, 'local', 'path');
 
         // Test
-        $this->assertEquals('path', $locaResource->getRootPath());
+        $this->assertEquals('path', $localResource->getRootPath());
     }
 }

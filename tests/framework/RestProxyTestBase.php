@@ -25,12 +25,13 @@
 
 namespace Tests\framework;
 
+use MicrosoftAzure\Storage\Common\Internal\RestProxy;
 use WindowsAzure\Common\Internal\Logger;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Common\ServicesBuilder;
 
 /**
- * Testbase for all REST proxy tests.
+ * Test base for all REST proxy tests.
  *
  * @category  Microsoft
  *

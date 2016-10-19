@@ -415,11 +415,11 @@ class ContentKey
     /**
      * checksum padding
      * @param string $text
-     * @param int $blocksize
+     * @param int $blockSize
      * @return string
      */
-    private function pkcs5_pad ($text, $blocksize) { 
-        $pad = $blocksize - (strlen($text) % $blocksize); 
+    private function pkcs5_pad ($text, $blockSize) {
+        $pad = $blockSize - (strlen($text) % $blockSize);
         return $text . str_repeat(chr($pad), $pad); 
     }
 

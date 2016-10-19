@@ -53,7 +53,7 @@ class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $entity = new TokenRestrictionTemplate();
-        $payload = array();
+        $payload = [];
         $payload[] = new SymmetricVerificationKey();
 
         // Test
@@ -126,7 +126,7 @@ class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $entity = new TokenRestrictionTemplate();
-        $payload = array();
+        $payload = [];
         $payload[] = new TokenClaim(TokenClaim::CONTENT_KEY_ID_CLAIM_TYPE);
 
         // Test

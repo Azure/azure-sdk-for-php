@@ -311,7 +311,7 @@ class BrokeredMessage
     /**
      * Gets the time of locked until UTC.
      * 
-     * @return string
+     * @return \DateTime
      */
     public function getLockedUntilUtc()
     {
@@ -321,9 +321,9 @@ class BrokeredMessage
     /**
      * Sets the time of locked until UTC. 
      * 
-     * @param string $lockedUntilUtc The time of locked until UTC.
+     * @param \DateTime $lockedUntilUtc The time of locked until UTC.
      */
-    public function setLockedUntilUtc($lockedUntilUtc)
+    public function setLockedUntilUtc(\DateTime $lockedUntilUtc)
     {
         $this->_brokerProperties->setLockedUntilUtc($lockedUntilUtc);
     }
@@ -431,7 +431,7 @@ class BrokeredMessage
     /**
      * Gets the scheduled enqueue time. 
      * 
-     * @return string
+     * @return \DateTime
      */
     public function getScheduledEnqueueTimeUtc()
     {
@@ -441,9 +441,9 @@ class BrokeredMessage
     /**
      * Sets the scheduled enqueue time. 
      * 
-     * @param string $scheduledEnqueueTime The date/time of the message.
+     * @param \DateTime $scheduledEnqueueTime The date/time of the message.
      */
-    public function setScheduledEnqueueTimeUtc($scheduledEnqueueTime)
+    public function setScheduledEnqueueTimeUtc(\DateTime $scheduledEnqueueTime)
     {
         $this->_brokerProperties->setScheduledEnqueueTimeUtc($scheduledEnqueueTime);
     }

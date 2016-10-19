@@ -28,7 +28,7 @@ namespace WindowsAzure\Common\Internal;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 
 /**
- * ServceFilter is called when the sending the request and after receiving the
+ * ServiceFilter is called when the sending the request and after receiving the
  * response.
  *
  * @category  Microsoft

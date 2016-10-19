@@ -153,7 +153,7 @@ class DeploymentTest extends \PHPUnit_Framework_TestCase
     public function testSetRoleInstanceList()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $deployment = new Deployment();
 
         // Test
@@ -187,7 +187,7 @@ class DeploymentTest extends \PHPUnit_Framework_TestCase
     public function testSetRoleList()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $deployment = new Deployment();
 
         // Test
@@ -221,7 +221,7 @@ class DeploymentTest extends \PHPUnit_Framework_TestCase
     public function testSetInputEndpointList()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $deployment = new Deployment();
 
         // Test

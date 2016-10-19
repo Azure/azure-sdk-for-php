@@ -114,6 +114,11 @@ class Deployment
     private $_upgradeStatus;
 
     /**
+     * @var string
+     */
+    private $_url;
+
+    /**
      * Creates a new Deployment from parsed response body.
      * 
      * @param array $parsed The parsed response body in array representation.
@@ -328,9 +333,9 @@ class Deployment
 
     /**
      * Gets the deployment url.
-     * 
-     * The URL used to access the hosted service. 
-     * 
+     *
+     * The URL used to access the hosted service.
+     *
      * @return string
      */
     public function getUrl()
@@ -340,7 +345,7 @@ class Deployment
 
     /**
      * Sets the deployment url.
-     * 
+     *
      * @param string $url The deployment url.
      */
     public function setUrl($url)

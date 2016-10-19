@@ -51,10 +51,10 @@ class WrapAccessTokenResultTest extends \PHPUnit_Framework_TestCase
         $expectedWrapAccessToken = 'WRAP_ACCESS_TOKEN';
         $expectedWrapAccessTokenExpiresIn = 300;
 
-        $queryParameter = array(
+        $queryParameter = [
             'wrap_access_token' => 'WRAP_ACCESS_TOKEN',
             'wrap_access_token_expires_in' => 300,
-        );
+        ];
 
         $queryString = http_build_query($queryParameter);
 

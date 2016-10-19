@@ -51,10 +51,10 @@ class StorageAccountTest extends \PHPUnit_Framework_TestCase
         // Setup
         $name = 'SomeName-42';
         $isDefault = true;
-        $options = array(
+        $options = [
                 'Name' => $name,
                 'IsDefault' => $isDefault,
-        );
+        ];
 
         // Test
         $storageAccount = StorageAccount::createFromOptions($options);
@@ -71,9 +71,9 @@ class StorageAccountTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $name = 'SomeName-42';
-        $options = array(
+        $options = [
                 'Name' => $name,
-        );
+        ];
         $storageAccount = StorageAccount::createFromOptions($options);
 
         // Test
@@ -90,9 +90,9 @@ class StorageAccountTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $isDefault = true;
-        $options = array(
+        $options = [
                 'IsDefault' => $isDefault,
-        );
+        ];
         $storageAccount = StorageAccount::createFromOptions($options);
 
         // Test

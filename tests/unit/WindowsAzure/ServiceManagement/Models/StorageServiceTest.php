@@ -51,10 +51,10 @@ class StorageServiceTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expectedGroup = 'group';
         $expectedName = 'name';
-        $raw = array(
+        $raw = [
             Resources::XTAG_AFFINITY_GROUP => $expectedGroup,
             Resources::XTAG_SERVICE_NAME => $expectedName,
-        );
+        ];
 
         // Test
         $storageService = new StorageService($raw);

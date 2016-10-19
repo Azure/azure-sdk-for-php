@@ -26,6 +26,7 @@
 namespace Tests\mock\WindowsAzure\Common\Internal\Filters;
 
 use WindowsAzure\Common\Internal\Http\IHttpClient;
+use WindowsAzure\Common\Internal\IServiceFilter;
 
 /**
  * Alters request headers and response to mock real filter.
@@ -40,7 +41,7 @@ use WindowsAzure\Common\Internal\Http\IHttpClient;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class SimpleFilterMock implements \WindowsAzure\Common\Internal\IServiceFilter
+class SimpleFilterMock implements IServiceFilter
 {
     private $_headerName;
     private $_data;

@@ -142,10 +142,10 @@ class RetentionPolicyTest extends \PHPUnit_Framework_TestCase
         // Setup
         $sample = TestResources::getServicePropertiesSample();
         $retentionPolicy = RetentionPolicy::create($sample['Logging']['RetentionPolicy']);
-        $expected = array(
+        $expected = [
             'Enabled' => $sample['Logging']['RetentionPolicy']['Enabled'],
             'Days' => $sample['Logging']['RetentionPolicy']['Days'],
-        );
+        ];
 
         // Test
         $actual = $retentionPolicy->toArray();
@@ -162,7 +162,7 @@ class RetentionPolicyTest extends \PHPUnit_Framework_TestCase
         // Setup
         $sample = TestResources::getServicePropertiesSample();
         $retentionPolicy = RetentionPolicy::create($sample['Logging']['RetentionPolicy']);
-        $expected = array('Enabled' => $sample['Logging']['RetentionPolicy']['Enabled']);
+        $expected = ['Enabled' => $sample['Logging']['RetentionPolicy']['Enabled']];
         $retentionPolicy->setDays(null);
 
         // Test

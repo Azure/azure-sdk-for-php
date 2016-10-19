@@ -49,11 +49,11 @@ class TaskHistoricalEventTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Code' => 123456,
                 'Message' => 'some message',
                 'TimeStamp' => '2013-11-27',
-        );
+        ];
         $time = new \Datetime($options['TimeStamp']);
 
         // Test
@@ -73,9 +73,9 @@ class TaskHistoricalEventTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'TimeStamp' => '2013-11-27',
-        );
+        ];
         $time = new \Datetime($options['TimeStamp']);
         $histEvent = TaskHistoricalEvent::createFromOptions($options);
 
@@ -93,9 +93,9 @@ class TaskHistoricalEventTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Message' => 'some message',
-        );
+        ];
         $histEvent = TaskHistoricalEvent::createFromOptions($options);
 
         // Test
@@ -112,9 +112,9 @@ class TaskHistoricalEventTest extends \PHPUnit_Framework_TestCase
     {
 
         // Setup
-        $options = array(
+        $options = [
                 'Code' => 654,
-        );
+        ];
         $histEvent = TaskHistoricalEvent::createFromOptions($options);
 
         // Test

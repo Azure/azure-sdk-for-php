@@ -78,7 +78,7 @@ class Program
     private $_description;
 
     /**
-     * Program acrhive window length.
+     * Program archive window length.
      *
      * @var \DateInterval
      */

@@ -143,10 +143,10 @@ class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $properties = ServiceProperties::create(TestResources::getServicePropertiesSample());
-        $expected = array(
+        $expected = [
             'Logging' => $properties->getLogging()->toArray(),
             'Metrics' => $properties->getMetrics()->toArray(),
-        );
+        ];
 
         // Test
         $actual = $properties->toArray();

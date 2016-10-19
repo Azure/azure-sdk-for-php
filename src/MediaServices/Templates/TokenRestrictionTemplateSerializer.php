@@ -172,9 +172,6 @@ class TokenRestrictionTemplateSerializer
         $tokenExpiration = null,
         $notBefore = null)
     {
-        Validate::notNull($template, 'template');
-        Validate::isA($template, 'WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate', 'template');
-
         if ($verificationKey == null) {
             $verificationKey = $template->getPrimaryVerificationKey();
         }

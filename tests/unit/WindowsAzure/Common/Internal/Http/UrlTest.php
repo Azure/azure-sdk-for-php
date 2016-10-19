@@ -138,7 +138,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $urlString = TestResources::VALID_URL;
-        $expectedQueryVariables = array(TestResources::HEADER1 => TestResources::HEADER1_VALUE);
+        $expectedQueryVariables = [TestResources::HEADER1 => TestResources::HEADER1_VALUE];
         $url = new Url($urlString);
         $url->setQueryVariable(TestResources::HEADER1, TestResources::HEADER1_VALUE);
 
@@ -155,7 +155,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $urlString = TestResources::VALID_URL;
-        $expectedQueryVariables = array(TestResources::HEADER1 => TestResources::HEADER1_VALUE);
+        $expectedQueryVariables = [TestResources::HEADER1 => TestResources::HEADER1_VALUE];
         $url = new Url($urlString);
 
         // Test
@@ -324,8 +324,8 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $urlString = TestResources::VALID_URL;
-        $expectedQueryVariables = array(TestResources::HEADER1 => TestResources::HEADER1_VALUE,
-                                        TestResources::HEADER2 => TestResources::HEADER2_VALUE, );
+        $expectedQueryVariables = [TestResources::HEADER1 => TestResources::HEADER1_VALUE,
+                                        TestResources::HEADER2 => TestResources::HEADER2_VALUE,];
         $url = new Url($urlString);
 
         // Test

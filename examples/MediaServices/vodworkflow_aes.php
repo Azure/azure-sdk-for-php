@@ -285,7 +285,7 @@ function createAssetDeliveryPolicy($restProxy, $encodedAsset, $contentKey)
     $randomKey = Utilities::generateCryptoKey(16);
     $configuration = [AssetDeliveryPolicyConfigurationKey::ENVELOPE_KEY_ACQUISITION_URL => $acquisitionUrl,
                       AssetDeliveryPolicyConfigurationKey::ENVELOPE_ENCRYPTION_IV_AS_BASE64 => base64_encode($randomKey)];
-    $confJson = AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfiguartionKey($configuration);
+    $confJson = AssetDeliveryPolicyConfigurationKey::stringifyAssetDeliveryPolicyConfigurationKey($configuration);
 
     // 5.3 Create the AssetDeliveryPolicy
     $adpolicy = new AssetDeliveryPolicy();

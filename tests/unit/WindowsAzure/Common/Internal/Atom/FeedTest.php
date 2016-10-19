@@ -69,7 +69,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testGetSetAttributes()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $expected['key'] = 'value';
         $feed = new Feed();
 
@@ -112,7 +112,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testGetSetCategory()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $expected[] = new Category();
         $feed = new Feed();
 
@@ -134,7 +134,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testGetSetContributor()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $expected[] = new Person();
         $feed = new Feed();
 
@@ -219,7 +219,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testGetSetLink()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $expected[] = new AtomLink();
         $feed = new Feed();
 
@@ -431,7 +431,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = new Feed();
-        $link = array();
+        $link = [];
         $linkInstanceOne = new AtomLink();
         $linkInstanceOne->setHref('linkOne');
         $linkInstanceTwo = new AtomLink();
@@ -460,13 +460,13 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $expected = new Feed();
-        $entry = array();
+        $entry = [];
         $entry[] = new Entry();
-        $category = array();
+        $category = [];
         $categoryInstance = new Category();
         $categoryInstance->setScheme('testCategory');
         $category[] = $categoryInstance;
-        $contributor = array();
+        $contributor = [];
         $contributorItem = new Person();
         $contributorItem->setName('testContributor');
         $contributor[] = $contributorItem;
@@ -474,7 +474,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $generator->setText('testGenerator');
         $icon = 'testIcon';
         $id = 'testId';
-        $link = array();
+        $link = [];
         $atomLink = new AtomLink();
         $atomLink->setHref('testLink');
         $link[] = $atomLink;

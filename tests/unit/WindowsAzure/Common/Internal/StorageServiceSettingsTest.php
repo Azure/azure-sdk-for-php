@@ -149,7 +149,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
         $expectedMsg = sprintf(
             Resources::INVALID_CONFIG_VALUE,
             $invalidValue,
-            implode("\n", array('true'))
+            implode("\n", ['true'])
         );
         $this->setExpectedException('\RuntimeException', $expectedMsg);
 
@@ -545,7 +545,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers \WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers \WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
-    public function testCreateFromConnectionStringWithQueueEndpointSpecfied()
+    public function testCreateFromConnectionStringWithQueueEndpointSpecified2()
     {
         // Setup
         $expectedName = $this->_accountName;
@@ -581,7 +581,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
      * @covers \WindowsAzure\Common\Internal\ServiceSettings::noMatch
      * @covers \WindowsAzure\Common\Internal\StorageServiceSettings::_createStorageServiceSettings
      */
-    public function testCreateFromConnectionStringWithQueueAndBlobEndpointSpecfied()
+    public function testCreateFromConnectionStringWithQueueAndBlobEndpointSpecified2()
     {
         // Setup
         $expectedName = $this->_accountName;
@@ -718,7 +718,7 @@ class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expectedName = $this->_accountName;
         $expectedKey = TestResources::KEY4;
-        $validKeys = array();
+        $validKeys = [];
         $validKeys[] = Resources::USE_DEVELOPMENT_STORAGE_NAME;
         $validKeys[] = Resources::DEVELOPMENT_STORAGE_PROXY_URI_NAME;
         $validKeys[] = Resources::DEFAULT_ENDPOINTS_PROTOCOL_NAME;

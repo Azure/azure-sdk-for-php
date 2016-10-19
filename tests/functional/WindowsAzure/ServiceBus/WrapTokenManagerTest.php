@@ -58,10 +58,10 @@ class WrapTokenManagerTest extends ServiceBusRestProxyTestBase
     public function testClientWillNotCallMultipleTimesWhileAccessTokenIsValid()
     {
         // Arrange
-        $expectedTokens = array('testaccesstoken1-1', 'testaccesstoken1-1', 'testaccesstoken1-1');
+        $expectedTokens = ['testaccesstoken1-1', 'testaccesstoken1-1', 'testaccesstoken1-1'];
 
         // Act
-        $accessTokens = array();
+        $accessTokens = [];
         $accessTokens[] = $this->_client->getAccessToken(('https://test/scope?arg=1'));
         $accessTokens[] = $this->_client->getAccessToken(('https://test/scope?arg=2'));
         // Wait until slightly before the token expires.
@@ -77,10 +77,10 @@ class WrapTokenManagerTest extends ServiceBusRestProxyTestBase
     public function testCallsToDifferentPathsWillResultInDifferentAccessTokens()
     {
         // Arrange
-        $expectedTokens = array('testaccesstoken1-1', 'testaccesstoken2-1', 'testaccesstoken1-1');
+        $expectedTokens = ['testaccesstoken1-1', 'testaccesstoken2-1', 'testaccesstoken1-1'];
 
         // Act
-        $accessTokens = array();
+        $accessTokens = [];
         $accessTokens[] = $this->_client->getAccessToken(('https://test/scope?arg=1'));
         $accessTokens[] = $this->_client->getAccessToken(('https://test/scope2?arg=2'));
         // Wait until slightly before the token expires.
@@ -99,10 +99,10 @@ class WrapTokenManagerTest extends ServiceBusRestProxyTestBase
     public function testClientWillBeCalledWhenTokenIsHalfwayToExpiring()
     {
         // Arrange
-        $expectedTokens = array('testaccesstoken1-1', 'testaccesstoken1-1', 'testaccesstoken1-2');
+        $expectedTokens = ['testaccesstoken1-1', 'testaccesstoken1-1', 'testaccesstoken1-2'];
 
         // Act
-        $accessTokens = array();
+        $accessTokens = [];
         $accessTokens[] = $this->_client->getAccessToken(('https://test/scope'));
         $accessTokens[] = $this->_client->getAccessToken(('https://test/scope'));
         // Wait until slightly after the token expires.

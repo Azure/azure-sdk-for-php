@@ -49,7 +49,7 @@ class HostedServiceTest extends \PHPUnit_Framework_TestCase
     public function testSetDeployments()
     {
         // Setup
-        $expected = array();
+        $expected = [];
         $hostedService = new HostedService();
 
         // Test

@@ -278,7 +278,7 @@ class ServiceManagementRestProxy extends RestProxy
     }
 
     /**
-     * Constructs request XML including windows azure XML namesoace.
+     * Constructs request XML including windows azure XML namespace.
      *
      * @param array  $xmlElements The XML elements associated with their values.
      * @param string $root        The XML root name.
@@ -771,11 +771,11 @@ class ServiceManagementRestProxy extends RestProxy
     public function getOperationStatus(AsynchronousOperationResult $requestInfo)
     {
         Validate::notNullOrEmpty($requestInfo, 'requestInfo');
-        Validate::notNullOrEmpty($requestInfo->getrequestId(), 'requestId');
+        Validate::notNullOrEmpty($requestInfo->getRequestId(), 'requestId');
 
         $context = new HttpCallContext();
         $context->setMethod(Resources::HTTP_GET);
-        $context->setPath($this->_getOperationPath($requestInfo->getrequestId()));
+        $context->setPath($this->_getOperationPath($requestInfo->getRequestId()));
         $context->addStatusCode(Resources::STATUS_OK);
 
         $response = $this->sendContext($context);

@@ -48,7 +48,7 @@ class ContentKeyDeliveryType
     const NONE = 0;
 
     /**
-     * Use PlayReady License acquistion protocol.
+     * Use PlayReady License acquisition protocol.
      *
      * @var int
      */

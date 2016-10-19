@@ -1758,7 +1758,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $currentGoalState = self::getStaticPropertyValue('_currentGoalState');
 
         // Process goal state to the previous state
-        $args = array();
+        $args = [];
         $args[] = $currentGoalState;
 
         $processGoalStateChange = self::getMethod('_processGoalStateChange');
@@ -1865,7 +1865,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
         $currentGoalState = self::getStaticPropertyValue('_currentGoalState');
 
         // Process goal state to the previous state
-        $args = array();
+        $args = [];
         $args[] = $currentGoalState;
 
         self::setStaticPropertyValue('_tracking', 1);
@@ -1889,7 +1889,7 @@ class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
 
         $goalStateFile->setContent($goalStateFileContent);
 
-        RoleEnvironment::addRoleEnvironmentStoppingListener(array('Tests\Unit\WindowsAzure\ServiceRuntime\myclass', 'execute'));
+        RoleEnvironment::addRoleEnvironmentStoppingListener(['Tests\Unit\WindowsAzure\ServiceRuntime\myclass', 'execute']);
 
         self::setStaticPropertyValue('_tracking', 1);
         RoleEnvironment::trackChanges();

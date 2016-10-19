@@ -77,7 +77,7 @@ class HttpClient implements IHttpClient
             Resources::SSL_VERIFY_HOST => false,
         ];
 
-        // Read HTTP_PROXY enviroment variable, if any.
+        // Read HTTP_PROXY environment variable, if any.
         // To use it with Fiddler, set the environment variable HTTP_PROXY
         // to http://localhost:8888. E.g.
         //
@@ -220,7 +220,7 @@ class HttpClient implements IHttpClient
     }
 
     /**
-     * Processes the reuqest through HTTP pipeline with passed $filters,
+     * Processes the request through HTTP pipeline with passed $filters,
      * sends HTTP request to the wire and process the response in the HTTP pipeline.
      *
      * @param array $filters HTTP filters which will be applied to the request before
@@ -237,8 +237,6 @@ class HttpClient implements IHttpClient
             $this->setUrl($url);
             $this->_request->setUrl($this->_requestUrl->getUrl());
         }
-
-        $contentLength = Resources::EMPTY_STRING;
 
         {
             $method = strtoupper($this->getMethod());
@@ -277,7 +275,7 @@ class HttpClient implements IHttpClient
     }
 
     /**
-     * Processes the reuqest through HTTP pipeline with passed $filters,
+     * Processes the request through HTTP pipeline with passed $filters,
      * sends HTTP request to the wire and process the response in the HTTP pipeline.
      *
      * @param array $filters HTTP filters which will be applied to the request before
@@ -362,7 +360,7 @@ class HttpClient implements IHttpClient
     }
 
     /**
-     * Throws ServiceException if the recieved status code is not expected.
+     * Throws ServiceException if the received status code is not expected.
      *
      * @param string $actual   The received status code.
      * @param string $reason   The reason phrase.

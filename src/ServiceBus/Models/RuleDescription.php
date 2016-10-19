@@ -87,7 +87,6 @@ class RuleDescription
         $root = simplexml_load_string(
             $ruleDescriptionXml
         );
-        $nameSpaces = $root->getNamespaces();
         $ruleDescriptionArray = (array) $root;
         if (array_key_exists('Filter', $ruleDescriptionArray)) {
             $filterItem = $ruleDescriptionArray['Filter'];
