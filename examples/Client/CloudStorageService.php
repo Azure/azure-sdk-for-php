@@ -25,6 +25,9 @@
 
 namespace Client;
 
+use MicrosoftAzure\Storage\Blob\Internal\IBlob;
+use MicrosoftAzure\Storage\Queue\Internal\IQueue;
+use MicrosoftAzure\Storage\Table\Internal\ITable;
 use WindowsAzure\Common\ServicesBuilder;
 use MicrosoftAzure\Storage\Table\Models\QueryTablesOptions;
 

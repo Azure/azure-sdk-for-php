@@ -83,7 +83,7 @@ include_once 'userconfig.php';
 // allow the script to run longer than 600 seconds (overrides userconfig.php)
 set_time_limit(0);
 
-$options = new StdClass();
+$options = new stdClass();
 
 // General Options
 $options->channelName = 'phpsdk-sample';
@@ -163,7 +163,7 @@ function createAndStartChannel($restProxy, $options)
 
 function createAsset($restProxy, $options)
 {
-    $result = new StdClass();
+    $result = new stdClass();
 
     // 1 - prepare the program asset 
     $result->asset = new Asset(Asset::OPTIONS_NONE);
