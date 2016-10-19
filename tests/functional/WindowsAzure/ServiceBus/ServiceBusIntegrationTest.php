@@ -25,6 +25,7 @@
 
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
+use Psr\Http\Message\ResponseInterface;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\IServiceFilter;
@@ -649,7 +650,7 @@ class CustomServiceFilter implements IServiceFilter
         return $request;
     }
 
-    public function handleResponse(IHttpClient $request, $response)
+    public function handleResponse(IHttpClient $request, ResponseInterface $response)
     {
         array_push($this->requests, $request);
         array_push($this->responses, $response);

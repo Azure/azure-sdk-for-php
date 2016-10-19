@@ -25,7 +25,6 @@
 
 namespace WindowsAzure\Common\Internal\Http;
 
-use WindowsAzure\Common\Internal\Http\IUrl;
 use Psr\Http\Message\ResponseInterface;
 
 use WindowsAzure\Common\ServiceException;

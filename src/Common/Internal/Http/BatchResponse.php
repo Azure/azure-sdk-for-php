@@ -25,10 +25,9 @@
 
 namespace WindowsAzure\Common\Internal\Http;
 
-use HTTP_Request2_Response;
+use function GuzzleHttp\Psr7\parse_response;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\Common\Internal\Http\BatchRequest;
 use GuzzleHttp\Psr7\Response;
 
 /**

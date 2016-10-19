@@ -29,7 +29,6 @@ use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
 use WindowsAzure\Common\Internal\Serialization\ISerializer;
-use WindowsAzure\Common\Internal\IServiceFilter;
 use Psr\Http\Message\ResponseInterface;
 
 /**

@@ -101,8 +101,6 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @param string          $path            The path to send message.
      * @param BrokeredMessage $brokeredMessage The brokered message.
-     *
-     * @return none
      */
     public function sendMessage($path, BrokeredMessage $brokeredMessage)
     {

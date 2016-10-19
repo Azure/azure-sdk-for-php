@@ -25,10 +25,12 @@
 
 namespace WindowsAzure\Common\Internal\Http;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7\Request;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Validate;
-use WindowsAzure\Common\Internal\Http\IUrl;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\RequestOptions;
 
@@ -63,12 +65,12 @@ class HttpClient implements IHttpClient
     /**
      * @var array
      */
-    private $_postParams = array();
+    private $_postParams = [];
 
     /**
      * @var array
      */
-    private $_headers = array();
+    private $_headers = [];
 
     /**
      * @var string
@@ -111,7 +113,7 @@ class HttpClient implements IHttpClient
         if (!empty($certificatePath)) {
             $this->_config[Resources::SSL_LOCAL_CERT] = $certificatePath;
             $this->_config[Resources::SSL_VERIFY_HOST] = true;
-            $this->_requestOptions[\GuzzleHttp\RequestOptions::CERT] = $certificatePath;
+            $this->_requestOptions[RequestOptions::CERT] = $certificatePath;
         }
 
         if (!empty($certificateAuthorityPath)) {
@@ -258,7 +260,7 @@ class HttpClient implements IHttpClient
             $filter->handleRequest($this);
         }
 
-        $client = new \GuzzleHttp\Client($this->_config);
+        $client = new Client($this->_config);
 
         // send request and recieve a response
         $response = null;
@@ -277,15 +279,15 @@ class HttpClient implements IHttpClient
                 $options[RequestOptions::VERIFY] = false;
             }
 
-            $request = new \GuzzleHttp\Psr7\Request(
+            $request = new Request(
                 $this->_method,
-                $this->getUrl()->getURL(),
+                $this->getUrl()->getUrl(),
                 $this->_headers,
                 $this->_body);
 
             $response = $client->send($request, $options);
         }
-        catch (\GuzzleHttp\Exception\ClientException $e)
+        catch (ClientException $e)
         {
             $response = $e->getResponse();
         }
@@ -418,7 +420,7 @@ class HttpClient implements IHttpClient
     {
         $responseHeaderArray = $response->getHeaders();
 
-        $responseHeaders = array();
+        $responseHeaders = [];
 
         foreach($responseHeaderArray as $key => $value) {
             $responseHeaders[strtolower($key)] = implode(',', $value);
