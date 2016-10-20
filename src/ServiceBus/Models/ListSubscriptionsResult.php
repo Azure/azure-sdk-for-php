@@ -45,7 +45,7 @@ class ListSubscriptionsResult extends Feed
     /**
      * The information of the subscription. 
      * 
-     * @var array
+     * @var SubscriptionInfo[]
      */
     private $_subscriptionInfos;
 
@@ -71,7 +71,7 @@ class ListSubscriptionsResult extends Feed
     /**
      * Gets the information of the subscription. 
      * 
-     * @return array
+     * @return SubscriptionInfo[]
      */
     public function getSubscriptionInfos()
     {
@@ -81,8 +81,8 @@ class ListSubscriptionsResult extends Feed
     /**
      * Sets the information of the rule. 
      * 
-     * @param array $subscriptionInfos The information of the
-     *                                 subscription.
+     * @param SubscriptionInfo[] $subscriptionInfos The information of the
+     *                                              subscription.
      */
     public function setSubscriptionInfos(array $subscriptionInfos)
     {

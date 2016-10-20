@@ -108,7 +108,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
         //$this->getMessageFromSub($expSub4Messages, $this->subscriptionName4, $expCustomProps4);
 
         self::write('Deleting topic '.$this->topicName);
-        $this->restProxy->deleteTopic($this->topicName);
+        $this->serviceBusWrapper->deleteTopic($this->topicName);
         self::write('Deleted topic '.$this->topicName);
     }
 
@@ -123,16 +123,16 @@ class ServiceBusTopicTest extends ScenarioTestBase
         $options = new ListTopicsOptions();
         $options->setSkip(20);
         $options->setTop(2);
-        $topics = $this->restProxy->listTopics($options)->getTopicInfos();
+        $topics = $this->serviceBusWrapper->listTopics($options)->getTopicInfos();
         foreach ($topics as $topic) {
             self::write('Topic name is '.$topic->getTitle());
         }
 
         self::write('checking if topic already exists '.$this->topicName);
         try {
-            $this->restProxy->getTopic($this->topicName);
+            $this->serviceBusWrapper->getTopic($this->topicName);
             self::write('Topic already exists deleting it');
-            $this->restProxy->deleteTopic($this->topicName);
+            $this->serviceBusWrapper->deleteTopic($this->topicName);
         } catch (\Exception $e) {
             self::write('could not get an existing topic ('.$e->getCode().'), proceeding...');
         }
@@ -144,8 +144,8 @@ class ServiceBusTopicTest extends ScenarioTestBase
 
         self::write('Creating topic '.$this->topicName);
 
-        $this->restProxy->createTopic($topic);
-        $this->restProxy->getTopic($this->topicName);
+        $this->serviceBusWrapper->createTopic($topic);
+        $this->serviceBusWrapper->getTopic($this->topicName);
     }
 
     /**
@@ -159,11 +159,11 @@ class ServiceBusTopicTest extends ScenarioTestBase
         $s->setEnableBatchedOperations(true);
         $s->setMaxDeliveryCount(10);
         $s->setRequiresSession(false);
-        $this->restProxy->createSubscription($this->topicName, $s);
+        $this->serviceBusWrapper->createSubscription($this->topicName, $s);
 
-        $this->restProxy->createSubscription($this->topicName, new SubscriptionInfo($this->subscriptionName2));
-        $this->restProxy->createSubscription($this->topicName, new SubscriptionInfo($this->subscriptionName3));
-        $this->restProxy->createSubscription($this->topicName, new SubscriptionInfo($this->subscriptionName4));
+        $this->serviceBusWrapper->createSubscription($this->topicName, new SubscriptionInfo($this->subscriptionName2));
+        $this->serviceBusWrapper->createSubscription($this->topicName, new SubscriptionInfo($this->subscriptionName3));
+        $this->serviceBusWrapper->createSubscription($this->topicName, new SubscriptionInfo($this->subscriptionName4));
     }
 
     /**
@@ -181,28 +181,28 @@ class ServiceBusTopicTest extends ScenarioTestBase
         // subscriptionName1 is left unchanged
 
         // subscriptionName2 gets a rule that works on integers
-        $this->restProxy->deleteRule($this->topicName, $this->subscriptionName2, '$Default');
+        $this->serviceBusWrapper->deleteRule($this->topicName, $this->subscriptionName2, '$Default');
         $rule2 = new RuleInfo('intType');
         $rule2->withSqlFilter('int < 53');
-        $this->restProxy->createRule($this->topicName, $this->subscriptionName2, $rule2);
+        $this->serviceBusWrapper->createRule($this->topicName, $this->subscriptionName2, $rule2);
 
         // subscriptionName3 gets a rule that works on strings and booleans
-        $this->restProxy->deleteRule($this->topicName, $this->subscriptionName3, '$Default');
+        $this->serviceBusWrapper->deleteRule($this->topicName, $this->subscriptionName3, '$Default');
         $rule3 = new RuleInfo('strAndBoolRule');
         $rule3->withSqlFilter('name LIKE \'%3\' OR user.even = TRUE');
-        $this->restProxy->createRule($this->topicName, $this->subscriptionName3, $rule3);
+        $this->serviceBusWrapper->createRule($this->topicName, $this->subscriptionName3, $rule3);
 
         // subscriptionName4 gets two rules to enable duplicate messages
 
-        $lst = $this->restProxy->listRules($this->topicName, $this->subscriptionName4)->getRuleInfos();
+        $lst = $this->serviceBusWrapper->listRules($this->topicName, $this->subscriptionName4)->getRuleInfos();
         $rule4a = $lst[0];
         $rule4a->withSqlRuleAction(
                 'SET trueRuleA=TRUE; '.
                 'SET actionGuid=newid(); '.
                 'SET actionDouble=3.5; '.
                 'REMOVE int;');
-        $this->restProxy->deleteRule($this->topicName, $this->subscriptionName4, $rule4a->getTitle());
-        $this->restProxy->createRule($this->topicName, $this->subscriptionName4, $rule4a);
+        $this->serviceBusWrapper->deleteRule($this->topicName, $this->subscriptionName4, $rule4a->getTitle());
+        $this->serviceBusWrapper->createRule($this->topicName, $this->subscriptionName4, $rule4a);
 
         $rule4b = new RuleInfo('trueRuleB');
         $rule4b->withTrueFilter();
@@ -222,7 +222,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
                 'REMOVE float;';
         $rule4b->withSqlRuleAction($action);
 
-        $this->restProxy->createRule($this->topicName, $this->subscriptionName4, $rule4b);
+        $this->serviceBusWrapper->createRule($this->topicName, $this->subscriptionName4, $rule4b);
 
         $this->showRules($this->subscriptionName1);
         $this->showRules($this->subscriptionName2);
@@ -236,7 +236,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
     private function showRules($subName)
     {
         self::write('Subscription: '.$subName);
-        $lst = $this->restProxy->listRules($this->topicName, $subName)->getRuleInfos();
+        $lst = $this->serviceBusWrapper->listRules($this->topicName, $subName)->getRuleInfos();
         foreach ($lst as $item) {
             self::write('  Rule: '.$item->getTitle());
             $filter = $item->getFilter();
@@ -258,7 +258,7 @@ class ServiceBusTopicTest extends ScenarioTestBase
         $messages[] = $this->createIssueMessage('3', 'Third  message information', 'label3', 3);
         $messages[] = $this->createIssueMessage('4', 'Fourth message information', 'label4', 4);
         foreach ($messages as $message) {
-            $this->restProxy->sendTopicMessage($this->topicName, $message);
+            $this->serviceBusWrapper->sendTopicMessage($this->topicName, $message);
             $data = $message->getBody();
             self::write('Message sent with id: '.$message->getMessageId().' Body of $message '.$data);
         }
@@ -292,26 +292,26 @@ class ServiceBusTopicTest extends ScenarioTestBase
      */
     private function getMessageCounts()
     {
-        $topic = $this->restProxy->getTopic($this->topicName);
+        $topic = $this->serviceBusWrapper->getTopic($this->topicName);
         $this->assertEquals($this->topicName, $topic->getTitle(), '$topic->getTopicInfo->getTitle');
 
         // Subscription 1
-        $subscription1 = $this->restProxy->getSubscription($this->topicName, $this->subscriptionName1);
+        $subscription1 = $this->serviceBusWrapper->getSubscription($this->topicName, $this->subscriptionName1);
         self::write('Subscription 1 message count: '.$subscription1->getMessageCount());
         $this->assertEquals(4, $subscription1->getMessageCount(), 'Subscription 1 message count');
 
         // Subscription 2
-        $subscription2 = $this->restProxy->getSubscription($this->topicName, $this->subscriptionName2);
+        $subscription2 = $this->serviceBusWrapper->getSubscription($this->topicName, $this->subscriptionName2);
         self::write('Subscription 2 message count '.$subscription2->getMessageCount());
         $this->assertEquals(2, $subscription2->getMessageCount(), 'Subscription 2 message count');
 
         // Subscription 3
-        $subscription3 = $this->restProxy->getSubscription($this->topicName, $this->subscriptionName3);
+        $subscription3 = $this->serviceBusWrapper->getSubscription($this->topicName, $this->subscriptionName3);
         self::write('Subscription 3 message count '.$subscription3->getMessageCount());
         $this->assertEquals(3, $subscription3->getMessageCount(), 'Subscription 3 message count');
 
         // Subscription 4
-        $subscription4 = $this->restProxy->getSubscription($this->topicName, $this->subscriptionName4);
+        $subscription4 = $this->serviceBusWrapper->getSubscription($this->topicName, $this->subscriptionName4);
         self::write('Subscription 4 message count '.$subscription4->getMessageCount());
         $this->assertEquals(8, $subscription4->getMessageCount(), 'Subscription 4 message count');
     }
@@ -336,31 +336,31 @@ class ServiceBusTopicTest extends ScenarioTestBase
 
         // Peek the first message
 
-        $message1 = $this->restProxy->receiveSubscriptionMessage($this->topicName, $subscriptionName, $this->PEEK_LOCK);
+        $message1 = $this->serviceBusWrapper->receiveSubscriptionMessage($this->topicName, $subscriptionName, $this->PEEK_LOCK);
         $this->compareMessages($expectedMessages[0], $message1, $expCustomProps[0]);
 
-        $messageCount = $this->restProxy->getSubscription($this->topicName, $subscriptionName)->getMessageCount();
+        $messageCount = $this->serviceBusWrapper->getSubscription($this->topicName, $subscriptionName)->getMessageCount();
         self::write('Peek locked first message, Message count: '.$messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Peek locked first message, count should not change');
 
         // Get the second message
 
-        $message2 = $this->restProxy->receiveSubscriptionMessage($this->topicName, $subscriptionName, $this->RECEIVE_AND_DELETE_5_SECONDS);
+        $message2 = $this->serviceBusWrapper->receiveSubscriptionMessage($this->topicName, $subscriptionName, $this->RECEIVE_AND_DELETE_5_SECONDS);
         --$expectedCount;
         $this->compareMessages($expectedMessages[1], $message2, $expCustomProps[1]);
 
-        $messageCount = $this->restProxy->getSubscription($this->topicName, $subscriptionName)->getMessageCount();
+        $messageCount = $this->serviceBusWrapper->getSubscription($this->topicName, $subscriptionName)->getMessageCount();
         self::write('RECEIVE_AND_DELETE second message, Message count: '.$messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'RECEIVE_AND_DELETE second message, count decrements');
 
         // Unlock then get the first message
 
-        $this->restProxy->unlockMessage($message1);
-        $message1again = $this->restProxy->receiveSubscriptionMessage($this->topicName, $subscriptionName, $this->RECEIVE_AND_DELETE_5_SECONDS);
+        $this->serviceBusWrapper->unlockMessage($message1);
+        $message1again = $this->serviceBusWrapper->receiveSubscriptionMessage($this->topicName, $subscriptionName, $this->RECEIVE_AND_DELETE_5_SECONDS);
         --$expectedCount;
         $this->compareMessages($expectedMessages[0], $message1again, $expCustomProps[0]);
 
-        $messageCount = $this->restProxy->getSubscription($this->topicName, $subscriptionName)->getMessageCount();
+        $messageCount = $this->serviceBusWrapper->getSubscription($this->topicName, $subscriptionName)->getMessageCount();
         self::write('got first message again, Message count: '.$messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'got first message again, count decrements');
 
@@ -368,14 +368,14 @@ class ServiceBusTopicTest extends ScenarioTestBase
 
         $messageId = 2;
         while ($expectedCount > 0) {
-            $message3 = $this->restProxy->receiveSubscriptionMessage($this->topicName, $subscriptionName);
+            $message3 = $this->serviceBusWrapper->receiveSubscriptionMessage($this->topicName, $subscriptionName);
             --$expectedCount;
             self::write('Got message #'.$messageId.', Message count: '.$messageCount);
             $this->compareMessages($expectedMessages[$messageId], $message3, $expCustomProps[$messageId]);
             ++$messageId;
         }
 
-        $messageCount = $this->restProxy->getSubscription($this->topicName, $subscriptionName)->getMessageCount();
+        $messageCount = $this->serviceBusWrapper->getSubscription($this->topicName, $subscriptionName)->getMessageCount();
         self::write('got all messages, Message count: '.$messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'got all messages');
     }

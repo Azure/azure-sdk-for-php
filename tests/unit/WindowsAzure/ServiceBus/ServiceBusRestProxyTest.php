@@ -38,6 +38,7 @@ use WindowsAzure\ServiceBus\Models\QueueDescription;
 use WindowsAzure\ServiceBus\Models\QueueInfo;
 use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
 use WindowsAzure\ServiceBus\Models\RuleInfo;
+use WindowsAzure\ServiceBus\Models\SqlFilter;
 use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
 use WindowsAzure\ServiceBus\Models\TopicInfo;
 
@@ -82,10 +83,10 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $queueName = 'testDeleteQueueWorks';
         $queueInfo = new QueueInfo($queueName);
         $this->safeDeleteQueue($queueName);
-        $this->restProxy->createQueue($queueInfo);
+        $this->serviceBusWrapper->createQueue($queueInfo);
 
         // Test
-        $this->restProxy->deleteQueue($queueName);
+        $this->serviceBusWrapper->deleteQueue($queueName);
 
         // Assert
         $this->assertNotNull($queueInfo);
@@ -103,7 +104,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         );
 
         // Test
-        $this->restProxy->deleteQueue($queueName);
+        $this->serviceBusWrapper->deleteQueue($queueName);
 
         // Assert
     }
@@ -117,17 +118,17 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $queueName = 'testDeleteQueueSuccess';
         $createQueueInfo = new QueueInfo($queueName);
         $listQueuesOptions = new ListQueuesOptions();
-        $listQueuesResult = $this->restProxy->listQueues($listQueuesOptions);
+        $listQueuesResult = $this->serviceBusWrapper->listQueues($listQueuesOptions);
 
         foreach ($listQueuesResult->getQueueInfos() as $queueInfo) {
-            $this->restProxy->deleteQueue($queueInfo->getTitle());
+            $this->serviceBusWrapper->deleteQueue($queueInfo->getTitle());
         }
 
-        $this->restProxy->createQueue($createQueueInfo);
+        $this->serviceBusWrapper->createQueue($createQueueInfo);
 
         // Test
-        $this->restProxy->deleteQueue($queueName);
-        $listQueuesResult = $this->restProxy->listQueues($listQueuesOptions);
+        $this->serviceBusWrapper->deleteQueue($queueName);
+        $listQueuesResult = $this->serviceBusWrapper->listQueues($listQueuesOptions);
 
         // Assert
 
@@ -148,16 +149,16 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $queueName = 'testListQueueSuccess';
         $createQueueInfo = new QueueInfo($queueName);
         $listQueuesOptions = new ListQueuesOptions();
-        $listQueuesResult = $this->restProxy->listQueues($listQueuesOptions);
+        $listQueuesResult = $this->serviceBusWrapper->listQueues($listQueuesOptions);
 
         foreach ($listQueuesResult->getQueueInfos() as $queueInfo) {
-            $this->restProxy->deleteQueue($queueInfo->getTitle());
+            $this->serviceBusWrapper->deleteQueue($queueInfo->getTitle());
         }
-        $this->restProxy->createQueue($createQueueInfo);
+        $this->serviceBusWrapper->createQueue($createQueueInfo);
 
         // Test
-        $listQueuesResult = $this->restProxy->listQueues($listQueuesOptions);
-        $this->restProxy->deleteQueue($queueName);
+        $listQueuesResult = $this->serviceBusWrapper->listQueues($listQueuesOptions);
+        $this->serviceBusWrapper->deleteQueue($queueName);
 
         // Assert
         $this->assertEquals(
@@ -180,7 +181,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $brokeredMessage->setBody('sendQueueMessageWorksMessage');
 
         // Test
-        $this->restProxy->sendQueueMessage(
+        $this->serviceBusWrapper->sendQueueMessage(
             'sendQueueMessageWorksQueue',
             $brokeredMessage
         );
@@ -203,7 +204,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $brokeredMessage = new BrokeredMessage();
         $expectedMessageText = 'testReceiveMessageWorks';
         $brokeredMessage->setBody($expectedMessageText);
-        $this->restProxy->sendQueueMessage(
+        $this->serviceBusWrapper->sendQueueMessage(
             $queueName,
             $brokeredMessage
         );
@@ -212,7 +213,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $receiveMessageOptions->setReceiveAndDelete();
 
         // Test
-        $receivedMessage = $this->restProxy->receiveMessage(
+        $receivedMessage = $this->serviceBusWrapper->receiveMessage(
             $queueName.'/messages/head',
             $receiveMessageOptions
         );
@@ -239,13 +240,13 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->createQueue($queueInfo);
         $brokeredMessage = new BrokeredMessage();
         $brokeredMessage->setBody($expectedMessage);
-        $this->restProxy->sendQueueMessage($queueName, $brokeredMessage);
+        $this->serviceBusWrapper->sendQueueMessage($queueName, $brokeredMessage);
         $receiveMessageOptions = new ReceiveMessageOptions();
         $receiveMessageOptions->setTimeout(5);
         $receiveMessageOptions->setPeekLock();
 
         // Test
-        $receivedMessage = $this->restProxy->receiveQueueMessage(
+        $receivedMessage = $this->serviceBusWrapper->receiveQueueMessage(
             $queueName,
             $receiveMessageOptions
         );
@@ -273,7 +274,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->setExpectedException(get_class(new \InvalidArgumentException()));
 
         // Test
-        $this->restProxy->deleteMessage($brokeredMessage);
+        $this->serviceBusWrapper->deleteMessage($brokeredMessage);
 
         // Assert
         $this->assertTrue(false);
@@ -295,15 +296,15 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $brokeredMessage->setBody($expectedMessage);
 
         // Test
-        $this->restProxy->sendQueueMessage($queueName, $brokeredMessage);
+        $this->serviceBusWrapper->sendQueueMessage($queueName, $brokeredMessage);
         $receiveMessageOptions = new ReceiveMessageOptions();
         $receiveMessageOptions->setTimeout(5);
         $receiveMessageOptions->setPeekLock();
-        $receivedMessage = $this->restProxy->receiveQueueMessage(
+        $receivedMessage = $this->serviceBusWrapper->receiveQueueMessage(
             $queueName,
             $receiveMessageOptions
         );
-        $this->restProxy->deleteMessage($receivedMessage);
+        $this->serviceBusWrapper->deleteMessage($receivedMessage);
 
         // Assert
         $this->assertTrue(true);
@@ -324,7 +325,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $brokeredMessage = new BrokeredMessage();
         $brokeredMessage->setBody($expectedMessage);
 
-        $this->restProxy->sendQueueMessage(
+        $this->serviceBusWrapper->sendQueueMessage(
             $queueName,
             $brokeredMessage
         );
@@ -334,7 +335,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $receiveMessageOptions->setPeekLock();
 
         // Test
-        $receivedMessage = $this->restProxy->receiveQueueMessage(
+        $receivedMessage = $this->serviceBusWrapper->receiveQueueMessage(
             $queueName,
             $receiveMessageOptions
         );
@@ -360,11 +361,11 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->createQueue($queueInfo);
         $brokeredMessage = new BrokeredMessage();
         $brokeredMessage->setBody($expectedMessage);
-        $this->restProxy->sendQueueMessage($queueName, $brokeredMessage);
+        $this->serviceBusWrapper->sendQueueMessage($queueName, $brokeredMessage);
         $receiveMessageOptions = new ReceiveMessageOptions();
         $receiveMessageOptions->setTimeout(5);
         $receiveMessageOptions->setPeekLock();
-        $peekedMessage = $this->restProxy->receiveQueueMessage(
+        $peekedMessage = $this->serviceBusWrapper->receiveQueueMessage(
             $queueName,
             $receiveMessageOptions
         );
@@ -372,9 +373,9 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $lockedUntilUtc = $peekedMessage->getLockedUntilUtc();
 
         // Test
-        $this->restProxy->unlockMessage($peekedMessage);
+        $this->serviceBusWrapper->unlockMessage($peekedMessage);
         $receiveMessageOptions->setReceiveAndDelete();
-        $unlockedMessage = $this->restProxy->receiveQueueMessage(
+        $unlockedMessage = $this->serviceBusWrapper->receiveQueueMessage(
             $queueName,
             $receiveMessageOptions
         );
@@ -407,8 +408,8 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $receiveMessageOptions->setReceiveAndDelete();
 
         // Test
-        $this->restProxy->sendQueueMessage($queueName, $expectedMessage);
-        $actualMessage = $this->restProxy->receiveQueueMessage(
+        $this->serviceBusWrapper->sendQueueMessage($queueName, $expectedMessage);
+        $actualMessage = $this->serviceBusWrapper->receiveQueueMessage(
             $queueName,
             $receiveMessageOptions
         );
@@ -437,18 +438,18 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $topicName = 'createTopicSuccess';
         $topicInfo = new TopicInfo($topicName);
         $listTopicsOptions = new ListTopicsOptions();
-        $listTopicsResult = $this->restProxy->listTopics($listTopicsOptions);
+        $listTopicsResult = $this->serviceBusWrapper->listTopics($listTopicsOptions);
 
         foreach ($listTopicsResult->getTopicInfos() as $topicInfo) {
-            $this->restProxy->deleteTopic($topicInfo->getTitle());
+            $this->serviceBusWrapper->deleteTopic($topicInfo->getTitle());
         }
 
         // Test
         $createTopicResult = $this->createTopic($topicInfo);
-        $listTopicsResult = $this->restProxy->listTopics($listTopicsOptions);
-        $getTopicResult = $this->restProxy->getTopic($topicName);
+        $listTopicsResult = $this->serviceBusWrapper->listTopics($listTopicsOptions);
+        $getTopicResult = $this->serviceBusWrapper->getTopic($topicName);
         $this->safeDeleteTopic($topicName);
-        $listTopicsResult2 = $this->restProxy->listTopics($listTopicsOptions);
+        $listTopicsResult2 = $this->serviceBusWrapper->listTopics($listTopicsOptions);
 
         // Assert
         $this->assertNotNull($createTopicResult);
@@ -507,7 +508,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->createSubscription($topicName, $subscriptionInfo);
 
         // Test
-        $listSubscriptionsResult = $this->restProxy->listSubscriptions(
+        $listSubscriptionsResult = $this->serviceBusWrapper->listSubscriptions(
             $topicName,
             $listSubscriptionOptions
         );
@@ -536,7 +537,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->createSubscription($topicName, $subscriptionInfo);
 
         // Test
-        $subscriptionInfo = $this->restProxy->getSubscription(
+        $subscriptionInfo = $this->serviceBusWrapper->getSubscription(
             $topicName,
             $subscriptionName
         );
@@ -566,8 +567,8 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->createSubscription($topicName, $subscriptionInfo);
 
         // Test
-        $this->restProxy->deleteSubscription($topicName, $subscriptionName);
-        $listSubscriptionsResult = $this->restProxy->listSubscriptions(
+        $this->serviceBusWrapper->deleteSubscription($topicName, $subscriptionName);
+        $listSubscriptionsResult = $this->serviceBusWrapper->listSubscriptions(
             $topicName,
             $listSubscriptionsOptions
         );
@@ -604,17 +605,17 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->createSubscription($topicName, $secondSubscriptionInfo);
 
         // Test
-        $listSubscriptionsResult = $this->restProxy->listSubscriptions(
+        $listSubscriptionsResult = $this->serviceBusWrapper->listSubscriptions(
             $topicName,
             $listSubscriptionOptions
         );
 
         $subscriptionInfo = $listSubscriptionsResult->getSubscriptionInfos();
 
-        $this->restProxy->deleteSubscription($topicName, $secondSubscriptionName);
-        $this->restProxy->deleteSubscription($topicName, $subscriptionName);
+        $this->serviceBusWrapper->deleteSubscription($topicName, $secondSubscriptionName);
+        $this->serviceBusWrapper->deleteSubscription($topicName, $subscriptionName);
 
-        $emptyListSubscriptionsResult = $this->restProxy->listSubscriptions(
+        $emptyListSubscriptionsResult = $this->serviceBusWrapper->listSubscriptions(
             $topicName,
             $listSubscriptionOptions
         );
@@ -658,8 +659,8 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $receiveMessageOptions->setReceiveAndDelete();
 
         // Test
-        $this->restProxy->sendTopicMessage($topicName, $brokeredMessage);
-        $receivedMessage = $this->restProxy->receiveSubscriptionMessage($topicName, $subscriptionName, $receiveMessageOptions);
+        $this->serviceBusWrapper->sendTopicMessage($topicName, $brokeredMessage);
+        $receivedMessage = $this->serviceBusWrapper->receiveSubscriptionMessage($topicName, $subscriptionName, $receiveMessageOptions);
 
         // Assert
         $this->assertNotNull($createTopicResult);
@@ -695,9 +696,9 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $receiveMessageOptions->setReceiveAndDelete();
 
         // Test
-        $this->restProxy->sendTopicMessage($topicName, $brokeredMessage);
-        $receivedMessage = $this->restProxy->receiveSubscriptionMessage($topicName, $subscriptionName, $receiveMessageOptions);
-        $subscriptionInfo = $this->restProxy->getSubscription($topicName, $subscriptionName);
+        $this->serviceBusWrapper->sendTopicMessage($topicName, $brokeredMessage);
+        $receivedMessage = $this->serviceBusWrapper->receiveSubscriptionMessage($topicName, $subscriptionName, $receiveMessageOptions);
+        $subscriptionInfo = $this->serviceBusWrapper->getSubscription($topicName, $subscriptionName);
 
         // Assert
         $this->assertNotNull($subscriptionInfo);
@@ -728,7 +729,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
 
         // Test
         $createRuleResult = $this->createRule($topicName, $subscriptionName, $ruleInfo);
-        $ruleInfo = $this->restProxy->getRule($topicName, $subscriptionName, $ruleName);
+        $ruleInfo = $this->serviceBusWrapper->getRule($topicName, $subscriptionName, $ruleName);
 
         // Assert
         $this->assertNotNull($createRuleResult);
@@ -764,7 +765,7 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         // Test
         $this->createRule($topicName, $subscriptionName, $ruleInfo);
         $this->createRule($topicName, $subscriptionName, $secondRuleInfo);
-        $listRulesResult = $this->restProxy->listRules($topicName, $subscriptionName, $listRulesOptions);
+        $listRulesResult = $this->serviceBusWrapper->listRules($topicName, $subscriptionName, $listRulesOptions);
 
         // Assert
         $this->assertNotNull($listRulesResult);
@@ -787,7 +788,9 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->createSubscription($topicName, $subscriptionInfo);
 
         // Test
-        $getRuleResult = $this->restProxy->getRule($topicName, $subscriptionName, Resources::DEFAULT_RULE_NAME);
+        $getRuleResult = $this->serviceBusWrapper->getRule(
+            $topicName, $subscriptionName, Resources::DEFAULT_RULE_NAME
+        );
 
         // Assert
         $this->assertNotNull($getRuleResult);
@@ -820,11 +823,11 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $this->createRule($topicName, $subscriptionName, $secondRuleInfo);
 
         // Test
-        $this->restProxy->deleteRule($topicName, $subscriptionName, $secondRuleName);
-        $this->restProxy->deleteRule($topicName, $subscriptionName, $firstRuleName);
-        $this->restProxy->deleteRule($topicName, $subscriptionName, Resources::DEFAULT_RULE_NAME);
+        $this->serviceBusWrapper->deleteRule($topicName, $subscriptionName, $secondRuleName);
+        $this->serviceBusWrapper->deleteRule($topicName, $subscriptionName, $firstRuleName);
+        $this->serviceBusWrapper->deleteRule($topicName, $subscriptionName, Resources::DEFAULT_RULE_NAME);
 
-        $listRulesResult = $this->restProxy->listRules($topicName, $subscriptionName, $listRulesOptions);
+        $listRulesResult = $this->serviceBusWrapper->listRules($topicName, $subscriptionName, $listRulesOptions);
         $ruleInfo = $listRulesResult->getRuleInfos();
 
         // Assert
@@ -860,12 +863,13 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         );
         $rule = new RuleInfo('one');
         $rule->withSqlFilter('OrderID=123');
-        $this->restProxy->createRule($topicName, $subscriptionName, $rule);
+        $this->serviceBusWrapper->createRule($topicName, $subscriptionName, $rule);
 
         // Test
-        $listRulesResult = $this->restProxy->listRules($topicName, $subscriptionName);
+        $listRulesResult = $this->serviceBusWrapper->listRules($topicName, $subscriptionName);
         $ruleInfo = $listRulesResult->getRuleInfos();
         $ruleInfoInstance = $ruleInfo[1];
+        /** @var SqlFilter $actualFilter */
         $actualFilter = $ruleInfoInstance->getFilter();
         $actual = $actualFilter->getSqlExpression();
 
@@ -914,37 +918,37 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $expectedRuleSix->withSqlFilter('x != 5');
 
         // Test
-        $actualRuleOne = $this->restProxy->createRule(
+        $actualRuleOne = $this->serviceBusWrapper->createRule(
             $topicName,
             $subscriptionName,
             $expectedRuleOne
         );
 
-        $actualRuleTwo = $this->restProxy->createRule(
+        $actualRuleTwo = $this->serviceBusWrapper->createRule(
             $topicName,
             $subscriptionName,
             $expectedRuleTwo
         );
 
-        $actualRuleThree = $this->restProxy->createRule(
+        $actualRuleThree = $this->serviceBusWrapper->createRule(
             $topicName,
             $subscriptionName,
             $expectedRuleThree
         );
 
-        $actualRuleFour = $this->restProxy->createRule(
+        $actualRuleFour = $this->serviceBusWrapper->createRule(
             $topicName,
             $subscriptionName,
             $expectedRuleFour
         );
 
-        $actualRuleFive = $this->restProxy->createRule(
+        $actualRuleFive = $this->serviceBusWrapper->createRule(
             $topicName,
             $subscriptionName,
             $expectedRuleFive
         );
 
-        $actualRuleSix = $this->restProxy->createRule(
+        $actualRuleSix = $this->serviceBusWrapper->createRule(
             $topicName,
             $subscriptionName,
             $expectedRuleSix
@@ -1011,13 +1015,13 @@ class ServiceBusRestProxyTest extends ServiceBusRestProxyTestBase
         $brokeredMessage->setProperty('testBoolean', $expectedTestBooleanValue);
         $brokeredMessage->setProperty('testBooleanFalse', $expectedTestBooleanFalseValue);
 
-        $this->restProxy->sendQueueMessage($queueName, $brokeredMessage);
+        $this->serviceBusWrapper->sendQueueMessage($queueName, $brokeredMessage);
         $receiveMessageOptions = new ReceiveMessageOptions();
         $receiveMessageOptions->setTimeout(5);
         $receiveMessageOptions->setReceiveAndDelete();
 
         // Test
-        $receivedMessage = $this->restProxy->receiveQueueMessage(
+        $receivedMessage = $this->serviceBusWrapper->receiveQueueMessage(
             $queueName,
             $receiveMessageOptions
         );

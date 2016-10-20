@@ -31,7 +31,9 @@ use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\ListQueuesOptions;
 use WindowsAzure\ServiceBus\Models\ListQueuesResult;
 use WindowsAzure\ServiceBus\Models\ListRulesOptions;
+use WindowsAzure\ServiceBus\Models\ListRulesResult;
 use WindowsAzure\ServiceBus\Models\ListSubscriptionsOptions;
+use WindowsAzure\ServiceBus\Models\ListSubscriptionsResult;
 use WindowsAzure\ServiceBus\Models\ListTopicsOptions;
 use WindowsAzure\ServiceBus\Models\ListTopicsResult;
 use WindowsAzure\ServiceBus\Models\QueueInfo;
@@ -79,14 +81,16 @@ interface IServiceBus extends FilterableService
     /**
      * Receives a queue message. 
      * 
-     * @param string                $queueName              The name of the
-     *                                                      queue.
-     * @param ReceiveMessageOptions $receivedMessageOptions The options to
-     *                                                      receive the message.
+     * @param string                     $queueName              The name of the
+     *                                                           queue.
+     * @param ReceiveMessageOptions|null $receivedMessageOptions The options to
+     *                                                           receive the message.
      *
      * @throws Exception
+     *
+     * @return BrokeredMessage
      */
-    public function receiveQueueMessage($queueName, ReceiveMessageOptions $receivedMessageOptions);
+    public function receiveQueueMessage($queueName, ReceiveMessageOptions $receivedMessageOptions = null);
 
     /**
      * Receives a message. 
@@ -97,6 +101,8 @@ interface IServiceBus extends FilterableService
      *                                                     receive the message.
      *
      * @throws Exception
+     *
+     * @return BrokeredMessage
      */
     public function receiveMessage($path, ReceiveMessageOptions $receiveMessageOptions);
 
@@ -113,19 +119,21 @@ interface IServiceBus extends FilterableService
     /**
      * Receives a subscription message. 
      * 
-     * @param string                $topicName             The name of the
-     *                                                     topic.
-     * @param string                $subscriptionName      The name of the
-     *                                                     subscription.
-     * @param ReceiveMessageOptions $receiveMessageOptions The options to
-     *                                                     receive the subscription message.
+     * @param string                     $topicName             The name of the
+     *                                                          topic.
+     * @param string                     $subscriptionName      The name of the
+     *                                                          subscription.
+     * @param ReceiveMessageOptions|null $receiveMessageOptions The options to
+     *                                                          receive the subscription message.
      *
      * @throws Exception
+     *
+     * @return BrokeredMessage
      */
     public function receiveSubscriptionMessage(
         $topicName,
         $subscriptionName,
-        ReceiveMessageOptions $receiveMessageOptions
+        ReceiveMessageOptions $receiveMessageOptions = null
     );
 
     /**
@@ -152,6 +160,8 @@ interface IServiceBus extends FilterableService
      * @param QueueInfo $queueInfo The information of the queue.
      *
      * @throws Exception
+     *
+     * @return QueueInfo
      */
     public function createQueue(QueueInfo $queueInfo);
 
@@ -170,6 +180,8 @@ interface IServiceBus extends FilterableService
      * @param string $queuePath The path of the queue.
      *
      * @throws Exception
+     *
+     * @return QueueInfo
      */
     public function getQueue($queuePath);
 
@@ -209,6 +221,8 @@ interface IServiceBus extends FilterableService
      * @param string $topicPath The path of the topic.
      *
      * @throws Exception
+     *
+     * @return TopicInfo
      */
     public function getTopic($topicPath);
 
@@ -233,6 +247,8 @@ interface IServiceBus extends FilterableService
      *                                           subscription.
      *
      * @throws Exception
+     *
+     * @return SubscriptionInfo
      */
     public function createSubscription($topicPath, SubscriptionInfo $subscriptionInfo);
 
@@ -253,20 +269,24 @@ interface IServiceBus extends FilterableService
      * @param string $subscriptionName The name of the subscription.
      *
      * @throws Exception
+     *
+     * @return SubscriptionInfo
      */
     public function getSubscription($topicPath, $subscriptionName);
 
     /**
      * Lists subscriptions. 
      * 
-     * @param string                   $topicPath                The path of 
-     *                                                           the topic.
-     * @param ListSubscriptionsOptions $listSubscriptionsOptions The options
-     *                                                           to list the subscriptions. 
+     * @param string                        $topicPath                The path of
+     *                                                                the topic.
+     * @param ListSubscriptionsOptions|null $listSubscriptionsOptions The options
+     *                                                                to list the subscriptions.
      *
      * @throws Exception
+     *
+     * @return ListSubscriptionsResult
      */
-    public function listSubscriptions($topicPath, ListSubscriptionsOptions $listSubscriptionsOptions);
+    public function listSubscriptions($topicPath, ListSubscriptionsOptions $listSubscriptionsOptions = null);
 
     /**
      * Creates a rule. 
@@ -274,6 +294,8 @@ interface IServiceBus extends FilterableService
      * @param string   $topicPath        The path of the topic.
      * @param string   $subscriptionName The name of the subscription.
      * @param RuleInfo $ruleInfo         The info of the rule.
+     *
+     * @return RuleInfo
      *
      * @throws Exception
      */
@@ -298,17 +320,21 @@ interface IServiceBus extends FilterableService
      * @param string $ruleName         The name of the rule.
      *
      * @throws Exception
+     *
+     * @return RuleInfo
      */
     public function getRule($topicPath, $subscriptionName, $ruleName);
 
     /**
      * Lists rules. 
      * 
-     * @param string           $topicPath        The path of the topic.
-     * @param string           $subscriptionName The name of the subscription.
-     * @param ListRulesOptions $listRulesOptions The options to list the rules.
+     * @param string                $topicPath        The path of the topic.
+     * @param string                $subscriptionName The name of the subscription.
+     * @param ListRulesOptions|null $listRulesOptions The options to list the rules.
      *
      * @throws Exception
+     *
+     * @return ListRulesResult
      */
-    public function listRules($topicPath, $subscriptionName, ListRulesOptions $listRulesOptions);
+    public function listRules($topicPath, $subscriptionName, ListRulesOptions $listRulesOptions = null);
 }

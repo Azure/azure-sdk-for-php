@@ -62,7 +62,7 @@ class ServiceBusQueueTest extends ScenarioTestBase
         $this->peekLockTest($expectedMessages);
 
         self::write('Deleting queue '.$this->queueName);
-        $this->restProxy->deleteQueue($this->queueName);
+        $this->serviceBusWrapper->deleteQueue($this->queueName);
         self::write('Deleted queue '.$this->queueName);
     }
 
@@ -77,16 +77,16 @@ class ServiceBusQueueTest extends ScenarioTestBase
         $options = new ListQueuesOptions();
         $options->setSkip(20);
         $options->setTop(2);
-        $queues = $this->restProxy->listQueues($options)->getQueueInfos();
+        $queues = $this->serviceBusWrapper->listQueues($options)->getQueueInfos();
         foreach ($queues as $queue) {
             self::write('Queue name is '.$queue->getTitle());
         }
 
         self::write('checking if queue already exists '.$this->queueName);
         try {
-            $this->restProxy->getQueue($this->queueName);
+            $this->serviceBusWrapper->getQueue($this->queueName);
             self::write('Queue already exists deleting it');
-            $this->restProxy->deleteQueue($this->queueName);
+            $this->serviceBusWrapper->deleteQueue($this->queueName);
         } catch (\Exception $e) {
             self::write('could not get an existing queue ('.$e->getCode().'), proceeding...');
         }
@@ -99,12 +99,14 @@ class ServiceBusQueueTest extends ScenarioTestBase
 
         self::write('Creating queue '.$this->queueName);
 
-        $this->restProxy->createQueue($q);
-        $this->restProxy->getQueue($this->queueName);
+        $this->serviceBusWrapper->createQueue($q);
+        $this->serviceBusWrapper->getQueue($this->queueName);
     }
 
     /**
      * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::sendQueueMessage
+     *
+     * @return BrokeredMessage[]
      */
     private function sendMessages()
     {
@@ -114,7 +116,7 @@ class ServiceBusQueueTest extends ScenarioTestBase
         $messages[] = $this->createIssueMessage('3', 'Third  message information', 'label3', 'location3');
         $messages[] = $this->createIssueMessage('4', 'Fourth message information', 'label4', 'location4');
         foreach ($messages as $message) {
-            $this->restProxy->sendQueueMessage($this->queueName, $message);
+            $this->serviceBusWrapper->sendQueueMessage($this->queueName, $message);
             $data = $message->getBody();
             self::write('Message sent with id: '.$message->getMessageId().' Body of $message '.$data);
         }
@@ -122,6 +124,13 @@ class ServiceBusQueueTest extends ScenarioTestBase
         return $messages;
     }
 
+    /**
+     * @param $issueId
+     * @param $issueBody
+     * @param $label
+     * @param $messageLocation
+     * @return BrokeredMessage
+     */
     private function createIssueMessage($issueId, $issueBody, $label, $messageLocation)
     {
         $message = new BrokeredMessage($issueBody);
@@ -157,55 +166,57 @@ class ServiceBusQueueTest extends ScenarioTestBase
      * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::getQueue
      * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::receiveQueueMessage
      * @covers \WindowsAzure\ServiceBus\ServiceBusRestProxy::unlockMessage
+     *
+     * @param BrokeredMessage[] $expectedMessages
      */
-    private function peekLockTest($expectedMessages)
+    private function peekLockTest(array $expectedMessages)
     {
         $expectedCount = count($expectedMessages);
         self::write('Receiving queue messages '.$this->queueName);
-        $messageCount = $this->restProxy->getQueue($this->queueName)->getMessageCount();
+        $messageCount = $this->serviceBusWrapper->getQueue($this->queueName)->getMessageCount();
         self::write('Before getting any messages, Message count: '.$messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Before getting any messages');
 
         // Get the first message
 
-        $message = $this->restProxy->receiveQueueMessage($this->queueName, $this->PEEK_LOCK);
+        $message = $this->serviceBusWrapper->receiveQueueMessage($this->queueName, $this->PEEK_LOCK);
         $this->compareMessages($expectedMessages[0], $message);
 
-        $messageCount = $this->restProxy->getQueue($this->queueName)->getMessageCount();
+        $messageCount = $this->serviceBusWrapper->getQueue($this->queueName)->getMessageCount();
         self::write('Peek locked first message, Message count: '.$messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Peek locked first message, count should not change');
 
         // Get the second message
 
-        $message2 = $this->restProxy->receiveQueueMessage($this->queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
+        $message2 = $this->serviceBusWrapper->receiveQueueMessage($this->queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
         --$expectedCount;
         $this->compareMessages($expectedMessages[1], $message2);
 
-        $messageCount = $this->restProxy->getQueue($this->queueName)->getMessageCount();
+        $messageCount = $this->serviceBusWrapper->getQueue($this->queueName)->getMessageCount();
         self::write('RECEIVE_AND_DELETE second message, Message count: '.$messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'RECEIVE_AND_DELETE second message, count decrements');
 
         // Unlock the first message
 
-        $this->restProxy->unlockMessage($message);
+        $this->serviceBusWrapper->unlockMessage($message);
 
-        $messageCount = $this->restProxy->getQueue($this->queueName)->getMessageCount();
+        $messageCount = $this->serviceBusWrapper->getQueue($this->queueName)->getMessageCount();
         self::write('Unlocked first message, Message count: '.$messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Unlocked first message, count stays the same');
 
         // Get the first unlocked message
 
-        $message1again = $this->restProxy->receiveQueueMessage($this->queueName);
+        $message1again = $this->serviceBusWrapper->receiveQueueMessage($this->queueName);
         --$expectedCount;
         // Should be the original, now that it is unlocked
         $this->compareMessages($expectedMessages[0], $message1again);
 
-        $messageCount = $this->restProxy->getQueue($this->queueName)->getMessageCount();
+        $messageCount = $this->serviceBusWrapper->getQueue($this->queueName)->getMessageCount();
         self::write('got first message again, Message count: '.$messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Got message one again (destructive), count should decrease');
 
         try {
-            $this->restProxy->deleteMessage($message1again);
+            $this->serviceBusWrapper->deleteMessage($message1again);
             $this->fail('Deleting a RECEIVEANDDELETE messasge should fail');
         } catch (\InvalidArgumentException $ex) {
             $this->assertEquals(
@@ -215,27 +226,28 @@ class ServiceBusQueueTest extends ScenarioTestBase
 
         // Get the third
 
-        $message3 = $this->restProxy->receiveQueueMessage($this->queueName, $this->PEEK_LOCK);
+        $message3 = $this->serviceBusWrapper->receiveQueueMessage($this->queueName, $this->PEEK_LOCK);
         $this->compareMessages($expectedMessages[2], $message3);
 
-        $messageCount = $this->restProxy->getQueue($this->queueName)->getMessageCount();
+        $messageCount = $this->serviceBusWrapper->getQueue($this->queueName)->getMessageCount();
         self::write('Got third message, Message count: '.$messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Peeked third message, count should not change');
 
-        $this->restProxy->deleteMessage($message3);
+        $this->serviceBusWrapper->deleteMessage($message3);
         --$expectedCount;
 
-        $messageCount = $this->restProxy->getQueue($this->queueName)->getMessageCount();
+        $messageCount = $this->serviceBusWrapper->getQueue($this->queueName)->getMessageCount();
         self::write('Deleted third message, Message count: '.$messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Deleted third message, count decrements');
 
         // Get the fourth
 
-        $message4 = $this->restProxy->receiveQueueMessage($this->queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
+        $message4 = $this->serviceBusWrapper->receiveQueueMessage(
+            $this->queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
         --$expectedCount;
         $this->compareMessages($expectedMessages[3], $message4);
 
-        $messageCount = $this->restProxy->getQueue($this->queueName)->getMessageCount();
+        $messageCount = $this->serviceBusWrapper->getQueue($this->queueName)->getMessageCount();
         self::write('Got fourth message, Message count: '.$messageCount);
         $this->assertEquals($expectedCount, $messageCount, 'Got fourth message, count should decrement');
     }

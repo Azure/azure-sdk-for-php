@@ -28,7 +28,9 @@ namespace WindowsAzure\ServiceRuntime;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceRuntime\Internal\CurrentState;
 use WindowsAzure\ServiceRuntime\Internal\GoalState;
+use WindowsAzure\ServiceRuntime\Internal\IRoleEnvironmentChange;
 use WindowsAzure\ServiceRuntime\Internal\IRuntimeClient;
+use WindowsAzure\ServiceRuntime\Internal\LocalResource;
 use WindowsAzure\ServiceRuntime\Internal\Role;
 use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentData;
 use WindowsAzure\ServiceRuntime\Internal\RoleInstance;
@@ -343,7 +345,7 @@ class RoleEnvironment
      *
      * @static
      *
-     * @return array
+     * @return IRoleEnvironmentChange[]
      */
     private static function _calculateChanges()
     {
@@ -415,7 +417,7 @@ class RoleEnvironment
      * 
      * @static
      * 
-     * @return array
+     * @return RoleEnvironmentConfigurationSettingChange[]
      */
     private static function _calculateConfigurationChanges(
         RoleEnvironmentData $currentRoleEnvironment,
@@ -706,7 +708,7 @@ class RoleEnvironment
      * 
      * @static
      * 
-     * @return array
+     * @return Role[]
      */
     public static function getRoles()
     {
@@ -738,7 +740,7 @@ class RoleEnvironment
      * 
      * @static
      * 
-     * @return array
+     * @return LocalResource[]
      */
     public static function getLocalResources()
     {

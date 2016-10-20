@@ -27,6 +27,10 @@ namespace Tests\framework;
 
 
 use WindowsAzure\ServiceBus\Internal\IServiceBus;
+use WindowsAzure\ServiceBus\Models\QueueInfo;
+use WindowsAzure\ServiceBus\Models\RuleInfo;
+use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
+use WindowsAzure\ServiceBus\Models\TopicInfo;
 
 /**
  * TestBase class for each unit test class.
@@ -64,40 +68,45 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
         parent::setProxy($this->serviceBusWrapper);
     }
 
-    public function createQueue($queueInfo)
+    public function createQueue(QueueInfo $queueInfo)
     {
         $this->_createdQueues[] = $queueInfo->getTitle();
 
-        return $this->restProxy->createQueue($queueInfo);
+        return $this->serviceBusWrapper->createQueue($queueInfo);
     }
 
-    public function createTopic($topicInfo)
+    public function createTopic(TopicInfo $topicInfo)
     {
         $this->_createdTopics[] = $topicInfo->getTitle();
 
-        return $this->restProxy->createTopic($topicInfo);
+        return $this->serviceBusWrapper->createTopic($topicInfo);
     }
 
-    public function createSubscription($topicName, $subscriptionInfo)
+    /**
+     * @param $topicName
+     * @param SubscriptionInfo $subscriptionInfo
+     * @return SubscriptionInfo
+     */
+    public function createSubscription($topicName, SubscriptionInfo $subscriptionInfo)
     {
         $topicSubscriptionNameArray = [$topicName, $subscriptionInfo->getTitle()];
         $this->_createdSubscriptions[] = implode('::', $topicSubscriptionNameArray);
 
-        return $this->restProxy->createSubscription($topicName, $subscriptionInfo);
+        return $this->serviceBusWrapper->createSubscription($topicName, $subscriptionInfo);
     }
 
-    public function createRule($topicName, $subscriptionName, $ruleInfo)
+    public function createRule($topicName, $subscriptionName, RuleInfo $ruleInfo)
     {
         $topicSubscriptionRuleArray = [$topicName, $subscriptionName, $ruleInfo->getTitle()];
         $this->_createdRules[] = implode('::', $topicSubscriptionRuleArray);
 
-        return $this->restProxy->createRule($topicName, $subscriptionName, $ruleInfo);
+        return $this->serviceBusWrapper->createRule($topicName, $subscriptionName, $ruleInfo);
     }
 
     public function safeDeleteQueue($queueName)
     {
         try {
-            $this->restProxy->deleteQueue($queueName);
+            $this->serviceBusWrapper->deleteQueue($queueName);
         } catch (\Exception $e) {
             // no need to show the error messages here. They are benign. 
             //error_log($e->getMessage());
@@ -107,7 +116,7 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
     public function safeDeleteRule($topicName, $subscriptionName, $ruleName)
     {
         try {
-            $this->restProxy->deleteRule($topicName, $subscriptionName, $ruleName);
+            $this->serviceBusWrapper->deleteRule($topicName, $subscriptionName, $ruleName);
         } catch (\Exception $e) {
             // no need to show the error messages here. They are benign.
             //error_log($e->getMessage());
@@ -117,7 +126,7 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
     public function safeDeleteSubscription($topicName, $subscriptionName)
     {
         try {
-            $this->restProxy->deleteSubscription($topicName, $subscriptionName);
+            $this->serviceBusWrapper->deleteSubscription($topicName, $subscriptionName);
         } catch (\Exception $e) {
             // no need to show the error messages here. They are benign.
             //error_log($e->getMessage());
@@ -127,7 +136,7 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
     public function safeDeleteTopic($topicName)
     {
         try {
-            $this->restProxy->deleteTopic($topicName);
+            $this->serviceBusWrapper->deleteTopic($topicName);
         } catch (\Exception $e) {
             // no need to show the error messages here. They are benign.
             //error_log($e->getMessage());

@@ -51,7 +51,7 @@ class RoleEnvironmentData
     private $_configurationSettings;
 
     /**
-     * @var array
+     * @var LocalResource[]
      */
     private $_localResources;
 
@@ -73,18 +73,18 @@ class RoleEnvironmentData
     /**
      * Constructor.
      * 
-     * @param string       $deploymentId          The deployment identifier.
-     * @param array        $configurationSettings The configuration settings.
-     * @param array        $localResources        The local resources.
-     * @param RoleInstance $currentInstance       The current instance information.
-     * @param Role[]       $roles                 The instance roles.
-     * @param bool         $isEmulated            Boolean value indicating if
-     *                                            the instance is running in the emulator.
+     * @param string          $deploymentId          The deployment identifier.
+     * @param array           $configurationSettings The configuration settings.
+     * @param LocalResource[] $localResources        The local resources.
+     * @param RoleInstance    $currentInstance       The current instance information.
+     * @param Role[]          $roles                 The instance roles.
+     * @param bool            $isEmulated            Boolean value indicating if
+     *                                               the instance is running in the emulator.
      */
     public function __construct(
         $deploymentId,
         $configurationSettings,
-        $localResources,
+        array $localResources,
         $currentInstance,
         array $roles,
         $isEmulated
@@ -110,7 +110,7 @@ class RoleEnvironmentData
     /**
      * Gets the local resources.
      * 
-     * @return array
+     * @return LocalResource[]
      */
     public function getLocalResources()
     {

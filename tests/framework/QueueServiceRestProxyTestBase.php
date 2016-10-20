@@ -24,7 +24,7 @@
  */
 
 namespace Tests\framework;
-
+use MicrosoftAzure\Storage\Queue\Internal\IQueue;
 
 
 /**
@@ -43,24 +43,28 @@ namespace Tests\framework;
 class QueueServiceRestProxyTestBase extends ServiceRestProxyTestBase
 {
     private $_createdQueues;
+    /**
+     * @var IQueue
+     */
+    private $queueRestProxy;
 
     public function setUp()
     {
         parent::setUp();
-        $queueRestProxy = $this->builder->createQueueService($this->connectionString);
-        parent::setProxy($queueRestProxy);
+        $this->queueRestProxy = $this->builder->createQueueService($this->connectionString);
+        parent::setProxy($this->queueRestProxy);
         $this->_createdQueues = [];
     }
 
     public function createQueue($queueName, $options = null)
     {
-        $this->restProxy->createQueue($queueName, $options);
+        $this->queueRestProxy->createQueue($queueName, $options);
         $this->_createdQueues[] = $queueName;
     }
 
     public function deleteQueue($queueName, $options = null)
     {
-        $this->restProxy->deleteQueue($queueName, $options);
+        $this->queueRestProxy->deleteQueue($queueName, $options);
     }
 
     public function safeDeleteQueue($queueName)

@@ -158,10 +158,10 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780735
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780756
      *
-     * @param string                $queueName             The name of the
-     *                                                     queue.
-     * @param ReceiveMessageOptions $receiveMessageOptions The options to
-     *                                                     receive the message.
+     * @param string                     $queueName             The name of the
+     *                                                          queue.
+     * @param ReceiveMessageOptions|null $receiveMessageOptions The options to
+     *                                                          receive the message.
      *
      * @return BrokeredMessage
      */
@@ -289,12 +289,12 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780722
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780770
      *
-     * @param string                $topicName             The name of the
-     *                                                     topic.
-     * @param string                $subscriptionName      The name of the
-     *                                                     subscription.
-     * @param ReceiveMessageOptions $receiveMessageOptions The options to
-     *                                                     receive the subscription message.
+     * @param string                     $topicName             The name of the
+     *                                                          topic.
+     * @param string                     $subscriptionName      The name of the
+     *                                                          subscription.
+     * @param ReceiveMessageOptions|null $receiveMessageOptions The options to
+     *                                                          receive the subscription message.
      *
      * @return BrokeredMessage
      */
@@ -741,10 +741,10 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780766
      *
-     * @param string                   $topicPath                The path of
-     *                                                           the topic.
-     * @param ListSubscriptionsOptions $listSubscriptionsOptions The options
-     *                                                           to list the subscription.
+     * @param string                        $topicPath                The path of
+     *                                                                the topic.
+     * @param ListSubscriptionsOptions|null $listSubscriptionsOptions The options
+     *                                                                to list the subscription.
      *
      * @return ListSubscriptionsResult
      */
@@ -880,9 +880,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780732
      *
-     * @param string           $topicPath        The path of the topic.
-     * @param string           $subscriptionName The name of the subscription.
-     * @param ListRulesOptions $listRulesOptions The options to list the rules.
+     * @param string                $topicPath        The path of the topic.
+     * @param string                $subscriptionName The name of the subscription.
+     * @param ListRulesOptions|null $listRulesOptions The options to list the rules.
      *
      * @return ListRulesResult
      */

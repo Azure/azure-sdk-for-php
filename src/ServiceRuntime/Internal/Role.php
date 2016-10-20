@@ -48,15 +48,15 @@ class Role
     private $_name;
 
     /**
-     * @var array
+     * @var RoleInstance[]
      */
     private $_instances;
 
     /**
      * Constructor.
      * 
-     * @param string $name      The role name.
-     * @param array  $instances The role instances.
+     * @param string         $name      The role name.
+     * @param RoleInstance[] $instances The role instances.
      */
     public function __construct($name, array $instances)
     {
@@ -73,7 +73,7 @@ class Role
      * A role must define at least one internal endpoint in order for its set 
      * of instances to be known at runtime.
      * 
-     * @return array
+     * @return RoleInstance[]
      */
     public function getInstances()
     {
