@@ -451,7 +451,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     public function testGetSetContributor()
     {
         // Setup
-        $expected = 'testContributor';
+        $expected = [new Person()];
         $entry = new Entry();
 
         // Test
