@@ -147,7 +147,7 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     public function testGetSetDate()
     {
         // Setup
-        $expected = new \DateTime();
+        $expected = 'date time';
         $brokeredMessage = new BrokeredMessage();
 
         // Test
