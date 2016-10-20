@@ -26,6 +26,7 @@
 namespace Tests\framework;
 
 
+use WindowsAzure\ServiceManagement\Internal\IServiceManagement;
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
@@ -55,16 +56,20 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
     protected $defaultDeploymentConfiguration;
     protected $complexConfiguration;
     protected $storageServiceName;
+    /**
+     * @var IServiceManagement
+     */
+    protected $serviceManagementRestProxy;
 
     public function setUp()
     {
         $this->skipIfEmulated();
         $this->skipIfOSX();
         parent::setUp();
-        $serviceManagementRestProxy = $this->builder->createServiceManagementService(TestResources::getServiceManagementConnectionString());
-        parent::setProxy($serviceManagementRestProxy);
+        $this->serviceManagementRestProxy = $this->builder->createServiceManagementService(TestResources::getServiceManagementConnectionString());
+        parent::setProxy($this->serviceManagementRestProxy);
 
-        $result = $serviceManagementRestProxy->listLocations();
+        $result = $this->serviceManagementRestProxy->listLocations();
         $locations = $result->getLocations();
         $firstLocation = $locations[0];
         $this->createdStorageServices = [];
@@ -94,7 +99,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function getAffinityGroup($name)
     {
-        $result = $this->restProxy->listAffinityGroups();
+        $result = $this->serviceManagementRestProxy->listAffinityGroups();
         $affinityGroups = $result->getAffinityGroups();
 
         foreach ($affinityGroups as $affinityGroup) {

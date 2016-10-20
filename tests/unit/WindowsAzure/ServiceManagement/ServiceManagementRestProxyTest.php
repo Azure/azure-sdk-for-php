@@ -96,7 +96,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $location = $this->defaultLocation;
 
         // Test
-        $this->restProxy->createAffinityGroup($name, $label, $location);
+        $this->serviceManagementRestProxy->createAffinityGroup($name, $label, $location);
 
         // Assert
         $this->assertTrue($this->affinityGroupExists($name));
@@ -115,10 +115,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $name = $this->getTestName();
         $label = base64_encode($name);
         $location = $this->defaultLocation;
-        $this->restProxy->createAffinityGroup($name, $label, $location);
+        $this->serviceManagementRestProxy->createAffinityGroup($name, $label, $location);
 
         // Test
-        $this->restProxy->deleteAffinityGroup($name);
+        $this->serviceManagementRestProxy->deleteAffinityGroup($name);
 
         // Assert
         $this->assertFalse($this->affinityGroupExists($name));
@@ -134,11 +134,11 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testListAffinityGroupsWithEmpty()
     {
         // Setup
-        $currentCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
+        $currentCount = count($this->serviceManagementRestProxy->listAffinityGroups()->getAffinityGroups());
         $expectedCount = 0 + $currentCount;
 
         // Test
-        $result = $this->restProxy->listAffinityGroups();
+        $result = $this->serviceManagementRestProxy->listAffinityGroups();
 
         // Assert
         $affinityGroups = $result->getAffinityGroups();
@@ -156,12 +156,12 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     {
         // Setup
         $name = $this->getTestName();
-        $currentCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
+        $currentCount = count($this->serviceManagementRestProxy->listAffinityGroups()->getAffinityGroups());
         $expectedCount = 1 + $currentCount;
         $this->createAffinityGroup($name);
 
         // Test
-        $result = $this->restProxy->listAffinityGroups();
+        $result = $this->serviceManagementRestProxy->listAffinityGroups();
 
         // Assert
         $affinityGroups = $result->getAffinityGroups();
@@ -180,13 +180,13 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         // Setup
         $name1 = $this->getTestName();
         $name2 = $this->getTestName();
-        $currentCount = count($this->restProxy->listAffinityGroups()->getAffinityGroups());
+        $currentCount = count($this->serviceManagementRestProxy->listAffinityGroups()->getAffinityGroups());
         $expectedCount = 2 + $currentCount;
         $this->createAffinityGroup($name1);
         $this->createAffinityGroup($name2);
 
         // Test
-        $result = $this->restProxy->listAffinityGroups();
+        $result = $this->serviceManagementRestProxy->listAffinityGroups();
 
         // Assert
         $affinityGroups = $result->getAffinityGroups();
@@ -209,7 +209,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $this->createAffinityGroup($name, $label, $location);
 
         // Test
-        $this->restProxy->updateAffinityGroup($name, $expectedLabel);
+        $this->serviceManagementRestProxy->updateAffinityGroup($name, $expectedLabel);
 
         // Assert
         $affinityGroup = $this->getAffinityGroup($name);
@@ -230,7 +230,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $this->createAffinityGroup($name);
 
         // Test
-        $result = $this->restProxy->getAffinityGroupProperties($name);
+        $result = $this->serviceManagementRestProxy->getAffinityGroupProperties($name);
 
         // Assert
         $expected = $this->getAffinityGroup($name);
@@ -259,10 +259,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $options->setLocation($this->defaultLocation);
 
         // Count the storage services before creating new one.
-        $storageCount = count($this->restProxy->listStorageServices()->getStorageServices());
+        $storageCount = count($this->serviceManagementRestProxy->listStorageServices()->getStorageServices());
 
         // Test
-        $result = $this->restProxy->createStorageService($name, $label, $options);
+        $result = $this->serviceManagementRestProxy->createStorageService($name, $label, $options);
         $this->blockUntilAsyncSucceed($result);
 
         // Assert
@@ -285,7 +285,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $expected = 1;
 
          // Test
-        $result = $this->restProxy->listStorageServices();
+        $result = $this->serviceManagementRestProxy->listStorageServices();
 
         // Assert
         $this->assertCount($expected + $storageCount, $result->getStorageServices());
@@ -309,10 +309,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $options->setLabel($expectedLabel);
 
         // Test
-        $this->restProxy->updateStorageService($name, $options);
+        $this->serviceManagementRestProxy->updateStorageService($name, $options);
 
         // Assert
-        $result = $this->restProxy->getStorageServiceProperties($name);
+        $result = $this->serviceManagementRestProxy->getStorageServiceProperties($name);
         $this->assertEquals($expectedDesc, $result->getStorageService()->getDescription());
         $this->assertEquals($expectedLabel, $result->getStorageService()->getLabel());
     }
@@ -331,7 +331,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $name = $this->storageServiceName;
 
         // Test
-        $result = $this->restProxy->getStorageServiceProperties($name);
+        $result = $this->serviceManagementRestProxy->getStorageServiceProperties($name);
 
         // Assert
         $this->assertEquals($name, $result->getStorageService()->getName());
@@ -354,7 +354,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $name = $this->storageServiceName;
 
         // Test
-        $result = $this->restProxy->getStorageServiceKeys($name);
+        $result = $this->serviceManagementRestProxy->getStorageServiceKeys($name);
 
         // Assert
         $this->assertNotNull($result->getUrl());
@@ -374,10 +374,10 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     {
         // Setup
         $name = $this->storageServiceName;
-        $old = $this->restProxy->getStorageServiceKeys($name);
+        $old = $this->serviceManagementRestProxy->getStorageServiceKeys($name);
 
         // Test
-        $new = $this->restProxy->regenerateStorageServiceKeys($name, KeyType::PRIMARY_KEY);
+        $new = $this->serviceManagementRestProxy->regenerateStorageServiceKeys($name, KeyType::PRIMARY_KEY);
 
         // Assert
         $this->assertNotEquals($old->getPrimary(), $new->getPrimary());
@@ -400,7 +400,7 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
         $name = $this->storageServiceName;
 
          // Test
-        $this->restProxy->deleteStorageService($name);
+        $this->serviceManagementRestProxy->deleteStorageService($name);
 
         // Assert
         $this->assertFalse($this->storageServiceExists($name));
@@ -416,11 +416,11 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testListHostedServicesEmpty()
     {
         // Setup
-        $currentCount = count($this->restProxy->listHostedServices()->getHostedServices());
+        $currentCount = count($this->serviceManagementRestProxy->listHostedServices()->getHostedServices());
         $expectedCount = $currentCount;
 
          // Test
-        $result = $this->restProxy->listHostedServices();
+        $result = $this->serviceManagementRestProxy->listHostedServices();
 
         // Assert
         $this->assertCount($expectedCount, $result->getHostedServices());
@@ -436,13 +436,13 @@ class ServiceManagementRestProxyTest extends ServiceManagementRestProxyTestBase
     public function testListHostedServicesOne()
     {
         // Setup
-        $currentCount = count($this->restProxy->listHostedServices()->getHostedServices());
+        $currentCount = count($this->serviceManagementRestProxy->listHostedServices()->getHostedServices());
         $name = $this->getTestName();
         $this->createHostedService($name);
         $expectedCount = $currentCount + 1;
 
          // Test
-        $result = $this->restProxy->listHostedServices();
+        $result = $this->serviceManagementRestProxy->listHostedServices();
 
         // Assert
         $actual = $result->getHostedServices();

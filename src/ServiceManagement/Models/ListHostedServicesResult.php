@@ -44,7 +44,7 @@ use WindowsAzure\Common\Internal\Resources;
 class ListHostedServicesResult
 {
     /**
-     * @var array
+     * @var HostedService[]
      */
     private $_hostedServices;
 
@@ -82,7 +82,7 @@ class ListHostedServicesResult
     /**
      * Gets hosted services.
      * 
-     * @return array
+     * @return HostedService[]
      */
     public function getHostedServices()
     {
@@ -92,7 +92,7 @@ class ListHostedServicesResult
     /**
      * Sets hosted services.
      * 
-     * @param array $hostedServices The hosted services.
+     * @param HostedService[] $hostedServices The hosted services.
      */
     public function setHostedServices(array $hostedServices)
     {

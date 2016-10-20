@@ -44,7 +44,7 @@ use WindowsAzure\Common\Internal\Resources;
 class ListAffinityGroupsResult
 {
     /**
-     * @var array
+     * @var AffinityGroup[]
      */
     private $_affinityGroups;
 
@@ -75,7 +75,7 @@ class ListAffinityGroupsResult
     /**
      * Gets affinity groups.
      * 
-     * @return array
+     * @return AffinityGroup[]
      */
     public function getAffinityGroups()
     {
@@ -85,7 +85,7 @@ class ListAffinityGroupsResult
     /**
      * Sets affinity groups.
      * 
-     * @param array $affinityGroups The affinity groups.
+     * @param AffinityGroup[] $affinityGroups The affinity groups.
      */
     public function setAffinityGroups(array $affinityGroups)
     {
