@@ -473,7 +473,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @param ListQueuesOptions|null $listQueuesOptions The options to list the
      *                                                  queues.
      *
-     * @return ListQueuesResult;
+     * @return ListQueuesResult
      */
     public function listQueues(ListQueuesOptions $listQueuesOptions = null)
     {

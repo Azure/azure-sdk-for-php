@@ -551,7 +551,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @param Asset|string $asset Asset data or asset Id
      *
-     * @return array of Models\Asset
+     * @return Asset[]
      */
     public function getAssetParentAssets($asset)
     {
@@ -762,7 +762,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get list of AccessPolicies.
      *
-     * @return array of Models\AccessPolicy
+     * @return AccessPolicy[]
      */
     public function getAccessPolicyList()
     {
@@ -2081,7 +2081,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get list of IngestManifestFile.
      *
-     * @return array of Models\IngestManifestFile
+     * @return IngestManifestFile[]
      */
     public function getIngestManifestFileList()
     {
@@ -2920,7 +2920,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get list of Channels.
      *
-     * @return array
+     * @return Channel[]
      */
     public function getChannelList()
     {
@@ -3345,7 +3345,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * returns the Programs associated to that Channel.
      *
      * @param null $channel
-     * @return array
+     * @return Program[]
      */
     public function getProgramList($channel = null)
     {

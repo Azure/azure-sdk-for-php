@@ -25,6 +25,7 @@
 namespace Tests\unit\WindowsAzure\MediaServices\Templates;
 
 use WindowsAzure\MediaServices\Templates\MediaServicesLicenseTemplateSerializer;
+use WindowsAzure\MediaServices\Templates\PlayReadyContentKey;
 use WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate;
 use WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate;
 use WindowsAzure\MediaServices\Templates\PlayReadyPlayRight;
@@ -178,8 +179,10 @@ class MediaServicesLicenseTemplateSerializerTest extends \PHPUnit_Framework_Test
         $this->assertEqualsLicenseResponseTemplate($template, $playreadyLicense);
     }
 
-    public function assertEqualsLicenseResponseTemplate($expected, $actual)
-    {
+    public function assertEqualsLicenseResponseTemplate(
+        PlayReadyLicenseResponseTemplate $expected,
+        PlayReadyLicenseResponseTemplate $actual
+    ) {
         $this->assertEquals(count($expected->getLicenseTemplates()), count($actual->getLicenseTemplates()));
         for ($i = 0; $i < count($expected->getLicenseTemplates()); ++$i) {
             $this->assertEqualsLicenseTemplate($expected->getLicenseTemplates()[$i], $actual->getLicenseTemplates()[$i]);
@@ -187,8 +190,10 @@ class MediaServicesLicenseTemplateSerializerTest extends \PHPUnit_Framework_Test
         $this->assertEquals($expected->getResponseCustomData(), $actual->getResponseCustomData());
     }
 
-    public function assertEqualsLicenseTemplate($expected, $actual)
-    {
+    public function assertEqualsLicenseTemplate(
+        PlayReadyLicenseTemplate $expected,
+        PlayReadyLicenseTemplate $actual
+    ) {
         $this->assertEquals($expected->getAllowTestDevices(), $actual->getAllowTestDevices());
         $this->assertEquals($expected->getLicenseType(), $actual->getLicenseType());
         $this->assertEquals($expected->getBeginDate(), $actual->getBeginDate());
@@ -201,19 +206,23 @@ class MediaServicesLicenseTemplateSerializerTest extends \PHPUnit_Framework_Test
         $this->assertEqualsContentKey($expected->getContentKey(), $actual->getContentKey());
     }
 
-    public function assertEqualsContentKey($expected, $actual)
-    {
+    public function assertEqualsContentKey(
+        PlayReadyContentKey $expected, PlayReadyContentKey $actual
+    ) {
         if ($expected instanceof ContentEncryptionKeyFromHeader) {
             $this->assertTrue($actual instanceof ContentEncryptionKeyFromHeader);
         }
 
         if ($expected instanceof ContentEncryptionKeyFromKeyIdentifier) {
-            $this->assertTrue($actual instanceof ContentEncryptionKeyFromKeyIdentifier);
-            $this->assertEquals($expected->getKeyIdentifier(), $actual->getKeyIdentifier());
+            if ($actual instanceof ContentEncryptionKeyFromKeyIdentifier) {
+                $this->assertEquals($expected->getKeyIdentifier(), $actual->getKeyIdentifier());
+            } else {
+                $this->fail();
+            }
         }
     }
 
-    public function assertEqualsPlayRight($expected, $actual)
+    public function assertEqualsPlayRight(PlayReadyPlayRight $expected, PlayReadyPlayRight $actual)
     {
         $this->assertNotNull($expected);
         $this->assertNotNull($actual);

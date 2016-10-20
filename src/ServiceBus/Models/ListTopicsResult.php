@@ -46,7 +46,7 @@ class ListTopicsResult extends Feed
     /**
      * Gets the information of the topic. 
      * 
-     * @var array
+     * @var TopicInfo[]
      */
     private $_topicInfos;
 
@@ -70,7 +70,7 @@ class ListTopicsResult extends Feed
     /**
      * Gets the information of the topic. 
      *  
-     * @return array
+     * @return TopicInfo[]
      */
     public function getTopicInfos()
     {
@@ -80,7 +80,7 @@ class ListTopicsResult extends Feed
     /**
      * Sets the topic information.
      *
-     * @param array $topicInfos The information of the topics. 
+     * @param TopicInfo[] $topicInfos The information of the topics.
      */
     public function setTopicInfos(array $topicInfos)
     {

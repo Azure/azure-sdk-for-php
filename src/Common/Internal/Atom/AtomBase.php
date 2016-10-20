@@ -204,7 +204,7 @@ class AtomBase
      *
      * @param array $xmlArray An array of simple xml elements.
      *
-     * @return array
+     * @return Person[]
      */
     protected function processContributorNode($xmlArray)
     {

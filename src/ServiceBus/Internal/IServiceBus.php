@@ -29,9 +29,11 @@ use Exception;
 use WindowsAzure\Common\Internal\FilterableService;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\ListQueuesOptions;
+use WindowsAzure\ServiceBus\Models\ListQueuesResult;
 use WindowsAzure\ServiceBus\Models\ListRulesOptions;
 use WindowsAzure\ServiceBus\Models\ListSubscriptionsOptions;
 use WindowsAzure\ServiceBus\Models\ListTopicsOptions;
+use WindowsAzure\ServiceBus\Models\ListTopicsResult;
 use WindowsAzure\ServiceBus\Models\QueueInfo;
 use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
 use WindowsAzure\ServiceBus\Models\RuleInfo;
@@ -177,6 +179,8 @@ interface IServiceBus extends FilterableService
      * @param ListQueuesOptions|null $listQueueOptions The options to list the
      *                                                 queues.
      *
+     * @return ListQueuesResult
+     *
      * @throws Exception
      */
     public function listQueues(ListQueuesOptions $listQueueOptions = null);
@@ -211,12 +215,14 @@ interface IServiceBus extends FilterableService
     /**
      * Lists topics. 
      * 
-     * @param ListTopicsOptions $listTopicsOptions The options to list
+     * @param ListTopicsOptions|null $listTopicsOptions The options to list
      *                                              the topics. 
+     *
+     * @return ListTopicsResult
      *
      * @throws Exception
      */
-    public function listTopics(ListTopicsOptions $listTopicsOptions);
+    public function listTopics(ListTopicsOptions $listTopicsOptions = null);
 
     /**
      * Creates a subscription with specified topic path and 

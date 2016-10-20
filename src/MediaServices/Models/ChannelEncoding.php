@@ -59,14 +59,14 @@ class ChannelEncoding
     /**
      * Encoding VideoStreams.
      *
-     * @var array
+     * @var VideoStream[]
      */
     private $_videoStreams;
 
     /**
      * Encoding AudioStreams.
      *
-     * @var array
+     * @var AudioStream[]
      */
     private $_audioStreams;
 
@@ -181,7 +181,7 @@ class ChannelEncoding
     /**
      * Get the Encoding VideoStream.
      *
-     * @return array
+     * @return VideoStream[]
      */
     public function getVideoStreams()
     {
@@ -191,7 +191,7 @@ class ChannelEncoding
     /**
      * Set the Encoding VideoStreams.
      *
-     * @param array $value Encoding VideoStreams.
+     * @param VideoStream[] $value Encoding VideoStreams.
      */
     public function setVideoStreams(array $value)
     {
@@ -201,7 +201,7 @@ class ChannelEncoding
     /**
      * Get the Encoding AudioStreams.
      *
-     * @return mixed
+     * @return AudioStream[]
      */
     public function getAudioStreams()
     {
@@ -211,7 +211,7 @@ class ChannelEncoding
     /**
      * Set the Encoding AudioStreams.
      *
-     * @param array $value Encoding AudioStreams.
+     * @param AudioStream[] $value Encoding AudioStreams.
      */
     public function setAudioStreams(array $value)
     {

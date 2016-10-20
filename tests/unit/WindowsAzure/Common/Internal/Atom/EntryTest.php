@@ -138,8 +138,8 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry();
 
         // Test
-        $entry->setContributor($expected);
-        $actual = $entry->getContributor();
+        $entry->setContributor([$expected]);
+        $actual = $entry->getContributor()[0];
 
         // Assert
         $this->assertEquals(

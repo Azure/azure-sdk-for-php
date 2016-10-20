@@ -26,6 +26,7 @@
 namespace Tests\framework;
 
 use Tests\Framework\TestResources;
+use WindowsAzure\ServiceBus\Internal\IServiceBus;
 
 /**
  * TestBase class for each unit test class.
@@ -46,17 +47,21 @@ class ServiceBusRestProxyTestBase extends ServiceRestProxyTestBase
     private $_createdSubscriptions;
     private $_createdRules;
     private $_createdQueues;
+    /**
+     * @var IServiceBus
+     */
+    protected $serviceBusWrapper;
 
     public function setUp()
     {
         $this->skipIfEmulated();
         parent::setUp();
-        $serviceBusWrapper = $this->builder->createServiceBusService(TestResources::getServiceBusConnectionString());
+        $this->serviceBusWrapper = $this->builder->createServiceBusService(TestResources::getServiceBusConnectionString());
         $this->_createdTopics = [];
         $this->_createdSubscriptions = [];
         $this->_createdRules = [];
         $this->_createdQueues = [];
-        parent::setProxy($serviceBusWrapper);
+        parent::setProxy($this->serviceBusWrapper);
     }
 
     public function createQueue($queueInfo)
