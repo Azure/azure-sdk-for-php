@@ -83,7 +83,7 @@ class BatchResponse
             if (!empty($part->body)) {
                 $response = parse_response($part->body);
 
-                $this->_contexts[] = $response;
+                $this->_responses[] = $response;
 
                 if (is_array($requestContexts)) {
                     $expectedCodes = $requestContexts[$i]->getStatusCodes();
