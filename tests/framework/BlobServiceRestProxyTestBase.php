@@ -26,7 +26,7 @@
 namespace Tests\framework;
 
 use MicrosoftAzure\Storage\Blob\Internal\IBlob;
-use Tests\Framework\ServiceRestProxyTestBase;
+
 use MicrosoftAzure\Storage\Blob\Models\CreateContainerOptions;
 use MicrosoftAzure\Storage\Blob\Models\ListContainersOptions;
 use MicrosoftAzure\Storage\Common\ServiceException;

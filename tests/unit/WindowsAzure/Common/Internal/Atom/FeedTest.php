@@ -27,7 +27,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal\Atom;
 
 use WindowsAzure\Common\Internal\Atom\Feed;
 use WindowsAzure\Common\Internal\Atom\Entry;
-use WindowsAzure\Common\Internal\Atom\Content;
+
 use WindowsAzure\Common\Internal\Atom\Category;
 use WindowsAzure\Common\Internal\Atom\Person;
 use WindowsAzure\Common\Internal\Atom\Generator;

@@ -25,7 +25,7 @@
 
 namespace Tests\functional\WindowsAzure\ServiceBus;
 
-use Tests\Functional\WindowsAzure\ServiceBus\ScenarioTestBase;
+
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;

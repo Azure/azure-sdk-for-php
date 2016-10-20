@@ -25,7 +25,7 @@
 
 namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
-use Symfony\Component\Validator\Constraints\DateTime;
+
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
 

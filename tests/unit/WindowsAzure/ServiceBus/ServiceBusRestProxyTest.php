@@ -28,7 +28,7 @@ namespace Tests\unit\WindowsAzure\ServiceBus;
 use Tests\framework\ServiceBusRestProxyTestBase;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Resources;
-use WindowsAzure\ServiceBus\ServiceBusRestProxy;
+
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\ListQueuesOptions;
 use WindowsAzure\ServiceBus\Models\ListRulesOptions;

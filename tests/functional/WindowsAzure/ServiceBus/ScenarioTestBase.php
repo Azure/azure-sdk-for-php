@@ -25,7 +25,7 @@
 
 namespace Tests\functional\WindowsAzure\ServiceBus;
 
-use Tests\Functional\WindowsAzure\ServiceBus\IntegrationTestBase;
+
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
 

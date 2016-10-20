@@ -52,20 +52,20 @@ use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyType;
 use WindowsAzure\MediaServices\Models\EncodingReservedUnitType;
 use WindowsAzure\MediaServices\Models\Channel;
 use WindowsAzure\MediaServices\Models\ChannelInput;
-use WindowsAzure\MediaServices\Models\ChannelOutput;
+
 use WindowsAzure\MediaServices\Models\ChannelPreview;
 use WindowsAzure\MediaServices\Models\ChannelEncoding;
-use WindowsAzure\MediaServices\Models\ChannelEndpoint;
+
 use WindowsAzure\MediaServices\Models\ChannelInputAccessControl;
 use WindowsAzure\MediaServices\Models\ChannelPreviewAccessControl;
-use WindowsAzure\MediaServices\Models\ChannelOutputHls;
+
 use WindowsAzure\MediaServices\Models\ChannelSlate;
 use WindowsAzure\MediaServices\Models\ChannelState;
 use WindowsAzure\MediaServices\Models\StreamingProtocol;
 use WindowsAzure\MediaServices\Models\EncodingType;
 use WindowsAzure\MediaServices\Models\IPAccessControl;
 use WindowsAzure\MediaServices\Models\IPRange;
-use WindowsAzure\MediaServices\Models\Operation;
+
 use WindowsAzure\MediaServices\Models\OperationState;
 use WindowsAzure\MediaServices\Models\CrossSiteAccessPolicies;
 use WindowsAzure\MediaServices\Models\AudioStream;
@@ -3164,8 +3164,9 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // assert the list should not contains the channel
         $list = $this->mediaServicesWrapper->getChannelList();
-        foreach($list as $channel) {
-            $this->assertFalse($channel->getId() == $channelId);
+        $channelId = $channel->getId();
+        foreach($list as $channel2) {
+            $this->assertFalse($channel2->getId() == $channelId);
         }
     }
 
