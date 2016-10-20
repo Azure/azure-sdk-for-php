@@ -3498,7 +3498,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
          $this->assertEquals($expected->getLanguage(), $actual->getLanguage());
     }
 
-    public function assertEqualsEncoding(ChannelEncoding $expected, ChannelEncoding $actual) {
+    public function assertEqualsEncoding(ChannelEncoding $expected = null, ChannelEncoding $actual = null) {
         if (is_null($expected) && is_null($actual)) {
             return; // pass
         } else if (is_null($expected) || is_null($actual)) {
@@ -3519,7 +3519,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEquals($expected->getSystemPreset(), $actual->getSystemPreset());
     }
 
-    public function assertEqualsSlate(ChannelSlate $expected, ChannelSlate $actual) {
+    public function assertEqualsSlate(ChannelSlate $expected = null, ChannelSlate $actual = null) {
         if (is_null($expected) && is_null($actual)) {
             return; // pass
         } else if (is_null($expected) || is_null($actual)) {
