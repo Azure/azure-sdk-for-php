@@ -312,9 +312,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $body
         );
 
-        if (!empty($response->getBody())) {
+        $responseBody = (string)$response->getBody();
+        if (!empty($responseBody)) {
             $entry = new Entry();
-            $entry->parseXml($response->getBody());
+            $entry->parseXml($responseBody);
             $entity = $this->getPropertiesFromAtomEntry($entry);
         } else {
             $entity = null;

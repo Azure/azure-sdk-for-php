@@ -2,12 +2,14 @@
     - [Type declarations](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration)
     - WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey
         - stringifyAssetDeliveryPolicyConfiguartionKey() => stringifyAssetDeliveryPolicyConfigurationKey()
-    - the `getContexts()` function from `\WindowsAzure\Common\Internal\Http\BatchResponse` is replaced by
-      `getResponses()`.
     - src/WindowsAzure.php has been removed,
     - src/Common/InternalFilter/RetryPolicyFilter.php has been removed.
     - the `getResponse()` function from `\WindowsAzure\Common\Internal\Http\IHttpClient` is replaced by
       `sendAndGetResponse()`.
+    - the `getContexts()` function from `\WindowsAzure\Common\Internal\Http\BatchResponse` is replaced by
+      `getResponses()`.
+    - the `sendContext()` function from `\WindowsAzure\Common\Internal\RestProxy` is replaced by `sendHttpContext()`.
+    - the `send()` function from `\WindowsAzure\MediaServices\MediaServicesRestProxy` is replaced by `sendHttp()`.
 - Switch to PHP 5.6.
 
 Windows Azure SDK For PHP 0.4.5, 2016-09-26
