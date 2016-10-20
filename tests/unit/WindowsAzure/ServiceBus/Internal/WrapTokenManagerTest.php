@@ -29,7 +29,7 @@ use WindowsAzure\Common\ServicesBuilder;
 use Tests\Framework\TestResources;
 use Tests\Framework\ServiceRestProxyTestBase;
 use WindowsAzure\Common\ServiceException;
-use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
+
 use WindowsAzure\ServiceBus\Internal\WrapTokenManager;
 use WindowsAzure\Common\Internal\ServiceBusSettings;
 

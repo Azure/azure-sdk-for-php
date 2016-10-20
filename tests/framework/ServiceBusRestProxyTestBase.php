@@ -25,7 +25,7 @@
 
 namespace Tests\framework;
 
-use Tests\Framework\TestResources;
+
 use WindowsAzure\ServiceBus\Internal\IServiceBus;
 
 /**

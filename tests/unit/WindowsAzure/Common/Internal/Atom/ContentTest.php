@@ -26,7 +26,7 @@
 namespace Tests\unit\WindowsAzure\Common\Internal\Atom;
 
 use WindowsAzure\Common\Internal\Atom\Content;
-use XMLWriter;
+
 
 /**
  * Unit tests for class WrapAccessTokenResult.

@@ -28,7 +28,7 @@ namespace Tests\unit\WindowsAzure\ServiceBus\models;
 use WindowsAzure\ServiceBus\Internal\Action;
 use WindowsAzure\ServiceBus\Internal\Filter;
 use WindowsAzure\ServiceBus\Models\RuleDescription;
-use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
+
 
 /**
  * Unit tests for class WrapAccessTokenResult.

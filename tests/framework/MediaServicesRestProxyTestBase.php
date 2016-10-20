@@ -27,7 +27,7 @@ namespace Tests\framework;
 
 use Exception;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
-use WindowsAzure\MediaServices\Internal\IMediaServices;
+
 use WindowsAzure\MediaServices\MediaServicesRestProxy;
 use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;

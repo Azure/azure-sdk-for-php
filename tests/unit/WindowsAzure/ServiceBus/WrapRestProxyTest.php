@@ -27,7 +27,7 @@ namespace Tests\Unit\WindowsAzure\ServiceBus\Internal;
 
 use Tests\Framework\TestResources;
 use Tests\Framework\ServiceRestProxyTestBase;
-use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
+
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\ServiceBusSettings;
 

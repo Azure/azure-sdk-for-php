@@ -25,7 +25,7 @@
 
 namespace Tests\framework;
 
-use Tests\Framework\TestResources;
+
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\DeploymentSlot;

@@ -25,7 +25,7 @@
 
 namespace Tests\framework;
 
-use Tests\Framework\ServiceRestProxyTestBase;
+
 
 /**
  * TestBase class for each unit test class.
