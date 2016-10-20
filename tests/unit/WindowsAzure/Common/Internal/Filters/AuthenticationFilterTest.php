@@ -95,14 +95,14 @@ class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
         $channel = new HttpClient();
         $url = new Url('http://microsoft.com');
         $channel->setUrl($url);
-        $response = null;
-        $scheme = new SharedKeyAuthScheme('account', 'key');
+        $response = new \GuzzleHttp\Psr7\Response();
+        $scheme = new SharedKeyAuthScheme('acount', 'key');
         $filter = new AuthenticationFilter($scheme);
 
         // Test
         $response = $filter->handleResponse($channel, $response);
 
         // Assert
-        $this->assertNull($response);
+        $this->assertNotNull($response);
     }
 }

@@ -39,7 +39,7 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
     {
         parent::setUp();
         $fiddlerFilter = new FiddlerFilter();
-        $this->restProxy = $this->restProxy->withFilter($fiddlerFilter);
+        $this->restProxy = $this->serviceBusWrapper = $this->serviceBusWrapper->withFilter($fiddlerFilter);
         if (!self::$isOneTimeSetup) {
             $this->doOneTimeSetup();
             self::$isOneTimeSetup = true;
@@ -54,7 +54,7 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
     private function doOneTimeSetup()
     {
         $testAlphaExists = false;
-        $queues = $this->restProxy->listQueues()->getQueueInfos();
+        $queues = $this->serviceBusWrapper->listQueues()->getQueueInfos();
         foreach ($queues as $queue) {
             $queueName = $queue->getTitle();
             if (Utilities::startsWith($queueName, 'Test') || Utilities::startsWith($queueName, 'test')) {
@@ -65,25 +65,25 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
                         $opts = new ReceiveMessageOptions();
                         $opts->setTimeout(20);
                         try {
-                            $this->restProxy->receiveQueueMessage($queueName, $opts);
+                            $this->serviceBusWrapper->receiveQueueMessage($queueName, $opts);
                         } catch (\Exception $ex) {
                             error_log($ex->getMessage());
                         }
                     }
                 } else {
                     try {
-                        $this->restProxy->deleteQueue($queueName);
+                        $this->serviceBusWrapper->deleteQueue($queueName);
                     } catch (\Exception $ex) {
                         error_log($ex->getMessage());
                     }
                 }
             }
         }
-        foreach ($this->restProxy->listTopics()->getTopicInfos() as $topic) {
+        foreach ($this->serviceBusWrapper->listTopics()->getTopicInfos() as $topic) {
             $topicName = $topic->getTitle();
             if (Utilities::startsWith($topicName, 'Test') || Utilities::startsWith($topicName, 'test')) {
                 try {
-                    $this->restProxy->deleteTopic($topicName);
+                    $this->serviceBusWrapper->deleteTopic($topicName);
                 } catch (\Exception $ex) {
                     error_log($ex->getMessage());
                 }
@@ -92,7 +92,7 @@ class IntegrationTestBase extends ServiceBusRestProxyTestBase
 
         if (!$testAlphaExists) {
             try {
-                $this->restProxy->createQueue(new QueueInfo('TestAlpha'));
+                $this->serviceBusWrapper->createQueue(new QueueInfo('TestAlpha'));
             } catch (\Exception $ex) {
                 error_log($ex->getMessage());
             }

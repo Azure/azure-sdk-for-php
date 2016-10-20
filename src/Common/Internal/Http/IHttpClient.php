@@ -25,6 +25,7 @@
 
 namespace WindowsAzure\Common\Internal\Http;
 
+use Psr\Http\Message\ResponseInterface;
 
 use WindowsAzure\Common\ServiceException;
 
@@ -111,9 +112,9 @@ interface IHttpClient
      *                       send and then applied to the response.
      * @param IUrl  $url     Request url.
      *
-     * @return \HTTP_Request2_Response The response.
+     * @return ResponseInterface The response.
      */
-    public function sendAndGetResponse(array $filters, IUrl $url = null);
+    public function sendAndGetHttpResponse(array $filters, IUrl $url = null);
 
     /**
      * Processes the request through HTTP pipeline with passed $filters,

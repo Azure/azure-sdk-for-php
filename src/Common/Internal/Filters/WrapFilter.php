@@ -31,6 +31,7 @@ use WindowsAzure\Common\Internal\IServiceFilter;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\ServiceBus\Internal\WrapTokenManager;
 use WindowsAzure\ServiceBus\Internal\IWrap;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Adds WRAP authentication header to the http request object.
@@ -100,12 +101,12 @@ class WrapFilter implements IServiceFilter
     /**
      * Returns the original response.
      *
-     * @param IHttpClient             $request  A HTTP channel object.
-     * @param \HTTP_Request2_Response $response A HTTP response object.
+     * @param IHttpClient       $request  A HTTP channel object.
+     * @param ResponseInterface $response A HTTP response object.
      *
-     * @return \HTTP_Request2_Response
+     * @return ResponseInterface
      */
-    public function handleResponse(IHttpClient $request, $response)
+    public function handleResponse(IHttpClient $request, ResponseInterface $response)
     {
         return $response;
     }

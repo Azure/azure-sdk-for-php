@@ -27,7 +27,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal\Serialization;
 
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Serialization\JsonSerializer;
-use WindowsAzure\Common\Internal\Resources;
+
 
 /**
  * Unit tests for class XmlSerializer.

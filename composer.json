@@ -11,12 +11,12 @@
     ],
     "require": {
         "php": ">=5.6",
-        "pear/http_request2": "^2.3",
         "pear/net_url2": "^2.2",
         "pear/mail_mime": "^1.10",
         "pear/mail_mime-decode": "^1.5",
         "firebase/php-jwt": "^4.0",
-        "microsoft/azure-storage": "^0.10"
+        "microsoft/azure-storage": "^0.10",
+        "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
         "mikey179/vfsStream": "^1.6",

@@ -25,9 +25,14 @@
 
 namespace WindowsAzure\Common\Internal\Http;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7\Request;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\Validate;
+use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\RequestOptions;
 
 /**
  * HTTP client which sends and receives HTTP requests and responses.
@@ -45,14 +50,42 @@ use WindowsAzure\Common\Internal\Validate;
 class HttpClient implements IHttpClient
 {
     /**
-     * @var \HTTP_Request2
+     * @var string
      */
-    private $_request;
+    private $_method = Resources::HTTP_GET;
+
+    /**
+     * @var array
+     */
+    private $_requestOptions = [
+        // Don't allow redirect.
+        RequestOptions::ALLOW_REDIRECTS => false,
+    ];
+
+    /**
+     * @var array
+     */
+    private $_postParams = [];
+
+    /**
+     * @var array
+     */
+    private $_headers = [];
+
+    /**
+     * @var string
+     */
+    private $_body = '';
 
     /**
      * @var IUrl
      */
     private $_requestUrl;
+
+    /**
+     * @var array
+     */
+    private $_config;
 
     /**
      * Holds expected status code after sending the request.
@@ -71,42 +104,22 @@ class HttpClient implements IHttpClient
         $certificatePath = Resources::EMPTY_STRING,
         $certificateAuthorityPath = Resources::EMPTY_STRING
     ) {
-        $config = [
+        $this->_config = [
             Resources::USE_BRACKETS => true,
             Resources::SSL_VERIFY_PEER => false,
             Resources::SSL_VERIFY_HOST => false,
         ];
 
-        // Read HTTP_PROXY environment variable, if any.
-        // To use it with Fiddler, set the environment variable HTTP_PROXY
-        // to http://localhost:8888. E.g.
-        //
-        //     set HTTP_PROXY=http://localhost:8888
-        //     php my_program.php
-        {
-            $proxy = getenv('HTTP_PROXY');
-            if ($proxy) {
-                $proxyStruct = parse_url($proxy);
-                if ($proxyStruct) {
-                    $config['proxy_host'] = $proxyStruct['host'];
-                    $config['proxy_port'] = $proxyStruct['port'];
-                }
-            }
-        }
-
         if (!empty($certificatePath)) {
-            $config[Resources::SSL_LOCAL_CERT] = $certificatePath;
-            $config[Resources::SSL_VERIFY_HOST] = true;
+            $this->_config[Resources::SSL_LOCAL_CERT] = $certificatePath;
+            $this->_config[Resources::SSL_VERIFY_HOST] = true;
+            $this->_requestOptions[RequestOptions::CERT] = $certificatePath;
         }
 
         if (!empty($certificateAuthorityPath)) {
-            $config[Resources::SSL_CAFILE] = $certificateAuthorityPath;
-            $config[Resources::SSL_VERIFY_PEER] = true;
+            $this->_config[Resources::SSL_CAFILE] = $certificateAuthorityPath;
+            $this->_config[Resources::SSL_VERIFY_PEER] = true;
         }
-
-        $this->_request = new \HTTP_Request2(
-            null, null, $config
-        );
 
         // Replace User-Agent.
         $this->setHeader(Resources::USER_AGENT, Resources::SDK_USER_AGENT, true);
@@ -120,9 +133,7 @@ class HttpClient implements IHttpClient
      * Makes deep copy from the current object.
      */
     public function __clone()
-    {
-        $this->_request = clone $this->_request;
-
+    {        
         if (!is_null($this->_requestUrl)) {
             $this->_requestUrl = clone $this->_requestUrl;
         }
@@ -150,14 +161,14 @@ class HttpClient implements IHttpClient
     }
 
     /**
-     * Sets request's HTTP method. You can use \HTTP_Request2 constants like
+     * Sets request's HTTP method. You can use constants like 
      * Resources::HTTP_GET or strings like 'GET'.
      *
      * @param string $method request's HTTP method.
      */
     public function setMethod($method)
     {
-        $this->_request->setMethod($method);
+        $this->_method = strtoupper($method);
     }
 
     /**
@@ -167,7 +178,7 @@ class HttpClient implements IHttpClient
      */
     public function getMethod()
     {
-        return $this->_request->getMethod();
+        return $this->_method;
     }
 
     /**
@@ -178,7 +189,7 @@ class HttpClient implements IHttpClient
      */
     public function getHeaders()
     {
-        return $this->_request->getHeaders();
+        return $this->_headers;
     }
 
     /**
@@ -194,7 +205,13 @@ class HttpClient implements IHttpClient
     {
         Validate::isString($value, 'value');
 
-        $this->_request->setHeader($header, $value, $replace);
+        // Header names are case insensitive
+        $header = strtolower($header);
+        if (!isset($this->_headers[$header]) || $replace) {
+            $this->_headers[$header] = $value;
+        } else {
+            $this->_headers[$header] .= ', ' . $value;
+        }
     }
 
     /**
@@ -216,7 +233,9 @@ class HttpClient implements IHttpClient
      */
     public function setPostParameters(array $postParameters)
     {
-        $this->_request->addPostParameter($postParameters);
+        foreach ($postParameters as $k => $v) {
+            $this->_postParams[$k] = $v;
+        }
     }
 
     /**
@@ -229,35 +248,49 @@ class HttpClient implements IHttpClient
      *
      * @throws ServiceException
      *
-     * @return \HTTP_Request2_Response The response.
+     * @return ResponseInterface The response.
      */
-    public function sendAndGetResponse(array $filters, IUrl $url = null)
+    public function sendAndGetHttpResponse(array $filters, IUrl $url = null)
     {
         if (isset($url)) {
             $this->setUrl($url);
-            $this->_request->setUrl($this->_requestUrl->getUrl());
-        }
-
-        {
-            $method = strtoupper($this->getMethod());
-            if ($method != Resources::HTTP_GET
-                && $method != Resources::HTTP_DELETE
-                && $method != Resources::HTTP_HEAD
-            ) {
-                $contentLength = 0;
-
-                if (!is_null($this->getBody())) {
-                    $contentLength = strlen($this->getBody());
-                }
-                $this->_request->setHeader(Resources::CONTENT_LENGTH, $contentLength);
-            }
         }
 
         foreach ($filters as $filter) {
             $filter->handleRequest($this);
         }
 
-        $response = $this->_request->send();
+        $client = new Client($this->_config);
+
+        // send request and recieve a response
+        $response = null;
+        try
+        {
+            $options = $this->_requestOptions;
+
+            if (!empty($this->_postParams)) {
+                $options[RequestOptions::FORM_PARAMS] = $this->_postParams;
+            }
+
+            // Since PHP 5.6, a default value for certificate validation is 'true'.
+            // We set it back to false if an enviroment variable 'HTTPS_PROXY' is
+            // defined.
+            if (getenv('HTTPS_PROXY') ) {
+                $options[RequestOptions::VERIFY] = false;
+            }
+
+            $request = new Request(
+                $this->_method,
+                $this->getUrl()->getUrl(),
+                $this->_headers,
+                $this->_body);
+
+            $response = $client->send($request, $options);
+        }
+        catch (ClientException $e)
+        {
+            $response = $e->getResponse();
+        }
 
         $start = count($filters) - 1;
         for ($index = $start; $index >= 0; --$index) {
@@ -265,7 +298,7 @@ class HttpClient implements IHttpClient
         }
 
         self::throwIfError(
-            $response->getStatus(),
+            $response->getStatusCode(),
             $response->getReasonPhrase(),
             $response->getBody(),
             $this->_expectedStatusCodes
@@ -288,7 +321,7 @@ class HttpClient implements IHttpClient
      */
     public function send(array $filters, IUrl $url = null)
     {
-        return $this->sendAndGetResponse($filters, $url)->getBody();
+        return (string)($this->sendAndGetHttpResponse($filters, $url)->getBody());
     }
 
     /**
@@ -323,7 +356,7 @@ class HttpClient implements IHttpClient
      */
     public function setConfig($name, $value = null)
     {
-        $this->_request->setConfig($name, $value);
+        $this->_config[$name] = $value;
     }
 
     /**
@@ -335,7 +368,7 @@ class HttpClient implements IHttpClient
      */
     public function getConfig($name)
     {
-        return $this->_request->getConfig($name);
+        return $this->_config[$name];
     }
 
     /**
@@ -346,7 +379,7 @@ class HttpClient implements IHttpClient
     public function setBody($body)
     {
         Validate::isString($body, 'body');
-        $this->_request->setBody($body);
+        $this->_body = $body;
     }
 
     /**
@@ -356,7 +389,7 @@ class HttpClient implements IHttpClient
      */
     public function getBody()
     {
-        return $this->_request->getBody();
+        return $this->_body;
     }
 
     /**
@@ -376,5 +409,23 @@ class HttpClient implements IHttpClient
         if (!in_array($actual, $expected)) {
             throw new ServiceException($actual, $reason, $message);
         }
+    }
+
+    /**
+     * @param ResponseInterface $response
+     *
+     * @return array an array of headers.
+     */
+    public static function getResponseHeaders(ResponseInterface $response)
+    {
+        $responseHeaderArray = $response->getHeaders();
+
+        $responseHeaders = [];
+
+        foreach($responseHeaderArray as $key => $value) {
+            $responseHeaders[strtolower($key)] = implode(',', $value);
+        }
+
+        return $responseHeaders;
     }
 }

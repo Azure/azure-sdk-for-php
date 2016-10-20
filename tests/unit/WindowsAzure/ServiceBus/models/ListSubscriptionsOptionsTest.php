@@ -26,7 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
 use WindowsAzure\ServiceBus\Models\ListSubscriptionsOptions;
-use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
+
 
 /**
  * Unit tests for class WrapAccessTokenResult.

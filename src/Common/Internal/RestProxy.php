@@ -29,6 +29,7 @@ use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
 use WindowsAzure\Common\Internal\Serialization\ISerializer;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Base class for all REST proxies.
@@ -115,9 +116,9 @@ class RestProxy
      *
      * @param HttpCallContext $context The HTTP call context.
      *
-     * @return \HTTP_Request2_Response
+     * @return ResponseInterface
      */
-    protected function sendContext(HttpCallContext $context)
+    protected function sendHttpContext(HttpCallContext $context)
     {
         $channel = clone $this->_channel;
         $contextUrl = $context->getUri();
@@ -140,7 +141,7 @@ class RestProxy
         $url->setQueryVariables($queryParams);
         $url->appendUrlPath($path);
 
-        return $channel->sendAndGetResponse($this->_filters, $url);
+        return $channel->sendAndGetHttpResponse($this->_filters, $url);
     }
 
     /**

@@ -69,7 +69,7 @@ class Entry extends AtomBase
     /**
      * The contributor of the entry.
      *
-     * @var string
+     * @var Person[]
      */
     protected $contributor;
 
@@ -274,7 +274,7 @@ class Entry extends AtomBase
     /**
      * Gets the contributor.
      *
-     * @return string
+     * @return Person[]
      */
     public function getContributor()
     {
@@ -284,9 +284,9 @@ class Entry extends AtomBase
     /**
      * Sets the contributor.
      *
-     * @param string $contributor The contributor of the entry.
+     * @param Person[] $contributor The contributor of the entry.
      */
-    public function setContributor($contributor)
+    public function setContributor(array $contributor)
     {
         $this->contributor = $contributor;
     }

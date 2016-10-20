@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -30,7 +30,7 @@ use WindowsAzure\Common\Internal\ServiceRestProxy;
 use WindowsAzure\Common\Internal\Resources;
 
 /**
- * The WRAP service layer. 
+ * The WRAP service layer.
  *
  * @category  Microsoft
  *
@@ -44,11 +44,11 @@ use WindowsAzure\Common\Internal\Resources;
  */
 class WrapRestProxy extends ServiceRestProxy implements IWrap
 {
-    /** 
-     * Creates a WrapRestProxy with specified parameters. 
-     * 
-     * @param IHttpClient $channel The channel to send the WRAP request. 
-     * @param string      $uri     The Uri of the WRAP service. 
+    /**
+     * Creates a WrapRestProxy with specified parameters.
+     *
+     * @param IHttpClient $channel The channel to send the WRAP request.
+     * @param string      $uri     The Uri of the WRAP service.
      */
     public function __construct(IHttpClient $channel, $uri)
     {
@@ -57,12 +57,12 @@ class WrapRestProxy extends ServiceRestProxy implements IWrap
 
     /**
      * Gets a WRAP access token with specified parameters.
-     * 
+     *
      * @param string $uri      The URI of the WRAP service.
-     * @param string $name     The user name of the WRAP service. 
-     * @param string $password The password of the WRAP service. 
-     * @param string $scope    The scope of the WRAP service. 
-     * 
+     * @param string $name     The user name of the WRAP service.
+     * @param string $password The password of the WRAP service.
+     * @param string $scope    The scope of the WRAP service.
+     *
      * @return WrapAccessTokenResult
      */
     public function wrapAccessToken($uri, $name, $password, $scope)
@@ -93,7 +93,7 @@ class WrapRestProxy extends ServiceRestProxy implements IWrap
 
         $this->setUri($uri);
 
-        $response = $this->send(
+        $response = $this->sendHttp(
             $method,
             $headers,
             $queryParams,

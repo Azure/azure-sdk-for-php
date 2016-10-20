@@ -25,10 +25,10 @@
 
 namespace WindowsAzure\Common\Internal\Http;
 
-use HTTP_Request2_Response;
+use function GuzzleHttp\Psr7\parse_response;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\ServiceException;
-
+use GuzzleHttp\Psr7\Response;
 
 /**
  * Batch response parser.
@@ -48,9 +48,9 @@ class BatchResponse
     /**
      * Http responses list.
      *
-     * @var HTTP_Request2_Response[]
+     * @var Response[]
      */
-    private $_contexts;
+    private $_responses;
 
     /**
      * Constructor.
@@ -74,35 +74,25 @@ class BatchResponse
                 'WindowsAzure\Common\Internal\Http\BatchRequest',
                 'request'
             );
+            // array of HttpCallContext
             $requestContexts = $request->getContexts();
         }
 
         $i = 0;
         foreach ($parts as $part) {
             if (!empty($part->body)) {
-                $headerEndPos = strpos($part->body, "\r\n\r\n");
+                $response = parse_response($part->body);
 
-                $header = substr($part->body, 0, $headerEndPos);
-                $body = substr($part->body, $headerEndPos + 4);
-                $headerStrings = explode("\r\n", $header);
-
-                $statusLine = array_shift($headerStrings);
-                $response = new \HTTP_Request2_Response($statusLine);
-                foreach ($headerStrings as $headerString) {
-                    $response->parseHeaderLine($headerString);
-                }
-                $response->appendBody($body);
-
-                $this->_contexts[] = $response;
+                $this->_responses[] = $response;
 
                 if (is_array($requestContexts)) {
                     $expectedCodes = $requestContexts[$i]->getStatusCodes();
-                    $statusCode = $response->getStatus();
+                    $statusCode = $response->getStatusCode();
 
                     if (!in_array($statusCode, $expectedCodes)) {
                         $reason = $response->getReasonPhrase();
 
-                        throw new ServiceException($statusCode, $reason, $body);
+                        throw new ServiceException($statusCode, $reason, $response->getBody());
                     }
                 }
 
@@ -114,10 +104,10 @@ class BatchResponse
     /**
      * Get parsed contexts as array.
      *
-     * @return HTTP_Request2_Response[]
+     * @return Response[]
      */
-    public function getContexts()
+    public function getResponses()
     {
-        return $this->_contexts;
+        return $this->_responses;
     }
 }

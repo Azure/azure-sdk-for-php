@@ -32,6 +32,7 @@ use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\RestProxy;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
+use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\ServiceManagement\Internal\IServiceManagement;
 use WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions;
@@ -109,9 +110,9 @@ class ServiceManagementRestProxy extends RestProxy
         $context->addHeader(Resources::CONTENT_TYPE, Resources::XML_CONTENT_TYPE);
         $context->addHeader(Resources::CONTENT_LENGTH_NO_SPACE, 0);
 
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
 
-        return AsynchronousOperationResult::create($response->getHeader());
+        return AsynchronousOperationResult::create(HttpClient::getResponseHeaders($response));
     }
 
     /**
@@ -358,7 +359,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getStorageServicePath());
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
         $serialized = $this->dataSerializer->unserialize($response->getBody());
 
         return ListStorageServicesResult::create($serialized);
@@ -387,7 +388,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getStorageServicePath($name));
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
         $parsed = $this->dataSerializer->unserialize($response->getBody());
 
         return GetStorageServicePropertiesResult::create($parsed);
@@ -413,7 +414,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getStorageServiceKeysPath($name));
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
         $parsed = $this->dataSerializer->unserialize($response->getBody());
 
         return GetStorageServiceKeysResult::create($parsed);
@@ -453,7 +454,7 @@ class ServiceManagementRestProxy extends RestProxy
             Resources::XML_CONTENT_TYPE
         );
 
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
         $parsed = $this->dataSerializer->unserialize($response->getBody());
 
         return GetStorageServiceKeysResult::create($parsed);
@@ -515,9 +516,9 @@ class ServiceManagementRestProxy extends RestProxy
             Resources::XML_CONTENT_TYPE
         );
 
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
 
-        return AsynchronousOperationResult::create($response->getHeader());
+        return AsynchronousOperationResult::create($response->getHeaders());
     }
 
     /**
@@ -537,7 +538,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getStorageServicePath($name));
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $this->sendContext($context);
+        $this->sendHttpContext($context);
     }
 
     /**
@@ -577,7 +578,7 @@ class ServiceManagementRestProxy extends RestProxy
             Resources::CONTENT_TYPE,
             Resources::XML_CONTENT_TYPE
         );
-        $this->sendContext($context);
+        $this->sendHttpContext($context);
     }
 
     /**
@@ -594,7 +595,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getAffinityGroupPath());
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
         $serialized = $this->dataSerializer->unserialize($response->getBody());
 
         return ListAffinityGroupsResult::create($serialized);
@@ -646,7 +647,7 @@ class ServiceManagementRestProxy extends RestProxy
             Resources::XML_CONTENT_TYPE
         );
 
-        $this->sendContext($context);
+        $this->sendHttpContext($context);
     }
 
     /**
@@ -666,7 +667,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getAffinityGroupPath($name));
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $this->sendContext($context);
+        $this->sendHttpContext($context);
     }
 
     /**
@@ -708,7 +709,7 @@ class ServiceManagementRestProxy extends RestProxy
             Resources::XML_CONTENT_TYPE
         );
 
-        $this->sendContext($context);
+        $this->sendHttpContext($context);
     }
 
     /**
@@ -730,7 +731,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getAffinityGroupPath($name));
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
         $parsed = $this->dataSerializer->unserialize($response->getBody());
 
         return GetAffinityGroupPropertiesResult::create($parsed);
@@ -750,7 +751,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getLocationPath());
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
         $serialized = $this->dataSerializer->unserialize($response->getBody());
 
         return ListLocationsResult::create($serialized);
@@ -778,7 +779,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getOperationPath($requestInfo->getRequestId()));
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
         $serialized = $this->dataSerializer->unserialize($response->getBody());
 
         return GetOperationStatusResult::create($serialized);
@@ -798,7 +799,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getHostedServicePath());
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
         $serialized = $this->dataSerializer->unserialize($response->getBody());
 
         return ListHostedServicesResult::create($serialized);
@@ -854,7 +855,7 @@ class ServiceManagementRestProxy extends RestProxy
             Resources::XML_CONTENT_TYPE
         );
 
-        $this->sendContext($context);
+        $this->sendHttpContext($context);
     }
 
     /**
@@ -896,7 +897,7 @@ class ServiceManagementRestProxy extends RestProxy
             Resources::CONTENT_TYPE,
             Resources::XML_CONTENT_TYPE
         );
-        $this->sendContext($context);
+        $this->sendHttpContext($context);
     }
 
     /**
@@ -921,7 +922,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($this->_getHostedServicePath($name));
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $this->sendContext($context);
+        $this->sendHttpContext($context);
     }
 
     /**
@@ -956,7 +957,7 @@ class ServiceManagementRestProxy extends RestProxy
             Utilities::booleanToString($options->getEmbedDetail())
         );
 
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
         $parsed = $this->dataSerializer->unserialize($response->getBody());
 
         return GetHostedServicePropertiesResult::create($parsed);
@@ -1053,9 +1054,9 @@ class ServiceManagementRestProxy extends RestProxy
             Resources::XML_CONTENT_TYPE
         );
 
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
 
-        return AsynchronousOperationResult::create($response->getHeader());
+        return AsynchronousOperationResult::create(HttpClient::getResponseHeaders($response));
     }
 
     /**
@@ -1087,7 +1088,7 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($path);
         $context->addStatusCode(Resources::STATUS_OK);
 
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
         $parsed = $this->dataSerializer->unserialize($response->getBody());
 
         return GetDeploymentResult::create($parsed);
@@ -1138,9 +1139,9 @@ class ServiceManagementRestProxy extends RestProxy
             Resources::XML_CONTENT_TYPE
         );
 
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
 
-        return AsynchronousOperationResult::create($response->getHeader());
+        return AsynchronousOperationResult::create(HttpClient::getResponseHeaders($response));
     }
 
     /**
@@ -1169,9 +1170,9 @@ class ServiceManagementRestProxy extends RestProxy
         $context->setPath($path);
         $context->addStatusCode(Resources::STATUS_ACCEPTED);
 
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
 
-        return AsynchronousOperationResult::create($response->getHeader());
+        return AsynchronousOperationResult::create(HttpClient::getResponseHeaders($response));
     }
 
     /**
@@ -1229,9 +1230,9 @@ class ServiceManagementRestProxy extends RestProxy
         );
 
         assert(Utilities::endsWith($context->getPath(), '/'));
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
 
-        return AsynchronousOperationResult::create($response->getHeader());
+        return AsynchronousOperationResult::create(HttpClient::getResponseHeaders($response));
     }
 
     /**
@@ -1280,9 +1281,9 @@ class ServiceManagementRestProxy extends RestProxy
         );
 
         assert(Utilities::endsWith($context->getPath(), '/'));
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
 
-        return AsynchronousOperationResult::create($response->getHeader());
+        return AsynchronousOperationResult::create(HttpClient::getResponseHeaders($response));
     }
 
     /**
@@ -1367,9 +1368,9 @@ class ServiceManagementRestProxy extends RestProxy
         );
 
         assert(Utilities::endsWith($context->getPath(), '/'));
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
 
-        return AsynchronousOperationResult::create($response->getHeader());
+        return AsynchronousOperationResult::create(HttpClient::getResponseHeaders($response));
     }
 
     /**
@@ -1418,9 +1419,9 @@ class ServiceManagementRestProxy extends RestProxy
         );
 
         assert(Utilities::endsWith($context->getPath(), '/'));
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
 
-        return AsynchronousOperationResult::create($response->getHeader());
+        return AsynchronousOperationResult::create(HttpClient::getResponseHeaders($response));
     }
 
     /**
@@ -1530,8 +1531,8 @@ class ServiceManagementRestProxy extends RestProxy
         );
 
         assert(Utilities::endsWith($context->getPath(), '/'));
-        $response = $this->sendContext($context);
+        $response = $this->sendHttpContext($context);
 
-        return AsynchronousOperationResult::create($response->getHeader());
+        return AsynchronousOperationResult::create(HttpClient::getResponseHeaders($response));
     }
 }

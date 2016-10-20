@@ -73,7 +73,7 @@ class ContentKeyAuthorizationPolicyOption
     /**
      * ContentKeyAuthorizationPolicyOption Restrictions.
      *
-     * @var array
+     * @var ContentKeyAuthorizationPolicyRestriction[]
      */
     private $_restrictions;
 
@@ -228,7 +228,7 @@ class ContentKeyAuthorizationPolicyOption
     /**
      * Get "ContentKeyAuthorizationPolicyOption Restrictions".
      *
-     * @return string
+     * @return ContentKeyAuthorizationPolicyRestriction[]
      */
     public function getRestrictions()
     {
@@ -238,9 +238,9 @@ class ContentKeyAuthorizationPolicyOption
     /**
      * Set "ContentKeyAuthorizationPolicyOption Restrictions".
      *
-     * @param array $value NameKeyDeliveryType
+     * @param ContentKeyAuthorizationPolicyRestriction[] $value NameKeyDeliveryType
      */
-    public function setRestrictions($value)
+    public function setRestrictions(array $value)
     {
         $this->_restrictions = $value;
     }

@@ -25,7 +25,7 @@
 namespace Tests\unit\WindowsAzure\MediaServices\Templates;
 
 use WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate;
-use WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate;
+
 
 /**
  * Unit Tests for PlayReadyLicenseTemplate.

@@ -25,6 +25,7 @@
 
 namespace Tests\framework;
 
+use Psr\Http\Message\ResponseInterface;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\IServiceFilter;
 
@@ -63,7 +64,7 @@ class FiddlerFilter implements IServiceFilter
         return $request;
     }
 
-    public function handleResponse(IHttpClient $request, $response)
+    public function handleResponse(IHttpClient $request, ResponseInterface $response)
     {
         return $response;
     }

@@ -67,13 +67,13 @@ class DateFilterTest extends \PHPUnit_Framework_TestCase
     {
         // Setup
         $channel = new HttpClient();
-        $response = null;
+        $response = new \GuzzleHttp\Psr7\Response();
         $filter = new DateFilter();
 
         // Test
         $response = $filter->handleResponse($channel, $response);
 
         // Assert
-        $this->assertNull($response);
+        $this->assertNotNull($response);
     }
 }

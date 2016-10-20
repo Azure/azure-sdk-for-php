@@ -25,7 +25,7 @@
 
 namespace Tests\unit\WindowsAzure\ServiceRuntime\Internal;
 
-use WindowsAzure\ServiceRuntime\Internal\GoalState;
+
 use WindowsAzure\ServiceRuntime\Internal\XmlGoalStateDeserializer;
 
 /**

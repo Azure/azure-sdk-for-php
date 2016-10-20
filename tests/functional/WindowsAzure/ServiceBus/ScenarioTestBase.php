@@ -25,16 +25,18 @@
 
 namespace Tests\functional\WindowsAzure\ServiceBus;
 
-use Tests\Functional\WindowsAzure\ServiceBus\IntegrationTestBase;
+
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 
 class ScenarioTestBase extends IntegrationTestBase
 {
     private static $verbose = false;
 
-    protected function compareMessages($expectedMessage, $actualMessage, $customProperties = null)
-    {
+    protected function compareMessages(
+        BrokeredMessage $expectedMessage, BrokeredMessage $actualMessage, $customProperties = null
+    ) {
         $this->assertEquals($expectedMessage->getBody(), $actualMessage->getBody(), 'body');
         $this->assertEquals($expectedMessage->getContentType(), $actualMessage->getContentType(), 'getContentType');
         $this->assertEquals($expectedMessage->getCorrelationId(), $actualMessage->getCorrelationId(), 'getCorrelationId');

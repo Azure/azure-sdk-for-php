@@ -45,7 +45,7 @@ class IPAccessControl
     /**
      * IPAccessControl Allow.
      *
-     * @var array
+     * @var IPRange[]
      */
     private $_allow;
 
@@ -90,7 +90,7 @@ class IPAccessControl
     /**
      * Get the ip access control allow.
      *
-     * @return array
+     * @return IPRange[]
      */
     public function getAllow()
     {
@@ -100,9 +100,9 @@ class IPAccessControl
     /**
      * Set the ip access control allow.
      *
-     * @param array $value ip range Name
+     * @param IPRange[] $value ip range Name
      */
-    public function setAllow($value)
+    public function setAllow(array $value)
     {
         $this->_allow = $value;
     }

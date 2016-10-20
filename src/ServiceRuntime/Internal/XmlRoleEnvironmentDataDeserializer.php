@@ -60,8 +60,7 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
         );
 
         $localResources = $this->_translateLocalResources($environmentInfo);
-        $currentInstance = $this
-            ->_translateCurrentInstance($environmentInfo);
+        $currentInstance = $this->_translateCurrentInstance($environmentInfo);
         $roles = $this->_translateRoles(
             $environmentInfo,
             $currentInstance,
@@ -116,7 +115,7 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
      * 
      * @param string $environmentInfo The role environment info.
      * 
-     * @return array
+     * @return LocalResource[]
      */
     private function _translateLocalResources($environmentInfo)
     {
@@ -210,7 +209,7 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
      * 
      * @param string $instancesInfo The instance info.
      * 
-     * @return array
+     * @return RoleInstance[]
      */
     private function _translateRoleInstances($instancesInfo)
     {

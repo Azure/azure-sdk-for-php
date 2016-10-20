@@ -80,16 +80,17 @@ interface IMediaServices extends FilterableService
     /**
      * Get asset list.
      *
-     * @return array of Models\Asset
+     * @param array $queryParams
+     * @return Asset[]
      */
-    public function getAssetList();
+    public function getAssetList(array $queryParams = []);
 
     /**
      * Get asset locators.
      *
      * @param Asset|string $asset Asset data or asset Id
      *
-     * @return array of Models\Locator
+     * @return Locator[]
      */
     public function getAssetLocators($asset);
 

@@ -26,8 +26,9 @@
 namespace Tests\framework;
 
 use Exception;
-use Tests\Framework\ServiceRestProxyTestBase;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
+
+use WindowsAzure\MediaServices\MediaServicesRestProxy;
 use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
@@ -36,8 +37,6 @@ use WindowsAzure\MediaServices\Models\Task;
 use WindowsAzure\MediaServices\Models\TaskOptions;
 use WindowsAzure\MediaServices\Models\JobTemplate;
 use WindowsAzure\MediaServices\Models\TaskTemplate;
-use WindowsAzure\MediaServices\Models\Channel;
-use WindowsAzure\MediaServices\Models\Program;
 use WindowsAzure\MediaServices\Models\ChannelState;
 use WindowsAzure\MediaServices\Models\ProgramState;
 use WindowsAzure\Common\Internal\Http\Url;
@@ -63,6 +62,9 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     protected $accessPolicy = [];
     protected $locator = [];
     protected $jobTemplate = [];
+    /**
+     * @var Job[]
+     */
     protected $job = [];
     protected $outputAssets = [];
     protected $ingestManifests = [];
@@ -72,6 +74,10 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
     protected $contentKeyAuthorizationPolicies = [];
     protected $contentKeyAuthorizationOptions = [];
     protected $assetDeliveryPolicies = [];
+    /**
+     * @var MediaServicesRestProxy
+     */
+    protected $mediaServicesWrapper;
 
     const LARGE_FILE_SIZE_MB = 7;
 
@@ -81,13 +87,13 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         parent::setUp();
         $connection = TestResources::getMediaServicesConnectionParameters();
         $settings = new MediaServicesSettings($connection['accountName'], $connection['accessKey'], $connection['endpointUri'], $connection['oauthEndpointUri']);
-        $mediaServicesWrapper = $this->builder->createMediaServicesService($settings);
-        parent::setProxy($mediaServicesWrapper);
+        $this->mediaServicesWrapper = $this->builder->createMediaServicesService($settings);
+        parent::setProxy($this->mediaServicesWrapper);
     }
 
     public function createAsset($asset)
     {
-        $result = $this->restProxy->createAsset($asset);
+        $result = $this->mediaServicesWrapper->createAsset($asset);
         $this->assets[$result->getId()] = $result;
 
         return $result;
@@ -95,7 +101,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createAccessPolicy($accessPolicy)
     {
-        $result = $this->restProxy->createAccessPolicy($accessPolicy);
+        $result = $this->mediaServicesWrapper->createAccessPolicy($accessPolicy);
         $this->accessPolicy[$result->getId()] = $result;
 
         return $result;
@@ -103,7 +109,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createLocator($loc)
     {
-        $result = $this->restProxy->createLocator($loc);
+        $result = $this->mediaServicesWrapper->createLocator($loc);
         $this->locator[$result->getId()] = $result;
 
         return $result;
@@ -111,7 +117,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createJob($job, $inputAssets, $tasks = null)
     {
-        $result = $this->restProxy->createJob($job, $inputAssets, $tasks);
+        $result = $this->mediaServicesWrapper->createJob($job, $inputAssets, $tasks);
         $this->job[$result->getId()] = $result;
 
         return $result;
@@ -119,7 +125,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createIngestManifest($ingestManifest)
     {
-        $result = $this->restProxy->createIngestManifest($ingestManifest);
+        $result = $this->mediaServicesWrapper->createIngestManifest($ingestManifest);
         $this->ingestManifests[$result->getId()] = $result;
 
         return $result;
@@ -127,7 +133,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createIngestManifestAsset($ingestManifestAsset, $asset)
     {
-        $result = $this->restProxy->createIngestManifestAsset($ingestManifestAsset, $asset);
+        $result = $this->mediaServicesWrapper->createIngestManifestAsset($ingestManifestAsset, $asset);
         $this->ingestManifestAssets[$result->getId()] = $result;
 
         return $result;
@@ -135,7 +141,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createIngestManifestFile($ingestManifestFile)
     {
-        $result = $this->restProxy->createIngestManifestFile($ingestManifestFile);
+        $result = $this->mediaServicesWrapper->createIngestManifestFile($ingestManifestFile);
         $this->ingestManifestFiles[$result->getId()] = $result;
 
         return $result;
@@ -143,7 +149,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createContentKey($contentKey)
     {
-        $result = $this->restProxy->createContentKey($contentKey);
+        $result = $this->mediaServicesWrapper->createContentKey($contentKey);
         $this->contentKeys[$result->getId()] = $result;
 
         return $result;
@@ -151,7 +157,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy)
     {
-        $result = $this->restProxy->createContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy);
+        $result = $this->mediaServicesWrapper->createContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy);
         $this->contentKeyAuthorizationPolicies[$result->getId()] = $result;
 
         return $result;
@@ -159,7 +165,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOption)
     {
-        $result = $this->restProxy->createContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOption);
+        $result = $this->mediaServicesWrapper->createContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOption);
         $this->contentKeyAuthorizationOptions[$result->getId()] = $result;
 
         return $result;
@@ -167,7 +173,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createAssetDeliveryPolicy($assetDeliveryPolicy)
     {
-        $result = $this->restProxy->createAssetDeliveryPolicy($assetDeliveryPolicy);
+        $result = $this->mediaServicesWrapper->createAssetDeliveryPolicy($assetDeliveryPolicy);
         $this->assetDeliveryPolicies[$result->getId()] = $result;
 
         return $result;
@@ -190,8 +196,8 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $locator = $this->createLocator($locator);
 
         $fileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
-        $this->restProxy->uploadAssetFile($locator, $fileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT);
-        $this->restProxy->createFileInfos($asset);
+        $this->mediaServicesWrapper->uploadAssetFile($locator, $fileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT);
+        $this->mediaServicesWrapper->createFileInfos($asset);
 
         return $asset;
     }
@@ -209,8 +215,8 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $locator = $this->createLocator($locator);
 
         $fileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
-        $this->restProxy->uploadAssetFile($locator, $fileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT);
-        $this->restProxy->createFileInfos($asset);
+        $this->mediaServicesWrapper->uploadAssetFile($locator, $fileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT);
+        $this->mediaServicesWrapper->createFileInfos($asset);
     }
 
     public function createAssetWithFilesForStream()
@@ -231,9 +237,9 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
         $firstFile = TestResources::getSmallIsm();
         $secondFile = TestResources::getSmallIsmc();
-        $this->restProxy->uploadAssetFile($locator, TestResources::MEDIA_SERVICES_ISM_FILE_NAME, $firstFile);
-        $this->restProxy->uploadAssetFile($locator, TestResources::MEDIA_SERVICES_ISMC_FILE_NAME, $secondFile);
-        $this->restProxy->createFileInfos($asset);
+        $this->mediaServicesWrapper->uploadAssetFile($locator, TestResources::MEDIA_SERVICES_ISM_FILE_NAME, $firstFile);
+        $this->mediaServicesWrapper->uploadAssetFile($locator, TestResources::MEDIA_SERVICES_ISMC_FILE_NAME, $secondFile);
+        $this->mediaServicesWrapper->createFileInfos($asset);
 
         return $asset;
     }
@@ -248,7 +254,9 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createJobWithTasks($name)
     {
-        $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
+        $mediaProcessor = $this->mediaServicesWrapper->getLatestMediaProcessor(
+            TestResources::MEDIA_SERVICES_PROCESSOR_NAME
+        );
         $inputAsset = $this->createAssetWithFile();
 
         $taskBody = TestResources::getMediaServicesTask($this->getOutputAssetName());
@@ -265,7 +273,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createJobTemplate($jobTemplate, $taskTemplates)
     {
-        $jobTempl = $this->restProxy->createJobTemplate($jobTemplate, $taskTemplates);
+        $jobTempl = $this->mediaServicesWrapper->createJobTemplate($jobTemplate, $taskTemplates);
         $this->jobTemplate[$jobTempl->getId()] = $jobTempl;
 
         return $jobTempl;
@@ -273,9 +281,10 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function createJobTemplateWithTasks($name)
     {
-        $mediaProcessor = $this->restProxy->getLatestMediaProcessor(TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
+        $mediaProcessor = $this->mediaServicesWrapper->getLatestMediaProcessor(
+            TestResources::MEDIA_SERVICES_PROCESSOR_NAME);
 
-        $this->assertNotNull($mediaProcessor); 
+        $this->assertNotNull($mediaProcessor);
 
         $taskTemplate = new TaskTemplate(1, 1);
         $taskTemplate->setMediaProcessorId($mediaProcessor->getId());
@@ -296,72 +305,74 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
         $this->assertNotNull($this->restProxy);
 
-        $channels = $this->restProxy->getChannelList();
+        $channels = $this->mediaServicesWrapper->getChannelList();
         foreach ($channels as $ch) {
             if ($this->startsWith($ch->getName(), TestResources::MEDIA_SERVICES_CHANNEL_NAME)) {
 
-                $programs = $this->restProxy->getProgramList($ch);
+                $programs = $this->mediaServicesWrapper->getProgramList($ch);
 
                 foreach($programs as $program) {
                     if ($program->getState() == ProgramState::Running) {
-                        $this->restProxy->stopProgram($program);
+                        $this->mediaServicesWrapper->stopProgram($program);
                     }
-                    $this->restProxy->deleteProgram($program);
+                    $this->mediaServicesWrapper->deleteProgram($program);
                 }
                 if ($ch->getState() == ChannelState::Running) {
-                    $this->restProxy->stopChannel($ch);
+                    $this->mediaServicesWrapper->stopChannel($ch);
                 }
-                $this->restProxy->deleteChannel($ch);
+                $this->mediaServicesWrapper->deleteChannel($ch);
             }
         }
 
         foreach ($this->ingestManifestFiles as $ingestManifestFile) {
-            $this->restProxy->deleteIngestManifestFile($ingestManifestFile);
+            $this->mediaServicesWrapper->deleteIngestManifestFile($ingestManifestFile);
         }
 
         foreach ($this->ingestManifestAssets as $ingestManifestAsset) {
-            $this->restProxy->deleteIngestManifestAsset($ingestManifestAsset);
+            $this->mediaServicesWrapper->deleteIngestManifestAsset($ingestManifestAsset);
         }
 
         foreach ($this->ingestManifests as $ingestManifest) {
-            $this->restProxy->deleteIngestManifest($ingestManifest);
+            $this->mediaServicesWrapper->deleteIngestManifest($ingestManifest);
         }
 
         foreach ($this->locator as $loc) {
-            $this->restProxy->deleteLocator($loc);
+            $this->mediaServicesWrapper->deleteLocator($loc);
         }
 
         foreach ($this->contentKeyAuthorizationPolicies as $contentKeyAuthorizationPolicy) {
-            $this->restProxy->deleteContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy);
+            $this->mediaServicesWrapper->deleteContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy);
         }
 
         foreach ($this->contentKeyAuthorizationOptions as $contentKeyAuthorizationOption) {
-            $this->restProxy->deleteContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOption);
+            $this->mediaServicesWrapper->deleteContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOption);
         }
 
         foreach ($this->assets as $asset) {
-            $assetDeliveryPolicies = $this->restProxy->getAssetLinkedDeliveryPolicy($asset);
+            $assetDeliveryPolicies = $this->mediaServicesWrapper->getAssetLinkedDeliveryPolicy($asset);
             foreach ($assetDeliveryPolicies as $dp) {
-                $this->restProxy->removeDeliveryPolicyFromAsset($asset, $dp);
+                $this->mediaServicesWrapper->removeDeliveryPolicyFromAsset($asset, $dp);
             }
         }
 
         foreach ($this->assetDeliveryPolicies as $assetDeliveryPolicy) {
-            $this->restProxy->deleteAssetDeliveryPolicy($assetDeliveryPolicy);
+            $this->mediaServicesWrapper->deleteAssetDeliveryPolicy($assetDeliveryPolicy);
         }
 
         foreach ($this->assets as $asset) {
-            $contentKeyList = $this->restProxy->getAssetContentKeys($asset);
+            $contentKeyList = $this->mediaServicesWrapper->getAssetContentKeys($asset);
             foreach ($contentKeyList as $contentKey) {
                 unset($this->contentKeys[$contentKey->getId()]);
             }
 
-            $this->restProxy->deleteAsset($asset);
+            $this->mediaServicesWrapper->deleteAsset($asset);
         }
+
+        $availableContentKeyList = null;
 
         // $this->restProxy can be empty here
         if (is_object($this->restProxy)) {
-            $availableContentKeyList = $this->restProxy->getContentKeyList();
+            $availableContentKeyList = $this->mediaServicesWrapper->getContentKeyList();
         }
 
         $availableContentKeyIds = [];
@@ -370,26 +381,26 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         }
         foreach ($this->contentKeys as $contentKey) {
             if (in_array($contentKey->getId(), $availableContentKeyIds)) {
-                $this->restProxy->deleteContentKey($contentKey);
+                $this->mediaServicesWrapper->deleteContentKey($contentKey);
             }
         }
 
         foreach ($this->accessPolicy as $access) {
-            $this->restProxy->deleteAccessPolicy($access);
+            $this->mediaServicesWrapper->deleteAccessPolicy($access);
         }
 
         foreach ($this->jobTemplate as $jobTemplate) {
-            $this->restProxy->deleteJobTemplate($jobTemplate);
+            $this->mediaServicesWrapper->deleteJobTemplate($jobTemplate);
         }
 
         foreach ($this->job as $job) {
             $this->deleteJob($job);
         }
 
-        $assets = $this->restProxy->getAssetList();
+        $assets = $this->mediaServicesWrapper->getAssetList();
         foreach ($assets as $asset) {
             if (in_array($asset->getName(), $this->outputAssets)) {
-                $this->restProxy->deleteAsset($asset);
+                $this->mediaServicesWrapper->deleteAsset($asset);
             }
         }
     }
@@ -418,28 +429,28 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function waitJobStatus($job, $statusArray)
     {
-        $status = $this->restProxy->getJobStatus($job);
+        $status = $this->mediaServicesWrapper->getJobStatus($job);
         while (!in_array($status, $statusArray)) {
             sleep(1);
-            $status = $this->restProxy->getJobStatus($job);
+            $status = $this->mediaServicesWrapper->getJobStatus($job);
         }
     }
 
-    public function deleteJob($job)
+    public function deleteJob(Job $job)
     {
         $this->waitJobStatus($job, [Job::STATE_FINISHED, Job::STATE_ERROR, Job::STATE_CANCELED]);
-        $this->restProxy->deleteJob($job->getId());
+        $this->mediaServicesWrapper->deleteJob($job->getId());
         unset($this->job[$job->getId()]);
     }
 
     public function waitIngestManifestFinishedFiles($manifest, $fileCount, $threshold = 40)
     {
-        $stat = $this->restProxy->getIngestManifest($manifest);
+        $stat = $this->mediaServicesWrapper->getIngestManifest($manifest);
         $attempt = 0;
         while (($stat->getStatistics()->getFinishedFilesCount() < $fileCount)
             && ($attempt < $threshold)
         ) {
-            $stat = $this->restProxy->getIngestManifest($manifest);
+            $stat = $this->mediaServicesWrapper->getIngestManifest($manifest);
             ++$attempt;
             sleep(1);
         }
@@ -461,8 +472,8 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $locator->setStartTime(new \DateTime('now -5 minutes'));
         $locator = $this->createLocator($locator);
 
-        $this->restProxy->uploadAssetFile($locator, $fileName, $fileContent);
-        $this->restProxy->createFileInfos($asset);
+        $this->mediaServicesWrapper->uploadAssetFile($locator, $fileName, $fileContent);
+        $this->mediaServicesWrapper->createFileInfos($asset);
 
         $accessPolicy = new AccessPolicy(TestResources::MEDIA_SERVICES_ACCESS_POLICY_NAME.$this->createSuffix());
         $accessPolicy->setDurationInMinutes(300);
@@ -505,13 +516,13 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $locator->setStartTime(new \DateTime('now -5 minutes'));
         $locator = $this->createLocator($locator);
         
-        $this->restProxy->uploadAssetFile($locator, $fileName, $fileContent); 
-        $this->restProxy->createFileInfos($asset);
+        $this->mediaServicesWrapper->uploadAssetFile($locator, $fileName, $fileContent);
+        $this->mediaServicesWrapper->createFileInfos($asset);
 
-        $list = $this->restProxy->getAssetAssetFileList($asset);
+        $list = $this->mediaServicesWrapper->getAssetAssetFileList($asset);
         if (isset($list[0])) {
             $list[0]->setIsPrimary(true);
-            $this->restProxy->updateAssetFile($list[0]);
+            $this->mediaServicesWrapper->updateAssetFile($list[0]);
         } else {
             throw new Exception("unable to find the asset file");
         }
@@ -522,9 +533,9 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
      * Verifies if $array contains an entity with id $id.
      *
      * @param mixed $id    the id to lookup into the array
-     * @param mixed $array the array 
+     * @param array $array the array
      */
-    public static function assertContainsEntityById($id, $array)
+    public static function assertContainsEntityById($id, array $array)
     {
         $found = false;
         foreach ($array as $entity) {

@@ -52,20 +52,20 @@ use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyType;
 use WindowsAzure\MediaServices\Models\EncodingReservedUnitType;
 use WindowsAzure\MediaServices\Models\Channel;
 use WindowsAzure\MediaServices\Models\ChannelInput;
-use WindowsAzure\MediaServices\Models\ChannelOutput;
+
 use WindowsAzure\MediaServices\Models\ChannelPreview;
 use WindowsAzure\MediaServices\Models\ChannelEncoding;
-use WindowsAzure\MediaServices\Models\ChannelEndpoint;
+
 use WindowsAzure\MediaServices\Models\ChannelInputAccessControl;
 use WindowsAzure\MediaServices\Models\ChannelPreviewAccessControl;
-use WindowsAzure\MediaServices\Models\ChannelOutputHls;
+
 use WindowsAzure\MediaServices\Models\ChannelSlate;
 use WindowsAzure\MediaServices\Models\ChannelState;
 use WindowsAzure\MediaServices\Models\StreamingProtocol;
 use WindowsAzure\MediaServices\Models\EncodingType;
 use WindowsAzure\MediaServices\Models\IPAccessControl;
 use WindowsAzure\MediaServices\Models\IPRange;
-use WindowsAzure\MediaServices\Models\Operation;
+
 use WindowsAzure\MediaServices\Models\OperationState;
 use WindowsAzure\MediaServices\Models\CrossSiteAccessPolicies;
 use WindowsAzure\MediaServices\Models\AudioStream;
@@ -152,7 +152,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $asset = $this->createAsset($asset);
 
         // Test
-        $result = $this->restProxy->getAsset($asset);
+        $result = $this->mediaServicesWrapper->getAsset($asset);
 
         // Assert
         $this->assertEquals($asset->getId(), $result->getId());
@@ -174,7 +174,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $asset = $this->createAsset($asset);
 
         // Test
-        $result = $this->restProxy->getAssetList();
+        $result = $this->mediaServicesWrapper->getAssetList();
 
         // Assert
         $this->assertCount(1, $result);
@@ -197,8 +197,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Test
         $asset->setName($name);
-        $this->restProxy->updateAsset($asset);
-        $result = $this->restProxy->getAsset($asset);
+        $this->mediaServicesWrapper->updateAsset($asset);
+        $result = $this->mediaServicesWrapper->getAsset($asset);
 
         // Assert
         $this->assertEquals($asset->getId(), $result->getId());
@@ -242,7 +242,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $access = $this->createAccessPolicy($access);
 
         // Test
-        $accessPolicies = $this->restProxy->getAccessPolicyList();
+        $accessPolicies = $this->mediaServicesWrapper->getAccessPolicyList();
 
         // Assert
         $this->assertGreaterThanOrEqual(1, count($accessPolicies)); //this changes with the user's permissions 
@@ -264,7 +264,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $access = $this->createAccessPolicy($access);
 
         // Test
-        $result = $this->restProxy->getAccessPolicy($access);
+        $result = $this->mediaServicesWrapper->getAccessPolicy($access);
 
         // Assert
         $this->assertEquals($access->getId(), $result->getId());
@@ -323,14 +323,16 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $locator = $this->createLocator($locator);
 
         $fileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME;
-        $this->restProxy->uploadAssetFile($locator, $fileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT);
+        $this->mediaServicesWrapper->uploadAssetFile(
+            $locator, $fileName, TestResources::MEDIA_SERVICES_DUMMY_FILE_CONTENT
+        );
 
         // Test
-        $this->restProxy->createFileInfos($asset);
+        $this->mediaServicesWrapper->createFileInfos($asset);
 
         // Assert
-        $assetFiles = $this->restProxy->getAssetFileList();
-        $result = $this->restProxy->getAssetFile($assetFiles[0]);
+        $assetFiles = $this->mediaServicesWrapper->getAssetFileList();
+        $result = $this->mediaServicesWrapper->getAssetFile($assetFiles[0]);
         $this->assertGreaterThanOrEqual(1, count($assetFiles)); //this changes with the user's permissions
 
         $this->assertEquals($fileName, $assetFiles[0]->getName());
@@ -368,7 +370,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $job = $this->createJobWithTasks($name);
 
         // Test
-        $result = $this->restProxy->getJobStatus($job);
+        $result = $this->mediaServicesWrapper->getJobStatus($job);
 
         // Assert
         $this->assertGreaterThanOrEqual(0, $result);
@@ -386,7 +388,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $job = $this->createJobWithTasks($name);
 
         // Test
-        $job = $this->restProxy->cancelJob($job);
+        $job = $this->mediaServicesWrapper->cancelJob($job);
 
         // Assert
         $this->assertNull($job);
@@ -433,7 +435,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $locator = $this->createLocator($locator);
 
         // Test
-        $result = $this->restProxy->getAssetLocators($asset);
+        $result = $this->mediaServicesWrapper->getAssetLocators($asset);
 
         // Assert
         $this->assertEquals($asset->getId(), $result[0]->getAssetId());
@@ -452,7 +454,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $asset = $this->createAsset($asset);
 
         // Test
-        $result = $this->restProxy->getAssetStorageAccount($asset);
+        $result = $this->mediaServicesWrapper->getAssetStorageAccount($asset);
 
         // Assert
         $this->assertNotEmpty($result);
@@ -480,7 +482,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $locator = $this->createLocator($locator);
 
         // Test
-        $result = $this->restProxy->getLocator($locator);
+        $result = $this->mediaServicesWrapper->getLocator($locator);
 
         // Assert
         $this->assertEquals($locator->getId(), $result->getId());
@@ -509,7 +511,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $locator = $this->createLocator($locator);
 
         // Test
-        $result = $this->restProxy->getLocatorAccessPolicy($locator);
+        $result = $this->mediaServicesWrapper->getLocatorAccessPolicy($locator);
 
         // Assert
         $this->assertEquals($access->getId(), $result->getId());
@@ -536,7 +538,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $locator = $this->createLocator($locator);
 
         // Test
-        $result = $this->restProxy->getLocatorAsset($locator);
+        $result = $this->mediaServicesWrapper->getLocatorAsset($locator);
 
         // Assert
         $this->assertEquals($asset->getId(), $result->getId());
@@ -563,7 +565,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $locator = $this->createLocator($locator);
 
         // Test
-        $result = $this->restProxy->getLocatorList();
+        $result = $this->mediaServicesWrapper->getLocatorList();
 
         // Assert
         $this->assertCount(1, $result);
@@ -594,7 +596,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Test
         $locator->setName($newName);
-        $this->restProxy->updateLocator($locator);
+        $this->mediaServicesWrapper->updateLocator($locator);
 
         // Assert
         $this->assertEquals($newName, $locator->getName());
@@ -611,10 +613,10 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     {
         // Setup
         $asset = $this->createAssetWithFile();
-        $assetFiles = $this->restProxy->getAssetFileList();
+        $assetFiles = $this->mediaServicesWrapper->getAssetFileList();
 
         // Test
-        $result = $this->restProxy->getAssetFile($assetFiles[0]);
+        $result = $this->mediaServicesWrapper->getAssetFile($assetFiles[0]);
 
         // Assert
         $this->assertEquals($assetFiles[0]->getName(), $result->getName());
@@ -630,11 +632,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Setup
         $asset = $this->createAssetWithFile();
         $newFileName = TestResources::MEDIA_SERVICES_DUMMY_FILE_NAME_1;
-        $assetFiles = $this->restProxy->getAssetFileList();
+        $assetFiles = $this->mediaServicesWrapper->getAssetFileList();
 
         // Test
         $assetFiles[0]->setName($newFileName);
-        $this->restProxy->updateAssetFile($assetFiles[0]);
+        $this->mediaServicesWrapper->updateAssetFile($assetFiles[0]);
         $result = $assetFiles[0]->getName();
 
         // Assert
@@ -650,10 +652,10 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         //Setup
         $job = $this->createJobWithTasks(TestResources::MEDIA_SERVICES_JOB_NAME.$this->createSuffix());
-        $jobList = $this->restProxy->getJobList();
+        $jobList = $this->mediaServicesWrapper->getJobList();
 
         // Test
-        $result = $this->restProxy->getJob($jobList[0]);
+        $result = $this->mediaServicesWrapper->getJob($jobList[0]);
 
         // Assert
         $this->assertEquals($job->getId(), $result->getId());
@@ -680,7 +682,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $job = $this->createJob($job, [$asset], [$task]);
 
         // Test
-        $result = $this->restProxy->getJobTasks($job);
+        $result = $this->mediaServicesWrapper->getJobTasks($job);
 
         // Assert
         $this->assertEquals($mediaProcessorId, $result[0]->getMediaProcessorId());
@@ -707,7 +709,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $job = $this->createJob($job, [$asset], [$task]);
 
         // Test
-        $result = $this->restProxy->getJobInputMediaAssets($job);
+        $result = $this->mediaServicesWrapper->getJobInputMediaAssets($job);
 
         // Assert
         $this->assertEquals($asset->getId(), $result[0]->getId());
@@ -721,7 +723,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testGetMediaProcessors()
     {
         // Test
-        $result = $this->restProxy->getMediaProcessors();
+        $result = $this->mediaServicesWrapper->getMediaProcessors();
 
         // Assert
         $this->assertNotEmpty($result);
@@ -736,7 +738,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $name = TestResources::MEDIA_SERVICES_PROCESSOR_NAME;
 
         // Test
-        $result = $this->restProxy->getLatestMediaProcessor($name);
+        $result = $this->mediaServicesWrapper->getLatestMediaProcessor($name);
 
         // Assert
         $this->assertNotNull($result);
@@ -763,7 +765,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $job = $this->createJob($job, [$asset], [$task]);
 
         // Test
-        $result = $this->restProxy->getJobOutputMediaAssets($job);
+        $result = $this->mediaServicesWrapper->getJobOutputMediaAssets($job);
 
         // Assert
         $this->assertNotEquals($asset->getId(), $result[0]->getId());
@@ -791,7 +793,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $job = $this->createJob($job, [$asset], [$task]);
 
         // Test
-        $result = $this->restProxy->getTaskList();
+        $result = $this->mediaServicesWrapper->getTaskList();
 
         // Assert
         $this->assertGreaterThanOrEqual(1, count($result)); //this changes with the user's permissions 
@@ -809,7 +811,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $jobTemplate = $this->createJobTemplateWithTasks($name);
 
         // Test
-        $result = $this->restProxy->getJobTemplate($jobTemplate);
+        $result = $this->mediaServicesWrapper->getJobTemplate($jobTemplate);
 
         // Assert
         $this->assertEquals($name, $result->getName());
@@ -826,7 +828,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $jobTemplate = $this->createJobTemplateWithTasks($name);
 
         // Test
-        $result = $this->restProxy->getJobTemplateList();
+        $result = $this->mediaServicesWrapper->getJobTemplateList();
 
         // Assert
         $this->assertEquals(1, count($result));
@@ -841,14 +843,14 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     {
 
         // Setup
-        $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
+        $mediaProcessor = $this->mediaServicesWrapper->getLatestMediaProcessor('Windows Azure Media Encoder');
         $configuration = 'H.264 HD 720p VBR';
         $name = TestResources::MEDIA_SERVICES_JOB_TEMPLATE_NAME.$this->createSuffix();
 
         $jobTemplate = $this->createJobTemplateWithTasks($name);
 
         // Test
-        $result = $this->restProxy->getJobTemplateTaskTemplateList($jobTemplate);
+        $result = $this->mediaServicesWrapper->getJobTemplateTaskTemplateList($jobTemplate);
 
         // Assert
         $this->assertEquals(1, count($result));
@@ -864,13 +866,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Setup
        $name = TestResources::MEDIA_SERVICES_JOB_TEMPLATE_NAME.$this->createSuffix();
-        $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
+        $mediaProcessor = $this->mediaServicesWrapper->getLatestMediaProcessor('Windows Azure Media Encoder');
         $configuration = 'H.264 HD 720p VBR';
 
         $jobTemplate = $this->createJobTemplateWithTasks($name);
 
         // Test
-        $result = $this->restProxy->getTaskTemplateList();
+        $result = $this->mediaServicesWrapper->getTaskTemplateList();
 
         // Assert
         $this->assertEquals(1, count($result));
@@ -888,7 +890,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $asset = $this->createAssetWithFile();
 
         // Test
-        $result = $this->restProxy->getAssetAssetFileList($asset);
+        $result = $this->mediaServicesWrapper->getAssetAssetFileList($asset);
 
         // Assert
         $this->assertEquals(1, count($result));
@@ -903,7 +905,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Setup
         $name = $this->getOutputAssetName();
-        $mediaProcessor = $this->restProxy->getLatestMediaProcessor('Windows Azure Media Encoder');
+        $mediaProcessor = $this->mediaServicesWrapper->getLatestMediaProcessor('Windows Azure Media Encoder');
         $inputAsset = $this->createAssetWithFile();
 
         $taskBody = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="'.$name.'">JobOutputAsset(0)</outputAsset></taskBody>';
@@ -914,12 +916,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $job->setName($name);
         $job = $this->createJob($job, [$inputAsset], [$task]);
 
-        $assetList = $this->restProxy->getAssetList();
+        $assetList = $this->mediaServicesWrapper->getAssetList();
 
+        $parentAssetId = null;
         // Test
         foreach ($assetList as $assetElement) {
             if (strcmp($assetElement->getName(), $name) == 0) {
-                $parentAssetId = $this->restProxy->getAssetParentAssets($assetElement);
+                $parentAssetId = $this->mediaServicesWrapper->getAssetParentAssets($assetElement);
             }
         }
 
@@ -960,7 +963,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $ingestManifest = $this->createIngestManifest($ingestManifest);
 
         // Test
-        $result = $this->restProxy->getIngestManifest($ingestManifest);
+        $result = $this->mediaServicesWrapper->getIngestManifest($ingestManifest);
 
         // Assert
         $this->assertEquals($name, $result->getName());
@@ -979,7 +982,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $ingestManifest = $this->createIngestManifest($ingestManifest);
 
         // Test
-        $result = $this->restProxy->getIngestManifestList();
+        $result = $this->mediaServicesWrapper->getIngestManifestList();
 
         // Assert
         $this->assertGreaterThanOrEqual(1, count($result));
@@ -1011,7 +1014,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $ingestManifestFile = $this->createIngestManifestFile($ingestManifestFile);
 
         // Test
-        $result = $this->restProxy->getIngestManifestAssets($ingestManifest);
+        $result = $this->mediaServicesWrapper->getIngestManifestAssets($ingestManifest);
 
         // Assert
         $this->assertCount(1, $result);
@@ -1043,7 +1046,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $ingestManifestFile = $this->createIngestManifestFile($ingestManifestFile);
 
         // Test
-        $result = $this->restProxy->getPendingIngestManifestAssets($ingestManifest);
+        $result = $this->mediaServicesWrapper->getPendingIngestManifestAssets($ingestManifest);
 
         // Assert
         $this->assertCount(1, $result);
@@ -1066,7 +1069,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $storageAccountName = $connectionParameters['accountName'];
 
         // Test
-        $result = $this->restProxy->getIngestManifestStorageAccount($ingestManifest);
+        $result = $this->mediaServicesWrapper->getIngestManifestStorageAccount($ingestManifest);
 
         // Assert
         $this->assertEquals($ingestManifest->getStorageAccountName(), $result->getName());
@@ -1087,7 +1090,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Test
         $ingestManifest->setName($name);
-        $this->restProxy->updateIngestManifest($ingestManifest);
+        $this->mediaServicesWrapper->updateIngestManifest($ingestManifest);
 
         // Assert
         $this->assertEquals($name, $ingestManifest->getName());
@@ -1139,7 +1142,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $ingestManifestAsset = $this->createIngestManifestAsset($ingestManifestAsset, $asset);
 
         // Test
-        $result = $this->restProxy->getIngestManifestAsset($ingestManifestAsset);
+        $result = $this->mediaServicesWrapper->getIngestManifestAsset($ingestManifestAsset);
 
         // Assert
         $this->assertEquals($ingestManifest->getId(), $result->getParentIngestManifestId());
@@ -1166,7 +1169,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $ingestManifestAsset = $this->createIngestManifestAsset($ingestManifestAsset, $asset);
 
         // Test
-        $result = $this->restProxy->getIngestManifestAssetList();
+        $result = $this->mediaServicesWrapper->getIngestManifestAssetList();
 
         // Assert
         $this->assertGreaterThanOrEqual(1, count($result)); 
@@ -1197,7 +1200,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $ingestManifestAssetFile = $this->createIngestManifestFile($ingestManifestAssetFile);
 
         // Test
-        $result = $this->restProxy->getIngestManifestAssetFiles($ingestManifestAsset);
+        $result = $this->mediaServicesWrapper->getIngestManifestAssetFiles($ingestManifestAsset);
 
         // Assert
         $this->assertCount(1, $result);
@@ -1262,7 +1265,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $ingestManifestFile = $this->createIngestManifestFile($ingestManifestFile);
 
         // Test
-        $result = $this->restProxy->getIngestManifestFile($ingestManifestFile);
+        $result = $this->mediaServicesWrapper->getIngestManifestFile($ingestManifestFile);
 
         // Assert
         $this->assertEquals($ingestManifestFile->getParentIngestManifestId(), $result->getParentIngestManifestId());
@@ -1294,7 +1297,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $ingestManifestFile = $this->createIngestManifestFile($ingestManifestFile);
 
         // Test
-        $result = $this->restProxy->getIngestManifestFileList();
+        $result = $this->mediaServicesWrapper->getIngestManifestFileList();
 
         // Assert
         $this->assertGreaterThanOrEqual(1, count($result));
@@ -1313,8 +1316,10 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Setup
         $aesKey = Utilities::generateCryptoKey(32);
 
-        $protectionKeyId = $this->restProxy->getProtectionKeyId(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
-        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+        $protectionKeyId = $this->mediaServicesWrapper->getProtectionKeyId(
+            ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT
+        );
+        $protectionKey = $this->mediaServicesWrapper->getProtectionKey($protectionKeyId);
 
         $contentKey = new ContentKey();
         $contentKey->setContentKey($aesKey, $protectionKey);
@@ -1345,8 +1350,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Setup
         $aesKey = Utilities::generateCryptoKey(32);
 
-        $protectionKeyId = $this->restProxy->getProtectionKeyId(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
-        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+        $protectionKeyId = $this->mediaServicesWrapper->getProtectionKeyId(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $protectionKey = $this->mediaServicesWrapper->getProtectionKey($protectionKeyId);
 
         $contentKey = new ContentKey();
         $contentKey->setContentKey($aesKey, $protectionKey);
@@ -1356,7 +1361,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $contentKey = $this->createContentKey($contentKey);
 
         // Test
-        $result = $this->restProxy->getContentKeyList();
+        $result = $this->mediaServicesWrapper->getContentKeyList();
 
         // Assert
         $this->assertCount(1, $result);
@@ -1375,8 +1380,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Setup
         $aesKey = Utilities::generateCryptoKey(32);
 
-        $protectionKeyId = $this->restProxy->getProtectionKeyId(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
-        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+        $protectionKeyId = $this->mediaServicesWrapper->getProtectionKeyId(ProtectionKeyTypes::X509_CERTIFICATE_THUMBPRINT);
+        $protectionKey = $this->mediaServicesWrapper->getProtectionKey($protectionKeyId);
 
         $contentKey = new ContentKey();
         $contentKey->setContentKey($aesKey, $protectionKey);
@@ -1386,7 +1391,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $contentKey = $this->createContentKey($contentKey);
 
         // Test
-        $result = $this->restProxy->getContentKey($contentKey);
+        $result = $this->mediaServicesWrapper->getContentKey($contentKey);
 
         // Assert
         $this->assertEquals($contentKey->getId(), $result->getId());
@@ -1404,8 +1409,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Setup
         $aesKey = Utilities::generateCryptoKey(32);
 
-        $protectionKeyId = $this->restProxy->getProtectionKeyId(ContentKeyTypes::STORAGE_ENCRYPTION);
-        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+        $protectionKeyId = $this->mediaServicesWrapper->getProtectionKeyId(ContentKeyTypes::STORAGE_ENCRYPTION);
+        $protectionKey = $this->mediaServicesWrapper->getProtectionKey($protectionKeyId);
 
         $contentKey = new ContentKey();
         $contentKey->setContentKey($aesKey, $protectionKey);
@@ -1415,7 +1420,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $contentKey = $this->createContentKey($contentKey);
 
         // Test
-        $result = $this->restProxy->rebindContentKey($contentKey, '');
+        $result = $this->mediaServicesWrapper->rebindContentKey($contentKey, '');
 
         // Assert
         $this->assertEquals($result, $aesKey);
@@ -1431,7 +1436,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $contentKeyType = ContentKeyTypes::STORAGE_ENCRYPTION;
 
         // Test
-        $protectionKeyId = $this->restProxy->getProtectionKeyId($contentKeyType);
+        $protectionKeyId = $this->mediaServicesWrapper->getProtectionKeyId($contentKeyType);
 
         // Assert
         $this->assertNotNull($protectionKeyId);
@@ -1445,10 +1450,10 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Setup
         $contentKeyType = ContentKeyTypes::STORAGE_ENCRYPTION;
-        $protectionKeyId = $this->restProxy->getProtectionKeyId($contentKeyType);
+        $protectionKeyId = $this->mediaServicesWrapper->getProtectionKeyId($contentKeyType);
 
         // Test
-        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+        $protectionKey = $this->mediaServicesWrapper->getProtectionKey($protectionKeyId);
 
         // Assert
         $this->assertNotNull($protectionKey);
@@ -1463,8 +1468,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Setup
         $aesKey = Utilities::generateCryptoKey(32);
 
-        $protectionKeyId = $this->restProxy->getProtectionKeyId(ContentKeyTypes::COMMON_ENCRYPTION);
-        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+        $protectionKeyId = $this->mediaServicesWrapper->getProtectionKeyId(ContentKeyTypes::COMMON_ENCRYPTION);
+        $protectionKey = $this->mediaServicesWrapper->getProtectionKey($protectionKeyId);
 
         $contentKey = new ContentKey();
         $contentKey->setContentKey($aesKey, $protectionKey);
@@ -1477,10 +1482,10 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME.$this->createSuffix());
         $asset = $this->createAsset($asset);
 
-        $this->restProxy->linkContentKeyToAsset($asset, $contentKey);
+        $this->mediaServicesWrapper->linkContentKeyToAsset($asset, $contentKey);
 
         // Test
-        $result = $this->restProxy->getAssetContentKeys($asset);
+        $result = $this->mediaServicesWrapper->getAssetContentKeys($asset);
 
         // Assert
         $this->assertCount(1, $result);
@@ -1497,8 +1502,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Setup
         $aesKey = Utilities::generateCryptoKey(16);
 
-        $protectionKeyId = $this->restProxy->getProtectionKeyId(ContentKeyTypes::COMMON_ENCRYPTION);
-        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+        $protectionKeyId = $this->mediaServicesWrapper->getProtectionKeyId(ContentKeyTypes::COMMON_ENCRYPTION);
+        $protectionKey = $this->mediaServicesWrapper->getProtectionKey($protectionKeyId);
 
         $contentKey = new ContentKey();
         $contentKey->setContentKey($aesKey, $protectionKey);
@@ -1512,10 +1517,10 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $asset = $this->createAsset($asset);
 
         // Test
-        $this->restProxy->linkContentKeyToAsset($asset, $contentKey);
+        $this->mediaServicesWrapper->linkContentKeyToAsset($asset, $contentKey);
 
         // Assert
-        $contentKeyFromAsset = $this->restProxy->getAssetContentKeys($asset);
+        $contentKeyFromAsset = $this->mediaServicesWrapper->getAssetContentKeys($asset);
         $this->assertEquals($contentKey->getId(), $contentKeyFromAsset[0]->getId());
         $this->assertEquals($contentKey->getProtectionKeyId(), $contentKeyFromAsset[0]->getProtectionKeyId());
         $this->assertEquals($contentKey->getContentKeyType(), $contentKeyFromAsset[0]->getContentKeyType());
@@ -1530,8 +1535,8 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Setup
         $aesKey = Utilities::generateCryptoKey(32);
 
-        $protectionKeyId = $this->restProxy->getProtectionKeyId(ContentKeyTypes::COMMON_ENCRYPTION);
-        $protectionKey = $this->restProxy->getProtectionKey($protectionKeyId);
+        $protectionKeyId = $this->mediaServicesWrapper->getProtectionKeyId(ContentKeyTypes::COMMON_ENCRYPTION);
+        $protectionKey = $this->mediaServicesWrapper->getProtectionKey($protectionKeyId);
 
         $contentKey = new ContentKey();
         $contentKey->setContentKey($aesKey, $protectionKey);
@@ -1544,13 +1549,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME.$this->createSuffix());
         $asset = $this->createAsset($asset);
 
-        $this->restProxy->linkContentKeyToAsset($asset, $contentKey);
+        $this->mediaServicesWrapper->linkContentKeyToAsset($asset, $contentKey);
 
         // Test
-        $this->restProxy->removeContentKeyFromAsset($asset, $contentKey);
+        $this->mediaServicesWrapper->removeContentKeyFromAsset($asset, $contentKey);
 
         // Assert
-        $contentKeyFromAsset = $this->restProxy->getAssetContentKeys($asset);
+        $contentKeyFromAsset = $this->mediaServicesWrapper->getAssetContentKeys($asset);
         $this->assertEmpty($contentKeyFromAsset);
     }
 
@@ -1656,7 +1661,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $id = $this->testCreateContentKeyAuthorizationPolicy();
 
         // Test
-        $result = $this->restProxy->getContentKeyAuthorizationPolicy($id);
+        $result = $this->mediaServicesWrapper->getContentKeyAuthorizationPolicy($id);
 
         // Assert
         $this->assertEquals($id, $result->getId());
@@ -1672,7 +1677,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $id2 = $this->testCreateContentKeyAuthorizationPolicy();
 
         // Test
-        $result = $this->restProxy->getContentKeyAuthorizationPolicyList();
+        $result = $this->mediaServicesWrapper->getContentKeyAuthorizationPolicyList();
 
         // Assert
         $this->assertContainsEntityById($id1, $result);
@@ -1694,9 +1699,9 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Test
         $result->setName($newName);
-        $this->restProxy->updateContentKeyAuthorizationPolicy($result);
+        $this->mediaServicesWrapper->updateContentKeyAuthorizationPolicy($result);
 
-        $result = $this->restProxy->getContentKeyAuthorizationPolicy($result->getId());
+        $result = $this->mediaServicesWrapper->getContentKeyAuthorizationPolicy($result->getId());
 
         // Assert
         $this->assertEquals($newName, $result->getName());
@@ -1708,17 +1713,17 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testDeleteContentKeyAuthorizationPolicy()
     {
         // Setup
-        $countBefore = count($this->restProxy->getContentKeyAuthorizationPolicyList());
+        $countBefore = count($this->mediaServicesWrapper->getContentKeyAuthorizationPolicyList());
         $name = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME.$this->createSuffix();
         $policy = new ContentKeyAuthorizationPolicy();
         $policy->setName($name);
-        $result = $this->restProxy->createContentKeyAuthorizationPolicy($policy);
+        $result = $this->mediaServicesWrapper->createContentKeyAuthorizationPolicy($policy);
 
-        $countMiddle = count($this->restProxy->getContentKeyAuthorizationPolicyList());
+        $countMiddle = count($this->mediaServicesWrapper->getContentKeyAuthorizationPolicyList());
 
         // Test
-        $this->restProxy->deleteContentKeyAuthorizationPolicy($result);
-        $countAfter = count($this->restProxy->getContentKeyAuthorizationPolicyList());
+        $this->mediaServicesWrapper->deleteContentKeyAuthorizationPolicy($result);
+        $countAfter = count($this->mediaServicesWrapper->getContentKeyAuthorizationPolicyList());
 
         // Assert
         $this->assertEquals($countMiddle - 1, $countBefore);
@@ -1764,7 +1769,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $id = $this->testCreateContentKeyAuthorizationPolicyOption();
 
         // Test
-        $result = $this->restProxy->getContentKeyAuthorizationPolicyOption($id);
+        $result = $this->mediaServicesWrapper->getContentKeyAuthorizationPolicyOption($id);
 
         // Assert
         $this->assertEquals($id, $result->getId());
@@ -1780,7 +1785,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $id2 = $this->testCreateContentKeyAuthorizationPolicyOption();
 
         // Test
-        $result = $this->restProxy->getContentKeyAuthorizationPolicyOptionList();
+        $result = $this->mediaServicesWrapper->getContentKeyAuthorizationPolicyOptionList();
 
         // Assert
         $this->assertContainsEntityById($id1, $result);
@@ -1795,13 +1800,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Setup
         $id = $this->testCreateContentKeyAuthorizationPolicyOption();
         $newName = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_POLICY_NAME.$this->createSuffix();
-        $options = $this->restProxy->getContentKeyAuthorizationPolicyOption($id);
+        $options = $this->mediaServicesWrapper->getContentKeyAuthorizationPolicyOption($id);
 
         // Test
         $options->setName($newName);
-        $this->restProxy->updateContentKeyAuthorizationPolicyOption($options);
+        $this->mediaServicesWrapper->updateContentKeyAuthorizationPolicyOption($options);
 
-        $options = $this->restProxy->getContentKeyAuthorizationPolicyOption($options->getId());
+        $options = $this->mediaServicesWrapper->getContentKeyAuthorizationPolicyOption($options->getId());
 
         // Assert
         $this->assertEquals($newName, $options->getName());
@@ -1813,17 +1818,17 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testDeleteContentKeyAuthorizationPolicyOption()
     {
         // Setup
-        $countBefore = count($this->restProxy->getContentKeyAuthorizationPolicyOptionList());
+        $countBefore = count($this->mediaServicesWrapper->getContentKeyAuthorizationPolicyOptionList());
         $name = TestResources::MEDIA_SERVICES_CONTENT_KEY_AUTHORIZATION_OPTIONS_NAME.$this->createSuffix();
         $options = new ContentKeyAuthorizationPolicyOption();
         $options->setName($name);
         $options->setKeyDeliveryType(ContentKeyDeliveryType::BASELINE_HTTP);
-        $options = $this->restProxy->createContentKeyAuthorizationPolicyOption($options);
-        $countMiddle = count($this->restProxy->getContentKeyAuthorizationPolicyOptionList());
+        $options = $this->mediaServicesWrapper->createContentKeyAuthorizationPolicyOption($options);
+        $countMiddle = count($this->mediaServicesWrapper->getContentKeyAuthorizationPolicyOptionList());
 
         // Test
-        $this->restProxy->deleteContentKeyAuthorizationPolicyOption($options);
-        $countAfter = count($this->restProxy->getContentKeyAuthorizationPolicyOptionList());
+        $this->mediaServicesWrapper->deleteContentKeyAuthorizationPolicyOption($options);
+        $countAfter = count($this->mediaServicesWrapper->getContentKeyAuthorizationPolicyOptionList());
 
         // Assert
         $this->assertEquals($countMiddle - 1, $countBefore);
@@ -1841,10 +1846,10 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $policyId = $this->testCreateContentKeyAuthorizationPolicy();
         $optionsId = $this->testCreateContentKeyAuthorizationPolicyOption();
 
-        $this->restProxy->linkOptionToContentKeyAuthorizationPolicy($optionsId, $policyId);
+        $this->mediaServicesWrapper->linkOptionToContentKeyAuthorizationPolicy($optionsId, $policyId);
 
         // Test
-        $result = $this->restProxy->getContentKeyAuthorizationPolicyLinkedOptions($policyId);
+        $result = $this->mediaServicesWrapper->getContentKeyAuthorizationPolicyLinkedOptions($policyId);
 
         // Assert
         $this->assertCount(1, $result);
@@ -1861,10 +1866,10 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $optionsId = $this->testCreateContentKeyAuthorizationPolicyOption();
 
         // Test
-        $this->restProxy->linkOptionToContentKeyAuthorizationPolicy($optionsId, $policyId);
+        $this->mediaServicesWrapper->linkOptionToContentKeyAuthorizationPolicy($optionsId, $policyId);
 
         // Assert
-        $result = $this->restProxy->getContentKeyAuthorizationPolicyLinkedOptions($policyId);
+        $result = $this->mediaServicesWrapper->getContentKeyAuthorizationPolicyLinkedOptions($policyId);
         $this->assertCount(1, $result);
         $this->assertEquals($optionsId, $result[0]->getId());
     }
@@ -1878,13 +1883,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Setup
         $policyId = $this->testCreateContentKeyAuthorizationPolicy();
         $optionsId = $this->testCreateContentKeyAuthorizationPolicyOption();
-        $this->restProxy->linkOptionToContentKeyAuthorizationPolicy($optionsId, $policyId);
+        $this->mediaServicesWrapper->linkOptionToContentKeyAuthorizationPolicy($optionsId, $policyId);
 
         // Test
-        $this->restProxy->removeOptionsFromContentKeyAuthorizationPolicy($optionsId, $policyId);
+        $this->mediaServicesWrapper->removeOptionsFromContentKeyAuthorizationPolicy($optionsId, $policyId);
 
         // Assert
-        $optionsFromPolicy = $this->restProxy->getContentKeyAuthorizationPolicyLinkedOptions($policyId);
+        $optionsFromPolicy = $this->mediaServicesWrapper->getContentKeyAuthorizationPolicyLinkedOptions($policyId);
         $this->assertEmpty($optionsFromPolicy);
     }
 
@@ -1920,7 +1925,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $id = $this->testCreateAssetDeliveryPolicy();
 
         // Test
-        $result = $this->restProxy->getAssetDeliveryPolicy($id);
+        $result = $this->mediaServicesWrapper->getAssetDeliveryPolicy($id);
 
         // Assert
         $this->assertEquals($id, $result->getId());
@@ -1936,7 +1941,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $id2 = $this->testCreateAssetDeliveryPolicy();
 
         // Test
-        $result = $this->restProxy->getAssetDeliveryPolicyList();
+        $result = $this->mediaServicesWrapper->getAssetDeliveryPolicyList();
 
         // Assert
         $this->assertContainsEntityById($id1, $result);
@@ -1961,9 +1966,9 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Test
         $result->setName($newName);
-        $this->restProxy->updateAssetDeliveryPolicy($result);
+        $this->mediaServicesWrapper->updateAssetDeliveryPolicy($result);
 
-        $result = $this->restProxy->getAssetDeliveryPolicy($result->getId());
+        $result = $this->mediaServicesWrapper->getAssetDeliveryPolicy($result->getId());
 
         // Assert
         $this->assertEquals($newName, $result->getName());
@@ -1975,20 +1980,20 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testDeleteAssetDeliveryPolicy()
     {
         // Setup
-        $countBefore = count($this->restProxy->getAssetDeliveryPolicyList());
+        $countBefore = count($this->mediaServicesWrapper->getAssetDeliveryPolicyList());
         $name = TestResources::MEDIA_SERVICES_ASSET_DELIVERY_POLICY_NAME.$this->createSuffix();
         $policy = new AssetDeliveryPolicy();
         $policy->setName($name);
         $policy->setAssetDeliveryProtocol(AssetDeliveryProtocol::ALL);
         $policy->setAssetDeliveryPolicyType(AssetDeliveryPolicyType::BLOCKED);
 
-        $result = $this->restProxy->createAssetDeliveryPolicy($policy);
+        $result = $this->mediaServicesWrapper->createAssetDeliveryPolicy($policy);
 
-        $countMiddle = count($this->restProxy->getAssetDeliveryPolicyList());
+        $countMiddle = count($this->mediaServicesWrapper->getAssetDeliveryPolicyList());
 
         // Test
-        $this->restProxy->deleteAssetDeliveryPolicy($result);
-        $countAfter = count($this->restProxy->getAssetDeliveryPolicyList());
+        $this->mediaServicesWrapper->deleteAssetDeliveryPolicy($result);
+        $countAfter = count($this->mediaServicesWrapper->getAssetDeliveryPolicyList());
 
         // Assert
         $this->assertEquals($countMiddle - 1, $countBefore);
@@ -2004,22 +2009,22 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Setup
         $asset = new Asset(Asset::OPTIONS_NONE);
-        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME + $this->createSuffix());
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
 
         $asset = $this->createAsset($asset);
         $policyId = $this->testCreateAssetDeliveryPolicy();
 
-        $this->restProxy->linkDeliveryPolicyToAsset($asset, $policyId);
+        $this->mediaServicesWrapper->linkDeliveryPolicyToAsset($asset, $policyId);
 
         // Test
-        $result = $this->restProxy->getAssetLinkedDeliveryPolicy($asset);
+        $result = $this->mediaServicesWrapper->getAssetLinkedDeliveryPolicy($asset);
 
         // Assert
         $this->assertCount(1, $result);
         $this->assertEquals($policyId, $result[0]->getId());
 
         // Cleanup
-        $this->restProxy->removeDeliveryPolicyFromAsset($asset, $policyId);
+        $this->mediaServicesWrapper->removeDeliveryPolicyFromAsset($asset, $policyId);
     }
 
     /**
@@ -2029,21 +2034,21 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     {
         // Setup
         $asset = new Asset(Asset::OPTIONS_NONE);
-        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME + $this->createSuffix());
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
 
         $asset = $this->createAsset($asset);
         $policyId = $this->testCreateAssetDeliveryPolicy();
 
         // Test
-        $this->restProxy->linkDeliveryPolicyToAsset($asset, $policyId);
+        $this->mediaServicesWrapper->linkDeliveryPolicyToAsset($asset, $policyId);
 
         // Assert
-        $result = $this->restProxy->getAssetLinkedDeliveryPolicy($asset);
+        $result = $this->mediaServicesWrapper->getAssetLinkedDeliveryPolicy($asset);
         $this->assertCount(1, $result);
         $this->assertEquals($policyId, $result[0]->getId());
 
         // Cleanup
-        $this->restProxy->removeDeliveryPolicyFromAsset($asset, $policyId);
+        $this->mediaServicesWrapper->removeDeliveryPolicyFromAsset($asset, $policyId);
     }
 
     /**
@@ -2053,18 +2058,18 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     {
         // Setup
         $asset = new Asset(Asset::OPTIONS_NONE);
-        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME + $this->createSuffix());
+        $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME . $this->createSuffix());
 
         $asset = $this->createAsset($asset);
         $policyId = $this->testCreateAssetDeliveryPolicy();
 
-        $this->restProxy->linkDeliveryPolicyToAsset($asset, $policyId);
+        $this->mediaServicesWrapper->linkDeliveryPolicyToAsset($asset, $policyId);
 
         // Test
-        $this->restProxy->removeDeliveryPolicyFromAsset($asset, $policyId);
+        $this->mediaServicesWrapper->removeDeliveryPolicyFromAsset($asset, $policyId);
 
         // Assert
-        $optionsFromPolicy = $this->restProxy->getAssetLinkedDeliveryPolicy($asset);
+        $optionsFromPolicy = $this->mediaServicesWrapper->getAssetLinkedDeliveryPolicy($asset);
         $this->assertEmpty($optionsFromPolicy);
     }
 
@@ -2077,13 +2082,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $contentKey = $this->testCreateContentKey();
         $policyId = $this->testCreateContentKeyAuthorizationPolicy();
         $optionsId = $this->testCreateContentKeyAuthorizationPolicyOption();
-        $this->restProxy->linkOptionToContentKeyAuthorizationPolicy($optionsId, $policyId);
+        $this->mediaServicesWrapper->linkOptionToContentKeyAuthorizationPolicy($optionsId, $policyId);
         $contentKey->setAuthorizationPolicyId($policyId);
-        $this->restProxy->updateContentKey($contentKey); // new method, TODO: integration test
-        $contentKey = $this->restProxy->getContentKey($contentKey);
+        $this->mediaServicesWrapper->updateContentKey($contentKey); // new method, TODO: integration test
+        $contentKey = $this->mediaServicesWrapper->getContentKey($contentKey);
 
         // Test
-        $result = $this->restProxy->getKeyDeliveryUrl($contentKey, ContentKeyDeliveryType::BASELINE_HTTP);
+        $result = $this->mediaServicesWrapper->getKeyDeliveryUrl($contentKey, ContentKeyDeliveryType::BASELINE_HTTP);
 
         // Assert
         $this->assertRegExp('/keydelivery.mediaservices.windows.net/', $result);
@@ -2125,7 +2130,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $result = $this->createContentKeyAuthorizationPolicyOption($options);
 
         // Retrieve the CKAPO again.
-        $result = $this->restProxy->getContentKeyAuthorizationPolicyOption($result->getId());
+        $result = $this->mediaServicesWrapper->getContentKeyAuthorizationPolicyOption($result->getId());
 
         // Assert Options
         $this->assertEquals($options->getName(), $result->getName());
@@ -2181,7 +2186,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $result = $this->createContentKeyAuthorizationPolicyOption($options);
 
         // Retrieve the CKAPO again.
-        $result = $this->restProxy->getContentKeyAuthorizationPolicyOption($result->getId());
+        $result = $this->mediaServicesWrapper->getContentKeyAuthorizationPolicyOption($result->getId());
 
         // Assert Options
         $this->assertEquals($options->getName(), $result->getName());
@@ -2254,7 +2259,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $result = $this->createContentKeyAuthorizationPolicyOption($options);
 
         // Retrieve the CKAPO again.
-        $result = $this->restProxy->getContentKeyAuthorizationPolicyOption($result->getId());
+        $result = $this->mediaServicesWrapper->getContentKeyAuthorizationPolicyOption($result->getId());
 
         // Assert Options
         $this->assertEquals($options->getName(), $result->getName());
@@ -2304,7 +2309,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testGetEncodingReservedUnitType()
     {
         // Test
-        $result = $this->restProxy->getEncodingReservedUnit();
+        $result = $this->mediaServicesWrapper->getEncodingReservedUnit();
 
         // Assert
         $this->assertNotNull($result);
@@ -2316,24 +2321,24 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function testUpdateEncodingReservedUnitType()
     {
         // Setup
-        $original = $this->restProxy->getEncodingReservedUnit();
-        $toUpdate = $this->restProxy->getEncodingReservedUnit();
+        $original = $this->mediaServicesWrapper->getEncodingReservedUnit();
+        $toUpdate = $this->mediaServicesWrapper->getEncodingReservedUnit();
 
         $this->assertNotNull($toUpdate);
 
         // Test
         $toUpdate->setReservedUnitType(EncodingReservedUnitType::S1);
         $toUpdate->setCurrentReservedUnits(2);
-        $this->restProxy->updateEncodingReservedUnit($toUpdate);
+        $this->mediaServicesWrapper->updateEncodingReservedUnit($toUpdate);
 
         // Assert
-        $updated = $this->restProxy->getEncodingReservedUnit();
+        $updated = $this->mediaServicesWrapper->getEncodingReservedUnit();
 
         $this->assertEquals(EncodingReservedUnitType::S1, $updated->getReservedUnitType());
         $this->assertEquals(2, $updated->getCurrentReservedUnits());
 
         // restore initial conditions
-        $this->restProxy->updateEncodingReservedUnit($original);
+        $this->mediaServicesWrapper->updateEncodingReservedUnit($original);
     }
 
     /**
@@ -2346,7 +2351,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Test
         try {
-            $op = $this->restProxy->getOperation($opId);
+            $op = $this->mediaServicesWrapper->getOperation($opId);
         } catch (ServiceException $se) {
             // Assert
             $this->assertEquals($se->getCode(), 404);
@@ -2364,13 +2369,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $channel = $this->makeChannelEncodingTypeNone($channelName);
 
         // test
-        $operation = $this->restProxy->sendCreateChannelOperation($channel);
+        $operation = $this->mediaServicesWrapper->sendCreateChannelOperation($channel);
 
         // waiting for create operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // get the created channel
-        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+        $channelResult = $this->mediaServicesWrapper->getChannel($operation->getTargetEntityId());
 
         // assert #1, channel must exists
         $channelId = $channelResult->getId();
@@ -2379,7 +2384,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEqualsChannel($channel, $channelResult);
 
         // assert #2 the list should contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
         $exists = false;
         foreach($list as $channel) {
             if ($channel->getId() == $channelId) {
@@ -2389,13 +2394,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertTrue($exists);
 
         // delete the channel
-        $operation = $this->restProxy->sendDeleteChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendDeleteChannelOperation($channelResult->getId());
 
         // waiting for delete operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // assert #3 the list should not contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
 
         foreach($list as $channel) {
             $this->assertFalse($channel->getId() == $channelId);
@@ -2422,13 +2427,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $channel->getSlate()->setDefaultSlateAssetId($slateAsset->getId());
 
         // test
-        $operation = $this->restProxy->sendCreateChannelOperation($channel);
+        $operation = $this->mediaServicesWrapper->sendCreateChannelOperation($channel);
 
         // waiting for create operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // get the created channel
-        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+        $channelResult = $this->mediaServicesWrapper->getChannel($operation->getTargetEntityId());
 
         // assert #1, channel must exists
         $channelId = $channelResult->getId();
@@ -2438,7 +2443,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEqualsChannel($channel, $channelResult);
 
         // assert #2 the list should contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
         $exists = false;
         foreach($list as $channel) {
             if ($channel->getId() == $channelId) {
@@ -2448,16 +2453,16 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertTrue($exists);
 
         // delete the channel
-        $operation = $this->restProxy->sendDeleteChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendDeleteChannelOperation($channelResult->getId());
 
         // waiting for delete operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // assert #3 the list should not contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
 
-        foreach($list as $channel) {
-            $this->assertFalse($channel->getId() == $channelId);
+        foreach($list as $channel10) {
+            $this->assertFalse($channel10->getId() == $channelId);
         }
     }
 
@@ -2472,13 +2477,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $channel = $this->makeChannelEncodingTypeNone($channelName);
 
         // test
-        $operation = $this->restProxy->sendCreateChannelOperation($channel);
+        $operation = $this->mediaServicesWrapper->sendCreateChannelOperation($channel);
 
         // waiting for create operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // get the created channel
-        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+        $channelResult = $this->mediaServicesWrapper->getChannel($operation->getTargetEntityId());
 
         // assert #1, channel must exists
         $channelId = $channelResult->getId();
@@ -2487,10 +2492,10 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEqualsChannel($channel, $channelResult);
 
         // assert #2 the list should contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
         $exists = false;
-        foreach($list as $channel) {
-            if ($channel->getId() == $channelId) {
+        foreach($list as $channel2) {
+            if ($channel2->getId() == $channelId) {
                 $exists = true;
             }
         }
@@ -2500,28 +2505,28 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $channelResult->setDescription("Alternative Description");
 
         // update the channel
-        $operation = $this->restProxy->sendUpdateChannelOperation($channelResult);
+        $operation = $this->mediaServicesWrapper->sendUpdateChannelOperation($channelResult);
 
         // validate that the update was applied directly
         $this->assertEquals($operation->getState(), OperationState::Succeeded);
 
         // get the created updated
-        $channelResult = $this->restProxy->getChannel($channelResult);
+        $channelResult = $this->mediaServicesWrapper->getChannel($channelResult);
 
         // assert the description is updated
         $this->assertEquals($channelResult->getDescription(), "Alternative Description");
 
         // delete the channel
-        $operation = $this->restProxy->sendDeleteChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendDeleteChannelOperation($channelResult->getId());
 
         // waiting for delete operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // assert #3 the list should not contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
 
-        foreach($list as $channel) {
-            $this->assertFalse($channel->getId() == $channelId);
+        foreach($list as $channel2) {
+            $this->assertFalse($channel2->getId() == $channelId);
         }
     }
 
@@ -2536,13 +2541,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $channel = $this->makeChannelEncodingTypeNone($channelName);
 
         // test
-        $operation = $this->restProxy->sendCreateChannelOperation($channel);
+        $operation = $this->mediaServicesWrapper->sendCreateChannelOperation($channel);
 
         // waiting for create operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // get the created channel
-        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+        $channelResult = $this->mediaServicesWrapper->getChannel($operation->getTargetEntityId());
 
         // assert #1, channel must exists
         $channelId = $channelResult->getId();
@@ -2551,44 +2556,44 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEqualsChannel($channel, $channelResult);
 
         // assert #2 the list should contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
         $exists = false;
-        foreach($list as $channel) {
-            if ($channel->getId() == $channelId) {
+        foreach($list as $channel2) {
+            if ($channel2->getId() == $channelId) {
                 $exists = true;
             }
         }
         $this->assertTrue($exists);
 
         // start the channel
-        $operation = $this->restProxy->sendStartChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendStartChannelOperation($channelResult->getId());
 
         // waiting for start channel operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // get the stared channel
-        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+        $channelResult = $this->mediaServicesWrapper->getChannel($operation->getTargetEntityId());
 
         // assert that the channel is running
         $this->assertEquals($channelResult->getState(), ChannelState::Running);
 
         // stop the channel
-        $operation = $this->restProxy->sendStopChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendStopChannelOperation($channelResult->getId());
 
         // waiting for stop channel operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // delete the channel
-        $operation = $this->restProxy->sendDeleteChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendDeleteChannelOperation($channelResult->getId());
 
         // waiting for delete operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // assert #3 the list should not contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
 
-        foreach($list as $channel) {
-            $this->assertFalse($channel->getId() == $channelId);
+        foreach($list as $channelX) {
+            $this->assertFalse($channelX->getId() == $channelId);
         }
     }
 
@@ -2603,13 +2608,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $channel = $this->makeChannelEncodingTypeNone($channelName);
 
         // test
-        $operation = $this->restProxy->sendCreateChannelOperation($channel);
+        $operation = $this->mediaServicesWrapper->sendCreateChannelOperation($channel);
 
         // waiting for create operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // get the created channel
-        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+        $channelResult = $this->mediaServicesWrapper->getChannel($operation->getTargetEntityId());
 
         // assert #1, channel must exists
         $channelId = $channelResult->getId();
@@ -2618,7 +2623,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEqualsChannel($channel, $channelResult);
 
         // assert #2 the list should contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
         $exists = false;
         foreach($list as $channel) {
             if ($channel->getId() == $channelId) {
@@ -2628,13 +2633,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertTrue($exists);
 
         // start the channel
-        $operation = $this->restProxy->sendStartChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendStartChannelOperation($channelResult->getId());
 
         // waiting for start channel operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // get the stared channel
-        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+        $channelResult = $this->mediaServicesWrapper->getChannel($operation->getTargetEntityId());
 
         // assert that the channel is running
         $this->assertEquals($channelResult->getState(), ChannelState::Running);
@@ -2643,34 +2648,34 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $channelResult->setDescription("Alternative Description");
 
         // update the channel
-        $operation = $this->restProxy->sendUpdateChannelOperation($channelResult);
+        $operation = $this->mediaServicesWrapper->sendUpdateChannelOperation($channelResult);
         
         // waiting for update channel operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // validate that the update was applied
         $this->assertEquals($operation->getState(), OperationState::Succeeded);
 
         // get the created updated
-        $channelResult = $this->restProxy->getChannel($channelResult);
+        $channelResult = $this->mediaServicesWrapper->getChannel($channelResult);
 
         // assert the description is updated
         $this->assertEquals($channelResult->getDescription(), "Alternative Description");
 
         // stop the channel
-        $operation = $this->restProxy->sendStopChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendStopChannelOperation($channelResult->getId());
 
         // waiting for stop channel operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // delete the channel
-        $operation = $this->restProxy->sendDeleteChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendDeleteChannelOperation($channelResult->getId());
 
         // waiting for delete operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // assert #3 the list should not contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
 
         foreach($list as $channel) {
             $this->assertFalse($channel->getId() == $channelId);
@@ -2688,13 +2693,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $channel = $this->makeChannelEncodingTypeNone($channelName);
 
         // test
-        $operation = $this->restProxy->sendCreateChannelOperation($channel);
+        $operation = $this->mediaServicesWrapper->sendCreateChannelOperation($channel);
 
         // waiting for create operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // get the created channel
-        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+        $channelResult = $this->mediaServicesWrapper->getChannel($operation->getTargetEntityId());
 
         // assert #1, channel must exists
         $channelId = $channelResult->getId();
@@ -2703,7 +2708,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEqualsChannel($channel, $channelResult);
 
         // assert #2 the list should contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
         $exists = false;
         foreach($list as $channel) {
             if ($channel->getId() == $channelId) {
@@ -2713,40 +2718,40 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertTrue($exists);
 
         // start the channel
-        $operation = $this->restProxy->sendStartChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendStartChannelOperation($channelResult->getId());
 
         // waiting for start channel operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // get the stared channel
-        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+        $channelResult = $this->mediaServicesWrapper->getChannel($operation->getTargetEntityId());
 
         // assert that the channel is running
         $this->assertEquals($channelResult->getState(), ChannelState::Running);
 
         // reset the channel
-        $operation = $this->restProxy->sendResetChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendResetChannelOperation($channelResult->getId());
 
         // waiting for reset channel operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // validate that the update was applied
         $this->assertEquals($operation->getState(), OperationState::Succeeded);
 
         // stop the channel
-        $operation = $this->restProxy->sendStopChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendStopChannelOperation($channelResult->getId());
 
         // waiting for stop channel operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // delete the channel
-        $operation = $this->restProxy->sendDeleteChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendDeleteChannelOperation($channelResult->getId());
 
         // waiting for delete operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // assert #3 the list should not contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
 
         foreach($list as $channel) {
             $this->assertFalse($channel->getId() == $channelId);
@@ -2764,13 +2769,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $channel = $this->makeChannelEncodingTypeStandard($channelName);
 
         // test
-        $operation = $this->restProxy->sendCreateChannelOperation($channel);
+        $operation = $this->mediaServicesWrapper->sendCreateChannelOperation($channel);
 
         // waiting for create operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // get the created channel
-        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+        $channelResult = $this->mediaServicesWrapper->getChannel($operation->getTargetEntityId());
 
         // assert #1, channel must exists
         $channelId = $channelResult->getId();
@@ -2779,7 +2784,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEqualsChannel($channel, $channelResult);
 
         // assert #2 the list should contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
         $exists = false;
         foreach($list as $channel) {
             if ($channel->getId() == $channelId) {
@@ -2789,24 +2794,24 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertTrue($exists);
 
         // start the channel
-        $operation = $this->restProxy->sendStartChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendStartChannelOperation($channelResult->getId());
 
         // waiting for start channel operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // get the stared channel
-        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+        $channelResult = $this->mediaServicesWrapper->getChannel($operation->getTargetEntityId());
 
         // assert that the channel is running
         $this->assertEquals($channelResult->getState(), ChannelState::Running);
 
         // start advertisement on the channel
-        $operation = $this->restProxy->
-                            sendStartAdvertisementChannelOperation($channelResult->getId(), 
-                                    "PT120S", "1234", true);
+        $operation = $this->mediaServicesWrapper->sendStartAdvertisementChannelOperation(
+            $channelResult->getId(), "PT120S", "1234", true
+        );
 
         // waiting for reset channel operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // validate that the operation is completed successfully
         $this->assertEquals($operation->getState(), OperationState::Succeeded);
@@ -2815,31 +2820,31 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         sleep(5);
 
         // end advertisement on the channel
-        $operation = $this->restProxy->sendEndAdvertisementChannelOperation($channelResult->getId(),"1234");
+        $operation = $this->mediaServicesWrapper->sendEndAdvertisementChannelOperation($channelResult->getId(),"1234");
 
         // waiting for end advertisement on channel operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // validate that the operation is completed successfully
         $this->assertEquals($operation->getState(), OperationState::Succeeded);
 
         // stop the channel
-        $operation = $this->restProxy->sendStopChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendStopChannelOperation($channelResult->getId());
 
         // waiting for stop channel operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // delete the channel
-        $operation = $this->restProxy->sendDeleteChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendDeleteChannelOperation($channelResult->getId());
 
         // waiting for delete operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // assert #3 the list should not contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
 
-        foreach($list as $channel) {
-            $this->assertFalse($channel->getId() == $channelId);
+        foreach($list as $channel3) {
+            $this->assertFalse($channel3->getId() == $channelId);
         }
     }
 
@@ -2858,13 +2863,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $channel = $this->makeChannelEncodingTypeStandard($channelName);
 
         // test
-        $operation = $this->restProxy->sendCreateChannelOperation($channel);
+        $operation = $this->mediaServicesWrapper->sendCreateChannelOperation($channel);
 
         // waiting for create operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // get the created channel
-        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+        $channelResult = $this->mediaServicesWrapper->getChannel($operation->getTargetEntityId());
 
         // assert #1, channel must exists
         $channelId = $channelResult->getId();
@@ -2873,7 +2878,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEqualsChannel($channel, $channelResult);
 
         // assert #2 the list should contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
         $exists = false;
         foreach($list as $channel) {
             if ($channel->getId() == $channelId) {
@@ -2883,23 +2888,23 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertTrue($exists);
 
         // start the channel
-        $operation = $this->restProxy->sendStartChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendStartChannelOperation($channelResult->getId());
 
         // waiting for start channel operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // get the stared channel
-        $channelResult = $this->restProxy->getChannel($operation->getTargetEntityId());
+        $channelResult = $this->mediaServicesWrapper->getChannel($operation->getTargetEntityId());
 
         // assert that the channel is running
         $this->assertEquals($channelResult->getState(), ChannelState::Running);
 
         // show slate on the channel
-        $operation = $this->restProxy->sendShowSlateChannelOperation($channelResult->getId(), 
+        $operation = $this->mediaServicesWrapper->sendShowSlateChannelOperation($channelResult->getId(),
                                             "PT30S", $slateAsset->getId());
 
         // waiting for reset channel operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // validate that the operation is completed successfully
         $this->assertEquals($operation->getState(), OperationState::Succeeded);
@@ -2908,28 +2913,28 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         sleep(5);
 
         // hide slate on the channel
-        $operation = $this->restProxy->sendHideSlateChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendHideSlateChannelOperation($channelResult->getId());
 
         // waiting for end advertisement on channel operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // validate that the operation is completed successfully
         $this->assertEquals($operation->getState(), OperationState::Succeeded);
 
         // stop the channel
-        $operation = $this->restProxy->sendStopChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendStopChannelOperation($channelResult->getId());
 
         // waiting for stop channel operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // delete the channel
-        $operation = $this->restProxy->sendDeleteChannelOperation($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->sendDeleteChannelOperation($channelResult->getId());
 
         // waiting for delete operation finishes
-        $operation = $this->restProxy->awaitOperation($operation);
+        $operation = $this->mediaServicesWrapper->awaitOperation($operation);
 
         // assert #3 the list should not contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
 
         foreach($list as $channel) {
             $this->assertFalse($channel->getId() == $channelId);
@@ -2947,11 +2952,11 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $channel = $this->makeChannelEncodingTypeStandard($channelName);
 
         // create channel
-        $channelResult = $this->restProxy->createChannel($channel);
+        $channelResult = $this->mediaServicesWrapper->createChannel($channel);
         $this->assertEqualsChannel($channel, $channelResult);
 
         // assert #1 the list should contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
         $exists = false;
         foreach($list as $channel) {
             if ($channel->getId() == $channelResult->getId()) {
@@ -2961,13 +2966,13 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertTrue($exists);
 
         // delete the channel
-        $this->restProxy->deleteChannel($channelResult);
+        $this->mediaServicesWrapper->deleteChannel($channelResult);
 
         // assert #2 the list should not contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
 
-        foreach($list as $channel) {
-            $this->assertFalse($channel->getId() == $channelResult->getId());
+        foreach($list as $channel3) {
+            $this->assertFalse($channel3->getId() == $channelResult->getId());
         }
     }
 
@@ -2986,7 +2991,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $channel = $this->makeChannelEncodingTypeStandard($channelName);
 
         // test
-        $channelResult = $this->restProxy->createChannel($channel);
+        $channelResult = $this->mediaServicesWrapper->createChannel($channel);
 
         // assert #1, channel must exists
         $channelId = $channelResult->getId();
@@ -2994,10 +2999,10 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEqualsChannel($channel, $channelResult);
 
         // assert #2 the list should contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
         $exists = false;
-        foreach($list as $channel) {
-            if ($channel->getId() == $channelId) {
+        foreach($list as $channel2) {
+            if ($channel2->getId() == $channelId) {
                 $exists = true;
             }
         }
@@ -3007,17 +3012,17 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $channelResult->setDescription("Alternative Description");
 
         // update the channel
-        $this->restProxy->updateChannel($channelResult);
+        $this->mediaServicesWrapper->updateChannel($channelResult);
         
         // get the created updated
-        $channelResult = $this->restProxy->getChannel($channelResult);
+        $channelResult = $this->mediaServicesWrapper->getChannel($channelResult);
 
         // assert the description is updated
         $this->assertEquals($channelResult->getDescription(), "Alternative Description");
 
         // start the channel
-        $this->restProxy->startChannel($channelResult);
-        $channelResult = $this->restProxy->getChannel($channelResult);
+        $this->mediaServicesWrapper->startChannel($channelResult);
+        $channelResult = $this->mediaServicesWrapper->getChannel($channelResult);
 
         // assert that the channel is running
         $this->assertEquals($channelResult->getState(), ChannelState::Running);
@@ -3026,42 +3031,42 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         sleep(5);
 
         // reset the channel
-        $this->restProxy->resetChannel($channelResult);
+        $this->mediaServicesWrapper->resetChannel($channelResult);
 
         // show slate on the channel
-        $operation = $this->restProxy->showSlateChannel($channelResult->getId(), 
+        $operation = $this->mediaServicesWrapper->showSlateChannel($channelResult->getId(),
                                             "PT30S", $slateAsset->getId());
 
         // wait for 5 seconds before to send the end advertisement signal.
         sleep(5);
 
         // hide slate on the channel
-        $operation = $this->restProxy->hideSlateChannel($channelResult->getId());
+        $operation = $this->mediaServicesWrapper->hideSlateChannel($channelResult->getId());
 
         // wait for 5 seconds before to send start AD 
         sleep(5);
 
         // start advertisement on the channel
-        $this->restProxy->startAdvertisementChannel($channelResult->getId(), 
+        $this->mediaServicesWrapper->startAdvertisementChannel($channelResult->getId(),
                                     "PT120S", "1234", true);
 
         // wait for 5 seconds before to send the end advertisement signal.
         sleep(5);
 
         // end advertisement on the channel
-        $this->restProxy->endAdvertisementChannel($channelResult->getId(), "1234");
+        $this->mediaServicesWrapper->endAdvertisementChannel($channelResult->getId(), "1234");
 
         // stop the channel
-        $this->restProxy->stopChannel($channelResult);
+        $this->mediaServicesWrapper->stopChannel($channelResult);
 
         // delete the channel
-        $this->restProxy->deleteChannel($channelResult);
+        $this->mediaServicesWrapper->deleteChannel($channelResult);
 
         // assert #3 the list should not contains the channel
-        $list = $this->restProxy->getChannelList();
+        $list = $this->mediaServicesWrapper->getChannelList();
 
-        foreach($list as $channel) {
-            $this->assertFalse($channel->getId() == $channelId);
+        foreach($list as $channel2) {
+            $this->assertFalse($channel2->getId() == $channelId);
         }
     }
 
@@ -3075,19 +3080,19 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $channelName = TestResources::MEDIA_SERVICES_CHANNEL_NAME . $this->createSuffix();
         $channel = $this->makeChannelEncodingTypeStandard($channelName);
 
-        $channel = $this->restProxy->createChannel($channel);
-        $program = $this->restProxy->createProgram($this->makeProgram("Prog", $channel));
+        $channel = $this->mediaServicesWrapper->createChannel($channel);
+        $program = $this->mediaServicesWrapper->createProgram($this->makeProgram("Prog", $channel));
 
         // test
         $program->setDescription("Alternate Description");
-        $programResult = $this->restProxy->updateProgram($program);
+        $programResult = $this->mediaServicesWrapper->updateProgram($program);
 
         // assert
         $this->assertEqualsProgram($program, $programResult);
 
         // teardown
-        $this->restProxy->deleteProgram($program);
-        $this->restProxy->deleteChannel($channel);
+        $this->mediaServicesWrapper->deleteProgram($program);
+        $this->mediaServicesWrapper->deleteChannel($channel);
     }
 
     /**
@@ -3104,9 +3109,9 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // Setup
         $channelName = TestResources::MEDIA_SERVICES_CHANNEL_NAME . $this->createSuffix();
         $channel = $this->makeChannelEncodingTypeStandard($channelName);
-        $channelResult = $this->restProxy->createChannel($channel);
-        $this->restProxy->startChannel($channelResult);
-        $channelResult = $this->restProxy->getChannel($channelResult);
+        $channelResult = $this->mediaServicesWrapper->createChannel($channel);
+        $this->mediaServicesWrapper->startChannel($channelResult);
+        $channelResult = $this->mediaServicesWrapper->getChannel($channelResult);
 
         // assert that the channel is running
         $this->assertEquals($channelResult->getState(), ChannelState::Running);
@@ -3116,19 +3121,19 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
 
         // Test
         $program = $this->makeProgram("Progname", $channelResult);
-        $program = $this->restProxy->createProgram($program);
+        $program = $this->mediaServicesWrapper->createProgram($program);
 
         // wait for 5 seconds before to start the program
         sleep(5);
 
-        $this->restProxy->startProgram($program);
+        $this->mediaServicesWrapper->startProgram($program);
 
         // assert that the program is in running state
-        $program = $this->restProxy->getProgram($program);
+        $program = $this->mediaServicesWrapper->getProgram($program);
         $this->assertEquals($program->getState(), ProgramState::Running);
 
         // assert that the channel has only one program and it is the created one
-        $programList = $this->restProxy->getProgramList($channelResult);
+        $programList = $this->mediaServicesWrapper->getProgramList($channelResult);
         $this->assertEquals(1, count($programList));
         foreach($programList as $p) {
             $this->assertEquals($program->getId(), $p->getId());
@@ -3137,35 +3142,36 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         // wait for 5 seconds before to stop the program
         sleep(5);
 
-        $this->restProxy->stopProgram($program);
+        $this->mediaServicesWrapper->stopProgram($program);
 
         // assert that the program is in running state
-        $program = $this->restProxy->getProgram($program);
+        $program = $this->mediaServicesWrapper->getProgram($program);
         $this->assertEquals($program->getState(), ProgramState::Stopped);
 
         // wait for 5 seconds before to delete the program
         sleep(5);
 
-        $program = $this->restProxy->deleteProgram($program);
+        $program = $this->mediaServicesWrapper->deleteProgram($program);
 
         // assert that the channel has no programs
-        $programList = $this->restProxy->getProgramList($channelResult);
+        $programList = $this->mediaServicesWrapper->getProgramList($channelResult);
         $this->assertEquals(0, count($programList));
 
         // teardown
         // stop & delete the channel
-        $this->restProxy->stopChannel($channelResult);
-        $this->restProxy->deleteChannel($channelResult);
+        $this->mediaServicesWrapper->stopChannel($channelResult);
+        $this->mediaServicesWrapper->deleteChannel($channelResult);
 
         // assert the list should not contains the channel
-        $list = $this->restProxy->getChannelList();
-        foreach($list as $channel) {
-            $this->assertFalse($channel->getId() == $channelId);
+        $list = $this->mediaServicesWrapper->getChannelList();
+        $channelId = $channel->getId();
+        foreach($list as $channel2) {
+            $this->assertFalse($channel2->getId() == $channelId);
         }
     }
 
     /// Utils
-    private function makeProgram($name, $channel) {
+    private function makeProgram($name, Channel $channel) {
         $asset = new Asset(Asset::OPTIONS_NONE);
         $asset->setName(TestResources::MEDIA_SERVICES_ASSET_NAME.$this->createSuffix());
         $asset = $this->createAsset($asset);
@@ -3176,7 +3182,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $policy->setAssetDeliveryPolicyType(AssetDeliveryPolicyType::NO_DYNAMIC_ENCRYPTION);
 
         $policy = $this->createAssetDeliveryPolicy($policy);
-        $this->restProxy->linkDeliveryPolicyToAsset($asset, $policy);
+        $this->mediaServicesWrapper->linkDeliveryPolicyToAsset($asset, $policy);
 
         $program = new Program();
         $program->setName($name);
@@ -3322,17 +3328,23 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     public function assertEqualsVerificationKey($expected, $actual)
     {
         if ($expected instanceof SymmetricVerificationKey) {
-            $this->assertTrue($actual instanceof SymmetricVerificationKey);
-            $this->assertEquals($expected->getKeyValue(), $actual->getKeyValue());
+            if ($actual instanceof SymmetricVerificationKey) {
+                $this->assertEquals($expected->getKeyValue(), $actual->getKeyValue());
+            } else {
+                $this->fail();
+            }
         }
 
         if ($expected instanceof X509CertTokenVerificationKey) {
-            $this->assertTrue($actual instanceof X509CertTokenVerificationKey);
-            $this->assertEquals($expected->getRawBody(), $actual->getRawBody());
+            if ($actual instanceof X509CertTokenVerificationKey) {
+                $this->assertEquals($expected->getRawBody(), $actual->getRawBody());
+            } else {
+                $this->fail();
+            }
         }
     }
 
-    public function assertEqualsRequiredClaim($expected, $actual)
+    public function assertEqualsRequiredClaim(TokenClaim $expected, TokenClaim $actual)
     {
         $this->assertEquals($expected->getClaimType(), $actual->getClaimType());
         $this->assertEquals($expected->getClaimValue(), $actual->getClaimValue());
@@ -3354,8 +3366,9 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEquals($expected->getResponseCustomData(), $actual->getResponseCustomData());
     }
 
-    public function assertEqualsLicenseTemplate($expected, $actual)
-    {
+    public function assertEqualsLicenseTemplate(
+        PlayReadyLicenseTemplate $expected, PlayReadyLicenseTemplate $actual
+    ) {
         $this->assertEquals($expected->getAllowTestDevices(), $actual->getAllowTestDevices());
         $this->assertEquals($expected->getLicenseType(), $actual->getLicenseType());
         $this->assertEquals($expected->getBeginDate(), $actual->getBeginDate());
@@ -3375,12 +3388,15 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         }
 
         if ($expected instanceof ContentEncryptionKeyFromKeyIdentifier) {
-            $this->assertTrue($actual instanceof ContentEncryptionKeyFromKeyIdentifier);
-            $this->assertEquals($expected->getKeyIdentifier(), $actual->getKeyIdentifier());
+            if ($actual instanceof ContentEncryptionKeyFromKeyIdentifier) {
+                $this->assertEquals($expected->getKeyIdentifier(), $actual->getKeyIdentifier());
+            } else {
+                $this->fail();
+            }
         }
     }
 
-    public function assertEqualsPlayRight($expected, $actual)
+    public function assertEqualsPlayRight(PlayReadyPlayRight $expected, PlayReadyPlayRight $actual)
     {
         $this->assertNotNull($expected);
         $this->assertNotNull($actual);
@@ -3437,62 +3453,53 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
     }
 
     // channel validation
-    public function assertEqualsIPRange($expected, $actual) { 
+    public function assertEqualsIPRange(IPRange $expected, IPRange $actual) {
          $this->assertEquals($expected->getName(), $actual->getName());
          $this->assertEquals($expected->getAddress(), $actual->getAddress());
          $this->assertEquals($expected->getSubnetPrefixLength(), $actual->getSubnetPrefixLength());
     }
 
-    public function assertEqualsIPAccessControl($expected, $actual) {
+    public function assertEqualsIPAccessControl(IPAccessControl $expected, IPAccessControl $actual) {
         $ix = 0;
         foreach ($expected->getAllow() as $ipRange) {
             $this->assertEqualsIPRange($ipRange, $actual->getAllow()[$ix++]);
         }
     }
 
-    public function assertEqualsChannelInputAccessControl($expected, $actual) {
+    public function assertEqualsChannelInputAccessControl(
+        ChannelInputAccessControl $expected, ChannelInputAccessControl $actual
+    ) {
         $this->assertEqualsIPAccessControl($expected->getIP(), $actual->getIP());
     }
 
-    public function assertEqualsChannelPreviewAccessControl($expected, $actual) {
+    public function assertEqualsChannelPreviewAccessControl(
+        ChannelPreviewAccessControl $expected, ChannelPreviewAccessControl $actual
+    ) {
         $this->assertEqualsIPAccessControl($expected->getIP(), $actual->getIP());
     }
 
-    public function assertEqualsChannelInput($expected, $actual) {
+    public function assertEqualsChannelInput(ChannelInput $expected, ChannelInput $actual) {
         $this->assertEquals($expected->getKeyFrameInterval(), $actual->getKeyFrameInterval());
         $this->assertEquals($expected->getStreamingProtocol(), $actual->getStreamingProtocol());
         $this->assertEqualsChannelInputAccessControl($expected->getAccessControl(), $actual->getAccessControl());
         // endpoints are server side generated: not validated.
     }
 
-    public function assertEqualsChannelPreview($expected, $actual) {
+    public function assertEqualsChannelPreview(ChannelPreview $expected, ChannelPreview $actual) {
         $this->assertEqualsChannelPreviewAccessControl($expected->getAccessControl(), $actual->getAccessControl());
         // endpoints are server side generated: not validated.
     }
 
-    public function assertEqualsChannelOutputHls($expected, $actual) { 
-         $this->assertEquals($expected->getFragmentsPerSegment(), $actual->getFragmentsPerSegment());
-    }
-
-    public function assertEqualsChannelOutput($expected, $actual) { 
-         $this->assertEqualsChannelOutputHls($expected->getHls(), $actual->getHls());
-    }
-
-    public function assertEqualsCrossSiteAccessPolicies($expected, $actual) { 
-        $this->assertEquals($expected->getClientAccessPolicy(), $actual->getClientAccessPolicy());
-        $this->assertEquals($expected->getCrossDomainPolicy(), $actual->getCrossDomainPolicy());
-    }
-
-    public function assertEqualsVideoStream($expected, $actual) { 
+    public function assertEqualsVideoStream(VideoStream $expected, VideoStream $actual) {
          $this->assertEquals($expected->getIndex(), $actual->getIndex());
     }
 
-    public function assertEqualsAudioStream($expected, $actual) { 
+    public function assertEqualsAudioStream(AudioStream $expected, AudioStream $actual) {
          $this->assertEquals($expected->getIndex(), $actual->getIndex());
          $this->assertEquals($expected->getLanguage(), $actual->getLanguage());
     }
 
-    public function assertEqualsEncoding($expected, $actual) {
+    public function assertEqualsEncoding(ChannelEncoding $expected = null, ChannelEncoding $actual = null) {
         if (is_null($expected) && is_null($actual)) {
             return; // pass
         } else if (is_null($expected) || is_null($actual)) {
@@ -3513,7 +3520,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEquals($expected->getSystemPreset(), $actual->getSystemPreset());
     }
 
-    public function assertEqualsSlate($expected, $actual) {
+    public function assertEqualsSlate(ChannelSlate $expected = null, ChannelSlate $actual = null) {
         if (is_null($expected) && is_null($actual)) {
             return; // pass
         } else if (is_null($expected) || is_null($actual)) {
@@ -3525,7 +3532,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEquals($expected->getDefaultSlateAssetId(), $actual->getDefaultSlateAssetId());
     }
 
-    public function assertEqualsChannel($expected, $actual) {
+    public function assertEqualsChannel(Channel $expected, Channel $actual) {
         // server side generated values are not verified
         $this->assertEquals($expected->getName(), $actual->getName());
         $this->assertEquals($expected->getDescription(), $actual->getDescription());
@@ -3536,7 +3543,7 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $this->assertEqualsSlate($expected->getSlate(), $actual->getSlate());
     }
 
-    public function assertEqualsProgram($expected, $actual) {
+    public function assertEqualsProgram(Program $expected, Program $actual) {
         // server side generated values are not verified
         $this->assertEquals($expected->getName(), $actual->getName());
         $this->assertEquals($expected->getDescription(), $actual->getDescription());

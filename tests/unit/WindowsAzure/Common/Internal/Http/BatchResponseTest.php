@@ -45,7 +45,7 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Http\BatchResponse::__construct
-     * @covers \WindowsAzure\Common\Internal\Http\BatchResponse::getContexts
+     * @covers \WindowsAzure\Common\Internal\Http\BatchResponse::getResponses
      */
     public function test__construct()
     {
@@ -68,7 +68,7 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $batchResp = new BatchResponse($encodedBody);
-        $result = $batchResp->getContexts();
+        $result = $batchResp->getResponses();
 
         // Assert
         $this->assertEquals(1, count($result));
@@ -77,7 +77,7 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \WindowsAzure\Common\Internal\Http\BatchResponse::__construct
-     * @covers \WindowsAzure\Common\Internal\Http\BatchResponse::getContexts
+     * @covers \WindowsAzure\Common\Internal\Http\BatchResponse::getResponses
      */
     public function test__constructWithRequestSuccess()
     {
@@ -108,7 +108,7 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $batchResp = new BatchResponse($encodedBody, $batchReq);
-        $result = $batchResp->getContexts();
+        $result = $batchResp->getResponses();
 
         // Assert
         $this->assertEquals(1, count($result));
@@ -117,7 +117,7 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \WindowsAzure\Common\Internal\Http\BatchResponse::__construct
-     * @covers \WindowsAzure\Common\Internal\Http\BatchResponse::getContexts
+     * @covers \WindowsAzure\Common\Internal\Http\BatchResponse::getResponses
      */
     public function test__constructWithRequestException()
     {
@@ -151,6 +151,6 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
 
         // Test
         $batchResp = new BatchResponse($encodedBody, $batchReq);
-        $result = $batchResp->getContexts();
+        $result = $batchResp->getResponses();
     }
 }

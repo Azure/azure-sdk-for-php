@@ -25,6 +25,7 @@
 
 namespace Tests\Functional\WindowsAzure\ServiceBus;
 
+use Psr\Http\Message\ResponseInterface;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\Common\Internal\IServiceFilter;
@@ -77,8 +78,8 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         // Arrange
 
         // Act
-        $entry = $this->restProxy->getQueue('TestAlpha');
-        $feed = $this->restProxy->listQueues();
+        $entry = $this->serviceBusWrapper->getQueue('TestAlpha');
+        $feed = $this->serviceBusWrapper->listQueues();
 
         // Assert
         $this->assertNotNull($entry, '$entry');
@@ -98,7 +99,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         $queueDescription->setMaxSizeInMegabytes(1024);
 
         $queue->setQueueDescription($queueDescription);
-        $saved = $this->restProxy->createQueue($queue);
+        $saved = $this->serviceBusWrapper->createQueue($queue);
 
         // Assert
         $this->assertNotNull($saved, '$saved');
@@ -114,14 +115,14 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         try {
-            $this->restProxy->createQueue(new QueueInfo('TestDeleteQueueWorks'));
+            $this->serviceBusWrapper->createQueue(new QueueInfo('TestDeleteQueueWorks'));
         } catch (ServiceException $e) {
             // Ignore
             error_log($e->getMessage());
         }
 
         // Act
-        $result = $this->restProxy->deleteQueue('TestDeleteQueueWorks');
+        $result = $this->serviceBusWrapper->deleteQueue('TestDeleteQueueWorks');
 
         // Assert
         $this->assertNull($result, '$result');
@@ -136,7 +137,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
         $message = new BrokeredMessage('sendMessageWorks');
 
         // Act
-        $this->restProxy->sendQueueMessage('TestAlpha', $message);
+        $this->serviceBusWrapper->sendQueueMessage('TestAlpha', $message);
 
         // Assert
         $this->assertTrue(true, 'no error');
@@ -151,11 +152,11 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $queueName = 'TestReceiveMessageWorks';
-        $this->restProxy->createQueue(new QueueInfo($queueName));
-        $this->restProxy->sendQueueMessage($queueName, new BrokeredMessage('Hello World'));
+        $this->serviceBusWrapper->createQueue(new QueueInfo($queueName));
+        $this->serviceBusWrapper->sendQueueMessage($queueName, new BrokeredMessage('Hello World'));
 
         // Act
-        $message = $this->restProxy->receiveQueueMessage($queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
+        $message = $this->serviceBusWrapper->receiveQueueMessage($queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
         $data = $message->getBody();
         $size = strlen($data);
 
@@ -173,11 +174,11 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $queueName = 'TestPeekLockMessageWorks';
-        $this->restProxy->createQueue(new QueueInfo($queueName));
-        $this->restProxy->sendQueueMessage($queueName, new BrokeredMessage('Hello Again'));
+        $this->serviceBusWrapper->createQueue(new QueueInfo($queueName));
+        $this->serviceBusWrapper->sendQueueMessage($queueName, new BrokeredMessage('Hello Again'));
 
         // Act
-        $message = $this->restProxy->receiveQueueMessage($queueName, $this->PEEK_LOCK_5_SECONDS);
+        $message = $this->serviceBusWrapper->receiveQueueMessage($queueName, $this->PEEK_LOCK_5_SECONDS);
 
         // Assert
         $data = $message->getBody();
@@ -196,16 +197,16 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $queueName = 'TestPeekLockedMessageCanBeCompleted';
-        $this->restProxy->createQueue(new QueueInfo($queueName));
-        $this->restProxy->sendQueueMessage($queueName, new BrokeredMessage('Hello Again'));
-        $message = $this->restProxy->receiveQueueMessage($queueName, $this->PEEK_LOCK_5_SECONDS);
+        $this->serviceBusWrapper->createQueue(new QueueInfo($queueName));
+        $this->serviceBusWrapper->sendQueueMessage($queueName, new BrokeredMessage('Hello Again'));
+        $message = $this->serviceBusWrapper->receiveQueueMessage($queueName, $this->PEEK_LOCK_5_SECONDS);
 
         // Act
         $lockToken = $message->getLockToken();
         $lockedUntil = $message->getLockedUntilUtc();
         $lockLocation = $message->getLockLocation();
 
-        $this->restProxy->deleteMessage($message);
+        $this->serviceBusWrapper->deleteMessage($message);
 
         // Assert
         $this->assertNotNull($lockToken, '$lockToken');
@@ -223,16 +224,16 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $queueName = 'TestPeekLockedMessageCanBeUnlocked';
-        $this->restProxy->createQueue(new QueueInfo($queueName));
-        $this->restProxy->sendQueueMessage($queueName, new BrokeredMessage('Hello Again'));
-        $peekedMessage = $this->restProxy->receiveQueueMessage($queueName, $this->PEEK_LOCK_5_SECONDS);
+        $this->serviceBusWrapper->createQueue(new QueueInfo($queueName));
+        $this->serviceBusWrapper->sendQueueMessage($queueName, new BrokeredMessage('Hello Again'));
+        $peekedMessage = $this->serviceBusWrapper->receiveQueueMessage($queueName, $this->PEEK_LOCK_5_SECONDS);
 
         // Act
         $lockToken = $peekedMessage->getLockToken();
         $lockedUntil = $peekedMessage->getLockedUntilUtc();
 
-        $this->restProxy->unlockMessage($peekedMessage);
-        $receivedMessage = $this->restProxy->receiveQueueMessage($queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
+        $this->serviceBusWrapper->unlockMessage($peekedMessage);
+        $receivedMessage = $this->serviceBusWrapper->receiveQueueMessage($queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
 
         // Assert
         $this->assertNotNull($lockToken, '$lockToken');
@@ -251,16 +252,16 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $queueName = 'TestPeekLockedMessageCanBeDeleted';
-        $this->restProxy->createQueue(new QueueInfo($queueName));
-        $this->restProxy->sendQueueMessage($queueName, new BrokeredMessage('Hello Again'));
-        $peekedMessage = $this->restProxy->receiveQueueMessage($queueName, $this->PEEK_LOCK_5_SECONDS);
+        $this->serviceBusWrapper->createQueue(new QueueInfo($queueName));
+        $this->serviceBusWrapper->sendQueueMessage($queueName, new BrokeredMessage('Hello Again'));
+        $peekedMessage = $this->serviceBusWrapper->receiveQueueMessage($queueName, $this->PEEK_LOCK_5_SECONDS);
 
         // Act
         $lockToken = $peekedMessage->getLockToken();
         $lockedUntil = $peekedMessage->getLockedUntilUtc();
 
-        $this->restProxy->deleteMessage($peekedMessage);
-        $receivedMessage = $this->restProxy->receiveQueueMessage($queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
+        $this->serviceBusWrapper->deleteMessage($peekedMessage);
+        $receivedMessage = $this->serviceBusWrapper->receiveQueueMessage($queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
 
         // Assert
         $this->assertNotNull($lockToken, '$lockToken');
@@ -277,14 +278,14 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $queueName = 'TestContentTypePassesThrough';
-        $this->restProxy->createQueue(new QueueInfo($queueName));
+        $this->serviceBusWrapper->createQueue(new QueueInfo($queueName));
 
         // Act
         $message = new BrokeredMessage('<data>Hello Again</data>');
         $message->setContentType('text/xml');
-        $this->restProxy->sendQueueMessage($queueName, $message);
+        $this->serviceBusWrapper->sendQueueMessage($queueName, $message);
 
-        $message = $this->restProxy->receiveQueueMessage($queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
+        $message = $this->serviceBusWrapper->receiveQueueMessage($queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
 
         // Assert
         $this->assertNotNull($message, '$message');
@@ -304,12 +305,12 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
 
         // Act
         $topic = new TopicInfo($topicName);
-        $created = $this->restProxy->createTopic($topic);
+        $created = $this->serviceBusWrapper->createTopic($topic);
 
-        $listed = $this->restProxy->listTopics();
-        $fetched = $this->restProxy->getTopic($topicName);
-        $this->restProxy->deleteTopic($topicName);
-        $listed2 = $this->restProxy->listTopics();
+        $listed = $this->serviceBusWrapper->listTopics();
+        $fetched = $this->serviceBusWrapper->getTopic($topicName);
+        $this->serviceBusWrapper->deleteTopic($topicName);
+        $listed2 = $this->serviceBusWrapper->listTopics();
 
         // Assert
         $this->assertNotNull($created, '$created');
@@ -328,7 +329,7 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $customServiceFilter = new CustomServiceFilter();
-        $filtered = $this->restProxy->withFilter($customServiceFilter);
+        $filtered = $this->serviceBusWrapper->withFilter($customServiceFilter);
 
         // Act
         $queueInfo = new QueueInfo('TestFilterCanSeeAndChangeRequestOrResponse');
@@ -348,10 +349,10 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $topicName = 'TestSubscriptionsCanBeCreatedOnTopics';
-        $this->restProxy->createTopic(new TopicInfo($topicName));
+        $this->serviceBusWrapper->createTopic(new TopicInfo($topicName));
 
         // Act
-        $created = $this->restProxy->createSubscription($topicName, new SubscriptionInfo('MySubscription'));
+        $created = $this->serviceBusWrapper->createSubscription($topicName, new SubscriptionInfo('MySubscription'));
 
         // Assert
         $this->assertNotNull($created, '$created');
@@ -367,11 +368,11 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $topicName = 'TestSubscriptionsCanBeListed';
-        $this->restProxy->createTopic(new TopicInfo($topicName));
-        $this->restProxy->createSubscription($topicName, new SubscriptionInfo('MySubscription2'));
+        $this->serviceBusWrapper->createTopic(new TopicInfo($topicName));
+        $this->serviceBusWrapper->createSubscription($topicName, new SubscriptionInfo('MySubscription2'));
 
         // Act
-        $result = $this->restProxy->listSubscriptions($topicName);
+        $result = $this->serviceBusWrapper->listSubscriptions($topicName);
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -389,11 +390,11 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $topicName = 'TestSubscriptionsDetailsMayBeFetched';
-        $this->restProxy->createTopic(new TopicInfo($topicName));
-        $this->restProxy->createSubscription($topicName, new SubscriptionInfo('MySubscription3'));
+        $this->serviceBusWrapper->createTopic(new TopicInfo($topicName));
+        $this->serviceBusWrapper->createSubscription($topicName, new SubscriptionInfo('MySubscription3'));
 
         // Act
-        $result = $this->restProxy->getSubscription($topicName, 'MySubscription3');
+        $result = $this->serviceBusWrapper->getSubscription($topicName, 'MySubscription3');
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -410,15 +411,15 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $topicName = 'TestSubscriptionsMayBeDeleted';
-        $this->restProxy->createTopic(new TopicInfo($topicName));
-        $this->restProxy->createSubscription($topicName, new SubscriptionInfo('MySubscription4'));
-        $this->restProxy->createSubscription($topicName, new SubscriptionInfo('MySubscription5'));
+        $this->serviceBusWrapper->createTopic(new TopicInfo($topicName));
+        $this->serviceBusWrapper->createSubscription($topicName, new SubscriptionInfo('MySubscription4'));
+        $this->serviceBusWrapper->createSubscription($topicName, new SubscriptionInfo('MySubscription5'));
 
         // Act
-        $this->restProxy->deleteSubscription($topicName, 'MySubscription4');
+        $this->serviceBusWrapper->deleteSubscription($topicName, 'MySubscription4');
 
         // Assert
-        $result = $this->restProxy->listSubscriptions($topicName);
+        $result = $this->serviceBusWrapper->listSubscriptions($topicName);
         $this->assertNotNull($result, '$result');
         $this->assertEquals(1, count($result->getSubscriptionInfos()), '$result->getItems()->size()');
         $items = $result->getSubscriptionInfos();
@@ -435,15 +436,15 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $topicName = 'TestSubscriptionWillReceiveMessage';
-        $this->restProxy->createTopic(new TopicInfo($topicName));
-        $this->restProxy->createSubscription($topicName, new SubscriptionInfo('sub'));
+        $this->serviceBusWrapper->createTopic(new TopicInfo($topicName));
+        $this->serviceBusWrapper->createSubscription($topicName, new SubscriptionInfo('sub'));
         // Act
         $message = new BrokeredMessage('<p>Testing subscription</p>');
         $message->setContentType('text/html');
-        $this->restProxy->sendTopicMessage($topicName, $message);
+        $this->serviceBusWrapper->sendTopicMessage($topicName, $message);
 
         // Act
-        $message = $this->restProxy->receiveSubscriptionMessage($topicName, 'sub', $this->RECEIVE_AND_DELETE_5_SECONDS);
+        $message = $this->serviceBusWrapper->receiveSubscriptionMessage($topicName, 'sub', $this->RECEIVE_AND_DELETE_5_SECONDS);
 
         // Assert
         $this->assertNotNull($message, '$message');
@@ -461,11 +462,11 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $topicName = 'TestrulesCanBeCreatedOnSubscriptions';
-        $this->restProxy->createTopic(new TopicInfo($topicName));
-        $this->restProxy->createSubscription($topicName, new SubscriptionInfo('sub'));
+        $this->serviceBusWrapper->createTopic(new TopicInfo($topicName));
+        $this->serviceBusWrapper->createSubscription($topicName, new SubscriptionInfo('sub'));
 
         // Act
-        $created = $this->restProxy->createRule($topicName, 'sub', new RuleInfo('MyRule1'));
+        $created = $this->serviceBusWrapper->createRule($topicName, 'sub', new RuleInfo('MyRule1'));
 
         // Assert
         $this->assertNotNull($created, '$created');
@@ -482,12 +483,12 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $topicName = 'TestrulesCanBeListedAndDefaultRuleIsPrecreated';
-        $this->restProxy->createTopic(new TopicInfo($topicName));
-        $this->restProxy->createSubscription($topicName, new SubscriptionInfo('sub'));
-        $this->restProxy->createRule($topicName, 'sub', new RuleInfo('MyRule2'));
+        $this->serviceBusWrapper->createTopic(new TopicInfo($topicName));
+        $this->serviceBusWrapper->createSubscription($topicName, new SubscriptionInfo('sub'));
+        $this->serviceBusWrapper->createRule($topicName, 'sub', new RuleInfo('MyRule2'));
 
         // Act
-        $result = $this->restProxy->listRules($topicName, 'sub');
+        $result = $this->serviceBusWrapper->listRules($topicName, 'sub');
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -516,11 +517,11 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $topicName = 'TestruleDetailsMayBeFetched';
-        $this->restProxy->createTopic(new TopicInfo($topicName));
-        $this->restProxy->createSubscription($topicName, new SubscriptionInfo('sub'));
+        $this->serviceBusWrapper->createTopic(new TopicInfo($topicName));
+        $this->serviceBusWrapper->createSubscription($topicName, new SubscriptionInfo('sub'));
 
         // Act
-        $result = $this->restProxy->getRule($topicName, 'sub', '$Default');
+        $result = $this->serviceBusWrapper->getRule($topicName, 'sub', '$Default');
 
         // Assert
         $this->assertNotNull($result, '$result');
@@ -538,17 +539,17 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $topicName = 'TestRulesMayBeDeleted';
-        $this->restProxy->createTopic(new TopicInfo($topicName));
-        $this->restProxy->createSubscription($topicName, new SubscriptionInfo('sub'));
-        $this->restProxy->createRule($topicName, 'sub', new RuleInfo('MyRule4'));
-        $this->restProxy->createRule($topicName, 'sub', new RuleInfo('MyRule5'));
+        $this->serviceBusWrapper->createTopic(new TopicInfo($topicName));
+        $this->serviceBusWrapper->createSubscription($topicName, new SubscriptionInfo('sub'));
+        $this->serviceBusWrapper->createRule($topicName, 'sub', new RuleInfo('MyRule4'));
+        $this->serviceBusWrapper->createRule($topicName, 'sub', new RuleInfo('MyRule5'));
 
         // Act
-        $this->restProxy->deleteRule($topicName, 'sub', 'MyRule5');
-        $this->restProxy->deleteRule($topicName, 'sub', '$Default');
+        $this->serviceBusWrapper->deleteRule($topicName, 'sub', 'MyRule5');
+        $this->serviceBusWrapper->deleteRule($topicName, 'sub', '$Default');
 
         // Assert
-        $result = $this->restProxy->listRules($topicName, 'sub');
+        $result = $this->serviceBusWrapper->listRules($topicName, 'sub');
         $this->assertNotNull($result, '$result');
 
         $this->assertEquals(1, count($result->getRuleInfos()), '$result->getItems()->size()');
@@ -565,28 +566,28 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $topicName = 'TestRulesMayHaveAnActionAndFilter';
-        $this->restProxy->createTopic(new TopicInfo($topicName));
-        $this->restProxy->createSubscription($topicName, new SubscriptionInfo('sub'));
+        $this->serviceBusWrapper->createTopic(new TopicInfo($topicName));
+        $this->serviceBusWrapper->createSubscription($topicName, new SubscriptionInfo('sub'));
 
         // Act
         $ruleInfoOne = new RuleInfo('One');
         $ruleInfoOne->withCorrelationFilter('my-id');
-        $ruleOne = $this->restProxy->createRule($topicName, 'sub', $ruleInfoOne);
+        $ruleOne = $this->serviceBusWrapper->createRule($topicName, 'sub', $ruleInfoOne);
         $ruleInfoTwo = new RuleInfo('Two');
         $ruleInfoTwo->withTrueFilter();
-        $ruleTwo = $this->restProxy->createRule($topicName, 'sub', $ruleInfoTwo);
+        $ruleTwo = $this->serviceBusWrapper->createRule($topicName, 'sub', $ruleInfoTwo);
         $ruleInfoThree = new RuleInfo('Three');
         $ruleInfoThree->withFalseFilter();
-        $ruleThree = $this->restProxy->createRule($topicName, 'sub', $ruleInfoThree);
+        $ruleThree = $this->serviceBusWrapper->createRule($topicName, 'sub', $ruleInfoThree);
         $ruleInfoFour = new RuleInfo('Four');
         $ruleInfoFour->withEmptyRuleAction();
-        $ruleFour = $this->restProxy->createRule($topicName, 'sub', $ruleInfoFour);
+        $ruleFour = $this->serviceBusWrapper->createRule($topicName, 'sub', $ruleInfoFour);
         $ruleInfoFive = new RuleInfo('Five');
         $ruleInfoFive->withSqlRuleAction('SET x = 5');
-        $ruleFive = $this->restProxy->createRule($topicName, 'sub', $ruleInfoFive);
+        $ruleFive = $this->serviceBusWrapper->createRule($topicName, 'sub', $ruleInfoFive);
         $ruleInfoSix = new RuleInfo('Six');
         $ruleInfoSix->withSqlFilter('x != 5');
-        $ruleSix = $this->restProxy->createRule($topicName, 'sub', $ruleInfoSix);
+        $ruleSix = $this->serviceBusWrapper->createRule($topicName, 'sub', $ruleInfoSix);
 
         // Assert
         $this->assertTrue(
@@ -624,14 +625,14 @@ class ServiceBusIntegrationTest extends IntegrationTestBase
     {
         // Arrange
         $queueName = 'TestMessagesMayHaveCustomProperties';
-        $this->restProxy->createQueue(new QueueInfo($queueName));
+        $this->serviceBusWrapper->createQueue(new QueueInfo($queueName));
 
         // Act
         $message = new BrokeredMessage('');
         $message->setProperty('hello', 'world');
         $message->setProperty('foo', 42);
-        $this->restProxy->sendQueueMessage($queueName, $message);
-        $message = $this->restProxy->receiveQueueMessage($queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
+        $this->serviceBusWrapper->sendQueueMessage($queueName, $message);
+        $message = $this->serviceBusWrapper->receiveQueueMessage($queueName, $this->RECEIVE_AND_DELETE_5_SECONDS);
 
         // Assert
         $this->assertEquals('world', $message->getProperty('hello'), '$message->getProperty(\'hello\')');
@@ -649,7 +650,7 @@ class CustomServiceFilter implements IServiceFilter
         return $request;
     }
 
-    public function handleResponse(IHttpClient $request, $response)
+    public function handleResponse(IHttpClient $request, ResponseInterface $response)
     {
         array_push($this->requests, $request);
         array_push($this->responses, $response);

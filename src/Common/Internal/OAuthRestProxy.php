@@ -102,7 +102,7 @@ class OAuthRestProxy extends ServiceRestProxy
             $scope
         );
 
-        $response = $this->send(
+        $response = $this->sendHttp(
             $method,
             $headers,
             $queryParams,

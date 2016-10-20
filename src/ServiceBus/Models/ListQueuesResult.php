@@ -46,7 +46,7 @@ class ListQueuesResult extends Feed
     /**
      * The information of the queue. 
      *
-     * @var array
+     * @var QueueInfo[]
      */
     private $_queueInfos;
 
@@ -70,7 +70,7 @@ class ListQueuesResult extends Feed
     /**
      * Gets the queue information. 
      * 
-     * @return array
+     * @return QueueInfo[]
      */
     public function getQueueInfos()
     {
@@ -80,9 +80,9 @@ class ListQueuesResult extends Feed
     /**
      * Sets the information of the queue. 
      * 
-     * @param array $queueInfos The information of the queue. 
+     * @param QueueInfo[] $queueInfos The information of the queue.
      */
-    public function setQueueInfos($queueInfos)
+    public function setQueueInfos(array $queueInfos)
     {
         $this->_queueInfos = $queueInfos;
     }

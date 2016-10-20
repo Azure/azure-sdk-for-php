@@ -30,6 +30,7 @@ use WindowsAzure\Common\Internal\Http\HttpCallContext;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\Serialization\ISerializer;
 use MicrosoftAzure\Storage\Blob\Models\AccessCondition;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Base class for all services rest proxies.
@@ -80,13 +81,13 @@ class ServiceRestProxy extends RestProxy
      *
      * @param HttpCallContext $context The HTTP call context.
      *
-     * @return \HTTP_Request2_Response
+     * @return ResponseInterface
      */
-    protected function sendContext(HttpCallContext $context)
+    protected function sendHttpContext(HttpCallContext $context)
     {
         $context->setUri($this->getUri());
 
-        return parent::sendContext($context);
+        return parent::sendHttpContext($context);
     }
 
     /**
@@ -100,9 +101,9 @@ class ServiceRestProxy extends RestProxy
      * @param int    $statusCode     Expected status code received in the response
      * @param string $body           Request body
      *
-     * @return \HTTP_Request2_Response
+     * @return ResponseInterface
      */
-    protected function send(
+    protected function sendHttp(
         $method,
         array $headers,
         array $queryParams,
@@ -125,7 +126,7 @@ class ServiceRestProxy extends RestProxy
             $context->addStatusCode($statusCode);
         }
 
-        return $this->sendContext($context);
+        return $this->sendHttpContext($context);
     }
 
     /**

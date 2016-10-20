@@ -293,7 +293,7 @@ class ServicesBuilder
      *
      * @param MediaServicesSettings $settings The media services configuration settings.
      *
-     * @return IMediaServices
+     * @return MediaServicesRestProxy
      */
     public function createMediaServicesService(MediaServicesSettings $settings)
     {

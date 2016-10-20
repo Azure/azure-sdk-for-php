@@ -25,7 +25,7 @@
 
 namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
-use Symfony\Component\Validator\Constraints\DateTime;
+
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
 
@@ -147,7 +147,7 @@ class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
     public function testGetSetDate()
     {
         // Setup
-        $expected = new \DateTime();
+        $expected = 'date time';
         $brokeredMessage = new BrokeredMessage();
 
         // Test

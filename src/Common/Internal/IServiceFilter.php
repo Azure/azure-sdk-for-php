@@ -26,6 +26,7 @@
 namespace WindowsAzure\Common\Internal;
 
 use WindowsAzure\Common\Internal\Http\IHttpClient;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * ServiceFilter is called when the sending the request and after receiving the
@@ -55,10 +56,10 @@ interface IServiceFilter
     /**
      * Processes HTTP response after send.
      *
-     * @param IHttpClient $request  HTTP request object.
-     * @param mixed       $response HTTP response object.
+     * @param IHttpClient       $request  HTTP request object.
+     * @param ResponseInterface $response HTTP response object.
      *
-     * @return mixed processed HTTP response object.
+     * @return ResponseInterface processed HTTP response object.
      */
-    public function handleResponse(IHttpClient $request, $response);
+    public function handleResponse(IHttpClient $request, ResponseInterface $response);
 }

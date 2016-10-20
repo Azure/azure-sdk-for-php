@@ -25,7 +25,7 @@
 
 namespace Tests\unit\WindowsAzure\Common\Internal\Atom;
 
-use Exception;
+
 use WindowsAzure\Common\Internal\Atom\AtomLink;
 
 /**

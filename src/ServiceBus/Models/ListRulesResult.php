@@ -46,7 +46,7 @@ class ListRulesResult extends Feed
     /**
      * The information of the rule. 
      * 
-     * @var array
+     * @var RuleInfo[]
      */
     private $_ruleInfos;
 
@@ -71,7 +71,7 @@ class ListRulesResult extends Feed
     /**
      * Gets the information of the rules. 
      * 
-     * @return array
+     * @return RuleInfo[]
      */
     public function getRuleInfos()
     {
@@ -81,9 +81,9 @@ class ListRulesResult extends Feed
     /** 
      * Sets the information of the rule. 
      * 
-     * @param array $ruleInfos The information of the rule. 
+     * @param RuleInfo[] $ruleInfos The information of the rule.
      */
-    public function setRuleInfos($ruleInfos)
+    public function setRuleInfos(array $ruleInfos)
     {
         $this->_ruleInfos = $ruleInfos;
     }
