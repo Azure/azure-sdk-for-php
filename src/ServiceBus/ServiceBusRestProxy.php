@@ -25,6 +25,7 @@
 
 namespace WindowsAzure\ServiceBus;
 
+use Psr\Http\Message\ResponseInterface;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\Serialization\ISerializer;
 use WindowsAzure\Common\Internal\ServiceRestProxy;
@@ -493,7 +494,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @param ListOptions $listOptions The options for list operation.
      * @param string      $path        The path of the list operation.
      *
-     * @return \HTTP_Request2_Response
+     * @return ResponseInterface
      */
     private function _listOptions($listOptions, $path)
     {

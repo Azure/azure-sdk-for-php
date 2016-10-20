@@ -11,7 +11,6 @@
     ],
     "require": {
         "php": ">=5.6",
-        "pear/http_request2": "^2.3",
         "pear/net_url2": "^2.2",
         "pear/mail_mime": "^1.10",
         "pear/mail_mime-decode": "^1.5",

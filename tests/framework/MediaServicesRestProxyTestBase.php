@@ -26,7 +26,6 @@
 namespace Tests\framework;
 
 use Exception;
-use Tests\Framework\ServiceRestProxyTestBase;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
@@ -36,8 +35,6 @@ use WindowsAzure\MediaServices\Models\Task;
 use WindowsAzure\MediaServices\Models\TaskOptions;
 use WindowsAzure\MediaServices\Models\JobTemplate;
 use WindowsAzure\MediaServices\Models\TaskTemplate;
-use WindowsAzure\MediaServices\Models\Channel;
-use WindowsAzure\MediaServices\Models\Program;
 use WindowsAzure\MediaServices\Models\ChannelState;
 use WindowsAzure\MediaServices\Models\ProgramState;
 use WindowsAzure\Common\Internal\Http\Url;

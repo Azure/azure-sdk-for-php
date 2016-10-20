@@ -138,7 +138,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
 
         // Set new URI endpoint if we get redirect response and perform query
         if ($response->getStatusCode() == Resources::STATUS_MOVED_PERMANENTLY) {
-            $this->setUri($response->getHeader('location'));
+            $responseHeaders = HttpClient::getResponseHeaders($response);
+            $this->setUri($responseHeaders['location']);
             array_pop($statusCode);
 
             $response = parent::sendHttp(
