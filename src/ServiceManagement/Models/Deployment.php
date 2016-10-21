@@ -74,7 +74,7 @@ class Deployment
     private $_configuration;
 
     /**
-     * @var array
+     * @var RoleInstance[]
      */
     private $_roleInstanceList;
 
@@ -378,7 +378,7 @@ class Deployment
     /**
      * Gets the deployment role instance list.
      * 
-     * @return array
+     * @return RoleInstance[]
      */
     public function getRoleInstanceList()
     {
@@ -388,9 +388,9 @@ class Deployment
     /**
      * Sets the deployment role instance list.
      * 
-     * @param array $roleInstanceList The deployment role instance list.
+     * @param RoleInstance[] $roleInstanceList The deployment role instance list.
      */
-    public function setRoleInstanceList($roleInstanceList)
+    public function setRoleInstanceList(array $roleInstanceList)
     {
         $this->_roleInstanceList = $roleInstanceList;
     }
