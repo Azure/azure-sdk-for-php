@@ -30,6 +30,7 @@ use Tests\Framework\ServiceRestProxyTestBase;
 
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\ServiceBusSettings;
+use WindowsAzure\ServiceBus\Internal\IWrap;
 
 /**
  * Unit tests for WrapRestProxy class.
@@ -46,6 +47,7 @@ use WindowsAzure\Common\Internal\ServiceBusSettings;
  */
 class WrapRestProxyTest extends ServiceRestProxyTestBase
 {
+    /** @var  IWrap */
     private $_wrapRestProxy;
 
     public function setUp()

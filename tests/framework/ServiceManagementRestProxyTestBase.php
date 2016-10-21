@@ -409,7 +409,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
     }
 
     protected function assertSuspendedDeploymentWithMultipleRoles(
-        $deployment,
+        Deployment $deployment,
         $name,
         $slot,
         $webCount,
@@ -433,7 +433,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
     }
 
     protected function assertSuspendedDeploymentWithOneRole(
-        $deployment,
+        Deployment $deployment,
         $name,
         $slot,
         $roleName,

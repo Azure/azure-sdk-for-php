@@ -192,14 +192,14 @@ class Task
     /**
      * HistoricalEvents.
      *
-     * @var array
+     * @var TaskHistoricalEvent[]
      */
     private $_historicalEvents;
 
     /**
      * ErrorDetails.
      *
-     * @var array
+     * @var ErrorDetail[]
      */
     private $_errorDetails;
 
@@ -635,7 +635,7 @@ class Task
     /**
      * Get "ErrorDetails".
      *
-     * @return array
+     * @return ErrorDetail[]
      */
     public function getErrorDetails()
     {
@@ -645,7 +645,7 @@ class Task
     /**
      * Get "HistoricalEvents".
      *
-     * @return array
+     * @return TaskHistoricalEvent[]
      */
     public function getHistoricalEvents()
     {

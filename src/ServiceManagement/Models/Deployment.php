@@ -84,7 +84,7 @@ class Deployment
     private $_upgradeDomainCount;
 
     /**
-     * @var array
+     * @var Role[]
      */
     private $_roleList;
 
@@ -94,7 +94,7 @@ class Deployment
     private $_sdkVersion;
 
     /**
-     * @var array
+     * @var InputEndpoint[]
      */
     private $_inputEndpointList;
 
@@ -420,7 +420,7 @@ class Deployment
      * 
      * Contains the provisioning details for the new virtual machine deployment.
      * 
-     * @return array
+     * @return Role[]
      */
     public function getRoleList()
     {
@@ -430,9 +430,9 @@ class Deployment
     /**
      * Sets the deployment role list.
      * 
-     * @param array $roleList The deployment role list.
+     * @param Role[] $roleList The deployment role list.
      */
-    public function setRoleList($roleList)
+    public function setRoleList(array $roleList)
     {
         $this->_roleList = $roleList;
     }
@@ -460,7 +460,7 @@ class Deployment
     /**
      * Gets the deployment input endpoint list.
      * 
-     * @return array
+     * @return InputEndpoint[]
      */
     public function getInputEndpointList()
     {
@@ -470,9 +470,9 @@ class Deployment
     /**
      * Sets the deployment input endpoint list.
      * 
-     * @param array $inputEndpointList The deployment input endpoint list.
+     * @param InputEndpoint[] $inputEndpointList The deployment input endpoint list.
      */
-    public function setInputEndpointList($inputEndpointList)
+    public function setInputEndpointList(array $inputEndpointList)
     {
         $this->_inputEndpointList = $inputEndpointList;
     }
