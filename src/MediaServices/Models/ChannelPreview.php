@@ -52,9 +52,9 @@ class ChannelPreview
     /**
      * ChannelPreview Endpoints.
      *
-     * @var array
+     * @var ChannelEndpoint[]
      */
-    private $_endpoints;
+    private $_endpoints = [];
 
     /**
      * Create ChannelPreview from array.
@@ -69,14 +69,6 @@ class ChannelPreview
         $operation->fromArray($options);
 
         return $operation;
-    }
-
-    /**
-     * Create ChannelPreview.
-     */
-    public function __construct()
-    {
-        $this->_endpoints = [];
     }
 
     /**
@@ -122,7 +114,7 @@ class ChannelPreview
     /**
      * Get the ChannelPreview Endpoints.
      *
-     * @return array
+     * @return ChannelEndpoint[]
      */
     public function getEndpoints()
     {

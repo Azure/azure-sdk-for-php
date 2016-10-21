@@ -44,7 +44,7 @@ use WindowsAzure\Common\Internal\Resources;
 class ListStorageServicesResult
 {
     /**
-     * @var array
+     * @var StorageService[]
      */
     private $_storageServices;
 
@@ -73,7 +73,7 @@ class ListStorageServicesResult
     /**
      * Gets storage accounts.
      * 
-     * @return array
+     * @return StorageService[]
      */
     public function getStorageServices()
     {
@@ -83,7 +83,7 @@ class ListStorageServicesResult
     /**
      * Sets storage accounts.
      * 
-     * @param array $storageServices The storage accounts.
+     * @param StorageService[] $storageServices The storage accounts.
      */
     public function setStorageServices(array $storageServices)
     {

@@ -44,7 +44,7 @@ use WindowsAzure\Common\Internal\Resources;
 class ListLocationsResult
 {
     /**
-     * @var array
+     * @var Location[]
      */
     private $_locations;
 
@@ -81,7 +81,7 @@ class ListLocationsResult
     /**
      * Gets locations.
      * 
-     * @return array
+     * @return Location[]
      */
     public function getLocations()
     {
@@ -91,7 +91,7 @@ class ListLocationsResult
     /**
      * Sets locations.
      * 
-     * @param array $locations The locations.
+     * @param Location[] $locations The locations.
      */
     public function setLocations(array $locations)
     {

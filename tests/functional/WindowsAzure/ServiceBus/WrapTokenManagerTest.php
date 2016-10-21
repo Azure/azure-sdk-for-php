@@ -35,6 +35,7 @@ use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
 class WrapTokenManagerTest extends ServiceBusRestProxyTestBase
 {
     private $_contract;
+    /** @var  WrapTokenManager */
     private $_client;
     const EXPIRES_IN_SEC = 9;
 

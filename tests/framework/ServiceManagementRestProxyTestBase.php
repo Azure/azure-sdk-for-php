@@ -26,7 +26,9 @@
 namespace Tests\framework;
 
 
+use WindowsAzure\ServiceManagement\Internal\IServiceManagement;
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
+use WindowsAzure\ServiceManagement\Models\Deployment;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
 use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
@@ -55,16 +57,20 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
     protected $defaultDeploymentConfiguration;
     protected $complexConfiguration;
     protected $storageServiceName;
+    /**
+     * @var IServiceManagement
+     */
+    protected $serviceManagementRestProxy;
 
     public function setUp()
     {
         $this->skipIfEmulated();
         $this->skipIfOSX();
         parent::setUp();
-        $serviceManagementRestProxy = $this->builder->createServiceManagementService(TestResources::getServiceManagementConnectionString());
-        parent::setProxy($serviceManagementRestProxy);
+        $this->serviceManagementRestProxy = $this->builder->createServiceManagementService(TestResources::getServiceManagementConnectionString());
+        parent::setProxy($this->serviceManagementRestProxy);
 
-        $result = $serviceManagementRestProxy->listLocations();
+        $result = $this->serviceManagementRestProxy->listLocations();
         $locations = $result->getLocations();
         $firstLocation = $locations[0];
         $this->createdStorageServices = [];
@@ -83,7 +89,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
         $location = $this->defaultLocation;
         $label = base64_encode($name);
 
-        $this->restProxy->createAffinityGroup($name, $label, $location);
+        $this->serviceManagementRestProxy->createAffinityGroup($name, $label, $location);
         $this->createdAffinityGroups[] = $name;
     }
 
@@ -94,7 +100,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function getAffinityGroup($name)
     {
-        $result = $this->restProxy->listAffinityGroups();
+        $result = $this->serviceManagementRestProxy->listAffinityGroups();
         $affinityGroups = $result->getAffinityGroups();
 
         foreach ($affinityGroups as $affinityGroup) {
@@ -108,7 +114,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function deleteAffinityGroup($name)
     {
-        $this->restProxy->deleteAffinityGroup($name);
+        $this->serviceManagementRestProxy->deleteAffinityGroup($name);
     }
 
     public function safeDeleteAffinityGroup($name)
@@ -127,7 +133,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
         $options = new CreateServiceOptions();
         $options->setLocation($this->defaultLocation);
 
-        $result = $this->restProxy->createStorageService($name, $label, $options);
+        $result = $this->serviceManagementRestProxy->createStorageService($name, $label, $options);
         $this->blockUntilAsyncSucceed($result);
         $this->createdStorageServices[] = $name;
     }
@@ -138,7 +144,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
 
         do {
             sleep(5);
-            $result = $this->restProxy->getOperationStatus($requestInfo);
+            $result = $this->serviceManagementRestProxy->getOperationStatus($requestInfo);
             $status = $result->getStatus();
         } while (OperationStatus::IN_PROGRESS == $status);
 
@@ -147,7 +153,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function storageServiceExists($name)
     {
-        $result = $this->restProxy->listStorageServices();
+        $result = $this->serviceManagementRestProxy->listStorageServices();
         $storageServices = $result->getStorageServices();
 
         foreach ($storageServices as $storageService) {
@@ -161,7 +167,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function deleteStorageService($name)
     {
-        $this->restProxy->deleteStorageService($name);
+        $this->serviceManagementRestProxy->deleteStorageService($name);
     }
 
     public function safeDeleteStorageService($name)
@@ -181,13 +187,13 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
         $options = new CreateServiceOptions();
         $options->setLocation($this->defaultLocation);
 
-        $this->restProxy->createHostedService($name, $label, $options);
+        $this->serviceManagementRestProxy->createHostedService($name, $label, $options);
         $this->createdHostedServices[] = $name;
     }
 
     public function hostedServiceExists($name)
     {
-        $result = $this->restProxy->listHostedServices();
+        $result = $this->serviceManagementRestProxy->listHostedServices();
         $hostedServices = $result->getHostedServices();
 
         foreach ($hostedServices as $hostedService) {
@@ -201,13 +207,13 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
 
     public function deleteHostedService($name)
     {
-        $this->restProxy->deleteHostedService($name);
+        $this->serviceManagementRestProxy->deleteHostedService($name);
     }
 
     public function safeDeleteHostedService($name)
     {
         try {
-            $this->restProxy->deleteHostedService($name);
+            $this->serviceManagementRestProxy->deleteHostedService($name);
         } catch (\Exception $e) {
             // Ignore exception and continue, will assume that this hosted account doesn't exist 
             // The errors are benign, no need to show them
@@ -231,7 +237,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
             }
         }
 
-        $result = $this->restProxy->createDeployment(
+        $result = $this->serviceManagementRestProxy->createDeployment(
             $name,
             $deploymentName,
             $slot,
@@ -252,7 +258,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
         $currentStatus = null;
 
         do {
-            $result = $this->restProxy->getDeployment($name, $options);
+            $result = $this->serviceManagementRestProxy->getDeployment($name, $options);
             $deployment = $result->getDeployment();
             $currentStatus = $deployment->getStatus();
         } while ($currentStatus != $status);
@@ -264,7 +270,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
         $options->setSlot($this->defaultSlot);
 
         do {
-            $result = $this->restProxy->getDeployment($name, $options);
+            $result = $this->serviceManagementRestProxy->getDeployment($name, $options);
             $deployment = $result->getDeployment();
             $rollbackAllowed = $deployment->getRollbackAllowed();
         } while (!$rollbackAllowed);
@@ -277,7 +283,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
         $currentStatus = null;
 
         do {
-            $result = $this->restProxy->getDeployment($name, $options);
+            $result = $this->serviceManagementRestProxy->getDeployment($name, $options);
             $deployment = $result->getDeployment();
             $roleInstanceList = $deployment->getRoleInstanceList();
 
@@ -306,7 +312,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
             }
         }
 
-        $result = $this->restProxy->createDeployment(
+        $result = $this->serviceManagementRestProxy->createDeployment(
             $name,
             $deploymentName,
             $slot,
@@ -325,7 +331,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
         try {
             $options = new GetDeploymentOptions();
             $options->setSlot($this->defaultSlot);
-            $result = $this->restProxy->getDeployment($name, $options);
+            $result = $this->serviceManagementRestProxy->getDeployment($name, $options);
 
             if ($result->getDeployment()->getName() === $name) {
                 return true;
@@ -341,7 +347,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
     {
         $options = new GetDeploymentOptions();
         $options->setSlot(is_null($slot) ? $this->defaultSlot : $slot);
-        $result = $this->restProxy->deleteDeployment($name, $options);
+        $result = $this->serviceManagementRestProxy->deleteDeployment($name, $options);
         $this->blockUntilAsyncSucceed($result);
     }
 
@@ -378,7 +384,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
         }
     }
 
-    protected function assertGeneralDeploymentInformation($deployment, $name, $slot, $roleCount)
+    protected function assertGeneralDeploymentInformation(Deployment $deployment, $name, $slot, $roleCount)
     {
         $this->assertNotNull($deployment);
         $this->assertNotNull($deployment->getPrivateId());
@@ -403,7 +409,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
     }
 
     protected function assertSuspendedDeploymentWithMultipleRoles(
-        $deployment,
+        Deployment $deployment,
         $name,
         $slot,
         $webCount,
@@ -427,7 +433,7 @@ class ServiceManagementRestProxyTestBase extends ServiceRestProxyTestBase
     }
 
     protected function assertSuspendedDeploymentWithOneRole(
-        $deployment,
+        Deployment $deployment,
         $name,
         $slot,
         $roleName,

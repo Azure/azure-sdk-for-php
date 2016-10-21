@@ -29,7 +29,6 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamWrapper;
 use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
-use WindowsAzure\ServiceRuntime\Internal\IRoleEnvironmentChange;
 use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentConfigurationSettingChange;
 use WindowsAzure\ServiceRuntime\RoleEnvironment;
 use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentNotAvailableException;

@@ -24,7 +24,7 @@
  */
 
 namespace Tests\framework;
-
+use MicrosoftAzure\Storage\Table\Internal\ITable;
 
 
 /**
@@ -43,24 +43,28 @@ namespace Tests\framework;
 class TableServiceRestProxyTestBase extends ServiceRestProxyTestBase
 {
     protected $_createdTables;
+    /**
+     * @var ITable
+     */
+    protected $tableRestProxy;
 
     public function setUp()
     {
         parent::setUp();
-        $tableRestProxy = $this->builder->createTableService($this->connectionString);
-        parent::setProxy($tableRestProxy);
+        $this->tableRestProxy = $this->builder->createTableService($this->connectionString);
+        parent::setProxy($this->tableRestProxy);
         $this->_createdTables = [];
     }
 
     public function createTable($tableName, $options = null)
     {
-        $this->restProxy->createTable($tableName, $options);
+        $this->tableRestProxy->createTable($tableName, $options);
         $this->_createdTables[] = $tableName;
     }
 
     public function deleteTable($tableName)
     {
-        $this->restProxy->deleteTable($tableName);
+        $this->tableRestProxy->deleteTable($tableName);
     }
 
     public function safeDeleteTable($tableName)

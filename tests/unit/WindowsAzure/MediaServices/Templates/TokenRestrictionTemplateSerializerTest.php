@@ -30,6 +30,7 @@ use WindowsAzure\MediaServices\Templates\TokenType;
 use WindowsAzure\MediaServices\Templates\TokenClaim;
 
 use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
+use WindowsAzure\MediaServices\Templates\TokenVerificationKey;
 use WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey;
 
 /**
@@ -243,11 +244,14 @@ class TokenRestrictionTemplateSerializerTest extends \PHPUnit_Framework_TestCase
     /// Assertion
 
     /**
-     * @param \PHPUnit_Framework_TestCase $test
-     * @param TokenRestrictionTemplate    $expected
-     * @param TokenRestrictionTemplate    $actual
+     * @param TokenRestrictionTemplateSerializerTest $test
+     * @param TokenRestrictionTemplate               $expected
+     * @param TokenRestrictionTemplate               $actual
      */
-    public static function assertEqualsTokenRestrictionTemplate($test, $expected, $actual)
+    public static function assertEqualsTokenRestrictionTemplate(
+        TokenRestrictionTemplateSerializerTest $test,
+        TokenRestrictionTemplate $expected,
+        $actual)
     {
         // Assert
         $test->assertNotNull($expected);
@@ -255,14 +259,23 @@ class TokenRestrictionTemplateSerializerTest extends \PHPUnit_Framework_TestCase
         $test->assertEquals($expected->getTokenType(), $actual->getTokenType());
         $test->assertEquals($expected->getAudience(), $actual->getAudience());
         $test->assertEquals($expected->getIssuer(), $actual->getIssuer());
-        $test->assertEqualsVerificationKey($test, $expected->getPrimaryVerificationKey(), $actual->getPrimaryVerificationKey());
+        $test->assertEqualsVerificationKey(
+            $test,
+            $expected->getPrimaryVerificationKey(),
+            $actual->getPrimaryVerificationKey());
         $test->assertEquals(count($expected->getAlternateVerificationKeys()), count($actual->getAlternateVerificationKeys()));
         for ($i = 0; $i < count($expected->getAlternateVerificationKeys()); ++$i) {
-            self::assertEqualsVerificationKey($test, $expected->getAlternateVerificationKeys()[$i], $actual->getAlternateVerificationKeys()[$i]);
+            self::assertEqualsVerificationKey(
+                $test,
+                $expected->getAlternateVerificationKeys()[$i],
+                $actual->getAlternateVerificationKeys()[$i]);
         }
         $test->assertEquals(count($expected->getRequiredClaims()), count($actual->getRequiredClaims()));
         for ($i = 0; $i < count($expected->getRequiredClaims()); ++$i) {
-            self::assertEqualsRequiredClaim($test, $expected->getRequiredClaims()[$i], $actual->getRequiredClaims()[$i]);
+            self::assertEqualsRequiredClaim(
+                $test,
+                $expected->getRequiredClaims()[$i],
+                $actual->getRequiredClaims()[$i]);
         }
         if ($expected->getOpenIdConnectDiscoveryDocument() != null) {
             $test->assertNotNull($actual->getOpenIdConnectDiscoveryDocument());
@@ -272,20 +285,32 @@ class TokenRestrictionTemplateSerializerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public static function assertEqualsVerificationKey($test, $expected, $actual)
+    public static function assertEqualsVerificationKey(
+        TokenRestrictionTemplateSerializerTest $test,
+        TokenVerificationKey $expected,
+        TokenVerificationKey $actual)
     {
         if ($expected instanceof SymmetricVerificationKey) {
-            $test->assertTrue($actual instanceof SymmetricVerificationKey);
-            $test->assertEquals($expected->getKeyValue(), $actual->getKeyValue());
+            if ($actual instanceof SymmetricVerificationKey) {
+                $test->assertEquals($expected->getKeyValue(), $actual->getKeyValue());
+            } else {
+                $test->fail();
+            }
         }
 
         if ($expected instanceof X509CertTokenVerificationKey) {
-            $test->assertTrue($actual instanceof X509CertTokenVerificationKey);
-            $test->assertEquals($expected->getRawBody(), $actual->getRawBody());
+            if ($actual instanceof X509CertTokenVerificationKey) {
+                $test->assertEquals($expected->getRawBody(), $actual->getRawBody());
+            } else {
+                $test->fail();
+            }
         }
     }
 
-    public static function assertEqualsRequiredClaim($test, $expected, $actual)
+    public static function assertEqualsRequiredClaim(
+        TokenRestrictionTemplateSerializerTest $test,
+        TokenClaim $expected,
+        TokenClaim $actual)
     {
         $test->assertEquals($expected->getClaimType(), $actual->getClaimType());
         $test->assertEquals($expected->getClaimValue(), $actual->getClaimValue());

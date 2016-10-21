@@ -66,7 +66,7 @@ class ChannelInput
     /**
      * ChannelInput Endpoints.
      *
-     * @var array
+     * @var ChannelEndpoint[]
      */
     private $_endpoints = [];
 
@@ -180,7 +180,7 @@ class ChannelInput
     /**
      * Get the channel input Endpoints.
      *
-     * @return array Endpoints
+     * @return ChannelEndpoint[] Endpoints
      */
     public function getEndpoints()
     {

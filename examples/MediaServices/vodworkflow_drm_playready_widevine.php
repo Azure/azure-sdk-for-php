@@ -27,6 +27,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\MediaServices\MediaServicesRestProxy;
 use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
@@ -107,7 +108,7 @@ echo 'Done!';
 // Helper methods //
 ////////////////////
 
-function uploadFileAndCreateAsset($restProxy, $mezzanineFileName)
+function uploadFileAndCreateAsset(MediaServicesRestProxy $restProxy, $mezzanineFileName)
 {
     // 1.1. create an empty "Asset" by specifying the name
     $asset = new Asset(Asset::OPTIONS_NONE);
@@ -148,7 +149,7 @@ function uploadFileAndCreateAsset($restProxy, $mezzanineFileName)
     return $asset;
 }
 
-function encodeToAdaptiveBitrateMP4Set($restProxy, $asset)
+function encodeToAdaptiveBitrateMP4Set(MediaServicesRestProxy $restProxy, Asset $asset)
 {
     // 2.1 retrieve the latest 'Media Encoder Standard' processor version
     $mediaProcessor = $restProxy->getLatestMediaProcessor('Media Encoder Standard');
@@ -197,7 +198,7 @@ function encodeToAdaptiveBitrateMP4Set($restProxy, $asset)
     return $encodedAsset;
 }
 
-function createCommonTypeContentKey($restProxy, $encodedAsset)
+function createCommonTypeContentKey(MediaServicesRestProxy $restProxy, $encodedAsset)
 {
     // 3.1 Generate a new key
     $aesKey = Utilities::generateCryptoKey(16);
@@ -223,8 +224,9 @@ function createCommonTypeContentKey($restProxy, $encodedAsset)
     return $contentKey;
 }
 
-function addOpenAuthorizationPolicy($restProxy, $contentKey)
-{
+function addOpenAuthorizationPolicy(
+    MediaServicesRestProxy $restProxy, ContentKey $contentKey
+) {
     // 4.1 Create ContentKeyAuthorizationPolicyRestriction (Open)
     $restriction = new ContentKeyAuthorizationPolicyRestriction();
     $restriction->setName('ContentKey Authorization Policy Restriction');
@@ -266,8 +268,9 @@ function addOpenAuthorizationPolicy($restProxy, $contentKey)
     echo "Added Content Key Authorization Policy: name={$ckapolicy->getName()} id={$ckapolicy->getId()}".PHP_EOL;
 }
 
-function addTokenRestrictedAuthorizationPolicy($restProxy, $contentKey, $tokenType)
-{
+function addTokenRestrictedAuthorizationPolicy(
+    MediaServicesRestProxy $restProxy, ContentKey $contentKey, $tokenType
+) {
     // 4.1 Create ContentKeyAuthorizationPolicyRestriction (Token Restricted)
     $tokenRestriction = generateTokenRequirements($tokenType);
     $restriction = new ContentKeyAuthorizationPolicyRestriction();
@@ -313,7 +316,7 @@ function addTokenRestrictedAuthorizationPolicy($restProxy, $contentKey, $tokenTy
     return $tokenRestriction;
 }
 
-function createAssetDeliveryPolicy($restProxy, $encodedAsset, $contentKey)
+function createAssetDeliveryPolicy(MediaServicesRestProxy $restProxy, $encodedAsset, $contentKey)
 {
     // 5.1 Get the acquisition URL
     $acquisitionUrl = $restProxy->getKeyDeliveryUrl($contentKey, ContentKeyDeliveryType::PLAYREADY_LICENSE);
@@ -344,7 +347,7 @@ function createAssetDeliveryPolicy($restProxy, $encodedAsset, $contentKey)
     echo "Added Asset Delivery Policy: name={$adpolicy->getName()} id={$adpolicy->getId()}".PHP_EOL;
 }
 
-function publishEncodedAsset($restProxy, $encodedAsset)
+function publishEncodedAsset(MediaServicesRestProxy $restProxy, $encodedAsset)
 {
     // 6.1 Get the .ISM AssetFile
     $files = $restProxy->getAssetAssetFileList($encodedAsset);
@@ -458,7 +461,7 @@ function generateTokenRequirements($tokenType)
     return TokenRestrictionTemplateSerializer::serialize($template);
 }
 
-function generateTestToken($tokenTemplateString, $contentKey)
+function generateTestToken($tokenTemplateString, ContentKey $contentKey)
 {
     $template = TokenRestrictionTemplateSerializer::deserialize($tokenTemplateString);
     $contentKeyUUID = substr($contentKey->getId(), strlen('nb:kid:UUID:'));
