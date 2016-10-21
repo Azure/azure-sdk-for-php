@@ -50,7 +50,7 @@ class BatchResponse
      *
      * @var Response[]
      */
-    private $_responses;
+    private $_responses = [];
 
     /**
      * Constructor.
@@ -66,7 +66,6 @@ class BatchResponse
         $structure = $mimeDecoder->decode($params);
         $parts = $structure->parts;
         $requestContexts = null;
-        $this->_responses = [];
 
         if ($request != null) {
             Validate::isA(
