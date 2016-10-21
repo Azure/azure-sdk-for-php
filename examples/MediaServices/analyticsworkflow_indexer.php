@@ -26,7 +26,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
-use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\MediaServices\MediaServicesRestProxy;
 use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
@@ -52,7 +52,8 @@ $generateKeywords = 'true';
 echo "Azure SDK for PHP - Media Analytics Sample (Indexer)".PHP_EOL;
 
 // 0 - Set up the MediaServicesService object to call into the Media Services REST API.
-$restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($account, $secret));
+$restProxy = ServicesBuilder::getInstance()->createMediaServicesService(
+    new MediaServicesSettings($account, $secret));
 
 // 1 - Upload the mezzanine
 $sourceAsset = uploadFileAndCreateAsset($restProxy, $mediaFileName);
@@ -73,7 +74,12 @@ echo 'Done!';
 // Helper methods //
 ////////////////////
 
-function uploadFileAndCreateAsset($restProxy, $mediaFileName)
+/**
+ * @param MediaServicesRestProxy $restProxy
+ * @param $mediaFileName
+ * @return Asset
+ */
+function uploadFileAndCreateAsset(MediaServicesRestProxy $restProxy, $mediaFileName)
 {
     // Create an empty "Asset" by specifying the name
     $asset = new Asset(Asset::OPTIONS_NONE);
@@ -114,7 +120,7 @@ function uploadFileAndCreateAsset($restProxy, $mediaFileName)
     return $asset;
 }
 
-function runIndexingJob($restProxy, $asset, $taskConfiguration)
+function runIndexingJob(MediaServicesRestProxy $restProxy, Asset $asset, $taskConfiguration)
 {
     // Retrieve the latest 'Azure Media Indexer' processor version
     $mediaProcessor = $restProxy->getLatestMediaProcessor('Azure Media Indexer');
@@ -164,7 +170,7 @@ function runIndexingJob($restProxy, $asset, $taskConfiguration)
     return $outputAsset;
 }
 
-function downloadAssetFiles($restProxy, $asset, $destinationPath)
+function downloadAssetFiles(MediaServicesRestProxy $restProxy, $asset, $destinationPath)
 {
     // Create destination directory if does not exist
     if (!file_exists($destinationPath)) {

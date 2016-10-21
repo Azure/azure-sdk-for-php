@@ -27,37 +27,25 @@ require_once __DIR__.'/../vendor/autoload.php';
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\MediaServices\MediaServicesRestProxy;
 use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
-use WindowsAzure\MediaServices\Models\Task;
-use WindowsAzure\MediaServices\Models\Job;
-use WindowsAzure\MediaServices\Models\TaskOptions;
 // Live Features
 use WindowsAzure\MediaServices\Models\Channel;
 use WindowsAzure\MediaServices\Models\ChannelInput;
-use WindowsAzure\MediaServices\Models\ChannelOutput;
 use WindowsAzure\MediaServices\Models\ChannelPreview;
 use WindowsAzure\MediaServices\Models\ChannelEncoding;
-use WindowsAzure\MediaServices\Models\ChannelEndpoint;
 use WindowsAzure\MediaServices\Models\ChannelInputAccessControl;
 use WindowsAzure\MediaServices\Models\ChannelPreviewAccessControl;
-use WindowsAzure\MediaServices\Models\ChannelOutputHls;
-use WindowsAzure\MediaServices\Models\ChannelSlate;
-use WindowsAzure\MediaServices\Models\ChannelState;
 use WindowsAzure\MediaServices\Models\StreamingProtocol;
 use WindowsAzure\MediaServices\Models\EncodingType;
 use WindowsAzure\MediaServices\Models\IPAccessControl;
 use WindowsAzure\MediaServices\Models\IPRange;
-use WindowsAzure\MediaServices\Models\Operation;
-use WindowsAzure\MediaServices\Models\OperationState;
 use WindowsAzure\MediaServices\Models\CrossSiteAccessPolicies;
-use WindowsAzure\MediaServices\Models\AudioStream;
-use WindowsAzure\MediaServices\Models\VideoStream;
 use WindowsAzure\MediaServices\Models\ChannelEncodingPresets;
-use WindowsAzure\MediaServices\Models\AdMarkerSources;
 use WindowsAzure\MediaServices\Models\Program;
-use WindowsAzure\MediaServices\Models\ProgramState;
+
 // Content Protection
 use WindowsAzure\MediaServices\Models\ContentKey;
 use WindowsAzure\MediaServices\Models\ProtectionKeyTypes;
@@ -107,7 +95,8 @@ $options->deleteArchiveAsset = true; // change this to false to keep the asset a
 echo "Azure SDK for PHP - Live Features".PHP_EOL;
 
 // 0 - set up the MediaServicesService object to call into the Media Services REST API.
-$restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($account, $secret));
+$restProxy = ServicesBuilder::getInstance()->createMediaServicesService(
+    new MediaServicesSettings($account, $secret));
 
 // 1 - Create and Start new Channel.
 $channel = createAndStartChannel($restProxy, $options);
@@ -143,7 +132,12 @@ exit(0);
 // Main methods   //
 ////////////////////
 
-function createAndStartChannel($restProxy, $options)
+/**
+ * @param MediaServicesRestProxy $restProxy
+ * @param $options
+ * @return Channel
+ */
+function createAndStartChannel(MediaServicesRestProxy $restProxy, $options)
 {
     // 1 - prepare the channel template 
     $channelData = createChannelData($options);
@@ -161,7 +155,7 @@ function createAndStartChannel($restProxy, $options)
     return $restProxy->getChannel($channel);
 }
 
-function createAsset($restProxy, $options)
+function createAsset(MediaServicesRestProxy $restProxy, $options)
 {
     $result = new stdClass();
 
@@ -182,8 +176,16 @@ function createAsset($restProxy, $options)
     return $result;
 }
 
-function createAndStartProgram($restProxy, $asset, $channel, $options)
-{
+/**
+ * @param MediaServicesRestProxy $restProxy
+ * @param Asset $asset
+ * @param Channel $channel
+ * @param $options
+ * @return Program
+ */
+function createAndStartProgram(
+    MediaServicesRestProxy $restProxy, Asset $asset, Channel $channel, $options
+) {
     // 1 - create a new program and link to the asset and channel
     $program = new Program();
     $program->setName($options->programName);
@@ -202,7 +204,7 @@ function createAndStartProgram($restProxy, $asset, $channel, $options)
     return $restProxy->getProgram($program);
 }
 
-function cleanup($restProxy, $channel, $program, $options)
+function cleanup(MediaServicesRestProxy $restProxy, $channel, Program $program, $options)
 {
     // cleanup program
     echo "Stopping program... ";
@@ -258,7 +260,7 @@ function cleanup($restProxy, $channel, $program, $options)
 // Helper methods //
 ////////////////////
 
-function applyAesDynamicEncryption ($restProxy, $asset, $options)
+function applyAesDynamicEncryption (MediaServicesRestProxy $restProxy, $asset, $options)
 {
     $testToken = null;
 
@@ -283,7 +285,7 @@ function applyAesDynamicEncryption ($restProxy, $asset, $options)
     return $testToken;
 }
 
-function applyNonDynamicEncription ($restProxy, $asset)
+function applyNonDynamicEncription(MediaServicesRestProxy  $restProxy, $asset)
 {
     $policy = new AssetDeliveryPolicy();
     $policy->setName("Clear Policy");
@@ -342,7 +344,7 @@ function createOpenIPAccessControl()
     return $iPAccessControl;
 }
 
-function publishLiveAsset($restProxy, $asset)
+function publishLiveAsset(MediaServicesRestProxy $restProxy, $asset)
 {
     // 1 Get the .ISM AssetFile
     echo "Publishing Asset...";
@@ -376,7 +378,12 @@ function publishLiveAsset($restProxy, $asset)
     return $locator->getPath().$manifestFile->getName().'/manifest';
 }
 
-function createEnvelopeTypeContentKey($restProxy, $encodedAsset)
+/**
+ * @param MediaServicesRestProxy $restProxy
+ * @param $encodedAsset
+ * @return ContentKey
+ */
+function createEnvelopeTypeContentKey(MediaServicesRestProxy $restProxy, $encodedAsset)
 {
     // 1 Generate a new key
     $aesKey = Utilities::generateCryptoKey(16);
@@ -400,7 +407,7 @@ function createEnvelopeTypeContentKey($restProxy, $encodedAsset)
     return $contentKey;
 }
 
-function addOpenAuthorizationPolicy($restProxy, $contentKey)
+function addOpenAuthorizationPolicy(MediaServicesRestProxy $restProxy, ContentKey $contentKey)
 {
     // 1 Create ContentKeyAuthorizationPolicyRestriction (Open)
     $restriction = new ContentKeyAuthorizationPolicyRestriction();
@@ -427,8 +434,9 @@ function addOpenAuthorizationPolicy($restProxy, $contentKey)
     $restProxy->updateContentKey($contentKey);
 }
 
-function addTokenRestrictedAuthorizationPolicy($restProxy, $contentKey, $tokenType)
-{
+function addTokenRestrictedAuthorizationPolicy(
+    MediaServicesRestProxy $restProxy, ContentKey $contentKey, $tokenType
+) {
     // 1 Create ContentKeyAuthorizationPolicyRestriction (Token Restricted)
     $tokenRestriction = generateTokenRequirements($tokenType);
     $restriction = new ContentKeyAuthorizationPolicyRestriction();
@@ -458,7 +466,7 @@ function addTokenRestrictedAuthorizationPolicy($restProxy, $contentKey, $tokenTy
     return $tokenRestriction;
 }
 
-function createAssetDeliveryPolicy($restProxy, $asset, $contentKey)
+function createAssetDeliveryPolicy(MediaServicesRestProxy $restProxy, $asset, $contentKey)
 {
     // 1 Get the acquisition URL
     $acquisitionUrl = $restProxy->getKeyDeliveryUrl($contentKey, ContentKeyDeliveryType::BASELINE_HTTP);
@@ -496,7 +504,7 @@ function generateTokenRequirements($tokenType)
     return TokenRestrictionTemplateSerializer::serialize($template);
 }
 
-function generateTestToken($tokenTemplateString, $contentKey)
+function generateTestToken($tokenTemplateString, ContentKey $contentKey)
 {
     $template = TokenRestrictionTemplateSerializer::deserialize($tokenTemplateString);
     $contentKeyUUID = substr($contentKey->getId(), strlen('nb:kid:UUID:'));

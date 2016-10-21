@@ -27,6 +27,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Common\Internal\Utilities;
+use WindowsAzure\MediaServices\MediaServicesRestProxy;
 use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
@@ -105,7 +106,7 @@ echo "Done!";
 // Helper methods //
 ////////////////////
 
-function uploadFileAndCreateAsset($restProxy, $mezzanineFileName)
+function uploadFileAndCreateAsset(MediaServicesRestProxy $restProxy, $mezzanineFileName)
 {
     // 1.1. create an empty "Asset" by specifying the name
     $asset = new Asset(Asset::OPTIONS_NONE);
@@ -145,7 +146,7 @@ function uploadFileAndCreateAsset($restProxy, $mezzanineFileName)
     return $asset;
 }
 
-function encodeToAdaptiveBitrateMP4Set($restProxy, $asset)
+function encodeToAdaptiveBitrateMP4Set(MediaServicesRestProxy $restProxy, Asset $asset)
 {
     // 2.1 retrieve the latest 'Media Encoder Standard' processor version
     $mediaProcessor = $restProxy->getLatestMediaProcessor('Media Encoder Standard');
@@ -194,7 +195,7 @@ function encodeToAdaptiveBitrateMP4Set($restProxy, $asset)
     return $encodedAsset;
 }
 
-function createCommonCBCTypeContentKey($restProxy, $encodedAsset)
+function createCommonCBCTypeContentKey(MediaServicesRestProxy $restProxy, $encodedAsset)
 {
     // 3.1 Generate a new key
     $aesKey = Utilities::generateCryptoKey(16);
@@ -220,8 +221,14 @@ function createCommonCBCTypeContentKey($restProxy, $encodedAsset)
     return $contentKey;
 }
 
-function addOpenAuthorizationPolicy($restProxy, $contentKey, $fairPlayASK, $fairPlayPfxPassword, $fairPlayPfxFile, $fairPlayIV)
-{
+function addOpenAuthorizationPolicy(
+    MediaServicesRestProxy $restProxy,
+    ContentKey $contentKey,
+    $fairPlayASK,
+    $fairPlayPfxPassword,
+    $fairPlayPfxFile,
+    $fairPlayIV
+) {
     // 4.1 Create ContentKeyAuthorizationPolicyRestriction (Open)
     $restriction = new ContentKeyAuthorizationPolicyRestriction();
     $restriction->setName('ContentKey Authorization Policy Restriction');
@@ -253,7 +260,14 @@ function addOpenAuthorizationPolicy($restProxy, $contentKey, $fairPlayASK, $fair
     echo "Added Content Key Authorization Policy: name={$ckapolicy->getName()} id={$ckapolicy->getId()}".PHP_EOL;
 }
 
-function addTokenRestrictedAuthorizationPolicy($restProxy, $contentKey, $tokenType, $fairPlayASK, $fairPlayPfxPassword, $fairPlayPfxFile, $fairPlayIV)
+function addTokenRestrictedAuthorizationPolicy(
+    MediaServicesRestProxy $restProxy,
+    ContentKey $contentKey,
+    $tokenType,
+    $fairPlayASK,
+    $fairPlayPfxPassword,
+    $fairPlayPfxFile,
+    $fairPlayIV)
 {
     // 4.1 Create ContentKeyAuthorizationPolicyRestriction (Token Restricted)
     $tokenRestriction = generateTokenRequirements($tokenType);
@@ -289,7 +303,7 @@ function addTokenRestrictedAuthorizationPolicy($restProxy, $contentKey, $tokenTy
     return $tokenRestriction;
 }
 
-function createAssetDeliveryPolicy($restProxy, $encodedAsset, $contentKey, $fairPlayIV)
+function createAssetDeliveryPolicy(MediaServicesRestProxy $restProxy, $encodedAsset, $contentKey, $fairPlayIV)
 {
     // 5.1 Get the acquisition URL
     $acquisitionUrl = $restProxy->getKeyDeliveryUrl($contentKey, ContentKeyDeliveryType::FAIRPLAY);
@@ -321,7 +335,7 @@ function createAssetDeliveryPolicy($restProxy, $encodedAsset, $contentKey, $fair
     echo "Added Asset Delivery Policy: name={$adpolicy->getName()} id={$adpolicy->getId()}".PHP_EOL;
 }
 
-function publishEncodedAsset($restProxy, $encodedAsset)
+function publishEncodedAsset(MediaServicesRestProxy $restProxy, $encodedAsset)
 {
     // 6.1 Get the .ISM AssetFile
     $files = $restProxy->getAssetAssetFileList($encodedAsset);
@@ -374,7 +388,7 @@ function configureFairPlayPolicyOptions($restProxy, $fairPlayASK, $fairPlayPfxPa
                 $fairPlayPfxPassword, $strPassContentKey, $strAskContentKey, $fairPlayIV);
 }
 
-function createFairPlayAskTypeContentKey($restProxy, $fairPlayASK)
+function createFairPlayAskTypeContentKey(MediaServicesRestProxy $restProxy, $fairPlayASK)
 {
     // 3.1 Convert the ASK to binary representation 
     $askKey = hex2bin($fairPlayASK);
@@ -397,8 +411,9 @@ function createFairPlayAskTypeContentKey($restProxy, $fairPlayASK)
     return $contentKey;
 }
 
-function createFairPlayPfxPasswordTypeContentKey($restProxy, $fairPlayPfxPassword)
-{
+function createFairPlayPfxPasswordTypeContentKey(
+    MediaServicesRestProxy $restProxy, $fairPlayPfxPassword
+) {
     // 3.1 Get the protection key id for ContentKey
     $protectionKeyId = $restProxy->getProtectionKeyId(ContentKeyTypes::FAIRPLAY_PFXPASSWORD);
     $protectionKey = $restProxy->getProtectionKey($protectionKeyId);
@@ -432,7 +447,7 @@ function generateTokenRequirements($tokenType)
     return TokenRestrictionTemplateSerializer::serialize($template);
 }
 
-function generateTestToken($tokenTemplateString, $contentKey)
+function generateTestToken($tokenTemplateString, ContentKey $contentKey)
 {
     $template = TokenRestrictionTemplateSerializer::deserialize($tokenTemplateString);
     $contentKeyUUID = substr($contentKey->getId(), strlen("nb:kid:UUID:"));

@@ -27,6 +27,7 @@ namespace Client;
 
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult;
+use WindowsAzure\ServiceManagement\Models\Location;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
 
@@ -89,9 +90,9 @@ class CloudSubscription
     /**
      * Creates a storage service if it does not exist and waits until it is created.
      *
-     * @param string $name     The storage service name.
-     * @param string $execType The execution type for this call.
-     * @param type   $location The storage service location. By default East US.
+     * @param string   $name     The storage service name.
+     * @param string   $execType The execution type for this call.
+     * @param Location $location The storage service location. By default East US.
      *
      * @return CloudStorageService
      */

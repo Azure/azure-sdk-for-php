@@ -31,6 +31,7 @@
 
 require_once '..\client\client.php';
 use Client\CloudSubscription;
+use Client\CloudTable;
 
 // read user setting from config
 include_once 'userconfig.php';
@@ -72,7 +73,7 @@ if (!is_null($cloudTable)) {
     listEntries($cloudTable);
 }
 
-function listEntries($cloudTable)
+function listEntries(CloudTable $cloudTable)
 {
     $result = $cloudTable->queryEntities();
     $entities = $result->getEntities();
