@@ -65,8 +65,8 @@ class BatchResponse
         $mimeDecoder = new \Mail_mimeDecode($content);
         $structure = $mimeDecoder->decode($params);
         $parts = $structure->parts;
-        $this->_contexts = [];
         $requestContexts = null;
+        $this->_responses = [];
 
         if ($request != null) {
             Validate::isA(
