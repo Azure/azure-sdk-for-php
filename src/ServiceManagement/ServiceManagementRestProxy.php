@@ -518,7 +518,7 @@ class ServiceManagementRestProxy extends RestProxy
 
         $response = $this->sendHttpContext($context);
 
-        return AsynchronousOperationResult::create($response->getHeaders());
+        return AsynchronousOperationResult::create(HttpClient::getResponseHeaders($response));
     }
 
     /**
