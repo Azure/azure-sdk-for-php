@@ -13,4 +13,4 @@ before_script:
 
 script: 
   - ./vendor/bin/phpunit -c phpunit.local.xml.dist
-  - ./vendor/bin/php-cs-fixer fix .\src
+  - ./vendor/bin/php-cs-fixer fix ./src/

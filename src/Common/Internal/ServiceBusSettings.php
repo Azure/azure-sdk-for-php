@@ -163,7 +163,7 @@ class ServiceBusSettings extends ServiceSettings
      *
      * @param string $connectionString The storage settings connection string
      *
-     * @return ServiceBusSettings
+     * @return ServiceBusSettings|void
      */
     public static function createFromConnectionString($connectionString)
     {
@@ -211,7 +211,8 @@ class ServiceBusSettings extends ServiceSettings
             );
         }
 
-        return self::noMatch($connectionString);
+        self::noMatch($connectionString);
+        return null;
     }
 
     /**

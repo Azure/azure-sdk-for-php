@@ -132,7 +132,7 @@ class ServiceManagementSettings extends ServiceSettings
      *
      * @param string $connectionString The storage settings connection string
      *
-     * @return ServiceManagementSettings
+     * @return ServiceManagementSettings|void
      */
     public static function createFromConnectionString($connectionString)
     {
@@ -170,7 +170,8 @@ class ServiceManagementSettings extends ServiceSettings
             );
         }
 
-        return self::noMatch($connectionString);
+        self::noMatch($connectionString);
+        return null;
     }
 
     /**
