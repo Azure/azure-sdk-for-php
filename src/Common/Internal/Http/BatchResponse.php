@@ -26,6 +26,7 @@
 namespace WindowsAzure\Common\Internal\Http;
 
 use function GuzzleHttp\Psr7\parse_response;
+use MicrosoftAzure\Storage\Table\Internal\MimeReaderWriter;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\ServiceException;
 use GuzzleHttp\Psr7\Response;
@@ -67,6 +68,15 @@ class BatchResponse
         $parts = $structure->parts;
         $requestContexts = null;
 
+        $mimeReaderWriter = new MimeReaderWriter();
+        $mimeParts = $mimeReaderWriter->decodeMimeMultipart($content);
+        /*
+        print(' ! mimeParts ! ');
+        print_r($mimeParts);
+
+        print(' ! structure ! ');
+        print_r($structure);
+
         if ($request != null) {
             Validate::isA(
                 $request,
@@ -76,9 +86,9 @@ class BatchResponse
             // array of HttpCallContext
             $requestContexts = $request->getContexts();
         }
-
+        */
         $i = 0;
-        foreach ($parts as $part) {
+        foreach ($mimeParts as $part) {
             if (!empty($part->body)) {
                 $response = parse_response($part->body);
 
