@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -44,28 +44,28 @@ use WindowsAzure\ServiceBus\Internal\Filter;
 class RuleDescription
 {
     /**
-     * The filter of the rule. 
-     * 
+     * The filter of the rule.
+     *
      * @var Filter
      */
     private $_filter;
 
     /**
-     * The action of the rule. 
-     * 
+     * The action of the rule.
+     *
      * @var Action
      */
     private $_action;
 
     /**
-     * The name of the rule. 
-     * 
+     * The name of the rule.
+     *
      * @var string
      */
     private $_name;
 
     /**
-     * Creates a rule description instance with default parameters. 
+     * Creates a rule description instance with default parameters.
      */
     public function __construct()
     {
@@ -74,11 +74,11 @@ class RuleDescription
     // @codingStandardsIgnoreStart
 
     /**
-     * Creates a rule description instance with specified XML string. 
-     * 
-     * @param string $ruleDescriptionXml A XML string representing the 
-     *                                   rule description.
-     * 
+     * Creates a rule description instance with specified XML string.
+     *
+     * @param string $ruleDescriptionXml A XML string representing the
+     *                                   rule description
+     *
      * @return RuleDescription
      */
     public static function create($ruleDescriptionXml)
@@ -95,15 +95,15 @@ class RuleDescription
             $filterType = (string) $filterAttributes['type'];
             $filter = null;
             switch ($filterType) {
-            case 'TrueFilter'  :
+            case 'TrueFilter':
                 $filter = new TrueFilter();
                 break;
 
-            case 'FalseFilter' :
+            case 'FalseFilter':
                 $filter = new FalseFilter();
                 break;
 
-            case 'CorrelationFilter' :
+            case 'CorrelationFilter':
                 $filter = new CorrelationFilter();
 
                 if (array_key_exists('CorrelationId', $filterItemArray)) {
@@ -113,7 +113,7 @@ class RuleDescription
                 }
                 break;
 
-            case 'SqlFilter' :
+            case 'SqlFilter':
                 $filter = new SqlFilter();
 
                 if (array_key_exists('SqlExpression', $filterItemArray)) {
@@ -123,13 +123,13 @@ class RuleDescription
                 }
                 if (array_key_exists('CompatibilityLevel', $filterItemArray)) {
                     $filter->setCompatibilityLevel(
-                        (integer) $filterItemArray['CompatibilityLevel']
+                        (int) $filterItemArray['CompatibilityLevel']
                     );
                 }
 
                 break;
 
-            default :
+            default:
                 $filter = new Filter();
             }
 
@@ -143,11 +143,11 @@ class RuleDescription
             $action = null;
 
             switch ($actionType) {
-            case 'EmptyRuleAction'  :
+            case 'EmptyRuleAction':
                 $action = new EmptyRuleAction();
                 break;
 
-            case 'SqlRuleAction' :
+            case 'SqlRuleAction':
                 $action = new SqlRuleAction();
 
                 if (array_key_exists('SqlExpression', $actionItem)) {
@@ -155,7 +155,7 @@ class RuleDescription
                 }
                 break;
 
-            default :
+            default:
                 $action = new Action();
             }
 
@@ -172,7 +172,7 @@ class RuleDescription
     // @codingStandardsIgnoreEnd
 
     /**
-     * Gets the filter. 
+     * Gets the filter.
      *
      * @return Filter
      */
@@ -182,9 +182,9 @@ class RuleDescription
     }
 
     /**
-     * Sets the filter of the rule description. 
-     * 
-     * @param Filter $filter The filter of the rule description.
+     * Sets the filter of the rule description.
+     *
+     * @param Filter $filter The filter of the rule description
      */
     public function setFilter(Filter $filter)
     {
@@ -192,7 +192,7 @@ class RuleDescription
     }
 
     /**
-     * Gets the action. 
+     * Gets the action.
      *
      * @return Action
      */
@@ -202,9 +202,9 @@ class RuleDescription
     }
 
     /**
-     * Sets the action of the rule description. 
-     * 
-     * @param Action $action The action of the rule description.
+     * Sets the action of the rule description.
+     *
+     * @param Action $action The action of the rule description
      */
     public function setAction(Action $action)
     {
@@ -212,7 +212,7 @@ class RuleDescription
     }
 
     /**
-     * Gets the name of the rule description. 
+     * Gets the name of the rule description.
      *
      * @return string
      */
@@ -222,9 +222,9 @@ class RuleDescription
     }
 
     /**
-     * Sets the name of the rule description. 
-     * 
-     * @param string $name The name of the rule description. 
+     * Sets the name of the rule description.
+     *
+     * @param string $name The name of the rule description
      */
     public function setName($name)
     {

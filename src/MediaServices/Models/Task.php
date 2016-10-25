@@ -207,6 +207,7 @@ class Task
      * Create task from array.
      *
      * @param array $options Array containing values for object properties
+     *
      * @return Task
      */
     public static function createFromOptions(array $options)
@@ -228,9 +229,9 @@ class Task
     /**
      * Create task.
      *
-     * @param string $taskBody         Task body.
-     * @param string $mediaProcessorId Media processor identifier.
-     * @param int    $options          Task encryption options.
+     * @param string $taskBody         Task body
+     * @param string $mediaProcessorId Media processor identifier
+     * @param int    $options          Task encryption options
      */
     public function __construct($taskBody, $mediaProcessorId, $options)
     {

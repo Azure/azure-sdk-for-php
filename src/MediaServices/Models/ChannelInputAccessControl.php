@@ -97,11 +97,10 @@ class ChannelInputAccessControl
     /**
      * Set the ChannelInputAccessControl IP.
      *
-     * @param IPAccessControl $value ChannelInputAccessControl IP.
+     * @param IPAccessControl $value ChannelInputAccessControl IP
      */
     public function setIP(IPAccessControl $value)
     {
         $this->_ip = $value;
     }
 }
-

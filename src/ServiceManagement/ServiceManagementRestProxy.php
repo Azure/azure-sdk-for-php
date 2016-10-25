@@ -75,8 +75,7 @@ use WindowsAzure\ServiceManagement\Models\UpgradeDeploymentOptions;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServiceManagementRestProxy extends RestProxy
-    implements IServiceManagement
+class ServiceManagementRestProxy extends RestProxy implements IServiceManagement
 {
     /**
      * @var string
@@ -86,11 +85,11 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Sends an order request for the specified role instance.
      *
-     * @param string               $name     The hosted service name.
-     * @param string               $roleName The role instance name.
-     * @param GetDeploymentOptions $options  The optional parameters.
+     * @param string               $name     The hosted service name
+     * @param string               $roleName The role instance name
+     * @param GetDeploymentOptions $options  The optional parameters
      * @param string               $order    The order name which is used as value
-     *                                       for query parameter 'comp'.
+     *                                       for query parameter 'comp'
      *
      * @return AsynchronousOperationResult
      */
@@ -118,8 +117,8 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Constructs URI path for given service management resource.
      *
-     * @param string $serviceManagementResource The resource name.
-     * @param string $name                      The service name.
+     * @param string $serviceManagementResource The resource name
+     * @param string $name                      The service name
      *
      * @return string
      */
@@ -147,7 +146,7 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Constructs URI path for affinity group.
      *
-     * @param string $name The affinity group name.
+     * @param string $name The affinity group name
      *
      * @return string
      */
@@ -159,7 +158,7 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Constructs URI path for storage service.
      *
-     * @param string $name The storage service name.
+     * @param string $name The storage service name
      *
      * @return string
      */
@@ -171,7 +170,7 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Constructs URI path for hosted service.
      *
-     * @param string $name The hosted service name.
+     * @param string $name The hosted service name
      *
      * @return string
      */
@@ -183,8 +182,8 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Constructs URI path for deployment slot.
      *
-     * @param string $name The hosted service name.
-     * @param string $slot The deployment slot name.
+     * @param string $name The hosted service name
+     * @param string $slot The deployment slot name
      *
      * @return string
      */
@@ -198,8 +197,8 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Constructs URI path for deployment slot.
      *
-     * @param string $name           The hosted service name.
-     * @param string $deploymentName The deployment slot name.
+     * @param string $name           The hosted service name
+     * @param string $deploymentName The deployment slot name
      *
      * @return string
      */
@@ -213,9 +212,9 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Gets role instance path.
      *
-     * @param string               $name     The hosted service name.
-     * @param GetDeploymentOptions $options  The get deployment options.
-     * @param string               $roleName The role instance name.
+     * @param string               $name     The hosted service name
+     * @param GetDeploymentOptions $options  The get deployment options
+     * @param string               $roleName The role instance name
      *
      * @return string
      */
@@ -229,8 +228,8 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Gets the deployment URI path using the slot or name.
      *
-     * @param string               $name    The hosted service name.
-     * @param GetDeploymentOptions $options The optional parameters.
+     * @param string               $name    The hosted service name
+     * @param GetDeploymentOptions $options The optional parameters
      *
      * @return string
      */
@@ -257,7 +256,7 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Constructs URI path for storage service key.
      *
-     * @param string $name The storage service name.
+     * @param string $name The storage service name
      *
      * @return string
      */
@@ -269,7 +268,7 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Constructs URI path for operations.
      *
-     * @param string $name The operation resource name.
+     * @param string $name The operation resource name
      *
      * @return string
      */
@@ -281,8 +280,8 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Constructs request XML including windows azure XML namespace.
      *
-     * @param array  $xmlElements The XML elements associated with their values.
-     * @param string $root        The XML root name.
+     * @param array  $xmlElements The XML elements associated with their values
+     * @param string $root        The XML root name
      *
      * @return string
      */
@@ -307,7 +306,7 @@ class ServiceManagementRestProxy extends RestProxy
      * Prepare configuration XML for sending via REST API.
      *
      * @param string|resource $value The configuration file contents
-     *                               or file stream.
+     *                               or file stream
      *
      * @return string
      */
@@ -327,10 +326,10 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Initializes new ServiceManagementRestProxy object.
      *
-     * @param IHttpClient      $channel        The HTTP channel.
-     * @param string           $subscriptionId The user subscription id.
-     * @param string           $uri            The service URI.
-     * @param ISerializer|null $dataSerializer The data serializer.
+     * @param IHttpClient      $channel        The HTTP channel
+     * @param string           $subscriptionId The user subscription id
+     * @param string           $uri            The service URI
+     * @param ISerializer|null $dataSerializer The data serializer
      */
     public function __construct(
         IHttpClient $channel,
@@ -372,7 +371,7 @@ class ServiceManagementRestProxy extends RestProxy
      * account; and the name of the affinity group to which the service belongs,
      * or its geo-location if it is not part of an affinity group.
      *
-     * @param string $name The storage account name.
+     * @param string $name The storage account name
      *
      * @return GetStorageServicePropertiesResult
      *
@@ -398,7 +397,7 @@ class ServiceManagementRestProxy extends RestProxy
      * Returns the primary and secondary access keys for the specified storage
      * account.
      *
-     * @param string $name The storage account name.
+     * @param string $name The storage account name
      *
      * @return GetStorageServiceKeysResult
      *
@@ -424,8 +423,8 @@ class ServiceManagementRestProxy extends RestProxy
      * Regenerates the primary or secondary access key for the specified storage
      * account.
      *
-     * @param string $name    The storage account name.
-     * @param string $keyType Specifies which key to regenerate.
+     * @param string $name    The storage account name
+     * @param string $keyType Specifies which key to regenerate
      *
      * @return GetStorageServiceKeysResult
      *
@@ -470,12 +469,12 @@ class ServiceManagementRestProxy extends RestProxy
      * in the response for this operation; if successful, it will be
      * status code 200 (OK).
      *
-     * @param string               $name    The storage account name.
+     * @param string               $name    The storage account name
      * @param string               $label   The name for the storage account
      *                                      specified as a base64-encoded string. The name may be up to 100 characters
      *                                      in length. The name can be used identify the storage account for your tracking
-     *                                      purposes.
-     * @param CreateServiceOptions $options The optional parameters.
+     *                                      purposes
+     * @param CreateServiceOptions $options The optional parameters
      *
      * @return AsynchronousOperationResult
      *
@@ -524,7 +523,7 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Deletes the specified storage account from Windows Azure.
      *
-     * @param string $name The storage account name.
+     * @param string $name The storage account name
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264517.aspx
      */
@@ -545,8 +544,8 @@ class ServiceManagementRestProxy extends RestProxy
      * Updates the label and/or the description for a storage account in Windows
      * Azure.
      *
-     * @param string               $name    The storage account name.
-     * @param UpdateServiceOptions $options The optional parameters.
+     * @param string               $name    The storage account name
+     * @param UpdateServiceOptions $options The optional parameters
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/hh264516.aspx
      */
@@ -604,13 +603,13 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Creates a new affinity group for the specified subscription.
      *
-     * @param string                     $name     The affinity group name.
+     * @param string                     $name     The affinity group name
      * @param string                     $label    The base-64 encoded name for the
-     *                                             affinity group. The name can be up to 100 characters in length.
+     *                                             affinity group. The name can be up to 100 characters in length
      * @param string                     $location The data center location where the
      *                                             affinity group will be created. To list available locations, use the
-     *                                             listLocations API.
-     * @param CreateAffinityGroupOptions $options  The optional parameters.
+     *                                             listLocations API
+     * @param CreateAffinityGroupOptions $options  The optional parameters
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg715317.aspx
      */
@@ -653,7 +652,7 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Deletes an affinity group in the specified subscription.
      *
-     * @param string $name The affinity group name.
+     * @param string $name The affinity group name
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg715314.aspx
      */
@@ -674,9 +673,9 @@ class ServiceManagementRestProxy extends RestProxy
      * Updates the label and/or the description for an affinity group for the
      * specified subscription.
      *
-     * @param string                     $name    The affinity group name.
-     * @param string                     $label   The affinity group label.
-     * @param CreateAffinityGroupOptions $options The optional parameters.
+     * @param string                     $name    The affinity group name
+     * @param string                     $label   The affinity group label
+     * @param CreateAffinityGroupOptions $options The optional parameters
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg715316.aspx
      */
@@ -715,7 +714,7 @@ class ServiceManagementRestProxy extends RestProxy
     /**
      * Returns the system properties associated with the specified affinity group.
      *
-     * @param string $name The affinity group name.
+     * @param string $name The affinity group name
      *
      * @return GetAffinityGroupPropertiesResult
      *
@@ -763,7 +762,7 @@ class ServiceManagementRestProxy extends RestProxy
      * operation has succeeded, failed, or is still in progress.
      *
      * @param AsynchronousOperationResult $requestInfo The request information for
-     *                                                 the REST call you want to track.
+     *                                                 the REST call you want to track
      *
      * @return GetOperationStatusResult
      *
@@ -810,11 +809,11 @@ class ServiceManagementRestProxy extends RestProxy
      *
      * @param string               $name    The name for the hosted service
      *                                      that is unique within Windows Azure. This name is the DNS prefix name and can
-     *                                      be used to access the hosted service.
+     *                                      be used to access the hosted service
      * @param string               $label   The name for the hosted service
      *                                      that is base-64 encoded. The name can be used identify the storage account for
-     *                                      your tracking purposes.
-     * @param CreateServiceOptions $options The optional parameters.
+     *                                      your tracking purposes
+     * @param CreateServiceOptions $options The optional parameters
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441304.aspx
      */
@@ -863,8 +862,8 @@ class ServiceManagementRestProxy extends RestProxy
      * Azure.
      *
      * @param string               $name    The name for the hosted service that is
-     *                                      unique within Windows Azure.
-     * @param UpdateServiceOptions $options The optional parameters.
+     *                                      unique within Windows Azure
+     * @param UpdateServiceOptions $options The optional parameters
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441303.aspx
      */
@@ -908,7 +907,7 @@ class ServiceManagementRestProxy extends RestProxy
      * an error. You can call the deleteDeployment API to delete a hosted service's
      * deployments.
      *
-     * @param string $name The name for the hosted service.
+     * @param string $name The name for the hosted service
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441305.aspx
      */
@@ -932,8 +931,8 @@ class ServiceManagementRestProxy extends RestProxy
      * group; and optionally, information on the service's deployments.
      *
      * @param string                            $name    The name for the hosted
-     *                                                   service.
-     * @param GetHostedServicePropertiesOptions $options The optional parameters.
+     *                                                   service
+     * @param GetHostedServicePropertiesOptions $options The optional parameters
      *
      * @return GetHostedServicePropertiesResult
      *
@@ -972,22 +971,22 @@ class ServiceManagementRestProxy extends RestProxy
      * getOperationStatus API.
      *
      * @param string                  $name           The name for the hosted service
-     *                                                that is unique within Windows Azure.
+     *                                                that is unique within Windows Azure
      * @param string                  $deploymentName The name for the deployment.
      *                                                The deployment name must be unique among other deployments for the hosted
-     *                                                service.
+     *                                                service
      * @param string                  $slot           The name of the deployment slot
-     *                                                This can be "production" or "staging".
+     *                                                This can be "production" or "staging"
      * @param string                  $packageUrl     The URL that refers to the
      *                                                location of the service package in the Blob service. The service package can
-     *                                                be located in a storage account beneath the same subscription.
+     *                                                be located in a storage account beneath the same subscription
      * @param string|resource         $configuration  The configuration file contents
-     *                                                or file stream.
+     *                                                or file stream
      * @param string                  $label          The name for the hosted service
      *                                                that is base-64 encoded. The name can be up to 100 characters in length. It is
      *                                                recommended that the label be unique within the subscription. The name can be
-     *                                                used identify the hosted service for your tracking purposes.
-     * @param CreateDeploymentOptions $options        The optional parameters.
+     *                                                used identify the hosted service for your tracking purposes
+     * @param CreateDeploymentOptions $options        The optional parameters
      *
      * @return AsynchronousOperationResult
      *
@@ -1069,8 +1068,8 @@ class ServiceManagementRestProxy extends RestProxy
      * first get the unique name for the deployment. This unique name is part of the
      * response when you make a request to get all deployments in an environment.
      *
-     * @param string               $name    The hosted service name.
-     * @param GetDeploymentOptions $options The optional parameters.
+     * @param string               $name    The hosted service name
+     * @param GetDeploymentOptions $options The optional parameters
      *
      * @return GetDeploymentResult
      *
@@ -1107,9 +1106,9 @@ class ServiceManagementRestProxy extends RestProxy
      * deployment and redeploy instead. You can obtain information about endpoints
      * that are used by using the Get Deployment operation.
      *
-     * @param string $name        The hosted service name.
-     * @param string $source      The name of the source deployment.
-     * @param string $destination The name of the destination deployment.
+     * @param string $name        The hosted service name
+     * @param string $source      The name of the source deployment
+     * @param string $destination The name of the destination deployment
      *
      * @return AsynchronousOperationResult
      *
@@ -1151,8 +1150,8 @@ class ServiceManagementRestProxy extends RestProxy
      * environment (staging or production), or by specifying the deployment's unique
      * name.
      *
-     * @param string               $name    The hosted service name.
-     * @param GetDeploymentOptions $options The optional parameters.
+     * @param string               $name    The hosted service name
+     * @param GetDeploymentOptions $options The optional parameters
      *
      * @return AsynchronousOperationResult
      *
@@ -1183,11 +1182,11 @@ class ServiceManagementRestProxy extends RestProxy
      * deployment's unique name.
      *
      * @param string                               $name          The hosted service
-     *                                                            name.
+     *                                                            name
      * @param string|resource                      $configuration The configuration
-     *                                                            file contents or file stream.
+     *                                                            file contents or file stream
      * @param ChangeDeploymentConfigurationOptions $options       The optional
-     *                                                            parameters.
+     *                                                            parameters
      *
      * @return AsynchronousOperationResult
      *
@@ -1242,11 +1241,11 @@ class ServiceManagementRestProxy extends RestProxy
      * environment (staging or production), or by specifying the deployment's unique
      * name.
      *
-     * @param string               $name    The hosted service name.
+     * @param string               $name    The hosted service name
      * @param string               $status  The change to initiate to the
      *                                      deployment status.
-     *                                      Possible values include Running or Suspended.
-     * @param GetDeploymentOptions $options The optional parameters.
+     *                                      Possible values include Running or Suspended
+     * @param GetDeploymentOptions $options The optional parameters
      *
      * @return AsynchronousOperationResult
      *
@@ -1293,24 +1292,24 @@ class ServiceManagementRestProxy extends RestProxy
      * environment (staging or production), or by specifying the deployment's unique
      * name.
      *
-     * @param string                   $name          The hosted service name.
+     * @param string                   $name          The hosted service name
      * @param string                   $mode          The type of upgrade to initiate
      *                                                If not specified the default value is Auto. If set to Manual,
      *                                                walkUpgradeDomain API must be called to apply the update. If set to Auto, the
      *                                                Windows Azure platform will automatically apply the update to each Upgrade
-     *                                                Domain in sequence.
+     *                                                Domain in sequence
      * @param string                   $packageUrl    The URL that refers to the
      *                                                location of the service package in the Blob service. The service package can
-     *                                                be located in a storage account beneath the same subscription.
+     *                                                be located in a storage account beneath the same subscription
      * @param string|resource          $configuration The configuration file contents
-     *                                                or file stream.
+     *                                                or file stream
      * @param string                   $label         The name for the hosted service
-     *                                                that is base-64 encoded. The name may be up to 100 characters in length.
+     *                                                that is base-64 encoded. The name may be up to 100 characters in length
      * @param bool                     $force         Specifies whether the rollback
      *                                                should proceed even when it will cause local data to be lost from some role
      *                                                instances. True if the rollback should proceed; otherwise false if the
-     *                                                rollback should fail.
-     * @param UpgradeDeploymentOptions $options       The optional parameters.
+     *                                                rollback should fail
+     * @param UpgradeDeploymentOptions $options       The optional parameters
      *
      * @return AsynchronousOperationResult
      *
@@ -1381,12 +1380,12 @@ class ServiceManagementRestProxy extends RestProxy
      * environment (staging or production), or by specifying the deployment's unique
      * name.
      *
-     * @param string               $name          The hosted service name.
+     * @param string               $name          The hosted service name
      * @param int                  $upgradeDomain The integer value that
      *                                            identifies the upgrade domain to walk. Upgrade domains are identified with a
      *                                            zero-based index: the first upgrade domain has an ID of 0, the second has an
-     *                                            ID of 1, and so on.
-     * @param GetDeploymentOptions $options       The optional parameters.
+     *                                            ID of 1, and so on
+     * @param GetDeploymentOptions $options       The optional parameters
      *
      * @return AsynchronousOperationResult
      *
@@ -1431,9 +1430,9 @@ class ServiceManagementRestProxy extends RestProxy
      * environment (staging or production), or by specifying the deployment's unique
      * name.
      *
-     * @param string               $name     The hosted service name.
-     * @param string               $roleName The role instance name.
-     * @param GetDeploymentOptions $options  The optional parameters.
+     * @param string               $name     The hosted service name
+     * @param string               $roleName The role instance name
+     * @param GetDeploymentOptions $options  The optional parameters
      *
      * @return AsynchronousOperationResult
      *
@@ -1456,9 +1455,9 @@ class ServiceManagementRestProxy extends RestProxy
      * environment (staging or production), or by specifying the deployment's unique
      * name.
      *
-     * @param string               $name     The hosted service name.
-     * @param string               $roleName The role instance name.
-     * @param GetDeploymentOptions $options  The optional parameters.
+     * @param string               $name     The hosted service name
+     * @param string               $roleName The role instance name
+     * @param GetDeploymentOptions $options  The optional parameters
      *
      * @return AsynchronousOperationResult
      *
@@ -1483,16 +1482,16 @@ class ServiceManagementRestProxy extends RestProxy
      * deployment environment (staging or production), or by specifying the
      * deployment's unique name.
      *
-     * @param string               $name    The hosted service name.
+     * @param string               $name    The hosted service name
      * @param string               $mode    Specifies whether the rollback
      *                                      should proceed automatically or not. Auto, The rollback proceeds without
      *                                      further user input. Manual, You must call the walkUpgradeDomain API to apply
-     *                                      the rollback to each upgrade domain.
+     *                                      the rollback to each upgrade domain
      * @param bool                 $force   Specifies whether the rollback
      *                                      should proceed even when it will cause local data to be lost from some role
      *                                      instances. True if the rollback should proceed; otherwise false if the
-     *                                      rollback should fail.
-     * @param GetDeploymentOptions $options The optional parameters.
+     *                                      rollback should fail
+     * @param GetDeploymentOptions $options The optional parameters
      *
      * @return AsynchronousOperationResult
      *

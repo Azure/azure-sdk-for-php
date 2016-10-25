@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -45,7 +45,7 @@ use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentConfigurationSettingChan
 use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange;
 
 /**
- * Represents the Windows Azure environment in which an instance of a role is 
+ * Represents the Windows Azure environment in which an instance of a role is
  * running.
  *
  * @category  Microsoft
@@ -62,14 +62,14 @@ class RoleEnvironment
 {
     /**
      * Specifies the environment variable that contains the path to the endpoint.
-     * 
+     *
      * @var string
      */
     const VERSION_ENDPOINT_ENVIRONMENT_NAME = 'WaRuntimeEndpoint';
 
     /**
      * Specifies the endpoint fixed path.
-     * 
+     *
      * @var string
      */
     const VERSION_ENDPOINT_FIXED_PATH = '\\\\.\\pipe\\WindowsAzureRuntime';
@@ -131,14 +131,14 @@ class RoleEnvironment
 
     /**
      * Initializes the role environment.
-     * 
+     *
      * @static
      */
     public static function init()
     {
         self::$_clientId = uniqid();
 
-        // 2038-01-19 04:14:07 
+        // 2038-01-19 04:14:07
         self::$_maxDateTime = new \DateTime(
             date(Resources::TIMESTAMP_FORMAT, Resources::INT32_MAX)
         );
@@ -148,9 +148,9 @@ class RoleEnvironment
 
     /**
      * Returns the client identifier.
-     * 
+     *
      * @static
-     * 
+     *
      * @return string
      */
     public static function getClientId()
@@ -162,7 +162,7 @@ class RoleEnvironment
      * Initializes the runtime client.
      *
      * @param bool $keepOpen Boolean value indicating if the connection
-     *                       should remain open.
+     *                       should remain open
      *
      * @throws RoleEnvironmentNotAvailableException
      * @static
@@ -206,9 +206,9 @@ class RoleEnvironment
 
     /**
      * Tracks role environment changes raising events as necessary.
-     * 
+     *
      * This method is blocking and can/should be called in a separate fork.
-     * 
+     *
      * @static
      */
     public static function trackChanges()
@@ -250,9 +250,9 @@ class RoleEnvironment
 
     /**
      * Processes a goal state change.
-     * 
-     * @param GoalState $newGoalState The new goal state.
-     * 
+     *
+     * @param GoalState $newGoalState The new goal state
+     *
      * @static
      */
     private static function _processGoalStateChange($newGoalState)
@@ -276,10 +276,10 @@ class RoleEnvironment
 
     /**
      * Accepts the latest incarnation.
-     * 
-     * @param GoalState    $newGoalState The new goal state.
-     * @param CurrentState $last         The last state.
-     * 
+     *
+     * @param GoalState    $newGoalState The new goal state
+     * @param CurrentState $last         The last state
+     *
      * @static
      */
     private static function _acceptLatestIncarnation(GoalState $newGoalState, CurrentState $last)
@@ -302,7 +302,7 @@ class RoleEnvironment
 
     /**
      * Raises a stopping event.
-     * 
+     *
      * @static
      */
     private static function _raiseStoppingEvent()
@@ -314,9 +314,9 @@ class RoleEnvironment
 
     /**
      * Raises a changing event.
-     * 
-     * @param array $changes The changes.
-     * 
+     *
+     * @param array $changes The changes
+     *
      * @static
      */
     private static function _raiseChangingEvent(array $changes)
@@ -328,9 +328,9 @@ class RoleEnvironment
 
     /**
      * Raises a changed event.
-     * 
-     * @param array $changes The changes.
-     * 
+     *
+     * @param array $changes The changes
+     *
      * @static
      */
     private static function _raiseChangedEvent(array $changes)
@@ -409,14 +409,14 @@ class RoleEnvironment
 
     /**
      * Calculates the configuration changes.
-     * 
-     * @param RoleEnvironmentData $currentRoleEnvironment The current role 
-     *                                                    environment data.
+     *
+     * @param RoleEnvironmentData $currentRoleEnvironment The current role
+     *                                                    environment data
      * @param RoleEnvironmentData $newRoleEnvironment     The new role
-     *                                                    environment data.
-     * 
+     *                                                    environment data
+     *
      * @static
-     * 
+     *
      * @return RoleEnvironmentConfigurationSettingChange[]
      */
     private static function _calculateConfigurationChanges(
@@ -455,13 +455,13 @@ class RoleEnvironment
     /**
      * Calculates which instances / instance endpoints were added from the current
      * role to the new role.
-     * 
-     * @param Role  $role                 The current role.
-     * @param array $currentRoleInstances The current role instances.
-     * @param array $newRoleInstances     The new role instances.
-     * 
+     *
+     * @param Role  $role                 The current role
+     * @param array $currentRoleInstances The current role instances
+     * @param array $newRoleInstances     The new role instances
+     *
      * @static
-     * 
+     *
      * @return array
      */
     private static function _calculateNewRoleInstanceChanges(
@@ -509,13 +509,13 @@ class RoleEnvironment
     /**
      * Calculates which endpoints / endpoint were added from the current
      * role to the new role.
-     * 
-     * @param Role  $role                     The current role.
-     * @param array $currentInstanceEndpoints The current instance endpoints.
-     * @param array $newInstanceEndpoints     The new instance endpoints.
-     * 
+     *
+     * @param Role  $role                     The current role
+     * @param array $currentInstanceEndpoints The current instance endpoints
+     * @param array $newInstanceEndpoints     The new instance endpoints
+     *
      * @static
-     * 
+     *
      * @return array
      */
     private static function _calculateNewRoleInstanceEndpointsChanges(
@@ -552,13 +552,13 @@ class RoleEnvironment
     /**
      * Calculates which instances / instance endpoints were removed from the current
      * role to the new role.
-     * 
-     * @param Role  $role                 The current role.
-     * @param array $currentRoleInstances The current role instances.
-     * @param array $newRoleInstances     The new role instances.
-     * 
+     *
+     * @param Role  $role                 The current role
+     * @param array $currentRoleInstances The current role instances
+     * @param array $newRoleInstances     The new role instances
+     *
      * @static
-     * 
+     *
      * @return array
      */
     private static function _calculateCurrentRoleInstanceChanges(
@@ -607,13 +607,13 @@ class RoleEnvironment
     /**
      * Calculates which endpoints / endpoint were removed from the current
      * role to the new role.
-     * 
-     * @param Role  $role                     The current changed role set.
-     * @param array $currentInstanceEndpoints The current instance endpoints.
-     * @param array $newInstanceEndpoints     The new instance endpoints.
-     * 
+     *
+     * @param Role  $role                     The current changed role set
+     * @param array $currentInstanceEndpoints The current instance endpoints
+     * @param array $newInstanceEndpoints     The new instance endpoints
+     *
      * @static
-     * 
+     *
      * @return array
      */
     private static function _calculateCurrentRoleInstanceEndpointsChanges(
@@ -639,9 +639,9 @@ class RoleEnvironment
     /**
      * Returns a RoleInstance object that represents the role instance
      * in which this code is currently executing.
-     * 
+     *
      * @static
-     * 
+     *
      * @return RoleInstance
      */
     public static function getCurrentRoleInstance()
@@ -654,9 +654,9 @@ class RoleEnvironment
     /**
      * Returns the deployment ID that uniquely identifies the deployment in
      * which this role instance is running.
-     * 
+     *
      * @static
-     * 
+     *
      * @return string
      */
     public static function getDeploymentId()
@@ -669,9 +669,9 @@ class RoleEnvironment
     /**
      * Indicates whether the role instance is running in the Windows Azure
      * environment.
-     * 
+     *
      * @static
-     * 
+     *
      * @return bool
      */
     public static function isAvailable()
@@ -689,9 +689,9 @@ class RoleEnvironment
 
     /**
      * Indicates whether the role instance is running in the development fabric.
-     * 
+     *
      * @static
-     * 
+     *
      * @return bool
      */
     public static function isEmulated()
@@ -703,11 +703,11 @@ class RoleEnvironment
 
     /**
      * Returns the set of Role objects defined for your service.
-     * 
+     *
      * Roles are defined in the service definition file.
-     * 
+     *
      * @static
-     * 
+     *
      * @return Role[]
      */
     public static function getRoles()
@@ -719,13 +719,13 @@ class RoleEnvironment
 
     /**
      * Retrieves the settings in the service configuration file.
-     * 
-     * A role's configuration settings are defined in the service definition 
+     *
+     * A role's configuration settings are defined in the service definition
      * file. Values for configuration settings are set in the service
      * configuration file.
-     * 
+     *
      * @static
-     * 
+     *
      * @return array
      */
     public static function getConfigurationSettings()
@@ -737,9 +737,9 @@ class RoleEnvironment
 
     /**
      * Retrieves the set of named local storage resources.
-     * 
+     *
      * @static
-     * 
+     *
      * @return LocalResource[]
      */
     public static function getLocalResources()
@@ -751,12 +751,12 @@ class RoleEnvironment
 
     /**
      * Requests that the current role instance be stopped and restarted.
-     * Before the role instance is recycled, the Windows Azure load balancer 
+     * Before the role instance is recycled, the Windows Azure load balancer
      * takes the role instance out of rotation.
-     * 
-     * This ensures that no new requests are routed to the instance while it 
+     *
+     * This ensures that no new requests are routed to the instance while it
      * is restarting.
-     * 
+     *
      * @static
      */
     public static function requestRecycle()
@@ -775,15 +775,15 @@ class RoleEnvironment
 
     /**
      * Sets the status of the role instance.
-     * 
-     * An instance may indicate that it is in one of two states: Ready or Busy. 
-     * If an instance's state is Ready, it is prepared to receive requests from 
+     *
+     * An instance may indicate that it is in one of two states: Ready or Busy.
+     * If an instance's state is Ready, it is prepared to receive requests from
      * the load balancer. If the instance's state is Busy, it will not receive
      * requests from the load balancer.
-     * 
-     * @param int       $status he new role status.
-     * @param \DateTime $expirationUtc The expiration UTC time.
-     * 
+     *
+     * @param int       $status        he new role status
+     * @param \DateTime $expirationUtc The expiration UTC time
+     *
      * @static
      */
     public static function setStatus($status, \DateTime $expirationUtc)
@@ -815,10 +815,10 @@ class RoleEnvironment
 
     /**
      * Clears the status of the role instance.
-     * 
-     * An instance may indicate that it has completed communicating status by 
+     *
+     * An instance may indicate that it has completed communicating status by
      * calling this method.
-     * 
+     *
      * @static
      */
     public static function clearStatus()
@@ -835,10 +835,10 @@ class RoleEnvironment
     /**
      * Adds an event listener for the changed event, which occurs
      * after a configuration change has been applied to a role instance.
-     * 
+     *
      * To listen for events, one should call trackChanges.
-     * 
-     * @param callable $listener The changed listener.
+     *
+     * @param callable $listener The changed listener
      */
     public static function addRoleEnvironmentChangedListener($listener)
     {
@@ -847,11 +847,11 @@ class RoleEnvironment
 
     /**
      * Removes an event listener for the Changed event.
-     * 
-     * @param callable $listener The changed listener.
-     * 
+     *
+     * @param callable $listener The changed listener
+     *
      * @static
-     * 
+     *
      * @return bool
      */
     public static function removeRoleEnvironmentChangedListener($listener)
@@ -871,25 +871,25 @@ class RoleEnvironment
      * Adds an event listener for the Changing event, which occurs
      * before a change to the service configuration is applied to the running
      * instances of the role.
-     * 
-     * Service configuration changes are applied on-the-fly to running role 
-     * instances. Configuration changes include changes to the service 
-     * configuration changes and changes to the number of instances in the 
+     *
+     * Service configuration changes are applied on-the-fly to running role
+     * instances. Configuration changes include changes to the service
+     * configuration changes and changes to the number of instances in the
      * service.
-     * 
-     * This event occurs after the new configuration file has been submitted to 
-     * Windows Azure but before the changes have been applied to each running 
-     * role instance. This event can be cancelled for a given instance to 
+     *
+     * This event occurs after the new configuration file has been submitted to
+     * Windows Azure but before the changes have been applied to each running
+     * role instance. This event can be cancelled for a given instance to
      * prevent the configuration change.
-     * 
-     * Note that cancelling this event causes the instance to be automatically 
-     * recycled. When the instance is recycled, the configuration change is 
+     *
+     * Note that cancelling this event causes the instance to be automatically
+     * recycled. When the instance is recycled, the configuration change is
      * applied when it restarts.
-     * 
+     *
      * To listen for events, one should call trackChanges.
-     * 
-     * @param callable $listener The changing listener.
-     * 
+     *
+     * @param callable $listener The changing listener
+     *
      * @static
      */
     public static function addRoleEnvironmentChangingListener($listener)
@@ -897,13 +897,13 @@ class RoleEnvironment
         self::$_changingListeners[] = $listener;
     }
 
-    /** 
+    /**
      * Removes an event listener for the Changing event.
-     * 
-     * @param callable $listener The changing listener.
-     * 
+     *
+     * @param callable $listener The changing listener
+     *
      * @static
-     * 
+     *
      * @return bool
      */
     public static function removeRoleEnvironmentChangingListener($listener)
@@ -923,9 +923,9 @@ class RoleEnvironment
      * Adds an event listener for the Stopping event, which occurs
      * when the role is stopping.
      * To listen for events, one should call trackChanges.
-     * 
-     * @param callable $listener The stopping listener.
-     * 
+     *
+     * @param callable $listener The stopping listener
+     *
      * @static
      */
     public static function addRoleEnvironmentStoppingListener($listener)
@@ -935,11 +935,11 @@ class RoleEnvironment
 
     /**
      * Removes an event listener for the Stopping event.
-     * 
-     * @param callable $listener The stopping listener.
-     * 
+     *
+     * @param callable $listener The stopping listener
+     *
      * @static
-     * 
+     *
      * @return bool
      */
     public static function removeRoleEnvironmentStoppingListener($listener)

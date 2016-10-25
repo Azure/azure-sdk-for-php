@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -47,11 +47,11 @@ class GetDeploymentResult
 
     /**
      * Creates a new GetDeploymentResult from parsed response body.
-     * 
-     * @param array $parsed The parsed response body in array representation.
-     * 
+     *
+     * @param array $parsed The parsed response body in array representation
+     *
      * @return GetDeploymentResult
-     * 
+     *
      * @static
      */
     public static function create($parsed)
@@ -65,7 +65,7 @@ class GetDeploymentResult
 
     /**
      * Gets the deployment instance.
-     * 
+     *
      * @return Deployment
      */
     public function getDeployment()
@@ -75,8 +75,8 @@ class GetDeploymentResult
 
     /**
      * Sets the deployment.
-     * 
-     * @param Deployment $deployment The deployment instance.
+     *
+     * @param Deployment $deployment The deployment instance
      */
     public function setDeployment($deployment)
     {

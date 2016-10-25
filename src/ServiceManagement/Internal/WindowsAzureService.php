@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -55,8 +55,8 @@ class WindowsAzureService extends Service
 
     /**
      * Constructs new storage service object.
-     * 
-     * @param array $sources The list of sources that has the row XML.
+     *
+     * @param array $sources The list of sources that has the row XML
      */
     public function __construct($sources = [])
     {
@@ -91,7 +91,7 @@ class WindowsAzureService extends Service
 
     /**
      * Gets the affinityGroup name.
-     * 
+     *
      * @return string
      */
     public function getAffinityGroup()
@@ -101,8 +101,8 @@ class WindowsAzureService extends Service
 
     /**
      * Sets the affinityGroup name.
-     * 
-     * @param string $affinityGroup The affinityGroup name.
+     *
+     * @param string $affinityGroup The affinityGroup name
      */
     public function setAffinityGroup($affinityGroup)
     {
@@ -111,7 +111,7 @@ class WindowsAzureService extends Service
 
     /**
      * Gets the url name.
-     * 
+     *
      * @return string
      */
     public function getUrl()
@@ -121,8 +121,8 @@ class WindowsAzureService extends Service
 
     /**
      * Sets the url name.
-     * 
-     * @param string $url The url name.
+     *
+     * @param string $url The url name
      */
     public function setUrl($url)
     {
@@ -131,7 +131,7 @@ class WindowsAzureService extends Service
 
     /**
      * Converts the current object into ordered array representation.
-     * 
+     *
      * @return array
      */
     protected function toArray()

@@ -88,5 +88,4 @@ class ContentKeyTypes
      * @var int
      */
     const FAIRPLAY_PFXPASSWORD = 8;
-
 }

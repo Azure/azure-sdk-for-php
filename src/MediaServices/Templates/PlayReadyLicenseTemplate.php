@@ -138,7 +138,7 @@ class PlayReadyLicenseTemplate
      * Configures the starting DateTime that the license is valid.  Attempts to use the license before this date and time will
      * result in an error on the client.
      *
-     * @return \DateTime BeginDate 
+     * @return \DateTime BeginDate
      */
     public function getBeginDate()
     {
@@ -149,7 +149,7 @@ class PlayReadyLicenseTemplate
      * Configures the starting DateTime that the license is valid.  Attempts to use the license before this date and time will
      * result in an error on the client.
      *
-     * @param \DateTime $value BeginDate 
+     * @param \DateTime $value BeginDate
      */
     public function setBeginDate($value)
     {
@@ -171,7 +171,7 @@ class PlayReadyLicenseTemplate
      * Configures the DateTime value when the the license expires.  Attempts to use the license after this date and time will
      * result in an error on the client.
      *
-     * @param \DateTime $value ExpirationDate 
+     * @param \DateTime $value ExpirationDate
      */
     public function setExpirationDate($value)
     {
@@ -179,8 +179,8 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures starting DateTime value when the license is valid.  Attempts to use the license before this date and time 
-     * will result in an error on the client.  The DateTime value is calculated as DateTime.UtcNow + RelativeBeginDate when 
+     * Configures starting DateTime value when the license is valid.  Attempts to use the license before this date and time
+     * will result in an error on the client.  The DateTime value is calculated as DateTime.UtcNow + RelativeBeginDate when
      * the license is issued.
      *
      * @return \DateInterval RelativeBeginDate
@@ -191,11 +191,11 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures starting DateTime value when the license is valid.  Attempts to use the license before this date and time 
-     * will result in an error on the client.  The DateTime value is calculated as DateTime.UtcNow + RelativeBeginDate when 
+     * Configures starting DateTime value when the license is valid.  Attempts to use the license before this date and time
+     * will result in an error on the client.  The DateTime value is calculated as DateTime.UtcNow + RelativeBeginDate when
      * the license is issued.
      *
-     * @param \DateInterval $value RelativeBeginDate 
+     * @param \DateInterval $value RelativeBeginDate
      */
     public function setRelativeBeginDate($value)
     {
@@ -203,8 +203,8 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures the DateTime value when the license expires.  Attempts to use the license after this date and time will result 
-     * in an error on the client.  The DateTime value is calculated as DateTime.UtcNow + RelativeExpirationDate when the license 
+     * Configures the DateTime value when the license expires.  Attempts to use the license after this date and time will result
+     * in an error on the client.  The DateTime value is calculated as DateTime.UtcNow + RelativeExpirationDate when the license
      * is issued.
      *
      * @return \DateInterval RelativeExpirationDate
@@ -215,8 +215,8 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures the DateTime value when the license expires.  Attempts to use the license after this date and time will result 
-     * in an error on the client.  The DateTime value is calculated as DateTime.UtcNow + RelativeExpirationDate when the license 
+     * Configures the DateTime value when the license expires.  Attempts to use the license after this date and time will result
+     * in an error on the client.  The DateTime value is calculated as DateTime.UtcNow + RelativeExpirationDate when the license
      * is issued.
      *
      * @param \DateInterval $value RelativeExpirationDate
@@ -299,7 +299,7 @@ class PlayReadyLicenseTemplate
      * object to allow the template to be applied to multiple content keys and have the content header tell the license
      * server the exact key to embed in the license issued to the client.
      *
-     * @return PlayReadyContentKey PlayReadyContentKey 
+     * @return PlayReadyContentKey PlayReadyContentKey
      */
     public function getContentKey()
     {
@@ -311,7 +311,7 @@ class PlayReadyLicenseTemplate
      * object to allow the template to be applied to multiple content keys and have the content header tell the license
      * server the exact key to embed in the license issued to the client.
      *
-     * @param PlayReadyContentKey $value PlayReadyContentKey 
+     * @param PlayReadyContentKey $value PlayReadyContentKey
      */
     public function setContentKey($value)
     {

@@ -129,7 +129,7 @@ class TokenRestrictionTemplateSerializer
 
         if ($tokenRestriction->getAlternateVerificationKeys()) {
             self::serializeAlternateVerificationKeys($writer, $tokenRestriction->getAlternateVerificationKeys());
-        } 
+        }
 
         $writer->writeElement('Audience', $tokenRestriction->getAudience());
         $writer->writeElement('Issuer', $tokenRestriction->getIssuer());
@@ -163,6 +163,7 @@ class TokenRestrictionTemplateSerializer
      * @param $contentKeyUUID
      * @param null $tokenExpiration
      * @param null $notBefore
+     *
      * @return mixed|string
      */
     public static function generateTestToken(
@@ -196,6 +197,7 @@ class TokenRestrictionTemplateSerializer
      * @param $verificationKey
      * @param $contentKeyUUID
      * @param $tokenExpiration
+     *
      * @return mixed|string
      */
     private static function generateTestTokenSWT(
@@ -227,16 +229,16 @@ class TokenRestrictionTemplateSerializer
 
         // Lowercase URL encode
         $token = preg_replace_callback('/%[0-9A-F]{2}/', function (array $matches) {
-                        return strtolower($matches[0]);
-                    }, $token);
+            return strtolower($matches[0]);
+        }, $token);
 
         // sign the token
         $signature = urlencode(base64_encode(hash_hmac('sha256', $token, $verificationKey->getKeyValue(), true)));
 
         // Lowercase URL encode
         $signature = preg_replace_callback('/%[0-9A-F]{2}/', function (array $matches) {
-                        return strtolower($matches[0]);
-                    }, $signature);
+            return strtolower($matches[0]);
+        }, $signature);
         $token .= "&HMACSHA256={$signature}";
 
         return $token;
@@ -248,6 +250,7 @@ class TokenRestrictionTemplateSerializer
      * @param $contentKeyUUID
      * @param $tokenExpiration
      * @param $notBefore
+     *
      * @return string
      */
     private static function generateTestTokenJWT(

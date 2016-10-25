@@ -174,7 +174,7 @@ class Asset
     /**
      * Create asset.
      *
-     * @param int $options Asset encryption options.
+     * @param int $options Asset encryption options
      */
     public function __construct($options)
     {

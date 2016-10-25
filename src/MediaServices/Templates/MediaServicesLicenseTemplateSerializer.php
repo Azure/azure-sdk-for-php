@@ -25,7 +25,6 @@
 
 namespace WindowsAzure\MediaServices\Templates;
 
-
 use WindowsAzure\Common\Internal\Resources;
 
 /**
@@ -102,6 +101,7 @@ class MediaServicesLicenseTemplateSerializer
 
     /**
      * @param PlayReadyLicenseResponseTemplate $template
+     *
      * @return bool
      */
     private static function ValidateLicenseResponseTemplate(PlayReadyLicenseResponseTemplate $template)
@@ -126,7 +126,7 @@ class MediaServicesLicenseTemplateSerializer
                 throw new \RuntimeException(ErrorMessages::PLAY_READY_PLAY_RIGHT_REQUIRED);
             }
 
-            //  Per the PlayReady Compliance rules (section 3.8 - Output Control for Unknown Outputs), passing content to 
+            //  Per the PlayReady Compliance rules (section 3.8 - Output Control for Unknown Outputs), passing content to
             //  unknown output is prohibited if the DigitalVideoOnlyContentRestriction is enabled.
             if ($license->getPlayRight()->getDigitalVideoOnlyContentRestriction()) {
                 if (($license->getPlayRight()->getAllowPassingVideoContentToUnknownOutput() == UnknownOutputPassingOption::ALLOWED) ||
@@ -150,7 +150,7 @@ class MediaServicesLicenseTemplateSerializer
             if ($license->getLicenseType() == PlayReadyLicenseType::NON_PERSISTENT) {
                 //  The PlayReady Rights Manager SDK will return an error if you try to specify a license
                 //  that is non-persistent and has a first play expiration set.  The event log message related
-                //  to the error will say "LicenseGenerationFailure: FirstPlayExpiration can not be set on Non 
+                //  to the error will say "LicenseGenerationFailure: FirstPlayExpiration can not be set on Non
                 //  Persistent license PlayRight."
                 if ($license->getPlayRight()->getFirstPlayExpiration() != null) {
                     throw new \RuntimeException(ErrorMessages::FIRST_PLAY_EXPIRATION_CANNOT_BE_SET_ON_NON_PERSISTENT_LICENSE);
@@ -164,7 +164,7 @@ class MediaServicesLicenseTemplateSerializer
 
                 //  The PlayReady Rights Manager SDK will return an error if you try to specify a license
                 //  that is non-persistent and has a GracePeriod set.  The event log message related
-                //  to the error will say "LicenseGenerationFailure: BeginDate or ExpirationDate should not be set 
+                //  to the error will say "LicenseGenerationFailure: BeginDate or ExpirationDate should not be set
                 //  on Non Persistent licenses"
                 if ($license->getBeginDate() != null) {
                     throw new \RuntimeException(ErrorMessages::BEGIN_DATE_CANNOT_BE_SET_ON_NON_PERSISTENT_LICENSE);
@@ -172,7 +172,7 @@ class MediaServicesLicenseTemplateSerializer
 
                 //  The PlayReady Rights Manager SDK will return an error if you try to specify a license
                 //  that is non-persistent and has a GracePeriod set.  The event log message related
-                //  to the error will say "LicenseGenerationFailure: BeginDate or ExpirationDate should not be set 
+                //  to the error will say "LicenseGenerationFailure: BeginDate or ExpirationDate should not be set
                 //  on Non Persistent licenses"
                 if ($license->getExpirationDate() != null) {
                     throw new \RuntimeException(ErrorMessages::EXPIRATION_CANNOT_BE_SET_ON_NON_PERSISTENT_LICENSE);
@@ -432,7 +432,7 @@ class MediaServicesLicenseTemplateSerializer
         if (isset($xmlElement->ExplicitAnalogTelevisionOutputRestriction) && isset($xmlElement->ExplicitAnalogTelevisionOutputRestriction->ConfigurationData)) {
             $bestEffort = false;
             if (isset($xmlElement->ExplicitAnalogTelevisionOutputRestriction->BestEffort)) {
-                $bestEffort = $xmlElement->ExplicitAnalogTelevisionOutputRestriction->BestEffort  == 'true';
+                $bestEffort = $xmlElement->ExplicitAnalogTelevisionOutputRestriction->BestEffort == 'true';
             }
             $configurationData = intval((string) $xmlElement->ExplicitAnalogTelevisionOutputRestriction->ConfigurationData);
             $result->setExplicitAnalogTelevisionOutputRestriction(new ExplicitAnalogTelevisionRestriction($configurationData, $bestEffort));
@@ -499,6 +499,7 @@ class MediaServicesLicenseTemplateSerializer
 
     /**
      * @param \DateInterval $delta
+     *
      * @return string
      */
     private static function getSpecString(\DateInterval $delta)

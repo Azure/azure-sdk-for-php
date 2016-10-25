@@ -102,9 +102,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * Sends HTTP request with the specified parameters.
      *
      * @param string $method         HTTP method used in the request
-     * @param array  $headers        HTTP headers.
-     * @param array  $queryParams    URL query parameters.
-     * @param array  $postParameters The HTTP POST parameters.
+     * @param array  $headers        HTTP headers
+     * @param array  $queryParams    URL query parameters
+     * @param array  $postParameters The HTTP POST parameters
      * @param string $path           URL path
      * @param int    $statusCode     Expected status code received in the response
      * @param string $body           Request body
@@ -275,7 +275,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
-     * Send live operation (Channel, Program or Streaming Endpoint)
+     * Send live operation (Channel, Program or Streaming Endpoint).
      *
      * @param object $entity     Entity data
      * @param string $path       REST path
@@ -298,7 +298,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $body = Resources::EMPTY_STRING;
         if (!is_string($entity) && !is_null($entity)) {
             $body = $this->wrapAtomEntry($entity, null);
-        } else if(is_string($entity)) {
+        } elseif (is_string($entity)) {
             $body = $entity;
         }
 
@@ -312,7 +312,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $body
         );
 
-        $responseBody = (string)$response->getBody();
+        $responseBody = (string) $response->getBody();
         if (!empty($responseBody)) {
             $entry = new Entry();
             $entry->parseXml($responseBody);
@@ -780,7 +780,6 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * Delete access policy.
      *
      * @param AccessPolicy|string $accessPolicy Access policy data or access policy Id
-     *
      */
     public function deleteAccessPolicy($accessPolicy)
     {
@@ -864,7 +863,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
-     * Get asset locators
+     * Get asset locators.
      *
      * @param Asset|string $asset Asset or AssetId
      *
@@ -1009,9 +1008,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Upload asset file to storage.
      *
-     * @param Locator            $locator Write locator for file upload
-     * @param string             $name    Uploading filename
-     * @param string | resource  $file    Uploading content or file handle
+     * @param Locator           $locator Write locator for file upload
+     * @param string            $name    Uploading filename
+     * @param string | resource $file    Uploading content or file handle
      */
     public function uploadAssetFile(Locator $locator, $name, $file)
     {
@@ -2581,6 +2580,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * Get asset delivery policy.
      *
      * @param ContentKeyAuthorizationPolicy|string $assetDeliveryPolicy
+     *
      * @return AssetDeliveryPolicy
      */
     public function getAssetDeliveryPolicy($assetDeliveryPolicy)
@@ -2638,7 +2638,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get AssetDeliveryPolicy list linked to an Asset.
      *
-     * @param Asset|string $asset Asset data or Asset Id to retrieve the linked delivery policies.
+     * @param Asset|string $asset Asset data or Asset Id to retrieve the linked delivery policies
      *
      * @return AssetDeliveryPolicy[]
      */
@@ -2750,10 +2750,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Link AssetDeliveryPolicy to Asset.
      *
-     * @param ContentKey|string $contentKey Asset to link a AssetDeliveryPolicy or
+     * @param ContentKey|string          $contentKey             Asset to link a AssetDeliveryPolicy or
      *                                                           Asset id
      * @param AssetDeliveryPolicy|string $contentKeyDeliveryType DeliveryPolicy to link or
      *                                                           DeliveryPolicy id
+     *
      * @return string
      */
     public function getKeyDeliveryUrl($contentKey, $contentKeyDeliveryType)
@@ -2819,7 +2820,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get the Operation entity.
      *
-     * @param Operation|string $operation The operation id.
+     * @param Operation|string $operation The operation id
      *
      * @return Operation
      */
@@ -2829,20 +2830,21 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $operation,
             'WindowsAzure\MediaServices\Models\Operation'
         );
+
         return Operation::createFromOptions($this->_getEntity("Operations('{$operationId}')"));
     }
 
     /**
      * Utility method to await for an Operation finishes.
      *
-     * @param Operation $operation The Operation object to await for.
+     * @param Operation $operation The Operation object to await for
      * @param int       $interval
      *
      * @return Operation
      */
     public function awaitOperation(Operation $operation, $interval = 5)
     {
-        while($operation->getState() == OperationState::InProgress) {
+        while ($operation->getState() == OperationState::InProgress) {
             $operation = $this->getOperation($operation);
             if ($operation->getState() == OperationState::InProgress) {
                 sleep($interval);
@@ -2853,11 +2855,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
-     * Send Create operation
+     * Send Create operation.
      *
      * @param Channel $channel Channel data
      *
-     * @return Operation The operation to track the channel create.
+     * @return Operation The operation to track the channel create
      */
     public function sendCreateChannelOperation(Channel $channel)
     {
@@ -2865,16 +2867,16 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     }
 
     /**
-     * Send Update operation
+     * Send Update operation.
      *
      * @param Channel $channel Channel data
      *
-     * @return Operation The operation to track the channel update.
+     * @return Operation The operation to track the channel update
      */
     public function sendUpdateChannelOperation(Channel $channel)
     {
         $channelId = $channel->getId();
-        Validate::notNull($channelId, "channelId");
+        Validate::notNull($channelId, 'channelId');
 
         return $this->_sendOperation(
             $channel,
@@ -2950,6 +2952,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $headers = [
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
         ];
+
         return $this->_sendOperation(
             null,
             "Channels('{$channelId}')/Start",
@@ -2974,6 +2977,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $headers = [
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
         ];
+
         return $this->_sendOperation(
             null,
             "Channels('{$channelId}')/Stop",
@@ -2986,6 +2990,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * Reset a channel.
      *
      * @param Channel|string $channel Channel data or channel Id
+     *
      * @return Operation
      */
     public function sendResetChannelOperation($channel)
@@ -2997,6 +3002,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $headers = [
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
         ];
+
         return $this->_sendOperation(
             null,
             "Channels('{$channelId}')/Reset",
@@ -3008,9 +3014,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * StartAdvertisement on a running channel.
      *
-     * @param Channel|string $channel Channel data or channel Id
-     * @param string         $duration The duration, in seconds, of the commercial break.
-     * @param string         $cueId Unique ID for the commercial break
+     * @param Channel|string $channel   Channel data or channel Id
+     * @param string         $duration  The duration, in seconds, of the commercial break
+     * @param string         $cueId     Unique ID for the commercial break
      * @param string         $showSlate Indicates to the live encoder within the Channel that it needs to switch to the default slate image during the commercial break
      *
      * @return Operation
@@ -3027,8 +3033,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $body = json_encode([
             'duration' => $duration,
             'cueId' => $cueId,
-            'showSlate' => ($showSlate) ? 'true' : 'false'
+            'showSlate' => ($showSlate) ? 'true' : 'false',
         ]);
+
         return $this->_sendOperation(
             $body,
             "Channels('{$channelId}')/StartAdvertisement",
@@ -3041,8 +3048,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * EndAdvertisement on a running channel.
      *
      * @param Channel|string $channel Channel data or channel Id
+     * @param mixed          $cueId
      *
-     * @param mixed $cueId
      * @return Operation
      */
     public function sendEndAdvertisementChannelOperation($channel, $cueId)
@@ -3055,8 +3062,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
         ];
         $body = json_encode([
-            'cueId' => $cueId
+            'cueId' => $cueId,
         ]);
+
         return $this->_sendOperation(
             $body,
             "Channels('{$channelId}')/EndAdvertisement",
@@ -3068,9 +3076,10 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * ShowSlate on a running channel.
      *
-     * @param Channel|string $channel Channel data or channel Id
-     * @param string $duration The duration, in seconds, of the commercial break.
+     * @param Channel|string $channel  Channel data or channel Id
+     * @param string         $duration The duration, in seconds, of the commercial break
      * @param $assetId
+     *
      * @return Operation
      */
     public function sendShowSlateChannelOperation($channel, $duration, $assetId)
@@ -3084,8 +3093,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         ];
         $body = json_encode([
             'duration' => $duration,
-            'assetId' => $assetId
+            'assetId' => $assetId,
         ]);
+
         return $this->_sendOperation(
             $body,
             "Channels('{$channelId}')/ShowSlate",
@@ -3110,6 +3120,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $headers = [
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
         ];
+
         return $this->_sendOperation(
             null,
             "Channels('{$channelId}')/HideSlate",
@@ -3177,7 +3188,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($op->getState() == OperationState::Succeeded);
+        return $op->getState() == OperationState::Succeeded;
     }
 
     /**
@@ -3195,7 +3206,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($op->getState() == OperationState::Succeeded);
+        return $op->getState() == OperationState::Succeeded;
     }
 
     /**
@@ -3213,7 +3224,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($op->getState() == OperationState::Succeeded);
+        return $op->getState() == OperationState::Succeeded;
     }
 
     /**
@@ -3231,17 +3242,17 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($op->getState() == OperationState::Succeeded);
+        return $op->getState() == OperationState::Succeeded;
     }
 
     /**
      * Start Advertisement on Channel.
      *
      * @param Channel|string $channel Channel data or channel Id
-     *
      * @param $duration
      * @param $cueId
      * @param $showSlate
+     *
      * @return bool true if succeeded
      */
     public function startAdvertisementChannel($channel, $duration, $cueId, $showSlate)
@@ -3252,7 +3263,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($op->getState() == OperationState::Succeeded);
+        return $op->getState() == OperationState::Succeeded;
     }
 
     /**
@@ -3260,6 +3271,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @param Channel|string $channel Channel data or channel Id
      * @param $cueId
+     *
      * @return bool true if succeeded
      */
     public function endAdvertisementChannel($channel, $cueId)
@@ -3270,16 +3282,16 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($op->getState() == OperationState::Succeeded);
+        return $op->getState() == OperationState::Succeeded;
     }
 
     /**
      * Show Slate on Channel.
      *
      * @param Channel|string $channel Channel data or channel Id
-     *
      * @param $duration
      * @param $assetId
+     *
      * @return bool true if succeeded
      */
     public function showSlateChannel($channel, $duration, $assetId)
@@ -3290,7 +3302,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($op->getState() == OperationState::Succeeded);
+        return $op->getState() == OperationState::Succeeded;
     }
 
     /**
@@ -3308,7 +3320,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($op->getState() == OperationState::Succeeded);
+        return $op->getState() == OperationState::Succeeded;
     }
 
     /**
@@ -3345,6 +3357,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * returns the Programs associated to that Channel.
      *
      * @param null $channel
+     *
      * @return Program[]
      */
     public function getProgramList($channel = null)
@@ -3381,6 +3394,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $headers = [
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
         ];
+
         return $this->_sendOperation(
             null,
             "Programs('{$programId}')/Start",
@@ -3405,6 +3419,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $headers = [
             Resources::CONTENT_TYPE => Resources::JSON_CONTENT_TYPE,
         ];
+
         return $this->_sendOperation(
             null,
             "Programs('{$programId}')/Stop",
@@ -3428,7 +3443,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($op->getState() == OperationState::Succeeded);
+        return $op->getState() == OperationState::Succeeded;
     }
 
     /**
@@ -3446,20 +3461,20 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($op->getState() == OperationState::Succeeded);
+        return $op->getState() == OperationState::Succeeded;
     }
 
     /**
-     * Send Update Program operation
+     * Send Update Program operation.
      *
      * @param Program $program Programs data
      *
-     * @return Operation The operation to track the program update.
+     * @return Operation The operation to track the program update
      */
     public function sendUpdateProgramOperation(Program $program)
     {
         $programId = $program->getId();
-        Validate::notNull($programId, "programId");
+        Validate::notNull($programId, 'programId');
 
         return $this->_sendOperation(
             $program,
@@ -3526,6 +3541,6 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
         $op = $this->awaitOperation($op);
 
         // true if succeeded
-        return ($op->getState() == OperationState::Succeeded);
+        return $op->getState() == OperationState::Succeeded;
     }
 }

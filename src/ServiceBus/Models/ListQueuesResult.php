@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -27,9 +27,8 @@ namespace WindowsAzure\ServiceBus\Models;
 
 use WindowsAzure\Common\Internal\Atom\Feed;
 
-
 /**
- * The results of list queues request. 
+ * The results of list queues request.
  *
  * @category  Microsoft
  *
@@ -44,16 +43,16 @@ use WindowsAzure\Common\Internal\Atom\Feed;
 class ListQueuesResult extends Feed
 {
     /**
-     * The information of the queue. 
+     * The information of the queue.
      *
      * @var QueueInfo[]
      */
     private $_queueInfos;
 
-    /** 
+    /**
      * Populates the properties with the response from the list queues request.
-     * 
-     * @param string $response The body of the response of the list queues request. 
+     *
+     * @param string $response The body of the response of the list queues request
      */
     public function parseXml($response)
     {
@@ -68,8 +67,8 @@ class ListQueuesResult extends Feed
     }
 
     /**
-     * Gets the queue information. 
-     * 
+     * Gets the queue information.
+     *
      * @return QueueInfo[]
      */
     public function getQueueInfos()
@@ -78,9 +77,9 @@ class ListQueuesResult extends Feed
     }
 
     /**
-     * Sets the information of the queue. 
-     * 
-     * @param QueueInfo[] $queueInfos The information of the queue.
+     * Sets the information of the queue.
+     *
+     * @param QueueInfo[] $queueInfos The information of the queue
      */
     public function setQueueInfos(array $queueInfos)
     {

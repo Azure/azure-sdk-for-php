@@ -57,7 +57,7 @@ class WidevineMessageSerializer
      *
      * @param string $json
      *
-     * @return WidevineMessage the message.
+     * @return WidevineMessage the message
      */
     public static function deserialize($json)
     {

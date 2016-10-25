@@ -159,7 +159,7 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Configures the Serial Copy Management System (SCMS) in the license.  SCMS is a form of audio output protection. 
+     * Configures the Serial Copy Management System (SCMS) in the license.  SCMS is a form of audio output protection.
      * For further details see the PlayReady Compliance Rules.
      *
      * @return ScmsRestriction ScmsRestriction
@@ -170,7 +170,7 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Configures the Serial Copy Management System (SCMS) in the license.  SCMS is a form of audio output protection. 
+     * Configures the Serial Copy Management System (SCMS) in the license.  SCMS is a form of audio output protection.
      * For further details see the PlayReady Compliance Rules.
      *
      * @param ScmsRestriction $value ScmsRestriction
@@ -204,7 +204,7 @@ class PlayReadyPlayRight
 
     /**
      * Configures the Explicit Analog Television Output Restriction in the license.  This is a form of video output protection.
-     * For further details see the PlayReady Compliance Rules. 
+     * For further details see the PlayReady Compliance Rules.
      *
      * @return ExplicitAnalogTelevisionRestriction ExplicitAnalogTelevisionRestriction
      */
@@ -215,7 +215,7 @@ class PlayReadyPlayRight
 
     /**
      * Configures the Explicit Analog Television Output Restriction in the license.  This is a form of video output protection.
-     * For further details see the PlayReady Compliance Rules.  
+     * For further details see the PlayReady Compliance Rules.
      *
      * @param ExplicitAnalogTelevisionRestriction $value ExplicitAnalogTelevisionRestriction
      */
@@ -226,7 +226,7 @@ class PlayReadyPlayRight
 
     /**
      * Enables the Digital Video Only Content Restriction in the license.  This is a form of video output protection
-     * which requires the player to output the video portion of the content over Digital Video Outputs.  For further 
+     * which requires the player to output the video portion of the content over Digital Video Outputs.  For further
      * details see the PlayReady Compliance Rules.
      *
      * @return bool DigitalVideoOnlyContentRestriction
@@ -238,7 +238,7 @@ class PlayReadyPlayRight
 
     /**
      * Enables the Digital Video Only Content Restriction in the license.  This is a form of video output protection
-     * which requires the player to output the video portion of the content over Digital Video Outputs.  For further 
+     * which requires the player to output the video portion of the content over Digital Video Outputs.  For further
      * details see the PlayReady Compliance Rules.
      *
      * @param bool $value DigitalVideoOnlyContentRestriction
@@ -251,7 +251,7 @@ class PlayReadyPlayRight
     /**
      * Enables the Image Constraint For Analog Component Video Restriction in the license.  This is a form of video output protection
      * which requires the player constrain the resolution of the video portion of the content when outputting it over an Analog
-     * Component Video Output.  For further details see the PlayReady Compliance Rules. 
+     * Component Video Output.  For further details see the PlayReady Compliance Rules.
      *
      * @return bool ImageConstraintForAnalogComponentVideoRestriction
      */
@@ -263,7 +263,7 @@ class PlayReadyPlayRight
     /**
      * Enables the Image Constraint For Analog Component Video Restriction in the license.  This is a form of video output protection
      * which requires the player constrain the resolution of the video portion of the content when outputting it over an Analog
-     * Component Video Output.  For further details see the PlayReady Compliance Rules. 
+     * Component Video Output.  For further details see the PlayReady Compliance Rules.
      *
      * @param bool $value ImageConstraintForAnalogComponentVideoRestriction
      */
@@ -297,10 +297,10 @@ class PlayReadyPlayRight
     }
 
     /**
-     * This property configures Unknown output handling settings of the license.  These settings tell the PlayReady DRM runtime 
+     * This property configures Unknown output handling settings of the license.  These settings tell the PlayReady DRM runtime
      * how it should handle unknown video outputs.  For further details see the PlayReady Compliance Rules.
      *
-     * @return string AllowPassingVideoContentToUnknownOutput 
+     * @return string AllowPassingVideoContentToUnknownOutput
      */
     public function getAllowPassingVideoContentToUnknownOutput()
     {
@@ -308,10 +308,10 @@ class PlayReadyPlayRight
     }
 
     /**
-     * This property configures Unknown output handling settings of the license.  These settings tell the PlayReady DRM runtime 
+     * This property configures Unknown output handling settings of the license.  These settings tell the PlayReady DRM runtime
      * how it should handle unknown video outputs.  For further details see the PlayReady Compliance Rules.
      *
-     * @param string $value AllowPassingVideoContentToUnknownOutput 
+     * @param string $value AllowPassingVideoContentToUnknownOutput
      */
     public function setAllowPassingVideoContentToUnknownOutput($value)
     {
@@ -321,7 +321,7 @@ class PlayReadyPlayRight
     /**
      * Specifies the output protection level for uncompressed digital video.  Valid values are null, 100, 250, 270, and 300.
      * When the property is set to null, the output protection level is not set in the license.  For further details on the meaning
-     * of the specific value see the PlayReady Compliance Rules. 
+     * of the specific value see the PlayReady Compliance Rules.
      *
      * @return int UncompressedDigitalVideoOpl
      */
@@ -375,7 +375,7 @@ class PlayReadyPlayRight
     /**
      * Specifies the output protection level for analog video.  Valid values are null, 100, 150, and 200.
      * When the property is set to null, the output protection level is not set in the license.  For further details on the meaning
-     * of the specific value see the PlayReady Compliance Rules. 
+     * of the specific value see the PlayReady Compliance Rules.
      *
      * @return int AnalogVideoOpl
      */
@@ -387,7 +387,7 @@ class PlayReadyPlayRight
     /**
      * Specifies the output protection level for analog video.  Valid values are null, 100, 150, and 200.
      * When the property is set to null, the output protection level is not set in the license.  For further details on the meaning
-     * of the specific value see the PlayReady Compliance Rules. 
+     * of the specific value see the PlayReady Compliance Rules.
      *
      * @param int $value AnalogVideoOpl
      */
@@ -429,7 +429,7 @@ class PlayReadyPlayRight
     /**
      * Specifies the output protection level for uncompressed digital audio.  Valid values are 100, 150, 200, 250, and 300.
      * When the property is set to null, the output protection level is not set in the license.  For further details on the meaning
-     * of the specific value see the PlayReady Compliance Rules. 
+     * of the specific value see the PlayReady Compliance Rules.
      *
      * @return int UncompressedDigitalAudioOpl
      */

@@ -10,7 +10,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -41,28 +41,28 @@ class ListOptions
 {
     /**
      * The skip query parameter for list API.
-     * 
+     *
      * @var int
      */
     private $_skip;
 
-    /** 
+    /**
      * The top query parameter for list API.
-     * 
+     *
      * @var int
      */
     private $_top;
 
     /**
-     * Creates a list option instance with default parameters. 
+     * Creates a list option instance with default parameters.
      */
     public function __construct()
     {
     }
 
     /**
-     * Gets the skip parameter. 
-     * 
+     * Gets the skip parameter.
+     *
      * @return int
      */
     public function getSkip()
@@ -73,7 +73,7 @@ class ListOptions
     /**
      * Sets the skip parameter.
      *
-     * @param int $skip value.
+     * @param int $skip value
      */
     public function setSkip($skip)
     {
@@ -81,8 +81,8 @@ class ListOptions
     }
 
     /**
-     * Gets the top parameter. 
-     * 
+     * Gets the top parameter.
+     *
      * @return int
      */
     public function getTop()
@@ -92,8 +92,8 @@ class ListOptions
 
     /**
      * Sets the top parameter.
-     * 
-     * @param int $top value.
+     *
+     * @param int $top value
      */
     public function setTop($top)
     {

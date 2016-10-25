@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -50,9 +50,9 @@ class ListLocationsResult
 
     /**
      * Creates new ListLocationsResult from parsed response body.
-     * 
-     * @param array $parsed The parsed response body.
-     * 
+     *
+     * @param array $parsed The parsed response body
+     *
      * @return ListLocationsResult
      */
     public static function create($parsed)
@@ -80,7 +80,7 @@ class ListLocationsResult
 
     /**
      * Gets locations.
-     * 
+     *
      * @return Location[]
      */
     public function getLocations()
@@ -90,8 +90,8 @@ class ListLocationsResult
 
     /**
      * Sets locations.
-     * 
-     * @param Location[] $locations The locations.
+     *
+     * @param Location[] $locations The locations
      */
     public function setLocations(array $locations)
     {

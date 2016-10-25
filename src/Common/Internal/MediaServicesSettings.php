@@ -133,10 +133,10 @@ class MediaServicesSettings extends ServiceSettings
     /**
      * Creates new media services settings instance.
      *
-     * @param string $accountName      The user provided account name.
+     * @param string $accountName      The user provided account name
      * @param string $accessKey        The user provided primary access key
-     * @param string $endpointUri      The service management endpoint uri.
-     * @param string $oauthEndpointUri The OAuth service endpoint uri.
+     * @param string $endpointUri      The service management endpoint uri
+     * @param string $oauthEndpointUri The OAuth service endpoint uri
      */
     public function __construct(
         $accountName,
@@ -170,7 +170,7 @@ class MediaServicesSettings extends ServiceSettings
     /**
      * Creates a MediaServicesSettings object from the given connection string.
      *
-     * @param string $connectionString The media services settings connection string.
+     * @param string $connectionString The media services settings connection string
      *
      * @return MediaServicesSettings
      */

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -26,7 +26,7 @@
 namespace WindowsAzure\Common\Internal;
 
 /**
- * Represents the settings used to sign and access a request against the service 
+ * Represents the settings used to sign and access a request against the service
  * management. For more information about service management connection strings check
  * this page: http://msdn.microsoft.com/en-us/library/windowsazure/gg466228.aspx.
  *
@@ -59,21 +59,21 @@ class ServiceManagementSettings extends ServiceSettings
 
     /**
      * Validator for the ServiceManagementEndpoint setting. Must be a valid Uri.
-     * 
+     *
      * @var array
      */
     private static $_endpointSetting;
 
     /**
      * Validator for the CertificatePath setting. It has to be provided.
-     * 
+     *
      * @var array
      */
     private static $_certificatePathSetting;
 
     /**
      * Validator for the SubscriptionId setting. It has to be provided.
-     * 
+     *
      * @var array
      */
     private static $_subscriptionIdSetting;
@@ -85,7 +85,7 @@ class ServiceManagementSettings extends ServiceSettings
 
     /**
      * Holds the expected setting keys.
-     * 
+     *
      * @var array
      */
     protected static $validSettingKeys = [];
@@ -115,10 +115,10 @@ class ServiceManagementSettings extends ServiceSettings
 
     /**
      * Creates new service management settings instance.
-     * 
-     * @param string $subscriptionId  The user provided subscription id.
-     * @param string $endpointUri     The service management endpoint uri.
-     * @param string $certificatePath The management certificate path.
+     *
+     * @param string $subscriptionId  The user provided subscription id
+     * @param string $endpointUri     The service management endpoint uri
+     * @param string $certificatePath The management certificate path
      */
     public function __construct($subscriptionId, $endpointUri, $certificatePath)
     {
@@ -129,9 +129,9 @@ class ServiceManagementSettings extends ServiceSettings
 
     /**
      * Creates a ServiceManagementSettings object from the given connection string.
-     * 
-     * @param string $connectionString The storage settings connection string.
-     * 
+     *
+     * @param string $connectionString The storage settings connection string
+     *
      * @return ServiceManagementSettings
      */
     public static function createFromConnectionString($connectionString)
@@ -175,7 +175,7 @@ class ServiceManagementSettings extends ServiceSettings
 
     /**
      * Gets service management endpoint uri.
-     * 
+     *
      * @return string
      */
     public function getEndpointUri()
@@ -185,7 +185,7 @@ class ServiceManagementSettings extends ServiceSettings
 
     /**
      * Gets the subscription id.
-     * 
+     *
      * @return string
      */
     public function getSubscriptionId()
@@ -195,7 +195,7 @@ class ServiceManagementSettings extends ServiceSettings
 
     /**
      * Gets the certificate path.
-     * 
+     *
      * @return string
      */
     public function getCertificatePath()

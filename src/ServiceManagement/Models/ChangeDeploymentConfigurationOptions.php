@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -45,17 +45,17 @@ class ChangeDeploymentConfigurationOptions extends GetDeploymentOptions
 {
     /**
      * Indicates whether to treat package validation warnings as errors.
-     * 
+     *
      * @var bool
      */
     private $_treatWarningsAsErrors;
 
     /**
-     * If not specified the default value is Auto. If set to Manual, 
-     * WalkUpgradeDomain must be called to apply the update. If set to Auto, the 
-     * Windows Azure platform will automatically apply the update To each upgrade 
+     * If not specified the default value is Auto. If set to Manual,
+     * WalkUpgradeDomain must be called to apply the update. If set to Auto, the
+     * Windows Azure platform will automatically apply the update To each upgrade
      * domain for the service.
-     * 
+     *
      * @var string
      */
     private $_mode;
@@ -70,10 +70,10 @@ class ChangeDeploymentConfigurationOptions extends GetDeploymentOptions
 
     /**
      * Gets treat warnings as errors flag.
-     * 
-     * If not specified the default value is false. If set to true, the update will 
+     *
+     * If not specified the default value is false. If set to true, the update will
      * be blocked when warnings are encountered.
-     * 
+     *
      * @return bool
      */
     public function getTreatWarningsAsErrors()
@@ -83,9 +83,9 @@ class ChangeDeploymentConfigurationOptions extends GetDeploymentOptions
 
     /**
      * Sets treat warnings as errors flag.
-     * 
-     * @param bool $treatWarningsAsErrors Indicates whether to treat package 
-     *                                    validation warnings as errors.
+     *
+     * @param bool $treatWarningsAsErrors Indicates whether to treat package
+     *                                    validation warnings as errors
      */
     public function setTreatWarningsAsErrors($treatWarningsAsErrors)
     {
@@ -96,12 +96,12 @@ class ChangeDeploymentConfigurationOptions extends GetDeploymentOptions
 
     /**
      * Gets change mode.
-     * 
-     * If not specified the default value is Auto. If set to Manual, 
-     * WalkUpgradeDomain must be called to apply the update. If set to Auto, the 
-     * Windows Azure platform will automatically apply the update To each upgrade 
+     *
+     * If not specified the default value is Auto. If set to Manual,
+     * WalkUpgradeDomain must be called to apply the update. If set to Auto, the
+     * Windows Azure platform will automatically apply the update To each upgrade
      * domain for the service.
-     * 
+     *
      * @return string
      */
     public function getMode()
@@ -111,8 +111,8 @@ class ChangeDeploymentConfigurationOptions extends GetDeploymentOptions
 
     /**
      * Sets mode.
-     * 
-     * @param string $mode The change mode.
+     *
+     * @param string $mode The change mode
      */
     public function setMode($mode)
     {

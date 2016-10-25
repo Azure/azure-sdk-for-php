@@ -97,8 +97,8 @@ class HttpClient implements IHttpClient
     /**
      * Initializes new HttpClient object.
      *
-     * @param string $certificatePath          The certificate path.
-     * @param string $certificateAuthorityPath The path of the certificate authority.
+     * @param string $certificatePath          The certificate path
+     * @param string $certificateAuthorityPath The path of the certificate authority
      */
     public function __construct(
         $certificatePath = Resources::EMPTY_STRING,
@@ -133,7 +133,7 @@ class HttpClient implements IHttpClient
      * Makes deep copy from the current object.
      */
     public function __clone()
-    {        
+    {
         if (!is_null($this->_requestUrl)) {
             $this->_requestUrl = clone $this->_requestUrl;
         }
@@ -142,7 +142,7 @@ class HttpClient implements IHttpClient
     /**
      * Sets the request url.
      *
-     * @param IUrl $url request url.
+     * @param IUrl $url request url
      */
     public function setUrl(IUrl $url)
     {
@@ -161,10 +161,10 @@ class HttpClient implements IHttpClient
     }
 
     /**
-     * Sets request's HTTP method. You can use constants like 
+     * Sets request's HTTP method. You can use constants like
      * Resources::HTTP_GET or strings like 'GET'.
      *
-     * @param string $method request's HTTP method.
+     * @param string $method request's HTTP method
      */
     public function setMethod($method)
     {
@@ -196,8 +196,8 @@ class HttpClient implements IHttpClient
      * Sets a an existing request header to value or creates a new one if the $header
      * doesn't exist.
      *
-     * @param string $header  header name.
-     * @param string $value   header value.
+     * @param string $header  header name
+     * @param string $value   header value
      * @param bool   $replace whether to replace previous header with the same name
      *                        or append to its value (comma separated)
      */
@@ -210,7 +210,7 @@ class HttpClient implements IHttpClient
         if (!isset($this->_headers[$header]) || $replace) {
             $this->_headers[$header] = $value;
         } else {
-            $this->_headers[$header] .= ', ' . $value;
+            $this->_headers[$header] .= ', '.$value;
         }
     }
 
@@ -229,7 +229,7 @@ class HttpClient implements IHttpClient
     /**
      * Sets HTTP POST parameters.
      *
-     * @param array $postParameters The HTTP POST parameters.
+     * @param array $postParameters The HTTP POST parameters
      */
     public function setPostParameters(array $postParameters)
     {
@@ -243,12 +243,12 @@ class HttpClient implements IHttpClient
      * sends HTTP request to the wire and process the response in the HTTP pipeline.
      *
      * @param array $filters HTTP filters which will be applied to the request before
-     *                       send and then applied to the response.
-     * @param IUrl  $url     Request url.
+     *                       send and then applied to the response
+     * @param IUrl  $url     Request url
      *
      * @throws ServiceException
      *
-     * @return ResponseInterface The response.
+     * @return ResponseInterface The response
      */
     public function sendAndGetHttpResponse(array $filters, IUrl $url = null)
     {
@@ -264,8 +264,7 @@ class HttpClient implements IHttpClient
 
         // send request and recieve a response
         $response = null;
-        try
-        {
+        try {
             $options = $this->_requestOptions;
 
             if (!empty($this->_postParams)) {
@@ -275,7 +274,7 @@ class HttpClient implements IHttpClient
             // Since PHP 5.6, a default value for certificate validation is 'true'.
             // We set it back to false if an enviroment variable 'HTTPS_PROXY' is
             // defined.
-            if (getenv('HTTPS_PROXY') ) {
+            if (getenv('HTTPS_PROXY')) {
                 $options[RequestOptions::VERIFY] = false;
             }
 
@@ -286,9 +285,7 @@ class HttpClient implements IHttpClient
                 $this->_body);
 
             $response = $client->send($request, $options);
-        }
-        catch (ClientException $e)
-        {
+        } catch (ClientException $e) {
             $response = $e->getResponse();
         }
 
@@ -312,8 +309,8 @@ class HttpClient implements IHttpClient
      * sends HTTP request to the wire and process the response in the HTTP pipeline.
      *
      * @param array $filters HTTP filters which will be applied to the request before
-     *                       send and then applied to the response.
-     * @param IUrl  $url     Request url.
+     *                       send and then applied to the response
+     * @param IUrl  $url     Request url
      *
      * @throws ServiceException
      *
@@ -321,13 +318,13 @@ class HttpClient implements IHttpClient
      */
     public function send(array $filters, IUrl $url = null)
     {
-        return (string)($this->sendAndGetHttpResponse($filters, $url)->getBody());
+        return (string) ($this->sendAndGetHttpResponse($filters, $url)->getBody());
     }
 
     /**
      * Sets successful status code.
      *
-     * @param array|string $statusCodes successful status code.
+     * @param array|string $statusCodes successful status code
      */
     public function setExpectedStatusCode($statusCodes)
     {
@@ -351,8 +348,8 @@ class HttpClient implements IHttpClient
     /**
      * Sets configuration parameter.
      *
-     * @param string $name  The configuration parameter name.
-     * @param mixed  $value The configuration parameter value.
+     * @param string $name  The configuration parameter name
+     * @param mixed  $value The configuration parameter value
      */
     public function setConfig($name, $value = null)
     {
@@ -362,7 +359,7 @@ class HttpClient implements IHttpClient
     /**
      * Gets value for configuration parameter.
      *
-     * @param string $name configuration parameter name.
+     * @param string $name configuration parameter name
      *
      * @return string
      */
@@ -374,7 +371,7 @@ class HttpClient implements IHttpClient
     /**
      * Sets the request body.
      *
-     * @param string $body body to use.
+     * @param string $body body to use
      */
     public function setBody($body)
     {
@@ -395,10 +392,10 @@ class HttpClient implements IHttpClient
     /**
      * Throws ServiceException if the received status code is not expected.
      *
-     * @param string $actual   The received status code.
-     * @param string $reason   The reason phrase.
-     * @param string $message  The detailed message (if any).
-     * @param array  $expected The expected status codes.
+     * @param string $actual   The received status code
+     * @param string $reason   The reason phrase
+     * @param string $message  The detailed message (if any)
+     * @param array  $expected The expected status codes
      *
      * @static
      *
@@ -414,7 +411,7 @@ class HttpClient implements IHttpClient
     /**
      * @param ResponseInterface $response
      *
-     * @return array an array of headers.
+     * @return array an array of headers
      */
     public static function getResponseHeaders(ResponseInterface $response)
     {
@@ -422,7 +419,7 @@ class HttpClient implements IHttpClient
 
         $responseHeaders = [];
 
-        foreach($responseHeaderArray as $key => $value) {
+        foreach ($responseHeaderArray as $key => $value) {
             $responseHeaders[strtolower($key)] = implode(',', $value);
         }
 

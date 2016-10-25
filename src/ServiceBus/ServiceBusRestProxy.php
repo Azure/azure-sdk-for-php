@@ -48,11 +48,8 @@ use WindowsAzure\ServiceBus\Models\ListRulesResult;
 use WindowsAzure\ServiceBus\Models\ListOptions;
 use WindowsAzure\ServiceBus\Models\QueueInfo;
 use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
-
 use WindowsAzure\ServiceBus\Models\RuleInfo;
-
 use WindowsAzure\ServiceBus\Models\SubscriptionInfo;
-
 use WindowsAzure\ServiceBus\Models\TopicInfo;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
@@ -76,9 +73,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     /**
      * Creates a ServiceBusRestProxy with specified parameter.
      *
-     * @param IHttpClient $channel        The channel to communicate.
-     * @param string      $uri            The URI of Service Bus service.
-     * @param ISerializer $dataSerializer The serializer of the Service Bus.
+     * @param IHttpClient $channel        The channel to communicate
+     * @param string      $uri            The URI of Service Bus service
+     * @param ISerializer $dataSerializer The serializer of the Service Bus
      */
     public function __construct(IHttpClient $channel, $uri, ISerializer $dataSerializer)
     {
@@ -100,8 +97,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * Topic Subscriptions:
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780786
      *
-     * @param string          $path            The path to send message.
-     * @param BrokeredMessage $brokeredMessage The brokered message.
+     * @param string          $path            The path to send message
+     * @param BrokeredMessage $brokeredMessage The brokered message
      */
     public function sendMessage($path, BrokeredMessage $brokeredMessage)
     {
@@ -143,8 +140,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780775
      *
-     * @param string          $queueName       The name of the queue.
-     * @param BrokeredMessage $brokeredMessage The brokered message.
+     * @param string          $queueName       The name of the queue
+     * @param BrokeredMessage $brokeredMessage The brokered message
      */
     public function sendQueueMessage($queueName, BrokeredMessage $brokeredMessage)
     {
@@ -159,9 +156,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780756
      *
      * @param string                     $queueName             The name of the
-     *                                                          queue.
+     *                                                          queue
      * @param ReceiveMessageOptions|null $receiveMessageOptions The options to
-     *                                                          receive the message.
+     *                                                          receive the message
      *
      * @return BrokeredMessage
      */
@@ -192,10 +189,10 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780770
      *
      * @param string                $path                  The path of the
-     *                                                     message.
+     *                                                     message
      * @param ReceiveMessageOptions $receiveMessageOptions The options to
-     *                                                     receive the message.
-     * 
+     *                                                     receive the message
+     *
      * @return BrokeredMessage
      */
     public function receiveMessage($path, ReceiveMessageOptions $receiveMessageOptions = null)
@@ -273,9 +270,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * Sends a brokered message to a specified topic.
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780786
-     * 
-     * @param string          $topicName       The name of the topic. 
-     * @param BrokeredMessage $brokeredMessage The brokered message.
+     *
+     * @param string          $topicName       The name of the topic
+     * @param BrokeredMessage $brokeredMessage The brokered message
      */
     public function sendTopicMessage($topicName, BrokeredMessage $brokeredMessage)
     {
@@ -290,11 +287,11 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780770
      *
      * @param string                     $topicName             The name of the
-     *                                                          topic.
+     *                                                          topic
      * @param string                     $subscriptionName      The name of the
-     *                                                          subscription.
+     *                                                          subscription
      * @param ReceiveMessageOptions|null $receiveMessageOptions The options to
-     *                                                          receive the subscription message.
+     *                                                          receive the subscription message
      *
      * @return BrokeredMessage
      */
@@ -326,8 +323,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * Topic Subscriptions:
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780737
-     * 
-     * @param BrokeredMessage $brokeredMessage The brokered message. 
+     *
+     * @param BrokeredMessage $brokeredMessage The brokered message
      */
     public function unlockMessage(BrokeredMessage $brokeredMessage)
     {
@@ -361,7 +358,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * Topic Subscriptions:
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780768
      *
-     * @param BrokeredMessage $brokeredMessage The brokered message.
+     * @param BrokeredMessage $brokeredMessage The brokered message
      */
     public function deleteMessage(BrokeredMessage $brokeredMessage)
     {
@@ -395,7 +392,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780716
      *
-     * @param QueueInfo $queueInfo The information of the queue.
+     * @param QueueInfo $queueInfo The information of the queue
      *
      * @return QueueInfo
      */
@@ -428,7 +425,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780747
      *
-     * @param string $queuePath The path of the queue.
+     * @param string $queuePath The path of the queue
      */
     public function deleteQueue($queuePath)
     {
@@ -448,7 +445,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780764
      *
-     * @param string $queuePath The path of the queue.
+     * @param string $queuePath The path of the queue
      *
      * @return QueueInfo
      */
@@ -469,9 +466,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * Lists a queue.
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780759
-     * 
+     *
      * @param ListQueuesOptions|null $listQueuesOptions The options to list the
-     *                                                  queues.
+     *                                                  queues
      *
      * @return ListQueuesResult
      */
@@ -491,8 +488,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
     /**
      * The base method of all the list operations.
      *
-     * @param ListOptions $listOptions The options for list operation.
-     * @param string      $path        The path of the list operation.
+     * @param ListOptions $listOptions The options for list operation
+     * @param string      $path        The path of the list operation
      *
      * @return ResponseInterface
      */
@@ -525,7 +522,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780728
      *
-     * @param TopicInfo $topicInfo The information of the topic.
+     * @param TopicInfo $topicInfo The information of the topic
      *
      * @return TopicInfo
      */
@@ -573,7 +570,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780721
      *
-     * @param string $topicPath The path of the topic.
+     * @param string $topicPath The path of the topic
      */
     public function deleteTopic($topicPath)
     {
@@ -590,7 +587,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780769
      *
-     * @param string $topicPath The path of the topic.
+     * @param string $topicPath The path of the topic
      *
      * @return TopicInfo
      */
@@ -613,7 +610,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780744
      *
      * @param ListTopicsOptions $listTopicsOptions The options to list
-     *                                             the topics.
+     *                                             the topics
      *
      * @return ListTopicsResult
      */
@@ -637,9 +634,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780748
      *
      * @param string           $topicPath        The path of
-     *                                           the topic.
+     *                                           the topic
      * @param SubscriptionInfo $subscriptionInfo The information
-     *                                           of the subscription.
+     *                                           of the subscription
      *
      * @return SubscriptionInfo
      */
@@ -691,8 +688,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780740
      *
-     * @param string $topicPath        The path of the topic.
-     * @param string $subscriptionName The name of the subscription.
+     * @param string $topicPath        The path of the topic
+     * @param string $subscriptionName The name of the subscription
      */
     public function deleteSubscription($topicPath, $subscriptionName)
     {
@@ -713,8 +710,8 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780741
      *
-     * @param string $topicPath        The path of the topic.
-     * @param string $subscriptionName The name of the subscription.
+     * @param string $topicPath        The path of the topic
+     * @param string $subscriptionName The name of the subscription
      *
      * @return SubscriptionInfo
      */
@@ -742,9 +739,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780766
      *
      * @param string                        $topicPath                The path of
-     *                                                                the topic.
+     *                                                                the topic
      * @param ListSubscriptionsOptions|null $listSubscriptionsOptions The options
-     *                                                                to list the subscription.
+     *                                                                to list the subscription
      *
      * @return ListSubscriptionsResult
      */
@@ -771,9 +768,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780774
      *
-     * @param string   $topicPath        The path of the topic.
-     * @param string   $subscriptionName The name of the subscription.
-     * @param RuleInfo $ruleInfo         The information of the rule.
+     * @param string   $topicPath        The path of the topic
+     * @param string   $subscriptionName The name of the subscription
+     * @param RuleInfo $ruleInfo         The information of the rule
      *
      * @return RuleInfo
      */
@@ -826,9 +823,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780751
      *
-     * @param string $topicPath        The path of the topic.
-     * @param string $subscriptionName The name of the subscription.
-     * @param string $ruleName         The name of the rule.
+     * @param string $topicPath        The path of the topic
+     * @param string $subscriptionName The name of the subscription
+     * @param string $ruleName         The name of the rule
      */
     public function deleteRule($topicPath, $subscriptionName, $ruleName)
     {
@@ -850,9 +847,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780772
      *
-     * @param string $topicPath        The path of the topic.
-     * @param string $subscriptionName The name of the subscription.
-     * @param string $ruleName         The name of the rule.
+     * @param string $topicPath        The path of the topic
+     * @param string $subscriptionName The name of the subscription
+     * @param string $ruleName         The name of the rule
      *
      * @return RuleInfo
      */
@@ -880,9 +877,9 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      *
      * @link http://msdn.microsoft.com/en-us/library/windowsazure/hh780732
      *
-     * @param string                $topicPath        The path of the topic.
-     * @param string                $subscriptionName The name of the subscription.
-     * @param ListRulesOptions|null $listRulesOptions The options to list the rules.
+     * @param string                $topicPath        The path of the topic
+     * @param string                $subscriptionName The name of the subscription
+     * @param ListRulesOptions|null $listRulesOptions The options to list the rules
      *
      * @return ListRulesResult
      */

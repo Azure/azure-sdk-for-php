@@ -64,7 +64,7 @@ class AtomBase
     /**
      * Sets the attributes of the ATOM class.
      *
-     * @param array $attributes The attributes of the array.
+     * @param array $attributes The attributes of the array
      */
     public function setAttributes(array $attributes)
     {
@@ -74,8 +74,8 @@ class AtomBase
     /**
      * Sets an attribute to the ATOM object instance.
      *
-     * @param string $attributeKey   The key of the attribute.
-     * @param mixed  $attributeValue The value of the attribute.
+     * @param string $attributeKey   The key of the attribute
+     * @param mixed  $attributeValue The value of the attribute
      */
     public function setAttribute($attributeKey, $attributeValue)
     {
@@ -85,7 +85,7 @@ class AtomBase
     /**
      * Gets an attribute with a specified attribute key.
      *
-     * @param string $attributeKey The key of the attribute.
+     * @param string $attributeKey The key of the attribute
      *
      * @return mixed
      */
@@ -97,9 +97,9 @@ class AtomBase
     /**
      * Processes author node.
      *
-     * @param \XMLWriter $xmlWriter   The XML writer.
-     * @param array      $itemArray   An array of item to write.
-     * @param string     $elementName The name of the element.
+     * @param \XMLWriter $xmlWriter   The XML writer
+     * @param array      $itemArray   An array of item to write
+     * @param string     $elementName The name of the element
      */
     protected function writeArrayItem(\XMLWriter $xmlWriter, array $itemArray, $elementName)
     {
@@ -119,7 +119,7 @@ class AtomBase
     /**
      * Processes author node.
      *
-     * @param SimpleXMLElement[] $xmlArray An array of simple xml elements.
+     * @param SimpleXMLElement[] $xmlArray An array of simple xml elements
      *
      * @return Person[]
      */
@@ -147,7 +147,7 @@ class AtomBase
     /**
      * Processes entry node.
      *
-     * @param array $xmlArray An array of simple xml elements.
+     * @param array $xmlArray An array of simple xml elements
      *
      * @return array
      */
@@ -174,7 +174,7 @@ class AtomBase
     /**
      * Processes category node.
      *
-     * @param SimpleXMLElement[] $xmlArray An array of simple xml elements.
+     * @param SimpleXMLElement[] $xmlArray An array of simple xml elements
      *
      * @return Category[]
      */
@@ -202,7 +202,7 @@ class AtomBase
     /**
      * Processes contributor node.
      *
-     * @param array $xmlArray An array of simple xml elements.
+     * @param array $xmlArray An array of simple xml elements
      *
      * @return Person[]
      */
@@ -234,7 +234,7 @@ class AtomBase
     /**
      * Processes link node.
      *
-     * @param array $xmlArray An array of simple xml elements.
+     * @param array $xmlArray An array of simple xml elements
      *
      * @return array
      */
@@ -262,9 +262,9 @@ class AtomBase
     /**
      * Writes an optional attribute for ATOM.
      *
-     * @param \XMLWriter $xmlWriter      The XML writer.
-     * @param string     $attributeName  The name of the attribute.
-     * @param mixed      $attributeValue The value of the attribute.
+     * @param \XMLWriter $xmlWriter      The XML writer
+     * @param string     $attributeName  The name of the attribute
+     * @param mixed      $attributeValue The value of the attribute
      */
     protected function writeOptionalAttribute(
         \XMLWriter $xmlWriter,
@@ -285,11 +285,11 @@ class AtomBase
     /**
      * Writes the optional elements namespaces.
      *
-     * @param \XMLWriter $xmlWriter    The XML writer.
-     * @param string     $prefix       The prefix.
-     * @param string     $elementName  The element name.
-     * @param string     $namespace    The namespace name.
-     * @param string     $elementValue The element value.
+     * @param \XMLWriter $xmlWriter    The XML writer
+     * @param string     $prefix       The prefix
+     * @param string     $elementName  The element name
+     * @param string     $namespace    The namespace name
+     * @param string     $elementValue The element value
      */
     protected function writeOptionalElementNS(
         \XMLWriter $xmlWriter,

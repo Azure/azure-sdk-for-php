@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -44,23 +44,23 @@ class RuntimeVersionManager
 {
     /**
      * The protocol client.
-     * 
+     *
      * @var RuntimeVersionProtocolClient
      */
     private $_protocolClient;
 
     /**
      * The supported versions list.
-     * 
+     *
      * @var array
      */
     private $_supportedVersionList;
 
     /**
      * Constructor.
-     * 
-     * @param RuntimeVersionProtocolClient $protocolClient The runtime version 
-     *                                                     protocol client.
+     *
+     * @param RuntimeVersionProtocolClient $protocolClient The runtime version
+     *                                                     protocol client
      */
     public function __construct($protocolClient)
     {
@@ -75,8 +75,8 @@ class RuntimeVersionManager
 
     /**
      * Gets the runtime client.
-     * 
-     * @param string $versionEndpoint The endpoint's version.
+     *
+     * @param string $versionEndpoint The endpoint's version
      *
      * @return Protocol1RuntimeClient
      */

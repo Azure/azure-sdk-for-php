@@ -78,11 +78,11 @@ class OAuthScheme implements IAuthScheme
     /**
      * Constructor.
      *
-     * @param string         $accountName  account name.
-     * @param string         $accountKey   account secondary key.
-     * @param string         $grantType    grant type for OAuth request.
-     * @param string         $scope        scope for OAuth request.
-     * @param OAuthRestProxy $oauthService account primary or secondary key.
+     * @param string         $accountName  account name
+     * @param string         $accountKey   account secondary key
+     * @param string         $grantType    grant type for OAuth request
+     * @param string         $scope        scope for OAuth request
+     * @param OAuthRestProxy $oauthService account primary or secondary key
      */
     public function __construct(
         $accountName,
@@ -107,10 +107,10 @@ class OAuthScheme implements IAuthScheme
     /**
      * Returns authorization header to be included in the request.
      *
-     * @param array  $headers     request headers.
-     * @param string $url         request url.
-     * @param array  $queryParams query variables.
-     * @param string $httpMethod  request http method.
+     * @param array  $headers     request headers
+     * @param string $url         request url
+     * @param array  $queryParams query variables
+     * @param string $httpMethod  request http method
      *
      * @see Specifying the Authorization Header section at
      *      http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx

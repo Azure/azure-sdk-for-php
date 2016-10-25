@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -94,7 +94,7 @@ class StorageService extends WindowsAzureService
 
     /**
      * Converts the current object into ordered array representation.
-     * 
+     *
      * @return array
      */
     protected function toArray()
@@ -115,7 +115,7 @@ class StorageService extends WindowsAzureService
 
     /**
      * Gets the status.
-     * 
+     *
      * @return string
      */
     public function getStatus()
@@ -125,8 +125,8 @@ class StorageService extends WindowsAzureService
 
     /**
      * Sets the status.
-     * 
-     * @param string $status The status.
+     *
+     * @param string $status The status
      */
     public function setStatus($status)
     {
@@ -135,7 +135,7 @@ class StorageService extends WindowsAzureService
 
     /**
      * Gets storage service blob endpoint uri.
-     * 
+     *
      * @return string
      */
     public function getBlobEndpointUri()
@@ -145,7 +145,7 @@ class StorageService extends WindowsAzureService
 
     /**
      * Gets storage service queue endpoint uri.
-     * 
+     *
      * @return string
      */
     public function getQueueEndpointUri()
@@ -155,7 +155,7 @@ class StorageService extends WindowsAzureService
 
     /**
      * Gets storage service table endpoint uri.
-     * 
+     *
      * @return string
      */
     public function getTableEndpointUri()
@@ -165,8 +165,8 @@ class StorageService extends WindowsAzureService
 
     /**
      * Gets storage service blob endpoint uri.
-     * 
-     * @param string $blobEndpointUri The endpoint URI.
+     *
+     * @param string $blobEndpointUri The endpoint URI
      */
     public function setBlobEndpointUri($blobEndpointUri)
     {
@@ -175,8 +175,8 @@ class StorageService extends WindowsAzureService
 
     /**
      * Gets storage service queue endpoint uri.
-     * 
-     * @param string $queueEndpointUri The endpoint URI.
+     *
+     * @param string $queueEndpointUri The endpoint URI
      */
     public function setQueueEndpointUri($queueEndpointUri)
     {
@@ -185,8 +185,8 @@ class StorageService extends WindowsAzureService
 
     /**
      * Gets storage service table endpoint uri.
-     * 
-     * @param string $tableEndpointUri The endpoint URI.
+     *
+     * @param string $tableEndpointUri The endpoint URI
      */
     public function setTableEndpointUri($tableEndpointUri)
     {

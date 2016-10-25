@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -26,7 +26,7 @@
 namespace WindowsAzure\Common\Internal;
 
 /**
- * Represents the settings used to sign and access a request against the service 
+ * Represents the settings used to sign and access a request against the service
  * bus.
  *
  * @category  Microsoft
@@ -68,28 +68,28 @@ class ServiceBusSettings extends ServiceSettings
 
     /**
      * Validator for the SharedSecretValue setting. It has to be provided.
-     * 
+     *
      * @var array
      */
     private static $_wrapPasswordSetting;
 
     /**
      * Validator for the SharedSecretIssuer setting. It has to be provided.
-     * 
+     *
      * @var array
      */
     private static $_wrapNameSetting;
 
     /**
      * Validator for the Endpoint setting. Must be a valid Uri.
-     * 
+     *
      * @var array
      */
     private static $_serviceBusEndpointSetting;
 
     /**
      * Validator for the StsEndpoint setting. Must be a valid Uri.
-     * 
+     *
      * @var array
      */
     private static $_wrapEndpointUriSetting;
@@ -101,7 +101,7 @@ class ServiceBusSettings extends ServiceSettings
 
     /**
      * Holds the expected setting keys.
-     * 
+     *
      * @var array
      */
     protected static $validSettingKeys = [];
@@ -138,11 +138,11 @@ class ServiceBusSettings extends ServiceSettings
     /**
      * Creates new Service Bus settings instance.
      *
-     * @param string $serviceBusEndpoint The Service Bus endpoint uri.
-     * @param string $namespace The service namespace.
+     * @param string $serviceBusEndpoint The Service Bus endpoint uri
+     * @param string $namespace          The service namespace
      * @param $wrapEndpointUri
-     * @param string $wrapName The wrap name.
-     * @param string $wrapPassword The wrap password.
+     * @param string $wrapName     The wrap name
+     * @param string $wrapPassword The wrap password
      */
     public function __construct(
         $serviceBusEndpoint,
@@ -160,9 +160,9 @@ class ServiceBusSettings extends ServiceSettings
 
     /**
      * Creates a ServiceBusSettings object from the given connection string.
-     * 
-     * @param string $connectionString The storage settings connection string.
-     * 
+     *
+     * @param string $connectionString The storage settings connection string
+     *
      * @return ServiceBusSettings
      */
     public static function createFromConnectionString($connectionString)
@@ -216,7 +216,7 @@ class ServiceBusSettings extends ServiceSettings
 
     /**
      * Gets the Service Bus endpoint URI.
-     * 
+     *
      * @return string
      */
     public function getServiceBusEndpointUri()
@@ -226,7 +226,7 @@ class ServiceBusSettings extends ServiceSettings
 
     /**
      * Gets the wrap endpoint URI.
-     * 
+     *
      * @return string
      */
     public function getWrapEndpointUri()
@@ -236,7 +236,7 @@ class ServiceBusSettings extends ServiceSettings
 
     /**
      * Gets the wrap name.
-     * 
+     *
      * @return string
      */
     public function getWrapName()
@@ -246,7 +246,7 @@ class ServiceBusSettings extends ServiceSettings
 
     /**
      * Gets the wrap password.
-     * 
+     *
      * @return string
      */
     public function getWrapPassword()
@@ -256,7 +256,7 @@ class ServiceBusSettings extends ServiceSettings
 
     /**
      * Gets the namespace name.
-     * 
+     *
      * @return string
      */
     public function getNamespace()

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -49,7 +49,7 @@ class CreateAffinityGroupOptions
 
     /**
      * Gets the description.
-     * 
+     *
      * @return string
      */
     public function getDescription()
@@ -59,8 +59,8 @@ class CreateAffinityGroupOptions
 
     /**
      * Sets the description.
-     * 
-     * @param string $description The description.
+     *
+     * @param string $description The description
      */
     public function setDescription($description)
     {

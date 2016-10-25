@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -82,15 +82,15 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
     /**
      * Constructor.
-     * 
+     *
      * @param Protocol1RuntimeCurrentStateClient|null $currentStateClient          The
-     *                                                                             current state client.
+     *                                                                             current state client
      * @param IGoalStateDeserializer|null             $goalStateDeserializer       The
-     *                                                                             goal state deserializer.
+     *                                                                             goal state deserializer
      * @param IRoleEnvironmentDataDeserializer|null   $roleEnvironmentDeserializer The
-     *                                                                             role environment deserializer.
+     *                                                                             role environment deserializer
      * @param IInputChannel|null                      $inputChannel                The
-     *                                                                             input channel.
+     *                                                                             input channel
      */
     public function __construct(
         Protocol1RuntimeCurrentStateClient $currentStateClient = null,
@@ -110,7 +110,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
     /**
      * Gets the current goal state.
-     * 
+     *
      * @return GoalState
      */
     public function getCurrentGoalState()
@@ -122,7 +122,9 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
     /**
      * Gets the role environment data.
+     *
      * @return RoleEnvironmentData
+     *
      * @throws RoleEnvironmentNotAvailableException
      */
     public function getRoleEnvironmentData()
@@ -152,7 +154,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
     /**
      * Sets the endpoint.
      *
-     * @param string $endpoint Sets the endpoint.
+     * @param string $endpoint Sets the endpoint
      */
     public function setEndpoint($endpoint)
     {
@@ -161,7 +163,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
     /**
      * Gets the endpoint.
-     * 
+     *
      * @return string
      */
     public function getEndpoint()
@@ -172,7 +174,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
     /**
      * Sets the keep open state.
      *
-     * @param string $keepOpen Sets the keep open state.
+     * @param string $keepOpen Sets the keep open state
      */
     public function setKeepOpen($keepOpen)
     {
@@ -181,7 +183,7 @@ class Protocol1RuntimeGoalStateClient implements IRuntimeGoalStateClient
 
     /**
      * Gets the keep open state.
-     * 
+     *
      * @return bool
      */
     public function getKeepOpen()

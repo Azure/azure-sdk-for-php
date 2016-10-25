@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -42,7 +42,7 @@ class Protocol1RuntimeClientFactory
 {
     /**
      * Gets the runtime version.
-     * 
+     *
      * @return string
      */
     public function getVersion()
@@ -52,9 +52,9 @@ class Protocol1RuntimeClientFactory
 
     /**
      * Creates a new runtime client instance.
-     * 
-     * @param string $path The goal state path.
-     * 
+     *
+     * @param string $path The goal state path
+     *
      * @return Protocol1RuntimeClient
      */
     public function createRuntimeClient($path)

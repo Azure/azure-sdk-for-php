@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -44,15 +44,15 @@ class RuntimeVersionProtocolClient
 {
     /**
      * The input channel.
-     * 
+     *
      * @var IInputChannel
      */
     private $_inputChannel;
 
     /**
      * Constructor.
-     * 
-     * @param IInputChannel $inputChannel The input channel.
+     *
+     * @param IInputChannel $inputChannel The input channel
      */
     public function __construct($inputChannel)
     {
@@ -61,9 +61,9 @@ class RuntimeVersionProtocolClient
 
     /**
      * Gets the version map.
-     * 
-     * @param string $connectionPath The connection path.
-     * 
+     *
+     * @param string $connectionPath The connection path
+     *
      * @return array
      */
     public function getVersionMap($connectionPath)

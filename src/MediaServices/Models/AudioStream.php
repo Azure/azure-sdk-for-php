@@ -50,7 +50,7 @@ class AudioStream
     private $_index;
 
     /**
-     * AudioStreams Language
+     * AudioStreams Language.
      *
      * @var string
      */
@@ -119,7 +119,7 @@ class AudioStream
     /**
      * Set the AudioStreams Index.
      *
-     * @param string $value AudioStreams Index.
+     * @param string $value AudioStreams Index
      */
     public function setIndex($value)
     {
@@ -139,11 +139,10 @@ class AudioStream
     /**
      * Set the AudioStreams Language.
      *
-     * @param string $value AudioStreams Language.
+     * @param string $value AudioStreams Language
      */
     public function setLanguage($value)
     {
         $this->_language = $value;
     }
 }
-
