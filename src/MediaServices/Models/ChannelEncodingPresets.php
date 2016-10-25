@@ -41,9 +41,9 @@ namespace WindowsAzure\MediaServices\Models;
 class ChannelEncodingPresets
 {
     /**
-     * Default720p
+     * Default720p.
      *
      * @var string
      */
-    const Default720p = "Default720p";
+    const Default720p = 'Default720p';
 }

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -66,9 +66,9 @@ class GetOperationStatusResult
 
     /**
      * Creates GetOperationStatusResult object from parsed response.
-     * 
-     * @param array $parsed The parsed response.
-     * 
+     *
+     * @param array $parsed The parsed response
+     *
      * @return GetOperationStatusResult
      */
     public static function create($parsed)
@@ -104,7 +104,7 @@ class GetOperationStatusResult
 
     /**
      * Gets the id.
-     * 
+     *
      * @return string
      */
     public function getId()
@@ -114,8 +114,8 @@ class GetOperationStatusResult
 
     /**
      * Sets the id.
-     * 
-     * @param string $id The id.
+     *
+     * @param string $id The id
      */
     public function setId($id)
     {
@@ -124,7 +124,7 @@ class GetOperationStatusResult
 
     /**
      * Gets the status.
-     * 
+     *
      * @return string
      */
     public function getStatus()
@@ -134,8 +134,8 @@ class GetOperationStatusResult
 
     /**
      * Sets the status.
-     * 
-     * @param string $status The status.
+     *
+     * @param string $status The status
      */
     public function setStatus($status)
     {
@@ -144,7 +144,7 @@ class GetOperationStatusResult
 
     /**
      * Gets the httpStatusCode.
-     * 
+     *
      * @return string
      */
     public function getHttpStatusCode()
@@ -154,8 +154,8 @@ class GetOperationStatusResult
 
     /**
      * Sets the httpStatusCode.
-     * 
-     * @param string $httpStatusCode The httpStatusCode.
+     *
+     * @param string $httpStatusCode The httpStatusCode
      */
     public function setHttpStatusCode($httpStatusCode)
     {
@@ -164,7 +164,7 @@ class GetOperationStatusResult
 
     /**
      * Gets the error.
-     * 
+     *
      * @return ServiceException
      */
     public function getError()
@@ -174,8 +174,8 @@ class GetOperationStatusResult
 
     /**
      * Sets the error.
-     * 
-     * @param ServiceException $error The error.
+     *
+     * @param ServiceException $error The error
      */
     public function setError($error)
     {

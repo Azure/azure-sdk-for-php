@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -76,7 +76,7 @@ class HostedService extends WindowsAzureService
 
     /**
      * Converts the current object into ordered array representation.
-     * 
+     *
      * @return array
      */
     protected function toArray()
@@ -97,7 +97,7 @@ class HostedService extends WindowsAzureService
 
     /**
      * Gets the deployments array.
-     * 
+     *
      * @return array
      */
     public function getDeployments()
@@ -107,8 +107,8 @@ class HostedService extends WindowsAzureService
 
     /**
      * Sets the deployments array.
-     * 
-     * @param array $deployments The deployments array.
+     *
+     * @param array $deployments The deployments array
      */
     public function setDeployments(array $deployments)
     {

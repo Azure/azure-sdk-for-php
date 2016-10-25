@@ -10,7 +10,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -41,8 +41,8 @@ use WindowsAzure\ServiceBus\Internal\Filter;
  */
 class FalseFilter extends Filter
 {
-    /** 
-     * Creates a filter with default parameter. 
+    /**
+     * Creates a filter with default parameter.
      */
     public function __construct()
     {

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -42,7 +42,7 @@ class ConnectionStringSource
 {
     /**
      * The list of all sources which comes as default.
-     * 
+     *
      * @var array
      */
     private static $_defaultSources;
@@ -72,9 +72,9 @@ class ConnectionStringSource
 
     /**
      * Gets a connection string value from the system environment.
-     * 
-     * @param string $key The connection string name.
-     * 
+     *
+     * @param string $key The connection string name
+     *
      * @return string
      */
     public static function environmentSource($key)
@@ -86,7 +86,7 @@ class ConnectionStringSource
 
     /**
      * Gets list of default sources.
-     * 
+     *
      * @return array
      */
     public static function getDefaultSources()

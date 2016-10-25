@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -72,14 +72,14 @@ class RoleEnvironmentData
 
     /**
      * Constructor.
-     * 
-     * @param string          $deploymentId          The deployment identifier.
-     * @param array           $configurationSettings The configuration settings.
-     * @param LocalResource[] $localResources        The local resources.
-     * @param RoleInstance    $currentInstance       The current instance information.
-     * @param Role[]          $roles                 The instance roles.
+     *
+     * @param string          $deploymentId          The deployment identifier
+     * @param array           $configurationSettings The configuration settings
+     * @param LocalResource[] $localResources        The local resources
+     * @param RoleInstance    $currentInstance       The current instance information
+     * @param Role[]          $roles                 The instance roles
      * @param bool            $isEmulated            Boolean value indicating if
-     *                                               the instance is running in the emulator.
+     *                                               the instance is running in the emulator
      */
     public function __construct(
         $deploymentId,
@@ -99,7 +99,7 @@ class RoleEnvironmentData
 
     /**
      * Gets the configuration settings.
-     * 
+     *
      * @return array
      */
     public function getConfigurationSettings()
@@ -109,7 +109,7 @@ class RoleEnvironmentData
 
     /**
      * Gets the local resources.
-     * 
+     *
      * @return LocalResource[]
      */
     public function getLocalResources()
@@ -119,7 +119,7 @@ class RoleEnvironmentData
 
     /**
      * Gets the current instance.
-     * 
+     *
      * @return RoleInstance
      */
     public function getCurrentInstance()
@@ -129,7 +129,7 @@ class RoleEnvironmentData
 
     /**
      * Gets the roles.
-     * 
+     *
      * @return Role[]
      */
     public function getRoles()
@@ -139,7 +139,7 @@ class RoleEnvironmentData
 
     /**
      * Gets the deployment identifier.
-     * 
+     *
      * @return string
      */
     public function getDeploymentId()
@@ -149,7 +149,7 @@ class RoleEnvironmentData
 
     /**
      * Indicates if it is emulated.
-     * 
+     *
      * @return bool
      */
     public function isEmulated()

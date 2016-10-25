@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -44,14 +44,14 @@ class CreateDeploymentOptions
 {
     /**
      * Indicates whether to start the deployment immediately after it is created.
-     * 
+     *
      * @var bool
      */
     private $_startDeployment;
 
     /**
      * Indicates whether to treat package validation warnings as errors.
-     * 
+     *
      * @var bool
      */
     private $_treatWarningsAsErrors;
@@ -67,7 +67,7 @@ class CreateDeploymentOptions
 
     /**
      * Gets start deployment flag.
-     * 
+     *
      * @return bool
      */
     public function getStartDeployment()
@@ -77,9 +77,9 @@ class CreateDeploymentOptions
 
     /**
      * Sets start deployment flag.
-     * 
-     * @param bool $startDeployment Indicates whether to start the deployment 
-     *                              immediately after it is created.
+     *
+     * @param bool $startDeployment Indicates whether to start the deployment
+     *                              immediately after it is created
      */
     public function setStartDeployment($startDeployment)
     {
@@ -90,7 +90,7 @@ class CreateDeploymentOptions
 
     /**
      * Gets treat warnings as errors flag.
-     * 
+     *
      * @return bool
      */
     public function getTreatWarningsAsErrors()
@@ -100,9 +100,9 @@ class CreateDeploymentOptions
 
     /**
      * Sets treat warnings as errors flag.
-     * 
-     * @param bool $treatWarningsAsErrors Indicates whether to treat package 
-     *                                    validation warnings as errors.
+     *
+     * @param bool $treatWarningsAsErrors Indicates whether to treat package
+     *                                    validation warnings as errors
      */
     public function setTreatWarningsAsErrors($treatWarningsAsErrors)
     {

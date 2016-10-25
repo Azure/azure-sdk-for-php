@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -49,15 +49,15 @@ use WindowsAzure\ServiceBus\Internal\Filter;
 class RuleInfo
 {
     /**
-     * The entry of the rule info. 
-     * 
+     * The entry of the rule info.
+     *
      * @var Entry
      */
     private $_entry;
 
     /**
      * The description of the rule.
-     * 
+     *
      * @var RuleDescription
      */
     private $_ruleDescription;
@@ -65,8 +65,8 @@ class RuleInfo
     /**
      * Creates an RuleInfo with specified parameters.
      *
-     * @param string          $title           The title of the rule.
-     * @param RuleDescription $ruleDescription The description of the rule.
+     * @param string          $title           The title of the rule
+     * @param RuleDescription $ruleDescription The description of the rule
      */
     public function __construct(
         $title = Resources::EMPTY_STRING,
@@ -87,10 +87,10 @@ class RuleInfo
     }
 
     /**
-     * Populates the properties with a specified XML string based on ATOM 
-     * ENTRY schema. 
-     * 
-     * @param string $xmlString An XML string representing a rule info instance.
+     * Populates the properties with a specified XML string based on ATOM
+     * ENTRY schema.
+     *
+     * @param string $xmlString An XML string representing a rule info instance
      */
     public function parseXml($xmlString)
     {
@@ -104,9 +104,9 @@ class RuleInfo
     }
 
     /**
-     * Writes an XML string representing the rule info instance. 
-     * 
-     * @param \XMLWriter $xmlWriter The XML writer.
+     * Writes an XML string representing the rule info instance.
+     *
+     * @param \XMLWriter $xmlWriter The XML writer
      */
     public function writeXml(\XMLWriter $xmlWriter)
     {
@@ -136,7 +136,7 @@ class RuleInfo
     /**
      * Sets the entry.
      *
-     * @param Entry $entry The entry of the queue info.
+     * @param Entry $entry The entry of the queue info
      */
     public function setEntry($entry)
     {
@@ -144,8 +144,8 @@ class RuleInfo
     }
 
     /**
-     * Gets the title. 
-     * 
+     * Gets the title.
+     *
      * @return string
      */
     public function getTitle()
@@ -153,10 +153,10 @@ class RuleInfo
         return $this->_entry->getTitle();
     }
 
-    /** 
-     * Sets the title. 
-     * 
-     * @param string $title The title of the rule info.
+    /**
+     * Sets the title.
+     *
+     * @param string $title The title of the rule info
      */
     public function setTitle($title)
     {
@@ -164,7 +164,7 @@ class RuleInfo
     }
 
     /**
-     * Gets the filter. 
+     * Gets the filter.
      *
      * @return Filter
      */
@@ -174,9 +174,9 @@ class RuleInfo
     }
 
     /**
-     * Sets the filter. 
-     * 
-     * @param Filter $filter The filter.
+     * Sets the filter.
+     *
+     * @param Filter $filter The filter
      */
     public function setFilter(Filter $filter)
     {
@@ -184,8 +184,8 @@ class RuleInfo
     }
 
     /**
-     * Gets the action. 
-     * 
+     * Gets the action.
+     *
      * @return Action
      */
     public function getAction()
@@ -194,9 +194,9 @@ class RuleInfo
     }
 
     /**
-     * Sets the action. 
-     * 
-     * @param Action $action The action.
+     * Sets the action.
+     *
+     * @param Action $action The action
      */
     public function setAction(Action $action)
     {
@@ -204,8 +204,8 @@ class RuleInfo
     }
 
     /**
-     * Gets the description of the rule. 
-     * 
+     * Gets the description of the rule.
+     *
      * @return RuleDescription
      */
     public function getRuleDescription()
@@ -214,9 +214,9 @@ class RuleInfo
     }
 
     /**
-     * Sets the rule description. 
-     * 
-     * @param RuleDescription $ruleDescription The description of the rule. 
+     * Sets the rule description.
+     *
+     * @param RuleDescription $ruleDescription The description of the rule
      */
     public function setRuleDescription(RuleDescription $ruleDescription)
     {
@@ -224,9 +224,9 @@ class RuleInfo
     }
 
     /**
-     * With correlation ID filter. 
-     * 
-     * @param string $correlationId The ID of the correlation.
+     * With correlation ID filter.
+     *
+     * @param string $correlationId The ID of the correlation
      */
     public function withCorrelationFilter($correlationId)
     {
@@ -236,9 +236,9 @@ class RuleInfo
     }
 
     /**
-     * With sql expression filter. 
-     * 
-     * @param string $sqlExpression The SQL expression of the filter. 
+     * With sql expression filter.
+     *
+     * @param string $sqlExpression The SQL expression of the filter
      */
     public function withSqlFilter($sqlExpression)
     {
@@ -249,7 +249,7 @@ class RuleInfo
     }
 
     /**
-     * With true filter. 
+     * With true filter.
      */
     public function withTrueFilter()
     {
@@ -258,7 +258,7 @@ class RuleInfo
     }
 
     /**
-     * With false filter. 
+     * With false filter.
      */
     public function withFalseFilter()
     {
@@ -267,7 +267,7 @@ class RuleInfo
     }
 
     /**
-     * With empty rule action. 
+     * With empty rule action.
      */
     public function withEmptyRuleAction()
     {
@@ -276,10 +276,10 @@ class RuleInfo
     }
 
     /**
-     * With SQL rule action. 
-     * 
-     * @param string $sqlExpression The SQL expression 
-     *                              of the rule action.
+     * With SQL rule action.
+     *
+     * @param string $sqlExpression The SQL expression
+     *                              of the rule action
      */
     public function withSqlRuleAction($sqlExpression)
     {
@@ -290,7 +290,7 @@ class RuleInfo
     }
 
     /**
-     * Gets the name of the rule description. 
+     * Gets the name of the rule description.
      *
      * @return string
      */
@@ -300,9 +300,9 @@ class RuleInfo
     }
 
     /**
-     * Sets the name of the rule description. 
-     * 
-     * @param string $name The name of the rule description. 
+     * Sets the name of the rule description.
+     *
+     * @param string $name The name of the rule description
      */
     public function setName($name)
     {

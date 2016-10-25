@@ -163,7 +163,7 @@ class Locator
      *
      * @param Asset|string        $asset        A target asset
      * @param AccessPolicy|string $accessPolicy A target access policy
-     * @param int                 $type         An enumeration value that describes the type of Locator.
+     * @param int                 $type         An enumeration value that describes the type of Locator
      */
     public function __construct($asset, $accessPolicy, $type)
     {

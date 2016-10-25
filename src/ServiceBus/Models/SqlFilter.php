@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -42,16 +42,16 @@ use WindowsAzure\ServiceBus\Internal\Filter;
  */
 class SqlFilter extends Filter
 {
-    /** 
-     * The SQL expression of the filter. 
+    /**
+     * The SQL expression of the filter.
      *
      * @var string
      */
     private $_sqlExpression;
 
     /**
-     * The compatibility level of the filter. 
-     * 
+     * The compatibility level of the filter.
+     *
      * @var string
      */
     private $_compatibilityLevel;
@@ -66,7 +66,7 @@ class SqlFilter extends Filter
     }
     /**
      * Gets the SQL expression.
-     * 
+     *
      * @return string
      */
     public function getSqlExpression()
@@ -75,9 +75,9 @@ class SqlFilter extends Filter
     }
 
     /**
-     * Sets the SQL expression. 
-     * 
-     * @param string $sqlExpression The SQL expression of the filter.
+     * Sets the SQL expression.
+     *
+     * @param string $sqlExpression The SQL expression of the filter
      */
     public function setSqlExpression($sqlExpression)
     {
@@ -85,8 +85,8 @@ class SqlFilter extends Filter
     }
 
     /**
-     * Gets the compatibility level. 
-     * 
+     * Gets the compatibility level.
+     *
      * @return string
      */
     public function getCompatibilityLevel()
@@ -95,9 +95,9 @@ class SqlFilter extends Filter
     }
 
     /**
-     * Sets the compatibility level. 
-     * 
-     * @param string $compatibilityLevel The compatibility level. 
+     * Sets the compatibility level.
+     *
+     * @param string $compatibilityLevel The compatibility level
      */
     public function setCompatibilityLevel($compatibilityLevel)
     {

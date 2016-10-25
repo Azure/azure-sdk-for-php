@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -44,12 +44,12 @@ use WindowsAzure\Common\Internal\Validate;
  */
 class WrapAccessTokenResult
 {
-    /** 
+    /**
      * @var string
      */
     private $_accessToken;
 
-    /** 
+    /**
      * @var int
      */
     private $_expiresIn;
@@ -57,9 +57,9 @@ class WrapAccessTokenResult
     /**
      * Creates WrapAccessTokenResult object from parsed XML response.
      *
-     * @param string $response The get WRAP access token response.
-     * 
-     * @return WrapAccessTokenResult.
+     * @param string $response The get WRAP access token response
+     *
+     * @return WrapAccessTokenResult
      */
     public static function create($response)
     {
@@ -86,7 +86,7 @@ class WrapAccessTokenResult
     /**
      * Gets access token.
      *
-     * @return string.
+     * @return string
      */
     public function getAccessToken()
     {
@@ -96,7 +96,7 @@ class WrapAccessTokenResult
     /**
      * Sets access token.
      *
-     * @param string $accessToken The access token.
+     * @param string $accessToken The access token
      */
     public function setAccessToken($accessToken)
     {
@@ -106,7 +106,7 @@ class WrapAccessTokenResult
     /**
      * Gets expires in.
      *
-     * @return integer.
+     * @return integer
      */
     public function getExpiresIn()
     {
@@ -116,7 +116,7 @@ class WrapAccessTokenResult
     /**
      * Sets expires in.
      *
-     * @param int $expiresIn value.
+     * @param int $expiresIn value
      */
     public function setExpiresIn($expiresIn)
     {

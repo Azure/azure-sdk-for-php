@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -42,70 +42,70 @@ class RuntimeKernel
 {
     /**
      * The singleton instance of the runtime kernel.
-     * 
+     *
      * @var self
      */
     private static $_theKernel;
 
     /**
      * The current state serializer.
-     * 
+     *
      * @var ICurrentStateSerializer
      */
     private $_currentStateSerializer;
 
     /**
      * The goal state deserializer.
-     * 
+     *
      * @var IGoalStateDeserializer
      */
     private $_goalStateDeserializer;
 
     /**
      * The input channel.
-     * 
+     *
      * @var IInputChannel
      */
     private $_inputChannel;
 
     /**
      * The output channel.
-     * 
+     *
      * @var IOutputChannel
      */
     private $_outputChannel;
 
     /**
      * The runtime current state client.
-     * 
+     *
      * @var Protocol1RuntimeCurrentStateClient
      */
     private $_protocol1RuntimeCurrentStateClient;
 
     /**
      * The role environment data deserializer.
-     * 
+     *
      * @var IRoleEnvironmentDataDeserializer
      */
     private $_roleEnvironmentDataDeserializer;
 
     /**
      * The runtime goal state client.
-     * 
+     *
      * @var Protocol1RuntimeGoalStateClient
      */
     private $_protocol1RuntimeGoalStateClient;
 
     /**
      * The runtime version protocol client.
-     * 
+     *
      * @var RuntimeVersionProtocolClient
      */
     private $_runtimeVersionProtocolClient;
 
     /**
      * The runtime version manager.
-     * 
+     *
      * @var RuntimeVersionManager
      */
     private $_runtimeVersionManager;
@@ -148,10 +148,10 @@ class RuntimeKernel
 
     /**
      * Gets the current kernel instance.
-     * 
+     *
      * @param bool $forceNewInstance Boolean value indicating if a new instance
-     *                               should be obtained even if a previous one exists.
-     * 
+     *                               should be obtained even if a previous one exists
+     *
      * @return RuntimeKernel
      */
     public static function getKernel($forceNewInstance = false)
@@ -165,7 +165,7 @@ class RuntimeKernel
 
     /**
      * Gets the current state serializer.
-     * 
+     *
      * @return ICurrentStateSerializer
      */
     public function getCurrentStateSerializer()
@@ -175,7 +175,7 @@ class RuntimeKernel
 
     /**
      * Gets the goal state deserializer.
-     * 
+     *
      * @return IGoalStateDeserializer
      */
     public function getGoalStateDeserializer()
@@ -195,7 +195,7 @@ class RuntimeKernel
 
     /**
      * Gets the output channel.
-     * 
+     *
      * @return IOutputChannel
      */
     public function getOutputChannel()
@@ -205,7 +205,7 @@ class RuntimeKernel
 
     /**
      * Gets the runtime current state client.
-     * 
+     *
      * @return Protocol1RuntimeCurrentStateClient
      */
     public function getProtocol1RuntimeCurrentStateClient()
@@ -215,7 +215,7 @@ class RuntimeKernel
 
     /**
      * Gets the role environment data deserializer.
-     * 
+     *
      * @return IRoleEnvironmentDataDeserializer
      */
     public function getRoleEnvironmentDataDeserializer()
@@ -225,7 +225,7 @@ class RuntimeKernel
 
     /**
      * Gets the runtime goal state client.
-     * 
+     *
      * @return Protocol1RuntimeGoalStateClient
      */
     public function getProtocol1RuntimeGoalStateClient()
@@ -235,7 +235,7 @@ class RuntimeKernel
 
     /**
      * Gets the runtime version protocol client.
-     * 
+     *
      * @return RuntimeVersionProtocolClient
      */
     public function getRuntimeVersionProtocolClient()
@@ -245,7 +245,7 @@ class RuntimeKernel
 
     /**
      * Gets the runtime version manager.
-     * 
+     *
      * @return RuntimeVersionManager
      */
     public function getRuntimeVersionManager()

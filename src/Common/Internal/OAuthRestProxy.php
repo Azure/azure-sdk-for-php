@@ -47,8 +47,8 @@ class OAuthRestProxy extends ServiceRestProxy
     /**
      * Initializes new OAuthRestProxy object.
      *
-     * @param IHttpClient $channel The HTTP client used to send HTTP requests.
-     * @param string      $uri     The storage account uri.
+     * @param IHttpClient $channel The HTTP client used to send HTTP requests
+     * @param string      $uri     The storage account uri
      */
     public function __construct(IHttpClient $channel, $uri)
     {
@@ -63,10 +63,10 @@ class OAuthRestProxy extends ServiceRestProxy
     /**
      * Get OAuth access token.
      *
-     * @param string $grantType    OAuth request grant_type field value.
-     * @param string $clientId     OAuth request client_id field value.
-     * @param string $clientSecret OAuth request client_secret field value.
-     * @param string $scope        OAuth request scope field value.
+     * @param string $grantType    OAuth request grant_type field value
+     * @param string $clientId     OAuth request client_id field value
+     * @param string $clientSecret OAuth request client_secret field value
+     * @param string $scope        OAuth request scope field value
      *
      * @return OAuthAccessToken
      */

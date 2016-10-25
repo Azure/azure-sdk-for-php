@@ -161,9 +161,9 @@ class AssetFile
     /**
      * Create asset file.
      *
-     * @param string $name          Friendly name for asset file.
+     * @param string $name          Friendly name for asset file
      * @param string $parentAssetId Asset Id of the Asset that this file is
-     *                              associated with.
+     *                              associated with
      */
     public function __construct($name, $parentAssetId)
     {

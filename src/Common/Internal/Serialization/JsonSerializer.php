@@ -45,8 +45,8 @@ class JsonSerializer implements ISerializer
     /**
      * Serialize an object with specified root element name.
      *
-     * @param object $targetObject The target object.
-     * @param string $rootName     The name of the root element.
+     * @param object $targetObject The target object
+     * @param string $rootName     The name of the root element
      *
      * @return string
      */
@@ -66,8 +66,8 @@ class JsonSerializer implements ISerializer
      * Serializes given array. The array indices must be string to use them as
      * as element name.
      *
-     * @param array      $array      The object to serialize represented in array.
-     * @param array|null $properties The used properties in the serialization process.
+     * @param array      $array      The object to serialize represented in array
+     * @param array|null $properties The used properties in the serialization process
      *
      * @return string
      */
@@ -79,7 +79,7 @@ class JsonSerializer implements ISerializer
     /**
      * Unserializes given serialized string to array.
      *
-     * @param string $serialized The serialized object in string representation.
+     * @param string $serialized The serialized object in string representation
      *
      * @return array
      */

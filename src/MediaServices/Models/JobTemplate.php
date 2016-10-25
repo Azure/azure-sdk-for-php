@@ -128,8 +128,8 @@ class JobTemplate
     /**
      * Create job template.
      *
-     * @param string     $jobTemplateBody Job template XML body.
-     * @param int|string $templateType    Template type default to AccountLevel.
+     * @param string     $jobTemplateBody Job template XML body
+     * @param int|string $templateType    Template type default to AccountLevel
      */
     public function __construct(
         $jobTemplateBody,

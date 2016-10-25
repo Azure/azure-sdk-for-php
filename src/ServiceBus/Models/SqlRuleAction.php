@@ -10,7 +10,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -43,20 +43,20 @@ class SqlRuleAction extends Action
 {
     /**
      * The SQL expression.
-     * 
+     *
      * @var string
      */
     private $_sqlExpression;
 
     /**
      * The compatibility level.
-     * 
+     *
      * @var string
      */
     private $_compatibilityLevel;
 
-    /** 
-     * Creates a SQL Rule Action instance with default parameters. 
+    /**
+     * Creates a SQL Rule Action instance with default parameters.
      */
     public function __construct()
     {
@@ -66,7 +66,7 @@ class SqlRuleAction extends Action
 
     /**
      * Gets the SQL expression.
-     * 
+     *
      * @return string
      */
     public function getSqlExpression()
@@ -75,9 +75,9 @@ class SqlRuleAction extends Action
     }
 
     /**
-     * Sets the SQL expression. 
-     * 
-     * @param string $sqlExpression Sets the SQL expression. 
+     * Sets the SQL expression.
+     *
+     * @param string $sqlExpression Sets the SQL expression
      */
     public function setSqlExpression($sqlExpression)
     {
@@ -85,8 +85,8 @@ class SqlRuleAction extends Action
     }
 
     /**
-     * Gets the compatibility level. 
-     * 
+     * Gets the compatibility level.
+     *
      * @return string
      */
     public function getCompatibilityLevel()
@@ -96,8 +96,8 @@ class SqlRuleAction extends Action
 
     /**
      * Sets the compatibility level.
-     * 
-     * @param string $compatibilityLevel The level of compatibility.
+     *
+     * @param string $compatibilityLevel The level of compatibility
      */
     public function setCompatibilityLevel($compatibilityLevel)
     {

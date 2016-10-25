@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -67,12 +67,12 @@ class GoalState
 
     /**
      * Constructor.
-     * 
-     * @param string    $incarnation          The incarnation.
-     * @param string    $expectedState        The expected state.
-     * @param string    $environmentPath      The environment path.
-     * @param \DateTime $deadline             The deadline.
-     * @param string    $currentStateEndpoint The current state endpoint.
+     *
+     * @param string    $incarnation          The incarnation
+     * @param string    $expectedState        The expected state
+     * @param string    $environmentPath      The environment path
+     * @param \DateTime $deadline             The deadline
+     * @param string    $currentStateEndpoint The current state endpoint
      */
     public function __construct(
         $incarnation,
@@ -90,7 +90,7 @@ class GoalState
 
     /**
      * Gets the incarnation.
-     * 
+     *
      * @return string
      */
     public function getIncarnation()
@@ -100,7 +100,7 @@ class GoalState
 
     /**
      * Gets the expected state.
-     * 
+     *
      * @return string
      */
     public function getExpectedState()
@@ -110,7 +110,7 @@ class GoalState
 
     /**
      * Gets the environment path.
-     * 
+     *
      * @return string
      */
     public function getEnvironmentPath()
@@ -120,7 +120,7 @@ class GoalState
 
     /**
      * Gets the deadline.
-     * 
+     *
      * @return string
      */
     public function getDeadline()
@@ -130,7 +130,7 @@ class GoalState
 
     /**
      * Gets the current state endpoint.
-     * 
+     *
      * @return string
      */
     public function getCurrentStateEndpoint()

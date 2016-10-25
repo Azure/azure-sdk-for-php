@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -57,8 +57,8 @@ class ServiceProperties
     /**
      * Creates ServiceProperties object from parsed XML response.
      *
-     * @param array $parsedResponse XML response parsed into array.
-     * 
+     * @param array $parsedResponse XML response parsed into array
+     *
      * @return ServiceProperties
      */
     public static function create(array $parsedResponse)
@@ -73,7 +73,7 @@ class ServiceProperties
     /**
      * Gets logging element.
      *
-     * @return Logging.
+     * @return Logging
      */
     public function getLogging()
     {
@@ -83,7 +83,7 @@ class ServiceProperties
     /**
      * Sets logging element.
      *
-     * @param Logging $logging new element.
+     * @param Logging $logging new element
      */
     public function setLogging(Logging $logging)
     {
@@ -93,7 +93,7 @@ class ServiceProperties
     /**
      * Gets metrics element.
      *
-     * @return Metrics.
+     * @return Metrics
      */
     public function getMetrics()
     {
@@ -103,7 +103,7 @@ class ServiceProperties
     /**
      * Sets metrics element.
      *
-     * @param Metrics $metrics new element.
+     * @param Metrics $metrics new element
      */
     public function setMetrics(Metrics $metrics)
     {
@@ -112,8 +112,8 @@ class ServiceProperties
 
     /**
      * Converts this object to array with XML tags.
-     * 
-     * @return array.
+     *
+     * @return array
      */
     public function toArray()
     {
@@ -125,9 +125,9 @@ class ServiceProperties
 
     /**
      * Converts this current object to XML representation.
-     * 
-     * @param XmlSerializer $xmlSerializer The XML serializer.
-     * 
+     *
+     * @param XmlSerializer $xmlSerializer The XML serializer
+     *
      * @return string
      */
     public function toXml($xmlSerializer)

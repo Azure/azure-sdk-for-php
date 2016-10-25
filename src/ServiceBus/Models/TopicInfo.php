@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -47,14 +47,14 @@ use WindowsAzure\Common\Internal\Validate;
 class TopicInfo extends Entry
 {
     /**
-     * The entry of the topic info. 
-     * 
+     * The entry of the topic info.
+     *
      * @var Entry
      */
     private $_entry;
 
     /**
-     * The description of the topics. 
+     * The description of the topics.
      *
      * @var TopicDescription
      */
@@ -63,9 +63,9 @@ class TopicInfo extends Entry
     /**
      * Creates a TopicInfo with specified parameters.
      *
-     * @param string           $title            The name of the topic.
-     * @param TopicDescription $topicDescription The description of the 
-     *                                           topic.
+     * @param string           $title            The name of the topic
+     * @param TopicDescription $topicDescription The description of the
+     *                                           topic
      */
     public function __construct(
         $title = Resources::EMPTY_STRING,
@@ -86,9 +86,9 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Populates properties with a specified XML string. 
-     * 
-     * @param string $xmlString An XML string representing the topic information. 
+     * Populates properties with a specified XML string.
+     *
+     * @param string $xmlString An XML string representing the topic information
      */
     public function parseXml($xmlString)
     {
@@ -103,8 +103,8 @@ class TopicInfo extends Entry
 
     /**
      * Writes an XML string.
-     * 
-     * @param \XMLWriter $xmlWriter The XML writer.
+     *
+     * @param \XMLWriter $xmlWriter The XML writer
      */
     public function writeXml(\XMLWriter $xmlWriter)
     {
@@ -136,7 +136,7 @@ class TopicInfo extends Entry
     /**
      * Sets the title.
      *
-     * @param string $title The title of the queue info.
+     * @param string $title The title of the queue info
      */
     public function setTitle($title)
     {
@@ -144,8 +144,8 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Gets the entry. 
-     * 
+     * Gets the entry.
+     *
      * @return Entry
      */
     public function getEntry()
@@ -156,7 +156,7 @@ class TopicInfo extends Entry
     /**
      * Sets the entry.
      *
-     * @param Entry $entry The entry of the queue info.
+     * @param Entry $entry The entry of the queue info
      */
     public function setEntry(Entry $entry)
     {
@@ -164,8 +164,8 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Gets the descriptions of the topic. 
-     * 
+     * Gets the descriptions of the topic.
+     *
      * @return TopicDescription
      */
     public function getTopicDescription()
@@ -173,10 +173,10 @@ class TopicInfo extends Entry
         return $this->_topicDescription;
     }
 
-    /** 
-     * Sets the descriptions of the topic. 
-     * 
-     * @param TopicDescription $topicDescription The description of the topic. 
+    /**
+     * Sets the descriptions of the topic.
+     *
+     * @param TopicDescription $topicDescription The description of the topic
      */
     public function setTopicDescription(TopicDescription $topicDescription)
     {
@@ -196,7 +196,7 @@ class TopicInfo extends Entry
     /**
      * Sets the default message to live.
      *
-     * @param string $defaultMessageTimeToLive The default message time to live.
+     * @param string $defaultMessageTimeToLive The default message time to live
      */
     public function setDefaultMessageTimeToLive($defaultMessageTimeToLive)
     {
@@ -206,8 +206,8 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Gets the msax size in mega bytes. 
-     * 
+     * Gets the msax size in mega bytes.
+     *
      * @return int
      */
     public function getMaxSizeInMegabytes()
@@ -216,9 +216,9 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Sets max size in mega bytes. 
-     * 
-     * @param int $maxSizeInMegabytes The maximum size in mega bytes.
+     * Sets max size in mega bytes.
+     *
+     * @param int $maxSizeInMegabytes The maximum size in mega bytes
      */
     public function setMaxSizeInMegabytes($maxSizeInMegabytes)
     {
@@ -227,7 +227,7 @@ class TopicInfo extends Entry
 
     /**
      * Gets requires duplicate detection.
-     * 
+     *
      * @return bool
      */
     public function getRequiresDuplicateDetection()
@@ -236,9 +236,9 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Sets requires duplicate detection. 
-     * 
-     * @param bool $requiresDuplicateDetection Sets requires duplicate detection.
+     * Sets requires duplicate detection.
+     *
+     * @param bool $requiresDuplicateDetection Sets requires duplicate detection
      */
     public function setRequiresDuplicateDetection($requiresDuplicateDetection)
     {
@@ -248,8 +248,8 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Gets duplicate detection history time window. 
-     * 
+     * Gets duplicate detection history time window.
+     *
      * @return string
      */
     public function getDuplicateDetectionHistoryTimeWindow()
@@ -258,10 +258,10 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Sets duplicate detection history time window. 
-     * 
-     * @param string $duplicateDetectionHistoryTimeWindow The duplicate 
-     *                                                    detection history time window.
+     * Sets duplicate detection history time window.
+     *
+     * @param string $duplicateDetectionHistoryTimeWindow The duplicate
+     *                                                    detection history time window
      */
     public function setDuplicateDetectionHistoryTimeWindow(
         $duplicateDetectionHistoryTimeWindow
@@ -272,8 +272,8 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Gets enable batched operations. 
-     * 
+     * Gets enable batched operations.
+     *
      * @return bool
      */
     public function getEnableBatchedOperations()
@@ -283,8 +283,8 @@ class TopicInfo extends Entry
 
     /**
      * Sets enable batched operations.
-     * 
-     * @param bool $enableBatchedOperations Enables batched operations.
+     *
+     * @param bool $enableBatchedOperations Enables batched operations
      */
     public function setEnableBatchedOperations($enableBatchedOperations)
     {
@@ -294,8 +294,8 @@ class TopicInfo extends Entry
     }
 
     /**
-     * Gets size in bytes. 
-     * 
+     * Gets size in bytes.
+     *
      * @return int
      */
     public function getSizeInBytes()
@@ -303,10 +303,10 @@ class TopicInfo extends Entry
         return $this->_topicDescription->getSizeInBytes();
     }
 
-    /** 
+    /**
      * Sets size in bytes.
-     * 
-     * @param int $sizeInBytes The size in bytes. 
+     *
+     * @param int $sizeInBytes The size in bytes
      */
     public function setSizeInBytes($sizeInBytes)
     {

@@ -81,6 +81,7 @@ interface IMediaServices extends FilterableService
      * Get asset list.
      *
      * @param array $queryParams
+     *
      * @return Asset[]
      */
     public function getAssetList(array $queryParams = []);
@@ -425,7 +426,7 @@ interface IMediaServices extends FilterableService
      * Get IngestManifest.
      *
      * @param IngestManifest|string $ingestManifest An IngestManifest data or
-     *                                                     IngestManifest Id
+     *                                              IngestManifest Id
      *
      * @return IngestManifest
      */
@@ -452,7 +453,7 @@ interface IMediaServices extends FilterableService
      * Get pending assets of IngestManifest.
      *
      * @param IngestManifest|string $ingestManifest An IngestManifest data or
-     *                                                     IngestManifest Id
+     *                                              IngestManifest Id
      *
      * @return IngestManifestAsset[]
      */
@@ -604,6 +605,7 @@ interface IMediaServices extends FilterableService
      * Create new content key authorization options.
      *
      * @param ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions data
+     *
      * @return ContentKeyAuthorizationPolicyOption Created ContentKeyAuthorizationPolicyOption
      */
     public function createContentKeyAuthorizationPolicyOption(
@@ -631,7 +633,7 @@ interface IMediaServices extends FilterableService
      * Update content key authorization options.
      *
      * @param ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions New content key authorization options data with
-     *                                                                                                               valid id
+     *                                                                            valid id
      */
     public function updateContentKeyAuthorizationPolicyOption(ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions);
 
@@ -682,6 +684,7 @@ interface IMediaServices extends FilterableService
      * Get asset delivery policy.
      *
      * @param $assetDeliveryPolicy
+     *
      * @return AssetDeliveryPolicy
      */
     public function getAssetDeliveryPolicy($assetDeliveryPolicy);
@@ -712,7 +715,7 @@ interface IMediaServices extends FilterableService
      * Get AssetDeliveryPolicy list linked to an Asset.
      *
      * @param \WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
-     *                                                               Asset Id to retrieve the linked delivery policies.
+     *                                                               Asset Id to retrieve the linked delivery policies
      *
      * @return array
      */

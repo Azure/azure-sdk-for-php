@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -60,9 +60,9 @@ class GetStorageServiceKeysResult
 
     /**
      * Creates new GetStorageServiceKeysResult object from parsed response.
-     * 
-     * @param array $parsed The HTTP parsed response into array representation.
-     * 
+     *
+     * @param array $parsed The HTTP parsed response into array representation
+     *
      * @return GetStorageServiceKeysResult
      */
     public static function create($parsed)
@@ -87,7 +87,7 @@ class GetStorageServiceKeysResult
 
     /**
      * Gets the url.
-     * 
+     *
      * @return string
      */
     public function getUrl()
@@ -97,8 +97,8 @@ class GetStorageServiceKeysResult
 
     /**
      * Sets the url.
-     * 
-     * @param string $url The url.
+     *
+     * @param string $url The url
      */
     public function setUrl($url)
     {
@@ -107,7 +107,7 @@ class GetStorageServiceKeysResult
 
     /**
      * Gets the primary.
-     * 
+     *
      * @return string
      */
     public function getPrimary()
@@ -117,8 +117,8 @@ class GetStorageServiceKeysResult
 
     /**
      * Sets the primary.
-     * 
-     * @param string $primary The primary.
+     *
+     * @param string $primary The primary
      */
     public function setPrimary($primary)
     {
@@ -127,7 +127,7 @@ class GetStorageServiceKeysResult
 
     /**
      * Gets the secondary.
-     * 
+     *
      * @return string
      */
     public function getSecondary()
@@ -137,8 +137,8 @@ class GetStorageServiceKeysResult
 
     /**
      * Sets the secondary.
-     * 
-     * @param string $secondary The secondary.
+     *
+     * @param string $secondary The secondary
      */
     public function setSecondary($secondary)
     {

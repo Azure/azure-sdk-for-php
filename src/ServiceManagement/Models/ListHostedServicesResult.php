@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -50,9 +50,9 @@ class ListHostedServicesResult
 
     /**
      * Creates new ListHostedServicesResult from parsed response body.
-     * 
-     * @param array $parsed The parsed response body.
-     * 
+     *
+     * @param array $parsed The parsed response body
+     *
      * @return ListHostedServicesResult
      */
     public static function create($parsed)
@@ -81,7 +81,7 @@ class ListHostedServicesResult
 
     /**
      * Gets hosted services.
-     * 
+     *
      * @return HostedService[]
      */
     public function getHostedServices()
@@ -91,8 +91,8 @@ class ListHostedServicesResult
 
     /**
      * Sets hosted services.
-     * 
-     * @param HostedService[] $hostedServices The hosted services.
+     *
+     * @param HostedService[] $hostedServices The hosted services
      */
     public function setHostedServices(array $hostedServices)
     {

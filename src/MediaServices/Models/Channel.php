@@ -70,8 +70,8 @@ class Channel
      */
     private $_description;
 
-	/**
-     * Channel LastModified DateTime
+    /**
+     * Channel LastModified DateTime.
      *
      * @var \DateTime
      */
@@ -112,7 +112,7 @@ class Channel
      */
     private $_crossSiteAccessPolicies;
 
-	/**
+    /**
      * Channel EncodingType.
      *
      * @var string
@@ -167,7 +167,7 @@ class Channel
             $this->_id = $options['Id'];
         }
 
-      	if (isset($options['Name'])) {
+        if (isset($options['Name'])) {
             Validate::isString($options['Name'], 'options[Name]');
             $this->_name = $options['Name'];
         }
@@ -182,7 +182,7 @@ class Channel
             $this->_description = $options['Description'];
         }
 
-	    if (isset($options['LastModified'])) {
+        if (isset($options['LastModified'])) {
             Validate::isDateString($options['LastModified'], 'options[LastModified]');
             $this->_lastModified = new \DateTime($options['LastModified']);
         }
@@ -192,22 +192,22 @@ class Channel
             $this->_state = $options['State'];
         }
 
-	    if (!empty($options['Input'])) {
+        if (!empty($options['Input'])) {
             Validate::isArray($options['Input'], 'options[Input]');
             $this->_input = ChannelInput::createFromOptions($options['Input']);
         }
 
-	    if (!empty($options['Output'])) {
+        if (!empty($options['Output'])) {
             Validate::isArray($options['Output'], 'options[Output]');
             $this->_output = ChannelOutput::createFromOptions($options['Output']);
         }
 
-	    if (!empty($options['Preview'])) {
+        if (!empty($options['Preview'])) {
             Validate::isArray($options['Preview'], 'options[Preview]');
             $this->_preview = ChannelPreview::createFromOptions($options['Preview']);
         }
 
-	    if (!empty($options['CrossSiteAccessPolicies'])) {
+        if (!empty($options['CrossSiteAccessPolicies'])) {
             Validate::isArray($options['CrossSiteAccessPolicies'], 'options[CrossSiteAccessPolicies]');
             $this->_crossSiteAccessPolicies = CrossSiteAccessPolicies::createFromOptions($options['CrossSiteAccessPolicies']);
         }
@@ -217,7 +217,7 @@ class Channel
             $this->_encodingType = $options['EncodingType'];
         }
 
-	    if (!empty($options['Encoding'])) {
+        if (!empty($options['Encoding'])) {
             Validate::isArray($options['Encoding'], 'options[Encoding]');
             $this->_encoding = ChannelEncoding::createFromOptions($options['Encoding']);
         }
@@ -239,7 +239,7 @@ class Channel
     }
 
     /**
-     * Set channel identifier
+     * Set channel identifier.
      *
      * @param string $value Operation id
      */
@@ -278,7 +278,7 @@ class Channel
         return $this->_created;
     }
 
-	/**
+    /**
      * Get channel Description.
      *
      * @return string

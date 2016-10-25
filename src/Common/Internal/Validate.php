@@ -43,10 +43,10 @@ class Validate
     /**
      * Throws exception if the provided variable type is not array.
      *
-     * @param mixed  $var  The variable to check.
-     * @param string $name The parameter name.
+     * @param mixed  $var  The variable to check
+     * @param string $name The parameter name
      *
-     * @throws InvalidArgumentTypeException.
+     * @throws InvalidArgumentTypeException
      */
     public static function isArray($var, $name)
     {
@@ -58,8 +58,8 @@ class Validate
     /**
      * Throws exception if the provided variable type is not string.
      *
-     * @param mixed  $var  The variable to check.
-     * @param string $name The parameter name.
+     * @param mixed  $var  The variable to check
+     * @param string $name The parameter name
      *
      * @throws InvalidArgumentTypeException
      */
@@ -75,7 +75,7 @@ class Validate
     /**
      * Throws exception if the provided variable type is not boolean.
      *
-     * @param mixed $var variable to check against.
+     * @param mixed  $var  variable to check against
      * @param string $name
      */
     public static function isBoolean($var, $name)
@@ -87,8 +87,8 @@ class Validate
     /**
      * Throws exception if the provided variable is set to null.
      *
-     * @param mixed  $var  The variable to check.
-     * @param string $name The parameter name.
+     * @param mixed  $var  The variable to check
+     * @param string $name The parameter name
      *
      * @throws \InvalidArgumentException
      */
@@ -104,8 +104,8 @@ class Validate
     /**
      * Throws exception if the provided variable is not double.
      *
-     * @param mixed  $var  The variable to check.
-     * @param string $name The parameter name.
+     * @param mixed  $var  The variable to check
+     * @param string $name The parameter name
      *
      * @throws \InvalidArgumentException
      */
@@ -119,8 +119,8 @@ class Validate
     /**
      * Throws exception if the provided variable type is not integer.
      *
-     * @param mixed  $var  The variable to check.
-     * @param string $name The parameter name.
+     * @param mixed  $var  The variable to check
+     * @param string $name The parameter name
      *
      * @throws InvalidArgumentTypeException
      */
@@ -136,7 +136,7 @@ class Validate
     /**
      * Returns whether the variable is an empty or null string.
      *
-     * @param string $var value.
+     * @param string $var value
      *
      * @return bool
      */
@@ -154,7 +154,7 @@ class Validate
     /**
      * Throws exception if the provided condition is not satisfied.
      *
-     * @param bool   $isSatisfied    condition result.
+     * @param bool   $isSatisfied    condition result
      * @param string $failureMessage the exception message
      *
      * @throws \Exception
@@ -169,7 +169,7 @@ class Validate
     /**
      * Throws exception if the provided $date is not of type \DateTime.
      *
-     * @param mixed $date variable to check against.
+     * @param mixed  $date variable to check against
      * @param string $name
      */
     public static function isDate($date, $name)
@@ -183,8 +183,8 @@ class Validate
     /**
      * Throws exception if the provided variable type is not DateInterval.
      *
-     * @param mixed  $var  The variable to check.
-     * @param string $name The parameter name.
+     * @param mixed  $var  The variable to check
+     * @param string $name The parameter name
      *
      * @throws InvalidArgumentTypeException
      */
@@ -193,15 +193,15 @@ class Validate
         try {
             new \DateInterval($var);
         } catch (\Exception $e) {
-            throw new InvalidArgumentTypeException("DateInterval", $name);
+            throw new InvalidArgumentTypeException('DateInterval', $name);
         }
     }
 
     /**
      * Throws exception if the provided variable is set to null.
      *
-     * @param mixed  $var  The variable to check.
-     * @param string $name The parameter name.
+     * @param mixed  $var  The variable to check
+     * @param string $name The parameter name
      *
      * @throws \InvalidArgumentException
      */
@@ -215,7 +215,7 @@ class Validate
     /**
      * Throws exception if the provided path does not exist.
      *
-     * @param string $path The path to check.
+     * @param string $path The path to check
      *
      * @throws \InvalidArgumentException
      */
@@ -229,10 +229,10 @@ class Validate
     /**
      * Throws exception if the object is not of the specified class type.
      *
-     * @param mixed  $objectInstance An object that requires class type validation.
+     * @param mixed  $objectInstance An object that requires class type validation
      * @param mixed  $classInstance  The instance of the class the the
-     *                               object instance should be.
-     * @param string $name           The name of the object.
+     *                               object instance should be
+     * @param string $name           The name of the object
      *
      * @throws \InvalidArgumentException
      *
@@ -277,8 +277,9 @@ class Validate
     /**
      * Throws exception if the string is not of a valid uri.
      *
-     * @param string $uri String to check.
+     * @param string $uri  String to check
      * @param string $name
+     *
      * @return bool
      */
     public static function isValidUri($uri, $name)
@@ -298,10 +299,10 @@ class Validate
     /**
      * Throws exception if the provided variable type is not object.
      *
-     * @param mixed  $var  The variable to check.
-     * @param string $name The parameter name.
+     * @param mixed  $var  The variable to check
+     * @param string $name The parameter name
      *
-     * @throws InvalidArgumentTypeException.
+     * @throws InvalidArgumentTypeException
      *
      * @return bool
      */
@@ -317,9 +318,9 @@ class Validate
     /**
      * Throws exception if the object is not of the specified class type.
      *
-     * @param mixed  $objectInstance An object that requires class type validation.
-     * @param string $class          The class the object instance should be.
-     * @param string $name           The parameter name.
+     * @param mixed  $objectInstance An object that requires class type validation
+     * @param string $class          The class the object instance should be
+     * @param string $name           The parameter name
      *
      * @throws \InvalidArgumentException
      *
