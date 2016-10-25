@@ -11,4 +11,6 @@ env:
 before_script:
   - composer install --prefer-dist -o
 
-script: ./vendor/bin/phpunit -c phpunit.local.xml.dist
+script: 
+  - ./vendor/bin/phpunit -c phpunit.local.xml.dist
+  - ./vendor/bin/php-cs-fixer fix .\src
