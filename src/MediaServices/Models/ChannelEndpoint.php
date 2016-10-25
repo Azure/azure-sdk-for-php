@@ -89,7 +89,7 @@ class ChannelEndpoint
             Validate::isString($options['Protocol'], 'options[Protocol]');
             $this->_protocol = $options['Protocol'];
         }
-	    if (isset($options['Url'])) {
+        if (isset($options['Url'])) {
             Validate::isString($options['Url'], 'options[Url]');
             $this->_url = $options['Url'];
         }
@@ -108,7 +108,7 @@ class ChannelEndpoint
     /**
      * Set the ChannelEndpoint Protocol.
      *
-     * @param string $value ChannelEndpoint Protocol.
+     * @param string $value ChannelEndpoint Protocol
      */
     public function setProtocol($value)
     {
@@ -128,11 +128,10 @@ class ChannelEndpoint
     /**
      * Set the ChannelEndpoint Url.
      *
-     * @param string $value ChannelEndpoint Url.
+     * @param string $value ChannelEndpoint Url
      */
     public function setUrl($value)
     {
         $this->_url = $value;
     }
 }
-

@@ -41,16 +41,16 @@ namespace WindowsAzure\MediaServices\Models;
 class AdMarkerSources
 {
     /**
-     * Api
+     * Api.
      *
      * @var string
      */
-    const Api = "Api";
+    const Api = 'Api';
 
     /**
-     * Scte35
+     * Scte35.
      *
      * @var string
      */
-    const Scte35 = "Scte35";
+    const Scte35 = 'Scte35';
 }

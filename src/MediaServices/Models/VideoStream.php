@@ -107,11 +107,10 @@ class VideoStream
     /**
      * Set the VideoStream Index.
      *
-     * @param string $value VideoStream Index.
+     * @param string $value VideoStream Index
      */
     public function setIndex($value)
     {
         $this->_index = $value;
     }
 }
-

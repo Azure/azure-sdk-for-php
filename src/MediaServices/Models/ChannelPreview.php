@@ -104,7 +104,7 @@ class ChannelPreview
     /**
      * Set the ChannelPreview AccessControl.
      *
-     * @param ChannelPreviewAccessControl $value ChannelPreview AccessControl.
+     * @param ChannelPreviewAccessControl $value ChannelPreview AccessControl
      */
     public function setAccessControl(ChannelPreviewAccessControl $value)
     {
@@ -121,4 +121,3 @@ class ChannelPreview
         return $this->_endpoints;
     }
 }
-

@@ -202,11 +202,11 @@ class IngestManifestFile
      * Create manifest file.
      *
      * @param string $name                        Actual filename that will be
-     *                                            uploaded.
+     *                                            uploaded
      * @param string $parentIngestManifestId      IngestManifest Id of the manifest
-     *                                            that contains this file.
+     *                                            that contains this file
      * @param string $parentIngestManifestAssetId IngestManifestAsset Id of the
-     *                                            IngestManifestAsset that this file is associated with.
+     *                                            IngestManifestAsset that this file is associated with
      */
     public function __construct(
         $name,

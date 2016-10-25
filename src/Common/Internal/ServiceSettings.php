@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -27,12 +27,12 @@ namespace WindowsAzure\Common\Internal;
 
 /**
  * Base class for all REST services settings.
- * 
+ *
  * Derived classes must implement the following members:
  * 1- $isInitialized: A static property that indicates whether the class's static
  *    members have been initialized.
  * 2- init(): A protected static method that initializes static members.
- * 3- $validSettingKeys: A static property that contains valid setting keys for this 
+ * 3- $validSettingKeys: A static property that contains valid setting keys for this
  *    service.
  * 4- createFromConnectionString($connectionString): A public static function that
  *    takes a connection string and returns the created settings object.
@@ -52,10 +52,8 @@ abstract class ServiceSettings
     /**
      * Throws an exception if the connection string format does not match any of the
      * available formats.
-     * 
-     * @param string $connectionString The invalid formatted connection string.
      *
-     * @return null
+     * @param string $connectionString The invalid formatted connection string
      *
      * @throws \RuntimeException
      */
@@ -69,11 +67,11 @@ abstract class ServiceSettings
     /**
      * Parses the connection string and then validate that the parsed keys belong to
      * the $validSettingKeys.
-     * 
-     * @param string $connectionString The user provided connection string.
-     * 
-     * @return array The tokenized connection string keys.
-     * 
+     *
+     * @param string $connectionString The user provided connection string
+     *
+     * @return array The tokenized connection string keys
+     *
      * @throws \RuntimeException
      */
     protected static function parseAndValidateKeys($connectionString)
@@ -107,13 +105,13 @@ abstract class ServiceSettings
 
     /**
      * Creates an anonymous function that acts as predicate.
-     * 
-     * @param array $requirements The array of conditions to satisfy.
-     * @param bool  $isRequired   Either these conditions are all required or all 
-     *                            optional.
+     *
+     * @param array $requirements The array of conditions to satisfy
+     * @param bool  $isRequired   Either these conditions are all required or all
+     *                            optional
      * @param bool  $atLeastOne   Indicates that at least one requirement must
-     *                            succeed.
-     * 
+     *                            succeed
+     *
      * @return callable
      */
     protected static function getValidator($requirements, $isRequired, $atLeastOne)
@@ -158,7 +156,7 @@ abstract class ServiceSettings
 
     /**
      * Creates at lease one succeed predicate for the provided list of requirements.
-     * 
+     *
      * @return callable
      */
     protected static function atLeastOne()
@@ -170,7 +168,7 @@ abstract class ServiceSettings
 
     /**
      * Creates an optional predicate for the provided list of requirements.
-     * 
+     *
      * @return callable
      */
     protected static function optional()
@@ -182,7 +180,7 @@ abstract class ServiceSettings
 
     /**
      * Creates an required predicate for the provided list of requirements.
-     * 
+     *
      * @return callable
      */
     protected static function allRequired()
@@ -194,10 +192,10 @@ abstract class ServiceSettings
 
     /**
      * Creates a setting value condition using the passed predicate.
-     * 
-     * @param string   $name      The setting key name.
-     * @param callable $predicate The setting value predicate.
-     * 
+     *
+     * @param string   $name      The setting key name
+     * @param callable $predicate The setting value predicate
+     *
      * @return array
      */
     protected static function settingWithFunc($name, $predicate)
@@ -212,9 +210,9 @@ abstract class ServiceSettings
     /**
      * Creates a setting value condition that validates it is one of the
      * passed valid values.
-     * 
-     * @param string $name The setting key name.
-     * 
+     *
+     * @param string $name The setting key name
+     *
      * @return array
      */
     protected static function setting($name)
@@ -256,11 +254,11 @@ abstract class ServiceSettings
 
     /**
      * Tests to see if a given list of settings matches a set of filters exactly.
-     * 
-     * @param array $settings The settings to check.
-     * 
-     * @return bool If any filter returns null, false. If there are any settings 
-     *              left over after all filters are processed, false. Otherwise true.
+     *
+     * @param array $settings The settings to check
+     *
+     * @return bool If any filter returns null, false. If there are any settings
+     *              left over after all filters are processed, false. Otherwise true
      */
     protected static function matchedSpecification($settings)
     {

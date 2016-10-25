@@ -48,7 +48,7 @@ class DateFilter implements IServiceFilter
     /**
      * Adds date (in GMT format) header to the request headers.
      *
-     * @param IHttpClient $request HTTP channel object.
+     * @param IHttpClient $request HTTP channel object
      *
      * @return IHttpClient
      */
@@ -63,8 +63,8 @@ class DateFilter implements IServiceFilter
     /**
      * Does nothing with the response.
      *
-     * @param IHttpClient       $request  HTTP channel object.
-     * @param ResponseInterface $response HTTP response object.
+     * @param IHttpClient       $request  HTTP channel object
+     * @param ResponseInterface $response HTTP response object
      *
      * @return ResponseInterface
      */

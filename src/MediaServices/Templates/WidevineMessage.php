@@ -41,7 +41,7 @@ namespace WindowsAzure\MediaServices\Templates;
 class WidevineMessage
 {
     /**
-     * Controls which content keys should be included in a license. 
+     * Controls which content keys should be included in a license.
      * Only one of allowed_track_types and content_key_specs can be specified.
      *
      * @var string
@@ -49,7 +49,7 @@ class WidevineMessage
     public $allowed_track_types;
 
     /**
-     * A finer grained control on what content keys to return. 
+     * A finer grained control on what content keys to return.
      * Only one of allowed_track_types and content_key_specs can be specified.
      *
      * @var ContentKeySpecs[]
@@ -57,7 +57,7 @@ class WidevineMessage
     public $content_key_specs;
 
     /**
-     * Policy settings for this license. In the event this asset has 
+     * Policy settings for this license. In the event this asset has
      * a pre-defined policy, these specified values will be used.
      *
      * @var mixed

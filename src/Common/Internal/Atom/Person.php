@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -44,14 +44,14 @@ use WindowsAzure\Common\Internal\Validate;
 class Person extends AtomBase
 {
     /**
-     * The name of the person. 
+     * The name of the person.
      *
      * @var string
      */
     protected $name;
 
     /**
-     * The Uri of the person. 
+     * The Uri of the person.
      *
      * @var string
      */
@@ -64,10 +64,10 @@ class Person extends AtomBase
      */
     protected $email;
 
-    /** 
+    /**
      * Creates an ATOM person instance with specified name.
      *
-     * @param string $name The name of the person.
+     * @param string $name The name of the person
      */
     public function __construct($name = Resources::EMPTY_STRING)
     {
@@ -75,10 +75,10 @@ class Person extends AtomBase
     }
 
     /**
-     * Populates the properties with a specified XML string. 
-     * 
-     * @param string $xmlString An XML based string representing 
-     *                          the Person instance. 
+     * Populates the properties with a specified XML string.
+     *
+     * @param string $xmlString An XML based string representing
+     *                          the Person instance
      */
     public function parseXml($xmlString)
     {
@@ -98,8 +98,8 @@ class Person extends AtomBase
         }
     }
 
-    /** 
-     * Gets the name of the person. 
+    /**
+     * Gets the name of the person.
      *
      * @return string
      */
@@ -110,8 +110,8 @@ class Person extends AtomBase
 
     /**
      * Sets the name of the person.
-     * 
-     * @param string $name The name of the person.
+     *
+     * @param string $name The name of the person
      */
     public function setName($name)
     {
@@ -119,8 +119,8 @@ class Person extends AtomBase
     }
 
     /**
-     * Gets the URI of the person. 
-     * 
+     * Gets the URI of the person.
+     *
      * @return string
      */
     public function getUri()
@@ -129,9 +129,9 @@ class Person extends AtomBase
     }
 
     /**
-     * Sets the URI of the person. 
-     * 
-     * @param string $uri The URI of the person.
+     * Sets the URI of the person.
+     *
+     * @param string $uri The URI of the person
      */
     public function setUri($uri)
     {
@@ -139,8 +139,8 @@ class Person extends AtomBase
     }
 
     /**
-     * Gets the email of the person. 
-     * 
+     * Gets the email of the person.
+     *
      * @return string
      */
     public function getEmail()
@@ -149,19 +149,19 @@ class Person extends AtomBase
     }
 
     /**
-     * Sets the email of the person. 
-     * 
-     * @param string $email The email of the person.
+     * Sets the email of the person.
+     *
+     * @param string $email The email of the person
      */
     public function setEmail($email)
     {
         $this->email = $email;
     }
 
-    /** 
-     * Writes an XML representing the person. 
-     * 
-     * @param \XMLWriter $xmlWriter The XML writer.
+    /**
+     * Writes an XML representing the person.
+     *
+     * @param \XMLWriter $xmlWriter The XML writer
      */
     public function writeXml(\XMLWriter $xmlWriter)
     {
@@ -175,10 +175,10 @@ class Person extends AtomBase
         $xmlWriter->endElement();
     }
 
-    /** 
-     * Writes a inner XML representing the person. 
-     * 
-     * @param \XMLWriter $xmlWriter The XML writer.
+    /**
+     * Writes a inner XML representing the person.
+     *
+     * @param \XMLWriter $xmlWriter The XML writer
      */
     public function writeInnerXml(\XMLWriter $xmlWriter)
     {

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -27,9 +27,8 @@ namespace WindowsAzure\ServiceBus\Models;
 
 use WindowsAzure\Common\Internal\Atom\Feed;
 
-
 /**
- * The result of a list topics request. 
+ * The result of a list topics request.
  *
  * @category  Microsoft
  *
@@ -44,16 +43,16 @@ use WindowsAzure\Common\Internal\Atom\Feed;
 class ListTopicsResult extends Feed
 {
     /**
-     * Gets the information of the topic. 
-     * 
+     * Gets the information of the topic.
+     *
      * @var TopicInfo[]
      */
     private $_topicInfos;
 
     /**
      * Populates the properties with a the response from the list topics request.
-     * 
-     * @param string $response The body of the response of the list topics request.
+     *
+     * @param string $response The body of the response of the list topics request
      */
     public function parseXml($response)
     {
@@ -68,8 +67,8 @@ class ListTopicsResult extends Feed
     }
 
     /**
-     * Gets the information of the topic. 
-     *  
+     * Gets the information of the topic.
+     *
      * @return TopicInfo[]
      */
     public function getTopicInfos()
@@ -80,7 +79,7 @@ class ListTopicsResult extends Feed
     /**
      * Sets the topic information.
      *
-     * @param TopicInfo[] $topicInfos The information of the topics.
+     * @param TopicInfo[] $topicInfos The information of the topics
      */
     public function setTopicInfos(array $topicInfos)
     {

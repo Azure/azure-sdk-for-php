@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -28,7 +28,7 @@ namespace WindowsAzure\ServiceBus\Internal;
 use WindowsAzure\Common\Internal\FilterableService;
 
 /**
- * This class constructs HTTP requests and receive HTTP responses for queue 
+ * This class constructs HTTP requests and receive HTTP responses for queue
  * service layer.
  *
  * @category  Microsoft
@@ -45,11 +45,11 @@ interface IWrap extends FilterableService
 {
     /**
      * Gets a WRAP access token with specified parameters.
-     * 
-     * @param string $uri      The URI of the WRAP service.
-     * @param string $name     The user name of the WRAP service. 
-     * @param string $password The password of the WRAP service. 
-     * @param string $scope    The scope of the WRAP service. 
+     *
+     * @param string $uri      The URI of the WRAP service
+     * @param string $name     The user name of the WRAP service
+     * @param string $password The password of the WRAP service
+     * @param string $scope    The scope of the WRAP service
      *
      * @return WrapAccessTokenResult
      */

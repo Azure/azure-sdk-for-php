@@ -97,32 +97,32 @@ class AssetDeliveryPolicyConfigurationKey
     const WIDEVINE_LICENSE_ACQUISITION_URL = 7;
 
     /**
-	 * WidevineBaseLicenseAcquisitionUrl, Base Widevine url that will have KID=<Guid> appended
-	 *
-	 * @var int
-	 */
+     * WidevineBaseLicenseAcquisitionUrl, Base Widevine url that will have KID=<Guid> appended.
+     *
+     * @var int
+     */
     const WIDEVINE_BASE_LICENSE_ACQUISITION_URL = 8;
 
     /**
-	 * FairPlay license acquisition URL.
-	 *
-	 * @var int
-	 */
+     * FairPlay license acquisition URL.
+     *
+     * @var int
+     */
     const FAIRPLAY_LICENSE_ACQUISITION_URL = 9;
 
     /**
-	 * Base FairPlay license acquisition URL that will have KID=<Guid> appended.
-	 *
-	 * @var int
-	 */
+     * Base FairPlay license acquisition URL that will have KID=<Guid> appended.
+     *
+     * @var int
+     */
     const FAIRPLAY_BASE_LICENSE_ACQUISITION_URL = 10;
 
     /**
-	 * Initialization Vector that will be used for encrypting the content. Must match
-	 * IV in the AssetDeliveryPolicy.
-	 *
-	 * @var int
-	 */
+     * Initialization Vector that will be used for encrypting the content. Must match
+     * IV in the AssetDeliveryPolicy.
+     *
+     * @var int
+     */
     const COMMON_ENCRYPTION_IV_FOR_CBCS = 11;
 
     /**
@@ -146,6 +146,7 @@ class AssetDeliveryPolicyConfigurationKey
      * Helper function to pack the AssetDeliveryPolicyConfigurationKey.
      *
      * @param string $json
+     *
      * @return array the unpacked array
      */
     public static function parseAssetDeliveryPolicyConfigurationKey($json)

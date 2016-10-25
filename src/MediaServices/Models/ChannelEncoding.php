@@ -113,7 +113,7 @@ class ChannelEncoding
             $this->_adMarkerSource = $options['AdMarkerSource'];
         }
 
-	    if (isset($options['IgnoreCea708ClosedCaptions'])) {
+        if (isset($options['IgnoreCea708ClosedCaptions'])) {
             Validate::isString($options['IgnoreCea708ClosedCaptions'], 'options[IgnoreCea708ClosedCaptions]');
             $this->_ignoreCea708ClosedCaptions = (bool) $options['IgnoreCea708ClosedCaptions'];
         }
@@ -151,7 +151,7 @@ class ChannelEncoding
     /**
      * Set the Encoding AdMarkerSource.
      *
-     * @param string $value Encoding AdMarkerSource.
+     * @param string $value Encoding AdMarkerSource
      */
     public function setAdMarkerSource($value)
     {
@@ -171,7 +171,7 @@ class ChannelEncoding
     /**
      * Set the Encoding IgnoreCea708ClosedCaptions.
      *
-     * @param string $value Encoding IgnoreCea708ClosedCaptions.
+     * @param string $value Encoding IgnoreCea708ClosedCaptions
      */
     public function setIgnoreCea708ClosedCaptions($value)
     {
@@ -191,7 +191,7 @@ class ChannelEncoding
     /**
      * Set the Encoding VideoStreams.
      *
-     * @param VideoStream[] $value Encoding VideoStreams.
+     * @param VideoStream[] $value Encoding VideoStreams
      */
     public function setVideoStreams(array $value)
     {
@@ -211,7 +211,7 @@ class ChannelEncoding
     /**
      * Set the Encoding AudioStreams.
      *
-     * @param AudioStream[] $value Encoding AudioStreams.
+     * @param AudioStream[] $value Encoding AudioStreams
      */
     public function setAudioStreams(array $value)
     {
@@ -231,11 +231,10 @@ class ChannelEncoding
     /**
      * Set the Encoding SystemPreset.
      *
-     * @param string $value Encoding SystemPreset.
+     * @param string $value Encoding SystemPreset
      */
     public function setSystemPreset($value)
     {
         $this->_systemPreset = $value;
     }
 }
-

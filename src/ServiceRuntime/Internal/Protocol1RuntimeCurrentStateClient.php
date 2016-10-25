@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -57,10 +57,10 @@ class Protocol1RuntimeCurrentStateClient implements IRuntimeCurrentStateClient
 
     /**
      * Constructor.
-     * 
+     *
      * @param ICurrentStateSerializer|null $serializer    The current state
-     *                                                    serializer.
-     * @param IOutputChannel|null          $outputChannel The output channel.
+     *                                                    serializer
+     * @param IOutputChannel|null          $outputChannel The output channel
      */
     public function __construct(ICurrentStateSerializer $serializer = null, IOutputChannel $outputChannel = null)
     {
@@ -71,8 +71,8 @@ class Protocol1RuntimeCurrentStateClient implements IRuntimeCurrentStateClient
 
     /**
      * Sets the endpoint to be used.
-     * 
-     * @param string $endpoint The endpoint.
+     *
+     * @param string $endpoint The endpoint
      */
     public function setEndpoint($endpoint)
     {
@@ -81,8 +81,8 @@ class Protocol1RuntimeCurrentStateClient implements IRuntimeCurrentStateClient
 
     /**
      * Sets the current state.
-     * 
-     * @param CurrentState $state The current state.
+     *
+     * @param CurrentState $state The current state
      */
     public function setCurrentState(CurrentState $state)
     {

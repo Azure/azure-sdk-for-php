@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -47,8 +47,8 @@ class RoleEnvironmentConfigurationSettingChange implements IRoleEnvironmentChang
 
     /**
      * Constructor.
-     * 
-     * @param string $settingName The setting name.
+     *
+     * @param string $settingName The setting name
      */
     public function __construct($settingName)
     {
@@ -57,7 +57,7 @@ class RoleEnvironmentConfigurationSettingChange implements IRoleEnvironmentChang
 
     /**
      * Returns the name of the configuration setting that has been changed.
-     * 
+     *
      * @return string
      */
     public function getConfigurationSettingName()

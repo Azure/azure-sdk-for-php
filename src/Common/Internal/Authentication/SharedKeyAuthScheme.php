@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -49,8 +49,8 @@ class SharedKeyAuthScheme extends StorageAuthScheme
     /**
      * Constructor.
      *
-     * @param string $accountName storage account name.
-     * @param string $accountKey  storage account primary or secondary key.
+     * @param string $accountName storage account name
+     * @param string $accountKey  storage account primary or secondary key
      */
     public function __construct($accountName, $accountKey)
     {
@@ -73,14 +73,14 @@ class SharedKeyAuthScheme extends StorageAuthScheme
     /**
      * Computes the authorization signature for blob and queue shared key.
      *
-     * @param array  $headers     request headers.
-     * @param string $url         request URL.
-     * @param array  $queryParams query variables.
-     * @param string $httpMethod  request http method.
-     * 
+     * @param array  $headers     request headers
+     * @param string $url         request URL
+     * @param array  $queryParams query variables
+     * @param string $httpMethod  request http method
+     *
      * @see Blob and Queue Services (Shared Key Authentication) at
      *      http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx
-     * 
+     *
      * @return string
      */
     protected function computeSignature($headers, $url, $queryParams, $httpMethod)
@@ -111,14 +111,14 @@ class SharedKeyAuthScheme extends StorageAuthScheme
     /**
      * Returns authorization header to be included in the request.
      *
-     * @param array  $headers     request headers.
-     * @param string $url         request URL.
-     * @param array  $queryParams query variables.
-     * @param string $httpMethod  request http method.
-     * 
-     * @see Specifying the Authorization Header section at 
+     * @param array  $headers     request headers
+     * @param string $url         request URL
+     * @param array  $queryParams query variables
+     * @param string $httpMethod  request http method
+     *
+     * @see Specifying the Authorization Header section at
      *      http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx
-     * 
+     *
      * @return string
      */
     public function getAuthorizationHeader($headers, $url, $queryParams, $httpMethod)

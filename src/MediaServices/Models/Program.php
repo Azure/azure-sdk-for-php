@@ -235,7 +235,7 @@ class Program
     /**
      * Set the program asset id.
      *
-     * @param string $value AssetId 
+     * @param string $value AssetId
      */
     public function setAssetId($value)
     {
@@ -333,7 +333,7 @@ class Program
     }
 
     /**
-     * Get the program parent channel Id
+     * Get the program parent channel Id.
      *
      * @return string channel Id
      */
@@ -343,7 +343,7 @@ class Program
     }
 
     /**
-     * Set the program parent channel Id
+     * Set the program parent channel Id.
      *
      * @param string $value channel Id
      */

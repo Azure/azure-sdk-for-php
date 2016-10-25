@@ -49,6 +49,7 @@ class ContentEncryptionKeyFromKeyIdentifier extends PlayReadyContentKey
 
     /**
      * Create ContentEncryptionKeyFromKeyIdentifier.
+     *
      * @param string|null $keyIdentifier
      */
     public function __construct($keyIdentifier = null)

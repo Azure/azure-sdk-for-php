@@ -52,7 +52,7 @@ class HeadersFilter implements IServiceFilter
     /**
      * Constructor.
      *
-     * @param array $headers static headers to be added.
+     * @param array $headers static headers to be added
      */
     public function __construct(array $headers)
     {
@@ -62,7 +62,7 @@ class HeadersFilter implements IServiceFilter
     /**
      * Adds static header(s) to the HTTP request headers.
      *
-     * @param IHttpClient $request HTTP channel object.
+     * @param IHttpClient $request HTTP channel object
      *
      * @return IHttpClient
      */
@@ -81,8 +81,8 @@ class HeadersFilter implements IServiceFilter
     /**
      * Does nothing with the response.
      *
-     * @param IHttpClient       $request  HTTP channel object.
-     * @param ResponseInterface $response HTTP response object.
+     * @param IHttpClient       $request  HTTP channel object
+     * @param ResponseInterface $response HTTP response object
      *
      * @return ResponseInterface
      */

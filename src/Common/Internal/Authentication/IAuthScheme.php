@@ -43,10 +43,10 @@ interface IAuthScheme
     /**
      * Returns authorization header to be included in the request.
      *
-     * @param array  $headers     request headers.
-     * @param string $url         request URL.
-     * @param array  $queryParams query variables.
-     * @param string $httpMethod  request http method.
+     * @param array  $headers     request headers
+     * @param string $url         request URL
+     * @param array  $queryParams query variables
+     * @param string $httpMethod  request http method
      *
      * @see Specifying the Authorization Header section at
      *      http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx

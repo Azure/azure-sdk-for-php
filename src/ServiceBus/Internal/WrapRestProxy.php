@@ -47,8 +47,8 @@ class WrapRestProxy extends ServiceRestProxy implements IWrap
     /**
      * Creates a WrapRestProxy with specified parameters.
      *
-     * @param IHttpClient $channel The channel to send the WRAP request.
-     * @param string      $uri     The Uri of the WRAP service.
+     * @param IHttpClient $channel The channel to send the WRAP request
+     * @param string      $uri     The Uri of the WRAP service
      */
     public function __construct(IHttpClient $channel, $uri)
     {
@@ -58,10 +58,10 @@ class WrapRestProxy extends ServiceRestProxy implements IWrap
     /**
      * Gets a WRAP access token with specified parameters.
      *
-     * @param string $uri      The URI of the WRAP service.
-     * @param string $name     The user name of the WRAP service.
-     * @param string $password The password of the WRAP service.
-     * @param string $scope    The scope of the WRAP service.
+     * @param string $uri      The URI of the WRAP service
+     * @param string $name     The user name of the WRAP service
+     * @param string $password The password of the WRAP service
+     * @param string $scope    The scope of the WRAP service
      *
      * @return WrapAccessTokenResult
      */

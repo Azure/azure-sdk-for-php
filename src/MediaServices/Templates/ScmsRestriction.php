@@ -49,6 +49,7 @@ class ScmsRestriction
 
     /**
      * Create ScmsRestriction.
+     *
      * @param $configurationData
      */
     public function __construct($configurationData)

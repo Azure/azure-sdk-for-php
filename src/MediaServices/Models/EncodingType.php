@@ -41,16 +41,16 @@ namespace WindowsAzure\MediaServices\Models;
 class EncodingType
 {
     /**
-     * None
+     * None.
      *
      * @var string
      */
-    const None = "None";
+    const None = 'None';
 
     /**
-     * Standard
+     * Standard.
      *
      * @var string
      */
-    const Standard = "Standard";
+    const Standard = 'Standard';
 }

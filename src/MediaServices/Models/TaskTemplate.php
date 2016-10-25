@@ -172,9 +172,9 @@ class TaskTemplate
      * Create task.
      *
      * @param int $numberofInputAssets  Number of input Assets the TaskTemplate
-     *                                  must process.
+     *                                  must process
      * @param int $numberofOutputAssets Number of output Assets the TaskTemplate
-     *                                  must process.
+     *                                  must process
      */
     public function __construct($numberofInputAssets, $numberofOutputAssets)
     {

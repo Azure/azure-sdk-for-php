@@ -69,9 +69,9 @@ class RestProxy
     /**
      * Initializes new RestProxy object.
      *
-     * @param IHttpClient      $channel        The HTTP client used to send HTTP requests.
-     * @param ISerializer|null $dataSerializer The data serializer.
-     * @param string           $uri            The uri of the service.
+     * @param IHttpClient      $channel        The HTTP client used to send HTTP requests
+     * @param ISerializer|null $dataSerializer The data serializer
+     * @param string           $uri            The uri of the service
      */
     public function __construct(IHttpClient $channel, $dataSerializer, $uri)
     {
@@ -104,7 +104,7 @@ class RestProxy
     /**
      * Sets the Uri of the service.
      *
-     * @param string $uri The URI of the request.
+     * @param string $uri The URI of the request
      */
     public function setUri($uri)
     {
@@ -114,7 +114,7 @@ class RestProxy
     /**
      * Sends HTTP request with the specified HTTP call context.
      *
-     * @param HttpCallContext $context The HTTP call context.
+     * @param HttpCallContext $context The HTTP call context
      *
      * @return ResponseInterface
      */
@@ -147,9 +147,9 @@ class RestProxy
     /**
      * Adds new filter to new service rest proxy object and returns that object back.
      *
-     * @param IServiceFilter $filter Filter to add for the pipeline.
+     * @param IServiceFilter $filter Filter to add for the pipeline
      *
-     * @return RestProxy.
+     * @return RestProxy
      */
     public function withFilter(IServiceFilter $filter)
     {
@@ -164,9 +164,9 @@ class RestProxy
      *
      * Doesn't add the value if it satisfies empty().
      *
-     * @param array  &$queryParameters The query parameters.
-     * @param string $key              The query variable name.
-     * @param string $value            The query variable value.
+     * @param array  &$queryParameters The query parameters
+     * @param string $key              The query variable name
+     * @param string $value            The query variable value
      */
     protected function addOptionalQueryParam(array &$queryParameters, $key, $value)
     {
@@ -183,9 +183,9 @@ class RestProxy
      *
      * Doesn't add the value if it satisfies empty().
      *
-     * @param array  &$headers The HTTP header parameters.
-     * @param string $key      The HTTP header name.
-     * @param string $value    The HTTP header value.
+     * @param array  &$headers The HTTP header parameters
+     * @param string $key      The HTTP header name
+     * @param string $value    The HTTP header value
      */
     protected function addOptionalHeader(array &$headers, $key, $value)
     {

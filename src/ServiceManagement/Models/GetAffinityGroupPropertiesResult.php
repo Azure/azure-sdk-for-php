@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -60,9 +60,9 @@ class GetAffinityGroupPropertiesResult
 
     /**
      * Creates GetAffinityGroupPropertiesResult from parsed response into array.
-     * 
-     * @param array $parsed The parsed HTTP response body.
-     * 
+     *
+     * @param array $parsed The parsed HTTP response body
+     *
      * @return GetAffinityGroupPropertiesResult
      */
     public static function create($parsed)
@@ -94,7 +94,7 @@ class GetAffinityGroupPropertiesResult
 
     /**
      * Gets the affinityGroup.
-     * 
+     *
      * @return AffinityGroup
      */
     public function getAffinityGroup()
@@ -104,8 +104,8 @@ class GetAffinityGroupPropertiesResult
 
     /**
      * Sets the affinityGroup.
-     * 
-     * @param AffinityGroup $affinityGroup The affinityGroup.
+     *
+     * @param AffinityGroup $affinityGroup The affinityGroup
      */
     public function setAffinityGroup($affinityGroup)
     {
@@ -114,7 +114,7 @@ class GetAffinityGroupPropertiesResult
 
     /**
      * Gets the hostedServices.
-     * 
+     *
      * @return array
      */
     public function getHostedServices()
@@ -124,8 +124,8 @@ class GetAffinityGroupPropertiesResult
 
     /**
      * Sets the hostedServices.
-     * 
-     * @param array $hostedServices The hostedServices.
+     *
+     * @param array $hostedServices The hostedServices
      */
     public function setHostedServices($hostedServices)
     {
@@ -134,7 +134,7 @@ class GetAffinityGroupPropertiesResult
 
     /**
      * Gets the storageServices.
-     * 
+     *
      * @return array
      */
     public function getStorageServices()
@@ -144,8 +144,8 @@ class GetAffinityGroupPropertiesResult
 
     /**
      * Sets the storageServices.
-     * 
-     * @param array $storageServices The storageServices.
+     *
+     * @param array $storageServices The storageServices
      */
     public function setStorageServices($storageServices)
     {

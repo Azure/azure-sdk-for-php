@@ -26,7 +26,6 @@
 namespace WindowsAzure\Common\Internal\Http;
 
 use Psr\Http\Message\ResponseInterface;
-
 use WindowsAzure\Common\ServiceException;
 
 /**
@@ -47,7 +46,7 @@ interface IHttpClient
     /**
      * Sets the request url.
      *
-     * @param IUrl $url request url.
+     * @param IUrl $url request url
      */
     public function setUrl(IUrl $url);
 
@@ -61,7 +60,7 @@ interface IHttpClient
     /**
      * Sets request's HTTP method.
      *
-     * @param string $method request's HTTP method.
+     * @param string $method request's HTTP method
      */
     public function setMethod($method);
 
@@ -83,8 +82,8 @@ interface IHttpClient
      * Sets a an existing request header to value or creates a new one if the $header
      * doesn't exist.
      *
-     * @param string $header  header name.
-     * @param string $value   header value.
+     * @param string $header  header name
+     * @param string $value   header value
      * @param bool   $replace whether to replace previous header with the same name
      *                        or append to its value (comma separated)
      */
@@ -100,7 +99,7 @@ interface IHttpClient
     /**
      * Sets HTTP POST parameters.
      *
-     * @param array $postParameters The HTTP POST parameters.
+     * @param array $postParameters The HTTP POST parameters
      */
     public function setPostParameters(array $postParameters);
 
@@ -109,10 +108,10 @@ interface IHttpClient
      * sends HTTP request to the wire and process the response in the HTTP pipeline.
      *
      * @param array $filters HTTP filters which will be applied to the request before
-     *                       send and then applied to the response.
-     * @param IUrl  $url     Request url.
+     *                       send and then applied to the response
+     * @param IUrl  $url     Request url
      *
-     * @return ResponseInterface The response.
+     * @return ResponseInterface The response
      */
     public function sendAndGetHttpResponse(array $filters, IUrl $url = null);
 
@@ -121,55 +120,55 @@ interface IHttpClient
      * sends HTTP request to the wire and process the response in the HTTP pipeline.
      *
      * @param array $filters HTTP filters which will be applied to the request before
-     *                       send and then applied to the response.
-     * @param IUrl  $url     Request url.
+     *                       send and then applied to the response
+     * @param IUrl  $url     Request url
      *
-     * @return string The response body.
+     * @return string The response body
      */
     public function send(array $filters, IUrl $url = null);
 
     /**
      * Sets successful status code.
      *
-     * @param array|string $statusCodes successful status code.
+     * @param array|string $statusCodes successful status code
      */
     public function setExpectedStatusCode($statusCodes);
 
     /**
      * Gets successful status code.
      *
-     * @return array.
+     * @return array
      */
     public function getSuccessfulStatusCode();
 
     /**
      * Sets a configuration element for the request.
      *
-     * @param string $name  configuration parameter name.
-     * @param mixed  $value configuration parameter value.
+     * @param string $name  configuration parameter name
+     * @param mixed  $value configuration parameter value
      */
     public function setConfig($name, $value = null);
 
     /**
      * Gets value for configuration parameter.
      *
-     * @param string $name configuration parameter name.
+     * @param string $name configuration parameter name
      *
-     * @return string.
+     * @return string
      */
     public function getConfig($name);
 
     /**
      * Sets the request body.
      *
-     * @param string $body body to use.
+     * @param string $body body to use
      */
     public function setBody($body);
 
     /**
      * Gets the request body.
      *
-     * @return string.
+     * @return string
      */
     public function getBody();
 
@@ -183,10 +182,10 @@ interface IHttpClient
     /**
      * Throws ServiceException if the received status code is not expected.
      *
-     * @param string $actual   The received status code.
-     * @param string $reason   The reason phrase.
-     * @param string $message  The detailed message (if any).
-     * @param array  $expected The expected status codes.
+     * @param string $actual   The received status code
+     * @param string $reason   The reason phrase
+     * @param string $message  The detailed message (if any)
+     * @param array  $expected The expected status codes
      *
      * @static
      *

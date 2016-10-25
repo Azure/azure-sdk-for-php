@@ -68,7 +68,7 @@ class HttpCallContext
     /**
      * The HTTP POST parameters.
      *
-     * @var array.
+     * @var array
      */
     private $_postParameters = [];
 
@@ -111,7 +111,7 @@ class HttpCallContext
     /**
      * Sets method.
      *
-     * @param string $method The method value.
+     * @param string $method The method value
      */
     public function setMethod($method)
     {
@@ -135,7 +135,7 @@ class HttpCallContext
      *
      * Ignores the header if its value is empty.
      *
-     * @param array $headers The headers value.
+     * @param array $headers The headers value
      */
     public function setHeaders(array $headers)
     {
@@ -160,7 +160,7 @@ class HttpCallContext
      *
      * Ignores the query variable if its value is empty.
      *
-     * @param array $queryParams The queryParams value.
+     * @param array $queryParams The queryParams value
      */
     public function setQueryParameters(array $queryParams)
     {
@@ -183,7 +183,7 @@ class HttpCallContext
     /**
      * Sets uri.
      *
-     * @param string $uri The uri value.
+     * @param string $uri The uri value
      */
     public function setUri($uri)
     {
@@ -205,7 +205,7 @@ class HttpCallContext
     /**
      * Sets path.
      *
-     * @param string $path The path value.
+     * @param string $path The path value
      */
     public function setPath($path)
     {
@@ -227,7 +227,7 @@ class HttpCallContext
     /**
      * Sets statusCodes.
      *
-     * @param array $statusCodes The statusCodes value.
+     * @param array $statusCodes The statusCodes value
      */
     public function setStatusCodes(array $statusCodes)
     {
@@ -250,7 +250,7 @@ class HttpCallContext
     /**
      * Sets body.
      *
-     * @param string $body The body value.
+     * @param string $body The body value
      */
     public function setBody($body)
     {
@@ -262,8 +262,8 @@ class HttpCallContext
     /**
      * Adds or sets header pair.
      *
-     * @param string $name  The HTTP header name.
-     * @param string $value The HTTP header value.
+     * @param string $name  The HTTP header name
+     * @param string $value The HTTP header value
      */
     public function addHeader($name, $value)
     {
@@ -278,8 +278,8 @@ class HttpCallContext
      *
      * Ignores header if it's value satisfies empty().
      *
-     * @param string $name  The HTTP header name.
-     * @param string $value The HTTP header value.
+     * @param string $name  The HTTP header name
+     * @param string $value The HTTP header value
      */
     public function addOptionalHeader($name, $value)
     {
@@ -294,7 +294,7 @@ class HttpCallContext
     /**
      * Removes header from the HTTP request headers.
      *
-     * @param string $name The HTTP header name.
+     * @param string $name The HTTP header name
      */
     public function removeHeader($name)
     {
@@ -307,8 +307,8 @@ class HttpCallContext
     /**
      * Adds or sets query parameter pair.
      *
-     * @param string $name  The URI query parameter name.
-     * @param string $value The URI query parameter value.
+     * @param string $name  The URI query parameter name
+     * @param string $value The URI query parameter value
      */
     public function addQueryParameter($name, $value)
     {
@@ -331,7 +331,7 @@ class HttpCallContext
     /**
      * Sets HTTP POST parameters.
      *
-     * @param array $postParameters The HTTP POST parameters.
+     * @param array $postParameters The HTTP POST parameters
      */
     public function setPostParameters(array $postParameters)
     {
@@ -343,8 +343,8 @@ class HttpCallContext
      *
      * Ignores query parameter if it's value satisfies empty().
      *
-     * @param string $name  The URI query parameter name.
-     * @param string $value The URI query parameter value.
+     * @param string $name  The URI query parameter name
+     * @param string $value The URI query parameter value
      */
     public function addOptionalQueryParameter($name, $value)
     {
@@ -359,7 +359,7 @@ class HttpCallContext
     /**
      * Adds status code to the expected status codes.
      *
-     * @param int $statusCode The expected status code.
+     * @param int $statusCode The expected status code
      */
     public function addStatusCode($statusCode)
     {
@@ -371,7 +371,7 @@ class HttpCallContext
     /**
      * Gets header value.
      *
-     * @param string $name The header name.
+     * @param string $name The header name
      *
      * @return mixed
      */

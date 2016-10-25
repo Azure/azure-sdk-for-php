@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -60,9 +60,9 @@ class InputEndpoint
 
     /**
      * Creates a new InputEndpoint from parsed response body.
-     * 
-     * @param array $parsed The parsed response body in array representation.
-     * 
+     *
+     * @param array $parsed The parsed response body in array representation
+     *
      * @return InputEndpoint
      */
     public static function create($parsed)
@@ -84,9 +84,9 @@ class InputEndpoint
 
     /**
      * Gets the input endpoint role name.
-     * 
+     *
      * The name of the role.
-     * 
+     *
      * @return string
      */
     public function getRoleName()
@@ -96,8 +96,8 @@ class InputEndpoint
 
     /**
      * Sets the input endpoint role name.
-     * 
-     * @param string $roleName The input endpoint role name.
+     *
+     * @param string $roleName The input endpoint role name
      */
     public function setRoleName($roleName)
     {
@@ -106,9 +106,9 @@ class InputEndpoint
 
     /**
      * Gets the input endpoint VIP.
-     * 
+     *
      * The virtual IP address that this input endpoint is exposed on.
-     * 
+     *
      * @return string
      */
     public function getVip()
@@ -118,8 +118,8 @@ class InputEndpoint
 
     /**
      * Sets the input endpoint VIP.
-     * 
-     * @param string $vip The input endpoint VIP.
+     *
+     * @param string $vip The input endpoint VIP
      */
     public function setVip($vip)
     {
@@ -128,9 +128,9 @@ class InputEndpoint
 
     /**
      * Gets the input endpoint port.
-     * 
+     *
      * The port this input endpoint is exposed on.
-     * 
+     *
      * @return string
      */
     public function getPort()
@@ -140,8 +140,8 @@ class InputEndpoint
 
     /**
      * Sets the input endpoint port.
-     * 
-     * @param string $port The input endpoint port.
+     *
+     * @param string $port The input endpoint port
      */
     public function setPort($port)
     {

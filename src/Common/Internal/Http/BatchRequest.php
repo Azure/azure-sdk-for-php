@@ -29,7 +29,6 @@ use Mail_mimePart;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 
-
 /**
  * Batch request marshaller.
  *

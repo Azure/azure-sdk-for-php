@@ -151,7 +151,7 @@ class IPRange
     /**
      * Set the ip range Address.
      *
-     * @param string $value ip range Address.
+     * @param string $value ip range Address
      */
     public function setAddress($value)
     {
@@ -171,7 +171,7 @@ class IPRange
     /**
      * Set the ip range SubnetPrefixLength.
      *
-     * @param string $value ip range SubnetPrefixLength.
+     * @param string $value ip range SubnetPrefixLength
      */
     public function setSubnetPrefixLength($value)
     {

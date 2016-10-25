@@ -10,7 +10,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -25,7 +25,7 @@
 namespace WindowsAzure\ServiceBus\Models;
 
 /**
- * The options for a receive message request. 
+ * The options for a receive message request.
  *
  * @category  Microsoft
  *
@@ -40,20 +40,20 @@ namespace WindowsAzure\ServiceBus\Models;
 class ReceiveMessageOptions
 {
     /**
-     * The timeout value of receiving message. 
+     * The timeout value of receiving message.
      *
      * @var int
      */
     private $_timeout;
 
     /**
-     * The mode of receiving message. 
-     * 
+     * The mode of receiving message.
+     *
      * @var int
      */
     private $_receiveMode;
 
-    /** 
+    /**
      * Creates a receive message option instance with default parameters.
      */
     public function __construct()
@@ -61,8 +61,8 @@ class ReceiveMessageOptions
         $this->_receiveMode = ReceiveMode::RECEIVE_AND_DELETE;
     }
     /**
-     * Gets the timeout of the receive message request. 
-     * 
+     * Gets the timeout of the receive message request.
+     *
      * @return int
      */
     public function getTimeout()
@@ -71,9 +71,9 @@ class ReceiveMessageOptions
     }
 
     /**
-     * Sets the timeout of the receive message request. 
+     * Sets the timeout of the receive message request.
      *
-     * @param int $timeout The timeout of the receive message request. 
+     * @param int $timeout The timeout of the receive message request
      */
     public function setTimeout($timeout)
     {
@@ -81,8 +81,8 @@ class ReceiveMessageOptions
     }
 
     /**
-     * Gets the receive mode. 
-     * 
+     * Gets the receive mode.
+     *
      * @return int
      */
     public function getReceiveMode()
@@ -91,9 +91,9 @@ class ReceiveMessageOptions
     }
 
     /**
-     * Sets the receive mode. 
-     * 
-     * @param int $receiveMode The mode of receiving the message. 
+     * Sets the receive mode.
+     *
+     * @param int $receiveMode The mode of receiving the message
      */
     public function setReceiveMode($receiveMode)
     {
@@ -101,8 +101,8 @@ class ReceiveMessageOptions
     }
 
     /**
-     * Gets is receive and delete. 
-     * 
+     * Gets is receive and delete.
+     *
      * @return bool
      */
     public function getIsReceiveAndDelete()
@@ -119,8 +119,8 @@ class ReceiveMessageOptions
     }
 
     /**
-     * Gets peek lock. 
-     * 
+     * Gets peek lock.
+     *
      * @return bool
      */
     public function getIsPeekLock()
@@ -129,7 +129,7 @@ class ReceiveMessageOptions
     }
 
     /**
-     * Sets peek lock. 
+     * Sets peek lock.
      */
     public function setPeekLock()
     {

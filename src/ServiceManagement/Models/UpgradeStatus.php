@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -60,9 +60,9 @@ class UpgradeStatus
 
     /**
      * Creates a new UpgradeStatus object from the parsed response.
-     * 
+     *
      * @param array $parsed The parsed response body in array representation
-     * 
+     *
      * @return \WindowsAzure\ServiceManagement\Models\UpgradeStatus
      */
     public static function create($parsed)
@@ -90,10 +90,10 @@ class UpgradeStatus
 
     /**
      * Gets the deployment upgrade type.
-     * 
+     *
      * The upgrade type designated for this deployment. Possible values are Auto and
      * Manual.
-     * 
+     *
      * @return string
      */
     public function getUpgradeType()
@@ -103,8 +103,8 @@ class UpgradeStatus
 
     /**
      * Sets the deployment upgrade type.
-     * 
-     * @param string $upgradeType The deployment upgrade type.
+     *
+     * @param string $upgradeType The deployment upgrade type
      */
     public function setUpgradeType($upgradeType)
     {
@@ -113,10 +113,10 @@ class UpgradeStatus
 
     /**
      * Gets the deployment current upgrade domain state.
-     * 
-     * The state of the current upgrade domain. Possible values are Before and 
+     *
+     * The state of the current upgrade domain. Possible values are Before and
      * During.
-     * 
+     *
      * @return string
      */
     public function getCurrentUpgradeDomainState()
@@ -126,9 +126,9 @@ class UpgradeStatus
 
     /**
      * Sets the deployment current upgrade domain state.
-     * 
+     *
      * @param string $currentUpgradeDomainState The deployment current upgrade domain
-     *                                          state.
+     *                                          state
      */
     public function setCurrentUpgradeDomainState($currentUpgradeDomainState)
     {
@@ -137,11 +137,11 @@ class UpgradeStatus
 
     /**
      * Gets the deployment current upgrade domain.
-     * 
-     * An integer value that identifies the current upgrade domain. Upgrade domains 
+     *
+     * An integer value that identifies the current upgrade domain. Upgrade domains
      * are identified with a zero-based index: the first upgrade domain has an ID of
      * 0, the second has an ID of 1, and so on.
-     * 
+     *
      * @return int
      */
     public function getCurrentUpgradeDomain()
@@ -151,8 +151,8 @@ class UpgradeStatus
 
     /**
      * Sets the deployment current upgrade domain.
-     * 
-     * @param int $currentUpgradeDomain The deployment current upgrade domain.
+     *
+     * @param int $currentUpgradeDomain The deployment current upgrade domain
      */
     public function setCurrentUpgradeDomain($currentUpgradeDomain)
     {

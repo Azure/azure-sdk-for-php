@@ -41,23 +41,23 @@ namespace WindowsAzure\MediaServices\Models;
 class OperationState
 {
     /**
-     * Succeeded
+     * Succeeded.
      *
      * @var string
      */
-    const Succeeded = "Succeeded";
+    const Succeeded = 'Succeeded';
 
     /**
-     * Failed
+     * Failed.
      *
      * @var string
      */
-    const Failed = "Failed";
+    const Failed = 'Failed';
 
     /**
-     * InProgress
+     * InProgress.
      *
      * @var string
      */
-    const InProgress = "InProgress";
+    const InProgress = 'InProgress';
 }

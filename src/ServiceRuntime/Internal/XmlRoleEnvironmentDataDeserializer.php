@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -44,9 +44,9 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
 {
     /**
      * Deserializes the role environment data.
-     * 
-     * @param resource $inputChannel The input Channel.
-     * 
+     *
+     * @param resource $inputChannel The input Channel
+     *
      * @return RoleEnvironmentData
      */
     public function deserialize($inputChannel)
@@ -79,9 +79,9 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
 
     /**
      * Translates the configuration settings.
-     * 
-     * @param string $environmentInfo The role environment info.
-     * 
+     *
+     * @param string $environmentInfo The role environment info
+     *
      * @return array
      */
     private function _translateConfigurationSettings($environmentInfo)
@@ -112,9 +112,9 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
 
     /**
      * Translates the local resources.
-     * 
-     * @param string $environmentInfo The role environment info.
-     * 
+     *
+     * @param string $environmentInfo The role environment info
+     *
      * @return LocalResource[]
      */
     private function _translateLocalResources($environmentInfo)
@@ -149,11 +149,11 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
 
     /**
      * Translates the roles.
-     * 
-     * @param string       $environmentInfo The role environment info.
-     * @param RoleInstance $currentInstance The current instance info.
-     * @param string       $currentRole     The current role.
-     * 
+     *
+     * @param string       $environmentInfo The role environment info
+     * @param RoleInstance $currentInstance The current instance info
+     * @param string       $currentRole     The current role
+     *
      * @return array
      */
     private function _translateRoles(
@@ -206,9 +206,9 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
 
     /**
      * Translates the role instances.
-     * 
-     * @param string $instancesInfo The instance info.
-     * 
+     *
+     * @param string $instancesInfo The instance info
+     *
      * @return RoleInstance[]
      */
     private function _translateRoleInstances($instancesInfo)
@@ -248,9 +248,9 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
 
     /**
      * Translates the role instance endpoints.
-     * 
-     * @param string $endpointsInfo The endpoints info.
-     * 
+     *
+     * @param string $endpointsInfo The endpoints info
+     *
      * @return RoleInstanceEndpoint[]
      */
     private function _translateRoleInstanceEndpoints($endpointsInfo)
@@ -277,9 +277,9 @@ class XmlRoleEnvironmentDataDeserializer implements IRoleEnvironmentDataDeserial
 
     /**
      * Translates the current instance info.
-     * 
-     * @param string $environmentInfo The environment info.
-     * 
+     *
+     * @param string $environmentInfo The environment info
+     *
      * @return RoleInstance
      */
     private function _translateCurrentInstance($environmentInfo)

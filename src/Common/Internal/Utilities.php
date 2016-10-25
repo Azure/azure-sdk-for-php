@@ -44,9 +44,9 @@ class Utilities
      * Returns the specified value of the $key passed from $array and in case that
      * this $key doesn't exist, the default value is returned.
      *
-     * @param array|null $array   The array to be used.
-     * @param mixed      $key     The array key.
-     * @param mixed      $default The value to return if $key is not found in $array.
+     * @param array|null $array   The array to be used
+     * @param mixed      $key     The array key
+     * @param mixed      $default The value to return if $key is not found in $array
      *
      * @static
      *
@@ -62,7 +62,7 @@ class Utilities
     /**
      * Adds a url scheme if there is no scheme.
      *
-     * @param string $url    The URL.
+     * @param string $url    The URL
      * @param string $scheme The scheme. By default HTTP
      *
      * @static
@@ -85,8 +85,8 @@ class Utilities
      *
      * Returns empty array object if the value is NULL.
      *
-     * @param string $key   The index name.
-     * @param array  $array The array object.
+     * @param string $key   The index name
+     * @param array  $array The array object
      *
      * @static
      *
@@ -103,9 +103,9 @@ class Utilities
      * This function just validates that the given $array is actually array. If it's
      * NULL the function treats it as array.
      *
-     * @param string      $key    The key.
-     * @param string      $value  The value.
-     * @param array|null &$array The array. If NULL will be used as array.
+     * @param string     $key    The key
+     * @param string     $value  The value
+     * @param array|null &$array The array. If NULL will be used as array
      *
      * @static
      */
@@ -124,7 +124,7 @@ class Utilities
      * Returns the specified value of the key chain passed from $array and in case
      * that key chain doesn't exist, null is returned.
      *
-     * @param array $array Array to be used.
+     * @param array $array Array to be used
      *
      * @static
      *
@@ -204,7 +204,7 @@ class Utilities
     /**
      * Unserializes the passed $xml into array.
      *
-     * @param string $xml XML to be parsed.
+     * @param string $xml XML to be parsed
      *
      * @static
      *
@@ -245,9 +245,9 @@ class Utilities
      * Serializes given array into xml. The array indices must be string to use
      * them as XML tags.
      *
-     * @param array  $array      object to serialize represented in array.
-     * @param string $rootName   name of the XML root element.
-     * @param string $defaultTag default tag for non-tagged elements.
+     * @param array  $array      object to serialize represented in array
+     * @param string $rootName   name of the XML root element
+     * @param string $defaultTag default tag for non-tagged elements
      * @param string $standalone adds 'standalone' header tag, values 'yes'/'no'
      *
      * @static
@@ -281,9 +281,9 @@ class Utilities
      * Takes an array and produces XML based on it.
      *
      * @param \XMLWriter $xmlw       XMLWriter object that was previously instanted
-     *                               and is used for creating the XML.
+     *                               and is used for creating the XML
      * @param array      $data       Array to be converted to XML
-     * @param string     $defaultTag Default XML tag to be used if none specified.
+     * @param string     $defaultTag Default XML tag to be used if none specified
      *
      * @static
      */
@@ -318,7 +318,7 @@ class Utilities
     /**
      * Converts string into boolean value.
      *
-     * @param string $obj boolean value in string format.
+     * @param string $obj boolean value in string format
      *
      * @static
      *
@@ -332,7 +332,7 @@ class Utilities
     /**
      * Converts string into boolean value.
      *
-     * @param bool $obj boolean value to convert.
+     * @param bool $obj boolean value to convert
      *
      * @static
      *
@@ -346,7 +346,7 @@ class Utilities
     /**
      * Converts a given date string into \DateTime object.
      *
-     * @param string $date windows azure date ins string representation.
+     * @param string $date windows azure date ins string representation
      *
      * @static
      *
@@ -364,7 +364,7 @@ class Utilities
      * Generate ISO 8601 compliant date string in UTC time zone.
      *
      * @param int $timestamp The unix timestamp to convert
-     *                       (for DateTime check date_timestamp_get).
+     *                       (for DateTime check date_timestamp_get)
      *
      * @static
      *
@@ -391,7 +391,7 @@ class Utilities
      * Converts a DateTime object into an Edm.DaeTime value in UTC timezone,
      * represented as a string.
      *
-     * @param \DateTime $value The datetime value.
+     * @param \DateTime $value The datetime value
      *
      * @static
      *
@@ -418,7 +418,7 @@ class Utilities
     /**
      * Converts a string to a \DateTime object. Returns false on failure.
      *
-     * @param string $value The string value to parse.
+     * @param string $value The string value to parse
      *
      * @static
      *
@@ -440,7 +440,7 @@ class Utilities
     /**
      * Converts string to stream handle.
      *
-     * @param string $string The string contents.
+     * @param string $string The string contents
      *
      * @static
      *
@@ -454,8 +454,8 @@ class Utilities
     /**
      * Sorts an array based on given keys order.
      *
-     * @param array $array The array to sort.
-     * @param array $order The keys order array.
+     * @param array $array The array to sort
+     * @param array $order The keys order array
      *
      * @return array
      */
@@ -476,8 +476,8 @@ class Utilities
      * Checks if a value exists in an array. The comparison is done in a case
      * insensitive manner.
      *
-     * @param string $needle   The searched value.
-     * @param array  $haystack The array.
+     * @param string $needle   The searched value
+     * @param array  $haystack The array
      *
      * @static
      *
@@ -492,8 +492,8 @@ class Utilities
      * Checks if the given key exists in the array. The comparison is done in a case
      * insensitive manner.
      *
-     * @param string $key    The value to check.
-     * @param array  $search The array with keys to check.
+     * @param string $key    The value to check
+     * @param array  $search The array with keys to check
      *
      * @static
      *
@@ -509,9 +509,9 @@ class Utilities
      * this $key doesn't exist, the default value is returned. The key matching is
      * done in a case insensitive manner.
      *
-     * @param string $key      The array key.
-     * @param array  $haystack The array to be used.
-     * @param mixed  $default  The value to return if $key is not found in $array.
+     * @param string $key      The array key
+     * @param array  $haystack The array to be used
+     * @param mixed  $default  The value to return if $key is not found in $array
      *
      * @static
      *
@@ -537,7 +537,7 @@ class Utilities
      *
      * @static
      *
-     * @return string A new GUID.
+     * @return string A new GUID
      */
     public static function getGuid()
     {
@@ -568,7 +568,7 @@ class Utilities
      * create method.
      *
      * @param array  $parsed The object in array representation
-     * @param string $class  The class name. Must have static method create.
+     * @param string $class  The class name. Must have static method create
      *
      * @static
      *
@@ -588,8 +588,8 @@ class Utilities
     /**
      * Takes a string and return if it ends with the specified character/string.
      *
-     * @param string $haystack   The string to search in.
-     * @param string $needle     postfix to match.
+     * @param string $haystack   The string to search in
+     * @param string $needle     postfix to match
      * @param bool   $ignoreCase Set true to ignore case during the comparison;
      *                           otherwise, false
      *
@@ -635,13 +635,13 @@ class Utilities
     }
 
     /**
-     * Generate a pseudo-random string of bytes using a cryptographically strong 
+     * Generate a pseudo-random string of bytes using a cryptographically strong
      * algorithm.
      *
      * @param int $length Length of the string in bytes
      *
-     * @return string|bool Generated string of bytes on success, or FALSE on 
-     *                     failure.
+     * @return string|bool Generated string of bytes on success, or FALSE on
+     *                     failure
      */
     public static function generateCryptoKey($length)
     {
@@ -650,11 +650,11 @@ class Utilities
 
     /**
      * Encrypts $data with CTR encryption.
-     * 
+     *
      * @param string $data                 Data to be encrypted
      * @param string $key                  AES Encryption key
      * @param string $initializationVector Initialization vector
-     * 
+     *
      * @return string Encrypted data
      */
     public static function ctrCrypt($data, $key, $initializationVector)
@@ -700,10 +700,10 @@ class Utilities
     }
 
     /**
-     * Convert base 256 number to decimal number. 
-     * 
+     * Convert base 256 number to decimal number.
+     *
      * @param string $number Base 256 number
-     * 
+     *
      * @return string Decimal number
      */
     public static function base256ToDec($number)

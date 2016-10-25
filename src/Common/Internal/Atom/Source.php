@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -46,98 +46,98 @@ class Source extends AtomBase
     // @codingStandardsIgnoreStart
 
     /**
-     * The author the source. 
-     * 
+     * The author the source.
+     *
      * @var Person[]
      */
     protected $author;
 
     /**
-     * The category of the source. 
-     * 
+     * The category of the source.
+     *
      * @var array
      */
     protected $category;
 
     /**
-     * The contributor of the source. 
-     * 
+     * The contributor of the source.
+     *
      * @var array
      */
     protected $contributor;
 
     /**
-     * The generator of the source. 
-     * 
+     * The generator of the source.
+     *
      * @var Generator
      */
     protected $generator;
 
     /**
-     * The icon of the source. 
-     * 
+     * The icon of the source.
+     *
      * @var string
      */
     protected $icon;
 
     /**
-     * The ID of the source. 
-     * 
+     * The ID of the source.
+     *
      * @var string
      */
     protected $id;
 
     /**
-     * The link of the source. 
-     * 
+     * The link of the source.
+     *
      * @var array
      */
     protected $link;
 
     /**
-     * The logo of the source. 
-     * 
+     * The logo of the source.
+     *
      * @var string
      */
     protected $logo;
 
     /**
-     * The rights of the source. 
-     * 
+     * The rights of the source.
+     *
      * @var string
      */
     protected $rights;
 
     /**
-     * The subtitle of the source. 
-     * 
+     * The subtitle of the source.
+     *
      * @var string
      */
     protected $subtitle;
 
     /**
-     * The title of the source. 
-     * 
+     * The title of the source.
+     *
      * @var string
      */
     protected $title;
 
     /**
-     * The update of the source. 
-     * 
+     * The update of the source.
+     *
      * @var \DateTime
      */
     protected $updated;
 
     /**
-     * The extension element of the source. 
-     * 
+     * The extension element of the source.
+     *
      * @var string
      */
     protected $extensionElement;
 
     /**
-     * Creates an ATOM FEED object with default parameters. 
+     * Creates an ATOM FEED object with default parameters.
      */
     public function __construct()
     {
@@ -148,9 +148,9 @@ class Source extends AtomBase
     }
 
     /**
-     * Creates a source object with specified XML string. 
-     * 
-     * @param string $xmlString The XML string representing a source.
+     * Creates a source object with specified XML string.
+     *
+     * @param string $xmlString The XML string representing a source
      */
     public function parseXml($xmlString)
     {
@@ -212,7 +212,7 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the author of the source. 
+     * Gets the author of the source.
      *
      * @return array
      */
@@ -222,9 +222,9 @@ class Source extends AtomBase
     }
 
     /**
-     * Sets the author of the source. 
+     * Sets the author of the source.
      *
-     * @param array $author An array of authors of the sources. 
+     * @param array $author An array of authors of the sources
      */
     public function setAuthor(array $author)
     {
@@ -233,7 +233,7 @@ class Source extends AtomBase
 
     /**
      * Gets the category of the source.
-     *  
+     *
      * @return array
      */
     public function getCategory()
@@ -243,8 +243,8 @@ class Source extends AtomBase
 
     /**
      * Sets the category of the source.
-     *  
-     * @param array $category The category of the source. 
+     *
+     * @param array $category The category of the source
      */
     public function setCategory(array $category)
     {
@@ -263,8 +263,8 @@ class Source extends AtomBase
 
     /**
      * Sets contributor.
-     * 
-     * @param array $contributor The contributors of the source. 
+     *
+     * @param array $contributor The contributors of the source
      */
     public function setContributor(array $contributor)
     {
@@ -273,7 +273,7 @@ class Source extends AtomBase
 
     /**
      * Gets generator.
-     * 
+     *
      * @return Generator
      */
     public function getGenerator()
@@ -282,9 +282,9 @@ class Source extends AtomBase
     }
 
     /**
-     * Sets the generator. 
-     * 
-     * @param Generator $generator Sets the generator of the source. 
+     * Sets the generator.
+     *
+     * @param Generator $generator Sets the generator of the source
      */
     public function setGenerator(Generator $generator)
     {
@@ -292,8 +292,8 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the icon of the source. 
-     * 
+     * Gets the icon of the source.
+     *
      * @return string
      */
     public function getIcon()
@@ -302,9 +302,9 @@ class Source extends AtomBase
     }
 
     /**
-     * Sets the icon of the source. 
-     * 
-     * @param string $icon The icon of the source.
+     * Sets the icon of the source.
+     *
+     * @param string $icon The icon of the source
      */
     public function setIcon($icon)
     {
@@ -312,8 +312,8 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the ID of the source. 
-     * 
+     * Gets the ID of the source.
+     *
      * @return string
      */
     public function getId()
@@ -323,8 +323,8 @@ class Source extends AtomBase
 
     /**
      * Sets the ID of the source.
-     * 
-     * @param string $id The ID of the source.
+     *
+     * @param string $id The ID of the source
      */
     public function setId($id)
     {
@@ -332,8 +332,8 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the link of the source. 
-     * 
+     * Gets the link of the source.
+     *
      * @return array
      */
     public function getLink()
@@ -342,9 +342,9 @@ class Source extends AtomBase
     }
 
     /**
-     * Sets the link of the source. 
-     * 
-     * @param array $link The link of the source.
+     * Sets the link of the source.
+     *
+     * @param array $link The link of the source
      */
     public function setLink($link)
     {
@@ -352,8 +352,8 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the logo of the source. 
-     * 
+     * Gets the logo of the source.
+     *
      * @return string
      */
     public function getLogo()
@@ -362,9 +362,9 @@ class Source extends AtomBase
     }
 
     /**
-     * Sets the logo of the source. 
-     * 
-     * @param string $logo The logo of the source. 
+     * Sets the logo of the source.
+     *
+     * @param string $logo The logo of the source
      */
     public function setLogo($logo)
     {
@@ -372,8 +372,8 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the rights of the source. 
-     * 
+     * Gets the rights of the source.
+     *
      * @return string
      */
     public function getRights()
@@ -381,10 +381,10 @@ class Source extends AtomBase
         return $this->rights;
     }
 
-    /** 
-     * Sets the rights of the source. 
-     * 
-     * @param string $rights The rights of the source. 
+    /**
+     * Sets the rights of the source.
+     *
+     * @param string $rights The rights of the source
      */
     public function setRights($rights)
     {
@@ -392,8 +392,8 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the sub title.  
-     * 
+     * Gets the sub title.
+     *
      * @return string
      */
     public function getSubtitle()
@@ -402,9 +402,9 @@ class Source extends AtomBase
     }
 
     /**
-     * Sets the sub title of the source. 
+     * Sets the sub title of the source.
      *
-     * @param string $subtitle Sets the sub title of the source. 
+     * @param string $subtitle Sets the sub title of the source
      */
     public function setSubtitle($subtitle)
     {
@@ -412,9 +412,9 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the title of the source. 
+     * Gets the title of the source.
      *
-     * @return string.
+     * @return string
      */
     public function getTitle()
     {
@@ -422,9 +422,9 @@ class Source extends AtomBase
     }
 
     /**
-     * Sets the title of the source. 
+     * Sets the title of the source.
      *
-     * @param string $title The title of the source. 
+     * @param string $title The title of the source
      */
     public function setTitle($title)
     {
@@ -432,8 +432,8 @@ class Source extends AtomBase
     }
 
     /**
-     * Gets the updated. 
-     * 
+     * Gets the updated.
+     *
      * @return \DateTime
      */
     public function getUpdated()
@@ -442,8 +442,8 @@ class Source extends AtomBase
     }
 
     /**
-     * Sets the updated. 
-     * 
+     * Sets the updated.
+     *
      * @param \DateTime $updated updated
      */
     public function setUpdated(\DateTime $updated)
@@ -451,9 +451,9 @@ class Source extends AtomBase
         $this->updated = $updated;
     }
 
-    /** 
-     * Gets the extension element. 
-     * 
+    /**
+     * Gets the extension element.
+     *
      * @return string
      */
     public function getExtensionElement()
@@ -462,19 +462,19 @@ class Source extends AtomBase
     }
 
     /**
-     * Sets the extension element. 
-     * 
-     * @param string $extensionElement The extension element. 
+     * Sets the extension element.
+     *
+     * @param string $extensionElement The extension element
      */
     public function setExtensionElement($extensionElement)
     {
         $this->extensionElement = $extensionElement;
     }
 
-    /** 
+    /**
      * Writes an XML representing the source object.
-     * 
-     * @param \XMLWriter $xmlWriter The XML writer.
+     *
+     * @param \XMLWriter $xmlWriter The XML writer
      */
     public function writeXml(\XMLWriter $xmlWriter)
     {
@@ -487,10 +487,10 @@ class Source extends AtomBase
         $this->writeInnerXml($xmlWriter);
         $xmlWriter->endElement();
     }
-    /** 
+    /**
      * Writes a inner XML representing the source object.
-     * 
-     * @param \XMLWriter $xmlWriter The XML writer.
+     *
+     * @param \XMLWriter $xmlWriter The XML writer
      */
     public function writeInnerXml(\XMLWriter $xmlWriter)
     {

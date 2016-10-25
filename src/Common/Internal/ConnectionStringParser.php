@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -64,13 +64,13 @@ class ConnectionStringParser
 
     /**
      * Parses the connection string into a collection of key/value pairs.
-     * 
-     * @param string $argumentName     Name of the argument to be used in error 
-     *                                 messages.
-     * @param string $connectionString Connection string.
-     * 
+     *
+     * @param string $argumentName     Name of the argument to be used in error
+     *                                 messages
+     * @param string $connectionString Connection string
+     *
      * @return array
-     * 
+     *
      * @static
      */
     public static function parseConnectionString($argumentName, $connectionString)
@@ -87,10 +87,10 @@ class ConnectionStringParser
 
     /**
      * Initializes the object.
-     * 
-     * @param string $argumentName Name of the argument to be used in error 
-     *                             messages.
-     * @param string $value        Connection string.
+     *
+     * @param string $argumentName Name of the argument to be used in error
+     *                             messages
+     * @param string $value        Connection string
      */
     private function __construct($argumentName, $value)
     {
@@ -102,9 +102,9 @@ class ConnectionStringParser
 
     /**
      * Parses the connection string.
-     * 
+     *
      * @return array
-     * 
+     *
      * @throws \RuntimeException
      */
     private function _parse()
@@ -119,7 +119,7 @@ class ConnectionStringParser
             if ($this->_pos == strlen($this->_value)
                 && $this->_state != ParserState::EXPECT_VALUE
             ) {
-                // Not stopping after the end has been reached and a value is 
+                // Not stopping after the end has been reached and a value is
                 // expected results in creating an empty value, which we expect.
                 break;
             }
@@ -163,12 +163,12 @@ class ConnectionStringParser
     }
 
     /**
-     *Generates an invalid connection string exception with the detailed error 
+     *Generates an invalid connection string exception with the detailed error
      * message.
-     * 
-     * @param int    $position    The position of the error.
-     * @param string $errorString The short error formatting string.
-     * 
+     *
+     * @param int    $position    The position of the error
+     * @param string $errorString The short error formatting string
+     *
      * @return \RuntimeException
      */
     private function _createException($position, $errorString)
@@ -204,7 +204,7 @@ class ConnectionStringParser
     private function _skipWhiteSpaces()
     {
         while ($this->_pos < strlen($this->_value)
-              &&  ctype_space($this->_value[$this->_pos])
+              && ctype_space($this->_value[$this->_pos])
         ) {
             ++$this->_pos;
         }
@@ -212,7 +212,7 @@ class ConnectionStringParser
 
     /**
      * Extracts the key's value.
-     * 
+     *
      * @return string
      */
     private function _extractValue()
@@ -251,7 +251,7 @@ class ConnectionStringParser
 
     /**
      * Extracts key at the current position.
-     * 
+     *
      * @return string
      */
     private function _extractKey()
@@ -296,9 +296,9 @@ class ConnectionStringParser
 
     /**
      * Extracts the string until the given quotation mark.
-     * 
-     * @param string $quote The quotation mark terminating the string.
-     * 
+     *
+     * @param string $quote The quotation mark terminating the string
+     *
      * @return string
      */
     private function _extractString($quote)
@@ -306,7 +306,7 @@ class ConnectionStringParser
         $firstPos = $this->_pos;
 
         while ($this->_pos < strlen($this->_value)
-              &&  $this->_value[$this->_pos] != $quote
+              && $this->_value[$this->_pos] != $quote
         ) {
             ++$this->_pos;
         }
@@ -325,8 +325,8 @@ class ConnectionStringParser
 
     /**
      * Skips specified operator.
-     * 
-     * @param string $operatorChar The operator character.
+     *
+     * @param string $operatorChar The operator character
      *
      * @throws \RuntimeException
      */

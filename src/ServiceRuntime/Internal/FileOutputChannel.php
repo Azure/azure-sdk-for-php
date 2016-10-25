@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -45,8 +45,10 @@ class FileOutputChannel implements IOutputChannel
     /**
      * Gets the output stream.
      *
-     * @param string $name The output channel path.
+     * @param string $name The output channel path
+     *
      * @return resource
+     *
      * @throws ChannelNotAvailableException
      */
     public function getOutputStream($name)

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -44,21 +44,21 @@ class Metrics
 {
     /**
      * The version of Storage Analytics to configure.
-     * 
+     *
      * @var string
      */
     private $_version;
 
     /**
      * Indicates whether metrics is enabled for the storage service.
-     * 
+     *
      * @var bool
      */
     private $_enabled;
 
     /**
      * Indicates whether a retention policy is enabled for the storage service.
-     * 
+     *
      * @var bool
      */
     private $_includeAPIs;
@@ -70,9 +70,9 @@ class Metrics
 
     /**
      * Creates object from $parsedResponse.
-     * 
-     * @param array $parsedResponse XML response parsed into array.
-     * 
+     *
+     * @param array $parsedResponse XML response parsed into array
+     *
      * @return Metrics
      */
     public static function create(array $parsedResponse)
@@ -94,7 +94,7 @@ class Metrics
 
     /**
      * Gets retention policy.
-     * 
+     *
      * @return RetentionPolicy
      */
     public function getRetentionPolicy()
@@ -104,7 +104,7 @@ class Metrics
 
     /**
      * Sets retention policy.
-     * 
+     *
      * @param RetentionPolicy $policy object to use
      */
     public function setRetentionPolicy(RetentionPolicy $policy)
@@ -114,8 +114,8 @@ class Metrics
 
     /**
      * Gets include APIs.
-     * 
-     * @return bool.
+     *
+     * @return bool
      */
     public function getIncludeAPIs()
     {
@@ -125,7 +125,7 @@ class Metrics
     /**
      * Sets include APIs.
      *
-     * @param bool $includeAPIs value to use.
+     * @param bool $includeAPIs value to use
      */
     public function setIncludeAPIs($includeAPIs)
     {
@@ -134,8 +134,8 @@ class Metrics
 
     /**
      * Gets enabled.
-     * 
-     * @return bool.
+     *
+     * @return bool
      */
     public function getEnabled()
     {
@@ -144,8 +144,8 @@ class Metrics
 
     /**
      * Sets enabled.
-     * 
-     * @param bool $enabled value to use.
+     *
+     * @param bool $enabled value to use
      */
     public function setEnabled($enabled)
     {
@@ -154,8 +154,8 @@ class Metrics
 
     /**
      * Gets version.
-     * 
-     * @return string.
+     *
+     * @return string
      */
     public function getVersion()
     {
@@ -164,8 +164,8 @@ class Metrics
 
     /**
      * Sets version.
-     * 
-     * @param string $version new value.
+     *
+     * @param string $version new value
      */
     public function setVersion($version)
     {
@@ -174,8 +174,8 @@ class Metrics
 
     /**
      * Converts this object to array with XML tags.
-     * 
-     * @return array.
+     *
+     * @return array
      */
     public function toArray()
     {

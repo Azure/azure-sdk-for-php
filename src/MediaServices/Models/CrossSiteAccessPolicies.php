@@ -109,7 +109,7 @@ class CrossSiteAccessPolicies
     /**
      * Set the CrossSiteAccessPolicies ClientAccessPolicy.
      *
-     * @param string $value CrossSiteAccessPolicies ClientAccessPolicy.
+     * @param string $value CrossSiteAccessPolicies ClientAccessPolicy
      */
     public function setClientAccessPolicy($value)
     {
@@ -129,11 +129,10 @@ class CrossSiteAccessPolicies
     /**
      * Set the CrossSiteAccessPolicies CrossDomainPolicy.
      *
-     * @param string $value CrossSiteAccessPolicies CrossDomainPolicy.
+     * @param string $value CrossSiteAccessPolicies CrossDomainPolicy
      */
     public function setCrossDomainPolicy($value)
     {
         $this->_crossDomainPolicy = $value;
     }
 }
-

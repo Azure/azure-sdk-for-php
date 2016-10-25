@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -55,7 +55,7 @@ class GetDeploymentOptions
 
     /**
      * Gets the deployment slot.
-     * 
+     *
      * @return string
      */
     public function getSlot()
@@ -65,8 +65,8 @@ class GetDeploymentOptions
 
     /**
      * Sets the deployment slot.
-     * 
-     * @param string $slot The deployment slot name.
+     *
+     * @param string $slot The deployment slot name
      */
     public function setSlot($slot)
     {
@@ -82,7 +82,7 @@ class GetDeploymentOptions
 
     /**
      * Gets the deployment name.
-     * 
+     *
      * @return string
      */
     public function getDeploymentName()
@@ -92,8 +92,8 @@ class GetDeploymentOptions
 
     /**
      * Sets the deployment name.
-     * 
-     * @param string $deploymentName The deployment name.
+     *
+     * @param string $deploymentName The deployment name
      */
     public function setDeploymentName($deploymentName)
     {

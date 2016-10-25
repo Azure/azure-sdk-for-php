@@ -49,7 +49,7 @@ class AgcAndColorStripeRestriction
 
     /**
      * Create AgcAndColorStripeRestriction.
-     * 
+     *
      * @param int $configurationData
      */
     public function __construct($configurationData)

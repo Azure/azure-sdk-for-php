@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -50,9 +50,9 @@ class GetHostedServicePropertiesResult
 
     /**
      * Creates GetHostedServicePropertiesResult from parsed response.
-     * 
-     * @param array $parsed The parsed response in array representation.
-     * 
+     *
+     * @param array $parsed The parsed response in array representation
+     *
      * @return GetHostedServicePropertiesResult
      */
     public static function create($parsed)
@@ -69,7 +69,7 @@ class GetHostedServicePropertiesResult
 
     /**
      * Gets the hostedService.
-     * 
+     *
      * @return HostedService
      */
     public function getHostedService()
@@ -79,8 +79,8 @@ class GetHostedServicePropertiesResult
 
     /**
      * Sets the hostedService.
-     * 
-     * @param HostedService $hostedService The hostedService.
+     *
+     * @param HostedService $hostedService The hostedService
      */
     public function setHostedService($hostedService)
     {

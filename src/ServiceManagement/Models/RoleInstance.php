@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -85,9 +85,9 @@ class RoleInstance
 
     /**
      * Creates a new RoleInstance from parsed response body.
-     * 
-     * @param array $parsed The parsed response body in array representation.
-     * 
+     *
+     * @param array $parsed The parsed response body in array representation
+     *
      * @return RoleInstance
      */
     public static function create($parsed)
@@ -140,9 +140,9 @@ class RoleInstance
 
     /**
      * Gets the role name.
-     * 
+     *
      * The name of the role.
-     * 
+     *
      * @return string
      */
     public function getRoleName()
@@ -152,8 +152,8 @@ class RoleInstance
 
     /**
      * Sets the role name.
-     * 
-     * @param string $roleName The role name.
+     *
+     * @param string $roleName The role name
      */
     public function setRoleName($roleName)
     {
@@ -162,9 +162,9 @@ class RoleInstance
 
     /**
      * Gets the instance name.
-     * 
+     *
      * The name of the specific role instance (if any).
-     * 
+     *
      * @return string
      */
     public function getInstanceName()
@@ -174,8 +174,8 @@ class RoleInstance
 
     /**
      * Sets the instance name.
-     * 
-     * @param string $instanceName The instance name.
+     *
+     * @param string $instanceName The instance name
      */
     public function setInstanceName($instanceName)
     {
@@ -184,9 +184,9 @@ class RoleInstance
 
     /**
      * Gets the instance status.
-     * 
+     *
      * The current status of this instance.
-     * 
+     *
      * @return string
      */
     public function getInstanceStatus()
@@ -196,8 +196,8 @@ class RoleInstance
 
     /**
      * Sets the instance status.
-     * 
-     * @param string $instanceStatus The instance status.
+     *
+     * @param string $instanceStatus The instance status
      */
     public function setInstanceStatus($instanceStatus)
     {
@@ -206,11 +206,11 @@ class RoleInstance
 
     /**
      * Gets the instance upgrade domain.
-     * 
-     * The upgrade domain that this role instance belongs to. During an upgrade 
-     * deployment, all roles in the same upgrade domain are upgraded at the same 
+     *
+     * The upgrade domain that this role instance belongs to. During an upgrade
+     * deployment, all roles in the same upgrade domain are upgraded at the same
      * time.
-     * 
+     *
      * @return int
      */
     public function getInstanceUpgradeDomain()
@@ -220,8 +220,8 @@ class RoleInstance
 
     /**
      * Sets the instance upgrade domain.
-     * 
-     * @param int $instanceUpgradeDomain The instance upgrade domain.
+     *
+     * @param int $instanceUpgradeDomain The instance upgrade domain
      */
     public function setInstanceUpgradeDomain($instanceUpgradeDomain)
     {
@@ -230,11 +230,11 @@ class RoleInstance
 
     /**
      * Gets the instance fault domain.
-     * 
-     * The fault domain that this role instance belongs to. Role instances in the 
-     * same fault domain may be vulnerable to the failure of a single piece of 
+     *
+     * The fault domain that this role instance belongs to. Role instances in the
+     * same fault domain may be vulnerable to the failure of a single piece of
      * hardware.
-     * 
+     *
      * @return int
      */
     public function getInstanceFaultDomain()
@@ -244,8 +244,8 @@ class RoleInstance
 
     /**
      * Sets the instance fault domain.
-     * 
-     * @param int $instanceFaultDomain The instance fault domain.
+     *
+     * @param int $instanceFaultDomain The instance fault domain
      */
     public function setInstanceFaultDomain($instanceFaultDomain)
     {
@@ -254,10 +254,10 @@ class RoleInstance
 
     /**
      * Gets the instance size.
-     * 
+     *
      * The size of the role instance. Possible values are: ExtraSmall, Small, Medium,
      * Large, ExtraLarge.
-     * 
+     *
      * @return string
      */
     public function getInstanceSize()
@@ -267,8 +267,8 @@ class RoleInstance
 
     /**
      * Sets the instance size.
-     * 
-     * @param string $instanceSize The instance size.
+     *
+     * @param string $instanceSize The instance size
      */
     public function setInstanceSize($instanceSize)
     {
@@ -277,12 +277,12 @@ class RoleInstance
 
     /**
      * Gets the instance state details.
-     * 
+     *
      * The instance state is returned as an English human-readable string that, when
      * present, provides a snapshot of the state of the virtual machine at the time
-     * the operation was called. For example, when the instance is first being 
+     * the operation was called. For example, when the instance is first being
      * initialized a "Preparing Windows for first use." could be returned.
-     * 
+     *
      * @return string
      */
     public function getInstanceStateDetails()
@@ -292,8 +292,8 @@ class RoleInstance
 
     /**
      * Sets the instance state details.
-     * 
-     * @param string $instanceStateDetails The instance state details.
+     *
+     * @param string $instanceStateDetails The instance state details
      */
     public function setInstanceStateDetails($instanceStateDetails)
     {
@@ -302,14 +302,14 @@ class RoleInstance
 
     /**
      * Gets the instance error code.
-     * 
-     * Error code of the latest role or VM start. For VMRoles the error codes are: 
+     *
+     * Error code of the latest role or VM start. For VMRoles the error codes are:
      * WaitTimeout, VhdTooLarge, AzureInternalError.
-     * 
+     *
      * For web and worker roles this field returns an error code that can be provided
      * to Windows Azure support to assist in resolution of errors. Typically this
      * field will be empty.
-     * 
+     *
      * @return string
      */
     public function getInstanceErrorCode()
@@ -319,8 +319,8 @@ class RoleInstance
 
     /**
      * Sets the instance error code.
-     * 
-     * @param string $instanceErrorCode The instance error code.
+     *
+     * @param string $instanceErrorCode The instance error code
      */
     public function setInstanceErrorCode($instanceErrorCode)
     {

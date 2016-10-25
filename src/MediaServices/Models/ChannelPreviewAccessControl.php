@@ -97,11 +97,10 @@ class ChannelPreviewAccessControl
     /**
      * Set the ChannelPreviewAccessControl IP.
      *
-     * @param IPAccessControl $value ChannelPreviewAccessControl IP.
+     * @param IPAccessControl $value ChannelPreviewAccessControl IP
      */
     public function setIP(IPAccessControl $value)
     {
         $this->_ip = $value;
     }
 }
-

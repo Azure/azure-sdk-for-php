@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -44,14 +44,14 @@ use WindowsAzure\Common\Internal\Validate;
 class AtomLink extends AtomBase
 {
     /**
-     * The undefined content. 
+     * The undefined content.
      *
      * @var string
      */
     protected $undefinedContent;
 
     /**
-     * The HREF of the link. 
+     * The HREF of the link.
      *
      * @var string
      */
@@ -65,7 +65,7 @@ class AtomLink extends AtomBase
     protected $rel;
 
     /**
-     * The media type of the link. 
+     * The media type of the link.
      *
      * @var string
      */
@@ -73,29 +73,29 @@ class AtomLink extends AtomBase
 
     /**
      * The language of HREF.
-     * 
+     *
      * @var string
      */
     protected $hreflang;
 
     /**
      * The title of the link.
-     * 
+     *
      * @var string
      */
     protected $title;
 
     /**
-     * The length of the link. 
-     * 
+     * The length of the link.
+     *
      * @var int
      */
     protected $length;
 
     /**
-     * Parse an ATOM Link xml. 
-     * 
-     * @param string $xmlString an XML based string of ATOM Link.
+     * Parse an ATOM Link xml.
+     *
+     * @param string $xmlString an XML based string of ATOM Link
      */
     public function parseXml($xmlString)
     {
@@ -125,7 +125,7 @@ class AtomLink extends AtomBase
         }
 
         if (!empty($attributes['length'])) {
-            $this->length = (integer) $attributes['length'];
+            $this->length = (int) $attributes['length'];
         }
 
         $undefinedContent = (string) $atomLinkXml;
@@ -136,8 +136,8 @@ class AtomLink extends AtomBase
         }
     }
 
-    /** 
-     * Gets the href of the link. 
+    /**
+     * Gets the href of the link.
      *
      * @return string
      */
@@ -148,8 +148,8 @@ class AtomLink extends AtomBase
 
     /**
      * Sets the href of the link.
-     * 
-     * @param string $href The href of the link.
+     *
+     * @param string $href The href of the link
      */
     public function setHref($href)
     {
@@ -157,8 +157,8 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Gets the rel of the atomLink. 
-     * 
+     * Gets the rel of the atomLink.
+     *
      * @return string
      */
     public function getRel()
@@ -167,9 +167,9 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Sets the rel of the link. 
-     * 
-     * @param string $rel The rel of the atomLink.
+     * Sets the rel of the link.
+     *
+     * @param string $rel The rel of the atomLink
      */
     public function setRel($rel)
     {
@@ -177,7 +177,7 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Gets the type of the link. 
+     * Gets the type of the link.
      *
      * @return string
      */
@@ -188,8 +188,8 @@ class AtomLink extends AtomBase
 
     /**
      * Sets the type of the link.
-     * 
-     * @param string $type The type of the link. 
+     *
+     * @param string $type The type of the link
      */
     public function setType($type)
     {
@@ -197,8 +197,8 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Gets the language of the href. 
-     * 
+     * Gets the language of the href.
+     *
      * @return string
      */
     public function getHreflang()
@@ -207,18 +207,18 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Sets the language of the href. 
-     * 
-     * @param string $hreflang The language of the href.
+     * Sets the language of the href.
+     *
+     * @param string $hreflang The language of the href
      */
     public function setHreflang($hreflang)
     {
         $this->hreflang = $hreflang;
     }
 
-    /** 
-     * Gets the title of the link. 
-     * 
+    /**
+     * Gets the title of the link.
+     *
      * @return string
      */
     public function getTitle()
@@ -227,9 +227,9 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Sets the title of the link. 
-     * 
-     * @param string $title The title of the link. 
+     * Sets the title of the link.
+     *
+     * @param string $title The title of the link
      */
     public function setTitle($title)
     {
@@ -237,8 +237,8 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Gets the length of the link. 
-     * 
+     * Gets the length of the link.
+     *
      * @return string
      */
     public function getLength()
@@ -247,17 +247,17 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Sets the length of the link. 
-     * 
-     * @param string $length The length of the link. 
+     * Sets the length of the link.
+     *
+     * @param string $length The length of the link
      */
     public function setLength($length)
     {
         $this->length = $length;
     }
 
-    /**     
-     * Gets the undefined content. 
+    /**
+     * Gets the undefined content.
      *
      * @return string
      */
@@ -267,19 +267,19 @@ class AtomLink extends AtomBase
     }
 
     /**
-     * Sets the undefined content. 
-     * 
-     * @param string $undefinedContent The undefined content. 
+     * Sets the undefined content.
+     *
+     * @param string $undefinedContent The undefined content
      */
     public function setUndefinedContent($undefinedContent)
     {
         $this->undefinedContent = $undefinedContent;
     }
 
-    /** 
+    /**
      * Writes an XML representing the ATOM link item.
-     * 
-     * @param \XMLWriter $xmlWriter The xml writer.
+     *
+     * @param \XMLWriter $xmlWriter The xml writer
      */
     public function writeXml(\XMLWriter $xmlWriter)
     {
@@ -292,10 +292,10 @@ class AtomLink extends AtomBase
         $xmlWriter->endElement();
     }
 
-    /** 
+    /**
      * Writes the inner XML representing the ATOM link item.
-     * 
-     * @param \XMLWriter $xmlWriter The xml writer.
+     *
+     * @param \XMLWriter $xmlWriter The xml writer
      */
     public function writeInnerXml(\XMLWriter $xmlWriter)
     {

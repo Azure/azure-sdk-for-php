@@ -54,7 +54,7 @@ class AuthenticationFilter implements IServiceFilter
     /**
      * Creates AuthenticationFilter with the passed scheme.
      *
-     * @param IAuthScheme $authenticationScheme The authentication scheme.
+     * @param IAuthScheme $authenticationScheme The authentication scheme
      */
     public function __construct(IAuthScheme $authenticationScheme)
     {
@@ -64,7 +64,7 @@ class AuthenticationFilter implements IServiceFilter
     /**
      * Adds authentication header to the request headers.
      *
-     * @param IHttpClient $request HTTP channel object.
+     * @param IHttpClient $request HTTP channel object
      *
      * @return IHttpClient
      */
@@ -82,8 +82,8 @@ class AuthenticationFilter implements IServiceFilter
     /**
      * Does nothing with the response.
      *
-     * @param IHttpClient       $request  HTTP channel object.
-     * @param ResponseInterface $response HTTP response object.
+     * @param IHttpClient       $request  HTTP channel object
+     * @param ResponseInterface $response HTTP response object
      *
      * @return ResponseInterface
      */
