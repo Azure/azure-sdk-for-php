@@ -26,7 +26,6 @@
 namespace WindowsAzure\Common\Internal\Filters;
 
 use WindowsAzure\Common\Internal\Resources;
-
 use WindowsAzure\Common\Internal\IServiceFilter;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\ServiceBus\Internal\WrapTokenManager;
@@ -56,10 +55,10 @@ class WrapFilter implements IServiceFilter
     /**
      * Creates a WrapFilter with specified WRAP parameters.
      *
-     * @param string $wrapUri       The URI of the WRAP service.
-     * @param string $wrapUsername  The user name of the WRAP account.
-     * @param string $wrapPassword  The password of the WRAP account.
-     * @param IWrap  $wrapRestProxy The WRAP service REST proxy.
+     * @param string $wrapUri       The URI of the WRAP service
+     * @param string $wrapUsername  The user name of the WRAP account
+     * @param string $wrapPassword  The password of the WRAP account
+     * @param IWrap  $wrapRestProxy The WRAP service REST proxy
      */
     public function __construct(
         $wrapUri,
@@ -78,7 +77,7 @@ class WrapFilter implements IServiceFilter
     /**
      * Adds WRAP authentication header to the request headers.
      *
-     * @param IHttpClient $request HTTP channel object.
+     * @param IHttpClient $request HTTP channel object
      *
      * @return IHttpClient
      */
@@ -101,8 +100,8 @@ class WrapFilter implements IServiceFilter
     /**
      * Returns the original response.
      *
-     * @param IHttpClient       $request  A HTTP channel object.
-     * @param ResponseInterface $response A HTTP response object.
+     * @param IHttpClient       $request  A HTTP channel object
+     * @param ResponseInterface $response A HTTP response object
      *
      * @return ResponseInterface
      */

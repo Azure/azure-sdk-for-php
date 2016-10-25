@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -44,37 +44,37 @@ use WindowsAzure\Common\Internal\Validate;
 class Category extends AtomBase
 {
     /**
-     * The term of the category. 
+     * The term of the category.
      *
      * @var string
      */
     protected $term;
 
     /**
-     * The scheme of the category. 
+     * The scheme of the category.
      *
      * @var string
      */
     protected $scheme;
 
     /**
-     * The label of the category. 
-     * 
+     * The label of the category.
+     *
      * @var string
      */
     protected $label;
 
     /**
-     * The undefined content of the category. 
-     *  
+     * The undefined content of the category.
+     *
      * @var string
      */
     protected $undefinedContent;
 
-    /** 
+    /**
      * Creates a Category instance with specified text.
      *
-     * @param string $undefinedContent The undefined content of the category.
+     * @param string $undefinedContent The undefined content of the category
      */
     public function __construct($undefinedContent = Resources::EMPTY_STRING)
     {
@@ -82,9 +82,9 @@ class Category extends AtomBase
     }
 
     /**
-     * Creates an ATOM Category instance with specified xml string. 
-     * 
-     * @param string $xmlString an XML based string of ATOM CONTENT.
+     * Creates an ATOM Category instance with specified xml string.
+     *
+     * @param string $xmlString an XML based string of ATOM CONTENT
      */
     public function parseXml($xmlString)
     {
@@ -107,8 +107,8 @@ class Category extends AtomBase
         $this->undefinedContent = (string) $categoryXml;
     }
 
-    /** 
-     * Gets the term of the category. 
+    /**
+     * Gets the term of the category.
      *
      * @return string
      */
@@ -119,8 +119,8 @@ class Category extends AtomBase
 
     /**
      * Sets the term of the category.
-     * 
-     * @param string $term The term of the category.
+     *
+     * @param string $term The term of the category
      */
     public function setTerm($term)
     {
@@ -128,8 +128,8 @@ class Category extends AtomBase
     }
 
     /**
-     * Gets the scheme of the category. 
-     * 
+     * Gets the scheme of the category.
+     *
      * @return string
      */
     public function getScheme()
@@ -138,9 +138,9 @@ class Category extends AtomBase
     }
 
     /**
-     * Sets the scheme of the category. 
-     * 
-     * @param string $scheme The scheme of the category.
+     * Sets the scheme of the category.
+     *
+     * @param string $scheme The scheme of the category
      */
     public function setScheme($scheme)
     {
@@ -148,9 +148,9 @@ class Category extends AtomBase
     }
 
     /**
-     * Gets the label of the category. 
+     * Gets the label of the category.
      *
-     * @return string The label. 
+     * @return string The label
      */
     public function getLabel()
     {
@@ -158,9 +158,9 @@ class Category extends AtomBase
     }
 
     /**
-     * Sets the label of the category. 
-     * 
-     * @param string $label The label of the category. 
+     * Sets the label of the category.
+     *
+     * @param string $label The label of the category
      */
     public function setLabel($label)
     {
@@ -168,8 +168,8 @@ class Category extends AtomBase
     }
 
     /**
-     * Gets the undefined content of the category. 
-     * 
+     * Gets the undefined content of the category.
+     *
      * @return string
      */
     public function getUndefinedContent()
@@ -178,19 +178,19 @@ class Category extends AtomBase
     }
 
     /**
-     * Sets the undefined content of the category. 
-     * 
-     * @param string $undefinedContent The undefined content of the category. 
+     * Sets the undefined content of the category.
+     *
+     * @param string $undefinedContent The undefined content of the category
      */
     public function setUndefinedContent($undefinedContent)
     {
         $this->undefinedContent = $undefinedContent;
     }
 
-    /** 
-     * Writes an XML representing the category. 
-     * 
-     * @param \XMLWriter $xmlWriter The XML writer.
+    /**
+     * Writes an XML representing the category.
+     *
+     * @param \XMLWriter $xmlWriter The XML writer
      */
     public function writeXml(\XMLWriter $xmlWriter)
     {
@@ -204,10 +204,10 @@ class Category extends AtomBase
         $xmlWriter->endElement();
     }
 
-    /** 
-     * Writes an XML representing the category. 
-     * 
-     * @param \XMLWriter $xmlWriter The XML writer.
+    /**
+     * Writes an XML representing the category.
+     *
+     * @param \XMLWriter $xmlWriter The XML writer
      */
     public function writeInnerXml(\XMLWriter $xmlWriter)
     {

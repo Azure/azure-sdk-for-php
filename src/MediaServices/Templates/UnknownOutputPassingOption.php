@@ -55,7 +55,7 @@ class UnknownOutputPassingOption
     const ALLOWED = 'Allowed';
 
     /**
-     * Passing the video portion of protected content to an Unknown Output is allowed but the client must 
+     * Passing the video portion of protected content to an Unknown Output is allowed but the client must
      * constrain the resolution of the video content.
      *
      * @var string

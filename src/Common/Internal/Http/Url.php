@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -50,7 +50,7 @@ class Url implements IUrl
 
     /**
      * Sets the url path to '/' if it's empty.
-     * 
+     *
      * @param string $url the url string
      */
     private function _setPathIfEmpty($url)
@@ -64,8 +64,8 @@ class Url implements IUrl
 
     /**
      * Constructor.
-     * 
-     * @param string $url the url to set.
+     *
+     * @param string $url the url to set
      */
     public function __construct($url)
     {
@@ -86,7 +86,7 @@ class Url implements IUrl
 
     /**
      * Returns the query portion of the url.
-     * 
+     *
      * @return string
      */
     public function getQuery()
@@ -96,7 +96,7 @@ class Url implements IUrl
 
     /**
      * Returns the query portion of the url in array form.
-     * 
+     *
      * @return array
      */
     public function getQueryVariables()
@@ -107,9 +107,9 @@ class Url implements IUrl
     /**
      * Sets a an existing query parameter to value or creates a new one if the $key
      * doesn't exist.
-     * 
-     * @param string $key   query parameter name.
-     * @param string $value query value.
+     *
+     * @param string $key   query parameter name
+     * @param string $value query value
      */
     public function setQueryVariable($key, $value)
     {
@@ -121,8 +121,8 @@ class Url implements IUrl
 
     /**
      * Gets actual URL string.
-     * 
-     * @return string.
+     *
+     * @return string
      */
     public function getUrl()
     {
@@ -131,8 +131,8 @@ class Url implements IUrl
 
     /**
      * Sets url path.
-     * 
-     * @param string $urlPath url path to set.
+     *
+     * @param string $urlPath url path to set
      */
     public function setUrlPath($urlPath)
     {
@@ -143,8 +143,8 @@ class Url implements IUrl
 
     /**
      * Appends url path.
-     * 
-     * @param string $urlPath url path to append.
+     *
+     * @param string $urlPath url path to append
      */
     public function appendUrlPath($urlPath)
     {
@@ -156,8 +156,8 @@ class Url implements IUrl
 
     /**
      * Gets actual URL string.
-     * 
-     * @return string.
+     *
+     * @return string
      */
     public function __toString()
     {
@@ -166,8 +166,8 @@ class Url implements IUrl
 
     /**
      * Sets the query string to the specified variables in $array.
-     * 
-     * @param array $array key/value representation of query variables.
+     *
+     * @param array $array key/value representation of query variables
      */
     public function setQueryVariables(array $array)
     {

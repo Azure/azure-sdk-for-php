@@ -93,7 +93,7 @@ class IngestManifestAsset
     /**
      * Create IngestManifestAsset.
      *
-     * @param int $parentIngestManifestId Parent IngestManifest id.
+     * @param int $parentIngestManifestId Parent IngestManifest id
      */
     public function __construct($parentIngestManifestId)
     {

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -29,7 +29,7 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Validate;
 
 /**
- * Manages WRAP tokens. 
+ * Manages WRAP tokens.
  *
  * @category  Microsoft
  *
@@ -43,48 +43,48 @@ use WindowsAzure\Common\Internal\Validate;
  */
 class WrapTokenManager
 {
-    /** 
+    /**
      * The Uri of the WRAP service.
-     * 
+     *
      * @var string
      */
     private $_wrapUri;
 
-    /** 
+    /**
      * The user name of the WRAP service.
-     * 
+     *
      * @var string
      */
     private $_wrapName;
 
-    /** 
+    /**
      * The password of the WRAP service.
-     * 
+     *
      * @var string
      */
     private $_wrapPassword;
 
-    /** 
+    /**
      * The proxy of the WRAP service.
-     * 
+     *
      * @var string
      */
     private $_wrapRestProxy;
 
-    /** 
+    /**
      * The active WRAP access tokens.
-     * 
+     *
      * @var array
      */
     private $_activeTokens;
 
     /**
-     * Creates a WRAP token manager with specified parameters. 
+     * Creates a WRAP token manager with specified parameters.
      *
-     * @param string $wrapUri       The URI of the WRAP service.
-     * @param string $wrapName      The user name of the WRAP service.
-     * @param string $wrapPassword  The password of the WRAP service.
-     * @param IWrap  $wrapRestProxy The WRAP service REST proxy.
+     * @param string $wrapUri       The URI of the WRAP service
+     * @param string $wrapName      The user name of the WRAP service
+     * @param string $wrapPassword  The password of the WRAP service
+     * @param IWrap  $wrapRestProxy The WRAP service REST proxy
      */
     public function __construct($wrapUri, $wrapName, $wrapPassword, IWrap $wrapRestProxy)
     {
@@ -100,11 +100,11 @@ class WrapTokenManager
         $this->_activeTokens = [];
     }
 
-    /** 
+    /**
      * Gets WRAP access token with specified target Uri.
-     * 
-     * @param string $targetUri The target Uri of the WRAP access Token. 
-     * 
+     *
+     * @param string $targetUri The target Uri of the WRAP access Token
+     *
      * @return string
      */
     public function getAccessToken($targetUri)
@@ -140,7 +140,7 @@ class WrapTokenManager
         return $wrapAccessTokenResult->getAccessToken();
     }
 
-    /** 
+    /**
      * Removes the expired WRAP access tokens.
      */
     private function _sweepExpiredTokens()
@@ -154,10 +154,10 @@ class WrapTokenManager
     }
 
     /**
-     * Creates a SCOPE URI with specified target URI. 
+     * Creates a SCOPE URI with specified target URI.
      *
-     * @param array $targetUri The target URI.
-     * 
+     * @param array $targetUri The target URI
+     *
      * @return string
      */
     private function _createScopeUri($targetUri)
@@ -180,11 +180,11 @@ class WrapTokenManager
         return $scopeUri;
     }
 
-    /** 
-     * Gets whether the authority related elements are valid. 
-     * 
-     * @param array $uriComponents The components of an URI.
-     * 
+    /**
+     * Gets whether the authority related elements are valid.
+     *
+     * @param array $uriComponents The components of an URI
+     *
      * @return bool
      */
     private function _containsValidAuthority($uriComponents)
@@ -208,8 +208,8 @@ class WrapTokenManager
         return true;
     }
 
-    /** 
-     * Creates an authority string with specified Uri components. 
+    /**
+     * Creates an authority string with specified Uri components.
      *
      * @param array $uriComponents The URI components
      *

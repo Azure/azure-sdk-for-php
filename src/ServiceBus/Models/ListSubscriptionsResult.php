@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -43,18 +43,18 @@ use WindowsAzure\Common\Internal\Atom\Feed;
 class ListSubscriptionsResult extends Feed
 {
     /**
-     * The information of the subscription. 
-     * 
+     * The information of the subscription.
+     *
      * @var SubscriptionInfo[]
      */
     private $_subscriptionInfos;
 
     /**
-     * Populates the properties with the response from the list 
+     * Populates the properties with the response from the list
      * subscriptions request.
-     * 
-     * @param string $response The body of the response of the list 
-     *                         subscriptions request. 
+     *
+     * @param string $response The body of the response of the list
+     *                         subscriptions request
      */
     public function parseXml($response)
     {
@@ -69,8 +69,8 @@ class ListSubscriptionsResult extends Feed
     }
 
     /**
-     * Gets the information of the subscription. 
-     * 
+     * Gets the information of the subscription.
+     *
      * @return SubscriptionInfo[]
      */
     public function getSubscriptionInfos()
@@ -79,10 +79,10 @@ class ListSubscriptionsResult extends Feed
     }
 
     /**
-     * Sets the information of the rule. 
-     * 
+     * Sets the information of the rule.
+     *
      * @param SubscriptionInfo[] $subscriptionInfos The information of the
-     *                                              subscription.
+     *                                              subscription
      */
     public function setSubscriptionInfos(array $subscriptionInfos)
     {

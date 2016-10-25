@@ -63,14 +63,14 @@ class TokenRestrictionTemplate
 
     /**
      * TokenRestrictionTemplate PrimaryVerificationKey.
-     * 
+     *
      * @var TokenVerificationKey
      */
     private $_primaryVerificationKey;
 
     /**
      * TokenRestrictionTemplate RequiredClaims.
-     * 
+     *
      * @var TokenClaim[]
      */
     private $_requiredClaims;
@@ -89,6 +89,7 @@ class TokenRestrictionTemplate
 
     /**
      * Create TokenRestrictionTemplate.
+     *
      * @param null $type
      */
     public function __construct($type = null)

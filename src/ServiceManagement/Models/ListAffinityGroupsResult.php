@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -50,9 +50,9 @@ class ListAffinityGroupsResult
 
     /**
      * Creates new ListAffinityGroupsResult from parsed response body.
-     * 
-     * @param array $parsed The parsed response body.
-     * 
+     *
+     * @param array $parsed The parsed response body
+     *
      * @return ListAffinityGroupsResult
      */
     public static function create($parsed)
@@ -74,7 +74,7 @@ class ListAffinityGroupsResult
 
     /**
      * Gets affinity groups.
-     * 
+     *
      * @return AffinityGroup[]
      */
     public function getAffinityGroups()
@@ -84,8 +84,8 @@ class ListAffinityGroupsResult
 
     /**
      * Sets affinity groups.
-     * 
-     * @param AffinityGroup[] $affinityGroups The affinity groups.
+     *
+     * @param AffinityGroup[] $affinityGroups The affinity groups
      */
     public function setAffinityGroups(array $affinityGroups)
     {

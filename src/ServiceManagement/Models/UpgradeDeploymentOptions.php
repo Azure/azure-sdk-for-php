@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -49,9 +49,9 @@ class UpgradeDeploymentOptions extends GetDeploymentOptions
 
     /**
      * Gets the role to upgrade name.
-     * 
+     *
      * The name of the specific role to upgrade.
-     * 
+     *
      * @return string
      */
     public function getRoleToUpgrade()
@@ -61,8 +61,8 @@ class UpgradeDeploymentOptions extends GetDeploymentOptions
 
     /**
      * Sets the role to upgrade name.
-     * 
-     * @param string $roleToUpgrade The role to upgrade name.
+     *
+     * @param string $roleToUpgrade The role to upgrade name
      */
     public function setRoleToUpgrade($roleToUpgrade)
     {

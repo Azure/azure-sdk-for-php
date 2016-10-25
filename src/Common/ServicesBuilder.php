@@ -38,7 +38,6 @@ use WindowsAzure\Common\Internal\Http\IHttpClient;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Serialization\ISerializer;
-
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Filters\HeadersFilter;
@@ -49,7 +48,6 @@ use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
 use WindowsAzure\Common\Internal\Authentication\TableSharedKeyLiteAuthScheme;
 use WindowsAzure\Common\Internal\ServiceManagementSettings;
 use WindowsAzure\Common\Internal\ServiceBusSettings;
-use WindowsAzure\MediaServices\Internal\IMediaServices;
 use WindowsAzure\ServiceBus\Internal\IServiceBus;
 use WindowsAzure\ServiceBus\Internal\IWrap;
 use WindowsAzure\ServiceBus\ServiceBusRestProxy;
@@ -123,8 +121,8 @@ class ServicesBuilder
     /**
      * Gets the Queue authentication scheme.
      *
-     * @param string $accountName The account name.
-     * @param string $accountKey  The account key.
+     * @param string $accountName The account name
+     * @param string $accountKey  The account key
      *
      * @return StorageAuthScheme
      */
@@ -136,8 +134,8 @@ class ServicesBuilder
     /**
      * Gets the Blob authentication scheme.
      *
-     * @param string $accountName The account name.
-     * @param string $accountKey  The account key.
+     * @param string $accountName The account name
+     * @param string $accountKey  The account key
      *
      * @return \WindowsAzure\Common\Internal\Authentication\StorageAuthScheme
      */
@@ -149,8 +147,8 @@ class ServicesBuilder
     /**
      * Gets the Table authentication scheme.
      *
-     * @param string $accountName The account name.
-     * @param string $accountKey  The account key.
+     * @param string $accountName The account name
+     * @param string $accountKey  The account key
      *
      * @return TableSharedKeyLiteAuthScheme
      */
@@ -162,7 +160,7 @@ class ServicesBuilder
     /**
      * Builds a WRAP client.
      *
-     * @param string $wrapEndpointUri The WRAP endpoint uri.
+     * @param string $wrapEndpointUri The WRAP endpoint uri
      *
      * @return IWrap
      */
@@ -177,7 +175,7 @@ class ServicesBuilder
     /**
      * Builds a queue object.
      *
-     * @param string $connectionString The configuration connection string.
+     * @param string $connectionString The configuration connection string
      *
      * @return IQueue
      */
@@ -189,7 +187,7 @@ class ServicesBuilder
     /**
      * Builds a blob object.
      *
-     * @param string $connectionString The configuration connection string.
+     * @param string $connectionString The configuration connection string
      *
      * @return IBlob
      */
@@ -201,7 +199,7 @@ class ServicesBuilder
     /**
      * Builds a table object.
      *
-     * @param string $connectionString The configuration connection string.
+     * @param string $connectionString The configuration connection string
      *
      * @return ITable
      */
@@ -213,7 +211,7 @@ class ServicesBuilder
     /**
      * Builds a Service Bus object.
      *
-     * @param string $connectionString The configuration connection string.
+     * @param string $connectionString The configuration connection string
      *
      * @return IServiceBus
      */
@@ -250,7 +248,7 @@ class ServicesBuilder
     /**
      * Builds a service management object.
      *
-     * @param string $connectionString The configuration connection string.
+     * @param string $connectionString The configuration connection string
      *
      * @return IServiceManagement
      */
@@ -291,7 +289,7 @@ class ServicesBuilder
     /**
      * Builds a media services object.
      *
-     * @param MediaServicesSettings $settings The media services configuration settings.
+     * @param MediaServicesSettings $settings The media services configuration settings
      *
      * @return MediaServicesRestProxy
      */

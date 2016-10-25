@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -48,9 +48,9 @@ class Logger
     /**
      * Logs $var to file.
      *
-     * @param mixed  $var The data to log.
-     * @param string $tip The help message.
-     * 
+     * @param mixed  $var The data to log
+     * @param string $tip The help message
+     *
      * @static
      */
     public static function log($var, $tip = Resources::EMPTY_STRING)
@@ -69,8 +69,8 @@ class Logger
     /**
      * Sets file path to use.
      *
-     * @param string $filePath The log file path.
-     * 
+     * @param string $filePath The log file path
+     *
      * @static
      */
     public static function setLogFile($filePath)

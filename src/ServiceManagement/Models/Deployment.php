@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -120,9 +120,9 @@ class Deployment
 
     /**
      * Creates a new Deployment from parsed response body.
-     * 
-     * @param array $parsed The parsed response body in array representation.
-     * 
+     *
+     * @param array $parsed The parsed response body in array representation
+     *
      * @return Deployment
      */
     public static function create($parsed)
@@ -219,9 +219,9 @@ class Deployment
 
     /**
      * Gets the deployment name.
-     * 
+     *
      * The user-supplied name for this deployment.
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -231,8 +231,8 @@ class Deployment
 
     /**
      * Sets the deployment name.
-     * 
-     * @param string $name The deployment name.
+     *
+     * @param string $name The deployment name
      */
     public function setName($name)
     {
@@ -241,10 +241,10 @@ class Deployment
 
     /**
      * Gets the deployment slot.
-     * 
-     * The environment to which the hosted service is deployed, either staging or 
+     *
+     * The environment to which the hosted service is deployed, either staging or
      * production.
-     * 
+     *
      * @return string
      */
     public function getSlot()
@@ -254,8 +254,8 @@ class Deployment
 
     /**
      * Sets the deployment slot.
-     * 
-     * @param string $slot The deployment slot.
+     *
+     * @param string $slot The deployment slot
      */
     public function setSlot($slot)
     {
@@ -264,10 +264,10 @@ class Deployment
 
     /**
      * Gets the deployment label.
-     * 
+     *
      * The user-supplied name of the deployment returned as a base-64 encoded string.
      * This name can be used identify the deployment for your tracking purposes.
-     * 
+     *
      * @return string
      */
     public function getLabel()
@@ -277,8 +277,8 @@ class Deployment
 
     /**
      * Sets the deployment label.
-     * 
-     * @param string $label The deployment label.
+     *
+     * @param string $label The deployment label
      */
     public function setLabel($label)
     {
@@ -287,9 +287,9 @@ class Deployment
 
     /**
      * Gets the deployment private Id.
-     * 
+     *
      * A unique identifier generated internally by Windows Azure for this deployment.
-     * 
+     *
      * @return string
      */
     public function getPrivateId()
@@ -299,8 +299,8 @@ class Deployment
 
     /**
      * Sets the deployment private Id.
-     * 
-     * @param string $privateId The deployment privateId.
+     *
+     * @param string $privateId The deployment privateId
      */
     public function setPrivateId($privateId)
     {
@@ -309,11 +309,11 @@ class Deployment
 
     /**
      * Gets the deployment status.
-     * 
-     * The status of the deployment. Possible values are: Running, Suspended, 
+     *
+     * The status of the deployment. Possible values are: Running, Suspended,
      * RunningTransitioning, SuspendedTransitioning, Starting, Suspending, Deploying,
      * Deploying.
-     * 
+     *
      * @return string
      */
     public function getStatus()
@@ -323,8 +323,8 @@ class Deployment
 
     /**
      * Sets the deployment status.
-     * 
-     * @param string $status The deployment status.
+     *
+     * @param string $status The deployment status
      */
     public function setStatus($status)
     {
@@ -346,7 +346,7 @@ class Deployment
     /**
      * Sets the deployment url.
      *
-     * @param string $url The deployment url.
+     * @param string $url The deployment url
      */
     public function setUrl($url)
     {
@@ -355,9 +355,9 @@ class Deployment
 
     /**
      * Gets the deployment configuration.
-     * 
+     *
      * The base-64 encoded configuration file of the deployment.
-     * 
+     *
      * @return string
      */
     public function getConfiguration()
@@ -367,8 +367,8 @@ class Deployment
 
     /**
      * Sets the configuration.
-     * 
-     * @param string $configuration The deployment configuration.
+     *
+     * @param string $configuration The deployment configuration
      */
     public function setConfiguration($configuration)
     {
@@ -377,7 +377,7 @@ class Deployment
 
     /**
      * Gets the deployment role instance list.
-     * 
+     *
      * @return RoleInstance[]
      */
     public function getRoleInstanceList()
@@ -387,8 +387,8 @@ class Deployment
 
     /**
      * Sets the deployment role instance list.
-     * 
-     * @param RoleInstance[] $roleInstanceList The deployment role instance list.
+     *
+     * @param RoleInstance[] $roleInstanceList The deployment role instance list
      */
     public function setRoleInstanceList(array $roleInstanceList)
     {
@@ -397,7 +397,7 @@ class Deployment
 
     /**
      * Gets the deployment upgrade domain count.
-     * 
+     *
      * @return int
      */
     public function getUpgradeDomainCount()
@@ -407,8 +407,8 @@ class Deployment
 
     /**
      * Sets the deployment upgradeDomainCount.
-     * 
-     * @param int $upgradeDomainCount The deployment upgrade domain count.
+     *
+     * @param int $upgradeDomainCount The deployment upgrade domain count
      */
     public function setUpgradeDomainCount($upgradeDomainCount)
     {
@@ -417,9 +417,9 @@ class Deployment
 
     /**
      * Gets the deployment role list.
-     * 
+     *
      * Contains the provisioning details for the new virtual machine deployment.
-     * 
+     *
      * @return Role[]
      */
     public function getRoleList()
@@ -429,8 +429,8 @@ class Deployment
 
     /**
      * Sets the deployment role list.
-     * 
-     * @param Role[] $roleList The deployment role list.
+     *
+     * @param Role[] $roleList The deployment role list
      */
     public function setRoleList(array $roleList)
     {
@@ -439,7 +439,7 @@ class Deployment
 
     /**
      * Gets the deployment SDK version.
-     * 
+     *
      * @return string
      */
     public function getSdkVersion()
@@ -449,8 +449,8 @@ class Deployment
 
     /**
      * Sets the deployment SDK version.
-     * 
-     * @param string $sdkVersion The deployment SDK version.
+     *
+     * @param string $sdkVersion The deployment SDK version
      */
     public function setSdkVersion($sdkVersion)
     {
@@ -459,7 +459,7 @@ class Deployment
 
     /**
      * Gets the deployment input endpoint list.
-     * 
+     *
      * @return InputEndpoint[]
      */
     public function getInputEndpointList()
@@ -469,8 +469,8 @@ class Deployment
 
     /**
      * Sets the deployment input endpoint list.
-     * 
-     * @param InputEndpoint[] $inputEndpointList The deployment input endpoint list.
+     *
+     * @param InputEndpoint[] $inputEndpointList The deployment input endpoint list
      */
     public function setInputEndpointList(array $inputEndpointList)
     {
@@ -479,7 +479,7 @@ class Deployment
 
     /**
      * Gets the deployment locked flag.
-     * 
+     *
      * @return bool
      */
     public function getLocked()
@@ -489,8 +489,8 @@ class Deployment
 
     /**
      * Sets the deployment locked flag.
-     * 
-     * @param bool $locked The deployment locked flag.
+     *
+     * @param bool $locked The deployment locked flag
      */
     public function setLocked($locked)
     {
@@ -499,7 +499,7 @@ class Deployment
 
     /**
      * Gets the deployment rollback allowed flag.
-     * 
+     *
      * @return bool
      */
     public function getRollbackAllowed()
@@ -509,8 +509,8 @@ class Deployment
 
     /**
      * Sets the deployment rollbackAllowed.
-     * 
-     * @param bool $rollbackAllowed The deployment rollback allowed flag.
+     *
+     * @param bool $rollbackAllowed The deployment rollback allowed flag
      */
     public function setRollbackAllowed($rollbackAllowed)
     {
@@ -519,7 +519,7 @@ class Deployment
 
     /**
      * Gets the deployment upgrade status.
-     * 
+     *
      * @return UpgradeStatus
      */
     public function getUpgradeStatus()
@@ -529,8 +529,8 @@ class Deployment
 
     /**
      * Sets the deployment upgrade status.
-     * 
-     * @param UpgradeStatus $upgradeStatus The deployment upgrade status.
+     *
+     * @param UpgradeStatus $upgradeStatus The deployment upgrade status
      */
     public function setUpgradeStatus($upgradeStatus)
     {

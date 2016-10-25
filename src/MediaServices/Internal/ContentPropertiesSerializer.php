@@ -126,7 +126,7 @@ class ContentPropertiesSerializer
      * Returns true if the specified filed y required for the specified entity.
      *
      * @param mixed  $object    the entity
-     * @param string $fieldName the property name to verify if it's required or not.
+     * @param string $fieldName the property name to verify if it's required or not
      *
      * @return bool
      */
@@ -225,32 +225,33 @@ class ContentPropertiesSerializer
      *
      * @return string
      */
-    private static function dateIntervalToString(\DateInterval $interval) {
+    private static function dateIntervalToString(\DateInterval $interval)
+    {
 
         // Reading all non-zero date parts.
         $date = array_filter([
             'Y' => $interval->y,
             'M' => $interval->m,
-            'D' => $interval->d
+            'D' => $interval->d,
         ]);
 
         // Reading all non-zero time parts.
         $time = array_filter([
             'H' => $interval->h,
             'M' => $interval->i,
-            'S' => $interval->s
+            'S' => $interval->s,
         ]);
 
         $specString = 'P';
 
         // Adding each part to the spec-string.
         foreach ($date as $key => $value) {
-            $specString .= $value . $key;
+            $specString .= $value.$key;
         }
         if (count($time) > 0) {
             $specString .= 'T';
             foreach ($time as $key => $value) {
-                $specString .= $value . $key;
+                $specString .= $value.$key;
             }
         }
 

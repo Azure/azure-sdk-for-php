@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -53,9 +53,9 @@ class XmlSerializer implements ISerializer
      * Converts a SimpleXML object to an Array recursively
      * ensuring all sub-elements are arrays as well.
      *
-     * @param string $sXml The SimpleXML object.
-     * @param array  $arr  The array into which to store results.
-     * 
+     * @param string $sXml The SimpleXML object
+     * @param array  $arr  The array into which to store results
+     *
      * @return array
      */
     private function _sxml2arr($sXml, $arr = null)
@@ -75,9 +75,9 @@ class XmlSerializer implements ISerializer
      * Takes an array and produces XML based on it.
      *
      * @param XMLWriter $xmlW       XMLWriter object that was previously instanted
-     *                              and is used for creating the XML.
-     * @param array     $data       Array to be converted to XML.
-     * @param string    $defaultTag Default XML tag to be used if none specified.
+     *                              and is used for creating the XML
+     * @param array     $data       Array to be converted to XML
+     * @param string    $defaultTag Default XML tag to be used if none specified
      */
     private function _arr2xml(XMLWriter $xmlW, array $data, $defaultTag = null)
     {
@@ -107,12 +107,12 @@ class XmlSerializer implements ISerializer
     }
 
     /**
-     * Gets the attributes of a specified object if get attributes 
-     * method is exposed. 
+     * Gets the attributes of a specified object if get attributes
+     * method is exposed.
      *
-     * @param object $targetObject The target object. 
-     * @param array  $methodArray  The array of method of the target object.
-     * 
+     * @param object $targetObject The target object
+     * @param array  $methodArray  The array of method of the target object
+     *
      * @return mixed
      */
     private static function _getInstanceAttributes($targetObject, $methodArray)
@@ -128,12 +128,12 @@ class XmlSerializer implements ISerializer
         return null;
     }
 
-    /** 
-     * Serialize an object with specified root element name. 
-     * 
-     * @param object $targetObject The target object. 
-     * @param string $rootName     The name of the root element. 
-     * 
+    /**
+     * Serialize an object with specified root element name.
+     *
+     * @param object $targetObject The target object
+     * @param string $rootName     The name of the root element
+     *
      * @return string
      */
     public static function objectSerialize($targetObject, $rootName)
@@ -188,10 +188,10 @@ class XmlSerializer implements ISerializer
     /**
      * Serializes given array. The array indices must be string to use them as
      * as element name.
-     * 
-     * @param array      $array      The object to serialize represented in array.
-     * @param array|null $properties The used properties in the serialization process.
-     * 
+     *
+     * @param array      $array      The object to serialize represented in array
+     * @param array|null $properties The used properties in the serialization process
+     *
      * @return string
      */
     public function serialize(array $array, array $properties = null)
@@ -235,9 +235,9 @@ class XmlSerializer implements ISerializer
 
     /**
      * Unserializes given serialized string.
-     * 
-     * @param string $serialized The serialized object in string representation.
-     * 
+     *
+     * @param string $serialized The serialized object in string representation
+     *
      * @return array
      */
     public function unserialize($serialized)

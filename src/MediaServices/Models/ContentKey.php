@@ -393,15 +393,15 @@ class ContentKey
     /**
      * Generate checksum for content key.
      *
-     * @param string $aesKey Content key
-     * @param bool $usePadding
+     * @param string $aesKey     Content key
+     * @param bool   $usePadding
      */
-    private function _generateChecksum($aesKey, $usePadding = FALSE)
+    private function _generateChecksum($aesKey, $usePadding = false)
     {
         if ($usePadding) {
-           $aesKey = $this->pkcs5_pad($aesKey, 16); 
+            $aesKey = $this->pkcs5_pad($aesKey, 16);
         }
-        
+
         $encrypted = mcrypt_encrypt(
             MCRYPT_RIJNDAEL_128, // AES
             $aesKey,
@@ -413,14 +413,18 @@ class ContentKey
     }
 
     /**
-     * checksum padding
+     * checksum padding.
+     *
      * @param string $text
-     * @param int $blockSize
+     * @param int    $blockSize
+     *
      * @return string
      */
-    private function pkcs5_pad ($text, $blockSize) {
+    private function pkcs5_pad($text, $blockSize)
+    {
         $pad = $blockSize - (strlen($text) % $blockSize);
-        return $text . str_repeat(chr($pad), $pad); 
+
+        return $text.str_repeat(chr($pad), $pad);
     }
 
     /**
@@ -429,9 +433,9 @@ class ContentKey
      *
      * @param string $value         Content key
      * @param string $protectionKey Protection key (public key) from WAMS
-     * @param boolean $usePadding   Set to true to automatically use padding while is generating the checksum
+     * @param bool   $usePadding    Set to true to automatically use padding while is generating the checksum
      */
-    public function setContentKey($value, $protectionKey, $usePadding = FALSE)   
+    public function setContentKey($value, $protectionKey, $usePadding = false)
     {
         $this->_generateEncryptedContentKey($value, $protectionKey);
 

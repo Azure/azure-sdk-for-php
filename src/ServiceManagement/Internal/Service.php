@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -72,8 +72,8 @@ class Service
 
     /**
      * Creates Service object from the given raw array.
-     * 
-     * @param array $sources The list of sources that has the row XML.
+     *
+     * @param array $sources The list of sources that has the row XML
      */
     public function __construct($sources = [])
     {
@@ -106,7 +106,7 @@ class Service
 
     /**
      * Gets the name.
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -116,8 +116,8 @@ class Service
 
     /**
      * Sets the name.
-     * 
-     * @param string $name The name.
+     *
+     * @param string $name The name
      */
     public function setName($name)
     {
@@ -126,7 +126,7 @@ class Service
 
     /**
      * Gets the label.
-     * 
+     *
      * @return string
      */
     public function getLabel()
@@ -136,8 +136,8 @@ class Service
 
     /**
      * Sets the label.
-     * 
-     * @param string $label The label.
+     *
+     * @param string $label The label
      */
     public function setLabel($label)
     {
@@ -146,7 +146,7 @@ class Service
 
     /**
      * Gets the description.
-     * 
+     *
      * @return string
      */
     public function getDescription()
@@ -156,8 +156,8 @@ class Service
 
     /**
      * Sets the description.
-     * 
-     * @param string $description The description.
+     *
+     * @param string $description The description
      */
     public function setDescription($description)
     {
@@ -166,7 +166,7 @@ class Service
 
     /**
      * Gets the location.
-     * 
+     *
      * @return string
      */
     public function getLocation()
@@ -176,8 +176,8 @@ class Service
 
     /**
      * Sets the location.
-     * 
-     * @param string $location The location.
+     *
+     * @param string $location The location
      */
     public function setLocation($location)
     {
@@ -186,9 +186,9 @@ class Service
 
     /**
      * Adds serialization property.
-     * 
-     * @param string $key   The property name.
-     * @param string $value The property value.
+     *
+     * @param string $key   The property name
+     * @param string $value The property value
      */
     public function addSerializationProperty($key, $value)
     {
@@ -197,9 +197,9 @@ class Service
 
     /**
      * Gets serialization property value.
-     * 
-     * @param string $key The property key.
-     * 
+     *
+     * @param string $key The property key
+     *
      * @return string
      */
     public function getSerializationPropertyValue($key)
@@ -209,7 +209,7 @@ class Service
 
     /**
      * Converts the current object into array representation.
-     * 
+     *
      * @return array
      */
     protected function toArray()
@@ -236,17 +236,18 @@ class Service
 
     /**
      * Serializes the current object.
-     * 
-     * @param ISerializer $serializer The serializer.
-     * 
+     *
+     * @param ISerializer $serializer The serializer
+     *
      * @return string
-     * 
+     *
      * @throws \InvalidArgumentException
      */
     public function serialize(ISerializer $serializer)
     {
         if ($serializer instanceof XmlSerializer) {
             $arr = $this->toArray();
+
             return $serializer->serialize(
                 $arr,
                 $this->_serializationProperties

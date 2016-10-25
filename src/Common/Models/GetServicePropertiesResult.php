@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -47,9 +47,9 @@ class GetServicePropertiesResult
 
     /**
      * Creates object from $parsedResponse.
-     * 
-     * @param array $parsedResponse XML response parsed into array.
-     * 
+     *
+     * @param array $parsedResponse XML response parsed into array
+     *
      * @return GetServicePropertiesResult
      */
     public static function create(array $parsedResponse)
@@ -62,7 +62,7 @@ class GetServicePropertiesResult
 
     /**
      * Gets service properties object.
-     * 
+     *
      * @return ServiceProperties
      */
     public function getValue()
@@ -72,8 +72,8 @@ class GetServicePropertiesResult
 
     /**
      * Sets service properties object.
-     * 
-     * @param ServiceProperties $serviceProperties object to use.
+     *
+     * @param ServiceProperties $serviceProperties object to use
      */
     public function setValue(ServiceProperties $serviceProperties)
     {

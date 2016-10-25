@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -52,10 +52,10 @@ class Protocol1RuntimeClient
 
     /**
      * Constructor.
-     * 
-     * @param string $goalStateClient    The goal state client.
-     * @param string $currentStateClient The current state client.
-     * @param string $endpoint           The endpoint.
+     *
+     * @param string $goalStateClient    The goal state client
+     * @param string $currentStateClient The current state client
+     * @param string $endpoint           The endpoint
      */
     public function __construct($goalStateClient, $currentStateClient, $endpoint)
     {
@@ -67,8 +67,8 @@ class Protocol1RuntimeClient
 
     /**
      * Gets the current goal state.
-     * 
-     * @return GoalState.
+     *
+     * @return GoalState
      */
     public function getCurrentGoalState()
     {
@@ -77,8 +77,8 @@ class Protocol1RuntimeClient
 
     /**
      * Gets the role environment data.
-     * 
-     * @return RoleEnvironmentData.
+     *
+     * @return RoleEnvironmentData
      */
     public function getRoleEnvironmentData()
     {
@@ -87,8 +87,8 @@ class Protocol1RuntimeClient
 
     /**
      * Sets the current state.
-     * 
-     * @param CurrentState $state The current state.
+     *
+     * @param CurrentState $state The current state
      */
     public function setCurrentState(CurrentState $state)
     {

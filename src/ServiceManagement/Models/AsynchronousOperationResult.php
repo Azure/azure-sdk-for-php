@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -50,9 +50,9 @@ class AsynchronousOperationResult
 
     /**
      * Creates new AsynchronousOperationResult from response HTTP headers.
-     * 
-     * @param array $headers The HTTP response headers array.
-     * 
+     *
+     * @param array $headers The HTTP response headers array
+     *
      * @return AsynchronousOperationResult
      */
     public static function create($headers)
@@ -68,7 +68,7 @@ class AsynchronousOperationResult
 
     /**
      * Gets the requestId.
-     * 
+     *
      * @return string
      */
     public function getRequestId()
@@ -78,8 +78,8 @@ class AsynchronousOperationResult
 
     /**
      * Sets the requestId.
-     * 
-     * @param string $requestId The request Id of the asynchronous operation.
+     *
+     * @param string $requestId The request Id of the asynchronous operation
      */
     public function setRequestId($requestId)
     {

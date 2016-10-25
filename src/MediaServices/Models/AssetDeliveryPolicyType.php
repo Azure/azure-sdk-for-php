@@ -75,11 +75,10 @@ class AssetDeliveryPolicyType
      */
     const DYNAMIC_COMMON_ENCRYPTION = 4;
 
-	/**
-	 * Apply Dynamic Common encryption with cbcs
-	 *
-	 * @var int
-	 */
+    /**
+     * Apply Dynamic Common encryption with cbcs.
+     *
+     * @var int
+     */
     const DYNAMIC_COMMON_ENCRYPTION_CBCS = 5;
-
 }

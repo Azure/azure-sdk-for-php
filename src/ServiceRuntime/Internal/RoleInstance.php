@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -67,11 +67,11 @@ class RoleInstance
 
     /**
      * Constructor.
-     * 
-     * @param string                      $id           The identifier.
-     * @param int                         $faultDomain  The fault domain.
-     * @param int                         $updateDomain The update domain.
-     * @param RoleInstanceEndpoint[]|null $endpoints    The endpoints.
+     *
+     * @param string                      $id           The identifier
+     * @param int                         $faultDomain  The fault domain
+     * @param int                         $updateDomain The update domain
+     * @param RoleInstanceEndpoint[]|null $endpoints    The endpoints
      */
     public function __construct($id, $faultDomain, $updateDomain, array $endpoints = null)
     {
@@ -83,12 +83,12 @@ class RoleInstance
 
     /**
      * Returns the ID of this instance.
-     * 
-     * The returned ID is unique to the application domain of the role's 
-     * instance. If an instance is terminated and has been configured to 
-     * restart automatically, the restarted instance will have the same ID 
+     *
+     * The returned ID is unique to the application domain of the role's
+     * instance. If an instance is terminated and has been configured to
+     * restart automatically, the restarted instance will have the same ID
      * as the terminated instance.
-     * 
+     *
      * @return string
      */
     public function getId()
@@ -99,7 +99,7 @@ class RoleInstance
     /**
      * Returns an integer value that indicates the fault domain in which this
      * instance resides.
-     * 
+     *
      * @return int
      */
     public function getFaultDomain()
@@ -110,7 +110,7 @@ class RoleInstance
     /**
      * Returns an integer value that indicates the update domain in which this
      * instance resides.
-     * 
+     *
      * @return int
      */
     public function getUpdateDomain()
@@ -120,7 +120,7 @@ class RoleInstance
 
     /**
      * Returns the Role object associated with this instance.
-     * 
+     *
      * @return Role
      */
     public function getRole()
@@ -130,8 +130,8 @@ class RoleInstance
 
     /**
      * Sets the Role object associated with this instance.
-     * 
-     * @param Role $role The role object.
+     *
+     * @param Role $role The role object
      */
     public function setRole($role)
     {
@@ -140,7 +140,7 @@ class RoleInstance
 
     /**
      * Returns the set of endpoints associated with this role instance.
-     * 
+     *
      * @return RoleInstanceEndpoint[]
      */
     public function getInstanceEndpoints()

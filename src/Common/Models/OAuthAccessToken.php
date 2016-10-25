@@ -59,14 +59,14 @@ class OAuthAccessToken
     /**
      * Scope of access token.
      *
-     * @var string.
+     * @var string
      */
     private $_scope;
 
     /**
      * Creates object from $parsedResponse.
      *
-     * @param array $parsedResponse JSON response parsed into array.
+     * @param array $parsedResponse JSON response parsed into array
      *
      * @return OAuthAccessToken
      */

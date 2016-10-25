@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -26,7 +26,6 @@
 namespace WindowsAzure\ServiceBus\Models;
 
 use WindowsAzure\Common\Internal\Atom\Feed;
-
 
 /**
  * The result of the list rules request.
@@ -44,16 +43,16 @@ use WindowsAzure\Common\Internal\Atom\Feed;
 class ListRulesResult extends Feed
 {
     /**
-     * The information of the rule. 
-     * 
+     * The information of the rule.
+     *
      * @var RuleInfo[]
      */
     private $_ruleInfos;
 
-    /** 
+    /**
      * Populates the properties with the response from the list rules request.
-     * 
-     * @param string $response The body of the response of the list rules request. 
+     *
+     * @param string $response The body of the response of the list rules request
      */
     public function parseXml($response)
     {
@@ -69,8 +68,8 @@ class ListRulesResult extends Feed
     }
 
     /**
-     * Gets the information of the rules. 
-     * 
+     * Gets the information of the rules.
+     *
      * @return RuleInfo[]
      */
     public function getRuleInfos()
@@ -78,10 +77,10 @@ class ListRulesResult extends Feed
         return $this->_ruleInfos;
     }
 
-    /** 
-     * Sets the information of the rule. 
-     * 
-     * @param RuleInfo[] $ruleInfos The information of the rule.
+    /**
+     * Sets the information of the rule.
+     *
+     * @param RuleInfo[] $ruleInfos The information of the rule
      */
     public function setRuleInfos(array $ruleInfos)
     {

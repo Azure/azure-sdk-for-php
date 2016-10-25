@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -57,11 +57,11 @@ class AcquireCurrentState extends CurrentState
 
     /**
      * Constructor.
-     * 
-     * @param string    $clientId    The client identifier.
-     * @param string    $incarnation The incarnation.
-     * @param string    $status      The status.
-     * @param \DateTime $expiration  The expiration date.
+     *
+     * @param string    $clientId    The client identifier
+     * @param string    $incarnation The incarnation
+     * @param string    $status      The status
+     * @param \DateTime $expiration  The expiration date
      */
     public function __construct($clientId, $incarnation, $status, $expiration)
     {
@@ -73,7 +73,7 @@ class AcquireCurrentState extends CurrentState
 
     /**
      * Gets the incarnation.
-     * 
+     *
      * @return string
      */
     public function getIncarnation()
@@ -83,7 +83,7 @@ class AcquireCurrentState extends CurrentState
 
     /**
      * Gets the status.
-     * 
+     *
      * @return string
      */
     public function getStatus()
@@ -93,7 +93,7 @@ class AcquireCurrentState extends CurrentState
 
     /**
      * Gets the expiration.
-     * 
+     *
      * @return \DateTime
      */
     public function getExpiration()

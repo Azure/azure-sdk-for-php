@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -59,7 +59,7 @@ class CreateServiceOptions
 
     /**
      * Gets the location.
-     * 
+     *
      * @return string
      */
     public function getLocation()
@@ -69,8 +69,8 @@ class CreateServiceOptions
 
     /**
      * Sets the location.
-     * 
-     * @param string $location The location.
+     *
+     * @param string $location The location
      */
     public function setLocation($location)
     {
@@ -82,7 +82,7 @@ class CreateServiceOptions
 
     /**
      * Gets the affinityGroup.
-     * 
+     *
      * @return string
      */
     public function getAffinityGroup()
@@ -92,8 +92,8 @@ class CreateServiceOptions
 
     /**
      * Sets the affinityGroup.
-     * 
-     * @param string $affinityGroup The affinityGroup.
+     *
+     * @param string $affinityGroup The affinityGroup
      */
     public function setAffinityGroup($affinityGroup)
     {
@@ -105,7 +105,7 @@ class CreateServiceOptions
 
     /**
      * Gets the description.
-     * 
+     *
      * @return string
      */
     public function getDescription()
@@ -115,8 +115,8 @@ class CreateServiceOptions
 
     /**
      * Sets the description.
-     * 
-     * @param string $description The description.
+     *
+     * @param string $description The description
      */
     public function setDescription($description)
     {

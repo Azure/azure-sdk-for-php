@@ -49,8 +49,8 @@ abstract class StorageAuthScheme implements IAuthScheme
     /**
      * Constructor.
      *
-     * @param string $accountName storage account name.
-     * @param string $accountKey  storage account primary or secondary key.
+     * @param string $accountName storage account name
+     * @param string $accountKey  storage account primary or secondary key
      */
     public function __construct($accountName, $accountKey)
     {
@@ -61,7 +61,7 @@ abstract class StorageAuthScheme implements IAuthScheme
     /**
      * Computes canonicalized headers for headers array.
      *
-     * @param array $headers request headers.
+     * @param array $headers request headers
      *
      * @see Constructing the Canonicalized Headers String section at
      *      http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx
@@ -112,8 +112,8 @@ abstract class StorageAuthScheme implements IAuthScheme
     /**
      * Computes canonicalized resources from URL using Table format.
      *
-     * @param string $url         request url.
-     * @param array  $queryParams request query variables.
+     * @param string $url         request url
+     * @param array  $queryParams request query variables
      *
      * @see Constructing the Canonicalized Resource String section at
      *      http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx
@@ -145,8 +145,8 @@ abstract class StorageAuthScheme implements IAuthScheme
     /**
      * Computes canonicalized resources from URL.
      *
-     * @param string $url         request url.
-     * @param array  $queryParams request query variables.
+     * @param string $url         request url
+     * @param array  $queryParams request query variables
      *
      * @see Constructing the Canonicalized Resource String section at
      *      http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx
@@ -194,10 +194,10 @@ abstract class StorageAuthScheme implements IAuthScheme
     /**
      * Computes the authorization signature.
      *
-     * @param array  $headers     request headers.
-     * @param string $url         request URL.
-     * @param array  $queryParams query variables.
-     * @param string $httpMethod  request http method.
+     * @param array  $headers     request headers
+     * @param string $url         request URL
+     * @param array  $queryParams query variables
+     * @param string $httpMethod  request http method
      *
      * @see check all authentication schemes at
      *      http://msdn.microsoft.com/en-us/library/windowsazure/dd179428.aspx

@@ -47,19 +47,19 @@ interface IServiceFilter
     /**
      * Processes HTTP request before send.
      *
-     * @param IHttpClient $request HTTP request object.
+     * @param IHttpClient $request HTTP request object
      *
-     * @return IHttpClient processed HTTP request object.
+     * @return IHttpClient processed HTTP request object
      */
     public function handleRequest(IHttpClient $request);
 
     /**
      * Processes HTTP response after send.
      *
-     * @param IHttpClient       $request  HTTP request object.
-     * @param ResponseInterface $response HTTP response object.
+     * @param IHttpClient       $request  HTTP request object
+     * @param ResponseInterface $response HTTP response object
      *
-     * @return ResponseInterface processed HTTP response object.
+     * @return ResponseInterface processed HTTP response object
      */
     public function handleResponse(IHttpClient $request, ResponseInterface $response);
 }

@@ -41,23 +41,23 @@ namespace WindowsAzure\MediaServices\Models;
 class StreamingProtocol
 {
     /**
-     * Fragmented MP4
+     * Fragmented MP4.
      *
      * @var string
      */
-    const FragmentedMP4 = "FragmentedMP4";
+    const FragmentedMP4 = 'FragmentedMP4';
 
     /**
-     * RTMP
+     * RTMP.
      *
      * @var string
      */
-    const RTMP = "RTMP";
+    const RTMP = 'RTMP';
 
     /**
-     * RTPMPEG2TS
+     * RTPMPEG2TS.
      *
      * @var string
      */
-    const RTPMPEG2TS = "RTPMPEG2TS";
+    const RTPMPEG2TS = 'RTPMPEG2TS';
 }

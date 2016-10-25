@@ -56,7 +56,8 @@ class ExplicitAnalogTelevisionRestriction
 
     /**
      * Create ExplicitAnalogTelevisionRestriction.
-     * @param int $configurationData
+     *
+     * @param int  $configurationData
      * @param bool $bestEffort
      */
     public function __construct($configurationData, $bestEffort = false)
@@ -66,9 +67,9 @@ class ExplicitAnalogTelevisionRestriction
     }
 
     /**
-     * Controls whether the Explicit Analog Television Output Restriction is enforced on a Best Effort basis or not. If true, 
-     * then the PlayReady client must make its best effort to enforce the restriction but can allow video content to flow to 
-     * Analog Television Outputs if it cannot support the restriction. If false, the PlayReady client must enforce the restriction. 
+     * Controls whether the Explicit Analog Television Output Restriction is enforced on a Best Effort basis or not. If true,
+     * then the PlayReady client must make its best effort to enforce the restriction but can allow video content to flow to
+     * Analog Television Outputs if it cannot support the restriction. If false, the PlayReady client must enforce the restriction.
      * For further details see the PlayReady Compliance Rules.
      *
      * @return bool BestEffort
@@ -79,9 +80,9 @@ class ExplicitAnalogTelevisionRestriction
     }
 
     /**
-     * Controls whether the Explicit Analog Television Output Restriction is enforced on a Best Effort basis or not. If true, 
-     * then the PlayReady client must make its best effort to enforce the restriction but can allow video content to flow to 
-     * Analog Television Outputs if it cannot support the restriction. If false, the PlayReady client must enforce the restriction. 
+     * Controls whether the Explicit Analog Television Output Restriction is enforced on a Best Effort basis or not. If true,
+     * then the PlayReady client must make its best effort to enforce the restriction but can allow video content to flow to
+     * Analog Television Outputs if it cannot support the restriction. If false, the PlayReady client must enforce the restriction.
      * For further details see the PlayReady Compliance Rules.
      *
      * @param bool $value BestEffort

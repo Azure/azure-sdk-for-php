@@ -90,7 +90,7 @@ class ChannelSlate
             $this->_insertSlateOnAdMarker = (bool) $options['InsertSlateOnAdMarker'];
         }
 
-	    if (isset($options['DefaultSlateAssetId'])) {
+        if (isset($options['DefaultSlateAssetId'])) {
             Validate::isString($options['DefaultSlateAssetId'], 'options[DefaultSlateAssetIdUrl]');
             $this->_defaultSlateAssetId = $options['DefaultSlateAssetId'];
         }
@@ -109,7 +109,7 @@ class ChannelSlate
     /**
      * Set the ChannelSlate InsertSlateOnAdMarker.
      *
-     * @param bool $value ChannelSlate InsertSlateOnAdMarker.
+     * @param bool $value ChannelSlate InsertSlateOnAdMarker
      */
     public function setInsertSlateOnAdMarker($value)
     {
@@ -129,11 +129,10 @@ class ChannelSlate
     /**
      * Set the ChannelSlate DefaultSlateAssetId.
      *
-     * @param string $value ChannelSlate DefaultSlateAssetId.
+     * @param string $value ChannelSlate DefaultSlateAssetId
      */
     public function setDefaultSlateAssetId($value)
     {
         $this->_defaultSlateAssetId = $value;
     }
 }
-

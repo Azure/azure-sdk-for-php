@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -24,8 +24,6 @@
  */
 
 namespace WindowsAzure\ServiceRuntime\Internal;
-
-
 
 /**
  * The role data.
@@ -54,9 +52,9 @@ class Role
 
     /**
      * Constructor.
-     * 
-     * @param string         $name      The role name.
-     * @param RoleInstance[] $instances The role instances.
+     *
+     * @param string         $name      The role name
+     * @param RoleInstance[] $instances The role instances
      */
     public function __construct($name, array $instances)
     {
@@ -66,13 +64,13 @@ class Role
 
     /**
      * Returns the collection of instances for the role.
-     * 
+     *
      * The number of instances of a role to be deployed to Windows Azure is
      * specified in the service's configuration file.
-     * 
-     * A role must define at least one internal endpoint in order for its set 
+     *
+     * A role must define at least one internal endpoint in order for its set
      * of instances to be known at runtime.
-     * 
+     *
      * @return RoleInstance[]
      */
     public function getInstances()
@@ -83,7 +81,7 @@ class Role
     /**
      * Returns the name of the role as it is declared in the service definition
      * file.
-     * 
+     *
      * @return string
      */
     public function getName()

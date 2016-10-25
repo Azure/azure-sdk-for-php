@@ -41,39 +41,39 @@ namespace WindowsAzure\MediaServices\Models;
 class ChannelState
 {
     /**
-     * Stopped: This is the initial state of the Channel after its creation. In this state, 
+     * Stopped: This is the initial state of the Channel after its creation. In this state,
      * the Channel properties can be updated but streaming is not allowed.
      *
      * @var string
      */
-    const Stopped = "Stopped";
+    const Stopped = 'Stopped';
 
     /**
-     * Starting: Channel is being started. No updates or streaming is allowed during this state. 
+     * Starting: Channel is being started. No updates or streaming is allowed during this state.
      * If an error occurs, the Channel returns to the Stopped state.
      *
      * @var string
      */
-    const Starting = "Starting";
+    const Starting = 'Starting';
 
     /**
      * Running: The Channel is capable of processing live streams.
      *
      * @var string
      */
-    const Running = "Running";
+    const Running = 'Running';
 
     /**
      * Stopping: The channel is being stopped. No updates or streaming is allowed during this state.
      *
      * @var string
      */
-    const Stopping = "Stopping";
+    const Stopping = 'Stopping';
 
     /**
      * Deleting: The Channel is being deleted. No updates or streaming is allowed during this state.
      *
      * @var string
      */
-    const Deleting = "Deleting";
+    const Deleting = 'Deleting';
 }

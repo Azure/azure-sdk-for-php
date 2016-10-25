@@ -60,6 +60,7 @@ class TokenClaim
 
     /**
      * Create TokenClaim.
+     *
      * @param $type
      * @param null $value
      */

@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -55,9 +55,9 @@ class Role
 
     /**
      * Creates a new Role from parsed response body.
-     * 
-     * @param array $parsed The parsed response body in array representation.
-     * 
+     *
+     * @param array $parsed The parsed response body in array representation
+     *
      * @return Role
      */
     public static function create($parsed)
@@ -80,9 +80,9 @@ class Role
 
     /**
      * Gets the role name.
-     * 
+     *
      * The name of the role.
-     * 
+     *
      * @return string
      */
     public function getRoleName()
@@ -92,8 +92,8 @@ class Role
 
     /**
      * Sets the role name.
-     * 
-     * @param string $roleName The role name.
+     *
+     * @param string $roleName The role name
      */
     public function setRoleName($roleName)
     {
@@ -102,10 +102,10 @@ class Role
 
     /**
      * Gets the role OS version.
-     * 
+     *
      * The version of the Windows Azure Guest Operating System on which this role's
      * instances are running.
-     * 
+     *
      * @return string
      */
     public function getOsVersion()
@@ -115,8 +115,8 @@ class Role
 
     /**
      * Sets the role OS version.
-     * 
-     * @param string $osVersion The role OS version.
+     *
+     * @param string $osVersion The role OS version
      */
     public function setOsVersion($osVersion)
     {

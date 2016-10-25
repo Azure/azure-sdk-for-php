@@ -97,11 +97,10 @@ class ChannelOutput
     /**
      * Set the ChannelOutput Hls.
      *
-     * @param ChannelOutputHls $value ChannelInputAccessControl Hls.
+     * @param ChannelOutputHls $value ChannelInputAccessControl Hls
      */
     public function setHls(ChannelOutputHls $value)
     {
         $this->_hls = $value;
     }
 }
-

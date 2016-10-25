@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -40,25 +40,25 @@ namespace WindowsAzure\ServiceBus\Internal;
  */
 class ActiveToken
 {
-    /** 
-     * The WRAP access token result. 
-     * 
+    /**
+     * The WRAP access token result.
+     *
      * @var WrapAccessTokenResult
      */
     private $_wrapAccessTokenResult;
 
-    /** 
-     * When the WRAP access token expires. 
-     * 
+    /**
+     * When the WRAP access token expires.
+     *
      * @var \DateTime
      */
     private $_expirationDateTime;
 
     /**
-     * Creates an ActiveToken with specified WRAP 
+     * Creates an ActiveToken with specified WRAP
      * access token result.
      *
-     * @param WrapAccessTokenResult $wrapAccessTokenResult A WRAP access token result.
+     * @param WrapAccessTokenResult $wrapAccessTokenResult A WRAP access token result
      */
     public function __construct(WrapAccessTokenResult $wrapAccessTokenResult)
     {
@@ -78,7 +78,7 @@ class ActiveToken
     /**
      * Sets WRAP access token.
      *
-     * @param WrapAccessTokenResult $wrapAccessTokenResult The WRAP access token result.
+     * @param WrapAccessTokenResult $wrapAccessTokenResult The WRAP access token result
      */
     public function setWrapAccessTokenResult($wrapAccessTokenResult)
     {
@@ -86,7 +86,7 @@ class ActiveToken
     }
 
     /**
-     * Gets expiration time.  
+     * Gets expiration time.
      *
      * @return \DateTime
      */
@@ -98,7 +98,7 @@ class ActiveToken
     /**
      * Sets expiration time.
      *
-     * @param \DateTime $expirationDateTime value.
+     * @param \DateTime $expirationDateTime value
      */
     public function setExpirationDateTime($expirationDateTime)
     {

@@ -139,7 +139,7 @@ class Entry extends AtomBase
     /**
      * Populate the properties of an ATOM Entry instance with specified XML..
      *
-     * @param string $xmlString A string representing an ATOM entry instance.
+     * @param string $xmlString A string representing an ATOM entry instance
      */
     public function parseXml($xmlString)
     {
@@ -224,7 +224,7 @@ class Entry extends AtomBase
     /**
      * Sets the author of the entry.
      *
-     * @param Person[] $author The author of the entry.
+     * @param Person[] $author The author of the entry
      */
     public function setAuthor(array $author)
     {
@@ -244,7 +244,7 @@ class Entry extends AtomBase
     /**
      * Sets the category.
      *
-     * @param Category[] $category The category of the entry.
+     * @param Category[] $category The category of the entry
      */
     public function setCategory(array $category)
     {
@@ -254,7 +254,7 @@ class Entry extends AtomBase
     /**
      * Gets the content.
      *
-     * @return Content.
+     * @return Content
      */
     public function getContent()
     {
@@ -264,7 +264,7 @@ class Entry extends AtomBase
     /**
      * Sets the content.
      *
-     * @param Content $content Sets the content of the entry.
+     * @param Content $content Sets the content of the entry
      */
     public function setContent(Content $content)
     {
@@ -284,7 +284,7 @@ class Entry extends AtomBase
     /**
      * Sets the contributor.
      *
-     * @param Person[] $contributor The contributor of the entry.
+     * @param Person[] $contributor The contributor of the entry
      */
     public function setContributor(array $contributor)
     {
@@ -304,7 +304,7 @@ class Entry extends AtomBase
     /**
      * Sets the ID of the entry.
      *
-     * @param string $id The id of the entry.
+     * @param string $id The id of the entry
      */
     public function setId($id)
     {
@@ -324,7 +324,7 @@ class Entry extends AtomBase
     /**
      * Sets the link of the entry.
      *
-     * @param string $link The link of the entry.
+     * @param string $link The link of the entry
      */
     public function setLink($link)
     {
@@ -344,7 +344,7 @@ class Entry extends AtomBase
     /**
      * Sets published of the entry.
      *
-     * @param bool $published Is the entry published.
+     * @param bool $published Is the entry published
      */
     public function setPublished($published)
     {
@@ -364,7 +364,7 @@ class Entry extends AtomBase
     /**
      * Sets the rights of the entry.
      *
-     * @param string $rights The rights of the entry.
+     * @param string $rights The rights of the entry
      */
     public function setRights($rights)
     {
@@ -384,7 +384,7 @@ class Entry extends AtomBase
     /**
      * Sets the source of the entry.
      *
-     * @param string $source The source of the entry.
+     * @param string $source The source of the entry
      */
     public function setSource($source)
     {
@@ -404,7 +404,7 @@ class Entry extends AtomBase
     /**
      * Sets the summary of the entry.
      *
-     * @param string $summary The summary of the entry.
+     * @param string $summary The summary of the entry
      */
     public function setSummary($summary)
     {
@@ -424,7 +424,7 @@ class Entry extends AtomBase
     /**
      * Sets the title of the entry.
      *
-     * @param string $title The title of the entry.
+     * @param string $title The title of the entry
      */
     public function setTitle($title)
     {
@@ -444,7 +444,7 @@ class Entry extends AtomBase
     /**
      * Sets updated.
      *
-     * @param \DateTime $updated updated.
+     * @param \DateTime $updated updated
      */
     public function setUpdated(\DateTime $updated)
     {
@@ -464,7 +464,7 @@ class Entry extends AtomBase
     /**
      * Sets extension element.
      *
-     * @param string $extensionElement The extension element of the entry.
+     * @param string $extensionElement The extension element of the entry
      */
     public function setExtensionElement($extensionElement)
     {
@@ -474,7 +474,7 @@ class Entry extends AtomBase
     /**
      * Writes a inner XML string representing the entry.
      *
-     * @param \XMLWriter $xmlWriter The XML writer.
+     * @param \XMLWriter $xmlWriter The XML writer
      */
     public function writeXml(\XMLWriter $xmlWriter)
     {
@@ -491,7 +491,7 @@ class Entry extends AtomBase
     /**
      * Writes a inner XML string representing the entry.
      *
-     * @param \XMLWriter $xmlWriter The XML writer.
+     * @param \XMLWriter $xmlWriter The XML writer
      */
     public function writeInnerXml(\XMLWriter $xmlWriter)
     {

@@ -97,11 +97,10 @@ class ChannelOutputHls
     /**
      * Set the ChannelOutputHls FragmentsPerSegment.
      *
-     * @param int $value ChannelOutputHls FragmentsPerSegment.
+     * @param int $value ChannelOutputHls FragmentsPerSegment
      */
     public function setFragmentsPerSegment($value)
     {
         $this->_fragmentsPerSegment = $value;
     }
 }
-

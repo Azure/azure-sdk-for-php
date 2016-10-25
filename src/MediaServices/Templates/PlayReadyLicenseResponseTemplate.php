@@ -89,7 +89,7 @@ class PlayReadyLicenseResponseTemplate
      * this data but it can be used for sending data to custom client implementations or adding
      * data for diagnostic purposes.
      *
-     * @return string ResponseCustomData 
+     * @return string ResponseCustomData
      */
     public function getResponseCustomData()
     {
@@ -101,7 +101,7 @@ class PlayReadyLicenseResponseTemplate
      * this data but it can be used for sending data to custom client implementations or adding
      * data for diagnostic purposes.
      *
-     * @param string $value ResponseCustomData 
+     * @param string $value ResponseCustomData
      */
     public function setResponseCustomData($value)
     {
