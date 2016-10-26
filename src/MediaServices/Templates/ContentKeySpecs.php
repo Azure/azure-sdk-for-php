@@ -58,9 +58,11 @@ class ContentKeySpecs
      * Defines client robustness requirements for playback.
      * 1 - Software-based whitebox crypto is required.
      * 2 - Software crypto and an obfuscated decoder is required.
-     * 3 - The key material and crypto operations must be performed within a hardware backed trusted execution environment.
+     * 3 - The key material and crypto operations must be performed within a hardware backed trusted execution
+     *     environment.
      * 4 - The crypto and decoding of content must be performed within a hardware backed trusted execution environment.
-     * 5 - The crypto, decoding and all handling of the media (compressed and uncompressed) must be handled within a hardware backed trusted execution environment.
+     * 5 - The crypto, decoding and all handling of the media (compressed and uncompressed) must be handled within a
+     *     hardware backed trusted execution environment.
      *
      * @var int
      */

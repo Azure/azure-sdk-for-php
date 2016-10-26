@@ -59,7 +59,9 @@ class MediaServicesLicenseTemplateSerializer
             throw new \RuntimeException("This is not a PlayReadyLicenseResponseTemplate, it is a '{$xml->getName()}'");
         }
         if (!isset($xml->LicenseTemplates)) {
-            throw new \RuntimeException("The PlayReadyLicenseResponseTemplate must contains an 'LicenseTemplates' element");
+            throw new \RuntimeException(
+                "The PlayReadyLicenseResponseTemplate must contains an 'LicenseTemplates' element"
+            );
         }
 
         // decoding
@@ -118,33 +120,42 @@ class MediaServicesLicenseTemplateSerializer
                 throw new \RuntimeException(ErrorMessages::PLAY_READY_CONTENT_KEY_REQUIRED);
             }
 
+            $licensePlayRight = $license->getPlayRight();
             // A PlayReady license must have at least one Right in it.  Today we only
             // support the PlayRight so it is required.  In the future we might support
             // other types of rights (CopyRight, perhaps an extensible Right, whatever)
             // so we enforce this in code and not in the DataContract itself.
-            if ($license->getPlayRight() == null) {
+            if ($licensePlayRight == null) {
                 throw new \RuntimeException(ErrorMessages::PLAY_READY_PLAY_RIGHT_REQUIRED);
             }
 
-            //  Per the PlayReady Compliance rules (section 3.8 - Output Control for Unknown Outputs), passing content to
-            //  unknown output is prohibited if the DigitalVideoOnlyContentRestriction is enabled.
-            if ($license->getPlayRight()->getDigitalVideoOnlyContentRestriction()) {
-                if (($license->getPlayRight()->getAllowPassingVideoContentToUnknownOutput() == UnknownOutputPassingOption::ALLOWED) ||
-                    ($license->getPlayRight()->getAllowPassingVideoContentToUnknownOutput() == UnknownOutputPassingOption::ALLOWED_WITH_VIDEO_CONSTRICTION)) {
-                    throw new \RuntimeException(ErrorMessages::DIGITAL_VIDEO_ONLY_MUTUALLY_EXCLUSIVE_WITH_PASSING_TO_UNKNOWN_OUTPUT_ERROR);
+            // Per the PlayReady Compliance rules (section 3.8 - Output Control for Unknown Outputs), passing content
+            // to unknown output is prohibited if the DigitalVideoOnlyContentRestriction is enabled.
+            if ($licensePlayRight->getDigitalVideoOnlyContentRestriction()) {
+                if (($licensePlayRight->getAllowPassingVideoContentToUnknownOutput() ==
+                        UnknownOutputPassingOption::ALLOWED) ||
+                    ($licensePlayRight->getAllowPassingVideoContentToUnknownOutput() ==
+                        UnknownOutputPassingOption::ALLOWED_WITH_VIDEO_CONSTRICTION)) {
+                    throw new \RuntimeException(
+                        ErrorMessages::DIGITAL_VIDEO_ONLY_MUTUALLY_EXCLUSIVE_WITH_PASSING_TO_UNKNOWN_OUTPUT_ERROR
+                    );
                 }
             }
 
             //  License template should not have both BeginDate and RelativeBeginDate set.
             //  Only one of these two values should be set.
             if (($license->getBeginDate() != null) && ($license->getRelativeBeginDate() != null)) {
-                throw new \RuntimeException(ErrorMessages::BEGIN_DATE_AND_RELATIVE_BEGIN_DATE_CANNOTBE_SET_SIMULTANEOUSLY_ERROR);
+                throw new \RuntimeException(
+                    ErrorMessages::BEGIN_DATE_AND_RELATIVE_BEGIN_DATE_CANNOTBE_SET_SIMULTANEOUSLY_ERROR
+                );
             }
 
             //  License template should not have both ExpirationDate and RelativeExpirationDate set.
             //  Only one of these two values should be set.
             if (($license->getExpirationDate() != null) && ($license->getRelativeExpirationDate() != null)) {
-                throw new \RuntimeException(ErrorMessages::EXPIRATION_DATE_AND_RELATIVE_EXPIRATION_DATE_CANNOTBE_SET_SIMULTANEOUSLY_ERROR);
+                throw new \RuntimeException(
+                    ErrorMessages::EXPIRATION_DATE_AND_RELATIVE_EXPIRATION_DATE_CANNOTBE_SET_SIMULTANEOUSLY_ERROR
+                );
             }
 
             if ($license->getLicenseType() == PlayReadyLicenseType::NON_PERSISTENT) {
@@ -153,7 +164,9 @@ class MediaServicesLicenseTemplateSerializer
                 //  to the error will say "LicenseGenerationFailure: FirstPlayExpiration can not be set on Non
                 //  Persistent license PlayRight."
                 if ($license->getPlayRight()->getFirstPlayExpiration() != null) {
-                    throw new \RuntimeException(ErrorMessages::FIRST_PLAY_EXPIRATION_CANNOT_BE_SET_ON_NON_PERSISTENT_LICENSE);
+                    throw new \RuntimeException(
+                        ErrorMessages::FIRST_PLAY_EXPIRATION_CANNOT_BE_SET_ON_NON_PERSISTENT_LICENSE
+                    );
                 }
 
                 //  The PlayReady Rights Manager SDK will return an error if you try to specify a license
@@ -233,7 +246,9 @@ class MediaServicesLicenseTemplateSerializer
         }
 
         if ($template->getRelativeExpirationDate() != null) {
-            $writer->writeElement('RelativeExpirationDate', self::getSpecString($template->getRelativeExpirationDate()));
+            $writer->writeElement(
+                'RelativeExpirationDate', self::getSpecString($template->getRelativeExpirationDate())
+            );
         }
 
         $writer->endElement();
@@ -249,12 +264,16 @@ class MediaServicesLicenseTemplateSerializer
 
         if ($playright->getAgcAndColorStripeRestriction() != null) {
             $writer->startElement('AgcAndColorStripeRestriction');
-            $writer->writeElement('ConfigurationData', $playright->getAgcAndColorStripeRestriction()->getConfigurationData());
+            $writer->writeElement(
+                'ConfigurationData', $playright->getAgcAndColorStripeRestriction()->getConfigurationData()
+            );
             $writer->endElement();
         }
 
         if ($playright->getAllowPassingVideoContentToUnknownOutput()) {
-            $writer->writeElement('AllowPassingVideoContentToUnknownOutput', $playright->getAllowPassingVideoContentToUnknownOutput());
+            $writer->writeElement(
+                'AllowPassingVideoContentToUnknownOutput', $playright->getAllowPassingVideoContentToUnknownOutput()
+            );
         }
 
         if ($playright->getAnalogVideoOpl() > 0) {
@@ -422,20 +441,31 @@ class MediaServicesLicenseTemplateSerializer
         }
 
         if (isset($xmlElement->ScmsRestriction) && isset($xmlElement->ScmsRestriction->ConfigurationData)) {
-            $result->setScmsRestriction(new ScmsRestriction(intval((string) $xmlElement->ScmsRestriction->ConfigurationData)));
+            $result->setScmsRestriction(
+                new ScmsRestriction(intval((string) $xmlElement->ScmsRestriction->ConfigurationData))
+            );
         }
 
-        if (isset($xmlElement->AgcAndColorStripeRestriction) && isset($xmlElement->AgcAndColorStripeRestriction->ConfigurationData)) {
-            $result->setAgcAndColorStripeRestriction(new AgcAndColorStripeRestriction(intval((string) $xmlElement->AgcAndColorStripeRestriction->ConfigurationData)));
+        if (isset($xmlElement->AgcAndColorStripeRestriction) &&
+            isset($xmlElement->AgcAndColorStripeRestriction->ConfigurationData)) {
+            $result->setAgcAndColorStripeRestriction(
+                new AgcAndColorStripeRestriction(
+                    intval((string) $xmlElement->AgcAndColorStripeRestriction->ConfigurationData)
+                )
+            );
         }
 
-        if (isset($xmlElement->ExplicitAnalogTelevisionOutputRestriction) && isset($xmlElement->ExplicitAnalogTelevisionOutputRestriction->ConfigurationData)) {
+        if (isset($xmlElement->ExplicitAnalogTelevisionOutputRestriction) &&
+            isset($xmlElement->ExplicitAnalogTelevisionOutputRestriction->ConfigurationData)) {
             $bestEffort = false;
             if (isset($xmlElement->ExplicitAnalogTelevisionOutputRestriction->BestEffort)) {
                 $bestEffort = $xmlElement->ExplicitAnalogTelevisionOutputRestriction->BestEffort == 'true';
             }
-            $configurationData = intval((string) $xmlElement->ExplicitAnalogTelevisionOutputRestriction->ConfigurationData);
-            $result->setExplicitAnalogTelevisionOutputRestriction(new ExplicitAnalogTelevisionRestriction($configurationData, $bestEffort));
+            $configurationData =
+                intval((string) $xmlElement->ExplicitAnalogTelevisionOutputRestriction->ConfigurationData);
+            $result->setExplicitAnalogTelevisionOutputRestriction(
+                new ExplicitAnalogTelevisionRestriction($configurationData, $bestEffort)
+            );
         }
 
         if (isset($xmlElement->DigitalVideoOnlyContentRestriction)) {
@@ -443,15 +473,21 @@ class MediaServicesLicenseTemplateSerializer
         }
 
         if (isset($xmlElement->ImageConstraintForAnalogComponentVideoRestriction)) {
-            $result->setImageConstraintForAnalogComponentVideoRestriction($xmlElement->ImageConstraintForAnalogComponentVideoRestriction == 'true');
+            $result->setImageConstraintForAnalogComponentVideoRestriction(
+                $xmlElement->ImageConstraintForAnalogComponentVideoRestriction == 'true'
+            );
         }
 
         if (isset($xmlElement->ImageConstraintForAnalogComputerMonitorRestriction)) {
-            $result->setImageConstraintForAnalogComputerMonitorRestriction($xmlElement->ImageConstraintForAnalogComputerMonitorRestriction == 'true');
+            $result->setImageConstraintForAnalogComputerMonitorRestriction(
+                $xmlElement->ImageConstraintForAnalogComputerMonitorRestriction == 'true'
+            );
         }
 
         if (isset($xmlElement->AllowPassingVideoContentToUnknownOutput)) {
-            $result->setAllowPassingVideoContentToUnknownOutput((string) $xmlElement->AllowPassingVideoContentToUnknownOutput);
+            $result->setAllowPassingVideoContentToUnknownOutput(
+                (string) $xmlElement->AllowPassingVideoContentToUnknownOutput
+            );
         }
 
         if (isset($xmlElement->UncompressedDigitalVideoOpl)) {

@@ -58,7 +58,8 @@ class ScmsRestriction
     }
 
     /**
-     * Configures the Serial Copy Management System (SCMS) control bits. For further details see the PlayReady Compliance Rules.
+     * Configures the Serial Copy Management System (SCMS) control bits. For further details see the PlayReady
+     * Compliance Rules.
      *
      * @return int ConfigurationData
      */
@@ -68,7 +69,8 @@ class ScmsRestriction
     }
 
     /**
-     * Configures the Serial Copy Management System (SCMS) control bits. For further details see the PlayReady Compliance Rules.
+     * Configures the Serial Copy Management System (SCMS) control bits. For further details see the PlayReady
+     * Compliance Rules.
      *
      * @param int $value ConfigurationData
      */

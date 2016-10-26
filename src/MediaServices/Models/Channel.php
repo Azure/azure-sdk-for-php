@@ -209,7 +209,9 @@ class Channel
 
         if (!empty($options['CrossSiteAccessPolicies'])) {
             Validate::isArray($options['CrossSiteAccessPolicies'], 'options[CrossSiteAccessPolicies]');
-            $this->_crossSiteAccessPolicies = CrossSiteAccessPolicies::createFromOptions($options['CrossSiteAccessPolicies']);
+            $this->_crossSiteAccessPolicies = CrossSiteAccessPolicies::createFromOptions(
+                $options['CrossSiteAccessPolicies']
+            );
         }
 
         if (isset($options['EncodingType'])) {
