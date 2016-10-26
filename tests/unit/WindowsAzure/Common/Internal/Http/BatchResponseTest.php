@@ -24,6 +24,7 @@
 
 namespace Tests\unit\WindowsAzure\Common\Internal\Http;
 
+use GuzzleHttp\Psr7\Response;
 use WindowsAzure\Common\Internal\Http\BatchResponse;
 use WindowsAzure\Common\Internal\Http\BatchRequest;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
@@ -52,22 +53,23 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
         // Setup
         $body = 'test response body';
         $encodedBody =
-                "--batch_956c339e-1ef0-4443-9276-68c12888a3f7\r\n".
-                "Content-Type: multipart/mixed; boundary=changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n".
-                "\r\n".
-                "--changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n".
-                "Content-Transfer-Encoding: binary\r\n".
-                "Content-Type: application/http\r\n".
-                "\r\n".
-                "HTTP/1.1 200 OK\r\n".
-                "content-id: 1\r\n".
-                "\r\n".
-                $body.
-                "--changeset_4a3f1712-c034-416e-9772-905d28c0b122--\r\n".
-                '--batch_956c339e-1ef0-4443-9276-68c12888a3f7--';
+            "--batch_956c339e-1ef0-4443-9276-68c12888a3f7\r\n".
+            "Content-Type: multipart/mixed; boundary=changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n".
+            "\r\n".
+            "--changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n".
+            "Content-Transfer-Encoding: binary\r\n".
+            "Content-Type: application/http\r\n".
+            "\r\n".
+            "HTTP/1.1 200 OK\r\n".
+            "content-id: 1\r\n".
+            "\r\n".
+            $body.
+            "--changeset_4a3f1712-c034-416e-9772-905d28c0b122--\r\n".
+            '--batch_956c339e-1ef0-4443-9276-68c12888a3f7--';
+        $response = new Response(200, [], $encodedBody);
 
         // Test
-        $batchResp = new BatchResponse($encodedBody);
+        $batchResp = new BatchResponse($response);
         $result = $batchResp->getResponses();
 
         // Assert
@@ -92,22 +94,23 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
         $batchReq->appendContext($httpCallContext);
 
         $encodedBody =
-        "--batch_956c339e-1ef0-4443-9276-68c12888a3f7\r\n".
-        "Content-Type: multipart/mixed; boundary=changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n".
-        "\r\n".
-        "--changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n".
-        "Content-Transfer-Encoding: binary\r\n".
-        "Content-Type: application/http\r\n".
-        "\r\n".
-        "HTTP/1.1 {$statusCode} OK\r\n".
-        "content-id: 1\r\n".
-        "\r\n".
-        $body.
-        "--changeset_4a3f1712-c034-416e-9772-905d28c0b122--\r\n".
-        '--batch_956c339e-1ef0-4443-9276-68c12888a3f7--';
+            "--batch_956c339e-1ef0-4443-9276-68c12888a3f7\r\n".
+            "Content-Type: multipart/mixed; boundary=changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n".
+            "\r\n".
+            "--changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n".
+            "Content-Transfer-Encoding: binary\r\n".
+            "Content-Type: application/http\r\n".
+            "\r\n".
+            "HTTP/1.1 {$statusCode} OK\r\n".
+            "content-id: 1\r\n".
+            "\r\n".
+            $body.
+            "--changeset_4a3f1712-c034-416e-9772-905d28c0b122--\r\n".
+            '--batch_956c339e-1ef0-4443-9276-68c12888a3f7--';
+        $response = new Response(200, [], $encodedBody);
 
         // Test
-        $batchResp = new BatchResponse($encodedBody, $batchReq);
+        $batchResp = new BatchResponse($response, $batchReq);
         $result = $batchResp->getResponses();
 
         // Assert
@@ -146,11 +149,12 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
         $body.
         "--changeset_4a3f1712-c034-416e-9772-905d28c0b122--\r\n".
         '--batch_956c339e-1ef0-4443-9276-68c12888a3f7--';
+        $response = new Response(200, [], $encodedBody);
 
         $this->setExpectedException('WindowsAzure\Common\ServiceException');
 
         // Test
-        $batchResp = new BatchResponse($encodedBody, $batchReq);
+        $batchResp = new BatchResponse($response, $batchReq);
         $result = $batchResp->getResponses();
     }
 }

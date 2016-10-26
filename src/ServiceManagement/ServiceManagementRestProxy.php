@@ -517,7 +517,7 @@ class ServiceManagementRestProxy extends RestProxy implements IServiceManagement
 
         $response = $this->sendHttpContext($context);
 
-        return AsynchronousOperationResult::create($response->getHeaders());
+        return AsynchronousOperationResult::create(HttpClient::getResponseHeaders($response));
     }
 
     /**

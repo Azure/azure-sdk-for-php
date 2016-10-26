@@ -10,6 +10,7 @@
       `getResponses()`.
     - the `sendContext()` function from `\WindowsAzure\Common\Internal\RestProxy` is replaced by `sendHttpContext()`.
     - the `send()` function from `\WindowsAzure\MediaServices\MediaServicesRestProxy` is replaced by `sendHttp()`.
+    - `\WindowsAzure\Common\Internal\Http\BatchResponse` constructor the first parameter is `Response`.
 - Switch to PHP 5.6.
 
 Windows Azure SDK For PHP 0.4.5, 2016-09-26

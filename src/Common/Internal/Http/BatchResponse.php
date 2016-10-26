@@ -50,22 +50,23 @@ class BatchResponse
      *
      * @var Response[]
      */
-    private $_responses;
+    private $_responses = [];
 
     /**
      * Constructor.
      *
-     * @param string       $content Http response as string
+     * @param Response     $response HTTP response
      * @param BatchRequest $request Source batch request object
      */
-    public function __construct($content, BatchRequest $request = null)
+    public function __construct(Response $response , BatchRequest $request = null)
     {
+        $content = (string)$response->getBody();
+
         $params['include_bodies'] = true;
         $params['input'] = $content;
         $mimeDecoder = new \Mail_mimeDecode($content);
         $structure = $mimeDecoder->decode($params);
         $parts = $structure->parts;
-        $this->_contexts = [];
         $requestContexts = null;
 
         if ($request != null) {
