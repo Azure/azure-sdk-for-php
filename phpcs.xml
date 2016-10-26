@@ -8,10 +8,17 @@
  <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
  <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"/>
 
- <rule ref="Generic.Files.LineLength"/>
+ <rule ref="Generic.Files.LineLength">
+  <properties>
+   <property name="lineLimit" value="120"/>
+   <property name="absoluteLineLimit" value="0"/>
+  </properties>
+ </rule>
  
  <rule ref="Generic.Formatting.DisallowMultipleStatements"/>
+<!--
  <rule ref="Generic.Formatting.MultipleStatementAlignment"/>
+-->
 
  <rule ref="Generic.Metrics.CyclomaticComplexity"/>
  <rule ref="Generic.Metrics.NestingLevel"/>
