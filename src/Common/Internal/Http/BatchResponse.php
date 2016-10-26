@@ -26,10 +26,13 @@
 namespace WindowsAzure\Common\Internal\Http;
 
 use function GuzzleHttp\Psr7\parse_response;
+use Herrera\Json\Exception\Exception;
 use MicrosoftAzure\Storage\Table\Internal\MimeReaderWriter;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\ServiceException;
 use GuzzleHttp\Psr7\Response;
+use Zend\Mime\Decode;
+use Zend\Mime\Message;
 
 /**
  * Batch response parser.
@@ -56,27 +59,44 @@ class BatchResponse
     /**
      * Constructor.
      *
-     * @param string       $content Http response as string
-     * @param BatchRequest $request Source batch request object
+     * @param Response          $content Http response as string
+     * @param BatchRequest|null $request Source batch request object
      */
-    public function __construct($content, BatchRequest $request = null)
+    public function __construct(Response $response, BatchRequest $request = null)
     {
+        $content = (string)$response->getBody();
+
         $params['include_bodies'] = true;
-        $params['input'] = $content;
+        $params['input']          = $content;
+
         $mimeDecoder = new \Mail_mimeDecode($content);
         $structure = $mimeDecoder->decode($params);
         $parts = $structure->parts;
         $requestContexts = null;
 
-        $mimeReaderWriter = new MimeReaderWriter();
-        $mimeParts = $mimeReaderWriter->decodeMimeMultipart($content);
+        print $content;
+
+        $zendHeaders = [];
+        $body = '';
+        print_r($request);
+        try {
+            Decode::splitMessage($content, $zendHeaders, $body);
+            print('=== headers ===');
+            print_r($zendHeaders);
+            print('=== body ===');
+            print_r($body);
+            print('=== ===');
+        } catch (Exception $e) {
+            print($e);
+        }
+
         /*
         print(' ! mimeParts ! ');
         print_r($mimeParts);
 
         print(' ! structure ! ');
         print_r($structure);
-
+        */
         if ($request != null) {
             Validate::isA(
                 $request,
@@ -86,9 +106,9 @@ class BatchResponse
             // array of HttpCallContext
             $requestContexts = $request->getContexts();
         }
-        */
+
         $i = 0;
-        foreach ($mimeParts as $part) {
+        foreach ($parts as $part) {
             if (!empty($part->body)) {
                 $response = parse_response($part->body);
 

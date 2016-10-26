@@ -1338,6 +1338,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $body
         );
 
+        print("<<<HEADERS>>>");
+        print_r($response->getHeaders());
+        print("<<<>>>");
         $responses = (new BatchResponse($response->getBody(), $batch))->getResponses();
         $jobResponse = $responses[0];
 
@@ -1633,6 +1636,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $body
         );
 
+        print("<<<HEADERS>>>");
+        print_r($response->getHeaders());
+        print("<<<>>>");
         $responses = (new BatchResponse($response->getBody(), $batch))->getResponses();
         $jobTemplateResponse = $responses[0];
 
