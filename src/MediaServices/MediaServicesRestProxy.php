@@ -378,7 +378,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * Get entity list.
      *
      * @param string $path        REST path
-     * @param array  $queryParams URL query parameters. An example is $queryParams = ['$top' => 20, '$skip' => 40] to support paging
+     * @param array  $queryParams URL query parameters. An example is $queryParams = ['$top' => 20, '$skip' => 40] to
+     *                            support paging
      *
      * @return Entity[]
      */
@@ -1338,10 +1339,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $body
         );
 
-        print("<<<HEADERS>>>");
-        print_r($response->getHeaders());
-        print("<<<>>>");
-        $responses = (new BatchResponse($response->getBody(), $batch))->getResponses();
+        $responses = (new BatchResponse($response, $batch))->getResponses();
         $jobResponse = $responses[0];
 
         $entry = new Entry();
@@ -1636,10 +1634,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             $body
         );
 
-        print("<<<HEADERS>>>");
-        print_r($response->getHeaders());
-        print("<<<>>>");
-        $responses = (new BatchResponse($response->getBody(), $batch))->getResponses();
+        $responses = (new BatchResponse($response, $batch))->getResponses();
         $jobTemplateResponse = $responses[0];
 
         $entry = new Entry();
@@ -2179,11 +2174,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Rebind ContentKey.
      *
-     * @param Models\ContentKey|string $contentKey      An ContentKey data or
-     *                                                  ContentKey Id
-     * @param string                   $x509Certificate X.509 certificate (with only
-     *                                                  the public key) that was used to encrypt the clear storage encryption/common
-     *                                                  protection content keys
+     * @param ContentKey|string $contentKey            An ContentKey data or ContentKey Id
+     * @param string            $x509Certificate X.509 certificate (with only the public key) that was used to encrypt
+     *                                                 the clear storage encryption/common protection content keys
      *
      * @return string Content key
      */
@@ -2321,8 +2314,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Get content key authorization policy.
      *
-     * @param ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationPolicy ContentKeyAuthorizationPolicies data or
-     *                                                                            content key authorization policy Id
+     * @param ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationPolicy ContentKeyAuthorizationPolicies data
+     *                                                                            or content key authorization policy Id
      *
      * @return ContentKeyAuthorizationPolicy
      */
@@ -2333,7 +2326,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             'WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy'
         );
 
-        return ContentKeyAuthorizationPolicy::createFromOptions($this->_getEntity("ContentKeyAuthorizationPolicies('{$contentKeyAuthorizationPolicyId}')"));
+        return ContentKeyAuthorizationPolicy::createFromOptions(
+            $this->_getEntity("ContentKeyAuthorizationPolicies('{$contentKeyAuthorizationPolicyId}')")
+        );
     }
 
     /**
@@ -2356,12 +2351,15 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update content key authorization policy.
      *
-     * @param ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy New content key authorization policy data with
-     *                                                                     valid id
+     * @param ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy New content key authorization policy data
+     *                                                                     with valid id
      */
     public function updateContentKeyAuthorizationPolicy(ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy)
     {
-        $this->_updateEntity($contentKeyAuthorizationPolicy, "ContentKeyAuthorizationPolicies('{$contentKeyAuthorizationPolicy->getId()}')");
+        $this->_updateEntity(
+            $contentKeyAuthorizationPolicy,
+            "ContentKeyAuthorizationPolicies('{$contentKeyAuthorizationPolicy->getId()}')"
+        );
     }
 
     /**
@@ -2390,14 +2388,17 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     public function createContentKeyAuthorizationPolicyOption(
         ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions)
     {
-        return ContentKeyAuthorizationPolicyOption::createFromOptions($this->_createEntity($contentKeyAuthorizationOptions, 'ContentKeyAuthorizationPolicyOptions'));
+        return ContentKeyAuthorizationPolicyOption::createFromOptions(
+            $this->_createEntity($contentKeyAuthorizationOptions, 'ContentKeyAuthorizationPolicyOptions')
+        );
     }
 
     /**
      * Get content key authorization option by id.
      *
-     * @param ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationOptions ContentKeyAuthorizationPolicies data or
-     *                                                                             content key authorization policy Id
+     * @param ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationOptions ContentKeyAuthorizationPolicies data
+     *                                                                             or content key authorization policy
+     *                                                                             Id
      *
      * @return ContentKeyAuthorizationPolicyOption
      */
@@ -2408,7 +2409,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
             'WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption'
         );
 
-        return ContentKeyAuthorizationPolicyOption::createFromOptions($this->_getEntity("ContentKeyAuthorizationPolicyOptions('{$contentKeyAuthorizationOptionsId}')"));
+        return ContentKeyAuthorizationPolicyOption::createFromOptions(
+            $this->_getEntity("ContentKeyAuthorizationPolicyOptions('{$contentKeyAuthorizationOptionsId}')")
+        );
     }
 
     /**
@@ -2431,8 +2434,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Update content key authorization options.
      *
-     * @param ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions New content key authorization options data with
-     *                                                                            valid id
+     * @param ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions New content key authorization options
+     *                                                                            data with valid id
      */
     public function updateContentKeyAuthorizationPolicyOption(
         ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions)
@@ -2446,7 +2449,7 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Delete content key authorization policy.
      *
-     * @param ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationOptions Models\ContentKeyAuthorizationPolicy data or
+     * @param ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationOptions ContentKeyAuthorizationPolicy data or
      *                                                                             content key authorization policy Id
      */
     public function deleteContentKeyAuthorizationPolicyOption($contentKeyAuthorizationOptions)
@@ -2487,8 +2490,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Link ContentKeyAuthorizationPolicyOption to ContentKeyAuthorizationPolicy.
      *
-     * @param Models\ContentKeyAuthorizationPolicyOption|string $options ContentKeyAuthorizationPolicyOption to link a ContentKeyAuthorizationPolicy or ContentKeyAuthorizationPolicyOption id
-     * @param Models\ContentKeyAuthorizationPolicy|string       $policy  ContentKeyAuthorizationPolicy to link or ContentKeyAuthorizationPolicy id
+     * @param ContentKeyAuthorizationPolicyOption|string $options ContentKeyAuthorizationPolicyOption to link a
+     *                                                            ContentKeyAuthorizationPolicy or
+     *                                                            ContentKeyAuthorizationPolicyOption id
+     * @param ContentKeyAuthorizationPolicy|string       $policy  ContentKeyAuthorizationPolicy to link or
+     *                                                            ContentKeyAuthorizationPolicy id
      */
     public function linkOptionToContentKeyAuthorizationPolicy($options, $policy)
     {
@@ -2538,8 +2544,11 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
     /**
      * Remove ContentKeyAuthorizationPolicyOption from ContentKeyAuthorizationPolicy.
      *
-     * @param ContentKeyAuthorizationPolicyOption|string $options ContentKeyAuthorizationPolicyOption to remove from ContentKeyAuthorizationPolicy or ContentKeyAuthorizationPolicyOption id
-     * @param ContentKeyAuthorizationPolicy|string       $policy  ContentKeyAuthorizationPolicy to remove or ContentKeyAuthorizationPolicy id
+     * @param ContentKeyAuthorizationPolicyOption|string $options ContentKeyAuthorizationPolicyOption to remove from
+     *                                                            ContentKeyAuthorizationPolicy or
+     *                                                            ContentKeyAuthorizationPolicyOption id
+     * @param ContentKeyAuthorizationPolicy|string       $policy  ContentKeyAuthorizationPolicy to remove or
+     *                                                            ContentKeyAuthorizationPolicy id
      */
     public function removeOptionsFromContentKeyAuthorizationPolicy($options, $policy)
     {
@@ -3023,7 +3032,8 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      * @param Channel|string $channel   Channel data or channel Id
      * @param string         $duration  The duration, in seconds, of the commercial break
      * @param string         $cueId     Unique ID for the commercial break
-     * @param string         $showSlate Indicates to the live encoder within the Channel that it needs to switch to the default slate image during the commercial break
+     * @param string         $showSlate Indicates to the live encoder within the Channel that it needs to switch to the
+     *                                  default slate image during the commercial break
      *
      * @return Operation
      */

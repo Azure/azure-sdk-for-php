@@ -73,7 +73,9 @@ class TokenRestrictionTemplateSerializer
 
         // decoding
         if (isset($xml->AlternateVerificationKeys)) {
-            $result->setAlternateVerificationKeys(self::deserializeAlternateVerificationKeys($xml->AlternateVerificationKeys));
+            $result->setAlternateVerificationKeys(
+                self::deserializeAlternateVerificationKeys($xml->AlternateVerificationKeys)
+            );
         }
 
         $result->setAudience((string) $xml->Audience);
@@ -92,7 +94,9 @@ class TokenRestrictionTemplateSerializer
         }
 
         if (isset($xml->OpenIdConnectDiscoveryDocument)) {
-            $result->setOpenIdConnectDiscoveryDocument(self::deserializeOpenIdConnectDiscoveryDocument($xml->OpenIdConnectDiscoveryDocument));
+            $result->setOpenIdConnectDiscoveryDocument(
+                self::deserializeOpenIdConnectDiscoveryDocument($xml->OpenIdConnectDiscoveryDocument)
+            );
         }
 
         return $result;
@@ -149,7 +153,9 @@ class TokenRestrictionTemplateSerializer
         }
 
         if ($tokenRestriction->getOpenIdConnectDiscoveryDocument()) {
-            self::serializeOpenIdConnectDiscoveryDocument($writer, $tokenRestriction->getOpenIdConnectDiscoveryDocument());
+            self::serializeOpenIdConnectDiscoveryDocument(
+                $writer, $tokenRestriction->getOpenIdConnectDiscoveryDocument()
+            );
         }
 
         $writer->endElement();
@@ -188,7 +194,9 @@ class TokenRestrictionTemplateSerializer
         if ($template->getTokenType() == TokenType::SWT) {
             return self::generateTestTokenSWT($template, $verificationKey, $contentKeyUUID, $tokenExpiration);
         } else {
-            return self::generateTestTokenJWT($template, $verificationKey, $contentKeyUUID, $tokenExpiration, $notBefore);
+            return self::generateTestTokenJWT(
+                $template, $verificationKey, $contentKeyUUID, $tokenExpiration, $notBefore
+            );
         }
     }
 
@@ -436,7 +444,9 @@ class TokenRestrictionTemplateSerializer
     private static function deserializeOpenIdConnectDiscoveryDocument($xmlElement)
     {
         if (!isset($xmlElement->OpenIdDiscoveryUri)) {
-            throw new \RuntimeException("The OpenIdConnectDiscoveryDocument must contains a 'OpenIdDiscoveryUri' element");
+            throw new \RuntimeException(
+                "The OpenIdConnectDiscoveryDocument must contains a 'OpenIdDiscoveryUri' element"
+            );
         }
 
         $result = new OpenIdConnectDiscoveryDocument();
