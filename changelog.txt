@@ -11,7 +11,9 @@
     - the `sendContext()` function from `\WindowsAzure\Common\Internal\RestProxy` is replaced by `sendHttpContext()`.
     - the `send()` function from `\WindowsAzure\MediaServices\MediaServicesRestProxy` is replaced by `sendHttp()`.
     - `\WindowsAzure\Common\Internal\Http\BatchResponse` constructor the first parameter is `Response`.
+- Using `zendframework/zend-mime` instead of `pear/mail_mime-decode`.
 - Switch to PHP 5.6.
+- Support for PHP 7.
 
 Windows Azure SDK For PHP 0.4.5, 2016-09-26
 -------------------------------------------
