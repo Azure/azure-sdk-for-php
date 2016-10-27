@@ -33,6 +33,7 @@ use WindowsAzure\Common\ServiceException;
 use GuzzleHttp\Psr7\Response;
 use Zend\Mime\Decode;
 use Zend\Mime\Message;
+use Zend\Mime\Part;
 
 /**
  * Batch response parser.
@@ -57,6 +58,16 @@ class BatchResponse
     private $_responses = [];
 
     /**
+     * @param string $contentType
+     * @return string
+     */
+    private static function getBoundary($contentType) {
+        $match = '';
+        preg_match('/boundary=(.*)/', $contentType, $match);
+        return str_replace('"', '', $match[1]);
+    }
+
+    /**
      * Constructor.
      *
      * @param Response          $content Http response as string
@@ -65,38 +76,21 @@ class BatchResponse
     public function __construct(Response $response, BatchRequest $request = null)
     {
         $content = (string)$response->getBody();
+        $contentType = HttpClient::getResponseHeaders($response)['content-type'];
+        $boundary = self::getBoundary($contentType);
+        $mimeBody = Message::createFromMessage($content, $boundary);
 
-        $params['include_bodies'] = true;
-        $params['input']          = $content;
-
-        $mimeDecoder = new \Mail_mimeDecode($content);
-        $structure = $mimeDecoder->decode($params);
-        $parts = $structure->parts;
-        $requestContexts = null;
-
-        print $content;
-
-        $zendHeaders = [];
-        $body = '';
-        print_r($request);
-        try {
-            Decode::splitMessage($content, $zendHeaders, $body);
-            print('=== headers ===');
-            print_r($zendHeaders);
-            print('=== body ===');
-            print_r($body);
-            print('=== ===');
-        } catch (Exception $e) {
-            print($e);
+        /** @var Part[] $allParts */
+        $allParts = [];
+        $mimeParts = $mimeBody->getParts();
+        foreach ($mimeParts as $mimePart) {
+            $partBoundary = self::getBoundary($mimePart->getType());
+            $partMessage = Message::createFromMessage($mimePart->getContent(), $partBoundary);
+            $allParts = array_merge($allParts, $partMessage->getParts());
         }
 
-        /*
-        print(' ! mimeParts ! ');
-        print_r($mimeParts);
+        $requestContexts = null;
 
-        print(' ! structure ! ');
-        print_r($structure);
-        */
         if ($request != null) {
             Validate::isA(
                 $request,
@@ -108,9 +102,10 @@ class BatchResponse
         }
 
         $i = 0;
-        foreach ($parts as $part) {
-            if (!empty($part->body)) {
-                $response = parse_response($part->body);
+        foreach ($allParts as $part) {
+            $body = $part->getContent();
+            if (!empty($body)) {
+                $response = parse_response($body);
 
                 $this->_responses[] = $response;
 

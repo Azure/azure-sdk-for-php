@@ -17,7 +17,8 @@
         "firebase/php-jwt": "^4.0",
         "microsoft/azure-storage": "^0.10",
         "guzzlehttp/guzzle": "^6.2",
-        "zendframework/zend-mime": "^2.6"
+        "zendframework/zend-mime": "^2.6",
+        "zendframework/zend-mail": "^2.7"
     },
     "require-dev": {
         "mikey179/vfsStream": "^1.6",
