@@ -70,7 +70,7 @@ class BatchResponse
     /**
      * Constructor.
      *
-     * @param Response          $content Http response as string
+     * @param Response          $content HTTP response
      * @param BatchRequest|null $request Source batch request object
      */
     public function __construct(Response $response, BatchRequest $request = null)
@@ -89,6 +89,7 @@ class BatchResponse
             $allParts = array_merge($allParts, $partMessage->getParts());
         }
 
+        /** @var HttpCallContext[]|null $requestContexts */
         $requestContexts = null;
 
         if ($request != null) {
@@ -97,7 +98,6 @@ class BatchResponse
                 'WindowsAzure\Common\Internal\Http\BatchRequest',
                 'request'
             );
-            // array of HttpCallContext
             $requestContexts = $request->getContexts();
         }
 
