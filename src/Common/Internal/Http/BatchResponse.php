@@ -70,8 +70,8 @@ class BatchResponse
     /**
      * Constructor.
      *
-     * @param Response          $content HTTP response
-     * @param BatchRequest|null $request Source batch request object
+     * @param Response          $response HTTP response
+     * @param BatchRequest|null $request  Source batch request object
      */
     public function __construct(Response $response, BatchRequest $request = null)
     {
