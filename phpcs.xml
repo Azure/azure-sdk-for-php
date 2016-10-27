@@ -16,9 +16,6 @@
  </rule>
  
  <rule ref="Generic.Formatting.DisallowMultipleStatements"/>
-<!--
- <rule ref="Generic.Formatting.MultipleStatementAlignment"/>
--->
 
  <rule ref="Generic.Metrics.CyclomaticComplexity"/>
  <rule ref="Generic.Metrics.NestingLevel"/>
@@ -30,7 +27,5 @@
  <rule ref="Generic.PHP.NoSilencedErrors"/>
 
  <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
-<!--
- <rule ref="PEAR"/>
---> 
+
 </ruleset>
