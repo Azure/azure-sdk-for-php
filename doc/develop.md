@@ -94,3 +94,14 @@ vendor\bin\phpunit.bat -c phpunit.local.xml.dist
 1. Create a project folder
 2. Run `composer init`.
 3. Run `composer install microsoft/windowsazure`
+
+## 4. Code Conventions
+
+1.	Use PHP 5 type hints as much as possible.
+   1. For class arguments: `ClassName $argument`
+   2. For array arguments: `array $argument`
+   3. For nullable arguments: `ClassName $argument = null`
+2.	Use phpDocumentator type declarations as much as possible.
+   1. Use `Type[]` instead of array.
+   2. Use unions for nullable types. For example, `Class|null`.
+   3. Try to avoid `mixed` type.
