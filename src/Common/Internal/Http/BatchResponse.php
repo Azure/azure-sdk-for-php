@@ -26,12 +26,9 @@
 namespace WindowsAzure\Common\Internal\Http;
 
 use function GuzzleHttp\Psr7\parse_response;
-use Herrera\Json\Exception\Exception;
-use MicrosoftAzure\Storage\Table\Internal\MimeReaderWriter;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\ServiceException;
 use GuzzleHttp\Psr7\Response;
-use Zend\Mime\Decode;
 use Zend\Mime\Message;
 use Zend\Mime\Part;
 
