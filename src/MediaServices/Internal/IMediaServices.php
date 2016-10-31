@@ -572,10 +572,10 @@ interface IMediaServices extends FilterableService
     /**
      * Get content key authorization policy.
      *
-     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationPolicy ContentKeyAuthorizationPolicies data or
-     *                                                                                                               content key authorization policy Id
+     * @param ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationPolicy ContentKeyAuthorizationPolicies data
+     *                                                                            or content key authorization policy Id
      *
-     * @return \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy
+     * @return ContentKeyAuthorizationPolicy
      */
     public function getContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy);
 
@@ -589,15 +589,16 @@ interface IMediaServices extends FilterableService
     /**
      * Update content key authorization policy.
      *
-     * @param ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy New content key authorization policy data with valid id
+     * @param ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy New content key authorization policy data
+     *                                                                     with valid id
      */
     public function updateContentKeyAuthorizationPolicy(ContentKeyAuthorizationPolicy $contentKeyAuthorizationPolicy);
 
     /**
      * Delete content key authorization policy.
      *
-     * @param \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationPolicy Models\ContentKeyAuthorizationPolicy data or
-     *                                                                                                               content key authorization policy Id
+     * @param ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationPolicy ContentKeyAuthorizationPolicy data or
+     *                                                                            content key authorization policy Id
      */
     public function deleteContentKeyAuthorizationPolicy($contentKeyAuthorizationPolicy);
 
@@ -615,8 +616,9 @@ interface IMediaServices extends FilterableService
     /**
      * Get content key authorization option by id.
      *
-     * @param ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationOptions ContentKeyAuthorizationPolicies data or
-     *                                                                             content key authorization policy Id
+     * @param ContentKeyAuthorizationPolicy|string $contentKeyAuthorizationOptions ContentKeyAuthorizationPolicies data
+     *                                                                             or content key authorization policy
+     *                                                                             Id
      *
      * @return ContentKeyAuthorizationPolicyOption
      */
@@ -632,10 +634,12 @@ interface IMediaServices extends FilterableService
     /**
      * Update content key authorization options.
      *
-     * @param ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions New content key authorization options data with
-     *                                                                            valid id
+     * @param ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions New content key authorization options
+     *                                                                            data with valid id
      */
-    public function updateContentKeyAuthorizationPolicyOption(ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions);
+    public function updateContentKeyAuthorizationPolicyOption(
+        ContentKeyAuthorizationPolicyOption $contentKeyAuthorizationOptions
+    );
 
     /**
      * Delete content key authorization policy.
@@ -658,16 +662,24 @@ interface IMediaServices extends FilterableService
     /**
      * Link ContentKeyAuthorizationPolicyOption to ContentKeyAuthorizationPolicy.
      *
-     * @param ContentKeyAuthorizationPolicyOption|string $options ContentKeyAuthorizationPolicyOption to link a ContentKeyAuthorizationPolicy or ContentKeyAuthorizationPolicyOption id
-     * @param string                                     $policy  ContentKeyAuthorizationPolicy to link or ContentKeyAuthorizationPolicy id
+     * @param ContentKeyAuthorizationPolicyOption|string $options ContentKeyAuthorizationPolicyOption to link a
+     *                                                            ContentKeyAuthorizationPolicy or
+     *                                                            ContentKeyAuthorizationPolicyOption id
+     *
+     * @param string                                     $policy  ContentKeyAuthorizationPolicy to link or
+     *                                                            ContentKeyAuthorizationPolicy id
      */
     public function linkOptionToContentKeyAuthorizationPolicy($options, $policy);
 
     /**
      * Remove ContentKeyAuthorizationPolicyOption from ContentKeyAuthorizationPolicy.
      *
-     * @param ContentKeyAuthorizationPolicyOption|string $options ContentKeyAuthorizationPolicyOption to remove from ContentKeyAuthorizationPolicy or ContentKeyAuthorizationPolicyOption id
-     * @param ContentKeyAuthorizationPolicy|string       $policy  ContentKeyAuthorizationPolicy to remove or ContentKeyAuthorizationPolicy id
+     * @param ContentKeyAuthorizationPolicyOption|string $options ContentKeyAuthorizationPolicyOption to remove from
+     *                                                            ContentKeyAuthorizationPolicy or
+     *                                                            ContentKeyAuthorizationPolicyOption id
+     *
+     * @param ContentKeyAuthorizationPolicy|string       $policy  ContentKeyAuthorizationPolicy to remove or
+     *                                                            ContentKeyAuthorizationPolicy id
      */
     public function removeOptionsFromContentKeyAuthorizationPolicy($options, $policy);
 
@@ -706,16 +718,14 @@ interface IMediaServices extends FilterableService
     /**
      * Delete asset delivery policy.
      *
-     * @param \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy|string $assetDeliveryPolicy Models\AssetDeliveryPolicy data or
-     *                                                                                           asset delivery policy Id
+     * @param AssetDeliveryPolicy|string $assetDeliveryPolicy AssetDeliveryPolicy data or asset delivery policy Id
      */
     public function deleteAssetDeliveryPolicy($assetDeliveryPolicy);
 
     /**
      * Get AssetDeliveryPolicy list linked to an Asset.
      *
-     * @param \WindowsAzure\MediaServices\Models\Asset|string $asset Asset data or
-     *                                                               Asset Id to retrieve the linked delivery policies
+     * @param Asset|string $asset Asset data or Asset Id to retrieve the linked delivery policies
      *
      * @return array
      */

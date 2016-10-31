@@ -58,7 +58,8 @@ class AgcAndColorStripeRestriction
     }
 
     /**
-     * Configures the Automatic Gain Control (AGC) and Color Stripe control bits. For further details see the PlayReady Compliance Rules.
+     * Configures the Automatic Gain Control (AGC) and Color Stripe control bits. For further details see the PlayReady
+     * Compliance Rules.
      *
      * @return int ConfigurationData
      */
@@ -68,7 +69,8 @@ class AgcAndColorStripeRestriction
     }
 
     /**
-     * Configures the Automatic Gain Control (AGC) and Color Stripe control bits. For further details see the PlayReady Compliance Rules.
+     * Configures the Automatic Gain Control (AGC) and Color Stripe control bits. For further details see the PlayReady
+     * Compliance Rules.
      *
      * @param int $value ConfigurationData
      */

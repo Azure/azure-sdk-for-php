@@ -113,8 +113,8 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Controls whether test devices can use the license or not.  If true, the MinimumSecurityLevel property of the license
-     * is set to 150.  If false (the default), the MinimumSecurityLevel property of the license is set to 2000.
+     * Controls whether test devices can use the license or not.  If true, the MinimumSecurityLevel property of the
+     * license is set to 150.  If false (the default), the MinimumSecurityLevel property of the license is set to 2000.
      *
      * @return bool AllowTestDevices
      */
@@ -124,8 +124,8 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Controls whether test devices can use the license or not.  If true, the MinimumSecurityLevel property of the license
-     * is set to 150.  If false (the default), the MinimumSecurityLevel property of the license is set to 2000.
+     * Controls whether test devices can use the license or not.  If true, the MinimumSecurityLevel property of the
+     * license is set to 150.  If false (the default), the MinimumSecurityLevel property of the license is set to 2000.
      *
      * @param bool $value AllowTestDevices
      */
@@ -135,8 +135,8 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures the starting DateTime that the license is valid.  Attempts to use the license before this date and time will
-     * result in an error on the client.
+     * Configures the starting DateTime that the license is valid.  Attempts to use the license before this date and
+     * time will result in an error on the client.
      *
      * @return \DateTime BeginDate
      */
@@ -146,8 +146,8 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures the starting DateTime that the license is valid.  Attempts to use the license before this date and time will
-     * result in an error on the client.
+     * Configures the starting DateTime that the license is valid.  Attempts to use the license before this date and
+     * time will result in an error on the client.
      *
      * @param \DateTime $value BeginDate
      */
@@ -157,8 +157,8 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures the DateTime value when the the license expires.  Attempts to use the license after this date and time will
-     * result in an error on the client.
+     * Configures the DateTime value when the the license expires.  Attempts to use the license after this date and time
+     * will result in an error on the client.
      *
      * @return \DateTime ExpirationDate
      */
@@ -168,8 +168,8 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures the DateTime value when the the license expires.  Attempts to use the license after this date and time will
-     * result in an error on the client.
+     * Configures the DateTime value when the the license expires.  Attempts to use the license after this date and time
+     * will result in an error on the client.
      *
      * @param \DateTime $value ExpirationDate
      */
@@ -179,9 +179,9 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures starting DateTime value when the license is valid.  Attempts to use the license before this date and time
-     * will result in an error on the client.  The DateTime value is calculated as DateTime.UtcNow + RelativeBeginDate when
-     * the license is issued.
+     * Configures starting DateTime value when the license is valid.  Attempts to use the license before this date and
+     * time will result in an error on the client. The DateTime value is calculated as
+     * DateTime.UtcNow + RelativeBeginDate when the license is issued.
      *
      * @return \DateInterval RelativeBeginDate
      */
@@ -191,9 +191,9 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures starting DateTime value when the license is valid.  Attempts to use the license before this date and time
-     * will result in an error on the client.  The DateTime value is calculated as DateTime.UtcNow + RelativeBeginDate when
-     * the license is issued.
+     * Configures starting DateTime value when the license is valid.  Attempts to use the license before this date and
+     * time will result in an error on the client.  The DateTime value is calculated as
+     * DateTime.UtcNow + RelativeBeginDate when the license is issued.
      *
      * @param \DateInterval $value RelativeBeginDate
      */
@@ -203,9 +203,9 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures the DateTime value when the license expires.  Attempts to use the license after this date and time will result
-     * in an error on the client.  The DateTime value is calculated as DateTime.UtcNow + RelativeExpirationDate when the license
-     * is issued.
+     * Configures the DateTime value when the license expires.  Attempts to use the license after this date and time
+     * will result in an error on the client.  The DateTime value is calculated as
+     * DateTime.UtcNow + RelativeExpirationDate when the license is issued.
      *
      * @return \DateInterval RelativeExpirationDate
      */
@@ -215,9 +215,9 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures the DateTime value when the license expires.  Attempts to use the license after this date and time will result
-     * in an error on the client.  The DateTime value is calculated as DateTime.UtcNow + RelativeExpirationDate when the license
-     * is issued.
+     * Configures the DateTime value when the license expires.  Attempts to use the license after this date and time
+     * will result in an error on the client.  The DateTime value is calculated as
+     * DateTime.UtcNow + RelativeExpirationDate when the license is issued.
      *
      * @param \DateInterval $value RelativeExpirationDate
      */
@@ -227,8 +227,8 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures the Grace Period setting of the PlayReady license.  This setting affects how DateTime based restrictions are
-     * evaluated on certain devices in the situation that the devices secure clock becomes unset.
+     * Configures the Grace Period setting of the PlayReady license.  This setting affects how DateTime based
+     * restrictions are evaluated on certain devices in the situation that the devices secure clock becomes unset.
      *
      * @return \DateInterval GracePeriod
      */
@@ -238,8 +238,8 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures the Grace Period setting of the PlayReady license.  This setting affects how DateTime based restrictions are
-     * evaluated on certain devices in the situation that the devices secure clock becomes unset.
+     * Configures the Grace Period setting of the PlayReady license.  This setting affects how DateTime based
+     * restrictions are evaluated on certain devices in the situation that the devices secure clock becomes unset.
      *
      * @param \DateInterval $value GracePeriod
      */
@@ -249,8 +249,8 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures the PlayRight of the PlayReady license.  This Right gives the client the ability to play back the content.
-     * The PlayRight also allows configuring restrictions specific to playback.  This Right is required.
+     * Configures the PlayRight of the PlayReady license.  This Right gives the client the ability to play back the
+     * content. The PlayRight also allows configuring restrictions specific to playback.  This Right is required.
      *
      * @return PlayReadyPlayRight PlayReadyPlayRight
      */
@@ -260,8 +260,8 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures the PlayRight of the PlayReady license.  This Right gives the client the ability to play back the content.
-     * The PlayRight also allows configuring restrictions specific to playback.  This Right is required.
+     * Configures the PlayRight of the PlayReady license.  This Right gives the client the ability to play back the
+     * content. The PlayRight also allows configuring restrictions specific to playback.  This Right is required.
      *
      * @param PlayReadyPlayRight $value PlayReadyPlayRight
      */
@@ -271,9 +271,9 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures whether the license is persistent (saved in persistent storage on the client) or non-persistent (only held in
-     * memory while the player is using the license).  Persistent licenses are typically used to allow offline playback of the
-     * content.
+     * Configures whether the license is persistent (saved in persistent storage on the client) or non-persistent (only
+     * held in memory while the player is using the license).  Persistent licenses are typically used to allow offline
+     * playback of the content.
      *
      * @return string LicenseType
      */
@@ -283,9 +283,9 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Configures whether the license is persistent (saved in persistent storage on the client) or non-persistent (only held in
-     * memory while the player is using the license).  Persistent licenses are typically used to allow offline playback of the
-     * content.
+     * Configures whether the license is persistent (saved in persistent storage on the client) or non-persistent (only
+     * held in memory while the player is using the license).  Persistent licenses are typically used to allow offline
+     * playback of the content.
      *
      * @param string $value LicenseType
      */
@@ -295,9 +295,9 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Specifies the content key in the license.  This is typically set to an instance of the ContentEncryptionKeyFromHeader
-     * object to allow the template to be applied to multiple content keys and have the content header tell the license
-     * server the exact key to embed in the license issued to the client.
+     * Specifies the content key in the license.  This is typically set to an instance of the
+     * ContentEncryptionKeyFromHeader object to allow the template to be applied to multiple content keys and have the
+     * content header tell the license server the exact key to embed in the license issued to the client.
      *
      * @return PlayReadyContentKey PlayReadyContentKey
      */
@@ -307,9 +307,9 @@ class PlayReadyLicenseTemplate
     }
 
     /**
-     * Specifies the content key in the license.  This is typically set to an instance of the ContentEncryptionKeyFromHeader
-     * object to allow the template to be applied to multiple content keys and have the content header tell the license
-     * server the exact key to embed in the license issued to the client.
+     * Specifies the content key in the license.  This is typically set to an instance of the
+     * ContentEncryptionKeyFromHeader object to allow the template to be applied to multiple content keys and have the
+     * content header tell the license server the exact key to embed in the license issued to the client.
      *
      * @param PlayReadyContentKey $value PlayReadyContentKey
      */

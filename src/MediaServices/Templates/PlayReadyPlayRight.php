@@ -181,8 +181,8 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Configures Automatic Gain Control (AGC) and Color Stripe in the license.  These are a form of video output protection.
-     * For further details see the PlayReady Compliance Rules.
+     * Configures Automatic Gain Control (AGC) and Color Stripe in the license. These are a form of video output
+     * protection. For further details see the PlayReady Compliance Rules.
      *
      * @return AgcAndColorStripeRestriction AgcAndColorStripeRestriction
      */
@@ -192,8 +192,8 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Configures Automatic Gain Control (AGC) and Color Stripe in the license.  These are a form of video output protection.
-     * For further details see the PlayReady Compliance Rules.
+     * Configures Automatic Gain Control (AGC) and Color Stripe in the license. These are a form of video output
+     * protection. For further details see the PlayReady Compliance Rules.
      *
      * @param AgcAndColorStripeRestriction $value AgcAndColorStripeRestriction
      */
@@ -203,8 +203,8 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Configures the Explicit Analog Television Output Restriction in the license.  This is a form of video output protection.
-     * For further details see the PlayReady Compliance Rules.
+     * Configures the Explicit Analog Television Output Restriction in the license. This is a form of video output
+     * protection. For further details see the PlayReady Compliance Rules.
      *
      * @return ExplicitAnalogTelevisionRestriction ExplicitAnalogTelevisionRestriction
      */
@@ -214,8 +214,8 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Configures the Explicit Analog Television Output Restriction in the license.  This is a form of video output protection.
-     * For further details see the PlayReady Compliance Rules.
+     * Configures the Explicit Analog Television Output Restriction in the license. This is a form of video output
+     * protection. For further details see the PlayReady Compliance Rules.
      *
      * @param ExplicitAnalogTelevisionRestriction $value ExplicitAnalogTelevisionRestriction
      */
@@ -249,9 +249,9 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Enables the Image Constraint For Analog Component Video Restriction in the license.  This is a form of video output protection
-     * which requires the player constrain the resolution of the video portion of the content when outputting it over an Analog
-     * Component Video Output.  For further details see the PlayReady Compliance Rules.
+     * Enables the Image Constraint For Analog Component Video Restriction in the license. This is a form of video
+     * output protection which requires the player constrain the resolution of the video portion of the content when
+     * outputting it over an Analog Component Video Output. For further details see the PlayReady Compliance Rules.
      *
      * @return bool ImageConstraintForAnalogComponentVideoRestriction
      */
@@ -261,9 +261,9 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Enables the Image Constraint For Analog Component Video Restriction in the license.  This is a form of video output protection
-     * which requires the player constrain the resolution of the video portion of the content when outputting it over an Analog
-     * Component Video Output.  For further details see the PlayReady Compliance Rules.
+     * Enables the Image Constraint For Analog Component Video Restriction in the license.  This is a form of video
+     * output protection which requires the player constrain the resolution of the video portion of the content when
+     * outputting it over an Analog Component Video Output. For further details see the PlayReady Compliance Rules.
      *
      * @param bool $value ImageConstraintForAnalogComponentVideoRestriction
      */
@@ -273,9 +273,9 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Enables the Image Constraint For Analog Computer Monitor Restriction in the license.  This is a form of video output protection
-     * which requires the player constrain the resolution of the video portion of the content when outputting it over an Analog
-     * Computer Monitor Output.  For further details see the PlayReady Compliance Rules.
+     * Enables the Image Constraint For Analog Computer Monitor Restriction in the license. This is a form of video
+     * output protection which requires the player constrain the resolution of the video portion of the content when
+     * outputting it over an Analog Computer Monitor Output. For further details see the PlayReady Compliance Rules.
      *
      * @return bool ImageConstraintForAnalogComputerMonitorRestriction
      */
@@ -285,9 +285,9 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Enables the Image Constraint For Analog Computer Monitor Restriction in the license.  This is a form of video output protection
-     * which requires the player constrain the resolution of the video portion of the content when outputting it over an Analog
-     * Computer Monitor Output.  For further details see the PlayReady Compliance Rules.
+     * Enables the Image Constraint For Analog Computer Monitor Restriction in the license. This is a form of video
+     * output protection which requires the player constrain the resolution of the video portion of the content when
+     * outputting it over an Analog Computer Monitor Output. For further details see the PlayReady Compliance Rules.
      *
      * @param bool $value ImageConstraintForAnalogComputerMonitorRestriction
      */
@@ -297,8 +297,8 @@ class PlayReadyPlayRight
     }
 
     /**
-     * This property configures Unknown output handling settings of the license.  These settings tell the PlayReady DRM runtime
-     * how it should handle unknown video outputs.  For further details see the PlayReady Compliance Rules.
+     * This property configures Unknown output handling settings of the license. These settings tell the PlayReady DRM
+     * runtime how it should handle unknown video outputs. For further details see the PlayReady Compliance Rules.
      *
      * @return string AllowPassingVideoContentToUnknownOutput
      */
@@ -308,8 +308,8 @@ class PlayReadyPlayRight
     }
 
     /**
-     * This property configures Unknown output handling settings of the license.  These settings tell the PlayReady DRM runtime
-     * how it should handle unknown video outputs.  For further details see the PlayReady Compliance Rules.
+     * This property configures Unknown output handling settings of the license. These settings tell the PlayReady DRM
+     * runtime how it should handle unknown video outputs.  For further details see the PlayReady Compliance Rules.
      *
      * @param string $value AllowPassingVideoContentToUnknownOutput
      */
@@ -319,9 +319,9 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Specifies the output protection level for uncompressed digital video.  Valid values are null, 100, 250, 270, and 300.
-     * When the property is set to null, the output protection level is not set in the license.  For further details on the meaning
-     * of the specific value see the PlayReady Compliance Rules.
+     * Specifies the output protection level for uncompressed digital video.  Valid values are null, 100, 250, 270, and
+     * 300. When the property is set to null, the output protection level is not set in the license. For further details
+     * on the meaning of the specific value see the PlayReady Compliance Rules.
      *
      * @return int UncompressedDigitalVideoOpl
      */
@@ -331,9 +331,9 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Specifies the output protection level for uncompressed digital video.  Valid values are null, 100, 250, 270, and 300.
-     * When the property is set to null, the output protection level is not set in the license.  For further details on the meaning
-     * of the specific value see the PlayReady Compliance Rules.
+     * Specifies the output protection level for uncompressed digital video.  Valid values are null, 100, 250, 270, and
+     * 300. When the property is set to null, the output protection level is not set in the license. For further details
+     * on the meaning of the specific value see the PlayReady Compliance Rules.
      *
      * @param int $value UncompressedDigitalVideoOpl
      */
@@ -346,9 +346,9 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Specifies the output protection level for compressed digital video.  Valid values are null, 400, and 500.
-     * When the property is set to null, the output protection level is not set in the license.  For further details on the meaning
-     * of the specific value see the PlayReady Compliance Rules.
+     * Specifies the output protection level for compressed digital video. Valid values are null, 400, and 500. When the
+     * property is set to null, the output protection level is not set in the license. For further details on the
+     * meaning of the specific value see the PlayReady Compliance Rules.
      *
      * @return int CompressedDigitalVideoOpl
      */
@@ -358,9 +358,9 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Specifies the output protection level for compressed digital video.  Valid values are null, 400, and 500.
-     * When the property is set to null, the output protection level is not set in the license.  For further details on the meaning
-     * of the specific value see the PlayReady Compliance Rules.
+     * Specifies the output protection level for compressed digital video. Valid values are null, 400, and 500. When the
+     * property is set to null, the output protection level is not set in the license. For further details on the
+     * meaning of the specific value see the PlayReady Compliance Rules.
      *
      * @param int $value CompressedDigitalVideoOpl
      */
@@ -373,9 +373,9 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Specifies the output protection level for analog video.  Valid values are null, 100, 150, and 200.
-     * When the property is set to null, the output protection level is not set in the license.  For further details on the meaning
-     * of the specific value see the PlayReady Compliance Rules.
+     * Specifies the output protection level for analog video. Valid values are null, 100, 150, and 200. When the
+     * property is set to null, the output protection level is not set in the license.  For further details on the
+     * meaning of the specific value see the PlayReady Compliance Rules.
      *
      * @return int AnalogVideoOpl
      */
@@ -385,9 +385,9 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Specifies the output protection level for analog video.  Valid values are null, 100, 150, and 200.
-     * When the property is set to null, the output protection level is not set in the license.  For further details on the meaning
-     * of the specific value see the PlayReady Compliance Rules.
+     * Specifies the output protection level for analog video. Valid values are null, 100, 150, and 200. When the
+     * property is set to null, the output protection level is not set in the license. For further details on the
+     * meaning of the specific value see the PlayReady Compliance Rules.
      *
      * @param int $value AnalogVideoOpl
      */
@@ -400,9 +400,9 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Specifies the output protection level for compressed digital audio.  Valid values are null, 100, 150, 200, 250, and 300.
-     * When the property is set to null, the output protection level is not set in the license.  For further details on the meaning
-     * of the specific value see the PlayReady Compliance Rules.
+     * Specifies the output protection level for compressed digital audio. Valid values are null, 100, 150, 200, 250,
+     * and 300. When the property is set to null, the output protection level is not set in the license. For further
+     * details on the meaning of the specific value see the PlayReady Compliance Rules.
      *
      * @return int CompressedDigitalAudioOpl
      */
@@ -412,9 +412,9 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Specifies the output protection level for compressed digital audio.  Valid values are null, 100, 150, 200, 250, and 300.
-     * When the property is set to null, the output protection level is not set in the license.  For further details on the meaning
-     * of the specific value see the PlayReady Compliance Rules.
+     * Specifies the output protection level for compressed digital audio. Valid values are null, 100, 150, 200, 250,
+     * and 300. When the property is set to null, the output protection level is not set in the license. For further
+     * details on the meaning of the specific value see the PlayReady Compliance Rules.
      *
      * @param int $value CompressedDigitalAudioOpl
      */
@@ -427,9 +427,9 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Specifies the output protection level for uncompressed digital audio.  Valid values are 100, 150, 200, 250, and 300.
-     * When the property is set to null, the output protection level is not set in the license.  For further details on the meaning
-     * of the specific value see the PlayReady Compliance Rules.
+     * Specifies the output protection level for uncompressed digital audio. Valid values are 100, 150, 200, 250, and
+     * 300. When the property is set to null, the output protection level is not set in the license. For further details
+     * on the meaning of the specific value see the PlayReady Compliance Rules.
      *
      * @return int UncompressedDigitalAudioOpl
      */
@@ -439,9 +439,9 @@ class PlayReadyPlayRight
     }
 
     /**
-     * Specifies the output protection level for uncompressed digital audio.  Valid values are 100, 150, 200, 250, and 300.
-     * When the property is set to null, the output protection level is not set in the license.  For further details on the meaning
-     * of the specific value see the PlayReady Compliance Rules.
+     * Specifies the output protection level for uncompressed digital audio. Valid values are 100, 150, 200, 250, and
+     * 300. When the property is set to null, the output protection level is not set in the license. For further details
+     * on the meaning of the specific value see the PlayReady Compliance Rules.
      *
      * @param int $value UncompressedDigitalAudioOpl
      */

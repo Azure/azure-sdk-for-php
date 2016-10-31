@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/Azure/azure-sdk-for-php.svg?branch=master)](https://travis-ci.org/Azure/azure-sdk-for-php)
+[![Latest Stable Version](https://poser.pugx.org/microsoft/windowsazure/v/stable)](https://packagist.org/packages/microsoft/windowsazure)
 
 # Microsoft Azure SDK for PHP
 

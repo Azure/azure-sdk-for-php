@@ -13,10 +13,11 @@
         "php": ">=5.6",
         "pear/net_url2": "^2.2",
         "pear/mail_mime": "^1.10",
-        "pear/mail_mime-decode": "^1.5",
         "firebase/php-jwt": "^4.0",
         "microsoft/azure-storage": "^0.10",
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^6.2",
+        "zendframework/zend-mime": "^2.6",
+        "zendframework/zend-mail": "^2.7"
     },
     "require-dev": {
         "mikey179/vfsStream": "^1.6",
@@ -28,7 +29,7 @@
         "phpmd/phpmd": "^2.4",
         "squizlabs/php_codesniffer": "^2.6",
         "mayflower/php-codebrowser": "^1.1",
-        "friendsofphp/php-cs-fixer": "^1.11"
+        "friendsofphp/php-cs-fixer": "^1.12.2"
     },
     "autoload": {
         "psr-4": { "WindowsAzure\\": "src/" }

@@ -29,6 +29,8 @@ use function GuzzleHttp\Psr7\parse_response;
 use WindowsAzure\Common\Internal\Validate;
 use WindowsAzure\Common\ServiceException;
 use GuzzleHttp\Psr7\Response;
+use Zend\Mime\Message;
+use Zend\Mime\Part;
 
 /**
  * Batch response parser.
@@ -53,20 +55,38 @@ class BatchResponse
     private $_responses = [];
 
     /**
+     * @param string $contentType
+     * @return string
+     */
+    private static function getBoundary($contentType) {
+        $match = '';
+        preg_match('/boundary=(.*)/', $contentType, $match);
+        return str_replace('"', '', $match[1]);
+    }
+
+    /**
      * Constructor.
      *
-     * @param Response     $response HTTP response
-     * @param BatchRequest $request Source batch request object
+     * @param Response          $response HTTP response
+     * @param BatchRequest|null $request  Source batch request object
      */
-    public function __construct(Response $response , BatchRequest $request = null)
+    public function __construct(Response $response, BatchRequest $request = null)
     {
         $content = (string)$response->getBody();
+        $contentType = HttpClient::getResponseHeaders($response)['content-type'];
+        $boundary = self::getBoundary($contentType);
+        $mimeBody = Message::createFromMessage($content, $boundary);
 
-        $params['include_bodies'] = true;
-        $params['input'] = $content;
-        $mimeDecoder = new \Mail_mimeDecode($content);
-        $structure = $mimeDecoder->decode($params);
-        $parts = $structure->parts;
+        /** @var Part[] $allParts */
+        $allParts = [];
+        $mimeParts = $mimeBody->getParts();
+        foreach ($mimeParts as $mimePart) {
+            $partBoundary = self::getBoundary($mimePart->getType());
+            $partMessage = Message::createFromMessage($mimePart->getContent(), $partBoundary);
+            $allParts = array_merge($allParts, $partMessage->getParts());
+        }
+
+        /** @var HttpCallContext[]|null $requestContexts */
         $requestContexts = null;
 
         if ($request != null) {
@@ -75,14 +95,14 @@ class BatchResponse
                 'WindowsAzure\Common\Internal\Http\BatchRequest',
                 'request'
             );
-            // array of HttpCallContext
             $requestContexts = $request->getContexts();
         }
 
         $i = 0;
-        foreach ($parts as $part) {
-            if (!empty($part->body)) {
-                $response = parse_response($part->body);
+        foreach ($allParts as $part) {
+            $body = $part->getContent();
+            if (!empty($body)) {
+                $response = parse_response($body);
 
                 $this->_responses[] = $response;
 

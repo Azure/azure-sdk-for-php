@@ -66,7 +66,10 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
             $body.
             "--changeset_4a3f1712-c034-416e-9772-905d28c0b122--\r\n".
             '--batch_956c339e-1ef0-4443-9276-68c12888a3f7--';
-        $response = new Response(200, [], $encodedBody);
+        $response = new Response(
+            200,
+            ['content-type' => ['boundary=batch_956c339e-1ef0-4443-9276-68c12888a3f7']],
+            $encodedBody);
 
         // Test
         $batchResp = new BatchResponse($response);
@@ -107,7 +110,10 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
             $body.
             "--changeset_4a3f1712-c034-416e-9772-905d28c0b122--\r\n".
             '--batch_956c339e-1ef0-4443-9276-68c12888a3f7--';
-        $response = new Response(200, [], $encodedBody);
+        $response = new Response(
+            200,
+            ['Content-Type' => ['boundary=batch_956c339e-1ef0-4443-9276-68c12888a3f7']],
+            $encodedBody);
 
         // Test
         $batchResp = new BatchResponse($response, $batchReq);
@@ -136,20 +142,23 @@ class BatchResponseTest extends \PHPUnit_Framework_TestCase
         $batchReq->appendContext($httpCallContext);
 
         $encodedBody =
-        "--batch_956c339e-1ef0-4443-9276-68c12888a3f7\r\n".
-        "Content-Type: multipart/mixed; boundary=changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n".
-        "\r\n".
-        "--changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n".
-        "Content-Transfer-Encoding: binary\r\n".
-        "Content-Type: application/http\r\n".
-        "\r\n".
-        "HTTP/1.1 {$statusCode} OK\r\n".
-        "content-id: 1\r\n".
-        "\r\n".
-        $body.
-        "--changeset_4a3f1712-c034-416e-9772-905d28c0b122--\r\n".
-        '--batch_956c339e-1ef0-4443-9276-68c12888a3f7--';
-        $response = new Response(200, [], $encodedBody);
+            "--batch_956c339e-1ef0-4443-9276-68c12888a3f7\r\n".
+            "Content-Type: multipart/mixed; boundary=changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n".
+            "\r\n".
+            "--changeset_4a3f1712-c034-416e-9772-905d28c0b122\r\n".
+            "Content-Transfer-Encoding: binary\r\n".
+            "Content-Type: application/http\r\n".
+            "\r\n".
+            "HTTP/1.1 {$statusCode} OK\r\n".
+            "content-id: 1\r\n".
+            "\r\n".
+            $body.
+            "--changeset_4a3f1712-c034-416e-9772-905d28c0b122--\r\n".
+            '--batch_956c339e-1ef0-4443-9276-68c12888a3f7--';
+        $response = new Response(
+            200,
+            ['content-type' => ['boundary=batch_956c339e-1ef0-4443-9276-68c12888a3f7']],
+            $encodedBody);
 
         $this->setExpectedException('WindowsAzure\Common\ServiceException');
 

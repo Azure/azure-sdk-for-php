@@ -168,9 +168,8 @@ interface IServiceManagement extends FilterableService
      * @param string                     $name     The affinity group name
      * @param string                     $label    A base-64 encoded name for
      *                                             the affinity group. The name can be up to 100 characters in length
-     * @param string                     $location The data center location
-     *                                             where the affinity group will be created. To list available locations, use
-     *                                             the listLocations API
+     * @param string                     $location The data center location where the affinity group will be created. To
+     *                                             list available locations, use the listLocations API
      * @param CreateAffinityGroupOptions $options  The optional parameters
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg715317.aspx
@@ -244,12 +243,10 @@ interface IServiceManagement extends FilterableService
     /**
      * Creates a new hosted service in Windows Azure.
      *
-     * @param string               $name    The name for the hosted service
-     *                                      that is unique within Windows Azure. This name is the DNS prefix name and can
-     *                                      be used to access the hosted service
-     * @param string               $label   The name for the hosted service
-     *                                      that is base-64 encoded. The name can be used identify the storage account for
-     *                                      your tracking purposes
+     * @param string               $name    The name for the hosted service that is unique within Windows Azure. This
+     *                                      name is the DNS prefix name and can be used to access the hosted service
+     * @param string               $label   The name for the hosted service that is base-64 encoded. The name can be
+     *                                      used identify the storage account for your tracking purposes
      * @param CreateServiceOptions $options The optional parameters
      *
      * @see http://msdn.microsoft.com/en-us/library/windowsazure/gg441304.aspx
@@ -308,20 +305,19 @@ interface IServiceManagement extends FilterableService
      *
      * @param string                  $name           The name for the hosted service
      *                                                that is unique within Windows Azure
-     * @param string                  $deploymentName The name for the deployment.
-     *                                                The deployment name must be unique among other deployments for the hosted
-     *                                                service
+     * @param string                  $deploymentName The name for the deployment. The deployment name must be unique
+     *                                                among other deployments for the hosted service
      * @param string                  $slot           The name of the deployment slot
      *                                                This can be "production" or "staging"
-     * @param string                  $packageUrl     The URL that refers to the
-     *                                                location of the service package in the Blob service. The service package can
-     *                                                be located in a storage account beneath the same subscription
+     * @param string                  $packageUrl     The URL that refers to the location of the service package in the
+     *                                                Blob service. The service package can be located in a storage
+     *                                                account beneath the same subscription
      * @param string                  $configuration  The base-64 encoded service
      *                                                configuration file for the deployment
-     * @param string                  $label          The name for the hosted service
-     *                                                that is base-64 encoded. The name can be up to 100 characters in length. It is
-     *                                                recommended that the label be unique within the subscription. The name can be
-     *                                                used identify the hosted service for your tracking purposes
+     * @param string                  $label          The name for the hosted service that is base-64 encoded. The name
+     *                                                can be up to 100 characters in length. It is recommended that the
+     *                                                label be unique within the subscription. The name can be used
+     *                                                identify the hosted service for your tracking purposes
      * @param CreateDeploymentOptions $options        The optional parameters
      *
      * @return AsynchronousOperationResult
@@ -444,22 +440,22 @@ interface IServiceManagement extends FilterableService
      * name.
      *
      * @param string                   $name          The hosted service name
-     * @param string                   $mode          The type of upgrade to initiate
-     *                                                If not specified the default value is Auto. If set to Manual,
-     *                                                walkUpgradeDomain API must be called to apply the update. If set to Auto, the
-     *                                                Windows Azure platform will automatically apply the update to each Upgrade
+     * @param string                   $mode          The type of upgrade to initiate. If not specified the default
+     *                                                value is Auto. If set to Manual, walkUpgradeDomain API must be
+     *                                                called to apply the update. If set to Auto, the Windows Azure
+     *                                                platform will automatically apply the update to each Upgrade
      *                                                Domain in sequence
-     * @param string                   $packageUrl    The URL that refers to the
-     *                                                location of the service package in the Blob service. The service package can
-     *                                                be located in a storage account beneath the same subscription
+     * @param string                   $packageUrl    The URL that refers to the location of the service package in the
+     *                                                Blob service. The service package can be located in a storage
+     *                                                account beneath the same subscription
      * @param string                   $configuration The base-64 encoded service
      *                                                configuration file for the deployment
-     * @param string                   $label         The name for the hosted service
-     *                                                that is base-64 encoded. The name may be up to 100 characters in length
-     * @param bool                     $force         Specifies whether the rollback
-     *                                                should proceed even when it will cause local data to be lost from some role
-     *                                                instances. True if the rollback should proceed; otherwise false if the
-     *                                                rollback should fail
+     * @param string                   $label         The name for the hosted service that is base-64 encoded. The name
+     *                                                may be up to 100 characters in length
+     * @param bool                     $force         Specifies whether the rollback should proceed even when it will
+     *                                                cause local data to be lost from some role instances. True if the
+     *                                                rollback should proceed; otherwise false if the rollback should
+     *                                                fail
      * @param UpgradeDeploymentOptions $options       The optional parameters
      *
      * @return AsynchronousOperationResult
@@ -485,10 +481,9 @@ interface IServiceManagement extends FilterableService
      * name.
      *
      * @param string               $name          The hosted service name
-     * @param int                  $upgradeDomain The integer value that
-     *                                            identifies the upgrade domain to walk. Upgrade domains are identified with a
-     *                                            zero-based index: the first upgrade domain has an ID of 0, the second has an
-     *                                            ID of 1, and so on
+     * @param int                  $upgradeDomain The integer value that identifies the upgrade domain to walk. Upgrade
+     *                                            domains are identified with a zero-based index: the first upgrade
+     *                                            domain has an ID of 0, the second has an ID of 1, and so on
      * @param GetDeploymentOptions $options       The optional parameters
      *
      * @return AsynchronousOperationResult

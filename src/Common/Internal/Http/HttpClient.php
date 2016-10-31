@@ -397,8 +397,6 @@ class HttpClient implements IHttpClient
      * @param string $message  The detailed message (if any)
      * @param array  $expected The expected status codes
      *
-     * @static
-     *
      * @throws ServiceException
      */
     public static function throwIfError($actual, $reason, $message, array $expected)
@@ -411,12 +409,13 @@ class HttpClient implements IHttpClient
     /**
      * @param ResponseInterface $response
      *
-     * @return array an array of headers
+     * @return string[]
      */
     public static function getResponseHeaders(ResponseInterface $response)
     {
         $responseHeaderArray = $response->getHeaders();
 
+        /** @var string[] $responseHeaders */
         $responseHeaders = [];
 
         foreach ($responseHeaderArray as $key => $value) {
