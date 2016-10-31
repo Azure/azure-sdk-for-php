@@ -1,5 +1,7 @@
-- Breaking changes
-    - [Type declarations](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration)
+Windows Azure SDK For PHP 0.5.0, 2016-10-31
+-------------------------------------------
+
+- Breaking changes [Type declarations](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration)
     - WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey
         - stringifyAssetDeliveryPolicyConfiguartionKey() => stringifyAssetDeliveryPolicyConfigurationKey()
     - src/WindowsAzure.php has been removed,

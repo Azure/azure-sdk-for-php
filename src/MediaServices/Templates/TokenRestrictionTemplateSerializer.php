@@ -38,7 +38,7 @@ use WindowsAzure\Common\Internal\Resources;
  * @copyright Microsoft Corporation
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  *
- * @version   Release: 0.4.5_2016-09
+ * @version   Release: 0.5.0_2016-11
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
@@ -164,17 +164,17 @@ class TokenRestrictionTemplateSerializer
     }
 
     /**
-     * @param TokenRestrictionTemplate $template
-     * @param SymmetricVerificationKey $verificationKey
-     * @param $contentKeyUUID
-     * @param null $tokenExpiration
-     * @param null $notBefore
+     * @param TokenRestrictionTemplate      $template
+     * @param SymmetricVerificationKey|null $verificationKey
+     * @param                               $contentKeyUUID
+     * @param null                          $tokenExpiration
+     * @param null                          $notBefore
      *
      * @return mixed|string
      */
     public static function generateTestToken(
         TokenRestrictionTemplate $template,
-        SymmetricVerificationKey $verificationKey,
+        SymmetricVerificationKey $verificationKey = null,
         $contentKeyUUID,
         $tokenExpiration = null,
         $notBefore = null)
