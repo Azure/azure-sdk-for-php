@@ -164,17 +164,17 @@ class TokenRestrictionTemplateSerializer
     }
 
     /**
-     * @param TokenRestrictionTemplate $template
-     * @param SymmetricVerificationKey $verificationKey
-     * @param $contentKeyUUID
-     * @param null $tokenExpiration
-     * @param null $notBefore
+     * @param TokenRestrictionTemplate      $template
+     * @param SymmetricVerificationKey|null $verificationKey
+     * @param                               $contentKeyUUID
+     * @param null                          $tokenExpiration
+     * @param null                          $notBefore
      *
      * @return mixed|string
      */
     public static function generateTestToken(
         TokenRestrictionTemplate $template,
-        SymmetricVerificationKey $verificationKey,
+        SymmetricVerificationKey $verificationKey = null,
         $contentKeyUUID,
         $tokenExpiration = null,
         $notBefore = null)
