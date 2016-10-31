@@ -251,7 +251,7 @@ class Resources
     const PRL_XML_NAMESPACE = 'http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1';
 
     // Header values
-    const SDK_USER_AGENT = 'Azure-SDK-For-PHP/0.4.5';
+    const SDK_USER_AGENT = 'Azure-SDK-For-PHP/0.5.0';
     const STORAGE_API_LATEST_VERSION = '2012-02-12';
     const SM_API_LATEST_VERSION = '2011-10-01';
     const DATA_SERVICE_VERSION_VALUE = '1.0;NetFx';
