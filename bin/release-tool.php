@@ -30,7 +30,7 @@
  * 2. run php .\bin\release-tool.php in the root directory
  */
 const VER_TOKEN = ' * @version';
-const NEW_VER = '   Release: 0.4.5_2016-09';
+const NEW_VER = '   Release: 0.5.0_2016-11';
 $startDir = __DIR__.'/../'; //this will update SDK sources, test sources and examples.
 
 $updateVersion = true;
