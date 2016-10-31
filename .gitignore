@@ -11,3 +11,4 @@ phpcs-checkstyle.tmp
 composer.phar
 .vscode/
 .idea/
+examples/MediaServices/IndexerOutput/

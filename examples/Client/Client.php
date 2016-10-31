@@ -22,7 +22,7 @@
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-require_once '../vendor/autoload.php';
+require_once __DIR__.'/../../vendor/autoload.php';
 
 spl_autoload_register(
    function ($class) {
