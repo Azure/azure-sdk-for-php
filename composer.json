@@ -15,7 +15,7 @@
         "pear/mail_mime": "^1.10",
         "pear/mail_mime-decode": "^1.5",
         "firebase/php-jwt": "^4.0",
-        "microsoft/azure-storage": "^0.10",
+        "microsoft/azure-storage": "^0.13",
         "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
