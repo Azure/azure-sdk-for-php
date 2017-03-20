@@ -63,9 +63,8 @@ cd ./azure-sdk-for-php
 ```
 
 > **Note**
-> 
-> The PHP Client Libraries for Microsoft Azure have a dependency on the [HTTP_Request2](http://pear.php.net/package/HTTP_Request2), [Mail_mime](http://pear.php.net/package/Mail_mime), and [Mail_mimeDecode](http://pear.php.net/package/Mail_mimeDecode) PEAR packages. The recommended way to resolve these dependencies is to install them using the [Composer package manager](http://getcomposer.org).
-
+>  
+> The recommended way to resolve dependencies is to install them using the [Composer package manager](http://getcomposer.org).
 
 ## Install via Composer
 
