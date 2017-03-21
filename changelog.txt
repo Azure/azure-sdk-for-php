@@ -1,3 +1,8 @@
+Windows Azure SDK For PHP 0.5.1, 2017-03-20
+-------------------------------------------
+
+- [Azure Storage SDK](https://packagist.org/packages/microsoft/azure-storage) is updated to the 0.13 version.
+
 Windows Azure SDK For PHP 0.5.0, 2016-10-31
 -------------------------------------------
 
