@@ -8,7 +8,8 @@
 1. Create a `readme.md` which points to the old branch and the composer package.
 1. Publish a new empty package (version 0.0.0). What's the new name should 
    be? **microsoft/azure**, **microsoft/azure-sdk**?
-1. Create an **Azure/azure-runtime-for-php** repository.
+1. Create the **Azure/azure-runtime-for-php** repository for common RunTime 
+   code.
    
 ## Requirements
 
