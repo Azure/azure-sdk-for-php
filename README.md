@@ -2,13 +2,15 @@
 
 1. Make a branch from the 
    [azure-sdk-for-php](https://github.com/Azure/azure-sdk-for-php) master 
-   branch, for example **microsoft/windowsazure**, the same as a the
+   branch, for example 
+   [windowsazure](https://github.com/Azure/azure-sdk-for-php/tree/windowsazure), the same as a the
    current name of the
    [composer package](https://packagist.org/packages/microsoft/windowsazure).
 1. Create a `readme.md` in the master branch which points to the old branch 
    and the old composer package.
 1. Publish a new empty package (version 0.0.0). What's the new name should 
-   be? **microsoft/azure**, **microsoft/azure-sdk**?
+   be? **microsoft/azure**, **microsoft/azure-sdk**? For example,
+   [microsoft/azure-storage](https://packagist.org/packages/microsoft/azure-storage).
 1. Create the **Azure/azure-runtime-for-php** repository for common RunTime 
    code.
    
