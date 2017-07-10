@@ -30,7 +30,7 @@
 
 ## Wish List
 
-1. One common core/run-time library for `Azire SDK for PHP` and 
+1. One common core/run-time library for `Azure SDK for PHP` and 
    `Azure Storage for PHP`.
 1. Documentation generation for docs.microsoft.com.
 1. Telemetry in the Core library
@@ -39,6 +39,7 @@
    - sync/async
    - raw/not-raw
    - strongly/duck typed
+1. An AutoRest PHP code generator as a PHP tool (published on Composer).
 
 ### API Level Example
 
