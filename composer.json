@@ -4,5 +4,10 @@
     "type": "library",
     "license": "Apache-2.0",
     "minimum-stability": "stable",
-    "require": {}
+    "autoload": {
+        "psr-4": { "": "src/" }
+    },
+    "require": {
+        "php": ">=5.6"
+    }
 }
