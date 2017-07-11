@@ -55,3 +55,15 @@ By default
 - sync
 - not raw
 - strongly typed
+
+### For Developers
+
+- On Windows
+  1. Download **PHP 5.6 x86 Non Thread Safe** from
+     [here](http://windows.php.net/download#php-5.6-nts-VC11-x86).
+  1. Unpack it to **c:\\php-5.6\\** folder.
+  1. Copy `php.ini-development` to `php.ini`.
+  1. Uncomment `extension_dir = "ext"`
+  1. Uncomment extensions:
+     - `openssl`
+  1. Run [install_composer.cmd](install_composer.cmd).

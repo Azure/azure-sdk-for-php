@@ -1,0 +1,8 @@
+{
+    "name": "microsoft/azure-sdk",
+    "description": "Azure SDK for PHP",
+    "type": "library",
+    "license": "Apache-2.0",
+    "minimum-stability": "stable",
+    "require": {}
+}

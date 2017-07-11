@@ -1,14 +1,2 @@
-bin/api
-bin/logs
-bin/coverage
-channel/
-*.tgz
-phpunit.xml
-cache.properties
-vendor
-nbproject
-phpcs-checkstyle.tmp
-composer.phar
-.vscode/
-.idea/
-examples/MediaServices/IndexerOutput/
+*.phar
+.idea
