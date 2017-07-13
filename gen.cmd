@@ -1,1 +1,1 @@
-node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/redis/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\src --namespace=Redis
+node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/redis/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Redis

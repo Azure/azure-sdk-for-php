@@ -5,7 +5,7 @@
     "license": "Apache-2.0",
     "minimum-stability": "stable",
     "autoload": {
-        "psr-4": { "": "src/" }
+        "psr-4": { "": [ "src/", "gen/" ] }
     },
     "require": {
         "php": ">=5.6"

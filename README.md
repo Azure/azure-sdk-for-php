@@ -39,7 +39,14 @@
    - sync/async
    - raw/not-raw
    - strongly/duck typed
+   - fluent?
 1. An AutoRest PHP code generator as a PHP tool (published on Composer).
+1. PHP conventions http://www.php-fig.org/bylaws/psr-naming-conventions/
+
+### Data Types
+
+- Q. Why avoid arrays?
+- A. Because they passed by value by default.
 
 ### API Level Example
 
