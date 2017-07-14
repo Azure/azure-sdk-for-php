@@ -1,17 +1,17 @@
 <?php
 namespace Microsoft\Rest;
 
-use Microsoft\Rest\Operations\Result;
+use Microsoft\Rest\Operations\OperationResult;
 
 final class Client
 {
     /**
-     * @param Operations\Info $info
+     * @param Operations\OperationInfo $info
      * @param array $parameters
-     * @return Result
+     * @return OperationResult
      * @throws \Exception
      */
-    function call(Operations\Info $info, array $parameters)
+    function call(Operations\OperationInfo $info, array $parameters)
     {
         // TODO: Implement call() method.
         throw new \Exception("not implemented");

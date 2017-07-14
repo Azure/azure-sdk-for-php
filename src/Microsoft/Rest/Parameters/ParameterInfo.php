@@ -1,7 +1,7 @@
 <?php
 namespace Microsoft\Rest\Parameters;
 
-final class Info
+final class ParameterInfo
 {
     /**
      * @param string $name

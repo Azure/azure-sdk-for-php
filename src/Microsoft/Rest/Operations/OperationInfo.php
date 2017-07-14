@@ -1,7 +1,9 @@
 <?php
 namespace Microsoft\Rest\Operations;
 
-final class Info
+use Microsoft\Rest\Parameters\ParameterInfo;
+
+final class OperationInfo
 {
     /**
      * @return string
@@ -11,15 +13,30 @@ final class Info
         return $this->operationId;
     }
 
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+
     /**
      * @param string $operationId
-     * @return Info
+     * @return OperationInfo
      */
     public static function create($operationId)
     {
         $result = new self;
         $result->operationId = $operationId;
         return $result;
+    }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function addParameter($name)
+    {
+        $this->parameters[] = ParameterInfo::create($name);
+        return $this;
     }
 
     private function __construct()
@@ -30,4 +47,9 @@ final class Info
      * @var string $operationId
      */
     private $operationId;
+
+    /**
+     * @var ParameterInfo[]
+     */
+    private $parameters;
 }

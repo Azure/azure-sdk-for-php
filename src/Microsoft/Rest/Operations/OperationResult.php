@@ -1,7 +1,7 @@
 <?php
 namespace Microsoft\Rest\Operations;
 
-final class Result
+final class OperationResult
 {
     /**
      * @return mixed
