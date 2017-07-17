@@ -1,5 +1,5 @@
 <?php
-namespace Microsoft\Rest\Operations;
+namespace Microsoft\Rest;
 
 final class OperationResult
 {

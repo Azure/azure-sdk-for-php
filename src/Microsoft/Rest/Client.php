@@ -1,19 +1,20 @@
 <?php
 namespace Microsoft\Rest;
 
-use Microsoft\Rest\Operations\OperationResult;
-
 final class Client
 {
     /**
-     * @param Operations\OperationInfo $info
-     * @param array $parameters
-     * @return OperationResult
-     * @throws \Exception
+     * @param string $operationId
+     * @param string $httpMethod
+     * @return Operation
      */
-    function call(Operations\OperationInfo $info, array $parameters)
+    function createOperation($operationId, $httpMethod)
     {
-        // TODO: Implement call() method.
-        throw new \Exception("not implemented");
+        return new Operation($this, $operationId, $httpMethod);
+    }
+
+    function createOperationFromData($path, $httpMethod, array $data)
+    {
+        return new Operation($this, $data["operationId"], )
     }
 }
