@@ -240,9 +240,9 @@ namespace Meta2\Create
 
 namespace {
     // doesn't work in PHP 5.6
-    $xx = new stdClass {
-        $a = 5
-    };
+    //$xx = new stdClass {
+    //    $a = 5
+    //};
 }
 
 namespace {
@@ -262,8 +262,27 @@ namespace {
             $this->b = $b;
         }
     }
+    function value(&$x)
+    {
+        return isset($x) ? $x : "default";
+    }
     $a = new A;
     $a->b = 3;
-    $a->setB(3);
+    //$a->setB(3);
     $a->setB(new B);
+
+    $arr = [ "x" => 3 ];
+    // $v = $arr["b"];
+    $b = new B;
+    $b->d = $arr["y"];
+    print_r($b);
+
+    class D
+    {
+        public $x;
+    }
+    $d = new D();
+    print_r($d->x);
+    unset($d->x);
+    print_r($d);
 }

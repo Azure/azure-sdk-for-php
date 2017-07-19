@@ -1,10 +1,18 @@
 <?php
 namespace Microsoft\Rest;
 
-
 final class Property
 {
-    public function __construct()
+    /**
+     * @var string
+     */
+    public $name;
+
+    /**
+     * @param string $name
+     */
+    public function __construct($name)
     {
+        $this->name = $name;
     }
 }

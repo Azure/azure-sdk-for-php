@@ -74,4 +74,5 @@ By default
 1. Uncomment `extension_dir = "ext"`
 1. Uncomment extensions:
    - `openssl`
+   - `mbstring`
 1. Run [install_composer.cmd](install_composer.cmd).
