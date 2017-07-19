@@ -4,29 +4,16 @@ namespace Microsoft\Rest;
 final class ParameterInfo
 {
     /**
-     * @return string
+     * @param string   $name
+     * @param string   $in   The location of the parameter. Possible values are
+     *                       "query", "header", "path", "formData" or "body".
+     * @param TypeInfo $type
      */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
-     * @param string $name
-     * @param string $location
-     */
-    public function __construct($name, $location)
+    public function __construct($name, $in, TypeInfo $type)
     {
         $this->name = $name;
-        $this->location = $location;
+        $this->in = $in;
+        $this->type = $type;
     }
 
     /**
@@ -37,5 +24,10 @@ final class ParameterInfo
     /**
      * @var string
      */
-    private $location;
+    private $in;
+
+    /**
+     * @var TypeInfo
+     */
+    private $type;
 }

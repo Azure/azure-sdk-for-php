@@ -15,45 +15,24 @@ final class Operation
     }
 
     /**
-     * @param string $value
-     * @param bool $isParameter
-     */
-    public function addPathPart($value, $isParameter = false)
-    {
-        $this->path[] = new PathPart($value, $isParameter);
-    }
-
-    /**
-     * @param string $name
-     * @param string $location
-     */
-    public function addParameter($name, $location)
-    {
-        $this->parameters[] = new ParameterInfo($name, $location);
-    }
-
-    /**
      * @param Client $client
+     * @param PathPart[] $path
+     * @param string $httpMethod  one of "GET", "PUT", "POST", "DELETE", "OPTIONS", "HEAD", or "PATCH".
      * @param string $operationId
-     * @param string $httpMethod
+     * @param ParameterInfo[] $parameters
      */
-    public function __construct(Client $client, $operationId, $httpMethod)
+    public function __construct(
+        Client $client,
+        array $path,
+        $httpMethod,
+        $operationId,
+        array $parameters)
     {
         $this->client = $client;
-        $this->operationId = $operationId;
+        $this->path = $path;
         $this->httpMethod = $httpMethod;
-    }
-
-    /**
-     * @param $client
-     * @param $path
-     * @param $httpMethod
-     * @param array $data
-     * @return Operation
-     */
-    public static function createFromData($client, $path, $httpMethod, array $data)
-    {
-        return new Operation($client, $path, $httpMethod, $data["operationId"]);
+        $this->operationId = $operationId;
+        $this->parameters = $parameters;
     }
 
     /**

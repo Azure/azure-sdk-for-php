@@ -237,3 +237,33 @@ namespace Meta2\Create
     {
     }
 }
+
+namespace {
+    // doesn't work in PHP 5.6
+    $xx = new stdClass {
+        $a = 5
+    };
+}
+
+namespace {
+    final class B
+    {
+
+    }
+    final class A
+    {
+        /**
+         * @var B
+         */
+        public $b;
+
+        public function setB(B $b)
+        {
+            $this->b = $b;
+        }
+    }
+    $a = new A;
+    $a->b = 3;
+    $a->setB(3);
+    $a->setB(new B);
+}
