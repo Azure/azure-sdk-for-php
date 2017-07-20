@@ -3,7 +3,8 @@ namespace Microsoft\Rest\Internal\Types;
 
 /**
  * type: string
+ * format: date-time
  */
-final class StringType extends TypeAbstract
+final class DateTimeType extends TypeAbstract
 {
 }

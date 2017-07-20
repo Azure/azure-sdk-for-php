@@ -3,7 +3,8 @@ namespace Microsoft\Rest\Internal\Types;
 
 /**
  * type: string
+ * format: byte
  */
-final class StringType extends TypeAbstract
+final class Base64Type extends TypeAbstract
 {
 }

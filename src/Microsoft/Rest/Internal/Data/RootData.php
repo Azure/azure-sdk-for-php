@@ -4,13 +4,13 @@ namespace Microsoft\Rest\Internal\Data;
 final class RootData extends DataAbstract
 {
     /**
-     * @param mixed $data
+     * @param mixed $value
      * @param string $root
      * @return DataAbstract
      */
-    static function create($data, $root)
+    static function create($value, $root)
     {
-        return new RootData($data, $root);
+        return new RootData($value, $root);
     }
 
     /**
@@ -18,16 +18,16 @@ final class RootData extends DataAbstract
      */
     function getPath()
     {
-        return "";
+        return $this->root;
     }
 
     /**
-     * @param mixed $data
+     * @param mixed $value
      * @param string $root
      */
-    protected function __construct($data, $root)
+    protected function __construct($value, $root)
     {
-        parent::__construct($data);
+        parent::__construct($value);
         $this->root = $root;
     }
 

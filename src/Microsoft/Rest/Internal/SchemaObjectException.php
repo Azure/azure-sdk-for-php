@@ -13,7 +13,7 @@ class SchemaObjectException extends \Exception
     {
         parent::__construct($message
             . "\nObject: "
-            . json_encode($data->getData())
+            . json_encode($data->getValue())
             . "\nPath: "
             . $data->getPath());
     }

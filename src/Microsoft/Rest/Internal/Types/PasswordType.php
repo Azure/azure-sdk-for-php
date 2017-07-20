@@ -3,7 +3,8 @@ namespace Microsoft\Rest\Internal\Types;
 
 /**
  * type: string
+ * format: password
  */
-final class StringType extends TypeAbstract
+final class PasswordType extends TypeAbstract
 {
 }

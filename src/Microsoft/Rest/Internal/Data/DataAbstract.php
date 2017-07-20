@@ -6,18 +6,28 @@ abstract class DataAbstract
     /**
      * @return mixed
      */
-    function getData()
+    function getValue()
     {
-        return $this->data;
+        return $this->value;
     }
 
     /**
      * @param string $key
      * @return MapData|null
      */
-    function at($key)
+    function getChild($key)
     {
-        return MapData::create($this, $key);
+        return isset($this->value[$key]) ? MapData::create($this, $key) : null;
+    }
+
+    /**
+     * @param string $key
+     * @return mixed|null
+     */
+    function getChildValue($key)
+    {
+        $value = $this->value;
+        return isset($value[$key]) ? $value[$key] : null;
     }
 
     /**
@@ -29,9 +39,9 @@ abstract class DataAbstract
          * @var MapData[]
          */
         $children = [];
-        foreach (array_keys($this->data) as $key)
+        foreach (array_keys($this->value) as $key)
         {
-            $children[] = $this->at($key);
+            $children[] = MapData::create($this, $key);
         }
         return $children;
     }
@@ -42,15 +52,15 @@ abstract class DataAbstract
     abstract function getPath();
 
     /**
-     * @param mixed $data
+     * @param mixed $value
      */
-    protected function __construct($data)
+    protected function __construct($value)
     {
-        $this->data = $data;
+        $this->value = $value;
     }
 
     /**
      * @var mixed
      */
-    private $data;
+    private $value;
 }

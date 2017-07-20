@@ -7,10 +7,10 @@ class UnknownTypeException extends SchemaObjectException
 {
     /**
      * @param DataAbstract $data
-     * @param string $type
      */
-    function __construct(DataAbstract $data, $type)
+    function __construct(DataAbstract $data)
     {
-        parent::__construct($data, "unknown type " . $type);
+        parent::__construct($data, "unknown type");
+
     }
 }

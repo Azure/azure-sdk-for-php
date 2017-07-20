@@ -14,26 +14,54 @@ abstract class TypeAbstract
      */
     static function createFromData(DataAbstract $schemaObjectData)
     {
-        //
-        $type = $schemaObjectData->at("type");
+        // https://swagger.io/specification/#data-types-12
+        /**
+         * @var string
+         */
+        $type = $schemaObjectData->getChildValue("type");
         if ($type !== null) {
             /**
              * @var string
              */
-            $typeStr = $type->getData();
-            switch ($typeStr)
-            {
+            $format = $schemaObjectData->getChildValue("format");
+            switch ($type) {
+                case "boolean":
+                    switch ($format) {
+                        case null: return new BooleanType();
+                    }
+                    break;
                 case "string":
-                    return new StringType();
-                default:
-                    throw new UnknownTypeException($schemaObjectData, $typeStr);
+                    switch ($format) {
+                        case null: return new StringType();
+                        case "byte": return new Base64Type();
+                        case "binary": return new BinaryType();
+                        case "date": return new DateType();
+                        case "dateTime": return new DateTimeType();
+                        case "password": return new PasswordType();
+                    }
+                    break;
+                case "integer":
+                    switch ($format) {
+                        case "int32": return new Int32Type();
+                        case "int64": return new Int64Type();
+                    }
+                    break;
+                case "number":
+                    switch ($format) {
+                        case "float": return new FloatType();
+                        case "double": return new DoubleType();
+                    }
+                    break;
             }
+            throw new UnknownTypeException($schemaObjectData);
         }
+
         // MapType
-        $properties = $schemaObjectData->at("properties");
+        $properties = $schemaObjectData->getChild("properties");
         if ($properties !== null) {
             return MapType::createFromData($properties);
         }
+
         throw new InvalidSchemaObjectException($schemaObjectData);
     }
 

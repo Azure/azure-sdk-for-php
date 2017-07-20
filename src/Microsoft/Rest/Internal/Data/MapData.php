@@ -6,12 +6,11 @@ final class MapData extends DataAbstract
     /**
      * @param DataAbstract $parent
      * @param string $key
-     * @return MapData|null
+     * @return MapData
      */
     static function create(DataAbstract $parent, $key)
     {
-        $parentData = $parent->getData();
-        return isset($parentData[$key]) ? new MapData($parentData[$key], $parent, $key) : null;
+        return new MapData($parent->getValue()[$key], $parent, $key);
     }
 
     /**
@@ -31,13 +30,13 @@ final class MapData extends DataAbstract
     }
 
     /**
-     * @param mixed $data
+     * @param mixed $value
      * @param DataAbstract $parent
      * @param string $key
      */
-    protected function __construct($data, DataAbstract $parent, $key)
+    protected function __construct($value, DataAbstract $parent, $key)
     {
-        parent::__construct($data);
+        parent::__construct($value);
         $this->parent = $parent;
         $this->key = $key;
     }

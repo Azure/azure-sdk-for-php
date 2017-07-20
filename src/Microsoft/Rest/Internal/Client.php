@@ -8,7 +8,6 @@ use Microsoft\Rest\OperationInterface;
 
 final class Client implements ClientInterface
 {
-
     /**
      * @param string $path see https://swagger.io/docs/specification/paths-and-operations/ for path templating.
      * @param string $httpMethod see https://swagger.io/specification/#pathItemObject for more details.

@@ -45,7 +45,7 @@ class ClientStaticTest extends TestCase
         } catch (InvalidSchemaObjectException $e) {
             $expected = "invalid schema object\n"
                 . "Object: []\n"
-                . "Path: [\"Sku\"]";
+                . "Path: \$definitionsData[\"Sku\"]";
             $this->assertEquals($expected, $e->getMessage());
             return;
         }
@@ -62,9 +62,9 @@ class ClientStaticTest extends TestCase
         try {
             ClientStatic::createFromData($definitionsData);
         } catch (UnknownTypeException $e) {
-            $expected = "unknown type unknown-type\n"
+            $expected = "unknown type\n"
                 . "Object: {\"type\":\"unknown-type\"}\n"
-                . "Path: [\"Sku\"]";
+                . "Path: \$definitionsData[\"Sku\"]";
             $this->assertEquals($expected, $e->getMessage());
             return;
         }
