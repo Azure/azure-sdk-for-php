@@ -13,6 +13,7 @@ use Microsoft\Rest\Internal\Types\DoubleType;
 use Microsoft\Rest\Internal\Types\FloatType;
 use Microsoft\Rest\Internal\Types\Int32Type;
 use Microsoft\Rest\Internal\Types\Int64Type;
+use Microsoft\Rest\Internal\Types\ClassType;
 use Microsoft\Rest\Internal\Types\MapType;
 use Microsoft\Rest\Internal\Types\PasswordType;
 use Microsoft\Rest\Internal\Types\StringType;
@@ -56,7 +57,7 @@ class ClientStaticTest extends TestCase
         } catch (InvalidSchemaObjectException $e) {
             $expected = "invalid schema object\n"
                 . "Object: []\n"
-                . "Path: \$definitions[\"Sku\"]";
+                . "Path: \$definitions['Sku']";
             $this->assertEquals($expected, $e->getMessage());
             return;
         }
@@ -74,8 +75,8 @@ class ClientStaticTest extends TestCase
             ClientStatic::createFromData($definitionsData);
         } catch (UnknownTypeException $e) {
             $expected = "unknown type\n"
-                . "Object: {\"type\":\"unknown-type\"}\n"
-                . "Path: \$definitions[\"Sku\"]";
+                . "Object: ['type'=>'unknown-type']\n"
+                . "Path: \$definitions['Sku']";
             $this->assertEquals($expected, $e->getMessage());
             return;
         }
@@ -137,6 +138,10 @@ class ClientStaticTest extends TestCase
                     ],
                     "ref" => [
                         '$ref' => "#/definitions/RedisProperties"
+                    ],
+                    "map" => [
+                        'type' => 'object',
+                        'additionalProperties' => [ 'type' => 'integer', 'format' => 'int32' ]
                     ]
                 ]
             ],
@@ -157,11 +162,11 @@ class ClientStaticTest extends TestCase
          * @var TypeAbstract[]
          */
         $typeMap = self::getPrivate($client, "typeMap");
-        $redisProperties = new MapType(["redisConfiguration" => new MapType([])]);
+        $redisProperties = new ClassType(["redisConfiguration" => new ClassType([])]);
         $this->assertEquals(
             $typeMap,
             [
-                "#/definitions/Sku" => new MapType([
+                "#/definitions/Sku" => new ClassType([
                     "name" => new StringType(),
                     "int32" => new Int32Type(),
                     "int64" => new Int64Type(),
@@ -174,7 +179,8 @@ class ClientStaticTest extends TestCase
                     "dateTime" => new DateTimeType(),
                     "password" => new PasswordType(),
                     "array" => new ArrayType(new StringType()),
-                    "ref" => $redisProperties
+                    "ref" => $redisProperties,
+                    "map" => new MapType(new Int32Type())
                 ]),
                 "#/definitions/RedisProperties" => $redisProperties,
             ]);
@@ -191,8 +197,8 @@ class ClientStaticTest extends TestCase
             ClientStatic::createFromData($definitionsData);
         } catch (UnknownTypeException $e) {
             $expected = "unknown type\n"
-                . "Object: {\"\$ref\":\"unknown-type\"}\n"
-                . "Path: \$definitions[\"Sku\"]";
+                . "Object: ['\$ref'=>'unknown-type']\n"
+                . "Path: \$definitions['Sku']";
             $this->assertEquals($expected, $e->getMessage());
             return;
         }

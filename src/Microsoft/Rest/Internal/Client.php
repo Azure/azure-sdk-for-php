@@ -27,7 +27,7 @@ final class Client implements ClientInterface
     {
         $client =new Client(TypeAbstract::createMapFromData(
             $definitionsData, '#/definitions/'));
-        $client->updateMapRefs($client->typeMap);
+        $client->removeRefTypesFromMap($client->typeMap);
         return $client;
     }
 
@@ -35,14 +35,14 @@ final class Client implements ClientInterface
      * @param TypeAbstract[] $typeMap
      * @return TypeAbstract[]
      */
-    function updateMapRefs(array $typeMap)
+    function removeRefTypesFromMap(array $typeMap)
     {
         /**
          * @var TypeAbstract[]
          */
         $result = [];
         foreach ($typeMap as $name => $value) {
-            $result[$name] = $value->updateRefs($this);
+            $result[$name] = $value->removeRefTypes($this);
         }
         return $result;
     }

@@ -18,7 +18,7 @@ final class MapData extends DataAbstract
      */
     function getPath()
     {
-        return $this->parent->getPath() . "[\"" . $this->key . "\"]";
+        return $this->parent->getPath() . '[\'' . $this->key . '\']';
     }
 
     /**

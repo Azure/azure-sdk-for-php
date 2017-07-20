@@ -5,6 +5,6 @@ namespace Microsoft\Rest\Internal\Types;
  * type: string
  * format: byte
  */
-final class Base64Type extends PrimitiveType
+final class Base64Type extends PrimitiveTypeAbstract
 {
 }

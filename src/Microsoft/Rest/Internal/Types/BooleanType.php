@@ -4,6 +4,6 @@ namespace Microsoft\Rest\Internal\Types;
 /**
  * type: boolean
  */
-final class BooleanType extends PrimitiveType
+final class BooleanType extends PrimitiveTypeAbstract
 {
 }

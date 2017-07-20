@@ -8,14 +8,14 @@ use Microsoft\Rest\Internal\Data\DataAbstract;
  * type: array
  * items: { }
  */
-final class ArrayType extends TypeAbstract
+final class ArrayType extends CollectionType
 {
     /**
      * @param TypeAbstract $items
      */
     function __construct(TypeAbstract $items)
     {
-        $this->items = $items;
+        parent::__construct($items);
     }
 
     /**
@@ -24,22 +24,7 @@ final class ArrayType extends TypeAbstract
      */
     static function createFromData(DataAbstract $schemaObjectData)
     {
-        $items = TypeAbstract::createFromData($schemaObjectData->getChild("items"));
-        return new ArrayType($items);
+        return new self(CollectionType::createItemsFromData(
+            $schemaObjectData, 'items'));
     }
-
-    /**
-     * @param Client $client
-     * @return TypeAbstract
-     */
-    function updateRefs(Client $client)
-    {
-        $this->items = $this->items->updateRefs($client);
-        return $this;
-    }
-
-    /**
-     * @var TypeAbstract
-     */
-    private $items;
 }

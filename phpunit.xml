@@ -15,6 +15,7 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src</directory>
+            <directory suffix=".php">gen</directory>
         </whitelist>
     </filter>
 </phpunit>

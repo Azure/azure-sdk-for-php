@@ -9,11 +9,11 @@ class SchemaObjectException extends \Exception
      * @param DataAbstract $data
      * @param string $message
      */
-    function __construct(DataAbstract $data, $message = "")
+    function __construct(DataAbstract $data, $message = '')
     {
         parent::__construct($message
             . "\nObject: "
-            . json_encode($data->getValue())
+            . $data->getPhpCode()
             . "\nPath: "
             . $data->getPath());
     }

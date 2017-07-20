@@ -10,6 +10,6 @@ class InvalidSchemaObjectException extends SchemaObjectException
      */
     function __construct(DataAbstract $data)
     {
-        parent::__construct($data, "invalid schema object");
+        parent::__construct($data, 'invalid schema object');
     }
 }

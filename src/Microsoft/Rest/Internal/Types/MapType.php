@@ -1,40 +1,25 @@
 <?php
 namespace Microsoft\Rest\Internal\Types;
 
-use Microsoft\Rest\Internal\Client;
 use Microsoft\Rest\Internal\Data\DataAbstract;
 
-final class MapType extends TypeAbstract
+final class MapType extends CollectionType
 {
     /**
-     * @param TypeAbstract[] $propertyMap
+     * @param TypeAbstract $items
      */
-    function __construct($propertyMap)
+    function __construct(TypeAbstract $items)
     {
-        $this->propertyMap = $propertyMap;
+        parent::__construct($items);
     }
 
     /**
-     * @param DataAbstract $propertiesData
+     * @param DataAbstract $schemaObjectData
      * @return MapType
      */
-    static function createFromData(DataAbstract $propertiesData)
+    static function createFromData(DataAbstract $schemaObjectData)
     {
-        return new MapType(TypeAbstract::createMapFromData($propertiesData));
+        return new self(CollectionType::createItemsFromData(
+            $schemaObjectData, 'additionalProperties'));
     }
-
-    /**
-     * @param Client $client
-     * @return TypeAbstract
-     */
-    function updateRefs(Client $client)
-    {
-        $this->propertyMap = $client->updateMapRefs($this->propertyMap);
-        return $this;
-    }
-
-    /**
-     * @var TypeAbstract[]
-     */
-    private $propertyMap;
 }

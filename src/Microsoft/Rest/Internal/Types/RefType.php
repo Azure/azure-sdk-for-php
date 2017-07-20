@@ -32,7 +32,7 @@ final class RefType extends TypeAbstract
      * @return TypeAbstract
      * @throws UnknownTypeException
      */
-    function updateRefs(Client $client)
+    function removeRefTypes(Client $client)
     {
         $result = $client->getType($this->ref);
         if ($result === null) {

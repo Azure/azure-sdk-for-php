@@ -52,6 +52,35 @@ abstract class DataAbstract
     abstract function getPath();
 
     /**
+     * @return string
+     */
+    function getPhpCode()
+    {
+        return self::valueToPhpCode($this->value);
+    }
+
+    /**
+     * @param mixed $value
+     * @return string
+     */
+    private static function valueToPhpCode($value)
+    {
+        if (is_array($value))
+        {
+            $body = [];
+            foreach ($value as $key => $child)
+            {
+                $body[] = "'" . $key . "'=>" . self::valueToPhpCode($child);
+            }
+            return '['.implode(',', $body).']';
+        }
+        else
+        {
+            return "'" . $value . "'";
+        }
+    }
+
+    /**
      * @param mixed $value
      */
     protected function __construct($value)

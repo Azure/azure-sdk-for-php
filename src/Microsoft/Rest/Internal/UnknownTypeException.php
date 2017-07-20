@@ -10,7 +10,7 @@ class UnknownTypeException extends SchemaObjectException
      */
     function __construct(DataAbstract $data)
     {
-        parent::__construct($data, "unknown type");
+        parent::__construct($data, 'unknown type');
 
     }
 }

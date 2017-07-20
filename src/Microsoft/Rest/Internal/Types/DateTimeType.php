@@ -5,6 +5,6 @@ namespace Microsoft\Rest\Internal\Types;
  * type: string
  * format: date-time
  */
-final class DateTimeType extends PrimitiveType
+final class DateTimeType extends PrimitiveTypeAbstract
 {
 }

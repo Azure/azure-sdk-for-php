@@ -12,7 +12,7 @@ abstract class TypeAbstract
      * @param Client $client
      * @return TypeAbstract
      */
-    abstract function updateRefs(Client $client);
+    abstract function removeRefTypes(Client $client);
 
     /**
      * @param DataAbstract $schemaObjectData see https://swagger.io/specification/#schemaObject
@@ -29,53 +29,56 @@ abstract class TypeAbstract
         if ($ref !== null) {
             return new RefType($ref, $schemaObjectData);
         }
+
         /**
          * @var string
          */
-        $type = $schemaObjectData->getChildValue("type");
+        $type = $schemaObjectData->getChildValue('type');
         if ($type !== null) {
             /**
              * @var string
              */
-            $format = $schemaObjectData->getChildValue("format");
+            $format = $schemaObjectData->getChildValue('format');
             switch ($type) {
-                case "array":
+                case 'array':
                     return ArrayType::createFromData($schemaObjectData);
-                case "boolean":
+                case 'object':
+                    return MapType::createFromData($schemaObjectData);
+                case 'boolean':
                     switch ($format) {
                         case null: return new BooleanType();
                     }
                     break;
-                case "string":
+                case 'string':
                     switch ($format) {
                         case null: return new StringType();
-                        case "byte": return new Base64Type();
-                        case "binary": return new BinaryType();
-                        case "date": return new DateType();
-                        case "date-time": return new DateTimeType();
-                        case "password": return new PasswordType();
+                        case 'byte': return new Base64Type();
+                        case 'binary': return new BinaryType();
+                        case 'date': return new DateType();
+                        case 'date-time': return new DateTimeType();
+                        case 'password': return new PasswordType();
                     }
                     break;
-                case "integer":
+                case 'integer':
                     switch ($format) {
-                        case "int32": return new Int32Type();
-                        case "int64": return new Int64Type();
+                        case 'int32': return new Int32Type();
+                        case 'int64': return new Int64Type();
                     }
                     break;
-                case "number":
+                case 'number':
                     switch ($format) {
-                        case "float": return new FloatType();
-                        case "double": return new DoubleType();
+                        case 'float': return new FloatType();
+                        case 'double': return new DoubleType();
                     }
                     break;
             }
             throw new UnknownTypeException($schemaObjectData);
         }
 
-        // MapType
-        $properties = $schemaObjectData->getChild("properties");
+        // ClassType
+        $properties = $schemaObjectData->getChild('properties');
         if ($properties !== null) {
-            return MapType::createFromData($properties);
+            return ClassType::createFromData($properties);
         }
 
         throw new InvalidSchemaObjectException($schemaObjectData);
