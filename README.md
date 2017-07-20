@@ -1,22 +1,22 @@
 ## Plan
 
-1. Make a branch from the 
-   [azure-sdk-for-php](https://github.com/Azure/azure-sdk-for-php) master 
-   branch, for example 
+1. Make a branch from the
+   [azure-sdk-for-php](https://github.com/Azure/azure-sdk-for-php) master
+   branch, for example
    [windowsazure](https://github.com/Azure/azure-sdk-for-php/tree/windowsazure), the same as a the
    current name of the
    [composer package](https://packagist.org/packages/microsoft/windowsazure).
-1. Create a `readme.md` in the master branch which points to the old branch 
+1. Create a `readme.md` in the master branch which points to the old branch
    and the old composer package.
-1. Publish a new empty package (version 0.0.0). What's the new name should 
+1. Publish a new empty package (version 0.0.0). What's the new name should
    be? **microsoft/azure**, **microsoft/azure-sdk**? For example,
    [microsoft/azure-storage](https://packagist.org/packages/microsoft/azure-storage).
-1. Create the **Azure/azure-runtime-for-php** repository for common RunTime 
+1. Create the **Azure/azure-runtime-for-php** repository for common RunTime
    code.
-   
+
 ## Requirements
 
-1. Support for different PHP versions (see 
+1. Support for different PHP versions (see
    [PHP: Supported Versions](http://php.net/supported-versions.php)):
    - PHP 5.6
    - PHP 7.0
@@ -25,12 +25,12 @@
 1. CI (Travis-CI, Appveyor?)
 1. Profile support.
 1. Descriptive code generation (instead of imperative).
-1. An authentication. See the email thread 
+1. An authentication. See the email thread
    `FW: Azure SDK common auth file support`.
 
 ## Wish List
 
-1. One common core/run-time library for `Azure SDK for PHP` and 
+1. One common core/run-time library for `Azure SDK for PHP` and
    `Azure Storage for PHP`.
 1. Documentation generation for docs.microsoft.com.
 1. Telemetry in the Core library
@@ -76,3 +76,98 @@ By default
    - `openssl`
    - `mbstring`
 1. Run [install_composer.cmd](install_composer.cmd).
+
+#### Run-Time Library Interface
+
+```php
+namespace Microsoft/Rest;
+
+interface OperationResultInterface
+{
+    // under construction
+}
+
+interface OperationInterface
+{
+    /**
+     * @param array $parameters
+     * @return OperationResultInterface
+     */
+    function call(array $parameters);
+}
+
+interface ClientInterface
+{
+    /**
+     * @param string $path
+     * @param string $httpMethod
+     * @param array $operationData
+     * @return OperationInterface
+     */
+    function createOperation($path, $httpMethod, array $operationData);
+}
+
+final class ClientStatic
+{
+    /**
+     * @param array $definitionsData
+     */
+    function createClient(array $definitionsData);
+
+    private function __constructor() {}
+}
+```
+
+#### An Example of Run-Time Interface Usage
+
+```php
+class RedisClient
+{
+    function __constructor()
+    {
+        $this->_client = \Microsoft\Rest\ClientStatic::createFromData(
+            self::_DEFINITIONS_DATA);
+        $this->_create_operation = $this->_client->createOperationFromData(
+            '/path/{parameter}/',
+            'get',
+            self::_CREATE_OPERATION_DATA);
+    }
+
+    /**
+     * @param string $name
+     */
+    function create($name)
+    {
+        return $this->_create_operation->call(['name' => $name]);
+    }
+
+    /**
+     * @var \Microsoft\Rest\ClientInterface
+     */
+    private $_client;
+
+    /**
+     * @var \Microsoft\Rest\OperationInterface
+     */
+    private $_create_operation;
+
+    const _DEFINITIONS_DATA = [
+        'Sku' => [
+            'properties' => [
+                'name' => [
+                   'type' => 'string'
+                ]
+            ]
+        ]
+    ];
+
+    const _CREATE_OPERATION_DATA = [
+        'operationId' => 'create',
+        'parameters' => [
+            'name' => [
+                'type' => 'string'
+            ]
+        ],
+    ];
+}
+```

@@ -56,7 +56,7 @@ class ClientStaticTest extends TestCase
         } catch (InvalidSchemaObjectException $e) {
             $expected = "invalid schema object\n"
                 . "Object: []\n"
-                . "Path: \$definitionsData[\"Sku\"]";
+                . "Path: \$definitions[\"Sku\"]";
             $this->assertEquals($expected, $e->getMessage());
             return;
         }
@@ -75,7 +75,7 @@ class ClientStaticTest extends TestCase
         } catch (UnknownTypeException $e) {
             $expected = "unknown type\n"
                 . "Object: {\"type\":\"unknown-type\"}\n"
-                . "Path: \$definitionsData[\"Sku\"]";
+                . "Path: \$definitions[\"Sku\"]";
             $this->assertEquals($expected, $e->getMessage());
             return;
         }
@@ -192,7 +192,7 @@ class ClientStaticTest extends TestCase
         } catch (UnknownTypeException $e) {
             $expected = "unknown type\n"
                 . "Object: {\"\$ref\":\"unknown-type\"}\n"
-                . "Path: \$definitionsData[\"Sku\"]";
+                . "Path: \$definitions[\"Sku\"]";
             $this->assertEquals($expected, $e->getMessage());
             return;
         }

@@ -14,7 +14,7 @@ final class Client implements ClientInterface
      * @param array $operationData see https://swagger.io/specification/#operationObject for more details.
      * @return OperationInterface
      */
-    function createOperation($path, $httpMethod, array $operationData)
+    function createOperationFromData($path, $httpMethod, array $operationData)
     {
         return Operation::create($this);
     }

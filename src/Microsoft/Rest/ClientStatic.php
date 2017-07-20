@@ -12,7 +12,7 @@ final class ClientStatic
      */
     static function createFromData(array $definitionsData)
     {
-        return Client::createFromData(RootData::create($definitionsData, "\$definitionsData"));
+        return Client::createFromData(RootData::create($definitionsData, "\$definitions"));
     }
 
     private function __construct() { }
