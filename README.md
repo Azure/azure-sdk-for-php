@@ -90,7 +90,7 @@ interface OperationResultInterface
 interface OperationInterface
 {
     /**
-     * @param array $parameters
+     * @param  array                    $parameters
      * @return OperationResultInterface
      */
     function call(array $parameters);
@@ -99,9 +99,9 @@ interface OperationInterface
 interface ClientInterface
 {
     /**
-     * @param string $path
-     * @param string $httpMethod
-     * @param array $operationData
+     * @param  string             $path          https://swagger.io/docs/specification/paths-and-operations/
+     * @param  string             $httpMethod    https://swagger.io/specification/#pathItemObject
+     * @param  array              $operationData https://swagger.io/specification/#operationObject
      * @return OperationInterface
      */
     function createOperation($path, $httpMethod, array $operationData);
@@ -110,7 +110,8 @@ interface ClientInterface
 final class ClientStatic
 {
     /**
-     * @param array $definitionsData
+     * @param  array           $definitionsData https://swagger.io/specification/#definitionsObject
+     * @return ClientInterface
      */
     function createClient(array $definitionsData);
 
