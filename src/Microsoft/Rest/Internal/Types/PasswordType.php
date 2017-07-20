@@ -5,6 +5,6 @@ namespace Microsoft\Rest\Internal\Types;
  * type: string
  * format: password
  */
-final class PasswordType extends TypeAbstract
+final class PasswordType extends PrimitiveType
 {
 }

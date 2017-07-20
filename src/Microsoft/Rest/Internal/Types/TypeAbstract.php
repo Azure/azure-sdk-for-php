@@ -1,12 +1,19 @@
 <?php
 namespace Microsoft\Rest\Internal\Types;
 
+use Microsoft\Rest\Internal\Client;
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\InvalidSchemaObjectException;
 use Microsoft\Rest\Internal\UnknownTypeException;
 
 abstract class TypeAbstract
 {
+    /**
+     * @param Client $client
+     * @return TypeAbstract
+     */
+    abstract function updateRefs(Client $client);
+
     /**
      * @param DataAbstract $schemaObjectData see https://swagger.io/specification/#schemaObject
      * @return TypeAbstract
@@ -18,6 +25,13 @@ abstract class TypeAbstract
         /**
          * @var string
          */
+        $ref = $schemaObjectData->getChildValue('$ref');
+        if ($ref !== null) {
+            return new RefType($ref);
+        }
+        /**
+         * @var string
+         */
         $type = $schemaObjectData->getChildValue("type");
         if ($type !== null) {
             /**
@@ -25,6 +39,8 @@ abstract class TypeAbstract
              */
             $format = $schemaObjectData->getChildValue("format");
             switch ($type) {
+                case "array":
+                    return ArrayType::createFromData($schemaObjectData);
                 case "boolean":
                     switch ($format) {
                         case null: return new BooleanType();
@@ -36,7 +52,7 @@ abstract class TypeAbstract
                         case "byte": return new Base64Type();
                         case "binary": return new BinaryType();
                         case "date": return new DateType();
-                        case "dateTime": return new DateTimeType();
+                        case "date-time": return new DateTimeType();
                         case "password": return new PasswordType();
                     }
                     break;
@@ -67,9 +83,10 @@ abstract class TypeAbstract
 
     /**
      * @param DataAbstract $schemaObjectMapData
+     * @param string $prefix
      * @return TypeAbstract[]
      */
-    static function createMapFromData(DataAbstract $schemaObjectMapData)
+    static function createMapFromData(DataAbstract $schemaObjectMapData, $prefix = '')
     {
         /**
          * @var TypeAbstract[]
@@ -77,7 +94,7 @@ abstract class TypeAbstract
         $typeMap = [];
         foreach ($schemaObjectMapData->getChildren() as $child)
         {
-            $typeMap[$child->getKey()] = TypeAbstract::createFromData($child);
+            $typeMap[$prefix . $child->getKey()] = TypeAbstract::createFromData($child);
         }
         return $typeMap;
     }

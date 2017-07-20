@@ -25,7 +25,38 @@ final class Client implements ClientInterface
      */
     static function createFromData(DataAbstract $definitionsData)
     {
-        return new Client(TypeAbstract::createMapFromData($definitionsData));
+        $client =new Client(TypeAbstract::createMapFromData(
+            $definitionsData, '#/definitions/'));
+        $client->updateMapRefs($client->typeMap);
+        return $client;
+    }
+
+    /**
+     * @param TypeAbstract[] $typeMap
+     * @return TypeAbstract[]
+     */
+    function updateMapRefs(array $typeMap)
+    {
+        /**
+         * @var TypeAbstract[]
+         */
+        $result = [];
+        foreach ($typeMap as $name => $value) {
+            $result[$name] = $value->updateRefs($this);
+        }
+        return $result;
+    }
+
+    /**
+     * @param string $name
+     * @return TypeAbstract
+     */
+    function getType($name)
+    {
+        if (!isset($this->typeMap[$name])) {
+            throw new UnknownTypeNameException($name);
+        }
+        return $this->typeMap[$name];
     }
 
     /**

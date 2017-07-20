@@ -4,6 +4,6 @@ namespace Microsoft\Rest\Internal\Types;
 /**
  * type: string
  */
-final class StringType extends TypeAbstract
+final class StringType extends PrimitiveType
 {
 }
