@@ -2,8 +2,11 @@
 namespace Microsoft\Rest;
 
 use Closure;
+use Microsoft\Rest\Internal\InvalidSchemaObjectException;
 use Microsoft\Rest\Internal\Types\MapType;
+use Microsoft\Rest\Internal\Types\StringType;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
+use Microsoft\Rest\Internal\UnknownTypeException;
 use PHPUnit\Framework\TestCase;
 
 class ClientStaticTest extends TestCase
@@ -32,15 +35,57 @@ class ClientStaticTest extends TestCase
         $this->assertEquals($typeMap, []);
     }
 
+    function testCreateFromDataThrowInvalidSchemaObjectException()
+    {
+        $definitionsData = [
+            "Sku" => []
+        ];
+        try {
+            ClientStatic::createFromData($definitionsData);
+        } catch (InvalidSchemaObjectException $e) {
+            $expected = "invalid schema object\n"
+                . "Object: []\n"
+                . "Path: [\"Sku\"]";
+            $this->assertEquals($expected, $e->getMessage());
+            return;
+        }
+        $this->fail();
+    }
+
+    function testCreateFromDataThrowUnknownTypeException()
+    {
+        $definitionsData = [
+            "Sku" => [
+                "type" => "unknown-type"
+            ]
+        ];
+        try {
+            ClientStatic::createFromData($definitionsData);
+        } catch (UnknownTypeException $e) {
+            $expected = "unknown type unknown-type\n"
+                . "Object: {\"type\":\"unknown-type\"}\n"
+                . "Path: [\"Sku\"]";
+            $this->assertEquals($expected, $e->getMessage());
+            return;
+        }
+        $this->fail();
+    }
+
     function testCreateFromData2()
     {
         $definitionsData = [
             "Sku" => [
-                "properties" => []
+                "properties" => [
+                    "name" => [
+                        "type" => "string"
+                    ]
+                ]
             ],
             "RedisProperties" => [
                 "properties" => [
-                    "redisConfiguration" => []
+                    "redisConfiguration" => [
+                        "properties" => []
+                    ]
                 ]
             ]
         ];
@@ -56,8 +101,8 @@ class ClientStaticTest extends TestCase
         $this->assertEquals(
             $typeMap,
             [
-                "Sku" => new MapType([]),
-                "RedisProperties" => new MapType([]),
+                "Sku" => new MapType(["name" => new StringType()]),
+                "RedisProperties" => new MapType(["redisConfiguration" => new MapType([])]),
             ]);
     }
 }

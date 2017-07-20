@@ -2,6 +2,8 @@
 namespace Microsoft\Rest\Internal\Types;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
+use Microsoft\Rest\Internal\InvalidSchemaObjectException;
+use Microsoft\Rest\Internal\UnknownTypeException;
 
 abstract class TypeAbstract
 {
@@ -12,14 +14,27 @@ abstract class TypeAbstract
      */
     static function createFromData(DataAbstract $schemaObjectData)
     {
+        //
+        $type = $schemaObjectData->at("type");
+        if ($type !== null) {
+            /**
+             * @var string
+             */
+            $typeStr = $type->getData();
+            switch ($typeStr)
+            {
+                case "string":
+                    return new StringType();
+                default:
+                    throw new UnknownTypeException($schemaObjectData, $typeStr);
+            }
+        }
+        // MapType
         $properties = $schemaObjectData->at("properties");
         if ($properties !== null) {
             return MapType::createFromData($properties);
         }
-        throw new \Exception("unknown schema object "
-            . json_encode($schemaObjectData)
-            . " at "
-            . $schemaObjectData->getPath());
+        throw new InvalidSchemaObjectException($schemaObjectData);
     }
 
     /**
