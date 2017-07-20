@@ -49,14 +49,11 @@ final class Client implements ClientInterface
 
     /**
      * @param string $name
-     * @return TypeAbstract
+     * @return TypeAbstract|null
      */
     function getType($name)
     {
-        if (!isset($this->typeMap[$name])) {
-            throw new UnknownTypeNameException($name);
-        }
-        return $this->typeMap[$name];
+        return isset($this->typeMap[$name]) ? $this->typeMap[$name] : null;
     }
 
     /**

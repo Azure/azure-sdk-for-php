@@ -15,11 +15,9 @@ use Microsoft\Rest\Internal\Types\Int32Type;
 use Microsoft\Rest\Internal\Types\Int64Type;
 use Microsoft\Rest\Internal\Types\MapType;
 use Microsoft\Rest\Internal\Types\PasswordType;
-use Microsoft\Rest\Internal\Types\RefType;
 use Microsoft\Rest\Internal\Types\StringType;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 use Microsoft\Rest\Internal\UnknownTypeException;
-use Microsoft\Rest\Internal\UnknownTypeNameException;
 use PHPUnit\Framework\TestCase;
 
 class ClientStaticTest extends TestCase
@@ -182,7 +180,7 @@ class ClientStaticTest extends TestCase
             ]);
     }
 
-    function testCreateFromDataThrowsUnknownTypeNameException()
+    function testCreateFromDataThrowsUnknownNameException()
     {
         $definitionsData = [
             "Sku" => [
@@ -191,8 +189,10 @@ class ClientStaticTest extends TestCase
         ];
         try {
             ClientStatic::createFromData($definitionsData);
-        } catch (UnknownTypeNameException $e) {
-            $expected = "unknown type name: unknown-type";
+        } catch (UnknownTypeException $e) {
+            $expected = "unknown type\n"
+                . "Object: {\"\$ref\":\"unknown-type\"}\n"
+                . "Path: \$definitionsData[\"Sku\"]";
             $this->assertEquals($expected, $e->getMessage());
             return;
         }

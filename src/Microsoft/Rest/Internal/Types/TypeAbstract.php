@@ -27,7 +27,7 @@ abstract class TypeAbstract
          */
         $ref = $schemaObjectData->getChildValue('$ref');
         if ($ref !== null) {
-            return new RefType($ref);
+            return new RefType($ref, $schemaObjectData);
         }
         /**
          * @var string
