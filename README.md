@@ -173,8 +173,23 @@ class RedisClient
 }
 ```
 
-#### Data Type
+#### Primitive Data Types
 
-type  |format|PHP Type Information |
-------|------|---------------------|
-string|      |Primitives\StringType|
+type   |format           |PHP Type Information|
+-------|-----------------|--------------------|
+boolean|                 |BooleanType         |
+string |                 |StringType          |
+string |byte             |Base64Type          |
+string |binary           |BinaryType          |
+string |date             |DateType            |
+string |date-time        |DateTimeType        |
+string |password         |PasswordType        |
+string |duration         |DurationType        |
+string |uuid             |UuidType            |
+string |date-time-rfc1123|DateTimeRfc1123Type |
+integer|int32            |Int32Type           |
+integer|int64            |Int64Type           |
+number |float            |FloatType           |
+number |double           |DoubleType          |
+number |decimal          |DecimalType         |
+
