@@ -1,5 +1,5 @@
 <?php
-namespace Microsoft\Rest\Internal\Types;
+namespace Microsoft\Rest\Internal\Types\Primitives;
 
 /**
  * type: boolean

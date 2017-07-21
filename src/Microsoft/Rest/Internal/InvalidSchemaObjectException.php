@@ -3,7 +3,7 @@ namespace Microsoft\Rest\Internal;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
 
-class InvalidSchemaObjectException extends SchemaObjectException
+class InvalidSchemaObjectException extends DataException
 {
     /**
      * @param DataAbstract $data

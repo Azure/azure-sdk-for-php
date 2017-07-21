@@ -3,6 +3,8 @@ namespace Microsoft\Rest\Internal;
 
 use Microsoft\Rest\ClientInterface;
 use Microsoft\Rest\Internal\Data\DataAbstract;
+use Microsoft\Rest\Internal\Data\MapData;
+use Microsoft\Rest\Internal\Data\RootData;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 use Microsoft\Rest\OperationInterface;
 
@@ -16,7 +18,11 @@ final class Client implements ClientInterface
      */
     function createOperationFromData($path, $httpMethod, array $operationData)
     {
-        return Operation::create($this);
+        return Operation::createFromOperationData(
+            $this,
+            RootData::create(
+                $operationData,
+                MapData::appendPathKey(MapData::appendPathKey('$paths', $path), $httpMethod)));
     }
 
     /**

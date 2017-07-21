@@ -1,6 +1,8 @@
 <?php
 namespace Microsoft\Rest\Internal\Data;
 
+use Microsoft\Rest\Internal\ExpectedPropertyException;
+
 abstract class DataAbstract
 {
     /**
@@ -12,22 +14,61 @@ abstract class DataAbstract
     }
 
     /**
+     * @param string|int $key
+     * @return bool
+     */
+    function hasKey($key)
+    {
+        return isset($this->value[$key]);
+    }
+
+    /**
+     * @param string|int $key
+     * @throws ExpectedPropertyException
+     */
+    function requireKey($key)
+    {
+        if (!$this->hasKey($key)) {
+            throw new ExpectedPropertyException($this, $key);
+        }
+    }
+
+    /**
      * @param string $key
      * @return MapData|null
      */
+    function getChildOrNull($key)
+    {
+        return $this->hasKey($key) ? MapData::create($this, $key) : null;
+    }
+
+    /**
+     * @param $key
+     * @return MapData
+     */
     function getChild($key)
     {
-        return isset($this->value[$key]) ? MapData::create($this, $key) : null;
+        $this->requireKey($key);
+        return MapData::create($this, $key);
     }
 
     /**
      * @param string $key
      * @return mixed|null
      */
+    function getChildValueOrNull($key)
+    {
+        return $this->hasKey($key) ? $this->value[$key] : null;
+    }
+
+    /**
+     * @param $key
+     * @return MapData
+     */
     function getChildValue($key)
     {
-        $value = $this->value;
-        return isset($value[$key]) ? $value[$key] : null;
+        $this->requireKey($key);
+        return $this->value[$key];
     }
 
     /**

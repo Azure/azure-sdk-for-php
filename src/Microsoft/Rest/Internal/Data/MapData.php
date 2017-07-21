@@ -5,7 +5,7 @@ final class MapData extends DataAbstract
 {
     /**
      * @param DataAbstract $parent
-     * @param string $key
+     * @param string|int $key
      * @return MapData
      */
     static function create(DataAbstract $parent, $key)
@@ -14,15 +14,26 @@ final class MapData extends DataAbstract
     }
 
     /**
+     * @param string $path
+     * @param string|int $key
      * @return string
      */
-    function getPath()
+    static function appendPathKey($path, $key)
     {
-        return $this->parent->getPath() . '[\'' . $this->key . '\']';
+        $keyStr = is_string($key) ? "'" . $key . "'" : strval($key);
+        return $path . '[' . $keyStr . ']';
     }
 
     /**
      * @return string
+     */
+    function getPath()
+    {
+        return self::appendPathKey($this->parent->getPath(), $this->key);
+    }
+
+    /**
+     * @return string|int
      */
     function getKey()
     {
@@ -32,7 +43,7 @@ final class MapData extends DataAbstract
     /**
      * @param mixed $value
      * @param DataAbstract $parent
-     * @param string $key
+     * @param string|int $key
      */
     protected function __construct($value, DataAbstract $parent, $key)
     {
@@ -47,7 +58,7 @@ final class MapData extends DataAbstract
     private $parent;
 
     /**
-     * @var string
+     * @var string|int
      */
     private $key;
 }

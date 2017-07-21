@@ -17,16 +17,6 @@ abstract class CollectionType extends TypeAbstract
     }
 
     /**
-     * @param DataAbstract $schemaObjectData
-     * @param string $itemsKey
-     * @return TypeAbstract
-     */
-    static function createItemsFromData(DataAbstract $schemaObjectData, $itemsKey)
-    {
-        return TypeAbstract::createFromData($schemaObjectData->getChild($itemsKey));
-    }
-
-    /**
      * @param TypeAbstract $items
      */
     protected function __construct(TypeAbstract $items)

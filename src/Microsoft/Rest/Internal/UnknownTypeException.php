@@ -3,7 +3,7 @@ namespace Microsoft\Rest\Internal;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
 
-class UnknownTypeException extends SchemaObjectException
+class UnknownTypeException extends DataException
 {
     /**
      * @param DataAbstract $data

@@ -14,12 +14,11 @@ final class MapType extends CollectionType
     }
 
     /**
-     * @param DataAbstract $schemaObjectData
+     * @param DataAbstract $additionalPropertiesData
      * @return MapType
      */
-    static function createFromData(DataAbstract $schemaObjectData)
+    static function createFromItemData(DataAbstract $additionalPropertiesData)
     {
-        return new self(CollectionType::createItemsFromData(
-            $schemaObjectData, 'additionalProperties'));
+        return new self(TypeAbstract::createFromData($additionalPropertiesData));
     }
 }

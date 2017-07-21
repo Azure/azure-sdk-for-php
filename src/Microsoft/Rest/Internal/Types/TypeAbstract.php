@@ -4,7 +4,8 @@ namespace Microsoft\Rest\Internal\Types;
 use Microsoft\Rest\Internal\Client;
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\InvalidSchemaObjectException;
-use Microsoft\Rest\Internal\UnknownTypeException;
+use Microsoft\Rest\Internal\Types\Primitives\ObjectType;
+use Microsoft\Rest\Internal\Types\Primitives\PrimitiveTypeAbstract;
 
 abstract class TypeAbstract
 {
@@ -25,7 +26,7 @@ abstract class TypeAbstract
         /**
          * @var string
          */
-        $ref = $schemaObjectData->getChildValue('$ref');
+        $ref = $schemaObjectData->getChildValueOrNull('$ref');
         if ($ref !== null) {
             return new RefType($ref, $schemaObjectData);
         }
@@ -33,50 +34,23 @@ abstract class TypeAbstract
         /**
          * @var string
          */
-        $type = $schemaObjectData->getChildValue('type');
+        $type = $schemaObjectData->getChildValueOrNull('type');
         if ($type !== null) {
-            /**
-             * @var string
-             */
-            $format = $schemaObjectData->getChildValue('format');
             switch ($type) {
                 case 'array':
                     return ArrayType::createFromData($schemaObjectData);
                 case 'object':
-                    return MapType::createFromData($schemaObjectData);
-                case 'boolean':
-                    switch ($format) {
-                        case null: return new BooleanType();
-                    }
-                    break;
-                case 'string':
-                    switch ($format) {
-                        case null: return new StringType();
-                        case 'byte': return new Base64Type();
-                        case 'binary': return new BinaryType();
-                        case 'date': return new DateType();
-                        case 'date-time': return new DateTimeType();
-                        case 'password': return new PasswordType();
-                    }
-                    break;
-                case 'integer':
-                    switch ($format) {
-                        case 'int32': return new Int32Type();
-                        case 'int64': return new Int64Type();
-                    }
-                    break;
-                case 'number':
-                    switch ($format) {
-                        case 'float': return new FloatType();
-                        case 'double': return new DoubleType();
-                    }
-                    break;
+                    $additionalPropertiesData = $schemaObjectData->getChildOrNull('additionalProperties');
+                    return $additionalPropertiesData === null
+                        ? new ObjectType()
+                        : MapType::createFromItemData($additionalPropertiesData);
+                default:
+                    return PrimitiveTypeAbstract::createFromData($schemaObjectData);
             }
-            throw new UnknownTypeException($schemaObjectData);
         }
 
         // ClassType
-        $properties = $schemaObjectData->getChild('properties');
+        $properties = $schemaObjectData->getChildOrNull('properties');
         if ($properties !== null) {
             return ClassType::createFromData($properties);
         }
