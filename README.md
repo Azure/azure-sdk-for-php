@@ -172,3 +172,9 @@ class RedisClient
     ];
 }
 ```
+
+#### Data Type
+
+type  |format|PHP Type Information |
+------|------|---------------------|
+string|      |Primitives\StringType|
