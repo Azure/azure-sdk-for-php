@@ -1,3 +1,5 @@
+# Azure SDK for PHP
+
 ## Plan
 
 1. Make a branch from the
@@ -59,6 +61,7 @@ $asyncClient = $s.client.async();
 ```
 
 By default
+
 - sync
 - not raw
 - strongly typed
@@ -193,3 +196,4 @@ number |float            |FloatType           |
 number |double           |DoubleType          |
 number |decimal          |DecimalType         |
 
+#### Run-Time 
