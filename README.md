@@ -178,25 +178,65 @@ class RedisClient
 
 #### Data Types
 
-|type   |format           |properties          |PHP Type Information|PHP Run-Time Return Type|PHP Run-Time Accept Type|
-|-------|-----------------|--------------------|--------------------|------------------------|------------------------|
-|boolean|                 |                    |BooleanType         |boolean                 |(bool)$value            |
-|string |                 |                    |StringType          |string                  |(string)$value          |
-|string |byte             |                    |Base64Type          |string                  |(string)$value          |
-|string |binary           |                    |BinaryType          |string                  |(string)$value          |
-|string |date             |                    |DateType            |string                  |(string)$value          |
-|string |date-time        |                    |DateTimeType        |string                  |(string)$value          |
-|string |password         |                    |PasswordType        |string                  |(string)$value          |
-|string |duration         |                    |DurationType        |string                  |(string)$value          |
-|string |uuid             |                    |UuidType            |string                  |(string)$value          |
-|string |date-time-rfc1123|                    |DateTimeRfc1123Type |string                  |(string)$value          |
-|string |                 |enum                |EnumType            |string                  |(string)$value          |
-|integer|int32            |                    |Int32Type           |integer                 |(integer)$value         |
-|integer|int64            |                    |Int64Type           |string                  |(string)$value          |
-|number |float            |                    |FloatType           |float                   |(float)$value           |
-|number |double           |                    |DoubleType          |float                   |(float)$value           |
-|number |decimal          |                    |DecimalType         |string                  |(string)$value          |
-|array  |                 |items               |ArrayType           |T[]                     |(iterable)$value        |
-|object |                 |                    |ObjectType          |mixed                   |                        |
-|object |                 |additionalProperties|MapType             |T[]                     |(iterable)$value        |
-|       |                 |properties          |ClassType           |array                   |(ArrayAccess)$value     |
+|type   |format           |properties          |PHP Type Information|PHP Run-Time Type|
+|-------|-----------------|--------------------|--------------------|-----------------|
+|boolean|                 |                    |BooleanType         |boolean          |
+|string |                 |                    |StringType          |string           |
+|string |byte             |                    |Base64Type          |string           |
+|string |binary           |                    |BinaryType          |string           |
+|string |date             |                    |DateType            |string           |
+|string |date-time        |                    |DateTimeType        |string           |
+|string |password         |                    |PasswordType        |string           |
+|string |duration         |                    |DurationType        |string           |
+|string |uuid             |                    |UuidType            |string           |
+|string |date-time-rfc1123|                    |DateTimeRfc1123Type |string           |
+|string |                 |enum                |EnumType            |string           |
+|integer|int32            |                    |Int32Type           |integer          |
+|integer|int64            |                    |Int64Type           |string           |
+|number |float            |                    |FloatType           |float            |
+|number |double           |                    |DoubleType          |float            |
+|number |decimal          |                    |DecimalType         |string           |
+|array  |                 |items               |ArrayType           |iterable         |
+|object |                 |                    |ObjectType          |mixed            |
+|object |                 |additionalProperties|MapType             |iterable         |
+|       |                 |properties          |ClassType           |ArrayAccess      |
+
+## API Levels
+
+- dictionaries - PHP 5.6
+- static types - PHP 7.1
+  ```php
+  class X
+  {
+      public $a;
+
+      function setA(string $a) : this
+      {
+          return $this;
+      }
+
+      function unsetA() : this
+      {
+          unset($this->a);
+          return $this;
+      }
+
+      // optional
+      function getA() : string
+      {
+          return $this->a;
+      }
+
+      // optional
+      function isASet() : bool
+      {
+          return isset($this->a);
+      }
+
+      // optional
+      function getAOrNull() : string
+      {
+          return isset($this->a) ? $this->a : null;
+      }
+  }
+  ```
