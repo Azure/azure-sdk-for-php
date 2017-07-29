@@ -2,6 +2,7 @@
 namespace Microsoft\Rest\Internal;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
+use Microsoft\Rest\Internal\Types\TypeAbstract;
 use Microsoft\Rest\OperationInterface;
 use Microsoft\Rest\OperationResultInterface;
 
@@ -31,7 +32,14 @@ final class Operation implements OperationInterface
         {
             $parameters[$child->getKey()] = Parameter::createFromData($child);
         }
-        return new Operation($client, $operationId, $parameters);
+        $responses = [];
+        foreach ($operationData->getChild('responses')->getChildren() as $child)
+        {
+            $schema = $child->getChildOrNull('schema');
+            $responses[intval($child->getKey())]
+                = $schema !== null ? TypeAbstract::createFromData($schema) : null;
+        }
+        return new Operation($client, $operationId, $parameters, $responses);
     }
 
     /**
@@ -50,14 +58,25 @@ final class Operation implements OperationInterface
     private $parameters;
 
     /**
+     * @var TypeAbstract[]
+     */
+    private $responses;
+
+    /**
      * @param Client $client
      * @param string $operationId
      * @param Parameter[] $parameters
+     * @param TypeAbstract[] $responses;
      */
-    private function __construct(Client $client, $operationId, array $parameters)
+    private function __construct(
+        Client $client,
+        $operationId,
+        array $parameters,
+        array $responses)
     {
         $this->client = $client;
         $this->operationId = $operationId;
         $this->parameters = $parameters;
+        $this->responses = $responses;
     }
 }

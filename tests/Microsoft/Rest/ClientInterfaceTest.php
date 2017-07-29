@@ -3,6 +3,7 @@ namespace Microsoft\Rest;
 
 use Microsoft\Rest\Internal\ExpectedPropertyException;
 use Microsoft\Rest\Internal\Operation;
+use phpDocumentor\Reflection\Types\String_;
 use PHPUnit\Framework\TestCase;
 
 class ClientInterfaceTest extends TestCase
@@ -11,9 +12,20 @@ class ClientInterfaceTest extends TestCase
     {
         $operationData = [
             'operationId' => 'someOperation',
-            'parameters' => []
+            'parameters' => [],
+            'responses' => [
+                '200' => [
+                    'schema' => [
+                        '$ref' => '#/definitions/A'
+                    ]
+                ]
+            ]
         ];
-        $client = ClientStatic::createFromData([]);
+        $client = ClientStatic::createFromData([
+            'A' => [
+                'type' => 'string'
+            ]
+        ]);
         /**
          * @var Operation
          */
@@ -25,6 +37,8 @@ class ClientInterfaceTest extends TestCase
         $this->assertEquals('someOperation', $operationId);
         $parameters = ClientStaticTest::getPrivate($operation, 'parameters');
         $this->assertEquals([], $parameters);
+        $responses = ClientStaticTest::getPrivate($operation, 'responses');
+        $this->assertEquals([200 => new String_()], $responses);
     }
 
     function testCreateOperationFromDataThrowsException()
