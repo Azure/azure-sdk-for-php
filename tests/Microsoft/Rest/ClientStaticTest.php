@@ -35,7 +35,7 @@ class ClientStaticTest extends TestCase
     function testCreateFromData()
     {
         $definitionsData = [];
-        $client = ClientStatic::createFromData($definitionsData);
+        $client = RunTimeStatic::create()->createClientFromData($definitionsData);
         $this->assertNotNull($client);
 
         // private fields:
@@ -53,7 +53,7 @@ class ClientStaticTest extends TestCase
             "Sku" => []
         ];
         try {
-            ClientStatic::createFromData($definitionsData);
+            RunTimeStatic::create()->createClientFromData($definitionsData);
         } catch (InvalidSchemaObjectException $e) {
             $expected = "invalid schema object\n"
                 . "Object: []\n"
@@ -72,7 +72,7 @@ class ClientStaticTest extends TestCase
             ]
         ];
         try {
-            ClientStatic::createFromData($definitionsData);
+            RunTimeStatic::create()->createClientFromData($definitionsData);
         } catch (UnknownTypeException $e) {
             $expected = "unknown type\n"
                 . "Object: ['type'=>'unknown-type']\n"
@@ -153,7 +153,7 @@ class ClientStaticTest extends TestCase
                 ]
             ]
         ];
-        $client = ClientStatic::createFromData($definitionsData);
+        $client = RunTimeStatic::create()->createClientFromData($definitionsData);
         $this->assertNotNull($client);
 
         // private fields:
@@ -194,7 +194,7 @@ class ClientStaticTest extends TestCase
             ]
         ];
         try {
-            ClientStatic::createFromData($definitionsData);
+            RunTimeStatic::create()->createClientFromData($definitionsData);
         } catch (UnknownTypeException $e) {
             $expected = "unknown type\n"
                 . "Object: ['\$ref'=>'unknown-type']\n"

@@ -1,19 +1,19 @@
 <?php
-namespace Microsoft\Rest;
+namespace Microsoft\Rest\Internal;
 
-use Microsoft\Rest\Internal\Client;
+use Microsoft\Rest\RunTimeInterface;
+use Microsoft\Rest\ClientInterface;
 use Microsoft\Rest\Internal\Data\RootData;
 
-final class ClientStatic
+final class RunTime implements RunTimeInterface
 {
+
     /**
      * @param array $definitionsData see https://swagger.io/specification/#definitionsObject for more information.
      * @return ClientInterface
      */
-    static function createFromData(array $definitionsData)
+    function createClientFromData(array $definitionsData)
     {
         return Client::createFromData(RootData::create($definitionsData, '$definitions'));
     }
-
-    private function __construct() { }
 }
