@@ -20,7 +20,7 @@ abstract class TypeAbstract
      * @return TypeAbstract
      * @throws \Exception
      */
-    static function createFromData(DataAbstract $schemaObjectData)
+    protected static function createFromDataWithRefs(DataAbstract $schemaObjectData)
     {
         // https://swagger.io/specification/#data-types-12
         /**
@@ -38,24 +38,29 @@ abstract class TypeAbstract
         if ($type !== null) {
             switch ($type) {
                 case 'array':
-                    return ArrayType::createFromData($schemaObjectData);
+                    return ArrayType::createFromDataWithRefs($schemaObjectData);
                 case 'object':
                     $additionalPropertiesData = $schemaObjectData->getChildOrNull('additionalProperties');
                     return $additionalPropertiesData === null
                         ? new ObjectType()
                         : MapType::createFromItemData($additionalPropertiesData);
                 default:
-                    return PrimitiveTypeAbstract::createFromData($schemaObjectData);
+                    return PrimitiveTypeAbstract::createFromDataWithRefs($schemaObjectData);
             }
         }
 
         // ClassType
         $properties = $schemaObjectData->getChildOrNull('properties');
         if ($properties !== null) {
-            return ClassType::createFromData($properties);
+            return ClassType::createFromDataWithRefs($properties);
         }
 
         throw new InvalidSchemaObjectException($schemaObjectData);
+    }
+
+    static function createFromData(Client $client, DataAbstract $schemaObjectData)
+    {
+        return self::createFromDataWithRefs($schemaObjectData)->removeRefTypes($client);
     }
 
     /**
@@ -71,7 +76,7 @@ abstract class TypeAbstract
         $typeMap = [];
         foreach ($schemaObjectMapData->getChildren() as $child)
         {
-            $typeMap[$prefix . $child->getKey()] = TypeAbstract::createFromData($child);
+            $typeMap[$prefix . $child->getKey()] = TypeAbstract::createFromDataWithRefs($child);
         }
         return $typeMap;
     }

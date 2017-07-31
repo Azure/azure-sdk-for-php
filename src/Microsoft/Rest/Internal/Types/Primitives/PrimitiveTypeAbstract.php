@@ -22,7 +22,7 @@ abstract class PrimitiveTypeAbstract extends TypeAbstract
      * @return TypeAbstract
      * @throws UnknownTypeException
      */
-    static function createFromData(DataAbstract $schemaObjectData)
+    static function createFromDataWithRefs(DataAbstract $schemaObjectData)
     {
         $type = $schemaObjectData->getChildValueOrNull('type');
         $format = $schemaObjectData->getChildValueOrNull('format');

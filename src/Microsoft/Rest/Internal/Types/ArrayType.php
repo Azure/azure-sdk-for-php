@@ -22,8 +22,8 @@ final class ArrayType extends CollectionType
      * @param DataAbstract $schemaObjectData
      * @return ArrayType
      */
-    static function createFromData(DataAbstract $schemaObjectData)
+    static function createFromDataWithRefs(DataAbstract $schemaObjectData)
     {
-        return new self(TypeAbstract::createFromData($schemaObjectData->getChild('items')));
+        return new self(TypeAbstract::createFromDataWithRefs($schemaObjectData->getChild('items')));
     }
 }

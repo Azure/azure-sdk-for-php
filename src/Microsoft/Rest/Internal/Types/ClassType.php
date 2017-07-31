@@ -18,7 +18,7 @@ final class ClassType extends TypeAbstract
      * @param DataAbstract $propertiesData
      * @return ClassType
      */
-    static function createFromData(DataAbstract $propertiesData)
+    static function createFromDataWithRefs(DataAbstract $propertiesData)
     {
         return new ClassType(TypeAbstract::createMapFromData($propertiesData));
     }

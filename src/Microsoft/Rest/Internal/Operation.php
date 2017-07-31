@@ -30,14 +30,14 @@ final class Operation implements OperationInterface
         $parametersData = $operationData->getChild('parameters');
         foreach ($parametersData->getChildren() as $child)
         {
-            $parameters[$child->getKey()] = Parameter::createFromData($child);
+            $parameters[$child->getKey()] = Parameter::createFromData($client, $child);
         }
         $responses = [];
         foreach ($operationData->getChild('responses')->getChildren() as $child)
         {
             $schema = $child->getChildOrNull('schema');
             $responses[intval($child->getKey())]
-                = $schema !== null ? TypeAbstract::createFromData($schema) : null;
+                = $schema !== null ? TypeAbstract::createFromData($client, $schema) : null;
         }
         return new Operation($client, $operationId, $parameters, $responses);
     }

@@ -19,6 +19,6 @@ final class MapType extends CollectionType
      */
     static function createFromItemData(DataAbstract $additionalPropertiesData)
     {
-        return new self(TypeAbstract::createFromData($additionalPropertiesData));
+        return new self(TypeAbstract::createFromDataWithRefs($additionalPropertiesData));
     }
 }
