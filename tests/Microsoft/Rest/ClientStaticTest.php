@@ -34,8 +34,8 @@ class ClientStaticTest extends TestCase
 
     function testCreateFromData()
     {
-        $definitionsData = [];
-        $client = RunTimeStatic::create()->createClientFromData($definitionsData);
+        $swaggerObjectData = ['host' => 'example.com', 'definitions' => []];
+        $client = RunTimeStatic::create()->createClientFromData($swaggerObjectData);
         $this->assertNotNull($client);
 
         // private fields:
@@ -49,15 +49,18 @@ class ClientStaticTest extends TestCase
 
     function testCreateFromDataThrowInvalidSchemaObjectException()
     {
-        $definitionsData = [
-            "Sku" => []
+        $swaggerObjectData = [
+            'host' => 'example.com',
+            'definitions' => [
+                'Sku' => []
+            ]
         ];
         try {
-            RunTimeStatic::create()->createClientFromData($definitionsData);
+            RunTimeStatic::create()->createClientFromData($swaggerObjectData);
         } catch (InvalidSchemaObjectException $e) {
             $expected = "invalid schema object\n"
                 . "Object: []\n"
-                . "Path: \$definitions['Sku']";
+                . "Path: ['definitions']['Sku']";
             $this->assertEquals($expected, $e->getMessage());
             return;
         }
@@ -67,8 +70,11 @@ class ClientStaticTest extends TestCase
     function testCreateFromDataThrowUnknownTypeException()
     {
         $definitionsData = [
-            "Sku" => [
-                "type" => "unknown-type"
+            'host' => 'example.com',
+            'definitions' => [
+                'Sku' => [
+                    'type' => 'unknown-type'
+                ]
             ]
         ];
         try {
@@ -76,7 +82,7 @@ class ClientStaticTest extends TestCase
         } catch (UnknownTypeException $e) {
             $expected = "unknown type\n"
                 . "Object: ['type'=>'unknown-type']\n"
-                . "Path: \$definitions['Sku']";
+                . "Path: ['definitions']['Sku']";
             $this->assertEquals($expected, $e->getMessage());
             return;
         }
@@ -153,7 +159,10 @@ class ClientStaticTest extends TestCase
                 ]
             ]
         ];
-        $client = RunTimeStatic::create()->createClientFromData($definitionsData);
+        $client = RunTimeStatic::create()->createClientFromData([
+            'host' => 'localhost',
+            'definitions' => $definitionsData
+        ]);
         $this->assertNotNull($client);
 
         // private fields:
@@ -188,17 +197,20 @@ class ClientStaticTest extends TestCase
 
     function testCreateFromDataThrowsUnknownNameException()
     {
-        $definitionsData = [
-            "Sku" => [
-                '$ref' => "unknown-type"
+        $swaggerObjectData = [
+            'host' => 'localhost',
+            'definitions' => [
+                'Sku' => [
+                    '$ref' => 'unknown-type'
+                ]
             ]
         ];
         try {
-            RunTimeStatic::create()->createClientFromData($definitionsData);
+            RunTimeStatic::create()->createClientFromData($swaggerObjectData);
         } catch (UnknownTypeException $e) {
             $expected = "unknown type\n"
                 . "Object: ['\$ref'=>'unknown-type']\n"
-                . "Path: \$definitions['Sku']";
+                . "Path: ['definitions']['Sku']";
             $this->assertEquals($expected, $e->getMessage());
             return;
         }

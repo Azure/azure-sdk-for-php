@@ -9,11 +9,11 @@ final class RunTime implements RunTimeInterface
 {
 
     /**
-     * @param array $definitionsData see https://swagger.io/specification/#definitionsObject for more information.
+     * @param array $schemaObjectData see https://swagger.io/specification/#definitionsObject for more information.
      * @return ClientInterface
      */
-    function createClientFromData(array $definitionsData)
+    function createClientFromData(array $schemaObjectData)
     {
-        return Client::createFromData(RootData::create($definitionsData, '$definitions'));
+        return Client::createFromData(RootData::create($schemaObjectData, ''));
     }
 }

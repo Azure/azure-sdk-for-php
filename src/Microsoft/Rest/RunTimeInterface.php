@@ -4,8 +4,8 @@ namespace Microsoft\Rest;
 interface RunTimeInterface
 {
     /**
-     * @param array $definitionsData see https://swagger.io/specification/#definitionsObject for more information.
+     * @param array $schemaObjectData see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#swagger-object for more information.
      * @return ClientInterface
      */
-    function createClientFromData(array $definitionsData);
+    function createClientFromData(array $schemaObjectData);
 }

@@ -6,11 +6,16 @@ use Microsoft\Rest\Internal\Types\TypeAbstract;
 
 final class Parameter
 {
-    static function createFromData(Client $client, DataAbstract $parameterData)
+    /**
+     * @param TypeAbstract[] $typeMap
+     * @param DataAbstract $parameterData
+     * @return Parameter
+     */
+    static function createFromData(array $typeMap, DataAbstract $parameterData)
     {
         $schemaData = $parameterData->getChildOrNull('schema');
         $type = TypeAbstract::createFromData(
-            $client,
+            $typeMap,
             $schemaData !== null ? $schemaData : $parameterData);
         return new self(
             $parameterData->getChildValue('name'),

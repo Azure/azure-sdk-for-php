@@ -10,10 +10,10 @@ use Microsoft\Rest\Internal\Types\Primitives\PrimitiveTypeAbstract;
 abstract class TypeAbstract
 {
     /**
-     * @param Client $client
+     * @param TypeAbstract[] $typeMap
      * @return TypeAbstract
      */
-    abstract function removeRefTypes(Client $client);
+    abstract function removeRefTypes(array $typeMap);
 
     /**
      * @param DataAbstract $schemaObjectData see https://swagger.io/specification/#schemaObject
@@ -58,9 +58,14 @@ abstract class TypeAbstract
         throw new InvalidSchemaObjectException($schemaObjectData);
     }
 
-    static function createFromData(Client $client, DataAbstract $schemaObjectData)
+    /**
+     * @param TypeAbstract[] $typeMap
+     * @param DataAbstract $schemaObjectData
+     * @return TypeAbstract
+     */
+    static function createFromData(array $typeMap, DataAbstract $schemaObjectData)
     {
-        return self::createFromDataWithRefs($schemaObjectData)->removeRefTypes($client);
+        return self::createFromDataWithRefs($schemaObjectData)->removeRefTypes($typeMap);
     }
 
     /**
@@ -79,5 +84,22 @@ abstract class TypeAbstract
             $typeMap[$prefix . $child->getKey()] = TypeAbstract::createFromDataWithRefs($child);
         }
         return $typeMap;
+    }
+
+    /**
+     * @param TypeAbstract[] $definitions
+     * @param TypeAbstract[] $typeMap
+     * @return TypeAbstract[]
+     */
+    static function removeRefTypesFromMap(array $definitions, array $typeMap)
+    {
+        /**
+         * @var TypeAbstract[]
+         */
+        $result = [];
+        foreach ($typeMap as $name => $value) {
+            $result[$name] = $value->removeRefTypes($definitions);
+        }
+        return $result;
     }
 }

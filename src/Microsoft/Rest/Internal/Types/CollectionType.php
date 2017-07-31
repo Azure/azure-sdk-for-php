@@ -7,12 +7,12 @@ use Microsoft\Rest\Internal\Data\DataAbstract;
 abstract class CollectionType extends TypeAbstract
 {
     /**
-     * @param Client $client
+     * @param TypeAbstract[] $typeMap
      * @return TypeAbstract
      */
-    function removeRefTypes(Client $client)
+    function removeRefTypes(array $typeMap)
     {
-        $this->items = $this->items->removeRefTypes($client);
+        $this->items = $this->items->removeRefTypes($typeMap);
         return $this;
     }
 

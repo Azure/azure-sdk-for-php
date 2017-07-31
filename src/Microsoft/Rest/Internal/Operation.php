@@ -18,34 +18,29 @@ final class Operation implements OperationInterface
     }
 
     /**
-     * @param Client $client
+     * @param TypeAbstract[] $typeMap
      * @param DataAbstract $operationData
      * @return OperationInterface
      * @throws ExpectedPropertyException
      */
-    static function createFromOperationData(Client $client, DataAbstract $operationData)
+    static function createFromOperationData(array $typeMap, DataAbstract $operationData)
     {
         $operationId = $operationData->getChildValue('operationId');
         $parameters = [];
         $parametersData = $operationData->getChild('parameters');
         foreach ($parametersData->getChildren() as $child)
         {
-            $parameters[$child->getKey()] = Parameter::createFromData($client, $child);
+            $parameters[$child->getKey()] = Parameter::createFromData($typeMap, $child);
         }
         $responses = [];
         foreach ($operationData->getChild('responses')->getChildren() as $child)
         {
             $schema = $child->getChildOrNull('schema');
             $responses[intval($child->getKey())]
-                = $schema !== null ? TypeAbstract::createFromData($client, $schema) : null;
+                = $schema !== null ? TypeAbstract::createFromData($typeMap, $schema) : null;
         }
-        return new Operation($client, $operationId, $parameters, $responses);
+        return new Operation($operationId, $parameters, $responses);
     }
-
-    /**
-     * @var Client
-     */
-    private $client;
 
     /**
      * @var string
@@ -63,18 +58,15 @@ final class Operation implements OperationInterface
     private $responses;
 
     /**
-     * @param Client $client
      * @param string $operationId
      * @param Parameter[] $parameters
      * @param TypeAbstract[] $responses;
      */
     private function __construct(
-        Client $client,
         $operationId,
         array $parameters,
         array $responses)
     {
-        $this->client = $client;
         $this->operationId = $operationId;
         $this->parameters = $parameters;
         $this->responses = $responses;

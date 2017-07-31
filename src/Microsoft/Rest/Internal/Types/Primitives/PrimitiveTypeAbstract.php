@@ -9,10 +9,10 @@ use Microsoft\Rest\Internal\UnknownTypeException;
 abstract class PrimitiveTypeAbstract extends TypeAbstract
 {
     /**
-     * @param Client $client
+     * @param TypeAbstract[] $typeMap
      * @return TypeAbstract
      */
-    function removeRefTypes(Client $client)
+    function removeRefTypes(array $typeMap)
     {
         return $this;
     }

@@ -18,6 +18,20 @@ final class RefType extends TypeAbstract
     }
 
     /**
+     * @param TypeAbstract[] $typeMap
+     * @return TypeAbstract
+     * @throws UnknownTypeException
+     */
+    function removeRefTypes(array $typeMap)
+    {
+        $ref = $this->ref;
+        if (!isset($typeMap[$ref])) {
+            throw new UnknownTypeException($this->data);
+        }
+        return $typeMap[$ref];
+    }
+
+    /**
      * @var string
      */
     private $ref;
@@ -26,18 +40,4 @@ final class RefType extends TypeAbstract
      * @var DataAbstract
      */
     private $data;
-
-    /**
-     * @param Client $client
-     * @return TypeAbstract
-     * @throws UnknownTypeException
-     */
-    function removeRefTypes(Client $client)
-    {
-        $result = $client->getType($this->ref);
-        if ($result === null) {
-            throw new UnknownTypeException($this->data);
-        }
-        return $result;
-    }
 }

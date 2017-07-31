@@ -19,7 +19,7 @@ final class Client implements ClientInterface
     function createOperationFromData($path, $httpMethod, array $operationData)
     {
         return Operation::createFromOperationData(
-            $this,
+            $this->typeMap,
             RootData::create(
                 $operationData,
                 MapData::appendPathKey(MapData::appendPathKey('$paths', $path), $httpMethod)));
@@ -31,26 +31,15 @@ final class Client implements ClientInterface
      */
     static function createFromData(DataAbstract $definitionsData)
     {
-        $client =new Client(TypeAbstract::createMapFromData(
-            $definitionsData, '#/definitions/'));
-        $client->removeRefTypesFromMap($client->typeMap);
+        $typeMap = TypeAbstract::createMapFromData(
+            $definitionsData->getChild('definitions'),
+            '#/definitions/');
+        $typeMap = TypeAbstract::removeRefTypesFromMap($typeMap, $typeMap);
+        $client =new Client(
+            $definitionsData->getChildValue('host'),
+            [],
+            $typeMap);
         return $client;
-    }
-
-    /**
-     * @param TypeAbstract[] $typeMap
-     * @return TypeAbstract[]
-     */
-    function removeRefTypesFromMap(array $typeMap)
-    {
-        /**
-         * @var TypeAbstract[]
-         */
-        $result = [];
-        foreach ($typeMap as $name => $value) {
-            $result[$name] = $value->removeRefTypes($this);
-        }
-        return $result;
     }
 
     /**
@@ -63,15 +52,32 @@ final class Client implements ClientInterface
     }
 
     /**
+     * @var string
+     */
+    private $host;
+
+    /**
+     * @var OperationInterface
+     */
+    private $operations;
+
+    /**
      * @var TypeAbstract[]
      */
     private $typeMap;
 
     /**
+     * @param string $host
+     * @param array $operations
      * @param TypeAbstract[] $typeMap
      */
-    private function __construct(array $typeMap)
+    private function __construct(
+        $host,
+        array $operations,
+        array $typeMap)
     {
+        $this->host = $host;
+        $this->operations = $operations;
         $this->typeMap = $typeMap;
     }
 }

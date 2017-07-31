@@ -34,8 +34,11 @@ class ClientInterfaceTest extends TestCase
             ]
         ];
         $client = RunTimeStatic::create()->createClientFromData([
-            'A' => [
-                'type' => 'string'
+            'host' => 'example.com',
+            'definitions' => [
+                'A' => [
+                    'type' => 'string'
+                ]
             ]
         ]);
         /**
@@ -60,7 +63,10 @@ class ClientInterfaceTest extends TestCase
 
     function testCreateOperationFromDataThrowsException()
     {
-        $client = RunTimeStatic::create()->createClientFromData([]);
+        $client = RunTimeStatic::create()->createClientFromData([
+            'host' => 'example.com',
+            'definitions' => []
+        ]);
         /**
          * @var Operation
          */

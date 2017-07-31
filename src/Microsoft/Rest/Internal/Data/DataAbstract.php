@@ -63,7 +63,7 @@ abstract class DataAbstract
 
     /**
      * @param $key
-     * @return MapData
+     * @return mixed
      */
     function getChildValue($key)
     {

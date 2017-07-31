@@ -24,12 +24,12 @@ final class ClassType extends TypeAbstract
     }
 
     /**
-     * @param Client $client
+     * @param TypeAbstract[] $typeMap
      * @return TypeAbstract
      */
-    function removeRefTypes(Client $client)
+    function removeRefTypes(array $typeMap)
     {
-        $this->propertyMap = $client->removeRefTypesFromMap($this->propertyMap);
+        $this->propertyMap = TypeAbstract::removeRefTypesFromMap($typeMap, $this->propertyMap);
         return $this;
     }
 
