@@ -27,4 +27,13 @@ final class ParameterPathPart extends PathPartAbstract
      * @var Parameter
      */
     private $parameter;
+
+    /**
+     * @param array $parameters
+     * @return string
+     */
+    function getValue(array $parameters)
+    {
+        return strval($parameters[$this->parameter->getName()]);
+    }
 }

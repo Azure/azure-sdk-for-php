@@ -4,6 +4,7 @@ namespace Microsoft\Rest;
 use Microsoft\Rest\Internal\ExpectedPropertyException;
 use Microsoft\Rest\Internal\Operation;
 use Microsoft\Rest\Internal\Parameter;
+use Microsoft\Rest\Internal\Parameters;
 use Microsoft\Rest\Internal\Path\ConstPathPart;
 use Microsoft\Rest\Internal\Path\ParameterPathPart;
 use Microsoft\Rest\Internal\Types\Primitives\StringType;
@@ -56,13 +57,17 @@ class ClientInterfaceTest extends TestCase
         // private
         $operationId = ClientStaticTest::getPrivate($operation, 'operationId');
         $this->assertEquals('someOperation', $operationId);
-        $queryParameters = ClientStaticTest::getPrivate($operation, 'queryParameters');
+        /**
+         * @var Parameters
+         */
+        $parameters = ClientStaticTest::getPrivate($operation, 'parameters');
+        $queryParameters = ClientStaticTest::getPrivate($parameters, 'query');
         $this->assertEquals(
             [
                 new Parameter('a', 'query', new StringType())
             ],
             $queryParameters);
-        $path = ClientStaticTest::getPrivate($operation, 'path');
+        $path = ClientStaticTest::getPrivate($parameters, 'path');
         $this->assertEquals(
             [
                 new ConstPathPart('somepath/'),

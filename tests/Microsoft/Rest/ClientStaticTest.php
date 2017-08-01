@@ -217,10 +217,11 @@ class ClientStaticTest extends TestCase
          */
         $operationMap = self::getPrivate($client, 'operationMap');
         $operation = $operationMap['someoperation'];
+        $parameters = self::getPrivate($operation, 'parameters');
         /**
          * @var Parameter[]
          */
-        $queryParameters = self::getPrivate($operation, 'queryParameters');
+        $queryParameters = self::getPrivate($parameters, 'query');
         $parameter = $queryParameters[0];
         $type = self::getPrivate($parameter, 'type');
 

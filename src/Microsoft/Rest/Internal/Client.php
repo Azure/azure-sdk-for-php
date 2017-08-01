@@ -29,40 +29,28 @@ final class Client implements ClientInterface
             '#/definitions/');
         $typeMap = TypeAbstract::removeRefTypesFromMap($typeMap, $typeMap);
 
-        /**
-         * @var OperationInterface[]
-         */
+        /** @var string */
+        $host = $swaggerObjectData->getChildValue('host');
+
+        /** @var OperationInterface[] */
         $operationMap = [];
         foreach ($swaggerObjectData->getChild('paths')->getChildren() as $pathItemObjectData) {
             $pathStr = $pathItemObjectData->getKey();
             $path = PathStrPart::parse($pathStr);
             foreach ($pathItemObjectData->getChildren() as $operationData) {
                 $httpMethod = $operationData->getKey();
-                $operation = Operation::createFromOperationData($typeMap, $operationData, $path, $httpMethod);
+                $operation = Operation::createFromOperationData(
+                    $typeMap,
+                    $host,
+                    $operationData,
+                    $path,
+                    $httpMethod);
                 $operationMap[$operation->getId()] = $operation;
             }
         }
 
-        $client =new Client(
-            $swaggerObjectData->getChildValue('host'),
-            $operationMap);
-
-        return $client;
+        return new Client($operationMap);
     }
-
-    /**
-     * @param string $name
-     * @return TypeAbstract|null
-     */
-    //function getType($name)
-    //{
-    //    return isset($this->typeMap[$name]) ? $this->typeMap[$name] : null;
-    //}
-
-    /**
-     * @var string
-     */
-    private $host;
 
     /**
      * @var OperationInterface[]
@@ -70,12 +58,10 @@ final class Client implements ClientInterface
     private $operationMap;
 
     /**
-     * @param string $host
      * @param OperationInterface[] $operationMap
      */
-    private function __construct($host, array $operationMap)
+    private function __construct(array $operationMap)
     {
-        $this->host = $host;
         $this->operationMap = $operationMap;
     }
 }

@@ -2,7 +2,6 @@
 namespace Microsoft\Rest\Internal;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
-use Microsoft\Rest\Internal\Path\PathPartAbstract;
 use Microsoft\Rest\Internal\Path\PathStrPart;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 use Microsoft\Rest\OperationInterface;
@@ -16,6 +15,9 @@ final class Operation implements OperationInterface
      */
     function call(array $parameters)
     {
+        $path = $this->parameters->getPath($parameters);
+        $query = $this->parameters->getQuery($parameters);
+        $url = 'https://' . $this->host . $path . '?' . $query;
         return new OperationResult();
     }
 
@@ -29,60 +31,22 @@ final class Operation implements OperationInterface
 
     /**
      * @param TypeAbstract[] $typeMap
+     * @param string $host
      * @param DataAbstract $operationData
      * @param PathStrPart[] $pathStrParts
      * @param string $httpMethod
      * @return Operation
-     * @throws \Exception
      */
     static function createFromOperationData(
-        array $typeMap, DataAbstract $operationData, array $pathStrParts, $httpMethod)
+        array $typeMap, $host, DataAbstract $operationData, array $pathStrParts, $httpMethod)
     {
         $operationId = $operationData->getChildValue('operationId');
 
-        /**
-         * @var Parameter[]
-         */
-        $pathParameters = [];
-        /**
-         * @var Parameter[]
-         */
-        $queryParameters = [];
-        /**
-         * @var Parameter
-         */
-        $body = null;
-        /**
-         * @var Parameter[]
-         */
-        $headerParameters = [];
-        foreach ($operationData->getChild('parameters')->getChildren() as $child)
-        {
-            $parameter = Parameter::createFromData($typeMap, $child);
-            $in = $parameter->getIn();
-            switch ($parameter->getIn()) {
-                case 'path':
-                    $pathParameters[$parameter->getName()] = $parameter;
-                    break;
-                case 'query':
-                    $queryParameters[] = $parameter;
-                    break;
-                case 'header':
-                    $headerParameters[] = $parameter;
-                    break;
-                case 'body':
-                    $body = $parameter;
-                    break;
-                default:
-                    throw new \Exception('unknown \'in\':' . $in);
-                    break;
-            }
-        }
-
-        $path = [];
-        foreach ($pathStrParts as $part) {
-            $path[] = $part->createPathPart($pathParameters, $operationId);
-        }
+        $parameters = Parameters::create(
+            $typeMap,
+            $operationId,
+            $operationData->getChild('parameters'),
+            $pathStrParts);
 
         /**
          * @var TypeAbstract[]
@@ -96,19 +60,17 @@ final class Operation implements OperationInterface
         }
 
         return new Operation(
-            $path,
+            $host,
             $httpMethod,
             $operationId,
-            $queryParameters,
-            $headerParameters,
-            $responses,
-            $body);
+            $parameters,
+            $responses);
     }
 
     /**
-     * @var PathPartAbstract[]
+     * @var string
      */
-    private $path;
+    private $host;
 
     /**
      * @var string
@@ -121,14 +83,9 @@ final class Operation implements OperationInterface
     private $operationId;
 
     /**
-     * @var Parameter[]
+     * @var Parameters
      */
-    private $queryParameters;
-
-    /**
-     * @var Parameter[]
-     */
-    private $headerParameters;
+    private $parameters;
 
     /**
      * @var TypeAbstract[]
@@ -136,34 +93,23 @@ final class Operation implements OperationInterface
     private $responses;
 
     /**
-     * @var Parameter|null
-     */
-    private $body;
-
-    /**
-     * @param PathPartAbstract[] $path
+     * @param string $host
      * @param string $httpMethod
      * @param string $operationId
-     * @param Parameter[] $queryParameters
-     * @param Parameter[] $headerParameters
+     * @param Parameters $parameters
      * @param TypeAbstract[] $responses
-     * @param Parameter|null $body
      */
     private function __construct(
-        array $path,
+        $host,
         $httpMethod,
         $operationId,
-        array $queryParameters,
-        array $headerParameters,
-        array $responses,
-        Parameter $body = null)
+        Parameters $parameters,
+        array $responses)
     {
-        $this->path = $path;
+        $this->host = $host;
         $this->httpMethod = $httpMethod;
         $this->operationId = $operationId;
-        $this->queryParameters = $queryParameters;
-        $this->headerParameters = $headerParameters;
+        $this->parameters = $parameters;
         $this->responses = $responses;
-        $this->body = $body;
     }
 }

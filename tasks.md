@@ -15,3 +15,11 @@
     1. Support for strong types. PHP 7, PHP 7.1 ?
     1. AutoRest should generate interfaces and static classes instead of concrete classes.
 1. Generate examples for unit testing.
+1. Select HTTP framework:
+   - guzzle - 39,404,000
+   - laravel - 5,508,000   
+   - zend-diactoros - 4,986,000   
+   - Slim - 3,613,000
+   - Lumen -  160,000
+   - Epiphany - 911
+   - Frapi - ?

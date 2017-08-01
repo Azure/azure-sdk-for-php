@@ -15,4 +15,13 @@ final class ConstPathPart extends PathPartAbstract
      * @var string
      */
     private $value;
+
+    /**
+     * @param array $parameters
+     * @return string
+     */
+    function getValue(array $parameters)
+    {
+        return $this->value;
+    }
 }
