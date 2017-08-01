@@ -35,6 +35,11 @@ class ClientInterfaceTest extends TestCase
         ];
         $client = RunTimeStatic::create()->createClientFromData([
             'host' => 'example.com',
+            'paths' => [
+                'somepath' => [
+                    'get' => $operationData
+                ]
+            ],
             'definitions' => [
                 'A' => [
                     'type' => 'string'
@@ -44,8 +49,7 @@ class ClientInterfaceTest extends TestCase
         /**
          * @var Operation
          */
-        $operation = $client->createOperationFromData(
-            'somepath', 'get', $operationData);
+        $operation = $client->createOperation('someOperation');
 
         // private
         $operationId = ClientStaticTest::getPrivate($operation, 'operationId');
@@ -63,20 +67,24 @@ class ClientInterfaceTest extends TestCase
 
     function testCreateOperationFromDataThrowsException()
     {
-        $client = RunTimeStatic::create()->createClientFromData([
-            'host' => 'example.com',
-            'definitions' => []
-        ]);
         /**
          * @var Operation
          */
         try {
-            $operation = $client->createOperationFromData('somepath', 'get', []);
+            $client = RunTimeStatic::create()->createClientFromData([
+                'host' => 'example.com',
+                'definitions' => [],
+                'paths' => [
+                    'somepath' => [
+                        'get' => []
+                    ]
+                ]
+            ]);
         } catch (ExpectedPropertyException $e) {
             $this->assertEquals(
                 'expected property: operationId'
                     . "\nObject: []"
-                    . "\nPath: \$paths['somepath']['get']",
+                    . "\nPath: ['paths']['somepath']['get']",
                 $e->getMessage());
             return;
         }

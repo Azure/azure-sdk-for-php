@@ -18,9 +18,17 @@ final class Operation implements OperationInterface
     }
 
     /**
+     * @return string
+     */
+    function getId()
+    {
+        return $this->operationId;
+    }
+
+    /**
      * @param TypeAbstract[] $typeMap
      * @param DataAbstract $operationData
-     * @return OperationInterface
+     * @return Operation
      * @throws ExpectedPropertyException
      */
     static function createFromOperationData(array $typeMap, DataAbstract $operationData)

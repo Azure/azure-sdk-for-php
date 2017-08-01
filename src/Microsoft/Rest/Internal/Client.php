@@ -11,34 +11,43 @@ use Microsoft\Rest\OperationInterface;
 final class Client implements ClientInterface
 {
     /**
-     * @param string $path see https://swagger.io/docs/specification/paths-and-operations/ for path templating.
-     * @param string $httpMethod see https://swagger.io/specification/#pathItemObject for more details.
-     * @param array $operationData see https://swagger.io/specification/#operationObject for more details.
+     * @param string $operationId
      * @return OperationInterface
      */
-    function createOperationFromData($path, $httpMethod, array $operationData)
+    function createOperation($operationId)
     {
-        return Operation::createFromOperationData(
-            $this->typeMap,
-            RootData::create(
-                $operationData,
-                MapData::appendPathKey(MapData::appendPathKey('$paths', $path), $httpMethod)));
+        return $this->operationMap[$operationId];
     }
 
     /**
-     * @param DataAbstract $definitionsData
+     * @param DataAbstract $swaggerObjectData
      * @return ClientInterface
      */
-    static function createFromData(DataAbstract $definitionsData)
+    static function createFromData(DataAbstract $swaggerObjectData)
     {
         $typeMap = TypeAbstract::createMapFromData(
-            $definitionsData->getChild('definitions'),
+            $swaggerObjectData->getChild('definitions'),
             '#/definitions/');
         $typeMap = TypeAbstract::removeRefTypesFromMap($typeMap, $typeMap);
+
+        /**
+         * @var OperationInterface[]
+         */
+        $operationMap = [];
+        foreach ($swaggerObjectData->getChild('paths')->getChildren() as $pathItemObjectData) {
+            $path = $pathItemObjectData->getKey();
+            foreach ($pathItemObjectData->getChildren() as $operationData) {
+                $httpMethod = $operationData->getKey();
+                $operation = Operation::createFromOperationData($typeMap, $operationData);
+                $operationMap[$operation->getId()] = $operation;
+            }
+        }
+
         $client =new Client(
-            $definitionsData->getChildValue('host'),
-            [],
+            $swaggerObjectData->getChildValue('host'),
+            $operationMap,
             $typeMap);
+
         return $client;
     }
 
@@ -57,27 +66,27 @@ final class Client implements ClientInterface
     private $host;
 
     /**
-     * @var OperationInterface
-     */
-    private $operations;
-
-    /**
      * @var TypeAbstract[]
      */
     private $typeMap;
 
     /**
+     * @var OperationInterface[]
+     */
+    private $operationMap;
+
+    /**
      * @param string $host
-     * @param array $operations
+     * @param OperationInterface[] $operationMap
      * @param TypeAbstract[] $typeMap
      */
     private function __construct(
         $host,
-        array $operations,
+        array $operationMap,
         array $typeMap)
     {
         $this->host = $host;
-        $this->operations = $operations;
+        $this->operationMap = $operationMap;
         $this->typeMap = $typeMap;
     }
 }

@@ -34,7 +34,7 @@ class ClientStaticTest extends TestCase
 
     function testCreateFromData()
     {
-        $swaggerObjectData = ['host' => 'example.com', 'definitions' => []];
+        $swaggerObjectData = ['host' => 'example.com', 'definitions' => [], 'paths' => []];
         $client = RunTimeStatic::create()->createClientFromData($swaggerObjectData);
         $this->assertNotNull($client);
 
@@ -161,7 +161,8 @@ class ClientStaticTest extends TestCase
         ];
         $client = RunTimeStatic::create()->createClientFromData([
             'host' => 'localhost',
-            'definitions' => $definitionsData
+            'definitions' => $definitionsData,
+            'paths' => []
         ]);
         $this->assertNotNull($client);
 
