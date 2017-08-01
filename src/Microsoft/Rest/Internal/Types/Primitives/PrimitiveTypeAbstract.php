@@ -1,7 +1,6 @@
 <?php
 namespace Microsoft\Rest\Internal\Types\Primitives;
 
-use Microsoft\Rest\Internal\Client;
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 use Microsoft\Rest\Internal\UnknownTypeException;
@@ -42,7 +41,7 @@ abstract class PrimitiveTypeAbstract extends TypeAbstract
                     case 'password': return new PasswordType();
                     case 'duration': return new DurationType();
                     case 'uuid': return new UuidType();
-                    case 'date-time-rfc1123': return new DateTiemRfc1123Type();
+                    case 'date-time-rfc1123': return new DateTimeRfc1123Type();
                 }
                 break;
             case 'integer':

@@ -1,7 +1,6 @@
 <?php
 namespace Microsoft\Rest\Internal\Types;
 
-use Microsoft\Rest\Internal\Client;
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\UnknownTypeException;
 

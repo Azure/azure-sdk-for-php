@@ -1,9 +1,6 @@
 <?php
 namespace Microsoft\Rest\Internal\Types;
 
-use Microsoft\Rest\Internal\Client;
-use Microsoft\Rest\Internal\Data\DataAbstract;
-
 abstract class CollectionType extends TypeAbstract
 {
     /**

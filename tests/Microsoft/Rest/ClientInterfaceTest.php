@@ -4,6 +4,8 @@ namespace Microsoft\Rest;
 use Microsoft\Rest\Internal\ExpectedPropertyException;
 use Microsoft\Rest\Internal\Operation;
 use Microsoft\Rest\Internal\Parameter;
+use Microsoft\Rest\Internal\Path\ConstPathPart;
+use Microsoft\Rest\Internal\Path\ParameterPathPart;
 use Microsoft\Rest\Internal\Types\Primitives\StringType;
 use PHPUnit\Framework\TestCase;
 
@@ -36,7 +38,7 @@ class ClientInterfaceTest extends TestCase
         $client = RunTimeStatic::create()->createClientFromData([
             'host' => 'example.com',
             'paths' => [
-                'somepath' => [
+                'somepath/{b}' => [
                     'get' => $operationData
                 ]
             ],
@@ -54,13 +56,20 @@ class ClientInterfaceTest extends TestCase
         // private
         $operationId = ClientStaticTest::getPrivate($operation, 'operationId');
         $this->assertEquals('someOperation', $operationId);
-        $parameters = ClientStaticTest::getPrivate($operation, 'parameters');
+        $queryParameters = ClientStaticTest::getPrivate($operation, 'queryParameters');
         $this->assertEquals(
             [
-                new Parameter('a', 'query', new StringType()),
-                new Parameter('b', 'path', new StringType())
+                new Parameter('a', 'query', new StringType())
             ],
-            $parameters);
+            $queryParameters);
+        $path = ClientStaticTest::getPrivate($operation, 'path');
+        $this->assertEquals(
+            [
+                new ConstPathPart('somepath/'),
+                new ParameterPathPart(
+                    new Parameter('b', 'path', new StringType()))
+            ],
+            $path);
         $responses = ClientStaticTest::getPrivate($operation, 'responses');
         $this->assertEquals([200 => new StringType()], $responses);
     }

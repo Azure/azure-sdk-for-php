@@ -14,3 +14,4 @@
 1. Facade:
     1. Support for strong types. PHP 7, PHP 7.1 ?
     1. AutoRest should generate interfaces and static classes instead of concrete classes.
+1. Generate examples for unit testing.

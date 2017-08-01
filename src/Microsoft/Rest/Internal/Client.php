@@ -3,8 +3,7 @@ namespace Microsoft\Rest\Internal;
 
 use Microsoft\Rest\ClientInterface;
 use Microsoft\Rest\Internal\Data\DataAbstract;
-use Microsoft\Rest\Internal\Data\MapData;
-use Microsoft\Rest\Internal\Data\RootData;
+use Microsoft\Rest\Internal\Path\PathStrPart;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 use Microsoft\Rest\OperationInterface;
 
@@ -35,7 +34,8 @@ final class Client implements ClientInterface
          */
         $operationMap = [];
         foreach ($swaggerObjectData->getChild('paths')->getChildren() as $pathItemObjectData) {
-            $path = $pathItemObjectData->getKey();
+            $pathStr = $pathItemObjectData->getKey();
+            $path = PathStrPart::parse($pathStr);
             foreach ($pathItemObjectData->getChildren() as $operationData) {
                 $httpMethod = $operationData->getKey();
                 $operation = Operation::createFromOperationData($typeMap, $operationData, $path, $httpMethod);
@@ -73,9 +73,7 @@ final class Client implements ClientInterface
      * @param string $host
      * @param OperationInterface[] $operationMap
      */
-    private function __construct(
-        $host,
-        array $operationMap)
+    private function __construct($host, array $operationMap)
     {
         $this->host = $host;
         $this->operationMap = $operationMap;

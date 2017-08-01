@@ -95,6 +95,30 @@ class ClientStaticTest extends TestCase
         $this->fail();
     }
 
+    function testPathParse()
+    {
+        $definitionsData = [
+            'host' => 'example.com',
+            'definitions' => [],
+            'paths' => [
+                'a{b}' => [
+                    'get' => [
+                        'operationId' => 'a',
+                        'parameters' => [
+                            [
+                                'name' => 'b',
+                                'in' => 'path',
+                                'type' => 'string'
+                            ]
+                        ],
+                        'responses' => []
+                    ]
+                ]
+            ]
+        ];
+        RunTimeStatic::create()->createClientFromData($definitionsData);
+    }
+
     function testCreateFromData2()
     {
         $definitionsData = [
@@ -196,9 +220,9 @@ class ClientStaticTest extends TestCase
         /**
          * @var Parameter[]
          */
-        $parameters = self::getPrivate($operation, 'parameters');
-        $paramater = $parameters[0];
-        $type = self::getPrivate($paramater, 'type');
+        $queryParameters = self::getPrivate($operation, 'queryParameters');
+        $parameter = $queryParameters[0];
+        $type = self::getPrivate($parameter, 'type');
 
         $redisProperties = new ClassType(['redisConfiguration' => new ClassType([])]);
         $this->assertEquals(

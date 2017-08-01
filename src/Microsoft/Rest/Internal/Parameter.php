@@ -23,6 +23,18 @@ final class Parameter
             $type);
     }
 
+    function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    function getIn() {
+        return $this->in;
+    }
+
     /**
      * @param string $name
      * @param string $in
