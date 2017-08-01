@@ -28,10 +28,11 @@ final class Operation implements OperationInterface
     /**
      * @param TypeAbstract[] $typeMap
      * @param DataAbstract $operationData
+     * @param string $path
+     * @param string $httpMethod
      * @return Operation
-     * @throws ExpectedPropertyException
      */
-    static function createFromOperationData(array $typeMap, DataAbstract $operationData)
+    static function createFromOperationData(array $typeMap, DataAbstract $operationData, $path, $httpMethod)
     {
         $operationId = $operationData->getChildValue('operationId');
         $parameters = [];
@@ -47,8 +48,18 @@ final class Operation implements OperationInterface
             $responses[intval($child->getKey())]
                 = $schema !== null ? TypeAbstract::createFromData($typeMap, $schema) : null;
         }
-        return new Operation($operationId, $parameters, $responses);
+        return new Operation($path, $httpMethod, $operationId, $parameters, $responses);
     }
+
+    /**
+     * @var string
+     */
+    private $path;
+
+    /**
+     * @var string
+     */
+    private $httpMethod;
 
     /**
      * @var string
@@ -66,15 +77,21 @@ final class Operation implements OperationInterface
     private $responses;
 
     /**
+     * @param string $path
+     * @param string $httpMethod
      * @param string $operationId
      * @param Parameter[] $parameters
-     * @param TypeAbstract[] $responses;
+     * @param TypeAbstract[] $responses
      */
     private function __construct(
+        $path,
+        $httpMethod,
         $operationId,
         array $parameters,
         array $responses)
     {
+        $this->path = $path;
+        $this->httpMethod = $httpMethod;
         $this->operationId = $operationId;
         $this->parameters = $parameters;
         $this->responses = $responses;

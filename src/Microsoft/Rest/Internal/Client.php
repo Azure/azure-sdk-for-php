@@ -38,15 +38,14 @@ final class Client implements ClientInterface
             $path = $pathItemObjectData->getKey();
             foreach ($pathItemObjectData->getChildren() as $operationData) {
                 $httpMethod = $operationData->getKey();
-                $operation = Operation::createFromOperationData($typeMap, $operationData);
+                $operation = Operation::createFromOperationData($typeMap, $operationData, $path, $httpMethod);
                 $operationMap[$operation->getId()] = $operation;
             }
         }
 
         $client =new Client(
             $swaggerObjectData->getChildValue('host'),
-            $operationMap,
-            $typeMap);
+            $operationMap);
 
         return $client;
     }
@@ -55,20 +54,15 @@ final class Client implements ClientInterface
      * @param string $name
      * @return TypeAbstract|null
      */
-    function getType($name)
-    {
-        return isset($this->typeMap[$name]) ? $this->typeMap[$name] : null;
-    }
+    //function getType($name)
+    //{
+    //    return isset($this->typeMap[$name]) ? $this->typeMap[$name] : null;
+    //}
 
     /**
      * @var string
      */
     private $host;
-
-    /**
-     * @var TypeAbstract[]
-     */
-    private $typeMap;
 
     /**
      * @var OperationInterface[]
@@ -78,15 +72,12 @@ final class Client implements ClientInterface
     /**
      * @param string $host
      * @param OperationInterface[] $operationMap
-     * @param TypeAbstract[] $typeMap
      */
     private function __construct(
         $host,
-        array $operationMap,
-        array $typeMap)
+        array $operationMap)
     {
         $this->host = $host;
         $this->operationMap = $operationMap;
-        $this->typeMap = $typeMap;
     }
 }

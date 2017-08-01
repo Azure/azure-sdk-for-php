@@ -3,6 +3,8 @@ namespace Microsoft\Rest;
 
 use Closure;
 use Microsoft\Rest\Internal\InvalidSchemaObjectException;
+use Microsoft\Rest\Internal\Operation;
+use Microsoft\Rest\Internal\Parameter;
 use Microsoft\Rest\Internal\Types\ArrayType;
 use Microsoft\Rest\Internal\Types\ClassType;
 use Microsoft\Rest\Internal\Types\MapType;
@@ -34,17 +36,21 @@ class ClientStaticTest extends TestCase
 
     function testCreateFromData()
     {
-        $swaggerObjectData = ['host' => 'example.com', 'definitions' => [], 'paths' => []];
+        $swaggerObjectData = [
+            'host' => 'example.com',
+            'definitions' => [],
+            'paths' => []
+        ];
         $client = RunTimeStatic::create()->createClientFromData($swaggerObjectData);
         $this->assertNotNull($client);
 
         // private fields:
 
         /**
-         * @var TypeAbstract[]
+         * @var Operation[]
          */
-        $typeMap = self::getPrivate($client, "typeMap");
-        $this->assertEquals($typeMap, []);
+        $operationMap = self::getPrivate($client, "operationMap");
+        $this->assertEquals($operationMap, []);
     }
 
     function testCreateFromDataThrowInvalidSchemaObjectException()
@@ -162,38 +168,57 @@ class ClientStaticTest extends TestCase
         $client = RunTimeStatic::create()->createClientFromData([
             'host' => 'localhost',
             'definitions' => $definitionsData,
-            'paths' => []
+            'paths' => [
+                'a' => [
+                    'get' => [
+                        'operationId' => 'someoperation',
+                        'parameters' => [
+                            [
+                                'name' => 'a',
+                                'in' => 'query',
+                                'schema' => [ '$ref' => '#/definitions/Sku' ]
+                            ]
+                        ],
+                        'responses' => []
+                    ]
+                ]
+            ]
         ]);
         $this->assertNotNull($client);
 
         // private fields:
 
         /**
-         * @var TypeAbstract[]
+         * @var Operation[]
          */
-        $typeMap = self::getPrivate($client, "typeMap");
-        $redisProperties = new ClassType(["redisConfiguration" => new ClassType([])]);
+        $operationMap = self::getPrivate($client, 'operationMap');
+        $operation = $operationMap['someoperation'];
+        /**
+         * @var Parameter[]
+         */
+        $parameters = self::getPrivate($operation, 'parameters');
+        $paramater = $parameters[0];
+        $type = self::getPrivate($paramater, 'type');
+
+        $redisProperties = new ClassType(['redisConfiguration' => new ClassType([])]);
         $this->assertEquals(
-            $typeMap,
-            [
-                "#/definitions/Sku" => new ClassType([
-                    "name" => new StringType(),
-                    "int32" => new Int32Type(),
-                    "int64" => new Int64Type(),
-                    "float" => new FloatType(),
-                    "double" => new DoubleType(),
-                    "base64" => new Base64Type(),
-                    "binary" => new BinaryType(),
-                    "boolean" => new BooleanType(),
-                    "date" => new DateType(),
-                    "dateTime" => new DateTimeType(),
-                    "password" => new PasswordType(),
-                    "array" => new ArrayType(new StringType()),
-                    "ref" => $redisProperties,
-                    "map" => new MapType(new Int32Type())
-                ]),
-                "#/definitions/RedisProperties" => $redisProperties,
-            ]);
+            $type,
+            new ClassType([
+                "name" => new StringType(),
+                "int32" => new Int32Type(),
+                "int64" => new Int64Type(),
+                "float" => new FloatType(),
+                "double" => new DoubleType(),
+                "base64" => new Base64Type(),
+                "binary" => new BinaryType(),
+                "boolean" => new BooleanType(),
+                "date" => new DateType(),
+                "dateTime" => new DateTimeType(),
+                "password" => new PasswordType(),
+                "array" => new ArrayType(new StringType()),
+                "ref" => $redisProperties,
+                "map" => new MapType(new Int32Type())
+            ]));
     }
 
     function testCreateFromDataThrowsUnknownNameException()
