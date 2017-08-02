@@ -2,6 +2,7 @@
 namespace Microsoft\Rest;
 
 use Closure;
+use GuzzleHttp\Client;
 use Microsoft\Rest\Internal\InvalidSchemaObjectException;
 use Microsoft\Rest\Internal\Operation;
 use Microsoft\Rest\Internal\Parameter;
@@ -266,5 +267,25 @@ class ClientStaticTest extends TestCase
             return;
         }
         $this->fail();
+    }
+
+    function testCredentials()
+    {
+        $json = json_decode(file_get_contents('C:/Users/sergey/Desktop/php-test.json'));
+        $clientId = $json->applicationId;
+        $clientSecret = $json->clientSecret;
+        $client = new Client();
+        $url = 'https://login.microsoftonline.com/common/oauth2/token';
+        $response = $client->post(
+            $url,
+            [
+                'form_params' => [
+                    'grant_type' => 'client_credentials',
+                    'client_id' => $clientId,
+                    'client_secret' => $clientSecret,
+                    'resource' => 'https://management.core.windows.net/'
+                ]
+            ]);
+        $body = json_decode($response->getBody()->getContents());
     }
 }

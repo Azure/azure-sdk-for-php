@@ -33,7 +33,7 @@ final class Parameters
     {
         $path = '';
         foreach ($this->path as $part) {
-            $path .= urlencode(strval($part->getValue($parameters)));
+            $path .= $part->getValue($parameters);
         }
         return $path;
     }

@@ -2,6 +2,7 @@
 namespace Microsoft\Rest\Internal;
 
 use Microsoft\Rest\ClientInterface;
+use Microsoft\Rest\CredentialsInterface;
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Path\PathStrPart;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
@@ -19,18 +20,20 @@ final class Client implements ClientInterface
     }
 
     /**
+     * @param CredentialsInterface $credentials
      * @param DataAbstract $swaggerObjectData
      * @return ClientInterface
      */
-    static function createFromData(DataAbstract $swaggerObjectData)
+    static function createFromData(CredentialsInterface $credentials, DataAbstract $swaggerObjectData)
     {
         $typeMap = TypeAbstract::createMapFromData(
             $swaggerObjectData->getChild('definitions'),
             '#/definitions/');
         $typeMap = TypeAbstract::removeRefTypesFromMap($typeMap, $typeMap);
 
-        /** @var string */
-        $host = $swaggerObjectData->getChildValue('host');
+        $shared = new OperationShared(
+            $credentials,
+            $swaggerObjectData->getChildValue('host'));
 
         /** @var OperationInterface[] */
         $operationMap = [];
@@ -40,8 +43,8 @@ final class Client implements ClientInterface
             foreach ($pathItemObjectData->getChildren() as $operationData) {
                 $httpMethod = $operationData->getKey();
                 $operation = Operation::createFromOperationData(
+                    $shared,
                     $typeMap,
-                    $host,
                     $operationData,
                     $path,
                     $httpMethod);

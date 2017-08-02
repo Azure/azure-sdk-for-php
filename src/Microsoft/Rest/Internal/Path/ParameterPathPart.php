@@ -34,6 +34,6 @@ final class ParameterPathPart extends PathPartAbstract
      */
     function getValue(array $parameters)
     {
-        return strval($parameters[$this->parameter->getName()]);
+        return urlencode(strval($parameters[$this->parameter->getName()]));
     }
 }

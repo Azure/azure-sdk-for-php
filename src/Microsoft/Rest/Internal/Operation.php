@@ -1,6 +1,7 @@
 <?php
 namespace Microsoft\Rest\Internal;
 
+use GuzzleHttp\Psr7\Request;
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Path\PathStrPart;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
@@ -17,7 +18,15 @@ final class Operation implements OperationInterface
     {
         $path = $this->parameters->getPath($parameters);
         $query = $this->parameters->getQuery($parameters);
-        $url = 'https://' . $this->host . $path . '?' . $query;
+        $url = 'https://' . $this->shared->getHost() . $path . '?' . $query;
+
+        $request = new Request(
+            $this->httpMethod,
+            $url,
+            $this->shared->getCredentials()->getHeaders());
+        $client = new \GuzzleHttp\Client();
+        $client->send($request);
+
         return new OperationResult();
     }
 
@@ -30,15 +39,20 @@ final class Operation implements OperationInterface
     }
 
     /**
+     * @param OperationShared $shared
      * @param TypeAbstract[] $typeMap
-     * @param string $host
      * @param DataAbstract $operationData
      * @param PathStrPart[] $pathStrParts
      * @param string $httpMethod
      * @return Operation
+     * @internal param string $host
      */
     static function createFromOperationData(
-        array $typeMap, $host, DataAbstract $operationData, array $pathStrParts, $httpMethod)
+        OperationShared $shared,
+        array $typeMap,
+        DataAbstract $operationData,
+        array $pathStrParts,
+        $httpMethod)
     {
         $operationId = $operationData->getChildValue('operationId');
 
@@ -60,7 +74,7 @@ final class Operation implements OperationInterface
         }
 
         return new Operation(
-            $host,
+            $shared,
             $httpMethod,
             $operationId,
             $parameters,
@@ -68,9 +82,9 @@ final class Operation implements OperationInterface
     }
 
     /**
-     * @var string
+     * @var OperationShared
      */
-    private $host;
+    private $shared;
 
     /**
      * @var string
@@ -93,20 +107,20 @@ final class Operation implements OperationInterface
     private $responses;
 
     /**
-     * @param string $host
+     * @param OperationShared $shared
      * @param string $httpMethod
      * @param string $operationId
      * @param Parameters $parameters
      * @param TypeAbstract[] $responses
      */
     private function __construct(
-        $host,
+        OperationShared $shared,
         $httpMethod,
         $operationId,
         Parameters $parameters,
         array $responses)
     {
-        $this->host = $host;
+        $this->shared = $shared;
         $this->httpMethod = $httpMethod;
         $this->operationId = $operationId;
         $this->parameters = $parameters;
