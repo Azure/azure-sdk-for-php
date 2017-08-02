@@ -42,7 +42,7 @@ class ClientStaticTest extends TestCase
             'definitions' => [],
             'paths' => []
         ];
-        $client = RunTimeStatic::create()->createClientFromData($swaggerObjectData);
+        $client = AzureStatic::create(null, null, null)->createClientFromData($swaggerObjectData);
         $this->assertNotNull($client);
 
         // private fields:
@@ -63,7 +63,7 @@ class ClientStaticTest extends TestCase
             ]
         ];
         try {
-            RunTimeStatic::create()->createClientFromData($swaggerObjectData);
+            AzureStatic::create(null, null, null)->createClientFromData($swaggerObjectData);
         } catch (InvalidSchemaObjectException $e) {
             $expected = "invalid schema object\n"
                 . "Object: []\n"
@@ -85,7 +85,7 @@ class ClientStaticTest extends TestCase
             ]
         ];
         try {
-            RunTimeStatic::create()->createClientFromData($definitionsData);
+            AzureStatic::create(null, null, null)->createClientFromData($definitionsData);
         } catch (UnknownTypeException $e) {
             $expected = "unknown type\n"
                 . "Object: ['type'=>'unknown-type']\n"
@@ -117,7 +117,7 @@ class ClientStaticTest extends TestCase
                 ]
             ]
         ];
-        RunTimeStatic::create()->createClientFromData($definitionsData);
+        AzureStatic::create(null, null, null)->createClientFromData($definitionsData);
     }
 
     function testCreateFromData2()
@@ -190,7 +190,7 @@ class ClientStaticTest extends TestCase
                 ]
             ]
         ];
-        $client = RunTimeStatic::create()->createClientFromData([
+        $client = AzureStatic::create(null, null, null)->createClientFromData([
             'host' => 'localhost',
             'definitions' => $definitionsData,
             'paths' => [
@@ -258,7 +258,7 @@ class ClientStaticTest extends TestCase
             ]
         ];
         try {
-            RunTimeStatic::create()->createClientFromData($swaggerObjectData);
+            AzureStatic::create(null, null, null)->createClientFromData($swaggerObjectData);
         } catch (UnknownTypeException $e) {
             $expected = "unknown type\n"
                 . "Object: ['\$ref'=>'unknown-type']\n"

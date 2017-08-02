@@ -1,40 +1,41 @@
 <?php
 namespace Microsoft\Rest\Internal;
 
-use Microsoft\Rest\CredentialsInterface;
+use Microsoft\Rest\Internal\Https\HttpsInterface;
 
 final class OperationShared
 {
     /**
-     * @return string
+     * @param string $method
+     * @param string $path
+     * @param string $query
+     * @return OperationResult
      */
-    function getHost()
+    function httpSend($method, $path, $query)
     {
-        return $this->host;
+        return $this->https->send(
+            $method,
+            'https://' . $this->host . $path . '?' . $query,
+            [],
+            []);
     }
 
     /**
-     * @return CredentialsInterface
-     */
-    function getCredentials()
-    {
-        return $this->credentials;
-    }
-
-    /**
-     * @param CredentialsInterface $credentials
+     * @param HttpsInterface $https
      * @param string $host
      */
-    function __construct(CredentialsInterface $credentials, $host)
+    function __construct(
+        HttpsInterface $https,
+        $host)
     {
-        $this->credentials = $credentials;
+        $this->https = $https;
         $this->host = $host;
     }
 
     /**
-     * @var CredentialsInterface
+     * @var HttpsInterface
      */
-    private $credentials;
+    private $https;
 
     /**
      * @var string

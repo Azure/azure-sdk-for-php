@@ -36,7 +36,7 @@ class ClientInterfaceTest extends TestCase
                 ]
             ]
         ];
-        $client = RunTimeStatic::create()->createClientFromData([
+        $client = AzureStatic::create(null, null, null)->createClientFromData([
             'host' => 'example.com',
             'paths' => [
                 'somepath/{b}' => [
@@ -85,7 +85,7 @@ class ClientInterfaceTest extends TestCase
          * @var Operation
          */
         try {
-            $client = RunTimeStatic::create()->createClientFromData([
+            $client = AzureStatic::create(null, null, null)->createClientFromData([
                 'host' => 'example.com',
                 'definitions' => [],
                 'paths' => [

@@ -2,8 +2,8 @@
 namespace Microsoft\Rest\Internal;
 
 use Microsoft\Rest\ClientInterface;
-use Microsoft\Rest\CredentialsInterface;
 use Microsoft\Rest\Internal\Data\DataAbstract;
+use Microsoft\Rest\Internal\Https\HttpsInterface;
 use Microsoft\Rest\Internal\Path\PathStrPart;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 use Microsoft\Rest\OperationInterface;
@@ -20,11 +20,11 @@ final class Client implements ClientInterface
     }
 
     /**
-     * @param CredentialsInterface $credentials
+     * @param HttpsInterface $https
      * @param DataAbstract $swaggerObjectData
      * @return ClientInterface
      */
-    static function createFromData(CredentialsInterface $credentials, DataAbstract $swaggerObjectData)
+    static function createFromData(HttpsInterface $https, DataAbstract $swaggerObjectData)
     {
         $typeMap = TypeAbstract::createMapFromData(
             $swaggerObjectData->getChild('definitions'),
@@ -32,7 +32,7 @@ final class Client implements ClientInterface
         $typeMap = TypeAbstract::removeRefTypesFromMap($typeMap, $typeMap);
 
         $shared = new OperationShared(
-            $credentials,
+            $https,
             $swaggerObjectData->getChildValue('host'));
 
         /** @var OperationInterface[] */

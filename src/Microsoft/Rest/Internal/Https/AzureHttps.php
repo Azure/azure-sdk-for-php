@@ -1,21 +1,22 @@
 <?php
-namespace Microsoft\Rest\Internal;
+namespace Microsoft\Rest\Internal\Https;
 
-use Microsoft\Rest\CredentialsInterface;
-
-final class AzureCredentials implements CredentialsInterface
+final class AzureHttps implements HttpsInterface
 {
     /**
-     * @return string[]
+     * @param string $method
+     * @param string $url
+     * @param string[] $headers
+     * @param array $options
+     * @return mixed
      */
-    function getHeaders()
+    function send($method, $url, array $headers, array $options)
     {
         if ($this->token === null) {
-            $client = new \GuzzleHttp\Client();
-            $url = 'https://login.microsoftonline.com/' . $this->tenantId . '/oauth2/token';
-            // $url = 'https://login.windows.net/72f988bf-86f1-41af-91ab-2d7cd011db47/';
-            $response = $client->post(
-                $url,
+            $response = $this->http->send(
+                'POST',
+                'https://login.microsoftonline.com/' . $this->tenantId . '/oauth2/token',
+                [],
                 [
                     'form_params' => [
                         'grant_type' => 'client_credentials',
@@ -27,16 +28,23 @@ final class AzureCredentials implements CredentialsInterface
             $body = json_decode($response->getBody()->getContents());
             $this->token = $body->access_token;
         }
-        return ['Authorization' => 'Bearer ' . $this->token];
+        $headers['Authorization'] = 'Bearer ' . $this->token;
+        return $this->http->send($method, $url, $headers, $options);
     }
 
     /**
+     * @param HttpsInterface $http
      * @param string $clientId
      * @param string $tenantId
      * @param string $clientSecret
      */
-    function __construct($clientId, $tenantId, $clientSecret)
+    function __construct(
+        HttpsInterface $http,
+        $clientId,
+        $tenantId,
+        $clientSecret)
     {
+        $this->http = $http;
         $this->clientId = $clientId;
         $this->tenantId = $tenantId;
         $this->clientSecret = $clientSecret;
@@ -46,6 +54,11 @@ final class AzureCredentials implements CredentialsInterface
      * @var string|null
      */
     private $token = null;
+
+    /**
+     * @var HttpsInterface
+     */
+    private $http;
 
     /**
      * @var string

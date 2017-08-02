@@ -8,7 +8,7 @@
         "psr-4": { "": [ "src/", "gen/" ] }
     },
     "autoload-dev": {
-        "psr-4": { "": "test" }
+        "psr-4": { "": "tests" }
     },
     "require": {
         "php": ">=5.6",

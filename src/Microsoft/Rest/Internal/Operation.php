@@ -1,7 +1,6 @@
 <?php
 namespace Microsoft\Rest\Internal;
 
-use GuzzleHttp\Psr7\Request;
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Path\PathStrPart;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
@@ -16,18 +15,10 @@ final class Operation implements OperationInterface
      */
     function call(array $parameters)
     {
-        $path = $this->parameters->getPath($parameters);
-        $query = $this->parameters->getQuery($parameters);
-        $url = 'https://' . $this->shared->getHost() . $path . '?' . $query;
-
-        $request = new Request(
+        return $this->shared->httpSend(
             $this->httpMethod,
-            $url,
-            $this->shared->getCredentials()->getHeaders());
-        $client = new \GuzzleHttp\Client();
-        $client->send($request);
-
-        return new OperationResult();
+            $this->parameters->getPath($parameters),
+            $this->parameters->getQuery($parameters));
     }
 
     /**

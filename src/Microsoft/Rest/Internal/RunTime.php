@@ -1,7 +1,7 @@
 <?php
 namespace Microsoft\Rest\Internal;
 
-use Microsoft\Rest\CredentialsInterface;
+use Microsoft\Rest\Internal\Https\HttpsInterface;
 use Microsoft\Rest\RunTimeInterface;
 use Microsoft\Rest\ClientInterface;
 use Microsoft\Rest\Internal\Data\RootData;
@@ -9,11 +9,11 @@ use Microsoft\Rest\Internal\Data\RootData;
 final class RunTime implements RunTimeInterface
 {
     /**
-     * @param CredentialsInterface|null $credentials
+     * @param HttpsInterface $https
      */
-    function __construct(CredentialsInterface $credentials = null)
+    function __construct(HttpsInterface $https)
     {
-        $this->credentials = $credentials;
+        $this->https = $https;
     }
 
     /**
@@ -22,11 +22,11 @@ final class RunTime implements RunTimeInterface
      */
     function createClientFromData(array $schemaObjectData)
     {
-        return Client::createFromData($this->credentials, RootData::create($schemaObjectData, ''));
+        return Client::createFromData($this->https, RootData::create($schemaObjectData, ''));
     }
 
     /**
-     * @var CredentialsInterface|null
+     * @var HttpsInterface
      */
-    private $credentials;
+    private $https;
 }

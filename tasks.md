@@ -5,8 +5,8 @@
    Currently, PHP code generator doesn't follow these steps exactly. This task is a clean up task.
 1. Special parameters:
    - subscriptionId
-   - const
-1. Authentication 
+   - constants (API-VERSION, etc.)
+1. Authentication
    - https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code
      - AD tenant
    - Frameworks
@@ -22,9 +22,11 @@
 1. Generate examples for unit testing.
 1. Select HTTP framework:
    - [X] guzzle - 39,404,000
-   - laravel - 5,508,000 
-   - zend-diactoros - 4,986,000   
+   - laravel - 5,508,000
+   - zend-diactoros - 4,986,000
    - Slim - 3,613,000
    - Lumen -  160,000
    - Epiphany - 911
    - Frapi - ?
+1. CI
+1. JSON server for testing
