@@ -7,11 +7,10 @@ final class PathBuilder
 {
     /**
      * @param Parameter[] $pathParameterMap
-     * @param string $operationId
      * @param PathStrPart[] $pathStrParts
      * @return PathPartAbstract[]
      */
-    static function create(array $pathParameterMap, $operationId, array $pathStrParts) {
+    static function create(array $pathParameterMap, array $pathStrParts) {
         /** @var PathPartAbstract[] */
         $result = [];
         $lastConst = '';

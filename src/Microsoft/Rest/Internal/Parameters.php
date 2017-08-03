@@ -114,7 +114,7 @@ final class Parameters
             }
         }
 
-        $path = PathBuilder::create($pathParameters, $operationId, $pathStrParts);
+        $path = PathBuilder::create($pathParameters, $pathStrParts);
 
         return new self(
             $path,

@@ -9,7 +9,7 @@ final class OperationShared
      * @param string $method
      * @param string $path
      * @param string $query
-     * @return OperationResult
+     * @return mixed
      */
     function send($method, $path, $query)
     {

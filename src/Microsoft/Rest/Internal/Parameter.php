@@ -57,13 +57,12 @@ final class Parameter
             $xMsSkipUrlEncoding = FALSE;
         }
 
-        $isConst = $type->isConst() && $required;
-
-        $constValue = $isConst ? $type->getConstValue() : null;
-
-        if (!$isConst && isset($sharedParameterMap[$name])) {
+        if (isset($sharedParameterMap[$name])) {
             $isConst = TRUE;
             $constValue = $sharedParameterMap[$name];
+        } else {
+            $isConst = $type->isConst() && $required;
+            $constValue = $isConst ? $type->getConstValue() : null;
         }
 
         return new self(

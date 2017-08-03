@@ -5,13 +5,12 @@ use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Path\PathStrPart;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 use Microsoft\Rest\OperationInterface;
-use Microsoft\Rest\OperationResultInterface;
 
 final class Operation implements OperationInterface
 {
     /**
      * @param array $parameters
-     * @return OperationResultInterface
+     * @return mixed
      */
     function call(array $parameters)
     {

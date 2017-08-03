@@ -5,7 +5,7 @@ interface OperationInterface
 {
     /**
      * @param array $parameters
-     * @return OperationResultInterface
+     * @return mixed
      */
     function call(array $parameters);
 }

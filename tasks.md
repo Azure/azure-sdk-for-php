@@ -4,7 +4,7 @@
    ```
    Currently, PHP code generator doesn't follow these steps exactly. This task is a clean up task.
 1. Special parameters:
-   - subscriptionId
+   - [X] subscriptionId
    - [X] constants (API-VERSION, etc.)
 1. Authentication
    - [+] https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code
@@ -17,6 +17,7 @@
 1. Extensions
    - long-running operations
    - flattering
+   - [X] x-ms-skip-url-encoding
 1. Facade:
     1. Support for strong types. PHP 7, PHP 7.1 ?
     1. AutoRest should generate interfaces and static classes instead of concrete classes.
@@ -39,13 +40,29 @@
 1. profiles and class aliases
 1. Response object
    ```php
-   interface Response
+   interface HttpsResponse
    {
        function getCode();
        function getResult();
    }
    ```
 1. Parameters by creation time
-   1. constant. for example 'api-version'
-   2. client initialization. 'subscriptionId'
-   3. call-time parameters.
+   1. [X] constant. for example 'api-version'
+   2. [X] client initialization. 'subscriptionId'
+   3. [X] call-time parameters.
+1. Structure
+    - overview:
+      ```
+      Swagger =[C#:AutoRest]=> PHP:Swagger =[PHP:RunTime]=> PHP:Operations
+                            => PHP:Facade
+      ```
+    - C#:AutoRest:
+      ```
+      C#:CodeModel => C#:Swagger =[C#:JsonToPhp]========> PHP:Swagger
+                                 =[C#:CodeGeneratorPhp]=> PHP:Facade
+      ```
+    - PHP:RunTime:
+      ```
+      PHP:Swagger => PHP:TypedSwagger => PHP:Operations
+      ```
+1. "parameters" - common parameters
