@@ -6,6 +6,22 @@ use Microsoft\Rest\Internal\Parameter;
 final class PathStrPart
 {
     /**
+     * @return bool
+     */
+    function isParameter()
+    {
+        return $this->isParameter;
+    }
+
+    /**
+     * @return string
+     */
+    function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
      * @param string $pathStr
      * @return PathStrPart[]
      * @throws PathParseException
@@ -47,15 +63,17 @@ final class PathStrPart
     }
 
     /**
-     * @param Parameter[] $pathParameters
+     * @param Parameter[] $pathParameterMap
      * @param string $operationId
      * @return PathPartAbstract
      */
-    function createPathPart(array $pathParameters, $operationId) {
+    /*
+    function createPathPart(array $pathParameterMap, $operationId) {
         return $this->isParameter
-            ? ParameterPathPart::create($pathParameters, $this->value, $operationId)
+            ? ParameterPathPart::create($pathParameterMap, $this->value, $operationId)
             : new ConstPathPart($this->value);
     }
+    */
 
     /**
      * @param bool $isParameter

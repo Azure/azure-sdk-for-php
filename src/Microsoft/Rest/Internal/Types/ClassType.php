@@ -5,6 +5,8 @@ use Microsoft\Rest\Internal\Data\DataAbstract;
 
 final class ClassType extends TypeAbstract
 {
+    use NotConstTypeTrait;
+
     /**
      * @param TypeAbstract[] $propertyMap
      */

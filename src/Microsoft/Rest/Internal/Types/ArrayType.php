@@ -9,6 +9,8 @@ use Microsoft\Rest\Internal\Data\DataAbstract;
  */
 final class ArrayType extends CollectionType
 {
+    use NotConstTypeTrait;
+
     /**
      * @param TypeAbstract $items
      */

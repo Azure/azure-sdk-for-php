@@ -109,6 +109,7 @@ class ClientStaticTest extends TestCase
                             [
                                 'name' => 'b',
                                 'in' => 'path',
+                                'required' => TRUE,
                                 'type' => 'string'
                             ]
                         ],
@@ -201,6 +202,7 @@ class ClientStaticTest extends TestCase
                             [
                                 'name' => 'a',
                                 'in' => 'query',
+                                'required' => TRUE,
                                 'schema' => [ '$ref' => '#/definitions/Sku' ]
                             ]
                         ],

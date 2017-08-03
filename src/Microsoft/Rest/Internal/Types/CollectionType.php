@@ -3,6 +3,8 @@ namespace Microsoft\Rest\Internal\Types;
 
 abstract class CollectionType extends TypeAbstract
 {
+    use NotConstTypeTrait;
+
     /**
      * @param TypeAbstract[] $typeMap
      * @return TypeAbstract

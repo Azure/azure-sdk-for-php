@@ -6,8 +6,6 @@ use Microsoft\Azure\Management\Advisor\_2017_04_19\AdvisorManagementClient;
 
 class AdvisorTest extends TestInfo
 {
-    const API_VERSION = '2017-04-19';
-
     /**
      * @var AdvisorManagementClient
      */
@@ -28,8 +26,7 @@ class AdvisorTest extends TestInfo
         try {
             $recommendations->getGenerateStatus(
                 $this->subscriptionId,
-                'someoperation',
-                self::API_VERSION);
+                'someoperation');
         } catch (ClientException $e) {
             print_r($e->getMessage());
         }
@@ -38,15 +35,13 @@ class AdvisorTest extends TestInfo
             // https://github.com/Azure/azure-rest-api-specs/blob/current/specification/advisor/resource-manager/Microsoft.Advisor/2017-04-19/advisor.json#L281
             $recommendations->get(
                 'example.com',
-                'rec',
-                self::API_VERSION);
+                'rec');
         } catch (ClientException $e) {
             print_r($e->getMessage());
         }
         try {
             $recommendations->list_(
                 $this->subscriptionId,
-                self::API_VERSION,
                 '',
                 '',
                 '');
@@ -54,7 +49,7 @@ class AdvisorTest extends TestInfo
             print_r($e->getMessage());
         }
         try {
-            $recommendations->generate($this->subscriptionId, self::API_VERSION);
+            $recommendations->generate($this->subscriptionId);
         } catch (ClientException $e) {
             print_r($e->getMessage());
         }
@@ -64,7 +59,7 @@ class AdvisorTest extends TestInfo
     {
         $operations = $this->client->getOperations();
         try {
-            $operations->list_(self::API_VERSION);
+            $operations->list_();
         } catch (ClientException $e) {
             print_r($e->getMessage());
         }

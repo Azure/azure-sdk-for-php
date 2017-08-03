@@ -9,6 +9,16 @@ use Microsoft\Rest\Internal\Types\Primitives\PrimitiveTypeAbstract;
 abstract class TypeAbstract
 {
     /**
+     * @return bool
+     */
+    abstract function isConst();
+
+    /**
+     * @return string
+     */
+    abstract function getConstValue();
+
+    /**
      * @param TypeAbstract[] $typeMap
      * @return TypeAbstract
      */

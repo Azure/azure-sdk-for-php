@@ -11,11 +11,15 @@ final class OperationShared
      * @param string $query
      * @return OperationResult
      */
-    function httpSend($method, $path, $query)
+    function send($method, $path, $query)
     {
+        $url = 'https://'
+            . $this->host
+            . $path
+            . $query;
         return $this->https->send(
             $method,
-            'https://' . $this->host . $path . '?' . $query,
+            $url,
             [],
             []);
     }

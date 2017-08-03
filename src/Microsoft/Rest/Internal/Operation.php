@@ -15,7 +15,7 @@ final class Operation implements OperationInterface
      */
     function call(array $parameters)
     {
-        return $this->shared->httpSend(
+        return $this->shared->send(
             $this->httpMethod,
             $this->parameters->getPath($parameters),
             $this->parameters->getQuery($parameters));

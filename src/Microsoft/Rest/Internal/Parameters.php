@@ -2,6 +2,7 @@
 namespace Microsoft\Rest\Internal;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
+use Microsoft\Rest\Internal\Path\PathBuilder;
 use Microsoft\Rest\Internal\Path\PathPartAbstract;
 use Microsoft\Rest\Internal\Path\PathStrPart;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
@@ -9,18 +10,26 @@ use Microsoft\Rest\Internal\Types\TypeAbstract;
 final class Parameters
 {
     /**
+     * @param string $query
+     * @param string $name
+     * @param string $value
+     * @return string
+     */
+    private static function addQueryParameter($query, $name, $value)
+    {
+        return (strlen($query) > 0 ? '&' : '?') . $name . "=" . urlencode($value);
+    }
+
+    /**
      * @param array $parameters
      * @return string
      */
     function getQuery(array $parameters)
     {
-        $query = '';
+        $query = $this->constQuery;
         foreach ($this->query as $queryParameter) {
-            if (strlen($query) > 0) {
-                $query .= '&';
-            }
             $name = $queryParameter->getName();
-            $query .= $name . '=' . urlencode(strval($parameters[$name]));
+            $query = self::addQueryParameter($query, $name, strval($parameters[$name]));
         }
         return $query;
     }
@@ -52,13 +61,12 @@ final class Parameters
         DataAbstract $parameters,
         array $pathStrParts)
     {
-        /**
-         * @var Parameter[]
-         */
+        /** @var Parameter[] */
         $pathParameters = [];
         /**
          * @var Parameter[]
          */
+        $constQuery = '';
         $queryParameters = [];
         /**
          * @var Parameter[]
@@ -77,7 +85,14 @@ final class Parameters
                     $pathParameters[$parameter->getName()] = $parameter;
                     break;
                 case 'query':
-                    $queryParameters[] = $parameter;
+                    if ($parameter->isConst()) {
+                        $constQuery = self::addQueryParameter(
+                            $constQuery,
+                            $parameter->getName(),
+                            $parameter->getConstValue());
+                    } else {
+                        $queryParameters[] = $parameter;
+                    }
                     break;
                 case 'header':
                     $headerParameters[] = $parameter;
@@ -94,13 +109,11 @@ final class Parameters
             }
         }
 
-        $path = [];
-        foreach ($pathStrParts as $part) {
-            $path[] = $part->createPathPart($pathParameters, $operationId);
-        }
+        $path = PathBuilder::create($pathParameters, $operationId, $pathStrParts);
 
         return new self(
             $path,
+            $constQuery,
             $queryParameters,
             $headerParameters,
             $body);
@@ -108,17 +121,20 @@ final class Parameters
 
     /**
      * @param PathPartAbstract[] $path
+     * @param string $constQuery
      * @param Parameter[] $query
      * @param Parameter[] $headers
      * @param Parameter|null $body
      */
     private function __construct(
         array $path,
+        $constQuery,
         array $query,
         array $headers,
         Parameter $body = null)
     {
         $this->path = $path;
+        $this->constQuery = $constQuery;
         $this->query = $query;
         $this->headers = $headers;
         $this->body = $body;
@@ -128,6 +144,11 @@ final class Parameters
      * @var PathPartAbstract[]
      */
     private $path;
+
+    /**
+     * @var string
+     */
+    private $constQuery;
 
     /**
      * @var Parameter[]

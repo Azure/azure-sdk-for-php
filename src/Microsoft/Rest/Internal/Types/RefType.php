@@ -6,6 +6,19 @@ use Microsoft\Rest\Internal\UnknownTypeException;
 
 final class RefType extends TypeAbstract
 {
+    function isConst()
+    {
+        throw new \Exception('RefType::isConst()');
+    }
+
+    /**
+     * @return string
+     */
+    function getConstValue()
+    {
+        throw new \Exception('RefType::isConst()');
+    }
+
     /**
      * @param string $ref
      * @param DataAbstract $data

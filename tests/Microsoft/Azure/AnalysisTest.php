@@ -5,8 +5,6 @@ use Microsoft\Azure\Management\Analysis\_2016_05_16\AnalysisServicesManagementCl
 
 class AnalysisTest extends TestInfo
 {
-    const API_VERSION = '2016-05-16';
-
     /**
      * @var AnalysisServicesManagementClient
      */
@@ -24,6 +22,6 @@ class AnalysisTest extends TestInfo
     function testServices()
     {
         $services = $this->client->getServers();
-        $services->list_(self::API_VERSION, $this->subscriptionId);
+        $services->list_($this->subscriptionId);
     }
 }

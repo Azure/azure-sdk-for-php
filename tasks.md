@@ -30,3 +30,8 @@
    - Frapi - ?
 1. CI
 1. JSON server for testing
+1. Services:
+    - Advisor: Recommendations.Get doesn't have the subscriptionId parameter
+    - KeyVault 2016-10-01 has a different api_version parameter 2015-11-01
+    - StorageImportExport has an explicit api_version
+    

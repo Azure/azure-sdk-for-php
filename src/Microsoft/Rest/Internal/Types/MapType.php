@@ -5,6 +5,8 @@ use Microsoft\Rest\Internal\Data\DataAbstract;
 
 final class MapType extends CollectionType
 {
+    use NotConstTypeTrait;
+
     /**
      * @param TypeAbstract $items
      */
