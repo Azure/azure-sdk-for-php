@@ -70,7 +70,14 @@ class ClientInterfaceTest extends TestCase
         $queryParameters = ClientStaticTest::getPrivate($parameters, 'query');
         $this->assertEquals(
             [
-                new Parameter('a', 'query', TRUE, FALSE, new StringType())
+                new Parameter(
+                    'a',
+                    'query',
+                    TRUE,
+                    FALSE,
+                    new StringType(),
+                    FALSE,
+                    null)
             ],
             $queryParameters);
         $path = ClientStaticTest::getPrivate($parameters, 'path');
@@ -78,7 +85,14 @@ class ClientInterfaceTest extends TestCase
             [
                 new ConstPathPart('somepath/'),
                 new ParameterPathPart(
-                    new Parameter('b', 'path', TRUE, FALSE, new StringType()))
+                    new Parameter(
+                        'b',
+                        'path',
+                        TRUE,
+                        FALSE,
+                        new StringType(),
+                        FALSE,
+                        null))
             ],
             $path);
         $responses = ClientStaticTest::getPrivate($operation, 'responses');

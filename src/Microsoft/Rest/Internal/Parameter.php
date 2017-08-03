@@ -37,6 +37,8 @@ final class Parameter
      */
     static function createFromData(array $typeMap, array $sharedParameterMap, DataAbstract $parameterData)
     {
+        $name = $parameterData->getChildValue('name');
+
         $schemaData = $parameterData->getChildOrNull('schema');
 
         $type = TypeAbstract::createFromData(
@@ -55,12 +57,23 @@ final class Parameter
             $xMsSkipUrlEncoding = FALSE;
         }
 
+        $isConst = $type->isConst() && $required;
+
+        $constValue = $isConst ? $type->getConstValue() : null;
+
+        if (!$isConst && isset($sharedParameterMap[$name])) {
+            $isConst = TRUE;
+            $constValue = $sharedParameterMap[$name];
+        }
+
         return new self(
-            $parameterData->getChildValue('name'),
+            $name,
             $in,
             $required,
             $xMsSkipUrlEncoding,
-            $type);
+            $type,
+            $isConst,
+            $constValue);
     }
 
     function getName()
@@ -81,23 +94,25 @@ final class Parameter
      * @param bool $required
      * @param bool $xMsSkipUrlEncoding
      * @param TypeAbstract $type
+     * @param bool $isConst
+     * @param mixed|null $constValue
      */
     function __construct(
         $name,
         $in,
         $required,
         $xMsSkipUrlEncoding,
-        TypeAbstract $type)
+        TypeAbstract $type,
+        $isConst,
+        $constValue)
     {
         $this->name = $name;
         $this->in = $in;
         $this->required = $required;
         $this->xMsSkipUrlEncoding = $xMsSkipUrlEncoding;
         $this->type = $type;
-        $this->isConst = $type->isConst() && $required;
-        if ($this->isConst) {
-            $this->constValue = $type->getConstValue();
-        }
+        $this->isConst = $isConst;
+        $this->constValue = $constValue;
     }
 
     /**
