@@ -5,13 +5,14 @@
    Currently, PHP code generator doesn't follow these steps exactly. This task is a clean up task.
 1. Special parameters:
    - subscriptionId
-   - constants (API-VERSION, etc.)
+   - [X] constants (API-VERSION, etc.)
 1. Authentication
-   - https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code
+   - [+] https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code
      - AD tenant
-   - Frameworks
+   - [X] Frameworks
      - https://github.com/FriendsOfSymfony/oauth2-php
      - https://github.com/adoy/PHP-OAuth2 - LGPL
+     - [X] none
 1. Core library.
 1. Extensions
    - long-running operations
@@ -20,7 +21,7 @@
     1. Support for strong types. PHP 7, PHP 7.1 ?
     1. AutoRest should generate interfaces and static classes instead of concrete classes.
 1. Generate examples for unit testing.
-1. Select HTTP framework:
+1. [X] Select HTTP framework:
    - [X] guzzle - 39,404,000
    - laravel - 5,508,000
    - zend-diactoros - 4,986,000
@@ -29,9 +30,22 @@
    - Epiphany - 911
    - Frapi - ?
 1. CI
-1. JSON server for testing
+1. JSON-RPC server for testing (just a core library,
+   AutoRest is not required)
 1. Services:
     - Advisor: Recommendations.Get doesn't have the subscriptionId parameter
     - KeyVault 2016-10-01 has a different api_version parameter 2015-11-01
     - StorageImportExport has an explicit api_version
-    
+1. profiles and class aliases
+1. Response object
+   ```php
+   interface Response
+   {
+       function getCode();
+       function getResult();
+   }
+   ```
+1. Parameters by creation time
+   1. constant. for example 'api-version'
+   2. client initialization. 'subscriptionId'
+   3. call-time parameters.

@@ -11,13 +11,16 @@ final class Parameters
 {
     /**
      * @param string $query
-     * @param string $name
+     * @param Parameter $parameter
      * @param string $value
      * @return string
      */
-    private static function addQueryParameter($query, $name, $value)
+    private static function addQueryParameter($query, Parameter $parameter, $value)
     {
-        return (strlen($query) > 0 ? '&' : '?') . $name . "=" . urlencode($value);
+        return (strlen($query) > 0 ? '&' : '?')
+            . $parameter->getName()
+            . "="
+            . $parameter->urlEncode($value);
     }
 
     /**
@@ -29,7 +32,7 @@ final class Parameters
         $query = $this->constQuery;
         foreach ($this->query as $queryParameter) {
             $name = $queryParameter->getName();
-            $query = self::addQueryParameter($query, $name, strval($parameters[$name]));
+            $query = self::addQueryParameter($query, $queryParameter, strval($parameters[$name]));
         }
         return $query;
     }
@@ -49,6 +52,7 @@ final class Parameters
 
     /**
      * @param TypeAbstract[] $typeMap
+     * @param array $sharedParameterMap
      * @param string $operationId
      * @param DataAbstract $parameters
      * @param PathStrPart[] $pathStrParts
@@ -57,6 +61,7 @@ final class Parameters
      */
     static function create(
         array $typeMap,
+        array $sharedParameterMap,
         $operationId,
         DataAbstract $parameters,
         array $pathStrParts)
@@ -78,7 +83,7 @@ final class Parameters
         $body = null;
         foreach ($parameters->getChildren() as $child)
         {
-            $parameter = Parameter::createFromData($typeMap, $child);
+            $parameter = Parameter::createFromData($typeMap, $sharedParameterMap, $child);
             $in = $parameter->getIn();
             switch ($parameter->getIn()) {
                 case 'path':
@@ -88,7 +93,7 @@ final class Parameters
                     if ($parameter->isConst()) {
                         $constQuery = self::addQueryParameter(
                             $constQuery,
-                            $parameter->getName(),
+                            $parameter,
                             $parameter->getConstValue());
                     } else {
                         $queryParameters[] = $parameter;

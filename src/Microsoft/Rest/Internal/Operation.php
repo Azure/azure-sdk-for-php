@@ -32,6 +32,7 @@ final class Operation implements OperationInterface
     /**
      * @param OperationShared $shared
      * @param TypeAbstract[] $typeMap
+     * @param array $sharedParameterMap
      * @param DataAbstract $operationData
      * @param PathStrPart[] $pathStrParts
      * @param string $httpMethod
@@ -41,6 +42,7 @@ final class Operation implements OperationInterface
     static function createFromOperationData(
         OperationShared $shared,
         array $typeMap,
+        array $sharedParameterMap,
         DataAbstract $operationData,
         array $pathStrParts,
         $httpMethod)
@@ -49,6 +51,7 @@ final class Operation implements OperationInterface
 
         $parameters = Parameters::create(
             $typeMap,
+            $sharedParameterMap,
             $operationId,
             $operationData->getChild('parameters'),
             $pathStrParts);

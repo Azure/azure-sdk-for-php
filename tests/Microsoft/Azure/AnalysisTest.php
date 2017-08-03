@@ -16,12 +16,12 @@ class AnalysisTest extends TestInfo
     function __construct()
     {
         parent::__construct();
-        $this->client = new AnalysisServicesManagementClient($this->runTime);
+        $this->client = new AnalysisServicesManagementClient($this->runTime, $this->subscriptionId);
     }
 
     function testServices()
     {
         $services = $this->client->getServers();
-        $services->list_($this->subscriptionId);
+        $services->list_();
     }
 }

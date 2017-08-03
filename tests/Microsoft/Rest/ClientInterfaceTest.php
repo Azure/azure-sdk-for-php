@@ -1,6 +1,7 @@
 <?php
 namespace Microsoft\Rest;
 
+use Microsoft\Rest\Azure\AzureStatic;
 use Microsoft\Rest\Internal\ExpectedPropertyException;
 use Microsoft\Rest\Internal\Operation;
 use Microsoft\Rest\Internal\Parameter;
@@ -38,19 +39,22 @@ class ClientInterfaceTest extends TestCase
                 ]
             ]
         ];
-        $client = AzureStatic::create(null, null, null)->createClientFromData([
-            'host' => 'example.com',
-            'paths' => [
-                'somepath/{b}' => [
-                    'get' => $operationData
-                ]
-            ],
-            'definitions' => [
-                'A' => [
-                    'type' => 'string'
-                ]
-            ]
-        ]);
+        $client = AzureStatic::create(null, null, null)
+            ->createClientFromData(
+                [
+                    'host' => 'example.com',
+                    'paths' => [
+                        'somepath/{b}' => [
+                            'get' => $operationData
+                        ]
+                    ],
+                    'definitions' => [
+                        'A' => [
+                            'type' => 'string'
+                        ]
+                    ]
+                ],
+                []);
         /**
          * @var Operation
          */
@@ -66,7 +70,7 @@ class ClientInterfaceTest extends TestCase
         $queryParameters = ClientStaticTest::getPrivate($parameters, 'query');
         $this->assertEquals(
             [
-                new Parameter('a', 'query', TRUE, new StringType())
+                new Parameter('a', 'query', TRUE, FALSE, new StringType())
             ],
             $queryParameters);
         $path = ClientStaticTest::getPrivate($parameters, 'path');
@@ -74,7 +78,7 @@ class ClientInterfaceTest extends TestCase
             [
                 new ConstPathPart('somepath/'),
                 new ParameterPathPart(
-                    new Parameter('b', 'path', TRUE, new StringType()))
+                    new Parameter('b', 'path', TRUE, FALSE, new StringType()))
             ],
             $path);
         $responses = ClientStaticTest::getPrivate($operation, 'responses');
@@ -87,15 +91,18 @@ class ClientInterfaceTest extends TestCase
          * @var Operation
          */
         try {
-            $client = AzureStatic::create(null, null, null)->createClientFromData([
-                'host' => 'example.com',
-                'definitions' => [],
-                'paths' => [
-                    'somepath' => [
-                        'get' => []
-                    ]
-                ]
-            ]);
+            $client = AzureStatic::create(null, null, null)
+                ->createClientFromData(
+                    [
+                        'host' => 'example.com',
+                        'definitions' => [],
+                        'paths' => [
+                            'somepath' => [
+                                'get' => []
+                            ]
+                        ]
+                    ],
+                    []);
         } catch (ExpectedPropertyException $e) {
             $this->assertEquals(
                 'expected property: operationId'

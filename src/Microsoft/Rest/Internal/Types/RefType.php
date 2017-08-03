@@ -13,6 +13,7 @@ final class RefType extends TypeAbstract
 
     /**
      * @return string
+     * @throws \Exception
      */
     function getConstValue()
     {

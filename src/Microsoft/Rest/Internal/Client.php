@@ -22,9 +22,13 @@ final class Client implements ClientInterface
     /**
      * @param HttpsInterface $https
      * @param DataAbstract $swaggerObjectData
+     * @param array $sharedParameterMap
      * @return ClientInterface
      */
-    static function createFromData(HttpsInterface $https, DataAbstract $swaggerObjectData)
+    static function createFromData(
+        HttpsInterface $https,
+        DataAbstract $swaggerObjectData,
+        array $sharedParameterMap)
     {
         $typeMap = TypeAbstract::createMapFromData(
             $swaggerObjectData->getChild('definitions'),
@@ -45,6 +49,7 @@ final class Client implements ClientInterface
                 $operation = Operation::createFromOperationData(
                     $shared,
                     $typeMap,
+                    $sharedParameterMap,
                     $operationData,
                     $path,
                     $httpMethod);

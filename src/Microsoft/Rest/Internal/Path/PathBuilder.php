@@ -22,7 +22,7 @@ final class PathBuilder
             } else {
                 $parameter = $pathParameterMap[$value];
                 if ($parameter->isConst()) {
-                    $lastConst .= $parameter->getConstValue();
+                    $lastConst .= $parameter->urlEncode($parameter->getConstValue());
                 } else {
                     if (strlen($lastConst) !== 0) {
                         $result[] = new ConstPathPart($lastConst);

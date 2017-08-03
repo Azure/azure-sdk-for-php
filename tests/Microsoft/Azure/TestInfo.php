@@ -1,7 +1,7 @@
 <?php
 namespace Microsoft\Azure;
 
-use Microsoft\Rest\AzureStatic;
+use Microsoft\Rest\Azure\AzureStatic;
 use PHPUnit\Framework\TestCase;
 
 class TestInfo extends TestCase

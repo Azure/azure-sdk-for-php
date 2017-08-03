@@ -20,13 +20,13 @@ class PathTest extends TestCase
                                 'name' => 'b',
                                 'in' => 'path',
                                 'type' => 'string',
-                                'enum' => ['YYY']
+                                'enum' => ['YYY/ZZZ']
                             ],
                             [
                                 'name' => 'd',
                                 'in' => 'path',
                                 'type' => 'string'
-                            ]
+                            ],
                         ],
                         'responses' => []
                     ]
@@ -35,10 +35,10 @@ class PathTest extends TestCase
         ];
         $httpMock = new HttpMock();
         $runTime = new RunTime($httpMock);
-        $client = $runTime->createClientFromData($schema);
+        $client = $runTime->createClientFromData($schema, []);
         $operation = $client->createOperation('abcde');
         $operation->call(['d' => 'DDD']);
-        $this->assertEquals($httpMock->url, 'https://somehost/a/YYY/c/DDD/e');
+        $this->assertEquals($httpMock->url, 'https://somehost/a/' . urlencode('YYY/ZZZ') . '/c/DDD/e');
         print_r($httpMock);
     }
 }

@@ -17,31 +17,26 @@ class AdvisorTest extends TestInfo
     function __construct()
     {
         parent::__construct();
-        $this->client = new AdvisorManagementClient($this->runTime);
+        $this->client = new AdvisorManagementClient($this->runTime, $this->subscriptionId);
     }
 
     function testRecommendations()
     {
         $recommendations = $this->client->getRecommendations();
         try {
-            $recommendations->getGenerateStatus(
-                $this->subscriptionId,
-                'someoperation');
+            $recommendations->getGenerateStatus('someoperation');
         } catch (ClientException $e) {
             print_r($e->getMessage());
         }
         try {
-            // TODO: should it have subscriptionId parameter?
-            // https://github.com/Azure/azure-rest-api-specs/blob/current/specification/advisor/resource-manager/Microsoft.Advisor/2017-04-19/advisor.json#L281
             $recommendations->get(
-                'example.com',
+                '/subscriptions/a00aa0aa-a0a0-0a0a-aaa0-aa0000000000',
                 'rec');
         } catch (ClientException $e) {
             print_r($e->getMessage());
         }
         try {
             $recommendations->list_(
-                $this->subscriptionId,
                 '',
                 '',
                 '');
@@ -49,7 +44,7 @@ class AdvisorTest extends TestInfo
             print_r($e->getMessage());
         }
         try {
-            $recommendations->generate($this->subscriptionId);
+            $recommendations->generate();
         } catch (ClientException $e) {
             print_r($e->getMessage());
         }

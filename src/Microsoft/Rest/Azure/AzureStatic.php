@@ -1,9 +1,10 @@
 <?php
-namespace Microsoft\Rest;
+namespace Microsoft\Rest\Azure;
 
 use Microsoft\Rest\Internal\Https\AzureHttps;
 use Microsoft\Rest\Internal\Https\DefaultHttps;
 use Microsoft\Rest\Internal\RunTime;
+use Microsoft\Rest\RunTimeInterface;
 
 final class AzureStatic
 {
