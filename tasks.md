@@ -1,10 +1,9 @@
 
-
 1. Special parameters:
    - [X] subscriptionId
    - [X] constants (API-VERSION, etc.)
 1. Authentication
-   - [X]https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code
+   - [X] see https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code
      - AD tenant
    - [X] Frameworks
      - https://github.com/FriendsOfSymfony/oauth2-php
