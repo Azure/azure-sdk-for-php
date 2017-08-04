@@ -4,13 +4,14 @@
    - [X] subscriptionId
    - [X] constants (API-VERSION, etc.)
 1. Authentication
-   - [+] https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code
+   - [X]https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code
      - AD tenant
    - [X] Frameworks
      - https://github.com/FriendsOfSymfony/oauth2-php
      - https://github.com/adoy/PHP-OAuth2 - LGPL
      - [X] none
-1. Core library.
+   - [ ] advanced authentication.
+1. Core library as a separate package.
 1. Extensions https://github.com/Azure/autorest/tree/master/docs/extensions
    - long-running operations
    - flattering
@@ -18,7 +19,7 @@
    - x-ms-pageable
 1. Facade:
     1. Support for strong types. PHP 7, PHP 7.1 ?
-    1. AutoRest should generate interfaces and static classes instead of concrete classes.
+    1. AutoRest should generate interfaces and static  classes instead of concrete classes.
 1. Generate examples for unit testing.
 1. [X] Select HTTP framework:
    - [X] guzzle - 39,404,000
@@ -31,24 +32,26 @@
 1. CI
 1. JSON-RPC server for testing (just a core library,
    AutoRest is not required)
-1. Services:
+1. Services issues:
     - Advisor: Recommendations.Get doesn't have the subscriptionId parameter
     - KeyVault 2016-10-01 has a different api_version parameter 2015-11-01
     - StorageImportExport has an explicit api_version
 1. profiles and class aliases
 1. Response object
-   ```php
-   interface HttpsResponse
-   {
-       function getCode();
-       function getResult();
-   }
-   ```
-1. Parameters by creation time
+   - [X] return a result for now.
+   - [ ] advanced response object for raw data.
+        ```php
+        interface HttpsResponse
+        {
+            function getCode();
+            function getResult();
+        }
+        ```
+1. [X] Parameters by creation time
    1. [X] constant. for example 'api-version'
    2. [X] client initialization. 'subscriptionId'
    3. [X] call-time parameters.
-1. Structure
+1. [ ] Structure
     - overview:
       ```
       Swagger =[C#:AutoRest]=> PHP:Swagger =[PHP:RunTime]=> PHP:Operations
@@ -64,13 +67,12 @@
       PHP:Swagger => PHP:TypedSwagger => PHP:Operations
       ```
     Currently, PHP code generator doesn't follow these steps exactly. This task is a clean up task.
-1. "parameters" - common parameters
+1. "parameters" - common parameters in Swagger data.
 1. optional parameters
 1. optional properties
-1. serialization/deseriazlization according to type info.
+1. [ ] serialization/deseriazlization according to type info.
 1. operation result:
    - exception vs code
    - raw vs not raw
-1. parameters/responses
-   - classes vs arrays
+1. [ ] classes vs arrays (parameters/responses)
 1. `specinfo.json` or something like this for generating code?
