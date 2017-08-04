@@ -256,13 +256,6 @@ class GenTest extends TestInfo
         $this->assertNotNull($client);
     }
 
-    function testStorage()
-    {
-        $client = new \Microsoft\Azure\Management\Storage\_2017_06_01\StorageManagementClient(
-            $this->runTime, $this->subscriptionId);
-        $this->assertNotNull($client);
-    }
-
     function testStorageImportExport()
     {
         $client = new \Microsoft\Azure\Management\StorageImportExport\_2016_11_01\StorageImportExport(

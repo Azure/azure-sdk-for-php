@@ -1,8 +1,5 @@
-1. AutoRest pipeline:
-   ```
-   AutoRest Model => Swagger Builder => PHP Builder => PHP Files
-   ```
-   Currently, PHP code generator doesn't follow these steps exactly. This task is a clean up task.
+
+
 1. Special parameters:
    - [X] subscriptionId
    - [X] constants (API-VERSION, etc.)
@@ -14,10 +11,11 @@
      - https://github.com/adoy/PHP-OAuth2 - LGPL
      - [X] none
 1. Core library.
-1. Extensions
+1. Extensions https://github.com/Azure/autorest/tree/master/docs/extensions
    - long-running operations
    - flattering
    - [X] x-ms-skip-url-encoding
+   - x-ms-pageable
 1. Facade:
     1. Support for strong types. PHP 7, PHP 7.1 ?
     1. AutoRest should generate interfaces and static classes instead of concrete classes.
@@ -65,4 +63,14 @@
       ```
       PHP:Swagger => PHP:TypedSwagger => PHP:Operations
       ```
+    Currently, PHP code generator doesn't follow these steps exactly. This task is a clean up task.
 1. "parameters" - common parameters
+1. optional parameters
+1. optional properties
+1. serialization/deseriazlization according to type info.
+1. operation result:
+   - exception vs code
+   - raw vs not raw
+1. parameters/responses
+   - classes vs arrays
+1. `specinfo.json` or something like this for generating code?

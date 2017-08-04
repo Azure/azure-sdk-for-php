@@ -25,8 +25,7 @@ final class AzureHttps implements HttpsInterface
                         'resource' => 'https://management.core.windows.net/'
                     ]
                 ]);
-            $body = json_decode($response->getBody()->getContents());
-            $this->token = $body->access_token;
+            $this->token = $response['access_token'];
         }
         $headers['Authorization'] = 'Bearer ' . $this->token;
         return $this->http->send($method, $url, $headers, $options);

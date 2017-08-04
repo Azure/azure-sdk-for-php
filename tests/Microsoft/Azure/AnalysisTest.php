@@ -22,6 +22,54 @@ class AnalysisTest extends TestInfo
     function testServices()
     {
         $services = $this->client->getServers();
-        $services->list_();
+        $result = $services->list_();
+        print_r($result);
+        try {
+            $result = $services->create('resource', 'server', []);
+        } catch (\Exception $e) {
+            print_r($e->getMessage());
+        }
+        try {
+            $result = $services->delete('res', 'server');
+        } catch (\Exception $e) {
+            print_r($e->getMessage());
+        }
+        try {
+            $result = $services->getDetails('res', 'server');
+        } catch (\Exception $e) {
+            print_r($e->getMessage());
+        }
+        try {
+            $result = $services->listByResourceGroup('res');
+        } catch (\Exception $e) {
+            print_r($e->getMessage());
+        }
+        try {
+            $services->listSkusForExisting('res', 'server');
+        } catch (\Exception $e) {
+            print_r($e->getMessage());
+        }
+        $result = $services->listSkusForNew();
+        print_r($result);
+        try {
+            $result = $services->listSkusForExisting('res', 'server');
+        } catch (\Exception $e) {
+            print_r($e->getMessage());
+        }
+        try {
+            $services->resume('res', 'server');
+        } catch (\Exception $e) {
+            print_r($e->getMessage());
+        }
+        try {
+            $services->suspend('res', 'server');
+        } catch (\Exception $e) {
+            print_r($e->getMessage());
+        }
+        try {
+            $services->update('res', 'server', []);
+        } catch (\Exception $e) {
+            print_r($e->getMessage());
+        }
     }
 }

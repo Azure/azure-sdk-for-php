@@ -85,9 +85,7 @@ node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/az
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/relay/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Relay
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/resourcehealth/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.ResourceHealth
 
-rem error Resource
-rem Error: No input files provided.
-rem node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/resources/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Resource
+node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/resources/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Resource --package-resources
 
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/scheduler/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Scheduler
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/search/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Search

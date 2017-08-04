@@ -25,7 +25,12 @@ final class DefaultHttps implements HttpsInterface
             $url,
             $headers
         );
-        return $this->client->send($request, $options);
+        $response = $this->client->send($request, $options);
+        return json_decode(
+            $response->getBody()->getContents(),
+            TRUE,
+            512,
+            JSON_BIGINT_AS_STRING);
     }
 
     /**
