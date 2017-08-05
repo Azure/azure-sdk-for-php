@@ -9,9 +9,11 @@ final class OperationShared
      * @param string $method
      * @param string $path
      * @param string $query
+     * @param string[] $headers
+     * @param string $body
      * @return mixed
      */
-    function send($method, $path, $query)
+    function send($method, $path, $query, array $headers, $body)
     {
         $url = 'https://'
             . $this->host
@@ -20,7 +22,8 @@ final class OperationShared
         return $this->https->send(
             $method,
             $url,
-            [],
+            $headers,
+            $body,
             []);
     }
 

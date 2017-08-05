@@ -15,15 +15,17 @@ final class DefaultHttps implements HttpsInterface
      * @param string $method
      * @param string $url
      * @param string[] $headers
+     * @param string $body
      * @param array $options
      * @return mixed
      */
-    function send($method, $url, array $headers, array $options)
+    function send($method, $url, array $headers, $body, array $options)
     {
         $request = new Request(
             $method,
             $url,
-            $headers
+            $headers,
+            $body
         );
         $response = $this->client->send($request, $options);
         return json_decode(

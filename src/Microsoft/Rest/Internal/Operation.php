@@ -14,10 +14,13 @@ final class Operation implements OperationInterface
      */
     function call(array $parameters)
     {
+        $body = $this->parameters->getBody($parameters);
         return $this->shared->send(
             $this->httpMethod,
             $this->parameters->getPath($parameters),
-            $this->parameters->getQuery($parameters));
+            $this->parameters->getQuery($parameters),
+            $body === null ? [] : ['content-type' => 'application/json'],
+            $body);
     }
 
     /**

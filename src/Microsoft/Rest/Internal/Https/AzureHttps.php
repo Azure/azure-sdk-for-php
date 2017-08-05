@@ -7,16 +7,18 @@ final class AzureHttps implements HttpsInterface
      * @param string $method
      * @param string $url
      * @param string[] $headers
+     * @param string $body
      * @param array $options
      * @return mixed
      */
-    function send($method, $url, array $headers, array $options)
+    function send($method, $url, array $headers, $body, array $options)
     {
         if ($this->token === null) {
             $response = $this->http->send(
                 'POST',
                 'https://login.microsoftonline.com/' . $this->tenantId . '/oauth2/token',
                 [],
+                null,
                 [
                     'form_params' => [
                         'grant_type' => 'client_credentials',
@@ -28,7 +30,7 @@ final class AzureHttps implements HttpsInterface
             $this->token = $response['access_token'];
         }
         $headers['Authorization'] = 'Bearer ' . $this->token;
-        return $this->http->send($method, $url, $headers, $options);
+        return $this->http->send($method, $url, $headers, $body, $options);
     }
 
     /**

@@ -1,3 +1,9 @@
 *.phar
 .idea
 vendor/
+*.suo
+obj/
+*.runtimeconfig.dev.json
+*.runtimeconfig.json
+*.pdb
+bin/

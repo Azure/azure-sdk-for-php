@@ -51,6 +51,15 @@ final class Parameters
     }
 
     /**
+     * @param array $parameters
+     * @return mixed
+     */
+    function getBody(array $parameters)
+    {
+        return $this->body === null ? null : json_encode($parameters[$this->body->getName()]);
+    }
+
+    /**
      * @param TypeAbstract[] $typeMap
      * @param array $sharedParameterMap
      * @param string $operationId
