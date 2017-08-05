@@ -16,6 +16,14 @@ abstract class CollectionType extends TypeAbstract
     }
 
     /**
+     * @return TypeAbstract
+     */
+    function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
      * @param TypeAbstract $items
      */
     protected function __construct(TypeAbstract $items)

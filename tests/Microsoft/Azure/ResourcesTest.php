@@ -2,8 +2,6 @@
 namespace Microsoft\Azure;
 
 use Microsoft\Azure\Management\Resource\_2017_05_10\ResourceManagementClient;
-use Microsoft\Rest\HttpMock;
-use Microsoft\Rest\Internal\RunTime;
 
 class ResourcesTest extends TestInfo
 {
@@ -21,6 +19,18 @@ class ResourcesTest extends TestInfo
     function testResourceGroups()
     {
         $resourceGroups = $this->client->getResourceGroups();
-        $resourceGroups->createOrUpdate('test-resource-group', ['location' => 'East US']);
+        $result = $resourceGroups->createOrUpdate('test-resource-group', ['location' => 'East US']);
+        print_r($result);
+        $resourceGroups->update('test-resource-group', []);
+        $result = $resourceGroups->delete('test-resource-group');
+        print_r($result);
+        $result = $resourceGroups->list_('', null);
+        print_r($result);
+        $result = $resourceGroups->get('test-resource-group');
+        print_r($result);
+        $result = $resourceGroups->checkExistence('test-resource-group');
+        print_r($result);
+        $result = $resourceGroups->exportTemplate('test-resource-group', ['resources' => ['*']]);
+        print_r($result);
     }
 }

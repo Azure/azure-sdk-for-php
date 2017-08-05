@@ -17,7 +17,7 @@ final class Parameters
      */
     private static function addQueryParameter($query, Parameter $parameter, $value)
     {
-        return (strlen($query) > 0 ? '&' : '?')
+        return (strlen($query) > 0 ? $query . '&' : '?')
             . $parameter->getName()
             . "="
             . $parameter->urlEncode($value);
@@ -56,7 +56,7 @@ final class Parameters
      */
     function getBody(array $parameters)
     {
-        return $this->body === null ? null : json_encode($parameters[$this->body->getName()]);
+        return $this->body === null ? null : $this->body->toJson($parameters[$this->body->getName()]);
     }
 
     /**

@@ -8,6 +8,15 @@ use Microsoft\Rest\Internal\UnknownTypeException;
 abstract class PrimitiveTypeAbstract extends TypeAbstract
 {
     /**
+     * @param mixed $value
+     * @return string
+     */
+    function toJson($value)
+    {
+        return json_encode(strval($value));
+    }
+
+    /**
      * @param TypeAbstract[] $typeMap
      * @return TypeAbstract
      */

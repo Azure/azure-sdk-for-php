@@ -8,6 +8,25 @@ final class ClassType extends TypeAbstract
     use NotConstTypeTrait;
 
     /**
+     * @param array $value
+     * @return string
+     */
+    function toJson($value)
+    {
+        $result = '{';
+        foreach ($this->propertyMap as $name => $type) {
+            if (isset($value[$name])) {
+                $result .= (strlen($result) > 1 ? ',' : '')
+                    . '"'
+                    . $name
+                    . '":'
+                    . $type->toJson($value[$name]);
+            }
+        }
+        return $result . '}';
+    }
+
+    /**
      * @param TypeAbstract[] $propertyMap
      */
     function __construct($propertyMap)

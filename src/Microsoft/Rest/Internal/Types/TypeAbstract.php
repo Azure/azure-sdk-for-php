@@ -9,6 +9,12 @@ use Microsoft\Rest\Internal\Types\Primitives\PrimitiveTypeAbstract;
 abstract class TypeAbstract
 {
     /**
+     * @param mixed $value
+     * @return string
+     */
+    abstract function toJson($value);
+
+    /**
      * @return bool
      */
     abstract function isConst();

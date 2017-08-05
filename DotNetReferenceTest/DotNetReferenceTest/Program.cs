@@ -26,6 +26,10 @@ namespace DotNetReferenceTest
                 {
                     Location = "East US"
                 });
+            var x = resourceManagement.ResourceGroups.List();
+            resourceManagement.ResourceGroups.Update("temp-group", new ResourceGroupPatchable());
+            resourceManagement.ResourceGroups.ExportTemplate(
+                "temp-group", new ExportTemplateRequest() { Resources = new string[] { "*" } });
         }
 
         static void Main(string[] args)

@@ -48,6 +48,7 @@
     Currently, PHP code generator doesn't follow these steps exactly. This task is a clean up task.
 1. [ ] classes vs arrays (parameters/responses)
 1. `specinfo.json` or something like this for generating code?
+1. telemetry
 
 ## Done
 
@@ -84,3 +85,5 @@
     - Advisor: Recommendations.Get doesn't have the subscriptionId parameter
     - KeyVault 2016-10-01 has a different api_version parameter 2015-11-01
     - StorageImportExport has an explicit api_version
+    - Resource: ResourceGroups_ExportTemplate(_, new ExportTemplateRequest())
+      ExportTemplateRequest should require "Resources" property.

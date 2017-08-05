@@ -25,8 +25,20 @@ final class Parameter
         return $this->constValue;
     }
 
+    /**
+     * @param string $value
+     * @return string
+     */
     function urlEncode($value) {
         return $this->xMsSkipUrlEncoding ? $value : urlencode($value);
+    }
+
+    /**
+     * @param mixed $value
+     * @return string
+     */
+    function toJson($value) {
+        return $this->type->toJson($value);
     }
 
     /**

@@ -6,6 +6,16 @@ use Microsoft\Rest\Internal\UnknownTypeException;
 
 final class RefType extends TypeAbstract
 {
+    /**
+     * @param mixed $value
+     * @return string
+     * @throws \Exception
+     */
+    function toJson($value)
+    {
+        throw new \Exception('RefType::toJson()');
+    }
+
     function isConst()
     {
         throw new \Exception('RefType::isConst()');

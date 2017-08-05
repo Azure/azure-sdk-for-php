@@ -8,6 +8,24 @@ final class MapType extends CollectionType
     use NotConstTypeTrait;
 
     /**
+     * @param array $value
+     * @return string
+     */
+    function toJson($value)
+    {
+        $items = $this->getItems();
+        $result = '{';
+        foreach ($value as $name => $item) {
+            $result .= (strlen($result) > 1 ? ',' : '')
+                . '"'
+                . $name
+                . '":'
+                . $items->toJson($item);
+        }
+        return $result . '}';
+    }
+
+    /**
      * @param TypeAbstract $items
      */
     function __construct(TypeAbstract $items)
