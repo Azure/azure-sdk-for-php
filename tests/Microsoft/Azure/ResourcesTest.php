@@ -33,4 +33,25 @@ class ResourcesTest extends TestInfo
         $result = $resourceGroups->exportTemplate('test-resource-group', ['resources' => ['*']]);
         print_r($result);
     }
+
+    function testDeploymentOperations()
+    {
+        $do = $this->client->getDeploymentOperations();
+        try {
+            $do->get('test-resource-group', 'dn', 'opid');
+        } catch (\Exception $e) {
+            print_r($e->getMessage());
+        }
+        try {
+            $do->list_('test-resource-group', '', 0);
+        } catch(\Exception $e) {
+            print_r($e->getMessage());
+        }
+    }
+
+    function testDeployments()
+    {
+        $do = $this->client->getDeployments();
+        $do->get('test-resource-group', 'dn');
+    }
 }

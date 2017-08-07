@@ -1,10 +1,16 @@
 <?php
 namespace Microsoft\Azure;
 
+use Microsoft\Azure\Management\Resource\_2017_05_10\ResourceManagementClient;
 use Microsoft\Azure\Management\Storage\_2017_06_01\StorageManagementClient;
 
 class StorageTest extends TestInfo
 {
+    /**
+     * @var ResourceManagementClient
+     */
+    private $resourceClient;
+
     /**
      * @var StorageManagementClient
      */
@@ -14,6 +20,7 @@ class StorageTest extends TestInfo
     {
         parent::__construct();
         $this->client = new StorageManagementClient($this->runTime, $this->subscriptionId);
+        $this->resourceClient = new ResourceManagementClient($this->runTime, $this->subscriptionId);
     }
 
     function testOperations() {
@@ -26,6 +33,7 @@ class StorageTest extends TestInfo
         $storageAccounts = $this->client->getStorageAccounts();
         $result = $storageAccounts->list_();
         print_r($result);
-        // $storageAccounts->create('resourceGroup', 'accountName', []);
+        $this->resourceClient->getResourceGroups()->createOrUpdate('storage-test-group', ['location' => 'east us']);
+        $storageAccounts->create('storage-test-group', 'myaccountName', ['location'=>'east us']);
     }
 }

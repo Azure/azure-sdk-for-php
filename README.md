@@ -89,16 +89,11 @@ By default
 ```php
 namespace Microsoft/Rest;
 
-interface OperationResultInterface
-{
-    // under construction
-}
-
 interface OperationInterface
 {
     /**
-     * @param  array                    $parameters
-     * @return OperationResultInterface
+     * @param  array $parameters
+     * @return mixed
      */
     function call(array $parameters);
 }
@@ -106,21 +101,31 @@ interface OperationInterface
 interface ClientInterface
 {
     /**
-     * @param  string             $path          https://swagger.io/docs/specification/paths-and-operations/
-     * @param  string             $httpMethod    https://swagger.io/specification/#pathItemObject
-     * @param  array              $operationData https://swagger.io/specification/#operationObject
+     * @param  string             $operationId
      * @return OperationInterface
      */
-    function createOperation($path, $httpMethod, array $operationData);
+    function createOperation($operationId);
 }
 
-final class ClientStatic
+interface RunTimeInterface
 {
     /**
-     * @param  array           $definitionsData https://swagger.io/specification/#definitionsObject
+     * @param  array           $swaggerObjectData
+     * @param  array           $sharedParameterMap
      * @return ClientInterface
      */
-    function createClient(array $definitionsData);
+    function createClient(array $swaggerObjectData, array $sharedParameterMap);
+}
+
+final class AzureStatic
+{
+    /**
+     * @param  string $clientId
+     * @param  string $tenantId
+     * @param  string $clientSecret
+     * @return RunTimeInterface
+     */
+    function create($clientId, $tenantId, $clientSecret);
 
     private function __constructor() {}
 }
@@ -131,14 +136,13 @@ final class ClientStatic
 ```php
 class RedisClient
 {
-    function __constructor()
+    /**
+     * @param string $subscriptionId
+     */
+    function __constructor(RunTimeInterface $runTime, $subscriptionId)
     {
-        $this->_client = \Microsoft\Rest\ClientStatic::createFromData(
-            self::_DEFINITIONS_DATA);
-        $this->_create_operation = $this->_client->createOperationFromData(
-            '/path/{parameter}/',
-            'get',
-            self::_CREATE_OPERATION_DATA);
+        $this->_client = $runTime->createFromData(self::_SWAGGER_OBJECT_DATA, $subscriptionId);
+        $this->_create_operation = $this->_client->createOperation('create');
     }
 
     /**
@@ -150,32 +154,12 @@ class RedisClient
     }
 
     /**
-     * @var \Microsoft\Rest\ClientInterface
-     */
-    private $_client;
-
-    /**
      * @var \Microsoft\Rest\OperationInterface
      */
     private $_create_operation;
 
-    const _DEFINITIONS_DATA = [
-        'Sku' => [
-            'properties' => [
-                'name' => [
-                   'type' => 'string'
-                ]
-            ]
-        ]
-    ];
-
-    const _CREATE_OPERATION_DATA = [
-        'operationId' => 'create',
-        'parameters' => [
-            'name' => [
-                'type' => 'string'
-            ]
-        ],
+    const _SWAGGER_OBJECT_DATA = [
+        ...
     ];
 }
 ```
