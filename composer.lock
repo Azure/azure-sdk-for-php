@@ -260,16 +260,16 @@
         },
         {
             "name": "microsoft/azure-storage",
-            "version": "v0.16.0",
+            "version": "v0.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Azure/azure-storage-php.git",
-                "reference": "f35df06025c2e114121e958a774bcaf0076ba6b3"
+                "reference": "c519bfa1f450a16be6f8ff81e5298a06bb28a986"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Azure/azure-storage-php/zipball/f35df06025c2e114121e958a774bcaf0076ba6b3",
-                "reference": "f35df06025c2e114121e958a774bcaf0076ba6b3",
+                "url": "https://api.github.com/repos/Azure/azure-storage-php/zipball/c519bfa1f450a16be6f8ff81e5298a06bb28a986",
+                "reference": "c519bfa1f450a16be6f8ff81e5298a06bb28a986",
                 "shasum": ""
             },
             "require": {
