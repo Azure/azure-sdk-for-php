@@ -228,3 +228,26 @@ class RedisClient
       }
   }
   ```
+  Operations
+  ```php
+  interface SomeOperationsInterface
+  {
+      /**
+       * @return SomeOperationInterface
+       */
+      function someOperation(...required parameters...)
+  }
+  interface SomeOperationInterface
+  {
+      /**
+       * @param string $value
+       * @return SomeOperationInterface
+       */
+      function a($value)
+
+      /**
+       * @return SomeOperationResult
+       */    
+      function send();
+  }
+  ```

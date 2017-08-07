@@ -34,6 +34,8 @@ class HttpMock implements HttpsInterface
         $this->headers = $headers;
         $this->body = $body;
         $this->options = $options;
-        return $this->real !== null ? $this->real->send($method, $url, $headers, $body, $options) : null;
+        return $this->real !== null
+            ? $this->real->send($method, $url, $headers, $body, $options)
+            : null;
     }
 }
