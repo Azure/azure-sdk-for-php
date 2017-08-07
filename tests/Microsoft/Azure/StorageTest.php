@@ -34,6 +34,10 @@ class StorageTest extends TestInfo
         $result = $storageAccounts->list_();
         print_r($result);
         $this->resourceClient->getResourceGroups()->createOrUpdate('storage-test-group', ['location' => 'east us']);
-        $storageAccounts->create('storage-test-group', 'myaccountName', ['location'=>'east us']);
+        try {
+            $storageAccounts->create('storage-test-group', 'myaccountName', ['location' => 'east us']);
+        } catch (\Exception $e) {
+            print_r($e->getMessage());
+        }
     }
 }

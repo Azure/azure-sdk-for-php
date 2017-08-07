@@ -52,6 +52,10 @@ class ResourcesTest extends TestInfo
     function testDeployments()
     {
         $do = $this->client->getDeployments();
-        $do->get('test-resource-group', 'dn');
+        try {
+            $do->get('test-resource-group', 'dn');
+        } catch(\Exception $e) {
+            print_r($e->getMessage());
+        }
     }
 }

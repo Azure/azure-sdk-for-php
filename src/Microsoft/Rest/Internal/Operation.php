@@ -15,11 +15,16 @@ final class Operation implements OperationInterface
     function call(array $parameters)
     {
         $body = $this->parameters->getBody($parameters);
+        /** @var string[] */
+        $headers = $this->parameters->getHeaders($parameters);
+        if ($body !== null) {
+            $headers['content-type'] = 'application/json';
+        }
         return $this->shared->send(
             $this->httpMethod,
             $this->parameters->getPath($parameters),
             $this->parameters->getQuery($parameters),
-            $body === null ? [] : ['content-type' => 'application/json'],
+            $headers,
             $body);
     }
 

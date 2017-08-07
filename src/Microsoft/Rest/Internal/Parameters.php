@@ -60,6 +60,20 @@ final class Parameters
     }
 
     /**
+     * @param mixed[] $parameters
+     * @return string[]
+     */
+    function getHeaders(array $parameters)
+    {
+        $result = [];
+        foreach ($this->headers as $header) {
+            $name = $header->getName();
+            $result[$name] = strval($parameters[$name]);
+        }
+        return $result;
+    }
+
+    /**
      * @param TypeAbstract[] $typeMap
      * @param array $sharedParameterMap
      * @param string $operationId
