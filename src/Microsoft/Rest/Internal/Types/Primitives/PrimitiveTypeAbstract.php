@@ -88,6 +88,8 @@ abstract class PrimitiveTypeAbstract extends TypeAbstract
                             return new DecimalType();
                     }
                     break;
+                case 'file':
+                    return new FileType();
             }
         }
         throw new UnknownTypeException($schemaObjectData);
