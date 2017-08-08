@@ -40,53 +40,30 @@ rem FATAL: AutoRest.Core.Logging.CodeGenerationException: Swagger specification 
 rem node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/monitor/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Monitor
 
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/mysql/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.MySql
-
-rem error Network
-rem FATAL: AutoRest.Core.Logging.CodeGenerationException: Swagger specification is missing title in info section
-rem node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/network/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Network
-
+node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/network/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Network --tag=package-2016-12
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/notificationhubs/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.NotificationHubs
-
-rem error OperationalInsights
-rem FATAL: AutoRest.Core.Logging.CodeGenerationException: Swagger specification is missing title in info section
-rem node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/operationalinsights/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.OperationalInsights
-
+node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/operationalinsights/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.OperationalInsights --tag=package-2015-03
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/postgresql/resource-manager/readme.md  --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.PostgreSql
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/powerbiembedded/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.PowerBIEmbedded
-
-rem error RecoveryServices
-rem FATAL: AutoRest.Core.Logging.CodeGenerationException: Swagger specification is missing title in info section
-rem node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/recoveryservices/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.RecoveryServices
-
-rem error RecoveryServices.Backup
-rem FATAL: AutoRest.Core.Logging.CodeGenerationException: Swagger specification is missing title in info section
-rem node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/recoveryservicesbackup/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.RecoveryServices.Backup
-
+node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/recoveryservices/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.RecoveryServices --tag=package-2016-06
+node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/recoveryservicesbackup/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.RecoveryServices.Backup --tag=package-2016-06
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/recoveryservicessiterecovery/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.RecoveryServices.SiteRecovery
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/redis/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Redis
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/relay/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Relay
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/resourcehealth/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.ResourceHealth
-
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/resources/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Resource --package-resources
-
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/scheduler/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Scheduler
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/search/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Search
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/servermanagement/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.ServerManagement
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/service-map/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.ServiceMap
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/servicebus/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.ServiceBus
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/servicefabric/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.ServiceFabric
-
-rem error Sql
-rem FATAL: AutoRest.Core.Logging.CodeGenerationException: Swagger specification is missing title in info section
-rem node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/sql/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Sql
-
+node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/sql/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Sql --tag=schema-2015-05-preview
+node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/sql/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Sql --tag=schema-2014-04
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/storage/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Storage
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/storageimportexport/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.StorageImportExport
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/storsimple8000series/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.StorSimple8000Series
-
-rem error StreamAnalytics
-rem FATAL: AutoRest.Core.Logging.CodeGenerationException: Swagger specification is missing title in info section
-rem node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/streamanalytics/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.StreamAnalytics
+node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/streamanalytics/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.StreamAnalytics
 
 rem error TimeSeriesInsights
 rem FATAL: System.InvalidOperationException: Found incompatible property types ,  for property 'properties' in schema inheritance chain
@@ -97,4 +74,4 @@ node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/az
 
 rem error Web
 rem FATAL: AutoRest.Core.Logging.CodeGenerationException: Swagger specification is missing title in info section
-rem node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/web/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.WebSites
+rem node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/web/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.WebSites --tag=package-2015-08-preview
