@@ -4,7 +4,7 @@ node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/az
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/analysisservices/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Analysis
 
 rem error ApiManagement
-rem FATAL: System.InvalidOperationException: Found incompatible property types ,  for property 'properties' in schema inheritance chain
+rem FATAL: AutoRest.Core.Logging.CodeGenerationException: Swagger specification is missing title in info section
 rem node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/apimanagement/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.ApiManagement
 
 rem error AppInsights

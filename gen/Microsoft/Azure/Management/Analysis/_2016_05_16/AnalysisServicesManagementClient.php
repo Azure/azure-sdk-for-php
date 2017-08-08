@@ -352,10 +352,6 @@ final class AnalysisServicesManagementClient
                         'Basic',
                         'Standard'
                     ]
-                ],
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
                 ]
             ]],
             'Resource' => ['properties' => [
@@ -417,14 +413,7 @@ final class AnalysisServicesManagementClient
             ]]],
             'AnalysisServicesServerMutableProperties' => ['properties' => [
                 'asAdministrators' => ['$ref' => '#/definitions/ServerAdministrators'],
-                'backupBlobContainerUri' => ['type' => 'string'],
-                'defaultConnectionMode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'all',
-                        'readOnly'
-                    ]
-                ]
+                'backupBlobContainerUri' => ['type' => 'string']
             ]],
             'AnalysisServicesServerUpdateParameters' => ['properties' => [
                 'sku' => ['$ref' => '#/definitions/ResourceSku'],
