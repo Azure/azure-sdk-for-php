@@ -5,11 +5,7 @@ node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/az
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/apimanagement/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.ApiManagement
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/appinsights/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.AppInsights
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/authorization/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Authorization
-
-rem error Automation
-rem FATAL: AutoRest.Core.Logging.CodeGenerationException: Swagger specification is missing title in info section
-rem node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/automation/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Automation
-
+node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/automation/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Automation
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/batch/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Batch
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/billing/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Billing
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/cdn/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Cdn
@@ -18,7 +14,8 @@ node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/az
 
 rem error Compute
 rem FATAL: AutoRest.Core.Logging.CodeGenerationException: Swagger specification is missing title in info section
-rem node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/compute/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Compute
+node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/compute/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Compute --tag=package-compute-2017-03
+node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/compute/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Compute --tag=package-container-service-2017-01
 
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/consumption/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.Consumption
 node c:\autorest\src\autorest-core\dist\app.js --php https://github.com/Azure/azure-rest-api-specs/blob/current/specification/containerregistry/resource-manager/readme.md --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --namespace=Microsoft.Azure.Management.ContainerRegistry
