@@ -46,6 +46,8 @@ abstract class TypeAbstract
             return new RefType($ref, $schemaObjectData);
         }
 
+        $additionalPropertiesData = $schemaObjectData->getChildOrNull('additionalProperties');
+
         /**
          * @var string
          */
@@ -55,7 +57,6 @@ abstract class TypeAbstract
                 case 'array':
                     return ArrayType::createFromDataWithRefs($schemaObjectData);
                 case 'object':
-                    $additionalPropertiesData = $schemaObjectData->getChildOrNull('additionalProperties');
                     return $additionalPropertiesData === null
                         ? new ObjectType()
                         : MapType::createFromItemData($additionalPropertiesData);
@@ -67,7 +68,10 @@ abstract class TypeAbstract
         // ClassType
         $properties = $schemaObjectData->getChildOrNull('properties');
         if ($properties !== null) {
-            return ClassType::createFromDataWithRefs($properties);
+            return ClassType::createClassFromData(
+                $properties,
+                $schemaObjectData->getChildOrNull('required'),
+                $additionalPropertiesData);
         }
 
         throw new InvalidSchemaObjectException($schemaObjectData);

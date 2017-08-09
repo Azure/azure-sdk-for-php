@@ -14,7 +14,14 @@ final class ClassType extends TypeAbstract
     function toJson($value)
     {
         $result = '{';
-        foreach ($this->propertyMap as $name => $type) {
+        foreach ($this->requiredPropertyMap as $name => $type) {
+            $result .= (strlen($result) > 1 ? ',' : '')
+                . '"'
+                . $name
+                . '":'
+                . $type->toJson($value[$name]);
+        }
+        foreach ($this->optionalPropertyMap as $name => $type) {
             if (isset($value[$name])) {
                 $result .= (strlen($result) > 1 ? ',' : '')
                     . '"'
@@ -27,34 +34,88 @@ final class ClassType extends TypeAbstract
     }
 
     /**
-     * @param TypeAbstract[] $propertyMap
+     * @param TypeAbstract[] $requiredPropertyMap
+     * @param TypeAbstract[] $optionalPropertyMap
+     * @param TypeAbstract|null $additionalProperties
      */
-    function __construct($propertyMap)
+    function __construct(
+        array $requiredPropertyMap,
+        array $optionalPropertyMap,
+        TypeAbstract $additionalProperties = null)
     {
-        $this->propertyMap = $propertyMap;
+        $this->requiredPropertyMap = $requiredPropertyMap;
+        $this->optionalPropertyMap = $optionalPropertyMap;
+        $this->additionalProperties = $additionalProperties;
     }
 
     /**
      * @param DataAbstract $propertiesData
+     * @param DataAbstract $requiredData
+     * @param DataAbstract|null $additionalPropertiesData
      * @return ClassType
      */
-    static function createFromDataWithRefs(DataAbstract $propertiesData)
+    static function createClassFromData(
+        DataAbstract $propertiesData,
+        DataAbstract $requiredData = null,
+        DataAbstract $additionalPropertiesData = null)
     {
-        return new ClassType(TypeAbstract::createMapFromData($propertiesData));
+        /**
+         * @var TypeAbstract[]
+         */
+        $requiredPropertyMap = [];
+        /**
+         * @var TypeAbstract[]
+         */
+        $optionalPropertyMap = [];
+        /**
+         * @var string[]
+         */
+        $required = $requiredData == null ? [] : $requiredData->getValue();
+        foreach ($propertiesData->getChildren() as $child)
+        {
+            $name = $child->getKey();
+            $type = TypeAbstract::createFromDataWithRefs($child);
+            if (in_array($name, $required)) {
+                $requiredPropertyMap[$name] = $type;
+            } else {
+                $optionalPropertyMap[$name] = $type;
+            }
+        }
+
+        return new ClassType(
+            $requiredPropertyMap,
+            $optionalPropertyMap,
+            $additionalPropertiesData == null
+                ? null
+                : TypeAbstract::createFromDataWithRefs($additionalPropertiesData));
     }
 
     /**
      * @param TypeAbstract[] $typeMap
-     * @return TypeAbstract
+     * @return $this
      */
     function removeRefTypes(array $typeMap)
     {
-        $this->propertyMap = TypeAbstract::removeRefTypesFromMap($typeMap, $this->propertyMap);
+        $this->requiredPropertyMap = TypeAbstract::removeRefTypesFromMap($typeMap, $this->requiredPropertyMap);
+        $this->optionalPropertyMap = TypeAbstract::removeRefTypesFromMap($typeMap, $this->optionalPropertyMap);
+        if ($this->additionalProperties != null) {
+            $this->additionalProperties = $this->additionalProperties->removeRefTypes($typeMap);
+        }
         return $this;
     }
 
     /**
      * @var TypeAbstract[]
      */
-    private $propertyMap;
+    private $requiredPropertyMap;
+
+    /**
+     * @var TypeAbstract[]
+     */
+    private $optionalPropertyMap;
+
+    /**
+     * @var TypeAbstract|null
+     */
+    private $additionalProperties;
 }

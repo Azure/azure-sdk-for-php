@@ -130,6 +130,7 @@ class ClientStaticTest extends TestCase
     {
         $definitionsData = [
             "Sku" => [
+                'required' => ['int32'],
                 "properties" => [
                     "name" => [
                         "type" => "string"
@@ -188,10 +189,11 @@ class ClientStaticTest extends TestCase
                     ]
                 ]
             ],
-            "RedisProperties" => [
-                "properties" => [
-                    "redisConfiguration" => [
-                        "properties" => []
+            'RedisProperties' => [
+                'required' => ['redisConfiguration'],
+                'properties' => [
+                    'redisConfiguration' => [
+                        'properties' => []
                     ]
                 ]
             ]
@@ -236,25 +238,26 @@ class ClientStaticTest extends TestCase
         $parameter = $queryParameters[0];
         $type = self::getPrivate($parameter, 'type');
 
-        $redisProperties = new ClassType(['redisConfiguration' => new ClassType([])]);
+        $redisProperties = new ClassType(['redisConfiguration' => new ClassType([], [])], []);
         $this->assertEquals(
             $type,
-            new ClassType([
-                "name" => new StringType(),
-                "int32" => new Int32Type(),
-                "int64" => new Int64Type(),
-                "float" => new FloatType(),
-                "double" => new DoubleType(),
-                "base64" => new Base64Type(),
-                "binary" => new BinaryType(),
-                "boolean" => new BooleanType(),
-                "date" => new DateType(),
-                "dateTime" => new DateTimeType(),
-                "password" => new PasswordType(),
-                "array" => new ArrayType(new StringType()),
-                "ref" => $redisProperties,
-                "map" => new MapType(new Int32Type())
-            ]));
+            new ClassType(
+                ["int32" => new Int32Type()],
+                [
+                    "name" => new StringType(),
+                    "int64" => new Int64Type(),
+                    "float" => new FloatType(),
+                    "double" => new DoubleType(),
+                    "base64" => new Base64Type(),
+                    "binary" => new BinaryType(),
+                    "boolean" => new BooleanType(),
+                    "date" => new DateType(),
+                    "dateTime" => new DateTimeType(),
+                    "password" => new PasswordType(),
+                    "array" => new ArrayType(new StringType()),
+                    "ref" => $redisProperties,
+                    "map" => new MapType(new Int32Type())
+                ]));
     }
 
     function testCreateFromDataThrowsUnknownNameException()
