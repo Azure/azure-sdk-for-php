@@ -1,7 +1,7 @@
 <?php
 namespace Microsoft\Azure;
 
-use Microsoft\Azure\Management\Authorization\_2015_07_01\AuthorizationManagementClient;
+use Microsoft\Azure\Management\Authorization\AuthorizationManagementClient;
 
 class AuthorizationTest extends TestInfo
 {

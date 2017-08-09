@@ -1,7 +1,7 @@
 <?php
 namespace Microsoft\Azure;
 
-use Microsoft\Azure\Management\Automation\_2015_10_31\AutomationClient;
+use Microsoft\Azure\Management\Automation\AutomationClient;
 
 class AutomationTest extends TestInfo
 {

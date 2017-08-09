@@ -1,7 +1,7 @@
 <?php
 namespace Microsoft\Azure;
 
-use Microsoft\Azure\Management\Dns\_2016_04_01\DnsManagementClient;
+use Microsoft\Azure\Management\Dns\DnsManagementClient;
 
 class DnsTest extends TestInfo
 {

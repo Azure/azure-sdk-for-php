@@ -2,7 +2,7 @@
 namespace Microsoft\Azure;
 
 use GuzzleHttp\Exception\ClientException;
-use Microsoft\Azure\Management\Advisor\_2017_04_19\AdvisorManagementClient;
+use Microsoft\Azure\Management\Advisor\AdvisorManagementClient;
 
 class AdvisorTest extends TestInfo
 {

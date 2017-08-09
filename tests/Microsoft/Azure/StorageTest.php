@@ -1,8 +1,8 @@
 <?php
 namespace Microsoft\Azure;
 
-use Microsoft\Azure\Management\Resource\_2017_05_10\ResourceManagementClient;
-use Microsoft\Azure\Management\Storage\_2017_06_01\StorageManagementClient;
+use Microsoft\Azure\Management\Resource\ResourceManagementClient;
+use Microsoft\Azure\Management\Storage\StorageManagementClient;
 
 class StorageTest extends TestInfo
 {

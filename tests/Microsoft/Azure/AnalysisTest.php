@@ -1,7 +1,7 @@
 <?php
 namespace Microsoft\Azure;
 
-use Microsoft\Azure\Management\Analysis\_2016_05_16\AnalysisServicesManagementClient;
+use Microsoft\Azure\Management\Analysis\AnalysisServicesManagementClient;
 
 class AnalysisTest extends TestInfo
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Microsoft\Azure;
 
-use Microsoft\Azure\Management\Resource\_2017_05_10\ResourceManagementClient;
+use Microsoft\Azure\Management\Resource\ResourceManagementClient;
 
 class ResourcesTest extends TestInfo
 {

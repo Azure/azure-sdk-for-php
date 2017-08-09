@@ -9,7 +9,7 @@ class GenTest extends TestInfo
 {
     function testAnalysis()
     {
-        $client = new \Microsoft\Azure\Management\Analysis\_2016_05_16\AnalysisServicesManagementClient(
+        $client = new \Microsoft\Azure\Management\Analysis\AnalysisServicesManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
@@ -20,266 +20,266 @@ class GenTest extends TestInfo
 
     function testAuthorization()
     {
-        $client = new \Microsoft\Azure\Management\Authorization\_2015_07_01\AuthorizationManagementClient(
+        $client = new \Microsoft\Azure\Management\Authorization\AuthorizationManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testBatch()
     {
-        $client = new \Microsoft\Azure\Management\Batch\_2017_05_01\BatchManagementClient(
+        $client = new \Microsoft\Azure\Management\Batch\BatchManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testBilling()
     {
-        $client = new \Microsoft\Azure\Management\Billing\_2017_04_24_preview\BillingManagementClient(
+        $client = new \Microsoft\Azure\Management\Billing\BillingManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testCdn()
     {
-        $client = new \Microsoft\Azure\Management\Cdn\_2016_10_02\CdnManagementClient(
+        $client = new \Microsoft\Azure\Management\Cdn\CdnManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testCognitiveServices()
     {
-        $client = new \Microsoft\Azure\Management\CognitiveServices\_2017_04_18\CognitiveServicesManagementClient(
+        $client = new \Microsoft\Azure\Management\CognitiveServices\CognitiveServicesManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testCommerce()
     {
-        $client = new \Microsoft\Azure\Management\Commerce\_2015_06_01_preview\UsageManagementClient(
+        $client = new \Microsoft\Azure\Management\Commerce\UsageManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testConsumption()
     {
-        $client = new \Microsoft\Azure\Management\Consumption\_2017_04_24_preview\ConsumptionManagementClient(
+        $client = new \Microsoft\Azure\Management\Consumption\ConsumptionManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testContainerRegistry()
     {
-        $client = new \Microsoft\Azure\Management\ContainerRegistry\_2017_06_01_preview\ContainerRegistryManagementClient(
+        $client = new \Microsoft\Azure\Management\ContainerRegistry\ContainerRegistryManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testCosmosDb()
     {
-        $client = new \Microsoft\Azure\Management\CosmosDb\_2015_04_08\CosmosDB(
+        $client = new \Microsoft\Azure\Management\CosmosDb\CosmosDB(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testCustomerInsights()
     {
-        $client = new \Microsoft\Azure\Management\CustomerInsights\_2017_04_26\CustomerInsightsManagementClient(
+        $client = new \Microsoft\Azure\Management\CustomerInsights\CustomerInsightsManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testDataLakeAnalytics()
     {
-        $client = new \Microsoft\Azure\Management\DataLake\Analytics\_2016_11_01\DataLakeAnalyticsAccountManagementClient(
+        $client = new \Microsoft\Azure\Management\DataLake\Analytics\DataLakeAnalyticsAccountManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testDataLakeStore()
     {
-        $client = new \Microsoft\Azure\Management\DataLake\Store\_2016_11_01\DataLakeStoreAccountManagementClient(
+        $client = new \Microsoft\Azure\Management\DataLake\Store\DataLakeStoreAccountManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testDevTestLab()
     {
-        $client = new \Microsoft\Azure\Management\DevTestLabs\_2016_05_15\DevTestLabsClient(
+        $client = new \Microsoft\Azure\Management\DevTestLabs\DevTestLabsClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testDns()
     {
-        $client = new \Microsoft\Azure\Management\Dns\_2016_04_01\DnsManagementClient(
+        $client = new \Microsoft\Azure\Management\Dns\DnsManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testEventHub()
     {
-        $client = new \Microsoft\Azure\Management\EventHub\_2017_04_01\EventHubManagementClient(
+        $client = new \Microsoft\Azure\Management\EventHub\EventHubManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testIntune()
     {
-        $client = new \Microsoft\Azure\Management\Intune\_2015_01_14_preview\IntuneResourceManagementClient(
+        $client = new \Microsoft\Azure\Management\Intune\IntuneResourceManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testIotHub()
     {
-        $client = new \Microsoft\Azure\Management\IotHub\_2017_07_01\IotHubClient(
+        $client = new \Microsoft\Azure\Management\IotHub\IotHubClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testKeyVault()
     {
-        $client = new \Microsoft\Azure\Management\KeyVault\_2016_10_01\KeyVaultManagementClient(
+        $client = new \Microsoft\Azure\Management\KeyVault\KeyVaultManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testLogic()
     {
-        $client = new \Microsoft\Azure\Management\Logic\_2016_06_01\LogicManagementClient(
+        $client = new \Microsoft\Azure\Management\Logic\LogicManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testMedia()
     {
-        $client = new \Microsoft\Azure\Management\Media\_2015_10_01\MediaServicesManagementClient(
+        $client = new \Microsoft\Azure\Management\Media\MediaServicesManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testMobileEngagement()
     {
-        $client = new \Microsoft\Azure\Management\MobileEngagement\_2014_12_01\EngagementManagementClient(
+        $client = new \Microsoft\Azure\Management\MobileEngagement\EngagementManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testMySql()
     {
-        $client = new \Microsoft\Azure\Management\MySql\_2017_04_30_preview\MySQLManagementClient(
+        $client = new \Microsoft\Azure\Management\MySql\MySQLManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testNotificationHubs()
     {
-        $client = new \Microsoft\Azure\Management\NotificationHubs\_2017_04_01\NotificationHubsManagementClient(
+        $client = new \Microsoft\Azure\Management\NotificationHubs\NotificationHubsManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testPostgreSql()
     {
-        $client = new \Microsoft\Azure\Management\PostgreSql\_2017_04_30_preview\PostgreSQLManagementClient(
+        $client = new \Microsoft\Azure\Management\PostgreSql\PostgreSQLManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testPowerBIEmbedded()
     {
-        $client = new \Microsoft\Azure\Management\PowerBIEmbedded\_2016_01_29\PowerBIEmbeddedManagementClient(
+        $client = new \Microsoft\Azure\Management\PowerBIEmbedded\PowerBIEmbeddedManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testRecoveryServicesSiteRecovery()
     {
-        $client = new \Microsoft\Azure\Management\RecoveryServices\SiteRecovery\_2016_08_10\SiteRecoveryManagementClient(
+        $client = new \Microsoft\Azure\Management\RecoveryServices\SiteRecovery\SiteRecoveryManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testRedis()
     {
-        $client = new \Microsoft\Azure\Management\Redis\_2017_02_01\RedisManagementClient(
+        $client = new \Microsoft\Azure\Management\Redis\RedisManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testRelay()
     {
-        $client = new \Microsoft\Azure\Management\Relay\_2017_04_01\RelayManagementClient(
+        $client = new \Microsoft\Azure\Management\Relay\RelayManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testResourceHealth()
     {
-        $client = new \Microsoft\Azure\Management\ResourceHealth\_2017_07_01\MicrosoftResourceHealth(
+        $client = new \Microsoft\Azure\Management\ResourceHealth\MicrosoftResourceHealth(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testScheduler()
     {
-        $client = new \Microsoft\Azure\Management\Scheduler\_2016_03_01\SchedulerManagementClient(
+        $client = new \Microsoft\Azure\Management\Scheduler\SchedulerManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testSearch()
     {
-        $client = new \Microsoft\Azure\Management\Search\_2015_08_19\SearchManagementClient(
+        $client = new \Microsoft\Azure\Management\Search\SearchManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testServerManagement()
     {
-        $client = new \Microsoft\Azure\Management\ServerManagement\_2016_07_01_preview\ServerManagement(
+        $client = new \Microsoft\Azure\Management\ServerManagement\ServerManagement(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testServiceMap()
     {
-        $client = new \Microsoft\Azure\Management\ServiceMap\_2015_11_01_preview\ServiceMap(
+        $client = new \Microsoft\Azure\Management\ServiceMap\ServiceMap(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testServiceBus()
     {
-        $client = new \Microsoft\Azure\Management\ServiceBus\_2017_04_01\ServiceBusManagementClient(
+        $client = new \Microsoft\Azure\Management\ServiceBus\ServiceBusManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testStorageImportExport()
     {
-        $client = new \Microsoft\Azure\Management\StorageImportExport\_2016_11_01\StorageImportExport(
+        $client = new \Microsoft\Azure\Management\StorageImportExport\StorageImportExport(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testStorSimple8000Series()
     {
-        $client = new \Microsoft\Azure\Management\StorSimple8000Series\_2017_06_01\StorSimple8000SeriesManagementClient(
+        $client = new \Microsoft\Azure\Management\StorSimple8000Series\StorSimple8000SeriesManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testTrafficManager()
     {
-        $client = new \Microsoft\Azure\Management\TrafficManager\_2017_05_01\TrafficManagerManagementClient(
+        $client = new \Microsoft\Azure\Management\TrafficManager\TrafficManagerManagementClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
 
     function testVisualStudio()
     {
-        $client = new \Microsoft\Azure\Management\VisualStudio\_2014_04_01_preview\VisualStudioResourceProviderClient(
+        $client = new \Microsoft\Azure\Management\VisualStudio\VisualStudioResourceProviderClient(
             $this->runTime, $this->subscriptionId);
         $this->assertNotNull($client);
     }
