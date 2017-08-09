@@ -118,17 +118,17 @@ final class Jobs
      * Lists all jobs under the specified job collection.
      * @param string $resourceGroupName
      * @param string $jobCollectionName
-     * @param integer $_top
-     * @param integer $_skip
-     * @param string $_filter
+     * @param integer|null $_top
+     * @param integer|null $_skip
+     * @param string|null $_filter
      * @return array
      */
     public function list_(
         $resourceGroupName,
         $jobCollectionName,
-        $_top,
-        $_skip,
-        $_filter
+        $_top = null,
+        $_skip = null,
+        $_filter = null
     )
     {
         return $this->_List_operation->call([
@@ -144,18 +144,18 @@ final class Jobs
      * @param string $resourceGroupName
      * @param string $jobCollectionName
      * @param string $jobName
-     * @param integer $_top
-     * @param integer $_skip
-     * @param string $_filter
+     * @param integer|null $_top
+     * @param integer|null $_skip
+     * @param string|null $_filter
      * @return array
      */
     public function listJobHistory(
         $resourceGroupName,
         $jobCollectionName,
         $jobName,
-        $_top,
-        $_skip,
-        $_filter
+        $_top = null,
+        $_skip = null,
+        $_filter = null
     )
     {
         return $this->_ListJobHistory_operation->call([

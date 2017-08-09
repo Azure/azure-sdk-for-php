@@ -32,13 +32,13 @@ final class Providers
     }
     /**
      * Gets all resource providers for a subscription.
-     * @param integer $_top
-     * @param string $_expand
+     * @param integer|null $_top
+     * @param string|null $_expand
      * @return array
      */
     public function list_(
-        $_top,
-        $_expand
+        $_top = null,
+        $_expand = null
     )
     {
         return $this->_List_operation->call([
@@ -48,12 +48,12 @@ final class Providers
     }
     /**
      * Gets the specified resource provider.
-     * @param string $_expand
+     * @param string|null $_expand
      * @param string $resourceProviderNamespace
      * @return array
      */
     public function get(
-        $_expand,
+        $_expand = null,
         $resourceProviderNamespace
     )
     {

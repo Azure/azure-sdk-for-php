@@ -17,13 +17,13 @@ final class Recommendations
     }
     /**
      * List all recommendations for a subscription.
-     * @param boolean $featured
-     * @param string $_filter
+     * @param boolean|null $featured
+     * @param string|null $_filter
      * @return array[]
      */
     public function list_(
-        $featured,
-        $_filter
+        $featured = null,
+        $_filter = null
     )
     {
         return $this->_List_operation->call([
@@ -42,13 +42,13 @@ final class Recommendations
      * Get past recommendations for an app, optionally specified by the time range.
      * @param string $resourceGroupName
      * @param string $siteName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array[]
      */
     public function listHistoryForWebApp(
         $resourceGroupName,
         $siteName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListHistoryForWebApp_operation->call([
@@ -61,15 +61,15 @@ final class Recommendations
      * Get all recommendations for an app.
      * @param string $resourceGroupName
      * @param string $siteName
-     * @param boolean $featured
-     * @param string $_filter
+     * @param boolean|null $featured
+     * @param string|null $_filter
      * @return array[]
      */
     public function listRecommendedRulesForWebApp(
         $resourceGroupName,
         $siteName,
-        $featured,
-        $_filter
+        $featured = null,
+        $_filter = null
     )
     {
         return $this->_ListRecommendedRulesForWebApp_operation->call([
@@ -114,14 +114,14 @@ final class Recommendations
      * @param string $resourceGroupName
      * @param string $siteName
      * @param string $name
-     * @param boolean $updateSeen
+     * @param boolean|null $updateSeen
      * @return array
      */
     public function getRuleDetailsByWebApp(
         $resourceGroupName,
         $siteName,
         $name,
-        $updateSeen
+        $updateSeen = null
     )
     {
         return $this->_GetRuleDetailsByWebApp_operation->call([

@@ -17,7 +17,7 @@ final class RecoveryPoints
      * @param string $fabricName
      * @param string $containerName
      * @param string $protectedItemName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function list_(
@@ -26,7 +26,7 @@ final class RecoveryPoints
         $fabricName,
         $containerName,
         $protectedItemName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_List_operation->call([

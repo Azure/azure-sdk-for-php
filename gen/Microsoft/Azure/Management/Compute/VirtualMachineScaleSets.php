@@ -78,13 +78,13 @@ final class VirtualMachineScaleSets
      * Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates.
      * @param string $resourceGroupName
      * @param string $vmScaleSetName
-     * @param array $vmInstanceIDs
+     * @param array|null $vmInstanceIDs
      * @return array
      */
     public function deallocate(
         $resourceGroupName,
         $vmScaleSetName,
-        array $vmInstanceIDs
+        array $vmInstanceIDs = null
     )
     {
         return $this->_Deallocate_operation->call([
@@ -165,13 +165,13 @@ final class VirtualMachineScaleSets
      * Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
      * @param string $resourceGroupName
      * @param string $vmScaleSetName
-     * @param array $vmInstanceIDs
+     * @param array|null $vmInstanceIDs
      * @return array
      */
     public function powerOff(
         $resourceGroupName,
         $vmScaleSetName,
-        array $vmInstanceIDs
+        array $vmInstanceIDs = null
     )
     {
         return $this->_PowerOff_operation->call([
@@ -184,13 +184,13 @@ final class VirtualMachineScaleSets
      * Restarts one or more virtual machines in a VM scale set.
      * @param string $resourceGroupName
      * @param string $vmScaleSetName
-     * @param array $vmInstanceIDs
+     * @param array|null $vmInstanceIDs
      * @return array
      */
     public function restart(
         $resourceGroupName,
         $vmScaleSetName,
-        array $vmInstanceIDs
+        array $vmInstanceIDs = null
     )
     {
         return $this->_Restart_operation->call([
@@ -203,13 +203,13 @@ final class VirtualMachineScaleSets
      * Starts one or more virtual machines in a VM scale set.
      * @param string $resourceGroupName
      * @param string $vmScaleSetName
-     * @param array $vmInstanceIDs
+     * @param array|null $vmInstanceIDs
      * @return array
      */
     public function start(
         $resourceGroupName,
         $vmScaleSetName,
-        array $vmInstanceIDs
+        array $vmInstanceIDs = null
     )
     {
         return $this->_Start_operation->call([
@@ -241,13 +241,13 @@ final class VirtualMachineScaleSets
      * Reimages (upgrade the operating system) one or more virtual machines in a VM scale set.
      * @param string $resourceGroupName
      * @param string $vmScaleSetName
-     * @param array $vmInstanceIDs
+     * @param array|null $vmInstanceIDs
      * @return array
      */
     public function reimage(
         $resourceGroupName,
         $vmScaleSetName,
-        array $vmInstanceIDs
+        array $vmInstanceIDs = null
     )
     {
         return $this->_Reimage_operation->call([
@@ -260,13 +260,13 @@ final class VirtualMachineScaleSets
      * Reimages all the disks ( including data disks ) in the virtual machines in a VM scale set. This operation is only supported for managed disks.
      * @param string $resourceGroupName
      * @param string $vmScaleSetName
-     * @param array $vmInstanceIDs
+     * @param array|null $vmInstanceIDs
      * @return array
      */
     public function reimageAll(
         $resourceGroupName,
         $vmScaleSetName,
-        array $vmInstanceIDs
+        array $vmInstanceIDs = null
     )
     {
         return $this->_ReimageAll_operation->call([

@@ -90,13 +90,13 @@ final class ResourceGroups
     }
     /**
      * Gets all the resource groups for a subscription.
-     * @param string $_filter
-     * @param integer $_top
+     * @param string|null $_filter
+     * @param integer|null $_top
      * @return array
      */
     public function list_(
-        $_filter,
-        $_top
+        $_filter = null,
+        $_top = null
     )
     {
         return $this->_List_operation->call([

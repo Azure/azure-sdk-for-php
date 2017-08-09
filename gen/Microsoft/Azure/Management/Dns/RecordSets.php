@@ -21,7 +21,7 @@ final class RecordSets
      * @param string $relativeRecordSetName
      * @param string $recordType
      * @param array $parameters
-     * @param string $if_Match
+     * @param string|null $if_Match
      * @return array
      */
     public function update(
@@ -30,7 +30,7 @@ final class RecordSets
         $relativeRecordSetName,
         $recordType,
         array $parameters,
-        $if_Match
+        $if_Match = null
     )
     {
         return $this->_Update_operation->call([
@@ -49,8 +49,8 @@ final class RecordSets
      * @param string $relativeRecordSetName
      * @param string $recordType
      * @param array $parameters
-     * @param string $if_Match
-     * @param string $if_None_Match
+     * @param string|null $if_Match
+     * @param string|null $if_None_Match
      * @return array
      */
     public function createOrUpdate(
@@ -59,8 +59,8 @@ final class RecordSets
         $relativeRecordSetName,
         $recordType,
         array $parameters,
-        $if_Match,
-        $if_None_Match
+        $if_Match = null,
+        $if_None_Match = null
     )
     {
         return $this->_CreateOrUpdate_operation->call([
@@ -79,14 +79,14 @@ final class RecordSets
      * @param string $zoneName
      * @param string $relativeRecordSetName
      * @param string $recordType
-     * @param string $if_Match
+     * @param string|null $if_Match
      */
     public function delete(
         $resourceGroupName,
         $zoneName,
         $relativeRecordSetName,
         $recordType,
-        $if_Match
+        $if_Match = null
     )
     {
         return $this->_Delete_operation->call([
@@ -124,16 +124,16 @@ final class RecordSets
      * @param string $resourceGroupName
      * @param string $zoneName
      * @param string $recordType
-     * @param integer $_top
-     * @param string $_recordsetnamesuffix
+     * @param integer|null $_top
+     * @param string|null $_recordsetnamesuffix
      * @return array
      */
     public function listByType(
         $resourceGroupName,
         $zoneName,
         $recordType,
-        $_top,
-        $_recordsetnamesuffix
+        $_top = null,
+        $_recordsetnamesuffix = null
     )
     {
         return $this->_ListByType_operation->call([
@@ -148,15 +148,15 @@ final class RecordSets
      * Lists all record sets in a DNS zone.
      * @param string $resourceGroupName
      * @param string $zoneName
-     * @param integer $_top
-     * @param string $_recordsetnamesuffix
+     * @param integer|null $_top
+     * @param string|null $_recordsetnamesuffix
      * @return array
      */
     public function listByDnsZone(
         $resourceGroupName,
         $zoneName,
-        $_top,
-        $_recordsetnamesuffix
+        $_top = null,
+        $_recordsetnamesuffix = null
     )
     {
         return $this->_ListByDnsZone_operation->call([

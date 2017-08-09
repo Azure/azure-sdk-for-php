@@ -40,14 +40,14 @@ final class TrustedIdProviders
      * @param string $resourceGroupName
      * @param string $accountName
      * @param string $trustedIdProviderName
-     * @param array $parameters
+     * @param array|null $parameters
      * @return array
      */
     public function update(
         $resourceGroupName,
         $accountName,
         $trustedIdProviderName,
-        array $parameters
+        array $parameters = null
     )
     {
         return $this->_Update_operation->call([

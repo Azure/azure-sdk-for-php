@@ -37,14 +37,14 @@ final class JobStream
      * @param string $resourceGroupName
      * @param string $automationAccountName
      * @param string $jobId
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listByJob(
         $resourceGroupName,
         $automationAccountName,
         $jobId,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListByJob_operation->call([

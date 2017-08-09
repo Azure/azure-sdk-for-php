@@ -14,13 +14,13 @@ final class AdminKeys
      * Gets the primary and secondary admin API keys for the specified Azure Search service.
      * @param string $resourceGroupName
      * @param string $searchServiceName
-     * @param string $x_ms_client_request_id
+     * @param string|null $x_ms_client_request_id
      * @return array
      */
     public function get(
         $resourceGroupName,
         $searchServiceName,
-        $x_ms_client_request_id
+        $x_ms_client_request_id = null
     )
     {
         return $this->_Get_operation->call([
@@ -34,14 +34,14 @@ final class AdminKeys
      * @param string $resourceGroupName
      * @param string $searchServiceName
      * @param string $keyKind
-     * @param string $x_ms_client_request_id
+     * @param string|null $x_ms_client_request_id
      * @return array
      */
     public function regenerate(
         $resourceGroupName,
         $searchServiceName,
         $keyKind,
-        $x_ms_client_request_id
+        $x_ms_client_request_id = null
     )
     {
         return $this->_Regenerate_operation->call([

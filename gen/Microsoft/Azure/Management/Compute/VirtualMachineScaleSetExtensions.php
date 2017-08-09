@@ -58,14 +58,14 @@ final class VirtualMachineScaleSetExtensions
      * @param string $resourceGroupName
      * @param string $vmScaleSetName
      * @param string $vmssExtensionName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
         $resourceGroupName,
         $vmScaleSetName,
         $vmssExtensionName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([

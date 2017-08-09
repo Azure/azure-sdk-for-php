@@ -102,22 +102,22 @@ final class Account
     /**
      * Lists the Data Lake Store accounts within a specific resource group. The response includes a link to the next page of results, if any.
      * @param string $resourceGroupName
-     * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
-     * @param string $_select
-     * @param string $_orderby
-     * @param boolean $_count
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param integer|null $_skip
+     * @param string|null $_select
+     * @param string|null $_orderby
+     * @param boolean|null $_count
      * @return array
      */
     public function listByResourceGroup(
         $resourceGroupName,
-        $_filter,
-        $_top,
-        $_skip,
-        $_select,
-        $_orderby,
-        $_count
+        $_filter = null,
+        $_top = null,
+        $_skip = null,
+        $_select = null,
+        $_orderby = null,
+        $_count = null
     )
     {
         return $this->_ListByResourceGroup_operation->call([
@@ -132,21 +132,21 @@ final class Account
     }
     /**
      * Lists the Data Lake Store accounts within the subscription. The response includes a link to the next page of results, if any.
-     * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
-     * @param string $_select
-     * @param string $_orderby
-     * @param boolean $_count
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param integer|null $_skip
+     * @param string|null $_select
+     * @param string|null $_orderby
+     * @param boolean|null $_count
      * @return array
      */
     public function list_(
-        $_filter,
-        $_top,
-        $_skip,
-        $_select,
-        $_orderby,
-        $_count
+        $_filter = null,
+        $_top = null,
+        $_skip = null,
+        $_select = null,
+        $_orderby = null,
+        $_count = null
     )
     {
         return $this->_List_operation->call([

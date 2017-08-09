@@ -136,17 +136,17 @@ final class VirtualMachineScaleSetVMs
      * Gets a list of all virtual machines in a VM scale sets.
      * @param string $resourceGroupName
      * @param string $virtualMachineScaleSetName
-     * @param string $_filter
-     * @param string $_select
-     * @param string $_expand
+     * @param string|null $_filter
+     * @param string|null $_select
+     * @param string|null $_expand
      * @return array
      */
     public function list_(
         $resourceGroupName,
         $virtualMachineScaleSetName,
-        $_filter,
-        $_select,
-        $_expand
+        $_filter = null,
+        $_select = null,
+        $_expand = null
     )
     {
         return $this->_List_operation->call([

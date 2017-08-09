@@ -223,13 +223,13 @@ final class Managers
      * Lists the features and their support status
      * @param string $resourceGroupName
      * @param string $managerName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listFeatureSupportStatus(
         $resourceGroupName,
         $managerName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListFeatureSupportStatus_operation->call([

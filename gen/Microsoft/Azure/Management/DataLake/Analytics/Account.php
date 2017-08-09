@@ -17,22 +17,22 @@ final class Account
     /**
      * Gets the first page of Data Lake Analytics accounts, if any, within a specific resource group. This includes a link to the next page, if any.
      * @param string $resourceGroupName
-     * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
-     * @param string $_select
-     * @param string $_orderby
-     * @param boolean $_count
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param integer|null $_skip
+     * @param string|null $_select
+     * @param string|null $_orderby
+     * @param boolean|null $_count
      * @return array
      */
     public function listByResourceGroup(
         $resourceGroupName,
-        $_filter,
-        $_top,
-        $_skip,
-        $_select,
-        $_orderby,
-        $_count
+        $_filter = null,
+        $_top = null,
+        $_skip = null,
+        $_select = null,
+        $_orderby = null,
+        $_count = null
     )
     {
         return $this->_ListByResourceGroup_operation->call([
@@ -47,21 +47,21 @@ final class Account
     }
     /**
      * Gets the first page of Data Lake Analytics accounts, if any, within the current subscription. This includes a link to the next page, if any.
-     * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
-     * @param string $_select
-     * @param string $_orderby
-     * @param boolean $_count
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param integer|null $_skip
+     * @param string|null $_select
+     * @param string|null $_orderby
+     * @param boolean|null $_count
      * @return array
      */
     public function list_(
-        $_filter,
-        $_top,
-        $_skip,
-        $_select,
-        $_orderby,
-        $_count
+        $_filter = null,
+        $_top = null,
+        $_skip = null,
+        $_select = null,
+        $_orderby = null,
+        $_count = null
     )
     {
         return $this->_List_operation->call([
@@ -96,13 +96,13 @@ final class Account
      * Updates the Data Lake Analytics account object specified by the accountName with the contents of the account object.
      * @param string $resourceGroupName
      * @param string $accountName
-     * @param array $parameters
+     * @param array|null $parameters
      * @return array
      */
     public function update(
         $resourceGroupName,
         $accountName,
-        array $parameters
+        array $parameters = null
     )
     {
         return $this->_Update_operation->call([

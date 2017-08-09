@@ -33,13 +33,13 @@ final class DeploymentOperations
      * Gets all deployments operations for a deployment.
      * @param string $resourceGroupName
      * @param string $deploymentName
-     * @param integer $_top
+     * @param integer|null $_top
      * @return array
      */
     public function list_(
         $resourceGroupName,
         $deploymentName,
-        $_top
+        $_top = null
     )
     {
         return $this->_List_operation->call([

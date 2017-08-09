@@ -37,14 +37,14 @@ final class TestJobStreams
      * @param string $resourceGroupName
      * @param string $automationAccountName
      * @param string $runbookName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listByTestJob(
         $resourceGroupName,
         $automationAccountName,
         $runbookName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListByTestJob_operation->call([

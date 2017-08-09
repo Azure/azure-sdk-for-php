@@ -39,14 +39,14 @@ final class Interactions
      * @param string $resourceGroupName
      * @param string $hubName
      * @param string $interactionName
-     * @param string $locale_code
+     * @param string|null $locale_code
      * @return array
      */
     public function get(
         $resourceGroupName,
         $hubName,
         $interactionName,
-        $locale_code
+        $locale_code = null
     )
     {
         return $this->_Get_operation->call([
@@ -60,13 +60,13 @@ final class Interactions
      * Gets all interactions in the hub.
      * @param string $resourceGroupName
      * @param string $hubName
-     * @param string $locale_code
+     * @param string|null $locale_code
      * @return array
      */
     public function listByHub(
         $resourceGroupName,
         $hubName,
-        $locale_code
+        $locale_code = null
     )
     {
         return $this->_ListByHub_operation->call([

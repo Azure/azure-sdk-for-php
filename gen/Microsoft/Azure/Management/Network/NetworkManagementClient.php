@@ -284,12 +284,12 @@ final class NetworkManagementClient
     /**
      * Checks whether a domain name in the cloudapp.net zone is available for use.
      * @param string $location
-     * @param string $domainNameLabel
+     * @param string|null $domainNameLabel
      * @return array
      */
     public function checkDnsNameAvailability(
         $location,
-        $domainNameLabel
+        $domainNameLabel = null
     )
     {
         return $this->_CheckDnsNameAvailability_operation->call([

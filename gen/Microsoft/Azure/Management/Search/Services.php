@@ -18,14 +18,14 @@ final class Services
      * @param string $resourceGroupName
      * @param string $searchServiceName
      * @param array $service
-     * @param string $x_ms_client_request_id
+     * @param string|null $x_ms_client_request_id
      * @return array
      */
     public function createOrUpdate(
         $resourceGroupName,
         $searchServiceName,
         array $service,
-        $x_ms_client_request_id
+        $x_ms_client_request_id = null
     )
     {
         return $this->_CreateOrUpdate_operation->call([
@@ -39,13 +39,13 @@ final class Services
      * Gets the Search service with the given name in the given resource group.
      * @param string $resourceGroupName
      * @param string $searchServiceName
-     * @param string $x_ms_client_request_id
+     * @param string|null $x_ms_client_request_id
      * @return array
      */
     public function get(
         $resourceGroupName,
         $searchServiceName,
-        $x_ms_client_request_id
+        $x_ms_client_request_id = null
     )
     {
         return $this->_Get_operation->call([
@@ -58,12 +58,12 @@ final class Services
      * Deletes a Search service in the given resource group, along with its associated resources.
      * @param string $resourceGroupName
      * @param string $searchServiceName
-     * @param string $x_ms_client_request_id
+     * @param string|null $x_ms_client_request_id
      */
     public function delete(
         $resourceGroupName,
         $searchServiceName,
-        $x_ms_client_request_id
+        $x_ms_client_request_id = null
     )
     {
         return $this->_Delete_operation->call([
@@ -75,12 +75,12 @@ final class Services
     /**
      * Gets a list of all Search services in the given resource group.
      * @param string $resourceGroupName
-     * @param string $x_ms_client_request_id
+     * @param string|null $x_ms_client_request_id
      * @return array
      */
     public function listByResourceGroup(
         $resourceGroupName,
-        $x_ms_client_request_id
+        $x_ms_client_request_id = null
     )
     {
         return $this->_ListByResourceGroup_operation->call([
@@ -91,12 +91,12 @@ final class Services
     /**
      * Checks whether or not the given Search service name is available for use. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net).
      * @param array $checkNameAvailabilityInput
-     * @param string $x_ms_client_request_id
+     * @param string|null $x_ms_client_request_id
      * @return array
      */
     public function checkNameAvailability(
         array $checkNameAvailabilityInput,
-        $x_ms_client_request_id
+        $x_ms_client_request_id = null
     )
     {
         return $this->_CheckNameAvailability_operation->call([

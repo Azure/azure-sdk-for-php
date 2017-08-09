@@ -15,14 +15,14 @@ final class Costs
      * @param string $resourceGroupName
      * @param string $labName
      * @param string $name
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
         $resourceGroupName,
         $labName,
         $name,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([

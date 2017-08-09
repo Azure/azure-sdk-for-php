@@ -245,12 +245,12 @@ final class ManagementLocks
     /**
      * Gets all the management locks for a resource group.
      * @param string $resourceGroupName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listAtResourceGroupLevel(
         $resourceGroupName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListAtResourceGroupLevel_operation->call([
@@ -265,7 +265,7 @@ final class ManagementLocks
      * @param string $parentResourcePath
      * @param string $resourceType
      * @param string $resourceName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listAtResourceLevel(
@@ -274,7 +274,7 @@ final class ManagementLocks
         $parentResourcePath,
         $resourceType,
         $resourceName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListAtResourceLevel_operation->call([
@@ -288,10 +288,10 @@ final class ManagementLocks
     }
     /**
      * Gets all the management locks for a subscription.
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
-    public function listAtSubscriptionLevel($_filter)
+    public function listAtSubscriptionLevel($_filter = null)
     {
         return $this->_ListAtSubscriptionLevel_operation->call(['$filter' => $_filter]);
     }

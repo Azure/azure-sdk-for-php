@@ -82,13 +82,13 @@ final class VirtualMachines
      * Retrieves information about the model view or the instance view of a virtual machine.
      * @param string $resourceGroupName
      * @param string $vmName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
         $resourceGroupName,
         $vmName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([

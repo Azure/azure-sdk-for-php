@@ -76,12 +76,12 @@ final class RoleDefinitions
     /**
      * Get all role definitions that are applicable at scope and above.
      * @param string $scope
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function list_(
         $scope,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_List_operation->call([

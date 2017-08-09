@@ -72,13 +72,13 @@ final class Appliances
      * Updates an existing appliance. The only value that can be updated via PATCH currently is the tags.
      * @param string $resourceGroupName
      * @param string $applianceName
-     * @param array $parameters
+     * @param array|null $parameters
      * @return array
      */
     public function update(
         $resourceGroupName,
         $applianceName,
-        array $parameters
+        array $parameters = null
     )
     {
         return $this->_Update_operation->call([
@@ -140,12 +140,12 @@ final class Appliances
     /**
      * Updates an existing appliance. The only value that can be updated via PATCH currently is the tags.
      * @param string $applianceId
-     * @param array $parameters
+     * @param array|null $parameters
      * @return array
      */
     public function updateById(
         $applianceId,
-        array $parameters
+        array $parameters = null
     )
     {
         return $this->_UpdateById_operation->call([

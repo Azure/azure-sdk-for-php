@@ -27,11 +27,11 @@ final class Campaigns
      * @param string $appCollection
      * @param string $appName
      * @param string $kind
-     * @param integer $_skip
-     * @param integer $_top
-     * @param string $_filter
-     * @param string $_orderby
-     * @param string $_search
+     * @param integer|null $_skip
+     * @param integer|null $_top
+     * @param string|null $_filter
+     * @param string|null $_orderby
+     * @param string|null $_search
      * @return array
      */
     public function list_(
@@ -39,11 +39,11 @@ final class Campaigns
         $appCollection,
         $appName,
         $kind,
-        $_skip,
-        $_top,
-        $_filter,
-        $_orderby,
-        $_search
+        $_skip = null,
+        $_top = null,
+        $_filter = null,
+        $_orderby = null,
+        $_search = null
     )
     {
         return $this->_List_operation->call([

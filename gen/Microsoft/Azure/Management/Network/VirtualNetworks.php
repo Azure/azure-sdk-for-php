@@ -34,13 +34,13 @@ final class VirtualNetworks
      * Gets the specified virtual network by resource group.
      * @param string $resourceGroupName
      * @param string $virtualNetworkName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
         $resourceGroupName,
         $virtualNetworkName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([
@@ -87,13 +87,13 @@ final class VirtualNetworks
     }
     /**
      * Checks whether a private IP address is available for use.
-     * @param string $ipAddress
+     * @param string|null $ipAddress
      * @param string $resourceGroupName
      * @param string $virtualNetworkName
      * @return array
      */
     public function checkIPAddressAvailability(
-        $ipAddress,
+        $ipAddress = null,
         $resourceGroupName,
         $virtualNetworkName
     )

@@ -13,12 +13,12 @@ final class ProviderOperationsMetadata
     /**
      * Gets provider operations metadata for the specified resource provider.
      * @param string $resourceProviderNamespace
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
         $resourceProviderNamespace,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([
@@ -28,10 +28,10 @@ final class ProviderOperationsMetadata
     }
     /**
      * Gets provider operations metadata for all resource providers.
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
-    public function list_($_expand)
+    public function list_($_expand = null)
     {
         return $this->_List_operation->call(['$expand' => $_expand]);
     }

@@ -16,14 +16,14 @@ final class QueryKeys
      * @param string $resourceGroupName
      * @param string $searchServiceName
      * @param string $name
-     * @param string $x_ms_client_request_id
+     * @param string|null $x_ms_client_request_id
      * @return array
      */
     public function create(
         $resourceGroupName,
         $searchServiceName,
         $name,
-        $x_ms_client_request_id
+        $x_ms_client_request_id = null
     )
     {
         return $this->_Create_operation->call([
@@ -37,13 +37,13 @@ final class QueryKeys
      * Returns the list of query API keys for the given Azure Search service.
      * @param string $resourceGroupName
      * @param string $searchServiceName
-     * @param string $x_ms_client_request_id
+     * @param string|null $x_ms_client_request_id
      * @return array
      */
     public function listBySearchService(
         $resourceGroupName,
         $searchServiceName,
-        $x_ms_client_request_id
+        $x_ms_client_request_id = null
     )
     {
         return $this->_ListBySearchService_operation->call([
@@ -57,13 +57,13 @@ final class QueryKeys
      * @param string $resourceGroupName
      * @param string $searchServiceName
      * @param string $key
-     * @param string $x_ms_client_request_id
+     * @param string|null $x_ms_client_request_id
      */
     public function delete(
         $resourceGroupName,
         $searchServiceName,
         $key,
-        $x_ms_client_request_id
+        $x_ms_client_request_id = null
     )
     {
         return $this->_Delete_operation->call([

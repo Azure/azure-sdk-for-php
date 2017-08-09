@@ -22,13 +22,13 @@ final class Workflows
     }
     /**
      * Gets a list of workflows by subscription.
-     * @param integer $_top
-     * @param string $_filter
+     * @param integer|null $_top
+     * @param string|null $_filter
      * @return array
      */
     public function listBySubscription(
-        $_top,
-        $_filter
+        $_top = null,
+        $_filter = null
     )
     {
         return $this->_ListBySubscription_operation->call([
@@ -39,14 +39,14 @@ final class Workflows
     /**
      * Gets a list of workflows by resource group.
      * @param string $resourceGroupName
-     * @param integer $_top
-     * @param string $_filter
+     * @param integer|null $_top
+     * @param string|null $_filter
      * @return array
      */
     public function listByResourceGroup(
         $resourceGroupName,
-        $_top,
-        $_filter
+        $_top = null,
+        $_filter = null
     )
     {
         return $this->_ListByResourceGroup_operation->call([

@@ -12,18 +12,18 @@ final class UsageDetails
     /**
      * Lists the usage details for a scope in reverse chronological order by billing period. Usage details are available via this API only for January 1, 2017 or later.
      * @param string $scope
-     * @param string $_expand
-     * @param string $_filter
-     * @param string $_skiptoken
-     * @param integer $_top
+     * @param string|null $_expand
+     * @param string|null $_filter
+     * @param string|null $_skiptoken
+     * @param integer|null $_top
      * @return array
      */
     public function list_(
         $scope,
-        $_expand,
-        $_filter,
-        $_skiptoken,
-        $_top
+        $_expand = null,
+        $_filter = null,
+        $_skiptoken = null,
+        $_top = null
     )
     {
         return $this->_List_operation->call([

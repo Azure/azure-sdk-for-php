@@ -159,13 +159,13 @@ final class WebSiteManagementClient
     }
     /**
      * Get a list of available geographical regions.
-     * @param string $sku
-     * @param boolean $linuxWorkersEnabled
+     * @param string|null $sku
+     * @param boolean|null $linuxWorkersEnabled
      * @return array
      */
     public function listGeoRegions(
-        $sku,
-        $linuxWorkersEnabled
+        $sku = null,
+        $linuxWorkersEnabled = null
     )
     {
         return $this->_ListGeoRegions_operation->call([

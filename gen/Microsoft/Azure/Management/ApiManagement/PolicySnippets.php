@@ -13,13 +13,13 @@ final class PolicySnippets
      * Lists all policy snippets.
      * @param string $resourceGroupName
      * @param string $serviceName
-     * @param string $scope
+     * @param string|null $scope
      * @return array
      */
     public function listByService(
         $resourceGroupName,
         $serviceName,
-        $scope
+        $scope = null
     )
     {
         return $this->_ListByService_operation->call([

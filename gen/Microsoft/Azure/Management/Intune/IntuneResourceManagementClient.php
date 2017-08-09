@@ -62,16 +62,16 @@ final class IntuneResourceManagementClient
     /**
      * Returns Intune Manageable apps.
      * @param string $hostName
-     * @param string $_filter
-     * @param integer $_top
-     * @param string $_select
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param string|null $_select
      * @return array
      */
     public function getApps(
         $hostName,
-        $_filter,
-        $_top,
-        $_select
+        $_filter = null,
+        $_top = null,
+        $_select = null
     )
     {
         return $this->_GetApps_operation->call([
@@ -85,17 +85,17 @@ final class IntuneResourceManagementClient
      * Get devices for a user.
      * @param string $hostName
      * @param string $userName
-     * @param string $_filter
-     * @param integer $_top
-     * @param string $_select
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param string|null $_select
      * @return array
      */
     public function getMAMUserDevices(
         $hostName,
         $userName,
-        $_filter,
-        $_top,
-        $_select
+        $_filter = null,
+        $_top = null,
+        $_select = null
     )
     {
         return $this->_GetMAMUserDevices_operation->call([
@@ -111,14 +111,14 @@ final class IntuneResourceManagementClient
      * @param string $hostName
      * @param string $userName
      * @param string $deviceName
-     * @param string $_select
+     * @param string|null $_select
      * @return array
      */
     public function getMAMUserDeviceByDeviceName(
         $hostName,
         $userName,
         $deviceName,
-        $_select
+        $_select = null
     )
     {
         return $this->_GetMAMUserDeviceByDeviceName_operation->call([
@@ -150,16 +150,16 @@ final class IntuneResourceManagementClient
     /**
      * Returns operationResults.
      * @param string $hostName
-     * @param string $_filter
-     * @param integer $_top
-     * @param string $_select
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param string|null $_select
      * @return array
      */
     public function getOperationResults(
         $hostName,
-        $_filter,
-        $_top,
-        $_select
+        $_filter = null,
+        $_top = null,
+        $_select = null
     )
     {
         return $this->_GetOperationResults_operation->call([
@@ -181,16 +181,16 @@ final class IntuneResourceManagementClient
     /**
      * Returns Intune flagged user collection
      * @param string $hostName
-     * @param string $_filter
-     * @param integer $_top
-     * @param string $_select
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param string|null $_select
      * @return array
      */
     public function getMAMFlaggedUsers(
         $hostName,
-        $_filter,
-        $_top,
-        $_select
+        $_filter = null,
+        $_top = null,
+        $_select = null
     )
     {
         return $this->_GetMAMFlaggedUsers_operation->call([
@@ -204,13 +204,13 @@ final class IntuneResourceManagementClient
      * Returns Intune flagged user details
      * @param string $hostName
      * @param string $userName
-     * @param string $_select
+     * @param string|null $_select
      * @return array
      */
     public function getMAMFlaggedUserByName(
         $hostName,
         $userName,
-        $_select
+        $_select = null
     )
     {
         return $this->_GetMAMFlaggedUserByName_operation->call([
@@ -223,17 +223,17 @@ final class IntuneResourceManagementClient
      * Returns Intune flagged enrolled app collection for the User
      * @param string $hostName
      * @param string $userName
-     * @param string $_filter
-     * @param integer $_top
-     * @param string $_select
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param string|null $_select
      * @return array
      */
     public function getMAMUserFlaggedEnrolledApps(
         $hostName,
         $userName,
-        $_filter,
-        $_top,
-        $_select
+        $_filter = null,
+        $_top = null,
+        $_select = null
     )
     {
         return $this->_GetMAMUserFlaggedEnrolledApps_operation->call([

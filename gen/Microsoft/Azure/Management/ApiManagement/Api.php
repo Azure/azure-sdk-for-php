@@ -17,17 +17,17 @@ final class Api
      * Lists all APIs of the API Management service instance.
      * @param string $resourceGroupName
      * @param string $serviceName
-     * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param integer|null $_skip
      * @return array
      */
     public function listByService(
         $resourceGroupName,
         $serviceName,
-        $_filter,
-        $_top,
-        $_skip
+        $_filter = null,
+        $_top = null,
+        $_skip = null
     )
     {
         return $this->_ListByService_operation->call([
@@ -63,7 +63,7 @@ final class Api
      * @param string $serviceName
      * @param string $apiId
      * @param array $parameters
-     * @param string $if_Match
+     * @param string|null $if_Match
      * @return array
      */
     public function createOrUpdate(
@@ -71,7 +71,7 @@ final class Api
         $serviceName,
         $apiId,
         array $parameters,
-        $if_Match
+        $if_Match = null
     )
     {
         return $this->_CreateOrUpdate_operation->call([

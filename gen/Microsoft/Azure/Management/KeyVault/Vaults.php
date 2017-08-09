@@ -69,12 +69,12 @@ final class Vaults
     /**
      * The List operation gets information about the vaults associated with the subscription and within the specified resource group.
      * @param string $resourceGroupName
-     * @param integer $_top
+     * @param integer|null $_top
      * @return array
      */
     public function listByResourceGroup(
         $resourceGroupName,
-        $_top
+        $_top = null
     )
     {
         return $this->_ListByResourceGroup_operation->call([
@@ -123,10 +123,10 @@ final class Vaults
     }
     /**
      * The List operation gets information about the vaults associated with the subscription.
-     * @param integer $_top
+     * @param integer|null $_top
      * @return array
      */
-    public function list_($_top)
+    public function list_($_top = null)
     {
         return $this->_List_operation->call(['$top' => $_top]);
     }

@@ -16,17 +16,17 @@ final class ServiceRunners
      * List service runners in a given lab.
      * @param string $resourceGroupName
      * @param string $labName
-     * @param string $_filter
-     * @param integer $_top
-     * @param string $_orderby
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param string|null $_orderby
      * @return array
      */
     public function list_(
         $resourceGroupName,
         $labName,
-        $_filter,
-        $_top,
-        $_orderby
+        $_filter = null,
+        $_top = null,
+        $_orderby = null
     )
     {
         return $this->_List_operation->call([

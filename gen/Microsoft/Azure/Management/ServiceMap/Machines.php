@@ -19,21 +19,21 @@ final class Machines
      * Returns a collection of machines matching the specified conditions.  The returned collection represents either machines that are active/live during the specified interval  of time (`live=true` and `startTime`/`endTime` are specified) or that are known to have existed at or  some time prior to the specified point in time (`live=false` and `timestamp` is specified).
      * @param string $resourceGroupName
      * @param string $workspaceName
-     * @param boolean $live
-     * @param string $startTime
-     * @param string $endTime
-     * @param string $timestamp
-     * @param integer $_top
+     * @param boolean|null $live
+     * @param string|null $startTime
+     * @param string|null $endTime
+     * @param string|null $timestamp
+     * @param integer|null $_top
      * @return array
      */
     public function listByWorkspace(
         $resourceGroupName,
         $workspaceName,
-        $live,
-        $startTime,
-        $endTime,
-        $timestamp,
-        $_top
+        $live = null,
+        $startTime = null,
+        $endTime = null,
+        $timestamp = null,
+        $_top = null
     )
     {
         return $this->_ListByWorkspace_operation->call([
@@ -51,14 +51,14 @@ final class Machines
      * @param string $resourceGroupName
      * @param string $workspaceName
      * @param string $machineName
-     * @param string $timestamp
+     * @param string|null $timestamp
      * @return array
      */
     public function get(
         $resourceGroupName,
         $workspaceName,
         $machineName,
-        $timestamp
+        $timestamp = null
     )
     {
         return $this->_Get_operation->call([
@@ -73,16 +73,16 @@ final class Machines
      * @param string $resourceGroupName
      * @param string $workspaceName
      * @param string $machineName
-     * @param string $startTime
-     * @param string $endTime
+     * @param string|null $startTime
+     * @param string|null $endTime
      * @return array
      */
     public function getLiveness(
         $resourceGroupName,
         $workspaceName,
         $machineName,
-        $startTime,
-        $endTime
+        $startTime = null,
+        $endTime = null
     )
     {
         return $this->_GetLiveness_operation->call([
@@ -98,16 +98,16 @@ final class Machines
      * @param string $resourceGroupName
      * @param string $workspaceName
      * @param string $machineName
-     * @param string $startTime
-     * @param string $endTime
+     * @param string|null $startTime
+     * @param string|null $endTime
      * @return array
      */
     public function listConnections(
         $resourceGroupName,
         $workspaceName,
         $machineName,
-        $startTime,
-        $endTime
+        $startTime = null,
+        $endTime = null
     )
     {
         return $this->_ListConnections_operation->call([
@@ -123,20 +123,20 @@ final class Machines
      * @param string $resourceGroupName
      * @param string $workspaceName
      * @param string $machineName
-     * @param boolean $live
-     * @param string $startTime
-     * @param string $endTime
-     * @param string $timestamp
+     * @param boolean|null $live
+     * @param string|null $startTime
+     * @param string|null $endTime
+     * @param string|null $timestamp
      * @return array
      */
     public function listProcesses(
         $resourceGroupName,
         $workspaceName,
         $machineName,
-        $live,
-        $startTime,
-        $endTime,
-        $timestamp
+        $live = null,
+        $startTime = null,
+        $endTime = null,
+        $timestamp = null
     )
     {
         return $this->_ListProcesses_operation->call([
@@ -154,16 +154,16 @@ final class Machines
      * @param string $resourceGroupName
      * @param string $workspaceName
      * @param string $machineName
-     * @param string $startTime
-     * @param string $endTime
+     * @param string|null $startTime
+     * @param string|null $endTime
      * @return array
      */
     public function listPorts(
         $resourceGroupName,
         $workspaceName,
         $machineName,
-        $startTime,
-        $endTime
+        $startTime = null,
+        $endTime = null
     )
     {
         return $this->_ListPorts_operation->call([

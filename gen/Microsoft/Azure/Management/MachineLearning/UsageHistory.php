@@ -13,13 +13,13 @@ final class UsageHistory
      * Retrieve the usage history for an Azure ML commitment plan.
      * @param string $resourceGroupName
      * @param string $commitmentPlanName
-     * @param string $_skipToken
+     * @param string|null $_skipToken
      * @return array
      */
     public function list_(
         $resourceGroupName,
         $commitmentPlanName,
-        $_skipToken
+        $_skipToken = null
     )
     {
         return $this->_List_operation->call([

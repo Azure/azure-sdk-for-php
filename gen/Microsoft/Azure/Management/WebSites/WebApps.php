@@ -250,12 +250,12 @@ final class WebApps
     /**
      * Gets all web, mobile, and API apps in the specified resource group.
      * @param string $resourceGroupName
-     * @param boolean $includeSlots
+     * @param boolean|null $includeSlots
      * @return array
      */
     public function listByResourceGroup(
         $resourceGroupName,
-        $includeSlots
+        $includeSlots = null
     )
     {
         return $this->_ListByResourceGroup_operation->call([
@@ -284,20 +284,20 @@ final class WebApps
      * @param string $resourceGroupName
      * @param string $name
      * @param array $siteEnvelope
-     * @param boolean $skipDnsRegistration
-     * @param boolean $skipCustomDomainVerification
-     * @param boolean $forceDnsRegistration
-     * @param string $ttlInSeconds
+     * @param boolean|null $skipDnsRegistration
+     * @param boolean|null $skipCustomDomainVerification
+     * @param boolean|null $forceDnsRegistration
+     * @param string|null $ttlInSeconds
      * @return array
      */
     public function createOrUpdate(
         $resourceGroupName,
         $name,
         array $siteEnvelope,
-        $skipDnsRegistration,
-        $skipCustomDomainVerification,
-        $forceDnsRegistration,
-        $ttlInSeconds
+        $skipDnsRegistration = null,
+        $skipCustomDomainVerification = null,
+        $forceDnsRegistration = null,
+        $ttlInSeconds = null
     )
     {
         return $this->_CreateOrUpdate_operation->call([
@@ -314,16 +314,16 @@ final class WebApps
      * Deletes a web, mobile, or API app, or one of the deployment slots.
      * @param string $resourceGroupName
      * @param string $name
-     * @param boolean $deleteMetrics
-     * @param boolean $deleteEmptyServerFarm
-     * @param boolean $skipDnsRegistration
+     * @param boolean|null $deleteMetrics
+     * @param boolean|null $deleteEmptyServerFarm
+     * @param boolean|null $skipDnsRegistration
      */
     public function delete(
         $resourceGroupName,
         $name,
-        $deleteMetrics,
-        $deleteEmptyServerFarm,
-        $skipDnsRegistration
+        $deleteMetrics = null,
+        $deleteEmptyServerFarm = null,
+        $skipDnsRegistration = null
     )
     {
         return $this->_Delete_operation->call([
@@ -338,13 +338,13 @@ final class WebApps
      * Analyze a custom hostname.
      * @param string $resourceGroupName
      * @param string $name
-     * @param string $hostName
+     * @param string|null $hostName
      * @return array
      */
     public function analyzeCustomHostname(
         $resourceGroupName,
         $name,
-        $hostName
+        $hostName = null
     )
     {
         return $this->_AnalyzeCustomHostname_operation->call([
@@ -1681,15 +1681,15 @@ final class WebApps
      * Gets performance metrics of an app (or deployment slot, if specified).
      * @param string $resourceGroupName
      * @param string $name
-     * @param boolean $details
-     * @param string $_filter
+     * @param boolean|null $details
+     * @param string|null $_filter
      * @return array
      */
     public function listMetrics(
         $resourceGroupName,
         $name,
-        $details,
-        $_filter
+        $details = null,
+        $_filter = null
     )
     {
         return $this->_ListMetrics_operation->call([
@@ -1779,17 +1779,17 @@ final class WebApps
      * Start capturing network packets for the site.
      * @param string $resourceGroupName
      * @param string $name
-     * @param integer $durationInSeconds
-     * @param integer $maxFrameLength
-     * @param string $sasUrl
+     * @param integer|null $durationInSeconds
+     * @param integer|null $maxFrameLength
+     * @param string|null $sasUrl
      * @return string
      */
     public function startWebSiteNetworkTrace(
         $resourceGroupName,
         $name,
-        $durationInSeconds,
-        $maxFrameLength,
-        $sasUrl
+        $durationInSeconds = null,
+        $maxFrameLength = null,
+        $sasUrl = null
     )
     {
         return $this->_StartWebSiteNetworkTrace_operation->call([
@@ -1835,13 +1835,13 @@ final class WebApps
      * Gets perfmon counters for web app.
      * @param string $resourceGroupName
      * @param string $name
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listPerfMonCounters(
         $resourceGroupName,
         $name,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListPerfMonCounters_operation->call([
@@ -2073,14 +2073,14 @@ final class WebApps
      * Restarts an app (or deployment slot, if specified).
      * @param string $resourceGroupName
      * @param string $name
-     * @param boolean $softRestart
-     * @param boolean $synchronous
+     * @param boolean|null $softRestart
+     * @param boolean|null $synchronous
      */
     public function restart(
         $resourceGroupName,
         $name,
-        $softRestart,
-        $synchronous
+        $softRestart = null,
+        $synchronous = null
     )
     {
         return $this->_Restart_operation->call([
@@ -2131,10 +2131,10 @@ final class WebApps
      * @param string $name
      * @param array $siteEnvelope
      * @param string $slot
-     * @param boolean $skipDnsRegistration
-     * @param boolean $skipCustomDomainVerification
-     * @param boolean $forceDnsRegistration
-     * @param string $ttlInSeconds
+     * @param boolean|null $skipDnsRegistration
+     * @param boolean|null $skipCustomDomainVerification
+     * @param boolean|null $forceDnsRegistration
+     * @param string|null $ttlInSeconds
      * @return array
      */
     public function createOrUpdateSlot(
@@ -2142,10 +2142,10 @@ final class WebApps
         $name,
         array $siteEnvelope,
         $slot,
-        $skipDnsRegistration,
-        $skipCustomDomainVerification,
-        $forceDnsRegistration,
-        $ttlInSeconds
+        $skipDnsRegistration = null,
+        $skipCustomDomainVerification = null,
+        $forceDnsRegistration = null,
+        $ttlInSeconds = null
     )
     {
         return $this->_CreateOrUpdateSlot_operation->call([
@@ -2164,17 +2164,17 @@ final class WebApps
      * @param string $resourceGroupName
      * @param string $name
      * @param string $slot
-     * @param boolean $deleteMetrics
-     * @param boolean $deleteEmptyServerFarm
-     * @param boolean $skipDnsRegistration
+     * @param boolean|null $deleteMetrics
+     * @param boolean|null $deleteEmptyServerFarm
+     * @param boolean|null $skipDnsRegistration
      */
     public function deleteSlot(
         $resourceGroupName,
         $name,
         $slot,
-        $deleteMetrics,
-        $deleteEmptyServerFarm,
-        $skipDnsRegistration
+        $deleteMetrics = null,
+        $deleteEmptyServerFarm = null,
+        $skipDnsRegistration = null
     )
     {
         return $this->_DeleteSlot_operation->call([
@@ -2191,14 +2191,14 @@ final class WebApps
      * @param string $resourceGroupName
      * @param string $name
      * @param string $slot
-     * @param string $hostName
+     * @param string|null $hostName
      * @return array
      */
     public function analyzeCustomHostnameSlot(
         $resourceGroupName,
         $name,
         $slot,
-        $hostName
+        $hostName = null
     )
     {
         return $this->_AnalyzeCustomHostnameSlot_operation->call([
@@ -3709,16 +3709,16 @@ final class WebApps
      * @param string $resourceGroupName
      * @param string $name
      * @param string $slot
-     * @param boolean $details
-     * @param string $_filter
+     * @param boolean|null $details
+     * @param string|null $_filter
      * @return array
      */
     public function listMetricsSlot(
         $resourceGroupName,
         $name,
         $slot,
-        $details,
-        $_filter
+        $details = null,
+        $_filter = null
     )
     {
         return $this->_ListMetricsSlot_operation->call([
@@ -3774,19 +3774,19 @@ final class WebApps
      * Start capturing network packets for the site.
      * @param string $resourceGroupName
      * @param string $name
-     * @param integer $durationInSeconds
+     * @param integer|null $durationInSeconds
      * @param string $slot
-     * @param integer $maxFrameLength
-     * @param string $sasUrl
+     * @param integer|null $maxFrameLength
+     * @param string|null $sasUrl
      * @return string
      */
     public function startWebSiteNetworkTraceSlot(
         $resourceGroupName,
         $name,
-        $durationInSeconds,
+        $durationInSeconds = null,
         $slot,
-        $maxFrameLength,
-        $sasUrl
+        $maxFrameLength = null,
+        $sasUrl = null
     )
     {
         return $this->_StartWebSiteNetworkTraceSlot_operation->call([
@@ -3840,14 +3840,14 @@ final class WebApps
      * @param string $resourceGroupName
      * @param string $name
      * @param string $slot
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listPerfMonCountersSlot(
         $resourceGroupName,
         $name,
         $slot,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListPerfMonCountersSlot_operation->call([
@@ -4117,15 +4117,15 @@ final class WebApps
      * @param string $resourceGroupName
      * @param string $name
      * @param string $slot
-     * @param boolean $softRestart
-     * @param boolean $synchronous
+     * @param boolean|null $softRestart
+     * @param boolean|null $synchronous
      */
     public function restartSlot(
         $resourceGroupName,
         $name,
         $slot,
-        $softRestart,
-        $synchronous
+        $softRestart = null,
+        $synchronous = null
     )
     {
         return $this->_RestartSlot_operation->call([
@@ -4334,14 +4334,14 @@ final class WebApps
      * @param string $resourceGroupName
      * @param string $name
      * @param string $slot
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listUsagesSlot(
         $resourceGroupName,
         $name,
         $slot,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListUsagesSlot_operation->call([
@@ -4711,13 +4711,13 @@ final class WebApps
      * Gets the quota usage information of an app (or deployment slot, if specified).
      * @param string $resourceGroupName
      * @param string $name
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listUsages(
         $resourceGroupName,
         $name,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListUsages_operation->call([

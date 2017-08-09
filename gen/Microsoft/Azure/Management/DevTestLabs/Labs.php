@@ -21,17 +21,17 @@ final class Labs
     }
     /**
      * List labs in a subscription.
-     * @param string $_expand
-     * @param string $_filter
-     * @param integer $_top
-     * @param string $_orderby
+     * @param string|null $_expand
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param string|null $_orderby
      * @return array
      */
     public function listBySubscription(
-        $_expand,
-        $_filter,
-        $_top,
-        $_orderby
+        $_expand = null,
+        $_filter = null,
+        $_top = null,
+        $_orderby = null
     )
     {
         return $this->_ListBySubscription_operation->call([
@@ -44,18 +44,18 @@ final class Labs
     /**
      * List labs in a resource group.
      * @param string $resourceGroupName
-     * @param string $_expand
-     * @param string $_filter
-     * @param integer $_top
-     * @param string $_orderby
+     * @param string|null $_expand
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param string|null $_orderby
      * @return array
      */
     public function listByResourceGroup(
         $resourceGroupName,
-        $_expand,
-        $_filter,
-        $_top,
-        $_orderby
+        $_expand = null,
+        $_filter = null,
+        $_top = null,
+        $_orderby = null
     )
     {
         return $this->_ListByResourceGroup_operation->call([
@@ -70,13 +70,13 @@ final class Labs
      * Get lab.
      * @param string $resourceGroupName
      * @param string $name
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
         $resourceGroupName,
         $name,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([

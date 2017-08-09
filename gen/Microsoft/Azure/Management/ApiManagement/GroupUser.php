@@ -16,18 +16,18 @@ final class GroupUser
      * @param string $resourceGroupName
      * @param string $serviceName
      * @param string $groupId
-     * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param integer|null $_skip
      * @return array
      */
     public function list_(
         $resourceGroupName,
         $serviceName,
         $groupId,
-        $_filter,
-        $_top,
-        $_skip
+        $_filter = null,
+        $_top = null,
+        $_skip = null
     )
     {
         return $this->_List_operation->call([

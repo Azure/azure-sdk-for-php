@@ -76,14 +76,14 @@ final class DataSources
      * @param string $resourceGroupName
      * @param string $workspaceName
      * @param string $_filter
-     * @param string $_skiptoken
+     * @param string|null $_skiptoken
      * @return array
      */
     public function listByWorkspace(
         $resourceGroupName,
         $workspaceName,
         $_filter,
-        $_skiptoken
+        $_skiptoken = null
     )
     {
         return $this->_ListByWorkspace_operation->call([

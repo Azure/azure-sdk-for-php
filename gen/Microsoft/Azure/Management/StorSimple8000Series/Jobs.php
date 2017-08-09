@@ -17,14 +17,14 @@ final class Jobs
      * @param string $deviceName
      * @param string $resourceGroupName
      * @param string $managerName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listByDevice(
         $deviceName,
         $resourceGroupName,
         $managerName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListByDevice_operation->call([
@@ -81,13 +81,13 @@ final class Jobs
      * Gets all the jobs for the specified manager. With optional OData query parameters, a filtered set of jobs is returned.
      * @param string $resourceGroupName
      * @param string $managerName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listByManager(
         $resourceGroupName,
         $managerName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListByManager_operation->call([

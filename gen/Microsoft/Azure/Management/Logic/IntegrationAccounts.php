@@ -17,22 +17,22 @@ final class IntegrationAccounts
     }
     /**
      * Gets a list of integration accounts by subscription.
-     * @param integer $_top
+     * @param integer|null $_top
      * @return array
      */
-    public function listBySubscription($_top)
+    public function listBySubscription($_top = null)
     {
         return $this->_ListBySubscription_operation->call(['$top' => $_top]);
     }
     /**
      * Gets a list of integration accounts by resource group.
      * @param string $resourceGroupName
-     * @param integer $_top
+     * @param integer|null $_top
      * @return array
      */
     public function listByResourceGroup(
         $resourceGroupName,
-        $_top
+        $_top = null
     )
     {
         return $this->_ListByResourceGroup_operation->call([

@@ -17,13 +17,13 @@ final class DataLakeStoreAccounts
      * @param string $resourceGroupName
      * @param string $accountName
      * @param string $dataLakeStoreAccountName
-     * @param array $parameters
+     * @param array|null $parameters
      */
     public function add(
         $resourceGroupName,
         $accountName,
         $dataLakeStoreAccountName,
-        array $parameters
+        array $parameters = null
     )
     {
         return $this->_Add_operation->call([
@@ -74,23 +74,23 @@ final class DataLakeStoreAccounts
      * Gets the first page of Data Lake Store accounts linked to the specified Data Lake Analytics account. The response includes a link to the next page, if any.
      * @param string $resourceGroupName
      * @param string $accountName
-     * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
-     * @param string $_select
-     * @param string $_orderby
-     * @param boolean $_count
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param integer|null $_skip
+     * @param string|null $_select
+     * @param string|null $_orderby
+     * @param boolean|null $_count
      * @return array
      */
     public function listByAccount(
         $resourceGroupName,
         $accountName,
-        $_filter,
-        $_top,
-        $_skip,
-        $_select,
-        $_orderby,
-        $_count
+        $_filter = null,
+        $_top = null,
+        $_skip = null,
+        $_select = null,
+        $_orderby = null,
+        $_count = null
     )
     {
         return $this->_ListByAccount_operation->call([

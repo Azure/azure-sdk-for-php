@@ -40,14 +40,14 @@ final class ComputePolicies
      * @param string $resourceGroupName
      * @param string $accountName
      * @param string $computePolicyName
-     * @param array $parameters
+     * @param array|null $parameters
      * @return array
      */
     public function update(
         $resourceGroupName,
         $accountName,
         $computePolicyName,
-        array $parameters
+        array $parameters = null
     )
     {
         return $this->_Update_operation->call([

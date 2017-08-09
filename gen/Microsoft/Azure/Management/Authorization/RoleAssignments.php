@@ -25,7 +25,7 @@ final class RoleAssignments
      * @param string $parentResourcePath
      * @param string $resourceType
      * @param string $resourceName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listForResource(
@@ -34,7 +34,7 @@ final class RoleAssignments
         $parentResourcePath,
         $resourceType,
         $resourceName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListForResource_operation->call([
@@ -49,12 +49,12 @@ final class RoleAssignments
     /**
      * Gets role assignments for a resource group.
      * @param string $resourceGroupName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listForResourceGroup(
         $resourceGroupName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListForResourceGroup_operation->call([
@@ -149,22 +149,22 @@ final class RoleAssignments
     }
     /**
      * Gets all role assignments for the subscription.
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
-    public function list_($_filter)
+    public function list_($_filter = null)
     {
         return $this->_List_operation->call(['$filter' => $_filter]);
     }
     /**
      * Gets role assignments for a scope.
      * @param string $scope
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listForScope(
         $scope,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListForScope_operation->call([

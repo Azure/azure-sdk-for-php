@@ -18,8 +18,8 @@ final class Functions
     /**
      * Creates a function or replaces an already existing function under an existing streaming job.
      * @param array $function
-     * @param string $if_Match
-     * @param string $if_None_Match
+     * @param string|null $if_Match
+     * @param string|null $if_None_Match
      * @param string $resourceGroupName
      * @param string $jobName
      * @param string $functionName
@@ -27,8 +27,8 @@ final class Functions
      */
     public function createOrReplace(
         array $function,
-        $if_Match,
-        $if_None_Match,
+        $if_Match = null,
+        $if_None_Match = null,
         $resourceGroupName,
         $jobName,
         $functionName
@@ -46,7 +46,7 @@ final class Functions
     /**
      * Updates an existing function under an existing streaming job. This can be used to partially update (ie. update one or two properties) a function without affecting the rest the job or function definition.
      * @param array $function
-     * @param string $if_Match
+     * @param string|null $if_Match
      * @param string $resourceGroupName
      * @param string $jobName
      * @param string $functionName
@@ -54,7 +54,7 @@ final class Functions
      */
     public function update(
         array $function,
-        $if_Match,
+        $if_Match = null,
         $resourceGroupName,
         $jobName,
         $functionName
@@ -107,13 +107,13 @@ final class Functions
     }
     /**
      * Lists all of the functions under the specified streaming job.
-     * @param string $_select
+     * @param string|null $_select
      * @param string $resourceGroupName
      * @param string $jobName
      * @return array
      */
     public function listByStreamingJob(
-        $_select,
+        $_select = null,
         $resourceGroupName,
         $jobName
     )
@@ -126,14 +126,14 @@ final class Functions
     }
     /**
      * Tests if the information provided for a function is valid. This can range from testing the connection to the underlying web service behind the function or making sure the function code provided is syntactically correct.
-     * @param array $function
+     * @param array|null $function
      * @param string $resourceGroupName
      * @param string $jobName
      * @param string $functionName
      * @return array
      */
     public function test(
-        array $function,
+        array $function = null,
         $resourceGroupName,
         $jobName,
         $functionName
@@ -148,14 +148,14 @@ final class Functions
     }
     /**
      * Retrieves the default definition of a function based on the parameters specified.
-     * @param array $functionRetrieveDefaultDefinitionParameters
+     * @param array|null $functionRetrieveDefaultDefinitionParameters
      * @param string $resourceGroupName
      * @param string $jobName
      * @param string $functionName
      * @return array
      */
     public function retrieveDefaultDefinition(
-        array $functionRetrieveDefaultDefinitionParameters,
+        array $functionRetrieveDefaultDefinitionParameters = null,
         $resourceGroupName,
         $jobName,
         $functionName

@@ -37,13 +37,13 @@ final class NetworkInterfaces
      * Gets information about the specified network interface.
      * @param string $resourceGroupName
      * @param string $networkInterfaceName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
         $resourceGroupName,
         $networkInterfaceName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([
@@ -161,7 +161,7 @@ final class NetworkInterfaces
      * @param string $virtualMachineScaleSetName
      * @param string $virtualmachineIndex
      * @param string $networkInterfaceName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function getVirtualMachineScaleSetNetworkInterface(
@@ -169,7 +169,7 @@ final class NetworkInterfaces
         $virtualMachineScaleSetName,
         $virtualmachineIndex,
         $networkInterfaceName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_GetVirtualMachineScaleSetNetworkInterface_operation->call([

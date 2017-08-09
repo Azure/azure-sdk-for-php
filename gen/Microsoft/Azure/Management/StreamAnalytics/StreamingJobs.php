@@ -19,16 +19,16 @@ final class StreamingJobs
     /**
      * Creates a streaming job or replaces an already existing streaming job.
      * @param array $streamingJob
-     * @param string $if_Match
-     * @param string $if_None_Match
+     * @param string|null $if_Match
+     * @param string|null $if_None_Match
      * @param string $resourceGroupName
      * @param string $jobName
      * @return array
      */
     public function createOrReplace(
         array $streamingJob,
-        $if_Match,
-        $if_None_Match,
+        $if_Match = null,
+        $if_None_Match = null,
         $resourceGroupName,
         $jobName
     )
@@ -44,14 +44,14 @@ final class StreamingJobs
     /**
      * Updates an existing streaming job. This can be used to partially update (ie. update one or two properties) a streaming job without affecting the rest the job definition.
      * @param array $streamingJob
-     * @param string $if_Match
+     * @param string|null $if_Match
      * @param string $resourceGroupName
      * @param string $jobName
      * @return array
      */
     public function update(
         array $streamingJob,
-        $if_Match,
+        $if_Match = null,
         $resourceGroupName,
         $jobName
     )
@@ -80,13 +80,13 @@ final class StreamingJobs
     }
     /**
      * Gets details about the specified streaming job.
-     * @param string $_expand
+     * @param string|null $_expand
      * @param string $resourceGroupName
      * @param string $jobName
      * @return array
      */
     public function get(
-        $_expand,
+        $_expand = null,
         $resourceGroupName,
         $jobName
     )
@@ -99,12 +99,12 @@ final class StreamingJobs
     }
     /**
      * Lists all of the streaming jobs in the specified resource group.
-     * @param string $_expand
+     * @param string|null $_expand
      * @param string $resourceGroupName
      * @return array
      */
     public function listByResourceGroup(
-        $_expand,
+        $_expand = null,
         $resourceGroupName
     )
     {
@@ -115,21 +115,21 @@ final class StreamingJobs
     }
     /**
      * Lists all of the streaming jobs in the given subscription.
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
-    public function list_($_expand)
+    public function list_($_expand = null)
     {
         return $this->_List_operation->call(['$expand' => $_expand]);
     }
     /**
      * Starts a streaming job. Once a job is started it will start processing input events and produce output.
-     * @param array $startJobParameters
+     * @param array|null $startJobParameters
      * @param string $resourceGroupName
      * @param string $jobName
      */
     public function start(
-        array $startJobParameters,
+        array $startJobParameters = null,
         $resourceGroupName,
         $jobName
     )

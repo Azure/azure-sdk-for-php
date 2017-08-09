@@ -39,13 +39,13 @@ final class WebServices
      * Gets the Web Service Definition as specified by a subscription, resource group, and name. Note that the storage credentials and web service keys are not returned by this call. To get the web service access keys, call List Keys.
      * @param string $resourceGroupName
      * @param string $webServiceName
-     * @param string $region
+     * @param string|null $region
      * @return array
      */
     public function get(
         $resourceGroupName,
         $webServiceName,
-        $region
+        $region = null
     )
     {
         return $this->_Get_operation->call([
@@ -126,12 +126,12 @@ final class WebServices
     /**
      * Gets the web services in the specified resource group.
      * @param string $resourceGroupName
-     * @param string $_skiptoken
+     * @param string|null $_skiptoken
      * @return array
      */
     public function listByResourceGroup(
         $resourceGroupName,
-        $_skiptoken
+        $_skiptoken = null
     )
     {
         return $this->_ListByResourceGroup_operation->call([
@@ -141,10 +141,10 @@ final class WebServices
     }
     /**
      * Gets the web services in the specified subscription.
-     * @param string $_skiptoken
+     * @param string|null $_skiptoken
      * @return array
      */
-    public function listBySubscriptionId($_skiptoken)
+    public function listBySubscriptionId($_skiptoken = null)
     {
         return $this->_ListBySubscriptionId_operation->call(['$skiptoken' => $_skiptoken]);
     }

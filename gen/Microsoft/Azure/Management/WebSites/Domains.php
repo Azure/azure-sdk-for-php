@@ -103,12 +103,12 @@ final class Domains
      * Delete a domain.
      * @param string $resourceGroupName
      * @param string $domainName
-     * @param boolean $forceHardDeleteDomain
+     * @param boolean|null $forceHardDeleteDomain
      */
     public function delete(
         $resourceGroupName,
         $domainName,
-        $forceHardDeleteDomain
+        $forceHardDeleteDomain = null
     )
     {
         return $this->_Delete_operation->call([

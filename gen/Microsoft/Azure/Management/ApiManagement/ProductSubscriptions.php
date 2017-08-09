@@ -14,18 +14,18 @@ final class ProductSubscriptions
      * @param string $resourceGroupName
      * @param string $serviceName
      * @param string $productId
-     * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param integer|null $_skip
      * @return array
      */
     public function list_(
         $resourceGroupName,
         $serviceName,
         $productId,
-        $_filter,
-        $_top,
-        $_skip
+        $_filter = null,
+        $_top = null,
+        $_skip = null
     )
     {
         return $this->_List_operation->call([

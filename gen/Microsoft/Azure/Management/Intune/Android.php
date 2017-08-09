@@ -22,16 +22,16 @@ final class Android
     /**
      * Returns Intune Android policies.
      * @param string $hostName
-     * @param string $_filter
-     * @param integer $_top
-     * @param string $_select
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param string|null $_select
      * @return array
      */
     public function getMAMPolicies(
         $hostName,
-        $_filter,
-        $_top,
-        $_select
+        $_filter = null,
+        $_top = null,
+        $_select = null
     )
     {
         return $this->_GetMAMPolicies_operation->call([
@@ -45,13 +45,13 @@ final class Android
      * Returns AndroidMAMPolicy with given name.
      * @param string $hostName
      * @param string $policyName
-     * @param string $_select
+     * @param string|null $_select
      * @return array
      */
     public function getMAMPolicyByName(
         $hostName,
         $policyName,
-        $_select
+        $_select = null
     )
     {
         return $this->_GetMAMPolicyByName_operation->call([
@@ -117,17 +117,17 @@ final class Android
      * Get apps for an AndroidMAMPolicy.
      * @param string $hostName
      * @param string $policyName
-     * @param string $_filter
-     * @param integer $_top
-     * @param string $_select
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param string|null $_select
      * @return array
      */
     public function getAppForMAMPolicy(
         $hostName,
         $policyName,
-        $_filter,
-        $_top,
-        $_select
+        $_filter = null,
+        $_top = null,
+        $_select = null
     )
     {
         return $this->_GetAppForMAMPolicy_operation->call([

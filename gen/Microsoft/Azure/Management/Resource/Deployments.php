@@ -134,14 +134,14 @@ final class Deployments
     /**
      * Get all the deployments for a resource group.
      * @param string $resourceGroupName
-     * @param string $_filter
-     * @param integer $_top
+     * @param string|null $_filter
+     * @param integer|null $_top
      * @return array
      */
     public function listByResourceGroup(
         $resourceGroupName,
-        $_filter,
-        $_top
+        $_filter = null,
+        $_top = null
     )
     {
         return $this->_ListByResourceGroup_operation->call([

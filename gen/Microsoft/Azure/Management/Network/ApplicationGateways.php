@@ -121,13 +121,13 @@ final class ApplicationGateways
      * Gets the backend health of the specified application gateway in a resource group.
      * @param string $resourceGroupName
      * @param string $applicationGatewayName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function backendHealth(
         $resourceGroupName,
         $applicationGatewayName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_BackendHealth_operation->call([

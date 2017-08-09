@@ -16,15 +16,15 @@ final class Schemas
      * Gets a list of integration account schemas.
      * @param string $resourceGroupName
      * @param string $integrationAccountName
-     * @param integer $_top
-     * @param string $_filter
+     * @param integer|null $_top
+     * @param string|null $_filter
      * @return array
      */
     public function listByIntegrationAccounts(
         $resourceGroupName,
         $integrationAccountName,
-        $_top,
-        $_filter
+        $_top = null,
+        $_filter = null
     )
     {
         return $this->_ListByIntegrationAccounts_operation->call([

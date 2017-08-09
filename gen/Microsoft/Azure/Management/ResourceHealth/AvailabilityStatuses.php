@@ -14,13 +14,13 @@ final class AvailabilityStatuses
     }
     /**
      * Lists the current availability status for all the resources in the subscription. Use the nextLink property in the response to get the next page of availability statuses.
-     * @param string $_filter
-     * @param string $_expand
+     * @param string|null $_filter
+     * @param string|null $_expand
      * @return array
      */
     public function listBySubscriptionId(
-        $_filter,
-        $_expand
+        $_filter = null,
+        $_expand = null
     )
     {
         return $this->_ListBySubscriptionId_operation->call([
@@ -31,14 +31,14 @@ final class AvailabilityStatuses
     /**
      * Lists the current availability status for all the resources in the resource group. Use the nextLink property in the response to get the next page of availability statuses.
      * @param string $resourceGroupName
-     * @param string $_filter
-     * @param string $_expand
+     * @param string|null $_filter
+     * @param string|null $_expand
      * @return array
      */
     public function listByResourceGroup(
         $resourceGroupName,
-        $_filter,
-        $_expand
+        $_filter = null,
+        $_expand = null
     )
     {
         return $this->_ListByResourceGroup_operation->call([
@@ -50,14 +50,14 @@ final class AvailabilityStatuses
     /**
      * Gets current availability status for a single resource
      * @param string $resourceUri
-     * @param string $_filter
-     * @param string $_expand
+     * @param string|null $_filter
+     * @param string|null $_expand
      * @return array
      */
     public function getByResource(
         $resourceUri,
-        $_filter,
-        $_expand
+        $_filter = null,
+        $_expand = null
     )
     {
         return $this->_GetByResource_operation->call([
@@ -69,14 +69,14 @@ final class AvailabilityStatuses
     /**
      * Lists all historical availability transitions and impacting events for a single resource. Use the nextLink property in the response to get the next page of availability status
      * @param string $resourceUri
-     * @param string $_filter
-     * @param string $_expand
+     * @param string|null $_filter
+     * @param string|null $_expand
      * @return array
      */
     public function list_(
         $resourceUri,
-        $_filter,
-        $_expand
+        $_filter = null,
+        $_expand = null
     )
     {
         return $this->_List_operation->call([

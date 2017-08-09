@@ -18,18 +18,18 @@ final class ApiOperation
      * @param string $resourceGroupName
      * @param string $serviceName
      * @param string $apiId
-     * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param integer|null $_skip
      * @return array
      */
     public function listByApi(
         $resourceGroupName,
         $serviceName,
         $apiId,
-        $_filter,
-        $_top,
-        $_skip
+        $_filter = null,
+        $_top = null,
+        $_skip = null
     )
     {
         return $this->_ListByApi_operation->call([

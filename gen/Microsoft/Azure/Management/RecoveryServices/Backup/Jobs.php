@@ -13,12 +13,12 @@ final class Jobs
      * Triggers export of jobs specified by filters and returns an OperationID to track.
      * @param string $vaultName
      * @param string $resourceGroupName
-     * @param string $_filter
+     * @param string|null $_filter
      */
     public function export(
         $vaultName,
         $resourceGroupName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_Export_operation->call([

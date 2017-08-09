@@ -18,14 +18,14 @@ final class Application
      * @param string $resourceGroupName
      * @param string $accountName
      * @param string $applicationId
-     * @param array $parameters
+     * @param array|null $parameters
      * @return array
      */
     public function create(
         $resourceGroupName,
         $accountName,
         $applicationId,
-        array $parameters
+        array $parameters = null
     )
     {
         return $this->_Create_operation->call([
@@ -97,13 +97,13 @@ final class Application
      * Lists all of the applications in the specified account.
      * @param string $resourceGroupName
      * @param string $accountName
-     * @param integer $maxresults
+     * @param integer|null $maxresults
      * @return array
      */
     public function list_(
         $resourceGroupName,
         $accountName,
-        $maxresults
+        $maxresults = null
     )
     {
         return $this->_List_operation->call([

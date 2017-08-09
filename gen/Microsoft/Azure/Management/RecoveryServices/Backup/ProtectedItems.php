@@ -18,7 +18,7 @@ final class ProtectedItems
      * @param string $fabricName
      * @param string $containerName
      * @param string $protectedItemName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function get(
@@ -27,7 +27,7 @@ final class ProtectedItems
         $fabricName,
         $containerName,
         $protectedItemName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_Get_operation->call([

@@ -32,13 +32,13 @@ final class RouteTables
      * Gets the specified route table.
      * @param string $resourceGroupName
      * @param string $routeTableName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
         $resourceGroupName,
         $routeTableName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([

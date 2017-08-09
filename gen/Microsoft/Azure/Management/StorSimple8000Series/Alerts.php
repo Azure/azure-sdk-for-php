@@ -15,13 +15,13 @@ final class Alerts
      * Retrieves all the alerts in a manager.
      * @param string $resourceGroupName
      * @param string $managerName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listByManager(
         $resourceGroupName,
         $managerName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListByManager_operation->call([

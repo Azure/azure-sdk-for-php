@@ -85,22 +85,22 @@ final class CommitmentPlans
     }
     /**
      * Retrieve all Azure ML commitment plans in a subscription.
-     * @param string $_skipToken
+     * @param string|null $_skipToken
      * @return array
      */
-    public function list_($_skipToken)
+    public function list_($_skipToken = null)
     {
         return $this->_List_operation->call(['$skipToken' => $_skipToken]);
     }
     /**
      * Retrieve all Azure ML commitment plans in a resource group.
      * @param string $resourceGroupName
-     * @param string $_skipToken
+     * @param string|null $_skipToken
      * @return array
      */
     public function listInResourceGroup(
         $resourceGroupName,
-        $_skipToken
+        $_skipToken = null
     )
     {
         return $this->_ListInResourceGroup_operation->call([

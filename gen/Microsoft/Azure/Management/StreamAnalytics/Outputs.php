@@ -17,8 +17,8 @@ final class Outputs
     /**
      * Creates an output or replaces an already existing output under an existing streaming job.
      * @param array $output
-     * @param string $if_Match
-     * @param string $if_None_Match
+     * @param string|null $if_Match
+     * @param string|null $if_None_Match
      * @param string $resourceGroupName
      * @param string $jobName
      * @param string $outputName
@@ -26,8 +26,8 @@ final class Outputs
      */
     public function createOrReplace(
         array $output,
-        $if_Match,
-        $if_None_Match,
+        $if_Match = null,
+        $if_None_Match = null,
         $resourceGroupName,
         $jobName,
         $outputName
@@ -45,7 +45,7 @@ final class Outputs
     /**
      * Updates an existing output under an existing streaming job. This can be used to partially update (ie. update one or two properties) an output without affecting the rest the job or output definition.
      * @param array $output
-     * @param string $if_Match
+     * @param string|null $if_Match
      * @param string $resourceGroupName
      * @param string $jobName
      * @param string $outputName
@@ -53,7 +53,7 @@ final class Outputs
      */
     public function update(
         array $output,
-        $if_Match,
+        $if_Match = null,
         $resourceGroupName,
         $jobName,
         $outputName
@@ -106,13 +106,13 @@ final class Outputs
     }
     /**
      * Lists all of the outputs under the specified streaming job.
-     * @param string $_select
+     * @param string|null $_select
      * @param string $resourceGroupName
      * @param string $jobName
      * @return array
      */
     public function listByStreamingJob(
-        $_select,
+        $_select = null,
         $resourceGroupName,
         $jobName
     )
@@ -125,14 +125,14 @@ final class Outputs
     }
     /**
      * Tests whether an output’s datasource is reachable and usable by the Azure Stream Analytics service.
-     * @param array $output
+     * @param array|null $output
      * @param string $resourceGroupName
      * @param string $jobName
      * @param string $outputName
      * @return array
      */
     public function test(
-        array $output,
+        array $output = null,
         $resourceGroupName,
         $jobName,
         $outputName

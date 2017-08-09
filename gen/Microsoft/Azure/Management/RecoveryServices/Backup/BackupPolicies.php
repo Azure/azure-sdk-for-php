@@ -13,13 +13,13 @@ final class BackupPolicies
      * Lists of backup policies associated with Recovery Services Vault. API provides pagination parameters to fetch scoped results.
      * @param string $vaultName
      * @param string $resourceGroupName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function list_(
         $vaultName,
         $resourceGroupName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_List_operation->call([

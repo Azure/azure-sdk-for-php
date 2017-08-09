@@ -13,13 +13,13 @@ final class BackupProtectionContainers
      * Lists the containers registered to Recovery Services Vault.
      * @param string $vaultName
      * @param string $resourceGroupName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function list_(
         $vaultName,
         $resourceGroupName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_List_operation->call([

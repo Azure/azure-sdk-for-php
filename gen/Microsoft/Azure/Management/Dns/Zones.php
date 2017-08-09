@@ -18,16 +18,16 @@ final class Zones
      * @param string $resourceGroupName
      * @param string $zoneName
      * @param array $parameters
-     * @param string $if_Match
-     * @param string $if_None_Match
+     * @param string|null $if_Match
+     * @param string|null $if_None_Match
      * @return array
      */
     public function createOrUpdate(
         $resourceGroupName,
         $zoneName,
         array $parameters,
-        $if_Match,
-        $if_None_Match
+        $if_Match = null,
+        $if_None_Match = null
     )
     {
         return $this->_CreateOrUpdate_operation->call([
@@ -42,13 +42,13 @@ final class Zones
      * Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone.
      * @param string $resourceGroupName
      * @param string $zoneName
-     * @param string $if_Match
+     * @param string|null $if_Match
      * @return array
      */
     public function delete(
         $resourceGroupName,
         $zoneName,
-        $if_Match
+        $if_Match = null
     )
     {
         return $this->_Delete_operation->call([
@@ -76,12 +76,12 @@ final class Zones
     /**
      * Lists the DNS zones within a resource group.
      * @param string $resourceGroupName
-     * @param integer $_top
+     * @param integer|null $_top
      * @return array
      */
     public function listByResourceGroup(
         $resourceGroupName,
-        $_top
+        $_top = null
     )
     {
         return $this->_ListByResourceGroup_operation->call([
@@ -91,10 +91,10 @@ final class Zones
     }
     /**
      * Lists the DNS zones in all resource groups in a subscription.
-     * @param integer $_top
+     * @param integer|null $_top
      * @return array
      */
-    public function list_($_top)
+    public function list_($_top = null)
     {
         return $this->_List_operation->call(['$top' => $_top]);
     }

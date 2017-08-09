@@ -35,7 +35,7 @@ final class Projects
      * @param string $resourceGroupName
      * @param string $rootResourceName
      * @param string $resourceName
-     * @param string $validating
+     * @param string|null $validating
      * @return array
      */
     public function create(
@@ -43,7 +43,7 @@ final class Projects
         $resourceGroupName,
         $rootResourceName,
         $resourceName,
-        $validating
+        $validating = null
     )
     {
         return $this->_Create_operation->call([
@@ -102,7 +102,7 @@ final class Projects
      * @param string $resourceName
      * @param string $subContainerName
      * @param string $operation
-     * @param string $jobId
+     * @param string|null $jobId
      * @return array
      */
     public function getJobStatus(
@@ -111,7 +111,7 @@ final class Projects
         $resourceName,
         $subContainerName,
         $operation,
-        $jobId
+        $jobId = null
     )
     {
         return $this->_GetJobStatus_operation->call([

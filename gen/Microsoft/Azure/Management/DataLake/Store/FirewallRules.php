@@ -40,14 +40,14 @@ final class FirewallRules
      * @param string $resourceGroupName
      * @param string $accountName
      * @param string $firewallRuleName
-     * @param array $parameters
+     * @param array|null $parameters
      * @return array
      */
     public function update(
         $resourceGroupName,
         $accountName,
         $firewallRuleName,
-        array $parameters
+        array $parameters = null
     )
     {
         return $this->_Update_operation->call([

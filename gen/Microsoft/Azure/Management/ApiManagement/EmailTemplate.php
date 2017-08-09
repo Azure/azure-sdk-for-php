@@ -17,15 +17,15 @@ final class EmailTemplate
      * Lists a collection of properties defined within a service instance.
      * @param string $resourceGroupName
      * @param string $serviceName
-     * @param integer $_top
-     * @param integer $_skip
+     * @param integer|null $_top
+     * @param integer|null $_skip
      * @return array
      */
     public function listByService(
         $resourceGroupName,
         $serviceName,
-        $_top,
-        $_skip
+        $_top = null,
+        $_skip = null
     )
     {
         return $this->_ListByService_operation->call([

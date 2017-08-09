@@ -12,15 +12,15 @@ final class BillingPeriods
     }
     /**
      * Lists the available billing periods for a subscription in reverse chronological order.
-     * @param string $_filter
-     * @param string $_skiptoken
-     * @param integer $_top
+     * @param string|null $_filter
+     * @param string|null $_skiptoken
+     * @param integer|null $_top
      * @return array
      */
     public function list_(
-        $_filter,
-        $_skiptoken,
-        $_top
+        $_filter = null,
+        $_skiptoken = null,
+        $_top = null
     )
     {
         return $this->_List_operation->call([

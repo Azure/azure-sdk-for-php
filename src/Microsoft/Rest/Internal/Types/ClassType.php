@@ -8,6 +8,24 @@ final class ClassType extends TypeAbstract
     use NotConstTypeTrait;
 
     /**
+     * @param string $name
+     * @param TypeAbstract $type
+     * @param array $value
+     * @param string $result
+     * @return string
+     */
+    private static function addJsonProperty($name, TypeAbstract $type, array $value, $result)
+    {
+        return $result .
+            (strlen($result) > 1 ? ',' : '')
+            . '"'
+            . $name
+            . '":'
+            . $type->toJson($value[$name]);
+    }
+
+
+    /**
      * @param array $value
      * @return string
      */
@@ -15,19 +33,11 @@ final class ClassType extends TypeAbstract
     {
         $result = '{';
         foreach ($this->requiredPropertyMap as $name => $type) {
-            $result .= (strlen($result) > 1 ? ',' : '')
-                . '"'
-                . $name
-                . '":'
-                . $type->toJson($value[$name]);
+            $result = self::addJsonProperty($name, $type, $value, $result);
         }
         foreach ($this->optionalPropertyMap as $name => $type) {
             if (isset($value[$name])) {
-                $result .= (strlen($result) > 1 ? ',' : '')
-                    . '"'
-                    . $name
-                    . '":'
-                    . $type->toJson($value[$name]);
+                $result = self::addJsonProperty($name, $type, $value, $result);
             }
         }
         return $result . '}';

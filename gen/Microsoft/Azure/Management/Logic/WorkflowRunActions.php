@@ -15,16 +15,16 @@ final class WorkflowRunActions
      * @param string $resourceGroupName
      * @param string $workflowName
      * @param string $runName
-     * @param integer $_top
-     * @param string $_filter
+     * @param integer|null $_top
+     * @param string|null $_filter
      * @return array
      */
     public function list_(
         $resourceGroupName,
         $workflowName,
         $runName,
-        $_top,
-        $_filter
+        $_top = null,
+        $_filter = null
     )
     {
         return $this->_List_operation->call([

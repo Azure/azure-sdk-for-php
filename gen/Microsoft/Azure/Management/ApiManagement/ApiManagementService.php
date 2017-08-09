@@ -172,13 +172,13 @@ final class ApiManagementService
      * Updates the Microsoft.ApiManagement resource running in the Virtual network to pick the updated network settings.
      * @param string $resourceGroupName
      * @param string $serviceName
-     * @param array $parameters
+     * @param array|null $parameters
      * @return array
      */
     public function applyNetworkConfigurationUpdates(
         $resourceGroupName,
         $serviceName,
-        array $parameters
+        array $parameters = null
     )
     {
         return $this->_ApplyNetworkConfigurationUpdates_operation->call([

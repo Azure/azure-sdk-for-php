@@ -45,13 +45,13 @@ final class Devices
      * Returns the list of devices for the specified manager.
      * @param string $resourceGroupName
      * @param string $managerName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function listByManager(
         $resourceGroupName,
         $managerName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_ListByManager_operation->call([
@@ -65,14 +65,14 @@ final class Devices
      * @param string $deviceName
      * @param string $resourceGroupName
      * @param string $managerName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
         $deviceName,
         $resourceGroupName,
         $managerName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([

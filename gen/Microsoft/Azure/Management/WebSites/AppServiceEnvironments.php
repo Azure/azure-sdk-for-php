@@ -100,12 +100,12 @@ final class AppServiceEnvironments
      * Delete an App Service Environment.
      * @param string $resourceGroupName
      * @param string $name
-     * @param boolean $forceDelete
+     * @param boolean|null $forceDelete
      */
     public function delete(
         $resourceGroupName,
         $name,
-        $forceDelete
+        $forceDelete = null
     )
     {
         return $this->_Delete_operation->call([
@@ -201,15 +201,15 @@ final class AppServiceEnvironments
      * Get global metrics of an App Service Environment.
      * @param string $resourceGroupName
      * @param string $name
-     * @param boolean $details
-     * @param string $_filter
+     * @param boolean|null $details
+     * @param string|null $_filter
      * @return array
      */
     public function listMetrics(
         $resourceGroupName,
         $name,
-        $details,
-        $_filter
+        $details = null,
+        $_filter = null
     )
     {
         return $this->_ListMetrics_operation->call([
@@ -294,14 +294,14 @@ final class AppServiceEnvironments
      * @param string $resourceGroupName
      * @param string $name
      * @param string $instance
-     * @param boolean $details
+     * @param boolean|null $details
      * @return array
      */
     public function listMultiRolePoolInstanceMetrics(
         $resourceGroupName,
         $name,
         $instance,
-        $details
+        $details = null
     )
     {
         return $this->_ListMultiRolePoolInstanceMetrics_operation->call([
@@ -331,21 +331,21 @@ final class AppServiceEnvironments
      * Get metrics for a multi-role pool of an App Service Environment.
      * @param string $resourceGroupName
      * @param string $name
-     * @param string $startTime
-     * @param string $endTime
-     * @param string $timeGrain
-     * @param boolean $details
-     * @param string $_filter
+     * @param string|null $startTime
+     * @param string|null $endTime
+     * @param string|null $timeGrain
+     * @param boolean|null $details
+     * @param string|null $_filter
      * @return array
      */
     public function listMultiRoleMetrics(
         $resourceGroupName,
         $name,
-        $startTime,
-        $endTime,
-        $timeGrain,
-        $details,
-        $_filter
+        $startTime = null,
+        $endTime = null,
+        $timeGrain = null,
+        $details = null,
+        $_filter = null
     )
     {
         return $this->_ListMultiRoleMetrics_operation->call([
@@ -457,13 +457,13 @@ final class AppServiceEnvironments
      * Get all apps in an App Service Environment.
      * @param string $resourceGroupName
      * @param string $name
-     * @param string $propertiesToInclude
+     * @param string|null $propertiesToInclude
      * @return array
      */
     public function listWebApps(
         $resourceGroupName,
         $name,
-        $propertiesToInclude
+        $propertiesToInclude = null
     )
     {
         return $this->_ListWebApps_operation->call([
@@ -492,13 +492,13 @@ final class AppServiceEnvironments
      * Get global usage metrics of an App Service Environment.
      * @param string $resourceGroupName
      * @param string $name
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listUsages(
         $resourceGroupName,
         $name,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListUsages_operation->call([
@@ -592,8 +592,8 @@ final class AppServiceEnvironments
      * @param string $name
      * @param string $workerPoolName
      * @param string $instance
-     * @param boolean $details
-     * @param string $_filter
+     * @param boolean|null $details
+     * @param string|null $_filter
      * @return array
      */
     public function listWorkerPoolInstanceMetrics(
@@ -601,8 +601,8 @@ final class AppServiceEnvironments
         $name,
         $workerPoolName,
         $instance,
-        $details,
-        $_filter
+        $details = null,
+        $_filter = null
     )
     {
         return $this->_ListWorkerPoolInstanceMetrics_operation->call([
@@ -638,16 +638,16 @@ final class AppServiceEnvironments
      * @param string $resourceGroupName
      * @param string $name
      * @param string $workerPoolName
-     * @param boolean $details
-     * @param string $_filter
+     * @param boolean|null $details
+     * @param string|null $_filter
      * @return array
      */
     public function listWebWorkerMetrics(
         $resourceGroupName,
         $name,
         $workerPoolName,
-        $details,
-        $_filter
+        $details = null,
+        $_filter = null
     )
     {
         return $this->_ListWebWorkerMetrics_operation->call([

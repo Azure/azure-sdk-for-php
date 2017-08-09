@@ -116,13 +116,13 @@ final class ReplicationJobs
      * Gets the list of Azure Site Recovery Jobs for the vault.
      * @param string $resourceName
      * @param string $resourceGroupName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function list_(
         $resourceName,
         $resourceGroupName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_List_operation->call([

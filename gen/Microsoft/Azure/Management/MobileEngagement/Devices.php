@@ -18,18 +18,18 @@ final class Devices
      * @param string $resourceGroupName
      * @param string $appCollection
      * @param string $appName
-     * @param integer $_top
-     * @param string $_select
-     * @param string $_filter
+     * @param integer|null $_top
+     * @param string|null $_select
+     * @param string|null $_filter
      * @return array
      */
     public function list_(
         $resourceGroupName,
         $appCollection,
         $appName,
-        $_top,
-        $_select,
-        $_filter
+        $_top = null,
+        $_select = null,
+        $_filter = null
     )
     {
         return $this->_List_operation->call([

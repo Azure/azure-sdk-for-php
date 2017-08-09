@@ -18,7 +18,7 @@ final class Processes
      * @param string $workspaceName
      * @param string $machineName
      * @param string $processName
-     * @param string $timestamp
+     * @param string|null $timestamp
      * @return array
      */
     public function get(
@@ -26,7 +26,7 @@ final class Processes
         $workspaceName,
         $machineName,
         $processName,
-        $timestamp
+        $timestamp = null
     )
     {
         return $this->_Get_operation->call([
@@ -43,8 +43,8 @@ final class Processes
      * @param string $workspaceName
      * @param string $machineName
      * @param string $processName
-     * @param string $startTime
-     * @param string $endTime
+     * @param string|null $startTime
+     * @param string|null $endTime
      * @return array
      */
     public function getLiveness(
@@ -52,8 +52,8 @@ final class Processes
         $workspaceName,
         $machineName,
         $processName,
-        $startTime,
-        $endTime
+        $startTime = null,
+        $endTime = null
     )
     {
         return $this->_GetLiveness_operation->call([
@@ -71,8 +71,8 @@ final class Processes
      * @param string $workspaceName
      * @param string $machineName
      * @param string $processName
-     * @param string $startTime
-     * @param string $endTime
+     * @param string|null $startTime
+     * @param string|null $endTime
      * @return array
      */
     public function listAcceptingPorts(
@@ -80,8 +80,8 @@ final class Processes
         $workspaceName,
         $machineName,
         $processName,
-        $startTime,
-        $endTime
+        $startTime = null,
+        $endTime = null
     )
     {
         return $this->_ListAcceptingPorts_operation->call([
@@ -99,8 +99,8 @@ final class Processes
      * @param string $workspaceName
      * @param string $machineName
      * @param string $processName
-     * @param string $startTime
-     * @param string $endTime
+     * @param string|null $startTime
+     * @param string|null $endTime
      * @return array
      */
     public function listConnections(
@@ -108,8 +108,8 @@ final class Processes
         $workspaceName,
         $machineName,
         $processName,
-        $startTime,
-        $endTime
+        $startTime = null,
+        $endTime = null
     )
     {
         return $this->_ListConnections_operation->call([

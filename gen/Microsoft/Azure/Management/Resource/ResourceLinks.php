@@ -48,22 +48,22 @@ final class ResourceLinks
     }
     /**
      * Gets all the linked resources for the subscription.
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
-    public function listAtSubscription($_filter)
+    public function listAtSubscription($_filter = null)
     {
         return $this->_ListAtSubscription_operation->call(['$filter' => $_filter]);
     }
     /**
      * Gets a list of resource links at and below the specified source scope.
      * @param string $scope
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listAtSourceScope(
         $scope,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListAtSourceScope_operation->call([

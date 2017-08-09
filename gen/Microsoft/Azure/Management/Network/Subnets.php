@@ -35,14 +35,14 @@ final class Subnets
      * @param string $resourceGroupName
      * @param string $virtualNetworkName
      * @param string $subnetName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
         $resourceGroupName,
         $virtualNetworkName,
         $subnetName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([

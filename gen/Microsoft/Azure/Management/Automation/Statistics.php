@@ -13,13 +13,13 @@ final class Statistics
      * Retrieve the statistics for the account.
      * @param string $resourceGroupName
      * @param string $automationAccountName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listByAutomationAccount(
         $resourceGroupName,
         $automationAccountName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListByAutomationAccount_operation->call([

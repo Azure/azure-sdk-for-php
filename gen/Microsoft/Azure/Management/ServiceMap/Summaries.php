@@ -13,15 +13,15 @@ final class Summaries
      * Returns summary information about the machines in the workspace.
      * @param string $resourceGroupName
      * @param string $workspaceName
-     * @param string $startTime
-     * @param string $endTime
+     * @param string|null $startTime
+     * @param string|null $endTime
      * @return array
      */
     public function getMachines(
         $resourceGroupName,
         $workspaceName,
-        $startTime,
-        $endTime
+        $startTime = null,
+        $endTime = null
     )
     {
         return $this->_GetMachines_operation->call([

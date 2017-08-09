@@ -19,20 +19,20 @@ final class Disks
      * @param string $resourceGroupName
      * @param string $labName
      * @param string $userName
-     * @param string $_expand
-     * @param string $_filter
-     * @param integer $_top
-     * @param string $_orderby
+     * @param string|null $_expand
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param string|null $_orderby
      * @return array
      */
     public function list_(
         $resourceGroupName,
         $labName,
         $userName,
-        $_expand,
-        $_filter,
-        $_top,
-        $_orderby
+        $_expand = null,
+        $_filter = null,
+        $_top = null,
+        $_orderby = null
     )
     {
         return $this->_List_operation->call([
@@ -51,7 +51,7 @@ final class Disks
      * @param string $labName
      * @param string $userName
      * @param string $name
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
@@ -59,7 +59,7 @@ final class Disks
         $labName,
         $userName,
         $name,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([

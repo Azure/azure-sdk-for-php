@@ -16,16 +16,16 @@ final class ClientGroups
      * @param string $resourceGroupName
      * @param string $workspaceName
      * @param string $clientGroupName
-     * @param string $startTime
-     * @param string $endTime
+     * @param string|null $startTime
+     * @param string|null $endTime
      * @return array
      */
     public function get(
         $resourceGroupName,
         $workspaceName,
         $clientGroupName,
-        $startTime,
-        $endTime
+        $startTime = null,
+        $endTime = null
     )
     {
         return $this->_Get_operation->call([
@@ -41,16 +41,16 @@ final class ClientGroups
      * @param string $resourceGroupName
      * @param string $workspaceName
      * @param string $clientGroupName
-     * @param string $startTime
-     * @param string $endTime
+     * @param string|null $startTime
+     * @param string|null $endTime
      * @return array
      */
     public function getMembersCount(
         $resourceGroupName,
         $workspaceName,
         $clientGroupName,
-        $startTime,
-        $endTime
+        $startTime = null,
+        $endTime = null
     )
     {
         return $this->_GetMembersCount_operation->call([
@@ -66,18 +66,18 @@ final class ClientGroups
      * @param string $resourceGroupName
      * @param string $workspaceName
      * @param string $clientGroupName
-     * @param string $startTime
-     * @param string $endTime
-     * @param integer $_top
+     * @param string|null $startTime
+     * @param string|null $endTime
+     * @param integer|null $_top
      * @return array
      */
     public function listMembers(
         $resourceGroupName,
         $workspaceName,
         $clientGroupName,
-        $startTime,
-        $endTime,
-        $_top
+        $startTime = null,
+        $endTime = null,
+        $_top = null
     )
     {
         return $this->_ListMembers_operation->call([

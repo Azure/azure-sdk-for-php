@@ -73,13 +73,13 @@ final class Suppressions
     }
     /**
      * Retrieves the list of snoozed or dismissed suppressions for a subscription. The snoozed or dismissed attribute of a recommendation is referred to as a suppression.
-     * @param integer $_top
-     * @param string $_skipToken
+     * @param integer|null $_top
+     * @param string|null $_skipToken
      * @return array
      */
     public function list_(
-        $_top,
-        $_skipToken
+        $_top = null,
+        $_skipToken = null
     )
     {
         return $this->_List_operation->call([

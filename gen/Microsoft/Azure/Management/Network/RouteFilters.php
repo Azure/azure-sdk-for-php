@@ -33,13 +33,13 @@ final class RouteFilters
      * Gets the specified route filter.
      * @param string $resourceGroupName
      * @param string $routeFilterName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
         $resourceGroupName,
         $routeFilterName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([

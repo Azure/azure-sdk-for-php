@@ -74,13 +74,13 @@ final class Gateway
      * Gets a gateway.
      * @param string $resourceGroupName
      * @param string $gatewayName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
         $resourceGroupName,
         $gatewayName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([

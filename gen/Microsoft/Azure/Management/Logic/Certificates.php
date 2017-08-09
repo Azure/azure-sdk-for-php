@@ -16,13 +16,13 @@ final class Certificates
      * Gets a list of integration account certificates.
      * @param string $resourceGroupName
      * @param string $integrationAccountName
-     * @param integer $_top
+     * @param integer|null $_top
      * @return array
      */
     public function listByIntegrationAccounts(
         $resourceGroupName,
         $integrationAccountName,
-        $_top
+        $_top = null
     )
     {
         return $this->_ListByIntegrationAccounts_operation->call([

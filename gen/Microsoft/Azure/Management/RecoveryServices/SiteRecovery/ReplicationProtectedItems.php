@@ -50,15 +50,15 @@ final class ReplicationProtectedItems
      * Gets the list of ASR replication protected items in the vault.
      * @param string $resourceName
      * @param string $resourceGroupName
-     * @param string $skipToken
-     * @param string $_filter
+     * @param string|null $skipToken
+     * @param string|null $_filter
      * @return array
      */
     public function list_(
         $resourceName,
         $resourceGroupName,
-        $skipToken,
-        $_filter
+        $skipToken = null,
+        $_filter = null
     )
     {
         return $this->_List_operation->call([

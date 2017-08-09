@@ -13,15 +13,15 @@ final class BackupJobs
      * Provides a pageable list of jobs.
      * @param string $vaultName
      * @param string $resourceGroupName
-     * @param string $_filter
-     * @param string $_skipToken
+     * @param string|null $_filter
+     * @param string|null $_skipToken
      * @return array
      */
     public function list_(
         $vaultName,
         $resourceGroupName,
-        $_filter,
-        $_skipToken
+        $_filter = null,
+        $_skipToken = null
     )
     {
         return $this->_List_operation->call([

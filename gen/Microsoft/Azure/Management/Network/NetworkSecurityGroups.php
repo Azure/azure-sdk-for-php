@@ -32,13 +32,13 @@ final class NetworkSecurityGroups
      * Gets the specified network security group.
      * @param string $resourceGroupName
      * @param string $networkSecurityGroupName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
         $resourceGroupName,
         $networkSecurityGroupName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([

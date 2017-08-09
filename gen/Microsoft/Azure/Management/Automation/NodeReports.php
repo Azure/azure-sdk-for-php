@@ -16,14 +16,14 @@ final class NodeReports
      * @param string $resourceGroupName
      * @param string $automationAccountName
      * @param string $nodeId
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listByNode(
         $resourceGroupName,
         $automationAccountName,
         $nodeId,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListByNode_operation->call([

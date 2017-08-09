@@ -36,10 +36,10 @@ final class AppServicePlans
     }
     /**
      * Get all App Service plans for a subcription.
-     * @param boolean $detailed
+     * @param boolean|null $detailed
      * @return array
      */
-    public function list_($detailed)
+    public function list_($detailed = null)
     {
         return $this->_List_operation->call(['detailed' => $detailed]);
     }
@@ -257,15 +257,15 @@ final class AppServicePlans
      * Get metrics for an App Serice plan.
      * @param string $resourceGroupName
      * @param string $name
-     * @param boolean $details
-     * @param string $_filter
+     * @param boolean|null $details
+     * @param string|null $_filter
      * @return array
      */
     public function listMetrics(
         $resourceGroupName,
         $name,
-        $details,
-        $_filter
+        $details = null,
+        $_filter = null
     )
     {
         return $this->_ListMetrics_operation->call([
@@ -279,12 +279,12 @@ final class AppServicePlans
      * Restart all apps in an App Service plan.
      * @param string $resourceGroupName
      * @param string $name
-     * @param boolean $softRestart
+     * @param boolean|null $softRestart
      */
     public function restartWebApps(
         $resourceGroupName,
         $name,
-        $softRestart
+        $softRestart = null
     )
     {
         return $this->_RestartWebApps_operation->call([
@@ -297,17 +297,17 @@ final class AppServicePlans
      * Get all apps associated with an App Service plan.
      * @param string $resourceGroupName
      * @param string $name
-     * @param string $_skipToken
-     * @param string $_filter
-     * @param string $_top
+     * @param string|null $_skipToken
+     * @param string|null $_filter
+     * @param string|null $_top
      * @return array
      */
     public function listWebApps(
         $resourceGroupName,
         $name,
-        $_skipToken,
-        $_filter,
-        $_top
+        $_skipToken = null,
+        $_filter = null,
+        $_top = null
     )
     {
         return $this->_ListWebApps_operation->call([

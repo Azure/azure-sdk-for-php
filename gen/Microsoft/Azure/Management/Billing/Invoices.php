@@ -13,17 +13,17 @@ final class Invoices
     }
     /**
      * Lists the available invoices for a subscription in reverse chronological order beginning with the most recent invoice. In preview, invoices are available via this API only for invoice periods which end December 1, 2016 or later.
-     * @param string $_expand
-     * @param string $_filter
-     * @param string $_skiptoken
-     * @param integer $_top
+     * @param string|null $_expand
+     * @param string|null $_filter
+     * @param string|null $_skiptoken
+     * @param integer|null $_top
      * @return array
      */
     public function list_(
-        $_expand,
-        $_filter,
-        $_skiptoken,
-        $_top
+        $_expand = null,
+        $_filter = null,
+        $_skiptoken = null,
+        $_top = null
     )
     {
         return $this->_List_operation->call([

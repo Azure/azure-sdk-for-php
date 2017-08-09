@@ -17,19 +17,19 @@ final class Product
      * Lists a collection of products in the specified service instance.
      * @param string $resourceGroupName
      * @param string $serviceName
-     * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
-     * @param boolean $expandGroups
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param integer|null $_skip
+     * @param boolean|null $expandGroups
      * @return array
      */
     public function listByService(
         $resourceGroupName,
         $serviceName,
-        $_filter,
-        $_top,
-        $_skip,
-        $expandGroups
+        $_filter = null,
+        $_top = null,
+        $_skip = null,
+        $expandGroups = null
     )
     {
         return $this->_ListByService_operation->call([
@@ -111,14 +111,14 @@ final class Product
      * @param string $resourceGroupName
      * @param string $serviceName
      * @param string $productId
-     * @param boolean $deleteSubscriptions
+     * @param boolean|null $deleteSubscriptions
      * @param string $if_Match
      */
     public function delete(
         $resourceGroupName,
         $serviceName,
         $productId,
-        $deleteSubscriptions,
+        $deleteSubscriptions = null,
         $if_Match
     )
     {

@@ -80,7 +80,7 @@ final class SyncGroups
      * @param string $startTime
      * @param string $endTime
      * @param string $type
-     * @param string $continuationToken
+     * @param string|null $continuationToken
      * @return array
      */
     public function listLogs(
@@ -91,7 +91,7 @@ final class SyncGroups
         $startTime,
         $endTime,
         $type,
-        $continuationToken
+        $continuationToken = null
     )
     {
         return $this->_ListLogs_operation->call([

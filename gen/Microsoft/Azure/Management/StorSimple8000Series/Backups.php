@@ -17,14 +17,14 @@ final class Backups
      * @param string $deviceName
      * @param string $resourceGroupName
      * @param string $managerName
-     * @param string $_filter
+     * @param string|null $_filter
      * @return array
      */
     public function listByDevice(
         $deviceName,
         $resourceGroupName,
         $managerName,
-        $_filter
+        $_filter = null
     )
     {
         return $this->_ListByDevice_operation->call([

@@ -25,18 +25,18 @@ final class ExportTasks
      * @param string $resourceGroupName
      * @param string $appCollection
      * @param string $appName
-     * @param integer $_skip
-     * @param integer $_top
-     * @param string $_orderby
+     * @param integer|null $_skip
+     * @param integer|null $_top
+     * @param string|null $_orderby
      * @return array
      */
     public function list_(
         $resourceGroupName,
         $appCollection,
         $appName,
-        $_skip,
-        $_top,
-        $_orderby
+        $_skip = null,
+        $_top = null,
+        $_orderby = null
     )
     {
         return $this->_List_operation->call([

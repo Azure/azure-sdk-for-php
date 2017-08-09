@@ -14,15 +14,15 @@ final class BackupEngines
      * Backup management servers registered to Recovery Services Vault. Returns a pageable list of servers.
      * @param string $vaultName
      * @param string $resourceGroupName
-     * @param string $_filter
-     * @param string $_skipToken
+     * @param string|null $_filter
+     * @param string|null $_skipToken
      * @return array
      */
     public function list_(
         $vaultName,
         $resourceGroupName,
-        $_filter,
-        $_skipToken
+        $_filter = null,
+        $_skipToken = null
     )
     {
         return $this->_List_operation->call([
@@ -37,16 +37,16 @@ final class BackupEngines
      * @param string $vaultName
      * @param string $resourceGroupName
      * @param string $backupEngineName
-     * @param string $_filter
-     * @param string $_skipToken
+     * @param string|null $_filter
+     * @param string|null $_skipToken
      * @return array
      */
     public function get(
         $vaultName,
         $resourceGroupName,
         $backupEngineName,
-        $_filter,
-        $_skipToken
+        $_filter = null,
+        $_skipToken = null
     )
     {
         return $this->_Get_operation->call([

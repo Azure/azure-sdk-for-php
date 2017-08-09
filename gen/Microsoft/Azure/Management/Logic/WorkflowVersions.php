@@ -15,13 +15,13 @@ final class WorkflowVersions
      * Gets a list of workflow versions.
      * @param string $resourceGroupName
      * @param string $workflowName
-     * @param integer $_top
+     * @param integer|null $_top
      * @return array
      */
     public function list_(
         $resourceGroupName,
         $workflowName,
-        $_top
+        $_top = null
     )
     {
         return $this->_List_operation->call([
@@ -55,7 +55,7 @@ final class WorkflowVersions
      * @param string $workflowName
      * @param string $versionId
      * @param string $triggerName
-     * @param array $parameters
+     * @param array|null $parameters
      * @return array
      */
     public function listCallbackUrl(
@@ -63,7 +63,7 @@ final class WorkflowVersions
         $workflowName,
         $versionId,
         $triggerName,
-        array $parameters
+        array $parameters = null
     )
     {
         return $this->_ListCallbackUrl_operation->call([

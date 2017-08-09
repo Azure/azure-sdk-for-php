@@ -40,14 +40,14 @@ final class Profiles
      * @param string $resourceGroupName
      * @param string $hubName
      * @param string $profileName
-     * @param string $locale_code
+     * @param string|null $locale_code
      * @return array
      */
     public function get(
         $resourceGroupName,
         $hubName,
         $profileName,
-        $locale_code
+        $locale_code = null
     )
     {
         return $this->_Get_operation->call([
@@ -62,13 +62,13 @@ final class Profiles
      * @param string $resourceGroupName
      * @param string $hubName
      * @param string $profileName
-     * @param string $locale_code
+     * @param string|null $locale_code
      */
     public function delete(
         $resourceGroupName,
         $hubName,
         $profileName,
-        $locale_code
+        $locale_code = null
     )
     {
         return $this->_Delete_operation->call([
@@ -82,13 +82,13 @@ final class Profiles
      * Gets all profile in the hub.
      * @param string $resourceGroupName
      * @param string $hubName
-     * @param string $locale_code
+     * @param string|null $locale_code
      * @return array
      */
     public function listByHub(
         $resourceGroupName,
         $hubName,
-        $locale_code
+        $locale_code = null
     )
     {
         return $this->_ListByHub_operation->call([

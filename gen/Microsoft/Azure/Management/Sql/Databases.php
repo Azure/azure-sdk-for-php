@@ -231,14 +231,14 @@ final class Databases
      * @param string $resourceGroupName
      * @param string $serverName
      * @param string $databaseName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
         $resourceGroupName,
         $serverName,
         $databaseName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([
@@ -252,15 +252,15 @@ final class Databases
      * Returns a list of databases in a server.
      * @param string $resourceGroupName
      * @param string $serverName
-     * @param string $_expand
-     * @param string $_filter
+     * @param string|null $_expand
+     * @param string|null $_filter
      * @return array
      */
     public function listByServer(
         $resourceGroupName,
         $serverName,
-        $_expand,
-        $_filter
+        $_expand = null,
+        $_filter = null
     )
     {
         return $this->_ListByServer_operation->call([

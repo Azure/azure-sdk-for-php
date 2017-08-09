@@ -51,14 +51,14 @@ final class InboundNatRules
      * @param string $resourceGroupName
      * @param string $loadBalancerName
      * @param string $inboundNatRuleName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
         $resourceGroupName,
         $loadBalancerName,
         $inboundNatRuleName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([

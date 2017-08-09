@@ -23,16 +23,16 @@ final class Resources
     /**
      * Get all the resources for a resource group.
      * @param string $resourceGroupName
-     * @param string $_filter
-     * @param string $_expand
-     * @param integer $_top
+     * @param string|null $_filter
+     * @param string|null $_expand
+     * @param integer|null $_top
      * @return array
      */
     public function listByResourceGroup(
         $resourceGroupName,
-        $_filter,
-        $_expand,
-        $_top
+        $_filter = null,
+        $_expand = null,
+        $_top = null
     )
     {
         return $this->_ListByResourceGroup_operation->call([
@@ -74,15 +74,15 @@ final class Resources
     }
     /**
      * Get all the resources in a subscription.
-     * @param string $_filter
-     * @param string $_expand
-     * @param integer $_top
+     * @param string|null $_filter
+     * @param string|null $_expand
+     * @param integer|null $_top
      * @return array
      */
     public function list_(
-        $_filter,
-        $_expand,
-        $_top
+        $_filter = null,
+        $_expand = null,
+        $_top = null
     )
     {
         return $this->_List_operation->call([

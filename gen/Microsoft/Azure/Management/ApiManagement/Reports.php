@@ -21,16 +21,16 @@ final class Reports
      * @param string $resourceGroupName
      * @param string $serviceName
      * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
+     * @param integer|null $_top
+     * @param integer|null $_skip
      * @return array
      */
     public function listByApi(
         $resourceGroupName,
         $serviceName,
         $_filter,
-        $_top,
-        $_skip
+        $_top = null,
+        $_skip = null
     )
     {
         return $this->_ListByApi_operation->call([
@@ -46,16 +46,16 @@ final class Reports
      * @param string $resourceGroupName
      * @param string $serviceName
      * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
+     * @param integer|null $_top
+     * @param integer|null $_skip
      * @return array
      */
     public function listByUser(
         $resourceGroupName,
         $serviceName,
         $_filter,
-        $_top,
-        $_skip
+        $_top = null,
+        $_skip = null
     )
     {
         return $this->_ListByUser_operation->call([
@@ -71,16 +71,16 @@ final class Reports
      * @param string $resourceGroupName
      * @param string $serviceName
      * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
+     * @param integer|null $_top
+     * @param integer|null $_skip
      * @return array
      */
     public function listByOperation(
         $resourceGroupName,
         $serviceName,
         $_filter,
-        $_top,
-        $_skip
+        $_top = null,
+        $_skip = null
     )
     {
         return $this->_ListByOperation_operation->call([
@@ -96,16 +96,16 @@ final class Reports
      * @param string $resourceGroupName
      * @param string $serviceName
      * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
+     * @param integer|null $_top
+     * @param integer|null $_skip
      * @return array
      */
     public function listByProduct(
         $resourceGroupName,
         $serviceName,
         $_filter,
-        $_top,
-        $_skip
+        $_top = null,
+        $_skip = null
     )
     {
         return $this->_ListByProduct_operation->call([
@@ -120,17 +120,17 @@ final class Reports
      * Lists report records by GeoGraphy.
      * @param string $resourceGroupName
      * @param string $serviceName
-     * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param integer|null $_skip
      * @return array
      */
     public function listByGeo(
         $resourceGroupName,
         $serviceName,
-        $_filter,
-        $_top,
-        $_skip
+        $_filter = null,
+        $_top = null,
+        $_skip = null
     )
     {
         return $this->_ListByGeo_operation->call([
@@ -145,17 +145,17 @@ final class Reports
      * Lists report records by subscription.
      * @param string $resourceGroupName
      * @param string $serviceName
-     * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param integer|null $_skip
      * @return array
      */
     public function listBySubscription(
         $resourceGroupName,
         $serviceName,
-        $_filter,
-        $_top,
-        $_skip
+        $_filter = null,
+        $_top = null,
+        $_skip = null
     )
     {
         return $this->_ListBySubscription_operation->call([
@@ -170,18 +170,18 @@ final class Reports
      * Lists report records by Time.
      * @param string $resourceGroupName
      * @param string $serviceName
-     * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param integer|null $_skip
      * @param string $interval
      * @return array
      */
     public function listByTime(
         $resourceGroupName,
         $serviceName,
-        $_filter,
-        $_top,
-        $_skip,
+        $_filter = null,
+        $_top = null,
+        $_skip = null,
         $interval
     )
     {
@@ -199,16 +199,16 @@ final class Reports
      * @param string $resourceGroupName
      * @param string $serviceName
      * @param string $_filter
-     * @param integer $_top
-     * @param integer $_skip
+     * @param integer|null $_top
+     * @param integer|null $_skip
      * @return array
      */
     public function listByRequest(
         $resourceGroupName,
         $serviceName,
         $_filter,
-        $_top,
-        $_skip
+        $_top = null,
+        $_skip = null
     )
     {
         return $this->_ListByRequest_operation->call([

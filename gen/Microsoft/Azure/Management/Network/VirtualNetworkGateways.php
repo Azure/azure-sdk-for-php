@@ -98,13 +98,13 @@ final class VirtualNetworkGateways
      * Resets the primary of the virtual network gateway in the specified resource group.
      * @param string $resourceGroupName
      * @param string $virtualNetworkGatewayName
-     * @param string $gatewayVip
+     * @param string|null $gatewayVip
      * @return array
      */
     public function reset(
         $resourceGroupName,
         $virtualNetworkGatewayName,
-        $gatewayVip
+        $gatewayVip = null
     )
     {
         return $this->_Reset_operation->call([
@@ -155,13 +155,13 @@ final class VirtualNetworkGateways
      * The GetBgpPeerStatus operation retrieves the status of all BGP peers.
      * @param string $resourceGroupName
      * @param string $virtualNetworkGatewayName
-     * @param string $peer
+     * @param string|null $peer
      * @return array
      */
     public function getBgpPeerStatus(
         $resourceGroupName,
         $virtualNetworkGatewayName,
-        $peer
+        $peer = null
     )
     {
         return $this->_GetBgpPeerStatus_operation->call([

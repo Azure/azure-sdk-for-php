@@ -13,17 +13,17 @@ final class UsageAggregates
      * Query aggregated Azure subscription consumption data for a date range.
      * @param string $reportedStartTime
      * @param string $reportedEndTime
-     * @param boolean $showDetails
-     * @param string $aggregationGranularity
-     * @param string $continuationToken
+     * @param boolean|null $showDetails
+     * @param string|null $aggregationGranularity
+     * @param string|null $continuationToken
      * @return array
      */
     public function list_(
         $reportedStartTime,
         $reportedEndTime,
-        $showDetails,
-        $aggregationGranularity,
-        $continuationToken
+        $showDetails = null,
+        $aggregationGranularity = null,
+        $continuationToken = null
     )
     {
         return $this->_List_operation->call([

@@ -16,13 +16,13 @@ final class Policy
      * Lists all the Global Policy definitions of the Api Management service.
      * @param string $resourceGroupName
      * @param string $serviceName
-     * @param string $scope
+     * @param string|null $scope
      * @return array
      */
     public function listByService(
         $resourceGroupName,
         $serviceName,
-        $scope
+        $scope = null
     )
     {
         return $this->_ListByService_operation->call([

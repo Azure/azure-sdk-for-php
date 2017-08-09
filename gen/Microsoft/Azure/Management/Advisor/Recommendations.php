@@ -29,15 +29,15 @@ final class Recommendations
     }
     /**
      * Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking generateRecommendations.
-     * @param string $_filter
-     * @param integer $_top
-     * @param string $_skipToken
+     * @param string|null $_filter
+     * @param integer|null $_top
+     * @param string|null $_skipToken
      * @return array
      */
     public function list_(
-        $_filter,
-        $_top,
-        $_skipToken
+        $_filter = null,
+        $_top = null,
+        $_skipToken = null
     )
     {
         return $this->_List_operation->call([

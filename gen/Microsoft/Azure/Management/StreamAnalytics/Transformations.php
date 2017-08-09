@@ -14,8 +14,8 @@ final class Transformations
     /**
      * Creates a transformation or replaces an already existing transformation under an existing streaming job.
      * @param array $transformation
-     * @param string $if_Match
-     * @param string $if_None_Match
+     * @param string|null $if_Match
+     * @param string|null $if_None_Match
      * @param string $resourceGroupName
      * @param string $jobName
      * @param string $transformationName
@@ -23,8 +23,8 @@ final class Transformations
      */
     public function createOrReplace(
         array $transformation,
-        $if_Match,
-        $if_None_Match,
+        $if_Match = null,
+        $if_None_Match = null,
         $resourceGroupName,
         $jobName,
         $transformationName
@@ -42,7 +42,7 @@ final class Transformations
     /**
      * Updates an existing transformation under an existing streaming job. This can be used to partially update (ie. update one or two properties) a transformation without affecting the rest the job or transformation definition.
      * @param array $transformation
-     * @param string $if_Match
+     * @param string|null $if_Match
      * @param string $resourceGroupName
      * @param string $jobName
      * @param string $transformationName
@@ -50,7 +50,7 @@ final class Transformations
      */
     public function update(
         array $transformation,
-        $if_Match,
+        $if_Match = null,
         $resourceGroupName,
         $jobName,
         $transformationName

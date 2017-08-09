@@ -35,13 +35,13 @@ final class PublicIPAddresses
      * Gets the specified public IP address in a specified resource group.
      * @param string $resourceGroupName
      * @param string $publicIpAddressName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function get(
         $resourceGroupName,
         $publicIpAddressName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_Get_operation->call([
@@ -135,7 +135,7 @@ final class PublicIPAddresses
      * @param string $networkInterfaceName
      * @param string $ipConfigurationName
      * @param string $publicIpAddressName
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function getVirtualMachineScaleSetPublicIPAddress(
@@ -145,7 +145,7 @@ final class PublicIPAddresses
         $networkInterfaceName,
         $ipConfigurationName,
         $publicIpAddressName,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_GetVirtualMachineScaleSetPublicIPAddress_operation->call([

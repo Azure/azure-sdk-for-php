@@ -62,7 +62,7 @@ final class PowerShell
      * @param string $nodeName
      * @param string $session
      * @param string $pssession
-     * @param string $_expand
+     * @param string|null $_expand
      * @return array
      */
     public function getCommandStatus(
@@ -70,7 +70,7 @@ final class PowerShell
         $nodeName,
         $session,
         $pssession,
-        $_expand
+        $_expand = null
     )
     {
         return $this->_GetCommandStatus_operation->call([
