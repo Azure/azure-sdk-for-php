@@ -1283,355 +1283,475 @@ final class DataLakeAnalyticsAccountManagementClient
             ]
         ],
         'definitions' => [
-            'StorageAccountProperties' => ['properties' => [
-                'accessKey' => ['type' => 'string'],
-                'suffix' => ['type' => 'string']
-            ]],
-            'UpdateStorageAccountProperties' => ['properties' => [
-                'accessKey' => ['type' => 'string'],
-                'suffix' => ['type' => 'string']
-            ]],
-            'StorageAccountInfo' => ['properties' => ['properties' => ['$ref' => '#/definitions/StorageAccountProperties']]],
-            'StorageContainerProperties' => ['properties' => ['lastModifiedTime' => [
-                'type' => 'string',
-                'format' => 'date-time'
-            ]]],
-            'StorageContainer' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/StorageContainerProperties']
-            ]],
-            'ListStorageContainersResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/StorageContainer']
+            'StorageAccountProperties' => [
+                'properties' => [
+                    'accessKey' => ['type' => 'string'],
+                    'suffix' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'SasTokenInfo' => ['properties' => ['accessToken' => ['type' => 'string']]],
-            'ListSasTokensResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SasTokenInfo']
+                'required' => ['accessKey']
+            ],
+            'UpdateStorageAccountProperties' => [
+                'properties' => [
+                    'accessKey' => ['type' => 'string'],
+                    'suffix' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'DataLakeStoreAccountInfoProperties' => ['properties' => ['suffix' => ['type' => 'string']]],
-            'DataLakeStoreAccountInfo' => ['properties' => ['properties' => ['$ref' => '#/definitions/DataLakeStoreAccountInfoProperties']]],
-            'DataLakeAnalyticsAccountListStorageAccountsResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/StorageAccountInfo']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'DataLakeAnalyticsAccountListDataLakeStoreResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DataLakeStoreAccountInfo']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'FirewallRuleProperties' => ['properties' => [
-                'startIpAddress' => ['type' => 'string'],
-                'endIpAddress' => ['type' => 'string']
-            ]],
-            'FirewallRule' => ['properties' => ['properties' => ['$ref' => '#/definitions/FirewallRuleProperties']]],
-            'ComputePolicyPropertiesCreateParameters' => ['properties' => [
-                'objectId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'objectType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'User',
-                        'Group',
-                        'ServicePrincipal'
-                    ]
-                ],
-                'maxDegreeOfParallelismPerJob' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'minPriorityPerJob' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ComputePolicyAccountCreateParameters' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ComputePolicyPropertiesCreateParameters']
-            ]],
-            'DataLakeAnalyticsAccountProperties' => ['properties' => [
-                'defaultDataLakeStoreAccount' => ['type' => 'string'],
-                'maxDegreeOfParallelism' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'queryStoreRetention' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'maxJobCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'systemMaxDegreeOfParallelism' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'systemMaxJobCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'dataLakeStoreAccounts' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DataLakeStoreAccountInfo']
-                ],
-                'storageAccounts' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/StorageAccountInfo']
-                ],
-                'newTier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Consumption',
-                        'Commitment_100AUHours',
-                        'Commitment_500AUHours',
-                        'Commitment_1000AUHours',
-                        'Commitment_5000AUHours',
-                        'Commitment_10000AUHours',
-                        'Commitment_50000AUHours',
-                        'Commitment_100000AUHours',
-                        'Commitment_500000AUHours'
-                    ]
-                ],
-                'currentTier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Consumption',
-                        'Commitment_100AUHours',
-                        'Commitment_500AUHours',
-                        'Commitment_1000AUHours',
-                        'Commitment_5000AUHours',
-                        'Commitment_10000AUHours',
-                        'Commitment_50000AUHours',
-                        'Commitment_100000AUHours',
-                        'Commitment_500000AUHours'
-                    ]
-                ],
-                'firewallState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'firewallAllowAzureIps' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'firewallRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/FirewallRule']
-                ],
-                'maxDegreeOfParallelismPerJob' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'minPriorityPerJob' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'computePolicies' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ComputePolicyAccountCreateParameters']
-                ]
-            ]],
-            'ComputePolicyProperties' => ['properties' => [
-                'objectId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'objectType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'User',
-                        'Group',
-                        'ServicePrincipal'
-                    ]
-                ],
-                'maxDegreeOfParallelismPerJob' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'minPriorityPerJob' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ComputePolicy' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ComputePolicyProperties']
-            ]],
-            'UpdateDataLakeAnalyticsAccountProperties' => ['properties' => [
-                'maxDegreeOfParallelism' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'queryStoreRetention' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'maxJobCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'newTier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Consumption',
-                        'Commitment_100AUHours',
-                        'Commitment_500AUHours',
-                        'Commitment_1000AUHours',
-                        'Commitment_5000AUHours',
-                        'Commitment_10000AUHours',
-                        'Commitment_50000AUHours',
-                        'Commitment_100000AUHours',
-                        'Commitment_500000AUHours'
-                    ]
-                ],
-                'firewallState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'firewallAllowAzureIps' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'firewallRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/FirewallRule']
-                ],
-                'maxDegreeOfParallelismPerJob' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'minPriorityPerJob' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'computePolicies' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ComputePolicy']
-                ]
-            ]],
-            'AddDataLakeStoreParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/DataLakeStoreAccountInfoProperties']]],
-            'AddStorageAccountParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/StorageAccountProperties']]],
-            'UpdateStorageAccountParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/UpdateStorageAccountProperties']]],
-            'ComputePolicyCreateOrUpdateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/ComputePolicyPropertiesCreateParameters']]],
-            'ComputePolicyListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ComputePolicy']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'DataLakeAnalyticsAccountUpdateParameters' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'properties' => ['$ref' => '#/definitions/UpdateDataLakeAnalyticsAccountProperties']
-            ]],
-            'DataLakeAnalyticsAccountPropertiesBasic' => ['properties' => [
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Failed',
-                        'Creating',
-                        'Running',
-                        'Succeeded',
-                        'Patching',
-                        'Suspending',
-                        'Resuming',
-                        'Deleting',
-                        'Deleted'
-                    ]
-                ],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Active',
-                        'Suspended'
-                    ]
-                ],
-                'creationTime' => [
+                'required' => []
+            ],
+            'StorageAccountInfo' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/StorageAccountProperties']],
+                'required' => ['properties']
+            ],
+            'StorageContainerProperties' => [
+                'properties' => ['lastModifiedTime' => [
                     'type' => 'string',
                     'format' => 'date-time'
+                ]],
+                'required' => []
+            ],
+            'StorageContainer' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/StorageContainerProperties']
                 ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'ListStorageContainersResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/StorageContainer']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'endpoint' => ['type' => 'string'],
-                'accountId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
+                'required' => []
+            ],
+            'SasTokenInfo' => [
+                'properties' => ['accessToken' => ['type' => 'string']],
+                'required' => []
+            ],
+            'ListSasTokensResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SasTokenInfo']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DataLakeStoreAccountInfoProperties' => [
+                'properties' => ['suffix' => ['type' => 'string']],
+                'required' => []
+            ],
+            'DataLakeStoreAccountInfo' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DataLakeStoreAccountInfoProperties']],
+                'required' => []
+            ],
+            'DataLakeAnalyticsAccountListStorageAccountsResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/StorageAccountInfo']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DataLakeAnalyticsAccountListDataLakeStoreResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DataLakeStoreAccountInfo']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'FirewallRuleProperties' => [
+                'properties' => [
+                    'startIpAddress' => ['type' => 'string'],
+                    'endIpAddress' => ['type' => 'string']
+                ],
+                'required' => [
+                    'startIpAddress',
+                    'endIpAddress'
                 ]
-            ]],
-            'DataLakeAnalyticsAccountBasic' => ['properties' => ['properties' => ['$ref' => '#/definitions/DataLakeAnalyticsAccountPropertiesBasic']]],
-            'DataLakeAnalyticsAccount' => ['properties' => ['properties' => ['$ref' => '#/definitions/DataLakeAnalyticsAccountProperties']]],
-            'DataLakeAnalyticsAccountListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DataLakeAnalyticsAccountBasic']
+            ],
+            'FirewallRule' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/FirewallRuleProperties']],
+                'required' => ['properties']
+            ],
+            'ComputePolicyPropertiesCreateParameters' => [
+                'properties' => [
+                    'objectId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'objectType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'User',
+                            'Group',
+                            'ServicePrincipal'
+                        ]
+                    ],
+                    'maxDegreeOfParallelismPerJob' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'minPriorityPerJob' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'DataLakeAnalyticsFirewallRuleListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/FirewallRule']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'UpdateFirewallRuleProperties' => ['properties' => [
-                'startIpAddress' => ['type' => 'string'],
-                'endIpAddress' => ['type' => 'string']
-            ]],
-            'UpdateFirewallRuleParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/UpdateFirewallRuleProperties']]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => [
+                    'objectId',
+                    'objectType'
                 ]
-            ]],
-            'OptionalSubResource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'SubResource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]]
+            ],
+            'ComputePolicyAccountCreateParameters' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ComputePolicyPropertiesCreateParameters']
+                ],
+                'required' => [
+                    'name',
+                    'properties'
+                ]
+            ],
+            'DataLakeAnalyticsAccountProperties' => [
+                'properties' => [
+                    'defaultDataLakeStoreAccount' => ['type' => 'string'],
+                    'maxDegreeOfParallelism' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'queryStoreRetention' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'maxJobCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'systemMaxDegreeOfParallelism' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'systemMaxJobCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'dataLakeStoreAccounts' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DataLakeStoreAccountInfo']
+                    ],
+                    'storageAccounts' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/StorageAccountInfo']
+                    ],
+                    'newTier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Consumption',
+                            'Commitment_100AUHours',
+                            'Commitment_500AUHours',
+                            'Commitment_1000AUHours',
+                            'Commitment_5000AUHours',
+                            'Commitment_10000AUHours',
+                            'Commitment_50000AUHours',
+                            'Commitment_100000AUHours',
+                            'Commitment_500000AUHours'
+                        ]
+                    ],
+                    'currentTier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Consumption',
+                            'Commitment_100AUHours',
+                            'Commitment_500AUHours',
+                            'Commitment_1000AUHours',
+                            'Commitment_5000AUHours',
+                            'Commitment_10000AUHours',
+                            'Commitment_50000AUHours',
+                            'Commitment_100000AUHours',
+                            'Commitment_500000AUHours'
+                        ]
+                    ],
+                    'firewallState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'firewallAllowAzureIps' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'firewallRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/FirewallRule']
+                    ],
+                    'maxDegreeOfParallelismPerJob' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'minPriorityPerJob' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'computePolicies' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ComputePolicyAccountCreateParameters']
+                    ]
+                ],
+                'required' => [
+                    'defaultDataLakeStoreAccount',
+                    'dataLakeStoreAccounts'
+                ]
+            ],
+            'ComputePolicyProperties' => [
+                'properties' => [
+                    'objectId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'objectType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'User',
+                            'Group',
+                            'ServicePrincipal'
+                        ]
+                    ],
+                    'maxDegreeOfParallelismPerJob' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'minPriorityPerJob' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ComputePolicy' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ComputePolicyProperties']
+                ],
+                'required' => []
+            ],
+            'UpdateDataLakeAnalyticsAccountProperties' => [
+                'properties' => [
+                    'maxDegreeOfParallelism' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'queryStoreRetention' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'maxJobCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'newTier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Consumption',
+                            'Commitment_100AUHours',
+                            'Commitment_500AUHours',
+                            'Commitment_1000AUHours',
+                            'Commitment_5000AUHours',
+                            'Commitment_10000AUHours',
+                            'Commitment_50000AUHours',
+                            'Commitment_100000AUHours',
+                            'Commitment_500000AUHours'
+                        ]
+                    ],
+                    'firewallState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'firewallAllowAzureIps' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'firewallRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/FirewallRule']
+                    ],
+                    'maxDegreeOfParallelismPerJob' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'minPriorityPerJob' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'computePolicies' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ComputePolicy']
+                    ]
+                ],
+                'required' => []
+            ],
+            'AddDataLakeStoreParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DataLakeStoreAccountInfoProperties']],
+                'required' => []
+            ],
+            'AddStorageAccountParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/StorageAccountProperties']],
+                'required' => ['properties']
+            ],
+            'UpdateStorageAccountParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UpdateStorageAccountProperties']],
+                'required' => []
+            ],
+            'ComputePolicyCreateOrUpdateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ComputePolicyPropertiesCreateParameters']],
+                'required' => ['properties']
+            ],
+            'ComputePolicyListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ComputePolicy']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DataLakeAnalyticsAccountUpdateParameters' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/UpdateDataLakeAnalyticsAccountProperties']
+                ],
+                'required' => []
+            ],
+            'DataLakeAnalyticsAccountPropertiesBasic' => [
+                'properties' => [
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Failed',
+                            'Creating',
+                            'Running',
+                            'Succeeded',
+                            'Patching',
+                            'Suspending',
+                            'Resuming',
+                            'Deleting',
+                            'Deleted'
+                        ]
+                    ],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Active',
+                            'Suspended'
+                        ]
+                    ],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endpoint' => ['type' => 'string'],
+                    'accountId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ]
+                ],
+                'required' => []
+            ],
+            'DataLakeAnalyticsAccountBasic' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DataLakeAnalyticsAccountPropertiesBasic']],
+                'required' => ['properties']
+            ],
+            'DataLakeAnalyticsAccount' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DataLakeAnalyticsAccountProperties']],
+                'required' => ['properties']
+            ],
+            'DataLakeAnalyticsAccountListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DataLakeAnalyticsAccountBasic']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DataLakeAnalyticsFirewallRuleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/FirewallRule']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'UpdateFirewallRuleProperties' => [
+                'properties' => [
+                    'startIpAddress' => ['type' => 'string'],
+                    'endIpAddress' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'UpdateFirewallRuleParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UpdateFirewallRuleProperties']],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['location']
+            ],
+            'OptionalSubResource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SubResource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => ['name']
+            ]
         ]
     ];
 }

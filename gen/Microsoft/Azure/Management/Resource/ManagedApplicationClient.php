@@ -595,166 +595,232 @@ final class ManagedApplicationClient
             ]
         ],
         'definitions' => [
-            'ApplianceProperties' => ['properties' => [
-                'managedResourceGroupId' => ['type' => 'string'],
-                'applianceDefinitionId' => ['type' => 'string'],
-                'parameters' => ['type' => 'object'],
-                'outputs' => ['type' => 'object'],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Accepted',
-                        'Running',
-                        'Ready',
-                        'Creating',
-                        'Created',
-                        'Deleting',
-                        'Deleted',
-                        'Canceled',
-                        'Failed',
-                        'Succeeded',
-                        'Updating'
+            'ApplianceProperties' => [
+                'properties' => [
+                    'managedResourceGroupId' => ['type' => 'string'],
+                    'applianceDefinitionId' => ['type' => 'string'],
+                    'parameters' => ['type' => 'object'],
+                    'outputs' => ['type' => 'object'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Accepted',
+                            'Running',
+                            'Ready',
+                            'Creating',
+                            'Created',
+                            'Deleting',
+                            'Deleted',
+                            'Canceled',
+                            'Failed',
+                            'Succeeded',
+                            'Updating'
+                        ]
+                    ],
+                    'uiDefinitionUri' => ['type' => 'string']
+                ],
+                'required' => ['managedResourceGroupId']
+            ],
+            'Plan' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'publisher' => ['type' => 'string'],
+                    'product' => ['type' => 'string'],
+                    'promotionCode' => ['type' => 'string'],
+                    'version' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'publisher',
+                    'product',
+                    'version'
+                ]
+            ],
+            'Appliance' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApplianceProperties'],
+                    'plan' => ['$ref' => '#/definitions/Plan'],
+                    'kind' => ['type' => 'string']
+                ],
+                'required' => [
+                    'properties',
+                    'kind'
+                ]
+            ],
+            'AppliancePropertiesPatchable' => [
+                'properties' => [
+                    'managedResourceGroupId' => ['type' => 'string'],
+                    'applianceDefinitionId' => ['type' => 'string'],
+                    'parameters' => ['type' => 'object'],
+                    'outputs' => ['type' => 'object'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Accepted',
+                            'Running',
+                            'Ready',
+                            'Creating',
+                            'Created',
+                            'Deleting',
+                            'Deleted',
+                            'Canceled',
+                            'Failed',
+                            'Succeeded',
+                            'Updating'
+                        ]
+                    ],
+                    'uiDefinitionUri' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PlanPatchable' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'publisher' => ['type' => 'string'],
+                    'product' => ['type' => 'string'],
+                    'promotionCode' => ['type' => 'string'],
+                    'version' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AppliancePatchable' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/AppliancePropertiesPatchable'],
+                    'plan' => ['$ref' => '#/definitions/PlanPatchable'],
+                    'kind' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplianceProviderAuthorization' => [
+                'properties' => [
+                    'principalId' => ['type' => 'string'],
+                    'roleDefinitionId' => ['type' => 'string']
+                ],
+                'required' => [
+                    'principalId',
+                    'roleDefinitionId'
+                ]
+            ],
+            'ApplianceArtifact' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'uri' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Template',
+                            'Custom'
+                        ]
                     ]
                 ],
-                'uiDefinitionUri' => ['type' => 'string']
-            ]],
-            'Plan' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'publisher' => ['type' => 'string'],
-                'product' => ['type' => 'string'],
-                'promotionCode' => ['type' => 'string'],
-                'version' => ['type' => 'string']
-            ]],
-            'Appliance' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApplianceProperties'],
-                'plan' => ['$ref' => '#/definitions/Plan'],
-                'kind' => ['type' => 'string']
-            ]],
-            'AppliancePropertiesPatchable' => ['properties' => [
-                'managedResourceGroupId' => ['type' => 'string'],
-                'applianceDefinitionId' => ['type' => 'string'],
-                'parameters' => ['type' => 'object'],
-                'outputs' => ['type' => 'object'],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Accepted',
-                        'Running',
-                        'Ready',
-                        'Creating',
-                        'Created',
-                        'Deleting',
-                        'Deleted',
-                        'Canceled',
-                        'Failed',
-                        'Succeeded',
-                        'Updating'
+                'required' => []
+            ],
+            'ApplianceDefinitionProperties' => [
+                'properties' => [
+                    'lockLevel' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'CanNotDelete',
+                            'ReadOnly',
+                            'None'
+                        ]
+                    ],
+                    'displayName' => ['type' => 'string'],
+                    'authorizations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplianceProviderAuthorization']
+                    ],
+                    'artifacts' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplianceArtifact']
+                    ],
+                    'description' => ['type' => 'string'],
+                    'packageFileUri' => ['type' => 'string']
+                ],
+                'required' => [
+                    'lockLevel',
+                    'authorizations',
+                    'packageFileUri'
+                ]
+            ],
+            'ApplianceDefinition' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ApplianceDefinitionProperties']],
+                'required' => ['properties']
+            ],
+            'Sku' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'tier' => ['type' => 'string'],
+                    'size' => ['type' => 'string'],
+                    'family' => ['type' => 'string'],
+                    'model' => ['type' => 'string'],
+                    'capacity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'uiDefinitionUri' => ['type' => 'string']
-            ]],
-            'PlanPatchable' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'publisher' => ['type' => 'string'],
-                'product' => ['type' => 'string'],
-                'promotionCode' => ['type' => 'string'],
-                'version' => ['type' => 'string']
-            ]],
-            'AppliancePatchable' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/AppliancePropertiesPatchable'],
-                'plan' => ['$ref' => '#/definitions/PlanPatchable'],
-                'kind' => ['type' => 'string']
-            ]],
-            'ApplianceProviderAuthorization' => ['properties' => [
-                'principalId' => ['type' => 'string'],
-                'roleDefinitionId' => ['type' => 'string']
-            ]],
-            'ApplianceArtifact' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'uri' => ['type' => 'string'],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Template',
-                        'Custom'
-                    ]
-                ]
-            ]],
-            'ApplianceDefinitionProperties' => ['properties' => [
-                'lockLevel' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'CanNotDelete',
-                        'ReadOnly',
-                        'None'
+                'required' => ['name']
+            ],
+            'Identity' => [
+                'properties' => [
+                    'principalId' => ['type' => 'string'],
+                    'tenantId' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => ['SystemAssigned']
                     ]
                 ],
-                'displayName' => ['type' => 'string'],
-                'authorizations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplianceProviderAuthorization']
+                'required' => []
+            ],
+            'GenericResource' => [
+                'properties' => [
+                    'managedBy' => ['type' => 'string'],
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'identity' => ['$ref' => '#/definitions/Identity']
                 ],
-                'artifacts' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplianceArtifact']
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
                 ],
-                'description' => ['type' => 'string'],
-                'packageFileUri' => ['type' => 'string']
-            ]],
-            'ApplianceDefinition' => ['properties' => ['properties' => ['$ref' => '#/definitions/ApplianceDefinitionProperties']]],
-            'Sku' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'tier' => ['type' => 'string'],
-                'size' => ['type' => 'string'],
-                'family' => ['type' => 'string'],
-                'model' => ['type' => 'string'],
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'Identity' => ['properties' => [
-                'principalId' => ['type' => 'string'],
-                'tenantId' => ['type' => 'string'],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => ['SystemAssigned']
-                ]
-            ]],
-            'GenericResource' => ['properties' => [
-                'managedBy' => ['type' => 'string'],
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'identity' => ['$ref' => '#/definitions/Identity']
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ApplianceListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Appliance']
+                'required' => []
+            ],
+            'ApplianceListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Appliance']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ApplianceDefinitionListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplianceDefinition']
+                'required' => []
+            ],
+            'ApplianceDefinitionListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplianceDefinition']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ErrorResponse' => ['properties' => [
-                'httpStatus' => ['type' => 'string'],
-                'errorCode' => ['type' => 'string'],
-                'errorMessage' => ['type' => 'string']
-            ]]
+                'required' => []
+            ],
+            'ErrorResponse' => [
+                'properties' => [
+                    'httpStatus' => ['type' => 'string'],
+                    'errorCode' => ['type' => 'string'],
+                    'errorMessage' => ['type' => 'string']
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

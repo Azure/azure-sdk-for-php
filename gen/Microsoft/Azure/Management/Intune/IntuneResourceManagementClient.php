@@ -1407,327 +1407,459 @@ final class IntuneResourceManagementClient
             ]
         ],
         'definitions' => [
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'location' => ['type' => 'string']
                 ],
-                'location' => ['type' => 'string']
-            ]],
-            'LocationProperties' => ['properties' => ['hostName' => ['type' => 'string']]],
-            'Location' => ['properties' => ['properties' => ['$ref' => '#/definitions/LocationProperties']]],
-            'Error' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'LocationCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Location']
+                'required' => []
+            ],
+            'LocationProperties' => [
+                'properties' => ['hostName' => ['type' => 'string']],
+                'required' => ['hostName']
+            ],
+            'Location' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/LocationProperties']],
+                'required' => []
+            ],
+            'Error' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
                 ],
-                'nextlink' => ['type' => 'string']
-            ]],
-            'GroupProperties' => ['properties' => ['friendlyName' => ['type' => 'string']]],
-            'GroupItem' => ['properties' => ['properties' => ['$ref' => '#/definitions/GroupProperties']]],
-            'GroupsCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/GroupItem']
-                ],
-                'nextlink' => ['type' => 'string']
-            ]],
-            'ApplicationProperties' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'platform' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'ios',
-                        'android',
-                        'windows'
-                    ]
-                ],
-                'appId' => ['type' => 'string']
-            ]],
-            'Application' => ['properties' => ['properties' => ['$ref' => '#/definitions/ApplicationProperties']]],
-            'ApplicationCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Application']
-                ],
-                'nextlink' => ['type' => 'string']
-            ]],
-            'iOSMAMPolicyProperties' => ['properties' => [
-                'fileEncryptionLevel' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'deviceLocked',
-                        'deviceLockedExceptFilesOpen',
-                        'afterDeviceRestart',
-                        'useDeviceSettings'
-                    ]
-                ],
-                'touchId' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'enable',
-                        'disable'
-                    ]
+                'required' => [
+                    'code',
+                    'message'
                 ]
-            ]],
-            'iOSMAMPolicy' => ['properties' => ['properties' => ['$ref' => '#/definitions/iOSMAMPolicyProperties']]],
-            'IOSMAMPolicyCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/iOSMAMPolicy']
+            ],
+            'LocationCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Location']
+                    ],
+                    'nextlink' => ['type' => 'string']
                 ],
-                'nextlink' => ['type' => 'string']
-            ]],
-            'AndroidMAMPolicyProperties' => ['properties' => [
-                'screenCapture' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'allow',
-                        'block'
-                    ]
+                'required' => ['value']
+            ],
+            'GroupProperties' => [
+                'properties' => ['friendlyName' => ['type' => 'string']],
+                'required' => ['friendlyName']
+            ],
+            'GroupItem' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/GroupProperties']],
+                'required' => []
+            ],
+            'GroupsCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/GroupItem']
+                    ],
+                    'nextlink' => ['type' => 'string']
                 ],
-                'fileEncryption' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'required',
-                        'notRequired'
-                    ]
+                'required' => ['value']
+            ],
+            'ApplicationProperties' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'platform' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'ios',
+                            'android',
+                            'windows'
+                        ]
+                    ],
+                    'appId' => ['type' => 'string']
+                ],
+                'required' => [
+                    'friendlyName',
+                    'platform'
                 ]
-            ]],
-            'AndroidMAMPolicy' => ['properties' => ['properties' => ['$ref' => '#/definitions/AndroidMAMPolicyProperties']]],
-            'AndroidMAMPolicyCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AndroidMAMPolicy']
+            ],
+            'Application' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ApplicationProperties']],
+                'required' => []
+            ],
+            'ApplicationCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Application']
+                    ],
+                    'nextlink' => ['type' => 'string']
                 ],
-                'nextlink' => ['type' => 'string']
-            ]],
-            'MAMPolicyAppOrGroupIdProperties' => ['properties' => ['url' => ['type' => 'string']]],
-            'MAMPolicyAppIdOrGroupIdPayload' => ['properties' => ['properties' => ['$ref' => '#/definitions/MAMPolicyAppOrGroupIdProperties']]],
-            'MAMPolicyProperties' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'appSharingFromLevel' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'none',
-                        'policyManagedApps',
-                        'allApps'
+                'required' => ['value']
+            ],
+            'iOSMAMPolicyProperties' => [
+                'properties' => [
+                    'fileEncryptionLevel' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'deviceLocked',
+                            'deviceLockedExceptFilesOpen',
+                            'afterDeviceRestart',
+                            'useDeviceSettings'
+                        ]
+                    ],
+                    'touchId' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'enable',
+                            'disable'
+                        ]
                     ]
                 ],
-                'appSharingToLevel' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'none',
-                        'policyManagedApps',
-                        'allApps'
+                'required' => []
+            ],
+            'iOSMAMPolicy' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/iOSMAMPolicyProperties']],
+                'required' => []
+            ],
+            'IOSMAMPolicyCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/iOSMAMPolicy']
+                    ],
+                    'nextlink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'AndroidMAMPolicyProperties' => [
+                'properties' => [
+                    'screenCapture' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'allow',
+                            'block'
+                        ]
+                    ],
+                    'fileEncryption' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'required',
+                            'notRequired'
+                        ]
                     ]
                 ],
-                'authentication' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'required',
-                        'notRequired'
+                'required' => []
+            ],
+            'AndroidMAMPolicy' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AndroidMAMPolicyProperties']],
+                'required' => []
+            ],
+            'AndroidMAMPolicyCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AndroidMAMPolicy']
+                    ],
+                    'nextlink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'MAMPolicyAppOrGroupIdProperties' => [
+                'properties' => ['url' => ['type' => 'string']],
+                'required' => ['url']
+            ],
+            'MAMPolicyAppIdOrGroupIdPayload' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/MAMPolicyAppOrGroupIdProperties']],
+                'required' => []
+            ],
+            'MAMPolicyProperties' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'appSharingFromLevel' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'none',
+                            'policyManagedApps',
+                            'allApps'
+                        ]
+                    ],
+                    'appSharingToLevel' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'none',
+                            'policyManagedApps',
+                            'allApps'
+                        ]
+                    ],
+                    'authentication' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'required',
+                            'notRequired'
+                        ]
+                    ],
+                    'clipboardSharingLevel' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'blocked',
+                            'policyManagedApps',
+                            'policyManagedAppsWithPasteIn',
+                            'allApps'
+                        ]
+                    ],
+                    'dataBackup' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'allow',
+                            'block'
+                        ]
+                    ],
+                    'fileSharingSaveAs' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'allow',
+                            'block'
+                        ]
+                    ],
+                    'pin' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'required',
+                            'notRequired'
+                        ]
+                    ],
+                    'pinNumRetry' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'deviceCompliance' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'enable',
+                            'disable'
+                        ]
+                    ],
+                    'managedBrowser' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'required',
+                            'notRequired'
+                        ]
+                    ],
+                    'accessRecheckOfflineTimeout' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'accessRecheckOnlineTimeout' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'offlineWipeTimeout' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'numOfApps' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'groupStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'notTargeted',
+                            'targeted'
+                        ]
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'clipboardSharingLevel' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'blocked',
-                        'policyManagedApps',
-                        'policyManagedAppsWithPasteIn',
-                        'allApps'
-                    ]
+                'required' => ['friendlyName']
+            ],
+            'DeviceProperties' => [
+                'properties' => [
+                    'userId' => ['type' => 'string'],
+                    'friendlyName' => ['type' => 'string'],
+                    'platform' => ['type' => 'string'],
+                    'platformVersion' => ['type' => 'string'],
+                    'deviceType' => ['type' => 'string']
                 ],
-                'dataBackup' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'allow',
-                        'block'
-                    ]
-                ],
-                'fileSharingSaveAs' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'allow',
-                        'block'
-                    ]
-                ],
-                'pin' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'required',
-                        'notRequired'
-                    ]
-                ],
-                'pinNumRetry' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'deviceCompliance' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'enable',
-                        'disable'
-                    ]
-                ],
-                'managedBrowser' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'required',
-                        'notRequired'
-                    ]
-                ],
-                'accessRecheckOfflineTimeout' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'accessRecheckOnlineTimeout' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'offlineWipeTimeout' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'numOfApps' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'groupStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'notTargeted',
-                        'targeted'
-                    ]
-                ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => [
+                    'userId',
+                    'friendlyName',
+                    'platform',
+                    'platformVersion',
+                    'deviceType'
                 ]
-            ]],
-            'DeviceProperties' => ['properties' => [
-                'userId' => ['type' => 'string'],
-                'friendlyName' => ['type' => 'string'],
-                'platform' => ['type' => 'string'],
-                'platformVersion' => ['type' => 'string'],
-                'deviceType' => ['type' => 'string']
-            ]],
-            'Device' => ['properties' => ['properties' => ['$ref' => '#/definitions/DeviceProperties']]],
-            'DeviceCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Device']
+            ],
+            'Device' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DeviceProperties']],
+                'required' => []
+            ],
+            'DeviceCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Device']
+                    ],
+                    'nextlink' => ['type' => 'string']
                 ],
-                'nextlink' => ['type' => 'string']
-            ]],
-            'WipeDeviceOperationResultProperties' => ['properties' => ['value' => ['type' => 'string']]],
-            'WipeDeviceOperationResult' => ['properties' => ['properties' => ['$ref' => '#/definitions/WipeDeviceOperationResultProperties']]],
-            'operationMetadataProperties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'OperationResultProperties' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'category' => ['type' => 'string'],
-                'lastModifiedTime' => ['type' => 'string'],
-                'state' => ['type' => 'string'],
-                'operationMetadata' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/operationMetadataProperties']
+                'required' => ['value']
+            ],
+            'WipeDeviceOperationResultProperties' => [
+                'properties' => ['value' => ['type' => 'string']],
+                'required' => ['value']
+            ],
+            'WipeDeviceOperationResult' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/WipeDeviceOperationResultProperties']],
+                'required' => []
+            ],
+            'operationMetadataProperties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'value'
                 ]
-            ]],
-            'OperationResult' => ['properties' => ['properties' => ['$ref' => '#/definitions/OperationResultProperties']]],
-            'OperationResultCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/OperationResult']
+            ],
+            'OperationResultProperties' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'category' => ['type' => 'string'],
+                    'lastModifiedTime' => ['type' => 'string'],
+                    'state' => ['type' => 'string'],
+                    'operationMetadata' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/operationMetadataProperties']
+                    ]
                 ],
-                'nextlink' => ['type' => 'string']
-            ]],
-            'StatusesProperties' => ['properties' => [
-                'deployedPolicies' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'enrolledUsers' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'flaggedUsers' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'policyAppliedUsers' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'status' => ['type' => 'string'],
-                'wipeFailedApps' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'wipePendingApps' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'wipeSucceededApps' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => [
+                    'friendlyName',
+                    'operationMetadata'
                 ]
-            ]],
-            'StatusesDefault' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/StatusesProperties'],
-                'nextlink' => ['type' => 'string']
-            ]],
-            'FlaggedUserProperties' => ['properties' => [
-                'errorCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+            ],
+            'OperationResult' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/OperationResultProperties']],
+                'required' => []
+            ],
+            'OperationResultCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/OperationResult']
+                    ],
+                    'nextlink' => ['type' => 'string']
                 ],
-                'friendlyName' => ['type' => 'string']
-            ]],
-            'FlaggedUser' => ['properties' => ['properties' => ['$ref' => '#/definitions/FlaggedUserProperties']]],
-            'FlaggedUserCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/FlaggedUser']
+                'required' => ['value']
+            ],
+            'StatusesProperties' => [
+                'properties' => [
+                    'deployedPolicies' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'enrolledUsers' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'flaggedUsers' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'policyAppliedUsers' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'status' => ['type' => 'string'],
+                    'wipeFailedApps' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'wipePendingApps' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'wipeSucceededApps' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
                 ],
-                'nextlink' => ['type' => 'string']
-            ]],
-            'FlaggedEnrolledAppError' => ['properties' => [
-                'errorCode' => ['type' => 'string'],
-                'severity' => ['type' => 'string']
-            ]],
-            'FlaggedEnrolledAppProperties' => ['properties' => [
-                'deviceType' => ['type' => 'string'],
-                'friendlyName' => ['type' => 'string'],
-                'lastModifiedTime' => ['type' => 'string'],
-                'platform' => ['type' => 'string'],
-                'errors' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/FlaggedEnrolledAppError']
-                ]
-            ]],
-            'FlaggedEnrolledApp' => ['properties' => ['properties' => ['$ref' => '#/definitions/FlaggedEnrolledAppProperties']]],
-            'FlaggedEnrolledAppCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/FlaggedEnrolledApp']
+                'required' => []
+            ],
+            'StatusesDefault' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/StatusesProperties'],
+                    'nextlink' => ['type' => 'string']
                 ],
-                'nextlink' => ['type' => 'string']
-            ]]
+                'required' => []
+            ],
+            'FlaggedUserProperties' => [
+                'properties' => [
+                    'errorCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'friendlyName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'FlaggedUser' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/FlaggedUserProperties']],
+                'required' => []
+            ],
+            'FlaggedUserCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/FlaggedUser']
+                    ],
+                    'nextlink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'FlaggedEnrolledAppError' => [
+                'properties' => [
+                    'errorCode' => ['type' => 'string'],
+                    'severity' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'FlaggedEnrolledAppProperties' => [
+                'properties' => [
+                    'deviceType' => ['type' => 'string'],
+                    'friendlyName' => ['type' => 'string'],
+                    'lastModifiedTime' => ['type' => 'string'],
+                    'platform' => ['type' => 'string'],
+                    'errors' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/FlaggedEnrolledAppError']
+                    ]
+                ],
+                'required' => []
+            ],
+            'FlaggedEnrolledApp' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/FlaggedEnrolledAppProperties']],
+                'required' => []
+            ],
+            'FlaggedEnrolledAppCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/FlaggedEnrolledApp']
+                    ],
+                    'nextlink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ]
         ]
     ];
 }

@@ -188,124 +188,160 @@ final class MicrosoftResourceHealth
             ]]
         ],
         'definitions' => [
-            'availabilityStatus_properties_recentlyResolvedState' => ['properties' => [
-                'unavailableOccurredTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+            'availabilityStatus_properties_recentlyResolvedState' => [
+                'properties' => [
+                    'unavailableOccurredTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'resolvedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'unavailabilitySummary' => ['type' => 'string']
                 ],
-                'resolvedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'recommendedAction' => [
+                'properties' => [
+                    'action' => ['type' => 'string'],
+                    'actionUrl' => ['type' => 'string'],
+                    'actionUrlText' => ['type' => 'string']
                 ],
-                'unavailabilitySummary' => ['type' => 'string']
-            ]],
-            'recommendedAction' => ['properties' => [
-                'action' => ['type' => 'string'],
-                'actionUrl' => ['type' => 'string'],
-                'actionUrlText' => ['type' => 'string']
-            ]],
-            'serviceImpactingEvent_status' => ['properties' => ['value' => ['type' => 'string']]],
-            'serviceImpactingEvent_incidentProperties' => ['properties' => [
-                'title' => ['type' => 'string'],
-                'service' => ['type' => 'string'],
-                'region' => ['type' => 'string'],
-                'incidentType' => ['type' => 'string']
-            ]],
-            'serviceImpactingEvent' => ['properties' => [
-                'eventStartTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'serviceImpactingEvent_status' => [
+                'properties' => ['value' => ['type' => 'string']],
+                'required' => []
+            ],
+            'serviceImpactingEvent_incidentProperties' => [
+                'properties' => [
+                    'title' => ['type' => 'string'],
+                    'service' => ['type' => 'string'],
+                    'region' => ['type' => 'string'],
+                    'incidentType' => ['type' => 'string']
                 ],
-                'eventStatusLastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'serviceImpactingEvent' => [
+                'properties' => [
+                    'eventStartTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'eventStatusLastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'correlationId' => ['type' => 'string'],
+                    'status' => ['$ref' => '#/definitions/serviceImpactingEvent_status'],
+                    'incidentProperties' => ['$ref' => '#/definitions/serviceImpactingEvent_incidentProperties']
                 ],
-                'correlationId' => ['type' => 'string'],
-                'status' => ['$ref' => '#/definitions/serviceImpactingEvent_status'],
-                'incidentProperties' => ['$ref' => '#/definitions/serviceImpactingEvent_incidentProperties']
-            ]],
-            'availabilityStatus_properties' => ['properties' => [
-                'availabilityState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Available',
-                        'Unavailable',
-                        'Unknown'
+                'required' => []
+            ],
+            'availabilityStatus_properties' => [
+                'properties' => [
+                    'availabilityState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Available',
+                            'Unavailable',
+                            'Unknown'
+                        ]
+                    ],
+                    'summary' => ['type' => 'string'],
+                    'detailedStatus' => ['type' => 'string'],
+                    'reasonType' => ['type' => 'string'],
+                    'rootCauseAttributionTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'healthEventType' => ['type' => 'string'],
+                    'healthEventCause' => ['type' => 'string'],
+                    'healthEventCategory' => ['type' => 'string'],
+                    'healthEventId' => ['type' => 'string'],
+                    'resolutionETA' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'occuredTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'reasonChronicity' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Transient',
+                            'Persistent'
+                        ]
+                    ],
+                    'reportedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'recentlyResolvedState' => ['$ref' => '#/definitions/availabilityStatus_properties_recentlyResolvedState'],
+                    'recommendedActions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/recommendedAction']
+                    ],
+                    'serviceImpactingEvents' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/serviceImpactingEvent']
                     ]
                 ],
-                'summary' => ['type' => 'string'],
-                'detailedStatus' => ['type' => 'string'],
-                'reasonType' => ['type' => 'string'],
-                'rootCauseAttributionTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'availabilityStatus' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/availabilityStatus_properties']
                 ],
-                'healthEventType' => ['type' => 'string'],
-                'healthEventCause' => ['type' => 'string'],
-                'healthEventCategory' => ['type' => 'string'],
-                'healthEventId' => ['type' => 'string'],
-                'resolutionETA' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'availabilityStatusListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/availabilityStatus']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'occuredTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => ['value']
+            ],
+            'operation_display' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
                 ],
-                'reasonChronicity' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Transient',
-                        'Persistent'
-                    ]
+                'required' => []
+            ],
+            'operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/operation_display']
                 ],
-                'reportedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'recentlyResolvedState' => ['$ref' => '#/definitions/availabilityStatus_properties_recentlyResolvedState'],
-                'recommendedActions' => [
+                'required' => []
+            ],
+            'operationListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/recommendedAction']
+                    'items' => ['$ref' => '#/definitions/operation']
+                ]],
+                'required' => ['value']
+            ],
+            'ErrorResponse' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'details' => ['type' => 'string']
                 ],
-                'serviceImpactingEvents' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/serviceImpactingEvent']
-                ]
-            ]],
-            'availabilityStatus' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/availabilityStatus_properties']
-            ]],
-            'availabilityStatusListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/availabilityStatus']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'operation_display' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/operation_display']
-            ]],
-            'operationListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/operation']
-            ]]],
-            'ErrorResponse' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'details' => ['type' => 'string']
-            ]]
+                'required' => []
+            ]
         ]
     ];
 }

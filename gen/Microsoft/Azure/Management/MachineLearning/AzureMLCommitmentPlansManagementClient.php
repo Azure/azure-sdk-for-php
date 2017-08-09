@@ -408,160 +408,199 @@ final class AzureMLCommitmentPlansManagementClient
             ]]
         ],
         'definitions' => [
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'CommitmentAssociationProperties' => ['properties' => [
-                'associatedResourceId' => ['type' => 'string'],
-                'commitmentPlanId' => ['type' => 'string'],
-                'creationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'CommitmentAssociation' => ['properties' => [
-                'etag' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/CommitmentAssociationProperties']
-            ]],
-            'ResourceSku' => ['properties' => [
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'name' => ['type' => 'string'],
-                'tier' => ['type' => 'string']
-            ]],
-            'CommitmentAssociationListResult' => ['properties' => [
-                'nextLink' => ['type' => 'string'],
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CommitmentAssociation']
-                ]
-            ]],
-            'MoveCommitmentAssociationRequest' => ['properties' => ['destinationPlanId' => ['type' => 'string']]],
-            'CommitmentPlanPatchPayload' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'sku' => ['$ref' => '#/definitions/ResourceSku']
-            ]],
-            'PlanQuantity' => ['properties' => [
-                'allowance' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'amount' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'includedQuantityMeter' => ['type' => 'string'],
-                'overageMeter' => ['type' => 'string']
-            ]],
-            'CommitmentPlanProperties' => ['properties' => [
-                'chargeForOverage' => ['type' => 'boolean'],
-                'chargeForPlan' => ['type' => 'boolean'],
-                'creationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'includedQuantities' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/PlanQuantity']
-                ],
-                'maxAssociationLimit' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'maxCapacityLimit' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'minCapacityLimit' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'planMeter' => ['type' => 'string'],
-                'refillFrequencyInDays' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'suspendPlanOnOverage' => ['type' => 'boolean']
-            ]],
-            'CommitmentPlan' => ['properties' => [
-                'etag' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/CommitmentPlanProperties'],
-                'sku' => ['$ref' => '#/definitions/ResourceSku']
-            ]],
-            'CommitmentPlanListResult' => ['properties' => [
-                'nextLink' => ['type' => 'string'],
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CommitmentPlan']
-                ]
-            ]],
-            'PlanUsageHistory' => ['properties' => [
-                'planDeletionOverage' => [
-                    'type' => 'object',
-                    'additionalProperties' => [
-                        'type' => 'number',
-                        'format' => 'double'
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'planMigrationOverage' => [
-                    'type' => 'object',
-                    'additionalProperties' => [
-                        'type' => 'number',
-                        'format' => 'double'
+                'required' => ['location']
+            ],
+            'CommitmentAssociationProperties' => [
+                'properties' => [
+                    'associatedResourceId' => ['type' => 'string'],
+                    'commitmentPlanId' => ['type' => 'string'],
+                    'creationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'planQuantitiesAfterUsage' => [
-                    'type' => 'object',
-                    'additionalProperties' => [
-                        'type' => 'number',
-                        'format' => 'double'
+                'required' => []
+            ],
+            'CommitmentAssociation' => [
+                'properties' => [
+                    'etag' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/CommitmentAssociationProperties']
+                ],
+                'required' => []
+            ],
+            'ResourceSku' => [
+                'properties' => [
+                    'capacity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'name' => ['type' => 'string'],
+                    'tier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CommitmentAssociationListResult' => [
+                'properties' => [
+                    'nextLink' => ['type' => 'string'],
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CommitmentAssociation']
                     ]
                 ],
-                'planQuantitiesBeforeUsage' => [
-                    'type' => 'object',
-                    'additionalProperties' => [
+                'required' => []
+            ],
+            'MoveCommitmentAssociationRequest' => [
+                'properties' => ['destinationPlanId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'CommitmentPlanPatchPayload' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'sku' => ['$ref' => '#/definitions/ResourceSku']
+                ],
+                'required' => []
+            ],
+            'PlanQuantity' => [
+                'properties' => [
+                    'allowance' => [
                         'type' => 'number',
                         'format' => 'double'
-                    ]
-                ],
-                'planUsageOverage' => [
-                    'type' => 'object',
-                    'additionalProperties' => [
+                    ],
+                    'amount' => [
                         'type' => 'number',
                         'format' => 'double'
+                    ],
+                    'includedQuantityMeter' => ['type' => 'string'],
+                    'overageMeter' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CommitmentPlanProperties' => [
+                'properties' => [
+                    'chargeForOverage' => ['type' => 'boolean'],
+                    'chargeForPlan' => ['type' => 'boolean'],
+                    'creationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'includedQuantities' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/PlanQuantity']
+                    ],
+                    'maxAssociationLimit' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'maxCapacityLimit' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'minCapacityLimit' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'planMeter' => ['type' => 'string'],
+                    'refillFrequencyInDays' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'suspendPlanOnOverage' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'CommitmentPlan' => [
+                'properties' => [
+                    'etag' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/CommitmentPlanProperties'],
+                    'sku' => ['$ref' => '#/definitions/ResourceSku']
+                ],
+                'required' => []
+            ],
+            'CommitmentPlanListResult' => [
+                'properties' => [
+                    'nextLink' => ['type' => 'string'],
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CommitmentPlan']
                     ]
                 ],
-                'usage' => [
-                    'type' => 'object',
-                    'additionalProperties' => [
-                        'type' => 'number',
-                        'format' => 'double'
+                'required' => []
+            ],
+            'PlanUsageHistory' => [
+                'properties' => [
+                    'planDeletionOverage' => [
+                        'type' => 'object',
+                        'additionalProperties' => [
+                            'type' => 'number',
+                            'format' => 'double'
+                        ]
+                    ],
+                    'planMigrationOverage' => [
+                        'type' => 'object',
+                        'additionalProperties' => [
+                            'type' => 'number',
+                            'format' => 'double'
+                        ]
+                    ],
+                    'planQuantitiesAfterUsage' => [
+                        'type' => 'object',
+                        'additionalProperties' => [
+                            'type' => 'number',
+                            'format' => 'double'
+                        ]
+                    ],
+                    'planQuantitiesBeforeUsage' => [
+                        'type' => 'object',
+                        'additionalProperties' => [
+                            'type' => 'number',
+                            'format' => 'double'
+                        ]
+                    ],
+                    'planUsageOverage' => [
+                        'type' => 'object',
+                        'additionalProperties' => [
+                            'type' => 'number',
+                            'format' => 'double'
+                        ]
+                    ],
+                    'usage' => [
+                        'type' => 'object',
+                        'additionalProperties' => [
+                            'type' => 'number',
+                            'format' => 'double'
+                        ]
+                    ],
+                    'usageDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'usageDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'PlanUsageHistoryListResult' => ['properties' => [
-                'nextLink' => ['type' => 'string'],
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PlanUsageHistory']
-                ]
-            ]]
+                'required' => []
+            ],
+            'PlanUsageHistoryListResult' => [
+                'properties' => [
+                    'nextLink' => ['type' => 'string'],
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PlanUsageHistory']
+                    ]
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

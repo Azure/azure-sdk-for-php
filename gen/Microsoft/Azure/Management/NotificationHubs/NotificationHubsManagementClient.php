@@ -1074,195 +1074,306 @@ final class NotificationHubsManagementClient
             ]]
         ],
         'definitions' => [
-            'CheckNameAvailabilityRequestParameters' => ['properties' => [
-                'Name' => ['type' => 'string'],
-                'Type' => ['type' => 'string']
-            ]],
-            'CheckNameAvailabilityResponse' => ['properties' => [
-                'NameAvailable' => ['type' => 'boolean'],
-                'Reason' => ['type' => 'string'],
-                'Message' => ['type' => 'string']
-            ]],
-            'Sku' => ['properties' => [
-                'name' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Free',
-                        'Basic',
-                        'Standard'
+            'CheckNameAvailabilityRequestParameters' => [
+                'properties' => [
+                    'Name' => ['type' => 'string'],
+                    'Type' => ['type' => 'string']
+                ],
+                'required' => ['Name']
+            ],
+            'CheckNameAvailabilityResponse' => [
+                'properties' => [
+                    'NameAvailable' => ['type' => 'boolean'],
+                    'Reason' => ['type' => 'string'],
+                    'Message' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Sku' => [
+                'properties' => [
+                    'name' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Free',
+                            'Basic',
+                            'Standard'
+                        ]
+                    ],
+                    'tier' => ['type' => 'string'],
+                    'size' => ['type' => 'string'],
+                    'family' => ['type' => 'string'],
+                    'capacity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'tier' => ['type' => 'string'],
-                'size' => ['type' => 'string'],
-                'family' => ['type' => 'string'],
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => ['name']
+            ],
+            'CheckAvailabilityParameters' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'isAvailiable' => ['type' => 'boolean']
+                ],
+                'required' => [
+                    'name',
+                    'location'
                 ]
-            ]],
-            'CheckAvailabilityParameters' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'isAvailiable' => ['type' => 'boolean']
-            ]],
-            'CheckAvailabilityResult' => ['properties' => ['isAvailiable' => ['type' => 'boolean']]],
-            'NamespaceProperties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string'],
-                'region' => ['type' => 'string'],
-                'status' => ['type' => 'string'],
-                'createdAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'serviceBusEndpoint' => ['type' => 'string'],
-                'subscriptionId' => ['type' => 'string'],
-                'scaleUnit' => ['type' => 'string'],
-                'enabled' => ['type' => 'boolean'],
-                'critical' => ['type' => 'boolean'],
-                'namespaceType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Messaging',
-                        'NotificationHub'
+            ],
+            'CheckAvailabilityResult' => [
+                'properties' => ['isAvailiable' => ['type' => 'boolean']],
+                'required' => []
+            ],
+            'NamespaceProperties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string'],
+                    'region' => ['type' => 'string'],
+                    'status' => ['type' => 'string'],
+                    'createdAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'serviceBusEndpoint' => ['type' => 'string'],
+                    'subscriptionId' => ['type' => 'string'],
+                    'scaleUnit' => ['type' => 'string'],
+                    'enabled' => ['type' => 'boolean'],
+                    'critical' => ['type' => 'boolean'],
+                    'namespaceType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Messaging',
+                            'NotificationHub'
+                        ]
                     ]
-                ]
-            ]],
-            'NamespaceCreateOrUpdateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/NamespaceProperties']]],
-            'NamespacePatchParameters' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
                 ],
-                'sku' => ['$ref' => '#/definitions/Sku']
-            ]],
-            'NamespaceResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/NamespaceProperties']]],
-            'SharedAccessAuthorizationRuleProperties' => ['properties' => ['rights' => [
-                'type' => 'array',
-                'items' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Manage',
-                        'Send',
-                        'Listen'
+                'required' => []
+            ],
+            'NamespaceCreateOrUpdateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/NamespaceProperties']],
+                'required' => []
+            ],
+            'NamespacePatchParameters' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'sku' => ['$ref' => '#/definitions/Sku']
+                ],
+                'required' => []
+            ],
+            'NamespaceResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/NamespaceProperties']],
+                'required' => []
+            ],
+            'SharedAccessAuthorizationRuleProperties' => [
+                'properties' => ['rights' => [
+                    'type' => 'array',
+                    'items' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Manage',
+                            'Send',
+                            'Listen'
+                        ]
                     ]
-                ]
-            ]]],
-            'SharedAccessAuthorizationRuleCreateOrUpdateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/SharedAccessAuthorizationRuleProperties']]],
-            'SharedAccessAuthorizationRuleResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/SharedAccessAuthorizationRuleProperties']]],
-            'NamespaceListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NamespaceResource']
+                ]],
+                'required' => []
+            ],
+            'SharedAccessAuthorizationRuleCreateOrUpdateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SharedAccessAuthorizationRuleProperties']],
+                'required' => ['properties']
+            ],
+            'SharedAccessAuthorizationRuleResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SharedAccessAuthorizationRuleProperties']],
+                'required' => []
+            ],
+            'NamespaceListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NamespaceResource']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'SharedAccessAuthorizationRuleListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SharedAccessAuthorizationRuleResource']
+                'required' => []
+            ],
+            'SharedAccessAuthorizationRuleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SharedAccessAuthorizationRuleResource']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResourceListKeys' => ['properties' => [
-                'primaryConnectionString' => ['type' => 'string'],
-                'secondaryConnectionString' => ['type' => 'string'],
-                'primaryKey' => ['type' => 'string'],
-                'secondaryKey' => ['type' => 'string'],
-                'keyName' => ['type' => 'string']
-            ]],
-            'PolicykeyResource' => ['properties' => ['policyKey' => ['type' => 'string']]],
-            'ApnsCredentialProperties' => ['properties' => [
-                'apnsCertificate' => ['type' => 'string'],
-                'certificateKey' => ['type' => 'string'],
-                'endpoint' => ['type' => 'string'],
-                'thumbprint' => ['type' => 'string'],
-                'keyId' => ['type' => 'string'],
-                'appName' => ['type' => 'string'],
-                'appId' => ['type' => 'string'],
-                'token' => ['type' => 'string']
-            ]],
-            'ApnsCredential' => ['properties' => ['properties' => ['$ref' => '#/definitions/ApnsCredentialProperties']]],
-            'WnsCredentialProperties' => ['properties' => [
-                'packageSid' => ['type' => 'string'],
-                'secretKey' => ['type' => 'string'],
-                'windowsLiveEndpoint' => ['type' => 'string']
-            ]],
-            'WnsCredential' => ['properties' => ['properties' => ['$ref' => '#/definitions/WnsCredentialProperties']]],
-            'GcmCredentialProperties' => ['properties' => [
-                'gcmEndpoint' => ['type' => 'string'],
-                'googleApiKey' => ['type' => 'string']
-            ]],
-            'GcmCredential' => ['properties' => ['properties' => ['$ref' => '#/definitions/GcmCredentialProperties']]],
-            'MpnsCredentialProperties' => ['properties' => [
-                'mpnsCertificate' => ['type' => 'string'],
-                'certificateKey' => ['type' => 'string'],
-                'thumbprint' => ['type' => 'string']
-            ]],
-            'MpnsCredential' => ['properties' => ['properties' => ['$ref' => '#/definitions/MpnsCredentialProperties']]],
-            'AdmCredentialProperties' => ['properties' => [
-                'clientId' => ['type' => 'string'],
-                'clientSecret' => ['type' => 'string'],
-                'authTokenUrl' => ['type' => 'string']
-            ]],
-            'AdmCredential' => ['properties' => ['properties' => ['$ref' => '#/definitions/AdmCredentialProperties']]],
-            'BaiduCredentialProperties' => ['properties' => [
-                'baiduApiKey' => ['type' => 'string'],
-                'baiduEndPoint' => ['type' => 'string'],
-                'baiduSecretKey' => ['type' => 'string']
-            ]],
-            'BaiduCredential' => ['properties' => ['properties' => ['$ref' => '#/definitions/BaiduCredentialProperties']]],
-            'NotificationHubProperties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'registrationTtl' => ['type' => 'string'],
-                'authorizationRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SharedAccessAuthorizationRuleProperties']
+                'required' => []
+            ],
+            'ResourceListKeys' => [
+                'properties' => [
+                    'primaryConnectionString' => ['type' => 'string'],
+                    'secondaryConnectionString' => ['type' => 'string'],
+                    'primaryKey' => ['type' => 'string'],
+                    'secondaryKey' => ['type' => 'string'],
+                    'keyName' => ['type' => 'string']
                 ],
-                'apnsCredential' => ['$ref' => '#/definitions/ApnsCredential'],
-                'wnsCredential' => ['$ref' => '#/definitions/WnsCredential'],
-                'gcmCredential' => ['$ref' => '#/definitions/GcmCredential'],
-                'mpnsCredential' => ['$ref' => '#/definitions/MpnsCredential'],
-                'admCredential' => ['$ref' => '#/definitions/AdmCredential'],
-                'baiduCredential' => ['$ref' => '#/definitions/BaiduCredential']
-            ]],
-            'NotificationHubCreateOrUpdateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/NotificationHubProperties']]],
-            'NotificationHubResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/NotificationHubProperties']]],
-            'PnsCredentialsProperties' => ['properties' => [
-                'apnsCredential' => ['$ref' => '#/definitions/ApnsCredential'],
-                'wnsCredential' => ['$ref' => '#/definitions/WnsCredential'],
-                'gcmCredential' => ['$ref' => '#/definitions/GcmCredential'],
-                'mpnsCredential' => ['$ref' => '#/definitions/MpnsCredential'],
-                'admCredential' => ['$ref' => '#/definitions/AdmCredential'],
-                'baiduCredential' => ['$ref' => '#/definitions/BaiduCredential']
-            ]],
-            'PnsCredentialsResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/PnsCredentialsProperties']]],
-            'NotificationHubListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NotificationHubResource']
+                'required' => []
+            ],
+            'PolicykeyResource' => [
+                'properties' => ['policyKey' => ['type' => 'string']],
+                'required' => []
+            ],
+            'ApnsCredentialProperties' => [
+                'properties' => [
+                    'apnsCertificate' => ['type' => 'string'],
+                    'certificateKey' => ['type' => 'string'],
+                    'endpoint' => ['type' => 'string'],
+                    'thumbprint' => ['type' => 'string'],
+                    'keyId' => ['type' => 'string'],
+                    'appName' => ['type' => 'string'],
+                    'appId' => ['type' => 'string'],
+                    'token' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => []
+            ],
+            'ApnsCredential' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ApnsCredentialProperties']],
+                'required' => []
+            ],
+            'WnsCredentialProperties' => [
+                'properties' => [
+                    'packageSid' => ['type' => 'string'],
+                    'secretKey' => ['type' => 'string'],
+                    'windowsLiveEndpoint' => ['type' => 'string']
                 ],
-                'sku' => ['$ref' => '#/definitions/Sku']
-            ]],
-            'SubResource' => ['properties' => ['id' => ['type' => 'string']]]
+                'required' => []
+            ],
+            'WnsCredential' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/WnsCredentialProperties']],
+                'required' => []
+            ],
+            'GcmCredentialProperties' => [
+                'properties' => [
+                    'gcmEndpoint' => ['type' => 'string'],
+                    'googleApiKey' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'GcmCredential' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/GcmCredentialProperties']],
+                'required' => []
+            ],
+            'MpnsCredentialProperties' => [
+                'properties' => [
+                    'mpnsCertificate' => ['type' => 'string'],
+                    'certificateKey' => ['type' => 'string'],
+                    'thumbprint' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MpnsCredential' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/MpnsCredentialProperties']],
+                'required' => []
+            ],
+            'AdmCredentialProperties' => [
+                'properties' => [
+                    'clientId' => ['type' => 'string'],
+                    'clientSecret' => ['type' => 'string'],
+                    'authTokenUrl' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AdmCredential' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AdmCredentialProperties']],
+                'required' => []
+            ],
+            'BaiduCredentialProperties' => [
+                'properties' => [
+                    'baiduApiKey' => ['type' => 'string'],
+                    'baiduEndPoint' => ['type' => 'string'],
+                    'baiduSecretKey' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'BaiduCredential' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BaiduCredentialProperties']],
+                'required' => []
+            ],
+            'NotificationHubProperties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'registrationTtl' => ['type' => 'string'],
+                    'authorizationRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SharedAccessAuthorizationRuleProperties']
+                    ],
+                    'apnsCredential' => ['$ref' => '#/definitions/ApnsCredential'],
+                    'wnsCredential' => ['$ref' => '#/definitions/WnsCredential'],
+                    'gcmCredential' => ['$ref' => '#/definitions/GcmCredential'],
+                    'mpnsCredential' => ['$ref' => '#/definitions/MpnsCredential'],
+                    'admCredential' => ['$ref' => '#/definitions/AdmCredential'],
+                    'baiduCredential' => ['$ref' => '#/definitions/BaiduCredential']
+                ],
+                'required' => []
+            ],
+            'NotificationHubCreateOrUpdateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/NotificationHubProperties']],
+                'required' => ['properties']
+            ],
+            'NotificationHubResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/NotificationHubProperties']],
+                'required' => []
+            ],
+            'PnsCredentialsProperties' => [
+                'properties' => [
+                    'apnsCredential' => ['$ref' => '#/definitions/ApnsCredential'],
+                    'wnsCredential' => ['$ref' => '#/definitions/WnsCredential'],
+                    'gcmCredential' => ['$ref' => '#/definitions/GcmCredential'],
+                    'mpnsCredential' => ['$ref' => '#/definitions/MpnsCredential'],
+                    'admCredential' => ['$ref' => '#/definitions/AdmCredential'],
+                    'baiduCredential' => ['$ref' => '#/definitions/BaiduCredential']
+                ],
+                'required' => []
+            ],
+            'PnsCredentialsResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PnsCredentialsProperties']],
+                'required' => []
+            ],
+            'NotificationHubListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NotificationHubResource']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'sku' => ['$ref' => '#/definitions/Sku']
+                ],
+                'required' => ['location']
+            ],
+            'SubResource' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => []
+            ]
         ]
     ];
 }

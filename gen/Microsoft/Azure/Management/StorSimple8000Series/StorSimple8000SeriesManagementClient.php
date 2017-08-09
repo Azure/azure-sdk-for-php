@@ -4428,1289 +4428,1778 @@ final class StorSimple8000SeriesManagementClient
             ]
         ],
         'definitions' => [
-            'AccessControlRecordProperties' => ['properties' => [
-                'initiatorName' => ['type' => 'string'],
-                'volumeCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+            'AccessControlRecordProperties' => [
+                'properties' => [
+                    'initiatorName' => ['type' => 'string'],
+                    'volumeCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => ['initiatorName']
+            ],
+            'AccessControlRecord' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AccessControlRecordProperties']],
+                'required' => ['properties']
+            ],
+            'AccessControlRecordList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/AccessControlRecord']
+                ]],
+                'required' => ['value']
+            ],
+            'AcsConfiguration' => [
+                'properties' => [
+                    'namespace' => ['type' => 'string'],
+                    'realm' => ['type' => 'string'],
+                    'serviceUrl' => ['type' => 'string']
+                ],
+                'required' => [
+                    'namespace',
+                    'realm',
+                    'serviceUrl'
                 ]
-            ]],
-            'AccessControlRecord' => ['properties' => ['properties' => ['$ref' => '#/definitions/AccessControlRecordProperties']]],
-            'AccessControlRecordList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/AccessControlRecord']
-            ]]],
-            'AcsConfiguration' => ['properties' => [
-                'namespace' => ['type' => 'string'],
-                'realm' => ['type' => 'string'],
-                'serviceUrl' => ['type' => 'string']
-            ]],
-            'AlertSource' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'timeZone' => ['type' => 'string'],
-                'alertSourceType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Resource',
-                        'Device'
+            ],
+            'AlertSource' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'timeZone' => ['type' => 'string'],
+                    'alertSourceType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Resource',
+                            'Device'
+                        ]
                     ]
+                ],
+                'required' => []
+            ],
+            'AlertErrorDetails' => [
+                'properties' => [
+                    'errorCode' => ['type' => 'string'],
+                    'errorMessage' => ['type' => 'string'],
+                    'occurences' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'AlertProperties' => [
+                'properties' => [
+                    'title' => ['type' => 'string'],
+                    'scope' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Resource',
+                            'Device'
+                        ]
+                    ],
+                    'alertType' => ['type' => 'string'],
+                    'appearedAtTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'appearedAtSourceTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'clearedAtTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'clearedAtSourceTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'source' => ['$ref' => '#/definitions/AlertSource'],
+                    'recommendation' => ['type' => 'string'],
+                    'resolutionReason' => ['type' => 'string'],
+                    'severity' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Informational',
+                            'Warning',
+                            'Critical'
+                        ]
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Active',
+                            'Cleared'
+                        ]
+                    ],
+                    'errorDetails' => ['$ref' => '#/definitions/AlertErrorDetails'],
+                    'detailedInformation' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => [
+                    'title',
+                    'scope',
+                    'alertType',
+                    'appearedAtTime',
+                    'appearedAtSourceTime',
+                    'source',
+                    'severity',
+                    'status'
                 ]
-            ]],
-            'AlertErrorDetails' => ['properties' => [
-                'errorCode' => ['type' => 'string'],
-                'errorMessage' => ['type' => 'string'],
-                'occurences' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+            ],
+            'Alert' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AlertProperties']],
+                'required' => ['properties']
+            ],
+            'AlertFilter' => [
+                'properties' => [
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Active',
+                            'Cleared'
+                        ]
+                    ],
+                    'severity' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Informational',
+                            'Warning',
+                            'Critical'
+                        ]
+                    ],
+                    'sourceType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Resource',
+                            'Device'
+                        ]
+                    ],
+                    'sourceName' => ['type' => 'string'],
+                    'appearedOnTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'AlertList' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Alert']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'AlertNotificationProperties' => [
+                'properties' => [
+                    'emailNotification' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'alertNotificationCulture' => ['type' => 'string'],
+                    'notificationToServiceOwners' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'additionalRecipientEmailList' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['emailNotification']
+            ],
+            'AlertSettings' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AlertNotificationProperties']],
+                'required' => ['properties']
+            ],
+            'AsymmetricEncryptedSecret' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'encryptionCertThumbprint' => ['type' => 'string'],
+                    'encryptionAlgorithm' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'AES256',
+                            'RSAES_PKCS1_v_1_5'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'value',
+                    'encryptionAlgorithm'
                 ]
-            ]],
-            'AlertProperties' => ['properties' => [
-                'title' => ['type' => 'string'],
-                'scope' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Resource',
-                        'Device'
+            ],
+            'AvailableProviderOperationDisplay' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AvailableProviderOperation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/AvailableProviderOperationDisplay'],
+                    'origin' => ['type' => 'string'],
+                    'properties' => ['type' => 'object']
+                ],
+                'required' => []
+            ],
+            'AvailableProviderOperationList' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AvailableProviderOperation']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'BackupElement' => [
+                'properties' => [
+                    'elementId' => ['type' => 'string'],
+                    'elementName' => ['type' => 'string'],
+                    'elementType' => ['type' => 'string'],
+                    'sizeInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'volumeName' => ['type' => 'string'],
+                    'volumeContainerId' => ['type' => 'string'],
+                    'volumeType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Tiered',
+                            'Archival',
+                            'LocallyPinned'
+                        ]
                     ]
                 ],
-                'alertType' => ['type' => 'string'],
-                'appearedAtTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'appearedAtSourceTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'clearedAtTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'clearedAtSourceTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'source' => ['$ref' => '#/definitions/AlertSource'],
-                'recommendation' => ['type' => 'string'],
-                'resolutionReason' => ['type' => 'string'],
-                'severity' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Informational',
-                        'Warning',
-                        'Critical'
+                'required' => [
+                    'elementId',
+                    'elementName',
+                    'elementType',
+                    'sizeInBytes',
+                    'volumeName',
+                    'volumeContainerId'
+                ]
+            ],
+            'BackupProperties' => [
+                'properties' => [
+                    'createdOn' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'sizeInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'backupType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'LocalSnapshot',
+                            'CloudSnapshot'
+                        ]
+                    ],
+                    'backupJobCreationType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Adhoc',
+                            'BySchedule',
+                            'BySSM'
+                        ]
+                    ],
+                    'backupPolicyId' => ['type' => 'string'],
+                    'ssmHostName' => ['type' => 'string'],
+                    'elements' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/BackupElement']
                     ]
                 ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Active',
-                        'Cleared'
+                'required' => [
+                    'createdOn',
+                    'sizeInBytes',
+                    'elements'
+                ]
+            ],
+            'Backup' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BackupProperties']],
+                'required' => ['properties']
+            ],
+            'BackupFilter' => [
+                'properties' => [
+                    'backupPolicyId' => ['type' => 'string'],
+                    'volumeId' => ['type' => 'string'],
+                    'createdTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'errorDetails' => ['$ref' => '#/definitions/AlertErrorDetails'],
-                'detailedInformation' => [
+                'required' => []
+            ],
+            'BackupList' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Backup']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'BackupPolicyProperties' => [
+                'properties' => [
+                    'volumeIds' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'nextBackupTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastBackupTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'schedulesCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'scheduledBackupStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Disabled',
+                            'Enabled'
+                        ]
+                    ],
+                    'backupPolicyCreationType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'BySaaS',
+                            'BySSM'
+                        ]
+                    ],
+                    'ssmHostName' => ['type' => 'string']
+                ],
+                'required' => ['volumeIds']
+            ],
+            'BackupPolicy' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BackupPolicyProperties']],
+                'required' => ['properties']
+            ],
+            'BackupPolicyList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/BackupPolicy']
+                ]],
+                'required' => ['value']
+            ],
+            'ScheduleRecurrence' => [
+                'properties' => [
+                    'recurrenceType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Minutes',
+                            'Hourly',
+                            'Daily',
+                            'Weekly'
+                        ]
+                    ],
+                    'recurrenceValue' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'weeklyDaysList' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'Sunday',
+                                'Monday',
+                                'Tuesday',
+                                'Wednesday',
+                                'Thursday',
+                                'Friday',
+                                'Saturday'
+                            ]
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'recurrenceType',
+                    'recurrenceValue'
+                ]
+            ],
+            'BackupScheduleProperties' => [
+                'properties' => [
+                    'scheduleRecurrence' => ['$ref' => '#/definitions/ScheduleRecurrence'],
+                    'backupType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'LocalSnapshot',
+                            'CloudSnapshot'
+                        ]
+                    ],
+                    'retentionCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'scheduleStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'lastSuccessfulRun' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => [
+                    'scheduleRecurrence',
+                    'backupType',
+                    'retentionCount',
+                    'startTime',
+                    'scheduleStatus'
+                ]
+            ],
+            'BackupSchedule' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BackupScheduleProperties']],
+                'required' => ['properties']
+            ],
+            'BackupScheduleList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/BackupSchedule']
+                ]],
+                'required' => ['value']
+            ],
+            'Time' => [
+                'properties' => [
+                    'hours' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'minutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'seconds' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => [
+                    'hours',
+                    'minutes',
+                    'seconds'
+                ]
+            ],
+            'BandwidthSchedule' => [
+                'properties' => [
+                    'start' => ['$ref' => '#/definitions/Time'],
+                    'stop' => ['$ref' => '#/definitions/Time'],
+                    'rateInMbps' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'days' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'Sunday',
+                                'Monday',
+                                'Tuesday',
+                                'Wednesday',
+                                'Thursday',
+                                'Friday',
+                                'Saturday'
+                            ]
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'start',
+                    'stop',
+                    'rateInMbps',
+                    'days'
+                ]
+            ],
+            'BandwidthRateSettingProperties' => [
+                'properties' => [
+                    'schedules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/BandwidthSchedule']
+                    ],
+                    'volumeCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => ['schedules']
+            ],
+            'BandwidthSetting' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BandwidthRateSettingProperties']],
+                'required' => ['properties']
+            ],
+            'BandwidthSettingList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/BandwidthSetting']
+                ]],
+                'required' => ['value']
+            ],
+            'BaseModel' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'kind' => [
+                        'type' => 'string',
+                        'enum' => ['Series8000']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ChapSettings' => [
+                'properties' => [
+                    'initiatorUser' => ['type' => 'string'],
+                    'initiatorSecret' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret'],
+                    'targetUser' => ['type' => 'string'],
+                    'targetSecret' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret']
+                ],
+                'required' => []
+            ],
+            'ClearAlertRequest' => [
+                'properties' => [
+                    'resolutionMessage' => ['type' => 'string'],
+                    'alerts' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['alerts']
+            ],
+            'CloneRequest' => [
+                'properties' => [
+                    'targetDeviceId' => ['type' => 'string'],
+                    'targetVolumeName' => ['type' => 'string'],
+                    'targetAccessControlRecordIds' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'backupElement' => ['$ref' => '#/definitions/BackupElement']
+                ],
+                'required' => [
+                    'targetDeviceId',
+                    'targetVolumeName',
+                    'targetAccessControlRecordIds',
+                    'backupElement'
+                ]
+            ],
+            'CloudAppliance' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'vnetName' => ['type' => 'string'],
+                    'vnetRegion' => ['type' => 'string'],
+                    'isVnetDnsConfigured' => ['type' => 'boolean'],
+                    'isVnetExpressConfigured' => ['type' => 'boolean'],
+                    'subnetName' => ['type' => 'string'],
+                    'storageAccountName' => ['type' => 'string'],
+                    'storageAccountType' => ['type' => 'string'],
+                    'vmType' => ['type' => 'string'],
+                    'vmImageName' => ['type' => 'string'],
+                    'modelNumber' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'vnetRegion'
+                ]
+            ],
+            'VmImage' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'version' => ['type' => 'string'],
+                    'offer' => ['type' => 'string'],
+                    'publisher' => ['type' => 'string'],
+                    'sku' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'version',
+                    'offer',
+                    'publisher',
+                    'sku'
+                ]
+            ],
+            'CloudApplianceConfigurationProperties' => [
+                'properties' => [
+                    'modelNumber' => ['type' => 'string'],
+                    'cloudPlatform' => ['type' => 'string'],
+                    'acsConfiguration' => ['$ref' => '#/definitions/AcsConfiguration'],
+                    'supportedStorageAccountTypes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'supportedRegions' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'supportedVmTypes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'supportedVmImages' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VmImage']
+                    ]
+                ],
+                'required' => [
+                    'modelNumber',
+                    'cloudPlatform',
+                    'acsConfiguration',
+                    'supportedStorageAccountTypes',
+                    'supportedRegions',
+                    'supportedVmTypes',
+                    'supportedVmImages'
+                ]
+            ],
+            'CloudApplianceConfiguration' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/CloudApplianceConfigurationProperties']],
+                'required' => ['properties']
+            ],
+            'CloudApplianceConfigurationList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/CloudApplianceConfiguration']
+                ]],
+                'required' => ['value']
+            ],
+            'CloudApplianceSettings' => [
+                'properties' => [
+                    'serviceDataEncryptionKey' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret'],
+                    'channelIntegrityKey' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret']
+                ],
+                'required' => []
+            ],
+            'SecondaryDNSSettings' => [
+                'properties' => ['secondaryDnsServers' => [
+                    'type' => 'array',
+                    'items' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'NetworkInterfaceData0Settings' => [
+                'properties' => [
+                    'controllerZeroIp' => ['type' => 'string'],
+                    'controllerOneIp' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ConfigureDeviceRequestProperties' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'currentDeviceName' => ['type' => 'string'],
+                    'timeZone' => ['type' => 'string'],
+                    'dnsSettings' => ['$ref' => '#/definitions/SecondaryDNSSettings'],
+                    'networkInterfaceData0Settings' => ['$ref' => '#/definitions/NetworkInterfaceData0Settings']
+                ],
+                'required' => [
+                    'friendlyName',
+                    'currentDeviceName',
+                    'timeZone'
+                ]
+            ],
+            'ConfigureDeviceRequest' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ConfigureDeviceRequestProperties']],
+                'required' => ['properties']
+            ],
+            'ControllerPowerStateChangeRequestProperties' => [
+                'properties' => [
+                    'action' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Start',
+                            'Restart',
+                            'Shutdown'
+                        ]
+                    ],
+                    'activeController' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unknown',
+                            'None',
+                            'Controller0',
+                            'Controller1'
+                        ]
+                    ],
+                    'controller0State' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotPresent',
+                            'PoweredOff',
+                            'Ok',
+                            'Recovering',
+                            'Warning',
+                            'Failure'
+                        ]
+                    ],
+                    'controller1State' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotPresent',
+                            'PoweredOff',
+                            'Ok',
+                            'Recovering',
+                            'Warning',
+                            'Failure'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'action',
+                    'activeController',
+                    'controller0State',
+                    'controller1State'
+                ]
+            ],
+            'ControllerPowerStateChangeRequest' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ControllerPowerStateChangeRequestProperties']],
+                'required' => ['properties']
+            ],
+            'DataStatistics' => [
+                'properties' => [
+                    'totalData' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'processedData' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'cloudData' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'throughput' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ]
+                ],
+                'required' => []
+            ],
+            'DeviceDetails' => [
+                'properties' => [
+                    'endpointCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'volumeContainerCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'DeviceRolloverDetails' => [
+                'properties' => [
+                    'authorizationEligibility' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'InEligible',
+                            'Eligible'
+                        ]
+                    ],
+                    'authorizationStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Disabled',
+                            'Enabled'
+                        ]
+                    ],
+                    'inEligibilityReason' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'DeviceNotOnline',
+                            'NotSupportedAppliance',
+                            'RolloverPending'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'DeviceProperties' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'activationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'culture' => ['type' => 'string'],
+                    'deviceDescription' => ['type' => 'string'],
+                    'deviceSoftwareVersion' => ['type' => 'string'],
+                    'friendlySoftwareName' => ['type' => 'string'],
+                    'deviceConfigurationStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Complete',
+                            'Pending'
+                        ]
+                    ],
+                    'targetIqn' => ['type' => 'string'],
+                    'modelDescription' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unknown',
+                            'Online',
+                            'Offline',
+                            'Deactivated',
+                            'RequiresAttention',
+                            'MaintenanceMode',
+                            'Creating',
+                            'Provisioning',
+                            'Deactivating',
+                            'Deleted',
+                            'ReadyToSetup'
+                        ]
+                    ],
+                    'serialNumber' => ['type' => 'string'],
+                    'deviceType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Series8000VirtualAppliance',
+                            'Series8000PhysicalAppliance'
+                        ]
+                    ],
+                    'activeController' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unknown',
+                            'None',
+                            'Controller0',
+                            'Controller1'
+                        ]
+                    ],
+                    'friendlySoftwareVersion' => ['type' => 'string'],
+                    'availableLocalStorageInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'availableTieredStorageInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'provisionedTieredStorageInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'provisionedLocalStorageInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'provisionedVolumeSizeInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'usingStorageInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'totalTieredStorageInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'agentGroupVersion' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'networkInterfaceCardCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'deviceLocation' => ['type' => 'string'],
+                    'virtualMachineApiType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Classic',
+                            'Arm'
+                        ]
+                    ],
+                    'details' => ['$ref' => '#/definitions/DeviceDetails'],
+                    'rolloverDetails' => ['$ref' => '#/definitions/DeviceRolloverDetails']
+                ],
+                'required' => [
+                    'friendlyName',
+                    'activationTime',
+                    'culture',
+                    'deviceDescription',
+                    'deviceSoftwareVersion',
+                    'deviceConfigurationStatus',
+                    'targetIqn',
+                    'modelDescription',
+                    'status',
+                    'serialNumber',
+                    'deviceType',
+                    'activeController',
+                    'friendlySoftwareVersion'
+                ]
+            ],
+            'Device' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DeviceProperties']],
+                'required' => ['properties']
+            ],
+            'DeviceList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Device']
+                ]],
+                'required' => ['value']
+            ],
+            'DevicePatchProperties' => [
+                'properties' => ['deviceDescription' => ['type' => 'string']],
+                'required' => []
+            ],
+            'DevicePatch' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DevicePatchProperties']],
+                'required' => ['properties']
+            ],
+            'DimensionFilter' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'values' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DNSSettings' => [
+                'properties' => [
+                    'primaryDnsServer' => ['type' => 'string'],
+                    'primaryIpv6DnsServer' => ['type' => 'string'],
+                    'secondaryDnsServers' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'secondaryIpv6DnsServers' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'EncryptionSettingsProperties' => [
+                'properties' => [
+                    'encryptionStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'keyRolloverStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Required',
+                            'NotRequired'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'encryptionStatus',
+                    'keyRolloverStatus'
+                ]
+            ],
+            'EncryptionSettings' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/EncryptionSettingsProperties']],
+                'required' => ['properties']
+            ],
+            'FailoverRequest' => [
+                'properties' => [
+                    'targetDeviceId' => ['type' => 'string'],
+                    'volumeContainers' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'VolumeFailoverMetadata' => [
+                'properties' => [
+                    'volumeId' => ['type' => 'string'],
+                    'volumeType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Tiered',
+                            'Archival',
+                            'LocallyPinned'
+                        ]
+                    ],
+                    'sizeInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'backupCreatedDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'backupElementId' => ['type' => 'string'],
+                    'backupId' => ['type' => 'string'],
+                    'backupPolicyId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VolumeContainerFailoverMetadata' => [
+                'properties' => [
+                    'volumeContainerId' => ['type' => 'string'],
+                    'volumes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VolumeFailoverMetadata']
+                    ]
+                ],
+                'required' => []
+            ],
+            'FailoverSetEligibilityResult' => [
+                'properties' => [
+                    'isEligibleForFailover' => ['type' => 'boolean'],
+                    'errorMessage' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'FailoverSet' => [
+                'properties' => [
+                    'volumeContainers' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VolumeContainerFailoverMetadata']
+                    ],
+                    'eligibilityResult' => ['$ref' => '#/definitions/FailoverSetEligibilityResult']
+                ],
+                'required' => []
+            ],
+            'FailoverSetsList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/FailoverSet']
+                ]],
+                'required' => []
+            ],
+            'TargetEligibilityErrorMessage' => [
+                'properties' => [
+                    'message' => ['type' => 'string'],
+                    'resolution' => ['type' => 'string'],
+                    'resultCode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'TargetAndSourceCannotBeSameError',
+                            'TargetIsNotOnlineError',
+                            'TargetSourceIncompatibleVersionError',
+                            'LocalToTieredVolumesConversionWarning',
+                            'TargetInsufficientCapacityError',
+                            'TargetInsufficientLocalVolumeMemoryError',
+                            'TargetInsufficientTieredVolumeMemoryError'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'TargetEligibilityResult' => [
+                'properties' => [
+                    'eligibilityStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotEligible',
+                            'Eligible'
+                        ]
+                    ],
+                    'messages' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TargetEligibilityErrorMessage']
+                    ]
+                ],
+                'required' => []
+            ],
+            'FailoverTarget' => [
+                'properties' => [
+                    'deviceId' => ['type' => 'string'],
+                    'deviceStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unknown',
+                            'Online',
+                            'Offline',
+                            'Deactivated',
+                            'RequiresAttention',
+                            'MaintenanceMode',
+                            'Creating',
+                            'Provisioning',
+                            'Deactivating',
+                            'Deleted',
+                            'ReadyToSetup'
+                        ]
+                    ],
+                    'modelDescription' => ['type' => 'string'],
+                    'deviceSoftwareVersion' => ['type' => 'string'],
+                    'dataContainersCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'volumesCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'availableLocalStorageInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'availableTieredStorageInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'deviceLocation' => ['type' => 'string'],
+                    'friendlyDeviceSoftwareVersion' => ['type' => 'string'],
+                    'eligibilityResult' => ['$ref' => '#/definitions/TargetEligibilityResult']
+                ],
+                'required' => []
+            ],
+            'FailoverTargetsList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/FailoverTarget']
+                ]],
+                'required' => []
+            ],
+            'Feature' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotAvailable',
+                            'UnsupportedDeviceVersion',
+                            'Supported'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'name',
+                    'status'
+                ]
+            ],
+            'FeatureFilter' => [
+                'properties' => ['deviceId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'FeatureList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Feature']
+                ]],
+                'required' => ['value']
+            ],
+            'HardwareComponent' => [
+                'properties' => [
+                    'componentId' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unknown',
+                            'NotPresent',
+                            'PoweredOff',
+                            'Ok',
+                            'Recovering',
+                            'Warning',
+                            'Failure'
+                        ]
+                    ],
+                    'statusDisplayName' => ['type' => 'string']
+                ],
+                'required' => [
+                    'componentId',
+                    'displayName',
+                    'status',
+                    'statusDisplayName'
+                ]
+            ],
+            'HardwareComponentGroupProperties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'lastUpdatedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'components' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HardwareComponent']
+                    ]
+                ],
+                'required' => [
+                    'displayName',
+                    'lastUpdatedTime',
+                    'components'
+                ]
+            ],
+            'HardwareComponentGroup' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/HardwareComponentGroupProperties']],
+                'required' => ['properties']
+            ],
+            'HardwareComponentGroupList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/HardwareComponentGroup']
+                ]],
+                'required' => ['value']
+            ],
+            'JobErrorItem' => [
+                'properties' => [
+                    'recommendations' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => [
+                    'code',
+                    'message'
+                ]
+            ],
+            'JobErrorDetails' => [
+                'properties' => [
+                    'errorDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/JobErrorItem']
+                    ],
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => [
+                    'code',
+                    'message'
+                ]
+            ],
+            'JobStage' => [
+                'properties' => [
+                    'message' => ['type' => 'string'],
+                    'stageStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Running',
+                            'Succeeded',
+                            'Failed',
+                            'Canceled'
+                        ]
+                    ],
+                    'detail' => ['type' => 'string'],
+                    'errorCode' => ['type' => 'string']
+                ],
+                'required' => ['stageStatus']
+            ],
+            'JobProperties' => [
+                'properties' => [
+                    'jobType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'ScheduledBackup',
+                            'ManualBackup',
+                            'RestoreBackup',
+                            'CloneVolume',
+                            'FailoverVolumeContainers',
+                            'CreateLocallyPinnedVolume',
+                            'ModifyVolume',
+                            'InstallUpdates',
+                            'SupportPackageLogs',
+                            'CreateCloudAppliance'
+                        ]
+                    ],
+                    'dataStats' => ['$ref' => '#/definitions/DataStatistics'],
+                    'entityLabel' => ['type' => 'string'],
+                    'entityType' => ['type' => 'string'],
+                    'jobStages' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/JobStage']
+                    ],
+                    'deviceId' => ['type' => 'string'],
+                    'isCancellable' => ['type' => 'boolean'],
+                    'backupType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'LocalSnapshot',
+                            'CloudSnapshot'
+                        ]
+                    ],
+                    'sourceDeviceId' => ['type' => 'string'],
+                    'backupPointInTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => ['jobType']
+            ],
+            'Job' => [
+                'properties' => [
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Running',
+                            'Succeeded',
+                            'Failed',
+                            'Canceled'
+                        ]
+                    ],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'percentComplete' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'error' => ['$ref' => '#/definitions/JobErrorDetails'],
+                    'properties' => ['$ref' => '#/definitions/JobProperties']
+                ],
+                'required' => [
+                    'status',
+                    'percentComplete'
+                ]
+            ],
+            'JobFilter' => [
+                'properties' => [
+                    'status' => ['type' => 'string'],
+                    'jobType' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'JobList' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Job']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'Key' => [
+                'properties' => ['activationKey' => ['type' => 'string']],
+                'required' => ['activationKey']
+            ],
+            'ListFailoverTargetsRequest' => [
+                'properties' => ['volumeContainers' => [
+                    'type' => 'array',
+                    'items' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'ManagerIntrinsicSettings' => [
+                'properties' => ['type' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'GardaV1',
+                        'HelsinkiV1'
+                    ]
+                ]],
+                'required' => ['type']
+            ],
+            'ManagerSku' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => ['name']
+            ],
+            'ManagerProperties' => [
+                'properties' => [
+                    'cisIntrinsicSettings' => ['$ref' => '#/definitions/ManagerIntrinsicSettings'],
+                    'sku' => ['$ref' => '#/definitions/ManagerSku'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Manager' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ManagerProperties'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ManagerExtendedInfoProperties' => [
+                'properties' => [
+                    'version' => ['type' => 'string'],
+                    'integrityKey' => ['type' => 'string'],
+                    'encryptionKey' => ['type' => 'string'],
+                    'encryptionKeyThumbprint' => ['type' => 'string'],
+                    'portalCertificateThumbprint' => ['type' => 'string'],
+                    'algorithm' => ['type' => 'string']
+                ],
+                'required' => [
+                    'integrityKey',
+                    'algorithm'
+                ]
+            ],
+            'ManagerExtendedInfo' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ManagerExtendedInfoProperties'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ManagerList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Manager']
+                ]],
+                'required' => ['value']
+            ],
+            'ManagerPatch' => [
+                'properties' => ['tags' => [
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'Alert' => ['properties' => ['properties' => ['$ref' => '#/definitions/AlertProperties']]],
-            'AlertFilter' => ['properties' => [
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Active',
-                        'Cleared'
+                ]],
+                'required' => []
+            ],
+            'MetricAvailablity' => [
+                'properties' => [
+                    'timeGrain' => ['type' => 'string'],
+                    'retention' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MetricData' => [
+                'properties' => [
+                    'timeStamp' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'sum' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'average' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'minimum' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'maximum' => [
+                        'type' => 'number',
+                        'format' => 'double'
                     ]
                 ],
-                'severity' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Informational',
-                        'Warning',
-                        'Critical'
-                    ]
+                'required' => []
+            ],
+            'MetricName' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'localizedValue' => ['type' => 'string']
                 ],
-                'sourceType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Resource',
-                        'Device'
-                    ]
+                'required' => []
+            ],
+            'MetricDimension' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
                 ],
-                'sourceName' => ['type' => 'string'],
-                'appearedOnTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'AlertList' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Alert']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'AlertNotificationProperties' => ['properties' => [
-                'emailNotification' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'alertNotificationCulture' => ['type' => 'string'],
-                'notificationToServiceOwners' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'additionalRecipientEmailList' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'AlertSettings' => ['properties' => ['properties' => ['$ref' => '#/definitions/AlertNotificationProperties']]],
-            'AsymmetricEncryptedSecret' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'encryptionCertThumbprint' => ['type' => 'string'],
-                'encryptionAlgorithm' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'AES256',
-                        'RSAES_PKCS1_v_1_5'
-                    ]
-                ]
-            ]],
-            'AvailableProviderOperationDisplay' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'AvailableProviderOperation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/AvailableProviderOperationDisplay'],
-                'origin' => ['type' => 'string'],
-                'properties' => ['type' => 'object']
-            ]],
-            'AvailableProviderOperationList' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AvailableProviderOperation']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'BackupElement' => ['properties' => [
-                'elementId' => ['type' => 'string'],
-                'elementName' => ['type' => 'string'],
-                'elementType' => ['type' => 'string'],
-                'sizeInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'volumeName' => ['type' => 'string'],
-                'volumeContainerId' => ['type' => 'string'],
-                'volumeType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Tiered',
-                        'Archival',
-                        'LocallyPinned'
-                    ]
-                ]
-            ]],
-            'BackupProperties' => ['properties' => [
-                'createdOn' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'sizeInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'backupType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'LocalSnapshot',
-                        'CloudSnapshot'
-                    ]
-                ],
-                'backupJobCreationType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Adhoc',
-                        'BySchedule',
-                        'BySSM'
-                    ]
-                ],
-                'backupPolicyId' => ['type' => 'string'],
-                'ssmHostName' => ['type' => 'string'],
-                'elements' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/BackupElement']
-                ]
-            ]],
-            'Backup' => ['properties' => ['properties' => ['$ref' => '#/definitions/BackupProperties']]],
-            'BackupFilter' => ['properties' => [
-                'backupPolicyId' => ['type' => 'string'],
-                'volumeId' => ['type' => 'string'],
-                'createdTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'BackupList' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Backup']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'BackupPolicyProperties' => ['properties' => [
-                'volumeIds' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'nextBackupTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastBackupTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'schedulesCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'scheduledBackupStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Disabled',
-                        'Enabled'
-                    ]
-                ],
-                'backupPolicyCreationType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'BySaaS',
-                        'BySSM'
-                    ]
-                ],
-                'ssmHostName' => ['type' => 'string']
-            ]],
-            'BackupPolicy' => ['properties' => ['properties' => ['$ref' => '#/definitions/BackupPolicyProperties']]],
-            'BackupPolicyList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/BackupPolicy']
-            ]]],
-            'ScheduleRecurrence' => ['properties' => [
-                'recurrenceType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Minutes',
-                        'Hourly',
-                        'Daily',
-                        'Weekly'
-                    ]
-                ],
-                'recurrenceValue' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'weeklyDaysList' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => []
+            ],
+            'MetricDefinition' => [
+                'properties' => [
+                    'name' => ['$ref' => '#/definitions/MetricName'],
+                    'unit' => [
                         'type' => 'string',
                         'enum' => [
-                            'Sunday',
-                            'Monday',
-                            'Tuesday',
-                            'Wednesday',
-                            'Thursday',
-                            'Friday',
-                            'Saturday'
+                            'Bytes',
+                            'BytesPerSecond',
+                            'Count',
+                            'CountPerSecond',
+                            'Percent',
+                            'Seconds'
                         ]
-                    ]
-                ]
-            ]],
-            'BackupScheduleProperties' => ['properties' => [
-                'scheduleRecurrence' => ['$ref' => '#/definitions/ScheduleRecurrence'],
-                'backupType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'LocalSnapshot',
-                        'CloudSnapshot'
-                    ]
-                ],
-                'retentionCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'scheduleStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'lastSuccessfulRun' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'BackupSchedule' => ['properties' => ['properties' => ['$ref' => '#/definitions/BackupScheduleProperties']]],
-            'BackupScheduleList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/BackupSchedule']
-            ]]],
-            'Time' => ['properties' => [
-                'hours' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'minutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'seconds' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'BandwidthSchedule' => ['properties' => [
-                'start' => ['$ref' => '#/definitions/Time'],
-                'stop' => ['$ref' => '#/definitions/Time'],
-                'rateInMbps' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'days' => [
-                    'type' => 'array',
-                    'items' => [
+                    ],
+                    'primaryAggregationType' => [
                         'type' => 'string',
                         'enum' => [
-                            'Sunday',
-                            'Monday',
-                            'Tuesday',
-                            'Wednesday',
-                            'Thursday',
-                            'Friday',
-                            'Saturday'
+                            'Average',
+                            'Last',
+                            'Maximum',
+                            'Minimum',
+                            'None',
+                            'Total'
                         ]
-                    ]
-                ]
-            ]],
-            'BandwidthRateSettingProperties' => ['properties' => [
-                'schedules' => [
+                    ],
+                    'resourceId' => ['type' => 'string'],
+                    'metricAvailabilities' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MetricAvailablity']
+                    ],
+                    'dimensions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MetricDimension']
+                    ],
+                    'category' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MetricDefinitionList' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/BandwidthSchedule']
+                    'items' => ['$ref' => '#/definitions/MetricDefinition']
+                ]],
+                'required' => []
+            ],
+            'MetricNameFilter' => [
+                'properties' => ['value' => ['type' => 'string']],
+                'required' => []
+            ],
+            'MetricFilter' => [
+                'properties' => [
+                    'name' => ['$ref' => '#/definitions/MetricNameFilter'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'timeGrain' => ['type' => 'string'],
+                    'category' => ['type' => 'string'],
+                    'dimensions' => ['$ref' => '#/definitions/DimensionFilter']
                 ],
-                'volumeCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'BandwidthSetting' => ['properties' => ['properties' => ['$ref' => '#/definitions/BandwidthRateSettingProperties']]],
-            'BandwidthSettingList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/BandwidthSetting']
-            ]]],
-            'BaseModel' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'kind' => [
-                    'type' => 'string',
-                    'enum' => ['Series8000']
-                ]
-            ]],
-            'ChapSettings' => ['properties' => [
-                'initiatorUser' => ['type' => 'string'],
-                'initiatorSecret' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret'],
-                'targetUser' => ['type' => 'string'],
-                'targetSecret' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret']
-            ]],
-            'ClearAlertRequest' => ['properties' => [
-                'resolutionMessage' => ['type' => 'string'],
-                'alerts' => [
+                'required' => ['category']
+            ],
+            'Metrics' => [
+                'properties' => [
+                    'resourceId' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'timeGrain' => ['type' => 'string'],
+                    'primaryAggregation' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Average',
+                            'Last',
+                            'Maximum',
+                            'Minimum',
+                            'None',
+                            'Total'
+                        ]
+                    ],
+                    'name' => ['$ref' => '#/definitions/MetricName'],
+                    'dimensions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MetricDimension']
+                    ],
+                    'unit' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Bytes',
+                            'BytesPerSecond',
+                            'Count',
+                            'CountPerSecond',
+                            'Percent',
+                            'Seconds'
+                        ]
+                    ],
+                    'type' => ['type' => 'string'],
+                    'values' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MetricData']
+                    ]
+                ],
+                'required' => []
+            ],
+            'MetricList' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['type' => 'string']
+                    'items' => ['$ref' => '#/definitions/Metrics']
+                ]],
+                'required' => []
+            ],
+            'NicIPv4' => [
+                'properties' => [
+                    'ipv4Address' => ['type' => 'string'],
+                    'ipv4Netmask' => ['type' => 'string'],
+                    'ipv4Gateway' => ['type' => 'string'],
+                    'controller0Ipv4Address' => ['type' => 'string'],
+                    'controller1Ipv4Address' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'NicIPv6' => [
+                'properties' => [
+                    'ipv6Address' => ['type' => 'string'],
+                    'ipv6Prefix' => ['type' => 'string'],
+                    'ipv6Gateway' => ['type' => 'string'],
+                    'controller0Ipv6Address' => ['type' => 'string'],
+                    'controller1Ipv6Address' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'NetworkAdapters' => [
+                'properties' => [
+                    'interfaceId' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Data0',
+                            'Data1',
+                            'Data2',
+                            'Data3',
+                            'Data4',
+                            'Data5'
+                        ]
+                    ],
+                    'netInterfaceStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'isDefault' => ['type' => 'boolean'],
+                    'iscsiAndCloudStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Disabled',
+                            'IscsiEnabled',
+                            'CloudEnabled',
+                            'IscsiAndCloudEnabled'
+                        ]
+                    ],
+                    'speed' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'mode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'IPV4',
+                            'IPV6',
+                            'BOTH'
+                        ]
+                    ],
+                    'nicIpv4Settings' => ['$ref' => '#/definitions/NicIPv4'],
+                    'nicIpv6Settings' => ['$ref' => '#/definitions/NicIPv6']
+                ],
+                'required' => [
+                    'interfaceId',
+                    'netInterfaceStatus',
+                    'iscsiAndCloudStatus',
+                    'mode'
                 ]
-            ]],
-            'CloneRequest' => ['properties' => [
-                'targetDeviceId' => ['type' => 'string'],
-                'targetVolumeName' => ['type' => 'string'],
-                'targetAccessControlRecordIds' => [
+            ],
+            'NetworkAdapterList' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['type' => 'string']
+                    'items' => ['$ref' => '#/definitions/NetworkAdapters']
+                ]],
+                'required' => ['value']
+            ],
+            'WebproxySettings' => [
+                'properties' => [
+                    'connectionUri' => ['type' => 'string'],
+                    'authentication' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'None',
+                            'Basic',
+                            'NTLM'
+                        ]
+                    ],
+                    'username' => ['type' => 'string']
                 ],
-                'backupElement' => ['$ref' => '#/definitions/BackupElement']
-            ]],
-            'CloudAppliance' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'vnetName' => ['type' => 'string'],
-                'vnetRegion' => ['type' => 'string'],
-                'isVnetDnsConfigured' => ['type' => 'boolean'],
-                'isVnetExpressConfigured' => ['type' => 'boolean'],
-                'subnetName' => ['type' => 'string'],
-                'storageAccountName' => ['type' => 'string'],
-                'storageAccountType' => ['type' => 'string'],
-                'vmType' => ['type' => 'string'],
-                'vmImageName' => ['type' => 'string'],
-                'modelNumber' => ['type' => 'string']
-            ]],
-            'VmImage' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'version' => ['type' => 'string'],
-                'offer' => ['type' => 'string'],
-                'publisher' => ['type' => 'string'],
-                'sku' => ['type' => 'string']
-            ]],
-            'CloudApplianceConfigurationProperties' => ['properties' => [
-                'modelNumber' => ['type' => 'string'],
-                'cloudPlatform' => ['type' => 'string'],
-                'acsConfiguration' => ['$ref' => '#/definitions/AcsConfiguration'],
-                'supportedStorageAccountTypes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'supportedRegions' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'supportedVmTypes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'supportedVmImages' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VmImage']
+                'required' => [
+                    'authentication',
+                    'username'
                 ]
-            ]],
-            'CloudApplianceConfiguration' => ['properties' => ['properties' => ['$ref' => '#/definitions/CloudApplianceConfigurationProperties']]],
-            'CloudApplianceConfigurationList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/CloudApplianceConfiguration']
-            ]]],
-            'CloudApplianceSettings' => ['properties' => [
-                'serviceDataEncryptionKey' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret'],
-                'channelIntegrityKey' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret']
-            ]],
-            'SecondaryDNSSettings' => ['properties' => ['secondaryDnsServers' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'NetworkInterfaceData0Settings' => ['properties' => [
-                'controllerZeroIp' => ['type' => 'string'],
-                'controllerOneIp' => ['type' => 'string']
-            ]],
-            'ConfigureDeviceRequestProperties' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'currentDeviceName' => ['type' => 'string'],
-                'timeZone' => ['type' => 'string'],
-                'dnsSettings' => ['$ref' => '#/definitions/SecondaryDNSSettings'],
-                'networkInterfaceData0Settings' => ['$ref' => '#/definitions/NetworkInterfaceData0Settings']
-            ]],
-            'ConfigureDeviceRequest' => ['properties' => ['properties' => ['$ref' => '#/definitions/ConfigureDeviceRequestProperties']]],
-            'ControllerPowerStateChangeRequestProperties' => ['properties' => [
-                'action' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Start',
-                        'Restart',
-                        'Shutdown'
-                    ]
+            ],
+            'NetworkSettingsProperties' => [
+                'properties' => [
+                    'dnsSettings' => ['$ref' => '#/definitions/DNSSettings'],
+                    'networkAdapters' => ['$ref' => '#/definitions/NetworkAdapterList'],
+                    'webproxySettings' => ['$ref' => '#/definitions/WebproxySettings']
                 ],
-                'activeController' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Unknown',
-                        'None',
-                        'Controller0',
-                        'Controller1'
-                    ]
-                ],
-                'controller0State' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NotPresent',
-                        'PoweredOff',
-                        'Ok',
-                        'Recovering',
-                        'Warning',
-                        'Failure'
-                    ]
-                ],
-                'controller1State' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NotPresent',
-                        'PoweredOff',
-                        'Ok',
-                        'Recovering',
-                        'Warning',
-                        'Failure'
-                    ]
+                'required' => [
+                    'dnsSettings',
+                    'networkAdapters',
+                    'webproxySettings'
                 ]
-            ]],
-            'ControllerPowerStateChangeRequest' => ['properties' => ['properties' => ['$ref' => '#/definitions/ControllerPowerStateChangeRequestProperties']]],
-            'DataStatistics' => ['properties' => [
-                'totalData' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'processedData' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'cloudData' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'throughput' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ]
-            ]],
-            'DeviceDetails' => ['properties' => [
-                'endpointCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'volumeContainerCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'DeviceRolloverDetails' => ['properties' => [
-                'authorizationEligibility' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'InEligible',
-                        'Eligible'
-                    ]
-                ],
-                'authorizationStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Disabled',
-                        'Enabled'
-                    ]
-                ],
-                'inEligibilityReason' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'DeviceNotOnline',
-                        'NotSupportedAppliance',
-                        'RolloverPending'
-                    ]
-                ]
-            ]],
-            'DeviceProperties' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'activationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'culture' => ['type' => 'string'],
-                'deviceDescription' => ['type' => 'string'],
-                'deviceSoftwareVersion' => ['type' => 'string'],
-                'friendlySoftwareName' => ['type' => 'string'],
-                'deviceConfigurationStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Complete',
-                        'Pending'
-                    ]
-                ],
-                'targetIqn' => ['type' => 'string'],
-                'modelDescription' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Unknown',
-                        'Online',
-                        'Offline',
-                        'Deactivated',
-                        'RequiresAttention',
-                        'MaintenanceMode',
-                        'Creating',
-                        'Provisioning',
-                        'Deactivating',
-                        'Deleted',
-                        'ReadyToSetup'
-                    ]
-                ],
-                'serialNumber' => ['type' => 'string'],
-                'deviceType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Series8000VirtualAppliance',
-                        'Series8000PhysicalAppliance'
-                    ]
-                ],
-                'activeController' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Unknown',
-                        'None',
-                        'Controller0',
-                        'Controller1'
-                    ]
-                ],
-                'friendlySoftwareVersion' => ['type' => 'string'],
-                'availableLocalStorageInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'availableTieredStorageInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'provisionedTieredStorageInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'provisionedLocalStorageInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'provisionedVolumeSizeInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'usingStorageInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'totalTieredStorageInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'agentGroupVersion' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'networkInterfaceCardCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'deviceLocation' => ['type' => 'string'],
-                'virtualMachineApiType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Classic',
-                        'Arm'
-                    ]
-                ],
-                'details' => ['$ref' => '#/definitions/DeviceDetails'],
-                'rolloverDetails' => ['$ref' => '#/definitions/DeviceRolloverDetails']
-            ]],
-            'Device' => ['properties' => ['properties' => ['$ref' => '#/definitions/DeviceProperties']]],
-            'DeviceList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Device']
-            ]]],
-            'DevicePatchProperties' => ['properties' => ['deviceDescription' => ['type' => 'string']]],
-            'DevicePatch' => ['properties' => ['properties' => ['$ref' => '#/definitions/DevicePatchProperties']]],
-            'DimensionFilter' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'values' => ['type' => 'string']
-            ]],
-            'DNSSettings' => ['properties' => [
-                'primaryDnsServer' => ['type' => 'string'],
-                'primaryIpv6DnsServer' => ['type' => 'string'],
-                'secondaryDnsServers' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'secondaryIpv6DnsServers' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'EncryptionSettingsProperties' => ['properties' => [
-                'encryptionStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'keyRolloverStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Required',
-                        'NotRequired'
-                    ]
-                ]
-            ]],
-            'EncryptionSettings' => ['properties' => ['properties' => ['$ref' => '#/definitions/EncryptionSettingsProperties']]],
-            'FailoverRequest' => ['properties' => [
-                'targetDeviceId' => ['type' => 'string'],
-                'volumeContainers' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'VolumeFailoverMetadata' => ['properties' => [
-                'volumeId' => ['type' => 'string'],
-                'volumeType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Tiered',
-                        'Archival',
-                        'LocallyPinned'
-                    ]
-                ],
-                'sizeInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'backupCreatedDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'backupElementId' => ['type' => 'string'],
-                'backupId' => ['type' => 'string'],
-                'backupPolicyId' => ['type' => 'string']
-            ]],
-            'VolumeContainerFailoverMetadata' => ['properties' => [
-                'volumeContainerId' => ['type' => 'string'],
-                'volumes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VolumeFailoverMetadata']
-                ]
-            ]],
-            'FailoverSetEligibilityResult' => ['properties' => [
-                'isEligibleForFailover' => ['type' => 'boolean'],
-                'errorMessage' => ['type' => 'string']
-            ]],
-            'FailoverSet' => ['properties' => [
-                'volumeContainers' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VolumeContainerFailoverMetadata']
-                ],
-                'eligibilityResult' => ['$ref' => '#/definitions/FailoverSetEligibilityResult']
-            ]],
-            'FailoverSetsList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/FailoverSet']
-            ]]],
-            'TargetEligibilityErrorMessage' => ['properties' => [
-                'message' => ['type' => 'string'],
-                'resolution' => ['type' => 'string'],
-                'resultCode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'TargetAndSourceCannotBeSameError',
-                        'TargetIsNotOnlineError',
-                        'TargetSourceIncompatibleVersionError',
-                        'LocalToTieredVolumesConversionWarning',
-                        'TargetInsufficientCapacityError',
-                        'TargetInsufficientLocalVolumeMemoryError',
-                        'TargetInsufficientTieredVolumeMemoryError'
-                    ]
-                ]
-            ]],
-            'TargetEligibilityResult' => ['properties' => [
-                'eligibilityStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NotEligible',
-                        'Eligible'
-                    ]
-                ],
-                'messages' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TargetEligibilityErrorMessage']
-                ]
-            ]],
-            'FailoverTarget' => ['properties' => [
-                'deviceId' => ['type' => 'string'],
-                'deviceStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Unknown',
-                        'Online',
-                        'Offline',
-                        'Deactivated',
-                        'RequiresAttention',
-                        'MaintenanceMode',
-                        'Creating',
-                        'Provisioning',
-                        'Deactivating',
-                        'Deleted',
-                        'ReadyToSetup'
-                    ]
-                ],
-                'modelDescription' => ['type' => 'string'],
-                'deviceSoftwareVersion' => ['type' => 'string'],
-                'dataContainersCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'volumesCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'availableLocalStorageInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'availableTieredStorageInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'deviceLocation' => ['type' => 'string'],
-                'friendlyDeviceSoftwareVersion' => ['type' => 'string'],
-                'eligibilityResult' => ['$ref' => '#/definitions/TargetEligibilityResult']
-            ]],
-            'FailoverTargetsList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/FailoverTarget']
-            ]]],
-            'Feature' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NotAvailable',
-                        'UnsupportedDeviceVersion',
-                        'Supported'
-                    ]
-                ]
-            ]],
-            'FeatureFilter' => ['properties' => ['deviceId' => ['type' => 'string']]],
-            'FeatureList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Feature']
-            ]]],
-            'HardwareComponent' => ['properties' => [
-                'componentId' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Unknown',
-                        'NotPresent',
-                        'PoweredOff',
-                        'Ok',
-                        'Recovering',
-                        'Warning',
-                        'Failure'
-                    ]
-                ],
-                'statusDisplayName' => ['type' => 'string']
-            ]],
-            'HardwareComponentGroupProperties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'lastUpdatedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'components' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HardwareComponent']
-                ]
-            ]],
-            'HardwareComponentGroup' => ['properties' => ['properties' => ['$ref' => '#/definitions/HardwareComponentGroupProperties']]],
-            'HardwareComponentGroupList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/HardwareComponentGroup']
-            ]]],
-            'JobErrorItem' => ['properties' => [
-                'recommendations' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'JobErrorDetails' => ['properties' => [
-                'errorDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/JobErrorItem']
-                ],
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'JobStage' => ['properties' => [
-                'message' => ['type' => 'string'],
-                'stageStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Running',
-                        'Succeeded',
-                        'Failed',
-                        'Canceled'
-                    ]
-                ],
-                'detail' => ['type' => 'string'],
-                'errorCode' => ['type' => 'string']
-            ]],
-            'JobProperties' => ['properties' => [
-                'jobType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'ScheduledBackup',
-                        'ManualBackup',
-                        'RestoreBackup',
-                        'CloneVolume',
-                        'FailoverVolumeContainers',
-                        'CreateLocallyPinnedVolume',
-                        'ModifyVolume',
-                        'InstallUpdates',
-                        'SupportPackageLogs',
-                        'CreateCloudAppliance'
-                    ]
-                ],
-                'dataStats' => ['$ref' => '#/definitions/DataStatistics'],
-                'entityLabel' => ['type' => 'string'],
-                'entityType' => ['type' => 'string'],
-                'jobStages' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/JobStage']
-                ],
-                'deviceId' => ['type' => 'string'],
-                'isCancellable' => ['type' => 'boolean'],
-                'backupType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'LocalSnapshot',
-                        'CloudSnapshot'
-                    ]
-                ],
-                'sourceDeviceId' => ['type' => 'string'],
-                'backupPointInTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'Job' => ['properties' => [
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Running',
-                        'Succeeded',
-                        'Failed',
-                        'Canceled'
-                    ]
-                ],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'percentComplete' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'error' => ['$ref' => '#/definitions/JobErrorDetails'],
-                'properties' => ['$ref' => '#/definitions/JobProperties']
-            ]],
-            'JobFilter' => ['properties' => [
-                'status' => ['type' => 'string'],
-                'jobType' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'JobList' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Job']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Key' => ['properties' => ['activationKey' => ['type' => 'string']]],
-            'ListFailoverTargetsRequest' => ['properties' => ['volumeContainers' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'ManagerIntrinsicSettings' => ['properties' => ['type' => [
-                'type' => 'string',
-                'enum' => [
-                    'GardaV1',
-                    'HelsinkiV1'
-                ]
-            ]]],
-            'ManagerSku' => ['properties' => ['name' => ['type' => 'string']]],
-            'ManagerProperties' => ['properties' => [
-                'cisIntrinsicSettings' => ['$ref' => '#/definitions/ManagerIntrinsicSettings'],
-                'sku' => ['$ref' => '#/definitions/ManagerSku'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'Manager' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ManagerProperties'],
-                'etag' => ['type' => 'string']
-            ]],
-            'ManagerExtendedInfoProperties' => ['properties' => [
-                'version' => ['type' => 'string'],
-                'integrityKey' => ['type' => 'string'],
-                'encryptionKey' => ['type' => 'string'],
-                'encryptionKeyThumbprint' => ['type' => 'string'],
-                'portalCertificateThumbprint' => ['type' => 'string'],
-                'algorithm' => ['type' => 'string']
-            ]],
-            'ManagerExtendedInfo' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ManagerExtendedInfoProperties'],
-                'etag' => ['type' => 'string']
-            ]],
-            'ManagerList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Manager']
-            ]]],
-            'ManagerPatch' => ['properties' => ['tags' => [
-                'type' => 'object',
-                'additionalProperties' => ['type' => 'string']
-            ]]],
-            'MetricAvailablity' => ['properties' => [
-                'timeGrain' => ['type' => 'string'],
-                'retention' => ['type' => 'string']
-            ]],
-            'MetricData' => ['properties' => [
-                'timeStamp' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'sum' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'average' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'minimum' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'maximum' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ]
-            ]],
-            'MetricName' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'localizedValue' => ['type' => 'string']
-            ]],
-            'MetricDimension' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'MetricDefinition' => ['properties' => [
-                'name' => ['$ref' => '#/definitions/MetricName'],
-                'unit' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Bytes',
-                        'BytesPerSecond',
-                        'Count',
-                        'CountPerSecond',
-                        'Percent',
-                        'Seconds'
-                    ]
-                ],
-                'primaryAggregationType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Average',
-                        'Last',
-                        'Maximum',
-                        'Minimum',
-                        'None',
-                        'Total'
-                    ]
-                ],
-                'resourceId' => ['type' => 'string'],
-                'metricAvailabilities' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MetricAvailablity']
-                ],
-                'dimensions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MetricDimension']
-                ],
-                'category' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'MetricDefinitionList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/MetricDefinition']
-            ]]],
-            'MetricNameFilter' => ['properties' => ['value' => ['type' => 'string']]],
-            'MetricFilter' => ['properties' => [
-                'name' => ['$ref' => '#/definitions/MetricNameFilter'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'timeGrain' => ['type' => 'string'],
-                'category' => ['type' => 'string'],
-                'dimensions' => ['$ref' => '#/definitions/DimensionFilter']
-            ]],
-            'Metrics' => ['properties' => [
-                'resourceId' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'timeGrain' => ['type' => 'string'],
-                'primaryAggregation' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Average',
-                        'Last',
-                        'Maximum',
-                        'Minimum',
-                        'None',
-                        'Total'
-                    ]
-                ],
-                'name' => ['$ref' => '#/definitions/MetricName'],
-                'dimensions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MetricDimension']
-                ],
-                'unit' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Bytes',
-                        'BytesPerSecond',
-                        'Count',
-                        'CountPerSecond',
-                        'Percent',
-                        'Seconds'
-                    ]
-                ],
-                'type' => ['type' => 'string'],
-                'values' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MetricData']
-                ]
-            ]],
-            'MetricList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Metrics']
-            ]]],
-            'NicIPv4' => ['properties' => [
-                'ipv4Address' => ['type' => 'string'],
-                'ipv4Netmask' => ['type' => 'string'],
-                'ipv4Gateway' => ['type' => 'string'],
-                'controller0Ipv4Address' => ['type' => 'string'],
-                'controller1Ipv4Address' => ['type' => 'string']
-            ]],
-            'NicIPv6' => ['properties' => [
-                'ipv6Address' => ['type' => 'string'],
-                'ipv6Prefix' => ['type' => 'string'],
-                'ipv6Gateway' => ['type' => 'string'],
-                'controller0Ipv6Address' => ['type' => 'string'],
-                'controller1Ipv6Address' => ['type' => 'string']
-            ]],
-            'NetworkAdapters' => ['properties' => [
-                'interfaceId' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Data0',
-                        'Data1',
-                        'Data2',
-                        'Data3',
-                        'Data4',
-                        'Data5'
-                    ]
-                ],
-                'netInterfaceStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'isDefault' => ['type' => 'boolean'],
-                'iscsiAndCloudStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Disabled',
-                        'IscsiEnabled',
-                        'CloudEnabled',
-                        'IscsiAndCloudEnabled'
-                    ]
-                ],
-                'speed' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'mode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'IPV4',
-                        'IPV6',
-                        'BOTH'
-                    ]
-                ],
-                'nicIpv4Settings' => ['$ref' => '#/definitions/NicIPv4'],
-                'nicIpv6Settings' => ['$ref' => '#/definitions/NicIPv6']
-            ]],
-            'NetworkAdapterList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/NetworkAdapters']
-            ]]],
-            'WebproxySettings' => ['properties' => [
-                'connectionUri' => ['type' => 'string'],
-                'authentication' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'None',
-                        'Basic',
-                        'NTLM'
-                    ]
-                ],
-                'username' => ['type' => 'string']
-            ]],
-            'NetworkSettingsProperties' => ['properties' => [
-                'dnsSettings' => ['$ref' => '#/definitions/DNSSettings'],
-                'networkAdapters' => ['$ref' => '#/definitions/NetworkAdapterList'],
-                'webproxySettings' => ['$ref' => '#/definitions/WebproxySettings']
-            ]],
-            'NetworkSettings' => ['properties' => ['properties' => ['$ref' => '#/definitions/NetworkSettingsProperties']]],
-            'NetworkSettingsPatchProperties' => ['properties' => [
-                'dnsSettings' => ['$ref' => '#/definitions/DNSSettings'],
-                'networkAdapters' => ['$ref' => '#/definitions/NetworkAdapterList']
-            ]],
-            'NetworkSettingsPatch' => ['properties' => ['properties' => ['$ref' => '#/definitions/NetworkSettingsPatchProperties']]],
-            'PublicKey' => ['properties' => ['key' => ['type' => 'string']]],
-            'RemoteManagementSettings' => ['properties' => [
-                'remoteManagementMode' => [
+            ],
+            'NetworkSettings' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/NetworkSettingsProperties']],
+                'required' => ['properties']
+            ],
+            'NetworkSettingsPatchProperties' => [
+                'properties' => [
+                    'dnsSettings' => ['$ref' => '#/definitions/DNSSettings'],
+                    'networkAdapters' => ['$ref' => '#/definitions/NetworkAdapterList']
+                ],
+                'required' => []
+            ],
+            'NetworkSettingsPatch' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/NetworkSettingsPatchProperties']],
+                'required' => ['properties']
+            ],
+            'PublicKey' => [
+                'properties' => ['key' => ['type' => 'string']],
+                'required' => ['key']
+            ],
+            'RemoteManagementSettings' => [
+                'properties' => [
+                    'remoteManagementMode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unknown',
+                            'Disabled',
+                            'HttpsEnabled',
+                            'HttpsAndHttpEnabled'
+                        ]
+                    ],
+                    'remoteManagementCertificate' => ['type' => 'string']
+                ],
+                'required' => ['remoteManagementMode']
+            ],
+            'RemoteManagementSettingsPatch' => [
+                'properties' => ['remoteManagementMode' => [
                     'type' => 'string',
                     'enum' => [
                         'Unknown',
@@ -5718,190 +6207,256 @@ final class StorSimple8000SeriesManagementClient
                         'HttpsEnabled',
                         'HttpsAndHttpEnabled'
                     ]
-                ],
-                'remoteManagementCertificate' => ['type' => 'string']
-            ]],
-            'RemoteManagementSettingsPatch' => ['properties' => ['remoteManagementMode' => [
-                'type' => 'string',
-                'enum' => [
-                    'Unknown',
-                    'Disabled',
-                    'HttpsEnabled',
-                    'HttpsAndHttpEnabled'
-                ]
-            ]]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'SecuritySettingsProperties' => ['properties' => [
-                'remoteManagementSettings' => ['$ref' => '#/definitions/RemoteManagementSettings'],
-                'chapSettings' => ['$ref' => '#/definitions/ChapSettings']
-            ]],
-            'SecuritySettings' => ['properties' => ['properties' => ['$ref' => '#/definitions/SecuritySettingsProperties']]],
-            'SecuritySettingsPatchProperties' => ['properties' => [
-                'remoteManagementSettings' => ['$ref' => '#/definitions/RemoteManagementSettingsPatch'],
-                'deviceAdminPassword' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret'],
-                'snapshotPassword' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret'],
-                'chapSettings' => ['$ref' => '#/definitions/ChapSettings'],
-                'cloudApplianceSettings' => ['$ref' => '#/definitions/CloudApplianceSettings']
-            ]],
-            'SecuritySettingsPatch' => ['properties' => ['properties' => ['$ref' => '#/definitions/SecuritySettingsPatchProperties']]],
-            'SendTestAlertEmailRequest' => ['properties' => ['emailList' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'StorageAccountCredentialProperties' => ['properties' => [
-                'endPoint' => ['type' => 'string'],
-                'sslStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
+                ]],
+                'required' => ['remoteManagementMode']
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'accessKey' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret'],
-                'volumesCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => ['location']
+            ],
+            'SecuritySettingsProperties' => [
+                'properties' => [
+                    'remoteManagementSettings' => ['$ref' => '#/definitions/RemoteManagementSettings'],
+                    'chapSettings' => ['$ref' => '#/definitions/ChapSettings']
+                ],
+                'required' => [
+                    'remoteManagementSettings',
+                    'chapSettings'
                 ]
-            ]],
-            'StorageAccountCredential' => ['properties' => ['properties' => ['$ref' => '#/definitions/StorageAccountCredentialProperties']]],
-            'StorageAccountCredentialList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/StorageAccountCredential']
-            ]]],
-            'SymmetricEncryptedSecret' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'valueCertificateThumbprint' => ['type' => 'string'],
-                'encryptionAlgorithm' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'AES256',
-                        'RSAES_PKCS1_v_1_5'
-                    ]
-                ]
-            ]],
-            'TimeSettingsProperties' => ['properties' => [
-                'timeZone' => ['type' => 'string'],
-                'primaryTimeServer' => ['type' => 'string'],
-                'secondaryTimeServer' => [
+            ],
+            'SecuritySettings' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SecuritySettingsProperties']],
+                'required' => ['properties']
+            ],
+            'SecuritySettingsPatchProperties' => [
+                'properties' => [
+                    'remoteManagementSettings' => ['$ref' => '#/definitions/RemoteManagementSettingsPatch'],
+                    'deviceAdminPassword' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret'],
+                    'snapshotPassword' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret'],
+                    'chapSettings' => ['$ref' => '#/definitions/ChapSettings'],
+                    'cloudApplianceSettings' => ['$ref' => '#/definitions/CloudApplianceSettings']
+                ],
+                'required' => []
+            ],
+            'SecuritySettingsPatch' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SecuritySettingsPatchProperties']],
+                'required' => ['properties']
+            ],
+            'SendTestAlertEmailRequest' => [
+                'properties' => ['emailList' => [
                     'type' => 'array',
                     'items' => ['type' => 'string']
-                ]
-            ]],
-            'TimeSettings' => ['properties' => ['properties' => ['$ref' => '#/definitions/TimeSettingsProperties']]],
-            'UpdatesProperties' => ['properties' => [
-                'regularUpdatesAvailable' => ['type' => 'boolean'],
-                'maintenanceModeUpdatesAvailable' => ['type' => 'boolean'],
-                'isUpdateInProgress' => ['type' => 'boolean'],
-                'lastUpdatedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'Updates' => ['properties' => ['properties' => ['$ref' => '#/definitions/UpdatesProperties']]],
-            'VolumeProperties' => ['properties' => [
-                'sizeInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'volumeType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Tiered',
-                        'Archival',
-                        'LocallyPinned'
+                ]],
+                'required' => ['emailList']
+            ],
+            'StorageAccountCredentialProperties' => [
+                'properties' => [
+                    'endPoint' => ['type' => 'string'],
+                    'sslStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'accessKey' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret'],
+                    'volumesCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'volumeContainerId' => ['type' => 'string'],
-                'accessControlRecordIds' => [
+                'required' => [
+                    'endPoint',
+                    'sslStatus'
+                ]
+            ],
+            'StorageAccountCredential' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/StorageAccountCredentialProperties']],
+                'required' => ['properties']
+            ],
+            'StorageAccountCredentialList' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'volumeStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Online',
-                        'Offline'
+                    'items' => ['$ref' => '#/definitions/StorageAccountCredential']
+                ]],
+                'required' => ['value']
+            ],
+            'SymmetricEncryptedSecret' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'valueCertificateThumbprint' => ['type' => 'string'],
+                    'encryptionAlgorithm' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'AES256',
+                            'RSAES_PKCS1_v_1_5'
+                        ]
                     ]
                 ],
-                'operationStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Updating',
-                        'Deleting',
-                        'Restoring'
+                'required' => [
+                    'value',
+                    'encryptionAlgorithm'
+                ]
+            ],
+            'TimeSettingsProperties' => [
+                'properties' => [
+                    'timeZone' => ['type' => 'string'],
+                    'primaryTimeServer' => ['type' => 'string'],
+                    'secondaryTimeServer' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
                     ]
                 ],
-                'backupStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
+                'required' => ['timeZone']
+            ],
+            'TimeSettings' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/TimeSettingsProperties']],
+                'required' => ['properties']
+            ],
+            'UpdatesProperties' => [
+                'properties' => [
+                    'regularUpdatesAvailable' => ['type' => 'boolean'],
+                    'maintenanceModeUpdatesAvailable' => ['type' => 'boolean'],
+                    'isUpdateInProgress' => ['type' => 'boolean'],
+                    'lastUpdatedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'monitoringStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
+                'required' => []
+            ],
+            'Updates' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UpdatesProperties']],
+                'required' => ['properties']
+            ],
+            'VolumeProperties' => [
+                'properties' => [
+                    'sizeInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'volumeType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Tiered',
+                            'Archival',
+                            'LocallyPinned'
+                        ]
+                    ],
+                    'volumeContainerId' => ['type' => 'string'],
+                    'accessControlRecordIds' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'volumeStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Online',
+                            'Offline'
+                        ]
+                    ],
+                    'operationStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Updating',
+                            'Deleting',
+                            'Restoring'
+                        ]
+                    ],
+                    'backupStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'monitoringStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'backupPolicyIds' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
                     ]
                 ],
-                'backupPolicyIds' => [
+                'required' => [
+                    'sizeInBytes',
+                    'volumeType',
+                    'accessControlRecordIds',
+                    'volumeStatus',
+                    'monitoringStatus'
+                ]
+            ],
+            'Volume' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/VolumeProperties']],
+                'required' => ['properties']
+            ],
+            'VolumeContainerProperties' => [
+                'properties' => [
+                    'encryptionKey' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret'],
+                    'encryptionStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'volumeCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'storageAccountCredentialId' => ['type' => 'string'],
+                    'ownerShipStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Owned',
+                            'NotOwned'
+                        ]
+                    ],
+                    'bandWidthRateInMbps' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'bandwidthSettingId' => ['type' => 'string'],
+                    'totalCloudStorageUsageInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ]
+                ],
+                'required' => ['storageAccountCredentialId']
+            ],
+            'VolumeContainer' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/VolumeContainerProperties']],
+                'required' => ['properties']
+            ],
+            'VolumeContainerList' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'Volume' => ['properties' => ['properties' => ['$ref' => '#/definitions/VolumeProperties']]],
-            'VolumeContainerProperties' => ['properties' => [
-                'encryptionKey' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret'],
-                'encryptionStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'volumeCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'storageAccountCredentialId' => ['type' => 'string'],
-                'ownerShipStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Owned',
-                        'NotOwned'
-                    ]
-                ],
-                'bandWidthRateInMbps' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'bandwidthSettingId' => ['type' => 'string'],
-                'totalCloudStorageUsageInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ]
-            ]],
-            'VolumeContainer' => ['properties' => ['properties' => ['$ref' => '#/definitions/VolumeContainerProperties']]],
-            'VolumeContainerList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/VolumeContainer']
-            ]]],
-            'VolumeList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Volume']
-            ]]]
+                    'items' => ['$ref' => '#/definitions/VolumeContainer']
+                ]],
+                'required' => ['value']
+            ],
+            'VolumeList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Volume']
+                ]],
+                'required' => ['value']
+            ]
         ]
     ];
 }

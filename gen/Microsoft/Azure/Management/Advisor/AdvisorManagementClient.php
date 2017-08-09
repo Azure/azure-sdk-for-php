@@ -312,98 +312,131 @@ final class AdvisorManagementClient
             ]]
         ],
         'definitions' => [
-            'ShortDescription' => ['properties' => [
-                'problem' => ['type' => 'string'],
-                'solution' => ['type' => 'string']
-            ]],
-            'RecommendationProperties' => ['properties' => [
-                'category' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'HighAvailability',
-                        'Security',
-                        'Performance',
-                        'Cost'
-                    ]
+            'ShortDescription' => [
+                'properties' => [
+                    'problem' => ['type' => 'string'],
+                    'solution' => ['type' => 'string']
                 ],
-                'impact' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'High',
-                        'Medium',
-                        'Low'
-                    ]
-                ],
-                'impactedField' => ['type' => 'string'],
-                'impactedValue' => ['type' => 'string'],
-                'lastUpdated' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'metadata' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'object']
-                ],
-                'recommendationTypeId' => ['type' => 'string'],
-                'risk' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Error',
-                        'Warning',
-                        'None'
-                    ]
-                ],
-                'shortDescription' => ['$ref' => '#/definitions/ShortDescription'],
-                'suppressionIds' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => []
+            ],
+            'RecommendationProperties' => [
+                'properties' => [
+                    'category' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'enum' => [
+                            'HighAvailability',
+                            'Security',
+                            'Performance',
+                            'Cost'
+                        ]
+                    ],
+                    'impact' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'High',
+                            'Medium',
+                            'Low'
+                        ]
+                    ],
+                    'impactedField' => ['type' => 'string'],
+                    'impactedValue' => ['type' => 'string'],
+                    'lastUpdated' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'metadata' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'object']
+                    ],
+                    'recommendationTypeId' => ['type' => 'string'],
+                    'risk' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Error',
+                            'Warning',
+                            'None'
+                        ]
+                    ],
+                    'shortDescription' => ['$ref' => '#/definitions/ShortDescription'],
+                    'suppressionIds' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'format' => 'uuid'
+                        ]
                     ]
-                ]
-            ]],
-            'ResourceRecommendationBase' => ['properties' => ['properties' => ['$ref' => '#/definitions/RecommendationProperties']]],
-            'ResourceRecommendationBaseListResult' => ['properties' => [
-                'nextLink' => ['type' => 'string'],
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceRecommendationBase']
-                ]
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'OperationDisplayInfo' => ['properties' => [
-                'description' => ['type' => 'string'],
-                'operation' => ['type' => 'string'],
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string']
-            ]],
-            'OperationEntity' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/OperationDisplayInfo']
-            ]],
-            'OperationEntityListResult' => ['properties' => [
-                'nextLink' => ['type' => 'string'],
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/OperationEntity']
-                ]
-            ]],
-            'SuppressionProperties' => ['properties' => [
-                'suppressionId' => ['type' => 'string'],
-                'ttl' => ['type' => 'string']
-            ]],
-            'SuppressionContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/SuppressionProperties']]],
-            'SuppressionContractListResult' => ['properties' => [
-                'nextLink' => ['type' => 'string'],
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SuppressionContract']
-                ]
-            ]]
+                ],
+                'required' => []
+            ],
+            'ResourceRecommendationBase' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RecommendationProperties']],
+                'required' => []
+            ],
+            'ResourceRecommendationBaseListResult' => [
+                'properties' => [
+                    'nextLink' => ['type' => 'string'],
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceRecommendationBase']
+                    ]
+                ],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'OperationDisplayInfo' => [
+                'properties' => [
+                    'description' => ['type' => 'string'],
+                    'operation' => ['type' => 'string'],
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'OperationEntity' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/OperationDisplayInfo']
+                ],
+                'required' => []
+            ],
+            'OperationEntityListResult' => [
+                'properties' => [
+                    'nextLink' => ['type' => 'string'],
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/OperationEntity']
+                    ]
+                ],
+                'required' => []
+            ],
+            'SuppressionProperties' => [
+                'properties' => [
+                    'suppressionId' => ['type' => 'string'],
+                    'ttl' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SuppressionContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SuppressionProperties']],
+                'required' => []
+            ],
+            'SuppressionContractListResult' => [
+                'properties' => [
+                    'nextLink' => ['type' => 'string'],
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SuppressionContract']
+                    ]
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

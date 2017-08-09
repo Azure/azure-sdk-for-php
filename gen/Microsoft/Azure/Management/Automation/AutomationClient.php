@@ -4690,1491 +4690,1984 @@ final class AutomationClient
             ]]
         ],
         'definitions' => [
-            'ErrorResponse' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'UsageCounterName' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'localizedValue' => ['type' => 'string']
-            ]],
-            'Usage' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['$ref' => '#/definitions/UsageCounterName'],
-                'unit' => ['type' => 'string'],
-                'currentValue' => [
-                    'type' => 'number',
-                    'format' => 'double'
+            'ErrorResponse' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
                 ],
-                'limit' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'UsageCounterName' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'localizedValue' => ['type' => 'string']
                 ],
-                'throttleStatus' => ['type' => 'string']
-            ]],
-            'UsageListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Usage']
-            ]]],
-            'Statistics' => ['properties' => [
-                'counterProperty' => ['type' => 'string'],
-                'counterValue' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'Usage' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['$ref' => '#/definitions/UsageCounterName'],
+                    'unit' => ['type' => 'string'],
+                    'currentValue' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'limit' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'throttleStatus' => ['type' => 'string']
                 ],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'id' => ['type' => 'string']
-            ]],
-            'StatisticsListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Statistics']
-            ]]],
-            'RunbookParameter' => ['properties' => [
-                'type' => ['type' => 'string'],
-                'isMandatory' => ['type' => 'boolean'],
-                'position' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'defaultValue' => ['type' => 'string']
-            ]],
-            'ContentHash' => ['properties' => [
-                'algorithm' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'ContentLink' => ['properties' => [
-                'uri' => ['type' => 'string'],
-                'contentHash' => ['$ref' => '#/definitions/ContentHash'],
-                'version' => ['type' => 'string']
-            ]],
-            'RunbookDraft' => ['properties' => [
-                'inEdit' => ['type' => 'boolean'],
-                'draftContentLink' => ['$ref' => '#/definitions/ContentLink'],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'parameters' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/RunbookParameter']
-                ],
-                'outputTypes' => [
+                'required' => []
+            ],
+            'UsageListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['type' => 'string']
+                    'items' => ['$ref' => '#/definitions/Usage']
+                ]],
+                'required' => []
+            ],
+            'Statistics' => [
+                'properties' => [
+                    'counterProperty' => ['type' => 'string'],
+                    'counterValue' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'id' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'StatisticsListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Statistics']
+                ]],
+                'required' => []
+            ],
+            'RunbookParameter' => [
+                'properties' => [
+                    'type' => ['type' => 'string'],
+                    'isMandatory' => ['type' => 'boolean'],
+                    'position' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'defaultValue' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ContentHash' => [
+                'properties' => [
+                    'algorithm' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => [
+                    'algorithm',
+                    'value'
                 ]
-            ]],
-            'RunbookProperties' => ['properties' => [
-                'runbookType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Script',
-                        'Graph',
-                        'PowerShellWorkflow',
-                        'PowerShell',
-                        'GraphPowerShellWorkflow',
-                        'GraphPowerShell'
+            ],
+            'ContentLink' => [
+                'properties' => [
+                    'uri' => ['type' => 'string'],
+                    'contentHash' => ['$ref' => '#/definitions/ContentHash'],
+                    'version' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RunbookDraft' => [
+                'properties' => [
+                    'inEdit' => ['type' => 'boolean'],
+                    'draftContentLink' => ['$ref' => '#/definitions/ContentLink'],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'parameters' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/RunbookParameter']
+                    ],
+                    'outputTypes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
                     ]
                 ],
-                'publishContentLink' => ['$ref' => '#/definitions/ContentLink'],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'New',
-                        'Edit',
-                        'Published'
-                    ]
+                'required' => []
+            ],
+            'RunbookProperties' => [
+                'properties' => [
+                    'runbookType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Script',
+                            'Graph',
+                            'PowerShellWorkflow',
+                            'PowerShell',
+                            'GraphPowerShellWorkflow',
+                            'GraphPowerShell'
+                        ]
+                    ],
+                    'publishContentLink' => ['$ref' => '#/definitions/ContentLink'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'New',
+                            'Edit',
+                            'Published'
+                        ]
+                    ],
+                    'logVerbose' => ['type' => 'boolean'],
+                    'logProgress' => ['type' => 'boolean'],
+                    'logActivityTrace' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'jobCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'parameters' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/RunbookParameter']
+                    ],
+                    'outputTypes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'draft' => ['$ref' => '#/definitions/RunbookDraft'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => ['Succeeded']
+                    ],
+                    'lastModifiedBy' => ['type' => 'string'],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'description' => ['type' => 'string']
                 ],
-                'logVerbose' => ['type' => 'boolean'],
-                'logProgress' => ['type' => 'boolean'],
-                'logActivityTrace' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'Runbook' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/RunbookProperties'],
+                    'etag' => ['type' => 'string']
                 ],
-                'jobCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'ModuleErrorInfo' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
                 ],
-                'parameters' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/RunbookParameter']
+                'required' => []
+            ],
+            'ModuleProperties' => [
+                'properties' => [
+                    'isGlobal' => ['type' => 'boolean'],
+                    'version' => ['type' => 'string'],
+                    'sizeInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'activityCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Created',
+                            'Creating',
+                            'StartingImportModuleRunbook',
+                            'RunningImportModuleRunbook',
+                            'ContentRetrieved',
+                            'ContentDownloaded',
+                            'ContentValidated',
+                            'ConnectionTypeImported',
+                            'ContentStored',
+                            'ModuleDataStored',
+                            'ActivitiesStored',
+                            'ModuleImportRunbookComplete',
+                            'Succeeded',
+                            'Failed',
+                            'Cancelled',
+                            'Updating'
+                        ]
+                    ],
+                    'contentLink' => ['$ref' => '#/definitions/ContentLink'],
+                    'error' => ['$ref' => '#/definitions/ModuleErrorInfo'],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'description' => ['type' => 'string']
                 ],
-                'outputTypes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'Module' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ModuleProperties'],
+                    'etag' => ['type' => 'string']
                 ],
-                'draft' => ['$ref' => '#/definitions/RunbookDraft'],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => ['Succeeded']
+                'required' => []
+            ],
+            'DscNodeConfigurationAssociationProperty' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'DscNode' => [
+                'properties' => [
+                    'lastSeen' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'registrationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'ip' => ['type' => 'string'],
+                    'accountId' => ['type' => 'string'],
+                    'nodeConfiguration' => ['$ref' => '#/definitions/DscNodeConfigurationAssociationProperty'],
+                    'status' => ['type' => 'string'],
+                    'nodeId' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
                 ],
-                'lastModifiedBy' => ['type' => 'string'],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'ContentSource' => [
+                'properties' => [
+                    'hash' => ['$ref' => '#/definitions/ContentHash'],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'embeddedContent',
+                            'uri'
+                        ]
+                    ],
+                    'value' => ['type' => 'string'],
+                    'version' => ['type' => 'string']
                 ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'DscConfigurationParameter' => [
+                'properties' => [
+                    'type' => ['type' => 'string'],
+                    'isMandatory' => ['type' => 'boolean'],
+                    'position' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'defaultValue' => ['type' => 'string']
                 ],
-                'description' => ['type' => 'string']
-            ]],
-            'Runbook' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/RunbookProperties'],
-                'etag' => ['type' => 'string']
-            ]],
-            'ModuleErrorInfo' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'ModuleProperties' => ['properties' => [
-                'isGlobal' => ['type' => 'boolean'],
-                'version' => ['type' => 'string'],
-                'sizeInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'DscConfigurationProperties' => [
+                'properties' => [
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => ['Succeeded']
+                    ],
+                    'jobCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'parameters' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/DscConfigurationParameter']
+                    ],
+                    'source' => ['$ref' => '#/definitions/ContentSource'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'New',
+                            'Edit',
+                            'Published'
+                        ]
+                    ],
+                    'logVerbose' => ['type' => 'boolean'],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'description' => ['type' => 'string']
                 ],
-                'activityCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'DscConfiguration' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/DscConfigurationProperties'],
+                    'etag' => ['type' => 'string']
                 ],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Created',
-                        'Creating',
-                        'StartingImportModuleRunbook',
-                        'RunningImportModuleRunbook',
-                        'ContentRetrieved',
-                        'ContentDownloaded',
-                        'ContentValidated',
-                        'ConnectionTypeImported',
-                        'ContentStored',
-                        'ModuleDataStored',
-                        'ActivitiesStored',
-                        'ModuleImportRunbookComplete',
-                        'Succeeded',
-                        'Failed',
-                        'Cancelled',
-                        'Updating'
-                    ]
-                ],
-                'contentLink' => ['$ref' => '#/definitions/ContentLink'],
-                'error' => ['$ref' => '#/definitions/ModuleErrorInfo'],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'description' => ['type' => 'string']
-            ]],
-            'Module' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ModuleProperties'],
-                'etag' => ['type' => 'string']
-            ]],
-            'DscNodeConfigurationAssociationProperty' => ['properties' => ['name' => ['type' => 'string']]],
-            'DscNode' => ['properties' => [
-                'lastSeen' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'registrationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'ip' => ['type' => 'string'],
-                'accountId' => ['type' => 'string'],
-                'nodeConfiguration' => ['$ref' => '#/definitions/DscNodeConfigurationAssociationProperty'],
-                'status' => ['type' => 'string'],
-                'nodeId' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'ContentSource' => ['properties' => [
-                'hash' => ['$ref' => '#/definitions/ContentHash'],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'embeddedContent',
-                        'uri'
-                    ]
-                ],
-                'value' => ['type' => 'string'],
-                'version' => ['type' => 'string']
-            ]],
-            'DscConfigurationParameter' => ['properties' => [
-                'type' => ['type' => 'string'],
-                'isMandatory' => ['type' => 'boolean'],
-                'position' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'defaultValue' => ['type' => 'string']
-            ]],
-            'DscConfigurationProperties' => ['properties' => [
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => ['Succeeded']
-                ],
-                'jobCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'parameters' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/DscConfigurationParameter']
-                ],
-                'source' => ['$ref' => '#/definitions/ContentSource'],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'New',
-                        'Edit',
-                        'Published'
-                    ]
-                ],
-                'logVerbose' => ['type' => 'boolean'],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'description' => ['type' => 'string']
-            ]],
-            'DscConfiguration' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/DscConfigurationProperties'],
-                'etag' => ['type' => 'string']
-            ]],
-            'Sku' => ['properties' => [
-                'name' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Free',
-                        'Basic'
-                    ]
-                ],
-                'family' => ['type' => 'string'],
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'AutomationAccountProperties' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'lastModifiedBy' => ['type' => 'string'],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Ok',
-                        'Unavailable',
-                        'Suspended'
-                    ]
-                ],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'description' => ['type' => 'string']
-            ]],
-            'AutomationAccount' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/AutomationAccountProperties'],
-                'etag' => ['type' => 'string']
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'AutomationAccountListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AutomationAccount']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Operation_display' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/Operation_display']
-            ]],
-            'OperationListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Operation']
-            ]]],
-            'AutomationAccountCreateOrUpdateProperties' => ['properties' => ['sku' => ['$ref' => '#/definitions/Sku']]],
-            'AutomationAccountCreateOrUpdateParameters' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/AutomationAccountCreateOrUpdateProperties'],
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'AutomationAccountUpdateProperties' => ['properties' => ['sku' => ['$ref' => '#/definitions/Sku']]],
-            'AutomationAccountUpdateParameters' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/AutomationAccountUpdateProperties'],
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'CertificateProperties' => ['properties' => [
-                'thumbprint' => ['type' => 'string'],
-                'expiryTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'isExportable' => ['type' => 'boolean'],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'description' => ['type' => 'string']
-            ]],
-            'Certificate' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/CertificateProperties']
-            ]],
-            'CertificateListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Certificate']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'CertificateUpdateProperties' => ['properties' => ['description' => ['type' => 'string']]],
-            'CertificateUpdateParameters' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/CertificateUpdateProperties']
-            ]],
-            'CertificateCreateOrUpdateProperties' => ['properties' => [
-                'base64Value' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'thumbprint' => ['type' => 'string'],
-                'isExportable' => ['type' => 'boolean']
-            ]],
-            'CertificateCreateOrUpdateParameters' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/CertificateCreateOrUpdateProperties']
-            ]],
-            'ConnectionTypeAssociationProperty' => ['properties' => ['name' => ['type' => 'string']]],
-            'ConnectionProperties' => ['properties' => [
-                'connectionType' => ['$ref' => '#/definitions/ConnectionTypeAssociationProperty'],
-                'fieldDefinitionValues' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'description' => ['type' => 'string']
-            ]],
-            'Connection' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ConnectionProperties']
-            ]],
-            'ConnectionListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Connection']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ConnectionUpdateProperties' => ['properties' => [
-                'description' => ['type' => 'string'],
-                'fieldDefinitionValues' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ConnectionUpdateParameters' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ConnectionUpdateProperties']
-            ]],
-            'ConnectionCreateOrUpdateProperties' => ['properties' => [
-                'description' => ['type' => 'string'],
-                'connectionType' => ['$ref' => '#/definitions/ConnectionTypeAssociationProperty'],
-                'fieldDefinitionValues' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ConnectionCreateOrUpdateParameters' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ConnectionCreateOrUpdateProperties']
-            ]],
-            'FieldDefinition' => ['properties' => [
-                'isEncrypted' => ['type' => 'boolean'],
-                'isOptional' => ['type' => 'boolean'],
-                'type' => ['type' => 'string']
-            ]],
-            'ConnectionTypeProperties' => ['properties' => [
-                'isGlobal' => ['type' => 'boolean'],
-                'fieldDefinitions' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/FieldDefinition']
-                ],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'description' => ['type' => 'string']
-            ]],
-            'ConnectionType' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ConnectionTypeProperties']
-            ]],
-            'ConnectionTypeListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ConnectionType']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ConnectionTypeCreateOrUpdateProperties' => ['properties' => [
-                'isGlobal' => ['type' => 'boolean'],
-                'fieldDefinitions' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/FieldDefinition']
-                ]
-            ]],
-            'ConnectionTypeCreateOrUpdateParameters' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ConnectionTypeCreateOrUpdateProperties']
-            ]],
-            'CredentialProperties' => ['properties' => [
-                'userName' => ['type' => 'string'],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'description' => ['type' => 'string']
-            ]],
-            'Credential' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/CredentialProperties']
-            ]],
-            'CredentialListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Credential']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'CredentialUpdateProperties' => ['properties' => [
-                'userName' => ['type' => 'string'],
-                'password' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'CredentialUpdateParameters' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/CredentialUpdateProperties']
-            ]],
-            'CredentialCreateOrUpdateProperties' => ['properties' => [
-                'userName' => ['type' => 'string'],
-                'password' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'CredentialCreateOrUpdateParameters' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/CredentialCreateOrUpdateProperties']
-            ]],
-            'ActivityParameter' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'isMandatory' => ['type' => 'boolean'],
-                'isDynamic' => ['type' => 'boolean'],
-                'position' => ['type' => 'boolean'],
-                'valueFromPipeline' => ['type' => 'boolean'],
-                'valueFromPipelineByPropertyName' => ['type' => 'boolean'],
-                'valueFromRemainingArguments' => ['type' => 'boolean']
-            ]],
-            'ActivityParameterSet' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'parameters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ActivityParameter']
-                ]
-            ]],
-            'ActivityOutputType' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ActivityProperties' => ['properties' => [
-                'definition' => ['type' => 'string'],
-                'parameterSets' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ActivityParameterSet']
-                ],
-                'outputTypes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ActivityOutputType']
-                ],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'description' => ['type' => 'string']
-            ]],
-            'Activity' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ActivityProperties']
-            ]],
-            'ActivityListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Activity']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'AdvancedScheduleMonthlyOccurrence' => ['properties' => [
-                'occurrence' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'day' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Monday',
-                        'Tuesday',
-                        'Wednesday',
-                        'Thursday',
-                        'Friday',
-                        'Saturday',
-                        'Sunday'
-                    ]
-                ]
-            ]],
-            'AdvancedSchedule' => ['properties' => [
-                'weekDays' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'monthDays' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => []
+            ],
+            'Sku' => [
+                'properties' => [
+                    'name' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Free',
+                            'Basic'
+                        ]
+                    ],
+                    'family' => ['type' => 'string'],
+                    'capacity' => [
                         'type' => 'integer',
                         'format' => 'int32'
                     ]
                 ],
-                'monthlyOccurrences' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AdvancedScheduleMonthlyOccurrence']
-                ]
-            ]],
-            'AgentRegistrationKeys' => ['properties' => [
-                'primary' => ['type' => 'string'],
-                'secondary' => ['type' => 'string']
-            ]],
-            'AgentRegistration' => ['properties' => [
-                'dscMetaConfiguration' => ['type' => 'string'],
-                'endpoint' => ['type' => 'string'],
-                'keys' => ['$ref' => '#/definitions/AgentRegistrationKeys'],
-                'id' => ['type' => 'string']
-            ]],
-            'AgentRegistrationRegenerateKeyParameter' => ['properties' => [
-                'keyName' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Primary',
-                        'Secondary'
+                'required' => ['name']
+            ],
+            'AutomationAccountProperties' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'lastModifiedBy' => ['type' => 'string'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Ok',
+                            'Unavailable',
+                            'Suspended'
+                        ]
+                    ],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AutomationAccount' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/AutomationAccountProperties'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'DscConfigurationAssociationProperty' => ['properties' => ['name' => ['type' => 'string']]],
-            'DscCompilationJobCreateProperties' => ['properties' => [
-                'configuration' => ['$ref' => '#/definitions/DscConfigurationAssociationProperty'],
-                'parameters' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'DscCompilationJobCreateParameters' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/DscCompilationJobCreateProperties'],
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'DscCompilationJobProperties' => ['properties' => [
-                'configuration' => ['$ref' => '#/definitions/DscConfigurationAssociationProperty'],
-                'startedBy' => ['type' => 'string'],
-                'jobId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
+                'required' => ['location']
+            ],
+            'AutomationAccountListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AutomationAccount']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'Operation_display' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string']
                 ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'New',
-                        'Activating',
-                        'Running',
-                        'Completed',
-                        'Failed',
-                        'Stopped',
-                        'Blocked',
-                        'Suspended',
-                        'Disconnected',
-                        'Suspending',
-                        'Stopping',
-                        'Resuming',
-                        'Removing'
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/Operation_display']
+                ],
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Operation']
+                ]],
+                'required' => []
+            ],
+            'AutomationAccountCreateOrUpdateProperties' => [
+                'properties' => ['sku' => ['$ref' => '#/definitions/Sku']],
+                'required' => []
+            ],
+            'AutomationAccountCreateOrUpdateParameters' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/AutomationAccountCreateOrUpdateProperties'],
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'statusDetails' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'exception' => ['type' => 'string'],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastStatusModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'parameters' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'DscCompilationJob' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/DscCompilationJobProperties']
-            ]],
-            'DscCompilationJobListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DscCompilationJob']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'DscConfigurationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DscConfiguration']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'DscConfigurationCreateOrUpdateProperties' => ['properties' => [
-                'logVerbose' => ['type' => 'boolean'],
-                'logProgress' => ['type' => 'boolean'],
-                'source' => ['$ref' => '#/definitions/ContentSource'],
-                'parameters' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/DscConfigurationParameter']
-                ],
-                'description' => ['type' => 'string']
-            ]],
-            'DscConfigurationCreateOrUpdateParameters' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/DscConfigurationCreateOrUpdateProperties'],
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'DscMetaConfiguration' => ['properties' => [
-                'configurationModeFrequencyMins' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'rebootNodeIfNeeded' => ['type' => 'boolean'],
-                'configurationMode' => ['type' => 'string'],
-                'actionAfterReboot' => ['type' => 'string'],
-                'certificateId' => ['type' => 'string'],
-                'refreshFrequencyMins' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'allowModuleOverwrite' => ['type' => 'boolean']
-            ]],
-            'DscNodeConfigurationCreateOrUpdateParameters' => ['properties' => [
-                'source' => ['$ref' => '#/definitions/ContentSource'],
-                'name' => ['type' => 'string'],
-                'configuration' => ['$ref' => '#/definitions/DscConfigurationAssociationProperty']
-            ]],
-            'DscNodeConfiguration' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'configuration' => ['$ref' => '#/definitions/DscConfigurationAssociationProperty'],
-                'id' => ['type' => 'string']
-            ]],
-            'DscNodeConfigurationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DscNodeConfiguration']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'DscNodeListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DscNode']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'DscNodeUpdateParameters' => ['properties' => [
-                'nodeId' => ['type' => 'string'],
-                'nodeConfiguration' => ['$ref' => '#/definitions/DscNodeConfigurationAssociationProperty']
-            ]],
-            'DscReportError' => ['properties' => [
-                'errorSource' => ['type' => 'string'],
-                'resourceId' => ['type' => 'string'],
-                'errorCode' => ['type' => 'string'],
-                'errorMessage' => ['type' => 'string'],
-                'locale' => ['type' => 'string'],
-                'errorDetails' => ['type' => 'string']
-            ]],
-            'DscReportResourceNavigation' => ['properties' => ['resourceId' => ['type' => 'string']]],
-            'DscReportResource' => ['properties' => [
-                'resourceId' => ['type' => 'string'],
-                'sourceInfo' => ['type' => 'string'],
-                'dependsOn' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DscReportResourceNavigation']
-                ],
-                'moduleName' => ['type' => 'string'],
-                'moduleVersion' => ['type' => 'string'],
-                'resourceName' => ['type' => 'string'],
-                'error' => ['type' => 'string'],
-                'status' => ['type' => 'string'],
-                'durationInSeconds' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'startDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'DscNodeReport' => ['properties' => [
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'type' => ['type' => 'string'],
-                'reportId' => ['type' => 'string'],
-                'status' => ['type' => 'string'],
-                'refreshMode' => ['type' => 'string'],
-                'rebootRequested' => ['type' => 'string'],
-                'reportFormatVersion' => ['type' => 'string'],
-                'configurationVersion' => ['type' => 'string'],
-                'id' => ['type' => 'string'],
-                'errors' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DscReportError']
-                ],
-                'resources' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DscReportResource']
-                ],
-                'metaConfiguration' => ['$ref' => '#/definitions/DscMetaConfiguration'],
-                'hostName' => ['type' => 'string'],
-                'iPV4Addresses' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'iPV6Addresses' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'numberOfResources' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'rawErrors' => ['type' => 'string']
-            ]],
-            'DscNodeReportListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DscNodeReport']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'HybridRunbookWorker' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'ip' => ['type' => 'string'],
-                'registrationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'RunAsCredentialAssociationProperty' => ['properties' => ['name' => ['type' => 'string']]],
-            'HybridRunbookWorkerGroup' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'hybridRunbookWorkers' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HybridRunbookWorker']
-                ],
-                'credential' => ['$ref' => '#/definitions/RunAsCredentialAssociationProperty']
-            ]],
-            'HybridRunbookWorkerGroupsListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HybridRunbookWorkerGroup']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'HybridRunbookWorkerGroupUpdateParameters' => ['properties' => ['credential' => ['$ref' => '#/definitions/RunAsCredentialAssociationProperty']]],
-            'RunbookAssociationProperty' => ['properties' => ['name' => ['type' => 'string']]],
-            'JobProperties' => ['properties' => [
-                'runbook' => ['$ref' => '#/definitions/RunbookAssociationProperty'],
-                'startedBy' => ['type' => 'string'],
-                'runOn' => ['type' => 'string'],
-                'jobId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'New',
-                        'Activating',
-                        'Running',
-                        'Completed',
-                        'Failed',
-                        'Stopped',
-                        'Blocked',
-                        'Suspended',
-                        'Disconnected',
-                        'Suspending',
-                        'Stopping',
-                        'Resuming',
-                        'Removing'
+                'required' => []
+            ],
+            'AutomationAccountUpdateProperties' => [
+                'properties' => ['sku' => ['$ref' => '#/definitions/Sku']],
+                'required' => []
+            ],
+            'AutomationAccountUpdateParameters' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/AutomationAccountUpdateProperties'],
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'statusDetails' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => ['properties']
+            ],
+            'CertificateProperties' => [
+                'properties' => [
+                    'thumbprint' => ['type' => 'string'],
+                    'expiryTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'isExportable' => ['type' => 'boolean'],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'description' => ['type' => 'string']
                 ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'Certificate' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/CertificateProperties']
                 ],
-                'exception' => ['type' => 'string'],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'CertificateListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Certificate']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'lastStatusModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'CertificateUpdateProperties' => [
+                'properties' => ['description' => ['type' => 'string']],
+                'required' => []
+            ],
+            'CertificateUpdateParameters' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/CertificateUpdateProperties']
                 ],
-                'parameters' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => ['name']
+            ],
+            'CertificateCreateOrUpdateProperties' => [
+                'properties' => [
+                    'base64Value' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'thumbprint' => ['type' => 'string'],
+                    'isExportable' => ['type' => 'boolean']
+                ],
+                'required' => ['base64Value']
+            ],
+            'CertificateCreateOrUpdateParameters' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/CertificateCreateOrUpdateProperties']
+                ],
+                'required' => [
+                    'name',
+                    'properties'
                 ]
-            ]],
-            'Job' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/JobProperties']
-            ]],
-            'JobCreateProperties' => ['properties' => [
-                'runbook' => ['$ref' => '#/definitions/RunbookAssociationProperty'],
-                'parameters' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+            ],
+            'ConnectionTypeAssociationProperty' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'ConnectionProperties' => [
+                'properties' => [
+                    'connectionType' => ['$ref' => '#/definitions/ConnectionTypeAssociationProperty'],
+                    'fieldDefinitionValues' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'description' => ['type' => 'string']
                 ],
-                'runOn' => ['type' => 'string']
-            ]],
-            'JobCreateParameters' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/JobCreateProperties'],
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'JobListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Job']
+                'required' => []
+            ],
+            'Connection' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ConnectionProperties']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ScheduleAssociationProperty' => ['properties' => ['name' => ['type' => 'string']]],
-            'JobScheduleCreateProperties' => ['properties' => [
-                'schedule' => ['$ref' => '#/definitions/ScheduleAssociationProperty'],
-                'runbook' => ['$ref' => '#/definitions/RunbookAssociationProperty'],
-                'runOn' => ['type' => 'string'],
-                'parameters' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'JobScheduleCreateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/JobScheduleCreateProperties']]],
-            'JobScheduleProperties' => ['properties' => [
-                'jobScheduleId' => ['type' => 'string'],
-                'schedule' => ['$ref' => '#/definitions/ScheduleAssociationProperty'],
-                'runbook' => ['$ref' => '#/definitions/RunbookAssociationProperty'],
-                'runOn' => ['type' => 'string'],
-                'parameters' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'JobSchedule' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/JobScheduleProperties']
-            ]],
-            'JobScheduleListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/JobSchedule']
+                'required' => []
+            ],
+            'ConnectionListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Connection']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'JobStreamProperties' => ['properties' => [
-                'jobStreamId' => ['type' => 'string'],
-                'time' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'streamType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Progress',
-                        'Output',
-                        'Warning',
-                        'Error',
-                        'Debug',
-                        'Verbose',
-                        'Any'
+                'required' => []
+            ],
+            'ConnectionUpdateProperties' => [
+                'properties' => [
+                    'description' => ['type' => 'string'],
+                    'fieldDefinitionValues' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'streamText' => ['type' => 'string'],
-                'summary' => ['type' => 'string'],
-                'value' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'object']
-                ]
-            ]],
-            'JobStream' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/JobStreamProperties']
-            ]],
-            'JobStreamListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/JobStream']
+                'required' => []
+            ],
+            'ConnectionUpdateParameters' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ConnectionUpdateProperties']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ModuleCreateOrUpdateProperties' => ['properties' => ['contentLink' => ['$ref' => '#/definitions/ContentLink']]],
-            'ModuleCreateOrUpdateParameters' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ModuleCreateOrUpdateProperties'],
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ModuleListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Module']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ModuleUpdateProperties' => ['properties' => ['contentLink' => ['$ref' => '#/definitions/ContentLink']]],
-            'ModuleUpdateParameters' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ModuleUpdateProperties'],
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'RunbookDraftUndoEditResult' => ['properties' => [
-                'statusCode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Continue',
-                        'SwitchingProtocols',
-                        'OK',
-                        'Created',
-                        'Accepted',
-                        'NonAuthoritativeInformation',
-                        'NoContent',
-                        'ResetContent',
-                        'PartialContent',
-                        'MultipleChoices',
-                        'Ambiguous',
-                        'MovedPermanently',
-                        'Moved',
-                        'Found',
-                        'Redirect',
-                        'SeeOther',
-                        'RedirectMethod',
-                        'NotModified',
-                        'UseProxy',
-                        'Unused',
-                        'TemporaryRedirect',
-                        'RedirectKeepVerb',
-                        'BadRequest',
-                        'Unauthorized',
-                        'PaymentRequired',
-                        'Forbidden',
-                        'NotFound',
-                        'MethodNotAllowed',
-                        'NotAcceptable',
-                        'ProxyAuthenticationRequired',
-                        'RequestTimeout',
-                        'Conflict',
-                        'Gone',
-                        'LengthRequired',
-                        'PreconditionFailed',
-                        'RequestEntityTooLarge',
-                        'RequestUriTooLong',
-                        'UnsupportedMediaType',
-                        'RequestedRangeNotSatisfiable',
-                        'ExpectationFailed',
-                        'UpgradeRequired',
-                        'InternalServerError',
-                        'NotImplemented',
-                        'BadGateway',
-                        'ServiceUnavailable',
-                        'GatewayTimeout',
-                        'HttpVersionNotSupported'
+                'required' => ['properties']
+            ],
+            'ConnectionCreateOrUpdateProperties' => [
+                'properties' => [
+                    'description' => ['type' => 'string'],
+                    'connectionType' => ['$ref' => '#/definitions/ConnectionTypeAssociationProperty'],
+                    'fieldDefinitionValues' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'requestId' => ['type' => 'string']
-            ]],
-            'RunbookCreateOrUpdateProperties' => ['properties' => [
-                'logVerbose' => ['type' => 'boolean'],
-                'logProgress' => ['type' => 'boolean'],
-                'runbookType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Script',
-                        'Graph',
-                        'PowerShellWorkflow',
-                        'PowerShell',
-                        'GraphPowerShellWorkflow',
-                        'GraphPowerShell'
+                'required' => ['connectionType']
+            ],
+            'ConnectionCreateOrUpdateParameters' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ConnectionCreateOrUpdateProperties']
+                ],
+                'required' => [
+                    'name',
+                    'properties'
+                ]
+            ],
+            'FieldDefinition' => [
+                'properties' => [
+                    'isEncrypted' => ['type' => 'boolean'],
+                    'isOptional' => ['type' => 'boolean'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => ['type']
+            ],
+            'ConnectionTypeProperties' => [
+                'properties' => [
+                    'isGlobal' => ['type' => 'boolean'],
+                    'fieldDefinitions' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/FieldDefinition']
+                    ],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ConnectionType' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ConnectionTypeProperties']
+                ],
+                'required' => []
+            ],
+            'ConnectionTypeListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ConnectionType']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ConnectionTypeCreateOrUpdateProperties' => [
+                'properties' => [
+                    'isGlobal' => ['type' => 'boolean'],
+                    'fieldDefinitions' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/FieldDefinition']
                     ]
                 ],
-                'draft' => ['$ref' => '#/definitions/RunbookDraft'],
-                'publishContentLink' => ['$ref' => '#/definitions/ContentLink'],
-                'description' => ['type' => 'string'],
-                'logActivityTrace' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => ['fieldDefinitions']
+            ],
+            'ConnectionTypeCreateOrUpdateParameters' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ConnectionTypeCreateOrUpdateProperties']
+                ],
+                'required' => [
+                    'name',
+                    'properties'
                 ]
-            ]],
-            'RunbookCreateOrUpdateParameters' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/RunbookCreateOrUpdateProperties'],
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+            ],
+            'CredentialProperties' => [
+                'properties' => [
+                    'userName' => ['type' => 'string'],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Credential' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/CredentialProperties']
+                ],
+                'required' => []
+            ],
+            'CredentialListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Credential']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CredentialUpdateProperties' => [
+                'properties' => [
+                    'userName' => ['type' => 'string'],
+                    'password' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CredentialUpdateParameters' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/CredentialUpdateProperties']
+                ],
+                'required' => ['name']
+            ],
+            'CredentialCreateOrUpdateProperties' => [
+                'properties' => [
+                    'userName' => ['type' => 'string'],
+                    'password' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => [
+                    'userName',
+                    'password'
                 ]
-            ]],
-            'RunbookCreateOrUpdateDraftProperties' => ['properties' => [
-                'logVerbose' => ['type' => 'boolean'],
-                'logProgress' => ['type' => 'boolean'],
-                'runbookType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Script',
-                        'Graph',
-                        'PowerShellWorkflow',
-                        'PowerShell',
-                        'GraphPowerShellWorkflow',
-                        'GraphPowerShell'
+            ],
+            'CredentialCreateOrUpdateParameters' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/CredentialCreateOrUpdateProperties']
+                ],
+                'required' => [
+                    'name',
+                    'properties'
+                ]
+            ],
+            'ActivityParameter' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'isMandatory' => ['type' => 'boolean'],
+                    'isDynamic' => ['type' => 'boolean'],
+                    'position' => ['type' => 'boolean'],
+                    'valueFromPipeline' => ['type' => 'boolean'],
+                    'valueFromPipelineByPropertyName' => ['type' => 'boolean'],
+                    'valueFromRemainingArguments' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'ActivityParameterSet' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'parameters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ActivityParameter']
                     ]
                 ],
-                'draft' => ['$ref' => '#/definitions/RunbookDraft'],
-                'description' => ['type' => 'string'],
-                'logActivityTrace' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'RunbookCreateOrUpdateDraftParameters' => ['properties' => ['runbookContent' => ['type' => 'string']]],
-            'RunbookUpdateProperties' => ['properties' => [
-                'description' => ['type' => 'string'],
-                'logVerbose' => ['type' => 'boolean'],
-                'logProgress' => ['type' => 'boolean'],
-                'logActivityTrace' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'RunbookUpdateParameters' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/RunbookUpdateProperties'],
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'RunbookListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Runbook']
+                'required' => []
+            ],
+            'ActivityOutputType' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ScheduleCreateOrUpdateProperties' => ['properties' => [
-                'description' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'ActivityProperties' => [
+                'properties' => [
+                    'definition' => ['type' => 'string'],
+                    'parameterSets' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ActivityParameterSet']
+                    ],
+                    'outputTypes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ActivityOutputType']
+                    ],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'description' => ['type' => 'string']
                 ],
-                'expiryTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'Activity' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ActivityProperties']
                 ],
-                'interval' => ['type' => 'object'],
-                'frequency' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'OneTime',
-                        'Day',
-                        'Hour',
-                        'Week',
-                        'Month'
+                'required' => []
+            ],
+            'ActivityListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Activity']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AdvancedScheduleMonthlyOccurrence' => [
+                'properties' => [
+                    'occurrence' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'day' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Monday',
+                            'Tuesday',
+                            'Wednesday',
+                            'Thursday',
+                            'Friday',
+                            'Saturday',
+                            'Sunday'
+                        ]
                     ]
                 ],
-                'timeZone' => ['type' => 'string'],
-                'advancedSchedule' => ['$ref' => '#/definitions/AdvancedSchedule']
-            ]],
-            'ScheduleCreateOrUpdateParameters' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ScheduleCreateOrUpdateProperties']
-            ]],
-            'ScheduleProperties' => ['properties' => [
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'startTimeOffsetMinutes' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'expiryTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'expiryTimeOffsetMinutes' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'isEnabled' => ['type' => 'boolean'],
-                'nextRun' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'nextRunOffsetMinutes' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'interval' => ['type' => 'object'],
-                'frequency' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'OneTime',
-                        'Day',
-                        'Hour',
-                        'Week',
-                        'Month'
+                'required' => []
+            ],
+            'AdvancedSchedule' => [
+                'properties' => [
+                    'weekDays' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'monthDays' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'integer',
+                            'format' => 'int32'
+                        ]
+                    ],
+                    'monthlyOccurrences' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AdvancedScheduleMonthlyOccurrence']
                     ]
                 ],
-                'timeZone' => ['type' => 'string'],
-                'advancedSchedule' => ['$ref' => '#/definitions/AdvancedSchedule'],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'AgentRegistrationKeys' => [
+                'properties' => [
+                    'primary' => ['type' => 'string'],
+                    'secondary' => ['type' => 'string']
                 ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'AgentRegistration' => [
+                'properties' => [
+                    'dscMetaConfiguration' => ['type' => 'string'],
+                    'endpoint' => ['type' => 'string'],
+                    'keys' => ['$ref' => '#/definitions/AgentRegistrationKeys'],
+                    'id' => ['type' => 'string']
                 ],
-                'description' => ['type' => 'string']
-            ]],
-            'Schedule' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ScheduleProperties']
-            ]],
-            'ScheduleUpdateProperties' => ['properties' => [
-                'description' => ['type' => 'string'],
-                'isEnabled' => ['type' => 'boolean']
-            ]],
-            'ScheduleUpdateParameters' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ScheduleUpdateProperties']
-            ]],
-            'ScheduleListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Schedule']
+                'required' => []
+            ],
+            'AgentRegistrationRegenerateKeyParameter' => [
+                'properties' => [
+                    'keyName' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Primary',
+                            'Secondary'
+                        ]
+                    ],
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'SubResource' => ['properties' => ['id' => ['type' => 'string']]],
-            'TestJobCreateParameters' => ['properties' => [
-                'runbookName' => ['type' => 'string'],
-                'parameters' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => ['keyName']
+            ],
+            'DscConfigurationAssociationProperty' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'DscCompilationJobCreateProperties' => [
+                'properties' => [
+                    'configuration' => ['$ref' => '#/definitions/DscConfigurationAssociationProperty'],
+                    'parameters' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
                 ],
-                'runOn' => ['type' => 'string']
-            ]],
-            'TestJob' => ['properties' => [
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => ['configuration']
+            ],
+            'DscCompilationJobCreateParameters' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/DscCompilationJobCreateProperties'],
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
                 ],
-                'status' => ['type' => 'string'],
-                'statusDetails' => ['type' => 'string'],
-                'runOn' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => ['properties']
+            ],
+            'DscCompilationJobProperties' => [
+                'properties' => [
+                    'configuration' => ['$ref' => '#/definitions/DscConfigurationAssociationProperty'],
+                    'startedBy' => ['type' => 'string'],
+                    'jobId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'New',
+                            'Activating',
+                            'Running',
+                            'Completed',
+                            'Failed',
+                            'Stopped',
+                            'Blocked',
+                            'Suspended',
+                            'Disconnected',
+                            'Suspending',
+                            'Stopping',
+                            'Resuming',
+                            'Removing'
+                        ]
+                    ],
+                    'statusDetails' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'exception' => ['type' => 'string'],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastStatusModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'parameters' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
                 ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'DscCompilationJob' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/DscCompilationJobProperties']
                 ],
-                'exception' => ['type' => 'string'],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'DscCompilationJobListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DscCompilationJob']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'lastStatusModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'DscConfigurationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DscConfiguration']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'parameters' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => []
+            ],
+            'DscConfigurationCreateOrUpdateProperties' => [
+                'properties' => [
+                    'logVerbose' => ['type' => 'boolean'],
+                    'logProgress' => ['type' => 'boolean'],
+                    'source' => ['$ref' => '#/definitions/ContentSource'],
+                    'parameters' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/DscConfigurationParameter']
+                    ],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => ['source']
+            ],
+            'DscConfigurationCreateOrUpdateParameters' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/DscConfigurationCreateOrUpdateProperties'],
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['properties']
+            ],
+            'DscMetaConfiguration' => [
+                'properties' => [
+                    'configurationModeFrequencyMins' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'rebootNodeIfNeeded' => ['type' => 'boolean'],
+                    'configurationMode' => ['type' => 'string'],
+                    'actionAfterReboot' => ['type' => 'string'],
+                    'certificateId' => ['type' => 'string'],
+                    'refreshFrequencyMins' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'allowModuleOverwrite' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'DscNodeConfigurationCreateOrUpdateParameters' => [
+                'properties' => [
+                    'source' => ['$ref' => '#/definitions/ContentSource'],
+                    'name' => ['type' => 'string'],
+                    'configuration' => ['$ref' => '#/definitions/DscConfigurationAssociationProperty']
+                ],
+                'required' => [
+                    'source',
+                    'name',
+                    'configuration'
                 ]
-            ]],
-            'TypeField' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'TypeFieldListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/TypeField']
-            ]]],
-            'VariableCreateOrUpdateProperties' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'isEncrypted' => ['type' => 'boolean']
-            ]],
-            'VariableCreateOrUpdateParameters' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/VariableCreateOrUpdateProperties']
-            ]],
-            'VariableProperties' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'isEncrypted' => ['type' => 'boolean'],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+            ],
+            'DscNodeConfiguration' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'configuration' => ['$ref' => '#/definitions/DscConfigurationAssociationProperty'],
+                    'id' => ['type' => 'string']
                 ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'DscNodeConfigurationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DscNodeConfiguration']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'description' => ['type' => 'string']
-            ]],
-            'Variable' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/VariableProperties']
-            ]],
-            'VariableListResult' => ['properties' => [
-                'value' => [
+                'required' => []
+            ],
+            'DscNodeListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DscNode']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DscNodeUpdateParameters' => [
+                'properties' => [
+                    'nodeId' => ['type' => 'string'],
+                    'nodeConfiguration' => ['$ref' => '#/definitions/DscNodeConfigurationAssociationProperty']
+                ],
+                'required' => []
+            ],
+            'DscReportError' => [
+                'properties' => [
+                    'errorSource' => ['type' => 'string'],
+                    'resourceId' => ['type' => 'string'],
+                    'errorCode' => ['type' => 'string'],
+                    'errorMessage' => ['type' => 'string'],
+                    'locale' => ['type' => 'string'],
+                    'errorDetails' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DscReportResourceNavigation' => [
+                'properties' => ['resourceId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'DscReportResource' => [
+                'properties' => [
+                    'resourceId' => ['type' => 'string'],
+                    'sourceInfo' => ['type' => 'string'],
+                    'dependsOn' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DscReportResourceNavigation']
+                    ],
+                    'moduleName' => ['type' => 'string'],
+                    'moduleVersion' => ['type' => 'string'],
+                    'resourceName' => ['type' => 'string'],
+                    'error' => ['type' => 'string'],
+                    'status' => ['type' => 'string'],
+                    'durationInSeconds' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'startDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'DscNodeReport' => [
+                'properties' => [
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'type' => ['type' => 'string'],
+                    'reportId' => ['type' => 'string'],
+                    'status' => ['type' => 'string'],
+                    'refreshMode' => ['type' => 'string'],
+                    'rebootRequested' => ['type' => 'string'],
+                    'reportFormatVersion' => ['type' => 'string'],
+                    'configurationVersion' => ['type' => 'string'],
+                    'id' => ['type' => 'string'],
+                    'errors' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DscReportError']
+                    ],
+                    'resources' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DscReportResource']
+                    ],
+                    'metaConfiguration' => ['$ref' => '#/definitions/DscMetaConfiguration'],
+                    'hostName' => ['type' => 'string'],
+                    'iPV4Addresses' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'iPV6Addresses' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'numberOfResources' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'rawErrors' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DscNodeReportListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DscNodeReport']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HybridRunbookWorker' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'ip' => ['type' => 'string'],
+                    'registrationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'RunAsCredentialAssociationProperty' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'HybridRunbookWorkerGroup' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'hybridRunbookWorkers' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HybridRunbookWorker']
+                    ],
+                    'credential' => ['$ref' => '#/definitions/RunAsCredentialAssociationProperty']
+                ],
+                'required' => []
+            ],
+            'HybridRunbookWorkerGroupsListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HybridRunbookWorkerGroup']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HybridRunbookWorkerGroupUpdateParameters' => [
+                'properties' => ['credential' => ['$ref' => '#/definitions/RunAsCredentialAssociationProperty']],
+                'required' => []
+            ],
+            'RunbookAssociationProperty' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'JobProperties' => [
+                'properties' => [
+                    'runbook' => ['$ref' => '#/definitions/RunbookAssociationProperty'],
+                    'startedBy' => ['type' => 'string'],
+                    'runOn' => ['type' => 'string'],
+                    'jobId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'New',
+                            'Activating',
+                            'Running',
+                            'Completed',
+                            'Failed',
+                            'Stopped',
+                            'Blocked',
+                            'Suspended',
+                            'Disconnected',
+                            'Suspending',
+                            'Stopping',
+                            'Resuming',
+                            'Removing'
+                        ]
+                    ],
+                    'statusDetails' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'exception' => ['type' => 'string'],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastStatusModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'parameters' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'Job' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/JobProperties']
+                ],
+                'required' => []
+            ],
+            'JobCreateProperties' => [
+                'properties' => [
+                    'runbook' => ['$ref' => '#/definitions/RunbookAssociationProperty'],
+                    'parameters' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'runOn' => ['type' => 'string']
+                ],
+                'required' => ['runbook']
+            ],
+            'JobCreateParameters' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/JobCreateProperties'],
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['properties']
+            ],
+            'JobListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Job']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ScheduleAssociationProperty' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'JobScheduleCreateProperties' => [
+                'properties' => [
+                    'schedule' => ['$ref' => '#/definitions/ScheduleAssociationProperty'],
+                    'runbook' => ['$ref' => '#/definitions/RunbookAssociationProperty'],
+                    'runOn' => ['type' => 'string'],
+                    'parameters' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => [
+                    'schedule',
+                    'runbook'
+                ]
+            ],
+            'JobScheduleCreateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/JobScheduleCreateProperties']],
+                'required' => ['properties']
+            ],
+            'JobScheduleProperties' => [
+                'properties' => [
+                    'jobScheduleId' => ['type' => 'string'],
+                    'schedule' => ['$ref' => '#/definitions/ScheduleAssociationProperty'],
+                    'runbook' => ['$ref' => '#/definitions/RunbookAssociationProperty'],
+                    'runOn' => ['type' => 'string'],
+                    'parameters' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'JobSchedule' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/JobScheduleProperties']
+                ],
+                'required' => []
+            ],
+            'JobScheduleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/JobSchedule']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'JobStreamProperties' => [
+                'properties' => [
+                    'jobStreamId' => ['type' => 'string'],
+                    'time' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'streamType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Progress',
+                            'Output',
+                            'Warning',
+                            'Error',
+                            'Debug',
+                            'Verbose',
+                            'Any'
+                        ]
+                    ],
+                    'streamText' => ['type' => 'string'],
+                    'summary' => ['type' => 'string'],
+                    'value' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'object']
+                    ]
+                ],
+                'required' => []
+            ],
+            'JobStream' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/JobStreamProperties']
+                ],
+                'required' => []
+            ],
+            'JobStreamListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/JobStream']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ModuleCreateOrUpdateProperties' => [
+                'properties' => ['contentLink' => ['$ref' => '#/definitions/ContentLink']],
+                'required' => ['contentLink']
+            ],
+            'ModuleCreateOrUpdateParameters' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ModuleCreateOrUpdateProperties'],
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['properties']
+            ],
+            'ModuleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Module']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ModuleUpdateProperties' => [
+                'properties' => ['contentLink' => ['$ref' => '#/definitions/ContentLink']],
+                'required' => []
+            ],
+            'ModuleUpdateParameters' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ModuleUpdateProperties'],
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['properties']
+            ],
+            'RunbookDraftUndoEditResult' => [
+                'properties' => [
+                    'statusCode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Continue',
+                            'SwitchingProtocols',
+                            'OK',
+                            'Created',
+                            'Accepted',
+                            'NonAuthoritativeInformation',
+                            'NoContent',
+                            'ResetContent',
+                            'PartialContent',
+                            'MultipleChoices',
+                            'Ambiguous',
+                            'MovedPermanently',
+                            'Moved',
+                            'Found',
+                            'Redirect',
+                            'SeeOther',
+                            'RedirectMethod',
+                            'NotModified',
+                            'UseProxy',
+                            'Unused',
+                            'TemporaryRedirect',
+                            'RedirectKeepVerb',
+                            'BadRequest',
+                            'Unauthorized',
+                            'PaymentRequired',
+                            'Forbidden',
+                            'NotFound',
+                            'MethodNotAllowed',
+                            'NotAcceptable',
+                            'ProxyAuthenticationRequired',
+                            'RequestTimeout',
+                            'Conflict',
+                            'Gone',
+                            'LengthRequired',
+                            'PreconditionFailed',
+                            'RequestEntityTooLarge',
+                            'RequestUriTooLong',
+                            'UnsupportedMediaType',
+                            'RequestedRangeNotSatisfiable',
+                            'ExpectationFailed',
+                            'UpgradeRequired',
+                            'InternalServerError',
+                            'NotImplemented',
+                            'BadGateway',
+                            'ServiceUnavailable',
+                            'GatewayTimeout',
+                            'HttpVersionNotSupported'
+                        ]
+                    ],
+                    'requestId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RunbookCreateOrUpdateProperties' => [
+                'properties' => [
+                    'logVerbose' => ['type' => 'boolean'],
+                    'logProgress' => ['type' => 'boolean'],
+                    'runbookType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Script',
+                            'Graph',
+                            'PowerShellWorkflow',
+                            'PowerShell',
+                            'GraphPowerShellWorkflow',
+                            'GraphPowerShell'
+                        ]
+                    ],
+                    'draft' => ['$ref' => '#/definitions/RunbookDraft'],
+                    'publishContentLink' => ['$ref' => '#/definitions/ContentLink'],
+                    'description' => ['type' => 'string'],
+                    'logActivityTrace' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => ['runbookType']
+            ],
+            'RunbookCreateOrUpdateParameters' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/RunbookCreateOrUpdateProperties'],
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['properties']
+            ],
+            'RunbookCreateOrUpdateDraftProperties' => [
+                'properties' => [
+                    'logVerbose' => ['type' => 'boolean'],
+                    'logProgress' => ['type' => 'boolean'],
+                    'runbookType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Script',
+                            'Graph',
+                            'PowerShellWorkflow',
+                            'PowerShell',
+                            'GraphPowerShellWorkflow',
+                            'GraphPowerShell'
+                        ]
+                    ],
+                    'draft' => ['$ref' => '#/definitions/RunbookDraft'],
+                    'description' => ['type' => 'string'],
+                    'logActivityTrace' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => [
+                    'runbookType',
+                    'draft'
+                ]
+            ],
+            'RunbookCreateOrUpdateDraftParameters' => [
+                'properties' => ['runbookContent' => ['type' => 'string']],
+                'required' => ['runbookContent']
+            ],
+            'RunbookUpdateProperties' => [
+                'properties' => [
+                    'description' => ['type' => 'string'],
+                    'logVerbose' => ['type' => 'boolean'],
+                    'logProgress' => ['type' => 'boolean'],
+                    'logActivityTrace' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'RunbookUpdateParameters' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/RunbookUpdateProperties'],
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'RunbookListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Runbook']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ScheduleCreateOrUpdateProperties' => [
+                'properties' => [
+                    'description' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'expiryTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'interval' => ['type' => 'object'],
+                    'frequency' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'OneTime',
+                            'Day',
+                            'Hour',
+                            'Week',
+                            'Month'
+                        ]
+                    ],
+                    'timeZone' => ['type' => 'string'],
+                    'advancedSchedule' => ['$ref' => '#/definitions/AdvancedSchedule']
+                ],
+                'required' => [
+                    'startTime',
+                    'frequency'
+                ]
+            ],
+            'ScheduleCreateOrUpdateParameters' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ScheduleCreateOrUpdateProperties']
+                ],
+                'required' => [
+                    'name',
+                    'properties'
+                ]
+            ],
+            'ScheduleProperties' => [
+                'properties' => [
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'startTimeOffsetMinutes' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'expiryTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'expiryTimeOffsetMinutes' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'isEnabled' => ['type' => 'boolean'],
+                    'nextRun' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'nextRunOffsetMinutes' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'interval' => ['type' => 'object'],
+                    'frequency' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'OneTime',
+                            'Day',
+                            'Hour',
+                            'Week',
+                            'Month'
+                        ]
+                    ],
+                    'timeZone' => ['type' => 'string'],
+                    'advancedSchedule' => ['$ref' => '#/definitions/AdvancedSchedule'],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Schedule' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ScheduleProperties']
+                ],
+                'required' => []
+            ],
+            'ScheduleUpdateProperties' => [
+                'properties' => [
+                    'description' => ['type' => 'string'],
+                    'isEnabled' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'ScheduleUpdateParameters' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ScheduleUpdateProperties']
+                ],
+                'required' => ['name']
+            ],
+            'ScheduleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Schedule']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SubResource' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => []
+            ],
+            'TestJobCreateParameters' => [
+                'properties' => [
+                    'runbookName' => ['type' => 'string'],
+                    'parameters' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'runOn' => ['type' => 'string']
+                ],
+                'required' => ['runbookName']
+            ],
+            'TestJob' => [
+                'properties' => [
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'status' => ['type' => 'string'],
+                    'statusDetails' => ['type' => 'string'],
+                    'runOn' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'exception' => ['type' => 'string'],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastStatusModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'parameters' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'TypeField' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'TypeFieldListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Variable']
+                    'items' => ['$ref' => '#/definitions/TypeField']
+                ]],
+                'required' => []
+            ],
+            'VariableCreateOrUpdateProperties' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'isEncrypted' => ['type' => 'boolean']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'VariableUpdateProperties' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'VariableUpdateParameters' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/VariableUpdateProperties']
-            ]],
-            'WebhookCreateOrUpdateProperties' => ['properties' => [
-                'isEnabled' => ['type' => 'boolean'],
-                'uri' => ['type' => 'string'],
-                'expiryTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'VariableCreateOrUpdateParameters' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/VariableCreateOrUpdateProperties']
                 ],
-                'parameters' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => [
+                    'name',
+                    'properties'
+                ]
+            ],
+            'VariableProperties' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'isEncrypted' => ['type' => 'boolean'],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'description' => ['type' => 'string']
                 ],
-                'runbook' => ['$ref' => '#/definitions/RunbookAssociationProperty'],
-                'runOn' => ['type' => 'string']
-            ]],
-            'WebhookCreateOrUpdateParameters' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/WebhookCreateOrUpdateProperties']
-            ]],
-            'WebhookProperties' => ['properties' => [
-                'isEnabled' => ['type' => 'boolean'],
-                'uri' => ['type' => 'string'],
-                'expiryTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'Variable' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/VariableProperties']
                 ],
-                'lastInvokedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'VariableListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Variable']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'parameters' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => []
+            ],
+            'VariableUpdateProperties' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
                 ],
-                'runbook' => ['$ref' => '#/definitions/RunbookAssociationProperty'],
-                'runOn' => ['type' => 'string'],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'VariableUpdateParameters' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/VariableUpdateProperties']
                 ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => ['name']
+            ],
+            'WebhookCreateOrUpdateProperties' => [
+                'properties' => [
+                    'isEnabled' => ['type' => 'boolean'],
+                    'uri' => ['type' => 'string'],
+                    'expiryTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'parameters' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'runbook' => ['$ref' => '#/definitions/RunbookAssociationProperty'],
+                    'runOn' => ['type' => 'string']
                 ],
-                'description' => ['type' => 'string']
-            ]],
-            'Webhook' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/WebhookProperties']
-            ]],
-            'WebhookListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Webhook']
+                'required' => []
+            ],
+            'WebhookCreateOrUpdateParameters' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/WebhookCreateOrUpdateProperties']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'WebhookUpdateProperties' => ['properties' => [
-                'isEnabled' => ['type' => 'boolean'],
-                'runOn' => ['type' => 'string'],
-                'parameters' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => [
+                    'name',
+                    'properties'
+                ]
+            ],
+            'WebhookProperties' => [
+                'properties' => [
+                    'isEnabled' => ['type' => 'boolean'],
+                    'uri' => ['type' => 'string'],
+                    'expiryTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastInvokedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'parameters' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'runbook' => ['$ref' => '#/definitions/RunbookAssociationProperty'],
+                    'runOn' => ['type' => 'string'],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'description' => ['type' => 'string']
                 ],
-                'description' => ['type' => 'string']
-            ]],
-            'WebhookUpdateParameters' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/WebhookUpdateProperties']
-            ]]
+                'required' => []
+            ],
+            'Webhook' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/WebhookProperties']
+                ],
+                'required' => []
+            ],
+            'WebhookListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Webhook']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'WebhookUpdateProperties' => [
+                'properties' => [
+                    'isEnabled' => ['type' => 'boolean'],
+                    'runOn' => ['type' => 'string'],
+                    'parameters' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'WebhookUpdateParameters' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/WebhookUpdateProperties']
+                ],
+                'required' => ['name']
+            ]
         ]
     ];
 }

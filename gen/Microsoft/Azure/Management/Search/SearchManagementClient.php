@@ -466,108 +466,147 @@ final class SearchManagementClient
             ]]
         ],
         'definitions' => [
-            'CheckNameAvailabilityInput' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'CheckNameAvailabilityOutput' => ['properties' => [
-                'nameAvailable' => ['type' => 'boolean'],
-                'reason' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'AlreadyExists'
-                    ]
+            'CheckNameAvailabilityInput' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
                 ],
-                'message' => ['type' => 'string']
-            ]],
-            'AdminKeyResult' => ['properties' => [
-                'primaryKey' => ['type' => 'string'],
-                'secondaryKey' => ['type' => 'string']
-            ]],
-            'QueryKey' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'key' => ['type' => 'string']
-            ]],
-            'ListQueryKeysResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/QueryKey']
-            ]]],
-            'Sku' => ['properties' => ['name' => [
-                'type' => 'string',
-                'enum' => [
-                    'free',
-                    'basic',
-                    'standard',
-                    'standard2',
-                    'standard3'
+                'required' => [
+                    'name',
+                    'type'
                 ]
-            ]]],
-            'SearchServiceProperties' => ['properties' => [
-                'replicaCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+            ],
+            'CheckNameAvailabilityOutput' => [
+                'properties' => [
+                    'nameAvailable' => ['type' => 'boolean'],
+                    'reason' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'AlreadyExists'
+                        ]
+                    ],
+                    'message' => ['type' => 'string']
                 ],
-                'partitionCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'AdminKeyResult' => [
+                'properties' => [
+                    'primaryKey' => ['type' => 'string'],
+                    'secondaryKey' => ['type' => 'string']
                 ],
-                'hostingMode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'default',
-                        'highDensity'
-                    ]
+                'required' => []
+            ],
+            'QueryKey' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'key' => ['type' => 'string']
                 ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'running',
-                        'provisioning',
-                        'deleting',
-                        'degraded',
-                        'disabled',
-                        'error'
-                    ]
-                ],
-                'statusDetails' => ['type' => 'string'],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'succeeded',
-                        'provisioning',
-                        'failed'
-                    ]
-                ]
-            ]],
-            'SearchService' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/SearchServiceProperties'],
-                'sku' => ['$ref' => '#/definitions/Sku']
-            ]],
-            'SearchServiceListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/SearchService']
-            ]]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'CloudErrorBody' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'target' => ['type' => 'string'],
-                'details' => [
+                'required' => []
+            ],
+            'ListQueryKeysResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CloudErrorBody']
-                ]
-            ]],
-            'CloudError' => ['properties' => ['error' => ['$ref' => '#/definitions/CloudErrorBody']]]
+                    'items' => ['$ref' => '#/definitions/QueryKey']
+                ]],
+                'required' => []
+            ],
+            'Sku' => [
+                'properties' => ['name' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'free',
+                        'basic',
+                        'standard',
+                        'standard2',
+                        'standard3'
+                    ]
+                ]],
+                'required' => []
+            ],
+            'SearchServiceProperties' => [
+                'properties' => [
+                    'replicaCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'partitionCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'hostingMode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'default',
+                            'highDensity'
+                        ]
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'running',
+                            'provisioning',
+                            'deleting',
+                            'degraded',
+                            'disabled',
+                            'error'
+                        ]
+                    ],
+                    'statusDetails' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'succeeded',
+                            'provisioning',
+                            'failed'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'SearchService' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/SearchServiceProperties'],
+                    'sku' => ['$ref' => '#/definitions/Sku']
+                ],
+                'required' => ['sku']
+            ],
+            'SearchServiceListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/SearchService']
+                ]],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['location']
+            ],
+            'CloudErrorBody' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'target' => ['type' => 'string'],
+                    'details' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CloudErrorBody']
+                    ]
+                ],
+                'required' => []
+            ],
+            'CloudError' => [
+                'properties' => ['error' => ['$ref' => '#/definitions/CloudErrorBody']],
+                'required' => []
+            ]
         ]
     ];
 }

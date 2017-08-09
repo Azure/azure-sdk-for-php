@@ -611,267 +611,503 @@ final class SchedulerManagementClient
             ]]
         ],
         'definitions' => [
-            'Sku' => ['properties' => ['name' => [
-                'type' => 'string',
-                'enum' => [
-                    'Standard',
-                    'Free',
-                    'P10Premium',
-                    'P20Premium'
-                ]
-            ]]],
-            'JobMaxRecurrence' => ['properties' => [
-                'frequency' => [
+            'Sku' => [
+                'properties' => ['name' => [
                     'type' => 'string',
                     'enum' => [
-                        'Minute',
-                        'Hour',
-                        'Day',
-                        'Week',
-                        'Month'
+                        'Standard',
+                        'Free',
+                        'P10Premium',
+                        'P20Premium'
                     ]
-                ],
-                'interval' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'JobCollectionQuota' => ['properties' => [
-                'maxJobCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'maxJobOccurrence' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'maxRecurrence' => ['$ref' => '#/definitions/JobMaxRecurrence']
-            ]],
-            'JobCollectionProperties' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled',
-                        'Suspended',
-                        'Deleted'
-                    ]
-                ],
-                'quota' => ['$ref' => '#/definitions/JobCollectionQuota']
-            ]],
-            'JobCollectionDefinition' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'properties' => ['$ref' => '#/definitions/JobCollectionProperties']
-            ]],
-            'JobCollectionListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/JobCollectionDefinition']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'HttpAuthentication' => ['properties' => ['type' => [
-                'type' => 'string',
-                'enum' => [
-                    'NotSpecified',
-                    'ClientCertificate',
-                    'ActiveDirectoryOAuth',
-                    'Basic'
-                ]
-            ]]],
-            'HttpRequest' => ['properties' => [
-                'authentication' => ['$ref' => '#/definitions/HttpAuthentication'],
-                'uri' => ['type' => 'string'],
-                'method' => ['type' => 'string'],
-                'body' => ['type' => 'string'],
-                'headers' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'StorageQueueMessage' => ['properties' => [
-                'storageAccount' => ['type' => 'string'],
-                'queueName' => ['type' => 'string'],
-                'sasToken' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'ServiceBusQueueMessage' => ['properties' => ['queueName' => ['type' => 'string']]],
-            'ServiceBusTopicMessage' => ['properties' => ['topicPath' => ['type' => 'string']]],
-            'RetryPolicy' => ['properties' => [
-                'retryType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Fixed'
-                    ]
-                ],
-                'retryInterval' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'retryCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'JobErrorAction' => ['properties' => [
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Http',
-                        'Https',
-                        'StorageQueue',
-                        'ServiceBusQueue',
-                        'ServiceBusTopic'
-                    ]
-                ],
-                'request' => ['$ref' => '#/definitions/HttpRequest'],
-                'queueMessage' => ['$ref' => '#/definitions/StorageQueueMessage'],
-                'serviceBusQueueMessage' => ['$ref' => '#/definitions/ServiceBusQueueMessage'],
-                'serviceBusTopicMessage' => ['$ref' => '#/definitions/ServiceBusTopicMessage'],
-                'retryPolicy' => ['$ref' => '#/definitions/RetryPolicy']
-            ]],
-            'JobAction' => ['properties' => [
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Http',
-                        'Https',
-                        'StorageQueue',
-                        'ServiceBusQueue',
-                        'ServiceBusTopic'
-                    ]
-                ],
-                'request' => ['$ref' => '#/definitions/HttpRequest'],
-                'queueMessage' => ['$ref' => '#/definitions/StorageQueueMessage'],
-                'serviceBusQueueMessage' => ['$ref' => '#/definitions/ServiceBusQueueMessage'],
-                'serviceBusTopicMessage' => ['$ref' => '#/definitions/ServiceBusTopicMessage'],
-                'retryPolicy' => ['$ref' => '#/definitions/RetryPolicy'],
-                'errorAction' => ['$ref' => '#/definitions/JobErrorAction']
-            ]],
-            'JobRecurrenceScheduleMonthlyOccurrence' => ['properties' => [
-                'day' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Monday',
-                        'Tuesday',
-                        'Wednesday',
-                        'Thursday',
-                        'Friday',
-                        'Saturday',
-                        'Sunday'
-                    ]
-                ],
-                'Occurrence' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'JobRecurrenceSchedule' => ['properties' => [
-                'weekDays' => [
-                    'type' => 'array',
-                    'items' => [
+                ]],
+                'required' => []
+            ],
+            'JobMaxRecurrence' => [
+                'properties' => [
+                    'frequency' => [
                         'type' => 'string',
                         'enum' => [
-                            'Sunday',
+                            'Minute',
+                            'Hour',
+                            'Day',
+                            'Week',
+                            'Month'
+                        ]
+                    ],
+                    'interval' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'JobCollectionQuota' => [
+                'properties' => [
+                    'maxJobCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'maxJobOccurrence' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'maxRecurrence' => ['$ref' => '#/definitions/JobMaxRecurrence']
+                ],
+                'required' => []
+            ],
+            'JobCollectionProperties' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled',
+                            'Suspended',
+                            'Deleted'
+                        ]
+                    ],
+                    'quota' => ['$ref' => '#/definitions/JobCollectionQuota']
+                ],
+                'required' => []
+            ],
+            'JobCollectionDefinition' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/JobCollectionProperties']
+                ],
+                'required' => []
+            ],
+            'JobCollectionListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/JobCollectionDefinition']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HttpAuthentication' => [
+                'properties' => ['type' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'NotSpecified',
+                        'ClientCertificate',
+                        'ActiveDirectoryOAuth',
+                        'Basic'
+                    ]
+                ]],
+                'required' => []
+            ],
+            'HttpRequest' => [
+                'properties' => [
+                    'authentication' => ['$ref' => '#/definitions/HttpAuthentication'],
+                    'uri' => ['type' => 'string'],
+                    'method' => ['type' => 'string'],
+                    'body' => ['type' => 'string'],
+                    'headers' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'StorageQueueMessage' => [
+                'properties' => [
+                    'storageAccount' => ['type' => 'string'],
+                    'queueName' => ['type' => 'string'],
+                    'sasToken' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ServiceBusQueueMessage' => [
+                'properties' => ['queueName' => ['type' => 'string']],
+                'required' => []
+            ],
+            'ServiceBusTopicMessage' => [
+                'properties' => ['topicPath' => ['type' => 'string']],
+                'required' => []
+            ],
+            'RetryPolicy' => [
+                'properties' => [
+                    'retryType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Fixed'
+                        ]
+                    ],
+                    'retryInterval' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'retryCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'JobErrorAction' => [
+                'properties' => [
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Http',
+                            'Https',
+                            'StorageQueue',
+                            'ServiceBusQueue',
+                            'ServiceBusTopic'
+                        ]
+                    ],
+                    'request' => ['$ref' => '#/definitions/HttpRequest'],
+                    'queueMessage' => ['$ref' => '#/definitions/StorageQueueMessage'],
+                    'serviceBusQueueMessage' => ['$ref' => '#/definitions/ServiceBusQueueMessage'],
+                    'serviceBusTopicMessage' => ['$ref' => '#/definitions/ServiceBusTopicMessage'],
+                    'retryPolicy' => ['$ref' => '#/definitions/RetryPolicy']
+                ],
+                'required' => []
+            ],
+            'JobAction' => [
+                'properties' => [
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Http',
+                            'Https',
+                            'StorageQueue',
+                            'ServiceBusQueue',
+                            'ServiceBusTopic'
+                        ]
+                    ],
+                    'request' => ['$ref' => '#/definitions/HttpRequest'],
+                    'queueMessage' => ['$ref' => '#/definitions/StorageQueueMessage'],
+                    'serviceBusQueueMessage' => ['$ref' => '#/definitions/ServiceBusQueueMessage'],
+                    'serviceBusTopicMessage' => ['$ref' => '#/definitions/ServiceBusTopicMessage'],
+                    'retryPolicy' => ['$ref' => '#/definitions/RetryPolicy'],
+                    'errorAction' => ['$ref' => '#/definitions/JobErrorAction']
+                ],
+                'required' => []
+            ],
+            'JobRecurrenceScheduleMonthlyOccurrence' => [
+                'properties' => [
+                    'day' => [
+                        'type' => 'string',
+                        'enum' => [
                             'Monday',
                             'Tuesday',
                             'Wednesday',
                             'Thursday',
                             'Friday',
-                            'Saturday'
+                            'Saturday',
+                            'Sunday'
+                        ]
+                    ],
+                    'Occurrence' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'JobRecurrenceSchedule' => [
+                'properties' => [
+                    'weekDays' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'Sunday',
+                                'Monday',
+                                'Tuesday',
+                                'Wednesday',
+                                'Thursday',
+                                'Friday',
+                                'Saturday'
+                            ]
+                        ]
+                    ],
+                    'hours' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'integer',
+                            'format' => 'int32'
+                        ]
+                    ],
+                    'minutes' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'integer',
+                            'format' => 'int32'
+                        ]
+                    ],
+                    'monthDays' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'integer',
+                            'format' => 'int32'
+                        ]
+                    ],
+                    'monthlyOccurrences' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/JobRecurrenceScheduleMonthlyOccurrence']
+                    ]
+                ],
+                'required' => []
+            ],
+            'JobRecurrence' => [
+                'properties' => [
+                    'frequency' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Minute',
+                            'Hour',
+                            'Day',
+                            'Week',
+                            'Month'
+                        ]
+                    ],
+                    'interval' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'schedule' => ['$ref' => '#/definitions/JobRecurrenceSchedule']
+                ],
+                'required' => []
+            ],
+            'JobStatus' => [
+                'properties' => [
+                    'executionCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'failureCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'faultedCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'lastExecutionTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'nextExecutionTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'JobProperties' => [
+                'properties' => [
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'action' => ['$ref' => '#/definitions/JobAction'],
+                    'recurrence' => ['$ref' => '#/definitions/JobRecurrence'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled',
+                            'Faulted',
+                            'Completed'
+                        ]
+                    ],
+                    'status' => ['$ref' => '#/definitions/JobStatus']
+                ],
+                'required' => []
+            ],
+            'JobDefinition' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/JobProperties']
+                ],
+                'required' => []
+            ],
+            'JobListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/JobDefinition']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'JobHistoryDefinitionProperties' => [
+                'properties' => [
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'expectedExecutionTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'actionName' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'MainAction',
+                            'ErrorAction'
+                        ]
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Completed',
+                            'Failed',
+                            'Postponed'
+                        ]
+                    ],
+                    'message' => ['type' => 'string'],
+                    'retryCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'repeatCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'JobHistoryDefinition' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/JobHistoryDefinitionProperties']
+                ],
+                'required' => []
+            ],
+            'JobHistoryListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/JobHistoryDefinition']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ClientCertAuthentication' => [
+                'properties' => [
+                    'password' => ['type' => 'string'],
+                    'pfx' => ['type' => 'string'],
+                    'certificateThumbprint' => ['type' => 'string'],
+                    'certificateExpirationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'certificateSubjectName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'BasicAuthentication' => [
+                'properties' => [
+                    'username' => ['type' => 'string'],
+                    'password' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'OAuthAuthentication' => [
+                'properties' => [
+                    'secret' => ['type' => 'string'],
+                    'tenant' => ['type' => 'string'],
+                    'audience' => ['type' => 'string'],
+                    'clientId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ServiceBusAuthentication' => [
+                'properties' => [
+                    'sasKey' => ['type' => 'string'],
+                    'sasKeyName' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotSpecified',
+                            'SharedAccessKey'
                         ]
                     ]
                 ],
-                'hours' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'integer',
-                        'format' => 'int32'
+                'required' => []
+            ],
+            'ServiceBusBrokeredMessageProperties' => [
+                'properties' => [
+                    'contentType' => ['type' => 'string'],
+                    'correlationId' => ['type' => 'string'],
+                    'forcePersistence' => ['type' => 'boolean'],
+                    'label' => ['type' => 'string'],
+                    'messageId' => ['type' => 'string'],
+                    'partitionKey' => ['type' => 'string'],
+                    'replyTo' => ['type' => 'string'],
+                    'replyToSessionId' => ['type' => 'string'],
+                    'scheduledEnqueueTimeUtc' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'sessionId' => ['type' => 'string'],
+                    'timeToLive' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'to' => ['type' => 'string'],
+                    'viaPartitionKey' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ServiceBusMessage' => [
+                'properties' => [
+                    'authentication' => ['$ref' => '#/definitions/ServiceBusAuthentication'],
+                    'brokeredMessageProperties' => ['$ref' => '#/definitions/ServiceBusBrokeredMessageProperties'],
+                    'customMessageProperties' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'message' => ['type' => 'string'],
+                    'namespace' => ['type' => 'string'],
+                    'transportType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotSpecified',
+                            'NetMessaging',
+                            'AMQP'
+                        ]
                     ]
                 ],
-                'minutes' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'integer',
-                        'format' => 'int32'
-                    ]
-                ],
-                'monthDays' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'integer',
-                        'format' => 'int32'
-                    ]
-                ],
-                'monthlyOccurrences' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/JobRecurrenceScheduleMonthlyOccurrence']
-                ]
-            ]],
-            'JobRecurrence' => ['properties' => [
-                'frequency' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Minute',
-                        'Hour',
-                        'Day',
-                        'Week',
-                        'Month'
-                    ]
-                ],
-                'interval' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'schedule' => ['$ref' => '#/definitions/JobRecurrenceSchedule']
-            ]],
-            'JobStatus' => ['properties' => [
-                'executionCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'failureCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'faultedCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'lastExecutionTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'nextExecutionTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'JobProperties' => ['properties' => [
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'action' => ['$ref' => '#/definitions/JobAction'],
-                'recurrence' => ['$ref' => '#/definitions/JobRecurrence'],
-                'state' => [
+                'required' => []
+            ],
+            'JobStateFilter' => [
+                'properties' => ['state' => [
                     'type' => 'string',
                     'enum' => [
                         'Enabled',
@@ -879,160 +1115,20 @@ final class SchedulerManagementClient
                         'Faulted',
                         'Completed'
                     ]
-                ],
-                'status' => ['$ref' => '#/definitions/JobStatus']
-            ]],
-            'JobDefinition' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/JobProperties']
-            ]],
-            'JobListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/JobDefinition']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'JobHistoryDefinitionProperties' => ['properties' => [
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'expectedExecutionTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'actionName' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'MainAction',
-                        'ErrorAction'
-                    ]
-                ],
-                'status' => [
+                ]],
+                'required' => []
+            ],
+            'JobHistoryFilter' => [
+                'properties' => ['status' => [
                     'type' => 'string',
                     'enum' => [
                         'Completed',
                         'Failed',
                         'Postponed'
                     ]
-                ],
-                'message' => ['type' => 'string'],
-                'retryCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'repeatCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'JobHistoryDefinition' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/JobHistoryDefinitionProperties']
-            ]],
-            'JobHistoryListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/JobHistoryDefinition']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ClientCertAuthentication' => ['properties' => [
-                'password' => ['type' => 'string'],
-                'pfx' => ['type' => 'string'],
-                'certificateThumbprint' => ['type' => 'string'],
-                'certificateExpirationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'certificateSubjectName' => ['type' => 'string']
-            ]],
-            'BasicAuthentication' => ['properties' => [
-                'username' => ['type' => 'string'],
-                'password' => ['type' => 'string']
-            ]],
-            'OAuthAuthentication' => ['properties' => [
-                'secret' => ['type' => 'string'],
-                'tenant' => ['type' => 'string'],
-                'audience' => ['type' => 'string'],
-                'clientId' => ['type' => 'string']
-            ]],
-            'ServiceBusAuthentication' => ['properties' => [
-                'sasKey' => ['type' => 'string'],
-                'sasKeyName' => ['type' => 'string'],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NotSpecified',
-                        'SharedAccessKey'
-                    ]
-                ]
-            ]],
-            'ServiceBusBrokeredMessageProperties' => ['properties' => [
-                'contentType' => ['type' => 'string'],
-                'correlationId' => ['type' => 'string'],
-                'forcePersistence' => ['type' => 'boolean'],
-                'label' => ['type' => 'string'],
-                'messageId' => ['type' => 'string'],
-                'partitionKey' => ['type' => 'string'],
-                'replyTo' => ['type' => 'string'],
-                'replyToSessionId' => ['type' => 'string'],
-                'scheduledEnqueueTimeUtc' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'sessionId' => ['type' => 'string'],
-                'timeToLive' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'to' => ['type' => 'string'],
-                'viaPartitionKey' => ['type' => 'string']
-            ]],
-            'ServiceBusMessage' => ['properties' => [
-                'authentication' => ['$ref' => '#/definitions/ServiceBusAuthentication'],
-                'brokeredMessageProperties' => ['$ref' => '#/definitions/ServiceBusBrokeredMessageProperties'],
-                'customMessageProperties' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'message' => ['type' => 'string'],
-                'namespace' => ['type' => 'string'],
-                'transportType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NotSpecified',
-                        'NetMessaging',
-                        'AMQP'
-                    ]
-                ]
-            ]],
-            'JobStateFilter' => ['properties' => ['state' => [
-                'type' => 'string',
-                'enum' => [
-                    'Enabled',
-                    'Disabled',
-                    'Faulted',
-                    'Completed'
-                ]
-            ]]],
-            'JobHistoryFilter' => ['properties' => ['status' => [
-                'type' => 'string',
-                'enum' => [
-                    'Completed',
-                    'Failed',
-                    'Postponed'
-                ]
-            ]]]
+                ]],
+                'required' => []
+            ]
         ]
     ];
 }

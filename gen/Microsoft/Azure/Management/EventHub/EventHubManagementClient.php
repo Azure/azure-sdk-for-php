@@ -1134,231 +1134,309 @@ final class EventHubManagementClient
             ]]
         ],
         'definitions' => [
-            'TrackedResource' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'Sku' => ['properties' => [
-                'name' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'Standard'
+            'TrackedResource' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'tier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'Standard'
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Sku' => [
+                'properties' => [
+                    'name' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'Standard'
+                        ]
+                    ],
+                    'tier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'Standard'
+                        ]
+                    ],
+                    'capacity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'EHNamespace_properties' => ['properties' => [
-                'provisioningState' => ['type' => 'string'],
-                'createdAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => ['name']
+            ],
+            'EHNamespace_properties' => [
+                'properties' => [
+                    'provisioningState' => ['type' => 'string'],
+                    'createdAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'updatedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'serviceBusEndpoint' => ['type' => 'string'],
+                    'metricId' => ['type' => 'string'],
+                    'isAutoInflateEnabled' => ['type' => 'boolean'],
+                    'maximumThroughputUnits' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
                 ],
-                'updatedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'EHNamespace' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'properties' => ['$ref' => '#/definitions/EHNamespace_properties']
                 ],
-                'serviceBusEndpoint' => ['type' => 'string'],
-                'metricId' => ['type' => 'string'],
-                'isAutoInflateEnabled' => ['type' => 'boolean'],
-                'maximumThroughputUnits' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'EHNamespace' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'properties' => ['$ref' => '#/definitions/EHNamespace_properties']
-            ]],
-            'EHNamespaceListResult' => ['properties' => [
-                'value' => [
+                'required' => []
+            ],
+            'EHNamespaceListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/EHNamespace']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AuthorizationRule_properties' => [
+                'properties' => ['rights' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/EHNamespace']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'AuthorizationRule_properties' => ['properties' => ['rights' => [
-                'type' => 'array',
-                'items' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Manage',
-                        'Send',
-                        'Listen'
+                    'items' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Manage',
+                            'Send',
+                            'Listen'
+                        ]
                     ]
-                ]
-            ]]],
-            'AuthorizationRule' => ['properties' => ['properties' => ['$ref' => '#/definitions/AuthorizationRule_properties']]],
-            'AuthorizationRuleListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AuthorizationRule']
+                ]],
+                'required' => []
+            ],
+            'AuthorizationRule' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AuthorizationRule_properties']],
+                'required' => []
+            ],
+            'AuthorizationRuleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AuthorizationRule']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'AccessKeys' => ['properties' => [
-                'primaryConnectionString' => ['type' => 'string'],
-                'secondaryConnectionString' => ['type' => 'string'],
-                'primaryKey' => ['type' => 'string'],
-                'secondaryKey' => ['type' => 'string'],
-                'keyName' => ['type' => 'string']
-            ]],
-            'RegenerateAccessKeyParameters' => ['properties' => [
-                'keyType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'PrimaryKey',
-                        'SecondaryKey'
+                'required' => []
+            ],
+            'AccessKeys' => [
+                'properties' => [
+                    'primaryConnectionString' => ['type' => 'string'],
+                    'secondaryConnectionString' => ['type' => 'string'],
+                    'primaryKey' => ['type' => 'string'],
+                    'secondaryKey' => ['type' => 'string'],
+                    'keyName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RegenerateAccessKeyParameters' => [
+                'properties' => [
+                    'keyType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'PrimaryKey',
+                            'SecondaryKey'
+                        ]
+                    ],
+                    'key' => ['type' => 'string']
+                ],
+                'required' => ['keyType']
+            ],
+            'Destination_properties' => [
+                'properties' => [
+                    'storageAccountResourceId' => ['type' => 'string'],
+                    'blobContainer' => ['type' => 'string'],
+                    'archiveNameFormat' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Destination' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/Destination_properties']
+                ],
+                'required' => []
+            ],
+            'CaptureDescription' => [
+                'properties' => [
+                    'enabled' => ['type' => 'boolean'],
+                    'encoding' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Avro',
+                            'AvroDeflate'
+                        ]
+                    ],
+                    'intervalInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'sizeLimitInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'destination' => ['$ref' => '#/definitions/Destination']
+                ],
+                'required' => []
+            ],
+            'Eventhub_properties' => [
+                'properties' => [
+                    'partitionIds' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'createdAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'updatedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'messageRetentionInDays' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'partitionCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Active',
+                            'Disabled',
+                            'Restoring',
+                            'SendDisabled',
+                            'ReceiveDisabled',
+                            'Creating',
+                            'Deleting',
+                            'Renaming',
+                            'Unknown'
+                        ]
+                    ],
+                    'captureDescription' => ['$ref' => '#/definitions/CaptureDescription']
+                ],
+                'required' => []
+            ],
+            'Eventhub' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Eventhub_properties']],
+                'required' => []
+            ],
+            'EventHubListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Eventhub']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ConsumerGroup_properties' => [
+                'properties' => [
+                    'createdAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'updatedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'userMetadata' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ConsumerGroup' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ConsumerGroup_properties']],
+                'required' => []
+            ],
+            'ConsumerGroupListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ConsumerGroup']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CheckNameAvailabilityParameter' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => ['name']
+            ],
+            'CheckNameAvailabilityResult' => [
+                'properties' => [
+                    'message' => ['type' => 'string'],
+                    'nameAvailable' => ['type' => 'boolean'],
+                    'reason' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'InvalidName',
+                            'SubscriptionIsDisabled',
+                            'NameInUse',
+                            'NameInLockdown',
+                            'TooManyNamespaceInCurrentSubscription'
+                        ]
                     ]
                 ],
-                'key' => ['type' => 'string']
-            ]],
-            'Destination_properties' => ['properties' => [
-                'storageAccountResourceId' => ['type' => 'string'],
-                'blobContainer' => ['type' => 'string'],
-                'archiveNameFormat' => ['type' => 'string']
-            ]],
-            'Destination' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/Destination_properties']
-            ]],
-            'CaptureDescription' => ['properties' => [
-                'enabled' => ['type' => 'boolean'],
-                'encoding' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Avro',
-                        'AvroDeflate'
-                    ]
+                'required' => []
+            ],
+            'Operation_display' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string']
                 ],
-                'intervalInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
-                'sizeLimitInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Operation']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'destination' => ['$ref' => '#/definitions/Destination']
-            ]],
-            'Eventhub_properties' => ['properties' => [
-                'partitionIds' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'ErrorResponse' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
                 ],
-                'createdAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'updatedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'messageRetentionInDays' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'partitionCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Active',
-                        'Disabled',
-                        'Restoring',
-                        'SendDisabled',
-                        'ReceiveDisabled',
-                        'Creating',
-                        'Deleting',
-                        'Renaming',
-                        'Unknown'
-                    ]
-                ],
-                'captureDescription' => ['$ref' => '#/definitions/CaptureDescription']
-            ]],
-            'Eventhub' => ['properties' => ['properties' => ['$ref' => '#/definitions/Eventhub_properties']]],
-            'EventHubListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Eventhub']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ConsumerGroup_properties' => ['properties' => [
-                'createdAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'updatedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'userMetadata' => ['type' => 'string']
-            ]],
-            'ConsumerGroup' => ['properties' => ['properties' => ['$ref' => '#/definitions/ConsumerGroup_properties']]],
-            'ConsumerGroupListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ConsumerGroup']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'CheckNameAvailabilityParameter' => ['properties' => ['name' => ['type' => 'string']]],
-            'CheckNameAvailabilityResult' => ['properties' => [
-                'message' => ['type' => 'string'],
-                'nameAvailable' => ['type' => 'boolean'],
-                'reason' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'InvalidName',
-                        'SubscriptionIsDisabled',
-                        'NameInUse',
-                        'NameInLockdown',
-                        'TooManyNamespaceInCurrentSubscription'
-                    ]
-                ]
-            ]],
-            'Operation_display' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/Operation_display']
-            ]],
-            'OperationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Operation']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ErrorResponse' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]]
+                'required' => []
+            ]
         ]
     ];
 }

@@ -748,245 +748,327 @@ final class DataLakeStoreAccountManagementClient
             ]]
         ],
         'definitions' => [
-            'UpdateFirewallRuleProperties' => ['properties' => [
-                'startIpAddress' => ['type' => 'string'],
-                'endIpAddress' => ['type' => 'string']
-            ]],
-            'UpdateFirewallRuleParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/UpdateFirewallRuleProperties']]],
-            'FirewallRuleProperties' => ['properties' => [
-                'startIpAddress' => ['type' => 'string'],
-                'endIpAddress' => ['type' => 'string']
-            ]],
-            'FirewallRule' => ['properties' => ['properties' => ['$ref' => '#/definitions/FirewallRuleProperties']]],
-            'UpdateTrustedIdProviderProperties' => ['properties' => ['idProvider' => ['type' => 'string']]],
-            'UpdateTrustedIdProviderParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/UpdateTrustedIdProviderProperties']]],
-            'TrustedIdProviderProperties' => ['properties' => ['idProvider' => ['type' => 'string']]],
-            'TrustedIdProvider' => ['properties' => ['properties' => ['$ref' => '#/definitions/TrustedIdProviderProperties']]],
-            'DataLakeStoreTrustedIdProviderListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TrustedIdProvider']
+            'UpdateFirewallRuleProperties' => [
+                'properties' => [
+                    'startIpAddress' => ['type' => 'string'],
+                    'endIpAddress' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'DataLakeStoreFirewallRuleListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/FirewallRule']
+                'required' => []
+            ],
+            'UpdateFirewallRuleParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UpdateFirewallRuleProperties']],
+                'required' => []
+            ],
+            'FirewallRuleProperties' => [
+                'properties' => [
+                    'startIpAddress' => ['type' => 'string'],
+                    'endIpAddress' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'EncryptionIdentity' => ['properties' => [
-                'type' => ['type' => 'string'],
-                'principalId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'tenantId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
+                'required' => [
+                    'startIpAddress',
+                    'endIpAddress'
                 ]
-            ]],
-            'KeyVaultMetaInfo' => ['properties' => [
-                'keyVaultResourceId' => ['type' => 'string'],
-                'encryptionKeyName' => ['type' => 'string'],
-                'encryptionKeyVersion' => ['type' => 'string']
-            ]],
-            'EncryptionConfig' => ['properties' => [
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'UserManaged',
-                        'ServiceManaged'
+            ],
+            'FirewallRule' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/FirewallRuleProperties']],
+                'required' => ['properties']
+            ],
+            'UpdateTrustedIdProviderProperties' => [
+                'properties' => ['idProvider' => ['type' => 'string']],
+                'required' => []
+            ],
+            'UpdateTrustedIdProviderParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UpdateTrustedIdProviderProperties']],
+                'required' => []
+            ],
+            'TrustedIdProviderProperties' => [
+                'properties' => ['idProvider' => ['type' => 'string']],
+                'required' => ['idProvider']
+            ],
+            'TrustedIdProvider' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/TrustedIdProviderProperties']],
+                'required' => ['properties']
+            ],
+            'DataLakeStoreTrustedIdProviderListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TrustedIdProvider']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DataLakeStoreFirewallRuleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/FirewallRule']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'EncryptionIdentity' => [
+                'properties' => [
+                    'type' => ['type' => 'string'],
+                    'principalId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
                     ]
                 ],
-                'keyVaultMetaInfo' => ['$ref' => '#/definitions/KeyVaultMetaInfo']
-            ]],
-            'UpdateKeyVaultMetaInfo' => ['properties' => ['encryptionKeyVersion' => ['type' => 'string']]],
-            'UpdateEncryptionConfig' => ['properties' => ['keyVaultMetaInfo' => ['$ref' => '#/definitions/UpdateKeyVaultMetaInfo']]],
-            'DataLakeStoreAccountProperties' => ['properties' => [
-                'encryptionState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
+                'required' => ['type']
+            ],
+            'KeyVaultMetaInfo' => [
+                'properties' => [
+                    'keyVaultResourceId' => ['type' => 'string'],
+                    'encryptionKeyName' => ['type' => 'string'],
+                    'encryptionKeyVersion' => ['type' => 'string']
                 ],
-                'encryptionProvisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Creating',
-                        'Succeeded'
-                    ]
-                ],
-                'encryptionConfig' => ['$ref' => '#/definitions/EncryptionConfig'],
-                'firewallState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'firewallRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/FirewallRule']
-                ],
-                'trustedIdProviderState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'trustedIdProviders' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TrustedIdProvider']
-                ],
-                'defaultGroup' => ['type' => 'string'],
-                'newTier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Consumption',
-                        'Commitment_1TB',
-                        'Commitment_10TB',
-                        'Commitment_100TB',
-                        'Commitment_500TB',
-                        'Commitment_1PB',
-                        'Commitment_5PB'
-                    ]
-                ],
-                'currentTier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Consumption',
-                        'Commitment_1TB',
-                        'Commitment_10TB',
-                        'Commitment_100TB',
-                        'Commitment_500TB',
-                        'Commitment_1PB',
-                        'Commitment_5PB'
-                    ]
-                ],
-                'firewallAllowAzureIps' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
+                'required' => [
+                    'keyVaultResourceId',
+                    'encryptionKeyName',
+                    'encryptionKeyVersion'
                 ]
-            ]],
-            'UpdateDataLakeStoreAccountProperties' => ['properties' => [
-                'firewallState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
+            ],
+            'EncryptionConfig' => [
+                'properties' => [
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'UserManaged',
+                            'ServiceManaged'
+                        ]
+                    ],
+                    'keyVaultMetaInfo' => ['$ref' => '#/definitions/KeyVaultMetaInfo']
+                ],
+                'required' => ['type']
+            ],
+            'UpdateKeyVaultMetaInfo' => [
+                'properties' => ['encryptionKeyVersion' => ['type' => 'string']],
+                'required' => []
+            ],
+            'UpdateEncryptionConfig' => [
+                'properties' => ['keyVaultMetaInfo' => ['$ref' => '#/definitions/UpdateKeyVaultMetaInfo']],
+                'required' => []
+            ],
+            'DataLakeStoreAccountProperties' => [
+                'properties' => [
+                    'encryptionState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'encryptionProvisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Creating',
+                            'Succeeded'
+                        ]
+                    ],
+                    'encryptionConfig' => ['$ref' => '#/definitions/EncryptionConfig'],
+                    'firewallState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'firewallRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/FirewallRule']
+                    ],
+                    'trustedIdProviderState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'trustedIdProviders' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TrustedIdProvider']
+                    ],
+                    'defaultGroup' => ['type' => 'string'],
+                    'newTier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Consumption',
+                            'Commitment_1TB',
+                            'Commitment_10TB',
+                            'Commitment_100TB',
+                            'Commitment_500TB',
+                            'Commitment_1PB',
+                            'Commitment_5PB'
+                        ]
+                    ],
+                    'currentTier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Consumption',
+                            'Commitment_1TB',
+                            'Commitment_10TB',
+                            'Commitment_100TB',
+                            'Commitment_500TB',
+                            'Commitment_1PB',
+                            'Commitment_5PB'
+                        ]
+                    ],
+                    'firewallAllowAzureIps' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
                     ]
                 ],
-                'trustedIdProviderState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
+                'required' => []
+            ],
+            'UpdateDataLakeStoreAccountProperties' => [
+                'properties' => [
+                    'firewallState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'trustedIdProviderState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'defaultGroup' => ['type' => 'string'],
+                    'newTier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Consumption',
+                            'Commitment_1TB',
+                            'Commitment_10TB',
+                            'Commitment_100TB',
+                            'Commitment_500TB',
+                            'Commitment_1PB',
+                            'Commitment_5PB'
+                        ]
+                    ],
+                    'firewallAllowAzureIps' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'encryptionConfig' => ['$ref' => '#/definitions/UpdateEncryptionConfig']
+                ],
+                'required' => []
+            ],
+            'DataLakeStoreAccountUpdateParameters' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/UpdateDataLakeStoreAccountProperties']
+                ],
+                'required' => []
+            ],
+            'DataLakeStoreAccount' => [
+                'properties' => [
+                    'identity' => ['$ref' => '#/definitions/EncryptionIdentity'],
+                    'properties' => ['$ref' => '#/definitions/DataLakeStoreAccountProperties']
+                ],
+                'required' => []
+            ],
+            'DataLakeStoreAccountPropertiesBasic' => [
+                'properties' => [
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Failed',
+                            'Creating',
+                            'Running',
+                            'Succeeded',
+                            'Patching',
+                            'Suspending',
+                            'Resuming',
+                            'Deleting',
+                            'Deleted'
+                        ]
+                    ],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Active',
+                            'Suspended'
+                        ]
+                    ],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endpoint' => ['type' => 'string'],
+                    'accountId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
                     ]
                 ],
-                'defaultGroup' => ['type' => 'string'],
-                'newTier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Consumption',
-                        'Commitment_1TB',
-                        'Commitment_10TB',
-                        'Commitment_100TB',
-                        'Commitment_500TB',
-                        'Commitment_1PB',
-                        'Commitment_5PB'
+                'required' => []
+            ],
+            'DataLakeStoreAccountBasic' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DataLakeStoreAccountPropertiesBasic']],
+                'required' => []
+            ],
+            'DataLakeStoreAccountListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DataLakeStoreAccountBasic']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ErrorDetails' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'target' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'firewallAllowAzureIps' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
+                'required' => ['location']
+            ],
+            'SubResource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
                 ],
-                'encryptionConfig' => ['$ref' => '#/definitions/UpdateEncryptionConfig']
-            ]],
-            'DataLakeStoreAccountUpdateParameters' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'properties' => ['$ref' => '#/definitions/UpdateDataLakeStoreAccountProperties']
-            ]],
-            'DataLakeStoreAccount' => ['properties' => [
-                'identity' => ['$ref' => '#/definitions/EncryptionIdentity'],
-                'properties' => ['$ref' => '#/definitions/DataLakeStoreAccountProperties']
-            ]],
-            'DataLakeStoreAccountPropertiesBasic' => ['properties' => [
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Failed',
-                        'Creating',
-                        'Running',
-                        'Succeeded',
-                        'Patching',
-                        'Suspending',
-                        'Resuming',
-                        'Deleting',
-                        'Deleted'
-                    ]
-                ],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Active',
-                        'Suspended'
-                    ]
-                ],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endpoint' => ['type' => 'string'],
-                'accountId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ]
-            ]],
-            'DataLakeStoreAccountBasic' => ['properties' => ['properties' => ['$ref' => '#/definitions/DataLakeStoreAccountPropertiesBasic']]],
-            'DataLakeStoreAccountListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DataLakeStoreAccountBasic']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ErrorDetails' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'target' => ['type' => 'string']
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'SubResource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]]
+                'required' => []
+            ]
         ]
     ];
 }

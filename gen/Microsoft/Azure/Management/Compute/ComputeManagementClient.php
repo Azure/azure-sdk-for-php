@@ -3466,1390 +3466,294 @@ final class ComputeManagementClient
             ]]
         ],
         'definitions' => [
-            'InstanceViewStatus' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'level' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Info',
-                        'Warning',
-                        'Error'
+            'InstanceViewStatus' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'level' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Info',
+                            'Warning',
+                            'Error'
+                        ]
+                    ],
+                    'displayStatus' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'time' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'displayStatus' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'time' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'SubResource' => ['properties' => ['id' => ['type' => 'string']]],
-            'AvailabilitySetProperties' => ['properties' => [
-                'platformUpdateDomainCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'SubResource' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => []
+            ],
+            'AvailabilitySetProperties' => [
+                'properties' => [
+                    'platformUpdateDomainCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'platformFaultDomainCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'virtualMachines' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubResource']
+                    ],
+                    'statuses' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InstanceViewStatus']
+                    ]
                 ],
-                'platformFaultDomainCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'Sku' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'tier' => ['type' => 'string'],
+                    'capacity' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ]
                 ],
-                'virtualMachines' => [
+                'required' => []
+            ],
+            'AvailabilitySet' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/AvailabilitySetProperties'],
+                    'sku' => ['$ref' => '#/definitions/Sku']
+                ],
+                'required' => []
+            ],
+            'AvailabilitySetListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubResource']
+                    'items' => ['$ref' => '#/definitions/AvailabilitySet']
+                ]],
+                'required' => []
+            ],
+            'VirtualMachineSize' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'numberOfCores' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'osDiskSizeInMB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'resourceDiskSizeInMB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'memoryInMB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'maxDataDiskCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
                 ],
-                'statuses' => [
+                'required' => []
+            ],
+            'VirtualMachineSizeListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InstanceViewStatus']
-                ]
-            ]],
-            'Sku' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'tier' => ['type' => 'string'],
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ]
-            ]],
-            'AvailabilitySet' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/AvailabilitySetProperties'],
-                'sku' => ['$ref' => '#/definitions/Sku']
-            ]],
-            'AvailabilitySetListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/AvailabilitySet']
-            ]]],
-            'VirtualMachineSize' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'numberOfCores' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                    'items' => ['$ref' => '#/definitions/VirtualMachineSize']
+                ]],
+                'required' => []
+            ],
+            'VirtualMachineExtensionImageProperties' => [
+                'properties' => [
+                    'operatingSystem' => ['type' => 'string'],
+                    'computeRole' => ['type' => 'string'],
+                    'handlerSchema' => ['type' => 'string'],
+                    'vmScaleSetEnabled' => ['type' => 'boolean'],
+                    'supportsMultipleExtensions' => ['type' => 'boolean']
                 ],
-                'osDiskSizeInMB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'resourceDiskSizeInMB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'memoryInMB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'maxDataDiskCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => [
+                    'operatingSystem',
+                    'computeRole',
+                    'handlerSchema'
                 ]
-            ]],
-            'VirtualMachineSizeListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/VirtualMachineSize']
-            ]]],
-            'VirtualMachineExtensionImageProperties' => ['properties' => [
-                'operatingSystem' => ['type' => 'string'],
-                'computeRole' => ['type' => 'string'],
-                'handlerSchema' => ['type' => 'string'],
-                'vmScaleSetEnabled' => ['type' => 'boolean'],
-                'supportsMultipleExtensions' => ['type' => 'boolean']
-            ]],
-            'VirtualMachineExtensionImage' => ['properties' => ['properties' => ['$ref' => '#/definitions/VirtualMachineExtensionImageProperties']]],
-            'VirtualMachineImageResource' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'VirtualMachineExtensionInstanceView' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'typeHandlerVersion' => ['type' => 'string'],
-                'substatuses' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InstanceViewStatus']
+            ],
+            'VirtualMachineExtensionImage' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/VirtualMachineExtensionImageProperties']],
+                'required' => []
+            ],
+            'VirtualMachineImageResource' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
                 ],
-                'statuses' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InstanceViewStatus']
+                'required' => [
+                    'name',
+                    'location'
                 ]
-            ]],
-            'VirtualMachineExtensionProperties' => ['properties' => [
-                'forceUpdateTag' => ['type' => 'string'],
-                'publisher' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'typeHandlerVersion' => ['type' => 'string'],
-                'autoUpgradeMinorVersion' => ['type' => 'boolean'],
-                'settings' => ['type' => 'object'],
-                'protectedSettings' => ['type' => 'object'],
-                'provisioningState' => ['type' => 'string'],
-                'instanceView' => ['$ref' => '#/definitions/VirtualMachineExtensionInstanceView']
-            ]],
-            'VirtualMachineExtension' => ['properties' => ['properties' => ['$ref' => '#/definitions/VirtualMachineExtensionProperties']]],
-            'PurchasePlan' => ['properties' => [
-                'publisher' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'product' => ['type' => 'string']
-            ]],
-            'OSDiskImage' => ['properties' => ['operatingSystem' => [
-                'type' => 'string',
-                'enum' => [
-                    'Windows',
-                    'Linux'
-                ]
-            ]]],
-            'DataDiskImage' => ['properties' => ['lun' => [
-                'type' => 'integer',
-                'format' => 'int32'
-            ]]],
-            'VirtualMachineImageProperties' => ['properties' => [
-                'plan' => ['$ref' => '#/definitions/PurchasePlan'],
-                'osDiskImage' => ['$ref' => '#/definitions/OSDiskImage'],
-                'dataDiskImages' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DataDiskImage']
-                ]
-            ]],
-            'VirtualMachineImage' => ['properties' => ['properties' => ['$ref' => '#/definitions/VirtualMachineImageProperties']]],
-            'UsageName' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'localizedValue' => ['type' => 'string']
-            ]],
-            'Usage' => ['properties' => [
-                'unit' => ['type' => 'string'],
-                'currentValue' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+            ],
+            'VirtualMachineExtensionInstanceView' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'typeHandlerVersion' => ['type' => 'string'],
+                    'substatuses' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InstanceViewStatus']
+                    ],
+                    'statuses' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InstanceViewStatus']
+                    ]
                 ],
-                'limit' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'VirtualMachineExtensionProperties' => [
+                'properties' => [
+                    'forceUpdateTag' => ['type' => 'string'],
+                    'publisher' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'typeHandlerVersion' => ['type' => 'string'],
+                    'autoUpgradeMinorVersion' => ['type' => 'boolean'],
+                    'settings' => ['type' => 'object'],
+                    'protectedSettings' => ['type' => 'object'],
+                    'provisioningState' => ['type' => 'string'],
+                    'instanceView' => ['$ref' => '#/definitions/VirtualMachineExtensionInstanceView']
                 ],
-                'name' => ['$ref' => '#/definitions/UsageName']
-            ]],
-            'ListUsagesResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Usage']
+                'required' => []
+            ],
+            'VirtualMachineExtension' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/VirtualMachineExtensionProperties']],
+                'required' => []
+            ],
+            'PurchasePlan' => [
+                'properties' => [
+                    'publisher' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'product' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'VirtualMachineCaptureParameters' => ['properties' => [
-                'vhdPrefix' => ['type' => 'string'],
-                'destinationContainerName' => ['type' => 'string'],
-                'overwriteVhds' => ['type' => 'boolean']
-            ]],
-            'VirtualMachineCaptureResultProperties' => ['properties' => ['output' => ['type' => 'object']]],
-            'VirtualMachineCaptureResult' => ['properties' => ['properties' => ['$ref' => '#/definitions/VirtualMachineCaptureResultProperties']]],
-            'Plan' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'publisher' => ['type' => 'string'],
-                'product' => ['type' => 'string'],
-                'promotionCode' => ['type' => 'string']
-            ]],
-            'HardwareProfile' => ['properties' => ['vmSize' => [
-                'type' => 'string',
-                'enum' => [
-                    'Basic_A0',
-                    'Basic_A1',
-                    'Basic_A2',
-                    'Basic_A3',
-                    'Basic_A4',
-                    'Standard_A0',
-                    'Standard_A1',
-                    'Standard_A2',
-                    'Standard_A3',
-                    'Standard_A4',
-                    'Standard_A5',
-                    'Standard_A6',
-                    'Standard_A7',
-                    'Standard_A8',
-                    'Standard_A9',
-                    'Standard_A10',
-                    'Standard_A11',
-                    'Standard_A1_v2',
-                    'Standard_A2_v2',
-                    'Standard_A4_v2',
-                    'Standard_A8_v2',
-                    'Standard_A2m_v2',
-                    'Standard_A4m_v2',
-                    'Standard_A8m_v2',
-                    'Standard_D1',
-                    'Standard_D2',
-                    'Standard_D3',
-                    'Standard_D4',
-                    'Standard_D11',
-                    'Standard_D12',
-                    'Standard_D13',
-                    'Standard_D14',
-                    'Standard_D1_v2',
-                    'Standard_D2_v2',
-                    'Standard_D3_v2',
-                    'Standard_D4_v2',
-                    'Standard_D5_v2',
-                    'Standard_D11_v2',
-                    'Standard_D12_v2',
-                    'Standard_D13_v2',
-                    'Standard_D14_v2',
-                    'Standard_D15_v2',
-                    'Standard_DS1',
-                    'Standard_DS2',
-                    'Standard_DS3',
-                    'Standard_DS4',
-                    'Standard_DS11',
-                    'Standard_DS12',
-                    'Standard_DS13',
-                    'Standard_DS14',
-                    'Standard_DS1_v2',
-                    'Standard_DS2_v2',
-                    'Standard_DS3_v2',
-                    'Standard_DS4_v2',
-                    'Standard_DS5_v2',
-                    'Standard_DS11_v2',
-                    'Standard_DS12_v2',
-                    'Standard_DS13_v2',
-                    'Standard_DS14_v2',
-                    'Standard_DS15_v2',
-                    'Standard_F1',
-                    'Standard_F2',
-                    'Standard_F4',
-                    'Standard_F8',
-                    'Standard_F16',
-                    'Standard_F1s',
-                    'Standard_F2s',
-                    'Standard_F4s',
-                    'Standard_F8s',
-                    'Standard_F16s',
-                    'Standard_G1',
-                    'Standard_G2',
-                    'Standard_G3',
-                    'Standard_G4',
-                    'Standard_G5',
-                    'Standard_GS1',
-                    'Standard_GS2',
-                    'Standard_GS3',
-                    'Standard_GS4',
-                    'Standard_GS5',
-                    'Standard_H8',
-                    'Standard_H16',
-                    'Standard_H8m',
-                    'Standard_H16m',
-                    'Standard_H16r',
-                    'Standard_H16mr',
-                    'Standard_L4s',
-                    'Standard_L8s',
-                    'Standard_L16s',
-                    'Standard_L32s',
-                    'Standard_NC6',
-                    'Standard_NC12',
-                    'Standard_NC24',
-                    'Standard_NC24r',
-                    'Standard_NV6',
-                    'Standard_NV12',
-                    'Standard_NV24'
+                'required' => [
+                    'publisher',
+                    'name',
+                    'product'
                 ]
-            ]]],
-            'ImageReference' => ['properties' => [
-                'publisher' => ['type' => 'string'],
-                'offer' => ['type' => 'string'],
-                'sku' => ['type' => 'string'],
-                'version' => ['type' => 'string']
-            ]],
-            'KeyVaultSecretReference' => ['properties' => [
-                'secretUrl' => ['type' => 'string'],
-                'sourceVault' => ['$ref' => '#/definitions/SubResource']
-            ]],
-            'KeyVaultKeyReference' => ['properties' => [
-                'keyUrl' => ['type' => 'string'],
-                'sourceVault' => ['$ref' => '#/definitions/SubResource']
-            ]],
-            'DiskEncryptionSettings' => ['properties' => [
-                'diskEncryptionKey' => ['$ref' => '#/definitions/KeyVaultSecretReference'],
-                'keyEncryptionKey' => ['$ref' => '#/definitions/KeyVaultKeyReference'],
-                'enabled' => ['type' => 'boolean']
-            ]],
-            'VirtualHardDisk' => ['properties' => ['uri' => ['type' => 'string']]],
-            'ManagedDiskParameters' => ['properties' => ['storageAccountType' => [
-                'type' => 'string',
-                'enum' => [
-                    'Standard_LRS',
-                    'Premium_LRS'
-                ]
-            ]]],
-            'OSDisk' => ['properties' => [
-                'osType' => [
+            ],
+            'OSDiskImage' => [
+                'properties' => ['operatingSystem' => [
                     'type' => 'string',
                     'enum' => [
                         'Windows',
                         'Linux'
                     ]
-                ],
-                'encryptionSettings' => ['$ref' => '#/definitions/DiskEncryptionSettings'],
-                'name' => ['type' => 'string'],
-                'vhd' => ['$ref' => '#/definitions/VirtualHardDisk'],
-                'image' => ['$ref' => '#/definitions/VirtualHardDisk'],
-                'caching' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'ReadOnly',
-                        'ReadWrite'
-                    ]
-                ],
-                'createOption' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'fromImage',
-                        'empty',
-                        'attach'
-                    ]
-                ],
-                'diskSizeGB' => [
+                ]],
+                'required' => ['operatingSystem']
+            ],
+            'DataDiskImage' => [
+                'properties' => ['lun' => [
                     'type' => 'integer',
                     'format' => 'int32'
-                ],
-                'managedDisk' => ['$ref' => '#/definitions/ManagedDiskParameters']
-            ]],
-            'DataDisk' => ['properties' => [
-                'lun' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'name' => ['type' => 'string'],
-                'vhd' => ['$ref' => '#/definitions/VirtualHardDisk'],
-                'image' => ['$ref' => '#/definitions/VirtualHardDisk'],
-                'caching' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'ReadOnly',
-                        'ReadWrite'
+                ]],
+                'required' => []
+            ],
+            'VirtualMachineImageProperties' => [
+                'properties' => [
+                    'plan' => ['$ref' => '#/definitions/PurchasePlan'],
+                    'osDiskImage' => ['$ref' => '#/definitions/OSDiskImage'],
+                    'dataDiskImages' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DataDiskImage']
                     ]
                 ],
-                'createOption' => [
+                'required' => []
+            ],
+            'VirtualMachineImage' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/VirtualMachineImageProperties']],
+                'required' => []
+            ],
+            'UsageName' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'localizedValue' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Usage' => [
+                'properties' => [
+                    'unit' => ['type' => 'string'],
+                    'currentValue' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'limit' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'name' => ['$ref' => '#/definitions/UsageName']
+                ],
+                'required' => [
+                    'unit',
+                    'currentValue',
+                    'limit',
+                    'name'
+                ]
+            ],
+            'ListUsagesResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Usage']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'VirtualMachineCaptureParameters' => [
+                'properties' => [
+                    'vhdPrefix' => ['type' => 'string'],
+                    'destinationContainerName' => ['type' => 'string'],
+                    'overwriteVhds' => ['type' => 'boolean']
+                ],
+                'required' => [
+                    'vhdPrefix',
+                    'destinationContainerName',
+                    'overwriteVhds'
+                ]
+            ],
+            'VirtualMachineCaptureResultProperties' => [
+                'properties' => ['output' => ['type' => 'object']],
+                'required' => []
+            ],
+            'VirtualMachineCaptureResult' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/VirtualMachineCaptureResultProperties']],
+                'required' => []
+            ],
+            'Plan' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'publisher' => ['type' => 'string'],
+                    'product' => ['type' => 'string'],
+                    'promotionCode' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HardwareProfile' => [
+                'properties' => ['vmSize' => [
                     'type' => 'string',
                     'enum' => [
-                        'fromImage',
-                        'empty',
-                        'attach'
-                    ]
-                ],
-                'diskSizeGB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'managedDisk' => ['$ref' => '#/definitions/ManagedDiskParameters']
-            ]],
-            'StorageProfile' => ['properties' => [
-                'imageReference' => ['$ref' => '#/definitions/ImageReference'],
-                'osDisk' => ['$ref' => '#/definitions/OSDisk'],
-                'dataDisks' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DataDisk']
-                ]
-            ]],
-            'AdditionalUnattendContent' => ['properties' => [
-                'passName' => [
-                    'type' => 'string',
-                    'enum' => ['oobeSystem']
-                ],
-                'componentName' => [
-                    'type' => 'string',
-                    'enum' => ['Microsoft-Windows-Shell-Setup']
-                ],
-                'settingName' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'AutoLogon',
-                        'FirstLogonCommands'
-                    ]
-                ],
-                'content' => ['type' => 'string']
-            ]],
-            'WinRMListener' => ['properties' => [
-                'protocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Http',
-                        'Https'
-                    ]
-                ],
-                'certificateUrl' => ['type' => 'string']
-            ]],
-            'WinRMConfiguration' => ['properties' => ['listeners' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/WinRMListener']
-            ]]],
-            'WindowsConfiguration' => ['properties' => [
-                'provisionVMAgent' => ['type' => 'boolean'],
-                'enableAutomaticUpdates' => ['type' => 'boolean'],
-                'timeZone' => ['type' => 'string'],
-                'additionalUnattendContent' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AdditionalUnattendContent']
-                ],
-                'winRM' => ['$ref' => '#/definitions/WinRMConfiguration']
-            ]],
-            'SshPublicKey' => ['properties' => [
-                'path' => ['type' => 'string'],
-                'keyData' => ['type' => 'string']
-            ]],
-            'SshConfiguration' => ['properties' => ['publicKeys' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/SshPublicKey']
-            ]]],
-            'LinuxConfiguration' => ['properties' => [
-                'disablePasswordAuthentication' => ['type' => 'boolean'],
-                'ssh' => ['$ref' => '#/definitions/SshConfiguration']
-            ]],
-            'VaultCertificate' => ['properties' => [
-                'certificateUrl' => ['type' => 'string'],
-                'certificateStore' => ['type' => 'string']
-            ]],
-            'VaultSecretGroup' => ['properties' => [
-                'sourceVault' => ['$ref' => '#/definitions/SubResource'],
-                'vaultCertificates' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VaultCertificate']
-                ]
-            ]],
-            'OSProfile' => ['properties' => [
-                'computerName' => ['type' => 'string'],
-                'adminUsername' => ['type' => 'string'],
-                'adminPassword' => ['type' => 'string'],
-                'customData' => ['type' => 'string'],
-                'windowsConfiguration' => ['$ref' => '#/definitions/WindowsConfiguration'],
-                'linuxConfiguration' => ['$ref' => '#/definitions/LinuxConfiguration'],
-                'secrets' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VaultSecretGroup']
-                ]
-            ]],
-            'NetworkInterfaceReferenceProperties' => ['properties' => ['primary' => ['type' => 'boolean']]],
-            'NetworkInterfaceReference' => ['properties' => ['properties' => ['$ref' => '#/definitions/NetworkInterfaceReferenceProperties']]],
-            'NetworkProfile' => ['properties' => ['networkInterfaces' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/NetworkInterfaceReference']
-            ]]],
-            'BootDiagnostics' => ['properties' => [
-                'enabled' => ['type' => 'boolean'],
-                'storageUri' => ['type' => 'string']
-            ]],
-            'DiagnosticsProfile' => ['properties' => ['bootDiagnostics' => ['$ref' => '#/definitions/BootDiagnostics']]],
-            'VirtualMachineExtensionHandlerInstanceView' => ['properties' => [
-                'type' => ['type' => 'string'],
-                'typeHandlerVersion' => ['type' => 'string'],
-                'status' => ['$ref' => '#/definitions/InstanceViewStatus']
-            ]],
-            'VirtualMachineAgentInstanceView' => ['properties' => [
-                'vmAgentVersion' => ['type' => 'string'],
-                'extensionHandlers' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualMachineExtensionHandlerInstanceView']
-                ],
-                'statuses' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InstanceViewStatus']
-                ]
-            ]],
-            'DiskInstanceView' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'encryptionSettings' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DiskEncryptionSettings']
-                ],
-                'statuses' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InstanceViewStatus']
-                ]
-            ]],
-            'BootDiagnosticsInstanceView' => ['properties' => [
-                'consoleScreenshotBlobUri' => ['type' => 'string'],
-                'serialConsoleLogBlobUri' => ['type' => 'string']
-            ]],
-            'VirtualMachineIdentity' => ['properties' => [
-                'principalId' => ['type' => 'string'],
-                'tenantId' => ['type' => 'string'],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => ['SystemAssigned']
-                ]
-            ]],
-            'MaintenanceRedeployStatus' => ['properties' => [
-                'isCustomerInitiatedMaintenanceAllowed' => ['type' => 'boolean'],
-                'preMaintenanceWindowStartTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'preMaintenanceWindowEndTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'maintenanceWindowStartTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'maintenanceWindowEndTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastOperationResultCode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'RetryLater',
-                        'MaintenanceAborted',
-                        'MaintenanceCompleted'
-                    ]
-                ],
-                'lastOperationMessage' => ['type' => 'string']
-            ]],
-            'VirtualMachineInstanceView' => ['properties' => [
-                'platformUpdateDomain' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'platformFaultDomain' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'rdpThumbPrint' => ['type' => 'string'],
-                'vmAgent' => ['$ref' => '#/definitions/VirtualMachineAgentInstanceView'],
-                'maintenanceRedeployStatus' => ['$ref' => '#/definitions/MaintenanceRedeployStatus'],
-                'disks' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DiskInstanceView']
-                ],
-                'extensions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualMachineExtensionInstanceView']
-                ],
-                'bootDiagnostics' => ['$ref' => '#/definitions/BootDiagnosticsInstanceView'],
-                'statuses' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InstanceViewStatus']
-                ]
-            ]],
-            'VirtualMachineProperties' => ['properties' => [
-                'hardwareProfile' => ['$ref' => '#/definitions/HardwareProfile'],
-                'storageProfile' => ['$ref' => '#/definitions/StorageProfile'],
-                'osProfile' => ['$ref' => '#/definitions/OSProfile'],
-                'networkProfile' => ['$ref' => '#/definitions/NetworkProfile'],
-                'diagnosticsProfile' => ['$ref' => '#/definitions/DiagnosticsProfile'],
-                'availabilitySet' => ['$ref' => '#/definitions/SubResource'],
-                'provisioningState' => ['type' => 'string'],
-                'instanceView' => ['$ref' => '#/definitions/VirtualMachineInstanceView'],
-                'licenseType' => ['type' => 'string'],
-                'vmId' => ['type' => 'string']
-            ]],
-            'VirtualMachine' => ['properties' => [
-                'plan' => ['$ref' => '#/definitions/Plan'],
-                'properties' => ['$ref' => '#/definitions/VirtualMachineProperties'],
-                'resources' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualMachineExtension']
-                ],
-                'identity' => ['$ref' => '#/definitions/VirtualMachineIdentity']
-            ]],
-            'VirtualMachineListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualMachine']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'UpgradePolicy' => ['properties' => ['mode' => [
-                'type' => 'string',
-                'enum' => [
-                    'Automatic',
-                    'Manual'
-                ]
-            ]]],
-            'RecoveryPolicy' => ['properties' => ['mode' => [
-                'type' => 'string',
-                'enum' => [
-                    'None',
-                    'OverProvision',
-                    'Reprovision'
-                ]
-            ]]],
-            'ImageOSDisk' => ['properties' => [
-                'osType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Windows',
-                        'Linux'
-                    ]
-                ],
-                'osState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Generalized',
-                        'Specialized'
-                    ]
-                ],
-                'snapshot' => ['$ref' => '#/definitions/SubResource'],
-                'managedDisk' => ['$ref' => '#/definitions/SubResource'],
-                'blobUri' => ['type' => 'string'],
-                'caching' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'ReadOnly',
-                        'ReadWrite'
-                    ]
-                ],
-                'diskSizeGB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'storageAccountType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Standard_LRS',
-                        'Premium_LRS'
-                    ]
-                ]
-            ]],
-            'ImageDataDisk' => ['properties' => [
-                'lun' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'snapshot' => ['$ref' => '#/definitions/SubResource'],
-                'managedDisk' => ['$ref' => '#/definitions/SubResource'],
-                'blobUri' => ['type' => 'string'],
-                'caching' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'ReadOnly',
-                        'ReadWrite'
-                    ]
-                ],
-                'diskSizeGB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'storageAccountType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Standard_LRS',
-                        'Premium_LRS'
-                    ]
-                ]
-            ]],
-            'ImageStorageProfile' => ['properties' => [
-                'osDisk' => ['$ref' => '#/definitions/ImageOSDisk'],
-                'dataDisks' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ImageDataDisk']
-                ]
-            ]],
-            'ImageProperties' => ['properties' => [
-                'sourceVirtualMachine' => ['$ref' => '#/definitions/SubResource'],
-                'storageProfile' => ['$ref' => '#/definitions/ImageStorageProfile'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'Image' => ['properties' => ['properties' => ['$ref' => '#/definitions/ImageProperties']]],
-            'ImageListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Image']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'VirtualMachineScaleSetIdentity' => ['properties' => [
-                'principalId' => ['type' => 'string'],
-                'tenantId' => ['type' => 'string'],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => ['SystemAssigned']
-                ]
-            ]],
-            'ResourceSkuCapacity' => ['properties' => [
-                'minimum' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'maximum' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'default' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'scaleType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Automatic',
-                        'Manual',
-                        'None'
-                    ]
-                ]
-            ]],
-            'ResourceSkuCosts' => ['properties' => [
-                'meterID' => ['type' => 'string'],
-                'quantity' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'extendedUnit' => ['type' => 'string']
-            ]],
-            'ResourceSkuCapabilities' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'ResourceSkuRestrictions' => ['properties' => [
-                'type' => [
-                    'type' => 'string',
-                    'enum' => ['location']
-                ],
-                'values' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'reasonCode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'QuotaId',
-                        'NotAvailableForSubscription'
-                    ]
-                ]
-            ]],
-            'ResourceSku' => ['properties' => [
-                'resourceType' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'tier' => ['type' => 'string'],
-                'size' => ['type' => 'string'],
-                'family' => ['type' => 'string'],
-                'kind' => ['type' => 'string'],
-                'capacity' => ['$ref' => '#/definitions/ResourceSkuCapacity'],
-                'locations' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'apiVersions' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'costs' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceSkuCosts']
-                ],
-                'capabilities' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceSkuCapabilities']
-                ],
-                'restrictions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceSkuRestrictions']
-                ]
-            ]],
-            'ResourceSkusResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceSku']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'VirtualMachineScaleSetOSProfile' => ['properties' => [
-                'computerNamePrefix' => ['type' => 'string'],
-                'adminUsername' => ['type' => 'string'],
-                'adminPassword' => ['type' => 'string'],
-                'customData' => ['type' => 'string'],
-                'windowsConfiguration' => ['$ref' => '#/definitions/WindowsConfiguration'],
-                'linuxConfiguration' => ['$ref' => '#/definitions/LinuxConfiguration'],
-                'secrets' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VaultSecretGroup']
-                ]
-            ]],
-            'VirtualMachineScaleSetManagedDiskParameters' => ['properties' => ['storageAccountType' => [
-                'type' => 'string',
-                'enum' => [
-                    'Standard_LRS',
-                    'Premium_LRS'
-                ]
-            ]]],
-            'VirtualMachineScaleSetOSDisk' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'caching' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'ReadOnly',
-                        'ReadWrite'
-                    ]
-                ],
-                'createOption' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'fromImage',
-                        'empty',
-                        'attach'
-                    ]
-                ],
-                'osType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Windows',
-                        'Linux'
-                    ]
-                ],
-                'image' => ['$ref' => '#/definitions/VirtualHardDisk'],
-                'vhdContainers' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'managedDisk' => ['$ref' => '#/definitions/VirtualMachineScaleSetManagedDiskParameters']
-            ]],
-            'VirtualMachineScaleSetDataDisk' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'lun' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'caching' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'ReadOnly',
-                        'ReadWrite'
-                    ]
-                ],
-                'createOption' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'fromImage',
-                        'empty',
-                        'attach'
-                    ]
-                ],
-                'diskSizeGB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'managedDisk' => ['$ref' => '#/definitions/VirtualMachineScaleSetManagedDiskParameters']
-            ]],
-            'VirtualMachineScaleSetStorageProfile' => ['properties' => [
-                'imageReference' => ['$ref' => '#/definitions/ImageReference'],
-                'osDisk' => ['$ref' => '#/definitions/VirtualMachineScaleSetOSDisk'],
-                'dataDisks' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetDataDisk']
-                ]
-            ]],
-            'ApiEntityReference' => ['properties' => ['id' => ['type' => 'string']]],
-            'VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings' => ['properties' => ['domainNameLabel' => ['type' => 'string']]],
-            'VirtualMachineScaleSetPublicIPAddressConfigurationProperties' => ['properties' => [
-                'idleTimeoutInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'dnsSettings' => ['$ref' => '#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings']
-            ]],
-            'VirtualMachineScaleSetPublicIPAddressConfiguration' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationProperties']
-            ]],
-            'VirtualMachineScaleSetIPConfigurationProperties' => ['properties' => [
-                'subnet' => ['$ref' => '#/definitions/ApiEntityReference'],
-                'primary' => ['type' => 'boolean'],
-                'publicIPAddressConfiguration' => ['$ref' => '#/definitions/VirtualMachineScaleSetPublicIPAddressConfiguration'],
-                'privateIPAddressVersion' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'IPv4',
-                        'IPv6'
-                    ]
-                ],
-                'applicationGatewayBackendAddressPools' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubResource']
-                ],
-                'loadBalancerBackendAddressPools' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubResource']
-                ],
-                'loadBalancerInboundNatPools' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubResource']
-                ]
-            ]],
-            'VirtualMachineScaleSetIPConfiguration' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetIPConfigurationProperties']
-            ]],
-            'VirtualMachineScaleSetNetworkConfigurationDnsSettings' => ['properties' => ['dnsServers' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'VirtualMachineScaleSetNetworkConfigurationProperties' => ['properties' => [
-                'primary' => ['type' => 'boolean'],
-                'enableAcceleratedNetworking' => ['type' => 'boolean'],
-                'networkSecurityGroup' => ['$ref' => '#/definitions/SubResource'],
-                'dnsSettings' => ['$ref' => '#/definitions/VirtualMachineScaleSetNetworkConfigurationDnsSettings'],
-                'ipConfigurations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetIPConfiguration']
-                ]
-            ]],
-            'VirtualMachineScaleSetNetworkConfiguration' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetNetworkConfigurationProperties']
-            ]],
-            'VirtualMachineScaleSetNetworkProfile' => ['properties' => ['networkInterfaceConfigurations' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetNetworkConfiguration']
-            ]]],
-            'VirtualMachineScaleSetExtensionProperties' => ['properties' => [
-                'forceUpdateTag' => ['type' => 'string'],
-                'publisher' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'typeHandlerVersion' => ['type' => 'string'],
-                'autoUpgradeMinorVersion' => ['type' => 'boolean'],
-                'settings' => ['type' => 'object'],
-                'protectedSettings' => ['type' => 'object'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'VirtualMachineScaleSetExtension' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetExtensionProperties']
-            ]],
-            'VirtualMachineScaleSetExtensionListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetExtension']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'VirtualMachineScaleSetExtensionProfile' => ['properties' => ['extensions' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetExtension']
-            ]]],
-            'VirtualMachineScaleSetVMProfile' => ['properties' => [
-                'osProfile' => ['$ref' => '#/definitions/VirtualMachineScaleSetOSProfile'],
-                'storageProfile' => ['$ref' => '#/definitions/VirtualMachineScaleSetStorageProfile'],
-                'networkProfile' => ['$ref' => '#/definitions/VirtualMachineScaleSetNetworkProfile'],
-                'diagnosticsProfile' => ['$ref' => '#/definitions/DiagnosticsProfile'],
-                'extensionProfile' => ['$ref' => '#/definitions/VirtualMachineScaleSetExtensionProfile'],
-                'licenseType' => ['type' => 'string']
-            ]],
-            'VirtualMachineScaleSetProperties' => ['properties' => [
-                'upgradePolicy' => ['$ref' => '#/definitions/UpgradePolicy'],
-                'recoveryPolicy' => ['$ref' => '#/definitions/RecoveryPolicy'],
-                'virtualMachineProfile' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMProfile'],
-                'provisioningState' => ['type' => 'string'],
-                'overprovision' => ['type' => 'boolean'],
-                'uniqueId' => ['type' => 'string'],
-                'singlePlacementGroup' => ['type' => 'boolean']
-            ]],
-            'VirtualMachineScaleSet' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'plan' => ['$ref' => '#/definitions/Plan'],
-                'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetProperties'],
-                'identity' => ['$ref' => '#/definitions/VirtualMachineScaleSetIdentity']
-            ]],
-            'VirtualMachineScaleSetVMInstanceIDs' => ['properties' => ['instanceIds' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'VirtualMachineScaleSetVMInstanceRequiredIDs' => ['properties' => ['instanceIds' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'VirtualMachineStatusCodeCount' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'VirtualMachineScaleSetInstanceViewStatusesSummary' => ['properties' => ['statusesSummary' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/VirtualMachineStatusCodeCount']
-            ]]],
-            'VirtualMachineScaleSetVMExtensionsSummary' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'statusesSummary' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualMachineStatusCodeCount']
-                ]
-            ]],
-            'VirtualMachineScaleSetInstanceView' => ['properties' => [
-                'virtualMachine' => ['$ref' => '#/definitions/VirtualMachineScaleSetInstanceViewStatusesSummary'],
-                'extensions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMExtensionsSummary']
-                ],
-                'statuses' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InstanceViewStatus']
-                ]
-            ]],
-            'VirtualMachineScaleSetListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualMachineScaleSet']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'VirtualMachineScaleSetListWithLinkResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualMachineScaleSet']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'VirtualMachineScaleSetSkuCapacity' => ['properties' => [
-                'minimum' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'maximum' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'defaultCapacity' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'scaleType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Automatic',
-                        'None'
-                    ]
-                ]
-            ]],
-            'VirtualMachineScaleSetSku' => ['properties' => [
-                'resourceType' => ['type' => 'string'],
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'capacity' => ['$ref' => '#/definitions/VirtualMachineScaleSetSkuCapacity']
-            ]],
-            'VirtualMachineScaleSetListSkusResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetSku']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'VirtualMachineScaleSetVMProperties' => ['properties' => [
-                'latestModelApplied' => ['type' => 'boolean'],
-                'vmId' => ['type' => 'string'],
-                'instanceView' => ['$ref' => '#/definitions/VirtualMachineInstanceView'],
-                'hardwareProfile' => ['$ref' => '#/definitions/HardwareProfile'],
-                'storageProfile' => ['$ref' => '#/definitions/StorageProfile'],
-                'osProfile' => ['$ref' => '#/definitions/OSProfile'],
-                'networkProfile' => ['$ref' => '#/definitions/NetworkProfile'],
-                'diagnosticsProfile' => ['$ref' => '#/definitions/DiagnosticsProfile'],
-                'availabilitySet' => ['$ref' => '#/definitions/SubResource'],
-                'provisioningState' => ['type' => 'string'],
-                'licenseType' => ['type' => 'string']
-            ]],
-            'VirtualMachineScaleSetVM' => ['properties' => [
-                'instanceId' => ['type' => 'string'],
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMProperties'],
-                'plan' => ['$ref' => '#/definitions/Plan'],
-                'resources' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualMachineExtension']
-                ]
-            ]],
-            'VirtualMachineScaleSetVMInstanceView' => ['properties' => [
-                'platformUpdateDomain' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'platformFaultDomain' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'rdpThumbPrint' => ['type' => 'string'],
-                'vmAgent' => ['$ref' => '#/definitions/VirtualMachineAgentInstanceView'],
-                'disks' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DiskInstanceView']
-                ],
-                'extensions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualMachineExtensionInstanceView']
-                ],
-                'bootDiagnostics' => ['$ref' => '#/definitions/BootDiagnosticsInstanceView'],
-                'statuses' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InstanceViewStatus']
-                ],
-                'placementGroupId' => ['type' => 'string']
-            ]],
-            'VirtualMachineScaleSetVMListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetVM']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ApiErrorBase' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'target' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'InnerError' => ['properties' => [
-                'exceptiontype' => ['type' => 'string'],
-                'errordetail' => ['type' => 'string']
-            ]],
-            'ApiError' => ['properties' => [
-                'details' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApiErrorBase']
-                ],
-                'innererror' => ['$ref' => '#/definitions/InnerError'],
-                'code' => ['type' => 'string'],
-                'target' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'ComputeLongRunningOperationProperties' => ['properties' => ['output' => ['type' => 'object']]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'SubResourceReadOnly' => ['properties' => ['id' => ['type' => 'string']]],
-            'OperationStatusResponse' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'status' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'error' => ['$ref' => '#/definitions/ApiError']
-            ]],
-            'DiskSku' => ['properties' => [
-                'name' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Standard_LRS',
-                        'Premium_LRS'
-                    ]
-                ],
-                'tier' => ['type' => 'string']
-            ]],
-            'ResourceUpdate' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'sku' => ['$ref' => '#/definitions/DiskSku']
-            ]],
-            'ImageDiskReference' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'lun' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'CreationData' => ['properties' => [
-                'createOption' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Empty',
-                        'Attach',
-                        'FromImage',
-                        'Import',
-                        'Copy'
-                    ]
-                ],
-                'storageAccountId' => ['type' => 'string'],
-                'imageReference' => ['$ref' => '#/definitions/ImageDiskReference'],
-                'sourceUri' => ['type' => 'string'],
-                'sourceResourceId' => ['type' => 'string']
-            ]],
-            'SourceVault' => ['properties' => ['id' => ['type' => 'string']]],
-            'KeyVaultAndSecretReference' => ['properties' => [
-                'sourceVault' => ['$ref' => '#/definitions/SourceVault'],
-                'secretUrl' => ['type' => 'string']
-            ]],
-            'KeyVaultAndKeyReference' => ['properties' => [
-                'sourceVault' => ['$ref' => '#/definitions/SourceVault'],
-                'keyUrl' => ['type' => 'string']
-            ]],
-            'EncryptionSettings' => ['properties' => [
-                'enabled' => ['type' => 'boolean'],
-                'diskEncryptionKey' => ['$ref' => '#/definitions/KeyVaultAndSecretReference'],
-                'keyEncryptionKey' => ['$ref' => '#/definitions/KeyVaultAndKeyReference']
-            ]],
-            'DiskProperties' => ['properties' => [
-                'timeCreated' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'osType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Windows',
-                        'Linux'
-                    ]
-                ],
-                'creationData' => ['$ref' => '#/definitions/CreationData'],
-                'diskSizeGB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'encryptionSettings' => ['$ref' => '#/definitions/EncryptionSettings'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'Disk' => ['properties' => [
-                'managedBy' => ['type' => 'string'],
-                'sku' => ['$ref' => '#/definitions/DiskSku'],
-                'properties' => ['$ref' => '#/definitions/DiskProperties']
-            ]],
-            'DiskUpdateProperties' => ['properties' => [
-                'osType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Windows',
-                        'Linux'
-                    ]
-                ],
-                'diskSizeGB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'encryptionSettings' => ['$ref' => '#/definitions/EncryptionSettings']
-            ]],
-            'DiskUpdate' => ['properties' => ['properties' => ['$ref' => '#/definitions/DiskUpdateProperties']]],
-            'DiskList' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Disk']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'GrantAccessData' => ['properties' => [
-                'access' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Read'
-                    ]
-                ],
-                'durationInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'AccessUriRaw' => ['properties' => ['accessSAS' => ['type' => 'string']]],
-            'AccessUriOutput' => ['properties' => ['output' => ['$ref' => '#/definitions/AccessUriRaw']]],
-            'AccessUri' => ['properties' => ['properties' => ['$ref' => '#/definitions/AccessUriOutput']]],
-            'Snapshot' => ['properties' => [
-                'managedBy' => ['type' => 'string'],
-                'sku' => ['$ref' => '#/definitions/DiskSku'],
-                'properties' => ['$ref' => '#/definitions/DiskProperties']
-            ]],
-            'SnapshotUpdate' => ['properties' => ['properties' => ['$ref' => '#/definitions/DiskUpdateProperties']]],
-            'SnapshotList' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Snapshot']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RunCommandInputParameter' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'RunCommandInput' => ['properties' => [
-                'commandId' => ['type' => 'string'],
-                'script' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'parameters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RunCommandInputParameter']
-                ]
-            ]],
-            'RunCommandParameterDefinition' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'defaultValue' => ['type' => 'string'],
-                'required' => ['type' => 'boolean']
-            ]],
-            'RunCommandDocumentBase' => ['properties' => [
-                '$schema' => ['type' => 'string'],
-                'id' => ['type' => 'string'],
-                'osType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Windows',
-                        'Linux'
-                    ]
-                ],
-                'label' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'RunCommandDocument' => ['properties' => [
-                'script' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'parameters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RunCommandParameterDefinition']
-                ]
-            ]],
-            'RunCommandListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RunCommandDocumentBase']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RunCommandResultProperties' => ['properties' => ['output' => ['type' => 'object']]],
-            'RunCommandResult' => ['properties' => ['properties' => ['$ref' => '#/definitions/RunCommandResultProperties']]],
-            'ContainerServiceCustomProfile' => ['properties' => ['orchestrator' => ['type' => 'string']]],
-            'ContainerServiceServicePrincipalProfile' => ['properties' => [
-                'clientId' => ['type' => 'string'],
-                'secret' => ['type' => 'string']
-            ]],
-            'ContainerServiceOrchestratorProfile' => ['properties' => ['orchestratorType' => [
-                'type' => 'string',
-                'enum' => [
-                    'Swarm',
-                    'DCOS',
-                    'Custom',
-                    'Kubernetes'
-                ]
-            ]]],
-            'ContainerServiceMasterProfile' => ['properties' => [
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'dnsPrefix' => ['type' => 'string'],
-                'fqdn' => ['type' => 'string']
-            ]],
-            'ContainerServiceAgentPoolProfile' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'vmSize' => [
-                    'type' => 'string',
-                    'enum' => [
+                        'Basic_A0',
+                        'Basic_A1',
+                        'Basic_A2',
+                        'Basic_A3',
+                        'Basic_A4',
                         'Standard_A0',
                         'Standard_A1',
                         'Standard_A2',
@@ -4862,6 +3766,13 @@ final class ComputeManagementClient
                         'Standard_A9',
                         'Standard_A10',
                         'Standard_A11',
+                        'Standard_A1_v2',
+                        'Standard_A2_v2',
+                        'Standard_A4_v2',
+                        'Standard_A8_v2',
+                        'Standard_A2m_v2',
+                        'Standard_A4m_v2',
+                        'Standard_A8m_v2',
                         'Standard_D1',
                         'Standard_D2',
                         'Standard_D3',
@@ -4879,11 +3790,7 @@ final class ComputeManagementClient
                         'Standard_D12_v2',
                         'Standard_D13_v2',
                         'Standard_D14_v2',
-                        'Standard_G1',
-                        'Standard_G2',
-                        'Standard_G3',
-                        'Standard_G4',
-                        'Standard_G5',
+                        'Standard_D15_v2',
                         'Standard_DS1',
                         'Standard_DS2',
                         'Standard_DS3',
@@ -4892,56 +3799,1709 @@ final class ComputeManagementClient
                         'Standard_DS12',
                         'Standard_DS13',
                         'Standard_DS14',
+                        'Standard_DS1_v2',
+                        'Standard_DS2_v2',
+                        'Standard_DS3_v2',
+                        'Standard_DS4_v2',
+                        'Standard_DS5_v2',
+                        'Standard_DS11_v2',
+                        'Standard_DS12_v2',
+                        'Standard_DS13_v2',
+                        'Standard_DS14_v2',
+                        'Standard_DS15_v2',
+                        'Standard_F1',
+                        'Standard_F2',
+                        'Standard_F4',
+                        'Standard_F8',
+                        'Standard_F16',
+                        'Standard_F1s',
+                        'Standard_F2s',
+                        'Standard_F4s',
+                        'Standard_F8s',
+                        'Standard_F16s',
+                        'Standard_G1',
+                        'Standard_G2',
+                        'Standard_G3',
+                        'Standard_G4',
+                        'Standard_G5',
                         'Standard_GS1',
                         'Standard_GS2',
                         'Standard_GS3',
                         'Standard_GS4',
-                        'Standard_GS5'
+                        'Standard_GS5',
+                        'Standard_H8',
+                        'Standard_H16',
+                        'Standard_H8m',
+                        'Standard_H16m',
+                        'Standard_H16r',
+                        'Standard_H16mr',
+                        'Standard_L4s',
+                        'Standard_L8s',
+                        'Standard_L16s',
+                        'Standard_L32s',
+                        'Standard_NC6',
+                        'Standard_NC12',
+                        'Standard_NC24',
+                        'Standard_NC24r',
+                        'Standard_NV6',
+                        'Standard_NV12',
+                        'Standard_NV24'
+                    ]
+                ]],
+                'required' => []
+            ],
+            'ImageReference' => [
+                'properties' => [
+                    'publisher' => ['type' => 'string'],
+                    'offer' => ['type' => 'string'],
+                    'sku' => ['type' => 'string'],
+                    'version' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'KeyVaultSecretReference' => [
+                'properties' => [
+                    'secretUrl' => ['type' => 'string'],
+                    'sourceVault' => ['$ref' => '#/definitions/SubResource']
+                ],
+                'required' => [
+                    'secretUrl',
+                    'sourceVault'
+                ]
+            ],
+            'KeyVaultKeyReference' => [
+                'properties' => [
+                    'keyUrl' => ['type' => 'string'],
+                    'sourceVault' => ['$ref' => '#/definitions/SubResource']
+                ],
+                'required' => [
+                    'keyUrl',
+                    'sourceVault'
+                ]
+            ],
+            'DiskEncryptionSettings' => [
+                'properties' => [
+                    'diskEncryptionKey' => ['$ref' => '#/definitions/KeyVaultSecretReference'],
+                    'keyEncryptionKey' => ['$ref' => '#/definitions/KeyVaultKeyReference'],
+                    'enabled' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'VirtualHardDisk' => [
+                'properties' => ['uri' => ['type' => 'string']],
+                'required' => []
+            ],
+            'ManagedDiskParameters' => [
+                'properties' => ['storageAccountType' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'Standard_LRS',
+                        'Premium_LRS'
+                    ]
+                ]],
+                'required' => []
+            ],
+            'OSDisk' => [
+                'properties' => [
+                    'osType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Windows',
+                            'Linux'
+                        ]
+                    ],
+                    'encryptionSettings' => ['$ref' => '#/definitions/DiskEncryptionSettings'],
+                    'name' => ['type' => 'string'],
+                    'vhd' => ['$ref' => '#/definitions/VirtualHardDisk'],
+                    'image' => ['$ref' => '#/definitions/VirtualHardDisk'],
+                    'caching' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'ReadOnly',
+                            'ReadWrite'
+                        ]
+                    ],
+                    'createOption' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'fromImage',
+                            'empty',
+                            'attach'
+                        ]
+                    ],
+                    'diskSizeGB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'managedDisk' => ['$ref' => '#/definitions/ManagedDiskParameters']
+                ],
+                'required' => ['createOption']
+            ],
+            'DataDisk' => [
+                'properties' => [
+                    'lun' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'name' => ['type' => 'string'],
+                    'vhd' => ['$ref' => '#/definitions/VirtualHardDisk'],
+                    'image' => ['$ref' => '#/definitions/VirtualHardDisk'],
+                    'caching' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'ReadOnly',
+                            'ReadWrite'
+                        ]
+                    ],
+                    'createOption' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'fromImage',
+                            'empty',
+                            'attach'
+                        ]
+                    ],
+                    'diskSizeGB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'managedDisk' => ['$ref' => '#/definitions/ManagedDiskParameters']
+                ],
+                'required' => [
+                    'lun',
+                    'createOption'
+                ]
+            ],
+            'StorageProfile' => [
+                'properties' => [
+                    'imageReference' => ['$ref' => '#/definitions/ImageReference'],
+                    'osDisk' => ['$ref' => '#/definitions/OSDisk'],
+                    'dataDisks' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DataDisk']
                     ]
                 ],
-                'dnsPrefix' => ['type' => 'string'],
-                'fqdn' => ['type' => 'string']
-            ]],
-            'ContainerServiceWindowsProfile' => ['properties' => [
-                'adminUsername' => ['type' => 'string'],
-                'adminPassword' => ['type' => 'string']
-            ]],
-            'ContainerServiceSshPublicKey' => ['properties' => ['keyData' => ['type' => 'string']]],
-            'ContainerServiceSshConfiguration' => ['properties' => ['publicKeys' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ContainerServiceSshPublicKey']
-            ]]],
-            'ContainerServiceLinuxProfile' => ['properties' => [
-                'adminUsername' => ['type' => 'string'],
-                'ssh' => ['$ref' => '#/definitions/ContainerServiceSshConfiguration']
-            ]],
-            'ContainerServiceVMDiagnostics' => ['properties' => [
-                'enabled' => ['type' => 'boolean'],
-                'storageUri' => ['type' => 'string']
-            ]],
-            'ContainerServiceDiagnosticsProfile' => ['properties' => ['vmDiagnostics' => ['$ref' => '#/definitions/ContainerServiceVMDiagnostics']]],
-            'ContainerServiceProperties' => ['properties' => [
-                'provisioningState' => ['type' => 'string'],
-                'orchestratorProfile' => ['$ref' => '#/definitions/ContainerServiceOrchestratorProfile'],
-                'customProfile' => ['$ref' => '#/definitions/ContainerServiceCustomProfile'],
-                'servicePrincipalProfile' => ['$ref' => '#/definitions/ContainerServiceServicePrincipalProfile'],
-                'masterProfile' => ['$ref' => '#/definitions/ContainerServiceMasterProfile'],
-                'agentPoolProfiles' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ContainerServiceAgentPoolProfile']
+                'required' => []
+            ],
+            'AdditionalUnattendContent' => [
+                'properties' => [
+                    'passName' => [
+                        'type' => 'string',
+                        'enum' => ['oobeSystem']
+                    ],
+                    'componentName' => [
+                        'type' => 'string',
+                        'enum' => ['Microsoft-Windows-Shell-Setup']
+                    ],
+                    'settingName' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'AutoLogon',
+                            'FirstLogonCommands'
+                        ]
+                    ],
+                    'content' => ['type' => 'string']
                 ],
-                'windowsProfile' => ['$ref' => '#/definitions/ContainerServiceWindowsProfile'],
-                'linuxProfile' => ['$ref' => '#/definitions/ContainerServiceLinuxProfile'],
-                'diagnosticsProfile' => ['$ref' => '#/definitions/ContainerServiceDiagnosticsProfile']
-            ]],
-            'ContainerService' => ['properties' => ['properties' => ['$ref' => '#/definitions/ContainerServiceProperties']]],
-            'ContainerServiceListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ContainerService']
+                'required' => []
+            ],
+            'WinRMListener' => [
+                'properties' => [
+                    'protocol' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Http',
+                            'Https'
+                        ]
+                    ],
+                    'certificateUrl' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]]
+                'required' => []
+            ],
+            'WinRMConfiguration' => [
+                'properties' => ['listeners' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/WinRMListener']
+                ]],
+                'required' => []
+            ],
+            'WindowsConfiguration' => [
+                'properties' => [
+                    'provisionVMAgent' => ['type' => 'boolean'],
+                    'enableAutomaticUpdates' => ['type' => 'boolean'],
+                    'timeZone' => ['type' => 'string'],
+                    'additionalUnattendContent' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AdditionalUnattendContent']
+                    ],
+                    'winRM' => ['$ref' => '#/definitions/WinRMConfiguration']
+                ],
+                'required' => []
+            ],
+            'SshPublicKey' => [
+                'properties' => [
+                    'path' => ['type' => 'string'],
+                    'keyData' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SshConfiguration' => [
+                'properties' => ['publicKeys' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/SshPublicKey']
+                ]],
+                'required' => []
+            ],
+            'LinuxConfiguration' => [
+                'properties' => [
+                    'disablePasswordAuthentication' => ['type' => 'boolean'],
+                    'ssh' => ['$ref' => '#/definitions/SshConfiguration']
+                ],
+                'required' => []
+            ],
+            'VaultCertificate' => [
+                'properties' => [
+                    'certificateUrl' => ['type' => 'string'],
+                    'certificateStore' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VaultSecretGroup' => [
+                'properties' => [
+                    'sourceVault' => ['$ref' => '#/definitions/SubResource'],
+                    'vaultCertificates' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VaultCertificate']
+                    ]
+                ],
+                'required' => []
+            ],
+            'OSProfile' => [
+                'properties' => [
+                    'computerName' => ['type' => 'string'],
+                    'adminUsername' => ['type' => 'string'],
+                    'adminPassword' => ['type' => 'string'],
+                    'customData' => ['type' => 'string'],
+                    'windowsConfiguration' => ['$ref' => '#/definitions/WindowsConfiguration'],
+                    'linuxConfiguration' => ['$ref' => '#/definitions/LinuxConfiguration'],
+                    'secrets' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VaultSecretGroup']
+                    ]
+                ],
+                'required' => []
+            ],
+            'NetworkInterfaceReferenceProperties' => [
+                'properties' => ['primary' => ['type' => 'boolean']],
+                'required' => []
+            ],
+            'NetworkInterfaceReference' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/NetworkInterfaceReferenceProperties']],
+                'required' => []
+            ],
+            'NetworkProfile' => [
+                'properties' => ['networkInterfaces' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/NetworkInterfaceReference']
+                ]],
+                'required' => []
+            ],
+            'BootDiagnostics' => [
+                'properties' => [
+                    'enabled' => ['type' => 'boolean'],
+                    'storageUri' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DiagnosticsProfile' => [
+                'properties' => ['bootDiagnostics' => ['$ref' => '#/definitions/BootDiagnostics']],
+                'required' => []
+            ],
+            'VirtualMachineExtensionHandlerInstanceView' => [
+                'properties' => [
+                    'type' => ['type' => 'string'],
+                    'typeHandlerVersion' => ['type' => 'string'],
+                    'status' => ['$ref' => '#/definitions/InstanceViewStatus']
+                ],
+                'required' => []
+            ],
+            'VirtualMachineAgentInstanceView' => [
+                'properties' => [
+                    'vmAgentVersion' => ['type' => 'string'],
+                    'extensionHandlers' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualMachineExtensionHandlerInstanceView']
+                    ],
+                    'statuses' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InstanceViewStatus']
+                    ]
+                ],
+                'required' => []
+            ],
+            'DiskInstanceView' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'encryptionSettings' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DiskEncryptionSettings']
+                    ],
+                    'statuses' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InstanceViewStatus']
+                    ]
+                ],
+                'required' => []
+            ],
+            'BootDiagnosticsInstanceView' => [
+                'properties' => [
+                    'consoleScreenshotBlobUri' => ['type' => 'string'],
+                    'serialConsoleLogBlobUri' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualMachineIdentity' => [
+                'properties' => [
+                    'principalId' => ['type' => 'string'],
+                    'tenantId' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => ['SystemAssigned']
+                    ]
+                ],
+                'required' => []
+            ],
+            'MaintenanceRedeployStatus' => [
+                'properties' => [
+                    'isCustomerInitiatedMaintenanceAllowed' => ['type' => 'boolean'],
+                    'preMaintenanceWindowStartTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'preMaintenanceWindowEndTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'maintenanceWindowStartTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'maintenanceWindowEndTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastOperationResultCode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'RetryLater',
+                            'MaintenanceAborted',
+                            'MaintenanceCompleted'
+                        ]
+                    ],
+                    'lastOperationMessage' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualMachineInstanceView' => [
+                'properties' => [
+                    'platformUpdateDomain' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'platformFaultDomain' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'rdpThumbPrint' => ['type' => 'string'],
+                    'vmAgent' => ['$ref' => '#/definitions/VirtualMachineAgentInstanceView'],
+                    'maintenanceRedeployStatus' => ['$ref' => '#/definitions/MaintenanceRedeployStatus'],
+                    'disks' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DiskInstanceView']
+                    ],
+                    'extensions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualMachineExtensionInstanceView']
+                    ],
+                    'bootDiagnostics' => ['$ref' => '#/definitions/BootDiagnosticsInstanceView'],
+                    'statuses' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InstanceViewStatus']
+                    ]
+                ],
+                'required' => []
+            ],
+            'VirtualMachineProperties' => [
+                'properties' => [
+                    'hardwareProfile' => ['$ref' => '#/definitions/HardwareProfile'],
+                    'storageProfile' => ['$ref' => '#/definitions/StorageProfile'],
+                    'osProfile' => ['$ref' => '#/definitions/OSProfile'],
+                    'networkProfile' => ['$ref' => '#/definitions/NetworkProfile'],
+                    'diagnosticsProfile' => ['$ref' => '#/definitions/DiagnosticsProfile'],
+                    'availabilitySet' => ['$ref' => '#/definitions/SubResource'],
+                    'provisioningState' => ['type' => 'string'],
+                    'instanceView' => ['$ref' => '#/definitions/VirtualMachineInstanceView'],
+                    'licenseType' => ['type' => 'string'],
+                    'vmId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualMachine' => [
+                'properties' => [
+                    'plan' => ['$ref' => '#/definitions/Plan'],
+                    'properties' => ['$ref' => '#/definitions/VirtualMachineProperties'],
+                    'resources' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualMachineExtension']
+                    ],
+                    'identity' => ['$ref' => '#/definitions/VirtualMachineIdentity']
+                ],
+                'required' => []
+            ],
+            'VirtualMachineListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualMachine']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'UpgradePolicy' => [
+                'properties' => ['mode' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'Automatic',
+                        'Manual'
+                    ]
+                ]],
+                'required' => []
+            ],
+            'RecoveryPolicy' => [
+                'properties' => ['mode' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'None',
+                        'OverProvision',
+                        'Reprovision'
+                    ]
+                ]],
+                'required' => []
+            ],
+            'ImageOSDisk' => [
+                'properties' => [
+                    'osType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Windows',
+                            'Linux'
+                        ]
+                    ],
+                    'osState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Generalized',
+                            'Specialized'
+                        ]
+                    ],
+                    'snapshot' => ['$ref' => '#/definitions/SubResource'],
+                    'managedDisk' => ['$ref' => '#/definitions/SubResource'],
+                    'blobUri' => ['type' => 'string'],
+                    'caching' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'ReadOnly',
+                            'ReadWrite'
+                        ]
+                    ],
+                    'diskSizeGB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'storageAccountType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Standard_LRS',
+                            'Premium_LRS'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'osType',
+                    'osState'
+                ]
+            ],
+            'ImageDataDisk' => [
+                'properties' => [
+                    'lun' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'snapshot' => ['$ref' => '#/definitions/SubResource'],
+                    'managedDisk' => ['$ref' => '#/definitions/SubResource'],
+                    'blobUri' => ['type' => 'string'],
+                    'caching' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'ReadOnly',
+                            'ReadWrite'
+                        ]
+                    ],
+                    'diskSizeGB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'storageAccountType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Standard_LRS',
+                            'Premium_LRS'
+                        ]
+                    ]
+                ],
+                'required' => ['lun']
+            ],
+            'ImageStorageProfile' => [
+                'properties' => [
+                    'osDisk' => ['$ref' => '#/definitions/ImageOSDisk'],
+                    'dataDisks' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ImageDataDisk']
+                    ]
+                ],
+                'required' => ['osDisk']
+            ],
+            'ImageProperties' => [
+                'properties' => [
+                    'sourceVirtualMachine' => ['$ref' => '#/definitions/SubResource'],
+                    'storageProfile' => ['$ref' => '#/definitions/ImageStorageProfile'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Image' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ImageProperties']],
+                'required' => []
+            ],
+            'ImageListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Image']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'VirtualMachineScaleSetIdentity' => [
+                'properties' => [
+                    'principalId' => ['type' => 'string'],
+                    'tenantId' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => ['SystemAssigned']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ResourceSkuCapacity' => [
+                'properties' => [
+                    'minimum' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'maximum' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'default' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'scaleType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Automatic',
+                            'Manual',
+                            'None'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'ResourceSkuCosts' => [
+                'properties' => [
+                    'meterID' => ['type' => 'string'],
+                    'quantity' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'extendedUnit' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResourceSkuCapabilities' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResourceSkuRestrictions' => [
+                'properties' => [
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => ['location']
+                    ],
+                    'values' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'reasonCode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'QuotaId',
+                            'NotAvailableForSubscription'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'ResourceSku' => [
+                'properties' => [
+                    'resourceType' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'tier' => ['type' => 'string'],
+                    'size' => ['type' => 'string'],
+                    'family' => ['type' => 'string'],
+                    'kind' => ['type' => 'string'],
+                    'capacity' => ['$ref' => '#/definitions/ResourceSkuCapacity'],
+                    'locations' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'apiVersions' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'costs' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceSkuCosts']
+                    ],
+                    'capabilities' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceSkuCapabilities']
+                    ],
+                    'restrictions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceSkuRestrictions']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ResourceSkusResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceSku']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'VirtualMachineScaleSetOSProfile' => [
+                'properties' => [
+                    'computerNamePrefix' => ['type' => 'string'],
+                    'adminUsername' => ['type' => 'string'],
+                    'adminPassword' => ['type' => 'string'],
+                    'customData' => ['type' => 'string'],
+                    'windowsConfiguration' => ['$ref' => '#/definitions/WindowsConfiguration'],
+                    'linuxConfiguration' => ['$ref' => '#/definitions/LinuxConfiguration'],
+                    'secrets' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VaultSecretGroup']
+                    ]
+                ],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetManagedDiskParameters' => [
+                'properties' => ['storageAccountType' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'Standard_LRS',
+                        'Premium_LRS'
+                    ]
+                ]],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetOSDisk' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'caching' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'ReadOnly',
+                            'ReadWrite'
+                        ]
+                    ],
+                    'createOption' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'fromImage',
+                            'empty',
+                            'attach'
+                        ]
+                    ],
+                    'osType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Windows',
+                            'Linux'
+                        ]
+                    ],
+                    'image' => ['$ref' => '#/definitions/VirtualHardDisk'],
+                    'vhdContainers' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'managedDisk' => ['$ref' => '#/definitions/VirtualMachineScaleSetManagedDiskParameters']
+                ],
+                'required' => ['createOption']
+            ],
+            'VirtualMachineScaleSetDataDisk' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'lun' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'caching' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'ReadOnly',
+                            'ReadWrite'
+                        ]
+                    ],
+                    'createOption' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'fromImage',
+                            'empty',
+                            'attach'
+                        ]
+                    ],
+                    'diskSizeGB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'managedDisk' => ['$ref' => '#/definitions/VirtualMachineScaleSetManagedDiskParameters']
+                ],
+                'required' => [
+                    'lun',
+                    'createOption'
+                ]
+            ],
+            'VirtualMachineScaleSetStorageProfile' => [
+                'properties' => [
+                    'imageReference' => ['$ref' => '#/definitions/ImageReference'],
+                    'osDisk' => ['$ref' => '#/definitions/VirtualMachineScaleSetOSDisk'],
+                    'dataDisks' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetDataDisk']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ApiEntityReference' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings' => [
+                'properties' => ['domainNameLabel' => ['type' => 'string']],
+                'required' => ['domainNameLabel']
+            ],
+            'VirtualMachineScaleSetPublicIPAddressConfigurationProperties' => [
+                'properties' => [
+                    'idleTimeoutInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'dnsSettings' => ['$ref' => '#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings']
+                ],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetPublicIPAddressConfiguration' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationProperties']
+                ],
+                'required' => ['name']
+            ],
+            'VirtualMachineScaleSetIPConfigurationProperties' => [
+                'properties' => [
+                    'subnet' => ['$ref' => '#/definitions/ApiEntityReference'],
+                    'primary' => ['type' => 'boolean'],
+                    'publicIPAddressConfiguration' => ['$ref' => '#/definitions/VirtualMachineScaleSetPublicIPAddressConfiguration'],
+                    'privateIPAddressVersion' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'IPv4',
+                            'IPv6'
+                        ]
+                    ],
+                    'applicationGatewayBackendAddressPools' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubResource']
+                    ],
+                    'loadBalancerBackendAddressPools' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubResource']
+                    ],
+                    'loadBalancerInboundNatPools' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubResource']
+                    ]
+                ],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetIPConfiguration' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetIPConfigurationProperties']
+                ],
+                'required' => ['name']
+            ],
+            'VirtualMachineScaleSetNetworkConfigurationDnsSettings' => [
+                'properties' => ['dnsServers' => [
+                    'type' => 'array',
+                    'items' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetNetworkConfigurationProperties' => [
+                'properties' => [
+                    'primary' => ['type' => 'boolean'],
+                    'enableAcceleratedNetworking' => ['type' => 'boolean'],
+                    'networkSecurityGroup' => ['$ref' => '#/definitions/SubResource'],
+                    'dnsSettings' => ['$ref' => '#/definitions/VirtualMachineScaleSetNetworkConfigurationDnsSettings'],
+                    'ipConfigurations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetIPConfiguration']
+                    ]
+                ],
+                'required' => ['ipConfigurations']
+            ],
+            'VirtualMachineScaleSetNetworkConfiguration' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetNetworkConfigurationProperties']
+                ],
+                'required' => ['name']
+            ],
+            'VirtualMachineScaleSetNetworkProfile' => [
+                'properties' => ['networkInterfaceConfigurations' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetNetworkConfiguration']
+                ]],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetExtensionProperties' => [
+                'properties' => [
+                    'forceUpdateTag' => ['type' => 'string'],
+                    'publisher' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'typeHandlerVersion' => ['type' => 'string'],
+                    'autoUpgradeMinorVersion' => ['type' => 'boolean'],
+                    'settings' => ['type' => 'object'],
+                    'protectedSettings' => ['type' => 'object'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetExtension' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetExtensionProperties']
+                ],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetExtensionListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetExtension']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'VirtualMachineScaleSetExtensionProfile' => [
+                'properties' => ['extensions' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetExtension']
+                ]],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetVMProfile' => [
+                'properties' => [
+                    'osProfile' => ['$ref' => '#/definitions/VirtualMachineScaleSetOSProfile'],
+                    'storageProfile' => ['$ref' => '#/definitions/VirtualMachineScaleSetStorageProfile'],
+                    'networkProfile' => ['$ref' => '#/definitions/VirtualMachineScaleSetNetworkProfile'],
+                    'diagnosticsProfile' => ['$ref' => '#/definitions/DiagnosticsProfile'],
+                    'extensionProfile' => ['$ref' => '#/definitions/VirtualMachineScaleSetExtensionProfile'],
+                    'licenseType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetProperties' => [
+                'properties' => [
+                    'upgradePolicy' => ['$ref' => '#/definitions/UpgradePolicy'],
+                    'recoveryPolicy' => ['$ref' => '#/definitions/RecoveryPolicy'],
+                    'virtualMachineProfile' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMProfile'],
+                    'provisioningState' => ['type' => 'string'],
+                    'overprovision' => ['type' => 'boolean'],
+                    'uniqueId' => ['type' => 'string'],
+                    'singlePlacementGroup' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'VirtualMachineScaleSet' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'plan' => ['$ref' => '#/definitions/Plan'],
+                    'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetProperties'],
+                    'identity' => ['$ref' => '#/definitions/VirtualMachineScaleSetIdentity']
+                ],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetVMInstanceIDs' => [
+                'properties' => ['instanceIds' => [
+                    'type' => 'array',
+                    'items' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetVMInstanceRequiredIDs' => [
+                'properties' => ['instanceIds' => [
+                    'type' => 'array',
+                    'items' => ['type' => 'string']
+                ]],
+                'required' => ['instanceIds']
+            ],
+            'VirtualMachineStatusCodeCount' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetInstanceViewStatusesSummary' => [
+                'properties' => ['statusesSummary' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/VirtualMachineStatusCodeCount']
+                ]],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetVMExtensionsSummary' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'statusesSummary' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualMachineStatusCodeCount']
+                    ]
+                ],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetInstanceView' => [
+                'properties' => [
+                    'virtualMachine' => ['$ref' => '#/definitions/VirtualMachineScaleSetInstanceViewStatusesSummary'],
+                    'extensions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMExtensionsSummary']
+                    ],
+                    'statuses' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InstanceViewStatus']
+                    ]
+                ],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualMachineScaleSet']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'VirtualMachineScaleSetListWithLinkResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualMachineScaleSet']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'VirtualMachineScaleSetSkuCapacity' => [
+                'properties' => [
+                    'minimum' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'maximum' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'defaultCapacity' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'scaleType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Automatic',
+                            'None'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetSku' => [
+                'properties' => [
+                    'resourceType' => ['type' => 'string'],
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'capacity' => ['$ref' => '#/definitions/VirtualMachineScaleSetSkuCapacity']
+                ],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetListSkusResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetSku']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'VirtualMachineScaleSetVMProperties' => [
+                'properties' => [
+                    'latestModelApplied' => ['type' => 'boolean'],
+                    'vmId' => ['type' => 'string'],
+                    'instanceView' => ['$ref' => '#/definitions/VirtualMachineInstanceView'],
+                    'hardwareProfile' => ['$ref' => '#/definitions/HardwareProfile'],
+                    'storageProfile' => ['$ref' => '#/definitions/StorageProfile'],
+                    'osProfile' => ['$ref' => '#/definitions/OSProfile'],
+                    'networkProfile' => ['$ref' => '#/definitions/NetworkProfile'],
+                    'diagnosticsProfile' => ['$ref' => '#/definitions/DiagnosticsProfile'],
+                    'availabilitySet' => ['$ref' => '#/definitions/SubResource'],
+                    'provisioningState' => ['type' => 'string'],
+                    'licenseType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetVM' => [
+                'properties' => [
+                    'instanceId' => ['type' => 'string'],
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMProperties'],
+                    'plan' => ['$ref' => '#/definitions/Plan'],
+                    'resources' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualMachineExtension']
+                    ]
+                ],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetVMInstanceView' => [
+                'properties' => [
+                    'platformUpdateDomain' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'platformFaultDomain' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'rdpThumbPrint' => ['type' => 'string'],
+                    'vmAgent' => ['$ref' => '#/definitions/VirtualMachineAgentInstanceView'],
+                    'disks' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DiskInstanceView']
+                    ],
+                    'extensions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualMachineExtensionInstanceView']
+                    ],
+                    'bootDiagnostics' => ['$ref' => '#/definitions/BootDiagnosticsInstanceView'],
+                    'statuses' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InstanceViewStatus']
+                    ],
+                    'placementGroupId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualMachineScaleSetVMListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetVM']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'ApiErrorBase' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'target' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InnerError' => [
+                'properties' => [
+                    'exceptiontype' => ['type' => 'string'],
+                    'errordetail' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApiError' => [
+                'properties' => [
+                    'details' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApiErrorBase']
+                    ],
+                    'innererror' => ['$ref' => '#/definitions/InnerError'],
+                    'code' => ['type' => 'string'],
+                    'target' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ComputeLongRunningOperationProperties' => [
+                'properties' => ['output' => ['type' => 'object']],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['location']
+            ],
+            'SubResourceReadOnly' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => []
+            ],
+            'OperationStatusResponse' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'status' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'error' => ['$ref' => '#/definitions/ApiError']
+                ],
+                'required' => []
+            ],
+            'DiskSku' => [
+                'properties' => [
+                    'name' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Standard_LRS',
+                            'Premium_LRS'
+                        ]
+                    ],
+                    'tier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResourceUpdate' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'sku' => ['$ref' => '#/definitions/DiskSku']
+                ],
+                'required' => []
+            ],
+            'ImageDiskReference' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'lun' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => ['id']
+            ],
+            'CreationData' => [
+                'properties' => [
+                    'createOption' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Empty',
+                            'Attach',
+                            'FromImage',
+                            'Import',
+                            'Copy'
+                        ]
+                    ],
+                    'storageAccountId' => ['type' => 'string'],
+                    'imageReference' => ['$ref' => '#/definitions/ImageDiskReference'],
+                    'sourceUri' => ['type' => 'string'],
+                    'sourceResourceId' => ['type' => 'string']
+                ],
+                'required' => ['createOption']
+            ],
+            'SourceVault' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => []
+            ],
+            'KeyVaultAndSecretReference' => [
+                'properties' => [
+                    'sourceVault' => ['$ref' => '#/definitions/SourceVault'],
+                    'secretUrl' => ['type' => 'string']
+                ],
+                'required' => [
+                    'sourceVault',
+                    'secretUrl'
+                ]
+            ],
+            'KeyVaultAndKeyReference' => [
+                'properties' => [
+                    'sourceVault' => ['$ref' => '#/definitions/SourceVault'],
+                    'keyUrl' => ['type' => 'string']
+                ],
+                'required' => [
+                    'sourceVault',
+                    'keyUrl'
+                ]
+            ],
+            'EncryptionSettings' => [
+                'properties' => [
+                    'enabled' => ['type' => 'boolean'],
+                    'diskEncryptionKey' => ['$ref' => '#/definitions/KeyVaultAndSecretReference'],
+                    'keyEncryptionKey' => ['$ref' => '#/definitions/KeyVaultAndKeyReference']
+                ],
+                'required' => []
+            ],
+            'DiskProperties' => [
+                'properties' => [
+                    'timeCreated' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'osType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Windows',
+                            'Linux'
+                        ]
+                    ],
+                    'creationData' => ['$ref' => '#/definitions/CreationData'],
+                    'diskSizeGB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'encryptionSettings' => ['$ref' => '#/definitions/EncryptionSettings'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => ['creationData']
+            ],
+            'Disk' => [
+                'properties' => [
+                    'managedBy' => ['type' => 'string'],
+                    'sku' => ['$ref' => '#/definitions/DiskSku'],
+                    'properties' => ['$ref' => '#/definitions/DiskProperties']
+                ],
+                'required' => []
+            ],
+            'DiskUpdateProperties' => [
+                'properties' => [
+                    'osType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Windows',
+                            'Linux'
+                        ]
+                    ],
+                    'diskSizeGB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'encryptionSettings' => ['$ref' => '#/definitions/EncryptionSettings']
+                ],
+                'required' => []
+            ],
+            'DiskUpdate' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DiskUpdateProperties']],
+                'required' => []
+            ],
+            'DiskList' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Disk']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'GrantAccessData' => [
+                'properties' => [
+                    'access' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Read'
+                        ]
+                    ],
+                    'durationInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => [
+                    'access',
+                    'durationInSeconds'
+                ]
+            ],
+            'AccessUriRaw' => [
+                'properties' => ['accessSAS' => ['type' => 'string']],
+                'required' => []
+            ],
+            'AccessUriOutput' => [
+                'properties' => ['output' => ['$ref' => '#/definitions/AccessUriRaw']],
+                'required' => []
+            ],
+            'AccessUri' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AccessUriOutput']],
+                'required' => []
+            ],
+            'Snapshot' => [
+                'properties' => [
+                    'managedBy' => ['type' => 'string'],
+                    'sku' => ['$ref' => '#/definitions/DiskSku'],
+                    'properties' => ['$ref' => '#/definitions/DiskProperties']
+                ],
+                'required' => []
+            ],
+            'SnapshotUpdate' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DiskUpdateProperties']],
+                'required' => []
+            ],
+            'SnapshotList' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Snapshot']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'RunCommandInputParameter' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'value'
+                ]
+            ],
+            'RunCommandInput' => [
+                'properties' => [
+                    'commandId' => ['type' => 'string'],
+                    'script' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'parameters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RunCommandInputParameter']
+                    ]
+                ],
+                'required' => ['commandId']
+            ],
+            'RunCommandParameterDefinition' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'defaultValue' => ['type' => 'string'],
+                    'required' => ['type' => 'boolean']
+                ],
+                'required' => [
+                    'name',
+                    'type'
+                ]
+            ],
+            'RunCommandDocumentBase' => [
+                'properties' => [
+                    '$schema' => ['type' => 'string'],
+                    'id' => ['type' => 'string'],
+                    'osType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Windows',
+                            'Linux'
+                        ]
+                    ],
+                    'label' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => [
+                    '$schema',
+                    'id',
+                    'osType',
+                    'label',
+                    'description'
+                ]
+            ],
+            'RunCommandDocument' => [
+                'properties' => [
+                    'script' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'parameters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RunCommandParameterDefinition']
+                    ]
+                ],
+                'required' => ['script']
+            ],
+            'RunCommandListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RunCommandDocumentBase']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'RunCommandResultProperties' => [
+                'properties' => ['output' => ['type' => 'object']],
+                'required' => []
+            ],
+            'RunCommandResult' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RunCommandResultProperties']],
+                'required' => []
+            ],
+            'ContainerServiceCustomProfile' => [
+                'properties' => ['orchestrator' => ['type' => 'string']],
+                'required' => ['orchestrator']
+            ],
+            'ContainerServiceServicePrincipalProfile' => [
+                'properties' => [
+                    'clientId' => ['type' => 'string'],
+                    'secret' => ['type' => 'string']
+                ],
+                'required' => [
+                    'clientId',
+                    'secret'
+                ]
+            ],
+            'ContainerServiceOrchestratorProfile' => [
+                'properties' => ['orchestratorType' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'Swarm',
+                        'DCOS',
+                        'Custom',
+                        'Kubernetes'
+                    ]
+                ]],
+                'required' => ['orchestratorType']
+            ],
+            'ContainerServiceMasterProfile' => [
+                'properties' => [
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'dnsPrefix' => ['type' => 'string'],
+                    'fqdn' => ['type' => 'string']
+                ],
+                'required' => ['dnsPrefix']
+            ],
+            'ContainerServiceAgentPoolProfile' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'vmSize' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Standard_A0',
+                            'Standard_A1',
+                            'Standard_A2',
+                            'Standard_A3',
+                            'Standard_A4',
+                            'Standard_A5',
+                            'Standard_A6',
+                            'Standard_A7',
+                            'Standard_A8',
+                            'Standard_A9',
+                            'Standard_A10',
+                            'Standard_A11',
+                            'Standard_D1',
+                            'Standard_D2',
+                            'Standard_D3',
+                            'Standard_D4',
+                            'Standard_D11',
+                            'Standard_D12',
+                            'Standard_D13',
+                            'Standard_D14',
+                            'Standard_D1_v2',
+                            'Standard_D2_v2',
+                            'Standard_D3_v2',
+                            'Standard_D4_v2',
+                            'Standard_D5_v2',
+                            'Standard_D11_v2',
+                            'Standard_D12_v2',
+                            'Standard_D13_v2',
+                            'Standard_D14_v2',
+                            'Standard_G1',
+                            'Standard_G2',
+                            'Standard_G3',
+                            'Standard_G4',
+                            'Standard_G5',
+                            'Standard_DS1',
+                            'Standard_DS2',
+                            'Standard_DS3',
+                            'Standard_DS4',
+                            'Standard_DS11',
+                            'Standard_DS12',
+                            'Standard_DS13',
+                            'Standard_DS14',
+                            'Standard_GS1',
+                            'Standard_GS2',
+                            'Standard_GS3',
+                            'Standard_GS4',
+                            'Standard_GS5'
+                        ]
+                    ],
+                    'dnsPrefix' => ['type' => 'string'],
+                    'fqdn' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'count',
+                    'vmSize',
+                    'dnsPrefix'
+                ]
+            ],
+            'ContainerServiceWindowsProfile' => [
+                'properties' => [
+                    'adminUsername' => ['type' => 'string'],
+                    'adminPassword' => ['type' => 'string']
+                ],
+                'required' => [
+                    'adminUsername',
+                    'adminPassword'
+                ]
+            ],
+            'ContainerServiceSshPublicKey' => [
+                'properties' => ['keyData' => ['type' => 'string']],
+                'required' => ['keyData']
+            ],
+            'ContainerServiceSshConfiguration' => [
+                'properties' => ['publicKeys' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ContainerServiceSshPublicKey']
+                ]],
+                'required' => ['publicKeys']
+            ],
+            'ContainerServiceLinuxProfile' => [
+                'properties' => [
+                    'adminUsername' => ['type' => 'string'],
+                    'ssh' => ['$ref' => '#/definitions/ContainerServiceSshConfiguration']
+                ],
+                'required' => [
+                    'adminUsername',
+                    'ssh'
+                ]
+            ],
+            'ContainerServiceVMDiagnostics' => [
+                'properties' => [
+                    'enabled' => ['type' => 'boolean'],
+                    'storageUri' => ['type' => 'string']
+                ],
+                'required' => ['enabled']
+            ],
+            'ContainerServiceDiagnosticsProfile' => [
+                'properties' => ['vmDiagnostics' => ['$ref' => '#/definitions/ContainerServiceVMDiagnostics']],
+                'required' => ['vmDiagnostics']
+            ],
+            'ContainerServiceProperties' => [
+                'properties' => [
+                    'provisioningState' => ['type' => 'string'],
+                    'orchestratorProfile' => ['$ref' => '#/definitions/ContainerServiceOrchestratorProfile'],
+                    'customProfile' => ['$ref' => '#/definitions/ContainerServiceCustomProfile'],
+                    'servicePrincipalProfile' => ['$ref' => '#/definitions/ContainerServiceServicePrincipalProfile'],
+                    'masterProfile' => ['$ref' => '#/definitions/ContainerServiceMasterProfile'],
+                    'agentPoolProfiles' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ContainerServiceAgentPoolProfile']
+                    ],
+                    'windowsProfile' => ['$ref' => '#/definitions/ContainerServiceWindowsProfile'],
+                    'linuxProfile' => ['$ref' => '#/definitions/ContainerServiceLinuxProfile'],
+                    'diagnosticsProfile' => ['$ref' => '#/definitions/ContainerServiceDiagnosticsProfile']
+                ],
+                'required' => [
+                    'masterProfile',
+                    'agentPoolProfiles',
+                    'linuxProfile'
+                ]
+            ],
+            'ContainerService' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ContainerServiceProperties']],
+                'required' => []
+            ],
+            'ContainerServiceListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ContainerService']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

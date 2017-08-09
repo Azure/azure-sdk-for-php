@@ -159,24 +159,36 @@ final class ManagementLinkClient
             ]]
         ],
         'definitions' => [
-            'ResourceLinkFilter' => ['properties' => ['targetId' => ['type' => 'string']]],
-            'ResourceLinkProperties' => ['properties' => [
-                'sourceId' => ['type' => 'string'],
-                'targetId' => ['type' => 'string'],
-                'notes' => ['type' => 'string']
-            ]],
-            'ResourceLink' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ResourceLinkProperties']
-            ]],
-            'ResourceLinkResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceLink']
+            'ResourceLinkFilter' => [
+                'properties' => ['targetId' => ['type' => 'string']],
+                'required' => ['targetId']
+            ],
+            'ResourceLinkProperties' => [
+                'properties' => [
+                    'sourceId' => ['type' => 'string'],
+                    'targetId' => ['type' => 'string'],
+                    'notes' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]]
+                'required' => ['targetId']
+            ],
+            'ResourceLink' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ResourceLinkProperties']
+                ],
+                'required' => []
+            ],
+            'ResourceLinkResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceLink']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ]
         ]
     ];
 }

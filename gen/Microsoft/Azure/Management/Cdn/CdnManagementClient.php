@@ -1286,307 +1286,440 @@ final class CdnManagementClient
             ]]
         ],
         'definitions' => [
-            'Sku' => ['properties' => ['name' => [
-                'type' => 'string',
-                'enum' => [
-                    'Standard_Verizon',
-                    'Premium_Verizon',
-                    'Custom_Verizon',
-                    'Standard_Akamai',
-                    'Standard_ChinaCdn'
-                ]
-            ]]],
-            'ProfileProperties' => ['properties' => [
-                'resourceState' => [
+            'Sku' => [
+                'properties' => ['name' => [
                     'type' => 'string',
                     'enum' => [
-                        'Creating',
-                        'Active',
-                        'Deleting',
-                        'Disabled'
+                        'Standard_Verizon',
+                        'Premium_Verizon',
+                        'Custom_Verizon',
+                        'Standard_Akamai',
+                        'Standard_ChinaCdn'
                     ]
+                ]],
+                'required' => []
+            ],
+            'ProfileProperties' => [
+                'properties' => [
+                    'resourceState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Creating',
+                            'Active',
+                            'Deleting',
+                            'Disabled'
+                        ]
+                    ],
+                    'provisioningState' => ['type' => 'string']
                 ],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'Profile' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'properties' => ['$ref' => '#/definitions/ProfileProperties']
-            ]],
-            'ProfileListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Profile']
+                'required' => []
+            ],
+            'Profile' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'properties' => ['$ref' => '#/definitions/ProfileProperties']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ProfileUpdateParameters' => ['properties' => ['tags' => [
-                'type' => 'object',
-                'additionalProperties' => ['type' => 'string']
-            ]]],
-            'SsoUri' => ['properties' => ['ssoUriValue' => ['type' => 'string']]],
-            'DeepCreatedOriginProperties' => ['properties' => [
-                'hostName' => ['type' => 'string'],
-                'httpPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => ['sku']
+            ],
+            'ProfileListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Profile']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'httpsPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'DeepCreatedOrigin' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/DeepCreatedOriginProperties']
-            ]],
-            'EndpointProperties' => ['properties' => [
-                'hostName' => ['type' => 'string'],
-                'origins' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DeepCreatedOrigin']
-                ],
-                'resourceState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Creating',
-                        'Deleting',
-                        'Running',
-                        'Starting',
-                        'Stopped',
-                        'Stopping'
-                    ]
-                ],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'Endpoint' => ['properties' => ['properties' => ['$ref' => '#/definitions/EndpointProperties']]],
-            'EndpointListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Endpoint']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'GeoFilter' => ['properties' => [
-                'relativePath' => ['type' => 'string'],
-                'action' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Block',
-                        'Allow'
-                    ]
-                ],
-                'countryCodes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'EndpointPropertiesUpdateParameters' => ['properties' => [
-                'originHostHeader' => ['type' => 'string'],
-                'originPath' => ['type' => 'string'],
-                'contentTypesToCompress' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'isCompressionEnabled' => ['type' => 'boolean'],
-                'isHttpAllowed' => ['type' => 'boolean'],
-                'isHttpsAllowed' => ['type' => 'boolean'],
-                'queryStringCachingBehavior' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'IgnoreQueryString',
-                        'BypassCaching',
-                        'UseQueryString',
-                        'NotSet'
-                    ]
-                ],
-                'optimizationType' => ['type' => 'string'],
-                'geoFilters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/GeoFilter']
-                ]
-            ]],
-            'EndpointUpdateParameters' => ['properties' => [
-                'tags' => [
+                'required' => []
+            ],
+            'ProfileUpdateParameters' => [
+                'properties' => ['tags' => [
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
-                ],
-                'properties' => ['$ref' => '#/definitions/EndpointPropertiesUpdateParameters']
-            ]],
-            'PurgeParameters' => ['properties' => ['contentPaths' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'LoadParameters' => ['properties' => ['contentPaths' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'OriginProperties' => ['properties' => [
-                'hostName' => ['type' => 'string'],
-                'httpPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'httpsPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'resourceState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Creating',
-                        'Active',
-                        'Deleting'
+                ]],
+                'required' => ['tags']
+            ],
+            'SsoUri' => [
+                'properties' => ['ssoUriValue' => ['type' => 'string']],
+                'required' => []
+            ],
+            'DeepCreatedOriginProperties' => [
+                'properties' => [
+                    'hostName' => ['type' => 'string'],
+                    'httpPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'httpsPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'Origin' => ['properties' => ['properties' => ['$ref' => '#/definitions/OriginProperties']]],
-            'OriginPropertiesParameters' => ['properties' => [
-                'hostName' => ['type' => 'string'],
-                'httpPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => ['hostName']
+            ],
+            'DeepCreatedOrigin' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/DeepCreatedOriginProperties']
                 ],
-                'httpsPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'OriginUpdateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/OriginPropertiesParameters']]],
-            'OriginListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Origin']
+                'required' => ['name']
+            ],
+            'EndpointProperties' => [
+                'properties' => [
+                    'hostName' => ['type' => 'string'],
+                    'origins' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DeepCreatedOrigin']
+                    ],
+                    'resourceState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Creating',
+                            'Deleting',
+                            'Running',
+                            'Starting',
+                            'Stopped',
+                            'Stopping'
+                        ]
+                    ],
+                    'provisioningState' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'CustomDomainProperties' => ['properties' => [
-                'hostName' => ['type' => 'string'],
-                'resourceState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Creating',
-                        'Active',
-                        'Deleting'
+                'required' => ['origins']
+            ],
+            'Endpoint' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/EndpointProperties']],
+                'required' => []
+            ],
+            'EndpointListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Endpoint']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'GeoFilter' => [
+                'properties' => [
+                    'relativePath' => ['type' => 'string'],
+                    'action' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Block',
+                            'Allow'
+                        ]
+                    ],
+                    'countryCodes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
                     ]
                 ],
-                'customHttpsProvisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabling',
-                        'Enabled',
-                        'Disabling',
-                        'Disabled',
-                        'Failed'
+                'required' => [
+                    'relativePath',
+                    'action',
+                    'countryCodes'
+                ]
+            ],
+            'EndpointPropertiesUpdateParameters' => [
+                'properties' => [
+                    'originHostHeader' => ['type' => 'string'],
+                    'originPath' => ['type' => 'string'],
+                    'contentTypesToCompress' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'isCompressionEnabled' => ['type' => 'boolean'],
+                    'isHttpAllowed' => ['type' => 'boolean'],
+                    'isHttpsAllowed' => ['type' => 'boolean'],
+                    'queryStringCachingBehavior' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'IgnoreQueryString',
+                            'BypassCaching',
+                            'UseQueryString',
+                            'NotSet'
+                        ]
+                    ],
+                    'optimizationType' => ['type' => 'string'],
+                    'geoFilters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/GeoFilter']
                     ]
                 ],
-                'validationData' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'CustomDomain' => ['properties' => ['properties' => ['$ref' => '#/definitions/CustomDomainProperties']]],
-            'CustomDomainPropertiesParameters' => ['properties' => ['hostName' => ['type' => 'string']]],
-            'CustomDomainParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/CustomDomainPropertiesParameters']]],
-            'CustomDomainListResult' => ['properties' => [
-                'value' => [
+                'required' => []
+            ],
+            'EndpointUpdateParameters' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/EndpointPropertiesUpdateParameters']
+                ],
+                'required' => []
+            ],
+            'PurgeParameters' => [
+                'properties' => ['contentPaths' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CustomDomain']
+                    'items' => ['type' => 'string']
+                ]],
+                'required' => ['contentPaths']
+            ],
+            'LoadParameters' => [
+                'properties' => ['contentPaths' => [
+                    'type' => 'array',
+                    'items' => ['type' => 'string']
+                ]],
+                'required' => ['contentPaths']
+            ],
+            'OriginProperties' => [
+                'properties' => [
+                    'hostName' => ['type' => 'string'],
+                    'httpPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'httpsPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'resourceState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Creating',
+                            'Active',
+                            'Deleting'
+                        ]
+                    ],
+                    'provisioningState' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ValidateCustomDomainInput' => ['properties' => ['hostName' => ['type' => 'string']]],
-            'ValidateCustomDomainOutput' => ['properties' => [
-                'customDomainValidated' => ['type' => 'boolean'],
-                'reason' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'CheckNameAvailabilityInput' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'CheckNameAvailabilityOutput' => ['properties' => [
-                'nameAvailable' => ['type' => 'boolean'],
-                'reason' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'ResourceUsage' => ['properties' => [
-                'resourceType' => ['type' => 'string'],
-                'unit' => ['type' => 'string'],
-                'currentValue' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => ['hostName']
+            ],
+            'Origin' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/OriginProperties']],
+                'required' => []
+            ],
+            'OriginPropertiesParameters' => [
+                'properties' => [
+                    'hostName' => ['type' => 'string'],
+                    'httpPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'httpsPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
                 ],
-                'limit' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'OriginUpdateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/OriginPropertiesParameters']],
+                'required' => []
+            ],
+            'OriginListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Origin']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CustomDomainProperties' => [
+                'properties' => [
+                    'hostName' => ['type' => 'string'],
+                    'resourceState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Creating',
+                            'Active',
+                            'Deleting'
+                        ]
+                    ],
+                    'customHttpsProvisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabling',
+                            'Enabled',
+                            'Disabling',
+                            'Disabled',
+                            'Failed'
+                        ]
+                    ],
+                    'validationData' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => ['hostName']
+            ],
+            'CustomDomain' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/CustomDomainProperties']],
+                'required' => []
+            ],
+            'CustomDomainPropertiesParameters' => [
+                'properties' => ['hostName' => ['type' => 'string']],
+                'required' => ['hostName']
+            ],
+            'CustomDomainParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/CustomDomainPropertiesParameters']],
+                'required' => []
+            ],
+            'CustomDomainListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CustomDomain']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ValidateCustomDomainInput' => [
+                'properties' => ['hostName' => ['type' => 'string']],
+                'required' => ['hostName']
+            ],
+            'ValidateCustomDomainOutput' => [
+                'properties' => [
+                    'customDomainValidated' => ['type' => 'boolean'],
+                    'reason' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CheckNameAvailabilityInput' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'type'
                 ]
-            ]],
-            'ResourceUsageListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceUsage']
+            ],
+            'CheckNameAvailabilityOutput' => [
+                'properties' => [
+                    'nameAvailable' => ['type' => 'boolean'],
+                    'reason' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Operation_display' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/Operation_display']
-            ]],
-            'OperationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Operation']
+                'required' => []
+            ],
+            'ResourceUsage' => [
+                'properties' => [
+                    'resourceType' => ['type' => 'string'],
+                    'unit' => ['type' => 'string'],
+                    'currentValue' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'limit' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'cidrIpAddress' => ['properties' => [
-                'baseIpAddress' => ['type' => 'string'],
-                'prefixLength' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'IpAddressGroup' => ['properties' => [
-                'deliveryRegion' => ['type' => 'string'],
-                'ipv4Addresses' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/cidrIpAddress']
+                'required' => []
+            ],
+            'ResourceUsageListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceUsage']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'ipv6Addresses' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/cidrIpAddress']
-                ]
-            ]],
-            'EdgeNodeProperties' => ['properties' => ['ipAddressGroups' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/IpAddressGroup']
-            ]]],
-            'EdgeNode' => ['properties' => ['properties' => ['$ref' => '#/definitions/EdgeNodeProperties']]],
-            'EdgenodeResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/EdgeNode']
+                'required' => []
+            ],
+            'Operation_display' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ErrorResponse' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]]
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/Operation_display']
+                ],
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Operation']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'cidrIpAddress' => [
+                'properties' => [
+                    'baseIpAddress' => ['type' => 'string'],
+                    'prefixLength' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'IpAddressGroup' => [
+                'properties' => [
+                    'deliveryRegion' => ['type' => 'string'],
+                    'ipv4Addresses' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/cidrIpAddress']
+                    ],
+                    'ipv6Addresses' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/cidrIpAddress']
+                    ]
+                ],
+                'required' => []
+            ],
+            'EdgeNodeProperties' => [
+                'properties' => ['ipAddressGroups' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/IpAddressGroup']
+                ]],
+                'required' => ['ipAddressGroups']
+            ],
+            'EdgeNode' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/EdgeNodeProperties']],
+                'required' => []
+            ],
+            'EdgenodeResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/EdgeNode']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['location']
+            ],
+            'ErrorResponse' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

@@ -1377,196 +1377,271 @@ final class RelayManagementClient
             ]]
         ],
         'definitions' => [
-            'TrackedResource' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'tags' => [
+            'TrackedResource' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['location']
+            ],
+            'ResourceNamespacePatch' => [
+                'properties' => ['tags' => [
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ResourceNamespacePatch' => ['properties' => ['tags' => [
-                'type' => 'object',
-                'additionalProperties' => ['type' => 'string']
-            ]]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'HybridConnection_properties' => ['properties' => [
-                'createdAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                ]],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
                 ],
-                'updatedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'HybridConnection_properties' => [
+                'properties' => [
+                    'createdAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'updatedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'listenerCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'requiresClientAuthorization' => ['type' => 'boolean'],
+                    'userMetadata' => ['type' => 'string']
                 ],
-                'listenerCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'HybridConnection' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/HybridConnection_properties']],
+                'required' => []
+            ],
+            'HybridConnectionListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HybridConnection']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'requiresClientAuthorization' => ['type' => 'boolean'],
-                'userMetadata' => ['type' => 'string']
-            ]],
-            'HybridConnection' => ['properties' => ['properties' => ['$ref' => '#/definitions/HybridConnection_properties']]],
-            'HybridConnectionListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HybridConnection']
+                'required' => []
+            ],
+            'WcfRelay_properties' => [
+                'properties' => [
+                    'isDynamic' => ['type' => 'boolean'],
+                    'createdAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'updatedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'listenerCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'relayType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NetTcp',
+                            'Http'
+                        ]
+                    ],
+                    'requiresClientAuthorization' => ['type' => 'boolean'],
+                    'requiresTransportSecurity' => ['type' => 'boolean'],
+                    'userMetadata' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'WcfRelay_properties' => ['properties' => [
-                'isDynamic' => ['type' => 'boolean'],
-                'createdAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'WcfRelay' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/WcfRelay_properties']],
+                'required' => []
+            ],
+            'WcfRelaysListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/WcfRelay']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'updatedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'listenerCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'relayType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NetTcp',
-                        'Http'
+                'required' => []
+            ],
+            'Sku' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'tier' => [
+                        'type' => 'string',
+                        'enum' => ['Standard']
                     ]
                 ],
-                'requiresClientAuthorization' => ['type' => 'boolean'],
-                'requiresTransportSecurity' => ['type' => 'boolean'],
-                'userMetadata' => ['type' => 'string']
-            ]],
-            'WcfRelay' => ['properties' => ['properties' => ['$ref' => '#/definitions/WcfRelay_properties']]],
-            'WcfRelaysListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/WcfRelay']
+                'required' => ['name']
+            ],
+            'RelayNamespaceProperties' => [
+                'properties' => [
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Created',
+                            'Succeeded',
+                            'Deleted',
+                            'Failed',
+                            'Updating',
+                            'Unknown'
+                        ]
+                    ],
+                    'createdAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'updatedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'serviceBusEndpoint' => ['type' => 'string'],
+                    'metricId' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Sku' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'tier' => [
-                    'type' => 'string',
-                    'enum' => ['Standard']
-                ]
-            ]],
-            'RelayNamespaceProperties' => ['properties' => [
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Created',
-                        'Succeeded',
-                        'Deleted',
-                        'Failed',
-                        'Updating',
-                        'Unknown'
+                'required' => []
+            ],
+            'RelayNamespace' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'properties' => ['$ref' => '#/definitions/RelayNamespaceProperties']
+                ],
+                'required' => []
+            ],
+            'RelayNamespaceListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RelayNamespace']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RelayUpdateParameters' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'properties' => ['$ref' => '#/definitions/RelayNamespaceProperties']
+                ],
+                'required' => []
+            ],
+            'AuthorizationRule_properties' => [
+                'properties' => ['rights' => [
+                    'type' => 'array',
+                    'items' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Manage',
+                            'Send',
+                            'Listen'
+                        ]
+                    ]
+                ]],
+                'required' => []
+            ],
+            'AuthorizationRule' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AuthorizationRule_properties']],
+                'required' => ['properties']
+            ],
+            'AuthorizationRuleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AuthorizationRule']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AccessKeys' => [
+                'properties' => [
+                    'primaryConnectionString' => ['type' => 'string'],
+                    'secondaryConnectionString' => ['type' => 'string'],
+                    'primaryKey' => ['type' => 'string'],
+                    'secondaryKey' => ['type' => 'string'],
+                    'keyName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RegenerateAccessKeyParameters' => [
+                'properties' => [
+                    'keyType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'PrimaryKey',
+                            'SecondaryKey'
+                        ]
+                    ],
+                    'key' => ['type' => 'string']
+                ],
+                'required' => ['keyType']
+            ],
+            'CheckNameAvailability' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => ['name']
+            ],
+            'CheckNameAvailabilityResult' => [
+                'properties' => [
+                    'message' => ['type' => 'string'],
+                    'nameAvailable' => ['type' => 'boolean'],
+                    'reason' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'InvalidName',
+                            'SubscriptionIsDisabled',
+                            'NameInUse',
+                            'NameInLockdown',
+                            'TooManyNamespaceInCurrentSubscription'
+                        ]
                     ]
                 ],
-                'createdAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'Operation_display' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string']
                 ],
-                'updatedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
-                'serviceBusEndpoint' => ['type' => 'string'],
-                'metricId' => ['type' => 'string']
-            ]],
-            'RelayNamespace' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'properties' => ['$ref' => '#/definitions/RelayNamespaceProperties']
-            ]],
-            'RelayNamespaceListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RelayNamespace']
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Operation']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RelayUpdateParameters' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'properties' => ['$ref' => '#/definitions/RelayNamespaceProperties']
-            ]],
-            'AuthorizationRule_properties' => ['properties' => ['rights' => [
-                'type' => 'array',
-                'items' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Manage',
-                        'Send',
-                        'Listen'
-                    ]
-                ]
-            ]]],
-            'AuthorizationRule' => ['properties' => ['properties' => ['$ref' => '#/definitions/AuthorizationRule_properties']]],
-            'AuthorizationRuleListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AuthorizationRule']
+                'required' => []
+            ],
+            'ErrorResponse' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'AccessKeys' => ['properties' => [
-                'primaryConnectionString' => ['type' => 'string'],
-                'secondaryConnectionString' => ['type' => 'string'],
-                'primaryKey' => ['type' => 'string'],
-                'secondaryKey' => ['type' => 'string'],
-                'keyName' => ['type' => 'string']
-            ]],
-            'RegenerateAccessKeyParameters' => ['properties' => [
-                'keyType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'PrimaryKey',
-                        'SecondaryKey'
-                    ]
-                ],
-                'key' => ['type' => 'string']
-            ]],
-            'CheckNameAvailability' => ['properties' => ['name' => ['type' => 'string']]],
-            'CheckNameAvailabilityResult' => ['properties' => [
-                'message' => ['type' => 'string'],
-                'nameAvailable' => ['type' => 'boolean'],
-                'reason' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'InvalidName',
-                        'SubscriptionIsDisabled',
-                        'NameInUse',
-                        'NameInLockdown',
-                        'TooManyNamespaceInCurrentSubscription'
-                    ]
-                ]
-            ]],
-            'Operation_display' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/Operation_display']
-            ]],
-            'OperationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Operation']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ErrorResponse' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]]
+                'required' => []
+            ]
         ]
     ];
 }

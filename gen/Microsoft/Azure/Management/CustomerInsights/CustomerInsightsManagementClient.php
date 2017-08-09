@@ -2741,1200 +2741,1581 @@ final class CustomerInsightsManagementClient
             ]]
         ],
         'definitions' => [
-            'HubBillingInfoFormat' => ['properties' => [
-                'skuName' => ['type' => 'string'],
-                'minUnits' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'maxUnits' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'HubPropertiesFormat' => ['properties' => [
-                'apiEndpoint' => ['type' => 'string'],
-                'webEndpoint' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string'],
-                'tenantFeatures' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'hubBillingInfo' => ['$ref' => '#/definitions/HubBillingInfoFormat']
-            ]],
-            'Hub' => ['properties' => ['properties' => ['$ref' => '#/definitions/HubPropertiesFormat']]],
-            'HubListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Hub']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'MetadataDefinitionBase' => ['properties' => [
-                'attributes' => [
-                    'type' => 'object',
-                    'additionalProperties' => [
-                        'type' => 'array',
-                        'items' => ['type' => 'string']
+            'HubBillingInfoFormat' => [
+                'properties' => [
+                    'skuName' => ['type' => 'string'],
+                    'minUnits' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'maxUnits' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'description' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => []
+            ],
+            'HubPropertiesFormat' => [
+                'properties' => [
+                    'apiEndpoint' => ['type' => 'string'],
+                    'webEndpoint' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string'],
+                    'tenantFeatures' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'hubBillingInfo' => ['$ref' => '#/definitions/HubBillingInfoFormat']
                 ],
-                'displayName' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => []
+            ],
+            'Hub' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/HubPropertiesFormat']],
+                'required' => []
+            ],
+            'HubListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Hub']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'localizedAttributes' => [
-                    'type' => 'object',
-                    'additionalProperties' => [
+                'required' => []
+            ],
+            'MetadataDefinitionBase' => [
+                'properties' => [
+                    'attributes' => [
+                        'type' => 'object',
+                        'additionalProperties' => [
+                            'type' => 'array',
+                            'items' => ['type' => 'string']
+                        ]
+                    ],
+                    'description' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'displayName' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'localizedAttributes' => [
+                        'type' => 'object',
+                        'additionalProperties' => [
+                            'type' => 'object',
+                            'additionalProperties' => ['type' => 'string']
+                        ]
+                    ],
+                    'smallImage' => ['type' => 'string'],
+                    'mediumImage' => ['type' => 'string'],
+                    'largeImage' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ProfileEnumValidValuesFormat' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'localizedValueNames' => [
                         'type' => 'object',
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'smallImage' => ['type' => 'string'],
-                'mediumImage' => ['type' => 'string'],
-                'largeImage' => ['type' => 'string']
-            ]],
-            'ProfileEnumValidValuesFormat' => ['properties' => [
-                'value' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'localizedValueNames' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'DataSource' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'dataSourceType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Connector',
-                        'LinkInteraction',
-                        'SystemDefault'
-                    ]
-                ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Active',
-                        'Deleted'
-                    ]
-                ],
-                'id' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'dataSourceReferenceId' => ['type' => 'string']
-            ]],
-            'DataSourcePrecedence' => ['properties' => [
-                'dataSource' => ['$ref' => '#/definitions/DataSource'],
-                'precedence' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'PropertyDefinition' => ['properties' => [
-                'arrayValueSeparator' => ['type' => 'string'],
-                'enumValidValues' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ProfileEnumValidValuesFormat']
-                ],
-                'fieldName' => ['type' => 'string'],
-                'fieldType' => ['type' => 'string'],
-                'isArray' => ['type' => 'boolean'],
-                'isEnum' => ['type' => 'boolean'],
-                'isFlagEnum' => ['type' => 'boolean'],
-                'isImage' => ['type' => 'boolean'],
-                'isLocalizedString' => ['type' => 'boolean'],
-                'isName' => ['type' => 'boolean'],
-                'isRequired' => ['type' => 'boolean'],
-                'propertyId' => ['type' => 'string'],
-                'schemaItemPropLink' => ['type' => 'string'],
-                'maxLength' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'isAvailableInGraph' => ['type' => 'boolean'],
-                'dataSourcePrecedenceRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DataSourcePrecedence']
-                ]
-            ]],
-            'EntityTypeDefinition' => ['properties' => [
-                'apiEntitySetName' => ['type' => 'string'],
-                'entityType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Profile',
-                        'Interaction',
-                        'Relationship'
-                    ]
-                ],
-                'fields' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PropertyDefinition']
-                ],
-                'instancesCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'lastChangedUtc' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Provisioning',
-                        'Succeeded',
-                        'Expiring',
-                        'Deleting',
-                        'HumanIntervention',
-                        'Failed'
-                    ]
-                ],
-                'schemaItemTypeLink' => ['type' => 'string'],
-                'tenantId' => ['type' => 'string'],
-                'timestampFieldName' => ['type' => 'string'],
-                'typeName' => ['type' => 'string']
-            ]],
-            'AuthorizationPolicy' => ['properties' => [
-                'policyName' => ['type' => 'string'],
-                'permissions' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => []
+            ],
+            'DataSource' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'dataSourceType' => [
                         'type' => 'string',
                         'enum' => [
-                            'Read',
-                            'Write',
-                            'Manage'
+                            'Connector',
+                            'LinkInteraction',
+                            'SystemDefault'
+                        ]
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Active',
+                            'Deleted'
+                        ]
+                    ],
+                    'id' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'dataSourceReferenceId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DataSourcePrecedence' => [
+                'properties' => [
+                    'dataSource' => ['$ref' => '#/definitions/DataSource'],
+                    'precedence' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'PropertyDefinition' => [
+                'properties' => [
+                    'arrayValueSeparator' => ['type' => 'string'],
+                    'enumValidValues' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ProfileEnumValidValuesFormat']
+                    ],
+                    'fieldName' => ['type' => 'string'],
+                    'fieldType' => ['type' => 'string'],
+                    'isArray' => ['type' => 'boolean'],
+                    'isEnum' => ['type' => 'boolean'],
+                    'isFlagEnum' => ['type' => 'boolean'],
+                    'isImage' => ['type' => 'boolean'],
+                    'isLocalizedString' => ['type' => 'boolean'],
+                    'isName' => ['type' => 'boolean'],
+                    'isRequired' => ['type' => 'boolean'],
+                    'propertyId' => ['type' => 'string'],
+                    'schemaItemPropLink' => ['type' => 'string'],
+                    'maxLength' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'isAvailableInGraph' => ['type' => 'boolean'],
+                    'dataSourcePrecedenceRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DataSourcePrecedence']
+                    ]
+                ],
+                'required' => [
+                    'fieldName',
+                    'fieldType'
+                ]
+            ],
+            'EntityTypeDefinition' => [
+                'properties' => [
+                    'apiEntitySetName' => ['type' => 'string'],
+                    'entityType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Profile',
+                            'Interaction',
+                            'Relationship'
+                        ]
+                    ],
+                    'fields' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PropertyDefinition']
+                    ],
+                    'instancesCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'lastChangedUtc' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Provisioning',
+                            'Succeeded',
+                            'Expiring',
+                            'Deleting',
+                            'HumanIntervention',
+                            'Failed'
+                        ]
+                    ],
+                    'schemaItemTypeLink' => ['type' => 'string'],
+                    'tenantId' => ['type' => 'string'],
+                    'timestampFieldName' => ['type' => 'string'],
+                    'typeName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AuthorizationPolicy' => [
+                'properties' => [
+                    'policyName' => ['type' => 'string'],
+                    'permissions' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'Read',
+                                'Write',
+                                'Manage'
+                            ]
+                        ]
+                    ],
+                    'primaryKey' => ['type' => 'string'],
+                    'secondaryKey' => ['type' => 'string']
+                ],
+                'required' => ['permissions']
+            ],
+            'SalesforceDiscoverSetting' => [
+                'properties' => ['salesforceConnectionStringSecretUrl' => ['type' => 'string']],
+                'required' => ['salesforceConnectionStringSecretUrl']
+            ],
+            'SalesforceTable' => [
+                'properties' => [
+                    'isProfile' => ['type' => 'string'],
+                    'tableCategory' => ['type' => 'string'],
+                    'tableName' => ['type' => 'string'],
+                    'tableRemarks' => ['type' => 'string'],
+                    'tableSchema' => ['type' => 'string']
+                ],
+                'required' => [
+                    'tableCategory',
+                    'tableName',
+                    'tableSchema'
+                ]
+            ],
+            'SalesforceConnectorProperties' => [
+                'properties' => [
+                    'usersetting' => ['$ref' => '#/definitions/SalesforceDiscoverSetting'],
+                    'salesforcetables' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SalesforceTable']
+                    ]
+                ],
+                'required' => [
+                    'usersetting',
+                    'salesforcetables'
+                ]
+            ],
+            'AzureBlobConnectorProperties' => [
+                'properties' => ['connectionKeyVaultUrl' => ['type' => 'string']],
+                'required' => ['connectionKeyVaultUrl']
+            ],
+            'CrmConnectorEntities' => [
+                'properties' => [
+                    'logicalName' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'isProfile' => ['type' => 'boolean']
+                ],
+                'required' => ['logicalName']
+            ],
+            'CrmConnectorProperties' => [
+                'properties' => [
+                    'connectionString' => ['type' => 'string'],
+                    'organizationId' => ['type' => 'string'],
+                    'organizationUrl' => ['type' => 'string'],
+                    'entities' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CrmConnectorEntities']
+                    ],
+                    'accessToken' => ['type' => 'string']
+                ],
+                'required' => [
+                    'organizationId',
+                    'organizationUrl',
+                    'entities'
+                ]
+            ],
+            'Connector' => [
+                'properties' => [
+                    'connectorId' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'connectorName' => ['type' => 'string'],
+                    'connectorType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'CRM',
+                            'AzureBlob',
+                            'Salesforce',
+                            'ExchangeOnline',
+                            'Outbound'
+                        ]
+                    ],
+                    'displayName' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'connectorProperties' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'object']
+                    ],
+                    'created' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModified' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Creating',
+                            'Created',
+                            'Ready',
+                            'Expiring',
+                            'Deleting',
+                            'Failed'
+                        ]
+                    ],
+                    'tenantId' => ['type' => 'string'],
+                    'isInternal' => ['type' => 'boolean']
+                ],
+                'required' => [
+                    'connectorType',
+                    'connectorProperties'
+                ]
+            ],
+            'ConnectorMappingErrorManagement' => [
+                'properties' => [
+                    'errorManagementType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'RejectAndContinue',
+                            'StopImport',
+                            'RejectUntilLimit'
+                        ]
+                    ],
+                    'errorLimit' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => ['errorManagementType']
+            ],
+            'ConnectorMappingFormat' => [
+                'properties' => [
+                    'formatType' => ['type' => 'string'],
+                    'columnDelimiter' => ['type' => 'string'],
+                    'acceptLanguage' => ['type' => 'string'],
+                    'quoteCharacter' => ['type' => 'string'],
+                    'quoteEscapeCharacter' => ['type' => 'string'],
+                    'arraySeparator' => ['type' => 'string']
+                ],
+                'required' => ['formatType']
+            ],
+            'ConnectorMappingAvailability' => [
+                'properties' => [
+                    'frequency' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Minute',
+                            'Hour',
+                            'Day',
+                            'Week',
+                            'Month'
+                        ]
+                    ],
+                    'interval' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => ['interval']
+            ],
+            'ConnectorMappingStructure' => [
+                'properties' => [
+                    'propertyName' => ['type' => 'string'],
+                    'columnName' => ['type' => 'string'],
+                    'customFormatSpecifier' => ['type' => 'string'],
+                    'isEncrypted' => ['type' => 'boolean']
+                ],
+                'required' => [
+                    'propertyName',
+                    'columnName'
+                ]
+            ],
+            'ConnectorMappingCompleteOperation' => [
+                'properties' => [
+                    'completionOperationType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'DoNothing',
+                            'DeleteFile',
+                            'MoveFile'
+                        ]
+                    ],
+                    'destinationFolder' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ConnectorMappingProperties' => [
+                'properties' => [
+                    'folderPath' => ['type' => 'string'],
+                    'fileFilter' => ['type' => 'string'],
+                    'hasHeader' => ['type' => 'boolean'],
+                    'errorManagement' => ['$ref' => '#/definitions/ConnectorMappingErrorManagement'],
+                    'format' => ['$ref' => '#/definitions/ConnectorMappingFormat'],
+                    'availability' => ['$ref' => '#/definitions/ConnectorMappingAvailability'],
+                    'structure' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ConnectorMappingStructure']
+                    ],
+                    'completeOperation' => ['$ref' => '#/definitions/ConnectorMappingCompleteOperation']
+                ],
+                'required' => [
+                    'errorManagement',
+                    'format',
+                    'availability',
+                    'structure',
+                    'completeOperation'
+                ]
+            ],
+            'ConnectorMapping' => [
+                'properties' => [
+                    'connectorName' => ['type' => 'string'],
+                    'connectorType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'CRM',
+                            'AzureBlob',
+                            'Salesforce',
+                            'ExchangeOnline',
+                            'Outbound'
+                        ]
+                    ],
+                    'created' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModified' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'entityType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Profile',
+                            'Interaction',
+                            'Relationship'
+                        ]
+                    ],
+                    'entityTypeName' => ['type' => 'string'],
+                    'connectorMappingName' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'dataFormatId' => ['type' => 'string'],
+                    'mappingProperties' => ['$ref' => '#/definitions/ConnectorMappingProperties'],
+                    'nextRunTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'runId' => ['type' => 'string'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Creating',
+                            'Created',
+                            'Failed',
+                            'Ready',
+                            'Running',
+                            'Stopped',
+                            'Expiring'
+                        ]
+                    ],
+                    'tenantId' => ['type' => 'string']
+                ],
+                'required' => [
+                    'entityType',
+                    'entityTypeName',
+                    'mappingProperties'
+                ]
+            ],
+            'KpiThresholds' => [
+                'properties' => [
+                    'lowerLimit' => [
+                        'type' => 'number',
+                        'format' => 'decimal'
+                    ],
+                    'upperLimit' => [
+                        'type' => 'number',
+                        'format' => 'decimal'
+                    ],
+                    'increasingKpi' => ['type' => 'boolean']
+                ],
+                'required' => [
+                    'lowerLimit',
+                    'upperLimit',
+                    'increasingKpi'
+                ]
+            ],
+            'KpiGroupByMetadata' => [
+                'properties' => [
+                    'displayName' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'fieldName' => ['type' => 'string'],
+                    'fieldType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'KpiParticipantProfilesMetadata' => [
+                'properties' => ['typeName' => ['type' => 'string']],
+                'required' => ['typeName']
+            ],
+            'KpiAlias' => [
+                'properties' => [
+                    'aliasName' => ['type' => 'string'],
+                    'expression' => ['type' => 'string']
+                ],
+                'required' => [
+                    'aliasName',
+                    'expression'
+                ]
+            ],
+            'KpiExtract' => [
+                'properties' => [
+                    'extractName' => ['type' => 'string'],
+                    'expression' => ['type' => 'string']
+                ],
+                'required' => [
+                    'extractName',
+                    'expression'
+                ]
+            ],
+            'KpiDefinition' => [
+                'properties' => [
+                    'entityType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Profile',
+                            'Interaction',
+                            'Relationship'
+                        ]
+                    ],
+                    'entityTypeName' => ['type' => 'string'],
+                    'tenantId' => ['type' => 'string'],
+                    'kpiName' => ['type' => 'string'],
+                    'displayName' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'description' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'calculationWindow' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Lifetime',
+                            'Hour',
+                            'Day',
+                            'Week',
+                            'Month'
+                        ]
+                    ],
+                    'calculationWindowFieldName' => ['type' => 'string'],
+                    'function' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Sum',
+                            'Avg',
+                            'Min',
+                            'Max',
+                            'Last',
+                            'Count',
+                            'None',
+                            'CountDistinct'
+                        ]
+                    ],
+                    'expression' => ['type' => 'string'],
+                    'unit' => ['type' => 'string'],
+                    'filter' => ['type' => 'string'],
+                    'groupBy' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'groupByMetadata' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/KpiGroupByMetadata']
+                    ],
+                    'participantProfilesMetadata' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/KpiParticipantProfilesMetadata']
+                    ],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Provisioning',
+                            'Succeeded',
+                            'Expiring',
+                            'Deleting',
+                            'HumanIntervention',
+                            'Failed'
+                        ]
+                    ],
+                    'thresHolds' => ['$ref' => '#/definitions/KpiThresholds'],
+                    'aliases' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/KpiAlias']
+                    ],
+                    'extracts' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/KpiExtract']
+                    ]
+                ],
+                'required' => [
+                    'entityType',
+                    'entityTypeName',
+                    'calculationWindow',
+                    'function',
+                    'expression'
+                ]
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ProxyResource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'WidgetType' => [
+                'properties' => [
+                    'widgetTypeName' => ['type' => 'string'],
+                    'definition' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'displayName' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'imageUrl' => ['type' => 'string'],
+                    'tenantId' => ['type' => 'string'],
+                    'widgetVersion' => ['type' => 'string'],
+                    'changed' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'created' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => ['definition']
+            ],
+            'View' => [
+                'properties' => [
+                    'viewName' => ['type' => 'string'],
+                    'userId' => ['type' => 'string'],
+                    'tenantId' => ['type' => 'string'],
+                    'displayName' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'definition' => ['type' => 'string'],
+                    'changed' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'created' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => ['definition']
+            ],
+            'TypePropertiesMapping' => [
+                'properties' => [
+                    'sourcePropertyName' => ['type' => 'string'],
+                    'targetPropertyName' => ['type' => 'string'],
+                    'linkType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'UpdateAlways',
+                            'CopyIfNull'
                         ]
                     ]
                 ],
-                'primaryKey' => ['type' => 'string'],
-                'secondaryKey' => ['type' => 'string']
-            ]],
-            'SalesforceDiscoverSetting' => ['properties' => ['salesforceConnectionStringSecretUrl' => ['type' => 'string']]],
-            'SalesforceTable' => ['properties' => [
-                'isProfile' => ['type' => 'string'],
-                'tableCategory' => ['type' => 'string'],
-                'tableName' => ['type' => 'string'],
-                'tableRemarks' => ['type' => 'string'],
-                'tableSchema' => ['type' => 'string']
-            ]],
-            'SalesforceConnectorProperties' => ['properties' => [
-                'usersetting' => ['$ref' => '#/definitions/SalesforceDiscoverSetting'],
-                'salesforcetables' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SalesforceTable']
+                'required' => [
+                    'sourcePropertyName',
+                    'targetPropertyName'
                 ]
-            ]],
-            'AzureBlobConnectorProperties' => ['properties' => ['connectionKeyVaultUrl' => ['type' => 'string']]],
-            'CrmConnectorEntities' => ['properties' => [
-                'logicalName' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'isProfile' => ['type' => 'boolean']
-            ]],
-            'CrmConnectorProperties' => ['properties' => [
-                'connectionString' => ['type' => 'string'],
-                'organizationId' => ['type' => 'string'],
-                'organizationUrl' => ['type' => 'string'],
-                'entities' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CrmConnectorEntities']
-                ],
-                'accessToken' => ['type' => 'string']
-            ]],
-            'Connector' => ['properties' => [
-                'connectorId' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'connectorName' => ['type' => 'string'],
-                'connectorType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'CRM',
-                        'AzureBlob',
-                        'Salesforce',
-                        'ExchangeOnline',
-                        'Outbound'
-                    ]
-                ],
-                'displayName' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'connectorProperties' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'object']
-                ],
-                'created' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastModified' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Creating',
-                        'Created',
-                        'Ready',
-                        'Expiring',
-                        'Deleting',
-                        'Failed'
-                    ]
-                ],
-                'tenantId' => ['type' => 'string'],
-                'isInternal' => ['type' => 'boolean']
-            ]],
-            'ConnectorMappingErrorManagement' => ['properties' => [
-                'errorManagementType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'RejectAndContinue',
-                        'StopImport',
-                        'RejectUntilLimit'
-                    ]
-                ],
-                'errorLimit' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ConnectorMappingFormat' => ['properties' => [
-                'formatType' => ['type' => 'string'],
-                'columnDelimiter' => ['type' => 'string'],
-                'acceptLanguage' => ['type' => 'string'],
-                'quoteCharacter' => ['type' => 'string'],
-                'quoteEscapeCharacter' => ['type' => 'string'],
-                'arraySeparator' => ['type' => 'string']
-            ]],
-            'ConnectorMappingAvailability' => ['properties' => [
-                'frequency' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Minute',
-                        'Hour',
-                        'Day',
-                        'Week',
-                        'Month'
-                    ]
-                ],
-                'interval' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ConnectorMappingStructure' => ['properties' => [
-                'propertyName' => ['type' => 'string'],
-                'columnName' => ['type' => 'string'],
-                'customFormatSpecifier' => ['type' => 'string'],
-                'isEncrypted' => ['type' => 'boolean']
-            ]],
-            'ConnectorMappingCompleteOperation' => ['properties' => [
-                'completionOperationType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'DoNothing',
-                        'DeleteFile',
-                        'MoveFile'
-                    ]
-                ],
-                'destinationFolder' => ['type' => 'string']
-            ]],
-            'ConnectorMappingProperties' => ['properties' => [
-                'folderPath' => ['type' => 'string'],
-                'fileFilter' => ['type' => 'string'],
-                'hasHeader' => ['type' => 'boolean'],
-                'errorManagement' => ['$ref' => '#/definitions/ConnectorMappingErrorManagement'],
-                'format' => ['$ref' => '#/definitions/ConnectorMappingFormat'],
-                'availability' => ['$ref' => '#/definitions/ConnectorMappingAvailability'],
-                'structure' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ConnectorMappingStructure']
-                ],
-                'completeOperation' => ['$ref' => '#/definitions/ConnectorMappingCompleteOperation']
-            ]],
-            'ConnectorMapping' => ['properties' => [
-                'connectorName' => ['type' => 'string'],
-                'connectorType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'CRM',
-                        'AzureBlob',
-                        'Salesforce',
-                        'ExchangeOnline',
-                        'Outbound'
-                    ]
-                ],
-                'created' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastModified' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'entityType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Profile',
-                        'Interaction',
-                        'Relationship'
-                    ]
-                ],
-                'entityTypeName' => ['type' => 'string'],
-                'connectorMappingName' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'dataFormatId' => ['type' => 'string'],
-                'mappingProperties' => ['$ref' => '#/definitions/ConnectorMappingProperties'],
-                'nextRunTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'runId' => ['type' => 'string'],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Creating',
-                        'Created',
-                        'Failed',
-                        'Ready',
-                        'Running',
-                        'Stopped',
-                        'Expiring'
-                    ]
-                ],
-                'tenantId' => ['type' => 'string']
-            ]],
-            'KpiThresholds' => ['properties' => [
-                'lowerLimit' => [
-                    'type' => 'number',
-                    'format' => 'decimal'
-                ],
-                'upperLimit' => [
-                    'type' => 'number',
-                    'format' => 'decimal'
-                ],
-                'increasingKpi' => ['type' => 'boolean']
-            ]],
-            'KpiGroupByMetadata' => ['properties' => [
-                'displayName' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'fieldName' => ['type' => 'string'],
-                'fieldType' => ['type' => 'string']
-            ]],
-            'KpiParticipantProfilesMetadata' => ['properties' => ['typeName' => ['type' => 'string']]],
-            'KpiAlias' => ['properties' => [
-                'aliasName' => ['type' => 'string'],
-                'expression' => ['type' => 'string']
-            ]],
-            'KpiExtract' => ['properties' => [
-                'extractName' => ['type' => 'string'],
-                'expression' => ['type' => 'string']
-            ]],
-            'KpiDefinition' => ['properties' => [
-                'entityType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Profile',
-                        'Interaction',
-                        'Relationship'
-                    ]
-                ],
-                'entityTypeName' => ['type' => 'string'],
-                'tenantId' => ['type' => 'string'],
-                'kpiName' => ['type' => 'string'],
-                'displayName' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'description' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'calculationWindow' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Lifetime',
-                        'Hour',
-                        'Day',
-                        'Week',
-                        'Month'
-                    ]
-                ],
-                'calculationWindowFieldName' => ['type' => 'string'],
-                'function' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Sum',
-                        'Avg',
-                        'Min',
-                        'Max',
-                        'Last',
-                        'Count',
-                        'None',
-                        'CountDistinct'
-                    ]
-                ],
-                'expression' => ['type' => 'string'],
-                'unit' => ['type' => 'string'],
-                'filter' => ['type' => 'string'],
-                'groupBy' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'groupByMetadata' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/KpiGroupByMetadata']
-                ],
-                'participantProfilesMetadata' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/KpiParticipantProfilesMetadata']
-                ],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Provisioning',
-                        'Succeeded',
-                        'Expiring',
-                        'Deleting',
-                        'HumanIntervention',
-                        'Failed'
-                    ]
-                ],
-                'thresHolds' => ['$ref' => '#/definitions/KpiThresholds'],
-                'aliases' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/KpiAlias']
-                ],
-                'extracts' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/KpiExtract']
-                ]
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ProxyResource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'WidgetType' => ['properties' => [
-                'widgetTypeName' => ['type' => 'string'],
-                'definition' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'displayName' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'imageUrl' => ['type' => 'string'],
-                'tenantId' => ['type' => 'string'],
-                'widgetVersion' => ['type' => 'string'],
-                'changed' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'created' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'View' => ['properties' => [
-                'viewName' => ['type' => 'string'],
-                'userId' => ['type' => 'string'],
-                'tenantId' => ['type' => 'string'],
-                'displayName' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'definition' => ['type' => 'string'],
-                'changed' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'created' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'TypePropertiesMapping' => ['properties' => [
-                'sourcePropertyName' => ['type' => 'string'],
-                'targetPropertyName' => ['type' => 'string'],
-                'linkType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'UpdateAlways',
-                        'CopyIfNull'
-                    ]
-                ]
-            ]],
-            'ParticipantPropertyReference' => ['properties' => [
-                'sourcePropertyName' => ['type' => 'string'],
-                'targetPropertyName' => ['type' => 'string']
-            ]],
-            'LinkDefinition' => ['properties' => [
-                'tenantId' => ['type' => 'string'],
-                'linkName' => ['type' => 'string'],
-                'sourceEntityType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Profile',
-                        'Interaction',
-                        'Relationship'
-                    ]
-                ],
-                'targetEntityType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Profile',
-                        'Interaction',
-                        'Relationship'
-                    ]
-                ],
-                'sourceEntityTypeName' => ['type' => 'string'],
-                'targetEntityTypeName' => ['type' => 'string'],
-                'displayName' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'description' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'mappings' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TypePropertiesMapping']
-                ],
-                'participantPropertyReferences' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ParticipantPropertyReference']
-                ],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Provisioning',
-                        'Succeeded',
-                        'Expiring',
-                        'Deleting',
-                        'HumanIntervention',
-                        'Failed'
-                    ]
-                ],
-                'referenceOnly' => ['type' => 'boolean'],
-                'operationType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Upsert',
-                        'Delete'
-                    ]
-                ]
-            ]],
-            'RelationshipTypeFieldMapping' => ['properties' => [
-                'profileFieldName' => ['type' => 'string'],
-                'relatedProfileKeyProperty' => ['type' => 'string']
-            ]],
-            'RelationshipTypeMapping' => ['properties' => ['fieldMappings' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/RelationshipTypeFieldMapping']
-            ]]],
-            'RelationshipDefinition' => ['properties' => [
-                'cardinality' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'OneToOne',
-                        'OneToMany',
-                        'ManyToMany'
-                    ]
-                ],
-                'displayName' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'description' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'expiryDateTimeUtc' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'fields' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PropertyDefinition']
-                ],
-                'lookupMappings' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RelationshipTypeMapping']
-                ],
-                'profileType' => ['type' => 'string'],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Provisioning',
-                        'Succeeded',
-                        'Expiring',
-                        'Deleting',
-                        'HumanIntervention',
-                        'Failed'
-                    ]
-                ],
-                'relationshipName' => ['type' => 'string'],
-                'relatedProfileType' => ['type' => 'string'],
-                'relationshipGuidId' => ['type' => 'string'],
-                'tenantId' => ['type' => 'string']
-            ]],
-            'RelationshipLinkFieldMapping' => ['properties' => [
-                'interactionFieldName' => ['type' => 'string'],
-                'linkType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'UpdateAlways',
-                        'CopyIfNull'
-                    ]
-                ],
-                'relationshipFieldName' => ['type' => 'string']
-            ]],
-            'ParticipantProfilePropertyReference' => ['properties' => [
-                'interactionPropertyName' => ['type' => 'string'],
-                'profilePropertyName' => ['type' => 'string']
-            ]],
-            'RelationshipLinkDefinition' => ['properties' => [
-                'displayName' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'description' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'interactionType' => ['type' => 'string'],
-                'linkName' => ['type' => 'string'],
-                'mappings' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RelationshipLinkFieldMapping']
-                ],
-                'profilePropertyReferences' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ParticipantProfilePropertyReference']
-                ],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Provisioning',
-                        'Succeeded',
-                        'Expiring',
-                        'Deleting',
-                        'HumanIntervention',
-                        'Failed'
-                    ]
-                ],
-                'relatedProfilePropertyReferences' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ParticipantProfilePropertyReference']
-                ],
-                'relationshipName' => ['type' => 'string'],
-                'relationshipGuidId' => ['type' => 'string'],
-                'tenantId' => ['type' => 'string']
-            ]],
-            'Participant' => ['properties' => [
-                'profileTypeName' => ['type' => 'string'],
-                'participantPropertyReferences' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ParticipantPropertyReference']
-                ],
-                'participantName' => ['type' => 'string'],
-                'displayName' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'description' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'role' => ['type' => 'string']
-            ]],
-            'InteractionTypeDefinition' => ['properties' => [
-                'idPropertyNames' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'participantProfiles' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Participant']
-                ],
-                'primaryParticipantProfilePropertyName' => ['type' => 'string'],
-                'dataSourcePrecedenceRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DataSourcePrecedence']
-                ],
-                'defaultDataSource' => ['$ref' => '#/definitions/DataSource'],
-                'isActivity' => ['type' => 'boolean']
-            ]],
-            'StrongId' => ['properties' => [
-                'keyPropertyNames' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'strongIdName' => ['type' => 'string'],
-                'displayName' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'description' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ProfileTypeDefinition' => ['properties' => ['strongIds' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/StrongId']
-            ]]],
-            'ProfileResourceFormat' => ['properties' => ['properties' => ['$ref' => '#/definitions/ProfileTypeDefinition']]],
-            'ProfileListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ProfileResourceFormat']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'InteractionResourceFormat' => ['properties' => ['properties' => ['$ref' => '#/definitions/InteractionTypeDefinition']]],
-            'InteractionListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InteractionResourceFormat']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'KpiResourceFormat' => ['properties' => ['properties' => ['$ref' => '#/definitions/KpiDefinition']]],
-            'KpiListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/KpiResourceFormat']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'EnrichingKpi' => ['properties' => []],
-            'ConnectorResourceFormat' => ['properties' => ['properties' => ['$ref' => '#/definitions/Connector']]],
-            'ConnectorListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ConnectorResourceFormat']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ConnectorMappingResourceFormat' => ['properties' => ['properties' => ['$ref' => '#/definitions/ConnectorMapping']]],
-            'ConnectorMappingListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ConnectorMappingResourceFormat']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'AuthorizationPolicyResourceFormat' => ['properties' => ['properties' => ['$ref' => '#/definitions/AuthorizationPolicy']]],
-            'AuthorizationPolicyListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AuthorizationPolicyResourceFormat']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'LinkResourceFormat' => ['properties' => ['properties' => ['$ref' => '#/definitions/LinkDefinition']]],
-            'LinkListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/LinkResourceFormat']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RelationshipResourceFormat' => ['properties' => ['properties' => ['$ref' => '#/definitions/RelationshipDefinition']]],
-            'RelationshipListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RelationshipResourceFormat']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RelationshipLinkResourceFormat' => ['properties' => ['properties' => ['$ref' => '#/definitions/RelationshipLinkDefinition']]],
-            'RelationshipLinkListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RelationshipLinkResourceFormat']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ViewResourceFormat' => ['properties' => ['properties' => ['$ref' => '#/definitions/View']]],
-            'ViewListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ViewResourceFormat']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'WidgetTypeResourceFormat' => ['properties' => ['properties' => ['$ref' => '#/definitions/WidgetType']]],
-            'WidgetTypeListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/WidgetTypeResourceFormat']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'AssignmentPrincipal' => ['properties' => [
-                'principalId' => ['type' => 'string'],
-                'principalType' => ['type' => 'string'],
-                'principalMetadata' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ResourceSetDescription' => ['properties' => [
-                'elements' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'exceptions' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'RoleAssignment' => ['properties' => [
-                'tenantId' => ['type' => 'string'],
-                'assignmentName' => ['type' => 'string'],
-                'displayName' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'description' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Provisioning',
-                        'Succeeded',
-                        'Expiring',
-                        'Deleting',
-                        'HumanIntervention',
-                        'Failed'
-                    ]
-                ],
-                'role' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Admin',
-                        'Reader',
-                        'ManageAdmin',
-                        'ManageReader',
-                        'DataAdmin',
-                        'DataReader'
-                    ]
-                ],
-                'principals' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AssignmentPrincipal']
-                ],
-                'profiles' => ['$ref' => '#/definitions/ResourceSetDescription'],
-                'interactions' => ['$ref' => '#/definitions/ResourceSetDescription'],
-                'links' => ['$ref' => '#/definitions/ResourceSetDescription'],
-                'kpis' => ['$ref' => '#/definitions/ResourceSetDescription'],
-                'sasPolicies' => ['$ref' => '#/definitions/ResourceSetDescription'],
-                'connectors' => ['$ref' => '#/definitions/ResourceSetDescription'],
-                'views' => ['$ref' => '#/definitions/ResourceSetDescription'],
-                'relationshipLinks' => ['$ref' => '#/definitions/ResourceSetDescription'],
-                'relationships' => ['$ref' => '#/definitions/ResourceSetDescription'],
-                'widgetTypes' => ['$ref' => '#/definitions/ResourceSetDescription'],
-                'roleAssignments' => ['$ref' => '#/definitions/ResourceSetDescription'],
-                'conflationPolicies' => ['$ref' => '#/definitions/ResourceSetDescription'],
-                'segments' => ['$ref' => '#/definitions/ResourceSetDescription']
-            ]],
-            'RoleAssignmentResourceFormat' => ['properties' => ['properties' => ['$ref' => '#/definitions/RoleAssignment']]],
-            'RoleAssignmentListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RoleAssignmentResourceFormat']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Role' => ['properties' => [
-                'roleName' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'RoleResourceFormat' => ['properties' => ['properties' => ['$ref' => '#/definitions/Role']]],
-            'RoleListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RoleResourceFormat']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'GetImageUploadUrlInput' => ['properties' => [
-                'entityType' => ['type' => 'string'],
-                'entityTypeName' => ['type' => 'string'],
-                'relativePath' => ['type' => 'string']
-            ]],
-            'ImageDefinition' => ['properties' => [
-                'imageExists' => ['type' => 'boolean'],
-                'contentUrl' => ['type' => 'string'],
-                'relativePath' => ['type' => 'string']
-            ]],
-            'RelationshipsLookup' => ['properties' => [
-                'profileName' => ['type' => 'string'],
-                'profilePropertyReferences' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ParticipantProfilePropertyReference']
-                ],
-                'relatedProfileName' => ['type' => 'string'],
-                'relatedProfilePropertyReferences' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ParticipantProfilePropertyReference']
-                ],
-                'existingRelationshipName' => ['type' => 'string']
-            ]],
-            'SuggestRelationshipLinksResponse' => ['properties' => [
-                'interactionName' => ['type' => 'string'],
-                'suggestedRelationships' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RelationshipsLookup']
-                ]
-            ]],
-            'Prediction_mappings' => ['properties' => [
-                'score' => ['type' => 'string'],
-                'grade' => ['type' => 'string'],
-                'reason' => ['type' => 'string']
-            ]],
-            'Prediction_gradesItem' => ['properties' => [
-                'gradeName' => ['type' => 'string'],
-                'minScoreThreshold' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'maxScoreThreshold' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'Prediction_systemGeneratedEntities' => ['properties' => [
-                'generatedInteractionTypes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'generatedLinks' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'generatedKpis' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'Prediction' => ['properties' => [
-                'description' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'displayName' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'involvedInteractionTypes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'involvedKpiTypes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'involvedRelationships' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'negativeOutcomeExpression' => ['type' => 'string'],
-                'positiveOutcomeExpression' => ['type' => 'string'],
-                'primaryProfileType' => ['type' => 'string'],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Provisioning',
-                        'Succeeded',
-                        'Expiring',
-                        'Deleting',
-                        'HumanIntervention',
-                        'Failed'
-                    ]
-                ],
-                'predictionName' => ['type' => 'string'],
-                'scopeExpression' => ['type' => 'string'],
-                'tenantId' => ['type' => 'string'],
-                'autoAnalyze' => ['type' => 'boolean'],
-                'mappings' => ['$ref' => '#/definitions/Prediction_mappings'],
-                'scoreLabel' => ['type' => 'string'],
-                'grades' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Prediction_gradesItem']
-                ],
-                'systemGeneratedEntities' => ['$ref' => '#/definitions/Prediction_systemGeneratedEntities']
-            ]],
-            'PredictionDistributionDefinition_distributionsItem' => ['properties' => [
-                'scoreThreshold' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'positives' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'negatives' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'positivesAboveThreshold' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'negativesAboveThreshold' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ]
-            ]],
-            'PredictionDistributionDefinition' => ['properties' => [
-                'totalPositives' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'totalNegatives' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'distributions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PredictionDistributionDefinition_distributionsItem']
-                ]
-            ]],
-            'CanonicalProfileDefinition_propertiesItem' => ['properties' => [
-                'profileName' => ['type' => 'string'],
-                'profilePropertyName' => ['type' => 'string'],
-                'rank' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Numeric',
-                        'Categorical',
-                        'DerivedCategorical',
-                        'DerivedNumeric'
-                    ]
-                ],
-                'value' => ['type' => 'string']
-            ]],
-            'CanonicalProfileDefinition' => ['properties' => [
-                'canonicalProfileId' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
+            ],
+            'ParticipantPropertyReference' => [
                 'properties' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CanonicalProfileDefinition_propertiesItem']
-                ]
-            ]],
-            'PredictionTrainingResults' => ['properties' => [
-                'tenantId' => ['type' => 'string'],
-                'scoreName' => ['type' => 'string'],
-                'predictionDistribution' => ['$ref' => '#/definitions/PredictionDistributionDefinition'],
-                'canonicalProfiles' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CanonicalProfileDefinition']
+                    'sourcePropertyName' => ['type' => 'string'],
+                    'targetPropertyName' => ['type' => 'string']
                 ],
-                'primaryProfileInstanceCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => [
+                    'sourcePropertyName',
+                    'targetPropertyName'
                 ]
-            ]],
-            'PredictionModelStatus' => ['properties' => [
-                'tenantId' => ['type' => 'string'],
-                'predictionName' => ['type' => 'string'],
-                'predictionGuidId' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'New',
-                        'Provisioning',
-                        'ProvisioningFailed',
-                        'PendingDiscovering',
-                        'Discovering',
-                        'PendingFeaturing',
-                        'Featuring',
-                        'FeaturingFailed',
-                        'PendingTraining',
-                        'Training',
-                        'TrainingFailed',
-                        'Evaluating',
-                        'EvaluatingFailed',
-                        'PendingModelConfirmation',
-                        'Active',
-                        'Deleted',
-                        'HumanIntervention',
-                        'Failed'
+            ],
+            'LinkDefinition' => [
+                'properties' => [
+                    'tenantId' => ['type' => 'string'],
+                    'linkName' => ['type' => 'string'],
+                    'sourceEntityType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Profile',
+                            'Interaction',
+                            'Relationship'
+                        ]
+                    ],
+                    'targetEntityType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Profile',
+                            'Interaction',
+                            'Relationship'
+                        ]
+                    ],
+                    'sourceEntityTypeName' => ['type' => 'string'],
+                    'targetEntityTypeName' => ['type' => 'string'],
+                    'displayName' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'description' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'mappings' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TypePropertiesMapping']
+                    ],
+                    'participantPropertyReferences' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ParticipantPropertyReference']
+                    ],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Provisioning',
+                            'Succeeded',
+                            'Expiring',
+                            'Deleting',
+                            'HumanIntervention',
+                            'Failed'
+                        ]
+                    ],
+                    'referenceOnly' => ['type' => 'boolean'],
+                    'operationType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Upsert',
+                            'Delete'
+                        ]
                     ]
                 ],
-                'message' => ['type' => 'string'],
-                'trainingSetCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => [
+                    'sourceEntityType',
+                    'targetEntityType',
+                    'sourceEntityTypeName',
+                    'targetEntityTypeName',
+                    'participantPropertyReferences'
+                ]
+            ],
+            'RelationshipTypeFieldMapping' => [
+                'properties' => [
+                    'profileFieldName' => ['type' => 'string'],
+                    'relatedProfileKeyProperty' => ['type' => 'string']
                 ],
-                'testSetCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'validationSetCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'trainingAccuracy' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'signalsUsed' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'modelVersion' => ['type' => 'string']
-            ]],
-            'PredictionResourceFormat' => ['properties' => ['properties' => ['$ref' => '#/definitions/Prediction']]],
-            'PredictionListResult' => ['properties' => [
-                'value' => [
+                'required' => [
+                    'profileFieldName',
+                    'relatedProfileKeyProperty'
+                ]
+            ],
+            'RelationshipTypeMapping' => [
+                'properties' => ['fieldMappings' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PredictionResourceFormat']
+                    'items' => ['$ref' => '#/definitions/RelationshipTypeFieldMapping']
+                ]],
+                'required' => ['fieldMappings']
+            ],
+            'RelationshipDefinition' => [
+                'properties' => [
+                    'cardinality' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'OneToOne',
+                            'OneToMany',
+                            'ManyToMany'
+                        ]
+                    ],
+                    'displayName' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'description' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'expiryDateTimeUtc' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'fields' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PropertyDefinition']
+                    ],
+                    'lookupMappings' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RelationshipTypeMapping']
+                    ],
+                    'profileType' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Provisioning',
+                            'Succeeded',
+                            'Expiring',
+                            'Deleting',
+                            'HumanIntervention',
+                            'Failed'
+                        ]
+                    ],
+                    'relationshipName' => ['type' => 'string'],
+                    'relatedProfileType' => ['type' => 'string'],
+                    'relationshipGuidId' => ['type' => 'string'],
+                    'tenantId' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]]
+                'required' => [
+                    'profileType',
+                    'relatedProfileType'
+                ]
+            ],
+            'RelationshipLinkFieldMapping' => [
+                'properties' => [
+                    'interactionFieldName' => ['type' => 'string'],
+                    'linkType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'UpdateAlways',
+                            'CopyIfNull'
+                        ]
+                    ],
+                    'relationshipFieldName' => ['type' => 'string']
+                ],
+                'required' => [
+                    'interactionFieldName',
+                    'relationshipFieldName'
+                ]
+            ],
+            'ParticipantProfilePropertyReference' => [
+                'properties' => [
+                    'interactionPropertyName' => ['type' => 'string'],
+                    'profilePropertyName' => ['type' => 'string']
+                ],
+                'required' => [
+                    'interactionPropertyName',
+                    'profilePropertyName'
+                ]
+            ],
+            'RelationshipLinkDefinition' => [
+                'properties' => [
+                    'displayName' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'description' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'interactionType' => ['type' => 'string'],
+                    'linkName' => ['type' => 'string'],
+                    'mappings' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RelationshipLinkFieldMapping']
+                    ],
+                    'profilePropertyReferences' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ParticipantProfilePropertyReference']
+                    ],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Provisioning',
+                            'Succeeded',
+                            'Expiring',
+                            'Deleting',
+                            'HumanIntervention',
+                            'Failed'
+                        ]
+                    ],
+                    'relatedProfilePropertyReferences' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ParticipantProfilePropertyReference']
+                    ],
+                    'relationshipName' => ['type' => 'string'],
+                    'relationshipGuidId' => ['type' => 'string'],
+                    'tenantId' => ['type' => 'string']
+                ],
+                'required' => [
+                    'interactionType',
+                    'profilePropertyReferences',
+                    'relatedProfilePropertyReferences',
+                    'relationshipName'
+                ]
+            ],
+            'Participant' => [
+                'properties' => [
+                    'profileTypeName' => ['type' => 'string'],
+                    'participantPropertyReferences' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ParticipantPropertyReference']
+                    ],
+                    'participantName' => ['type' => 'string'],
+                    'displayName' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'description' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'role' => ['type' => 'string']
+                ],
+                'required' => [
+                    'profileTypeName',
+                    'participantPropertyReferences',
+                    'participantName'
+                ]
+            ],
+            'InteractionTypeDefinition' => [
+                'properties' => [
+                    'idPropertyNames' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'participantProfiles' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Participant']
+                    ],
+                    'primaryParticipantProfilePropertyName' => ['type' => 'string'],
+                    'dataSourcePrecedenceRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DataSourcePrecedence']
+                    ],
+                    'defaultDataSource' => ['$ref' => '#/definitions/DataSource'],
+                    'isActivity' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'StrongId' => [
+                'properties' => [
+                    'keyPropertyNames' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'strongIdName' => ['type' => 'string'],
+                    'displayName' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'description' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => [
+                    'keyPropertyNames',
+                    'strongIdName'
+                ]
+            ],
+            'ProfileTypeDefinition' => [
+                'properties' => ['strongIds' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/StrongId']
+                ]],
+                'required' => []
+            ],
+            'ProfileResourceFormat' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ProfileTypeDefinition']],
+                'required' => []
+            ],
+            'ProfileListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ProfileResourceFormat']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InteractionResourceFormat' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/InteractionTypeDefinition']],
+                'required' => []
+            ],
+            'InteractionListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InteractionResourceFormat']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'KpiResourceFormat' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/KpiDefinition']],
+                'required' => []
+            ],
+            'KpiListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/KpiResourceFormat']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'EnrichingKpi' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'ConnectorResourceFormat' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Connector']],
+                'required' => []
+            ],
+            'ConnectorListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ConnectorResourceFormat']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ConnectorMappingResourceFormat' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ConnectorMapping']],
+                'required' => []
+            ],
+            'ConnectorMappingListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ConnectorMappingResourceFormat']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AuthorizationPolicyResourceFormat' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AuthorizationPolicy']],
+                'required' => []
+            ],
+            'AuthorizationPolicyListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AuthorizationPolicyResourceFormat']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LinkResourceFormat' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/LinkDefinition']],
+                'required' => []
+            ],
+            'LinkListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/LinkResourceFormat']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RelationshipResourceFormat' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RelationshipDefinition']],
+                'required' => []
+            ],
+            'RelationshipListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RelationshipResourceFormat']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RelationshipLinkResourceFormat' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RelationshipLinkDefinition']],
+                'required' => []
+            ],
+            'RelationshipLinkListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RelationshipLinkResourceFormat']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ViewResourceFormat' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/View']],
+                'required' => []
+            ],
+            'ViewListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ViewResourceFormat']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'WidgetTypeResourceFormat' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/WidgetType']],
+                'required' => []
+            ],
+            'WidgetTypeListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/WidgetTypeResourceFormat']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AssignmentPrincipal' => [
+                'properties' => [
+                    'principalId' => ['type' => 'string'],
+                    'principalType' => ['type' => 'string'],
+                    'principalMetadata' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => [
+                    'principalId',
+                    'principalType'
+                ]
+            ],
+            'ResourceSetDescription' => [
+                'properties' => [
+                    'elements' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'exceptions' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'RoleAssignment' => [
+                'properties' => [
+                    'tenantId' => ['type' => 'string'],
+                    'assignmentName' => ['type' => 'string'],
+                    'displayName' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'description' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Provisioning',
+                            'Succeeded',
+                            'Expiring',
+                            'Deleting',
+                            'HumanIntervention',
+                            'Failed'
+                        ]
+                    ],
+                    'role' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Admin',
+                            'Reader',
+                            'ManageAdmin',
+                            'ManageReader',
+                            'DataAdmin',
+                            'DataReader'
+                        ]
+                    ],
+                    'principals' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AssignmentPrincipal']
+                    ],
+                    'profiles' => ['$ref' => '#/definitions/ResourceSetDescription'],
+                    'interactions' => ['$ref' => '#/definitions/ResourceSetDescription'],
+                    'links' => ['$ref' => '#/definitions/ResourceSetDescription'],
+                    'kpis' => ['$ref' => '#/definitions/ResourceSetDescription'],
+                    'sasPolicies' => ['$ref' => '#/definitions/ResourceSetDescription'],
+                    'connectors' => ['$ref' => '#/definitions/ResourceSetDescription'],
+                    'views' => ['$ref' => '#/definitions/ResourceSetDescription'],
+                    'relationshipLinks' => ['$ref' => '#/definitions/ResourceSetDescription'],
+                    'relationships' => ['$ref' => '#/definitions/ResourceSetDescription'],
+                    'widgetTypes' => ['$ref' => '#/definitions/ResourceSetDescription'],
+                    'roleAssignments' => ['$ref' => '#/definitions/ResourceSetDescription'],
+                    'conflationPolicies' => ['$ref' => '#/definitions/ResourceSetDescription'],
+                    'segments' => ['$ref' => '#/definitions/ResourceSetDescription']
+                ],
+                'required' => [
+                    'role',
+                    'principals'
+                ]
+            ],
+            'RoleAssignmentResourceFormat' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RoleAssignment']],
+                'required' => []
+            ],
+            'RoleAssignmentListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RoleAssignmentResourceFormat']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Role' => [
+                'properties' => [
+                    'roleName' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RoleResourceFormat' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Role']],
+                'required' => []
+            ],
+            'RoleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RoleResourceFormat']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'GetImageUploadUrlInput' => [
+                'properties' => [
+                    'entityType' => ['type' => 'string'],
+                    'entityTypeName' => ['type' => 'string'],
+                    'relativePath' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ImageDefinition' => [
+                'properties' => [
+                    'imageExists' => ['type' => 'boolean'],
+                    'contentUrl' => ['type' => 'string'],
+                    'relativePath' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RelationshipsLookup' => [
+                'properties' => [
+                    'profileName' => ['type' => 'string'],
+                    'profilePropertyReferences' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ParticipantProfilePropertyReference']
+                    ],
+                    'relatedProfileName' => ['type' => 'string'],
+                    'relatedProfilePropertyReferences' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ParticipantProfilePropertyReference']
+                    ],
+                    'existingRelationshipName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SuggestRelationshipLinksResponse' => [
+                'properties' => [
+                    'interactionName' => ['type' => 'string'],
+                    'suggestedRelationships' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RelationshipsLookup']
+                    ]
+                ],
+                'required' => []
+            ],
+            'Prediction_mappings' => [
+                'properties' => [
+                    'score' => ['type' => 'string'],
+                    'grade' => ['type' => 'string'],
+                    'reason' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Prediction_gradesItem' => [
+                'properties' => [
+                    'gradeName' => ['type' => 'string'],
+                    'minScoreThreshold' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'maxScoreThreshold' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'Prediction_systemGeneratedEntities' => [
+                'properties' => [
+                    'generatedInteractionTypes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'generatedLinks' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'generatedKpis' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'Prediction' => [
+                'properties' => [
+                    'description' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'displayName' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'involvedInteractionTypes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'involvedKpiTypes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'involvedRelationships' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'negativeOutcomeExpression' => ['type' => 'string'],
+                    'positiveOutcomeExpression' => ['type' => 'string'],
+                    'primaryProfileType' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Provisioning',
+                            'Succeeded',
+                            'Expiring',
+                            'Deleting',
+                            'HumanIntervention',
+                            'Failed'
+                        ]
+                    ],
+                    'predictionName' => ['type' => 'string'],
+                    'scopeExpression' => ['type' => 'string'],
+                    'tenantId' => ['type' => 'string'],
+                    'autoAnalyze' => ['type' => 'boolean'],
+                    'mappings' => ['$ref' => '#/definitions/Prediction_mappings'],
+                    'scoreLabel' => ['type' => 'string'],
+                    'grades' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Prediction_gradesItem']
+                    ],
+                    'systemGeneratedEntities' => ['$ref' => '#/definitions/Prediction_systemGeneratedEntities']
+                ],
+                'required' => [
+                    'negativeOutcomeExpression',
+                    'positiveOutcomeExpression',
+                    'primaryProfileType',
+                    'scopeExpression',
+                    'autoAnalyze',
+                    'mappings',
+                    'scoreLabel'
+                ]
+            ],
+            'PredictionDistributionDefinition_distributionsItem' => [
+                'properties' => [
+                    'scoreThreshold' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'positives' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'negatives' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'positivesAboveThreshold' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'negativesAboveThreshold' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ]
+                ],
+                'required' => []
+            ],
+            'PredictionDistributionDefinition' => [
+                'properties' => [
+                    'totalPositives' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'totalNegatives' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'distributions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PredictionDistributionDefinition_distributionsItem']
+                    ]
+                ],
+                'required' => []
+            ],
+            'CanonicalProfileDefinition_propertiesItem' => [
+                'properties' => [
+                    'profileName' => ['type' => 'string'],
+                    'profilePropertyName' => ['type' => 'string'],
+                    'rank' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Numeric',
+                            'Categorical',
+                            'DerivedCategorical',
+                            'DerivedNumeric'
+                        ]
+                    ],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CanonicalProfileDefinition' => [
+                'properties' => [
+                    'canonicalProfileId' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'properties' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CanonicalProfileDefinition_propertiesItem']
+                    ]
+                ],
+                'required' => []
+            ],
+            'PredictionTrainingResults' => [
+                'properties' => [
+                    'tenantId' => ['type' => 'string'],
+                    'scoreName' => ['type' => 'string'],
+                    'predictionDistribution' => ['$ref' => '#/definitions/PredictionDistributionDefinition'],
+                    'canonicalProfiles' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CanonicalProfileDefinition']
+                    ],
+                    'primaryProfileInstanceCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ]
+                ],
+                'required' => []
+            ],
+            'PredictionModelStatus' => [
+                'properties' => [
+                    'tenantId' => ['type' => 'string'],
+                    'predictionName' => ['type' => 'string'],
+                    'predictionGuidId' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'New',
+                            'Provisioning',
+                            'ProvisioningFailed',
+                            'PendingDiscovering',
+                            'Discovering',
+                            'PendingFeaturing',
+                            'Featuring',
+                            'FeaturingFailed',
+                            'PendingTraining',
+                            'Training',
+                            'TrainingFailed',
+                            'Evaluating',
+                            'EvaluatingFailed',
+                            'PendingModelConfirmation',
+                            'Active',
+                            'Deleted',
+                            'HumanIntervention',
+                            'Failed'
+                        ]
+                    ],
+                    'message' => ['type' => 'string'],
+                    'trainingSetCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'testSetCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'validationSetCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'trainingAccuracy' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'signalsUsed' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'modelVersion' => ['type' => 'string']
+                ],
+                'required' => ['status']
+            ],
+            'PredictionResourceFormat' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Prediction']],
+                'required' => []
+            ],
+            'PredictionListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PredictionResourceFormat']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

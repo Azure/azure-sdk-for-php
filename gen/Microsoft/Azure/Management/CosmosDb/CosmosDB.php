@@ -413,147 +413,198 @@ final class CosmosDB
             ]]
         ],
         'definitions' => [
-            'ConsistencyPolicy' => ['properties' => [
-                'defaultConsistencyLevel' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Eventual',
-                        'Session',
-                        'BoundedStaleness',
-                        'Strong',
-                        'ConsistentPrefix'
+            'ConsistencyPolicy' => [
+                'properties' => [
+                    'defaultConsistencyLevel' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Eventual',
+                            'Session',
+                            'BoundedStaleness',
+                            'Strong',
+                            'ConsistentPrefix'
+                        ]
+                    ],
+                    'maxStalenessPrefix' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'maxIntervalInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'maxStalenessPrefix' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => ['defaultConsistencyLevel']
+            ],
+            'Location' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'locationName' => ['type' => 'string'],
+                    'documentEndpoint' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string'],
+                    'failoverPriority' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
                 ],
-                'maxIntervalInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'Location' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'locationName' => ['type' => 'string'],
-                'documentEndpoint' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string'],
-                'failoverPriority' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'FailoverPolicy' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'locationName' => ['type' => 'string'],
-                'failoverPriority' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'DatabaseAccountProperties' => ['properties' => [
-                'provisioningState' => ['type' => 'string'],
-                'documentEndpoint' => ['type' => 'string'],
-                'databaseAccountOfferType' => [
-                    'type' => 'string',
-                    'enum' => ['Standard']
+                'required' => []
+            ],
+            'FailoverPolicy' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'locationName' => ['type' => 'string'],
+                    'failoverPriority' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
                 ],
-                'ipRangeFilter' => ['type' => 'string'],
-                'enableAutomaticFailover' => ['type' => 'boolean'],
-                'consistencyPolicy' => ['$ref' => '#/definitions/ConsistencyPolicy'],
-                'writeLocations' => [
+                'required' => []
+            ],
+            'DatabaseAccountProperties' => [
+                'properties' => [
+                    'provisioningState' => ['type' => 'string'],
+                    'documentEndpoint' => ['type' => 'string'],
+                    'databaseAccountOfferType' => [
+                        'type' => 'string',
+                        'enum' => ['Standard']
+                    ],
+                    'ipRangeFilter' => ['type' => 'string'],
+                    'enableAutomaticFailover' => ['type' => 'boolean'],
+                    'consistencyPolicy' => ['$ref' => '#/definitions/ConsistencyPolicy'],
+                    'writeLocations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Location']
+                    ],
+                    'readLocations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Location']
+                    ],
+                    'failoverPolicies' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/FailoverPolicy']
+                    ]
+                ],
+                'required' => []
+            ],
+            'DatabaseAccount' => [
+                'properties' => [
+                    'kind' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'GlobalDocumentDB',
+                            'MongoDB',
+                            'Parse'
+                        ]
+                    ],
+                    'properties' => ['$ref' => '#/definitions/DatabaseAccountProperties']
+                ],
+                'required' => []
+            ],
+            'DatabaseAccountsListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Location']
-                ],
-                'readLocations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Location']
-                ],
-                'failoverPolicies' => [
+                    'items' => ['$ref' => '#/definitions/DatabaseAccount']
+                ]],
+                'required' => []
+            ],
+            'FailoverPolicies' => [
+                'properties' => ['failoverPolicies' => [
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/FailoverPolicy']
-                ]
-            ]],
-            'DatabaseAccount' => ['properties' => [
-                'kind' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'GlobalDocumentDB',
-                        'MongoDB',
-                        'Parse'
+                ]],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'properties' => ['$ref' => '#/definitions/DatabaseAccountProperties']
-            ]],
-            'DatabaseAccountsListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/DatabaseAccount']
-            ]]],
-            'FailoverPolicies' => ['properties' => ['failoverPolicies' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/FailoverPolicy']
-            ]]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
+                'required' => ['location']
+            ],
+            'DatabaseAccountCreateUpdateProperties' => [
+                'properties' => [
+                    'consistencyPolicy' => ['$ref' => '#/definitions/ConsistencyPolicy'],
+                    'locations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Location']
+                    ],
+                    'databaseAccountOfferType' => ['type' => 'string'],
+                    'ipRangeFilter' => ['type' => 'string'],
+                    'enableAutomaticFailover' => ['type' => 'boolean']
+                ],
+                'required' => [
+                    'locations',
+                    'databaseAccountOfferType'
+                ]
+            ],
+            'DatabaseAccountCreateUpdateParameters' => [
+                'properties' => [
+                    'kind' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'GlobalDocumentDB',
+                            'MongoDB',
+                            'Parse'
+                        ]
+                    ],
+                    'properties' => ['$ref' => '#/definitions/DatabaseAccountCreateUpdateProperties']
+                ],
+                'required' => ['properties']
+            ],
+            'DatabaseAccountPatchParameters' => [
+                'properties' => ['tags' => [
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'DatabaseAccountCreateUpdateProperties' => ['properties' => [
-                'consistencyPolicy' => ['$ref' => '#/definitions/ConsistencyPolicy'],
-                'locations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Location']
+                ]],
+                'required' => ['tags']
+            ],
+            'DatabaseAccountListReadOnlyKeysResult' => [
+                'properties' => [
+                    'primaryReadonlyMasterKey' => ['type' => 'string'],
+                    'secondaryReadonlyMasterKey' => ['type' => 'string']
                 ],
-                'databaseAccountOfferType' => ['type' => 'string'],
-                'ipRangeFilter' => ['type' => 'string'],
-                'enableAutomaticFailover' => ['type' => 'boolean']
-            ]],
-            'DatabaseAccountCreateUpdateParameters' => ['properties' => [
-                'kind' => [
+                'required' => []
+            ],
+            'DatabaseAccountListKeysResult' => [
+                'properties' => [
+                    'primaryMasterKey' => ['type' => 'string'],
+                    'secondaryMasterKey' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/DatabaseAccountListReadOnlyKeysResult']
+                ],
+                'required' => []
+            ],
+            'DatabaseAccountConnectionString' => [
+                'properties' => [
+                    'connectionString' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DatabaseAccountListConnectionStringsResult' => [
+                'properties' => ['connectionStrings' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/DatabaseAccountConnectionString']
+                ]],
+                'required' => []
+            ],
+            'DatabaseAccountRegenerateKeyParameters' => [
+                'properties' => ['keyKind' => [
                     'type' => 'string',
                     'enum' => [
-                        'GlobalDocumentDB',
-                        'MongoDB',
-                        'Parse'
+                        'primary',
+                        'secondary',
+                        'primaryReadonly',
+                        'secondaryReadonly'
                     ]
-                ],
-                'properties' => ['$ref' => '#/definitions/DatabaseAccountCreateUpdateProperties']
-            ]],
-            'DatabaseAccountPatchParameters' => ['properties' => ['tags' => [
-                'type' => 'object',
-                'additionalProperties' => ['type' => 'string']
-            ]]],
-            'DatabaseAccountListReadOnlyKeysResult' => ['properties' => [
-                'primaryReadonlyMasterKey' => ['type' => 'string'],
-                'secondaryReadonlyMasterKey' => ['type' => 'string']
-            ]],
-            'DatabaseAccountListKeysResult' => ['properties' => [
-                'primaryMasterKey' => ['type' => 'string'],
-                'secondaryMasterKey' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/DatabaseAccountListReadOnlyKeysResult']
-            ]],
-            'DatabaseAccountConnectionString' => ['properties' => [
-                'connectionString' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'DatabaseAccountListConnectionStringsResult' => ['properties' => ['connectionStrings' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/DatabaseAccountConnectionString']
-            ]]],
-            'DatabaseAccountRegenerateKeyParameters' => ['properties' => ['keyKind' => [
-                'type' => 'string',
-                'enum' => [
-                    'primary',
-                    'secondary',
-                    'primaryReadonly',
-                    'secondaryReadonly'
-                ]
-            ]]]
+                ]],
+                'required' => ['keyKind']
+            ]
         ]
     ];
 }

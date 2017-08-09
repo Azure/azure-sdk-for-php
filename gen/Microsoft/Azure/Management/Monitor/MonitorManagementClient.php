@@ -1094,505 +1094,760 @@ final class MonitorManagementClient
             ]]
         ],
         'definitions' => [
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['location']
+            ],
+            'ScaleCapacity' => [
+                'properties' => [
+                    'minimum' => ['type' => 'string'],
+                    'maximum' => ['type' => 'string'],
+                    'default' => ['type' => 'string']
+                ],
+                'required' => [
+                    'minimum',
+                    'maximum',
+                    'default'
                 ]
-            ]],
-            'ScaleCapacity' => ['properties' => [
-                'minimum' => ['type' => 'string'],
-                'maximum' => ['type' => 'string'],
-                'default' => ['type' => 'string']
-            ]],
-            'MetricTrigger' => ['properties' => [
-                'metricName' => ['type' => 'string'],
-                'metricResourceUri' => ['type' => 'string'],
-                'timeGrain' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'statistic' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Average',
-                        'Min',
-                        'Max',
-                        'Sum'
+            ],
+            'MetricTrigger' => [
+                'properties' => [
+                    'metricName' => ['type' => 'string'],
+                    'metricResourceUri' => ['type' => 'string'],
+                    'timeGrain' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'statistic' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Average',
+                            'Min',
+                            'Max',
+                            'Sum'
+                        ]
+                    ],
+                    'timeWindow' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'timeAggregation' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Average',
+                            'Minimum',
+                            'Maximum',
+                            'Total',
+                            'Count'
+                        ]
+                    ],
+                    'operator' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Equals',
+                            'NotEquals',
+                            'GreaterThan',
+                            'GreaterThanOrEqual',
+                            'LessThan',
+                            'LessThanOrEqual'
+                        ]
+                    ],
+                    'threshold' => [
+                        'type' => 'number',
+                        'format' => 'double'
                     ]
                 ],
-                'timeWindow' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'timeAggregation' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Average',
-                        'Minimum',
-                        'Maximum',
-                        'Total',
-                        'Count'
-                    ]
-                ],
-                'operator' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Equals',
-                        'NotEquals',
-                        'GreaterThan',
-                        'GreaterThanOrEqual',
-                        'LessThan',
-                        'LessThanOrEqual'
-                    ]
-                ],
-                'threshold' => [
-                    'type' => 'number',
-                    'format' => 'double'
+                'required' => [
+                    'metricName',
+                    'metricResourceUri',
+                    'timeGrain',
+                    'statistic',
+                    'timeWindow',
+                    'timeAggregation',
+                    'operator',
+                    'threshold'
                 ]
-            ]],
-            'ScaleAction' => ['properties' => [
-                'direction' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Increase',
-                        'Decrease'
+            ],
+            'ScaleAction' => [
+                'properties' => [
+                    'direction' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Increase',
+                            'Decrease'
+                        ]
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'ChangeCount',
+                            'PercentChangeCount',
+                            'ExactCount'
+                        ]
+                    ],
+                    'value' => ['type' => 'string'],
+                    'cooldown' => [
+                        'type' => 'string',
+                        'format' => 'duration'
                     ]
                 ],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'ChangeCount',
-                        'PercentChangeCount',
-                        'ExactCount'
+                'required' => [
+                    'direction',
+                    'type',
+                    'cooldown'
+                ]
+            ],
+            'ScaleRule' => [
+                'properties' => [
+                    'metricTrigger' => ['$ref' => '#/definitions/MetricTrigger'],
+                    'scaleAction' => ['$ref' => '#/definitions/ScaleAction']
+                ],
+                'required' => [
+                    'metricTrigger',
+                    'scaleAction'
+                ]
+            ],
+            'TimeWindow' => [
+                'properties' => [
+                    'timeZone' => ['type' => 'string'],
+                    'start' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'end' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'value' => ['type' => 'string'],
-                'cooldown' => [
-                    'type' => 'string',
-                    'format' => 'duration'
+                'required' => [
+                    'start',
+                    'end'
                 ]
-            ]],
-            'ScaleRule' => ['properties' => [
-                'metricTrigger' => ['$ref' => '#/definitions/MetricTrigger'],
-                'scaleAction' => ['$ref' => '#/definitions/ScaleAction']
-            ]],
-            'TimeWindow' => ['properties' => [
-                'timeZone' => ['type' => 'string'],
-                'start' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+            ],
+            'RecurrentSchedule' => [
+                'properties' => [
+                    'timeZone' => ['type' => 'string'],
+                    'days' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'hours' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'integer',
+                            'format' => 'int32'
+                        ]
+                    ],
+                    'minutes' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'integer',
+                            'format' => 'int32'
+                        ]
+                    ]
                 ],
-                'end' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => [
+                    'timeZone',
+                    'days',
+                    'hours',
+                    'minutes'
                 ]
-            ]],
-            'RecurrentSchedule' => ['properties' => [
-                'timeZone' => ['type' => 'string'],
-                'days' => [
+            ],
+            'Recurrence' => [
+                'properties' => [
+                    'frequency' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Second',
+                            'Minute',
+                            'Hour',
+                            'Day',
+                            'Week',
+                            'Month',
+                            'Year'
+                        ]
+                    ],
+                    'schedule' => ['$ref' => '#/definitions/RecurrentSchedule']
+                ],
+                'required' => [
+                    'frequency',
+                    'schedule'
+                ]
+            ],
+            'AutoscaleProfile' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'capacity' => ['$ref' => '#/definitions/ScaleCapacity'],
+                    'rules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ScaleRule']
+                    ],
+                    'fixedDate' => ['$ref' => '#/definitions/TimeWindow'],
+                    'recurrence' => ['$ref' => '#/definitions/Recurrence']
+                ],
+                'required' => [
+                    'name',
+                    'capacity',
+                    'rules'
+                ]
+            ],
+            'EmailNotification' => [
+                'properties' => [
+                    'sendToSubscriptionAdministrator' => ['type' => 'boolean'],
+                    'sendToSubscriptionCoAdministrators' => ['type' => 'boolean'],
+                    'customEmails' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'WebhookNotification' => [
+                'properties' => [
+                    'serviceUri' => ['type' => 'string'],
+                    'properties' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'AutoscaleNotification' => [
+                'properties' => [
+                    'operation' => ['type' => 'string'],
+                    'email' => ['$ref' => '#/definitions/EmailNotification'],
+                    'webhooks' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/WebhookNotification']
+                    ]
+                ],
+                'required' => ['operation']
+            ],
+            'AutoscaleSetting' => [
+                'properties' => [
+                    'profiles' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AutoscaleProfile']
+                    ],
+                    'notifications' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AutoscaleNotification']
+                    ],
+                    'enabled' => ['type' => 'boolean'],
+                    'name' => ['type' => 'string'],
+                    'targetResourceUri' => ['type' => 'string']
+                ],
+                'required' => ['profiles']
+            ],
+            'AutoscaleSettingResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AutoscaleSetting']],
+                'required' => ['properties']
+            ],
+            'AutoscaleSettingResourcePatch' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/AutoscaleSetting']
+                ],
+                'required' => []
+            ],
+            'AutoscaleSettingResourceCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AutoscaleSettingResource']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'ErrorResponse' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Incident' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'ruleName' => ['type' => 'string'],
+                    'isActive' => ['type' => 'boolean'],
+                    'activatedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'resolvedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'IncidentListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['type' => 'string']
+                    'items' => ['$ref' => '#/definitions/Incident']
+                ]],
+                'required' => []
+            ],
+            'RuleDataSource' => [
+                'properties' => ['resourceUri' => ['type' => 'string']],
+                'required' => []
+            ],
+            'RuleCondition' => [
+                'properties' => ['dataSource' => ['$ref' => '#/definitions/RuleDataSource']],
+                'required' => []
+            ],
+            'Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource' => [
+                'properties' => ['metricName' => ['type' => 'string']],
+                'required' => []
+            ],
+            'RuleManagementEventClaimsDataSource' => [
+                'properties' => ['emailAddress' => ['type' => 'string']],
+                'required' => []
+            ],
+            'Microsoft.Azure.Management.Insights.Models.RuleManagementEventDataSource' => [
+                'properties' => [
+                    'eventName' => ['type' => 'string'],
+                    'eventSource' => ['type' => 'string'],
+                    'level' => ['type' => 'string'],
+                    'operationName' => ['type' => 'string'],
+                    'resourceGroupName' => ['type' => 'string'],
+                    'resourceProviderName' => ['type' => 'string'],
+                    'status' => ['type' => 'string'],
+                    'subStatus' => ['type' => 'string'],
+                    'claims' => ['$ref' => '#/definitions/RuleManagementEventClaimsDataSource']
                 ],
-                'hours' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => []
+            ],
+            'Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition' => [
+                'properties' => [
+                    'operator' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'GreaterThan',
+                            'GreaterThanOrEqual',
+                            'LessThan',
+                            'LessThanOrEqual'
+                        ]
+                    ],
+                    'threshold' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'windowSize' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'timeAggregation' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Average',
+                            'Minimum',
+                            'Maximum',
+                            'Total',
+                            'Last'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'operator',
+                    'threshold'
+                ]
+            ],
+            'Microsoft.Azure.Management.Insights.Models.LocationThresholdRuleCondition' => [
+                'properties' => [
+                    'windowSize' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'failedLocationCount' => [
                         'type' => 'integer',
                         'format' => 'int32'
                     ]
                 ],
-                'minutes' => [
+                'required' => ['failedLocationCount']
+            ],
+            'ManagementEventAggregationCondition' => [
+                'properties' => [
+                    'operator' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'GreaterThan',
+                            'GreaterThanOrEqual',
+                            'LessThan',
+                            'LessThanOrEqual'
+                        ]
+                    ],
+                    'threshold' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'windowSize' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ]
+                ],
+                'required' => []
+            ],
+            'Microsoft.Azure.Management.Insights.Models.ManagementEventRuleCondition' => [
+                'properties' => ['aggregation' => ['$ref' => '#/definitions/ManagementEventAggregationCondition']],
+                'required' => []
+            ],
+            'RuleAction' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'Microsoft.Azure.Management.Insights.Models.RuleEmailAction' => [
+                'properties' => [
+                    'sendToServiceOwners' => ['type' => 'boolean'],
+                    'customEmails' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'Microsoft.Azure.Management.Insights.Models.RuleWebhookAction' => [
+                'properties' => [
+                    'serviceUri' => ['type' => 'string'],
+                    'properties' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'AlertRule' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'isEnabled' => ['type' => 'boolean'],
+                    'condition' => ['$ref' => '#/definitions/RuleCondition'],
+                    'actions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RuleAction']
+                    ],
+                    'lastUpdatedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => [
+                    'name',
+                    'isEnabled',
+                    'condition'
+                ]
+            ],
+            'AlertRuleResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AlertRule']],
+                'required' => ['properties']
+            ],
+            'AlertRuleResourcePatch' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/AlertRule']
+                ],
+                'required' => []
+            ],
+            'AlertRuleResourceCollection' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => [
+                    'items' => ['$ref' => '#/definitions/AlertRuleResource']
+                ]],
+                'required' => []
+            ],
+            'RetentionPolicy' => [
+                'properties' => [
+                    'enabled' => ['type' => 'boolean'],
+                    'days' => [
                         'type' => 'integer',
                         'format' => 'int32'
                     ]
-                ]
-            ]],
-            'Recurrence' => ['properties' => [
-                'frequency' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Second',
-                        'Minute',
-                        'Hour',
-                        'Day',
-                        'Week',
-                        'Month',
-                        'Year'
-                    ]
                 ],
-                'schedule' => ['$ref' => '#/definitions/RecurrentSchedule']
-            ]],
-            'AutoscaleProfile' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'capacity' => ['$ref' => '#/definitions/ScaleCapacity'],
-                'rules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ScaleRule']
-                ],
-                'fixedDate' => ['$ref' => '#/definitions/TimeWindow'],
-                'recurrence' => ['$ref' => '#/definitions/Recurrence']
-            ]],
-            'EmailNotification' => ['properties' => [
-                'sendToSubscriptionAdministrator' => ['type' => 'boolean'],
-                'sendToSubscriptionCoAdministrators' => ['type' => 'boolean'],
-                'customEmails' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => [
+                    'enabled',
+                    'days'
                 ]
-            ]],
-            'WebhookNotification' => ['properties' => [
-                'serviceUri' => ['type' => 'string'],
+            ],
+            'LogProfileProperties' => [
                 'properties' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                    'storageAccountId' => ['type' => 'string'],
+                    'serviceBusRuleId' => ['type' => 'string'],
+                    'locations' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'categories' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy']
+                ],
+                'required' => [
+                    'locations',
+                    'categories',
+                    'retentionPolicy'
                 ]
-            ]],
-            'AutoscaleNotification' => ['properties' => [
-                'operation' => ['type' => 'string'],
-                'email' => ['$ref' => '#/definitions/EmailNotification'],
-                'webhooks' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/WebhookNotification']
-                ]
-            ]],
-            'AutoscaleSetting' => ['properties' => [
-                'profiles' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AutoscaleProfile']
-                ],
-                'notifications' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AutoscaleNotification']
-                ],
-                'enabled' => ['type' => 'boolean'],
-                'name' => ['type' => 'string'],
-                'targetResourceUri' => ['type' => 'string']
-            ]],
-            'AutoscaleSettingResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/AutoscaleSetting']]],
-            'AutoscaleSettingResourcePatch' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'properties' => ['$ref' => '#/definitions/AutoscaleSetting']
-            ]],
-            'AutoscaleSettingResourceCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AutoscaleSettingResource']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ErrorResponse' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'Incident' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'ruleName' => ['type' => 'string'],
-                'isActive' => ['type' => 'boolean'],
-                'activatedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'resolvedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'IncidentListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Incident']
-            ]]],
-            'RuleDataSource' => ['properties' => ['resourceUri' => ['type' => 'string']]],
-            'RuleCondition' => ['properties' => ['dataSource' => ['$ref' => '#/definitions/RuleDataSource']]],
-            'Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource' => ['properties' => ['metricName' => ['type' => 'string']]],
-            'RuleManagementEventClaimsDataSource' => ['properties' => ['emailAddress' => ['type' => 'string']]],
-            'Microsoft.Azure.Management.Insights.Models.RuleManagementEventDataSource' => ['properties' => [
-                'eventName' => ['type' => 'string'],
-                'eventSource' => ['type' => 'string'],
-                'level' => ['type' => 'string'],
-                'operationName' => ['type' => 'string'],
-                'resourceGroupName' => ['type' => 'string'],
-                'resourceProviderName' => ['type' => 'string'],
-                'status' => ['type' => 'string'],
-                'subStatus' => ['type' => 'string'],
-                'claims' => ['$ref' => '#/definitions/RuleManagementEventClaimsDataSource']
-            ]],
-            'Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition' => ['properties' => [
-                'operator' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'GreaterThan',
-                        'GreaterThanOrEqual',
-                        'LessThan',
-                        'LessThanOrEqual'
-                    ]
-                ],
-                'threshold' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'windowSize' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'timeAggregation' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Average',
-                        'Minimum',
-                        'Maximum',
-                        'Total',
-                        'Last'
-                    ]
-                ]
-            ]],
-            'Microsoft.Azure.Management.Insights.Models.LocationThresholdRuleCondition' => ['properties' => [
-                'windowSize' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'failedLocationCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ManagementEventAggregationCondition' => ['properties' => [
-                'operator' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'GreaterThan',
-                        'GreaterThanOrEqual',
-                        'LessThan',
-                        'LessThanOrEqual'
-                    ]
-                ],
-                'threshold' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'windowSize' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ]
-            ]],
-            'Microsoft.Azure.Management.Insights.Models.ManagementEventRuleCondition' => ['properties' => ['aggregation' => ['$ref' => '#/definitions/ManagementEventAggregationCondition']]],
-            'RuleAction' => ['properties' => []],
-            'Microsoft.Azure.Management.Insights.Models.RuleEmailAction' => ['properties' => [
-                'sendToServiceOwners' => ['type' => 'boolean'],
-                'customEmails' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'Microsoft.Azure.Management.Insights.Models.RuleWebhookAction' => ['properties' => [
-                'serviceUri' => ['type' => 'string'],
+            ],
+            'LogProfileResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/LogProfileProperties']],
+                'required' => ['properties']
+            ],
+            'LogProfileResourcePatch' => [
                 'properties' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/LogProfileProperties']
+                ],
+                'required' => []
+            ],
+            'LogProfileCollection' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/LogProfileResource']
+                ]],
+                'required' => ['value']
+            ],
+            'MetricSettings' => [
+                'properties' => [
+                    'timeGrain' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'enabled' => ['type' => 'boolean'],
+                    'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy']
+                ],
+                'required' => [
+                    'timeGrain',
+                    'enabled'
                 ]
-            ]],
-            'AlertRule' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'isEnabled' => ['type' => 'boolean'],
-                'condition' => ['$ref' => '#/definitions/RuleCondition'],
-                'actions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RuleAction']
+            ],
+            'LogSettings' => [
+                'properties' => [
+                    'category' => ['type' => 'string'],
+                    'enabled' => ['type' => 'boolean'],
+                    'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy']
                 ],
-                'lastUpdatedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'AlertRuleResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/AlertRule']]],
-            'AlertRuleResourcePatch' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => ['enabled']
+            ],
+            'ServiceDiagnosticSettings' => [
+                'properties' => [
+                    'storageAccountId' => ['type' => 'string'],
+                    'serviceBusRuleId' => ['type' => 'string'],
+                    'eventHubAuthorizationRuleId' => ['type' => 'string'],
+                    'metrics' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MetricSettings']
+                    ],
+                    'logs' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/LogSettings']
+                    ],
+                    'workspaceId' => ['type' => 'string']
                 ],
-                'properties' => ['$ref' => '#/definitions/AlertRule']
-            ]],
-            'AlertRuleResourceCollection' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/AlertRuleResource']
-            ]]],
-            'RetentionPolicy' => ['properties' => [
-                'enabled' => ['type' => 'boolean'],
-                'days' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'LogProfileProperties' => ['properties' => [
-                'storageAccountId' => ['type' => 'string'],
-                'serviceBusRuleId' => ['type' => 'string'],
-                'locations' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'ServiceDiagnosticSettingsResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ServiceDiagnosticSettings']],
+                'required' => []
+            ],
+            'ServiceDiagnosticSettingsResourcePatch' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/ServiceDiagnosticSettings']
                 ],
-                'categories' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy']
-            ]],
-            'LogProfileResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/LogProfileProperties']]],
-            'LogProfileResourcePatch' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'properties' => ['$ref' => '#/definitions/LogProfileProperties']
-            ]],
-            'LogProfileCollection' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/LogProfileResource']
-            ]]],
-            'MetricSettings' => ['properties' => [
-                'timeGrain' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'enabled' => ['type' => 'boolean'],
-                'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy']
-            ]],
-            'LogSettings' => ['properties' => [
-                'category' => ['type' => 'string'],
-                'enabled' => ['type' => 'boolean'],
-                'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy']
-            ]],
-            'ServiceDiagnosticSettings' => ['properties' => [
-                'storageAccountId' => ['type' => 'string'],
-                'serviceBusRuleId' => ['type' => 'string'],
-                'eventHubAuthorizationRuleId' => ['type' => 'string'],
-                'metrics' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MetricSettings']
-                ],
-                'logs' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/LogSettings']
-                ],
-                'workspaceId' => ['type' => 'string']
-            ]],
-            'ServiceDiagnosticSettingsResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/ServiceDiagnosticSettings']]],
-            'ServiceDiagnosticSettingsResourcePatch' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'properties' => ['$ref' => '#/definitions/ServiceDiagnosticSettings']
-            ]],
-            'EmailReceiver' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'emailAddress' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NotSpecified',
-                        'Enabled',
-                        'Disabled'
+                'required' => []
+            ],
+            'EmailReceiver' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'emailAddress' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotSpecified',
+                            'Enabled',
+                            'Disabled'
+                        ]
                     ]
+                ],
+                'required' => [
+                    'name',
+                    'emailAddress'
                 ]
-            ]],
-            'SmsReceiver' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'countryCode' => ['type' => 'string'],
-                'phoneNumber' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NotSpecified',
-                        'Enabled',
-                        'Disabled'
+            ],
+            'SmsReceiver' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'countryCode' => ['type' => 'string'],
+                    'phoneNumber' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotSpecified',
+                            'Enabled',
+                            'Disabled'
+                        ]
                     ]
+                ],
+                'required' => [
+                    'name',
+                    'countryCode',
+                    'phoneNumber'
                 ]
-            ]],
-            'WebhookReceiver' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'serviceUri' => ['type' => 'string']
-            ]],
-            'ActionGroup' => ['properties' => [
-                'groupShortName' => ['type' => 'string'],
-                'enabled' => ['type' => 'boolean'],
-                'emailReceivers' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/EmailReceiver']
+            ],
+            'WebhookReceiver' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'serviceUri' => ['type' => 'string']
                 ],
-                'smsReceivers' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SmsReceiver']
-                ],
-                'webhookReceivers' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/WebhookReceiver']
+                'required' => [
+                    'name',
+                    'serviceUri'
                 ]
-            ]],
-            'ActionGroupResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/ActionGroup']]],
-            'ActionGroupList' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ActionGroupResource']
+            ],
+            'ActionGroup' => [
+                'properties' => [
+                    'groupShortName' => ['type' => 'string'],
+                    'enabled' => ['type' => 'boolean'],
+                    'emailReceivers' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/EmailReceiver']
+                    ],
+                    'smsReceivers' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SmsReceiver']
+                    ],
+                    'webhookReceivers' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/WebhookReceiver']
+                    ]
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'EnableRequest' => ['properties' => ['receiverName' => ['type' => 'string']]],
-            'ActivityLogAlertLeafCondition' => ['properties' => [
-                'field' => ['type' => 'string'],
-                'equals' => ['type' => 'string']
-            ]],
-            'ActivityLogAlertAllOfCondition' => ['properties' => ['allOf' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ActivityLogAlertLeafCondition']
-            ]]],
-            'ActivityLogAlertActionGroup' => ['properties' => [
-                'actionGroupId' => ['type' => 'string'],
-                'webhookProperties' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => [
+                    'groupShortName',
+                    'enabled'
                 ]
-            ]],
-            'ActivityLogAlertActionList' => ['properties' => ['actionGroups' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ActivityLogAlertActionGroup']
-            ]]],
-            'ActivityLogAlert' => ['properties' => [
-                'scopes' => [
+            ],
+            'ActionGroupResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ActionGroup']],
+                'required' => []
+            ],
+            'ActionGroupList' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ActionGroupResource']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'EnableRequest' => [
+                'properties' => ['receiverName' => ['type' => 'string']],
+                'required' => ['receiverName']
+            ],
+            'ActivityLogAlertLeafCondition' => [
+                'properties' => [
+                    'field' => ['type' => 'string'],
+                    'equals' => ['type' => 'string']
+                ],
+                'required' => [
+                    'field',
+                    'equals'
+                ]
+            ],
+            'ActivityLogAlertAllOfCondition' => [
+                'properties' => ['allOf' => [
                     'type' => 'array',
-                    'items' => ['type' => 'string']
+                    'items' => ['$ref' => '#/definitions/ActivityLogAlertLeafCondition']
+                ]],
+                'required' => ['allOf']
+            ],
+            'ActivityLogAlertActionGroup' => [
+                'properties' => [
+                    'actionGroupId' => ['type' => 'string'],
+                    'webhookProperties' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
                 ],
-                'enabled' => ['type' => 'boolean'],
-                'condition' => ['$ref' => '#/definitions/ActivityLogAlertAllOfCondition'],
-                'actions' => ['$ref' => '#/definitions/ActivityLogAlertActionList'],
-                'description' => ['type' => 'string']
-            ]],
-            'ActivityLogAlertResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/ActivityLogAlert']]],
-            'ActivityLogAlertList' => ['properties' => [
-                'value' => [
+                'required' => ['actionGroupId']
+            ],
+            'ActivityLogAlertActionList' => [
+                'properties' => ['actionGroups' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ActivityLogAlertResource']
+                    'items' => ['$ref' => '#/definitions/ActivityLogAlertActionGroup']
+                ]],
+                'required' => []
+            ],
+            'ActivityLogAlert' => [
+                'properties' => [
+                    'scopes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'enabled' => ['type' => 'boolean'],
+                    'condition' => ['$ref' => '#/definitions/ActivityLogAlertAllOfCondition'],
+                    'actions' => ['$ref' => '#/definitions/ActivityLogAlertActionList'],
+                    'description' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ActivityLogAlertPatch' => ['properties' => ['enabled' => ['type' => 'boolean']]],
-            'ActivityLogAlertPatchBody' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => [
+                    'scopes',
+                    'condition',
+                    'actions'
+                ]
+            ],
+            'ActivityLogAlertResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ActivityLogAlert']],
+                'required' => []
+            ],
+            'ActivityLogAlertList' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ActivityLogAlertResource']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'properties' => ['$ref' => '#/definitions/ActivityLogAlertPatch']
-            ]]
+                'required' => []
+            ],
+            'ActivityLogAlertPatch' => [
+                'properties' => ['enabled' => ['type' => 'boolean']],
+                'required' => []
+            ],
+            'ActivityLogAlertPatchBody' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/ActivityLogAlertPatch']
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

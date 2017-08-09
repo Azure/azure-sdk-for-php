@@ -343,95 +343,131 @@ final class AnalysisServicesManagementClient
             ]]
         ],
         'definitions' => [
-            'ResourceSku' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'tier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Development',
-                        'Basic',
-                        'Standard'
+            'ResourceSku' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'tier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Development',
+                            'Basic',
+                            'Standard'
+                        ]
                     ]
+                ],
+                'required' => ['name']
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'sku' => ['$ref' => '#/definitions/ResourceSku'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => [
+                    'location',
+                    'sku'
                 ]
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'sku' => ['$ref' => '#/definitions/ResourceSku'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'AnalysisServicesServerProperties' => ['properties' => [
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Deleting',
-                        'Succeeded',
-                        'Failed',
-                        'Paused',
-                        'Suspended',
-                        'Provisioning',
-                        'Updating',
-                        'Suspending',
-                        'Pausing',
-                        'Resuming',
-                        'Preparing',
-                        'Scaling'
-                    ]
+            ],
+            'AnalysisServicesServerProperties' => [
+                'properties' => [
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Deleting',
+                            'Succeeded',
+                            'Failed',
+                            'Paused',
+                            'Suspended',
+                            'Provisioning',
+                            'Updating',
+                            'Suspending',
+                            'Pausing',
+                            'Resuming',
+                            'Preparing',
+                            'Scaling'
+                        ]
+                    ],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Deleting',
+                            'Succeeded',
+                            'Failed',
+                            'Paused',
+                            'Suspended',
+                            'Provisioning',
+                            'Updating',
+                            'Suspending',
+                            'Pausing',
+                            'Resuming',
+                            'Preparing',
+                            'Scaling'
+                        ]
+                    ],
+                    'serverFullName' => ['type' => 'string']
                 ],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Deleting',
-                        'Succeeded',
-                        'Failed',
-                        'Paused',
-                        'Suspended',
-                        'Provisioning',
-                        'Updating',
-                        'Suspending',
-                        'Pausing',
-                        'Resuming',
-                        'Preparing',
-                        'Scaling'
-                    ]
+                'required' => []
+            ],
+            'AnalysisServicesServer' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AnalysisServicesServerProperties']],
+                'required' => []
+            ],
+            'AnalysisServicesServers' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/AnalysisServicesServer']
+                ]],
+                'required' => ['value']
+            ],
+            'ServerAdministrators' => [
+                'properties' => ['members' => [
+                    'type' => 'array',
+                    'items' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'AnalysisServicesServerMutableProperties' => [
+                'properties' => [
+                    'asAdministrators' => ['$ref' => '#/definitions/ServerAdministrators'],
+                    'backupBlobContainerUri' => ['type' => 'string']
                 ],
-                'serverFullName' => ['type' => 'string']
-            ]],
-            'AnalysisServicesServer' => ['properties' => ['properties' => ['$ref' => '#/definitions/AnalysisServicesServerProperties']]],
-            'AnalysisServicesServers' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/AnalysisServicesServer']
-            ]]],
-            'ServerAdministrators' => ['properties' => ['members' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'AnalysisServicesServerMutableProperties' => ['properties' => [
-                'asAdministrators' => ['$ref' => '#/definitions/ServerAdministrators'],
-                'backupBlobContainerUri' => ['type' => 'string']
-            ]],
-            'AnalysisServicesServerUpdateParameters' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/ResourceSku'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => []
+            ],
+            'AnalysisServicesServerUpdateParameters' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/ResourceSku'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/AnalysisServicesServerMutableProperties']
                 ],
-                'properties' => ['$ref' => '#/definitions/AnalysisServicesServerMutableProperties']
-            ]],
-            'SkuEnumerationForNewResourceResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ResourceSku']
-            ]]],
-            'SkuDetailsForExistingResource' => ['properties' => ['sku' => ['$ref' => '#/definitions/ResourceSku']]],
-            'SkuEnumerationForExistingResourceResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/SkuDetailsForExistingResource']
-            ]]]
+                'required' => []
+            ],
+            'SkuEnumerationForNewResourceResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ResourceSku']
+                ]],
+                'required' => []
+            ],
+            'SkuDetailsForExistingResource' => [
+                'properties' => ['sku' => ['$ref' => '#/definitions/ResourceSku']],
+                'required' => []
+            ],
+            'SkuEnumerationForExistingResourceResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/SkuDetailsForExistingResource']
+                ]],
+                'required' => []
+            ]
         ]
     ];
 }

@@ -468,219 +468,330 @@ final class StorageImportExport
             ]]
         ],
         'definitions' => [
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => ['type' => 'object']
-            ]],
-            'OperationDisplayInformation' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/OperationDisplayInformation']
-            ]],
-            'SupportedOperationsListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Operation']
-            ]]],
-            'DriveStatus' => ['properties' => [
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Specified',
-                        'Received',
-                        'NeverReceived',
-                        'Transferring',
-                        'Completed',
-                        'CompletedMoreInfo',
-                        'ShippedBack'
-                    ]
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => ['type' => 'object']
                 ],
-                'copyStatus' => ['type' => 'string'],
-                'percentComplete' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => ['location']
+            ],
+            'OperationDisplayInformation' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
                 ],
-                'verboseLogUri' => ['type' => 'string'],
-                'errorLogUri' => ['type' => 'string'],
-                'manifestUri' => ['type' => 'string']
-            ]],
-            'BitLockerKeysListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/DriveStatus']
-            ]]],
-            'MoveJobParameters' => ['properties' => [
-                'targetResourceGroup' => ['type' => 'string'],
-                'resources' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/OperationDisplayInformation']
+                ],
+                'required' => [
+                    'name',
+                    'display'
                 ]
-            ]],
-            'LocationProperties' => ['properties' => [
-                'recipientName' => ['type' => 'string'],
-                'streetAddress1' => ['type' => 'string'],
-                'streetAddress2' => ['type' => 'string'],
-                'city' => ['type' => 'string'],
-                'stateOrProvince' => ['type' => 'string'],
-                'postalCode' => ['type' => 'string'],
-                'countryOrRegion' => ['type' => 'string'],
-                'phone' => ['type' => 'string'],
-                'supportedCarriers' => [
+            ],
+            'SupportedOperationsListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['type' => 'string']
+                    'items' => ['$ref' => '#/definitions/Operation']
+                ]],
+                'required' => []
+            ],
+            'DriveStatus' => [
+                'properties' => [
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Specified',
+                            'Received',
+                            'NeverReceived',
+                            'Transferring',
+                            'Completed',
+                            'CompletedMoreInfo',
+                            'ShippedBack'
+                        ]
+                    ],
+                    'copyStatus' => ['type' => 'string'],
+                    'percentComplete' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'verboseLogUri' => ['type' => 'string'],
+                    'errorLogUri' => ['type' => 'string'],
+                    'manifestUri' => ['type' => 'string']
                 ],
-                'alternateLocations' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'Location' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/LocationProperties']
-            ]],
-            'LocationsListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Location']
-            ]]],
-            'ErrorBase' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'target' => ['type' => 'string']
-            ]],
-            'ErrorInfo' => ['properties' => ['details' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ErrorBase']
-            ]]],
-            'ErrorResponse' => ['properties' => ['error' => ['$ref' => '#/definitions/ErrorInfo']]],
-            'ReturnAddress' => ['properties' => [
-                'recipientName' => ['type' => 'string'],
-                'streetAddress1' => ['type' => 'string'],
-                'streetAddress2' => ['type' => 'string'],
-                'city' => ['type' => 'string'],
-                'stateOrProvince' => ['type' => 'string'],
-                'postalCode' => ['type' => 'string'],
-                'countryOrRegion' => ['type' => 'string'],
-                'phone' => ['type' => 'string'],
-                'email' => ['type' => 'string']
-            ]],
-            'ReturnShipping' => ['properties' => [
-                'carrierName' => ['type' => 'string'],
-                'carrierAccountNumber' => ['type' => 'string']
-            ]],
-            'PackageInfomation' => ['properties' => [
-                'carrierName' => ['type' => 'string'],
-                'trackingNumber' => ['type' => 'string'],
-                'driveCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'shipDate' => ['type' => 'string']
-            ]],
-            'MutableJobProperties' => ['properties' => [
-                'cancelRequested' => ['type' => 'boolean'],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => ['Shipping']
-                ],
-                'returnAddress' => ['$ref' => '#/definitions/ReturnAddress'],
-                'returnShipping' => ['$ref' => '#/definitions/ReturnShipping'],
-                'deliveryPackage' => ['$ref' => '#/definitions/PackageInfomation'],
-                'logLevel' => ['type' => 'string'],
-                'backupDriveManifest' => ['type' => 'boolean']
-            ]],
-            'MutableJob' => ['properties' => [
-                'tags' => ['type' => 'object'],
-                'properties' => ['$ref' => '#/definitions/MutableJobProperties']
-            ]],
-            'ShippingInformation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'address' => ['type' => 'string']
-            ]],
-            'Export_blobList' => ['properties' => [
-                'blobPath' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'blobPathPrefix' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'Export' => ['properties' => [
-                'blobList' => ['$ref' => '#/definitions/Export_blobList'],
-                'blobListblobPath' => ['type' => 'string']
-            ]],
-            'JobProperties' => ['properties' => [
-                'storageAccountId' => ['type' => 'string'],
-                'containerSas' => ['type' => 'string'],
-                'jobType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Import',
-                        'Export'
-                    ]
-                ],
-                'returnAddress' => ['$ref' => '#/definitions/ReturnAddress'],
-                'returnShipping' => ['$ref' => '#/definitions/ReturnShipping'],
-                'shippingInformation' => ['$ref' => '#/definitions/ShippingInformation'],
-                'deliveryPackage' => ['$ref' => '#/definitions/PackageInfomation'],
-                'returnPackage' => ['$ref' => '#/definitions/PackageInfomation'],
-                'diagnosticsPath' => ['type' => 'string'],
-                'logLevel' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Error',
-                        'Verbose'
-                    ]
-                ],
-                'backupDriveManifest' => ['type' => 'boolean'],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Creating',
-                        'Shipping',
-                        'Received',
-                        'Transferring',
-                        'Packaging',
-                        'Closed',
-                        'Completed'
-                    ]
-                ],
-                'cancelRequested' => ['type' => 'boolean'],
-                'percentComplete' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'incompleteBlobListUri' => ['type' => 'string'],
-                'driveList' => [
+                'required' => []
+            ],
+            'BitLockerKeysListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/DriveStatus']
+                ]],
+                'required' => []
+            ],
+            'MoveJobParameters' => [
+                'properties' => [
+                    'targetResourceGroup' => ['type' => 'string'],
+                    'resources' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
                 ],
-                'export' => ['$ref' => '#/definitions/Export'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'Job' => ['properties' => ['properties' => ['$ref' => '#/definitions/JobProperties']]],
-            'JobListResult' => ['properties' => [
-                'nextLink' => ['type' => 'string'],
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Job']
+                'required' => [
+                    'targetResourceGroup',
+                    'resources'
                 ]
-            ]],
-            'Drive' => ['properties' => [
-                'driveId' => ['type' => 'string'],
-                'bitLockerKey' => ['type' => 'string'],
-                'manifestFile' => ['type' => 'string'],
-                'manifestHash' => ['type' => 'string']
-            ]]
+            ],
+            'LocationProperties' => [
+                'properties' => [
+                    'recipientName' => ['type' => 'string'],
+                    'streetAddress1' => ['type' => 'string'],
+                    'streetAddress2' => ['type' => 'string'],
+                    'city' => ['type' => 'string'],
+                    'stateOrProvince' => ['type' => 'string'],
+                    'postalCode' => ['type' => 'string'],
+                    'countryOrRegion' => ['type' => 'string'],
+                    'phone' => ['type' => 'string'],
+                    'supportedCarriers' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'alternateLocations' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'Location' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/LocationProperties']
+                ],
+                'required' => []
+            ],
+            'LocationsListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Location']
+                ]],
+                'required' => ['value']
+            ],
+            'ErrorBase' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'target' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ErrorInfo' => [
+                'properties' => ['details' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ErrorBase']
+                ]],
+                'required' => []
+            ],
+            'ErrorResponse' => [
+                'properties' => ['error' => ['$ref' => '#/definitions/ErrorInfo']],
+                'required' => []
+            ],
+            'ReturnAddress' => [
+                'properties' => [
+                    'recipientName' => ['type' => 'string'],
+                    'streetAddress1' => ['type' => 'string'],
+                    'streetAddress2' => ['type' => 'string'],
+                    'city' => ['type' => 'string'],
+                    'stateOrProvince' => ['type' => 'string'],
+                    'postalCode' => ['type' => 'string'],
+                    'countryOrRegion' => ['type' => 'string'],
+                    'phone' => ['type' => 'string'],
+                    'email' => ['type' => 'string']
+                ],
+                'required' => [
+                    'recipientName',
+                    'streetAddress1',
+                    'city',
+                    'postalCode',
+                    'countryOrRegion',
+                    'phone',
+                    'email'
+                ]
+            ],
+            'ReturnShipping' => [
+                'properties' => [
+                    'carrierName' => ['type' => 'string'],
+                    'carrierAccountNumber' => ['type' => 'string']
+                ],
+                'required' => [
+                    'carrierName',
+                    'carrierAccountNumber'
+                ]
+            ],
+            'PackageInfomation' => [
+                'properties' => [
+                    'carrierName' => ['type' => 'string'],
+                    'trackingNumber' => ['type' => 'string'],
+                    'driveCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'shipDate' => ['type' => 'string']
+                ],
+                'required' => [
+                    'carrierName',
+                    'trackingNumber',
+                    'driveCount',
+                    'shipDate'
+                ]
+            ],
+            'MutableJobProperties' => [
+                'properties' => [
+                    'cancelRequested' => ['type' => 'boolean'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => ['Shipping']
+                    ],
+                    'returnAddress' => ['$ref' => '#/definitions/ReturnAddress'],
+                    'returnShipping' => ['$ref' => '#/definitions/ReturnShipping'],
+                    'deliveryPackage' => ['$ref' => '#/definitions/PackageInfomation'],
+                    'logLevel' => ['type' => 'string'],
+                    'backupDriveManifest' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'MutableJob' => [
+                'properties' => [
+                    'tags' => ['type' => 'object'],
+                    'properties' => ['$ref' => '#/definitions/MutableJobProperties']
+                ],
+                'required' => []
+            ],
+            'ShippingInformation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'address' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'address'
+                ]
+            ],
+            'Export_blobList' => [
+                'properties' => [
+                    'blobPath' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'blobPathPrefix' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'Export' => [
+                'properties' => [
+                    'blobList' => ['$ref' => '#/definitions/Export_blobList'],
+                    'blobListblobPath' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'JobProperties' => [
+                'properties' => [
+                    'storageAccountId' => ['type' => 'string'],
+                    'containerSas' => ['type' => 'string'],
+                    'jobType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Import',
+                            'Export'
+                        ]
+                    ],
+                    'returnAddress' => ['$ref' => '#/definitions/ReturnAddress'],
+                    'returnShipping' => ['$ref' => '#/definitions/ReturnShipping'],
+                    'shippingInformation' => ['$ref' => '#/definitions/ShippingInformation'],
+                    'deliveryPackage' => ['$ref' => '#/definitions/PackageInfomation'],
+                    'returnPackage' => ['$ref' => '#/definitions/PackageInfomation'],
+                    'diagnosticsPath' => ['type' => 'string'],
+                    'logLevel' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Error',
+                            'Verbose'
+                        ]
+                    ],
+                    'backupDriveManifest' => ['type' => 'boolean'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Creating',
+                            'Shipping',
+                            'Received',
+                            'Transferring',
+                            'Packaging',
+                            'Closed',
+                            'Completed'
+                        ]
+                    ],
+                    'cancelRequested' => ['type' => 'boolean'],
+                    'percentComplete' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'incompleteBlobListUri' => ['type' => 'string'],
+                    'driveList' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DriveStatus']
+                    ],
+                    'export' => ['$ref' => '#/definitions/Export'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => [
+                    'storageAccountId',
+                    'jobType',
+                    'returnAddress',
+                    'returnShipping',
+                    'diagnosticsPath'
+                ]
+            ],
+            'Job' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/JobProperties']],
+                'required' => ['properties']
+            ],
+            'JobListResult' => [
+                'properties' => [
+                    'nextLink' => ['type' => 'string'],
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Job']
+                    ]
+                ],
+                'required' => ['value']
+            ],
+            'Drive' => [
+                'properties' => [
+                    'driveId' => ['type' => 'string'],
+                    'bitLockerKey' => ['type' => 'string'],
+                    'manifestFile' => ['type' => 'string'],
+                    'manifestHash' => ['type' => 'string']
+                ],
+                'required' => [
+                    'driveId',
+                    'bitLockerKey',
+                    'manifestFile',
+                    'manifestHash'
+                ]
+            ]
         ]
     ];
 }

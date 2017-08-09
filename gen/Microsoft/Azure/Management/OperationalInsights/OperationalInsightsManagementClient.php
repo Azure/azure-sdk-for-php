@@ -1230,16 +1230,53 @@ final class OperationalInsightsManagementClient
             ]]
         ],
         'definitions' => [
-            'LinkedServiceProperties' => ['properties' => ['resourceId' => ['type' => 'string']]],
-            'LinkedService' => ['properties' => ['properties' => ['$ref' => '#/definitions/LinkedServiceProperties']]],
-            'LinkedServiceListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/LinkedService']
-            ]]],
-            'DataSource' => ['properties' => [
-                'properties' => ['type' => 'object'],
-                'eTag' => ['type' => 'string'],
-                'kind' => [
+            'LinkedServiceProperties' => [
+                'properties' => ['resourceId' => ['type' => 'string']],
+                'required' => ['resourceId']
+            ],
+            'LinkedService' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/LinkedServiceProperties']],
+                'required' => ['properties']
+            ],
+            'LinkedServiceListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/LinkedService']
+                ]],
+                'required' => []
+            ],
+            'DataSource' => [
+                'properties' => [
+                    'properties' => ['type' => 'object'],
+                    'eTag' => ['type' => 'string'],
+                    'kind' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'AzureActivityLog',
+                            'ChangeTrackingPath',
+                            'ChangeTrackingDefaultPath',
+                            'ChangeTrackingDefaultRegistry',
+                            'ChangeTrackingCustomRegistry',
+                            'CustomLog',
+                            'CustomLogCollection',
+                            'GenericDataSource',
+                            'IISLogs',
+                            'LinuxPerformanceObject',
+                            'LinuxPerformanceCollection',
+                            'LinuxSyslog',
+                            'LinuxSyslogCollection',
+                            'WindowsEvent',
+                            'WindowsPerformanceCounter'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'properties',
+                    'kind'
+                ]
+            ],
+            'DataSourceFilter' => [
+                'properties' => ['kind' => [
                     'type' => 'string',
                     'enum' => [
                         'AzureActivityLog',
@@ -1258,345 +1295,446 @@ final class OperationalInsightsManagementClient
                         'WindowsEvent',
                         'WindowsPerformanceCounter'
                     ]
-                ]
-            ]],
-            'DataSourceFilter' => ['properties' => ['kind' => [
-                'type' => 'string',
-                'enum' => [
-                    'AzureActivityLog',
-                    'ChangeTrackingPath',
-                    'ChangeTrackingDefaultPath',
-                    'ChangeTrackingDefaultRegistry',
-                    'ChangeTrackingCustomRegistry',
-                    'CustomLog',
-                    'CustomLogCollection',
-                    'GenericDataSource',
-                    'IISLogs',
-                    'LinuxPerformanceObject',
-                    'LinuxPerformanceCollection',
-                    'LinuxSyslog',
-                    'LinuxSyslogCollection',
-                    'WindowsEvent',
-                    'WindowsPerformanceCounter'
-                ]
-            ]]],
-            'DataSourceListResult' => ['properties' => [
-                'value' => [
+                ]],
+                'required' => []
+            ],
+            'DataSourceListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DataSource']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'IntelligencePack' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'enabled' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'SharedKeys' => [
+                'properties' => [
+                    'primarySharedKey' => ['type' => 'string'],
+                    'secondarySharedKey' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MetricName' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'localizedValue' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'UsageMetric' => [
+                'properties' => [
+                    'name' => ['$ref' => '#/definitions/MetricName'],
+                    'unit' => ['type' => 'string'],
+                    'currentValue' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'limit' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'nextResetTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'quotaPeriod' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'WorkspaceListUsagesResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DataSource']
+                    'items' => ['$ref' => '#/definitions/UsageMetric']
+                ]],
+                'required' => []
+            ],
+            'ManagementGroupProperties' => [
+                'properties' => [
+                    'serverCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'isGateway' => ['type' => 'boolean'],
+                    'name' => ['type' => 'string'],
+                    'id' => ['type' => 'string'],
+                    'created' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'dataReceived' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'version' => ['type' => 'string'],
+                    'sku' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'IntelligencePack' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'enabled' => ['type' => 'boolean']
-            ]],
-            'SharedKeys' => ['properties' => [
-                'primarySharedKey' => ['type' => 'string'],
-                'secondarySharedKey' => ['type' => 'string']
-            ]],
-            'MetricName' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'localizedValue' => ['type' => 'string']
-            ]],
-            'UsageMetric' => ['properties' => [
-                'name' => ['$ref' => '#/definitions/MetricName'],
-                'unit' => ['type' => 'string'],
-                'currentValue' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'limit' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'nextResetTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'quotaPeriod' => ['type' => 'string']
-            ]],
-            'WorkspaceListUsagesResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/UsageMetric']
-            ]]],
-            'ManagementGroupProperties' => ['properties' => [
-                'serverCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'isGateway' => ['type' => 'boolean'],
-                'name' => ['type' => 'string'],
-                'id' => ['type' => 'string'],
-                'created' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'dataReceived' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'version' => ['type' => 'string'],
-                'sku' => ['type' => 'string']
-            ]],
-            'ManagementGroup' => ['properties' => ['properties' => ['$ref' => '#/definitions/ManagementGroupProperties']]],
-            'WorkspaceListManagementGroupsResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ManagementGroup']
-            ]]],
-            'Sku' => ['properties' => ['name' => [
-                'type' => 'string',
-                'enum' => [
-                    'Free',
-                    'Standard',
-                    'Premium',
-                    'Unlimited',
-                    'PerNode',
-                    'Standalone'
-                ]
-            ]]],
-            'WorkspaceProperties' => ['properties' => [
-                'provisioningState' => [
+                'required' => []
+            ],
+            'ManagementGroup' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ManagementGroupProperties']],
+                'required' => []
+            ],
+            'WorkspaceListManagementGroupsResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ManagementGroup']
+                ]],
+                'required' => []
+            ],
+            'Sku' => [
+                'properties' => ['name' => [
                     'type' => 'string',
                     'enum' => [
-                        'Creating',
-                        'Succeeded',
-                        'Failed',
-                        'Canceled',
-                        'Deleting',
-                        'ProvisioningAccount'
+                        'Free',
+                        'Standard',
+                        'Premium',
+                        'Unlimited',
+                        'PerNode',
+                        'Standalone'
+                    ]
+                ]],
+                'required' => ['name']
+            ],
+            'WorkspaceProperties' => [
+                'properties' => [
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Creating',
+                            'Succeeded',
+                            'Failed',
+                            'Canceled',
+                            'Deleting',
+                            'ProvisioningAccount'
+                        ]
+                    ],
+                    'source' => ['type' => 'string'],
+                    'customerId' => ['type' => 'string'],
+                    'portalUrl' => ['type' => 'string'],
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'retentionInDays' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'source' => ['type' => 'string'],
-                'customerId' => ['type' => 'string'],
-                'portalUrl' => ['type' => 'string'],
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'retentionInDays' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'Workspace' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/WorkspaceProperties'],
-                'eTag' => ['type' => 'string']
-            ]],
-            'WorkspaceListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Workspace']
-            ]]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ProxyResource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'LinkTarget' => ['properties' => [
-                'customerId' => ['type' => 'string'],
-                'accountName' => ['type' => 'string'],
-                'workspaceName' => ['type' => 'string'],
-                'location' => ['type' => 'string']
-            ]],
-            'Tag' => ['properties' => [
-                'Name' => ['type' => 'string'],
-                'Value' => ['type' => 'string']
-            ]],
-            'SavedSearchProperties' => ['properties' => [
-                'Category' => ['type' => 'string'],
-                'DisplayName' => ['type' => 'string'],
-                'Query' => ['type' => 'string'],
-                'Version' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'Workspace' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/WorkspaceProperties'],
+                    'eTag' => ['type' => 'string']
                 ],
-                'Tags' => [
+                'required' => []
+            ],
+            'WorkspaceListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Tag']
-                ]
-            ]],
-            'CoreSummary' => ['properties' => [
-                'Status' => ['type' => 'string'],
-                'NumberOfDocuments' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ]
-            ]],
-            'SearchSort' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'order' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'asc',
-                        'desc'
-                    ]
-                ]
-            ]],
-            'SearchMetadataSchema' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'version' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'SearchMetadata' => ['properties' => [
-                'RequestId' => ['type' => 'string'],
-                'resultType' => ['type' => 'string'],
-                'total' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'top' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'id' => ['type' => 'string'],
-                'CoreSummaries' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CoreSummary']
-                ],
-                'Status' => ['type' => 'string'],
-                'StartTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'LastUpdated' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'ETag' => ['type' => 'string'],
-                'sort' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SearchSort']
-                ],
-                'requestTime' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'aggregatedValueField' => ['type' => 'string'],
-                'aggregatedGroupingFields' => ['type' => 'string'],
-                'sum' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'max' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'schema' => ['$ref' => '#/definitions/SearchMetadataSchema']
-            ]],
-            'SavedSearch' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/SavedSearchProperties']
-            ]],
-            'SavedSearchesListResult' => ['properties' => [
-                '__metadata' => ['$ref' => '#/definitions/SearchMetadata'],
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SavedSearch']
-                ]
-            ]],
-            'SearchError' => ['properties' => [
-                'type' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'SearchResultsResponse' => ['properties' => [
-                'id' => ['type' => 'string'],
-                '__metadata' => ['$ref' => '#/definitions/SearchMetadata'],
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'object']
-                ],
-                'error' => ['$ref' => '#/definitions/SearchError']
-            ]],
-            'SearchSchemaValue' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'indexed' => ['type' => 'boolean'],
-                'stored' => ['type' => 'boolean'],
-                'facet' => ['type' => 'boolean'],
-                'ownerType' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'SearchGetSchemaResponse' => ['properties' => [
-                '__metadata' => ['$ref' => '#/definitions/SearchMetadata'],
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SearchSchemaValue']
-                ]
-            ]],
-            'SearchHighlight' => ['properties' => [
-                'pre' => ['type' => 'string'],
-                'post' => ['type' => 'string']
-            ]],
-            'SearchParameters' => ['properties' => [
-                'top' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'highlight' => ['$ref' => '#/definitions/SearchHighlight'],
-                'query' => ['type' => 'string'],
-                'start' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'end' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'StorageAccount' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'key' => ['type' => 'string']
-            ]],
-            'StorageInsightStatus' => ['properties' => [
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'OK',
-                        'ERROR'
+                    'items' => ['$ref' => '#/definitions/Workspace']
+                ]],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'description' => ['type' => 'string']
-            ]],
-            'StorageInsightProperties' => ['properties' => [
-                'containers' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => ['location']
+            ],
+            'ProxyResource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
                 ],
-                'tables' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'LinkTarget' => [
+                'properties' => [
+                    'customerId' => ['type' => 'string'],
+                    'accountName' => ['type' => 'string'],
+                    'workspaceName' => ['type' => 'string'],
+                    'location' => ['type' => 'string']
                 ],
-                'storageAccount' => ['$ref' => '#/definitions/StorageAccount'],
-                'status' => ['$ref' => '#/definitions/StorageInsightStatus']
-            ]],
-            'StorageInsight' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/StorageInsightProperties'],
-                'eTag' => ['type' => 'string']
-            ]],
-            'StorageInsightListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/StorageInsight']
+                'required' => []
+            ],
+            'Tag' => [
+                'properties' => [
+                    'Name' => ['type' => 'string'],
+                    'Value' => ['type' => 'string']
                 ],
-                '@odata.nextLink' => ['type' => 'string']
-            ]]
+                'required' => [
+                    'Name',
+                    'Value'
+                ]
+            ],
+            'SavedSearchProperties' => [
+                'properties' => [
+                    'Category' => ['type' => 'string'],
+                    'DisplayName' => ['type' => 'string'],
+                    'Query' => ['type' => 'string'],
+                    'Version' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'Tags' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Tag']
+                    ]
+                ],
+                'required' => [
+                    'Category',
+                    'DisplayName',
+                    'Query',
+                    'Version'
+                ]
+            ],
+            'CoreSummary' => [
+                'properties' => [
+                    'Status' => ['type' => 'string'],
+                    'NumberOfDocuments' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ]
+                ],
+                'required' => ['NumberOfDocuments']
+            ],
+            'SearchSort' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'order' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'asc',
+                            'desc'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'SearchMetadataSchema' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'version' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'SearchMetadata' => [
+                'properties' => [
+                    'RequestId' => ['type' => 'string'],
+                    'resultType' => ['type' => 'string'],
+                    'total' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'top' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'id' => ['type' => 'string'],
+                    'CoreSummaries' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CoreSummary']
+                    ],
+                    'Status' => ['type' => 'string'],
+                    'StartTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'LastUpdated' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'ETag' => ['type' => 'string'],
+                    'sort' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SearchSort']
+                    ],
+                    'requestTime' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'aggregatedValueField' => ['type' => 'string'],
+                    'aggregatedGroupingFields' => ['type' => 'string'],
+                    'sum' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'max' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'schema' => ['$ref' => '#/definitions/SearchMetadataSchema']
+                ],
+                'required' => []
+            ],
+            'SavedSearch' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/SavedSearchProperties']
+                ],
+                'required' => ['properties']
+            ],
+            'SavedSearchesListResult' => [
+                'properties' => [
+                    '__metadata' => ['$ref' => '#/definitions/SearchMetadata'],
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SavedSearch']
+                    ]
+                ],
+                'required' => []
+            ],
+            'SearchError' => [
+                'properties' => [
+                    'type' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SearchResultsResponse' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    '__metadata' => ['$ref' => '#/definitions/SearchMetadata'],
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'object']
+                    ],
+                    'error' => ['$ref' => '#/definitions/SearchError']
+                ],
+                'required' => []
+            ],
+            'SearchSchemaValue' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'indexed' => ['type' => 'boolean'],
+                    'stored' => ['type' => 'boolean'],
+                    'facet' => ['type' => 'boolean'],
+                    'ownerType' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => [
+                    'indexed',
+                    'stored',
+                    'facet'
+                ]
+            ],
+            'SearchGetSchemaResponse' => [
+                'properties' => [
+                    '__metadata' => ['$ref' => '#/definitions/SearchMetadata'],
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SearchSchemaValue']
+                    ]
+                ],
+                'required' => []
+            ],
+            'SearchHighlight' => [
+                'properties' => [
+                    'pre' => ['type' => 'string'],
+                    'post' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SearchParameters' => [
+                'properties' => [
+                    'top' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'highlight' => ['$ref' => '#/definitions/SearchHighlight'],
+                    'query' => ['type' => 'string'],
+                    'start' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'end' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => ['query']
+            ],
+            'StorageAccount' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'key' => ['type' => 'string']
+                ],
+                'required' => [
+                    'id',
+                    'key'
+                ]
+            ],
+            'StorageInsightStatus' => [
+                'properties' => [
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'OK',
+                            'ERROR'
+                        ]
+                    ],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => ['state']
+            ],
+            'StorageInsightProperties' => [
+                'properties' => [
+                    'containers' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'tables' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'storageAccount' => ['$ref' => '#/definitions/StorageAccount'],
+                    'status' => ['$ref' => '#/definitions/StorageInsightStatus']
+                ],
+                'required' => ['storageAccount']
+            ],
+            'StorageInsight' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/StorageInsightProperties'],
+                    'eTag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'StorageInsightListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/StorageInsight']
+                    ],
+                    '@odata.nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

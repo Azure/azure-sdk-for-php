@@ -1393,321 +1393,456 @@ final class ResourceManagementClient
             ]]
         ],
         'definitions' => [
-            'DeploymentExtendedFilter' => ['properties' => ['provisioningState' => ['type' => 'string']]],
-            'GenericResourceFilter' => ['properties' => [
-                'resourceType' => ['type' => 'string'],
-                'tagname' => ['type' => 'string'],
-                'tagvalue' => ['type' => 'string']
-            ]],
-            'ResourceGroupFilter' => ['properties' => [
-                'tagName' => ['type' => 'string'],
-                'tagValue' => ['type' => 'string']
-            ]],
-            'TemplateLink' => ['properties' => [
-                'uri' => ['type' => 'string'],
-                'contentVersion' => ['type' => 'string']
-            ]],
-            'ParametersLink' => ['properties' => [
-                'uri' => ['type' => 'string'],
-                'contentVersion' => ['type' => 'string']
-            ]],
-            'DebugSetting' => ['properties' => ['detailLevel' => ['type' => 'string']]],
-            'DeploymentProperties' => ['properties' => [
-                'template' => ['type' => 'object'],
-                'templateLink' => ['$ref' => '#/definitions/TemplateLink'],
-                'parameters' => ['type' => 'object'],
-                'parametersLink' => ['$ref' => '#/definitions/ParametersLink'],
-                'mode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Incremental',
-                        'Complete'
-                    ]
-                ],
-                'debugSetting' => ['$ref' => '#/definitions/DebugSetting']
-            ]],
-            'Deployment' => ['properties' => ['properties' => ['$ref' => '#/definitions/DeploymentProperties']]],
-            'DeploymentExportResult' => ['properties' => ['template' => ['type' => 'object']]],
-            'ResourceManagementErrorWithDetails' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'target' => ['type' => 'string'],
-                'details' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceManagementErrorWithDetails']
-                ]
-            ]],
-            'AliasPathType' => ['properties' => [
-                'path' => ['type' => 'string'],
-                'apiVersions' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'AliasType' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'paths' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AliasPathType']
-                ]
-            ]],
-            'ProviderResourceType' => ['properties' => [
-                'resourceType' => ['type' => 'string'],
-                'locations' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'aliases' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AliasType']
-                ],
-                'apiVersions' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
+            'DeploymentExtendedFilter' => [
+                'properties' => ['provisioningState' => ['type' => 'string']],
+                'required' => []
+            ],
+            'GenericResourceFilter' => [
                 'properties' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'Provider' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'namespace' => ['type' => 'string'],
-                'registrationState' => ['type' => 'string'],
-                'resourceTypes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ProviderResourceType']
-                ]
-            ]],
-            'BasicDependency' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'resourceType' => ['type' => 'string'],
-                'resourceName' => ['type' => 'string']
-            ]],
-            'Dependency' => ['properties' => [
-                'dependsOn' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/BasicDependency']
+                    'resourceType' => ['type' => 'string'],
+                    'tagname' => ['type' => 'string'],
+                    'tagvalue' => ['type' => 'string']
                 ],
-                'id' => ['type' => 'string'],
-                'resourceType' => ['type' => 'string'],
-                'resourceName' => ['type' => 'string']
-            ]],
-            'DeploymentPropertiesExtended' => ['properties' => [
-                'provisioningState' => ['type' => 'string'],
-                'correlationId' => ['type' => 'string'],
-                'timestamp' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'ResourceGroupFilter' => [
+                'properties' => [
+                    'tagName' => ['type' => 'string'],
+                    'tagValue' => ['type' => 'string']
                 ],
-                'outputs' => ['type' => 'object'],
-                'providers' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Provider']
+                'required' => []
+            ],
+            'TemplateLink' => [
+                'properties' => [
+                    'uri' => ['type' => 'string'],
+                    'contentVersion' => ['type' => 'string']
                 ],
-                'dependencies' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Dependency']
+                'required' => ['uri']
+            ],
+            'ParametersLink' => [
+                'properties' => [
+                    'uri' => ['type' => 'string'],
+                    'contentVersion' => ['type' => 'string']
                 ],
-                'template' => ['type' => 'object'],
-                'templateLink' => ['$ref' => '#/definitions/TemplateLink'],
-                'parameters' => ['type' => 'object'],
-                'parametersLink' => ['$ref' => '#/definitions/ParametersLink'],
-                'mode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Incremental',
-                        'Complete'
+                'required' => ['uri']
+            ],
+            'DebugSetting' => [
+                'properties' => ['detailLevel' => ['type' => 'string']],
+                'required' => []
+            ],
+            'DeploymentProperties' => [
+                'properties' => [
+                    'template' => ['type' => 'object'],
+                    'templateLink' => ['$ref' => '#/definitions/TemplateLink'],
+                    'parameters' => ['type' => 'object'],
+                    'parametersLink' => ['$ref' => '#/definitions/ParametersLink'],
+                    'mode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Incremental',
+                            'Complete'
+                        ]
+                    ],
+                    'debugSetting' => ['$ref' => '#/definitions/DebugSetting']
+                ],
+                'required' => ['mode']
+            ],
+            'Deployment' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DeploymentProperties']],
+                'required' => ['properties']
+            ],
+            'DeploymentExportResult' => [
+                'properties' => ['template' => ['type' => 'object']],
+                'required' => []
+            ],
+            'ResourceManagementErrorWithDetails' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'target' => ['type' => 'string'],
+                    'details' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceManagementErrorWithDetails']
                     ]
                 ],
-                'debugSetting' => ['$ref' => '#/definitions/DebugSetting']
-            ]],
-            'DeploymentValidateResult' => ['properties' => [
-                'error' => ['$ref' => '#/definitions/ResourceManagementErrorWithDetails'],
-                'properties' => ['$ref' => '#/definitions/DeploymentPropertiesExtended']
-            ]],
-            'DeploymentExtended' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/DeploymentPropertiesExtended']
-            ]],
-            'DeploymentListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DeploymentExtended']
+                'required' => []
+            ],
+            'AliasPathType' => [
+                'properties' => [
+                    'path' => ['type' => 'string'],
+                    'apiVersions' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ProviderListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Provider']
+                'required' => []
+            ],
+            'AliasType' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'paths' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AliasPathType']
+                    ]
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Plan' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'publisher' => ['type' => 'string'],
-                'product' => ['type' => 'string'],
-                'promotionCode' => ['type' => 'string']
-            ]],
-            'Sku' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'tier' => ['type' => 'string'],
-                'size' => ['type' => 'string'],
-                'family' => ['type' => 'string'],
-                'model' => ['type' => 'string'],
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'Identity' => ['properties' => [
-                'principalId' => ['type' => 'string'],
-                'tenantId' => ['type' => 'string'],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => ['SystemAssigned']
-                ]
-            ]],
-            'GenericResource' => ['properties' => [
-                'plan' => ['$ref' => '#/definitions/Plan'],
-                'properties' => ['type' => 'object'],
-                'kind' => ['type' => 'string'],
-                'managedBy' => ['type' => 'string'],
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'identity' => ['$ref' => '#/definitions/Identity']
-            ]],
-            'ResourceListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/GenericResource']
+                'required' => []
+            ],
+            'ProviderResourceType' => [
+                'properties' => [
+                    'resourceType' => ['type' => 'string'],
+                    'locations' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'aliases' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AliasType']
+                    ],
+                    'apiVersions' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'properties' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResourceGroupProperties' => ['properties' => ['provisioningState' => ['type' => 'string']]],
-            'ResourceGroup' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ResourceGroupProperties'],
-                'location' => ['type' => 'string'],
-                'managedBy' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ResourceGroupPatchable' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ResourceGroupProperties'],
-                'managedBy' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ResourceGroupListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceGroup']
+                'required' => []
+            ],
+            'Provider' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'namespace' => ['type' => 'string'],
+                    'registrationState' => ['type' => 'string'],
+                    'resourceTypes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ProviderResourceType']
+                    ]
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResourcesMoveInfo' => ['properties' => [
-                'resources' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'BasicDependency' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'resourceType' => ['type' => 'string'],
+                    'resourceName' => ['type' => 'string']
                 ],
-                'targetResourceGroup' => ['type' => 'string']
-            ]],
-            'ExportTemplateRequest' => ['properties' => [
-                'resources' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'Dependency' => [
+                'properties' => [
+                    'dependsOn' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/BasicDependency']
+                    ],
+                    'id' => ['type' => 'string'],
+                    'resourceType' => ['type' => 'string'],
+                    'resourceName' => ['type' => 'string']
                 ],
-                'options' => ['type' => 'string']
-            ]],
-            'TagCount' => ['properties' => [
-                'type' => ['type' => 'string'],
-                'value' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'TagValue' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'tagValue' => ['type' => 'string'],
-                'count' => ['$ref' => '#/definitions/TagCount']
-            ]],
-            'TagDetails' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'tagName' => ['type' => 'string'],
-                'count' => ['$ref' => '#/definitions/TagCount'],
-                'values' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TagValue']
-                ]
-            ]],
-            'TagsListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TagDetails']
+                'required' => []
+            ],
+            'DeploymentPropertiesExtended' => [
+                'properties' => [
+                    'provisioningState' => ['type' => 'string'],
+                    'correlationId' => ['type' => 'string'],
+                    'timestamp' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'outputs' => ['type' => 'object'],
+                    'providers' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Provider']
+                    ],
+                    'dependencies' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Dependency']
+                    ],
+                    'template' => ['type' => 'object'],
+                    'templateLink' => ['$ref' => '#/definitions/TemplateLink'],
+                    'parameters' => ['type' => 'object'],
+                    'parametersLink' => ['$ref' => '#/definitions/ParametersLink'],
+                    'mode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Incremental',
+                            'Complete'
+                        ]
+                    ],
+                    'debugSetting' => ['$ref' => '#/definitions/DebugSetting']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'TargetResource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'resourceName' => ['type' => 'string'],
-                'resourceType' => ['type' => 'string']
-            ]],
-            'HttpMessage' => ['properties' => ['content' => ['type' => 'object']]],
-            'DeploymentOperationProperties' => ['properties' => [
-                'provisioningState' => ['type' => 'string'],
-                'timestamp' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'DeploymentValidateResult' => [
+                'properties' => [
+                    'error' => ['$ref' => '#/definitions/ResourceManagementErrorWithDetails'],
+                    'properties' => ['$ref' => '#/definitions/DeploymentPropertiesExtended']
                 ],
-                'serviceRequestId' => ['type' => 'string'],
-                'statusCode' => ['type' => 'string'],
-                'statusMessage' => ['type' => 'object'],
-                'targetResource' => ['$ref' => '#/definitions/TargetResource'],
-                'request' => ['$ref' => '#/definitions/HttpMessage'],
-                'response' => ['$ref' => '#/definitions/HttpMessage']
-            ]],
-            'DeploymentOperation' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'operationId' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/DeploymentOperationProperties']
-            ]],
-            'DeploymentOperationsListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DeploymentOperation']
+                'required' => []
+            ],
+            'DeploymentExtended' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/DeploymentPropertiesExtended']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResourceProviderOperationDisplayProperties' => ['properties' => [
-                'publisher' => ['type' => 'string'],
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'SubResource' => ['properties' => ['id' => ['type' => 'string']]],
-            'ResourceGroupExportResult' => ['properties' => [
-                'template' => ['type' => 'object'],
-                'error' => ['$ref' => '#/definitions/ResourceManagementErrorWithDetails']
-            ]]
+                'required' => ['name']
+            ],
+            'DeploymentListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DeploymentExtended']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ProviderListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Provider']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Plan' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'publisher' => ['type' => 'string'],
+                    'product' => ['type' => 'string'],
+                    'promotionCode' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Sku' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'tier' => ['type' => 'string'],
+                    'size' => ['type' => 'string'],
+                    'family' => ['type' => 'string'],
+                    'model' => ['type' => 'string'],
+                    'capacity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'Identity' => [
+                'properties' => [
+                    'principalId' => ['type' => 'string'],
+                    'tenantId' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => ['SystemAssigned']
+                    ]
+                ],
+                'required' => []
+            ],
+            'GenericResource' => [
+                'properties' => [
+                    'plan' => ['$ref' => '#/definitions/Plan'],
+                    'properties' => ['type' => 'object'],
+                    'kind' => ['type' => 'string'],
+                    'managedBy' => ['type' => 'string'],
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'identity' => ['$ref' => '#/definitions/Identity']
+                ],
+                'required' => []
+            ],
+            'ResourceListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/GenericResource']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResourceGroupProperties' => [
+                'properties' => ['provisioningState' => ['type' => 'string']],
+                'required' => []
+            ],
+            'ResourceGroup' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ResourceGroupProperties'],
+                    'location' => ['type' => 'string'],
+                    'managedBy' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['location']
+            ],
+            'ResourceGroupPatchable' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ResourceGroupProperties'],
+                    'managedBy' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ResourceGroupListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceGroup']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResourcesMoveInfo' => [
+                'properties' => [
+                    'resources' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'targetResourceGroup' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ExportTemplateRequest' => [
+                'properties' => [
+                    'resources' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'options' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'TagCount' => [
+                'properties' => [
+                    'type' => ['type' => 'string'],
+                    'value' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'TagValue' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'tagValue' => ['type' => 'string'],
+                    'count' => ['$ref' => '#/definitions/TagCount']
+                ],
+                'required' => []
+            ],
+            'TagDetails' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'tagName' => ['type' => 'string'],
+                    'count' => ['$ref' => '#/definitions/TagCount'],
+                    'values' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TagValue']
+                    ]
+                ],
+                'required' => []
+            ],
+            'TagsListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TagDetails']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'TargetResource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'resourceName' => ['type' => 'string'],
+                    'resourceType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HttpMessage' => [
+                'properties' => ['content' => ['type' => 'object']],
+                'required' => []
+            ],
+            'DeploymentOperationProperties' => [
+                'properties' => [
+                    'provisioningState' => ['type' => 'string'],
+                    'timestamp' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'serviceRequestId' => ['type' => 'string'],
+                    'statusCode' => ['type' => 'string'],
+                    'statusMessage' => ['type' => 'object'],
+                    'targetResource' => ['$ref' => '#/definitions/TargetResource'],
+                    'request' => ['$ref' => '#/definitions/HttpMessage'],
+                    'response' => ['$ref' => '#/definitions/HttpMessage']
+                ],
+                'required' => []
+            ],
+            'DeploymentOperation' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'operationId' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/DeploymentOperationProperties']
+                ],
+                'required' => []
+            ],
+            'DeploymentOperationsListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DeploymentOperation']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResourceProviderOperationDisplayProperties' => [
+                'properties' => [
+                    'publisher' => ['type' => 'string'],
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'SubResource' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => []
+            ],
+            'ResourceGroupExportResult' => [
+                'properties' => [
+                    'template' => ['type' => 'object'],
+                    'error' => ['$ref' => '#/definitions/ResourceManagementErrorWithDetails']
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

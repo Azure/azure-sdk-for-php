@@ -1018,314 +1018,410 @@ final class ServerManagement
             ]]
         ],
         'definitions' => [
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'etag' => ['type' => 'string']
                 ],
-                'etag' => ['type' => 'string']
-            ]],
-            'EncryptionJwkResource' => ['properties' => [
-                'kty' => ['type' => 'string'],
-                'alg' => ['type' => 'string'],
-                'e' => ['type' => 'string'],
-                'n' => ['type' => 'string']
-            ]],
-            'GatewayStatus' => ['properties' => [
-                'availableMemoryMByte' => [
-                    'type' => 'number',
-                    'format' => 'double'
+                'required' => []
+            ],
+            'EncryptionJwkResource' => [
+                'properties' => [
+                    'kty' => ['type' => 'string'],
+                    'alg' => ['type' => 'string'],
+                    'e' => ['type' => 'string'],
+                    'n' => ['type' => 'string']
                 ],
-                'gatewayCpuUtilizationPercent' => [
-                    'type' => 'number',
-                    'format' => 'double'
+                'required' => []
+            ],
+            'GatewayStatus' => [
+                'properties' => [
+                    'availableMemoryMByte' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'gatewayCpuUtilizationPercent' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'totalCpuUtilizationPercent' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'gatewayVersion' => ['type' => 'string'],
+                    'friendlyOsName' => ['type' => 'string'],
+                    'installedDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'logicalProcessorCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'name' => ['type' => 'string'],
+                    'gatewayId' => ['type' => 'string'],
+                    'gatewayWorkingSetMByte' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'statusUpdated' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'groupPolicyError' => ['type' => 'string'],
+                    'allowGatewayGroupPolicyStatus' => ['type' => 'boolean'],
+                    'requireMfaGroupPolicyStatus' => ['type' => 'boolean'],
+                    'encryptionCertificateThumbprint' => ['type' => 'string'],
+                    'secondaryEncryptionCertificateThumbprint' => ['type' => 'string'],
+                    'encryptionJwk' => ['$ref' => '#/definitions/EncryptionJwkResource'],
+                    'secondaryEncryptionJwk' => ['$ref' => '#/definitions/EncryptionJwkResource'],
+                    'activeMessageCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'latestPublishedMsiVersion' => ['type' => 'string'],
+                    'publishedTimeUtc' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
                 ],
-                'totalCpuUtilizationPercent' => [
-                    'type' => 'number',
-                    'format' => 'double'
+                'required' => []
+            ],
+            'GatewayResource_properties' => [
+                'properties' => [
+                    'created' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'updated' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'upgradeMode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Manual',
+                            'Automatic'
+                        ]
+                    ],
+                    'desiredVersion' => ['type' => 'string'],
+                    'instances' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/GatewayStatus']
+                    ],
+                    'activeMessageCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'latestPublishedMsiVersion' => ['type' => 'string'],
+                    'publishedTimeUtc' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'installerDownload' => ['type' => 'string'],
+                    'minimumVersion' => ['type' => 'string']
                 ],
-                'gatewayVersion' => ['type' => 'string'],
-                'friendlyOsName' => ['type' => 'string'],
-                'installedDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'GatewayResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/GatewayResource_properties']],
+                'required' => []
+            ],
+            'GatewayResources' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/GatewayResource']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'logicalProcessorCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'GatewayProfile' => [
+                'properties' => [
+                    'dataPlaneServiceBaseAddress' => ['type' => 'string'],
+                    'gatewayId' => ['type' => 'string'],
+                    'environment' => ['type' => 'string'],
+                    'upgradeManifestUrl' => ['type' => 'string'],
+                    'messagingNamespace' => ['type' => 'string'],
+                    'messagingAccount' => ['type' => 'string'],
+                    'messagingKey' => ['type' => 'string'],
+                    'requestQueue' => ['type' => 'string'],
+                    'responseTopic' => ['type' => 'string'],
+                    'statusBlobSignature' => ['type' => 'string']
                 ],
-                'name' => ['type' => 'string'],
-                'gatewayId' => ['type' => 'string'],
-                'gatewayWorkingSetMByte' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'statusUpdated' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'groupPolicyError' => ['type' => 'string'],
-                'allowGatewayGroupPolicyStatus' => ['type' => 'boolean'],
-                'requireMfaGroupPolicyStatus' => ['type' => 'boolean'],
-                'encryptionCertificateThumbprint' => ['type' => 'string'],
-                'secondaryEncryptionCertificateThumbprint' => ['type' => 'string'],
-                'encryptionJwk' => ['$ref' => '#/definitions/EncryptionJwkResource'],
-                'secondaryEncryptionJwk' => ['$ref' => '#/definitions/EncryptionJwkResource'],
-                'activeMessageCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'latestPublishedMsiVersion' => ['type' => 'string'],
-                'publishedTimeUtc' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'GatewayResource_properties' => ['properties' => [
-                'created' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'updated' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'upgradeMode' => [
+                'required' => []
+            ],
+            'GatewayParameters_properties' => [
+                'properties' => ['upgradeMode' => [
                     'type' => 'string',
                     'enum' => [
                         'Manual',
                         'Automatic'
                     ]
+                ]],
+                'required' => []
+            ],
+            'GatewayParameters' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'tags' => ['type' => 'object'],
+                    'properties' => ['$ref' => '#/definitions/GatewayParameters_properties']
                 ],
-                'desiredVersion' => ['type' => 'string'],
-                'instances' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/GatewayStatus']
-                ],
-                'activeMessageCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'latestPublishedMsiVersion' => ['type' => 'string'],
-                'publishedTimeUtc' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'installerDownload' => ['type' => 'string'],
-                'minimumVersion' => ['type' => 'string']
-            ]],
-            'GatewayResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/GatewayResource_properties']]],
-            'GatewayResources' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/GatewayResource']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'GatewayProfile' => ['properties' => [
-                'dataPlaneServiceBaseAddress' => ['type' => 'string'],
-                'gatewayId' => ['type' => 'string'],
-                'environment' => ['type' => 'string'],
-                'upgradeManifestUrl' => ['type' => 'string'],
-                'messagingNamespace' => ['type' => 'string'],
-                'messagingAccount' => ['type' => 'string'],
-                'messagingKey' => ['type' => 'string'],
-                'requestQueue' => ['type' => 'string'],
-                'responseTopic' => ['type' => 'string'],
-                'statusBlobSignature' => ['type' => 'string']
-            ]],
-            'GatewayParameters_properties' => ['properties' => ['upgradeMode' => [
-                'type' => 'string',
-                'enum' => [
-                    'Manual',
-                    'Automatic'
-                ]
-            ]]],
-            'GatewayParameters' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'tags' => ['type' => 'object'],
-                'properties' => ['$ref' => '#/definitions/GatewayParameters_properties']
-            ]],
-            'NodeResource_properties' => ['properties' => [
-                'gatewayId' => ['type' => 'string'],
-                'connectionName' => ['type' => 'string'],
-                'created' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'updated' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'NodeResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/NodeResource_properties']]],
-            'NodeResources' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NodeResource']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'NodeParameters_properties' => ['properties' => [
-                'gatewayId' => ['type' => 'string'],
-                'connectionName' => ['type' => 'string'],
-                'userName' => ['type' => 'string'],
-                'password' => ['type' => 'string']
-            ]],
-            'NodeParameters' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'tags' => ['type' => 'object'],
-                'properties' => ['$ref' => '#/definitions/NodeParameters_properties']
-            ]],
-            'SessionResource_properties' => ['properties' => [
-                'userName' => ['type' => 'string'],
-                'created' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'updated' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'SessionResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/SessionResource_properties']]],
-            'SessionParameters_properties' => ['properties' => [
-                'userName' => ['type' => 'string'],
-                'password' => ['type' => 'string'],
-                'retentionPeriod' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Session',
-                        'Persistent'
+                'required' => []
+            ],
+            'NodeResource_properties' => [
+                'properties' => [
+                    'gatewayId' => ['type' => 'string'],
+                    'connectionName' => ['type' => 'string'],
+                    'created' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'updated' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'credentialDataFormat' => [
-                    'type' => 'string',
-                    'enum' => ['RsaEncrypted']
+                'required' => []
+            ],
+            'NodeResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/NodeResource_properties']],
+                'required' => []
+            ],
+            'NodeResources' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NodeResource']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'EncryptionCertificateThumbprint' => ['type' => 'string']
-            ]],
-            'SessionParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/SessionParameters_properties']]],
-            'Version' => ['properties' => [
-                'major' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'NodeParameters_properties' => [
+                'properties' => [
+                    'gatewayId' => ['type' => 'string'],
+                    'connectionName' => ['type' => 'string'],
+                    'userName' => ['type' => 'string'],
+                    'password' => ['type' => 'string']
                 ],
-                'minor' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'NodeParameters' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'tags' => ['type' => 'object'],
+                    'properties' => ['$ref' => '#/definitions/NodeParameters_properties']
                 ],
-                'build' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'revision' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'majorRevision' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'minorRevision' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'PowerShellSessionResource_properties' => ['properties' => [
-                'sessionId' => ['type' => 'string'],
-                'state' => ['type' => 'string'],
-                'runspaceAvailability' => ['type' => 'string'],
-                'disconnectedOn' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'expiresOn' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'version' => ['$ref' => '#/definitions/Version'],
-                'name' => ['type' => 'string']
-            ]],
-            'PowerShellSessionResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/PowerShellSessionResource_properties']]],
-            'PromptFieldDescription' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'label' => ['type' => 'string'],
-                'helpMessage' => ['type' => 'string'],
-                'promptFieldTypeIsList' => ['type' => 'boolean'],
-                'promptFieldType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'String',
-                        'SecureString',
-                        'Credential'
+                'required' => []
+            ],
+            'SessionResource_properties' => [
+                'properties' => [
+                    'userName' => ['type' => 'string'],
+                    'created' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'updated' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
-                ]
-            ]],
-            'PowerShellCommandResult' => ['properties' => [
-                'messageType' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
                 ],
-                'foregroundColor' => ['type' => 'string'],
-                'backgroundColor' => ['type' => 'string'],
-                'value' => ['type' => 'string'],
-                'prompt' => ['type' => 'string'],
-                'exitCode' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'SessionResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SessionResource_properties']],
+                'required' => []
+            ],
+            'SessionParameters_properties' => [
+                'properties' => [
+                    'userName' => ['type' => 'string'],
+                    'password' => ['type' => 'string'],
+                    'retentionPeriod' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Session',
+                            'Persistent'
+                        ]
+                    ],
+                    'credentialDataFormat' => [
+                        'type' => 'string',
+                        'enum' => ['RsaEncrypted']
+                    ],
+                    'EncryptionCertificateThumbprint' => ['type' => 'string']
                 ],
-                'id' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'SessionParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SessionParameters_properties']],
+                'required' => []
+            ],
+            'Version' => [
+                'properties' => [
+                    'major' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'minor' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'build' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'revision' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'majorRevision' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'minorRevision' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
                 ],
-                'caption' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'descriptions' => [
+                'required' => []
+            ],
+            'PowerShellSessionResource_properties' => [
+                'properties' => [
+                    'sessionId' => ['type' => 'string'],
+                    'state' => ['type' => 'string'],
+                    'runspaceAvailability' => ['type' => 'string'],
+                    'disconnectedOn' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'expiresOn' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'version' => ['$ref' => '#/definitions/Version'],
+                    'name' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PowerShellSessionResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PowerShellSessionResource_properties']],
+                'required' => []
+            ],
+            'PromptFieldDescription' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'label' => ['type' => 'string'],
+                    'helpMessage' => ['type' => 'string'],
+                    'promptFieldTypeIsList' => ['type' => 'boolean'],
+                    'promptFieldType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'String',
+                            'SecureString',
+                            'Credential'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'PowerShellCommandResult' => [
+                'properties' => [
+                    'messageType' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'foregroundColor' => ['type' => 'string'],
+                    'backgroundColor' => ['type' => 'string'],
+                    'value' => ['type' => 'string'],
+                    'prompt' => ['type' => 'string'],
+                    'exitCode' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'id' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'caption' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'descriptions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PromptFieldDescription']
+                    ]
+                ],
+                'required' => []
+            ],
+            'PowerShellCommandResults' => [
+                'properties' => [
+                    'results' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PowerShellCommandResult']
+                    ],
+                    'pssession' => ['type' => 'string'],
+                    'command' => ['type' => 'string'],
+                    'completed' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'PowerShellCommandStatus' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PowerShellCommandResults']],
+                'required' => []
+            ],
+            'PowerShellSessionResources' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PowerShellSessionResource']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PowerShellCommandParameters_properties' => [
+                'properties' => ['command' => ['type' => 'string']],
+                'required' => []
+            ],
+            'PowerShellCommandParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PowerShellCommandParameters_properties']],
+                'required' => []
+            ],
+            'PromptMessageResponse' => [
+                'properties' => ['response' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PromptFieldDescription']
-                ]
-            ]],
-            'PowerShellCommandResults' => ['properties' => [
-                'results' => [
+                    'items' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'PowerShellTabCompletionParameters' => [
+                'properties' => ['command' => ['type' => 'string']],
+                'required' => []
+            ],
+            'PowerShellTabCompletionResults' => [
+                'properties' => ['results' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PowerShellCommandResult']
+                    'items' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'Error' => [
+                'properties' => [
+                    'code' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'message' => ['type' => 'string'],
+                    'fields' => ['type' => 'string']
                 ],
-                'pssession' => ['type' => 'string'],
-                'command' => ['type' => 'string'],
-                'completed' => ['type' => 'boolean']
-            ]],
-            'PowerShellCommandStatus' => ['properties' => ['properties' => ['$ref' => '#/definitions/PowerShellCommandResults']]],
-            'PowerShellSessionResources' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PowerShellSessionResource']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'PowerShellCommandParameters_properties' => ['properties' => ['command' => ['type' => 'string']]],
-            'PowerShellCommandParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/PowerShellCommandParameters_properties']]],
-            'PromptMessageResponse' => ['properties' => ['response' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'PowerShellTabCompletionParameters' => ['properties' => ['command' => ['type' => 'string']]],
-            'PowerShellTabCompletionResults' => ['properties' => ['results' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'Error' => ['properties' => [
-                'code' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'message' => ['type' => 'string'],
-                'fields' => ['type' => 'string']
-            ]]
+                'required' => []
+            ]
         ]
     ];
 }

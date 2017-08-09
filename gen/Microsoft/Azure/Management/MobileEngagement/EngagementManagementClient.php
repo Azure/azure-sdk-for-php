@@ -1877,390 +1877,262 @@ final class EngagementManagementClient
             ]]
         ],
         'definitions' => [
-            'ApiError_error' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'ApiError' => ['properties' => ['error' => ['$ref' => '#/definitions/ApiError_error']]],
-            'AppProperties' => ['properties' => [
-                'backendId' => ['type' => 'string'],
-                'platform' => ['type' => 'string'],
-                'appState' => ['type' => 'string']
-            ]],
-            'App' => ['properties' => ['properties' => ['$ref' => '#/definitions/AppProperties']]],
-            'AppListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/App']
+            'ApiError_error' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'AppCollectionProperties' => ['properties' => ['provisioningState' => [
-                'type' => 'string',
-                'enum' => [
-                    'Creating',
-                    'Succeeded'
-                ]
-            ]]],
-            'AppCollection' => ['properties' => ['properties' => ['$ref' => '#/definitions/AppCollectionProperties']]],
-            'AppCollectionListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AppCollection']
+                'required' => []
+            ],
+            'ApiError' => [
+                'properties' => ['error' => ['$ref' => '#/definitions/ApiError_error']],
+                'required' => []
+            ],
+            'AppProperties' => [
+                'properties' => [
+                    'backendId' => ['type' => 'string'],
+                    'platform' => ['type' => 'string'],
+                    'appState' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'AppCollectionNameAvailability' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'available' => ['type' => 'boolean'],
-                'unavailabilityReason' => ['type' => 'string']
-            ]],
-            'SupportedPlatformsListResult' => ['properties' => ['platforms' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'CampaignTestSavedParameters' => ['properties' => [
-                'deviceId' => ['type' => 'string'],
-                'lang' => ['type' => 'string']
-            ]],
-            'Criterion' => ['properties' => []],
-            'Filter' => ['properties' => []],
-            'Campaign_audience' => ['properties' => [
-                'expression' => ['type' => 'string'],
-                'criteria' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/Criterion']
+                'required' => []
+            ],
+            'App' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AppProperties']],
+                'required' => []
+            ],
+            'AppListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/App']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'filters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Filter']
-                ]
-            ]],
-            'NotificationOptions' => ['properties' => [
-                'bigText' => ['type' => 'string'],
-                'bigPicture' => ['type' => 'string'],
-                'sound' => ['type' => 'string'],
-                'actionText' => ['type' => 'string']
-            ]],
-            'CampaignLocalization' => ['properties' => [
-                'notificationTitle' => ['type' => 'string'],
-                'notificationMessage' => ['type' => 'string'],
-                'notificationImage' => [
-                    'type' => 'string',
-                    'format' => 'byte'
-                ],
-                'notificationOptions' => ['$ref' => '#/definitions/NotificationOptions'],
-                'title' => ['type' => 'string'],
-                'body' => ['type' => 'string'],
-                'actionButtonText' => ['type' => 'string'],
-                'exitButtonText' => ['type' => 'string'],
-                'actionUrl' => ['type' => 'string'],
-                'payload' => ['type' => 'object']
-            ]],
-            'PollQuestionLocalization' => ['properties' => ['title' => ['type' => 'string']]],
-            'PollQuestionChoiceLocalization' => ['properties' => ['title' => ['type' => 'string']]],
-            'PollQuestionChoice' => ['properties' => [
-                'id' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'localization' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/PollQuestionChoiceLocalization']
-                ],
-                'isDefault' => ['type' => 'boolean']
-            ]],
-            'PollQuestion' => ['properties' => [
-                'id' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'localization' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/PollQuestionLocalization']
-                ],
-                'choices' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PollQuestionChoice']
-                ]
-            ]],
-            'Campaign' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'audience' => ['$ref' => '#/definitions/Campaign_audience'],
-                'category' => ['type' => 'string'],
-                'pushMode' => [
+                'required' => []
+            ],
+            'AppCollectionProperties' => [
+                'properties' => ['provisioningState' => [
                     'type' => 'string',
                     'enum' => [
-                        'real-time',
-                        'one-shot',
-                        'manual'
+                        'Creating',
+                        'Succeeded'
                     ]
+                ]],
+                'required' => []
+            ],
+            'AppCollection' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AppCollectionProperties']],
+                'required' => []
+            ],
+            'AppCollectionListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AppCollection']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'text/plain',
-                        'text/html',
-                        'only_notif',
-                        'text/base64'
-                    ]
+                'required' => []
+            ],
+            'AppCollectionNameAvailability' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'available' => ['type' => 'boolean'],
+                    'unavailabilityReason' => ['type' => 'string']
                 ],
-                'deliveryTime' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'any',
-                        'background',
-                        'session'
-                    ]
-                ],
-                'deliveryActivities' => [
+                'required' => []
+            ],
+            'SupportedPlatformsListResult' => [
+                'properties' => ['platforms' => [
                     'type' => 'array',
                     'items' => ['type' => 'string']
-                ],
-                'startTime' => ['type' => 'string'],
-                'endTime' => ['type' => 'string'],
-                'timezone' => ['type' => 'string'],
-                'notificationType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'system',
-                        'popup'
+                ]],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'notificationIcon' => ['type' => 'boolean'],
-                'notificationCloseable' => ['type' => 'boolean'],
-                'notificationVibrate' => ['type' => 'boolean'],
-                'notificationSound' => ['type' => 'boolean'],
-                'notificationBadge' => ['type' => 'boolean'],
-                'localization' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/CampaignLocalization']
+                'required' => ['location']
+            ],
+            'CampaignTestSavedParameters' => [
+                'properties' => [
+                    'deviceId' => ['type' => 'string'],
+                    'lang' => ['type' => 'string']
                 ],
-                'questions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PollQuestion']
-                ]
-            ]],
-            'CampaignTestNewParameters' => ['properties' => ['data' => ['$ref' => '#/definitions/Campaign']]],
-            'CampaignPushParameters' => ['properties' => [
-                'deviceIds' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'data' => ['$ref' => '#/definitions/Campaign']
-            ]],
-            'CampaignState' => ['properties' => ['state' => [
-                'type' => 'string',
-                'enum' => [
-                    'draft',
-                    'scheduled',
-                    'in-progress',
-                    'finished',
-                    'queued'
-                ]
-            ]]],
-            'CampaignStateResult' => ['properties' => ['id' => [
-                'type' => 'integer',
-                'format' => 'int32'
-            ]]],
-            'carrier-name' => ['properties' => ['name' => ['type' => 'string']]],
-            'carrier-country' => ['properties' => ['name' => ['type' => 'string']]],
-            'firmware-version' => ['properties' => ['name' => ['type' => 'string']]],
-            'device-manufacturer' => ['properties' => ['name' => ['type' => 'string']]],
-            'device-model' => ['properties' => ['name' => ['type' => 'string']]],
-            'application-version' => ['properties' => ['name' => ['type' => 'string']]],
-            'network-type' => ['properties' => ['name' => ['type' => 'string']]],
-            'language' => ['properties' => ['name' => ['type' => 'string']]],
-            'screen-size' => ['properties' => ['name' => ['type' => 'string']]],
-            'location' => ['properties' => [
-                'country' => ['type' => 'string'],
-                'region' => ['type' => 'string'],
-                'locality' => ['type' => 'string']
-            ]],
-            'geo-fencing' => ['properties' => [
-                'lat' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'lon' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'radius' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'expiration' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'announcement-feedback' => ['properties' => [
-                'content-id' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'action' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'pushed',
-                        'replied',
-                        'actioned',
-                        'exited'
+                'required' => ['deviceId']
+            ],
+            'Criterion' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'Filter' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'Campaign_audience' => [
+                'properties' => [
+                    'expression' => ['type' => 'string'],
+                    'criteria' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/Criterion']
+                    ],
+                    'filters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Filter']
                     ]
-                ]
-            ]],
-            'poll-feedback' => ['properties' => [
-                'content-id' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
                 ],
-                'action' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'pushed',
-                        'replied',
-                        'actioned',
-                        'exited'
+                'required' => []
+            ],
+            'NotificationOptions' => [
+                'properties' => [
+                    'bigText' => ['type' => 'string'],
+                    'bigPicture' => ['type' => 'string'],
+                    'sound' => ['type' => 'string'],
+                    'actionText' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CampaignLocalization' => [
+                'properties' => [
+                    'notificationTitle' => ['type' => 'string'],
+                    'notificationMessage' => ['type' => 'string'],
+                    'notificationImage' => [
+                        'type' => 'string',
+                        'format' => 'byte'
+                    ],
+                    'notificationOptions' => ['$ref' => '#/definitions/NotificationOptions'],
+                    'title' => ['type' => 'string'],
+                    'body' => ['type' => 'string'],
+                    'actionButtonText' => ['type' => 'string'],
+                    'exitButtonText' => ['type' => 'string'],
+                    'actionUrl' => ['type' => 'string'],
+                    'payload' => ['type' => 'object']
+                ],
+                'required' => []
+            ],
+            'PollQuestionLocalization' => [
+                'properties' => ['title' => ['type' => 'string']],
+                'required' => []
+            ],
+            'PollQuestionChoiceLocalization' => [
+                'properties' => ['title' => ['type' => 'string']],
+                'required' => []
+            ],
+            'PollQuestionChoice' => [
+                'properties' => [
+                    'id' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'localization' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/PollQuestionChoiceLocalization']
+                    ],
+                    'isDefault' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'PollQuestion' => [
+                'properties' => [
+                    'id' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'localization' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/PollQuestionLocalization']
+                    ],
+                    'choices' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PollQuestionChoice']
                     ]
-                ]
-            ]],
-            'poll-answer-feedback' => ['properties' => [
-                'content-id' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
                 ],
-                'choice-id' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'datapush-feedback' => ['properties' => [
-                'content-id' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'action' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'pushed',
-                        'replied',
-                        'actioned',
-                        'exited'
+                'required' => []
+            ],
+            'Campaign' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'audience' => ['$ref' => '#/definitions/Campaign_audience'],
+                    'category' => ['type' => 'string'],
+                    'pushMode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'real-time',
+                            'one-shot',
+                            'manual'
+                        ]
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'text/plain',
+                            'text/html',
+                            'only_notif',
+                            'text/base64'
+                        ]
+                    ],
+                    'deliveryTime' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'any',
+                            'background',
+                            'session'
+                        ]
+                    ],
+                    'deliveryActivities' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'startTime' => ['type' => 'string'],
+                    'endTime' => ['type' => 'string'],
+                    'timezone' => ['type' => 'string'],
+                    'notificationType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'system',
+                            'popup'
+                        ]
+                    ],
+                    'notificationIcon' => ['type' => 'boolean'],
+                    'notificationCloseable' => ['type' => 'boolean'],
+                    'notificationVibrate' => ['type' => 'boolean'],
+                    'notificationSound' => ['type' => 'boolean'],
+                    'notificationBadge' => ['type' => 'boolean'],
+                    'localization' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/CampaignLocalization']
+                    ],
+                    'questions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PollQuestion']
                     ]
-                ]
-            ]],
-            'segment' => ['properties' => [
-                'id' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
                 ],
-                'exclude' => ['type' => 'boolean']
-            ]],
-            'string-tag' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'date-tag' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => [
-                    'type' => 'string',
-                    'format' => 'date'
+                'required' => []
+            ],
+            'CampaignTestNewParameters' => [
+                'properties' => ['data' => ['$ref' => '#/definitions/Campaign']],
+                'required' => ['data']
+            ],
+            'CampaignPushParameters' => [
+                'properties' => [
+                    'deviceIds' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'data' => ['$ref' => '#/definitions/Campaign']
                 ],
-                'op' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'EQ',
-                        'LT',
-                        'GT',
-                        'LE',
-                        'GE'
-                    ]
-                ]
-            ]],
-            'integer-tag' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'op' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'EQ',
-                        'LT',
-                        'GT',
-                        'LE',
-                        'GE'
-                    ]
-                ]
-            ]],
-            'boolean-tag' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => ['type' => 'boolean']
-            ]],
-            'engage-subset' => ['properties' => ['max' => [
-                'type' => 'integer',
-                'format' => 'int32'
-            ]]],
-            'engage-old-users' => ['properties' => ['threshold' => [
-                'type' => 'integer',
-                'format' => 'int32'
-            ]]],
-            'engage-new-users' => ['properties' => ['threshold' => [
-                'type' => 'integer',
-                'format' => 'int32'
-            ]]],
-            'engage-active-users' => ['properties' => ['threshold' => [
-                'type' => 'integer',
-                'format' => 'int32'
-            ]]],
-            'engage-idle-users' => ['properties' => ['threshold' => [
-                'type' => 'integer',
-                'format' => 'int32'
-            ]]],
-            'native-push-enabled' => ['properties' => []],
-            'push-quota' => ['properties' => []],
-            'app-info' => ['properties' => ['appInfo' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'CampaignListResult' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'activatedDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'finishedDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'timezone' => ['type' => 'string']
-            ]],
-            'CampaignResult' => ['properties' => [
-                'id' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'state' => [
+                'required' => ['deviceIds']
+            ],
+            'CampaignState' => [
+                'properties' => ['state' => [
                     'type' => 'string',
                     'enum' => [
                         'draft',
@@ -2269,343 +2141,726 @@ final class EngagementManagementClient
                         'finished',
                         'queued'
                     ]
-                ],
-                'activatedDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'finishedDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'CampaignPushResult' => ['properties' => ['invalidDeviceIds' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'CampaignStatisticsResult' => ['properties' => [
-                'queued' => [
+                ]],
+                'required' => []
+            ],
+            'CampaignStateResult' => [
+                'properties' => ['id' => [
                     'type' => 'integer',
                     'format' => 'int32'
+                ]],
+                'required' => ['id']
+            ],
+            'carrier-name' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'carrier-country' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'firmware-version' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'device-manufacturer' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'device-model' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'application-version' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'network-type' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'language' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'screen-size' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'location' => [
+                'properties' => [
+                    'country' => ['type' => 'string'],
+                    'region' => ['type' => 'string'],
+                    'locality' => ['type' => 'string']
                 ],
-                'pushed' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'pushed-native' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'pushed-native-google' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'pushed-native-adm' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'delivered' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'dropped' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'system-notification-displayed' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'in-app-notification-displayed' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'content-displayed' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'system-notification-actioned' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'system-notification-exited' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'in-app-notification-actioned' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'in-app-notification-exited' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'content-actioned' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'content-exited' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'answers' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'object']
-                ]
-            ]],
-            'CampaignsListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CampaignListResult']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'DeviceMeta' => ['properties' => [
-                'firstSeen' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'lastSeen' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'lastInfo' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'lastLocation' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'nativePushEnabled' => ['type' => 'boolean']
-            ]],
-            'DeviceQueryResult' => ['properties' => [
-                'deviceId' => ['type' => 'string'],
-                'meta' => ['$ref' => '#/definitions/DeviceMeta'],
-                'appInfo' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'DevicesQueryResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DeviceQueryResult']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'DeviceInfo' => ['properties' => [
-                'phoneModel' => ['type' => 'string'],
-                'phoneManufacturer' => ['type' => 'string'],
-                'firmwareVersion' => ['type' => 'string'],
-                'firmwareName' => ['type' => 'string'],
-                'androidAPILevel' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'carrierCountry' => ['type' => 'string'],
-                'locale' => ['type' => 'string'],
-                'carrierName' => ['type' => 'string'],
-                'networkType' => ['type' => 'string'],
-                'networkSubtype' => ['type' => 'string'],
-                'applicationVersionName' => ['type' => 'string'],
-                'applicationVersionCode' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'timeZoneOffset' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'serviceVersion' => ['type' => 'string']
-            ]],
-            'DeviceLocation' => ['properties' => [
-                'countrycode' => ['type' => 'string'],
-                'region' => ['type' => 'string'],
-                'locality' => ['type' => 'string']
-            ]],
-            'Device' => ['properties' => [
-                'deviceId' => ['type' => 'string'],
-                'meta' => ['$ref' => '#/definitions/DeviceMeta'],
-                'info' => ['$ref' => '#/definitions/DeviceInfo'],
-                'location' => ['$ref' => '#/definitions/DeviceLocation'],
-                'appInfo' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'DeviceTagsParameters' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => [
-                        'type' => 'object',
-                        'additionalProperties' => ['type' => 'string']
-                    ]
-                ],
-                'deleteOnNull' => ['type' => 'boolean']
-            ]],
-            'DeviceTagsResult' => ['properties' => ['invalidIds' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'exportOptions' => ['properties' => ['exportUserId' => ['type' => 'boolean']]],
-            'dateRangeExportTaskParameter' => ['properties' => [
-                'containerUrl' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'startDate' => [
-                    'type' => 'string',
-                    'format' => 'date'
-                ],
-                'endDate' => [
-                    'type' => 'string',
-                    'format' => 'date'
-                ],
-                'exportFormat' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'JsonBlob',
-                        'CsvBlob'
-                    ]
-                ]
-            ]],
-            'exportTaskParameter' => ['properties' => [
-                'containerUrl' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'exportFormat' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'JsonBlob',
-                        'CsvBlob'
-                    ]
-                ]
-            ]],
-            'feedbackByCampaignParameter' => ['properties' => [
-                'containerUrl' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'campaignType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Announcement',
-                        'DataPush',
-                        'NativePush',
-                        'Poll'
-                    ]
-                ],
-                'campaignIds' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => []
+            ],
+            'geo-fencing' => [
+                'properties' => [
+                    'lat' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'lon' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'radius' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'expiration' => [
                         'type' => 'integer',
                         'format' => 'int32'
                     ]
                 ],
-                'exportFormat' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'JsonBlob',
-                        'CsvBlob'
-                    ]
-                ]
-            ]],
-            'feedbackByDateRangeParameter' => ['properties' => [
-                'containerUrl' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'campaignType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Announcement',
-                        'DataPush',
-                        'NativePush',
-                        'Poll'
+                'required' => []
+            ],
+            'announcement-feedback' => [
+                'properties' => [
+                    'content-id' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'action' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'pushed',
+                            'replied',
+                            'actioned',
+                            'exited'
+                        ]
                     ]
                 ],
-                'campaignWindowStart' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'campaignWindowEnd' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'exportFormat' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'JsonBlob',
-                        'CsvBlob'
-                    ]
-                ]
-            ]],
-            'exportTaskResult' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Queued',
-                        'Started',
-                        'Succeeded',
-                        'Failed'
+                'required' => []
+            ],
+            'poll-feedback' => [
+                'properties' => [
+                    'content-id' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'action' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'pushed',
+                            'replied',
+                            'actioned',
+                            'exited'
+                        ]
                     ]
                 ],
-                'dateCreated' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'dateCompleted' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'exportType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Activity',
-                        'Tag',
-                        'Crash',
-                        'Error',
-                        'Event',
-                        'Job',
-                        'Session',
-                        'Token',
-                        'Push'
+                'required' => []
+            ],
+            'poll-answer-feedback' => [
+                'properties' => [
+                    'content-id' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'choice-id' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'errorDetails' => ['type' => 'string']
-            ]],
-            'exportTaskListResult' => ['properties' => [
-                'value' => [
+                'required' => []
+            ],
+            'datapush-feedback' => [
+                'properties' => [
+                    'content-id' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'action' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'pushed',
+                            'replied',
+                            'actioned',
+                            'exited'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'segment' => [
+                'properties' => [
+                    'id' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'exclude' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'string-tag' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'date-tag' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => [
+                        'type' => 'string',
+                        'format' => 'date'
+                    ],
+                    'op' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'EQ',
+                            'LT',
+                            'GT',
+                            'LE',
+                            'GE'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'integer-tag' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'op' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'EQ',
+                            'LT',
+                            'GT',
+                            'LE',
+                            'GE'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'boolean-tag' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'engage-subset' => [
+                'properties' => ['max' => [
+                    'type' => 'integer',
+                    'format' => 'int32'
+                ]],
+                'required' => []
+            ],
+            'engage-old-users' => [
+                'properties' => ['threshold' => [
+                    'type' => 'integer',
+                    'format' => 'int32'
+                ]],
+                'required' => []
+            ],
+            'engage-new-users' => [
+                'properties' => ['threshold' => [
+                    'type' => 'integer',
+                    'format' => 'int32'
+                ]],
+                'required' => []
+            ],
+            'engage-active-users' => [
+                'properties' => ['threshold' => [
+                    'type' => 'integer',
+                    'format' => 'int32'
+                ]],
+                'required' => []
+            ],
+            'engage-idle-users' => [
+                'properties' => ['threshold' => [
+                    'type' => 'integer',
+                    'format' => 'int32'
+                ]],
+                'required' => []
+            ],
+            'native-push-enabled' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'push-quota' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'app-info' => [
+                'properties' => ['appInfo' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/exportTaskResult']
+                    'items' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'CampaignListResult' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'activatedDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'finishedDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'timezone' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'importTask' => ['properties' => ['storageUrl' => ['type' => 'string']]],
-            'importTaskResult' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Queued',
-                        'Started',
-                        'Succeeded',
-                        'Failed'
+                'required' => []
+            ],
+            'CampaignResult' => [
+                'properties' => [
+                    'id' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'draft',
+                            'scheduled',
+                            'in-progress',
+                            'finished',
+                            'queued'
+                        ]
+                    ],
+                    'activatedDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'finishedDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'dateCreated' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'dateCompleted' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'errorDetails' => ['type' => 'string']
-            ]],
-            'importTaskListResult' => ['properties' => [
-                'value' => [
+                'required' => []
+            ],
+            'CampaignPushResult' => [
+                'properties' => ['invalidDeviceIds' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/importTaskResult']
+                    'items' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'CampaignStatisticsResult' => [
+                'properties' => [
+                    'queued' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'pushed' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'pushed-native' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'pushed-native-google' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'pushed-native-adm' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'delivered' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'dropped' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'system-notification-displayed' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'in-app-notification-displayed' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'content-displayed' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'system-notification-actioned' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'system-notification-exited' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'in-app-notification-actioned' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'in-app-notification-exited' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'content-actioned' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'content-exited' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'answers' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'object']
+                    ]
                 ],
-                'nextLink' => ['type' => 'string']
-            ]]
+                'required' => []
+            ],
+            'CampaignsListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CampaignListResult']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DeviceMeta' => [
+                'properties' => [
+                    'firstSeen' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'lastSeen' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'lastInfo' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'lastLocation' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'nativePushEnabled' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'DeviceQueryResult' => [
+                'properties' => [
+                    'deviceId' => ['type' => 'string'],
+                    'meta' => ['$ref' => '#/definitions/DeviceMeta'],
+                    'appInfo' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['deviceId']
+            ],
+            'DevicesQueryResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DeviceQueryResult']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DeviceInfo' => [
+                'properties' => [
+                    'phoneModel' => ['type' => 'string'],
+                    'phoneManufacturer' => ['type' => 'string'],
+                    'firmwareVersion' => ['type' => 'string'],
+                    'firmwareName' => ['type' => 'string'],
+                    'androidAPILevel' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'carrierCountry' => ['type' => 'string'],
+                    'locale' => ['type' => 'string'],
+                    'carrierName' => ['type' => 'string'],
+                    'networkType' => ['type' => 'string'],
+                    'networkSubtype' => ['type' => 'string'],
+                    'applicationVersionName' => ['type' => 'string'],
+                    'applicationVersionCode' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'timeZoneOffset' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'serviceVersion' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DeviceLocation' => [
+                'properties' => [
+                    'countrycode' => ['type' => 'string'],
+                    'region' => ['type' => 'string'],
+                    'locality' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Device' => [
+                'properties' => [
+                    'deviceId' => ['type' => 'string'],
+                    'meta' => ['$ref' => '#/definitions/DeviceMeta'],
+                    'info' => ['$ref' => '#/definitions/DeviceInfo'],
+                    'location' => ['$ref' => '#/definitions/DeviceLocation'],
+                    'appInfo' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['deviceId']
+            ],
+            'DeviceTagsParameters' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => [
+                            'type' => 'object',
+                            'additionalProperties' => ['type' => 'string']
+                        ]
+                    ],
+                    'deleteOnNull' => ['type' => 'boolean']
+                ],
+                'required' => ['tags']
+            ],
+            'DeviceTagsResult' => [
+                'properties' => ['invalidIds' => [
+                    'type' => 'array',
+                    'items' => ['type' => 'string']
+                ]],
+                'required' => ['invalidIds']
+            ],
+            'exportOptions' => [
+                'properties' => ['exportUserId' => ['type' => 'boolean']],
+                'required' => []
+            ],
+            'dateRangeExportTaskParameter' => [
+                'properties' => [
+                    'containerUrl' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'startDate' => [
+                        'type' => 'string',
+                        'format' => 'date'
+                    ],
+                    'endDate' => [
+                        'type' => 'string',
+                        'format' => 'date'
+                    ],
+                    'exportFormat' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'JsonBlob',
+                            'CsvBlob'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'containerUrl',
+                    'startDate',
+                    'endDate',
+                    'exportFormat'
+                ]
+            ],
+            'exportTaskParameter' => [
+                'properties' => [
+                    'containerUrl' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'exportFormat' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'JsonBlob',
+                            'CsvBlob'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'containerUrl',
+                    'exportFormat'
+                ]
+            ],
+            'feedbackByCampaignParameter' => [
+                'properties' => [
+                    'containerUrl' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'campaignType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Announcement',
+                            'DataPush',
+                            'NativePush',
+                            'Poll'
+                        ]
+                    ],
+                    'campaignIds' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'integer',
+                            'format' => 'int32'
+                        ]
+                    ],
+                    'exportFormat' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'JsonBlob',
+                            'CsvBlob'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'containerUrl',
+                    'campaignType',
+                    'campaignIds',
+                    'exportFormat'
+                ]
+            ],
+            'feedbackByDateRangeParameter' => [
+                'properties' => [
+                    'containerUrl' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'campaignType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Announcement',
+                            'DataPush',
+                            'NativePush',
+                            'Poll'
+                        ]
+                    ],
+                    'campaignWindowStart' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'campaignWindowEnd' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'exportFormat' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'JsonBlob',
+                            'CsvBlob'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'containerUrl',
+                    'campaignType',
+                    'campaignWindowStart',
+                    'campaignWindowEnd',
+                    'exportFormat'
+                ]
+            ],
+            'exportTaskResult' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Queued',
+                            'Started',
+                            'Succeeded',
+                            'Failed'
+                        ]
+                    ],
+                    'dateCreated' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'dateCompleted' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'exportType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Activity',
+                            'Tag',
+                            'Crash',
+                            'Error',
+                            'Event',
+                            'Job',
+                            'Session',
+                            'Token',
+                            'Push'
+                        ]
+                    ],
+                    'errorDetails' => ['type' => 'string']
+                ],
+                'required' => [
+                    'id',
+                    'state',
+                    'dateCreated',
+                    'exportType'
+                ]
+            ],
+            'exportTaskListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/exportTaskResult']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'importTask' => [
+                'properties' => ['storageUrl' => ['type' => 'string']],
+                'required' => []
+            ],
+            'importTaskResult' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Queued',
+                            'Started',
+                            'Succeeded',
+                            'Failed'
+                        ]
+                    ],
+                    'dateCreated' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'dateCompleted' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'errorDetails' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'importTaskListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/importTaskResult']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

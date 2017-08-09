@@ -598,226 +598,289 @@ final class DnsManagementClient
             ]]
         ],
         'definitions' => [
-            'ARecord' => ['properties' => ['ipv4Address' => ['type' => 'string']]],
-            'AaaaRecord' => ['properties' => ['ipv6Address' => ['type' => 'string']]],
-            'MxRecord' => ['properties' => [
-                'preference' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+            'ARecord' => [
+                'properties' => ['ipv4Address' => ['type' => 'string']],
+                'required' => []
+            ],
+            'AaaaRecord' => [
+                'properties' => ['ipv6Address' => ['type' => 'string']],
+                'required' => []
+            ],
+            'MxRecord' => [
+                'properties' => [
+                    'preference' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'exchange' => ['type' => 'string']
                 ],
-                'exchange' => ['type' => 'string']
-            ]],
-            'NsRecord' => ['properties' => ['nsdname' => ['type' => 'string']]],
-            'PtrRecord' => ['properties' => ['ptrdname' => ['type' => 'string']]],
-            'SrvRecord' => ['properties' => [
-                'priority' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'NsRecord' => [
+                'properties' => ['nsdname' => ['type' => 'string']],
+                'required' => []
+            ],
+            'PtrRecord' => [
+                'properties' => ['ptrdname' => ['type' => 'string']],
+                'required' => []
+            ],
+            'SrvRecord' => [
+                'properties' => [
+                    'priority' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'weight' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'port' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'target' => ['type' => 'string']
                 ],
-                'weight' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'port' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'target' => ['type' => 'string']
-            ]],
-            'TxtRecord' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'CnameRecord' => ['properties' => ['cname' => ['type' => 'string']]],
-            'SoaRecord' => ['properties' => [
-                'host' => ['type' => 'string'],
-                'email' => ['type' => 'string'],
-                'serialNumber' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'refreshTime' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'retryTime' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'expireTime' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'minimumTTL' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ]
-            ]],
-            'RecordSetProperties' => ['properties' => [
-                'metadata' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'TTL' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'ARecords' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ARecord']
-                ],
-                'AAAARecords' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AaaaRecord']
-                ],
-                'MXRecords' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MxRecord']
-                ],
-                'NSRecords' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NsRecord']
-                ],
-                'PTRRecords' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PtrRecord']
-                ],
-                'SRVRecords' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SrvRecord']
-                ],
-                'TXTRecords' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TxtRecord']
-                ],
-                'CNAMERecord' => ['$ref' => '#/definitions/CnameRecord'],
-                'SOARecord' => ['$ref' => '#/definitions/SoaRecord']
-            ]],
-            'RecordSet' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/RecordSetProperties']
-            ]],
-            'RecordSetUpdateParameters' => ['properties' => ['RecordSet' => ['$ref' => '#/definitions/RecordSet']]],
-            'RecordSetListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RecordSet']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ZoneProperties' => ['properties' => [
-                'maxNumberOfRecordSets' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'numberOfRecordSets' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'nameServers' => [
+                'required' => []
+            ],
+            'TxtRecord' => [
+                'properties' => ['value' => [
                     'type' => 'array',
                     'items' => ['type' => 'string']
-                ]
-            ]],
-            'Zone' => ['properties' => [
-                'etag' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ZoneProperties']
-            ]],
-            'ZoneDeleteResult' => ['properties' => [
-                'azureAsyncOperation' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'InProgress',
-                        'Succeeded',
-                        'Failed'
+                ]],
+                'required' => []
+            ],
+            'CnameRecord' => [
+                'properties' => ['cname' => ['type' => 'string']],
+                'required' => []
+            ],
+            'SoaRecord' => [
+                'properties' => [
+                    'host' => ['type' => 'string'],
+                    'email' => ['type' => 'string'],
+                    'serialNumber' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'refreshTime' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'retryTime' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'expireTime' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'minimumTTL' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
                     ]
                 ],
-                'statusCode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Continue',
-                        'SwitchingProtocols',
-                        'OK',
-                        'Created',
-                        'Accepted',
-                        'NonAuthoritativeInformation',
-                        'NoContent',
-                        'ResetContent',
-                        'PartialContent',
-                        'MultipleChoices',
-                        'Ambiguous',
-                        'MovedPermanently',
-                        'Moved',
-                        'Found',
-                        'Redirect',
-                        'SeeOther',
-                        'RedirectMethod',
-                        'NotModified',
-                        'UseProxy',
-                        'Unused',
-                        'TemporaryRedirect',
-                        'RedirectKeepVerb',
-                        'BadRequest',
-                        'Unauthorized',
-                        'PaymentRequired',
-                        'Forbidden',
-                        'NotFound',
-                        'MethodNotAllowed',
-                        'NotAcceptable',
-                        'ProxyAuthenticationRequired',
-                        'RequestTimeout',
-                        'Conflict',
-                        'Gone',
-                        'LengthRequired',
-                        'PreconditionFailed',
-                        'RequestEntityTooLarge',
-                        'RequestUriTooLong',
-                        'UnsupportedMediaType',
-                        'RequestedRangeNotSatisfiable',
-                        'ExpectationFailed',
-                        'UpgradeRequired',
-                        'InternalServerError',
-                        'NotImplemented',
-                        'BadGateway',
-                        'ServiceUnavailable',
-                        'GatewayTimeout',
-                        'HttpVersionNotSupported'
+                'required' => []
+            ],
+            'RecordSetProperties' => [
+                'properties' => [
+                    'metadata' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'TTL' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'ARecords' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ARecord']
+                    ],
+                    'AAAARecords' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AaaaRecord']
+                    ],
+                    'MXRecords' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MxRecord']
+                    ],
+                    'NSRecords' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NsRecord']
+                    ],
+                    'PTRRecords' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PtrRecord']
+                    ],
+                    'SRVRecords' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SrvRecord']
+                    ],
+                    'TXTRecords' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TxtRecord']
+                    ],
+                    'CNAMERecord' => ['$ref' => '#/definitions/CnameRecord'],
+                    'SOARecord' => ['$ref' => '#/definitions/SoaRecord']
+                ],
+                'required' => []
+            ],
+            'RecordSet' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/RecordSetProperties']
+                ],
+                'required' => []
+            ],
+            'RecordSetUpdateParameters' => [
+                'properties' => ['RecordSet' => ['$ref' => '#/definitions/RecordSet']],
+                'required' => []
+            ],
+            'RecordSetListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RecordSet']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ZoneProperties' => [
+                'properties' => [
+                    'maxNumberOfRecordSets' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'numberOfRecordSets' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'nameServers' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
                     ]
                 ],
-                'requestId' => ['type' => 'string']
-            ]],
-            'ZoneListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Zone']
+                'required' => []
+            ],
+            'Zone' => [
+                'properties' => [
+                    'etag' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ZoneProperties']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'SubResource' => ['properties' => ['id' => ['type' => 'string']]],
-            'CloudErrorBody' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'target' => ['type' => 'string'],
-                'details' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CloudErrorBody']
-                ]
-            ]],
-            'CloudError' => ['properties' => ['error' => ['$ref' => '#/definitions/CloudErrorBody']]]
+                'required' => []
+            ],
+            'ZoneDeleteResult' => [
+                'properties' => [
+                    'azureAsyncOperation' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'InProgress',
+                            'Succeeded',
+                            'Failed'
+                        ]
+                    ],
+                    'statusCode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Continue',
+                            'SwitchingProtocols',
+                            'OK',
+                            'Created',
+                            'Accepted',
+                            'NonAuthoritativeInformation',
+                            'NoContent',
+                            'ResetContent',
+                            'PartialContent',
+                            'MultipleChoices',
+                            'Ambiguous',
+                            'MovedPermanently',
+                            'Moved',
+                            'Found',
+                            'Redirect',
+                            'SeeOther',
+                            'RedirectMethod',
+                            'NotModified',
+                            'UseProxy',
+                            'Unused',
+                            'TemporaryRedirect',
+                            'RedirectKeepVerb',
+                            'BadRequest',
+                            'Unauthorized',
+                            'PaymentRequired',
+                            'Forbidden',
+                            'NotFound',
+                            'MethodNotAllowed',
+                            'NotAcceptable',
+                            'ProxyAuthenticationRequired',
+                            'RequestTimeout',
+                            'Conflict',
+                            'Gone',
+                            'LengthRequired',
+                            'PreconditionFailed',
+                            'RequestEntityTooLarge',
+                            'RequestUriTooLong',
+                            'UnsupportedMediaType',
+                            'RequestedRangeNotSatisfiable',
+                            'ExpectationFailed',
+                            'UpgradeRequired',
+                            'InternalServerError',
+                            'NotImplemented',
+                            'BadGateway',
+                            'ServiceUnavailable',
+                            'GatewayTimeout',
+                            'HttpVersionNotSupported'
+                        ]
+                    ],
+                    'requestId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ZoneListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Zone']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['location']
+            ],
+            'SubResource' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => []
+            ],
+            'CloudErrorBody' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'target' => ['type' => 'string'],
+                    'details' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CloudErrorBody']
+                    ]
+                ],
+                'required' => []
+            ],
+            'CloudError' => [
+                'properties' => ['error' => ['$ref' => '#/definitions/CloudErrorBody']],
+                'required' => []
+            ]
         ]
     ];
 }

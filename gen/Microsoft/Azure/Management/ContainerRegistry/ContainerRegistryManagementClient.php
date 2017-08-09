@@ -864,363 +864,489 @@ final class ContainerRegistryManagementClient
             ]]
         ],
         'definitions' => [
-            'RegistryNameCheckRequest' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'RegistryNameStatus' => ['properties' => [
-                'nameAvailable' => ['type' => 'boolean'],
-                'reason' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'OperationDisplayDefinition' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'OperationDefinition' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/OperationDisplayDefinition']
-            ]],
-            'OperationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/OperationDefinition']
+            'RegistryNameCheckRequest' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Sku' => ['properties' => [
-                'name' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'Managed_Basic',
-                        'Managed_Standard',
-                        'Managed_Premium'
-                    ]
-                ],
-                'tier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'Managed'
-                    ]
+                'required' => [
+                    'name',
+                    'type'
                 ]
-            ]],
-            'Status' => ['properties' => [
-                'displayStatus' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'timestamp' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'StorageAccountProperties' => ['properties' => ['id' => ['type' => 'string']]],
-            'RegistryProperties' => ['properties' => [
-                'loginServer' => ['type' => 'string'],
-                'creationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+            ],
+            'RegistryNameStatus' => [
+                'properties' => [
+                    'nameAvailable' => ['type' => 'boolean'],
+                    'reason' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
                 ],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Creating',
-                        'Updating',
-                        'Deleting',
-                        'Succeeded',
-                        'Failed',
-                        'Canceled'
+                'required' => []
+            ],
+            'OperationDisplayDefinition' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'OperationDefinition' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/OperationDisplayDefinition']
+                ],
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/OperationDefinition']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Sku' => [
+                'properties' => [
+                    'name' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'Managed_Basic',
+                            'Managed_Standard',
+                            'Managed_Premium'
+                        ]
+                    ],
+                    'tier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'Managed'
+                        ]
                     ]
                 ],
-                'status' => ['$ref' => '#/definitions/Status'],
-                'adminUserEnabled' => ['type' => 'boolean'],
-                'storageAccount' => ['$ref' => '#/definitions/StorageAccountProperties']
-            ]],
-            'Registry' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'properties' => ['$ref' => '#/definitions/RegistryProperties']
-            ]],
-            'RegistryPropertiesUpdateParameters' => ['properties' => [
-                'adminUserEnabled' => ['type' => 'boolean'],
-                'storageAccount' => ['$ref' => '#/definitions/StorageAccountProperties']
-            ]],
-            'RegistryUpdateParameters' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => ['name']
+            ],
+            'Status' => [
+                'properties' => [
+                    'displayStatus' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'timestamp' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
                 ],
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'properties' => ['$ref' => '#/definitions/RegistryPropertiesUpdateParameters']
-            ]],
-            'RegistryListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Registry']
+                'required' => []
+            ],
+            'StorageAccountProperties' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => ['id']
+            ],
+            'RegistryProperties' => [
+                'properties' => [
+                    'loginServer' => ['type' => 'string'],
+                    'creationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Creating',
+                            'Updating',
+                            'Deleting',
+                            'Succeeded',
+                            'Failed',
+                            'Canceled'
+                        ]
+                    ],
+                    'status' => ['$ref' => '#/definitions/Status'],
+                    'adminUserEnabled' => ['type' => 'boolean'],
+                    'storageAccount' => ['$ref' => '#/definitions/StorageAccountProperties']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RegistryPassword' => ['properties' => [
-                'name' => [
+                'required' => []
+            ],
+            'Registry' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'properties' => ['$ref' => '#/definitions/RegistryProperties']
+                ],
+                'required' => ['sku']
+            ],
+            'RegistryPropertiesUpdateParameters' => [
+                'properties' => [
+                    'adminUserEnabled' => ['type' => 'boolean'],
+                    'storageAccount' => ['$ref' => '#/definitions/StorageAccountProperties']
+                ],
+                'required' => []
+            ],
+            'RegistryUpdateParameters' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'properties' => ['$ref' => '#/definitions/RegistryPropertiesUpdateParameters']
+                ],
+                'required' => []
+            ],
+            'RegistryListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Registry']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RegistryPassword' => [
+                'properties' => [
+                    'name' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'password',
+                            'password2'
+                        ]
+                    ],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RegistryListCredentialsResult' => [
+                'properties' => [
+                    'username' => ['type' => 'string'],
+                    'passwords' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RegistryPassword']
+                    ]
+                ],
+                'required' => []
+            ],
+            'RegenerateCredentialParameters' => [
+                'properties' => ['name' => [
                     'type' => 'string',
                     'enum' => [
                         'password',
                         'password2'
                     ]
-                ],
-                'value' => ['type' => 'string']
-            ]],
-            'RegistryListCredentialsResult' => ['properties' => [
-                'username' => ['type' => 'string'],
-                'passwords' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RegistryPassword']
-                ]
-            ]],
-            'RegenerateCredentialParameters' => ['properties' => ['name' => [
-                'type' => 'string',
-                'enum' => [
-                    'password',
-                    'password2'
-                ]
-            ]]],
-            'RegistryUsage' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'limit' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'currentValue' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'unit' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Count',
-                        'Bytes'
-                    ]
-                ]
-            ]],
-            'RegistryUsageListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/RegistryUsage']
-            ]]],
-            'ReplicationProperties' => ['properties' => [
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Creating',
-                        'Updating',
-                        'Deleting',
-                        'Succeeded',
-                        'Failed',
-                        'Canceled'
-                    ]
-                ],
-                'status' => ['$ref' => '#/definitions/Status']
-            ]],
-            'Replication' => ['properties' => ['properties' => ['$ref' => '#/definitions/ReplicationProperties']]],
-            'ReplicationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Replication']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'WebhookProperties' => ['properties' => [
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'enabled',
-                        'disabled'
-                    ]
-                ],
-                'scope' => ['type' => 'string'],
-                'actions' => [
-                    'type' => 'array',
-                    'items' => [
+                ]],
+                'required' => ['name']
+            ],
+            'RegistryUsage' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'limit' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'currentValue' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'unit' => [
                         'type' => 'string',
                         'enum' => [
-                            'push',
-                            'delete'
+                            'Count',
+                            'Bytes'
                         ]
                     ]
                 ],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Creating',
-                        'Updating',
-                        'Deleting',
-                        'Succeeded',
-                        'Failed',
-                        'Canceled'
-                    ]
-                ]
-            ]],
-            'Webhook' => ['properties' => ['properties' => ['$ref' => '#/definitions/WebhookProperties']]],
-            'WebhookPropertiesCreateParameters' => ['properties' => [
-                'serviceUri' => ['type' => 'string'],
-                'customHeaders' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'enabled',
-                        'disabled'
-                    ]
-                ],
-                'scope' => ['type' => 'string'],
-                'actions' => [
+                'required' => []
+            ],
+            'RegistryUsageListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => [
+                    'items' => ['$ref' => '#/definitions/RegistryUsage']
+                ]],
+                'required' => []
+            ],
+            'ReplicationProperties' => [
+                'properties' => [
+                    'provisioningState' => [
                         'type' => 'string',
                         'enum' => [
-                            'push',
-                            'delete'
+                            'Creating',
+                            'Updating',
+                            'Deleting',
+                            'Succeeded',
+                            'Failed',
+                            'Canceled'
                         ]
-                    ]
-                ]
-            ]],
-            'WebhookCreateParameters' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                    ],
+                    'status' => ['$ref' => '#/definitions/Status']
                 ],
-                'location' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/WebhookPropertiesCreateParameters']
-            ]],
-            'WebhookPropertiesUpdateParameters' => ['properties' => [
-                'serviceUri' => ['type' => 'string'],
-                'customHeaders' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => []
+            ],
+            'Replication' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ReplicationProperties']],
+                'required' => []
+            ],
+            'ReplicationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Replication']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'enabled',
-                        'disabled'
-                    ]
-                ],
-                'scope' => ['type' => 'string'],
-                'actions' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => []
+            ],
+            'WebhookProperties' => [
+                'properties' => [
+                    'status' => [
                         'type' => 'string',
                         'enum' => [
-                            'push',
-                            'delete'
+                            'enabled',
+                            'disabled'
+                        ]
+                    ],
+                    'scope' => ['type' => 'string'],
+                    'actions' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'push',
+                                'delete'
+                            ]
+                        ]
+                    ],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Creating',
+                            'Updating',
+                            'Deleting',
+                            'Succeeded',
+                            'Failed',
+                            'Canceled'
                         ]
                     ]
+                ],
+                'required' => ['actions']
+            ],
+            'Webhook' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/WebhookProperties']],
+                'required' => []
+            ],
+            'WebhookPropertiesCreateParameters' => [
+                'properties' => [
+                    'serviceUri' => ['type' => 'string'],
+                    'customHeaders' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'enabled',
+                            'disabled'
+                        ]
+                    ],
+                    'scope' => ['type' => 'string'],
+                    'actions' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'push',
+                                'delete'
+                            ]
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'serviceUri',
+                    'actions'
                 ]
-            ]],
-            'WebhookUpdateParameters' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+            ],
+            'WebhookCreateParameters' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'location' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/WebhookPropertiesCreateParameters']
                 ],
-                'properties' => ['$ref' => '#/definitions/WebhookPropertiesUpdateParameters']
-            ]],
-            'WebhookListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Webhook']
+                'required' => ['location']
+            ],
+            'WebhookPropertiesUpdateParameters' => [
+                'properties' => [
+                    'serviceUri' => ['type' => 'string'],
+                    'customHeaders' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'enabled',
+                            'disabled'
+                        ]
+                    ],
+                    'scope' => ['type' => 'string'],
+                    'actions' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'push',
+                                'delete'
+                            ]
+                        ]
+                    ]
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'EventInfo' => ['properties' => ['id' => ['type' => 'string']]],
-            'CallbackConfig' => ['properties' => [
-                'serviceUri' => ['type' => 'string'],
-                'customHeaders' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'Target' => ['properties' => [
-                'mediaType' => ['type' => 'string'],
-                'size' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'WebhookUpdateParameters' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/WebhookPropertiesUpdateParameters']
                 ],
-                'digest' => ['type' => 'string'],
-                'length' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'WebhookListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Webhook']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'repository' => ['type' => 'string'],
-                'url' => ['type' => 'string'],
-                'tag' => ['type' => 'string']
-            ]],
-            'Request' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'addr' => ['type' => 'string'],
-                'host' => ['type' => 'string'],
-                'method' => ['type' => 'string'],
-                'useragent' => ['type' => 'string']
-            ]],
-            'Actor' => ['properties' => ['name' => ['type' => 'string']]],
-            'Source' => ['properties' => [
-                'addr' => ['type' => 'string'],
-                'instanceID' => ['type' => 'string']
-            ]],
-            'EventContent' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'timestamp' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'EventInfo' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => []
+            ],
+            'CallbackConfig' => [
+                'properties' => [
+                    'serviceUri' => ['type' => 'string'],
+                    'customHeaders' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
                 ],
-                'action' => ['type' => 'string'],
-                'target' => ['$ref' => '#/definitions/Target'],
-                'request' => ['$ref' => '#/definitions/Request'],
-                'actor' => ['$ref' => '#/definitions/Actor'],
-                'source' => ['$ref' => '#/definitions/Source']
-            ]],
-            'EventRequestMessage' => ['properties' => [
-                'content' => ['$ref' => '#/definitions/EventContent'],
-                'headers' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => ['serviceUri']
+            ],
+            'Target' => [
+                'properties' => [
+                    'mediaType' => ['type' => 'string'],
+                    'size' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'digest' => ['type' => 'string'],
+                    'length' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'repository' => ['type' => 'string'],
+                    'url' => ['type' => 'string'],
+                    'tag' => ['type' => 'string']
                 ],
-                'method' => ['type' => 'string'],
-                'requestUri' => ['type' => 'string'],
-                'version' => ['type' => 'string']
-            ]],
-            'EventResponseMessage' => ['properties' => [
-                'content' => ['type' => 'string'],
-                'headers' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => []
+            ],
+            'Request' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'addr' => ['type' => 'string'],
+                    'host' => ['type' => 'string'],
+                    'method' => ['type' => 'string'],
+                    'useragent' => ['type' => 'string']
                 ],
-                'reasonPhrase' => ['type' => 'string'],
-                'statusCode' => ['type' => 'string'],
-                'version' => ['type' => 'string']
-            ]],
-            'Event' => ['properties' => [
-                'eventRequestMessage' => ['$ref' => '#/definitions/EventRequestMessage'],
-                'eventResponseMessage' => ['$ref' => '#/definitions/EventResponseMessage']
-            ]],
-            'EventListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Event']
+                'required' => []
+            ],
+            'Actor' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'Source' => [
+                'properties' => [
+                    'addr' => ['type' => 'string'],
+                    'instanceID' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]]
+                'required' => []
+            ],
+            'EventContent' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'timestamp' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'action' => ['type' => 'string'],
+                    'target' => ['$ref' => '#/definitions/Target'],
+                    'request' => ['$ref' => '#/definitions/Request'],
+                    'actor' => ['$ref' => '#/definitions/Actor'],
+                    'source' => ['$ref' => '#/definitions/Source']
+                ],
+                'required' => []
+            ],
+            'EventRequestMessage' => [
+                'properties' => [
+                    'content' => ['$ref' => '#/definitions/EventContent'],
+                    'headers' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'method' => ['type' => 'string'],
+                    'requestUri' => ['type' => 'string'],
+                    'version' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'EventResponseMessage' => [
+                'properties' => [
+                    'content' => ['type' => 'string'],
+                    'headers' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'reasonPhrase' => ['type' => 'string'],
+                    'statusCode' => ['type' => 'string'],
+                    'version' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Event' => [
+                'properties' => [
+                    'eventRequestMessage' => ['$ref' => '#/definitions/EventRequestMessage'],
+                    'eventResponseMessage' => ['$ref' => '#/definitions/EventResponseMessage']
+                ],
+                'required' => []
+            ],
+            'EventListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Event']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['location']
+            ]
         ]
     ];
 }

@@ -438,130 +438,177 @@ final class AppInsightsManagementClient
             ]]
         ],
         'definitions' => [
-            'ErrorResponse' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'Operation_display' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/Operation_display']
-            ]],
-            'OperationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Operation']
+            'ErrorResponse' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
+                'required' => []
+            ],
+            'Operation_display' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/Operation_display']
+                ],
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Operation']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['location']
+            ],
+            'TagsResource' => [
+                'properties' => ['tags' => [
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'ApplicationInsightsComponentProperties' => [
+                'properties' => [
+                    'ApplicationId' => ['type' => 'string'],
+                    'AppId' => ['type' => 'string'],
+                    'Application_Type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'web',
+                            'other'
+                        ]
+                    ],
+                    'Flow_Type' => [
+                        'type' => 'string',
+                        'enum' => ['Bluefield']
+                    ],
+                    'Request_Source' => [
+                        'type' => 'string',
+                        'enum' => ['rest']
+                    ],
+                    'InstrumentationKey' => ['type' => 'string'],
+                    'CreationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'TenantId' => ['type' => 'string'],
+                    'HockeyAppId' => ['type' => 'string'],
+                    'HockeyAppToken' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string'],
+                    'SamplingPercentage' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ]
+                ],
+                'required' => ['Application_Type']
+            ],
+            'ApplicationInsightsComponent' => [
+                'properties' => [
+                    'kind' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ApplicationInsightsComponentProperties']
+                ],
+                'required' => ['kind']
+            ],
+            'ApplicationInsightsComponentListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationInsightsComponent']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'WebTestGeolocation' => [
+                'properties' => ['Id' => ['type' => 'string']],
+                'required' => []
+            ],
+            'WebTestProperties_Configuration' => [
+                'properties' => ['WebTest' => ['type' => 'string']],
+                'required' => []
+            ],
+            'WebTestProperties' => [
+                'properties' => [
+                    'SyntheticMonitorId' => ['type' => 'string'],
+                    'Name' => ['type' => 'string'],
+                    'Description' => ['type' => 'string'],
+                    'Enabled' => ['type' => 'boolean'],
+                    'Frequency' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'Timeout' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'Kind' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'ping',
+                            'multistep'
+                        ]
+                    ],
+                    'RetryEnabled' => ['type' => 'boolean'],
+                    'Locations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/WebTestGeolocation']
+                    ],
+                    'Configuration' => ['$ref' => '#/definitions/WebTestProperties_Configuration'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => [
+                    'SyntheticMonitorId',
+                    'Name',
+                    'Kind',
+                    'Locations'
                 ]
-            ]],
-            'TagsResource' => ['properties' => ['tags' => [
-                'type' => 'object',
-                'additionalProperties' => ['type' => 'string']
-            ]]],
-            'ApplicationInsightsComponentProperties' => ['properties' => [
-                'ApplicationId' => ['type' => 'string'],
-                'AppId' => ['type' => 'string'],
-                'Application_Type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'web',
-                        'other'
-                    ]
+            ],
+            'WebTest' => [
+                'properties' => [
+                    'kind' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'ping',
+                            'multistep'
+                        ]
+                    ],
+                    'properties' => ['$ref' => '#/definitions/WebTestProperties']
                 ],
-                'Flow_Type' => [
-                    'type' => 'string',
-                    'enum' => ['Bluefield']
+                'required' => []
+            ],
+            'webTestListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/WebTest']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'Request_Source' => [
-                    'type' => 'string',
-                    'enum' => ['rest']
-                ],
-                'InstrumentationKey' => ['type' => 'string'],
-                'CreationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'TenantId' => ['type' => 'string'],
-                'HockeyAppId' => ['type' => 'string'],
-                'HockeyAppToken' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string'],
-                'SamplingPercentage' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ]
-            ]],
-            'ApplicationInsightsComponent' => ['properties' => [
-                'kind' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ApplicationInsightsComponentProperties']
-            ]],
-            'ApplicationInsightsComponentListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationInsightsComponent']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'WebTestGeolocation' => ['properties' => ['Id' => ['type' => 'string']]],
-            'WebTestProperties_Configuration' => ['properties' => ['WebTest' => ['type' => 'string']]],
-            'WebTestProperties' => ['properties' => [
-                'SyntheticMonitorId' => ['type' => 'string'],
-                'Name' => ['type' => 'string'],
-                'Description' => ['type' => 'string'],
-                'Enabled' => ['type' => 'boolean'],
-                'Frequency' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'Timeout' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'Kind' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'ping',
-                        'multistep'
-                    ]
-                ],
-                'RetryEnabled' => ['type' => 'boolean'],
-                'Locations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/WebTestGeolocation']
-                ],
-                'Configuration' => ['$ref' => '#/definitions/WebTestProperties_Configuration'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'WebTest' => ['properties' => [
-                'kind' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'ping',
-                        'multistep'
-                    ]
-                ],
-                'properties' => ['$ref' => '#/definitions/WebTestProperties']
-            ]],
-            'webTestListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/WebTest']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]]
+                'required' => ['value']
+            ]
         ]
     ];
 }

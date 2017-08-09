@@ -760,220 +760,313 @@ final class MySQLManagementClient
             ]]
         ],
         'definitions' => [
-            'ProxyResource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'TrackedResource' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ServerProperties' => ['properties' => [
-                'administratorLogin' => ['type' => 'string'],
-                'storageMB' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'version' => [
-                    'type' => 'string',
-                    'enum' => [
-                        '5.6',
-                        '5.7'
-                    ]
-                ],
-                'sslEnforcement' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'userVisibleState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Ready',
-                        'Dropping',
-                        'Disabled'
-                    ]
-                ],
-                'fullyQualifiedDomainName' => ['type' => 'string']
-            ]],
-            'ServerPropertiesForCreate' => ['properties' => [
-                'storageMB' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'version' => [
-                    'type' => 'string',
-                    'enum' => [
-                        '5.6',
-                        '5.7'
-                    ]
-                ],
-                'sslEnforcement' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ]
-            ]],
-            'Default' => ['properties' => [
-                'administratorLogin' => ['type' => 'string'],
-                'administratorLoginPassword' => ['type' => 'string']
-            ]],
-            'PointInTimeRestore' => ['properties' => [
-                'sourceServerId' => ['type' => 'string'],
-                'restorePointInTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'Sku' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'tier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'Standard'
-                    ]
-                ],
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'size' => ['type' => 'string'],
-                'family' => ['type' => 'string']
-            ]],
-            'Server' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'properties' => ['$ref' => '#/definitions/ServerProperties']
-            ]],
-            'ServerForCreate' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'properties' => ['$ref' => '#/definitions/ServerPropertiesForCreate'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ServerUpdateParameters_properties' => ['properties' => [
-                'storageMB' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'administratorLoginPassword' => ['type' => 'string'],
-                'version' => [
-                    'type' => 'string',
-                    'enum' => [
-                        '5.6',
-                        '5.7'
-                    ]
-                ],
-                'sslEnforcement' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ]
-            ]],
-            'ServerUpdateParameters' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'properties' => ['$ref' => '#/definitions/ServerUpdateParameters_properties'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ServerListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Server']
-            ]]],
-            'FirewallRuleProperties' => ['properties' => [
-                'startIpAddress' => ['type' => 'string'],
-                'endIpAddress' => ['type' => 'string']
-            ]],
-            'FirewallRule' => ['properties' => ['properties' => ['$ref' => '#/definitions/FirewallRuleProperties']]],
-            'FirewallRuleListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/FirewallRule']
-            ]]],
-            'DatabaseProperties' => ['properties' => [
-                'charset' => ['type' => 'string'],
-                'collation' => ['type' => 'string']
-            ]],
-            'Database' => ['properties' => ['properties' => ['$ref' => '#/definitions/DatabaseProperties']]],
-            'DatabaseListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Database']
-            ]]],
-            'ConfigurationProperties' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'defaultValue' => ['type' => 'string'],
-                'dataType' => ['type' => 'string'],
-                'allowedValues' => ['type' => 'string'],
-                'source' => ['type' => 'string']
-            ]],
-            'Configuration' => ['properties' => ['properties' => ['$ref' => '#/definitions/ConfigurationProperties']]],
-            'ConfigurationListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Configuration']
-            ]]],
-            'OperationDisplay' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/OperationDisplay'],
-                'origin' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NotSpecified',
-                        'user',
-                        'system'
-                    ]
-                ],
+            'ProxyResource' => [
                 'properties' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'object']
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'TrackedResource' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['location']
+            ],
+            'ServerProperties' => [
+                'properties' => [
+                    'administratorLogin' => ['type' => 'string'],
+                    'storageMB' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'version' => [
+                        'type' => 'string',
+                        'enum' => [
+                            '5.6',
+                            '5.7'
+                        ]
+                    ],
+                    'sslEnforcement' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'userVisibleState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Ready',
+                            'Dropping',
+                            'Disabled'
+                        ]
+                    ],
+                    'fullyQualifiedDomainName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ServerPropertiesForCreate' => [
+                'properties' => [
+                    'storageMB' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'version' => [
+                        'type' => 'string',
+                        'enum' => [
+                            '5.6',
+                            '5.7'
+                        ]
+                    ],
+                    'sslEnforcement' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'Default' => [
+                'properties' => [
+                    'administratorLogin' => ['type' => 'string'],
+                    'administratorLoginPassword' => ['type' => 'string']
+                ],
+                'required' => [
+                    'administratorLogin',
+                    'administratorLoginPassword'
                 ]
-            ]],
-            'OperationListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Operation']
-            ]]],
-            'LogFileProperties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'sizeInKB' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+            ],
+            'PointInTimeRestore' => [
+                'properties' => [
+                    'sourceServerId' => ['type' => 'string'],
+                    'restorePointInTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
                 ],
-                'createdTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => [
+                    'sourceServerId',
+                    'restorePointInTime'
+                ]
+            ],
+            'Sku' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'tier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'Standard'
+                        ]
+                    ],
+                    'capacity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'size' => ['type' => 'string'],
+                    'family' => ['type' => 'string']
                 ],
-                'lastModifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'Server' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'properties' => ['$ref' => '#/definitions/ServerProperties']
                 ],
-                'type' => ['type' => 'string'],
-                'url' => ['type' => 'string']
-            ]],
-            'LogFile' => ['properties' => ['properties' => ['$ref' => '#/definitions/LogFileProperties']]],
-            'LogFileListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/LogFile']
-            ]]]
+                'required' => []
+            ],
+            'ServerForCreate' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'properties' => ['$ref' => '#/definitions/ServerPropertiesForCreate'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => [
+                    'properties',
+                    'location'
+                ]
+            ],
+            'ServerUpdateParameters_properties' => [
+                'properties' => [
+                    'storageMB' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'administratorLoginPassword' => ['type' => 'string'],
+                    'version' => [
+                        'type' => 'string',
+                        'enum' => [
+                            '5.6',
+                            '5.7'
+                        ]
+                    ],
+                    'sslEnforcement' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'ServerUpdateParameters' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'properties' => ['$ref' => '#/definitions/ServerUpdateParameters_properties'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ServerListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Server']
+                ]],
+                'required' => []
+            ],
+            'FirewallRuleProperties' => [
+                'properties' => [
+                    'startIpAddress' => ['type' => 'string'],
+                    'endIpAddress' => ['type' => 'string']
+                ],
+                'required' => [
+                    'startIpAddress',
+                    'endIpAddress'
+                ]
+            ],
+            'FirewallRule' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/FirewallRuleProperties']],
+                'required' => ['properties']
+            ],
+            'FirewallRuleListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/FirewallRule']
+                ]],
+                'required' => []
+            ],
+            'DatabaseProperties' => [
+                'properties' => [
+                    'charset' => ['type' => 'string'],
+                    'collation' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Database' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DatabaseProperties']],
+                'required' => []
+            ],
+            'DatabaseListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Database']
+                ]],
+                'required' => []
+            ],
+            'ConfigurationProperties' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'defaultValue' => ['type' => 'string'],
+                    'dataType' => ['type' => 'string'],
+                    'allowedValues' => ['type' => 'string'],
+                    'source' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Configuration' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ConfigurationProperties']],
+                'required' => []
+            ],
+            'ConfigurationListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Configuration']
+                ]],
+                'required' => []
+            ],
+            'OperationDisplay' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/OperationDisplay'],
+                    'origin' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotSpecified',
+                            'user',
+                            'system'
+                        ]
+                    ],
+                    'properties' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'object']
+                    ]
+                ],
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Operation']
+                ]],
+                'required' => []
+            ],
+            'LogFileProperties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'sizeInKB' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'createdTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'type' => ['type' => 'string'],
+                    'url' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LogFile' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/LogFileProperties']],
+                'required' => []
+            ],
+            'LogFileListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/LogFile']
+                ]],
+                'required' => []
+            ]
         ]
     ];
 }

@@ -398,152 +398,9 @@ final class CognitiveServicesManagementClient
             ]]
         ],
         'definitions' => [
-            'Sku' => ['properties' => [
-                'name' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'F0',
-                        'P0',
-                        'P1',
-                        'P2',
-                        'S0',
-                        'S1',
-                        'S2',
-                        'S3',
-                        'S4',
-                        'S5',
-                        'S6'
-                    ]
-                ],
-                'tier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Free',
-                        'Standard',
-                        'Premium'
-                    ]
-                ]
-            ]],
-            'CognitiveServicesAccountCreateParameters' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'kind' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Academic',
-                        'Bing.Autosuggest',
-                        'Bing.Search',
-                        'Bing.Speech',
-                        'Bing.SpellCheck',
-                        'ComputerVision',
-                        'ContentModerator',
-                        'CustomSpeech',
-                        'Emotion',
-                        'Face',
-                        'LUIS',
-                        'Recommendations',
-                        'SpeakerRecognition',
-                        'Speech',
-                        'SpeechTranslation',
-                        'TextAnalytics',
-                        'TextTranslation',
-                        'WebLM'
-                    ]
-                ],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'properties' => ['type' => 'object']
-            ]],
-            'CognitiveServicesAccountUpdateParameters' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'CognitiveServicesAccountProperties' => ['properties' => [
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Creating',
-                        'ResolvingDNS',
-                        'Succeeded',
-                        'Failed'
-                    ]
-                ],
-                'endpoint' => ['type' => 'string'],
-                'internalId' => ['type' => 'string']
-            ]],
-            'CognitiveServicesAccount' => ['properties' => [
-                'etag' => ['type' => 'string'],
-                'id' => ['type' => 'string'],
-                'kind' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/CognitiveServicesAccountProperties'],
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'type' => ['type' => 'string']
-            ]],
-            'CognitiveServicesAccountListResult' => ['properties' => [
-                'nextLink' => ['type' => 'string'],
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CognitiveServicesAccount']
-                ]
-            ]],
-            'CognitiveServicesAccountKeys' => ['properties' => [
-                'key1' => ['type' => 'string'],
-                'key2' => ['type' => 'string']
-            ]],
-            'RegenerateKeyParameters' => ['properties' => ['keyName' => [
-                'type' => 'string',
-                'enum' => [
-                    'Key1',
-                    'Key2'
-                ]
-            ]]],
-            'CognitiveServicesResourceAndSku' => ['properties' => [
-                'resourceType' => ['type' => 'string'],
-                'sku' => ['$ref' => '#/definitions/Sku']
-            ]],
-            'CognitiveServicesAccountEnumerateSkusResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/CognitiveServicesResourceAndSku']
-            ]]],
-            'ErrorBody' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'Error' => ['properties' => ['error' => ['$ref' => '#/definitions/ErrorBody']]],
-            'OperationDisplayInfo' => ['properties' => [
-                'description' => ['type' => 'string'],
-                'operation' => ['type' => 'string'],
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string']
-            ]],
-            'OperationEntity' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/OperationDisplayInfo'],
-                'origin' => ['type' => 'string'],
-                'properties' => ['type' => 'object']
-            ]],
-            'OperationEntityListResult' => ['properties' => [
-                'nextLink' => ['type' => 'string'],
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/OperationEntity']
-                ]
-            ]],
-            'CheckSkuAvailabilityParameter' => ['properties' => [
-                'skus' => [
-                    'type' => 'array',
-                    'items' => [
+            'Sku' => [
+                'properties' => [
+                    'name' => [
                         'type' => 'string',
                         'enum' => [
                             'F0',
@@ -558,82 +415,291 @@ final class CognitiveServicesManagementClient
                             'S5',
                             'S6'
                         ]
+                    ],
+                    'tier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Free',
+                            'Standard',
+                            'Premium'
+                        ]
                     ]
                 ],
-                'kind' => [
+                'required' => ['name']
+            ],
+            'CognitiveServicesAccountCreateParameters' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'kind' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Academic',
+                            'Bing.Autosuggest',
+                            'Bing.Search',
+                            'Bing.Speech',
+                            'Bing.SpellCheck',
+                            'ComputerVision',
+                            'ContentModerator',
+                            'CustomSpeech',
+                            'Emotion',
+                            'Face',
+                            'LUIS',
+                            'Recommendations',
+                            'SpeakerRecognition',
+                            'Speech',
+                            'SpeechTranslation',
+                            'TextAnalytics',
+                            'TextTranslation',
+                            'WebLM'
+                        ]
+                    ],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['type' => 'object']
+                ],
+                'required' => [
+                    'sku',
+                    'kind',
+                    'location',
+                    'properties'
+                ]
+            ],
+            'CognitiveServicesAccountUpdateParameters' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'CognitiveServicesAccountProperties' => [
+                'properties' => [
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Creating',
+                            'ResolvingDNS',
+                            'Succeeded',
+                            'Failed'
+                        ]
+                    ],
+                    'endpoint' => ['type' => 'string'],
+                    'internalId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CognitiveServicesAccount' => [
+                'properties' => [
+                    'etag' => ['type' => 'string'],
+                    'id' => ['type' => 'string'],
+                    'kind' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/CognitiveServicesAccountProperties'],
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CognitiveServicesAccountListResult' => [
+                'properties' => [
+                    'nextLink' => ['type' => 'string'],
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CognitiveServicesAccount']
+                    ]
+                ],
+                'required' => []
+            ],
+            'CognitiveServicesAccountKeys' => [
+                'properties' => [
+                    'key1' => ['type' => 'string'],
+                    'key2' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RegenerateKeyParameters' => [
+                'properties' => ['keyName' => [
                     'type' => 'string',
                     'enum' => [
-                        'Academic',
-                        'Bing.Autosuggest',
-                        'Bing.Search',
-                        'Bing.Speech',
-                        'Bing.SpellCheck',
-                        'ComputerVision',
-                        'ContentModerator',
-                        'CustomSpeech',
-                        'Emotion',
-                        'Face',
-                        'LUIS',
-                        'Recommendations',
-                        'SpeakerRecognition',
-                        'Speech',
-                        'SpeechTranslation',
-                        'TextAnalytics',
-                        'TextTranslation',
-                        'WebLM'
+                        'Key1',
+                        'Key2'
+                    ]
+                ]],
+                'required' => ['keyName']
+            ],
+            'CognitiveServicesResourceAndSku' => [
+                'properties' => [
+                    'resourceType' => ['type' => 'string'],
+                    'sku' => ['$ref' => '#/definitions/Sku']
+                ],
+                'required' => []
+            ],
+            'CognitiveServicesAccountEnumerateSkusResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/CognitiveServicesResourceAndSku']
+                ]],
+                'required' => []
+            ],
+            'ErrorBody' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => [
+                    'code',
+                    'message'
+                ]
+            ],
+            'Error' => [
+                'properties' => ['error' => ['$ref' => '#/definitions/ErrorBody']],
+                'required' => []
+            ],
+            'OperationDisplayInfo' => [
+                'properties' => [
+                    'description' => ['type' => 'string'],
+                    'operation' => ['type' => 'string'],
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'OperationEntity' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/OperationDisplayInfo'],
+                    'origin' => ['type' => 'string'],
+                    'properties' => ['type' => 'object']
+                ],
+                'required' => []
+            ],
+            'OperationEntityListResult' => [
+                'properties' => [
+                    'nextLink' => ['type' => 'string'],
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/OperationEntity']
                     ]
                 ],
-                'type' => ['type' => 'string']
-            ]],
-            'CheckSkuAvailabilityResult' => ['properties' => [
-                'kind' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Academic',
-                        'Bing.Autosuggest',
-                        'Bing.Search',
-                        'Bing.Speech',
-                        'Bing.SpellCheck',
-                        'ComputerVision',
-                        'ContentModerator',
-                        'CustomSpeech',
-                        'Emotion',
-                        'Face',
-                        'LUIS',
-                        'Recommendations',
-                        'SpeakerRecognition',
-                        'Speech',
-                        'SpeechTranslation',
-                        'TextAnalytics',
-                        'TextTranslation',
-                        'WebLM'
-                    ]
+                'required' => []
+            ],
+            'CheckSkuAvailabilityParameter' => [
+                'properties' => [
+                    'skus' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'F0',
+                                'P0',
+                                'P1',
+                                'P2',
+                                'S0',
+                                'S1',
+                                'S2',
+                                'S3',
+                                'S4',
+                                'S5',
+                                'S6'
+                            ]
+                        ]
+                    ],
+                    'kind' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Academic',
+                            'Bing.Autosuggest',
+                            'Bing.Search',
+                            'Bing.Speech',
+                            'Bing.SpellCheck',
+                            'ComputerVision',
+                            'ContentModerator',
+                            'CustomSpeech',
+                            'Emotion',
+                            'Face',
+                            'LUIS',
+                            'Recommendations',
+                            'SpeakerRecognition',
+                            'Speech',
+                            'SpeechTranslation',
+                            'TextAnalytics',
+                            'TextTranslation',
+                            'WebLM'
+                        ]
+                    ],
+                    'type' => ['type' => 'string']
                 ],
-                'type' => ['type' => 'string'],
-                'skuName' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'F0',
-                        'P0',
-                        'P1',
-                        'P2',
-                        'S0',
-                        'S1',
-                        'S2',
-                        'S3',
-                        'S4',
-                        'S5',
-                        'S6'
-                    ]
+                'required' => [
+                    'skus',
+                    'kind',
+                    'type'
+                ]
+            ],
+            'CheckSkuAvailabilityResult' => [
+                'properties' => [
+                    'kind' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Academic',
+                            'Bing.Autosuggest',
+                            'Bing.Search',
+                            'Bing.Speech',
+                            'Bing.SpellCheck',
+                            'ComputerVision',
+                            'ContentModerator',
+                            'CustomSpeech',
+                            'Emotion',
+                            'Face',
+                            'LUIS',
+                            'Recommendations',
+                            'SpeakerRecognition',
+                            'Speech',
+                            'SpeechTranslation',
+                            'TextAnalytics',
+                            'TextTranslation',
+                            'WebLM'
+                        ]
+                    ],
+                    'type' => ['type' => 'string'],
+                    'skuName' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'F0',
+                            'P0',
+                            'P1',
+                            'P2',
+                            'S0',
+                            'S1',
+                            'S2',
+                            'S3',
+                            'S4',
+                            'S5',
+                            'S6'
+                        ]
+                    ],
+                    'skuAvailable' => ['type' => 'boolean'],
+                    'reason' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
                 ],
-                'skuAvailable' => ['type' => 'boolean'],
-                'reason' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'CheckSkuAvailabilityResultList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/CheckSkuAvailabilityResult']
-            ]]]
+                'required' => []
+            ],
+            'CheckSkuAvailabilityResultList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/CheckSkuAvailabilityResult']
+                ]],
+                'required' => []
+            ]
         ]
     ];
 }

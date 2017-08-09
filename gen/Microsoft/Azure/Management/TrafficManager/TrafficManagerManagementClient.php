@@ -467,165 +467,219 @@ final class TrafficManagerManagementClient
             ]]
         ],
         'definitions' => [
-            'DeleteOperationResult' => ['properties' => ['boolean' => ['type' => 'boolean']]],
-            'EndpointProperties' => ['properties' => [
-                'targetResourceId' => ['type' => 'string'],
-                'target' => ['type' => 'string'],
-                'endpointStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
+            'DeleteOperationResult' => [
+                'properties' => ['boolean' => ['type' => 'boolean']],
+                'required' => []
+            ],
+            'EndpointProperties' => [
+                'properties' => [
+                    'targetResourceId' => ['type' => 'string'],
+                    'target' => ['type' => 'string'],
+                    'endpointStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'weight' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'priority' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'endpointLocation' => ['type' => 'string'],
+                    'endpointMonitorStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'CheckingEndpoint',
+                            'Online',
+                            'Degraded',
+                            'Disabled',
+                            'Inactive',
+                            'Stopped'
+                        ]
+                    ],
+                    'minChildEndpoints' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'geoMapping' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
                     ]
                 ],
-                'weight' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'Endpoint' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/EndpointProperties']],
+                'required' => []
+            ],
+            'CheckTrafficManagerRelativeDnsNameAvailabilityParameters' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
                 ],
-                'priority' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'endpointLocation' => ['type' => 'string'],
-                'endpointMonitorStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'CheckingEndpoint',
-                        'Online',
-                        'Degraded',
-                        'Disabled',
-                        'Inactive',
-                        'Stopped'
+                'required' => []
+            ],
+            'DnsConfig' => [
+                'properties' => [
+                    'relativeName' => ['type' => 'string'],
+                    'fqdn' => ['type' => 'string'],
+                    'ttl' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
                     ]
                 ],
-                'minChildEndpoints' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'MonitorConfig' => [
+                'properties' => [
+                    'profileMonitorStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'CheckingEndpoints',
+                            'Online',
+                            'Degraded',
+                            'Disabled',
+                            'Inactive'
+                        ]
+                    ],
+                    'protocol' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'HTTP',
+                            'HTTPS',
+                            'TCP'
+                        ]
+                    ],
+                    'port' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'path' => ['type' => 'string'],
+                    'intervalInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'timeoutInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'toleratedNumberOfFailures' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ]
                 ],
-                'geoMapping' => [
+                'required' => []
+            ],
+            'ProfileProperties' => [
+                'properties' => [
+                    'profileStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'trafficRoutingMethod' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Performance',
+                            'Priority',
+                            'Weighted',
+                            'Geographic'
+                        ]
+                    ],
+                    'dnsConfig' => ['$ref' => '#/definitions/DnsConfig'],
+                    'monitorConfig' => ['$ref' => '#/definitions/MonitorConfig'],
+                    'endpoints' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Endpoint']
+                    ]
+                ],
+                'required' => []
+            ],
+            'Profile' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ProfileProperties']],
+                'required' => []
+            ],
+            'ProfileListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'Endpoint' => ['properties' => ['properties' => ['$ref' => '#/definitions/EndpointProperties']]],
-            'CheckTrafficManagerRelativeDnsNameAvailabilityParameters' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'DnsConfig' => ['properties' => [
-                'relativeName' => ['type' => 'string'],
-                'fqdn' => ['type' => 'string'],
-                'ttl' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ]
-            ]],
-            'MonitorConfig' => ['properties' => [
-                'profileMonitorStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'CheckingEndpoints',
-                        'Online',
-                        'Degraded',
-                        'Disabled',
-                        'Inactive'
+                    'items' => ['$ref' => '#/definitions/Profile']
+                ]],
+                'required' => []
+            ],
+            'TrafficManagerNameAvailability' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'nameAvailable' => ['type' => 'boolean'],
+                    'reason' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Region' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'regions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Region']
                     ]
                 ],
-                'protocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'HTTP',
-                        'HTTPS',
-                        'TCP'
+                'required' => []
+            ],
+            'GeographicHierarchyProperties' => [
+                'properties' => ['geographicHierarchy' => ['$ref' => '#/definitions/Region']],
+                'required' => []
+            ],
+            'TrafficManagerGeographicHierarchy' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/GeographicHierarchyProperties']],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'TrackedResource' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'location' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ProxyResource' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'CloudErrorBody' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'target' => ['type' => 'string'],
+                    'details' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CloudErrorBody']
                     ]
                 ],
-                'port' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'path' => ['type' => 'string'],
-                'intervalInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'timeoutInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'toleratedNumberOfFailures' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ]
-            ]],
-            'ProfileProperties' => ['properties' => [
-                'profileStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'trafficRoutingMethod' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Performance',
-                        'Priority',
-                        'Weighted',
-                        'Geographic'
-                    ]
-                ],
-                'dnsConfig' => ['$ref' => '#/definitions/DnsConfig'],
-                'monitorConfig' => ['$ref' => '#/definitions/MonitorConfig'],
-                'endpoints' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Endpoint']
-                ]
-            ]],
-            'Profile' => ['properties' => ['properties' => ['$ref' => '#/definitions/ProfileProperties']]],
-            'ProfileListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Profile']
-            ]]],
-            'TrafficManagerNameAvailability' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'nameAvailable' => ['type' => 'boolean'],
-                'reason' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'Region' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'regions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Region']
-                ]
-            ]],
-            'GeographicHierarchyProperties' => ['properties' => ['geographicHierarchy' => ['$ref' => '#/definitions/Region']]],
-            'TrafficManagerGeographicHierarchy' => ['properties' => ['properties' => ['$ref' => '#/definitions/GeographicHierarchyProperties']]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'TrackedResource' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'location' => ['type' => 'string']
-            ]],
-            'ProxyResource' => ['properties' => []],
-            'CloudErrorBody' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'target' => ['type' => 'string'],
-                'details' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CloudErrorBody']
-                ]
-            ]],
-            'CloudError' => ['properties' => ['error' => ['$ref' => '#/definitions/CloudErrorBody']]]
+                'required' => []
+            ],
+            'CloudError' => [
+                'properties' => ['error' => ['$ref' => '#/definitions/CloudErrorBody']],
+                'required' => []
+            ]
         ]
     ];
 }

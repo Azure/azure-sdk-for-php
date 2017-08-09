@@ -329,75 +329,120 @@ final class MediaServicesManagementClient
             ]]
         ],
         'definitions' => [
-            'ApiEndpoint' => ['properties' => [
-                'endpoint' => ['type' => 'string'],
-                'majorVersion' => ['type' => 'string']
-            ]],
-            'ApiError' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'CheckNameAvailabilityInput' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'CheckNameAvailabilityOutput' => ['properties' => [
-                'NameAvailable' => ['type' => 'boolean'],
-                'Reason' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Invalid',
-                        'AlreadyExists'
+            'ApiEndpoint' => [
+                'properties' => [
+                    'endpoint' => ['type' => 'string'],
+                    'majorVersion' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApiError' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CheckNameAvailabilityInput' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'type'
+                ]
+            ],
+            'CheckNameAvailabilityOutput' => [
+                'properties' => [
+                    'NameAvailable' => ['type' => 'boolean'],
+                    'Reason' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Invalid',
+                            'AlreadyExists'
+                        ]
+                    ],
+                    'Message' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'StorageAccount' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'isPrimary' => ['type' => 'boolean']
+                ],
+                'required' => [
+                    'id',
+                    'isPrimary'
+                ]
+            ],
+            'MediaServiceProperties' => [
+                'properties' => [
+                    'apiEndpoints' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApiEndpoint']
+                    ],
+                    'storageAccounts' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/StorageAccount']
                     ]
                 ],
-                'Message' => ['type' => 'string']
-            ]],
-            'StorageAccount' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'isPrimary' => ['type' => 'boolean']
-            ]],
-            'MediaServiceProperties' => ['properties' => [
-                'apiEndpoints' => [
+                'required' => []
+            ],
+            'MediaService' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/MediaServiceProperties']],
+                'required' => []
+            ],
+            'MediaServiceCollection' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApiEndpoint']
+                    'items' => ['$ref' => '#/definitions/MediaService']
+                ]],
+                'required' => []
+            ],
+            'RegenerateKeyInput' => [
+                'properties' => ['keyType' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'Primary',
+                        'Secondary'
+                    ]
+                ]],
+                'required' => ['keyType']
+            ],
+            'RegenerateKeyOutput' => [
+                'properties' => ['key' => ['type' => 'string']],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
                 ],
-                'storageAccounts' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/StorageAccount']
-                ]
-            ]],
-            'MediaService' => ['properties' => ['properties' => ['$ref' => '#/definitions/MediaServiceProperties']]],
-            'MediaServiceCollection' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/MediaService']
-            ]]],
-            'RegenerateKeyInput' => ['properties' => ['keyType' => [
-                'type' => 'string',
-                'enum' => [
-                    'Primary',
-                    'Secondary'
-                ]
-            ]]],
-            'RegenerateKeyOutput' => ['properties' => ['key' => ['type' => 'string']]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ServiceKeys' => ['properties' => [
-                'primaryAuthEndpoint' => ['type' => 'string'],
-                'secondaryAuthEndpoint' => ['type' => 'string'],
-                'primaryKey' => ['type' => 'string'],
-                'secondaryKey' => ['type' => 'string'],
-                'scope' => ['type' => 'string']
-            ]],
-            'SyncStorageKeysInput' => ['properties' => ['id' => ['type' => 'string']]]
+                'required' => []
+            ],
+            'ServiceKeys' => [
+                'properties' => [
+                    'primaryAuthEndpoint' => ['type' => 'string'],
+                    'secondaryAuthEndpoint' => ['type' => 'string'],
+                    'primaryKey' => ['type' => 'string'],
+                    'secondaryKey' => ['type' => 'string'],
+                    'scope' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SyncStorageKeysInput' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => ['id']
+            ]
         ]
     ];
 }

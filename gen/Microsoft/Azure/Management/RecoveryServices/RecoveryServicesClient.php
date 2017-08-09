@@ -731,324 +731,430 @@ final class RecoveryServicesClient
             ]]
         ],
         'definitions' => [
-            'BackupStorageConfigProperties' => ['properties' => [
-                'storageModelType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'GeoRedundant',
-                        'LocallyRedundant'
+            'BackupStorageConfigProperties' => [
+                'properties' => [
+                    'storageModelType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'GeoRedundant',
+                            'LocallyRedundant'
+                        ]
+                    ],
+                    'storageType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'GeoRedundant',
+                            'LocallyRedundant'
+                        ]
+                    ],
+                    'storageTypeState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Locked',
+                            'Unlocked'
+                        ]
                     ]
                 ],
-                'storageType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'GeoRedundant',
-                        'LocallyRedundant'
+                'required' => []
+            ],
+            'BackupStorageConfig' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BackupStorageConfigProperties']],
+                'required' => []
+            ],
+            'BackupVaultConfigProperties' => [
+                'properties' => [
+                    'storageType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'GeoRedundant',
+                            'LocallyRedundant'
+                        ]
+                    ],
+                    'storageTypeState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Locked',
+                            'Unlocked'
+                        ]
+                    ],
+                    'enhancedSecurityState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Enabled',
+                            'Disabled'
+                        ]
                     ]
                 ],
-                'storageTypeState' => [
+                'required' => []
+            ],
+            'BackupVaultConfig' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BackupVaultConfigProperties']],
+                'required' => []
+            ],
+            'VaultExtendedInfo' => [
+                'properties' => [
+                    'integrityKey' => ['type' => 'string'],
+                    'encryptionKey' => ['type' => 'string'],
+                    'encryptionKeyThumbprint' => ['type' => 'string'],
+                    'algorithm' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VaultExtendedInfoResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/VaultExtendedInfo']],
+                'required' => []
+            ],
+            'Sku' => [
+                'properties' => ['name' => [
                     'type' => 'string',
                     'enum' => [
-                        'Invalid',
-                        'Locked',
-                        'Unlocked'
+                        'Standard',
+                        'RS0'
                     ]
-                ]
-            ]],
-            'BackupStorageConfig' => ['properties' => ['properties' => ['$ref' => '#/definitions/BackupStorageConfigProperties']]],
-            'BackupVaultConfigProperties' => ['properties' => [
-                'storageType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'GeoRedundant',
-                        'LocallyRedundant'
-                    ]
+                ]],
+                'required' => ['name']
+            ],
+            'UpgradeDetails' => [
+                'properties' => [
+                    'operationId' => ['type' => 'string'],
+                    'startTimeUtc' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastUpdatedTimeUtc' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTimeUtc' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unknown',
+                            'InProgress',
+                            'Upgraded',
+                            'Failed'
+                        ]
+                    ],
+                    'message' => ['type' => 'string'],
+                    'triggerType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'UserTriggered',
+                            'ForcedUpgrade'
+                        ]
+                    ],
+                    'upgradedResourceId' => ['type' => 'string'],
+                    'previousResourceId' => ['type' => 'string']
                 ],
-                'storageTypeState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Locked',
-                        'Unlocked'
-                    ]
+                'required' => []
+            ],
+            'VaultProperties' => [
+                'properties' => [
+                    'provisioningState' => ['type' => 'string'],
+                    'upgradeDetails' => ['$ref' => '#/definitions/UpgradeDetails']
                 ],
-                'enhancedSecurityState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ]
-            ]],
-            'BackupVaultConfig' => ['properties' => ['properties' => ['$ref' => '#/definitions/BackupVaultConfigProperties']]],
-            'VaultExtendedInfo' => ['properties' => [
-                'integrityKey' => ['type' => 'string'],
-                'encryptionKey' => ['type' => 'string'],
-                'encryptionKeyThumbprint' => ['type' => 'string'],
-                'algorithm' => ['type' => 'string']
-            ]],
-            'VaultExtendedInfoResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/VaultExtendedInfo']]],
-            'Sku' => ['properties' => ['name' => [
-                'type' => 'string',
-                'enum' => [
-                    'Standard',
-                    'RS0'
-                ]
-            ]]],
-            'UpgradeDetails' => ['properties' => [
-                'operationId' => ['type' => 'string'],
-                'startTimeUtc' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'Vault' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/VaultProperties'],
+                    'sku' => ['$ref' => '#/definitions/Sku']
                 ],
-                'lastUpdatedTimeUtc' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTimeUtc' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Unknown',
-                        'InProgress',
-                        'Upgraded',
-                        'Failed'
+                'required' => []
+            ],
+            'TrackedResource' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'message' => ['type' => 'string'],
-                'triggerType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'UserTriggered',
-                        'ForcedUpgrade'
+                'required' => ['location']
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'eTag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RawCertificateData' => [
+                'properties' => [
+                    'authType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'ACS',
+                            'AAD',
+                            'AccessControlService',
+                            'AzureActiveDirectory'
+                        ]
+                    ],
+                    'certificate' => [
+                        'type' => 'string',
+                        'format' => 'byte'
                     ]
                 ],
-                'upgradedResourceId' => ['type' => 'string'],
-                'previousResourceId' => ['type' => 'string']
-            ]],
-            'VaultProperties' => ['properties' => [
-                'provisioningState' => ['type' => 'string'],
-                'upgradeDetails' => ['$ref' => '#/definitions/UpgradeDetails']
-            ]],
-            'Vault' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/VaultProperties'],
-                'sku' => ['$ref' => '#/definitions/Sku']
-            ]],
-            'TrackedResource' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => []
+            ],
+            'CertificateRequest' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RawCertificateData']],
+                'required' => []
+            ],
+            'AzureActiveDirectory' => [
+                'properties' => [
+                    'aadAuthority' => ['type' => 'string'],
+                    'aadTenantId' => ['type' => 'string'],
+                    'servicePrincipalClientId' => ['type' => 'string'],
+                    'servicePrincipalObjectId' => ['type' => 'string'],
+                    'azureManagementEndpointAudience' => ['type' => 'string']
+                ],
+                'required' => [
+                    'aadAuthority',
+                    'aadTenantId',
+                    'servicePrincipalClientId',
+                    'servicePrincipalObjectId',
+                    'azureManagementEndpointAudience'
                 ]
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'eTag' => ['type' => 'string']
-            ]],
-            'RawCertificateData' => ['properties' => [
-                'authType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'ACS',
-                        'AAD',
-                        'AccessControlService',
-                        'AzureActiveDirectory'
+            ],
+            'AccessControlService' => [
+                'properties' => [
+                    'globalAcsNamespace' => ['type' => 'string'],
+                    'globalAcsHostName' => ['type' => 'string'],
+                    'globalAcsRPRealm' => ['type' => 'string']
+                ],
+                'required' => [
+                    'globalAcsNamespace',
+                    'globalAcsHostName',
+                    'globalAcsRPRealm'
+                ]
+            ],
+            'ResourceCertificateDetails' => [
+                'properties' => [
+                    'certificate' => [
+                        'type' => 'string',
+                        'format' => 'byte'
+                    ],
+                    'friendlyName' => ['type' => 'string'],
+                    'issuer' => ['type' => 'string'],
+                    'resourceId' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'subject' => ['type' => 'string'],
+                    'thumbprint' => ['type' => 'string'],
+                    'validFrom' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'validTo' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'certificate' => [
-                    'type' => 'string',
-                    'format' => 'byte'
-                ]
-            ]],
-            'CertificateRequest' => ['properties' => ['properties' => ['$ref' => '#/definitions/RawCertificateData']]],
-            'AzureActiveDirectory' => ['properties' => [
-                'aadAuthority' => ['type' => 'string'],
-                'aadTenantId' => ['type' => 'string'],
-                'servicePrincipalClientId' => ['type' => 'string'],
-                'servicePrincipalObjectId' => ['type' => 'string'],
-                'azureManagementEndpointAudience' => ['type' => 'string']
-            ]],
-            'AccessControlService' => ['properties' => [
-                'globalAcsNamespace' => ['type' => 'string'],
-                'globalAcsHostName' => ['type' => 'string'],
-                'globalAcsRPRealm' => ['type' => 'string']
-            ]],
-            'ResourceCertificateDetails' => ['properties' => [
-                'certificate' => [
-                    'type' => 'string',
-                    'format' => 'byte'
+                'required' => []
+            ],
+            'VaultCertificateResponse' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'id' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ResourceCertificateDetails']
                 ],
-                'friendlyName' => ['type' => 'string'],
-                'issuer' => ['type' => 'string'],
-                'resourceId' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'JobsSummary' => [
+                'properties' => [
+                    'failedJobs' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'suspendedJobs' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'inProgressJobs' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
                 ],
-                'subject' => ['type' => 'string'],
-                'thumbprint' => ['type' => 'string'],
-                'validFrom' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'MonitoringSummary' => [
+                'properties' => [
+                    'unHealthyVmCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'unHealthyProviderCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'eventsCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'deprecatedProviderCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'supportedProviderCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'unsupportedProviderCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
                 ],
-                'validTo' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'VaultCertificateResponse' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'id' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ResourceCertificateDetails']
-            ]],
-            'JobsSummary' => ['properties' => [
-                'failedJobs' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'ReplicationUsage' => [
+                'properties' => [
+                    'monitoringSummary' => ['$ref' => '#/definitions/MonitoringSummary'],
+                    'jobsSummary' => ['$ref' => '#/definitions/JobsSummary'],
+                    'protectedItemCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'recoveryPlanCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'registeredServersCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'recoveryServicesProviderAuthType' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
                 ],
-                'suspendedJobs' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'inProgressJobs' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'MonitoringSummary' => ['properties' => [
-                'unHealthyVmCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'unHealthyProviderCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'eventsCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'deprecatedProviderCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'supportedProviderCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'unsupportedProviderCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ReplicationUsage' => ['properties' => [
-                'monitoringSummary' => ['$ref' => '#/definitions/MonitoringSummary'],
-                'jobsSummary' => ['$ref' => '#/definitions/JobsSummary'],
-                'protectedItemCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'recoveryPlanCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'registeredServersCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'recoveryServicesProviderAuthType' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ReplicationUsageList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ReplicationUsage']
-            ]]],
-            'ClientDiscoveryDisplay' => ['properties' => [
-                'Provider' => ['type' => 'string'],
-                'Resource' => ['type' => 'string'],
-                'Operation' => ['type' => 'string'],
-                'Description' => ['type' => 'string']
-            ]],
-            'ClientDiscoveryForLogSpecification' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'blobDuration' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'ClientDiscoveryForServiceSpecification' => ['properties' => ['logSpecifications' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ClientDiscoveryForLogSpecification']
-            ]]],
-            'ClientDiscoveryProperties' => ['properties' => ['serviceSpecification' => ['$ref' => '#/definitions/ClientDiscoveryForServiceSpecification']]],
-            'ClientDiscoveryValueForSingleApi' => ['properties' => [
-                'Name' => ['type' => 'string'],
-                'Display' => ['$ref' => '#/definitions/ClientDiscoveryDisplay'],
-                'Origin' => ['type' => 'string'],
-                'Properties' => ['$ref' => '#/definitions/ClientDiscoveryProperties']
-            ]],
-            'ClientDiscoveryResponse' => ['properties' => [
-                'Value' => [
+                'required' => []
+            ],
+            'ReplicationUsageList' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ClientDiscoveryValueForSingleApi']
+                    'items' => ['$ref' => '#/definitions/ReplicationUsage']
+                ]],
+                'required' => []
+            ],
+            'ClientDiscoveryDisplay' => [
+                'properties' => [
+                    'Provider' => ['type' => 'string'],
+                    'Resource' => ['type' => 'string'],
+                    'Operation' => ['type' => 'string'],
+                    'Description' => ['type' => 'string']
                 ],
-                'NextLink' => ['type' => 'string']
-            ]],
-            'VaultList' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Vault']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'NameInfo' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'localizedValue' => ['type' => 'string']
-            ]],
-            'VaultUsage' => ['properties' => [
-                'unit' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Count',
-                        'Bytes',
-                        'Seconds',
-                        'Percent',
-                        'CountPerSecond',
-                        'BytesPerSecond'
+                'required' => []
+            ],
+            'ClientDiscoveryForLogSpecification' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'blobDuration' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'quotaPeriod' => ['type' => 'string'],
-                'nextResetTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'ClientDiscoveryForServiceSpecification' => [
+                'properties' => ['logSpecifications' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ClientDiscoveryForLogSpecification']
+                ]],
+                'required' => []
+            ],
+            'ClientDiscoveryProperties' => [
+                'properties' => ['serviceSpecification' => ['$ref' => '#/definitions/ClientDiscoveryForServiceSpecification']],
+                'required' => []
+            ],
+            'ClientDiscoveryValueForSingleApi' => [
+                'properties' => [
+                    'Name' => ['type' => 'string'],
+                    'Display' => ['$ref' => '#/definitions/ClientDiscoveryDisplay'],
+                    'Origin' => ['type' => 'string'],
+                    'Properties' => ['$ref' => '#/definitions/ClientDiscoveryProperties']
                 ],
-                'currentValue' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'ClientDiscoveryResponse' => [
+                'properties' => [
+                    'Value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ClientDiscoveryValueForSingleApi']
+                    ],
+                    'NextLink' => ['type' => 'string']
                 ],
-                'limit' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'VaultList' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Vault']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'name' => ['$ref' => '#/definitions/NameInfo']
-            ]],
-            'VaultUsageList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/VaultUsage']
-            ]]]
+                'required' => []
+            ],
+            'NameInfo' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'localizedValue' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VaultUsage' => [
+                'properties' => [
+                    'unit' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Count',
+                            'Bytes',
+                            'Seconds',
+                            'Percent',
+                            'CountPerSecond',
+                            'BytesPerSecond'
+                        ]
+                    ],
+                    'quotaPeriod' => ['type' => 'string'],
+                    'nextResetTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'currentValue' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'limit' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'name' => ['$ref' => '#/definitions/NameInfo']
+                ],
+                'required' => []
+            ],
+            'VaultUsageList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/VaultUsage']
+                ]],
+                'required' => []
+            ]
         ]
     ];
 }

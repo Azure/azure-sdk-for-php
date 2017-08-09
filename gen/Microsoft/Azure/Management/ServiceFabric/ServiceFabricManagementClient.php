@@ -391,321 +391,442 @@ final class ServiceFabricManagementClient
             ]]
         ],
         'definitions' => [
-            'ClusterVersionDetails' => ['properties' => [
-                'codeVersion' => ['type' => 'string'],
-                'supportExpiryUtc' => ['type' => 'string'],
-                'environment' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Windows',
-                        'Linux'
-                    ]
-                ]
-            ]],
-            'ClusterCodeVersionsResult' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ClusterVersionDetails']
-            ]],
-            'ClusterCodeVersionsListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ClusterCodeVersionsResult']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'CertificateDescription' => ['properties' => [
-                'thumbprint' => ['type' => 'string'],
-                'thumbprintSecondary' => ['type' => 'string'],
-                'x509StoreName' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'AddressBook',
-                        'AuthRoot',
-                        'CertificateAuthority',
-                        'Disallowed',
-                        'My',
-                        'Root',
-                        'TrustedPeople',
-                        'TrustedPublisher'
-                    ]
-                ]
-            ]],
-            'SettingsParameterDescription' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'SettingsSectionDescription' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'parameters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SettingsParameterDescription']
-                ]
-            ]],
-            'EndpointRangeDescription' => ['properties' => [
-                'startPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'endPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'NodeTypeDescription' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'placementProperties' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'capacities' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'clientConnectionEndpointPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'httpGatewayEndpointPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'durabilityLevel' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Bronze',
-                        'Silver',
-                        'Gold'
+            'ClusterVersionDetails' => [
+                'properties' => [
+                    'codeVersion' => ['type' => 'string'],
+                    'supportExpiryUtc' => ['type' => 'string'],
+                    'environment' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Windows',
+                            'Linux'
+                        ]
                     ]
                 ],
-                'applicationPorts' => ['$ref' => '#/definitions/EndpointRangeDescription'],
-                'ephemeralPorts' => ['$ref' => '#/definitions/EndpointRangeDescription'],
-                'isPrimary' => ['type' => 'boolean'],
-                'vmInstanceCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'ClusterCodeVersionsResult' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ClusterVersionDetails']
                 ],
-                'reverseProxyEndpointPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'ClusterCodeVersionsListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ClusterCodeVersionsResult']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CertificateDescription' => [
+                'properties' => [
+                    'thumbprint' => ['type' => 'string'],
+                    'thumbprintSecondary' => ['type' => 'string'],
+                    'x509StoreName' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'AddressBook',
+                            'AuthRoot',
+                            'CertificateAuthority',
+                            'Disallowed',
+                            'My',
+                            'Root',
+                            'TrustedPeople',
+                            'TrustedPublisher'
+                        ]
+                    ]
+                ],
+                'required' => ['thumbprint']
+            ],
+            'SettingsParameterDescription' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'value'
                 ]
-            ]],
-            'ClientCertificateThumbprint' => ['properties' => [
-                'isAdmin' => ['type' => 'boolean'],
-                'certificateThumbprint' => ['type' => 'string']
-            ]],
-            'ClientCertificateCommonName' => ['properties' => [
-                'isAdmin' => ['type' => 'boolean'],
-                'certificateCommonName' => ['type' => 'string'],
-                'certificateIssuerThumbprint' => ['type' => 'string']
-            ]],
-            'ClusterHealthPolicy' => ['properties' => [
-                'maxPercentUnhealthyNodes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+            ],
+            'SettingsSectionDescription' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'parameters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SettingsParameterDescription']
+                    ]
                 ],
-                'maxPercentUnhealthyApplications' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => [
+                    'name',
+                    'parameters'
                 ]
-            ]],
-            'ClusterUpgradeDeltaHealthPolicy' => ['properties' => [
-                'maxPercentDeltaUnhealthyNodes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+            ],
+            'EndpointRangeDescription' => [
+                'properties' => [
+                    'startPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'endPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
                 ],
-                'maxPercentUpgradeDomainDeltaUnhealthyNodes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'maxPercentDeltaUnhealthyApplications' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => [
+                    'startPort',
+                    'endPort'
                 ]
-            ]],
-            'ClusterUpgradePolicy' => ['properties' => [
-                'overrideUserUpgradePolicy' => ['type' => 'boolean'],
-                'forceRestart' => ['type' => 'boolean'],
-                'upgradeReplicaSetCheckTimeout' => ['type' => 'string'],
-                'healthCheckWaitDuration' => ['type' => 'string'],
-                'healthCheckStableDuration' => ['type' => 'string'],
-                'healthCheckRetryTimeout' => ['type' => 'string'],
-                'upgradeTimeout' => ['type' => 'string'],
-                'upgradeDomainTimeout' => ['type' => 'string'],
-                'healthPolicy' => ['$ref' => '#/definitions/ClusterHealthPolicy'],
-                'deltaHealthPolicy' => ['$ref' => '#/definitions/ClusterUpgradeDeltaHealthPolicy']
-            ]],
-            'DiagnosticsStorageAccountConfig' => ['properties' => [
-                'storageAccountName' => ['type' => 'string'],
-                'protectedAccountKeyName' => ['type' => 'string'],
-                'blobEndpoint' => ['type' => 'string'],
-                'queueEndpoint' => ['type' => 'string'],
-                'tableEndpoint' => ['type' => 'string']
-            ]],
-            'AzureActiveDirectory' => ['properties' => [
-                'tenantId' => ['type' => 'string'],
-                'clusterApplication' => ['type' => 'string'],
-                'clientApplication' => ['type' => 'string']
-            ]],
-            'ClusterPropertiesUpdateParameters' => ['properties' => [
-                'reliabilityLevel' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Bronze',
-                        'Silver',
-                        'Gold'
+            ],
+            'NodeTypeDescription' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'placementProperties' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'capacities' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'clientConnectionEndpointPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'httpGatewayEndpointPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'durabilityLevel' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Bronze',
+                            'Silver',
+                            'Gold'
+                        ]
+                    ],
+                    'applicationPorts' => ['$ref' => '#/definitions/EndpointRangeDescription'],
+                    'ephemeralPorts' => ['$ref' => '#/definitions/EndpointRangeDescription'],
+                    'isPrimary' => ['type' => 'boolean'],
+                    'vmInstanceCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'reverseProxyEndpointPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'upgradeMode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Automatic',
-                        'Manual'
-                    ]
-                ],
-                'clusterCodeVersion' => ['type' => 'string'],
-                'certificate' => ['$ref' => '#/definitions/CertificateDescription'],
-                'clientCertificateThumbprints' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ClientCertificateThumbprint']
-                ],
-                'clientCertificateCommonNames' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ClientCertificateCommonName']
-                ],
-                'fabricSettings' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SettingsSectionDescription']
-                ],
-                'reverseProxyCertificate' => ['$ref' => '#/definitions/CertificateDescription'],
-                'nodeTypes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NodeTypeDescription']
-                ],
-                'upgradeDescription' => ['$ref' => '#/definitions/ClusterUpgradePolicy']
-            ]],
-            'ClusterProperties' => ['properties' => [
-                'availableClusterVersions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ClusterVersionDetails']
-                ],
-                'clusterId' => ['type' => 'string'],
-                'clusterState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'WaitingForNodes',
-                        'Deploying',
-                        'BaselineUpgrade',
-                        'UpdatingUserConfiguration',
-                        'UpdatingUserCertificate',
-                        'UpdatingInfrastructure',
-                        'EnforcingClusterVersion',
-                        'UpgradeServiceUnreachable',
-                        'AutoScale',
-                        'Ready'
-                    ]
-                ],
-                'clusterEndpoint' => ['type' => 'string'],
-                'clusterCodeVersion' => ['type' => 'string'],
-                'certificate' => ['$ref' => '#/definitions/CertificateDescription'],
-                'reliabilityLevel' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Bronze',
-                        'Silver',
-                        'Gold',
-                        'Platinum'
-                    ]
-                ],
-                'upgradeMode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Automatic',
-                        'Manual'
-                    ]
-                ],
-                'clientCertificateThumbprints' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ClientCertificateThumbprint']
-                ],
-                'clientCertificateCommonNames' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ClientCertificateCommonName']
-                ],
-                'fabricSettings' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SettingsSectionDescription']
-                ],
-                'reverseProxyCertificate' => ['$ref' => '#/definitions/CertificateDescription'],
-                'managementEndpoint' => ['type' => 'string'],
-                'nodeTypes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NodeTypeDescription']
-                ],
-                'azureActiveDirectory' => ['$ref' => '#/definitions/AzureActiveDirectory'],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Updating',
-                        'Succeeded',
-                        'Failed',
-                        'Canceled'
-                    ]
-                ],
-                'vmImage' => ['type' => 'string'],
-                'diagnosticsStorageAccountConfig' => ['$ref' => '#/definitions/DiagnosticsStorageAccountConfig'],
-                'upgradeDescription' => ['$ref' => '#/definitions/ClusterUpgradePolicy']
-            ]],
-            'ClusterUpdateParameters' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ClusterPropertiesUpdateParameters'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => [
+                    'name',
+                    'clientConnectionEndpointPort',
+                    'httpGatewayEndpointPort',
+                    'isPrimary',
+                    'vmInstanceCount'
                 ]
-            ]],
-            'Cluster' => ['properties' => ['properties' => ['$ref' => '#/definitions/ClusterProperties']]],
-            'ClusterListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Cluster']
+            ],
+            'ClientCertificateThumbprint' => [
+                'properties' => [
+                    'isAdmin' => ['type' => 'boolean'],
+                    'certificateThumbprint' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'AvailableOperationDisplay' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'OperationResult' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/AvailableOperationDisplay'],
-                'origin' => ['type' => 'string'],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'OperationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/OperationResult']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ErrorModel_error' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'ErrorModel' => ['properties' => ['error' => ['$ref' => '#/definitions/ErrorModel_error']]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => [
+                    'isAdmin',
+                    'certificateThumbprint'
                 ]
-            ]]
+            ],
+            'ClientCertificateCommonName' => [
+                'properties' => [
+                    'isAdmin' => ['type' => 'boolean'],
+                    'certificateCommonName' => ['type' => 'string'],
+                    'certificateIssuerThumbprint' => ['type' => 'string']
+                ],
+                'required' => [
+                    'isAdmin',
+                    'certificateCommonName',
+                    'certificateIssuerThumbprint'
+                ]
+            ],
+            'ClusterHealthPolicy' => [
+                'properties' => [
+                    'maxPercentUnhealthyNodes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'maxPercentUnhealthyApplications' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ClusterUpgradeDeltaHealthPolicy' => [
+                'properties' => [
+                    'maxPercentDeltaUnhealthyNodes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'maxPercentUpgradeDomainDeltaUnhealthyNodes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'maxPercentDeltaUnhealthyApplications' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => [
+                    'maxPercentDeltaUnhealthyNodes',
+                    'maxPercentUpgradeDomainDeltaUnhealthyNodes',
+                    'maxPercentDeltaUnhealthyApplications'
+                ]
+            ],
+            'ClusterUpgradePolicy' => [
+                'properties' => [
+                    'overrideUserUpgradePolicy' => ['type' => 'boolean'],
+                    'forceRestart' => ['type' => 'boolean'],
+                    'upgradeReplicaSetCheckTimeout' => ['type' => 'string'],
+                    'healthCheckWaitDuration' => ['type' => 'string'],
+                    'healthCheckStableDuration' => ['type' => 'string'],
+                    'healthCheckRetryTimeout' => ['type' => 'string'],
+                    'upgradeTimeout' => ['type' => 'string'],
+                    'upgradeDomainTimeout' => ['type' => 'string'],
+                    'healthPolicy' => ['$ref' => '#/definitions/ClusterHealthPolicy'],
+                    'deltaHealthPolicy' => ['$ref' => '#/definitions/ClusterUpgradeDeltaHealthPolicy']
+                ],
+                'required' => [
+                    'upgradeReplicaSetCheckTimeout',
+                    'healthCheckWaitDuration',
+                    'healthCheckStableDuration',
+                    'healthCheckRetryTimeout',
+                    'upgradeTimeout',
+                    'upgradeDomainTimeout',
+                    'healthPolicy'
+                ]
+            ],
+            'DiagnosticsStorageAccountConfig' => [
+                'properties' => [
+                    'storageAccountName' => ['type' => 'string'],
+                    'protectedAccountKeyName' => ['type' => 'string'],
+                    'blobEndpoint' => ['type' => 'string'],
+                    'queueEndpoint' => ['type' => 'string'],
+                    'tableEndpoint' => ['type' => 'string']
+                ],
+                'required' => [
+                    'storageAccountName',
+                    'protectedAccountKeyName',
+                    'blobEndpoint',
+                    'queueEndpoint',
+                    'tableEndpoint'
+                ]
+            ],
+            'AzureActiveDirectory' => [
+                'properties' => [
+                    'tenantId' => ['type' => 'string'],
+                    'clusterApplication' => ['type' => 'string'],
+                    'clientApplication' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ClusterPropertiesUpdateParameters' => [
+                'properties' => [
+                    'reliabilityLevel' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Bronze',
+                            'Silver',
+                            'Gold'
+                        ]
+                    ],
+                    'upgradeMode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Automatic',
+                            'Manual'
+                        ]
+                    ],
+                    'clusterCodeVersion' => ['type' => 'string'],
+                    'certificate' => ['$ref' => '#/definitions/CertificateDescription'],
+                    'clientCertificateThumbprints' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ClientCertificateThumbprint']
+                    ],
+                    'clientCertificateCommonNames' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ClientCertificateCommonName']
+                    ],
+                    'fabricSettings' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SettingsSectionDescription']
+                    ],
+                    'reverseProxyCertificate' => ['$ref' => '#/definitions/CertificateDescription'],
+                    'nodeTypes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NodeTypeDescription']
+                    ],
+                    'upgradeDescription' => ['$ref' => '#/definitions/ClusterUpgradePolicy']
+                ],
+                'required' => []
+            ],
+            'ClusterProperties' => [
+                'properties' => [
+                    'availableClusterVersions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ClusterVersionDetails']
+                    ],
+                    'clusterId' => ['type' => 'string'],
+                    'clusterState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'WaitingForNodes',
+                            'Deploying',
+                            'BaselineUpgrade',
+                            'UpdatingUserConfiguration',
+                            'UpdatingUserCertificate',
+                            'UpdatingInfrastructure',
+                            'EnforcingClusterVersion',
+                            'UpgradeServiceUnreachable',
+                            'AutoScale',
+                            'Ready'
+                        ]
+                    ],
+                    'clusterEndpoint' => ['type' => 'string'],
+                    'clusterCodeVersion' => ['type' => 'string'],
+                    'certificate' => ['$ref' => '#/definitions/CertificateDescription'],
+                    'reliabilityLevel' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Bronze',
+                            'Silver',
+                            'Gold',
+                            'Platinum'
+                        ]
+                    ],
+                    'upgradeMode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Automatic',
+                            'Manual'
+                        ]
+                    ],
+                    'clientCertificateThumbprints' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ClientCertificateThumbprint']
+                    ],
+                    'clientCertificateCommonNames' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ClientCertificateCommonName']
+                    ],
+                    'fabricSettings' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SettingsSectionDescription']
+                    ],
+                    'reverseProxyCertificate' => ['$ref' => '#/definitions/CertificateDescription'],
+                    'managementEndpoint' => ['type' => 'string'],
+                    'nodeTypes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NodeTypeDescription']
+                    ],
+                    'azureActiveDirectory' => ['$ref' => '#/definitions/AzureActiveDirectory'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Updating',
+                            'Succeeded',
+                            'Failed',
+                            'Canceled'
+                        ]
+                    ],
+                    'vmImage' => ['type' => 'string'],
+                    'diagnosticsStorageAccountConfig' => ['$ref' => '#/definitions/DiagnosticsStorageAccountConfig'],
+                    'upgradeDescription' => ['$ref' => '#/definitions/ClusterUpgradePolicy']
+                ],
+                'required' => [
+                    'managementEndpoint',
+                    'nodeTypes'
+                ]
+            ],
+            'ClusterUpdateParameters' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ClusterPropertiesUpdateParameters'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'Cluster' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ClusterProperties']],
+                'required' => []
+            ],
+            'ClusterListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Cluster']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AvailableOperationDisplay' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'OperationResult' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/AvailableOperationDisplay'],
+                    'origin' => ['type' => 'string'],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/OperationResult']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ErrorModel_error' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ErrorModel' => [
+                'properties' => ['error' => ['$ref' => '#/definitions/ErrorModel_error']],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['location']
+            ]
         ]
     ];
 }

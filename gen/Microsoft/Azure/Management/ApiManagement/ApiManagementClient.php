@@ -6951,1254 +6951,1810 @@ final class ApiManagementClient
             ]]
         ],
         'definitions' => [
-            'ErrorFieldContract' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'target' => ['type' => 'string']
-            ]],
-            'ErrorResponse' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'details' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ErrorFieldContract']
-                ]
-            ]],
-            'PolicyContractProperties' => ['properties' => ['policyContent' => ['type' => 'string']]],
-            'PolicyContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/PolicyContractProperties']]],
-            'PolicyCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PolicyContract']
+            'ErrorFieldContract' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'target' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'PolicySnippetContract' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'content' => ['type' => 'string'],
-                'toolTip' => ['type' => 'string'],
-                'scope' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'PolicySnippetsCollection' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/PolicySnippetContract']
-            ]]],
-            'RegionContract' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'isMasterRegion' => ['type' => 'boolean'],
-                'isDeleted' => ['type' => 'boolean']
-            ]],
-            'RegionListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RegionContract']
+                'required' => []
+            ],
+            'ErrorResponse' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'details' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ErrorFieldContract']
+                    ]
                 ],
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'PolicyContractProperties' => [
+                'properties' => ['policyContent' => ['type' => 'string']],
+                'required' => ['policyContent']
+            ],
+            'PolicyContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PolicyContractProperties']],
+                'required' => []
+            ],
+            'PolicyCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PolicyContract']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ApiContractProperties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'serviceUrl' => ['type' => 'string'],
-                'path' => ['type' => 'string'],
-                'protocols' => [
+                'required' => []
+            ],
+            'PolicySnippetContract' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'content' => ['type' => 'string'],
+                    'toolTip' => ['type' => 'string'],
+                    'scope' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'PolicySnippetsCollection' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => [
+                    'items' => ['$ref' => '#/definitions/PolicySnippetContract']
+                ]],
+                'required' => []
+            ],
+            'RegionContract' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'isMasterRegion' => ['type' => 'boolean'],
+                    'isDeleted' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'RegionListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RegionContract']
+                    ],
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApiContractProperties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'serviceUrl' => ['type' => 'string'],
+                    'path' => ['type' => 'string'],
+                    'protocols' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'http',
+                                'https'
+                            ]
+                        ]
+                    ]
+                ],
+                'required' => ['path']
+            ],
+            'ApiContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ApiContractProperties']],
+                'required' => []
+            ],
+            'ApiCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApiContract']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApiCreateOrUpdateProperties' => [
+                'properties' => [
+                    'contentValue' => ['type' => 'string'],
+                    'contentFormat' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'wadl-xml',
+                            'wadl-link-json',
+                            'swagger-json',
+                            'swagger-link-json',
+                            'wsdl',
+                            'wsdl-link'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'ApiCreateOrUpdateParameter' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ApiCreateOrUpdateProperties']],
+                'required' => []
+            ],
+            'ApiContractUpdateProperties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'serviceUrl' => ['type' => 'string'],
+                    'path' => ['type' => 'string'],
+                    'protocols' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'http',
+                                'https'
+                            ]
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'ApiUpdateContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ApiContractUpdateProperties']],
+                'required' => []
+            ],
+            'OAuth2AuthenticationSettingsContract' => [
+                'properties' => [
+                    'authorizationServerId' => ['type' => 'string'],
+                    'scope' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AuthenticationSettingsContract' => [
+                'properties' => ['oAuth2' => ['$ref' => '#/definitions/OAuth2AuthenticationSettingsContract']],
+                'required' => []
+            ],
+            'SubscriptionKeyParameterNamesContract' => [
+                'properties' => [
+                    'header' => ['type' => 'string'],
+                    'query' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApiEntityBaseContract' => [
+                'properties' => [
+                    'description' => ['type' => 'string'],
+                    'authenticationSettings' => ['$ref' => '#/definitions/AuthenticationSettingsContract'],
+                    'subscriptionKeyParameterNames' => ['$ref' => '#/definitions/SubscriptionKeyParameterNamesContract'],
+                    'type' => [
                         'type' => 'string',
                         'enum' => [
                             'http',
-                            'https'
+                            'soap'
                         ]
-                    ]
+                    ],
+                    'apiRevision' => ['type' => 'string'],
+                    'isCurrent' => ['type' => 'boolean'],
+                    'isOnline' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'OperationContractProperties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'method' => ['type' => 'string'],
+                    'urlTemplate' => ['type' => 'string']
+                ],
+                'required' => [
+                    'displayName',
+                    'method',
+                    'urlTemplate'
                 ]
-            ]],
-            'ApiContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/ApiContractProperties']]],
-            'ApiCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApiContract']
+            ],
+            'OperationContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/OperationContractProperties']],
+                'required' => []
+            ],
+            'OperationCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/OperationContract']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ApiCreateOrUpdateProperties' => ['properties' => [
-                'contentValue' => ['type' => 'string'],
-                'contentFormat' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'wadl-xml',
-                        'wadl-link-json',
-                        'swagger-json',
-                        'swagger-link-json',
-                        'wsdl',
-                        'wsdl-link'
-                    ]
-                ]
-            ]],
-            'ApiCreateOrUpdateParameter' => ['properties' => ['properties' => ['$ref' => '#/definitions/ApiCreateOrUpdateProperties']]],
-            'ApiContractUpdateProperties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'serviceUrl' => ['type' => 'string'],
-                'path' => ['type' => 'string'],
-                'protocols' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'enum' => [
-                            'http',
-                            'https'
-                        ]
-                    ]
-                ]
-            ]],
-            'ApiUpdateContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/ApiContractUpdateProperties']]],
-            'OAuth2AuthenticationSettingsContract' => ['properties' => [
-                'authorizationServerId' => ['type' => 'string'],
-                'scope' => ['type' => 'string']
-            ]],
-            'AuthenticationSettingsContract' => ['properties' => ['oAuth2' => ['$ref' => '#/definitions/OAuth2AuthenticationSettingsContract']]],
-            'SubscriptionKeyParameterNamesContract' => ['properties' => [
-                'header' => ['type' => 'string'],
-                'query' => ['type' => 'string']
-            ]],
-            'ApiEntityBaseContract' => ['properties' => [
-                'description' => ['type' => 'string'],
-                'authenticationSettings' => ['$ref' => '#/definitions/AuthenticationSettingsContract'],
-                'subscriptionKeyParameterNames' => ['$ref' => '#/definitions/SubscriptionKeyParameterNamesContract'],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'http',
-                        'soap'
-                    ]
+                'required' => []
+            ],
+            'OperationUpdateContractProperties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'method' => ['type' => 'string'],
+                    'urlTemplate' => ['type' => 'string']
                 ],
-                'apiRevision' => ['type' => 'string'],
-                'isCurrent' => ['type' => 'boolean'],
-                'isOnline' => ['type' => 'boolean']
-            ]],
-            'OperationContractProperties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'method' => ['type' => 'string'],
-                'urlTemplate' => ['type' => 'string']
-            ]],
-            'OperationContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/OperationContractProperties']]],
-            'OperationCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/OperationContract']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'OperationUpdateContractProperties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'method' => ['type' => 'string'],
-                'urlTemplate' => ['type' => 'string']
-            ]],
-            'ParameterContract' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'defaultValue' => ['type' => 'string'],
-                'required' => ['type' => 'boolean'],
-                'values' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'RepresentationContract' => ['properties' => [
-                'contentType' => ['type' => 'string'],
-                'sample' => ['type' => 'string'],
-                'schemaId' => ['type' => 'string'],
-                'typeName' => ['type' => 'string'],
-                'formParameters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ParameterContract']
-                ]
-            ]],
-            'RequestContract' => ['properties' => [
-                'description' => ['type' => 'string'],
-                'queryParameters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ParameterContract']
-                ],
-                'headers' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ParameterContract']
-                ],
-                'representations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RepresentationContract']
-                ]
-            ]],
-            'ResponseContract' => ['properties' => [
-                'statusCode' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'description' => ['type' => 'string'],
-                'representations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RepresentationContract']
-                ],
-                'headers' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ParameterContract']
-                ]
-            ]],
-            'OperationEntityBaseContract' => ['properties' => [
-                'templateParameters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ParameterContract']
-                ],
-                'description' => ['type' => 'string'],
-                'request' => ['$ref' => '#/definitions/RequestContract'],
-                'responses' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResponseContract']
-                ],
-                'policies' => ['type' => 'string']
-            ]],
-            'OperationUpdateContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/OperationUpdateContractProperties']]],
-            'ProductUpdateProperties' => ['properties' => ['name' => ['type' => 'string']]],
-            'ProductContractProperties' => ['properties' => ['displayName' => ['type' => 'string']]],
-            'ProductEntityBaseParameters' => ['properties' => [
-                'description' => ['type' => 'string'],
-                'terms' => ['type' => 'string'],
-                'subscriptionRequired' => ['type' => 'boolean'],
-                'approvalRequired' => ['type' => 'boolean'],
-                'subscriptionsLimit' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'notPublished',
-                        'published'
-                    ]
-                ]
-            ]],
-            'ProductContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/ProductContractProperties']]],
-            'ProductCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ProductContract']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'AuthorizationServerContractProperties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'clientRegistrationEndpoint' => ['type' => 'string'],
-                'authorizationEndpoint' => ['type' => 'string'],
-                'grantTypes' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'enum' => [
-                            'authorizationCode',
-                            'implicit',
-                            'resourceOwnerPassword',
-                            'clientCredentials'
-                        ]
-                    ]
-                ],
-                'clientId' => ['type' => 'string']
-            ]],
-            'AuthorizationServerContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/AuthorizationServerContractProperties']]],
-            'AuthorizationServerCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AuthorizationServerContract']
-                ],
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'AuthorizationServerUpdateContractProperties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'clientRegistrationEndpoint' => ['type' => 'string'],
-                'authorizationEndpoint' => ['type' => 'string'],
-                'grantTypes' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'enum' => [
-                            'authorizationCode',
-                            'implicit',
-                            'resourceOwnerPassword',
-                            'clientCredentials'
-                        ]
-                    ]
-                ],
-                'clientId' => ['type' => 'string']
-            ]],
-            'AuthorizationServerUpdateContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/AuthorizationServerUpdateContractProperties']]],
-            'TokenBodyParameterContract' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'AuthorizationServerContractBaseProperties' => ['properties' => [
-                'description' => ['type' => 'string'],
-                'authorizationMethods' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'enum' => [
-                            'HEAD',
-                            'OPTIONS',
-                            'TRACE',
-                            'GET',
-                            'POST',
-                            'PUT',
-                            'PATCH',
-                            'DELETE'
-                        ]
-                    ]
-                ],
-                'clientAuthenticationMethod' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'enum' => [
-                            'Basic',
-                            'Body'
-                        ]
-                    ]
-                ],
-                'tokenBodyParameters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TokenBodyParameterContract']
-                ],
-                'tokenEndpoint' => ['type' => 'string'],
-                'supportState' => ['type' => 'boolean'],
-                'defaultScope' => ['type' => 'string'],
-                'bearerTokenSendingMethods' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'enum' => [
-                            'authorizationHeader',
-                            'query'
-                        ]
-                    ]
-                ],
-                'clientSecret' => ['type' => 'string'],
-                'resourceOwnerUsername' => ['type' => 'string'],
-                'resourceOwnerPassword' => ['type' => 'string']
-            ]],
-            'BackendAuthorizationHeaderCredentials' => ['properties' => [
-                'scheme' => ['type' => 'string'],
-                'parameter' => ['type' => 'string']
-            ]],
-            'X509CertificateName' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'issuerCertificateThumbprint' => ['type' => 'string']
-            ]],
-            'BackendServiceFabricClusterProperties' => ['properties' => [
-                'clientCertificatethumbprint' => ['type' => 'string'],
-                'maxPartitionResolutionRetries' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'managementEndpoints' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'serverCertificateThumbprints' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'serverX509Names' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/X509CertificateName']
-                ]
-            ]],
-            'BackendProperties' => ['properties' => ['serviceFabricCluster' => ['$ref' => '#/definitions/BackendServiceFabricClusterProperties']]],
-            'BackendCredentialsContract' => ['properties' => [
-                'certificate' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'query' => [
-                    'type' => 'object',
-                    'additionalProperties' => [
+                'required' => []
+            ],
+            'ParameterContract' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'defaultValue' => ['type' => 'string'],
+                    'required' => ['type' => 'boolean'],
+                    'values' => [
                         'type' => 'array',
                         'items' => ['type' => 'string']
                     ]
                 ],
-                'header' => [
-                    'type' => 'object',
-                    'additionalProperties' => [
+                'required' => [
+                    'name',
+                    'type'
+                ]
+            ],
+            'RepresentationContract' => [
+                'properties' => [
+                    'contentType' => ['type' => 'string'],
+                    'sample' => ['type' => 'string'],
+                    'schemaId' => ['type' => 'string'],
+                    'typeName' => ['type' => 'string'],
+                    'formParameters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ParameterContract']
+                    ]
+                ],
+                'required' => ['contentType']
+            ],
+            'RequestContract' => [
+                'properties' => [
+                    'description' => ['type' => 'string'],
+                    'queryParameters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ParameterContract']
+                    ],
+                    'headers' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ParameterContract']
+                    ],
+                    'representations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RepresentationContract']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ResponseContract' => [
+                'properties' => [
+                    'statusCode' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'description' => ['type' => 'string'],
+                    'representations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RepresentationContract']
+                    ],
+                    'headers' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ParameterContract']
+                    ]
+                ],
+                'required' => ['statusCode']
+            ],
+            'OperationEntityBaseContract' => [
+                'properties' => [
+                    'templateParameters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ParameterContract']
+                    ],
+                    'description' => ['type' => 'string'],
+                    'request' => ['$ref' => '#/definitions/RequestContract'],
+                    'responses' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResponseContract']
+                    ],
+                    'policies' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'OperationUpdateContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/OperationUpdateContractProperties']],
+                'required' => []
+            ],
+            'ProductUpdateProperties' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'ProductContractProperties' => [
+                'properties' => ['displayName' => ['type' => 'string']],
+                'required' => ['displayName']
+            ],
+            'ProductEntityBaseParameters' => [
+                'properties' => [
+                    'description' => ['type' => 'string'],
+                    'terms' => ['type' => 'string'],
+                    'subscriptionRequired' => ['type' => 'boolean'],
+                    'approvalRequired' => ['type' => 'boolean'],
+                    'subscriptionsLimit' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'notPublished',
+                            'published'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'ProductContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ProductContractProperties']],
+                'required' => []
+            ],
+            'ProductCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ProductContract']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AuthorizationServerContractProperties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'clientRegistrationEndpoint' => ['type' => 'string'],
+                    'authorizationEndpoint' => ['type' => 'string'],
+                    'grantTypes' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'authorizationCode',
+                                'implicit',
+                                'resourceOwnerPassword',
+                                'clientCredentials'
+                            ]
+                        ]
+                    ],
+                    'clientId' => ['type' => 'string']
+                ],
+                'required' => [
+                    'displayName',
+                    'clientRegistrationEndpoint',
+                    'authorizationEndpoint',
+                    'grantTypes',
+                    'clientId'
+                ]
+            ],
+            'AuthorizationServerContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AuthorizationServerContractProperties']],
+                'required' => []
+            ],
+            'AuthorizationServerCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AuthorizationServerContract']
+                    ],
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AuthorizationServerUpdateContractProperties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'clientRegistrationEndpoint' => ['type' => 'string'],
+                    'authorizationEndpoint' => ['type' => 'string'],
+                    'grantTypes' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'authorizationCode',
+                                'implicit',
+                                'resourceOwnerPassword',
+                                'clientCredentials'
+                            ]
+                        ]
+                    ],
+                    'clientId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AuthorizationServerUpdateContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AuthorizationServerUpdateContractProperties']],
+                'required' => []
+            ],
+            'TokenBodyParameterContract' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'value'
+                ]
+            ],
+            'AuthorizationServerContractBaseProperties' => [
+                'properties' => [
+                    'description' => ['type' => 'string'],
+                    'authorizationMethods' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'HEAD',
+                                'OPTIONS',
+                                'TRACE',
+                                'GET',
+                                'POST',
+                                'PUT',
+                                'PATCH',
+                                'DELETE'
+                            ]
+                        ]
+                    ],
+                    'clientAuthenticationMethod' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'Basic',
+                                'Body'
+                            ]
+                        ]
+                    ],
+                    'tokenBodyParameters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TokenBodyParameterContract']
+                    ],
+                    'tokenEndpoint' => ['type' => 'string'],
+                    'supportState' => ['type' => 'boolean'],
+                    'defaultScope' => ['type' => 'string'],
+                    'bearerTokenSendingMethods' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'authorizationHeader',
+                                'query'
+                            ]
+                        ]
+                    ],
+                    'clientSecret' => ['type' => 'string'],
+                    'resourceOwnerUsername' => ['type' => 'string'],
+                    'resourceOwnerPassword' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'BackendAuthorizationHeaderCredentials' => [
+                'properties' => [
+                    'scheme' => ['type' => 'string'],
+                    'parameter' => ['type' => 'string']
+                ],
+                'required' => [
+                    'scheme',
+                    'parameter'
+                ]
+            ],
+            'X509CertificateName' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'issuerCertificateThumbprint' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'BackendServiceFabricClusterProperties' => [
+                'properties' => [
+                    'clientCertificatethumbprint' => ['type' => 'string'],
+                    'maxPartitionResolutionRetries' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'managementEndpoints' => [
                         'type' => 'array',
                         'items' => ['type' => 'string']
+                    ],
+                    'serverCertificateThumbprints' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'serverX509Names' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/X509CertificateName']
                     ]
                 ],
-                'authorization' => ['$ref' => '#/definitions/BackendAuthorizationHeaderCredentials']
-            ]],
-            'BackendProxyContract' => ['properties' => [
-                'url' => ['type' => 'string'],
-                'username' => ['type' => 'string'],
-                'password' => ['type' => 'string']
-            ]],
-            'BackendTlsProperties' => ['properties' => [
-                'validateCertificateChain' => ['type' => 'boolean'],
-                'validateCertificateName' => ['type' => 'boolean']
-            ]],
-            'BackendBaseParameters' => ['properties' => [
-                'title' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'resourceId' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/BackendProperties'],
-                'credentials' => ['$ref' => '#/definitions/BackendCredentialsContract'],
-                'proxy' => ['$ref' => '#/definitions/BackendProxyContract'],
-                'tls' => ['$ref' => '#/definitions/BackendTlsProperties']
-            ]],
-            'BackendContractProperties' => ['properties' => [
-                'url' => ['type' => 'string'],
-                'protocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'http',
-                        'soap'
-                    ]
+                'required' => [
+                    'clientCertificatethumbprint',
+                    'managementEndpoints'
                 ]
-            ]],
-            'BackendContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/BackendContractProperties']]],
-            'BackendCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/BackendContract']
+            ],
+            'BackendProperties' => [
+                'properties' => ['serviceFabricCluster' => ['$ref' => '#/definitions/BackendServiceFabricClusterProperties']],
+                'required' => []
+            ],
+            'BackendCredentialsContract' => [
+                'properties' => [
+                    'certificate' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'query' => [
+                        'type' => 'object',
+                        'additionalProperties' => [
+                            'type' => 'array',
+                            'items' => ['type' => 'string']
+                        ]
+                    ],
+                    'header' => [
+                        'type' => 'object',
+                        'additionalProperties' => [
+                            'type' => 'array',
+                            'items' => ['type' => 'string']
+                        ]
+                    ],
+                    'authorization' => ['$ref' => '#/definitions/BackendAuthorizationHeaderCredentials']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'BackendUpdateParameters' => ['properties' => [
-                'url' => ['type' => 'string'],
-                'protocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'http',
-                        'soap'
-                    ]
-                ]
-            ]],
-            'CertificateContractProperties' => ['properties' => [
-                'subject' => ['type' => 'string'],
-                'thumbprint' => ['type' => 'string'],
-                'expirationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'CertificateContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/CertificateContractProperties']]],
-            'CertificateCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CertificateContract']
+                'required' => []
+            ],
+            'BackendProxyContract' => [
+                'properties' => [
+                    'url' => ['type' => 'string'],
+                    'username' => ['type' => 'string'],
+                    'password' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'CertificateCreateOrUpdateProperties' => ['properties' => [
-                'data' => ['type' => 'string'],
-                'password' => ['type' => 'string']
-            ]],
-            'CertificateCreateOrUpdateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/CertificateCreateOrUpdateProperties']]],
-            'CertificateInformation' => ['properties' => [
-                'expiry' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => ['url']
+            ],
+            'BackendTlsProperties' => [
+                'properties' => [
+                    'validateCertificateChain' => ['type' => 'boolean'],
+                    'validateCertificateName' => ['type' => 'boolean']
                 ],
-                'thumbprint' => ['type' => 'string'],
-                'subject' => ['type' => 'string']
-            ]],
-            'HostnameConfiguration' => ['properties' => [
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Proxy',
-                        'Portal',
-                        'Management',
-                        'Scm'
+                'required' => []
+            ],
+            'BackendBaseParameters' => [
+                'properties' => [
+                    'title' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'resourceId' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/BackendProperties'],
+                    'credentials' => ['$ref' => '#/definitions/BackendCredentialsContract'],
+                    'proxy' => ['$ref' => '#/definitions/BackendProxyContract'],
+                    'tls' => ['$ref' => '#/definitions/BackendTlsProperties']
+                ],
+                'required' => []
+            ],
+            'BackendContractProperties' => [
+                'properties' => [
+                    'url' => ['type' => 'string'],
+                    'protocol' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'http',
+                            'soap'
+                        ]
                     ]
                 ],
-                'hostName' => ['type' => 'string'],
-                'encodedCertificate' => ['type' => 'string'],
-                'certificatePassword' => ['type' => 'string'],
-                'negotiateClientCertificate' => ['type' => 'boolean'],
-                'certificate' => ['$ref' => '#/definitions/CertificateInformation']
-            ]],
-            'VirtualNetworkConfiguration' => ['properties' => [
-                'vnetid' => ['type' => 'string'],
-                'subnetname' => ['type' => 'string'],
-                'subnetResourceId' => ['type' => 'string']
-            ]],
-            'ApiManagementServiceSkuProperties' => ['properties' => [
-                'name' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Developer',
-                        'Standard',
-                        'Premium'
+                'required' => [
+                    'url',
+                    'protocol'
+                ]
+            ],
+            'BackendContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BackendContractProperties']],
+                'required' => []
+            ],
+            'BackendCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/BackendContract']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'BackendUpdateParameters' => [
+                'properties' => [
+                    'url' => ['type' => 'string'],
+                    'protocol' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'http',
+                            'soap'
+                        ]
                     ]
                 ],
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'AdditionalLocation' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'sku' => ['$ref' => '#/definitions/ApiManagementServiceSkuProperties'],
-                'staticIps' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'virtualNetworkConfiguration' => ['$ref' => '#/definitions/VirtualNetworkConfiguration']
-            ]],
-            'ApiManagementServiceBackupRestoreParameters' => ['properties' => [
-                'storageAccount' => ['type' => 'string'],
-                'accessKey' => ['type' => 'string'],
-                'containerName' => ['type' => 'string'],
-                'backupName' => ['type' => 'string']
-            ]],
-            'ApiManagementServiceProperties' => ['properties' => [
-                'publisherEmail' => ['type' => 'string'],
-                'publisherName' => ['type' => 'string']
-            ]],
-            'ApiManagementServiceUpdateProperties' => ['properties' => [
-                'publisherEmail' => ['type' => 'string'],
-                'publisherName' => ['type' => 'string']
-            ]],
-            'ApiManagementServiceBaseProperties' => ['properties' => [
-                'notificationSenderEmail' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string'],
-                'targetProvisioningState' => ['type' => 'string'],
-                'createdAtUtc' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'gatewayUrl' => ['type' => 'string'],
-                'portalUrl' => ['type' => 'string'],
-                'managementApiUrl' => ['type' => 'string'],
-                'scmUrl' => ['type' => 'string'],
-                'hostnameConfigurations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HostnameConfiguration']
-                ],
-                'staticIps' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'virtualNetworkConfiguration' => ['$ref' => '#/definitions/VirtualNetworkConfiguration'],
-                'additionalLocations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AdditionalLocation']
-                ],
-                'customProperties' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'virtualNetworkType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'External',
-                        'Internal'
-                    ]
-                ]
-            ]],
-            'ApiManagementServiceResource' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApiManagementServiceProperties'],
-                'sku' => ['$ref' => '#/definitions/ApiManagementServiceSkuProperties'],
-                'location' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'ApimResource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ApiManagementServiceUpdateParameters' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApiManagementServiceUpdateProperties'],
-                'sku' => ['$ref' => '#/definitions/ApiManagementServiceSkuProperties'],
-                'etag' => ['type' => 'string']
-            ]],
-            'ApiManagementServiceListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApiManagementServiceResource']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ApiManagementServiceGetSsoTokenResult' => ['properties' => ['redirectUri' => ['type' => 'string']]],
-            'ApiManagementServiceCheckNameAvailabilityParameters' => ['properties' => ['name' => ['type' => 'string']]],
-            'ApiManagementServiceNameAvailabilityResult' => ['properties' => [
-                'nameAvailable' => ['type' => 'boolean'],
-                'message' => ['type' => 'string'],
-                'reason' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Valid',
-                        'Invalid',
-                        'AlreadyExists'
-                    ]
-                ]
-            ]],
-            'ApiManagementServiceApplyNetworkConfigurationParameters' => ['properties' => ['location' => ['type' => 'string']]],
-            'Operation_display' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'operation' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/Operation_display']
-            ]],
-            'OperationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Operation']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'EmailTemplateParametersContractProperties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'title' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'EmailTemplateContractProperties' => ['properties' => [
-                'subject' => ['type' => 'string'],
-                'body' => ['type' => 'string'],
-                'title' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'isDefault' => ['type' => 'boolean'],
-                'parameters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/EmailTemplateParametersContractProperties']
-                ]
-            ]],
-            'EmailTemplateContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/EmailTemplateContractProperties']]],
-            'EmailTemplateCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/EmailTemplateContract']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'EmailTemplateUpdateParameterProperties' => ['properties' => [
-                'subject' => ['type' => 'string'],
-                'title' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'body' => ['type' => 'string'],
-                'parameters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/EmailTemplateParametersContractProperties']
-                ]
-            ]],
-            'EmailTemplateUpdateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/EmailTemplateUpdateParameterProperties']]],
-            'GroupContractProperties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'builtIn' => ['type' => 'boolean'],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'custom',
-                        'system',
-                        'external'
+                'required' => []
+            ],
+            'CertificateContractProperties' => [
+                'properties' => [
+                    'subject' => ['type' => 'string'],
+                    'thumbprint' => ['type' => 'string'],
+                    'expirationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'externalId' => ['type' => 'string']
-            ]],
-            'GroupContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/GroupContractProperties']]],
-            'GroupCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/GroupContract']
+                'required' => [
+                    'subject',
+                    'thumbprint',
+                    'expirationDate'
+                ]
+            ],
+            'CertificateContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/CertificateContractProperties']],
+                'required' => []
+            ],
+            'CertificateCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CertificateContract']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'GroupCreateParametersProperties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'custom',
-                        'system',
-                        'external'
+                'required' => []
+            ],
+            'CertificateCreateOrUpdateProperties' => [
+                'properties' => [
+                    'data' => ['type' => 'string'],
+                    'password' => ['type' => 'string']
+                ],
+                'required' => [
+                    'data',
+                    'password'
+                ]
+            ],
+            'CertificateCreateOrUpdateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/CertificateCreateOrUpdateProperties']],
+                'required' => []
+            ],
+            'CertificateInformation' => [
+                'properties' => [
+                    'expiry' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'thumbprint' => ['type' => 'string'],
+                    'subject' => ['type' => 'string']
+                ],
+                'required' => [
+                    'expiry',
+                    'thumbprint',
+                    'subject'
+                ]
+            ],
+            'HostnameConfiguration' => [
+                'properties' => [
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Proxy',
+                            'Portal',
+                            'Management',
+                            'Scm'
+                        ]
+                    ],
+                    'hostName' => ['type' => 'string'],
+                    'encodedCertificate' => ['type' => 'string'],
+                    'certificatePassword' => ['type' => 'string'],
+                    'negotiateClientCertificate' => ['type' => 'boolean'],
+                    'certificate' => ['$ref' => '#/definitions/CertificateInformation']
+                ],
+                'required' => [
+                    'type',
+                    'hostName'
+                ]
+            ],
+            'VirtualNetworkConfiguration' => [
+                'properties' => [
+                    'vnetid' => ['type' => 'string'],
+                    'subnetname' => ['type' => 'string'],
+                    'subnetResourceId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApiManagementServiceSkuProperties' => [
+                'properties' => [
+                    'name' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Developer',
+                            'Standard',
+                            'Premium'
+                        ]
+                    ],
+                    'capacity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'externalId' => ['type' => 'string']
-            ]],
-            'GroupCreateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/GroupCreateParametersProperties']]],
-            'GroupUpdateParametersProperties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'custom',
-                        'system',
-                        'external'
+                'required' => ['name']
+            ],
+            'AdditionalLocation' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'sku' => ['$ref' => '#/definitions/ApiManagementServiceSkuProperties'],
+                    'staticIps' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'virtualNetworkConfiguration' => ['$ref' => '#/definitions/VirtualNetworkConfiguration']
+                ],
+                'required' => [
+                    'location',
+                    'sku'
+                ]
+            ],
+            'ApiManagementServiceBackupRestoreParameters' => [
+                'properties' => [
+                    'storageAccount' => ['type' => 'string'],
+                    'accessKey' => ['type' => 'string'],
+                    'containerName' => ['type' => 'string'],
+                    'backupName' => ['type' => 'string']
+                ],
+                'required' => [
+                    'storageAccount',
+                    'accessKey',
+                    'containerName',
+                    'backupName'
+                ]
+            ],
+            'ApiManagementServiceProperties' => [
+                'properties' => [
+                    'publisherEmail' => ['type' => 'string'],
+                    'publisherName' => ['type' => 'string']
+                ],
+                'required' => [
+                    'publisherEmail',
+                    'publisherName'
+                ]
+            ],
+            'ApiManagementServiceUpdateProperties' => [
+                'properties' => [
+                    'publisherEmail' => ['type' => 'string'],
+                    'publisherName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApiManagementServiceBaseProperties' => [
+                'properties' => [
+                    'notificationSenderEmail' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string'],
+                    'targetProvisioningState' => ['type' => 'string'],
+                    'createdAtUtc' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'gatewayUrl' => ['type' => 'string'],
+                    'portalUrl' => ['type' => 'string'],
+                    'managementApiUrl' => ['type' => 'string'],
+                    'scmUrl' => ['type' => 'string'],
+                    'hostnameConfigurations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HostnameConfiguration']
+                    ],
+                    'staticIps' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'virtualNetworkConfiguration' => ['$ref' => '#/definitions/VirtualNetworkConfiguration'],
+                    'additionalLocations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AdditionalLocation']
+                    ],
+                    'customProperties' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'virtualNetworkType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'External',
+                            'Internal'
+                        ]
                     ]
                 ],
-                'externalId' => ['type' => 'string']
-            ]],
-            'GroupUpdateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/GroupUpdateParametersProperties']]],
-            'UserIdentityContract' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'id' => ['type' => 'string']
-            ]],
-            'UserUpdateParametersProperties' => ['properties' => [
-                'email' => ['type' => 'string'],
-                'password' => ['type' => 'string'],
-                'firstName' => ['type' => 'string'],
-                'lastName' => ['type' => 'string']
-            ]],
-            'UserCreateParameterProperties' => ['properties' => [
-                'email' => ['type' => 'string'],
-                'firstName' => ['type' => 'string'],
-                'lastName' => ['type' => 'string'],
-                'password' => ['type' => 'string']
-            ]],
-            'UserContractProperties' => ['properties' => [
-                'firstName' => ['type' => 'string'],
-                'lastName' => ['type' => 'string'],
-                'email' => ['type' => 'string'],
-                'registrationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'ApiManagementServiceResource' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApiManagementServiceProperties'],
+                    'sku' => ['$ref' => '#/definitions/ApiManagementServiceSkuProperties'],
+                    'location' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
                 ],
-                'groups' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/GroupContract']
+                'required' => [
+                    'properties',
+                    'sku',
+                    'location'
                 ]
-            ]],
-            'UserEntityBaseParameters' => ['properties' => [
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'active',
-                        'blocked'
+            ],
+            'ApimResource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'note' => ['type' => 'string'],
-                'identities' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/UserIdentityContract']
-                ]
-            ]],
-            'UserContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/UserContractProperties']]],
-            'UserCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/UserContract']
+                'required' => []
+            ],
+            'ApiManagementServiceUpdateParameters' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApiManagementServiceUpdateProperties'],
+                    'sku' => ['$ref' => '#/definitions/ApiManagementServiceSkuProperties'],
+                    'etag' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'IdentityProviderContractProperties' => ['properties' => [
-                'clientId' => ['type' => 'string'],
-                'clientSecret' => ['type' => 'string']
-            ]],
-            'IdentityProviderContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/IdentityProviderContractProperties']]],
-            'IdentityProviderList' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/IdentityProviderContract']
+                'required' => []
+            ],
+            'ApiManagementServiceListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApiManagementServiceResource']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'IdentityProviderUpdateProperties' => ['properties' => [
-                'clientId' => ['type' => 'string'],
-                'clientSecret' => ['type' => 'string']
-            ]],
-            'IdentityProviderUpdateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/IdentityProviderUpdateProperties']]],
-            'IdentityProviderBaseParameters' => ['properties' => [
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'facebook',
-                        'google',
-                        'microsoft',
-                        'twitter',
-                        'aad',
-                        'aadB2C'
+                'required' => ['value']
+            ],
+            'ApiManagementServiceGetSsoTokenResult' => [
+                'properties' => ['redirectUri' => ['type' => 'string']],
+                'required' => []
+            ],
+            'ApiManagementServiceCheckNameAvailabilityParameters' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => ['name']
+            ],
+            'ApiManagementServiceNameAvailabilityResult' => [
+                'properties' => [
+                    'nameAvailable' => ['type' => 'boolean'],
+                    'message' => ['type' => 'string'],
+                    'reason' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Valid',
+                            'Invalid',
+                            'AlreadyExists'
+                        ]
                     ]
                 ],
-                'allowedTenants' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'ApiManagementServiceApplyNetworkConfigurationParameters' => [
+                'properties' => ['location' => ['type' => 'string']],
+                'required' => []
+            ],
+            'Operation_display' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'operation' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
                 ],
-                'signupPolicyName' => ['type' => 'string'],
-                'signinPolicyName' => ['type' => 'string'],
-                'profileEditingPolicyName' => ['type' => 'string'],
-                'passwordResetPolicyName' => ['type' => 'string']
-            ]],
-            'LoggerContractProperties' => ['properties' => [
-                'loggerType' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'credentials' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
-                'isBuffered' => ['type' => 'boolean']
-            ]],
-            'LoggerContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/LoggerContractProperties']]],
-            'LoggerCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/LoggerContract']
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Operation']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'EmailTemplateParametersContractProperties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'title' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'LoggerUpdateParameters' => ['properties' => [
-                'loggerType' => [
-                    'type' => 'string',
-                    'enum' => ['azureEventHub']
-                ],
-                'description' => ['type' => 'string'],
-                'credentials' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'isBuffered' => ['type' => 'boolean']
-            ]],
-            'LoggerUpdateContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/LoggerUpdateParameters']]],
-            'ConnectivityStatusContract' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'initializing',
-                        'success',
-                        'failure'
+                'required' => []
+            ],
+            'EmailTemplateContractProperties' => [
+                'properties' => [
+                    'subject' => ['type' => 'string'],
+                    'body' => ['type' => 'string'],
+                    'title' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'isDefault' => ['type' => 'boolean'],
+                    'parameters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/EmailTemplateParametersContractProperties']
                     ]
                 ],
-                'error' => ['type' => 'string'],
-                'lastUpdated' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastStatusChange' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => [
+                    'subject',
+                    'body'
                 ]
-            ]],
-            'NetworkStatusContract' => ['properties' => [
-                'dnsServers' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+            ],
+            'EmailTemplateContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/EmailTemplateContractProperties']],
+                'required' => []
+            ],
+            'EmailTemplateCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/EmailTemplateContract']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'connectivityStatus' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ConnectivityStatusContract']
-                ]
-            ]],
-            'OpenidConnectProviderContractProperties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'metadataEndpoint' => ['type' => 'string'],
-                'clientId' => ['type' => 'string'],
-                'clientSecret' => ['type' => 'string']
-            ]],
-            'OpenidConnectProviderContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/OpenidConnectProviderContractProperties']]],
-            'OpenIdConnectProviderCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/OpenidConnectProviderContract']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'OpenidConnectProviderUpdateContractProperties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'metadataEndpoint' => ['type' => 'string'],
-                'clientId' => ['type' => 'string'],
-                'clientSecret' => ['type' => 'string']
-            ]],
-            'OpenidConnectProviderUpdateContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/OpenidConnectProviderUpdateContractProperties']]],
-            'ProductUpdateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/ProductUpdateProperties']]],
-            'SubscriptionContractProperties' => ['properties' => [
-                'userId' => ['type' => 'string'],
-                'productId' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'suspended',
-                        'active',
-                        'expired',
-                        'submitted',
-                        'rejected',
-                        'cancelled'
+                'required' => []
+            ],
+            'EmailTemplateUpdateParameterProperties' => [
+                'properties' => [
+                    'subject' => ['type' => 'string'],
+                    'title' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'body' => ['type' => 'string'],
+                    'parameters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/EmailTemplateParametersContractProperties']
                     ]
                 ],
-                'createdDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'EmailTemplateUpdateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/EmailTemplateUpdateParameterProperties']],
+                'required' => []
+            ],
+            'GroupContractProperties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'builtIn' => ['type' => 'boolean'],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'custom',
+                            'system',
+                            'external'
+                        ]
+                    ],
+                    'externalId' => ['type' => 'string']
                 ],
-                'startDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => ['displayName']
+            ],
+            'GroupContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/GroupContractProperties']],
+                'required' => []
+            ],
+            'GroupCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/GroupContract']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'expirationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'GroupCreateParametersProperties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'custom',
+                            'system',
+                            'external'
+                        ]
+                    ],
+                    'externalId' => ['type' => 'string']
                 ],
-                'endDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => ['displayName']
+            ],
+            'GroupCreateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/GroupCreateParametersProperties']],
+                'required' => []
+            ],
+            'GroupUpdateParametersProperties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'custom',
+                            'system',
+                            'external'
+                        ]
+                    ],
+                    'externalId' => ['type' => 'string']
                 ],
-                'notificationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'GroupUpdateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/GroupUpdateParametersProperties']],
+                'required' => []
+            ],
+            'UserIdentityContract' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'id' => ['type' => 'string']
                 ],
-                'primaryKey' => ['type' => 'string'],
-                'secondaryKey' => ['type' => 'string'],
-                'stateComment' => ['type' => 'string']
-            ]],
-            'SubscriptionContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/SubscriptionContractProperties']]],
-            'SubscriptionCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubscriptionContract']
+                'required' => []
+            ],
+            'UserUpdateParametersProperties' => [
+                'properties' => [
+                    'email' => ['type' => 'string'],
+                    'password' => ['type' => 'string'],
+                    'firstName' => ['type' => 'string'],
+                    'lastName' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'PropertyContractProperties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'PropertyContract' => ['properties' => ['properties' => ['$ref' => '#/definitions/PropertyContractProperties']]],
-            'PropertyCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PropertyContract']
+                'required' => []
+            ],
+            'UserCreateParameterProperties' => [
+                'properties' => [
+                    'email' => ['type' => 'string'],
+                    'firstName' => ['type' => 'string'],
+                    'lastName' => ['type' => 'string'],
+                    'password' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'PropertyUpdateParameterProperties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'PropertyUpdateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/PropertyUpdateParameterProperties']]],
-            'PropertyEntityBaseParameters' => ['properties' => [
-                'tags' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'secret' => ['type' => 'boolean']
-            ]],
-            'QuotaCounterValueContractProperties' => ['properties' => [
-                'callsCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'kbTransferred' => [
-                    'type' => 'number',
-                    'format' => 'double'
+                'required' => [
+                    'email',
+                    'firstName',
+                    'lastName'
                 ]
-            ]],
-            'QuotaCounterContract' => ['properties' => [
-                'counterKey' => ['type' => 'string'],
-                'periodKey' => ['type' => 'string'],
-                'periodStartTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'periodEndTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'Value' => ['$ref' => '#/definitions/QuotaCounterValueContractProperties']
-            ]],
-            'QuotaCounterCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/QuotaCounterContract']
-                ],
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'QuotaCounterValueContract' => ['properties' => ['value' => ['$ref' => '#/definitions/QuotaCounterValueContractProperties']]],
-            'ReportRecordContract' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'timestamp' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'interval' => ['type' => 'string'],
-                'country' => ['type' => 'string'],
-                'region' => ['type' => 'string'],
-                'zip' => ['type' => 'string'],
-                'userId' => ['type' => 'string'],
-                'productId' => ['type' => 'string'],
-                'apiId' => ['type' => 'string'],
-                'operationId' => ['type' => 'string'],
-                'apiRegion' => ['type' => 'string'],
-                'subscriptionId' => ['type' => 'string'],
-                'callCountSuccess' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'callCountBlocked' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'callCountFailed' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'callCountOther' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'callCountTotal' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'bandwidth' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'cacheHitCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'cacheMissCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'apiTimeAvg' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'apiTimeMin' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'apiTimeMax' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'serviceTimeAvg' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'serviceTimeMin' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'serviceTimeMax' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ]
-            ]],
-            'ReportCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ReportRecordContract']
-                ],
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RequestReportRecordContract' => ['properties' => [
-                'apiId' => ['type' => 'string'],
-                'operationId' => ['type' => 'string'],
-                'productId' => ['type' => 'string'],
-                'userId' => ['type' => 'string'],
-                'method' => ['type' => 'string'],
-                'url' => ['type' => 'string'],
-                'ipAddress' => ['type' => 'string'],
-                'backendResponseCode' => ['type' => 'string'],
-                'responseCode' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'responseSize' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'timestamp' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'cache' => ['type' => 'string'],
-                'apiTime' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'serviceTime' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'apiRegion' => ['type' => 'string'],
-                'subscriptionId' => ['type' => 'string'],
-                'requestId' => ['type' => 'string'],
-                'requestSize' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'RequestReportCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RequestReportRecordContract']
-                ],
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ]
-            ]],
-            'SubscriptionCreateParameterProperties' => ['properties' => [
-                'userId' => ['type' => 'string'],
-                'productId' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'primaryKey' => ['type' => 'string'],
-                'secondaryKey' => ['type' => 'string'],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'suspended',
-                        'active',
-                        'expired',
-                        'submitted',
-                        'rejected',
-                        'cancelled'
-                    ]
-                ]
-            ]],
-            'SubscriptionCreateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/SubscriptionCreateParameterProperties']]],
-            'SubscriptionUpdateParameterProperties' => ['properties' => [
-                'userId' => ['type' => 'string'],
-                'productId' => ['type' => 'string'],
-                'expirationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'displayName' => ['type' => 'string'],
-                'primaryKey' => ['type' => 'string'],
-                'secondaryKey' => ['type' => 'string'],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'suspended',
-                        'active',
-                        'expired',
-                        'submitted',
-                        'rejected',
-                        'cancelled'
+            ],
+            'UserContractProperties' => [
+                'properties' => [
+                    'firstName' => ['type' => 'string'],
+                    'lastName' => ['type' => 'string'],
+                    'email' => ['type' => 'string'],
+                    'registrationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'groups' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/GroupContract']
                     ]
                 ],
-                'stateComment' => ['type' => 'string']
-            ]],
-            'SubscriptionUpdateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/SubscriptionUpdateParameterProperties']]],
-            'AccessInformationContract' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'primaryKey' => ['type' => 'string'],
-                'secondaryKey' => ['type' => 'string'],
-                'enabled' => ['type' => 'boolean']
-            ]],
-            'AccessInformationUpdateParameters' => ['properties' => ['enabled' => ['type' => 'boolean']]],
-            'DeployConfigurationParameters' => ['properties' => [
-                'branch' => ['type' => 'string'],
-                'force' => ['type' => 'boolean']
-            ]],
-            'OperationResultContract' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Started',
-                        'InProgress',
-                        'Succeeded',
-                        'Failed'
+                'required' => []
+            ],
+            'UserEntityBaseParameters' => [
+                'properties' => [
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'active',
+                            'blocked'
+                        ]
+                    ],
+                    'note' => ['type' => 'string'],
+                    'identities' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/UserIdentityContract']
                     ]
                 ],
-                'started' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'UserContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UserContractProperties']],
+                'required' => []
+            ],
+            'UserCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/UserContract']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'updated' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'IdentityProviderContractProperties' => [
+                'properties' => [
+                    'clientId' => ['type' => 'string'],
+                    'clientSecret' => ['type' => 'string']
                 ],
-                'resultInfo' => ['type' => 'string'],
-                'error' => ['$ref' => '#/definitions/ErrorResponse']
-            ]],
-            'SaveConfigurationParameter' => ['properties' => [
-                'branch' => ['type' => 'string'],
-                'force' => ['type' => 'boolean']
-            ]],
-            'TenantConfigurationSyncStateContract' => ['properties' => [
-                'branch' => ['type' => 'string'],
-                'commitId' => ['type' => 'string'],
-                'isExport' => ['type' => 'boolean'],
-                'isSynced' => ['type' => 'boolean'],
-                'isGitEnabled' => ['type' => 'boolean'],
-                'syncDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'configurationChangeDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => [
+                    'clientId',
+                    'clientSecret'
                 ]
-            ]],
-            'GenerateSsoUrlResult' => ['properties' => ['value' => ['type' => 'string']]],
-            'UserCreateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/UserCreateParameterProperties']]],
-            'UserIdentityCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/UserIdentityContract']
+            ],
+            'IdentityProviderContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/IdentityProviderContractProperties']],
+                'required' => []
+            ],
+            'IdentityProviderList' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/IdentityProviderContract']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'IdentityProviderUpdateProperties' => [
+                'properties' => [
+                    'clientId' => ['type' => 'string'],
+                    'clientSecret' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'UserTokenParameters' => ['properties' => [
-                'keyType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'primary',
-                        'secondary'
+                'required' => []
+            ],
+            'IdentityProviderUpdateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/IdentityProviderUpdateProperties']],
+                'required' => []
+            ],
+            'IdentityProviderBaseParameters' => [
+                'properties' => [
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'facebook',
+                            'google',
+                            'microsoft',
+                            'twitter',
+                            'aad',
+                            'aadB2C'
+                        ]
+                    ],
+                    'allowedTenants' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'signupPolicyName' => ['type' => 'string'],
+                    'signinPolicyName' => ['type' => 'string'],
+                    'profileEditingPolicyName' => ['type' => 'string'],
+                    'passwordResetPolicyName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LoggerContractProperties' => [
+                'properties' => [
+                    'loggerType' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'credentials' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'isBuffered' => ['type' => 'boolean']
+                ],
+                'required' => [
+                    'loggerType',
+                    'credentials'
+                ]
+            ],
+            'LoggerContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/LoggerContractProperties']],
+                'required' => []
+            ],
+            'LoggerCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/LoggerContract']
+                    ],
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LoggerUpdateParameters' => [
+                'properties' => [
+                    'loggerType' => [
+                        'type' => 'string',
+                        'enum' => ['azureEventHub']
+                    ],
+                    'description' => ['type' => 'string'],
+                    'credentials' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'isBuffered' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'LoggerUpdateContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/LoggerUpdateParameters']],
+                'required' => []
+            ],
+            'ConnectivityStatusContract' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'initializing',
+                            'success',
+                            'failure'
+                        ]
+                    ],
+                    'error' => ['type' => 'string'],
+                    'lastUpdated' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastStatusChange' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'expiry' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => [
+                    'name',
+                    'status',
+                    'lastUpdated',
+                    'lastStatusChange'
                 ]
-            ]],
-            'UserTokenResult' => ['properties' => ['value' => ['type' => 'string']]],
-            'UserUpdateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/UserUpdateParametersProperties']]]
+            ],
+            'NetworkStatusContract' => [
+                'properties' => [
+                    'dnsServers' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'connectivityStatus' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ConnectivityStatusContract']
+                    ]
+                ],
+                'required' => [
+                    'dnsServers',
+                    'connectivityStatus'
+                ]
+            ],
+            'OpenidConnectProviderContractProperties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'metadataEndpoint' => ['type' => 'string'],
+                    'clientId' => ['type' => 'string'],
+                    'clientSecret' => ['type' => 'string']
+                ],
+                'required' => [
+                    'displayName',
+                    'metadataEndpoint',
+                    'clientId'
+                ]
+            ],
+            'OpenidConnectProviderContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/OpenidConnectProviderContractProperties']],
+                'required' => []
+            ],
+            'OpenIdConnectProviderCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/OpenidConnectProviderContract']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'OpenidConnectProviderUpdateContractProperties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'metadataEndpoint' => ['type' => 'string'],
+                    'clientId' => ['type' => 'string'],
+                    'clientSecret' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'OpenidConnectProviderUpdateContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/OpenidConnectProviderUpdateContractProperties']],
+                'required' => []
+            ],
+            'ProductUpdateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ProductUpdateProperties']],
+                'required' => []
+            ],
+            'SubscriptionContractProperties' => [
+                'properties' => [
+                    'userId' => ['type' => 'string'],
+                    'productId' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'suspended',
+                            'active',
+                            'expired',
+                            'submitted',
+                            'rejected',
+                            'cancelled'
+                        ]
+                    ],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'startDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'expirationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'notificationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'primaryKey' => ['type' => 'string'],
+                    'secondaryKey' => ['type' => 'string'],
+                    'stateComment' => ['type' => 'string']
+                ],
+                'required' => [
+                    'userId',
+                    'productId',
+                    'state',
+                    'primaryKey',
+                    'secondaryKey'
+                ]
+            ],
+            'SubscriptionContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SubscriptionContractProperties']],
+                'required' => []
+            ],
+            'SubscriptionCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubscriptionContract']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PropertyContractProperties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => [
+                    'displayName',
+                    'value'
+                ]
+            ],
+            'PropertyContract' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PropertyContractProperties']],
+                'required' => []
+            ],
+            'PropertyCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PropertyContract']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PropertyUpdateParameterProperties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PropertyUpdateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PropertyUpdateParameterProperties']],
+                'required' => []
+            ],
+            'PropertyEntityBaseParameters' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'secret' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'QuotaCounterValueContractProperties' => [
+                'properties' => [
+                    'callsCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'kbTransferred' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ]
+                ],
+                'required' => []
+            ],
+            'QuotaCounterContract' => [
+                'properties' => [
+                    'counterKey' => ['type' => 'string'],
+                    'periodKey' => ['type' => 'string'],
+                    'periodStartTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'periodEndTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'Value' => ['$ref' => '#/definitions/QuotaCounterValueContractProperties']
+                ],
+                'required' => [
+                    'counterKey',
+                    'periodKey',
+                    'periodStartTime',
+                    'periodEndTime'
+                ]
+            ],
+            'QuotaCounterCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/QuotaCounterContract']
+                    ],
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'QuotaCounterValueContract' => [
+                'properties' => ['value' => ['$ref' => '#/definitions/QuotaCounterValueContractProperties']],
+                'required' => []
+            ],
+            'ReportRecordContract' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'timestamp' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'interval' => ['type' => 'string'],
+                    'country' => ['type' => 'string'],
+                    'region' => ['type' => 'string'],
+                    'zip' => ['type' => 'string'],
+                    'userId' => ['type' => 'string'],
+                    'productId' => ['type' => 'string'],
+                    'apiId' => ['type' => 'string'],
+                    'operationId' => ['type' => 'string'],
+                    'apiRegion' => ['type' => 'string'],
+                    'subscriptionId' => ['type' => 'string'],
+                    'callCountSuccess' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'callCountBlocked' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'callCountFailed' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'callCountOther' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'callCountTotal' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'bandwidth' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'cacheHitCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'cacheMissCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'apiTimeAvg' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'apiTimeMin' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'apiTimeMax' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'serviceTimeAvg' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'serviceTimeMin' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'serviceTimeMax' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ReportCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ReportRecordContract']
+                    ],
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RequestReportRecordContract' => [
+                'properties' => [
+                    'apiId' => ['type' => 'string'],
+                    'operationId' => ['type' => 'string'],
+                    'productId' => ['type' => 'string'],
+                    'userId' => ['type' => 'string'],
+                    'method' => ['type' => 'string'],
+                    'url' => ['type' => 'string'],
+                    'ipAddress' => ['type' => 'string'],
+                    'backendResponseCode' => ['type' => 'string'],
+                    'responseCode' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'responseSize' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'timestamp' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'cache' => ['type' => 'string'],
+                    'apiTime' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'serviceTime' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'apiRegion' => ['type' => 'string'],
+                    'subscriptionId' => ['type' => 'string'],
+                    'requestId' => ['type' => 'string'],
+                    'requestSize' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'RequestReportCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RequestReportRecordContract']
+                    ],
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ]
+                ],
+                'required' => []
+            ],
+            'SubscriptionCreateParameterProperties' => [
+                'properties' => [
+                    'userId' => ['type' => 'string'],
+                    'productId' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'primaryKey' => ['type' => 'string'],
+                    'secondaryKey' => ['type' => 'string'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'suspended',
+                            'active',
+                            'expired',
+                            'submitted',
+                            'rejected',
+                            'cancelled'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'userId',
+                    'productId',
+                    'displayName'
+                ]
+            ],
+            'SubscriptionCreateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SubscriptionCreateParameterProperties']],
+                'required' => []
+            ],
+            'SubscriptionUpdateParameterProperties' => [
+                'properties' => [
+                    'userId' => ['type' => 'string'],
+                    'productId' => ['type' => 'string'],
+                    'expirationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'displayName' => ['type' => 'string'],
+                    'primaryKey' => ['type' => 'string'],
+                    'secondaryKey' => ['type' => 'string'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'suspended',
+                            'active',
+                            'expired',
+                            'submitted',
+                            'rejected',
+                            'cancelled'
+                        ]
+                    ],
+                    'stateComment' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SubscriptionUpdateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SubscriptionUpdateParameterProperties']],
+                'required' => []
+            ],
+            'AccessInformationContract' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'primaryKey' => ['type' => 'string'],
+                    'secondaryKey' => ['type' => 'string'],
+                    'enabled' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'AccessInformationUpdateParameters' => [
+                'properties' => ['enabled' => ['type' => 'boolean']],
+                'required' => []
+            ],
+            'DeployConfigurationParameters' => [
+                'properties' => [
+                    'branch' => ['type' => 'string'],
+                    'force' => ['type' => 'boolean']
+                ],
+                'required' => ['branch']
+            ],
+            'OperationResultContract' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Started',
+                            'InProgress',
+                            'Succeeded',
+                            'Failed'
+                        ]
+                    ],
+                    'started' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'updated' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'resultInfo' => ['type' => 'string'],
+                    'error' => ['$ref' => '#/definitions/ErrorResponse']
+                ],
+                'required' => []
+            ],
+            'SaveConfigurationParameter' => [
+                'properties' => [
+                    'branch' => ['type' => 'string'],
+                    'force' => ['type' => 'boolean']
+                ],
+                'required' => ['branch']
+            ],
+            'TenantConfigurationSyncStateContract' => [
+                'properties' => [
+                    'branch' => ['type' => 'string'],
+                    'commitId' => ['type' => 'string'],
+                    'isExport' => ['type' => 'boolean'],
+                    'isSynced' => ['type' => 'boolean'],
+                    'isGitEnabled' => ['type' => 'boolean'],
+                    'syncDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'configurationChangeDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'GenerateSsoUrlResult' => [
+                'properties' => ['value' => ['type' => 'string']],
+                'required' => []
+            ],
+            'UserCreateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UserCreateParameterProperties']],
+                'required' => []
+            ],
+            'UserIdentityCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/UserIdentityContract']
+                    ],
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'UserTokenParameters' => [
+                'properties' => [
+                    'keyType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'primary',
+                            'secondary'
+                        ]
+                    ],
+                    'expiry' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => [
+                    'keyType',
+                    'expiry'
+                ]
+            ],
+            'UserTokenResult' => [
+                'properties' => ['value' => ['type' => 'string']],
+                'required' => []
+            ],
+            'UserUpdateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UserUpdateParametersProperties']],
+                'required' => []
+            ]
         ]
     ];
 }

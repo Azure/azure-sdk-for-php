@@ -4752,2363 +4752,3254 @@ final class SiteRecoveryManagementClient
             ]]
         ],
         'definitions' => [
-            'AlertProperties' => ['properties' => [
-                'sendToOwners' => ['type' => 'string'],
-                'customEmailAddresses' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+            'AlertProperties' => [
+                'properties' => [
+                    'sendToOwners' => ['type' => 'string'],
+                    'customEmailAddresses' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'locale' => ['type' => 'string']
                 ],
-                'locale' => ['type' => 'string']
-            ]],
-            'Alert' => ['properties' => ['properties' => ['$ref' => '#/definitions/AlertProperties']]],
-            'AlertCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Alert']
+                'required' => []
+            ],
+            'Alert' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AlertProperties']],
+                'required' => []
+            ],
+            'AlertCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Alert']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ConfigureAlertRequestProperties' => ['properties' => [
-                'sendToOwners' => ['type' => 'string'],
-                'customEmailAddresses' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'ConfigureAlertRequestProperties' => [
+                'properties' => [
+                    'sendToOwners' => ['type' => 'string'],
+                    'customEmailAddresses' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'locale' => ['type' => 'string']
                 ],
-                'locale' => ['type' => 'string']
-            ]],
-            'ConfigureAlertRequest' => ['properties' => ['properties' => ['$ref' => '#/definitions/ConfigureAlertRequestProperties']]],
-            'EventProviderSpecificDetails' => ['properties' => []],
-            'EventSpecificDetails' => ['properties' => []],
-            'HealthError' => ['properties' => [
-                'errorLevel' => ['type' => 'string'],
-                'errorCode' => ['type' => 'string'],
-                'errorMessage' => ['type' => 'string'],
-                'possibleCauses' => ['type' => 'string'],
-                'recommendedAction' => ['type' => 'string'],
-                'creationTimeUtc' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'recoveryProviderErrorMessage' => ['type' => 'string'],
-                'entityId' => ['type' => 'string']
-            ]],
-            'EventProperties' => ['properties' => [
-                'eventCode' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'eventType' => ['type' => 'string'],
-                'affectedObjectFriendlyName' => ['type' => 'string'],
-                'severity' => ['type' => 'string'],
-                'timeOfOccurrence' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'fabricId' => ['type' => 'string'],
-                'providerSpecificDetails' => ['$ref' => '#/definitions/EventProviderSpecificDetails'],
-                'eventSpecificDetails' => ['$ref' => '#/definitions/EventSpecificDetails'],
-                'healthErrors' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HealthError']
-                ]
-            ]],
-            'Event' => ['properties' => ['properties' => ['$ref' => '#/definitions/EventProperties']]],
-            'EventCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Event']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'EncryptionDetails' => ['properties' => [
-                'kekState' => ['type' => 'string'],
-                'kekCertThumbprint' => ['type' => 'string'],
-                'kekCertExpiryDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'FabricSpecificDetails' => ['properties' => []],
-            'FabricProperties' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'encryptionDetails' => ['$ref' => '#/definitions/EncryptionDetails'],
-                'rolloverEncryptionDetails' => ['$ref' => '#/definitions/EncryptionDetails'],
-                'internalIdentifier' => ['type' => 'string'],
-                'bcdrState' => ['type' => 'string'],
-                'customDetails' => ['$ref' => '#/definitions/FabricSpecificDetails'],
-                'healthErrorDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HealthError']
-                ],
-                'health' => ['type' => 'string']
-            ]],
-            'Fabric' => ['properties' => ['properties' => ['$ref' => '#/definitions/FabricProperties']]],
-            'FabricCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Fabric']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'FabricSpecificCreationInput' => ['properties' => []],
-            'FabricCreationInputProperties' => ['properties' => ['customDetails' => ['$ref' => '#/definitions/FabricSpecificCreationInput']]],
-            'FabricCreationInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/FabricCreationInputProperties']]],
-            'FailoverProcessServerRequestProperties' => ['properties' => [
-                'containerName' => ['type' => 'string'],
-                'sourceProcessServerId' => ['type' => 'string'],
-                'targetProcessServerId' => ['type' => 'string'],
-                'vmsToMigrate' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'updateType' => ['type' => 'string']
-            ]],
-            'FailoverProcessServerRequest' => ['properties' => ['properties' => ['$ref' => '#/definitions/FailoverProcessServerRequestProperties']]],
-            'TaskTypeDetails' => ['properties' => []],
-            'GroupTaskDetails' => ['properties' => ['childTasks' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ASRTask']
-            ]]],
-            'ServiceError' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'possibleCauses' => ['type' => 'string'],
-                'recommendedAction' => ['type' => 'string'],
-                'activityId' => ['type' => 'string']
-            ]],
-            'ProviderError' => ['properties' => [
-                'errorCode' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'errorMessage' => ['type' => 'string'],
-                'errorId' => ['type' => 'string'],
-                'possibleCauses' => ['type' => 'string'],
-                'recommendedAction' => ['type' => 'string']
-            ]],
-            'JobErrorDetails' => ['properties' => [
-                'serviceErrorDetails' => ['$ref' => '#/definitions/ServiceError'],
-                'providerErrorDetails' => ['$ref' => '#/definitions/ProviderError'],
-                'errorLevel' => ['type' => 'string'],
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'taskId' => ['type' => 'string']
-            ]],
-            'ASRTask' => ['properties' => [
-                'taskId' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'allowedActions' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'friendlyName' => ['type' => 'string'],
-                'state' => ['type' => 'string'],
-                'stateDescription' => ['type' => 'string'],
-                'taskType' => ['type' => 'string'],
-                'customDetails' => ['$ref' => '#/definitions/TaskTypeDetails'],
-                'groupTaskCustomDetails' => ['$ref' => '#/definitions/GroupTaskDetails'],
-                'errors' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/JobErrorDetails']
-                ]
-            ]],
-            'JobDetails' => ['properties' => ['affectedObjectDetails' => [
-                'type' => 'object',
-                'additionalProperties' => ['type' => 'string']
-            ]]],
-            'JobProperties' => ['properties' => [
-                'activityId' => ['type' => 'string'],
-                'scenarioName' => ['type' => 'string'],
-                'friendlyName' => ['type' => 'string'],
-                'state' => ['type' => 'string'],
-                'stateDescription' => ['type' => 'string'],
-                'tasks' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ASRTask']
-                ],
-                'errors' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/JobErrorDetails']
-                ],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'allowedActions' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'targetObjectId' => ['type' => 'string'],
-                'targetObjectName' => ['type' => 'string'],
-                'targetInstanceType' => ['type' => 'string'],
-                'customDetails' => ['$ref' => '#/definitions/JobDetails']
-            ]],
-            'ARMExceptionDetails' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'possibleCauses' => ['type' => 'string'],
-                'recommendedAction' => ['type' => 'string'],
-                'clientRequestId' => ['type' => 'string'],
-                'activityId' => ['type' => 'string'],
-                'target' => ['type' => 'string']
-            ]],
-            'MethodCallStatus' => ['properties' => [
-                'isVirtual' => ['type' => 'string'],
-                'parameters' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'containsGenericParameters' => ['type' => 'string']
-            ]],
-            'ARMInnerError' => ['properties' => [
-                'trace' => ['type' => 'string'],
-                'source' => ['type' => 'string'],
-                'methodStatus' => ['$ref' => '#/definitions/MethodCallStatus'],
-                'cloudId' => ['type' => 'string'],
-                'hVHostId' => ['type' => 'string'],
-                'hVClusterId' => ['type' => 'string'],
-                'networkId' => ['type' => 'string'],
-                'vmId' => ['type' => 'string'],
-                'fabricId' => ['type' => 'string'],
-                'liveId' => ['type' => 'string'],
-                'containerId' => ['type' => 'string'],
-                'resourceId' => ['type' => 'string'],
-                'resourceName' => ['type' => 'string'],
-                'subscriptionId' => ['type' => 'string'],
-                'serializedSRSLogContext' => ['type' => 'string']
-            ]],
-            'ARMException' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'target' => ['type' => 'string'],
-                'details' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ARMExceptionDetails']
-                ],
-                'innererror' => ['$ref' => '#/definitions/ARMInnerError']
-            ]],
-            'Job' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/JobProperties'],
-                'status' => ['type' => 'string'],
-                'error' => ['$ref' => '#/definitions/ARMException'],
-                'startTime' => ['type' => 'string'],
-                'endTime' => ['type' => 'string']
-            ]],
-            'JobCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Job']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'JobQueryParameter' => ['properties' => [
-                'startTime' => ['type' => 'string'],
-                'endTime' => ['type' => 'string'],
-                'fabricId' => ['type' => 'string'],
-                'affectedObjectTypes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'jobStatus' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'ResumeJobParamsProperties' => ['properties' => ['comments' => ['type' => 'string']]],
-            'ResumeJobParams' => ['properties' => ['properties' => ['$ref' => '#/definitions/ResumeJobParamsProperties']]],
-            'LogicalNetworkProperties' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'networkVirtualizationStatus' => ['type' => 'string'],
-                'logicalNetworkUsage' => ['type' => 'string'],
-                'logicalNetworkDefinitionsStatus' => ['type' => 'string']
-            ]],
-            'LogicalNetwork' => ['properties' => ['properties' => ['$ref' => '#/definitions/LogicalNetworkProperties']]],
-            'LogicalNetworkCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/LogicalNetwork']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'NetworkMappingFabricSpecificSettings' => ['properties' => []],
-            'NetworkMappingProperties' => ['properties' => [
-                'state' => ['type' => 'string'],
-                'primaryNetworkFriendlyName' => ['type' => 'string'],
-                'primaryNetworkId' => ['type' => 'string'],
-                'primaryFabricFriendlyName' => ['type' => 'string'],
-                'recoveryNetworkFriendlyName' => ['type' => 'string'],
-                'recoveryNetworkId' => ['type' => 'string'],
-                'recoveryFabricArmId' => ['type' => 'string'],
-                'recoveryFabricFriendlyName' => ['type' => 'string'],
-                'fabricSpecificSettings' => ['$ref' => '#/definitions/NetworkMappingFabricSpecificSettings']
-            ]],
-            'NetworkMapping' => ['properties' => ['properties' => ['$ref' => '#/definitions/NetworkMappingProperties']]],
-            'FabricSpecificCreateNetworkMappingInput' => ['properties' => []],
-            'CreateNetworkMappingInputProperties' => ['properties' => [
-                'recoveryFabricName' => ['type' => 'string'],
-                'recoveryNetworkId' => ['type' => 'string'],
-                'fabricSpecificDetails' => ['$ref' => '#/definitions/FabricSpecificCreateNetworkMappingInput']
-            ]],
-            'CreateNetworkMappingInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/CreateNetworkMappingInputProperties']]],
-            'FabricSpecificUpdateNetworkMappingInput' => ['properties' => []],
-            'UpdateNetworkMappingInputProperties' => ['properties' => [
-                'recoveryFabricName' => ['type' => 'string'],
-                'recoveryNetworkId' => ['type' => 'string'],
-                'fabricSpecificDetails' => ['$ref' => '#/definitions/FabricSpecificUpdateNetworkMappingInput']
-            ]],
-            'UpdateNetworkMappingInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/UpdateNetworkMappingInputProperties']]],
-            'Subnet' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'friendlyName' => ['type' => 'string'],
-                'addressList' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'NetworkProperties' => ['properties' => [
-                'fabricType' => ['type' => 'string'],
-                'subnets' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Subnet']
-                ],
-                'friendlyName' => ['type' => 'string'],
-                'networkType' => ['type' => 'string']
-            ]],
-            'Network' => ['properties' => ['properties' => ['$ref' => '#/definitions/NetworkProperties']]],
-            'NetworkCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Network']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Display' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'OperationsDiscovery' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/Display'],
-                'origin' => ['type' => 'string'],
-                'properties' => ['type' => 'object']
-            ]],
-            'OperationsDiscoveryCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/OperationsDiscovery']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'PolicyProviderSpecificDetails' => ['properties' => []],
-            'PolicyProperties' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'providerSpecificDetails' => ['$ref' => '#/definitions/PolicyProviderSpecificDetails']
-            ]],
-            'Policy' => ['properties' => ['properties' => ['$ref' => '#/definitions/PolicyProperties']]],
-            'PolicyCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Policy']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'PolicyProviderSpecificInput' => ['properties' => []],
-            'CreatePolicyInputProperties' => ['properties' => ['providerSpecificInput' => ['$ref' => '#/definitions/PolicyProviderSpecificInput']]],
-            'CreatePolicyInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/CreatePolicyInputProperties']]],
-            'UpdatePolicyInputProperties' => ['properties' => ['replicationProviderSettings' => ['$ref' => '#/definitions/PolicyProviderSpecificInput']]],
-            'UpdatePolicyInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/UpdatePolicyInputProperties']]],
-            'ConfigurationSettings' => ['properties' => []],
-            'ProtectableItemProperties' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'protectionStatus' => ['type' => 'string'],
-                'replicationProtectedItemId' => ['type' => 'string'],
-                'recoveryServicesProviderId' => ['type' => 'string'],
-                'protectionReadinessErrors' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'supportedReplicationProviders' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'customDetails' => ['$ref' => '#/definitions/ConfigurationSettings']
-            ]],
-            'ProtectableItem' => ['properties' => ['properties' => ['$ref' => '#/definitions/ProtectableItemProperties']]],
-            'ProtectableItemCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ProtectableItem']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ProtectionContainerMappingProviderSpecificDetails' => ['properties' => ['instanceType' => ['type' => 'string']]],
-            'ProtectionContainerMappingProperties' => ['properties' => [
-                'targetProtectionContainerId' => ['type' => 'string'],
-                'targetProtectionContainerFriendlyName' => ['type' => 'string'],
-                'providerSpecificDetails' => ['$ref' => '#/definitions/ProtectionContainerMappingProviderSpecificDetails'],
-                'health' => ['type' => 'string'],
-                'healthErrorDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HealthError']
-                ],
-                'policyId' => ['type' => 'string'],
-                'state' => ['type' => 'string'],
-                'sourceProtectionContainerFriendlyName' => ['type' => 'string'],
-                'sourceFabricFriendlyName' => ['type' => 'string'],
-                'targetFabricFriendlyName' => ['type' => 'string'],
-                'policyFriendlyName' => ['type' => 'string']
-            ]],
-            'ProtectionContainerMapping' => ['properties' => ['properties' => ['$ref' => '#/definitions/ProtectionContainerMappingProperties']]],
-            'ProtectionContainerMappingCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ProtectionContainerMapping']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ReplicationProviderSpecificContainerMappingInput' => ['properties' => ['instanceType' => ['type' => 'string']]],
-            'CreateProtectionContainerMappingInputProperties' => ['properties' => [
-                'targetProtectionContainerId' => ['type' => 'string'],
-                'PolicyId' => ['type' => 'string'],
-                'providerSpecificInput' => ['$ref' => '#/definitions/ReplicationProviderSpecificContainerMappingInput']
-            ]],
-            'CreateProtectionContainerMappingInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/CreateProtectionContainerMappingInputProperties']]],
-            'ReplicationProviderContainerUnmappingInput' => ['properties' => ['instanceType' => ['type' => 'string']]],
-            'RemoveProtectionContainerMappingInputProperties' => ['properties' => ['providerSpecificInput' => ['$ref' => '#/definitions/ReplicationProviderContainerUnmappingInput']]],
-            'RemoveProtectionContainerMappingInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/RemoveProtectionContainerMappingInputProperties']]],
-            'ProtectionContainerFabricSpecificDetails' => ['properties' => ['instanceType' => ['type' => 'string']]],
-            'ProtectionContainerProperties' => ['properties' => [
-                'fabricFriendlyName' => ['type' => 'string'],
-                'friendlyName' => ['type' => 'string'],
-                'fabricType' => ['type' => 'string'],
-                'protectedItemCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'pairingStatus' => ['type' => 'string'],
-                'role' => ['type' => 'string'],
-                'fabricSpecificDetails' => ['$ref' => '#/definitions/ProtectionContainerFabricSpecificDetails']
-            ]],
-            'ProtectionContainer' => ['properties' => ['properties' => ['$ref' => '#/definitions/ProtectionContainerProperties']]],
-            'ProtectionContainerCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ProtectionContainer']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ReplicationProviderSpecificContainerCreationInput' => ['properties' => []],
-            'CreateProtectionContainerInputProperties' => ['properties' => ['providerSpecificInput' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ReplicationProviderSpecificContainerCreationInput']
-            ]]],
-            'CreateProtectionContainerInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/CreateProtectionContainerInputProperties']]],
-            'DiscoverProtectableItemRequestProperties' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'ipAddress' => ['type' => 'string'],
-                'osType' => ['type' => 'string']
-            ]],
-            'DiscoverProtectableItemRequest' => ['properties' => ['properties' => ['$ref' => '#/definitions/DiscoverProtectableItemRequestProperties']]],
-            'SwitchProtectionProviderSpecificInput' => ['properties' => []],
-            'SwitchProtectionInputProperties' => ['properties' => [
-                'replicationProtectedItemName' => ['type' => 'string'],
-                'providerSpecificDetails' => ['$ref' => '#/definitions/SwitchProtectionProviderSpecificInput']
-            ]],
-            'SwitchProtectionInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/SwitchProtectionInputProperties']]],
-            'CurrentScenarioDetails' => ['properties' => [
-                'scenarioName' => ['type' => 'string'],
-                'jobId' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'RecoveryPlanProtectedItem' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'virtualMachineId' => ['type' => 'string']
-            ]],
-            'RecoveryPlanActionDetails' => ['properties' => []],
-            'RecoveryPlanAction' => ['properties' => [
-                'actionName' => ['type' => 'string'],
-                'failoverTypes' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => []
+            ],
+            'ConfigureAlertRequest' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ConfigureAlertRequestProperties']],
+                'required' => []
+            ],
+            'EventProviderSpecificDetails' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'EventSpecificDetails' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'HealthError' => [
+                'properties' => [
+                    'errorLevel' => ['type' => 'string'],
+                    'errorCode' => ['type' => 'string'],
+                    'errorMessage' => ['type' => 'string'],
+                    'possibleCauses' => ['type' => 'string'],
+                    'recommendedAction' => ['type' => 'string'],
+                    'creationTimeUtc' => [
                         'type' => 'string',
-                        'enum' => [
-                            'ReverseReplicate',
-                            'Commit',
-                            'PlannedFailover',
-                            'UnplannedFailover',
-                            'DisableProtection',
-                            'TestFailover',
-                            'TestFailoverCleanup',
-                            'Failback',
-                            'FinalizeFailback',
-                            'ChangePit',
-                            'RepairReplication',
-                            'SwitchProtection',
-                            'CompleteMigration'
-                        ]
+                        'format' => 'date-time'
+                    ],
+                    'recoveryProviderErrorMessage' => ['type' => 'string'],
+                    'entityId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'EventProperties' => [
+                'properties' => [
+                    'eventCode' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'eventType' => ['type' => 'string'],
+                    'affectedObjectFriendlyName' => ['type' => 'string'],
+                    'severity' => ['type' => 'string'],
+                    'timeOfOccurrence' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'fabricId' => ['type' => 'string'],
+                    'providerSpecificDetails' => ['$ref' => '#/definitions/EventProviderSpecificDetails'],
+                    'eventSpecificDetails' => ['$ref' => '#/definitions/EventSpecificDetails'],
+                    'healthErrors' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HealthError']
                     ]
                 ],
-                'failoverDirections' => [
+                'required' => []
+            ],
+            'Event' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/EventProperties']],
+                'required' => []
+            ],
+            'EventCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Event']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'EncryptionDetails' => [
+                'properties' => [
+                    'kekState' => ['type' => 'string'],
+                    'kekCertThumbprint' => ['type' => 'string'],
+                    'kekCertExpiryDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'FabricSpecificDetails' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'FabricProperties' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'encryptionDetails' => ['$ref' => '#/definitions/EncryptionDetails'],
+                    'rolloverEncryptionDetails' => ['$ref' => '#/definitions/EncryptionDetails'],
+                    'internalIdentifier' => ['type' => 'string'],
+                    'bcdrState' => ['type' => 'string'],
+                    'customDetails' => ['$ref' => '#/definitions/FabricSpecificDetails'],
+                    'healthErrorDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HealthError']
+                    ],
+                    'health' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Fabric' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/FabricProperties']],
+                'required' => []
+            ],
+            'FabricCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Fabric']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'FabricSpecificCreationInput' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'FabricCreationInputProperties' => [
+                'properties' => ['customDetails' => ['$ref' => '#/definitions/FabricSpecificCreationInput']],
+                'required' => []
+            ],
+            'FabricCreationInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/FabricCreationInputProperties']],
+                'required' => []
+            ],
+            'FailoverProcessServerRequestProperties' => [
+                'properties' => [
+                    'containerName' => ['type' => 'string'],
+                    'sourceProcessServerId' => ['type' => 'string'],
+                    'targetProcessServerId' => ['type' => 'string'],
+                    'vmsToMigrate' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'updateType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'FailoverProcessServerRequest' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/FailoverProcessServerRequestProperties']],
+                'required' => []
+            ],
+            'TaskTypeDetails' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'GroupTaskDetails' => [
+                'properties' => ['childTasks' => [
                     'type' => 'array',
-                    'items' => [
+                    'items' => ['$ref' => '#/definitions/ASRTask']
+                ]],
+                'required' => []
+            ],
+            'ServiceError' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'possibleCauses' => ['type' => 'string'],
+                    'recommendedAction' => ['type' => 'string'],
+                    'activityId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ProviderError' => [
+                'properties' => [
+                    'errorCode' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'errorMessage' => ['type' => 'string'],
+                    'errorId' => ['type' => 'string'],
+                    'possibleCauses' => ['type' => 'string'],
+                    'recommendedAction' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'JobErrorDetails' => [
+                'properties' => [
+                    'serviceErrorDetails' => ['$ref' => '#/definitions/ServiceError'],
+                    'providerErrorDetails' => ['$ref' => '#/definitions/ProviderError'],
+                    'errorLevel' => ['type' => 'string'],
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'taskId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ASRTask' => [
+                'properties' => [
+                    'taskId' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'allowedActions' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'friendlyName' => ['type' => 'string'],
+                    'state' => ['type' => 'string'],
+                    'stateDescription' => ['type' => 'string'],
+                    'taskType' => ['type' => 'string'],
+                    'customDetails' => ['$ref' => '#/definitions/TaskTypeDetails'],
+                    'groupTaskCustomDetails' => ['$ref' => '#/definitions/GroupTaskDetails'],
+                    'errors' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/JobErrorDetails']
+                    ]
+                ],
+                'required' => []
+            ],
+            'JobDetails' => [
+                'properties' => ['affectedObjectDetails' => [
+                    'type' => 'object',
+                    'additionalProperties' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'JobProperties' => [
+                'properties' => [
+                    'activityId' => ['type' => 'string'],
+                    'scenarioName' => ['type' => 'string'],
+                    'friendlyName' => ['type' => 'string'],
+                    'state' => ['type' => 'string'],
+                    'stateDescription' => ['type' => 'string'],
+                    'tasks' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ASRTask']
+                    ],
+                    'errors' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/JobErrorDetails']
+                    ],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'allowedActions' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'targetObjectId' => ['type' => 'string'],
+                    'targetObjectName' => ['type' => 'string'],
+                    'targetInstanceType' => ['type' => 'string'],
+                    'customDetails' => ['$ref' => '#/definitions/JobDetails']
+                ],
+                'required' => []
+            ],
+            'ARMExceptionDetails' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'possibleCauses' => ['type' => 'string'],
+                    'recommendedAction' => ['type' => 'string'],
+                    'clientRequestId' => ['type' => 'string'],
+                    'activityId' => ['type' => 'string'],
+                    'target' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MethodCallStatus' => [
+                'properties' => [
+                    'isVirtual' => ['type' => 'string'],
+                    'parameters' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'containsGenericParameters' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ARMInnerError' => [
+                'properties' => [
+                    'trace' => ['type' => 'string'],
+                    'source' => ['type' => 'string'],
+                    'methodStatus' => ['$ref' => '#/definitions/MethodCallStatus'],
+                    'cloudId' => ['type' => 'string'],
+                    'hVHostId' => ['type' => 'string'],
+                    'hVClusterId' => ['type' => 'string'],
+                    'networkId' => ['type' => 'string'],
+                    'vmId' => ['type' => 'string'],
+                    'fabricId' => ['type' => 'string'],
+                    'liveId' => ['type' => 'string'],
+                    'containerId' => ['type' => 'string'],
+                    'resourceId' => ['type' => 'string'],
+                    'resourceName' => ['type' => 'string'],
+                    'subscriptionId' => ['type' => 'string'],
+                    'serializedSRSLogContext' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ARMException' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'target' => ['type' => 'string'],
+                    'details' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ARMExceptionDetails']
+                    ],
+                    'innererror' => ['$ref' => '#/definitions/ARMInnerError']
+                ],
+                'required' => []
+            ],
+            'Job' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/JobProperties'],
+                    'status' => ['type' => 'string'],
+                    'error' => ['$ref' => '#/definitions/ARMException'],
+                    'startTime' => ['type' => 'string'],
+                    'endTime' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'JobCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Job']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'JobQueryParameter' => [
+                'properties' => [
+                    'startTime' => ['type' => 'string'],
+                    'endTime' => ['type' => 'string'],
+                    'fabricId' => ['type' => 'string'],
+                    'affectedObjectTypes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'jobStatus' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ResumeJobParamsProperties' => [
+                'properties' => ['comments' => ['type' => 'string']],
+                'required' => []
+            ],
+            'ResumeJobParams' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ResumeJobParamsProperties']],
+                'required' => []
+            ],
+            'LogicalNetworkProperties' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'networkVirtualizationStatus' => ['type' => 'string'],
+                    'logicalNetworkUsage' => ['type' => 'string'],
+                    'logicalNetworkDefinitionsStatus' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LogicalNetwork' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/LogicalNetworkProperties']],
+                'required' => []
+            ],
+            'LogicalNetworkCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/LogicalNetwork']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'NetworkMappingFabricSpecificSettings' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'NetworkMappingProperties' => [
+                'properties' => [
+                    'state' => ['type' => 'string'],
+                    'primaryNetworkFriendlyName' => ['type' => 'string'],
+                    'primaryNetworkId' => ['type' => 'string'],
+                    'primaryFabricFriendlyName' => ['type' => 'string'],
+                    'recoveryNetworkFriendlyName' => ['type' => 'string'],
+                    'recoveryNetworkId' => ['type' => 'string'],
+                    'recoveryFabricArmId' => ['type' => 'string'],
+                    'recoveryFabricFriendlyName' => ['type' => 'string'],
+                    'fabricSpecificSettings' => ['$ref' => '#/definitions/NetworkMappingFabricSpecificSettings']
+                ],
+                'required' => []
+            ],
+            'NetworkMapping' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/NetworkMappingProperties']],
+                'required' => []
+            ],
+            'FabricSpecificCreateNetworkMappingInput' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'CreateNetworkMappingInputProperties' => [
+                'properties' => [
+                    'recoveryFabricName' => ['type' => 'string'],
+                    'recoveryNetworkId' => ['type' => 'string'],
+                    'fabricSpecificDetails' => ['$ref' => '#/definitions/FabricSpecificCreateNetworkMappingInput']
+                ],
+                'required' => []
+            ],
+            'CreateNetworkMappingInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/CreateNetworkMappingInputProperties']],
+                'required' => []
+            ],
+            'FabricSpecificUpdateNetworkMappingInput' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'UpdateNetworkMappingInputProperties' => [
+                'properties' => [
+                    'recoveryFabricName' => ['type' => 'string'],
+                    'recoveryNetworkId' => ['type' => 'string'],
+                    'fabricSpecificDetails' => ['$ref' => '#/definitions/FabricSpecificUpdateNetworkMappingInput']
+                ],
+                'required' => []
+            ],
+            'UpdateNetworkMappingInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UpdateNetworkMappingInputProperties']],
+                'required' => []
+            ],
+            'Subnet' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'friendlyName' => ['type' => 'string'],
+                    'addressList' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'NetworkProperties' => [
+                'properties' => [
+                    'fabricType' => ['type' => 'string'],
+                    'subnets' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Subnet']
+                    ],
+                    'friendlyName' => ['type' => 'string'],
+                    'networkType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Network' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/NetworkProperties']],
+                'required' => []
+            ],
+            'NetworkCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Network']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Display' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'OperationsDiscovery' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/Display'],
+                    'origin' => ['type' => 'string'],
+                    'properties' => ['type' => 'object']
+                ],
+                'required' => []
+            ],
+            'OperationsDiscoveryCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/OperationsDiscovery']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PolicyProviderSpecificDetails' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'PolicyProperties' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'providerSpecificDetails' => ['$ref' => '#/definitions/PolicyProviderSpecificDetails']
+                ],
+                'required' => []
+            ],
+            'Policy' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PolicyProperties']],
+                'required' => []
+            ],
+            'PolicyCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Policy']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PolicyProviderSpecificInput' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'CreatePolicyInputProperties' => [
+                'properties' => ['providerSpecificInput' => ['$ref' => '#/definitions/PolicyProviderSpecificInput']],
+                'required' => []
+            ],
+            'CreatePolicyInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/CreatePolicyInputProperties']],
+                'required' => []
+            ],
+            'UpdatePolicyInputProperties' => [
+                'properties' => ['replicationProviderSettings' => ['$ref' => '#/definitions/PolicyProviderSpecificInput']],
+                'required' => []
+            ],
+            'UpdatePolicyInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UpdatePolicyInputProperties']],
+                'required' => []
+            ],
+            'ConfigurationSettings' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'ProtectableItemProperties' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'protectionStatus' => ['type' => 'string'],
+                    'replicationProtectedItemId' => ['type' => 'string'],
+                    'recoveryServicesProviderId' => ['type' => 'string'],
+                    'protectionReadinessErrors' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'supportedReplicationProviders' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'customDetails' => ['$ref' => '#/definitions/ConfigurationSettings']
+                ],
+                'required' => []
+            ],
+            'ProtectableItem' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ProtectableItemProperties']],
+                'required' => []
+            ],
+            'ProtectableItemCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ProtectableItem']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ProtectionContainerMappingProviderSpecificDetails' => [
+                'properties' => ['instanceType' => ['type' => 'string']],
+                'required' => []
+            ],
+            'ProtectionContainerMappingProperties' => [
+                'properties' => [
+                    'targetProtectionContainerId' => ['type' => 'string'],
+                    'targetProtectionContainerFriendlyName' => ['type' => 'string'],
+                    'providerSpecificDetails' => ['$ref' => '#/definitions/ProtectionContainerMappingProviderSpecificDetails'],
+                    'health' => ['type' => 'string'],
+                    'healthErrorDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HealthError']
+                    ],
+                    'policyId' => ['type' => 'string'],
+                    'state' => ['type' => 'string'],
+                    'sourceProtectionContainerFriendlyName' => ['type' => 'string'],
+                    'sourceFabricFriendlyName' => ['type' => 'string'],
+                    'targetFabricFriendlyName' => ['type' => 'string'],
+                    'policyFriendlyName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ProtectionContainerMapping' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ProtectionContainerMappingProperties']],
+                'required' => []
+            ],
+            'ProtectionContainerMappingCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ProtectionContainerMapping']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ReplicationProviderSpecificContainerMappingInput' => [
+                'properties' => ['instanceType' => ['type' => 'string']],
+                'required' => []
+            ],
+            'CreateProtectionContainerMappingInputProperties' => [
+                'properties' => [
+                    'targetProtectionContainerId' => ['type' => 'string'],
+                    'PolicyId' => ['type' => 'string'],
+                    'providerSpecificInput' => ['$ref' => '#/definitions/ReplicationProviderSpecificContainerMappingInput']
+                ],
+                'required' => []
+            ],
+            'CreateProtectionContainerMappingInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/CreateProtectionContainerMappingInputProperties']],
+                'required' => []
+            ],
+            'ReplicationProviderContainerUnmappingInput' => [
+                'properties' => ['instanceType' => ['type' => 'string']],
+                'required' => []
+            ],
+            'RemoveProtectionContainerMappingInputProperties' => [
+                'properties' => ['providerSpecificInput' => ['$ref' => '#/definitions/ReplicationProviderContainerUnmappingInput']],
+                'required' => []
+            ],
+            'RemoveProtectionContainerMappingInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RemoveProtectionContainerMappingInputProperties']],
+                'required' => []
+            ],
+            'ProtectionContainerFabricSpecificDetails' => [
+                'properties' => ['instanceType' => ['type' => 'string']],
+                'required' => []
+            ],
+            'ProtectionContainerProperties' => [
+                'properties' => [
+                    'fabricFriendlyName' => ['type' => 'string'],
+                    'friendlyName' => ['type' => 'string'],
+                    'fabricType' => ['type' => 'string'],
+                    'protectedItemCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'pairingStatus' => ['type' => 'string'],
+                    'role' => ['type' => 'string'],
+                    'fabricSpecificDetails' => ['$ref' => '#/definitions/ProtectionContainerFabricSpecificDetails']
+                ],
+                'required' => []
+            ],
+            'ProtectionContainer' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ProtectionContainerProperties']],
+                'required' => []
+            ],
+            'ProtectionContainerCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ProtectionContainer']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ReplicationProviderSpecificContainerCreationInput' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'CreateProtectionContainerInputProperties' => [
+                'properties' => ['providerSpecificInput' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ReplicationProviderSpecificContainerCreationInput']
+                ]],
+                'required' => []
+            ],
+            'CreateProtectionContainerInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/CreateProtectionContainerInputProperties']],
+                'required' => []
+            ],
+            'DiscoverProtectableItemRequestProperties' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'ipAddress' => ['type' => 'string'],
+                    'osType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DiscoverProtectableItemRequest' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DiscoverProtectableItemRequestProperties']],
+                'required' => []
+            ],
+            'SwitchProtectionProviderSpecificInput' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'SwitchProtectionInputProperties' => [
+                'properties' => [
+                    'replicationProtectedItemName' => ['type' => 'string'],
+                    'providerSpecificDetails' => ['$ref' => '#/definitions/SwitchProtectionProviderSpecificInput']
+                ],
+                'required' => []
+            ],
+            'SwitchProtectionInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SwitchProtectionInputProperties']],
+                'required' => []
+            ],
+            'CurrentScenarioDetails' => [
+                'properties' => [
+                    'scenarioName' => ['type' => 'string'],
+                    'jobId' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'RecoveryPlanProtectedItem' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'virtualMachineId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RecoveryPlanActionDetails' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'RecoveryPlanAction' => [
+                'properties' => [
+                    'actionName' => ['type' => 'string'],
+                    'failoverTypes' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'ReverseReplicate',
+                                'Commit',
+                                'PlannedFailover',
+                                'UnplannedFailover',
+                                'DisableProtection',
+                                'TestFailover',
+                                'TestFailoverCleanup',
+                                'Failback',
+                                'FinalizeFailback',
+                                'ChangePit',
+                                'RepairReplication',
+                                'SwitchProtection',
+                                'CompleteMigration'
+                            ]
+                        ]
+                    ],
+                    'failoverDirections' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'PrimaryToRecovery',
+                                'RecoveryToPrimary'
+                            ]
+                        ]
+                    ],
+                    'customDetails' => ['$ref' => '#/definitions/RecoveryPlanActionDetails']
+                ],
+                'required' => [
+                    'actionName',
+                    'failoverTypes',
+                    'failoverDirections',
+                    'customDetails'
+                ]
+            ],
+            'RecoveryPlanGroup' => [
+                'properties' => [
+                    'groupType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Shutdown',
+                            'Boot',
+                            'Failover'
+                        ]
+                    ],
+                    'replicationProtectedItems' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RecoveryPlanProtectedItem']
+                    ],
+                    'startGroupActions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RecoveryPlanAction']
+                    ],
+                    'endGroupActions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RecoveryPlanAction']
+                    ]
+                ],
+                'required' => ['groupType']
+            ],
+            'RecoveryPlanProperties' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'primaryFabricId' => ['type' => 'string'],
+                    'primaryFabricFriendlyName' => ['type' => 'string'],
+                    'recoveryFabricId' => ['type' => 'string'],
+                    'recoveryFabricFriendlyName' => ['type' => 'string'],
+                    'failoverDeploymentModel' => ['type' => 'string'],
+                    'replicationProviders' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'allowedOperations' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'lastPlannedFailoverTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastTestFailoverTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'currentScenario' => ['$ref' => '#/definitions/CurrentScenarioDetails'],
+                    'currentScenarioStatus' => ['type' => 'string'],
+                    'currentScenarioStatusDescription' => ['type' => 'string'],
+                    'groups' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RecoveryPlanGroup']
+                    ]
+                ],
+                'required' => []
+            ],
+            'RecoveryPlan' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPlanProperties']],
+                'required' => []
+            ],
+            'RecoveryPlanCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RecoveryPlan']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CreateRecoveryPlanInputProperties' => [
+                'properties' => [
+                    'primaryFabricId' => ['type' => 'string'],
+                    'recoveryFabricId' => ['type' => 'string'],
+                    'failoverDeploymentModel' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotApplicable',
+                            'Classic',
+                            'ResourceManager'
+                        ]
+                    ],
+                    'groups' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RecoveryPlanGroup']
+                    ]
+                ],
+                'required' => [
+                    'primaryFabricId',
+                    'recoveryFabricId',
+                    'groups'
+                ]
+            ],
+            'CreateRecoveryPlanInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/CreateRecoveryPlanInputProperties']],
+                'required' => ['properties']
+            ],
+            'UpdateRecoveryPlanInputProperties' => [
+                'properties' => ['groups' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/RecoveryPlanGroup']
+                ]],
+                'required' => []
+            ],
+            'UpdateRecoveryPlanInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UpdateRecoveryPlanInputProperties']],
+                'required' => []
+            ],
+            'RecoveryPlanProviderSpecificFailoverInput' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'RecoveryPlanPlannedFailoverInputProperties' => [
+                'properties' => [
+                    'failoverDirection' => [
                         'type' => 'string',
                         'enum' => [
                             'PrimaryToRecovery',
                             'RecoveryToPrimary'
                         ]
+                    ],
+                    'providerSpecificDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RecoveryPlanProviderSpecificFailoverInput']
                     ]
                 ],
-                'customDetails' => ['$ref' => '#/definitions/RecoveryPlanActionDetails']
-            ]],
-            'RecoveryPlanGroup' => ['properties' => [
-                'groupType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Shutdown',
-                        'Boot',
-                        'Failover'
+                'required' => ['failoverDirection']
+            ],
+            'RecoveryPlanPlannedFailoverInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPlanPlannedFailoverInputProperties']],
+                'required' => ['properties']
+            ],
+            'RecoveryPlanUnplannedFailoverInputProperties' => [
+                'properties' => [
+                    'failoverDirection' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'PrimaryToRecovery',
+                            'RecoveryToPrimary'
+                        ]
+                    ],
+                    'sourceSiteOperations' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Required',
+                            'NotRequired'
+                        ]
+                    ],
+                    'providerSpecificDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RecoveryPlanProviderSpecificFailoverInput']
                     ]
                 ],
-                'replicationProtectedItems' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RecoveryPlanProtectedItem']
-                ],
-                'startGroupActions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RecoveryPlanAction']
-                ],
-                'endGroupActions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RecoveryPlanAction']
+                'required' => [
+                    'failoverDirection',
+                    'sourceSiteOperations'
                 ]
-            ]],
-            'RecoveryPlanProperties' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'primaryFabricId' => ['type' => 'string'],
-                'primaryFabricFriendlyName' => ['type' => 'string'],
-                'recoveryFabricId' => ['type' => 'string'],
-                'recoveryFabricFriendlyName' => ['type' => 'string'],
-                'failoverDeploymentModel' => ['type' => 'string'],
-                'replicationProviders' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'allowedOperations' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'lastPlannedFailoverTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastTestFailoverTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'currentScenario' => ['$ref' => '#/definitions/CurrentScenarioDetails'],
-                'currentScenarioStatus' => ['type' => 'string'],
-                'currentScenarioStatusDescription' => ['type' => 'string'],
-                'groups' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RecoveryPlanGroup']
-                ]
-            ]],
-            'RecoveryPlan' => ['properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPlanProperties']]],
-            'RecoveryPlanCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RecoveryPlan']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'CreateRecoveryPlanInputProperties' => ['properties' => [
-                'primaryFabricId' => ['type' => 'string'],
-                'recoveryFabricId' => ['type' => 'string'],
-                'failoverDeploymentModel' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NotApplicable',
-                        'Classic',
-                        'ResourceManager'
+            ],
+            'RecoveryPlanUnplannedFailoverInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPlanUnplannedFailoverInputProperties']],
+                'required' => ['properties']
+            ],
+            'RecoveryPlanTestFailoverInputProperties' => [
+                'properties' => [
+                    'failoverDirection' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'PrimaryToRecovery',
+                            'RecoveryToPrimary'
+                        ]
+                    ],
+                    'networkType' => ['type' => 'string'],
+                    'networkId' => ['type' => 'string'],
+                    'skipTestFailoverCleanup' => ['type' => 'string'],
+                    'providerSpecificDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RecoveryPlanProviderSpecificFailoverInput']
                     ]
                 ],
-                'groups' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RecoveryPlanGroup']
+                'required' => [
+                    'failoverDirection',
+                    'networkType'
                 ]
-            ]],
-            'CreateRecoveryPlanInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/CreateRecoveryPlanInputProperties']]],
-            'UpdateRecoveryPlanInputProperties' => ['properties' => ['groups' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/RecoveryPlanGroup']
-            ]]],
-            'UpdateRecoveryPlanInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/UpdateRecoveryPlanInputProperties']]],
-            'RecoveryPlanProviderSpecificFailoverInput' => ['properties' => []],
-            'RecoveryPlanPlannedFailoverInputProperties' => ['properties' => [
-                'failoverDirection' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'PrimaryToRecovery',
-                        'RecoveryToPrimary'
-                    ]
-                ],
-                'providerSpecificDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RecoveryPlanProviderSpecificFailoverInput']
-                ]
-            ]],
-            'RecoveryPlanPlannedFailoverInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPlanPlannedFailoverInputProperties']]],
-            'RecoveryPlanUnplannedFailoverInputProperties' => ['properties' => [
-                'failoverDirection' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'PrimaryToRecovery',
-                        'RecoveryToPrimary'
-                    ]
-                ],
-                'sourceSiteOperations' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Required',
-                        'NotRequired'
-                    ]
-                ],
-                'providerSpecificDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RecoveryPlanProviderSpecificFailoverInput']
-                ]
-            ]],
-            'RecoveryPlanUnplannedFailoverInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPlanUnplannedFailoverInputProperties']]],
-            'RecoveryPlanTestFailoverInputProperties' => ['properties' => [
-                'failoverDirection' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'PrimaryToRecovery',
-                        'RecoveryToPrimary'
-                    ]
-                ],
-                'networkType' => ['type' => 'string'],
-                'networkId' => ['type' => 'string'],
-                'skipTestFailoverCleanup' => ['type' => 'string'],
-                'providerSpecificDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RecoveryPlanProviderSpecificFailoverInput']
-                ]
-            ]],
-            'RecoveryPlanTestFailoverInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPlanTestFailoverInputProperties']]],
-            'RecoveryPlanTestFailoverCleanupInputProperties' => ['properties' => ['comments' => ['type' => 'string']]],
-            'RecoveryPlanTestFailoverCleanupInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPlanTestFailoverCleanupInputProperties']]],
-            'RecoveryPointProperties' => ['properties' => [
-                'recoveryPointTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'recoveryPointType' => ['type' => 'string']
-            ]],
-            'RecoveryPoint' => ['properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPointProperties']]],
-            'RecoveryPointCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RecoveryPoint']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RecoveryServicesProviderProperties' => ['properties' => [
-                'fabricType' => ['type' => 'string'],
-                'friendlyName' => ['type' => 'string'],
-                'providerVersion' => ['type' => 'string'],
-                'serverVersion' => ['type' => 'string'],
-                'providerVersionState' => ['type' => 'string'],
-                'providerVersionExpiryDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'fabricFriendlyName' => ['type' => 'string'],
-                'lastHeartBeat' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'connectionStatus' => ['type' => 'string'],
-                'protectedItemCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'allowedScenarios' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'healthErrorDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HealthError']
-                ]
-            ]],
-            'RecoveryServicesProvider' => ['properties' => ['properties' => ['$ref' => '#/definitions/RecoveryServicesProviderProperties']]],
-            'RecoveryServicesProviderCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RecoveryServicesProvider']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ReplicationProviderSpecificSettings' => ['properties' => []],
-            'ReplicationProtectedItemProperties' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'protectedItemType' => ['type' => 'string'],
-                'protectableItemId' => ['type' => 'string'],
-                'recoveryServicesProviderId' => ['type' => 'string'],
-                'primaryFabricFriendlyName' => ['type' => 'string'],
-                'recoveryFabricFriendlyName' => ['type' => 'string'],
-                'recoveryFabricId' => ['type' => 'string'],
-                'primaryProtectionContainerFriendlyName' => ['type' => 'string'],
-                'recoveryProtectionContainerFriendlyName' => ['type' => 'string'],
-                'protectionState' => ['type' => 'string'],
-                'protectionStateDescription' => ['type' => 'string'],
-                'activeLocation' => ['type' => 'string'],
-                'testFailoverState' => ['type' => 'string'],
-                'testFailoverStateDescription' => ['type' => 'string'],
-                'allowedOperations' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'replicationHealth' => ['type' => 'string'],
-                'replicationHealthErrors' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HealthError']
-                ],
-                'policyId' => ['type' => 'string'],
-                'policyFriendlyName' => ['type' => 'string'],
-                'lastSuccessfulFailoverTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastSuccessfulTestFailoverTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'currentScenario' => ['$ref' => '#/definitions/CurrentScenarioDetails'],
-                'failoverRecoveryPointId' => ['type' => 'string'],
-                'providerSpecificDetails' => ['$ref' => '#/definitions/ReplicationProviderSpecificSettings'],
-                'recoveryContainerId' => ['type' => 'string']
-            ]],
-            'ReplicationProtectedItem' => ['properties' => ['properties' => ['$ref' => '#/definitions/ReplicationProtectedItemProperties']]],
-            'EnableProtectionProviderSpecificInput' => ['properties' => []],
-            'EnableProtectionInputProperties' => ['properties' => [
-                'policyId' => ['type' => 'string'],
-                'protectableItemId' => ['type' => 'string'],
-                'providerSpecificDetails' => ['$ref' => '#/definitions/EnableProtectionProviderSpecificInput']
-            ]],
-            'EnableProtectionInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/EnableProtectionInputProperties']]],
-            'VMNicInputDetails' => ['properties' => [
-                'nicId' => ['type' => 'string'],
-                'recoveryVMSubnetName' => ['type' => 'string'],
-                'replicaNicStaticIPAddress' => ['type' => 'string'],
-                'selectionType' => ['type' => 'string']
-            ]],
-            'UpdateReplicationProtectedItemProviderInput' => ['properties' => []],
-            'UpdateReplicationProtectedItemInputProperties' => ['properties' => [
-                'recoveryAzureVMName' => ['type' => 'string'],
-                'recoveryAzureVMSize' => ['type' => 'string'],
-                'selectedRecoveryAzureNetworkId' => ['type' => 'string'],
-                'enableRDPOnTargetOption' => ['type' => 'string'],
-                'vmNics' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VMNicInputDetails']
-                ],
-                'licenseType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NotSpecified',
-                        'NoLicenseType',
-                        'WindowsServer'
-                    ]
-                ],
-                'recoveryAvailabilitySetId' => ['type' => 'string'],
-                'providerSpecificDetails' => ['$ref' => '#/definitions/UpdateReplicationProtectedItemProviderInput']
-            ]],
-            'UpdateReplicationProtectedItemInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/UpdateReplicationProtectedItemInputProperties']]],
-            'DisableProtectionProviderSpecificInput' => ['properties' => []],
-            'DisableProtectionInputProperties' => ['properties' => [
-                'disableProtectionReason' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NotSpecified',
-                        'MigrationComplete'
-                    ]
-                ],
-                'replicationProviderInput' => ['$ref' => '#/definitions/DisableProtectionProviderSpecificInput']
-            ]],
-            'DisableProtectionInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/DisableProtectionInputProperties']]],
-            'ProviderSpecificFailoverInput' => ['properties' => []],
-            'PlannedFailoverInputProperties' => ['properties' => [
-                'failoverDirection' => ['type' => 'string'],
-                'providerSpecificDetails' => ['$ref' => '#/definitions/ProviderSpecificFailoverInput']
-            ]],
-            'PlannedFailoverInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/PlannedFailoverInputProperties']]],
-            'UnplannedFailoverInputProperties' => ['properties' => [
-                'failoverDirection' => ['type' => 'string'],
-                'sourceSiteOperations' => ['type' => 'string'],
-                'providerSpecificDetails' => ['$ref' => '#/definitions/ProviderSpecificFailoverInput']
-            ]],
-            'UnplannedFailoverInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/UnplannedFailoverInputProperties']]],
-            'TestFailoverInputProperties' => ['properties' => [
-                'failoverDirection' => ['type' => 'string'],
-                'networkType' => ['type' => 'string'],
-                'networkId' => ['type' => 'string'],
-                'skipTestFailoverCleanup' => ['type' => 'string'],
-                'providerSpecificDetails' => ['$ref' => '#/definitions/ProviderSpecificFailoverInput']
-            ]],
-            'TestFailoverInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/TestFailoverInputProperties']]],
-            'TestFailoverCleanupInputProperties' => ['properties' => ['comments' => ['type' => 'string']]],
-            'TestFailoverCleanupInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/TestFailoverCleanupInputProperties']]],
-            'ReverseReplicationProviderSpecificInput' => ['properties' => []],
-            'ReverseReplicationInputProperties' => ['properties' => [
-                'failoverDirection' => ['type' => 'string'],
-                'providerSpecificDetails' => ['$ref' => '#/definitions/ReverseReplicationProviderSpecificInput']
-            ]],
-            'ReverseReplicationInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/ReverseReplicationInputProperties']]],
-            'UpdateMobilityServiceRequestProperties' => ['properties' => ['runAsAccountId' => ['type' => 'string']]],
-            'UpdateMobilityServiceRequest' => ['properties' => ['properties' => ['$ref' => '#/definitions/UpdateMobilityServiceRequestProperties']]],
-            'ApplyRecoveryPointProviderSpecificInput' => ['properties' => []],
-            'ApplyRecoveryPointInputProperties' => ['properties' => [
-                'recoveryPointId' => ['type' => 'string'],
-                'providerSpecificDetails' => ['$ref' => '#/definitions/ApplyRecoveryPointProviderSpecificInput']
-            ]],
-            'ApplyRecoveryPointInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/ApplyRecoveryPointInputProperties']]],
-            'StorageClassificationProperties' => ['properties' => ['friendlyName' => ['type' => 'string']]],
-            'StorageClassification' => ['properties' => ['properties' => ['$ref' => '#/definitions/StorageClassificationProperties']]],
-            'StorageClassificationCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/StorageClassification']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'StorageClassificationMappingProperties' => ['properties' => ['targetStorageClassificationId' => ['type' => 'string']]],
-            'StorageClassificationMapping' => ['properties' => ['properties' => ['$ref' => '#/definitions/StorageClassificationMappingProperties']]],
-            'StorageClassificationMappingCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/StorageClassificationMapping']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'StorageMappingInputProperties' => ['properties' => ['targetStorageClassificationId' => ['type' => 'string']]],
-            'StorageClassificationMappingInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/StorageMappingInputProperties']]],
-            'VCenterProperties' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'internalId' => ['type' => 'string'],
-                'lastHeartbeat' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'discoveryStatus' => ['type' => 'string'],
-                'processServerId' => ['type' => 'string'],
-                'ipAddress' => ['type' => 'string'],
-                'infrastructureId' => ['type' => 'string'],
-                'port' => ['type' => 'string'],
-                'runAsAccountId' => ['type' => 'string'],
-                'fabricArmResourceName' => ['type' => 'string']
-            ]],
-            'VCenter' => ['properties' => ['properties' => ['$ref' => '#/definitions/VCenterProperties']]],
-            'VCenterCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VCenter']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'AddVCenterRequestProperties' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'ipAddress' => ['type' => 'string'],
-                'processServerId' => ['type' => 'string'],
-                'port' => ['type' => 'string'],
-                'runAsAccountId' => ['type' => 'string']
-            ]],
-            'AddVCenterRequest' => ['properties' => ['properties' => ['$ref' => '#/definitions/AddVCenterRequestProperties']]],
-            'UpdateVCenterRequestProperties' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'ipAddress' => ['type' => 'string'],
-                'processServerId' => ['type' => 'string'],
-                'port' => ['type' => 'string'],
-                'runAsAccountId' => ['type' => 'string']
-            ]],
-            'UpdateVCenterRequest' => ['properties' => ['properties' => ['$ref' => '#/definitions/UpdateVCenterRequestProperties']]],
-            'RenewCertificateInputProperties' => ['properties' => ['renewCertificateType' => ['type' => 'string']]],
-            'RenewCertificateInput' => ['properties' => ['properties' => ['$ref' => '#/definitions/RenewCertificateInputProperties']]],
-            'NetworkMappingCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NetworkMapping']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ReplicationProtectedItemCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ReplicationProtectedItem']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ProtectedItemsQueryParameter' => ['properties' => [
-                'sourceFabricName' => ['type' => 'string'],
-                'recoveryPlanName' => ['type' => 'string']
-            ]],
-            'AzureToAzure' => ['properties' => [
-                'primaryFabricLocation' => ['type' => 'string'],
-                'recoveryFabricLocation' => ['type' => 'string']
-            ]],
-            'VmmToAzure' => ['properties' => []],
-            'VmmToVmm' => ['properties' => []],
-            'AzureToAzure' => ['properties' => ['primaryNetworkId' => ['type' => 'string']]],
-            'VmmToAzure' => ['properties' => []],
-            'VmmToVmm' => ['properties' => []],
-            'AzureToAzure' => ['properties' => ['primaryNetworkId' => ['type' => 'string']]],
-            'VmmToAzure' => ['properties' => []],
-            'VmmToVmm' => ['properties' => []],
-            'Azure' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'containerIds' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'VMM' => ['properties' => []],
-            'HyperVSite' => ['properties' => []],
-            'MobilityServiceUpdate' => ['properties' => [
-                'version' => ['type' => 'string'],
-                'rebootStatus' => ['type' => 'string'],
-                'osType' => ['type' => 'string']
-            ]],
-            'ProcessServer' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'id' => ['type' => 'string'],
-                'ipAddress' => ['type' => 'string'],
-                'osType' => ['type' => 'string'],
-                'agentVersion' => ['type' => 'string'],
-                'lastHeartbeat' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'versionStatus' => ['type' => 'string'],
-                'mobilityServiceUpdates' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MobilityServiceUpdate']
-                ],
-                'hostId' => ['type' => 'string'],
-                'machineCount' => ['type' => 'string'],
-                'replicationPairCount' => ['type' => 'string'],
-                'systemLoad' => ['type' => 'string'],
-                'systemLoadStatus' => ['type' => 'string'],
-                'cpuLoad' => ['type' => 'string'],
-                'cpuLoadStatus' => ['type' => 'string'],
-                'totalMemoryInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'availableMemoryInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'memoryUsageStatus' => ['type' => 'string'],
-                'totalSpaceInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'availableSpaceInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'spaceUsageStatus' => ['type' => 'string'],
-                'psServiceStatus' => ['type' => 'string'],
-                'sslCertExpiryDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'sslCertExpiryRemainingDays' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'RetentionVolume' => ['properties' => [
-                'volumeName' => ['type' => 'string'],
-                'capacityInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'freeSpaceInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'thresholdPercentage' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'DataStore' => ['properties' => [
-                'symbolicName' => ['type' => 'string'],
-                'uuid' => ['type' => 'string'],
-                'capacity' => ['type' => 'string'],
-                'freeSpace' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'MasterTargetServer' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'ipAddress' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'osType' => ['type' => 'string'],
-                'agentVersion' => ['type' => 'string'],
-                'lastHeartbeat' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'versionStatus' => ['type' => 'string'],
-                'retentionVolumes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RetentionVolume']
-                ],
-                'dataStores' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DataStore']
-                ],
-                'validationErrors' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HealthError']
-                ]
-            ]],
-            'RunAsAccount' => ['properties' => [
-                'accountId' => ['type' => 'string'],
-                'accountName' => ['type' => 'string']
-            ]],
-            'VMware' => ['properties' => [
-                'processServers' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ProcessServer']
-                ],
-                'masterTargetServers' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MasterTargetServer']
-                ],
-                'runAsAccounts' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RunAsAccount']
-                ],
-                'replicationPairCount' => ['type' => 'string'],
-                'processServerCount' => ['type' => 'string'],
-                'agentCount' => ['type' => 'string'],
-                'protectedServers' => ['type' => 'string'],
-                'systemLoad' => ['type' => 'string'],
-                'systemLoadStatus' => ['type' => 'string'],
-                'cpuLoad' => ['type' => 'string'],
-                'cpuLoadStatus' => ['type' => 'string'],
-                'totalMemoryInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'availableMemoryInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'memoryUsageStatus' => ['type' => 'string'],
-                'totalSpaceInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'availableSpaceInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'spaceUsageStatus' => ['type' => 'string'],
-                'webLoad' => ['type' => 'string'],
-                'webLoadStatus' => ['type' => 'string'],
-                'databaseServerLoad' => ['type' => 'string'],
-                'databaseServerLoadStatus' => ['type' => 'string'],
-                'csServiceStatus' => ['type' => 'string'],
-                'ipAddress' => ['type' => 'string'],
-                'agentVersion' => ['type' => 'string'],
-                'hostName' => ['type' => 'string'],
-                'lastHeartbeat' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'versionStatus' => ['type' => 'string'],
-                'sslCertExpiryDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'sslCertExpiryRemainingDays' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'psTemplateVersion' => ['type' => 'string']
-            ]],
-            'VMNicDetails' => ['properties' => [
-                'nicId' => ['type' => 'string'],
-                'replicaNicId' => ['type' => 'string'],
-                'sourceNicArmId' => ['type' => 'string'],
-                'vMSubnetName' => ['type' => 'string'],
-                'vMNetworkName' => ['type' => 'string'],
-                'recoveryVMNetworkId' => ['type' => 'string'],
-                'recoveryVMSubnetName' => ['type' => 'string'],
-                'ipAddressType' => ['type' => 'string'],
-                'primaryNicStaticIPAddress' => ['type' => 'string'],
-                'replicaNicStaticIPAddress' => ['type' => 'string'],
-                'selectionType' => ['type' => 'string']
-            ]],
-            'InitialReplicationDetails' => ['properties' => [
-                'initialReplicationType' => ['type' => 'string'],
-                'initialReplicationProgressPercentage' => ['type' => 'string']
-            ]],
-            'DiskDetails' => ['properties' => [
-                'maxSizeMB' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'vhdType' => ['type' => 'string'],
-                'vhdId' => ['type' => 'string'],
-                'vhdName' => ['type' => 'string']
-            ]],
-            'HyperVReplicaBaseReplicationDetails' => ['properties' => [
-                'lastReplicatedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'vmNics' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VMNicDetails']
-                ],
-                'vmId' => ['type' => 'string'],
-                'vmProtectionState' => ['type' => 'string'],
-                'vmProtectionStateDescription' => ['type' => 'string'],
-                'initialReplicationDetails' => ['$ref' => '#/definitions/InitialReplicationDetails'],
-                'vMDiskDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DiskDetails']
-                ]
-            ]],
-            'HyperVReplica2012' => ['properties' => [
-                'lastReplicatedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'vmNics' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VMNicDetails']
-                ],
-                'vmId' => ['type' => 'string'],
-                'vmProtectionState' => ['type' => 'string'],
-                'vmProtectionStateDescription' => ['type' => 'string'],
-                'initialReplicationDetails' => ['$ref' => '#/definitions/InitialReplicationDetails'],
-                'vMDiskDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DiskDetails']
-                ]
-            ]],
-            'HyperVReplica2012R2' => ['properties' => [
-                'lastReplicatedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'vmNics' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VMNicDetails']
-                ],
-                'vmId' => ['type' => 'string'],
-                'vmProtectionState' => ['type' => 'string'],
-                'vmProtectionStateDescription' => ['type' => 'string'],
-                'initialReplicationDetails' => ['$ref' => '#/definitions/InitialReplicationDetails'],
-                'vMDiskDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DiskDetails']
-                ]
-            ]],
-            'AzureVmDiskDetails' => ['properties' => [
-                'vhdType' => ['type' => 'string'],
-                'vhdId' => ['type' => 'string'],
-                'vhdName' => ['type' => 'string'],
-                'maxSizeMB' => ['type' => 'string'],
-                'targetDiskLocation' => ['type' => 'string'],
-                'targetDiskName' => ['type' => 'string'],
-                'lunId' => ['type' => 'string']
-            ]],
-            'OSDetails' => ['properties' => [
-                'osType' => ['type' => 'string'],
-                'productType' => ['type' => 'string'],
-                'osEdition' => ['type' => 'string'],
-                'oSVersion' => ['type' => 'string'],
-                'oSMajorVersion' => ['type' => 'string'],
-                'oSMinorVersion' => ['type' => 'string']
-            ]],
-            'HyperVReplicaAzure' => ['properties' => [
-                'azureVMDiskDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AzureVmDiskDetails']
-                ],
-                'recoveryAzureVMName' => ['type' => 'string'],
-                'recoveryAzureVMSize' => ['type' => 'string'],
-                'recoveryAzureStorageAccount' => ['type' => 'string'],
-                'recoveryAzureLogStorageAccountId' => ['type' => 'string'],
-                'lastReplicatedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'vmId' => ['type' => 'string'],
-                'vmProtectionState' => ['type' => 'string'],
-                'vmProtectionStateDescription' => ['type' => 'string'],
-                'initialReplicationDetails' => ['$ref' => '#/definitions/InitialReplicationDetails'],
-                'vmNics' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VMNicDetails']
-                ],
-                'selectedRecoveryAzureNetworkId' => ['type' => 'string'],
-                'encryption' => ['type' => 'string'],
-                'oSDetails' => ['$ref' => '#/definitions/OSDetails'],
-                'sourceVmRAMSizeInMB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'sourceVmCPUCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'enableRDPOnTargetOption' => ['type' => 'string'],
-                'recoveryAzureResourceGroupId' => ['type' => 'string'],
-                'recoveryAvailabilitySetId' => ['type' => 'string'],
-                'useManagedDisks' => ['type' => 'string'],
-                'licenseType' => ['type' => 'string']
-            ]],
-            'InMageAzureV2ProtectedDiskDetails' => ['properties' => [
-                'diskId' => ['type' => 'string'],
-                'diskName' => ['type' => 'string'],
-                'protectionStage' => ['type' => 'string'],
-                'healthErrorCode' => ['type' => 'string'],
-                'rpoInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'resyncRequired' => ['type' => 'string'],
-                'resyncProgressPercentage' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'resyncDurationInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'diskCapacityInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'fileSystemCapacityInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'sourceDataInMegaBytes' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'psDataInMegaBytes' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'targetDataInMegaBytes' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'diskResized' => ['type' => 'string']
-            ]],
-            'InMageAzureV2' => ['properties' => [
-                'infrastructureVmId' => ['type' => 'string'],
-                'vCenterInfrastructureId' => ['type' => 'string'],
-                'protectionStage' => ['type' => 'string'],
-                'vmId' => ['type' => 'string'],
-                'vmProtectionState' => ['type' => 'string'],
-                'vmProtectionStateDescription' => ['type' => 'string'],
-                'resyncProgressPercentage' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'rpoInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'compressedDataRateInMB' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'uncompressedDataRateInMB' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'ipAddress' => ['type' => 'string'],
-                'agentVersion' => ['type' => 'string'],
-                'isAgentUpdateRequired' => ['type' => 'string'],
-                'isRebootAfterUpdateRequired' => ['type' => 'string'],
-                'lastHeartbeat' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'processServerId' => ['type' => 'string'],
-                'multiVmGroupId' => ['type' => 'string'],
-                'multiVmGroupName' => ['type' => 'string'],
-                'multiVmSyncStatus' => ['type' => 'string'],
-                'protectedDisks' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InMageAzureV2ProtectedDiskDetails']
-                ],
-                'diskResized' => ['type' => 'string'],
-                'masterTargetId' => ['type' => 'string'],
-                'sourceVmCPUCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'sourceVmRAMSizeInMB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'osType' => ['type' => 'string'],
-                'vhdName' => ['type' => 'string'],
-                'osDiskId' => ['type' => 'string'],
-                'azureVMDiskDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AzureVmDiskDetails']
-                ],
-                'recoveryAzureVMName' => ['type' => 'string'],
-                'recoveryAzureVMSize' => ['type' => 'string'],
-                'recoveryAzureStorageAccount' => ['type' => 'string'],
-                'recoveryAzureLogStorageAccountId' => ['type' => 'string'],
-                'vmNics' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VMNicDetails']
-                ],
-                'selectedRecoveryAzureNetworkId' => ['type' => 'string'],
-                'discoveryType' => ['type' => 'string'],
-                'enableRDPOnTargetOption' => ['type' => 'string'],
-                'datastores' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'targetVmId' => ['type' => 'string'],
-                'recoveryAzureResourceGroupId' => ['type' => 'string'],
-                'recoveryAvailabilitySetId' => ['type' => 'string'],
-                'useManagedDisks' => ['type' => 'string'],
-                'licenseType' => ['type' => 'string'],
-                'validationErrors' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HealthError']
-                ]
-            ]],
-            'OSDiskDetails' => ['properties' => [
-                'osVhdId' => ['type' => 'string'],
-                'osType' => ['type' => 'string'],
-                'vhdName' => ['type' => 'string']
-            ]],
-            'InMageProtectedDiskDetails' => ['properties' => [
-                'diskId' => ['type' => 'string'],
-                'diskName' => ['type' => 'string'],
-                'protectionStage' => ['type' => 'string'],
-                'healthErrorCode' => ['type' => 'string'],
-                'rpoInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'resyncRequired' => ['type' => 'string'],
-                'resyncProgressPercentage' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'resyncDurationInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'diskCapacityInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'fileSystemCapacityInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'sourceDataInMB' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'psDataInMB' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'targetDataInMB' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'diskResized' => ['type' => 'string']
-            ]],
-            'InMageAgentDetails' => ['properties' => [
-                'agentVersion' => ['type' => 'string'],
-                'agentUpdateStatus' => ['type' => 'string'],
-                'postUpdateRebootStatus' => ['type' => 'string']
-            ]],
-            'InMage' => ['properties' => [
-                'activeSiteType' => ['type' => 'string'],
-                'sourceVmCPUCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'sourceVmRAMSizeInMB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'osDetails' => ['$ref' => '#/definitions/OSDiskDetails'],
-                'protectionStage' => ['type' => 'string'],
-                'vmId' => ['type' => 'string'],
-                'vmProtectionState' => ['type' => 'string'],
-                'vmProtectionStateDescription' => ['type' => 'string'],
-                'resyncDetails' => ['$ref' => '#/definitions/InitialReplicationDetails'],
-                'retentionWindowStart' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'retentionWindowEnd' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'compressedDataRateInMB' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'uncompressedDataRateInMB' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'rpoInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'protectedDisks' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InMageProtectedDiskDetails']
-                ],
-                'ipAddress' => ['type' => 'string'],
-                'lastHeartbeat' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'processServerId' => ['type' => 'string'],
-                'masterTargetId' => ['type' => 'string'],
-                'consistencyPoints' => [
-                    'type' => 'object',
-                    'additionalProperties' => [
+            ],
+            'RecoveryPlanTestFailoverInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPlanTestFailoverInputProperties']],
+                'required' => ['properties']
+            ],
+            'RecoveryPlanTestFailoverCleanupInputProperties' => [
+                'properties' => ['comments' => ['type' => 'string']],
+                'required' => []
+            ],
+            'RecoveryPlanTestFailoverCleanupInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPlanTestFailoverCleanupInputProperties']],
+                'required' => ['properties']
+            ],
+            'RecoveryPointProperties' => [
+                'properties' => [
+                    'recoveryPointTime' => [
                         'type' => 'string',
                         'format' => 'date-time'
+                    ],
+                    'recoveryPointType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RecoveryPoint' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPointProperties']],
+                'required' => []
+            ],
+            'RecoveryPointCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RecoveryPoint']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RecoveryServicesProviderProperties' => [
+                'properties' => [
+                    'fabricType' => ['type' => 'string'],
+                    'friendlyName' => ['type' => 'string'],
+                    'providerVersion' => ['type' => 'string'],
+                    'serverVersion' => ['type' => 'string'],
+                    'providerVersionState' => ['type' => 'string'],
+                    'providerVersionExpiryDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'fabricFriendlyName' => ['type' => 'string'],
+                    'lastHeartBeat' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'connectionStatus' => ['type' => 'string'],
+                    'protectedItemCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'allowedScenarios' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'healthErrorDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HealthError']
                     ]
                 ],
-                'diskResized' => ['type' => 'string'],
-                'rebootAfterUpdateStatus' => ['type' => 'string'],
-                'multiVmGroupId' => ['type' => 'string'],
-                'multiVmGroupName' => ['type' => 'string'],
-                'multiVmSyncStatus' => ['type' => 'string'],
-                'agentDetails' => ['$ref' => '#/definitions/InMageAgentDetails'],
-                'vCenterInfrastructureId' => ['type' => 'string'],
-                'infrastructureVmId' => ['type' => 'string'],
-                'vmNics' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VMNicDetails']
+                'required' => []
+            ],
+            'RecoveryServicesProvider' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RecoveryServicesProviderProperties']],
+                'required' => []
+            ],
+            'RecoveryServicesProviderCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RecoveryServicesProvider']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'discoveryType' => ['type' => 'string'],
-                'azureStorageAccountId' => ['type' => 'string'],
-                'datastores' => [
+                'required' => []
+            ],
+            'ReplicationProviderSpecificSettings' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'ReplicationProtectedItemProperties' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'protectedItemType' => ['type' => 'string'],
+                    'protectableItemId' => ['type' => 'string'],
+                    'recoveryServicesProviderId' => ['type' => 'string'],
+                    'primaryFabricFriendlyName' => ['type' => 'string'],
+                    'recoveryFabricFriendlyName' => ['type' => 'string'],
+                    'recoveryFabricId' => ['type' => 'string'],
+                    'primaryProtectionContainerFriendlyName' => ['type' => 'string'],
+                    'recoveryProtectionContainerFriendlyName' => ['type' => 'string'],
+                    'protectionState' => ['type' => 'string'],
+                    'protectionStateDescription' => ['type' => 'string'],
+                    'activeLocation' => ['type' => 'string'],
+                    'testFailoverState' => ['type' => 'string'],
+                    'testFailoverStateDescription' => ['type' => 'string'],
+                    'allowedOperations' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'replicationHealth' => ['type' => 'string'],
+                    'replicationHealthErrors' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HealthError']
+                    ],
+                    'policyId' => ['type' => 'string'],
+                    'policyFriendlyName' => ['type' => 'string'],
+                    'lastSuccessfulFailoverTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastSuccessfulTestFailoverTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'currentScenario' => ['$ref' => '#/definitions/CurrentScenarioDetails'],
+                    'failoverRecoveryPointId' => ['type' => 'string'],
+                    'providerSpecificDetails' => ['$ref' => '#/definitions/ReplicationProviderSpecificSettings'],
+                    'recoveryContainerId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ReplicationProtectedItem' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ReplicationProtectedItemProperties']],
+                'required' => []
+            ],
+            'EnableProtectionProviderSpecificInput' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'EnableProtectionInputProperties' => [
+                'properties' => [
+                    'policyId' => ['type' => 'string'],
+                    'protectableItemId' => ['type' => 'string'],
+                    'providerSpecificDetails' => ['$ref' => '#/definitions/EnableProtectionProviderSpecificInput']
+                ],
+                'required' => []
+            ],
+            'EnableProtectionInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/EnableProtectionInputProperties']],
+                'required' => []
+            ],
+            'VMNicInputDetails' => [
+                'properties' => [
+                    'nicId' => ['type' => 'string'],
+                    'recoveryVMSubnetName' => ['type' => 'string'],
+                    'replicaNicStaticIPAddress' => ['type' => 'string'],
+                    'selectionType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'UpdateReplicationProtectedItemProviderInput' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'UpdateReplicationProtectedItemInputProperties' => [
+                'properties' => [
+                    'recoveryAzureVMName' => ['type' => 'string'],
+                    'recoveryAzureVMSize' => ['type' => 'string'],
+                    'selectedRecoveryAzureNetworkId' => ['type' => 'string'],
+                    'enableRDPOnTargetOption' => ['type' => 'string'],
+                    'vmNics' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VMNicInputDetails']
+                    ],
+                    'licenseType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotSpecified',
+                            'NoLicenseType',
+                            'WindowsServer'
+                        ]
+                    ],
+                    'recoveryAvailabilitySetId' => ['type' => 'string'],
+                    'providerSpecificDetails' => ['$ref' => '#/definitions/UpdateReplicationProtectedItemProviderInput']
+                ],
+                'required' => []
+            ],
+            'UpdateReplicationProtectedItemInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UpdateReplicationProtectedItemInputProperties']],
+                'required' => []
+            ],
+            'DisableProtectionProviderSpecificInput' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'DisableProtectionInputProperties' => [
+                'properties' => [
+                    'disableProtectionReason' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotSpecified',
+                            'MigrationComplete'
+                        ]
+                    ],
+                    'replicationProviderInput' => ['$ref' => '#/definitions/DisableProtectionProviderSpecificInput']
+                ],
+                'required' => []
+            ],
+            'DisableProtectionInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DisableProtectionInputProperties']],
+                'required' => []
+            ],
+            'ProviderSpecificFailoverInput' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'PlannedFailoverInputProperties' => [
+                'properties' => [
+                    'failoverDirection' => ['type' => 'string'],
+                    'providerSpecificDetails' => ['$ref' => '#/definitions/ProviderSpecificFailoverInput']
+                ],
+                'required' => []
+            ],
+            'PlannedFailoverInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PlannedFailoverInputProperties']],
+                'required' => []
+            ],
+            'UnplannedFailoverInputProperties' => [
+                'properties' => [
+                    'failoverDirection' => ['type' => 'string'],
+                    'sourceSiteOperations' => ['type' => 'string'],
+                    'providerSpecificDetails' => ['$ref' => '#/definitions/ProviderSpecificFailoverInput']
+                ],
+                'required' => []
+            ],
+            'UnplannedFailoverInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UnplannedFailoverInputProperties']],
+                'required' => []
+            ],
+            'TestFailoverInputProperties' => [
+                'properties' => [
+                    'failoverDirection' => ['type' => 'string'],
+                    'networkType' => ['type' => 'string'],
+                    'networkId' => ['type' => 'string'],
+                    'skipTestFailoverCleanup' => ['type' => 'string'],
+                    'providerSpecificDetails' => ['$ref' => '#/definitions/ProviderSpecificFailoverInput']
+                ],
+                'required' => []
+            ],
+            'TestFailoverInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/TestFailoverInputProperties']],
+                'required' => []
+            ],
+            'TestFailoverCleanupInputProperties' => [
+                'properties' => ['comments' => ['type' => 'string']],
+                'required' => []
+            ],
+            'TestFailoverCleanupInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/TestFailoverCleanupInputProperties']],
+                'required' => ['properties']
+            ],
+            'ReverseReplicationProviderSpecificInput' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'ReverseReplicationInputProperties' => [
+                'properties' => [
+                    'failoverDirection' => ['type' => 'string'],
+                    'providerSpecificDetails' => ['$ref' => '#/definitions/ReverseReplicationProviderSpecificInput']
+                ],
+                'required' => []
+            ],
+            'ReverseReplicationInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ReverseReplicationInputProperties']],
+                'required' => []
+            ],
+            'UpdateMobilityServiceRequestProperties' => [
+                'properties' => ['runAsAccountId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'UpdateMobilityServiceRequest' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UpdateMobilityServiceRequestProperties']],
+                'required' => []
+            ],
+            'ApplyRecoveryPointProviderSpecificInput' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'ApplyRecoveryPointInputProperties' => [
+                'properties' => [
+                    'recoveryPointId' => ['type' => 'string'],
+                    'providerSpecificDetails' => ['$ref' => '#/definitions/ApplyRecoveryPointProviderSpecificInput']
+                ],
+                'required' => []
+            ],
+            'ApplyRecoveryPointInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ApplyRecoveryPointInputProperties']],
+                'required' => []
+            ],
+            'StorageClassificationProperties' => [
+                'properties' => ['friendlyName' => ['type' => 'string']],
+                'required' => []
+            ],
+            'StorageClassification' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/StorageClassificationProperties']],
+                'required' => []
+            ],
+            'StorageClassificationCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/StorageClassification']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'StorageClassificationMappingProperties' => [
+                'properties' => ['targetStorageClassificationId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'StorageClassificationMapping' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/StorageClassificationMappingProperties']],
+                'required' => []
+            ],
+            'StorageClassificationMappingCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/StorageClassificationMapping']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'StorageMappingInputProperties' => [
+                'properties' => ['targetStorageClassificationId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'StorageClassificationMappingInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/StorageMappingInputProperties']],
+                'required' => []
+            ],
+            'VCenterProperties' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'internalId' => ['type' => 'string'],
+                    'lastHeartbeat' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'discoveryStatus' => ['type' => 'string'],
+                    'processServerId' => ['type' => 'string'],
+                    'ipAddress' => ['type' => 'string'],
+                    'infrastructureId' => ['type' => 'string'],
+                    'port' => ['type' => 'string'],
+                    'runAsAccountId' => ['type' => 'string'],
+                    'fabricArmResourceName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VCenter' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/VCenterProperties']],
+                'required' => []
+            ],
+            'VCenterCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VCenter']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AddVCenterRequestProperties' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'ipAddress' => ['type' => 'string'],
+                    'processServerId' => ['type' => 'string'],
+                    'port' => ['type' => 'string'],
+                    'runAsAccountId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AddVCenterRequest' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AddVCenterRequestProperties']],
+                'required' => []
+            ],
+            'UpdateVCenterRequestProperties' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'ipAddress' => ['type' => 'string'],
+                    'processServerId' => ['type' => 'string'],
+                    'port' => ['type' => 'string'],
+                    'runAsAccountId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'UpdateVCenterRequest' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UpdateVCenterRequestProperties']],
+                'required' => []
+            ],
+            'RenewCertificateInputProperties' => [
+                'properties' => ['renewCertificateType' => ['type' => 'string']],
+                'required' => []
+            ],
+            'RenewCertificateInput' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RenewCertificateInputProperties']],
+                'required' => []
+            ],
+            'NetworkMappingCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NetworkMapping']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ReplicationProtectedItemCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ReplicationProtectedItem']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ProtectedItemsQueryParameter' => [
+                'properties' => [
+                    'sourceFabricName' => ['type' => 'string'],
+                    'recoveryPlanName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AzureToAzure' => [
+                'properties' => [
+                    'primaryFabricLocation' => ['type' => 'string'],
+                    'recoveryFabricLocation' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VmmToAzure' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'VmmToVmm' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'AzureToAzure' => [
+                'properties' => ['primaryNetworkId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'VmmToAzure' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'VmmToVmm' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'AzureToAzure' => [
+                'properties' => ['primaryNetworkId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'VmmToAzure' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'VmmToVmm' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'Azure' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'containerIds' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'VMM' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'HyperVSite' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'MobilityServiceUpdate' => [
+                'properties' => [
+                    'version' => ['type' => 'string'],
+                    'rebootStatus' => ['type' => 'string'],
+                    'osType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ProcessServer' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'id' => ['type' => 'string'],
+                    'ipAddress' => ['type' => 'string'],
+                    'osType' => ['type' => 'string'],
+                    'agentVersion' => ['type' => 'string'],
+                    'lastHeartbeat' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'versionStatus' => ['type' => 'string'],
+                    'mobilityServiceUpdates' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MobilityServiceUpdate']
+                    ],
+                    'hostId' => ['type' => 'string'],
+                    'machineCount' => ['type' => 'string'],
+                    'replicationPairCount' => ['type' => 'string'],
+                    'systemLoad' => ['type' => 'string'],
+                    'systemLoadStatus' => ['type' => 'string'],
+                    'cpuLoad' => ['type' => 'string'],
+                    'cpuLoadStatus' => ['type' => 'string'],
+                    'totalMemoryInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'availableMemoryInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'memoryUsageStatus' => ['type' => 'string'],
+                    'totalSpaceInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'availableSpaceInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'spaceUsageStatus' => ['type' => 'string'],
+                    'psServiceStatus' => ['type' => 'string'],
+                    'sslCertExpiryDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'sslCertExpiryRemainingDays' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'RetentionVolume' => [
+                'properties' => [
+                    'volumeName' => ['type' => 'string'],
+                    'capacityInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'freeSpaceInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'thresholdPercentage' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'DataStore' => [
+                'properties' => [
+                    'symbolicName' => ['type' => 'string'],
+                    'uuid' => ['type' => 'string'],
+                    'capacity' => ['type' => 'string'],
+                    'freeSpace' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MasterTargetServer' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'ipAddress' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'osType' => ['type' => 'string'],
+                    'agentVersion' => ['type' => 'string'],
+                    'lastHeartbeat' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'versionStatus' => ['type' => 'string'],
+                    'retentionVolumes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RetentionVolume']
+                    ],
+                    'dataStores' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DataStore']
+                    ],
+                    'validationErrors' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HealthError']
+                    ]
+                ],
+                'required' => []
+            ],
+            'RunAsAccount' => [
+                'properties' => [
+                    'accountId' => ['type' => 'string'],
+                    'accountName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VMware' => [
+                'properties' => [
+                    'processServers' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ProcessServer']
+                    ],
+                    'masterTargetServers' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MasterTargetServer']
+                    ],
+                    'runAsAccounts' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RunAsAccount']
+                    ],
+                    'replicationPairCount' => ['type' => 'string'],
+                    'processServerCount' => ['type' => 'string'],
+                    'agentCount' => ['type' => 'string'],
+                    'protectedServers' => ['type' => 'string'],
+                    'systemLoad' => ['type' => 'string'],
+                    'systemLoadStatus' => ['type' => 'string'],
+                    'cpuLoad' => ['type' => 'string'],
+                    'cpuLoadStatus' => ['type' => 'string'],
+                    'totalMemoryInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'availableMemoryInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'memoryUsageStatus' => ['type' => 'string'],
+                    'totalSpaceInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'availableSpaceInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'spaceUsageStatus' => ['type' => 'string'],
+                    'webLoad' => ['type' => 'string'],
+                    'webLoadStatus' => ['type' => 'string'],
+                    'databaseServerLoad' => ['type' => 'string'],
+                    'databaseServerLoadStatus' => ['type' => 'string'],
+                    'csServiceStatus' => ['type' => 'string'],
+                    'ipAddress' => ['type' => 'string'],
+                    'agentVersion' => ['type' => 'string'],
+                    'hostName' => ['type' => 'string'],
+                    'lastHeartbeat' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'versionStatus' => ['type' => 'string'],
+                    'sslCertExpiryDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'sslCertExpiryRemainingDays' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'psTemplateVersion' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VMNicDetails' => [
+                'properties' => [
+                    'nicId' => ['type' => 'string'],
+                    'replicaNicId' => ['type' => 'string'],
+                    'sourceNicArmId' => ['type' => 'string'],
+                    'vMSubnetName' => ['type' => 'string'],
+                    'vMNetworkName' => ['type' => 'string'],
+                    'recoveryVMNetworkId' => ['type' => 'string'],
+                    'recoveryVMSubnetName' => ['type' => 'string'],
+                    'ipAddressType' => ['type' => 'string'],
+                    'primaryNicStaticIPAddress' => ['type' => 'string'],
+                    'replicaNicStaticIPAddress' => ['type' => 'string'],
+                    'selectionType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InitialReplicationDetails' => [
+                'properties' => [
+                    'initialReplicationType' => ['type' => 'string'],
+                    'initialReplicationProgressPercentage' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DiskDetails' => [
+                'properties' => [
+                    'maxSizeMB' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'vhdType' => ['type' => 'string'],
+                    'vhdId' => ['type' => 'string'],
+                    'vhdName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVReplicaBaseReplicationDetails' => [
+                'properties' => [
+                    'lastReplicatedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'vmNics' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VMNicDetails']
+                    ],
+                    'vmId' => ['type' => 'string'],
+                    'vmProtectionState' => ['type' => 'string'],
+                    'vmProtectionStateDescription' => ['type' => 'string'],
+                    'initialReplicationDetails' => ['$ref' => '#/definitions/InitialReplicationDetails'],
+                    'vMDiskDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DiskDetails']
+                    ]
+                ],
+                'required' => []
+            ],
+            'HyperVReplica2012' => [
+                'properties' => [
+                    'lastReplicatedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'vmNics' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VMNicDetails']
+                    ],
+                    'vmId' => ['type' => 'string'],
+                    'vmProtectionState' => ['type' => 'string'],
+                    'vmProtectionStateDescription' => ['type' => 'string'],
+                    'initialReplicationDetails' => ['$ref' => '#/definitions/InitialReplicationDetails'],
+                    'vMDiskDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DiskDetails']
+                    ]
+                ],
+                'required' => []
+            ],
+            'HyperVReplica2012R2' => [
+                'properties' => [
+                    'lastReplicatedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'vmNics' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VMNicDetails']
+                    ],
+                    'vmId' => ['type' => 'string'],
+                    'vmProtectionState' => ['type' => 'string'],
+                    'vmProtectionStateDescription' => ['type' => 'string'],
+                    'initialReplicationDetails' => ['$ref' => '#/definitions/InitialReplicationDetails'],
+                    'vMDiskDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DiskDetails']
+                    ]
+                ],
+                'required' => []
+            ],
+            'AzureVmDiskDetails' => [
+                'properties' => [
+                    'vhdType' => ['type' => 'string'],
+                    'vhdId' => ['type' => 'string'],
+                    'vhdName' => ['type' => 'string'],
+                    'maxSizeMB' => ['type' => 'string'],
+                    'targetDiskLocation' => ['type' => 'string'],
+                    'targetDiskName' => ['type' => 'string'],
+                    'lunId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'OSDetails' => [
+                'properties' => [
+                    'osType' => ['type' => 'string'],
+                    'productType' => ['type' => 'string'],
+                    'osEdition' => ['type' => 'string'],
+                    'oSVersion' => ['type' => 'string'],
+                    'oSMajorVersion' => ['type' => 'string'],
+                    'oSMinorVersion' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVReplicaAzure' => [
+                'properties' => [
+                    'azureVMDiskDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AzureVmDiskDetails']
+                    ],
+                    'recoveryAzureVMName' => ['type' => 'string'],
+                    'recoveryAzureVMSize' => ['type' => 'string'],
+                    'recoveryAzureStorageAccount' => ['type' => 'string'],
+                    'recoveryAzureLogStorageAccountId' => ['type' => 'string'],
+                    'lastReplicatedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'vmId' => ['type' => 'string'],
+                    'vmProtectionState' => ['type' => 'string'],
+                    'vmProtectionStateDescription' => ['type' => 'string'],
+                    'initialReplicationDetails' => ['$ref' => '#/definitions/InitialReplicationDetails'],
+                    'vmNics' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VMNicDetails']
+                    ],
+                    'selectedRecoveryAzureNetworkId' => ['type' => 'string'],
+                    'encryption' => ['type' => 'string'],
+                    'oSDetails' => ['$ref' => '#/definitions/OSDetails'],
+                    'sourceVmRAMSizeInMB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'sourceVmCPUCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'enableRDPOnTargetOption' => ['type' => 'string'],
+                    'recoveryAzureResourceGroupId' => ['type' => 'string'],
+                    'recoveryAvailabilitySetId' => ['type' => 'string'],
+                    'useManagedDisks' => ['type' => 'string'],
+                    'licenseType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMageAzureV2ProtectedDiskDetails' => [
+                'properties' => [
+                    'diskId' => ['type' => 'string'],
+                    'diskName' => ['type' => 'string'],
+                    'protectionStage' => ['type' => 'string'],
+                    'healthErrorCode' => ['type' => 'string'],
+                    'rpoInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'resyncRequired' => ['type' => 'string'],
+                    'resyncProgressPercentage' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'resyncDurationInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'diskCapacityInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'fileSystemCapacityInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'sourceDataInMegaBytes' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'psDataInMegaBytes' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'targetDataInMegaBytes' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'diskResized' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMageAzureV2' => [
+                'properties' => [
+                    'infrastructureVmId' => ['type' => 'string'],
+                    'vCenterInfrastructureId' => ['type' => 'string'],
+                    'protectionStage' => ['type' => 'string'],
+                    'vmId' => ['type' => 'string'],
+                    'vmProtectionState' => ['type' => 'string'],
+                    'vmProtectionStateDescription' => ['type' => 'string'],
+                    'resyncProgressPercentage' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'rpoInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'compressedDataRateInMB' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'uncompressedDataRateInMB' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'ipAddress' => ['type' => 'string'],
+                    'agentVersion' => ['type' => 'string'],
+                    'isAgentUpdateRequired' => ['type' => 'string'],
+                    'isRebootAfterUpdateRequired' => ['type' => 'string'],
+                    'lastHeartbeat' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'processServerId' => ['type' => 'string'],
+                    'multiVmGroupId' => ['type' => 'string'],
+                    'multiVmGroupName' => ['type' => 'string'],
+                    'multiVmSyncStatus' => ['type' => 'string'],
+                    'protectedDisks' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InMageAzureV2ProtectedDiskDetails']
+                    ],
+                    'diskResized' => ['type' => 'string'],
+                    'masterTargetId' => ['type' => 'string'],
+                    'sourceVmCPUCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'sourceVmRAMSizeInMB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'osType' => ['type' => 'string'],
+                    'vhdName' => ['type' => 'string'],
+                    'osDiskId' => ['type' => 'string'],
+                    'azureVMDiskDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AzureVmDiskDetails']
+                    ],
+                    'recoveryAzureVMName' => ['type' => 'string'],
+                    'recoveryAzureVMSize' => ['type' => 'string'],
+                    'recoveryAzureStorageAccount' => ['type' => 'string'],
+                    'recoveryAzureLogStorageAccountId' => ['type' => 'string'],
+                    'vmNics' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VMNicDetails']
+                    ],
+                    'selectedRecoveryAzureNetworkId' => ['type' => 'string'],
+                    'discoveryType' => ['type' => 'string'],
+                    'enableRDPOnTargetOption' => ['type' => 'string'],
+                    'datastores' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'targetVmId' => ['type' => 'string'],
+                    'recoveryAzureResourceGroupId' => ['type' => 'string'],
+                    'recoveryAvailabilitySetId' => ['type' => 'string'],
+                    'useManagedDisks' => ['type' => 'string'],
+                    'licenseType' => ['type' => 'string'],
+                    'validationErrors' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HealthError']
+                    ]
+                ],
+                'required' => []
+            ],
+            'OSDiskDetails' => [
+                'properties' => [
+                    'osVhdId' => ['type' => 'string'],
+                    'osType' => ['type' => 'string'],
+                    'vhdName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMageProtectedDiskDetails' => [
+                'properties' => [
+                    'diskId' => ['type' => 'string'],
+                    'diskName' => ['type' => 'string'],
+                    'protectionStage' => ['type' => 'string'],
+                    'healthErrorCode' => ['type' => 'string'],
+                    'rpoInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'resyncRequired' => ['type' => 'string'],
+                    'resyncProgressPercentage' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'resyncDurationInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'diskCapacityInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'fileSystemCapacityInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'sourceDataInMB' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'psDataInMB' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'targetDataInMB' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'diskResized' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMageAgentDetails' => [
+                'properties' => [
+                    'agentVersion' => ['type' => 'string'],
+                    'agentUpdateStatus' => ['type' => 'string'],
+                    'postUpdateRebootStatus' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMage' => [
+                'properties' => [
+                    'activeSiteType' => ['type' => 'string'],
+                    'sourceVmCPUCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'sourceVmRAMSizeInMB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'osDetails' => ['$ref' => '#/definitions/OSDiskDetails'],
+                    'protectionStage' => ['type' => 'string'],
+                    'vmId' => ['type' => 'string'],
+                    'vmProtectionState' => ['type' => 'string'],
+                    'vmProtectionStateDescription' => ['type' => 'string'],
+                    'resyncDetails' => ['$ref' => '#/definitions/InitialReplicationDetails'],
+                    'retentionWindowStart' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'retentionWindowEnd' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'compressedDataRateInMB' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'uncompressedDataRateInMB' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'rpoInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'protectedDisks' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InMageProtectedDiskDetails']
+                    ],
+                    'ipAddress' => ['type' => 'string'],
+                    'lastHeartbeat' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'processServerId' => ['type' => 'string'],
+                    'masterTargetId' => ['type' => 'string'],
+                    'consistencyPoints' => [
+                        'type' => 'object',
+                        'additionalProperties' => [
+                            'type' => 'string',
+                            'format' => 'date-time'
+                        ]
+                    ],
+                    'diskResized' => ['type' => 'string'],
+                    'rebootAfterUpdateStatus' => ['type' => 'string'],
+                    'multiVmGroupId' => ['type' => 'string'],
+                    'multiVmGroupName' => ['type' => 'string'],
+                    'multiVmSyncStatus' => ['type' => 'string'],
+                    'agentDetails' => ['$ref' => '#/definitions/InMageAgentDetails'],
+                    'vCenterInfrastructureId' => ['type' => 'string'],
+                    'infrastructureVmId' => ['type' => 'string'],
+                    'vmNics' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VMNicDetails']
+                    ],
+                    'discoveryType' => ['type' => 'string'],
+                    'azureStorageAccountId' => ['type' => 'string'],
+                    'datastores' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'validationErrors' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HealthError']
+                    ]
+                ],
+                'required' => []
+            ],
+            'A2AProtectedDiskDetails' => [
+                'properties' => [
+                    'diskUri' => ['type' => 'string'],
+                    'diskName' => ['type' => 'string'],
+                    'diskCapacityInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'recoveryAzureStorageAccountId' => ['type' => 'string'],
+                    'primaryStagingAzureStorageAccountId' => ['type' => 'string'],
+                    'primaryDiskAzureStorageAccountId' => ['type' => 'string'],
+                    'recoveryDiskUri' => ['type' => 'string'],
+                    'diskType' => ['type' => 'string'],
+                    'resyncRequired' => ['type' => 'boolean'],
+                    'monitoringPercentageCompletion' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'monitoringJobType' => ['type' => 'string'],
+                    'dataPendingInStagingStorageAccountInMB' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'dataPendingAtSourceAgentInMB' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ]
+                ],
+                'required' => []
+            ],
+            'RoleAssignment' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'scope' => ['type' => 'string'],
+                    'principalId' => ['type' => 'string'],
+                    'roleDefinitionId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InputEndpoint' => [
+                'properties' => [
+                    'endpointName' => ['type' => 'string'],
+                    'privatePort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'publicPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'protocol' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AzureToAzureVmSyncedConfigDetails' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'roleAssignments' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RoleAssignment']
+                    ],
+                    'inputEndpoints' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InputEndpoint']
+                    ]
+                ],
+                'required' => []
+            ],
+            'A2A' => [
+                'properties' => [
+                    'fabricObjectId' => ['type' => 'string'],
+                    'multiVmGroupId' => ['type' => 'string'],
+                    'multiVmGroupName' => ['type' => 'string'],
+                    'managementId' => ['type' => 'string'],
+                    'protectedDisks' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/A2AProtectedDiskDetails']
+                    ],
+                    'primaryFabricLocation' => ['type' => 'string'],
+                    'recoveryFabricLocation' => ['type' => 'string'],
+                    'osType' => ['type' => 'string'],
+                    'recoveryAzureVMSize' => ['type' => 'string'],
+                    'recoveryAzureVMName' => ['type' => 'string'],
+                    'recoveryAzureResourceGroupId' => ['type' => 'string'],
+                    'recoveryCloudService' => ['type' => 'string'],
+                    'recoveryAvailabilitySet' => ['type' => 'string'],
+                    'selectedRecoveryAzureNetworkId' => ['type' => 'string'],
+                    'vmNics' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VMNicDetails']
+                    ],
+                    'vmSyncedConfigDetails' => ['$ref' => '#/definitions/AzureToAzureVmSyncedConfigDetails'],
+                    'monitoringPercentageCompletion' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'monitoringJobType' => ['type' => 'string'],
+                    'lastHeartbeat' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'agentVersion' => ['type' => 'string'],
+                    'isReplicationAgentUpdateRequired' => ['type' => 'boolean'],
+                    'recoveryFabricObjectId' => ['type' => 'string'],
+                    'vmProtectionState' => ['type' => 'string'],
+                    'vmProtectionStateDescription' => ['type' => 'string'],
+                    'lifecycleId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVReplicaAzure' => [
+                'properties' => [
+                    'hvHostVmId' => ['type' => 'string'],
+                    'vmName' => ['type' => 'string'],
+                    'osType' => ['type' => 'string'],
+                    'vhdId' => ['type' => 'string'],
+                    'targetStorageAccountId' => ['type' => 'string'],
+                    'targetAzureNetworkId' => ['type' => 'string'],
+                    'targetAzureSubnetId' => ['type' => 'string'],
+                    'enableRDPOnTargetOption' => ['type' => 'string'],
+                    'targetAzureVmName' => ['type' => 'string'],
+                    'logStorageAccountId' => ['type' => 'string'],
+                    'disksToInclude' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'targetAzureV1ResourceGroupId' => ['type' => 'string'],
+                    'targetAzureV2ResourceGroupId' => ['type' => 'string'],
+                    'useManagedDisks' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'San' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'InMageAzureV2' => [
+                'properties' => [
+                    'masterTargetId' => ['type' => 'string'],
+                    'processServerId' => ['type' => 'string'],
+                    'storageAccountId' => ['type' => 'string'],
+                    'runAsAccountId' => ['type' => 'string'],
+                    'multiVmGroupId' => ['type' => 'string'],
+                    'multiVmGroupName' => ['type' => 'string'],
+                    'disksToInclude' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'targetAzureNetworkId' => ['type' => 'string'],
+                    'targetAzureSubnetId' => ['type' => 'string'],
+                    'enableRDPOnTargetOption' => ['type' => 'string'],
+                    'targetAzureVmName' => ['type' => 'string'],
+                    'logStorageAccountId' => ['type' => 'string'],
+                    'targetAzureV1ResourceGroupId' => ['type' => 'string'],
+                    'targetAzureV2ResourceGroupId' => ['type' => 'string'],
+                    'useManagedDisks' => ['type' => 'string']
+                ],
+                'required' => ['storageAccountId']
+            ],
+            'InMageVolumeExclusionOptions' => [
+                'properties' => [
+                    'volumeLabel' => ['type' => 'string'],
+                    'OnlyExcludeIfSingleVolume' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMageDiskSignatureExclusionOptions' => [
+                'properties' => ['diskSignature' => ['type' => 'string']],
+                'required' => []
+            ],
+            'InMageDiskExclusionInput' => [
+                'properties' => [
+                    'volumeOptions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InMageVolumeExclusionOptions']
+                    ],
+                    'diskSignatureOptions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InMageDiskSignatureExclusionOptions']
+                    ]
+                ],
+                'required' => []
+            ],
+            'InMage' => [
+                'properties' => [
+                    'vmFriendlyName' => ['type' => 'string'],
+                    'masterTargetId' => ['type' => 'string'],
+                    'processServerId' => ['type' => 'string'],
+                    'retentionDrive' => ['type' => 'string'],
+                    'runAsAccountId' => ['type' => 'string'],
+                    'multiVmGroupId' => ['type' => 'string'],
+                    'multiVmGroupName' => ['type' => 'string'],
+                    'datastoreName' => ['type' => 'string'],
+                    'diskExclusionInput' => ['$ref' => '#/definitions/InMageDiskExclusionInput'],
+                    'disksToInclude' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'A2AVmDiskInputDetails' => [
+                'properties' => [
+                    'diskUri' => ['type' => 'string'],
+                    'recoveryAzureStorageAccountId' => ['type' => 'string'],
+                    'primaryStagingAzureStorageAccountId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'A2A' => [
+                'properties' => [
+                    'fabricObjectId' => ['type' => 'string'],
+                    'recoveryContainerId' => ['type' => 'string'],
+                    'recoveryResourceGroupId' => ['type' => 'string'],
+                    'recoveryCloudServiceId' => ['type' => 'string'],
+                    'recoveryAvailabilitySetId' => ['type' => 'string'],
+                    'vmDisks' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/A2AVmDiskInputDetails']
+                    ]
+                ],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVReplicaAzure' => [
+                'properties' => [
+                    'recoveryAzureV1ResourceGroupId' => ['type' => 'string'],
+                    'recoveryAzureV2ResourceGroupId' => ['type' => 'string'],
+                    'useManagedDisks' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMageAzureV2' => [
+                'properties' => [
+                    'recoveryAzureV1ResourceGroupId' => ['type' => 'string'],
+                    'recoveryAzureV2ResourceGroupId' => ['type' => 'string'],
+                    'useManagedDisks' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'A2A' => [
+                'properties' => [
+                    'recoveryCloudServiceId' => ['type' => 'string'],
+                    'recoveryResourceGroupId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVReplicaBaseEventDetails' => [
+                'properties' => [
+                    'containerName' => ['type' => 'string'],
+                    'fabricName' => ['type' => 'string'],
+                    'remoteContainerName' => ['type' => 'string'],
+                    'remoteFabricName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVReplica2012' => [
+                'properties' => [
+                    'containerName' => ['type' => 'string'],
+                    'fabricName' => ['type' => 'string'],
+                    'remoteContainerName' => ['type' => 'string'],
+                    'remoteFabricName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVReplica2012R2' => [
+                'properties' => [
+                    'containerName' => ['type' => 'string'],
+                    'fabricName' => ['type' => 'string'],
+                    'remoteContainerName' => ['type' => 'string'],
+                    'remoteFabricName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVReplicaAzure' => [
+                'properties' => [
+                    'containerName' => ['type' => 'string'],
+                    'fabricName' => ['type' => 'string'],
+                    'remoteContainerName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'A2A' => [
+                'properties' => [
+                    'protectedItemName' => ['type' => 'string'],
+                    'fabricObjectId' => ['type' => 'string'],
+                    'fabricName' => ['type' => 'string'],
+                    'fabricLocation' => ['type' => 'string'],
+                    'remoteFabricName' => ['type' => 'string'],
+                    'remoteFabricLocation' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMageAzureV2' => [
+                'properties' => [
+                    'eventType' => ['type' => 'string'],
+                    'category' => ['type' => 'string'],
+                    'component' => ['type' => 'string'],
+                    'correctiveAction' => ['type' => 'string'],
+                    'details' => ['type' => 'string'],
+                    'summary' => ['type' => 'string'],
+                    'siteName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'JobStatus' => [
+                'properties' => [
+                    'jobId' => ['type' => 'string'],
+                    'jobFriendlyName' => ['type' => 'string'],
+                    'jobStatus' => ['type' => 'string'],
+                    'affectedObjectType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVVirtualMachine' => [
+                'properties' => [
+                    'sourceItemId' => ['type' => 'string'],
+                    'generation' => ['type' => 'string'],
+                    'osDetails' => ['$ref' => '#/definitions/OSDetails'],
+                    'diskDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DiskDetails']
+                    ]
+                ],
+                'required' => []
+            ],
+            'DiskVolumeDetails' => [
+                'properties' => [
+                    'label' => ['type' => 'string'],
+                    'name' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMageDiskDetails' => [
+                'properties' => [
+                    'diskId' => ['type' => 'string'],
+                    'diskName' => ['type' => 'string'],
+                    'diskSizeInMB' => ['type' => 'string'],
+                    'diskType' => ['type' => 'string'],
+                    'diskConfiguration' => ['type' => 'string'],
+                    'volumeList' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DiskVolumeDetails']
+                    ]
+                ],
+                'required' => []
+            ],
+            'VMwareVirtualMachine' => [
+                'properties' => [
+                    'agentGeneratedId' => ['type' => 'string'],
+                    'agentInstalled' => ['type' => 'string'],
+                    'osType' => ['type' => 'string'],
+                    'agentVersion' => ['type' => 'string'],
+                    'ipAddress' => ['type' => 'string'],
+                    'poweredOn' => ['type' => 'string'],
+                    'vCenterInfrastructureId' => ['type' => 'string'],
+                    'discoveryType' => ['type' => 'string'],
+                    'diskDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InMageDiskDetails']
+                    ],
+                    'validationErrors' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HealthError']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ReplicationGroupDetails' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'InMage' => [
+                'properties' => ['replicaVmDeletionStatus' => ['type' => 'string']],
+                'required' => []
+            ],
+            'HyperVReplicaAzure' => [
+                'properties' => [
+                    'vaultLocation' => ['type' => 'string'],
+                    'primaryKekCertificatePfx' => ['type' => 'string'],
+                    'secondaryKekCertificatePfx' => ['type' => 'string'],
+                    'recoveryPointId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVReplicaAzureFailback' => [
+                'properties' => [
+                    'dataSyncOption' => ['type' => 'string'],
+                    'recoveryVmCreationOption' => ['type' => 'string'],
+                    'providerIdForAlternateRecovery' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMageAzureV2' => [
+                'properties' => [
+                    'vaultLocation' => ['type' => 'string'],
+                    'recoveryPointId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMage' => [
+                'properties' => [
+                    'recoveryPointType' => ['type' => 'string'],
+                    'recoveryPointId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'A2A' => [
+                'properties' => [
+                    'recoveryPointId' => ['type' => 'string'],
+                    'cloudServiceCreationOption' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVReplicaAzure' => [
+                'properties' => [
+                    'hvHostVmId' => ['type' => 'string'],
+                    'vmName' => ['type' => 'string'],
+                    'osType' => ['type' => 'string'],
+                    'vHDId' => ['type' => 'string'],
+                    'storageAccountId' => ['type' => 'string'],
+                    'logStorageAccountId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMageAzureV2' => [
+                'properties' => [
+                    'masterTargetId' => ['type' => 'string'],
+                    'processServerId' => ['type' => 'string'],
+                    'storageAccountId' => ['type' => 'string'],
+                    'runAsAccountId' => ['type' => 'string'],
+                    'policyId' => ['type' => 'string'],
+                    'logStorageAccountId' => ['type' => 'string'],
+                    'disksToInclude' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'InMage' => [
+                'properties' => [
+                    'masterTargetId' => ['type' => 'string'],
+                    'processServerId' => ['type' => 'string'],
+                    'retentionDrive' => ['type' => 'string'],
+                    'runAsAccountId' => ['type' => 'string'],
+                    'datastoreName' => ['type' => 'string'],
+                    'diskExclusionInput' => ['$ref' => '#/definitions/InMageDiskExclusionInput'],
+                    'profileId' => ['type' => 'string'],
+                    'disksToInclude' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'A2A' => [
+                'properties' => [
+                    'recoveryContainerId' => ['type' => 'string'],
+                    'vmDisks' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/A2AVmDiskInputDetails']
+                    ],
+                    'recoveryResourceGroupId' => ['type' => 'string'],
+                    'recoveryCloudServiceId' => ['type' => 'string'],
+                    'recoveryAvailabilitySetId' => ['type' => 'string'],
+                    'policyId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVReplicaAzure' => [
+                'properties' => [
+                    'vaultLocation' => ['type' => 'string'],
+                    'primaryKekCertificatePfx' => ['type' => 'string'],
+                    'secondaryKekCertificatePfx' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMageAzureV2' => [
+                'properties' => ['vaultLocation' => ['type' => 'string']],
+                'required' => []
+            ],
+            'A2A' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'JobEntity' => [
+                'properties' => [
+                    'jobId' => ['type' => 'string'],
+                    'jobFriendlyName' => ['type' => 'string'],
+                    'targetObjectId' => ['type' => 'string'],
+                    'targetObjectName' => ['type' => 'string'],
+                    'targetInstanceType' => ['type' => 'string'],
+                    'jobScenarioName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'JobTaskDetails' => [
+                'properties' => ['jobTask' => ['$ref' => '#/definitions/JobEntity']],
+                'required' => []
+            ],
+            'VirtualMachineTaskDetails' => [
+                'properties' => [
+                    'skippedReason' => ['type' => 'string'],
+                    'skippedReasonString' => ['type' => 'string'],
+                    'jobTask' => ['$ref' => '#/definitions/JobEntity']
+                ],
+                'required' => []
+            ],
+            'FabricReplicationGroupTaskDetails' => [
+                'properties' => [
+                    'skippedReason' => ['type' => 'string'],
+                    'skippedReasonString' => ['type' => 'string'],
+                    'jobTask' => ['$ref' => '#/definitions/JobEntity']
+                ],
+                'required' => []
+            ],
+            'ManualActionTaskDetails' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'instructions' => ['type' => 'string'],
+                    'observation' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ScriptActionTaskDetails' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'path' => ['type' => 'string'],
+                    'output' => ['type' => 'string'],
+                    'isPrimarySideScript' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'VmNicUpdatesTaskDetails' => [
+                'properties' => [
+                    'vmId' => ['type' => 'string'],
+                    'nicId' => ['type' => 'string'],
+                    'name' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InconsistentVmDetails' => [
+                'properties' => [
+                    'vmName' => ['type' => 'string'],
+                    'cloudName' => ['type' => 'string'],
+                    'details' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'errorIds' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ConsistencyCheckTaskDetails' => [
+                'properties' => ['vmDetails' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/InconsistentVmDetails']
+                ]],
+                'required' => []
+            ],
+            'AutomationRunbookTaskDetails' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'cloudServiceName' => ['type' => 'string'],
+                    'subscriptionId' => ['type' => 'string'],
+                    'accountName' => ['type' => 'string'],
+                    'runbookId' => ['type' => 'string'],
+                    'runbookName' => ['type' => 'string'],
+                    'jobId' => ['type' => 'string'],
+                    'jobOutput' => ['type' => 'string'],
+                    'isPrimarySideScript' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'InlineWorkflowTaskDetails' => [
+                'properties' => ['workflowIds' => [
                     'type' => 'array',
                     'items' => ['type' => 'string']
-                ],
-                'validationErrors' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HealthError']
-                ]
-            ]],
-            'A2AProtectedDiskDetails' => ['properties' => [
-                'diskUri' => ['type' => 'string'],
-                'diskName' => ['type' => 'string'],
-                'diskCapacityInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'recoveryAzureStorageAccountId' => ['type' => 'string'],
-                'primaryStagingAzureStorageAccountId' => ['type' => 'string'],
-                'primaryDiskAzureStorageAccountId' => ['type' => 'string'],
-                'recoveryDiskUri' => ['type' => 'string'],
-                'diskType' => ['type' => 'string'],
-                'resyncRequired' => ['type' => 'boolean'],
-                'monitoringPercentageCompletion' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'monitoringJobType' => ['type' => 'string'],
-                'dataPendingInStagingStorageAccountInMB' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'dataPendingAtSourceAgentInMB' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ]
-            ]],
-            'RoleAssignment' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'scope' => ['type' => 'string'],
-                'principalId' => ['type' => 'string'],
-                'roleDefinitionId' => ['type' => 'string']
-            ]],
-            'InputEndpoint' => ['properties' => [
-                'endpointName' => ['type' => 'string'],
-                'privatePort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'publicPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'protocol' => ['type' => 'string']
-            ]],
-            'AzureToAzureVmSyncedConfigDetails' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'roleAssignments' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RoleAssignment']
-                ],
-                'inputEndpoints' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InputEndpoint']
-                ]
-            ]],
-            'A2A' => ['properties' => [
-                'fabricObjectId' => ['type' => 'string'],
-                'multiVmGroupId' => ['type' => 'string'],
-                'multiVmGroupName' => ['type' => 'string'],
-                'managementId' => ['type' => 'string'],
-                'protectedDisks' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/A2AProtectedDiskDetails']
-                ],
-                'primaryFabricLocation' => ['type' => 'string'],
-                'recoveryFabricLocation' => ['type' => 'string'],
-                'osType' => ['type' => 'string'],
-                'recoveryAzureVMSize' => ['type' => 'string'],
-                'recoveryAzureVMName' => ['type' => 'string'],
-                'recoveryAzureResourceGroupId' => ['type' => 'string'],
-                'recoveryCloudService' => ['type' => 'string'],
-                'recoveryAvailabilitySet' => ['type' => 'string'],
-                'selectedRecoveryAzureNetworkId' => ['type' => 'string'],
-                'vmNics' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VMNicDetails']
-                ],
-                'vmSyncedConfigDetails' => ['$ref' => '#/definitions/AzureToAzureVmSyncedConfigDetails'],
-                'monitoringPercentageCompletion' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'monitoringJobType' => ['type' => 'string'],
-                'lastHeartbeat' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'agentVersion' => ['type' => 'string'],
-                'isReplicationAgentUpdateRequired' => ['type' => 'boolean'],
-                'recoveryFabricObjectId' => ['type' => 'string'],
-                'vmProtectionState' => ['type' => 'string'],
-                'vmProtectionStateDescription' => ['type' => 'string'],
-                'lifecycleId' => ['type' => 'string']
-            ]],
-            'HyperVReplicaAzure' => ['properties' => [
-                'hvHostVmId' => ['type' => 'string'],
-                'vmName' => ['type' => 'string'],
-                'osType' => ['type' => 'string'],
-                'vhdId' => ['type' => 'string'],
-                'targetStorageAccountId' => ['type' => 'string'],
-                'targetAzureNetworkId' => ['type' => 'string'],
-                'targetAzureSubnetId' => ['type' => 'string'],
-                'enableRDPOnTargetOption' => ['type' => 'string'],
-                'targetAzureVmName' => ['type' => 'string'],
-                'logStorageAccountId' => ['type' => 'string'],
-                'disksToInclude' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'targetAzureV1ResourceGroupId' => ['type' => 'string'],
-                'targetAzureV2ResourceGroupId' => ['type' => 'string'],
-                'useManagedDisks' => ['type' => 'string']
-            ]],
-            'San' => ['properties' => []],
-            'InMageAzureV2' => ['properties' => [
-                'masterTargetId' => ['type' => 'string'],
-                'processServerId' => ['type' => 'string'],
-                'storageAccountId' => ['type' => 'string'],
-                'runAsAccountId' => ['type' => 'string'],
-                'multiVmGroupId' => ['type' => 'string'],
-                'multiVmGroupName' => ['type' => 'string'],
-                'disksToInclude' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'targetAzureNetworkId' => ['type' => 'string'],
-                'targetAzureSubnetId' => ['type' => 'string'],
-                'enableRDPOnTargetOption' => ['type' => 'string'],
-                'targetAzureVmName' => ['type' => 'string'],
-                'logStorageAccountId' => ['type' => 'string'],
-                'targetAzureV1ResourceGroupId' => ['type' => 'string'],
-                'targetAzureV2ResourceGroupId' => ['type' => 'string'],
-                'useManagedDisks' => ['type' => 'string']
-            ]],
-            'InMageVolumeExclusionOptions' => ['properties' => [
-                'volumeLabel' => ['type' => 'string'],
-                'OnlyExcludeIfSingleVolume' => ['type' => 'string']
-            ]],
-            'InMageDiskSignatureExclusionOptions' => ['properties' => ['diskSignature' => ['type' => 'string']]],
-            'InMageDiskExclusionInput' => ['properties' => [
-                'volumeOptions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InMageVolumeExclusionOptions']
-                ],
-                'diskSignatureOptions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InMageDiskSignatureExclusionOptions']
-                ]
-            ]],
-            'InMage' => ['properties' => [
-                'vmFriendlyName' => ['type' => 'string'],
-                'masterTargetId' => ['type' => 'string'],
-                'processServerId' => ['type' => 'string'],
-                'retentionDrive' => ['type' => 'string'],
-                'runAsAccountId' => ['type' => 'string'],
-                'multiVmGroupId' => ['type' => 'string'],
-                'multiVmGroupName' => ['type' => 'string'],
-                'datastoreName' => ['type' => 'string'],
-                'diskExclusionInput' => ['$ref' => '#/definitions/InMageDiskExclusionInput'],
-                'disksToInclude' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'A2AVmDiskInputDetails' => ['properties' => [
-                'diskUri' => ['type' => 'string'],
-                'recoveryAzureStorageAccountId' => ['type' => 'string'],
-                'primaryStagingAzureStorageAccountId' => ['type' => 'string']
-            ]],
-            'A2A' => ['properties' => [
-                'fabricObjectId' => ['type' => 'string'],
-                'recoveryContainerId' => ['type' => 'string'],
-                'recoveryResourceGroupId' => ['type' => 'string'],
-                'recoveryCloudServiceId' => ['type' => 'string'],
-                'recoveryAvailabilitySetId' => ['type' => 'string'],
-                'vmDisks' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/A2AVmDiskInputDetails']
-                ]
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string']
-            ]],
-            'HyperVReplicaAzure' => ['properties' => [
-                'recoveryAzureV1ResourceGroupId' => ['type' => 'string'],
-                'recoveryAzureV2ResourceGroupId' => ['type' => 'string'],
-                'useManagedDisks' => ['type' => 'string']
-            ]],
-            'InMageAzureV2' => ['properties' => [
-                'recoveryAzureV1ResourceGroupId' => ['type' => 'string'],
-                'recoveryAzureV2ResourceGroupId' => ['type' => 'string'],
-                'useManagedDisks' => ['type' => 'string']
-            ]],
-            'A2A' => ['properties' => [
-                'recoveryCloudServiceId' => ['type' => 'string'],
-                'recoveryResourceGroupId' => ['type' => 'string']
-            ]],
-            'HyperVReplicaBaseEventDetails' => ['properties' => [
-                'containerName' => ['type' => 'string'],
-                'fabricName' => ['type' => 'string'],
-                'remoteContainerName' => ['type' => 'string'],
-                'remoteFabricName' => ['type' => 'string']
-            ]],
-            'HyperVReplica2012' => ['properties' => [
-                'containerName' => ['type' => 'string'],
-                'fabricName' => ['type' => 'string'],
-                'remoteContainerName' => ['type' => 'string'],
-                'remoteFabricName' => ['type' => 'string']
-            ]],
-            'HyperVReplica2012R2' => ['properties' => [
-                'containerName' => ['type' => 'string'],
-                'fabricName' => ['type' => 'string'],
-                'remoteContainerName' => ['type' => 'string'],
-                'remoteFabricName' => ['type' => 'string']
-            ]],
-            'HyperVReplicaAzure' => ['properties' => [
-                'containerName' => ['type' => 'string'],
-                'fabricName' => ['type' => 'string'],
-                'remoteContainerName' => ['type' => 'string']
-            ]],
-            'A2A' => ['properties' => [
-                'protectedItemName' => ['type' => 'string'],
-                'fabricObjectId' => ['type' => 'string'],
-                'fabricName' => ['type' => 'string'],
-                'fabricLocation' => ['type' => 'string'],
-                'remoteFabricName' => ['type' => 'string'],
-                'remoteFabricLocation' => ['type' => 'string']
-            ]],
-            'InMageAzureV2' => ['properties' => [
-                'eventType' => ['type' => 'string'],
-                'category' => ['type' => 'string'],
-                'component' => ['type' => 'string'],
-                'correctiveAction' => ['type' => 'string'],
-                'details' => ['type' => 'string'],
-                'summary' => ['type' => 'string'],
-                'siteName' => ['type' => 'string']
-            ]],
-            'JobStatus' => ['properties' => [
-                'jobId' => ['type' => 'string'],
-                'jobFriendlyName' => ['type' => 'string'],
-                'jobStatus' => ['type' => 'string'],
-                'affectedObjectType' => ['type' => 'string']
-            ]],
-            'HyperVVirtualMachine' => ['properties' => [
-                'sourceItemId' => ['type' => 'string'],
-                'generation' => ['type' => 'string'],
-                'osDetails' => ['$ref' => '#/definitions/OSDetails'],
-                'diskDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DiskDetails']
-                ]
-            ]],
-            'DiskVolumeDetails' => ['properties' => [
-                'label' => ['type' => 'string'],
-                'name' => ['type' => 'string']
-            ]],
-            'InMageDiskDetails' => ['properties' => [
-                'diskId' => ['type' => 'string'],
-                'diskName' => ['type' => 'string'],
-                'diskSizeInMB' => ['type' => 'string'],
-                'diskType' => ['type' => 'string'],
-                'diskConfiguration' => ['type' => 'string'],
-                'volumeList' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DiskVolumeDetails']
-                ]
-            ]],
-            'VMwareVirtualMachine' => ['properties' => [
-                'agentGeneratedId' => ['type' => 'string'],
-                'agentInstalled' => ['type' => 'string'],
-                'osType' => ['type' => 'string'],
-                'agentVersion' => ['type' => 'string'],
-                'ipAddress' => ['type' => 'string'],
-                'poweredOn' => ['type' => 'string'],
-                'vCenterInfrastructureId' => ['type' => 'string'],
-                'discoveryType' => ['type' => 'string'],
-                'diskDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InMageDiskDetails']
-                ],
-                'validationErrors' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HealthError']
-                ]
-            ]],
-            'ReplicationGroupDetails' => ['properties' => []],
-            'InMage' => ['properties' => ['replicaVmDeletionStatus' => ['type' => 'string']]],
-            'HyperVReplicaAzure' => ['properties' => [
-                'vaultLocation' => ['type' => 'string'],
-                'primaryKekCertificatePfx' => ['type' => 'string'],
-                'secondaryKekCertificatePfx' => ['type' => 'string'],
-                'recoveryPointId' => ['type' => 'string']
-            ]],
-            'HyperVReplicaAzureFailback' => ['properties' => [
-                'dataSyncOption' => ['type' => 'string'],
-                'recoveryVmCreationOption' => ['type' => 'string'],
-                'providerIdForAlternateRecovery' => ['type' => 'string']
-            ]],
-            'InMageAzureV2' => ['properties' => [
-                'vaultLocation' => ['type' => 'string'],
-                'recoveryPointId' => ['type' => 'string']
-            ]],
-            'InMage' => ['properties' => [
-                'recoveryPointType' => ['type' => 'string'],
-                'recoveryPointId' => ['type' => 'string']
-            ]],
-            'A2A' => ['properties' => [
-                'recoveryPointId' => ['type' => 'string'],
-                'cloudServiceCreationOption' => ['type' => 'string']
-            ]],
-            'HyperVReplicaAzure' => ['properties' => [
-                'hvHostVmId' => ['type' => 'string'],
-                'vmName' => ['type' => 'string'],
-                'osType' => ['type' => 'string'],
-                'vHDId' => ['type' => 'string'],
-                'storageAccountId' => ['type' => 'string'],
-                'logStorageAccountId' => ['type' => 'string']
-            ]],
-            'InMageAzureV2' => ['properties' => [
-                'masterTargetId' => ['type' => 'string'],
-                'processServerId' => ['type' => 'string'],
-                'storageAccountId' => ['type' => 'string'],
-                'runAsAccountId' => ['type' => 'string'],
-                'policyId' => ['type' => 'string'],
-                'logStorageAccountId' => ['type' => 'string'],
-                'disksToInclude' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'InMage' => ['properties' => [
-                'masterTargetId' => ['type' => 'string'],
-                'processServerId' => ['type' => 'string'],
-                'retentionDrive' => ['type' => 'string'],
-                'runAsAccountId' => ['type' => 'string'],
-                'datastoreName' => ['type' => 'string'],
-                'diskExclusionInput' => ['$ref' => '#/definitions/InMageDiskExclusionInput'],
-                'profileId' => ['type' => 'string'],
-                'disksToInclude' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'A2A' => ['properties' => [
-                'recoveryContainerId' => ['type' => 'string'],
-                'vmDisks' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/A2AVmDiskInputDetails']
-                ],
-                'recoveryResourceGroupId' => ['type' => 'string'],
-                'recoveryCloudServiceId' => ['type' => 'string'],
-                'recoveryAvailabilitySetId' => ['type' => 'string'],
-                'policyId' => ['type' => 'string']
-            ]],
-            'HyperVReplicaAzure' => ['properties' => [
-                'vaultLocation' => ['type' => 'string'],
-                'primaryKekCertificatePfx' => ['type' => 'string'],
-                'secondaryKekCertificatePfx' => ['type' => 'string']
-            ]],
-            'InMageAzureV2' => ['properties' => ['vaultLocation' => ['type' => 'string']]],
-            'A2A' => ['properties' => []],
-            'JobEntity' => ['properties' => [
-                'jobId' => ['type' => 'string'],
-                'jobFriendlyName' => ['type' => 'string'],
-                'targetObjectId' => ['type' => 'string'],
-                'targetObjectName' => ['type' => 'string'],
-                'targetInstanceType' => ['type' => 'string'],
-                'jobScenarioName' => ['type' => 'string']
-            ]],
-            'JobTaskDetails' => ['properties' => ['jobTask' => ['$ref' => '#/definitions/JobEntity']]],
-            'VirtualMachineTaskDetails' => ['properties' => [
-                'skippedReason' => ['type' => 'string'],
-                'skippedReasonString' => ['type' => 'string'],
-                'jobTask' => ['$ref' => '#/definitions/JobEntity']
-            ]],
-            'FabricReplicationGroupTaskDetails' => ['properties' => [
-                'skippedReason' => ['type' => 'string'],
-                'skippedReasonString' => ['type' => 'string'],
-                'jobTask' => ['$ref' => '#/definitions/JobEntity']
-            ]],
-            'ManualActionTaskDetails' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'instructions' => ['type' => 'string'],
-                'observation' => ['type' => 'string']
-            ]],
-            'ScriptActionTaskDetails' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'path' => ['type' => 'string'],
-                'output' => ['type' => 'string'],
-                'isPrimarySideScript' => ['type' => 'boolean']
-            ]],
-            'VmNicUpdatesTaskDetails' => ['properties' => [
-                'vmId' => ['type' => 'string'],
-                'nicId' => ['type' => 'string'],
-                'name' => ['type' => 'string']
-            ]],
-            'InconsistentVmDetails' => ['properties' => [
-                'vmName' => ['type' => 'string'],
-                'cloudName' => ['type' => 'string'],
-                'details' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'errorIds' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'ConsistencyCheckTaskDetails' => ['properties' => ['vmDetails' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/InconsistentVmDetails']
-            ]]],
-            'AutomationRunbookTaskDetails' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'cloudServiceName' => ['type' => 'string'],
-                'subscriptionId' => ['type' => 'string'],
-                'accountName' => ['type' => 'string'],
-                'runbookId' => ['type' => 'string'],
-                'runbookName' => ['type' => 'string'],
-                'jobId' => ['type' => 'string'],
-                'jobOutput' => ['type' => 'string'],
-                'isPrimarySideScript' => ['type' => 'boolean']
-            ]],
-            'InlineWorkflowTaskDetails' => ['properties' => ['workflowIds' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'RecoveryPlanGroupTaskDetails' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'groupId' => ['type' => 'string'],
-                'rpGroupType' => ['type' => 'string']
-            ]],
-            'RecoveryPlanShutdownGroupTaskDetails' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'groupId' => ['type' => 'string'],
-                'rpGroupType' => ['type' => 'string']
-            ]],
-            'AsrJobDetails' => ['properties' => []],
-            'TestFailoverReplicationProtectedItemDetails' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'friendlyName' => ['type' => 'string'],
-                'testVmName' => ['type' => 'string'],
-                'testVmFriendlyName' => ['type' => 'string'],
-                'networkConnectionStatus' => ['type' => 'string'],
-                'networkFriendlyName' => ['type' => 'string'],
-                'subnet' => ['type' => 'string']
-            ]],
-            'TestFailoverJobDetails' => ['properties' => [
-                'testFailoverStatus' => ['type' => 'string'],
-                'comments' => ['type' => 'string'],
-                'networkName' => ['type' => 'string'],
-                'networkFriendlyName' => ['type' => 'string'],
-                'networkType' => ['type' => 'string'],
-                'protectedItemDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TestFailoverReplicationProtectedItemDetails']
-                ]
-            ]],
-            'ExportJobDetails' => ['properties' => [
-                'blobUri' => ['type' => 'string'],
-                'sasToken' => ['type' => 'string']
-            ]],
-            'SwitchProtectionJobDetails' => ['properties' => ['newReplicationProtectedItemId' => ['type' => 'string']]],
-            'A2A' => ['properties' => []],
-            'A2A' => ['properties' => [
-                'recoveryContainerId' => ['type' => 'string'],
-                'vmDisks' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/A2AVmDiskInputDetails']
-                ],
-                'recoveryResourceGroupId' => ['type' => 'string'],
-                'recoveryCloudServiceId' => ['type' => 'string'],
-                'recoveryAvailabilitySetId' => ['type' => 'string'],
-                'policyId' => ['type' => 'string']
-            ]],
-            'HyperVReplicaAzure' => ['properties' => [
-                'recoveryPointHistoryDurationInHours' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'applicationConsistentSnapshotFrequencyInHours' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'replicationInterval' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'onlineReplicationStartTime' => ['type' => 'string'],
-                'encryption' => ['type' => 'string'],
-                'activeStorageAccountId' => ['type' => 'string']
-            ]],
-            'HyperVReplicaBasePolicyDetails' => ['properties' => [
-                'recoveryPoints' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'applicationConsistentSnapshotFrequencyInHours' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'compression' => ['type' => 'string'],
-                'initialReplicationMethod' => ['type' => 'string'],
-                'onlineReplicationStartTime' => ['type' => 'string'],
-                'offlineReplicationImportPath' => ['type' => 'string'],
-                'offlineReplicationExportPath' => ['type' => 'string'],
-                'replicationPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'allowedAuthenticationType' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'replicaDeletionOption' => ['type' => 'string']
-            ]],
-            'HyperVReplica2012' => ['properties' => [
-                'recoveryPoints' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'applicationConsistentSnapshotFrequencyInHours' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'compression' => ['type' => 'string'],
-                'initialReplicationMethod' => ['type' => 'string'],
-                'onlineReplicationStartTime' => ['type' => 'string'],
-                'offlineReplicationImportPath' => ['type' => 'string'],
-                'offlineReplicationExportPath' => ['type' => 'string'],
-                'replicationPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'allowedAuthenticationType' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'replicaDeletionOption' => ['type' => 'string']
-            ]],
-            'HyperVReplica2012R2' => ['properties' => [
-                'replicationFrequencyInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'recoveryPoints' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'applicationConsistentSnapshotFrequencyInHours' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'compression' => ['type' => 'string'],
-                'initialReplicationMethod' => ['type' => 'string'],
-                'onlineReplicationStartTime' => ['type' => 'string'],
-                'offlineReplicationImportPath' => ['type' => 'string'],
-                'offlineReplicationExportPath' => ['type' => 'string'],
-                'replicationPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'allowedAuthenticationType' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'replicaDeletionOption' => ['type' => 'string']
-            ]],
-            'InMageBasePolicyDetails' => ['properties' => [
-                'recoveryPointThresholdInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'recoveryPointHistory' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'appConsistentFrequencyInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'multiVmSyncStatus' => ['type' => 'string']
-            ]],
-            'InMageAzureV2' => ['properties' => [
-                'crashConsistentFrequencyInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'recoveryPointThresholdInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'recoveryPointHistory' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'appConsistentFrequencyInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'multiVmSyncStatus' => ['type' => 'string']
-            ]],
-            'InMage' => ['properties' => [
-                'recoveryPointThresholdInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'recoveryPointHistory' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'appConsistentFrequencyInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'multiVmSyncStatus' => ['type' => 'string']
-            ]],
-            'A2A' => ['properties' => [
-                'recoveryPointThresholdInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'recoveryPointHistory' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'appConsistentFrequencyInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'multiVmSyncStatus' => ['type' => 'string'],
-                'crashConsistentFrequencyInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'HyperVReplicaAzure' => ['properties' => [
-                'recoveryPointHistoryDuration' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'applicationConsistentSnapshotFrequencyInHours' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'replicationInterval' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'onlineReplicationStartTime' => ['type' => 'string'],
-                'encryption' => ['type' => 'string'],
-                'storageAccounts' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'HyperVReplica2012' => ['properties' => [
-                'recoveryPoints' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'applicationConsistentSnapshotFrequencyInHours' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'compression' => ['type' => 'string'],
-                'initialReplicationMethod' => ['type' => 'string'],
-                'onlineReplicationStartTime' => ['type' => 'string'],
-                'offlineReplicationImportPath' => ['type' => 'string'],
-                'offlineReplicationExportPath' => ['type' => 'string'],
-                'replicationPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'allowedAuthenticationType' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'replicaDeletion' => ['type' => 'string']
-            ]],
-            'HyperVReplica2012R2' => ['properties' => [
-                'replicationFrequencyInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'recoveryPoints' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'applicationConsistentSnapshotFrequencyInHours' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'compression' => ['type' => 'string'],
-                'initialReplicationMethod' => ['type' => 'string'],
-                'onlineReplicationStartTime' => ['type' => 'string'],
-                'offlineReplicationImportPath' => ['type' => 'string'],
-                'offlineReplicationExportPath' => ['type' => 'string'],
-                'replicationPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'allowedAuthenticationType' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'replicaDeletion' => ['type' => 'string']
-            ]],
-            'InMageAzureV2' => ['properties' => [
-                'recoveryPointThresholdInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'recoveryPointHistory' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'crashConsistentFrequencyInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'appConsistentFrequencyInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'multiVmSyncStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enable',
-                        'Disable'
-                    ]
-                ]
-            ]],
-            'InMage' => ['properties' => [
-                'recoveryPointThresholdInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'recoveryPointHistory' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'appConsistentFrequencyInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'multiVmSyncStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enable',
-                        'Disable'
-                    ]
-                ]
-            ]],
-            'A2A' => ['properties' => [
-                'recoveryPointHistory' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'crashConsistentFrequencyInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'appConsistentFrequencyInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'multiVmSyncStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enable',
-                        'Disable'
-                    ]
-                ]
-            ]],
-            'ScriptActionDetails' => ['properties' => [
-                'path' => ['type' => 'string'],
-                'timeout' => ['type' => 'string'],
-                'fabricLocation' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Primary',
-                        'Recovery'
-                    ]
-                ]
-            ]],
-            'AutomationRunbookActionDetails' => ['properties' => [
-                'runbookId' => ['type' => 'string'],
-                'timeout' => ['type' => 'string'],
-                'fabricLocation' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Primary',
-                        'Recovery'
-                    ]
-                ]
-            ]],
-            'ManualActionDetails' => ['properties' => ['description' => ['type' => 'string']]],
-            'HyperVReplicaAzure' => ['properties' => [
-                'vaultLocation' => ['type' => 'string'],
-                'primaryKekCertificatePfx' => ['type' => 'string'],
-                'secondaryKekCertificatePfx' => ['type' => 'string'],
-                'recoveryPointType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Latest',
-                        'LatestApplicationConsistent',
-                        'LatestProcessed'
-                    ]
-                ]
-            ]],
-            'HyperVReplicaAzureFailback' => ['properties' => [
-                'dataSyncOption' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'ForDownTime',
-                        'ForSynchronization'
+                ]],
+                'required' => []
+            ],
+            'RecoveryPlanGroupTaskDetails' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'groupId' => ['type' => 'string'],
+                    'rpGroupType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RecoveryPlanShutdownGroupTaskDetails' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'groupId' => ['type' => 'string'],
+                    'rpGroupType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AsrJobDetails' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'TestFailoverReplicationProtectedItemDetails' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'friendlyName' => ['type' => 'string'],
+                    'testVmName' => ['type' => 'string'],
+                    'testVmFriendlyName' => ['type' => 'string'],
+                    'networkConnectionStatus' => ['type' => 'string'],
+                    'networkFriendlyName' => ['type' => 'string'],
+                    'subnet' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'TestFailoverJobDetails' => [
+                'properties' => [
+                    'testFailoverStatus' => ['type' => 'string'],
+                    'comments' => ['type' => 'string'],
+                    'networkName' => ['type' => 'string'],
+                    'networkFriendlyName' => ['type' => 'string'],
+                    'networkType' => ['type' => 'string'],
+                    'protectedItemDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TestFailoverReplicationProtectedItemDetails']
                     ]
                 ],
-                'recoveryVmCreationOption' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'CreateVmIfNotFound',
-                        'NoAction'
-                    ]
-                ]
-            ]],
-            'InMageAzureV2' => ['properties' => [
-                'vaultLocation' => ['type' => 'string'],
-                'recoveryPointType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Latest',
-                        'LatestApplicationConsistent',
-                        'LatestCrashConsistent',
-                        'LatestProcessed'
-                    ]
-                ]
-            ]],
-            'InMage' => ['properties' => ['recoveryPointType' => [
-                'type' => 'string',
-                'enum' => [
-                    'LatestTime',
-                    'LatestTag',
-                    'Custom'
-                ]
-            ]]],
-            'A2A' => ['properties' => [
-                'recoveryPointType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Latest',
-                        'LatestApplicationConsistent',
-                        'LatestCrashConsistent',
-                        'LatestProcessed'
+                'required' => []
+            ],
+            'ExportJobDetails' => [
+                'properties' => [
+                    'blobUri' => ['type' => 'string'],
+                    'sasToken' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SwitchProtectionJobDetails' => [
+                'properties' => ['newReplicationProtectedItemId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'A2A' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'A2A' => [
+                'properties' => [
+                    'recoveryContainerId' => ['type' => 'string'],
+                    'vmDisks' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/A2AVmDiskInputDetails']
+                    ],
+                    'recoveryResourceGroupId' => ['type' => 'string'],
+                    'recoveryCloudServiceId' => ['type' => 'string'],
+                    'recoveryAvailabilitySetId' => ['type' => 'string'],
+                    'policyId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVReplicaAzure' => [
+                'properties' => [
+                    'recoveryPointHistoryDurationInHours' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'applicationConsistentSnapshotFrequencyInHours' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'replicationInterval' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'onlineReplicationStartTime' => ['type' => 'string'],
+                    'encryption' => ['type' => 'string'],
+                    'activeStorageAccountId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVReplicaBasePolicyDetails' => [
+                'properties' => [
+                    'recoveryPoints' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'applicationConsistentSnapshotFrequencyInHours' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'compression' => ['type' => 'string'],
+                    'initialReplicationMethod' => ['type' => 'string'],
+                    'onlineReplicationStartTime' => ['type' => 'string'],
+                    'offlineReplicationImportPath' => ['type' => 'string'],
+                    'offlineReplicationExportPath' => ['type' => 'string'],
+                    'replicationPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'allowedAuthenticationType' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'replicaDeletionOption' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVReplica2012' => [
+                'properties' => [
+                    'recoveryPoints' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'applicationConsistentSnapshotFrequencyInHours' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'compression' => ['type' => 'string'],
+                    'initialReplicationMethod' => ['type' => 'string'],
+                    'onlineReplicationStartTime' => ['type' => 'string'],
+                    'offlineReplicationImportPath' => ['type' => 'string'],
+                    'offlineReplicationExportPath' => ['type' => 'string'],
+                    'replicationPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'allowedAuthenticationType' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'replicaDeletionOption' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVReplica2012R2' => [
+                'properties' => [
+                    'replicationFrequencyInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'recoveryPoints' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'applicationConsistentSnapshotFrequencyInHours' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'compression' => ['type' => 'string'],
+                    'initialReplicationMethod' => ['type' => 'string'],
+                    'onlineReplicationStartTime' => ['type' => 'string'],
+                    'offlineReplicationImportPath' => ['type' => 'string'],
+                    'offlineReplicationExportPath' => ['type' => 'string'],
+                    'replicationPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'allowedAuthenticationType' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'replicaDeletionOption' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMageBasePolicyDetails' => [
+                'properties' => [
+                    'recoveryPointThresholdInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'recoveryPointHistory' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'appConsistentFrequencyInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'multiVmSyncStatus' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMageAzureV2' => [
+                'properties' => [
+                    'crashConsistentFrequencyInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'recoveryPointThresholdInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'recoveryPointHistory' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'appConsistentFrequencyInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'multiVmSyncStatus' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMage' => [
+                'properties' => [
+                    'recoveryPointThresholdInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'recoveryPointHistory' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'appConsistentFrequencyInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'multiVmSyncStatus' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'A2A' => [
+                'properties' => [
+                    'recoveryPointThresholdInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'recoveryPointHistory' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'appConsistentFrequencyInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'multiVmSyncStatus' => ['type' => 'string'],
+                    'crashConsistentFrequencyInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'cloudServiceCreationOption' => ['type' => 'string']
-            ]],
-            'A2A' => ['properties' => ['location' => ['type' => 'string']]]
+                'required' => []
+            ],
+            'HyperVReplicaAzure' => [
+                'properties' => [
+                    'recoveryPointHistoryDuration' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'applicationConsistentSnapshotFrequencyInHours' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'replicationInterval' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'onlineReplicationStartTime' => ['type' => 'string'],
+                    'encryption' => ['type' => 'string'],
+                    'storageAccounts' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'HyperVReplica2012' => [
+                'properties' => [
+                    'recoveryPoints' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'applicationConsistentSnapshotFrequencyInHours' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'compression' => ['type' => 'string'],
+                    'initialReplicationMethod' => ['type' => 'string'],
+                    'onlineReplicationStartTime' => ['type' => 'string'],
+                    'offlineReplicationImportPath' => ['type' => 'string'],
+                    'offlineReplicationExportPath' => ['type' => 'string'],
+                    'replicationPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'allowedAuthenticationType' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'replicaDeletion' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HyperVReplica2012R2' => [
+                'properties' => [
+                    'replicationFrequencyInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'recoveryPoints' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'applicationConsistentSnapshotFrequencyInHours' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'compression' => ['type' => 'string'],
+                    'initialReplicationMethod' => ['type' => 'string'],
+                    'onlineReplicationStartTime' => ['type' => 'string'],
+                    'offlineReplicationImportPath' => ['type' => 'string'],
+                    'offlineReplicationExportPath' => ['type' => 'string'],
+                    'replicationPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'allowedAuthenticationType' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'replicaDeletion' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InMageAzureV2' => [
+                'properties' => [
+                    'recoveryPointThresholdInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'recoveryPointHistory' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'crashConsistentFrequencyInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'appConsistentFrequencyInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'multiVmSyncStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enable',
+                            'Disable'
+                        ]
+                    ]
+                ],
+                'required' => ['multiVmSyncStatus']
+            ],
+            'InMage' => [
+                'properties' => [
+                    'recoveryPointThresholdInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'recoveryPointHistory' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'appConsistentFrequencyInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'multiVmSyncStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enable',
+                            'Disable'
+                        ]
+                    ]
+                ],
+                'required' => ['multiVmSyncStatus']
+            ],
+            'A2A' => [
+                'properties' => [
+                    'recoveryPointHistory' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'crashConsistentFrequencyInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'appConsistentFrequencyInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'multiVmSyncStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enable',
+                            'Disable'
+                        ]
+                    ]
+                ],
+                'required' => ['multiVmSyncStatus']
+            ],
+            'ScriptActionDetails' => [
+                'properties' => [
+                    'path' => ['type' => 'string'],
+                    'timeout' => ['type' => 'string'],
+                    'fabricLocation' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Primary',
+                            'Recovery'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'path',
+                    'fabricLocation'
+                ]
+            ],
+            'AutomationRunbookActionDetails' => [
+                'properties' => [
+                    'runbookId' => ['type' => 'string'],
+                    'timeout' => ['type' => 'string'],
+                    'fabricLocation' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Primary',
+                            'Recovery'
+                        ]
+                    ]
+                ],
+                'required' => ['fabricLocation']
+            ],
+            'ManualActionDetails' => [
+                'properties' => ['description' => ['type' => 'string']],
+                'required' => []
+            ],
+            'HyperVReplicaAzure' => [
+                'properties' => [
+                    'vaultLocation' => ['type' => 'string'],
+                    'primaryKekCertificatePfx' => ['type' => 'string'],
+                    'secondaryKekCertificatePfx' => ['type' => 'string'],
+                    'recoveryPointType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Latest',
+                            'LatestApplicationConsistent',
+                            'LatestProcessed'
+                        ]
+                    ]
+                ],
+                'required' => ['vaultLocation']
+            ],
+            'HyperVReplicaAzureFailback' => [
+                'properties' => [
+                    'dataSyncOption' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'ForDownTime',
+                            'ForSynchronization'
+                        ]
+                    ],
+                    'recoveryVmCreationOption' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'CreateVmIfNotFound',
+                            'NoAction'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'dataSyncOption',
+                    'recoveryVmCreationOption'
+                ]
+            ],
+            'InMageAzureV2' => [
+                'properties' => [
+                    'vaultLocation' => ['type' => 'string'],
+                    'recoveryPointType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Latest',
+                            'LatestApplicationConsistent',
+                            'LatestCrashConsistent',
+                            'LatestProcessed'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'vaultLocation',
+                    'recoveryPointType'
+                ]
+            ],
+            'InMage' => [
+                'properties' => ['recoveryPointType' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'LatestTime',
+                        'LatestTag',
+                        'Custom'
+                    ]
+                ]],
+                'required' => ['recoveryPointType']
+            ],
+            'A2A' => [
+                'properties' => [
+                    'recoveryPointType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Latest',
+                            'LatestApplicationConsistent',
+                            'LatestCrashConsistent',
+                            'LatestProcessed'
+                        ]
+                    ],
+                    'cloudServiceCreationOption' => ['type' => 'string']
+                ],
+                'required' => ['recoveryPointType']
+            ],
+            'A2A' => [
+                'properties' => ['location' => ['type' => 'string']],
+                'required' => []
+            ]
         ]
     ];
 }

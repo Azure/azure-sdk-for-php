@@ -692,189 +692,281 @@ final class RedisManagementClient
             ]]
         ],
         'definitions' => [
-            'Sku' => ['properties' => [
-                'name' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'Standard',
-                        'Premium'
+            'Sku' => [
+                'properties' => [
+                    'name' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'Standard',
+                            'Premium'
+                        ]
+                    ],
+                    'family' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'C',
+                            'P'
+                        ]
+                    ],
+                    'capacity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'family' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'C',
-                        'P'
+                'required' => [
+                    'name',
+                    'family',
+                    'capacity'
+                ]
+            ],
+            'RedisProperties' => [
+                'properties' => [
+                    'redisConfiguration' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'enableNonSslPort' => ['type' => 'boolean'],
+                    'tenantSettings' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'shardCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'subnetId' => ['type' => 'string'],
+                    'staticIP' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RedisCreateProperties' => [
+                'properties' => ['sku' => ['$ref' => '#/definitions/Sku']],
+                'required' => ['sku']
+            ],
+            'RedisUpdateProperties' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'RedisProperties' => ['properties' => [
-                'redisConfiguration' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
                 ],
-                'enableNonSslPort' => ['type' => 'boolean'],
-                'tenantSettings' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => ['location']
+            ],
+            'RedisCreateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RedisCreateProperties']],
+                'required' => ['properties']
+            ],
+            'RedisUpdateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RedisUpdateProperties']],
+                'required' => []
+            ],
+            'RedisAccessKeys' => [
+                'properties' => [
+                    'primaryKey' => ['type' => 'string'],
+                    'secondaryKey' => ['type' => 'string']
                 ],
-                'shardCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'subnetId' => ['type' => 'string'],
-                'staticIP' => ['type' => 'string']
-            ]],
-            'RedisCreateProperties' => ['properties' => ['sku' => ['$ref' => '#/definitions/Sku']]],
-            'RedisUpdateProperties' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'RedisCreateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/RedisCreateProperties']]],
-            'RedisUpdateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/RedisUpdateProperties']]],
-            'RedisAccessKeys' => ['properties' => [
-                'primaryKey' => ['type' => 'string'],
-                'secondaryKey' => ['type' => 'string']
-            ]],
-            'RedisLinkedServer' => ['properties' => ['id' => ['type' => 'string']]],
-            'RedisLinkedServerList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/RedisLinkedServer']
-            ]]],
-            'RedisResourceProperties' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'redisVersion' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string'],
-                'hostName' => ['type' => 'string'],
-                'port' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'sslPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'accessKeys' => ['$ref' => '#/definitions/RedisAccessKeys'],
-                'linkedServers' => ['$ref' => '#/definitions/RedisLinkedServerList']
-            ]],
-            'RedisResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/RedisResourceProperties']]],
-            'RedisListResult' => ['properties' => [
-                'value' => [
+                'required' => []
+            ],
+            'RedisLinkedServer' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => []
+            ],
+            'RedisLinkedServerList' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RedisResource']
+                    'items' => ['$ref' => '#/definitions/RedisLinkedServer']
+                ]],
+                'required' => ['value']
+            ],
+            'RedisResourceProperties' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'redisVersion' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string'],
+                    'hostName' => ['type' => 'string'],
+                    'port' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'sslPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'accessKeys' => ['$ref' => '#/definitions/RedisAccessKeys'],
+                    'linkedServers' => ['$ref' => '#/definitions/RedisLinkedServerList']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RedisRegenerateKeyParameters' => ['properties' => ['keyType' => [
-                'type' => 'string',
-                'enum' => [
-                    'Primary',
-                    'Secondary'
-                ]
-            ]]],
-            'RedisRebootParameters' => ['properties' => [
-                'rebootType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'PrimaryNode',
-                        'SecondaryNode',
-                        'AllNodes'
-                    ]
+                'required' => []
+            ],
+            'RedisResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RedisResourceProperties']],
+                'required' => []
+            ],
+            'RedisListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RedisResource']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'shardId' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ExportRDBParameters' => ['properties' => [
-                'format' => ['type' => 'string'],
-                'prefix' => ['type' => 'string'],
-                'container' => ['type' => 'string']
-            ]],
-            'ImportRDBParameters' => ['properties' => [
-                'format' => ['type' => 'string'],
-                'files' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'ScheduleEntry' => ['properties' => [
-                'dayOfWeek' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Monday',
-                        'Tuesday',
-                        'Wednesday',
-                        'Thursday',
-                        'Friday',
-                        'Saturday',
-                        'Sunday',
-                        'Everyday',
-                        'Weekend'
-                    ]
-                ],
-                'startHourUtc' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'maintenanceWindow' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ]
-            ]],
-            'ScheduleEntries' => ['properties' => ['scheduleEntries' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ScheduleEntry']
-            ]]],
-            'RedisPatchSchedule' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ScheduleEntries']
-            ]],
-            'RedisForceRebootResponse' => ['properties' => ['Message' => ['type' => 'string']]],
-            'RedisLinkedServerProperties' => ['properties' => ['provisioningState' => ['type' => 'string']]],
-            'RedisLinkedServerWithProperties' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/RedisLinkedServerProperties']
-            ]],
-            'RedisLinkedServerWithPropertiesList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/RedisLinkedServerWithProperties']
-            ]]],
-            'RedisLinkedServerCreateProperties' => ['properties' => [
-                'linkedRedisCacheId' => ['type' => 'string'],
-                'linkedRedisCacheLocation' => ['type' => 'string'],
-                'serverRole' => [
+                'required' => []
+            ],
+            'RedisRegenerateKeyParameters' => [
+                'properties' => ['keyType' => [
                     'type' => 'string',
                     'enum' => [
                         'Primary',
                         'Secondary'
                     ]
+                ]],
+                'required' => ['keyType']
+            ],
+            'RedisRebootParameters' => [
+                'properties' => [
+                    'rebootType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'PrimaryNode',
+                            'SecondaryNode',
+                            'AllNodes'
+                        ]
+                    ],
+                    'shardId' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => ['rebootType']
+            ],
+            'ExportRDBParameters' => [
+                'properties' => [
+                    'format' => ['type' => 'string'],
+                    'prefix' => ['type' => 'string'],
+                    'container' => ['type' => 'string']
+                ],
+                'required' => [
+                    'prefix',
+                    'container'
                 ]
-            ]],
-            'RedisLinkedServerCreateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/RedisLinkedServerCreateProperties']]]
+            ],
+            'ImportRDBParameters' => [
+                'properties' => [
+                    'format' => ['type' => 'string'],
+                    'files' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['files']
+            ],
+            'ScheduleEntry' => [
+                'properties' => [
+                    'dayOfWeek' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Monday',
+                            'Tuesday',
+                            'Wednesday',
+                            'Thursday',
+                            'Friday',
+                            'Saturday',
+                            'Sunday',
+                            'Everyday',
+                            'Weekend'
+                        ]
+                    ],
+                    'startHourUtc' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'maintenanceWindow' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ]
+                ],
+                'required' => [
+                    'dayOfWeek',
+                    'startHourUtc'
+                ]
+            ],
+            'ScheduleEntries' => [
+                'properties' => ['scheduleEntries' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ScheduleEntry']
+                ]],
+                'required' => ['scheduleEntries']
+            ],
+            'RedisPatchSchedule' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ScheduleEntries']
+                ],
+                'required' => ['properties']
+            ],
+            'RedisForceRebootResponse' => [
+                'properties' => ['Message' => ['type' => 'string']],
+                'required' => []
+            ],
+            'RedisLinkedServerProperties' => [
+                'properties' => ['provisioningState' => ['type' => 'string']],
+                'required' => []
+            ],
+            'RedisLinkedServerWithProperties' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/RedisLinkedServerProperties']
+                ],
+                'required' => []
+            ],
+            'RedisLinkedServerWithPropertiesList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/RedisLinkedServerWithProperties']
+                ]],
+                'required' => ['value']
+            ],
+            'RedisLinkedServerCreateProperties' => [
+                'properties' => [
+                    'linkedRedisCacheId' => ['type' => 'string'],
+                    'linkedRedisCacheLocation' => ['type' => 'string'],
+                    'serverRole' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Primary',
+                            'Secondary'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'linkedRedisCacheId',
+                    'linkedRedisCacheLocation',
+                    'serverRole'
+                ]
+            ],
+            'RedisLinkedServerCreateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RedisLinkedServerCreateProperties']],
+                'required' => ['properties']
+            ]
         ]
     ];
 }

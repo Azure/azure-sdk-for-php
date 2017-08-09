@@ -645,127 +645,184 @@ final class AuthorizationManagementClient
             ]]
         ],
         'definitions' => [
-            'RoleAssignmentFilter' => ['properties' => ['principalId' => ['type' => 'string']]],
-            'RoleDefinitionFilter' => ['properties' => ['roleName' => ['type' => 'string']]],
-            'ClassicAdministratorProperties' => ['properties' => [
-                'emailAddress' => ['type' => 'string'],
-                'role' => ['type' => 'string']
-            ]],
-            'ClassicAdministrator' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ClassicAdministratorProperties']
-            ]],
-            'ClassicAdministratorListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ClassicAdministrator']
+            'RoleAssignmentFilter' => [
+                'properties' => ['principalId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'RoleDefinitionFilter' => [
+                'properties' => ['roleName' => ['type' => 'string']],
+                'required' => []
+            ],
+            'ClassicAdministratorProperties' => [
+                'properties' => [
+                    'emailAddress' => ['type' => 'string'],
+                    'role' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Permission' => ['properties' => [
-                'actions' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'ClassicAdministrator' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ClassicAdministratorProperties']
                 ],
-                'notActions' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'PermissionGetResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Permission']
+                'required' => []
+            ],
+            'ClassicAdministratorListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ClassicAdministrator']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ProviderOperation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'origin' => ['type' => 'string'],
-                'properties' => ['type' => 'object']
-            ]],
-            'ResourceType' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'operations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ProviderOperation']
-                ]
-            ]],
-            'ProviderOperationsMetadata' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'resourceTypes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceType']
+                'required' => []
+            ],
+            'Permission' => [
+                'properties' => [
+                    'actions' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'notActions' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
                 ],
-                'operations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ProviderOperation']
-                ]
-            ]],
-            'ProviderOperationsMetadataListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ProviderOperationsMetadata']
+                'required' => []
+            ],
+            'PermissionGetResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Permission']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RoleAssignmentPropertiesWithScope' => ['properties' => [
-                'scope' => ['type' => 'string'],
-                'roleDefinitionId' => ['type' => 'string'],
-                'principalId' => ['type' => 'string']
-            ]],
-            'RoleAssignment' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/RoleAssignmentPropertiesWithScope']
-            ]],
-            'RoleAssignmentListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RoleAssignment']
+                'required' => []
+            ],
+            'ProviderOperation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'origin' => ['type' => 'string'],
+                    'properties' => ['type' => 'object']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RoleAssignmentProperties' => ['properties' => [
-                'roleDefinitionId' => ['type' => 'string'],
-                'principalId' => ['type' => 'string']
-            ]],
-            'RoleAssignmentCreateParameters' => ['properties' => ['properties' => ['$ref' => '#/definitions/RoleAssignmentProperties']]],
-            'RoleDefinitionProperties' => ['properties' => [
-                'roleName' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'permissions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Permission']
+                'required' => []
+            ],
+            'ResourceType' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'operations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ProviderOperation']
+                    ]
                 ],
-                'assignableScopes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'RoleDefinition' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/RoleDefinitionProperties']
-            ]],
-            'RoleDefinitionListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RoleDefinition']
+                'required' => []
+            ],
+            'ProviderOperationsMetadata' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'resourceTypes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceType']
+                    ],
+                    'operations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ProviderOperation']
+                    ]
                 ],
-                'nextLink' => ['type' => 'string']
-            ]]
+                'required' => []
+            ],
+            'ProviderOperationsMetadataListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ProviderOperationsMetadata']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RoleAssignmentPropertiesWithScope' => [
+                'properties' => [
+                    'scope' => ['type' => 'string'],
+                    'roleDefinitionId' => ['type' => 'string'],
+                    'principalId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RoleAssignment' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/RoleAssignmentPropertiesWithScope']
+                ],
+                'required' => []
+            ],
+            'RoleAssignmentListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RoleAssignment']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RoleAssignmentProperties' => [
+                'properties' => [
+                    'roleDefinitionId' => ['type' => 'string'],
+                    'principalId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RoleAssignmentCreateParameters' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RoleAssignmentProperties']],
+                'required' => []
+            ],
+            'RoleDefinitionProperties' => [
+                'properties' => [
+                    'roleName' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'permissions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Permission']
+                    ],
+                    'assignableScopes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'RoleDefinition' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/RoleDefinitionProperties']
+                ],
+                'required' => []
+            ],
+            'RoleDefinitionListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RoleDefinition']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

@@ -705,464 +705,632 @@ final class IotHubClient
             ]]
         ],
         'definitions' => [
-            'SharedAccessSignatureAuthorizationRule' => ['properties' => [
-                'keyName' => ['type' => 'string'],
-                'primaryKey' => ['type' => 'string'],
-                'secondaryKey' => ['type' => 'string'],
-                'rights' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'RegistryRead',
-                        'RegistryWrite',
-                        'ServiceConnect',
-                        'DeviceConnect',
-                        'RegistryRead, RegistryWrite',
-                        'RegistryRead, ServiceConnect',
-                        'RegistryRead, DeviceConnect',
-                        'RegistryWrite, ServiceConnect',
-                        'RegistryWrite, DeviceConnect',
-                        'ServiceConnect, DeviceConnect',
-                        'RegistryRead, RegistryWrite, ServiceConnect',
-                        'RegistryRead, RegistryWrite, DeviceConnect',
-                        'RegistryRead, ServiceConnect, DeviceConnect',
-                        'RegistryWrite, ServiceConnect, DeviceConnect',
-                        'RegistryRead, RegistryWrite, ServiceConnect, DeviceConnect'
-                    ]
-                ]
-            ]],
-            'IpFilterRule' => ['properties' => [
-                'filterName' => ['type' => 'string'],
-                'action' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Accept',
-                        'Reject'
+            'SharedAccessSignatureAuthorizationRule' => [
+                'properties' => [
+                    'keyName' => ['type' => 'string'],
+                    'primaryKey' => ['type' => 'string'],
+                    'secondaryKey' => ['type' => 'string'],
+                    'rights' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'RegistryRead',
+                            'RegistryWrite',
+                            'ServiceConnect',
+                            'DeviceConnect',
+                            'RegistryRead, RegistryWrite',
+                            'RegistryRead, ServiceConnect',
+                            'RegistryRead, DeviceConnect',
+                            'RegistryWrite, ServiceConnect',
+                            'RegistryWrite, DeviceConnect',
+                            'ServiceConnect, DeviceConnect',
+                            'RegistryRead, RegistryWrite, ServiceConnect',
+                            'RegistryRead, RegistryWrite, DeviceConnect',
+                            'RegistryRead, ServiceConnect, DeviceConnect',
+                            'RegistryWrite, ServiceConnect, DeviceConnect',
+                            'RegistryRead, RegistryWrite, ServiceConnect, DeviceConnect'
+                        ]
                     ]
                 ],
-                'ipMask' => ['type' => 'string']
-            ]],
-            'EventHubProperties' => ['properties' => [
-                'retentionTimeInDays' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'partitionCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'partitionIds' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'path' => ['type' => 'string'],
-                'endpoint' => ['type' => 'string']
-            ]],
-            'RoutingServiceBusQueueEndpointProperties' => ['properties' => [
-                'connectionString' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'subscriptionId' => ['type' => 'string'],
-                'resourceGroup' => ['type' => 'string']
-            ]],
-            'RoutingServiceBusTopicEndpointProperties' => ['properties' => [
-                'connectionString' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'subscriptionId' => ['type' => 'string'],
-                'resourceGroup' => ['type' => 'string']
-            ]],
-            'RoutingEventHubProperties' => ['properties' => [
-                'connectionString' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'subscriptionId' => ['type' => 'string'],
-                'resourceGroup' => ['type' => 'string']
-            ]],
-            'RoutingStorageContainerProperties' => ['properties' => [
-                'connectionString' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'subscriptionId' => ['type' => 'string'],
-                'resourceGroup' => ['type' => 'string'],
-                'containerName' => ['type' => 'string'],
-                'fileNameFormat' => ['type' => 'string'],
-                'batchFrequencyInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'maxChunkSizeInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'encoding' => ['type' => 'string']
-            ]],
-            'RoutingEndpoints' => ['properties' => [
-                'serviceBusQueues' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RoutingServiceBusQueueEndpointProperties']
-                ],
-                'serviceBusTopics' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RoutingServiceBusTopicEndpointProperties']
-                ],
-                'eventHubs' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RoutingEventHubProperties']
-                ],
-                'storageContainers' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RoutingStorageContainerProperties']
+                'required' => [
+                    'keyName',
+                    'rights'
                 ]
-            ]],
-            'RouteProperties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'source' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'DeviceMessages',
-                        'TwinChangeEvents',
-                        'DeviceLifecycleEvents',
-                        'DeviceJobLifecycleEvents'
+            ],
+            'IpFilterRule' => [
+                'properties' => [
+                    'filterName' => ['type' => 'string'],
+                    'action' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Accept',
+                            'Reject'
+                        ]
+                    ],
+                    'ipMask' => ['type' => 'string']
+                ],
+                'required' => [
+                    'filterName',
+                    'action',
+                    'ipMask'
+                ]
+            ],
+            'EventHubProperties' => [
+                'properties' => [
+                    'retentionTimeInDays' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'partitionCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'partitionIds' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'path' => ['type' => 'string'],
+                    'endpoint' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RoutingServiceBusQueueEndpointProperties' => [
+                'properties' => [
+                    'connectionString' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'subscriptionId' => ['type' => 'string'],
+                    'resourceGroup' => ['type' => 'string']
+                ],
+                'required' => [
+                    'connectionString',
+                    'name'
+                ]
+            ],
+            'RoutingServiceBusTopicEndpointProperties' => [
+                'properties' => [
+                    'connectionString' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'subscriptionId' => ['type' => 'string'],
+                    'resourceGroup' => ['type' => 'string']
+                ],
+                'required' => [
+                    'connectionString',
+                    'name'
+                ]
+            ],
+            'RoutingEventHubProperties' => [
+                'properties' => [
+                    'connectionString' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'subscriptionId' => ['type' => 'string'],
+                    'resourceGroup' => ['type' => 'string']
+                ],
+                'required' => [
+                    'connectionString',
+                    'name'
+                ]
+            ],
+            'RoutingStorageContainerProperties' => [
+                'properties' => [
+                    'connectionString' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'subscriptionId' => ['type' => 'string'],
+                    'resourceGroup' => ['type' => 'string'],
+                    'containerName' => ['type' => 'string'],
+                    'fileNameFormat' => ['type' => 'string'],
+                    'batchFrequencyInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'maxChunkSizeInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'encoding' => ['type' => 'string']
+                ],
+                'required' => [
+                    'connectionString',
+                    'name',
+                    'containerName'
+                ]
+            ],
+            'RoutingEndpoints' => [
+                'properties' => [
+                    'serviceBusQueues' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RoutingServiceBusQueueEndpointProperties']
+                    ],
+                    'serviceBusTopics' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RoutingServiceBusTopicEndpointProperties']
+                    ],
+                    'eventHubs' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RoutingEventHubProperties']
+                    ],
+                    'storageContainers' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RoutingStorageContainerProperties']
                     ]
                 ],
-                'condition' => ['type' => 'string'],
-                'endpointNames' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'RouteProperties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'source' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'DeviceMessages',
+                            'TwinChangeEvents',
+                            'DeviceLifecycleEvents',
+                            'DeviceJobLifecycleEvents'
+                        ]
+                    ],
+                    'condition' => ['type' => 'string'],
+                    'endpointNames' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'isEnabled' => ['type' => 'boolean']
                 ],
-                'isEnabled' => ['type' => 'boolean']
-            ]],
-            'FallbackRouteProperties' => ['properties' => [
-                'source' => ['type' => 'string'],
-                'condition' => ['type' => 'string'],
-                'endpointNames' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'isEnabled' => ['type' => 'boolean']
-            ]],
-            'RoutingProperties' => ['properties' => [
-                'endpoints' => ['$ref' => '#/definitions/RoutingEndpoints'],
-                'routes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RouteProperties']
-                ],
-                'fallbackRoute' => ['$ref' => '#/definitions/FallbackRouteProperties']
-            ]],
-            'StorageEndpointProperties' => ['properties' => [
-                'sasTtlAsIso8601' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'connectionString' => ['type' => 'string'],
-                'containerName' => ['type' => 'string']
-            ]],
-            'MessagingEndpointProperties' => ['properties' => [
-                'lockDurationAsIso8601' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'ttlAsIso8601' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'maxDeliveryCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => [
+                    'name',
+                    'source',
+                    'endpointNames',
+                    'isEnabled'
                 ]
-            ]],
-            'FeedbackProperties' => ['properties' => [
-                'lockDurationAsIso8601' => [
-                    'type' => 'string',
-                    'format' => 'duration'
+            ],
+            'FallbackRouteProperties' => [
+                'properties' => [
+                    'source' => ['type' => 'string'],
+                    'condition' => ['type' => 'string'],
+                    'endpointNames' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'isEnabled' => ['type' => 'boolean']
                 ],
-                'ttlAsIso8601' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'maxDeliveryCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => [
+                    'source',
+                    'endpointNames',
+                    'isEnabled'
                 ]
-            ]],
-            'CloudToDeviceProperties' => ['properties' => [
-                'maxDeliveryCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+            ],
+            'RoutingProperties' => [
+                'properties' => [
+                    'endpoints' => ['$ref' => '#/definitions/RoutingEndpoints'],
+                    'routes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RouteProperties']
+                    ],
+                    'fallbackRoute' => ['$ref' => '#/definitions/FallbackRouteProperties']
                 ],
-                'defaultTtlAsIso8601' => [
-                    'type' => 'string',
-                    'format' => 'duration'
+                'required' => []
+            ],
+            'StorageEndpointProperties' => [
+                'properties' => [
+                    'sasTtlAsIso8601' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'connectionString' => ['type' => 'string'],
+                    'containerName' => ['type' => 'string']
                 ],
-                'feedback' => ['$ref' => '#/definitions/FeedbackProperties']
-            ]],
-            'OperationsMonitoringProperties' => ['properties' => ['events' => [
-                'type' => 'object',
-                'additionalProperties' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Error',
-                        'Information',
-                        'Error, Information'
+                'required' => [
+                    'connectionString',
+                    'containerName'
+                ]
+            ],
+            'MessagingEndpointProperties' => [
+                'properties' => [
+                    'lockDurationAsIso8601' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'ttlAsIso8601' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'maxDeliveryCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
-                ]
-            ]]],
-            'IotHubProperties' => ['properties' => [
-                'authorizationPolicies' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SharedAccessSignatureAuthorizationRule']
                 ],
-                'ipFilterRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/IpFilterRule']
+                'required' => []
+            ],
+            'FeedbackProperties' => [
+                'properties' => [
+                    'lockDurationAsIso8601' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'ttlAsIso8601' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'maxDeliveryCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
                 ],
-                'provisioningState' => ['type' => 'string'],
-                'hostName' => ['type' => 'string'],
-                'eventHubEndpoints' => [
+                'required' => []
+            ],
+            'CloudToDeviceProperties' => [
+                'properties' => [
+                    'maxDeliveryCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'defaultTtlAsIso8601' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'feedback' => ['$ref' => '#/definitions/FeedbackProperties']
+                ],
+                'required' => []
+            ],
+            'OperationsMonitoringProperties' => [
+                'properties' => ['events' => [
                     'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/EventHubProperties']
-                ],
-                'routing' => ['$ref' => '#/definitions/RoutingProperties'],
-                'storageEndpoints' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/StorageEndpointProperties']
-                ],
-                'messagingEndpoints' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/MessagingEndpointProperties']
-                ],
-                'enableFileUploadNotifications' => ['type' => 'boolean'],
-                'cloudToDevice' => ['$ref' => '#/definitions/CloudToDeviceProperties'],
-                'comments' => ['type' => 'string'],
-                'operationsMonitoringProperties' => ['$ref' => '#/definitions/OperationsMonitoringProperties'],
-                'features' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'DeviceManagement'
+                    'additionalProperties' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Error',
+                            'Information',
+                            'Error, Information'
+                        ]
                     ]
+                ]],
+                'required' => []
+            ],
+            'IotHubProperties' => [
+                'properties' => [
+                    'authorizationPolicies' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SharedAccessSignatureAuthorizationRule']
+                    ],
+                    'ipFilterRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/IpFilterRule']
+                    ],
+                    'provisioningState' => ['type' => 'string'],
+                    'hostName' => ['type' => 'string'],
+                    'eventHubEndpoints' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/EventHubProperties']
+                    ],
+                    'routing' => ['$ref' => '#/definitions/RoutingProperties'],
+                    'storageEndpoints' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/StorageEndpointProperties']
+                    ],
+                    'messagingEndpoints' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/MessagingEndpointProperties']
+                    ],
+                    'enableFileUploadNotifications' => ['type' => 'boolean'],
+                    'cloudToDevice' => ['$ref' => '#/definitions/CloudToDeviceProperties'],
+                    'comments' => ['type' => 'string'],
+                    'operationsMonitoringProperties' => ['$ref' => '#/definitions/OperationsMonitoringProperties'],
+                    'features' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'DeviceManagement'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'IotHubSkuInfo' => [
+                'properties' => [
+                    'name' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'F1',
+                            'S1',
+                            'S2',
+                            'S3'
+                        ]
+                    ],
+                    'tier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Free',
+                            'Standard'
+                        ]
+                    ],
+                    'capacity' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ]
+                ],
+                'required' => [
+                    'name',
+                    'capacity'
                 ]
-            ]],
-            'IotHubSkuInfo' => ['properties' => [
-                'name' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'F1',
-                        'S1',
-                        'S2',
-                        'S3'
-                    ]
+            ],
+            'IotHubDescription' => [
+                'properties' => [
+                    'subscriptionid' => ['type' => 'string'],
+                    'resourcegroup' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/IotHubProperties'],
+                    'sku' => ['$ref' => '#/definitions/IotHubSkuInfo']
                 ],
-                'tier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Free',
-                        'Standard'
-                    ]
-                ],
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => [
+                    'subscriptionid',
+                    'resourcegroup',
+                    'sku'
                 ]
-            ]],
-            'IotHubDescription' => ['properties' => [
-                'subscriptionid' => ['type' => 'string'],
-                'resourcegroup' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/IotHubProperties'],
-                'sku' => ['$ref' => '#/definitions/IotHubSkuInfo']
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'SharedAccessSignatureAuthorizationRuleListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SharedAccessSignatureAuthorizationRule']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Operation_display' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/Operation_display']
-            ]],
-            'OperationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Operation']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ErrorDetails' => ['properties' => [
-                'Code' => ['type' => 'string'],
-                'HttpStatusCode' => ['type' => 'string'],
-                'Message' => ['type' => 'string'],
-                'Details' => ['type' => 'string']
-            ]],
-            'IotHubQuotaMetricInfo' => ['properties' => [
-                'Name' => ['type' => 'string'],
-                'CurrentValue' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'MaxValue' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ]
-            ]],
-            'IotHubQuotaMetricInfoListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/IotHubQuotaMetricInfo']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RegistryStatistics' => ['properties' => [
-                'totalDeviceCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'enabledDeviceCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'disabledDeviceCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ]
-            ]],
-            'JobResponse' => ['properties' => [
-                'jobId' => ['type' => 'string'],
-                'startTimeUtc' => [
-                    'type' => 'string',
-                    'format' => 'date-time-rfc1123'
-                ],
-                'endTimeUtc' => [
-                    'type' => 'string',
-                    'format' => 'date-time-rfc1123'
-                ],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'unknown',
-                        'export',
-                        'import',
-                        'backup',
-                        'readDeviceProperties',
-                        'writeDeviceProperties',
-                        'updateDeviceConfiguration',
-                        'rebootDevice',
-                        'factoryResetDevice',
-                        'firmwareUpdate'
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'unknown',
-                        'enqueued',
-                        'running',
-                        'completed',
-                        'failed',
-                        'cancelled'
+                'required' => ['location']
+            ],
+            'SharedAccessSignatureAuthorizationRuleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SharedAccessSignatureAuthorizationRule']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Operation_display' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/Operation_display']
+                ],
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Operation']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ErrorDetails' => [
+                'properties' => [
+                    'Code' => ['type' => 'string'],
+                    'HttpStatusCode' => ['type' => 'string'],
+                    'Message' => ['type' => 'string'],
+                    'Details' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'IotHubQuotaMetricInfo' => [
+                'properties' => [
+                    'Name' => ['type' => 'string'],
+                    'CurrentValue' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'MaxValue' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
                     ]
                 ],
-                'failureReason' => ['type' => 'string'],
-                'statusMessage' => ['type' => 'string'],
-                'parentJobId' => ['type' => 'string']
-            ]],
-            'JobResponseListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/JobResponse']
+                'required' => []
+            ],
+            'IotHubQuotaMetricInfoListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/IotHubQuotaMetricInfo']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'IotHubCapacity' => ['properties' => [
-                'minimum' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'maximum' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'default' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'scaleType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Automatic',
-                        'Manual',
-                        'None'
+                'required' => []
+            ],
+            'RegistryStatistics' => [
+                'properties' => [
+                    'totalDeviceCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'enabledDeviceCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'disabledDeviceCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
                     ]
+                ],
+                'required' => []
+            ],
+            'JobResponse' => [
+                'properties' => [
+                    'jobId' => ['type' => 'string'],
+                    'startTimeUtc' => [
+                        'type' => 'string',
+                        'format' => 'date-time-rfc1123'
+                    ],
+                    'endTimeUtc' => [
+                        'type' => 'string',
+                        'format' => 'date-time-rfc1123'
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'unknown',
+                            'export',
+                            'import',
+                            'backup',
+                            'readDeviceProperties',
+                            'writeDeviceProperties',
+                            'updateDeviceConfiguration',
+                            'rebootDevice',
+                            'factoryResetDevice',
+                            'firmwareUpdate'
+                        ]
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'unknown',
+                            'enqueued',
+                            'running',
+                            'completed',
+                            'failed',
+                            'cancelled'
+                        ]
+                    ],
+                    'failureReason' => ['type' => 'string'],
+                    'statusMessage' => ['type' => 'string'],
+                    'parentJobId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'JobResponseListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/JobResponse']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'IotHubCapacity' => [
+                'properties' => [
+                    'minimum' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'maximum' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'default' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'scaleType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Automatic',
+                            'Manual',
+                            'None'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'IotHubSkuDescription' => [
+                'properties' => [
+                    'resourceType' => ['type' => 'string'],
+                    'sku' => ['$ref' => '#/definitions/IotHubSkuInfo'],
+                    'capacity' => ['$ref' => '#/definitions/IotHubCapacity']
+                ],
+                'required' => [
+                    'sku',
+                    'capacity'
                 ]
-            ]],
-            'IotHubSkuDescription' => ['properties' => [
-                'resourceType' => ['type' => 'string'],
-                'sku' => ['$ref' => '#/definitions/IotHubSkuInfo'],
-                'capacity' => ['$ref' => '#/definitions/IotHubCapacity']
-            ]],
-            'EventHubConsumerGroupsListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+            ],
+            'EventHubConsumerGroupsListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'EventHubConsumerGroupInfo' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => []
+            ],
+            'EventHubConsumerGroupInfo' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string']
                 ],
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string']
-            ]],
-            'IotHubSkuDescriptionListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/IotHubSkuDescription']
+                'required' => []
+            ],
+            'IotHubSkuDescriptionListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/IotHubSkuDescription']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'IotHubDescriptionListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/IotHubDescription']
+                'required' => []
+            ],
+            'IotHubDescriptionListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/IotHubDescription']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'OperationInputs' => ['properties' => ['Name' => ['type' => 'string']]],
-            'IotHubNameAvailabilityInfo' => ['properties' => [
-                'nameAvailable' => ['type' => 'boolean'],
-                'reason' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'AlreadyExists'
-                    ]
+                'required' => []
+            ],
+            'OperationInputs' => [
+                'properties' => ['Name' => ['type' => 'string']],
+                'required' => ['Name']
+            ],
+            'IotHubNameAvailabilityInfo' => [
+                'properties' => [
+                    'nameAvailable' => ['type' => 'boolean'],
+                    'reason' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'AlreadyExists'
+                        ]
+                    ],
+                    'message' => ['type' => 'string']
                 ],
-                'message' => ['type' => 'string']
-            ]],
-            'ExportDevicesRequest' => ['properties' => [
-                'ExportBlobContainerUri' => ['type' => 'string'],
-                'ExcludeKeys' => ['type' => 'boolean']
-            ]],
-            'ImportDevicesRequest' => ['properties' => [
-                'InputBlobContainerUri' => ['type' => 'string'],
-                'OutputBlobContainerUri' => ['type' => 'string']
-            ]]
+                'required' => []
+            ],
+            'ExportDevicesRequest' => [
+                'properties' => [
+                    'ExportBlobContainerUri' => ['type' => 'string'],
+                    'ExcludeKeys' => ['type' => 'boolean']
+                ],
+                'required' => [
+                    'ExportBlobContainerUri',
+                    'ExcludeKeys'
+                ]
+            ],
+            'ImportDevicesRequest' => [
+                'properties' => [
+                    'InputBlobContainerUri' => ['type' => 'string'],
+                    'OutputBlobContainerUri' => ['type' => 'string']
+                ],
+                'required' => [
+                    'InputBlobContainerUri',
+                    'OutputBlobContainerUri'
+                ]
+            ]
         ]
     ];
 }

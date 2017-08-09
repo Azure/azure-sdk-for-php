@@ -105,65 +105,86 @@ final class SubscriptionClient
             ]]
         ],
         'definitions' => [
-            'Location' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'subscriptionId' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'latitude' => ['type' => 'string'],
-                'longitude' => ['type' => 'string']
-            ]],
-            'LocationListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Location']
-            ]]],
-            'SubscriptionPolicies' => ['properties' => [
-                'locationPlacementId' => ['type' => 'string'],
-                'quotaId' => ['type' => 'string'],
-                'spendingLimit' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'On',
-                        'Off',
-                        'CurrentPeriodOff'
-                    ]
-                ]
-            ]],
-            'Subscription' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'subscriptionId' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Warned',
-                        'PastDue',
-                        'Disabled',
-                        'Deleted'
+            'Location' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'subscriptionId' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'latitude' => ['type' => 'string'],
+                    'longitude' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LocationListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Location']
+                ]],
+                'required' => []
+            ],
+            'SubscriptionPolicies' => [
+                'properties' => [
+                    'locationPlacementId' => ['type' => 'string'],
+                    'quotaId' => ['type' => 'string'],
+                    'spendingLimit' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'On',
+                            'Off',
+                            'CurrentPeriodOff'
+                        ]
                     ]
                 ],
-                'subscriptionPolicies' => ['$ref' => '#/definitions/SubscriptionPolicies'],
-                'authorizationSource' => ['type' => 'string']
-            ]],
-            'SubscriptionListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Subscription']
+                'required' => []
+            ],
+            'Subscription' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'subscriptionId' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Warned',
+                            'PastDue',
+                            'Disabled',
+                            'Deleted'
+                        ]
+                    ],
+                    'subscriptionPolicies' => ['$ref' => '#/definitions/SubscriptionPolicies'],
+                    'authorizationSource' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'TenantIdDescription' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'tenantId' => ['type' => 'string']
-            ]],
-            'TenantListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TenantIdDescription']
+                'required' => []
+            ],
+            'SubscriptionListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Subscription']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]]
+                'required' => ['nextLink']
+            ],
+            'TenantIdDescription' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'tenantId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'TenantListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TenantIdDescription']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['nextLink']
+            ]
         ]
     ];
 }

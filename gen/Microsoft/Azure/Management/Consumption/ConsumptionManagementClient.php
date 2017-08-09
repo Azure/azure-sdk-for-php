@@ -101,95 +101,125 @@ final class ConsumptionManagementClient
             ]]
         ],
         'definitions' => [
-            'MeterDetails' => ['properties' => [
-                'meterName' => ['type' => 'string'],
-                'meterCategory' => ['type' => 'string'],
-                'meterSubCategory' => ['type' => 'string'],
-                'unit' => ['type' => 'string'],
-                'meterLocation' => ['type' => 'string'],
-                'totalIncludedQuantity' => [
-                    'type' => 'number',
-                    'format' => 'decimal'
+            'MeterDetails' => [
+                'properties' => [
+                    'meterName' => ['type' => 'string'],
+                    'meterCategory' => ['type' => 'string'],
+                    'meterSubCategory' => ['type' => 'string'],
+                    'unit' => ['type' => 'string'],
+                    'meterLocation' => ['type' => 'string'],
+                    'totalIncludedQuantity' => [
+                        'type' => 'number',
+                        'format' => 'decimal'
+                    ],
+                    'pretaxStandardRate' => [
+                        'type' => 'number',
+                        'format' => 'decimal'
+                    ]
                 ],
-                'pretaxStandardRate' => [
-                    'type' => 'number',
-                    'format' => 'decimal'
-                ]
-            ]],
-            'UsageDetailProperties' => ['properties' => [
-                'billingPeriodId' => ['type' => 'string'],
-                'invoiceId' => ['type' => 'string'],
-                'usageStart' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'UsageDetailProperties' => [
+                'properties' => [
+                    'billingPeriodId' => ['type' => 'string'],
+                    'invoiceId' => ['type' => 'string'],
+                    'usageStart' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'usageEnd' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'instanceName' => ['type' => 'string'],
+                    'instanceId' => ['type' => 'string'],
+                    'instanceLocation' => ['type' => 'string'],
+                    'currency' => ['type' => 'string'],
+                    'usageQuantity' => [
+                        'type' => 'number',
+                        'format' => 'decimal'
+                    ],
+                    'billableQuantity' => [
+                        'type' => 'number',
+                        'format' => 'decimal'
+                    ],
+                    'pretaxCost' => [
+                        'type' => 'number',
+                        'format' => 'decimal'
+                    ],
+                    'isEstimated' => ['type' => 'boolean'],
+                    'meterId' => ['type' => 'string'],
+                    'meterDetails' => ['$ref' => '#/definitions/MeterDetails'],
+                    'additionalProperties' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
                 ],
-                'usageEnd' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'UsageDetail' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UsageDetailProperties']],
+                'required' => []
+            ],
+            'UsageDetailsListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/UsageDetail']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'instanceName' => ['type' => 'string'],
-                'instanceId' => ['type' => 'string'],
-                'instanceLocation' => ['type' => 'string'],
-                'currency' => ['type' => 'string'],
-                'usageQuantity' => [
-                    'type' => 'number',
-                    'format' => 'decimal'
+                'required' => []
+            ],
+            'ErrorDetails' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'target' => ['type' => 'string']
                 ],
-                'billableQuantity' => [
-                    'type' => 'number',
-                    'format' => 'decimal'
+                'required' => []
+            ],
+            'ErrorResponse' => [
+                'properties' => ['error' => ['$ref' => '#/definitions/ErrorDetails']],
+                'required' => []
+            ],
+            'Operation_display' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string']
                 ],
-                'pretaxCost' => [
-                    'type' => 'number',
-                    'format' => 'decimal'
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
-                'isEstimated' => ['type' => 'boolean'],
-                'meterId' => ['type' => 'string'],
-                'meterDetails' => ['$ref' => '#/definitions/MeterDetails'],
-                'additionalProperties' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'UsageDetail' => ['properties' => ['properties' => ['$ref' => '#/definitions/UsageDetailProperties']]],
-            'UsageDetailsListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/UsageDetail']
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Operation']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ErrorDetails' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'target' => ['type' => 'string']
-            ]],
-            'ErrorResponse' => ['properties' => ['error' => ['$ref' => '#/definitions/ErrorDetails']]],
-            'Operation_display' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/Operation_display']
-            ]],
-            'OperationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Operation']
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]]
+                'required' => []
+            ]
         ]
     ];
 }

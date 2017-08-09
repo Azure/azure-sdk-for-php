@@ -6062,906 +6062,629 @@ final class NetworkManagementClient
             ]]
         ],
         'definitions' => [
-            'SubResource' => ['properties' => ['id' => ['type' => 'string']]],
-            'BackendAddressPoolPropertiesFormat' => ['properties' => [
-                'backendIPConfigurations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NetworkInterfaceIPConfiguration']
+            'SubResource' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => []
+            ],
+            'BackendAddressPoolPropertiesFormat' => [
+                'properties' => [
+                    'backendIPConfigurations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NetworkInterfaceIPConfiguration']
+                    ],
+                    'loadBalancingRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubResource']
+                    ],
+                    'outboundNatRule' => ['$ref' => '#/definitions/SubResource'],
+                    'provisioningState' => ['type' => 'string']
                 ],
-                'loadBalancingRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubResource']
+                'required' => []
+            ],
+            'BackendAddressPool' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/BackendAddressPoolPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
                 ],
-                'outboundNatRule' => ['$ref' => '#/definitions/SubResource'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'BackendAddressPool' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/BackendAddressPoolPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'InboundNatRulePropertiesFormat' => ['properties' => [
-                'frontendIPConfiguration' => ['$ref' => '#/definitions/SubResource'],
-                'backendIPConfiguration' => ['$ref' => '#/definitions/NetworkInterfaceIPConfiguration'],
-                'protocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Udp',
-                        'Tcp'
-                    ]
-                ],
-                'frontendPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'backendPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'idleTimeoutInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'enableFloatingIP' => ['type' => 'boolean'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'InboundNatRule' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/InboundNatRulePropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'SecurityRulePropertiesFormat' => ['properties' => [
-                'description' => ['type' => 'string'],
-                'protocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Tcp',
-                        'Udp',
-                        '*'
-                    ]
-                ],
-                'sourcePortRange' => ['type' => 'string'],
-                'destinationPortRange' => ['type' => 'string'],
-                'sourceAddressPrefix' => ['type' => 'string'],
-                'sourceAddressPrefixes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'destinationAddressPrefix' => ['type' => 'string'],
-                'destinationAddressPrefixes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'sourcePortRanges' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'destinationPortRanges' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'access' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Allow',
-                        'Deny'
-                    ]
-                ],
-                'priority' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'direction' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Inbound',
-                        'Outbound'
-                    ]
-                ],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'SecurityRule' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/SecurityRulePropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'NetworkInterfaceDnsSettings' => ['properties' => [
-                'dnsServers' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'appliedDnsServers' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'internalDnsNameLabel' => ['type' => 'string'],
-                'internalFqdn' => ['type' => 'string'],
-                'internalDomainNameSuffix' => ['type' => 'string']
-            ]],
-            'NetworkInterfacePropertiesFormat' => ['properties' => [
-                'virtualMachine' => ['$ref' => '#/definitions/SubResource'],
-                'networkSecurityGroup' => ['$ref' => '#/definitions/NetworkSecurityGroup'],
-                'ipConfigurations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NetworkInterfaceIPConfiguration']
-                ],
-                'dnsSettings' => ['$ref' => '#/definitions/NetworkInterfaceDnsSettings'],
-                'macAddress' => ['type' => 'string'],
-                'primary' => ['type' => 'boolean'],
-                'enableAcceleratedNetworking' => ['type' => 'boolean'],
-                'enableIPForwarding' => ['type' => 'boolean'],
-                'resourceGuid' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'NetworkInterface' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/NetworkInterfacePropertiesFormat'],
-                'etag' => ['type' => 'string']
-            ]],
-            'NetworkSecurityGroupPropertiesFormat' => ['properties' => [
-                'securityRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SecurityRule']
-                ],
-                'defaultSecurityRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SecurityRule']
-                ],
-                'networkInterfaces' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NetworkInterface']
-                ],
-                'subnets' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Subnet']
-                ],
-                'resourceGuid' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'NetworkSecurityGroup' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/NetworkSecurityGroupPropertiesFormat'],
-                'etag' => ['type' => 'string']
-            ]],
-            'RoutePropertiesFormat' => ['properties' => [
-                'addressPrefix' => ['type' => 'string'],
-                'nextHopType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'VirtualNetworkGateway',
-                        'VnetLocal',
-                        'Internet',
-                        'VirtualAppliance',
-                        'None'
-                    ]
-                ],
-                'nextHopIpAddress' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'Route' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/RoutePropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'RouteTablePropertiesFormat' => ['properties' => [
-                'routes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Route']
-                ],
-                'subnets' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Subnet']
-                ],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'RouteTable' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/RouteTablePropertiesFormat'],
-                'etag' => ['type' => 'string']
-            ]],
-            'PublicIPAddressDnsSettings' => ['properties' => [
-                'domainNameLabel' => ['type' => 'string'],
-                'fqdn' => ['type' => 'string'],
-                'reverseFqdn' => ['type' => 'string']
-            ]],
-            'PublicIPAddressPropertiesFormat' => ['properties' => [
-                'publicIPAllocationMethod' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Static',
-                        'Dynamic'
-                    ]
-                ],
-                'publicIPAddressVersion' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'IPv4',
-                        'IPv6'
-                    ]
-                ],
-                'ipConfiguration' => ['$ref' => '#/definitions/IPConfiguration'],
-                'dnsSettings' => ['$ref' => '#/definitions/PublicIPAddressDnsSettings'],
-                'ipAddress' => ['type' => 'string'],
-                'idleTimeoutInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'resourceGuid' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'PublicIPAddress' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/PublicIPAddressPropertiesFormat'],
-                'etag' => ['type' => 'string']
-            ]],
-            'IPConfigurationPropertiesFormat' => ['properties' => [
-                'privateIPAddress' => ['type' => 'string'],
-                'privateIPAllocationMethod' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Static',
-                        'Dynamic'
-                    ]
-                ],
-                'subnet' => ['$ref' => '#/definitions/Subnet'],
-                'publicIPAddress' => ['$ref' => '#/definitions/PublicIPAddress'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'IPConfiguration' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/IPConfigurationPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'ResourceNavigationLinkFormat' => ['properties' => [
-                'linkedResourceType' => ['type' => 'string'],
-                'link' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'ResourceNavigationLink' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ResourceNavigationLinkFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'SubnetPropertiesFormat' => ['properties' => [
-                'addressPrefix' => ['type' => 'string'],
-                'networkSecurityGroup' => ['$ref' => '#/definitions/NetworkSecurityGroup'],
-                'routeTable' => ['$ref' => '#/definitions/RouteTable'],
-                'ipConfigurations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/IPConfiguration']
-                ],
-                'resourceNavigationLinks' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceNavigationLink']
-                ],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'Subnet' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/SubnetPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'NetworkInterfaceIPConfigurationPropertiesFormat' => ['properties' => [
-                'applicationGatewayBackendAddressPools' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendAddressPool']
-                ],
-                'loadBalancerBackendAddressPools' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/BackendAddressPool']
-                ],
-                'loadBalancerInboundNatRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InboundNatRule']
-                ],
-                'privateIPAddress' => ['type' => 'string'],
-                'privateIPAllocationMethod' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Static',
-                        'Dynamic'
-                    ]
-                ],
-                'privateIPAddressVersion' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'IPv4',
-                        'IPv6'
-                    ]
-                ],
-                'subnet' => ['$ref' => '#/definitions/Subnet'],
-                'primary' => ['type' => 'boolean'],
-                'publicIPAddress' => ['$ref' => '#/definitions/PublicIPAddress'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'NetworkInterfaceIPConfiguration' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/NetworkInterfaceIPConfigurationPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayBackendAddress' => ['properties' => [
-                'fqdn' => ['type' => 'string'],
-                'ipAddress' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayBackendAddressPoolPropertiesFormat' => ['properties' => [
-                'backendIPConfigurations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NetworkInterfaceIPConfiguration']
-                ],
-                'backendAddresses' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendAddress']
-                ],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayBackendAddressPool' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayConnectionDraining' => ['properties' => [
-                'enabled' => ['type' => 'boolean'],
-                'drainTimeoutInSec' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ApplicationGatewayBackendHttpSettingsPropertiesFormat' => ['properties' => [
-                'port' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'protocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Http',
-                        'Https'
-                    ]
-                ],
-                'cookieBasedAffinity' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'requestTimeout' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'probe' => ['$ref' => '#/definitions/SubResource'],
-                'authenticationCertificates' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubResource']
-                ],
-                'connectionDraining' => ['$ref' => '#/definitions/ApplicationGatewayConnectionDraining'],
-                'hostName' => ['type' => 'string'],
-                'pickHostNameFromBackendAddress' => ['type' => 'boolean'],
-                'affinityCookieName' => ['type' => 'string'],
-                'probeEnabled' => ['type' => 'boolean'],
-                'path' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayBackendHttpSettings' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApplicationGatewayBackendHttpSettingsPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayBackendHealthServer' => ['properties' => [
-                'address' => ['type' => 'string'],
-                'ipConfiguration' => ['$ref' => '#/definitions/NetworkInterfaceIPConfiguration'],
-                'health' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Unknown',
-                        'Up',
-                        'Down',
-                        'Partial',
-                        'Draining'
-                    ]
-                ]
-            ]],
-            'ApplicationGatewayBackendHealthHttpSettings' => ['properties' => [
-                'backendHttpSettings' => ['$ref' => '#/definitions/ApplicationGatewayBackendHttpSettings'],
-                'servers' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendHealthServer']
-                ]
-            ]],
-            'ApplicationGatewayBackendHealthPool' => ['properties' => [
-                'backendAddressPool' => ['$ref' => '#/definitions/ApplicationGatewayBackendAddressPool'],
-                'backendHttpSettingsCollection' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendHealthHttpSettings']
-                ]
-            ]],
-            'ApplicationGatewayBackendHealth' => ['properties' => ['backendAddressPools' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendHealthPool']
-            ]]],
-            'ApplicationGatewaySku' => ['properties' => [
-                'name' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Standard_Small',
-                        'Standard_Medium',
-                        'Standard_Large',
-                        'WAF_Medium',
-                        'WAF_Large'
-                    ]
-                ],
-                'tier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Standard',
-                        'WAF'
-                    ]
-                ],
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ApplicationGatewaySslPolicy' => ['properties' => [
-                'disabledSslProtocols' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => []
+            ],
+            'InboundNatRulePropertiesFormat' => [
+                'properties' => [
+                    'frontendIPConfiguration' => ['$ref' => '#/definitions/SubResource'],
+                    'backendIPConfiguration' => ['$ref' => '#/definitions/NetworkInterfaceIPConfiguration'],
+                    'protocol' => [
                         'type' => 'string',
                         'enum' => [
-                            'TLSv1_0',
-                            'TLSv1_1',
-                            'TLSv1_2'
+                            'Udp',
+                            'Tcp'
                         ]
-                    ]
+                    ],
+                    'frontendPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'backendPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'idleTimeoutInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'enableFloatingIP' => ['type' => 'boolean'],
+                    'provisioningState' => ['type' => 'string']
                 ],
-                'policyType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Predefined',
-                        'Custom'
-                    ]
+                'required' => []
+            ],
+            'InboundNatRule' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/InboundNatRulePropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
                 ],
-                'policyName' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'AppGwSslPolicy20150501',
-                        'AppGwSslPolicy20170401',
-                        'AppGwSslPolicy20170401S'
-                    ]
-                ],
-                'cipherSuites' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => []
+            ],
+            'SecurityRulePropertiesFormat' => [
+                'properties' => [
+                    'description' => ['type' => 'string'],
+                    'protocol' => [
                         'type' => 'string',
                         'enum' => [
-                            'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384',
-                            'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256',
-                            'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA',
-                            'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA',
-                            'TLS_DHE_RSA_WITH_AES_256_GCM_SHA384',
-                            'TLS_DHE_RSA_WITH_AES_128_GCM_SHA256',
-                            'TLS_DHE_RSA_WITH_AES_256_CBC_SHA',
-                            'TLS_DHE_RSA_WITH_AES_128_CBC_SHA',
-                            'TLS_RSA_WITH_AES_256_GCM_SHA384',
-                            'TLS_RSA_WITH_AES_128_GCM_SHA256',
-                            'TLS_RSA_WITH_AES_256_CBC_SHA256',
-                            'TLS_RSA_WITH_AES_128_CBC_SHA256',
-                            'TLS_RSA_WITH_AES_256_CBC_SHA',
-                            'TLS_RSA_WITH_AES_128_CBC_SHA',
-                            'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384',
-                            'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256',
-                            'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384',
-                            'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256',
-                            'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA',
-                            'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA',
-                            'TLS_DHE_DSS_WITH_AES_256_CBC_SHA256',
-                            'TLS_DHE_DSS_WITH_AES_128_CBC_SHA256',
-                            'TLS_DHE_DSS_WITH_AES_256_CBC_SHA',
-                            'TLS_DHE_DSS_WITH_AES_128_CBC_SHA',
-                            'TLS_RSA_WITH_3DES_EDE_CBC_SHA'
+                            'Tcp',
+                            'Udp',
+                            '*'
                         ]
-                    ]
+                    ],
+                    'sourcePortRange' => ['type' => 'string'],
+                    'destinationPortRange' => ['type' => 'string'],
+                    'sourceAddressPrefix' => ['type' => 'string'],
+                    'sourceAddressPrefixes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'destinationAddressPrefix' => ['type' => 'string'],
+                    'destinationAddressPrefixes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'sourcePortRanges' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'destinationPortRanges' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'access' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Allow',
+                            'Deny'
+                        ]
+                    ],
+                    'priority' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'direction' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Inbound',
+                            'Outbound'
+                        ]
+                    ],
+                    'provisioningState' => ['type' => 'string']
                 ],
-                'minProtocolVersion' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'TLSv1_0',
-                        'TLSv1_1',
-                        'TLSv1_2'
-                    ]
+                'required' => [
+                    'protocol',
+                    'sourceAddressPrefix',
+                    'destinationAddressPrefix',
+                    'access',
+                    'direction'
                 ]
-            ]],
-            'ApplicationGatewayIPConfigurationPropertiesFormat' => ['properties' => [
-                'subnet' => ['$ref' => '#/definitions/SubResource'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayIPConfiguration' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApplicationGatewayIPConfigurationPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayAuthenticationCertificatePropertiesFormat' => ['properties' => [
-                'data' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayAuthenticationCertificate' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApplicationGatewayAuthenticationCertificatePropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ApplicationGatewaySslCertificatePropertiesFormat' => ['properties' => [
-                'data' => ['type' => 'string'],
-                'password' => ['type' => 'string'],
-                'publicCertData' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'ApplicationGatewaySslCertificate' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApplicationGatewaySslCertificatePropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayFrontendIPConfigurationPropertiesFormat' => ['properties' => [
-                'privateIPAddress' => ['type' => 'string'],
-                'privateIPAllocationMethod' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Static',
-                        'Dynamic'
-                    ]
+            ],
+            'SecurityRule' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/SecurityRulePropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
                 ],
-                'subnet' => ['$ref' => '#/definitions/SubResource'],
-                'publicIPAddress' => ['$ref' => '#/definitions/SubResource'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayFrontendIPConfiguration' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApplicationGatewayFrontendIPConfigurationPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayFrontendPortPropertiesFormat' => ['properties' => [
-                'port' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'NetworkInterfaceDnsSettings' => [
+                'properties' => [
+                    'dnsServers' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'appliedDnsServers' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'internalDnsNameLabel' => ['type' => 'string'],
+                    'internalFqdn' => ['type' => 'string'],
+                    'internalDomainNameSuffix' => ['type' => 'string']
                 ],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayFrontendPort' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApplicationGatewayFrontendPortPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayHttpListenerPropertiesFormat' => ['properties' => [
-                'frontendIPConfiguration' => ['$ref' => '#/definitions/SubResource'],
-                'frontendPort' => ['$ref' => '#/definitions/SubResource'],
-                'protocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Http',
-                        'Https'
-                    ]
+                'required' => []
+            ],
+            'NetworkInterfacePropertiesFormat' => [
+                'properties' => [
+                    'virtualMachine' => ['$ref' => '#/definitions/SubResource'],
+                    'networkSecurityGroup' => ['$ref' => '#/definitions/NetworkSecurityGroup'],
+                    'ipConfigurations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NetworkInterfaceIPConfiguration']
+                    ],
+                    'dnsSettings' => ['$ref' => '#/definitions/NetworkInterfaceDnsSettings'],
+                    'macAddress' => ['type' => 'string'],
+                    'primary' => ['type' => 'boolean'],
+                    'enableAcceleratedNetworking' => ['type' => 'boolean'],
+                    'enableIPForwarding' => ['type' => 'boolean'],
+                    'resourceGuid' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
                 ],
-                'hostName' => ['type' => 'string'],
-                'sslCertificate' => ['$ref' => '#/definitions/SubResource'],
-                'requireServerNameIndication' => ['type' => 'boolean'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayHttpListener' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApplicationGatewayHttpListenerPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayPathRulePropertiesFormat' => ['properties' => [
-                'paths' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'NetworkInterface' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/NetworkInterfacePropertiesFormat'],
+                    'etag' => ['type' => 'string']
                 ],
-                'backendAddressPool' => ['$ref' => '#/definitions/SubResource'],
-                'backendHttpSettings' => ['$ref' => '#/definitions/SubResource'],
-                'redirectConfiguration' => ['$ref' => '#/definitions/SubResource'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayPathRule' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApplicationGatewayPathRulePropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayProbeHealthResponseMatch' => ['properties' => [
-                'body' => ['type' => 'string'],
-                'statusCodes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'ApplicationGatewayProbePropertiesFormat' => ['properties' => [
-                'protocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Http',
-                        'Https'
-                    ]
+                'required' => []
+            ],
+            'NetworkSecurityGroupPropertiesFormat' => [
+                'properties' => [
+                    'securityRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SecurityRule']
+                    ],
+                    'defaultSecurityRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SecurityRule']
+                    ],
+                    'networkInterfaces' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NetworkInterface']
+                    ],
+                    'subnets' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Subnet']
+                    ],
+                    'resourceGuid' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
                 ],
-                'host' => ['type' => 'string'],
-                'path' => ['type' => 'string'],
-                'interval' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'NetworkSecurityGroup' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/NetworkSecurityGroupPropertiesFormat'],
+                    'etag' => ['type' => 'string']
                 ],
-                'timeout' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'RoutePropertiesFormat' => [
+                'properties' => [
+                    'addressPrefix' => ['type' => 'string'],
+                    'nextHopType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'VirtualNetworkGateway',
+                            'VnetLocal',
+                            'Internet',
+                            'VirtualAppliance',
+                            'None'
+                        ]
+                    ],
+                    'nextHopIpAddress' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
                 ],
-                'unhealthyThreshold' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => ['nextHopType']
+            ],
+            'Route' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/RoutePropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
                 ],
-                'pickHostNameFromBackendHttpSettings' => ['type' => 'boolean'],
-                'minServers' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'RouteTablePropertiesFormat' => [
+                'properties' => [
+                    'routes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Route']
+                    ],
+                    'subnets' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Subnet']
+                    ],
+                    'provisioningState' => ['type' => 'string']
                 ],
-                'match' => ['$ref' => '#/definitions/ApplicationGatewayProbeHealthResponseMatch'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayProbe' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApplicationGatewayProbePropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayRequestRoutingRulePropertiesFormat' => ['properties' => [
-                'ruleType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'PathBasedRouting'
-                    ]
+                'required' => []
+            ],
+            'RouteTable' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/RouteTablePropertiesFormat'],
+                    'etag' => ['type' => 'string']
                 ],
-                'backendAddressPool' => ['$ref' => '#/definitions/SubResource'],
-                'backendHttpSettings' => ['$ref' => '#/definitions/SubResource'],
-                'httpListener' => ['$ref' => '#/definitions/SubResource'],
-                'urlPathMap' => ['$ref' => '#/definitions/SubResource'],
-                'redirectConfiguration' => ['$ref' => '#/definitions/SubResource'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayRequestRoutingRule' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApplicationGatewayRequestRoutingRulePropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayRedirectConfigurationPropertiesFormat' => ['properties' => [
-                'redirectType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Permanent',
-                        'Found',
-                        'SeeOther',
-                        'Temporary'
-                    ]
+                'required' => []
+            ],
+            'PublicIPAddressDnsSettings' => [
+                'properties' => [
+                    'domainNameLabel' => ['type' => 'string'],
+                    'fqdn' => ['type' => 'string'],
+                    'reverseFqdn' => ['type' => 'string']
                 ],
-                'targetListener' => ['$ref' => '#/definitions/SubResource'],
-                'targetUrl' => ['type' => 'string'],
-                'includePath' => ['type' => 'boolean'],
-                'includeQueryString' => ['type' => 'boolean'],
-                'requestRoutingRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubResource']
+                'required' => []
+            ],
+            'PublicIPAddressPropertiesFormat' => [
+                'properties' => [
+                    'publicIPAllocationMethod' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Static',
+                            'Dynamic'
+                        ]
+                    ],
+                    'publicIPAddressVersion' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'IPv4',
+                            'IPv6'
+                        ]
+                    ],
+                    'ipConfiguration' => ['$ref' => '#/definitions/IPConfiguration'],
+                    'dnsSettings' => ['$ref' => '#/definitions/PublicIPAddressDnsSettings'],
+                    'ipAddress' => ['type' => 'string'],
+                    'idleTimeoutInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'resourceGuid' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
                 ],
-                'urlPathMaps' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubResource']
+                'required' => []
+            ],
+            'PublicIPAddress' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/PublicIPAddressPropertiesFormat'],
+                    'etag' => ['type' => 'string']
                 ],
-                'pathRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubResource']
-                ]
-            ]],
-            'ApplicationGatewayRedirectConfiguration' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApplicationGatewayRedirectConfigurationPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayUrlPathMapPropertiesFormat' => ['properties' => [
-                'defaultBackendAddressPool' => ['$ref' => '#/definitions/SubResource'],
-                'defaultBackendHttpSettings' => ['$ref' => '#/definitions/SubResource'],
-                'defaultRedirectConfiguration' => ['$ref' => '#/definitions/SubResource'],
-                'pathRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayPathRule']
+                'required' => []
+            ],
+            'IPConfigurationPropertiesFormat' => [
+                'properties' => [
+                    'privateIPAddress' => ['type' => 'string'],
+                    'privateIPAllocationMethod' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Static',
+                            'Dynamic'
+                        ]
+                    ],
+                    'subnet' => ['$ref' => '#/definitions/Subnet'],
+                    'publicIPAddress' => ['$ref' => '#/definitions/PublicIPAddress'],
+                    'provisioningState' => ['type' => 'string']
                 ],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayUrlPathMap' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApplicationGatewayUrlPathMapPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayFirewallDisabledRuleGroup' => ['properties' => [
-                'ruleGroupName' => ['type' => 'string'],
-                'rules' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => []
+            ],
+            'IPConfiguration' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/IPConfigurationPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResourceNavigationLinkFormat' => [
+                'properties' => [
+                    'linkedResourceType' => ['type' => 'string'],
+                    'link' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResourceNavigationLink' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ResourceNavigationLinkFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SubnetPropertiesFormat' => [
+                'properties' => [
+                    'addressPrefix' => ['type' => 'string'],
+                    'networkSecurityGroup' => ['$ref' => '#/definitions/NetworkSecurityGroup'],
+                    'routeTable' => ['$ref' => '#/definitions/RouteTable'],
+                    'ipConfigurations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/IPConfiguration']
+                    ],
+                    'resourceNavigationLinks' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceNavigationLink']
+                    ],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Subnet' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/SubnetPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'NetworkInterfaceIPConfigurationPropertiesFormat' => [
+                'properties' => [
+                    'applicationGatewayBackendAddressPools' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendAddressPool']
+                    ],
+                    'loadBalancerBackendAddressPools' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/BackendAddressPool']
+                    ],
+                    'loadBalancerInboundNatRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InboundNatRule']
+                    ],
+                    'privateIPAddress' => ['type' => 'string'],
+                    'privateIPAllocationMethod' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Static',
+                            'Dynamic'
+                        ]
+                    ],
+                    'privateIPAddressVersion' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'IPv4',
+                            'IPv6'
+                        ]
+                    ],
+                    'subnet' => ['$ref' => '#/definitions/Subnet'],
+                    'primary' => ['type' => 'boolean'],
+                    'publicIPAddress' => ['$ref' => '#/definitions/PublicIPAddress'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'NetworkInterfaceIPConfiguration' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/NetworkInterfaceIPConfigurationPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayBackendAddress' => [
+                'properties' => [
+                    'fqdn' => ['type' => 'string'],
+                    'ipAddress' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayBackendAddressPoolPropertiesFormat' => [
+                'properties' => [
+                    'backendIPConfigurations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NetworkInterfaceIPConfiguration']
+                    ],
+                    'backendAddresses' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendAddress']
+                    ],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayBackendAddressPool' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayConnectionDraining' => [
+                'properties' => [
+                    'enabled' => ['type' => 'boolean'],
+                    'drainTimeoutInSec' => [
                         'type' => 'integer',
                         'format' => 'int32'
                     ]
+                ],
+                'required' => [
+                    'enabled',
+                    'drainTimeoutInSec'
                 ]
-            ]],
-            'ApplicationGatewayWebApplicationFirewallConfiguration' => ['properties' => [
-                'enabled' => ['type' => 'boolean'],
-                'firewallMode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Detection',
-                        'Prevention'
-                    ]
-                ],
-                'ruleSetType' => ['type' => 'string'],
-                'ruleSetVersion' => ['type' => 'string'],
-                'disabledRuleGroups' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayFirewallDisabledRuleGroup']
-                ]
-            ]],
-            'ApplicationGatewayPropertiesFormat' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/ApplicationGatewaySku'],
-                'sslPolicy' => ['$ref' => '#/definitions/ApplicationGatewaySslPolicy'],
-                'operationalState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Stopped',
-                        'Starting',
-                        'Running',
-                        'Stopping'
-                    ]
-                ],
-                'gatewayIPConfigurations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayIPConfiguration']
-                ],
-                'authenticationCertificates' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayAuthenticationCertificate']
-                ],
-                'sslCertificates' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewaySslCertificate']
-                ],
-                'frontendIPConfigurations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayFrontendIPConfiguration']
-                ],
-                'frontendPorts' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayFrontendPort']
-                ],
-                'probes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayProbe']
-                ],
-                'backendAddressPools' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendAddressPool']
-                ],
-                'backendHttpSettingsCollection' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendHttpSettings']
-                ],
-                'httpListeners' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayHttpListener']
-                ],
-                'urlPathMaps' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayUrlPathMap']
-                ],
-                'requestRoutingRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayRequestRoutingRule']
-                ],
-                'redirectConfigurations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayRedirectConfiguration']
-                ],
-                'webApplicationFirewallConfiguration' => ['$ref' => '#/definitions/ApplicationGatewayWebApplicationFirewallConfiguration'],
-                'resourceGuid' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'ApplicationGateway' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ApplicationGatewayPropertiesFormat'],
-                'etag' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGateway']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayFirewallRule' => ['properties' => [
-                'ruleId' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'description' => ['type' => 'string']
-            ]],
-            'ApplicationGatewayFirewallRuleGroup' => ['properties' => [
-                'ruleGroupName' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'rules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayFirewallRule']
-                ]
-            ]],
-            'ApplicationGatewayFirewallRuleSetPropertiesFormat' => ['properties' => [
-                'provisioningState' => ['type' => 'string'],
-                'ruleSetType' => ['type' => 'string'],
-                'ruleSetVersion' => ['type' => 'string'],
-                'ruleGroups' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewayFirewallRuleGroup']
-                ]
-            ]],
-            'ApplicationGatewayFirewallRuleSet' => ['properties' => ['properties' => ['$ref' => '#/definitions/ApplicationGatewayFirewallRuleSetPropertiesFormat']]],
-            'ApplicationGatewayAvailableWafRuleSetsResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ApplicationGatewayFirewallRuleSet']
-            ]]],
-            'ApplicationGatewayAvailableSslOptionsPropertiesFormat' => ['properties' => [
-                'predefinedPolicies' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubResource']
-                ],
-                'defaultPolicy' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'AppGwSslPolicy20150501',
-                        'AppGwSslPolicy20170401',
-                        'AppGwSslPolicy20170401S'
-                    ]
-                ],
-                'availableCipherSuites' => [
-                    'type' => 'array',
-                    'items' => [
+            ],
+            'ApplicationGatewayBackendHttpSettingsPropertiesFormat' => [
+                'properties' => [
+                    'port' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'protocol' => [
                         'type' => 'string',
                         'enum' => [
-                            'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384',
-                            'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256',
-                            'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA',
-                            'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA',
-                            'TLS_DHE_RSA_WITH_AES_256_GCM_SHA384',
-                            'TLS_DHE_RSA_WITH_AES_128_GCM_SHA256',
-                            'TLS_DHE_RSA_WITH_AES_256_CBC_SHA',
-                            'TLS_DHE_RSA_WITH_AES_128_CBC_SHA',
-                            'TLS_RSA_WITH_AES_256_GCM_SHA384',
-                            'TLS_RSA_WITH_AES_128_GCM_SHA256',
-                            'TLS_RSA_WITH_AES_256_CBC_SHA256',
-                            'TLS_RSA_WITH_AES_128_CBC_SHA256',
-                            'TLS_RSA_WITH_AES_256_CBC_SHA',
-                            'TLS_RSA_WITH_AES_128_CBC_SHA',
-                            'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384',
-                            'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256',
-                            'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384',
-                            'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256',
-                            'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA',
-                            'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA',
-                            'TLS_DHE_DSS_WITH_AES_256_CBC_SHA256',
-                            'TLS_DHE_DSS_WITH_AES_128_CBC_SHA256',
-                            'TLS_DHE_DSS_WITH_AES_256_CBC_SHA',
-                            'TLS_DHE_DSS_WITH_AES_128_CBC_SHA',
-                            'TLS_RSA_WITH_3DES_EDE_CBC_SHA'
+                            'Http',
+                            'Https'
+                        ]
+                    ],
+                    'cookieBasedAffinity' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'requestTimeout' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'probe' => ['$ref' => '#/definitions/SubResource'],
+                    'authenticationCertificates' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubResource']
+                    ],
+                    'connectionDraining' => ['$ref' => '#/definitions/ApplicationGatewayConnectionDraining'],
+                    'hostName' => ['type' => 'string'],
+                    'pickHostNameFromBackendAddress' => ['type' => 'boolean'],
+                    'affinityCookieName' => ['type' => 'string'],
+                    'probeEnabled' => ['type' => 'boolean'],
+                    'path' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayBackendHttpSettings' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApplicationGatewayBackendHttpSettingsPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayBackendHealthServer' => [
+                'properties' => [
+                    'address' => ['type' => 'string'],
+                    'ipConfiguration' => ['$ref' => '#/definitions/NetworkInterfaceIPConfiguration'],
+                    'health' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unknown',
+                            'Up',
+                            'Down',
+                            'Partial',
+                            'Draining'
                         ]
                     ]
                 ],
-                'availableProtocols' => [
+                'required' => []
+            ],
+            'ApplicationGatewayBackendHealthHttpSettings' => [
+                'properties' => [
+                    'backendHttpSettings' => ['$ref' => '#/definitions/ApplicationGatewayBackendHttpSettings'],
+                    'servers' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendHealthServer']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayBackendHealthPool' => [
+                'properties' => [
+                    'backendAddressPool' => ['$ref' => '#/definitions/ApplicationGatewayBackendAddressPool'],
+                    'backendHttpSettingsCollection' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendHealthHttpSettings']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayBackendHealth' => [
+                'properties' => ['backendAddressPools' => [
                     'type' => 'array',
-                    'items' => [
+                    'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendHealthPool']
+                ]],
+                'required' => []
+            ],
+            'ApplicationGatewaySku' => [
+                'properties' => [
+                    'name' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Standard_Small',
+                            'Standard_Medium',
+                            'Standard_Large',
+                            'WAF_Medium',
+                            'WAF_Large'
+                        ]
+                    ],
+                    'tier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Standard',
+                            'WAF'
+                        ]
+                    ],
+                    'capacity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewaySslPolicy' => [
+                'properties' => [
+                    'disabledSslProtocols' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'TLSv1_0',
+                                'TLSv1_1',
+                                'TLSv1_2'
+                            ]
+                        ]
+                    ],
+                    'policyType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Predefined',
+                            'Custom'
+                        ]
+                    ],
+                    'policyName' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'AppGwSslPolicy20150501',
+                            'AppGwSslPolicy20170401',
+                            'AppGwSslPolicy20170401S'
+                        ]
+                    ],
+                    'cipherSuites' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384',
+                                'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256',
+                                'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA',
+                                'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA',
+                                'TLS_DHE_RSA_WITH_AES_256_GCM_SHA384',
+                                'TLS_DHE_RSA_WITH_AES_128_GCM_SHA256',
+                                'TLS_DHE_RSA_WITH_AES_256_CBC_SHA',
+                                'TLS_DHE_RSA_WITH_AES_128_CBC_SHA',
+                                'TLS_RSA_WITH_AES_256_GCM_SHA384',
+                                'TLS_RSA_WITH_AES_128_GCM_SHA256',
+                                'TLS_RSA_WITH_AES_256_CBC_SHA256',
+                                'TLS_RSA_WITH_AES_128_CBC_SHA256',
+                                'TLS_RSA_WITH_AES_256_CBC_SHA',
+                                'TLS_RSA_WITH_AES_128_CBC_SHA',
+                                'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384',
+                                'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256',
+                                'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384',
+                                'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256',
+                                'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA',
+                                'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA',
+                                'TLS_DHE_DSS_WITH_AES_256_CBC_SHA256',
+                                'TLS_DHE_DSS_WITH_AES_128_CBC_SHA256',
+                                'TLS_DHE_DSS_WITH_AES_256_CBC_SHA',
+                                'TLS_DHE_DSS_WITH_AES_128_CBC_SHA',
+                                'TLS_RSA_WITH_3DES_EDE_CBC_SHA'
+                            ]
+                        ]
+                    ],
+                    'minProtocolVersion' => [
                         'type' => 'string',
                         'enum' => [
                             'TLSv1_0',
@@ -6969,1860 +6692,2937 @@ final class NetworkManagementClient
                             'TLSv1_2'
                         ]
                     ]
-                ]
-            ]],
-            'ApplicationGatewayAvailableSslOptions' => ['properties' => ['properties' => ['$ref' => '#/definitions/ApplicationGatewayAvailableSslOptionsPropertiesFormat']]],
-            'ApplicationGatewaySslPredefinedPolicyPropertiesFormat' => ['properties' => [
-                'cipherSuites' => [
-                    'type' => 'array',
-                    'items' => [
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayIPConfigurationPropertiesFormat' => [
+                'properties' => [
+                    'subnet' => ['$ref' => '#/definitions/SubResource'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayIPConfiguration' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApplicationGatewayIPConfigurationPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayAuthenticationCertificatePropertiesFormat' => [
+                'properties' => [
+                    'data' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayAuthenticationCertificate' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApplicationGatewayAuthenticationCertificatePropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewaySslCertificatePropertiesFormat' => [
+                'properties' => [
+                    'data' => ['type' => 'string'],
+                    'password' => ['type' => 'string'],
+                    'publicCertData' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewaySslCertificate' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApplicationGatewaySslCertificatePropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayFrontendIPConfigurationPropertiesFormat' => [
+                'properties' => [
+                    'privateIPAddress' => ['type' => 'string'],
+                    'privateIPAllocationMethod' => [
                         'type' => 'string',
                         'enum' => [
-                            'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384',
-                            'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256',
-                            'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA',
-                            'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA',
-                            'TLS_DHE_RSA_WITH_AES_256_GCM_SHA384',
-                            'TLS_DHE_RSA_WITH_AES_128_GCM_SHA256',
-                            'TLS_DHE_RSA_WITH_AES_256_CBC_SHA',
-                            'TLS_DHE_RSA_WITH_AES_128_CBC_SHA',
-                            'TLS_RSA_WITH_AES_256_GCM_SHA384',
-                            'TLS_RSA_WITH_AES_128_GCM_SHA256',
-                            'TLS_RSA_WITH_AES_256_CBC_SHA256',
-                            'TLS_RSA_WITH_AES_128_CBC_SHA256',
-                            'TLS_RSA_WITH_AES_256_CBC_SHA',
-                            'TLS_RSA_WITH_AES_128_CBC_SHA',
-                            'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384',
-                            'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256',
-                            'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384',
-                            'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256',
-                            'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA',
-                            'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA',
-                            'TLS_DHE_DSS_WITH_AES_256_CBC_SHA256',
-                            'TLS_DHE_DSS_WITH_AES_128_CBC_SHA256',
-                            'TLS_DHE_DSS_WITH_AES_256_CBC_SHA',
-                            'TLS_DHE_DSS_WITH_AES_128_CBC_SHA',
-                            'TLS_RSA_WITH_3DES_EDE_CBC_SHA'
+                            'Static',
+                            'Dynamic'
                         ]
-                    ]
-                ],
-                'minProtocolVersion' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'TLSv1_0',
-                        'TLSv1_1',
-                        'TLSv1_2'
-                    ]
-                ]
-            ]],
-            'ApplicationGatewaySslPredefinedPolicy' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ApplicationGatewaySslPredefinedPolicyPropertiesFormat']
-            ]],
-            'ApplicationGatewayAvailableSslPredefinedPolicies' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGatewaySslPredefinedPolicy']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'DnsNameAvailabilityResult' => ['properties' => ['available' => ['type' => 'boolean']]],
-            'AuthorizationPropertiesFormat' => ['properties' => [
-                'authorizationKey' => ['type' => 'string'],
-                'authorizationUseStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Available',
-                        'InUse'
-                    ]
-                ],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'ExpressRouteCircuitAuthorization' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/AuthorizationPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'AuthorizationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ExpressRouteCircuitAuthorization']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ExpressRouteCircuitPeeringConfig' => ['properties' => [
-                'advertisedPublicPrefixes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'advertisedCommunities' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'advertisedPublicPrefixesState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NotConfigured',
-                        'Configuring',
-                        'Configured',
-                        'ValidationNeeded'
-                    ]
-                ],
-                'legacyMode' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'customerASN' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'routingRegistryName' => ['type' => 'string']
-            ]],
-            'RouteFilterRulePropertiesFormat' => ['properties' => [
-                'access' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Allow',
-                        'Deny'
-                    ]
-                ],
-                'routeFilterRuleType' => ['type' => 'string'],
-                'communities' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'RouteFilterRule' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/RouteFilterRulePropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ExpressRouteCircuitStats' => ['properties' => [
-                'primarybytesIn' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'primarybytesOut' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'secondarybytesIn' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'secondarybytesOut' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ]
-            ]],
-            'ExpressRouteCircuitPeeringPropertiesFormat' => ['properties' => [
-                'peeringType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'AzurePublicPeering',
-                        'AzurePrivatePeering',
-                        'MicrosoftPeering'
-                    ]
-                ],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Disabled',
-                        'Enabled'
-                    ]
-                ],
-                'azureASN' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'peerASN' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'primaryPeerAddressPrefix' => ['type' => 'string'],
-                'secondaryPeerAddressPrefix' => ['type' => 'string'],
-                'primaryAzurePort' => ['type' => 'string'],
-                'secondaryAzurePort' => ['type' => 'string'],
-                'sharedKey' => ['type' => 'string'],
-                'vlanId' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'microsoftPeeringConfig' => ['$ref' => '#/definitions/ExpressRouteCircuitPeeringConfig'],
-                'stats' => ['$ref' => '#/definitions/ExpressRouteCircuitStats'],
-                'provisioningState' => ['type' => 'string'],
-                'gatewayManagerEtag' => ['type' => 'string'],
-                'lastModifiedBy' => ['type' => 'string'],
-                'routeFilter' => ['$ref' => '#/definitions/RouteFilter'],
-                'ipv6PeeringConfig' => ['$ref' => '#/definitions/Ipv6ExpressRouteCircuitPeeringConfig']
-            ]],
-            'ExpressRouteCircuitPeering' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ExpressRouteCircuitPeeringPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'RouteFilterPropertiesFormat' => ['properties' => [
-                'rules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RouteFilterRule']
-                ],
-                'peerings' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ExpressRouteCircuitPeering']
-                ],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'RouteFilter' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/RouteFilterPropertiesFormat'],
-                'etag' => ['type' => 'string']
-            ]],
-            'Ipv6ExpressRouteCircuitPeeringConfig' => ['properties' => [
-                'primaryPeerAddressPrefix' => ['type' => 'string'],
-                'secondaryPeerAddressPrefix' => ['type' => 'string'],
-                'microsoftPeeringConfig' => ['$ref' => '#/definitions/ExpressRouteCircuitPeeringConfig'],
-                'routeFilter' => ['$ref' => '#/definitions/RouteFilter'],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Disabled',
-                        'Enabled'
-                    ]
-                ]
-            ]],
-            'ExpressRouteCircuitPeeringListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ExpressRouteCircuitPeering']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ExpressRouteCircuitSku' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'tier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Standard',
-                        'Premium'
-                    ]
-                ],
-                'family' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'UnlimitedData',
-                        'MeteredData'
-                    ]
-                ]
-            ]],
-            'ExpressRouteCircuitServiceProviderProperties' => ['properties' => [
-                'serviceProviderName' => ['type' => 'string'],
-                'peeringLocation' => ['type' => 'string'],
-                'bandwidthInMbps' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ExpressRouteCircuitPropertiesFormat' => ['properties' => [
-                'allowClassicOperations' => ['type' => 'boolean'],
-                'circuitProvisioningState' => ['type' => 'string'],
-                'serviceProviderProvisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NotProvisioned',
-                        'Provisioning',
-                        'Provisioned',
-                        'Deprovisioning'
-                    ]
-                ],
-                'authorizations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ExpressRouteCircuitAuthorization']
-                ],
-                'peerings' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ExpressRouteCircuitPeering']
-                ],
-                'serviceKey' => ['type' => 'string'],
-                'serviceProviderNotes' => ['type' => 'string'],
-                'serviceProviderProperties' => ['$ref' => '#/definitions/ExpressRouteCircuitServiceProviderProperties'],
-                'provisioningState' => ['type' => 'string'],
-                'gatewayManagerEtag' => ['type' => 'string']
-            ]],
-            'ExpressRouteCircuit' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/ExpressRouteCircuitSku'],
-                'properties' => ['$ref' => '#/definitions/ExpressRouteCircuitPropertiesFormat'],
-                'etag' => ['type' => 'string']
-            ]],
-            'ExpressRouteCircuitArpTable' => ['properties' => [
-                'age' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'interface' => ['type' => 'string'],
-                'ipAddress' => ['type' => 'string'],
-                'macAddress' => ['type' => 'string']
-            ]],
-            'ExpressRouteCircuitsArpTableListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ExpressRouteCircuitArpTable']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ExpressRouteCircuitRoutesTable' => ['properties' => [
-                'network' => ['type' => 'string'],
-                'nextHop' => ['type' => 'string'],
-                'locPrf' => ['type' => 'string'],
-                'weight' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'path' => ['type' => 'string']
-            ]],
-            'ExpressRouteCircuitsRoutesTableListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ExpressRouteCircuitRoutesTable']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ExpressRouteCircuitRoutesTableSummary' => ['properties' => [
-                'neighbor' => ['type' => 'string'],
-                'v' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'as' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'upDown' => ['type' => 'string'],
-                'statePfxRcd' => ['type' => 'string']
-            ]],
-            'ExpressRouteCircuitsRoutesTableSummaryListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ExpressRouteCircuitRoutesTableSummary']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ExpressRouteCircuitListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ExpressRouteCircuit']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ExpressRouteServiceProviderBandwidthsOffered' => ['properties' => [
-                'offerName' => ['type' => 'string'],
-                'valueInMbps' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ExpressRouteServiceProviderPropertiesFormat' => ['properties' => [
-                'peeringLocations' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'bandwidthsOffered' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ExpressRouteServiceProviderBandwidthsOffered']
-                ],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'ExpressRouteServiceProvider' => ['properties' => ['properties' => ['$ref' => '#/definitions/ExpressRouteServiceProviderPropertiesFormat']]],
-            'ExpressRouteServiceProviderListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ExpressRouteServiceProvider']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'FrontendIPConfigurationPropertiesFormat' => ['properties' => [
-                'inboundNatRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubResource']
-                ],
-                'inboundNatPools' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubResource']
-                ],
-                'outboundNatRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubResource']
-                ],
-                'loadBalancingRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubResource']
-                ],
-                'privateIPAddress' => ['type' => 'string'],
-                'privateIPAllocationMethod' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Static',
-                        'Dynamic'
-                    ]
-                ],
-                'subnet' => ['$ref' => '#/definitions/Subnet'],
-                'publicIPAddress' => ['$ref' => '#/definitions/PublicIPAddress'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'FrontendIPConfiguration' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/FrontendIPConfigurationPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'LoadBalancingRulePropertiesFormat' => ['properties' => [
-                'frontendIPConfiguration' => ['$ref' => '#/definitions/SubResource'],
-                'backendAddressPool' => ['$ref' => '#/definitions/SubResource'],
-                'probe' => ['$ref' => '#/definitions/SubResource'],
-                'protocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Udp',
-                        'Tcp'
-                    ]
-                ],
-                'loadDistribution' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Default',
-                        'SourceIP',
-                        'SourceIPProtocol'
-                    ]
-                ],
-                'frontendPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'backendPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'idleTimeoutInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'enableFloatingIP' => ['type' => 'boolean'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'LoadBalancingRule' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/LoadBalancingRulePropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'ProbePropertiesFormat' => ['properties' => [
-                'loadBalancingRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubResource']
-                ],
-                'protocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Http',
-                        'Tcp'
-                    ]
-                ],
-                'port' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'intervalInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'numberOfProbes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'requestPath' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'Probe' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ProbePropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'InboundNatPoolPropertiesFormat' => ['properties' => [
-                'frontendIPConfiguration' => ['$ref' => '#/definitions/SubResource'],
-                'protocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Udp',
-                        'Tcp'
-                    ]
-                ],
-                'frontendPortRangeStart' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'frontendPortRangeEnd' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'backendPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'InboundNatPool' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/InboundNatPoolPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'OutboundNatRulePropertiesFormat' => ['properties' => [
-                'allocatedOutboundPorts' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'frontendIPConfigurations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubResource']
-                ],
-                'backendAddressPool' => ['$ref' => '#/definitions/SubResource'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'OutboundNatRule' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/OutboundNatRulePropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'LoadBalancerPropertiesFormat' => ['properties' => [
-                'frontendIPConfigurations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/FrontendIPConfiguration']
-                ],
-                'backendAddressPools' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/BackendAddressPool']
-                ],
-                'loadBalancingRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/LoadBalancingRule']
-                ],
-                'probes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Probe']
-                ],
-                'inboundNatRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InboundNatRule']
-                ],
-                'inboundNatPools' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InboundNatPool']
-                ],
-                'outboundNatRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/OutboundNatRule']
-                ],
-                'resourceGuid' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'LoadBalancer' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/LoadBalancerPropertiesFormat'],
-                'etag' => ['type' => 'string']
-            ]],
-            'LoadBalancerListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/LoadBalancer']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'InboundNatRuleListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/InboundNatRule']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'LoadBalancerBackendAddressPoolListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/BackendAddressPool']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'LoadBalancerFrontendIPConfigurationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/FrontendIPConfiguration']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'LoadBalancerLoadBalancingRuleListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/LoadBalancingRule']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'LoadBalancerProbeListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Probe']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'NetworkInterfaceListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NetworkInterface']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ErrorDetails' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'target' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'Error' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'target' => ['type' => 'string'],
-                'details' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ErrorDetails']
-                ],
-                'innerError' => ['type' => 'string']
-            ]],
-            'AzureAsyncOperationResult' => ['properties' => [
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'InProgress',
-                        'Succeeded',
-                        'Failed'
-                    ]
-                ],
-                'error' => ['$ref' => '#/definitions/Error']
-            ]],
-            'NetworkInterfaceIPConfigurationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NetworkInterfaceIPConfiguration']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'NetworkInterfaceLoadBalancerListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/LoadBalancer']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'EffectiveNetworkSecurityGroupAssociation' => ['properties' => [
-                'subnet' => ['$ref' => '#/definitions/SubResource'],
-                'networkInterface' => ['$ref' => '#/definitions/SubResource']
-            ]],
-            'EffectiveNetworkSecurityRule' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'protocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Tcp',
-                        'Udp',
-                        'All'
-                    ]
-                ],
-                'sourcePortRange' => ['type' => 'string'],
-                'destinationPortRange' => ['type' => 'string'],
-                'sourcePortRanges' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'destinationPortRanges' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'sourceAddressPrefix' => ['type' => 'string'],
-                'destinationAddressPrefix' => ['type' => 'string'],
-                'sourceAddressPrefixes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'destinationAddressPrefixes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'expandedSourceAddressPrefix' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'expandedDestinationAddressPrefix' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'access' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Allow',
-                        'Deny'
-                    ]
-                ],
-                'priority' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'direction' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Inbound',
-                        'Outbound'
-                    ]
-                ]
-            ]],
-            'EffectiveNetworkSecurityGroup' => ['properties' => [
-                'networkSecurityGroup' => ['$ref' => '#/definitions/SubResource'],
-                'association' => ['$ref' => '#/definitions/EffectiveNetworkSecurityGroupAssociation'],
-                'effectiveSecurityRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/EffectiveNetworkSecurityRule']
-                ],
-                'tagMap' => [
-                    'type' => 'object',
-                    'additionalProperties' => [
+                    ],
+                    'subnet' => ['$ref' => '#/definitions/SubResource'],
+                    'publicIPAddress' => ['$ref' => '#/definitions/SubResource'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayFrontendIPConfiguration' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApplicationGatewayFrontendIPConfigurationPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayFrontendPortPropertiesFormat' => [
+                'properties' => [
+                    'port' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayFrontendPort' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApplicationGatewayFrontendPortPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayHttpListenerPropertiesFormat' => [
+                'properties' => [
+                    'frontendIPConfiguration' => ['$ref' => '#/definitions/SubResource'],
+                    'frontendPort' => ['$ref' => '#/definitions/SubResource'],
+                    'protocol' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Http',
+                            'Https'
+                        ]
+                    ],
+                    'hostName' => ['type' => 'string'],
+                    'sslCertificate' => ['$ref' => '#/definitions/SubResource'],
+                    'requireServerNameIndication' => ['type' => 'boolean'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayHttpListener' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApplicationGatewayHttpListenerPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayPathRulePropertiesFormat' => [
+                'properties' => [
+                    'paths' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'backendAddressPool' => ['$ref' => '#/definitions/SubResource'],
+                    'backendHttpSettings' => ['$ref' => '#/definitions/SubResource'],
+                    'redirectConfiguration' => ['$ref' => '#/definitions/SubResource'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayPathRule' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApplicationGatewayPathRulePropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayProbeHealthResponseMatch' => [
+                'properties' => [
+                    'body' => ['type' => 'string'],
+                    'statusCodes' => [
                         'type' => 'array',
                         'items' => ['type' => 'string']
                     ]
-                ]
-            ]],
-            'EffectiveNetworkSecurityGroupListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/EffectiveNetworkSecurityGroup']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'EffectiveRoute' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'source' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Unknown',
-                        'User',
-                        'VirtualNetworkGateway',
-                        'Default'
-                    ]
-                ],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Active',
-                        'Invalid'
-                    ]
-                ],
-                'addressPrefix' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'nextHopIpAddress' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'nextHopType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'VirtualNetworkGateway',
-                        'VnetLocal',
-                        'Internet',
-                        'VirtualAppliance',
-                        'None'
-                    ]
-                ]
-            ]],
-            'EffectiveRouteListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/EffectiveRoute']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'SecurityRuleListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SecurityRule']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'NetworkSecurityGroupListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NetworkSecurityGroup']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'NetworkWatcherPropertiesFormat' => ['properties' => ['provisioningState' => [
-                'type' => 'string',
-                'enum' => [
-                    'Succeeded',
-                    'Updating',
-                    'Deleting',
-                    'Failed'
-                ]
-            ]]],
-            'NetworkWatcher' => ['properties' => [
-                'etag' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/NetworkWatcherPropertiesFormat']
-            ]],
-            'NetworkWatcherListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/NetworkWatcher']
-            ]]],
-            'TopologyParameters' => ['properties' => ['targetResourceGroupName' => ['type' => 'string']]],
-            'TopologyAssociation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'resourceId' => ['type' => 'string'],
-                'associationType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Associated',
-                        'Contains'
-                    ]
-                ]
-            ]],
-            'TopologyResource' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'id' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'associations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TopologyAssociation']
-                ]
-            ]],
-            'Topology' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'createdDateTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastModified' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'resources' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TopologyResource']
-                ]
-            ]],
-            'VerificationIPFlowParameters' => ['properties' => [
-                'targetResourceId' => ['type' => 'string'],
-                'direction' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Inbound',
-                        'Outbound'
-                    ]
-                ],
-                'protocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'TCP',
-                        'UDP'
-                    ]
-                ],
-                'localPort' => ['type' => 'string'],
-                'remotePort' => ['type' => 'string'],
-                'localIPAddress' => ['type' => 'string'],
-                'remoteIPAddress' => ['type' => 'string'],
-                'targetNicResourceId' => ['type' => 'string']
-            ]],
-            'VerificationIPFlowResult' => ['properties' => [
-                'access' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Allow',
-                        'Deny'
-                    ]
-                ],
-                'ruleName' => ['type' => 'string']
-            ]],
-            'NextHopParameters' => ['properties' => [
-                'targetResourceId' => ['type' => 'string'],
-                'sourceIPAddress' => ['type' => 'string'],
-                'destinationIPAddress' => ['type' => 'string'],
-                'targetNicResourceId' => ['type' => 'string']
-            ]],
-            'NextHopResult' => ['properties' => [
-                'nextHopType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Internet',
-                        'VirtualAppliance',
-                        'VirtualNetworkGateway',
-                        'VnetLocal',
-                        'HyperNetGateway',
-                        'None'
-                    ]
-                ],
-                'nextHopIpAddress' => ['type' => 'string'],
-                'routeTableId' => ['type' => 'string']
-            ]],
-            'SecurityGroupViewParameters' => ['properties' => ['targetResourceId' => ['type' => 'string']]],
-            'NetworkInterfaceAssociation' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'securityRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SecurityRule']
-                ]
-            ]],
-            'SubnetAssociation' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'securityRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SecurityRule']
-                ]
-            ]],
-            'SecurityRuleAssociations' => ['properties' => [
-                'networkInterfaceAssociation' => ['$ref' => '#/definitions/NetworkInterfaceAssociation'],
-                'subnetAssociation' => ['$ref' => '#/definitions/SubnetAssociation'],
-                'defaultSecurityRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SecurityRule']
-                ],
-                'effectiveSecurityRules' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/EffectiveNetworkSecurityRule']
-                ]
-            ]],
-            'SecurityGroupNetworkInterface' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'securityRuleAssociations' => ['$ref' => '#/definitions/SecurityRuleAssociations']
-            ]],
-            'SecurityGroupViewResult' => ['properties' => ['networkInterfaces' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/SecurityGroupNetworkInterface']
-            ]]],
-            'PacketCaptureStorageLocation' => ['properties' => [
-                'storageId' => ['type' => 'string'],
-                'storagePath' => ['type' => 'string'],
-                'filePath' => ['type' => 'string']
-            ]],
-            'PacketCaptureFilter' => ['properties' => [
-                'protocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'TCP',
-                        'UDP',
-                        'Any'
-                    ]
-                ],
-                'localIPAddress' => ['type' => 'string'],
-                'remoteIPAddress' => ['type' => 'string'],
-                'localPort' => ['type' => 'string'],
-                'remotePort' => ['type' => 'string']
-            ]],
-            'PacketCaptureParameters' => ['properties' => [
-                'target' => ['type' => 'string'],
-                'bytesToCapturePerPacket' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'totalBytesPerSession' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'timeLimitInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'storageLocation' => ['$ref' => '#/definitions/PacketCaptureStorageLocation'],
-                'filters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PacketCaptureFilter']
-                ]
-            ]],
-            'PacketCapture' => ['properties' => ['properties' => ['$ref' => '#/definitions/PacketCaptureParameters']]],
-            'PacketCaptureResultProperties' => ['properties' => ['provisioningState' => [
-                'type' => 'string',
-                'enum' => [
-                    'Succeeded',
-                    'Updating',
-                    'Deleting',
-                    'Failed'
-                ]
-            ]]],
-            'PacketCaptureResult' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'id' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/PacketCaptureResultProperties']
-            ]],
-            'PacketCaptureListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/PacketCaptureResult']
-            ]]],
-            'PacketCaptureQueryStatusResult' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'id' => ['type' => 'string'],
-                'captureStartTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'packetCaptureStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NotStarted',
-                        'Running',
-                        'Stopped',
-                        'Error',
-                        'Unknown'
-                    ]
-                ],
-                'stopReason' => ['type' => 'string'],
-                'packetCaptureError' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => []
+            ],
+            'ApplicationGatewayProbePropertiesFormat' => [
+                'properties' => [
+                    'protocol' => [
                         'type' => 'string',
                         'enum' => [
-                            'InternalError',
-                            'AgentStopped',
-                            'CaptureFailed',
-                            'LocalFileFailed',
-                            'StorageFailed'
+                            'Http',
+                            'Https'
+                        ]
+                    ],
+                    'host' => ['type' => 'string'],
+                    'path' => ['type' => 'string'],
+                    'interval' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'timeout' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'unhealthyThreshold' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'pickHostNameFromBackendHttpSettings' => ['type' => 'boolean'],
+                    'minServers' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'match' => ['$ref' => '#/definitions/ApplicationGatewayProbeHealthResponseMatch'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayProbe' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApplicationGatewayProbePropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayRequestRoutingRulePropertiesFormat' => [
+                'properties' => [
+                    'ruleType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'PathBasedRouting'
+                        ]
+                    ],
+                    'backendAddressPool' => ['$ref' => '#/definitions/SubResource'],
+                    'backendHttpSettings' => ['$ref' => '#/definitions/SubResource'],
+                    'httpListener' => ['$ref' => '#/definitions/SubResource'],
+                    'urlPathMap' => ['$ref' => '#/definitions/SubResource'],
+                    'redirectConfiguration' => ['$ref' => '#/definitions/SubResource'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayRequestRoutingRule' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApplicationGatewayRequestRoutingRulePropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayRedirectConfigurationPropertiesFormat' => [
+                'properties' => [
+                    'redirectType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Permanent',
+                            'Found',
+                            'SeeOther',
+                            'Temporary'
+                        ]
+                    ],
+                    'targetListener' => ['$ref' => '#/definitions/SubResource'],
+                    'targetUrl' => ['type' => 'string'],
+                    'includePath' => ['type' => 'boolean'],
+                    'includeQueryString' => ['type' => 'boolean'],
+                    'requestRoutingRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubResource']
+                    ],
+                    'urlPathMaps' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubResource']
+                    ],
+                    'pathRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubResource']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayRedirectConfiguration' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApplicationGatewayRedirectConfigurationPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayUrlPathMapPropertiesFormat' => [
+                'properties' => [
+                    'defaultBackendAddressPool' => ['$ref' => '#/definitions/SubResource'],
+                    'defaultBackendHttpSettings' => ['$ref' => '#/definitions/SubResource'],
+                    'defaultRedirectConfiguration' => ['$ref' => '#/definitions/SubResource'],
+                    'pathRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayPathRule']
+                    ],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayUrlPathMap' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApplicationGatewayUrlPathMapPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayFirewallDisabledRuleGroup' => [
+                'properties' => [
+                    'ruleGroupName' => ['type' => 'string'],
+                    'rules' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'integer',
+                            'format' => 'int32'
                         ]
                     ]
-                ]
-            ]],
-            'TroubleshootingProperties' => ['properties' => [
-                'storageId' => ['type' => 'string'],
-                'storagePath' => ['type' => 'string']
-            ]],
-            'TroubleshootingParameters' => ['properties' => [
-                'targetResourceId' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/TroubleshootingProperties']
-            ]],
-            'QueryTroubleshootingParameters' => ['properties' => ['targetResourceId' => ['type' => 'string']]],
-            'TroubleshootingRecommendedActions' => ['properties' => [
-                'actionId' => ['type' => 'string'],
-                'actionText' => ['type' => 'string'],
-                'actionUri' => ['type' => 'string'],
-                'actionUriText' => ['type' => 'string']
-            ]],
-            'TroubleshootingDetails' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'reasonType' => ['type' => 'string'],
-                'summary' => ['type' => 'string'],
-                'detail' => ['type' => 'string'],
-                'recommendedActions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TroubleshootingRecommendedActions']
-                ]
-            ]],
-            'TroubleshootingResult' => ['properties' => [
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
                 ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'code' => ['type' => 'string'],
-                'results' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TroubleshootingDetails']
-                ]
-            ]],
-            'RetentionPolicyParameters' => ['properties' => [
-                'days' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'enabled' => ['type' => 'boolean']
-            ]],
-            'FlowLogProperties' => ['properties' => [
-                'storageId' => ['type' => 'string'],
-                'enabled' => ['type' => 'boolean'],
-                'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicyParameters']
-            ]],
-            'FlowLogStatusParameters' => ['properties' => ['targetResourceId' => ['type' => 'string']]],
-            'FlowLogInformation' => ['properties' => [
-                'targetResourceId' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/FlowLogProperties']
-            ]],
-            'ConnectivitySource' => ['properties' => [
-                'resourceId' => ['type' => 'string'],
-                'port' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ConnectivityDestination' => ['properties' => [
-                'resourceId' => ['type' => 'string'],
-                'address' => ['type' => 'string'],
-                'port' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ConnectivityParameters' => ['properties' => [
-                'source' => ['$ref' => '#/definitions/ConnectivitySource'],
-                'destination' => ['$ref' => '#/definitions/ConnectivityDestination']
-            ]],
-            'ConnectivityIssue' => ['properties' => [
-                'origin' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Local',
-                        'Inbound',
-                        'Outbound'
+                'required' => ['ruleGroupName']
+            ],
+            'ApplicationGatewayWebApplicationFirewallConfiguration' => [
+                'properties' => [
+                    'enabled' => ['type' => 'boolean'],
+                    'firewallMode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Detection',
+                            'Prevention'
+                        ]
+                    ],
+                    'ruleSetType' => ['type' => 'string'],
+                    'ruleSetVersion' => ['type' => 'string'],
+                    'disabledRuleGroups' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayFirewallDisabledRuleGroup']
                     ]
                 ],
-                'severity' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Error',
-                        'Warning'
+                'required' => [
+                    'enabled',
+                    'firewallMode',
+                    'ruleSetType',
+                    'ruleSetVersion'
+                ]
+            ],
+            'ApplicationGatewayPropertiesFormat' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/ApplicationGatewaySku'],
+                    'sslPolicy' => ['$ref' => '#/definitions/ApplicationGatewaySslPolicy'],
+                    'operationalState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Stopped',
+                            'Starting',
+                            'Running',
+                            'Stopping'
+                        ]
+                    ],
+                    'gatewayIPConfigurations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayIPConfiguration']
+                    ],
+                    'authenticationCertificates' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayAuthenticationCertificate']
+                    ],
+                    'sslCertificates' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewaySslCertificate']
+                    ],
+                    'frontendIPConfigurations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayFrontendIPConfiguration']
+                    ],
+                    'frontendPorts' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayFrontendPort']
+                    ],
+                    'probes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayProbe']
+                    ],
+                    'backendAddressPools' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendAddressPool']
+                    ],
+                    'backendHttpSettingsCollection' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendHttpSettings']
+                    ],
+                    'httpListeners' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayHttpListener']
+                    ],
+                    'urlPathMaps' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayUrlPathMap']
+                    ],
+                    'requestRoutingRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayRequestRoutingRule']
+                    ],
+                    'redirectConfigurations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayRedirectConfiguration']
+                    ],
+                    'webApplicationFirewallConfiguration' => ['$ref' => '#/definitions/ApplicationGatewayWebApplicationFirewallConfiguration'],
+                    'resourceGuid' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGateway' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ApplicationGatewayPropertiesFormat'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGateway']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayFirewallRule' => [
+                'properties' => [
+                    'ruleId' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => ['ruleId']
+            ],
+            'ApplicationGatewayFirewallRuleGroup' => [
+                'properties' => [
+                    'ruleGroupName' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'rules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayFirewallRule']
                     ]
                 ],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Unknown',
-                        'AgentStopped',
-                        'GuestFirewall',
-                        'DnsResolution',
-                        'SocketBind',
-                        'NetworkSecurityRule',
-                        'UserDefinedRoute',
-                        'PortThrottled',
-                        'Platform'
+                'required' => [
+                    'ruleGroupName',
+                    'rules'
+                ]
+            ],
+            'ApplicationGatewayFirewallRuleSetPropertiesFormat' => [
+                'properties' => [
+                    'provisioningState' => ['type' => 'string'],
+                    'ruleSetType' => ['type' => 'string'],
+                    'ruleSetVersion' => ['type' => 'string'],
+                    'ruleGroups' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewayFirewallRuleGroup']
                     ]
                 ],
-                'context' => [
+                'required' => [
+                    'ruleSetType',
+                    'ruleSetVersion',
+                    'ruleGroups'
+                ]
+            ],
+            'ApplicationGatewayFirewallRuleSet' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ApplicationGatewayFirewallRuleSetPropertiesFormat']],
+                'required' => []
+            ],
+            'ApplicationGatewayAvailableWafRuleSetsResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => [
+                    'items' => ['$ref' => '#/definitions/ApplicationGatewayFirewallRuleSet']
+                ]],
+                'required' => []
+            ],
+            'ApplicationGatewayAvailableSslOptionsPropertiesFormat' => [
+                'properties' => [
+                    'predefinedPolicies' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubResource']
+                    ],
+                    'defaultPolicy' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'AppGwSslPolicy20150501',
+                            'AppGwSslPolicy20170401',
+                            'AppGwSslPolicy20170401S'
+                        ]
+                    ],
+                    'availableCipherSuites' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384',
+                                'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256',
+                                'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA',
+                                'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA',
+                                'TLS_DHE_RSA_WITH_AES_256_GCM_SHA384',
+                                'TLS_DHE_RSA_WITH_AES_128_GCM_SHA256',
+                                'TLS_DHE_RSA_WITH_AES_256_CBC_SHA',
+                                'TLS_DHE_RSA_WITH_AES_128_CBC_SHA',
+                                'TLS_RSA_WITH_AES_256_GCM_SHA384',
+                                'TLS_RSA_WITH_AES_128_GCM_SHA256',
+                                'TLS_RSA_WITH_AES_256_CBC_SHA256',
+                                'TLS_RSA_WITH_AES_128_CBC_SHA256',
+                                'TLS_RSA_WITH_AES_256_CBC_SHA',
+                                'TLS_RSA_WITH_AES_128_CBC_SHA',
+                                'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384',
+                                'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256',
+                                'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384',
+                                'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256',
+                                'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA',
+                                'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA',
+                                'TLS_DHE_DSS_WITH_AES_256_CBC_SHA256',
+                                'TLS_DHE_DSS_WITH_AES_128_CBC_SHA256',
+                                'TLS_DHE_DSS_WITH_AES_256_CBC_SHA',
+                                'TLS_DHE_DSS_WITH_AES_128_CBC_SHA',
+                                'TLS_RSA_WITH_3DES_EDE_CBC_SHA'
+                            ]
+                        ]
+                    ],
+                    'availableProtocols' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'TLSv1_0',
+                                'TLSv1_1',
+                                'TLSv1_2'
+                            ]
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayAvailableSslOptions' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ApplicationGatewayAvailableSslOptionsPropertiesFormat']],
+                'required' => []
+            ],
+            'ApplicationGatewaySslPredefinedPolicyPropertiesFormat' => [
+                'properties' => [
+                    'cipherSuites' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384',
+                                'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256',
+                                'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA',
+                                'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA',
+                                'TLS_DHE_RSA_WITH_AES_256_GCM_SHA384',
+                                'TLS_DHE_RSA_WITH_AES_128_GCM_SHA256',
+                                'TLS_DHE_RSA_WITH_AES_256_CBC_SHA',
+                                'TLS_DHE_RSA_WITH_AES_128_CBC_SHA',
+                                'TLS_RSA_WITH_AES_256_GCM_SHA384',
+                                'TLS_RSA_WITH_AES_128_GCM_SHA256',
+                                'TLS_RSA_WITH_AES_256_CBC_SHA256',
+                                'TLS_RSA_WITH_AES_128_CBC_SHA256',
+                                'TLS_RSA_WITH_AES_256_CBC_SHA',
+                                'TLS_RSA_WITH_AES_128_CBC_SHA',
+                                'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384',
+                                'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256',
+                                'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384',
+                                'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256',
+                                'TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA',
+                                'TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA',
+                                'TLS_DHE_DSS_WITH_AES_256_CBC_SHA256',
+                                'TLS_DHE_DSS_WITH_AES_128_CBC_SHA256',
+                                'TLS_DHE_DSS_WITH_AES_256_CBC_SHA',
+                                'TLS_DHE_DSS_WITH_AES_128_CBC_SHA',
+                                'TLS_RSA_WITH_3DES_EDE_CBC_SHA'
+                            ]
+                        ]
+                    ],
+                    'minProtocolVersion' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'TLSv1_0',
+                            'TLSv1_1',
+                            'TLSv1_2'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewaySslPredefinedPolicy' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ApplicationGatewaySslPredefinedPolicyPropertiesFormat']
+                ],
+                'required' => []
+            ],
+            'ApplicationGatewayAvailableSslPredefinedPolicies' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGatewaySslPredefinedPolicy']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
                         'type' => 'object',
                         'additionalProperties' => ['type' => 'string']
                     ]
-                ]
-            ]],
-            'ConnectivityHop' => ['properties' => [
-                'type' => ['type' => 'string'],
-                'id' => ['type' => 'string'],
-                'address' => ['type' => 'string'],
-                'resourceId' => ['type' => 'string'],
-                'nextHopIds' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
                 ],
-                'issues' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ConnectivityIssue']
-                ]
-            ]],
-            'ConnectivityInformation' => ['properties' => [
-                'hops' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ConnectivityHop']
-                ],
-                'connectionStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Unknown',
-                        'Connected',
-                        'Disconnected',
-                        'Degraded'
-                    ]
-                ],
-                'avgLatencyInMs' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'minLatencyInMs' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'maxLatencyInMs' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'probesSent' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'probesFailed' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'PublicIPAddressListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PublicIPAddress']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'PatchRouteFilterRule' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/RouteFilterRulePropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'PatchRouteFilter' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/RouteFilterPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'RouteFilterListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RouteFilter']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RouteFilterRuleListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RouteFilterRule']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RouteTableListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RouteTable']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RouteListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Route']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'BGPCommunity' => ['properties' => [
-                'serviceSupportedRegion' => ['type' => 'string'],
-                'communityName' => ['type' => 'string'],
-                'communityValue' => ['type' => 'string'],
-                'communityPrefixes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'isAuthorizedToUse' => ['type' => 'boolean'],
-                'serviceGroup' => ['type' => 'string']
-            ]],
-            'BgpServiceCommunityPropertiesFormat' => ['properties' => [
-                'serviceName' => ['type' => 'string'],
-                'bgpCommunities' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/BGPCommunity']
-                ]
-            ]],
-            'BgpServiceCommunity' => ['properties' => ['properties' => ['$ref' => '#/definitions/BgpServiceCommunityPropertiesFormat']]],
-            'BgpServiceCommunityListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/BgpServiceCommunity']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'UsageName' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'localizedValue' => ['type' => 'string']
-            ]],
-            'Usage' => ['properties' => [
-                'unit' => ['type' => 'string'],
-                'currentValue' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'limit' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'name' => ['$ref' => '#/definitions/UsageName']
-            ]],
-            'UsagesListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Usage']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'VirtualNetworkPeeringPropertiesFormat' => ['properties' => [
-                'allowVirtualNetworkAccess' => ['type' => 'boolean'],
-                'allowForwardedTraffic' => ['type' => 'boolean'],
-                'allowGatewayTransit' => ['type' => 'boolean'],
-                'useRemoteGateways' => ['type' => 'boolean'],
-                'remoteVirtualNetwork' => ['$ref' => '#/definitions/SubResource'],
-                'peeringState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Initiated',
-                        'Connected',
-                        'Disconnected'
-                    ]
-                ],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'VirtualNetworkPeering' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/VirtualNetworkPeeringPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'SubnetListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Subnet']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'VirtualNetworkPeeringListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualNetworkPeering']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'AddressSpace' => ['properties' => ['addressPrefixes' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'DhcpOptions' => ['properties' => ['dnsServers' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'VirtualNetworkPropertiesFormat' => ['properties' => [
-                'addressSpace' => ['$ref' => '#/definitions/AddressSpace'],
-                'dhcpOptions' => ['$ref' => '#/definitions/DhcpOptions'],
-                'subnets' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Subnet']
-                ],
-                'virtualNetworkPeerings' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualNetworkPeering']
-                ],
-                'resourceGuid' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'VirtualNetwork' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/VirtualNetworkPropertiesFormat'],
-                'etag' => ['type' => 'string']
-            ]],
-            'VirtualNetworkListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualNetwork']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'IPAddressAvailabilityResult' => ['properties' => [
-                'available' => ['type' => 'boolean'],
-                'availableIPAddresses' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'VirtualNetworkUsageName' => ['properties' => [
-                'localizedValue' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'VirtualNetworkUsage' => ['properties' => [
-                'currentValue' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'id' => ['type' => 'string'],
-                'limit' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'name' => ['$ref' => '#/definitions/VirtualNetworkUsageName'],
-                'unit' => ['type' => 'string']
-            ]],
-            'VirtualNetworkListUsageResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualNetworkUsage']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'VirtualNetworkGatewayIPConfigurationPropertiesFormat' => ['properties' => [
-                'privateIPAllocationMethod' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Static',
-                        'Dynamic'
-                    ]
-                ],
-                'subnet' => ['$ref' => '#/definitions/SubResource'],
-                'publicIPAddress' => ['$ref' => '#/definitions/SubResource'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'VirtualNetworkGatewayIPConfiguration' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/VirtualNetworkGatewayIPConfigurationPropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'VirtualNetworkGatewaySku' => ['properties' => [
-                'name' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'HighPerformance',
-                        'Standard',
-                        'UltraPerformance',
-                        'VpnGw1',
-                        'VpnGw2',
-                        'VpnGw3'
-                    ]
-                ],
-                'tier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'HighPerformance',
-                        'Standard',
-                        'UltraPerformance',
-                        'VpnGw1',
-                        'VpnGw2',
-                        'VpnGw3'
-                    ]
-                ],
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'VpnClientRootCertificatePropertiesFormat' => ['properties' => [
-                'publicCertData' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'VpnClientRootCertificate' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/VpnClientRootCertificatePropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'VpnClientRevokedCertificatePropertiesFormat' => ['properties' => [
-                'thumbprint' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'VpnClientRevokedCertificate' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/VpnClientRevokedCertificatePropertiesFormat'],
-                'name' => ['type' => 'string'],
-                'etag' => ['type' => 'string']
-            ]],
-            'VpnClientConfiguration' => ['properties' => [
-                'vpnClientAddressPool' => ['$ref' => '#/definitions/AddressSpace'],
-                'vpnClientRootCertificates' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VpnClientRootCertificate']
-                ],
-                'vpnClientRevokedCertificates' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VpnClientRevokedCertificate']
-                ],
-                'vpnClientProtocols' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => []
+            ],
+            'DnsNameAvailabilityResult' => [
+                'properties' => ['available' => ['type' => 'boolean']],
+                'required' => []
+            ],
+            'AuthorizationPropertiesFormat' => [
+                'properties' => [
+                    'authorizationKey' => ['type' => 'string'],
+                    'authorizationUseStatus' => [
                         'type' => 'string',
                         'enum' => [
-                            'IkeV2',
-                            'SSTP'
+                            'Available',
+                            'InUse'
+                        ]
+                    ],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ExpressRouteCircuitAuthorization' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/AuthorizationPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AuthorizationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ExpressRouteCircuitAuthorization']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ExpressRouteCircuitPeeringConfig' => [
+                'properties' => [
+                    'advertisedPublicPrefixes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'advertisedCommunities' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'advertisedPublicPrefixesState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotConfigured',
+                            'Configuring',
+                            'Configured',
+                            'ValidationNeeded'
+                        ]
+                    ],
+                    'legacyMode' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'customerASN' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'routingRegistryName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RouteFilterRulePropertiesFormat' => [
+                'properties' => [
+                    'access' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Allow',
+                            'Deny'
+                        ]
+                    ],
+                    'routeFilterRuleType' => ['type' => 'string'],
+                    'communities' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => [
+                    'access',
+                    'routeFilterRuleType',
+                    'communities'
+                ]
+            ],
+            'RouteFilterRule' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/RouteFilterRulePropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ExpressRouteCircuitStats' => [
+                'properties' => [
+                    'primarybytesIn' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'primarybytesOut' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'secondarybytesIn' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'secondarybytesOut' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ExpressRouteCircuitPeeringPropertiesFormat' => [
+                'properties' => [
+                    'peeringType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'AzurePublicPeering',
+                            'AzurePrivatePeering',
+                            'MicrosoftPeering'
+                        ]
+                    ],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Disabled',
+                            'Enabled'
+                        ]
+                    ],
+                    'azureASN' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'peerASN' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'primaryPeerAddressPrefix' => ['type' => 'string'],
+                    'secondaryPeerAddressPrefix' => ['type' => 'string'],
+                    'primaryAzurePort' => ['type' => 'string'],
+                    'secondaryAzurePort' => ['type' => 'string'],
+                    'sharedKey' => ['type' => 'string'],
+                    'vlanId' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'microsoftPeeringConfig' => ['$ref' => '#/definitions/ExpressRouteCircuitPeeringConfig'],
+                    'stats' => ['$ref' => '#/definitions/ExpressRouteCircuitStats'],
+                    'provisioningState' => ['type' => 'string'],
+                    'gatewayManagerEtag' => ['type' => 'string'],
+                    'lastModifiedBy' => ['type' => 'string'],
+                    'routeFilter' => ['$ref' => '#/definitions/RouteFilter'],
+                    'ipv6PeeringConfig' => ['$ref' => '#/definitions/Ipv6ExpressRouteCircuitPeeringConfig']
+                ],
+                'required' => []
+            ],
+            'ExpressRouteCircuitPeering' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ExpressRouteCircuitPeeringPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RouteFilterPropertiesFormat' => [
+                'properties' => [
+                    'rules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RouteFilterRule']
+                    ],
+                    'peerings' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ExpressRouteCircuitPeering']
+                    ],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RouteFilter' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/RouteFilterPropertiesFormat'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Ipv6ExpressRouteCircuitPeeringConfig' => [
+                'properties' => [
+                    'primaryPeerAddressPrefix' => ['type' => 'string'],
+                    'secondaryPeerAddressPrefix' => ['type' => 'string'],
+                    'microsoftPeeringConfig' => ['$ref' => '#/definitions/ExpressRouteCircuitPeeringConfig'],
+                    'routeFilter' => ['$ref' => '#/definitions/RouteFilter'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Disabled',
+                            'Enabled'
                         ]
                     ]
                 ],
-                'radiusServerAddress' => ['type' => 'string'],
-                'radiusServerSecret' => ['type' => 'string']
-            ]],
-            'BgpSettings' => ['properties' => [
-                'asn' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'ExpressRouteCircuitPeeringListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ExpressRouteCircuitPeering']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'bgpPeeringAddress' => ['type' => 'string'],
-                'peerWeight' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'ExpressRouteCircuitSku' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'tier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Standard',
+                            'Premium'
+                        ]
+                    ],
+                    'family' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'UnlimitedData',
+                            'MeteredData'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'ExpressRouteCircuitServiceProviderProperties' => [
+                'properties' => [
+                    'serviceProviderName' => ['type' => 'string'],
+                    'peeringLocation' => ['type' => 'string'],
+                    'bandwidthInMbps' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ExpressRouteCircuitPropertiesFormat' => [
+                'properties' => [
+                    'allowClassicOperations' => ['type' => 'boolean'],
+                    'circuitProvisioningState' => ['type' => 'string'],
+                    'serviceProviderProvisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotProvisioned',
+                            'Provisioning',
+                            'Provisioned',
+                            'Deprovisioning'
+                        ]
+                    ],
+                    'authorizations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ExpressRouteCircuitAuthorization']
+                    ],
+                    'peerings' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ExpressRouteCircuitPeering']
+                    ],
+                    'serviceKey' => ['type' => 'string'],
+                    'serviceProviderNotes' => ['type' => 'string'],
+                    'serviceProviderProperties' => ['$ref' => '#/definitions/ExpressRouteCircuitServiceProviderProperties'],
+                    'provisioningState' => ['type' => 'string'],
+                    'gatewayManagerEtag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ExpressRouteCircuit' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/ExpressRouteCircuitSku'],
+                    'properties' => ['$ref' => '#/definitions/ExpressRouteCircuitPropertiesFormat'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ExpressRouteCircuitArpTable' => [
+                'properties' => [
+                    'age' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'interface' => ['type' => 'string'],
+                    'ipAddress' => ['type' => 'string'],
+                    'macAddress' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ExpressRouteCircuitsArpTableListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ExpressRouteCircuitArpTable']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ExpressRouteCircuitRoutesTable' => [
+                'properties' => [
+                    'network' => ['type' => 'string'],
+                    'nextHop' => ['type' => 'string'],
+                    'locPrf' => ['type' => 'string'],
+                    'weight' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'path' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ExpressRouteCircuitsRoutesTableListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ExpressRouteCircuitRoutesTable']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ExpressRouteCircuitRoutesTableSummary' => [
+                'properties' => [
+                    'neighbor' => ['type' => 'string'],
+                    'v' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'as' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'upDown' => ['type' => 'string'],
+                    'statePfxRcd' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ExpressRouteCircuitsRoutesTableSummaryListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ExpressRouteCircuitRoutesTableSummary']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ExpressRouteCircuitListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ExpressRouteCircuit']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ExpressRouteServiceProviderBandwidthsOffered' => [
+                'properties' => [
+                    'offerName' => ['type' => 'string'],
+                    'valueInMbps' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ExpressRouteServiceProviderPropertiesFormat' => [
+                'properties' => [
+                    'peeringLocations' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'bandwidthsOffered' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ExpressRouteServiceProviderBandwidthsOffered']
+                    ],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ExpressRouteServiceProvider' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ExpressRouteServiceProviderPropertiesFormat']],
+                'required' => []
+            ],
+            'ExpressRouteServiceProviderListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ExpressRouteServiceProvider']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'FrontendIPConfigurationPropertiesFormat' => [
+                'properties' => [
+                    'inboundNatRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubResource']
+                    ],
+                    'inboundNatPools' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubResource']
+                    ],
+                    'outboundNatRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubResource']
+                    ],
+                    'loadBalancingRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubResource']
+                    ],
+                    'privateIPAddress' => ['type' => 'string'],
+                    'privateIPAllocationMethod' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Static',
+                            'Dynamic'
+                        ]
+                    ],
+                    'subnet' => ['$ref' => '#/definitions/Subnet'],
+                    'publicIPAddress' => ['$ref' => '#/definitions/PublicIPAddress'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'FrontendIPConfiguration' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/FrontendIPConfigurationPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LoadBalancingRulePropertiesFormat' => [
+                'properties' => [
+                    'frontendIPConfiguration' => ['$ref' => '#/definitions/SubResource'],
+                    'backendAddressPool' => ['$ref' => '#/definitions/SubResource'],
+                    'probe' => ['$ref' => '#/definitions/SubResource'],
+                    'protocol' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Udp',
+                            'Tcp'
+                        ]
+                    ],
+                    'loadDistribution' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Default',
+                            'SourceIP',
+                            'SourceIPProtocol'
+                        ]
+                    ],
+                    'frontendPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'backendPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'idleTimeoutInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'enableFloatingIP' => ['type' => 'boolean'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => [
+                    'protocol',
+                    'frontendPort'
                 ]
-            ]],
-            'VirtualNetworkGatewayPropertiesFormat' => ['properties' => [
-                'ipConfigurations' => [
+            ],
+            'LoadBalancingRule' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/LoadBalancingRulePropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ProbePropertiesFormat' => [
+                'properties' => [
+                    'loadBalancingRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubResource']
+                    ],
+                    'protocol' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Http',
+                            'Tcp'
+                        ]
+                    ],
+                    'port' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'intervalInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'numberOfProbes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'requestPath' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => [
+                    'protocol',
+                    'port'
+                ]
+            ],
+            'Probe' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ProbePropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InboundNatPoolPropertiesFormat' => [
+                'properties' => [
+                    'frontendIPConfiguration' => ['$ref' => '#/definitions/SubResource'],
+                    'protocol' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Udp',
+                            'Tcp'
+                        ]
+                    ],
+                    'frontendPortRangeStart' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'frontendPortRangeEnd' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'backendPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => [
+                    'protocol',
+                    'frontendPortRangeStart',
+                    'frontendPortRangeEnd',
+                    'backendPort'
+                ]
+            ],
+            'InboundNatPool' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/InboundNatPoolPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'OutboundNatRulePropertiesFormat' => [
+                'properties' => [
+                    'allocatedOutboundPorts' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'frontendIPConfigurations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubResource']
+                    ],
+                    'backendAddressPool' => ['$ref' => '#/definitions/SubResource'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => ['backendAddressPool']
+            ],
+            'OutboundNatRule' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/OutboundNatRulePropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LoadBalancerPropertiesFormat' => [
+                'properties' => [
+                    'frontendIPConfigurations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/FrontendIPConfiguration']
+                    ],
+                    'backendAddressPools' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/BackendAddressPool']
+                    ],
+                    'loadBalancingRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/LoadBalancingRule']
+                    ],
+                    'probes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Probe']
+                    ],
+                    'inboundNatRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InboundNatRule']
+                    ],
+                    'inboundNatPools' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InboundNatPool']
+                    ],
+                    'outboundNatRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/OutboundNatRule']
+                    ],
+                    'resourceGuid' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LoadBalancer' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/LoadBalancerPropertiesFormat'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LoadBalancerListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/LoadBalancer']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InboundNatRuleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/InboundNatRule']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LoadBalancerBackendAddressPoolListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/BackendAddressPool']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LoadBalancerFrontendIPConfigurationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/FrontendIPConfiguration']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LoadBalancerLoadBalancingRuleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/LoadBalancingRule']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LoadBalancerProbeListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Probe']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'NetworkInterfaceListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NetworkInterface']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ErrorDetails' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'target' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Error' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'target' => ['type' => 'string'],
+                    'details' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ErrorDetails']
+                    ],
+                    'innerError' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AzureAsyncOperationResult' => [
+                'properties' => [
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'InProgress',
+                            'Succeeded',
+                            'Failed'
+                        ]
+                    ],
+                    'error' => ['$ref' => '#/definitions/Error']
+                ],
+                'required' => []
+            ],
+            'NetworkInterfaceIPConfigurationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NetworkInterfaceIPConfiguration']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'NetworkInterfaceLoadBalancerListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/LoadBalancer']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'EffectiveNetworkSecurityGroupAssociation' => [
+                'properties' => [
+                    'subnet' => ['$ref' => '#/definitions/SubResource'],
+                    'networkInterface' => ['$ref' => '#/definitions/SubResource']
+                ],
+                'required' => []
+            ],
+            'EffectiveNetworkSecurityRule' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'protocol' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Tcp',
+                            'Udp',
+                            'All'
+                        ]
+                    ],
+                    'sourcePortRange' => ['type' => 'string'],
+                    'destinationPortRange' => ['type' => 'string'],
+                    'sourcePortRanges' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'destinationPortRanges' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'sourceAddressPrefix' => ['type' => 'string'],
+                    'destinationAddressPrefix' => ['type' => 'string'],
+                    'sourceAddressPrefixes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'destinationAddressPrefixes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'expandedSourceAddressPrefix' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'expandedDestinationAddressPrefix' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'access' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Allow',
+                            'Deny'
+                        ]
+                    ],
+                    'priority' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'direction' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Inbound',
+                            'Outbound'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'EffectiveNetworkSecurityGroup' => [
+                'properties' => [
+                    'networkSecurityGroup' => ['$ref' => '#/definitions/SubResource'],
+                    'association' => ['$ref' => '#/definitions/EffectiveNetworkSecurityGroupAssociation'],
+                    'effectiveSecurityRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/EffectiveNetworkSecurityRule']
+                    ],
+                    'tagMap' => [
+                        'type' => 'object',
+                        'additionalProperties' => [
+                            'type' => 'array',
+                            'items' => ['type' => 'string']
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'EffectiveNetworkSecurityGroupListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/EffectiveNetworkSecurityGroup']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'EffectiveRoute' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'source' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unknown',
+                            'User',
+                            'VirtualNetworkGateway',
+                            'Default'
+                        ]
+                    ],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Active',
+                            'Invalid'
+                        ]
+                    ],
+                    'addressPrefix' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'nextHopIpAddress' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'nextHopType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'VirtualNetworkGateway',
+                            'VnetLocal',
+                            'Internet',
+                            'VirtualAppliance',
+                            'None'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'EffectiveRouteListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/EffectiveRoute']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SecurityRuleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SecurityRule']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'NetworkSecurityGroupListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NetworkSecurityGroup']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'NetworkWatcherPropertiesFormat' => [
+                'properties' => ['provisioningState' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'Succeeded',
+                        'Updating',
+                        'Deleting',
+                        'Failed'
+                    ]
+                ]],
+                'required' => []
+            ],
+            'NetworkWatcher' => [
+                'properties' => [
+                    'etag' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/NetworkWatcherPropertiesFormat']
+                ],
+                'required' => []
+            ],
+            'NetworkWatcherListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualNetworkGatewayIPConfiguration']
-                ],
-                'gatewayType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Vpn',
-                        'ExpressRoute'
+                    'items' => ['$ref' => '#/definitions/NetworkWatcher']
+                ]],
+                'required' => []
+            ],
+            'TopologyParameters' => [
+                'properties' => ['targetResourceGroupName' => ['type' => 'string']],
+                'required' => ['targetResourceGroupName']
+            ],
+            'TopologyAssociation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'resourceId' => ['type' => 'string'],
+                    'associationType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Associated',
+                            'Contains'
+                        ]
                     ]
                 ],
-                'vpnType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'PolicyBased',
-                        'RouteBased'
+                'required' => []
+            ],
+            'TopologyResource' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'id' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'associations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TopologyAssociation']
                     ]
                 ],
-                'enableBgp' => ['type' => 'boolean'],
-                'activeActive' => ['type' => 'boolean'],
-                'gatewayDefaultSite' => ['$ref' => '#/definitions/SubResource'],
-                'sku' => ['$ref' => '#/definitions/VirtualNetworkGatewaySku'],
-                'vpnClientConfiguration' => ['$ref' => '#/definitions/VpnClientConfiguration'],
-                'bgpSettings' => ['$ref' => '#/definitions/BgpSettings'],
-                'resourceGuid' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'BgpPeerStatus' => ['properties' => [
-                'localAddress' => ['type' => 'string'],
-                'neighbor' => ['type' => 'string'],
-                'asn' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Unknown',
-                        'Stopped',
-                        'Idle',
-                        'Connecting',
-                        'Connected'
+                'required' => []
+            ],
+            'Topology' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'createdDateTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModified' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'resources' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TopologyResource']
                     ]
                 ],
-                'connectedDuration' => ['type' => 'string'],
-                'routesReceived' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'VerificationIPFlowParameters' => [
+                'properties' => [
+                    'targetResourceId' => ['type' => 'string'],
+                    'direction' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Inbound',
+                            'Outbound'
+                        ]
+                    ],
+                    'protocol' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'TCP',
+                            'UDP'
+                        ]
+                    ],
+                    'localPort' => ['type' => 'string'],
+                    'remotePort' => ['type' => 'string'],
+                    'localIPAddress' => ['type' => 'string'],
+                    'remoteIPAddress' => ['type' => 'string'],
+                    'targetNicResourceId' => ['type' => 'string']
                 ],
-                'messagesSent' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'messagesReceived' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => [
+                    'targetResourceId',
+                    'direction',
+                    'protocol',
+                    'localPort',
+                    'remotePort',
+                    'localIPAddress',
+                    'remoteIPAddress'
                 ]
-            ]],
-            'GatewayRoute' => ['properties' => [
-                'localAddress' => ['type' => 'string'],
-                'network' => ['type' => 'string'],
-                'nextHop' => ['type' => 'string'],
-                'sourcePeer' => ['type' => 'string'],
-                'origin' => ['type' => 'string'],
-                'asPath' => ['type' => 'string'],
-                'weight' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+            ],
+            'VerificationIPFlowResult' => [
+                'properties' => [
+                    'access' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Allow',
+                            'Deny'
+                        ]
+                    ],
+                    'ruleName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'NextHopParameters' => [
+                'properties' => [
+                    'targetResourceId' => ['type' => 'string'],
+                    'sourceIPAddress' => ['type' => 'string'],
+                    'destinationIPAddress' => ['type' => 'string'],
+                    'targetNicResourceId' => ['type' => 'string']
+                ],
+                'required' => [
+                    'targetResourceId',
+                    'sourceIPAddress',
+                    'destinationIPAddress'
                 ]
-            ]],
-            'VirtualNetworkGateway' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/VirtualNetworkGatewayPropertiesFormat'],
-                'etag' => ['type' => 'string']
-            ]],
-            'VpnClientParameters' => ['properties' => [
-                'processorArchitecture' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Amd64',
-                        'X86'
+            ],
+            'NextHopResult' => [
+                'properties' => [
+                    'nextHopType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Internet',
+                            'VirtualAppliance',
+                            'VirtualNetworkGateway',
+                            'VnetLocal',
+                            'HyperNetGateway',
+                            'None'
+                        ]
+                    ],
+                    'nextHopIpAddress' => ['type' => 'string'],
+                    'routeTableId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SecurityGroupViewParameters' => [
+                'properties' => ['targetResourceId' => ['type' => 'string']],
+                'required' => ['targetResourceId']
+            ],
+            'NetworkInterfaceAssociation' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'securityRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SecurityRule']
                     ]
                 ],
-                'authenticationMethod' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'EAPTLS',
-                        'EAPMSCHAPv2'
+                'required' => []
+            ],
+            'SubnetAssociation' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'securityRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SecurityRule']
                     ]
                 ],
-                'radiusServerAuthCertificate' => ['type' => 'string'],
-                'clientRootCertificates' => [
+                'required' => []
+            ],
+            'SecurityRuleAssociations' => [
+                'properties' => [
+                    'networkInterfaceAssociation' => ['$ref' => '#/definitions/NetworkInterfaceAssociation'],
+                    'subnetAssociation' => ['$ref' => '#/definitions/SubnetAssociation'],
+                    'defaultSecurityRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SecurityRule']
+                    ],
+                    'effectiveSecurityRules' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/EffectiveNetworkSecurityRule']
+                    ]
+                ],
+                'required' => []
+            ],
+            'SecurityGroupNetworkInterface' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'securityRuleAssociations' => ['$ref' => '#/definitions/SecurityRuleAssociations']
+                ],
+                'required' => []
+            ],
+            'SecurityGroupViewResult' => [
+                'properties' => ['networkInterfaces' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/SecurityGroupNetworkInterface']
+                ]],
+                'required' => []
+            ],
+            'PacketCaptureStorageLocation' => [
+                'properties' => [
+                    'storageId' => ['type' => 'string'],
+                    'storagePath' => ['type' => 'string'],
+                    'filePath' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PacketCaptureFilter' => [
+                'properties' => [
+                    'protocol' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'TCP',
+                            'UDP',
+                            'Any'
+                        ]
+                    ],
+                    'localIPAddress' => ['type' => 'string'],
+                    'remoteIPAddress' => ['type' => 'string'],
+                    'localPort' => ['type' => 'string'],
+                    'remotePort' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PacketCaptureParameters' => [
+                'properties' => [
+                    'target' => ['type' => 'string'],
+                    'bytesToCapturePerPacket' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'totalBytesPerSession' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'timeLimitInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'storageLocation' => ['$ref' => '#/definitions/PacketCaptureStorageLocation'],
+                    'filters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PacketCaptureFilter']
+                    ]
+                ],
+                'required' => [
+                    'target',
+                    'storageLocation'
+                ]
+            ],
+            'PacketCapture' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PacketCaptureParameters']],
+                'required' => ['properties']
+            ],
+            'PacketCaptureResultProperties' => [
+                'properties' => ['provisioningState' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'Succeeded',
+                        'Updating',
+                        'Deleting',
+                        'Failed'
+                    ]
+                ]],
+                'required' => []
+            ],
+            'PacketCaptureResult' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'id' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/PacketCaptureResultProperties']
+                ],
+                'required' => []
+            ],
+            'PacketCaptureListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/PacketCaptureResult']
+                ]],
+                'required' => []
+            ],
+            'PacketCaptureQueryStatusResult' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'id' => ['type' => 'string'],
+                    'captureStartTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'packetCaptureStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotStarted',
+                            'Running',
+                            'Stopped',
+                            'Error',
+                            'Unknown'
+                        ]
+                    ],
+                    'stopReason' => ['type' => 'string'],
+                    'packetCaptureError' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'InternalError',
+                                'AgentStopped',
+                                'CaptureFailed',
+                                'LocalFileFailed',
+                                'StorageFailed'
+                            ]
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'TroubleshootingProperties' => [
+                'properties' => [
+                    'storageId' => ['type' => 'string'],
+                    'storagePath' => ['type' => 'string']
+                ],
+                'required' => [
+                    'storageId',
+                    'storagePath'
+                ]
+            ],
+            'TroubleshootingParameters' => [
+                'properties' => [
+                    'targetResourceId' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/TroubleshootingProperties']
+                ],
+                'required' => [
+                    'targetResourceId',
+                    'properties'
+                ]
+            ],
+            'QueryTroubleshootingParameters' => [
+                'properties' => ['targetResourceId' => ['type' => 'string']],
+                'required' => ['targetResourceId']
+            ],
+            'TroubleshootingRecommendedActions' => [
+                'properties' => [
+                    'actionId' => ['type' => 'string'],
+                    'actionText' => ['type' => 'string'],
+                    'actionUri' => ['type' => 'string'],
+                    'actionUriText' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'TroubleshootingDetails' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'reasonType' => ['type' => 'string'],
+                    'summary' => ['type' => 'string'],
+                    'detail' => ['type' => 'string'],
+                    'recommendedActions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TroubleshootingRecommendedActions']
+                    ]
+                ],
+                'required' => []
+            ],
+            'TroubleshootingResult' => [
+                'properties' => [
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'code' => ['type' => 'string'],
+                    'results' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TroubleshootingDetails']
+                    ]
+                ],
+                'required' => []
+            ],
+            'RetentionPolicyParameters' => [
+                'properties' => [
+                    'days' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'enabled' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'FlowLogProperties' => [
+                'properties' => [
+                    'storageId' => ['type' => 'string'],
+                    'enabled' => ['type' => 'boolean'],
+                    'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicyParameters']
+                ],
+                'required' => [
+                    'storageId',
+                    'enabled'
+                ]
+            ],
+            'FlowLogStatusParameters' => [
+                'properties' => ['targetResourceId' => ['type' => 'string']],
+                'required' => ['targetResourceId']
+            ],
+            'FlowLogInformation' => [
+                'properties' => [
+                    'targetResourceId' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/FlowLogProperties']
+                ],
+                'required' => [
+                    'targetResourceId',
+                    'properties'
+                ]
+            ],
+            'ConnectivitySource' => [
+                'properties' => [
+                    'resourceId' => ['type' => 'string'],
+                    'port' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => ['resourceId']
+            ],
+            'ConnectivityDestination' => [
+                'properties' => [
+                    'resourceId' => ['type' => 'string'],
+                    'address' => ['type' => 'string'],
+                    'port' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ConnectivityParameters' => [
+                'properties' => [
+                    'source' => ['$ref' => '#/definitions/ConnectivitySource'],
+                    'destination' => ['$ref' => '#/definitions/ConnectivityDestination']
+                ],
+                'required' => [
+                    'source',
+                    'destination'
+                ]
+            ],
+            'ConnectivityIssue' => [
+                'properties' => [
+                    'origin' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Local',
+                            'Inbound',
+                            'Outbound'
+                        ]
+                    ],
+                    'severity' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Error',
+                            'Warning'
+                        ]
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unknown',
+                            'AgentStopped',
+                            'GuestFirewall',
+                            'DnsResolution',
+                            'SocketBind',
+                            'NetworkSecurityRule',
+                            'UserDefinedRoute',
+                            'PortThrottled',
+                            'Platform'
+                        ]
+                    ],
+                    'context' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'object',
+                            'additionalProperties' => ['type' => 'string']
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'ConnectivityHop' => [
+                'properties' => [
+                    'type' => ['type' => 'string'],
+                    'id' => ['type' => 'string'],
+                    'address' => ['type' => 'string'],
+                    'resourceId' => ['type' => 'string'],
+                    'nextHopIds' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'issues' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ConnectivityIssue']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ConnectivityInformation' => [
+                'properties' => [
+                    'hops' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ConnectivityHop']
+                    ],
+                    'connectionStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unknown',
+                            'Connected',
+                            'Disconnected',
+                            'Degraded'
+                        ]
+                    ],
+                    'avgLatencyInMs' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'minLatencyInMs' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'maxLatencyInMs' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'probesSent' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'probesFailed' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'PublicIPAddressListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PublicIPAddress']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PatchRouteFilterRule' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/RouteFilterRulePropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'PatchRouteFilter' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/RouteFilterPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'RouteFilterListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RouteFilter']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RouteFilterRuleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RouteFilterRule']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RouteTableListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RouteTable']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RouteListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Route']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'BGPCommunity' => [
+                'properties' => [
+                    'serviceSupportedRegion' => ['type' => 'string'],
+                    'communityName' => ['type' => 'string'],
+                    'communityValue' => ['type' => 'string'],
+                    'communityPrefixes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'isAuthorizedToUse' => ['type' => 'boolean'],
+                    'serviceGroup' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'BgpServiceCommunityPropertiesFormat' => [
+                'properties' => [
+                    'serviceName' => ['type' => 'string'],
+                    'bgpCommunities' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/BGPCommunity']
+                    ]
+                ],
+                'required' => []
+            ],
+            'BgpServiceCommunity' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BgpServiceCommunityPropertiesFormat']],
+                'required' => []
+            ],
+            'BgpServiceCommunityListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/BgpServiceCommunity']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'UsageName' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'localizedValue' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Usage' => [
+                'properties' => [
+                    'unit' => ['type' => 'string'],
+                    'currentValue' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'limit' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'name' => ['$ref' => '#/definitions/UsageName']
+                ],
+                'required' => [
+                    'unit',
+                    'currentValue',
+                    'limit',
+                    'name'
+                ]
+            ],
+            'UsagesListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Usage']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkPeeringPropertiesFormat' => [
+                'properties' => [
+                    'allowVirtualNetworkAccess' => ['type' => 'boolean'],
+                    'allowForwardedTraffic' => ['type' => 'boolean'],
+                    'allowGatewayTransit' => ['type' => 'boolean'],
+                    'useRemoteGateways' => ['type' => 'boolean'],
+                    'remoteVirtualNetwork' => ['$ref' => '#/definitions/SubResource'],
+                    'peeringState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Initiated',
+                            'Connected',
+                            'Disconnected'
+                        ]
+                    ],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkPeering' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/VirtualNetworkPeeringPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SubnetListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Subnet']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkPeeringListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualNetworkPeering']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AddressSpace' => [
+                'properties' => ['addressPrefixes' => [
                     'type' => 'array',
                     'items' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'DhcpOptions' => [
+                'properties' => ['dnsServers' => [
+                    'type' => 'array',
+                    'items' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'VirtualNetworkPropertiesFormat' => [
+                'properties' => [
+                    'addressSpace' => ['$ref' => '#/definitions/AddressSpace'],
+                    'dhcpOptions' => ['$ref' => '#/definitions/DhcpOptions'],
+                    'subnets' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Subnet']
+                    ],
+                    'virtualNetworkPeerings' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualNetworkPeering']
+                    ],
+                    'resourceGuid' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualNetwork' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/VirtualNetworkPropertiesFormat'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualNetwork']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'IPAddressAvailabilityResult' => [
+                'properties' => [
+                    'available' => ['type' => 'boolean'],
+                    'availableIPAddresses' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkUsageName' => [
+                'properties' => [
+                    'localizedValue' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkUsage' => [
+                'properties' => [
+                    'currentValue' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'id' => ['type' => 'string'],
+                    'limit' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'name' => ['$ref' => '#/definitions/VirtualNetworkUsageName'],
+                    'unit' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkListUsageResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualNetworkUsage']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkGatewayIPConfigurationPropertiesFormat' => [
+                'properties' => [
+                    'privateIPAllocationMethod' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Static',
+                            'Dynamic'
+                        ]
+                    ],
+                    'subnet' => ['$ref' => '#/definitions/SubResource'],
+                    'publicIPAddress' => ['$ref' => '#/definitions/SubResource'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkGatewayIPConfiguration' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/VirtualNetworkGatewayIPConfigurationPropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkGatewaySku' => [
+                'properties' => [
+                    'name' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'HighPerformance',
+                            'Standard',
+                            'UltraPerformance',
+                            'VpnGw1',
+                            'VpnGw2',
+                            'VpnGw3'
+                        ]
+                    ],
+                    'tier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'HighPerformance',
+                            'Standard',
+                            'UltraPerformance',
+                            'VpnGw1',
+                            'VpnGw2',
+                            'VpnGw3'
+                        ]
+                    ],
+                    'capacity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'VpnClientRootCertificatePropertiesFormat' => [
+                'properties' => [
+                    'publicCertData' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => ['publicCertData']
+            ],
+            'VpnClientRootCertificate' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/VpnClientRootCertificatePropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => ['properties']
+            ],
+            'VpnClientRevokedCertificatePropertiesFormat' => [
+                'properties' => [
+                    'thumbprint' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VpnClientRevokedCertificate' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/VpnClientRevokedCertificatePropertiesFormat'],
+                    'name' => ['type' => 'string'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VpnClientConfiguration' => [
+                'properties' => [
+                    'vpnClientAddressPool' => ['$ref' => '#/definitions/AddressSpace'],
+                    'vpnClientRootCertificates' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VpnClientRootCertificate']
+                    ],
+                    'vpnClientRevokedCertificates' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VpnClientRevokedCertificate']
+                    ],
+                    'vpnClientProtocols' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'IkeV2',
+                                'SSTP'
+                            ]
+                        ]
+                    ],
+                    'radiusServerAddress' => ['type' => 'string'],
+                    'radiusServerSecret' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'BgpSettings' => [
+                'properties' => [
+                    'asn' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'bgpPeeringAddress' => ['type' => 'string'],
+                    'peerWeight' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkGatewayPropertiesFormat' => [
+                'properties' => [
+                    'ipConfigurations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualNetworkGatewayIPConfiguration']
+                    ],
+                    'gatewayType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Vpn',
+                            'ExpressRoute'
+                        ]
+                    ],
+                    'vpnType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'PolicyBased',
+                            'RouteBased'
+                        ]
+                    ],
+                    'enableBgp' => ['type' => 'boolean'],
+                    'activeActive' => ['type' => 'boolean'],
+                    'gatewayDefaultSite' => ['$ref' => '#/definitions/SubResource'],
+                    'sku' => ['$ref' => '#/definitions/VirtualNetworkGatewaySku'],
+                    'vpnClientConfiguration' => ['$ref' => '#/definitions/VpnClientConfiguration'],
+                    'bgpSettings' => ['$ref' => '#/definitions/BgpSettings'],
+                    'resourceGuid' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'BgpPeerStatus' => [
+                'properties' => [
+                    'localAddress' => ['type' => 'string'],
+                    'neighbor' => ['type' => 'string'],
+                    'asn' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unknown',
+                            'Stopped',
+                            'Idle',
+                            'Connecting',
+                            'Connected'
+                        ]
+                    ],
+                    'connectedDuration' => ['type' => 'string'],
+                    'routesReceived' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'messagesSent' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'messagesReceived' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ]
+                ],
+                'required' => []
+            ],
+            'GatewayRoute' => [
+                'properties' => [
+                    'localAddress' => ['type' => 'string'],
+                    'network' => ['type' => 'string'],
+                    'nextHop' => ['type' => 'string'],
+                    'sourcePeer' => ['type' => 'string'],
+                    'origin' => ['type' => 'string'],
+                    'asPath' => ['type' => 'string'],
+                    'weight' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkGateway' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/VirtualNetworkGatewayPropertiesFormat'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => ['properties']
+            ],
+            'VpnClientParameters' => [
+                'properties' => [
+                    'processorArchitecture' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Amd64',
+                            'X86'
+                        ]
+                    ],
+                    'authenticationMethod' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'EAPTLS',
+                            'EAPMSCHAPv2'
+                        ]
+                    ],
+                    'radiusServerAuthCertificate' => ['type' => 'string'],
+                    'clientRootCertificates' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkGatewayListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualNetworkGateway']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'BgpPeerStatusListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/BgpPeerStatus']
+                ]],
+                'required' => []
+            ],
+            'GatewayRouteListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/GatewayRoute']
+                ]],
+                'required' => []
+            ],
+            'TunnelConnectionHealth' => [
+                'properties' => [
+                    'tunnel' => ['type' => 'string'],
+                    'connectionStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unknown',
+                            'Connecting',
+                            'Connected',
+                            'NotConnected'
+                        ]
+                    ],
+                    'ingressBytesTransferred' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'egressBytesTransferred' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'lastConnectionEstablishedUtcTime' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LocalNetworkGatewayPropertiesFormat' => [
+                'properties' => [
+                    'localNetworkAddressSpace' => ['$ref' => '#/definitions/AddressSpace'],
+                    'gatewayIpAddress' => ['type' => 'string'],
+                    'bgpSettings' => ['$ref' => '#/definitions/BgpSettings'],
+                    'resourceGuid' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LocalNetworkGateway' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/LocalNetworkGatewayPropertiesFormat'],
+                    'etag' => ['type' => 'string']
+                ],
+                'required' => ['properties']
+            ],
+            'IpsecPolicy' => [
+                'properties' => [
+                    'saLifeTimeSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'saDataSizeKilobytes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'ipsecEncryption' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'DES',
+                            'DES3',
+                            'AES128',
+                            'AES192',
+                            'AES256',
+                            'GCMAES128',
+                            'GCMAES192',
+                            'GCMAES256'
+                        ]
+                    ],
+                    'ipsecIntegrity' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'MD5',
+                            'SHA1',
+                            'SHA256',
+                            'GCMAES128',
+                            'GCMAES192',
+                            'GCMAES256'
+                        ]
+                    ],
+                    'ikeEncryption' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'DES',
+                            'DES3',
+                            'AES128',
+                            'AES192',
+                            'AES256'
+                        ]
+                    ],
+                    'ikeIntegrity' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'MD5',
+                            'SHA1',
+                            'SHA256',
+                            'SHA384'
+                        ]
+                    ],
+                    'dhGroup' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'DHGroup1',
+                            'DHGroup2',
+                            'DHGroup14',
+                            'DHGroup2048',
+                            'ECP256',
+                            'ECP384',
+                            'DHGroup24'
+                        ]
+                    ],
+                    'pfsGroup' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'PFS1',
+                            'PFS2',
+                            'PFS2048',
+                            'ECP256',
+                            'ECP384',
+                            'PFS24'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'saLifeTimeSeconds',
+                    'saDataSizeKilobytes',
+                    'ipsecEncryption',
+                    'ipsecIntegrity',
+                    'ikeEncryption',
+                    'ikeIntegrity',
+                    'dhGroup',
+                    'pfsGroup'
                 ]
-            ]],
-            'VirtualNetworkGatewayListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualNetworkGateway']
+            ],
+            'VirtualNetworkGatewayConnectionPropertiesFormat' => [
+                'properties' => [
+                    'authorizationKey' => ['type' => 'string'],
+                    'virtualNetworkGateway1' => ['$ref' => '#/definitions/VirtualNetworkGateway'],
+                    'virtualNetworkGateway2' => ['$ref' => '#/definitions/VirtualNetworkGateway'],
+                    'localNetworkGateway2' => ['$ref' => '#/definitions/LocalNetworkGateway'],
+                    'connectionType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'IPsec',
+                            'Vnet2Vnet',
+                            'ExpressRoute',
+                            'VPNClient'
+                        ]
+                    ],
+                    'routingWeight' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'sharedKey' => ['type' => 'string'],
+                    'connectionStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unknown',
+                            'Connecting',
+                            'Connected',
+                            'NotConnected'
+                        ]
+                    ],
+                    'tunnelConnectionStatus' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TunnelConnectionHealth']
+                    ],
+                    'egressBytesTransferred' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'ingressBytesTransferred' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'peer' => ['$ref' => '#/definitions/SubResource'],
+                    'enableBgp' => ['type' => 'boolean'],
+                    'usePolicyBasedTrafficSelectors' => ['type' => 'boolean'],
+                    'ipsecPolicies' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/IpsecPolicy']
+                    ],
+                    'resourceGuid' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'BgpPeerStatusListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/BgpPeerStatus']
-            ]]],
-            'GatewayRouteListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/GatewayRoute']
-            ]]],
-            'TunnelConnectionHealth' => ['properties' => [
-                'tunnel' => ['type' => 'string'],
-                'connectionStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Unknown',
-                        'Connecting',
-                        'Connected',
-                        'NotConnected'
-                    ]
-                ],
-                'ingressBytesTransferred' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'egressBytesTransferred' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'lastConnectionEstablishedUtcTime' => ['type' => 'string']
-            ]],
-            'LocalNetworkGatewayPropertiesFormat' => ['properties' => [
-                'localNetworkAddressSpace' => ['$ref' => '#/definitions/AddressSpace'],
-                'gatewayIpAddress' => ['type' => 'string'],
-                'bgpSettings' => ['$ref' => '#/definitions/BgpSettings'],
-                'resourceGuid' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'LocalNetworkGateway' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/LocalNetworkGatewayPropertiesFormat'],
-                'etag' => ['type' => 'string']
-            ]],
-            'IpsecPolicy' => ['properties' => [
-                'saLifeTimeSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'saDataSizeKilobytes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'ipsecEncryption' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'DES',
-                        'DES3',
-                        'AES128',
-                        'AES192',
-                        'AES256',
-                        'GCMAES128',
-                        'GCMAES192',
-                        'GCMAES256'
-                    ]
-                ],
-                'ipsecIntegrity' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'MD5',
-                        'SHA1',
-                        'SHA256',
-                        'GCMAES128',
-                        'GCMAES192',
-                        'GCMAES256'
-                    ]
-                ],
-                'ikeEncryption' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'DES',
-                        'DES3',
-                        'AES128',
-                        'AES192',
-                        'AES256'
-                    ]
-                ],
-                'ikeIntegrity' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'MD5',
-                        'SHA1',
-                        'SHA256',
-                        'SHA384'
-                    ]
-                ],
-                'dhGroup' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'DHGroup1',
-                        'DHGroup2',
-                        'DHGroup14',
-                        'DHGroup2048',
-                        'ECP256',
-                        'ECP384',
-                        'DHGroup24'
-                    ]
-                ],
-                'pfsGroup' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'PFS1',
-                        'PFS2',
-                        'PFS2048',
-                        'ECP256',
-                        'ECP384',
-                        'PFS24'
-                    ]
+                'required' => [
+                    'virtualNetworkGateway1',
+                    'connectionType'
                 ]
-            ]],
-            'VirtualNetworkGatewayConnectionPropertiesFormat' => ['properties' => [
-                'authorizationKey' => ['type' => 'string'],
-                'virtualNetworkGateway1' => ['$ref' => '#/definitions/VirtualNetworkGateway'],
-                'virtualNetworkGateway2' => ['$ref' => '#/definitions/VirtualNetworkGateway'],
-                'localNetworkGateway2' => ['$ref' => '#/definitions/LocalNetworkGateway'],
-                'connectionType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'IPsec',
-                        'Vnet2Vnet',
-                        'ExpressRoute',
-                        'VPNClient'
-                    ]
+            ],
+            'VirtualNetworkGatewayConnection' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/VirtualNetworkGatewayConnectionPropertiesFormat'],
+                    'etag' => ['type' => 'string']
                 ],
-                'routingWeight' => [
+                'required' => ['properties']
+            ],
+            'VirtualNetworkGatewayConnectionListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualNetworkGatewayConnection']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ConnectionResetSharedKey' => [
+                'properties' => ['keyLength' => [
                     'type' => 'integer',
                     'format' => 'int32'
+                ]],
+                'required' => ['keyLength']
+            ],
+            'ConnectionSharedKey' => [
+                'properties' => ['value' => ['type' => 'string']],
+                'required' => ['value']
+            ],
+            'LocalNetworkGatewayListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/LocalNetworkGateway']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'sharedKey' => ['type' => 'string'],
-                'connectionStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Unknown',
-                        'Connecting',
-                        'Connected',
-                        'NotConnected'
-                    ]
+                'required' => []
+            ],
+            'virtualNetworkConnectionGatewayReference' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => ['id']
+            ],
+            'VirtualNetworkGatewayConnectionListEntityPropertiesFormat' => [
+                'properties' => [
+                    'authorizationKey' => ['type' => 'string'],
+                    'virtualNetworkGateway1' => ['$ref' => '#/definitions/virtualNetworkConnectionGatewayReference'],
+                    'virtualNetworkGateway2' => ['$ref' => '#/definitions/virtualNetworkConnectionGatewayReference'],
+                    'localNetworkGateway2' => ['$ref' => '#/definitions/virtualNetworkConnectionGatewayReference'],
+                    'connectionType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'IPsec',
+                            'Vnet2Vnet',
+                            'ExpressRoute',
+                            'VPNClient'
+                        ]
+                    ],
+                    'routingWeight' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'sharedKey' => ['type' => 'string'],
+                    'connectionStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unknown',
+                            'Connecting',
+                            'Connected',
+                            'NotConnected'
+                        ]
+                    ],
+                    'tunnelConnectionStatus' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TunnelConnectionHealth']
+                    ],
+                    'egressBytesTransferred' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'ingressBytesTransferred' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'peer' => ['$ref' => '#/definitions/SubResource'],
+                    'enableBgp' => ['type' => 'boolean'],
+                    'usePolicyBasedTrafficSelectors' => ['type' => 'boolean'],
+                    'ipsecPolicies' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/IpsecPolicy']
+                    ],
+                    'resourceGuid' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string']
                 ],
-                'tunnelConnectionStatus' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TunnelConnectionHealth']
+                'required' => [
+                    'virtualNetworkGateway1',
+                    'connectionType'
+                ]
+            ],
+            'VirtualNetworkGatewayConnectionListEntity' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/VirtualNetworkGatewayConnectionListEntityPropertiesFormat'],
+                    'etag' => ['type' => 'string']
                 ],
-                'egressBytesTransferred' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => ['properties']
+            ],
+            'VirtualNetworkGatewayListConnectionsResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualNetworkGatewayConnectionListEntity']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'ingressBytesTransferred' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'peer' => ['$ref' => '#/definitions/SubResource'],
-                'enableBgp' => ['type' => 'boolean'],
-                'usePolicyBasedTrafficSelectors' => ['type' => 'boolean'],
-                'ipsecPolicies' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/IpsecPolicy']
-                ],
-                'resourceGuid' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'VirtualNetworkGatewayConnection' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/VirtualNetworkGatewayConnectionPropertiesFormat'],
-                'etag' => ['type' => 'string']
-            ]],
-            'VirtualNetworkGatewayConnectionListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualNetworkGatewayConnection']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ConnectionResetSharedKey' => ['properties' => ['keyLength' => [
-                'type' => 'integer',
-                'format' => 'int32'
-            ]]],
-            'ConnectionSharedKey' => ['properties' => ['value' => ['type' => 'string']]],
-            'LocalNetworkGatewayListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/LocalNetworkGateway']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'virtualNetworkConnectionGatewayReference' => ['properties' => ['id' => ['type' => 'string']]],
-            'VirtualNetworkGatewayConnectionListEntityPropertiesFormat' => ['properties' => [
-                'authorizationKey' => ['type' => 'string'],
-                'virtualNetworkGateway1' => ['$ref' => '#/definitions/virtualNetworkConnectionGatewayReference'],
-                'virtualNetworkGateway2' => ['$ref' => '#/definitions/virtualNetworkConnectionGatewayReference'],
-                'localNetworkGateway2' => ['$ref' => '#/definitions/virtualNetworkConnectionGatewayReference'],
-                'connectionType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'IPsec',
-                        'Vnet2Vnet',
-                        'ExpressRoute',
-                        'VPNClient'
-                    ]
-                ],
-                'routingWeight' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'sharedKey' => ['type' => 'string'],
-                'connectionStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Unknown',
-                        'Connecting',
-                        'Connected',
-                        'NotConnected'
-                    ]
-                ],
-                'tunnelConnectionStatus' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TunnelConnectionHealth']
-                ],
-                'egressBytesTransferred' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'ingressBytesTransferred' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'peer' => ['$ref' => '#/definitions/SubResource'],
-                'enableBgp' => ['type' => 'boolean'],
-                'usePolicyBasedTrafficSelectors' => ['type' => 'boolean'],
-                'ipsecPolicies' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/IpsecPolicy']
-                ],
-                'resourceGuid' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string']
-            ]],
-            'VirtualNetworkGatewayConnectionListEntity' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/VirtualNetworkGatewayConnectionListEntityPropertiesFormat'],
-                'etag' => ['type' => 'string']
-            ]],
-            'VirtualNetworkGatewayListConnectionsResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualNetworkGatewayConnectionListEntity']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]]
+                'required' => []
+            ]
         ]
     ];
 }

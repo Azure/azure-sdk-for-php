@@ -5125,1423 +5125,1900 @@ final class DevTestLabsClient
             ]
         ],
         'definitions' => [
-            'WeekDetails' => ['properties' => [
-                'weekdays' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+            'WeekDetails' => [
+                'properties' => [
+                    'weekdays' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'time' => ['type' => 'string']
                 ],
-                'time' => ['type' => 'string']
-            ]],
-            'DayDetails' => ['properties' => ['time' => ['type' => 'string']]],
-            'HourDetails' => ['properties' => ['minute' => [
-                'type' => 'integer',
-                'format' => 'int32'
-            ]]],
-            'NotificationSettings' => ['properties' => [
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Disabled',
-                        'Enabled'
-                    ]
-                ],
-                'timeInMinutes' => [
+                'required' => []
+            ],
+            'DayDetails' => [
+                'properties' => ['time' => ['type' => 'string']],
+                'required' => []
+            ],
+            'HourDetails' => [
+                'properties' => ['minute' => [
                     'type' => 'integer',
                     'format' => 'int32'
+                ]],
+                'required' => []
+            ],
+            'NotificationSettings' => [
+                'properties' => [
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Disabled',
+                            'Enabled'
+                        ]
+                    ],
+                    'timeInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'webhookUrl' => ['type' => 'string']
                 ],
-                'webhookUrl' => ['type' => 'string']
-            ]],
-            'ScheduleProperties' => ['properties' => [
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
+                'required' => []
+            ],
+            'ScheduleProperties' => [
+                'properties' => [
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'taskType' => ['type' => 'string'],
+                    'weeklyRecurrence' => ['$ref' => '#/definitions/WeekDetails'],
+                    'dailyRecurrence' => ['$ref' => '#/definitions/DayDetails'],
+                    'hourlyRecurrence' => ['$ref' => '#/definitions/HourDetails'],
+                    'timeZoneId' => ['type' => 'string'],
+                    'notificationSettings' => ['$ref' => '#/definitions/NotificationSettings'],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'targetResourceId' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
                 ],
-                'taskType' => ['type' => 'string'],
-                'weeklyRecurrence' => ['$ref' => '#/definitions/WeekDetails'],
-                'dailyRecurrence' => ['$ref' => '#/definitions/DayDetails'],
-                'hourlyRecurrence' => ['$ref' => '#/definitions/HourDetails'],
-                'timeZoneId' => ['type' => 'string'],
-                'notificationSettings' => ['$ref' => '#/definitions/NotificationSettings'],
-                'createdDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'Schedule' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ScheduleProperties']],
+                'required' => ['properties']
+            ],
+            'ApplicableScheduleProperties' => [
+                'properties' => [
+                    'labVmsShutdown' => ['$ref' => '#/definitions/Schedule'],
+                    'labVmsStartup' => ['$ref' => '#/definitions/Schedule']
                 ],
-                'targetResourceId' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'Schedule' => ['properties' => ['properties' => ['$ref' => '#/definitions/ScheduleProperties']]],
-            'ApplicableScheduleProperties' => ['properties' => [
-                'labVmsShutdown' => ['$ref' => '#/definitions/Schedule'],
-                'labVmsStartup' => ['$ref' => '#/definitions/Schedule']
-            ]],
-            'ApplicableSchedule' => ['properties' => ['properties' => ['$ref' => '#/definitions/ApplicableScheduleProperties']]],
-            'WeekDetailsFragment' => ['properties' => [
-                'weekdays' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'ApplicableSchedule' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ApplicableScheduleProperties']],
+                'required' => ['properties']
+            ],
+            'WeekDetailsFragment' => [
+                'properties' => [
+                    'weekdays' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'time' => ['type' => 'string']
                 ],
-                'time' => ['type' => 'string']
-            ]],
-            'DayDetailsFragment' => ['properties' => ['time' => ['type' => 'string']]],
-            'HourDetailsFragment' => ['properties' => ['minute' => [
-                'type' => 'integer',
-                'format' => 'int32'
-            ]]],
-            'NotificationSettingsFragment' => ['properties' => [
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Disabled',
-                        'Enabled'
-                    ]
-                ],
-                'timeInMinutes' => [
+                'required' => []
+            ],
+            'DayDetailsFragment' => [
+                'properties' => ['time' => ['type' => 'string']],
+                'required' => []
+            ],
+            'HourDetailsFragment' => [
+                'properties' => ['minute' => [
                     'type' => 'integer',
                     'format' => 'int32'
+                ]],
+                'required' => []
+            ],
+            'NotificationSettingsFragment' => [
+                'properties' => [
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Disabled',
+                            'Enabled'
+                        ]
+                    ],
+                    'timeInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'webhookUrl' => ['type' => 'string']
                 ],
-                'webhookUrl' => ['type' => 'string']
-            ]],
-            'SchedulePropertiesFragment' => ['properties' => [
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
+                'required' => []
+            ],
+            'SchedulePropertiesFragment' => [
+                'properties' => [
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'taskType' => ['type' => 'string'],
+                    'weeklyRecurrence' => ['$ref' => '#/definitions/WeekDetailsFragment'],
+                    'dailyRecurrence' => ['$ref' => '#/definitions/DayDetailsFragment'],
+                    'hourlyRecurrence' => ['$ref' => '#/definitions/HourDetailsFragment'],
+                    'timeZoneId' => ['type' => 'string'],
+                    'notificationSettings' => ['$ref' => '#/definitions/NotificationSettingsFragment'],
+                    'targetResourceId' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ScheduleFragment' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SchedulePropertiesFragment']],
+                'required' => []
+            ],
+            'ApplicableSchedulePropertiesFragment' => [
+                'properties' => [
+                    'labVmsShutdown' => ['$ref' => '#/definitions/ScheduleFragment'],
+                    'labVmsStartup' => ['$ref' => '#/definitions/ScheduleFragment']
+                ],
+                'required' => []
+            ],
+            'ApplicableScheduleFragment' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ApplicableSchedulePropertiesFragment']],
+                'required' => []
+            ],
+            'ArtifactParameterProperties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ArtifactInstallProperties' => [
+                'properties' => [
+                    'artifactId' => ['type' => 'string'],
+                    'parameters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ArtifactParameterProperties']
+                    ],
+                    'status' => ['type' => 'string'],
+                    'deploymentStatusMessage' => ['type' => 'string'],
+                    'vmExtensionStatusMessage' => ['type' => 'string'],
+                    'installTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'taskType' => ['type' => 'string'],
-                'weeklyRecurrence' => ['$ref' => '#/definitions/WeekDetailsFragment'],
-                'dailyRecurrence' => ['$ref' => '#/definitions/DayDetailsFragment'],
-                'hourlyRecurrence' => ['$ref' => '#/definitions/HourDetailsFragment'],
-                'timeZoneId' => ['type' => 'string'],
-                'notificationSettings' => ['$ref' => '#/definitions/NotificationSettingsFragment'],
-                'targetResourceId' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'ScheduleFragment' => ['properties' => ['properties' => ['$ref' => '#/definitions/SchedulePropertiesFragment']]],
-            'ApplicableSchedulePropertiesFragment' => ['properties' => [
-                'labVmsShutdown' => ['$ref' => '#/definitions/ScheduleFragment'],
-                'labVmsStartup' => ['$ref' => '#/definitions/ScheduleFragment']
-            ]],
-            'ApplicableScheduleFragment' => ['properties' => ['properties' => ['$ref' => '#/definitions/ApplicableSchedulePropertiesFragment']]],
-            'ArtifactParameterProperties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'ArtifactInstallProperties' => ['properties' => [
-                'artifactId' => ['type' => 'string'],
-                'parameters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ArtifactParameterProperties']
-                ],
-                'status' => ['type' => 'string'],
-                'deploymentStatusMessage' => ['type' => 'string'],
-                'vmExtensionStatusMessage' => ['type' => 'string'],
-                'installTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'ApplyArtifactsRequest' => ['properties' => ['artifacts' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ArtifactInstallProperties']
-            ]]],
-            'ParametersValueFileInfo' => ['properties' => [
-                'fileName' => ['type' => 'string'],
-                'parametersValueInfo' => ['type' => 'object']
-            ]],
-            'ArmTemplateProperties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'publisher' => ['type' => 'string'],
-                'icon' => ['type' => 'string'],
-                'contents' => ['type' => 'object'],
-                'createdDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'parametersValueFilesInfo' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ParametersValueFileInfo']
-                ]
-            ]],
-            'ArmTemplate' => ['properties' => ['properties' => ['$ref' => '#/definitions/ArmTemplateProperties']]],
-            'ArmTemplateInfo' => ['properties' => [
-                'template' => ['type' => 'object'],
-                'parameters' => ['type' => 'object']
-            ]],
-            'ArmTemplateParameterProperties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'ArtifactProperties' => ['properties' => [
-                'title' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'publisher' => ['type' => 'string'],
-                'filePath' => ['type' => 'string'],
-                'icon' => ['type' => 'string'],
-                'targetOsType' => ['type' => 'string'],
-                'parameters' => ['type' => 'object'],
-                'createdDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'Artifact' => ['properties' => ['properties' => ['$ref' => '#/definitions/ArtifactProperties']]],
-            'ArtifactDeploymentStatusProperties' => ['properties' => [
-                'deploymentStatus' => ['type' => 'string'],
-                'artifactsApplied' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'totalArtifacts' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ArtifactDeploymentStatusPropertiesFragment' => ['properties' => [
-                'deploymentStatus' => ['type' => 'string'],
-                'artifactsApplied' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'totalArtifacts' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ArtifactParameterPropertiesFragment' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'ArtifactInstallPropertiesFragment' => ['properties' => [
-                'artifactId' => ['type' => 'string'],
-                'parameters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ArtifactParameterPropertiesFragment']
-                ],
-                'status' => ['type' => 'string'],
-                'deploymentStatusMessage' => ['type' => 'string'],
-                'vmExtensionStatusMessage' => ['type' => 'string'],
-                'installTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'ArtifactSourceProperties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'uri' => ['type' => 'string'],
-                'sourceType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'VsoGit',
-                        'GitHub'
-                    ]
-                ],
-                'folderPath' => ['type' => 'string'],
-                'armTemplateFolderPath' => ['type' => 'string'],
-                'branchRef' => ['type' => 'string'],
-                'securityToken' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'createdDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'ArtifactSource' => ['properties' => ['properties' => ['$ref' => '#/definitions/ArtifactSourceProperties']]],
-            'ArtifactSourcePropertiesFragment' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'uri' => ['type' => 'string'],
-                'sourceType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'VsoGit',
-                        'GitHub'
-                    ]
-                ],
-                'folderPath' => ['type' => 'string'],
-                'armTemplateFolderPath' => ['type' => 'string'],
-                'branchRef' => ['type' => 'string'],
-                'securityToken' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'ArtifactSourceFragment' => ['properties' => ['properties' => ['$ref' => '#/definitions/ArtifactSourcePropertiesFragment']]],
-            'AttachDiskProperties' => ['properties' => ['leasedByLabVmId' => ['type' => 'string']]],
-            'AttachNewDataDiskOptions' => ['properties' => [
-                'diskSizeGiB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'diskName' => ['type' => 'string'],
-                'diskType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Standard',
-                        'Premium'
-                    ]
-                ]
-            ]],
-            'BulkCreationParameters' => ['properties' => ['instanceCount' => [
-                'type' => 'integer',
-                'format' => 'int32'
-            ]]],
-            'CloudErrorBody' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'target' => ['type' => 'string'],
-                'details' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CloudErrorBody']
-                ]
-            ]],
-            'CloudError' => ['properties' => ['error' => ['$ref' => '#/definitions/CloudErrorBody']]],
-            'ComputeDataDisk' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'diskUri' => ['type' => 'string'],
-                'managedDiskId' => ['type' => 'string'],
-                'diskSizeGiB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ComputeDataDiskFragment' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'diskUri' => ['type' => 'string'],
-                'managedDiskId' => ['type' => 'string'],
-                'diskSizeGiB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ComputeVmInstanceViewStatus' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'displayStatus' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'ComputeVmInstanceViewStatusFragment' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'displayStatus' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'ComputeVmProperties' => ['properties' => [
-                'statuses' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ComputeVmInstanceViewStatus']
-                ],
-                'osType' => ['type' => 'string'],
-                'vmSize' => ['type' => 'string'],
-                'networkInterfaceId' => ['type' => 'string'],
-                'osDiskId' => ['type' => 'string'],
-                'dataDiskIds' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'dataDisks' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ComputeDataDisk']
-                ]
-            ]],
-            'ComputeVmPropertiesFragment' => ['properties' => [
-                'statuses' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ComputeVmInstanceViewStatusFragment']
-                ],
-                'osType' => ['type' => 'string'],
-                'vmSize' => ['type' => 'string'],
-                'networkInterfaceId' => ['type' => 'string'],
-                'osDiskId' => ['type' => 'string'],
-                'dataDiskIds' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'dataDisks' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ComputeDataDiskFragment']
-                ]
-            ]],
-            'PercentageCostThresholdProperties' => ['properties' => ['thresholdValue' => [
-                'type' => 'number',
-                'format' => 'double'
-            ]]],
-            'CostThresholdProperties' => ['properties' => [
-                'thresholdId' => ['type' => 'string'],
-                'percentageThreshold' => ['$ref' => '#/definitions/PercentageCostThresholdProperties'],
-                'displayOnChart' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'sendNotificationWhenExceeded' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'NotificationSent' => ['type' => 'string']
-            ]],
-            'WindowsOsInfo' => ['properties' => ['windowsOsState' => [
-                'type' => 'string',
-                'enum' => [
-                    'NonSysprepped',
-                    'SysprepRequested',
-                    'SysprepApplied'
-                ]
-            ]]],
-            'LinuxOsInfo' => ['properties' => ['linuxOsState' => [
-                'type' => 'string',
-                'enum' => [
-                    'NonDeprovisioned',
-                    'DeprovisionRequested',
-                    'DeprovisionApplied'
-                ]
-            ]]],
-            'CustomImagePropertiesFromVm' => ['properties' => [
-                'sourceVmId' => ['type' => 'string'],
-                'windowsOsInfo' => ['$ref' => '#/definitions/WindowsOsInfo'],
-                'linuxOsInfo' => ['$ref' => '#/definitions/LinuxOsInfo']
-            ]],
-            'CustomImagePropertiesCustom' => ['properties' => [
-                'imageName' => ['type' => 'string'],
-                'sysPrep' => ['type' => 'boolean'],
-                'osType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Windows',
-                        'Linux',
-                        'None'
-                    ]
-                ]
-            ]],
-            'CustomImageProperties' => ['properties' => [
-                'vm' => ['$ref' => '#/definitions/CustomImagePropertiesFromVm'],
-                'vhd' => ['$ref' => '#/definitions/CustomImagePropertiesCustom'],
-                'description' => ['type' => 'string'],
-                'author' => ['type' => 'string'],
-                'creationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'managedImageId' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'CustomImage' => ['properties' => ['properties' => ['$ref' => '#/definitions/CustomImageProperties']]],
-            'DataDiskProperties' => ['properties' => [
-                'attachNewDataDiskOptions' => ['$ref' => '#/definitions/AttachNewDataDiskOptions'],
-                'existingLabDiskId' => ['type' => 'string'],
-                'hostCaching' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'ReadOnly',
-                        'ReadWrite'
-                    ]
-                ]
-            ]],
-            'DetachDataDiskProperties' => ['properties' => ['existingLabDiskId' => ['type' => 'string']]],
-            'DetachDiskProperties' => ['properties' => ['leasedByLabVmId' => ['type' => 'string']]],
-            'DiskProperties' => ['properties' => [
-                'diskType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Standard',
-                        'Premium'
-                    ]
-                ],
-                'diskSizeGiB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'leasedByLabVmId' => ['type' => 'string'],
-                'diskBlobName' => ['type' => 'string'],
-                'diskUri' => ['type' => 'string'],
-                'createdDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'hostCaching' => ['type' => 'string'],
-                'managedDiskId' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'Disk' => ['properties' => ['properties' => ['$ref' => '#/definitions/DiskProperties']]],
-            'EnvironmentDeploymentProperties' => ['properties' => [
-                'armTemplateId' => ['type' => 'string'],
-                'parameters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ArmTemplateParameterProperties']
-                ]
-            ]],
-            'EnvironmentProperties' => ['properties' => [
-                'deploymentProperties' => ['$ref' => '#/definitions/EnvironmentDeploymentProperties'],
-                'armTemplateDisplayName' => ['type' => 'string'],
-                'resourceGroupId' => ['type' => 'string'],
-                'createdByUser' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'DtlEnvironment' => ['properties' => ['properties' => ['$ref' => '#/definitions/EnvironmentProperties']]],
-            'EvaluatePoliciesProperties' => ['properties' => [
-                'factName' => ['type' => 'string'],
-                'factData' => ['type' => 'string'],
-                'valueOffset' => ['type' => 'string']
-            ]],
-            'EvaluatePoliciesRequest' => ['properties' => ['policies' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/EvaluatePoliciesProperties']
-            ]]],
-            'PolicyViolation' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'PolicySetResult' => ['properties' => [
-                'hasError' => ['type' => 'boolean'],
-                'policyViolations' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PolicyViolation']
-                ]
-            ]],
-            'EvaluatePoliciesResponse' => ['properties' => ['results' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/PolicySetResult']
-            ]]],
-            'Event' => ['properties' => ['eventName' => [
-                'type' => 'string',
-                'enum' => [
-                    'AutoShutdown',
-                    'Cost'
-                ]
-            ]]],
-            'EventFragment' => ['properties' => ['eventName' => [
-                'type' => 'string',
-                'enum' => [
-                    'AutoShutdown',
-                    'Cost'
-                ]
-            ]]],
-            'ExportResourceUsageParameters' => ['properties' => [
-                'blobStorageAbsoluteSasUri' => ['type' => 'string'],
-                'usageStartDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'ExternalSubnet' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string']
-            ]],
-            'ExternalSubnetFragment' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string']
-            ]],
-            'GalleryImageReference' => ['properties' => [
-                'offer' => ['type' => 'string'],
-                'publisher' => ['type' => 'string'],
-                'sku' => ['type' => 'string'],
-                'osType' => ['type' => 'string'],
-                'version' => ['type' => 'string']
-            ]],
-            'InboundNatRule' => ['properties' => [
-                'transportProtocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Tcp',
-                        'Udp'
-                    ]
-                ],
-                'frontendPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'backendPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'SharedPublicIpAddressConfiguration' => ['properties' => ['inboundNatRules' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/InboundNatRule']
-            ]]],
-            'NetworkInterfaceProperties' => ['properties' => [
-                'virtualNetworkId' => ['type' => 'string'],
-                'subnetId' => ['type' => 'string'],
-                'publicIpAddressId' => ['type' => 'string'],
-                'publicIpAddress' => ['type' => 'string'],
-                'privateIpAddress' => ['type' => 'string'],
-                'dnsName' => ['type' => 'string'],
-                'rdpAuthority' => ['type' => 'string'],
-                'sshAuthority' => ['type' => 'string'],
-                'sharedPublicIpAddressConfiguration' => ['$ref' => '#/definitions/SharedPublicIpAddressConfiguration']
-            ]],
-            'LabVirtualMachineCreationParameterProperties' => ['properties' => [
-                'bulkCreationParameters' => ['$ref' => '#/definitions/BulkCreationParameters'],
-                'notes' => ['type' => 'string'],
-                'ownerObjectId' => ['type' => 'string'],
-                'ownerUserPrincipalName' => ['type' => 'string'],
-                'createdByUserId' => ['type' => 'string'],
-                'createdByUser' => ['type' => 'string'],
-                'createdDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'customImageId' => ['type' => 'string'],
-                'osType' => ['type' => 'string'],
-                'size' => ['type' => 'string'],
-                'userName' => ['type' => 'string'],
-                'password' => ['type' => 'string'],
-                'sshKey' => ['type' => 'string'],
-                'isAuthenticationWithSshKey' => ['type' => 'boolean'],
-                'fqdn' => ['type' => 'string'],
-                'labSubnetName' => ['type' => 'string'],
-                'labVirtualNetworkId' => ['type' => 'string'],
-                'disallowPublicIpAddress' => ['type' => 'boolean'],
-                'artifacts' => [
+                'required' => []
+            ],
+            'ApplyArtifactsRequest' => [
+                'properties' => ['artifacts' => [
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ArtifactInstallProperties']
+                ]],
+                'required' => []
+            ],
+            'ParametersValueFileInfo' => [
+                'properties' => [
+                    'fileName' => ['type' => 'string'],
+                    'parametersValueInfo' => ['type' => 'object']
                 ],
-                'artifactDeploymentStatus' => ['$ref' => '#/definitions/ArtifactDeploymentStatusProperties'],
-                'galleryImageReference' => ['$ref' => '#/definitions/GalleryImageReference'],
-                'computeVm' => ['$ref' => '#/definitions/ComputeVmProperties'],
-                'networkInterface' => ['$ref' => '#/definitions/NetworkInterfaceProperties'],
-                'applicableSchedule' => ['$ref' => '#/definitions/ApplicableSchedule'],
-                'expirationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'allowClaim' => ['type' => 'boolean'],
-                'storageType' => ['type' => 'string'],
-                'virtualMachineCreationSource' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'FromCustomImage',
-                        'FromGalleryImage'
+                'required' => []
+            ],
+            'ArmTemplateProperties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'publisher' => ['type' => 'string'],
+                    'icon' => ['type' => 'string'],
+                    'contents' => ['type' => 'object'],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'parametersValueFilesInfo' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ParametersValueFileInfo']
                     ]
                 ],
-                'environmentId' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'LabVirtualMachineCreationParameter' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/LabVirtualMachineCreationParameterProperties'],
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'FormulaPropertiesFromVm' => ['properties' => ['labVmId' => ['type' => 'string']]],
-            'FormulaProperties' => ['properties' => [
-                'description' => ['type' => 'string'],
-                'author' => ['type' => 'string'],
-                'osType' => ['type' => 'string'],
-                'creationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'ArmTemplate' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ArmTemplateProperties']],
+                'required' => ['properties']
+            ],
+            'ArmTemplateInfo' => [
+                'properties' => [
+                    'template' => ['type' => 'object'],
+                    'parameters' => ['type' => 'object']
                 ],
-                'formulaContent' => ['$ref' => '#/definitions/LabVirtualMachineCreationParameter'],
-                'vm' => ['$ref' => '#/definitions/FormulaPropertiesFromVm'],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'Formula' => ['properties' => ['properties' => ['$ref' => '#/definitions/FormulaProperties']]],
-            'GalleryImageProperties' => ['properties' => [
-                'author' => ['type' => 'string'],
-                'createdDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'ArmTemplateParameterProperties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
                 ],
-                'description' => ['type' => 'string'],
-                'imageReference' => ['$ref' => '#/definitions/GalleryImageReference'],
-                'icon' => ['type' => 'string'],
-                'enabled' => ['type' => 'boolean']
-            ]],
-            'GalleryImage' => ['properties' => ['properties' => ['$ref' => '#/definitions/GalleryImageProperties']]],
-            'GalleryImageReferenceFragment' => ['properties' => [
-                'offer' => ['type' => 'string'],
-                'publisher' => ['type' => 'string'],
-                'sku' => ['type' => 'string'],
-                'osType' => ['type' => 'string'],
-                'version' => ['type' => 'string']
-            ]],
-            'ParameterInfo' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'GenerateArmTemplateRequest' => ['properties' => [
-                'virtualMachineName' => ['type' => 'string'],
-                'parameters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ParameterInfo']
-                ],
-                'location' => ['type' => 'string'],
-                'fileUploadOptions' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'UploadFilesAndGenerateSasTokens',
-                        'None'
-                    ]
-                ]
-            ]],
-            'GenerateUploadUriParameter' => ['properties' => ['blobName' => ['type' => 'string']]],
-            'GenerateUploadUriResponse' => ['properties' => ['uploadUri' => ['type' => 'string']]],
-            'IdentityProperties' => ['properties' => [
-                'type' => ['type' => 'string'],
-                'principalId' => ['type' => 'string'],
-                'tenantId' => ['type' => 'string'],
-                'clientSecretUrl' => ['type' => 'string']
-            ]],
-            'InboundNatRuleFragment' => ['properties' => [
-                'transportProtocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Tcp',
-                        'Udp'
+                'required' => []
+            ],
+            'ArtifactProperties' => [
+                'properties' => [
+                    'title' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'publisher' => ['type' => 'string'],
+                    'filePath' => ['type' => 'string'],
+                    'icon' => ['type' => 'string'],
+                    'targetOsType' => ['type' => 'string'],
+                    'parameters' => ['type' => 'object'],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'frontendPort' => [
+                'required' => []
+            ],
+            'Artifact' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ArtifactProperties']],
+                'required' => ['properties']
+            ],
+            'ArtifactDeploymentStatusProperties' => [
+                'properties' => [
+                    'deploymentStatus' => ['type' => 'string'],
+                    'artifactsApplied' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'totalArtifacts' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ArtifactDeploymentStatusPropertiesFragment' => [
+                'properties' => [
+                    'deploymentStatus' => ['type' => 'string'],
+                    'artifactsApplied' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'totalArtifacts' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ArtifactParameterPropertiesFragment' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ArtifactInstallPropertiesFragment' => [
+                'properties' => [
+                    'artifactId' => ['type' => 'string'],
+                    'parameters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ArtifactParameterPropertiesFragment']
+                    ],
+                    'status' => ['type' => 'string'],
+                    'deploymentStatusMessage' => ['type' => 'string'],
+                    'vmExtensionStatusMessage' => ['type' => 'string'],
+                    'installTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ArtifactSourceProperties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'uri' => ['type' => 'string'],
+                    'sourceType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'VsoGit',
+                            'GitHub'
+                        ]
+                    ],
+                    'folderPath' => ['type' => 'string'],
+                    'armTemplateFolderPath' => ['type' => 'string'],
+                    'branchRef' => ['type' => 'string'],
+                    'securityToken' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ArtifactSource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ArtifactSourceProperties']],
+                'required' => ['properties']
+            ],
+            'ArtifactSourcePropertiesFragment' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'uri' => ['type' => 'string'],
+                    'sourceType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'VsoGit',
+                            'GitHub'
+                        ]
+                    ],
+                    'folderPath' => ['type' => 'string'],
+                    'armTemplateFolderPath' => ['type' => 'string'],
+                    'branchRef' => ['type' => 'string'],
+                    'securityToken' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ArtifactSourceFragment' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ArtifactSourcePropertiesFragment']],
+                'required' => []
+            ],
+            'AttachDiskProperties' => [
+                'properties' => ['leasedByLabVmId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'AttachNewDataDiskOptions' => [
+                'properties' => [
+                    'diskSizeGiB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'diskName' => ['type' => 'string'],
+                    'diskType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Standard',
+                            'Premium'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'BulkCreationParameters' => [
+                'properties' => ['instanceCount' => [
                     'type' => 'integer',
                     'format' => 'int32'
-                ],
-                'backendPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'LabProperties' => ['properties' => [
-                'defaultStorageAccount' => ['type' => 'string'],
-                'defaultPremiumStorageAccount' => ['type' => 'string'],
-                'artifactsStorageAccount' => ['type' => 'string'],
-                'premiumDataDiskStorageAccount' => ['type' => 'string'],
-                'vaultName' => ['type' => 'string'],
-                'labStorageType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Standard',
-                        'Premium'
+                ]],
+                'required' => []
+            ],
+            'CloudErrorBody' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'target' => ['type' => 'string'],
+                    'details' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CloudErrorBody']
                     ]
                 ],
-                'createdDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'premiumDataDisks' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Disabled',
-                        'Enabled'
+                'required' => []
+            ],
+            'CloudError' => [
+                'properties' => ['error' => ['$ref' => '#/definitions/CloudErrorBody']],
+                'required' => []
+            ],
+            'ComputeDataDisk' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'diskUri' => ['type' => 'string'],
+                    'managedDiskId' => ['type' => 'string'],
+                    'diskSizeGiB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'Lab' => ['properties' => ['properties' => ['$ref' => '#/definitions/LabProperties']]],
-            'TargetCostProperties' => ['properties' => [
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
+                'required' => []
+            ],
+            'ComputeDataDiskFragment' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'diskUri' => ['type' => 'string'],
+                    'managedDiskId' => ['type' => 'string'],
+                    'diskSizeGiB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'target' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'ComputeVmInstanceViewStatus' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'displayStatus' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
                 ],
-                'costThresholds' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CostThresholdProperties']
+                'required' => []
+            ],
+            'ComputeVmInstanceViewStatusFragment' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'displayStatus' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
                 ],
-                'cycleStartDateTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'cycleEndDateTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'cycleType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'CalendarMonth',
-                        'Custom'
+                'required' => []
+            ],
+            'ComputeVmProperties' => [
+                'properties' => [
+                    'statuses' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ComputeVmInstanceViewStatus']
+                    ],
+                    'osType' => ['type' => 'string'],
+                    'vmSize' => ['type' => 'string'],
+                    'networkInterfaceId' => ['type' => 'string'],
+                    'osDiskId' => ['type' => 'string'],
+                    'dataDiskIds' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'dataDisks' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ComputeDataDisk']
                     ]
-                ]
-            ]],
-            'LabCostSummaryProperties' => ['properties' => ['estimatedLabCost' => [
-                'type' => 'number',
-                'format' => 'double'
-            ]]],
-            'LabCostDetailsProperties' => ['properties' => [
-                'date' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
                 ],
-                'cost' => [
+                'required' => []
+            ],
+            'ComputeVmPropertiesFragment' => [
+                'properties' => [
+                    'statuses' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ComputeVmInstanceViewStatusFragment']
+                    ],
+                    'osType' => ['type' => 'string'],
+                    'vmSize' => ['type' => 'string'],
+                    'networkInterfaceId' => ['type' => 'string'],
+                    'osDiskId' => ['type' => 'string'],
+                    'dataDiskIds' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'dataDisks' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ComputeDataDiskFragment']
+                    ]
+                ],
+                'required' => []
+            ],
+            'PercentageCostThresholdProperties' => [
+                'properties' => ['thresholdValue' => [
                     'type' => 'number',
                     'format' => 'double'
+                ]],
+                'required' => []
+            ],
+            'CostThresholdProperties' => [
+                'properties' => [
+                    'thresholdId' => ['type' => 'string'],
+                    'percentageThreshold' => ['$ref' => '#/definitions/PercentageCostThresholdProperties'],
+                    'displayOnChart' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'sendNotificationWhenExceeded' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'NotificationSent' => ['type' => 'string']
                 ],
-                'costType' => [
+                'required' => []
+            ],
+            'WindowsOsInfo' => [
+                'properties' => ['windowsOsState' => [
                     'type' => 'string',
                     'enum' => [
-                        'Unavailable',
-                        'Reported',
-                        'Projected'
+                        'NonSysprepped',
+                        'SysprepRequested',
+                        'SysprepApplied'
                     ]
-                ]
-            ]],
-            'LabResourceCostProperties' => ['properties' => [
-                'resourcename' => ['type' => 'string'],
-                'resourceUId' => ['type' => 'string'],
-                'resourceCost' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'resourceType' => ['type' => 'string'],
-                'resourceOwner' => ['type' => 'string'],
-                'resourcePricingTier' => ['type' => 'string'],
-                'resourceStatus' => ['type' => 'string'],
-                'resourceId' => ['type' => 'string'],
-                'externalResourceId' => ['type' => 'string']
-            ]],
-            'LabCostProperties' => ['properties' => [
-                'targetCost' => ['$ref' => '#/definitions/TargetCostProperties'],
-                'labCostSummary' => ['$ref' => '#/definitions/LabCostSummaryProperties'],
-                'labCostDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/LabCostDetailsProperties']
-                ],
-                'resourceCosts' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/LabResourceCostProperties']
-                ],
-                'currencyCode' => ['type' => 'string'],
-                'startDateTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endDateTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'createdDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'LabCost' => ['properties' => ['properties' => ['$ref' => '#/definitions/LabCostProperties']]],
-            'LabPropertiesFragment' => ['properties' => [
-                'labStorageType' => [
+                ]],
+                'required' => []
+            ],
+            'LinuxOsInfo' => [
+                'properties' => ['linuxOsState' => [
                     'type' => 'string',
                     'enum' => [
-                        'Standard',
-                        'Premium'
+                        'NonDeprovisioned',
+                        'DeprovisionRequested',
+                        'DeprovisionApplied'
+                    ]
+                ]],
+                'required' => []
+            ],
+            'CustomImagePropertiesFromVm' => [
+                'properties' => [
+                    'sourceVmId' => ['type' => 'string'],
+                    'windowsOsInfo' => ['$ref' => '#/definitions/WindowsOsInfo'],
+                    'linuxOsInfo' => ['$ref' => '#/definitions/LinuxOsInfo']
+                ],
+                'required' => []
+            ],
+            'CustomImagePropertiesCustom' => [
+                'properties' => [
+                    'imageName' => ['type' => 'string'],
+                    'sysPrep' => ['type' => 'boolean'],
+                    'osType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Windows',
+                            'Linux',
+                            'None'
+                        ]
                     ]
                 ],
-                'premiumDataDisks' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Disabled',
-                        'Enabled'
+                'required' => ['osType']
+            ],
+            'CustomImageProperties' => [
+                'properties' => [
+                    'vm' => ['$ref' => '#/definitions/CustomImagePropertiesFromVm'],
+                    'vhd' => ['$ref' => '#/definitions/CustomImagePropertiesCustom'],
+                    'description' => ['type' => 'string'],
+                    'author' => ['type' => 'string'],
+                    'creationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'managedImageId' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CustomImage' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/CustomImageProperties']],
+                'required' => ['properties']
+            ],
+            'DataDiskProperties' => [
+                'properties' => [
+                    'attachNewDataDiskOptions' => ['$ref' => '#/definitions/AttachNewDataDiskOptions'],
+                    'existingLabDiskId' => ['type' => 'string'],
+                    'hostCaching' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'ReadOnly',
+                            'ReadWrite'
+                        ]
                     ]
                 ],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'LabFragment' => ['properties' => ['properties' => ['$ref' => '#/definitions/LabPropertiesFragment']]],
-            'LabVhd' => ['properties' => ['id' => ['type' => 'string']]],
-            'LabVirtualMachineProperties' => ['properties' => [
-                'notes' => ['type' => 'string'],
-                'ownerObjectId' => ['type' => 'string'],
-                'ownerUserPrincipalName' => ['type' => 'string'],
-                'createdByUserId' => ['type' => 'string'],
-                'createdByUser' => ['type' => 'string'],
-                'createdDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'DetachDataDiskProperties' => [
+                'properties' => ['existingLabDiskId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'DetachDiskProperties' => [
+                'properties' => ['leasedByLabVmId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'DiskProperties' => [
+                'properties' => [
+                    'diskType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Standard',
+                            'Premium'
+                        ]
+                    ],
+                    'diskSizeGiB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'leasedByLabVmId' => ['type' => 'string'],
+                    'diskBlobName' => ['type' => 'string'],
+                    'diskUri' => ['type' => 'string'],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'hostCaching' => ['type' => 'string'],
+                    'managedDiskId' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
                 ],
-                'computeId' => ['type' => 'string'],
-                'customImageId' => ['type' => 'string'],
-                'osType' => ['type' => 'string'],
-                'size' => ['type' => 'string'],
-                'userName' => ['type' => 'string'],
-                'password' => ['type' => 'string'],
-                'sshKey' => ['type' => 'string'],
-                'isAuthenticationWithSshKey' => ['type' => 'boolean'],
-                'fqdn' => ['type' => 'string'],
-                'labSubnetName' => ['type' => 'string'],
-                'labVirtualNetworkId' => ['type' => 'string'],
-                'disallowPublicIpAddress' => ['type' => 'boolean'],
-                'artifacts' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ArtifactInstallProperties']
-                ],
-                'artifactDeploymentStatus' => ['$ref' => '#/definitions/ArtifactDeploymentStatusProperties'],
-                'galleryImageReference' => ['$ref' => '#/definitions/GalleryImageReference'],
-                'computeVm' => ['$ref' => '#/definitions/ComputeVmProperties'],
-                'networkInterface' => ['$ref' => '#/definitions/NetworkInterfaceProperties'],
-                'applicableSchedule' => ['$ref' => '#/definitions/ApplicableSchedule'],
-                'expirationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'allowClaim' => ['type' => 'boolean'],
-                'storageType' => ['type' => 'string'],
-                'virtualMachineCreationSource' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'FromCustomImage',
-                        'FromGalleryImage'
+                'required' => []
+            ],
+            'Disk' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DiskProperties']],
+                'required' => ['properties']
+            ],
+            'EnvironmentDeploymentProperties' => [
+                'properties' => [
+                    'armTemplateId' => ['type' => 'string'],
+                    'parameters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ArmTemplateParameterProperties']
                     ]
                 ],
-                'environmentId' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'LabVirtualMachine' => ['properties' => ['properties' => ['$ref' => '#/definitions/LabVirtualMachineProperties']]],
-            'SharedPublicIpAddressConfigurationFragment' => ['properties' => ['inboundNatRules' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/InboundNatRuleFragment']
-            ]]],
-            'NetworkInterfacePropertiesFragment' => ['properties' => [
-                'virtualNetworkId' => ['type' => 'string'],
-                'subnetId' => ['type' => 'string'],
-                'publicIpAddressId' => ['type' => 'string'],
-                'publicIpAddress' => ['type' => 'string'],
-                'privateIpAddress' => ['type' => 'string'],
-                'dnsName' => ['type' => 'string'],
-                'rdpAuthority' => ['type' => 'string'],
-                'sshAuthority' => ['type' => 'string'],
-                'sharedPublicIpAddressConfiguration' => ['$ref' => '#/definitions/SharedPublicIpAddressConfigurationFragment']
-            ]],
-            'LabVirtualMachinePropertiesFragment' => ['properties' => [
-                'notes' => ['type' => 'string'],
-                'ownerObjectId' => ['type' => 'string'],
-                'ownerUserPrincipalName' => ['type' => 'string'],
-                'createdByUserId' => ['type' => 'string'],
-                'createdByUser' => ['type' => 'string'],
-                'createdDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'EnvironmentProperties' => [
+                'properties' => [
+                    'deploymentProperties' => ['$ref' => '#/definitions/EnvironmentDeploymentProperties'],
+                    'armTemplateDisplayName' => ['type' => 'string'],
+                    'resourceGroupId' => ['type' => 'string'],
+                    'createdByUser' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
                 ],
-                'customImageId' => ['type' => 'string'],
-                'osType' => ['type' => 'string'],
-                'size' => ['type' => 'string'],
-                'userName' => ['type' => 'string'],
-                'password' => ['type' => 'string'],
-                'sshKey' => ['type' => 'string'],
-                'isAuthenticationWithSshKey' => ['type' => 'boolean'],
-                'fqdn' => ['type' => 'string'],
-                'labSubnetName' => ['type' => 'string'],
-                'labVirtualNetworkId' => ['type' => 'string'],
-                'disallowPublicIpAddress' => ['type' => 'boolean'],
-                'artifacts' => [
+                'required' => []
+            ],
+            'DtlEnvironment' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/EnvironmentProperties']],
+                'required' => ['properties']
+            ],
+            'EvaluatePoliciesProperties' => [
+                'properties' => [
+                    'factName' => ['type' => 'string'],
+                    'factData' => ['type' => 'string'],
+                    'valueOffset' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'EvaluatePoliciesRequest' => [
+                'properties' => ['policies' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ArtifactInstallPropertiesFragment']
+                    'items' => ['$ref' => '#/definitions/EvaluatePoliciesProperties']
+                ]],
+                'required' => []
+            ],
+            'PolicyViolation' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
                 ],
-                'artifactDeploymentStatus' => ['$ref' => '#/definitions/ArtifactDeploymentStatusPropertiesFragment'],
-                'galleryImageReference' => ['$ref' => '#/definitions/GalleryImageReferenceFragment'],
-                'computeVm' => ['$ref' => '#/definitions/ComputeVmPropertiesFragment'],
-                'networkInterface' => ['$ref' => '#/definitions/NetworkInterfacePropertiesFragment'],
-                'applicableSchedule' => ['$ref' => '#/definitions/ApplicableScheduleFragment'],
-                'expirationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'allowClaim' => ['type' => 'boolean'],
-                'storageType' => ['type' => 'string'],
-                'virtualMachineCreationSource' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'FromCustomImage',
-                        'FromGalleryImage'
+                'required' => []
+            ],
+            'PolicySetResult' => [
+                'properties' => [
+                    'hasError' => ['type' => 'boolean'],
+                    'policyViolations' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PolicyViolation']
                     ]
                 ],
-                'environmentId' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'LabVirtualMachineFragment' => ['properties' => ['properties' => ['$ref' => '#/definitions/LabVirtualMachinePropertiesFragment']]],
-            'NotificationChannelProperties' => ['properties' => [
-                'webHookUrl' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'events' => [
+                'required' => []
+            ],
+            'EvaluatePoliciesResponse' => [
+                'properties' => ['results' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Event']
-                ],
-                'createdDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'NotificationChannel' => ['properties' => ['properties' => ['$ref' => '#/definitions/NotificationChannelProperties']]],
-            'NotificationChannelPropertiesFragment' => ['properties' => [
-                'webHookUrl' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'events' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/EventFragment']
-                ],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'NotificationChannelFragment' => ['properties' => ['properties' => ['$ref' => '#/definitions/NotificationChannelPropertiesFragment']]],
-            'NotifyParameters' => ['properties' => [
-                'eventName' => [
+                    'items' => ['$ref' => '#/definitions/PolicySetResult']
+                ]],
+                'required' => []
+            ],
+            'Event' => [
+                'properties' => ['eventName' => [
                     'type' => 'string',
                     'enum' => [
                         'AutoShutdown',
                         'Cost'
                     ]
-                ],
-                'jsonPayload' => ['type' => 'string']
-            ]],
-            'PolicyProperties' => ['properties' => [
-                'description' => ['type' => 'string'],
-                'status' => [
+                ]],
+                'required' => []
+            ],
+            'EventFragment' => [
+                'properties' => ['eventName' => [
                     'type' => 'string',
                     'enum' => [
-                        'Enabled',
-                        'Disabled'
+                        'AutoShutdown',
+                        'Cost'
+                    ]
+                ]],
+                'required' => []
+            ],
+            'ExportResourceUsageParameters' => [
+                'properties' => [
+                    'blobStorageAbsoluteSasUri' => ['type' => 'string'],
+                    'usageStartDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'factName' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'UserOwnedLabVmCount',
-                        'UserOwnedLabPremiumVmCount',
-                        'LabVmCount',
-                        'LabPremiumVmCount',
-                        'LabVmSize',
-                        'GalleryImage',
-                        'UserOwnedLabVmCountInSubnet',
-                        'LabTargetCost'
+                'required' => []
+            ],
+            'ExternalSubnet' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ExternalSubnetFragment' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'GalleryImageReference' => [
+                'properties' => [
+                    'offer' => ['type' => 'string'],
+                    'publisher' => ['type' => 'string'],
+                    'sku' => ['type' => 'string'],
+                    'osType' => ['type' => 'string'],
+                    'version' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InboundNatRule' => [
+                'properties' => [
+                    'transportProtocol' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Tcp',
+                            'Udp'
+                        ]
+                    ],
+                    'frontendPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'backendPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'factData' => ['type' => 'string'],
-                'threshold' => ['type' => 'string'],
-                'evaluatorType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'AllowedValuesPolicy',
-                        'MaxValuePolicy'
+                'required' => []
+            ],
+            'SharedPublicIpAddressConfiguration' => [
+                'properties' => ['inboundNatRules' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/InboundNatRule']
+                ]],
+                'required' => []
+            ],
+            'NetworkInterfaceProperties' => [
+                'properties' => [
+                    'virtualNetworkId' => ['type' => 'string'],
+                    'subnetId' => ['type' => 'string'],
+                    'publicIpAddressId' => ['type' => 'string'],
+                    'publicIpAddress' => ['type' => 'string'],
+                    'privateIpAddress' => ['type' => 'string'],
+                    'dnsName' => ['type' => 'string'],
+                    'rdpAuthority' => ['type' => 'string'],
+                    'sshAuthority' => ['type' => 'string'],
+                    'sharedPublicIpAddressConfiguration' => ['$ref' => '#/definitions/SharedPublicIpAddressConfiguration']
+                ],
+                'required' => []
+            ],
+            'LabVirtualMachineCreationParameterProperties' => [
+                'properties' => [
+                    'bulkCreationParameters' => ['$ref' => '#/definitions/BulkCreationParameters'],
+                    'notes' => ['type' => 'string'],
+                    'ownerObjectId' => ['type' => 'string'],
+                    'ownerUserPrincipalName' => ['type' => 'string'],
+                    'createdByUserId' => ['type' => 'string'],
+                    'createdByUser' => ['type' => 'string'],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'customImageId' => ['type' => 'string'],
+                    'osType' => ['type' => 'string'],
+                    'size' => ['type' => 'string'],
+                    'userName' => ['type' => 'string'],
+                    'password' => ['type' => 'string'],
+                    'sshKey' => ['type' => 'string'],
+                    'isAuthenticationWithSshKey' => ['type' => 'boolean'],
+                    'fqdn' => ['type' => 'string'],
+                    'labSubnetName' => ['type' => 'string'],
+                    'labVirtualNetworkId' => ['type' => 'string'],
+                    'disallowPublicIpAddress' => ['type' => 'boolean'],
+                    'artifacts' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ArtifactInstallProperties']
+                    ],
+                    'artifactDeploymentStatus' => ['$ref' => '#/definitions/ArtifactDeploymentStatusProperties'],
+                    'galleryImageReference' => ['$ref' => '#/definitions/GalleryImageReference'],
+                    'computeVm' => ['$ref' => '#/definitions/ComputeVmProperties'],
+                    'networkInterface' => ['$ref' => '#/definitions/NetworkInterfaceProperties'],
+                    'applicableSchedule' => ['$ref' => '#/definitions/ApplicableSchedule'],
+                    'expirationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'allowClaim' => ['type' => 'boolean'],
+                    'storageType' => ['type' => 'string'],
+                    'virtualMachineCreationSource' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'FromCustomImage',
+                            'FromGalleryImage'
+                        ]
+                    ],
+                    'environmentId' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LabVirtualMachineCreationParameter' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/LabVirtualMachineCreationParameterProperties'],
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'createdDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'FormulaPropertiesFromVm' => [
+                'properties' => ['labVmId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'FormulaProperties' => [
+                'properties' => [
+                    'description' => ['type' => 'string'],
+                    'author' => ['type' => 'string'],
+                    'osType' => ['type' => 'string'],
+                    'creationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'formulaContent' => ['$ref' => '#/definitions/LabVirtualMachineCreationParameter'],
+                    'vm' => ['$ref' => '#/definitions/FormulaPropertiesFromVm'],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
                 ],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'Policy' => ['properties' => ['properties' => ['$ref' => '#/definitions/PolicyProperties']]],
-            'PolicyPropertiesFragment' => ['properties' => [
-                'description' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
+                'required' => []
+            ],
+            'Formula' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/FormulaProperties']],
+                'required' => ['properties']
+            ],
+            'GalleryImageProperties' => [
+                'properties' => [
+                    'author' => ['type' => 'string'],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'description' => ['type' => 'string'],
+                    'imageReference' => ['$ref' => '#/definitions/GalleryImageReference'],
+                    'icon' => ['type' => 'string'],
+                    'enabled' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'GalleryImage' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/GalleryImageProperties']],
+                'required' => ['properties']
+            ],
+            'GalleryImageReferenceFragment' => [
+                'properties' => [
+                    'offer' => ['type' => 'string'],
+                    'publisher' => ['type' => 'string'],
+                    'sku' => ['type' => 'string'],
+                    'osType' => ['type' => 'string'],
+                    'version' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ParameterInfo' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'GenerateArmTemplateRequest' => [
+                'properties' => [
+                    'virtualMachineName' => ['type' => 'string'],
+                    'parameters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ParameterInfo']
+                    ],
+                    'location' => ['type' => 'string'],
+                    'fileUploadOptions' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'UploadFilesAndGenerateSasTokens',
+                            'None'
+                        ]
                     ]
                 ],
-                'factName' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'UserOwnedLabVmCount',
-                        'UserOwnedLabPremiumVmCount',
-                        'LabVmCount',
-                        'LabPremiumVmCount',
-                        'LabVmSize',
-                        'GalleryImage',
-                        'UserOwnedLabVmCountInSubnet',
-                        'LabTargetCost'
+                'required' => []
+            ],
+            'GenerateUploadUriParameter' => [
+                'properties' => ['blobName' => ['type' => 'string']],
+                'required' => []
+            ],
+            'GenerateUploadUriResponse' => [
+                'properties' => ['uploadUri' => ['type' => 'string']],
+                'required' => []
+            ],
+            'IdentityProperties' => [
+                'properties' => [
+                    'type' => ['type' => 'string'],
+                    'principalId' => ['type' => 'string'],
+                    'tenantId' => ['type' => 'string'],
+                    'clientSecretUrl' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'InboundNatRuleFragment' => [
+                'properties' => [
+                    'transportProtocol' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Tcp',
+                            'Udp'
+                        ]
+                    ],
+                    'frontendPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'backendPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'factData' => ['type' => 'string'],
-                'threshold' => ['type' => 'string'],
-                'evaluatorType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'AllowedValuesPolicy',
-                        'MaxValuePolicy'
+                'required' => []
+            ],
+            'LabProperties' => [
+                'properties' => [
+                    'defaultStorageAccount' => ['type' => 'string'],
+                    'defaultPremiumStorageAccount' => ['type' => 'string'],
+                    'artifactsStorageAccount' => ['type' => 'string'],
+                    'premiumDataDiskStorageAccount' => ['type' => 'string'],
+                    'vaultName' => ['type' => 'string'],
+                    'labStorageType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Standard',
+                            'Premium'
+                        ]
+                    ],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'premiumDataDisks' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Disabled',
+                            'Enabled'
+                        ]
+                    ],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Lab' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/LabProperties']],
+                'required' => []
+            ],
+            'TargetCostProperties' => [
+                'properties' => [
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'target' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'costThresholds' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CostThresholdProperties']
+                    ],
+                    'cycleStartDateTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'cycleEndDateTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'cycleType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'CalendarMonth',
+                            'Custom'
+                        ]
                     ]
                 ],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'PolicyFragment' => ['properties' => ['properties' => ['$ref' => '#/definitions/PolicyPropertiesFragment']]],
-            'Port' => ['properties' => [
-                'transportProtocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Tcp',
-                        'Udp'
+                'required' => []
+            ],
+            'LabCostSummaryProperties' => [
+                'properties' => ['estimatedLabCost' => [
+                    'type' => 'number',
+                    'format' => 'double'
+                ]],
+                'required' => []
+            ],
+            'LabCostDetailsProperties' => [
+                'properties' => [
+                    'date' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'cost' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'costType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unavailable',
+                            'Reported',
+                            'Projected'
+                        ]
                     ]
                 ],
-                'backendPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'PortFragment' => ['properties' => [
-                'transportProtocol' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Tcp',
-                        'Udp'
+                'required' => []
+            ],
+            'LabResourceCostProperties' => [
+                'properties' => [
+                    'resourcename' => ['type' => 'string'],
+                    'resourceUId' => ['type' => 'string'],
+                    'resourceCost' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'resourceType' => ['type' => 'string'],
+                    'resourceOwner' => ['type' => 'string'],
+                    'resourcePricingTier' => ['type' => 'string'],
+                    'resourceStatus' => ['type' => 'string'],
+                    'resourceId' => ['type' => 'string'],
+                    'externalResourceId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LabCostProperties' => [
+                'properties' => [
+                    'targetCost' => ['$ref' => '#/definitions/TargetCostProperties'],
+                    'labCostSummary' => ['$ref' => '#/definitions/LabCostSummaryProperties'],
+                    'labCostDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/LabCostDetailsProperties']
+                    ],
+                    'resourceCosts' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/LabResourceCostProperties']
+                    ],
+                    'currencyCode' => ['type' => 'string'],
+                    'startDateTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endDateTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LabCost' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/LabCostProperties']],
+                'required' => ['properties']
+            ],
+            'LabPropertiesFragment' => [
+                'properties' => [
+                    'labStorageType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Standard',
+                            'Premium'
+                        ]
+                    ],
+                    'premiumDataDisks' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Disabled',
+                            'Enabled'
+                        ]
+                    ],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LabFragment' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/LabPropertiesFragment']],
+                'required' => []
+            ],
+            'LabVhd' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => []
+            ],
+            'LabVirtualMachineProperties' => [
+                'properties' => [
+                    'notes' => ['type' => 'string'],
+                    'ownerObjectId' => ['type' => 'string'],
+                    'ownerUserPrincipalName' => ['type' => 'string'],
+                    'createdByUserId' => ['type' => 'string'],
+                    'createdByUser' => ['type' => 'string'],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'computeId' => ['type' => 'string'],
+                    'customImageId' => ['type' => 'string'],
+                    'osType' => ['type' => 'string'],
+                    'size' => ['type' => 'string'],
+                    'userName' => ['type' => 'string'],
+                    'password' => ['type' => 'string'],
+                    'sshKey' => ['type' => 'string'],
+                    'isAuthenticationWithSshKey' => ['type' => 'boolean'],
+                    'fqdn' => ['type' => 'string'],
+                    'labSubnetName' => ['type' => 'string'],
+                    'labVirtualNetworkId' => ['type' => 'string'],
+                    'disallowPublicIpAddress' => ['type' => 'boolean'],
+                    'artifacts' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ArtifactInstallProperties']
+                    ],
+                    'artifactDeploymentStatus' => ['$ref' => '#/definitions/ArtifactDeploymentStatusProperties'],
+                    'galleryImageReference' => ['$ref' => '#/definitions/GalleryImageReference'],
+                    'computeVm' => ['$ref' => '#/definitions/ComputeVmProperties'],
+                    'networkInterface' => ['$ref' => '#/definitions/NetworkInterfaceProperties'],
+                    'applicableSchedule' => ['$ref' => '#/definitions/ApplicableSchedule'],
+                    'expirationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'allowClaim' => ['type' => 'boolean'],
+                    'storageType' => ['type' => 'string'],
+                    'virtualMachineCreationSource' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'FromCustomImage',
+                            'FromGalleryImage'
+                        ]
+                    ],
+                    'environmentId' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LabVirtualMachine' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/LabVirtualMachineProperties']],
+                'required' => ['properties']
+            ],
+            'SharedPublicIpAddressConfigurationFragment' => [
+                'properties' => ['inboundNatRules' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/InboundNatRuleFragment']
+                ]],
+                'required' => []
+            ],
+            'NetworkInterfacePropertiesFragment' => [
+                'properties' => [
+                    'virtualNetworkId' => ['type' => 'string'],
+                    'subnetId' => ['type' => 'string'],
+                    'publicIpAddressId' => ['type' => 'string'],
+                    'publicIpAddress' => ['type' => 'string'],
+                    'privateIpAddress' => ['type' => 'string'],
+                    'dnsName' => ['type' => 'string'],
+                    'rdpAuthority' => ['type' => 'string'],
+                    'sshAuthority' => ['type' => 'string'],
+                    'sharedPublicIpAddressConfiguration' => ['$ref' => '#/definitions/SharedPublicIpAddressConfigurationFragment']
+                ],
+                'required' => []
+            ],
+            'LabVirtualMachinePropertiesFragment' => [
+                'properties' => [
+                    'notes' => ['type' => 'string'],
+                    'ownerObjectId' => ['type' => 'string'],
+                    'ownerUserPrincipalName' => ['type' => 'string'],
+                    'createdByUserId' => ['type' => 'string'],
+                    'createdByUser' => ['type' => 'string'],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'customImageId' => ['type' => 'string'],
+                    'osType' => ['type' => 'string'],
+                    'size' => ['type' => 'string'],
+                    'userName' => ['type' => 'string'],
+                    'password' => ['type' => 'string'],
+                    'sshKey' => ['type' => 'string'],
+                    'isAuthenticationWithSshKey' => ['type' => 'boolean'],
+                    'fqdn' => ['type' => 'string'],
+                    'labSubnetName' => ['type' => 'string'],
+                    'labVirtualNetworkId' => ['type' => 'string'],
+                    'disallowPublicIpAddress' => ['type' => 'boolean'],
+                    'artifacts' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ArtifactInstallPropertiesFragment']
+                    ],
+                    'artifactDeploymentStatus' => ['$ref' => '#/definitions/ArtifactDeploymentStatusPropertiesFragment'],
+                    'galleryImageReference' => ['$ref' => '#/definitions/GalleryImageReferenceFragment'],
+                    'computeVm' => ['$ref' => '#/definitions/ComputeVmPropertiesFragment'],
+                    'networkInterface' => ['$ref' => '#/definitions/NetworkInterfacePropertiesFragment'],
+                    'applicableSchedule' => ['$ref' => '#/definitions/ApplicableScheduleFragment'],
+                    'expirationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'allowClaim' => ['type' => 'boolean'],
+                    'storageType' => ['type' => 'string'],
+                    'virtualMachineCreationSource' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'FromCustomImage',
+                            'FromGalleryImage'
+                        ]
+                    ],
+                    'environmentId' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'LabVirtualMachineFragment' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/LabVirtualMachinePropertiesFragment']],
+                'required' => []
+            ],
+            'NotificationChannelProperties' => [
+                'properties' => [
+                    'webHookUrl' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'events' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Event']
+                    ],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'NotificationChannel' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/NotificationChannelProperties']],
+                'required' => ['properties']
+            ],
+            'NotificationChannelPropertiesFragment' => [
+                'properties' => [
+                    'webHookUrl' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'events' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/EventFragment']
+                    ],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'NotificationChannelFragment' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/NotificationChannelPropertiesFragment']],
+                'required' => []
+            ],
+            'NotifyParameters' => [
+                'properties' => [
+                    'eventName' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'AutoShutdown',
+                            'Cost'
+                        ]
+                    ],
+                    'jsonPayload' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PolicyProperties' => [
+                'properties' => [
+                    'description' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'factName' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'UserOwnedLabVmCount',
+                            'UserOwnedLabPremiumVmCount',
+                            'LabVmCount',
+                            'LabPremiumVmCount',
+                            'LabVmSize',
+                            'GalleryImage',
+                            'UserOwnedLabVmCountInSubnet',
+                            'LabTargetCost'
+                        ]
+                    ],
+                    'factData' => ['type' => 'string'],
+                    'threshold' => ['type' => 'string'],
+                    'evaluatorType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'AllowedValuesPolicy',
+                            'MaxValuePolicy'
+                        ]
+                    ],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Policy' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PolicyProperties']],
+                'required' => ['properties']
+            ],
+            'PolicyPropertiesFragment' => [
+                'properties' => [
+                    'description' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'factName' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'UserOwnedLabVmCount',
+                            'UserOwnedLabPremiumVmCount',
+                            'LabVmCount',
+                            'LabPremiumVmCount',
+                            'LabVmSize',
+                            'GalleryImage',
+                            'UserOwnedLabVmCountInSubnet',
+                            'LabTargetCost'
+                        ]
+                    ],
+                    'factData' => ['type' => 'string'],
+                    'threshold' => ['type' => 'string'],
+                    'evaluatorType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'AllowedValuesPolicy',
+                            'MaxValuePolicy'
+                        ]
+                    ],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PolicyFragment' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PolicyPropertiesFragment']],
+                'required' => []
+            ],
+            'Port' => [
+                'properties' => [
+                    'transportProtocol' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Tcp',
+                            'Udp'
+                        ]
+                    ],
+                    'backendPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'backendPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ResponseWithContinuation[ArmTemplate]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ArmTemplate']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResponseWithContinuation[Artifact]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Artifact']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResponseWithContinuation[ArtifactSource]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ArtifactSource']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResponseWithContinuation[CustomImage]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CustomImage']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResponseWithContinuation[Disk]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Disk']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResponseWithContinuation[DtlEnvironment]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DtlEnvironment']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResponseWithContinuation[Formula]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Formula']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResponseWithContinuation[GalleryImage]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/GalleryImage']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResponseWithContinuation[Lab]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Lab']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResponseWithContinuation[LabVhd]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/LabVhd']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResponseWithContinuation[LabVirtualMachine]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/LabVirtualMachine']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResponseWithContinuation[NotificationChannel]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NotificationChannel']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResponseWithContinuation[Policy]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Policy']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResponseWithContinuation[Schedule]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Schedule']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'SecretProperties' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'Secret' => ['properties' => ['properties' => ['$ref' => '#/definitions/SecretProperties']]],
-            'ResponseWithContinuation[Secret]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Secret']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ServiceRunner' => ['properties' => ['identity' => ['$ref' => '#/definitions/IdentityProperties']]],
-            'ResponseWithContinuation[ServiceRunner]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ServiceRunner']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'UserIdentity' => ['properties' => [
-                'principalName' => ['type' => 'string'],
-                'principalId' => ['type' => 'string'],
-                'tenantId' => ['type' => 'string'],
-                'objectId' => ['type' => 'string'],
-                'appId' => ['type' => 'string']
-            ]],
-            'UserSecretStore' => ['properties' => [
-                'keyVaultUri' => ['type' => 'string'],
-                'keyVaultId' => ['type' => 'string']
-            ]],
-            'UserProperties' => ['properties' => [
-                'identity' => ['$ref' => '#/definitions/UserIdentity'],
-                'secretStore' => ['$ref' => '#/definitions/UserSecretStore'],
-                'createdDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'User' => ['properties' => ['properties' => ['$ref' => '#/definitions/UserProperties']]],
-            'ResponseWithContinuation[User]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/User']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Subnet' => ['properties' => [
-                'resourceId' => ['type' => 'string'],
-                'labSubnetName' => ['type' => 'string'],
-                'allowPublicIp' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Default',
-                        'Deny',
-                        'Allow'
-                    ]
-                ]
-            ]],
-            'SubnetSharedPublicIpAddressConfiguration' => ['properties' => ['allowedPorts' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Port']
-            ]]],
-            'SubnetOverride' => ['properties' => [
-                'resourceId' => ['type' => 'string'],
-                'labSubnetName' => ['type' => 'string'],
-                'useInVmCreationPermission' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Default',
-                        'Deny',
-                        'Allow'
+                'required' => []
+            ],
+            'PortFragment' => [
+                'properties' => [
+                    'transportProtocol' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Tcp',
+                            'Udp'
+                        ]
+                    ],
+                    'backendPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'usePublicIpAddressPermission' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Default',
-                        'Deny',
-                        'Allow'
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'sharedPublicIpAddressConfiguration' => ['$ref' => '#/definitions/SubnetSharedPublicIpAddressConfiguration'],
-                'virtualNetworkPoolName' => ['type' => 'string']
-            ]],
-            'VirtualNetworkProperties' => ['properties' => [
-                'allowedSubnets' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Subnet']
+                'required' => []
+            ],
+            'ResponseWithContinuation[ArmTemplate]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ArmTemplate']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'description' => ['type' => 'string'],
-                'externalProviderResourceId' => ['type' => 'string'],
-                'externalSubnets' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ExternalSubnet']
+                'required' => []
+            ],
+            'ResponseWithContinuation[Artifact]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Artifact']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'subnetOverrides' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubnetOverride']
+                'required' => []
+            ],
+            'ResponseWithContinuation[ArtifactSource]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ArtifactSource']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'createdDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'ResponseWithContinuation[CustomImage]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CustomImage']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'VirtualNetwork' => ['properties' => ['properties' => ['$ref' => '#/definitions/VirtualNetworkProperties']]],
-            'ResponseWithContinuation[VirtualNetwork]' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualNetwork']
+                'required' => []
+            ],
+            'ResponseWithContinuation[Disk]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Disk']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RetargetScheduleProperties' => ['properties' => [
-                'currentResourceId' => ['type' => 'string'],
-                'targetResourceId' => ['type' => 'string']
-            ]],
-            'ShutdownNotificationContent' => ['properties' => [
-                'skipUrl' => ['type' => 'string'],
-                'delayUrl60' => ['type' => 'string'],
-                'delayUrl120' => ['type' => 'string'],
-                'vmName' => ['type' => 'string'],
-                'guid' => ['type' => 'string'],
-                'owner' => ['type' => 'string'],
-                'eventType' => ['type' => 'string'],
-                'text' => ['type' => 'string'],
-                'subscriptionId' => ['type' => 'string'],
-                'resourceGroupName' => ['type' => 'string'],
-                'labName' => ['type' => 'string']
-            ]],
-            'SubnetFragment' => ['properties' => [
-                'resourceId' => ['type' => 'string'],
-                'labSubnetName' => ['type' => 'string'],
-                'allowPublicIp' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Default',
-                        'Deny',
-                        'Allow'
+                'required' => []
+            ],
+            'ResponseWithContinuation[DtlEnvironment]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DtlEnvironment']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResponseWithContinuation[Formula]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Formula']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResponseWithContinuation[GalleryImage]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/GalleryImage']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResponseWithContinuation[Lab]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Lab']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResponseWithContinuation[LabVhd]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/LabVhd']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResponseWithContinuation[LabVirtualMachine]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/LabVirtualMachine']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResponseWithContinuation[NotificationChannel]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NotificationChannel']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResponseWithContinuation[Policy]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Policy']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResponseWithContinuation[Schedule]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Schedule']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SecretProperties' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Secret' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SecretProperties']],
+                'required' => ['properties']
+            ],
+            'ResponseWithContinuation[Secret]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Secret']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ServiceRunner' => [
+                'properties' => ['identity' => ['$ref' => '#/definitions/IdentityProperties']],
+                'required' => []
+            ],
+            'ResponseWithContinuation[ServiceRunner]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ServiceRunner']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'UserIdentity' => [
+                'properties' => [
+                    'principalName' => ['type' => 'string'],
+                    'principalId' => ['type' => 'string'],
+                    'tenantId' => ['type' => 'string'],
+                    'objectId' => ['type' => 'string'],
+                    'appId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'UserSecretStore' => [
+                'properties' => [
+                    'keyVaultUri' => ['type' => 'string'],
+                    'keyVaultId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'UserProperties' => [
+                'properties' => [
+                    'identity' => ['$ref' => '#/definitions/UserIdentity'],
+                    'secretStore' => ['$ref' => '#/definitions/UserSecretStore'],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'User' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UserProperties']],
+                'required' => []
+            ],
+            'ResponseWithContinuation[User]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/User']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Subnet' => [
+                'properties' => [
+                    'resourceId' => ['type' => 'string'],
+                    'labSubnetName' => ['type' => 'string'],
+                    'allowPublicIp' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Default',
+                            'Deny',
+                            'Allow'
+                        ]
                     ]
-                ]
-            ]],
-            'SubnetSharedPublicIpAddressConfigurationFragment' => ['properties' => ['allowedPorts' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/PortFragment']
-            ]]],
-            'SubnetOverrideFragment' => ['properties' => [
-                'resourceId' => ['type' => 'string'],
-                'labSubnetName' => ['type' => 'string'],
-                'useInVmCreationPermission' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Default',
-                        'Deny',
-                        'Allow'
+                ],
+                'required' => []
+            ],
+            'SubnetSharedPublicIpAddressConfiguration' => [
+                'properties' => ['allowedPorts' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Port']
+                ]],
+                'required' => []
+            ],
+            'SubnetOverride' => [
+                'properties' => [
+                    'resourceId' => ['type' => 'string'],
+                    'labSubnetName' => ['type' => 'string'],
+                    'useInVmCreationPermission' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Default',
+                            'Deny',
+                            'Allow'
+                        ]
+                    ],
+                    'usePublicIpAddressPermission' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Default',
+                            'Deny',
+                            'Allow'
+                        ]
+                    ],
+                    'sharedPublicIpAddressConfiguration' => ['$ref' => '#/definitions/SubnetSharedPublicIpAddressConfiguration'],
+                    'virtualNetworkPoolName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkProperties' => [
+                'properties' => [
+                    'allowedSubnets' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Subnet']
+                    ],
+                    'description' => ['type' => 'string'],
+                    'externalProviderResourceId' => ['type' => 'string'],
+                    'externalSubnets' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ExternalSubnet']
+                    ],
+                    'subnetOverrides' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubnetOverride']
+                    ],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualNetwork' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/VirtualNetworkProperties']],
+                'required' => []
+            ],
+            'ResponseWithContinuation[VirtualNetwork]' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualNetwork']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RetargetScheduleProperties' => [
+                'properties' => [
+                    'currentResourceId' => ['type' => 'string'],
+                    'targetResourceId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ShutdownNotificationContent' => [
+                'properties' => [
+                    'skipUrl' => ['type' => 'string'],
+                    'delayUrl60' => ['type' => 'string'],
+                    'delayUrl120' => ['type' => 'string'],
+                    'vmName' => ['type' => 'string'],
+                    'guid' => ['type' => 'string'],
+                    'owner' => ['type' => 'string'],
+                    'eventType' => ['type' => 'string'],
+                    'text' => ['type' => 'string'],
+                    'subscriptionId' => ['type' => 'string'],
+                    'resourceGroupName' => ['type' => 'string'],
+                    'labName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SubnetFragment' => [
+                'properties' => [
+                    'resourceId' => ['type' => 'string'],
+                    'labSubnetName' => ['type' => 'string'],
+                    'allowPublicIp' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Default',
+                            'Deny',
+                            'Allow'
+                        ]
                     ]
                 ],
-                'usePublicIpAddressPermission' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Default',
-                        'Deny',
-                        'Allow'
-                    ]
-                ],
-                'sharedPublicIpAddressConfiguration' => ['$ref' => '#/definitions/SubnetSharedPublicIpAddressConfigurationFragment'],
-                'virtualNetworkPoolName' => ['type' => 'string']
-            ]],
-            'UserIdentityFragment' => ['properties' => [
-                'principalName' => ['type' => 'string'],
-                'principalId' => ['type' => 'string'],
-                'tenantId' => ['type' => 'string'],
-                'objectId' => ['type' => 'string'],
-                'appId' => ['type' => 'string']
-            ]],
-            'UserSecretStoreFragment' => ['properties' => [
-                'keyVaultUri' => ['type' => 'string'],
-                'keyVaultId' => ['type' => 'string']
-            ]],
-            'UserPropertiesFragment' => ['properties' => [
-                'identity' => ['$ref' => '#/definitions/UserIdentityFragment'],
-                'secretStore' => ['$ref' => '#/definitions/UserSecretStoreFragment'],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'UserFragment' => ['properties' => ['properties' => ['$ref' => '#/definitions/UserPropertiesFragment']]],
-            'VirtualNetworkPropertiesFragment' => ['properties' => [
-                'allowedSubnets' => [
+                'required' => []
+            ],
+            'SubnetSharedPublicIpAddressConfigurationFragment' => [
+                'properties' => ['allowedPorts' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubnetFragment']
+                    'items' => ['$ref' => '#/definitions/PortFragment']
+                ]],
+                'required' => []
+            ],
+            'SubnetOverrideFragment' => [
+                'properties' => [
+                    'resourceId' => ['type' => 'string'],
+                    'labSubnetName' => ['type' => 'string'],
+                    'useInVmCreationPermission' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Default',
+                            'Deny',
+                            'Allow'
+                        ]
+                    ],
+                    'usePublicIpAddressPermission' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Default',
+                            'Deny',
+                            'Allow'
+                        ]
+                    ],
+                    'sharedPublicIpAddressConfiguration' => ['$ref' => '#/definitions/SubnetSharedPublicIpAddressConfigurationFragment'],
+                    'virtualNetworkPoolName' => ['type' => 'string']
                 ],
-                'description' => ['type' => 'string'],
-                'externalProviderResourceId' => ['type' => 'string'],
-                'externalSubnets' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ExternalSubnetFragment']
+                'required' => []
+            ],
+            'UserIdentityFragment' => [
+                'properties' => [
+                    'principalName' => ['type' => 'string'],
+                    'principalId' => ['type' => 'string'],
+                    'tenantId' => ['type' => 'string'],
+                    'objectId' => ['type' => 'string'],
+                    'appId' => ['type' => 'string']
                 ],
-                'subnetOverrides' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubnetOverrideFragment']
+                'required' => []
+            ],
+            'UserSecretStoreFragment' => [
+                'properties' => [
+                    'keyVaultUri' => ['type' => 'string'],
+                    'keyVaultId' => ['type' => 'string']
                 ],
-                'provisioningState' => ['type' => 'string'],
-                'uniqueIdentifier' => ['type' => 'string']
-            ]],
-            'VirtualNetworkFragment' => ['properties' => ['properties' => ['$ref' => '#/definitions/VirtualNetworkPropertiesFragment']]]
+                'required' => []
+            ],
+            'UserPropertiesFragment' => [
+                'properties' => [
+                    'identity' => ['$ref' => '#/definitions/UserIdentityFragment'],
+                    'secretStore' => ['$ref' => '#/definitions/UserSecretStoreFragment'],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'UserFragment' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/UserPropertiesFragment']],
+                'required' => []
+            ],
+            'VirtualNetworkPropertiesFragment' => [
+                'properties' => [
+                    'allowedSubnets' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubnetFragment']
+                    ],
+                    'description' => ['type' => 'string'],
+                    'externalProviderResourceId' => ['type' => 'string'],
+                    'externalSubnets' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ExternalSubnetFragment']
+                    ],
+                    'subnetOverrides' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SubnetOverrideFragment']
+                    ],
+                    'provisioningState' => ['type' => 'string'],
+                    'uniqueIdentifier' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkFragment' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/VirtualNetworkPropertiesFragment']],
+                'required' => []
+            ]
         ]
     ];
 }

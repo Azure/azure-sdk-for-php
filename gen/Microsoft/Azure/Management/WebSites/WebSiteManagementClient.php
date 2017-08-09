@@ -13957,1205 +13957,1500 @@ final class WebSiteManagementClient
             ]]
         ],
         'definitions' => [
-            'AppServiceCertificate' => ['properties' => [
-                'keyVaultId' => ['type' => 'string'],
-                'keyVaultSecretName' => ['type' => 'string'],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Initialized',
-                        'WaitingOnCertificateOrder',
-                        'Succeeded',
-                        'CertificateOrderFailed',
-                        'OperationNotPermittedOnKeyVault',
-                        'AzureServiceUnauthorizedToAccessKeyVault',
-                        'KeyVaultDoesNotExist',
-                        'KeyVaultSecretDoesNotExist',
-                        'UnknownError',
-                        'ExternalPrivateKey',
-                        'Unknown'
-                    ]
-                ]
-            ]],
-            'AppServiceCertificateResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/AppServiceCertificate']]],
-            'AppServiceCertificateCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AppServiceCertificateResource']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'CertificateDetails' => ['properties' => [
-                'version' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'serialNumber' => ['type' => 'string'],
-                'thumbprint' => ['type' => 'string'],
-                'subject' => ['type' => 'string'],
-                'notBefore' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'notAfter' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'signatureAlgorithm' => ['type' => 'string'],
-                'issuer' => ['type' => 'string'],
-                'rawData' => ['type' => 'string']
-            ]],
-            'AppServiceCertificateOrder_properties' => ['properties' => [
-                'certificates' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/AppServiceCertificate']
-                ],
-                'distinguishedName' => ['type' => 'string'],
-                'domainVerificationToken' => ['type' => 'string'],
-                'validityInYears' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'keySize' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'productType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'StandardDomainValidatedSsl',
-                        'StandardDomainValidatedWildCardSsl'
-                    ]
-                ],
-                'autoRenew' => ['type' => 'boolean'],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Succeeded',
-                        'Failed',
-                        'Canceled',
-                        'InProgress',
-                        'Deleting'
-                    ]
-                ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Pendingissuance',
-                        'Issued',
-                        'Revoked',
-                        'Canceled',
-                        'Denied',
-                        'Pendingrevocation',
-                        'PendingRekey',
-                        'Unused',
-                        'Expired',
-                        'NotSubmitted'
-                    ]
-                ],
-                'signedCertificate' => ['$ref' => '#/definitions/CertificateDetails'],
-                'csr' => ['type' => 'string'],
-                'intermediate' => ['$ref' => '#/definitions/CertificateDetails'],
-                'root' => ['$ref' => '#/definitions/CertificateDetails'],
-                'serialNumber' => ['type' => 'string'],
-                'lastCertificateIssuanceTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'expirationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'isPrivateKeyExternal' => ['type' => 'boolean'],
-                'appServiceCertificateNotRenewableReasons' => [
-                    'type' => 'array',
-                    'items' => [
+            'AppServiceCertificate' => [
+                'properties' => [
+                    'keyVaultId' => ['type' => 'string'],
+                    'keyVaultSecretName' => ['type' => 'string'],
+                    'provisioningState' => [
                         'type' => 'string',
                         'enum' => [
-                            'RegistrationStatusNotSupportedForRenewal',
-                            'ExpirationNotInRenewalTimeRange',
-                            'SubscriptionNotActive'
+                            'Initialized',
+                            'WaitingOnCertificateOrder',
+                            'Succeeded',
+                            'CertificateOrderFailed',
+                            'OperationNotPermittedOnKeyVault',
+                            'AzureServiceUnauthorizedToAccessKeyVault',
+                            'KeyVaultDoesNotExist',
+                            'KeyVaultSecretDoesNotExist',
+                            'UnknownError',
+                            'ExternalPrivateKey',
+                            'Unknown'
                         ]
                     ]
                 ],
-                'nextAutoRenewalTimeStamp' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'AppServiceCertificateOrder' => ['properties' => ['properties' => ['$ref' => '#/definitions/AppServiceCertificateOrder_properties']]],
-            'AppServiceCertificateOrderCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AppServiceCertificateOrder']
+                'required' => []
+            ],
+            'AppServiceCertificateResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AppServiceCertificate']],
+                'required' => []
+            ],
+            'AppServiceCertificateCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AppServiceCertificateResource']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'CertificateEmail_properties' => ['properties' => [
-                'emailId' => ['type' => 'string'],
-                'timeStamp' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'CertificateEmail' => ['properties' => ['properties' => ['$ref' => '#/definitions/CertificateEmail_properties']]],
-            'CertificateOrderAction_properties' => ['properties' => [
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'CertificateIssued',
-                        'CertificateOrderCanceled',
-                        'CertificateOrderCreated',
-                        'CertificateRevoked',
-                        'DomainValidationComplete',
-                        'FraudDetected',
-                        'OrgNameChange',
-                        'OrgValidationComplete',
-                        'SanDrop',
-                        'FraudCleared',
-                        'CertificateExpired',
-                        'CertificateExpirationWarning',
-                        'FraudDocumentationRequired',
-                        'Unknown'
-                    ]
+                'required' => ['value']
+            ],
+            'CertificateDetails' => [
+                'properties' => [
+                    'version' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'serialNumber' => ['type' => 'string'],
+                    'thumbprint' => ['type' => 'string'],
+                    'subject' => ['type' => 'string'],
+                    'notBefore' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'notAfter' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'signatureAlgorithm' => ['type' => 'string'],
+                    'issuer' => ['type' => 'string'],
+                    'rawData' => ['type' => 'string']
                 ],
-                'createdAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'CertificateOrderAction' => ['properties' => ['properties' => ['$ref' => '#/definitions/CertificateOrderAction_properties']]],
-            'NameIdentifier' => ['properties' => ['name' => ['type' => 'string']]],
-            'ReissueCertificateOrderRequest_properties' => ['properties' => [
-                'keySize' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'delayExistingRevokeInHours' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'csr' => ['type' => 'string'],
-                'isPrivateKeyExternal' => ['type' => 'boolean']
-            ]],
-            'ReissueCertificateOrderRequest' => ['properties' => ['properties' => ['$ref' => '#/definitions/ReissueCertificateOrderRequest_properties']]],
-            'RenewCertificateOrderRequest_properties' => ['properties' => [
-                'keySize' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'csr' => ['type' => 'string'],
-                'isPrivateKeyExternal' => ['type' => 'boolean']
-            ]],
-            'RenewCertificateOrderRequest' => ['properties' => ['properties' => ['$ref' => '#/definitions/RenewCertificateOrderRequest_properties']]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'kind' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'SiteSeal' => ['properties' => ['html' => ['type' => 'string']]],
-            'SiteSealRequest' => ['properties' => [
-                'lightTheme' => ['type' => 'boolean'],
-                'locale' => ['type' => 'string']
-            ]],
-            'Address' => ['properties' => [
-                'address1' => ['type' => 'string'],
-                'address2' => ['type' => 'string'],
-                'city' => ['type' => 'string'],
-                'country' => ['type' => 'string'],
-                'postalCode' => ['type' => 'string'],
-                'state' => ['type' => 'string']
-            ]],
-            'Contact' => ['properties' => [
-                'addressMailing' => ['$ref' => '#/definitions/Address'],
-                'email' => ['type' => 'string'],
-                'fax' => ['type' => 'string'],
-                'jobTitle' => ['type' => 'string'],
-                'nameFirst' => ['type' => 'string'],
-                'nameLast' => ['type' => 'string'],
-                'nameMiddle' => ['type' => 'string'],
-                'organization' => ['type' => 'string'],
-                'phone' => ['type' => 'string']
-            ]],
-            'HostName' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'siteNames' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'azureResourceName' => ['type' => 'string'],
-                'azureResourceType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Website',
-                        'TrafficManager'
-                    ]
-                ],
-                'customHostNameDnsRecordType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'CName',
-                        'A'
-                    ]
-                ],
-                'hostNameType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Verified',
-                        'Managed'
-                    ]
-                ]
-            ]],
-            'DomainPurchaseConsent' => ['properties' => [
-                'agreementKeys' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'agreedBy' => ['type' => 'string'],
-                'agreedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'Domain_properties' => ['properties' => [
-                'contactAdmin' => ['$ref' => '#/definitions/Contact'],
-                'contactBilling' => ['$ref' => '#/definitions/Contact'],
-                'contactRegistrant' => ['$ref' => '#/definitions/Contact'],
-                'contactTech' => ['$ref' => '#/definitions/Contact'],
-                'registrationStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Active',
-                        'Awaiting',
-                        'Cancelled',
-                        'Confiscated',
-                        'Disabled',
-                        'Excluded',
-                        'Expired',
-                        'Failed',
-                        'Held',
-                        'Locked',
-                        'Parked',
-                        'Pending',
-                        'Reserved',
-                        'Reverted',
-                        'Suspended',
-                        'Transferred',
-                        'Unknown',
-                        'Unlocked',
-                        'Unparked',
-                        'Updated',
-                        'JsonConverterFailed'
-                    ]
-                ],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Succeeded',
-                        'Failed',
-                        'Canceled',
-                        'InProgress',
-                        'Deleting'
-                    ]
-                ],
-                'nameServers' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'privacy' => ['type' => 'boolean'],
-                'createdTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'expirationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastRenewedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'autoRenew' => ['type' => 'boolean'],
-                'readyForDnsRecordManagement' => ['type' => 'boolean'],
-                'managedHostNames' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HostName']
-                ],
-                'consent' => ['$ref' => '#/definitions/DomainPurchaseConsent'],
-                'domainNotRenewableReasons' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => []
+            ],
+            'AppServiceCertificateOrder_properties' => [
+                'properties' => [
+                    'certificates' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/AppServiceCertificate']
+                    ],
+                    'distinguishedName' => ['type' => 'string'],
+                    'domainVerificationToken' => ['type' => 'string'],
+                    'validityInYears' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'keySize' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'productType' => [
                         'type' => 'string',
                         'enum' => [
-                            'RegistrationStatusNotSupportedForRenewal',
-                            'ExpirationNotInRenewalTimeRange',
-                            'SubscriptionNotActive'
+                            'StandardDomainValidatedSsl',
+                            'StandardDomainValidatedWildCardSsl'
+                        ]
+                    ],
+                    'autoRenew' => ['type' => 'boolean'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Succeeded',
+                            'Failed',
+                            'Canceled',
+                            'InProgress',
+                            'Deleting'
+                        ]
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Pendingissuance',
+                            'Issued',
+                            'Revoked',
+                            'Canceled',
+                            'Denied',
+                            'Pendingrevocation',
+                            'PendingRekey',
+                            'Unused',
+                            'Expired',
+                            'NotSubmitted'
+                        ]
+                    ],
+                    'signedCertificate' => ['$ref' => '#/definitions/CertificateDetails'],
+                    'csr' => ['type' => 'string'],
+                    'intermediate' => ['$ref' => '#/definitions/CertificateDetails'],
+                    'root' => ['$ref' => '#/definitions/CertificateDetails'],
+                    'serialNumber' => ['type' => 'string'],
+                    'lastCertificateIssuanceTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'expirationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'isPrivateKeyExternal' => ['type' => 'boolean'],
+                    'appServiceCertificateNotRenewableReasons' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'RegistrationStatusNotSupportedForRenewal',
+                                'ExpirationNotInRenewalTimeRange',
+                                'SubscriptionNotActive'
+                            ]
+                        ]
+                    ],
+                    'nextAutoRenewalTimeStamp' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'AppServiceCertificateOrder' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AppServiceCertificateOrder_properties']],
+                'required' => []
+            ],
+            'AppServiceCertificateOrderCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AppServiceCertificateOrder']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'CertificateEmail_properties' => [
+                'properties' => [
+                    'emailId' => ['type' => 'string'],
+                    'timeStamp' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'CertificateEmail' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/CertificateEmail_properties']],
+                'required' => []
+            ],
+            'CertificateOrderAction_properties' => [
+                'properties' => [
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'CertificateIssued',
+                            'CertificateOrderCanceled',
+                            'CertificateOrderCreated',
+                            'CertificateRevoked',
+                            'DomainValidationComplete',
+                            'FraudDetected',
+                            'OrgNameChange',
+                            'OrgValidationComplete',
+                            'SanDrop',
+                            'FraudCleared',
+                            'CertificateExpired',
+                            'CertificateExpirationWarning',
+                            'FraudDocumentationRequired',
+                            'Unknown'
+                        ]
+                    ],
+                    'createdAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'CertificateOrderAction' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/CertificateOrderAction_properties']],
+                'required' => []
+            ],
+            'NameIdentifier' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'ReissueCertificateOrderRequest_properties' => [
+                'properties' => [
+                    'keySize' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'delayExistingRevokeInHours' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'csr' => ['type' => 'string'],
+                    'isPrivateKeyExternal' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'ReissueCertificateOrderRequest' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ReissueCertificateOrderRequest_properties']],
+                'required' => []
+            ],
+            'RenewCertificateOrderRequest_properties' => [
+                'properties' => [
+                    'keySize' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'csr' => ['type' => 'string'],
+                    'isPrivateKeyExternal' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'RenewCertificateOrderRequest' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RenewCertificateOrderRequest_properties']],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'kind' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => ['location']
+            ],
+            'SiteSeal' => [
+                'properties' => ['html' => ['type' => 'string']],
+                'required' => ['html']
+            ],
+            'SiteSealRequest' => [
+                'properties' => [
+                    'lightTheme' => ['type' => 'boolean'],
+                    'locale' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Address' => [
+                'properties' => [
+                    'address1' => ['type' => 'string'],
+                    'address2' => ['type' => 'string'],
+                    'city' => ['type' => 'string'],
+                    'country' => ['type' => 'string'],
+                    'postalCode' => ['type' => 'string'],
+                    'state' => ['type' => 'string']
+                ],
+                'required' => [
+                    'address1',
+                    'city',
+                    'country',
+                    'postalCode',
+                    'state'
+                ]
+            ],
+            'Contact' => [
+                'properties' => [
+                    'addressMailing' => ['$ref' => '#/definitions/Address'],
+                    'email' => ['type' => 'string'],
+                    'fax' => ['type' => 'string'],
+                    'jobTitle' => ['type' => 'string'],
+                    'nameFirst' => ['type' => 'string'],
+                    'nameLast' => ['type' => 'string'],
+                    'nameMiddle' => ['type' => 'string'],
+                    'organization' => ['type' => 'string'],
+                    'phone' => ['type' => 'string']
+                ],
+                'required' => [
+                    'email',
+                    'nameFirst',
+                    'nameLast',
+                    'phone'
+                ]
+            ],
+            'HostName' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'siteNames' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'azureResourceName' => ['type' => 'string'],
+                    'azureResourceType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Website',
+                            'TrafficManager'
+                        ]
+                    ],
+                    'customHostNameDnsRecordType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'CName',
+                            'A'
+                        ]
+                    ],
+                    'hostNameType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Verified',
+                            'Managed'
                         ]
                     ]
                 ],
-                'dnsType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'AzureDns',
-                        'DefaultDomainRegistrarDns'
+                'required' => []
+            ],
+            'DomainPurchaseConsent' => [
+                'properties' => [
+                    'agreementKeys' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'agreedBy' => ['type' => 'string'],
+                    'agreedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'dnsZoneId' => ['type' => 'string'],
-                'targetDnsType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'AzureDns',
-                        'DefaultDomainRegistrarDns'
+                'required' => []
+            ],
+            'Domain_properties' => [
+                'properties' => [
+                    'contactAdmin' => ['$ref' => '#/definitions/Contact'],
+                    'contactBilling' => ['$ref' => '#/definitions/Contact'],
+                    'contactRegistrant' => ['$ref' => '#/definitions/Contact'],
+                    'contactTech' => ['$ref' => '#/definitions/Contact'],
+                    'registrationStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Active',
+                            'Awaiting',
+                            'Cancelled',
+                            'Confiscated',
+                            'Disabled',
+                            'Excluded',
+                            'Expired',
+                            'Failed',
+                            'Held',
+                            'Locked',
+                            'Parked',
+                            'Pending',
+                            'Reserved',
+                            'Reverted',
+                            'Suspended',
+                            'Transferred',
+                            'Unknown',
+                            'Unlocked',
+                            'Unparked',
+                            'Updated',
+                            'JsonConverterFailed'
+                        ]
+                    ],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Succeeded',
+                            'Failed',
+                            'Canceled',
+                            'InProgress',
+                            'Deleting'
+                        ]
+                    ],
+                    'nameServers' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'privacy' => ['type' => 'boolean'],
+                    'createdTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'expirationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastRenewedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'autoRenew' => ['type' => 'boolean'],
+                    'readyForDnsRecordManagement' => ['type' => 'boolean'],
+                    'managedHostNames' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HostName']
+                    ],
+                    'consent' => ['$ref' => '#/definitions/DomainPurchaseConsent'],
+                    'domainNotRenewableReasons' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'RegistrationStatusNotSupportedForRenewal',
+                                'ExpirationNotInRenewalTimeRange',
+                                'SubscriptionNotActive'
+                            ]
+                        ]
+                    ],
+                    'dnsType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'AzureDns',
+                            'DefaultDomainRegistrarDns'
+                        ]
+                    ],
+                    'dnsZoneId' => ['type' => 'string'],
+                    'targetDnsType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'AzureDns',
+                            'DefaultDomainRegistrarDns'
+                        ]
+                    ],
+                    'authCode' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Domain' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Domain_properties']],
+                'required' => []
+            ],
+            'DomainAvailablilityCheckResult' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'available' => ['type' => 'boolean'],
+                    'domainType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Regular',
+                            'SoftDeleted'
+                        ]
                     ]
                 ],
-                'authCode' => ['type' => 'string']
-            ]],
-            'Domain' => ['properties' => ['properties' => ['$ref' => '#/definitions/Domain_properties']]],
-            'DomainAvailablilityCheckResult' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'available' => ['type' => 'boolean'],
-                'domainType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Regular',
-                        'SoftDeleted'
+                'required' => []
+            ],
+            'DomainCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Domain']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'DomainControlCenterSsoRequest' => [
+                'properties' => [
+                    'url' => ['type' => 'string'],
+                    'postParameterKey' => ['type' => 'string'],
+                    'postParameterValue' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DomainOwnershipIdentifier_properties' => [
+                'properties' => ['ownershipId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'DomainOwnershipIdentifier' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DomainOwnershipIdentifier_properties']],
+                'required' => []
+            ],
+            'DomainOwnershipIdentifierCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DomainOwnershipIdentifier']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'DomainRecommendationSearchParameters' => [
+                'properties' => [
+                    'keywords' => ['type' => 'string'],
+                    'maxDomainRecommendations' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
+                ],
+                'required' => []
+            ],
+            'NameIdentifierCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NameIdentifier']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'TldLegalAgreement' => [
+                'properties' => [
+                    'agreementKey' => ['type' => 'string'],
+                    'title' => ['type' => 'string'],
+                    'content' => ['type' => 'string'],
+                    'url' => ['type' => 'string']
+                ],
+                'required' => [
+                    'agreementKey',
+                    'title',
+                    'content'
                 ]
-            ]],
-            'DomainCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Domain']
+            ],
+            'TldLegalAgreementCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TldLegalAgreement']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'DomainControlCenterSsoRequest' => ['properties' => [
-                'url' => ['type' => 'string'],
-                'postParameterKey' => ['type' => 'string'],
-                'postParameterValue' => ['type' => 'string']
-            ]],
-            'DomainOwnershipIdentifier_properties' => ['properties' => ['ownershipId' => ['type' => 'string']]],
-            'DomainOwnershipIdentifier' => ['properties' => ['properties' => ['$ref' => '#/definitions/DomainOwnershipIdentifier_properties']]],
-            'DomainOwnershipIdentifierCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DomainOwnershipIdentifier']
+                'required' => ['value']
+            ],
+            'TopLevelDomain_properties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'privacy' => ['type' => 'boolean']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'DomainRecommendationSearchParameters' => ['properties' => [
-                'keywords' => ['type' => 'string'],
-                'maxDomainRecommendations' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'NameIdentifierCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NameIdentifier']
+                'required' => []
+            ],
+            'TopLevelDomain' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/TopLevelDomain_properties']],
+                'required' => []
+            ],
+            'TopLevelDomainAgreementOption' => [
+                'properties' => [
+                    'includePrivacy' => ['type' => 'boolean'],
+                    'forTransfer' => ['type' => 'boolean']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'TldLegalAgreement' => ['properties' => [
-                'agreementKey' => ['type' => 'string'],
-                'title' => ['type' => 'string'],
-                'content' => ['type' => 'string'],
-                'url' => ['type' => 'string']
-            ]],
-            'TldLegalAgreementCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TldLegalAgreement']
+                'required' => []
+            ],
+            'TopLevelDomainCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TopLevelDomain']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'TopLevelDomain_properties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'privacy' => ['type' => 'boolean']
-            ]],
-            'TopLevelDomain' => ['properties' => ['properties' => ['$ref' => '#/definitions/TopLevelDomain_properties']]],
-            'TopLevelDomainAgreementOption' => ['properties' => [
-                'includePrivacy' => ['type' => 'boolean'],
-                'forTransfer' => ['type' => 'boolean']
-            ]],
-            'TopLevelDomainCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TopLevelDomain']
+                'required' => ['value']
+            ],
+            'HostingEnvironmentProfile' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'HostingEnvironmentProfile' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'Certificate_properties' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'subjectName' => ['type' => 'string'],
-                'hostNames' => [
+                'required' => []
+            ],
+            'Certificate_properties' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'subjectName' => ['type' => 'string'],
+                    'hostNames' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'pfxBlob' => [
+                        'type' => 'string',
+                        'format' => 'byte'
+                    ],
+                    'siteName' => ['type' => 'string'],
+                    'selfLink' => ['type' => 'string'],
+                    'issuer' => ['type' => 'string'],
+                    'issueDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'expirationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'password' => ['type' => 'string'],
+                    'thumbprint' => ['type' => 'string'],
+                    'valid' => ['type' => 'boolean'],
+                    'cerBlob' => ['type' => 'string'],
+                    'publicKeyHash' => ['type' => 'string'],
+                    'hostingEnvironmentProfile' => ['$ref' => '#/definitions/HostingEnvironmentProfile'],
+                    'keyVaultId' => ['type' => 'string'],
+                    'keyVaultSecretName' => ['type' => 'string'],
+                    'keyVaultSecretStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Initialized',
+                            'WaitingOnCertificateOrder',
+                            'Succeeded',
+                            'CertificateOrderFailed',
+                            'OperationNotPermittedOnKeyVault',
+                            'AzureServiceUnauthorizedToAccessKeyVault',
+                            'KeyVaultDoesNotExist',
+                            'KeyVaultSecretDoesNotExist',
+                            'UnknownError',
+                            'ExternalPrivateKey',
+                            'Unknown'
+                        ]
+                    ],
+                    'geoRegion' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'serverFarmId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Certificate' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Certificate_properties']],
+                'required' => []
+            ],
+            'CertificateCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Certificate']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'ApiDefinitionInfo' => [
+                'properties' => ['url' => ['type' => 'string']],
+                'required' => []
+            ],
+            'AutoHealCustomAction' => [
+                'properties' => [
+                    'exe' => ['type' => 'string'],
+                    'parameters' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AutoHealActions' => [
+                'properties' => [
+                    'actionType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Recycle',
+                            'LogEvent',
+                            'CustomAction'
+                        ]
+                    ],
+                    'customAction' => ['$ref' => '#/definitions/AutoHealCustomAction'],
+                    'minProcessExecutionTime' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RequestsBasedTrigger' => [
+                'properties' => [
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'timeInterval' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'StatusCodesBasedTrigger' => [
+                'properties' => [
+                    'status' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'subStatus' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'win32Status' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'timeInterval' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SlowRequestsBasedTrigger' => [
+                'properties' => [
+                    'timeTaken' => ['type' => 'string'],
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'timeInterval' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AutoHealTriggers' => [
+                'properties' => [
+                    'requests' => ['$ref' => '#/definitions/RequestsBasedTrigger'],
+                    'privateBytesInKB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'statusCodes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/StatusCodesBasedTrigger']
+                    ],
+                    'slowRequests' => ['$ref' => '#/definitions/SlowRequestsBasedTrigger']
+                ],
+                'required' => []
+            ],
+            'AutoHealRules' => [
+                'properties' => [
+                    'triggers' => ['$ref' => '#/definitions/AutoHealTriggers'],
+                    'actions' => ['$ref' => '#/definitions/AutoHealActions']
+                ],
+                'required' => []
+            ],
+            'CloningInfo' => [
+                'properties' => [
+                    'correlationId' => ['type' => 'string'],
+                    'overwrite' => ['type' => 'boolean'],
+                    'cloneCustomHostNames' => ['type' => 'boolean'],
+                    'cloneSourceControl' => ['type' => 'boolean'],
+                    'sourceWebAppId' => ['type' => 'string'],
+                    'hostingEnvironment' => ['type' => 'string'],
+                    'appSettingsOverrides' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'configureLoadBalancing' => ['type' => 'boolean'],
+                    'trafficManagerProfileId' => ['type' => 'string'],
+                    'trafficManagerProfileName' => ['type' => 'string'],
+                    'ignoreQuotas' => ['type' => 'boolean']
+                ],
+                'required' => ['sourceWebAppId']
+            ],
+            'ConnStringInfo' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'connectionString' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'MySql',
+                            'SQLServer',
+                            'SQLAzure',
+                            'Custom',
+                            'NotificationHub',
+                            'ServiceBus',
+                            'EventHub',
+                            'ApiHub',
+                            'DocDb',
+                            'RedisCache',
+                            'PostgreSQL'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'CorsSettings' => [
+                'properties' => ['allowedOrigins' => [
                     'type' => 'array',
                     'items' => ['type' => 'string']
-                ],
-                'pfxBlob' => [
-                    'type' => 'string',
-                    'format' => 'byte'
-                ],
-                'siteName' => ['type' => 'string'],
-                'selfLink' => ['type' => 'string'],
-                'issuer' => ['type' => 'string'],
-                'issueDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'expirationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'password' => ['type' => 'string'],
-                'thumbprint' => ['type' => 'string'],
-                'valid' => ['type' => 'boolean'],
-                'cerBlob' => ['type' => 'string'],
-                'publicKeyHash' => ['type' => 'string'],
-                'hostingEnvironmentProfile' => ['$ref' => '#/definitions/HostingEnvironmentProfile'],
-                'keyVaultId' => ['type' => 'string'],
-                'keyVaultSecretName' => ['type' => 'string'],
-                'keyVaultSecretStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Initialized',
-                        'WaitingOnCertificateOrder',
-                        'Succeeded',
-                        'CertificateOrderFailed',
-                        'OperationNotPermittedOnKeyVault',
-                        'AzureServiceUnauthorizedToAccessKeyVault',
-                        'KeyVaultDoesNotExist',
-                        'KeyVaultSecretDoesNotExist',
-                        'UnknownError',
-                        'ExternalPrivateKey',
-                        'Unknown'
+                ]],
+                'required' => []
+            ],
+            'HostNameSslState' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'sslState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Disabled',
+                            'SniEnabled',
+                            'IpBasedEnabled'
+                        ]
+                    ],
+                    'virtualIP' => ['type' => 'string'],
+                    'thumbprint' => ['type' => 'string'],
+                    'toUpdate' => ['type' => 'boolean'],
+                    'hostType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Standard',
+                            'Repository'
+                        ]
                     ]
                 ],
-                'geoRegion' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'serverFarmId' => ['type' => 'string']
-            ]],
-            'Certificate' => ['properties' => ['properties' => ['$ref' => '#/definitions/Certificate_properties']]],
-            'CertificateCollection' => ['properties' => [
-                'value' => [
+                'required' => []
+            ],
+            'NameValuePair' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SiteMachineKey' => [
+                'properties' => [
+                    'validation' => ['type' => 'string'],
+                    'validationKey' => ['type' => 'string'],
+                    'decryption' => ['type' => 'string'],
+                    'decryptionKey' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HandlerMapping' => [
+                'properties' => [
+                    'extension' => ['type' => 'string'],
+                    'scriptProcessor' => ['type' => 'string'],
+                    'arguments' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualDirectory' => [
+                'properties' => [
+                    'virtualPath' => ['type' => 'string'],
+                    'physicalPath' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualApplication' => [
+                'properties' => [
+                    'virtualPath' => ['type' => 'string'],
+                    'physicalPath' => ['type' => 'string'],
+                    'preloadEnabled' => ['type' => 'boolean'],
+                    'virtualDirectories' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualDirectory']
+                    ]
+                ],
+                'required' => []
+            ],
+            'RampUpRule' => [
+                'properties' => [
+                    'actionHostName' => ['type' => 'string'],
+                    'reroutePercentage' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'changeStep' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'changeIntervalInMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'minReroutePercentage' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'maxReroutePercentage' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'changeDecisionCallbackUrl' => ['type' => 'string'],
+                    'name' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Experiments' => [
+                'properties' => ['rampUpRules' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Certificate']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ApiDefinitionInfo' => ['properties' => ['url' => ['type' => 'string']]],
-            'AutoHealCustomAction' => ['properties' => [
-                'exe' => ['type' => 'string'],
-                'parameters' => ['type' => 'string']
-            ]],
-            'AutoHealActions' => ['properties' => [
-                'actionType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Recycle',
-                        'LogEvent',
-                        'CustomAction'
+                    'items' => ['$ref' => '#/definitions/RampUpRule']
+                ]],
+                'required' => []
+            ],
+            'SiteLimits' => [
+                'properties' => [
+                    'maxPercentageCpu' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'maxMemoryInMb' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'maxDiskSizeInMb' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
                     ]
                 ],
-                'customAction' => ['$ref' => '#/definitions/AutoHealCustomAction'],
-                'minProcessExecutionTime' => ['type' => 'string']
-            ]],
-            'RequestsBasedTrigger' => ['properties' => [
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'PushSettings' => [
+                'properties' => [
+                    'isPushEnabled' => ['type' => 'boolean'],
+                    'tagWhitelistJson' => ['type' => 'string'],
+                    'tagsRequiringAuth' => ['type' => 'string'],
+                    'dynamicTagsJson' => ['type' => 'string']
                 ],
-                'timeInterval' => ['type' => 'string']
-            ]],
-            'StatusCodesBasedTrigger' => ['properties' => [
-                'status' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => ['isPushEnabled']
+            ],
+            'IpSecurityRestriction' => [
+                'properties' => [
+                    'ipAddress' => ['type' => 'string'],
+                    'subnetMask' => ['type' => 'string']
                 ],
-                'subStatus' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'win32Status' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'timeInterval' => ['type' => 'string']
-            ]],
-            'SlowRequestsBasedTrigger' => ['properties' => [
-                'timeTaken' => ['type' => 'string'],
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'timeInterval' => ['type' => 'string']
-            ]],
-            'AutoHealTriggers' => ['properties' => [
-                'requests' => ['$ref' => '#/definitions/RequestsBasedTrigger'],
-                'privateBytesInKB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'statusCodes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/StatusCodesBasedTrigger']
-                ],
-                'slowRequests' => ['$ref' => '#/definitions/SlowRequestsBasedTrigger']
-            ]],
-            'AutoHealRules' => ['properties' => [
-                'triggers' => ['$ref' => '#/definitions/AutoHealTriggers'],
-                'actions' => ['$ref' => '#/definitions/AutoHealActions']
-            ]],
-            'CloningInfo' => ['properties' => [
-                'correlationId' => ['type' => 'string'],
-                'overwrite' => ['type' => 'boolean'],
-                'cloneCustomHostNames' => ['type' => 'boolean'],
-                'cloneSourceControl' => ['type' => 'boolean'],
-                'sourceWebAppId' => ['type' => 'string'],
-                'hostingEnvironment' => ['type' => 'string'],
-                'appSettingsOverrides' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'configureLoadBalancing' => ['type' => 'boolean'],
-                'trafficManagerProfileId' => ['type' => 'string'],
-                'trafficManagerProfileName' => ['type' => 'string'],
-                'ignoreQuotas' => ['type' => 'boolean']
-            ]],
-            'ConnStringInfo' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'connectionString' => ['type' => 'string'],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'MySql',
-                        'SQLServer',
-                        'SQLAzure',
-                        'Custom',
-                        'NotificationHub',
-                        'ServiceBus',
-                        'EventHub',
-                        'ApiHub',
-                        'DocDb',
-                        'RedisCache',
-                        'PostgreSQL'
+                'required' => ['ipAddress']
+            ],
+            'SiteConfig' => [
+                'properties' => [
+                    'numberOfWorkers' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'defaultDocuments' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'netFrameworkVersion' => ['type' => 'string'],
+                    'phpVersion' => ['type' => 'string'],
+                    'pythonVersion' => ['type' => 'string'],
+                    'nodeVersion' => ['type' => 'string'],
+                    'linuxFxVersion' => ['type' => 'string'],
+                    'requestTracingEnabled' => ['type' => 'boolean'],
+                    'requestTracingExpirationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'remoteDebuggingEnabled' => ['type' => 'boolean'],
+                    'remoteDebuggingVersion' => ['type' => 'string'],
+                    'httpLoggingEnabled' => ['type' => 'boolean'],
+                    'logsDirectorySizeLimit' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'detailedErrorLoggingEnabled' => ['type' => 'boolean'],
+                    'publishingUsername' => ['type' => 'string'],
+                    'appSettings' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NameValuePair']
+                    ],
+                    'connectionStrings' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ConnStringInfo']
+                    ],
+                    'machineKey' => ['$ref' => '#/definitions/SiteMachineKey'],
+                    'handlerMappings' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HandlerMapping']
+                    ],
+                    'documentRoot' => ['type' => 'string'],
+                    'scmType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Dropbox',
+                            'Tfs',
+                            'LocalGit',
+                            'GitHub',
+                            'CodePlexGit',
+                            'CodePlexHg',
+                            'BitbucketGit',
+                            'BitbucketHg',
+                            'ExternalGit',
+                            'ExternalHg',
+                            'OneDrive',
+                            'VSO'
+                        ]
+                    ],
+                    'use32BitWorkerProcess' => ['type' => 'boolean'],
+                    'webSocketsEnabled' => ['type' => 'boolean'],
+                    'alwaysOn' => ['type' => 'boolean'],
+                    'javaVersion' => ['type' => 'string'],
+                    'javaContainer' => ['type' => 'string'],
+                    'javaContainerVersion' => ['type' => 'string'],
+                    'appCommandLine' => ['type' => 'string'],
+                    'managedPipelineMode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Integrated',
+                            'Classic'
+                        ]
+                    ],
+                    'virtualApplications' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualApplication']
+                    ],
+                    'loadBalancing' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'WeightedRoundRobin',
+                            'LeastRequests',
+                            'LeastResponseTime',
+                            'WeightedTotalTraffic',
+                            'RequestHash'
+                        ]
+                    ],
+                    'experiments' => ['$ref' => '#/definitions/Experiments'],
+                    'limits' => ['$ref' => '#/definitions/SiteLimits'],
+                    'autoHealEnabled' => ['type' => 'boolean'],
+                    'autoHealRules' => ['$ref' => '#/definitions/AutoHealRules'],
+                    'tracingOptions' => ['type' => 'string'],
+                    'vnetName' => ['type' => 'string'],
+                    'cors' => ['$ref' => '#/definitions/CorsSettings'],
+                    'push' => ['$ref' => '#/definitions/PushSettings'],
+                    'apiDefinition' => ['$ref' => '#/definitions/ApiDefinitionInfo'],
+                    'autoSwapSlotName' => ['type' => 'string'],
+                    'localMySqlEnabled' => ['type' => 'boolean'],
+                    'ipSecurityRestrictions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/IpSecurityRestriction']
                     ]
+                ],
+                'required' => []
+            ],
+            'SlotSwapStatus' => [
+                'properties' => [
+                    'timestampUtc' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'sourceSlotName' => ['type' => 'string'],
+                    'destinationSlotName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DeletedSite_properties' => [
+                'properties' => [
+                    'deletedTimestamp' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'state' => ['type' => 'string'],
+                    'hostNames' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'repositorySiteName' => ['type' => 'string'],
+                    'usageState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Normal',
+                            'Exceeded'
+                        ]
+                    ],
+                    'enabled' => ['type' => 'boolean'],
+                    'enabledHostNames' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'availabilityState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Normal',
+                            'Limited',
+                            'DisasterRecoveryMode'
+                        ]
+                    ],
+                    'hostNameSslStates' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HostNameSslState']
+                    ],
+                    'serverFarmId' => ['type' => 'string'],
+                    'reserved' => ['type' => 'boolean'],
+                    'lastModifiedTimeUtc' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'siteConfig' => ['$ref' => '#/definitions/SiteConfig'],
+                    'trafficManagerHostNames' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'premiumAppDeployed' => ['type' => 'boolean'],
+                    'scmSiteAlsoStopped' => ['type' => 'boolean'],
+                    'targetSwapSlot' => ['type' => 'string'],
+                    'hostingEnvironmentProfile' => ['$ref' => '#/definitions/HostingEnvironmentProfile'],
+                    'microService' => ['type' => 'string'],
+                    'gatewaySiteName' => ['type' => 'string'],
+                    'clientAffinityEnabled' => ['type' => 'boolean'],
+                    'clientCertEnabled' => ['type' => 'boolean'],
+                    'hostNamesDisabled' => ['type' => 'boolean'],
+                    'outboundIpAddresses' => ['type' => 'string'],
+                    'containerSize' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'dailyMemoryTimeQuota' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'suspendedTill' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'maxNumberOfWorkers' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'cloningInfo' => ['$ref' => '#/definitions/CloningInfo'],
+                    'resourceGroup' => ['type' => 'string'],
+                    'isDefaultContainer' => ['type' => 'boolean'],
+                    'defaultHostName' => ['type' => 'string'],
+                    'slotSwapStatus' => ['$ref' => '#/definitions/SlotSwapStatus']
+                ],
+                'required' => []
+            ],
+            'DeletedSite' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/DeletedSite_properties']],
+                'required' => []
+            ],
+            'DeletedWebAppCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DeletedSite']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'Recommendation' => [
+                'properties' => [
+                    'creationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'recommendationId' => ['type' => 'string'],
+                    'resourceId' => ['type' => 'string'],
+                    'resourceScope' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'ServerFarm',
+                            'Subscription',
+                            'WebSite'
+                        ]
+                    ],
+                    'ruleName' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'level' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Critical',
+                            'Warning',
+                            'Information',
+                            'NonUrgentSuggestion'
+                        ]
+                    ],
+                    'channels' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Notification',
+                            'Api',
+                            'Email',
+                            'Webhook',
+                            'All'
+                        ]
+                    ],
+                    'tags' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'actionName' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'nextNotificationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'notificationExpirationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'notifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'score' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'isDynamic' => ['type' => 'boolean'],
+                    'extensionName' => ['type' => 'string'],
+                    'bladeName' => ['type' => 'string'],
+                    'forwardLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RecommendationRule' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'recommendationId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'description' => ['type' => 'string'],
+                    'actionName' => ['type' => 'string'],
+                    'level' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Critical',
+                            'Warning',
+                            'Information',
+                            'NonUrgentSuggestion'
+                        ]
+                    ],
+                    'channels' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Notification',
+                            'Api',
+                            'Email',
+                            'Webhook',
+                            'All'
+                        ]
+                    ],
+                    'tags' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'isDynamic' => ['type' => 'boolean'],
+                    'extensionName' => ['type' => 'string'],
+                    'bladeName' => ['type' => 'string'],
+                    'forwardLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Capability' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => ['type' => 'string'],
+                    'reason' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CsmMoveResourceEnvelope' => [
+                'properties' => [
+                    'targetResourceGroup' => ['type' => 'string'],
+                    'resources' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'GeoRegion_properties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'GeoRegion' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/GeoRegion_properties']],
+                'required' => []
+            ],
+            'GeoRegionCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/GeoRegion']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'SkuCapacity' => [
+                'properties' => [
+                    'minimum' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'maximum' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'default' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'scaleType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'GlobalCsmSkuDescription' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'tier' => ['type' => 'string'],
+                    'capacity' => ['$ref' => '#/definitions/SkuCapacity'],
+                    'locations' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'capabilities' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Capability']
+                    ]
+                ],
+                'required' => []
+            ],
+            'PremierAddOnOffer_properties' => [
+                'properties' => [
+                    'sku' => ['type' => 'string'],
+                    'product' => ['type' => 'string'],
+                    'vendor' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'promoCodeRequired' => ['type' => 'boolean'],
+                    'quota' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'webHostingPlanRestrictions' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Free',
+                            'Shared',
+                            'Basic',
+                            'Standard',
+                            'Premium'
+                        ]
+                    ],
+                    'privacyPolicyUrl' => ['type' => 'string'],
+                    'legalTermsUrl' => ['type' => 'string'],
+                    'marketplacePublisher' => ['type' => 'string'],
+                    'marketplaceOffer' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PremierAddOnOffer' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PremierAddOnOffer_properties']],
+                'required' => []
+            ],
+            'PremierAddOnOfferCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PremierAddOnOffer']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'ResourceNameAvailability' => [
+                'properties' => [
+                    'nameAvailable' => ['type' => 'boolean'],
+                    'reason' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'AlreadyExists'
+                        ]
+                    ],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResourceNameAvailabilityRequest' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Site',
+                            'Slot',
+                            'HostingEnvironment'
+                        ]
+                    ],
+                    'isFqdn' => ['type' => 'boolean']
+                ],
+                'required' => [
+                    'name',
+                    'type'
                 ]
-            ]],
-            'CorsSettings' => ['properties' => ['allowedOrigins' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'HostNameSslState' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'sslState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Disabled',
-                        'SniEnabled',
-                        'IpBasedEnabled'
+            ],
+            'SkuInfos' => [
+                'properties' => [
+                    'resourceType' => ['type' => 'string'],
+                    'skus' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/GlobalCsmSkuDescription']
                     ]
                 ],
-                'virtualIP' => ['type' => 'string'],
-                'thumbprint' => ['type' => 'string'],
-                'toUpdate' => ['type' => 'boolean'],
-                'hostType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Standard',
-                        'Repository'
+                'required' => []
+            ],
+            'SourceControl_properties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'token' => ['type' => 'string'],
+                    'tokenSecret' => ['type' => 'string'],
+                    'refreshToken' => ['type' => 'string'],
+                    'expirationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
+                ],
+                'required' => []
+            ],
+            'SourceControl' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SourceControl_properties']],
+                'required' => []
+            ],
+            'SourceControlCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SourceControl']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'User_properties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'publishingUserName' => ['type' => 'string'],
+                    'publishingPassword' => ['type' => 'string'],
+                    'publishingPasswordHash' => ['type' => 'string'],
+                    'publishingPasswordHashSalt' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'User' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/User_properties']],
+                'required' => []
+            ],
+            'ValidateProperties' => [
+                'properties' => [
+                    'serverFarmId' => ['type' => 'string'],
+                    'skuName' => ['type' => 'string'],
+                    'needLinuxWorkers' => ['type' => 'boolean'],
+                    'capacity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'hostingEnvironment' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ValidateRequest' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'ServerFarm',
+                            'Site'
+                        ]
+                    ],
+                    'location' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ValidateProperties']
+                ],
+                'required' => [
+                    'name',
+                    'type',
+                    'location',
+                    'properties'
                 ]
-            ]],
-            'NameValuePair' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'SiteMachineKey' => ['properties' => [
-                'validation' => ['type' => 'string'],
-                'validationKey' => ['type' => 'string'],
-                'decryption' => ['type' => 'string'],
-                'decryptionKey' => ['type' => 'string']
-            ]],
-            'HandlerMapping' => ['properties' => [
-                'extension' => ['type' => 'string'],
-                'scriptProcessor' => ['type' => 'string'],
-                'arguments' => ['type' => 'string']
-            ]],
-            'VirtualDirectory' => ['properties' => [
-                'virtualPath' => ['type' => 'string'],
-                'physicalPath' => ['type' => 'string']
-            ]],
-            'VirtualApplication' => ['properties' => [
-                'virtualPath' => ['type' => 'string'],
-                'physicalPath' => ['type' => 'string'],
-                'preloadEnabled' => ['type' => 'boolean'],
-                'virtualDirectories' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualDirectory']
-                ]
-            ]],
-            'RampUpRule' => ['properties' => [
-                'actionHostName' => ['type' => 'string'],
-                'reroutePercentage' => [
-                    'type' => 'number',
-                    'format' => 'double'
+            ],
+            'ValidateResponseError' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
                 ],
-                'changeStep' => [
-                    'type' => 'number',
-                    'format' => 'double'
+                'required' => []
+            ],
+            'ValidateResponse' => [
+                'properties' => [
+                    'status' => ['type' => 'string'],
+                    'error' => ['$ref' => '#/definitions/ValidateResponseError']
                 ],
-                'changeIntervalInMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'minReroutePercentage' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'maxReroutePercentage' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'changeDecisionCallbackUrl' => ['type' => 'string'],
-                'name' => ['type' => 'string']
-            ]],
-            'Experiments' => ['properties' => ['rampUpRules' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/RampUpRule']
-            ]]],
-            'SiteLimits' => ['properties' => [
-                'maxPercentageCpu' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'maxMemoryInMb' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'maxDiskSizeInMb' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ]
-            ]],
-            'PushSettings' => ['properties' => [
-                'isPushEnabled' => ['type' => 'boolean'],
-                'tagWhitelistJson' => ['type' => 'string'],
-                'tagsRequiringAuth' => ['type' => 'string'],
-                'dynamicTagsJson' => ['type' => 'string']
-            ]],
-            'IpSecurityRestriction' => ['properties' => [
-                'ipAddress' => ['type' => 'string'],
-                'subnetMask' => ['type' => 'string']
-            ]],
-            'SiteConfig' => ['properties' => [
-                'numberOfWorkers' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'defaultDocuments' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'netFrameworkVersion' => ['type' => 'string'],
-                'phpVersion' => ['type' => 'string'],
-                'pythonVersion' => ['type' => 'string'],
-                'nodeVersion' => ['type' => 'string'],
-                'linuxFxVersion' => ['type' => 'string'],
-                'requestTracingEnabled' => ['type' => 'boolean'],
-                'requestTracingExpirationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'remoteDebuggingEnabled' => ['type' => 'boolean'],
-                'remoteDebuggingVersion' => ['type' => 'string'],
-                'httpLoggingEnabled' => ['type' => 'boolean'],
-                'logsDirectorySizeLimit' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'detailedErrorLoggingEnabled' => ['type' => 'boolean'],
-                'publishingUsername' => ['type' => 'string'],
-                'appSettings' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NameValuePair']
-                ],
-                'connectionStrings' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ConnStringInfo']
-                ],
-                'machineKey' => ['$ref' => '#/definitions/SiteMachineKey'],
-                'handlerMappings' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HandlerMapping']
-                ],
-                'documentRoot' => ['type' => 'string'],
-                'scmType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Dropbox',
-                        'Tfs',
-                        'LocalGit',
-                        'GitHub',
-                        'CodePlexGit',
-                        'CodePlexHg',
-                        'BitbucketGit',
-                        'BitbucketHg',
-                        'ExternalGit',
-                        'ExternalHg',
-                        'OneDrive',
-                        'VSO'
-                    ]
-                ],
-                'use32BitWorkerProcess' => ['type' => 'boolean'],
-                'webSocketsEnabled' => ['type' => 'boolean'],
-                'alwaysOn' => ['type' => 'boolean'],
-                'javaVersion' => ['type' => 'string'],
-                'javaContainer' => ['type' => 'string'],
-                'javaContainerVersion' => ['type' => 'string'],
-                'appCommandLine' => ['type' => 'string'],
-                'managedPipelineMode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Integrated',
-                        'Classic'
-                    ]
-                ],
-                'virtualApplications' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualApplication']
-                ],
-                'loadBalancing' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'WeightedRoundRobin',
-                        'LeastRequests',
-                        'LeastResponseTime',
-                        'WeightedTotalTraffic',
-                        'RequestHash'
-                    ]
-                ],
-                'experiments' => ['$ref' => '#/definitions/Experiments'],
-                'limits' => ['$ref' => '#/definitions/SiteLimits'],
-                'autoHealEnabled' => ['type' => 'boolean'],
-                'autoHealRules' => ['$ref' => '#/definitions/AutoHealRules'],
-                'tracingOptions' => ['type' => 'string'],
-                'vnetName' => ['type' => 'string'],
-                'cors' => ['$ref' => '#/definitions/CorsSettings'],
-                'push' => ['$ref' => '#/definitions/PushSettings'],
-                'apiDefinition' => ['$ref' => '#/definitions/ApiDefinitionInfo'],
-                'autoSwapSlotName' => ['type' => 'string'],
-                'localMySqlEnabled' => ['type' => 'boolean'],
-                'ipSecurityRestrictions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/IpSecurityRestriction']
-                ]
-            ]],
-            'SlotSwapStatus' => ['properties' => [
-                'timestampUtc' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'sourceSlotName' => ['type' => 'string'],
-                'destinationSlotName' => ['type' => 'string']
-            ]],
-            'DeletedSite_properties' => ['properties' => [
-                'deletedTimestamp' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'state' => ['type' => 'string'],
-                'hostNames' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'repositorySiteName' => ['type' => 'string'],
-                'usageState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Normal',
-                        'Exceeded'
-                    ]
-                ],
-                'enabled' => ['type' => 'boolean'],
-                'enabledHostNames' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'availabilityState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Normal',
-                        'Limited',
-                        'DisasterRecoveryMode'
-                    ]
-                ],
-                'hostNameSslStates' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HostNameSslState']
-                ],
-                'serverFarmId' => ['type' => 'string'],
-                'reserved' => ['type' => 'boolean'],
-                'lastModifiedTimeUtc' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'siteConfig' => ['$ref' => '#/definitions/SiteConfig'],
-                'trafficManagerHostNames' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'premiumAppDeployed' => ['type' => 'boolean'],
-                'scmSiteAlsoStopped' => ['type' => 'boolean'],
-                'targetSwapSlot' => ['type' => 'string'],
-                'hostingEnvironmentProfile' => ['$ref' => '#/definitions/HostingEnvironmentProfile'],
-                'microService' => ['type' => 'string'],
-                'gatewaySiteName' => ['type' => 'string'],
-                'clientAffinityEnabled' => ['type' => 'boolean'],
-                'clientCertEnabled' => ['type' => 'boolean'],
-                'hostNamesDisabled' => ['type' => 'boolean'],
-                'outboundIpAddresses' => ['type' => 'string'],
-                'containerSize' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'dailyMemoryTimeQuota' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'suspendedTill' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'maxNumberOfWorkers' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'cloningInfo' => ['$ref' => '#/definitions/CloningInfo'],
-                'resourceGroup' => ['type' => 'string'],
-                'isDefaultContainer' => ['type' => 'boolean'],
-                'defaultHostName' => ['type' => 'string'],
-                'slotSwapStatus' => ['$ref' => '#/definitions/SlotSwapStatus']
-            ]],
-            'DeletedSite' => ['properties' => ['properties' => ['$ref' => '#/definitions/DeletedSite_properties']]],
-            'DeletedWebAppCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DeletedSite']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Recommendation' => ['properties' => [
-                'creationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'recommendationId' => ['type' => 'string'],
-                'resourceId' => ['type' => 'string'],
-                'resourceScope' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'ServerFarm',
-                        'Subscription',
-                        'WebSite'
-                    ]
-                ],
-                'ruleName' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'level' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Critical',
-                        'Warning',
-                        'Information',
-                        'NonUrgentSuggestion'
-                    ]
-                ],
-                'channels' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Notification',
-                        'Api',
-                        'Email',
-                        'Webhook',
-                        'All'
-                    ]
-                ],
-                'tags' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'actionName' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'nextNotificationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'notificationExpirationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'notifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'score' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'isDynamic' => ['type' => 'boolean'],
-                'extensionName' => ['type' => 'string'],
-                'bladeName' => ['type' => 'string'],
-                'forwardLink' => ['type' => 'string']
-            ]],
-            'RecommendationRule' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'recommendationId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'description' => ['type' => 'string'],
-                'actionName' => ['type' => 'string'],
-                'level' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Critical',
-                        'Warning',
-                        'Information',
-                        'NonUrgentSuggestion'
-                    ]
-                ],
-                'channels' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Notification',
-                        'Api',
-                        'Email',
-                        'Webhook',
-                        'All'
-                    ]
-                ],
-                'tags' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'isDynamic' => ['type' => 'boolean'],
-                'extensionName' => ['type' => 'string'],
-                'bladeName' => ['type' => 'string'],
-                'forwardLink' => ['type' => 'string']
-            ]],
-            'Capability' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => ['type' => 'string'],
-                'reason' => ['type' => 'string']
-            ]],
-            'CsmMoveResourceEnvelope' => ['properties' => [
-                'targetResourceGroup' => ['type' => 'string'],
-                'resources' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'GeoRegion_properties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'displayName' => ['type' => 'string']
-            ]],
-            'GeoRegion' => ['properties' => ['properties' => ['$ref' => '#/definitions/GeoRegion_properties']]],
-            'GeoRegionCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/GeoRegion']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'SkuCapacity' => ['properties' => [
-                'minimum' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'maximum' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'default' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'scaleType' => ['type' => 'string']
-            ]],
-            'GlobalCsmSkuDescription' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'tier' => ['type' => 'string'],
-                'capacity' => ['$ref' => '#/definitions/SkuCapacity'],
-                'locations' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'capabilities' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Capability']
-                ]
-            ]],
-            'PremierAddOnOffer_properties' => ['properties' => [
-                'sku' => ['type' => 'string'],
-                'product' => ['type' => 'string'],
-                'vendor' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'promoCodeRequired' => ['type' => 'boolean'],
-                'quota' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'webHostingPlanRestrictions' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Free',
-                        'Shared',
-                        'Basic',
-                        'Standard',
-                        'Premium'
-                    ]
-                ],
-                'privacyPolicyUrl' => ['type' => 'string'],
-                'legalTermsUrl' => ['type' => 'string'],
-                'marketplacePublisher' => ['type' => 'string'],
-                'marketplaceOffer' => ['type' => 'string']
-            ]],
-            'PremierAddOnOffer' => ['properties' => ['properties' => ['$ref' => '#/definitions/PremierAddOnOffer_properties']]],
-            'PremierAddOnOfferCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PremierAddOnOffer']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResourceNameAvailability' => ['properties' => [
-                'nameAvailable' => ['type' => 'boolean'],
-                'reason' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'AlreadyExists'
-                    ]
-                ],
-                'message' => ['type' => 'string']
-            ]],
-            'ResourceNameAvailabilityRequest' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Site',
-                        'Slot',
-                        'HostingEnvironment'
-                    ]
-                ],
-                'isFqdn' => ['type' => 'boolean']
-            ]],
-            'SkuInfos' => ['properties' => [
-                'resourceType' => ['type' => 'string'],
-                'skus' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/GlobalCsmSkuDescription']
-                ]
-            ]],
-            'SourceControl_properties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'token' => ['type' => 'string'],
-                'tokenSecret' => ['type' => 'string'],
-                'refreshToken' => ['type' => 'string'],
-                'expirationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'SourceControl' => ['properties' => ['properties' => ['$ref' => '#/definitions/SourceControl_properties']]],
-            'SourceControlCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SourceControl']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'User_properties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'publishingUserName' => ['type' => 'string'],
-                'publishingPassword' => ['type' => 'string'],
-                'publishingPasswordHash' => ['type' => 'string'],
-                'publishingPasswordHashSalt' => ['type' => 'string']
-            ]],
-            'User' => ['properties' => ['properties' => ['$ref' => '#/definitions/User_properties']]],
-            'ValidateProperties' => ['properties' => [
-                'serverFarmId' => ['type' => 'string'],
-                'skuName' => ['type' => 'string'],
-                'needLinuxWorkers' => ['type' => 'boolean'],
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'hostingEnvironment' => ['type' => 'string']
-            ]],
-            'ValidateRequest' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'ServerFarm',
-                        'Site'
-                    ]
-                ],
-                'location' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ValidateProperties']
-            ]],
-            'ValidateResponseError' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'ValidateResponse' => ['properties' => [
-                'status' => ['type' => 'string'],
-                'error' => ['$ref' => '#/definitions/ValidateResponseError']
-            ]],
-            'FileSystemApplicationLogsConfig' => ['properties' => ['level' => [
-                'type' => 'string',
-                'enum' => [
-                    'Off',
-                    'Verbose',
-                    'Information',
-                    'Warning',
-                    'Error'
-                ]
-            ]]],
-            'AzureTableStorageApplicationLogsConfig' => ['properties' => [
-                'level' => [
+                'required' => []
+            ],
+            'FileSystemApplicationLogsConfig' => [
+                'properties' => ['level' => [
                     'type' => 'string',
                     'enum' => [
                         'Off',
@@ -15164,1448 +15459,1918 @@ final class WebSiteManagementClient
                         'Warning',
                         'Error'
                     ]
+                ]],
+                'required' => []
+            ],
+            'AzureTableStorageApplicationLogsConfig' => [
+                'properties' => [
+                    'level' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Off',
+                            'Verbose',
+                            'Information',
+                            'Warning',
+                            'Error'
+                        ]
+                    ],
+                    'sasUrl' => ['type' => 'string']
                 ],
-                'sasUrl' => ['type' => 'string']
-            ]],
-            'AzureBlobStorageApplicationLogsConfig' => ['properties' => [
-                'level' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Off',
-                        'Verbose',
-                        'Information',
-                        'Warning',
-                        'Error'
+                'required' => ['sasUrl']
+            ],
+            'AzureBlobStorageApplicationLogsConfig' => [
+                'properties' => [
+                    'level' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Off',
+                            'Verbose',
+                            'Information',
+                            'Warning',
+                            'Error'
+                        ]
+                    ],
+                    'sasUrl' => ['type' => 'string'],
+                    'retentionInDays' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'sasUrl' => ['type' => 'string'],
-                'retentionInDays' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'ApplicationLogsConfig' => [
+                'properties' => [
+                    'fileSystem' => ['$ref' => '#/definitions/FileSystemApplicationLogsConfig'],
+                    'azureTableStorage' => ['$ref' => '#/definitions/AzureTableStorageApplicationLogsConfig'],
+                    'azureBlobStorage' => ['$ref' => '#/definitions/AzureBlobStorageApplicationLogsConfig']
+                ],
+                'required' => []
+            ],
+            'AzureBlobStorageHttpLogsConfig' => [
+                'properties' => [
+                    'sasUrl' => ['type' => 'string'],
+                    'retentionInDays' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'enabled' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'DatabaseBackupSetting' => [
+                'properties' => [
+                    'databaseType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'SqlAzure',
+                            'MySql',
+                            'LocalMySql',
+                            'PostgreSql'
+                        ]
+                    ],
+                    'name' => ['type' => 'string'],
+                    'connectionStringName' => ['type' => 'string'],
+                    'connectionString' => ['type' => 'string']
+                ],
+                'required' => ['databaseType']
+            ],
+            'BackupItem_properties' => [
+                'properties' => [
+                    'id' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'storageAccountUrl' => ['type' => 'string'],
+                    'blobName' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'InProgress',
+                            'Failed',
+                            'Succeeded',
+                            'TimedOut',
+                            'Created',
+                            'Skipped',
+                            'PartiallySucceeded',
+                            'DeleteInProgress',
+                            'DeleteFailed',
+                            'Deleted'
+                        ]
+                    ],
+                    'sizeInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'created' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'log' => ['type' => 'string'],
+                    'databases' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DatabaseBackupSetting']
+                    ],
+                    'scheduled' => ['type' => 'boolean'],
+                    'lastRestoreTimeStamp' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'finishedTimeStamp' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'correlationId' => ['type' => 'string'],
+                    'websiteSizeInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ]
+                ],
+                'required' => []
+            ],
+            'BackupItem' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BackupItem_properties']],
+                'required' => []
+            ],
+            'BackupItemCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/BackupItem']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'BackupSchedule' => [
+                'properties' => [
+                    'frequencyInterval' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'frequencyUnit' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Day',
+                            'Hour'
+                        ]
+                    ],
+                    'keepAtLeastOneBackup' => ['type' => 'boolean'],
+                    'retentionPeriodInDays' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastExecutionTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => [
+                    'frequencyInterval',
+                    'frequencyUnit',
+                    'keepAtLeastOneBackup',
+                    'retentionPeriodInDays'
                 ]
-            ]],
-            'ApplicationLogsConfig' => ['properties' => [
-                'fileSystem' => ['$ref' => '#/definitions/FileSystemApplicationLogsConfig'],
-                'azureTableStorage' => ['$ref' => '#/definitions/AzureTableStorageApplicationLogsConfig'],
-                'azureBlobStorage' => ['$ref' => '#/definitions/AzureBlobStorageApplicationLogsConfig']
-            ]],
-            'AzureBlobStorageHttpLogsConfig' => ['properties' => [
-                'sasUrl' => ['type' => 'string'],
-                'retentionInDays' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'enabled' => ['type' => 'boolean']
-            ]],
-            'DatabaseBackupSetting' => ['properties' => [
-                'databaseType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'SqlAzure',
-                        'MySql',
-                        'LocalMySql',
-                        'PostgreSql'
+            ],
+            'BackupRequest_properties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'enabled' => ['type' => 'boolean'],
+                    'storageAccountUrl' => ['type' => 'string'],
+                    'backupSchedule' => ['$ref' => '#/definitions/BackupSchedule'],
+                    'databases' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DatabaseBackupSetting']
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Default',
+                            'Clone',
+                            'Relocation',
+                            'Snapshot'
+                        ]
                     ]
                 ],
-                'name' => ['type' => 'string'],
-                'connectionStringName' => ['type' => 'string'],
-                'connectionString' => ['type' => 'string']
-            ]],
-            'BackupItem_properties' => ['properties' => [
-                'id' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'storageAccountUrl' => ['type' => 'string'],
-                'blobName' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'InProgress',
-                        'Failed',
-                        'Succeeded',
-                        'TimedOut',
-                        'Created',
-                        'Skipped',
-                        'PartiallySucceeded',
-                        'DeleteInProgress',
-                        'DeleteFailed',
-                        'Deleted'
+                'required' => []
+            ],
+            'BackupRequest' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BackupRequest_properties']],
+                'required' => []
+            ],
+            'ConnStringValueTypePair' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'MySql',
+                            'SQLServer',
+                            'SQLAzure',
+                            'Custom',
+                            'NotificationHub',
+                            'ServiceBus',
+                            'EventHub',
+                            'ApiHub',
+                            'DocDb',
+                            'RedisCache',
+                            'PostgreSQL'
+                        ]
                     ]
                 ],
-                'sizeInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'created' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'log' => ['type' => 'string'],
-                'databases' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DatabaseBackupSetting']
-                ],
-                'scheduled' => ['type' => 'boolean'],
-                'lastRestoreTimeStamp' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'finishedTimeStamp' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'correlationId' => ['type' => 'string'],
-                'websiteSizeInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => [
+                    'value',
+                    'type'
                 ]
-            ]],
-            'BackupItem' => ['properties' => ['properties' => ['$ref' => '#/definitions/BackupItem_properties']]],
-            'BackupItemCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/BackupItem']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'BackupSchedule' => ['properties' => [
-                'frequencyInterval' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'frequencyUnit' => [
+            ],
+            'ConnectionStringDictionary' => [
+                'properties' => ['properties' => [
+                    'type' => 'object',
+                    'additionalProperties' => ['$ref' => '#/definitions/ConnStringValueTypePair']
+                ]],
+                'required' => []
+            ],
+            'CsmPublishingProfileOptions' => [
+                'properties' => ['format' => [
                     'type' => 'string',
                     'enum' => [
-                        'Day',
-                        'Hour'
+                        'FileZilla3',
+                        'WebDeploy',
+                        'Ftp'
                     ]
+                ]],
+                'required' => []
+            ],
+            'CsmSlotEntity' => [
+                'properties' => [
+                    'targetSlot' => ['type' => 'string'],
+                    'preserveVnet' => ['type' => 'boolean']
                 ],
-                'keepAtLeastOneBackup' => ['type' => 'boolean'],
-                'retentionPeriodInDays' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastExecutionTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => [
+                    'targetSlot',
+                    'preserveVnet'
                 ]
-            ]],
-            'BackupRequest_properties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'enabled' => ['type' => 'boolean'],
-                'storageAccountUrl' => ['type' => 'string'],
-                'backupSchedule' => ['$ref' => '#/definitions/BackupSchedule'],
-                'databases' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DatabaseBackupSetting']
+            ],
+            'LocalizableString' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'localizedValue' => ['type' => 'string']
                 ],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Default',
-                        'Clone',
-                        'Relocation',
-                        'Snapshot'
+                'required' => []
+            ],
+            'CsmUsageQuota' => [
+                'properties' => [
+                    'unit' => ['type' => 'string'],
+                    'nextResetTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'currentValue' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'limit' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'name' => ['$ref' => '#/definitions/LocalizableString']
+                ],
+                'required' => []
+            ],
+            'CsmUsageQuotaCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CsmUsageQuota']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'ErrorEntity' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'extendedCode' => ['type' => 'string'],
+                    'messageTemplate' => ['type' => 'string'],
+                    'parameters' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'innerErrors' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ErrorEntity']
                     ]
-                ]
-            ]],
-            'BackupRequest' => ['properties' => ['properties' => ['$ref' => '#/definitions/BackupRequest_properties']]],
-            'ConnStringValueTypePair' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'MySql',
-                        'SQLServer',
-                        'SQLAzure',
-                        'Custom',
-                        'NotificationHub',
-                        'ServiceBus',
-                        'EventHub',
-                        'ApiHub',
-                        'DocDb',
-                        'RedisCache',
-                        'PostgreSQL'
+                ],
+                'required' => []
+            ],
+            'CustomHostnameAnalysisResult_properties' => [
+                'properties' => [
+                    'isHostnameAlreadyVerified' => ['type' => 'boolean'],
+                    'customDomainVerificationTest' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Passed',
+                            'Failed',
+                            'Skipped'
+                        ]
+                    ],
+                    'customDomainVerificationFailureInfo' => ['$ref' => '#/definitions/ErrorEntity'],
+                    'hasConflictOnScaleUnit' => ['type' => 'boolean'],
+                    'hasConflictAcrossSubscription' => ['type' => 'boolean'],
+                    'conflictingAppResourceId' => ['type' => 'string'],
+                    'cNameRecords' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'txtRecords' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'aRecords' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'alternateCNameRecords' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'alternateTxtRecords' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
                     ]
-                ]
-            ]],
-            'ConnectionStringDictionary' => ['properties' => ['properties' => [
-                'type' => 'object',
-                'additionalProperties' => ['$ref' => '#/definitions/ConnStringValueTypePair']
-            ]]],
-            'CsmPublishingProfileOptions' => ['properties' => ['format' => [
-                'type' => 'string',
-                'enum' => [
-                    'FileZilla3',
-                    'WebDeploy',
-                    'Ftp'
-                ]
-            ]]],
-            'CsmSlotEntity' => ['properties' => [
-                'targetSlot' => ['type' => 'string'],
-                'preserveVnet' => ['type' => 'boolean']
-            ]],
-            'LocalizableString' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'localizedValue' => ['type' => 'string']
-            ]],
-            'CsmUsageQuota' => ['properties' => [
-                'unit' => ['type' => 'string'],
-                'nextResetTime' => [
+                ],
+                'required' => []
+            ],
+            'CustomHostnameAnalysisResult' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/CustomHostnameAnalysisResult_properties']],
+                'required' => []
+            ],
+            'Deployment_properties' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'message' => ['type' => 'string'],
+                    'author' => ['type' => 'string'],
+                    'deployer' => ['type' => 'string'],
+                    'authorEmail' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'active' => ['type' => 'boolean'],
+                    'details' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Deployment' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Deployment_properties']],
+                'required' => []
+            ],
+            'DeploymentCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Deployment']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'EnabledConfig' => [
+                'properties' => ['enabled' => ['type' => 'boolean']],
+                'required' => []
+            ],
+            'FileSystemHttpLogsConfig' => [
+                'properties' => [
+                    'retentionInMb' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'retentionInDays' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'enabled' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'HostNameBinding_properties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'siteName' => ['type' => 'string'],
+                    'domainId' => ['type' => 'string'],
+                    'azureResourceName' => ['type' => 'string'],
+                    'azureResourceType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Website',
+                            'TrafficManager'
+                        ]
+                    ],
+                    'customHostNameDnsRecordType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'CName',
+                            'A'
+                        ]
+                    ],
+                    'hostNameType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Verified',
+                            'Managed'
+                        ]
+                    ],
+                    'sslState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Disabled',
+                            'SniEnabled',
+                            'IpBasedEnabled'
+                        ]
+                    ],
+                    'thumbprint' => ['type' => 'string'],
+                    'virtualIP' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HostNameBinding' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/HostNameBinding_properties']],
+                'required' => []
+            ],
+            'HostNameBindingCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HostNameBinding']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'HttpLogsConfig' => [
+                'properties' => [
+                    'fileSystem' => ['$ref' => '#/definitions/FileSystemHttpLogsConfig'],
+                    'azureBlobStorage' => ['$ref' => '#/definitions/AzureBlobStorageHttpLogsConfig']
+                ],
+                'required' => []
+            ],
+            'HybridConnection_properties' => [
+                'properties' => [
+                    'serviceBusNamespace' => ['type' => 'string'],
+                    'relayName' => ['type' => 'string'],
+                    'relayArmUri' => ['type' => 'string'],
+                    'hostname' => ['type' => 'string'],
+                    'port' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'sendKeyName' => ['type' => 'string'],
+                    'sendKeyValue' => ['type' => 'string'],
+                    'serviceBusSuffix' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HybridConnection' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/HybridConnection_properties']],
+                'required' => []
+            ],
+            'HybridConnectionKey_properties' => [
+                'properties' => [
+                    'sendKeyName' => ['type' => 'string'],
+                    'sendKeyValue' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HybridConnectionKey' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/HybridConnectionKey_properties']],
+                'required' => []
+            ],
+            'Identifier_properties' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => []
+            ],
+            'Identifier' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Identifier_properties']],
+                'required' => []
+            ],
+            'IdentifierCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Identifier']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'MSDeployParameterEntry' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MSDeployCore' => [
+                'properties' => [
+                    'packageUri' => ['type' => 'string'],
+                    'connectionString' => ['type' => 'string'],
+                    'dbType' => ['type' => 'string'],
+                    'setParametersXmlFileUri' => ['type' => 'string'],
+                    'setParameters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MSDeployParameterEntry']
+                    ],
+                    'skipAppData' => ['type' => 'boolean'],
+                    'appOffline' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'MSDeploy' => [
+                'properties' => [
+                    'addOnPackages' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MSDeployCore']
+                    ],
+                    'packageUri' => ['type' => 'string'],
+                    'connectionString' => ['type' => 'string'],
+                    'dbType' => ['type' => 'string'],
+                    'setParametersXmlFileUri' => ['type' => 'string'],
+                    'setParameters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MSDeployParameterEntry']
+                    ],
+                    'skipAppData' => ['type' => 'boolean'],
+                    'appOffline' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'MSDeployLogEntry' => [
+                'properties' => [
+                    'time' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Message',
+                            'Warning',
+                            'Error'
+                        ]
+                    ],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MSDeployLog' => [
+                'properties' => ['entries' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/MSDeployLogEntry']
+                ]],
+                'required' => []
+            ],
+            'MSDeployStatus_properties' => [
+                'properties' => [
+                    'deployer' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'accepted',
+                            'running',
+                            'succeeded',
+                            'failed',
+                            'canceled'
+                        ]
+                    ],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'complete' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'MSDeployStatus' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/MSDeployStatus_properties']],
+                'required' => []
+            ],
+            'MigrateMySqlRequest_properties' => [
+                'properties' => [
+                    'connectionString' => ['type' => 'string'],
+                    'migrationType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'LocalToRemote',
+                            'RemoteToLocal'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'MigrateMySqlRequest' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/MigrateMySqlRequest_properties']],
+                'required' => []
+            ],
+            'MigrateMySqlStatus_properties' => [
+                'properties' => [
+                    'migrationOperationStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'InProgress',
+                            'Failed',
+                            'Succeeded',
+                            'TimedOut',
+                            'Created'
+                        ]
+                    ],
+                    'operationId' => ['type' => 'string'],
+                    'localMySqlEnabled' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'MigrateMySqlStatus' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/MigrateMySqlStatus_properties']],
+                'required' => []
+            ],
+            'VnetRoute_properties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'startAddress' => ['type' => 'string'],
+                    'endAddress' => ['type' => 'string'],
+                    'routeType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'DEFAULT',
+                            'INHERITED',
+                            'STATIC'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'VnetRoute' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/VnetRoute_properties']],
+                'required' => []
+            ],
+            'VnetInfo' => [
+                'properties' => [
+                    'vnetResourceId' => ['type' => 'string'],
+                    'certThumbprint' => ['type' => 'string'],
+                    'certBlob' => ['type' => 'string'],
+                    'routes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VnetRoute']
+                    ],
+                    'resyncRequired' => ['type' => 'boolean'],
+                    'dnsServers' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RelayServiceConnectionEntity_properties' => [
+                'properties' => [
+                    'entityName' => ['type' => 'string'],
+                    'entityConnectionString' => ['type' => 'string'],
+                    'resourceType' => ['type' => 'string'],
+                    'resourceConnectionString' => ['type' => 'string'],
+                    'hostname' => ['type' => 'string'],
+                    'port' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'biztalkUri' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RelayServiceConnectionEntity' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RelayServiceConnectionEntity_properties']],
+                'required' => []
+            ],
+            'NetworkFeatures_properties' => [
+                'properties' => [
+                    'virtualNetworkName' => ['type' => 'string'],
+                    'virtualNetworkConnection' => ['$ref' => '#/definitions/VnetInfo'],
+                    'hybridConnections' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RelayServiceConnectionEntity']
+                    ],
+                    'hybridConnectionsV2' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HybridConnection']
+                    ]
+                ],
+                'required' => []
+            ],
+            'NetworkFeatures' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/NetworkFeatures_properties']],
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'InProgress',
+                            'Failed',
+                            'Succeeded',
+                            'TimedOut',
+                            'Created'
+                        ]
+                    ],
+                    'errors' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ErrorEntity']
+                    ],
+                    'createdTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'modifiedTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'expirationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'geoMasterOperationId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PerfMonSample' => [
+                'properties' => [
+                    'time' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'instanceName' => ['type' => 'string'],
+                    'value' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'coreCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'PerfMonSet' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'timeGrain' => ['type' => 'string'],
+                    'values' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PerfMonSample']
+                    ]
+                ],
+                'required' => []
+            ],
+            'PerfMonResponse' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'data' => ['$ref' => '#/definitions/PerfMonSet']
+                ],
+                'required' => []
+            ],
+            'PerfMonCounterCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PerfMonResponse']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'PremierAddOn_properties' => [
+                'properties' => [
+                    'sku' => ['type' => 'string'],
+                    'product' => ['type' => 'string'],
+                    'vendor' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'marketplacePublisher' => ['type' => 'string'],
+                    'marketplaceOffer' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PremierAddOn' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PremierAddOn_properties']],
+                'required' => []
+            ],
+            'PublicCertificate_properties' => [
+                'properties' => [
+                    'blob' => ['type' => 'string'],
+                    'publicCertificateLocation' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'CurrentUserMy',
+                            'LocalMachineMy',
+                            'Unknown'
+                        ]
+                    ],
+                    'thumbprint' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PublicCertificate' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PublicCertificate_properties']],
+                'required' => []
+            ],
+            'PublicCertificateCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PublicCertificate']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'RecoverResponse_properties' => [
+                'properties' => ['operationId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'RecoverResponse' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RecoverResponse_properties']],
+                'required' => []
+            ],
+            'ResourceMetricName' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'localizedValue' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResourceMetricProperty' => [
+                'properties' => [
+                    'key' => ['type' => 'string'],
+                    'value' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResourceMetricValue' => [
+                'properties' => [
+                    'timestamp' => ['type' => 'string'],
+                    'average' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'minimum' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'maximum' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'total' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'count' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'properties' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceMetricProperty']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ResourceMetric' => [
+                'properties' => [
+                    'name' => ['$ref' => '#/definitions/ResourceMetricName'],
+                    'unit' => ['type' => 'string'],
+                    'timeGrain' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'resourceId' => ['type' => 'string'],
+                    'id' => ['type' => 'string'],
+                    'metricValues' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceMetricValue']
+                    ],
+                    'properties' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceMetricProperty']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ResourceMetricAvailability' => [
+                'properties' => [
+                    'timeGrain' => ['type' => 'string'],
+                    'retention' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResourceMetricCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceMetric']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'ResourceMetricDefinition_properties' => [
+                'properties' => [
+                    'name' => ['$ref' => '#/definitions/ResourceMetricName'],
+                    'unit' => ['type' => 'string'],
+                    'primaryAggregationType' => ['type' => 'string'],
+                    'metricAvailabilities' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceMetricAvailability']
+                    ],
+                    'resourceUri' => ['type' => 'string'],
+                    'id' => ['type' => 'string'],
+                    'properties' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ResourceMetricDefinition' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ResourceMetricDefinition_properties']],
+                'required' => []
+            ],
+            'ResourceMetricDefinitionCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ResourceMetricDefinition']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'RestoreRequest_properties' => [
+                'properties' => [
+                    'storageAccountUrl' => ['type' => 'string'],
+                    'blobName' => ['type' => 'string'],
+                    'overwrite' => ['type' => 'boolean'],
+                    'siteName' => ['type' => 'string'],
+                    'databases' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DatabaseBackupSetting']
+                    ],
+                    'ignoreConflictingHostNames' => ['type' => 'boolean'],
+                    'ignoreDatabases' => ['type' => 'boolean'],
+                    'operationType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Default',
+                            'Clone',
+                            'Relocation',
+                            'Snapshot'
+                        ]
+                    ],
+                    'adjustConnectionStrings' => ['type' => 'boolean'],
+                    'hostingEnvironment' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RestoreRequest' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RestoreRequest_properties']],
+                'required' => []
+            ],
+            'RestoreResponse_properties' => [
+                'properties' => ['operationId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'RestoreResponse' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RestoreResponse_properties']],
+                'required' => []
+            ],
+            'Site_properties' => [
+                'properties' => [
+                    'state' => ['type' => 'string'],
+                    'hostNames' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'repositorySiteName' => ['type' => 'string'],
+                    'usageState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Normal',
+                            'Exceeded'
+                        ]
+                    ],
+                    'enabled' => ['type' => 'boolean'],
+                    'enabledHostNames' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'availabilityState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Normal',
+                            'Limited',
+                            'DisasterRecoveryMode'
+                        ]
+                    ],
+                    'hostNameSslStates' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HostNameSslState']
+                    ],
+                    'serverFarmId' => ['type' => 'string'],
+                    'reserved' => ['type' => 'boolean'],
+                    'lastModifiedTimeUtc' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'siteConfig' => ['$ref' => '#/definitions/SiteConfig'],
+                    'trafficManagerHostNames' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'scmSiteAlsoStopped' => ['type' => 'boolean'],
+                    'targetSwapSlot' => ['type' => 'string'],
+                    'hostingEnvironmentProfile' => ['$ref' => '#/definitions/HostingEnvironmentProfile'],
+                    'clientAffinityEnabled' => ['type' => 'boolean'],
+                    'clientCertEnabled' => ['type' => 'boolean'],
+                    'hostNamesDisabled' => ['type' => 'boolean'],
+                    'outboundIpAddresses' => ['type' => 'string'],
+                    'containerSize' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'dailyMemoryTimeQuota' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'suspendedTill' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'maxNumberOfWorkers' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'cloningInfo' => ['$ref' => '#/definitions/CloningInfo'],
+                    'resourceGroup' => ['type' => 'string'],
+                    'isDefaultContainer' => ['type' => 'boolean'],
+                    'defaultHostName' => ['type' => 'string'],
+                    'slotSwapStatus' => ['$ref' => '#/definitions/SlotSwapStatus'],
+                    'premiumAppDeployed' => ['type' => 'boolean'],
+                    'microService' => ['type' => 'string'],
+                    'gatewaySiteName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Site' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Site_properties']],
+                'required' => []
+            ],
+            'SiteAuthSettings_properties' => [
+                'properties' => [
+                    'enabled' => ['type' => 'boolean'],
+                    'runtimeVersion' => ['type' => 'string'],
+                    'unauthenticatedClientAction' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'RedirectToLoginPage',
+                            'AllowAnonymous'
+                        ]
+                    ],
+                    'tokenStoreEnabled' => ['type' => 'boolean'],
+                    'allowedExternalRedirectUrls' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'defaultProvider' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'AzureActiveDirectory',
+                            'Facebook',
+                            'Google',
+                            'MicrosoftAccount',
+                            'Twitter'
+                        ]
+                    ],
+                    'tokenRefreshExtensionHours' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'clientId' => ['type' => 'string'],
+                    'clientSecret' => ['type' => 'string'],
+                    'issuer' => ['type' => 'string'],
+                    'allowedAudiences' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'additionalLoginParams' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'googleClientId' => ['type' => 'string'],
+                    'googleClientSecret' => ['type' => 'string'],
+                    'googleOAuthScopes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'facebookAppId' => ['type' => 'string'],
+                    'facebookAppSecret' => ['type' => 'string'],
+                    'facebookOAuthScopes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'twitterConsumerKey' => ['type' => 'string'],
+                    'twitterConsumerSecret' => ['type' => 'string'],
+                    'microsoftAccountClientId' => ['type' => 'string'],
+                    'microsoftAccountClientSecret' => ['type' => 'string'],
+                    'microsoftAccountOAuthScopes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'SiteAuthSettings' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SiteAuthSettings_properties']],
+                'required' => []
+            ],
+            'SiteCloneabilityCriterion' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SiteCloneability' => [
+                'properties' => [
+                    'result' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Cloneable',
+                            'PartiallyCloneable',
+                            'NotCloneable'
+                        ]
+                    ],
+                    'blockingFeatures' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SiteCloneabilityCriterion']
+                    ],
+                    'unsupportedFeatures' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SiteCloneabilityCriterion']
+                    ],
+                    'blockingCharacteristics' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SiteCloneabilityCriterion']
+                    ]
+                ],
+                'required' => []
+            ],
+            'SiteConfigResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SiteConfig']],
+                'required' => []
+            ],
+            'SiteConfigResourceCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SiteConfigResource']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'SiteConfigurationSnapshotInfo_properties' => [
+                'properties' => [
+                    'time' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'id' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'SiteConfigurationSnapshotInfo' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SiteConfigurationSnapshotInfo_properties']],
+                'required' => []
+            ],
+            'SiteInstance_properties' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'SiteInstance' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SiteInstance_properties']],
+                'required' => []
+            ],
+            'SiteLogsConfig_properties' => [
+                'properties' => [
+                    'applicationLogs' => ['$ref' => '#/definitions/ApplicationLogsConfig'],
+                    'httpLogs' => ['$ref' => '#/definitions/HttpLogsConfig'],
+                    'failedRequestsTracing' => ['$ref' => '#/definitions/EnabledConfig'],
+                    'detailedErrorMessages' => ['$ref' => '#/definitions/EnabledConfig']
+                ],
+                'required' => []
+            ],
+            'SiteLogsConfig' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SiteLogsConfig_properties']],
+                'required' => []
+            ],
+            'SitePhpErrorLogFlag_properties' => [
+                'properties' => [
+                    'localLogErrors' => ['type' => 'string'],
+                    'masterLogErrors' => ['type' => 'string'],
+                    'localLogErrorsMaxLength' => ['type' => 'string'],
+                    'masterLogErrorsMaxLength' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SitePhpErrorLogFlag' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SitePhpErrorLogFlag_properties']],
+                'required' => []
+            ],
+            'SiteSourceControl_properties' => [
+                'properties' => [
+                    'repoUrl' => ['type' => 'string'],
+                    'branch' => ['type' => 'string'],
+                    'isManualIntegration' => ['type' => 'boolean'],
+                    'deploymentRollbackEnabled' => ['type' => 'boolean'],
+                    'isMercurial' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'SiteSourceControl' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SiteSourceControl_properties']],
+                'required' => []
+            ],
+            'SlotConfigNames' => [
+                'properties' => [
+                    'connectionStringNames' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'appSettingNames' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'SlotConfigNamesResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SlotConfigNames']],
+                'required' => []
+            ],
+            'SlotDifference_properties' => [
+                'properties' => [
+                    'type' => ['type' => 'string'],
+                    'settingType' => ['type' => 'string'],
+                    'diffRule' => ['type' => 'string'],
+                    'settingName' => ['type' => 'string'],
+                    'valueInCurrentSlot' => ['type' => 'string'],
+                    'valueInTargetSlot' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SlotDifference' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SlotDifference_properties']],
+                'required' => []
+            ],
+            'SlotDifferenceCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SlotDifference']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'Snapshot_properties' => [
+                'properties' => ['time' => [
                     'type' => 'string',
                     'format' => 'date-time'
+                ]],
+                'required' => []
+            ],
+            'Snapshot' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Snapshot_properties']],
+                'required' => []
+            ],
+            'SnapshotCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Snapshot']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'currentValue' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => ['value']
+            ],
+            'SnapshotRecoveryTarget' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'id' => ['type' => 'string']
                 ],
-                'limit' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'SnapshotRecoveryRequest_properties' => [
+                'properties' => [
+                    'snapshotTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'recoveryTarget' => ['$ref' => '#/definitions/SnapshotRecoveryTarget'],
+                    'overwrite' => ['type' => 'boolean'],
+                    'recoverConfiguration' => ['type' => 'boolean']
                 ],
-                'name' => ['$ref' => '#/definitions/LocalizableString']
-            ]],
-            'CsmUsageQuotaCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CsmUsageQuota']
+                'required' => []
+            ],
+            'SnapshotRecoveryRequest' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SnapshotRecoveryRequest_properties']],
+                'required' => []
+            ],
+            'StorageMigrationOptions_properties' => [
+                'properties' => [
+                    'azurefilesConnectionString' => ['type' => 'string'],
+                    'azurefilesShare' => ['type' => 'string'],
+                    'switchSiteAfterMigration' => ['type' => 'boolean'],
+                    'blockWriteAccessToSite' => ['type' => 'boolean']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ErrorEntity' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'extendedCode' => ['type' => 'string'],
-                'messageTemplate' => ['type' => 'string'],
-                'parameters' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'innerErrors' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ErrorEntity']
-                ]
-            ]],
-            'CustomHostnameAnalysisResult_properties' => ['properties' => [
-                'isHostnameAlreadyVerified' => ['type' => 'boolean'],
-                'customDomainVerificationTest' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Passed',
-                        'Failed',
-                        'Skipped'
-                    ]
-                ],
-                'customDomainVerificationFailureInfo' => ['$ref' => '#/definitions/ErrorEntity'],
-                'hasConflictOnScaleUnit' => ['type' => 'boolean'],
-                'hasConflictAcrossSubscription' => ['type' => 'boolean'],
-                'conflictingAppResourceId' => ['type' => 'string'],
-                'cNameRecords' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'txtRecords' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'aRecords' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'alternateCNameRecords' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'alternateTxtRecords' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'CustomHostnameAnalysisResult' => ['properties' => ['properties' => ['$ref' => '#/definitions/CustomHostnameAnalysisResult_properties']]],
-            'Deployment_properties' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'message' => ['type' => 'string'],
-                'author' => ['type' => 'string'],
-                'deployer' => ['type' => 'string'],
-                'authorEmail' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'active' => ['type' => 'boolean'],
-                'details' => ['type' => 'string']
-            ]],
-            'Deployment' => ['properties' => ['properties' => ['$ref' => '#/definitions/Deployment_properties']]],
-            'DeploymentCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Deployment']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'EnabledConfig' => ['properties' => ['enabled' => ['type' => 'boolean']]],
-            'FileSystemHttpLogsConfig' => ['properties' => [
-                'retentionInMb' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'retentionInDays' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'enabled' => ['type' => 'boolean']
-            ]],
-            'HostNameBinding_properties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'siteName' => ['type' => 'string'],
-                'domainId' => ['type' => 'string'],
-                'azureResourceName' => ['type' => 'string'],
-                'azureResourceType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Website',
-                        'TrafficManager'
-                    ]
-                ],
-                'customHostNameDnsRecordType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'CName',
-                        'A'
-                    ]
-                ],
-                'hostNameType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Verified',
-                        'Managed'
-                    ]
-                ],
-                'sslState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Disabled',
-                        'SniEnabled',
-                        'IpBasedEnabled'
-                    ]
-                ],
-                'thumbprint' => ['type' => 'string'],
-                'virtualIP' => ['type' => 'string']
-            ]],
-            'HostNameBinding' => ['properties' => ['properties' => ['$ref' => '#/definitions/HostNameBinding_properties']]],
-            'HostNameBindingCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HostNameBinding']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'HttpLogsConfig' => ['properties' => [
-                'fileSystem' => ['$ref' => '#/definitions/FileSystemHttpLogsConfig'],
-                'azureBlobStorage' => ['$ref' => '#/definitions/AzureBlobStorageHttpLogsConfig']
-            ]],
-            'HybridConnection_properties' => ['properties' => [
-                'serviceBusNamespace' => ['type' => 'string'],
-                'relayName' => ['type' => 'string'],
-                'relayArmUri' => ['type' => 'string'],
-                'hostname' => ['type' => 'string'],
-                'port' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'sendKeyName' => ['type' => 'string'],
-                'sendKeyValue' => ['type' => 'string'],
-                'serviceBusSuffix' => ['type' => 'string']
-            ]],
-            'HybridConnection' => ['properties' => ['properties' => ['$ref' => '#/definitions/HybridConnection_properties']]],
-            'HybridConnectionKey_properties' => ['properties' => [
-                'sendKeyName' => ['type' => 'string'],
-                'sendKeyValue' => ['type' => 'string']
-            ]],
-            'HybridConnectionKey' => ['properties' => ['properties' => ['$ref' => '#/definitions/HybridConnectionKey_properties']]],
-            'Identifier_properties' => ['properties' => ['id' => ['type' => 'string']]],
-            'Identifier' => ['properties' => ['properties' => ['$ref' => '#/definitions/Identifier_properties']]],
-            'IdentifierCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Identifier']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'MSDeployParameterEntry' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'MSDeployCore' => ['properties' => [
-                'packageUri' => ['type' => 'string'],
-                'connectionString' => ['type' => 'string'],
-                'dbType' => ['type' => 'string'],
-                'setParametersXmlFileUri' => ['type' => 'string'],
-                'setParameters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MSDeployParameterEntry']
-                ],
-                'skipAppData' => ['type' => 'boolean'],
-                'appOffline' => ['type' => 'boolean']
-            ]],
-            'MSDeploy' => ['properties' => [
-                'addOnPackages' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MSDeployCore']
-                ],
-                'packageUri' => ['type' => 'string'],
-                'connectionString' => ['type' => 'string'],
-                'dbType' => ['type' => 'string'],
-                'setParametersXmlFileUri' => ['type' => 'string'],
-                'setParameters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MSDeployParameterEntry']
-                ],
-                'skipAppData' => ['type' => 'boolean'],
-                'appOffline' => ['type' => 'boolean']
-            ]],
-            'MSDeployLogEntry' => ['properties' => [
-                'time' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Message',
-                        'Warning',
-                        'Error'
-                    ]
-                ],
-                'message' => ['type' => 'string']
-            ]],
-            'MSDeployLog' => ['properties' => ['entries' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/MSDeployLogEntry']
-            ]]],
-            'MSDeployStatus_properties' => ['properties' => [
-                'deployer' => ['type' => 'string'],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'accepted',
-                        'running',
-                        'succeeded',
-                        'failed',
-                        'canceled'
-                    ]
-                ],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'complete' => ['type' => 'boolean']
-            ]],
-            'MSDeployStatus' => ['properties' => ['properties' => ['$ref' => '#/definitions/MSDeployStatus_properties']]],
-            'MigrateMySqlRequest_properties' => ['properties' => [
-                'connectionString' => ['type' => 'string'],
-                'migrationType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'LocalToRemote',
-                        'RemoteToLocal'
-                    ]
-                ]
-            ]],
-            'MigrateMySqlRequest' => ['properties' => ['properties' => ['$ref' => '#/definitions/MigrateMySqlRequest_properties']]],
-            'MigrateMySqlStatus_properties' => ['properties' => [
-                'migrationOperationStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'InProgress',
-                        'Failed',
-                        'Succeeded',
-                        'TimedOut',
-                        'Created'
-                    ]
-                ],
-                'operationId' => ['type' => 'string'],
-                'localMySqlEnabled' => ['type' => 'boolean']
-            ]],
-            'MigrateMySqlStatus' => ['properties' => ['properties' => ['$ref' => '#/definitions/MigrateMySqlStatus_properties']]],
-            'VnetRoute_properties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'startAddress' => ['type' => 'string'],
-                'endAddress' => ['type' => 'string'],
-                'routeType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'DEFAULT',
-                        'INHERITED',
-                        'STATIC'
-                    ]
-                ]
-            ]],
-            'VnetRoute' => ['properties' => ['properties' => ['$ref' => '#/definitions/VnetRoute_properties']]],
-            'VnetInfo' => ['properties' => [
-                'vnetResourceId' => ['type' => 'string'],
-                'certThumbprint' => ['type' => 'string'],
-                'certBlob' => ['type' => 'string'],
-                'routes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VnetRoute']
-                ],
-                'resyncRequired' => ['type' => 'boolean'],
-                'dnsServers' => ['type' => 'string']
-            ]],
-            'RelayServiceConnectionEntity_properties' => ['properties' => [
-                'entityName' => ['type' => 'string'],
-                'entityConnectionString' => ['type' => 'string'],
-                'resourceType' => ['type' => 'string'],
-                'resourceConnectionString' => ['type' => 'string'],
-                'hostname' => ['type' => 'string'],
-                'port' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'biztalkUri' => ['type' => 'string']
-            ]],
-            'RelayServiceConnectionEntity' => ['properties' => ['properties' => ['$ref' => '#/definitions/RelayServiceConnectionEntity_properties']]],
-            'NetworkFeatures_properties' => ['properties' => [
-                'virtualNetworkName' => ['type' => 'string'],
-                'virtualNetworkConnection' => ['$ref' => '#/definitions/VnetInfo'],
-                'hybridConnections' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RelayServiceConnectionEntity']
-                ],
-                'hybridConnectionsV2' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HybridConnection']
-                ]
-            ]],
-            'NetworkFeatures' => ['properties' => ['properties' => ['$ref' => '#/definitions/NetworkFeatures_properties']]],
-            'Operation' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'InProgress',
-                        'Failed',
-                        'Succeeded',
-                        'TimedOut',
-                        'Created'
-                    ]
-                ],
-                'errors' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ErrorEntity']
-                ],
-                'createdTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'modifiedTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'expirationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'geoMasterOperationId' => ['type' => 'string']
-            ]],
-            'PerfMonSample' => ['properties' => [
-                'time' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'instanceName' => ['type' => 'string'],
-                'value' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'coreCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'PerfMonSet' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'timeGrain' => ['type' => 'string'],
-                'values' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PerfMonSample']
-                ]
-            ]],
-            'PerfMonResponse' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'data' => ['$ref' => '#/definitions/PerfMonSet']
-            ]],
-            'PerfMonCounterCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PerfMonResponse']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'PremierAddOn_properties' => ['properties' => [
-                'sku' => ['type' => 'string'],
-                'product' => ['type' => 'string'],
-                'vendor' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
+                'required' => []
+            ],
+            'StorageMigrationOptions' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/StorageMigrationOptions_properties']],
+                'required' => []
+            ],
+            'StorageMigrationResponse_properties' => [
+                'properties' => ['operationId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'StorageMigrationResponse' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/StorageMigrationResponse_properties']],
+                'required' => []
+            ],
+            'StringDictionary' => [
+                'properties' => ['properties' => [
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
-                ],
-                'marketplacePublisher' => ['type' => 'string'],
-                'marketplaceOffer' => ['type' => 'string']
-            ]],
-            'PremierAddOn' => ['properties' => ['properties' => ['$ref' => '#/definitions/PremierAddOn_properties']]],
-            'PublicCertificate_properties' => ['properties' => [
-                'blob' => ['type' => 'string'],
-                'publicCertificateLocation' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'CurrentUserMy',
-                        'LocalMachineMy',
-                        'Unknown'
-                    ]
-                ],
-                'thumbprint' => ['type' => 'string']
-            ]],
-            'PublicCertificate' => ['properties' => ['properties' => ['$ref' => '#/definitions/PublicCertificate_properties']]],
-            'PublicCertificateCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PublicCertificate']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RecoverResponse_properties' => ['properties' => ['operationId' => ['type' => 'string']]],
-            'RecoverResponse' => ['properties' => ['properties' => ['$ref' => '#/definitions/RecoverResponse_properties']]],
-            'ResourceMetricName' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'localizedValue' => ['type' => 'string']
-            ]],
-            'ResourceMetricProperty' => ['properties' => [
-                'key' => ['type' => 'string'],
-                'value' => ['type' => 'string']
-            ]],
-            'ResourceMetricValue' => ['properties' => [
-                'timestamp' => ['type' => 'string'],
-                'average' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'minimum' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'maximum' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'total' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'count' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
+                ]],
+                'required' => []
+            ],
+            'VnetGateway_properties' => [
                 'properties' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceMetricProperty']
-                ]
-            ]],
-            'ResourceMetric' => ['properties' => [
-                'name' => ['$ref' => '#/definitions/ResourceMetricName'],
-                'unit' => ['type' => 'string'],
-                'timeGrain' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                    'vnetName' => ['type' => 'string'],
+                    'vpnPackageUri' => ['type' => 'string']
                 ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'resourceId' => ['type' => 'string'],
-                'id' => ['type' => 'string'],
-                'metricValues' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceMetricValue']
-                ],
+                'required' => []
+            ],
+            'VnetGateway' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/VnetGateway_properties']],
+                'required' => []
+            ],
+            'WebAppCollection' => [
                 'properties' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceMetricProperty']
-                ]
-            ]],
-            'ResourceMetricAvailability' => ['properties' => [
-                'timeGrain' => ['type' => 'string'],
-                'retention' => ['type' => 'string']
-            ]],
-            'ResourceMetricCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceMetric']
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Site']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResourceMetricDefinition_properties' => ['properties' => [
-                'name' => ['$ref' => '#/definitions/ResourceMetricName'],
-                'unit' => ['type' => 'string'],
-                'primaryAggregationType' => ['type' => 'string'],
-                'metricAvailabilities' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceMetricAvailability']
-                ],
-                'resourceUri' => ['type' => 'string'],
-                'id' => ['type' => 'string'],
+                'required' => ['value']
+            ],
+            'WebAppInstanceCollection' => [
                 'properties' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SiteInstance']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'VirtualIPMapping' => [
+                'properties' => [
+                    'virtualIP' => ['type' => 'string'],
+                    'internalHttpPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'internalHttpsPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'inUse' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'AddressResponse' => [
+                'properties' => [
+                    'serviceIpAddress' => ['type' => 'string'],
+                    'internalIpAddress' => ['type' => 'string'],
+                    'outboundIpAddresses' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'vipMappings' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualIPMapping']
+                    ]
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkProfile' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'subnet' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'WorkerPool' => [
+                'properties' => [
+                    'workerSizeId' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'computeMode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Shared',
+                            'Dedicated',
+                            'Dynamic'
+                        ]
+                    ],
+                    'workerSize' => ['type' => 'string'],
+                    'workerCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'instanceNames' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'StampCapacity' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'availableCapacity' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'totalCapacity' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'unit' => ['type' => 'string'],
+                    'computeMode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Shared',
+                            'Dedicated',
+                            'Dynamic'
+                        ]
+                    ],
+                    'workerSize' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Default',
+                            'Small',
+                            'Medium',
+                            'Large'
+                        ]
+                    ],
+                    'workerSizeId' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'excludeFromCapacityAllocation' => ['type' => 'boolean'],
+                    'isApplicableForAllComputeModes' => ['type' => 'boolean'],
+                    'siteMode' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'NetworkAccessControlEntry' => [
+                'properties' => [
+                    'action' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Permit',
+                            'Deny'
+                        ]
+                    ],
+                    'description' => ['type' => 'string'],
+                    'order' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'remoteSubnet' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AppServiceEnvironment' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Succeeded',
+                            'Failed',
+                            'Canceled',
+                            'InProgress',
+                            'Deleting'
+                        ]
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Preparing',
+                            'Ready',
+                            'Scaling',
+                            'Deleting'
+                        ]
+                    ],
+                    'vnetName' => ['type' => 'string'],
+                    'vnetResourceGroupName' => ['type' => 'string'],
+                    'vnetSubnetName' => ['type' => 'string'],
+                    'virtualNetwork' => ['$ref' => '#/definitions/VirtualNetworkProfile'],
+                    'internalLoadBalancingMode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Web',
+                            'Publishing'
+                        ]
+                    ],
+                    'multiSize' => ['type' => 'string'],
+                    'multiRoleCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'workerPools' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/WorkerPool']
+                    ],
+                    'ipsslAddressCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'databaseEdition' => ['type' => 'string'],
+                    'databaseServiceObjective' => ['type' => 'string'],
+                    'upgradeDomains' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'subscriptionId' => ['type' => 'string'],
+                    'dnsSuffix' => ['type' => 'string'],
+                    'lastAction' => ['type' => 'string'],
+                    'lastActionResult' => ['type' => 'string'],
+                    'allowedMultiSizes' => ['type' => 'string'],
+                    'allowedWorkerSizes' => ['type' => 'string'],
+                    'maximumNumberOfMachines' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'vipMappings' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualIPMapping']
+                    ],
+                    'environmentCapacities' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/StampCapacity']
+                    ],
+                    'networkAccessControlList' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NetworkAccessControlEntry']
+                    ],
+                    'environmentIsHealthy' => ['type' => 'boolean'],
+                    'environmentStatus' => ['type' => 'string'],
+                    'resourceGroup' => ['type' => 'string'],
+                    'frontEndScaleFactor' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'defaultFrontEndScaleFactor' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'apiManagementAccountId' => ['type' => 'string'],
+                    'suspended' => ['type' => 'boolean'],
+                    'dynamicCacheEnabled' => ['type' => 'boolean'],
+                    'clusterSettings' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/NameValuePair']
+                    ]
+                ],
+                'required' => [
+                    'name',
+                    'location',
+                    'virtualNetwork',
+                    'workerPools'
                 ]
-            ]],
-            'ResourceMetricDefinition' => ['properties' => ['properties' => ['$ref' => '#/definitions/ResourceMetricDefinition_properties']]],
-            'ResourceMetricDefinitionCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ResourceMetricDefinition']
+            ],
+            'AppServiceEnvironmentCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AppServiceEnvironment']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'RestoreRequest_properties' => ['properties' => [
-                'storageAccountUrl' => ['type' => 'string'],
-                'blobName' => ['type' => 'string'],
-                'overwrite' => ['type' => 'boolean'],
-                'siteName' => ['type' => 'string'],
-                'databases' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DatabaseBackupSetting']
-                ],
-                'ignoreConflictingHostNames' => ['type' => 'boolean'],
-                'ignoreDatabases' => ['type' => 'boolean'],
-                'operationType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Default',
-                        'Clone',
-                        'Relocation',
-                        'Snapshot'
+                'required' => ['value']
+            ],
+            'AppServiceEnvironmentResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AppServiceEnvironment']],
+                'required' => []
+            ],
+            'AppServicePlan_properties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'workerTierName' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Ready',
+                            'Pending'
+                        ]
+                    ],
+                    'subscription' => ['type' => 'string'],
+                    'adminSiteName' => ['type' => 'string'],
+                    'hostingEnvironmentProfile' => ['$ref' => '#/definitions/HostingEnvironmentProfile'],
+                    'maximumNumberOfWorkers' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'geoRegion' => ['type' => 'string'],
+                    'perSiteScaling' => ['type' => 'boolean'],
+                    'numberOfSites' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'resourceGroup' => ['type' => 'string'],
+                    'reserved' => ['type' => 'boolean'],
+                    'targetWorkerCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'targetWorkerSizeId' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Succeeded',
+                            'Failed',
+                            'Canceled',
+                            'InProgress',
+                            'Deleting'
+                        ]
                     ]
                 ],
-                'adjustConnectionStrings' => ['type' => 'boolean'],
-                'hostingEnvironment' => ['type' => 'string']
-            ]],
-            'RestoreRequest' => ['properties' => ['properties' => ['$ref' => '#/definitions/RestoreRequest_properties']]],
-            'RestoreResponse_properties' => ['properties' => ['operationId' => ['type' => 'string']]],
-            'RestoreResponse' => ['properties' => ['properties' => ['$ref' => '#/definitions/RestoreResponse_properties']]],
-            'Site_properties' => ['properties' => [
-                'state' => ['type' => 'string'],
-                'hostNames' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'repositorySiteName' => ['type' => 'string'],
-                'usageState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Normal',
-                        'Exceeded'
+                'required' => []
+            ],
+            'SkuDescription' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'tier' => ['type' => 'string'],
+                    'size' => ['type' => 'string'],
+                    'family' => ['type' => 'string'],
+                    'capacity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'skuCapacity' => ['$ref' => '#/definitions/SkuCapacity'],
+                    'locations' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'capabilities' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Capability']
                     ]
                 ],
-                'enabled' => ['type' => 'boolean'],
-                'enabledHostNames' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'AppServicePlan' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/AppServicePlan_properties'],
+                    'sku' => ['$ref' => '#/definitions/SkuDescription']
                 ],
-                'availabilityState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Normal',
-                        'Limited',
-                        'DisasterRecoveryMode'
+                'required' => []
+            ],
+            'AppServicePlanCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AppServicePlan']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'HostingEnvironmentDiagnostics' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'diagnosicsOutput' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MetricAvailabilily' => [
+                'properties' => [
+                    'timeGrain' => ['type' => 'string'],
+                    'retention' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MetricDefinition_properties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'unit' => ['type' => 'string'],
+                    'primaryAggregationType' => ['type' => 'string'],
+                    'metricAvailabilities' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MetricAvailabilily']
+                    ],
+                    'displayName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MetricDefinition' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/MetricDefinition_properties']],
+                'required' => []
+            ],
+            'SkuInfo' => [
+                'properties' => [
+                    'resourceType' => ['type' => 'string'],
+                    'sku' => ['$ref' => '#/definitions/SkuDescription'],
+                    'capacity' => ['$ref' => '#/definitions/SkuCapacity']
+                ],
+                'required' => []
+            ],
+            'SkuInfoCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SkuInfo']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'StampCapacityCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/StampCapacity']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'Usage_properties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'resourceName' => ['type' => 'string'],
+                    'unit' => ['type' => 'string'],
+                    'currentValue' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'limit' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'nextResetTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'computeMode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Shared',
+                            'Dedicated',
+                            'Dynamic'
+                        ]
+                    ],
+                    'siteMode' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Usage' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Usage_properties']],
+                'required' => []
+            ],
+            'UsageCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Usage']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'WorkerPoolResource' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/WorkerPool'],
+                    'sku' => ['$ref' => '#/definitions/SkuDescription']
+                ],
+                'required' => []
+            ],
+            'WorkerPoolCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/WorkerPoolResource']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'HybridConnectionCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/HybridConnection']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'HybridConnectionLimits_properties' => [
+                'properties' => [
+                    'current' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'maximum' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'hostNameSslStates' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HostNameSslState']
-                ],
-                'serverFarmId' => ['type' => 'string'],
-                'reserved' => ['type' => 'boolean'],
-                'lastModifiedTimeUtc' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'siteConfig' => ['$ref' => '#/definitions/SiteConfig'],
-                'trafficManagerHostNames' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'scmSiteAlsoStopped' => ['type' => 'boolean'],
-                'targetSwapSlot' => ['type' => 'string'],
-                'hostingEnvironmentProfile' => ['$ref' => '#/definitions/HostingEnvironmentProfile'],
-                'clientAffinityEnabled' => ['type' => 'boolean'],
-                'clientCertEnabled' => ['type' => 'boolean'],
-                'hostNamesDisabled' => ['type' => 'boolean'],
-                'outboundIpAddresses' => ['type' => 'string'],
-                'containerSize' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'dailyMemoryTimeQuota' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'suspendedTill' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'maxNumberOfWorkers' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'cloningInfo' => ['$ref' => '#/definitions/CloningInfo'],
-                'resourceGroup' => ['type' => 'string'],
-                'isDefaultContainer' => ['type' => 'boolean'],
-                'defaultHostName' => ['type' => 'string'],
-                'slotSwapStatus' => ['$ref' => '#/definitions/SlotSwapStatus'],
-                'premiumAppDeployed' => ['type' => 'boolean'],
-                'microService' => ['type' => 'string'],
-                'gatewaySiteName' => ['type' => 'string']
-            ]],
-            'Site' => ['properties' => ['properties' => ['$ref' => '#/definitions/Site_properties']]],
-            'SiteAuthSettings_properties' => ['properties' => [
-                'enabled' => ['type' => 'boolean'],
-                'runtimeVersion' => ['type' => 'string'],
-                'unauthenticatedClientAction' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'RedirectToLoginPage',
-                        'AllowAnonymous'
-                    ]
-                ],
-                'tokenStoreEnabled' => ['type' => 'boolean'],
-                'allowedExternalRedirectUrls' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'defaultProvider' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'AzureActiveDirectory',
-                        'Facebook',
-                        'Google',
-                        'MicrosoftAccount',
-                        'Twitter'
-                    ]
-                ],
-                'tokenRefreshExtensionHours' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'clientId' => ['type' => 'string'],
-                'clientSecret' => ['type' => 'string'],
-                'issuer' => ['type' => 'string'],
-                'allowedAudiences' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'additionalLoginParams' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'googleClientId' => ['type' => 'string'],
-                'googleClientSecret' => ['type' => 'string'],
-                'googleOAuthScopes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'facebookAppId' => ['type' => 'string'],
-                'facebookAppSecret' => ['type' => 'string'],
-                'facebookOAuthScopes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'twitterConsumerKey' => ['type' => 'string'],
-                'twitterConsumerSecret' => ['type' => 'string'],
-                'microsoftAccountClientId' => ['type' => 'string'],
-                'microsoftAccountClientSecret' => ['type' => 'string'],
-                'microsoftAccountOAuthScopes' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'SiteAuthSettings' => ['properties' => ['properties' => ['$ref' => '#/definitions/SiteAuthSettings_properties']]],
-            'SiteCloneabilityCriterion' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'SiteCloneability' => ['properties' => [
-                'result' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Cloneable',
-                        'PartiallyCloneable',
-                        'NotCloneable'
-                    ]
-                ],
-                'blockingFeatures' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SiteCloneabilityCriterion']
-                ],
-                'unsupportedFeatures' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SiteCloneabilityCriterion']
-                ],
-                'blockingCharacteristics' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SiteCloneabilityCriterion']
-                ]
-            ]],
-            'SiteConfigResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/SiteConfig']]],
-            'SiteConfigResourceCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SiteConfigResource']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'SiteConfigurationSnapshotInfo_properties' => ['properties' => [
-                'time' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'id' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'SiteConfigurationSnapshotInfo' => ['properties' => ['properties' => ['$ref' => '#/definitions/SiteConfigurationSnapshotInfo_properties']]],
-            'SiteInstance_properties' => ['properties' => ['name' => ['type' => 'string']]],
-            'SiteInstance' => ['properties' => ['properties' => ['$ref' => '#/definitions/SiteInstance_properties']]],
-            'SiteLogsConfig_properties' => ['properties' => [
-                'applicationLogs' => ['$ref' => '#/definitions/ApplicationLogsConfig'],
-                'httpLogs' => ['$ref' => '#/definitions/HttpLogsConfig'],
-                'failedRequestsTracing' => ['$ref' => '#/definitions/EnabledConfig'],
-                'detailedErrorMessages' => ['$ref' => '#/definitions/EnabledConfig']
-            ]],
-            'SiteLogsConfig' => ['properties' => ['properties' => ['$ref' => '#/definitions/SiteLogsConfig_properties']]],
-            'SitePhpErrorLogFlag_properties' => ['properties' => [
-                'localLogErrors' => ['type' => 'string'],
-                'masterLogErrors' => ['type' => 'string'],
-                'localLogErrorsMaxLength' => ['type' => 'string'],
-                'masterLogErrorsMaxLength' => ['type' => 'string']
-            ]],
-            'SitePhpErrorLogFlag' => ['properties' => ['properties' => ['$ref' => '#/definitions/SitePhpErrorLogFlag_properties']]],
-            'SiteSourceControl_properties' => ['properties' => [
-                'repoUrl' => ['type' => 'string'],
-                'branch' => ['type' => 'string'],
-                'isManualIntegration' => ['type' => 'boolean'],
-                'deploymentRollbackEnabled' => ['type' => 'boolean'],
-                'isMercurial' => ['type' => 'boolean']
-            ]],
-            'SiteSourceControl' => ['properties' => ['properties' => ['$ref' => '#/definitions/SiteSourceControl_properties']]],
-            'SlotConfigNames' => ['properties' => [
-                'connectionStringNames' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'appSettingNames' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'SlotConfigNamesResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/SlotConfigNames']]],
-            'SlotDifference_properties' => ['properties' => [
-                'type' => ['type' => 'string'],
-                'settingType' => ['type' => 'string'],
-                'diffRule' => ['type' => 'string'],
-                'settingName' => ['type' => 'string'],
-                'valueInCurrentSlot' => ['type' => 'string'],
-                'valueInTargetSlot' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'SlotDifference' => ['properties' => ['properties' => ['$ref' => '#/definitions/SlotDifference_properties']]],
-            'SlotDifferenceCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SlotDifference']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Snapshot_properties' => ['properties' => ['time' => [
-                'type' => 'string',
-                'format' => 'date-time'
-            ]]],
-            'Snapshot' => ['properties' => ['properties' => ['$ref' => '#/definitions/Snapshot_properties']]],
-            'SnapshotCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Snapshot']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'SnapshotRecoveryTarget' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'id' => ['type' => 'string']
-            ]],
-            'SnapshotRecoveryRequest_properties' => ['properties' => [
-                'snapshotTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'recoveryTarget' => ['$ref' => '#/definitions/SnapshotRecoveryTarget'],
-                'overwrite' => ['type' => 'boolean'],
-                'recoverConfiguration' => ['type' => 'boolean']
-            ]],
-            'SnapshotRecoveryRequest' => ['properties' => ['properties' => ['$ref' => '#/definitions/SnapshotRecoveryRequest_properties']]],
-            'StorageMigrationOptions_properties' => ['properties' => [
-                'azurefilesConnectionString' => ['type' => 'string'],
-                'azurefilesShare' => ['type' => 'string'],
-                'switchSiteAfterMigration' => ['type' => 'boolean'],
-                'blockWriteAccessToSite' => ['type' => 'boolean']
-            ]],
-            'StorageMigrationOptions' => ['properties' => ['properties' => ['$ref' => '#/definitions/StorageMigrationOptions_properties']]],
-            'StorageMigrationResponse_properties' => ['properties' => ['operationId' => ['type' => 'string']]],
-            'StorageMigrationResponse' => ['properties' => ['properties' => ['$ref' => '#/definitions/StorageMigrationResponse_properties']]],
-            'StringDictionary' => ['properties' => ['properties' => [
-                'type' => 'object',
-                'additionalProperties' => ['type' => 'string']
-            ]]],
-            'VnetGateway_properties' => ['properties' => [
-                'vnetName' => ['type' => 'string'],
-                'vpnPackageUri' => ['type' => 'string']
-            ]],
-            'VnetGateway' => ['properties' => ['properties' => ['$ref' => '#/definitions/VnetGateway_properties']]],
-            'WebAppCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Site']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'WebAppInstanceCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SiteInstance']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'VirtualIPMapping' => ['properties' => [
-                'virtualIP' => ['type' => 'string'],
-                'internalHttpPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'internalHttpsPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'inUse' => ['type' => 'boolean']
-            ]],
-            'AddressResponse' => ['properties' => [
-                'serviceIpAddress' => ['type' => 'string'],
-                'internalIpAddress' => ['type' => 'string'],
-                'outboundIpAddresses' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'vipMappings' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualIPMapping']
-                ]
-            ]],
-            'VirtualNetworkProfile' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'subnet' => ['type' => 'string']
-            ]],
-            'WorkerPool' => ['properties' => [
-                'workerSizeId' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'computeMode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Shared',
-                        'Dedicated',
-                        'Dynamic'
-                    ]
-                ],
-                'workerSize' => ['type' => 'string'],
-                'workerCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'instanceNames' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'StampCapacity' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'availableCapacity' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'totalCapacity' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'unit' => ['type' => 'string'],
-                'computeMode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Shared',
-                        'Dedicated',
-                        'Dynamic'
-                    ]
-                ],
-                'workerSize' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Default',
-                        'Small',
-                        'Medium',
-                        'Large'
-                    ]
-                ],
-                'workerSizeId' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'excludeFromCapacityAllocation' => ['type' => 'boolean'],
-                'isApplicableForAllComputeModes' => ['type' => 'boolean'],
-                'siteMode' => ['type' => 'string']
-            ]],
-            'NetworkAccessControlEntry' => ['properties' => [
-                'action' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Permit',
-                        'Deny'
-                    ]
-                ],
-                'description' => ['type' => 'string'],
-                'order' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'remoteSubnet' => ['type' => 'string']
-            ]],
-            'AppServiceEnvironment' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Succeeded',
-                        'Failed',
-                        'Canceled',
-                        'InProgress',
-                        'Deleting'
-                    ]
-                ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Preparing',
-                        'Ready',
-                        'Scaling',
-                        'Deleting'
-                    ]
-                ],
-                'vnetName' => ['type' => 'string'],
-                'vnetResourceGroupName' => ['type' => 'string'],
-                'vnetSubnetName' => ['type' => 'string'],
-                'virtualNetwork' => ['$ref' => '#/definitions/VirtualNetworkProfile'],
-                'internalLoadBalancingMode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Web',
-                        'Publishing'
-                    ]
-                ],
-                'multiSize' => ['type' => 'string'],
-                'multiRoleCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'workerPools' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/WorkerPool']
-                ],
-                'ipsslAddressCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'databaseEdition' => ['type' => 'string'],
-                'databaseServiceObjective' => ['type' => 'string'],
-                'upgradeDomains' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'subscriptionId' => ['type' => 'string'],
-                'dnsSuffix' => ['type' => 'string'],
-                'lastAction' => ['type' => 'string'],
-                'lastActionResult' => ['type' => 'string'],
-                'allowedMultiSizes' => ['type' => 'string'],
-                'allowedWorkerSizes' => ['type' => 'string'],
-                'maximumNumberOfMachines' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'vipMappings' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualIPMapping']
-                ],
-                'environmentCapacities' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/StampCapacity']
-                ],
-                'networkAccessControlList' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NetworkAccessControlEntry']
-                ],
-                'environmentIsHealthy' => ['type' => 'boolean'],
-                'environmentStatus' => ['type' => 'string'],
-                'resourceGroup' => ['type' => 'string'],
-                'frontEndScaleFactor' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'defaultFrontEndScaleFactor' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'apiManagementAccountId' => ['type' => 'string'],
-                'suspended' => ['type' => 'boolean'],
-                'dynamicCacheEnabled' => ['type' => 'boolean'],
-                'clusterSettings' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/NameValuePair']
-                ]
-            ]],
-            'AppServiceEnvironmentCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AppServiceEnvironment']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'AppServiceEnvironmentResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/AppServiceEnvironment']]],
-            'AppServicePlan_properties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'workerTierName' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Ready',
-                        'Pending'
-                    ]
-                ],
-                'subscription' => ['type' => 'string'],
-                'adminSiteName' => ['type' => 'string'],
-                'hostingEnvironmentProfile' => ['$ref' => '#/definitions/HostingEnvironmentProfile'],
-                'maximumNumberOfWorkers' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'geoRegion' => ['type' => 'string'],
-                'perSiteScaling' => ['type' => 'boolean'],
-                'numberOfSites' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'resourceGroup' => ['type' => 'string'],
-                'reserved' => ['type' => 'boolean'],
-                'targetWorkerCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'targetWorkerSizeId' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Succeeded',
-                        'Failed',
-                        'Canceled',
-                        'InProgress',
-                        'Deleting'
-                    ]
-                ]
-            ]],
-            'SkuDescription' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'tier' => ['type' => 'string'],
-                'size' => ['type' => 'string'],
-                'family' => ['type' => 'string'],
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'skuCapacity' => ['$ref' => '#/definitions/SkuCapacity'],
-                'locations' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'capabilities' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Capability']
-                ]
-            ]],
-            'AppServicePlan' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/AppServicePlan_properties'],
-                'sku' => ['$ref' => '#/definitions/SkuDescription']
-            ]],
-            'AppServicePlanCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AppServicePlan']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'HostingEnvironmentDiagnostics' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'diagnosicsOutput' => ['type' => 'string']
-            ]],
-            'MetricAvailabilily' => ['properties' => [
-                'timeGrain' => ['type' => 'string'],
-                'retention' => ['type' => 'string']
-            ]],
-            'MetricDefinition_properties' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'unit' => ['type' => 'string'],
-                'primaryAggregationType' => ['type' => 'string'],
-                'metricAvailabilities' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MetricAvailabilily']
-                ],
-                'displayName' => ['type' => 'string']
-            ]],
-            'MetricDefinition' => ['properties' => ['properties' => ['$ref' => '#/definitions/MetricDefinition_properties']]],
-            'SkuInfo' => ['properties' => [
-                'resourceType' => ['type' => 'string'],
-                'sku' => ['$ref' => '#/definitions/SkuDescription'],
-                'capacity' => ['$ref' => '#/definitions/SkuCapacity']
-            ]],
-            'SkuInfoCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SkuInfo']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'StampCapacityCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/StampCapacity']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Usage_properties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'resourceName' => ['type' => 'string'],
-                'unit' => ['type' => 'string'],
-                'currentValue' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'limit' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'nextResetTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'computeMode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Shared',
-                        'Dedicated',
-                        'Dynamic'
-                    ]
-                ],
-                'siteMode' => ['type' => 'string']
-            ]],
-            'Usage' => ['properties' => ['properties' => ['$ref' => '#/definitions/Usage_properties']]],
-            'UsageCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Usage']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'WorkerPoolResource' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/WorkerPool'],
-                'sku' => ['$ref' => '#/definitions/SkuDescription']
-            ]],
-            'WorkerPoolCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/WorkerPoolResource']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'HybridConnectionCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/HybridConnection']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'HybridConnectionLimits_properties' => ['properties' => [
-                'current' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'maximum' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'HybridConnectionLimits' => ['properties' => ['properties' => ['$ref' => '#/definitions/HybridConnectionLimits_properties']]],
-            'ResourceCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]]
+                'required' => []
+            ],
+            'HybridConnectionLimits' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/HybridConnectionLimits_properties']],
+                'required' => []
+            ],
+            'ResourceCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ]
         ]
     ];
 }

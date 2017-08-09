@@ -1005,308 +1005,434 @@ final class HDInsightManagementClient
             ]]
         ],
         'definitions' => [
-            'HttpSettingsParameters' => ['properties' => [
-                'restAuthCredential.isEnabled' => ['type' => 'string'],
-                'restAuthCredential.username' => ['type' => 'string'],
-                'restAuthCredential.password' => ['type' => 'string']
-            ]],
-            'ClusterDefinition' => ['properties' => [
-                'blueprint' => ['type' => 'string'],
-                'kind' => ['type' => 'string'],
-                'componentVersion' => [
+            'HttpSettingsParameters' => [
+                'properties' => [
+                    'restAuthCredential.isEnabled' => ['type' => 'string'],
+                    'restAuthCredential.username' => ['type' => 'string'],
+                    'restAuthCredential.password' => ['type' => 'string']
+                ],
+                'required' => ['restAuthCredential.isEnabled']
+            ],
+            'ClusterDefinition' => [
+                'properties' => [
+                    'blueprint' => ['type' => 'string'],
+                    'kind' => ['type' => 'string'],
+                    'componentVersion' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'configurations' => ['type' => 'object']
+                ],
+                'required' => []
+            ],
+            'SecurityProfile' => [
+                'properties' => [
+                    'directoryType' => [
+                        'type' => 'string',
+                        'enum' => ['ActiveDirectory']
+                    ],
+                    'domain' => ['type' => 'string'],
+                    'organizationalUnitDN' => ['type' => 'string'],
+                    'ldapsUrls' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'domainUsername' => ['type' => 'string'],
+                    'domainUserPassword' => ['type' => 'string'],
+                    'clusterUsersGroupDNs' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'HardwareProfile' => [
+                'properties' => ['vmSize' => ['type' => 'string']],
+                'required' => []
+            ],
+            'VirtualNetworkProfile' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'subnet' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'RdpSettings' => [
+                'properties' => [
+                    'username' => ['type' => 'string'],
+                    'password' => ['type' => 'string'],
+                    'expiryDate' => [
+                        'type' => 'string',
+                        'format' => 'date'
+                    ]
+                ],
+                'required' => []
+            ],
+            'WindowsOperatingSystemProfile' => [
+                'properties' => ['rdpSettings' => ['$ref' => '#/definitions/RdpSettings']],
+                'required' => []
+            ],
+            'SshPublicKey' => [
+                'properties' => ['certificateData' => ['type' => 'string']],
+                'required' => []
+            ],
+            'SshProfile' => [
+                'properties' => ['publicKeys' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/SshPublicKey']
+                ]],
+                'required' => []
+            ],
+            'LinuxOperatingSystemProfile' => [
+                'properties' => [
+                    'username' => ['type' => 'string'],
+                    'password' => ['type' => 'string'],
+                    'sshProfile' => ['$ref' => '#/definitions/SshProfile']
+                ],
+                'required' => []
+            ],
+            'OsProfile' => [
+                'properties' => [
+                    'windowsOperatingSystemProfile' => ['$ref' => '#/definitions/WindowsOperatingSystemProfile'],
+                    'linuxOperatingSystemProfile' => ['$ref' => '#/definitions/LinuxOperatingSystemProfile']
+                ],
+                'required' => []
+            ],
+            'ScriptAction' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'uri' => ['type' => 'string'],
+                    'parameters' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'uri',
+                    'parameters'
+                ]
+            ],
+            'Role' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'minInstanceCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'targetInstanceCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'hardwareProfile' => ['$ref' => '#/definitions/HardwareProfile'],
+                    'osProfile' => ['$ref' => '#/definitions/OsProfile'],
+                    'virtualNetworkProfile' => ['$ref' => '#/definitions/VirtualNetworkProfile'],
+                    'scriptActions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ScriptAction']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ComputeProfile' => [
+                'properties' => ['roles' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Role']
+                ]],
+                'required' => []
+            ],
+            'StorageAccount' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'isDefault' => ['type' => 'boolean'],
+                    'container' => ['type' => 'string'],
+                    'key' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'StorageProfile' => [
+                'properties' => ['storageaccounts' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/StorageAccount']
+                ]],
+                'required' => []
+            ],
+            'ClusterCreateProperties' => [
+                'properties' => [
+                    'clusterVersion' => ['type' => 'string'],
+                    'osType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Windows',
+                            'Linux'
+                        ]
+                    ],
+                    'tier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Standard',
+                            'Premium'
+                        ]
+                    ],
+                    'clusterDefinition' => ['$ref' => '#/definitions/ClusterDefinition'],
+                    'securityProfile' => ['$ref' => '#/definitions/SecurityProfile'],
+                    'computeProfile' => ['$ref' => '#/definitions/ComputeProfile'],
+                    'storageProfile' => ['$ref' => '#/definitions/StorageProfile']
+                ],
+                'required' => []
+            ],
+            'ClusterCreateParametersExtended' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/ClusterCreateProperties']
+                ],
+                'required' => []
+            ],
+            'ClusterPatchParameters' => [
+                'properties' => ['tags' => [
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
-                ],
-                'configurations' => ['type' => 'object']
-            ]],
-            'SecurityProfile' => ['properties' => [
-                'directoryType' => [
-                    'type' => 'string',
-                    'enum' => ['ActiveDirectory']
-                ],
-                'domain' => ['type' => 'string'],
-                'organizationalUnitDN' => ['type' => 'string'],
-                'ldapsUrls' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'domainUsername' => ['type' => 'string'],
-                'domainUserPassword' => ['type' => 'string'],
-                'clusterUsersGroupDNs' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'HardwareProfile' => ['properties' => ['vmSize' => ['type' => 'string']]],
-            'VirtualNetworkProfile' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'subnet' => ['type' => 'string']
-            ]],
-            'RdpSettings' => ['properties' => [
-                'username' => ['type' => 'string'],
-                'password' => ['type' => 'string'],
-                'expiryDate' => [
-                    'type' => 'string',
-                    'format' => 'date'
-                ]
-            ]],
-            'WindowsOperatingSystemProfile' => ['properties' => ['rdpSettings' => ['$ref' => '#/definitions/RdpSettings']]],
-            'SshPublicKey' => ['properties' => ['certificateData' => ['type' => 'string']]],
-            'SshProfile' => ['properties' => ['publicKeys' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/SshPublicKey']
-            ]]],
-            'LinuxOperatingSystemProfile' => ['properties' => [
-                'username' => ['type' => 'string'],
-                'password' => ['type' => 'string'],
-                'sshProfile' => ['$ref' => '#/definitions/SshProfile']
-            ]],
-            'OsProfile' => ['properties' => [
-                'windowsOperatingSystemProfile' => ['$ref' => '#/definitions/WindowsOperatingSystemProfile'],
-                'linuxOperatingSystemProfile' => ['$ref' => '#/definitions/LinuxOperatingSystemProfile']
-            ]],
-            'ScriptAction' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'uri' => ['type' => 'string'],
-                'parameters' => ['type' => 'string']
-            ]],
-            'Role' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'minInstanceCount' => [
+                ]],
+                'required' => []
+            ],
+            'QuotaInfo' => [
+                'properties' => ['coresUsed' => [
                     'type' => 'integer',
                     'format' => 'int32'
+                ]],
+                'required' => []
+            ],
+            'errors' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
                 ],
-                'targetInstanceCount' => [
+                'required' => []
+            ],
+            'ConnectivityEndpoint' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'protocol' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'port' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ClusterGetProperties' => [
+                'properties' => [
+                    'clusterVersion' => ['type' => 'string'],
+                    'osType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Windows',
+                            'Linux'
+                        ]
+                    ],
+                    'tier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Standard',
+                            'Premium'
+                        ]
+                    ],
+                    'clusterDefinition' => ['$ref' => '#/definitions/ClusterDefinition'],
+                    'securityProfile' => ['$ref' => '#/definitions/SecurityProfile'],
+                    'computeProfile' => ['$ref' => '#/definitions/ComputeProfile'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'InProgress',
+                            'Failed',
+                            'Succeeded',
+                            'Canceled',
+                            'Deleting'
+                        ]
+                    ],
+                    'createdDate' => ['type' => 'string'],
+                    'clusterState' => ['type' => 'string'],
+                    'quotaInfo' => ['$ref' => '#/definitions/QuotaInfo'],
+                    'errors' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/errors']
+                    ],
+                    'connectivityEndpoints' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ConnectivityEndpoint']
+                    ]
+                ],
+                'required' => ['clusterDefinition']
+            ],
+            'Cluster' => [
+                'properties' => [
+                    'etag' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ClusterGetProperties']
+                ],
+                'required' => []
+            ],
+            'RuntimeScriptAction' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'uri' => ['type' => 'string'],
+                    'parameters' => ['type' => 'string'],
+                    'roles' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'applicationName' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'uri',
+                    'roles'
+                ]
+            ],
+            'ExecuteScriptActionParameters' => [
+                'properties' => [
+                    'scriptActions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RuntimeScriptAction']
+                    ],
+                    'persistOnSuccess' => ['type' => 'string']
+                ],
+                'required' => ['persistOnSuccess']
+            ],
+            'ClusterListPersistedScriptActionsResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RuntimeScriptAction']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ScriptActionExecutionSummary' => [
+                'properties' => [
+                    'status' => ['type' => 'string'],
+                    'instanceCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'RuntimeScriptActionDetail' => [
+                'properties' => [
+                    'scriptExecutionId' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'startTime' => ['type' => 'string'],
+                    'endTime' => ['type' => 'string'],
+                    'status' => ['type' => 'string'],
+                    'operation' => ['type' => 'string'],
+                    'executionSummary' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ScriptActionExecutionSummary']
+                    ],
+                    'debugInformation' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'uri' => ['type' => 'string'],
+                    'parameters' => ['type' => 'string'],
+                    'roles' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'applicationName' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'uri',
+                    'roles'
+                ]
+            ],
+            'ClusterListRuntimeScriptActionDetailResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RuntimeScriptActionDetail']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ClusterListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Cluster']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ClusterResizeParameters' => [
+                'properties' => ['targetInstanceCount' => [
                     'type' => 'integer',
                     'format' => 'int32'
+                ]],
+                'required' => []
+            ],
+            'OperationResource' => [
+                'properties' => [
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'InProgress',
+                            'Succeeded',
+                            'Failed'
+                        ]
+                    ],
+                    'error' => ['$ref' => '#/definitions/errors']
                 ],
-                'hardwareProfile' => ['$ref' => '#/definitions/HardwareProfile'],
-                'osProfile' => ['$ref' => '#/definitions/OsProfile'],
-                'virtualNetworkProfile' => ['$ref' => '#/definitions/VirtualNetworkProfile'],
-                'scriptActions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ScriptAction']
-                ]
-            ]],
-            'ComputeProfile' => ['properties' => ['roles' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Role']
-            ]]],
-            'StorageAccount' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'isDefault' => ['type' => 'boolean'],
-                'container' => ['type' => 'string'],
-                'key' => ['type' => 'string']
-            ]],
-            'StorageProfile' => ['properties' => ['storageaccounts' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/StorageAccount']
-            ]]],
-            'ClusterCreateProperties' => ['properties' => [
-                'clusterVersion' => ['type' => 'string'],
-                'osType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Windows',
-                        'Linux'
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'tier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Standard',
-                        'Premium'
-                    ]
+                'required' => ['location']
+            ],
+            'SubResource' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => []
+            ],
+            'Operation_display' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string']
                 ],
-                'clusterDefinition' => ['$ref' => '#/definitions/ClusterDefinition'],
-                'securityProfile' => ['$ref' => '#/definitions/SecurityProfile'],
-                'computeProfile' => ['$ref' => '#/definitions/ComputeProfile'],
-                'storageProfile' => ['$ref' => '#/definitions/StorageProfile']
-            ]],
-            'ClusterCreateParametersExtended' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
-                'properties' => ['$ref' => '#/definitions/ClusterCreateProperties']
-            ]],
-            'ClusterPatchParameters' => ['properties' => ['tags' => [
-                'type' => 'object',
-                'additionalProperties' => ['type' => 'string']
-            ]]],
-            'QuotaInfo' => ['properties' => ['coresUsed' => [
-                'type' => 'integer',
-                'format' => 'int32'
-            ]]],
-            'errors' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'ConnectivityEndpoint' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'protocol' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'port' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ClusterGetProperties' => ['properties' => [
-                'clusterVersion' => ['type' => 'string'],
-                'osType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Windows',
-                        'Linux'
-                    ]
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Operation']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'tier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Standard',
-                        'Premium'
-                    ]
-                ],
-                'clusterDefinition' => ['$ref' => '#/definitions/ClusterDefinition'],
-                'securityProfile' => ['$ref' => '#/definitions/SecurityProfile'],
-                'computeProfile' => ['$ref' => '#/definitions/ComputeProfile'],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'InProgress',
-                        'Failed',
-                        'Succeeded',
-                        'Canceled',
-                        'Deleting'
-                    ]
-                ],
-                'createdDate' => ['type' => 'string'],
-                'clusterState' => ['type' => 'string'],
-                'quotaInfo' => ['$ref' => '#/definitions/QuotaInfo'],
-                'errors' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/errors']
-                ],
-                'connectivityEndpoints' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ConnectivityEndpoint']
-                ]
-            ]],
-            'Cluster' => ['properties' => [
-                'etag' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ClusterGetProperties']
-            ]],
-            'RuntimeScriptAction' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'uri' => ['type' => 'string'],
-                'parameters' => ['type' => 'string'],
-                'roles' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'applicationName' => ['type' => 'string']
-            ]],
-            'ExecuteScriptActionParameters' => ['properties' => [
-                'scriptActions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RuntimeScriptAction']
-                ],
-                'persistOnSuccess' => ['type' => 'string']
-            ]],
-            'ClusterListPersistedScriptActionsResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RuntimeScriptAction']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ScriptActionExecutionSummary' => ['properties' => [
-                'status' => ['type' => 'string'],
-                'instanceCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'RuntimeScriptActionDetail' => ['properties' => [
-                'scriptExecutionId' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'startTime' => ['type' => 'string'],
-                'endTime' => ['type' => 'string'],
-                'status' => ['type' => 'string'],
-                'operation' => ['type' => 'string'],
-                'executionSummary' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ScriptActionExecutionSummary']
-                ],
-                'debugInformation' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'uri' => ['type' => 'string'],
-                'parameters' => ['type' => 'string'],
-                'roles' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'applicationName' => ['type' => 'string']
-            ]],
-            'ClusterListRuntimeScriptActionDetailResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RuntimeScriptActionDetail']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ClusterListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Cluster']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ClusterResizeParameters' => ['properties' => ['targetInstanceCount' => [
-                'type' => 'integer',
-                'format' => 'int32'
-            ]]],
-            'OperationResource' => ['properties' => [
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'InProgress',
-                        'Succeeded',
-                        'Failed'
-                    ]
-                ],
-                'error' => ['$ref' => '#/definitions/errors']
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'SubResource' => ['properties' => ['id' => ['type' => 'string']]],
-            'Operation_display' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/Operation_display']
-            ]],
-            'OperationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Operation']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
+                'required' => []
+            ],
             'ApplicationGetHttpsEndpoint' => [
                 'properties' => [
                     'accessModes' => [
@@ -1326,182 +1452,237 @@ final class HDInsightManagementClient
                 'additionalProperties' => [
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
-                ]
+                ],
+                'required' => []
             ],
-            'ApplicationGetEndpoint' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'destinationPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+            'ApplicationGetEndpoint' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'destinationPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'publicPort' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
                 ],
-                'publicPort' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ApplicationGetProperties' => ['properties' => [
-                'computeProfile' => ['$ref' => '#/definitions/ComputeProfile'],
-                'installScriptActions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RuntimeScriptAction']
-                ],
-                'uninstallScriptActions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RuntimeScriptAction']
-                ],
-                'httpsEndpoints' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGetHttpsEndpoint']
-                ],
-                'sshEndpoints' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationGetEndpoint']
-                ],
-                'provisioningState' => ['type' => 'string'],
-                'applicationType' => ['type' => 'string'],
-                'applicationState' => ['type' => 'string'],
-                'errors' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/errors']
-                ],
-                'createdDate' => ['type' => 'string'],
-                'marketplaceIdentifier' => ['type' => 'string'],
-                'additionalProperties' => ['type' => 'string']
-            ]],
-            'Application' => ['properties' => [
-                'id' => ['$ref' => '#/definitions/SubResource'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'etag' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
+                'required' => []
+            ],
+            'ApplicationGetProperties' => [
+                'properties' => [
+                    'computeProfile' => ['$ref' => '#/definitions/ComputeProfile'],
+                    'installScriptActions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RuntimeScriptAction']
+                    ],
+                    'uninstallScriptActions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RuntimeScriptAction']
+                    ],
+                    'httpsEndpoints' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGetHttpsEndpoint']
+                    ],
+                    'sshEndpoints' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationGetEndpoint']
+                    ],
+                    'provisioningState' => ['type' => 'string'],
+                    'applicationType' => ['type' => 'string'],
+                    'applicationState' => ['type' => 'string'],
+                    'errors' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/errors']
+                    ],
+                    'createdDate' => ['type' => 'string'],
+                    'marketplaceIdentifier' => ['type' => 'string'],
                     'additionalProperties' => ['type' => 'string']
                 ],
-                'properties' => ['$ref' => '#/definitions/ApplicationGetProperties']
-            ]],
-            'ApplicationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Application']
+                'required' => []
+            ],
+            'Application' => [
+                'properties' => [
+                    'id' => ['$ref' => '#/definitions/SubResource'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'etag' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/ApplicationGetProperties']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'versionSpec' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'isDefault' => ['type' => 'string'],
-                'componentVersions' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'versionsCapability' => ['properties' => ['available' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/versionSpec']
-            ]]],
-            'regionsCapability' => ['properties' => ['available' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'vmSizesCapability' => ['properties' => ['available' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'vmSizeCompatibilityFilter' => ['properties' => [
-                'FilterMode' => ['type' => 'string'],
-                'Regions' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'ApplicationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Application']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'ClusterFlavors' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'versionSpec' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'isDefault' => ['type' => 'string'],
+                    'componentVersions' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
                 ],
-                'NodeTypes' => [
+                'required' => []
+            ],
+            'versionsCapability' => [
+                'properties' => ['available' => [
                     'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'ClusterVersions' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'vmsizes' => [
+                    'items' => ['$ref' => '#/definitions/versionSpec']
+                ]],
+                'required' => []
+            ],
+            'regionsCapability' => [
+                'properties' => ['available' => [
                     'type' => 'array',
                     'items' => ['type' => 'string']
-                ]
-            ]],
-            'regionalQuotaCapability' => ['properties' => [
-                'region_name' => ['type' => 'string'],
-                'cores_used' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'cores_available' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ]
-            ]],
-            'quotaCapability' => ['properties' => ['regionalQuotas' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/regionalQuotaCapability']
-            ]]],
-            'capabilitiesResult' => ['properties' => [
-                'versions' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/versionsCapability']
-                ],
-                'regions' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/regionsCapability']
-                ],
-                'vmsizes' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['$ref' => '#/definitions/vmSizesCapability']
-                ],
-                'vmsize_filters' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/vmSizeCompatibilityFilter']
-                ],
-                'features' => [
+                ]],
+                'required' => []
+            ],
+            'vmSizesCapability' => [
+                'properties' => ['available' => [
                     'type' => 'array',
                     'items' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'vmSizeCompatibilityFilter' => [
+                'properties' => [
+                    'FilterMode' => ['type' => 'string'],
+                    'Regions' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'ClusterFlavors' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'NodeTypes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'ClusterVersions' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'vmsizes' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
                 ],
-                'quota' => ['$ref' => '#/definitions/quotaCapability']
-            ]],
-            'RDPSettingsParameters' => ['properties' => ['osProfile' => ['$ref' => '#/definitions/OsProfile']]],
-            'HttpConnectivitySettings' => ['properties' => [
-                'restAuthCredential.isEnabled' => ['type' => 'string'],
-                'restAuthCredential.username' => ['type' => 'string'],
-                'restAuthCredential.password' => ['type' => 'string']
-            ]],
-            'Extension' => ['properties' => [
-                'workspaceId' => ['type' => 'string'],
-                'primaryKey' => ['type' => 'string']
-            ]],
-            'ScriptActionExecutionHistoryList' => ['properties' => [
-                'value' => [
+                'required' => []
+            ],
+            'regionalQuotaCapability' => [
+                'properties' => [
+                    'region_name' => ['type' => 'string'],
+                    'cores_used' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'cores_available' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ]
+                ],
+                'required' => []
+            ],
+            'quotaCapability' => [
+                'properties' => ['regionalQuotas' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RuntimeScriptActionDetail']
+                    'items' => ['$ref' => '#/definitions/regionalQuotaCapability']
+                ]],
+                'required' => []
+            ],
+            'capabilitiesResult' => [
+                'properties' => [
+                    'versions' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/versionsCapability']
+                    ],
+                    'regions' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/regionsCapability']
+                    ],
+                    'vmsizes' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['$ref' => '#/definitions/vmSizesCapability']
+                    ],
+                    'vmsize_filters' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/vmSizeCompatibilityFilter']
+                    ],
+                    'features' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'quota' => ['$ref' => '#/definitions/quotaCapability']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ScriptActionPersistedGetResponseSpec' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'uri' => ['type' => 'string'],
-                'parameters' => ['type' => 'string'],
-                'roles' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'RDPSettingsParameters' => [
+                'properties' => ['osProfile' => ['$ref' => '#/definitions/OsProfile']],
+                'required' => ['osProfile']
+            ],
+            'HttpConnectivitySettings' => [
+                'properties' => [
+                    'restAuthCredential.isEnabled' => ['type' => 'string'],
+                    'restAuthCredential.username' => ['type' => 'string'],
+                    'restAuthCredential.password' => ['type' => 'string']
                 ],
-                'applicationName' => ['type' => 'string']
-            ]],
-            'ScriptActionsList' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RuntimeScriptActionDetail']
+                'required' => []
+            ],
+            'Extension' => [
+                'properties' => [
+                    'workspaceId' => ['type' => 'string'],
+                    'primaryKey' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]]
+                'required' => []
+            ],
+            'ScriptActionExecutionHistoryList' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RuntimeScriptActionDetail']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ScriptActionPersistedGetResponseSpec' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'uri' => ['type' => 'string'],
+                    'parameters' => ['type' => 'string'],
+                    'roles' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'applicationName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ScriptActionsList' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RuntimeScriptActionDetail']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

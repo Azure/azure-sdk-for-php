@@ -15,6 +15,8 @@ final class RecoveryServicesBackupClient
             self::_SWAGGER_OBJECT_DATA,
             ['subscriptionId' => $subscriptionId]
         );
+        $this->_BackupJobs_group = new \Microsoft\Azure\Management\RecoveryServices\Backup\BackupJobs($_client);
+        $this->_JobDetails_group = new \Microsoft\Azure\Management\RecoveryServices\Backup\JobDetails($_client);
         $this->_BackupResourceVaultConfigs_group = new \Microsoft\Azure\Management\RecoveryServices\Backup\BackupResourceVaultConfigs($_client);
         $this->_BackupEngines_group = new \Microsoft\Azure\Management\RecoveryServices\Backup\BackupEngines($_client);
         $this->_ProtectionContainerRefreshOperationResults_group = new \Microsoft\Azure\Management\RecoveryServices\Backup\ProtectionContainerRefreshOperationResults($_client);
@@ -27,8 +29,6 @@ final class RecoveryServicesBackupClient
         $this->_RecoveryPoints_group = new \Microsoft\Azure\Management\RecoveryServices\Backup\RecoveryPoints($_client);
         $this->_ItemLevelRecoveryConnections_group = new \Microsoft\Azure\Management\RecoveryServices\Backup\ItemLevelRecoveryConnections($_client);
         $this->_Restores_group = new \Microsoft\Azure\Management\RecoveryServices\Backup\Restores($_client);
-        $this->_BackupJobs_group = new \Microsoft\Azure\Management\RecoveryServices\Backup\BackupJobs($_client);
-        $this->_JobDetails_group = new \Microsoft\Azure\Management\RecoveryServices\Backup\JobDetails($_client);
         $this->_JobCancellations_group = new \Microsoft\Azure\Management\RecoveryServices\Backup\JobCancellations($_client);
         $this->_JobOperationResults_group = new \Microsoft\Azure\Management\RecoveryServices\Backup\JobOperationResults($_client);
         $this->_ExportJobsOperationResults_group = new \Microsoft\Azure\Management\RecoveryServices\Backup\ExportJobsOperationResults($_client);
@@ -46,6 +46,20 @@ final class RecoveryServicesBackupClient
         $this->_BackupResourceStorageConfigs_group = new \Microsoft\Azure\Management\RecoveryServices\Backup\BackupResourceStorageConfigs($_client);
         $this->_BackupUsageSummaries_group = new \Microsoft\Azure\Management\RecoveryServices\Backup\BackupUsageSummaries($_client);
         $this->_Operations_group = new \Microsoft\Azure\Management\RecoveryServices\Backup\Operations($_client);
+    }
+    /**
+     * @return \Microsoft\Azure\Management\RecoveryServices\Backup\BackupJobs
+     */
+    public function getBackupJobs()
+    {
+        return $this->_BackupJobs_group;
+    }
+    /**
+     * @return \Microsoft\Azure\Management\RecoveryServices\Backup\JobDetails
+     */
+    public function getJobDetails()
+    {
+        return $this->_JobDetails_group;
     }
     /**
      * @return \Microsoft\Azure\Management\RecoveryServices\Backup\BackupResourceVaultConfigs
@@ -130,20 +144,6 @@ final class RecoveryServicesBackupClient
     public function getRestores()
     {
         return $this->_Restores_group;
-    }
-    /**
-     * @return \Microsoft\Azure\Management\RecoveryServices\Backup\BackupJobs
-     */
-    public function getBackupJobs()
-    {
-        return $this->_BackupJobs_group;
-    }
-    /**
-     * @return \Microsoft\Azure\Management\RecoveryServices\Backup\JobDetails
-     */
-    public function getJobDetails()
-    {
-        return $this->_JobDetails_group;
     }
     /**
      * @return \Microsoft\Azure\Management\RecoveryServices\Backup\JobCancellations
@@ -265,6 +265,14 @@ final class RecoveryServicesBackupClient
         return $this->_Operations_group;
     }
     /**
+     * @var \Microsoft\Azure\Management\RecoveryServices\Backup\BackupJobs
+     */
+    private $_BackupJobs_group;
+    /**
+     * @var \Microsoft\Azure\Management\RecoveryServices\Backup\JobDetails
+     */
+    private $_JobDetails_group;
+    /**
      * @var \Microsoft\Azure\Management\RecoveryServices\Backup\BackupResourceVaultConfigs
      */
     private $_BackupResourceVaultConfigs_group;
@@ -312,14 +320,6 @@ final class RecoveryServicesBackupClient
      * @var \Microsoft\Azure\Management\RecoveryServices\Backup\Restores
      */
     private $_Restores_group;
-    /**
-     * @var \Microsoft\Azure\Management\RecoveryServices\Backup\BackupJobs
-     */
-    private $_BackupJobs_group;
-    /**
-     * @var \Microsoft\Azure\Management\RecoveryServices\Backup\JobDetails
-     */
-    private $_JobDetails_group;
     /**
      * @var \Microsoft\Azure\Management\RecoveryServices\Backup\JobCancellations
      */
@@ -391,6 +391,86 @@ final class RecoveryServicesBackupClient
     const _SWAGGER_OBJECT_DATA = [
         'host' => 'management.azure.com',
         'paths' => [
+            '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs' => ['get' => [
+                'operationId' => 'BackupJobs_List',
+                'parameters' => [
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2017-07-01']
+                    ],
+                    [
+                        'name' => 'vaultName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'resourceGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => '$filter',
+                        'in' => 'query',
+                        'required' => FALSE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => '$skipToken',
+                        'in' => 'query',
+                        'required' => FALSE,
+                        'type' => 'string'
+                    ]
+                ],
+                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/JobResourceList']]]
+            ]],
+            '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}' => ['get' => [
+                'operationId' => 'JobDetails_Get',
+                'parameters' => [
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2017-07-01']
+                    ],
+                    [
+                        'name' => 'vaultName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'resourceGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'jobName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ]
+                ],
+                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/JobResource']]]
+            ]],
             '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupconfig/vaultconfig' => [
                 'get' => [
                     'operationId' => 'BackupResourceVaultConfigs_Get',
@@ -458,10 +538,7 @@ final class RecoveryServicesBackupClient
                             '$ref' => '#/definitions/BackupResourceVaultConfigResource'
                         ]
                     ],
-                    'responses' => [
-                        '200' => ['schema' => ['$ref' => '#/definitions/BackupResourceVaultConfigResource']],
-                        '204' => []
-                    ]
+                    'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/BackupResourceVaultConfigResource']]]
                 ]
             ],
             '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupEngines' => ['get' => [
@@ -1355,86 +1432,6 @@ final class RecoveryServicesBackupClient
                 ],
                 'responses' => ['202' => []]
             ]],
-            '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs' => ['get' => [
-                'operationId' => 'BackupJobs_List',
-                'parameters' => [
-                    [
-                        'name' => 'api-version',
-                        'in' => 'query',
-                        'required' => TRUE,
-                        'type' => 'string',
-                        'enum' => ['2016-12-01']
-                    ],
-                    [
-                        'name' => 'vaultName',
-                        'in' => 'path',
-                        'required' => TRUE,
-                        'type' => 'string'
-                    ],
-                    [
-                        'name' => 'resourceGroupName',
-                        'in' => 'path',
-                        'required' => TRUE,
-                        'type' => 'string'
-                    ],
-                    [
-                        'name' => 'subscriptionId',
-                        'in' => 'path',
-                        'required' => TRUE,
-                        'type' => 'string'
-                    ],
-                    [
-                        'name' => '$filter',
-                        'in' => 'query',
-                        'required' => FALSE,
-                        'type' => 'string'
-                    ],
-                    [
-                        'name' => '$skipToken',
-                        'in' => 'query',
-                        'required' => FALSE,
-                        'type' => 'string'
-                    ]
-                ],
-                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/JobResourceList']]]
-            ]],
-            '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}' => ['get' => [
-                'operationId' => 'JobDetails_Get',
-                'parameters' => [
-                    [
-                        'name' => 'api-version',
-                        'in' => 'query',
-                        'required' => TRUE,
-                        'type' => 'string',
-                        'enum' => ['2016-12-01']
-                    ],
-                    [
-                        'name' => 'vaultName',
-                        'in' => 'path',
-                        'required' => TRUE,
-                        'type' => 'string'
-                    ],
-                    [
-                        'name' => 'resourceGroupName',
-                        'in' => 'path',
-                        'required' => TRUE,
-                        'type' => 'string'
-                    ],
-                    [
-                        'name' => 'subscriptionId',
-                        'in' => 'path',
-                        'required' => TRUE,
-                        'type' => 'string'
-                    ],
-                    [
-                        'name' => 'jobName',
-                        'in' => 'path',
-                        'required' => TRUE,
-                        'type' => 'string'
-                    ]
-                ],
-                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/JobResource']]]
-            ]],
             '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/cancel' => ['post' => [
                 'operationId' => 'JobCancellations_Trigger',
                 'parameters' => [
@@ -2196,1434 +2193,1829 @@ final class RecoveryServicesBackupClient
             ]]
         ],
         'definitions' => [
-            'DPMContainerExtendedInfo' => ['properties' => ['lastRefreshedAt' => [
-                'type' => 'string',
-                'format' => 'date-time'
-            ]]],
-            'AzureBackupServerContainer' => ['properties' => [
-                'canReRegister' => ['type' => 'boolean'],
-                'containerId' => ['type' => 'string'],
-                'protectedItemCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'dpmAgentVersion' => ['type' => 'string'],
-                'DPMServers' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'UpgradeAvailable' => ['type' => 'boolean'],
-                'protectionStatus' => ['type' => 'string'],
-                'extendedInfo' => ['$ref' => '#/definitions/DPMContainerExtendedInfo']
-            ]],
-            'AzureBackupServerEngine' => ['properties' => []],
-            'Microsoft.ClassicCompute/virtualMachines' => ['properties' => []],
-            'Microsoft.ClassicCompute/virtualMachines' => ['properties' => []],
-            'Microsoft.ClassicCompute/virtualMachines' => ['properties' => []],
-            'Microsoft.Compute/virtualMachines' => ['properties' => []],
-            'Microsoft.Compute/virtualMachines' => ['properties' => []],
-            'Microsoft.Compute/virtualMachines' => ['properties' => []],
-            'AzureIaaSVMErrorInfo' => ['properties' => [
-                'errorCode' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'errorTitle' => ['type' => 'string'],
-                'errorString' => ['type' => 'string'],
-                'recommendations' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'AzureIaaSVMHealthDetails' => ['properties' => [
-                'code' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'title' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'recommendations' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'AzureIaaSVMJobTaskDetails' => ['properties' => [
-                'taskId' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'instanceId' => ['type' => 'string'],
-                'duration' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'status' => ['type' => 'string'],
-                'progressPercentage' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ]
-            ]],
-            'AzureIaaSVMJobExtendedInfo' => ['properties' => [
-                'tasksList' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AzureIaaSVMJobTaskDetails']
-                ],
-                'propertyBag' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'progressPercentage' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'dynamicErrorMessage' => ['type' => 'string']
-            ]],
-            'AzureIaaSVMJob' => ['properties' => [
-                'duration' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'actionsInfo' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'enum' => [
-                            'Invalid',
-                            'Cancellable',
-                            'Retriable'
-                        ]
-                    ]
-                ],
-                'errorDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AzureIaaSVMErrorInfo']
-                ],
-                'virtualMachineVersion' => ['type' => 'string'],
-                'extendedInfo' => ['$ref' => '#/definitions/AzureIaaSVMJobExtendedInfo']
-            ]],
-            'AzureIaaSVMProtectedItemExtendedInfo' => ['properties' => [
-                'oldestRecoveryPoint' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'recoveryPointCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'policyInconsistent' => ['type' => 'boolean']
-            ]],
-            'AzureIaaSVMProtectedItem' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'virtualMachineId' => ['type' => 'string'],
-                'protectionStatus' => ['type' => 'string'],
-                'protectionState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'IRPending',
-                        'Protected',
-                        'ProtectionError',
-                        'ProtectionStopped',
-                        'ProtectionPaused'
-                    ]
-                ],
-                'healthStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Passed',
-                        'ActionRequired',
-                        'ActionSuggested',
-                        'Invalid'
-                    ]
-                ],
-                'healthDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AzureIaaSVMHealthDetails']
-                ],
-                'lastBackupStatus' => ['type' => 'string'],
-                'lastBackupTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'protectedItemDataId' => ['type' => 'string'],
-                'extendedInfo' => ['$ref' => '#/definitions/AzureIaaSVMProtectedItemExtendedInfo']
-            ]],
-            'SchedulePolicy' => ['properties' => []],
-            'RetentionPolicy' => ['properties' => []],
-            'AzureIaasVM' => ['properties' => [
-                'schedulePolicy' => ['$ref' => '#/definitions/SchedulePolicy'],
-                'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy'],
-                'timeZone' => ['type' => 'string']
-            ]],
-            'AzureSqlContainer' => ['properties' => []],
-            'AzureSqlProtectedItemExtendedInfo' => ['properties' => [
-                'oldestRecoveryPoint' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'recoveryPointCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'policyState' => ['type' => 'string']
-            ]],
-            'Microsoft.Sql/servers/databases' => ['properties' => [
-                'protectedItemDataId' => ['type' => 'string'],
-                'protectionState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'IRPending',
-                        'Protected',
-                        'ProtectionError',
-                        'ProtectionStopped',
-                        'ProtectionPaused'
-                    ]
-                ],
-                'extendedInfo' => ['$ref' => '#/definitions/AzureSqlProtectedItemExtendedInfo']
-            ]],
-            'AzureSql' => ['properties' => ['retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy']]],
-            'BackupEngineExtendedInfo' => ['properties' => [
-                'databaseName' => ['type' => 'string'],
-                'protectedItemsCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'protectedServersCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'diskCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'usedDiskSpace' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'availableDiskSpace' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'refreshedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'azureProtectedInstances' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'BackupEngineBase' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'backupManagementType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'AzureIaasVM',
-                        'MAB',
-                        'DPM',
-                        'AzureBackupServer',
-                        'AzureSql'
-                    ]
-                ],
-                'registrationStatus' => ['type' => 'string'],
-                'backupEngineState' => ['type' => 'string'],
-                'healthStatus' => ['type' => 'string'],
-                'canReRegister' => ['type' => 'boolean'],
-                'backupEngineId' => ['type' => 'string'],
-                'dpmVersion' => ['type' => 'string'],
-                'azureBackupAgentVersion' => ['type' => 'string'],
-                'isAzureBackupAgentUpgradeAvailable' => ['type' => 'boolean'],
-                'isDPMUpgradeAvailable' => ['type' => 'boolean'],
-                'extendedInfo' => ['$ref' => '#/definitions/BackupEngineExtendedInfo']
-            ]],
-            'BackupEngineBaseResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/BackupEngineBase']]],
-            'BackupEngineBaseResourceList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/BackupEngineBaseResource']
-            ]]],
-            'NameInfo' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'localizedValue' => ['type' => 'string']
-            ]],
-            'BackupManagementUsage' => ['properties' => [
-                'unit' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Count',
-                        'Bytes',
-                        'Seconds',
-                        'Percent',
-                        'CountPerSecond',
-                        'BytesPerSecond'
-                    ]
-                ],
-                'quotaPeriod' => ['type' => 'string'],
-                'nextResetTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'currentValue' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'limit' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'name' => ['$ref' => '#/definitions/NameInfo']
-            ]],
-            'BackupManagementUsageList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/BackupManagementUsage']
-            ]]],
-            'BackupRequest' => ['properties' => []],
-            'BackupRequestResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/BackupRequest']]],
-            'BackupResourceConfig' => ['properties' => [
-                'storageType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'GeoRedundant',
-                        'LocallyRedundant'
-                    ]
-                ],
-                'storageTypeState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Locked',
-                        'Unlocked'
-                    ]
-                ]
-            ]],
-            'BackupResourceConfigResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/BackupResourceConfig']]],
-            'BackupResourceVaultConfig' => ['properties' => [
-                'storageType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'GeoRedundant',
-                        'LocallyRedundant'
-                    ]
-                ],
-                'storageTypeState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Locked',
-                        'Unlocked'
-                    ]
-                ],
-                'enhancedSecurityState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ]
-            ]],
-            'BackupResourceVaultConfigResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/BackupResourceVaultConfig']]],
-            'BEKDetails' => ['properties' => [
-                'secretUrl' => ['type' => 'string'],
-                'secretVaultId' => ['type' => 'string'],
-                'secretData' => ['type' => 'string']
-            ]],
-            'BMSBackupEngineQueryObject' => ['properties' => ['expand' => ['type' => 'string']]],
-            'BMSBackupEnginesQueryObject' => ['properties' => [
-                'backupManagementType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'AzureIaasVM',
-                        'MAB',
-                        'DPM',
-                        'AzureBackupServer',
-                        'AzureSql'
-                    ]
-                ],
-                'friendlyName' => ['type' => 'string'],
-                'expand' => ['type' => 'string']
-            ]],
-            'BMSBackupSummariesQueryObject' => ['properties' => ['type' => [
-                'type' => 'string',
-                'enum' => [
-                    'Invalid',
-                    'BackupProtectedItemCountSummary',
-                    'BackupProtectionContainerCountSummary'
-                ]
-            ]]],
-            'BMSContainerQueryObject' => ['properties' => [
-                'backupManagementType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'AzureIaasVM',
-                        'MAB',
-                        'DPM',
-                        'AzureBackupServer',
-                        'AzureSql'
-                    ]
-                ],
-                'containerType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Unknown',
-                        'IaasVMContainer',
-                        'IaasVMServiceContainer',
-                        'DPMContainer',
-                        'AzureBackupServerContainer',
-                        'MABContainer',
-                        'Cluster',
-                        'AzureSqlContainer',
-                        'Windows',
-                        'VCenter'
-                    ]
-                ],
-                'backupEngineName' => ['type' => 'string'],
-                'status' => ['type' => 'string'],
-                'friendlyName' => ['type' => 'string']
-            ]],
-            'BMSPOQueryObject' => ['properties' => [
-                'backupManagementType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'AzureIaasVM',
-                        'MAB',
-                        'DPM',
-                        'AzureBackupServer',
-                        'AzureSql'
-                    ]
-                ],
-                'status' => ['type' => 'string'],
-                'friendlyName' => ['type' => 'string']
-            ]],
-            'BMSRPQueryObject' => ['properties' => [
-                'startDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'ClientScriptForConnect' => ['properties' => [
-                'scriptContent' => ['type' => 'string'],
-                'scriptExtension' => ['type' => 'string'],
-                'osType' => ['type' => 'string'],
-                'url' => ['type' => 'string'],
-                'scriptNameSuffix' => ['type' => 'string']
-            ]],
-            'Day' => ['properties' => [
-                'date' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'isLast' => ['type' => 'boolean']
-            ]],
-            'DailyRetentionFormat' => ['properties' => ['daysOfTheMonth' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Day']
-            ]]],
-            'RetentionDuration' => ['properties' => [
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'durationType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Days',
-                        'Weeks',
-                        'Months',
-                        'Years'
-                    ]
-                ]
-            ]],
-            'DailyRetentionSchedule' => ['properties' => [
-                'retentionTimes' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'format' => 'date-time'
-                    ]
-                ],
-                'retentionDuration' => ['$ref' => '#/definitions/RetentionDuration']
-            ]],
-            'DpmBackupEngine' => ['properties' => []],
-            'DPMContainer' => ['properties' => [
-                'canReRegister' => ['type' => 'boolean'],
-                'containerId' => ['type' => 'string'],
-                'protectedItemCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'dpmAgentVersion' => ['type' => 'string'],
-                'DPMServers' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'UpgradeAvailable' => ['type' => 'boolean'],
-                'protectionStatus' => ['type' => 'string'],
-                'extendedInfo' => ['$ref' => '#/definitions/DPMContainerExtendedInfo']
-            ]],
-            'DpmErrorInfo' => ['properties' => [
-                'errorString' => ['type' => 'string'],
-                'recommendations' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'DpmJobTaskDetails' => ['properties' => [
-                'taskId' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'duration' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'status' => ['type' => 'string']
-            ]],
-            'DpmJobExtendedInfo' => ['properties' => [
-                'tasksList' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DpmJobTaskDetails']
-                ],
-                'propertyBag' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'dynamicErrorMessage' => ['type' => 'string']
-            ]],
-            'DpmJob' => ['properties' => [
-                'duration' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'dpmServerName' => ['type' => 'string'],
-                'containerName' => ['type' => 'string'],
-                'containerType' => ['type' => 'string'],
-                'workloadType' => ['type' => 'string'],
-                'actionsInfo' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'enum' => [
-                            'Invalid',
-                            'Cancellable',
-                            'Retriable'
-                        ]
-                    ]
-                ],
-                'errorDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DpmErrorInfo']
-                ],
-                'extendedInfo' => ['$ref' => '#/definitions/DpmJobExtendedInfo']
-            ]],
-            'DPMProtectedItemExtendedInfo' => ['properties' => [
-                'protectableObjectLoadPath' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'protected' => ['type' => 'boolean'],
-                'isPresentOnCloud' => ['type' => 'boolean'],
-                'lastBackupStatus' => ['type' => 'string'],
-                'lastRefreshedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'oldestRecoveryPoint' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'recoveryPointCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'onPremiseOldestRecoveryPoint' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'onPremiseLatestRecoveryPoint' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'onPremiseRecoveryPointCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'isCollocated' => ['type' => 'boolean'],
-                'protectionGroupName' => ['type' => 'string'],
-                'diskStorageUsedInBytes' => ['type' => 'string'],
-                'totalDiskStorageSizeInBytes' => ['type' => 'string']
-            ]],
-            'DPMProtectedItem' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'backupEngineName' => ['type' => 'string'],
-                'protectionState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'IRPending',
-                        'Protected',
-                        'ProtectionError',
-                        'ProtectionStopped',
-                        'ProtectionPaused'
-                    ]
-                ],
-                'isScheduledForDeferredDelete' => ['type' => 'boolean'],
-                'extendedInfo' => ['$ref' => '#/definitions/DPMProtectedItemExtendedInfo']
-            ]],
-            'EncryptionDetails' => ['properties' => [
-                'encryptionEnabled' => ['type' => 'boolean'],
-                'kekUrl' => ['type' => 'string'],
-                'secretKeyUrl' => ['type' => 'string'],
-                'kekVaultId' => ['type' => 'string'],
-                'secretKeyVaultId' => ['type' => 'string']
-            ]],
-            'ExportJobsOperationResultInfo' => ['properties' => [
-                'blobUrl' => ['type' => 'string'],
-                'blobSasKey' => ['type' => 'string']
-            ]],
-            'GenericRecoveryPoint' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'recoveryPointType' => ['type' => 'string'],
-                'recoveryPointTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'recoveryPointAdditionalInfo' => ['type' => 'string']
-            ]],
-            'GetProtectedItemQueryObject' => ['properties' => ['expand' => ['type' => 'string']]],
-            'IaasVMBackupRequest' => ['properties' => ['recoveryPointExpiryTimeInUTC' => [
-                'type' => 'string',
-                'format' => 'date-time'
-            ]]],
-            'IaaSVMContainer' => ['properties' => [
-                'virtualMachineId' => ['type' => 'string'],
-                'virtualMachineVersion' => ['type' => 'string'],
-                'resourceGroup' => ['type' => 'string']
-            ]],
-            'IaasVMILRRegistrationRequest' => ['properties' => [
-                'recoveryPointId' => ['type' => 'string'],
-                'virtualMachineId' => ['type' => 'string'],
-                'initiatorName' => ['type' => 'string'],
-                'renewExistingRegistration' => ['type' => 'boolean']
-            ]],
-            'IaaSVMProtectableItem' => ['properties' => ['virtualMachineId' => ['type' => 'string']]],
-            'KEKDetails' => ['properties' => [
-                'keyUrl' => ['type' => 'string'],
-                'keyVaultId' => ['type' => 'string'],
-                'keyBackupData' => ['type' => 'string']
-            ]],
-            'KeyAndSecretDetails' => ['properties' => [
-                'kekDetails' => ['$ref' => '#/definitions/KEKDetails'],
-                'bekDetails' => ['$ref' => '#/definitions/BEKDetails']
-            ]],
-            'RecoveryPointTierInformation' => ['properties' => [
-                'type' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'InstantRP',
-                        'HardenedRP'
-                    ]
-                ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Valid',
-                        'Disabled',
-                        'Deleted'
-                    ]
-                ]
-            ]],
-            'IaasVMRecoveryPoint' => ['properties' => [
-                'recoveryPointType' => ['type' => 'string'],
-                'recoveryPointTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'recoveryPointAdditionalInfo' => ['type' => 'string'],
-                'sourceVMStorageType' => ['type' => 'string'],
-                'isSourceVMEncrypted' => ['type' => 'boolean'],
-                'keyAndSecret' => ['$ref' => '#/definitions/KeyAndSecretDetails'],
-                'isInstantILRSessionActive' => ['type' => 'boolean'],
-                'recoveryPointTierDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RecoveryPointTierInformation']
-                ],
-                'isManagedVirtualMachine' => ['type' => 'boolean'],
-                'virtualMachineSize' => ['type' => 'string']
-            ]],
-            'IaasVMRestoreRequest' => ['properties' => [
-                'recoveryPointId' => ['type' => 'string'],
-                'recoveryType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'OriginalLocation',
-                        'AlternateLocation',
-                        'RestoreDisks'
-                    ]
-                ],
-                'sourceResourceId' => ['type' => 'string'],
-                'targetVirtualMachineId' => ['type' => 'string'],
-                'targetResourceGroupId' => ['type' => 'string'],
-                'storageAccountId' => ['type' => 'string'],
-                'virtualNetworkId' => ['type' => 'string'],
-                'subnetId' => ['type' => 'string'],
-                'targetDomainNameId' => ['type' => 'string'],
-                'region' => ['type' => 'string'],
-                'affinityGroup' => ['type' => 'string'],
-                'createNewCloudService' => ['type' => 'boolean'],
-                'encryptionDetails' => ['$ref' => '#/definitions/EncryptionDetails']
-            ]],
-            'ILRRequest' => ['properties' => []],
-            'ILRRequestResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/ILRRequest']]],
-            'InstantItemRecoveryTarget' => ['properties' => ['clientScripts' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ClientScriptForConnect']
-            ]]],
-            'Job' => ['properties' => [
-                'entityFriendlyName' => ['type' => 'string'],
-                'backupManagementType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'AzureIaasVM',
-                        'MAB',
-                        'DPM',
-                        'AzureBackupServer',
-                        'AzureSql'
-                    ]
-                ],
-                'operation' => ['type' => 'string'],
-                'status' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'activityId' => ['type' => 'string']
-            ]],
-            'JobQueryObject' => ['properties' => [
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'InProgress',
-                        'Completed',
-                        'Failed',
-                        'CompletedWithWarnings',
-                        'Cancelled',
-                        'Cancelling'
-                    ]
-                ],
-                'backupManagementType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'AzureIaasVM',
-                        'MAB',
-                        'DPM',
-                        'AzureBackupServer',
-                        'AzureSql'
-                    ]
-                ],
-                'operation' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Register',
-                        'UnRegister',
-                        'ConfigureBackup',
-                        'Backup',
-                        'Restore',
-                        'DisableBackup',
-                        'DeleteBackupData'
-                    ]
-                ],
-                'jobId' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'JobResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/Job']]],
-            'JobResourceList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/JobResource']
-            ]]],
-            'WeeklyRetentionSchedule' => ['properties' => [
-                'daysOfTheWeek' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'enum' => [
-                            'Sunday',
-                            'Monday',
-                            'Tuesday',
-                            'Wednesday',
-                            'Thursday',
-                            'Friday',
-                            'Saturday'
-                        ]
-                    ]
-                ],
-                'retentionTimes' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'format' => 'date-time'
-                    ]
-                ],
-                'retentionDuration' => ['$ref' => '#/definitions/RetentionDuration']
-            ]],
-            'WeeklyRetentionFormat' => ['properties' => [
-                'daysOfTheWeek' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'enum' => [
-                            'Sunday',
-                            'Monday',
-                            'Tuesday',
-                            'Wednesday',
-                            'Thursday',
-                            'Friday',
-                            'Saturday'
-                        ]
-                    ]
-                ],
-                'weeksOfTheMonth' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'enum' => [
-                            'First',
-                            'Second',
-                            'Third',
-                            'Fourth',
-                            'Last'
-                        ]
-                    ]
-                ]
-            ]],
-            'MonthlyRetentionSchedule' => ['properties' => [
-                'retentionScheduleFormatType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Daily',
-                        'Weekly'
-                    ]
-                ],
-                'retentionScheduleDaily' => ['$ref' => '#/definitions/DailyRetentionFormat'],
-                'retentionScheduleWeekly' => ['$ref' => '#/definitions/WeeklyRetentionFormat'],
-                'retentionTimes' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'format' => 'date-time'
-                    ]
-                ],
-                'retentionDuration' => ['$ref' => '#/definitions/RetentionDuration']
-            ]],
-            'YearlyRetentionSchedule' => ['properties' => [
-                'retentionScheduleFormatType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Daily',
-                        'Weekly'
-                    ]
-                ],
-                'monthsOfYear' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'enum' => [
-                            'Invalid',
-                            'January',
-                            'February',
-                            'March',
-                            'April',
-                            'May',
-                            'June',
-                            'July',
-                            'August',
-                            'September',
-                            'October',
-                            'November',
-                            'December'
-                        ]
-                    ]
-                ],
-                'retentionScheduleDaily' => ['$ref' => '#/definitions/DailyRetentionFormat'],
-                'retentionScheduleWeekly' => ['$ref' => '#/definitions/WeeklyRetentionFormat'],
-                'retentionTimes' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'format' => 'date-time'
-                    ]
-                ],
-                'retentionDuration' => ['$ref' => '#/definitions/RetentionDuration']
-            ]],
-            'LongTermRetentionPolicy' => ['properties' => [
-                'dailySchedule' => ['$ref' => '#/definitions/DailyRetentionSchedule'],
-                'weeklySchedule' => ['$ref' => '#/definitions/WeeklyRetentionSchedule'],
-                'monthlySchedule' => ['$ref' => '#/definitions/MonthlyRetentionSchedule'],
-                'yearlySchedule' => ['$ref' => '#/definitions/YearlyRetentionSchedule']
-            ]],
-            'LongTermSchedulePolicy' => ['properties' => []],
-            'MabContainerExtendedInfo' => ['properties' => [
-                'lastRefreshedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'backupItemType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'VM',
-                        'FileFolder',
-                        'AzureSqlDb',
-                        'SQLDB',
-                        'Exchange',
-                        'Sharepoint',
-                        'VMwareVM',
-                        'SystemState',
-                        'Client',
-                        'GenericDataSource'
-                    ]
-                ],
-                'backupItems' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'policyName' => ['type' => 'string'],
-                'lastBackupStatus' => ['type' => 'string']
-            ]],
-            'MABWindowsContainer' => ['properties' => [
-                'canReRegister' => ['type' => 'boolean'],
-                'containerId' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'protectedItemCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'agentVersion' => ['type' => 'string'],
-                'extendedInfo' => ['$ref' => '#/definitions/MabContainerExtendedInfo']
-            ]],
-            'MabErrorInfo' => ['properties' => [
-                'errorString' => ['type' => 'string'],
-                'recommendations' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'MabFileFolderProtectedItemExtendedInfo' => ['properties' => [
-                'lastRefreshedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'oldestRecoveryPoint' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'recoveryPointCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'MabFileFolderProtectedItem' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'computerName' => ['type' => 'string'],
-                'lastBackupStatus' => ['type' => 'string'],
-                'protectionState' => ['type' => 'string'],
-                'isScheduledForDeferredDelete' => ['type' => 'boolean'],
-                'deferredDeleteSyncTimeInUTC' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'extendedInfo' => ['$ref' => '#/definitions/MabFileFolderProtectedItemExtendedInfo']
-            ]],
-            'MabJobTaskDetails' => ['properties' => [
-                'taskId' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'duration' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'status' => ['type' => 'string']
-            ]],
-            'MabJobExtendedInfo' => ['properties' => [
-                'tasksList' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MabJobTaskDetails']
-                ],
-                'propertyBag' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'dynamicErrorMessage' => ['type' => 'string']
-            ]],
-            'MabJob' => ['properties' => [
-                'duration' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'actionsInfo' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'enum' => [
-                            'Invalid',
-                            'Cancellable',
-                            'Retriable'
-                        ]
-                    ]
-                ],
-                'mabServerName' => ['type' => 'string'],
-                'mabServerType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Unknown',
-                        'IaasVMContainer',
-                        'IaasVMServiceContainer',
-                        'DPMContainer',
-                        'AzureBackupServerContainer',
-                        'MABContainer',
-                        'Cluster',
-                        'AzureSqlContainer',
-                        'Windows',
-                        'VCenter'
-                    ]
-                ],
-                'workloadType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'VM',
-                        'FileFolder',
-                        'AzureSqlDb',
-                        'SQLDB',
-                        'Exchange',
-                        'Sharepoint',
-                        'VMwareVM',
-                        'SystemState',
-                        'Client',
-                        'GenericDataSource'
-                    ]
-                ],
-                'errorDetails' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MabErrorInfo']
-                ],
-                'extendedInfo' => ['$ref' => '#/definitions/MabJobExtendedInfo']
-            ]],
-            'MAB' => ['properties' => [
-                'schedulePolicy' => ['$ref' => '#/definitions/SchedulePolicy'],
-                'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy']
-            ]],
-            'OperationResultInfo' => ['properties' => ['jobList' => [
-                'type' => 'array',
-                'items' => ['type' => 'string']
-            ]]],
-            'OperationResultInfoBase' => ['properties' => []],
-            'OperationResultInfoBaseResource' => ['properties' => ['operation' => ['$ref' => '#/definitions/OperationResultInfoBase']]],
-            'OperationStatusError' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'OperationStatusExtendedInfo' => ['properties' => []],
-            'OperationStatus' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'InProgress',
-                        'Succeeded',
-                        'Failed',
-                        'Canceled'
-                    ]
-                ],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'error' => ['$ref' => '#/definitions/OperationStatusError'],
-                'properties' => ['$ref' => '#/definitions/OperationStatusExtendedInfo']
-            ]],
-            'OperationStatusJobExtendedInfo' => ['properties' => ['jobId' => ['type' => 'string']]],
-            'OperationStatusJobsExtendedInfo' => ['properties' => [
-                'jobIds' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'failedJobsError' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'OperationStatusProvisionILRExtendedInfo' => ['properties' => ['recoveryTarget' => ['$ref' => '#/definitions/InstantItemRecoveryTarget']]],
-            'OperationWorkerResponse' => ['properties' => [
-                'statusCode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Continue',
-                        'SwitchingProtocols',
-                        'OK',
-                        'Created',
-                        'Accepted',
-                        'NonAuthoritativeInformation',
-                        'NoContent',
-                        'ResetContent',
-                        'PartialContent',
-                        'MultipleChoices',
-                        'Ambiguous',
-                        'MovedPermanently',
-                        'Moved',
-                        'Found',
-                        'Redirect',
-                        'SeeOther',
-                        'RedirectMethod',
-                        'NotModified',
-                        'UseProxy',
-                        'Unused',
-                        'TemporaryRedirect',
-                        'RedirectKeepVerb',
-                        'BadRequest',
-                        'Unauthorized',
-                        'PaymentRequired',
-                        'Forbidden',
-                        'NotFound',
-                        'MethodNotAllowed',
-                        'NotAcceptable',
-                        'ProxyAuthenticationRequired',
-                        'RequestTimeout',
-                        'Conflict',
-                        'Gone',
-                        'LengthRequired',
-                        'PreconditionFailed',
-                        'RequestEntityTooLarge',
-                        'RequestUriTooLong',
-                        'UnsupportedMediaType',
-                        'RequestedRangeNotSatisfiable',
-                        'ExpectationFailed',
-                        'UpgradeRequired',
-                        'InternalServerError',
-                        'NotImplemented',
-                        'BadGateway',
-                        'ServiceUnavailable',
-                        'GatewayTimeout',
-                        'HttpVersionNotSupported'
-                    ]
-                ],
-                'Headers' => [
-                    'type' => 'object',
-                    'additionalProperties' => [
+            'AzureIaaSVMErrorInfo' => [
+                'properties' => [
+                    'errorCode' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'errorTitle' => ['type' => 'string'],
+                    'errorString' => ['type' => 'string'],
+                    'recommendations' => [
                         'type' => 'array',
                         'items' => ['type' => 'string']
                     ]
-                ]
-            ]],
-            'ProtectedItem' => ['properties' => [
-                'backupManagementType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'AzureIaasVM',
-                        'MAB',
-                        'DPM',
-                        'AzureBackupServer',
-                        'AzureSql'
+                ],
+                'required' => []
+            ],
+            'AzureIaaSVMJobTaskDetails' => [
+                'properties' => [
+                    'taskId' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'instanceId' => ['type' => 'string'],
+                    'duration' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'status' => ['type' => 'string'],
+                    'progressPercentage' => [
+                        'type' => 'number',
+                        'format' => 'double'
                     ]
                 ],
-                'workloadType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'VM',
-                        'FileFolder',
-                        'AzureSqlDb',
-                        'SQLDB',
-                        'Exchange',
-                        'Sharepoint',
-                        'VMwareVM',
-                        'SystemState',
-                        'Client',
-                        'GenericDataSource'
+                'required' => []
+            ],
+            'AzureIaaSVMJobExtendedInfo' => [
+                'properties' => [
+                    'tasksList' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AzureIaaSVMJobTaskDetails']
+                    ],
+                    'propertyBag' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'progressPercentage' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'dynamicErrorMessage' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AzureIaaSVMJob' => [
+                'properties' => [
+                    'duration' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'actionsInfo' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'Invalid',
+                                'Cancellable',
+                                'Retriable'
+                            ]
+                        ]
+                    ],
+                    'errorDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AzureIaaSVMErrorInfo']
+                    ],
+                    'virtualMachineVersion' => ['type' => 'string'],
+                    'extendedInfo' => ['$ref' => '#/definitions/AzureIaaSVMJobExtendedInfo']
+                ],
+                'required' => []
+            ],
+            'DpmErrorInfo' => [
+                'properties' => [
+                    'errorString' => ['type' => 'string'],
+                    'recommendations' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
                     ]
                 ],
-                'containerName' => ['type' => 'string'],
-                'sourceResourceId' => ['type' => 'string'],
-                'policyId' => ['type' => 'string'],
-                'lastRecoveryPoint' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'ProtectedItemQueryObject' => ['properties' => [
-                'healthState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Passed',
-                        'ActionRequired',
-                        'ActionSuggested',
-                        'Invalid'
-                    ]
+                'required' => []
+            ],
+            'DpmJobTaskDetails' => [
+                'properties' => [
+                    'taskId' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'duration' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'status' => ['type' => 'string']
                 ],
-                'backupManagementType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'AzureIaasVM',
-                        'MAB',
-                        'DPM',
-                        'AzureBackupServer',
-                        'AzureSql'
-                    ]
+                'required' => []
+            ],
+            'DpmJobExtendedInfo' => [
+                'properties' => [
+                    'tasksList' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DpmJobTaskDetails']
+                    ],
+                    'propertyBag' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'dynamicErrorMessage' => ['type' => 'string']
                 ],
-                'itemType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'VM',
-                        'FileFolder',
-                        'AzureSqlDb',
-                        'SQLDB',
-                        'Exchange',
-                        'Sharepoint',
-                        'VMwareVM',
-                        'SystemState',
-                        'Client',
-                        'GenericDataSource'
-                    ]
+                'required' => []
+            ],
+            'DpmJob' => [
+                'properties' => [
+                    'duration' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'dpmServerName' => ['type' => 'string'],
+                    'containerName' => ['type' => 'string'],
+                    'containerType' => ['type' => 'string'],
+                    'workloadType' => ['type' => 'string'],
+                    'actionsInfo' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'Invalid',
+                                'Cancellable',
+                                'Retriable'
+                            ]
+                        ]
+                    ],
+                    'errorDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DpmErrorInfo']
+                    ],
+                    'extendedInfo' => ['$ref' => '#/definitions/DpmJobExtendedInfo']
                 ],
-                'policyName' => ['type' => 'string'],
-                'containerName' => ['type' => 'string'],
-                'backupEngineName' => ['type' => 'string'],
-                'friendlyName' => ['type' => 'string']
-            ]],
-            'ProtectedItemResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/ProtectedItem']]],
-            'ProtectedItemResourceList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ProtectedItemResource']
-            ]]],
-            'ProtectionContainer' => ['properties' => [
-                'friendlyName' => ['type' => 'string'],
-                'backupManagementType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'AzureIaasVM',
-                        'MAB',
-                        'DPM',
-                        'AzureBackupServer',
-                        'AzureSql'
-                    ]
-                ],
-                'registrationStatus' => ['type' => 'string'],
-                'healthStatus' => ['type' => 'string'],
-                'containerType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Unknown',
-                        'IaasVMContainer',
-                        'IaasVMServiceContainer',
-                        'DPMContainer',
-                        'AzureBackupServerContainer',
-                        'MABContainer',
-                        'Cluster',
-                        'AzureSqlContainer',
-                        'Windows',
-                        'VCenter'
-                    ]
-                ]
-            ]],
-            'ProtectionContainerResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/ProtectionContainer']]],
-            'ProtectionContainerResourceList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ProtectionContainerResource']
-            ]]],
-            'ProtectionPolicy' => ['properties' => ['protectedItemsCount' => [
-                'type' => 'integer',
-                'format' => 'int32'
-            ]]],
-            'ProtectionPolicyQueryObject' => ['properties' => ['backupManagementType' => [
-                'type' => 'string',
-                'enum' => [
-                    'Invalid',
-                    'AzureIaasVM',
-                    'MAB',
-                    'DPM',
-                    'AzureBackupServer',
-                    'AzureSql'
-                ]
-            ]]],
-            'ProtectionPolicyResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/ProtectionPolicy']]],
-            'ProtectionPolicyResourceList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ProtectionPolicyResource']
-            ]]],
-            'RecoveryPoint' => ['properties' => []],
-            'RecoveryPointResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPoint']]],
-            'RecoveryPointResourceList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/RecoveryPointResource']
-            ]]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'eTag' => ['type' => 'string']
-            ]],
-            'ResourceList' => ['properties' => ['nextLink' => ['type' => 'string']]],
-            'RestoreRequest' => ['properties' => []],
-            'RestoreRequestResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/RestoreRequest']]],
-            'SimpleRetentionPolicy' => ['properties' => ['retentionDuration' => ['$ref' => '#/definitions/RetentionDuration']]],
-            'SimpleSchedulePolicy' => ['properties' => [
-                'scheduleRunFrequency' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Daily',
-                        'Weekly'
-                    ]
-                ],
-                'scheduleRunDays' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => []
+            ],
+            'Job' => [
+                'properties' => [
+                    'entityFriendlyName' => ['type' => 'string'],
+                    'backupManagementType' => [
                         'type' => 'string',
                         'enum' => [
-                            'Sunday',
-                            'Monday',
-                            'Tuesday',
-                            'Wednesday',
-                            'Thursday',
-                            'Friday',
-                            'Saturday'
+                            'Invalid',
+                            'AzureIaasVM',
+                            'MAB',
+                            'DPM',
+                            'AzureBackupServer',
+                            'AzureSql'
                         ]
-                    ]
+                    ],
+                    'operation' => ['type' => 'string'],
+                    'status' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'activityId' => ['type' => 'string']
                 ],
-                'scheduleRunTimes' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => []
+            ],
+            'JobQueryObject' => [
+                'properties' => [
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'InProgress',
+                            'Completed',
+                            'Failed',
+                            'CompletedWithWarnings',
+                            'Cancelled',
+                            'Cancelling'
+                        ]
+                    ],
+                    'backupManagementType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'AzureIaasVM',
+                            'MAB',
+                            'DPM',
+                            'AzureBackupServer',
+                            'AzureSql'
+                        ]
+                    ],
+                    'operation' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Register',
+                            'UnRegister',
+                            'ConfigureBackup',
+                            'Backup',
+                            'Restore',
+                            'DisableBackup',
+                            'DeleteBackupData'
+                        ]
+                    ],
+                    'jobId' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
                         'type' => 'string',
                         'format' => 'date-time'
                     ]
                 ],
-                'scheduleWeeklyFrequency' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'TokenInformation' => ['properties' => [
-                'token' => ['type' => 'string'],
-                'expiryTimeInUtcTicks' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'JobResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Job']],
+                'required' => []
+            ],
+            'JobResourceList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/JobResource']
+                ]],
+                'required' => []
+            ],
+            'MabErrorInfo' => [
+                'properties' => [
+                    'errorString' => ['type' => 'string'],
+                    'recommendations' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
                 ],
-                'securityPIN' => ['type' => 'string']
-            ]],
-            'WorkloadProtectableItem' => ['properties' => [
-                'backupManagementType' => ['type' => 'string'],
-                'friendlyName' => ['type' => 'string'],
-                'protectionState' => [
+                'required' => []
+            ],
+            'MabJobTaskDetails' => [
+                'properties' => [
+                    'taskId' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'duration' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'status' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MabJobExtendedInfo' => [
+                'properties' => [
+                    'tasksList' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MabJobTaskDetails']
+                    ],
+                    'propertyBag' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'dynamicErrorMessage' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MabJob' => [
+                'properties' => [
+                    'duration' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'actionsInfo' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'Invalid',
+                                'Cancellable',
+                                'Retriable'
+                            ]
+                        ]
+                    ],
+                    'mabServerName' => ['type' => 'string'],
+                    'mabServerType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Unknown',
+                            'IaasVMContainer',
+                            'IaasVMServiceContainer',
+                            'DPMContainer',
+                            'AzureBackupServerContainer',
+                            'MABContainer',
+                            'Cluster',
+                            'AzureSqlContainer',
+                            'Windows',
+                            'VCenter'
+                        ]
+                    ],
+                    'workloadType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'VM',
+                            'FileFolder',
+                            'AzureSqlDb',
+                            'SQLDB',
+                            'Exchange',
+                            'Sharepoint',
+                            'VMwareVM',
+                            'SystemState',
+                            'Client',
+                            'GenericDataSource'
+                        ]
+                    ],
+                    'errorDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MabErrorInfo']
+                    ],
+                    'extendedInfo' => ['$ref' => '#/definitions/MabJobExtendedInfo']
+                ],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'eTag' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResourceList' => [
+                'properties' => ['nextLink' => ['type' => 'string']],
+                'required' => []
+            ],
+            'DPMContainerExtendedInfo' => [
+                'properties' => ['lastRefreshedAt' => [
+                    'type' => 'string',
+                    'format' => 'date-time'
+                ]],
+                'required' => []
+            ],
+            'AzureBackupServerContainer' => [
+                'properties' => [
+                    'canReRegister' => ['type' => 'boolean'],
+                    'containerId' => ['type' => 'string'],
+                    'protectedItemCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'dpmAgentVersion' => ['type' => 'string'],
+                    'DPMServers' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'UpgradeAvailable' => ['type' => 'boolean'],
+                    'protectionStatus' => ['type' => 'string'],
+                    'extendedInfo' => ['$ref' => '#/definitions/DPMContainerExtendedInfo']
+                ],
+                'required' => []
+            ],
+            'AzureBackupServerEngine' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'Microsoft.ClassicCompute/virtualMachines' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'Microsoft.ClassicCompute/virtualMachines' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'Microsoft.ClassicCompute/virtualMachines' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'Microsoft.Compute/virtualMachines' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'Microsoft.Compute/virtualMachines' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'Microsoft.Compute/virtualMachines' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'AzureIaaSVMHealthDetails' => [
+                'properties' => [
+                    'code' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'title' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'recommendations' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'AzureIaaSVMProtectedItemExtendedInfo' => [
+                'properties' => [
+                    'oldestRecoveryPoint' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'recoveryPointCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'policyInconsistent' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'AzureIaaSVMProtectedItem' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'virtualMachineId' => ['type' => 'string'],
+                    'protectionStatus' => ['type' => 'string'],
+                    'protectionState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'IRPending',
+                            'Protected',
+                            'ProtectionError',
+                            'ProtectionStopped',
+                            'ProtectionPaused'
+                        ]
+                    ],
+                    'healthStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Passed',
+                            'ActionRequired',
+                            'ActionSuggested',
+                            'Invalid'
+                        ]
+                    ],
+                    'healthDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AzureIaaSVMHealthDetails']
+                    ],
+                    'lastBackupStatus' => ['type' => 'string'],
+                    'lastBackupTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'protectedItemDataId' => ['type' => 'string'],
+                    'extendedInfo' => ['$ref' => '#/definitions/AzureIaaSVMProtectedItemExtendedInfo']
+                ],
+                'required' => []
+            ],
+            'SchedulePolicy' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'RetentionPolicy' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'AzureIaasVM' => [
+                'properties' => [
+                    'schedulePolicy' => ['$ref' => '#/definitions/SchedulePolicy'],
+                    'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy'],
+                    'timeZone' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AzureSqlContainer' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'AzureSqlProtectedItemExtendedInfo' => [
+                'properties' => [
+                    'oldestRecoveryPoint' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'recoveryPointCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'policyState' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Microsoft.Sql/servers/databases' => [
+                'properties' => [
+                    'protectedItemDataId' => ['type' => 'string'],
+                    'protectionState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'IRPending',
+                            'Protected',
+                            'ProtectionError',
+                            'ProtectionStopped',
+                            'ProtectionPaused'
+                        ]
+                    ],
+                    'extendedInfo' => ['$ref' => '#/definitions/AzureSqlProtectedItemExtendedInfo']
+                ],
+                'required' => []
+            ],
+            'AzureSql' => [
+                'properties' => ['retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy']],
+                'required' => []
+            ],
+            'BackupEngineExtendedInfo' => [
+                'properties' => [
+                    'databaseName' => ['type' => 'string'],
+                    'protectedItemsCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'protectedServersCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'diskCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'usedDiskSpace' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'availableDiskSpace' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'refreshedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'azureProtectedInstances' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'BackupEngineBase' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'backupManagementType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'AzureIaasVM',
+                            'MAB',
+                            'DPM',
+                            'AzureBackupServer',
+                            'AzureSql'
+                        ]
+                    ],
+                    'registrationStatus' => ['type' => 'string'],
+                    'backupEngineState' => ['type' => 'string'],
+                    'healthStatus' => ['type' => 'string'],
+                    'canReRegister' => ['type' => 'boolean'],
+                    'backupEngineId' => ['type' => 'string'],
+                    'dpmVersion' => ['type' => 'string'],
+                    'azureBackupAgentVersion' => ['type' => 'string'],
+                    'isAzureBackupAgentUpgradeAvailable' => ['type' => 'boolean'],
+                    'isDPMUpgradeAvailable' => ['type' => 'boolean'],
+                    'extendedInfo' => ['$ref' => '#/definitions/BackupEngineExtendedInfo']
+                ],
+                'required' => []
+            ],
+            'BackupEngineBaseResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BackupEngineBase']],
+                'required' => []
+            ],
+            'BackupEngineBaseResourceList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/BackupEngineBaseResource']
+                ]],
+                'required' => []
+            ],
+            'NameInfo' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'localizedValue' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'BackupManagementUsage' => [
+                'properties' => [
+                    'unit' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Count',
+                            'Bytes',
+                            'Seconds',
+                            'Percent',
+                            'CountPerSecond',
+                            'BytesPerSecond'
+                        ]
+                    ],
+                    'quotaPeriod' => ['type' => 'string'],
+                    'nextResetTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'currentValue' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'limit' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'name' => ['$ref' => '#/definitions/NameInfo']
+                ],
+                'required' => []
+            ],
+            'BackupManagementUsageList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/BackupManagementUsage']
+                ]],
+                'required' => []
+            ],
+            'BackupRequest' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'BackupRequestResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BackupRequest']],
+                'required' => []
+            ],
+            'BackupResourceConfig' => [
+                'properties' => [
+                    'storageType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'GeoRedundant',
+                            'LocallyRedundant'
+                        ]
+                    ],
+                    'storageTypeState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Locked',
+                            'Unlocked'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'BackupResourceConfigResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BackupResourceConfig']],
+                'required' => []
+            ],
+            'BackupResourceVaultConfig' => [
+                'properties' => [
+                    'storageType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'GeoRedundant',
+                            'LocallyRedundant'
+                        ]
+                    ],
+                    'storageTypeState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Locked',
+                            'Unlocked'
+                        ]
+                    ],
+                    'enhancedSecurityState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'BackupResourceVaultConfigResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BackupResourceVaultConfig']],
+                'required' => []
+            ],
+            'BEKDetails' => [
+                'properties' => [
+                    'secretUrl' => ['type' => 'string'],
+                    'secretVaultId' => ['type' => 'string'],
+                    'secretData' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'BMSBackupEngineQueryObject' => [
+                'properties' => ['expand' => ['type' => 'string']],
+                'required' => []
+            ],
+            'BMSBackupEnginesQueryObject' => [
+                'properties' => [
+                    'backupManagementType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'AzureIaasVM',
+                            'MAB',
+                            'DPM',
+                            'AzureBackupServer',
+                            'AzureSql'
+                        ]
+                    ],
+                    'friendlyName' => ['type' => 'string'],
+                    'expand' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'BMSBackupSummariesQueryObject' => [
+                'properties' => ['type' => [
                     'type' => 'string',
                     'enum' => [
                         'Invalid',
-                        'NotProtected',
-                        'Protecting',
-                        'Protected'
+                        'BackupProtectedItemCountSummary',
+                        'BackupProtectionContainerCountSummary'
                     ]
-                ]
-            ]],
-            'WorkloadProtectableItemResource' => ['properties' => ['properties' => ['$ref' => '#/definitions/WorkloadProtectableItem']]],
-            'WorkloadProtectableItemResourceList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/WorkloadProtectableItemResource']
-            ]]],
-            'ClientDiscoveryDisplay' => ['properties' => [
-                'Provider' => ['type' => 'string'],
-                'Resource' => ['type' => 'string'],
-                'Operation' => ['type' => 'string'],
-                'Description' => ['type' => 'string']
-            ]],
-            'ClientDiscoveryForLogSpecification' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'blobDuration' => ['type' => 'string']
-            ]],
-            'ClientDiscoveryForServiceSpecification' => ['properties' => ['logSpecifications' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ClientDiscoveryForLogSpecification']
-            ]]],
-            'ClientDiscoveryForProperties' => ['properties' => ['serviceSpecification' => ['$ref' => '#/definitions/ClientDiscoveryForServiceSpecification']]],
-            'ClientDiscoveryValueForSingleApi' => ['properties' => [
-                'Name' => ['type' => 'string'],
-                'Display' => ['$ref' => '#/definitions/ClientDiscoveryDisplay'],
-                'Origin' => ['type' => 'string'],
-                'Properties' => ['$ref' => '#/definitions/ClientDiscoveryForProperties']
-            ]],
-            'ClientDiscoveryResponse' => ['properties' => [
-                'Value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ClientDiscoveryValueForSingleApi']
+                ]],
+                'required' => []
+            ],
+            'BMSContainerQueryObject' => [
+                'properties' => [
+                    'backupManagementType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'AzureIaasVM',
+                            'MAB',
+                            'DPM',
+                            'AzureBackupServer',
+                            'AzureSql'
+                        ]
+                    ],
+                    'containerType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Unknown',
+                            'IaasVMContainer',
+                            'IaasVMServiceContainer',
+                            'DPMContainer',
+                            'AzureBackupServerContainer',
+                            'MABContainer',
+                            'Cluster',
+                            'AzureSqlContainer',
+                            'Windows',
+                            'VCenter'
+                        ]
+                    ],
+                    'backupEngineName' => ['type' => 'string'],
+                    'status' => ['type' => 'string'],
+                    'friendlyName' => ['type' => 'string']
                 ],
-                'NextLink' => ['type' => 'string']
-            ]]
+                'required' => ['backupManagementType']
+            ],
+            'BMSPOQueryObject' => [
+                'properties' => [
+                    'backupManagementType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'AzureIaasVM',
+                            'MAB',
+                            'DPM',
+                            'AzureBackupServer',
+                            'AzureSql'
+                        ]
+                    ],
+                    'status' => ['type' => 'string'],
+                    'friendlyName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'BMSRPQueryObject' => [
+                'properties' => [
+                    'startDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ClientScriptForConnect' => [
+                'properties' => [
+                    'scriptContent' => ['type' => 'string'],
+                    'scriptExtension' => ['type' => 'string'],
+                    'osType' => ['type' => 'string'],
+                    'url' => ['type' => 'string'],
+                    'scriptNameSuffix' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Day' => [
+                'properties' => [
+                    'date' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'isLast' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'DailyRetentionFormat' => [
+                'properties' => ['daysOfTheMonth' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Day']
+                ]],
+                'required' => []
+            ],
+            'RetentionDuration' => [
+                'properties' => [
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'durationType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Days',
+                            'Weeks',
+                            'Months',
+                            'Years'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'DailyRetentionSchedule' => [
+                'properties' => [
+                    'retentionTimes' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'format' => 'date-time'
+                        ]
+                    ],
+                    'retentionDuration' => ['$ref' => '#/definitions/RetentionDuration']
+                ],
+                'required' => []
+            ],
+            'DpmBackupEngine' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'DPMContainer' => [
+                'properties' => [
+                    'canReRegister' => ['type' => 'boolean'],
+                    'containerId' => ['type' => 'string'],
+                    'protectedItemCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'dpmAgentVersion' => ['type' => 'string'],
+                    'DPMServers' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'UpgradeAvailable' => ['type' => 'boolean'],
+                    'protectionStatus' => ['type' => 'string'],
+                    'extendedInfo' => ['$ref' => '#/definitions/DPMContainerExtendedInfo']
+                ],
+                'required' => []
+            ],
+            'DPMProtectedItemExtendedInfo' => [
+                'properties' => [
+                    'protectableObjectLoadPath' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'protected' => ['type' => 'boolean'],
+                    'isPresentOnCloud' => ['type' => 'boolean'],
+                    'lastBackupStatus' => ['type' => 'string'],
+                    'lastRefreshedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'oldestRecoveryPoint' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'recoveryPointCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'onPremiseOldestRecoveryPoint' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'onPremiseLatestRecoveryPoint' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'onPremiseRecoveryPointCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'isCollocated' => ['type' => 'boolean'],
+                    'protectionGroupName' => ['type' => 'string'],
+                    'diskStorageUsedInBytes' => ['type' => 'string'],
+                    'totalDiskStorageSizeInBytes' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DPMProtectedItem' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'backupEngineName' => ['type' => 'string'],
+                    'protectionState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'IRPending',
+                            'Protected',
+                            'ProtectionError',
+                            'ProtectionStopped',
+                            'ProtectionPaused'
+                        ]
+                    ],
+                    'isScheduledForDeferredDelete' => ['type' => 'boolean'],
+                    'extendedInfo' => ['$ref' => '#/definitions/DPMProtectedItemExtendedInfo']
+                ],
+                'required' => []
+            ],
+            'EncryptionDetails' => [
+                'properties' => [
+                    'encryptionEnabled' => ['type' => 'boolean'],
+                    'kekUrl' => ['type' => 'string'],
+                    'secretKeyUrl' => ['type' => 'string'],
+                    'kekVaultId' => ['type' => 'string'],
+                    'secretKeyVaultId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ExportJobsOperationResultInfo' => [
+                'properties' => [
+                    'blobUrl' => ['type' => 'string'],
+                    'blobSasKey' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'GenericRecoveryPoint' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'recoveryPointType' => ['type' => 'string'],
+                    'recoveryPointTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'recoveryPointAdditionalInfo' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'GetProtectedItemQueryObject' => [
+                'properties' => ['expand' => ['type' => 'string']],
+                'required' => []
+            ],
+            'IaasVMBackupRequest' => [
+                'properties' => ['recoveryPointExpiryTimeInUTC' => [
+                    'type' => 'string',
+                    'format' => 'date-time'
+                ]],
+                'required' => []
+            ],
+            'IaaSVMContainer' => [
+                'properties' => [
+                    'virtualMachineId' => ['type' => 'string'],
+                    'virtualMachineVersion' => ['type' => 'string'],
+                    'resourceGroup' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'IaasVMILRRegistrationRequest' => [
+                'properties' => [
+                    'recoveryPointId' => ['type' => 'string'],
+                    'virtualMachineId' => ['type' => 'string'],
+                    'initiatorName' => ['type' => 'string'],
+                    'renewExistingRegistration' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'IaaSVMProtectableItem' => [
+                'properties' => ['virtualMachineId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'KEKDetails' => [
+                'properties' => [
+                    'keyUrl' => ['type' => 'string'],
+                    'keyVaultId' => ['type' => 'string'],
+                    'keyBackupData' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'KeyAndSecretDetails' => [
+                'properties' => [
+                    'kekDetails' => ['$ref' => '#/definitions/KEKDetails'],
+                    'bekDetails' => ['$ref' => '#/definitions/BEKDetails']
+                ],
+                'required' => []
+            ],
+            'RecoveryPointTierInformation' => [
+                'properties' => [
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'InstantRP',
+                            'HardenedRP'
+                        ]
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Valid',
+                            'Disabled',
+                            'Deleted'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'IaasVMRecoveryPoint' => [
+                'properties' => [
+                    'recoveryPointType' => ['type' => 'string'],
+                    'recoveryPointTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'recoveryPointAdditionalInfo' => ['type' => 'string'],
+                    'sourceVMStorageType' => ['type' => 'string'],
+                    'isSourceVMEncrypted' => ['type' => 'boolean'],
+                    'keyAndSecret' => ['$ref' => '#/definitions/KeyAndSecretDetails'],
+                    'isInstantILRSessionActive' => ['type' => 'boolean'],
+                    'recoveryPointTierDetails' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RecoveryPointTierInformation']
+                    ],
+                    'isManagedVirtualMachine' => ['type' => 'boolean'],
+                    'virtualMachineSize' => ['type' => 'string'],
+                    'originalStorageAccountOption' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'IaasVMRestoreRequest' => [
+                'properties' => [
+                    'recoveryPointId' => ['type' => 'string'],
+                    'recoveryType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'OriginalLocation',
+                            'AlternateLocation',
+                            'RestoreDisks'
+                        ]
+                    ],
+                    'sourceResourceId' => ['type' => 'string'],
+                    'targetVirtualMachineId' => ['type' => 'string'],
+                    'targetResourceGroupId' => ['type' => 'string'],
+                    'storageAccountId' => ['type' => 'string'],
+                    'virtualNetworkId' => ['type' => 'string'],
+                    'subnetId' => ['type' => 'string'],
+                    'targetDomainNameId' => ['type' => 'string'],
+                    'region' => ['type' => 'string'],
+                    'affinityGroup' => ['type' => 'string'],
+                    'createNewCloudService' => ['type' => 'boolean'],
+                    'originalStorageAccountOption' => ['type' => 'boolean'],
+                    'encryptionDetails' => ['$ref' => '#/definitions/EncryptionDetails']
+                ],
+                'required' => []
+            ],
+            'ILRRequest' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'ILRRequestResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ILRRequest']],
+                'required' => []
+            ],
+            'InstantItemRecoveryTarget' => [
+                'properties' => ['clientScripts' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ClientScriptForConnect']
+                ]],
+                'required' => []
+            ],
+            'WeeklyRetentionSchedule' => [
+                'properties' => [
+                    'daysOfTheWeek' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'Sunday',
+                                'Monday',
+                                'Tuesday',
+                                'Wednesday',
+                                'Thursday',
+                                'Friday',
+                                'Saturday'
+                            ]
+                        ]
+                    ],
+                    'retentionTimes' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'format' => 'date-time'
+                        ]
+                    ],
+                    'retentionDuration' => ['$ref' => '#/definitions/RetentionDuration']
+                ],
+                'required' => []
+            ],
+            'WeeklyRetentionFormat' => [
+                'properties' => [
+                    'daysOfTheWeek' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'Sunday',
+                                'Monday',
+                                'Tuesday',
+                                'Wednesday',
+                                'Thursday',
+                                'Friday',
+                                'Saturday'
+                            ]
+                        ]
+                    ],
+                    'weeksOfTheMonth' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'First',
+                                'Second',
+                                'Third',
+                                'Fourth',
+                                'Last'
+                            ]
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'MonthlyRetentionSchedule' => [
+                'properties' => [
+                    'retentionScheduleFormatType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Daily',
+                            'Weekly'
+                        ]
+                    ],
+                    'retentionScheduleDaily' => ['$ref' => '#/definitions/DailyRetentionFormat'],
+                    'retentionScheduleWeekly' => ['$ref' => '#/definitions/WeeklyRetentionFormat'],
+                    'retentionTimes' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'format' => 'date-time'
+                        ]
+                    ],
+                    'retentionDuration' => ['$ref' => '#/definitions/RetentionDuration']
+                ],
+                'required' => []
+            ],
+            'YearlyRetentionSchedule' => [
+                'properties' => [
+                    'retentionScheduleFormatType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Daily',
+                            'Weekly'
+                        ]
+                    ],
+                    'monthsOfYear' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'Invalid',
+                                'January',
+                                'February',
+                                'March',
+                                'April',
+                                'May',
+                                'June',
+                                'July',
+                                'August',
+                                'September',
+                                'October',
+                                'November',
+                                'December'
+                            ]
+                        ]
+                    ],
+                    'retentionScheduleDaily' => ['$ref' => '#/definitions/DailyRetentionFormat'],
+                    'retentionScheduleWeekly' => ['$ref' => '#/definitions/WeeklyRetentionFormat'],
+                    'retentionTimes' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'format' => 'date-time'
+                        ]
+                    ],
+                    'retentionDuration' => ['$ref' => '#/definitions/RetentionDuration']
+                ],
+                'required' => []
+            ],
+            'LongTermRetentionPolicy' => [
+                'properties' => [
+                    'dailySchedule' => ['$ref' => '#/definitions/DailyRetentionSchedule'],
+                    'weeklySchedule' => ['$ref' => '#/definitions/WeeklyRetentionSchedule'],
+                    'monthlySchedule' => ['$ref' => '#/definitions/MonthlyRetentionSchedule'],
+                    'yearlySchedule' => ['$ref' => '#/definitions/YearlyRetentionSchedule']
+                ],
+                'required' => []
+            ],
+            'LongTermSchedulePolicy' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'MabContainerExtendedInfo' => [
+                'properties' => [
+                    'lastRefreshedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'backupItemType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'VM',
+                            'FileFolder',
+                            'AzureSqlDb',
+                            'SQLDB',
+                            'Exchange',
+                            'Sharepoint',
+                            'VMwareVM',
+                            'SystemState',
+                            'Client',
+                            'GenericDataSource'
+                        ]
+                    ],
+                    'backupItems' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'policyName' => ['type' => 'string'],
+                    'lastBackupStatus' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MABWindowsContainer' => [
+                'properties' => [
+                    'canReRegister' => ['type' => 'boolean'],
+                    'containerId' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'protectedItemCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'agentVersion' => ['type' => 'string'],
+                    'extendedInfo' => ['$ref' => '#/definitions/MabContainerExtendedInfo']
+                ],
+                'required' => []
+            ],
+            'MabFileFolderProtectedItemExtendedInfo' => [
+                'properties' => [
+                    'lastRefreshedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'oldestRecoveryPoint' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'recoveryPointCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'MabFileFolderProtectedItem' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'computerName' => ['type' => 'string'],
+                    'lastBackupStatus' => ['type' => 'string'],
+                    'protectionState' => ['type' => 'string'],
+                    'isScheduledForDeferredDelete' => ['type' => 'boolean'],
+                    'deferredDeleteSyncTimeInUTC' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'extendedInfo' => ['$ref' => '#/definitions/MabFileFolderProtectedItemExtendedInfo']
+                ],
+                'required' => []
+            ],
+            'MAB' => [
+                'properties' => [
+                    'schedulePolicy' => ['$ref' => '#/definitions/SchedulePolicy'],
+                    'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy']
+                ],
+                'required' => []
+            ],
+            'OperationResultInfo' => [
+                'properties' => ['jobList' => [
+                    'type' => 'array',
+                    'items' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'OperationResultInfoBase' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'OperationResultInfoBaseResource' => [
+                'properties' => ['operation' => ['$ref' => '#/definitions/OperationResultInfoBase']],
+                'required' => []
+            ],
+            'OperationStatusError' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'OperationStatusExtendedInfo' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'OperationStatus' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'InProgress',
+                            'Succeeded',
+                            'Failed',
+                            'Canceled'
+                        ]
+                    ],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'error' => ['$ref' => '#/definitions/OperationStatusError'],
+                    'properties' => ['$ref' => '#/definitions/OperationStatusExtendedInfo']
+                ],
+                'required' => []
+            ],
+            'OperationStatusJobExtendedInfo' => [
+                'properties' => ['jobId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'OperationStatusJobsExtendedInfo' => [
+                'properties' => [
+                    'jobIds' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'failedJobsError' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'OperationStatusProvisionILRExtendedInfo' => [
+                'properties' => ['recoveryTarget' => ['$ref' => '#/definitions/InstantItemRecoveryTarget']],
+                'required' => []
+            ],
+            'OperationWorkerResponse' => [
+                'properties' => [
+                    'statusCode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Continue',
+                            'SwitchingProtocols',
+                            'OK',
+                            'Created',
+                            'Accepted',
+                            'NonAuthoritativeInformation',
+                            'NoContent',
+                            'ResetContent',
+                            'PartialContent',
+                            'MultipleChoices',
+                            'Ambiguous',
+                            'MovedPermanently',
+                            'Moved',
+                            'Found',
+                            'Redirect',
+                            'SeeOther',
+                            'RedirectMethod',
+                            'NotModified',
+                            'UseProxy',
+                            'Unused',
+                            'TemporaryRedirect',
+                            'RedirectKeepVerb',
+                            'BadRequest',
+                            'Unauthorized',
+                            'PaymentRequired',
+                            'Forbidden',
+                            'NotFound',
+                            'MethodNotAllowed',
+                            'NotAcceptable',
+                            'ProxyAuthenticationRequired',
+                            'RequestTimeout',
+                            'Conflict',
+                            'Gone',
+                            'LengthRequired',
+                            'PreconditionFailed',
+                            'RequestEntityTooLarge',
+                            'RequestUriTooLong',
+                            'UnsupportedMediaType',
+                            'RequestedRangeNotSatisfiable',
+                            'ExpectationFailed',
+                            'UpgradeRequired',
+                            'InternalServerError',
+                            'NotImplemented',
+                            'BadGateway',
+                            'ServiceUnavailable',
+                            'GatewayTimeout',
+                            'HttpVersionNotSupported'
+                        ]
+                    ],
+                    'Headers' => [
+                        'type' => 'object',
+                        'additionalProperties' => [
+                            'type' => 'array',
+                            'items' => ['type' => 'string']
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'ProtectedItem' => [
+                'properties' => [
+                    'backupManagementType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'AzureIaasVM',
+                            'MAB',
+                            'DPM',
+                            'AzureBackupServer',
+                            'AzureSql'
+                        ]
+                    ],
+                    'workloadType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'VM',
+                            'FileFolder',
+                            'AzureSqlDb',
+                            'SQLDB',
+                            'Exchange',
+                            'Sharepoint',
+                            'VMwareVM',
+                            'SystemState',
+                            'Client',
+                            'GenericDataSource'
+                        ]
+                    ],
+                    'containerName' => ['type' => 'string'],
+                    'sourceResourceId' => ['type' => 'string'],
+                    'policyId' => ['type' => 'string'],
+                    'lastRecoveryPoint' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ProtectedItemQueryObject' => [
+                'properties' => [
+                    'healthState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Passed',
+                            'ActionRequired',
+                            'ActionSuggested',
+                            'Invalid'
+                        ]
+                    ],
+                    'backupManagementType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'AzureIaasVM',
+                            'MAB',
+                            'DPM',
+                            'AzureBackupServer',
+                            'AzureSql'
+                        ]
+                    ],
+                    'itemType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'VM',
+                            'FileFolder',
+                            'AzureSqlDb',
+                            'SQLDB',
+                            'Exchange',
+                            'Sharepoint',
+                            'VMwareVM',
+                            'SystemState',
+                            'Client',
+                            'GenericDataSource'
+                        ]
+                    ],
+                    'policyName' => ['type' => 'string'],
+                    'containerName' => ['type' => 'string'],
+                    'backupEngineName' => ['type' => 'string'],
+                    'friendlyName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ProtectedItemResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ProtectedItem']],
+                'required' => []
+            ],
+            'ProtectedItemResourceList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ProtectedItemResource']
+                ]],
+                'required' => []
+            ],
+            'ProtectionContainer' => [
+                'properties' => [
+                    'friendlyName' => ['type' => 'string'],
+                    'backupManagementType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'AzureIaasVM',
+                            'MAB',
+                            'DPM',
+                            'AzureBackupServer',
+                            'AzureSql'
+                        ]
+                    ],
+                    'registrationStatus' => ['type' => 'string'],
+                    'healthStatus' => ['type' => 'string'],
+                    'containerType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Unknown',
+                            'IaasVMContainer',
+                            'IaasVMServiceContainer',
+                            'DPMContainer',
+                            'AzureBackupServerContainer',
+                            'MABContainer',
+                            'Cluster',
+                            'AzureSqlContainer',
+                            'Windows',
+                            'VCenter'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'ProtectionContainerResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ProtectionContainer']],
+                'required' => []
+            ],
+            'ProtectionContainerResourceList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ProtectionContainerResource']
+                ]],
+                'required' => []
+            ],
+            'ProtectionPolicy' => [
+                'properties' => ['protectedItemsCount' => [
+                    'type' => 'integer',
+                    'format' => 'int32'
+                ]],
+                'required' => []
+            ],
+            'ProtectionPolicyQueryObject' => [
+                'properties' => ['backupManagementType' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'Invalid',
+                        'AzureIaasVM',
+                        'MAB',
+                        'DPM',
+                        'AzureBackupServer',
+                        'AzureSql'
+                    ]
+                ]],
+                'required' => []
+            ],
+            'ProtectionPolicyResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ProtectionPolicy']],
+                'required' => []
+            ],
+            'ProtectionPolicyResourceList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ProtectionPolicyResource']
+                ]],
+                'required' => []
+            ],
+            'RecoveryPoint' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'RecoveryPointResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPoint']],
+                'required' => []
+            ],
+            'RecoveryPointResourceList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/RecoveryPointResource']
+                ]],
+                'required' => []
+            ],
+            'RestoreRequest' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'RestoreRequestResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RestoreRequest']],
+                'required' => []
+            ],
+            'SimpleRetentionPolicy' => [
+                'properties' => ['retentionDuration' => ['$ref' => '#/definitions/RetentionDuration']],
+                'required' => []
+            ],
+            'SimpleSchedulePolicy' => [
+                'properties' => [
+                    'scheduleRunFrequency' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Daily',
+                            'Weekly'
+                        ]
+                    ],
+                    'scheduleRunDays' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'Sunday',
+                                'Monday',
+                                'Tuesday',
+                                'Wednesday',
+                                'Thursday',
+                                'Friday',
+                                'Saturday'
+                            ]
+                        ]
+                    ],
+                    'scheduleRunTimes' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'format' => 'date-time'
+                        ]
+                    ],
+                    'scheduleWeeklyFrequency' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'TokenInformation' => [
+                'properties' => [
+                    'token' => ['type' => 'string'],
+                    'expiryTimeInUtcTicks' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'securityPIN' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'WorkloadProtectableItem' => [
+                'properties' => [
+                    'backupManagementType' => ['type' => 'string'],
+                    'friendlyName' => ['type' => 'string'],
+                    'protectionState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'NotProtected',
+                            'Protecting',
+                            'Protected'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'WorkloadProtectableItemResource' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/WorkloadProtectableItem']],
+                'required' => []
+            ],
+            'WorkloadProtectableItemResourceList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/WorkloadProtectableItemResource']
+                ]],
+                'required' => []
+            ],
+            'ClientDiscoveryDisplay' => [
+                'properties' => [
+                    'Provider' => ['type' => 'string'],
+                    'Resource' => ['type' => 'string'],
+                    'Operation' => ['type' => 'string'],
+                    'Description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ClientDiscoveryForLogSpecification' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'blobDuration' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ClientDiscoveryForServiceSpecification' => [
+                'properties' => ['logSpecifications' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ClientDiscoveryForLogSpecification']
+                ]],
+                'required' => []
+            ],
+            'ClientDiscoveryForProperties' => [
+                'properties' => ['serviceSpecification' => ['$ref' => '#/definitions/ClientDiscoveryForServiceSpecification']],
+                'required' => []
+            ],
+            'ClientDiscoveryValueForSingleApi' => [
+                'properties' => [
+                    'Name' => ['type' => 'string'],
+                    'Display' => ['$ref' => '#/definitions/ClientDiscoveryDisplay'],
+                    'Origin' => ['type' => 'string'],
+                    'Properties' => ['$ref' => '#/definitions/ClientDiscoveryForProperties']
+                ],
+                'required' => []
+            ],
+            'ClientDiscoveryResponse' => [
+                'properties' => [
+                    'Value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ClientDiscoveryValueForSingleApi']
+                    ],
+                    'NextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

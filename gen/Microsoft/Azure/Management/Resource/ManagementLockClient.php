@@ -616,35 +616,47 @@ final class ManagementLockClient
             ]]
         ],
         'definitions' => [
-            'ManagementLockOwner' => ['properties' => ['applicationId' => ['type' => 'string']]],
-            'ManagementLockProperties' => ['properties' => [
-                'level' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'NotSpecified',
-                        'CanNotDelete',
-                        'ReadOnly'
+            'ManagementLockOwner' => [
+                'properties' => ['applicationId' => ['type' => 'string']],
+                'required' => []
+            ],
+            'ManagementLockProperties' => [
+                'properties' => [
+                    'level' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotSpecified',
+                            'CanNotDelete',
+                            'ReadOnly'
+                        ]
+                    ],
+                    'notes' => ['type' => 'string'],
+                    'owners' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ManagementLockOwner']
                     ]
                 ],
-                'notes' => ['type' => 'string'],
-                'owners' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ManagementLockOwner']
-                ]
-            ]],
-            'ManagementLockObject' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ManagementLockProperties'],
-                'id' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'name' => ['type' => 'string']
-            ]],
-            'ManagementLockListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ManagementLockObject']
+                'required' => ['level']
+            ],
+            'ManagementLockObject' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ManagementLockProperties'],
+                    'id' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'name' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]]
+                'required' => ['properties']
+            ],
+            'ManagementLockListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ManagementLockObject']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

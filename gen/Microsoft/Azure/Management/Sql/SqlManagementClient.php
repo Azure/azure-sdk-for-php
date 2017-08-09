@@ -47,6 +47,9 @@ final class SqlManagementClient
         $this->_EncryptionProtectors_group = new \Microsoft\Azure\Management\Sql\EncryptionProtectors($_client);
         $this->_FailoverGroups_group = new \Microsoft\Azure\Management\Sql\FailoverGroups($_client);
         $this->_ServerKeys_group = new \Microsoft\Azure\Management\Sql\ServerKeys($_client);
+        $this->_SyncAgents_group = new \Microsoft\Azure\Management\Sql\SyncAgents($_client);
+        $this->_SyncGroups_group = new \Microsoft\Azure\Management\Sql\SyncGroups($_client);
+        $this->_SyncMembers_group = new \Microsoft\Azure\Management\Sql\SyncMembers($_client);
         $this->_VirtualNetworkRules_group = new \Microsoft\Azure\Management\Sql\VirtualNetworkRules($_client);
     }
     /**
@@ -274,6 +277,27 @@ final class SqlManagementClient
         return $this->_ServerKeys_group;
     }
     /**
+     * @return \Microsoft\Azure\Management\Sql\SyncAgents
+     */
+    public function getSyncAgents()
+    {
+        return $this->_SyncAgents_group;
+    }
+    /**
+     * @return \Microsoft\Azure\Management\Sql\SyncGroups
+     */
+    public function getSyncGroups()
+    {
+        return $this->_SyncGroups_group;
+    }
+    /**
+     * @return \Microsoft\Azure\Management\Sql\SyncMembers
+     */
+    public function getSyncMembers()
+    {
+        return $this->_SyncMembers_group;
+    }
+    /**
      * @return \Microsoft\Azure\Management\Sql\VirtualNetworkRules
      */
     public function getVirtualNetworkRules()
@@ -408,6 +432,18 @@ final class SqlManagementClient
      * @var \Microsoft\Azure\Management\Sql\ServerKeys
      */
     private $_ServerKeys_group;
+    /**
+     * @var \Microsoft\Azure\Management\Sql\SyncAgents
+     */
+    private $_SyncAgents_group;
+    /**
+     * @var \Microsoft\Azure\Management\Sql\SyncGroups
+     */
+    private $_SyncGroups_group;
+    /**
+     * @var \Microsoft\Azure\Management\Sql\SyncMembers
+     */
+    private $_SyncMembers_group;
     /**
      * @var \Microsoft\Azure\Management\Sql\VirtualNetworkRules
      */
@@ -4401,6 +4437,1110 @@ final class SqlManagementClient
                     ]
                 ]
             ],
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}' => [
+                'get' => [
+                    'operationId' => 'SyncAgents_Get',
+                    'parameters' => [
+                        [
+                            'name' => 'resourceGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'serverName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'syncAgentName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'subscriptionId',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'api-version',
+                            'in' => 'query',
+                            'required' => TRUE,
+                            'type' => 'string',
+                            'enum' => ['2015-05-01-preview']
+                        ]
+                    ],
+                    'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/SyncAgent']]]
+                ],
+                'put' => [
+                    'operationId' => 'SyncAgents_CreateOrUpdate',
+                    'parameters' => [
+                        [
+                            'name' => 'resourceGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'serverName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'syncAgentName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'parameters',
+                            'in' => 'body',
+                            'required' => TRUE,
+                            '$ref' => '#/definitions/SyncAgent'
+                        ],
+                        [
+                            'name' => 'subscriptionId',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'api-version',
+                            'in' => 'query',
+                            'required' => TRUE,
+                            'type' => 'string',
+                            'enum' => ['2015-05-01-preview']
+                        ]
+                    ],
+                    'responses' => [
+                        '200' => ['schema' => ['$ref' => '#/definitions/SyncAgent']],
+                        '202' => [],
+                        '201' => ['schema' => ['$ref' => '#/definitions/SyncAgent']]
+                    ]
+                ],
+                'delete' => [
+                    'operationId' => 'SyncAgents_Delete',
+                    'parameters' => [
+                        [
+                            'name' => 'resourceGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'serverName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'syncAgentName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'subscriptionId',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'api-version',
+                            'in' => 'query',
+                            'required' => TRUE,
+                            'type' => 'string',
+                            'enum' => ['2015-05-01-preview']
+                        ]
+                    ],
+                    'responses' => [
+                        '200' => [],
+                        '202' => [],
+                        '204' => []
+                    ]
+                ]
+            ],
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents' => ['get' => [
+                'operationId' => 'SyncAgents_ListByServer',
+                'parameters' => [
+                    [
+                        'name' => 'resourceGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'serverName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2015-05-01-preview']
+                    ]
+                ],
+                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/SyncAgentListResult']]]
+            ]],
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}/generateKey' => ['post' => [
+                'operationId' => 'SyncAgents_GenerateKey',
+                'parameters' => [
+                    [
+                        'name' => 'resourceGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'serverName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'syncAgentName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2015-05-01-preview']
+                    ]
+                ],
+                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/SyncAgentKeyProperties']]]
+            ]],
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}/linkedDatabases' => ['get' => [
+                'operationId' => 'SyncAgents_ListLinkedDatabases',
+                'parameters' => [
+                    [
+                        'name' => 'resourceGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'serverName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'syncAgentName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2015-05-01-preview']
+                    ]
+                ],
+                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/SyncAgentLinkedDatabaseListResult']]]
+            ]],
+            '/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/syncDatabaseIds' => ['get' => [
+                'operationId' => 'SyncGroups_ListSyncDatabaseIds',
+                'parameters' => [
+                    [
+                        'name' => 'locationName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2015-05-01-preview']
+                    ]
+                ],
+                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/SyncDatabaseIdListResult']]]
+            ]],
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/refreshHubSchema' => ['post' => [
+                'operationId' => 'SyncGroups_RefreshHubSchema',
+                'parameters' => [
+                    [
+                        'name' => 'resourceGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'serverName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'databaseName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'syncGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2015-05-01-preview']
+                    ]
+                ],
+                'responses' => [
+                    '200' => [],
+                    '202' => []
+                ]
+            ]],
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/hubSchemas' => ['get' => [
+                'operationId' => 'SyncGroups_ListHubSchemas',
+                'parameters' => [
+                    [
+                        'name' => 'resourceGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'serverName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'databaseName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'syncGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2015-05-01-preview']
+                    ]
+                ],
+                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/SyncFullSchemaPropertiesListResult']]]
+            ]],
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/logs' => ['get' => [
+                'operationId' => 'SyncGroups_ListLogs',
+                'parameters' => [
+                    [
+                        'name' => 'resourceGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'serverName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'databaseName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'syncGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'startTime',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'endTime',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'type',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => [
+                            'All',
+                            'Error',
+                            'Warning',
+                            'Success'
+                        ]
+                    ],
+                    [
+                        'name' => 'continuationToken',
+                        'in' => 'query',
+                        'required' => FALSE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2015-05-01-preview']
+                    ]
+                ],
+                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/SyncGroupLogListResult']]]
+            ]],
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/cancelSync' => ['post' => [
+                'operationId' => 'SyncGroups_CancelSync',
+                'parameters' => [
+                    [
+                        'name' => 'resourceGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'serverName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'databaseName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'syncGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2015-05-01-preview']
+                    ]
+                ],
+                'responses' => ['200' => []]
+            ]],
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/triggerSync' => ['post' => [
+                'operationId' => 'SyncGroups_TriggerSync',
+                'parameters' => [
+                    [
+                        'name' => 'resourceGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'serverName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'databaseName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'syncGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2015-05-01-preview']
+                    ]
+                ],
+                'responses' => ['200' => []]
+            ]],
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}' => [
+                'get' => [
+                    'operationId' => 'SyncGroups_Get',
+                    'parameters' => [
+                        [
+                            'name' => 'resourceGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'serverName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'databaseName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'syncGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'subscriptionId',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'api-version',
+                            'in' => 'query',
+                            'required' => TRUE,
+                            'type' => 'string',
+                            'enum' => ['2015-05-01-preview']
+                        ]
+                    ],
+                    'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/SyncGroup']]]
+                ],
+                'put' => [
+                    'operationId' => 'SyncGroups_CreateOrUpdate',
+                    'parameters' => [
+                        [
+                            'name' => 'resourceGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'serverName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'databaseName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'syncGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'parameters',
+                            'in' => 'body',
+                            'required' => TRUE,
+                            '$ref' => '#/definitions/SyncGroup'
+                        ],
+                        [
+                            'name' => 'subscriptionId',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'api-version',
+                            'in' => 'query',
+                            'required' => TRUE,
+                            'type' => 'string',
+                            'enum' => ['2015-05-01-preview']
+                        ]
+                    ],
+                    'responses' => [
+                        '200' => ['schema' => ['$ref' => '#/definitions/SyncGroup']],
+                        '202' => [],
+                        '201' => ['schema' => ['$ref' => '#/definitions/SyncGroup']]
+                    ]
+                ],
+                'delete' => [
+                    'operationId' => 'SyncGroups_Delete',
+                    'parameters' => [
+                        [
+                            'name' => 'resourceGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'serverName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'databaseName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'syncGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'subscriptionId',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'api-version',
+                            'in' => 'query',
+                            'required' => TRUE,
+                            'type' => 'string',
+                            'enum' => ['2015-05-01-preview']
+                        ]
+                    ],
+                    'responses' => [
+                        '200' => [],
+                        '202' => [],
+                        '204' => []
+                    ]
+                ],
+                'patch' => [
+                    'operationId' => 'SyncGroups_Update',
+                    'parameters' => [
+                        [
+                            'name' => 'resourceGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'serverName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'databaseName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'syncGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'parameters',
+                            'in' => 'body',
+                            'required' => TRUE,
+                            '$ref' => '#/definitions/SyncGroup'
+                        ],
+                        [
+                            'name' => 'subscriptionId',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'api-version',
+                            'in' => 'query',
+                            'required' => TRUE,
+                            'type' => 'string',
+                            'enum' => ['2015-05-01-preview']
+                        ]
+                    ],
+                    'responses' => [
+                        '200' => ['schema' => ['$ref' => '#/definitions/SyncGroup']],
+                        '202' => []
+                    ]
+                ]
+            ],
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups' => ['get' => [
+                'operationId' => 'SyncGroups_ListByDatabase',
+                'parameters' => [
+                    [
+                        'name' => 'resourceGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'serverName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'databaseName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2015-05-01-preview']
+                    ]
+                ],
+                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/SyncGroupListResult']]]
+            ]],
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}' => [
+                'get' => [
+                    'operationId' => 'SyncMembers_Get',
+                    'parameters' => [
+                        [
+                            'name' => 'resourceGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'serverName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'databaseName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'syncGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'syncMemberName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'subscriptionId',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'api-version',
+                            'in' => 'query',
+                            'required' => TRUE,
+                            'type' => 'string',
+                            'enum' => ['2015-05-01-preview']
+                        ]
+                    ],
+                    'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/SyncMember']]]
+                ],
+                'put' => [
+                    'operationId' => 'SyncMembers_CreateOrUpdate',
+                    'parameters' => [
+                        [
+                            'name' => 'resourceGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'serverName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'databaseName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'syncGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'syncMemberName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'parameters',
+                            'in' => 'body',
+                            'required' => TRUE,
+                            '$ref' => '#/definitions/SyncMember'
+                        ],
+                        [
+                            'name' => 'subscriptionId',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'api-version',
+                            'in' => 'query',
+                            'required' => TRUE,
+                            'type' => 'string',
+                            'enum' => ['2015-05-01-preview']
+                        ]
+                    ],
+                    'responses' => [
+                        '200' => ['schema' => ['$ref' => '#/definitions/SyncMember']],
+                        '202' => [],
+                        '201' => ['schema' => ['$ref' => '#/definitions/SyncMember']]
+                    ]
+                ],
+                'delete' => [
+                    'operationId' => 'SyncMembers_Delete',
+                    'parameters' => [
+                        [
+                            'name' => 'resourceGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'serverName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'databaseName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'syncGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'syncMemberName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'subscriptionId',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'api-version',
+                            'in' => 'query',
+                            'required' => TRUE,
+                            'type' => 'string',
+                            'enum' => ['2015-05-01-preview']
+                        ]
+                    ],
+                    'responses' => [
+                        '200' => [],
+                        '202' => [],
+                        '204' => []
+                    ]
+                ],
+                'patch' => [
+                    'operationId' => 'SyncMembers_Update',
+                    'parameters' => [
+                        [
+                            'name' => 'resourceGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'serverName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'databaseName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'syncGroupName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'syncMemberName',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'parameters',
+                            'in' => 'body',
+                            'required' => TRUE,
+                            '$ref' => '#/definitions/SyncMember'
+                        ],
+                        [
+                            'name' => 'subscriptionId',
+                            'in' => 'path',
+                            'required' => TRUE,
+                            'type' => 'string'
+                        ],
+                        [
+                            'name' => 'api-version',
+                            'in' => 'query',
+                            'required' => TRUE,
+                            'type' => 'string',
+                            'enum' => ['2015-05-01-preview']
+                        ]
+                    ],
+                    'responses' => [
+                        '200' => ['schema' => ['$ref' => '#/definitions/SyncMember']],
+                        '202' => []
+                    ]
+                ]
+            ],
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers' => ['get' => [
+                'operationId' => 'SyncMembers_ListBySyncGroup',
+                'parameters' => [
+                    [
+                        'name' => 'resourceGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'serverName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'databaseName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'syncGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2015-05-01-preview']
+                    ]
+                ],
+                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/SyncMemberListResult']]]
+            ]],
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}/schemas' => ['get' => [
+                'operationId' => 'SyncMembers_ListMemberSchemas',
+                'parameters' => [
+                    [
+                        'name' => 'resourceGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'serverName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'databaseName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'syncGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'syncMemberName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2015-05-01-preview']
+                    ]
+                ],
+                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/SyncFullSchemaPropertiesListResult']]]
+            ]],
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/syncGroups/{syncGroupName}/syncMembers/{syncMemberName}/refreshSchema' => ['post' => [
+                'operationId' => 'SyncMembers_RefreshMemberSchema',
+                'parameters' => [
+                    [
+                        'name' => 'resourceGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'serverName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'databaseName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'syncGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'syncMemberName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2015-05-01-preview']
+                    ]
+                ],
+                'responses' => [
+                    '200' => [],
+                    '202' => []
+                ]
+            ]],
             '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}' => [
                 'get' => [
                     'operationId' => 'VirtualNetworkRules_Get',
@@ -4561,1596 +5701,2332 @@ final class SqlManagementClient
             ]]
         ],
         'definitions' => [
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ProxyResource' => ['properties' => []],
-            'BackupLongTermRetentionPolicyProperties' => ['properties' => [
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Disabled',
-                        'Enabled'
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ProxyResource' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'BackupLongTermRetentionPolicyProperties' => [
+                'properties' => [
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Disabled',
+                            'Enabled'
+                        ]
+                    ],
+                    'recoveryServicesBackupPolicyResourceId' => ['type' => 'string']
+                ],
+                'required' => [
+                    'state',
+                    'recoveryServicesBackupPolicyResourceId'
+                ]
+            ],
+            'BackupLongTermRetentionPolicy' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/BackupLongTermRetentionPolicyProperties']
+                ],
+                'required' => []
+            ],
+            'BackupLongTermRetentionVaultProperties' => [
+                'properties' => ['recoveryServicesVaultResourceId' => ['type' => 'string']],
+                'required' => ['recoveryServicesVaultResourceId']
+            ],
+            'BackupLongTermRetentionVault' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/BackupLongTermRetentionVaultProperties']
+                ],
+                'required' => []
+            ],
+            'TrackedResource' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'location' => ['type' => 'string']
+                ],
+                'required' => ['location']
+            ],
+            'RestorePointProperties' => [
+                'properties' => [
+                    'restorePointType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'DISCRETE',
+                            'CONTINUOUS'
+                        ]
+                    ],
+                    'restorePointCreationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'earliestRestoreDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'recoveryServicesBackupPolicyResourceId' => ['type' => 'string']
-            ]],
-            'BackupLongTermRetentionPolicy' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/BackupLongTermRetentionPolicyProperties']
-            ]],
-            'BackupLongTermRetentionVaultProperties' => ['properties' => ['recoveryServicesVaultResourceId' => ['type' => 'string']]],
-            'BackupLongTermRetentionVault' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/BackupLongTermRetentionVaultProperties']
-            ]],
-            'TrackedResource' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'location' => ['type' => 'string']
-            ]],
-            'RestorePointProperties' => ['properties' => [
-                'restorePointType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'DISCRETE',
-                        'CONTINUOUS'
+                'required' => []
+            ],
+            'RestorePoint' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RestorePointProperties']],
+                'required' => []
+            ],
+            'RestorePointListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/RestorePoint']
+                ]],
+                'required' => ['value']
+            ],
+            'RecoverableDatabaseProperties' => [
+                'properties' => [
+                    'edition' => ['type' => 'string'],
+                    'serviceLevelObjective' => ['type' => 'string'],
+                    'elasticPoolName' => ['type' => 'string'],
+                    'lastAvailableBackupDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'restorePointCreationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'earliestRestoreDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'RestorePoint' => ['properties' => ['properties' => ['$ref' => '#/definitions/RestorePointProperties']]],
-            'RestorePointListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/RestorePoint']
-            ]]],
-            'RecoverableDatabaseProperties' => ['properties' => [
-                'edition' => ['type' => 'string'],
-                'serviceLevelObjective' => ['type' => 'string'],
-                'elasticPoolName' => ['type' => 'string'],
-                'lastAvailableBackupDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'RecoverableDatabase' => ['properties' => ['properties' => ['$ref' => '#/definitions/RecoverableDatabaseProperties']]],
-            'RecoverableDatabaseListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/RecoverableDatabase']
-            ]]],
-            'RestorableDroppedDatabaseProperties' => ['properties' => [
-                'databaseName' => ['type' => 'string'],
-                'edition' => ['type' => 'string'],
-                'maxSizeBytes' => ['type' => 'string'],
-                'serviceLevelObjective' => ['type' => 'string'],
-                'elasticPoolName' => ['type' => 'string'],
-                'creationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'deletionDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'earliestRestoreDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'RestorableDroppedDatabase' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/RestorableDroppedDatabaseProperties']
-            ]],
-            'RestorableDroppedDatabaseListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/RestorableDroppedDatabase']
-            ]]],
-            'MaxSizeCapability' => ['properties' => [
-                'limit' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'unit' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Megabytes',
-                        'Gigabytes',
-                        'Terabytes',
-                        'Petabytes'
+                'required' => []
+            ],
+            'RecoverableDatabase' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RecoverableDatabaseProperties']],
+                'required' => []
+            ],
+            'RecoverableDatabaseListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/RecoverableDatabase']
+                ]],
+                'required' => ['value']
+            ],
+            'RestorableDroppedDatabaseProperties' => [
+                'properties' => [
+                    'databaseName' => ['type' => 'string'],
+                    'edition' => ['type' => 'string'],
+                    'maxSizeBytes' => ['type' => 'string'],
+                    'serviceLevelObjective' => ['type' => 'string'],
+                    'elasticPoolName' => ['type' => 'string'],
+                    'creationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'deletionDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'earliestRestoreDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'status' => [
+                'required' => []
+            ],
+            'RestorableDroppedDatabase' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/RestorableDroppedDatabaseProperties']
+                ],
+                'required' => []
+            ],
+            'RestorableDroppedDatabaseListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/RestorableDroppedDatabase']
+                ]],
+                'required' => ['value']
+            ],
+            'MaxSizeCapability' => [
+                'properties' => [
+                    'limit' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'unit' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Megabytes',
+                            'Gigabytes',
+                            'Terabytes',
+                            'Petabytes'
+                        ]
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Visible',
+                            'Available',
+                            'Default',
+                            'Disabled'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'PerformanceLevel' => [
+                'properties' => [
+                    'unit' => [
+                        'type' => 'string',
+                        'enum' => ['DTU']
+                    ],
+                    'value' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ServiceObjectiveCapability' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Visible',
+                            'Available',
+                            'Default',
+                            'Disabled'
+                        ]
+                    ],
+                    'performanceLevel' => ['$ref' => '#/definitions/PerformanceLevel'],
+                    'id' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'supportedMaxSizes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MaxSizeCapability']
+                    ],
+                    'includedMaxSize' => ['$ref' => '#/definitions/MaxSizeCapability']
+                ],
+                'required' => []
+            ],
+            'EditionCapability' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Visible',
+                            'Available',
+                            'Default',
+                            'Disabled'
+                        ]
+                    ],
+                    'supportedServiceLevelObjectives' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ServiceObjectiveCapability']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ElasticPoolPerDatabaseMinDtuCapability' => [
+                'properties' => [
+                    'limit' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Visible',
+                            'Available',
+                            'Default',
+                            'Disabled'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'ElasticPoolPerDatabaseMaxDtuCapability' => [
+                'properties' => [
+                    'limit' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Visible',
+                            'Available',
+                            'Default',
+                            'Disabled'
+                        ]
+                    ],
+                    'supportedPerDatabaseMinDtus' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ElasticPoolPerDatabaseMinDtuCapability']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ElasticPoolDtuCapability' => [
+                'properties' => [
+                    'limit' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'maxDatabaseCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Visible',
+                            'Available',
+                            'Default',
+                            'Disabled'
+                        ]
+                    ],
+                    'supportedMaxSizes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MaxSizeCapability']
+                    ],
+                    'includedMaxSize' => ['$ref' => '#/definitions/MaxSizeCapability'],
+                    'supportedPerDatabaseMaxSizes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MaxSizeCapability']
+                    ],
+                    'supportedPerDatabaseMaxDtus' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ElasticPoolPerDatabaseMaxDtuCapability']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ElasticPoolEditionCapability' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Visible',
+                            'Available',
+                            'Default',
+                            'Disabled'
+                        ]
+                    ],
+                    'supportedElasticPoolDtus' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ElasticPoolDtuCapability']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ServerVersionCapability' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Visible',
+                            'Available',
+                            'Default',
+                            'Disabled'
+                        ]
+                    ],
+                    'supportedEditions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/EditionCapability']
+                    ],
+                    'supportedElasticPoolEditions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ElasticPoolEditionCapability']
+                    ]
+                ],
+                'required' => []
+            ],
+            'LocationCapabilities' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Visible',
+                            'Available',
+                            'Default',
+                            'Disabled'
+                        ]
+                    ],
+                    'supportedServerVersions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ServerVersionCapability']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ServerConnectionPolicyProperties' => [
+                'properties' => ['connectionType' => [
                     'type' => 'string',
                     'enum' => [
-                        'Visible',
-                        'Available',
                         'Default',
-                        'Disabled'
+                        'Proxy',
+                        'Redirect'
                     ]
-                ]
-            ]],
-            'PerformanceLevel' => ['properties' => [
-                'unit' => [
-                    'type' => 'string',
-                    'enum' => ['DTU']
+                ]],
+                'required' => ['connectionType']
+            ],
+            'ServerConnectionPolicy' => [
+                'properties' => [
+                    'kind' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ServerConnectionPolicyProperties']
                 ],
-                'value' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ServiceObjectiveCapability' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Visible',
-                        'Available',
-                        'Default',
-                        'Disabled'
-                    ]
-                ],
-                'performanceLevel' => ['$ref' => '#/definitions/PerformanceLevel'],
-                'id' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'supportedMaxSizes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MaxSizeCapability']
-                ],
-                'includedMaxSize' => ['$ref' => '#/definitions/MaxSizeCapability']
-            ]],
-            'EditionCapability' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Visible',
-                        'Available',
-                        'Default',
-                        'Disabled'
-                    ]
-                ],
-                'supportedServiceLevelObjectives' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ServiceObjectiveCapability']
-                ]
-            ]],
-            'ElasticPoolPerDatabaseMinDtuCapability' => ['properties' => [
-                'limit' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Visible',
-                        'Available',
-                        'Default',
-                        'Disabled'
-                    ]
-                ]
-            ]],
-            'ElasticPoolPerDatabaseMaxDtuCapability' => ['properties' => [
-                'limit' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Visible',
-                        'Available',
-                        'Default',
-                        'Disabled'
+                'required' => []
+            ],
+            'DatabaseSecurityAlertPolicyProperties' => [
+                'properties' => [
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'New',
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'disabledAlerts' => ['type' => 'string'],
+                    'emailAddresses' => ['type' => 'string'],
+                    'emailAccountAdmins' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'storageEndpoint' => ['type' => 'string'],
+                    'storageAccountAccessKey' => ['type' => 'string'],
+                    'retentionDays' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'useServerDefault' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
                     ]
                 ],
-                'supportedPerDatabaseMinDtus' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ElasticPoolPerDatabaseMinDtuCapability']
+                'required' => ['state']
+            ],
+            'DatabaseSecurityAlertPolicy' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'kind' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/DatabaseSecurityAlertPolicyProperties']
+                ],
+                'required' => []
+            ],
+            'DataMaskingPolicyProperties' => [
+                'properties' => [
+                    'dataMaskingState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Disabled',
+                            'Enabled'
+                        ]
+                    ],
+                    'exemptPrincipals' => ['type' => 'string'],
+                    'applicationPrincipals' => ['type' => 'string'],
+                    'maskingLevel' => ['type' => 'string']
+                ],
+                'required' => ['dataMaskingState']
+            ],
+            'DataMaskingPolicy' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/DataMaskingPolicyProperties'],
+                    'location' => ['type' => 'string'],
+                    'kind' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DataMaskingRuleProperties' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'aliasName' => ['type' => 'string'],
+                    'ruleState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Disabled',
+                            'Enabled'
+                        ]
+                    ],
+                    'schemaName' => ['type' => 'string'],
+                    'tableName' => ['type' => 'string'],
+                    'columnName' => ['type' => 'string'],
+                    'maskingFunction' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Default',
+                            'CCN',
+                            'Email',
+                            'Number',
+                            'SSN',
+                            'Text'
+                        ]
+                    ],
+                    'numberFrom' => ['type' => 'string'],
+                    'numberTo' => ['type' => 'string'],
+                    'prefixSize' => ['type' => 'string'],
+                    'suffixSize' => ['type' => 'string'],
+                    'replacementString' => ['type' => 'string']
+                ],
+                'required' => [
+                    'schemaName',
+                    'tableName',
+                    'columnName',
+                    'maskingFunction'
                 ]
-            ]],
-            'ElasticPoolDtuCapability' => ['properties' => [
-                'limit' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+            ],
+            'DataMaskingRule' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/DataMaskingRuleProperties'],
+                    'location' => ['type' => 'string'],
+                    'kind' => ['type' => 'string']
                 ],
-                'maxDatabaseCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'DataMaskingRuleListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/DataMaskingRule']
+                ]],
+                'required' => []
+            ],
+            'FirewallRuleProperties' => [
+                'properties' => [
+                    'startIpAddress' => ['type' => 'string'],
+                    'endIpAddress' => ['type' => 'string']
                 ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Visible',
-                        'Available',
-                        'Default',
-                        'Disabled'
+                'required' => [
+                    'startIpAddress',
+                    'endIpAddress'
+                ]
+            ],
+            'FirewallRule' => [
+                'properties' => [
+                    'kind' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/FirewallRuleProperties']
+                ],
+                'required' => []
+            ],
+            'FirewallRuleListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/FirewallRule']
+                ]],
+                'required' => []
+            ],
+            'GeoBackupPolicyProperties' => [
+                'properties' => [
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Disabled',
+                            'Enabled'
+                        ]
+                    ],
+                    'storageType' => ['type' => 'string']
+                ],
+                'required' => ['state']
+            ],
+            'GeoBackupPolicy' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/GeoBackupPolicyProperties'],
+                    'kind' => ['type' => 'string'],
+                    'location' => ['type' => 'string']
+                ],
+                'required' => ['properties']
+            ],
+            'GeoBackupPolicyListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/GeoBackupPolicy']
+                ]],
+                'required' => []
+            ],
+            'ImportExtensionProperties' => [
+                'properties' => ['operationMode' => ['type' => 'string']],
+                'required' => ['operationMode']
+            ],
+            'ImportExtensionRequest' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ImportExtensionProperties']
+                ],
+                'required' => []
+            ],
+            'ImportExportResponseProperties' => [
+                'properties' => [
+                    'requestType' => ['type' => 'string'],
+                    'requestId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'serverName' => ['type' => 'string'],
+                    'databaseName' => ['type' => 'string'],
+                    'status' => ['type' => 'string'],
+                    'lastModifiedTime' => ['type' => 'string'],
+                    'queuedTime' => ['type' => 'string'],
+                    'blobUri' => ['type' => 'string'],
+                    'errorMessage' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ImportExportResponse' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ImportExportResponseProperties']],
+                'required' => []
+            ],
+            'ImportRequest' => [
+                'properties' => [
+                    'databaseName' => ['type' => 'string'],
+                    'edition' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Web',
+                            'Business',
+                            'Basic',
+                            'Standard',
+                            'Premium',
+                            'Free',
+                            'Stretch',
+                            'DataWarehouse',
+                            'System',
+                            'System2'
+                        ]
+                    ],
+                    'serviceObjectiveName' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'S0',
+                            'S1',
+                            'S2',
+                            'S3',
+                            'P1',
+                            'P2',
+                            'P3',
+                            'P4',
+                            'P6',
+                            'P11',
+                            'P15',
+                            'System',
+                            'System2',
+                            'ElasticPool'
+                        ]
+                    ],
+                    'maxSizeBytes' => ['type' => 'string']
+                ],
+                'required' => [
+                    'databaseName',
+                    'edition',
+                    'serviceObjectiveName',
+                    'maxSizeBytes'
+                ]
+            ],
+            'ExportRequest' => [
+                'properties' => [
+                    'storageKeyType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'StorageAccessKey',
+                            'SharedAccessKey'
+                        ]
+                    ],
+                    'storageKey' => ['type' => 'string'],
+                    'storageUri' => ['type' => 'string'],
+                    'administratorLogin' => ['type' => 'string'],
+                    'administratorLoginPassword' => ['type' => 'string'],
+                    'authenticationType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'SQL',
+                            'ADPassword'
+                        ]
                     ]
                 ],
-                'supportedMaxSizes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MaxSizeCapability']
-                ],
-                'includedMaxSize' => ['$ref' => '#/definitions/MaxSizeCapability'],
-                'supportedPerDatabaseMaxSizes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MaxSizeCapability']
-                ],
-                'supportedPerDatabaseMaxDtus' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ElasticPoolPerDatabaseMaxDtuCapability']
+                'required' => [
+                    'storageKeyType',
+                    'storageKey',
+                    'storageUri',
+                    'administratorLogin',
+                    'administratorLoginPassword'
                 ]
-            ]],
-            'ElasticPoolEditionCapability' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Visible',
-                        'Available',
-                        'Default',
-                        'Disabled'
+            ],
+            'MetricValue' => [
+                'properties' => [
+                    'count' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'average' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'maximum' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'minimum' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'timestamp' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'total' => [
+                        'type' => 'number',
+                        'format' => 'double'
                     ]
                 ],
-                'supportedElasticPoolDtus' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ElasticPoolDtuCapability']
-                ]
-            ]],
-            'ServerVersionCapability' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Visible',
-                        'Available',
-                        'Default',
-                        'Disabled'
+                'required' => []
+            ],
+            'MetricName' => [
+                'properties' => [
+                    'value' => ['type' => 'string'],
+                    'localizedValue' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Metric' => [
+                'properties' => [
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'timeGrain' => ['type' => 'string'],
+                    'unit' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'count',
+                            'bytes',
+                            'seconds',
+                            'percent',
+                            'countPerSecond',
+                            'bytesPerSecond'
+                        ]
+                    ],
+                    'name' => ['$ref' => '#/definitions/MetricName'],
+                    'metricValues' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MetricValue']
                     ]
                 ],
-                'supportedEditions' => [
+                'required' => []
+            ],
+            'MetricListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/EditionCapability']
+                    'items' => ['$ref' => '#/definitions/Metric']
+                ]],
+                'required' => ['value']
+            ],
+            'MetricAvailability' => [
+                'properties' => [
+                    'retention' => ['type' => 'string'],
+                    'timeGrain' => ['type' => 'string']
                 ],
-                'supportedElasticPoolEditions' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ElasticPoolEditionCapability']
-                ]
-            ]],
-            'LocationCapabilities' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Visible',
-                        'Available',
-                        'Default',
-                        'Disabled'
+                'required' => []
+            ],
+            'MetricDefinition' => [
+                'properties' => [
+                    'name' => ['$ref' => '#/definitions/MetricName'],
+                    'primaryAggregationType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'Average',
+                            'Count',
+                            'Minimum',
+                            'Maximum',
+                            'Total'
+                        ]
+                    ],
+                    'resourceUri' => ['type' => 'string'],
+                    'unit' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Count',
+                            'Bytes',
+                            'Seconds',
+                            'Percent',
+                            'CountPerSecond',
+                            'BytesPerSecond'
+                        ]
+                    ],
+                    'metricAvailabilities' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MetricAvailability']
                     ]
                 ],
-                'supportedServerVersions' => [
+                'required' => []
+            ],
+            'MetricDefinitionListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ServerVersionCapability']
+                    'items' => ['$ref' => '#/definitions/MetricDefinition']
+                ]],
+                'required' => ['value']
+            ],
+            'Operation_display' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/Operation_display']
+                ],
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Operation']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ReplicationLinkProperties' => [
+                'properties' => [
+                    'isTerminationAllowed' => ['type' => 'boolean'],
+                    'replicationMode' => ['type' => 'string'],
+                    'partnerServer' => ['type' => 'string'],
+                    'partnerDatabase' => ['type' => 'string'],
+                    'partnerLocation' => ['type' => 'string'],
+                    'role' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Primary',
+                            'Secondary',
+                            'NonReadableSecondary',
+                            'Source',
+                            'Copy'
+                        ]
+                    ],
+                    'partnerRole' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Primary',
+                            'Secondary',
+                            'NonReadableSecondary',
+                            'Source',
+                            'Copy'
+                        ]
+                    ],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'percentComplete' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'replicationState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'PENDING',
+                            'SEEDING',
+                            'CATCH_UP',
+                            'SUSPENDED'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'ReplicationLink' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ReplicationLinkProperties']
+                ],
+                'required' => []
+            ],
+            'ReplicationLinkListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ReplicationLink']
+                ]],
+                'required' => []
+            ],
+            'ServerAdministratorProperties' => [
+                'properties' => [
+                    'administratorType' => ['type' => 'string'],
+                    'login' => ['type' => 'string'],
+                    'sid' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ]
+                ],
+                'required' => [
+                    'administratorType',
+                    'login',
+                    'sid',
+                    'tenantId'
                 ]
-            ]],
-            'ServerConnectionPolicyProperties' => ['properties' => ['connectionType' => [
-                'type' => 'string',
-                'enum' => [
-                    'Default',
-                    'Proxy',
-                    'Redirect'
+            ],
+            'ServerAzureADAdministrator' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ServerAdministratorProperties']],
+                'required' => []
+            ],
+            'ServerAdministratorListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ServerAzureADAdministrator']
+                ]],
+                'required' => []
+            ],
+            'ServerCommunicationLinkProperties' => [
+                'properties' => [
+                    'state' => ['type' => 'string'],
+                    'partnerServer' => ['type' => 'string']
+                ],
+                'required' => ['partnerServer']
+            ],
+            'ServerCommunicationLink' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ServerCommunicationLinkProperties'],
+                    'location' => ['type' => 'string'],
+                    'kind' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ServerCommunicationLinkListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ServerCommunicationLink']
+                ]],
+                'required' => []
+            ],
+            'ServiceObjectiveProperties' => [
+                'properties' => [
+                    'serviceObjectiveName' => ['type' => 'string'],
+                    'isDefault' => ['type' => 'boolean'],
+                    'isSystem' => ['type' => 'boolean'],
+                    'description' => ['type' => 'string'],
+                    'enabled' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'ServiceObjective' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ServiceObjectiveProperties']],
+                'required' => []
+            ],
+            'ServiceObjectiveListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ServiceObjective']
+                ]],
+                'required' => ['value']
+            ],
+            'CheckNameAvailabilityRequest' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'type'
                 ]
-            ]]],
-            'ServerConnectionPolicy' => ['properties' => [
-                'kind' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ServerConnectionPolicyProperties']
-            ]],
-            'DatabaseSecurityAlertPolicyProperties' => ['properties' => [
-                'state' => [
+            ],
+            'CheckNameAvailabilityResponse' => [
+                'properties' => [
+                    'available' => ['type' => 'boolean'],
+                    'message' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'reason' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'AlreadyExists'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'RecommendedElasticPoolMetric' => [
+                'properties' => [
+                    'dateTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'dtu' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'sizeGB' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ]
+                ],
+                'required' => []
+            ],
+            'SloUsageMetric' => [
+                'properties' => [
+                    'serviceLevelObjective' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'S0',
+                            'S1',
+                            'S2',
+                            'S3',
+                            'P1',
+                            'P2',
+                            'P3',
+                            'P4',
+                            'P6',
+                            'P11',
+                            'P15',
+                            'System',
+                            'System2',
+                            'ElasticPool'
+                        ]
+                    ],
+                    'serviceLevelObjectiveId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'inRangeTimeRatio' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ServiceTierAdvisorProperties' => [
+                'properties' => [
+                    'observationPeriodStart' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'observationPeriodEnd' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'activeTimeRatio' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'minDtu' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'avgDtu' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'maxDtu' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'maxSizeInGB' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'serviceLevelObjectiveUsageMetrics' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SloUsageMetric']
+                    ],
+                    'currentServiceLevelObjective' => ['type' => 'string'],
+                    'currentServiceLevelObjectiveId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'usageBasedRecommendationServiceLevelObjective' => ['type' => 'string'],
+                    'usageBasedRecommendationServiceLevelObjectiveId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'databaseSizeBasedRecommendationServiceLevelObjective' => ['type' => 'string'],
+                    'databaseSizeBasedRecommendationServiceLevelObjectiveId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'disasterPlanBasedRecommendationServiceLevelObjective' => ['type' => 'string'],
+                    'disasterPlanBasedRecommendationServiceLevelObjectiveId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'overallRecommendationServiceLevelObjective' => ['type' => 'string'],
+                    'overallRecommendationServiceLevelObjectiveId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'confidence' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ServiceTierAdvisor' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ServiceTierAdvisorProperties']],
+                'required' => []
+            ],
+            'TransparentDataEncryptionProperties' => [
+                'properties' => ['status' => [
                     'type' => 'string',
                     'enum' => [
-                        'New',
                         'Enabled',
                         'Disabled'
                     ]
+                ]],
+                'required' => []
+            ],
+            'TransparentDataEncryption' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/TransparentDataEncryptionProperties']
                 ],
-                'disabledAlerts' => ['type' => 'string'],
-                'emailAddresses' => ['type' => 'string'],
-                'emailAccountAdmins' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
+                'required' => []
+            ],
+            'OperationImpact' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'unit' => ['type' => 'string'],
+                    'changeValueAbsolute' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'changeValueRelative' => [
+                        'type' => 'number',
+                        'format' => 'double'
                     ]
                 ],
-                'storageEndpoint' => ['type' => 'string'],
-                'storageAccountAccessKey' => ['type' => 'string'],
-                'retentionDays' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'useServerDefault' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ]
-            ]],
-            'DatabaseSecurityAlertPolicy' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'kind' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/DatabaseSecurityAlertPolicyProperties']
-            ]],
-            'DataMaskingPolicyProperties' => ['properties' => [
-                'dataMaskingState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Disabled',
-                        'Enabled'
-                    ]
-                ],
-                'exemptPrincipals' => ['type' => 'string'],
-                'applicationPrincipals' => ['type' => 'string'],
-                'maskingLevel' => ['type' => 'string']
-            ]],
-            'DataMaskingPolicy' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/DataMaskingPolicyProperties'],
-                'location' => ['type' => 'string'],
-                'kind' => ['type' => 'string']
-            ]],
-            'DataMaskingRuleProperties' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'aliasName' => ['type' => 'string'],
-                'ruleState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Disabled',
-                        'Enabled'
-                    ]
-                ],
-                'schemaName' => ['type' => 'string'],
-                'tableName' => ['type' => 'string'],
-                'columnName' => ['type' => 'string'],
-                'maskingFunction' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Default',
-                        'CCN',
-                        'Email',
-                        'Number',
-                        'SSN',
-                        'Text'
-                    ]
-                ],
-                'numberFrom' => ['type' => 'string'],
-                'numberTo' => ['type' => 'string'],
-                'prefixSize' => ['type' => 'string'],
-                'suffixSize' => ['type' => 'string'],
-                'replacementString' => ['type' => 'string']
-            ]],
-            'DataMaskingRule' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/DataMaskingRuleProperties'],
-                'location' => ['type' => 'string'],
-                'kind' => ['type' => 'string']
-            ]],
-            'DataMaskingRuleListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/DataMaskingRule']
-            ]]],
-            'FirewallRuleProperties' => ['properties' => [
-                'startIpAddress' => ['type' => 'string'],
-                'endIpAddress' => ['type' => 'string']
-            ]],
-            'FirewallRule' => ['properties' => [
-                'kind' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/FirewallRuleProperties']
-            ]],
-            'FirewallRuleListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/FirewallRule']
-            ]]],
-            'GeoBackupPolicyProperties' => ['properties' => [
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Disabled',
-                        'Enabled'
+                'required' => []
+            ],
+            'RecommendedIndexProperties' => [
+                'properties' => [
+                    'action' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Create',
+                            'Drop',
+                            'Rebuild'
+                        ]
+                    ],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Active',
+                            'Pending',
+                            'Executing',
+                            'Verifying',
+                            'Pending Revert',
+                            'Reverting',
+                            'Reverted',
+                            'Ignored',
+                            'Expired',
+                            'Blocked',
+                            'Success'
+                        ]
+                    ],
+                    'created' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastModified' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'indexType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'CLUSTERED',
+                            'NONCLUSTERED',
+                            'COLUMNSTORE',
+                            'CLUSTERED COLUMNSTORE'
+                        ]
+                    ],
+                    'schema' => ['type' => 'string'],
+                    'table' => ['type' => 'string'],
+                    'columns' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'includedColumns' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'indexScript' => ['type' => 'string'],
+                    'estimatedImpact' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/OperationImpact']
+                    ],
+                    'reportedImpact' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/OperationImpact']
                     ]
                 ],
-                'storageType' => ['type' => 'string']
-            ]],
-            'GeoBackupPolicy' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/GeoBackupPolicyProperties'],
-                'kind' => ['type' => 'string'],
-                'location' => ['type' => 'string']
-            ]],
-            'GeoBackupPolicyListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/GeoBackupPolicy']
-            ]]],
-            'ImportExtensionProperties' => ['properties' => ['operationMode' => ['type' => 'string']]],
-            'ImportExtensionRequest' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ImportExtensionProperties']
-            ]],
-            'ImportExportResponseProperties' => ['properties' => [
-                'requestType' => ['type' => 'string'],
-                'requestId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'serverName' => ['type' => 'string'],
-                'databaseName' => ['type' => 'string'],
-                'status' => ['type' => 'string'],
-                'lastModifiedTime' => ['type' => 'string'],
-                'queuedTime' => ['type' => 'string'],
-                'blobUri' => ['type' => 'string'],
-                'errorMessage' => ['type' => 'string']
-            ]],
-            'ImportExportResponse' => ['properties' => ['properties' => ['$ref' => '#/definitions/ImportExportResponseProperties']]],
-            'ImportRequest' => ['properties' => [
-                'databaseName' => ['type' => 'string'],
-                'edition' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Web',
-                        'Business',
-                        'Basic',
-                        'Standard',
-                        'Premium',
-                        'Free',
-                        'Stretch',
-                        'DataWarehouse',
-                        'System',
-                        'System2'
+                'required' => []
+            ],
+            'RecommendedIndex' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RecommendedIndexProperties']],
+                'required' => []
+            ],
+            'DatabaseProperties' => [
+                'properties' => [
+                    'collation' => ['type' => 'string'],
+                    'creationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'containmentState' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'currentServiceObjectiveId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'databaseId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'earliestRestoreDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'createMode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Copy',
+                            'Default',
+                            'NonReadableSecondary',
+                            'OnlineSecondary',
+                            'PointInTimeRestore',
+                            'Recovery',
+                            'Restore',
+                            'RestoreLongTermRetentionBackup'
+                        ]
+                    ],
+                    'sourceDatabaseId' => ['type' => 'string'],
+                    'sourceDatabaseDeletionDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'restorePointInTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'recoveryServicesRecoveryPointResourceId' => ['type' => 'string'],
+                    'edition' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Web',
+                            'Business',
+                            'Basic',
+                            'Standard',
+                            'Premium',
+                            'Free',
+                            'Stretch',
+                            'DataWarehouse',
+                            'System',
+                            'System2'
+                        ]
+                    ],
+                    'maxSizeBytes' => ['type' => 'string'],
+                    'requestedServiceObjectiveId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'requestedServiceObjectiveName' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'S0',
+                            'S1',
+                            'S2',
+                            'S3',
+                            'P1',
+                            'P2',
+                            'P3',
+                            'P4',
+                            'P6',
+                            'P11',
+                            'P15',
+                            'System',
+                            'System2',
+                            'ElasticPool'
+                        ]
+                    ],
+                    'serviceLevelObjective' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'S0',
+                            'S1',
+                            'S2',
+                            'S3',
+                            'P1',
+                            'P2',
+                            'P3',
+                            'P4',
+                            'P6',
+                            'P11',
+                            'P15',
+                            'System',
+                            'System2',
+                            'ElasticPool'
+                        ]
+                    ],
+                    'status' => ['type' => 'string'],
+                    'elasticPoolName' => ['type' => 'string'],
+                    'defaultSecondaryLocation' => ['type' => 'string'],
+                    'serviceTierAdvisors' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ServiceTierAdvisor']
+                    ],
+                    'transparentDataEncryption' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/TransparentDataEncryption']
+                    ],
+                    'recommendedIndex' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RecommendedIndex']
+                    ],
+                    'failoverGroupId' => ['type' => 'string'],
+                    'readScale' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'sampleName' => [
+                        'type' => 'string',
+                        'enum' => ['AdventureWorksLT']
                     ]
                 ],
-                'serviceObjectiveName' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'S0',
-                        'S1',
-                        'S2',
-                        'S3',
-                        'P1',
-                        'P2',
-                        'P3',
-                        'P4',
-                        'P6',
-                        'P11',
-                        'P15',
-                        'System',
-                        'System2',
-                        'ElasticPool'
+                'required' => []
+            ],
+            'Database' => [
+                'properties' => [
+                    'kind' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/DatabaseProperties']
+                ],
+                'required' => []
+            ],
+            'RecommendedElasticPoolProperties' => [
+                'properties' => [
+                    'databaseEdition' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'Standard',
+                            'Premium'
+                        ]
+                    ],
+                    'dtu' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'databaseDtuMin' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'databaseDtuMax' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'storageMB' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'observationPeriodStart' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'observationPeriodEnd' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'maxObservedDtu' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'maxObservedStorageMB' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'databases' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Database']
+                    ],
+                    'metrics' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/RecommendedElasticPoolMetric']
                     ]
                 ],
-                'maxSizeBytes' => ['type' => 'string']
-            ]],
-            'ExportRequest' => ['properties' => [
-                'storageKeyType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'StorageAccessKey',
-                        'SharedAccessKey'
-                    ]
-                ],
-                'storageKey' => ['type' => 'string'],
-                'storageUri' => ['type' => 'string'],
-                'administratorLogin' => ['type' => 'string'],
-                'administratorLoginPassword' => ['type' => 'string'],
-                'authenticationType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'SQL',
-                        'ADPassword'
-                    ]
-                ]
-            ]],
-            'MetricValue' => ['properties' => [
-                'count' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'average' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'maximum' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'minimum' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'timestamp' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'total' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ]
-            ]],
-            'MetricName' => ['properties' => [
-                'value' => ['type' => 'string'],
-                'localizedValue' => ['type' => 'string']
-            ]],
-            'Metric' => ['properties' => [
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'timeGrain' => ['type' => 'string'],
-                'unit' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'count',
-                        'bytes',
-                        'seconds',
-                        'percent',
-                        'countPerSecond',
-                        'bytesPerSecond'
-                    ]
-                ],
-                'name' => ['$ref' => '#/definitions/MetricName'],
-                'metricValues' => [
+                'required' => []
+            ],
+            'RecommendedElasticPool' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/RecommendedElasticPoolProperties']],
+                'required' => []
+            ],
+            'RecommendedElasticPoolListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MetricValue']
-                ]
-            ]],
-            'MetricListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Metric']
-            ]]],
-            'MetricAvailability' => ['properties' => [
-                'retention' => ['type' => 'string'],
-                'timeGrain' => ['type' => 'string']
-            ]],
-            'MetricDefinition' => ['properties' => [
-                'name' => ['$ref' => '#/definitions/MetricName'],
-                'primaryAggregationType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'Average',
-                        'Count',
-                        'Minimum',
-                        'Maximum',
-                        'Total'
-                    ]
-                ],
-                'resourceUri' => ['type' => 'string'],
-                'unit' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Count',
-                        'Bytes',
-                        'Seconds',
-                        'Percent',
-                        'CountPerSecond',
-                        'BytesPerSecond'
-                    ]
-                ],
-                'metricAvailabilities' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MetricAvailability']
-                ]
-            ]],
-            'MetricDefinitionListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/MetricDefinition']
-            ]]],
-            'Operation_display' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/Operation_display']
-            ]],
-            'OperationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Operation']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ReplicationLinkProperties' => ['properties' => [
-                'isTerminationAllowed' => ['type' => 'boolean'],
-                'replicationMode' => ['type' => 'string'],
-                'partnerServer' => ['type' => 'string'],
-                'partnerDatabase' => ['type' => 'string'],
-                'partnerLocation' => ['type' => 'string'],
-                'role' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Primary',
-                        'Secondary',
-                        'NonReadableSecondary',
-                        'Source',
-                        'Copy'
-                    ]
-                ],
-                'partnerRole' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Primary',
-                        'Secondary',
-                        'NonReadableSecondary',
-                        'Source',
-                        'Copy'
-                    ]
-                ],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'percentComplete' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'replicationState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'PENDING',
-                        'SEEDING',
-                        'CATCH_UP',
-                        'SUSPENDED'
-                    ]
-                ]
-            ]],
-            'ReplicationLink' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ReplicationLinkProperties']
-            ]],
-            'ReplicationLinkListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ReplicationLink']
-            ]]],
-            'ServerAdministratorProperties' => ['properties' => [
-                'administratorType' => ['type' => 'string'],
-                'login' => ['type' => 'string'],
-                'sid' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'tenantId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ]
-            ]],
-            'ServerAzureADAdministrator' => ['properties' => ['properties' => ['$ref' => '#/definitions/ServerAdministratorProperties']]],
-            'ServerAdministratorListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ServerAzureADAdministrator']
-            ]]],
-            'ServerCommunicationLinkProperties' => ['properties' => [
-                'state' => ['type' => 'string'],
-                'partnerServer' => ['type' => 'string']
-            ]],
-            'ServerCommunicationLink' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ServerCommunicationLinkProperties'],
-                'location' => ['type' => 'string'],
-                'kind' => ['type' => 'string']
-            ]],
-            'ServerCommunicationLinkListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ServerCommunicationLink']
-            ]]],
-            'ServiceObjectiveProperties' => ['properties' => [
-                'serviceObjectiveName' => ['type' => 'string'],
-                'isDefault' => ['type' => 'boolean'],
-                'isSystem' => ['type' => 'boolean'],
-                'description' => ['type' => 'string'],
-                'enabled' => ['type' => 'boolean']
-            ]],
-            'ServiceObjective' => ['properties' => ['properties' => ['$ref' => '#/definitions/ServiceObjectiveProperties']]],
-            'ServiceObjectiveListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ServiceObjective']
-            ]]],
-            'CheckNameAvailabilityRequest' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'CheckNameAvailabilityResponse' => ['properties' => [
-                'available' => ['type' => 'boolean'],
-                'message' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'reason' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'AlreadyExists'
-                    ]
-                ]
-            ]],
-            'RecommendedElasticPoolMetric' => ['properties' => [
-                'dateTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'dtu' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'sizeGB' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ]
-            ]],
-            'SloUsageMetric' => ['properties' => [
-                'serviceLevelObjective' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'S0',
-                        'S1',
-                        'S2',
-                        'S3',
-                        'P1',
-                        'P2',
-                        'P3',
-                        'P4',
-                        'P6',
-                        'P11',
-                        'P15',
-                        'System',
-                        'System2',
-                        'ElasticPool'
-                    ]
-                ],
-                'serviceLevelObjectiveId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'inRangeTimeRatio' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ]
-            ]],
-            'ServiceTierAdvisorProperties' => ['properties' => [
-                'observationPeriodStart' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'observationPeriodEnd' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'activeTimeRatio' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'minDtu' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'avgDtu' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'maxDtu' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'maxSizeInGB' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'serviceLevelObjectiveUsageMetrics' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SloUsageMetric']
-                ],
-                'currentServiceLevelObjective' => ['type' => 'string'],
-                'currentServiceLevelObjectiveId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'usageBasedRecommendationServiceLevelObjective' => ['type' => 'string'],
-                'usageBasedRecommendationServiceLevelObjectiveId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'databaseSizeBasedRecommendationServiceLevelObjective' => ['type' => 'string'],
-                'databaseSizeBasedRecommendationServiceLevelObjectiveId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'disasterPlanBasedRecommendationServiceLevelObjective' => ['type' => 'string'],
-                'disasterPlanBasedRecommendationServiceLevelObjectiveId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'overallRecommendationServiceLevelObjective' => ['type' => 'string'],
-                'overallRecommendationServiceLevelObjectiveId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'confidence' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ]
-            ]],
-            'ServiceTierAdvisor' => ['properties' => ['properties' => ['$ref' => '#/definitions/ServiceTierAdvisorProperties']]],
-            'TransparentDataEncryptionProperties' => ['properties' => ['status' => [
-                'type' => 'string',
-                'enum' => [
-                    'Enabled',
-                    'Disabled'
-                ]
-            ]]],
-            'TransparentDataEncryption' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/TransparentDataEncryptionProperties']
-            ]],
-            'OperationImpact' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'unit' => ['type' => 'string'],
-                'changeValueAbsolute' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'changeValueRelative' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ]
-            ]],
-            'RecommendedIndexProperties' => ['properties' => [
-                'action' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Create',
-                        'Drop',
-                        'Rebuild'
-                    ]
-                ],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Active',
-                        'Pending',
-                        'Executing',
-                        'Verifying',
-                        'Pending Revert',
-                        'Reverting',
-                        'Reverted',
-                        'Ignored',
-                        'Expired',
-                        'Blocked',
-                        'Success'
-                    ]
-                ],
-                'created' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'lastModified' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'indexType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'CLUSTERED',
-                        'NONCLUSTERED',
-                        'COLUMNSTORE',
-                        'CLUSTERED COLUMNSTORE'
-                    ]
-                ],
-                'schema' => ['type' => 'string'],
-                'table' => ['type' => 'string'],
-                'columns' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'includedColumns' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'indexScript' => ['type' => 'string'],
-                'estimatedImpact' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/OperationImpact']
-                ],
-                'reportedImpact' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/OperationImpact']
-                ]
-            ]],
-            'RecommendedIndex' => ['properties' => ['properties' => ['$ref' => '#/definitions/RecommendedIndexProperties']]],
-            'DatabaseProperties' => ['properties' => [
-                'collation' => ['type' => 'string'],
-                'creationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'containmentState' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'currentServiceObjectiveId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'databaseId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'earliestRestoreDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'createMode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Copy',
-                        'Default',
-                        'NonReadableSecondary',
-                        'OnlineSecondary',
-                        'PointInTimeRestore',
-                        'Recovery',
-                        'Restore',
-                        'RestoreLongTermRetentionBackup'
-                    ]
-                ],
-                'sourceDatabaseId' => ['type' => 'string'],
-                'sourceDatabaseDeletionDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'restorePointInTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'recoveryServicesRecoveryPointResourceId' => ['type' => 'string'],
-                'edition' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Web',
-                        'Business',
-                        'Basic',
-                        'Standard',
-                        'Premium',
-                        'Free',
-                        'Stretch',
-                        'DataWarehouse',
-                        'System',
-                        'System2'
-                    ]
-                ],
-                'maxSizeBytes' => ['type' => 'string'],
-                'requestedServiceObjectiveId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'requestedServiceObjectiveName' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'S0',
-                        'S1',
-                        'S2',
-                        'S3',
-                        'P1',
-                        'P2',
-                        'P3',
-                        'P4',
-                        'P6',
-                        'P11',
-                        'P15',
-                        'System',
-                        'System2',
-                        'ElasticPool'
-                    ]
-                ],
-                'serviceLevelObjective' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'S0',
-                        'S1',
-                        'S2',
-                        'S3',
-                        'P1',
-                        'P2',
-                        'P3',
-                        'P4',
-                        'P6',
-                        'P11',
-                        'P15',
-                        'System',
-                        'System2',
-                        'ElasticPool'
-                    ]
-                ],
-                'status' => ['type' => 'string'],
-                'elasticPoolName' => ['type' => 'string'],
-                'defaultSecondaryLocation' => ['type' => 'string'],
-                'serviceTierAdvisors' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ServiceTierAdvisor']
-                ],
-                'transparentDataEncryption' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/TransparentDataEncryption']
-                ],
-                'recommendedIndex' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/RecommendedIndex']
-                ],
-                'failoverGroupId' => ['type' => 'string'],
-                'readScale' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'sampleName' => [
-                    'type' => 'string',
-                    'enum' => ['AdventureWorksLT']
-                ]
-            ]],
-            'Database' => ['properties' => [
-                'kind' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/DatabaseProperties']
-            ]],
-            'RecommendedElasticPoolProperties' => ['properties' => [
-                'databaseEdition' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'Standard',
-                        'Premium'
-                    ]
-                ],
-                'dtu' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'databaseDtuMin' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'databaseDtuMax' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'storageMB' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'observationPeriodStart' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'observationPeriodEnd' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'maxObservedDtu' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'maxObservedStorageMB' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'databases' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Database']
-                ],
-                'metrics' => [
+                    'items' => ['$ref' => '#/definitions/RecommendedElasticPool']
+                ]],
+                'required' => ['value']
+            ],
+            'RecommendedElasticPoolListMetricsResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/RecommendedElasticPoolMetric']
-                ]
-            ]],
-            'RecommendedElasticPool' => ['properties' => ['properties' => ['$ref' => '#/definitions/RecommendedElasticPoolProperties']]],
-            'RecommendedElasticPoolListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/RecommendedElasticPool']
-            ]]],
-            'RecommendedElasticPoolListMetricsResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/RecommendedElasticPoolMetric']
-            ]]],
-            'ElasticPoolProperties' => ['properties' => [
-                'creationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Creating',
-                        'Ready',
-                        'Disabled'
+                ]],
+                'required' => ['value']
+            ],
+            'ElasticPoolProperties' => [
+                'properties' => [
+                    'creationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Creating',
+                            'Ready',
+                            'Disabled'
+                        ]
+                    ],
+                    'edition' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'Standard',
+                            'Premium'
+                        ]
+                    ],
+                    'dtu' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'databaseDtuMax' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'databaseDtuMin' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'storageMB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'edition' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'Standard',
-                        'Premium'
-                    ]
+                'required' => []
+            ],
+            'ElasticPool' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ElasticPoolProperties'],
+                    'kind' => ['type' => 'string']
                 ],
-                'dtu' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'ElasticPoolUpdate' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/ElasticPoolProperties']
                 ],
-                'databaseDtuMax' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'databaseDtuMin' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'storageMB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ElasticPool' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ElasticPoolProperties'],
-                'kind' => ['type' => 'string']
-            ]],
-            'ElasticPoolUpdate' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'properties' => ['$ref' => '#/definitions/ElasticPoolProperties']
-            ]],
-            'ElasticPoolListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ElasticPool']
-            ]]],
-            'ElasticPoolActivityProperties' => ['properties' => [
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'errorCode' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'errorMessage' => ['type' => 'string'],
-                'errorSeverity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'operation' => ['type' => 'string'],
-                'operationId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'percentComplete' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'requestedDatabaseDtuMax' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'requestedDatabaseDtuMin' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'requestedDtu' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'requestedElasticPoolName' => ['type' => 'string'],
-                'requestedStorageLimitInGB' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'elasticPoolName' => ['type' => 'string'],
-                'serverName' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'state' => ['type' => 'string'],
-                'requestedStorageLimitInMB' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'requestedDatabaseDtuGuarantee' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'requestedDatabaseDtuCap' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'requestedDtuGuarantee' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ElasticPoolActivity' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ElasticPoolActivityProperties']
-            ]],
-            'ElasticPoolActivityListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ElasticPoolActivity']
-            ]]],
-            'ElasticPoolDatabaseActivityProperties' => ['properties' => [
-                'databaseName' => ['type' => 'string'],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'errorCode' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'errorMessage' => ['type' => 'string'],
-                'errorSeverity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'operation' => ['type' => 'string'],
-                'operationId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'percentComplete' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'requestedElasticPoolName' => ['type' => 'string'],
-                'currentElasticPoolName' => ['type' => 'string'],
-                'currentServiceObjective' => ['type' => 'string'],
-                'requestedServiceObjective' => ['type' => 'string'],
-                'serverName' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'state' => ['type' => 'string']
-            ]],
-            'ElasticPoolDatabaseActivity' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ElasticPoolDatabaseActivityProperties']
-            ]],
-            'ElasticPoolDatabaseActivityListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ElasticPoolDatabaseActivity']
-            ]]],
-            'DatabaseUpdate' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'properties' => ['$ref' => '#/definitions/DatabaseProperties']
-            ]],
-            'DatabaseListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Database']
-            ]]],
-            'ServiceTierAdvisorListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ServiceTierAdvisor']
-            ]]],
-            'TransparentDataEncryptionActivityProperties' => ['properties' => [
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Encrypting',
-                        'Decrypting'
-                    ]
-                ],
-                'percentComplete' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ]
-            ]],
-            'TransparentDataEncryptionActivity' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/TransparentDataEncryptionActivityProperties']
-            ]],
-            'TransparentDataEncryptionActivityListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/TransparentDataEncryptionActivity']
-            ]]],
-            'ServerUsage' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'resourceName' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'currentValue' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'limit' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'unit' => ['type' => 'string'],
-                'nextResetTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'ServerUsageListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ServerUsage']
-            ]]],
-            'DatabaseUsage' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'resourceName' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'currentValue' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'limit' => [
-                    'type' => 'number',
-                    'format' => 'double'
-                ],
-                'unit' => ['type' => 'string'],
-                'nextResetTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'DatabaseUsageListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/DatabaseUsage']
-            ]]],
-            'DatabaseBlobAuditingPolicyProperties' => ['properties' => [
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Enabled',
-                        'Disabled'
-                    ]
-                ],
-                'storageEndpoint' => ['type' => 'string'],
-                'storageAccountAccessKey' => ['type' => 'string'],
-                'retentionDays' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'auditActionsAndGroups' => [
+                'required' => []
+            ],
+            'ElasticPoolListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'storageAccountSubscriptionId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'isStorageSecondaryKeyInUse' => ['type' => 'boolean']
-            ]],
-            'DatabaseBlobAuditingPolicy' => ['properties' => [
-                'kind' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/DatabaseBlobAuditingPolicyProperties']
-            ]],
-            'EncryptionProtectorProperties' => ['properties' => [
-                'subregion' => ['type' => 'string'],
-                'serverKeyName' => ['type' => 'string'],
-                'serverKeyType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'ServiceManaged',
-                        'AzureKeyVault'
+                    'items' => ['$ref' => '#/definitions/ElasticPool']
+                ]],
+                'required' => ['value']
+            ],
+            'ElasticPoolActivityProperties' => [
+                'properties' => [
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'errorCode' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'errorMessage' => ['type' => 'string'],
+                    'errorSeverity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'operation' => ['type' => 'string'],
+                    'operationId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'percentComplete' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'requestedDatabaseDtuMax' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'requestedDatabaseDtuMin' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'requestedDtu' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'requestedElasticPoolName' => ['type' => 'string'],
+                    'requestedStorageLimitInGB' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'elasticPoolName' => ['type' => 'string'],
+                    'serverName' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'state' => ['type' => 'string'],
+                    'requestedStorageLimitInMB' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'requestedDatabaseDtuGuarantee' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'requestedDatabaseDtuCap' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'requestedDtuGuarantee' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'uri' => ['type' => 'string'],
-                'thumbprint' => ['type' => 'string']
-            ]],
-            'EncryptionProtector' => ['properties' => [
-                'kind' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/EncryptionProtectorProperties']
-            ]],
-            'EncryptionProtectorListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/EncryptionProtector']
+                'required' => []
+            ],
+            'ElasticPoolActivity' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ElasticPoolActivityProperties']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'FailoverGroupReadWriteEndpoint' => ['properties' => [
-                'failoverPolicy' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Manual',
-                        'Automatic'
+                'required' => []
+            ],
+            'ElasticPoolActivityListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ElasticPoolActivity']
+                ]],
+                'required' => ['value']
+            ],
+            'ElasticPoolDatabaseActivityProperties' => [
+                'properties' => [
+                    'databaseName' => ['type' => 'string'],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'errorCode' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'errorMessage' => ['type' => 'string'],
+                    'errorSeverity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'operation' => ['type' => 'string'],
+                    'operationId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'percentComplete' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'requestedElasticPoolName' => ['type' => 'string'],
+                    'currentElasticPoolName' => ['type' => 'string'],
+                    'currentServiceObjective' => ['type' => 'string'],
+                    'requestedServiceObjective' => ['type' => 'string'],
+                    'serverName' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'state' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ElasticPoolDatabaseActivity' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ElasticPoolDatabaseActivityProperties']
+                ],
+                'required' => []
+            ],
+            'ElasticPoolDatabaseActivityListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ElasticPoolDatabaseActivity']
+                ]],
+                'required' => ['value']
+            ],
+            'DatabaseUpdate' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/DatabaseProperties']
+                ],
+                'required' => []
+            ],
+            'DatabaseListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Database']
+                ]],
+                'required' => ['value']
+            ],
+            'ServiceTierAdvisorListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ServiceTierAdvisor']
+                ]],
+                'required' => ['value']
+            ],
+            'TransparentDataEncryptionActivityProperties' => [
+                'properties' => [
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Encrypting',
+                            'Decrypting'
+                        ]
+                    ],
+                    'percentComplete' => [
+                        'type' => 'number',
+                        'format' => 'double'
                     ]
                 ],
-                'failoverWithDataLossGracePeriodMinutes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'FailoverGroupReadOnlyEndpoint' => ['properties' => ['failoverPolicy' => [
-                'type' => 'string',
-                'enum' => [
-                    'Disabled',
-                    'Enabled'
-                ]
-            ]]],
-            'PartnerInfo' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'replicationRole' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Primary',
-                        'Secondary'
-                    ]
-                ]
-            ]],
-            'FailoverGroupProperties' => ['properties' => [
-                'readWriteEndpoint' => ['$ref' => '#/definitions/FailoverGroupReadWriteEndpoint'],
-                'readOnlyEndpoint' => ['$ref' => '#/definitions/FailoverGroupReadOnlyEndpoint'],
-                'replicationRole' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Primary',
-                        'Secondary'
-                    ]
+                'required' => []
+            ],
+            'TransparentDataEncryptionActivity' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/TransparentDataEncryptionActivityProperties']
                 ],
-                'replicationState' => ['type' => 'string'],
-                'partnerServers' => [
+                'required' => []
+            ],
+            'TransparentDataEncryptionActivityListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PartnerInfo']
-                ],
-                'databases' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'FailoverGroup' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'properties' => ['$ref' => '#/definitions/FailoverGroupProperties']
-            ]],
-            'FailoverGroupUpdateProperties' => ['properties' => [
-                'readWriteEndpoint' => ['$ref' => '#/definitions/FailoverGroupReadWriteEndpoint'],
-                'readOnlyEndpoint' => ['$ref' => '#/definitions/FailoverGroupReadOnlyEndpoint'],
-                'databases' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'FailoverGroupUpdate' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/FailoverGroupUpdateProperties'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'FailoverGroupListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/FailoverGroup']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ServerKeyProperties' => ['properties' => [
-                'subregion' => ['type' => 'string'],
-                'serverKeyType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'ServiceManaged',
-                        'AzureKeyVault'
+                    'items' => ['$ref' => '#/definitions/TransparentDataEncryptionActivity']
+                ]],
+                'required' => ['value']
+            ],
+            'ServerUsage' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'resourceName' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'currentValue' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'limit' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'unit' => ['type' => 'string'],
+                    'nextResetTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
                     ]
                 ],
-                'uri' => ['type' => 'string'],
-                'thumbprint' => ['type' => 'string'],
-                'creationDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'ServerKey' => ['properties' => [
-                'kind' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ServerKeyProperties']
-            ]],
-            'ServerKeyListResult' => ['properties' => [
-                'value' => [
+                'required' => []
+            ],
+            'ServerUsageListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ServerKey']
+                    'items' => ['$ref' => '#/definitions/ServerUsage']
+                ]],
+                'required' => ['value']
+            ],
+            'DatabaseUsage' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'resourceName' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'currentValue' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'limit' => [
+                        'type' => 'number',
+                        'format' => 'double'
+                    ],
+                    'unit' => ['type' => 'string'],
+                    'nextResetTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ResourceIdentity' => ['properties' => [
-                'principalId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'type' => [
-                    'type' => 'string',
-                    'enum' => ['SystemAssigned']
-                ],
-                'tenantId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ]
-            ]],
-            'ServerProperties' => ['properties' => [
-                'administratorLogin' => ['type' => 'string'],
-                'administratorLoginPassword' => ['type' => 'string'],
-                'version' => ['type' => 'string'],
-                'state' => ['type' => 'string'],
-                'fullyQualifiedDomainName' => ['type' => 'string']
-            ]],
-            'Server' => ['properties' => [
-                'identity' => ['$ref' => '#/definitions/ResourceIdentity'],
-                'kind' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/ServerProperties']
-            ]],
-            'ServerListResult' => ['properties' => [
-                'value' => [
+                'required' => []
+            ],
+            'DatabaseUsageListResult' => [
+                'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Server']
+                    'items' => ['$ref' => '#/definitions/DatabaseUsage']
+                ]],
+                'required' => ['value']
+            ],
+            'DatabaseBlobAuditingPolicyProperties' => [
+                'properties' => [
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Enabled',
+                            'Disabled'
+                        ]
+                    ],
+                    'storageEndpoint' => ['type' => 'string'],
+                    'storageAccountAccessKey' => ['type' => 'string'],
+                    'retentionDays' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'auditActionsAndGroups' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'storageAccountSubscriptionId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'isStorageSecondaryKeyInUse' => ['type' => 'boolean']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ServerUpdate' => ['properties' => [
-                'properties' => ['$ref' => '#/definitions/ServerProperties'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'VirtualNetworkRuleProperties' => ['properties' => [
-                'virtualNetworkSubnetId' => ['type' => 'string'],
-                'ignoreVnetPrivateAccessConfiguration' => ['type' => 'boolean'],
-                'state' => [
+                'required' => ['state']
+            ],
+            'DatabaseBlobAuditingPolicy' => [
+                'properties' => [
+                    'kind' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/DatabaseBlobAuditingPolicyProperties']
+                ],
+                'required' => []
+            ],
+            'EncryptionProtectorProperties' => [
+                'properties' => [
+                    'subregion' => ['type' => 'string'],
+                    'serverKeyName' => ['type' => 'string'],
+                    'serverKeyType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'ServiceManaged',
+                            'AzureKeyVault'
+                        ]
+                    ],
+                    'uri' => ['type' => 'string'],
+                    'thumbprint' => ['type' => 'string']
+                ],
+                'required' => ['serverKeyType']
+            ],
+            'EncryptionProtector' => [
+                'properties' => [
+                    'kind' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/EncryptionProtectorProperties']
+                ],
+                'required' => []
+            ],
+            'EncryptionProtectorListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/EncryptionProtector']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'FailoverGroupReadWriteEndpoint' => [
+                'properties' => [
+                    'failoverPolicy' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Manual',
+                            'Automatic'
+                        ]
+                    ],
+                    'failoverWithDataLossGracePeriodMinutes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => ['failoverPolicy']
+            ],
+            'FailoverGroupReadOnlyEndpoint' => [
+                'properties' => ['failoverPolicy' => [
                     'type' => 'string',
                     'enum' => [
-                        'Initializing',
-                        'InProgress',
-                        'Ready',
-                        'Deleting',
-                        'Unknown'
+                        'Disabled',
+                        'Enabled'
                     ]
-                ]
-            ]],
-            'VirtualNetworkRule' => ['properties' => ['properties' => ['$ref' => '#/definitions/VirtualNetworkRuleProperties']]],
-            'VirtualNetworkRuleListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualNetworkRule']
+                ]],
+                'required' => []
+            ],
+            'PartnerInfo' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'replicationRole' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Primary',
+                            'Secondary'
+                        ]
+                    ]
                 ],
-                'nextLink' => ['type' => 'string']
-            ]]
+                'required' => ['id']
+            ],
+            'FailoverGroupProperties' => [
+                'properties' => [
+                    'readWriteEndpoint' => ['$ref' => '#/definitions/FailoverGroupReadWriteEndpoint'],
+                    'readOnlyEndpoint' => ['$ref' => '#/definitions/FailoverGroupReadOnlyEndpoint'],
+                    'replicationRole' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Primary',
+                            'Secondary'
+                        ]
+                    ],
+                    'replicationState' => ['type' => 'string'],
+                    'partnerServers' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PartnerInfo']
+                    ],
+                    'databases' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => [
+                    'readWriteEndpoint',
+                    'partnerServers'
+                ]
+            ],
+            'FailoverGroup' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/FailoverGroupProperties']
+                ],
+                'required' => []
+            ],
+            'FailoverGroupUpdateProperties' => [
+                'properties' => [
+                    'readWriteEndpoint' => ['$ref' => '#/definitions/FailoverGroupReadWriteEndpoint'],
+                    'readOnlyEndpoint' => ['$ref' => '#/definitions/FailoverGroupReadOnlyEndpoint'],
+                    'databases' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'FailoverGroupUpdate' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/FailoverGroupUpdateProperties'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'FailoverGroupListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/FailoverGroup']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ServerKeyProperties' => [
+                'properties' => [
+                    'subregion' => ['type' => 'string'],
+                    'serverKeyType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'ServiceManaged',
+                            'AzureKeyVault'
+                        ]
+                    ],
+                    'uri' => ['type' => 'string'],
+                    'thumbprint' => ['type' => 'string'],
+                    'creationDate' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => ['serverKeyType']
+            ],
+            'ServerKey' => [
+                'properties' => [
+                    'kind' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ServerKeyProperties']
+                ],
+                'required' => []
+            ],
+            'ServerKeyListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ServerKey']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResourceIdentity' => [
+                'properties' => [
+                    'principalId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => ['SystemAssigned']
+                    ],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ]
+                ],
+                'required' => []
+            ],
+            'ServerProperties' => [
+                'properties' => [
+                    'administratorLogin' => ['type' => 'string'],
+                    'administratorLoginPassword' => ['type' => 'string'],
+                    'version' => ['type' => 'string'],
+                    'state' => ['type' => 'string'],
+                    'fullyQualifiedDomainName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Server' => [
+                'properties' => [
+                    'identity' => ['$ref' => '#/definitions/ResourceIdentity'],
+                    'kind' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/ServerProperties']
+                ],
+                'required' => []
+            ],
+            'ServerListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Server']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ServerUpdate' => [
+                'properties' => [
+                    'properties' => ['$ref' => '#/definitions/ServerProperties'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'SyncAgentProperties' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'syncDatabaseId' => ['type' => 'string'],
+                    'lastAliveTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Online',
+                            'Offline',
+                            'NeverConnected'
+                        ]
+                    ],
+                    'isUpToDate' => ['type' => 'boolean'],
+                    'expiryTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'version' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SyncAgent' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SyncAgentProperties']],
+                'required' => []
+            ],
+            'SyncAgentListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SyncAgent']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SyncAgentKeyProperties' => [
+                'properties' => ['syncAgentKey' => ['type' => 'string']],
+                'required' => []
+            ],
+            'SyncAgentLinkedDatabaseProperties' => [
+                'properties' => [
+                    'databaseType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'AzureSqlDatabase',
+                            'SqlServerDatabase'
+                        ]
+                    ],
+                    'databaseId' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'serverName' => ['type' => 'string'],
+                    'databaseName' => ['type' => 'string'],
+                    'userName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SyncAgentLinkedDatabase' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SyncAgentLinkedDatabaseProperties']],
+                'required' => []
+            ],
+            'SyncAgentLinkedDatabaseListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SyncAgentLinkedDatabase']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SyncDatabaseIdProperties' => [
+                'properties' => ['id' => ['type' => 'string']],
+                'required' => []
+            ],
+            'SyncDatabaseIdListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SyncDatabaseIdProperties']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SyncFullSchemaTableColumn' => [
+                'properties' => [
+                    'dataSize' => ['type' => 'string'],
+                    'dataType' => ['type' => 'string'],
+                    'errorId' => ['type' => 'string'],
+                    'hasError' => ['type' => 'boolean'],
+                    'isPrimaryKey' => ['type' => 'boolean'],
+                    'name' => ['type' => 'string'],
+                    'quotedName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SyncFullSchemaTable' => [
+                'properties' => [
+                    'columns' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SyncFullSchemaTableColumn']
+                    ],
+                    'errorId' => ['type' => 'string'],
+                    'hasError' => ['type' => 'boolean'],
+                    'name' => ['type' => 'string'],
+                    'quotedName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SyncFullSchemaProperties' => [
+                'properties' => [
+                    'tables' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SyncFullSchemaTable']
+                    ],
+                    'lastUpdateTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'SyncFullSchemaPropertiesListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SyncFullSchemaProperties']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SyncGroupLogProperties' => [
+                'properties' => [
+                    'timestamp' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'All',
+                            'Error',
+                            'Warning',
+                            'Success'
+                        ]
+                    ],
+                    'source' => ['type' => 'string'],
+                    'details' => ['type' => 'string'],
+                    'tracingId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'operationStatus' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SyncGroupLogListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SyncGroupLogProperties']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SyncGroupSchemaTableColumn' => [
+                'properties' => [
+                    'quotedName' => ['type' => 'string'],
+                    'dataSize' => ['type' => 'string'],
+                    'dataType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SyncGroupSchemaTable' => [
+                'properties' => [
+                    'columns' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SyncGroupSchemaTableColumn']
+                    ],
+                    'quotedName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SyncGroupSchema' => [
+                'properties' => [
+                    'tables' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SyncGroupSchemaTable']
+                    ],
+                    'masterSyncMemberName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SyncGroupProperties' => [
+                'properties' => [
+                    'interval' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'lastSyncTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'conflictResolutionPolicy' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'HubWin',
+                            'MemberWin'
+                        ]
+                    ],
+                    'syncDatabaseId' => ['type' => 'string'],
+                    'hubDatabaseUserName' => ['type' => 'string'],
+                    'hubDatabasePassword' => ['type' => 'string'],
+                    'syncState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'NotReady',
+                            'Error',
+                            'Warning',
+                            'Progressing',
+                            'Good'
+                        ]
+                    ],
+                    'schema' => ['$ref' => '#/definitions/SyncGroupSchema']
+                ],
+                'required' => []
+            ],
+            'SyncGroup' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SyncGroupProperties']],
+                'required' => []
+            ],
+            'SyncGroupListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SyncGroup']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SyncMemberProperties' => [
+                'properties' => [
+                    'databaseType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'AzureSqlDatabase',
+                            'SqlServerDatabase'
+                        ]
+                    ],
+                    'syncAgentId' => ['type' => 'string'],
+                    'sqlServerDatabaseId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'serverName' => ['type' => 'string'],
+                    'databaseName' => ['type' => 'string'],
+                    'userName' => ['type' => 'string'],
+                    'password' => ['type' => 'string'],
+                    'syncDirection' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Bidirectional',
+                            'OneWayMemberToHub',
+                            'OneWayHubToMember'
+                        ]
+                    ],
+                    'syncState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'SyncInProgress',
+                            'SyncSucceeded',
+                            'SyncFailed',
+                            'DisabledTombstoneCleanup',
+                            'DisabledBackupRestore',
+                            'SyncSucceededWithWarnings',
+                            'SyncCancelling',
+                            'SyncCancelled',
+                            'UnProvisioned',
+                            'Provisioning',
+                            'Provisioned',
+                            'ProvisionFailed',
+                            'DeProvisioning',
+                            'DeProvisioned',
+                            'DeProvisionFailed',
+                            'Reprovisioning',
+                            'ReprovisionFailed',
+                            'UnReprovisioned'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'SyncMember' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SyncMemberProperties']],
+                'required' => []
+            ],
+            'SyncMemberListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SyncMember']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'VirtualNetworkRuleProperties' => [
+                'properties' => [
+                    'virtualNetworkSubnetId' => ['type' => 'string'],
+                    'ignoreVnetPrivateAccessConfiguration' => ['type' => 'boolean'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Initializing',
+                            'InProgress',
+                            'Ready',
+                            'Deleting',
+                            'Unknown'
+                        ]
+                    ]
+                ],
+                'required' => ['virtualNetworkSubnetId']
+            ],
+            'VirtualNetworkRule' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/VirtualNetworkRuleProperties']],
+                'required' => []
+            ],
+            'VirtualNetworkRuleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/VirtualNetworkRule']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

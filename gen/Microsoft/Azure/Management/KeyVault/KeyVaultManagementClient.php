@@ -286,195 +286,247 @@ final class KeyVaultManagementClient
             ]]
         ],
         'definitions' => [
-            'Sku' => ['properties' => [
-                'family' => ['type' => 'string'],
-                'name' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'standard',
-                        'premium'
-                    ]
-                ]
-            ]],
-            'Permissions' => ['properties' => [
-                'keys' => [
-                    'type' => 'array',
-                    'items' => [
+            'Sku' => [
+                'properties' => [
+                    'family' => ['type' => 'string'],
+                    'name' => [
                         'type' => 'string',
                         'enum' => [
-                            'encrypt',
-                            'decrypt',
-                            'wrapKey',
-                            'unwrapKey',
-                            'sign',
-                            'verify',
-                            'get',
-                            'list',
-                            'create',
-                            'update',
-                            'import',
-                            'delete',
-                            'backup',
-                            'restore',
+                            'standard',
+                            'premium'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'family',
+                    'name'
+                ]
+            ],
+            'Permissions' => [
+                'properties' => [
+                    'keys' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'encrypt',
+                                'decrypt',
+                                'wrapKey',
+                                'unwrapKey',
+                                'sign',
+                                'verify',
+                                'get',
+                                'list',
+                                'create',
+                                'update',
+                                'import',
+                                'delete',
+                                'backup',
+                                'restore',
+                                'recover',
+                                'purge'
+                            ]
+                        ]
+                    ],
+                    'secrets' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'get',
+                                'list',
+                                'set',
+                                'delete',
+                                'backup',
+                                'restore',
+                                'recover',
+                                'purge'
+                            ]
+                        ]
+                    ],
+                    'certificates' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'get',
+                                'list',
+                                'delete',
+                                'create',
+                                'import',
+                                'update',
+                                'managecontacts',
+                                'getissuers',
+                                'listissuers',
+                                'setissuers',
+                                'deleteissuers',
+                                'manageissuers',
+                                'recover',
+                                'purge'
+                            ]
+                        ]
+                    ],
+                    'storage' => [
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'string',
+                            'enum' => [
+                                'get',
+                                'list',
+                                'delete',
+                                'set',
+                                'update',
+                                'regeneratekey',
+                                'setsas',
+                                'listsas',
+                                'getsas',
+                                'deletesas'
+                            ]
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'AccessPolicyEntry' => [
+                'properties' => [
+                    'tenantId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'objectId' => ['type' => 'string'],
+                    'applicationId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'permissions' => ['$ref' => '#/definitions/Permissions']
+                ],
+                'required' => [
+                    'tenantId',
+                    'objectId',
+                    'permissions'
+                ]
+            ],
+            'VaultProperties' => [
+                'properties' => [
+                    'tenantId' => [
+                        'type' => 'string',
+                        'format' => 'uuid'
+                    ],
+                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'accessPolicies' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/AccessPolicyEntry']
+                    ],
+                    'vaultUri' => ['type' => 'string'],
+                    'enabledForDeployment' => ['type' => 'boolean'],
+                    'enabledForDiskEncryption' => ['type' => 'boolean'],
+                    'enabledForTemplateDeployment' => ['type' => 'boolean'],
+                    'enableSoftDelete' => ['type' => 'boolean'],
+                    'createMode' => [
+                        'type' => 'string',
+                        'enum' => [
                             'recover',
-                            'purge'
+                            'default'
                         ]
                     ]
                 ],
-                'secrets' => [
-                    'type' => 'array',
-                    'items' => [
+                'required' => [
+                    'tenantId',
+                    'sku'
+                ]
+            ],
+            'DeletedVaultProperties' => [
+                'properties' => [
+                    'vaultId' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'deletionDate' => [
                         'type' => 'string',
-                        'enum' => [
-                            'get',
-                            'list',
-                            'set',
-                            'delete',
-                            'backup',
-                            'restore',
-                            'recover',
-                            'purge'
-                        ]
-                    ]
-                ],
-                'certificates' => [
-                    'type' => 'array',
-                    'items' => [
+                        'format' => 'date-time'
+                    ],
+                    'scheduledPurgeDate' => [
                         'type' => 'string',
-                        'enum' => [
-                            'get',
-                            'list',
-                            'delete',
-                            'create',
-                            'import',
-                            'update',
-                            'managecontacts',
-                            'getissuers',
-                            'listissuers',
-                            'setissuers',
-                            'deleteissuers',
-                            'manageissuers',
-                            'recover',
-                            'purge'
-                        ]
+                        'format' => 'date-time'
+                    ],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'storage' => [
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'string',
-                        'enum' => [
-                            'get',
-                            'list',
-                            'delete',
-                            'set',
-                            'update',
-                            'regeneratekey',
-                            'setsas',
-                            'listsas',
-                            'getsas',
-                            'deletesas'
-                        ]
+                'required' => []
+            ],
+            'VaultCreateOrUpdateParameters' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/VaultProperties']
+                ],
+                'required' => [
+                    'location',
+                    'properties'
+                ]
+            ],
+            'Vault' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/VaultProperties']],
+                'required' => ['properties']
+            ],
+            'DeletedVault' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/DeletedVaultProperties']
+                ],
+                'required' => []
+            ],
+            'VaultListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Vault']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'DeletedVaultListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/DeletedVault']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
+                ],
+                'required' => [
+                    'name',
+                    'location'
                 ]
-            ]],
-            'AccessPolicyEntry' => ['properties' => [
-                'tenantId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
+            ],
+            'ResourceListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Resource']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'objectId' => ['type' => 'string'],
-                'applicationId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'permissions' => ['$ref' => '#/definitions/Permissions']
-            ]],
-            'VaultProperties' => ['properties' => [
-                'tenantId' => [
-                    'type' => 'string',
-                    'format' => 'uuid'
-                ],
-                'sku' => ['$ref' => '#/definitions/Sku'],
-                'accessPolicies' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/AccessPolicyEntry']
-                ],
-                'vaultUri' => ['type' => 'string'],
-                'enabledForDeployment' => ['type' => 'boolean'],
-                'enabledForDiskEncryption' => ['type' => 'boolean'],
-                'enabledForTemplateDeployment' => ['type' => 'boolean'],
-                'enableSoftDelete' => ['type' => 'boolean'],
-                'createMode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'recover',
-                        'default'
-                    ]
-                ]
-            ]],
-            'DeletedVaultProperties' => ['properties' => [
-                'vaultId' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'deletionDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'scheduledPurgeDate' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'VaultCreateOrUpdateParameters' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'properties' => ['$ref' => '#/definitions/VaultProperties']
-            ]],
-            'Vault' => ['properties' => ['properties' => ['$ref' => '#/definitions/VaultProperties']]],
-            'DeletedVault' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/DeletedVaultProperties']
-            ]],
-            'VaultListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Vault']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'DeletedVaultListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DeletedVault']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ResourceListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Resource']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]]
+                'required' => []
+            ]
         ]
     ];
 }

@@ -412,113 +412,167 @@ final class PowerBIEmbeddedManagementClient
             ]]
         ],
         'definitions' => [
-            'ErrorDetail' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'target' => ['type' => 'string']
-            ]],
-            'Error' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'target' => ['type' => 'string'],
-                'details' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ErrorDetail']
-                ]
-            ]],
-            'AzureSku' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'tier' => ['type' => 'string']
-            ]],
-            'WorkspaceCollection' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+            'ErrorDetail' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'target' => ['type' => 'string']
                 ],
-                'sku' => ['$ref' => '#/definitions/AzureSku'],
-                'properties' => ['type' => 'object']
-            ]],
-            'WorkspaceCollectionList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/WorkspaceCollection']
-            ]]],
-            'Workspace' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'properties' => ['type' => 'object']
-            ]],
-            'WorkspaceList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Workspace']
-            ]]],
-            'Display' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string'],
-                'description' => ['type' => 'string'],
-                'origin' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/Display']
-            ]],
-            'OperationList' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Operation']
-            ]]],
-            'WorkspaceCollectionAccessKeys' => ['properties' => [
-                'key1' => ['type' => 'string'],
-                'key2' => ['type' => 'string']
-            ]],
-            'WorkspaceCollectionAccessKey' => ['properties' => ['keyName' => [
-                'type' => 'string',
-                'enum' => [
-                    'key1',
-                    'key2'
-                ]
-            ]]],
-            'CreateWorkspaceCollectionRequest' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'sku' => ['$ref' => '#/definitions/AzureSku']
-            ]],
-            'UpdateWorkspaceCollectionRequest' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'sku' => ['$ref' => '#/definitions/AzureSku']
-            ]],
-            'CheckNameRequest' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'CheckNameResponse' => ['properties' => [
-                'nameAvailable' => ['type' => 'boolean'],
-                'reason' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Unavailable',
-                        'Invalid'
+                'required' => []
+            ],
+            'Error' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'target' => ['type' => 'string'],
+                    'details' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ErrorDetail']
                     ]
                 ],
-                'message' => ['type' => 'string']
-            ]],
-            'MigrateWorkspaceCollectionRequest' => ['properties' => [
-                'targetResourceGroup' => ['type' => 'string'],
-                'resources' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'AzureSku' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'tier' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'tier'
                 ]
-            ]]
+            ],
+            'WorkspaceCollection' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'sku' => ['$ref' => '#/definitions/AzureSku'],
+                    'properties' => ['type' => 'object']
+                ],
+                'required' => []
+            ],
+            'WorkspaceCollectionList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/WorkspaceCollection']
+                ]],
+                'required' => []
+            ],
+            'Workspace' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'properties' => ['type' => 'object']
+                ],
+                'required' => []
+            ],
+            'WorkspaceList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Workspace']
+                ]],
+                'required' => []
+            ],
+            'Display' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string'],
+                    'description' => ['type' => 'string'],
+                    'origin' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/Display']
+                ],
+                'required' => []
+            ],
+            'OperationList' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Operation']
+                ]],
+                'required' => []
+            ],
+            'WorkspaceCollectionAccessKeys' => [
+                'properties' => [
+                    'key1' => ['type' => 'string'],
+                    'key2' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'WorkspaceCollectionAccessKey' => [
+                'properties' => ['keyName' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'key1',
+                        'key2'
+                    ]
+                ]],
+                'required' => []
+            ],
+            'CreateWorkspaceCollectionRequest' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'sku' => ['$ref' => '#/definitions/AzureSku']
+                ],
+                'required' => []
+            ],
+            'UpdateWorkspaceCollectionRequest' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'sku' => ['$ref' => '#/definitions/AzureSku']
+                ],
+                'required' => []
+            ],
+            'CheckNameRequest' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CheckNameResponse' => [
+                'properties' => [
+                    'nameAvailable' => ['type' => 'boolean'],
+                    'reason' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Unavailable',
+                            'Invalid'
+                        ]
+                    ],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MigrateWorkspaceCollectionRequest' => [
+                'properties' => [
+                    'targetResourceGroup' => ['type' => 'string'],
+                    'resources' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

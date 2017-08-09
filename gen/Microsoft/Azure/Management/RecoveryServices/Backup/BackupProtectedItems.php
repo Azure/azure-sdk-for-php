@@ -10,7 +10,7 @@ final class BackupProtectedItems
         $this->_List_operation = $_client->createOperation('BackupProtectedItems_List');
     }
     /**
-     * Provides a pageable list of all items that can be backed up within a subscription.
+     * Provides a pageable list of all items that are backed up within a vault.
      * @param string $vaultName
      * @param string $resourceGroupName
      * @param string $_filter

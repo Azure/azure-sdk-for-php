@@ -654,97 +654,142 @@ final class VisualStudioResourceProviderClient
             ]]
         ],
         'definitions' => [
-            'AccountResource' => ['properties' => ['properties' => [
-                'type' => 'object',
-                'additionalProperties' => ['type' => 'string']
-            ]]],
-            'AccountResourceListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/AccountResource']
-            ]]],
-            'AccountResourceRequest' => ['properties' => [
-                'accountName' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'operationType' => ['type' => 'object'],
+            'AccountResource' => [
+                'properties' => ['properties' => [
+                    'type' => 'object',
+                    'additionalProperties' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'AccountResourceListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/AccountResource']
+                ]],
+                'required' => []
+            ],
+            'AccountResourceRequest' => [
                 'properties' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                    'accountName' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'operationType' => ['type' => 'object'],
+                    'properties' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
                 ],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'CheckNameAvailabilityParameter' => ['properties' => [
-                'resourceName' => ['type' => 'string'],
-                'resourceType' => ['type' => 'string']
-            ]],
-            'CheckNameAvailabilityResult' => ['properties' => [
-                'message' => ['type' => 'string'],
-                'nameAvailable' => ['type' => 'boolean']
-            ]],
-            'ExtensionResourcePlan' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'product' => ['type' => 'string'],
-                'promotionCode' => ['type' => 'string'],
-                'publisher' => ['type' => 'string'],
-                'version' => ['type' => 'string']
-            ]],
-            'ExtensionResource' => ['properties' => [
-                'plan' => ['$ref' => '#/definitions/ExtensionResourcePlan'],
+                'required' => []
+            ],
+            'CheckNameAvailabilityParameter' => [
                 'properties' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'ExtensionResourceListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ExtensionResource']
-            ]]],
-            'ExtensionResourceRequest' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'plan' => ['$ref' => '#/definitions/ExtensionResourcePlan'],
+                    'resourceName' => ['type' => 'string'],
+                    'resourceType' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CheckNameAvailabilityResult' => [
                 'properties' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                    'message' => ['type' => 'string'],
+                    'nameAvailable' => ['type' => 'boolean']
                 ],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'OperationProperties' => ['properties' => [
-                'description' => ['type' => 'string'],
-                'operation' => ['type' => 'string'],
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'display' => ['$ref' => '#/definitions/OperationProperties'],
-                'name' => ['type' => 'string']
-            ]],
-            'OperationListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/Operation']
-            ]]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+                'required' => []
+            ],
+            'ExtensionResourcePlan' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'product' => ['type' => 'string'],
+                    'promotionCode' => ['type' => 'string'],
+                    'publisher' => ['type' => 'string'],
+                    'version' => ['type' => 'string']
                 ],
-                'type' => ['type' => 'string']
-            ]],
-            'ProjectResource' => ['properties' => ['properties' => [
-                'type' => 'object',
-                'additionalProperties' => ['type' => 'string']
-            ]]],
-            'ProjectResourceListResult' => ['properties' => ['value' => [
-                'type' => 'array',
-                'items' => ['$ref' => '#/definitions/ProjectResource']
-            ]]]
+                'required' => []
+            ],
+            'ExtensionResource' => [
+                'properties' => [
+                    'plan' => ['$ref' => '#/definitions/ExtensionResourcePlan'],
+                    'properties' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ExtensionResourceListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ExtensionResource']
+                ]],
+                'required' => []
+            ],
+            'ExtensionResourceRequest' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'plan' => ['$ref' => '#/definitions/ExtensionResourcePlan'],
+                    'properties' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'OperationProperties' => [
+                'properties' => [
+                    'description' => ['type' => 'string'],
+                    'operation' => ['type' => 'string'],
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'display' => ['$ref' => '#/definitions/OperationProperties'],
+                    'name' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/Operation']
+                ]],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ProjectResource' => [
+                'properties' => ['properties' => [
+                    'type' => 'object',
+                    'additionalProperties' => ['type' => 'string']
+                ]],
+                'required' => []
+            ],
+            'ProjectResourceListResult' => [
+                'properties' => ['value' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/ProjectResource']
+                ]],
+                'required' => []
+            ]
         ]
     ];
 }

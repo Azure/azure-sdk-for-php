@@ -816,208 +816,295 @@ final class BatchManagementClient
             ]]
         ],
         'definitions' => [
-            'AutoStorageBaseProperties' => ['properties' => ['storageAccountId' => ['type' => 'string']]],
-            'BatchAccountUpdateProperties' => ['properties' => ['autoStorage' => ['$ref' => '#/definitions/AutoStorageBaseProperties']]],
-            'KeyVaultReference' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'url' => ['type' => 'string']
-            ]],
-            'BatchAccountCreateProperties' => ['properties' => [
-                'autoStorage' => ['$ref' => '#/definitions/AutoStorageBaseProperties'],
-                'poolAllocationMode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'BatchService',
-                        'UserSubscription'
-                    ]
+            'AutoStorageBaseProperties' => [
+                'properties' => ['storageAccountId' => ['type' => 'string']],
+                'required' => ['storageAccountId']
+            ],
+            'BatchAccountUpdateProperties' => [
+                'properties' => ['autoStorage' => ['$ref' => '#/definitions/AutoStorageBaseProperties']],
+                'required' => []
+            ],
+            'KeyVaultReference' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'url' => ['type' => 'string']
                 ],
-                'keyVaultReference' => ['$ref' => '#/definitions/KeyVaultReference']
-            ]],
-            'BatchAccountCreateParameters' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ],
-                'properties' => ['$ref' => '#/definitions/BatchAccountCreateProperties']
-            ]],
-            'AutoStorageProperties' => ['properties' => ['lastKeySync' => [
-                'type' => 'string',
-                'format' => 'date-time'
-            ]]],
-            'BatchAccountProperties' => ['properties' => [
-                'accountEndpoint' => ['type' => 'string'],
-                'provisioningState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'Creating',
-                        'Deleting',
-                        'Succeeded',
-                        'Failed',
-                        'Cancelled'
-                    ]
-                ],
-                'poolAllocationMode' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'BatchService',
-                        'UserSubscription'
-                    ]
-                ],
-                'keyVaultReference' => ['$ref' => '#/definitions/KeyVaultReference'],
-                'autoStorage' => ['$ref' => '#/definitions/AutoStorageProperties'],
-                'dedicatedCoreQuota' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'lowPriorityCoreQuota' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'poolQuota' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'activeJobAndJobScheduleQuota' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => [
+                    'id',
+                    'url'
                 ]
-            ]],
-            'BatchAccount' => ['properties' => ['properties' => ['$ref' => '#/definitions/BatchAccountProperties']]],
-            'BatchAccountUpdateParameters' => ['properties' => [
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
+            ],
+            'BatchAccountCreateProperties' => [
+                'properties' => [
+                    'autoStorage' => ['$ref' => '#/definitions/AutoStorageBaseProperties'],
+                    'poolAllocationMode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'BatchService',
+                            'UserSubscription'
+                        ]
+                    ],
+                    'keyVaultReference' => ['$ref' => '#/definitions/KeyVaultReference']
                 ],
-                'properties' => ['$ref' => '#/definitions/BatchAccountUpdateProperties']
-            ]],
-            'BatchAccountListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/BatchAccount']
+                'required' => []
+            ],
+            'BatchAccountCreateParameters' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/BatchAccountCreateProperties']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'BatchAccountRegenerateKeyParameters' => ['properties' => ['keyName' => [
-                'type' => 'string',
-                'enum' => [
-                    'Primary',
-                    'Secondary'
-                ]
-            ]]],
-            'BatchAccountKeys' => ['properties' => [
-                'accountName' => ['type' => 'string'],
-                'primary' => ['type' => 'string'],
-                'secondary' => ['type' => 'string']
-            ]],
-            'ActivateApplicationPackageParameters' => ['properties' => ['format' => ['type' => 'string']]],
-            'ApplicationCreateParameters' => ['properties' => [
-                'allowUpdates' => ['type' => 'boolean'],
-                'displayName' => ['type' => 'string']
-            ]],
-            'ApplicationPackage' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'version' => ['type' => 'string'],
-                'state' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'pending',
-                        'active',
-                        'unmapped'
-                    ]
-                ],
-                'format' => ['type' => 'string'],
-                'storageUrl' => ['type' => 'string'],
-                'storageUrlExpiry' => [
+                'required' => ['location']
+            ],
+            'AutoStorageProperties' => [
+                'properties' => ['lastKeySync' => [
                     'type' => 'string',
                     'format' => 'date-time'
-                ],
-                'lastActivationTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'Application' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'packages' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ApplicationPackage']
-                ],
-                'allowUpdates' => ['type' => 'boolean'],
-                'defaultVersion' => ['type' => 'string']
-            ]],
-            'ListApplicationsResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Application']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ApplicationUpdateParameters' => ['properties' => [
-                'allowUpdates' => ['type' => 'boolean'],
-                'defaultVersion' => ['type' => 'string'],
-                'displayName' => ['type' => 'string']
-            ]],
-            'BatchLocationQuota' => ['properties' => ['accountQuota' => [
-                'type' => 'integer',
-                'format' => 'int32'
-            ]]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'CloudErrorBody' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'target' => ['type' => 'string'],
-                'details' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CloudErrorBody']
-                ]
-            ]],
-            'CloudError' => ['properties' => ['error' => ['$ref' => '#/definitions/CloudErrorBody']]],
-            'Operation_display' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'operation' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'description' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/Operation_display'],
-                'origin' => ['type' => 'string'],
-                'properties' => ['type' => 'object']
-            ]],
-            'OperationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Operation']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'CheckNameAvailabilityParameters' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'CheckNameAvailabilityResult' => ['properties' => [
-                'nameAvailable' => ['type' => 'boolean'],
-                'reason' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Invalid',
-                        'AlreadyExists'
+                ]],
+                'required' => ['lastKeySync']
+            ],
+            'BatchAccountProperties' => [
+                'properties' => [
+                    'accountEndpoint' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'Creating',
+                            'Deleting',
+                            'Succeeded',
+                            'Failed',
+                            'Cancelled'
+                        ]
+                    ],
+                    'poolAllocationMode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'BatchService',
+                            'UserSubscription'
+                        ]
+                    ],
+                    'keyVaultReference' => ['$ref' => '#/definitions/KeyVaultReference'],
+                    'autoStorage' => ['$ref' => '#/definitions/AutoStorageProperties'],
+                    'dedicatedCoreQuota' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'lowPriorityCoreQuota' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'poolQuota' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'activeJobAndJobScheduleQuota' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'message' => ['type' => 'string']
-            ]]
+                'required' => []
+            ],
+            'BatchAccount' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BatchAccountProperties']],
+                'required' => []
+            ],
+            'BatchAccountUpdateParameters' => [
+                'properties' => [
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ],
+                    'properties' => ['$ref' => '#/definitions/BatchAccountUpdateProperties']
+                ],
+                'required' => []
+            ],
+            'BatchAccountListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/BatchAccount']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'BatchAccountRegenerateKeyParameters' => [
+                'properties' => ['keyName' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'Primary',
+                        'Secondary'
+                    ]
+                ]],
+                'required' => ['keyName']
+            ],
+            'BatchAccountKeys' => [
+                'properties' => [
+                    'accountName' => ['type' => 'string'],
+                    'primary' => ['type' => 'string'],
+                    'secondary' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ActivateApplicationPackageParameters' => [
+                'properties' => ['format' => ['type' => 'string']],
+                'required' => ['format']
+            ],
+            'ApplicationCreateParameters' => [
+                'properties' => [
+                    'allowUpdates' => ['type' => 'boolean'],
+                    'displayName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationPackage' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'version' => ['type' => 'string'],
+                    'state' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'pending',
+                            'active',
+                            'unmapped'
+                        ]
+                    ],
+                    'format' => ['type' => 'string'],
+                    'storageUrl' => ['type' => 'string'],
+                    'storageUrlExpiry' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'lastActivationTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'Application' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'packages' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ApplicationPackage']
+                    ],
+                    'allowUpdates' => ['type' => 'boolean'],
+                    'defaultVersion' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ListApplicationsResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Application']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ApplicationUpdateParameters' => [
+                'properties' => [
+                    'allowUpdates' => ['type' => 'boolean'],
+                    'defaultVersion' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'BatchLocationQuota' => [
+                'properties' => ['accountQuota' => [
+                    'type' => 'integer',
+                    'format' => 'int32'
+                ]],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
+                    ]
+                ],
+                'required' => []
+            ],
+            'CloudErrorBody' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'target' => ['type' => 'string'],
+                    'details' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CloudErrorBody']
+                    ]
+                ],
+                'required' => []
+            ],
+            'CloudError' => [
+                'properties' => ['error' => ['$ref' => '#/definitions/CloudErrorBody']],
+                'required' => []
+            ],
+            'Operation_display' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'operation' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/Operation_display'],
+                    'origin' => ['type' => 'string'],
+                    'properties' => ['type' => 'object']
+                ],
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Operation']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'CheckNameAvailabilityParameters' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => [
+                    'name',
+                    'type'
+                ]
+            ],
+            'CheckNameAvailabilityResult' => [
+                'properties' => [
+                    'nameAvailable' => ['type' => 'boolean'],
+                    'reason' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Invalid',
+                            'AlreadyExists'
+                        ]
+                    ],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

@@ -1889,517 +1889,655 @@ final class ServiceBusManagementClient
             ]]
         ],
         'definitions' => [
-            'TrackedResource' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'ResourceNamespacePatch' => ['properties' => [
-                'location' => ['type' => 'string'],
-                'tags' => [
-                    'type' => 'object',
-                    'additionalProperties' => ['type' => 'string']
-                ]
-            ]],
-            'SBSku' => ['properties' => [
-                'name' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'Standard',
-                        'Premium'
+            'TrackedResource' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'tier' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Basic',
-                        'Standard',
-                        'Premium'
+                'required' => ['location']
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResourceNamespacePatch' => [
+                'properties' => [
+                    'location' => ['type' => 'string'],
+                    'tags' => [
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ]
                 ],
-                'capacity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'SBNamespaceProperties' => ['properties' => [
-                'provisioningState' => ['type' => 'string'],
-                'createdAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'SBSku' => [
+                'properties' => [
+                    'name' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'Standard',
+                            'Premium'
+                        ]
+                    ],
+                    'tier' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Basic',
+                            'Standard',
+                            'Premium'
+                        ]
+                    ],
+                    'capacity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
                 ],
-                'updatedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => ['name']
+            ],
+            'SBNamespaceProperties' => [
+                'properties' => [
+                    'provisioningState' => ['type' => 'string'],
+                    'createdAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'updatedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'serviceBusEndpoint' => ['type' => 'string'],
+                    'metricId' => ['type' => 'string']
                 ],
-                'serviceBusEndpoint' => ['type' => 'string'],
-                'metricId' => ['type' => 'string']
-            ]],
-            'SBNamespace' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/SBSku'],
-                'properties' => ['$ref' => '#/definitions/SBNamespaceProperties']
-            ]],
-            'SBNamespaceListResult' => ['properties' => [
-                'value' => [
+                'required' => []
+            ],
+            'SBNamespace' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/SBSku'],
+                    'properties' => ['$ref' => '#/definitions/SBNamespaceProperties']
+                ],
+                'required' => []
+            ],
+            'SBNamespaceListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SBNamespace']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SBNamespaceUpdateParameters' => [
+                'properties' => [
+                    'sku' => ['$ref' => '#/definitions/SBSku'],
+                    'properties' => ['$ref' => '#/definitions/SBNamespaceProperties']
+                ],
+                'required' => []
+            ],
+            'SBAuthorizationRule_properties' => [
+                'properties' => ['rights' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SBNamespace']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'SBNamespaceUpdateParameters' => ['properties' => [
-                'sku' => ['$ref' => '#/definitions/SBSku'],
-                'properties' => ['$ref' => '#/definitions/SBNamespaceProperties']
-            ]],
-            'SBAuthorizationRule_properties' => ['properties' => ['rights' => [
-                'type' => 'array',
-                'items' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Manage',
-                        'Send',
-                        'Listen'
+                    'items' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Manage',
+                            'Send',
+                            'Listen'
+                        ]
                     ]
-                ]
-            ]]],
-            'SBAuthorizationRule' => ['properties' => ['properties' => ['$ref' => '#/definitions/SBAuthorizationRule_properties']]],
-            'SBAuthorizationRuleListResult' => ['properties' => [
-                'value' => [
+                ]],
+                'required' => []
+            ],
+            'SBAuthorizationRule' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SBAuthorizationRule_properties']],
+                'required' => []
+            ],
+            'SBAuthorizationRuleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SBAuthorizationRule']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'AuthorizationRuleProperties' => [
+                'properties' => ['rights' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SBAuthorizationRule']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'AuthorizationRuleProperties' => ['properties' => ['rights' => [
-                'type' => 'array',
-                'items' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Manage',
-                        'Send',
-                        'Listen'
+                    'items' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Manage',
+                            'Send',
+                            'Listen'
+                        ]
                     ]
-                ]
-            ]]],
-            'AccessKeys' => ['properties' => [
-                'primaryConnectionString' => ['type' => 'string'],
-                'secondaryConnectionString' => ['type' => 'string'],
-                'primaryKey' => ['type' => 'string'],
-                'secondaryKey' => ['type' => 'string'],
-                'keyName' => ['type' => 'string']
-            ]],
-            'RegenerateAccessKeyParameters' => ['properties' => [
-                'keyType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'PrimaryKey',
-                        'SecondaryKey'
-                    ]
+                ]],
+                'required' => ['rights']
+            ],
+            'AccessKeys' => [
+                'properties' => [
+                    'primaryConnectionString' => ['type' => 'string'],
+                    'secondaryConnectionString' => ['type' => 'string'],
+                    'primaryKey' => ['type' => 'string'],
+                    'secondaryKey' => ['type' => 'string'],
+                    'keyName' => ['type' => 'string']
                 ],
-                'key' => ['type' => 'string']
-            ]],
-            'MessageCountDetails' => ['properties' => [
-                'activeMessageCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'RegenerateAccessKeyParameters' => [
+                'properties' => [
+                    'keyType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'PrimaryKey',
+                            'SecondaryKey'
+                        ]
+                    ],
+                    'key' => ['type' => 'string']
                 ],
-                'deadLetterMessageCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'scheduledMessageCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'transferMessageCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'transferDeadLetterMessageCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ]
-            ]],
-            'SBQueueProperties' => ['properties' => [
-                'countDetails' => ['$ref' => '#/definitions/MessageCountDetails'],
-                'createdAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'updatedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'accessedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'sizeInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'messageCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'lockDuration' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'maxSizeInMegabytes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'requiresDuplicateDetection' => ['type' => 'boolean'],
-                'requiresSession' => ['type' => 'boolean'],
-                'defaultMessageTimeToLive' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'deadLetteringOnMessageExpiration' => ['type' => 'boolean'],
-                'duplicateDetectionHistoryTimeWindow' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'maxDeliveryCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Active',
-                        'Disabled',
-                        'Restoring',
-                        'SendDisabled',
-                        'ReceiveDisabled',
-                        'Creating',
-                        'Deleting',
-                        'Renaming',
-                        'Unknown'
+                'required' => ['keyType']
+            ],
+            'MessageCountDetails' => [
+                'properties' => [
+                    'activeMessageCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'deadLetterMessageCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'scheduledMessageCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'transferMessageCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'transferDeadLetterMessageCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
                     ]
                 ],
-                'autoDeleteOnIdle' => [
-                    'type' => 'string',
-                    'format' => 'duration'
+                'required' => []
+            ],
+            'SBQueueProperties' => [
+                'properties' => [
+                    'countDetails' => ['$ref' => '#/definitions/MessageCountDetails'],
+                    'createdAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'updatedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'accessedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'sizeInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'messageCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'lockDuration' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'maxSizeInMegabytes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'requiresDuplicateDetection' => ['type' => 'boolean'],
+                    'requiresSession' => ['type' => 'boolean'],
+                    'defaultMessageTimeToLive' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'deadLetteringOnMessageExpiration' => ['type' => 'boolean'],
+                    'duplicateDetectionHistoryTimeWindow' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'maxDeliveryCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Active',
+                            'Disabled',
+                            'Restoring',
+                            'SendDisabled',
+                            'ReceiveDisabled',
+                            'Creating',
+                            'Deleting',
+                            'Renaming',
+                            'Unknown'
+                        ]
+                    ],
+                    'autoDeleteOnIdle' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'enablePartitioning' => ['type' => 'boolean'],
+                    'enableExpress' => ['type' => 'boolean']
                 ],
-                'enablePartitioning' => ['type' => 'boolean'],
-                'enableExpress' => ['type' => 'boolean']
-            ]],
-            'SBQueue' => ['properties' => ['properties' => ['$ref' => '#/definitions/SBQueueProperties']]],
-            'SBQueueListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SBQueue']
+                'required' => []
+            ],
+            'SBQueue' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SBQueueProperties']],
+                'required' => []
+            ],
+            'SBQueueListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SBQueue']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'SBTopicProperties' => ['properties' => [
-                'sizeInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'SBTopicProperties' => [
+                'properties' => [
+                    'sizeInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'createdAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'updatedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'accessedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'subscriptionCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'countDetails' => ['$ref' => '#/definitions/MessageCountDetails'],
+                    'defaultMessageTimeToLive' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'maxSizeInMegabytes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'requiresDuplicateDetection' => ['type' => 'boolean'],
+                    'duplicateDetectionHistoryTimeWindow' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'enableBatchedOperations' => ['type' => 'boolean'],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Active',
+                            'Disabled',
+                            'Restoring',
+                            'SendDisabled',
+                            'ReceiveDisabled',
+                            'Creating',
+                            'Deleting',
+                            'Renaming',
+                            'Unknown'
+                        ]
+                    ],
+                    'supportOrdering' => ['type' => 'boolean'],
+                    'autoDeleteOnIdle' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'enablePartitioning' => ['type' => 'boolean'],
+                    'enableExpress' => ['type' => 'boolean']
                 ],
-                'createdAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'SBTopic' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SBTopicProperties']],
+                'required' => []
+            ],
+            'SBTopicListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SBTopic']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'updatedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'accessedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'subscriptionCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'countDetails' => ['$ref' => '#/definitions/MessageCountDetails'],
-                'defaultMessageTimeToLive' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'maxSizeInMegabytes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'requiresDuplicateDetection' => ['type' => 'boolean'],
-                'duplicateDetectionHistoryTimeWindow' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'enableBatchedOperations' => ['type' => 'boolean'],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Active',
-                        'Disabled',
-                        'Restoring',
-                        'SendDisabled',
-                        'ReceiveDisabled',
-                        'Creating',
-                        'Deleting',
-                        'Renaming',
-                        'Unknown'
+                'required' => []
+            ],
+            'SBSubscriptionProperties' => [
+                'properties' => [
+                    'messageCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'createdAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'accessedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'updatedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'countDetails' => ['$ref' => '#/definitions/MessageCountDetails'],
+                    'lockDuration' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'requiresSession' => ['type' => 'boolean'],
+                    'defaultMessageTimeToLive' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'deadLetteringOnMessageExpiration' => ['type' => 'boolean'],
+                    'duplicateDetectionHistoryTimeWindow' => [
+                        'type' => 'string',
+                        'format' => 'duration'
+                    ],
+                    'maxDeliveryCount' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Active',
+                            'Disabled',
+                            'Restoring',
+                            'SendDisabled',
+                            'ReceiveDisabled',
+                            'Creating',
+                            'Deleting',
+                            'Renaming',
+                            'Unknown'
+                        ]
+                    ],
+                    'enableBatchedOperations' => ['type' => 'boolean'],
+                    'autoDeleteOnIdle' => [
+                        'type' => 'string',
+                        'format' => 'duration'
                     ]
                 ],
-                'supportOrdering' => ['type' => 'boolean'],
-                'autoDeleteOnIdle' => [
-                    'type' => 'string',
-                    'format' => 'duration'
+                'required' => []
+            ],
+            'SBSubscription' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/SBSubscriptionProperties']],
+                'required' => []
+            ],
+            'SBSubscriptionListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/SBSubscription']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'enablePartitioning' => ['type' => 'boolean'],
-                'enableExpress' => ['type' => 'boolean']
-            ]],
-            'SBTopic' => ['properties' => ['properties' => ['$ref' => '#/definitions/SBTopicProperties']]],
-            'SBTopicListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SBTopic']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'SBSubscriptionProperties' => ['properties' => [
-                'messageCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
-                ],
-                'createdAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'accessedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'updatedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'countDetails' => ['$ref' => '#/definitions/MessageCountDetails'],
-                'lockDuration' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'requiresSession' => ['type' => 'boolean'],
-                'defaultMessageTimeToLive' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'deadLetteringOnMessageExpiration' => ['type' => 'boolean'],
-                'duplicateDetectionHistoryTimeWindow' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ],
-                'maxDeliveryCount' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Active',
-                        'Disabled',
-                        'Restoring',
-                        'SendDisabled',
-                        'ReceiveDisabled',
-                        'Creating',
-                        'Deleting',
-                        'Renaming',
-                        'Unknown'
+                'required' => []
+            ],
+            'CheckNameAvailability' => [
+                'properties' => ['name' => ['type' => 'string']],
+                'required' => ['name']
+            ],
+            'CheckNameAvailabilityResult' => [
+                'properties' => [
+                    'message' => ['type' => 'string'],
+                    'nameAvailable' => ['type' => 'boolean'],
+                    'reason' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'None',
+                            'InvalidName',
+                            'SubscriptionIsDisabled',
+                            'NameInUse',
+                            'NameInLockdown',
+                            'TooManyNamespaceInCurrentSubscription'
+                        ]
                     ]
                 ],
-                'enableBatchedOperations' => ['type' => 'boolean'],
-                'autoDeleteOnIdle' => [
-                    'type' => 'string',
-                    'format' => 'duration'
-                ]
-            ]],
-            'SBSubscription' => ['properties' => ['properties' => ['$ref' => '#/definitions/SBSubscriptionProperties']]],
-            'SBSubscriptionListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SBSubscription']
+                'required' => []
+            ],
+            'Operation_display' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'CheckNameAvailability' => ['properties' => ['name' => ['type' => 'string']]],
-            'CheckNameAvailabilityResult' => ['properties' => [
-                'message' => ['type' => 'string'],
-                'nameAvailable' => ['type' => 'boolean'],
-                'reason' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'None',
-                        'InvalidName',
-                        'SubscriptionIsDisabled',
-                        'NameInUse',
-                        'NameInLockdown',
-                        'TooManyNamespaceInCurrentSubscription'
-                    ]
-                ]
-            ]],
-            'Operation_display' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/Operation_display']
-            ]],
-            'OperationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Operation']
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ErrorResponse' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'Action' => ['properties' => [
-                'sqlExpression' => ['type' => 'string'],
-                'compatibilityLevel' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Operation']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'requiresPreprocessing' => ['type' => 'boolean']
-            ]],
-            'SqlFilter' => ['properties' => [
-                'sqlExpression' => ['type' => 'string'],
-                'compatibilityLevel' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'ErrorResponse' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
                 ],
-                'requiresPreprocessing' => ['type' => 'boolean']
-            ]],
-            'CorrelationFilter' => ['properties' => [
-                'correlationId' => ['type' => 'string'],
-                'messageId' => ['type' => 'string'],
-                'to' => ['type' => 'string'],
-                'replyTo' => ['type' => 'string'],
-                'label' => ['type' => 'string'],
-                'sessionId' => ['type' => 'string'],
-                'replyToSessionId' => ['type' => 'string'],
-                'contentType' => ['type' => 'string'],
-                'requiresPreprocessing' => ['type' => 'boolean']
-            ]],
-            'Ruleproperties' => ['properties' => [
-                'action' => ['$ref' => '#/definitions/Action'],
-                'filterType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'SqlFilter',
-                        'CorrelationFilter'
-                    ]
+                'required' => []
+            ],
+            'Action' => [
+                'properties' => [
+                    'sqlExpression' => ['type' => 'string'],
+                    'compatibilityLevel' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'requiresPreprocessing' => ['type' => 'boolean']
                 ],
-                'sqlFilter' => ['$ref' => '#/definitions/SqlFilter'],
-                'correlationFilter' => ['$ref' => '#/definitions/CorrelationFilter']
-            ]],
-            'Rule' => ['properties' => ['properties' => ['$ref' => '#/definitions/Ruleproperties']]],
-            'RuleListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Rule']
+                'required' => []
+            ],
+            'SqlFilter' => [
+                'properties' => [
+                    'sqlExpression' => ['type' => 'string'],
+                    'compatibilityLevel' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'requiresPreprocessing' => ['type' => 'boolean']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'SqlRuleAction' => ['properties' => []],
-            'PremiumMessagingRegions_properties' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'fullName' => ['type' => 'string']
-            ]],
-            'PremiumMessagingRegions' => ['properties' => ['properties' => ['$ref' => '#/definitions/PremiumMessagingRegions_properties']]],
-            'PremiumMessagingRegionsListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/PremiumMessagingRegions']
+                'required' => []
+            ],
+            'CorrelationFilter' => [
+                'properties' => [
+                    'correlationId' => ['type' => 'string'],
+                    'messageId' => ['type' => 'string'],
+                    'to' => ['type' => 'string'],
+                    'replyTo' => ['type' => 'string'],
+                    'label' => ['type' => 'string'],
+                    'sessionId' => ['type' => 'string'],
+                    'replyToSessionId' => ['type' => 'string'],
+                    'contentType' => ['type' => 'string'],
+                    'requiresPreprocessing' => ['type' => 'boolean']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Destination_properties' => ['properties' => [
-                'storageAccountResourceId' => ['type' => 'string'],
-                'blobContainer' => ['type' => 'string'],
-                'archiveNameFormat' => ['type' => 'string']
-            ]],
-            'Destination' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/Destination_properties']
-            ]],
-            'CaptureDescription' => ['properties' => [
-                'enabled' => ['type' => 'boolean'],
-                'encoding' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Avro',
-                        'AvroDeflate'
-                    ]
+                'required' => []
+            ],
+            'Ruleproperties' => [
+                'properties' => [
+                    'action' => ['$ref' => '#/definitions/Action'],
+                    'filterType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'SqlFilter',
+                            'CorrelationFilter'
+                        ]
+                    ],
+                    'sqlFilter' => ['$ref' => '#/definitions/SqlFilter'],
+                    'correlationFilter' => ['$ref' => '#/definitions/CorrelationFilter']
                 ],
-                'intervalInSeconds' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'Rule' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Ruleproperties']],
+                'required' => []
+            ],
+            'RuleListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Rule']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'sizeLimitInBytes' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
+                'required' => []
+            ],
+            'SqlRuleAction' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'PremiumMessagingRegions_properties' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'fullName' => ['type' => 'string']
                 ],
-                'destination' => ['$ref' => '#/definitions/Destination']
-            ]],
-            'Eventhub_properties' => ['properties' => [
-                'partitionIds' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
+                'required' => []
+            ],
+            'PremiumMessagingRegions' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PremiumMessagingRegions_properties']],
+                'required' => []
+            ],
+            'PremiumMessagingRegionsListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/PremiumMessagingRegions']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'createdAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'Destination_properties' => [
+                'properties' => [
+                    'storageAccountResourceId' => ['type' => 'string'],
+                    'blobContainer' => ['type' => 'string'],
+                    'archiveNameFormat' => ['type' => 'string']
                 ],
-                'updatedAt' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'Destination' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/Destination_properties']
                 ],
-                'messageRetentionInDays' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'CaptureDescription' => [
+                'properties' => [
+                    'enabled' => ['type' => 'boolean'],
+                    'encoding' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Avro',
+                            'AvroDeflate'
+                        ]
+                    ],
+                    'intervalInSeconds' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'sizeLimitInBytes' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'destination' => ['$ref' => '#/definitions/Destination']
                 ],
-                'partitionCount' => [
-                    'type' => 'integer',
-                    'format' => 'int64'
+                'required' => []
+            ],
+            'Eventhub_properties' => [
+                'properties' => [
+                    'partitionIds' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'createdAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'updatedAt' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'messageRetentionInDays' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'partitionCount' => [
+                        'type' => 'integer',
+                        'format' => 'int64'
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'Active',
+                            'Disabled',
+                            'Restoring',
+                            'SendDisabled',
+                            'ReceiveDisabled',
+                            'Creating',
+                            'Deleting',
+                            'Renaming',
+                            'Unknown'
+                        ]
+                    ],
+                    'captureDescription' => ['$ref' => '#/definitions/CaptureDescription']
                 ],
-                'status' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'Active',
-                        'Disabled',
-                        'Restoring',
-                        'SendDisabled',
-                        'ReceiveDisabled',
-                        'Creating',
-                        'Deleting',
-                        'Renaming',
-                        'Unknown'
-                    ]
+                'required' => []
+            ],
+            'Eventhub' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Eventhub_properties']],
+                'required' => []
+            ],
+            'EventHubListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Eventhub']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'captureDescription' => ['$ref' => '#/definitions/CaptureDescription']
-            ]],
-            'Eventhub' => ['properties' => ['properties' => ['$ref' => '#/definitions/Eventhub_properties']]],
-            'EventHubListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Eventhub']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]]
+                'required' => []
+            ]
         ]
     ];
 }

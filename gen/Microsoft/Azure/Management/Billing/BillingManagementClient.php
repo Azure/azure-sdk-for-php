@@ -219,85 +219,124 @@ final class BillingManagementClient
             ]]
         ],
         'definitions' => [
-            'BillingPeriodProperties' => ['properties' => [
-                'billingPeriodStartDate' => [
-                    'type' => 'string',
-                    'format' => 'date'
+            'BillingPeriodProperties' => [
+                'properties' => [
+                    'billingPeriodStartDate' => [
+                        'type' => 'string',
+                        'format' => 'date'
+                    ],
+                    'billingPeriodEndDate' => [
+                        'type' => 'string',
+                        'format' => 'date'
+                    ],
+                    'invoiceIds' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
                 ],
-                'billingPeriodEndDate' => [
-                    'type' => 'string',
-                    'format' => 'date'
+                'required' => []
+            ],
+            'BillingPeriod' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/BillingPeriodProperties']],
+                'required' => []
+            ],
+            'BillingPeriodsListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/BillingPeriod']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'invoiceIds' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'BillingPeriod' => ['properties' => ['properties' => ['$ref' => '#/definitions/BillingPeriodProperties']]],
-            'BillingPeriodsListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/BillingPeriod']
+                'required' => []
+            ],
+            'DownloadUrl' => [
+                'properties' => [
+                    'expiryTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'url' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'DownloadUrl' => ['properties' => [
-                'expiryTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'ErrorDetails' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string'],
+                    'target' => ['type' => 'string']
                 ],
-                'url' => ['type' => 'string']
-            ]],
-            'ErrorDetails' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string'],
-                'target' => ['type' => 'string']
-            ]],
-            'ErrorResponse' => ['properties' => ['error' => ['$ref' => '#/definitions/ErrorDetails']]],
-            'InvoiceProperties' => ['properties' => [
-                'downloadUrl' => ['$ref' => '#/definitions/DownloadUrl'],
-                'invoicePeriodStartDate' => [
-                    'type' => 'string',
-                    'format' => 'date'
+                'required' => []
+            ],
+            'ErrorResponse' => [
+                'properties' => ['error' => ['$ref' => '#/definitions/ErrorDetails']],
+                'required' => []
+            ],
+            'InvoiceProperties' => [
+                'properties' => [
+                    'downloadUrl' => ['$ref' => '#/definitions/DownloadUrl'],
+                    'invoicePeriodStartDate' => [
+                        'type' => 'string',
+                        'format' => 'date'
+                    ],
+                    'invoicePeriodEndDate' => [
+                        'type' => 'string',
+                        'format' => 'date'
+                    ],
+                    'billingPeriodIds' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ]
                 ],
-                'invoicePeriodEndDate' => [
-                    'type' => 'string',
-                    'format' => 'date'
+                'required' => []
+            ],
+            'Invoice' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/InvoiceProperties']],
+                'required' => []
+            ],
+            'InvoicesListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Invoice']
+                    ],
+                    'nextLink' => ['type' => 'string']
                 ],
-                'billingPeriodIds' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'Invoice' => ['properties' => ['properties' => ['$ref' => '#/definitions/InvoiceProperties']]],
-            'InvoicesListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Invoice']
+                'required' => []
+            ],
+            'Operation_display' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Operation_display' => ['properties' => [
-                'provider' => ['type' => 'string'],
-                'resource' => ['type' => 'string'],
-                'operation' => ['type' => 'string']
-            ]],
-            'Operation' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'display' => ['$ref' => '#/definitions/Operation_display']
-            ]],
-            'OperationListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Operation']
+                'required' => []
+            ],
+            'Operation' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'name' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]]
+                'required' => []
+            ],
+            'OperationListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Operation']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

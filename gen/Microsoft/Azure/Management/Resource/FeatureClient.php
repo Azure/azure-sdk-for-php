@@ -139,20 +139,29 @@ final class FeatureClient
             ]]
         ],
         'definitions' => [
-            'FeatureProperties' => ['properties' => ['state' => ['type' => 'string']]],
-            'FeatureResult' => ['properties' => [
-                'name' => ['type' => 'string'],
-                'properties' => ['$ref' => '#/definitions/FeatureProperties'],
-                'id' => ['type' => 'string'],
-                'type' => ['type' => 'string']
-            ]],
-            'FeatureOperationsListResult' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/FeatureResult']
+            'FeatureProperties' => [
+                'properties' => ['state' => ['type' => 'string']],
+                'required' => []
+            ],
+            'FeatureResult' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/FeatureProperties'],
+                    'id' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
                 ],
-                'nextLink' => ['type' => 'string']
-            ]]
+                'required' => []
+            ],
+            'FeatureOperationsListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/FeatureResult']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ]
         ]
     ];
 }

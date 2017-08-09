@@ -1348,498 +1348,718 @@ final class ServiceMap
             ]
         ],
         'definitions' => [
-            'Resource' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'name' => ['type' => 'string']
-            ]],
-            'ResourceReference' => ['properties' => [
-                'id' => ['type' => 'string'],
-                'type' => ['type' => 'string'],
-                'name' => ['type' => 'string']
-            ]],
-            'ref:machine' => ['properties' => []],
-            'ProcessReference_properties' => ['properties' => ['machine' => ['$ref' => '#/definitions/ref:machine']]],
-            'ref:process' => ['properties' => ['properties' => ['$ref' => '#/definitions/ProcessReference_properties']]],
-            'PortReference_properties' => ['properties' => [
-                'machine' => ['$ref' => '#/definitions/ref:machine'],
-                'ipAddress' => ['type' => 'string'],
-                'portNumber' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'ref:port' => ['properties' => ['properties' => ['$ref' => '#/definitions/PortReference_properties']]],
-            'MachineReferenceWithHints_properties' => ['properties' => [
-                'displayNameHint' => ['type' => 'string'],
-                'osFamilyHint' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'unknown',
-                        'windows',
-                        'linux',
-                        'solaris',
-                        'aix'
-                    ]
-                ]
-            ]],
-            'ref:machinewithhints' => ['properties' => ['properties' => ['$ref' => '#/definitions/MachineReferenceWithHints_properties']]],
-            'CoreResource' => ['properties' => ['etag' => ['type' => 'string']]],
-            'Timezone' => ['properties' => ['fullName' => ['type' => 'string']]],
-            'AgentConfiguration' => ['properties' => [
-                'agentId' => ['type' => 'string'],
-                'dependencyAgentId' => ['type' => 'string'],
-                'dependencyAgentVersion' => ['type' => 'string'],
-                'dependencyAgentRevision' => ['type' => 'string'],
-                'rebootStatus' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'unknown',
-                        'rebooted',
-                        'notRebooted'
+            'Resource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'name' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ResourceReference' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'type' => ['type' => 'string'],
+                    'name' => ['type' => 'string']
+                ],
+                'required' => ['id']
+            ],
+            'ref:machine' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'ProcessReference_properties' => [
+                'properties' => ['machine' => ['$ref' => '#/definitions/ref:machine']],
+                'required' => []
+            ],
+            'ref:process' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ProcessReference_properties']],
+                'required' => []
+            ],
+            'PortReference_properties' => [
+                'properties' => [
+                    'machine' => ['$ref' => '#/definitions/ref:machine'],
+                    'ipAddress' => ['type' => 'string'],
+                    'portNumber' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'clockGranularity' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'MachineResourcesConfiguration' => ['properties' => [
-                'physicalMemory' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'cpus' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'cpuSpeed' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'cpuSpeedAccuracy' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'actual',
-                        'estimated'
-                    ]
-                ]
-            ]],
-            'Ipv4NetworkInterface' => ['properties' => [
-                'ipAddress' => ['type' => 'string'],
-                'subnetMask' => ['type' => 'string']
-            ]],
-            'Ipv6NetworkInterface' => ['properties' => ['ipAddress' => ['type' => 'string']]],
-            'NetworkConfiguration' => ['properties' => [
-                'ipv4Interfaces' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Ipv4NetworkInterface']
-                ],
-                'ipv6Interfaces' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/Ipv6NetworkInterface']
-                ],
-                'defaultIpv4Gateways' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'macAddresses' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ],
-                'dnsNames' => [
-                    'type' => 'array',
-                    'items' => ['type' => 'string']
-                ]
-            ]],
-            'OperatingSystemConfiguration' => ['properties' => [
-                'family' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'unknown',
-                        'windows',
-                        'linux',
-                        'solaris',
-                        'aix'
+                'required' => []
+            ],
+            'ref:port' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/PortReference_properties']],
+                'required' => []
+            ],
+            'MachineReferenceWithHints_properties' => [
+                'properties' => [
+                    'displayNameHint' => ['type' => 'string'],
+                    'osFamilyHint' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'unknown',
+                            'windows',
+                            'linux',
+                            'solaris',
+                            'aix'
+                        ]
                     ]
                 ],
-                'fullName' => ['type' => 'string'],
-                'bitness' => [
-                    'type' => 'string',
-                    'enum' => [
-                        '32bit',
-                        '64bit'
-                    ]
-                ]
-            ]],
-            'VirtualMachineConfiguration' => ['properties' => [
-                'virtualMachineType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'unknown',
-                        'hyperv',
-                        'ldom',
-                        'lpar',
-                        'vmware',
-                        'virtualPc',
-                        'xen'
-                    ]
-                ],
-                'nativeMachineId' => ['type' => 'string'],
-                'virtualMachineName' => ['type' => 'string'],
-                'nativeHostMachineId' => ['type' => 'string']
-            ]],
-            'HypervisorConfiguration' => ['properties' => [
-                'hypervisorType' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'unknown',
-                        'hyperv'
-                    ]
-                ],
-                'nativeHostMachineId' => ['type' => 'string']
-            ]],
-            'Machine_properties' => ['properties' => [
-                'timestamp' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'monitoringState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'monitored',
-                        'discovered'
+                'required' => []
+            ],
+            'ref:machinewithhints' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/MachineReferenceWithHints_properties']],
+                'required' => []
+            ],
+            'CoreResource' => [
+                'properties' => ['etag' => ['type' => 'string']],
+                'required' => []
+            ],
+            'Timezone' => [
+                'properties' => ['fullName' => ['type' => 'string']],
+                'required' => []
+            ],
+            'AgentConfiguration' => [
+                'properties' => [
+                    'agentId' => ['type' => 'string'],
+                    'dependencyAgentId' => ['type' => 'string'],
+                    'dependencyAgentVersion' => ['type' => 'string'],
+                    'dependencyAgentRevision' => ['type' => 'string'],
+                    'rebootStatus' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'unknown',
+                            'rebooted',
+                            'notRebooted'
+                        ]
+                    ],
+                    'clockGranularity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'virtualizationState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'unknown',
-                        'physical',
-                        'virtual',
-                        'hypervisor'
+                'required' => ['agentId']
+            ],
+            'MachineResourcesConfiguration' => [
+                'properties' => [
+                    'physicalMemory' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'cpus' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'cpuSpeed' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'cpuSpeedAccuracy' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'actual',
+                            'estimated'
+                        ]
                     ]
                 ],
-                'displayName' => ['type' => 'string'],
-                'computerName' => ['type' => 'string'],
-                'fullyQualifiedDomainName' => ['type' => 'string'],
-                'bootTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
+                'required' => []
+            ],
+            'Ipv4NetworkInterface' => [
+                'properties' => [
+                    'ipAddress' => ['type' => 'string'],
+                    'subnetMask' => ['type' => 'string']
                 ],
-                'timezone' => ['$ref' => '#/definitions/Timezone'],
-                'agent' => ['$ref' => '#/definitions/AgentConfiguration'],
-                'resources' => ['$ref' => '#/definitions/MachineResourcesConfiguration'],
-                'networking' => ['$ref' => '#/definitions/NetworkConfiguration'],
-                'operatingSystem' => ['$ref' => '#/definitions/OperatingSystemConfiguration'],
-                'virtualMachine' => ['$ref' => '#/definitions/VirtualMachineConfiguration'],
-                'hypervisor' => ['$ref' => '#/definitions/HypervisorConfiguration']
-            ]],
-            'machine' => ['properties' => ['properties' => ['$ref' => '#/definitions/Machine_properties']]],
-            'ProcessDetails' => ['properties' => [
-                'persistentKey' => ['type' => 'string'],
-                'poolId' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'firstPid' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'description' => ['type' => 'string'],
-                'companyName' => ['type' => 'string'],
-                'internalName' => ['type' => 'string'],
-                'productName' => ['type' => 'string'],
-                'productVersion' => ['type' => 'string'],
-                'fileVersion' => ['type' => 'string'],
-                'commandLine' => ['type' => 'string'],
-                'executablePath' => ['type' => 'string'],
-                'workingDirectory' => ['type' => 'string']
-            ]],
-            'ProcessUser' => ['properties' => [
-                'userName' => ['type' => 'string'],
-                'userDomain' => ['type' => 'string']
-            ]],
-            'Process_properties' => ['properties' => [
-                'timestamp' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'monitoringState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'monitored',
-                        'discovered'
+                'required' => ['ipAddress']
+            ],
+            'Ipv6NetworkInterface' => [
+                'properties' => ['ipAddress' => ['type' => 'string']],
+                'required' => ['ipAddress']
+            ],
+            'NetworkConfiguration' => [
+                'properties' => [
+                    'ipv4Interfaces' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Ipv4NetworkInterface']
+                    ],
+                    'ipv6Interfaces' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Ipv6NetworkInterface']
+                    ],
+                    'defaultIpv4Gateways' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'macAddresses' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'dnsNames' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
                     ]
                 ],
-                'machine' => ['$ref' => '#/definitions/ResourceReference'],
-                'executableName' => ['type' => 'string'],
-                'displayName' => ['type' => 'string'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'role' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'webServer',
-                        'appServer',
-                        'databaseServer',
-                        'ldapServer',
-                        'smbServer'
+                'required' => []
+            ],
+            'OperatingSystemConfiguration' => [
+                'properties' => [
+                    'family' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'unknown',
+                            'windows',
+                            'linux',
+                            'solaris',
+                            'aix'
+                        ]
+                    ],
+                    'fullName' => ['type' => 'string'],
+                    'bitness' => [
+                        'type' => 'string',
+                        'enum' => [
+                            '32bit',
+                            '64bit'
+                        ]
                     ]
                 ],
-                'details' => ['$ref' => '#/definitions/ProcessDetails'],
-                'user' => ['$ref' => '#/definitions/ProcessUser'],
-                'clientOf' => ['$ref' => '#/definitions/ResourceReference'],
-                'acceptorOf' => ['$ref' => '#/definitions/ResourceReference']
-            ]],
-            'process' => ['properties' => ['properties' => ['$ref' => '#/definitions/Process_properties']]],
-            'Port_properties' => ['properties' => [
-                'monitoringState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'monitored',
-                        'discovered'
+                'required' => [
+                    'family',
+                    'fullName',
+                    'bitness'
+                ]
+            ],
+            'VirtualMachineConfiguration' => [
+                'properties' => [
+                    'virtualMachineType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'unknown',
+                            'hyperv',
+                            'ldom',
+                            'lpar',
+                            'vmware',
+                            'virtualPc',
+                            'xen'
+                        ]
+                    ],
+                    'nativeMachineId' => ['type' => 'string'],
+                    'virtualMachineName' => ['type' => 'string'],
+                    'nativeHostMachineId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'HypervisorConfiguration' => [
+                'properties' => [
+                    'hypervisorType' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'unknown',
+                            'hyperv'
+                        ]
+                    ],
+                    'nativeHostMachineId' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Machine_properties' => [
+                'properties' => [
+                    'timestamp' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'monitoringState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'monitored',
+                            'discovered'
+                        ]
+                    ],
+                    'virtualizationState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'unknown',
+                            'physical',
+                            'virtual',
+                            'hypervisor'
+                        ]
+                    ],
+                    'displayName' => ['type' => 'string'],
+                    'computerName' => ['type' => 'string'],
+                    'fullyQualifiedDomainName' => ['type' => 'string'],
+                    'bootTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'timezone' => ['$ref' => '#/definitions/Timezone'],
+                    'agent' => ['$ref' => '#/definitions/AgentConfiguration'],
+                    'resources' => ['$ref' => '#/definitions/MachineResourcesConfiguration'],
+                    'networking' => ['$ref' => '#/definitions/NetworkConfiguration'],
+                    'operatingSystem' => ['$ref' => '#/definitions/OperatingSystemConfiguration'],
+                    'virtualMachine' => ['$ref' => '#/definitions/VirtualMachineConfiguration'],
+                    'hypervisor' => ['$ref' => '#/definitions/HypervisorConfiguration']
+                ],
+                'required' => []
+            ],
+            'machine' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Machine_properties']],
+                'required' => []
+            ],
+            'ProcessDetails' => [
+                'properties' => [
+                    'persistentKey' => ['type' => 'string'],
+                    'poolId' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'firstPid' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'description' => ['type' => 'string'],
+                    'companyName' => ['type' => 'string'],
+                    'internalName' => ['type' => 'string'],
+                    'productName' => ['type' => 'string'],
+                    'productVersion' => ['type' => 'string'],
+                    'fileVersion' => ['type' => 'string'],
+                    'commandLine' => ['type' => 'string'],
+                    'executablePath' => ['type' => 'string'],
+                    'workingDirectory' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ProcessUser' => [
+                'properties' => [
+                    'userName' => ['type' => 'string'],
+                    'userDomain' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Process_properties' => [
+                'properties' => [
+                    'timestamp' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'monitoringState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'monitored',
+                            'discovered'
+                        ]
+                    ],
+                    'machine' => ['$ref' => '#/definitions/ResourceReference'],
+                    'executableName' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'role' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'webServer',
+                            'appServer',
+                            'databaseServer',
+                            'ldapServer',
+                            'smbServer'
+                        ]
+                    ],
+                    'details' => ['$ref' => '#/definitions/ProcessDetails'],
+                    'user' => ['$ref' => '#/definitions/ProcessUser'],
+                    'clientOf' => ['$ref' => '#/definitions/ResourceReference'],
+                    'acceptorOf' => ['$ref' => '#/definitions/ResourceReference']
+                ],
+                'required' => []
+            ],
+            'process' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Process_properties']],
+                'required' => []
+            ],
+            'Port_properties' => [
+                'properties' => [
+                    'monitoringState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'monitored',
+                            'discovered'
+                        ]
+                    ],
+                    'machine' => ['$ref' => '#/definitions/ResourceReference'],
+                    'displayName' => ['type' => 'string'],
+                    'ipAddress' => ['type' => 'string'],
+                    'portNumber' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
-                'machine' => ['$ref' => '#/definitions/ResourceReference'],
-                'displayName' => ['type' => 'string'],
-                'ipAddress' => ['type' => 'string'],
-                'portNumber' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'port' => ['properties' => ['properties' => ['$ref' => '#/definitions/Port_properties']]],
-            'ClientGroup_properties' => ['properties' => ['clientsOf' => ['$ref' => '#/definitions/ResourceReference']]],
-            'clientGroup' => ['properties' => ['properties' => ['$ref' => '#/definitions/ClientGroup_properties']]],
-            'ClientGroupMember_properties' => ['properties' => [
-                'ipAddress' => ['type' => 'string'],
-                'port' => ['$ref' => '#/definitions/ref:port'],
-                'processes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ref:process']
-                ]
-            ]],
-            'ClientGroupMember' => ['properties' => ['properties' => ['$ref' => '#/definitions/ClientGroupMember_properties']]],
-            'MachineGroup_properties' => ['properties' => [
-                'displayName' => ['type' => 'string'],
-                'machines' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ref:machinewithhints']
-                ]
-            ]],
-            'machineGroup' => ['properties' => ['properties' => ['$ref' => '#/definitions/MachineGroup_properties']]],
-            'Summary' => ['properties' => []],
-            'MachineCountsByOperatingSystem' => ['properties' => [
-                'windows' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'linux' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ]
-            ]],
-            'MachinesSummaryProperties' => ['properties' => [
-                'total' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'live' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'os' => ['$ref' => '#/definitions/MachineCountsByOperatingSystem']
-            ]],
-            'MachinesSummary' => ['properties' => ['properties' => ['$ref' => '#/definitions/MachinesSummaryProperties']]],
-            'Relationship' => ['properties' => []],
-            'ConnectionProperties' => ['properties' => [
-                'serverPort' => ['$ref' => '#/definitions/ref:port'],
-                'failureState' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'ok',
-                        'failed',
-                        'mixed'
+                'required' => []
+            ],
+            'port' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/Port_properties']],
+                'required' => []
+            ],
+            'ClientGroup_properties' => [
+                'properties' => ['clientsOf' => ['$ref' => '#/definitions/ResourceReference']],
+                'required' => []
+            ],
+            'clientGroup' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ClientGroup_properties']],
+                'required' => []
+            ],
+            'ClientGroupMember_properties' => [
+                'properties' => [
+                    'ipAddress' => ['type' => 'string'],
+                    'port' => ['$ref' => '#/definitions/ref:port'],
+                    'processes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ref:process']
                     ]
-                ]
-            ]],
-            'rel:connection' => ['properties' => ['properties' => ['$ref' => '#/definitions/ConnectionProperties']]],
-            'AcceptorProperties' => ['properties' => [
-                'source' => ['$ref' => '#/definitions/ref:port'],
-                'destination' => ['$ref' => '#/definitions/ref:process'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
                 ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'rel:acceptor' => ['properties' => ['properties' => ['$ref' => '#/definitions/AcceptorProperties']]],
-            'MachineCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/machine']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ProcessCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/process']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'PortCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/port']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ClientGroupMembersCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ClientGroupMember']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'ConnectionCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/rel:connection']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'MachineGroupCollection' => ['properties' => [
-                'value' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/machineGroup']
-                ],
-                'nextLink' => ['type' => 'string']
-            ]],
-            'SummaryProperties' => ['properties' => [
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'RelationshipProperties' => ['properties' => [
-                'source' => ['$ref' => '#/definitions/ResourceReference'],
-                'destination' => ['$ref' => '#/definitions/ResourceReference'],
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'MapNodes' => ['properties' => [
-                'machines' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/machine']
-                ],
-                'processes' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/process']
-                ],
-                'Ports' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/port']
-                ],
-                'ClientGroups' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/clientGroup']
-                ]
-            ]],
-            'MapEdges' => ['properties' => [
-                'connections' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/rel:connection']
-                ],
-                'acceptors' => [
-                    'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/rel:acceptor']
-                ]
-            ]],
-            'Map' => ['properties' => [
-                'nodes' => ['$ref' => '#/definitions/MapNodes'],
-                'edges' => ['$ref' => '#/definitions/MapEdges']
-            ]],
-            'Liveness' => ['properties' => [
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'live' => ['type' => 'boolean']
-            ]],
-            'MapRequest' => ['properties' => [
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ]
-            ]],
-            'map:single-machine-dependency' => ['properties' => ['machineId' => ['type' => 'string']]],
-            'map:machine-group-dependency' => ['properties' => [
-                'machineGroupId' => ['type' => 'string'],
-                'filterProcesses' => ['type' => 'boolean']
-            ]],
-            'MapResponse' => ['properties' => [
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'map' => ['$ref' => '#/definitions/Map']
-            ]],
-            'ClientGroupMembersCount' => ['properties' => [
-                'startTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'endTime' => [
-                    'type' => 'string',
-                    'format' => 'date-time'
-                ],
-                'groupId' => ['type' => 'string'],
-                'count' => [
-                    'type' => 'integer',
-                    'format' => 'int32'
-                ],
-                'accuracy' => [
-                    'type' => 'string',
-                    'enum' => [
-                        'actual',
-                        'estimated'
+                'required' => []
+            ],
+            'ClientGroupMember' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ClientGroupMember_properties']],
+                'required' => []
+            ],
+            'MachineGroup_properties' => [
+                'properties' => [
+                    'displayName' => ['type' => 'string'],
+                    'machines' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ref:machinewithhints']
                     ]
+                ],
+                'required' => []
+            ],
+            'machineGroup' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/MachineGroup_properties']],
+                'required' => []
+            ],
+            'Summary' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'MachineCountsByOperatingSystem' => [
+                'properties' => [
+                    'windows' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'linux' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ]
+                ],
+                'required' => [
+                    'windows',
+                    'linux'
                 ]
-            ]],
-            'Error' => ['properties' => [
-                'code' => ['type' => 'string'],
-                'message' => ['type' => 'string']
-            ]],
-            'ErrorResponse' => ['properties' => ['error' => ['$ref' => '#/definitions/Error']]]
+            ],
+            'MachinesSummaryProperties' => [
+                'properties' => [
+                    'total' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'live' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'os' => ['$ref' => '#/definitions/MachineCountsByOperatingSystem']
+                ],
+                'required' => [
+                    'total',
+                    'live',
+                    'os'
+                ]
+            ],
+            'MachinesSummary' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/MachinesSummaryProperties']],
+                'required' => []
+            ],
+            'Relationship' => [
+                'properties' => [],
+                'required' => []
+            ],
+            'ConnectionProperties' => [
+                'properties' => [
+                    'serverPort' => ['$ref' => '#/definitions/ref:port'],
+                    'failureState' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'ok',
+                            'failed',
+                            'mixed'
+                        ]
+                    ]
+                ],
+                'required' => []
+            ],
+            'rel:connection' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/ConnectionProperties']],
+                'required' => []
+            ],
+            'AcceptorProperties' => [
+                'properties' => [
+                    'source' => ['$ref' => '#/definitions/ref:port'],
+                    'destination' => ['$ref' => '#/definitions/ref:process'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => [
+                    'source',
+                    'destination'
+                ]
+            ],
+            'rel:acceptor' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/AcceptorProperties']],
+                'required' => []
+            ],
+            'MachineCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/machine']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ProcessCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/process']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PortCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/port']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ClientGroupMembersCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ClientGroupMember']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'ConnectionCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/rel:connection']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MachineGroupCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/machineGroup']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'SummaryProperties' => [
+                'properties' => [
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => [
+                    'startTime',
+                    'endTime'
+                ]
+            ],
+            'RelationshipProperties' => [
+                'properties' => [
+                    'source' => ['$ref' => '#/definitions/ResourceReference'],
+                    'destination' => ['$ref' => '#/definitions/ResourceReference'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => [
+                    'source',
+                    'destination'
+                ]
+            ],
+            'MapNodes' => [
+                'properties' => [
+                    'machines' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/machine']
+                    ],
+                    'processes' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/process']
+                    ],
+                    'Ports' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/port']
+                    ],
+                    'ClientGroups' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/clientGroup']
+                    ]
+                ],
+                'required' => []
+            ],
+            'MapEdges' => [
+                'properties' => [
+                    'connections' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/rel:connection']
+                    ],
+                    'acceptors' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/rel:acceptor']
+                    ]
+                ],
+                'required' => []
+            ],
+            'Map' => [
+                'properties' => [
+                    'nodes' => ['$ref' => '#/definitions/MapNodes'],
+                    'edges' => ['$ref' => '#/definitions/MapEdges']
+                ],
+                'required' => [
+                    'nodes',
+                    'edges'
+                ]
+            ],
+            'Liveness' => [
+                'properties' => [
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'live' => ['type' => 'boolean']
+                ],
+                'required' => [
+                    'startTime',
+                    'endTime',
+                    'live'
+                ]
+            ],
+            'MapRequest' => [
+                'properties' => [
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ]
+                ],
+                'required' => []
+            ],
+            'map:single-machine-dependency' => [
+                'properties' => ['machineId' => ['type' => 'string']],
+                'required' => ['machineId']
+            ],
+            'map:machine-group-dependency' => [
+                'properties' => [
+                    'machineGroupId' => ['type' => 'string'],
+                    'filterProcesses' => ['type' => 'boolean']
+                ],
+                'required' => ['machineGroupId']
+            ],
+            'MapResponse' => [
+                'properties' => [
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'map' => ['$ref' => '#/definitions/Map']
+                ],
+                'required' => [
+                    'startTime',
+                    'endTime',
+                    'map'
+                ]
+            ],
+            'ClientGroupMembersCount' => [
+                'properties' => [
+                    'startTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'format' => 'date-time'
+                    ],
+                    'groupId' => ['type' => 'string'],
+                    'count' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
+                    ],
+                    'accuracy' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'actual',
+                            'estimated'
+                        ]
+                    ]
+                ],
+                'required' => [
+                    'startTime',
+                    'endTime',
+                    'groupId',
+                    'count',
+                    'accuracy'
+                ]
+            ],
+            'Error' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'required' => ['code']
+            ],
+            'ErrorResponse' => [
+                'properties' => ['error' => ['$ref' => '#/definitions/Error']],
+                'required' => ['error']
+            ]
         ]
     ];
 }
