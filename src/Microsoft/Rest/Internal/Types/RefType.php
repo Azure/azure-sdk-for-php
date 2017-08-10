@@ -48,7 +48,7 @@ final class RefType extends TypeAbstract
      */
     function removeRefTypes(DefinitionsObject $definitionsObject)
     {
-        return $definitionsObject->getSchemaObject($this->data, $this->ref)->getType();
+        return $definitionsObject->getSchemaObject($this->data, $this->ref)->getDataType();
     }
 
     /**

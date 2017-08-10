@@ -1,33 +1,39 @@
 <?php
 namespace Microsoft\Rest\Internal\Swagger;
 
+use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 
 final class SchemaObject
 {
     function removeRefs(DefinitionsObject $definitionsObject)
     {
-        $this->type = $this->type->removeRefTypes($definitionsObject);
+        $this->dataType = $this->dataType->removeRefTypes($definitionsObject);
     }
 
     /**
      * @return TypeAbstract
      */
-    function getType()
+    function getDataType()
     {
-        return $this->type;
+        return $this->dataType;
+    }
+
+    static function createFromData(DataAbstract $schemaObjectData)
+    {
+        return new SchemaObject(TypeAbstract::createFromDataWithRefs($schemaObjectData));
     }
 
     /**
-     * @param TypeAbstract $type
+     * @param TypeAbstract $dataType
      */
-    function __construct(TypeAbstract $type)
+    private function __construct(TypeAbstract $dataType)
     {
-        $this->type = $type;
+        $this->dataType = $dataType;
     }
 
     /**
      * @var TypeAbstract
      */
-    private $type;
+    private $dataType;
 }

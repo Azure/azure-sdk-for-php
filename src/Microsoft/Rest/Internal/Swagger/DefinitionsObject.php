@@ -60,7 +60,7 @@ final class DefinitionsObject
         $schemaObjectMap = [];
         foreach ($definitionsObjectData->getChildren() as $child) {
             $schemaObjectMap['#/definitions/' . $child->getKey()] =
-                new SchemaObject(TypeAbstract::createFromDataWithRefs($child));
+                SchemaObject::createFromData($child);
         }
         $result = new self($schemaObjectMap);
         // remove refs
