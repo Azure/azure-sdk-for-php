@@ -3,6 +3,7 @@ namespace Microsoft\Rest\Internal\Types;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\InvalidSchemaObjectException;
+use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
 use Microsoft\Rest\Internal\Types\Primitives\ObjectType;
 use Microsoft\Rest\Internal\Types\Primitives\PrimitiveTypeAbstract;
 
@@ -25,17 +26,17 @@ abstract class TypeAbstract
     abstract function getConstValue();
 
     /**
-     * @param TypeAbstract[] $typeMap
+     * @param DefinitionsObject $definitionsObject
      * @return TypeAbstract
      */
-    abstract function removeRefTypes(array $typeMap);
+    abstract function removeRefTypes(DefinitionsObject $definitionsObject);
 
     /**
      * @param DataAbstract $schemaObjectData see https://swagger.io/specification/#schemaObject
      * @return TypeAbstract
      * @throws \Exception
      */
-    protected static function createFromDataWithRefs(DataAbstract $schemaObjectData)
+    public static function createFromDataWithRefs(DataAbstract $schemaObjectData)
     {
         // https://swagger.io/specification/#data-types-12
         /**
@@ -65,7 +66,7 @@ abstract class TypeAbstract
             }
         }
 
-        // ClassType
+        // ClassSchemaObject
         $properties = $schemaObjectData->getChildOrNull('properties');
         if ($properties !== null) {
             return ClassType::createClassFromData(
@@ -75,50 +76,5 @@ abstract class TypeAbstract
         }
 
         throw new InvalidSchemaObjectException($schemaObjectData);
-    }
-
-    /**
-     * @param TypeAbstract[] $typeMap
-     * @param DataAbstract $schemaObjectData
-     * @return TypeAbstract
-     */
-    static function createFromData(array $typeMap, DataAbstract $schemaObjectData)
-    {
-        return self::createFromDataWithRefs($schemaObjectData)->removeRefTypes($typeMap);
-    }
-
-    /**
-     * @param DataAbstract $schemaObjectMapData
-     * @param string $prefix
-     * @return TypeAbstract[]
-     */
-    static function createMapFromData(DataAbstract $schemaObjectMapData, $prefix = '')
-    {
-        /**
-         * @var TypeAbstract[]
-         */
-        $typeMap = [];
-        foreach ($schemaObjectMapData->getChildren() as $child)
-        {
-            $typeMap[$prefix . $child->getKey()] = TypeAbstract::createFromDataWithRefs($child);
-        }
-        return $typeMap;
-    }
-
-    /**
-     * @param TypeAbstract[] $definitions
-     * @param TypeAbstract[] $typeMap
-     * @return TypeAbstract[]
-     */
-    static function removeRefTypesFromMap(array $definitions, array $typeMap)
-    {
-        /**
-         * @var TypeAbstract[]
-         */
-        $result = [];
-        foreach ($typeMap as $name => $value) {
-            $result[$name] = $value->removeRefTypes($definitions);
-        }
-        return $result;
     }
 }

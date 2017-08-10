@@ -2,8 +2,9 @@
 namespace Microsoft\Rest\Internal\Types\Primitives;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
+use Microsoft\Rest\Internal\InvalidSchemaObjectException;
+use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
-use Microsoft\Rest\Internal\UnknownTypeException;
 
 abstract class PrimitiveTypeAbstract extends TypeAbstract
 {
@@ -17,10 +18,10 @@ abstract class PrimitiveTypeAbstract extends TypeAbstract
     }
 
     /**
-     * @param TypeAbstract[] $typeMap
+     * @param DefinitionsObject $definitionsObject
      * @return TypeAbstract
      */
-    function removeRefTypes(array $typeMap)
+    function removeRefTypes(DefinitionsObject $definitionsObject)
     {
         return $this;
     }
@@ -28,7 +29,7 @@ abstract class PrimitiveTypeAbstract extends TypeAbstract
     /**
      * @param DataAbstract $schemaObjectData
      * @return TypeAbstract
-     * @throws UnknownTypeException
+     * @throws InvalidSchemaObjectException
      */
     static function createFromDataWithRefs(DataAbstract $schemaObjectData)
     {
@@ -92,6 +93,6 @@ abstract class PrimitiveTypeAbstract extends TypeAbstract
                     return new FileType();
             }
         }
-        throw new UnknownTypeException($schemaObjectData);
+        throw new InvalidSchemaObjectException($schemaObjectData);
     }
 }

@@ -2,6 +2,7 @@
 namespace Microsoft\Rest\Internal\Types;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
+use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
 use Microsoft\Rest\Internal\UnknownTypeException;
 
 final class RefType extends TypeAbstract
@@ -41,17 +42,13 @@ final class RefType extends TypeAbstract
     }
 
     /**
-     * @param TypeAbstract[] $typeMap
+     * @param DefinitionsObject $definitionsObject
      * @return TypeAbstract
      * @throws UnknownTypeException
      */
-    function removeRefTypes(array $typeMap)
+    function removeRefTypes(DefinitionsObject $definitionsObject)
     {
-        $ref = $this->ref;
-        if (!isset($typeMap[$ref])) {
-            throw new UnknownTypeException($this->data);
-        }
-        return $typeMap[$ref];
+        return $definitionsObject->getSchemaObject($this->data, $this->ref);
     }
 
     /**

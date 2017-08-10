@@ -3,6 +3,7 @@ namespace Microsoft\Rest\Internal;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Path\PathStrPart;
+use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 use Microsoft\Rest\OperationInterface;
 
@@ -38,7 +39,7 @@ final class Operation implements OperationInterface
 
     /**
      * @param OperationShared $shared
-     * @param TypeAbstract[] $typeMap
+     * @param DefinitionsObject $typeMap
      * @param array $sharedParameterMap
      * @param DataAbstract $operationData
      * @param PathStrPart[] $pathStrParts
@@ -48,7 +49,7 @@ final class Operation implements OperationInterface
      */
     static function createFromOperationData(
         OperationShared $shared,
-        array $typeMap,
+        DefinitionsObject $typeMap,
         array $sharedParameterMap,
         DataAbstract $operationData,
         array $pathStrParts,
@@ -59,7 +60,6 @@ final class Operation implements OperationInterface
         $parameters = Parameters::create(
             $typeMap,
             $sharedParameterMap,
-            $operationId,
             $operationData->getChild('parameters'),
             $pathStrParts);
 
@@ -71,7 +71,7 @@ final class Operation implements OperationInterface
         {
             $schema = $child->getChildOrNull('schema');
             $responses[intval($child->getKey())]
-                = $schema !== null ? TypeAbstract::createFromData($typeMap, $schema) : null;
+                = $schema !== null ? $typeMap->createSchemaObjectFromData($schema) : null;
         }
 
         return new Operation(

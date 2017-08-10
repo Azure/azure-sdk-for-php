@@ -5,7 +5,7 @@ use Microsoft\Rest\ClientInterface;
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Https\HttpsInterface;
 use Microsoft\Rest\Internal\Path\PathStrPart;
-use Microsoft\Rest\Internal\Types\TypeAbstract;
+use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
 use Microsoft\Rest\OperationInterface;
 
 final class Client implements ClientInterface
@@ -30,10 +30,8 @@ final class Client implements ClientInterface
         DataAbstract $swaggerObjectData,
         array $sharedParameterMap)
     {
-        $typeMap = TypeAbstract::createMapFromData(
-            $swaggerObjectData->getChild('definitions'),
-            '#/definitions/');
-        $typeMap = TypeAbstract::removeRefTypesFromMap($typeMap, $typeMap);
+        $definitionsObject = DefinitionsObject::createFromData(
+            $swaggerObjectData->getChild('definitions'));
 
         $shared = new OperationShared(
             $https,
@@ -48,7 +46,7 @@ final class Client implements ClientInterface
                 $httpMethod = $operationData->getKey();
                 $operation = Operation::createFromOperationData(
                     $shared,
-                    $typeMap,
+                    $definitionsObject,
                     $sharedParameterMap,
                     $operationData,
                     $path,

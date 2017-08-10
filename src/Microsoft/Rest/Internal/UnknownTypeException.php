@@ -7,10 +7,11 @@ class UnknownTypeException extends DataException
 {
     /**
      * @param DataAbstract $data
+     * @param string $ref
      */
-    function __construct(DataAbstract $data)
+    function __construct(DataAbstract $data, $ref)
     {
-        parent::__construct($data, 'unknown type');
+        parent::__construct($data, 'unknown type: ' . $ref);
 
     }
 }

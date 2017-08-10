@@ -2,6 +2,7 @@
 namespace Microsoft\Rest\Internal;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
+use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 
 /**
@@ -42,19 +43,18 @@ final class Parameter
     }
 
     /**
-     * @param TypeAbstract[] $typeMap
+     * @param DefinitionsObject $typeMap
      * @param array $sharedParameterMap
      * @param DataAbstract $parameterData
      * @return Parameter
      */
-    static function createFromData(array $typeMap, array $sharedParameterMap, DataAbstract $parameterData)
+    static function createFromData(DefinitionsObject $typeMap, array $sharedParameterMap, DataAbstract $parameterData)
     {
         $name = $parameterData->getChildValue('name');
 
         $schemaData = $parameterData->getChildOrNull('schema');
 
-        $type = TypeAbstract::createFromData(
-            $typeMap,
+        $type = $typeMap->createSchemaObjectFromData(
             $schemaData !== null ? $schemaData : $parameterData);
 
         $in = $parameterData->getChildValue('in');

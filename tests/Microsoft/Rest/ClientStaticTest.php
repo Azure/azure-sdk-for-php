@@ -21,7 +21,6 @@ use Microsoft\Rest\Internal\Types\Primitives\Int32Type;
 use Microsoft\Rest\Internal\Types\Primitives\Int64Type;
 use Microsoft\Rest\Internal\Types\Primitives\StringType;
 use Microsoft\Rest\Internal\Types\Primitives\PasswordType;
-use Microsoft\Rest\Internal\Types\TypeAbstract;
 use Microsoft\Rest\Internal\UnknownTypeException;
 use PHPUnit\Framework\TestCase;
 
@@ -90,8 +89,8 @@ class ClientStaticTest extends TestCase
         try {
             AzureStatic::create(null, null, null)
                 ->createClientFromData($definitionsData, []);
-        } catch (UnknownTypeException $e) {
-            $expected = "unknown type\n"
+        } catch (InvalidSchemaObjectException $e) {
+            $expected = "invalid schema object\n"
                 . "Object: ['type'=>'unknown-type']\n"
                 . "Path: ['definitions']['Sku']";
             $this->assertEquals($expected, $e->getMessage());
@@ -274,7 +273,7 @@ class ClientStaticTest extends TestCase
             AzureStatic::create(null, null, null)
                 ->createClientFromData($swaggerObjectData, []);
         } catch (UnknownTypeException $e) {
-            $expected = "unknown type\n"
+            $expected = "unknown type: unknown-type\n"
                 . "Object: ['\$ref'=>'unknown-type']\n"
                 . "Path: ['definitions']['Sku']";
             $this->assertEquals($expected, $e->getMessage());
