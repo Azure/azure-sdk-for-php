@@ -3,13 +3,13 @@ namespace Microsoft\Rest\Internal\Types;
 
 use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
 
-abstract class CollectionType extends TypeAbstract
+abstract class CollectionType extends SchemaObjectAbstract
 {
     use NotConstTypeTrait;
 
     /**
      * @param DefinitionsObject $definitionsObject
-     * @return TypeAbstract
+     * @return SchemaObjectAbstract
      */
     function removeRefTypes(DefinitionsObject $definitionsObject)
     {
@@ -18,7 +18,7 @@ abstract class CollectionType extends TypeAbstract
     }
 
     /**
-     * @return TypeAbstract
+     * @return SchemaObjectAbstract
      */
     function getItems()
     {
@@ -26,15 +26,15 @@ abstract class CollectionType extends TypeAbstract
     }
 
     /**
-     * @param TypeAbstract $items
+     * @param SchemaObjectAbstract $items
      */
-    protected function __construct(TypeAbstract $items)
+    protected function __construct(SchemaObjectAbstract $items)
     {
         $this->items = $items;
     }
 
     /**
-     * @var TypeAbstract
+     * @var SchemaObjectAbstract
      */
     private $items;
 }

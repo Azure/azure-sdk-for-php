@@ -5,7 +5,7 @@ use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
 use Microsoft\Rest\Internal\UnknownTypeException;
 
-final class RefType extends TypeAbstract
+final class RefType extends SchemaObjectAbstract
 {
     /**
      * @param mixed $value
@@ -43,7 +43,7 @@ final class RefType extends TypeAbstract
 
     /**
      * @param DefinitionsObject $definitionsObject
-     * @return TypeAbstract
+     * @return SchemaObjectAbstract
      * @throws UnknownTypeException
      */
     function removeRefTypes(DefinitionsObject $definitionsObject)

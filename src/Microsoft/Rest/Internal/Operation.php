@@ -4,7 +4,7 @@ namespace Microsoft\Rest\Internal;
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Path\PathStrPart;
 use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
-use Microsoft\Rest\Internal\Types\TypeAbstract;
+use Microsoft\Rest\Internal\Types\SchemaObjectAbstract;
 use Microsoft\Rest\OperationInterface;
 
 final class Operation implements OperationInterface
@@ -64,7 +64,7 @@ final class Operation implements OperationInterface
             $pathStrParts);
 
         /**
-         * @var TypeAbstract[]
+         * @var SchemaObjectAbstract[]
          */
         $responses = [];
         foreach ($operationData->getChild('responses')->getChildren() as $child)
@@ -103,7 +103,7 @@ final class Operation implements OperationInterface
     private $parameters;
 
     /**
-     * @var TypeAbstract[]
+     * @var SchemaObjectAbstract[]
      */
     private $responses;
 
@@ -112,7 +112,7 @@ final class Operation implements OperationInterface
      * @param string $httpMethod
      * @param string $operationId
      * @param Parameters $parameters
-     * @param TypeAbstract[] $responses
+     * @param SchemaObjectAbstract[] $responses
      */
     private function __construct(
         OperationShared $shared,

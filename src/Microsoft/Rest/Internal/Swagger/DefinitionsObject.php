@@ -2,7 +2,7 @@
 namespace Microsoft\Rest\Internal\Swagger;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
-use Microsoft\Rest\Internal\Types\TypeAbstract;
+use Microsoft\Rest\Internal\Types\SchemaObjectAbstract;
 use Microsoft\Rest\Internal\UnknownTypeException;
 
 /**
@@ -13,7 +13,7 @@ final class DefinitionsObject
     /**
      * @param DataAbstract $source
      * @param string $ref
-     * @return TypeAbstract
+     * @return SchemaObjectAbstract
      * @throws UnknownTypeException
      */
     function getSchemaObject(DataAbstract $source, $ref)
@@ -26,22 +26,22 @@ final class DefinitionsObject
 
     /**
      * @param DataAbstract $schemaObjectData
-     * @return TypeAbstract
+     * @return SchemaObjectAbstract
      */
     function createSchemaObjectFromData(DataAbstract $schemaObjectData)
     {
-        return TypeAbstract::createFromDataWithRefs($schemaObjectData)
+        return SchemaObjectAbstract::createFromDataWithRefs($schemaObjectData)
             ->removeRefTypes($this);
     }
 
     /**
-     * @param TypeAbstract[] $typeMap
-     * @return TypeAbstract[]
+     * @param SchemaObjectAbstract[] $typeMap
+     * @return SchemaObjectAbstract[]
      */
     function removeRefTypesFromMap(array $typeMap)
     {
         /**
-         * @var TypeAbstract[]
+         * @var SchemaObjectAbstract[]
          */
         $result = [];
         foreach ($typeMap as $name => $value) {
@@ -56,11 +56,11 @@ final class DefinitionsObject
      */
     static function createFromData(DataAbstract $definitionsObjectData)
     {
-        /** @var TypeAbstract[] */
+        /** @var SchemaObjectAbstract[] */
         $schemaObjectMap = [];
         foreach ($definitionsObjectData->getChildren() as $child) {
             $schemaObjectMap['#/definitions/' . $child->getKey()] =
-                TypeAbstract::createFromDataWithRefs($child);
+                SchemaObjectAbstract::createFromDataWithRefs($child);
         }
         $result = new self($schemaObjectMap);
         $result->removeRefTypesFromMap($schemaObjectMap);
@@ -68,7 +68,7 @@ final class DefinitionsObject
     }
 
     /**
-     * @param TypeAbstract[] $schemaObjectMap
+     * @param SchemaObjectAbstract[] $schemaObjectMap
      */
     private function __construct(array $schemaObjectMap)
     {
@@ -76,7 +76,7 @@ final class DefinitionsObject
     }
 
     /**
-     * @var TypeAbstract[]
+     * @var SchemaObjectAbstract[]
      */
     private $schemaObjectMap;
 }

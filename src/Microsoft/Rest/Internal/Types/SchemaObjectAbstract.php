@@ -7,7 +7,7 @@ use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
 use Microsoft\Rest\Internal\Types\Primitives\ObjectType;
 use Microsoft\Rest\Internal\Types\Primitives\PrimitiveTypeAbstract;
 
-abstract class TypeAbstract
+abstract class SchemaObjectAbstract
 {
     /**
      * @param mixed $value
@@ -27,13 +27,13 @@ abstract class TypeAbstract
 
     /**
      * @param DefinitionsObject $definitionsObject
-     * @return TypeAbstract
+     * @return SchemaObjectAbstract
      */
     abstract function removeRefTypes(DefinitionsObject $definitionsObject);
 
     /**
      * @param DataAbstract $schemaObjectData see https://swagger.io/specification/#schemaObject
-     * @return TypeAbstract
+     * @return SchemaObjectAbstract
      * @throws \Exception
      */
     public static function createFromDataWithRefs(DataAbstract $schemaObjectData)

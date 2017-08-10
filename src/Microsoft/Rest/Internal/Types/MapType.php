@@ -26,9 +26,9 @@ final class MapType extends CollectionType
     }
 
     /**
-     * @param TypeAbstract $items
+     * @param SchemaObjectAbstract $items
      */
-    function __construct(TypeAbstract $items)
+    function __construct(SchemaObjectAbstract $items)
     {
         parent::__construct($items);
     }
@@ -39,6 +39,6 @@ final class MapType extends CollectionType
      */
     static function createFromItemData(DataAbstract $additionalPropertiesData)
     {
-        return new self(TypeAbstract::createFromDataWithRefs($additionalPropertiesData));
+        return new self(SchemaObjectAbstract::createFromDataWithRefs($additionalPropertiesData));
     }
 }

@@ -4,18 +4,18 @@ namespace Microsoft\Rest\Internal\Types;
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
 
-final class ClassType extends TypeAbstract
+final class ClassType extends SchemaObjectAbstract
 {
     use NotConstTypeTrait;
 
     /**
      * @param string $name
-     * @param TypeAbstract $type
+     * @param SchemaObjectAbstract $type
      * @param array $value
      * @param string $result
      * @return string
      */
-    private static function addJsonProperty($name, TypeAbstract $type, array $value, $result)
+    private static function addJsonProperty($name, SchemaObjectAbstract $type, array $value, $result)
     {
         return $result .
             (strlen($result) > 1 ? ',' : '')
@@ -45,14 +45,14 @@ final class ClassType extends TypeAbstract
     }
 
     /**
-     * @param TypeAbstract[] $requiredPropertyMap
-     * @param TypeAbstract[] $optionalPropertyMap
-     * @param TypeAbstract|null $additionalProperties
+     * @param SchemaObjectAbstract[] $requiredPropertyMap
+     * @param SchemaObjectAbstract[] $optionalPropertyMap
+     * @param SchemaObjectAbstract|null $additionalProperties
      */
     function __construct(
         array $requiredPropertyMap,
         array $optionalPropertyMap,
-        TypeAbstract $additionalProperties = null)
+        SchemaObjectAbstract $additionalProperties = null)
     {
         $this->requiredPropertyMap = $requiredPropertyMap;
         $this->optionalPropertyMap = $optionalPropertyMap;
@@ -71,11 +71,11 @@ final class ClassType extends TypeAbstract
         DataAbstract $additionalPropertiesData = null)
     {
         /**
-         * @var TypeAbstract[]
+         * @var SchemaObjectAbstract[]
          */
         $requiredPropertyMap = [];
         /**
-         * @var TypeAbstract[]
+         * @var SchemaObjectAbstract[]
          */
         $optionalPropertyMap = [];
         /**
@@ -85,7 +85,7 @@ final class ClassType extends TypeAbstract
         foreach ($propertiesData->getChildren() as $child)
         {
             $name = $child->getKey();
-            $type = TypeAbstract::createFromDataWithRefs($child);
+            $type = SchemaObjectAbstract::createFromDataWithRefs($child);
             if (in_array($name, $required)) {
                 $requiredPropertyMap[$name] = $type;
             } else {
@@ -98,7 +98,7 @@ final class ClassType extends TypeAbstract
             $optionalPropertyMap,
             $additionalPropertiesData == null
                 ? null
-                : TypeAbstract::createFromDataWithRefs($additionalPropertiesData));
+                : SchemaObjectAbstract::createFromDataWithRefs($additionalPropertiesData));
     }
 
     /**
@@ -116,17 +116,17 @@ final class ClassType extends TypeAbstract
     }
 
     /**
-     * @var TypeAbstract[]
+     * @var SchemaObjectAbstract[]
      */
     private $requiredPropertyMap;
 
     /**
-     * @var TypeAbstract[]
+     * @var SchemaObjectAbstract[]
      */
     private $optionalPropertyMap;
 
     /**
-     * @var TypeAbstract|null
+     * @var SchemaObjectAbstract|null
      */
     private $additionalProperties;
 }
