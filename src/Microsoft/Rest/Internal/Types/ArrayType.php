@@ -26,9 +26,9 @@ final class ArrayType extends CollectionType
     }
 
     /**
-     * @param SchemaObjectAbstract $items
+     * @param TypeAbstract $items
      */
-    function __construct(SchemaObjectAbstract $items)
+    function __construct(TypeAbstract $items)
     {
         parent::__construct($items);
     }
@@ -39,6 +39,6 @@ final class ArrayType extends CollectionType
      */
     static function createFromDataWithRefs(DataAbstract $schemaObjectData)
     {
-        return new self(SchemaObjectAbstract::createFromDataWithRefs($schemaObjectData->getChild('items')));
+        return new self(TypeAbstract::createFromDataWithRefs($schemaObjectData->getChild('items')));
     }
 }

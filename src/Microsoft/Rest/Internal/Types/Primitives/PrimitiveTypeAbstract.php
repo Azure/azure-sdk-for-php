@@ -4,9 +4,9 @@ namespace Microsoft\Rest\Internal\Types\Primitives;
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\InvalidSchemaObjectException;
 use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
-use Microsoft\Rest\Internal\Types\SchemaObjectAbstract;
+use Microsoft\Rest\Internal\Types\TypeAbstract;
 
-abstract class PrimitiveTypeAbstract extends SchemaObjectAbstract
+abstract class PrimitiveTypeAbstract extends TypeAbstract
 {
     /**
      * @param mixed $value
@@ -19,7 +19,7 @@ abstract class PrimitiveTypeAbstract extends SchemaObjectAbstract
 
     /**
      * @param DefinitionsObject $definitionsObject
-     * @return SchemaObjectAbstract
+     * @return TypeAbstract
      */
     function removeRefTypes(DefinitionsObject $definitionsObject)
     {
@@ -28,7 +28,7 @@ abstract class PrimitiveTypeAbstract extends SchemaObjectAbstract
 
     /**
      * @param DataAbstract $schemaObjectData
-     * @return SchemaObjectAbstract
+     * @return TypeAbstract
      * @throws InvalidSchemaObjectException
      */
     static function createFromDataWithRefs(DataAbstract $schemaObjectData)

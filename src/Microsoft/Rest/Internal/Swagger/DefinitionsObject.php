@@ -2,7 +2,7 @@
 namespace Microsoft\Rest\Internal\Swagger;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
-use Microsoft\Rest\Internal\Types\SchemaObjectAbstract;
+use Microsoft\Rest\Internal\Types\TypeAbstract;
 use Microsoft\Rest\Internal\UnknownTypeException;
 
 /**
@@ -13,7 +13,7 @@ final class DefinitionsObject
     /**
      * @param DataAbstract $source
      * @param string $ref
-     * @return SchemaObjectAbstract
+     * @return SchemaObject
      * @throws UnknownTypeException
      */
     function getSchemaObject(DataAbstract $source, $ref)
@@ -26,22 +26,22 @@ final class DefinitionsObject
 
     /**
      * @param DataAbstract $schemaObjectData
-     * @return SchemaObjectAbstract
+     * @return TypeAbstract
      */
     function createSchemaObjectFromData(DataAbstract $schemaObjectData)
     {
-        return SchemaObjectAbstract::createFromDataWithRefs($schemaObjectData)
+        return TypeAbstract::createFromDataWithRefs($schemaObjectData)
             ->removeRefTypes($this);
     }
 
     /**
-     * @param SchemaObjectAbstract[] $typeMap
-     * @return SchemaObjectAbstract[]
+     * @param TypeAbstract[] $typeMap
+     * @return TypeAbstract[]
      */
     function removeRefTypesFromMap(array $typeMap)
     {
         /**
-         * @var SchemaObjectAbstract[]
+         * @var TypeAbstract[]
          */
         $result = [];
         foreach ($typeMap as $name => $value) {
@@ -56,19 +56,22 @@ final class DefinitionsObject
      */
     static function createFromData(DataAbstract $definitionsObjectData)
     {
-        /** @var SchemaObjectAbstract[] */
+        /** @var SchemaObject[] */
         $schemaObjectMap = [];
         foreach ($definitionsObjectData->getChildren() as $child) {
             $schemaObjectMap['#/definitions/' . $child->getKey()] =
-                SchemaObjectAbstract::createFromDataWithRefs($child);
+                new SchemaObject(TypeAbstract::createFromDataWithRefs($child));
         }
         $result = new self($schemaObjectMap);
-        $result->removeRefTypesFromMap($schemaObjectMap);
+        // remove refs
+        foreach ($schemaObjectMap as $value) {
+            $value->removeRefs($result);
+        }
         return $result;
     }
 
     /**
-     * @param SchemaObjectAbstract[] $schemaObjectMap
+     * @param SchemaObject[] $schemaObjectMap
      */
     private function __construct(array $schemaObjectMap)
     {
@@ -76,7 +79,7 @@ final class DefinitionsObject
     }
 
     /**
-     * @var SchemaObjectAbstract[]
+     * @var SchemaObject[]
      */
     private $schemaObjectMap;
 }

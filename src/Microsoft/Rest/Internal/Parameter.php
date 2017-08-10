@@ -3,7 +3,7 @@ namespace Microsoft\Rest\Internal;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
-use Microsoft\Rest\Internal\Types\SchemaObjectAbstract;
+use Microsoft\Rest\Internal\Types\TypeAbstract;
 
 /**
  * https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#parameterObject
@@ -104,7 +104,7 @@ final class Parameter
      * @param string $in
      * @param bool $required
      * @param bool $xMsSkipUrlEncoding
-     * @param SchemaObjectAbstract $type
+     * @param TypeAbstract $type
      * @param bool $isConst
      * @param mixed|null $constValue
      */
@@ -113,7 +113,7 @@ final class Parameter
         $in,
         $required,
         $xMsSkipUrlEncoding,
-        SchemaObjectAbstract $type,
+        TypeAbstract $type,
         $isConst,
         $constValue)
     {
@@ -147,7 +147,7 @@ final class Parameter
     private $xMsSkipUrlEncoding;
 
     /**
-     * @var SchemaObjectAbstract
+     * @var TypeAbstract
      */
     private $type;
 
