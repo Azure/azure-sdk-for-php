@@ -522,7 +522,7 @@ final class NetworkManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ApplicationGateway'
+                            'schema' => ['$ref' => '#/definitions/ApplicationGateway']
                         ],
                         [
                             'name' => 'api-version',
@@ -913,7 +913,7 @@ final class NetworkManagementClient
                             'name' => 'authorizationParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ExpressRouteCircuitAuthorization'
+                            'schema' => ['$ref' => '#/definitions/ExpressRouteCircuitAuthorization']
                         ],
                         [
                             'name' => 'api-version',
@@ -1070,7 +1070,7 @@ final class NetworkManagementClient
                             'name' => 'peeringParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ExpressRouteCircuitPeering'
+                            'schema' => ['$ref' => '#/definitions/ExpressRouteCircuitPeering']
                         ],
                         [
                             'name' => 'api-version',
@@ -1209,7 +1209,7 @@ final class NetworkManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ExpressRouteCircuit'
+                            'schema' => ['$ref' => '#/definitions/ExpressRouteCircuit']
                         ],
                         [
                             'name' => 'api-version',
@@ -1592,7 +1592,7 @@ final class NetworkManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LoadBalancer'
+                            'schema' => ['$ref' => '#/definitions/LoadBalancer']
                         ],
                         [
                             'name' => 'api-version',
@@ -1935,7 +1935,7 @@ final class NetworkManagementClient
                             'name' => 'inboundNatRuleParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/InboundNatRule'
+                            'schema' => ['$ref' => '#/definitions/InboundNatRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -2216,7 +2216,7 @@ final class NetworkManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/NetworkInterface'
+                            'schema' => ['$ref' => '#/definitions/NetworkInterface']
                         ],
                         [
                             'name' => 'api-version',
@@ -2658,7 +2658,7 @@ final class NetworkManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/NetworkSecurityGroup'
+                            'schema' => ['$ref' => '#/definitions/NetworkSecurityGroup']
                         ],
                         [
                             'name' => 'api-version',
@@ -2828,7 +2828,7 @@ final class NetworkManagementClient
                             'name' => 'securityRuleParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SecurityRule'
+                            'schema' => ['$ref' => '#/definitions/SecurityRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -2969,7 +2969,7 @@ final class NetworkManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/NetworkWatcher'
+                            'schema' => ['$ref' => '#/definitions/NetworkWatcher']
                         ],
                         [
                             'name' => 'api-version',
@@ -3119,7 +3119,7 @@ final class NetworkManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/TopologyParameters'
+                        'schema' => ['$ref' => '#/definitions/TopologyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -3156,7 +3156,7 @@ final class NetworkManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/VerificationIPFlowParameters'
+                        'schema' => ['$ref' => '#/definitions/VerificationIPFlowParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -3196,7 +3196,7 @@ final class NetworkManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/NextHopParameters'
+                        'schema' => ['$ref' => '#/definitions/NextHopParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -3236,7 +3236,7 @@ final class NetworkManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/SecurityGroupViewParameters'
+                        'schema' => ['$ref' => '#/definitions/SecurityGroupViewParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -3276,7 +3276,7 @@ final class NetworkManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/TroubleshootingParameters'
+                        'schema' => ['$ref' => '#/definitions/TroubleshootingParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -3316,7 +3316,7 @@ final class NetworkManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/QueryTroubleshootingParameters'
+                        'schema' => ['$ref' => '#/definitions/QueryTroubleshootingParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -3356,7 +3356,7 @@ final class NetworkManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/FlowLogInformation'
+                        'schema' => ['$ref' => '#/definitions/FlowLogInformation']
                     ],
                     [
                         'name' => 'api-version',
@@ -3396,7 +3396,7 @@ final class NetworkManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/FlowLogStatusParameters'
+                        'schema' => ['$ref' => '#/definitions/FlowLogStatusParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -3436,7 +3436,7 @@ final class NetworkManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ConnectivityParameters'
+                        'schema' => ['$ref' => '#/definitions/ConnectivityParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -3483,7 +3483,7 @@ final class NetworkManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PacketCapture'
+                            'schema' => ['$ref' => '#/definitions/PacketCapture']
                         ],
                         [
                             'name' => 'api-version',
@@ -3782,7 +3782,7 @@ final class NetworkManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PublicIPAddress'
+                            'schema' => ['$ref' => '#/definitions/PublicIPAddress']
                         ],
                         [
                             'name' => 'api-version',
@@ -4081,7 +4081,7 @@ final class NetworkManagementClient
                             'name' => 'routeFilterParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RouteFilter'
+                            'schema' => ['$ref' => '#/definitions/RouteFilter']
                         ],
                         [
                             'name' => 'api-version',
@@ -4121,7 +4121,7 @@ final class NetworkManagementClient
                             'name' => 'routeFilterParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PatchRouteFilter'
+                            'schema' => ['$ref' => '#/definitions/PatchRouteFilter']
                         ],
                         [
                             'name' => 'api-version',
@@ -4288,7 +4288,7 @@ final class NetworkManagementClient
                             'name' => 'routeFilterRuleParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RouteFilterRule'
+                            'schema' => ['$ref' => '#/definitions/RouteFilterRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -4334,7 +4334,7 @@ final class NetworkManagementClient
                             'name' => 'routeFilterRuleParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PatchRouteFilterRule'
+                            'schema' => ['$ref' => '#/definitions/PatchRouteFilterRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -4476,7 +4476,7 @@ final class NetworkManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RouteTable'
+                            'schema' => ['$ref' => '#/definitions/RouteTable']
                         ],
                         [
                             'name' => 'api-version',
@@ -4646,7 +4646,7 @@ final class NetworkManagementClient
                             'name' => 'routeParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Route'
+                            'schema' => ['$ref' => '#/definitions/Route']
                         ],
                         [
                             'name' => 'api-version',
@@ -4835,7 +4835,7 @@ final class NetworkManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VirtualNetwork'
+                            'schema' => ['$ref' => '#/definitions/VirtualNetwork']
                         ],
                         [
                             'name' => 'api-version',
@@ -5079,7 +5079,7 @@ final class NetworkManagementClient
                             'name' => 'subnetParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Subnet'
+                            'schema' => ['$ref' => '#/definitions/Subnet']
                         ],
                         [
                             'name' => 'api-version',
@@ -5236,7 +5236,7 @@ final class NetworkManagementClient
                             'name' => 'VirtualNetworkPeeringParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VirtualNetworkPeering'
+                            'schema' => ['$ref' => '#/definitions/VirtualNetworkPeering']
                         ],
                         [
                             'name' => 'api-version',
@@ -5309,7 +5309,7 @@ final class NetworkManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VirtualNetworkGateway'
+                            'schema' => ['$ref' => '#/definitions/VirtualNetworkGateway']
                         ],
                         [
                             'name' => 'api-version',
@@ -5512,7 +5512,7 @@ final class NetworkManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/VpnClientParameters'
+                        'schema' => ['$ref' => '#/definitions/VpnClientParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -5549,7 +5549,7 @@ final class NetworkManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/VpnClientParameters'
+                        'schema' => ['$ref' => '#/definitions/VpnClientParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -5701,7 +5701,7 @@ final class NetworkManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VirtualNetworkGatewayConnection'
+                            'schema' => ['$ref' => '#/definitions/VirtualNetworkGatewayConnection']
                         ],
                         [
                             'name' => 'api-version',
@@ -5809,7 +5809,7 @@ final class NetworkManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ConnectionSharedKey'
+                            'schema' => ['$ref' => '#/definitions/ConnectionSharedKey']
                         ],
                         [
                             'name' => 'api-version',
@@ -5906,7 +5906,7 @@ final class NetworkManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ConnectionResetSharedKey'
+                        'schema' => ['$ref' => '#/definitions/ConnectionResetSharedKey']
                     ],
                     [
                         'name' => 'api-version',
@@ -5947,7 +5947,7 @@ final class NetworkManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LocalNetworkGateway'
+                            'schema' => ['$ref' => '#/definitions/LocalNetworkGateway']
                         ],
                         [
                             'name' => 'api-version',

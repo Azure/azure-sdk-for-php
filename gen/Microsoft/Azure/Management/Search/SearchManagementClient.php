@@ -291,7 +291,7 @@ final class SearchManagementClient
                             'name' => 'service',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SearchService'
+                            'schema' => ['$ref' => '#/definitions/SearchService']
                         ],
                         [
                             'name' => 'x-ms-client-request-id',
@@ -439,7 +439,7 @@ final class SearchManagementClient
                         'name' => 'checkNameAvailabilityInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameAvailabilityInput'
+                        'schema' => ['$ref' => '#/definitions/CheckNameAvailabilityInput']
                     ],
                     [
                         'name' => 'x-ms-client-request-id',

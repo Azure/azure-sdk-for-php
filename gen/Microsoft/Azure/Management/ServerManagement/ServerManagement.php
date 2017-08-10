@@ -100,7 +100,7 @@ final class ServerManagement
                             'name' => 'GatewayParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/GatewayParameters'
+                            'schema' => ['$ref' => '#/definitions/GatewayParameters']
                         ]
                     ],
                     'responses' => [
@@ -140,7 +140,7 @@ final class ServerManagement
                             'name' => 'GatewayParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/GatewayParameters'
+                            'schema' => ['$ref' => '#/definitions/GatewayParameters']
                         ]
                     ],
                     'responses' => [
@@ -403,7 +403,7 @@ final class ServerManagement
                             'name' => 'GatewayParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/NodeParameters'
+                            'schema' => ['$ref' => '#/definitions/NodeParameters']
                         ]
                     ],
                     'responses' => [
@@ -444,7 +444,7 @@ final class ServerManagement
                             'name' => 'NodeParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/NodeParameters'
+                            'schema' => ['$ref' => '#/definitions/NodeParameters']
                         ]
                     ],
                     'responses' => [
@@ -601,7 +601,7 @@ final class ServerManagement
                             'name' => 'SessionParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SessionParameters'
+                            'schema' => ['$ref' => '#/definitions/SessionParameters']
                         ]
                     ],
                     'responses' => [
@@ -913,7 +913,7 @@ final class ServerManagement
                         'name' => 'PowerShellCommandParameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/PowerShellCommandParameters'
+                        'schema' => ['$ref' => '#/definitions/PowerShellCommandParameters']
                     ]
                 ],
                 'responses' => [
@@ -1011,7 +1011,7 @@ final class ServerManagement
                         'name' => 'PowerShellTabCompletionParamters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/PowerShellTabCompletionParameters'
+                        'schema' => ['$ref' => '#/definitions/PowerShellTabCompletionParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/PowerShellTabCompletionResults']]]

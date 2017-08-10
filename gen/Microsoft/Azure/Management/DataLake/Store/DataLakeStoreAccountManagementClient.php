@@ -81,7 +81,7 @@ final class DataLakeStoreAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/FirewallRule'
+                            'schema' => ['$ref' => '#/definitions/FirewallRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -124,7 +124,7 @@ final class DataLakeStoreAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => FALSE,
-                            '$ref' => '#/definitions/UpdateFirewallRuleParameters'
+                            'schema' => ['$ref' => '#/definitions/UpdateFirewallRuleParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -277,7 +277,7 @@ final class DataLakeStoreAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/TrustedIdProvider'
+                            'schema' => ['$ref' => '#/definitions/TrustedIdProvider']
                         ],
                         [
                             'name' => 'api-version',
@@ -320,7 +320,7 @@ final class DataLakeStoreAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => FALSE,
-                            '$ref' => '#/definitions/UpdateTrustedIdProviderParameters'
+                            'schema' => ['$ref' => '#/definitions/UpdateTrustedIdProviderParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -467,7 +467,7 @@ final class DataLakeStoreAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DataLakeStoreAccount'
+                            'schema' => ['$ref' => '#/definitions/DataLakeStoreAccount']
                         ],
                         [
                             'name' => 'api-version',
@@ -507,7 +507,7 @@ final class DataLakeStoreAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DataLakeStoreAccountUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/DataLakeStoreAccountUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',

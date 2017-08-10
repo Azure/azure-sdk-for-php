@@ -58,7 +58,7 @@ final class KeyVaultManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VaultCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/VaultCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',

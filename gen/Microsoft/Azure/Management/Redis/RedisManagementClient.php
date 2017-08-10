@@ -75,7 +75,7 @@ final class RedisManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RedisCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/RedisCreateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -115,7 +115,7 @@ final class RedisManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RedisUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/RedisUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -293,7 +293,7 @@ final class RedisManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RedisRegenerateKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/RedisRegenerateKeyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -330,7 +330,7 @@ final class RedisManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RedisRebootParameters'
+                        'schema' => ['$ref' => '#/definitions/RedisRebootParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -367,7 +367,7 @@ final class RedisManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ImportRDBParameters'
+                        'schema' => ['$ref' => '#/definitions/ImportRDBParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -408,7 +408,7 @@ final class RedisManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ExportRDBParameters'
+                        'schema' => ['$ref' => '#/definitions/ExportRDBParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -450,7 +450,7 @@ final class RedisManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RedisPatchSchedule'
+                            'schema' => ['$ref' => '#/definitions/RedisPatchSchedule']
                         ],
                         [
                             'name' => 'api-version',
@@ -563,7 +563,7 @@ final class RedisManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RedisLinkedServerCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/RedisLinkedServerCreateParameters']
                         ],
                         [
                             'name' => 'api-version',

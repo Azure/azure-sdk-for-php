@@ -135,7 +135,7 @@ final class HDInsightManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ClusterCreateParametersExtended'
+                            'schema' => ['$ref' => '#/definitions/ClusterCreateParametersExtended']
                         ],
                         [
                             'name' => 'api-version',
@@ -172,7 +172,7 @@ final class HDInsightManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ClusterPatchParameters'
+                            'schema' => ['$ref' => '#/definitions/ClusterPatchParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -307,7 +307,7 @@ final class HDInsightManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ClusterResizeParameters'
+                        'schema' => ['$ref' => '#/definitions/ClusterResizeParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -366,7 +366,7 @@ final class HDInsightManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RDPSettingsParameters'
+                        'schema' => ['$ref' => '#/definitions/RDPSettingsParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -406,7 +406,7 @@ final class HDInsightManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ExecuteScriptActionParameters'
+                        'schema' => ['$ref' => '#/definitions/ExecuteScriptActionParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -523,7 +523,7 @@ final class HDInsightManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ApplicationGetProperties'
+                            'schema' => ['$ref' => '#/definitions/ApplicationGetProperties']
                         ],
                         [
                             'name' => 'api-version',
@@ -632,7 +632,7 @@ final class HDInsightManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/HttpConnectivitySettings'
+                            'schema' => ['$ref' => '#/definitions/HttpConnectivitySettings']
                         ],
                         [
                             'name' => 'api-version',
@@ -716,7 +716,7 @@ final class HDInsightManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Extension'
+                            'schema' => ['$ref' => '#/definitions/Extension']
                         ],
                         [
                             'name' => 'extensionName',

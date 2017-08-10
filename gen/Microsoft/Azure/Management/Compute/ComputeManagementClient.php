@@ -231,7 +231,7 @@ final class ComputeManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AvailabilitySet'
+                            'schema' => ['$ref' => '#/definitions/AvailabilitySet']
                         ],
                         [
                             'name' => 'api-version',
@@ -533,7 +533,7 @@ final class ComputeManagementClient
                             'name' => 'extensionParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VirtualMachineExtension'
+                            'schema' => ['$ref' => '#/definitions/VirtualMachineExtension']
                         ],
                         [
                             'name' => 'api-version',
@@ -925,7 +925,7 @@ final class ComputeManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Image'
+                            'schema' => ['$ref' => '#/definitions/Image']
                         ],
                         [
                             'name' => 'api-version',
@@ -1101,7 +1101,7 @@ final class ComputeManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/VirtualMachineCaptureParameters'
+                        'schema' => ['$ref' => '#/definitions/VirtualMachineCaptureParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -1142,7 +1142,7 @@ final class ComputeManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VirtualMachine'
+                            'schema' => ['$ref' => '#/definitions/VirtualMachine']
                         ],
                         [
                             'name' => 'api-version',
@@ -1600,7 +1600,7 @@ final class ComputeManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RunCommandInput'
+                        'schema' => ['$ref' => '#/definitions/RunCommandInput']
                     ],
                     [
                         'name' => 'api-version',
@@ -1641,7 +1641,7 @@ final class ComputeManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VirtualMachineScaleSet'
+                            'schema' => ['$ref' => '#/definitions/VirtualMachineScaleSet']
                         ],
                         [
                             'name' => 'api-version',
@@ -1748,7 +1748,7 @@ final class ComputeManagementClient
                         'name' => 'vmInstanceIDs',
                         'in' => 'body',
                         'required' => FALSE,
-                        '$ref' => '#/definitions/VirtualMachineScaleSetVMInstanceIDs'
+                        'schema' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMInstanceIDs']
                     ],
                     [
                         'name' => 'api-version',
@@ -1788,7 +1788,7 @@ final class ComputeManagementClient
                         'name' => 'vmInstanceIDs',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/VirtualMachineScaleSetVMInstanceRequiredIDs'
+                        'schema' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMInstanceRequiredIDs']
                     ],
                     [
                         'name' => 'api-version',
@@ -1934,7 +1934,7 @@ final class ComputeManagementClient
                         'name' => 'vmInstanceIDs',
                         'in' => 'body',
                         'required' => FALSE,
-                        '$ref' => '#/definitions/VirtualMachineScaleSetVMInstanceIDs'
+                        'schema' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMInstanceIDs']
                     ],
                     [
                         'name' => 'api-version',
@@ -1974,7 +1974,7 @@ final class ComputeManagementClient
                         'name' => 'vmInstanceIDs',
                         'in' => 'body',
                         'required' => FALSE,
-                        '$ref' => '#/definitions/VirtualMachineScaleSetVMInstanceIDs'
+                        'schema' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMInstanceIDs']
                     ],
                     [
                         'name' => 'api-version',
@@ -2014,7 +2014,7 @@ final class ComputeManagementClient
                         'name' => 'vmInstanceIDs',
                         'in' => 'body',
                         'required' => FALSE,
-                        '$ref' => '#/definitions/VirtualMachineScaleSetVMInstanceIDs'
+                        'schema' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMInstanceIDs']
                     ],
                     [
                         'name' => 'api-version',
@@ -2054,7 +2054,7 @@ final class ComputeManagementClient
                         'name' => 'vmInstanceIDs',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/VirtualMachineScaleSetVMInstanceRequiredIDs'
+                        'schema' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMInstanceRequiredIDs']
                     ],
                     [
                         'name' => 'api-version',
@@ -2094,7 +2094,7 @@ final class ComputeManagementClient
                         'name' => 'vmInstanceIDs',
                         'in' => 'body',
                         'required' => FALSE,
-                        '$ref' => '#/definitions/VirtualMachineScaleSetVMInstanceIDs'
+                        'schema' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMInstanceIDs']
                     ],
                     [
                         'name' => 'api-version',
@@ -2134,7 +2134,7 @@ final class ComputeManagementClient
                         'name' => 'vmInstanceIDs',
                         'in' => 'body',
                         'required' => FALSE,
-                        '$ref' => '#/definitions/VirtualMachineScaleSetVMInstanceIDs'
+                        'schema' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMInstanceIDs']
                     ],
                     [
                         'name' => 'api-version',
@@ -2181,7 +2181,7 @@ final class ComputeManagementClient
                             'name' => 'extensionParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VirtualMachineScaleSetExtension'
+                            'schema' => ['$ref' => '#/definitions/VirtualMachineScaleSetExtension']
                         ],
                         [
                             'name' => 'api-version',
@@ -2757,7 +2757,7 @@ final class ComputeManagementClient
                             'name' => 'disk',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Disk'
+                            'schema' => ['$ref' => '#/definitions/Disk']
                         ]
                     ],
                     'responses' => [
@@ -2797,7 +2797,7 @@ final class ComputeManagementClient
                             'name' => 'disk',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DiskUpdate'
+                            'schema' => ['$ref' => '#/definitions/DiskUpdate']
                         ]
                     ],
                     'responses' => [
@@ -2948,7 +2948,7 @@ final class ComputeManagementClient
                         'name' => 'grantAccessData',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/GrantAccessData'
+                        'schema' => ['$ref' => '#/definitions/GrantAccessData']
                     ]
                 ],
                 'responses' => [
@@ -3023,7 +3023,7 @@ final class ComputeManagementClient
                             'name' => 'snapshot',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Snapshot'
+                            'schema' => ['$ref' => '#/definitions/Snapshot']
                         ]
                     ],
                     'responses' => [
@@ -3063,7 +3063,7 @@ final class ComputeManagementClient
                             'name' => 'snapshot',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SnapshotUpdate'
+                            'schema' => ['$ref' => '#/definitions/SnapshotUpdate']
                         ]
                     ],
                     'responses' => [
@@ -3214,7 +3214,7 @@ final class ComputeManagementClient
                         'name' => 'grantAccessData',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/GrantAccessData'
+                        'schema' => ['$ref' => '#/definitions/GrantAccessData']
                     ]
                 ],
                 'responses' => [
@@ -3351,7 +3351,7 @@ final class ComputeManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ContainerService'
+                            'schema' => ['$ref' => '#/definitions/ContainerService']
                         ],
                         [
                             'name' => 'api-version',

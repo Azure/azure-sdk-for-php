@@ -737,7 +737,7 @@ final class IntuneResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/iOSMAMPolicy'
+                            'schema' => ['$ref' => '#/definitions/iOSMAMPolicy']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/iOSMAMPolicy']]]
@@ -768,7 +768,7 @@ final class IntuneResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/iOSMAMPolicy'
+                            'schema' => ['$ref' => '#/definitions/iOSMAMPolicy']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/iOSMAMPolicy']]]
@@ -879,7 +879,7 @@ final class IntuneResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MAMPolicyAppIdOrGroupIdPayload'
+                            'schema' => ['$ref' => '#/definitions/MAMPolicyAppIdOrGroupIdPayload']
                         ]
                     ],
                     'responses' => [
@@ -980,7 +980,7 @@ final class IntuneResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MAMPolicyAppIdOrGroupIdPayload'
+                            'schema' => ['$ref' => '#/definitions/MAMPolicyAppIdOrGroupIdPayload']
                         ]
                     ],
                     'responses' => [
@@ -1119,7 +1119,7 @@ final class IntuneResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AndroidMAMPolicy'
+                            'schema' => ['$ref' => '#/definitions/AndroidMAMPolicy']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/AndroidMAMPolicy']]]
@@ -1150,7 +1150,7 @@ final class IntuneResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AndroidMAMPolicy'
+                            'schema' => ['$ref' => '#/definitions/AndroidMAMPolicy']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/AndroidMAMPolicy']]]
@@ -1261,7 +1261,7 @@ final class IntuneResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MAMPolicyAppIdOrGroupIdPayload'
+                            'schema' => ['$ref' => '#/definitions/MAMPolicyAppIdOrGroupIdPayload']
                         ]
                     ],
                     'responses' => [
@@ -1362,7 +1362,7 @@ final class IntuneResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MAMPolicyAppIdOrGroupIdPayload'
+                            'schema' => ['$ref' => '#/definitions/MAMPolicyAppIdOrGroupIdPayload']
                         ]
                     ],
                     'responses' => [

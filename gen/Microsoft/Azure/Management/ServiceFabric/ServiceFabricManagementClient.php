@@ -82,7 +82,7 @@ final class ServiceFabricManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ClusterUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/ClusterUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -153,7 +153,7 @@ final class ServiceFabricManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Cluster'
+                            'schema' => ['$ref' => '#/definitions/Cluster']
                         ],
                         [
                             'name' => 'subscriptionId',

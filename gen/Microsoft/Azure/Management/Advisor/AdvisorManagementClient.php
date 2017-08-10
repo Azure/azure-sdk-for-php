@@ -234,7 +234,7 @@ final class AdvisorManagementClient
                             'name' => 'suppressionContract',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SuppressionContract'
+                            'schema' => ['$ref' => '#/definitions/SuppressionContract']
                         ],
                         [
                             'name' => 'api-version',

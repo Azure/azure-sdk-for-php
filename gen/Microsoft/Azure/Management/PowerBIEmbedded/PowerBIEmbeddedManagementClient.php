@@ -120,7 +120,7 @@ final class PowerBIEmbeddedManagementClient
                             'name' => 'body',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CreateWorkspaceCollectionRequest'
+                            'schema' => ['$ref' => '#/definitions/CreateWorkspaceCollectionRequest']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/WorkspaceCollection']]]
@@ -157,7 +157,7 @@ final class PowerBIEmbeddedManagementClient
                             'name' => 'body',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/UpdateWorkspaceCollectionRequest'
+                            'schema' => ['$ref' => '#/definitions/UpdateWorkspaceCollectionRequest']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/WorkspaceCollection']]]
@@ -220,7 +220,7 @@ final class PowerBIEmbeddedManagementClient
                         'name' => 'body',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameRequest'
+                        'schema' => ['$ref' => '#/definitions/CheckNameRequest']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CheckNameResponse']]]
@@ -332,7 +332,7 @@ final class PowerBIEmbeddedManagementClient
                         'name' => 'body',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/WorkspaceCollectionAccessKey'
+                        'schema' => ['$ref' => '#/definitions/WorkspaceCollectionAccessKey']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/WorkspaceCollectionAccessKeys']]]
@@ -363,7 +363,7 @@ final class PowerBIEmbeddedManagementClient
                         'name' => 'body',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/MigrateWorkspaceCollectionRequest'
+                        'schema' => ['$ref' => '#/definitions/MigrateWorkspaceCollectionRequest']
                     ]
                 ],
                 'responses' => ['200' => []]

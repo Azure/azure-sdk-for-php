@@ -118,7 +118,7 @@ final class IotHubClient
                             'name' => 'iotHubDescription',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IotHubDescription'
+                            'schema' => ['$ref' => '#/definitions/IotHubDescription']
                         ]
                     ],
                     'responses' => [
@@ -556,7 +556,7 @@ final class IotHubClient
                         'name' => 'operationInputs',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/OperationInputs'
+                        'schema' => ['$ref' => '#/definitions/OperationInputs']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/IotHubNameAvailabilityInfo']]]
@@ -661,7 +661,7 @@ final class IotHubClient
                         'name' => 'exportDevicesParameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ExportDevicesRequest'
+                        'schema' => ['$ref' => '#/definitions/ExportDevicesRequest']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/JobResponse']]]
@@ -698,7 +698,7 @@ final class IotHubClient
                         'name' => 'importDevicesParameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ImportDevicesRequest'
+                        'schema' => ['$ref' => '#/definitions/ImportDevicesRequest']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/JobResponse']]]

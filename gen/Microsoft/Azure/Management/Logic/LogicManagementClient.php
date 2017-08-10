@@ -322,7 +322,7 @@ final class LogicManagementClient
                             'name' => 'workflow',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Workflow'
+                            'schema' => ['$ref' => '#/definitions/Workflow']
                         ]
                     ],
                     'responses' => [
@@ -362,7 +362,7 @@ final class LogicManagementClient
                             'name' => 'workflow',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Workflow'
+                            'schema' => ['$ref' => '#/definitions/Workflow']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/Workflow']]]
@@ -496,7 +496,7 @@ final class LogicManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/GenerateUpgradedDefinitionParameters'
+                        'schema' => ['$ref' => '#/definitions/GenerateUpgradedDefinitionParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['type' => 'object']]]
@@ -557,7 +557,7 @@ final class LogicManagementClient
                         'name' => 'keyType',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateActionParameter'
+                        'schema' => ['$ref' => '#/definitions/RegenerateActionParameter']
                     ],
                     [
                         'name' => 'api-version',
@@ -607,7 +607,7 @@ final class LogicManagementClient
                         'name' => 'workflow',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/Workflow'
+                        'schema' => ['$ref' => '#/definitions/Workflow']
                     ]
                 ],
                 'responses' => ['200' => []]
@@ -724,7 +724,7 @@ final class LogicManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => FALSE,
-                        '$ref' => '#/definitions/GetCallbackUrlParameters'
+                        'schema' => ['$ref' => '#/definitions/GetCallbackUrlParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -1360,7 +1360,7 @@ final class LogicManagementClient
                             'name' => 'integrationAccount',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IntegrationAccount'
+                            'schema' => ['$ref' => '#/definitions/IntegrationAccount']
                         ]
                     ],
                     'responses' => [
@@ -1400,7 +1400,7 @@ final class LogicManagementClient
                             'name' => 'integrationAccount',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IntegrationAccount'
+                            'schema' => ['$ref' => '#/definitions/IntegrationAccount']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/IntegrationAccount']]]
@@ -1472,7 +1472,7 @@ final class LogicManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/GetCallbackUrlParameters'
+                        'schema' => ['$ref' => '#/definitions/GetCallbackUrlParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CallbackUrl']]]
@@ -1597,7 +1597,7 @@ final class LogicManagementClient
                             'name' => 'schema',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IntegrationAccountSchema'
+                            'schema' => ['$ref' => '#/definitions/IntegrationAccountSchema']
                         ]
                     ],
                     'responses' => [
@@ -1766,7 +1766,7 @@ final class LogicManagementClient
                             'name' => 'map',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IntegrationAccountMap'
+                            'schema' => ['$ref' => '#/definitions/IntegrationAccountMap']
                         ]
                     ],
                     'responses' => [
@@ -1935,7 +1935,7 @@ final class LogicManagementClient
                             'name' => 'partner',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IntegrationAccountPartner'
+                            'schema' => ['$ref' => '#/definitions/IntegrationAccountPartner']
                         ]
                     ],
                     'responses' => [
@@ -2104,7 +2104,7 @@ final class LogicManagementClient
                             'name' => 'agreement',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IntegrationAccountAgreement'
+                            'schema' => ['$ref' => '#/definitions/IntegrationAccountAgreement']
                         ]
                     ],
                     'responses' => [
@@ -2267,7 +2267,7 @@ final class LogicManagementClient
                             'name' => 'certificate',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IntegrationAccountCertificate'
+                            'schema' => ['$ref' => '#/definitions/IntegrationAccountCertificate']
                         ]
                     ],
                     'responses' => [
@@ -2436,7 +2436,7 @@ final class LogicManagementClient
                             'name' => 'session',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IntegrationAccountSession'
+                            'schema' => ['$ref' => '#/definitions/IntegrationAccountSession']
                         ]
                     ],
                     'responses' => [

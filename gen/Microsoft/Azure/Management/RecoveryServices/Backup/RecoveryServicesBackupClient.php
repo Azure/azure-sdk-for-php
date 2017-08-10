@@ -535,7 +535,7 @@ final class RecoveryServicesBackupClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/BackupResourceVaultConfigResource'
+                            'schema' => ['$ref' => '#/definitions/BackupResourceVaultConfigResource']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/BackupResourceVaultConfigResource']]]
@@ -918,7 +918,7 @@ final class RecoveryServicesBackupClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ProtectedItemResource'
+                            'schema' => ['$ref' => '#/definitions/ProtectedItemResource']
                         ]
                     ],
                     'responses' => ['202' => []]
@@ -1026,7 +1026,7 @@ final class RecoveryServicesBackupClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/BackupRequestResource'
+                        'schema' => ['$ref' => '#/definitions/BackupRequestResource']
                     ]
                 ],
                 'responses' => ['202' => []]
@@ -1311,7 +1311,7 @@ final class RecoveryServicesBackupClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ILRRequestResource'
+                        'schema' => ['$ref' => '#/definitions/ILRRequestResource']
                     ]
                 ],
                 'responses' => ['202' => []]
@@ -1427,7 +1427,7 @@ final class RecoveryServicesBackupClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RestoreRequestResource'
+                        'schema' => ['$ref' => '#/definitions/RestoreRequestResource']
                     ]
                 ],
                 'responses' => ['202' => []]
@@ -1784,7 +1784,7 @@ final class RecoveryServicesBackupClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ProtectionPolicyResource'
+                            'schema' => ['$ref' => '#/definitions/ProtectionPolicyResource']
                         ]
                     ],
                     'responses' => [

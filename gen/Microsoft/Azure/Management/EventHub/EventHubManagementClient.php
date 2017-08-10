@@ -98,7 +98,7 @@ final class EventHubManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameAvailabilityParameter'
+                        'schema' => ['$ref' => '#/definitions/CheckNameAvailabilityParameter']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CheckNameAvailabilityResult']]]
@@ -167,7 +167,7 @@ final class EventHubManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/EHNamespace'
+                            'schema' => ['$ref' => '#/definitions/EHNamespace']
                         ],
                         [
                             'name' => 'api-version',
@@ -277,7 +277,7 @@ final class EventHubManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/EHNamespace'
+                            'schema' => ['$ref' => '#/definitions/EHNamespace']
                         ],
                         [
                             'name' => 'api-version',
@@ -357,7 +357,7 @@ final class EventHubManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AuthorizationRule'
+                            'schema' => ['$ref' => '#/definitions/AuthorizationRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -515,7 +515,7 @@ final class EventHubManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateAccessKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/RegenerateAccessKeyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -590,7 +590,7 @@ final class EventHubManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Eventhub'
+                            'schema' => ['$ref' => '#/definitions/Eventhub']
                         ],
                         [
                             'name' => 'api-version',
@@ -755,7 +755,7 @@ final class EventHubManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AuthorizationRule'
+                            'schema' => ['$ref' => '#/definitions/AuthorizationRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -937,7 +937,7 @@ final class EventHubManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateAccessKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/RegenerateAccessKeyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -987,7 +987,7 @@ final class EventHubManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ConsumerGroup'
+                            'schema' => ['$ref' => '#/definitions/ConsumerGroup']
                         ],
                         [
                             'name' => 'api-version',

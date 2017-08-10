@@ -383,7 +383,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'applyRecoveryPointInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ApplyRecoveryPointInput'
+                        'schema' => ['$ref' => '#/definitions/ApplyRecoveryPointInput']
                     ]
                 ],
                 'responses' => [
@@ -493,7 +493,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'updateMobilityServiceRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/UpdateMobilityServiceRequest'
+                        'schema' => ['$ref' => '#/definitions/UpdateMobilityServiceRequest']
                     ]
                 ],
                 'responses' => [
@@ -551,7 +551,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'rrInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ReverseReplicationInput'
+                        'schema' => ['$ref' => '#/definitions/ReverseReplicationInput']
                     ]
                 ],
                 'responses' => [
@@ -661,7 +661,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'cleanupInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/TestFailoverCleanupInput'
+                        'schema' => ['$ref' => '#/definitions/TestFailoverCleanupInput']
                     ]
                 ],
                 'responses' => [
@@ -719,7 +719,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'failoverInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/TestFailoverInput'
+                        'schema' => ['$ref' => '#/definitions/TestFailoverInput']
                     ]
                 ],
                 'responses' => [
@@ -777,7 +777,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'failoverInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/UnplannedFailoverInput'
+                        'schema' => ['$ref' => '#/definitions/UnplannedFailoverInput']
                     ]
                 ],
                 'responses' => [
@@ -835,7 +835,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'failoverInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/PlannedFailoverInput'
+                        'schema' => ['$ref' => '#/definitions/PlannedFailoverInput']
                     ]
                 ],
                 'responses' => [
@@ -893,7 +893,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'disableProtectionInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DisableProtectionInput'
+                        'schema' => ['$ref' => '#/definitions/DisableProtectionInput']
                     ]
                 ],
                 'responses' => [
@@ -1001,7 +1001,7 @@ final class SiteRecoveryManagementClient
                             'name' => 'input',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/EnableProtectionInput'
+                            'schema' => ['$ref' => '#/definitions/EnableProtectionInput']
                         ]
                     ],
                     'responses' => [
@@ -1111,7 +1111,7 @@ final class SiteRecoveryManagementClient
                             'name' => 'updateProtectionInput',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/UpdateReplicationProtectedItemInput'
+                            'schema' => ['$ref' => '#/definitions/UpdateReplicationProtectedItemInput']
                         ]
                     ],
                     'responses' => [
@@ -1294,7 +1294,7 @@ final class SiteRecoveryManagementClient
                             'name' => 'input',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CreateNetworkMappingInput'
+                            'schema' => ['$ref' => '#/definitions/CreateNetworkMappingInput']
                         ]
                     ],
                     'responses' => [
@@ -1404,7 +1404,7 @@ final class SiteRecoveryManagementClient
                             'name' => 'input',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/UpdateNetworkMappingInput'
+                            'schema' => ['$ref' => '#/definitions/UpdateNetworkMappingInput']
                         ]
                     ],
                     'responses' => [
@@ -1491,7 +1491,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'renewCertificate',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RenewCertificateInput'
+                        'schema' => ['$ref' => '#/definitions/RenewCertificateInput']
                     ]
                 ],
                 'responses' => [
@@ -1537,7 +1537,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'failoverProcessServerRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/FailoverProcessServerRequest'
+                        'schema' => ['$ref' => '#/definitions/FailoverProcessServerRequest']
                     ]
                 ],
                 'responses' => [
@@ -1701,7 +1701,7 @@ final class SiteRecoveryManagementClient
                             'name' => 'input',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/FabricCreationInput'
+                            'schema' => ['$ref' => '#/definitions/FabricCreationInput']
                         ]
                     ],
                     'responses' => [
@@ -1869,7 +1869,7 @@ final class SiteRecoveryManagementClient
                             'name' => 'addVCenterRequest',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AddVCenterRequest'
+                            'schema' => ['$ref' => '#/definitions/AddVCenterRequest']
                         ]
                     ],
                     'responses' => [
@@ -1967,7 +1967,7 @@ final class SiteRecoveryManagementClient
                             'name' => 'updateVCenterRequest',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/UpdateVCenterRequest'
+                            'schema' => ['$ref' => '#/definitions/UpdateVCenterRequest']
                         ]
                     ],
                     'responses' => [
@@ -2144,7 +2144,7 @@ final class SiteRecoveryManagementClient
                             'name' => 'pairingInput',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/StorageClassificationMappingInput'
+                            'schema' => ['$ref' => '#/definitions/StorageClassificationMappingInput']
                         ]
                     ],
                     'responses' => [
@@ -2863,7 +2863,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'input',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RecoveryPlanTestFailoverCleanupInput'
+                        'schema' => ['$ref' => '#/definitions/RecoveryPlanTestFailoverCleanupInput']
                     ]
                 ],
                 'responses' => [
@@ -2909,7 +2909,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'input',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RecoveryPlanTestFailoverInput'
+                        'schema' => ['$ref' => '#/definitions/RecoveryPlanTestFailoverInput']
                     ]
                 ],
                 'responses' => [
@@ -2955,7 +2955,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'input',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RecoveryPlanUnplannedFailoverInput'
+                        'schema' => ['$ref' => '#/definitions/RecoveryPlanUnplannedFailoverInput']
                     ]
                 ],
                 'responses' => [
@@ -3001,7 +3001,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'input',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RecoveryPlanPlannedFailoverInput'
+                        'schema' => ['$ref' => '#/definitions/RecoveryPlanPlannedFailoverInput']
                     ]
                 ],
                 'responses' => [
@@ -3085,7 +3085,7 @@ final class SiteRecoveryManagementClient
                             'name' => 'input',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CreateRecoveryPlanInput'
+                            'schema' => ['$ref' => '#/definitions/CreateRecoveryPlanInput']
                         ]
                     ],
                     'responses' => [
@@ -3171,7 +3171,7 @@ final class SiteRecoveryManagementClient
                             'name' => 'input',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/UpdateRecoveryPlanInput'
+                            'schema' => ['$ref' => '#/definitions/UpdateRecoveryPlanInput']
                         ]
                     ],
                     'responses' => [
@@ -3255,7 +3255,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'switchInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/SwitchProtectionInput'
+                        'schema' => ['$ref' => '#/definitions/SwitchProtectionInput']
                     ]
                 ],
                 'responses' => [
@@ -3353,7 +3353,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'discoverProtectableItemRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DiscoverProtectableItemRequest'
+                        'schema' => ['$ref' => '#/definitions/DiscoverProtectableItemRequest']
                     ]
                 ],
                 'responses' => [
@@ -3449,7 +3449,7 @@ final class SiteRecoveryManagementClient
                             'name' => 'creationInput',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CreateProtectionContainerInput'
+                            'schema' => ['$ref' => '#/definitions/CreateProtectionContainerInput']
                         ]
                     ],
                     'responses' => [
@@ -3576,7 +3576,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'removalInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RemoveProtectionContainerMappingInput'
+                        'schema' => ['$ref' => '#/definitions/RemoveProtectionContainerMappingInput']
                     ]
                 ],
                 'responses' => [
@@ -3684,7 +3684,7 @@ final class SiteRecoveryManagementClient
                             'name' => 'creationInput',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CreateProtectionContainerMappingInput'
+                            'schema' => ['$ref' => '#/definitions/CreateProtectionContainerMappingInput']
                         ]
                     ],
                     'responses' => [
@@ -3987,7 +3987,7 @@ final class SiteRecoveryManagementClient
                             'name' => 'input',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CreatePolicyInput'
+                            'schema' => ['$ref' => '#/definitions/CreatePolicyInput']
                         ]
                     ],
                     'responses' => [
@@ -4073,7 +4073,7 @@ final class SiteRecoveryManagementClient
                             'name' => 'input',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/UpdatePolicyInput'
+                            'schema' => ['$ref' => '#/definitions/UpdatePolicyInput']
                         ]
                     ],
                     'responses' => [
@@ -4367,7 +4367,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'resumeJobParams',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ResumeJobParams'
+                        'schema' => ['$ref' => '#/definitions/ResumeJobParams']
                     ]
                 ],
                 'responses' => [
@@ -4524,7 +4524,7 @@ final class SiteRecoveryManagementClient
                         'name' => 'jobQueryParameter',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/JobQueryParameter'
+                        'schema' => ['$ref' => '#/definitions/JobQueryParameter']
                     ]
                 ],
                 'responses' => [
@@ -4713,7 +4713,7 @@ final class SiteRecoveryManagementClient
                             'name' => 'request',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ConfigureAlertRequest'
+                            'schema' => ['$ref' => '#/definitions/ConfigureAlertRequest']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/Alert']]]

@@ -105,7 +105,7 @@ final class OperationalInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LinkedService'
+                            'schema' => ['$ref' => '#/definitions/LinkedService']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -261,7 +261,7 @@ final class OperationalInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DataSource'
+                            'schema' => ['$ref' => '#/definitions/DataSource']
                         ],
                         [
                             'name' => 'api-version',
@@ -668,7 +668,7 @@ final class OperationalInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Workspace'
+                            'schema' => ['$ref' => '#/definitions/Workspace']
                         ],
                         [
                             'name' => 'api-version',
@@ -827,7 +827,7 @@ final class OperationalInsightsManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/SearchParameters'
+                        'schema' => ['$ref' => '#/definitions/SearchParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -911,7 +911,7 @@ final class OperationalInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/StorageInsight'
+                            'schema' => ['$ref' => '#/definitions/StorageInsight']
                         ],
                         [
                             'name' => 'api-version',
@@ -1104,7 +1104,7 @@ final class OperationalInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SavedSearch'
+                            'schema' => ['$ref' => '#/definitions/SavedSearch']
                         ],
                         [
                             'name' => 'api-version',

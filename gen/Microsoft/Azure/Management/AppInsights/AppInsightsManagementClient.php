@@ -208,7 +208,7 @@ final class AppInsightsManagementClient
                             'name' => 'InsightProperties',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ApplicationInsightsComponent'
+                            'schema' => ['$ref' => '#/definitions/ApplicationInsightsComponent']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/ApplicationInsightsComponent']]]
@@ -245,7 +245,7 @@ final class AppInsightsManagementClient
                             'name' => 'ComponentTags',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/TagsResource'
+                            'schema' => ['$ref' => '#/definitions/TagsResource']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/ApplicationInsightsComponent']]]
@@ -340,7 +340,7 @@ final class AppInsightsManagementClient
                             'name' => 'WebTestDefinition',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/WebTest'
+                            'schema' => ['$ref' => '#/definitions/WebTest']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/WebTest']]]
@@ -377,7 +377,7 @@ final class AppInsightsManagementClient
                             'name' => 'WebTestTags',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/TagsResource'
+                            'schema' => ['$ref' => '#/definitions/TagsResource']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/WebTest']]]

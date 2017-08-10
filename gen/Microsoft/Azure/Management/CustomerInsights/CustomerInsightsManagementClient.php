@@ -231,7 +231,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Hub'
+                            'schema' => ['$ref' => '#/definitions/Hub']
                         ],
                         [
                             'name' => 'api-version',
@@ -271,7 +271,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Hub'
+                            'schema' => ['$ref' => '#/definitions/Hub']
                         ],
                         [
                             'name' => 'api-version',
@@ -426,7 +426,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ProfileResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/ProfileResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -641,7 +641,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/InteractionResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/InteractionResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -806,7 +806,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RelationshipResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/RelationshipResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -962,7 +962,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RelationshipLinkResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/RelationshipLinkResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -1118,7 +1118,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AuthorizationPolicyResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/AuthorizationPolicyResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -1308,7 +1308,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ConnectorResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/ConnectorResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -1471,7 +1471,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ConnectorMappingResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/ConnectorMappingResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -1645,7 +1645,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/KpiResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/KpiResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -1943,7 +1943,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ViewResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/ViewResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -2074,7 +2074,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LinkResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/LinkResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -2292,7 +2292,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RoleAssignmentResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/RoleAssignmentResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -2411,7 +2411,7 @@ final class CustomerInsightsManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/GetImageUploadUrlInput'
+                        'schema' => ['$ref' => '#/definitions/GetImageUploadUrlInput']
                     ],
                     [
                         'name' => 'api-version',
@@ -2448,7 +2448,7 @@ final class CustomerInsightsManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/GetImageUploadUrlInput'
+                        'schema' => ['$ref' => '#/definitions/GetImageUploadUrlInput']
                     ],
                     [
                         'name' => 'api-version',
@@ -2492,7 +2492,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PredictionResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/PredictionResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -2690,7 +2690,7 @@ final class CustomerInsightsManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/PredictionModelStatus'
+                        'schema' => ['$ref' => '#/definitions/PredictionModelStatus']
                     ],
                     [
                         'name' => 'api-version',

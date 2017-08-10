@@ -285,7 +285,7 @@ final class StorageImportExport
                             'name' => 'jobProperties',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MutableJob'
+                            'schema' => ['$ref' => '#/definitions/MutableJob']
                         ],
                         [
                             'name' => 'api-version',
@@ -329,7 +329,7 @@ final class StorageImportExport
                             'name' => 'jobProperties',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Job'
+                            'schema' => ['$ref' => '#/definitions/Job']
                         ],
                         [
                             'name' => 'api-version',
@@ -409,7 +409,7 @@ final class StorageImportExport
                         'name' => 'MoveJobsParameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/MoveJobParameters'
+                        'schema' => ['$ref' => '#/definitions/MoveJobParameters']
                     ],
                     [
                         'name' => 'api-version',

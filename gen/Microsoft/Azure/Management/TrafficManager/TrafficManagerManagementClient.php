@@ -87,7 +87,7 @@ final class TrafficManagerManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Endpoint'
+                            'schema' => ['$ref' => '#/definitions/Endpoint']
                         ],
                         [
                             'name' => 'api-version',
@@ -179,7 +179,7 @@ final class TrafficManagerManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Endpoint'
+                            'schema' => ['$ref' => '#/definitions/Endpoint']
                         ],
                         [
                             'name' => 'api-version',
@@ -254,7 +254,7 @@ final class TrafficManagerManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckTrafficManagerRelativeDnsNameAvailabilityParameters'
+                        'schema' => ['$ref' => '#/definitions/CheckTrafficManagerRelativeDnsNameAvailabilityParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -361,7 +361,7 @@ final class TrafficManagerManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Profile'
+                            'schema' => ['$ref' => '#/definitions/Profile']
                         ],
                         [
                             'name' => 'api-version',
@@ -435,7 +435,7 @@ final class TrafficManagerManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Profile'
+                            'schema' => ['$ref' => '#/definitions/Profile']
                         ],
                         [
                             'name' => 'api-version',

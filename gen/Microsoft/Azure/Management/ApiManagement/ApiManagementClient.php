@@ -572,7 +572,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PolicyContract'
+                            'schema' => ['$ref' => '#/definitions/PolicyContract']
                         ],
                         [
                             'name' => 'api-version',
@@ -827,7 +827,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ApiCreateOrUpdateParameter'
+                            'schema' => ['$ref' => '#/definitions/ApiCreateOrUpdateParameter']
                         ],
                         [
                             'name' => 'If-Match',
@@ -879,7 +879,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ApiUpdateContract'
+                            'schema' => ['$ref' => '#/definitions/ApiUpdateContract']
                         ],
                         [
                             'name' => 'If-Match',
@@ -1079,7 +1079,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/OperationContract'
+                            'schema' => ['$ref' => '#/definitions/OperationContract']
                         ],
                         [
                             'name' => 'api-version',
@@ -1131,7 +1131,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/OperationUpdateContract'
+                            'schema' => ['$ref' => '#/definitions/OperationUpdateContract']
                         ],
                         [
                             'name' => 'If-Match',
@@ -1294,7 +1294,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PolicyContract'
+                            'schema' => ['$ref' => '#/definitions/PolicyContract']
                         ],
                         [
                             'name' => 'If-Match',
@@ -1549,7 +1549,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PolicyContract'
+                            'schema' => ['$ref' => '#/definitions/PolicyContract']
                         ],
                         [
                             'name' => 'If-Match',
@@ -1741,7 +1741,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AuthorizationServerContract'
+                            'schema' => ['$ref' => '#/definitions/AuthorizationServerContract']
                         ],
                         [
                             'name' => 'api-version',
@@ -1787,7 +1787,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AuthorizationServerUpdateContract'
+                            'schema' => ['$ref' => '#/definitions/AuthorizationServerUpdateContract']
                         ],
                         [
                             'name' => 'If-Match',
@@ -1969,7 +1969,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/BackendContract'
+                            'schema' => ['$ref' => '#/definitions/BackendContract']
                         ],
                         [
                             'name' => 'api-version',
@@ -2015,7 +2015,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/BackendUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/BackendUpdateParameters']
                         ],
                         [
                             'name' => 'If-Match',
@@ -2197,7 +2197,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CertificateCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/CertificateCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'If-Match',
@@ -2298,7 +2298,7 @@ final class ApiManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ApiManagementServiceBackupRestoreParameters'
+                        'schema' => ['$ref' => '#/definitions/ApiManagementServiceBackupRestoreParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -2338,7 +2338,7 @@ final class ApiManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ApiManagementServiceBackupRestoreParameters'
+                        'schema' => ['$ref' => '#/definitions/ApiManagementServiceBackupRestoreParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -2379,7 +2379,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ApiManagementServiceResource'
+                            'schema' => ['$ref' => '#/definitions/ApiManagementServiceResource']
                         ],
                         [
                             'name' => 'api-version',
@@ -2419,7 +2419,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ApiManagementServiceUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/ApiManagementServiceUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -2588,7 +2588,7 @@ final class ApiManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ApiManagementServiceCheckNameAvailabilityParameters'
+                        'schema' => ['$ref' => '#/definitions/ApiManagementServiceCheckNameAvailabilityParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -2625,7 +2625,7 @@ final class ApiManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => FALSE,
-                        '$ref' => '#/definitions/ApiManagementServiceApplyNetworkConfigurationParameters'
+                        'schema' => ['$ref' => '#/definitions/ApiManagementServiceApplyNetworkConfigurationParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -2786,7 +2786,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/EmailTemplateUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/EmailTemplateUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -2848,7 +2848,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/EmailTemplateUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/EmailTemplateUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -3040,7 +3040,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/GroupCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/GroupCreateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -3086,7 +3086,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/GroupUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/GroupUpdateParameters']
                         ],
                         [
                             'name' => 'If-Match',
@@ -3412,7 +3412,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IdentityProviderContract'
+                            'schema' => ['$ref' => '#/definitions/IdentityProviderContract']
                         ],
                         [
                             'name' => 'api-version',
@@ -3466,7 +3466,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IdentityProviderUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/IdentityProviderUpdateParameters']
                         ],
                         [
                             'name' => 'If-Match',
@@ -3656,7 +3656,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LoggerContract'
+                            'schema' => ['$ref' => '#/definitions/LoggerContract']
                         ],
                         [
                             'name' => 'api-version',
@@ -3702,7 +3702,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LoggerUpdateContract'
+                            'schema' => ['$ref' => '#/definitions/LoggerUpdateContract']
                         ],
                         [
                             'name' => 'If-Match',
@@ -3952,7 +3952,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/OpenidConnectProviderContract'
+                            'schema' => ['$ref' => '#/definitions/OpenidConnectProviderContract']
                         ],
                         [
                             'name' => 'api-version',
@@ -3998,7 +3998,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/OpenidConnectProviderUpdateContract'
+                            'schema' => ['$ref' => '#/definitions/OpenidConnectProviderUpdateContract']
                         ],
                         [
                             'name' => 'If-Match',
@@ -4186,7 +4186,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ProductContract'
+                            'schema' => ['$ref' => '#/definitions/ProductContract']
                         ],
                         [
                             'name' => 'api-version',
@@ -4232,7 +4232,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ProductUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/ProductUpdateParameters']
                         ],
                         [
                             'name' => 'If-Match',
@@ -4773,7 +4773,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PolicyContract'
+                            'schema' => ['$ref' => '#/definitions/PolicyContract']
                         ],
                         [
                             'name' => 'api-version',
@@ -4959,7 +4959,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PropertyContract'
+                            'schema' => ['$ref' => '#/definitions/PropertyContract']
                         ],
                         [
                             'name' => 'api-version',
@@ -5005,7 +5005,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PropertyUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/PropertyUpdateParameters']
                         ],
                         [
                             'name' => 'If-Match',
@@ -5136,7 +5136,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/QuotaCounterValueContractProperties'
+                            'schema' => ['$ref' => '#/definitions/QuotaCounterValueContractProperties']
                         ],
                         [
                             'name' => 'api-version',
@@ -5230,7 +5230,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/QuotaCounterValueContractProperties'
+                            'schema' => ['$ref' => '#/definitions/QuotaCounterValueContractProperties']
                         ],
                         [
                             'name' => 'api-version',
@@ -5834,7 +5834,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SubscriptionCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/SubscriptionCreateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -5880,7 +5880,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SubscriptionUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/SubscriptionUpdateParameters']
                         ],
                         [
                             'name' => 'If-Match',
@@ -6080,7 +6080,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AccessInformationUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/AccessInformationUpdateParameters']
                         ],
                         [
                             'name' => 'accessName',
@@ -6321,7 +6321,7 @@ final class ApiManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DeployConfigurationParameters'
+                        'schema' => ['$ref' => '#/definitions/DeployConfigurationParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -6368,7 +6368,7 @@ final class ApiManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/SaveConfigurationParameter'
+                        'schema' => ['$ref' => '#/definitions/SaveConfigurationParameter']
                     ],
                     [
                         'name' => 'api-version',
@@ -6415,7 +6415,7 @@ final class ApiManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DeployConfigurationParameters'
+                        'schema' => ['$ref' => '#/definitions/DeployConfigurationParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -6595,7 +6595,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/UserCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/UserCreateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -6641,7 +6641,7 @@ final class ApiManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/UserUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/UserUpdateParameters']
                         ],
                         [
                             'name' => 'If-Match',
@@ -6780,7 +6780,7 @@ final class ApiManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/UserTokenParameters'
+                        'schema' => ['$ref' => '#/definitions/UserTokenParameters']
                     ],
                     [
                         'name' => 'api-version',

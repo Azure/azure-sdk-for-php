@@ -179,7 +179,7 @@ final class ResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Deployment'
+                            'schema' => ['$ref' => '#/definitions/Deployment']
                         ],
                         [
                             'name' => 'api-version',
@@ -282,7 +282,7 @@ final class ResourceManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/Deployment'
+                        'schema' => ['$ref' => '#/definitions/Deployment']
                     ],
                     [
                         'name' => 'api-version',
@@ -542,7 +542,7 @@ final class ResourceManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ResourcesMoveInfo'
+                        'schema' => ['$ref' => '#/definitions/ResourcesMoveInfo']
                     ],
                     [
                         'name' => 'api-version',
@@ -576,7 +576,7 @@ final class ResourceManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ResourcesMoveInfo'
+                        'schema' => ['$ref' => '#/definitions/ResourcesMoveInfo']
                     ],
                     [
                         'name' => 'api-version',
@@ -792,7 +792,7 @@ final class ResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/GenericResource'
+                            'schema' => ['$ref' => '#/definitions/GenericResource']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -928,7 +928,7 @@ final class ResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/GenericResource'
+                            'schema' => ['$ref' => '#/definitions/GenericResource']
                         ]
                     ],
                     'responses' => [
@@ -1000,7 +1000,7 @@ final class ResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ResourceGroup'
+                            'schema' => ['$ref' => '#/definitions/ResourceGroup']
                         ],
                         [
                             'name' => 'api-version',
@@ -1087,7 +1087,7 @@ final class ResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ResourceGroupPatchable'
+                            'schema' => ['$ref' => '#/definitions/ResourceGroupPatchable']
                         ],
                         [
                             'name' => 'api-version',
@@ -1119,7 +1119,7 @@ final class ResourceManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ExportTemplateRequest'
+                        'schema' => ['$ref' => '#/definitions/ExportTemplateRequest']
                     ],
                     [
                         'name' => 'api-version',

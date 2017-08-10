@@ -8,6 +8,7 @@ final class Provider
     public function __construct(\Microsoft\Rest\ClientInterface $_client)
     {
         $this->_GetAvailableStacks_operation = $_client->createOperation('Provider_GetAvailableStacks');
+        $this->_ListOperations_operation = $_client->createOperation('Provider_ListOperations');
         $this->_GetAvailableStacksOnPrem_operation = $_client->createOperation('Provider_GetAvailableStacksOnPrem');
     }
     /**
@@ -17,6 +18,13 @@ final class Provider
     public function getAvailableStacks()
     {
         return $this->_GetAvailableStacks_operation->call([]);
+    }
+    /**
+     * @return array
+     */
+    public function listOperations()
+    {
+        return $this->_ListOperations_operation->call([]);
     }
     /**
      * Get available application frameworks and their versions
@@ -30,6 +38,10 @@ final class Provider
      * @var \Microsoft\Rest\OperationInterface
      */
     private $_GetAvailableStacks_operation;
+    /**
+     * @var \Microsoft\Rest\OperationInterface
+     */
+    private $_ListOperations_operation;
     /**
      * @var \Microsoft\Rest\OperationInterface
      */

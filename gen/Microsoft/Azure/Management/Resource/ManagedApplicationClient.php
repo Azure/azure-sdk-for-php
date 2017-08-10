@@ -131,7 +131,7 @@ final class ManagedApplicationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Appliance'
+                            'schema' => ['$ref' => '#/definitions/Appliance']
                         ],
                         [
                             'name' => 'api-version',
@@ -171,7 +171,7 @@ final class ManagedApplicationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => FALSE,
-                            '$ref' => '#/definitions/Appliance'
+                            'schema' => ['$ref' => '#/definitions/Appliance']
                         ],
                         [
                             'name' => 'api-version',
@@ -307,7 +307,7 @@ final class ManagedApplicationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Appliance'
+                            'schema' => ['$ref' => '#/definitions/Appliance']
                         ],
                         [
                             'name' => 'api-version',
@@ -342,7 +342,7 @@ final class ManagedApplicationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => FALSE,
-                            '$ref' => '#/definitions/Appliance'
+                            'schema' => ['$ref' => '#/definitions/Appliance']
                         ],
                         [
                             'name' => 'api-version',
@@ -450,7 +450,7 @@ final class ManagedApplicationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ApplianceDefinition'
+                            'schema' => ['$ref' => '#/definitions/ApplianceDefinition']
                         ],
                         [
                             'name' => 'api-version',
@@ -571,7 +571,7 @@ final class ManagedApplicationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ApplianceDefinition'
+                            'schema' => ['$ref' => '#/definitions/ApplianceDefinition']
                         ],
                         [
                             'name' => 'api-version',

@@ -87,7 +87,7 @@ final class DnsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RecordSet'
+                            'schema' => ['$ref' => '#/definitions/RecordSet']
                         ],
                         [
                             'name' => 'If-Match',
@@ -154,7 +154,7 @@ final class DnsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RecordSet'
+                            'schema' => ['$ref' => '#/definitions/RecordSet']
                         ],
                         [
                             'name' => 'If-Match',
@@ -432,7 +432,7 @@ final class DnsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Zone'
+                            'schema' => ['$ref' => '#/definitions/Zone']
                         ],
                         [
                             'name' => 'If-Match',

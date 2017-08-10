@@ -353,7 +353,7 @@ final class AuthorizationManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RoleAssignmentCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/RoleAssignmentCreateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -427,7 +427,7 @@ final class AuthorizationManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RoleAssignmentCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/RoleAssignmentCreateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -584,7 +584,7 @@ final class AuthorizationManagementClient
                             'name' => 'roleDefinition',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RoleDefinition'
+                            'schema' => ['$ref' => '#/definitions/RoleDefinition']
                         ],
                         [
                             'name' => 'api-version',

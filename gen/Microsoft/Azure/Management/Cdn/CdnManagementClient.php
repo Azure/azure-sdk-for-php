@@ -214,7 +214,7 @@ final class CdnManagementClient
                             'name' => 'profile',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Profile'
+                            'schema' => ['$ref' => '#/definitions/Profile']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -255,7 +255,7 @@ final class CdnManagementClient
                             'name' => 'profileUpdateParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ProfileUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/ProfileUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -467,7 +467,7 @@ final class CdnManagementClient
                             'name' => 'endpoint',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Endpoint'
+                            'schema' => ['$ref' => '#/definitions/Endpoint']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -514,7 +514,7 @@ final class CdnManagementClient
                             'name' => 'endpointUpdateProperties',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/EndpointUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/EndpointUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -675,7 +675,7 @@ final class CdnManagementClient
                         'name' => 'contentFilePaths',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/PurgeParameters'
+                        'schema' => ['$ref' => '#/definitions/PurgeParameters']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -718,7 +718,7 @@ final class CdnManagementClient
                         'name' => 'contentFilePaths',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/LoadParameters'
+                        'schema' => ['$ref' => '#/definitions/LoadParameters']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -761,7 +761,7 @@ final class CdnManagementClient
                         'name' => 'customDomainProperties',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ValidateCustomDomainInput'
+                        'schema' => ['$ref' => '#/definitions/ValidateCustomDomainInput']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -928,7 +928,7 @@ final class CdnManagementClient
                             'name' => 'originUpdateProperties',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/OriginUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/OriginUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1062,7 +1062,7 @@ final class CdnManagementClient
                             'name' => 'customDomainProperties',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CustomDomainParameters'
+                            'schema' => ['$ref' => '#/definitions/CustomDomainParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1231,7 +1231,7 @@ final class CdnManagementClient
                         'name' => 'checkNameAvailabilityInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameAvailabilityInput'
+                        'schema' => ['$ref' => '#/definitions/CheckNameAvailabilityInput']
                     ],
                     [
                         'name' => 'api-version',

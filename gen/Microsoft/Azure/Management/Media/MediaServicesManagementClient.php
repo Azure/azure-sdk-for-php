@@ -51,7 +51,7 @@ final class MediaServicesManagementClient
                         'name' => 'CheckNameAvailabilityInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameAvailabilityInput'
+                        'schema' => ['$ref' => '#/definitions/CheckNameAvailabilityInput']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CheckNameAvailabilityOutput']]]
@@ -145,7 +145,7 @@ final class MediaServicesManagementClient
                             'name' => 'MediaService',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MediaService'
+                            'schema' => ['$ref' => '#/definitions/MediaService']
                         ]
                     ],
                     'responses' => ['201' => ['schema' => ['$ref' => '#/definitions/MediaService']]]
@@ -216,7 +216,7 @@ final class MediaServicesManagementClient
                             'name' => 'MediaService',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MediaService'
+                            'schema' => ['$ref' => '#/definitions/MediaService']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/MediaService']]]
@@ -254,7 +254,7 @@ final class MediaServicesManagementClient
                         'name' => 'RegenerateKeyInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateKeyInput'
+                        'schema' => ['$ref' => '#/definitions/RegenerateKeyInput']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/RegenerateKeyOutput']]]
@@ -322,7 +322,7 @@ final class MediaServicesManagementClient
                         'name' => 'SyncStorageKeysInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/SyncStorageKeysInput'
+                        'schema' => ['$ref' => '#/definitions/SyncStorageKeysInput']
                     ]
                 ],
                 'responses' => ['200' => []]

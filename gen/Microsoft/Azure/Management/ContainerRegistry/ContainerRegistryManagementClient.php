@@ -87,7 +87,7 @@ final class ContainerRegistryManagementClient
                         'name' => 'registryNameCheckRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegistryNameCheckRequest'
+                        'schema' => ['$ref' => '#/definitions/RegistryNameCheckRequest']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/RegistryNameStatus']]]
@@ -156,7 +156,7 @@ final class ContainerRegistryManagementClient
                             'name' => 'registry',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Registry'
+                            'schema' => ['$ref' => '#/definitions/Registry']
                         ]
                     ],
                     'responses' => [
@@ -231,7 +231,7 @@ final class ContainerRegistryManagementClient
                             'name' => 'registryUpdateParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RegistryUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/RegistryUpdateParameters']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/Registry']]]
@@ -344,7 +344,7 @@ final class ContainerRegistryManagementClient
                         'name' => 'regenerateCredentialParameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateCredentialParameters'
+                        'schema' => ['$ref' => '#/definitions/RegenerateCredentialParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/RegistryListCredentialsResult']]]
@@ -467,7 +467,7 @@ final class ContainerRegistryManagementClient
                             'name' => 'replication',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Replication'
+                            'schema' => ['$ref' => '#/definitions/Replication']
                         ]
                     ],
                     'responses' => [
@@ -624,7 +624,7 @@ final class ContainerRegistryManagementClient
                             'name' => 'webhookCreateParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/WebhookCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/WebhookCreateParameters']
                         ]
                     ],
                     'responses' => [
@@ -711,7 +711,7 @@ final class ContainerRegistryManagementClient
                             'name' => 'webhookUpdateParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/WebhookUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/WebhookUpdateParameters']
                         ]
                     ],
                     'responses' => [

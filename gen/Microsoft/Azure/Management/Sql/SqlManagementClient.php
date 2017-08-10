@@ -541,7 +541,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/BackupLongTermRetentionPolicy'
+                            'schema' => ['$ref' => '#/definitions/BackupLongTermRetentionPolicy']
                         ]
                     ],
                     'responses' => [
@@ -629,7 +629,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/BackupLongTermRetentionVault'
+                            'schema' => ['$ref' => '#/definitions/BackupLongTermRetentionVault']
                         ]
                     ],
                     'responses' => [
@@ -877,7 +877,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ServerConnectionPolicy'
+                            'schema' => ['$ref' => '#/definitions/ServerConnectionPolicy']
                         ]
                     ],
                     'responses' => [
@@ -1007,7 +1007,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DatabaseSecurityAlertPolicy'
+                            'schema' => ['$ref' => '#/definitions/DatabaseSecurityAlertPolicy']
                         ],
                         [
                             'name' => 'api-version',
@@ -1069,7 +1069,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DataMaskingPolicy'
+                            'schema' => ['$ref' => '#/definitions/DataMaskingPolicy']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/DataMaskingPolicy']]]
@@ -1170,7 +1170,7 @@ final class SqlManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DataMaskingRule'
+                        'schema' => ['$ref' => '#/definitions/DataMaskingRule']
                     ]
                 ],
                 'responses' => [
@@ -1261,7 +1261,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/FirewallRule'
+                            'schema' => ['$ref' => '#/definitions/FirewallRule']
                         ]
                     ],
                     'responses' => [
@@ -1424,7 +1424,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/GeoBackupPolicy'
+                            'schema' => ['$ref' => '#/definitions/GeoBackupPolicy']
                         ]
                     ],
                     'responses' => [
@@ -1546,7 +1546,7 @@ final class SqlManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ImportRequest'
+                        'schema' => ['$ref' => '#/definitions/ImportRequest']
                     ]
                 ],
                 'responses' => [
@@ -1599,7 +1599,7 @@ final class SqlManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ImportExtensionRequest'
+                        'schema' => ['$ref' => '#/definitions/ImportExtensionRequest']
                     ]
                 ],
                 'responses' => [
@@ -1645,7 +1645,7 @@ final class SqlManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ExportRequest'
+                        'schema' => ['$ref' => '#/definitions/ExportRequest']
                     ]
                 ],
                 'responses' => [
@@ -1852,7 +1852,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Database'
+                            'schema' => ['$ref' => '#/definitions/Database']
                         ]
                     ],
                     'responses' => [
@@ -1899,7 +1899,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DatabaseUpdate'
+                            'schema' => ['$ref' => '#/definitions/DatabaseUpdate']
                         ]
                     ],
                     'responses' => [
@@ -2313,7 +2313,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ElasticPool'
+                            'schema' => ['$ref' => '#/definitions/ElasticPool']
                         ]
                     ],
                     'responses' => [
@@ -2360,7 +2360,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ElasticPoolUpdate'
+                            'schema' => ['$ref' => '#/definitions/ElasticPoolUpdate']
                         ]
                     ],
                     'responses' => [
@@ -2748,7 +2748,7 @@ final class SqlManagementClient
                             'name' => 'properties',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ServerAzureADAdministrator'
+                            'schema' => ['$ref' => '#/definitions/ServerAzureADAdministrator']
                         ]
                     ],
                     'responses' => [
@@ -2982,7 +2982,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ServerCommunicationLink'
+                            'schema' => ['$ref' => '#/definitions/ServerCommunicationLink']
                         ]
                     ],
                     'responses' => [
@@ -3110,7 +3110,7 @@ final class SqlManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameAvailabilityRequest'
+                        'schema' => ['$ref' => '#/definitions/CheckNameAvailabilityRequest']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CheckNameAvailabilityResponse']]]
@@ -3210,7 +3210,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Server'
+                            'schema' => ['$ref' => '#/definitions/Server']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3286,7 +3286,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ServerUpdate'
+                            'schema' => ['$ref' => '#/definitions/ServerUpdate']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3613,7 +3613,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/TransparentDataEncryption'
+                            'schema' => ['$ref' => '#/definitions/TransparentDataEncryption']
                         ]
                     ],
                     'responses' => [
@@ -3855,7 +3855,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DatabaseBlobAuditingPolicy'
+                            'schema' => ['$ref' => '#/definitions/DatabaseBlobAuditingPolicy']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3973,7 +3973,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/EncryptionProtector'
+                            'schema' => ['$ref' => '#/definitions/EncryptionProtector']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4058,7 +4058,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/FailoverGroup'
+                            'schema' => ['$ref' => '#/definitions/FailoverGroup']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4146,7 +4146,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/FailoverGroupUpdate'
+                            'schema' => ['$ref' => '#/definitions/FailoverGroupUpdate']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4373,7 +4373,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ServerKey'
+                            'schema' => ['$ref' => '#/definitions/ServerKey']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4500,7 +4500,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SyncAgent'
+                            'schema' => ['$ref' => '#/definitions/SyncAgent']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5017,7 +5017,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SyncGroup'
+                            'schema' => ['$ref' => '#/definitions/SyncGroup']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5117,7 +5117,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SyncGroup'
+                            'schema' => ['$ref' => '#/definitions/SyncGroup']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5263,7 +5263,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SyncMember'
+                            'schema' => ['$ref' => '#/definitions/SyncMember']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5375,7 +5375,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SyncMember'
+                            'schema' => ['$ref' => '#/definitions/SyncMember']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5604,7 +5604,7 @@ final class SqlManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VirtualNetworkRule'
+                            'schema' => ['$ref' => '#/definitions/VirtualNetworkRule']
                         ],
                         [
                             'name' => 'subscriptionId',

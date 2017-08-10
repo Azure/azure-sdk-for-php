@@ -142,7 +142,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/AppCollectionNameAvailability'
+                        'schema' => ['$ref' => '#/definitions/AppCollectionNameAvailability']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/AppCollectionNameAvailability']]]
@@ -329,7 +329,7 @@ final class EngagementManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Campaign'
+                            'schema' => ['$ref' => '#/definitions/Campaign']
                         ]
                     ],
                     'responses' => ['201' => ['schema' => ['$ref' => '#/definitions/CampaignStateResult']]]
@@ -418,7 +418,7 @@ final class EngagementManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Campaign'
+                            'schema' => ['$ref' => '#/definitions/Campaign']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -623,7 +623,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CampaignTestSavedParameters'
+                        'schema' => ['$ref' => '#/definitions/CampaignTestSavedParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CampaignStateResult']]]
@@ -678,7 +678,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CampaignTestNewParameters'
+                        'schema' => ['$ref' => '#/definitions/CampaignTestNewParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CampaignState']]]
@@ -852,7 +852,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CampaignPushParameters'
+                        'schema' => ['$ref' => '#/definitions/CampaignPushParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CampaignPushResult']]]
@@ -1149,7 +1149,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DeviceTagsParameters'
+                        'schema' => ['$ref' => '#/definitions/DeviceTagsParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/DeviceTagsResult']]]
@@ -1192,7 +1192,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DeviceTagsParameters'
+                        'schema' => ['$ref' => '#/definitions/DeviceTagsParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/DeviceTagsResult']]]
@@ -1335,7 +1335,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/dateRangeExportTaskParameter'
+                        'schema' => ['$ref' => '#/definitions/dateRangeExportTaskParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1378,7 +1378,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/dateRangeExportTaskParameter'
+                        'schema' => ['$ref' => '#/definitions/dateRangeExportTaskParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1421,7 +1421,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/dateRangeExportTaskParameter'
+                        'schema' => ['$ref' => '#/definitions/dateRangeExportTaskParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1464,7 +1464,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/dateRangeExportTaskParameter'
+                        'schema' => ['$ref' => '#/definitions/dateRangeExportTaskParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1507,7 +1507,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/dateRangeExportTaskParameter'
+                        'schema' => ['$ref' => '#/definitions/dateRangeExportTaskParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1550,7 +1550,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/dateRangeExportTaskParameter'
+                        'schema' => ['$ref' => '#/definitions/dateRangeExportTaskParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1593,7 +1593,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/exportTaskParameter'
+                        'schema' => ['$ref' => '#/definitions/exportTaskParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1636,7 +1636,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/exportTaskParameter'
+                        'schema' => ['$ref' => '#/definitions/exportTaskParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1679,7 +1679,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/feedbackByDateRangeParameter'
+                        'schema' => ['$ref' => '#/definitions/feedbackByDateRangeParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1722,7 +1722,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/feedbackByCampaignParameter'
+                        'schema' => ['$ref' => '#/definitions/feedbackByCampaignParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1823,7 +1823,7 @@ final class EngagementManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/importTask'
+                            'schema' => ['$ref' => '#/definitions/importTask']
                         ]
                     ],
                     'responses' => [

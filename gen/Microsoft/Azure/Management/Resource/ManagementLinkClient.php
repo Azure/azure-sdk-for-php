@@ -69,7 +69,7 @@ final class ManagementLinkClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ResourceLink'
+                            'schema' => ['$ref' => '#/definitions/ResourceLink']
                         ],
                         [
                             'name' => 'api-version',

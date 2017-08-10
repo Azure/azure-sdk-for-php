@@ -428,7 +428,7 @@ final class DevTestLabsClient
                             'name' => 'lab',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Lab'
+                            'schema' => ['$ref' => '#/definitions/Lab']
                         ],
                         [
                             'name' => 'api-version',
@@ -502,7 +502,7 @@ final class DevTestLabsClient
                             'name' => 'lab',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LabFragment'
+                            'schema' => ['$ref' => '#/definitions/LabFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -574,7 +574,7 @@ final class DevTestLabsClient
                         'name' => 'labVirtualMachineCreationParameter',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/LabVirtualMachineCreationParameter'
+                        'schema' => ['$ref' => '#/definitions/LabVirtualMachineCreationParameter']
                     ],
                     [
                         'name' => 'api-version',
@@ -614,7 +614,7 @@ final class DevTestLabsClient
                         'name' => 'exportResourceUsageParameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ExportResourceUsageParameters'
+                        'schema' => ['$ref' => '#/definitions/ExportResourceUsageParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -654,7 +654,7 @@ final class DevTestLabsClient
                         'name' => 'generateUploadUriParameter',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/GenerateUploadUriParameter'
+                        'schema' => ['$ref' => '#/definitions/GenerateUploadUriParameter']
                     ],
                     [
                         'name' => 'api-version',
@@ -854,7 +854,7 @@ final class DevTestLabsClient
                             'name' => 'schedule',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Schedule'
+                            'schema' => ['$ref' => '#/definitions/Schedule']
                         ],
                         [
                             'name' => 'api-version',
@@ -928,7 +928,7 @@ final class DevTestLabsClient
                             'name' => 'schedule',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ScheduleFragment'
+                            'schema' => ['$ref' => '#/definitions/ScheduleFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -1000,7 +1000,7 @@ final class DevTestLabsClient
                         'name' => 'retargetScheduleProperties',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RetargetScheduleProperties'
+                        'schema' => ['$ref' => '#/definitions/RetargetScheduleProperties']
                     ],
                     [
                         'name' => 'api-version',
@@ -1146,7 +1146,7 @@ final class DevTestLabsClient
                             'name' => 'artifactSource',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ArtifactSource'
+                            'schema' => ['$ref' => '#/definitions/ArtifactSource']
                         ],
                         [
                             'name' => 'api-version',
@@ -1232,7 +1232,7 @@ final class DevTestLabsClient
                             'name' => 'artifactSource',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ArtifactSourceFragment'
+                            'schema' => ['$ref' => '#/definitions/ArtifactSourceFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -1504,7 +1504,7 @@ final class DevTestLabsClient
                         'name' => 'generateArmTemplateRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/GenerateArmTemplateRequest'
+                        'schema' => ['$ref' => '#/definitions/GenerateArmTemplateRequest']
                     ],
                     [
                         'name' => 'api-version',
@@ -1591,7 +1591,7 @@ final class DevTestLabsClient
                             'name' => 'labCost',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LabCost'
+                            'schema' => ['$ref' => '#/definitions/LabCost']
                         ],
                         [
                             'name' => 'api-version',
@@ -1738,7 +1738,7 @@ final class DevTestLabsClient
                             'name' => 'customImage',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CustomImage'
+                            'schema' => ['$ref' => '#/definitions/CustomImage']
                         ],
                         [
                             'name' => 'api-version',
@@ -1925,7 +1925,7 @@ final class DevTestLabsClient
                             'name' => 'formula',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Formula'
+                            'schema' => ['$ref' => '#/definitions/Formula']
                         ],
                         [
                             'name' => 'api-version',
@@ -2168,7 +2168,7 @@ final class DevTestLabsClient
                             'name' => 'notificationChannel',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/NotificationChannel'
+                            'schema' => ['$ref' => '#/definitions/NotificationChannel']
                         ],
                         [
                             'name' => 'api-version',
@@ -2254,7 +2254,7 @@ final class DevTestLabsClient
                             'name' => 'notificationChannel',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/NotificationChannelFragment'
+                            'schema' => ['$ref' => '#/definitions/NotificationChannelFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -2298,7 +2298,7 @@ final class DevTestLabsClient
                         'name' => 'notifyParameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/NotifyParameters'
+                        'schema' => ['$ref' => '#/definitions/NotifyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -2341,7 +2341,7 @@ final class DevTestLabsClient
                         'name' => 'evaluatePoliciesRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/EvaluatePoliciesRequest'
+                        'schema' => ['$ref' => '#/definitions/EvaluatePoliciesRequest']
                     ],
                     [
                         'name' => 'api-version',
@@ -2502,7 +2502,7 @@ final class DevTestLabsClient
                             'name' => 'policy',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Policy'
+                            'schema' => ['$ref' => '#/definitions/Policy']
                         ],
                         [
                             'name' => 'api-version',
@@ -2600,7 +2600,7 @@ final class DevTestLabsClient
                             'name' => 'policy',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PolicyFragment'
+                            'schema' => ['$ref' => '#/definitions/PolicyFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -2744,7 +2744,7 @@ final class DevTestLabsClient
                             'name' => 'schedule',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Schedule'
+                            'schema' => ['$ref' => '#/definitions/Schedule']
                         ],
                         [
                             'name' => 'api-version',
@@ -2830,7 +2830,7 @@ final class DevTestLabsClient
                             'name' => 'schedule',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ScheduleFragment'
+                            'schema' => ['$ref' => '#/definitions/ScheduleFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -3039,7 +3039,7 @@ final class DevTestLabsClient
                             'name' => 'serviceRunner',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ServiceRunner'
+                            'schema' => ['$ref' => '#/definitions/ServiceRunner']
                         ],
                         [
                             'name' => 'api-version',
@@ -3226,7 +3226,7 @@ final class DevTestLabsClient
                             'name' => 'user',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/User'
+                            'schema' => ['$ref' => '#/definitions/User']
                         ],
                         [
                             'name' => 'api-version',
@@ -3312,7 +3312,7 @@ final class DevTestLabsClient
                             'name' => 'user',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/UserFragment'
+                            'schema' => ['$ref' => '#/definitions/UserFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -3474,7 +3474,7 @@ final class DevTestLabsClient
                             'name' => 'disk',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Disk'
+                            'schema' => ['$ref' => '#/definitions/Disk']
                         ],
                         [
                             'name' => 'api-version',
@@ -3573,7 +3573,7 @@ final class DevTestLabsClient
                         'name' => 'attachDiskProperties',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/AttachDiskProperties'
+                        'schema' => ['$ref' => '#/definitions/AttachDiskProperties']
                     ],
                     [
                         'name' => 'api-version',
@@ -3625,7 +3625,7 @@ final class DevTestLabsClient
                         'name' => 'detachDiskProperties',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DetachDiskProperties'
+                        'schema' => ['$ref' => '#/definitions/DetachDiskProperties']
                     ],
                     [
                         'name' => 'api-version',
@@ -3789,7 +3789,7 @@ final class DevTestLabsClient
                             'name' => 'dtlEnvironment',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DtlEnvironment'
+                            'schema' => ['$ref' => '#/definitions/DtlEnvironment']
                         ],
                         [
                             'name' => 'api-version',
@@ -4000,7 +4000,7 @@ final class DevTestLabsClient
                             'name' => 'secret',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Secret'
+                            'schema' => ['$ref' => '#/definitions/Secret']
                         ],
                         [
                             'name' => 'api-version',
@@ -4193,7 +4193,7 @@ final class DevTestLabsClient
                             'name' => 'labVirtualMachine',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LabVirtualMachine'
+                            'schema' => ['$ref' => '#/definitions/LabVirtualMachine']
                         ],
                         [
                             'name' => 'api-version',
@@ -4279,7 +4279,7 @@ final class DevTestLabsClient
                             'name' => 'labVirtualMachine',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LabVirtualMachineFragment'
+                            'schema' => ['$ref' => '#/definitions/LabVirtualMachineFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -4323,7 +4323,7 @@ final class DevTestLabsClient
                         'name' => 'dataDiskProperties',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DataDiskProperties'
+                        'schema' => ['$ref' => '#/definitions/DataDiskProperties']
                     ],
                     [
                         'name' => 'api-version',
@@ -4369,7 +4369,7 @@ final class DevTestLabsClient
                         'name' => 'applyArtifactsRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ApplyArtifactsRequest'
+                        'schema' => ['$ref' => '#/definitions/ApplyArtifactsRequest']
                     ],
                     [
                         'name' => 'api-version',
@@ -4455,7 +4455,7 @@ final class DevTestLabsClient
                         'name' => 'detachDataDiskProperties',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DetachDataDiskProperties'
+                        'schema' => ['$ref' => '#/definitions/DetachDataDiskProperties']
                     ],
                     [
                         'name' => 'api-version',
@@ -4736,7 +4736,7 @@ final class DevTestLabsClient
                             'name' => 'schedule',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Schedule'
+                            'schema' => ['$ref' => '#/definitions/Schedule']
                         ],
                         [
                             'name' => 'api-version',
@@ -4834,7 +4834,7 @@ final class DevTestLabsClient
                             'name' => 'schedule',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ScheduleFragment'
+                            'schema' => ['$ref' => '#/definitions/ScheduleFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -5024,7 +5024,7 @@ final class DevTestLabsClient
                             'name' => 'virtualNetwork',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VirtualNetwork'
+                            'schema' => ['$ref' => '#/definitions/VirtualNetwork']
                         ],
                         [
                             'name' => 'api-version',
@@ -5110,7 +5110,7 @@ final class DevTestLabsClient
                             'name' => 'virtualNetwork',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VirtualNetworkFragment'
+                            'schema' => ['$ref' => '#/definitions/VirtualNetworkFragment']
                         ],
                         [
                             'name' => 'api-version',

@@ -158,7 +158,7 @@ final class ServiceBusManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameAvailability'
+                        'schema' => ['$ref' => '#/definitions/CheckNameAvailability']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CheckNameAvailabilityResult']]]
@@ -227,7 +227,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SBNamespace'
+                            'schema' => ['$ref' => '#/definitions/SBNamespace']
                         ],
                         [
                             'name' => 'api-version',
@@ -334,7 +334,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SBNamespaceUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/SBNamespaceUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -414,7 +414,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SBAuthorizationRule'
+                            'schema' => ['$ref' => '#/definitions/SBAuthorizationRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -572,7 +572,7 @@ final class ServiceBusManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateAccessKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/RegenerateAccessKeyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -647,7 +647,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SBQueue'
+                            'schema' => ['$ref' => '#/definitions/SBQueue']
                         ],
                         [
                             'name' => 'api-version',
@@ -812,7 +812,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SBAuthorizationRule'
+                            'schema' => ['$ref' => '#/definitions/SBAuthorizationRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -994,7 +994,7 @@ final class ServiceBusManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateAccessKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/RegenerateAccessKeyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -1069,7 +1069,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SBTopic'
+                            'schema' => ['$ref' => '#/definitions/SBTopic']
                         ],
                         [
                             'name' => 'api-version',
@@ -1234,7 +1234,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SBAuthorizationRule'
+                            'schema' => ['$ref' => '#/definitions/SBAuthorizationRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -1416,7 +1416,7 @@ final class ServiceBusManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateAccessKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/RegenerateAccessKeyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -1503,7 +1503,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SBSubscription'
+                            'schema' => ['$ref' => '#/definitions/SBSubscription']
                         ],
                         [
                             'name' => 'api-version',
@@ -1692,7 +1692,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Rule'
+                            'schema' => ['$ref' => '#/definitions/Rule']
                         ],
                         [
                             'name' => 'api-version',

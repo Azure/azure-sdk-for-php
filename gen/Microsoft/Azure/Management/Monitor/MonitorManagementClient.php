@@ -148,7 +148,7 @@ final class MonitorManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AutoscaleSettingResource'
+                            'schema' => ['$ref' => '#/definitions/AutoscaleSettingResource']
                         ],
                         [
                             'name' => 'api-version',
@@ -266,7 +266,7 @@ final class MonitorManagementClient
                             'name' => 'autoscaleSettingResource',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AutoscaleSettingResourcePatch'
+                            'schema' => ['$ref' => '#/definitions/AutoscaleSettingResourcePatch']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/AutoscaleSettingResource']]]
@@ -367,7 +367,7 @@ final class MonitorManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AlertRuleResource'
+                            'schema' => ['$ref' => '#/definitions/AlertRuleResource']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -478,7 +478,7 @@ final class MonitorManagementClient
                             'name' => 'alertRulesResource',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AlertRuleResourcePatch'
+                            'schema' => ['$ref' => '#/definitions/AlertRuleResourcePatch']
                         ]
                     ],
                     'responses' => [
@@ -583,7 +583,7 @@ final class MonitorManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LogProfileResource'
+                            'schema' => ['$ref' => '#/definitions/LogProfileResource']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -620,7 +620,7 @@ final class MonitorManagementClient
                             'name' => 'logProfilesResource',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LogProfileResourcePatch'
+                            'schema' => ['$ref' => '#/definitions/LogProfileResourcePatch']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/LogProfileResource']]]
@@ -685,7 +685,7 @@ final class MonitorManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ServiceDiagnosticSettingsResource'
+                            'schema' => ['$ref' => '#/definitions/ServiceDiagnosticSettingsResource']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/ServiceDiagnosticSettingsResource']]]
@@ -710,7 +710,7 @@ final class MonitorManagementClient
                             'name' => 'serviceDiagnosticSettingsResource',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ServiceDiagnosticSettingsResourcePatch'
+                            'schema' => ['$ref' => '#/definitions/ServiceDiagnosticSettingsResourcePatch']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/ServiceDiagnosticSettingsResource']]]
@@ -736,7 +736,7 @@ final class MonitorManagementClient
                             'name' => 'actionGroup',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ActionGroupResource'
+                            'schema' => ['$ref' => '#/definitions/ActionGroupResource']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -886,7 +886,7 @@ final class MonitorManagementClient
                         'name' => 'enableRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/EnableRequest'
+                        'schema' => ['$ref' => '#/definitions/EnableRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -937,7 +937,7 @@ final class MonitorManagementClient
                             'name' => 'activityLogAlert',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ActivityLogAlertResource'
+                            'schema' => ['$ref' => '#/definitions/ActivityLogAlertResource']
                         ]
                     ],
                     'responses' => [
@@ -1042,7 +1042,7 @@ final class MonitorManagementClient
                             'name' => 'activityLogAlertPatch',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ActivityLogAlertPatchBody'
+                            'schema' => ['$ref' => '#/definitions/ActivityLogAlertPatchBody']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/ActivityLogAlertResource']]]

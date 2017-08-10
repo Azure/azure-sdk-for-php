@@ -95,7 +95,7 @@ final class CosmosDB
                             'name' => 'updateParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DatabaseAccountPatchParameters'
+                            'schema' => ['$ref' => '#/definitions/DatabaseAccountPatchParameters']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/DatabaseAccount']]]
@@ -132,7 +132,7 @@ final class CosmosDB
                             'name' => 'createUpdateParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DatabaseAccountCreateUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/DatabaseAccountCreateUpdateParameters']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/DatabaseAccount']]]
@@ -204,7 +204,7 @@ final class CosmosDB
                         'name' => 'failoverParameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/FailoverPolicies'
+                        'schema' => ['$ref' => '#/definitions/FailoverPolicies']
                     ]
                 ],
                 'responses' => [
@@ -381,7 +381,7 @@ final class CosmosDB
                         'name' => 'keyToRegenerate',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DatabaseAccountRegenerateKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/DatabaseAccountRegenerateKeyParameters']
                     ]
                 ],
                 'responses' => [

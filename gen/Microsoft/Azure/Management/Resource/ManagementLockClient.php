@@ -51,7 +51,7 @@ final class ManagementLockClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ManagementLockObject'
+                            'schema' => ['$ref' => '#/definitions/ManagementLockObject']
                         ],
                         [
                             'name' => 'api-version',
@@ -158,7 +158,7 @@ final class ManagementLockClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ManagementLockObject'
+                            'schema' => ['$ref' => '#/definitions/ManagementLockObject']
                         ],
                         [
                             'name' => 'api-version',
@@ -273,7 +273,7 @@ final class ManagementLockClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ManagementLockObject'
+                            'schema' => ['$ref' => '#/definitions/ManagementLockObject']
                         ],
                         [
                             'name' => 'api-version',
@@ -426,7 +426,7 @@ final class ManagementLockClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ManagementLockObject'
+                            'schema' => ['$ref' => '#/definitions/ManagementLockObject']
                         ],
                         [
                             'name' => 'api-version',

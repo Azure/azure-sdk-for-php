@@ -191,7 +191,7 @@ final class RecoveryServicesClient
                             'name' => 'backupVaultConfig',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/BackupVaultConfig'
+                            'schema' => ['$ref' => '#/definitions/BackupVaultConfig']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/BackupVaultConfig']]]
@@ -261,7 +261,7 @@ final class RecoveryServicesClient
                             'name' => 'backupStorageConfig',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/BackupStorageConfig'
+                            'schema' => ['$ref' => '#/definitions/BackupStorageConfig']
                         ]
                     ],
                     'responses' => ['204' => []]
@@ -305,7 +305,7 @@ final class RecoveryServicesClient
                         'name' => 'certificateRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CertificateRequest'
+                        'schema' => ['$ref' => '#/definitions/CertificateRequest']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/VaultCertificateResponse']]]
@@ -486,7 +486,7 @@ final class RecoveryServicesClient
                             'name' => 'vault',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Vault'
+                            'schema' => ['$ref' => '#/definitions/Vault']
                         ]
                     ],
                     'responses' => [
@@ -557,7 +557,7 @@ final class RecoveryServicesClient
                             'name' => 'vault',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Vault'
+                            'schema' => ['$ref' => '#/definitions/Vault']
                         ]
                     ],
                     'responses' => [
@@ -655,7 +655,7 @@ final class RecoveryServicesClient
                             'name' => 'resourceResourceExtendedInfoDetails',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VaultExtendedInfoResource'
+                            'schema' => ['$ref' => '#/definitions/VaultExtendedInfoResource']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/VaultExtendedInfoResource']]]
@@ -692,7 +692,7 @@ final class RecoveryServicesClient
                             'name' => 'resourceResourceExtendedInfoDetails',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VaultExtendedInfoResource'
+                            'schema' => ['$ref' => '#/definitions/VaultExtendedInfoResource']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/VaultExtendedInfoResource']]]

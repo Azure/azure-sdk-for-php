@@ -92,7 +92,7 @@ final class VisualStudioResourceProviderClient
                         'name' => 'body',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameAvailabilityParameter'
+                        'schema' => ['$ref' => '#/definitions/CheckNameAvailabilityParameter']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CheckNameAvailabilityResult']]]
@@ -149,7 +149,7 @@ final class VisualStudioResourceProviderClient
                             'name' => 'body',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AccountResourceRequest'
+                            'schema' => ['$ref' => '#/definitions/AccountResourceRequest']
                         ],
                         [
                             'name' => 'resourceName',
@@ -287,7 +287,7 @@ final class VisualStudioResourceProviderClient
                             'name' => 'body',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ExtensionResourceRequest'
+                            'schema' => ['$ref' => '#/definitions/ExtensionResourceRequest']
                         ],
                         [
                             'name' => 'accountResourceName',
@@ -407,7 +407,7 @@ final class VisualStudioResourceProviderClient
                             'name' => 'body',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ExtensionResourceRequest'
+                            'schema' => ['$ref' => '#/definitions/ExtensionResourceRequest']
                         ],
                         [
                             'name' => 'accountResourceName',
@@ -464,7 +464,7 @@ final class VisualStudioResourceProviderClient
                             'name' => 'body',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ProjectResource'
+                            'schema' => ['$ref' => '#/definitions/ProjectResource']
                         ],
                         [
                             'name' => 'resourceGroupName',
@@ -575,7 +575,7 @@ final class VisualStudioResourceProviderClient
                             'name' => 'body',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ProjectResource'
+                            'schema' => ['$ref' => '#/definitions/ProjectResource']
                         ],
                         [
                             'name' => 'rootResourceName',

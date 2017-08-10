@@ -124,7 +124,7 @@ final class PostgreSQLManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ServerForCreate'
+                            'schema' => ['$ref' => '#/definitions/ServerForCreate']
                         ]
                     ],
                     'responses' => [
@@ -165,7 +165,7 @@ final class PostgreSQLManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ServerUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/ServerUpdateParameters']
                         ]
                     ],
                     'responses' => [
@@ -323,7 +323,7 @@ final class PostgreSQLManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/FirewallRule'
+                            'schema' => ['$ref' => '#/definitions/FirewallRule']
                         ]
                     ],
                     'responses' => [
@@ -481,7 +481,7 @@ final class PostgreSQLManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Database'
+                            'schema' => ['$ref' => '#/definitions/Database']
                         ]
                     ],
                     'responses' => [
@@ -639,7 +639,7 @@ final class PostgreSQLManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Configuration'
+                            'schema' => ['$ref' => '#/definitions/Configuration']
                         ]
                     ],
                     'responses' => [

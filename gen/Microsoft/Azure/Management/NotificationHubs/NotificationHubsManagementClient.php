@@ -74,7 +74,7 @@ final class NotificationHubsManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckAvailabilityParameters'
+                        'schema' => ['$ref' => '#/definitions/CheckAvailabilityParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -112,7 +112,7 @@ final class NotificationHubsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/NamespaceCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/NamespaceCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -152,7 +152,7 @@ final class NotificationHubsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/NamespacePatchParameters'
+                            'schema' => ['$ref' => '#/definitions/NamespacePatchParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -263,7 +263,7 @@ final class NotificationHubsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -496,7 +496,7 @@ final class NotificationHubsManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/PolicykeyResource'
+                        'schema' => ['$ref' => '#/definitions/PolicykeyResource']
                     ],
                     [
                         'name' => 'api-version',
@@ -521,7 +521,7 @@ final class NotificationHubsManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameAvailabilityRequestParameters'
+                        'schema' => ['$ref' => '#/definitions/CheckNameAvailabilityRequestParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -558,7 +558,7 @@ final class NotificationHubsManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckAvailabilityParameters'
+                        'schema' => ['$ref' => '#/definitions/CheckAvailabilityParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -602,7 +602,7 @@ final class NotificationHubsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/NotificationHubCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/NotificationHubCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -730,7 +730,7 @@ final class NotificationHubsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -980,7 +980,7 @@ final class NotificationHubsManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/PolicykeyResource'
+                        'schema' => ['$ref' => '#/definitions/PolicykeyResource']
                     ],
                     [
                         'name' => 'api-version',
@@ -1054,7 +1054,7 @@ final class NotificationHubsManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameAvailabilityRequestParameters'
+                        'schema' => ['$ref' => '#/definitions/CheckNameAvailabilityRequestParameters']
                     ],
                     [
                         'name' => 'api-version',

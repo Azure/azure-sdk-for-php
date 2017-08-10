@@ -1107,7 +1107,7 @@ final class ServiceMap
                         'name' => 'request',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/MapRequest'
+                        'schema' => ['$ref' => '#/definitions/MapRequest']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/MapResponse']]]
@@ -1221,7 +1221,7 @@ final class ServiceMap
                             'name' => 'machineGroup',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/machineGroup'
+                            'schema' => ['$ref' => '#/definitions/machineGroup']
                         ]
                     ],
                     'responses' => ['201' => ['schema' => ['$ref' => '#/definitions/machineGroup']]]
@@ -1303,7 +1303,7 @@ final class ServiceMap
                             'name' => 'machineGroup',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/machineGroup'
+                            'schema' => ['$ref' => '#/definitions/machineGroup']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/machineGroup']]]

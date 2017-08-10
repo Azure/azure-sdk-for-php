@@ -315,7 +315,7 @@ final class StorSimple8000SeriesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Manager'
+                            'schema' => ['$ref' => '#/definitions/Manager']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -397,7 +397,7 @@ final class StorSimple8000SeriesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ManagerPatch'
+                            'schema' => ['$ref' => '#/definitions/ManagerPatch']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -552,7 +552,7 @@ final class StorSimple8000SeriesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ManagerExtendedInfo'
+                            'schema' => ['$ref' => '#/definitions/ManagerExtendedInfo']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -628,7 +628,7 @@ final class StorSimple8000SeriesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ManagerExtendedInfo'
+                            'schema' => ['$ref' => '#/definitions/ManagerExtendedInfo']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -983,7 +983,7 @@ final class StorSimple8000SeriesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AccessControlRecord'
+                            'schema' => ['$ref' => '#/definitions/AccessControlRecord']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1114,7 +1114,7 @@ final class StorSimple8000SeriesManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ClearAlertRequest'
+                        'schema' => ['$ref' => '#/definitions/ClearAlertRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1162,7 +1162,7 @@ final class StorSimple8000SeriesManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/SendTestAlertEmailRequest'
+                        'schema' => ['$ref' => '#/definitions/SendTestAlertEmailRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1288,7 +1288,7 @@ final class StorSimple8000SeriesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/BandwidthSetting'
+                            'schema' => ['$ref' => '#/definitions/BandwidthSetting']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1413,7 +1413,7 @@ final class StorSimple8000SeriesManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CloudAppliance'
+                        'schema' => ['$ref' => '#/definitions/CloudAppliance']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1457,7 +1457,7 @@ final class StorSimple8000SeriesManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ConfigureDeviceRequest'
+                        'schema' => ['$ref' => '#/definitions/ConfigureDeviceRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1643,7 +1643,7 @@ final class StorSimple8000SeriesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DevicePatch'
+                            'schema' => ['$ref' => '#/definitions/DevicePatch']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2043,7 +2043,7 @@ final class StorSimple8000SeriesManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/FailoverRequest'
+                        'schema' => ['$ref' => '#/definitions/FailoverRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2094,7 +2094,7 @@ final class StorSimple8000SeriesManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ListFailoverTargetsRequest'
+                        'schema' => ['$ref' => '#/definitions/ListFailoverTargetsRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2185,7 +2185,7 @@ final class StorSimple8000SeriesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AlertSettings'
+                            'schema' => ['$ref' => '#/definitions/AlertSettings']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2280,7 +2280,7 @@ final class StorSimple8000SeriesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/NetworkSettingsPatch'
+                            'schema' => ['$ref' => '#/definitions/NetworkSettingsPatch']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2375,7 +2375,7 @@ final class StorSimple8000SeriesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SecuritySettingsPatch'
+                            'schema' => ['$ref' => '#/definitions/SecuritySettingsPatch']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2515,7 +2515,7 @@ final class StorSimple8000SeriesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/TimeSettings'
+                            'schema' => ['$ref' => '#/definitions/TimeSettings']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2666,7 +2666,7 @@ final class StorSimple8000SeriesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/BackupPolicy'
+                            'schema' => ['$ref' => '#/definitions/BackupPolicy']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2949,7 +2949,7 @@ final class StorSimple8000SeriesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/BackupSchedule'
+                            'schema' => ['$ref' => '#/definitions/BackupSchedule']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3174,7 +3174,7 @@ final class StorSimple8000SeriesManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CloneRequest'
+                        'schema' => ['$ref' => '#/definitions/CloneRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3326,7 +3326,7 @@ final class StorSimple8000SeriesManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ControllerPowerStateChangeRequest'
+                        'schema' => ['$ref' => '#/definitions/ControllerPowerStateChangeRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3666,7 +3666,7 @@ final class StorSimple8000SeriesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VolumeContainer'
+                            'schema' => ['$ref' => '#/definitions/VolumeContainer']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3994,7 +3994,7 @@ final class StorSimple8000SeriesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Volume'
+                            'schema' => ['$ref' => '#/definitions/Volume']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4343,7 +4343,7 @@ final class StorSimple8000SeriesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/StorageAccountCredential'
+                            'schema' => ['$ref' => '#/definitions/StorageAccountCredential']
                         ],
                         [
                             'name' => 'subscriptionId',

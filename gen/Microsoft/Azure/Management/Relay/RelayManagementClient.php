@@ -98,7 +98,7 @@ final class RelayManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameAvailability'
+                        'schema' => ['$ref' => '#/definitions/CheckNameAvailability']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CheckNameAvailabilityResult']]]
@@ -167,7 +167,7 @@ final class RelayManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RelayNamespace'
+                            'schema' => ['$ref' => '#/definitions/RelayNamespace']
                         ],
                         [
                             'name' => 'api-version',
@@ -273,7 +273,7 @@ final class RelayManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RelayUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/RelayUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -352,7 +352,7 @@ final class RelayManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AuthorizationRule'
+                            'schema' => ['$ref' => '#/definitions/AuthorizationRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -510,7 +510,7 @@ final class RelayManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateAccessKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/RegenerateAccessKeyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -585,7 +585,7 @@ final class RelayManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/HybridConnection'
+                            'schema' => ['$ref' => '#/definitions/HybridConnection']
                         ],
                         [
                             'name' => 'api-version',
@@ -750,7 +750,7 @@ final class RelayManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AuthorizationRule'
+                            'schema' => ['$ref' => '#/definitions/AuthorizationRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -932,7 +932,7 @@ final class RelayManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateAccessKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/RegenerateAccessKeyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -1007,7 +1007,7 @@ final class RelayManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/WcfRelay'
+                            'schema' => ['$ref' => '#/definitions/WcfRelay']
                         ],
                         [
                             'name' => 'api-version',
@@ -1175,7 +1175,7 @@ final class RelayManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AuthorizationRule'
+                            'schema' => ['$ref' => '#/definitions/AuthorizationRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -1357,7 +1357,7 @@ final class RelayManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateAccessKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/RegenerateAccessKeyParameters']
                     ],
                     [
                         'name' => 'api-version',

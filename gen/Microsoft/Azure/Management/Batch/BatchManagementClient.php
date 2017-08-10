@@ -99,7 +99,7 @@ final class BatchManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/BatchAccountCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/BatchAccountCreateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -139,7 +139,7 @@ final class BatchManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/BatchAccountUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/BatchAccountUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -318,7 +318,7 @@ final class BatchManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/BatchAccountRegenerateKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/BatchAccountRegenerateKeyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -398,7 +398,7 @@ final class BatchManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ActivateApplicationPackageParameters'
+                        'schema' => ['$ref' => '#/definitions/ActivateApplicationPackageParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -573,7 +573,7 @@ final class BatchManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => FALSE,
-                            '$ref' => '#/definitions/ApplicationCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/ApplicationCreateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -690,7 +690,7 @@ final class BatchManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ApplicationUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/ApplicationUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -798,7 +798,7 @@ final class BatchManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameAvailabilityParameters'
+                        'schema' => ['$ref' => '#/definitions/CheckNameAvailabilityParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CheckNameAvailabilityResult']]]

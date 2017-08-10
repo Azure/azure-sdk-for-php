@@ -387,7 +387,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AutomationAccountUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/AutomationAccountUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -424,7 +424,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AutomationAccountCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/AutomationAccountCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -734,7 +734,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CertificateCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/CertificateCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -780,7 +780,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CertificateUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/CertificateUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -933,7 +933,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ConnectionCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/ConnectionCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -979,7 +979,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ConnectionUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/ConnectionUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1132,7 +1132,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ConnectionTypeCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/ConnectionTypeCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1285,7 +1285,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CredentialCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/CredentialCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1331,7 +1331,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CredentialUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/CredentialUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1408,7 +1408,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DscCompilationJobCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/DscCompilationJobCreateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1649,7 +1649,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DscConfigurationCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/DscConfigurationCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1789,7 +1789,7 @@ final class AutomationClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/AgentRegistrationRegenerateKeyParameter'
+                        'schema' => ['$ref' => '#/definitions/AgentRegistrationRegenerateKeyParameter']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1907,7 +1907,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DscNodeUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/DscNodeUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2192,7 +2192,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DscNodeConfigurationCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/DscNodeConfigurationCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2351,7 +2351,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/HybridRunbookWorkerGroupUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/HybridRunbookWorkerGroupUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2616,7 +2616,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/JobCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/JobCreateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2899,7 +2899,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/JobScheduleCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/JobScheduleCreateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3129,7 +3129,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ModuleCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/ModuleCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3175,7 +3175,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ModuleUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/ModuleUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3411,7 +3411,7 @@ final class AutomationClient
                             'name' => 'runbookContent',
                             'in' => 'body',
                             'required' => TRUE,
-                            'type' => 'file'
+                            'schema' => ['type' => 'file']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3647,7 +3647,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RunbookCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/RunbookCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3694,7 +3694,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RunbookUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/RunbookUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3893,7 +3893,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/TestJobCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/TestJobCreateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4086,7 +4086,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ScheduleCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/ScheduleCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4132,7 +4132,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ScheduleUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/ScheduleUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4285,7 +4285,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VariableCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/VariableCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4331,7 +4331,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VariableUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/VariableUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4586,7 +4586,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/WebhookCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/WebhookCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4632,7 +4632,7 @@ final class AutomationClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/WebhookUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/WebhookUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',

@@ -167,7 +167,7 @@ final class AzureMLCommitmentPlansManagementClient
                         'name' => 'movePayload',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/MoveCommitmentAssociationRequest'
+                        'schema' => ['$ref' => '#/definitions/MoveCommitmentAssociationRequest']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CommitmentAssociation']]]
@@ -211,7 +211,7 @@ final class AzureMLCommitmentPlansManagementClient
                             'name' => 'createOrUpdatePayload',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CommitmentPlan'
+                            'schema' => ['$ref' => '#/definitions/CommitmentPlan']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -282,7 +282,7 @@ final class AzureMLCommitmentPlansManagementClient
                             'name' => 'patchPayload',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CommitmentPlanPatchPayload'
+                            'schema' => ['$ref' => '#/definitions/CommitmentPlanPatchPayload']
                         ],
                         [
                             'name' => 'subscriptionId',

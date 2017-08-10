@@ -82,7 +82,7 @@ final class AnalysisServicesManagementClient
                             'name' => 'serverParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AnalysisServicesServer'
+                            'schema' => ['$ref' => '#/definitions/AnalysisServicesServer']
                         ],
                         [
                             'name' => 'api-version',
@@ -157,7 +157,7 @@ final class AnalysisServicesManagementClient
                             'name' => 'serverUpdateParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AnalysisServicesServerUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/AnalysisServicesServerUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',

@@ -122,7 +122,7 @@ final class StreamAnalyticsManagementClient
                             'name' => 'streamingJob',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/StreamingJob'
+                            'schema' => ['$ref' => '#/definitions/StreamingJob']
                         ],
                         [
                             'name' => 'If-Match',
@@ -174,7 +174,7 @@ final class StreamAnalyticsManagementClient
                             'name' => 'streamingJob',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/StreamingJob'
+                            'schema' => ['$ref' => '#/definitions/StreamingJob']
                         ],
                         [
                             'name' => 'If-Match',
@@ -346,7 +346,7 @@ final class StreamAnalyticsManagementClient
                         'name' => 'startJobParameters',
                         'in' => 'body',
                         'required' => FALSE,
-                        '$ref' => '#/definitions/StartStreamingJobParameters'
+                        'schema' => ['$ref' => '#/definitions/StartStreamingJobParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -421,7 +421,7 @@ final class StreamAnalyticsManagementClient
                             'name' => 'input',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Input'
+                            'schema' => ['$ref' => '#/definitions/Input']
                         ],
                         [
                             'name' => 'If-Match',
@@ -479,7 +479,7 @@ final class StreamAnalyticsManagementClient
                             'name' => 'input',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Input'
+                            'schema' => ['$ref' => '#/definitions/Input']
                         ],
                         [
                             'name' => 'If-Match',
@@ -643,7 +643,7 @@ final class StreamAnalyticsManagementClient
                         'name' => 'input',
                         'in' => 'body',
                         'required' => FALSE,
-                        '$ref' => '#/definitions/Input'
+                        'schema' => ['$ref' => '#/definitions/Input']
                     ],
                     [
                         'name' => 'api-version',
@@ -690,7 +690,7 @@ final class StreamAnalyticsManagementClient
                             'name' => 'output',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Output'
+                            'schema' => ['$ref' => '#/definitions/Output']
                         ],
                         [
                             'name' => 'If-Match',
@@ -748,7 +748,7 @@ final class StreamAnalyticsManagementClient
                             'name' => 'output',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Output'
+                            'schema' => ['$ref' => '#/definitions/Output']
                         ],
                         [
                             'name' => 'If-Match',
@@ -912,7 +912,7 @@ final class StreamAnalyticsManagementClient
                         'name' => 'output',
                         'in' => 'body',
                         'required' => FALSE,
-                        '$ref' => '#/definitions/Output'
+                        'schema' => ['$ref' => '#/definitions/Output']
                     ],
                     [
                         'name' => 'api-version',
@@ -959,7 +959,7 @@ final class StreamAnalyticsManagementClient
                             'name' => 'transformation',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Transformation'
+                            'schema' => ['$ref' => '#/definitions/Transformation']
                         ],
                         [
                             'name' => 'If-Match',
@@ -1017,7 +1017,7 @@ final class StreamAnalyticsManagementClient
                             'name' => 'transformation',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Transformation'
+                            'schema' => ['$ref' => '#/definitions/Transformation']
                         ],
                         [
                             'name' => 'If-Match',
@@ -1105,7 +1105,7 @@ final class StreamAnalyticsManagementClient
                             'name' => 'function',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Function'
+                            'schema' => ['$ref' => '#/definitions/Function']
                         ],
                         [
                             'name' => 'If-Match',
@@ -1163,7 +1163,7 @@ final class StreamAnalyticsManagementClient
                             'name' => 'function',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Function'
+                            'schema' => ['$ref' => '#/definitions/Function']
                         ],
                         [
                             'name' => 'If-Match',
@@ -1327,7 +1327,7 @@ final class StreamAnalyticsManagementClient
                         'name' => 'function',
                         'in' => 'body',
                         'required' => FALSE,
-                        '$ref' => '#/definitions/Function'
+                        'schema' => ['$ref' => '#/definitions/Function']
                     ],
                     [
                         'name' => 'api-version',
@@ -1373,7 +1373,7 @@ final class StreamAnalyticsManagementClient
                         'name' => 'functionRetrieveDefaultDefinitionParameters',
                         'in' => 'body',
                         'required' => FALSE,
-                        '$ref' => '#/definitions/FunctionRetrieveDefaultDefinitionParameters'
+                        'schema' => ['$ref' => '#/definitions/FunctionRetrieveDefaultDefinitionParameters']
                     ],
                     [
                         'name' => 'api-version',

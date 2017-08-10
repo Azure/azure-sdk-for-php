@@ -151,7 +151,7 @@ final class SchedulerManagementClient
                             'name' => 'jobCollection',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/JobCollectionDefinition'
+                            'schema' => ['$ref' => '#/definitions/JobCollectionDefinition']
                         ]
                     ],
                     'responses' => [
@@ -191,7 +191,7 @@ final class SchedulerManagementClient
                             'name' => 'jobCollection',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/JobCollectionDefinition'
+                            'schema' => ['$ref' => '#/definitions/JobCollectionDefinition']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/JobCollectionDefinition']]]
@@ -375,7 +375,7 @@ final class SchedulerManagementClient
                             'name' => 'job',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/JobDefinition'
+                            'schema' => ['$ref' => '#/definitions/JobDefinition']
                         ]
                     ],
                     'responses' => [
@@ -421,7 +421,7 @@ final class SchedulerManagementClient
                             'name' => 'job',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/JobDefinition'
+                            'schema' => ['$ref' => '#/definitions/JobDefinition']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/JobDefinition']]]

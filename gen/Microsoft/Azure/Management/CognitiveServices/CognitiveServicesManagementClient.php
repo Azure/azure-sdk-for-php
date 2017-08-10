@@ -87,7 +87,7 @@ final class CognitiveServicesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CognitiveServicesAccountCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/CognitiveServicesAccountCreateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -127,7 +127,7 @@ final class CognitiveServicesManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CognitiveServicesAccountUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/CognitiveServicesAccountUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -261,7 +261,7 @@ final class CognitiveServicesManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/RegenerateKeyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -391,7 +391,7 @@ final class CognitiveServicesManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckSkuAvailabilityParameter'
+                        'schema' => ['$ref' => '#/definitions/CheckSkuAvailabilityParameter']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CheckSkuAvailabilityResultList']]]

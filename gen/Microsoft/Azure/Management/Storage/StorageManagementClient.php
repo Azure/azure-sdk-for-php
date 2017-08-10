@@ -73,7 +73,7 @@ final class StorageManagementClient
                         'name' => 'accountName',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/StorageAccountCheckNameAvailabilityParameters'
+                        'schema' => ['$ref' => '#/definitions/StorageAccountCheckNameAvailabilityParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -111,7 +111,7 @@ final class StorageManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/StorageAccountCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/StorageAccountCreateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -216,7 +216,7 @@ final class StorageManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/StorageAccountUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/StorageAccountUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -329,7 +329,7 @@ final class StorageManagementClient
                         'name' => 'regenerateKey',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/StorageAccountRegenerateKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/StorageAccountRegenerateKeyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -366,7 +366,7 @@ final class StorageManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/AccountSasParameters'
+                        'schema' => ['$ref' => '#/definitions/AccountSasParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -403,7 +403,7 @@ final class StorageManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ServiceSasParameters'
+                        'schema' => ['$ref' => '#/definitions/ServiceSasParameters']
                     ],
                     [
                         'name' => 'api-version',

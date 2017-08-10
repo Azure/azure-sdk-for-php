@@ -105,7 +105,7 @@ final class DataLakeAnalyticsAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ComputePolicyCreateOrUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/ComputePolicyCreateOrUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -148,7 +148,7 @@ final class DataLakeAnalyticsAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => FALSE,
-                            '$ref' => '#/definitions/ComputePolicy'
+                            'schema' => ['$ref' => '#/definitions/ComputePolicy']
                         ],
                         [
                             'name' => 'api-version',
@@ -301,7 +301,7 @@ final class DataLakeAnalyticsAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/FirewallRule'
+                            'schema' => ['$ref' => '#/definitions/FirewallRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -344,7 +344,7 @@ final class DataLakeAnalyticsAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => FALSE,
-                            '$ref' => '#/definitions/UpdateFirewallRuleParameters'
+                            'schema' => ['$ref' => '#/definitions/UpdateFirewallRuleParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -497,7 +497,7 @@ final class DataLakeAnalyticsAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AddStorageAccountParameters'
+                            'schema' => ['$ref' => '#/definitions/AddStorageAccountParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -540,7 +540,7 @@ final class DataLakeAnalyticsAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => FALSE,
-                            '$ref' => '#/definitions/UpdateStorageAccountParameters'
+                            'schema' => ['$ref' => '#/definitions/UpdateStorageAccountParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -851,7 +851,7 @@ final class DataLakeAnalyticsAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => FALSE,
-                            '$ref' => '#/definitions/AddDataLakeStoreParameters'
+                            'schema' => ['$ref' => '#/definitions/AddDataLakeStoreParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -1153,7 +1153,7 @@ final class DataLakeAnalyticsAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DataLakeAnalyticsAccount'
+                            'schema' => ['$ref' => '#/definitions/DataLakeAnalyticsAccount']
                         ],
                         [
                             'name' => 'api-version',
@@ -1193,7 +1193,7 @@ final class DataLakeAnalyticsAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => FALSE,
-                            '$ref' => '#/definitions/DataLakeAnalyticsAccountUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/DataLakeAnalyticsAccountUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',

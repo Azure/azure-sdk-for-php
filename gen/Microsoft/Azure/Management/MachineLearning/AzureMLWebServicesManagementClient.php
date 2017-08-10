@@ -51,7 +51,7 @@ final class AzureMLWebServicesManagementClient
                             'name' => 'createOrUpdatePayload',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/WebService'
+                            'schema' => ['$ref' => '#/definitions/WebService']
                         ],
                         [
                             'name' => 'api-version',
@@ -128,7 +128,7 @@ final class AzureMLWebServicesManagementClient
                             'name' => 'patchPayload',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/WebService'
+                            'schema' => ['$ref' => '#/definitions/WebService']
                         ],
                         [
                             'name' => 'api-version',

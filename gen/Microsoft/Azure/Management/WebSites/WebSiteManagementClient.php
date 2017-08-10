@@ -348,7 +348,7 @@ final class WebSiteManagementClient
                         'name' => 'appServiceCertificateOrder',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/AppServiceCertificateOrder'
+                        'schema' => ['$ref' => '#/definitions/AppServiceCertificateOrder']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -442,7 +442,7 @@ final class WebSiteManagementClient
                             'name' => 'certificateDistinguishedName',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AppServiceCertificateOrder'
+                            'schema' => ['$ref' => '#/definitions/AppServiceCertificateOrder']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -592,7 +592,7 @@ final class WebSiteManagementClient
                             'name' => 'keyVaultCertificate',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AppServiceCertificateResource'
+                            'schema' => ['$ref' => '#/definitions/AppServiceCertificateResource']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -673,7 +673,7 @@ final class WebSiteManagementClient
                         'name' => 'reissueCertificateOrderRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ReissueCertificateOrderRequest'
+                        'schema' => ['$ref' => '#/definitions/ReissueCertificateOrderRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -710,7 +710,7 @@ final class WebSiteManagementClient
                         'name' => 'renewCertificateOrderRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RenewCertificateOrderRequest'
+                        'schema' => ['$ref' => '#/definitions/RenewCertificateOrderRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -778,7 +778,7 @@ final class WebSiteManagementClient
                         'name' => 'nameIdentifier',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/NameIdentifier'
+                        'schema' => ['$ref' => '#/definitions/NameIdentifier']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -815,7 +815,7 @@ final class WebSiteManagementClient
                         'name' => 'siteSealRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/SiteSealRequest'
+                        'schema' => ['$ref' => '#/definitions/SiteSealRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -939,7 +939,7 @@ final class WebSiteManagementClient
                         'name' => 'identifier',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/NameIdentifier'
+                        'schema' => ['$ref' => '#/definitions/NameIdentifier']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1002,7 +1002,7 @@ final class WebSiteManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DomainRecommendationSearchParameters'
+                        'schema' => ['$ref' => '#/definitions/DomainRecommendationSearchParameters']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1096,7 +1096,7 @@ final class WebSiteManagementClient
                             'name' => 'domain',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Domain'
+                            'schema' => ['$ref' => '#/definitions/Domain']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1252,7 +1252,7 @@ final class WebSiteManagementClient
                             'name' => 'domainOwnershipIdentifier',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DomainOwnershipIdentifier'
+                            'schema' => ['$ref' => '#/definitions/DomainOwnershipIdentifier']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1335,7 +1335,7 @@ final class WebSiteManagementClient
                             'name' => 'domainOwnershipIdentifier',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DomainOwnershipIdentifier'
+                            'schema' => ['$ref' => '#/definitions/DomainOwnershipIdentifier']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1411,7 +1411,7 @@ final class WebSiteManagementClient
                         'name' => 'agreementOption',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/TopLevelDomainAgreementOption'
+                        'schema' => ['$ref' => '#/definitions/TopLevelDomainAgreementOption']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1524,7 +1524,7 @@ final class WebSiteManagementClient
                             'name' => 'certificateEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Certificate'
+                            'schema' => ['$ref' => '#/definitions/Certificate']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1595,7 +1595,7 @@ final class WebSiteManagementClient
                             'name' => 'certificateEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Certificate'
+                            'schema' => ['$ref' => '#/definitions/Certificate']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1668,6 +1668,17 @@ final class WebSiteManagementClient
                     'enum' => ['2016-03-01']
                 ]],
                 'responses' => ['200' => ['schema' => ['type' => 'object']]]
+            ]],
+            '/providers/Microsoft.Web/operations' => ['get' => [
+                'operationId' => 'Provider_ListOperations',
+                'parameters' => [[
+                    'name' => 'api-version',
+                    'in' => 'query',
+                    'required' => TRUE,
+                    'type' => 'string',
+                    'enum' => ['2016-03-01']
+                ]],
+                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CsmOperationCollection']]]
             ]],
             '/subscriptions/{subscriptionId}/providers/Microsoft.Web/availableStacks' => ['get' => [
                 'operationId' => 'Provider_GetAvailableStacksOnPrem',
@@ -1954,7 +1965,7 @@ final class WebSiteManagementClient
                             'name' => 'userDetails',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/User'
+                            'schema' => ['$ref' => '#/definitions/User']
                         ],
                         [
                             'name' => 'api-version',
@@ -1991,7 +2002,7 @@ final class WebSiteManagementClient
                         'name' => 'requestMessage',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/SourceControl'
+                        'schema' => ['$ref' => '#/definitions/SourceControl']
                     ],
                     [
                         'name' => 'api-version',
@@ -2010,7 +2021,7 @@ final class WebSiteManagementClient
                         'name' => 'request',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ResourceNameAvailabilityRequest'
+                        'schema' => ['$ref' => '#/definitions/ResourceNameAvailabilityRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2119,7 +2130,7 @@ final class WebSiteManagementClient
                         'name' => 'moveResourceEnvelope',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CsmMoveResourceEnvelope'
+                        'schema' => ['$ref' => '#/definitions/CsmMoveResourceEnvelope']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2150,7 +2161,7 @@ final class WebSiteManagementClient
                         'name' => 'validateRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ValidateRequest'
+                        'schema' => ['$ref' => '#/definitions/ValidateRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2181,7 +2192,7 @@ final class WebSiteManagementClient
                         'name' => 'moveResourceEnvelope',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CsmMoveResourceEnvelope'
+                        'schema' => ['$ref' => '#/definitions/CsmMoveResourceEnvelope']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2300,7 +2311,7 @@ final class WebSiteManagementClient
                             'name' => 'siteEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Site'
+                            'schema' => ['$ref' => '#/definitions/Site']
                         ],
                         [
                             'name' => 'skipDnsRegistration',
@@ -2454,7 +2465,7 @@ final class WebSiteManagementClient
                         'name' => 'slotSwapEntity',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CsmSlotEntity'
+                        'schema' => ['$ref' => '#/definitions/CsmSlotEntity']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2491,7 +2502,7 @@ final class WebSiteManagementClient
                         'name' => 'request',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/BackupRequest'
+                        'schema' => ['$ref' => '#/definitions/BackupRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2559,7 +2570,7 @@ final class WebSiteManagementClient
                         'name' => 'request',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RestoreRequest'
+                        'schema' => ['$ref' => '#/definitions/RestoreRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2681,7 +2692,7 @@ final class WebSiteManagementClient
                         'name' => 'request',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/BackupRequest'
+                        'schema' => ['$ref' => '#/definitions/BackupRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2724,7 +2735,7 @@ final class WebSiteManagementClient
                         'name' => 'request',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RestoreRequest'
+                        'schema' => ['$ref' => '#/definitions/RestoreRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2792,7 +2803,7 @@ final class WebSiteManagementClient
                         'name' => 'appSettings',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/StringDictionary'
+                        'schema' => ['$ref' => '#/definitions/StringDictionary']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2860,7 +2871,7 @@ final class WebSiteManagementClient
                         'name' => 'siteAuthSettings',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/SiteAuthSettings'
+                        'schema' => ['$ref' => '#/definitions/SiteAuthSettings']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2929,7 +2940,7 @@ final class WebSiteManagementClient
                             'name' => 'request',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/BackupRequest'
+                            'schema' => ['$ref' => '#/definitions/BackupRequest']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3029,7 +3040,7 @@ final class WebSiteManagementClient
                         'name' => 'connectionStrings',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ConnectionStringDictionary'
+                        'schema' => ['$ref' => '#/definitions/ConnectionStringDictionary']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3129,7 +3140,7 @@ final class WebSiteManagementClient
                             'name' => 'siteLogsConfig',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SiteLogsConfig'
+                            'schema' => ['$ref' => '#/definitions/SiteLogsConfig']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3167,7 +3178,7 @@ final class WebSiteManagementClient
                         'name' => 'metadata',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/StringDictionary'
+                        'schema' => ['$ref' => '#/definitions/StringDictionary']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3266,7 +3277,7 @@ final class WebSiteManagementClient
                         'name' => 'pushSettings',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/PushSettings'
+                        'schema' => ['$ref' => '#/definitions/PushSettings']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3366,7 +3377,7 @@ final class WebSiteManagementClient
                             'name' => 'slotConfigNames',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SlotConfigNamesResource'
+                            'schema' => ['$ref' => '#/definitions/SlotConfigNamesResource']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3436,7 +3447,7 @@ final class WebSiteManagementClient
                             'name' => 'siteConfig',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SiteConfigResource'
+                            'schema' => ['$ref' => '#/definitions/SiteConfigResource']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3473,7 +3484,7 @@ final class WebSiteManagementClient
                             'name' => 'siteConfig',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SiteConfigResource'
+                            'schema' => ['$ref' => '#/definitions/SiteConfigResource']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3694,7 +3705,7 @@ final class WebSiteManagementClient
                             'name' => 'deployment',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Deployment'
+                            'schema' => ['$ref' => '#/definitions/Deployment']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3847,7 +3858,7 @@ final class WebSiteManagementClient
                             'name' => 'domainOwnershipIdentifier',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Identifier'
+                            'schema' => ['$ref' => '#/definitions/Identifier']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3930,7 +3941,7 @@ final class WebSiteManagementClient
                             'name' => 'domainOwnershipIdentifier',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Identifier'
+                            'schema' => ['$ref' => '#/definitions/Identifier']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4000,7 +4011,7 @@ final class WebSiteManagementClient
                             'name' => 'MSDeploy',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MSDeploy'
+                            'schema' => ['$ref' => '#/definitions/MSDeploy']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4178,7 +4189,7 @@ final class WebSiteManagementClient
                             'name' => 'hostNameBinding',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/HostNameBinding'
+                            'schema' => ['$ref' => '#/definitions/HostNameBinding']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4312,7 +4323,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/HybridConnection'
+                            'schema' => ['$ref' => '#/definitions/HybridConnection']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4407,7 +4418,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/HybridConnection'
+                            'schema' => ['$ref' => '#/definitions/HybridConnection']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4594,7 +4605,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RelayServiceConnectionEntity'
+                            'schema' => ['$ref' => '#/definitions/RelayServiceConnectionEntity']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4677,7 +4688,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RelayServiceConnectionEntity'
+                            'schema' => ['$ref' => '#/definitions/RelayServiceConnectionEntity']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4839,7 +4850,7 @@ final class WebSiteManagementClient
                             'name' => 'deployment',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Deployment'
+                            'schema' => ['$ref' => '#/definitions/Deployment']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4967,7 +4978,7 @@ final class WebSiteManagementClient
                             'name' => 'MSDeploy',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MSDeploy'
+                            'schema' => ['$ref' => '#/definitions/MSDeploy']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5157,7 +5168,7 @@ final class WebSiteManagementClient
                         'name' => 'migrationOptions',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/StorageMigrationOptions'
+                        'schema' => ['$ref' => '#/definitions/StorageMigrationOptions']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -5194,7 +5205,7 @@ final class WebSiteManagementClient
                         'name' => 'migrationRequestEnvelope',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/MigrateMySqlRequest'
+                        'schema' => ['$ref' => '#/definitions/MigrateMySqlRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -5559,7 +5570,7 @@ final class WebSiteManagementClient
                             'name' => 'premierAddOn',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PremierAddOn'
+                            'schema' => ['$ref' => '#/definitions/PremierAddOn']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5709,7 +5720,7 @@ final class WebSiteManagementClient
                             'name' => 'publicCertificate',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PublicCertificate'
+                            'schema' => ['$ref' => '#/definitions/PublicCertificate']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5787,7 +5798,7 @@ final class WebSiteManagementClient
                         'name' => 'publishingProfileOptions',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CsmPublishingProfileOptions'
+                        'schema' => ['$ref' => '#/definitions/CsmPublishingProfileOptions']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -5824,7 +5835,7 @@ final class WebSiteManagementClient
                         'name' => 'recoveryEntity',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/SnapshotRecoveryRequest'
+                        'schema' => ['$ref' => '#/definitions/SnapshotRecoveryRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -6004,7 +6015,7 @@ final class WebSiteManagementClient
                             'name' => 'siteEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Site'
+                            'schema' => ['$ref' => '#/definitions/Site']
                         ],
                         [
                             'name' => 'slot',
@@ -6176,7 +6187,7 @@ final class WebSiteManagementClient
                         'name' => 'slotSwapEntity',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CsmSlotEntity'
+                        'schema' => ['$ref' => '#/definitions/CsmSlotEntity']
                     ],
                     [
                         'name' => 'slot',
@@ -6219,7 +6230,7 @@ final class WebSiteManagementClient
                         'name' => 'request',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/BackupRequest'
+                        'schema' => ['$ref' => '#/definitions/BackupRequest']
                     ],
                     [
                         'name' => 'slot',
@@ -6299,7 +6310,7 @@ final class WebSiteManagementClient
                         'name' => 'request',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RestoreRequest'
+                        'schema' => ['$ref' => '#/definitions/RestoreRequest']
                     ],
                     [
                         'name' => 'slot',
@@ -6439,7 +6450,7 @@ final class WebSiteManagementClient
                         'name' => 'request',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/BackupRequest'
+                        'schema' => ['$ref' => '#/definitions/BackupRequest']
                     ],
                     [
                         'name' => 'slot',
@@ -6488,7 +6499,7 @@ final class WebSiteManagementClient
                         'name' => 'request',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RestoreRequest'
+                        'schema' => ['$ref' => '#/definitions/RestoreRequest']
                     ],
                     [
                         'name' => 'slot',
@@ -6568,7 +6579,7 @@ final class WebSiteManagementClient
                         'name' => 'appSettings',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/StringDictionary'
+                        'schema' => ['$ref' => '#/definitions/StringDictionary']
                     ],
                     [
                         'name' => 'slot',
@@ -6648,7 +6659,7 @@ final class WebSiteManagementClient
                         'name' => 'siteAuthSettings',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/SiteAuthSettings'
+                        'schema' => ['$ref' => '#/definitions/SiteAuthSettings']
                     ],
                     [
                         'name' => 'slot',
@@ -6729,7 +6740,7 @@ final class WebSiteManagementClient
                             'name' => 'request',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/BackupRequest'
+                            'schema' => ['$ref' => '#/definitions/BackupRequest']
                         ],
                         [
                             'name' => 'slot',
@@ -6847,7 +6858,7 @@ final class WebSiteManagementClient
                         'name' => 'connectionStrings',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ConnectionStringDictionary'
+                        'schema' => ['$ref' => '#/definitions/ConnectionStringDictionary']
                     ],
                     [
                         'name' => 'slot',
@@ -6965,7 +6976,7 @@ final class WebSiteManagementClient
                             'name' => 'siteLogsConfig',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SiteLogsConfig'
+                            'schema' => ['$ref' => '#/definitions/SiteLogsConfig']
                         ],
                         [
                             'name' => 'slot',
@@ -7009,7 +7020,7 @@ final class WebSiteManagementClient
                         'name' => 'metadata',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/StringDictionary'
+                        'schema' => ['$ref' => '#/definitions/StringDictionary']
                     ],
                     [
                         'name' => 'slot',
@@ -7126,7 +7137,7 @@ final class WebSiteManagementClient
                         'name' => 'pushSettings',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/PushSettings'
+                        'schema' => ['$ref' => '#/definitions/PushSettings']
                     ],
                     [
                         'name' => 'slot',
@@ -7244,7 +7255,7 @@ final class WebSiteManagementClient
                             'name' => 'siteConfig',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SiteConfigResource'
+                            'schema' => ['$ref' => '#/definitions/SiteConfigResource']
                         ],
                         [
                             'name' => 'slot',
@@ -7287,7 +7298,7 @@ final class WebSiteManagementClient
                             'name' => 'siteConfig',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SiteConfigResource'
+                            'schema' => ['$ref' => '#/definitions/SiteConfigResource']
                         ],
                         [
                             'name' => 'slot',
@@ -7550,7 +7561,7 @@ final class WebSiteManagementClient
                             'name' => 'deployment',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Deployment'
+                            'schema' => ['$ref' => '#/definitions/Deployment']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -7721,7 +7732,7 @@ final class WebSiteManagementClient
                             'name' => 'domainOwnershipIdentifier',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Identifier'
+                            'schema' => ['$ref' => '#/definitions/Identifier']
                         ],
                         [
                             'name' => 'slot',
@@ -7816,7 +7827,7 @@ final class WebSiteManagementClient
                             'name' => 'domainOwnershipIdentifier',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Identifier'
+                            'schema' => ['$ref' => '#/definitions/Identifier']
                         ],
                         [
                             'name' => 'slot',
@@ -7904,7 +7915,7 @@ final class WebSiteManagementClient
                             'name' => 'MSDeploy',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MSDeploy'
+                            'schema' => ['$ref' => '#/definitions/MSDeploy']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -8106,7 +8117,7 @@ final class WebSiteManagementClient
                             'name' => 'hostNameBinding',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/HostNameBinding'
+                            'schema' => ['$ref' => '#/definitions/HostNameBinding']
                         ],
                         [
                             'name' => 'slot',
@@ -8258,7 +8269,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/HybridConnection'
+                            'schema' => ['$ref' => '#/definitions/HybridConnection']
                         ],
                         [
                             'name' => 'slot',
@@ -8365,7 +8376,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/HybridConnection'
+                            'schema' => ['$ref' => '#/definitions/HybridConnection']
                         ],
                         [
                             'name' => 'slot',
@@ -8582,7 +8593,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RelayServiceConnectionEntity'
+                            'schema' => ['$ref' => '#/definitions/RelayServiceConnectionEntity']
                         ],
                         [
                             'name' => 'slot',
@@ -8677,7 +8688,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RelayServiceConnectionEntity'
+                            'schema' => ['$ref' => '#/definitions/RelayServiceConnectionEntity']
                         ],
                         [
                             'name' => 'slot',
@@ -8869,7 +8880,7 @@ final class WebSiteManagementClient
                             'name' => 'deployment',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Deployment'
+                            'schema' => ['$ref' => '#/definitions/Deployment']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -9015,7 +9026,7 @@ final class WebSiteManagementClient
                             'name' => 'MSDeploy',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MSDeploy'
+                            'schema' => ['$ref' => '#/definitions/MSDeploy']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -9605,7 +9616,7 @@ final class WebSiteManagementClient
                             'name' => 'premierAddOn',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PremierAddOn'
+                            'schema' => ['$ref' => '#/definitions/PremierAddOn']
                         ],
                         [
                             'name' => 'slot',
@@ -9779,7 +9790,7 @@ final class WebSiteManagementClient
                             'name' => 'publicCertificate',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PublicCertificate'
+                            'schema' => ['$ref' => '#/definitions/PublicCertificate']
                         ],
                         [
                             'name' => 'slot',
@@ -9869,7 +9880,7 @@ final class WebSiteManagementClient
                         'name' => 'publishingProfileOptions',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CsmPublishingProfileOptions'
+                        'schema' => ['$ref' => '#/definitions/CsmPublishingProfileOptions']
                     ],
                     [
                         'name' => 'slot',
@@ -9912,7 +9923,7 @@ final class WebSiteManagementClient
                         'name' => 'recoveryEntity',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/SnapshotRecoveryRequest'
+                        'schema' => ['$ref' => '#/definitions/SnapshotRecoveryRequest']
                     ],
                     [
                         'name' => 'slot',
@@ -10041,7 +10052,7 @@ final class WebSiteManagementClient
                         'name' => 'slotSwapEntity',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CsmSlotEntity'
+                        'schema' => ['$ref' => '#/definitions/CsmSlotEntity']
                     ],
                     [
                         'name' => 'slot',
@@ -10084,7 +10095,7 @@ final class WebSiteManagementClient
                         'name' => 'slotSwapEntity',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CsmSlotEntity'
+                        'schema' => ['$ref' => '#/definitions/CsmSlotEntity']
                     ],
                     [
                         'name' => 'slot',
@@ -10205,7 +10216,7 @@ final class WebSiteManagementClient
                             'name' => 'siteSourceControl',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SiteSourceControl'
+                            'schema' => ['$ref' => '#/definitions/SiteSourceControl']
                         ],
                         [
                             'name' => 'slot',
@@ -10575,7 +10586,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VnetInfo'
+                            'schema' => ['$ref' => '#/definitions/VnetInfo']
                         ],
                         [
                             'name' => 'slot',
@@ -10670,7 +10681,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VnetInfo'
+                            'schema' => ['$ref' => '#/definitions/VnetInfo']
                         ],
                         [
                             'name' => 'slot',
@@ -10779,7 +10790,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VnetGateway'
+                            'schema' => ['$ref' => '#/definitions/VnetGateway']
                         ],
                         [
                             'name' => 'slot',
@@ -10834,7 +10845,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VnetGateway'
+                            'schema' => ['$ref' => '#/definitions/VnetGateway']
                         ],
                         [
                             'name' => 'slot',
@@ -10878,7 +10889,7 @@ final class WebSiteManagementClient
                         'name' => 'slotSwapEntity',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CsmSlotEntity'
+                        'schema' => ['$ref' => '#/definitions/CsmSlotEntity']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -10915,7 +10926,7 @@ final class WebSiteManagementClient
                         'name' => 'slotSwapEntity',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CsmSlotEntity'
+                        'schema' => ['$ref' => '#/definitions/CsmSlotEntity']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -11018,7 +11029,7 @@ final class WebSiteManagementClient
                             'name' => 'siteSourceControl',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SiteSourceControl'
+                            'schema' => ['$ref' => '#/definitions/SiteSourceControl']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -11334,7 +11345,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VnetInfo'
+                            'schema' => ['$ref' => '#/definitions/VnetInfo']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -11417,7 +11428,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VnetInfo'
+                            'schema' => ['$ref' => '#/definitions/VnetInfo']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -11514,7 +11525,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VnetGateway'
+                            'schema' => ['$ref' => '#/definitions/VnetGateway']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -11563,7 +11574,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VnetGateway'
+                            'schema' => ['$ref' => '#/definitions/VnetGateway']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -11677,7 +11688,7 @@ final class WebSiteManagementClient
                             'name' => 'hostingEnvironmentEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AppServiceEnvironmentResource'
+                            'schema' => ['$ref' => '#/definitions/AppServiceEnvironmentResource']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -12035,7 +12046,7 @@ final class WebSiteManagementClient
                             'name' => 'multiRolePoolEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/WorkerPoolResource'
+                            'schema' => ['$ref' => '#/definitions/WorkerPoolResource']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -12633,7 +12644,7 @@ final class WebSiteManagementClient
                             'name' => 'workerPoolEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/WorkerPoolResource'
+                            'schema' => ['$ref' => '#/definitions/WorkerPoolResource']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -13019,7 +13030,7 @@ final class WebSiteManagementClient
                             'name' => 'appServicePlan',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AppServicePlan'
+                            'schema' => ['$ref' => '#/definitions/AppServicePlan']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -13656,7 +13667,7 @@ final class WebSiteManagementClient
                             'name' => 'connectionEnvelope',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VnetGateway'
+                            'schema' => ['$ref' => '#/definitions/VnetGateway']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -13796,7 +13807,7 @@ final class WebSiteManagementClient
                             'name' => 'route',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VnetRoute'
+                            'schema' => ['$ref' => '#/definitions/VnetRoute']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -13895,7 +13906,7 @@ final class WebSiteManagementClient
                             'name' => 'route',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VnetRoute'
+                            'schema' => ['$ref' => '#/definitions/VnetRoute']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -14160,6 +14171,15 @@ final class WebSiteManagementClient
             ],
             'NameIdentifier' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'required' => []
+            ],
+            'ProxyOnlyResource' => [
+                'properties' => [
+                    'id' => ['type' => 'string'],
+                    'name' => ['type' => 'string'],
+                    'kind' => ['type' => 'string'],
+                    'type' => ['type' => 'string']
+                ],
                 'required' => []
             ],
             'ReissueCertificateOrderRequest_properties' => [
@@ -14858,12 +14878,22 @@ final class WebSiteManagementClient
                 ],
                 'required' => []
             ],
-            'PushSettings' => [
+            'PushSettings_properties' => [
                 'properties' => [
                     'isPushEnabled' => ['type' => 'boolean'],
                     'tagWhitelistJson' => ['type' => 'string'],
                     'tagsRequiringAuth' => ['type' => 'string'],
                     'dynamicTagsJson' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'PushSettings' => [
+                'properties' => [
+                    'isPushEnabled' => ['type' => 'boolean'],
+                    'tagWhitelistJson' => ['type' => 'string'],
+                    'tagsRequiringAuth' => ['type' => 'string'],
+                    'dynamicTagsJson' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/PushSettings_properties']
                 ],
                 'required' => ['isPushEnabled']
             ],
@@ -15082,6 +15112,87 @@ final class WebSiteManagementClient
                     'value' => [
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/DeletedSite']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
+                'required' => ['value']
+            ],
+            'CsmOperationDisplay' => [
+                'properties' => [
+                    'provider' => ['type' => 'string'],
+                    'resource' => ['type' => 'string'],
+                    'operation' => ['type' => 'string'],
+                    'description' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'Dimension' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'internalName' => ['type' => 'string'],
+                    'toBeExportedForShoebox' => ['type' => 'boolean']
+                ],
+                'required' => []
+            ],
+            'MetricAvailability' => [
+                'properties' => [
+                    'timeGrain' => ['type' => 'string'],
+                    'blobDuration' => ['type' => 'string']
+                ],
+                'required' => []
+            ],
+            'MetricSpecification' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'displayName' => ['type' => 'string'],
+                    'displayDescription' => ['type' => 'string'],
+                    'unit' => ['type' => 'string'],
+                    'aggregationType' => ['type' => 'string'],
+                    'supportsInstanceLevelAggregation' => ['type' => 'boolean'],
+                    'enableRegionalMdmAccount' => ['type' => 'boolean'],
+                    'sourceMdmAccount' => ['type' => 'string'],
+                    'sourceMdmNamespace' => ['type' => 'string'],
+                    'metricFilterPattern' => ['type' => 'string'],
+                    'fillGapWithZero' => ['type' => 'boolean'],
+                    'isInternal' => ['type' => 'boolean'],
+                    'dimensions' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/Dimension']
+                    ],
+                    'category' => ['type' => 'string'],
+                    'availabilities' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/MetricAvailability']
+                    ]
+                ],
+                'required' => []
+            ],
+            'ServiceSpecification' => [
+                'properties' => ['metricSpecifications' => [
+                    'type' => 'array',
+                    'items' => ['$ref' => '#/definitions/MetricSpecification']
+                ]],
+                'required' => []
+            ],
+            'CsmOperationDescriptionProperties' => [
+                'properties' => ['serviceSpecification' => ['$ref' => '#/definitions/ServiceSpecification']],
+                'required' => []
+            ],
+            'CsmOperationDescription' => [
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'display' => ['$ref' => '#/definitions/CsmOperationDisplay'],
+                    'origin' => ['type' => 'string'],
+                    'properties' => ['$ref' => '#/definitions/CsmOperationDescriptionProperties']
+                ],
+                'required' => []
+            ],
+            'CsmOperationCollection' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/CsmOperationDescription']
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
@@ -15976,13 +16087,6 @@ final class WebSiteManagementClient
                 ],
                 'required' => ['value']
             ],
-            'MSDeployParameterEntry' => [
-                'properties' => [
-                    'name' => ['type' => 'string'],
-                    'value' => ['type' => 'string']
-                ],
-                'required' => []
-            ],
             'MSDeployCore' => [
                 'properties' => [
                     'packageUri' => ['type' => 'string'],
@@ -15990,8 +16094,8 @@ final class WebSiteManagementClient
                     'dbType' => ['type' => 'string'],
                     'setParametersXmlFileUri' => ['type' => 'string'],
                     'setParameters' => [
-                        'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/MSDeployParameterEntry']
+                        'type' => 'object',
+                        'additionalProperties' => ['type' => 'string']
                     ],
                     'skipAppData' => ['type' => 'boolean'],
                     'appOffline' => ['type' => 'boolean']
@@ -15999,22 +16103,7 @@ final class WebSiteManagementClient
                 'required' => []
             ],
             'MSDeploy' => [
-                'properties' => [
-                    'addOnPackages' => [
-                        'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/MSDeployCore']
-                    ],
-                    'packageUri' => ['type' => 'string'],
-                    'connectionString' => ['type' => 'string'],
-                    'dbType' => ['type' => 'string'],
-                    'setParametersXmlFileUri' => ['type' => 'string'],
-                    'setParameters' => [
-                        'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/MSDeployParameterEntry']
-                    ],
-                    'skipAppData' => ['type' => 'boolean'],
-                    'appOffline' => ['type' => 'boolean']
-                ],
+                'properties' => ['properties' => ['$ref' => '#/definitions/MSDeployCore']],
                 'required' => []
             ],
             'MSDeployLogEntry' => [
@@ -16035,11 +16124,15 @@ final class WebSiteManagementClient
                 ],
                 'required' => []
             ],
-            'MSDeployLog' => [
+            'MSDeployLog_properties' => [
                 'properties' => ['entries' => [
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/MSDeployLogEntry']
                 ]],
+                'required' => []
+            ],
+            'MSDeployLog' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/MSDeployLog_properties']],
                 'required' => []
             ],
             'MSDeployStatus_properties' => [
@@ -16129,7 +16222,7 @@ final class WebSiteManagementClient
                 'properties' => ['properties' => ['$ref' => '#/definitions/VnetRoute_properties']],
                 'required' => []
             ],
-            'VnetInfo' => [
+            'VnetInfo_properties' => [
                 'properties' => [
                     'vnetResourceId' => ['type' => 'string'],
                     'certThumbprint' => ['type' => 'string'],
@@ -16141,6 +16234,10 @@ final class WebSiteManagementClient
                     'resyncRequired' => ['type' => 'boolean'],
                     'dnsServers' => ['type' => 'string']
                 ],
+                'required' => []
+            ],
+            'VnetInfo' => [
+                'properties' => ['properties' => ['$ref' => '#/definitions/VnetInfo_properties']],
                 'required' => []
             ],
             'RelayServiceConnectionEntity_properties' => [
