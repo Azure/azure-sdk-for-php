@@ -2,6 +2,7 @@
 namespace Microsoft\Rest\Internal\Swagger;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
+use Microsoft\Rest\Internal\Swagger2\DefinitionsObject;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 use Microsoft\Rest\Internal\UnknownTypeException;
 
@@ -51,10 +52,10 @@ final class Definitions
     }
 
     /**
-     * @param DataAbstract $definitionsObjectData
+     * @param DefinitionsObject $definitionsObjectData
      * @return Definitions
      */
-    static function createFromData(DataAbstract $definitionsObjectData)
+    static function createFromData(DefinitionsObject $definitionsObjectData)
     {
         /** @var Schema[] */
         $schemaObjectMap = [];

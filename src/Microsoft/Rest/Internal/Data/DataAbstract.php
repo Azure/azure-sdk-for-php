@@ -43,13 +43,14 @@ class DataAbstract
     }
 
     /**
-     * @param $key
-     * @return DataAbstract
+     * @param string $key
+     * @param string $className
+     * @return mixed
      */
-    function getChild($key)
+    function getChild($key, $className = DataAbstract::class)
     {
         $this->requireKey($key);
-        return new DataAbstract($this, $key);
+        return new $className($this, $key);
     }
 
     /**
