@@ -124,7 +124,7 @@ abstract class DataAbstract
     /**
      * @param mixed $value
      */
-    protected function __construct($value)
+    function __construct($value)
     {
         $this->value = $value;
     }

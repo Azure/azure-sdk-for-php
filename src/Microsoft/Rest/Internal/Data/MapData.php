@@ -14,22 +14,13 @@ final class MapData extends DataAbstract
     }
 
     /**
-     * @param string $path
-     * @param string|int $key
-     * @return string
-     */
-    static function appendPathKey($path, $key)
-    {
-        $keyStr = is_string($key) ? "'" . $key . "'" : strval($key);
-        return $path . '[' . $keyStr . ']';
-    }
-
-    /**
      * @return string
      */
     function getPath()
     {
-        return self::appendPathKey($this->parent->getPath(), $this->key);
+        return $this->parent === null
+            ? '#'
+            : $this->parent->getPath() . '/' . urlencode(strval($this->getKey()));
     }
 
     /**
@@ -45,7 +36,7 @@ final class MapData extends DataAbstract
      * @param DataAbstract $parent
      * @param string|int $key
      */
-    protected function __construct($value, DataAbstract $parent, $key)
+    function __construct($value, DataAbstract $parent = null, $key = null)
     {
         parent::__construct($value);
         $this->parent = $parent;

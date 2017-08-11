@@ -120,8 +120,7 @@ class ClientInterfaceTest extends TestCase
         } catch (ExpectedPropertyException $e) {
             $this->assertEquals(
                 'expected property: operationId'
-                    . "\nObject: []"
-                    . "\nPath: ['paths']['somepath']['get']",
+                    . "\nURI: #/paths/somepath/get",
                 $e->getMessage());
             return;
         }

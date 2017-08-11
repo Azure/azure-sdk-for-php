@@ -68,8 +68,7 @@ class ClientStaticTest extends TestCase
                 ->createClientFromData($swaggerObjectData, []);
         } catch (InvalidSchemaObjectException $e) {
             $expected = "invalid schema object\n"
-                . "Object: []\n"
-                . "Path: ['definitions']['Sku']";
+                . "URI: #/definitions/Sku";
             $this->assertEquals($expected, $e->getMessage());
             return;
         }
@@ -91,8 +90,7 @@ class ClientStaticTest extends TestCase
                 ->createClientFromData($definitionsData, []);
         } catch (InvalidSchemaObjectException $e) {
             $expected = "invalid schema object\n"
-                . "Object: ['type'=>'unknown-type']\n"
-                . "Path: ['definitions']['Sku']";
+                . "URI: #/definitions/Sku";
             $this->assertEquals($expected, $e->getMessage());
             return;
         }
@@ -274,8 +272,7 @@ class ClientStaticTest extends TestCase
                 ->createClientFromData($swaggerObjectData, []);
         } catch (UnknownTypeException $e) {
             $expected = "unknown type: unknown-type\n"
-                . "Object: ['\$ref'=>'unknown-type']\n"
-                . "Path: ['definitions']['Sku']";
+                . "URI: #/definitions/Sku";
             $this->assertEquals($expected, $e->getMessage());
             return;
         }

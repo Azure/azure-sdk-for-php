@@ -12,9 +12,7 @@ class DataException extends \Exception
     function __construct(DataAbstract $data, $message = '')
     {
         parent::__construct($message
-            . "\nObject: "
-            . $data->getPhpCode()
-            . "\nPath: "
+            . "\nURI: "
             . $data->getPath());
     }
 }

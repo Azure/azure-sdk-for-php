@@ -1,10 +1,10 @@
 <?php
 namespace Microsoft\Rest\Internal;
 
+use Microsoft\Rest\Internal\Data\MapData;
 use Microsoft\Rest\Internal\Https\HttpsInterface;
 use Microsoft\Rest\RunTimeInterface;
 use Microsoft\Rest\ClientInterface;
-use Microsoft\Rest\Internal\Data\RootData;
 
 final class RunTime implements RunTimeInterface
 {
@@ -26,7 +26,7 @@ final class RunTime implements RunTimeInterface
     {
         return Client::createFromData(
             $this->https,
-            RootData::create($schemaObjectData, ''),
+            new MapData($schemaObjectData),
             $shareParameterMap);
     }
 
