@@ -1,7 +1,5 @@
 <?php
-namespace Microsoft\Rest\Internal;
-
-use Microsoft\Rest\Internal\Data\DataAbstract;
+namespace Microsoft\Rest\Internal\Data;
 
 class DataException extends \Exception
 {

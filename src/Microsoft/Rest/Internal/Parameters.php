@@ -5,7 +5,7 @@ use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Path\PathBuilder;
 use Microsoft\Rest\Internal\Path\PathPartAbstract;
 use Microsoft\Rest\Internal\Path\PathStrPart;
-use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
+use Microsoft\Rest\Internal\Swagger\Definitions;
 
 final class Parameters
 {
@@ -74,7 +74,7 @@ final class Parameters
     }
 
     /**
-     * @param DefinitionsObject $typeMap
+     * @param Definitions $typeMap
      * @param array $sharedParameterMap
      * @param DataAbstract $parameters
      * @param PathStrPart[] $pathStrParts
@@ -82,7 +82,7 @@ final class Parameters
      * @throws \Exception
      */
     static function create(
-        DefinitionsObject $typeMap,
+        Definitions $typeMap,
         array $sharedParameterMap,
         DataAbstract $parameters,
         array $pathStrParts)

@@ -8,12 +8,12 @@ use Microsoft\Rest\Internal\UnknownTypeException;
 /**
  * https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#definitions-object
  */
-final class DefinitionsObject
+final class Definitions
 {
     /**
      * @param DataAbstract $source
      * @param string $ref
-     * @return SchemaObject
+     * @return Schema
      * @throws UnknownTypeException
      */
     function getSchemaObject(DataAbstract $source, $ref)
@@ -52,15 +52,15 @@ final class DefinitionsObject
 
     /**
      * @param DataAbstract $definitionsObjectData
-     * @return DefinitionsObject
+     * @return Definitions
      */
     static function createFromData(DataAbstract $definitionsObjectData)
     {
-        /** @var SchemaObject[] */
+        /** @var Schema[] */
         $schemaObjectMap = [];
         foreach ($definitionsObjectData->getChildren() as $child) {
             $schemaObjectMap['#/definitions/' . $child->getKey()] =
-                SchemaObject::createFromData($child);
+                Schema::createFromData($child);
         }
         $result = new self($schemaObjectMap);
         // remove refs
@@ -71,7 +71,7 @@ final class DefinitionsObject
     }
 
     /**
-     * @param SchemaObject[] $schemaObjectMap
+     * @param Schema[] $schemaObjectMap
      */
     private function __construct(array $schemaObjectMap)
     {
@@ -79,7 +79,7 @@ final class DefinitionsObject
     }
 
     /**
-     * @var SchemaObject[]
+     * @var Schema[]
      */
     private $schemaObjectMap;
 }

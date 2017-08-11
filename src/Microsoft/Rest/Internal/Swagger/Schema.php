@@ -4,9 +4,9 @@ namespace Microsoft\Rest\Internal\Swagger;
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 
-final class SchemaObject
+final class Schema
 {
-    function removeRefs(DefinitionsObject $definitionsObject)
+    function removeRefs(Definitions $definitionsObject)
     {
         $this->dataType = $this->dataType->removeRefTypes($definitionsObject);
     }
@@ -21,7 +21,7 @@ final class SchemaObject
 
     static function createFromData(DataAbstract $schemaObjectData)
     {
-        return new SchemaObject(TypeAbstract::createFromDataWithRefs($schemaObjectData));
+        return new Schema(TypeAbstract::createFromDataWithRefs($schemaObjectData));
     }
 
     /**

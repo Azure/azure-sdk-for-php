@@ -3,7 +3,7 @@ namespace Microsoft\Rest\Internal\Types\Primitives;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\InvalidSchemaObjectException;
-use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
+use Microsoft\Rest\Internal\Swagger\Definitions;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 
 abstract class PrimitiveTypeAbstract extends TypeAbstract
@@ -18,10 +18,10 @@ abstract class PrimitiveTypeAbstract extends TypeAbstract
     }
 
     /**
-     * @param DefinitionsObject $definitionsObject
+     * @param Definitions $definitionsObject
      * @return TypeAbstract
      */
-    function removeRefTypes(DefinitionsObject $definitionsObject)
+    function removeRefTypes(Definitions $definitionsObject)
     {
         return $this;
     }

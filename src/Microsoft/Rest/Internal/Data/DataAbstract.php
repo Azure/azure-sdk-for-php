@@ -72,7 +72,7 @@ class DataAbstract
     }
 
     /**
-     * @return MapData[]
+     * @return DataAbstract[]
      */
     function getChildren()
     {

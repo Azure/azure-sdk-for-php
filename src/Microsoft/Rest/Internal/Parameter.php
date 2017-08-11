@@ -2,7 +2,7 @@
 namespace Microsoft\Rest\Internal;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
-use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
+use Microsoft\Rest\Internal\Swagger\Definitions;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 
 /**
@@ -43,12 +43,12 @@ final class Parameter
     }
 
     /**
-     * @param DefinitionsObject $typeMap
+     * @param Definitions $typeMap
      * @param array $sharedParameterMap
      * @param DataAbstract $parameterData
      * @return Parameter
      */
-    static function createFromData(DefinitionsObject $typeMap, array $sharedParameterMap, DataAbstract $parameterData)
+    static function createFromData(Definitions $typeMap, array $sharedParameterMap, DataAbstract $parameterData)
     {
         $name = $parameterData->getChildValue('name');
 

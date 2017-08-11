@@ -2,7 +2,7 @@
 namespace Microsoft\Rest\Internal\Types;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
-use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
+use Microsoft\Rest\Internal\Swagger\Definitions;
 
 final class ClassType extends TypeAbstract
 {
@@ -115,10 +115,10 @@ final class ClassType extends TypeAbstract
     }
 
     /**
-     * @param DefinitionsObject $definitionsObject
+     * @param Definitions $definitionsObject
      * @return $this
      */
-    function removeRefTypes(DefinitionsObject $definitionsObject)
+    function removeRefTypes(Definitions $definitionsObject)
     {
         $this->requiredPropertyMap = $definitionsObject->removeRefTypesFromMap($this->requiredPropertyMap);
         $this->optionalPropertyMap = $definitionsObject->removeRefTypesFromMap($this->optionalPropertyMap);

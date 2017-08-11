@@ -1,17 +1,17 @@
 <?php
 namespace Microsoft\Rest\Internal\Types;
 
-use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
+use Microsoft\Rest\Internal\Swagger\Definitions;
 
 abstract class CollectionType extends TypeAbstract
 {
     use NotConstTypeTrait;
 
     /**
-     * @param DefinitionsObject $definitionsObject
+     * @param Definitions $definitionsObject
      * @return TypeAbstract
      */
-    function removeRefTypes(DefinitionsObject $definitionsObject)
+    function removeRefTypes(Definitions $definitionsObject)
     {
         $this->items = $this->items->removeRefTypes($definitionsObject);
         return $this;

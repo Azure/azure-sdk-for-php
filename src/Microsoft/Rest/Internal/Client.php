@@ -5,7 +5,7 @@ use Microsoft\Rest\ClientInterface;
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Https\HttpsInterface;
 use Microsoft\Rest\Internal\Path\PathStrPart;
-use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
+use Microsoft\Rest\Internal\Swagger\Definitions;
 use Microsoft\Rest\OperationInterface;
 
 final class Client implements ClientInterface
@@ -30,7 +30,7 @@ final class Client implements ClientInterface
         DataAbstract $swaggerObjectData,
         array $sharedParameterMap)
     {
-        $definitionsObject = DefinitionsObject::createFromData(
+        $definitionsObject = Definitions::createFromData(
             $swaggerObjectData->getChild('definitions'));
 
         $shared = new OperationShared(

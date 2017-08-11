@@ -3,7 +3,7 @@ namespace Microsoft\Rest\Internal;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Path\PathStrPart;
-use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
+use Microsoft\Rest\Internal\Swagger\Definitions;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 use Microsoft\Rest\OperationInterface;
 
@@ -39,7 +39,7 @@ final class Operation implements OperationInterface
 
     /**
      * @param OperationShared $shared
-     * @param DefinitionsObject $typeMap
+     * @param Definitions $typeMap
      * @param array $sharedParameterMap
      * @param DataAbstract $operationData
      * @param PathStrPart[] $pathStrParts
@@ -49,7 +49,7 @@ final class Operation implements OperationInterface
      */
     static function createFromOperationData(
         OperationShared $shared,
-        DefinitionsObject $typeMap,
+        Definitions $typeMap,
         array $sharedParameterMap,
         DataAbstract $operationData,
         array $pathStrParts,

@@ -3,7 +3,7 @@ namespace Microsoft\Rest\Internal\Types;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\InvalidSchemaObjectException;
-use Microsoft\Rest\Internal\Swagger\DefinitionsObject;
+use Microsoft\Rest\Internal\Swagger\Definitions;
 use Microsoft\Rest\Internal\Types\Primitives\ObjectType;
 use Microsoft\Rest\Internal\Types\Primitives\PrimitiveTypeAbstract;
 
@@ -26,10 +26,10 @@ abstract class TypeAbstract
     abstract function getConstValue();
 
     /**
-     * @param DefinitionsObject $definitionsObject
+     * @param Definitions $definitionsObject
      * @return TypeAbstract
      */
-    abstract function removeRefTypes(DefinitionsObject $definitionsObject);
+    abstract function removeRefTypes(Definitions $definitionsObject);
 
     /**
      * @param DataAbstract $schemaObjectData see https://swagger.io/specification/#schemaObject
