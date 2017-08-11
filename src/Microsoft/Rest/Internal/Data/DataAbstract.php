@@ -3,7 +3,7 @@ namespace Microsoft\Rest\Internal\Data;
 
 use Microsoft\Rest\Internal\ExpectedPropertyException;
 
-abstract class DataAbstract
+class DataAbstract
 {
     /**
      * @return mixed
@@ -35,21 +35,21 @@ abstract class DataAbstract
 
     /**
      * @param string $key
-     * @return MapData|null
+     * @return DataAbstract|null
      */
     function getChildOrNull($key)
     {
-        return $this->hasKey($key) ? MapData::create($this, $key) : null;
+        return $this->hasKey($key) ? new DataAbstract($this, $key) : null;
     }
 
     /**
      * @param $key
-     * @return MapData
+     * @return DataAbstract
      */
     function getChild($key)
     {
         $this->requireKey($key);
-        return MapData::create($this, $key);
+        return new DataAbstract($this, $key);
     }
 
     /**
@@ -77,20 +77,15 @@ abstract class DataAbstract
     function getChildren()
     {
         /**
-         * @var MapData[]
+         * @var DataAbstract[]
          */
         $children = [];
         foreach (array_keys($this->value) as $key)
         {
-            $children[] = MapData::create($this, $key);
+            $children[] = new DataAbstract($this, $key);
         }
         return $children;
     }
-
-    /**
-     * @return string
-     */
-    abstract function getPath();
 
     /**
      * @return string
@@ -122,12 +117,44 @@ abstract class DataAbstract
     }
 
     /**
+     * @return string
+     */
+    function getPath()
+    {
+        return $this->parent === null
+            ? '#'
+            : $this->parent->getPath() . '/' . urlencode(strval($this->getKey()));
+    }
+
+    /**
+     * @return string|int
+     */
+    function getKey()
+    {
+        return $this->key;
+    }
+
+    /**
+     * @param DataAbstract|null $parent
+     * @param string|int|null $key
      * @param mixed $value
      */
-    function __construct($value)
+    function __construct($parent, $key, $value = null)
     {
-        $this->value = $value;
+        $this->parent = $parent;
+        $this->key = $key;
+        $this->value = $value === null ? $parent->getChildValue($key) : $value;
     }
+
+    /**
+     * @var DataAbstract
+     */
+    private $parent;
+
+    /**
+     * @var string|int
+     */
+    private $key;
 
     /**
      * @var mixed
