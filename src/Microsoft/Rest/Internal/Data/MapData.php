@@ -10,7 +10,7 @@ final class MapData extends DataAbstract
      */
     static function create(DataAbstract $parent, $key)
     {
-        return new MapData($parent->getValue()[$key], $parent, $key);
+        return new MapData($parent, $key, $parent->getValue()[$key]);
     }
 
     /**
@@ -32,11 +32,11 @@ final class MapData extends DataAbstract
     }
 
     /**
+     * @param DataAbstract|null $parent
+     * @param string|int|null $key
      * @param mixed $value
-     * @param DataAbstract $parent
-     * @param string|int $key
      */
-    function __construct($value, DataAbstract $parent = null, $key = null)
+    function __construct($parent, $key, $value = null)
     {
         parent::__construct($value);
         $this->parent = $parent;
