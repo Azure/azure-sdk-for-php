@@ -95,7 +95,7 @@ final class CosmosDB
                             'name' => 'updateParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DatabaseAccountPatchParameters'
+                            'schema' => ['$ref' => '#/definitions/DatabaseAccountPatchParameters']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/DatabaseAccount']]]
@@ -132,7 +132,7 @@ final class CosmosDB
                             'name' => 'createUpdateParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DatabaseAccountCreateUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/DatabaseAccountCreateUpdateParameters']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/DatabaseAccount']]]
@@ -204,7 +204,7 @@ final class CosmosDB
                         'name' => 'failoverParameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/FailoverPolicies'
+                        'schema' => ['$ref' => '#/definitions/FailoverPolicies']
                     ]
                 ],
                 'responses' => [
@@ -381,7 +381,7 @@ final class CosmosDB
                         'name' => 'keyToRegenerate',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DatabaseAccountRegenerateKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/DatabaseAccountRegenerateKeyParameters']
                     ]
                 ],
                 'responses' => [
@@ -434,6 +434,7 @@ final class CosmosDB
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['defaultConsistencyLevel']
             ],
             'Location' => [
@@ -447,6 +448,7 @@ final class CosmosDB
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FailoverPolicy' => [
@@ -458,6 +460,7 @@ final class CosmosDB
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DatabaseAccountProperties' => [
@@ -484,6 +487,7 @@ final class CosmosDB
                         'items' => ['$ref' => '#/definitions/FailoverPolicy']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DatabaseAccount' => [
@@ -498,6 +502,7 @@ final class CosmosDB
                     ],
                     'properties' => ['$ref' => '#/definitions/DatabaseAccountProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DatabaseAccountsListResult' => [
@@ -505,6 +510,7 @@ final class CosmosDB
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/DatabaseAccount']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FailoverPolicies' => [
@@ -512,6 +518,7 @@ final class CosmosDB
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/FailoverPolicy']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -525,6 +532,7 @@ final class CosmosDB
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'DatabaseAccountCreateUpdateProperties' => [
@@ -538,6 +546,7 @@ final class CosmosDB
                     'ipRangeFilter' => ['type' => 'string'],
                     'enableAutomaticFailover' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'locations',
                     'databaseAccountOfferType'
@@ -555,6 +564,7 @@ final class CosmosDB
                     ],
                     'properties' => ['$ref' => '#/definitions/DatabaseAccountCreateUpdateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'DatabaseAccountPatchParameters' => [
@@ -562,6 +572,7 @@ final class CosmosDB
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['tags']
             ],
             'DatabaseAccountListReadOnlyKeysResult' => [
@@ -569,6 +580,7 @@ final class CosmosDB
                     'primaryReadonlyMasterKey' => ['type' => 'string'],
                     'secondaryReadonlyMasterKey' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DatabaseAccountListKeysResult' => [
@@ -577,6 +589,7 @@ final class CosmosDB
                     'secondaryMasterKey' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/DatabaseAccountListReadOnlyKeysResult']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DatabaseAccountConnectionString' => [
@@ -584,6 +597,7 @@ final class CosmosDB
                     'connectionString' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DatabaseAccountListConnectionStringsResult' => [
@@ -591,6 +605,7 @@ final class CosmosDB
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/DatabaseAccountConnectionString']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DatabaseAccountRegenerateKeyParameters' => [
@@ -603,6 +618,7 @@ final class CosmosDB
                         'secondaryReadonly'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['keyKind']
             ]
         ]

@@ -82,7 +82,7 @@ final class ServiceFabricManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ClusterUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/ClusterUpdateParameters']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -153,7 +153,7 @@ final class ServiceFabricManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Cluster'
+                            'schema' => ['$ref' => '#/definitions/Cluster']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -403,6 +403,7 @@ final class ServiceFabricManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClusterCodeVersionsResult' => [
@@ -412,6 +413,7 @@ final class ServiceFabricManagementClient
                     'type' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ClusterVersionDetails']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClusterCodeVersionsListResult' => [
@@ -422,6 +424,7 @@ final class ServiceFabricManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CertificateDescription' => [
@@ -442,6 +445,7 @@ final class ServiceFabricManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['thumbprint']
             ],
             'SettingsParameterDescription' => [
@@ -449,6 +453,7 @@ final class ServiceFabricManagementClient
                     'name' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'value'
@@ -462,6 +467,7 @@ final class ServiceFabricManagementClient
                         'items' => ['$ref' => '#/definitions/SettingsParameterDescription']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'parameters'
@@ -478,6 +484,7 @@ final class ServiceFabricManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'startPort',
                     'endPort'
@@ -522,6 +529,7 @@ final class ServiceFabricManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'clientConnectionEndpointPort',
@@ -535,6 +543,7 @@ final class ServiceFabricManagementClient
                     'isAdmin' => ['type' => 'boolean'],
                     'certificateThumbprint' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'isAdmin',
                     'certificateThumbprint'
@@ -546,6 +555,7 @@ final class ServiceFabricManagementClient
                     'certificateCommonName' => ['type' => 'string'],
                     'certificateIssuerThumbprint' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'isAdmin',
                     'certificateCommonName',
@@ -563,6 +573,7 @@ final class ServiceFabricManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClusterUpgradeDeltaHealthPolicy' => [
@@ -580,6 +591,7 @@ final class ServiceFabricManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'maxPercentDeltaUnhealthyNodes',
                     'maxPercentUpgradeDomainDeltaUnhealthyNodes',
@@ -599,6 +611,7 @@ final class ServiceFabricManagementClient
                     'healthPolicy' => ['$ref' => '#/definitions/ClusterHealthPolicy'],
                     'deltaHealthPolicy' => ['$ref' => '#/definitions/ClusterUpgradeDeltaHealthPolicy']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'upgradeReplicaSetCheckTimeout',
                     'healthCheckWaitDuration',
@@ -617,6 +630,7 @@ final class ServiceFabricManagementClient
                     'queueEndpoint' => ['type' => 'string'],
                     'tableEndpoint' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'storageAccountName',
                     'protectedAccountKeyName',
@@ -631,6 +645,7 @@ final class ServiceFabricManagementClient
                     'clusterApplication' => ['type' => 'string'],
                     'clientApplication' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClusterPropertiesUpdateParameters' => [
@@ -671,6 +686,7 @@ final class ServiceFabricManagementClient
                     ],
                     'upgradeDescription' => ['$ref' => '#/definitions/ClusterUpgradePolicy']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClusterProperties' => [
@@ -746,6 +762,7 @@ final class ServiceFabricManagementClient
                     'diagnosticsStorageAccountConfig' => ['$ref' => '#/definitions/DiagnosticsStorageAccountConfig'],
                     'upgradeDescription' => ['$ref' => '#/definitions/ClusterUpgradePolicy']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'managementEndpoint',
                     'nodeTypes'
@@ -759,10 +776,12 @@ final class ServiceFabricManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Cluster' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ClusterProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClusterListResult' => [
@@ -773,6 +792,7 @@ final class ServiceFabricManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AvailableOperationDisplay' => [
@@ -782,6 +802,7 @@ final class ServiceFabricManagementClient
                     'operation' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationResult' => [
@@ -791,6 +812,7 @@ final class ServiceFabricManagementClient
                     'origin' => ['type' => 'string'],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -801,6 +823,7 @@ final class ServiceFabricManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorModel_error' => [
@@ -808,10 +831,12 @@ final class ServiceFabricManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorModel' => [
                 'properties' => ['error' => ['$ref' => '#/definitions/ErrorModel_error']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -825,6 +850,7 @@ final class ServiceFabricManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ]
         ]

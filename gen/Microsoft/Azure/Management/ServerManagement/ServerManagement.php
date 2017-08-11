@@ -100,7 +100,7 @@ final class ServerManagement
                             'name' => 'GatewayParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/GatewayParameters'
+                            'schema' => ['$ref' => '#/definitions/GatewayParameters']
                         ]
                     ],
                     'responses' => [
@@ -140,7 +140,7 @@ final class ServerManagement
                             'name' => 'GatewayParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/GatewayParameters'
+                            'schema' => ['$ref' => '#/definitions/GatewayParameters']
                         ]
                     ],
                     'responses' => [
@@ -403,7 +403,7 @@ final class ServerManagement
                             'name' => 'GatewayParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/NodeParameters'
+                            'schema' => ['$ref' => '#/definitions/NodeParameters']
                         ]
                     ],
                     'responses' => [
@@ -444,7 +444,7 @@ final class ServerManagement
                             'name' => 'NodeParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/NodeParameters'
+                            'schema' => ['$ref' => '#/definitions/NodeParameters']
                         ]
                     ],
                     'responses' => [
@@ -601,7 +601,7 @@ final class ServerManagement
                             'name' => 'SessionParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SessionParameters'
+                            'schema' => ['$ref' => '#/definitions/SessionParameters']
                         ]
                     ],
                     'responses' => [
@@ -913,7 +913,7 @@ final class ServerManagement
                         'name' => 'PowerShellCommandParameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/PowerShellCommandParameters'
+                        'schema' => ['$ref' => '#/definitions/PowerShellCommandParameters']
                     ]
                 ],
                 'responses' => [
@@ -1011,7 +1011,7 @@ final class ServerManagement
                         'name' => 'PowerShellTabCompletionParamters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/PowerShellTabCompletionParameters'
+                        'schema' => ['$ref' => '#/definitions/PowerShellTabCompletionParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/PowerShellTabCompletionResults']]]
@@ -1030,6 +1030,7 @@ final class ServerManagement
                     ],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EncryptionJwkResource' => [
@@ -1039,6 +1040,7 @@ final class ServerManagement
                     'e' => ['type' => 'string'],
                     'n' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GatewayStatus' => [
@@ -1092,6 +1094,7 @@ final class ServerManagement
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GatewayResource_properties' => [
@@ -1128,10 +1131,12 @@ final class ServerManagement
                     'installerDownload' => ['type' => 'string'],
                     'minimumVersion' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GatewayResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/GatewayResource_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GatewayResources' => [
@@ -1142,6 +1147,7 @@ final class ServerManagement
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GatewayProfile' => [
@@ -1157,6 +1163,7 @@ final class ServerManagement
                     'responseTopic' => ['type' => 'string'],
                     'statusBlobSignature' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GatewayParameters_properties' => [
@@ -1167,6 +1174,7 @@ final class ServerManagement
                         'Automatic'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GatewayParameters' => [
@@ -1175,6 +1183,7 @@ final class ServerManagement
                     'tags' => ['type' => 'object'],
                     'properties' => ['$ref' => '#/definitions/GatewayParameters_properties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NodeResource_properties' => [
@@ -1190,10 +1199,12 @@ final class ServerManagement
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NodeResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/NodeResource_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NodeResources' => [
@@ -1204,6 +1215,7 @@ final class ServerManagement
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NodeParameters_properties' => [
@@ -1213,6 +1225,7 @@ final class ServerManagement
                     'userName' => ['type' => 'string'],
                     'password' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NodeParameters' => [
@@ -1221,6 +1234,7 @@ final class ServerManagement
                     'tags' => ['type' => 'object'],
                     'properties' => ['$ref' => '#/definitions/NodeParameters_properties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SessionResource_properties' => [
@@ -1235,10 +1249,12 @@ final class ServerManagement
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SessionResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SessionResource_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SessionParameters_properties' => [
@@ -1258,10 +1274,12 @@ final class ServerManagement
                     ],
                     'EncryptionCertificateThumbprint' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SessionParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SessionParameters_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Version' => [
@@ -1291,6 +1309,7 @@ final class ServerManagement
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PowerShellSessionResource_properties' => [
@@ -1309,10 +1328,12 @@ final class ServerManagement
                     'version' => ['$ref' => '#/definitions/Version'],
                     'name' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PowerShellSessionResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/PowerShellSessionResource_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PromptFieldDescription' => [
@@ -1330,6 +1351,7 @@ final class ServerManagement
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PowerShellCommandResult' => [
@@ -1357,6 +1379,7 @@ final class ServerManagement
                         'items' => ['$ref' => '#/definitions/PromptFieldDescription']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PowerShellCommandResults' => [
@@ -1369,10 +1392,12 @@ final class ServerManagement
                     'command' => ['type' => 'string'],
                     'completed' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PowerShellCommandStatus' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/PowerShellCommandResults']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PowerShellSessionResources' => [
@@ -1383,14 +1408,17 @@ final class ServerManagement
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PowerShellCommandParameters_properties' => [
                 'properties' => ['command' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PowerShellCommandParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/PowerShellCommandParameters_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PromptMessageResponse' => [
@@ -1398,10 +1426,12 @@ final class ServerManagement
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PowerShellTabCompletionParameters' => [
                 'properties' => ['command' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PowerShellTabCompletionResults' => [
@@ -1409,6 +1439,7 @@ final class ServerManagement
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Error' => [
@@ -1420,6 +1451,7 @@ final class ServerManagement
                     'message' => ['type' => 'string'],
                     'fields' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

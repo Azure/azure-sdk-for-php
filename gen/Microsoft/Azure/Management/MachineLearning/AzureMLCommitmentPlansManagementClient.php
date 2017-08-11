@@ -167,7 +167,7 @@ final class AzureMLCommitmentPlansManagementClient
                         'name' => 'movePayload',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/MoveCommitmentAssociationRequest'
+                        'schema' => ['$ref' => '#/definitions/MoveCommitmentAssociationRequest']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CommitmentAssociation']]]
@@ -211,7 +211,7 @@ final class AzureMLCommitmentPlansManagementClient
                             'name' => 'createOrUpdatePayload',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CommitmentPlan'
+                            'schema' => ['$ref' => '#/definitions/CommitmentPlan']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -282,7 +282,7 @@ final class AzureMLCommitmentPlansManagementClient
                             'name' => 'patchPayload',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CommitmentPlanPatchPayload'
+                            'schema' => ['$ref' => '#/definitions/CommitmentPlanPatchPayload']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -419,6 +419,7 @@ final class AzureMLCommitmentPlansManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'CommitmentAssociationProperties' => [
@@ -430,6 +431,7 @@ final class AzureMLCommitmentPlansManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CommitmentAssociation' => [
@@ -437,6 +439,7 @@ final class AzureMLCommitmentPlansManagementClient
                     'etag' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/CommitmentAssociationProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceSku' => [
@@ -448,6 +451,7 @@ final class AzureMLCommitmentPlansManagementClient
                     'name' => ['type' => 'string'],
                     'tier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CommitmentAssociationListResult' => [
@@ -458,10 +462,12 @@ final class AzureMLCommitmentPlansManagementClient
                         'items' => ['$ref' => '#/definitions/CommitmentAssociation']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MoveCommitmentAssociationRequest' => [
                 'properties' => ['destinationPlanId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CommitmentPlanPatchPayload' => [
@@ -472,6 +478,7 @@ final class AzureMLCommitmentPlansManagementClient
                     ],
                     'sku' => ['$ref' => '#/definitions/ResourceSku']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PlanQuantity' => [
@@ -487,6 +494,7 @@ final class AzureMLCommitmentPlansManagementClient
                     'includedQuantityMeter' => ['type' => 'string'],
                     'overageMeter' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CommitmentPlanProperties' => [
@@ -520,6 +528,7 @@ final class AzureMLCommitmentPlansManagementClient
                     ],
                     'suspendPlanOnOverage' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CommitmentPlan' => [
@@ -528,6 +537,7 @@ final class AzureMLCommitmentPlansManagementClient
                     'properties' => ['$ref' => '#/definitions/CommitmentPlanProperties'],
                     'sku' => ['$ref' => '#/definitions/ResourceSku']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CommitmentPlanListResult' => [
@@ -538,6 +548,7 @@ final class AzureMLCommitmentPlansManagementClient
                         'items' => ['$ref' => '#/definitions/CommitmentPlan']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PlanUsageHistory' => [
@@ -589,6 +600,7 @@ final class AzureMLCommitmentPlansManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PlanUsageHistoryListResult' => [
@@ -599,6 +611,7 @@ final class AzureMLCommitmentPlansManagementClient
                         'items' => ['$ref' => '#/definitions/PlanUsageHistory']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

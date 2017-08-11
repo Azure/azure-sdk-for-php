@@ -135,7 +135,7 @@ final class HDInsightManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ClusterCreateParametersExtended'
+                            'schema' => ['$ref' => '#/definitions/ClusterCreateParametersExtended']
                         ],
                         [
                             'name' => 'api-version',
@@ -172,7 +172,7 @@ final class HDInsightManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ClusterPatchParameters'
+                            'schema' => ['$ref' => '#/definitions/ClusterPatchParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -307,7 +307,7 @@ final class HDInsightManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ClusterResizeParameters'
+                        'schema' => ['$ref' => '#/definitions/ClusterResizeParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -366,7 +366,7 @@ final class HDInsightManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RDPSettingsParameters'
+                        'schema' => ['$ref' => '#/definitions/RDPSettingsParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -406,7 +406,7 @@ final class HDInsightManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ExecuteScriptActionParameters'
+                        'schema' => ['$ref' => '#/definitions/ExecuteScriptActionParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -523,7 +523,7 @@ final class HDInsightManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ApplicationGetProperties'
+                            'schema' => ['$ref' => '#/definitions/ApplicationGetProperties']
                         ],
                         [
                             'name' => 'api-version',
@@ -632,7 +632,7 @@ final class HDInsightManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/HttpConnectivitySettings'
+                            'schema' => ['$ref' => '#/definitions/HttpConnectivitySettings']
                         ],
                         [
                             'name' => 'api-version',
@@ -716,7 +716,7 @@ final class HDInsightManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Extension'
+                            'schema' => ['$ref' => '#/definitions/Extension']
                         ],
                         [
                             'name' => 'extensionName',
@@ -1011,6 +1011,7 @@ final class HDInsightManagementClient
                     'restAuthCredential.username' => ['type' => 'string'],
                     'restAuthCredential.password' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['restAuthCredential.isEnabled']
             ],
             'ClusterDefinition' => [
@@ -1023,6 +1024,7 @@ final class HDInsightManagementClient
                     ],
                     'configurations' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SecurityProfile' => [
@@ -1044,10 +1046,12 @@ final class HDInsightManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HardwareProfile' => [
                 'properties' => ['vmSize' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkProfile' => [
@@ -1055,6 +1059,7 @@ final class HDInsightManagementClient
                     'id' => ['type' => 'string'],
                     'subnet' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RdpSettings' => [
@@ -1066,14 +1071,17 @@ final class HDInsightManagementClient
                         'format' => 'date'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WindowsOperatingSystemProfile' => [
                 'properties' => ['rdpSettings' => ['$ref' => '#/definitions/RdpSettings']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SshPublicKey' => [
                 'properties' => ['certificateData' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SshProfile' => [
@@ -1081,6 +1089,7 @@ final class HDInsightManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/SshPublicKey']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LinuxOperatingSystemProfile' => [
@@ -1089,6 +1098,7 @@ final class HDInsightManagementClient
                     'password' => ['type' => 'string'],
                     'sshProfile' => ['$ref' => '#/definitions/SshProfile']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OsProfile' => [
@@ -1096,6 +1106,7 @@ final class HDInsightManagementClient
                     'windowsOperatingSystemProfile' => ['$ref' => '#/definitions/WindowsOperatingSystemProfile'],
                     'linuxOperatingSystemProfile' => ['$ref' => '#/definitions/LinuxOperatingSystemProfile']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ScriptAction' => [
@@ -1104,6 +1115,7 @@ final class HDInsightManagementClient
                     'uri' => ['type' => 'string'],
                     'parameters' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'uri',
@@ -1129,6 +1141,7 @@ final class HDInsightManagementClient
                         'items' => ['$ref' => '#/definitions/ScriptAction']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ComputeProfile' => [
@@ -1136,6 +1149,7 @@ final class HDInsightManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Role']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageAccount' => [
@@ -1145,6 +1159,7 @@ final class HDInsightManagementClient
                     'container' => ['type' => 'string'],
                     'key' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageProfile' => [
@@ -1152,6 +1167,7 @@ final class HDInsightManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/StorageAccount']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClusterCreateProperties' => [
@@ -1176,6 +1192,7 @@ final class HDInsightManagementClient
                     'computeProfile' => ['$ref' => '#/definitions/ComputeProfile'],
                     'storageProfile' => ['$ref' => '#/definitions/StorageProfile']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClusterCreateParametersExtended' => [
@@ -1187,6 +1204,7 @@ final class HDInsightManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/ClusterCreateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClusterPatchParameters' => [
@@ -1194,6 +1212,7 @@ final class HDInsightManagementClient
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'QuotaInfo' => [
@@ -1201,6 +1220,7 @@ final class HDInsightManagementClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'errors' => [
@@ -1208,6 +1228,7 @@ final class HDInsightManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectivityEndpoint' => [
@@ -1220,6 +1241,7 @@ final class HDInsightManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClusterGetProperties' => [
@@ -1264,6 +1286,7 @@ final class HDInsightManagementClient
                         'items' => ['$ref' => '#/definitions/ConnectivityEndpoint']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['clusterDefinition']
             ],
             'Cluster' => [
@@ -1271,6 +1294,7 @@ final class HDInsightManagementClient
                     'etag' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ClusterGetProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RuntimeScriptAction' => [
@@ -1284,6 +1308,7 @@ final class HDInsightManagementClient
                     ],
                     'applicationName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'uri',
@@ -1298,6 +1323,7 @@ final class HDInsightManagementClient
                     ],
                     'persistOnSuccess' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['persistOnSuccess']
             ],
             'ClusterListPersistedScriptActionsResult' => [
@@ -1308,6 +1334,7 @@ final class HDInsightManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ScriptActionExecutionSummary' => [
@@ -1318,6 +1345,7 @@ final class HDInsightManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RuntimeScriptActionDetail' => [
@@ -1344,6 +1372,7 @@ final class HDInsightManagementClient
                     ],
                     'applicationName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'uri',
@@ -1358,6 +1387,7 @@ final class HDInsightManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClusterListResult' => [
@@ -1368,6 +1398,7 @@ final class HDInsightManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClusterResizeParameters' => [
@@ -1375,6 +1406,7 @@ final class HDInsightManagementClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationResource' => [
@@ -1389,6 +1421,7 @@ final class HDInsightManagementClient
                     ],
                     'error' => ['$ref' => '#/definitions/errors']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -1402,10 +1435,12 @@ final class HDInsightManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'SubResource' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation_display' => [
@@ -1414,6 +1449,7 @@ final class HDInsightManagementClient
                     'resource' => ['type' => 'string'],
                     'operation' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -1421,6 +1457,7 @@ final class HDInsightManagementClient
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -1431,6 +1468,7 @@ final class HDInsightManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGetHttpsEndpoint' => [
@@ -1467,6 +1505,7 @@ final class HDInsightManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGetProperties' => [
@@ -1499,6 +1538,7 @@ final class HDInsightManagementClient
                     'marketplaceIdentifier' => ['type' => 'string'],
                     'additionalProperties' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Application' => [
@@ -1513,6 +1553,7 @@ final class HDInsightManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/ApplicationGetProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationListResult' => [
@@ -1523,6 +1564,7 @@ final class HDInsightManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'versionSpec' => [
@@ -1535,6 +1577,7 @@ final class HDInsightManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'versionsCapability' => [
@@ -1542,6 +1585,7 @@ final class HDInsightManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/versionSpec']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'regionsCapability' => [
@@ -1549,6 +1593,7 @@ final class HDInsightManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'vmSizesCapability' => [
@@ -1556,6 +1601,7 @@ final class HDInsightManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'vmSizeCompatibilityFilter' => [
@@ -1582,6 +1628,7 @@ final class HDInsightManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'regionalQuotaCapability' => [
@@ -1596,6 +1643,7 @@ final class HDInsightManagementClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'quotaCapability' => [
@@ -1603,6 +1651,7 @@ final class HDInsightManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/regionalQuotaCapability']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'capabilitiesResult' => [
@@ -1629,10 +1678,12 @@ final class HDInsightManagementClient
                     ],
                     'quota' => ['$ref' => '#/definitions/quotaCapability']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RDPSettingsParameters' => [
                 'properties' => ['osProfile' => ['$ref' => '#/definitions/OsProfile']],
+                'additionalProperties' => FALSE,
                 'required' => ['osProfile']
             ],
             'HttpConnectivitySettings' => [
@@ -1641,6 +1692,7 @@ final class HDInsightManagementClient
                     'restAuthCredential.username' => ['type' => 'string'],
                     'restAuthCredential.password' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Extension' => [
@@ -1648,6 +1700,7 @@ final class HDInsightManagementClient
                     'workspaceId' => ['type' => 'string'],
                     'primaryKey' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ScriptActionExecutionHistoryList' => [
@@ -1658,6 +1711,7 @@ final class HDInsightManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ScriptActionPersistedGetResponseSpec' => [
@@ -1671,6 +1725,7 @@ final class HDInsightManagementClient
                     ],
                     'applicationName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ScriptActionsList' => [
@@ -1681,6 +1736,7 @@ final class HDInsightManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

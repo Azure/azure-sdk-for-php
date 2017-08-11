@@ -158,7 +158,7 @@ final class ServiceBusManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameAvailability'
+                        'schema' => ['$ref' => '#/definitions/CheckNameAvailability']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CheckNameAvailabilityResult']]]
@@ -227,7 +227,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SBNamespace'
+                            'schema' => ['$ref' => '#/definitions/SBNamespace']
                         ],
                         [
                             'name' => 'api-version',
@@ -334,7 +334,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SBNamespaceUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/SBNamespaceUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -414,7 +414,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SBAuthorizationRule'
+                            'schema' => ['$ref' => '#/definitions/SBAuthorizationRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -572,7 +572,7 @@ final class ServiceBusManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateAccessKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/RegenerateAccessKeyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -647,7 +647,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SBQueue'
+                            'schema' => ['$ref' => '#/definitions/SBQueue']
                         ],
                         [
                             'name' => 'api-version',
@@ -812,7 +812,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SBAuthorizationRule'
+                            'schema' => ['$ref' => '#/definitions/SBAuthorizationRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -994,7 +994,7 @@ final class ServiceBusManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateAccessKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/RegenerateAccessKeyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -1069,7 +1069,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SBTopic'
+                            'schema' => ['$ref' => '#/definitions/SBTopic']
                         ],
                         [
                             'name' => 'api-version',
@@ -1234,7 +1234,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SBAuthorizationRule'
+                            'schema' => ['$ref' => '#/definitions/SBAuthorizationRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -1416,7 +1416,7 @@ final class ServiceBusManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateAccessKeyParameters'
+                        'schema' => ['$ref' => '#/definitions/RegenerateAccessKeyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -1503,7 +1503,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SBSubscription'
+                            'schema' => ['$ref' => '#/definitions/SBSubscription']
                         ],
                         [
                             'name' => 'api-version',
@@ -1692,7 +1692,7 @@ final class ServiceBusManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Rule'
+                            'schema' => ['$ref' => '#/definitions/Rule']
                         ],
                         [
                             'name' => 'api-version',
@@ -1897,6 +1897,7 @@ final class ServiceBusManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'Resource' => [
@@ -1905,6 +1906,7 @@ final class ServiceBusManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceNamespacePatch' => [
@@ -1915,6 +1917,7 @@ final class ServiceBusManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SBSku' => [
@@ -1940,6 +1943,7 @@ final class ServiceBusManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'SBNamespaceProperties' => [
@@ -1956,6 +1960,7 @@ final class ServiceBusManagementClient
                     'serviceBusEndpoint' => ['type' => 'string'],
                     'metricId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SBNamespace' => [
@@ -1963,6 +1968,7 @@ final class ServiceBusManagementClient
                     'sku' => ['$ref' => '#/definitions/SBSku'],
                     'properties' => ['$ref' => '#/definitions/SBNamespaceProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SBNamespaceListResult' => [
@@ -1973,6 +1979,7 @@ final class ServiceBusManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SBNamespaceUpdateParameters' => [
@@ -1980,6 +1987,7 @@ final class ServiceBusManagementClient
                     'sku' => ['$ref' => '#/definitions/SBSku'],
                     'properties' => ['$ref' => '#/definitions/SBNamespaceProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SBAuthorizationRule_properties' => [
@@ -1994,10 +2002,12 @@ final class ServiceBusManagementClient
                         ]
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SBAuthorizationRule' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SBAuthorizationRule_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SBAuthorizationRuleListResult' => [
@@ -2008,6 +2018,7 @@ final class ServiceBusManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AuthorizationRuleProperties' => [
@@ -2022,6 +2033,7 @@ final class ServiceBusManagementClient
                         ]
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['rights']
             ],
             'AccessKeys' => [
@@ -2032,6 +2044,7 @@ final class ServiceBusManagementClient
                     'secondaryKey' => ['type' => 'string'],
                     'keyName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RegenerateAccessKeyParameters' => [
@@ -2045,6 +2058,7 @@ final class ServiceBusManagementClient
                     ],
                     'key' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['keyType']
             ],
             'MessageCountDetails' => [
@@ -2070,6 +2084,7 @@ final class ServiceBusManagementClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SBQueueProperties' => [
@@ -2139,10 +2154,12 @@ final class ServiceBusManagementClient
                     'enablePartitioning' => ['type' => 'boolean'],
                     'enableExpress' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SBQueue' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SBQueueProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SBQueueListResult' => [
@@ -2153,6 +2170,7 @@ final class ServiceBusManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SBTopicProperties' => [
@@ -2214,10 +2232,12 @@ final class ServiceBusManagementClient
                     'enablePartitioning' => ['type' => 'boolean'],
                     'enableExpress' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SBTopic' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SBTopicProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SBTopicListResult' => [
@@ -2228,6 +2248,7 @@ final class ServiceBusManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SBSubscriptionProperties' => [
@@ -2287,10 +2308,12 @@ final class ServiceBusManagementClient
                         'format' => 'duration'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SBSubscription' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SBSubscriptionProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SBSubscriptionListResult' => [
@@ -2301,10 +2324,12 @@ final class ServiceBusManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CheckNameAvailability' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'CheckNameAvailabilityResult' => [
@@ -2323,6 +2348,7 @@ final class ServiceBusManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation_display' => [
@@ -2331,6 +2357,7 @@ final class ServiceBusManagementClient
                     'resource' => ['type' => 'string'],
                     'operation' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -2338,6 +2365,7 @@ final class ServiceBusManagementClient
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -2348,6 +2376,7 @@ final class ServiceBusManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorResponse' => [
@@ -2355,6 +2384,7 @@ final class ServiceBusManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Action' => [
@@ -2366,6 +2396,7 @@ final class ServiceBusManagementClient
                     ],
                     'requiresPreprocessing' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SqlFilter' => [
@@ -2377,6 +2408,7 @@ final class ServiceBusManagementClient
                     ],
                     'requiresPreprocessing' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CorrelationFilter' => [
@@ -2391,6 +2423,7 @@ final class ServiceBusManagementClient
                     'contentType' => ['type' => 'string'],
                     'requiresPreprocessing' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Ruleproperties' => [
@@ -2406,10 +2439,12 @@ final class ServiceBusManagementClient
                     'sqlFilter' => ['$ref' => '#/definitions/SqlFilter'],
                     'correlationFilter' => ['$ref' => '#/definitions/CorrelationFilter']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Rule' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/Ruleproperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RuleListResult' => [
@@ -2420,10 +2455,12 @@ final class ServiceBusManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SqlRuleAction' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PremiumMessagingRegions_properties' => [
@@ -2431,10 +2468,12 @@ final class ServiceBusManagementClient
                     'code' => ['type' => 'string'],
                     'fullName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PremiumMessagingRegions' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/PremiumMessagingRegions_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PremiumMessagingRegionsListResult' => [
@@ -2445,6 +2484,7 @@ final class ServiceBusManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Destination_properties' => [
@@ -2453,6 +2493,7 @@ final class ServiceBusManagementClient
                     'blobContainer' => ['type' => 'string'],
                     'archiveNameFormat' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Destination' => [
@@ -2460,6 +2501,7 @@ final class ServiceBusManagementClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/Destination_properties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CaptureDescription' => [
@@ -2482,6 +2524,7 @@ final class ServiceBusManagementClient
                     ],
                     'destination' => ['$ref' => '#/definitions/Destination']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Eventhub_properties' => [
@@ -2522,10 +2565,12 @@ final class ServiceBusManagementClient
                     ],
                     'captureDescription' => ['$ref' => '#/definitions/CaptureDescription']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Eventhub' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/Eventhub_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EventHubListResult' => [
@@ -2536,6 +2581,7 @@ final class ServiceBusManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

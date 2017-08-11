@@ -285,7 +285,7 @@ final class StorageImportExport
                             'name' => 'jobProperties',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MutableJob'
+                            'schema' => ['$ref' => '#/definitions/MutableJob']
                         ],
                         [
                             'name' => 'api-version',
@@ -329,7 +329,7 @@ final class StorageImportExport
                             'name' => 'jobProperties',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Job'
+                            'schema' => ['$ref' => '#/definitions/Job']
                         ],
                         [
                             'name' => 'api-version',
@@ -409,7 +409,7 @@ final class StorageImportExport
                         'name' => 'MoveJobsParameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/MoveJobParameters'
+                        'schema' => ['$ref' => '#/definitions/MoveJobParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -476,6 +476,7 @@ final class StorageImportExport
                     'location' => ['type' => 'string'],
                     'tags' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'OperationDisplayInformation' => [
@@ -485,6 +486,7 @@ final class StorageImportExport
                     'operation' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -492,6 +494,7 @@ final class StorageImportExport
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/OperationDisplayInformation']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'display'
@@ -502,6 +505,7 @@ final class StorageImportExport
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Operation']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DriveStatus' => [
@@ -527,6 +531,7 @@ final class StorageImportExport
                     'errorLogUri' => ['type' => 'string'],
                     'manifestUri' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BitLockerKeysListResult' => [
@@ -534,6 +539,7 @@ final class StorageImportExport
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/DriveStatus']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MoveJobParameters' => [
@@ -544,6 +550,7 @@ final class StorageImportExport
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'targetResourceGroup',
                     'resources'
@@ -568,6 +575,7 @@ final class StorageImportExport
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Location' => [
@@ -577,6 +585,7 @@ final class StorageImportExport
                     'type' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/LocationProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LocationsListResult' => [
@@ -584,6 +593,7 @@ final class StorageImportExport
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Location']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'ErrorBase' => [
@@ -592,6 +602,7 @@ final class StorageImportExport
                     'message' => ['type' => 'string'],
                     'target' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorInfo' => [
@@ -599,10 +610,12 @@ final class StorageImportExport
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ErrorBase']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorResponse' => [
                 'properties' => ['error' => ['$ref' => '#/definitions/ErrorInfo']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReturnAddress' => [
@@ -617,6 +630,7 @@ final class StorageImportExport
                     'phone' => ['type' => 'string'],
                     'email' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'recipientName',
                     'streetAddress1',
@@ -632,6 +646,7 @@ final class StorageImportExport
                     'carrierName' => ['type' => 'string'],
                     'carrierAccountNumber' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'carrierName',
                     'carrierAccountNumber'
@@ -647,6 +662,7 @@ final class StorageImportExport
                     ],
                     'shipDate' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'carrierName',
                     'trackingNumber',
@@ -667,6 +683,7 @@ final class StorageImportExport
                     'logLevel' => ['type' => 'string'],
                     'backupDriveManifest' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MutableJob' => [
@@ -674,6 +691,7 @@ final class StorageImportExport
                     'tags' => ['type' => 'object'],
                     'properties' => ['$ref' => '#/definitions/MutableJobProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ShippingInformation' => [
@@ -681,6 +699,7 @@ final class StorageImportExport
                     'name' => ['type' => 'string'],
                     'address' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'address'
@@ -697,6 +716,7 @@ final class StorageImportExport
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Export' => [
@@ -704,6 +724,7 @@ final class StorageImportExport
                     'blobList' => ['$ref' => '#/definitions/Export_blobList'],
                     'blobListblobPath' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobProperties' => [
@@ -756,6 +777,7 @@ final class StorageImportExport
                     'export' => ['$ref' => '#/definitions/Export'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'storageAccountId',
                     'jobType',
@@ -766,6 +788,7 @@ final class StorageImportExport
             ],
             'Job' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/JobProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'JobListResult' => [
@@ -776,6 +799,7 @@ final class StorageImportExport
                         'items' => ['$ref' => '#/definitions/Job']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'Drive' => [
@@ -785,6 +809,7 @@ final class StorageImportExport
                     'manifestFile' => ['type' => 'string'],
                     'manifestHash' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'driveId',
                     'bitLockerKey',

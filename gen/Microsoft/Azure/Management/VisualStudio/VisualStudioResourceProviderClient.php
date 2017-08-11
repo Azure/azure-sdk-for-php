@@ -92,7 +92,7 @@ final class VisualStudioResourceProviderClient
                         'name' => 'body',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameAvailabilityParameter'
+                        'schema' => ['$ref' => '#/definitions/CheckNameAvailabilityParameter']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CheckNameAvailabilityResult']]]
@@ -149,7 +149,7 @@ final class VisualStudioResourceProviderClient
                             'name' => 'body',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AccountResourceRequest'
+                            'schema' => ['$ref' => '#/definitions/AccountResourceRequest']
                         ],
                         [
                             'name' => 'resourceName',
@@ -287,7 +287,7 @@ final class VisualStudioResourceProviderClient
                             'name' => 'body',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ExtensionResourceRequest'
+                            'schema' => ['$ref' => '#/definitions/ExtensionResourceRequest']
                         ],
                         [
                             'name' => 'accountResourceName',
@@ -407,7 +407,7 @@ final class VisualStudioResourceProviderClient
                             'name' => 'body',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ExtensionResourceRequest'
+                            'schema' => ['$ref' => '#/definitions/ExtensionResourceRequest']
                         ],
                         [
                             'name' => 'accountResourceName',
@@ -464,7 +464,7 @@ final class VisualStudioResourceProviderClient
                             'name' => 'body',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ProjectResource'
+                            'schema' => ['$ref' => '#/definitions/ProjectResource']
                         ],
                         [
                             'name' => 'resourceGroupName',
@@ -575,7 +575,7 @@ final class VisualStudioResourceProviderClient
                             'name' => 'body',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ProjectResource'
+                            'schema' => ['$ref' => '#/definitions/ProjectResource']
                         ],
                         [
                             'name' => 'rootResourceName',
@@ -659,6 +659,7 @@ final class VisualStudioResourceProviderClient
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AccountResourceListResult' => [
@@ -666,6 +667,7 @@ final class VisualStudioResourceProviderClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/AccountResource']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AccountResourceRequest' => [
@@ -682,6 +684,7 @@ final class VisualStudioResourceProviderClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CheckNameAvailabilityParameter' => [
@@ -689,6 +692,7 @@ final class VisualStudioResourceProviderClient
                     'resourceName' => ['type' => 'string'],
                     'resourceType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CheckNameAvailabilityResult' => [
@@ -696,6 +700,7 @@ final class VisualStudioResourceProviderClient
                     'message' => ['type' => 'string'],
                     'nameAvailable' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExtensionResourcePlan' => [
@@ -706,6 +711,7 @@ final class VisualStudioResourceProviderClient
                     'publisher' => ['type' => 'string'],
                     'version' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExtensionResource' => [
@@ -716,6 +722,7 @@ final class VisualStudioResourceProviderClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExtensionResourceListResult' => [
@@ -723,6 +730,7 @@ final class VisualStudioResourceProviderClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ExtensionResource']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExtensionResourceRequest' => [
@@ -738,6 +746,7 @@ final class VisualStudioResourceProviderClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationProperties' => [
@@ -747,6 +756,7 @@ final class VisualStudioResourceProviderClient
                     'provider' => ['type' => 'string'],
                     'resource' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -754,6 +764,7 @@ final class VisualStudioResourceProviderClient
                     'display' => ['$ref' => '#/definitions/OperationProperties'],
                     'name' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -761,6 +772,7 @@ final class VisualStudioResourceProviderClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Operation']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -774,6 +786,7 @@ final class VisualStudioResourceProviderClient
                     ],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProjectResource' => [
@@ -781,6 +794,7 @@ final class VisualStudioResourceProviderClient
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProjectResourceListResult' => [
@@ -788,6 +802,7 @@ final class VisualStudioResourceProviderClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ProjectResource']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

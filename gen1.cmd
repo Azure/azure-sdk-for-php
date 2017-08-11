@@ -1,0 +1,1 @@
+node c:\autorest\src\autorest-core\dist\app.js --php --output-folder=c:\users\sergey\Desktop\azure-sdk-for-php\gen --use-extension={'@microsoft.azure/autorest-classic-generators':'C:\autorest/src/core/AutoRest'} %*

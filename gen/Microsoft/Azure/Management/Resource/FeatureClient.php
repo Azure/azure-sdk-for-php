@@ -141,6 +141,7 @@ final class FeatureClient
         'definitions' => [
             'FeatureProperties' => [
                 'properties' => ['state' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FeatureResult' => [
@@ -150,6 +151,7 @@ final class FeatureClient
                     'id' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FeatureOperationsListResult' => [
@@ -160,6 +162,7 @@ final class FeatureClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

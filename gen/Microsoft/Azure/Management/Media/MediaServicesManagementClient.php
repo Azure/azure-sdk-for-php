@@ -51,7 +51,7 @@ final class MediaServicesManagementClient
                         'name' => 'CheckNameAvailabilityInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameAvailabilityInput'
+                        'schema' => ['$ref' => '#/definitions/CheckNameAvailabilityInput']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CheckNameAvailabilityOutput']]]
@@ -145,7 +145,7 @@ final class MediaServicesManagementClient
                             'name' => 'MediaService',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MediaService'
+                            'schema' => ['$ref' => '#/definitions/MediaService']
                         ]
                     ],
                     'responses' => ['201' => ['schema' => ['$ref' => '#/definitions/MediaService']]]
@@ -216,7 +216,7 @@ final class MediaServicesManagementClient
                             'name' => 'MediaService',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MediaService'
+                            'schema' => ['$ref' => '#/definitions/MediaService']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/MediaService']]]
@@ -254,7 +254,7 @@ final class MediaServicesManagementClient
                         'name' => 'RegenerateKeyInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateKeyInput'
+                        'schema' => ['$ref' => '#/definitions/RegenerateKeyInput']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/RegenerateKeyOutput']]]
@@ -322,7 +322,7 @@ final class MediaServicesManagementClient
                         'name' => 'SyncStorageKeysInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/SyncStorageKeysInput'
+                        'schema' => ['$ref' => '#/definitions/SyncStorageKeysInput']
                     ]
                 ],
                 'responses' => ['200' => []]
@@ -334,6 +334,7 @@ final class MediaServicesManagementClient
                     'endpoint' => ['type' => 'string'],
                     'majorVersion' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiError' => [
@@ -341,6 +342,7 @@ final class MediaServicesManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CheckNameAvailabilityInput' => [
@@ -348,6 +350,7 @@ final class MediaServicesManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'type'
@@ -366,6 +369,7 @@ final class MediaServicesManagementClient
                     ],
                     'Message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageAccount' => [
@@ -373,6 +377,7 @@ final class MediaServicesManagementClient
                     'id' => ['type' => 'string'],
                     'isPrimary' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'id',
                     'isPrimary'
@@ -389,10 +394,12 @@ final class MediaServicesManagementClient
                         'items' => ['$ref' => '#/definitions/StorageAccount']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MediaService' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/MediaServiceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MediaServiceCollection' => [
@@ -400,6 +407,7 @@ final class MediaServicesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/MediaService']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RegenerateKeyInput' => [
@@ -410,10 +418,12 @@ final class MediaServicesManagementClient
                         'Secondary'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['keyType']
             ],
             'RegenerateKeyOutput' => [
                 'properties' => ['key' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -427,6 +437,7 @@ final class MediaServicesManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServiceKeys' => [
@@ -437,10 +448,12 @@ final class MediaServicesManagementClient
                     'secondaryKey' => ['type' => 'string'],
                     'scope' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SyncStorageKeysInput' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['id']
             ]
         ]

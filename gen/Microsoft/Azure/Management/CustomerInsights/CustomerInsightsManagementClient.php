@@ -231,7 +231,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Hub'
+                            'schema' => ['$ref' => '#/definitions/Hub']
                         ],
                         [
                             'name' => 'api-version',
@@ -271,7 +271,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Hub'
+                            'schema' => ['$ref' => '#/definitions/Hub']
                         ],
                         [
                             'name' => 'api-version',
@@ -426,7 +426,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ProfileResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/ProfileResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -641,7 +641,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/InteractionResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/InteractionResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -806,7 +806,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RelationshipResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/RelationshipResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -962,7 +962,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RelationshipLinkResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/RelationshipLinkResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -1118,7 +1118,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AuthorizationPolicyResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/AuthorizationPolicyResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -1308,7 +1308,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ConnectorResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/ConnectorResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -1471,7 +1471,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ConnectorMappingResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/ConnectorMappingResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -1645,7 +1645,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/KpiResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/KpiResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -1943,7 +1943,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ViewResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/ViewResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -2074,7 +2074,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LinkResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/LinkResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -2292,7 +2292,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RoleAssignmentResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/RoleAssignmentResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -2411,7 +2411,7 @@ final class CustomerInsightsManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/GetImageUploadUrlInput'
+                        'schema' => ['$ref' => '#/definitions/GetImageUploadUrlInput']
                     ],
                     [
                         'name' => 'api-version',
@@ -2448,7 +2448,7 @@ final class CustomerInsightsManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/GetImageUploadUrlInput'
+                        'schema' => ['$ref' => '#/definitions/GetImageUploadUrlInput']
                     ],
                     [
                         'name' => 'api-version',
@@ -2492,7 +2492,7 @@ final class CustomerInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PredictionResourceFormat'
+                            'schema' => ['$ref' => '#/definitions/PredictionResourceFormat']
                         ],
                         [
                             'name' => 'api-version',
@@ -2690,7 +2690,7 @@ final class CustomerInsightsManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/PredictionModelStatus'
+                        'schema' => ['$ref' => '#/definitions/PredictionModelStatus']
                     ],
                     [
                         'name' => 'api-version',
@@ -2753,6 +2753,7 @@ final class CustomerInsightsManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HubPropertiesFormat' => [
@@ -2766,10 +2767,12 @@ final class CustomerInsightsManagementClient
                     ],
                     'hubBillingInfo' => ['$ref' => '#/definitions/HubBillingInfoFormat']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Hub' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/HubPropertiesFormat']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HubListResult' => [
@@ -2780,6 +2783,7 @@ final class CustomerInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MetadataDefinitionBase' => [
@@ -2810,6 +2814,7 @@ final class CustomerInsightsManagementClient
                     'mediumImage' => ['type' => 'string'],
                     'largeImage' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProfileEnumValidValuesFormat' => [
@@ -2823,6 +2828,7 @@ final class CustomerInsightsManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataSource' => [
@@ -2850,6 +2856,7 @@ final class CustomerInsightsManagementClient
                     ],
                     'dataSourceReferenceId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataSourcePrecedence' => [
@@ -2860,6 +2867,7 @@ final class CustomerInsightsManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PropertyDefinition' => [
@@ -2890,6 +2898,7 @@ final class CustomerInsightsManagementClient
                         'items' => ['$ref' => '#/definitions/DataSourcePrecedence']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'fieldName',
                     'fieldType'
@@ -2935,6 +2944,7 @@ final class CustomerInsightsManagementClient
                     'timestampFieldName' => ['type' => 'string'],
                     'typeName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AuthorizationPolicy' => [
@@ -2954,10 +2964,12 @@ final class CustomerInsightsManagementClient
                     'primaryKey' => ['type' => 'string'],
                     'secondaryKey' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['permissions']
             ],
             'SalesforceDiscoverSetting' => [
                 'properties' => ['salesforceConnectionStringSecretUrl' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['salesforceConnectionStringSecretUrl']
             ],
             'SalesforceTable' => [
@@ -2968,6 +2980,7 @@ final class CustomerInsightsManagementClient
                     'tableRemarks' => ['type' => 'string'],
                     'tableSchema' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'tableCategory',
                     'tableName',
@@ -2982,6 +2995,7 @@ final class CustomerInsightsManagementClient
                         'items' => ['$ref' => '#/definitions/SalesforceTable']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'usersetting',
                     'salesforcetables'
@@ -2989,6 +3003,7 @@ final class CustomerInsightsManagementClient
             ],
             'AzureBlobConnectorProperties' => [
                 'properties' => ['connectionKeyVaultUrl' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['connectionKeyVaultUrl']
             ],
             'CrmConnectorEntities' => [
@@ -2997,6 +3012,7 @@ final class CustomerInsightsManagementClient
                     'displayName' => ['type' => 'string'],
                     'isProfile' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['logicalName']
             ],
             'CrmConnectorProperties' => [
@@ -3010,6 +3026,7 @@ final class CustomerInsightsManagementClient
                     ],
                     'accessToken' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'organizationId',
                     'organizationUrl',
@@ -3062,6 +3079,7 @@ final class CustomerInsightsManagementClient
                     'tenantId' => ['type' => 'string'],
                     'isInternal' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'connectorType',
                     'connectorProperties'
@@ -3082,6 +3100,7 @@ final class CustomerInsightsManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['errorManagementType']
             ],
             'ConnectorMappingFormat' => [
@@ -3093,6 +3112,7 @@ final class CustomerInsightsManagementClient
                     'quoteEscapeCharacter' => ['type' => 'string'],
                     'arraySeparator' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['formatType']
             ],
             'ConnectorMappingAvailability' => [
@@ -3112,6 +3132,7 @@ final class CustomerInsightsManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['interval']
             ],
             'ConnectorMappingStructure' => [
@@ -3121,6 +3142,7 @@ final class CustomerInsightsManagementClient
                     'customFormatSpecifier' => ['type' => 'string'],
                     'isEncrypted' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'propertyName',
                     'columnName'
@@ -3138,6 +3160,7 @@ final class CustomerInsightsManagementClient
                     ],
                     'destinationFolder' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectorMappingProperties' => [
@@ -3154,6 +3177,7 @@ final class CustomerInsightsManagementClient
                     ],
                     'completeOperation' => ['$ref' => '#/definitions/ConnectorMappingCompleteOperation']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'errorManagement',
                     'format',
@@ -3218,6 +3242,7 @@ final class CustomerInsightsManagementClient
                     ],
                     'tenantId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'entityType',
                     'entityTypeName',
@@ -3236,6 +3261,7 @@ final class CustomerInsightsManagementClient
                     ],
                     'increasingKpi' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'lowerLimit',
                     'upperLimit',
@@ -3251,10 +3277,12 @@ final class CustomerInsightsManagementClient
                     'fieldName' => ['type' => 'string'],
                     'fieldType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'KpiParticipantProfilesMetadata' => [
                 'properties' => ['typeName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['typeName']
             ],
             'KpiAlias' => [
@@ -3262,6 +3290,7 @@ final class CustomerInsightsManagementClient
                     'aliasName' => ['type' => 'string'],
                     'expression' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'aliasName',
                     'expression'
@@ -3272,6 +3301,7 @@ final class CustomerInsightsManagementClient
                     'extractName' => ['type' => 'string'],
                     'expression' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'extractName',
                     'expression'
@@ -3359,6 +3389,7 @@ final class CustomerInsightsManagementClient
                         'items' => ['$ref' => '#/definitions/KpiExtract']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'entityType',
                     'entityTypeName',
@@ -3378,6 +3409,7 @@ final class CustomerInsightsManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProxyResource' => [
@@ -3386,6 +3418,7 @@ final class CustomerInsightsManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WidgetType' => [
@@ -3409,6 +3442,7 @@ final class CustomerInsightsManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['definition']
             ],
             'View' => [
@@ -3430,6 +3464,7 @@ final class CustomerInsightsManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['definition']
             ],
             'TypePropertiesMapping' => [
@@ -3444,6 +3479,7 @@ final class CustomerInsightsManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'sourcePropertyName',
                     'targetPropertyName'
@@ -3454,6 +3490,7 @@ final class CustomerInsightsManagementClient
                     'sourcePropertyName' => ['type' => 'string'],
                     'targetPropertyName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'sourcePropertyName',
                     'targetPropertyName'
@@ -3519,6 +3556,7 @@ final class CustomerInsightsManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'sourceEntityType',
                     'targetEntityType',
@@ -3532,6 +3570,7 @@ final class CustomerInsightsManagementClient
                     'profileFieldName' => ['type' => 'string'],
                     'relatedProfileKeyProperty' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'profileFieldName',
                     'relatedProfileKeyProperty'
@@ -3542,6 +3581,7 @@ final class CustomerInsightsManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/RelationshipTypeFieldMapping']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['fieldMappings']
             ],
             'RelationshipDefinition' => [
@@ -3591,6 +3631,7 @@ final class CustomerInsightsManagementClient
                     'relationshipGuidId' => ['type' => 'string'],
                     'tenantId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'profileType',
                     'relatedProfileType'
@@ -3608,6 +3649,7 @@ final class CustomerInsightsManagementClient
                     ],
                     'relationshipFieldName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'interactionFieldName',
                     'relationshipFieldName'
@@ -3618,6 +3660,7 @@ final class CustomerInsightsManagementClient
                     'interactionPropertyName' => ['type' => 'string'],
                     'profilePropertyName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'interactionPropertyName',
                     'profilePropertyName'
@@ -3662,6 +3705,7 @@ final class CustomerInsightsManagementClient
                     'relationshipGuidId' => ['type' => 'string'],
                     'tenantId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'interactionType',
                     'profilePropertyReferences',
@@ -3687,6 +3731,7 @@ final class CustomerInsightsManagementClient
                     ],
                     'role' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'profileTypeName',
                     'participantPropertyReferences',
@@ -3711,6 +3756,7 @@ final class CustomerInsightsManagementClient
                     'defaultDataSource' => ['$ref' => '#/definitions/DataSource'],
                     'isActivity' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StrongId' => [
@@ -3729,6 +3775,7 @@ final class CustomerInsightsManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'keyPropertyNames',
                     'strongIdName'
@@ -3739,10 +3786,12 @@ final class CustomerInsightsManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/StrongId']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProfileResourceFormat' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ProfileTypeDefinition']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProfileListResult' => [
@@ -3753,10 +3802,12 @@ final class CustomerInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InteractionResourceFormat' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/InteractionTypeDefinition']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InteractionListResult' => [
@@ -3767,10 +3818,12 @@ final class CustomerInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'KpiResourceFormat' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/KpiDefinition']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'KpiListResult' => [
@@ -3781,14 +3834,17 @@ final class CustomerInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EnrichingKpi' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectorResourceFormat' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/Connector']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectorListResult' => [
@@ -3799,10 +3855,12 @@ final class CustomerInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectorMappingResourceFormat' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ConnectorMapping']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectorMappingListResult' => [
@@ -3813,10 +3871,12 @@ final class CustomerInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AuthorizationPolicyResourceFormat' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AuthorizationPolicy']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AuthorizationPolicyListResult' => [
@@ -3827,10 +3887,12 @@ final class CustomerInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LinkResourceFormat' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/LinkDefinition']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LinkListResult' => [
@@ -3841,10 +3903,12 @@ final class CustomerInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RelationshipResourceFormat' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RelationshipDefinition']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RelationshipListResult' => [
@@ -3855,10 +3919,12 @@ final class CustomerInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RelationshipLinkResourceFormat' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RelationshipLinkDefinition']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RelationshipLinkListResult' => [
@@ -3869,10 +3935,12 @@ final class CustomerInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ViewResourceFormat' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/View']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ViewListResult' => [
@@ -3883,10 +3951,12 @@ final class CustomerInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WidgetTypeResourceFormat' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/WidgetType']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WidgetTypeListResult' => [
@@ -3897,6 +3967,7 @@ final class CustomerInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AssignmentPrincipal' => [
@@ -3908,6 +3979,7 @@ final class CustomerInsightsManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'principalId',
                     'principalType'
@@ -3924,6 +3996,7 @@ final class CustomerInsightsManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RoleAssignment' => [
@@ -3978,6 +4051,7 @@ final class CustomerInsightsManagementClient
                     'conflationPolicies' => ['$ref' => '#/definitions/ResourceSetDescription'],
                     'segments' => ['$ref' => '#/definitions/ResourceSetDescription']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'role',
                     'principals'
@@ -3985,6 +4059,7 @@ final class CustomerInsightsManagementClient
             ],
             'RoleAssignmentResourceFormat' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RoleAssignment']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RoleAssignmentListResult' => [
@@ -3995,6 +4070,7 @@ final class CustomerInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Role' => [
@@ -4002,10 +4078,12 @@ final class CustomerInsightsManagementClient
                     'roleName' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RoleResourceFormat' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/Role']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RoleListResult' => [
@@ -4016,6 +4094,7 @@ final class CustomerInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GetImageUploadUrlInput' => [
@@ -4024,6 +4103,7 @@ final class CustomerInsightsManagementClient
                     'entityTypeName' => ['type' => 'string'],
                     'relativePath' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ImageDefinition' => [
@@ -4032,6 +4112,7 @@ final class CustomerInsightsManagementClient
                     'contentUrl' => ['type' => 'string'],
                     'relativePath' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RelationshipsLookup' => [
@@ -4048,6 +4129,7 @@ final class CustomerInsightsManagementClient
                     ],
                     'existingRelationshipName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SuggestRelationshipLinksResponse' => [
@@ -4058,6 +4140,7 @@ final class CustomerInsightsManagementClient
                         'items' => ['$ref' => '#/definitions/RelationshipsLookup']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Prediction_mappings' => [
@@ -4066,6 +4149,7 @@ final class CustomerInsightsManagementClient
                     'grade' => ['type' => 'string'],
                     'reason' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Prediction_gradesItem' => [
@@ -4080,6 +4164,7 @@ final class CustomerInsightsManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Prediction_systemGeneratedEntities' => [
@@ -4097,6 +4182,7 @@ final class CustomerInsightsManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Prediction' => [
@@ -4147,6 +4233,7 @@ final class CustomerInsightsManagementClient
                     ],
                     'systemGeneratedEntities' => ['$ref' => '#/definitions/Prediction_systemGeneratedEntities']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'negativeOutcomeExpression',
                     'positiveOutcomeExpression',
@@ -4180,6 +4267,7 @@ final class CustomerInsightsManagementClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PredictionDistributionDefinition' => [
@@ -4197,6 +4285,7 @@ final class CustomerInsightsManagementClient
                         'items' => ['$ref' => '#/definitions/PredictionDistributionDefinition_distributionsItem']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CanonicalProfileDefinition_propertiesItem' => [
@@ -4218,6 +4307,7 @@ final class CustomerInsightsManagementClient
                     ],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CanonicalProfileDefinition' => [
@@ -4231,6 +4321,7 @@ final class CustomerInsightsManagementClient
                         'items' => ['$ref' => '#/definitions/CanonicalProfileDefinition_propertiesItem']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PredictionTrainingResults' => [
@@ -4247,6 +4338,7 @@ final class CustomerInsightsManagementClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PredictionModelStatus' => [
@@ -4300,10 +4392,12 @@ final class CustomerInsightsManagementClient
                     ],
                     'modelVersion' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['status']
             ],
             'PredictionResourceFormat' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/Prediction']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PredictionListResult' => [
@@ -4314,6 +4408,7 @@ final class CustomerInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

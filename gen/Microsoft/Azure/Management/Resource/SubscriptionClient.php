@@ -114,6 +114,7 @@ final class SubscriptionClient
                     'latitude' => ['type' => 'string'],
                     'longitude' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LocationListResult' => [
@@ -121,6 +122,7 @@ final class SubscriptionClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Location']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubscriptionPolicies' => [
@@ -136,6 +138,7 @@ final class SubscriptionClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Subscription' => [
@@ -156,6 +159,7 @@ final class SubscriptionClient
                     'subscriptionPolicies' => ['$ref' => '#/definitions/SubscriptionPolicies'],
                     'authorizationSource' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubscriptionListResult' => [
@@ -166,6 +170,7 @@ final class SubscriptionClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['nextLink']
             ],
             'TenantIdDescription' => [
@@ -173,6 +178,7 @@ final class SubscriptionClient
                     'id' => ['type' => 'string'],
                     'tenantId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TenantListResult' => [
@@ -183,6 +189,7 @@ final class SubscriptionClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['nextLink']
             ]
         ]

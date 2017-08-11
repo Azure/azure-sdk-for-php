@@ -127,6 +127,7 @@ final class UsageManagementClient
         'definitions' => [
             'InfoField' => [
                 'properties' => ['project' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UsageSample' => [
@@ -153,6 +154,7 @@ final class UsageManagementClient
                     'infoFields' => ['$ref' => '#/definitions/InfoField'],
                     'instanceData' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UsageAggregation' => [
@@ -162,6 +164,7 @@ final class UsageManagementClient
                     'type' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/UsageSample']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UsageAggregationListResult' => [
@@ -172,6 +175,7 @@ final class UsageManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RateCardQueryParameters' => [
@@ -181,6 +185,7 @@ final class UsageManagementClient
                     'Locale' => ['type' => 'string'],
                     'RegionInfo' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'OfferDurableId',
                     'Currency',
@@ -193,6 +198,7 @@ final class UsageManagementClient
                     'type' => 'string',
                     'format' => 'date-time'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MeterInfo' => [
@@ -226,6 +232,7 @@ final class UsageManagementClient
                         'format' => 'double'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceRateCardInfo' => [
@@ -242,6 +249,7 @@ final class UsageManagementClient
                         'items' => ['$ref' => '#/definitions/MeterInfo']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Monetary Credit' => [
@@ -258,6 +266,7 @@ final class UsageManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Monetary Commitment' => [
@@ -277,6 +286,7 @@ final class UsageManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Recurring Charge' => [
@@ -284,6 +294,7 @@ final class UsageManagementClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorResponse' => [
@@ -291,6 +302,7 @@ final class UsageManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

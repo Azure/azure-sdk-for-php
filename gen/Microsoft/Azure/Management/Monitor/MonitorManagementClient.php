@@ -148,7 +148,7 @@ final class MonitorManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AutoscaleSettingResource'
+                            'schema' => ['$ref' => '#/definitions/AutoscaleSettingResource']
                         ],
                         [
                             'name' => 'api-version',
@@ -266,7 +266,7 @@ final class MonitorManagementClient
                             'name' => 'autoscaleSettingResource',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AutoscaleSettingResourcePatch'
+                            'schema' => ['$ref' => '#/definitions/AutoscaleSettingResourcePatch']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/AutoscaleSettingResource']]]
@@ -367,7 +367,7 @@ final class MonitorManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AlertRuleResource'
+                            'schema' => ['$ref' => '#/definitions/AlertRuleResource']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -478,7 +478,7 @@ final class MonitorManagementClient
                             'name' => 'alertRulesResource',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AlertRuleResourcePatch'
+                            'schema' => ['$ref' => '#/definitions/AlertRuleResourcePatch']
                         ]
                     ],
                     'responses' => [
@@ -583,7 +583,7 @@ final class MonitorManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LogProfileResource'
+                            'schema' => ['$ref' => '#/definitions/LogProfileResource']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -620,7 +620,7 @@ final class MonitorManagementClient
                             'name' => 'logProfilesResource',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LogProfileResourcePatch'
+                            'schema' => ['$ref' => '#/definitions/LogProfileResourcePatch']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/LogProfileResource']]]
@@ -685,7 +685,7 @@ final class MonitorManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ServiceDiagnosticSettingsResource'
+                            'schema' => ['$ref' => '#/definitions/ServiceDiagnosticSettingsResource']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/ServiceDiagnosticSettingsResource']]]
@@ -710,7 +710,7 @@ final class MonitorManagementClient
                             'name' => 'serviceDiagnosticSettingsResource',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ServiceDiagnosticSettingsResourcePatch'
+                            'schema' => ['$ref' => '#/definitions/ServiceDiagnosticSettingsResourcePatch']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/ServiceDiagnosticSettingsResource']]]
@@ -736,7 +736,7 @@ final class MonitorManagementClient
                             'name' => 'actionGroup',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ActionGroupResource'
+                            'schema' => ['$ref' => '#/definitions/ActionGroupResource']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -886,7 +886,7 @@ final class MonitorManagementClient
                         'name' => 'enableRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/EnableRequest'
+                        'schema' => ['$ref' => '#/definitions/EnableRequest']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -937,7 +937,7 @@ final class MonitorManagementClient
                             'name' => 'activityLogAlert',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ActivityLogAlertResource'
+                            'schema' => ['$ref' => '#/definitions/ActivityLogAlertResource']
                         ]
                     ],
                     'responses' => [
@@ -1042,7 +1042,7 @@ final class MonitorManagementClient
                             'name' => 'activityLogAlertPatch',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ActivityLogAlertPatchBody'
+                            'schema' => ['$ref' => '#/definitions/ActivityLogAlertPatchBody']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/ActivityLogAlertResource']]]
@@ -1105,6 +1105,7 @@ final class MonitorManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'ScaleCapacity' => [
@@ -1113,6 +1114,7 @@ final class MonitorManagementClient
                     'maximum' => ['type' => 'string'],
                     'default' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'minimum',
                     'maximum',
@@ -1166,6 +1168,7 @@ final class MonitorManagementClient
                         'format' => 'double'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'metricName',
                     'metricResourceUri',
@@ -1201,6 +1204,7 @@ final class MonitorManagementClient
                         'format' => 'duration'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'direction',
                     'type',
@@ -1212,6 +1216,7 @@ final class MonitorManagementClient
                     'metricTrigger' => ['$ref' => '#/definitions/MetricTrigger'],
                     'scaleAction' => ['$ref' => '#/definitions/ScaleAction']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'metricTrigger',
                     'scaleAction'
@@ -1229,6 +1234,7 @@ final class MonitorManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'start',
                     'end'
@@ -1256,6 +1262,7 @@ final class MonitorManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'timeZone',
                     'days',
@@ -1280,6 +1287,7 @@ final class MonitorManagementClient
                     ],
                     'schedule' => ['$ref' => '#/definitions/RecurrentSchedule']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'frequency',
                     'schedule'
@@ -1296,6 +1304,7 @@ final class MonitorManagementClient
                     'fixedDate' => ['$ref' => '#/definitions/TimeWindow'],
                     'recurrence' => ['$ref' => '#/definitions/Recurrence']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'capacity',
@@ -1311,6 +1320,7 @@ final class MonitorManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WebhookNotification' => [
@@ -1321,6 +1331,7 @@ final class MonitorManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AutoscaleNotification' => [
@@ -1332,6 +1343,7 @@ final class MonitorManagementClient
                         'items' => ['$ref' => '#/definitions/WebhookNotification']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['operation']
             ],
             'AutoscaleSetting' => [
@@ -1348,10 +1360,12 @@ final class MonitorManagementClient
                     'name' => ['type' => 'string'],
                     'targetResourceUri' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['profiles']
             ],
             'AutoscaleSettingResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AutoscaleSetting']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'AutoscaleSettingResourcePatch' => [
@@ -1362,6 +1376,7 @@ final class MonitorManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/AutoscaleSetting']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AutoscaleSettingResourceCollection' => [
@@ -1372,6 +1387,7 @@ final class MonitorManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'ErrorResponse' => [
@@ -1379,6 +1395,7 @@ final class MonitorManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Incident' => [
@@ -1395,6 +1412,7 @@ final class MonitorManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IncidentListResult' => [
@@ -1402,22 +1420,27 @@ final class MonitorManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Incident']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RuleDataSource' => [
                 'properties' => ['resourceUri' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RuleCondition' => [
                 'properties' => ['dataSource' => ['$ref' => '#/definitions/RuleDataSource']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource' => [
                 'properties' => ['metricName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RuleManagementEventClaimsDataSource' => [
                 'properties' => ['emailAddress' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Azure.Management.Insights.Models.RuleManagementEventDataSource' => [
@@ -1432,6 +1455,7 @@ final class MonitorManagementClient
                     'subStatus' => ['type' => 'string'],
                     'claims' => ['$ref' => '#/definitions/RuleManagementEventClaimsDataSource']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition' => [
@@ -1464,6 +1488,7 @@ final class MonitorManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'operator',
                     'threshold'
@@ -1480,6 +1505,7 @@ final class MonitorManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['failedLocationCount']
             ],
             'ManagementEventAggregationCondition' => [
@@ -1502,14 +1528,17 @@ final class MonitorManagementClient
                         'format' => 'duration'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Azure.Management.Insights.Models.ManagementEventRuleCondition' => [
                 'properties' => ['aggregation' => ['$ref' => '#/definitions/ManagementEventAggregationCondition']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RuleAction' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Azure.Management.Insights.Models.RuleEmailAction' => [
@@ -1520,6 +1549,7 @@ final class MonitorManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Azure.Management.Insights.Models.RuleWebhookAction' => [
@@ -1530,6 +1560,7 @@ final class MonitorManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AlertRule' => [
@@ -1547,6 +1578,7 @@ final class MonitorManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'isEnabled',
@@ -1555,6 +1587,7 @@ final class MonitorManagementClient
             ],
             'AlertRuleResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AlertRule']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'AlertRuleResourcePatch' => [
@@ -1565,6 +1598,7 @@ final class MonitorManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/AlertRule']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AlertRuleResourceCollection' => [
@@ -1572,6 +1606,7 @@ final class MonitorManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/AlertRuleResource']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RetentionPolicy' => [
@@ -1582,6 +1617,7 @@ final class MonitorManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'enabled',
                     'days'
@@ -1601,6 +1637,7 @@ final class MonitorManagementClient
                     ],
                     'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'locations',
                     'categories',
@@ -1609,6 +1646,7 @@ final class MonitorManagementClient
             ],
             'LogProfileResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/LogProfileProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'LogProfileResourcePatch' => [
@@ -1619,6 +1657,7 @@ final class MonitorManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/LogProfileProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LogProfileCollection' => [
@@ -1626,6 +1665,7 @@ final class MonitorManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/LogProfileResource']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'MetricSettings' => [
@@ -1637,6 +1677,7 @@ final class MonitorManagementClient
                     'enabled' => ['type' => 'boolean'],
                     'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'timeGrain',
                     'enabled'
@@ -1648,6 +1689,7 @@ final class MonitorManagementClient
                     'enabled' => ['type' => 'boolean'],
                     'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['enabled']
             ],
             'ServiceDiagnosticSettings' => [
@@ -1665,10 +1707,12 @@ final class MonitorManagementClient
                     ],
                     'workspaceId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServiceDiagnosticSettingsResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ServiceDiagnosticSettings']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServiceDiagnosticSettingsResourcePatch' => [
@@ -1679,6 +1723,7 @@ final class MonitorManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/ServiceDiagnosticSettings']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EmailReceiver' => [
@@ -1694,6 +1739,7 @@ final class MonitorManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'emailAddress'
@@ -1713,6 +1759,7 @@ final class MonitorManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'countryCode',
@@ -1724,6 +1771,7 @@ final class MonitorManagementClient
                     'name' => ['type' => 'string'],
                     'serviceUri' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'serviceUri'
@@ -1746,6 +1794,7 @@ final class MonitorManagementClient
                         'items' => ['$ref' => '#/definitions/WebhookReceiver']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'groupShortName',
                     'enabled'
@@ -1753,6 +1802,7 @@ final class MonitorManagementClient
             ],
             'ActionGroupResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ActionGroup']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ActionGroupList' => [
@@ -1763,10 +1813,12 @@ final class MonitorManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EnableRequest' => [
                 'properties' => ['receiverName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['receiverName']
             ],
             'ActivityLogAlertLeafCondition' => [
@@ -1774,6 +1826,7 @@ final class MonitorManagementClient
                     'field' => ['type' => 'string'],
                     'equals' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'field',
                     'equals'
@@ -1784,6 +1837,7 @@ final class MonitorManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ActivityLogAlertLeafCondition']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['allOf']
             ],
             'ActivityLogAlertActionGroup' => [
@@ -1794,6 +1848,7 @@ final class MonitorManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['actionGroupId']
             ],
             'ActivityLogAlertActionList' => [
@@ -1801,6 +1856,7 @@ final class MonitorManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ActivityLogAlertActionGroup']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ActivityLogAlert' => [
@@ -1814,6 +1870,7 @@ final class MonitorManagementClient
                     'actions' => ['$ref' => '#/definitions/ActivityLogAlertActionList'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'scopes',
                     'condition',
@@ -1822,6 +1879,7 @@ final class MonitorManagementClient
             ],
             'ActivityLogAlertResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ActivityLogAlert']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ActivityLogAlertList' => [
@@ -1832,10 +1890,12 @@ final class MonitorManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ActivityLogAlertPatch' => [
                 'properties' => ['enabled' => ['type' => 'boolean']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ActivityLogAlertPatchBody' => [
@@ -1846,6 +1906,7 @@ final class MonitorManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/ActivityLogAlertPatch']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

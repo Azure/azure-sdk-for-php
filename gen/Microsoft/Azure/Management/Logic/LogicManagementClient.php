@@ -322,7 +322,7 @@ final class LogicManagementClient
                             'name' => 'workflow',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Workflow'
+                            'schema' => ['$ref' => '#/definitions/Workflow']
                         ]
                     ],
                     'responses' => [
@@ -362,7 +362,7 @@ final class LogicManagementClient
                             'name' => 'workflow',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Workflow'
+                            'schema' => ['$ref' => '#/definitions/Workflow']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/Workflow']]]
@@ -496,7 +496,7 @@ final class LogicManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/GenerateUpgradedDefinitionParameters'
+                        'schema' => ['$ref' => '#/definitions/GenerateUpgradedDefinitionParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['type' => 'object']]]
@@ -557,7 +557,7 @@ final class LogicManagementClient
                         'name' => 'keyType',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateActionParameter'
+                        'schema' => ['$ref' => '#/definitions/RegenerateActionParameter']
                     ],
                     [
                         'name' => 'api-version',
@@ -607,7 +607,7 @@ final class LogicManagementClient
                         'name' => 'workflow',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/Workflow'
+                        'schema' => ['$ref' => '#/definitions/Workflow']
                     ]
                 ],
                 'responses' => ['200' => []]
@@ -724,7 +724,7 @@ final class LogicManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => FALSE,
-                        '$ref' => '#/definitions/GetCallbackUrlParameters'
+                        'schema' => ['$ref' => '#/definitions/GetCallbackUrlParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -1360,7 +1360,7 @@ final class LogicManagementClient
                             'name' => 'integrationAccount',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IntegrationAccount'
+                            'schema' => ['$ref' => '#/definitions/IntegrationAccount']
                         ]
                     ],
                     'responses' => [
@@ -1400,7 +1400,7 @@ final class LogicManagementClient
                             'name' => 'integrationAccount',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IntegrationAccount'
+                            'schema' => ['$ref' => '#/definitions/IntegrationAccount']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/IntegrationAccount']]]
@@ -1472,7 +1472,7 @@ final class LogicManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/GetCallbackUrlParameters'
+                        'schema' => ['$ref' => '#/definitions/GetCallbackUrlParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CallbackUrl']]]
@@ -1597,7 +1597,7 @@ final class LogicManagementClient
                             'name' => 'schema',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IntegrationAccountSchema'
+                            'schema' => ['$ref' => '#/definitions/IntegrationAccountSchema']
                         ]
                     ],
                     'responses' => [
@@ -1766,7 +1766,7 @@ final class LogicManagementClient
                             'name' => 'map',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IntegrationAccountMap'
+                            'schema' => ['$ref' => '#/definitions/IntegrationAccountMap']
                         ]
                     ],
                     'responses' => [
@@ -1935,7 +1935,7 @@ final class LogicManagementClient
                             'name' => 'partner',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IntegrationAccountPartner'
+                            'schema' => ['$ref' => '#/definitions/IntegrationAccountPartner']
                         ]
                     ],
                     'responses' => [
@@ -2104,7 +2104,7 @@ final class LogicManagementClient
                             'name' => 'agreement',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IntegrationAccountAgreement'
+                            'schema' => ['$ref' => '#/definitions/IntegrationAccountAgreement']
                         ]
                     ],
                     'responses' => [
@@ -2267,7 +2267,7 @@ final class LogicManagementClient
                             'name' => 'certificate',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IntegrationAccountCertificate'
+                            'schema' => ['$ref' => '#/definitions/IntegrationAccountCertificate']
                         ]
                     ],
                     'responses' => [
@@ -2436,7 +2436,7 @@ final class LogicManagementClient
                             'name' => 'session',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/IntegrationAccountSession'
+                            'schema' => ['$ref' => '#/definitions/IntegrationAccountSession']
                         ]
                     ],
                     'responses' => [
@@ -2509,10 +2509,12 @@ final class LogicManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubResource' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceReference' => [
@@ -2521,6 +2523,7 @@ final class LogicManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Sku' => [
@@ -2538,6 +2541,7 @@ final class LogicManagementClient
                     ],
                     'plan' => ['$ref' => '#/definitions/ResourceReference']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'WorkflowParameter' => [
@@ -2560,6 +2564,7 @@ final class LogicManagementClient
                     'metadata' => ['type' => 'object'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowProperties' => [
@@ -2616,10 +2621,12 @@ final class LogicManagementClient
                         'additionalProperties' => ['$ref' => '#/definitions/WorkflowParameter']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Workflow' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/WorkflowProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowFilter' => [
@@ -2634,6 +2641,7 @@ final class LogicManagementClient
                         'Suspended'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowListResult' => [
@@ -2644,6 +2652,7 @@ final class LogicManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowVersionProperties' => [
@@ -2677,10 +2686,12 @@ final class LogicManagementClient
                         'additionalProperties' => ['$ref' => '#/definitions/WorkflowParameter']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowVersion' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/WorkflowVersionProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowVersionListResult' => [
@@ -2691,6 +2702,7 @@ final class LogicManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecurrenceScheduleOccurrence' => [
@@ -2712,6 +2724,7 @@ final class LogicManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecurrenceSchedule' => [
@@ -2757,6 +2770,7 @@ final class LogicManagementClient
                         'items' => ['$ref' => '#/definitions/RecurrenceScheduleOccurrence']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowTriggerRecurrence' => [
@@ -2789,6 +2803,7 @@ final class LogicManagementClient
                     'timeZone' => ['type' => 'string'],
                     'schedule' => ['$ref' => '#/definitions/RecurrenceSchedule']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowTriggerProperties' => [
@@ -2864,6 +2879,7 @@ final class LogicManagementClient
                     'recurrence' => ['$ref' => '#/definitions/WorkflowTriggerRecurrence'],
                     'workflow' => ['$ref' => '#/definitions/ResourceReference']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowTrigger' => [
@@ -2872,6 +2888,7 @@ final class LogicManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowTriggerFilter' => [
@@ -2886,6 +2903,7 @@ final class LogicManagementClient
                         'Suspended'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowTriggerListResult' => [
@@ -2896,6 +2914,7 @@ final class LogicManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowTriggerListCallbackUrlQueries' => [
@@ -2905,6 +2924,7 @@ final class LogicManagementClient
                     'sv' => ['type' => 'string'],
                     'sig' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowTriggerCallbackUrl' => [
@@ -2919,10 +2939,12 @@ final class LogicManagementClient
                     ],
                     'queries' => ['$ref' => '#/definitions/WorkflowTriggerListCallbackUrlQueries']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Correlation' => [
                 'properties' => ['clientTrackingId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ContentHash' => [
@@ -2930,6 +2952,7 @@ final class LogicManagementClient
                     'algorithm' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ContentLink' => [
@@ -2943,6 +2966,7 @@ final class LogicManagementClient
                     'contentHash' => ['$ref' => '#/definitions/ContentHash'],
                     'metadata' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowTriggerHistoryProperties' => [
@@ -2982,6 +3006,7 @@ final class LogicManagementClient
                     'fired' => ['type' => 'boolean'],
                     'run' => ['$ref' => '#/definitions/ResourceReference']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowTriggerHistory' => [
@@ -2990,6 +3015,7 @@ final class LogicManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowTriggerHistoryListResult' => [
@@ -3000,6 +3026,7 @@ final class LogicManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowTriggerHistoryFilter' => [
@@ -3021,6 +3048,7 @@ final class LogicManagementClient
                         'Ignored'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowRunTrigger' => [
@@ -3062,10 +3090,12 @@ final class LogicManagementClient
                     'error' => ['type' => 'object'],
                     'trackedProperties' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowOutputParameter' => [
                 'properties' => ['error' => ['type' => 'object']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowRunProperties' => [
@@ -3108,6 +3138,7 @@ final class LogicManagementClient
                     ],
                     'response' => ['$ref' => '#/definitions/WorkflowRunTrigger']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowRun' => [
@@ -3116,6 +3147,7 @@ final class LogicManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowRunFilter' => [
@@ -3137,6 +3169,7 @@ final class LogicManagementClient
                         'Ignored'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowRunListResult' => [
@@ -3147,6 +3180,7 @@ final class LogicManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorProperties' => [
@@ -3154,10 +3188,12 @@ final class LogicManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorResponse' => [
                 'properties' => ['error' => ['$ref' => '#/definitions/ErrorProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RetryHistory' => [
@@ -3175,6 +3211,7 @@ final class LogicManagementClient
                     'serviceRequestId' => ['type' => 'string'],
                     'error' => ['$ref' => '#/definitions/ErrorResponse']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowRunActionProperties' => [
@@ -3217,6 +3254,7 @@ final class LogicManagementClient
                         'items' => ['$ref' => '#/definitions/RetryHistory']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowRunAction' => [
@@ -3225,6 +3263,7 @@ final class LogicManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowRunActionFilter' => [
@@ -3246,6 +3285,7 @@ final class LogicManagementClient
                         'Ignored'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowRunActionListResult' => [
@@ -3256,6 +3296,7 @@ final class LogicManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RegenerateActionParameter' => [
@@ -3267,10 +3308,12 @@ final class LogicManagementClient
                         'Secondary'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GenerateUpgradedDefinitionParameters' => [
                 'properties' => ['targetSchemaVersion' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IntegrationAccountSku' => [
@@ -3282,6 +3325,7 @@ final class LogicManagementClient
                         'Standard'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'IntegrationAccount' => [
@@ -3289,6 +3333,7 @@ final class LogicManagementClient
                     'properties' => ['type' => 'object'],
                     'sku' => ['$ref' => '#/definitions/IntegrationAccountSku']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IntegrationAccountListResult' => [
@@ -3299,6 +3344,7 @@ final class LogicManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GetCallbackUrlParameters' => [
@@ -3316,10 +3362,12 @@ final class LogicManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CallbackUrl' => [
                 'properties' => ['value' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IntegrationAccountSchemaProperties' => [
@@ -3347,10 +3395,12 @@ final class LogicManagementClient
                     'contentType' => ['type' => 'string'],
                     'contentLink' => ['$ref' => '#/definitions/ContentLink']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['schemaType']
             ],
             'IntegrationAccountSchema' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/IntegrationAccountSchemaProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'IntegrationAccountSchemaListResult' => [
@@ -3361,6 +3411,7 @@ final class LogicManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IntegrationAccountSchemaFilter' => [
@@ -3371,10 +3422,12 @@ final class LogicManagementClient
                         'Xml'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['schemaType']
             ],
             'IntegrationAccountMapProperties_parametersSchema' => [
                 'properties' => ['ref' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IntegrationAccountMapProperties' => [
@@ -3400,10 +3453,12 @@ final class LogicManagementClient
                     'contentLink' => ['$ref' => '#/definitions/ContentLink'],
                     'metadata' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['mapType']
             ],
             'IntegrationAccountMap' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/IntegrationAccountMapProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'IntegrationAccountMapListResult' => [
@@ -3414,6 +3469,7 @@ final class LogicManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IntegrationAccountMapFilter' => [
@@ -3424,6 +3480,7 @@ final class LogicManagementClient
                         'Xslt'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['mapType']
             ],
             'BusinessIdentity' => [
@@ -3431,6 +3488,7 @@ final class LogicManagementClient
                     'qualifier' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'qualifier',
                     'value'
@@ -3441,10 +3499,12 @@ final class LogicManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/BusinessIdentity']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PartnerContent' => [
                 'properties' => ['b2b' => ['$ref' => '#/definitions/B2BPartnerContent']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IntegrationAccountPartnerProperties' => [
@@ -3467,6 +3527,7 @@ final class LogicManagementClient
                     'metadata' => ['type' => 'object'],
                     'content' => ['$ref' => '#/definitions/PartnerContent']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'partnerType',
                     'content'
@@ -3474,6 +3535,7 @@ final class LogicManagementClient
             ],
             'IntegrationAccountPartner' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/IntegrationAccountPartnerProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'IntegrationAccountPartnerListResult' => [
@@ -3484,6 +3546,7 @@ final class LogicManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IntegrationAccountPartnerFilter' => [
@@ -3494,6 +3557,7 @@ final class LogicManagementClient
                         'B2B'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['partnerType']
             ],
             'AS2MessageConnectionSettings' => [
@@ -3503,6 +3567,7 @@ final class LogicManagementClient
                     'keepHttpConnectionAlive' => ['type' => 'boolean'],
                     'unfoldHttpHeaders' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'ignoreCertificateNameMismatch',
                     'supportHttpStatusCodeContinue',
@@ -3517,6 +3582,7 @@ final class LogicManagementClient
                     'keepHttpConnectionAlive' => ['type' => 'boolean'],
                     'unfoldHttpHeaders' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'ignoreCertificateNameMismatch',
                     'supportHttpStatusCodeContinue',
@@ -3547,6 +3613,7 @@ final class LogicManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'needMdn',
                     'signMdn',
@@ -3569,6 +3636,7 @@ final class LogicManagementClient
                     'enableNrrForInboundMdn' => ['type' => 'boolean'],
                     'sha2AlgorithmFormat' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'overrideGroupSigningCertificate',
                     'enableNrrForInboundEncodedMessages',
@@ -3616,6 +3684,7 @@ final class LogicManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'overrideMessageProperties',
                     'encryptMessage',
@@ -3636,6 +3705,7 @@ final class LogicManagementClient
                     'suspendMessageOnFileNameGenerationError' => ['type' => 'boolean'],
                     'autogenerateFileName' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'messageContentType',
                     'transmitFileNameInMimeHeader',
@@ -3649,6 +3719,7 @@ final class LogicManagementClient
                     'suspendDuplicateMessage' => ['type' => 'boolean'],
                     'resendIfMdnNotReceived' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'suspendDuplicateMessage',
                     'resendIfMdnNotReceived'
@@ -3664,6 +3735,7 @@ final class LogicManagementClient
                     'envelopeSettings' => ['$ref' => '#/definitions/AS2EnvelopeSettings'],
                     'errorSettings' => ['$ref' => '#/definitions/AS2ErrorSettings']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'messageConnectionSettings',
                     'acknowledgementConnectionSettings',
@@ -3680,6 +3752,7 @@ final class LogicManagementClient
                     'receiverBusinessIdentity' => ['$ref' => '#/definitions/BusinessIdentity'],
                     'protocolSettings' => ['$ref' => '#/definitions/AS2ProtocolSettings']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'senderBusinessIdentity',
                     'receiverBusinessIdentity',
@@ -3691,6 +3764,7 @@ final class LogicManagementClient
                     'receiveAgreement' => ['$ref' => '#/definitions/AS2OneWayAgreement'],
                     'sendAgreement' => ['$ref' => '#/definitions/AS2OneWayAgreement']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'receiveAgreement',
                     'sendAgreement'
@@ -3720,6 +3794,7 @@ final class LogicManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'validateCharacterSet',
                     'checkDuplicateInterchangeControlNumber',
@@ -3772,6 +3847,7 @@ final class LogicManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'dataElementSeparator',
                     'componentSeparator',
@@ -3854,6 +3930,7 @@ final class LogicManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'controlStandardsId',
                     'useControlStandardsIdAsRepetitionCharacter',
@@ -3902,6 +3979,7 @@ final class LogicManagementClient
                     ],
                     'rolloverAcknowledgementControlNumber' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'needTechnicalAcknowledgement',
                     'batchTechnicalAcknowledgements',
@@ -3925,6 +4003,7 @@ final class LogicManagementClient
                         'Exclude'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['messageFilterType']
             ],
             'X12SecuritySettings' => [
@@ -3934,6 +4013,7 @@ final class LogicManagementClient
                     'securityQualifier' => ['type' => 'string'],
                     'passwordValue' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'authorizationQualifier',
                     'securityQualifier'
@@ -3948,6 +4028,7 @@ final class LogicManagementClient
                     'createEmptyXmlTagsForTrailingSeparators' => ['type' => 'boolean'],
                     'useDotAsDecimalSeparator' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'maskSecurityInfo',
                     'convertImpliedDecimal',
@@ -3986,6 +4067,7 @@ final class LogicManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'targetNamespace',
                     'protocolVersion',
@@ -4016,6 +4098,7 @@ final class LogicManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'messageId',
                     'validateEdiTypes',
@@ -4028,6 +4111,7 @@ final class LogicManagementClient
             ],
             'X12MessageIdentifier' => [
                 'properties' => ['messageId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['messageId']
             ],
             'X12SchemaReference' => [
@@ -4037,6 +4121,7 @@ final class LogicManagementClient
                     'schemaVersion' => ['type' => 'string'],
                     'schemaName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'messageId',
                     'schemaVersion',
@@ -4076,6 +4161,7 @@ final class LogicManagementClient
                     'replaceSeparatorsInPayload' => ['type' => 'boolean'],
                     'targetNamespace' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'dataElementSeparator',
                     'componentSeparator',
@@ -4115,6 +4201,7 @@ final class LogicManagementClient
                         'items' => ['$ref' => '#/definitions/X12DelimiterOverrides']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'validationSettings',
                     'framingSettings',
@@ -4132,6 +4219,7 @@ final class LogicManagementClient
                     'receiverBusinessIdentity' => ['$ref' => '#/definitions/BusinessIdentity'],
                     'protocolSettings' => ['$ref' => '#/definitions/X12ProtocolSettings']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'senderBusinessIdentity',
                     'receiverBusinessIdentity',
@@ -4143,6 +4231,7 @@ final class LogicManagementClient
                     'receiveAgreement' => ['$ref' => '#/definitions/X12OneWayAgreement'],
                     'sendAgreement' => ['$ref' => '#/definitions/X12OneWayAgreement']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'receiveAgreement',
                     'sendAgreement'
@@ -4172,6 +4261,7 @@ final class LogicManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'validateCharacterSet',
                     'checkDuplicateInterchangeControlNumber',
@@ -4252,6 +4342,7 @@ final class LogicManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'protocolVersion',
                     'dataElementSeparator',
@@ -4326,6 +4417,7 @@ final class LogicManagementClient
                     'receiverInternalIdentification' => ['type' => 'string'],
                     'receiverInternalSubIdentification' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'applyDelimiterStringAdvice',
                     'createGroupingSegments',
@@ -4363,6 +4455,7 @@ final class LogicManagementClient
                     ],
                     'rolloverAcknowledgementControlNumber' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'needTechnicalAcknowledgement',
                     'batchTechnicalAcknowledgements',
@@ -4384,6 +4477,7 @@ final class LogicManagementClient
                         'Exclude'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['messageFilterType']
             ],
             'EdifactProcessingSettings' => [
@@ -4394,6 +4488,7 @@ final class LogicManagementClient
                     'createEmptyXmlTagsForTrailingSeparators' => ['type' => 'boolean'],
                     'useDotAsDecimalSeparator' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'maskSecurityInfo',
                     'preserveInterchange',
@@ -4420,10 +4515,12 @@ final class LogicManagementClient
                     'associationAssignedCode' => ['type' => 'string'],
                     'applicationPassword' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EdifactMessageIdentifier' => [
                 'properties' => ['messageId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['messageId']
             ],
             'EdifactSchemaReference' => [
@@ -4436,6 +4533,7 @@ final class LogicManagementClient
                     'associationAssignedCode' => ['type' => 'string'],
                     'schemaName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'messageId',
                     'messageVersion',
@@ -4461,6 +4559,7 @@ final class LogicManagementClient
                     ],
                     'trimLeadingAndTrailingSpacesAndZeroes' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'messageId',
                     'enforceCharacterSet',
@@ -4517,6 +4616,7 @@ final class LogicManagementClient
                     'messageAssociationAssignedCode' => ['type' => 'string'],
                     'targetNamespace' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'dataElementSeparator',
                     'componentSeparator',
@@ -4556,6 +4656,7 @@ final class LogicManagementClient
                         'items' => ['$ref' => '#/definitions/EdifactDelimiterOverride']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'validationSettings',
                     'framingSettings',
@@ -4572,6 +4673,7 @@ final class LogicManagementClient
                     'receiverBusinessIdentity' => ['$ref' => '#/definitions/BusinessIdentity'],
                     'protocolSettings' => ['$ref' => '#/definitions/EdifactProtocolSettings']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'senderBusinessIdentity',
                     'receiverBusinessIdentity',
@@ -4583,6 +4685,7 @@ final class LogicManagementClient
                     'receiveAgreement' => ['$ref' => '#/definitions/EdifactOneWayAgreement'],
                     'sendAgreement' => ['$ref' => '#/definitions/EdifactOneWayAgreement']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'receiveAgreement',
                     'sendAgreement'
@@ -4594,6 +4697,7 @@ final class LogicManagementClient
                     'x12' => ['$ref' => '#/definitions/X12AgreementContent'],
                     'edifact' => ['$ref' => '#/definitions/EdifactAgreementContent']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IntegrationAccountAgreementProperties' => [
@@ -4622,6 +4726,7 @@ final class LogicManagementClient
                     'guestIdentity' => ['$ref' => '#/definitions/BusinessIdentity'],
                     'content' => ['$ref' => '#/definitions/AgreementContent']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'agreementType',
                     'hostPartner',
@@ -4633,6 +4738,7 @@ final class LogicManagementClient
             ],
             'IntegrationAccountAgreement' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/IntegrationAccountAgreementProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'IntegrationAccountAgreementListResult' => [
@@ -4643,6 +4749,7 @@ final class LogicManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IntegrationAccountAgreementFilter' => [
@@ -4655,6 +4762,7 @@ final class LogicManagementClient
                         'Edifact'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['agreementType']
             ],
             'KeyVaultKeyReference_keyVault' => [
@@ -4663,6 +4771,7 @@ final class LogicManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'KeyVaultKeyReference' => [
@@ -4671,6 +4780,7 @@ final class LogicManagementClient
                     'keyName' => ['type' => 'string'],
                     'keyVersion' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'keyVault',
                     'keyName'
@@ -4690,10 +4800,12 @@ final class LogicManagementClient
                     'key' => ['$ref' => '#/definitions/KeyVaultKeyReference'],
                     'publicCertificate' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IntegrationAccountCertificate' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/IntegrationAccountCertificateProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'IntegrationAccountCertificateListResult' => [
@@ -4704,6 +4816,7 @@ final class LogicManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IntegrationAccountSessionFilter' => [
@@ -4711,6 +4824,7 @@ final class LogicManagementClient
                     'type' => 'string',
                     'format' => 'date-time'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['changedTime']
             ],
             'IntegrationAccountSessionProperties' => [
@@ -4725,10 +4839,12 @@ final class LogicManagementClient
                     ],
                     'content' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IntegrationAccountSession' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/IntegrationAccountSessionProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'IntegrationAccountSessionListResult' => [
@@ -4739,6 +4855,7 @@ final class LogicManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation_display' => [
@@ -4747,6 +4864,7 @@ final class LogicManagementClient
                     'resource' => ['type' => 'string'],
                     'operation' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -4754,6 +4872,7 @@ final class LogicManagementClient
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -4764,6 +4883,7 @@ final class LogicManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

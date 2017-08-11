@@ -87,7 +87,7 @@ final class ContainerRegistryManagementClient
                         'name' => 'registryNameCheckRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegistryNameCheckRequest'
+                        'schema' => ['$ref' => '#/definitions/RegistryNameCheckRequest']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/RegistryNameStatus']]]
@@ -156,7 +156,7 @@ final class ContainerRegistryManagementClient
                             'name' => 'registry',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Registry'
+                            'schema' => ['$ref' => '#/definitions/Registry']
                         ]
                     ],
                     'responses' => [
@@ -231,7 +231,7 @@ final class ContainerRegistryManagementClient
                             'name' => 'registryUpdateParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RegistryUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/RegistryUpdateParameters']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/Registry']]]
@@ -344,7 +344,7 @@ final class ContainerRegistryManagementClient
                         'name' => 'regenerateCredentialParameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RegenerateCredentialParameters'
+                        'schema' => ['$ref' => '#/definitions/RegenerateCredentialParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/RegistryListCredentialsResult']]]
@@ -467,7 +467,7 @@ final class ContainerRegistryManagementClient
                             'name' => 'replication',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Replication'
+                            'schema' => ['$ref' => '#/definitions/Replication']
                         ]
                     ],
                     'responses' => [
@@ -624,7 +624,7 @@ final class ContainerRegistryManagementClient
                             'name' => 'webhookCreateParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/WebhookCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/WebhookCreateParameters']
                         ]
                     ],
                     'responses' => [
@@ -711,7 +711,7 @@ final class ContainerRegistryManagementClient
                             'name' => 'webhookUpdateParameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/WebhookUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/WebhookUpdateParameters']
                         ]
                     ],
                     'responses' => [
@@ -869,6 +869,7 @@ final class ContainerRegistryManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'type'
@@ -880,6 +881,7 @@ final class ContainerRegistryManagementClient
                     'reason' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationDisplayDefinition' => [
@@ -889,6 +891,7 @@ final class ContainerRegistryManagementClient
                     'operation' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationDefinition' => [
@@ -896,6 +899,7 @@ final class ContainerRegistryManagementClient
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/OperationDisplayDefinition']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -906,6 +910,7 @@ final class ContainerRegistryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Sku' => [
@@ -927,6 +932,7 @@ final class ContainerRegistryManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'Status' => [
@@ -938,10 +944,12 @@ final class ContainerRegistryManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageAccountProperties' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['id']
             ],
             'RegistryProperties' => [
@@ -966,6 +974,7 @@ final class ContainerRegistryManagementClient
                     'adminUserEnabled' => ['type' => 'boolean'],
                     'storageAccount' => ['$ref' => '#/definitions/StorageAccountProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Registry' => [
@@ -973,6 +982,7 @@ final class ContainerRegistryManagementClient
                     'sku' => ['$ref' => '#/definitions/Sku'],
                     'properties' => ['$ref' => '#/definitions/RegistryProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['sku']
             ],
             'RegistryPropertiesUpdateParameters' => [
@@ -980,6 +990,7 @@ final class ContainerRegistryManagementClient
                     'adminUserEnabled' => ['type' => 'boolean'],
                     'storageAccount' => ['$ref' => '#/definitions/StorageAccountProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RegistryUpdateParameters' => [
@@ -991,6 +1002,7 @@ final class ContainerRegistryManagementClient
                     'sku' => ['$ref' => '#/definitions/Sku'],
                     'properties' => ['$ref' => '#/definitions/RegistryPropertiesUpdateParameters']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RegistryListResult' => [
@@ -1001,6 +1013,7 @@ final class ContainerRegistryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RegistryPassword' => [
@@ -1014,6 +1027,7 @@ final class ContainerRegistryManagementClient
                     ],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RegistryListCredentialsResult' => [
@@ -1024,6 +1038,7 @@ final class ContainerRegistryManagementClient
                         'items' => ['$ref' => '#/definitions/RegistryPassword']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RegenerateCredentialParameters' => [
@@ -1034,6 +1049,7 @@ final class ContainerRegistryManagementClient
                         'password2'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'RegistryUsage' => [
@@ -1055,6 +1071,7 @@ final class ContainerRegistryManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RegistryUsageListResult' => [
@@ -1062,6 +1079,7 @@ final class ContainerRegistryManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/RegistryUsage']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReplicationProperties' => [
@@ -1079,10 +1097,12 @@ final class ContainerRegistryManagementClient
                     ],
                     'status' => ['$ref' => '#/definitions/Status']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Replication' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ReplicationProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReplicationListResult' => [
@@ -1093,6 +1113,7 @@ final class ContainerRegistryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WebhookProperties' => [
@@ -1127,10 +1148,12 @@ final class ContainerRegistryManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['actions']
             ],
             'Webhook' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/WebhookProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WebhookPropertiesCreateParameters' => [
@@ -1159,6 +1182,7 @@ final class ContainerRegistryManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'serviceUri',
                     'actions'
@@ -1173,6 +1197,7 @@ final class ContainerRegistryManagementClient
                     'location' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/WebhookPropertiesCreateParameters']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'WebhookPropertiesUpdateParameters' => [
@@ -1201,6 +1226,7 @@ final class ContainerRegistryManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WebhookUpdateParameters' => [
@@ -1211,6 +1237,7 @@ final class ContainerRegistryManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/WebhookPropertiesUpdateParameters']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WebhookListResult' => [
@@ -1221,10 +1248,12 @@ final class ContainerRegistryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EventInfo' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CallbackConfig' => [
@@ -1235,6 +1264,7 @@ final class ContainerRegistryManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['serviceUri']
             ],
             'Target' => [
@@ -1253,6 +1283,7 @@ final class ContainerRegistryManagementClient
                     'url' => ['type' => 'string'],
                     'tag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Request' => [
@@ -1263,10 +1294,12 @@ final class ContainerRegistryManagementClient
                     'method' => ['type' => 'string'],
                     'useragent' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Actor' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Source' => [
@@ -1274,6 +1307,7 @@ final class ContainerRegistryManagementClient
                     'addr' => ['type' => 'string'],
                     'instanceID' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EventContent' => [
@@ -1289,6 +1323,7 @@ final class ContainerRegistryManagementClient
                     'actor' => ['$ref' => '#/definitions/Actor'],
                     'source' => ['$ref' => '#/definitions/Source']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EventRequestMessage' => [
@@ -1302,6 +1337,7 @@ final class ContainerRegistryManagementClient
                     'requestUri' => ['type' => 'string'],
                     'version' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EventResponseMessage' => [
@@ -1315,6 +1351,7 @@ final class ContainerRegistryManagementClient
                     'statusCode' => ['type' => 'string'],
                     'version' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Event' => [
@@ -1322,6 +1359,7 @@ final class ContainerRegistryManagementClient
                     'eventRequestMessage' => ['$ref' => '#/definitions/EventRequestMessage'],
                     'eventResponseMessage' => ['$ref' => '#/definitions/EventResponseMessage']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EventListResult' => [
@@ -1332,6 +1370,7 @@ final class ContainerRegistryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -1345,6 +1384,7 @@ final class ContainerRegistryManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ]
         ]

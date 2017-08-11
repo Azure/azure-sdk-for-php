@@ -737,7 +737,7 @@ final class IntuneResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/iOSMAMPolicy'
+                            'schema' => ['$ref' => '#/definitions/iOSMAMPolicy']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/iOSMAMPolicy']]]
@@ -768,7 +768,7 @@ final class IntuneResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/iOSMAMPolicy'
+                            'schema' => ['$ref' => '#/definitions/iOSMAMPolicy']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/iOSMAMPolicy']]]
@@ -879,7 +879,7 @@ final class IntuneResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MAMPolicyAppIdOrGroupIdPayload'
+                            'schema' => ['$ref' => '#/definitions/MAMPolicyAppIdOrGroupIdPayload']
                         ]
                     ],
                     'responses' => [
@@ -980,7 +980,7 @@ final class IntuneResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MAMPolicyAppIdOrGroupIdPayload'
+                            'schema' => ['$ref' => '#/definitions/MAMPolicyAppIdOrGroupIdPayload']
                         ]
                     ],
                     'responses' => [
@@ -1119,7 +1119,7 @@ final class IntuneResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AndroidMAMPolicy'
+                            'schema' => ['$ref' => '#/definitions/AndroidMAMPolicy']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/AndroidMAMPolicy']]]
@@ -1150,7 +1150,7 @@ final class IntuneResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/AndroidMAMPolicy'
+                            'schema' => ['$ref' => '#/definitions/AndroidMAMPolicy']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/AndroidMAMPolicy']]]
@@ -1261,7 +1261,7 @@ final class IntuneResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MAMPolicyAppIdOrGroupIdPayload'
+                            'schema' => ['$ref' => '#/definitions/MAMPolicyAppIdOrGroupIdPayload']
                         ]
                     ],
                     'responses' => [
@@ -1362,7 +1362,7 @@ final class IntuneResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/MAMPolicyAppIdOrGroupIdPayload'
+                            'schema' => ['$ref' => '#/definitions/MAMPolicyAppIdOrGroupIdPayload']
                         ]
                     ],
                     'responses' => [
@@ -1418,14 +1418,17 @@ final class IntuneResourceManagementClient
                     ],
                     'location' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LocationProperties' => [
                 'properties' => ['hostName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['hostName']
             ],
             'Location' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/LocationProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Error' => [
@@ -1433,6 +1436,7 @@ final class IntuneResourceManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'code',
                     'message'
@@ -1446,14 +1450,17 @@ final class IntuneResourceManagementClient
                     ],
                     'nextlink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'GroupProperties' => [
                 'properties' => ['friendlyName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['friendlyName']
             ],
             'GroupItem' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/GroupProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GroupsCollection' => [
@@ -1464,6 +1471,7 @@ final class IntuneResourceManagementClient
                     ],
                     'nextlink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'ApplicationProperties' => [
@@ -1479,6 +1487,7 @@ final class IntuneResourceManagementClient
                     ],
                     'appId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'friendlyName',
                     'platform'
@@ -1486,6 +1495,7 @@ final class IntuneResourceManagementClient
             ],
             'Application' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ApplicationProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationCollection' => [
@@ -1496,6 +1506,7 @@ final class IntuneResourceManagementClient
                     ],
                     'nextlink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'iOSMAMPolicyProperties' => [
@@ -1517,10 +1528,12 @@ final class IntuneResourceManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'iOSMAMPolicy' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/iOSMAMPolicyProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IOSMAMPolicyCollection' => [
@@ -1531,6 +1544,7 @@ final class IntuneResourceManagementClient
                     ],
                     'nextlink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'AndroidMAMPolicyProperties' => [
@@ -1550,10 +1564,12 @@ final class IntuneResourceManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AndroidMAMPolicy' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AndroidMAMPolicyProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AndroidMAMPolicyCollection' => [
@@ -1564,14 +1580,17 @@ final class IntuneResourceManagementClient
                     ],
                     'nextlink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'MAMPolicyAppOrGroupIdProperties' => [
                 'properties' => ['url' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['url']
             ],
             'MAMPolicyAppIdOrGroupIdPayload' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/MAMPolicyAppOrGroupIdProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MAMPolicyProperties' => [
@@ -1677,6 +1696,7 @@ final class IntuneResourceManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['friendlyName']
             ],
             'DeviceProperties' => [
@@ -1687,6 +1707,7 @@ final class IntuneResourceManagementClient
                     'platformVersion' => ['type' => 'string'],
                     'deviceType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'userId',
                     'friendlyName',
@@ -1697,6 +1718,7 @@ final class IntuneResourceManagementClient
             ],
             'Device' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/DeviceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeviceCollection' => [
@@ -1707,14 +1729,17 @@ final class IntuneResourceManagementClient
                     ],
                     'nextlink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'WipeDeviceOperationResultProperties' => [
                 'properties' => ['value' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'WipeDeviceOperationResult' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/WipeDeviceOperationResultProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'operationMetadataProperties' => [
@@ -1722,6 +1747,7 @@ final class IntuneResourceManagementClient
                     'name' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'value'
@@ -1738,6 +1764,7 @@ final class IntuneResourceManagementClient
                         'items' => ['$ref' => '#/definitions/operationMetadataProperties']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'friendlyName',
                     'operationMetadata'
@@ -1745,6 +1772,7 @@ final class IntuneResourceManagementClient
             ],
             'OperationResult' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/OperationResultProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationResultCollection' => [
@@ -1755,6 +1783,7 @@ final class IntuneResourceManagementClient
                     ],
                     'nextlink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'StatusesProperties' => [
@@ -1793,6 +1822,7 @@ final class IntuneResourceManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StatusesDefault' => [
@@ -1800,6 +1830,7 @@ final class IntuneResourceManagementClient
                     'properties' => ['$ref' => '#/definitions/StatusesProperties'],
                     'nextlink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FlaggedUserProperties' => [
@@ -1810,10 +1841,12 @@ final class IntuneResourceManagementClient
                     ],
                     'friendlyName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FlaggedUser' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/FlaggedUserProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FlaggedUserCollection' => [
@@ -1824,6 +1857,7 @@ final class IntuneResourceManagementClient
                     ],
                     'nextlink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'FlaggedEnrolledAppError' => [
@@ -1831,6 +1865,7 @@ final class IntuneResourceManagementClient
                     'errorCode' => ['type' => 'string'],
                     'severity' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FlaggedEnrolledAppProperties' => [
@@ -1844,10 +1879,12 @@ final class IntuneResourceManagementClient
                         'items' => ['$ref' => '#/definitions/FlaggedEnrolledAppError']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FlaggedEnrolledApp' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/FlaggedEnrolledAppProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FlaggedEnrolledAppCollection' => [
@@ -1858,6 +1895,7 @@ final class IntuneResourceManagementClient
                     ],
                     'nextlink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ]
         ]

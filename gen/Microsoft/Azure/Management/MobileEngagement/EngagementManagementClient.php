@@ -142,7 +142,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/AppCollectionNameAvailability'
+                        'schema' => ['$ref' => '#/definitions/AppCollectionNameAvailability']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/AppCollectionNameAvailability']]]
@@ -329,7 +329,7 @@ final class EngagementManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Campaign'
+                            'schema' => ['$ref' => '#/definitions/Campaign']
                         ]
                     ],
                     'responses' => ['201' => ['schema' => ['$ref' => '#/definitions/CampaignStateResult']]]
@@ -418,7 +418,7 @@ final class EngagementManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Campaign'
+                            'schema' => ['$ref' => '#/definitions/Campaign']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -623,7 +623,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CampaignTestSavedParameters'
+                        'schema' => ['$ref' => '#/definitions/CampaignTestSavedParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CampaignStateResult']]]
@@ -678,7 +678,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CampaignTestNewParameters'
+                        'schema' => ['$ref' => '#/definitions/CampaignTestNewParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CampaignState']]]
@@ -852,7 +852,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CampaignPushParameters'
+                        'schema' => ['$ref' => '#/definitions/CampaignPushParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CampaignPushResult']]]
@@ -1149,7 +1149,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DeviceTagsParameters'
+                        'schema' => ['$ref' => '#/definitions/DeviceTagsParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/DeviceTagsResult']]]
@@ -1192,7 +1192,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DeviceTagsParameters'
+                        'schema' => ['$ref' => '#/definitions/DeviceTagsParameters']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/DeviceTagsResult']]]
@@ -1335,7 +1335,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/dateRangeExportTaskParameter'
+                        'schema' => ['$ref' => '#/definitions/dateRangeExportTaskParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1378,7 +1378,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/dateRangeExportTaskParameter'
+                        'schema' => ['$ref' => '#/definitions/dateRangeExportTaskParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1421,7 +1421,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/dateRangeExportTaskParameter'
+                        'schema' => ['$ref' => '#/definitions/dateRangeExportTaskParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1464,7 +1464,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/dateRangeExportTaskParameter'
+                        'schema' => ['$ref' => '#/definitions/dateRangeExportTaskParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1507,7 +1507,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/dateRangeExportTaskParameter'
+                        'schema' => ['$ref' => '#/definitions/dateRangeExportTaskParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1550,7 +1550,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/dateRangeExportTaskParameter'
+                        'schema' => ['$ref' => '#/definitions/dateRangeExportTaskParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1593,7 +1593,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/exportTaskParameter'
+                        'schema' => ['$ref' => '#/definitions/exportTaskParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1636,7 +1636,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/exportTaskParameter'
+                        'schema' => ['$ref' => '#/definitions/exportTaskParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1679,7 +1679,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/feedbackByDateRangeParameter'
+                        'schema' => ['$ref' => '#/definitions/feedbackByDateRangeParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1722,7 +1722,7 @@ final class EngagementManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/feedbackByCampaignParameter'
+                        'schema' => ['$ref' => '#/definitions/feedbackByCampaignParameter']
                     ]
                 ],
                 'responses' => ['202' => ['schema' => ['$ref' => '#/definitions/exportTaskResult']]]
@@ -1823,7 +1823,7 @@ final class EngagementManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/importTask'
+                            'schema' => ['$ref' => '#/definitions/importTask']
                         ]
                     ],
                     'responses' => [
@@ -1882,10 +1882,12 @@ final class EngagementManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiError' => [
                 'properties' => ['error' => ['$ref' => '#/definitions/ApiError_error']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AppProperties' => [
@@ -1894,10 +1896,12 @@ final class EngagementManagementClient
                     'platform' => ['type' => 'string'],
                     'appState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'App' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AppProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AppListResult' => [
@@ -1908,6 +1912,7 @@ final class EngagementManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AppCollectionProperties' => [
@@ -1918,10 +1923,12 @@ final class EngagementManagementClient
                         'Succeeded'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AppCollection' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AppCollectionProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AppCollectionListResult' => [
@@ -1932,6 +1939,7 @@ final class EngagementManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AppCollectionNameAvailability' => [
@@ -1940,6 +1948,7 @@ final class EngagementManagementClient
                     'available' => ['type' => 'boolean'],
                     'unavailabilityReason' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SupportedPlatformsListResult' => [
@@ -1947,6 +1956,7 @@ final class EngagementManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -1960,6 +1970,7 @@ final class EngagementManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'CampaignTestSavedParameters' => [
@@ -1967,14 +1978,17 @@ final class EngagementManagementClient
                     'deviceId' => ['type' => 'string'],
                     'lang' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['deviceId']
             ],
             'Criterion' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Filter' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Campaign_audience' => [
@@ -1989,6 +2003,7 @@ final class EngagementManagementClient
                         'items' => ['$ref' => '#/definitions/Filter']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NotificationOptions' => [
@@ -1998,6 +2013,7 @@ final class EngagementManagementClient
                     'sound' => ['type' => 'string'],
                     'actionText' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CampaignLocalization' => [
@@ -2016,14 +2032,17 @@ final class EngagementManagementClient
                     'actionUrl' => ['type' => 'string'],
                     'payload' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PollQuestionLocalization' => [
                 'properties' => ['title' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PollQuestionChoiceLocalization' => [
                 'properties' => ['title' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PollQuestionChoice' => [
@@ -2038,6 +2057,7 @@ final class EngagementManagementClient
                     ],
                     'isDefault' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PollQuestion' => [
@@ -2055,6 +2075,7 @@ final class EngagementManagementClient
                         'items' => ['$ref' => '#/definitions/PollQuestionChoice']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Campaign' => [
@@ -2115,10 +2136,12 @@ final class EngagementManagementClient
                         'items' => ['$ref' => '#/definitions/PollQuestion']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CampaignTestNewParameters' => [
                 'properties' => ['data' => ['$ref' => '#/definitions/Campaign']],
+                'additionalProperties' => FALSE,
                 'required' => ['data']
             ],
             'CampaignPushParameters' => [
@@ -2129,6 +2152,7 @@ final class EngagementManagementClient
                     ],
                     'data' => ['$ref' => '#/definitions/Campaign']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['deviceIds']
             ],
             'CampaignState' => [
@@ -2142,6 +2166,7 @@ final class EngagementManagementClient
                         'queued'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CampaignStateResult' => [
@@ -2149,42 +2174,52 @@ final class EngagementManagementClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['id']
             ],
             'carrier-name' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'carrier-country' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'firmware-version' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'device-manufacturer' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'device-model' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'application-version' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'network-type' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'language' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'screen-size' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'location' => [
@@ -2193,6 +2228,7 @@ final class EngagementManagementClient
                     'region' => ['type' => 'string'],
                     'locality' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'geo-fencing' => [
@@ -2214,6 +2250,7 @@ final class EngagementManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'announcement-feedback' => [
@@ -2232,6 +2269,7 @@ final class EngagementManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'poll-feedback' => [
@@ -2250,6 +2288,7 @@ final class EngagementManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'poll-answer-feedback' => [
@@ -2263,6 +2302,7 @@ final class EngagementManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'datapush-feedback' => [
@@ -2281,6 +2321,7 @@ final class EngagementManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'segment' => [
@@ -2291,6 +2332,7 @@ final class EngagementManagementClient
                     ],
                     'exclude' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'string-tag' => [
@@ -2298,6 +2340,7 @@ final class EngagementManagementClient
                     'name' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'date-tag' => [
@@ -2318,6 +2361,7 @@ final class EngagementManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'integer-tag' => [
@@ -2338,6 +2382,7 @@ final class EngagementManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'boolean-tag' => [
@@ -2345,6 +2390,7 @@ final class EngagementManagementClient
                     'name' => ['type' => 'string'],
                     'value' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'engage-subset' => [
@@ -2352,6 +2398,7 @@ final class EngagementManagementClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'engage-old-users' => [
@@ -2359,6 +2406,7 @@ final class EngagementManagementClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'engage-new-users' => [
@@ -2366,6 +2414,7 @@ final class EngagementManagementClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'engage-active-users' => [
@@ -2373,6 +2422,7 @@ final class EngagementManagementClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'engage-idle-users' => [
@@ -2380,14 +2430,17 @@ final class EngagementManagementClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'native-push-enabled' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'push-quota' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'app-info' => [
@@ -2395,6 +2448,7 @@ final class EngagementManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CampaignListResult' => [
@@ -2418,6 +2472,7 @@ final class EngagementManagementClient
                     ],
                     'timezone' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CampaignResult' => [
@@ -2445,6 +2500,7 @@ final class EngagementManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CampaignPushResult' => [
@@ -2452,6 +2508,7 @@ final class EngagementManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CampaignStatisticsResult' => [
@@ -2525,6 +2582,7 @@ final class EngagementManagementClient
                         'additionalProperties' => ['type' => 'object']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CampaignsListResult' => [
@@ -2535,6 +2593,7 @@ final class EngagementManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeviceMeta' => [
@@ -2557,6 +2616,7 @@ final class EngagementManagementClient
                     ],
                     'nativePushEnabled' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeviceQueryResult' => [
@@ -2568,6 +2628,7 @@ final class EngagementManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['deviceId']
             ],
             'DevicesQueryResult' => [
@@ -2578,6 +2639,7 @@ final class EngagementManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeviceInfo' => [
@@ -2606,6 +2668,7 @@ final class EngagementManagementClient
                     ],
                     'serviceVersion' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeviceLocation' => [
@@ -2614,6 +2677,7 @@ final class EngagementManagementClient
                     'region' => ['type' => 'string'],
                     'locality' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Device' => [
@@ -2627,6 +2691,7 @@ final class EngagementManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['deviceId']
             ],
             'DeviceTagsParameters' => [
@@ -2640,6 +2705,7 @@ final class EngagementManagementClient
                     ],
                     'deleteOnNull' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['tags']
             ],
             'DeviceTagsResult' => [
@@ -2647,10 +2713,12 @@ final class EngagementManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['invalidIds']
             ],
             'exportOptions' => [
                 'properties' => ['exportUserId' => ['type' => 'boolean']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'dateRangeExportTaskParameter' => [
@@ -2673,6 +2741,7 @@ final class EngagementManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'containerUrl',
                     'startDate',
@@ -2692,6 +2761,7 @@ final class EngagementManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'containerUrl',
                     'exportFormat'
@@ -2725,6 +2795,7 @@ final class EngagementManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'containerUrl',
                     'campaignType',
@@ -2761,6 +2832,7 @@ final class EngagementManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'containerUrl',
                     'campaignType',
@@ -2806,6 +2878,7 @@ final class EngagementManagementClient
                     ],
                     'errorDetails' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'id',
                     'state',
@@ -2821,10 +2894,12 @@ final class EngagementManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'importTask' => [
                 'properties' => ['storageUrl' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'importTaskResult' => [
@@ -2849,6 +2924,7 @@ final class EngagementManagementClient
                     ],
                     'errorDetails' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'importTaskListResult' => [
@@ -2859,6 +2935,7 @@ final class EngagementManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

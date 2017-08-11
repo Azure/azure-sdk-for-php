@@ -428,7 +428,7 @@ final class DevTestLabsClient
                             'name' => 'lab',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Lab'
+                            'schema' => ['$ref' => '#/definitions/Lab']
                         ],
                         [
                             'name' => 'api-version',
@@ -502,7 +502,7 @@ final class DevTestLabsClient
                             'name' => 'lab',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LabFragment'
+                            'schema' => ['$ref' => '#/definitions/LabFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -574,7 +574,7 @@ final class DevTestLabsClient
                         'name' => 'labVirtualMachineCreationParameter',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/LabVirtualMachineCreationParameter'
+                        'schema' => ['$ref' => '#/definitions/LabVirtualMachineCreationParameter']
                     ],
                     [
                         'name' => 'api-version',
@@ -614,7 +614,7 @@ final class DevTestLabsClient
                         'name' => 'exportResourceUsageParameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ExportResourceUsageParameters'
+                        'schema' => ['$ref' => '#/definitions/ExportResourceUsageParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -654,7 +654,7 @@ final class DevTestLabsClient
                         'name' => 'generateUploadUriParameter',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/GenerateUploadUriParameter'
+                        'schema' => ['$ref' => '#/definitions/GenerateUploadUriParameter']
                     ],
                     [
                         'name' => 'api-version',
@@ -854,7 +854,7 @@ final class DevTestLabsClient
                             'name' => 'schedule',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Schedule'
+                            'schema' => ['$ref' => '#/definitions/Schedule']
                         ],
                         [
                             'name' => 'api-version',
@@ -928,7 +928,7 @@ final class DevTestLabsClient
                             'name' => 'schedule',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ScheduleFragment'
+                            'schema' => ['$ref' => '#/definitions/ScheduleFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -1000,7 +1000,7 @@ final class DevTestLabsClient
                         'name' => 'retargetScheduleProperties',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/RetargetScheduleProperties'
+                        'schema' => ['$ref' => '#/definitions/RetargetScheduleProperties']
                     ],
                     [
                         'name' => 'api-version',
@@ -1146,7 +1146,7 @@ final class DevTestLabsClient
                             'name' => 'artifactSource',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ArtifactSource'
+                            'schema' => ['$ref' => '#/definitions/ArtifactSource']
                         ],
                         [
                             'name' => 'api-version',
@@ -1232,7 +1232,7 @@ final class DevTestLabsClient
                             'name' => 'artifactSource',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ArtifactSourceFragment'
+                            'schema' => ['$ref' => '#/definitions/ArtifactSourceFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -1504,7 +1504,7 @@ final class DevTestLabsClient
                         'name' => 'generateArmTemplateRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/GenerateArmTemplateRequest'
+                        'schema' => ['$ref' => '#/definitions/GenerateArmTemplateRequest']
                     ],
                     [
                         'name' => 'api-version',
@@ -1591,7 +1591,7 @@ final class DevTestLabsClient
                             'name' => 'labCost',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LabCost'
+                            'schema' => ['$ref' => '#/definitions/LabCost']
                         ],
                         [
                             'name' => 'api-version',
@@ -1738,7 +1738,7 @@ final class DevTestLabsClient
                             'name' => 'customImage',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CustomImage'
+                            'schema' => ['$ref' => '#/definitions/CustomImage']
                         ],
                         [
                             'name' => 'api-version',
@@ -1925,7 +1925,7 @@ final class DevTestLabsClient
                             'name' => 'formula',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Formula'
+                            'schema' => ['$ref' => '#/definitions/Formula']
                         ],
                         [
                             'name' => 'api-version',
@@ -2168,7 +2168,7 @@ final class DevTestLabsClient
                             'name' => 'notificationChannel',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/NotificationChannel'
+                            'schema' => ['$ref' => '#/definitions/NotificationChannel']
                         ],
                         [
                             'name' => 'api-version',
@@ -2254,7 +2254,7 @@ final class DevTestLabsClient
                             'name' => 'notificationChannel',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/NotificationChannelFragment'
+                            'schema' => ['$ref' => '#/definitions/NotificationChannelFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -2298,7 +2298,7 @@ final class DevTestLabsClient
                         'name' => 'notifyParameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/NotifyParameters'
+                        'schema' => ['$ref' => '#/definitions/NotifyParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -2341,7 +2341,7 @@ final class DevTestLabsClient
                         'name' => 'evaluatePoliciesRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/EvaluatePoliciesRequest'
+                        'schema' => ['$ref' => '#/definitions/EvaluatePoliciesRequest']
                     ],
                     [
                         'name' => 'api-version',
@@ -2502,7 +2502,7 @@ final class DevTestLabsClient
                             'name' => 'policy',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Policy'
+                            'schema' => ['$ref' => '#/definitions/Policy']
                         ],
                         [
                             'name' => 'api-version',
@@ -2600,7 +2600,7 @@ final class DevTestLabsClient
                             'name' => 'policy',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/PolicyFragment'
+                            'schema' => ['$ref' => '#/definitions/PolicyFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -2744,7 +2744,7 @@ final class DevTestLabsClient
                             'name' => 'schedule',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Schedule'
+                            'schema' => ['$ref' => '#/definitions/Schedule']
                         ],
                         [
                             'name' => 'api-version',
@@ -2830,7 +2830,7 @@ final class DevTestLabsClient
                             'name' => 'schedule',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ScheduleFragment'
+                            'schema' => ['$ref' => '#/definitions/ScheduleFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -3039,7 +3039,7 @@ final class DevTestLabsClient
                             'name' => 'serviceRunner',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ServiceRunner'
+                            'schema' => ['$ref' => '#/definitions/ServiceRunner']
                         ],
                         [
                             'name' => 'api-version',
@@ -3226,7 +3226,7 @@ final class DevTestLabsClient
                             'name' => 'user',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/User'
+                            'schema' => ['$ref' => '#/definitions/User']
                         ],
                         [
                             'name' => 'api-version',
@@ -3312,7 +3312,7 @@ final class DevTestLabsClient
                             'name' => 'user',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/UserFragment'
+                            'schema' => ['$ref' => '#/definitions/UserFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -3474,7 +3474,7 @@ final class DevTestLabsClient
                             'name' => 'disk',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Disk'
+                            'schema' => ['$ref' => '#/definitions/Disk']
                         ],
                         [
                             'name' => 'api-version',
@@ -3573,7 +3573,7 @@ final class DevTestLabsClient
                         'name' => 'attachDiskProperties',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/AttachDiskProperties'
+                        'schema' => ['$ref' => '#/definitions/AttachDiskProperties']
                     ],
                     [
                         'name' => 'api-version',
@@ -3625,7 +3625,7 @@ final class DevTestLabsClient
                         'name' => 'detachDiskProperties',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DetachDiskProperties'
+                        'schema' => ['$ref' => '#/definitions/DetachDiskProperties']
                     ],
                     [
                         'name' => 'api-version',
@@ -3789,7 +3789,7 @@ final class DevTestLabsClient
                             'name' => 'dtlEnvironment',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DtlEnvironment'
+                            'schema' => ['$ref' => '#/definitions/DtlEnvironment']
                         ],
                         [
                             'name' => 'api-version',
@@ -4000,7 +4000,7 @@ final class DevTestLabsClient
                             'name' => 'secret',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Secret'
+                            'schema' => ['$ref' => '#/definitions/Secret']
                         ],
                         [
                             'name' => 'api-version',
@@ -4193,7 +4193,7 @@ final class DevTestLabsClient
                             'name' => 'labVirtualMachine',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LabVirtualMachine'
+                            'schema' => ['$ref' => '#/definitions/LabVirtualMachine']
                         ],
                         [
                             'name' => 'api-version',
@@ -4279,7 +4279,7 @@ final class DevTestLabsClient
                             'name' => 'labVirtualMachine',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LabVirtualMachineFragment'
+                            'schema' => ['$ref' => '#/definitions/LabVirtualMachineFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -4323,7 +4323,7 @@ final class DevTestLabsClient
                         'name' => 'dataDiskProperties',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DataDiskProperties'
+                        'schema' => ['$ref' => '#/definitions/DataDiskProperties']
                     ],
                     [
                         'name' => 'api-version',
@@ -4369,7 +4369,7 @@ final class DevTestLabsClient
                         'name' => 'applyArtifactsRequest',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ApplyArtifactsRequest'
+                        'schema' => ['$ref' => '#/definitions/ApplyArtifactsRequest']
                     ],
                     [
                         'name' => 'api-version',
@@ -4455,7 +4455,7 @@ final class DevTestLabsClient
                         'name' => 'detachDataDiskProperties',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/DetachDataDiskProperties'
+                        'schema' => ['$ref' => '#/definitions/DetachDataDiskProperties']
                     ],
                     [
                         'name' => 'api-version',
@@ -4736,7 +4736,7 @@ final class DevTestLabsClient
                             'name' => 'schedule',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Schedule'
+                            'schema' => ['$ref' => '#/definitions/Schedule']
                         ],
                         [
                             'name' => 'api-version',
@@ -4834,7 +4834,7 @@ final class DevTestLabsClient
                             'name' => 'schedule',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ScheduleFragment'
+                            'schema' => ['$ref' => '#/definitions/ScheduleFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -5024,7 +5024,7 @@ final class DevTestLabsClient
                             'name' => 'virtualNetwork',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VirtualNetwork'
+                            'schema' => ['$ref' => '#/definitions/VirtualNetwork']
                         ],
                         [
                             'name' => 'api-version',
@@ -5110,7 +5110,7 @@ final class DevTestLabsClient
                             'name' => 'virtualNetwork',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/VirtualNetworkFragment'
+                            'schema' => ['$ref' => '#/definitions/VirtualNetworkFragment']
                         ],
                         [
                             'name' => 'api-version',
@@ -5133,10 +5133,12 @@ final class DevTestLabsClient
                     ],
                     'time' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DayDetails' => [
                 'properties' => ['time' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HourDetails' => [
@@ -5144,6 +5146,7 @@ final class DevTestLabsClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NotificationSettings' => [
@@ -5161,6 +5164,7 @@ final class DevTestLabsClient
                     ],
                     'webhookUrl' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ScheduleProperties' => [
@@ -5186,10 +5190,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Schedule' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ScheduleProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'ApplicableScheduleProperties' => [
@@ -5197,10 +5203,12 @@ final class DevTestLabsClient
                     'labVmsShutdown' => ['$ref' => '#/definitions/Schedule'],
                     'labVmsStartup' => ['$ref' => '#/definitions/Schedule']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicableSchedule' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ApplicableScheduleProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'WeekDetailsFragment' => [
@@ -5211,10 +5219,12 @@ final class DevTestLabsClient
                     ],
                     'time' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DayDetailsFragment' => [
                 'properties' => ['time' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HourDetailsFragment' => [
@@ -5222,6 +5232,7 @@ final class DevTestLabsClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NotificationSettingsFragment' => [
@@ -5239,6 +5250,7 @@ final class DevTestLabsClient
                     ],
                     'webhookUrl' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SchedulePropertiesFragment' => [
@@ -5260,10 +5272,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ScheduleFragment' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SchedulePropertiesFragment']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicableSchedulePropertiesFragment' => [
@@ -5271,10 +5285,12 @@ final class DevTestLabsClient
                     'labVmsShutdown' => ['$ref' => '#/definitions/ScheduleFragment'],
                     'labVmsStartup' => ['$ref' => '#/definitions/ScheduleFragment']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicableScheduleFragment' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ApplicableSchedulePropertiesFragment']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ArtifactParameterProperties' => [
@@ -5282,6 +5298,7 @@ final class DevTestLabsClient
                     'name' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ArtifactInstallProperties' => [
@@ -5299,6 +5316,7 @@ final class DevTestLabsClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplyArtifactsRequest' => [
@@ -5306,6 +5324,7 @@ final class DevTestLabsClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ArtifactInstallProperties']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ParametersValueFileInfo' => [
@@ -5313,6 +5332,7 @@ final class DevTestLabsClient
                     'fileName' => ['type' => 'string'],
                     'parametersValueInfo' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ArmTemplateProperties' => [
@@ -5331,10 +5351,12 @@ final class DevTestLabsClient
                         'items' => ['$ref' => '#/definitions/ParametersValueFileInfo']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ArmTemplate' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ArmTemplateProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'ArmTemplateInfo' => [
@@ -5342,6 +5364,7 @@ final class DevTestLabsClient
                     'template' => ['type' => 'object'],
                     'parameters' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ArmTemplateParameterProperties' => [
@@ -5349,6 +5372,7 @@ final class DevTestLabsClient
                     'name' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ArtifactProperties' => [
@@ -5365,10 +5389,12 @@ final class DevTestLabsClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Artifact' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ArtifactProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'ArtifactDeploymentStatusProperties' => [
@@ -5383,6 +5409,7 @@ final class DevTestLabsClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ArtifactDeploymentStatusPropertiesFragment' => [
@@ -5397,6 +5424,7 @@ final class DevTestLabsClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ArtifactParameterPropertiesFragment' => [
@@ -5404,6 +5432,7 @@ final class DevTestLabsClient
                     'name' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ArtifactInstallPropertiesFragment' => [
@@ -5421,6 +5450,7 @@ final class DevTestLabsClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ArtifactSourceProperties' => [
@@ -5452,10 +5482,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ArtifactSource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ArtifactSourceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'ArtifactSourcePropertiesFragment' => [
@@ -5483,14 +5515,17 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ArtifactSourceFragment' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ArtifactSourcePropertiesFragment']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AttachDiskProperties' => [
                 'properties' => ['leasedByLabVmId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AttachNewDataDiskOptions' => [
@@ -5508,6 +5543,7 @@ final class DevTestLabsClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BulkCreationParameters' => [
@@ -5515,6 +5551,7 @@ final class DevTestLabsClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CloudErrorBody' => [
@@ -5527,10 +5564,12 @@ final class DevTestLabsClient
                         'items' => ['$ref' => '#/definitions/CloudErrorBody']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CloudError' => [
                 'properties' => ['error' => ['$ref' => '#/definitions/CloudErrorBody']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ComputeDataDisk' => [
@@ -5543,6 +5582,7 @@ final class DevTestLabsClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ComputeDataDiskFragment' => [
@@ -5555,6 +5595,7 @@ final class DevTestLabsClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ComputeVmInstanceViewStatus' => [
@@ -5563,6 +5604,7 @@ final class DevTestLabsClient
                     'displayStatus' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ComputeVmInstanceViewStatusFragment' => [
@@ -5571,6 +5613,7 @@ final class DevTestLabsClient
                     'displayStatus' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ComputeVmProperties' => [
@@ -5592,6 +5635,7 @@ final class DevTestLabsClient
                         'items' => ['$ref' => '#/definitions/ComputeDataDisk']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ComputeVmPropertiesFragment' => [
@@ -5613,6 +5657,7 @@ final class DevTestLabsClient
                         'items' => ['$ref' => '#/definitions/ComputeDataDiskFragment']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PercentageCostThresholdProperties' => [
@@ -5620,6 +5665,7 @@ final class DevTestLabsClient
                     'type' => 'number',
                     'format' => 'double'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CostThresholdProperties' => [
@@ -5642,6 +5688,7 @@ final class DevTestLabsClient
                     ],
                     'NotificationSent' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WindowsOsInfo' => [
@@ -5653,6 +5700,7 @@ final class DevTestLabsClient
                         'SysprepApplied'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LinuxOsInfo' => [
@@ -5664,6 +5712,7 @@ final class DevTestLabsClient
                         'DeprovisionApplied'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CustomImagePropertiesFromVm' => [
@@ -5672,6 +5721,7 @@ final class DevTestLabsClient
                     'windowsOsInfo' => ['$ref' => '#/definitions/WindowsOsInfo'],
                     'linuxOsInfo' => ['$ref' => '#/definitions/LinuxOsInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CustomImagePropertiesCustom' => [
@@ -5687,6 +5737,7 @@ final class DevTestLabsClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['osType']
             ],
             'CustomImageProperties' => [
@@ -5703,10 +5754,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CustomImage' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/CustomImageProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'DataDiskProperties' => [
@@ -5722,14 +5775,17 @@ final class DevTestLabsClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DetachDataDiskProperties' => [
                 'properties' => ['existingLabDiskId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DetachDiskProperties' => [
                 'properties' => ['leasedByLabVmId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DiskProperties' => [
@@ -5757,10 +5813,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Disk' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/DiskProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'EnvironmentDeploymentProperties' => [
@@ -5771,6 +5829,7 @@ final class DevTestLabsClient
                         'items' => ['$ref' => '#/definitions/ArmTemplateParameterProperties']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EnvironmentProperties' => [
@@ -5782,10 +5841,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DtlEnvironment' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/EnvironmentProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'EvaluatePoliciesProperties' => [
@@ -5794,6 +5855,7 @@ final class DevTestLabsClient
                     'factData' => ['type' => 'string'],
                     'valueOffset' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EvaluatePoliciesRequest' => [
@@ -5801,6 +5863,7 @@ final class DevTestLabsClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/EvaluatePoliciesProperties']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PolicyViolation' => [
@@ -5808,6 +5871,7 @@ final class DevTestLabsClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PolicySetResult' => [
@@ -5818,6 +5882,7 @@ final class DevTestLabsClient
                         'items' => ['$ref' => '#/definitions/PolicyViolation']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EvaluatePoliciesResponse' => [
@@ -5825,6 +5890,7 @@ final class DevTestLabsClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/PolicySetResult']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Event' => [
@@ -5835,6 +5901,7 @@ final class DevTestLabsClient
                         'Cost'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EventFragment' => [
@@ -5845,6 +5912,7 @@ final class DevTestLabsClient
                         'Cost'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExportResourceUsageParameters' => [
@@ -5855,6 +5923,7 @@ final class DevTestLabsClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExternalSubnet' => [
@@ -5862,6 +5931,7 @@ final class DevTestLabsClient
                     'id' => ['type' => 'string'],
                     'name' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExternalSubnetFragment' => [
@@ -5869,6 +5939,7 @@ final class DevTestLabsClient
                     'id' => ['type' => 'string'],
                     'name' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GalleryImageReference' => [
@@ -5879,6 +5950,7 @@ final class DevTestLabsClient
                     'osType' => ['type' => 'string'],
                     'version' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InboundNatRule' => [
@@ -5899,6 +5971,7 @@ final class DevTestLabsClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SharedPublicIpAddressConfiguration' => [
@@ -5906,6 +5979,7 @@ final class DevTestLabsClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/InboundNatRule']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkInterfaceProperties' => [
@@ -5920,6 +5994,7 @@ final class DevTestLabsClient
                     'sshAuthority' => ['type' => 'string'],
                     'sharedPublicIpAddressConfiguration' => ['$ref' => '#/definitions/SharedPublicIpAddressConfiguration']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LabVirtualMachineCreationParameterProperties' => [
@@ -5971,6 +6046,7 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LabVirtualMachineCreationParameter' => [
@@ -5983,10 +6059,12 @@ final class DevTestLabsClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FormulaPropertiesFromVm' => [
                 'properties' => ['labVmId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FormulaProperties' => [
@@ -6003,10 +6081,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Formula' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/FormulaProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'GalleryImageProperties' => [
@@ -6021,10 +6101,12 @@ final class DevTestLabsClient
                     'icon' => ['type' => 'string'],
                     'enabled' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GalleryImage' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/GalleryImageProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'GalleryImageReferenceFragment' => [
@@ -6035,6 +6117,7 @@ final class DevTestLabsClient
                     'osType' => ['type' => 'string'],
                     'version' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ParameterInfo' => [
@@ -6042,6 +6125,7 @@ final class DevTestLabsClient
                     'name' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GenerateArmTemplateRequest' => [
@@ -6060,14 +6144,17 @@ final class DevTestLabsClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GenerateUploadUriParameter' => [
                 'properties' => ['blobName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GenerateUploadUriResponse' => [
                 'properties' => ['uploadUri' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IdentityProperties' => [
@@ -6077,6 +6164,7 @@ final class DevTestLabsClient
                     'tenantId' => ['type' => 'string'],
                     'clientSecretUrl' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InboundNatRuleFragment' => [
@@ -6097,6 +6185,7 @@ final class DevTestLabsClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LabProperties' => [
@@ -6127,10 +6216,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Lab' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/LabProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TargetCostProperties' => [
@@ -6166,6 +6257,7 @@ final class DevTestLabsClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LabCostSummaryProperties' => [
@@ -6173,6 +6265,7 @@ final class DevTestLabsClient
                     'type' => 'number',
                     'format' => 'double'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LabCostDetailsProperties' => [
@@ -6194,6 +6287,7 @@ final class DevTestLabsClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LabResourceCostProperties' => [
@@ -6211,6 +6305,7 @@ final class DevTestLabsClient
                     'resourceId' => ['type' => 'string'],
                     'externalResourceId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LabCostProperties' => [
@@ -6241,10 +6336,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LabCost' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/LabCostProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'LabPropertiesFragment' => [
@@ -6266,14 +6363,17 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LabFragment' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/LabPropertiesFragment']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LabVhd' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LabVirtualMachineProperties' => [
@@ -6325,10 +6425,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LabVirtualMachine' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/LabVirtualMachineProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'SharedPublicIpAddressConfigurationFragment' => [
@@ -6336,6 +6438,7 @@ final class DevTestLabsClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/InboundNatRuleFragment']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkInterfacePropertiesFragment' => [
@@ -6350,6 +6453,7 @@ final class DevTestLabsClient
                     'sshAuthority' => ['type' => 'string'],
                     'sharedPublicIpAddressConfiguration' => ['$ref' => '#/definitions/SharedPublicIpAddressConfigurationFragment']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LabVirtualMachinePropertiesFragment' => [
@@ -6400,10 +6504,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LabVirtualMachineFragment' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/LabVirtualMachinePropertiesFragment']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NotificationChannelProperties' => [
@@ -6421,10 +6527,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NotificationChannel' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/NotificationChannelProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'NotificationChannelPropertiesFragment' => [
@@ -6438,10 +6546,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NotificationChannelFragment' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/NotificationChannelPropertiesFragment']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NotifyParameters' => [
@@ -6455,6 +6565,7 @@ final class DevTestLabsClient
                     ],
                     'jsonPayload' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PolicyProperties' => [
@@ -6496,10 +6607,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Policy' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/PolicyProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'PolicyPropertiesFragment' => [
@@ -6537,10 +6650,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PolicyFragment' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/PolicyPropertiesFragment']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Port' => [
@@ -6557,6 +6672,7 @@ final class DevTestLabsClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PortFragment' => [
@@ -6573,6 +6689,7 @@ final class DevTestLabsClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -6586,6 +6703,7 @@ final class DevTestLabsClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[ArmTemplate]' => [
@@ -6596,6 +6714,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[Artifact]' => [
@@ -6606,6 +6725,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[ArtifactSource]' => [
@@ -6616,6 +6736,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[CustomImage]' => [
@@ -6626,6 +6747,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[Disk]' => [
@@ -6636,6 +6758,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[DtlEnvironment]' => [
@@ -6646,6 +6769,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[Formula]' => [
@@ -6656,6 +6780,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[GalleryImage]' => [
@@ -6666,6 +6791,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[Lab]' => [
@@ -6676,6 +6802,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[LabVhd]' => [
@@ -6686,6 +6813,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[LabVirtualMachine]' => [
@@ -6696,6 +6824,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[NotificationChannel]' => [
@@ -6706,6 +6835,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[Policy]' => [
@@ -6716,6 +6846,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[Schedule]' => [
@@ -6726,6 +6857,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SecretProperties' => [
@@ -6734,10 +6866,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Secret' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SecretProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'ResponseWithContinuation[Secret]' => [
@@ -6748,10 +6882,12 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServiceRunner' => [
                 'properties' => ['identity' => ['$ref' => '#/definitions/IdentityProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[ServiceRunner]' => [
@@ -6762,6 +6898,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserIdentity' => [
@@ -6772,6 +6909,7 @@ final class DevTestLabsClient
                     'objectId' => ['type' => 'string'],
                     'appId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserSecretStore' => [
@@ -6779,6 +6917,7 @@ final class DevTestLabsClient
                     'keyVaultUri' => ['type' => 'string'],
                     'keyVaultId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserProperties' => [
@@ -6792,10 +6931,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'User' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UserProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[User]' => [
@@ -6806,6 +6947,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Subnet' => [
@@ -6821,6 +6963,7 @@ final class DevTestLabsClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubnetSharedPublicIpAddressConfiguration' => [
@@ -6828,6 +6971,7 @@ final class DevTestLabsClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Port']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubnetOverride' => [
@@ -6853,6 +6997,7 @@ final class DevTestLabsClient
                     'sharedPublicIpAddressConfiguration' => ['$ref' => '#/definitions/SubnetSharedPublicIpAddressConfiguration'],
                     'virtualNetworkPoolName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkProperties' => [
@@ -6878,10 +7023,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetwork' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/VirtualNetworkProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseWithContinuation[VirtualNetwork]' => [
@@ -6892,6 +7039,7 @@ final class DevTestLabsClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RetargetScheduleProperties' => [
@@ -6899,6 +7047,7 @@ final class DevTestLabsClient
                     'currentResourceId' => ['type' => 'string'],
                     'targetResourceId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ShutdownNotificationContent' => [
@@ -6915,6 +7064,7 @@ final class DevTestLabsClient
                     'resourceGroupName' => ['type' => 'string'],
                     'labName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubnetFragment' => [
@@ -6930,6 +7080,7 @@ final class DevTestLabsClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubnetSharedPublicIpAddressConfigurationFragment' => [
@@ -6937,6 +7088,7 @@ final class DevTestLabsClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/PortFragment']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubnetOverrideFragment' => [
@@ -6962,6 +7114,7 @@ final class DevTestLabsClient
                     'sharedPublicIpAddressConfiguration' => ['$ref' => '#/definitions/SubnetSharedPublicIpAddressConfigurationFragment'],
                     'virtualNetworkPoolName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserIdentityFragment' => [
@@ -6972,6 +7125,7 @@ final class DevTestLabsClient
                     'objectId' => ['type' => 'string'],
                     'appId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserSecretStoreFragment' => [
@@ -6979,6 +7133,7 @@ final class DevTestLabsClient
                     'keyVaultUri' => ['type' => 'string'],
                     'keyVaultId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserPropertiesFragment' => [
@@ -6988,10 +7143,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserFragment' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UserPropertiesFragment']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkPropertiesFragment' => [
@@ -7013,10 +7170,12 @@ final class DevTestLabsClient
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkFragment' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/VirtualNetworkPropertiesFragment']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

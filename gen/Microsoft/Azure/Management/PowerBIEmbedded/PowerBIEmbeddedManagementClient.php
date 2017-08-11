@@ -120,7 +120,7 @@ final class PowerBIEmbeddedManagementClient
                             'name' => 'body',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/CreateWorkspaceCollectionRequest'
+                            'schema' => ['$ref' => '#/definitions/CreateWorkspaceCollectionRequest']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/WorkspaceCollection']]]
@@ -157,7 +157,7 @@ final class PowerBIEmbeddedManagementClient
                             'name' => 'body',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/UpdateWorkspaceCollectionRequest'
+                            'schema' => ['$ref' => '#/definitions/UpdateWorkspaceCollectionRequest']
                         ]
                     ],
                     'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/WorkspaceCollection']]]
@@ -220,7 +220,7 @@ final class PowerBIEmbeddedManagementClient
                         'name' => 'body',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameRequest'
+                        'schema' => ['$ref' => '#/definitions/CheckNameRequest']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/CheckNameResponse']]]
@@ -332,7 +332,7 @@ final class PowerBIEmbeddedManagementClient
                         'name' => 'body',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/WorkspaceCollectionAccessKey'
+                        'schema' => ['$ref' => '#/definitions/WorkspaceCollectionAccessKey']
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/WorkspaceCollectionAccessKeys']]]
@@ -363,7 +363,7 @@ final class PowerBIEmbeddedManagementClient
                         'name' => 'body',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/MigrateWorkspaceCollectionRequest'
+                        'schema' => ['$ref' => '#/definitions/MigrateWorkspaceCollectionRequest']
                     ]
                 ],
                 'responses' => ['200' => []]
@@ -418,6 +418,7 @@ final class PowerBIEmbeddedManagementClient
                     'message' => ['type' => 'string'],
                     'target' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Error' => [
@@ -430,6 +431,7 @@ final class PowerBIEmbeddedManagementClient
                         'items' => ['$ref' => '#/definitions/ErrorDetail']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureSku' => [
@@ -437,6 +439,7 @@ final class PowerBIEmbeddedManagementClient
                     'name' => ['type' => 'string'],
                     'tier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'tier'
@@ -455,6 +458,7 @@ final class PowerBIEmbeddedManagementClient
                     'sku' => ['$ref' => '#/definitions/AzureSku'],
                     'properties' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkspaceCollectionList' => [
@@ -462,6 +466,7 @@ final class PowerBIEmbeddedManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/WorkspaceCollection']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Workspace' => [
@@ -471,6 +476,7 @@ final class PowerBIEmbeddedManagementClient
                     'type' => ['type' => 'string'],
                     'properties' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkspaceList' => [
@@ -478,6 +484,7 @@ final class PowerBIEmbeddedManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Workspace']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Display' => [
@@ -488,6 +495,7 @@ final class PowerBIEmbeddedManagementClient
                     'description' => ['type' => 'string'],
                     'origin' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -495,6 +503,7 @@ final class PowerBIEmbeddedManagementClient
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/Display']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationList' => [
@@ -502,6 +511,7 @@ final class PowerBIEmbeddedManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Operation']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkspaceCollectionAccessKeys' => [
@@ -509,6 +519,7 @@ final class PowerBIEmbeddedManagementClient
                     'key1' => ['type' => 'string'],
                     'key2' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkspaceCollectionAccessKey' => [
@@ -519,6 +530,7 @@ final class PowerBIEmbeddedManagementClient
                         'key2'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CreateWorkspaceCollectionRequest' => [
@@ -530,6 +542,7 @@ final class PowerBIEmbeddedManagementClient
                     ],
                     'sku' => ['$ref' => '#/definitions/AzureSku']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateWorkspaceCollectionRequest' => [
@@ -540,6 +553,7 @@ final class PowerBIEmbeddedManagementClient
                     ],
                     'sku' => ['$ref' => '#/definitions/AzureSku']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CheckNameRequest' => [
@@ -547,6 +561,7 @@ final class PowerBIEmbeddedManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CheckNameResponse' => [
@@ -561,6 +576,7 @@ final class PowerBIEmbeddedManagementClient
                     ],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MigrateWorkspaceCollectionRequest' => [
@@ -571,6 +587,7 @@ final class PowerBIEmbeddedManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

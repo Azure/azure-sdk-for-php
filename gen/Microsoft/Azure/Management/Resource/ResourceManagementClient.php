@@ -179,7 +179,7 @@ final class ResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Deployment'
+                            'schema' => ['$ref' => '#/definitions/Deployment']
                         ],
                         [
                             'name' => 'api-version',
@@ -282,7 +282,7 @@ final class ResourceManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/Deployment'
+                        'schema' => ['$ref' => '#/definitions/Deployment']
                     ],
                     [
                         'name' => 'api-version',
@@ -542,7 +542,7 @@ final class ResourceManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ResourcesMoveInfo'
+                        'schema' => ['$ref' => '#/definitions/ResourcesMoveInfo']
                     ],
                     [
                         'name' => 'api-version',
@@ -576,7 +576,7 @@ final class ResourceManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ResourcesMoveInfo'
+                        'schema' => ['$ref' => '#/definitions/ResourcesMoveInfo']
                     ],
                     [
                         'name' => 'api-version',
@@ -792,7 +792,7 @@ final class ResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/GenericResource'
+                            'schema' => ['$ref' => '#/definitions/GenericResource']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -928,7 +928,7 @@ final class ResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/GenericResource'
+                            'schema' => ['$ref' => '#/definitions/GenericResource']
                         ]
                     ],
                     'responses' => [
@@ -1000,7 +1000,7 @@ final class ResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ResourceGroup'
+                            'schema' => ['$ref' => '#/definitions/ResourceGroup']
                         ],
                         [
                             'name' => 'api-version',
@@ -1087,7 +1087,7 @@ final class ResourceManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ResourceGroupPatchable'
+                            'schema' => ['$ref' => '#/definitions/ResourceGroupPatchable']
                         ],
                         [
                             'name' => 'api-version',
@@ -1119,7 +1119,7 @@ final class ResourceManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/ExportTemplateRequest'
+                        'schema' => ['$ref' => '#/definitions/ExportTemplateRequest']
                     ],
                     [
                         'name' => 'api-version',
@@ -1395,6 +1395,7 @@ final class ResourceManagementClient
         'definitions' => [
             'DeploymentExtendedFilter' => [
                 'properties' => ['provisioningState' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GenericResourceFilter' => [
@@ -1403,6 +1404,7 @@ final class ResourceManagementClient
                     'tagname' => ['type' => 'string'],
                     'tagvalue' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceGroupFilter' => [
@@ -1410,6 +1412,7 @@ final class ResourceManagementClient
                     'tagName' => ['type' => 'string'],
                     'tagValue' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TemplateLink' => [
@@ -1417,6 +1420,7 @@ final class ResourceManagementClient
                     'uri' => ['type' => 'string'],
                     'contentVersion' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['uri']
             ],
             'ParametersLink' => [
@@ -1424,10 +1428,12 @@ final class ResourceManagementClient
                     'uri' => ['type' => 'string'],
                     'contentVersion' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['uri']
             ],
             'DebugSetting' => [
                 'properties' => ['detailLevel' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeploymentProperties' => [
@@ -1445,14 +1451,17 @@ final class ResourceManagementClient
                     ],
                     'debugSetting' => ['$ref' => '#/definitions/DebugSetting']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['mode']
             ],
             'Deployment' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/DeploymentProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'DeploymentExportResult' => [
                 'properties' => ['template' => ['type' => 'object']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceManagementErrorWithDetails' => [
@@ -1465,6 +1474,7 @@ final class ResourceManagementClient
                         'items' => ['$ref' => '#/definitions/ResourceManagementErrorWithDetails']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AliasPathType' => [
@@ -1475,6 +1485,7 @@ final class ResourceManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AliasType' => [
@@ -1485,6 +1496,7 @@ final class ResourceManagementClient
                         'items' => ['$ref' => '#/definitions/AliasPathType']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProviderResourceType' => [
@@ -1507,6 +1519,7 @@ final class ResourceManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Provider' => [
@@ -1519,6 +1532,7 @@ final class ResourceManagementClient
                         'items' => ['$ref' => '#/definitions/ProviderResourceType']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BasicDependency' => [
@@ -1527,6 +1541,7 @@ final class ResourceManagementClient
                     'resourceType' => ['type' => 'string'],
                     'resourceName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Dependency' => [
@@ -1539,6 +1554,7 @@ final class ResourceManagementClient
                     'resourceType' => ['type' => 'string'],
                     'resourceName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeploymentPropertiesExtended' => [
@@ -1571,6 +1587,7 @@ final class ResourceManagementClient
                     ],
                     'debugSetting' => ['$ref' => '#/definitions/DebugSetting']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeploymentValidateResult' => [
@@ -1578,6 +1595,7 @@ final class ResourceManagementClient
                     'error' => ['$ref' => '#/definitions/ResourceManagementErrorWithDetails'],
                     'properties' => ['$ref' => '#/definitions/DeploymentPropertiesExtended']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeploymentExtended' => [
@@ -1586,6 +1604,7 @@ final class ResourceManagementClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/DeploymentPropertiesExtended']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'DeploymentListResult' => [
@@ -1596,6 +1615,7 @@ final class ResourceManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProviderListResult' => [
@@ -1606,6 +1626,7 @@ final class ResourceManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Plan' => [
@@ -1615,6 +1636,7 @@ final class ResourceManagementClient
                     'product' => ['type' => 'string'],
                     'promotionCode' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Sku' => [
@@ -1629,6 +1651,7 @@ final class ResourceManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Identity' => [
@@ -1640,6 +1663,7 @@ final class ResourceManagementClient
                         'enum' => ['SystemAssigned']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GenericResource' => [
@@ -1651,6 +1675,7 @@ final class ResourceManagementClient
                     'sku' => ['$ref' => '#/definitions/Sku'],
                     'identity' => ['$ref' => '#/definitions/Identity']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceListResult' => [
@@ -1661,10 +1686,12 @@ final class ResourceManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceGroupProperties' => [
                 'properties' => ['provisioningState' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceGroup' => [
@@ -1679,6 +1706,7 @@ final class ResourceManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'ResourceGroupPatchable' => [
@@ -1691,6 +1719,7 @@ final class ResourceManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceGroupListResult' => [
@@ -1701,6 +1730,7 @@ final class ResourceManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourcesMoveInfo' => [
@@ -1711,6 +1741,7 @@ final class ResourceManagementClient
                     ],
                     'targetResourceGroup' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExportTemplateRequest' => [
@@ -1721,6 +1752,7 @@ final class ResourceManagementClient
                     ],
                     'options' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TagCount' => [
@@ -1731,6 +1763,7 @@ final class ResourceManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TagValue' => [
@@ -1739,6 +1772,7 @@ final class ResourceManagementClient
                     'tagValue' => ['type' => 'string'],
                     'count' => ['$ref' => '#/definitions/TagCount']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TagDetails' => [
@@ -1751,6 +1785,7 @@ final class ResourceManagementClient
                         'items' => ['$ref' => '#/definitions/TagValue']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TagsListResult' => [
@@ -1761,6 +1796,7 @@ final class ResourceManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TargetResource' => [
@@ -1769,10 +1805,12 @@ final class ResourceManagementClient
                     'resourceName' => ['type' => 'string'],
                     'resourceType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HttpMessage' => [
                 'properties' => ['content' => ['type' => 'object']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeploymentOperationProperties' => [
@@ -1789,6 +1827,7 @@ final class ResourceManagementClient
                     'request' => ['$ref' => '#/definitions/HttpMessage'],
                     'response' => ['$ref' => '#/definitions/HttpMessage']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeploymentOperation' => [
@@ -1797,6 +1836,7 @@ final class ResourceManagementClient
                     'operationId' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/DeploymentOperationProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeploymentOperationsListResult' => [
@@ -1807,6 +1847,7 @@ final class ResourceManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceProviderOperationDisplayProperties' => [
@@ -1817,6 +1858,7 @@ final class ResourceManagementClient
                     'operation' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -1830,10 +1872,12 @@ final class ResourceManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubResource' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceGroupExportResult' => [
@@ -1841,6 +1885,7 @@ final class ResourceManagementClient
                     'template' => ['type' => 'object'],
                     'error' => ['$ref' => '#/definitions/ResourceManagementErrorWithDetails']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

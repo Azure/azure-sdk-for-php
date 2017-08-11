@@ -69,7 +69,7 @@ final class ManagementLinkClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/ResourceLink'
+                            'schema' => ['$ref' => '#/definitions/ResourceLink']
                         ],
                         [
                             'name' => 'api-version',
@@ -161,6 +161,7 @@ final class ManagementLinkClient
         'definitions' => [
             'ResourceLinkFilter' => [
                 'properties' => ['targetId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['targetId']
             ],
             'ResourceLinkProperties' => [
@@ -169,6 +170,7 @@ final class ManagementLinkClient
                     'targetId' => ['type' => 'string'],
                     'notes' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['targetId']
             ],
             'ResourceLink' => [
@@ -177,6 +179,7 @@ final class ManagementLinkClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ResourceLinkProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceLinkResult' => [
@@ -187,6 +190,7 @@ final class ManagementLinkClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ]
         ]

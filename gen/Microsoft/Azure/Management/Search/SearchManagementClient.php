@@ -291,7 +291,7 @@ final class SearchManagementClient
                             'name' => 'service',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SearchService'
+                            'schema' => ['$ref' => '#/definitions/SearchService']
                         ],
                         [
                             'name' => 'x-ms-client-request-id',
@@ -439,7 +439,7 @@ final class SearchManagementClient
                         'name' => 'checkNameAvailabilityInput',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/CheckNameAvailabilityInput'
+                        'schema' => ['$ref' => '#/definitions/CheckNameAvailabilityInput']
                     ],
                     [
                         'name' => 'x-ms-client-request-id',
@@ -471,6 +471,7 @@ final class SearchManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'type'
@@ -488,6 +489,7 @@ final class SearchManagementClient
                     ],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AdminKeyResult' => [
@@ -495,6 +497,7 @@ final class SearchManagementClient
                     'primaryKey' => ['type' => 'string'],
                     'secondaryKey' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'QueryKey' => [
@@ -502,6 +505,7 @@ final class SearchManagementClient
                     'name' => ['type' => 'string'],
                     'key' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ListQueryKeysResult' => [
@@ -509,6 +513,7 @@ final class SearchManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/QueryKey']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Sku' => [
@@ -522,6 +527,7 @@ final class SearchManagementClient
                         'standard3'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SearchServiceProperties' => [
@@ -562,6 +568,7 @@ final class SearchManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SearchService' => [
@@ -569,6 +576,7 @@ final class SearchManagementClient
                     'properties' => ['$ref' => '#/definitions/SearchServiceProperties'],
                     'sku' => ['$ref' => '#/definitions/Sku']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['sku']
             ],
             'SearchServiceListResult' => [
@@ -576,6 +584,7 @@ final class SearchManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/SearchService']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -589,6 +598,7 @@ final class SearchManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'CloudErrorBody' => [
@@ -601,10 +611,12 @@ final class SearchManagementClient
                         'items' => ['$ref' => '#/definitions/CloudErrorBody']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CloudError' => [
                 'properties' => ['error' => ['$ref' => '#/definitions/CloudErrorBody']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

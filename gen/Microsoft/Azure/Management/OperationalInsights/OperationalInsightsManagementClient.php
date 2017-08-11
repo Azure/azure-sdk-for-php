@@ -105,7 +105,7 @@ final class OperationalInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/LinkedService'
+                            'schema' => ['$ref' => '#/definitions/LinkedService']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -261,7 +261,7 @@ final class OperationalInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DataSource'
+                            'schema' => ['$ref' => '#/definitions/DataSource']
                         ],
                         [
                             'name' => 'api-version',
@@ -668,7 +668,7 @@ final class OperationalInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/Workspace'
+                            'schema' => ['$ref' => '#/definitions/Workspace']
                         ],
                         [
                             'name' => 'api-version',
@@ -827,7 +827,7 @@ final class OperationalInsightsManagementClient
                         'name' => 'parameters',
                         'in' => 'body',
                         'required' => TRUE,
-                        '$ref' => '#/definitions/SearchParameters'
+                        'schema' => ['$ref' => '#/definitions/SearchParameters']
                     ],
                     [
                         'name' => 'api-version',
@@ -911,7 +911,7 @@ final class OperationalInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/StorageInsight'
+                            'schema' => ['$ref' => '#/definitions/StorageInsight']
                         ],
                         [
                             'name' => 'api-version',
@@ -1104,7 +1104,7 @@ final class OperationalInsightsManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/SavedSearch'
+                            'schema' => ['$ref' => '#/definitions/SavedSearch']
                         ],
                         [
                             'name' => 'api-version',
@@ -1232,10 +1232,12 @@ final class OperationalInsightsManagementClient
         'definitions' => [
             'LinkedServiceProperties' => [
                 'properties' => ['resourceId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['resourceId']
             ],
             'LinkedService' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/LinkedServiceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'LinkedServiceListResult' => [
@@ -1243,6 +1245,7 @@ final class OperationalInsightsManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/LinkedService']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataSource' => [
@@ -1270,6 +1273,7 @@ final class OperationalInsightsManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'properties',
                     'kind'
@@ -1296,6 +1300,7 @@ final class OperationalInsightsManagementClient
                         'WindowsPerformanceCounter'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataSourceListResult' => [
@@ -1306,6 +1311,7 @@ final class OperationalInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IntelligencePack' => [
@@ -1313,6 +1319,7 @@ final class OperationalInsightsManagementClient
                     'name' => ['type' => 'string'],
                     'enabled' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SharedKeys' => [
@@ -1320,6 +1327,7 @@ final class OperationalInsightsManagementClient
                     'primarySharedKey' => ['type' => 'string'],
                     'secondarySharedKey' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MetricName' => [
@@ -1327,6 +1335,7 @@ final class OperationalInsightsManagementClient
                     'value' => ['type' => 'string'],
                     'localizedValue' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UsageMetric' => [
@@ -1347,6 +1356,7 @@ final class OperationalInsightsManagementClient
                     ],
                     'quotaPeriod' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkspaceListUsagesResult' => [
@@ -1354,6 +1364,7 @@ final class OperationalInsightsManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/UsageMetric']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ManagementGroupProperties' => [
@@ -1376,10 +1387,12 @@ final class OperationalInsightsManagementClient
                     'version' => ['type' => 'string'],
                     'sku' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ManagementGroup' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ManagementGroupProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkspaceListManagementGroupsResult' => [
@@ -1387,6 +1400,7 @@ final class OperationalInsightsManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ManagementGroup']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Sku' => [
@@ -1401,6 +1415,7 @@ final class OperationalInsightsManagementClient
                         'Standalone'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'WorkspaceProperties' => [
@@ -1425,6 +1440,7 @@ final class OperationalInsightsManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Workspace' => [
@@ -1432,6 +1448,7 @@ final class OperationalInsightsManagementClient
                     'properties' => ['$ref' => '#/definitions/WorkspaceProperties'],
                     'eTag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkspaceListResult' => [
@@ -1439,6 +1456,7 @@ final class OperationalInsightsManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Workspace']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -1452,6 +1470,7 @@ final class OperationalInsightsManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'ProxyResource' => [
@@ -1464,6 +1483,7 @@ final class OperationalInsightsManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LinkTarget' => [
@@ -1473,6 +1493,7 @@ final class OperationalInsightsManagementClient
                     'workspaceName' => ['type' => 'string'],
                     'location' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Tag' => [
@@ -1480,6 +1501,7 @@ final class OperationalInsightsManagementClient
                     'Name' => ['type' => 'string'],
                     'Value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'Name',
                     'Value'
@@ -1499,6 +1521,7 @@ final class OperationalInsightsManagementClient
                         'items' => ['$ref' => '#/definitions/Tag']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'Category',
                     'DisplayName',
@@ -1514,6 +1537,7 @@ final class OperationalInsightsManagementClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['NumberOfDocuments']
             ],
             'SearchSort' => [
@@ -1527,6 +1551,7 @@ final class OperationalInsightsManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SearchMetadataSchema' => [
@@ -1537,6 +1562,7 @@ final class OperationalInsightsManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SearchMetadata' => [
@@ -1586,6 +1612,7 @@ final class OperationalInsightsManagementClient
                     ],
                     'schema' => ['$ref' => '#/definitions/SearchMetadataSchema']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SavedSearch' => [
@@ -1594,6 +1621,7 @@ final class OperationalInsightsManagementClient
                     'etag' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/SavedSearchProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'SavedSearchesListResult' => [
@@ -1604,6 +1632,7 @@ final class OperationalInsightsManagementClient
                         'items' => ['$ref' => '#/definitions/SavedSearch']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SearchError' => [
@@ -1611,6 +1640,7 @@ final class OperationalInsightsManagementClient
                     'type' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SearchResultsResponse' => [
@@ -1623,6 +1653,7 @@ final class OperationalInsightsManagementClient
                     ],
                     'error' => ['$ref' => '#/definitions/SearchError']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SearchSchemaValue' => [
@@ -1638,6 +1669,7 @@ final class OperationalInsightsManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'indexed',
                     'stored',
@@ -1652,6 +1684,7 @@ final class OperationalInsightsManagementClient
                         'items' => ['$ref' => '#/definitions/SearchSchemaValue']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SearchHighlight' => [
@@ -1659,6 +1692,7 @@ final class OperationalInsightsManagementClient
                     'pre' => ['type' => 'string'],
                     'post' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SearchParameters' => [
@@ -1678,6 +1712,7 @@ final class OperationalInsightsManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['query']
             ],
             'StorageAccount' => [
@@ -1685,6 +1720,7 @@ final class OperationalInsightsManagementClient
                     'id' => ['type' => 'string'],
                     'key' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'id',
                     'key'
@@ -1701,6 +1737,7 @@ final class OperationalInsightsManagementClient
                     ],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['state']
             ],
             'StorageInsightProperties' => [
@@ -1716,6 +1753,7 @@ final class OperationalInsightsManagementClient
                     'storageAccount' => ['$ref' => '#/definitions/StorageAccount'],
                     'status' => ['$ref' => '#/definitions/StorageInsightStatus']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['storageAccount']
             ],
             'StorageInsight' => [
@@ -1723,6 +1761,7 @@ final class OperationalInsightsManagementClient
                     'properties' => ['$ref' => '#/definitions/StorageInsightProperties'],
                     'eTag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageInsightListResult' => [
@@ -1733,6 +1772,7 @@ final class OperationalInsightsManagementClient
                     ],
                     '@odata.nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

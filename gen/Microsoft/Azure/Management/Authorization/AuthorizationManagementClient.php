@@ -353,7 +353,7 @@ final class AuthorizationManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RoleAssignmentCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/RoleAssignmentCreateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -427,7 +427,7 @@ final class AuthorizationManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RoleAssignmentCreateParameters'
+                            'schema' => ['$ref' => '#/definitions/RoleAssignmentCreateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -584,7 +584,7 @@ final class AuthorizationManagementClient
                             'name' => 'roleDefinition',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/RoleDefinition'
+                            'schema' => ['$ref' => '#/definitions/RoleDefinition']
                         ],
                         [
                             'name' => 'api-version',
@@ -647,10 +647,12 @@ final class AuthorizationManagementClient
         'definitions' => [
             'RoleAssignmentFilter' => [
                 'properties' => ['principalId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RoleDefinitionFilter' => [
                 'properties' => ['roleName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClassicAdministratorProperties' => [
@@ -658,6 +660,7 @@ final class AuthorizationManagementClient
                     'emailAddress' => ['type' => 'string'],
                     'role' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClassicAdministrator' => [
@@ -667,6 +670,7 @@ final class AuthorizationManagementClient
                     'type' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ClassicAdministratorProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClassicAdministratorListResult' => [
@@ -677,6 +681,7 @@ final class AuthorizationManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Permission' => [
@@ -690,6 +695,7 @@ final class AuthorizationManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PermissionGetResult' => [
@@ -700,6 +706,7 @@ final class AuthorizationManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProviderOperation' => [
@@ -710,6 +717,7 @@ final class AuthorizationManagementClient
                     'origin' => ['type' => 'string'],
                     'properties' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceType' => [
@@ -721,6 +729,7 @@ final class AuthorizationManagementClient
                         'items' => ['$ref' => '#/definitions/ProviderOperation']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProviderOperationsMetadata' => [
@@ -738,6 +747,7 @@ final class AuthorizationManagementClient
                         'items' => ['$ref' => '#/definitions/ProviderOperation']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProviderOperationsMetadataListResult' => [
@@ -748,6 +758,7 @@ final class AuthorizationManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RoleAssignmentPropertiesWithScope' => [
@@ -756,6 +767,7 @@ final class AuthorizationManagementClient
                     'roleDefinitionId' => ['type' => 'string'],
                     'principalId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RoleAssignment' => [
@@ -765,6 +777,7 @@ final class AuthorizationManagementClient
                     'type' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/RoleAssignmentPropertiesWithScope']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RoleAssignmentListResult' => [
@@ -775,6 +788,7 @@ final class AuthorizationManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RoleAssignmentProperties' => [
@@ -782,10 +796,12 @@ final class AuthorizationManagementClient
                     'roleDefinitionId' => ['type' => 'string'],
                     'principalId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RoleAssignmentCreateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RoleAssignmentProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RoleDefinitionProperties' => [
@@ -802,6 +818,7 @@ final class AuthorizationManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RoleDefinition' => [
@@ -811,6 +828,7 @@ final class AuthorizationManagementClient
                     'type' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/RoleDefinitionProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RoleDefinitionListResult' => [
@@ -821,6 +839,7 @@ final class AuthorizationManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

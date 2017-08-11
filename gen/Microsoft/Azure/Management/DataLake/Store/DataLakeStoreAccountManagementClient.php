@@ -81,7 +81,7 @@ final class DataLakeStoreAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/FirewallRule'
+                            'schema' => ['$ref' => '#/definitions/FirewallRule']
                         ],
                         [
                             'name' => 'api-version',
@@ -124,7 +124,7 @@ final class DataLakeStoreAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => FALSE,
-                            '$ref' => '#/definitions/UpdateFirewallRuleParameters'
+                            'schema' => ['$ref' => '#/definitions/UpdateFirewallRuleParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -277,7 +277,7 @@ final class DataLakeStoreAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/TrustedIdProvider'
+                            'schema' => ['$ref' => '#/definitions/TrustedIdProvider']
                         ],
                         [
                             'name' => 'api-version',
@@ -320,7 +320,7 @@ final class DataLakeStoreAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => FALSE,
-                            '$ref' => '#/definitions/UpdateTrustedIdProviderParameters'
+                            'schema' => ['$ref' => '#/definitions/UpdateTrustedIdProviderParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -467,7 +467,7 @@ final class DataLakeStoreAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DataLakeStoreAccount'
+                            'schema' => ['$ref' => '#/definitions/DataLakeStoreAccount']
                         ],
                         [
                             'name' => 'api-version',
@@ -507,7 +507,7 @@ final class DataLakeStoreAccountManagementClient
                             'name' => 'parameters',
                             'in' => 'body',
                             'required' => TRUE,
-                            '$ref' => '#/definitions/DataLakeStoreAccountUpdateParameters'
+                            'schema' => ['$ref' => '#/definitions/DataLakeStoreAccountUpdateParameters']
                         ],
                         [
                             'name' => 'api-version',
@@ -753,10 +753,12 @@ final class DataLakeStoreAccountManagementClient
                     'startIpAddress' => ['type' => 'string'],
                     'endIpAddress' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateFirewallRuleParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UpdateFirewallRuleProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FirewallRuleProperties' => [
@@ -764,6 +766,7 @@ final class DataLakeStoreAccountManagementClient
                     'startIpAddress' => ['type' => 'string'],
                     'endIpAddress' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'startIpAddress',
                     'endIpAddress'
@@ -771,22 +774,27 @@ final class DataLakeStoreAccountManagementClient
             ],
             'FirewallRule' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/FirewallRuleProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'UpdateTrustedIdProviderProperties' => [
                 'properties' => ['idProvider' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateTrustedIdProviderParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UpdateTrustedIdProviderProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TrustedIdProviderProperties' => [
                 'properties' => ['idProvider' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['idProvider']
             ],
             'TrustedIdProvider' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/TrustedIdProviderProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'DataLakeStoreTrustedIdProviderListResult' => [
@@ -797,6 +805,7 @@ final class DataLakeStoreAccountManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataLakeStoreFirewallRuleListResult' => [
@@ -807,6 +816,7 @@ final class DataLakeStoreAccountManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EncryptionIdentity' => [
@@ -821,6 +831,7 @@ final class DataLakeStoreAccountManagementClient
                         'format' => 'uuid'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['type']
             ],
             'KeyVaultMetaInfo' => [
@@ -829,6 +840,7 @@ final class DataLakeStoreAccountManagementClient
                     'encryptionKeyName' => ['type' => 'string'],
                     'encryptionKeyVersion' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'keyVaultResourceId',
                     'encryptionKeyName',
@@ -846,14 +858,17 @@ final class DataLakeStoreAccountManagementClient
                     ],
                     'keyVaultMetaInfo' => ['$ref' => '#/definitions/KeyVaultMetaInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['type']
             ],
             'UpdateKeyVaultMetaInfo' => [
                 'properties' => ['encryptionKeyVersion' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateEncryptionConfig' => [
                 'properties' => ['keyVaultMetaInfo' => ['$ref' => '#/definitions/UpdateKeyVaultMetaInfo']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataLakeStoreAccountProperties' => [
@@ -928,6 +943,7 @@ final class DataLakeStoreAccountManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateDataLakeStoreAccountProperties' => [
@@ -968,6 +984,7 @@ final class DataLakeStoreAccountManagementClient
                     ],
                     'encryptionConfig' => ['$ref' => '#/definitions/UpdateEncryptionConfig']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataLakeStoreAccountUpdateParameters' => [
@@ -978,6 +995,7 @@ final class DataLakeStoreAccountManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/UpdateDataLakeStoreAccountProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataLakeStoreAccount' => [
@@ -985,6 +1003,7 @@ final class DataLakeStoreAccountManagementClient
                     'identity' => ['$ref' => '#/definitions/EncryptionIdentity'],
                     'properties' => ['$ref' => '#/definitions/DataLakeStoreAccountProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataLakeStoreAccountPropertiesBasic' => [
@@ -1024,10 +1043,12 @@ final class DataLakeStoreAccountManagementClient
                         'format' => 'uuid'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataLakeStoreAccountBasic' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/DataLakeStoreAccountPropertiesBasic']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataLakeStoreAccountListResult' => [
@@ -1038,6 +1059,7 @@ final class DataLakeStoreAccountManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorDetails' => [
@@ -1046,6 +1068,7 @@ final class DataLakeStoreAccountManagementClient
                     'message' => ['type' => 'string'],
                     'target' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -1059,6 +1082,7 @@ final class DataLakeStoreAccountManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'SubResource' => [
@@ -1067,6 +1091,7 @@ final class DataLakeStoreAccountManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]
