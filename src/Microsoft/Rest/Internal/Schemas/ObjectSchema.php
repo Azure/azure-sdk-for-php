@@ -19,8 +19,8 @@ final class ObjectSchema extends SchemaAbstract
             }
         }
 
-        $additionalPropertiesObject = $schemaObject->additionalProperties();
         $this->allowAdditionalProperties = true;
+        $additionalPropertiesObject = $schemaObject->additionalProperties();
         if ($additionalPropertiesObject !== null) {
             $allow = $additionalPropertiesObject->value();
             if (is_bool($allow)) {
@@ -51,6 +51,18 @@ final class ObjectSchema extends SchemaAbstract
      */
     function isConst()
     {
-        return false;
+        if ($this->allowAdditionalProperties) {
+            return false;
+        }
+        // TODO:
+        // 1. make sure all parameters are required.
+        // 2. make sure the properties are not nullable
+        // 3. make sure the object is not nullable
+        foreach ($this->propertyMap as $property) {
+            if (!$property->isConst()) {
+                return false;
+            }
+        }
+        return true;
     }
 }
