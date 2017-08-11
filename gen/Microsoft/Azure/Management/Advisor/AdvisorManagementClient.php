@@ -317,6 +317,7 @@ final class AdvisorManagementClient
                     'problem' => ['type' => 'string'],
                     'solution' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecommendationProperties' => [
@@ -366,10 +367,12 @@ final class AdvisorManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceRecommendationBase' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RecommendationProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceRecommendationBaseListResult' => [
@@ -380,6 +383,7 @@ final class AdvisorManagementClient
                         'items' => ['$ref' => '#/definitions/ResourceRecommendationBase']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -388,6 +392,7 @@ final class AdvisorManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationDisplayInfo' => [
@@ -397,6 +402,7 @@ final class AdvisorManagementClient
                     'provider' => ['type' => 'string'],
                     'resource' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationEntity' => [
@@ -404,6 +410,7 @@ final class AdvisorManagementClient
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/OperationDisplayInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationEntityListResult' => [
@@ -414,6 +421,7 @@ final class AdvisorManagementClient
                         'items' => ['$ref' => '#/definitions/OperationEntity']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SuppressionProperties' => [
@@ -421,10 +429,12 @@ final class AdvisorManagementClient
                     'suppressionId' => ['type' => 'string'],
                     'ttl' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SuppressionContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SuppressionProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SuppressionContractListResult' => [
@@ -435,6 +445,7 @@ final class AdvisorManagementClient
                         'items' => ['$ref' => '#/definitions/SuppressionContract']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

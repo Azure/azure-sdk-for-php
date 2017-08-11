@@ -31,10 +31,10 @@ class SchemaObject extends DataTypeObject
     }
 
     /**
-     * @return SchemaObject|null
+     * @return AdditionalPropertiesObject|null
      */
     function additionalProperties()
     {
-        return $this->getChildOrNull('additionalProperties', SchemaObject::class);
+        return $this->getChildOrNull('additionalProperties', AdditionalPropertiesObject::class);
     }
 }

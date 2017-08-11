@@ -47,15 +47,18 @@ final class ClassType extends TypeAbstract
     /**
      * @param TypeAbstract[] $requiredPropertyMap
      * @param TypeAbstract[] $optionalPropertyMap
+     * @param bool $allowAdditionalProperties
      * @param TypeAbstract|null $additionalProperties
      */
     function __construct(
         array $requiredPropertyMap,
         array $optionalPropertyMap,
+        $allowAdditionalProperties = true,
         TypeAbstract $additionalProperties = null)
     {
         $this->requiredPropertyMap = $requiredPropertyMap;
         $this->optionalPropertyMap = $optionalPropertyMap;
+        $this->allowAdditionalProperties = $allowAdditionalProperties;
         $this->additionalProperties = $additionalProperties;
     }
 
@@ -93,12 +96,22 @@ final class ClassType extends TypeAbstract
             }
         }
 
+        $allowAdditionalProperties = true;
+        $additionalProperties = null;
+        if ($additionalPropertiesData !== null) {
+            $allow = $additionalPropertiesData->getValue();
+            if (is_bool($allow)) {
+                $allowAdditionalProperties = $allow;
+            } else {
+                $additionalProperties = TypeAbstract::createFromDataWithRefs($additionalPropertiesData);
+            }
+        }
+
         return new self(
             $requiredPropertyMap,
             $optionalPropertyMap,
-            $additionalPropertiesData == null
-                ? null
-                : TypeAbstract::createFromDataWithRefs($additionalPropertiesData));
+            $allowAdditionalProperties,
+            $additionalProperties);
     }
 
     /**
@@ -124,6 +137,11 @@ final class ClassType extends TypeAbstract
      * @var TypeAbstract[]
      */
     private $optionalPropertyMap;
+
+    /**
+     * @var bool
+     */
+    private $allowAdditionalProperties;
 
     /**
      * @var TypeAbstract|null

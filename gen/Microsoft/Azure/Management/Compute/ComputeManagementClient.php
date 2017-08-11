@@ -3484,10 +3484,12 @@ final class ComputeManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubResource' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AvailabilitySetProperties' => [
@@ -3509,6 +3511,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/InstanceViewStatus']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Sku' => [
@@ -3520,6 +3523,7 @@ final class ComputeManagementClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AvailabilitySet' => [
@@ -3527,6 +3531,7 @@ final class ComputeManagementClient
                     'properties' => ['$ref' => '#/definitions/AvailabilitySetProperties'],
                     'sku' => ['$ref' => '#/definitions/Sku']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AvailabilitySetListResult' => [
@@ -3534,6 +3539,7 @@ final class ComputeManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/AvailabilitySet']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineSize' => [
@@ -3560,6 +3566,7 @@ final class ComputeManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineSizeListResult' => [
@@ -3567,6 +3574,7 @@ final class ComputeManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/VirtualMachineSize']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineExtensionImageProperties' => [
@@ -3577,6 +3585,7 @@ final class ComputeManagementClient
                     'vmScaleSetEnabled' => ['type' => 'boolean'],
                     'supportsMultipleExtensions' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'operatingSystem',
                     'computeRole',
@@ -3585,6 +3594,7 @@ final class ComputeManagementClient
             ],
             'VirtualMachineExtensionImage' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/VirtualMachineExtensionImageProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineImageResource' => [
@@ -3596,6 +3606,7 @@ final class ComputeManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'location'
@@ -3615,6 +3626,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/InstanceViewStatus']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineExtensionProperties' => [
@@ -3629,10 +3641,12 @@ final class ComputeManagementClient
                     'provisioningState' => ['type' => 'string'],
                     'instanceView' => ['$ref' => '#/definitions/VirtualMachineExtensionInstanceView']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineExtension' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/VirtualMachineExtensionProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PurchasePlan' => [
@@ -3641,6 +3655,7 @@ final class ComputeManagementClient
                     'name' => ['type' => 'string'],
                     'product' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'publisher',
                     'name',
@@ -3655,6 +3670,7 @@ final class ComputeManagementClient
                         'Linux'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['operatingSystem']
             ],
             'DataDiskImage' => [
@@ -3662,6 +3678,7 @@ final class ComputeManagementClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineImageProperties' => [
@@ -3673,10 +3690,12 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/DataDiskImage']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineImage' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/VirtualMachineImageProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UsageName' => [
@@ -3684,6 +3703,7 @@ final class ComputeManagementClient
                     'value' => ['type' => 'string'],
                     'localizedValue' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Usage' => [
@@ -3699,6 +3719,7 @@ final class ComputeManagementClient
                     ],
                     'name' => ['$ref' => '#/definitions/UsageName']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'unit',
                     'currentValue',
@@ -3714,6 +3735,7 @@ final class ComputeManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'VirtualMachineCaptureParameters' => [
@@ -3722,6 +3744,7 @@ final class ComputeManagementClient
                     'destinationContainerName' => ['type' => 'string'],
                     'overwriteVhds' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'vhdPrefix',
                     'destinationContainerName',
@@ -3730,10 +3753,12 @@ final class ComputeManagementClient
             ],
             'VirtualMachineCaptureResultProperties' => [
                 'properties' => ['output' => ['type' => 'object']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineCaptureResult' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/VirtualMachineCaptureResultProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Plan' => [
@@ -3743,6 +3768,7 @@ final class ComputeManagementClient
                     'product' => ['type' => 'string'],
                     'promotionCode' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HardwareProfile' => [
@@ -3848,6 +3874,7 @@ final class ComputeManagementClient
                         'Standard_NV24'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ImageReference' => [
@@ -3857,6 +3884,7 @@ final class ComputeManagementClient
                     'sku' => ['type' => 'string'],
                     'version' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'KeyVaultSecretReference' => [
@@ -3864,6 +3892,7 @@ final class ComputeManagementClient
                     'secretUrl' => ['type' => 'string'],
                     'sourceVault' => ['$ref' => '#/definitions/SubResource']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'secretUrl',
                     'sourceVault'
@@ -3874,6 +3903,7 @@ final class ComputeManagementClient
                     'keyUrl' => ['type' => 'string'],
                     'sourceVault' => ['$ref' => '#/definitions/SubResource']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'keyUrl',
                     'sourceVault'
@@ -3885,10 +3915,12 @@ final class ComputeManagementClient
                     'keyEncryptionKey' => ['$ref' => '#/definitions/KeyVaultKeyReference'],
                     'enabled' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualHardDisk' => [
                 'properties' => ['uri' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ManagedDiskParameters' => [
@@ -3899,6 +3931,7 @@ final class ComputeManagementClient
                         'Premium_LRS'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OSDisk' => [
@@ -3936,6 +3969,7 @@ final class ComputeManagementClient
                     ],
                     'managedDisk' => ['$ref' => '#/definitions/ManagedDiskParameters']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['createOption']
             ],
             'DataDisk' => [
@@ -3969,6 +4003,7 @@ final class ComputeManagementClient
                     ],
                     'managedDisk' => ['$ref' => '#/definitions/ManagedDiskParameters']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'lun',
                     'createOption'
@@ -3983,6 +4018,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/DataDisk']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AdditionalUnattendContent' => [
@@ -4004,6 +4040,7 @@ final class ComputeManagementClient
                     ],
                     'content' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WinRMListener' => [
@@ -4017,6 +4054,7 @@ final class ComputeManagementClient
                     ],
                     'certificateUrl' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WinRMConfiguration' => [
@@ -4024,6 +4062,7 @@ final class ComputeManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/WinRMListener']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WindowsConfiguration' => [
@@ -4037,6 +4076,7 @@ final class ComputeManagementClient
                     ],
                     'winRM' => ['$ref' => '#/definitions/WinRMConfiguration']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SshPublicKey' => [
@@ -4044,6 +4084,7 @@ final class ComputeManagementClient
                     'path' => ['type' => 'string'],
                     'keyData' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SshConfiguration' => [
@@ -4051,6 +4092,7 @@ final class ComputeManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/SshPublicKey']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LinuxConfiguration' => [
@@ -4058,6 +4100,7 @@ final class ComputeManagementClient
                     'disablePasswordAuthentication' => ['type' => 'boolean'],
                     'ssh' => ['$ref' => '#/definitions/SshConfiguration']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VaultCertificate' => [
@@ -4065,6 +4108,7 @@ final class ComputeManagementClient
                     'certificateUrl' => ['type' => 'string'],
                     'certificateStore' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VaultSecretGroup' => [
@@ -4075,6 +4119,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/VaultCertificate']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OSProfile' => [
@@ -4090,14 +4135,17 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/VaultSecretGroup']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkInterfaceReferenceProperties' => [
                 'properties' => ['primary' => ['type' => 'boolean']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkInterfaceReference' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/NetworkInterfaceReferenceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkProfile' => [
@@ -4105,6 +4153,7 @@ final class ComputeManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/NetworkInterfaceReference']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BootDiagnostics' => [
@@ -4112,10 +4161,12 @@ final class ComputeManagementClient
                     'enabled' => ['type' => 'boolean'],
                     'storageUri' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DiagnosticsProfile' => [
                 'properties' => ['bootDiagnostics' => ['$ref' => '#/definitions/BootDiagnostics']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineExtensionHandlerInstanceView' => [
@@ -4124,6 +4175,7 @@ final class ComputeManagementClient
                     'typeHandlerVersion' => ['type' => 'string'],
                     'status' => ['$ref' => '#/definitions/InstanceViewStatus']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineAgentInstanceView' => [
@@ -4138,6 +4190,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/InstanceViewStatus']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DiskInstanceView' => [
@@ -4152,6 +4205,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/InstanceViewStatus']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BootDiagnosticsInstanceView' => [
@@ -4159,6 +4213,7 @@ final class ComputeManagementClient
                     'consoleScreenshotBlobUri' => ['type' => 'string'],
                     'serialConsoleLogBlobUri' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineIdentity' => [
@@ -4170,6 +4225,7 @@ final class ComputeManagementClient
                         'enum' => ['SystemAssigned']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MaintenanceRedeployStatus' => [
@@ -4202,6 +4258,7 @@ final class ComputeManagementClient
                     ],
                     'lastOperationMessage' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineInstanceView' => [
@@ -4231,6 +4288,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/InstanceViewStatus']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineProperties' => [
@@ -4246,6 +4304,7 @@ final class ComputeManagementClient
                     'licenseType' => ['type' => 'string'],
                     'vmId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachine' => [
@@ -4258,6 +4317,7 @@ final class ComputeManagementClient
                     ],
                     'identity' => ['$ref' => '#/definitions/VirtualMachineIdentity']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineListResult' => [
@@ -4268,6 +4328,7 @@ final class ComputeManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'UpgradePolicy' => [
@@ -4278,6 +4339,7 @@ final class ComputeManagementClient
                         'Manual'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPolicy' => [
@@ -4289,6 +4351,7 @@ final class ComputeManagementClient
                         'Reprovision'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ImageOSDisk' => [
@@ -4330,6 +4393,7 @@ final class ComputeManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'osType',
                     'osState'
@@ -4364,6 +4428,7 @@ final class ComputeManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['lun']
             ],
             'ImageStorageProfile' => [
@@ -4374,6 +4439,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/ImageDataDisk']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['osDisk']
             ],
             'ImageProperties' => [
@@ -4382,10 +4448,12 @@ final class ComputeManagementClient
                     'storageProfile' => ['$ref' => '#/definitions/ImageStorageProfile'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Image' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ImageProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ImageListResult' => [
@@ -4396,6 +4464,7 @@ final class ComputeManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'VirtualMachineScaleSetIdentity' => [
@@ -4407,6 +4476,7 @@ final class ComputeManagementClient
                         'enum' => ['SystemAssigned']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceSkuCapacity' => [
@@ -4432,6 +4502,7 @@ final class ComputeManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceSkuCosts' => [
@@ -4443,6 +4514,7 @@ final class ComputeManagementClient
                     ],
                     'extendedUnit' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceSkuCapabilities' => [
@@ -4450,6 +4522,7 @@ final class ComputeManagementClient
                     'name' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceSkuRestrictions' => [
@@ -4470,6 +4543,7 @@ final class ComputeManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceSku' => [
@@ -4502,6 +4576,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/ResourceSkuRestrictions']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceSkusResult' => [
@@ -4512,6 +4587,7 @@ final class ComputeManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'VirtualMachineScaleSetOSProfile' => [
@@ -4527,6 +4603,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/VaultSecretGroup']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetManagedDiskParameters' => [
@@ -4537,6 +4614,7 @@ final class ComputeManagementClient
                         'Premium_LRS'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetOSDisk' => [
@@ -4572,6 +4650,7 @@ final class ComputeManagementClient
                     ],
                     'managedDisk' => ['$ref' => '#/definitions/VirtualMachineScaleSetManagedDiskParameters']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['createOption']
             ],
             'VirtualMachineScaleSetDataDisk' => [
@@ -4603,6 +4682,7 @@ final class ComputeManagementClient
                     ],
                     'managedDisk' => ['$ref' => '#/definitions/VirtualMachineScaleSetManagedDiskParameters']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'lun',
                     'createOption'
@@ -4617,14 +4697,17 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetDataDisk']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiEntityReference' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings' => [
                 'properties' => ['domainNameLabel' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['domainNameLabel']
             ],
             'VirtualMachineScaleSetPublicIPAddressConfigurationProperties' => [
@@ -4635,6 +4718,7 @@ final class ComputeManagementClient
                     ],
                     'dnsSettings' => ['$ref' => '#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetPublicIPAddressConfiguration' => [
@@ -4642,6 +4726,7 @@ final class ComputeManagementClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'VirtualMachineScaleSetIPConfigurationProperties' => [
@@ -4669,6 +4754,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/SubResource']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetIPConfiguration' => [
@@ -4676,6 +4762,7 @@ final class ComputeManagementClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetIPConfigurationProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'VirtualMachineScaleSetNetworkConfigurationDnsSettings' => [
@@ -4683,6 +4770,7 @@ final class ComputeManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetNetworkConfigurationProperties' => [
@@ -4696,6 +4784,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetIPConfiguration']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['ipConfigurations']
             ],
             'VirtualMachineScaleSetNetworkConfiguration' => [
@@ -4703,6 +4792,7 @@ final class ComputeManagementClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetNetworkConfigurationProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'VirtualMachineScaleSetNetworkProfile' => [
@@ -4710,6 +4800,7 @@ final class ComputeManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetNetworkConfiguration']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetExtensionProperties' => [
@@ -4723,6 +4814,7 @@ final class ComputeManagementClient
                     'protectedSettings' => ['type' => 'object'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetExtension' => [
@@ -4730,6 +4822,7 @@ final class ComputeManagementClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetExtensionProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetExtensionListResult' => [
@@ -4740,6 +4833,7 @@ final class ComputeManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'VirtualMachineScaleSetExtensionProfile' => [
@@ -4747,6 +4841,7 @@ final class ComputeManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetExtension']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetVMProfile' => [
@@ -4758,6 +4853,7 @@ final class ComputeManagementClient
                     'extensionProfile' => ['$ref' => '#/definitions/VirtualMachineScaleSetExtensionProfile'],
                     'licenseType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetProperties' => [
@@ -4770,6 +4866,7 @@ final class ComputeManagementClient
                     'uniqueId' => ['type' => 'string'],
                     'singlePlacementGroup' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSet' => [
@@ -4779,6 +4876,7 @@ final class ComputeManagementClient
                     'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetProperties'],
                     'identity' => ['$ref' => '#/definitions/VirtualMachineScaleSetIdentity']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetVMInstanceIDs' => [
@@ -4786,6 +4884,7 @@ final class ComputeManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetVMInstanceRequiredIDs' => [
@@ -4793,6 +4892,7 @@ final class ComputeManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['instanceIds']
             ],
             'VirtualMachineStatusCodeCount' => [
@@ -4803,6 +4903,7 @@ final class ComputeManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetInstanceViewStatusesSummary' => [
@@ -4810,6 +4911,7 @@ final class ComputeManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/VirtualMachineStatusCodeCount']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetVMExtensionsSummary' => [
@@ -4820,6 +4922,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/VirtualMachineStatusCodeCount']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetInstanceView' => [
@@ -4834,6 +4937,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/InstanceViewStatus']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetListResult' => [
@@ -4844,6 +4948,7 @@ final class ComputeManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'VirtualMachineScaleSetListWithLinkResult' => [
@@ -4854,6 +4959,7 @@ final class ComputeManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'VirtualMachineScaleSetSkuCapacity' => [
@@ -4878,6 +4984,7 @@ final class ComputeManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetSku' => [
@@ -4886,6 +4993,7 @@ final class ComputeManagementClient
                     'sku' => ['$ref' => '#/definitions/Sku'],
                     'capacity' => ['$ref' => '#/definitions/VirtualMachineScaleSetSkuCapacity']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetListSkusResult' => [
@@ -4896,6 +5004,7 @@ final class ComputeManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'VirtualMachineScaleSetVMProperties' => [
@@ -4912,6 +5021,7 @@ final class ComputeManagementClient
                     'provisioningState' => ['type' => 'string'],
                     'licenseType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetVM' => [
@@ -4925,6 +5035,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/VirtualMachineExtension']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetVMInstanceView' => [
@@ -4954,6 +5065,7 @@ final class ComputeManagementClient
                     ],
                     'placementGroupId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetVMListResult' => [
@@ -4964,6 +5076,7 @@ final class ComputeManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'ApiErrorBase' => [
@@ -4972,6 +5085,7 @@ final class ComputeManagementClient
                     'target' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InnerError' => [
@@ -4979,6 +5093,7 @@ final class ComputeManagementClient
                     'exceptiontype' => ['type' => 'string'],
                     'errordetail' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiError' => [
@@ -4992,10 +5107,12 @@ final class ComputeManagementClient
                     'target' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ComputeLongRunningOperationProperties' => [
                 'properties' => ['output' => ['type' => 'object']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -5009,10 +5126,12 @@ final class ComputeManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'SubResourceReadOnly' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationStatusResponse' => [
@@ -5029,6 +5148,7 @@ final class ComputeManagementClient
                     ],
                     'error' => ['$ref' => '#/definitions/ApiError']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DiskSku' => [
@@ -5042,6 +5162,7 @@ final class ComputeManagementClient
                     ],
                     'tier' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceUpdate' => [
@@ -5052,6 +5173,7 @@ final class ComputeManagementClient
                     ],
                     'sku' => ['$ref' => '#/definitions/DiskSku']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ImageDiskReference' => [
@@ -5062,6 +5184,7 @@ final class ComputeManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['id']
             ],
             'CreationData' => [
@@ -5081,10 +5204,12 @@ final class ComputeManagementClient
                     'sourceUri' => ['type' => 'string'],
                     'sourceResourceId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['createOption']
             ],
             'SourceVault' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'KeyVaultAndSecretReference' => [
@@ -5092,6 +5217,7 @@ final class ComputeManagementClient
                     'sourceVault' => ['$ref' => '#/definitions/SourceVault'],
                     'secretUrl' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'sourceVault',
                     'secretUrl'
@@ -5102,6 +5228,7 @@ final class ComputeManagementClient
                     'sourceVault' => ['$ref' => '#/definitions/SourceVault'],
                     'keyUrl' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'sourceVault',
                     'keyUrl'
@@ -5113,6 +5240,7 @@ final class ComputeManagementClient
                     'diskEncryptionKey' => ['$ref' => '#/definitions/KeyVaultAndSecretReference'],
                     'keyEncryptionKey' => ['$ref' => '#/definitions/KeyVaultAndKeyReference']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DiskProperties' => [
@@ -5136,6 +5264,7 @@ final class ComputeManagementClient
                     'encryptionSettings' => ['$ref' => '#/definitions/EncryptionSettings'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['creationData']
             ],
             'Disk' => [
@@ -5144,6 +5273,7 @@ final class ComputeManagementClient
                     'sku' => ['$ref' => '#/definitions/DiskSku'],
                     'properties' => ['$ref' => '#/definitions/DiskProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DiskUpdateProperties' => [
@@ -5161,10 +5291,12 @@ final class ComputeManagementClient
                     ],
                     'encryptionSettings' => ['$ref' => '#/definitions/EncryptionSettings']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DiskUpdate' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/DiskUpdateProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DiskList' => [
@@ -5175,6 +5307,7 @@ final class ComputeManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'GrantAccessData' => [
@@ -5191,6 +5324,7 @@ final class ComputeManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'access',
                     'durationInSeconds'
@@ -5198,14 +5332,17 @@ final class ComputeManagementClient
             ],
             'AccessUriRaw' => [
                 'properties' => ['accessSAS' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AccessUriOutput' => [
                 'properties' => ['output' => ['$ref' => '#/definitions/AccessUriRaw']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AccessUri' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AccessUriOutput']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Snapshot' => [
@@ -5214,10 +5351,12 @@ final class ComputeManagementClient
                     'sku' => ['$ref' => '#/definitions/DiskSku'],
                     'properties' => ['$ref' => '#/definitions/DiskProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SnapshotUpdate' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/DiskUpdateProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SnapshotList' => [
@@ -5228,6 +5367,7 @@ final class ComputeManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'RunCommandInputParameter' => [
@@ -5235,6 +5375,7 @@ final class ComputeManagementClient
                     'name' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'value'
@@ -5252,6 +5393,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/RunCommandInputParameter']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['commandId']
             ],
             'RunCommandParameterDefinition' => [
@@ -5261,6 +5403,7 @@ final class ComputeManagementClient
                     'defaultValue' => ['type' => 'string'],
                     'required' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'type'
@@ -5280,6 +5423,7 @@ final class ComputeManagementClient
                     'label' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     '$schema',
                     'id',
@@ -5299,6 +5443,7 @@ final class ComputeManagementClient
                         'items' => ['$ref' => '#/definitions/RunCommandParameterDefinition']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['script']
             ],
             'RunCommandListResult' => [
@@ -5309,18 +5454,22 @@ final class ComputeManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'RunCommandResultProperties' => [
                 'properties' => ['output' => ['type' => 'object']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RunCommandResult' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RunCommandResultProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ContainerServiceCustomProfile' => [
                 'properties' => ['orchestrator' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['orchestrator']
             ],
             'ContainerServiceServicePrincipalProfile' => [
@@ -5328,6 +5477,7 @@ final class ComputeManagementClient
                     'clientId' => ['type' => 'string'],
                     'secret' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'clientId',
                     'secret'
@@ -5343,6 +5493,7 @@ final class ComputeManagementClient
                         'Kubernetes'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['orchestratorType']
             ],
             'ContainerServiceMasterProfile' => [
@@ -5354,6 +5505,7 @@ final class ComputeManagementClient
                     'dnsPrefix' => ['type' => 'string'],
                     'fqdn' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['dnsPrefix']
             ],
             'ContainerServiceAgentPoolProfile' => [
@@ -5418,6 +5570,7 @@ final class ComputeManagementClient
                     'dnsPrefix' => ['type' => 'string'],
                     'fqdn' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'count',
@@ -5430,6 +5583,7 @@ final class ComputeManagementClient
                     'adminUsername' => ['type' => 'string'],
                     'adminPassword' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'adminUsername',
                     'adminPassword'
@@ -5437,6 +5591,7 @@ final class ComputeManagementClient
             ],
             'ContainerServiceSshPublicKey' => [
                 'properties' => ['keyData' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['keyData']
             ],
             'ContainerServiceSshConfiguration' => [
@@ -5444,6 +5599,7 @@ final class ComputeManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ContainerServiceSshPublicKey']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['publicKeys']
             ],
             'ContainerServiceLinuxProfile' => [
@@ -5451,6 +5607,7 @@ final class ComputeManagementClient
                     'adminUsername' => ['type' => 'string'],
                     'ssh' => ['$ref' => '#/definitions/ContainerServiceSshConfiguration']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'adminUsername',
                     'ssh'
@@ -5461,10 +5618,12 @@ final class ComputeManagementClient
                     'enabled' => ['type' => 'boolean'],
                     'storageUri' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['enabled']
             ],
             'ContainerServiceDiagnosticsProfile' => [
                 'properties' => ['vmDiagnostics' => ['$ref' => '#/definitions/ContainerServiceVMDiagnostics']],
+                'additionalProperties' => FALSE,
                 'required' => ['vmDiagnostics']
             ],
             'ContainerServiceProperties' => [
@@ -5482,6 +5641,7 @@ final class ComputeManagementClient
                     'linuxProfile' => ['$ref' => '#/definitions/ContainerServiceLinuxProfile'],
                     'diagnosticsProfile' => ['$ref' => '#/definitions/ContainerServiceDiagnosticsProfile']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'masterProfile',
                     'agentPoolProfiles',
@@ -5490,6 +5650,7 @@ final class ComputeManagementClient
             ],
             'ContainerService' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ContainerServiceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ContainerServiceListResult' => [
@@ -5500,6 +5661,7 @@ final class ComputeManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

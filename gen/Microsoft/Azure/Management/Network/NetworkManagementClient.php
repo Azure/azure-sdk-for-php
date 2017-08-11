@@ -6064,6 +6064,7 @@ final class NetworkManagementClient
         'definitions' => [
             'SubResource' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackendAddressPoolPropertiesFormat' => [
@@ -6079,6 +6080,7 @@ final class NetworkManagementClient
                     'outboundNatRule' => ['$ref' => '#/definitions/SubResource'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackendAddressPool' => [
@@ -6087,6 +6089,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InboundNatRulePropertiesFormat' => [
@@ -6115,6 +6118,7 @@ final class NetworkManagementClient
                     'enableFloatingIP' => ['type' => 'boolean'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InboundNatRule' => [
@@ -6123,6 +6127,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SecurityRulePropertiesFormat' => [
@@ -6176,6 +6181,7 @@ final class NetworkManagementClient
                     ],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'protocol',
                     'sourceAddressPrefix',
@@ -6190,6 +6196,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkInterfaceDnsSettings' => [
@@ -6206,6 +6213,7 @@ final class NetworkManagementClient
                     'internalFqdn' => ['type' => 'string'],
                     'internalDomainNameSuffix' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkInterfacePropertiesFormat' => [
@@ -6224,6 +6232,7 @@ final class NetworkManagementClient
                     'resourceGuid' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkInterface' => [
@@ -6231,6 +6240,7 @@ final class NetworkManagementClient
                     'properties' => ['$ref' => '#/definitions/NetworkInterfacePropertiesFormat'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkSecurityGroupPropertiesFormat' => [
@@ -6254,6 +6264,7 @@ final class NetworkManagementClient
                     'resourceGuid' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkSecurityGroup' => [
@@ -6261,6 +6272,7 @@ final class NetworkManagementClient
                     'properties' => ['$ref' => '#/definitions/NetworkSecurityGroupPropertiesFormat'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RoutePropertiesFormat' => [
@@ -6279,6 +6291,7 @@ final class NetworkManagementClient
                     'nextHopIpAddress' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['nextHopType']
             ],
             'Route' => [
@@ -6287,6 +6300,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RouteTablePropertiesFormat' => [
@@ -6301,6 +6315,7 @@ final class NetworkManagementClient
                     ],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RouteTable' => [
@@ -6308,6 +6323,7 @@ final class NetworkManagementClient
                     'properties' => ['$ref' => '#/definitions/RouteTablePropertiesFormat'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PublicIPAddressDnsSettings' => [
@@ -6316,6 +6332,7 @@ final class NetworkManagementClient
                     'fqdn' => ['type' => 'string'],
                     'reverseFqdn' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PublicIPAddressPropertiesFormat' => [
@@ -6344,6 +6361,7 @@ final class NetworkManagementClient
                     'resourceGuid' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PublicIPAddress' => [
@@ -6351,6 +6369,7 @@ final class NetworkManagementClient
                     'properties' => ['$ref' => '#/definitions/PublicIPAddressPropertiesFormat'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IPConfigurationPropertiesFormat' => [
@@ -6367,6 +6386,7 @@ final class NetworkManagementClient
                     'publicIPAddress' => ['$ref' => '#/definitions/PublicIPAddress'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IPConfiguration' => [
@@ -6375,6 +6395,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceNavigationLinkFormat' => [
@@ -6383,6 +6404,7 @@ final class NetworkManagementClient
                     'link' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceNavigationLink' => [
@@ -6391,6 +6413,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubnetPropertiesFormat' => [
@@ -6408,6 +6431,7 @@ final class NetworkManagementClient
                     ],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Subnet' => [
@@ -6416,6 +6440,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkInterfaceIPConfigurationPropertiesFormat' => [
@@ -6452,6 +6477,7 @@ final class NetworkManagementClient
                     'publicIPAddress' => ['$ref' => '#/definitions/PublicIPAddress'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkInterfaceIPConfiguration' => [
@@ -6460,6 +6486,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayBackendAddress' => [
@@ -6467,6 +6494,7 @@ final class NetworkManagementClient
                     'fqdn' => ['type' => 'string'],
                     'ipAddress' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayBackendAddressPoolPropertiesFormat' => [
@@ -6481,6 +6509,7 @@ final class NetworkManagementClient
                     ],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayBackendAddressPool' => [
@@ -6490,6 +6519,7 @@ final class NetworkManagementClient
                     'etag' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayConnectionDraining' => [
@@ -6500,6 +6530,7 @@ final class NetworkManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'enabled',
                     'drainTimeoutInSec'
@@ -6542,6 +6573,7 @@ final class NetworkManagementClient
                     'path' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayBackendHttpSettings' => [
@@ -6551,6 +6583,7 @@ final class NetworkManagementClient
                     'etag' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayBackendHealthServer' => [
@@ -6568,6 +6601,7 @@ final class NetworkManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayBackendHealthHttpSettings' => [
@@ -6578,6 +6612,7 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendHealthServer']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayBackendHealthPool' => [
@@ -6588,6 +6623,7 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendHealthHttpSettings']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayBackendHealth' => [
@@ -6595,6 +6631,7 @@ final class NetworkManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ApplicationGatewayBackendHealthPool']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewaySku' => [
@@ -6621,6 +6658,7 @@ final class NetworkManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewaySslPolicy' => [
@@ -6693,6 +6731,7 @@ final class NetworkManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayIPConfigurationPropertiesFormat' => [
@@ -6700,6 +6739,7 @@ final class NetworkManagementClient
                     'subnet' => ['$ref' => '#/definitions/SubResource'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayIPConfiguration' => [
@@ -6709,6 +6749,7 @@ final class NetworkManagementClient
                     'etag' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayAuthenticationCertificatePropertiesFormat' => [
@@ -6716,6 +6757,7 @@ final class NetworkManagementClient
                     'data' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayAuthenticationCertificate' => [
@@ -6725,6 +6767,7 @@ final class NetworkManagementClient
                     'etag' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewaySslCertificatePropertiesFormat' => [
@@ -6734,6 +6777,7 @@ final class NetworkManagementClient
                     'publicCertData' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewaySslCertificate' => [
@@ -6743,6 +6787,7 @@ final class NetworkManagementClient
                     'etag' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayFrontendIPConfigurationPropertiesFormat' => [
@@ -6759,6 +6804,7 @@ final class NetworkManagementClient
                     'publicIPAddress' => ['$ref' => '#/definitions/SubResource'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayFrontendIPConfiguration' => [
@@ -6768,6 +6814,7 @@ final class NetworkManagementClient
                     'etag' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayFrontendPortPropertiesFormat' => [
@@ -6778,6 +6825,7 @@ final class NetworkManagementClient
                     ],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayFrontendPort' => [
@@ -6787,6 +6835,7 @@ final class NetworkManagementClient
                     'etag' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayHttpListenerPropertiesFormat' => [
@@ -6805,6 +6854,7 @@ final class NetworkManagementClient
                     'requireServerNameIndication' => ['type' => 'boolean'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayHttpListener' => [
@@ -6814,6 +6864,7 @@ final class NetworkManagementClient
                     'etag' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayPathRulePropertiesFormat' => [
@@ -6827,6 +6878,7 @@ final class NetworkManagementClient
                     'redirectConfiguration' => ['$ref' => '#/definitions/SubResource'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayPathRule' => [
@@ -6836,6 +6888,7 @@ final class NetworkManagementClient
                     'etag' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayProbeHealthResponseMatch' => [
@@ -6846,6 +6899,7 @@ final class NetworkManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayProbePropertiesFormat' => [
@@ -6879,6 +6933,7 @@ final class NetworkManagementClient
                     'match' => ['$ref' => '#/definitions/ApplicationGatewayProbeHealthResponseMatch'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayProbe' => [
@@ -6888,6 +6943,7 @@ final class NetworkManagementClient
                     'etag' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayRequestRoutingRulePropertiesFormat' => [
@@ -6906,6 +6962,7 @@ final class NetworkManagementClient
                     'redirectConfiguration' => ['$ref' => '#/definitions/SubResource'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayRequestRoutingRule' => [
@@ -6915,6 +6972,7 @@ final class NetworkManagementClient
                     'etag' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayRedirectConfigurationPropertiesFormat' => [
@@ -6945,6 +7003,7 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/SubResource']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayRedirectConfiguration' => [
@@ -6954,6 +7013,7 @@ final class NetworkManagementClient
                     'etag' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayUrlPathMapPropertiesFormat' => [
@@ -6967,6 +7027,7 @@ final class NetworkManagementClient
                     ],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayUrlPathMap' => [
@@ -6976,6 +7037,7 @@ final class NetworkManagementClient
                     'etag' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayFirewallDisabledRuleGroup' => [
@@ -6989,6 +7051,7 @@ final class NetworkManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['ruleGroupName']
             ],
             'ApplicationGatewayWebApplicationFirewallConfiguration' => [
@@ -7008,6 +7071,7 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/ApplicationGatewayFirewallDisabledRuleGroup']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'enabled',
                     'firewallMode',
@@ -7080,6 +7144,7 @@ final class NetworkManagementClient
                     'resourceGuid' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGateway' => [
@@ -7087,6 +7152,7 @@ final class NetworkManagementClient
                     'properties' => ['$ref' => '#/definitions/ApplicationGatewayPropertiesFormat'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayListResult' => [
@@ -7097,6 +7163,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayFirewallRule' => [
@@ -7107,6 +7174,7 @@ final class NetworkManagementClient
                     ],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['ruleId']
             ],
             'ApplicationGatewayFirewallRuleGroup' => [
@@ -7118,6 +7186,7 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/ApplicationGatewayFirewallRule']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'ruleGroupName',
                     'rules'
@@ -7133,6 +7202,7 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/ApplicationGatewayFirewallRuleGroup']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'ruleSetType',
                     'ruleSetVersion',
@@ -7141,6 +7211,7 @@ final class NetworkManagementClient
             ],
             'ApplicationGatewayFirewallRuleSet' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ApplicationGatewayFirewallRuleSetPropertiesFormat']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayAvailableWafRuleSetsResult' => [
@@ -7148,6 +7219,7 @@ final class NetworkManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ApplicationGatewayFirewallRuleSet']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayAvailableSslOptionsPropertiesFormat' => [
@@ -7209,10 +7281,12 @@ final class NetworkManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayAvailableSslOptions' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ApplicationGatewayAvailableSslOptionsPropertiesFormat']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewaySslPredefinedPolicyPropertiesFormat' => [
@@ -7259,6 +7333,7 @@ final class NetworkManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewaySslPredefinedPolicy' => [
@@ -7266,6 +7341,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ApplicationGatewaySslPredefinedPolicyPropertiesFormat']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationGatewayAvailableSslPredefinedPolicies' => [
@@ -7276,6 +7352,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -7289,10 +7366,12 @@ final class NetworkManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DnsNameAvailabilityResult' => [
                 'properties' => ['available' => ['type' => 'boolean']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AuthorizationPropertiesFormat' => [
@@ -7307,6 +7386,7 @@ final class NetworkManagementClient
                     ],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuitAuthorization' => [
@@ -7315,6 +7395,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AuthorizationListResult' => [
@@ -7325,6 +7406,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuitPeeringConfig' => [
@@ -7356,6 +7438,7 @@ final class NetworkManagementClient
                     ],
                     'routingRegistryName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RouteFilterRulePropertiesFormat' => [
@@ -7374,6 +7457,7 @@ final class NetworkManagementClient
                     ],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'access',
                     'routeFilterRuleType',
@@ -7391,6 +7475,7 @@ final class NetworkManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuitStats' => [
@@ -7412,6 +7497,7 @@ final class NetworkManagementClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuitPeeringPropertiesFormat' => [
@@ -7456,6 +7542,7 @@ final class NetworkManagementClient
                     'routeFilter' => ['$ref' => '#/definitions/RouteFilter'],
                     'ipv6PeeringConfig' => ['$ref' => '#/definitions/Ipv6ExpressRouteCircuitPeeringConfig']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuitPeering' => [
@@ -7464,6 +7551,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RouteFilterPropertiesFormat' => [
@@ -7478,6 +7566,7 @@ final class NetworkManagementClient
                     ],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RouteFilter' => [
@@ -7485,6 +7574,7 @@ final class NetworkManagementClient
                     'properties' => ['$ref' => '#/definitions/RouteFilterPropertiesFormat'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Ipv6ExpressRouteCircuitPeeringConfig' => [
@@ -7501,6 +7591,7 @@ final class NetworkManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuitPeeringListResult' => [
@@ -7511,6 +7602,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuitSku' => [
@@ -7531,6 +7623,7 @@ final class NetworkManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuitServiceProviderProperties' => [
@@ -7542,6 +7635,7 @@ final class NetworkManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuitPropertiesFormat' => [
@@ -7571,6 +7665,7 @@ final class NetworkManagementClient
                     'provisioningState' => ['type' => 'string'],
                     'gatewayManagerEtag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuit' => [
@@ -7579,6 +7674,7 @@ final class NetworkManagementClient
                     'properties' => ['$ref' => '#/definitions/ExpressRouteCircuitPropertiesFormat'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuitArpTable' => [
@@ -7591,6 +7687,7 @@ final class NetworkManagementClient
                     'ipAddress' => ['type' => 'string'],
                     'macAddress' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuitsArpTableListResult' => [
@@ -7601,6 +7698,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuitRoutesTable' => [
@@ -7614,6 +7712,7 @@ final class NetworkManagementClient
                     ],
                     'path' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuitsRoutesTableListResult' => [
@@ -7624,6 +7723,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuitRoutesTableSummary' => [
@@ -7640,6 +7740,7 @@ final class NetworkManagementClient
                     'upDown' => ['type' => 'string'],
                     'statePfxRcd' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuitsRoutesTableSummaryListResult' => [
@@ -7650,6 +7751,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteCircuitListResult' => [
@@ -7660,6 +7762,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteServiceProviderBandwidthsOffered' => [
@@ -7670,6 +7773,7 @@ final class NetworkManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteServiceProviderPropertiesFormat' => [
@@ -7684,10 +7788,12 @@ final class NetworkManagementClient
                     ],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteServiceProvider' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ExpressRouteServiceProviderPropertiesFormat']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExpressRouteServiceProviderListResult' => [
@@ -7698,6 +7804,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FrontendIPConfigurationPropertiesFormat' => [
@@ -7730,6 +7837,7 @@ final class NetworkManagementClient
                     'publicIPAddress' => ['$ref' => '#/definitions/PublicIPAddress'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FrontendIPConfiguration' => [
@@ -7738,6 +7846,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LoadBalancingRulePropertiesFormat' => [
@@ -7775,6 +7884,7 @@ final class NetworkManagementClient
                     'enableFloatingIP' => ['type' => 'boolean'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'protocol',
                     'frontendPort'
@@ -7786,6 +7896,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProbePropertiesFormat' => [
@@ -7816,6 +7927,7 @@ final class NetworkManagementClient
                     'requestPath' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'protocol',
                     'port'
@@ -7827,6 +7939,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InboundNatPoolPropertiesFormat' => [
@@ -7853,6 +7966,7 @@ final class NetworkManagementClient
                     ],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'protocol',
                     'frontendPortRangeStart',
@@ -7866,6 +7980,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OutboundNatRulePropertiesFormat' => [
@@ -7881,6 +7996,7 @@ final class NetworkManagementClient
                     'backendAddressPool' => ['$ref' => '#/definitions/SubResource'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['backendAddressPool']
             ],
             'OutboundNatRule' => [
@@ -7889,6 +8005,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LoadBalancerPropertiesFormat' => [
@@ -7924,6 +8041,7 @@ final class NetworkManagementClient
                     'resourceGuid' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LoadBalancer' => [
@@ -7931,6 +8049,7 @@ final class NetworkManagementClient
                     'properties' => ['$ref' => '#/definitions/LoadBalancerPropertiesFormat'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LoadBalancerListResult' => [
@@ -7941,6 +8060,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InboundNatRuleListResult' => [
@@ -7951,6 +8071,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LoadBalancerBackendAddressPoolListResult' => [
@@ -7961,6 +8082,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LoadBalancerFrontendIPConfigurationListResult' => [
@@ -7971,6 +8093,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LoadBalancerLoadBalancingRuleListResult' => [
@@ -7981,6 +8104,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LoadBalancerProbeListResult' => [
@@ -7991,6 +8115,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkInterfaceListResult' => [
@@ -8001,6 +8126,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorDetails' => [
@@ -8009,6 +8135,7 @@ final class NetworkManagementClient
                     'target' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Error' => [
@@ -8022,6 +8149,7 @@ final class NetworkManagementClient
                     ],
                     'innerError' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureAsyncOperationResult' => [
@@ -8036,6 +8164,7 @@ final class NetworkManagementClient
                     ],
                     'error' => ['$ref' => '#/definitions/Error']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkInterfaceIPConfigurationListResult' => [
@@ -8046,6 +8175,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkInterfaceLoadBalancerListResult' => [
@@ -8056,6 +8186,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EffectiveNetworkSecurityGroupAssociation' => [
@@ -8063,6 +8194,7 @@ final class NetworkManagementClient
                     'subnet' => ['$ref' => '#/definitions/SubResource'],
                     'networkInterface' => ['$ref' => '#/definitions/SubResource']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EffectiveNetworkSecurityRule' => [
@@ -8123,6 +8255,7 @@ final class NetworkManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EffectiveNetworkSecurityGroup' => [
@@ -8141,6 +8274,7 @@ final class NetworkManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EffectiveNetworkSecurityGroupListResult' => [
@@ -8151,6 +8285,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EffectiveRoute' => [
@@ -8191,6 +8326,7 @@ final class NetworkManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EffectiveRouteListResult' => [
@@ -8201,6 +8337,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SecurityRuleListResult' => [
@@ -8211,6 +8348,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkSecurityGroupListResult' => [
@@ -8221,6 +8359,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkWatcherPropertiesFormat' => [
@@ -8233,6 +8372,7 @@ final class NetworkManagementClient
                         'Failed'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkWatcher' => [
@@ -8240,6 +8380,7 @@ final class NetworkManagementClient
                     'etag' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/NetworkWatcherPropertiesFormat']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkWatcherListResult' => [
@@ -8247,10 +8388,12 @@ final class NetworkManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/NetworkWatcher']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TopologyParameters' => [
                 'properties' => ['targetResourceGroupName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['targetResourceGroupName']
             ],
             'TopologyAssociation' => [
@@ -8265,6 +8408,7 @@ final class NetworkManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TopologyResource' => [
@@ -8277,6 +8421,7 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/TopologyAssociation']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Topology' => [
@@ -8295,6 +8440,7 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/TopologyResource']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VerificationIPFlowParameters' => [
@@ -8320,6 +8466,7 @@ final class NetworkManagementClient
                     'remoteIPAddress' => ['type' => 'string'],
                     'targetNicResourceId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'targetResourceId',
                     'direction',
@@ -8341,6 +8488,7 @@ final class NetworkManagementClient
                     ],
                     'ruleName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NextHopParameters' => [
@@ -8350,6 +8498,7 @@ final class NetworkManagementClient
                     'destinationIPAddress' => ['type' => 'string'],
                     'targetNicResourceId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'targetResourceId',
                     'sourceIPAddress',
@@ -8372,10 +8521,12 @@ final class NetworkManagementClient
                     'nextHopIpAddress' => ['type' => 'string'],
                     'routeTableId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SecurityGroupViewParameters' => [
                 'properties' => ['targetResourceId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['targetResourceId']
             ],
             'NetworkInterfaceAssociation' => [
@@ -8386,6 +8537,7 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/SecurityRule']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubnetAssociation' => [
@@ -8396,6 +8548,7 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/SecurityRule']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SecurityRuleAssociations' => [
@@ -8411,6 +8564,7 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/EffectiveNetworkSecurityRule']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SecurityGroupNetworkInterface' => [
@@ -8418,6 +8572,7 @@ final class NetworkManagementClient
                     'id' => ['type' => 'string'],
                     'securityRuleAssociations' => ['$ref' => '#/definitions/SecurityRuleAssociations']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SecurityGroupViewResult' => [
@@ -8425,6 +8580,7 @@ final class NetworkManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/SecurityGroupNetworkInterface']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PacketCaptureStorageLocation' => [
@@ -8433,6 +8589,7 @@ final class NetworkManagementClient
                     'storagePath' => ['type' => 'string'],
                     'filePath' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PacketCaptureFilter' => [
@@ -8450,6 +8607,7 @@ final class NetworkManagementClient
                     'localPort' => ['type' => 'string'],
                     'remotePort' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PacketCaptureParameters' => [
@@ -8473,6 +8631,7 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/PacketCaptureFilter']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'target',
                     'storageLocation'
@@ -8480,6 +8639,7 @@ final class NetworkManagementClient
             ],
             'PacketCapture' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/PacketCaptureParameters']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'PacketCaptureResultProperties' => [
@@ -8492,6 +8652,7 @@ final class NetworkManagementClient
                         'Failed'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PacketCaptureResult' => [
@@ -8501,6 +8662,7 @@ final class NetworkManagementClient
                     'etag' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/PacketCaptureResultProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PacketCaptureListResult' => [
@@ -8508,6 +8670,7 @@ final class NetworkManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/PacketCaptureResult']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PacketCaptureQueryStatusResult' => [
@@ -8543,6 +8706,7 @@ final class NetworkManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TroubleshootingProperties' => [
@@ -8550,6 +8714,7 @@ final class NetworkManagementClient
                     'storageId' => ['type' => 'string'],
                     'storagePath' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'storageId',
                     'storagePath'
@@ -8560,6 +8725,7 @@ final class NetworkManagementClient
                     'targetResourceId' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/TroubleshootingProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'targetResourceId',
                     'properties'
@@ -8567,6 +8733,7 @@ final class NetworkManagementClient
             ],
             'QueryTroubleshootingParameters' => [
                 'properties' => ['targetResourceId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['targetResourceId']
             ],
             'TroubleshootingRecommendedActions' => [
@@ -8576,6 +8743,7 @@ final class NetworkManagementClient
                     'actionUri' => ['type' => 'string'],
                     'actionUriText' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TroubleshootingDetails' => [
@@ -8589,6 +8757,7 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/TroubleshootingRecommendedActions']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TroubleshootingResult' => [
@@ -8607,6 +8776,7 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/TroubleshootingDetails']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RetentionPolicyParameters' => [
@@ -8617,6 +8787,7 @@ final class NetworkManagementClient
                     ],
                     'enabled' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FlowLogProperties' => [
@@ -8625,6 +8796,7 @@ final class NetworkManagementClient
                     'enabled' => ['type' => 'boolean'],
                     'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicyParameters']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'storageId',
                     'enabled'
@@ -8632,6 +8804,7 @@ final class NetworkManagementClient
             ],
             'FlowLogStatusParameters' => [
                 'properties' => ['targetResourceId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['targetResourceId']
             ],
             'FlowLogInformation' => [
@@ -8639,6 +8812,7 @@ final class NetworkManagementClient
                     'targetResourceId' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/FlowLogProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'targetResourceId',
                     'properties'
@@ -8652,6 +8826,7 @@ final class NetworkManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['resourceId']
             ],
             'ConnectivityDestination' => [
@@ -8663,6 +8838,7 @@ final class NetworkManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectivityParameters' => [
@@ -8670,6 +8846,7 @@ final class NetworkManagementClient
                     'source' => ['$ref' => '#/definitions/ConnectivitySource'],
                     'destination' => ['$ref' => '#/definitions/ConnectivityDestination']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'source',
                     'destination'
@@ -8714,6 +8891,7 @@ final class NetworkManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectivityHop' => [
@@ -8731,6 +8909,7 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/ConnectivityIssue']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectivityInformation' => [
@@ -8769,6 +8948,7 @@ final class NetworkManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PublicIPAddressListResult' => [
@@ -8779,6 +8959,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PatchRouteFilterRule' => [
@@ -8791,6 +8972,7 @@ final class NetworkManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PatchRouteFilter' => [
@@ -8804,6 +8986,7 @@ final class NetworkManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RouteFilterListResult' => [
@@ -8814,6 +8997,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RouteFilterRuleListResult' => [
@@ -8824,6 +9008,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RouteTableListResult' => [
@@ -8834,6 +9019,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RouteListResult' => [
@@ -8844,6 +9030,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BGPCommunity' => [
@@ -8858,6 +9045,7 @@ final class NetworkManagementClient
                     'isAuthorizedToUse' => ['type' => 'boolean'],
                     'serviceGroup' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BgpServiceCommunityPropertiesFormat' => [
@@ -8868,10 +9056,12 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/BGPCommunity']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BgpServiceCommunity' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BgpServiceCommunityPropertiesFormat']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BgpServiceCommunityListResult' => [
@@ -8882,6 +9072,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UsageName' => [
@@ -8889,6 +9080,7 @@ final class NetworkManagementClient
                     'value' => ['type' => 'string'],
                     'localizedValue' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Usage' => [
@@ -8904,6 +9096,7 @@ final class NetworkManagementClient
                     ],
                     'name' => ['$ref' => '#/definitions/UsageName']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'unit',
                     'currentValue',
@@ -8919,6 +9112,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkPeeringPropertiesFormat' => [
@@ -8938,6 +9132,7 @@ final class NetworkManagementClient
                     ],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkPeering' => [
@@ -8946,6 +9141,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubnetListResult' => [
@@ -8956,6 +9152,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkPeeringListResult' => [
@@ -8966,6 +9163,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AddressSpace' => [
@@ -8973,6 +9171,7 @@ final class NetworkManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DhcpOptions' => [
@@ -8980,6 +9179,7 @@ final class NetworkManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkPropertiesFormat' => [
@@ -8997,6 +9197,7 @@ final class NetworkManagementClient
                     'resourceGuid' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetwork' => [
@@ -9004,6 +9205,7 @@ final class NetworkManagementClient
                     'properties' => ['$ref' => '#/definitions/VirtualNetworkPropertiesFormat'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkListResult' => [
@@ -9014,6 +9216,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IPAddressAvailabilityResult' => [
@@ -9024,6 +9227,7 @@ final class NetworkManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkUsageName' => [
@@ -9031,6 +9235,7 @@ final class NetworkManagementClient
                     'localizedValue' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkUsage' => [
@@ -9047,6 +9252,7 @@ final class NetworkManagementClient
                     'name' => ['$ref' => '#/definitions/VirtualNetworkUsageName'],
                     'unit' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkListUsageResult' => [
@@ -9057,6 +9263,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkGatewayIPConfigurationPropertiesFormat' => [
@@ -9072,6 +9279,7 @@ final class NetworkManagementClient
                     'publicIPAddress' => ['$ref' => '#/definitions/SubResource'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkGatewayIPConfiguration' => [
@@ -9080,6 +9288,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkGatewaySku' => [
@@ -9113,6 +9322,7 @@ final class NetworkManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VpnClientRootCertificatePropertiesFormat' => [
@@ -9120,6 +9330,7 @@ final class NetworkManagementClient
                     'publicCertData' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['publicCertData']
             ],
             'VpnClientRootCertificate' => [
@@ -9128,6 +9339,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'VpnClientRevokedCertificatePropertiesFormat' => [
@@ -9135,6 +9347,7 @@ final class NetworkManagementClient
                     'thumbprint' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VpnClientRevokedCertificate' => [
@@ -9143,6 +9356,7 @@ final class NetworkManagementClient
                     'name' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VpnClientConfiguration' => [
@@ -9169,6 +9383,7 @@ final class NetworkManagementClient
                     'radiusServerAddress' => ['type' => 'string'],
                     'radiusServerSecret' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BgpSettings' => [
@@ -9183,6 +9398,7 @@ final class NetworkManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkGatewayPropertiesFormat' => [
@@ -9214,6 +9430,7 @@ final class NetworkManagementClient
                     'resourceGuid' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BgpPeerStatus' => [
@@ -9248,6 +9465,7 @@ final class NetworkManagementClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GatewayRoute' => [
@@ -9263,6 +9481,7 @@ final class NetworkManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkGateway' => [
@@ -9270,6 +9489,7 @@ final class NetworkManagementClient
                     'properties' => ['$ref' => '#/definitions/VirtualNetworkGatewayPropertiesFormat'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'VpnClientParameters' => [
@@ -9294,6 +9514,7 @@ final class NetworkManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualNetworkGatewayListResult' => [
@@ -9304,6 +9525,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BgpPeerStatusListResult' => [
@@ -9311,6 +9533,7 @@ final class NetworkManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/BgpPeerStatus']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GatewayRouteListResult' => [
@@ -9318,6 +9541,7 @@ final class NetworkManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/GatewayRoute']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TunnelConnectionHealth' => [
@@ -9342,6 +9566,7 @@ final class NetworkManagementClient
                     ],
                     'lastConnectionEstablishedUtcTime' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LocalNetworkGatewayPropertiesFormat' => [
@@ -9352,6 +9577,7 @@ final class NetworkManagementClient
                     'resourceGuid' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LocalNetworkGateway' => [
@@ -9359,6 +9585,7 @@ final class NetworkManagementClient
                     'properties' => ['$ref' => '#/definitions/LocalNetworkGatewayPropertiesFormat'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'IpsecPolicy' => [
@@ -9441,6 +9668,7 @@ final class NetworkManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'saLifeTimeSeconds',
                     'saDataSizeKilobytes',
@@ -9503,6 +9731,7 @@ final class NetworkManagementClient
                     'resourceGuid' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'virtualNetworkGateway1',
                     'connectionType'
@@ -9513,6 +9742,7 @@ final class NetworkManagementClient
                     'properties' => ['$ref' => '#/definitions/VirtualNetworkGatewayConnectionPropertiesFormat'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'VirtualNetworkGatewayConnectionListResult' => [
@@ -9523,6 +9753,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectionResetSharedKey' => [
@@ -9530,10 +9761,12 @@ final class NetworkManagementClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['keyLength']
             ],
             'ConnectionSharedKey' => [
                 'properties' => ['value' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'LocalNetworkGatewayListResult' => [
@@ -9544,10 +9777,12 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'virtualNetworkConnectionGatewayReference' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['id']
             ],
             'VirtualNetworkGatewayConnectionListEntityPropertiesFormat' => [
@@ -9601,6 +9836,7 @@ final class NetworkManagementClient
                     'resourceGuid' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'virtualNetworkGateway1',
                     'connectionType'
@@ -9611,6 +9847,7 @@ final class NetworkManagementClient
                     'properties' => ['$ref' => '#/definitions/VirtualNetworkGatewayConnectionListEntityPropertiesFormat'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'VirtualNetworkGatewayListConnectionsResult' => [
@@ -9621,6 +9858,7 @@ final class NetworkManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

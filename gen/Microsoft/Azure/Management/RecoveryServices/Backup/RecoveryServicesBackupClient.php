@@ -2206,6 +2206,7 @@ final class RecoveryServicesBackupClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureIaaSVMJobTaskDetails' => [
@@ -2230,6 +2231,7 @@ final class RecoveryServicesBackupClient
                         'format' => 'double'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureIaaSVMJobExtendedInfo' => [
@@ -2248,6 +2250,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'dynamicErrorMessage' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureIaaSVMJob' => [
@@ -2274,6 +2277,7 @@ final class RecoveryServicesBackupClient
                     'virtualMachineVersion' => ['type' => 'string'],
                     'extendedInfo' => ['$ref' => '#/definitions/AzureIaaSVMJobExtendedInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DpmErrorInfo' => [
@@ -2284,6 +2288,7 @@ final class RecoveryServicesBackupClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DpmJobTaskDetails' => [
@@ -2303,6 +2308,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'status' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DpmJobExtendedInfo' => [
@@ -2317,6 +2323,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'dynamicErrorMessage' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DpmJob' => [
@@ -2346,6 +2353,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'extendedInfo' => ['$ref' => '#/definitions/DpmJobExtendedInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Job' => [
@@ -2374,6 +2382,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'activityId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobQueryObject' => [
@@ -2424,10 +2433,12 @@ final class RecoveryServicesBackupClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/Job']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobResourceList' => [
@@ -2435,6 +2446,7 @@ final class RecoveryServicesBackupClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/JobResource']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MabErrorInfo' => [
@@ -2445,6 +2457,7 @@ final class RecoveryServicesBackupClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MabJobTaskDetails' => [
@@ -2464,6 +2477,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'status' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MabJobExtendedInfo' => [
@@ -2478,6 +2492,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'dynamicErrorMessage' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MabJob' => [
@@ -2536,6 +2551,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'extendedInfo' => ['$ref' => '#/definitions/MabJobExtendedInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -2550,10 +2566,12 @@ final class RecoveryServicesBackupClient
                     ],
                     'eTag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceList' => [
                 'properties' => ['nextLink' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DPMContainerExtendedInfo' => [
@@ -2561,6 +2579,7 @@ final class RecoveryServicesBackupClient
                     'type' => 'string',
                     'format' => 'date-time'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureBackupServerContainer' => [
@@ -2580,34 +2599,42 @@ final class RecoveryServicesBackupClient
                     'protectionStatus' => ['type' => 'string'],
                     'extendedInfo' => ['$ref' => '#/definitions/DPMContainerExtendedInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureBackupServerEngine' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.ClassicCompute/virtualMachines' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.ClassicCompute/virtualMachines' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.ClassicCompute/virtualMachines' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Compute/virtualMachines' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Compute/virtualMachines' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Compute/virtualMachines' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureIaaSVMHealthDetails' => [
@@ -2623,6 +2650,7 @@ final class RecoveryServicesBackupClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureIaaSVMProtectedItemExtendedInfo' => [
@@ -2637,6 +2665,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'policyInconsistent' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureIaaSVMProtectedItem' => [
@@ -2676,14 +2705,17 @@ final class RecoveryServicesBackupClient
                     'protectedItemDataId' => ['type' => 'string'],
                     'extendedInfo' => ['$ref' => '#/definitions/AzureIaaSVMProtectedItemExtendedInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SchedulePolicy' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RetentionPolicy' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureIaasVM' => [
@@ -2692,10 +2724,12 @@ final class RecoveryServicesBackupClient
                     'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy'],
                     'timeZone' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureSqlContainer' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureSqlProtectedItemExtendedInfo' => [
@@ -2710,6 +2744,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'policyState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Sql/servers/databases' => [
@@ -2728,10 +2763,12 @@ final class RecoveryServicesBackupClient
                     ],
                     'extendedInfo' => ['$ref' => '#/definitions/AzureSqlProtectedItemExtendedInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureSql' => [
                 'properties' => ['retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackupEngineExtendedInfo' => [
@@ -2766,6 +2803,7 @@ final class RecoveryServicesBackupClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackupEngineBase' => [
@@ -2793,10 +2831,12 @@ final class RecoveryServicesBackupClient
                     'isDPMUpgradeAvailable' => ['type' => 'boolean'],
                     'extendedInfo' => ['$ref' => '#/definitions/BackupEngineExtendedInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackupEngineBaseResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BackupEngineBase']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackupEngineBaseResourceList' => [
@@ -2804,6 +2844,7 @@ final class RecoveryServicesBackupClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/BackupEngineBaseResource']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NameInfo' => [
@@ -2811,6 +2852,7 @@ final class RecoveryServicesBackupClient
                     'value' => ['type' => 'string'],
                     'localizedValue' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackupManagementUsage' => [
@@ -2841,6 +2883,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'name' => ['$ref' => '#/definitions/NameInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackupManagementUsageList' => [
@@ -2848,14 +2891,17 @@ final class RecoveryServicesBackupClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/BackupManagementUsage']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackupRequest' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackupRequestResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BackupRequest']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackupResourceConfig' => [
@@ -2877,10 +2923,12 @@ final class RecoveryServicesBackupClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackupResourceConfigResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BackupResourceConfig']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackupResourceVaultConfig' => [
@@ -2910,10 +2958,12 @@ final class RecoveryServicesBackupClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackupResourceVaultConfigResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BackupResourceVaultConfig']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BEKDetails' => [
@@ -2922,10 +2972,12 @@ final class RecoveryServicesBackupClient
                     'secretVaultId' => ['type' => 'string'],
                     'secretData' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BMSBackupEngineQueryObject' => [
                 'properties' => ['expand' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BMSBackupEnginesQueryObject' => [
@@ -2944,6 +2996,7 @@ final class RecoveryServicesBackupClient
                     'friendlyName' => ['type' => 'string'],
                     'expand' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BMSBackupSummariesQueryObject' => [
@@ -2955,6 +3008,7 @@ final class RecoveryServicesBackupClient
                         'BackupProtectionContainerCountSummary'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BMSContainerQueryObject' => [
@@ -2990,6 +3044,7 @@ final class RecoveryServicesBackupClient
                     'status' => ['type' => 'string'],
                     'friendlyName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['backupManagementType']
             ],
             'BMSPOQueryObject' => [
@@ -3008,6 +3063,7 @@ final class RecoveryServicesBackupClient
                     'status' => ['type' => 'string'],
                     'friendlyName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BMSRPQueryObject' => [
@@ -3021,6 +3077,7 @@ final class RecoveryServicesBackupClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientScriptForConnect' => [
@@ -3031,6 +3088,7 @@ final class RecoveryServicesBackupClient
                     'url' => ['type' => 'string'],
                     'scriptNameSuffix' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Day' => [
@@ -3041,6 +3099,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'isLast' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DailyRetentionFormat' => [
@@ -3048,6 +3107,7 @@ final class RecoveryServicesBackupClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Day']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RetentionDuration' => [
@@ -3067,6 +3127,7 @@ final class RecoveryServicesBackupClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DailyRetentionSchedule' => [
@@ -3080,10 +3141,12 @@ final class RecoveryServicesBackupClient
                     ],
                     'retentionDuration' => ['$ref' => '#/definitions/RetentionDuration']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DpmBackupEngine' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DPMContainer' => [
@@ -3103,6 +3166,7 @@ final class RecoveryServicesBackupClient
                     'protectionStatus' => ['type' => 'string'],
                     'extendedInfo' => ['$ref' => '#/definitions/DPMContainerExtendedInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DPMProtectedItemExtendedInfo' => [
@@ -3143,6 +3207,7 @@ final class RecoveryServicesBackupClient
                     'diskStorageUsedInBytes' => ['type' => 'string'],
                     'totalDiskStorageSizeInBytes' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DPMProtectedItem' => [
@@ -3163,6 +3228,7 @@ final class RecoveryServicesBackupClient
                     'isScheduledForDeferredDelete' => ['type' => 'boolean'],
                     'extendedInfo' => ['$ref' => '#/definitions/DPMProtectedItemExtendedInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EncryptionDetails' => [
@@ -3173,6 +3239,7 @@ final class RecoveryServicesBackupClient
                     'kekVaultId' => ['type' => 'string'],
                     'secretKeyVaultId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExportJobsOperationResultInfo' => [
@@ -3180,6 +3247,7 @@ final class RecoveryServicesBackupClient
                     'blobUrl' => ['type' => 'string'],
                     'blobSasKey' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GenericRecoveryPoint' => [
@@ -3192,10 +3260,12 @@ final class RecoveryServicesBackupClient
                     ],
                     'recoveryPointAdditionalInfo' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GetProtectedItemQueryObject' => [
                 'properties' => ['expand' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IaasVMBackupRequest' => [
@@ -3203,6 +3273,7 @@ final class RecoveryServicesBackupClient
                     'type' => 'string',
                     'format' => 'date-time'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IaaSVMContainer' => [
@@ -3211,6 +3282,7 @@ final class RecoveryServicesBackupClient
                     'virtualMachineVersion' => ['type' => 'string'],
                     'resourceGroup' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IaasVMILRRegistrationRequest' => [
@@ -3220,10 +3292,12 @@ final class RecoveryServicesBackupClient
                     'initiatorName' => ['type' => 'string'],
                     'renewExistingRegistration' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IaaSVMProtectableItem' => [
                 'properties' => ['virtualMachineId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'KEKDetails' => [
@@ -3232,6 +3306,7 @@ final class RecoveryServicesBackupClient
                     'keyVaultId' => ['type' => 'string'],
                     'keyBackupData' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'KeyAndSecretDetails' => [
@@ -3239,6 +3314,7 @@ final class RecoveryServicesBackupClient
                     'kekDetails' => ['$ref' => '#/definitions/KEKDetails'],
                     'bekDetails' => ['$ref' => '#/definitions/BEKDetails']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPointTierInformation' => [
@@ -3261,6 +3337,7 @@ final class RecoveryServicesBackupClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IaasVMRecoveryPoint' => [
@@ -3283,6 +3360,7 @@ final class RecoveryServicesBackupClient
                     'virtualMachineSize' => ['type' => 'string'],
                     'originalStorageAccountOption' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IaasVMRestoreRequest' => [
@@ -3310,14 +3388,17 @@ final class RecoveryServicesBackupClient
                     'originalStorageAccountOption' => ['type' => 'boolean'],
                     'encryptionDetails' => ['$ref' => '#/definitions/EncryptionDetails']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ILRRequest' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ILRRequestResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ILRRequest']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InstantItemRecoveryTarget' => [
@@ -3325,6 +3406,7 @@ final class RecoveryServicesBackupClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ClientScriptForConnect']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WeeklyRetentionSchedule' => [
@@ -3353,6 +3435,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'retentionDuration' => ['$ref' => '#/definitions/RetentionDuration']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WeeklyRetentionFormat' => [
@@ -3386,6 +3469,7 @@ final class RecoveryServicesBackupClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MonthlyRetentionSchedule' => [
@@ -3409,6 +3493,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'retentionDuration' => ['$ref' => '#/definitions/RetentionDuration']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'YearlyRetentionSchedule' => [
@@ -3453,6 +3538,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'retentionDuration' => ['$ref' => '#/definitions/RetentionDuration']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LongTermRetentionPolicy' => [
@@ -3462,10 +3548,12 @@ final class RecoveryServicesBackupClient
                     'monthlySchedule' => ['$ref' => '#/definitions/MonthlyRetentionSchedule'],
                     'yearlySchedule' => ['$ref' => '#/definitions/YearlyRetentionSchedule']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LongTermSchedulePolicy' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MabContainerExtendedInfo' => [
@@ -3497,6 +3585,7 @@ final class RecoveryServicesBackupClient
                     'policyName' => ['type' => 'string'],
                     'lastBackupStatus' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MABWindowsContainer' => [
@@ -3513,6 +3602,7 @@ final class RecoveryServicesBackupClient
                     'agentVersion' => ['type' => 'string'],
                     'extendedInfo' => ['$ref' => '#/definitions/MabContainerExtendedInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MabFileFolderProtectedItemExtendedInfo' => [
@@ -3530,6 +3620,7 @@ final class RecoveryServicesBackupClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MabFileFolderProtectedItem' => [
@@ -3545,6 +3636,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'extendedInfo' => ['$ref' => '#/definitions/MabFileFolderProtectedItemExtendedInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MAB' => [
@@ -3552,6 +3644,7 @@ final class RecoveryServicesBackupClient
                     'schedulePolicy' => ['$ref' => '#/definitions/SchedulePolicy'],
                     'retentionPolicy' => ['$ref' => '#/definitions/RetentionPolicy']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationResultInfo' => [
@@ -3559,14 +3652,17 @@ final class RecoveryServicesBackupClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationResultInfoBase' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationResultInfoBaseResource' => [
                 'properties' => ['operation' => ['$ref' => '#/definitions/OperationResultInfoBase']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationStatusError' => [
@@ -3574,10 +3670,12 @@ final class RecoveryServicesBackupClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationStatusExtendedInfo' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationStatus' => [
@@ -3605,10 +3703,12 @@ final class RecoveryServicesBackupClient
                     'error' => ['$ref' => '#/definitions/OperationStatusError'],
                     'properties' => ['$ref' => '#/definitions/OperationStatusExtendedInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationStatusJobExtendedInfo' => [
                 'properties' => ['jobId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationStatusJobsExtendedInfo' => [
@@ -3622,10 +3722,12 @@ final class RecoveryServicesBackupClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationStatusProvisionILRExtendedInfo' => [
                 'properties' => ['recoveryTarget' => ['$ref' => '#/definitions/InstantItemRecoveryTarget']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationWorkerResponse' => [
@@ -3690,6 +3792,7 @@ final class RecoveryServicesBackupClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectedItem' => [
@@ -3729,6 +3832,7 @@ final class RecoveryServicesBackupClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectedItemQueryObject' => [
@@ -3774,10 +3878,12 @@ final class RecoveryServicesBackupClient
                     'backupEngineName' => ['type' => 'string'],
                     'friendlyName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectedItemResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ProtectedItem']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectedItemResourceList' => [
@@ -3785,6 +3891,7 @@ final class RecoveryServicesBackupClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ProtectedItemResource']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectionContainer' => [
@@ -3820,10 +3927,12 @@ final class RecoveryServicesBackupClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectionContainerResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ProtectionContainer']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectionContainerResourceList' => [
@@ -3831,6 +3940,7 @@ final class RecoveryServicesBackupClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ProtectionContainerResource']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectionPolicy' => [
@@ -3838,6 +3948,7 @@ final class RecoveryServicesBackupClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectionPolicyQueryObject' => [
@@ -3852,10 +3963,12 @@ final class RecoveryServicesBackupClient
                         'AzureSql'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectionPolicyResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ProtectionPolicy']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectionPolicyResourceList' => [
@@ -3863,14 +3976,17 @@ final class RecoveryServicesBackupClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ProtectionPolicyResource']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPoint' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPointResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPoint']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPointResourceList' => [
@@ -3878,18 +3994,22 @@ final class RecoveryServicesBackupClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/RecoveryPointResource']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RestoreRequest' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RestoreRequestResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RestoreRequest']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SimpleRetentionPolicy' => [
                 'properties' => ['retentionDuration' => ['$ref' => '#/definitions/RetentionDuration']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SimpleSchedulePolicy' => [
@@ -3929,6 +4049,7 @@ final class RecoveryServicesBackupClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TokenInformation' => [
@@ -3940,6 +4061,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'securityPIN' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkloadProtectableItem' => [
@@ -3956,10 +4078,12 @@ final class RecoveryServicesBackupClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkloadProtectableItemResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/WorkloadProtectableItem']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkloadProtectableItemResourceList' => [
@@ -3967,6 +4091,7 @@ final class RecoveryServicesBackupClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/WorkloadProtectableItemResource']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientDiscoveryDisplay' => [
@@ -3976,6 +4101,7 @@ final class RecoveryServicesBackupClient
                     'Operation' => ['type' => 'string'],
                     'Description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientDiscoveryForLogSpecification' => [
@@ -3984,6 +4110,7 @@ final class RecoveryServicesBackupClient
                     'displayName' => ['type' => 'string'],
                     'blobDuration' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientDiscoveryForServiceSpecification' => [
@@ -3991,10 +4118,12 @@ final class RecoveryServicesBackupClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ClientDiscoveryForLogSpecification']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientDiscoveryForProperties' => [
                 'properties' => ['serviceSpecification' => ['$ref' => '#/definitions/ClientDiscoveryForServiceSpecification']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientDiscoveryValueForSingleApi' => [
@@ -4004,6 +4133,7 @@ final class RecoveryServicesBackupClient
                     'Origin' => ['type' => 'string'],
                     'Properties' => ['$ref' => '#/definitions/ClientDiscoveryForProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientDiscoveryResponse' => [
@@ -4014,6 +4144,7 @@ final class RecoveryServicesBackupClient
                     ],
                     'NextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

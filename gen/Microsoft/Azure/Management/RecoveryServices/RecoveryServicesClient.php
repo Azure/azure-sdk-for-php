@@ -758,10 +758,12 @@ final class RecoveryServicesClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackupStorageConfig' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BackupStorageConfigProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackupVaultConfigProperties' => [
@@ -791,10 +793,12 @@ final class RecoveryServicesClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackupVaultConfig' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BackupVaultConfigProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VaultExtendedInfo' => [
@@ -804,10 +808,12 @@ final class RecoveryServicesClient
                     'encryptionKeyThumbprint' => ['type' => 'string'],
                     'algorithm' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VaultExtendedInfoResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/VaultExtendedInfo']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Sku' => [
@@ -818,6 +824,7 @@ final class RecoveryServicesClient
                         'RS0'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'UpgradeDetails' => [
@@ -855,6 +862,7 @@ final class RecoveryServicesClient
                     'upgradedResourceId' => ['type' => 'string'],
                     'previousResourceId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VaultProperties' => [
@@ -862,6 +870,7 @@ final class RecoveryServicesClient
                     'provisioningState' => ['type' => 'string'],
                     'upgradeDetails' => ['$ref' => '#/definitions/UpgradeDetails']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Vault' => [
@@ -869,6 +878,7 @@ final class RecoveryServicesClient
                     'properties' => ['$ref' => '#/definitions/VaultProperties'],
                     'sku' => ['$ref' => '#/definitions/Sku']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TrackedResource' => [
@@ -879,6 +889,7 @@ final class RecoveryServicesClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'Resource' => [
@@ -888,6 +899,7 @@ final class RecoveryServicesClient
                     'type' => ['type' => 'string'],
                     'eTag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RawCertificateData' => [
@@ -907,10 +919,12 @@ final class RecoveryServicesClient
                         'format' => 'byte'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CertificateRequest' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RawCertificateData']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureActiveDirectory' => [
@@ -921,6 +935,7 @@ final class RecoveryServicesClient
                     'servicePrincipalObjectId' => ['type' => 'string'],
                     'azureManagementEndpointAudience' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'aadAuthority',
                     'aadTenantId',
@@ -935,6 +950,7 @@ final class RecoveryServicesClient
                     'globalAcsHostName' => ['type' => 'string'],
                     'globalAcsRPRealm' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'globalAcsNamespace',
                     'globalAcsHostName',
@@ -964,6 +980,7 @@ final class RecoveryServicesClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VaultCertificateResponse' => [
@@ -973,6 +990,7 @@ final class RecoveryServicesClient
                     'id' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ResourceCertificateDetails']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobsSummary' => [
@@ -990,6 +1008,7 @@ final class RecoveryServicesClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MonitoringSummary' => [
@@ -1019,6 +1038,7 @@ final class RecoveryServicesClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReplicationUsage' => [
@@ -1042,6 +1062,7 @@ final class RecoveryServicesClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReplicationUsageList' => [
@@ -1049,6 +1070,7 @@ final class RecoveryServicesClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ReplicationUsage']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientDiscoveryDisplay' => [
@@ -1058,6 +1080,7 @@ final class RecoveryServicesClient
                     'Operation' => ['type' => 'string'],
                     'Description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientDiscoveryForLogSpecification' => [
@@ -1069,6 +1092,7 @@ final class RecoveryServicesClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientDiscoveryForServiceSpecification' => [
@@ -1076,10 +1100,12 @@ final class RecoveryServicesClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ClientDiscoveryForLogSpecification']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientDiscoveryProperties' => [
                 'properties' => ['serviceSpecification' => ['$ref' => '#/definitions/ClientDiscoveryForServiceSpecification']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientDiscoveryValueForSingleApi' => [
@@ -1089,6 +1115,7 @@ final class RecoveryServicesClient
                     'Origin' => ['type' => 'string'],
                     'Properties' => ['$ref' => '#/definitions/ClientDiscoveryProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientDiscoveryResponse' => [
@@ -1099,6 +1126,7 @@ final class RecoveryServicesClient
                     ],
                     'NextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VaultList' => [
@@ -1109,6 +1137,7 @@ final class RecoveryServicesClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NameInfo' => [
@@ -1116,6 +1145,7 @@ final class RecoveryServicesClient
                     'value' => ['type' => 'string'],
                     'localizedValue' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VaultUsage' => [
@@ -1146,6 +1176,7 @@ final class RecoveryServicesClient
                     ],
                     'name' => ['$ref' => '#/definitions/NameInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VaultUsageList' => [
@@ -1153,6 +1184,7 @@ final class RecoveryServicesClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/VaultUsage']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

@@ -1079,6 +1079,7 @@ final class NotificationHubsManagementClient
                     'Name' => ['type' => 'string'],
                     'Type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['Name']
             ],
             'CheckNameAvailabilityResponse' => [
@@ -1087,6 +1088,7 @@ final class NotificationHubsManagementClient
                     'Reason' => ['type' => 'string'],
                     'Message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Sku' => [
@@ -1107,6 +1109,7 @@ final class NotificationHubsManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'CheckAvailabilityParameters' => [
@@ -1122,6 +1125,7 @@ final class NotificationHubsManagementClient
                     'sku' => ['$ref' => '#/definitions/Sku'],
                     'isAvailiable' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'location'
@@ -1129,6 +1133,7 @@ final class NotificationHubsManagementClient
             ],
             'CheckAvailabilityResult' => [
                 'properties' => ['isAvailiable' => ['type' => 'boolean']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NamespaceProperties' => [
@@ -1154,10 +1159,12 @@ final class NotificationHubsManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NamespaceCreateOrUpdateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/NamespaceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NamespacePatchParameters' => [
@@ -1168,10 +1175,12 @@ final class NotificationHubsManagementClient
                     ],
                     'sku' => ['$ref' => '#/definitions/Sku']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NamespaceResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/NamespaceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SharedAccessAuthorizationRuleProperties' => [
@@ -1186,14 +1195,17 @@ final class NotificationHubsManagementClient
                         ]
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SharedAccessAuthorizationRuleCreateOrUpdateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SharedAccessAuthorizationRuleProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'SharedAccessAuthorizationRuleResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SharedAccessAuthorizationRuleProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NamespaceListResult' => [
@@ -1204,6 +1216,7 @@ final class NotificationHubsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SharedAccessAuthorizationRuleListResult' => [
@@ -1214,6 +1227,7 @@ final class NotificationHubsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceListKeys' => [
@@ -1224,10 +1238,12 @@ final class NotificationHubsManagementClient
                     'secondaryKey' => ['type' => 'string'],
                     'keyName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PolicykeyResource' => [
                 'properties' => ['policyKey' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApnsCredentialProperties' => [
@@ -1241,10 +1257,12 @@ final class NotificationHubsManagementClient
                     'appId' => ['type' => 'string'],
                     'token' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApnsCredential' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ApnsCredentialProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WnsCredentialProperties' => [
@@ -1253,10 +1271,12 @@ final class NotificationHubsManagementClient
                     'secretKey' => ['type' => 'string'],
                     'windowsLiveEndpoint' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WnsCredential' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/WnsCredentialProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GcmCredentialProperties' => [
@@ -1264,10 +1284,12 @@ final class NotificationHubsManagementClient
                     'gcmEndpoint' => ['type' => 'string'],
                     'googleApiKey' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GcmCredential' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/GcmCredentialProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MpnsCredentialProperties' => [
@@ -1276,10 +1298,12 @@ final class NotificationHubsManagementClient
                     'certificateKey' => ['type' => 'string'],
                     'thumbprint' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MpnsCredential' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/MpnsCredentialProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AdmCredentialProperties' => [
@@ -1288,10 +1312,12 @@ final class NotificationHubsManagementClient
                     'clientSecret' => ['type' => 'string'],
                     'authTokenUrl' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AdmCredential' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AdmCredentialProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BaiduCredentialProperties' => [
@@ -1300,10 +1326,12 @@ final class NotificationHubsManagementClient
                     'baiduEndPoint' => ['type' => 'string'],
                     'baiduSecretKey' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BaiduCredential' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BaiduCredentialProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NotificationHubProperties' => [
@@ -1321,14 +1349,17 @@ final class NotificationHubsManagementClient
                     'admCredential' => ['$ref' => '#/definitions/AdmCredential'],
                     'baiduCredential' => ['$ref' => '#/definitions/BaiduCredential']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NotificationHubCreateOrUpdateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/NotificationHubProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'NotificationHubResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/NotificationHubProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PnsCredentialsProperties' => [
@@ -1340,10 +1371,12 @@ final class NotificationHubsManagementClient
                     'admCredential' => ['$ref' => '#/definitions/AdmCredential'],
                     'baiduCredential' => ['$ref' => '#/definitions/BaiduCredential']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PnsCredentialsResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/PnsCredentialsProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NotificationHubListResult' => [
@@ -1354,6 +1387,7 @@ final class NotificationHubsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -1368,10 +1402,12 @@ final class NotificationHubsManagementClient
                     ],
                     'sku' => ['$ref' => '#/definitions/Sku']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'SubResource' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

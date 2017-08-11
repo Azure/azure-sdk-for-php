@@ -321,6 +321,7 @@ final class AzureMLWebServicesManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'WebServiceKeys' => [
@@ -328,6 +329,7 @@ final class AzureMLWebServicesManagementClient
                     'primary' => ['type' => 'string'],
                     'secondary' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RealtimeConfiguration' => [
@@ -335,6 +337,7 @@ final class AzureMLWebServicesManagementClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DiagnosticsConfiguration' => [
@@ -352,6 +355,7 @@ final class AzureMLWebServicesManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['level']
             ],
             'StorageAccount' => [
@@ -359,14 +363,17 @@ final class AzureMLWebServicesManagementClient
                     'name' => ['type' => 'string'],
                     'key' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MachineLearningWorkspace' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['id']
             ],
             'CommitmentPlan' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['id']
             ],
             'ColumnSpecification' => [
@@ -409,6 +416,7 @@ final class AzureMLWebServicesManagementClient
                     'x-ms-isnullable' => ['type' => 'boolean'],
                     'x-ms-isordered' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['type']
             ],
             'TableSpecification' => [
@@ -422,6 +430,7 @@ final class AzureMLWebServicesManagementClient
                         'additionalProperties' => ['$ref' => '#/definitions/ColumnSpecification']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['type']
             ],
             'ServiceInputOutputSpecification' => [
@@ -434,6 +443,7 @@ final class AzureMLWebServicesManagementClient
                         'additionalProperties' => ['$ref' => '#/definitions/TableSpecification']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'type',
                     'properties'
@@ -456,6 +466,7 @@ final class AzureMLWebServicesManagementClient
                         'additionalProperties' => ['type' => 'object']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BlobLocation' => [
@@ -463,6 +474,7 @@ final class AzureMLWebServicesManagementClient
                     'uri' => ['type' => 'string'],
                     'credentials' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['uri']
             ],
             'InputPort' => [
@@ -470,6 +482,7 @@ final class AzureMLWebServicesManagementClient
                     'type' => 'string',
                     'enum' => ['Dataset']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OutputPort' => [
@@ -477,6 +490,7 @@ final class AzureMLWebServicesManagementClient
                     'type' => 'string',
                     'enum' => ['Dataset']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ModeValueInfo' => [
@@ -487,6 +501,7 @@ final class AzureMLWebServicesManagementClient
                         'items' => ['$ref' => '#/definitions/ModuleAssetParameter']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ModuleAssetParameter' => [
@@ -498,6 +513,7 @@ final class AzureMLWebServicesManagementClient
                         'additionalProperties' => ['$ref' => '#/definitions/ModeValueInfo']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AssetItem' => [
@@ -529,6 +545,7 @@ final class AzureMLWebServicesManagementClient
                         'items' => ['$ref' => '#/definitions/ModuleAssetParameter']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'type',
@@ -540,6 +557,7 @@ final class AzureMLWebServicesManagementClient
                     'value' => ['type' => 'object'],
                     'certificateThumbprint' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WebServiceProperties' => [
@@ -586,10 +604,12 @@ final class AzureMLWebServicesManagementClient
                     'payloadsInBlobStorage' => ['type' => 'boolean'],
                     'payloadsLocation' => ['$ref' => '#/definitions/BlobLocation']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WebService' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/WebServiceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'GraphNode' => [
@@ -602,6 +622,7 @@ final class AzureMLWebServicesManagementClient
                         'additionalProperties' => ['$ref' => '#/definitions/WebServiceParameter']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GraphEdge' => [
@@ -611,6 +632,7 @@ final class AzureMLWebServicesManagementClient
                     'targetNodeId' => ['type' => 'string'],
                     'targetPortId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GraphParameterLink' => [
@@ -618,6 +640,7 @@ final class AzureMLWebServicesManagementClient
                     'nodeId' => ['type' => 'string'],
                     'parameterKey' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'nodeId',
                     'parameterKey'
@@ -648,6 +671,7 @@ final class AzureMLWebServicesManagementClient
                         'items' => ['$ref' => '#/definitions/GraphParameterLink']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'type',
                     'links'
@@ -668,10 +692,12 @@ final class AzureMLWebServicesManagementClient
                         'additionalProperties' => ['$ref' => '#/definitions/GraphParameter']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Graph' => [
                 'properties' => ['package' => ['$ref' => '#/definitions/GraphPackage']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PaginatedWebServicesList' => [
@@ -682,6 +708,7 @@ final class AzureMLWebServicesManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AsyncOperationErrorInfo' => [
@@ -694,6 +721,7 @@ final class AzureMLWebServicesManagementClient
                         'items' => ['$ref' => '#/definitions/AsyncOperationErrorInfo']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AsyncOperationStatus' => [
@@ -723,6 +751,7 @@ final class AzureMLWebServicesManagementClient
                     ],
                     'errorInfo' => ['$ref' => '#/definitions/AsyncOperationErrorInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

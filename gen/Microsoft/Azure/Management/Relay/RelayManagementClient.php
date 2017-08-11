@@ -1385,6 +1385,7 @@ final class RelayManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'ResourceNamespacePatch' => [
@@ -1392,6 +1393,7 @@ final class RelayManagementClient
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -1400,6 +1402,7 @@ final class RelayManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HybridConnection_properties' => [
@@ -1419,10 +1422,12 @@ final class RelayManagementClient
                     'requiresClientAuthorization' => ['type' => 'boolean'],
                     'userMetadata' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HybridConnection' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/HybridConnection_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HybridConnectionListResult' => [
@@ -1433,6 +1438,7 @@ final class RelayManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WcfRelay_properties' => [
@@ -1461,10 +1467,12 @@ final class RelayManagementClient
                     'requiresTransportSecurity' => ['type' => 'boolean'],
                     'userMetadata' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WcfRelay' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/WcfRelay_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WcfRelaysListResult' => [
@@ -1475,6 +1483,7 @@ final class RelayManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Sku' => [
@@ -1485,6 +1494,7 @@ final class RelayManagementClient
                         'enum' => ['Standard']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'RelayNamespaceProperties' => [
@@ -1511,6 +1521,7 @@ final class RelayManagementClient
                     'serviceBusEndpoint' => ['type' => 'string'],
                     'metricId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RelayNamespace' => [
@@ -1518,6 +1529,7 @@ final class RelayManagementClient
                     'sku' => ['$ref' => '#/definitions/Sku'],
                     'properties' => ['$ref' => '#/definitions/RelayNamespaceProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RelayNamespaceListResult' => [
@@ -1528,6 +1540,7 @@ final class RelayManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RelayUpdateParameters' => [
@@ -1535,6 +1548,7 @@ final class RelayManagementClient
                     'sku' => ['$ref' => '#/definitions/Sku'],
                     'properties' => ['$ref' => '#/definitions/RelayNamespaceProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AuthorizationRule_properties' => [
@@ -1549,10 +1563,12 @@ final class RelayManagementClient
                         ]
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AuthorizationRule' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AuthorizationRule_properties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'AuthorizationRuleListResult' => [
@@ -1563,6 +1579,7 @@ final class RelayManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AccessKeys' => [
@@ -1573,6 +1590,7 @@ final class RelayManagementClient
                     'secondaryKey' => ['type' => 'string'],
                     'keyName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RegenerateAccessKeyParameters' => [
@@ -1586,10 +1604,12 @@ final class RelayManagementClient
                     ],
                     'key' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['keyType']
             ],
             'CheckNameAvailability' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'CheckNameAvailabilityResult' => [
@@ -1608,6 +1628,7 @@ final class RelayManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation_display' => [
@@ -1616,6 +1637,7 @@ final class RelayManagementClient
                     'resource' => ['type' => 'string'],
                     'operation' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -1623,6 +1645,7 @@ final class RelayManagementClient
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -1633,6 +1656,7 @@ final class RelayManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorResponse' => [
@@ -1640,6 +1664,7 @@ final class RelayManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

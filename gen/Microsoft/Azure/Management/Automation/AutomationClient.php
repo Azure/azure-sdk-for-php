@@ -4695,6 +4695,7 @@ final class AutomationClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UsageCounterName' => [
@@ -4702,6 +4703,7 @@ final class AutomationClient
                     'value' => ['type' => 'string'],
                     'localizedValue' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Usage' => [
@@ -4719,6 +4721,7 @@ final class AutomationClient
                     ],
                     'throttleStatus' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UsageListResult' => [
@@ -4726,6 +4729,7 @@ final class AutomationClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Usage']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Statistics' => [
@@ -4745,6 +4749,7 @@ final class AutomationClient
                     ],
                     'id' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StatisticsListResult' => [
@@ -4752,6 +4757,7 @@ final class AutomationClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Statistics']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RunbookParameter' => [
@@ -4764,6 +4770,7 @@ final class AutomationClient
                     ],
                     'defaultValue' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ContentHash' => [
@@ -4771,6 +4778,7 @@ final class AutomationClient
                     'algorithm' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'algorithm',
                     'value'
@@ -4782,6 +4790,7 @@ final class AutomationClient
                     'contentHash' => ['$ref' => '#/definitions/ContentHash'],
                     'version' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RunbookDraft' => [
@@ -4805,6 +4814,7 @@ final class AutomationClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RunbookProperties' => [
@@ -4863,6 +4873,7 @@ final class AutomationClient
                     ],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Runbook' => [
@@ -4870,6 +4881,7 @@ final class AutomationClient
                     'properties' => ['$ref' => '#/definitions/RunbookProperties'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ModuleErrorInfo' => [
@@ -4877,6 +4889,7 @@ final class AutomationClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ModuleProperties' => [
@@ -4924,6 +4937,7 @@ final class AutomationClient
                     ],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Module' => [
@@ -4931,10 +4945,12 @@ final class AutomationClient
                     'properties' => ['$ref' => '#/definitions/ModuleProperties'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscNodeConfigurationAssociationProperty' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscNode' => [
@@ -4954,6 +4970,7 @@ final class AutomationClient
                     'nodeId' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ContentSource' => [
@@ -4969,6 +4986,7 @@ final class AutomationClient
                     'value' => ['type' => 'string'],
                     'version' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscConfigurationParameter' => [
@@ -4981,6 +4999,7 @@ final class AutomationClient
                     ],
                     'defaultValue' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscConfigurationProperties' => [
@@ -5017,6 +5036,7 @@ final class AutomationClient
                     ],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscConfiguration' => [
@@ -5024,6 +5044,7 @@ final class AutomationClient
                     'properties' => ['$ref' => '#/definitions/DscConfigurationProperties'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Sku' => [
@@ -5041,6 +5062,7 @@ final class AutomationClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'AutomationAccountProperties' => [
@@ -5065,6 +5087,7 @@ final class AutomationClient
                     ],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AutomationAccount' => [
@@ -5072,6 +5095,7 @@ final class AutomationClient
                     'properties' => ['$ref' => '#/definitions/AutomationAccountProperties'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -5085,6 +5109,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'AutomationAccountListResult' => [
@@ -5095,6 +5120,7 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation_display' => [
@@ -5103,6 +5129,7 @@ final class AutomationClient
                     'resource' => ['type' => 'string'],
                     'operation' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -5110,6 +5137,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -5117,10 +5145,12 @@ final class AutomationClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Operation']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AutomationAccountCreateOrUpdateProperties' => [
                 'properties' => ['sku' => ['$ref' => '#/definitions/Sku']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AutomationAccountCreateOrUpdateParameters' => [
@@ -5133,10 +5163,12 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AutomationAccountUpdateProperties' => [
                 'properties' => ['sku' => ['$ref' => '#/definitions/Sku']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AutomationAccountUpdateParameters' => [
@@ -5149,6 +5181,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'CertificateProperties' => [
@@ -5169,6 +5202,7 @@ final class AutomationClient
                     ],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Certificate' => [
@@ -5177,6 +5211,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/CertificateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CertificateListResult' => [
@@ -5187,10 +5222,12 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CertificateUpdateProperties' => [
                 'properties' => ['description' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CertificateUpdateParameters' => [
@@ -5198,6 +5235,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/CertificateUpdateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'CertificateCreateOrUpdateProperties' => [
@@ -5207,6 +5245,7 @@ final class AutomationClient
                     'thumbprint' => ['type' => 'string'],
                     'isExportable' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['base64Value']
             ],
             'CertificateCreateOrUpdateParameters' => [
@@ -5214,6 +5253,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/CertificateCreateOrUpdateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'properties'
@@ -5221,6 +5261,7 @@ final class AutomationClient
             ],
             'ConnectionTypeAssociationProperty' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectionProperties' => [
@@ -5240,6 +5281,7 @@ final class AutomationClient
                     ],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Connection' => [
@@ -5248,6 +5290,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ConnectionProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectionListResult' => [
@@ -5258,6 +5301,7 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectionUpdateProperties' => [
@@ -5268,6 +5312,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectionUpdateParameters' => [
@@ -5275,6 +5320,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ConnectionUpdateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'ConnectionCreateOrUpdateProperties' => [
@@ -5286,6 +5332,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['connectionType']
             ],
             'ConnectionCreateOrUpdateParameters' => [
@@ -5293,6 +5340,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ConnectionCreateOrUpdateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'properties'
@@ -5304,6 +5352,7 @@ final class AutomationClient
                     'isOptional' => ['type' => 'boolean'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['type']
             ],
             'ConnectionTypeProperties' => [
@@ -5323,6 +5372,7 @@ final class AutomationClient
                     ],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectionType' => [
@@ -5331,6 +5381,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ConnectionTypeProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectionTypeListResult' => [
@@ -5341,6 +5392,7 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectionTypeCreateOrUpdateProperties' => [
@@ -5351,6 +5403,7 @@ final class AutomationClient
                         'additionalProperties' => ['$ref' => '#/definitions/FieldDefinition']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['fieldDefinitions']
             ],
             'ConnectionTypeCreateOrUpdateParameters' => [
@@ -5358,6 +5411,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ConnectionTypeCreateOrUpdateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'properties'
@@ -5376,6 +5430,7 @@ final class AutomationClient
                     ],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Credential' => [
@@ -5384,6 +5439,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/CredentialProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CredentialListResult' => [
@@ -5394,6 +5450,7 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CredentialUpdateProperties' => [
@@ -5402,6 +5459,7 @@ final class AutomationClient
                     'password' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CredentialUpdateParameters' => [
@@ -5409,6 +5467,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/CredentialUpdateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'CredentialCreateOrUpdateProperties' => [
@@ -5417,6 +5476,7 @@ final class AutomationClient
                     'password' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'userName',
                     'password'
@@ -5427,6 +5487,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/CredentialCreateOrUpdateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'properties'
@@ -5443,6 +5504,7 @@ final class AutomationClient
                     'valueFromPipelineByPropertyName' => ['type' => 'boolean'],
                     'valueFromRemainingArguments' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ActivityParameterSet' => [
@@ -5453,6 +5515,7 @@ final class AutomationClient
                         'items' => ['$ref' => '#/definitions/ActivityParameter']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ActivityOutputType' => [
@@ -5460,6 +5523,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ActivityProperties' => [
@@ -5483,6 +5547,7 @@ final class AutomationClient
                     ],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Activity' => [
@@ -5491,6 +5556,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ActivityProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ActivityListResult' => [
@@ -5501,6 +5567,7 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AdvancedScheduleMonthlyOccurrence' => [
@@ -5522,6 +5589,7 @@ final class AutomationClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AdvancedSchedule' => [
@@ -5542,6 +5610,7 @@ final class AutomationClient
                         'items' => ['$ref' => '#/definitions/AdvancedScheduleMonthlyOccurrence']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AgentRegistrationKeys' => [
@@ -5549,6 +5618,7 @@ final class AutomationClient
                     'primary' => ['type' => 'string'],
                     'secondary' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AgentRegistration' => [
@@ -5558,6 +5628,7 @@ final class AutomationClient
                     'keys' => ['$ref' => '#/definitions/AgentRegistrationKeys'],
                     'id' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AgentRegistrationRegenerateKeyParameter' => [
@@ -5576,10 +5647,12 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['keyName']
             ],
             'DscConfigurationAssociationProperty' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscCompilationJobCreateProperties' => [
@@ -5590,6 +5663,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['configuration']
             ],
             'DscCompilationJobCreateParameters' => [
@@ -5602,6 +5676,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'DscCompilationJobProperties' => [
@@ -5657,6 +5732,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscCompilationJob' => [
@@ -5664,6 +5740,7 @@ final class AutomationClient
                     'id' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/DscCompilationJobProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscCompilationJobListResult' => [
@@ -5674,6 +5751,7 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscConfigurationListResult' => [
@@ -5684,6 +5762,7 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscConfigurationCreateOrUpdateProperties' => [
@@ -5697,6 +5776,7 @@ final class AutomationClient
                     ],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['source']
             ],
             'DscConfigurationCreateOrUpdateParameters' => [
@@ -5709,6 +5789,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'DscMetaConfiguration' => [
@@ -5727,6 +5808,7 @@ final class AutomationClient
                     ],
                     'allowModuleOverwrite' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscNodeConfigurationCreateOrUpdateParameters' => [
@@ -5735,6 +5817,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'configuration' => ['$ref' => '#/definitions/DscConfigurationAssociationProperty']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'source',
                     'name',
@@ -5755,6 +5838,7 @@ final class AutomationClient
                     'configuration' => ['$ref' => '#/definitions/DscConfigurationAssociationProperty'],
                     'id' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscNodeConfigurationListResult' => [
@@ -5765,6 +5849,7 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscNodeListResult' => [
@@ -5775,6 +5860,7 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscNodeUpdateParameters' => [
@@ -5782,6 +5868,7 @@ final class AutomationClient
                     'nodeId' => ['type' => 'string'],
                     'nodeConfiguration' => ['$ref' => '#/definitions/DscNodeConfigurationAssociationProperty']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscReportError' => [
@@ -5793,10 +5880,12 @@ final class AutomationClient
                     'locale' => ['type' => 'string'],
                     'errorDetails' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscReportResourceNavigation' => [
                 'properties' => ['resourceId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscReportResource' => [
@@ -5821,6 +5910,7 @@ final class AutomationClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscNodeReport' => [
@@ -5869,6 +5959,7 @@ final class AutomationClient
                     ],
                     'rawErrors' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DscNodeReportListResult' => [
@@ -5879,6 +5970,7 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HybridRunbookWorker' => [
@@ -5890,10 +5982,12 @@ final class AutomationClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RunAsCredentialAssociationProperty' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HybridRunbookWorkerGroup' => [
@@ -5906,6 +6000,7 @@ final class AutomationClient
                     ],
                     'credential' => ['$ref' => '#/definitions/RunAsCredentialAssociationProperty']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HybridRunbookWorkerGroupsListResult' => [
@@ -5916,14 +6011,17 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HybridRunbookWorkerGroupUpdateParameters' => [
                 'properties' => ['credential' => ['$ref' => '#/definitions/RunAsCredentialAssociationProperty']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RunbookAssociationProperty' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobProperties' => [
@@ -5980,6 +6078,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Job' => [
@@ -5987,6 +6086,7 @@ final class AutomationClient
                     'id' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/JobProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobCreateProperties' => [
@@ -5998,6 +6098,7 @@ final class AutomationClient
                     ],
                     'runOn' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['runbook']
             ],
             'JobCreateParameters' => [
@@ -6010,6 +6111,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'JobListResult' => [
@@ -6020,10 +6122,12 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ScheduleAssociationProperty' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobScheduleCreateProperties' => [
@@ -6036,6 +6140,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'schedule',
                     'runbook'
@@ -6043,6 +6148,7 @@ final class AutomationClient
             ],
             'JobScheduleCreateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/JobScheduleCreateProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'JobScheduleProperties' => [
@@ -6056,6 +6162,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobSchedule' => [
@@ -6063,6 +6170,7 @@ final class AutomationClient
                     'id' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/JobScheduleProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobScheduleListResult' => [
@@ -6073,6 +6181,7 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobStreamProperties' => [
@@ -6101,6 +6210,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'object']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobStream' => [
@@ -6108,6 +6218,7 @@ final class AutomationClient
                     'id' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/JobStreamProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobStreamListResult' => [
@@ -6118,10 +6229,12 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ModuleCreateOrUpdateProperties' => [
                 'properties' => ['contentLink' => ['$ref' => '#/definitions/ContentLink']],
+                'additionalProperties' => FALSE,
                 'required' => ['contentLink']
             ],
             'ModuleCreateOrUpdateParameters' => [
@@ -6134,6 +6247,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'ModuleListResult' => [
@@ -6144,10 +6258,12 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ModuleUpdateProperties' => [
                 'properties' => ['contentLink' => ['$ref' => '#/definitions/ContentLink']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ModuleUpdateParameters' => [
@@ -6160,6 +6276,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'RunbookDraftUndoEditResult' => [
@@ -6218,6 +6335,7 @@ final class AutomationClient
                     ],
                     'requestId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RunbookCreateOrUpdateProperties' => [
@@ -6243,6 +6361,7 @@ final class AutomationClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['runbookType']
             ],
             'RunbookCreateOrUpdateParameters' => [
@@ -6255,6 +6374,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'RunbookCreateOrUpdateDraftProperties' => [
@@ -6279,6 +6399,7 @@ final class AutomationClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'runbookType',
                     'draft'
@@ -6286,6 +6407,7 @@ final class AutomationClient
             ],
             'RunbookCreateOrUpdateDraftParameters' => [
                 'properties' => ['runbookContent' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['runbookContent']
             ],
             'RunbookUpdateProperties' => [
@@ -6298,6 +6420,7 @@ final class AutomationClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RunbookUpdateParameters' => [
@@ -6310,6 +6433,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RunbookListResult' => [
@@ -6320,6 +6444,7 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ScheduleCreateOrUpdateProperties' => [
@@ -6347,6 +6472,7 @@ final class AutomationClient
                     'timeZone' => ['type' => 'string'],
                     'advancedSchedule' => ['$ref' => '#/definitions/AdvancedSchedule']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'startTime',
                     'frequency'
@@ -6357,6 +6483,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ScheduleCreateOrUpdateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'properties'
@@ -6412,6 +6539,7 @@ final class AutomationClient
                     ],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Schedule' => [
@@ -6420,6 +6548,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ScheduleProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ScheduleUpdateProperties' => [
@@ -6427,6 +6556,7 @@ final class AutomationClient
                     'description' => ['type' => 'string'],
                     'isEnabled' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ScheduleUpdateParameters' => [
@@ -6434,6 +6564,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ScheduleUpdateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'ScheduleListResult' => [
@@ -6444,10 +6575,12 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubResource' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TestJobCreateParameters' => [
@@ -6459,6 +6592,7 @@ final class AutomationClient
                     ],
                     'runOn' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['runbookName']
             ],
             'TestJob' => [
@@ -6492,6 +6626,7 @@ final class AutomationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TypeField' => [
@@ -6499,6 +6634,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TypeFieldListResult' => [
@@ -6506,6 +6642,7 @@ final class AutomationClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/TypeField']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VariableCreateOrUpdateProperties' => [
@@ -6514,6 +6651,7 @@ final class AutomationClient
                     'description' => ['type' => 'string'],
                     'isEncrypted' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VariableCreateOrUpdateParameters' => [
@@ -6521,6 +6659,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/VariableCreateOrUpdateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'properties'
@@ -6540,6 +6679,7 @@ final class AutomationClient
                     ],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Variable' => [
@@ -6548,6 +6688,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/VariableProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VariableListResult' => [
@@ -6558,6 +6699,7 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VariableUpdateProperties' => [
@@ -6565,6 +6707,7 @@ final class AutomationClient
                     'value' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VariableUpdateParameters' => [
@@ -6572,6 +6715,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/VariableUpdateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'WebhookCreateOrUpdateProperties' => [
@@ -6589,6 +6733,7 @@ final class AutomationClient
                     'runbook' => ['$ref' => '#/definitions/RunbookAssociationProperty'],
                     'runOn' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WebhookCreateOrUpdateParameters' => [
@@ -6596,6 +6741,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/WebhookCreateOrUpdateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'properties'
@@ -6629,6 +6775,7 @@ final class AutomationClient
                     ],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Webhook' => [
@@ -6637,6 +6784,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/WebhookProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WebhookListResult' => [
@@ -6647,6 +6795,7 @@ final class AutomationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WebhookUpdateProperties' => [
@@ -6659,6 +6808,7 @@ final class AutomationClient
                     ],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WebhookUpdateParameters' => [
@@ -6666,6 +6816,7 @@ final class AutomationClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/WebhookUpdateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ]
         ]

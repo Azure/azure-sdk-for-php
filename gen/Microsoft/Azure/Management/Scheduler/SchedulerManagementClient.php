@@ -621,6 +621,7 @@ final class SchedulerManagementClient
                         'P20Premium'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobMaxRecurrence' => [
@@ -640,6 +641,7 @@ final class SchedulerManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobCollectionQuota' => [
@@ -654,6 +656,7 @@ final class SchedulerManagementClient
                     ],
                     'maxRecurrence' => ['$ref' => '#/definitions/JobMaxRecurrence']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobCollectionProperties' => [
@@ -670,6 +673,7 @@ final class SchedulerManagementClient
                     ],
                     'quota' => ['$ref' => '#/definitions/JobCollectionQuota']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobCollectionDefinition' => [
@@ -684,6 +688,7 @@ final class SchedulerManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/JobCollectionProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobCollectionListResult' => [
@@ -694,6 +699,7 @@ final class SchedulerManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HttpAuthentication' => [
@@ -706,6 +712,7 @@ final class SchedulerManagementClient
                         'Basic'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HttpRequest' => [
@@ -719,6 +726,7 @@ final class SchedulerManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageQueueMessage' => [
@@ -728,14 +736,17 @@ final class SchedulerManagementClient
                     'sasToken' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServiceBusQueueMessage' => [
                 'properties' => ['queueName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServiceBusTopicMessage' => [
                 'properties' => ['topicPath' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RetryPolicy' => [
@@ -756,6 +767,7 @@ final class SchedulerManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobErrorAction' => [
@@ -776,6 +788,7 @@ final class SchedulerManagementClient
                     'serviceBusTopicMessage' => ['$ref' => '#/definitions/ServiceBusTopicMessage'],
                     'retryPolicy' => ['$ref' => '#/definitions/RetryPolicy']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobAction' => [
@@ -797,6 +810,7 @@ final class SchedulerManagementClient
                     'retryPolicy' => ['$ref' => '#/definitions/RetryPolicy'],
                     'errorAction' => ['$ref' => '#/definitions/JobErrorAction']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobRecurrenceScheduleMonthlyOccurrence' => [
@@ -818,6 +832,7 @@ final class SchedulerManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobRecurrenceSchedule' => [
@@ -863,6 +878,7 @@ final class SchedulerManagementClient
                         'items' => ['$ref' => '#/definitions/JobRecurrenceScheduleMonthlyOccurrence']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobRecurrence' => [
@@ -891,6 +907,7 @@ final class SchedulerManagementClient
                     ],
                     'schedule' => ['$ref' => '#/definitions/JobRecurrenceSchedule']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobStatus' => [
@@ -916,6 +933,7 @@ final class SchedulerManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobProperties' => [
@@ -937,6 +955,7 @@ final class SchedulerManagementClient
                     ],
                     'status' => ['$ref' => '#/definitions/JobStatus']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobDefinition' => [
@@ -946,6 +965,7 @@ final class SchedulerManagementClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/JobProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobListResult' => [
@@ -956,6 +976,7 @@ final class SchedulerManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobHistoryDefinitionProperties' => [
@@ -997,6 +1018,7 @@ final class SchedulerManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobHistoryDefinition' => [
@@ -1006,6 +1028,7 @@ final class SchedulerManagementClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/JobHistoryDefinitionProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobHistoryListResult' => [
@@ -1016,6 +1039,7 @@ final class SchedulerManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientCertAuthentication' => [
@@ -1029,6 +1053,7 @@ final class SchedulerManagementClient
                     ],
                     'certificateSubjectName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BasicAuthentication' => [
@@ -1036,6 +1061,7 @@ final class SchedulerManagementClient
                     'username' => ['type' => 'string'],
                     'password' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OAuthAuthentication' => [
@@ -1045,6 +1071,7 @@ final class SchedulerManagementClient
                     'audience' => ['type' => 'string'],
                     'clientId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServiceBusAuthentication' => [
@@ -1059,6 +1086,7 @@ final class SchedulerManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServiceBusBrokeredMessageProperties' => [
@@ -1083,6 +1111,7 @@ final class SchedulerManagementClient
                     'to' => ['type' => 'string'],
                     'viaPartitionKey' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServiceBusMessage' => [
@@ -1104,6 +1133,7 @@ final class SchedulerManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobStateFilter' => [
@@ -1116,6 +1146,7 @@ final class SchedulerManagementClient
                         'Completed'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobHistoryFilter' => [
@@ -1127,6 +1158,7 @@ final class SchedulerManagementClient
                         'Postponed'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

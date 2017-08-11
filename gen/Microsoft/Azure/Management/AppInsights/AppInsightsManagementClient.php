@@ -443,6 +443,7 @@ final class AppInsightsManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation_display' => [
@@ -451,6 +452,7 @@ final class AppInsightsManagementClient
                     'resource' => ['type' => 'string'],
                     'operation' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -458,6 +460,7 @@ final class AppInsightsManagementClient
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -468,6 +471,7 @@ final class AppInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -481,6 +485,7 @@ final class AppInsightsManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'TagsResource' => [
@@ -488,6 +493,7 @@ final class AppInsightsManagementClient
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationInsightsComponentProperties' => [
@@ -523,6 +529,7 @@ final class AppInsightsManagementClient
                         'format' => 'double'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['Application_Type']
             ],
             'ApplicationInsightsComponent' => [
@@ -530,6 +537,7 @@ final class AppInsightsManagementClient
                     'kind' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ApplicationInsightsComponentProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['kind']
             ],
             'ApplicationInsightsComponentListResult' => [
@@ -540,14 +548,17 @@ final class AppInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'WebTestGeolocation' => [
                 'properties' => ['Id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WebTestProperties_Configuration' => [
                 'properties' => ['WebTest' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WebTestProperties' => [
@@ -579,6 +590,7 @@ final class AppInsightsManagementClient
                     'Configuration' => ['$ref' => '#/definitions/WebTestProperties_Configuration'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'SyntheticMonitorId',
                     'Name',
@@ -597,6 +609,7 @@ final class AppInsightsManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/WebTestProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'webTestListResult' => [
@@ -607,6 +620,7 @@ final class AppInsightsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ]
         ]

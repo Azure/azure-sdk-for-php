@@ -448,6 +448,7 @@ final class StorageManagementClient
                     'resource' => ['type' => 'string'],
                     'operation' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Dimension' => [
@@ -455,6 +456,7 @@ final class StorageManagementClient
                     'name' => ['type' => 'string'],
                     'displayName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MetricSpecification' => [
@@ -472,6 +474,7 @@ final class StorageManagementClient
                     'category' => ['type' => 'string'],
                     'resourceIdDimensionNameOverride' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServiceSpecification' => [
@@ -479,10 +482,12 @@ final class StorageManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/MetricSpecification']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationProperties' => [
                 'properties' => ['serviceSpecification' => ['$ref' => '#/definitions/ServiceSpecification']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -492,6 +497,7 @@ final class StorageManagementClient
                     'origin' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/OperationProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -499,6 +505,7 @@ final class StorageManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Operation']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageAccountCheckNameAvailabilityParameters' => [
@@ -506,6 +513,7 @@ final class StorageManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'type'
@@ -523,6 +531,7 @@ final class StorageManagementClient
                     ],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Sku' => [
@@ -545,6 +554,7 @@ final class StorageManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'CustomDomain' => [
@@ -552,6 +562,7 @@ final class StorageManagementClient
                     'name' => ['type' => 'string'],
                     'useSubDomain' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'EncryptionService' => [
@@ -562,6 +573,7 @@ final class StorageManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EncryptionServices' => [
@@ -571,6 +583,7 @@ final class StorageManagementClient
                     'table' => ['$ref' => '#/definitions/EncryptionService'],
                     'queue' => ['$ref' => '#/definitions/EncryptionService']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'KeyVaultProperties' => [
@@ -579,6 +592,7 @@ final class StorageManagementClient
                     'keyversion' => ['type' => 'string'],
                     'keyvaulturi' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Encryption' => [
@@ -593,6 +607,7 @@ final class StorageManagementClient
                     ],
                     'keyvaultproperties' => ['$ref' => '#/definitions/KeyVaultProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['keySource']
             ],
             'VirtualNetworkRule' => [
@@ -613,6 +628,7 @@ final class StorageManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['id']
             ],
             'IPRule' => [
@@ -623,6 +639,7 @@ final class StorageManagementClient
                         'enum' => ['Allow']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'StorageNetworkAcls' => [
@@ -652,6 +669,7 @@ final class StorageManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['defaultAction']
             ],
             'StorageAccountPropertiesCreateParameters' => [
@@ -668,6 +686,7 @@ final class StorageManagementClient
                     ],
                     'supportsHttpsTrafficOnly' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Identity' => [
@@ -676,6 +695,7 @@ final class StorageManagementClient
                     'tenantId' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['type']
             ],
             'StorageAccountCreateParameters' => [
@@ -696,6 +716,7 @@ final class StorageManagementClient
                     'identity' => ['$ref' => '#/definitions/Identity'],
                     'properties' => ['$ref' => '#/definitions/StorageAccountPropertiesCreateParameters']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'sku',
                     'kind',
@@ -709,6 +730,7 @@ final class StorageManagementClient
                     'table' => ['type' => 'string'],
                     'file' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageAccountProperties' => [
@@ -759,6 +781,7 @@ final class StorageManagementClient
                     'supportsHttpsTrafficOnly' => ['type' => 'boolean'],
                     'networkAcls' => ['$ref' => '#/definitions/StorageNetworkAcls']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageAccount' => [
@@ -774,6 +797,7 @@ final class StorageManagementClient
                     'identity' => ['$ref' => '#/definitions/Identity'],
                     'properties' => ['$ref' => '#/definitions/StorageAccountProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageAccountKey' => [
@@ -788,6 +812,7 @@ final class StorageManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageAccountListResult' => [
@@ -795,6 +820,7 @@ final class StorageManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/StorageAccount']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageAccountListKeysResult' => [
@@ -802,10 +828,12 @@ final class StorageManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/StorageAccountKey']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageAccountRegenerateKeyParameters' => [
                 'properties' => ['keyName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['keyName']
             ],
             'StorageAccountPropertiesUpdateParameters' => [
@@ -822,6 +850,7 @@ final class StorageManagementClient
                     'supportsHttpsTrafficOnly' => ['type' => 'boolean'],
                     'networkAcls' => ['$ref' => '#/definitions/StorageNetworkAcls']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageAccountUpdateParameters' => [
@@ -834,6 +863,7 @@ final class StorageManagementClient
                     'identity' => ['$ref' => '#/definitions/Identity'],
                     'properties' => ['$ref' => '#/definitions/StorageAccountPropertiesUpdateParameters']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UsageName' => [
@@ -841,6 +871,7 @@ final class StorageManagementClient
                     'value' => ['type' => 'string'],
                     'localizedValue' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Usage' => [
@@ -866,6 +897,7 @@ final class StorageManagementClient
                     ],
                     'name' => ['$ref' => '#/definitions/UsageName']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UsageListResult' => [
@@ -873,6 +905,7 @@ final class StorageManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Usage']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -886,6 +919,7 @@ final class StorageManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AccountSasParameters' => [
@@ -938,6 +972,7 @@ final class StorageManagementClient
                     ],
                     'keyToSign' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'signedServices',
                     'signedResourceTypes',
@@ -947,6 +982,7 @@ final class StorageManagementClient
             ],
             'ListAccountSasResponse' => [
                 'properties' => ['accountSasToken' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServiceSasParameters' => [
@@ -1002,6 +1038,7 @@ final class StorageManagementClient
                     'rscl' => ['type' => 'string'],
                     'rsct' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'canonicalizedResource',
                     'signedResource'
@@ -1009,6 +1046,7 @@ final class StorageManagementClient
             ],
             'ListServiceSasResponse' => [
                 'properties' => ['serviceSasToken' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

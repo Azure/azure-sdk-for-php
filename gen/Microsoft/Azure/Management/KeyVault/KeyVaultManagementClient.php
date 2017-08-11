@@ -297,6 +297,7 @@ final class KeyVaultManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'family',
                     'name'
@@ -385,6 +386,7 @@ final class KeyVaultManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AccessPolicyEntry' => [
@@ -400,6 +402,7 @@ final class KeyVaultManagementClient
                     ],
                     'permissions' => ['$ref' => '#/definitions/Permissions']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'tenantId',
                     'objectId',
@@ -430,6 +433,7 @@ final class KeyVaultManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'tenantId',
                     'sku'
@@ -452,6 +456,7 @@ final class KeyVaultManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VaultCreateOrUpdateParameters' => [
@@ -463,6 +468,7 @@ final class KeyVaultManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/VaultProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'location',
                     'properties'
@@ -470,6 +476,7 @@ final class KeyVaultManagementClient
             ],
             'Vault' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/VaultProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'DeletedVault' => [
@@ -479,6 +486,7 @@ final class KeyVaultManagementClient
                     'type' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/DeletedVaultProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VaultListResult' => [
@@ -489,6 +497,7 @@ final class KeyVaultManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeletedVaultListResult' => [
@@ -499,6 +508,7 @@ final class KeyVaultManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -512,6 +522,7 @@ final class KeyVaultManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'location'
@@ -525,6 +536,7 @@ final class KeyVaultManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

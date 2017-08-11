@@ -618,6 +618,7 @@ final class ManagementLockClient
         'definitions' => [
             'ManagementLockOwner' => [
                 'properties' => ['applicationId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ManagementLockProperties' => [
@@ -636,6 +637,7 @@ final class ManagementLockClient
                         'items' => ['$ref' => '#/definitions/ManagementLockOwner']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['level']
             ],
             'ManagementLockObject' => [
@@ -645,6 +647,7 @@ final class ManagementLockClient
                     'type' => ['type' => 'string'],
                     'name' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'ManagementLockListResult' => [
@@ -655,6 +658,7 @@ final class ManagementLockClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

@@ -87,3 +87,4 @@
     - StorageImportExport has an explicit api_version
     - Resource: ResourceGroups_ExportTemplate(_, new ExportTemplateRequest())
       ExportTemplateRequest should require "Resources" property.
+    - https://github.com/Azure/azure-rest-api-specs/blob/current/specification/network/resource-manager/Microsoft.Network/2017-06-01/vmssNetworkInterface.json has version 2017-03-30

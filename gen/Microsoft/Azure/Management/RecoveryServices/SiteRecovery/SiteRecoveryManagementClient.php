@@ -4761,10 +4761,12 @@ final class SiteRecoveryManagementClient
                     ],
                     'locale' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Alert' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AlertProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AlertCollection' => [
@@ -4775,6 +4777,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConfigureAlertRequestProperties' => [
@@ -4786,18 +4789,22 @@ final class SiteRecoveryManagementClient
                     ],
                     'locale' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConfigureAlertRequest' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ConfigureAlertRequestProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EventProviderSpecificDetails' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EventSpecificDetails' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HealthError' => [
@@ -4814,6 +4821,7 @@ final class SiteRecoveryManagementClient
                     'recoveryProviderErrorMessage' => ['type' => 'string'],
                     'entityId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EventProperties' => [
@@ -4835,10 +4843,12 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/HealthError']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Event' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/EventProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EventCollection' => [
@@ -4849,6 +4859,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EncryptionDetails' => [
@@ -4860,10 +4871,12 @@ final class SiteRecoveryManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FabricSpecificDetails' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FabricProperties' => [
@@ -4880,10 +4893,12 @@ final class SiteRecoveryManagementClient
                     ],
                     'health' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Fabric' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/FabricProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FabricCollection' => [
@@ -4894,18 +4909,22 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FabricSpecificCreationInput' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FabricCreationInputProperties' => [
                 'properties' => ['customDetails' => ['$ref' => '#/definitions/FabricSpecificCreationInput']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FabricCreationInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/FabricCreationInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FailoverProcessServerRequestProperties' => [
@@ -4919,14 +4938,17 @@ final class SiteRecoveryManagementClient
                     ],
                     'updateType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FailoverProcessServerRequest' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/FailoverProcessServerRequestProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TaskTypeDetails' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GroupTaskDetails' => [
@@ -4934,6 +4956,7 @@ final class SiteRecoveryManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ASRTask']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServiceError' => [
@@ -4944,6 +4967,7 @@ final class SiteRecoveryManagementClient
                     'recommendedAction' => ['type' => 'string'],
                     'activityId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProviderError' => [
@@ -4957,6 +4981,7 @@ final class SiteRecoveryManagementClient
                     'possibleCauses' => ['type' => 'string'],
                     'recommendedAction' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobErrorDetails' => [
@@ -4970,6 +4995,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'taskId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ASRTask' => [
@@ -4999,6 +5025,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/JobErrorDetails']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobDetails' => [
@@ -5006,6 +5033,7 @@ final class SiteRecoveryManagementClient
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobProperties' => [
@@ -5040,6 +5068,7 @@ final class SiteRecoveryManagementClient
                     'targetInstanceType' => ['type' => 'string'],
                     'customDetails' => ['$ref' => '#/definitions/JobDetails']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ARMExceptionDetails' => [
@@ -5052,6 +5081,7 @@ final class SiteRecoveryManagementClient
                     'activityId' => ['type' => 'string'],
                     'target' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MethodCallStatus' => [
@@ -5063,6 +5093,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'containsGenericParameters' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ARMInnerError' => [
@@ -5083,6 +5114,7 @@ final class SiteRecoveryManagementClient
                     'subscriptionId' => ['type' => 'string'],
                     'serializedSRSLogContext' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ARMException' => [
@@ -5096,6 +5128,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'innererror' => ['$ref' => '#/definitions/ARMInnerError']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Job' => [
@@ -5106,6 +5139,7 @@ final class SiteRecoveryManagementClient
                     'startTime' => ['type' => 'string'],
                     'endTime' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobCollection' => [
@@ -5116,6 +5150,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobQueryParameter' => [
@@ -5132,14 +5167,17 @@ final class SiteRecoveryManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResumeJobParamsProperties' => [
                 'properties' => ['comments' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResumeJobParams' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ResumeJobParamsProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LogicalNetworkProperties' => [
@@ -5149,10 +5187,12 @@ final class SiteRecoveryManagementClient
                     'logicalNetworkUsage' => ['type' => 'string'],
                     'logicalNetworkDefinitionsStatus' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LogicalNetwork' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/LogicalNetworkProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LogicalNetworkCollection' => [
@@ -5163,10 +5203,12 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkMappingFabricSpecificSettings' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkMappingProperties' => [
@@ -5181,14 +5223,17 @@ final class SiteRecoveryManagementClient
                     'recoveryFabricFriendlyName' => ['type' => 'string'],
                     'fabricSpecificSettings' => ['$ref' => '#/definitions/NetworkMappingFabricSpecificSettings']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkMapping' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/NetworkMappingProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FabricSpecificCreateNetworkMappingInput' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CreateNetworkMappingInputProperties' => [
@@ -5197,14 +5242,17 @@ final class SiteRecoveryManagementClient
                     'recoveryNetworkId' => ['type' => 'string'],
                     'fabricSpecificDetails' => ['$ref' => '#/definitions/FabricSpecificCreateNetworkMappingInput']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CreateNetworkMappingInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/CreateNetworkMappingInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FabricSpecificUpdateNetworkMappingInput' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateNetworkMappingInputProperties' => [
@@ -5213,10 +5261,12 @@ final class SiteRecoveryManagementClient
                     'recoveryNetworkId' => ['type' => 'string'],
                     'fabricSpecificDetails' => ['$ref' => '#/definitions/FabricSpecificUpdateNetworkMappingInput']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateNetworkMappingInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UpdateNetworkMappingInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Subnet' => [
@@ -5228,6 +5278,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkProperties' => [
@@ -5240,10 +5291,12 @@ final class SiteRecoveryManagementClient
                     'friendlyName' => ['type' => 'string'],
                     'networkType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Network' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/NetworkProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkCollection' => [
@@ -5254,6 +5307,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Display' => [
@@ -5263,6 +5317,7 @@ final class SiteRecoveryManagementClient
                     'operation' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationsDiscovery' => [
@@ -5272,6 +5327,7 @@ final class SiteRecoveryManagementClient
                     'origin' => ['type' => 'string'],
                     'properties' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationsDiscoveryCollection' => [
@@ -5282,10 +5338,12 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PolicyProviderSpecificDetails' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PolicyProperties' => [
@@ -5293,10 +5351,12 @@ final class SiteRecoveryManagementClient
                     'friendlyName' => ['type' => 'string'],
                     'providerSpecificDetails' => ['$ref' => '#/definitions/PolicyProviderSpecificDetails']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Policy' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/PolicyProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PolicyCollection' => [
@@ -5307,30 +5367,37 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PolicyProviderSpecificInput' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CreatePolicyInputProperties' => [
                 'properties' => ['providerSpecificInput' => ['$ref' => '#/definitions/PolicyProviderSpecificInput']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CreatePolicyInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/CreatePolicyInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdatePolicyInputProperties' => [
                 'properties' => ['replicationProviderSettings' => ['$ref' => '#/definitions/PolicyProviderSpecificInput']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdatePolicyInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UpdatePolicyInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConfigurationSettings' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectableItemProperties' => [
@@ -5349,10 +5416,12 @@ final class SiteRecoveryManagementClient
                     ],
                     'customDetails' => ['$ref' => '#/definitions/ConfigurationSettings']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectableItem' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ProtectableItemProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectableItemCollection' => [
@@ -5363,10 +5432,12 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectionContainerMappingProviderSpecificDetails' => [
                 'properties' => ['instanceType' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectionContainerMappingProperties' => [
@@ -5386,10 +5457,12 @@ final class SiteRecoveryManagementClient
                     'targetFabricFriendlyName' => ['type' => 'string'],
                     'policyFriendlyName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectionContainerMapping' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ProtectionContainerMappingProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectionContainerMappingCollection' => [
@@ -5400,10 +5473,12 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReplicationProviderSpecificContainerMappingInput' => [
                 'properties' => ['instanceType' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CreateProtectionContainerMappingInputProperties' => [
@@ -5412,26 +5487,32 @@ final class SiteRecoveryManagementClient
                     'PolicyId' => ['type' => 'string'],
                     'providerSpecificInput' => ['$ref' => '#/definitions/ReplicationProviderSpecificContainerMappingInput']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CreateProtectionContainerMappingInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/CreateProtectionContainerMappingInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReplicationProviderContainerUnmappingInput' => [
                 'properties' => ['instanceType' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RemoveProtectionContainerMappingInputProperties' => [
                 'properties' => ['providerSpecificInput' => ['$ref' => '#/definitions/ReplicationProviderContainerUnmappingInput']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RemoveProtectionContainerMappingInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RemoveProtectionContainerMappingInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectionContainerFabricSpecificDetails' => [
                 'properties' => ['instanceType' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectionContainerProperties' => [
@@ -5447,10 +5528,12 @@ final class SiteRecoveryManagementClient
                     'role' => ['type' => 'string'],
                     'fabricSpecificDetails' => ['$ref' => '#/definitions/ProtectionContainerFabricSpecificDetails']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectionContainer' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ProtectionContainerProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectionContainerCollection' => [
@@ -5461,10 +5544,12 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReplicationProviderSpecificContainerCreationInput' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CreateProtectionContainerInputProperties' => [
@@ -5472,10 +5557,12 @@ final class SiteRecoveryManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ReplicationProviderSpecificContainerCreationInput']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CreateProtectionContainerInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/CreateProtectionContainerInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DiscoverProtectableItemRequestProperties' => [
@@ -5484,14 +5571,17 @@ final class SiteRecoveryManagementClient
                     'ipAddress' => ['type' => 'string'],
                     'osType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DiscoverProtectableItemRequest' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/DiscoverProtectableItemRequestProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SwitchProtectionProviderSpecificInput' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SwitchProtectionInputProperties' => [
@@ -5499,10 +5589,12 @@ final class SiteRecoveryManagementClient
                     'replicationProtectedItemName' => ['type' => 'string'],
                     'providerSpecificDetails' => ['$ref' => '#/definitions/SwitchProtectionProviderSpecificInput']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SwitchProtectionInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SwitchProtectionInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CurrentScenarioDetails' => [
@@ -5514,6 +5606,7 @@ final class SiteRecoveryManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPlanProtectedItem' => [
@@ -5521,10 +5614,12 @@ final class SiteRecoveryManagementClient
                     'id' => ['type' => 'string'],
                     'virtualMachineId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPlanActionDetails' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPlanAction' => [
@@ -5563,6 +5658,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'customDetails' => ['$ref' => '#/definitions/RecoveryPlanActionDetails']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'actionName',
                     'failoverTypes',
@@ -5593,6 +5689,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/RecoveryPlanAction']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['groupType']
             ],
             'RecoveryPlanProperties' => [
@@ -5627,10 +5724,12 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/RecoveryPlanGroup']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPlan' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPlanProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPlanCollection' => [
@@ -5641,6 +5740,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CreateRecoveryPlanInputProperties' => [
@@ -5660,6 +5760,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/RecoveryPlanGroup']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'primaryFabricId',
                     'recoveryFabricId',
@@ -5668,6 +5769,7 @@ final class SiteRecoveryManagementClient
             ],
             'CreateRecoveryPlanInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/CreateRecoveryPlanInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'UpdateRecoveryPlanInputProperties' => [
@@ -5675,14 +5777,17 @@ final class SiteRecoveryManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/RecoveryPlanGroup']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateRecoveryPlanInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UpdateRecoveryPlanInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPlanProviderSpecificFailoverInput' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPlanPlannedFailoverInputProperties' => [
@@ -5699,10 +5804,12 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/RecoveryPlanProviderSpecificFailoverInput']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['failoverDirection']
             ],
             'RecoveryPlanPlannedFailoverInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPlanPlannedFailoverInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'RecoveryPlanUnplannedFailoverInputProperties' => [
@@ -5726,6 +5833,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/RecoveryPlanProviderSpecificFailoverInput']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'failoverDirection',
                     'sourceSiteOperations'
@@ -5733,6 +5841,7 @@ final class SiteRecoveryManagementClient
             ],
             'RecoveryPlanUnplannedFailoverInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPlanUnplannedFailoverInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'RecoveryPlanTestFailoverInputProperties' => [
@@ -5752,6 +5861,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/RecoveryPlanProviderSpecificFailoverInput']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'failoverDirection',
                     'networkType'
@@ -5759,14 +5869,17 @@ final class SiteRecoveryManagementClient
             ],
             'RecoveryPlanTestFailoverInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPlanTestFailoverInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'RecoveryPlanTestFailoverCleanupInputProperties' => [
                 'properties' => ['comments' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPlanTestFailoverCleanupInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPlanTestFailoverCleanupInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'RecoveryPointProperties' => [
@@ -5777,10 +5890,12 @@ final class SiteRecoveryManagementClient
                     ],
                     'recoveryPointType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPoint' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RecoveryPointProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPointCollection' => [
@@ -5791,6 +5906,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryServicesProviderProperties' => [
@@ -5823,10 +5939,12 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/HealthError']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryServicesProvider' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RecoveryServicesProviderProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryServicesProviderCollection' => [
@@ -5837,10 +5955,12 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReplicationProviderSpecificSettings' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReplicationProtectedItemProperties' => [
@@ -5883,14 +6003,17 @@ final class SiteRecoveryManagementClient
                     'providerSpecificDetails' => ['$ref' => '#/definitions/ReplicationProviderSpecificSettings'],
                     'recoveryContainerId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReplicationProtectedItem' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ReplicationProtectedItemProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EnableProtectionProviderSpecificInput' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EnableProtectionInputProperties' => [
@@ -5899,10 +6022,12 @@ final class SiteRecoveryManagementClient
                     'protectableItemId' => ['type' => 'string'],
                     'providerSpecificDetails' => ['$ref' => '#/definitions/EnableProtectionProviderSpecificInput']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EnableProtectionInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/EnableProtectionInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VMNicInputDetails' => [
@@ -5912,10 +6037,12 @@ final class SiteRecoveryManagementClient
                     'replicaNicStaticIPAddress' => ['type' => 'string'],
                     'selectionType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateReplicationProtectedItemProviderInput' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateReplicationProtectedItemInputProperties' => [
@@ -5939,14 +6066,17 @@ final class SiteRecoveryManagementClient
                     'recoveryAvailabilitySetId' => ['type' => 'string'],
                     'providerSpecificDetails' => ['$ref' => '#/definitions/UpdateReplicationProtectedItemProviderInput']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateReplicationProtectedItemInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UpdateReplicationProtectedItemInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DisableProtectionProviderSpecificInput' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DisableProtectionInputProperties' => [
@@ -5960,14 +6090,17 @@ final class SiteRecoveryManagementClient
                     ],
                     'replicationProviderInput' => ['$ref' => '#/definitions/DisableProtectionProviderSpecificInput']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DisableProtectionInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/DisableProtectionInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProviderSpecificFailoverInput' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PlannedFailoverInputProperties' => [
@@ -5975,10 +6108,12 @@ final class SiteRecoveryManagementClient
                     'failoverDirection' => ['type' => 'string'],
                     'providerSpecificDetails' => ['$ref' => '#/definitions/ProviderSpecificFailoverInput']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PlannedFailoverInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/PlannedFailoverInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UnplannedFailoverInputProperties' => [
@@ -5987,10 +6122,12 @@ final class SiteRecoveryManagementClient
                     'sourceSiteOperations' => ['type' => 'string'],
                     'providerSpecificDetails' => ['$ref' => '#/definitions/ProviderSpecificFailoverInput']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UnplannedFailoverInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UnplannedFailoverInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TestFailoverInputProperties' => [
@@ -6001,22 +6138,27 @@ final class SiteRecoveryManagementClient
                     'skipTestFailoverCleanup' => ['type' => 'string'],
                     'providerSpecificDetails' => ['$ref' => '#/definitions/ProviderSpecificFailoverInput']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TestFailoverInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/TestFailoverInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TestFailoverCleanupInputProperties' => [
                 'properties' => ['comments' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TestFailoverCleanupInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/TestFailoverCleanupInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'ReverseReplicationProviderSpecificInput' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReverseReplicationInputProperties' => [
@@ -6024,22 +6166,27 @@ final class SiteRecoveryManagementClient
                     'failoverDirection' => ['type' => 'string'],
                     'providerSpecificDetails' => ['$ref' => '#/definitions/ReverseReplicationProviderSpecificInput']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReverseReplicationInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ReverseReplicationInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateMobilityServiceRequestProperties' => [
                 'properties' => ['runAsAccountId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateMobilityServiceRequest' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UpdateMobilityServiceRequestProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplyRecoveryPointProviderSpecificInput' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplyRecoveryPointInputProperties' => [
@@ -6047,18 +6194,22 @@ final class SiteRecoveryManagementClient
                     'recoveryPointId' => ['type' => 'string'],
                     'providerSpecificDetails' => ['$ref' => '#/definitions/ApplyRecoveryPointProviderSpecificInput']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplyRecoveryPointInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ApplyRecoveryPointInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageClassificationProperties' => [
                 'properties' => ['friendlyName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageClassification' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/StorageClassificationProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageClassificationCollection' => [
@@ -6069,14 +6220,17 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageClassificationMappingProperties' => [
                 'properties' => ['targetStorageClassificationId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageClassificationMapping' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/StorageClassificationMappingProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageClassificationMappingCollection' => [
@@ -6087,14 +6241,17 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageMappingInputProperties' => [
                 'properties' => ['targetStorageClassificationId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageClassificationMappingInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/StorageMappingInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VCenterProperties' => [
@@ -6113,10 +6270,12 @@ final class SiteRecoveryManagementClient
                     'runAsAccountId' => ['type' => 'string'],
                     'fabricArmResourceName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VCenter' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/VCenterProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VCenterCollection' => [
@@ -6127,6 +6286,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AddVCenterRequestProperties' => [
@@ -6137,10 +6297,12 @@ final class SiteRecoveryManagementClient
                     'port' => ['type' => 'string'],
                     'runAsAccountId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AddVCenterRequest' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AddVCenterRequestProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateVCenterRequestProperties' => [
@@ -6151,18 +6313,22 @@ final class SiteRecoveryManagementClient
                     'port' => ['type' => 'string'],
                     'runAsAccountId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateVCenterRequest' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UpdateVCenterRequestProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RenewCertificateInputProperties' => [
                 'properties' => ['renewCertificateType' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RenewCertificateInput' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RenewCertificateInputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkMappingCollection' => [
@@ -6173,6 +6339,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReplicationProtectedItemCollection' => [
@@ -6183,6 +6350,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProtectedItemsQueryParameter' => [
@@ -6190,6 +6358,7 @@ final class SiteRecoveryManagementClient
                     'sourceFabricName' => ['type' => 'string'],
                     'recoveryPlanName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureToAzure' => [
@@ -6197,38 +6366,47 @@ final class SiteRecoveryManagementClient
                     'primaryFabricLocation' => ['type' => 'string'],
                     'recoveryFabricLocation' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VmmToAzure' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VmmToVmm' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureToAzure' => [
                 'properties' => ['primaryNetworkId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VmmToAzure' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VmmToVmm' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureToAzure' => [
                 'properties' => ['primaryNetworkId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VmmToAzure' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VmmToVmm' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Azure' => [
@@ -6239,14 +6417,17 @@ final class SiteRecoveryManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VMM' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVSite' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MobilityServiceUpdate' => [
@@ -6255,6 +6436,7 @@ final class SiteRecoveryManagementClient
                     'rebootStatus' => ['type' => 'string'],
                     'osType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProcessServer' => [
@@ -6308,6 +6490,7 @@ final class SiteRecoveryManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RetentionVolume' => [
@@ -6326,6 +6509,7 @@ final class SiteRecoveryManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataStore' => [
@@ -6336,6 +6520,7 @@ final class SiteRecoveryManagementClient
                     'freeSpace' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MasterTargetServer' => [
@@ -6363,6 +6548,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/HealthError']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RunAsAccount' => [
@@ -6370,6 +6556,7 @@ final class SiteRecoveryManagementClient
                     'accountId' => ['type' => 'string'],
                     'accountName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VMware' => [
@@ -6435,6 +6622,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'psTemplateVersion' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VMNicDetails' => [
@@ -6451,6 +6639,7 @@ final class SiteRecoveryManagementClient
                     'replicaNicStaticIPAddress' => ['type' => 'string'],
                     'selectionType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InitialReplicationDetails' => [
@@ -6458,6 +6647,7 @@ final class SiteRecoveryManagementClient
                     'initialReplicationType' => ['type' => 'string'],
                     'initialReplicationProgressPercentage' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DiskDetails' => [
@@ -6470,6 +6660,7 @@ final class SiteRecoveryManagementClient
                     'vhdId' => ['type' => 'string'],
                     'vhdName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplicaBaseReplicationDetails' => [
@@ -6491,6 +6682,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/DiskDetails']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplica2012' => [
@@ -6512,6 +6704,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/DiskDetails']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplica2012R2' => [
@@ -6533,6 +6726,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/DiskDetails']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureVmDiskDetails' => [
@@ -6545,6 +6739,7 @@ final class SiteRecoveryManagementClient
                     'targetDiskName' => ['type' => 'string'],
                     'lunId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OSDetails' => [
@@ -6556,6 +6751,7 @@ final class SiteRecoveryManagementClient
                     'oSMajorVersion' => ['type' => 'string'],
                     'oSMinorVersion' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplicaAzure' => [
@@ -6597,6 +6793,7 @@ final class SiteRecoveryManagementClient
                     'useManagedDisks' => ['type' => 'string'],
                     'licenseType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMageAzureV2ProtectedDiskDetails' => [
@@ -6640,6 +6837,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'diskResized' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMageAzureV2' => [
@@ -6724,6 +6922,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/HealthError']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OSDiskDetails' => [
@@ -6732,6 +6931,7 @@ final class SiteRecoveryManagementClient
                     'osType' => ['type' => 'string'],
                     'vhdName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMageProtectedDiskDetails' => [
@@ -6775,6 +6975,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'diskResized' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMageAgentDetails' => [
@@ -6783,6 +6984,7 @@ final class SiteRecoveryManagementClient
                     'agentUpdateStatus' => ['type' => 'string'],
                     'postUpdateRebootStatus' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMage' => [
@@ -6863,6 +7065,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/HealthError']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'A2AProtectedDiskDetails' => [
@@ -6893,6 +7096,7 @@ final class SiteRecoveryManagementClient
                         'format' => 'double'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RoleAssignment' => [
@@ -6903,6 +7107,7 @@ final class SiteRecoveryManagementClient
                     'principalId' => ['type' => 'string'],
                     'roleDefinitionId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InputEndpoint' => [
@@ -6918,6 +7123,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'protocol' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureToAzureVmSyncedConfigDetails' => [
@@ -6935,6 +7141,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/InputEndpoint']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'A2A' => [
@@ -6977,6 +7184,7 @@ final class SiteRecoveryManagementClient
                     'vmProtectionStateDescription' => ['type' => 'string'],
                     'lifecycleId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplicaAzure' => [
@@ -6999,10 +7207,12 @@ final class SiteRecoveryManagementClient
                     'targetAzureV2ResourceGroupId' => ['type' => 'string'],
                     'useManagedDisks' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'San' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMageAzureV2' => [
@@ -7026,6 +7236,7 @@ final class SiteRecoveryManagementClient
                     'targetAzureV2ResourceGroupId' => ['type' => 'string'],
                     'useManagedDisks' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['storageAccountId']
             ],
             'InMageVolumeExclusionOptions' => [
@@ -7033,10 +7244,12 @@ final class SiteRecoveryManagementClient
                     'volumeLabel' => ['type' => 'string'],
                     'OnlyExcludeIfSingleVolume' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMageDiskSignatureExclusionOptions' => [
                 'properties' => ['diskSignature' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMageDiskExclusionInput' => [
@@ -7050,6 +7263,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/InMageDiskSignatureExclusionOptions']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMage' => [
@@ -7068,6 +7282,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'A2AVmDiskInputDetails' => [
@@ -7076,6 +7291,7 @@ final class SiteRecoveryManagementClient
                     'recoveryAzureStorageAccountId' => ['type' => 'string'],
                     'primaryStagingAzureStorageAccountId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'A2A' => [
@@ -7090,6 +7306,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/A2AVmDiskInputDetails']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -7099,6 +7316,7 @@ final class SiteRecoveryManagementClient
                     'type' => ['type' => 'string'],
                     'location' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplicaAzure' => [
@@ -7107,6 +7325,7 @@ final class SiteRecoveryManagementClient
                     'recoveryAzureV2ResourceGroupId' => ['type' => 'string'],
                     'useManagedDisks' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMageAzureV2' => [
@@ -7115,6 +7334,7 @@ final class SiteRecoveryManagementClient
                     'recoveryAzureV2ResourceGroupId' => ['type' => 'string'],
                     'useManagedDisks' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'A2A' => [
@@ -7122,6 +7342,7 @@ final class SiteRecoveryManagementClient
                     'recoveryCloudServiceId' => ['type' => 'string'],
                     'recoveryResourceGroupId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplicaBaseEventDetails' => [
@@ -7131,6 +7352,7 @@ final class SiteRecoveryManagementClient
                     'remoteContainerName' => ['type' => 'string'],
                     'remoteFabricName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplica2012' => [
@@ -7140,6 +7362,7 @@ final class SiteRecoveryManagementClient
                     'remoteContainerName' => ['type' => 'string'],
                     'remoteFabricName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplica2012R2' => [
@@ -7149,6 +7372,7 @@ final class SiteRecoveryManagementClient
                     'remoteContainerName' => ['type' => 'string'],
                     'remoteFabricName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplicaAzure' => [
@@ -7157,6 +7381,7 @@ final class SiteRecoveryManagementClient
                     'fabricName' => ['type' => 'string'],
                     'remoteContainerName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'A2A' => [
@@ -7168,6 +7393,7 @@ final class SiteRecoveryManagementClient
                     'remoteFabricName' => ['type' => 'string'],
                     'remoteFabricLocation' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMageAzureV2' => [
@@ -7180,6 +7406,7 @@ final class SiteRecoveryManagementClient
                     'summary' => ['type' => 'string'],
                     'siteName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobStatus' => [
@@ -7189,6 +7416,7 @@ final class SiteRecoveryManagementClient
                     'jobStatus' => ['type' => 'string'],
                     'affectedObjectType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVVirtualMachine' => [
@@ -7201,6 +7429,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/DiskDetails']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DiskVolumeDetails' => [
@@ -7208,6 +7437,7 @@ final class SiteRecoveryManagementClient
                     'label' => ['type' => 'string'],
                     'name' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMageDiskDetails' => [
@@ -7222,6 +7452,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/DiskVolumeDetails']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VMwareVirtualMachine' => [
@@ -7243,14 +7474,17 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/HealthError']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReplicationGroupDetails' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMage' => [
                 'properties' => ['replicaVmDeletionStatus' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplicaAzure' => [
@@ -7260,6 +7494,7 @@ final class SiteRecoveryManagementClient
                     'secondaryKekCertificatePfx' => ['type' => 'string'],
                     'recoveryPointId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplicaAzureFailback' => [
@@ -7268,6 +7503,7 @@ final class SiteRecoveryManagementClient
                     'recoveryVmCreationOption' => ['type' => 'string'],
                     'providerIdForAlternateRecovery' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMageAzureV2' => [
@@ -7275,6 +7511,7 @@ final class SiteRecoveryManagementClient
                     'vaultLocation' => ['type' => 'string'],
                     'recoveryPointId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMage' => [
@@ -7282,6 +7519,7 @@ final class SiteRecoveryManagementClient
                     'recoveryPointType' => ['type' => 'string'],
                     'recoveryPointId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'A2A' => [
@@ -7289,6 +7527,7 @@ final class SiteRecoveryManagementClient
                     'recoveryPointId' => ['type' => 'string'],
                     'cloudServiceCreationOption' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplicaAzure' => [
@@ -7300,6 +7539,7 @@ final class SiteRecoveryManagementClient
                     'storageAccountId' => ['type' => 'string'],
                     'logStorageAccountId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMageAzureV2' => [
@@ -7315,6 +7555,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMage' => [
@@ -7331,6 +7572,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'A2A' => [
@@ -7345,6 +7587,7 @@ final class SiteRecoveryManagementClient
                     'recoveryAvailabilitySetId' => ['type' => 'string'],
                     'policyId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplicaAzure' => [
@@ -7353,14 +7596,17 @@ final class SiteRecoveryManagementClient
                     'primaryKekCertificatePfx' => ['type' => 'string'],
                     'secondaryKekCertificatePfx' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMageAzureV2' => [
                 'properties' => ['vaultLocation' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'A2A' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobEntity' => [
@@ -7372,10 +7618,12 @@ final class SiteRecoveryManagementClient
                     'targetInstanceType' => ['type' => 'string'],
                     'jobScenarioName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobTaskDetails' => [
                 'properties' => ['jobTask' => ['$ref' => '#/definitions/JobEntity']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineTaskDetails' => [
@@ -7384,6 +7632,7 @@ final class SiteRecoveryManagementClient
                     'skippedReasonString' => ['type' => 'string'],
                     'jobTask' => ['$ref' => '#/definitions/JobEntity']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FabricReplicationGroupTaskDetails' => [
@@ -7392,6 +7641,7 @@ final class SiteRecoveryManagementClient
                     'skippedReasonString' => ['type' => 'string'],
                     'jobTask' => ['$ref' => '#/definitions/JobEntity']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ManualActionTaskDetails' => [
@@ -7400,6 +7650,7 @@ final class SiteRecoveryManagementClient
                     'instructions' => ['type' => 'string'],
                     'observation' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ScriptActionTaskDetails' => [
@@ -7409,6 +7660,7 @@ final class SiteRecoveryManagementClient
                     'output' => ['type' => 'string'],
                     'isPrimarySideScript' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VmNicUpdatesTaskDetails' => [
@@ -7417,6 +7669,7 @@ final class SiteRecoveryManagementClient
                     'nicId' => ['type' => 'string'],
                     'name' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InconsistentVmDetails' => [
@@ -7432,6 +7685,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConsistencyCheckTaskDetails' => [
@@ -7439,6 +7693,7 @@ final class SiteRecoveryManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/InconsistentVmDetails']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AutomationRunbookTaskDetails' => [
@@ -7453,6 +7708,7 @@ final class SiteRecoveryManagementClient
                     'jobOutput' => ['type' => 'string'],
                     'isPrimarySideScript' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InlineWorkflowTaskDetails' => [
@@ -7460,6 +7716,7 @@ final class SiteRecoveryManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPlanGroupTaskDetails' => [
@@ -7468,6 +7725,7 @@ final class SiteRecoveryManagementClient
                     'groupId' => ['type' => 'string'],
                     'rpGroupType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecoveryPlanShutdownGroupTaskDetails' => [
@@ -7476,10 +7734,12 @@ final class SiteRecoveryManagementClient
                     'groupId' => ['type' => 'string'],
                     'rpGroupType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AsrJobDetails' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TestFailoverReplicationProtectedItemDetails' => [
@@ -7492,6 +7752,7 @@ final class SiteRecoveryManagementClient
                     'networkFriendlyName' => ['type' => 'string'],
                     'subnet' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TestFailoverJobDetails' => [
@@ -7506,6 +7767,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['$ref' => '#/definitions/TestFailoverReplicationProtectedItemDetails']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExportJobDetails' => [
@@ -7513,14 +7775,17 @@ final class SiteRecoveryManagementClient
                     'blobUri' => ['type' => 'string'],
                     'sasToken' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SwitchProtectionJobDetails' => [
                 'properties' => ['newReplicationProtectedItemId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'A2A' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'A2A' => [
@@ -7535,6 +7800,7 @@ final class SiteRecoveryManagementClient
                     'recoveryAvailabilitySetId' => ['type' => 'string'],
                     'policyId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplicaAzure' => [
@@ -7555,6 +7821,7 @@ final class SiteRecoveryManagementClient
                     'encryption' => ['type' => 'string'],
                     'activeStorageAccountId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplicaBasePolicyDetails' => [
@@ -7582,6 +7849,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'replicaDeletionOption' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplica2012' => [
@@ -7609,6 +7877,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'replicaDeletionOption' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplica2012R2' => [
@@ -7640,6 +7909,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'replicaDeletionOption' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMageBasePolicyDetails' => [
@@ -7658,6 +7928,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'multiVmSyncStatus' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMageAzureV2' => [
@@ -7680,6 +7951,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'multiVmSyncStatus' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMage' => [
@@ -7698,6 +7970,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'multiVmSyncStatus' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'A2A' => [
@@ -7720,6 +7993,7 @@ final class SiteRecoveryManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplicaAzure' => [
@@ -7743,6 +8017,7 @@ final class SiteRecoveryManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplica2012' => [
@@ -7770,6 +8045,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'replicaDeletion' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplica2012R2' => [
@@ -7801,6 +8077,7 @@ final class SiteRecoveryManagementClient
                     ],
                     'replicaDeletion' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InMageAzureV2' => [
@@ -7829,6 +8106,7 @@ final class SiteRecoveryManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['multiVmSyncStatus']
             ],
             'InMage' => [
@@ -7853,6 +8131,7 @@ final class SiteRecoveryManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['multiVmSyncStatus']
             ],
             'A2A' => [
@@ -7877,6 +8156,7 @@ final class SiteRecoveryManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['multiVmSyncStatus']
             ],
             'ScriptActionDetails' => [
@@ -7891,6 +8171,7 @@ final class SiteRecoveryManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'path',
                     'fabricLocation'
@@ -7908,10 +8189,12 @@ final class SiteRecoveryManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['fabricLocation']
             ],
             'ManualActionDetails' => [
                 'properties' => ['description' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HyperVReplicaAzure' => [
@@ -7928,6 +8211,7 @@ final class SiteRecoveryManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['vaultLocation']
             ],
             'HyperVReplicaAzureFailback' => [
@@ -7947,6 +8231,7 @@ final class SiteRecoveryManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'dataSyncOption',
                     'recoveryVmCreationOption'
@@ -7965,6 +8250,7 @@ final class SiteRecoveryManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'vaultLocation',
                     'recoveryPointType'
@@ -7979,6 +8265,7 @@ final class SiteRecoveryManagementClient
                         'Custom'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['recoveryPointType']
             ],
             'A2A' => [
@@ -7994,10 +8281,12 @@ final class SiteRecoveryManagementClient
                     ],
                     'cloudServiceCreationOption' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['recoveryPointType']
             ],
             'A2A' => [
                 'properties' => ['location' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

@@ -766,6 +766,7 @@ final class MySQLManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TrackedResource' => [
@@ -776,6 +777,7 @@ final class MySQLManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'ServerProperties' => [
@@ -809,6 +811,7 @@ final class MySQLManagementClient
                     ],
                     'fullyQualifiedDomainName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServerPropertiesForCreate' => [
@@ -832,6 +835,7 @@ final class MySQLManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Default' => [
@@ -839,6 +843,7 @@ final class MySQLManagementClient
                     'administratorLogin' => ['type' => 'string'],
                     'administratorLoginPassword' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'administratorLogin',
                     'administratorLoginPassword'
@@ -852,6 +857,7 @@ final class MySQLManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'sourceServerId',
                     'restorePointInTime'
@@ -874,6 +880,7 @@ final class MySQLManagementClient
                     'size' => ['type' => 'string'],
                     'family' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Server' => [
@@ -881,6 +888,7 @@ final class MySQLManagementClient
                     'sku' => ['$ref' => '#/definitions/Sku'],
                     'properties' => ['$ref' => '#/definitions/ServerProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServerForCreate' => [
@@ -893,6 +901,7 @@ final class MySQLManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'properties',
                     'location'
@@ -920,6 +929,7 @@ final class MySQLManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServerUpdateParameters' => [
@@ -931,6 +941,7 @@ final class MySQLManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServerListResult' => [
@@ -938,6 +949,7 @@ final class MySQLManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Server']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FirewallRuleProperties' => [
@@ -945,6 +957,7 @@ final class MySQLManagementClient
                     'startIpAddress' => ['type' => 'string'],
                     'endIpAddress' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'startIpAddress',
                     'endIpAddress'
@@ -952,6 +965,7 @@ final class MySQLManagementClient
             ],
             'FirewallRule' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/FirewallRuleProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'FirewallRuleListResult' => [
@@ -959,6 +973,7 @@ final class MySQLManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/FirewallRule']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DatabaseProperties' => [
@@ -966,10 +981,12 @@ final class MySQLManagementClient
                     'charset' => ['type' => 'string'],
                     'collation' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Database' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/DatabaseProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DatabaseListResult' => [
@@ -977,6 +994,7 @@ final class MySQLManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Database']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConfigurationProperties' => [
@@ -988,10 +1006,12 @@ final class MySQLManagementClient
                     'allowedValues' => ['type' => 'string'],
                     'source' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Configuration' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ConfigurationProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConfigurationListResult' => [
@@ -999,6 +1019,7 @@ final class MySQLManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Configuration']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationDisplay' => [
@@ -1008,6 +1029,7 @@ final class MySQLManagementClient
                     'operation' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -1027,6 +1049,7 @@ final class MySQLManagementClient
                         'additionalProperties' => ['type' => 'object']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -1034,6 +1057,7 @@ final class MySQLManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Operation']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LogFileProperties' => [
@@ -1054,10 +1078,12 @@ final class MySQLManagementClient
                     'type' => ['type' => 'string'],
                     'url' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LogFile' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/LogFileProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LogFileListResult' => [
@@ -1065,6 +1091,7 @@ final class MySQLManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/LogFile']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

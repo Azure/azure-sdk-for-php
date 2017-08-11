@@ -4436,10 +4436,12 @@ final class StorSimple8000SeriesManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['initiatorName']
             ],
             'AccessControlRecord' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AccessControlRecordProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'AccessControlRecordList' => [
@@ -4447,6 +4449,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/AccessControlRecord']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'AcsConfiguration' => [
@@ -4455,6 +4458,7 @@ final class StorSimple8000SeriesManagementClient
                     'realm' => ['type' => 'string'],
                     'serviceUrl' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'namespace',
                     'realm',
@@ -4473,6 +4477,7 @@ final class StorSimple8000SeriesManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AlertErrorDetails' => [
@@ -4484,6 +4489,7 @@ final class StorSimple8000SeriesManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AlertProperties' => [
@@ -4537,6 +4543,7 @@ final class StorSimple8000SeriesManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'title',
                     'scope',
@@ -4550,6 +4557,7 @@ final class StorSimple8000SeriesManagementClient
             ],
             'Alert' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AlertProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'AlertFilter' => [
@@ -4582,6 +4590,7 @@ final class StorSimple8000SeriesManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AlertList' => [
@@ -4592,6 +4601,7 @@ final class StorSimple8000SeriesManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'AlertNotificationProperties' => [
@@ -4616,10 +4626,12 @@ final class StorSimple8000SeriesManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['emailNotification']
             ],
             'AlertSettings' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AlertNotificationProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'AsymmetricEncryptedSecret' => [
@@ -4635,6 +4647,7 @@ final class StorSimple8000SeriesManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'value',
                     'encryptionAlgorithm'
@@ -4647,6 +4660,7 @@ final class StorSimple8000SeriesManagementClient
                     'operation' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AvailableProviderOperation' => [
@@ -4656,6 +4670,7 @@ final class StorSimple8000SeriesManagementClient
                     'origin' => ['type' => 'string'],
                     'properties' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AvailableProviderOperationList' => [
@@ -4666,6 +4681,7 @@ final class StorSimple8000SeriesManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'BackupElement' => [
@@ -4688,6 +4704,7 @@ final class StorSimple8000SeriesManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'elementId',
                     'elementName',
@@ -4729,6 +4746,7 @@ final class StorSimple8000SeriesManagementClient
                         'items' => ['$ref' => '#/definitions/BackupElement']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'createdOn',
                     'sizeInBytes',
@@ -4737,6 +4755,7 @@ final class StorSimple8000SeriesManagementClient
             ],
             'Backup' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BackupProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'BackupFilter' => [
@@ -4748,6 +4767,7 @@ final class StorSimple8000SeriesManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackupList' => [
@@ -4758,6 +4778,7 @@ final class StorSimple8000SeriesManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'BackupPolicyProperties' => [
@@ -4794,10 +4815,12 @@ final class StorSimple8000SeriesManagementClient
                     ],
                     'ssmHostName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['volumeIds']
             ],
             'BackupPolicy' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BackupPolicyProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'BackupPolicyList' => [
@@ -4805,6 +4828,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/BackupPolicy']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'ScheduleRecurrence' => [
@@ -4838,6 +4862,7 @@ final class StorSimple8000SeriesManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'recurrenceType',
                     'recurrenceValue'
@@ -4873,6 +4898,7 @@ final class StorSimple8000SeriesManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'scheduleRecurrence',
                     'backupType',
@@ -4883,6 +4909,7 @@ final class StorSimple8000SeriesManagementClient
             ],
             'BackupSchedule' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BackupScheduleProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'BackupScheduleList' => [
@@ -4890,6 +4917,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/BackupSchedule']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'Time' => [
@@ -4907,6 +4935,7 @@ final class StorSimple8000SeriesManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'hours',
                     'minutes',
@@ -4937,6 +4966,7 @@ final class StorSimple8000SeriesManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'start',
                     'stop',
@@ -4955,10 +4985,12 @@ final class StorSimple8000SeriesManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['schedules']
             ],
             'BandwidthSetting' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BandwidthRateSettingProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'BandwidthSettingList' => [
@@ -4966,6 +4998,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/BandwidthSetting']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'BaseModel' => [
@@ -4978,6 +5011,7 @@ final class StorSimple8000SeriesManagementClient
                         'enum' => ['Series8000']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ChapSettings' => [
@@ -4987,6 +5021,7 @@ final class StorSimple8000SeriesManagementClient
                     'targetUser' => ['type' => 'string'],
                     'targetSecret' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClearAlertRequest' => [
@@ -4997,6 +5032,7 @@ final class StorSimple8000SeriesManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['alerts']
             ],
             'CloneRequest' => [
@@ -5009,6 +5045,7 @@ final class StorSimple8000SeriesManagementClient
                     ],
                     'backupElement' => ['$ref' => '#/definitions/BackupElement']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'targetDeviceId',
                     'targetVolumeName',
@@ -5030,6 +5067,7 @@ final class StorSimple8000SeriesManagementClient
                     'vmImageName' => ['type' => 'string'],
                     'modelNumber' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'vnetRegion'
@@ -5043,6 +5081,7 @@ final class StorSimple8000SeriesManagementClient
                     'publisher' => ['type' => 'string'],
                     'sku' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'version',
@@ -5073,6 +5112,7 @@ final class StorSimple8000SeriesManagementClient
                         'items' => ['$ref' => '#/definitions/VmImage']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'modelNumber',
                     'cloudPlatform',
@@ -5085,6 +5125,7 @@ final class StorSimple8000SeriesManagementClient
             ],
             'CloudApplianceConfiguration' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/CloudApplianceConfigurationProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'CloudApplianceConfigurationList' => [
@@ -5092,6 +5133,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/CloudApplianceConfiguration']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'CloudApplianceSettings' => [
@@ -5099,6 +5141,7 @@ final class StorSimple8000SeriesManagementClient
                     'serviceDataEncryptionKey' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret'],
                     'channelIntegrityKey' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SecondaryDNSSettings' => [
@@ -5106,6 +5149,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkInterfaceData0Settings' => [
@@ -5113,6 +5157,7 @@ final class StorSimple8000SeriesManagementClient
                     'controllerZeroIp' => ['type' => 'string'],
                     'controllerOneIp' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConfigureDeviceRequestProperties' => [
@@ -5123,6 +5168,7 @@ final class StorSimple8000SeriesManagementClient
                     'dnsSettings' => ['$ref' => '#/definitions/SecondaryDNSSettings'],
                     'networkInterfaceData0Settings' => ['$ref' => '#/definitions/NetworkInterfaceData0Settings']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'friendlyName',
                     'currentDeviceName',
@@ -5131,6 +5177,7 @@ final class StorSimple8000SeriesManagementClient
             ],
             'ConfigureDeviceRequest' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ConfigureDeviceRequestProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'ControllerPowerStateChangeRequestProperties' => [
@@ -5175,6 +5222,7 @@ final class StorSimple8000SeriesManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'action',
                     'activeController',
@@ -5184,6 +5232,7 @@ final class StorSimple8000SeriesManagementClient
             ],
             'ControllerPowerStateChangeRequest' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ControllerPowerStateChangeRequestProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'DataStatistics' => [
@@ -5205,6 +5254,7 @@ final class StorSimple8000SeriesManagementClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeviceDetails' => [
@@ -5218,6 +5268,7 @@ final class StorSimple8000SeriesManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeviceRolloverDetails' => [
@@ -5245,6 +5296,7 @@ final class StorSimple8000SeriesManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeviceProperties' => [
@@ -5349,6 +5401,7 @@ final class StorSimple8000SeriesManagementClient
                     'details' => ['$ref' => '#/definitions/DeviceDetails'],
                     'rolloverDetails' => ['$ref' => '#/definitions/DeviceRolloverDetails']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'friendlyName',
                     'activationTime',
@@ -5367,6 +5420,7 @@ final class StorSimple8000SeriesManagementClient
             ],
             'Device' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/DeviceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'DeviceList' => [
@@ -5374,14 +5428,17 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Device']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'DevicePatchProperties' => [
                 'properties' => ['deviceDescription' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DevicePatch' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/DevicePatchProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'DimensionFilter' => [
@@ -5389,6 +5446,7 @@ final class StorSimple8000SeriesManagementClient
                     'name' => ['type' => 'string'],
                     'values' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DNSSettings' => [
@@ -5404,6 +5462,7 @@ final class StorSimple8000SeriesManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EncryptionSettingsProperties' => [
@@ -5423,6 +5482,7 @@ final class StorSimple8000SeriesManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'encryptionStatus',
                     'keyRolloverStatus'
@@ -5430,6 +5490,7 @@ final class StorSimple8000SeriesManagementClient
             ],
             'EncryptionSettings' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/EncryptionSettingsProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'FailoverRequest' => [
@@ -5440,6 +5501,7 @@ final class StorSimple8000SeriesManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VolumeFailoverMetadata' => [
@@ -5465,6 +5527,7 @@ final class StorSimple8000SeriesManagementClient
                     'backupId' => ['type' => 'string'],
                     'backupPolicyId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VolumeContainerFailoverMetadata' => [
@@ -5475,6 +5538,7 @@ final class StorSimple8000SeriesManagementClient
                         'items' => ['$ref' => '#/definitions/VolumeFailoverMetadata']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FailoverSetEligibilityResult' => [
@@ -5482,6 +5546,7 @@ final class StorSimple8000SeriesManagementClient
                     'isEligibleForFailover' => ['type' => 'boolean'],
                     'errorMessage' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FailoverSet' => [
@@ -5492,6 +5557,7 @@ final class StorSimple8000SeriesManagementClient
                     ],
                     'eligibilityResult' => ['$ref' => '#/definitions/FailoverSetEligibilityResult']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FailoverSetsList' => [
@@ -5499,6 +5565,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/FailoverSet']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TargetEligibilityErrorMessage' => [
@@ -5518,6 +5585,7 @@ final class StorSimple8000SeriesManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TargetEligibilityResult' => [
@@ -5534,6 +5602,7 @@ final class StorSimple8000SeriesManagementClient
                         'items' => ['$ref' => '#/definitions/TargetEligibilityErrorMessage']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FailoverTarget' => [
@@ -5577,6 +5646,7 @@ final class StorSimple8000SeriesManagementClient
                     'friendlyDeviceSoftwareVersion' => ['type' => 'string'],
                     'eligibilityResult' => ['$ref' => '#/definitions/TargetEligibilityResult']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FailoverTargetsList' => [
@@ -5584,6 +5654,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/FailoverTarget']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Feature' => [
@@ -5598,6 +5669,7 @@ final class StorSimple8000SeriesManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'status'
@@ -5605,6 +5677,7 @@ final class StorSimple8000SeriesManagementClient
             ],
             'FeatureFilter' => [
                 'properties' => ['deviceId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FeatureList' => [
@@ -5612,6 +5685,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Feature']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'HardwareComponent' => [
@@ -5632,6 +5706,7 @@ final class StorSimple8000SeriesManagementClient
                     ],
                     'statusDisplayName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'componentId',
                     'displayName',
@@ -5651,6 +5726,7 @@ final class StorSimple8000SeriesManagementClient
                         'items' => ['$ref' => '#/definitions/HardwareComponent']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'displayName',
                     'lastUpdatedTime',
@@ -5659,6 +5735,7 @@ final class StorSimple8000SeriesManagementClient
             ],
             'HardwareComponentGroup' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/HardwareComponentGroupProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'HardwareComponentGroupList' => [
@@ -5666,6 +5743,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/HardwareComponentGroup']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'JobErrorItem' => [
@@ -5677,6 +5755,7 @@ final class StorSimple8000SeriesManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'code',
                     'message'
@@ -5691,6 +5770,7 @@ final class StorSimple8000SeriesManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'code',
                     'message'
@@ -5711,6 +5791,7 @@ final class StorSimple8000SeriesManagementClient
                     'detail' => ['type' => 'string'],
                     'errorCode' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['stageStatus']
             ],
             'JobProperties' => [
@@ -5752,6 +5833,7 @@ final class StorSimple8000SeriesManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['jobType']
             ],
             'Job' => [
@@ -5780,6 +5862,7 @@ final class StorSimple8000SeriesManagementClient
                     'error' => ['$ref' => '#/definitions/JobErrorDetails'],
                     'properties' => ['$ref' => '#/definitions/JobProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'status',
                     'percentComplete'
@@ -5794,6 +5877,7 @@ final class StorSimple8000SeriesManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobList' => [
@@ -5804,10 +5888,12 @@ final class StorSimple8000SeriesManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'Key' => [
                 'properties' => ['activationKey' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['activationKey']
             ],
             'ListFailoverTargetsRequest' => [
@@ -5815,6 +5901,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ManagerIntrinsicSettings' => [
@@ -5825,10 +5912,12 @@ final class StorSimple8000SeriesManagementClient
                         'HelsinkiV1'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['type']
             ],
             'ManagerSku' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'ManagerProperties' => [
@@ -5837,6 +5926,7 @@ final class StorSimple8000SeriesManagementClient
                     'sku' => ['$ref' => '#/definitions/ManagerSku'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Manager' => [
@@ -5844,6 +5934,7 @@ final class StorSimple8000SeriesManagementClient
                     'properties' => ['$ref' => '#/definitions/ManagerProperties'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ManagerExtendedInfoProperties' => [
@@ -5855,6 +5946,7 @@ final class StorSimple8000SeriesManagementClient
                     'portalCertificateThumbprint' => ['type' => 'string'],
                     'algorithm' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'integrityKey',
                     'algorithm'
@@ -5865,6 +5957,7 @@ final class StorSimple8000SeriesManagementClient
                     'properties' => ['$ref' => '#/definitions/ManagerExtendedInfoProperties'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ManagerList' => [
@@ -5872,6 +5965,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Manager']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'ManagerPatch' => [
@@ -5879,6 +5973,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MetricAvailablity' => [
@@ -5886,6 +5981,7 @@ final class StorSimple8000SeriesManagementClient
                     'timeGrain' => ['type' => 'string'],
                     'retention' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MetricData' => [
@@ -5915,6 +6011,7 @@ final class StorSimple8000SeriesManagementClient
                         'format' => 'double'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MetricName' => [
@@ -5922,6 +6019,7 @@ final class StorSimple8000SeriesManagementClient
                     'value' => ['type' => 'string'],
                     'localizedValue' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MetricDimension' => [
@@ -5929,6 +6027,7 @@ final class StorSimple8000SeriesManagementClient
                     'name' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MetricDefinition' => [
@@ -5968,6 +6067,7 @@ final class StorSimple8000SeriesManagementClient
                     'category' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MetricDefinitionList' => [
@@ -5975,10 +6075,12 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/MetricDefinition']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MetricNameFilter' => [
                 'properties' => ['value' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MetricFilter' => [
@@ -5996,6 +6098,7 @@ final class StorSimple8000SeriesManagementClient
                     'category' => ['type' => 'string'],
                     'dimensions' => ['$ref' => '#/definitions/DimensionFilter']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['category']
             ],
             'Metrics' => [
@@ -6043,6 +6146,7 @@ final class StorSimple8000SeriesManagementClient
                         'items' => ['$ref' => '#/definitions/MetricData']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MetricList' => [
@@ -6050,6 +6154,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Metrics']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NicIPv4' => [
@@ -6060,6 +6165,7 @@ final class StorSimple8000SeriesManagementClient
                     'controller0Ipv4Address' => ['type' => 'string'],
                     'controller1Ipv4Address' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NicIPv6' => [
@@ -6070,6 +6176,7 @@ final class StorSimple8000SeriesManagementClient
                     'controller0Ipv6Address' => ['type' => 'string'],
                     'controller1Ipv6Address' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkAdapters' => [
@@ -6119,6 +6226,7 @@ final class StorSimple8000SeriesManagementClient
                     'nicIpv4Settings' => ['$ref' => '#/definitions/NicIPv4'],
                     'nicIpv6Settings' => ['$ref' => '#/definitions/NicIPv6']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'interfaceId',
                     'netInterfaceStatus',
@@ -6131,6 +6239,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/NetworkAdapters']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'WebproxySettings' => [
@@ -6147,6 +6256,7 @@ final class StorSimple8000SeriesManagementClient
                     ],
                     'username' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'authentication',
                     'username'
@@ -6158,6 +6268,7 @@ final class StorSimple8000SeriesManagementClient
                     'networkAdapters' => ['$ref' => '#/definitions/NetworkAdapterList'],
                     'webproxySettings' => ['$ref' => '#/definitions/WebproxySettings']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'dnsSettings',
                     'networkAdapters',
@@ -6166,6 +6277,7 @@ final class StorSimple8000SeriesManagementClient
             ],
             'NetworkSettings' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/NetworkSettingsProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'NetworkSettingsPatchProperties' => [
@@ -6173,14 +6285,17 @@ final class StorSimple8000SeriesManagementClient
                     'dnsSettings' => ['$ref' => '#/definitions/DNSSettings'],
                     'networkAdapters' => ['$ref' => '#/definitions/NetworkAdapterList']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NetworkSettingsPatch' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/NetworkSettingsPatchProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'PublicKey' => [
                 'properties' => ['key' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['key']
             ],
             'RemoteManagementSettings' => [
@@ -6196,6 +6311,7 @@ final class StorSimple8000SeriesManagementClient
                     ],
                     'remoteManagementCertificate' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['remoteManagementMode']
             ],
             'RemoteManagementSettingsPatch' => [
@@ -6208,6 +6324,7 @@ final class StorSimple8000SeriesManagementClient
                         'HttpsAndHttpEnabled'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['remoteManagementMode']
             ],
             'Resource' => [
@@ -6221,6 +6338,7 @@ final class StorSimple8000SeriesManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'SecuritySettingsProperties' => [
@@ -6228,6 +6346,7 @@ final class StorSimple8000SeriesManagementClient
                     'remoteManagementSettings' => ['$ref' => '#/definitions/RemoteManagementSettings'],
                     'chapSettings' => ['$ref' => '#/definitions/ChapSettings']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'remoteManagementSettings',
                     'chapSettings'
@@ -6235,6 +6354,7 @@ final class StorSimple8000SeriesManagementClient
             ],
             'SecuritySettings' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SecuritySettingsProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'SecuritySettingsPatchProperties' => [
@@ -6245,10 +6365,12 @@ final class StorSimple8000SeriesManagementClient
                     'chapSettings' => ['$ref' => '#/definitions/ChapSettings'],
                     'cloudApplianceSettings' => ['$ref' => '#/definitions/CloudApplianceSettings']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SecuritySettingsPatch' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SecuritySettingsPatchProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'SendTestAlertEmailRequest' => [
@@ -6256,6 +6378,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['emailList']
             ],
             'StorageAccountCredentialProperties' => [
@@ -6274,6 +6397,7 @@ final class StorSimple8000SeriesManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'endPoint',
                     'sslStatus'
@@ -6281,6 +6405,7 @@ final class StorSimple8000SeriesManagementClient
             ],
             'StorageAccountCredential' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/StorageAccountCredentialProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'StorageAccountCredentialList' => [
@@ -6288,6 +6413,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/StorageAccountCredential']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'SymmetricEncryptedSecret' => [
@@ -6303,6 +6429,7 @@ final class StorSimple8000SeriesManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'value',
                     'encryptionAlgorithm'
@@ -6317,10 +6444,12 @@ final class StorSimple8000SeriesManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['timeZone']
             ],
             'TimeSettings' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/TimeSettingsProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'UpdatesProperties' => [
@@ -6333,10 +6462,12 @@ final class StorSimple8000SeriesManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Updates' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UpdatesProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'VolumeProperties' => [
@@ -6393,6 +6524,7 @@ final class StorSimple8000SeriesManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'sizeInBytes',
                     'volumeType',
@@ -6403,6 +6535,7 @@ final class StorSimple8000SeriesManagementClient
             ],
             'Volume' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/VolumeProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'VolumeContainerProperties' => [
@@ -6437,10 +6570,12 @@ final class StorSimple8000SeriesManagementClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['storageAccountCredentialId']
             ],
             'VolumeContainer' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/VolumeContainerProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'VolumeContainerList' => [
@@ -6448,6 +6583,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/VolumeContainer']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'VolumeList' => [
@@ -6455,6 +6591,7 @@ final class StorSimple8000SeriesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Volume']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ]
         ]

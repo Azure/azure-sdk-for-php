@@ -9,6 +9,14 @@ use Microsoft\Rest\Internal\DataRef;
 final class SwaggerObject extends DataRef
 {
     /**
+     * @return string
+     */
+    function host()
+    {
+        return $this->getChildValue('host');
+    }
+
+    /**
      * @return SchemaObjectMap
      */
     function definitions()

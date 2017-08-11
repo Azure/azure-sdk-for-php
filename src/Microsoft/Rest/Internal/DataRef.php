@@ -45,9 +45,17 @@ class DataRef
     {
         $result = [];
         foreach ($this->keys() as $key) {
-            $result[] = new $className($this, $key);
+            $result[$key] = new $className($this, $key);
         }
         return $result;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    protected function getValue()
+    {
+        return $this->value;
     }
 
     /**

@@ -818,10 +818,12 @@ final class BatchManagementClient
         'definitions' => [
             'AutoStorageBaseProperties' => [
                 'properties' => ['storageAccountId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['storageAccountId']
             ],
             'BatchAccountUpdateProperties' => [
                 'properties' => ['autoStorage' => ['$ref' => '#/definitions/AutoStorageBaseProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'KeyVaultReference' => [
@@ -829,6 +831,7 @@ final class BatchManagementClient
                     'id' => ['type' => 'string'],
                     'url' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'id',
                     'url'
@@ -846,6 +849,7 @@ final class BatchManagementClient
                     ],
                     'keyVaultReference' => ['$ref' => '#/definitions/KeyVaultReference']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BatchAccountCreateParameters' => [
@@ -857,6 +861,7 @@ final class BatchManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/BatchAccountCreateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'AutoStorageProperties' => [
@@ -864,6 +869,7 @@ final class BatchManagementClient
                     'type' => 'string',
                     'format' => 'date-time'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['lastKeySync']
             ],
             'BatchAccountProperties' => [
@@ -906,10 +912,12 @@ final class BatchManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BatchAccount' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BatchAccountProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BatchAccountUpdateParameters' => [
@@ -920,6 +928,7 @@ final class BatchManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/BatchAccountUpdateProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BatchAccountListResult' => [
@@ -930,6 +939,7 @@ final class BatchManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BatchAccountRegenerateKeyParameters' => [
@@ -940,6 +950,7 @@ final class BatchManagementClient
                         'Secondary'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['keyName']
             ],
             'BatchAccountKeys' => [
@@ -948,10 +959,12 @@ final class BatchManagementClient
                     'primary' => ['type' => 'string'],
                     'secondary' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ActivateApplicationPackageParameters' => [
                 'properties' => ['format' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['format']
             ],
             'ApplicationCreateParameters' => [
@@ -959,6 +972,7 @@ final class BatchManagementClient
                     'allowUpdates' => ['type' => 'boolean'],
                     'displayName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationPackage' => [
@@ -984,6 +998,7 @@ final class BatchManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Application' => [
@@ -997,6 +1012,7 @@ final class BatchManagementClient
                     'allowUpdates' => ['type' => 'boolean'],
                     'defaultVersion' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ListApplicationsResult' => [
@@ -1007,6 +1023,7 @@ final class BatchManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplicationUpdateParameters' => [
@@ -1015,6 +1032,7 @@ final class BatchManagementClient
                     'defaultVersion' => ['type' => 'string'],
                     'displayName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BatchLocationQuota' => [
@@ -1022,6 +1040,7 @@ final class BatchManagementClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -1035,6 +1054,7 @@ final class BatchManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CloudErrorBody' => [
@@ -1047,10 +1067,12 @@ final class BatchManagementClient
                         'items' => ['$ref' => '#/definitions/CloudErrorBody']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CloudError' => [
                 'properties' => ['error' => ['$ref' => '#/definitions/CloudErrorBody']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation_display' => [
@@ -1060,6 +1082,7 @@ final class BatchManagementClient
                     'resource' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -1069,6 +1092,7 @@ final class BatchManagementClient
                     'origin' => ['type' => 'string'],
                     'properties' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -1079,6 +1103,7 @@ final class BatchManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CheckNameAvailabilityParameters' => [
@@ -1086,6 +1111,7 @@ final class BatchManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'type'
@@ -1103,6 +1129,7 @@ final class BatchManagementClient
                     ],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

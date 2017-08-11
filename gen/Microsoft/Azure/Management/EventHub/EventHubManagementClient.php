@@ -1142,6 +1142,7 @@ final class EventHubManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -1150,6 +1151,7 @@ final class EventHubManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Sku' => [
@@ -1173,6 +1175,7 @@ final class EventHubManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'EHNamespace_properties' => [
@@ -1194,6 +1197,7 @@ final class EventHubManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EHNamespace' => [
@@ -1201,6 +1205,7 @@ final class EventHubManagementClient
                     'sku' => ['$ref' => '#/definitions/Sku'],
                     'properties' => ['$ref' => '#/definitions/EHNamespace_properties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EHNamespaceListResult' => [
@@ -1211,6 +1216,7 @@ final class EventHubManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AuthorizationRule_properties' => [
@@ -1225,10 +1231,12 @@ final class EventHubManagementClient
                         ]
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AuthorizationRule' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AuthorizationRule_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AuthorizationRuleListResult' => [
@@ -1239,6 +1247,7 @@ final class EventHubManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AccessKeys' => [
@@ -1249,6 +1258,7 @@ final class EventHubManagementClient
                     'secondaryKey' => ['type' => 'string'],
                     'keyName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RegenerateAccessKeyParameters' => [
@@ -1262,6 +1272,7 @@ final class EventHubManagementClient
                     ],
                     'key' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['keyType']
             ],
             'Destination_properties' => [
@@ -1270,6 +1281,7 @@ final class EventHubManagementClient
                     'blobContainer' => ['type' => 'string'],
                     'archiveNameFormat' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Destination' => [
@@ -1277,6 +1289,7 @@ final class EventHubManagementClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/Destination_properties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CaptureDescription' => [
@@ -1299,6 +1312,7 @@ final class EventHubManagementClient
                     ],
                     'destination' => ['$ref' => '#/definitions/Destination']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Eventhub_properties' => [
@@ -1339,10 +1353,12 @@ final class EventHubManagementClient
                     ],
                     'captureDescription' => ['$ref' => '#/definitions/CaptureDescription']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Eventhub' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/Eventhub_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EventHubListResult' => [
@@ -1353,6 +1369,7 @@ final class EventHubManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConsumerGroup_properties' => [
@@ -1367,10 +1384,12 @@ final class EventHubManagementClient
                     ],
                     'userMetadata' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConsumerGroup' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ConsumerGroup_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConsumerGroupListResult' => [
@@ -1381,10 +1400,12 @@ final class EventHubManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CheckNameAvailabilityParameter' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'CheckNameAvailabilityResult' => [
@@ -1403,6 +1424,7 @@ final class EventHubManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation_display' => [
@@ -1411,6 +1433,7 @@ final class EventHubManagementClient
                     'resource' => ['type' => 'string'],
                     'operation' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -1418,6 +1441,7 @@ final class EventHubManagementClient
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -1428,6 +1452,7 @@ final class EventHubManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorResponse' => [
@@ -1435,6 +1460,7 @@ final class EventHubManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

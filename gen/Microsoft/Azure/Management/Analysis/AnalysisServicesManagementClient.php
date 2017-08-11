@@ -355,6 +355,7 @@ final class AnalysisServicesManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'Resource' => [
@@ -369,6 +370,7 @@ final class AnalysisServicesManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'location',
                     'sku'
@@ -412,10 +414,12 @@ final class AnalysisServicesManagementClient
                     ],
                     'serverFullName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AnalysisServicesServer' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AnalysisServicesServerProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AnalysisServicesServers' => [
@@ -423,6 +427,7 @@ final class AnalysisServicesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/AnalysisServicesServer']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'ServerAdministrators' => [
@@ -430,6 +435,7 @@ final class AnalysisServicesManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AnalysisServicesServerMutableProperties' => [
@@ -437,6 +443,7 @@ final class AnalysisServicesManagementClient
                     'asAdministrators' => ['$ref' => '#/definitions/ServerAdministrators'],
                     'backupBlobContainerUri' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AnalysisServicesServerUpdateParameters' => [
@@ -448,6 +455,7 @@ final class AnalysisServicesManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/AnalysisServicesServerMutableProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SkuEnumerationForNewResourceResult' => [
@@ -455,10 +463,12 @@ final class AnalysisServicesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ResourceSku']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SkuDetailsForExistingResource' => [
                 'properties' => ['sku' => ['$ref' => '#/definitions/ResourceSku']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SkuEnumerationForExistingResourceResult' => [
@@ -466,6 +476,7 @@ final class AnalysisServicesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/SkuDetailsForExistingResource']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

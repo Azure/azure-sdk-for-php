@@ -731,6 +731,7 @@ final class IotHubClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'keyName',
                     'rights'
@@ -748,6 +749,7 @@ final class IotHubClient
                     ],
                     'ipMask' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'filterName',
                     'action',
@@ -771,6 +773,7 @@ final class IotHubClient
                     'path' => ['type' => 'string'],
                     'endpoint' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RoutingServiceBusQueueEndpointProperties' => [
@@ -780,6 +783,7 @@ final class IotHubClient
                     'subscriptionId' => ['type' => 'string'],
                     'resourceGroup' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'connectionString',
                     'name'
@@ -792,6 +796,7 @@ final class IotHubClient
                     'subscriptionId' => ['type' => 'string'],
                     'resourceGroup' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'connectionString',
                     'name'
@@ -804,6 +809,7 @@ final class IotHubClient
                     'subscriptionId' => ['type' => 'string'],
                     'resourceGroup' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'connectionString',
                     'name'
@@ -827,6 +833,7 @@ final class IotHubClient
                     ],
                     'encoding' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'connectionString',
                     'name',
@@ -852,6 +859,7 @@ final class IotHubClient
                         'items' => ['$ref' => '#/definitions/RoutingStorageContainerProperties']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RouteProperties' => [
@@ -873,6 +881,7 @@ final class IotHubClient
                     ],
                     'isEnabled' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'source',
@@ -890,6 +899,7 @@ final class IotHubClient
                     ],
                     'isEnabled' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'source',
                     'endpointNames',
@@ -905,6 +915,7 @@ final class IotHubClient
                     ],
                     'fallbackRoute' => ['$ref' => '#/definitions/FallbackRouteProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageEndpointProperties' => [
@@ -916,6 +927,7 @@ final class IotHubClient
                     'connectionString' => ['type' => 'string'],
                     'containerName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'connectionString',
                     'containerName'
@@ -936,6 +948,7 @@ final class IotHubClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FeedbackProperties' => [
@@ -953,6 +966,7 @@ final class IotHubClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CloudToDeviceProperties' => [
@@ -967,6 +981,7 @@ final class IotHubClient
                     ],
                     'feedback' => ['$ref' => '#/definitions/FeedbackProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationsMonitoringProperties' => [
@@ -982,6 +997,7 @@ final class IotHubClient
                         ]
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IotHubProperties' => [
@@ -1021,6 +1037,7 @@ final class IotHubClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IotHubSkuInfo' => [
@@ -1046,6 +1063,7 @@ final class IotHubClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'capacity'
@@ -1059,6 +1077,7 @@ final class IotHubClient
                     'properties' => ['$ref' => '#/definitions/IotHubProperties'],
                     'sku' => ['$ref' => '#/definitions/IotHubSkuInfo']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'subscriptionid',
                     'resourcegroup',
@@ -1076,6 +1095,7 @@ final class IotHubClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'SharedAccessSignatureAuthorizationRuleListResult' => [
@@ -1086,6 +1106,7 @@ final class IotHubClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation_display' => [
@@ -1094,6 +1115,7 @@ final class IotHubClient
                     'resource' => ['type' => 'string'],
                     'operation' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -1101,6 +1123,7 @@ final class IotHubClient
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -1111,6 +1134,7 @@ final class IotHubClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorDetails' => [
@@ -1120,6 +1144,7 @@ final class IotHubClient
                     'Message' => ['type' => 'string'],
                     'Details' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IotHubQuotaMetricInfo' => [
@@ -1134,6 +1159,7 @@ final class IotHubClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IotHubQuotaMetricInfoListResult' => [
@@ -1144,6 +1170,7 @@ final class IotHubClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RegistryStatistics' => [
@@ -1161,6 +1188,7 @@ final class IotHubClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobResponse' => [
@@ -1204,6 +1232,7 @@ final class IotHubClient
                     'statusMessage' => ['type' => 'string'],
                     'parentJobId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobResponseListResult' => [
@@ -1214,6 +1243,7 @@ final class IotHubClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IotHubCapacity' => [
@@ -1239,6 +1269,7 @@ final class IotHubClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IotHubSkuDescription' => [
@@ -1247,6 +1278,7 @@ final class IotHubClient
                     'sku' => ['$ref' => '#/definitions/IotHubSkuInfo'],
                     'capacity' => ['$ref' => '#/definitions/IotHubCapacity']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'sku',
                     'capacity'
@@ -1260,6 +1292,7 @@ final class IotHubClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EventHubConsumerGroupInfo' => [
@@ -1271,6 +1304,7 @@ final class IotHubClient
                     'id' => ['type' => 'string'],
                     'name' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IotHubSkuDescriptionListResult' => [
@@ -1281,6 +1315,7 @@ final class IotHubClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IotHubDescriptionListResult' => [
@@ -1291,10 +1326,12 @@ final class IotHubClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationInputs' => [
                 'properties' => ['Name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['Name']
             ],
             'IotHubNameAvailabilityInfo' => [
@@ -1309,6 +1346,7 @@ final class IotHubClient
                     ],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ExportDevicesRequest' => [
@@ -1316,6 +1354,7 @@ final class IotHubClient
                     'ExportBlobContainerUri' => ['type' => 'string'],
                     'ExcludeKeys' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'ExportBlobContainerUri',
                     'ExcludeKeys'
@@ -1326,6 +1365,7 @@ final class IotHubClient
                     'InputBlobContainerUri' => ['type' => 'string'],
                     'OutputBlobContainerUri' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'InputBlobContainerUri',
                     'OutputBlobContainerUri'

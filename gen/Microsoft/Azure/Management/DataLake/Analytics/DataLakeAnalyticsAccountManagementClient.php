@@ -1288,6 +1288,7 @@ final class DataLakeAnalyticsAccountManagementClient
                     'accessKey' => ['type' => 'string'],
                     'suffix' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['accessKey']
             ],
             'UpdateStorageAccountProperties' => [
@@ -1295,10 +1296,12 @@ final class DataLakeAnalyticsAccountManagementClient
                     'accessKey' => ['type' => 'string'],
                     'suffix' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageAccountInfo' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/StorageAccountProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'StorageContainerProperties' => [
@@ -1306,6 +1309,7 @@ final class DataLakeAnalyticsAccountManagementClient
                     'type' => 'string',
                     'format' => 'date-time'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageContainer' => [
@@ -1315,6 +1319,7 @@ final class DataLakeAnalyticsAccountManagementClient
                     'type' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/StorageContainerProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ListStorageContainersResult' => [
@@ -1325,10 +1330,12 @@ final class DataLakeAnalyticsAccountManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SasTokenInfo' => [
                 'properties' => ['accessToken' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ListSasTokensResult' => [
@@ -1339,14 +1346,17 @@ final class DataLakeAnalyticsAccountManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataLakeStoreAccountInfoProperties' => [
                 'properties' => ['suffix' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataLakeStoreAccountInfo' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/DataLakeStoreAccountInfoProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataLakeAnalyticsAccountListStorageAccountsResult' => [
@@ -1357,6 +1367,7 @@ final class DataLakeAnalyticsAccountManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataLakeAnalyticsAccountListDataLakeStoreResult' => [
@@ -1367,6 +1378,7 @@ final class DataLakeAnalyticsAccountManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FirewallRuleProperties' => [
@@ -1374,6 +1386,7 @@ final class DataLakeAnalyticsAccountManagementClient
                     'startIpAddress' => ['type' => 'string'],
                     'endIpAddress' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'startIpAddress',
                     'endIpAddress'
@@ -1381,6 +1394,7 @@ final class DataLakeAnalyticsAccountManagementClient
             ],
             'FirewallRule' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/FirewallRuleProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'ComputePolicyPropertiesCreateParameters' => [
@@ -1406,6 +1420,7 @@ final class DataLakeAnalyticsAccountManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'objectId',
                     'objectType'
@@ -1416,6 +1431,7 @@ final class DataLakeAnalyticsAccountManagementClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ComputePolicyPropertiesCreateParameters']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'properties'
@@ -1511,6 +1527,7 @@ final class DataLakeAnalyticsAccountManagementClient
                         'items' => ['$ref' => '#/definitions/ComputePolicyAccountCreateParameters']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'defaultDataLakeStoreAccount',
                     'dataLakeStoreAccounts'
@@ -1539,6 +1556,7 @@ final class DataLakeAnalyticsAccountManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ComputePolicy' => [
@@ -1546,6 +1564,7 @@ final class DataLakeAnalyticsAccountManagementClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ComputePolicyProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateDataLakeAnalyticsAccountProperties' => [
@@ -1607,22 +1626,27 @@ final class DataLakeAnalyticsAccountManagementClient
                         'items' => ['$ref' => '#/definitions/ComputePolicy']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AddDataLakeStoreParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/DataLakeStoreAccountInfoProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AddStorageAccountParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/StorageAccountProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'UpdateStorageAccountParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UpdateStorageAccountProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ComputePolicyCreateOrUpdateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ComputePolicyPropertiesCreateParameters']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'ComputePolicyListResult' => [
@@ -1633,6 +1657,7 @@ final class DataLakeAnalyticsAccountManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataLakeAnalyticsAccountUpdateParameters' => [
@@ -1643,6 +1668,7 @@ final class DataLakeAnalyticsAccountManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/UpdateDataLakeAnalyticsAccountProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataLakeAnalyticsAccountPropertiesBasic' => [
@@ -1682,14 +1708,17 @@ final class DataLakeAnalyticsAccountManagementClient
                         'format' => 'uuid'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataLakeAnalyticsAccountBasic' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/DataLakeAnalyticsAccountPropertiesBasic']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'DataLakeAnalyticsAccount' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/DataLakeAnalyticsAccountProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'DataLakeAnalyticsAccountListResult' => [
@@ -1700,6 +1729,7 @@ final class DataLakeAnalyticsAccountManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataLakeAnalyticsFirewallRuleListResult' => [
@@ -1710,6 +1740,7 @@ final class DataLakeAnalyticsAccountManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateFirewallRuleProperties' => [
@@ -1717,10 +1748,12 @@ final class DataLakeAnalyticsAccountManagementClient
                     'startIpAddress' => ['type' => 'string'],
                     'endIpAddress' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UpdateFirewallRuleParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UpdateFirewallRuleProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -1734,6 +1767,7 @@ final class DataLakeAnalyticsAccountManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'OptionalSubResource' => [
@@ -1742,6 +1776,7 @@ final class DataLakeAnalyticsAccountManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubResource' => [
@@ -1750,6 +1785,7 @@ final class DataLakeAnalyticsAccountManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ]
         ]

@@ -234,10 +234,12 @@ final class BillingManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BillingPeriod' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BillingPeriodProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BillingPeriodsListResult' => [
@@ -248,6 +250,7 @@ final class BillingManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DownloadUrl' => [
@@ -258,6 +261,7 @@ final class BillingManagementClient
                     ],
                     'url' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorDetails' => [
@@ -266,10 +270,12 @@ final class BillingManagementClient
                     'message' => ['type' => 'string'],
                     'target' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorResponse' => [
                 'properties' => ['error' => ['$ref' => '#/definitions/ErrorDetails']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InvoiceProperties' => [
@@ -288,10 +294,12 @@ final class BillingManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Invoice' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/InvoiceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InvoicesListResult' => [
@@ -302,6 +310,7 @@ final class BillingManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation_display' => [
@@ -310,6 +319,7 @@ final class BillingManagementClient
                     'resource' => ['type' => 'string'],
                     'operation' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -317,6 +327,7 @@ final class BillingManagementClient
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -327,6 +338,7 @@ final class BillingManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -335,6 +347,7 @@ final class BillingManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

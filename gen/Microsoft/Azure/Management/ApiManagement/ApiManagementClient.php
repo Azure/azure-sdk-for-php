@@ -6957,6 +6957,7 @@ final class ApiManagementClient
                     'message' => ['type' => 'string'],
                     'target' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorResponse' => [
@@ -6968,14 +6969,17 @@ final class ApiManagementClient
                         'items' => ['$ref' => '#/definitions/ErrorFieldContract']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PolicyContractProperties' => [
                 'properties' => ['policyContent' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['policyContent']
             ],
             'PolicyContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/PolicyContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PolicyCollection' => [
@@ -6986,6 +6990,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PolicySnippetContract' => [
@@ -6998,6 +7003,7 @@ final class ApiManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PolicySnippetsCollection' => [
@@ -7005,6 +7011,7 @@ final class ApiManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/PolicySnippetContract']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RegionContract' => [
@@ -7013,6 +7020,7 @@ final class ApiManagementClient
                     'isMasterRegion' => ['type' => 'boolean'],
                     'isDeleted' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RegionListResult' => [
@@ -7027,6 +7035,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -7035,6 +7044,7 @@ final class ApiManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiContractProperties' => [
@@ -7053,10 +7063,12 @@ final class ApiManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['path']
             ],
             'ApiContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ApiContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiCollection' => [
@@ -7067,6 +7079,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiCreateOrUpdateProperties' => [
@@ -7084,10 +7097,12 @@ final class ApiManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiCreateOrUpdateParameter' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ApiCreateOrUpdateProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiContractUpdateProperties' => [
@@ -7106,10 +7121,12 @@ final class ApiManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiUpdateContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ApiContractUpdateProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OAuth2AuthenticationSettingsContract' => [
@@ -7117,10 +7134,12 @@ final class ApiManagementClient
                     'authorizationServerId' => ['type' => 'string'],
                     'scope' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AuthenticationSettingsContract' => [
                 'properties' => ['oAuth2' => ['$ref' => '#/definitions/OAuth2AuthenticationSettingsContract']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubscriptionKeyParameterNamesContract' => [
@@ -7128,6 +7147,7 @@ final class ApiManagementClient
                     'header' => ['type' => 'string'],
                     'query' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiEntityBaseContract' => [
@@ -7146,6 +7166,7 @@ final class ApiManagementClient
                     'isCurrent' => ['type' => 'boolean'],
                     'isOnline' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationContractProperties' => [
@@ -7154,6 +7175,7 @@ final class ApiManagementClient
                     'method' => ['type' => 'string'],
                     'urlTemplate' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'displayName',
                     'method',
@@ -7162,6 +7184,7 @@ final class ApiManagementClient
             ],
             'OperationContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/OperationContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationCollection' => [
@@ -7172,6 +7195,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationUpdateContractProperties' => [
@@ -7180,6 +7204,7 @@ final class ApiManagementClient
                     'method' => ['type' => 'string'],
                     'urlTemplate' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ParameterContract' => [
@@ -7194,6 +7219,7 @@ final class ApiManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'type'
@@ -7210,6 +7236,7 @@ final class ApiManagementClient
                         'items' => ['$ref' => '#/definitions/ParameterContract']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['contentType']
             ],
             'RequestContract' => [
@@ -7228,6 +7255,7 @@ final class ApiManagementClient
                         'items' => ['$ref' => '#/definitions/RepresentationContract']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResponseContract' => [
@@ -7246,6 +7274,7 @@ final class ApiManagementClient
                         'items' => ['$ref' => '#/definitions/ParameterContract']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['statusCode']
             ],
             'OperationEntityBaseContract' => [
@@ -7262,18 +7291,22 @@ final class ApiManagementClient
                     ],
                     'policies' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationUpdateContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/OperationUpdateContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProductUpdateProperties' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProductContractProperties' => [
                 'properties' => ['displayName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['displayName']
             ],
             'ProductEntityBaseParameters' => [
@@ -7294,10 +7327,12 @@ final class ApiManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProductContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ProductContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProductCollection' => [
@@ -7308,6 +7343,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AuthorizationServerContractProperties' => [
@@ -7329,6 +7365,7 @@ final class ApiManagementClient
                     ],
                     'clientId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'displayName',
                     'clientRegistrationEndpoint',
@@ -7339,6 +7376,7 @@ final class ApiManagementClient
             ],
             'AuthorizationServerContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AuthorizationServerContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AuthorizationServerCollection' => [
@@ -7353,6 +7391,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AuthorizationServerUpdateContractProperties' => [
@@ -7374,10 +7413,12 @@ final class ApiManagementClient
                     ],
                     'clientId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AuthorizationServerUpdateContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AuthorizationServerUpdateContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TokenBodyParameterContract' => [
@@ -7385,6 +7426,7 @@ final class ApiManagementClient
                     'name' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'value'
@@ -7440,6 +7482,7 @@ final class ApiManagementClient
                     'resourceOwnerUsername' => ['type' => 'string'],
                     'resourceOwnerPassword' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackendAuthorizationHeaderCredentials' => [
@@ -7447,6 +7490,7 @@ final class ApiManagementClient
                     'scheme' => ['type' => 'string'],
                     'parameter' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'scheme',
                     'parameter'
@@ -7457,6 +7501,7 @@ final class ApiManagementClient
                     'name' => ['type' => 'string'],
                     'issuerCertificateThumbprint' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackendServiceFabricClusterProperties' => [
@@ -7479,6 +7524,7 @@ final class ApiManagementClient
                         'items' => ['$ref' => '#/definitions/X509CertificateName']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'clientCertificatethumbprint',
                     'managementEndpoints'
@@ -7486,6 +7532,7 @@ final class ApiManagementClient
             ],
             'BackendProperties' => [
                 'properties' => ['serviceFabricCluster' => ['$ref' => '#/definitions/BackendServiceFabricClusterProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackendCredentialsContract' => [
@@ -7510,6 +7557,7 @@ final class ApiManagementClient
                     ],
                     'authorization' => ['$ref' => '#/definitions/BackendAuthorizationHeaderCredentials']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackendProxyContract' => [
@@ -7518,6 +7566,7 @@ final class ApiManagementClient
                     'username' => ['type' => 'string'],
                     'password' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['url']
             ],
             'BackendTlsProperties' => [
@@ -7525,6 +7574,7 @@ final class ApiManagementClient
                     'validateCertificateChain' => ['type' => 'boolean'],
                     'validateCertificateName' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackendBaseParameters' => [
@@ -7537,6 +7587,7 @@ final class ApiManagementClient
                     'proxy' => ['$ref' => '#/definitions/BackendProxyContract'],
                     'tls' => ['$ref' => '#/definitions/BackendTlsProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackendContractProperties' => [
@@ -7550,6 +7601,7 @@ final class ApiManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'url',
                     'protocol'
@@ -7557,6 +7609,7 @@ final class ApiManagementClient
             ],
             'BackendContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BackendContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackendCollection' => [
@@ -7567,6 +7620,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BackendUpdateParameters' => [
@@ -7580,6 +7634,7 @@ final class ApiManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CertificateContractProperties' => [
@@ -7591,6 +7646,7 @@ final class ApiManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'subject',
                     'thumbprint',
@@ -7599,6 +7655,7 @@ final class ApiManagementClient
             ],
             'CertificateContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/CertificateContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CertificateCollection' => [
@@ -7609,6 +7666,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CertificateCreateOrUpdateProperties' => [
@@ -7616,6 +7674,7 @@ final class ApiManagementClient
                     'data' => ['type' => 'string'],
                     'password' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'data',
                     'password'
@@ -7623,6 +7682,7 @@ final class ApiManagementClient
             ],
             'CertificateCreateOrUpdateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/CertificateCreateOrUpdateProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CertificateInformation' => [
@@ -7634,6 +7694,7 @@ final class ApiManagementClient
                     'thumbprint' => ['type' => 'string'],
                     'subject' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'expiry',
                     'thumbprint',
@@ -7657,6 +7718,7 @@ final class ApiManagementClient
                     'negotiateClientCertificate' => ['type' => 'boolean'],
                     'certificate' => ['$ref' => '#/definitions/CertificateInformation']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'type',
                     'hostName'
@@ -7668,6 +7730,7 @@ final class ApiManagementClient
                     'subnetname' => ['type' => 'string'],
                     'subnetResourceId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiManagementServiceSkuProperties' => [
@@ -7685,6 +7748,7 @@ final class ApiManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'AdditionalLocation' => [
@@ -7697,6 +7761,7 @@ final class ApiManagementClient
                     ],
                     'virtualNetworkConfiguration' => ['$ref' => '#/definitions/VirtualNetworkConfiguration']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'location',
                     'sku'
@@ -7709,6 +7774,7 @@ final class ApiManagementClient
                     'containerName' => ['type' => 'string'],
                     'backupName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'storageAccount',
                     'accessKey',
@@ -7721,6 +7787,7 @@ final class ApiManagementClient
                     'publisherEmail' => ['type' => 'string'],
                     'publisherName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'publisherEmail',
                     'publisherName'
@@ -7731,6 +7798,7 @@ final class ApiManagementClient
                     'publisherEmail' => ['type' => 'string'],
                     'publisherName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiManagementServiceBaseProperties' => [
@@ -7772,6 +7840,7 @@ final class ApiManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiManagementServiceResource' => [
@@ -7781,6 +7850,7 @@ final class ApiManagementClient
                     'location' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'properties',
                     'sku',
@@ -7797,6 +7867,7 @@ final class ApiManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiManagementServiceUpdateParameters' => [
@@ -7805,6 +7876,7 @@ final class ApiManagementClient
                     'sku' => ['$ref' => '#/definitions/ApiManagementServiceSkuProperties'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiManagementServiceListResult' => [
@@ -7815,14 +7887,17 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'ApiManagementServiceGetSsoTokenResult' => [
                 'properties' => ['redirectUri' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiManagementServiceCheckNameAvailabilityParameters' => [
                 'properties' => ['name' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'ApiManagementServiceNameAvailabilityResult' => [
@@ -7838,10 +7913,12 @@ final class ApiManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApiManagementServiceApplyNetworkConfigurationParameters' => [
                 'properties' => ['location' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation_display' => [
@@ -7851,6 +7928,7 @@ final class ApiManagementClient
                     'resource' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -7858,6 +7936,7 @@ final class ApiManagementClient
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -7868,6 +7947,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EmailTemplateParametersContractProperties' => [
@@ -7876,6 +7956,7 @@ final class ApiManagementClient
                     'title' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EmailTemplateContractProperties' => [
@@ -7890,6 +7971,7 @@ final class ApiManagementClient
                         'items' => ['$ref' => '#/definitions/EmailTemplateParametersContractProperties']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'subject',
                     'body'
@@ -7897,6 +7979,7 @@ final class ApiManagementClient
             ],
             'EmailTemplateContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/EmailTemplateContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EmailTemplateCollection' => [
@@ -7907,6 +7990,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EmailTemplateUpdateParameterProperties' => [
@@ -7920,10 +8004,12 @@ final class ApiManagementClient
                         'items' => ['$ref' => '#/definitions/EmailTemplateParametersContractProperties']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EmailTemplateUpdateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/EmailTemplateUpdateParameterProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GroupContractProperties' => [
@@ -7941,10 +8027,12 @@ final class ApiManagementClient
                     ],
                     'externalId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['displayName']
             ],
             'GroupContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/GroupContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GroupCollection' => [
@@ -7955,6 +8043,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GroupCreateParametersProperties' => [
@@ -7971,10 +8060,12 @@ final class ApiManagementClient
                     ],
                     'externalId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['displayName']
             ],
             'GroupCreateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/GroupCreateParametersProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GroupUpdateParametersProperties' => [
@@ -7991,10 +8082,12 @@ final class ApiManagementClient
                     ],
                     'externalId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GroupUpdateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/GroupUpdateParametersProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserIdentityContract' => [
@@ -8002,6 +8095,7 @@ final class ApiManagementClient
                     'provider' => ['type' => 'string'],
                     'id' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserUpdateParametersProperties' => [
@@ -8011,6 +8105,7 @@ final class ApiManagementClient
                     'firstName' => ['type' => 'string'],
                     'lastName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserCreateParameterProperties' => [
@@ -8020,6 +8115,7 @@ final class ApiManagementClient
                     'lastName' => ['type' => 'string'],
                     'password' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'email',
                     'firstName',
@@ -8040,6 +8136,7 @@ final class ApiManagementClient
                         'items' => ['$ref' => '#/definitions/GroupContract']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserEntityBaseParameters' => [
@@ -8057,10 +8154,12 @@ final class ApiManagementClient
                         'items' => ['$ref' => '#/definitions/UserIdentityContract']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UserContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserCollection' => [
@@ -8071,6 +8170,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IdentityProviderContractProperties' => [
@@ -8078,6 +8178,7 @@ final class ApiManagementClient
                     'clientId' => ['type' => 'string'],
                     'clientSecret' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'clientId',
                     'clientSecret'
@@ -8085,6 +8186,7 @@ final class ApiManagementClient
             ],
             'IdentityProviderContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/IdentityProviderContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IdentityProviderList' => [
@@ -8095,6 +8197,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IdentityProviderUpdateProperties' => [
@@ -8102,10 +8205,12 @@ final class ApiManagementClient
                     'clientId' => ['type' => 'string'],
                     'clientSecret' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IdentityProviderUpdateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/IdentityProviderUpdateProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IdentityProviderBaseParameters' => [
@@ -8130,6 +8235,7 @@ final class ApiManagementClient
                     'profileEditingPolicyName' => ['type' => 'string'],
                     'passwordResetPolicyName' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LoggerContractProperties' => [
@@ -8142,6 +8248,7 @@ final class ApiManagementClient
                     ],
                     'isBuffered' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'loggerType',
                     'credentials'
@@ -8149,6 +8256,7 @@ final class ApiManagementClient
             ],
             'LoggerContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/LoggerContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LoggerCollection' => [
@@ -8163,6 +8271,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LoggerUpdateParameters' => [
@@ -8178,10 +8287,12 @@ final class ApiManagementClient
                     ],
                     'isBuffered' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'LoggerUpdateContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/LoggerUpdateParameters']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectivityStatusContract' => [
@@ -8205,6 +8316,7 @@ final class ApiManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'status',
@@ -8223,6 +8335,7 @@ final class ApiManagementClient
                         'items' => ['$ref' => '#/definitions/ConnectivityStatusContract']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'dnsServers',
                     'connectivityStatus'
@@ -8236,6 +8349,7 @@ final class ApiManagementClient
                     'clientId' => ['type' => 'string'],
                     'clientSecret' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'displayName',
                     'metadataEndpoint',
@@ -8244,6 +8358,7 @@ final class ApiManagementClient
             ],
             'OpenidConnectProviderContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/OpenidConnectProviderContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OpenIdConnectProviderCollection' => [
@@ -8254,6 +8369,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OpenidConnectProviderUpdateContractProperties' => [
@@ -8264,14 +8380,17 @@ final class ApiManagementClient
                     'clientId' => ['type' => 'string'],
                     'clientSecret' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OpenidConnectProviderUpdateContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/OpenidConnectProviderUpdateContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProductUpdateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ProductUpdateProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubscriptionContractProperties' => [
@@ -8314,6 +8433,7 @@ final class ApiManagementClient
                     'secondaryKey' => ['type' => 'string'],
                     'stateComment' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'userId',
                     'productId',
@@ -8324,6 +8444,7 @@ final class ApiManagementClient
             ],
             'SubscriptionContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SubscriptionContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubscriptionCollection' => [
@@ -8334,6 +8455,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PropertyContractProperties' => [
@@ -8341,6 +8463,7 @@ final class ApiManagementClient
                     'displayName' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'displayName',
                     'value'
@@ -8348,6 +8471,7 @@ final class ApiManagementClient
             ],
             'PropertyContract' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/PropertyContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PropertyCollection' => [
@@ -8358,6 +8482,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PropertyUpdateParameterProperties' => [
@@ -8365,10 +8490,12 @@ final class ApiManagementClient
                     'displayName' => ['type' => 'string'],
                     'value' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PropertyUpdateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/PropertyUpdateParameterProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PropertyEntityBaseParameters' => [
@@ -8379,6 +8506,7 @@ final class ApiManagementClient
                     ],
                     'secret' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'QuotaCounterValueContractProperties' => [
@@ -8392,6 +8520,7 @@ final class ApiManagementClient
                         'format' => 'double'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'QuotaCounterContract' => [
@@ -8408,6 +8537,7 @@ final class ApiManagementClient
                     ],
                     'Value' => ['$ref' => '#/definitions/QuotaCounterValueContractProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'counterKey',
                     'periodKey',
@@ -8427,10 +8557,12 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'QuotaCounterValueContract' => [
                 'properties' => ['value' => ['$ref' => '#/definitions/QuotaCounterValueContractProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReportRecordContract' => [
@@ -8507,6 +8639,7 @@ final class ApiManagementClient
                         'format' => 'double'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReportCollection' => [
@@ -8521,6 +8654,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RequestReportRecordContract' => [
@@ -8562,6 +8696,7 @@ final class ApiManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RequestReportCollection' => [
@@ -8575,6 +8710,7 @@ final class ApiManagementClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubscriptionCreateParameterProperties' => [
@@ -8596,6 +8732,7 @@ final class ApiManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'userId',
                     'productId',
@@ -8604,6 +8741,7 @@ final class ApiManagementClient
             ],
             'SubscriptionCreateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SubscriptionCreateParameterProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubscriptionUpdateParameterProperties' => [
@@ -8630,10 +8768,12 @@ final class ApiManagementClient
                     ],
                     'stateComment' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubscriptionUpdateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SubscriptionUpdateParameterProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AccessInformationContract' => [
@@ -8643,10 +8783,12 @@ final class ApiManagementClient
                     'secondaryKey' => ['type' => 'string'],
                     'enabled' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AccessInformationUpdateParameters' => [
                 'properties' => ['enabled' => ['type' => 'boolean']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeployConfigurationParameters' => [
@@ -8654,6 +8796,7 @@ final class ApiManagementClient
                     'branch' => ['type' => 'string'],
                     'force' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['branch']
             ],
             'OperationResultContract' => [
@@ -8679,6 +8822,7 @@ final class ApiManagementClient
                     'resultInfo' => ['type' => 'string'],
                     'error' => ['$ref' => '#/definitions/ErrorResponse']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SaveConfigurationParameter' => [
@@ -8686,6 +8830,7 @@ final class ApiManagementClient
                     'branch' => ['type' => 'string'],
                     'force' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['branch']
             ],
             'TenantConfigurationSyncStateContract' => [
@@ -8704,14 +8849,17 @@ final class ApiManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GenerateSsoUrlResult' => [
                 'properties' => ['value' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserCreateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UserCreateParameterProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserIdentityCollection' => [
@@ -8726,6 +8874,7 @@ final class ApiManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserTokenParameters' => [
@@ -8742,6 +8891,7 @@ final class ApiManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'keyType',
                     'expiry'
@@ -8749,10 +8899,12 @@ final class ApiManagementClient
             ],
             'UserTokenResult' => [
                 'properties' => ['value' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UserUpdateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UserUpdateParametersProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

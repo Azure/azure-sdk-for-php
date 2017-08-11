@@ -714,6 +714,7 @@ final class RedisManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'family',
@@ -738,10 +739,12 @@ final class RedisManagementClient
                     'subnetId' => ['type' => 'string'],
                     'staticIP' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RedisCreateProperties' => [
                 'properties' => ['sku' => ['$ref' => '#/definitions/Sku']],
+                'additionalProperties' => FALSE,
                 'required' => ['sku']
             ],
             'RedisUpdateProperties' => [
@@ -752,6 +755,7 @@ final class RedisManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -765,14 +769,17 @@ final class RedisManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'RedisCreateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RedisCreateProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'RedisUpdateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RedisUpdateProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RedisAccessKeys' => [
@@ -780,10 +787,12 @@ final class RedisManagementClient
                     'primaryKey' => ['type' => 'string'],
                     'secondaryKey' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RedisLinkedServer' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RedisLinkedServerList' => [
@@ -791,6 +800,7 @@ final class RedisManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/RedisLinkedServer']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'RedisResourceProperties' => [
@@ -810,10 +820,12 @@ final class RedisManagementClient
                     'accessKeys' => ['$ref' => '#/definitions/RedisAccessKeys'],
                     'linkedServers' => ['$ref' => '#/definitions/RedisLinkedServerList']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RedisResource' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RedisResourceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RedisListResult' => [
@@ -824,6 +836,7 @@ final class RedisManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RedisRegenerateKeyParameters' => [
@@ -834,6 +847,7 @@ final class RedisManagementClient
                         'Secondary'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['keyType']
             ],
             'RedisRebootParameters' => [
@@ -851,6 +865,7 @@ final class RedisManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['rebootType']
             ],
             'ExportRDBParameters' => [
@@ -859,6 +874,7 @@ final class RedisManagementClient
                     'prefix' => ['type' => 'string'],
                     'container' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'prefix',
                     'container'
@@ -872,6 +888,7 @@ final class RedisManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['files']
             ],
             'ScheduleEntry' => [
@@ -899,6 +916,7 @@ final class RedisManagementClient
                         'format' => 'duration'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'dayOfWeek',
                     'startHourUtc'
@@ -909,6 +927,7 @@ final class RedisManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/ScheduleEntry']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['scheduleEntries']
             ],
             'RedisPatchSchedule' => [
@@ -919,14 +938,17 @@ final class RedisManagementClient
                     'location' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ScheduleEntries']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'RedisForceRebootResponse' => [
                 'properties' => ['Message' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RedisLinkedServerProperties' => [
                 'properties' => ['provisioningState' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RedisLinkedServerWithProperties' => [
@@ -936,6 +958,7 @@ final class RedisManagementClient
                     'type' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/RedisLinkedServerProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RedisLinkedServerWithPropertiesList' => [
@@ -943,6 +966,7 @@ final class RedisManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/RedisLinkedServerWithProperties']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'RedisLinkedServerCreateProperties' => [
@@ -957,6 +981,7 @@ final class RedisManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'linkedRedisCacheId',
                     'linkedRedisCacheLocation',
@@ -965,6 +990,7 @@ final class RedisManagementClient
             ],
             'RedisLinkedServerCreateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/RedisLinkedServerCreateProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ]
         ]

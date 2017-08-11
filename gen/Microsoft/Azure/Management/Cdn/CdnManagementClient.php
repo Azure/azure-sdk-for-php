@@ -1297,6 +1297,7 @@ final class CdnManagementClient
                         'Standard_ChinaCdn'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProfileProperties' => [
@@ -1312,6 +1313,7 @@ final class CdnManagementClient
                     ],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Profile' => [
@@ -1319,6 +1321,7 @@ final class CdnManagementClient
                     'sku' => ['$ref' => '#/definitions/Sku'],
                     'properties' => ['$ref' => '#/definitions/ProfileProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['sku']
             ],
             'ProfileListResult' => [
@@ -1329,6 +1332,7 @@ final class CdnManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProfileUpdateParameters' => [
@@ -1336,10 +1340,12 @@ final class CdnManagementClient
                     'type' => 'object',
                     'additionalProperties' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['tags']
             ],
             'SsoUri' => [
                 'properties' => ['ssoUriValue' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeepCreatedOriginProperties' => [
@@ -1354,6 +1360,7 @@ final class CdnManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['hostName']
             ],
             'DeepCreatedOrigin' => [
@@ -1361,6 +1368,7 @@ final class CdnManagementClient
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/DeepCreatedOriginProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'EndpointProperties' => [
@@ -1383,10 +1391,12 @@ final class CdnManagementClient
                     ],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['origins']
             ],
             'Endpoint' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/EndpointProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EndpointListResult' => [
@@ -1397,6 +1407,7 @@ final class CdnManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GeoFilter' => [
@@ -1414,6 +1425,7 @@ final class CdnManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'relativePath',
                     'action',
@@ -1446,6 +1458,7 @@ final class CdnManagementClient
                         'items' => ['$ref' => '#/definitions/GeoFilter']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EndpointUpdateParameters' => [
@@ -1456,6 +1469,7 @@ final class CdnManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/EndpointPropertiesUpdateParameters']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PurgeParameters' => [
@@ -1463,6 +1477,7 @@ final class CdnManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['contentPaths']
             ],
             'LoadParameters' => [
@@ -1470,6 +1485,7 @@ final class CdnManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['contentPaths']
             ],
             'OriginProperties' => [
@@ -1493,10 +1509,12 @@ final class CdnManagementClient
                     ],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['hostName']
             ],
             'Origin' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/OriginProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OriginPropertiesParameters' => [
@@ -1511,10 +1529,12 @@ final class CdnManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OriginUpdateParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/OriginPropertiesParameters']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OriginListResult' => [
@@ -1525,6 +1545,7 @@ final class CdnManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CustomDomainProperties' => [
@@ -1551,18 +1572,22 @@ final class CdnManagementClient
                     'validationData' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['hostName']
             ],
             'CustomDomain' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/CustomDomainProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CustomDomainPropertiesParameters' => [
                 'properties' => ['hostName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['hostName']
             ],
             'CustomDomainParameters' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/CustomDomainPropertiesParameters']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CustomDomainListResult' => [
@@ -1573,10 +1598,12 @@ final class CdnManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ValidateCustomDomainInput' => [
                 'properties' => ['hostName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['hostName']
             ],
             'ValidateCustomDomainOutput' => [
@@ -1585,6 +1612,7 @@ final class CdnManagementClient
                     'reason' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CheckNameAvailabilityInput' => [
@@ -1592,6 +1620,7 @@ final class CdnManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'type'
@@ -1603,6 +1632,7 @@ final class CdnManagementClient
                     'reason' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceUsage' => [
@@ -1618,6 +1648,7 @@ final class CdnManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceUsageListResult' => [
@@ -1628,6 +1659,7 @@ final class CdnManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation_display' => [
@@ -1636,6 +1668,7 @@ final class CdnManagementClient
                     'resource' => ['type' => 'string'],
                     'operation' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -1643,6 +1676,7 @@ final class CdnManagementClient
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -1653,6 +1687,7 @@ final class CdnManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'cidrIpAddress' => [
@@ -1663,6 +1698,7 @@ final class CdnManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IpAddressGroup' => [
@@ -1677,6 +1713,7 @@ final class CdnManagementClient
                         'items' => ['$ref' => '#/definitions/cidrIpAddress']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EdgeNodeProperties' => [
@@ -1684,10 +1721,12 @@ final class CdnManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/IpAddressGroup']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['ipAddressGroups']
             ],
             'EdgeNode' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/EdgeNodeProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EdgenodeResult' => [
@@ -1698,6 +1737,7 @@ final class CdnManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -1711,6 +1751,7 @@ final class CdnManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'ErrorResponse' => [
@@ -1718,6 +1759,7 @@ final class CdnManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

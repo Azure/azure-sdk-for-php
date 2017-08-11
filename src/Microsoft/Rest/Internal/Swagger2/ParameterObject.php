@@ -37,4 +37,12 @@ class ParameterObject extends DataTypeObject
     {
         return $this->getChildValueOrNull('required');
     }
+
+    /**
+     * @return bool|null
+     */
+    function xMsSkipUrlEncoding()
+    {
+        return $this->getChildValueOrNull('x-ms-skip-url-encoding');
+    }
 }

@@ -200,6 +200,7 @@ final class MicrosoftResourceHealth
                     ],
                     'unavailabilitySummary' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'recommendedAction' => [
@@ -208,10 +209,12 @@ final class MicrosoftResourceHealth
                     'actionUrl' => ['type' => 'string'],
                     'actionUrlText' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'serviceImpactingEvent_status' => [
                 'properties' => ['value' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'serviceImpactingEvent_incidentProperties' => [
@@ -221,6 +224,7 @@ final class MicrosoftResourceHealth
                     'region' => ['type' => 'string'],
                     'incidentType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'serviceImpactingEvent' => [
@@ -237,6 +241,7 @@ final class MicrosoftResourceHealth
                     'status' => ['$ref' => '#/definitions/serviceImpactingEvent_status'],
                     'incidentProperties' => ['$ref' => '#/definitions/serviceImpactingEvent_incidentProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'availabilityStatus_properties' => [
@@ -289,6 +294,7 @@ final class MicrosoftResourceHealth
                         'items' => ['$ref' => '#/definitions/serviceImpactingEvent']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'availabilityStatus' => [
@@ -299,6 +305,7 @@ final class MicrosoftResourceHealth
                     'location' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/availabilityStatus_properties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'availabilityStatusListResult' => [
@@ -309,6 +316,7 @@ final class MicrosoftResourceHealth
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'operation_display' => [
@@ -318,6 +326,7 @@ final class MicrosoftResourceHealth
                     'operation' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'operation' => [
@@ -325,6 +334,7 @@ final class MicrosoftResourceHealth
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/operation_display']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'operationListResult' => [
@@ -332,6 +342,7 @@ final class MicrosoftResourceHealth
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/operation']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'ErrorResponse' => [
@@ -340,6 +351,7 @@ final class MicrosoftResourceHealth
                     'message' => ['type' => 'string'],
                     'details' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

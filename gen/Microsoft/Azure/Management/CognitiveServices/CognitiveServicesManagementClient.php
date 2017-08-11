@@ -425,6 +425,7 @@ final class CognitiveServicesManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'CognitiveServicesAccountCreateParameters' => [
@@ -460,6 +461,7 @@ final class CognitiveServicesManagementClient
                     ],
                     'properties' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'sku',
                     'kind',
@@ -475,6 +477,7 @@ final class CognitiveServicesManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CognitiveServicesAccountProperties' => [
@@ -491,6 +494,7 @@ final class CognitiveServicesManagementClient
                     'endpoint' => ['type' => 'string'],
                     'internalId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CognitiveServicesAccount' => [
@@ -508,6 +512,7 @@ final class CognitiveServicesManagementClient
                     ],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CognitiveServicesAccountListResult' => [
@@ -518,6 +523,7 @@ final class CognitiveServicesManagementClient
                         'items' => ['$ref' => '#/definitions/CognitiveServicesAccount']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CognitiveServicesAccountKeys' => [
@@ -525,6 +531,7 @@ final class CognitiveServicesManagementClient
                     'key1' => ['type' => 'string'],
                     'key2' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RegenerateKeyParameters' => [
@@ -535,6 +542,7 @@ final class CognitiveServicesManagementClient
                         'Key2'
                     ]
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => ['keyName']
             ],
             'CognitiveServicesResourceAndSku' => [
@@ -542,6 +550,7 @@ final class CognitiveServicesManagementClient
                     'resourceType' => ['type' => 'string'],
                     'sku' => ['$ref' => '#/definitions/Sku']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CognitiveServicesAccountEnumerateSkusResult' => [
@@ -549,6 +558,7 @@ final class CognitiveServicesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/CognitiveServicesResourceAndSku']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorBody' => [
@@ -556,6 +566,7 @@ final class CognitiveServicesManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'code',
                     'message'
@@ -563,6 +574,7 @@ final class CognitiveServicesManagementClient
             ],
             'Error' => [
                 'properties' => ['error' => ['$ref' => '#/definitions/ErrorBody']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationDisplayInfo' => [
@@ -572,6 +584,7 @@ final class CognitiveServicesManagementClient
                     'provider' => ['type' => 'string'],
                     'resource' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationEntity' => [
@@ -581,6 +594,7 @@ final class CognitiveServicesManagementClient
                     'origin' => ['type' => 'string'],
                     'properties' => ['type' => 'object']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationEntityListResult' => [
@@ -591,6 +605,7 @@ final class CognitiveServicesManagementClient
                         'items' => ['$ref' => '#/definitions/OperationEntity']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CheckSkuAvailabilityParameter' => [
@@ -639,6 +654,7 @@ final class CognitiveServicesManagementClient
                     ],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'skus',
                     'kind',
@@ -691,6 +707,7 @@ final class CognitiveServicesManagementClient
                     'reason' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CheckSkuAvailabilityResultList' => [
@@ -698,6 +715,7 @@ final class CognitiveServicesManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/CheckSkuAvailabilityResult']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

@@ -619,6 +619,7 @@ final class ManagedApplicationClient
                     ],
                     'uiDefinitionUri' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['managedResourceGroupId']
             ],
             'Plan' => [
@@ -629,6 +630,7 @@ final class ManagedApplicationClient
                     'promotionCode' => ['type' => 'string'],
                     'version' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'name',
                     'publisher',
@@ -642,6 +644,7 @@ final class ManagedApplicationClient
                     'plan' => ['$ref' => '#/definitions/Plan'],
                     'kind' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'properties',
                     'kind'
@@ -671,6 +674,7 @@ final class ManagedApplicationClient
                     ],
                     'uiDefinitionUri' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PlanPatchable' => [
@@ -681,6 +685,7 @@ final class ManagedApplicationClient
                     'promotionCode' => ['type' => 'string'],
                     'version' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AppliancePatchable' => [
@@ -689,6 +694,7 @@ final class ManagedApplicationClient
                     'plan' => ['$ref' => '#/definitions/PlanPatchable'],
                     'kind' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplianceProviderAuthorization' => [
@@ -696,6 +702,7 @@ final class ManagedApplicationClient
                     'principalId' => ['type' => 'string'],
                     'roleDefinitionId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'principalId',
                     'roleDefinitionId'
@@ -713,6 +720,7 @@ final class ManagedApplicationClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplianceDefinitionProperties' => [
@@ -737,6 +745,7 @@ final class ManagedApplicationClient
                     'description' => ['type' => 'string'],
                     'packageFileUri' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'lockLevel',
                     'authorizations',
@@ -745,6 +754,7 @@ final class ManagedApplicationClient
             ],
             'ApplianceDefinition' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ApplianceDefinitionProperties']],
+                'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'Sku' => [
@@ -759,6 +769,7 @@ final class ManagedApplicationClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['name']
             ],
             'Identity' => [
@@ -770,6 +781,7 @@ final class ManagedApplicationClient
                         'enum' => ['SystemAssigned']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GenericResource' => [
@@ -778,6 +790,7 @@ final class ManagedApplicationClient
                     'sku' => ['$ref' => '#/definitions/Sku'],
                     'identity' => ['$ref' => '#/definitions/Identity']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -791,6 +804,7 @@ final class ManagedApplicationClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplianceListResult' => [
@@ -801,6 +815,7 @@ final class ManagedApplicationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ApplianceDefinitionListResult' => [
@@ -811,6 +826,7 @@ final class ManagedApplicationClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorResponse' => [
@@ -819,6 +835,7 @@ final class ManagedApplicationClient
                     'errorCode' => ['type' => 'string'],
                     'errorMessage' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

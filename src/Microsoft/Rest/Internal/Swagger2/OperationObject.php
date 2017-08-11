@@ -23,4 +23,12 @@ class OperationObject extends DataRef
     {
         return new ParametersObject($this, 'parameters');
     }
+
+    /**
+     * @return ResponsesObject
+     */
+    function responses()
+    {
+        return new ResponsesObject($this, 'responses');
+    }
 }

@@ -1443,6 +1443,7 @@ final class StreamAnalyticsManagementClient
                     'operation' => ['type' => 'string'],
                     'description' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -1450,6 +1451,7 @@ final class StreamAnalyticsManagementClient
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -1460,6 +1462,7 @@ final class StreamAnalyticsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Sku' => [
@@ -1467,10 +1470,12 @@ final class StreamAnalyticsManagementClient
                     'type' => 'string',
                     'enum' => ['Standard']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Serialization' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DiagnosticCondition' => [
@@ -1479,6 +1484,7 @@ final class StreamAnalyticsManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Diagnostics' => [
@@ -1486,6 +1492,7 @@ final class StreamAnalyticsManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/DiagnosticCondition']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InputProperties' => [
@@ -1494,10 +1501,12 @@ final class StreamAnalyticsManagementClient
                     'diagnostics' => ['$ref' => '#/definitions/Diagnostics'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Input' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/InputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TransformationProperties' => [
@@ -1509,14 +1518,17 @@ final class StreamAnalyticsManagementClient
                     'query' => ['type' => 'string'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Transformation' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/TransformationProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OutputDataSource' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OutputProperties' => [
@@ -1526,18 +1538,22 @@ final class StreamAnalyticsManagementClient
                     'diagnostics' => ['$ref' => '#/definitions/Diagnostics'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Output' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/OutputProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FunctionProperties' => [
                 'properties' => ['etag' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Function' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/FunctionProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StreamingJobProperties' => [
@@ -1608,10 +1624,12 @@ final class StreamAnalyticsManagementClient
                     ],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StreamingJob' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/StreamingJobProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StreamingJobListResult' => [
@@ -1622,6 +1640,7 @@ final class StreamAnalyticsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StartStreamingJobParameters' => [
@@ -1639,6 +1658,7 @@ final class StreamAnalyticsManagementClient
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -1652,14 +1672,17 @@ final class StreamAnalyticsManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JavaScriptFunctionBindingProperties' => [
                 'properties' => ['script' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.StreamAnalytics/JavascriptUdf' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/JavaScriptFunctionBindingProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureMachineLearningWebServiceOutputColumn' => [
@@ -1667,6 +1690,7 @@ final class StreamAnalyticsManagementClient
                     'name' => ['type' => 'string'],
                     'dataType' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureMachineLearningWebServiceInputColumn' => [
@@ -1678,6 +1702,7 @@ final class StreamAnalyticsManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureMachineLearningWebServiceInputs' => [
@@ -1688,6 +1713,7 @@ final class StreamAnalyticsManagementClient
                         'items' => ['$ref' => '#/definitions/AzureMachineLearningWebServiceInputColumn']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureMachineLearningWebServiceFunctionBindingProperties' => [
@@ -1704,18 +1730,22 @@ final class StreamAnalyticsManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.MachineLearning/WebService' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AzureMachineLearningWebServiceFunctionBindingProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FunctionBinding' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FunctionOutput' => [
                 'properties' => ['dataType' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FunctionInput' => [
@@ -1723,6 +1753,7 @@ final class StreamAnalyticsManagementClient
                     'dataType' => ['type' => 'string'],
                     'isConfigurationParameter' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ScalarFunctionConfiguration' => [
@@ -1734,10 +1765,12 @@ final class StreamAnalyticsManagementClient
                     'output' => ['$ref' => '#/definitions/FunctionOutput'],
                     'binding' => ['$ref' => '#/definitions/FunctionBinding']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Scalar' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ScalarFunctionConfiguration']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JavaScriptFunctionBindingRetrievalProperties' => [
@@ -1748,10 +1781,12 @@ final class StreamAnalyticsManagementClient
                         'enum' => ['Scalar']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.StreamAnalytics/JavascriptUdf' => [
                 'properties' => ['bindingRetrievalProperties' => ['$ref' => '#/definitions/JavaScriptFunctionBindingRetrievalProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureMachineLearningWebServiceFunctionBindingRetrievalProperties' => [
@@ -1762,14 +1797,17 @@ final class StreamAnalyticsManagementClient
                         'enum' => ['Scalar']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.MachineLearning/WebService' => [
                 'properties' => ['bindingRetrievalProperties' => ['$ref' => '#/definitions/AzureMachineLearningWebServiceFunctionBindingRetrievalProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FunctionRetrieveDefaultDefinitionParameters' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubResource' => [
@@ -1778,10 +1816,12 @@ final class StreamAnalyticsManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Avro' => [
                 'properties' => ['properties' => ['type' => 'object']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JsonSerializationProperties' => [
@@ -1798,10 +1838,12 @@ final class StreamAnalyticsManagementClient
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Json' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/JsonSerializationProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CsvSerializationProperties' => [
@@ -1812,18 +1854,22 @@ final class StreamAnalyticsManagementClient
                         'enum' => ['UTF8']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Csv' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/CsvSerializationProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EventHubStreamInputDataSourceProperties' => [
                 'properties' => ['consumerGroupName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EventHubDataSourceProperties' => [
                 'properties' => ['eventHubName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServiceBusDataSourceProperties' => [
@@ -1832,6 +1878,7 @@ final class StreamAnalyticsManagementClient
                     'sharedAccessPolicyName' => ['type' => 'string'],
                     'sharedAccessPolicyKey' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServiceBusTopicOutputDataSourceProperties' => [
@@ -1842,10 +1889,12 @@ final class StreamAnalyticsManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.ServiceBus/Topic' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ServiceBusTopicOutputDataSourceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServiceBusQueueOutputDataSourceProperties' => [
@@ -1856,10 +1905,12 @@ final class StreamAnalyticsManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.ServiceBus/Queue' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ServiceBusQueueOutputDataSourceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DocumentDbOutputDataSourceProperties' => [
@@ -1871,14 +1922,17 @@ final class StreamAnalyticsManagementClient
                     'partitionKey' => ['type' => 'string'],
                     'documentId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Storage/DocumentDB' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/DocumentDbOutputDataSourceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureSqlDatabaseOutputDataSourceProperties' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureSqlDatabaseDataSourceProperties' => [
@@ -1889,18 +1943,22 @@ final class StreamAnalyticsManagementClient
                     'password' => ['type' => 'string'],
                     'table' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Sql/Server/Database' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AzureSqlDatabaseOutputDataSourceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EventHubOutputDataSourceProperties' => [
                 'properties' => ['partitionKey' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.ServiceBus/EventHub' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/EventHubOutputDataSourceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AzureTableOutputDataSourceProperties' => [
@@ -1919,10 +1977,12 @@ final class StreamAnalyticsManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Storage/Table' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AzureTableOutputDataSourceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageAccount' => [
@@ -1930,10 +1990,12 @@ final class StreamAnalyticsManagementClient
                     'accountName' => ['type' => 'string'],
                     'accountKey' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BlobReferenceInputDataSourceProperties' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BlobStreamInputDataSourceProperties' => [
@@ -1941,6 +2003,7 @@ final class StreamAnalyticsManagementClient
                     'type' => 'integer',
                     'format' => 'int32'
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BlobDataSourceProperties' => [
@@ -1954,26 +2017,32 @@ final class StreamAnalyticsManagementClient
                     'dateFormat' => ['type' => 'string'],
                     'timeFormat' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BlobOutputDataSourceProperties' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Storage/Blob' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BlobOutputDataSourceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Storage/Blob' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BlobReferenceInputDataSourceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ReferenceInputDataSource' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Reference' => [
                 'properties' => ['datasource' => ['$ref' => '#/definitions/ReferenceInputDataSource']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IoTHubStreamInputDataSourceProperties' => [
@@ -1984,26 +2053,32 @@ final class StreamAnalyticsManagementClient
                     'consumerGroupName' => ['type' => 'string'],
                     'endpoint' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Devices/IotHubs' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/IoTHubStreamInputDataSourceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.ServiceBus/EventHub' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/EventHubStreamInputDataSourceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Microsoft.Storage/Blob' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/BlobStreamInputDataSourceProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StreamInputDataSource' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Stream' => [
                 'properties' => ['datasource' => ['$ref' => '#/definitions/StreamInputDataSource']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'InputListResult' => [
@@ -2014,6 +2089,7 @@ final class StreamAnalyticsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorResponse' => [
@@ -2021,6 +2097,7 @@ final class StreamAnalyticsManagementClient
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceTestStatus' => [
@@ -2028,6 +2105,7 @@ final class StreamAnalyticsManagementClient
                     'status' => ['type' => 'string'],
                     'error' => ['$ref' => '#/definitions/ErrorResponse']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OutputListResult' => [
@@ -2038,6 +2116,7 @@ final class StreamAnalyticsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FunctionListResult' => [
@@ -2048,6 +2127,7 @@ final class StreamAnalyticsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubscriptionQuota_properties' => [
@@ -2061,10 +2141,12 @@ final class StreamAnalyticsManagementClient
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubscriptionQuota' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/SubscriptionQuota_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubscriptionQuotasListResult' => [
@@ -2072,6 +2154,7 @@ final class StreamAnalyticsManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/SubscriptionQuota']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

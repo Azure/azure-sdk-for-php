@@ -469,6 +469,7 @@ final class TrafficManagerManagementClient
         'definitions' => [
             'DeleteOperationResult' => [
                 'properties' => ['boolean' => ['type' => 'boolean']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EndpointProperties' => [
@@ -511,10 +512,12 @@ final class TrafficManagerManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Endpoint' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/EndpointProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CheckTrafficManagerRelativeDnsNameAvailabilityParameters' => [
@@ -522,6 +525,7 @@ final class TrafficManagerManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DnsConfig' => [
@@ -533,6 +537,7 @@ final class TrafficManagerManagementClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MonitorConfig' => [
@@ -573,6 +578,7 @@ final class TrafficManagerManagementClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProfileProperties' => [
@@ -600,10 +606,12 @@ final class TrafficManagerManagementClient
                         'items' => ['$ref' => '#/definitions/Endpoint']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Profile' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ProfileProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProfileListResult' => [
@@ -611,6 +619,7 @@ final class TrafficManagerManagementClient
                     'type' => 'array',
                     'items' => ['$ref' => '#/definitions/Profile']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TrafficManagerNameAvailability' => [
@@ -621,6 +630,7 @@ final class TrafficManagerManagementClient
                     'reason' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Region' => [
@@ -632,14 +642,17 @@ final class TrafficManagerManagementClient
                         'items' => ['$ref' => '#/definitions/Region']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'GeographicHierarchyProperties' => [
                 'properties' => ['geographicHierarchy' => ['$ref' => '#/definitions/Region']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TrafficManagerGeographicHierarchy' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/GeographicHierarchyProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -648,6 +661,7 @@ final class TrafficManagerManagementClient
                     'name' => ['type' => 'string'],
                     'type' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TrackedResource' => [
@@ -658,10 +672,12 @@ final class TrafficManagerManagementClient
                     ],
                     'location' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProxyResource' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CloudErrorBody' => [
@@ -674,10 +690,12 @@ final class TrafficManagerManagementClient
                         'items' => ['$ref' => '#/definitions/CloudErrorBody']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CloudError' => [
                 'properties' => ['error' => ['$ref' => '#/definitions/CloudErrorBody']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

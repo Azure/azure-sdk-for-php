@@ -1354,6 +1354,7 @@ final class ServiceMap
                     'type' => ['type' => 'string'],
                     'name' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceReference' => [
@@ -1362,18 +1363,22 @@ final class ServiceMap
                     'type' => ['type' => 'string'],
                     'name' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['id']
             ],
             'ref:machine' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProcessReference_properties' => [
                 'properties' => ['machine' => ['$ref' => '#/definitions/ref:machine']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ref:process' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ProcessReference_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PortReference_properties' => [
@@ -1385,10 +1390,12 @@ final class ServiceMap
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ref:port' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/PortReference_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MachineReferenceWithHints_properties' => [
@@ -1405,18 +1412,22 @@ final class ServiceMap
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ref:machinewithhints' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/MachineReferenceWithHints_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CoreResource' => [
                 'properties' => ['etag' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Timezone' => [
                 'properties' => ['fullName' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AgentConfiguration' => [
@@ -1438,6 +1449,7 @@ final class ServiceMap
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['agentId']
             ],
             'MachineResourcesConfiguration' => [
@@ -1462,6 +1474,7 @@ final class ServiceMap
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Ipv4NetworkInterface' => [
@@ -1469,10 +1482,12 @@ final class ServiceMap
                     'ipAddress' => ['type' => 'string'],
                     'subnetMask' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['ipAddress']
             ],
             'Ipv6NetworkInterface' => [
                 'properties' => ['ipAddress' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['ipAddress']
             ],
             'NetworkConfiguration' => [
@@ -1498,6 +1513,7 @@ final class ServiceMap
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperatingSystemConfiguration' => [
@@ -1521,6 +1537,7 @@ final class ServiceMap
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'family',
                     'fullName',
@@ -1545,6 +1562,7 @@ final class ServiceMap
                     'virtualMachineName' => ['type' => 'string'],
                     'nativeHostMachineId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'HypervisorConfiguration' => [
@@ -1558,6 +1576,7 @@ final class ServiceMap
                     ],
                     'nativeHostMachineId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Machine_properties' => [
@@ -1597,10 +1616,12 @@ final class ServiceMap
                     'virtualMachine' => ['$ref' => '#/definitions/VirtualMachineConfiguration'],
                     'hypervisor' => ['$ref' => '#/definitions/HypervisorConfiguration']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'machine' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/Machine_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProcessDetails' => [
@@ -1624,6 +1645,7 @@ final class ServiceMap
                     'executablePath' => ['type' => 'string'],
                     'workingDirectory' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProcessUser' => [
@@ -1631,6 +1653,7 @@ final class ServiceMap
                     'userName' => ['type' => 'string'],
                     'userDomain' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Process_properties' => [
@@ -1668,10 +1691,12 @@ final class ServiceMap
                     'clientOf' => ['$ref' => '#/definitions/ResourceReference'],
                     'acceptorOf' => ['$ref' => '#/definitions/ResourceReference']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'process' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/Process_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Port_properties' => [
@@ -1691,18 +1716,22 @@ final class ServiceMap
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'port' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/Port_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientGroup_properties' => [
                 'properties' => ['clientsOf' => ['$ref' => '#/definitions/ResourceReference']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'clientGroup' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ClientGroup_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientGroupMember_properties' => [
@@ -1714,10 +1743,12 @@ final class ServiceMap
                         'items' => ['$ref' => '#/definitions/ref:process']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientGroupMember' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ClientGroupMember_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MachineGroup_properties' => [
@@ -1728,14 +1759,17 @@ final class ServiceMap
                         'items' => ['$ref' => '#/definitions/ref:machinewithhints']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'machineGroup' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/MachineGroup_properties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Summary' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MachineCountsByOperatingSystem' => [
@@ -1749,6 +1783,7 @@ final class ServiceMap
                         'format' => 'int32'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'windows',
                     'linux'
@@ -1766,6 +1801,7 @@ final class ServiceMap
                     ],
                     'os' => ['$ref' => '#/definitions/MachineCountsByOperatingSystem']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'total',
                     'live',
@@ -1774,10 +1810,12 @@ final class ServiceMap
             ],
             'MachinesSummary' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/MachinesSummaryProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Relationship' => [
                 'properties' => [],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectionProperties' => [
@@ -1792,10 +1830,12 @@ final class ServiceMap
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'rel:connection' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/ConnectionProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AcceptorProperties' => [
@@ -1811,6 +1851,7 @@ final class ServiceMap
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'source',
                     'destination'
@@ -1818,6 +1859,7 @@ final class ServiceMap
             ],
             'rel:acceptor' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/AcceptorProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MachineCollection' => [
@@ -1828,6 +1870,7 @@ final class ServiceMap
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ProcessCollection' => [
@@ -1838,6 +1881,7 @@ final class ServiceMap
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PortCollection' => [
@@ -1848,6 +1892,7 @@ final class ServiceMap
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientGroupMembersCollection' => [
@@ -1858,6 +1903,7 @@ final class ServiceMap
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ConnectionCollection' => [
@@ -1868,6 +1914,7 @@ final class ServiceMap
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MachineGroupCollection' => [
@@ -1878,6 +1925,7 @@ final class ServiceMap
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SummaryProperties' => [
@@ -1891,6 +1939,7 @@ final class ServiceMap
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'startTime',
                     'endTime'
@@ -1909,6 +1958,7 @@ final class ServiceMap
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'source',
                     'destination'
@@ -1933,6 +1983,7 @@ final class ServiceMap
                         'items' => ['$ref' => '#/definitions/clientGroup']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MapEdges' => [
@@ -1946,6 +1997,7 @@ final class ServiceMap
                         'items' => ['$ref' => '#/definitions/rel:acceptor']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Map' => [
@@ -1953,6 +2005,7 @@ final class ServiceMap
                     'nodes' => ['$ref' => '#/definitions/MapNodes'],
                     'edges' => ['$ref' => '#/definitions/MapEdges']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'nodes',
                     'edges'
@@ -1970,6 +2023,7 @@ final class ServiceMap
                     ],
                     'live' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'startTime',
                     'endTime',
@@ -1987,10 +2041,12 @@ final class ServiceMap
                         'format' => 'date-time'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'map:single-machine-dependency' => [
                 'properties' => ['machineId' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => ['machineId']
             ],
             'map:machine-group-dependency' => [
@@ -1998,6 +2054,7 @@ final class ServiceMap
                     'machineGroupId' => ['type' => 'string'],
                     'filterProcesses' => ['type' => 'boolean']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['machineGroupId']
             ],
             'MapResponse' => [
@@ -2012,6 +2069,7 @@ final class ServiceMap
                     ],
                     'map' => ['$ref' => '#/definitions/Map']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'startTime',
                     'endTime',
@@ -2041,6 +2099,7 @@ final class ServiceMap
                         ]
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => [
                     'startTime',
                     'endTime',
@@ -2054,10 +2113,12 @@ final class ServiceMap
                     'code' => ['type' => 'string'],
                     'message' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['code']
             ],
             'ErrorResponse' => [
                 'properties' => ['error' => ['$ref' => '#/definitions/Error']],
+                'additionalProperties' => FALSE,
                 'required' => ['error']
             ]
         ]

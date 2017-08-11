@@ -117,6 +117,7 @@ final class ConsumptionManagementClient
                         'format' => 'decimal'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UsageDetailProperties' => [
@@ -155,10 +156,12 @@ final class ConsumptionManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UsageDetail' => [
                 'properties' => ['properties' => ['$ref' => '#/definitions/UsageDetailProperties']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'UsageDetailsListResult' => [
@@ -169,6 +172,7 @@ final class ConsumptionManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorDetails' => [
@@ -177,10 +181,12 @@ final class ConsumptionManagementClient
                     'message' => ['type' => 'string'],
                     'target' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorResponse' => [
                 'properties' => ['error' => ['$ref' => '#/definitions/ErrorDetails']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation_display' => [
@@ -189,6 +195,7 @@ final class ConsumptionManagementClient
                     'resource' => ['type' => 'string'],
                     'operation' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
@@ -196,6 +203,7 @@ final class ConsumptionManagementClient
                     'name' => ['type' => 'string'],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationListResult' => [
@@ -206,6 +214,7 @@ final class ConsumptionManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -218,6 +227,7 @@ final class ConsumptionManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]

@@ -600,10 +600,12 @@ final class DnsManagementClient
         'definitions' => [
             'ARecord' => [
                 'properties' => ['ipv4Address' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AaaaRecord' => [
                 'properties' => ['ipv6Address' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MxRecord' => [
@@ -614,14 +616,17 @@ final class DnsManagementClient
                     ],
                     'exchange' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'NsRecord' => [
                 'properties' => ['nsdname' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'PtrRecord' => [
                 'properties' => ['ptrdname' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SrvRecord' => [
@@ -640,6 +645,7 @@ final class DnsManagementClient
                     ],
                     'target' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'TxtRecord' => [
@@ -647,10 +653,12 @@ final class DnsManagementClient
                     'type' => 'array',
                     'items' => ['type' => 'string']
                 ]],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CnameRecord' => [
                 'properties' => ['cname' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SoaRecord' => [
@@ -678,6 +686,7 @@ final class DnsManagementClient
                         'format' => 'int64'
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecordSetProperties' => [
@@ -721,6 +730,7 @@ final class DnsManagementClient
                     'CNAMERecord' => ['$ref' => '#/definitions/CnameRecord'],
                     'SOARecord' => ['$ref' => '#/definitions/SoaRecord']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecordSet' => [
@@ -731,10 +741,12 @@ final class DnsManagementClient
                     'etag' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/RecordSetProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecordSetUpdateParameters' => [
                 'properties' => ['RecordSet' => ['$ref' => '#/definitions/RecordSet']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecordSetListResult' => [
@@ -745,6 +757,7 @@ final class DnsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ZoneProperties' => [
@@ -762,6 +775,7 @@ final class DnsManagementClient
                         'items' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Zone' => [
@@ -769,6 +783,7 @@ final class DnsManagementClient
                     'etag' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ZoneProperties']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ZoneDeleteResult' => [
@@ -836,6 +851,7 @@ final class DnsManagementClient
                     ],
                     'requestId' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ZoneListResult' => [
@@ -846,6 +862,7 @@ final class DnsManagementClient
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
@@ -859,10 +876,12 @@ final class DnsManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => ['location']
             ],
             'SubResource' => [
                 'properties' => ['id' => ['type' => 'string']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CloudErrorBody' => [
@@ -875,10 +894,12 @@ final class DnsManagementClient
                         'items' => ['$ref' => '#/definitions/CloudErrorBody']
                     ]
                 ],
+                'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CloudError' => [
                 'properties' => ['error' => ['$ref' => '#/definitions/CloudErrorBody']],
+                'additionalProperties' => FALSE,
                 'required' => []
             ]
         ]
