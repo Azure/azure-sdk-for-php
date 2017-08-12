@@ -8,6 +8,11 @@ use Microsoft\Rest\Internal\Data\DataAbstract;
  */
 class OperationObject extends DataAbstract
 {
+    function operationId()
+    {
+        return $this->getChildValue('operationId');
+    }
+
     /**
      * @return ParametersObject
      */

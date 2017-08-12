@@ -50,7 +50,7 @@ final class Parameter
      */
     static function createFromData(Definitions $typeMap, array $sharedParameterMap, ParameterObject $parameterData)
     {
-        $name = $parameterData->getChildValue('name');
+        $name = $parameterData->name();
 
         $schemaData = $parameterData->schema();
 
@@ -58,14 +58,14 @@ final class Parameter
             ? $typeMap->createSchemaObjectFromData($schemaData)
             : $typeMap->createSchemaObjectFromDataType($parameterData);
 
-        $in = $parameterData->getChildValue('in');
+        $in = $parameterData->in();
 
-        $required = $parameterData->getChildValueOrNull('required');
+        $required = $parameterData->required();
         if ($required === null) {
             $required = $in === 'path';
         }
 
-        $xMsSkipUrlEncoding = $parameterData->getChildValueOrNull('x-ms-skip-url-encoding');
+        $xMsSkipUrlEncoding = $parameterData->x_ms_skip_url_encoding();
         if ($xMsSkipUrlEncoding === null) {
             $xMsSkipUrlEncoding = FALSE;
         }

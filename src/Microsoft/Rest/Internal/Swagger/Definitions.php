@@ -23,6 +23,7 @@ final class Definitions
     function getSchemaObject(DataAbstract $source, $ref)
     {
         if (!isset($this->schemaObjectMap[$ref])) {
+            print_r($this->schemaObjectMap);
             throw new UnknownTypeException($source, $ref);
         }
         return $this->schemaObjectMap[$ref];
@@ -72,8 +73,8 @@ final class Definitions
     {
         /** @var Schema[] */
         $schemaObjectMap = [];
-        foreach ($definitionsObjectData->children() as $child) {
-            $schemaObjectMap['#/definitions/' . $child->getKey()] =
+        foreach ($definitionsObjectData->children() as $key => $child) {
+            $schemaObjectMap['#/definitions/' . $key] =
                 Schema::createFromData($child);
         }
         $result = new self($schemaObjectMap);

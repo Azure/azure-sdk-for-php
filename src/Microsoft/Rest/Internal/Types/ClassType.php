@@ -1,7 +1,6 @@
 <?php
 namespace Microsoft\Rest\Internal\Types;
 
-use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Swagger\Definitions;
 use Microsoft\Rest\Internal\Swagger2\SchemaObject;
 use Microsoft\Rest\Internal\Swagger2\SchemaObjectMap;
@@ -89,9 +88,8 @@ final class ClassType extends TypeAbstract
         if ($required === null) {
             $required = [];
         }
-        foreach ($propertiesData->children() as $child)
+        foreach ($propertiesData->children() as $name => $child)
         {
-            $name = $child->getKey();
             $type = TypeAbstract::createFromDataWithRefs($child);
             if (in_array($name, $required)) {
                 $requiredPropertyMap[$name] = $type;

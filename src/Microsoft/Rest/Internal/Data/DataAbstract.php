@@ -9,7 +9,7 @@ class DataAbstract
      * @param string|int $key
      * @return bool
      */
-    function hasKey($key)
+    protected function hasKey($key)
     {
         return isset($this->value[$key]);
     }
@@ -18,7 +18,7 @@ class DataAbstract
      * @param string|int $key
      * @throws ExpectedPropertyException
      */
-    function requireKey($key)
+    protected function requireKey($key)
     {
         if (!$this->hasKey($key)) {
             throw new ExpectedPropertyException($this, $key);
@@ -30,12 +30,12 @@ class DataAbstract
      * @param string $className
      * @return mixed|null
      */
-    function getChildOrNull($key, $className = DataAbstract::class)
+    protected function getChildOrNull($key, $className)
     {
         return $this->hasKey($key) ? new $className($this, $key) : null;
     }
 
-    function getChildOrValueOrNull($key, $className = DataAbstract::class)
+    protected function getChildOrValueOrNull($key, $className)
     {
         $value = $this->getChildValueOrNull($key);
         return $value === null
@@ -50,7 +50,7 @@ class DataAbstract
      * @param string $className
      * @return mixed
      */
-    function getChild($key, $className = DataAbstract::class)
+    protected function getChild($key, $className)
     {
         $this->requireKey($key);
         return new $className($this, $key);
@@ -60,7 +60,7 @@ class DataAbstract
      * @param string $key
      * @return mixed|null
      */
-    function getChildValueOrNull($key)
+    protected function getChildValueOrNull($key)
     {
         return $this->hasKey($key) ? $this->value[$key] : null;
     }
@@ -69,7 +69,7 @@ class DataAbstract
      * @param $key
      * @return mixed
      */
-    function getChildValue($key)
+    protected function getChildValue($key)
     {
         $this->requireKey($key);
         return $this->value[$key];
@@ -79,7 +79,7 @@ class DataAbstract
      * @param string $className
      * @return array
      */
-    function getChildren($className = DataAbstract::class)
+    protected function getChildren($className = DataAbstract::class)
     {
         /**
          * @var DataAbstract[]
@@ -87,38 +87,9 @@ class DataAbstract
         $children = [];
         foreach (array_keys($this->value) as $key)
         {
-            $children[] = new $className($this, $key);
+            $children[$key] = new $className($this, $key);
         }
         return $children;
-    }
-
-    /**
-     * @return string
-     */
-    function getPhpCode()
-    {
-        return self::valueToPhpCode($this->value);
-    }
-
-    /**
-     * @param mixed $value
-     * @return string
-     */
-    private static function valueToPhpCode($value)
-    {
-        if (is_array($value))
-        {
-            $body = [];
-            foreach ($value as $key => $child)
-            {
-                $body[] = "'" . $key . "'=>" . self::valueToPhpCode($child);
-            }
-            return '['.implode(',', $body).']';
-        }
-        else
-        {
-            return "'" . $value . "'";
-        }
     }
 
     /**
@@ -134,7 +105,7 @@ class DataAbstract
     /**
      * @return string|int
      */
-    function getKey()
+    protected function getKey()
     {
         return $this->key;
     }

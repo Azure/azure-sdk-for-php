@@ -40,7 +40,7 @@ abstract class TypeAbstract
         /**
          * @var string
          */
-        $ref = $schemaObjectData->getChildValueOrNull('$ref');
+        $ref = $schemaObjectData->_ref();
         if ($ref !== null) {
             return new RefType($ref, $schemaObjectData);
         }
@@ -48,7 +48,7 @@ abstract class TypeAbstract
         /**
          * @var string
          */
-        $type = $schemaObjectData->getChildValueOrNull('type');
+        $type = $schemaObjectData->type();
         switch ($type) {
             case 'object':
             case null:

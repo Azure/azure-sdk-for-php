@@ -13,7 +13,7 @@ abstract class SimpleTypeAbstract extends TypeAbstract
      */
     public static function createSimpleFromDataWithRefs(DataTypeObject $dataTypeObject)
     {
-        $type = $dataTypeObject->getChildValueOrNull('type');
+        $type = $dataTypeObject->type();
         switch ($type) {
             case 'array':
                 return ArrayType::createArrayFromDataWithRefs($dataTypeObject);

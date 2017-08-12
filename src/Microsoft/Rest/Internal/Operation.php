@@ -55,7 +55,7 @@ final class Operation implements OperationInterface
         array $pathStrParts,
         $httpMethod)
     {
-        $operationId = $operationData->getChildValue('operationId');
+        $operationId = $operationData->operationId();
 
         $parameters = Parameters::create(
             $typeMap,
@@ -67,10 +67,10 @@ final class Operation implements OperationInterface
          * @var TypeAbstract[]
          */
         $responses = [];
-        foreach ($operationData->responses()->children() as $child)
+        foreach ($operationData->responses()->children() as $code => $child)
         {
             $schema = $child->schema();
-            $responses[intval($child->getKey())]
+            $responses[intval($code)]
                 = $schema !== null ? $typeMap->createSchemaObjectFromData($schema) : null;
         }
 

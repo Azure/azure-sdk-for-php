@@ -4,6 +4,14 @@ namespace Microsoft\Rest\Internal\Swagger2;
 final class SchemaObject extends DataTypeObject
 {
     /**
+     * @return string|null
+     */
+    function _ref()
+    {
+        return $this->getChildValueOrNull('$ref');
+    }
+
+    /**
      * @return SchemaObjectMap|null
      */
     function properties()

@@ -33,8 +33,8 @@ abstract class PrimitiveTypeAbstract extends TypeAbstract
      */
     static function createPrimitiveFromDataWithRefs(DataTypeObject $dataTypeObject)
     {
-        $type = $dataTypeObject->getChildValueOrNull('type');
-        $format = $dataTypeObject->getChildValueOrNull('format');
+        $type = $dataTypeObject->type();
+        $format = $dataTypeObject->format();
         $enum = $dataTypeObject->enum();
         if ($enum) {
             if ($type === 'string' && $format === null) {

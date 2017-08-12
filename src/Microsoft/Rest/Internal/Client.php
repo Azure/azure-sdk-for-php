@@ -41,11 +41,9 @@ final class Client implements ClientInterface
         $operationMap = [];
         $paths = $swaggerObjectData->paths();
         if ($paths !== null) {
-            foreach ($swaggerObjectData->paths()->children() as $pathItemObjectData) {
-                $pathStr = $pathItemObjectData->getKey();
+            foreach ($swaggerObjectData->paths()->children() as $pathStr => $pathItemObjectData) {
                 $path = PathStrPart::parse($pathStr);
-                foreach ($pathItemObjectData->children() as $operationData) {
-                    $httpMethod = $operationData->getKey();
+                foreach ($pathItemObjectData->children() as $httpMethod => $operationData) {
                     $operation = Operation::createFromOperationData(
                         $shared,
                         $definitionsObject,
