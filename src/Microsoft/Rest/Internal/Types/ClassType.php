@@ -3,6 +3,8 @@ namespace Microsoft\Rest\Internal\Types;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Swagger\Definitions;
+use Microsoft\Rest\Internal\Swagger2\SchemaObject;
+use Microsoft\Rest\Internal\Swagger2\SchemaObjectMap;
 
 final class ClassType extends TypeAbstract
 {
@@ -63,15 +65,15 @@ final class ClassType extends TypeAbstract
     }
 
     /**
-     * @param DataAbstract $propertiesData
+     * @param SchemaObjectMap $propertiesData
      * @param DataAbstract $requiredData
-     * @param DataAbstract|null $additionalPropertiesData
+     * @param SchemaObject|null $additionalPropertiesData
      * @return ClassType
      */
     static function createClassFromData(
-        DataAbstract $propertiesData,
+        SchemaObjectMap $propertiesData,
         DataAbstract $requiredData = null,
-        DataAbstract $additionalPropertiesData = null)
+        SchemaObject $additionalPropertiesData = null)
     {
         /**
          * @var TypeAbstract[]
@@ -85,7 +87,7 @@ final class ClassType extends TypeAbstract
          * @var string[]
          */
         $required = $requiredData == null ? [] : $requiredData->getValue();
-        foreach ($propertiesData->getChildren() as $child)
+        foreach ($propertiesData->children() as $child)
         {
             $name = $child->getKey();
             $type = TypeAbstract::createFromDataWithRefs($child);

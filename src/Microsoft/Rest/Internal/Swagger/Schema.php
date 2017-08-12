@@ -1,7 +1,7 @@
 <?php
 namespace Microsoft\Rest\Internal\Swagger;
 
-use Microsoft\Rest\Internal\Data\DataAbstract;
+use Microsoft\Rest\Internal\Swagger2\SchemaObject;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 
 final class Schema
@@ -19,7 +19,11 @@ final class Schema
         return $this->dataType;
     }
 
-    static function createFromData(DataAbstract $schemaObjectData)
+    /**
+     * @param SchemaObject $schemaObjectData
+     * @return Schema
+     */
+    static function createFromData(SchemaObject $schemaObjectData)
     {
         return new Schema(TypeAbstract::createFromDataWithRefs($schemaObjectData));
     }

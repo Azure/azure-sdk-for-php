@@ -1,9 +1,9 @@
 <?php
 namespace Microsoft\Rest\Internal;
 
-use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Path\PathStrPart;
 use Microsoft\Rest\Internal\Swagger\Definitions;
+use Microsoft\Rest\Internal\Swagger2\OperationObject;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 use Microsoft\Rest\OperationInterface;
 
@@ -41,7 +41,7 @@ final class Operation implements OperationInterface
      * @param OperationShared $shared
      * @param Definitions $typeMap
      * @param array $sharedParameterMap
-     * @param DataAbstract $operationData
+     * @param OperationObject $operationData
      * @param PathStrPart[] $pathStrParts
      * @param string $httpMethod
      * @return Operation
@@ -51,7 +51,7 @@ final class Operation implements OperationInterface
         OperationShared $shared,
         Definitions $typeMap,
         array $sharedParameterMap,
-        DataAbstract $operationData,
+        OperationObject $operationData,
         array $pathStrParts,
         $httpMethod)
     {
@@ -60,16 +60,16 @@ final class Operation implements OperationInterface
         $parameters = Parameters::create(
             $typeMap,
             $sharedParameterMap,
-            $operationData->getChild('parameters'),
+            $operationData->parameters(),
             $pathStrParts);
 
         /**
          * @var TypeAbstract[]
          */
         $responses = [];
-        foreach ($operationData->getChild('responses')->getChildren() as $child)
+        foreach ($operationData->responses()->children() as $child)
         {
-            $schema = $child->getChildOrNull('schema');
+            $schema = $child->schema();
             $responses[intval($child->getKey())]
                 = $schema !== null ? $typeMap->createSchemaObjectFromData($schema) : null;
         }

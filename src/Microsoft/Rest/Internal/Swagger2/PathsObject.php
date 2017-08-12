@@ -10,5 +10,11 @@ use Microsoft\Rest\Internal\Data\DataAbstract;
  */
 class PathsObject extends DataAbstract
 {
-
+    /**
+     * @return PathItemObject[]
+     */
+    function children()
+    {
+        return $this->getChildren(PathItemObject::class);
+    }
 }

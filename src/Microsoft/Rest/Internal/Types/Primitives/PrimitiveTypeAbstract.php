@@ -1,9 +1,9 @@
 <?php
 namespace Microsoft\Rest\Internal\Types\Primitives;
 
-use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\InvalidSchemaObjectException;
 use Microsoft\Rest\Internal\Swagger\Definitions;
+use Microsoft\Rest\Internal\Swagger2\DataTypeObject;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 
 abstract class PrimitiveTypeAbstract extends TypeAbstract
@@ -27,15 +27,15 @@ abstract class PrimitiveTypeAbstract extends TypeAbstract
     }
 
     /**
-     * @param DataAbstract $schemaObjectData
+     * @param DataTypeObject $dataTypeObject
      * @return TypeAbstract
      * @throws InvalidSchemaObjectException
      */
-    static function createFromDataWithRefs(DataAbstract $schemaObjectData)
+    static function createPrimitiveFromDataWithRefs(DataTypeObject $dataTypeObject)
     {
-        $type = $schemaObjectData->getChildValueOrNull('type');
-        $format = $schemaObjectData->getChildValueOrNull('format');
-        $enum = $schemaObjectData->getChildOrNull('enum');
+        $type = $dataTypeObject->getChildValueOrNull('type');
+        $format = $dataTypeObject->getChildValueOrNull('format');
+        $enum = $dataTypeObject->getChildOrNull('enum');
         if ($enum) {
             if ($type === 'string' && $format === null) {
                 return new EnumType($enum->getValue());
@@ -93,6 +93,6 @@ abstract class PrimitiveTypeAbstract extends TypeAbstract
                     return new FileType();
             }
         }
-        throw new InvalidSchemaObjectException($schemaObjectData);
+        throw new InvalidSchemaObjectException($dataTypeObject);
     }
 }

@@ -1,8 +1,8 @@
 <?php
 namespace Microsoft\Rest\Internal;
 
-use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Swagger\Definitions;
+use Microsoft\Rest\Internal\Swagger2\ParameterObject;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 
 /**
@@ -45,17 +45,18 @@ final class Parameter
     /**
      * @param Definitions $typeMap
      * @param array $sharedParameterMap
-     * @param DataAbstract $parameterData
+     * @param ParameterObject $parameterData
      * @return Parameter
      */
-    static function createFromData(Definitions $typeMap, array $sharedParameterMap, DataAbstract $parameterData)
+    static function createFromData(Definitions $typeMap, array $sharedParameterMap, ParameterObject $parameterData)
     {
         $name = $parameterData->getChildValue('name');
 
-        $schemaData = $parameterData->getChildOrNull('schema');
+        $schemaData = $parameterData->schema();
 
-        $type = $typeMap->createSchemaObjectFromData(
-            $schemaData !== null ? $schemaData : $parameterData);
+        $type = $schemaData !== null
+            ? $typeMap->createSchemaObjectFromData($schemaData)
+            : $typeMap->createSchemaObjectFromDataType($parameterData);
 
         $in = $parameterData->getChildValue('in');
 

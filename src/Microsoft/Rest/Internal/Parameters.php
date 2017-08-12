@@ -1,11 +1,11 @@
 <?php
 namespace Microsoft\Rest\Internal;
 
-use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Path\PathBuilder;
 use Microsoft\Rest\Internal\Path\PathPartAbstract;
 use Microsoft\Rest\Internal\Path\PathStrPart;
 use Microsoft\Rest\Internal\Swagger\Definitions;
+use Microsoft\Rest\Internal\Swagger2\ParametersObject;
 
 final class Parameters
 {
@@ -76,7 +76,7 @@ final class Parameters
     /**
      * @param Definitions $typeMap
      * @param array $sharedParameterMap
-     * @param DataAbstract $parameters
+     * @param ParametersObject $parameters
      * @param PathStrPart[] $pathStrParts
      * @return Parameters
      * @throws \Exception
@@ -84,7 +84,7 @@ final class Parameters
     static function create(
         Definitions $typeMap,
         array $sharedParameterMap,
-        DataAbstract $parameters,
+        ParametersObject $parameters,
         array $pathStrParts)
     {
         /** @var Parameter[] */
@@ -102,7 +102,7 @@ final class Parameters
          * @var Parameter
          */
         $body = null;
-        foreach ($parameters->getChildren() as $child)
+        foreach ($parameters->children() as $child)
         {
             $parameter = Parameter::createFromData($typeMap, $sharedParameterMap, $child);
             $in = $parameter->getIn();

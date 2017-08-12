@@ -1,7 +1,7 @@
 <?php
 namespace Microsoft\Rest\Internal\Types;
 
-use Microsoft\Rest\Internal\Data\DataAbstract;
+use Microsoft\Rest\Internal\Swagger2\DataTypeObject;
 
 /**
  * type: array
@@ -34,11 +34,11 @@ final class ArrayType extends CollectionType
     }
 
     /**
-     * @param DataAbstract $schemaObjectData
+     * @param DataTypeObject $dataTypeObject
      * @return ArrayType
      */
-    static function createFromDataWithRefs(DataAbstract $schemaObjectData)
+    static function createArrayFromDataWithRefs(DataTypeObject $dataTypeObject)
     {
-        return new self(TypeAbstract::createFromDataWithRefs($schemaObjectData->getChild('items')));
+        return new self(TypeAbstract::createFromDataWithRefs($dataTypeObject->items()));
     }
 }

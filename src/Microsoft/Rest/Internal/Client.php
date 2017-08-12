@@ -2,7 +2,6 @@
 namespace Microsoft\Rest\Internal;
 
 use Microsoft\Rest\ClientInterface;
-use Microsoft\Rest\Internal\Data\DataAbstract;
 use Microsoft\Rest\Internal\Https\HttpsInterface;
 use Microsoft\Rest\Internal\Path\PathStrPart;
 use Microsoft\Rest\Internal\Swagger\Definitions;
@@ -40,10 +39,10 @@ final class Client implements ClientInterface
 
         /** @var OperationInterface[] */
         $operationMap = [];
-        foreach ($swaggerObjectData->paths()->getChildren() as $pathItemObjectData) {
+        foreach ($swaggerObjectData->paths()->children() as $pathItemObjectData) {
             $pathStr = $pathItemObjectData->getKey();
             $path = PathStrPart::parse($pathStr);
-            foreach ($pathItemObjectData->getChildren() as $operationData) {
+            foreach ($pathItemObjectData->children() as $operationData) {
                 $httpMethod = $operationData->getKey();
                 $operation = Operation::createFromOperationData(
                     $shared,

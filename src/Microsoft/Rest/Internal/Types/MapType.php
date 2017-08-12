@@ -1,7 +1,7 @@
 <?php
 namespace Microsoft\Rest\Internal\Types;
 
-use Microsoft\Rest\Internal\Data\DataAbstract;
+use Microsoft\Rest\Internal\Swagger2\SchemaObject;
 
 final class MapType extends CollectionType
 {
@@ -34,10 +34,10 @@ final class MapType extends CollectionType
     }
 
     /**
-     * @param DataAbstract $additionalPropertiesData
+     * @param SchemaObject $additionalPropertiesData
      * @return MapType
      */
-    static function createFromItemData(DataAbstract $additionalPropertiesData)
+    static function createFromItemData(SchemaObject $additionalPropertiesData)
     {
         return new self(TypeAbstract::createFromDataWithRefs($additionalPropertiesData));
     }

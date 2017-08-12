@@ -18,11 +18,11 @@ final class SwaggerObject extends DataAbstract
     }
 
     /**
-     * @return DefinitionsObject
+     * @return SchemaObjectMap
      */
     function definitions()
     {
-        return $this->getChild('definitions', DefinitionsObject::class);
+        return $this->getChild('definitions', SchemaObjectMap::class);
     }
 
     /**

@@ -35,11 +35,12 @@ class DataAbstract
 
     /**
      * @param string $key
-     * @return DataAbstract|null
+     * @param string $className
+     * @return mixed|null
      */
-    function getChildOrNull($key)
+    function getChildOrNull($key, $className = DataAbstract::class)
     {
-        return $this->hasKey($key) ? new DataAbstract($this, $key) : null;
+        return $this->hasKey($key) ? new $className($this, $key) : null;
     }
 
     /**
@@ -73,9 +74,10 @@ class DataAbstract
     }
 
     /**
-     * @return DataAbstract[]
+     * @param string $className
+     * @return array
      */
-    function getChildren()
+    function getChildren($className = DataAbstract::class)
     {
         /**
          * @var DataAbstract[]
@@ -83,7 +85,7 @@ class DataAbstract
         $children = [];
         foreach (array_keys($this->value) as $key)
         {
-            $children[] = new DataAbstract($this, $key);
+            $children[] = new $className($this, $key);
         }
         return $children;
     }

@@ -2,7 +2,10 @@
 namespace Microsoft\Rest\Internal\Swagger;
 
 use Microsoft\Rest\Internal\Data\DataAbstract;
-use Microsoft\Rest\Internal\Swagger2\DefinitionsObject;
+use Microsoft\Rest\Internal\Swagger2\DataTypeObject;
+use Microsoft\Rest\Internal\Swagger2\SchemaObject;
+use Microsoft\Rest\Internal\Swagger2\SchemaObjectMap;
+use Microsoft\Rest\Internal\Types\SimpleTypeAbstract;
 use Microsoft\Rest\Internal\Types\TypeAbstract;
 use Microsoft\Rest\Internal\UnknownTypeException;
 
@@ -26,12 +29,22 @@ final class Definitions
     }
 
     /**
-     * @param DataAbstract $schemaObjectData
+     * @param SchemaObject $schemaObjectData
      * @return TypeAbstract
      */
-    function createSchemaObjectFromData(DataAbstract $schemaObjectData)
+    function createSchemaObjectFromData(SchemaObject $schemaObjectData)
     {
         return TypeAbstract::createFromDataWithRefs($schemaObjectData)
+            ->removeRefTypes($this);
+    }
+
+    /**
+     * @param DataTypeObject $dataTypeObject
+     * @return TypeAbstract
+     */
+    function createSchemaObjectFromDataType(DataTypeObject $dataTypeObject)
+    {
+        return SimpleTypeAbstract::createSimpleFromDataWithRefs($dataTypeObject)
             ->removeRefTypes($this);
     }
 
@@ -52,14 +65,14 @@ final class Definitions
     }
 
     /**
-     * @param DefinitionsObject $definitionsObjectData
+     * @param SchemaObjectMap $definitionsObjectData
      * @return Definitions
      */
-    static function createFromData(DefinitionsObject $definitionsObjectData)
+    static function createFromData(SchemaObjectMap $definitionsObjectData)
     {
         /** @var Schema[] */
         $schemaObjectMap = [];
-        foreach ($definitionsObjectData->getChildren() as $child) {
+        foreach ($definitionsObjectData->children() as $child) {
             $schemaObjectMap['#/definitions/' . $child->getKey()] =
                 Schema::createFromData($child);
         }

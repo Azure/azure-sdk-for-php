@@ -1,8 +1,6 @@
 <?php
 namespace Microsoft\Rest\Internal;
 
-use Microsoft\Rest\Internal\Data\DataAbstract;
-use Microsoft\Rest\Internal\Data\MapData;
 use Microsoft\Rest\Internal\Https\HttpsInterface;
 use Microsoft\Rest\Internal\Swagger2\SwaggerObject;
 use Microsoft\Rest\RunTimeInterface;
