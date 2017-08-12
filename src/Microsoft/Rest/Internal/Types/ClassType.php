@@ -66,14 +66,14 @@ final class ClassType extends TypeAbstract
 
     /**
      * @param SchemaObjectMap $propertiesData
-     * @param DataAbstract $requiredData
-     * @param SchemaObject|null $additionalPropertiesData
+     * @param string[] $required
+     * @param SchemaObject|bool|null $additionalPropertiesData
      * @return ClassType
      */
     static function createClassFromData(
         SchemaObjectMap $propertiesData,
-        DataAbstract $requiredData = null,
-        SchemaObject $additionalPropertiesData = null)
+        array $required = null,
+        $additionalPropertiesData = null)
     {
         /**
          * @var TypeAbstract[]
@@ -86,7 +86,9 @@ final class ClassType extends TypeAbstract
         /**
          * @var string[]
          */
-        $required = $requiredData == null ? [] : $requiredData->getValue();
+        if ($required === null) {
+            $required = [];
+        }
         foreach ($propertiesData->children() as $child)
         {
             $name = $child->getKey();
@@ -101,9 +103,8 @@ final class ClassType extends TypeAbstract
         $allowAdditionalProperties = true;
         $additionalProperties = null;
         if ($additionalPropertiesData !== null) {
-            $allow = $additionalPropertiesData->getValue();
-            if (is_bool($allow)) {
-                $allowAdditionalProperties = $allow;
+            if (is_bool($additionalPropertiesData)) {
+                $allowAdditionalProperties = $additionalPropertiesData;
             } else {
                 $additionalProperties = TypeAbstract::createFromDataWithRefs($additionalPropertiesData);
             }

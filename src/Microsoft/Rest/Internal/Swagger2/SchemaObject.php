@@ -16,6 +16,14 @@ final class SchemaObject extends DataTypeObject
      */
     function additionalProperties()
     {
-        return $this->getChildOrNull('additionalProperties', SchemaObject::class);
+        return $this->getChildOrValueOrNull('additionalProperties', SchemaObject::class);
+    }
+
+    /**
+     * @return string[]|null
+     */
+    function required()
+    {
+        return $this->getChildValueOrNull('required');
     }
 }

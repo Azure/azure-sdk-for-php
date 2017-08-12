@@ -35,13 +35,12 @@ abstract class PrimitiveTypeAbstract extends TypeAbstract
     {
         $type = $dataTypeObject->getChildValueOrNull('type');
         $format = $dataTypeObject->getChildValueOrNull('format');
-        $enum = $dataTypeObject->getChildOrNull('enum');
+        $enum = $dataTypeObject->enum();
         if ($enum) {
             if ($type === 'string' && $format === null) {
-                return new EnumType($enum->getValue());
+                return new EnumType($enum);
             }
-        }
-        else {
+        } else {
             switch ($type) {
                 case 'boolean':
                     switch ($format) {

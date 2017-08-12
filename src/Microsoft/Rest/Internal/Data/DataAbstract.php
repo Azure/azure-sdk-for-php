@@ -6,14 +6,6 @@ use Microsoft\Rest\Internal\ExpectedPropertyException;
 class DataAbstract
 {
     /**
-     * @return mixed
-     */
-    function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
      * @param string|int $key
      * @return bool
      */
@@ -41,6 +33,16 @@ class DataAbstract
     function getChildOrNull($key, $className = DataAbstract::class)
     {
         return $this->hasKey($key) ? new $className($this, $key) : null;
+    }
+
+    function getChildOrValueOrNull($key, $className = DataAbstract::class)
+    {
+        $value = $this->getChildValueOrNull($key);
+        return $value === null
+                ? null
+            : is_array($value)
+                ? new $className($this, $key)
+                : $value;
     }
 
     /**

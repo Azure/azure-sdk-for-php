@@ -12,4 +12,12 @@ class DataTypeObject extends DataAbstract
     {
         return $this->getChildOrNull('items', SchemaObject::class);
     }
+
+    /**
+     * @return string[]|null
+     */
+    function enum()
+    {
+        return $this->getChildValueOrNull('enum');
+    }
 }

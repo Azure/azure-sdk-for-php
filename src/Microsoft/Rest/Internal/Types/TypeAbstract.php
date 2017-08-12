@@ -58,7 +58,7 @@ abstract class TypeAbstract
                 if ($properties !== null) {
                     return ClassType::createClassFromData(
                         $properties,
-                        $schemaObjectData->getChildOrNull('required'),
+                        $schemaObjectData->required(),
                         $additionalPropertiesData);
                 }
                 return $additionalPropertiesData === null
