@@ -60,7 +60,7 @@ class ClientStaticTest extends TestCase
         $swaggerObjectData = [
             'host' => 'example.com',
             'definitions' => [
-                'Sku' => []
+                'Sku' => [ 'type' => 'something' ]
             ]
         ];
         try {

@@ -26,11 +26,11 @@ final class SwaggerObject extends DataAbstract
     }
 
     /**
-     * @return PathsObject
+     * @return PathsObject|null
      */
     function paths()
     {
-        return $this->getChild('paths', PathsObject::class);
+        return $this->getChildOrNull('paths', PathsObject::class);
     }
 
     /**

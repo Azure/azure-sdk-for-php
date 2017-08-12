@@ -28,7 +28,9 @@ class ClientInterfaceTest extends TestCase
                     'name' => 'b',
                     'in' => 'path',
                     'required' => TRUE,
-                    '$ref' => '#/definitions/A'
+                    'schema' => [
+                        '$ref' => '#/definitions/A'
+                    ]
                 ]
             ],
             'responses' => [
