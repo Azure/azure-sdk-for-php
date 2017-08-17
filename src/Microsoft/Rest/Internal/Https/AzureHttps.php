@@ -30,6 +30,7 @@ final class AzureHttps implements HttpsInterface
             $this->token = $response['access_token'];
         }
         $headers['Authorization'] = 'Bearer ' . $this->token;
+        $headers['UserAgent'] = 'Azure-SDK-For-PHP/0.0.0-poc';
         return $this->http->send($method, $url, $headers, $body, $options);
     }
 
