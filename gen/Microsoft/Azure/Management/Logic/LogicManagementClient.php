@@ -2500,9 +2500,18 @@ final class LogicManagementClient
         'definitions' => [
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -2513,15 +2522,27 @@ final class LogicManagementClient
                 'required' => []
             ],
             'SubResource' => [
-                'properties' => ['id' => ['type' => 'string']],
+                'properties' => ['id' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceReference' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -2590,15 +2611,18 @@ final class LogicManagementClient
                             'Unregistering',
                             'Unregistered',
                             'Completed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'createdTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'changedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'state' => [
                         'type' => 'string',
@@ -2611,8 +2635,14 @@ final class LogicManagementClient
                             'Suspended'
                         ]
                     ],
-                    'version' => ['type' => 'string'],
-                    'accessEndpoint' => ['type' => 'string'],
+                    'version' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'accessEndpoint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'sku' => ['$ref' => '#/definitions/Sku'],
                     'integrationAccount' => ['$ref' => '#/definitions/ResourceReference'],
                     'definition' => ['type' => 'object'],
@@ -2659,11 +2689,13 @@ final class LogicManagementClient
                 'properties' => [
                     'createdTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'changedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'state' => [
                         'type' => 'string',
@@ -2676,8 +2708,14 @@ final class LogicManagementClient
                             'Suspended'
                         ]
                     ],
-                    'version' => ['type' => 'string'],
-                    'accessEndpoint' => ['type' => 'string'],
+                    'version' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'accessEndpoint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'sku' => ['$ref' => '#/definitions/Sku'],
                     'integrationAccount' => ['$ref' => '#/definitions/ResourceReference'],
                     'definition' => ['type' => 'object'],
@@ -2829,15 +2867,18 @@ final class LogicManagementClient
                             'Unregistering',
                             'Unregistered',
                             'Completed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'createdTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'changedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'state' => [
                         'type' => 'string',
@@ -2848,7 +2889,8 @@ final class LogicManagementClient
                             'Disabled',
                             'Deleted',
                             'Suspended'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'status' => [
                         'type' => 'string',
@@ -2866,18 +2908,27 @@ final class LogicManagementClient
                             'TimedOut',
                             'Aborted',
                             'Ignored'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'lastExecutionTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'nextExecutionTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'recurrence' => ['$ref' => '#/definitions/WorkflowTriggerRecurrence'],
-                    'workflow' => ['$ref' => '#/definitions/ResourceReference']
+                    'recurrence' => [
+                        '$ref' => '#/definitions/WorkflowTriggerRecurrence',
+                        'readOnly' => TRUE
+                    ],
+                    'workflow' => [
+                        '$ref' => '#/definitions/ResourceReference',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -2885,8 +2936,14 @@ final class LogicManagementClient
             'WorkflowTrigger' => [
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/WorkflowTriggerProperties'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -2929,10 +2986,22 @@ final class LogicManagementClient
             ],
             'WorkflowTriggerCallbackUrl' => [
                 'properties' => [
-                    'value' => ['type' => 'string'],
-                    'method' => ['type' => 'string'],
-                    'basePath' => ['type' => 'string'],
-                    'relativePath' => ['type' => 'string'],
+                    'value' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'method' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'basePath' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'relativePath' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'relativePathParameters' => [
                         'type' => 'array',
                         'items' => ['type' => 'string']
@@ -2973,11 +3042,13 @@ final class LogicManagementClient
                 'properties' => [
                     'startTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'endTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'status' => [
                         'type' => 'string',
@@ -2995,16 +3066,38 @@ final class LogicManagementClient
                             'TimedOut',
                             'Aborted',
                             'Ignored'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'code' => ['type' => 'string'],
-                    'error' => ['type' => 'object'],
-                    'trackingId' => ['type' => 'string'],
+                    'code' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'error' => [
+                        'type' => 'object',
+                        'readOnly' => TRUE
+                    ],
+                    'trackingId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'correlation' => ['$ref' => '#/definitions/Correlation'],
-                    'inputsLink' => ['$ref' => '#/definitions/ContentLink'],
-                    'outputsLink' => ['$ref' => '#/definitions/ContentLink'],
-                    'fired' => ['type' => 'boolean'],
-                    'run' => ['$ref' => '#/definitions/ResourceReference']
+                    'inputsLink' => [
+                        '$ref' => '#/definitions/ContentLink',
+                        'readOnly' => TRUE
+                    ],
+                    'outputsLink' => [
+                        '$ref' => '#/definitions/ContentLink',
+                        'readOnly' => TRUE
+                    ],
+                    'fired' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'run' => [
+                        '$ref' => '#/definitions/ResourceReference',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -3012,8 +3105,14 @@ final class LogicManagementClient
             'WorkflowTriggerHistory' => [
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/WorkflowTriggerHistoryProperties'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -3053,22 +3152,45 @@ final class LogicManagementClient
             ],
             'WorkflowRunTrigger' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
-                    'inputs' => ['type' => 'object'],
-                    'inputsLink' => ['$ref' => '#/definitions/ContentLink'],
-                    'outputs' => ['type' => 'object'],
-                    'outputsLink' => ['$ref' => '#/definitions/ContentLink'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'inputs' => [
+                        'type' => 'object',
+                        'readOnly' => TRUE
+                    ],
+                    'inputsLink' => [
+                        '$ref' => '#/definitions/ContentLink',
+                        'readOnly' => TRUE
+                    ],
+                    'outputs' => [
+                        'type' => 'object',
+                        'readOnly' => TRUE
+                    ],
+                    'outputsLink' => [
+                        '$ref' => '#/definitions/ContentLink',
+                        'readOnly' => TRUE
+                    ],
                     'startTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'endTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'trackingId' => ['type' => 'string'],
+                    'trackingId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'correlation' => ['$ref' => '#/definitions/Correlation'],
-                    'code' => ['type' => 'string'],
+                    'code' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'status' => [
                         'type' => 'string',
                         'enum' => [
@@ -3085,16 +3207,26 @@ final class LogicManagementClient
                             'TimedOut',
                             'Aborted',
                             'Ignored'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'error' => ['type' => 'object'],
-                    'trackedProperties' => ['type' => 'object']
+                    'error' => [
+                        'type' => 'object',
+                        'readOnly' => TRUE
+                    ],
+                    'trackedProperties' => [
+                        'type' => 'object',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WorkflowOutputParameter' => [
-                'properties' => ['error' => ['type' => 'object']],
+                'properties' => ['error' => [
+                    'type' => 'object',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -3102,11 +3234,13 @@ final class LogicManagementClient
                 'properties' => [
                     'startTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'endTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'status' => [
                         'type' => 'string',
@@ -3124,19 +3258,39 @@ final class LogicManagementClient
                             'TimedOut',
                             'Aborted',
                             'Ignored'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'code' => ['type' => 'string'],
-                    'error' => ['type' => 'object'],
-                    'correlationId' => ['type' => 'string'],
+                    'code' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'error' => [
+                        'type' => 'object',
+                        'readOnly' => TRUE
+                    ],
+                    'correlationId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'correlation' => ['$ref' => '#/definitions/Correlation'],
-                    'workflow' => ['$ref' => '#/definitions/ResourceReference'],
-                    'trigger' => ['$ref' => '#/definitions/WorkflowRunTrigger'],
+                    'workflow' => [
+                        '$ref' => '#/definitions/ResourceReference',
+                        'readOnly' => TRUE
+                    ],
+                    'trigger' => [
+                        '$ref' => '#/definitions/WorkflowRunTrigger',
+                        'readOnly' => TRUE
+                    ],
                     'outputs' => [
                         'type' => 'object',
-                        'additionalProperties' => ['$ref' => '#/definitions/WorkflowOutputParameter']
+                        'additionalProperties' => ['$ref' => '#/definitions/WorkflowOutputParameter'],
+                        'readOnly' => TRUE
                     ],
-                    'response' => ['$ref' => '#/definitions/WorkflowRunTrigger']
+                    'response' => [
+                        '$ref' => '#/definitions/WorkflowRunTrigger',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -3144,8 +3298,14 @@ final class LogicManagementClient
             'WorkflowRun' => [
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/WorkflowRunProperties'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -3218,11 +3378,13 @@ final class LogicManagementClient
                 'properties' => [
                     'startTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'endTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'status' => [
                         'type' => 'string',
@@ -3240,15 +3402,34 @@ final class LogicManagementClient
                             'TimedOut',
                             'Aborted',
                             'Ignored'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'code' => ['type' => 'string'],
-                    'error' => ['type' => 'object'],
-                    'trackingId' => ['type' => 'string'],
+                    'code' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'error' => [
+                        'type' => 'object',
+                        'readOnly' => TRUE
+                    ],
+                    'trackingId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'correlation' => ['$ref' => '#/definitions/Correlation'],
-                    'inputsLink' => ['$ref' => '#/definitions/ContentLink'],
-                    'outputsLink' => ['$ref' => '#/definitions/ContentLink'],
-                    'trackedProperties' => ['type' => 'object'],
+                    'inputsLink' => [
+                        '$ref' => '#/definitions/ContentLink',
+                        'readOnly' => TRUE
+                    ],
+                    'outputsLink' => [
+                        '$ref' => '#/definitions/ContentLink',
+                        'readOnly' => TRUE
+                    ],
+                    'trackedProperties' => [
+                        'type' => 'object',
+                        'readOnly' => TRUE
+                    ],
                     'retryHistory' => [
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/RetryHistory']
@@ -3260,8 +3441,14 @@ final class LogicManagementClient
             'WorkflowRunAction' => [
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/WorkflowRunActionProperties'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -3384,16 +3571,21 @@ final class LogicManagementClient
                     'fileName' => ['type' => 'string'],
                     'createdTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'changedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'metadata' => ['type' => 'object'],
                     'content' => ['type' => 'string'],
                     'contentType' => ['type' => 'string'],
-                    'contentLink' => ['$ref' => '#/definitions/ContentLink']
+                    'contentLink' => [
+                        '$ref' => '#/definitions/ContentLink',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['schemaType']
@@ -3442,15 +3634,20 @@ final class LogicManagementClient
                     'parametersSchema' => ['$ref' => '#/definitions/IntegrationAccountMapProperties_parametersSchema'],
                     'createdTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'changedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'content' => ['type' => 'string'],
                     'contentType' => ['type' => 'string'],
-                    'contentLink' => ['$ref' => '#/definitions/ContentLink'],
+                    'contentLink' => [
+                        '$ref' => '#/definitions/ContentLink',
+                        'readOnly' => TRUE
+                    ],
                     'metadata' => ['type' => 'object']
                 ],
                 'additionalProperties' => FALSE,
@@ -3518,11 +3715,13 @@ final class LogicManagementClient
                     ],
                     'createdTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'changedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'metadata' => ['type' => 'object'],
                     'content' => ['$ref' => '#/definitions/PartnerContent']
@@ -4704,11 +4903,13 @@ final class LogicManagementClient
                 'properties' => [
                     'createdTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'changedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'metadata' => ['type' => 'object'],
                     'agreementType' => [
@@ -4768,8 +4969,14 @@ final class LogicManagementClient
             'KeyVaultKeyReference_keyVault' => [
                 'properties' => [
                     'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -4790,11 +4997,13 @@ final class LogicManagementClient
                 'properties' => [
                     'createdTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'changedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'metadata' => ['type' => 'object'],
                     'key' => ['$ref' => '#/definitions/KeyVaultKeyReference'],
@@ -4831,11 +5040,13 @@ final class LogicManagementClient
                 'properties' => [
                     'createdTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'changedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'content' => ['type' => 'object']
                 ],

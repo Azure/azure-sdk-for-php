@@ -768,10 +768,17 @@ final class IotHubClient
                     ],
                     'partitionIds' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
-                    'path' => ['type' => 'string'],
-                    'endpoint' => ['type' => 'string']
+                    'path' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'endpoint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1010,8 +1017,14 @@ final class IotHubClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/IpFilterRule']
                     ],
-                    'provisioningState' => ['type' => 'string'],
-                    'hostName' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'hostName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'eventHubEndpoints' => [
                         'type' => 'object',
                         'additionalProperties' => ['$ref' => '#/definitions/EventHubProperties']
@@ -1056,7 +1069,8 @@ final class IotHubClient
                         'enum' => [
                             'Free',
                             'Standard'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'capacity' => [
                         'type' => 'integer',
@@ -1086,9 +1100,18 @@ final class IotHubClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -1104,23 +1127,38 @@ final class IotHubClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/SharedAccessSignatureAuthorizationRule']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation_display' => [
                 'properties' => [
-                    'provider' => ['type' => 'string'],
-                    'resource' => ['type' => 'string'],
-                    'operation' => ['type' => 'string']
+                    'provider' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'resource' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'operation' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
                 'additionalProperties' => FALSE,
@@ -1130,33 +1168,54 @@ final class IotHubClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/Operation']
+                        'items' => ['$ref' => '#/definitions/Operation'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorDetails' => [
                 'properties' => [
-                    'Code' => ['type' => 'string'],
-                    'HttpStatusCode' => ['type' => 'string'],
-                    'Message' => ['type' => 'string'],
-                    'Details' => ['type' => 'string']
+                    'Code' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'HttpStatusCode' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'Message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'Details' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'IotHubQuotaMetricInfo' => [
                 'properties' => [
-                    'Name' => ['type' => 'string'],
+                    'Name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'CurrentValue' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'MaxValue' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1168,7 +1227,10 @@ final class IotHubClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/IotHubQuotaMetricInfo']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1177,15 +1239,18 @@ final class IotHubClient
                 'properties' => [
                     'totalDeviceCount' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'enabledDeviceCount' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'disabledDeviceCount' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1193,14 +1258,19 @@ final class IotHubClient
             ],
             'JobResponse' => [
                 'properties' => [
-                    'jobId' => ['type' => 'string'],
+                    'jobId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'startTimeUtc' => [
                         'type' => 'string',
-                        'format' => 'date-time-rfc1123'
+                        'format' => 'date-time-rfc1123',
+                        'readOnly' => TRUE
                     ],
                     'endTimeUtc' => [
                         'type' => 'string',
-                        'format' => 'date-time-rfc1123'
+                        'format' => 'date-time-rfc1123',
+                        'readOnly' => TRUE
                     ],
                     'type' => [
                         'type' => 'string',
@@ -1215,7 +1285,8 @@ final class IotHubClient
                             'rebootDevice',
                             'factoryResetDevice',
                             'firmwareUpdate'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'status' => [
                         'type' => 'string',
@@ -1226,11 +1297,21 @@ final class IotHubClient
                             'completed',
                             'failed',
                             'cancelled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'failureReason' => ['type' => 'string'],
-                    'statusMessage' => ['type' => 'string'],
-                    'parentJobId' => ['type' => 'string']
+                    'failureReason' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'statusMessage' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'parentJobId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1241,7 +1322,10 @@ final class IotHubClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/JobResponse']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1250,15 +1334,18 @@ final class IotHubClient
                 'properties' => [
                     'minimum' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'maximum' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'default' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'scaleType' => [
                         'type' => 'string',
@@ -1266,7 +1353,8 @@ final class IotHubClient
                             'Automatic',
                             'Manual',
                             'None'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1274,7 +1362,10 @@ final class IotHubClient
             ],
             'IotHubSkuDescription' => [
                 'properties' => [
-                    'resourceType' => ['type' => 'string'],
+                    'resourceType' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'sku' => ['$ref' => '#/definitions/IotHubSkuInfo'],
                     'capacity' => ['$ref' => '#/definitions/IotHubCapacity']
                 ],
@@ -1290,7 +1381,10 @@ final class IotHubClient
                         'type' => 'array',
                         'items' => ['type' => 'string']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1313,7 +1407,10 @@ final class IotHubClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/IotHubSkuDescription']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1324,7 +1421,10 @@ final class IotHubClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/IotHubDescription']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1336,13 +1436,17 @@ final class IotHubClient
             ],
             'IotHubNameAvailabilityInfo' => [
                 'properties' => [
-                    'nameAvailable' => ['type' => 'boolean'],
+                    'nameAvailable' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'reason' => [
                         'type' => 'string',
                         'enum' => [
                             'Invalid',
                             'AlreadyExists'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'message' => ['type' => 'string']
                 ],

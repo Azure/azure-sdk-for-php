@@ -643,8 +643,14 @@ final class ManagementLockClient
             'ManagementLockObject' => [
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/ManagementLockProperties'],
-                    'id' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'name' => ['type' => 'string']
                 ],
                 'additionalProperties' => FALSE,

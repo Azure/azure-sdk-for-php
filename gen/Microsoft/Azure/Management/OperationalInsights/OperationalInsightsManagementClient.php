@@ -1461,9 +1461,18 @@ final class OperationalInsightsManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -1475,9 +1484,18 @@ final class OperationalInsightsManagementClient
             ],
             'ProxyResource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'tags' => [
                         'type' => 'object',
                         'additionalProperties' => ['type' => 'string']
@@ -1617,7 +1635,10 @@ final class OperationalInsightsManagementClient
             ],
             'SavedSearch' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'etag' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/SavedSearchProperties']
                 ],
@@ -1645,7 +1666,10 @@ final class OperationalInsightsManagementClient
             ],
             'SearchResultsResponse' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     '__metadata' => ['$ref' => '#/definitions/SearchMetadata'],
                     'value' => [
                         'type' => 'array',
@@ -1751,7 +1775,10 @@ final class OperationalInsightsManagementClient
                         'items' => ['type' => 'string']
                     ],
                     'storageAccount' => ['$ref' => '#/definitions/StorageAccount'],
-                    'status' => ['$ref' => '#/definitions/StorageInsightStatus']
+                    'status' => [
+                        '$ref' => '#/definitions/StorageInsightStatus',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['storageAccount']

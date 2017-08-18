@@ -6995,12 +6995,22 @@ final class ApiManagementClient
             ],
             'PolicySnippetContract' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
-                    'content' => ['type' => 'string'],
-                    'toolTip' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'content' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'toolTip' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'scope' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -7016,7 +7026,10 @@ final class ApiManagementClient
             ],
             'RegionContract' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'isMasterRegion' => ['type' => 'boolean'],
                     'isDeleted' => ['type' => 'boolean']
                 ],
@@ -7040,9 +7053,18 @@ final class ApiManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7716,7 +7738,10 @@ final class ApiManagementClient
                     'encodedCertificate' => ['type' => 'string'],
                     'certificatePassword' => ['type' => 'string'],
                     'negotiateClientCertificate' => ['type' => 'boolean'],
-                    'certificate' => ['$ref' => '#/definitions/CertificateInformation']
+                    'certificate' => [
+                        '$ref' => '#/definitions/CertificateInformation',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => [
@@ -7726,8 +7751,14 @@ final class ApiManagementClient
             ],
             'VirtualNetworkConfiguration' => [
                 'properties' => [
-                    'vnetid' => ['type' => 'string'],
-                    'subnetname' => ['type' => 'string'],
+                    'vnetid' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'subnetname' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'subnetResourceId' => ['type' => 'string']
                 ],
                 'additionalProperties' => FALSE,
@@ -7757,7 +7788,8 @@ final class ApiManagementClient
                     'sku' => ['$ref' => '#/definitions/ApiManagementServiceSkuProperties'],
                     'staticIps' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
                     'virtualNetworkConfiguration' => ['$ref' => '#/definitions/VirtualNetworkConfiguration']
                 ],
@@ -7804,23 +7836,43 @@ final class ApiManagementClient
             'ApiManagementServiceBaseProperties' => [
                 'properties' => [
                     'notificationSenderEmail' => ['type' => 'string'],
-                    'provisioningState' => ['type' => 'string'],
-                    'targetProvisioningState' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'targetProvisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'createdAtUtc' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'gatewayUrl' => ['type' => 'string'],
-                    'portalUrl' => ['type' => 'string'],
-                    'managementApiUrl' => ['type' => 'string'],
-                    'scmUrl' => ['type' => 'string'],
+                    'gatewayUrl' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'portalUrl' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'managementApiUrl' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'scmUrl' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'hostnameConfigurations' => [
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/HostnameConfiguration']
                     ],
                     'staticIps' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
                     'virtualNetworkConfiguration' => ['$ref' => '#/definitions/VirtualNetworkConfiguration'],
                     'additionalLocations' => [
@@ -7848,7 +7900,10 @@ final class ApiManagementClient
                     'properties' => ['$ref' => '#/definitions/ApiManagementServiceProperties'],
                     'sku' => ['$ref' => '#/definitions/ApiManagementServiceSkuProperties'],
                     'location' => ['type' => 'string'],
-                    'etag' => ['type' => 'string']
+                    'etag' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => [
@@ -7859,9 +7914,18 @@ final class ApiManagementClient
             ],
             'ApimResource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'tags' => [
                         'type' => 'object',
                         'additionalProperties' => ['type' => 'string']
@@ -7874,7 +7938,10 @@ final class ApiManagementClient
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/ApiManagementServiceUpdateProperties'],
                     'sku' => ['$ref' => '#/definitions/ApiManagementServiceSkuProperties'],
-                    'etag' => ['type' => 'string']
+                    'etag' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7902,8 +7969,14 @@ final class ApiManagementClient
             ],
             'ApiManagementServiceNameAvailabilityResult' => [
                 'properties' => [
-                    'nameAvailable' => ['type' => 'boolean'],
-                    'message' => ['type' => 'string'],
+                    'nameAvailable' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'reason' => [
                         'type' => 'string',
                         'enum' => [
@@ -7965,7 +8038,10 @@ final class ApiManagementClient
                     'body' => ['type' => 'string'],
                     'title' => ['type' => 'string'],
                     'description' => ['type' => 'string'],
-                    'isDefault' => ['type' => 'boolean'],
+                    'isDefault' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'parameters' => [
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/EmailTemplateParametersContractProperties']
@@ -8016,7 +8092,10 @@ final class ApiManagementClient
                 'properties' => [
                     'displayName' => ['type' => 'string'],
                     'description' => ['type' => 'string'],
-                    'builtIn' => ['type' => 'boolean'],
+                    'builtIn' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'type' => [
                         'type' => 'string',
                         'enum' => [
@@ -8133,7 +8212,8 @@ final class ApiManagementClient
                     ],
                     'groups' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/GroupContract']
+                        'items' => ['$ref' => '#/definitions/GroupContract'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -8151,7 +8231,8 @@ final class ApiManagementClient
                     'note' => ['type' => 'string'],
                     'identities' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/UserIdentityContract']
+                        'items' => ['$ref' => '#/definitions/UserIdentityContract'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -8411,7 +8492,8 @@ final class ApiManagementClient
                     ],
                     'createdDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'startDate' => [
                         'type' => 'string',
@@ -8576,8 +8658,14 @@ final class ApiManagementClient
                     'country' => ['type' => 'string'],
                     'region' => ['type' => 'string'],
                     'zip' => ['type' => 'string'],
-                    'userId' => ['type' => 'string'],
-                    'productId' => ['type' => 'string'],
+                    'userId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'productId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'apiId' => ['type' => 'string'],
                     'operationId' => ['type' => 'string'],
                     'apiRegion' => ['type' => 'string'],
@@ -8661,8 +8749,14 @@ final class ApiManagementClient
                 'properties' => [
                     'apiId' => ['type' => 'string'],
                     'operationId' => ['type' => 'string'],
-                    'productId' => ['type' => 'string'],
-                    'userId' => ['type' => 'string'],
+                    'productId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'userId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'method' => ['type' => 'string'],
                     'url' => ['type' => 'string'],
                     'ipAddress' => ['type' => 'string'],

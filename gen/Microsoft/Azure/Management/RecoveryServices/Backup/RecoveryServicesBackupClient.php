@@ -2556,9 +2556,18 @@ final class RecoveryServicesBackupClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -3924,7 +3933,8 @@ final class RecoveryServicesBackupClient
                             'AzureSqlContainer',
                             'Windows',
                             'VCenter'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,

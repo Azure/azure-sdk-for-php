@@ -2758,9 +2758,18 @@ final class CustomerInsightsManagementClient
             ],
             'HubPropertiesFormat' => [
                 'properties' => [
-                    'apiEndpoint' => ['type' => 'string'],
-                    'webEndpoint' => ['type' => 'string'],
-                    'provisioningState' => ['type' => 'string'],
+                    'apiEndpoint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'webEndpoint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'tenantFeatures' => [
                         'type' => 'integer',
                         'format' => 'int32'
@@ -2833,14 +2842,18 @@ final class CustomerInsightsManagementClient
             ],
             'DataSource' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'dataSourceType' => [
                         'type' => 'string',
                         'enum' => [
                             'Connector',
                             'LinkInteraction',
                             'SystemDefault'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'status' => [
                         'type' => 'string',
@@ -2848,13 +2861,18 @@ final class CustomerInsightsManagementClient
                             'None',
                             'Active',
                             'Deleted'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'id' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'dataSourceReferenceId' => ['type' => 'string']
+                    'dataSourceReferenceId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -2895,7 +2913,8 @@ final class CustomerInsightsManagementClient
                     'isAvailableInGraph' => ['type' => 'boolean'],
                     'dataSourcePrecedenceRules' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/DataSourcePrecedence']
+                        'items' => ['$ref' => '#/definitions/DataSourcePrecedence'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -2926,7 +2945,8 @@ final class CustomerInsightsManagementClient
                     ],
                     'lastChangedUtc' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'provisioningState' => [
                         'type' => 'string',
@@ -2937,10 +2957,14 @@ final class CustomerInsightsManagementClient
                             'Deleting',
                             'HumanIntervention',
                             'Failed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'schemaItemTypeLink' => ['type' => 'string'],
-                    'tenantId' => ['type' => 'string'],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'timestampFieldName' => ['type' => 'string'],
                     'typeName' => ['type' => 'string']
                 ],
@@ -2949,7 +2973,10 @@ final class CustomerInsightsManagementClient
             ],
             'AuthorizationPolicy' => [
                 'properties' => [
-                    'policyName' => ['type' => 'string'],
+                    'policyName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'permissions' => [
                         'type' => 'array',
                         'items' => [
@@ -3037,7 +3064,8 @@ final class CustomerInsightsManagementClient
                 'properties' => [
                     'connectorId' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'connectorName' => ['type' => 'string'],
                     'connectorType' => [
@@ -3059,11 +3087,13 @@ final class CustomerInsightsManagementClient
                     ],
                     'created' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'lastModified' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'state' => [
                         'type' => 'string',
@@ -3074,9 +3104,13 @@ final class CustomerInsightsManagementClient
                             'Expiring',
                             'Deleting',
                             'Failed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'tenantId' => ['type' => 'string'],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'isInternal' => ['type' => 'boolean']
                 ],
                 'additionalProperties' => FALSE,
@@ -3188,7 +3222,10 @@ final class CustomerInsightsManagementClient
             ],
             'ConnectorMapping' => [
                 'properties' => [
-                    'connectorName' => ['type' => 'string'],
+                    'connectorName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'connectorType' => [
                         'type' => 'string',
                         'enum' => [
@@ -3202,11 +3239,13 @@ final class CustomerInsightsManagementClient
                     ],
                     'created' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'lastModified' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'entityType' => [
                         'type' => 'string',
@@ -3218,16 +3257,26 @@ final class CustomerInsightsManagementClient
                         ]
                     ],
                     'entityTypeName' => ['type' => 'string'],
-                    'connectorMappingName' => ['type' => 'string'],
+                    'connectorMappingName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'displayName' => ['type' => 'string'],
                     'description' => ['type' => 'string'],
-                    'dataFormatId' => ['type' => 'string'],
+                    'dataFormatId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'mappingProperties' => ['$ref' => '#/definitions/ConnectorMappingProperties'],
                     'nextRunTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'runId' => ['type' => 'string'],
+                    'runId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'state' => [
                         'type' => 'string',
                         'enum' => [
@@ -3238,9 +3287,13 @@ final class CustomerInsightsManagementClient
                             'Running',
                             'Stopped',
                             'Expiring'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'tenantId' => ['type' => 'string']
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => [
@@ -3319,8 +3372,14 @@ final class CustomerInsightsManagementClient
                         ]
                     ],
                     'entityTypeName' => ['type' => 'string'],
-                    'tenantId' => ['type' => 'string'],
-                    'kpiName' => ['type' => 'string'],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'kpiName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'displayName' => [
                         'type' => 'object',
                         'additionalProperties' => ['type' => 'string']
@@ -3362,11 +3421,13 @@ final class CustomerInsightsManagementClient
                     ],
                     'groupByMetadata' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/KpiGroupByMetadata']
+                        'items' => ['$ref' => '#/definitions/KpiGroupByMetadata'],
+                        'readOnly' => TRUE
                     ],
                     'participantProfilesMetadata' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/KpiParticipantProfilesMetadata']
+                        'items' => ['$ref' => '#/definitions/KpiParticipantProfilesMetadata'],
+                        'readOnly' => TRUE
                     ],
                     'provisioningState' => [
                         'type' => 'string',
@@ -3377,7 +3438,8 @@ final class CustomerInsightsManagementClient
                             'Deleting',
                             'HumanIntervention',
                             'Failed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'thresHolds' => ['$ref' => '#/definitions/KpiThresholds'],
                     'aliases' => [
@@ -3400,9 +3462,18 @@ final class CustomerInsightsManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -3414,16 +3485,28 @@ final class CustomerInsightsManagementClient
             ],
             'ProxyResource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'WidgetType' => [
                 'properties' => [
-                    'widgetTypeName' => ['type' => 'string'],
+                    'widgetTypeName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'definition' => ['type' => 'string'],
                     'description' => ['type' => 'string'],
                     'displayName' => [
@@ -3431,15 +3514,20 @@ final class CustomerInsightsManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ],
                     'imageUrl' => ['type' => 'string'],
-                    'tenantId' => ['type' => 'string'],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'widgetVersion' => ['type' => 'string'],
                     'changed' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'created' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -3447,9 +3535,15 @@ final class CustomerInsightsManagementClient
             ],
             'View' => [
                 'properties' => [
-                    'viewName' => ['type' => 'string'],
+                    'viewName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'userId' => ['type' => 'string'],
-                    'tenantId' => ['type' => 'string'],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'displayName' => [
                         'type' => 'object',
                         'additionalProperties' => ['type' => 'string']
@@ -3457,11 +3551,13 @@ final class CustomerInsightsManagementClient
                     'definition' => ['type' => 'string'],
                     'changed' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'created' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -3498,8 +3594,14 @@ final class CustomerInsightsManagementClient
             ],
             'LinkDefinition' => [
                 'properties' => [
-                    'tenantId' => ['type' => 'string'],
-                    'linkName' => ['type' => 'string'],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'linkName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'sourceEntityType' => [
                         'type' => 'string',
                         'enum' => [
@@ -3545,7 +3647,8 @@ final class CustomerInsightsManagementClient
                             'Deleting',
                             'HumanIntervention',
                             'Failed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'referenceOnly' => ['type' => 'boolean'],
                     'operationType' => [
@@ -3624,12 +3727,22 @@ final class CustomerInsightsManagementClient
                             'Deleting',
                             'HumanIntervention',
                             'Failed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'relationshipName' => ['type' => 'string'],
+                    'relationshipName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'relatedProfileType' => ['type' => 'string'],
-                    'relationshipGuidId' => ['type' => 'string'],
-                    'tenantId' => ['type' => 'string']
+                    'relationshipGuidId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => [
@@ -3677,7 +3790,10 @@ final class CustomerInsightsManagementClient
                         'additionalProperties' => ['type' => 'string']
                     ],
                     'interactionType' => ['type' => 'string'],
-                    'linkName' => ['type' => 'string'],
+                    'linkName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'mappings' => [
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/RelationshipLinkFieldMapping']
@@ -3695,15 +3811,22 @@ final class CustomerInsightsManagementClient
                             'Deleting',
                             'HumanIntervention',
                             'Failed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'relatedProfilePropertyReferences' => [
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/ParticipantProfilePropertyReference']
                     ],
                     'relationshipName' => ['type' => 'string'],
-                    'relationshipGuidId' => ['type' => 'string'],
-                    'tenantId' => ['type' => 'string']
+                    'relationshipGuidId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => [
@@ -3751,7 +3874,8 @@ final class CustomerInsightsManagementClient
                     'primaryParticipantProfilePropertyName' => ['type' => 'string'],
                     'dataSourcePrecedenceRules' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/DataSourcePrecedence']
+                        'items' => ['$ref' => '#/definitions/DataSourcePrecedence'],
+                        'readOnly' => TRUE
                     ],
                     'defaultDataSource' => ['$ref' => '#/definitions/DataSource'],
                     'isActivity' => ['type' => 'boolean']
@@ -4001,8 +4125,14 @@ final class CustomerInsightsManagementClient
             ],
             'RoleAssignment' => [
                 'properties' => [
-                    'tenantId' => ['type' => 'string'],
-                    'assignmentName' => ['type' => 'string'],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'assignmentName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'displayName' => [
                         'type' => 'object',
                         'additionalProperties' => ['type' => 'string']
@@ -4020,7 +4150,8 @@ final class CustomerInsightsManagementClient
                             'Deleting',
                             'HumanIntervention',
                             'Failed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'role' => [
                         'type' => 'string',
@@ -4117,27 +4248,42 @@ final class CustomerInsightsManagementClient
             ],
             'RelationshipsLookup' => [
                 'properties' => [
-                    'profileName' => ['type' => 'string'],
+                    'profileName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'profilePropertyReferences' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ParticipantProfilePropertyReference']
+                        'items' => ['$ref' => '#/definitions/ParticipantProfilePropertyReference'],
+                        'readOnly' => TRUE
                     ],
-                    'relatedProfileName' => ['type' => 'string'],
+                    'relatedProfileName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'relatedProfilePropertyReferences' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ParticipantProfilePropertyReference']
+                        'items' => ['$ref' => '#/definitions/ParticipantProfilePropertyReference'],
+                        'readOnly' => TRUE
                     ],
-                    'existingRelationshipName' => ['type' => 'string']
+                    'existingRelationshipName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SuggestRelationshipLinksResponse' => [
                 'properties' => [
-                    'interactionName' => ['type' => 'string'],
+                    'interactionName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'suggestedRelationships' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/RelationshipsLookup']
+                        'items' => ['$ref' => '#/definitions/RelationshipsLookup'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -4219,11 +4365,15 @@ final class CustomerInsightsManagementClient
                             'Deleting',
                             'HumanIntervention',
                             'Failed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'predictionName' => ['type' => 'string'],
                     'scopeExpression' => ['type' => 'string'],
-                    'tenantId' => ['type' => 'string'],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'autoAnalyze' => ['type' => 'boolean'],
                     'mappings' => ['$ref' => '#/definitions/Prediction_mappings'],
                     'scoreLabel' => ['type' => 'string'],
@@ -4231,7 +4381,10 @@ final class CustomerInsightsManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/Prediction_gradesItem']
                     ],
-                    'systemGeneratedEntities' => ['$ref' => '#/definitions/Prediction_systemGeneratedEntities']
+                    'systemGeneratedEntities' => [
+                        '$ref' => '#/definitions/Prediction_systemGeneratedEntities',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => [
@@ -4326,16 +4479,27 @@ final class CustomerInsightsManagementClient
             ],
             'PredictionTrainingResults' => [
                 'properties' => [
-                    'tenantId' => ['type' => 'string'],
-                    'scoreName' => ['type' => 'string'],
-                    'predictionDistribution' => ['$ref' => '#/definitions/PredictionDistributionDefinition'],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'scoreName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'predictionDistribution' => [
+                        '$ref' => '#/definitions/PredictionDistributionDefinition',
+                        'readOnly' => TRUE
+                    ],
                     'canonicalProfiles' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/CanonicalProfileDefinition']
+                        'items' => ['$ref' => '#/definitions/CanonicalProfileDefinition'],
+                        'readOnly' => TRUE
                     ],
                     'primaryProfileInstanceCount' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -4343,9 +4507,18 @@ final class CustomerInsightsManagementClient
             ],
             'PredictionModelStatus' => [
                 'properties' => [
-                    'tenantId' => ['type' => 'string'],
-                    'predictionName' => ['type' => 'string'],
-                    'predictionGuidId' => ['type' => 'string'],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'predictionName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'predictionGuidId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'status' => [
                         'type' => 'string',
                         'enum' => [
@@ -4369,28 +4542,39 @@ final class CustomerInsightsManagementClient
                             'Failed'
                         ]
                     ],
-                    'message' => ['type' => 'string'],
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'trainingSetCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'testSetCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'validationSetCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'trainingAccuracy' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'signalsUsed' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'modelVersion' => ['type' => 'string']
+                    'modelVersion' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['status']

@@ -762,9 +762,18 @@ final class MySQLManagementClient
         'definitions' => [
             'ProxyResource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1000,10 +1009,22 @@ final class MySQLManagementClient
             'ConfigurationProperties' => [
                 'properties' => [
                     'value' => ['type' => 'string'],
-                    'description' => ['type' => 'string'],
-                    'defaultValue' => ['type' => 'string'],
-                    'dataType' => ['type' => 'string'],
-                    'allowedValues' => ['type' => 'string'],
+                    'description' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'defaultValue' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'dataType' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'allowedValues' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'source' => ['type' => 'string']
                 ],
                 'additionalProperties' => FALSE,
@@ -1024,29 +1045,49 @@ final class MySQLManagementClient
             ],
             'OperationDisplay' => [
                 'properties' => [
-                    'provider' => ['type' => 'string'],
-                    'resource' => ['type' => 'string'],
-                    'operation' => ['type' => 'string'],
-                    'description' => ['type' => 'string']
+                    'provider' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'resource' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'operation' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'description' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
-                    'display' => ['$ref' => '#/definitions/OperationDisplay'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'display' => [
+                        '$ref' => '#/definitions/OperationDisplay',
+                        'readOnly' => TRUE
+                    ],
                     'origin' => [
                         'type' => 'string',
                         'enum' => [
                             'NotSpecified',
                             'user',
                             'system'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'properties' => [
                         'type' => 'object',
-                        'additionalProperties' => ['type' => 'object']
+                        'additionalProperties' => ['type' => 'object'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,

@@ -1398,9 +1398,18 @@ final class RelayManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1409,15 +1418,18 @@ final class RelayManagementClient
                 'properties' => [
                     'createdAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'updatedAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'listenerCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'requiresClientAuthorization' => ['type' => 'boolean'],
                     'userMetadata' => ['type' => 'string']
@@ -1443,18 +1455,24 @@ final class RelayManagementClient
             ],
             'WcfRelay_properties' => [
                 'properties' => [
-                    'isDynamic' => ['type' => 'boolean'],
+                    'isDynamic' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'createdAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'updatedAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'listenerCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'relayType' => [
                         'type' => 'string',
@@ -1508,18 +1526,27 @@ final class RelayManagementClient
                             'Failed',
                             'Updating',
                             'Unknown'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'createdAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'updatedAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'serviceBusEndpoint' => ['type' => 'string'],
-                    'metricId' => ['type' => 'string']
+                    'serviceBusEndpoint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'metricId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1614,7 +1641,10 @@ final class RelayManagementClient
             ],
             'CheckNameAvailabilityResult' => [
                 'properties' => [
-                    'message' => ['type' => 'string'],
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'nameAvailable' => ['type' => 'boolean'],
                     'reason' => [
                         'type' => 'string',
@@ -1633,16 +1663,28 @@ final class RelayManagementClient
             ],
             'Operation_display' => [
                 'properties' => [
-                    'provider' => ['type' => 'string'],
-                    'resource' => ['type' => 'string'],
-                    'operation' => ['type' => 'string']
+                    'provider' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'resource' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'operation' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
                 'additionalProperties' => FALSE,
@@ -1652,9 +1694,13 @@ final class RelayManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/Operation']
+                        'items' => ['$ref' => '#/definitions/Operation'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []

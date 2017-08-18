@@ -1307,17 +1307,30 @@ final class DataLakeAnalyticsAccountManagementClient
             'StorageContainerProperties' => [
                 'properties' => ['lastModifiedTime' => [
                     'type' => 'string',
-                    'format' => 'date-time'
+                    'format' => 'date-time',
+                    'readOnly' => TRUE
                 ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'StorageContainer' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
-                    'properties' => ['$ref' => '#/definitions/StorageContainerProperties']
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'properties' => [
+                        '$ref' => '#/definitions/StorageContainerProperties',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1326,15 +1339,22 @@ final class DataLakeAnalyticsAccountManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/StorageContainer']
+                        'items' => ['$ref' => '#/definitions/StorageContainer'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SasTokenInfo' => [
-                'properties' => ['accessToken' => ['type' => 'string']],
+                'properties' => ['accessToken' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -1342,9 +1362,13 @@ final class DataLakeAnalyticsAccountManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SasTokenInfo']
+                        'items' => ['$ref' => '#/definitions/SasTokenInfo'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1363,9 +1387,13 @@ final class DataLakeAnalyticsAccountManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/StorageAccountInfo']
+                        'items' => ['$ref' => '#/definitions/StorageAccountInfo'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1374,9 +1402,13 @@ final class DataLakeAnalyticsAccountManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/DataLakeStoreAccountInfo']
+                        'items' => ['$ref' => '#/definitions/DataLakeStoreAccountInfo'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1454,11 +1486,13 @@ final class DataLakeAnalyticsAccountManagementClient
                     ],
                     'systemMaxDegreeOfParallelism' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'systemMaxJobCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'dataLakeStoreAccounts' => [
                         'type' => 'array',
@@ -1494,7 +1528,8 @@ final class DataLakeAnalyticsAccountManagementClient
                             'Commitment_50000AUHours',
                             'Commitment_100000AUHours',
                             'Commitment_500000AUHours'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'firewallState' => [
                         'type' => 'string',
@@ -1537,7 +1572,8 @@ final class DataLakeAnalyticsAccountManagementClient
                 'properties' => [
                     'objectId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
                     'objectType' => [
                         'type' => 'string',
@@ -1545,7 +1581,8 @@ final class DataLakeAnalyticsAccountManagementClient
                             'User',
                             'Group',
                             'ServicePrincipal'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'maxDegreeOfParallelismPerJob' => [
                         'type' => 'integer',
@@ -1561,7 +1598,10 @@ final class DataLakeAnalyticsAccountManagementClient
             ],
             'ComputePolicy' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/ComputePolicyProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -1653,9 +1693,13 @@ final class DataLakeAnalyticsAccountManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ComputePolicy']
+                        'items' => ['$ref' => '#/definitions/ComputePolicy'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1685,27 +1729,35 @@ final class DataLakeAnalyticsAccountManagementClient
                             'Resuming',
                             'Deleting',
                             'Deleted'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'state' => [
                         'type' => 'string',
                         'enum' => [
                             'Active',
                             'Suspended'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'creationTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'lastModifiedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'endpoint' => ['type' => 'string'],
+                    'endpoint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'accountId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1725,9 +1777,13 @@ final class DataLakeAnalyticsAccountManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/DataLakeAnalyticsAccountBasic']
+                        'items' => ['$ref' => '#/definitions/DataLakeAnalyticsAccountBasic'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1736,9 +1792,13 @@ final class DataLakeAnalyticsAccountManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/FirewallRule']
+                        'items' => ['$ref' => '#/definitions/FirewallRule'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1758,9 +1818,18 @@ final class DataLakeAnalyticsAccountManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -1772,18 +1841,30 @@ final class DataLakeAnalyticsAccountManagementClient
             ],
             'OptionalSubResource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubResource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['name']

@@ -479,31 +479,50 @@ final class SearchManagementClient
             ],
             'CheckNameAvailabilityOutput' => [
                 'properties' => [
-                    'nameAvailable' => ['type' => 'boolean'],
+                    'nameAvailable' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'reason' => [
                         'type' => 'string',
                         'enum' => [
                             'Invalid',
                             'AlreadyExists'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'message' => ['type' => 'string']
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'AdminKeyResult' => [
                 'properties' => [
-                    'primaryKey' => ['type' => 'string'],
-                    'secondaryKey' => ['type' => 'string']
+                    'primaryKey' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'secondaryKey' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'QueryKey' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
-                    'key' => ['type' => 'string']
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'key' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -511,7 +530,8 @@ final class SearchManagementClient
             'ListQueryKeysResult' => [
                 'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/QueryKey']
+                    'items' => ['$ref' => '#/definitions/QueryKey'],
+                    'readOnly' => TRUE
                 ]],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -556,16 +576,21 @@ final class SearchManagementClient
                             'degraded',
                             'disabled',
                             'error'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'statusDetails' => ['type' => 'string'],
+                    'statusDetails' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'provisioningState' => [
                         'type' => 'string',
                         'enum' => [
                             'succeeded',
                             'provisioning',
                             'failed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -582,16 +607,26 @@ final class SearchManagementClient
             'SearchServiceListResult' => [
                 'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SearchService']
+                    'items' => ['$ref' => '#/definitions/SearchService'],
+                    'readOnly' => TRUE
                 ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',

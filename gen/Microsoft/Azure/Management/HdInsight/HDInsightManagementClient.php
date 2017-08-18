@@ -1306,7 +1306,10 @@ final class HDInsightManagementClient
                         'type' => 'array',
                         'items' => ['type' => 'string']
                     ],
-                    'applicationName' => ['type' => 'string']
+                    'applicationName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => [
@@ -1332,17 +1335,24 @@ final class HDInsightManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/RuntimeScriptAction']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ScriptActionExecutionSummary' => [
                 'properties' => [
-                    'status' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'instanceCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1352,17 +1362,34 @@ final class HDInsightManagementClient
                 'properties' => [
                     'scriptExecutionId' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
-                    'startTime' => ['type' => 'string'],
-                    'endTime' => ['type' => 'string'],
-                    'status' => ['type' => 'string'],
-                    'operation' => ['type' => 'string'],
+                    'startTime' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'endTime' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'operation' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'executionSummary' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ScriptActionExecutionSummary']
+                        'items' => ['$ref' => '#/definitions/ScriptActionExecutionSummary'],
+                        'readOnly' => TRUE
                     ],
-                    'debugInformation' => ['type' => 'string'],
+                    'debugInformation' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'name' => ['type' => 'string'],
                     'uri' => ['type' => 'string'],
                     'parameters' => ['type' => 'string'],
@@ -1370,7 +1397,10 @@ final class HDInsightManagementClient
                         'type' => 'array',
                         'items' => ['type' => 'string']
                     ],
-                    'applicationName' => ['type' => 'string']
+                    'applicationName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => [
@@ -1383,9 +1413,13 @@ final class HDInsightManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/RuntimeScriptActionDetail']
+                        'items' => ['$ref' => '#/definitions/RuntimeScriptActionDetail'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1396,7 +1430,10 @@ final class HDInsightManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/Cluster']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1426,9 +1463,18 @@ final class HDInsightManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -1527,15 +1573,27 @@ final class HDInsightManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/ApplicationGetEndpoint']
                     ],
-                    'provisioningState' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'applicationType' => ['type' => 'string'],
-                    'applicationState' => ['type' => 'string'],
+                    'applicationState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'errors' => [
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/errors']
                     ],
-                    'createdDate' => ['type' => 'string'],
-                    'marketplaceIdentifier' => ['type' => 'string'],
+                    'createdDate' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'marketplaceIdentifier' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'additionalProperties' => ['type' => 'string']
                 ],
                 'additionalProperties' => FALSE,
@@ -1543,9 +1601,18 @@ final class HDInsightManagementClient
             ],
             'Application' => [
                 'properties' => [
-                    'id' => ['$ref' => '#/definitions/SubResource'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        '$ref' => '#/definitions/SubResource',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'etag' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -1562,7 +1629,10 @@ final class HDInsightManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/Application']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1707,9 +1777,13 @@ final class HDInsightManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/RuntimeScriptActionDetail']
+                        'items' => ['$ref' => '#/definitions/RuntimeScriptActionDetail'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1734,7 +1808,10 @@ final class HDInsightManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/RuntimeScriptActionDetail']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []

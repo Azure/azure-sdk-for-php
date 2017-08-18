@@ -5703,9 +5703,18 @@ final class SqlManagementClient
         'definitions' => [
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -5734,7 +5743,10 @@ final class SqlManagementClient
             ],
             'BackupLongTermRetentionPolicy' => [
                 'properties' => [
-                    'location' => ['type' => 'string'],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/BackupLongTermRetentionPolicyProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -5747,7 +5759,10 @@ final class SqlManagementClient
             ],
             'BackupLongTermRetentionVault' => [
                 'properties' => [
-                    'location' => ['type' => 'string'],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/BackupLongTermRetentionVaultProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -5771,15 +5786,18 @@ final class SqlManagementClient
                         'enum' => [
                             'DISCRETE',
                             'CONTINUOUS'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'restorePointCreationDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'earliestRestoreDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -5800,12 +5818,22 @@ final class SqlManagementClient
             ],
             'RecoverableDatabaseProperties' => [
                 'properties' => [
-                    'edition' => ['type' => 'string'],
-                    'serviceLevelObjective' => ['type' => 'string'],
-                    'elasticPoolName' => ['type' => 'string'],
+                    'edition' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'serviceLevelObjective' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'elasticPoolName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'lastAvailableBackupDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -5826,22 +5854,40 @@ final class SqlManagementClient
             ],
             'RestorableDroppedDatabaseProperties' => [
                 'properties' => [
-                    'databaseName' => ['type' => 'string'],
-                    'edition' => ['type' => 'string'],
-                    'maxSizeBytes' => ['type' => 'string'],
-                    'serviceLevelObjective' => ['type' => 'string'],
-                    'elasticPoolName' => ['type' => 'string'],
+                    'databaseName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'edition' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'maxSizeBytes' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'serviceLevelObjective' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'elasticPoolName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'creationDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'deletionDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'earliestRestoreDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -5849,7 +5895,10 @@ final class SqlManagementClient
             ],
             'RestorableDroppedDatabase' => [
                 'properties' => [
-                    'location' => ['type' => 'string'],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/RestorableDroppedDatabaseProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -5867,7 +5916,8 @@ final class SqlManagementClient
                 'properties' => [
                     'limit' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'unit' => [
                         'type' => 'string',
@@ -5876,7 +5926,8 @@ final class SqlManagementClient
                             'Gigabytes',
                             'Terabytes',
                             'Petabytes'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'status' => [
                         'type' => 'string',
@@ -5885,7 +5936,8 @@ final class SqlManagementClient
                             'Available',
                             'Default',
                             'Disabled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -5895,11 +5947,13 @@ final class SqlManagementClient
                 'properties' => [
                     'unit' => [
                         'type' => 'string',
-                        'enum' => ['DTU']
+                        'enum' => ['DTU'],
+                        'readOnly' => TRUE
                     ],
                     'value' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -5907,7 +5961,10 @@ final class SqlManagementClient
             ],
             'ServiceObjectiveCapability' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'status' => [
                         'type' => 'string',
                         'enum' => [
@@ -5915,25 +5972,37 @@ final class SqlManagementClient
                             'Available',
                             'Default',
                             'Disabled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'performanceLevel' => ['$ref' => '#/definitions/PerformanceLevel'],
+                    'performanceLevel' => [
+                        '$ref' => '#/definitions/PerformanceLevel',
+                        'readOnly' => TRUE
+                    ],
                     'id' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
                     'supportedMaxSizes' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/MaxSizeCapability']
+                        'items' => ['$ref' => '#/definitions/MaxSizeCapability'],
+                        'readOnly' => TRUE
                     ],
-                    'includedMaxSize' => ['$ref' => '#/definitions/MaxSizeCapability']
+                    'includedMaxSize' => [
+                        '$ref' => '#/definitions/MaxSizeCapability',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'EditionCapability' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'status' => [
                         'type' => 'string',
                         'enum' => [
@@ -5941,11 +6010,13 @@ final class SqlManagementClient
                             'Available',
                             'Default',
                             'Disabled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'supportedServiceLevelObjectives' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ServiceObjectiveCapability']
+                        'items' => ['$ref' => '#/definitions/ServiceObjectiveCapability'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -5955,7 +6026,8 @@ final class SqlManagementClient
                 'properties' => [
                     'limit' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'status' => [
                         'type' => 'string',
@@ -5964,7 +6036,8 @@ final class SqlManagementClient
                             'Available',
                             'Default',
                             'Disabled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -5974,7 +6047,8 @@ final class SqlManagementClient
                 'properties' => [
                     'limit' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'status' => [
                         'type' => 'string',
@@ -5983,11 +6057,13 @@ final class SqlManagementClient
                             'Available',
                             'Default',
                             'Disabled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'supportedPerDatabaseMinDtus' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ElasticPoolPerDatabaseMinDtuCapability']
+                        'items' => ['$ref' => '#/definitions/ElasticPoolPerDatabaseMinDtuCapability'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -5997,11 +6073,13 @@ final class SqlManagementClient
                 'properties' => [
                     'limit' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'maxDatabaseCount' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'status' => [
                         'type' => 'string',
@@ -6010,20 +6088,27 @@ final class SqlManagementClient
                             'Available',
                             'Default',
                             'Disabled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'supportedMaxSizes' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/MaxSizeCapability']
+                        'items' => ['$ref' => '#/definitions/MaxSizeCapability'],
+                        'readOnly' => TRUE
                     ],
-                    'includedMaxSize' => ['$ref' => '#/definitions/MaxSizeCapability'],
+                    'includedMaxSize' => [
+                        '$ref' => '#/definitions/MaxSizeCapability',
+                        'readOnly' => TRUE
+                    ],
                     'supportedPerDatabaseMaxSizes' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/MaxSizeCapability']
+                        'items' => ['$ref' => '#/definitions/MaxSizeCapability'],
+                        'readOnly' => TRUE
                     ],
                     'supportedPerDatabaseMaxDtus' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ElasticPoolPerDatabaseMaxDtuCapability']
+                        'items' => ['$ref' => '#/definitions/ElasticPoolPerDatabaseMaxDtuCapability'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -6031,7 +6116,10 @@ final class SqlManagementClient
             ],
             'ElasticPoolEditionCapability' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'status' => [
                         'type' => 'string',
                         'enum' => [
@@ -6039,11 +6127,13 @@ final class SqlManagementClient
                             'Available',
                             'Default',
                             'Disabled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'supportedElasticPoolDtus' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ElasticPoolDtuCapability']
+                        'items' => ['$ref' => '#/definitions/ElasticPoolDtuCapability'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -6051,7 +6141,10 @@ final class SqlManagementClient
             ],
             'ServerVersionCapability' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'status' => [
                         'type' => 'string',
                         'enum' => [
@@ -6059,15 +6152,18 @@ final class SqlManagementClient
                             'Available',
                             'Default',
                             'Disabled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'supportedEditions' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/EditionCapability']
+                        'items' => ['$ref' => '#/definitions/EditionCapability'],
+                        'readOnly' => TRUE
                     ],
                     'supportedElasticPoolEditions' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ElasticPoolEditionCapability']
+                        'items' => ['$ref' => '#/definitions/ElasticPoolEditionCapability'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -6075,7 +6171,10 @@ final class SqlManagementClient
             ],
             'LocationCapabilities' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'status' => [
                         'type' => 'string',
                         'enum' => [
@@ -6083,11 +6182,13 @@ final class SqlManagementClient
                             'Available',
                             'Default',
                             'Disabled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'supportedServerVersions' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ServerVersionCapability']
+                        'items' => ['$ref' => '#/definitions/ServerVersionCapability'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -6107,8 +6208,14 @@ final class SqlManagementClient
             ],
             'ServerConnectionPolicy' => [
                 'properties' => [
-                    'kind' => ['type' => 'string'],
-                    'location' => ['type' => 'string'],
+                    'kind' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/ServerConnectionPolicyProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -6153,7 +6260,10 @@ final class SqlManagementClient
             'DatabaseSecurityAlertPolicy' => [
                 'properties' => [
                     'location' => ['type' => 'string'],
-                    'kind' => ['type' => 'string'],
+                    'kind' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/DatabaseSecurityAlertPolicyProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -6169,8 +6279,14 @@ final class SqlManagementClient
                         ]
                     ],
                     'exemptPrincipals' => ['type' => 'string'],
-                    'applicationPrincipals' => ['type' => 'string'],
-                    'maskingLevel' => ['type' => 'string']
+                    'applicationPrincipals' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'maskingLevel' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['dataMaskingState']
@@ -6178,15 +6294,24 @@ final class SqlManagementClient
             'DataMaskingPolicy' => [
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/DataMaskingPolicyProperties'],
-                    'location' => ['type' => 'string'],
-                    'kind' => ['type' => 'string']
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'kind' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DataMaskingRuleProperties' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'aliasName' => ['type' => 'string'],
                     'ruleState' => [
                         'type' => 'string',
@@ -6226,8 +6351,14 @@ final class SqlManagementClient
             'DataMaskingRule' => [
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/DataMaskingRuleProperties'],
-                    'location' => ['type' => 'string'],
-                    'kind' => ['type' => 'string']
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'kind' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -6253,8 +6384,14 @@ final class SqlManagementClient
             ],
             'FirewallRule' => [
                 'properties' => [
-                    'kind' => ['type' => 'string'],
-                    'location' => ['type' => 'string'],
+                    'kind' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/FirewallRuleProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -6277,7 +6414,10 @@ final class SqlManagementClient
                             'Enabled'
                         ]
                     ],
-                    'storageType' => ['type' => 'string']
+                    'storageType' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['state']
@@ -6285,8 +6425,14 @@ final class SqlManagementClient
             'GeoBackupPolicy' => [
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/GeoBackupPolicyProperties'],
-                    'kind' => ['type' => 'string'],
-                    'location' => ['type' => 'string']
+                    'kind' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['properties']
@@ -6315,18 +6461,43 @@ final class SqlManagementClient
             ],
             'ImportExportResponseProperties' => [
                 'properties' => [
-                    'requestType' => ['type' => 'string'],
+                    'requestType' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'requestId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
-                    'serverName' => ['type' => 'string'],
-                    'databaseName' => ['type' => 'string'],
-                    'status' => ['type' => 'string'],
-                    'lastModifiedTime' => ['type' => 'string'],
-                    'queuedTime' => ['type' => 'string'],
-                    'blobUri' => ['type' => 'string'],
-                    'errorMessage' => ['type' => 'string']
+                    'serverName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'databaseName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'queuedTime' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'blobUri' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'errorMessage' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -6418,27 +6589,33 @@ final class SqlManagementClient
                 'properties' => [
                     'count' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'average' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'maximum' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'minimum' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'timestamp' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'total' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -6446,8 +6623,14 @@ final class SqlManagementClient
             ],
             'MetricName' => [
                 'properties' => [
-                    'value' => ['type' => 'string'],
-                    'localizedValue' => ['type' => 'string']
+                    'value' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'localizedValue' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -6456,13 +6639,18 @@ final class SqlManagementClient
                 'properties' => [
                     'startTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'endTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'timeGrain' => ['type' => 'string'],
+                    'timeGrain' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'unit' => [
                         'type' => 'string',
                         'enum' => [
@@ -6472,12 +6660,17 @@ final class SqlManagementClient
                             'percent',
                             'countPerSecond',
                             'bytesPerSecond'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'name' => ['$ref' => '#/definitions/MetricName'],
+                    'name' => [
+                        '$ref' => '#/definitions/MetricName',
+                        'readOnly' => TRUE
+                    ],
                     'metricValues' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/MetricValue']
+                        'items' => ['$ref' => '#/definitions/MetricValue'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -6493,15 +6686,24 @@ final class SqlManagementClient
             ],
             'MetricAvailability' => [
                 'properties' => [
-                    'retention' => ['type' => 'string'],
-                    'timeGrain' => ['type' => 'string']
+                    'retention' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'timeGrain' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'MetricDefinition' => [
                 'properties' => [
-                    'name' => ['$ref' => '#/definitions/MetricName'],
+                    'name' => [
+                        '$ref' => '#/definitions/MetricName',
+                        'readOnly' => TRUE
+                    ],
                     'primaryAggregationType' => [
                         'type' => 'string',
                         'enum' => [
@@ -6511,9 +6713,13 @@ final class SqlManagementClient
                             'Minimum',
                             'Maximum',
                             'Total'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'resourceUri' => ['type' => 'string'],
+                    'resourceUri' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'unit' => [
                         'type' => 'string',
                         'enum' => [
@@ -6523,11 +6729,13 @@ final class SqlManagementClient
                             'Percent',
                             'CountPerSecond',
                             'BytesPerSecond'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'metricAvailabilities' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/MetricAvailability']
+                        'items' => ['$ref' => '#/definitions/MetricAvailability'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -6571,11 +6779,26 @@ final class SqlManagementClient
             ],
             'ReplicationLinkProperties' => [
                 'properties' => [
-                    'isTerminationAllowed' => ['type' => 'boolean'],
-                    'replicationMode' => ['type' => 'string'],
-                    'partnerServer' => ['type' => 'string'],
-                    'partnerDatabase' => ['type' => 'string'],
-                    'partnerLocation' => ['type' => 'string'],
+                    'isTerminationAllowed' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'replicationMode' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'partnerServer' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'partnerDatabase' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'partnerLocation' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'role' => [
                         'type' => 'string',
                         'enum' => [
@@ -6584,7 +6807,8 @@ final class SqlManagementClient
                             'NonReadableSecondary',
                             'Source',
                             'Copy'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'partnerRole' => [
                         'type' => 'string',
@@ -6594,15 +6818,18 @@ final class SqlManagementClient
                             'NonReadableSecondary',
                             'Source',
                             'Copy'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'startTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'percentComplete' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'replicationState' => [
                         'type' => 'string',
@@ -6611,7 +6838,8 @@ final class SqlManagementClient
                             'SEEDING',
                             'CATCH_UP',
                             'SUSPENDED'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -6619,7 +6847,10 @@ final class SqlManagementClient
             ],
             'ReplicationLink' => [
                 'properties' => [
-                    'location' => ['type' => 'string'],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/ReplicationLinkProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -6669,7 +6900,10 @@ final class SqlManagementClient
             ],
             'ServerCommunicationLinkProperties' => [
                 'properties' => [
-                    'state' => ['type' => 'string'],
+                    'state' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'partnerServer' => ['type' => 'string']
                 ],
                 'additionalProperties' => FALSE,
@@ -6678,8 +6912,14 @@ final class SqlManagementClient
             'ServerCommunicationLink' => [
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/ServerCommunicationLinkProperties'],
-                    'location' => ['type' => 'string'],
-                    'kind' => ['type' => 'string']
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'kind' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -6694,11 +6934,26 @@ final class SqlManagementClient
             ],
             'ServiceObjectiveProperties' => [
                 'properties' => [
-                    'serviceObjectiveName' => ['type' => 'string'],
-                    'isDefault' => ['type' => 'boolean'],
-                    'isSystem' => ['type' => 'boolean'],
-                    'description' => ['type' => 'string'],
-                    'enabled' => ['type' => 'boolean']
+                    'serviceObjectiveName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'isDefault' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'isSystem' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'description' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'enabled' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -6729,15 +6984,25 @@ final class SqlManagementClient
             ],
             'CheckNameAvailabilityResponse' => [
                 'properties' => [
-                    'available' => ['type' => 'boolean'],
-                    'message' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
+                    'available' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'reason' => [
                         'type' => 'string',
                         'enum' => [
                             'Invalid',
                             'AlreadyExists'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -6781,15 +7046,18 @@ final class SqlManagementClient
                             'System',
                             'System2',
                             'ElasticPool'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'serviceLevelObjectiveId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
                     'inRangeTimeRatio' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -6799,71 +7067,103 @@ final class SqlManagementClient
                 'properties' => [
                     'observationPeriodStart' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'observationPeriodEnd' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'activeTimeRatio' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'minDtu' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'avgDtu' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'maxDtu' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'maxSizeInGB' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'serviceLevelObjectiveUsageMetrics' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SloUsageMetric']
+                        'items' => ['$ref' => '#/definitions/SloUsageMetric'],
+                        'readOnly' => TRUE
                     ],
-                    'currentServiceLevelObjective' => ['type' => 'string'],
+                    'currentServiceLevelObjective' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'currentServiceLevelObjectiveId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
-                    'usageBasedRecommendationServiceLevelObjective' => ['type' => 'string'],
+                    'usageBasedRecommendationServiceLevelObjective' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'usageBasedRecommendationServiceLevelObjectiveId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
-                    'databaseSizeBasedRecommendationServiceLevelObjective' => ['type' => 'string'],
+                    'databaseSizeBasedRecommendationServiceLevelObjective' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'databaseSizeBasedRecommendationServiceLevelObjectiveId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
-                    'disasterPlanBasedRecommendationServiceLevelObjective' => ['type' => 'string'],
+                    'disasterPlanBasedRecommendationServiceLevelObjective' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'disasterPlanBasedRecommendationServiceLevelObjectiveId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
-                    'overallRecommendationServiceLevelObjective' => ['type' => 'string'],
+                    'overallRecommendationServiceLevelObjective' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'overallRecommendationServiceLevelObjectiveId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
                     'confidence' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServiceTierAdvisor' => [
-                'properties' => ['properties' => ['$ref' => '#/definitions/ServiceTierAdvisorProperties']],
+                'properties' => ['properties' => [
+                    '$ref' => '#/definitions/ServiceTierAdvisorProperties',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -6880,7 +7180,10 @@ final class SqlManagementClient
             ],
             'TransparentDataEncryption' => [
                 'properties' => [
-                    'location' => ['type' => 'string'],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/TransparentDataEncryptionProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -6888,15 +7191,23 @@ final class SqlManagementClient
             ],
             'OperationImpact' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
-                    'unit' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'unit' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'changeValueAbsolute' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'changeValueRelative' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -6910,7 +7221,8 @@ final class SqlManagementClient
                             'Create',
                             'Drop',
                             'Rebuild'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'state' => [
                         'type' => 'string',
@@ -6926,15 +7238,18 @@ final class SqlManagementClient
                             'Expired',
                             'Blocked',
                             'Success'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'created' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'lastModified' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'indexType' => [
                         'type' => 'string',
@@ -6943,33 +7258,50 @@ final class SqlManagementClient
                             'NONCLUSTERED',
                             'COLUMNSTORE',
                             'CLUSTERED COLUMNSTORE'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'schema' => ['type' => 'string'],
-                    'table' => ['type' => 'string'],
+                    'schema' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'table' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'columns' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
                     'includedColumns' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
-                    'indexScript' => ['type' => 'string'],
+                    'indexScript' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'estimatedImpact' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/OperationImpact']
+                        'items' => ['$ref' => '#/definitions/OperationImpact'],
+                        'readOnly' => TRUE
                     ],
                     'reportedImpact' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/OperationImpact']
+                        'items' => ['$ref' => '#/definitions/OperationImpact'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RecommendedIndex' => [
-                'properties' => ['properties' => ['$ref' => '#/definitions/RecommendedIndexProperties']],
+                'properties' => ['properties' => [
+                    '$ref' => '#/definitions/RecommendedIndexProperties',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -6978,23 +7310,28 @@ final class SqlManagementClient
                     'collation' => ['type' => 'string'],
                     'creationDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'containmentState' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'currentServiceObjectiveId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
                     'databaseId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
                     'earliestRestoreDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'createMode' => [
                         'type' => 'string',
@@ -7077,24 +7414,37 @@ final class SqlManagementClient
                             'System',
                             'System2',
                             'ElasticPool'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'status' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'elasticPoolName' => ['type' => 'string'],
-                    'defaultSecondaryLocation' => ['type' => 'string'],
+                    'defaultSecondaryLocation' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'serviceTierAdvisors' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ServiceTierAdvisor']
+                        'items' => ['$ref' => '#/definitions/ServiceTierAdvisor'],
+                        'readOnly' => TRUE
                     ],
                     'transparentDataEncryption' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/TransparentDataEncryption']
+                        'items' => ['$ref' => '#/definitions/TransparentDataEncryption'],
+                        'readOnly' => TRUE
                     ],
                     'recommendedIndex' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/RecommendedIndex']
+                        'items' => ['$ref' => '#/definitions/RecommendedIndex'],
+                        'readOnly' => TRUE
                     ],
-                    'failoverGroupId' => ['type' => 'string'],
+                    'failoverGroupId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'readScale' => [
                         'type' => 'string',
                         'enum' => [
@@ -7112,7 +7462,10 @@ final class SqlManagementClient
             ],
             'Database' => [
                 'properties' => [
-                    'kind' => ['type' => 'string'],
+                    'kind' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/DatabaseProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -7126,7 +7479,8 @@ final class SqlManagementClient
                             'Basic',
                             'Standard',
                             'Premium'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'dtu' => [
                         'type' => 'number',
@@ -7146,27 +7500,33 @@ final class SqlManagementClient
                     ],
                     'observationPeriodStart' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'observationPeriodEnd' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'maxObservedDtu' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'maxObservedStorageMB' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'databases' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/Database']
+                        'items' => ['$ref' => '#/definitions/Database'],
+                        'readOnly' => TRUE
                     ],
                     'metrics' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/RecommendedElasticPoolMetric']
+                        'items' => ['$ref' => '#/definitions/RecommendedElasticPoolMetric'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -7197,7 +7557,8 @@ final class SqlManagementClient
                 'properties' => [
                     'creationDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'state' => [
                         'type' => 'string',
@@ -7205,7 +7566,8 @@ final class SqlManagementClient
                             'Creating',
                             'Ready',
                             'Disabled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'edition' => [
                         'type' => 'string',
@@ -7238,7 +7600,10 @@ final class SqlManagementClient
             'ElasticPool' => [
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/ElasticPoolProperties'],
-                    'kind' => ['type' => 'string']
+                    'kind' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7266,65 +7631,97 @@ final class SqlManagementClient
                 'properties' => [
                     'endTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'errorCode' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'errorMessage' => ['type' => 'string'],
+                    'errorMessage' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'errorSeverity' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'operation' => ['type' => 'string'],
+                    'operation' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'operationId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
                     'percentComplete' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'requestedDatabaseDtuMax' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'requestedDatabaseDtuMin' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'requestedDtu' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'requestedElasticPoolName' => ['type' => 'string'],
+                    'requestedElasticPoolName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'requestedStorageLimitInGB' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
-                    'elasticPoolName' => ['type' => 'string'],
-                    'serverName' => ['type' => 'string'],
+                    'elasticPoolName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'serverName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'startTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'state' => ['type' => 'string'],
+                    'state' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'requestedStorageLimitInMB' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'requestedDatabaseDtuGuarantee' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'requestedDatabaseDtuCap' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'requestedDtuGuarantee' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -7348,39 +7745,72 @@ final class SqlManagementClient
             ],
             'ElasticPoolDatabaseActivityProperties' => [
                 'properties' => [
-                    'databaseName' => ['type' => 'string'],
+                    'databaseName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'endTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'errorCode' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'errorMessage' => ['type' => 'string'],
+                    'errorMessage' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'errorSeverity' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'operation' => ['type' => 'string'],
+                    'operation' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'operationId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
                     'percentComplete' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'requestedElasticPoolName' => ['type' => 'string'],
-                    'currentElasticPoolName' => ['type' => 'string'],
-                    'currentServiceObjective' => ['type' => 'string'],
-                    'requestedServiceObjective' => ['type' => 'string'],
-                    'serverName' => ['type' => 'string'],
+                    'requestedElasticPoolName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'currentElasticPoolName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'currentServiceObjective' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'requestedServiceObjective' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'serverName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'startTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'state' => ['type' => 'string']
+                    'state' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7435,11 +7865,13 @@ final class SqlManagementClient
                         'enum' => [
                             'Encrypting',
                             'Decrypting'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'percentComplete' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -7447,7 +7879,10 @@ final class SqlManagementClient
             ],
             'TransparentDataEncryptionActivity' => [
                 'properties' => [
-                    'location' => ['type' => 'string'],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/TransparentDataEncryptionActivityProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -7463,21 +7898,36 @@ final class SqlManagementClient
             ],
             'ServerUsage' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
-                    'resourceName' => ['type' => 'string'],
-                    'displayName' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'resourceName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'displayName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'currentValue' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'limit' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
-                    'unit' => ['type' => 'string'],
+                    'unit' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'nextResetTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -7493,21 +7943,36 @@ final class SqlManagementClient
             ],
             'DatabaseUsage' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
-                    'resourceName' => ['type' => 'string'],
-                    'displayName' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'resourceName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'displayName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'currentValue' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'limit' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
-                    'unit' => ['type' => 'string'],
+                    'unit' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'nextResetTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -7551,7 +8016,10 @@ final class SqlManagementClient
             ],
             'DatabaseBlobAuditingPolicy' => [
                 'properties' => [
-                    'kind' => ['type' => 'string'],
+                    'kind' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/DatabaseBlobAuditingPolicyProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -7559,7 +8027,10 @@ final class SqlManagementClient
             ],
             'EncryptionProtectorProperties' => [
                 'properties' => [
-                    'subregion' => ['type' => 'string'],
+                    'subregion' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'serverKeyName' => ['type' => 'string'],
                     'serverKeyType' => [
                         'type' => 'string',
@@ -7568,8 +8039,14 @@ final class SqlManagementClient
                             'AzureKeyVault'
                         ]
                     ],
-                    'uri' => ['type' => 'string'],
-                    'thumbprint' => ['type' => 'string']
+                    'uri' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'thumbprint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['serverKeyType']
@@ -7577,7 +8054,10 @@ final class SqlManagementClient
             'EncryptionProtector' => [
                 'properties' => [
                     'kind' => ['type' => 'string'],
-                    'location' => ['type' => 'string'],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/EncryptionProtectorProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -7587,9 +8067,13 @@ final class SqlManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/EncryptionProtector']
+                        'items' => ['$ref' => '#/definitions/EncryptionProtector'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7625,13 +8109,17 @@ final class SqlManagementClient
             'PartnerInfo' => [
                 'properties' => [
                     'id' => ['type' => 'string'],
-                    'location' => ['type' => 'string'],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'replicationRole' => [
                         'type' => 'string',
                         'enum' => [
                             'Primary',
                             'Secondary'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -7646,9 +8134,13 @@ final class SqlManagementClient
                         'enum' => [
                             'Primary',
                             'Secondary'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'replicationState' => ['type' => 'string'],
+                    'replicationState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'partnerServers' => [
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/PartnerInfo']
@@ -7666,7 +8158,10 @@ final class SqlManagementClient
             ],
             'FailoverGroup' => [
                 'properties' => [
-                    'location' => ['type' => 'string'],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'tags' => [
                         'type' => 'object',
                         'additionalProperties' => ['type' => 'string']
@@ -7703,16 +8198,23 @@ final class SqlManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/FailoverGroup']
+                        'items' => ['$ref' => '#/definitions/FailoverGroup'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ServerKeyProperties' => [
                 'properties' => [
-                    'subregion' => ['type' => 'string'],
+                    'subregion' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'serverKeyType' => [
                         'type' => 'string',
                         'enum' => [
@@ -7733,7 +8235,10 @@ final class SqlManagementClient
             'ServerKey' => [
                 'properties' => [
                     'kind' => ['type' => 'string'],
-                    'location' => ['type' => 'string'],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/ServerKeyProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -7743,9 +8248,13 @@ final class SqlManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ServerKey']
+                        'items' => ['$ref' => '#/definitions/ServerKey'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7754,7 +8263,8 @@ final class SqlManagementClient
                 'properties' => [
                     'principalId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
                     'type' => [
                         'type' => 'string',
@@ -7762,7 +8272,8 @@ final class SqlManagementClient
                     ],
                     'tenantId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -7773,8 +8284,14 @@ final class SqlManagementClient
                     'administratorLogin' => ['type' => 'string'],
                     'administratorLoginPassword' => ['type' => 'string'],
                     'version' => ['type' => 'string'],
-                    'state' => ['type' => 'string'],
-                    'fullyQualifiedDomainName' => ['type' => 'string']
+                    'state' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'fullyQualifiedDomainName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7782,7 +8299,10 @@ final class SqlManagementClient
             'Server' => [
                 'properties' => [
                     'identity' => ['$ref' => '#/definitions/ResourceIdentity'],
-                    'kind' => ['type' => 'string'],
+                    'kind' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/ServerProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -7792,9 +8312,13 @@ final class SqlManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/Server']
+                        'items' => ['$ref' => '#/definitions/Server'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7812,11 +8336,15 @@ final class SqlManagementClient
             ],
             'SyncAgentProperties' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'syncDatabaseId' => ['type' => 'string'],
                     'lastAliveTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'state' => [
                         'type' => 'string',
@@ -7824,14 +8352,22 @@ final class SqlManagementClient
                             'Online',
                             'Offline',
                             'NeverConnected'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'isUpToDate' => ['type' => 'boolean'],
+                    'isUpToDate' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'expiryTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'version' => ['type' => 'string']
+                    'version' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7845,15 +8381,22 @@ final class SqlManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SyncAgent']
+                        'items' => ['$ref' => '#/definitions/SyncAgent'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SyncAgentKeyProperties' => [
-                'properties' => ['syncAgentKey' => ['type' => 'string']],
+                'properties' => ['syncAgentKey' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -7864,13 +8407,29 @@ final class SqlManagementClient
                         'enum' => [
                             'AzureSqlDatabase',
                             'SqlServerDatabase'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'databaseId' => ['type' => 'string'],
-                    'description' => ['type' => 'string'],
-                    'serverName' => ['type' => 'string'],
-                    'databaseName' => ['type' => 'string'],
-                    'userName' => ['type' => 'string']
+                    'databaseId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'description' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'serverName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'databaseName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'userName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7884,15 +8443,22 @@ final class SqlManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SyncAgentLinkedDatabase']
+                        'items' => ['$ref' => '#/definitions/SyncAgentLinkedDatabase'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SyncDatabaseIdProperties' => [
-                'properties' => ['id' => ['type' => 'string']],
+                'properties' => ['id' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -7900,22 +8466,47 @@ final class SqlManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SyncDatabaseIdProperties']
+                        'items' => ['$ref' => '#/definitions/SyncDatabaseIdProperties'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SyncFullSchemaTableColumn' => [
                 'properties' => [
-                    'dataSize' => ['type' => 'string'],
-                    'dataType' => ['type' => 'string'],
-                    'errorId' => ['type' => 'string'],
-                    'hasError' => ['type' => 'boolean'],
-                    'isPrimaryKey' => ['type' => 'boolean'],
-                    'name' => ['type' => 'string'],
-                    'quotedName' => ['type' => 'string']
+                    'dataSize' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'dataType' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'errorId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'hasError' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'isPrimaryKey' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'quotedName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7924,12 +8515,25 @@ final class SqlManagementClient
                 'properties' => [
                     'columns' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SyncFullSchemaTableColumn']
+                        'items' => ['$ref' => '#/definitions/SyncFullSchemaTableColumn'],
+                        'readOnly' => TRUE
                     ],
-                    'errorId' => ['type' => 'string'],
-                    'hasError' => ['type' => 'boolean'],
-                    'name' => ['type' => 'string'],
-                    'quotedName' => ['type' => 'string']
+                    'errorId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'hasError' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'quotedName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7938,11 +8542,13 @@ final class SqlManagementClient
                 'properties' => [
                     'tables' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SyncFullSchemaTable']
+                        'items' => ['$ref' => '#/definitions/SyncFullSchemaTable'],
+                        'readOnly' => TRUE
                     ],
                     'lastUpdateTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -7952,9 +8558,13 @@ final class SqlManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SyncFullSchemaProperties']
+                        'items' => ['$ref' => '#/definitions/SyncFullSchemaProperties'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7963,7 +8573,8 @@ final class SqlManagementClient
                 'properties' => [
                     'timestamp' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'type' => [
                         'type' => 'string',
@@ -7972,15 +8583,26 @@ final class SqlManagementClient
                             'Error',
                             'Warning',
                             'Success'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'source' => ['type' => 'string'],
-                    'details' => ['type' => 'string'],
+                    'source' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'details' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'tracingId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
-                    'operationStatus' => ['type' => 'string']
+                    'operationStatus' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7989,9 +8611,13 @@ final class SqlManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SyncGroupLogProperties']
+                        'items' => ['$ref' => '#/definitions/SyncGroupLogProperties'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -8035,7 +8661,8 @@ final class SqlManagementClient
                     ],
                     'lastSyncTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'conflictResolutionPolicy' => [
                         'type' => 'string',
@@ -8055,7 +8682,8 @@ final class SqlManagementClient
                             'Warning',
                             'Progressing',
                             'Good'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'schema' => ['$ref' => '#/definitions/SyncGroupSchema']
                 ],
@@ -8071,9 +8699,13 @@ final class SqlManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SyncGroup']
+                        'items' => ['$ref' => '#/definitions/SyncGroup'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -8125,7 +8757,8 @@ final class SqlManagementClient
                             'Reprovisioning',
                             'ReprovisionFailed',
                             'UnReprovisioned'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -8140,9 +8773,13 @@ final class SqlManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SyncMember']
+                        'items' => ['$ref' => '#/definitions/SyncMember'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -8159,7 +8796,8 @@ final class SqlManagementClient
                             'Ready',
                             'Deleting',
                             'Unknown'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -8174,9 +8812,13 @@ final class SqlManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/VirtualNetworkRule']
+                        'items' => ['$ref' => '#/definitions/VirtualNetworkRule'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []

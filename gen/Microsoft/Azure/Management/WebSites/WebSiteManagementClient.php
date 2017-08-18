@@ -13986,7 +13986,8 @@ final class WebSiteManagementClient
                             'UnknownError',
                             'ExternalPrivateKey',
                             'Unknown'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -14012,22 +14013,43 @@ final class WebSiteManagementClient
                 'properties' => [
                     'version' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'serialNumber' => ['type' => 'string'],
-                    'thumbprint' => ['type' => 'string'],
-                    'subject' => ['type' => 'string'],
+                    'serialNumber' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'thumbprint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'subject' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'notBefore' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'notAfter' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'signatureAlgorithm' => ['type' => 'string'],
-                    'issuer' => ['type' => 'string'],
-                    'rawData' => ['type' => 'string']
+                    'signatureAlgorithm' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'issuer' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'rawData' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -14039,7 +14061,10 @@ final class WebSiteManagementClient
                         'additionalProperties' => ['$ref' => '#/definitions/AppServiceCertificate']
                     ],
                     'distinguishedName' => ['type' => 'string'],
-                    'domainVerificationToken' => ['type' => 'string'],
+                    'domainVerificationToken' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'validityInYears' => [
                         'type' => 'integer',
                         'format' => 'int32'
@@ -14064,7 +14089,8 @@ final class WebSiteManagementClient
                             'Canceled',
                             'InProgress',
                             'Deleting'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'status' => [
                         'type' => 'string',
@@ -14079,22 +14105,40 @@ final class WebSiteManagementClient
                             'Unused',
                             'Expired',
                             'NotSubmitted'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'signedCertificate' => ['$ref' => '#/definitions/CertificateDetails'],
+                    'signedCertificate' => [
+                        '$ref' => '#/definitions/CertificateDetails',
+                        'readOnly' => TRUE
+                    ],
                     'csr' => ['type' => 'string'],
-                    'intermediate' => ['$ref' => '#/definitions/CertificateDetails'],
-                    'root' => ['$ref' => '#/definitions/CertificateDetails'],
-                    'serialNumber' => ['type' => 'string'],
+                    'intermediate' => [
+                        '$ref' => '#/definitions/CertificateDetails',
+                        'readOnly' => TRUE
+                    ],
+                    'root' => [
+                        '$ref' => '#/definitions/CertificateDetails',
+                        'readOnly' => TRUE
+                    ],
+                    'serialNumber' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'lastCertificateIssuanceTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'expirationTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'isPrivateKeyExternal' => ['type' => 'boolean'],
+                    'isPrivateKeyExternal' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'appServiceCertificateNotRenewableReasons' => [
                         'type' => 'array',
                         'items' => [
@@ -14104,11 +14148,13 @@ final class WebSiteManagementClient
                                 'ExpirationNotInRenewalTimeRange',
                                 'SubscriptionNotActive'
                             ]
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'nextAutoRenewalTimeStamp' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -14187,10 +14233,19 @@ final class WebSiteManagementClient
             ],
             'ProxyOnlyResource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'kind' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -14235,11 +14290,20 @@ final class WebSiteManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'kind' => ['type' => 'string'],
                     'location' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'tags' => [
                         'type' => 'object',
                         'additionalProperties' => ['type' => 'string']
@@ -14377,7 +14441,8 @@ final class WebSiteManagementClient
                             'Unparked',
                             'Updated',
                             'JsonConverterFailed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'provisioningState' => [
                         'type' => 'string',
@@ -14387,30 +14452,39 @@ final class WebSiteManagementClient
                             'Canceled',
                             'InProgress',
                             'Deleting'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'nameServers' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
                     'privacy' => ['type' => 'boolean'],
                     'createdTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'expirationTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'lastRenewedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'autoRenew' => ['type' => 'boolean'],
-                    'readyForDnsRecordManagement' => ['type' => 'boolean'],
+                    'readyForDnsRecordManagement' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'managedHostNames' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/HostName']
+                        'items' => ['$ref' => '#/definitions/HostName'],
+                        'readOnly' => TRUE
                     ],
                     'consent' => ['$ref' => '#/definitions/DomainPurchaseConsent'],
                     'domainNotRenewableReasons' => [
@@ -14422,7 +14496,8 @@ final class WebSiteManagementClient
                                 'ExpirationNotInRenewalTimeRange',
                                 'SubscriptionNotActive'
                             ]
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'dnsType' => [
                         'type' => 'string',
@@ -14439,7 +14514,10 @@ final class WebSiteManagementClient
                             'DefaultDomainRegistrarDns'
                         ]
                     ],
-                    'authCode' => ['type' => 'string']
+                    'authCode' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -14477,9 +14555,18 @@ final class WebSiteManagementClient
             ],
             'DomainControlCenterSsoRequest' => [
                 'properties' => [
-                    'url' => ['type' => 'string'],
-                    'postParameterKey' => ['type' => 'string'],
-                    'postParameterValue' => ['type' => 'string']
+                    'url' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'postParameterKey' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'postParameterValue' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -14554,7 +14641,10 @@ final class WebSiteManagementClient
             ],
             'TopLevelDomain_properties' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'privacy' => ['type' => 'boolean']
                 ],
                 'additionalProperties' => FALSE,
@@ -14587,16 +14677,28 @@ final class WebSiteManagementClient
             'HostingEnvironmentProfile' => [
                 'properties' => [
                     'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Certificate_properties' => [
                 'properties' => [
-                    'friendlyName' => ['type' => 'string'],
-                    'subjectName' => ['type' => 'string'],
+                    'friendlyName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'subjectName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'hostNames' => [
                         'type' => 'array',
                         'items' => ['type' => 'string']
@@ -14605,23 +14707,49 @@ final class WebSiteManagementClient
                         'type' => 'string',
                         'format' => 'byte'
                     ],
-                    'siteName' => ['type' => 'string'],
-                    'selfLink' => ['type' => 'string'],
-                    'issuer' => ['type' => 'string'],
+                    'siteName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'selfLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'issuer' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'issueDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'expirationDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'password' => ['type' => 'string'],
-                    'thumbprint' => ['type' => 'string'],
-                    'valid' => ['type' => 'boolean'],
-                    'cerBlob' => ['type' => 'string'],
-                    'publicKeyHash' => ['type' => 'string'],
-                    'hostingEnvironmentProfile' => ['$ref' => '#/definitions/HostingEnvironmentProfile'],
+                    'thumbprint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'valid' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'cerBlob' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'publicKeyHash' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'hostingEnvironmentProfile' => [
+                        '$ref' => '#/definitions/HostingEnvironmentProfile',
+                        'readOnly' => TRUE
+                    ],
                     'keyVaultId' => ['type' => 'string'],
                     'keyVaultSecretName' => ['type' => 'string'],
                     'keyVaultSecretStatus' => [
@@ -14638,10 +14766,17 @@ final class WebSiteManagementClient
                             'UnknownError',
                             'ExternalPrivateKey',
                             'Unknown'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'geoRegion' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
+                    'geoRegion' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'serverFarmId' => ['type' => 'string']
                 ],
                 'additionalProperties' => FALSE,
@@ -15008,7 +15143,10 @@ final class WebSiteManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/ConnStringInfo']
                     ],
-                    'machineKey' => ['$ref' => '#/definitions/SiteMachineKey'],
+                    'machineKey' => [
+                        '$ref' => '#/definitions/SiteMachineKey',
+                        'readOnly' => TRUE
+                    ],
                     'handlerMappings' => [
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/HandlerMapping']
@@ -15083,10 +15221,17 @@ final class WebSiteManagementClient
                 'properties' => [
                     'timestampUtc' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'sourceSlotName' => ['type' => 'string'],
-                    'destinationSlotName' => ['type' => 'string']
+                    'sourceSlotName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'destinationSlotName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -15095,25 +15240,35 @@ final class WebSiteManagementClient
                 'properties' => [
                     'deletedTimestamp' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'state' => ['type' => 'string'],
+                    'state' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'hostNames' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
-                    'repositorySiteName' => ['type' => 'string'],
+                    'repositorySiteName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'usageState' => [
                         'type' => 'string',
                         'enum' => [
                             'Normal',
                             'Exceeded'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'enabled' => ['type' => 'boolean'],
                     'enabledHostNames' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
                     'availabilityState' => [
                         'type' => 'string',
@@ -15121,7 +15276,8 @@ final class WebSiteManagementClient
                             'Normal',
                             'Limited',
                             'DisasterRecoveryMode'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'hostNameSslStates' => [
                         'type' => 'array',
@@ -15131,23 +15287,34 @@ final class WebSiteManagementClient
                     'reserved' => ['type' => 'boolean'],
                     'lastModifiedTimeUtc' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'siteConfig' => ['$ref' => '#/definitions/SiteConfig'],
                     'trafficManagerHostNames' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
-                    'premiumAppDeployed' => ['type' => 'boolean'],
+                    'premiumAppDeployed' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'scmSiteAlsoStopped' => ['type' => 'boolean'],
-                    'targetSwapSlot' => ['type' => 'string'],
+                    'targetSwapSlot' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'hostingEnvironmentProfile' => ['$ref' => '#/definitions/HostingEnvironmentProfile'],
                     'microService' => ['type' => 'string'],
                     'gatewaySiteName' => ['type' => 'string'],
                     'clientAffinityEnabled' => ['type' => 'boolean'],
                     'clientCertEnabled' => ['type' => 'boolean'],
                     'hostNamesDisabled' => ['type' => 'boolean'],
-                    'outboundIpAddresses' => ['type' => 'string'],
+                    'outboundIpAddresses' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'containerSize' => [
                         'type' => 'integer',
                         'format' => 'int32'
@@ -15158,17 +15325,31 @@ final class WebSiteManagementClient
                     ],
                     'suspendedTill' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'maxNumberOfWorkers' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'cloningInfo' => ['$ref' => '#/definitions/CloningInfo'],
-                    'resourceGroup' => ['type' => 'string'],
-                    'isDefaultContainer' => ['type' => 'boolean'],
-                    'defaultHostName' => ['type' => 'string'],
-                    'slotSwapStatus' => ['$ref' => '#/definitions/SlotSwapStatus']
+                    'resourceGroup' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'isDefaultContainer' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'defaultHostName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'slotSwapStatus' => [
+                        '$ref' => '#/definitions/SlotSwapStatus',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -15417,9 +15598,18 @@ final class WebSiteManagementClient
             ],
             'GeoRegion_properties' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
-                    'description' => ['type' => 'string'],
-                    'displayName' => ['type' => 'string']
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'description' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'displayName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -15759,11 +15949,21 @@ final class WebSiteManagementClient
                 'properties' => [
                     'id' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'storageAccountUrl' => ['type' => 'string'],
-                    'blobName' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
+                    'storageAccountUrl' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'blobName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'status' => [
                         'type' => 'string',
                         'enum' => [
@@ -15777,34 +15977,50 @@ final class WebSiteManagementClient
                             'DeleteInProgress',
                             'DeleteFailed',
                             'Deleted'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'sizeInBytes' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'created' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'log' => ['type' => 'string'],
+                    'log' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'databases' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/DatabaseBackupSetting']
+                        'items' => ['$ref' => '#/definitions/DatabaseBackupSetting'],
+                        'readOnly' => TRUE
                     ],
-                    'scheduled' => ['type' => 'boolean'],
+                    'scheduled' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'lastRestoreTimeStamp' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'finishedTimeStamp' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'correlationId' => ['type' => 'string'],
+                    'correlationId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'websiteSizeInBytes' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -15850,7 +16066,8 @@ final class WebSiteManagementClient
                     ],
                     'lastExecutionTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -16005,19 +16222,35 @@ final class WebSiteManagementClient
             ],
             'CustomHostnameAnalysisResult_properties' => [
                 'properties' => [
-                    'isHostnameAlreadyVerified' => ['type' => 'boolean'],
+                    'isHostnameAlreadyVerified' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'customDomainVerificationTest' => [
                         'type' => 'string',
                         'enum' => [
                             'Passed',
                             'Failed',
                             'Skipped'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'customDomainVerificationFailureInfo' => ['$ref' => '#/definitions/ErrorEntity'],
-                    'hasConflictOnScaleUnit' => ['type' => 'boolean'],
-                    'hasConflictAcrossSubscription' => ['type' => 'boolean'],
-                    'conflictingAppResourceId' => ['type' => 'string'],
+                    'customDomainVerificationFailureInfo' => [
+                        '$ref' => '#/definitions/ErrorEntity',
+                        'readOnly' => TRUE
+                    ],
+                    'hasConflictOnScaleUnit' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'hasConflictAcrossSubscription' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'conflictingAppResourceId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'cNameRecords' => [
                         'type' => 'array',
                         'items' => ['type' => 'string']
@@ -16144,7 +16377,10 @@ final class WebSiteManagementClient
                         ]
                     ],
                     'thumbprint' => ['type' => 'string'],
-                    'virtualIP' => ['type' => 'string']
+                    'virtualIP' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -16197,8 +16433,14 @@ final class WebSiteManagementClient
             ],
             'HybridConnectionKey_properties' => [
                 'properties' => [
-                    'sendKeyName' => ['type' => 'string'],
-                    'sendKeyValue' => ['type' => 'string']
+                    'sendKeyName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'sendKeyValue' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -16254,7 +16496,8 @@ final class WebSiteManagementClient
                 'properties' => [
                     'time' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'type' => [
                         'type' => 'string',
@@ -16262,9 +16505,13 @@ final class WebSiteManagementClient
                             'Message',
                             'Warning',
                             'Error'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'message' => ['type' => 'string']
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -16272,7 +16519,8 @@ final class WebSiteManagementClient
             'MSDeployLog_properties' => [
                 'properties' => ['entries' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/MSDeployLogEntry']
+                    'items' => ['$ref' => '#/definitions/MSDeployLogEntry'],
+                    'readOnly' => TRUE
                 ]],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -16284,7 +16532,10 @@ final class WebSiteManagementClient
             ],
             'MSDeployStatus_properties' => [
                 'properties' => [
-                    'deployer' => ['type' => 'string'],
+                    'deployer' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'provisioningState' => [
                         'type' => 'string',
                         'enum' => [
@@ -16293,17 +16544,23 @@ final class WebSiteManagementClient
                             'succeeded',
                             'failed',
                             'canceled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'startTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'endTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'complete' => ['type' => 'boolean']
+                    'complete' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -16342,10 +16599,17 @@ final class WebSiteManagementClient
                             'Succeeded',
                             'TimedOut',
                             'Created'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'operationId' => ['type' => 'string'],
-                    'localMySqlEnabled' => ['type' => 'boolean']
+                    'operationId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'localMySqlEnabled' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -16380,13 +16644,20 @@ final class WebSiteManagementClient
             'VnetInfo_properties' => [
                 'properties' => [
                     'vnetResourceId' => ['type' => 'string'],
-                    'certThumbprint' => ['type' => 'string'],
+                    'certThumbprint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'certBlob' => ['type' => 'string'],
                     'routes' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/VnetRoute']
+                        'items' => ['$ref' => '#/definitions/VnetRoute'],
+                        'readOnly' => TRUE
                     ],
-                    'resyncRequired' => ['type' => 'boolean'],
+                    'resyncRequired' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'dnsServers' => ['type' => 'string']
                 ],
                 'additionalProperties' => FALSE,
@@ -16420,15 +16691,23 @@ final class WebSiteManagementClient
             ],
             'NetworkFeatures_properties' => [
                 'properties' => [
-                    'virtualNetworkName' => ['type' => 'string'],
-                    'virtualNetworkConnection' => ['$ref' => '#/definitions/VnetInfo'],
+                    'virtualNetworkName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'virtualNetworkConnection' => [
+                        '$ref' => '#/definitions/VnetInfo',
+                        'readOnly' => TRUE
+                    ],
                     'hybridConnections' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/RelayServiceConnectionEntity']
+                        'items' => ['$ref' => '#/definitions/RelayServiceConnectionEntity'],
+                        'readOnly' => TRUE
                     ],
                     'hybridConnectionsV2' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/HybridConnection']
+                        'items' => ['$ref' => '#/definitions/HybridConnection'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -16566,7 +16845,10 @@ final class WebSiteManagementClient
                             'Unknown'
                         ]
                     ],
-                    'thumbprint' => ['type' => 'string']
+                    'thumbprint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -16588,7 +16870,10 @@ final class WebSiteManagementClient
                 'required' => ['value']
             ],
             'RecoverResponse_properties' => [
-                'properties' => ['operationId' => ['type' => 'string']],
+                'properties' => ['operationId' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -16599,8 +16884,14 @@ final class WebSiteManagementClient
             ],
             'ResourceMetricName' => [
                 'properties' => [
-                    'value' => ['type' => 'string'],
-                    'localizedValue' => ['type' => 'string']
+                    'value' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'localizedValue' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -16615,30 +16906,39 @@ final class WebSiteManagementClient
             ],
             'ResourceMetricValue' => [
                 'properties' => [
-                    'timestamp' => ['type' => 'string'],
+                    'timestamp' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'average' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'minimum' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'maximum' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'total' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'count' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'properties' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ResourceMetricProperty']
+                        'items' => ['$ref' => '#/definitions/ResourceMetricProperty'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -16646,26 +16946,45 @@ final class WebSiteManagementClient
             ],
             'ResourceMetric' => [
                 'properties' => [
-                    'name' => ['$ref' => '#/definitions/ResourceMetricName'],
-                    'unit' => ['type' => 'string'],
-                    'timeGrain' => ['type' => 'string'],
+                    'name' => [
+                        '$ref' => '#/definitions/ResourceMetricName',
+                        'readOnly' => TRUE
+                    ],
+                    'unit' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'timeGrain' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'startTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'endTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'resourceId' => ['type' => 'string'],
-                    'id' => ['type' => 'string'],
+                    'resourceId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'metricValues' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ResourceMetricValue']
+                        'items' => ['$ref' => '#/definitions/ResourceMetricValue'],
+                        'readOnly' => TRUE
                     ],
                     'properties' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ResourceMetricProperty']
+                        'items' => ['$ref' => '#/definitions/ResourceMetricProperty'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -16673,8 +16992,14 @@ final class WebSiteManagementClient
             ],
             'ResourceMetricAvailability' => [
                 'properties' => [
-                    'timeGrain' => ['type' => 'string'],
-                    'retention' => ['type' => 'string']
+                    'timeGrain' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'retention' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -16692,18 +17017,35 @@ final class WebSiteManagementClient
             ],
             'ResourceMetricDefinition_properties' => [
                 'properties' => [
-                    'name' => ['$ref' => '#/definitions/ResourceMetricName'],
-                    'unit' => ['type' => 'string'],
-                    'primaryAggregationType' => ['type' => 'string'],
+                    'name' => [
+                        '$ref' => '#/definitions/ResourceMetricName',
+                        'readOnly' => TRUE
+                    ],
+                    'unit' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'primaryAggregationType' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'metricAvailabilities' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ResourceMetricAvailability']
+                        'items' => ['$ref' => '#/definitions/ResourceMetricAvailability'],
+                        'readOnly' => TRUE
                     ],
-                    'resourceUri' => ['type' => 'string'],
-                    'id' => ['type' => 'string'],
+                    'resourceUri' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => [
                         'type' => 'object',
-                        'additionalProperties' => ['type' => 'string']
+                        'additionalProperties' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -16758,7 +17100,10 @@ final class WebSiteManagementClient
                 'required' => []
             ],
             'RestoreResponse_properties' => [
-                'properties' => ['operationId' => ['type' => 'string']],
+                'properties' => ['operationId' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -16769,23 +17114,32 @@ final class WebSiteManagementClient
             ],
             'Site_properties' => [
                 'properties' => [
-                    'state' => ['type' => 'string'],
+                    'state' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'hostNames' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
-                    'repositorySiteName' => ['type' => 'string'],
+                    'repositorySiteName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'usageState' => [
                         'type' => 'string',
                         'enum' => [
                             'Normal',
                             'Exceeded'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'enabled' => ['type' => 'boolean'],
                     'enabledHostNames' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
                     'availabilityState' => [
                         'type' => 'string',
@@ -16793,7 +17147,8 @@ final class WebSiteManagementClient
                             'Normal',
                             'Limited',
                             'DisasterRecoveryMode'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'hostNameSslStates' => [
                         'type' => 'array',
@@ -16803,20 +17158,28 @@ final class WebSiteManagementClient
                     'reserved' => ['type' => 'boolean'],
                     'lastModifiedTimeUtc' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'siteConfig' => ['$ref' => '#/definitions/SiteConfig'],
                     'trafficManagerHostNames' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
                     'scmSiteAlsoStopped' => ['type' => 'boolean'],
-                    'targetSwapSlot' => ['type' => 'string'],
+                    'targetSwapSlot' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'hostingEnvironmentProfile' => ['$ref' => '#/definitions/HostingEnvironmentProfile'],
                     'clientAffinityEnabled' => ['type' => 'boolean'],
                     'clientCertEnabled' => ['type' => 'boolean'],
                     'hostNamesDisabled' => ['type' => 'boolean'],
-                    'outboundIpAddresses' => ['type' => 'string'],
+                    'outboundIpAddresses' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'containerSize' => [
                         'type' => 'integer',
                         'format' => 'int32'
@@ -16827,18 +17190,35 @@ final class WebSiteManagementClient
                     ],
                     'suspendedTill' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'maxNumberOfWorkers' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'cloningInfo' => ['$ref' => '#/definitions/CloningInfo'],
-                    'resourceGroup' => ['type' => 'string'],
-                    'isDefaultContainer' => ['type' => 'boolean'],
-                    'defaultHostName' => ['type' => 'string'],
-                    'slotSwapStatus' => ['$ref' => '#/definitions/SlotSwapStatus'],
-                    'premiumAppDeployed' => ['type' => 'boolean'],
+                    'resourceGroup' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'isDefaultContainer' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'defaultHostName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'slotSwapStatus' => [
+                        '$ref' => '#/definitions/SlotSwapStatus',
+                        'readOnly' => TRUE
+                    ],
+                    'premiumAppDeployed' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'microService' => ['type' => 'string'],
                     'gatewaySiteName' => ['type' => 'string']
                 ],
@@ -16974,11 +17354,13 @@ final class WebSiteManagementClient
                 'properties' => [
                     'time' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'id' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -16990,7 +17372,10 @@ final class WebSiteManagementClient
                 'required' => []
             ],
             'SiteInstance_properties' => [
-                'properties' => ['name' => ['type' => 'string']],
+                'properties' => ['name' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -17066,13 +17451,34 @@ final class WebSiteManagementClient
             ],
             'SlotDifference_properties' => [
                 'properties' => [
-                    'type' => ['type' => 'string'],
-                    'settingType' => ['type' => 'string'],
-                    'diffRule' => ['type' => 'string'],
-                    'settingName' => ['type' => 'string'],
-                    'valueInCurrentSlot' => ['type' => 'string'],
-                    'valueInTargetSlot' => ['type' => 'string'],
-                    'description' => ['type' => 'string']
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'settingType' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'diffRule' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'settingName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'valueInCurrentSlot' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'valueInTargetSlot' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'description' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -17096,7 +17502,8 @@ final class WebSiteManagementClient
             'Snapshot_properties' => [
                 'properties' => ['time' => [
                     'type' => 'string',
-                    'format' => 'date-time'
+                    'format' => 'date-time',
+                    'readOnly' => TRUE
                 ]],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -17159,7 +17566,10 @@ final class WebSiteManagementClient
                 'required' => []
             ],
             'StorageMigrationResponse_properties' => [
-                'properties' => ['operationId' => ['type' => 'string']],
+                'properties' => ['operationId' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -17246,8 +17656,14 @@ final class WebSiteManagementClient
             'VirtualNetworkProfile' => [
                 'properties' => [
                     'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'subnet' => ['type' => 'string']
                 ],
                 'additionalProperties' => FALSE,
@@ -17274,7 +17690,8 @@ final class WebSiteManagementClient
                     ],
                     'instanceNames' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -17351,7 +17768,8 @@ final class WebSiteManagementClient
                             'Canceled',
                             'InProgress',
                             'Deleting'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'status' => [
                         'type' => 'string',
@@ -17360,7 +17778,8 @@ final class WebSiteManagementClient
                             'Ready',
                             'Scaling',
                             'Deleting'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'vnetName' => ['type' => 'string'],
                     'vnetResourceGroupName' => ['type' => 'string'],
@@ -17387,44 +17806,79 @@ final class WebSiteManagementClient
                         'type' => 'integer',
                         'format' => 'int32'
                     ],
-                    'databaseEdition' => ['type' => 'string'],
-                    'databaseServiceObjective' => ['type' => 'string'],
+                    'databaseEdition' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'databaseServiceObjective' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'upgradeDomains' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'subscriptionId' => ['type' => 'string'],
+                    'subscriptionId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'dnsSuffix' => ['type' => 'string'],
-                    'lastAction' => ['type' => 'string'],
-                    'lastActionResult' => ['type' => 'string'],
-                    'allowedMultiSizes' => ['type' => 'string'],
-                    'allowedWorkerSizes' => ['type' => 'string'],
+                    'lastAction' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'lastActionResult' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'allowedMultiSizes' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'allowedWorkerSizes' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'maximumNumberOfMachines' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'vipMappings' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/VirtualIPMapping']
+                        'items' => ['$ref' => '#/definitions/VirtualIPMapping'],
+                        'readOnly' => TRUE
                     ],
                     'environmentCapacities' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/StampCapacity']
+                        'items' => ['$ref' => '#/definitions/StampCapacity'],
+                        'readOnly' => TRUE
                     ],
                     'networkAccessControlList' => [
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/NetworkAccessControlEntry']
                     ],
-                    'environmentIsHealthy' => ['type' => 'boolean'],
-                    'environmentStatus' => ['type' => 'string'],
-                    'resourceGroup' => ['type' => 'string'],
+                    'environmentIsHealthy' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'environmentStatus' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'resourceGroup' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'frontEndScaleFactor' => [
                         'type' => 'integer',
                         'format' => 'int32'
                     ],
                     'defaultFrontEndScaleFactor' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'apiManagementAccountId' => ['type' => 'string'],
                     'suspended' => ['type' => 'boolean'],
@@ -17467,22 +17921,34 @@ final class WebSiteManagementClient
                         'enum' => [
                             'Ready',
                             'Pending'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'subscription' => ['type' => 'string'],
+                    'subscription' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'adminSiteName' => ['type' => 'string'],
                     'hostingEnvironmentProfile' => ['$ref' => '#/definitions/HostingEnvironmentProfile'],
                     'maximumNumberOfWorkers' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'geoRegion' => ['type' => 'string'],
+                    'geoRegion' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'perSiteScaling' => ['type' => 'boolean'],
                     'numberOfSites' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'resourceGroup' => ['type' => 'string'],
+                    'resourceGroup' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'reserved' => ['type' => 'boolean'],
                     'targetWorkerCount' => [
                         'type' => 'integer',
@@ -17500,7 +17966,8 @@ final class WebSiteManagementClient
                             'Canceled',
                             'InProgress',
                             'Deleting'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -17566,14 +18033,27 @@ final class WebSiteManagementClient
             ],
             'MetricDefinition_properties' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
-                    'unit' => ['type' => 'string'],
-                    'primaryAggregationType' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'unit' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'primaryAggregationType' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'metricAvailabilities' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/MetricAvailabilily']
+                        'items' => ['$ref' => '#/definitions/MetricAvailabilily'],
+                        'readOnly' => TRUE
                     ],
-                    'displayName' => ['type' => 'string']
+                    'displayName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -17616,21 +18096,36 @@ final class WebSiteManagementClient
             ],
             'Usage_properties' => [
                 'properties' => [
-                    'displayName' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'resourceName' => ['type' => 'string'],
-                    'unit' => ['type' => 'string'],
+                    'displayName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'resourceName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'unit' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'currentValue' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'limit' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'nextResetTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'computeMode' => [
                         'type' => 'string',
@@ -17638,9 +18133,13 @@ final class WebSiteManagementClient
                             'Shared',
                             'Dedicated',
                             'Dynamic'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'siteMode' => ['type' => 'string']
+                    'siteMode' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -17695,11 +18194,13 @@ final class WebSiteManagementClient
                 'properties' => [
                     'current' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'maximum' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,

@@ -4433,7 +4433,8 @@ final class StorSimple8000SeriesManagementClient
                     'initiatorName' => ['type' => 'string'],
                     'volumeCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -4789,31 +4790,39 @@ final class StorSimple8000SeriesManagementClient
                     ],
                     'nextBackupTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'lastBackupTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'schedulesCount' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'scheduledBackupStatus' => [
                         'type' => 'string',
                         'enum' => [
                             'Disabled',
                             'Enabled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'backupPolicyCreationType' => [
                         'type' => 'string',
                         'enum' => [
                             'BySaaS',
                             'BySSM'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'ssmHostName' => ['type' => 'string']
+                    'ssmHostName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['volumeIds']
@@ -4895,7 +4904,8 @@ final class StorSimple8000SeriesManagementClient
                     ],
                     'lastSuccessfulRun' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -4982,7 +4992,8 @@ final class StorSimple8000SeriesManagementClient
                     ],
                     'volumeCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -5003,9 +5014,18 @@ final class StorSimple8000SeriesManagementClient
             ],
             'BaseModel' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'kind' => [
                         'type' => 'string',
                         'enum' => ['Series8000']
@@ -5396,7 +5416,8 @@ final class StorSimple8000SeriesManagementClient
                         'enum' => [
                             'Classic',
                             'Arm'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'details' => ['$ref' => '#/definitions/DeviceDetails'],
                     'rolloverDetails' => ['$ref' => '#/definitions/DeviceRolloverDetails']
@@ -6329,9 +6350,18 @@ final class StorSimple8000SeriesManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -6394,7 +6424,8 @@ final class StorSimple8000SeriesManagementClient
                     'accessKey' => ['$ref' => '#/definitions/AsymmetricEncryptedSecret'],
                     'volumesCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -6484,7 +6515,10 @@ final class StorSimple8000SeriesManagementClient
                             'LocallyPinned'
                         ]
                     ],
-                    'volumeContainerId' => ['type' => 'string'],
+                    'volumeContainerId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'accessControlRecordIds' => [
                         'type' => 'array',
                         'items' => ['type' => 'string']
@@ -6503,14 +6537,16 @@ final class StorSimple8000SeriesManagementClient
                             'Updating',
                             'Deleting',
                             'Restoring'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'backupStatus' => [
                         'type' => 'string',
                         'enum' => [
                             'Enabled',
                             'Disabled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'monitoringStatus' => [
                         'type' => 'string',
@@ -6521,7 +6557,8 @@ final class StorSimple8000SeriesManagementClient
                     ],
                     'backupPolicyIds' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -6546,11 +6583,13 @@ final class StorSimple8000SeriesManagementClient
                         'enum' => [
                             'Enabled',
                             'Disabled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'volumeCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'storageAccountCredentialId' => ['type' => 'string'],
                     'ownerShipStatus' => [
@@ -6558,7 +6597,8 @@ final class StorSimple8000SeriesManagementClient
                         'enum' => [
                             'Owned',
                             'NotOwned'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'bandWidthRateInMbps' => [
                         'type' => 'integer',
@@ -6567,7 +6607,8 @@ final class StorSimple8000SeriesManagementClient
                     'bandwidthSettingId' => ['type' => 'string'],
                     'totalCloudStorageUsageInBytes' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,

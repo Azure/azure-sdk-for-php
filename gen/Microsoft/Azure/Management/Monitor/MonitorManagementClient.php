@@ -1096,9 +1096,18 @@ final class MonitorManagementClient
         'definitions' => [
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -1400,16 +1409,27 @@ final class MonitorManagementClient
             ],
             'Incident' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
-                    'ruleName' => ['type' => 'string'],
-                    'isActive' => ['type' => 'boolean'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'ruleName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'isActive' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'activatedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'resolvedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1575,7 +1595,8 @@ final class MonitorManagementClient
                     ],
                     'lastUpdatedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1736,7 +1757,8 @@ final class MonitorManagementClient
                             'NotSpecified',
                             'Enabled',
                             'Disabled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1756,7 +1778,8 @@ final class MonitorManagementClient
                             'NotSpecified',
                             'Enabled',
                             'Disabled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,

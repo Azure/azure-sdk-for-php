@@ -1309,9 +1309,13 @@ final class CdnManagementClient
                             'Active',
                             'Deleting',
                             'Disabled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1373,7 +1377,10 @@ final class CdnManagementClient
             ],
             'EndpointProperties' => [
                 'properties' => [
-                    'hostName' => ['type' => 'string'],
+                    'hostName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'origins' => [
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/DeepCreatedOrigin']
@@ -1387,9 +1394,13 @@ final class CdnManagementClient
                             'Starting',
                             'Stopped',
                             'Stopping'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['origins']
@@ -1505,9 +1516,13 @@ final class CdnManagementClient
                             'Creating',
                             'Active',
                             'Deleting'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['hostName']
@@ -1557,7 +1572,8 @@ final class CdnManagementClient
                             'Creating',
                             'Active',
                             'Deleting'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'customHttpsProvisioningState' => [
                         'type' => 'string',
@@ -1567,10 +1583,14 @@ final class CdnManagementClient
                             'Disabling',
                             'Disabled',
                             'Failed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'validationData' => ['type' => 'string'],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['hostName']
@@ -1742,9 +1762,18 @@ final class CdnManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',

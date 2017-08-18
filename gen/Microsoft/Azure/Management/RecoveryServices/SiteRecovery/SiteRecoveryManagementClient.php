@@ -5436,7 +5436,10 @@ final class SiteRecoveryManagementClient
                 'required' => []
             ],
             'ProtectionContainerMappingProviderSpecificDetails' => [
-                'properties' => ['instanceType' => ['type' => 'string']],
+                'properties' => ['instanceType' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -5511,7 +5514,10 @@ final class SiteRecoveryManagementClient
                 'required' => []
             ],
             'ProtectionContainerFabricSpecificDetails' => [
-                'properties' => ['instanceType' => ['type' => 'string']],
+                'properties' => ['instanceType' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -7311,9 +7317,18 @@ final class SiteRecoveryManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string']
                 ],
                 'additionalProperties' => FALSE,

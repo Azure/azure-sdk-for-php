@@ -1438,18 +1438,36 @@ final class StreamAnalyticsManagementClient
         'definitions' => [
             'Operation_display' => [
                 'properties' => [
-                    'provider' => ['type' => 'string'],
-                    'resource' => ['type' => 'string'],
-                    'operation' => ['type' => 'string'],
-                    'description' => ['type' => 'string']
+                    'provider' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'resource' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'operation' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'description' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
-                    'display' => ['$ref' => '#/definitions/Operation_display']
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'display' => [
+                        '$ref' => '#/definitions/Operation_display',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1458,9 +1476,13 @@ final class StreamAnalyticsManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/Operation']
+                        'items' => ['$ref' => '#/definitions/Operation'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1480,9 +1502,18 @@ final class StreamAnalyticsManagementClient
             ],
             'DiagnosticCondition' => [
                 'properties' => [
-                    'since' => ['type' => 'string'],
-                    'code' => ['type' => 'string'],
-                    'message' => ['type' => 'string']
+                    'since' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'code' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1490,7 +1521,8 @@ final class StreamAnalyticsManagementClient
             'Diagnostics' => [
                 'properties' => ['conditions' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DiagnosticCondition']
+                    'items' => ['$ref' => '#/definitions/DiagnosticCondition'],
+                    'readOnly' => TRUE
                 ]],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1498,8 +1530,14 @@ final class StreamAnalyticsManagementClient
             'InputProperties' => [
                 'properties' => [
                     'serialization' => ['$ref' => '#/definitions/Serialization'],
-                    'diagnostics' => ['$ref' => '#/definitions/Diagnostics'],
-                    'etag' => ['type' => 'string']
+                    'diagnostics' => [
+                        '$ref' => '#/definitions/Diagnostics',
+                        'readOnly' => TRUE
+                    ],
+                    'etag' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1516,7 +1554,10 @@ final class StreamAnalyticsManagementClient
                         'format' => 'int32'
                     ],
                     'query' => ['type' => 'string'],
-                    'etag' => ['type' => 'string']
+                    'etag' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1535,8 +1576,14 @@ final class StreamAnalyticsManagementClient
                 'properties' => [
                     'datasource' => ['$ref' => '#/definitions/OutputDataSource'],
                     'serialization' => ['$ref' => '#/definitions/Serialization'],
-                    'diagnostics' => ['$ref' => '#/definitions/Diagnostics'],
-                    'etag' => ['type' => 'string']
+                    'diagnostics' => [
+                        '$ref' => '#/definitions/Diagnostics',
+                        'readOnly' => TRUE
+                    ],
+                    'etag' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1547,7 +1594,10 @@ final class StreamAnalyticsManagementClient
                 'required' => []
             ],
             'FunctionProperties' => [
-                'properties' => ['etag' => ['type' => 'string']],
+                'properties' => ['etag' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -1559,9 +1609,18 @@ final class StreamAnalyticsManagementClient
             'StreamingJobProperties' => [
                 'properties' => [
                     'sku' => ['$ref' => '#/definitions/Sku'],
-                    'jobId' => ['type' => 'string'],
-                    'provisioningState' => ['type' => 'string'],
-                    'jobState' => ['type' => 'string'],
+                    'jobId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'jobState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'outputStartMode' => [
                         'type' => 'string',
                         'enum' => [
@@ -1576,7 +1635,8 @@ final class StreamAnalyticsManagementClient
                     ],
                     'lastOutputEventTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'eventsOutOfOrderPolicy' => [
                         'type' => 'string',
@@ -1607,7 +1667,8 @@ final class StreamAnalyticsManagementClient
                     ],
                     'createdDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'inputs' => [
                         'type' => 'array',
@@ -1622,7 +1683,10 @@ final class StreamAnalyticsManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/Function']
                     ],
-                    'etag' => ['type' => 'string']
+                    'etag' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1636,9 +1700,13 @@ final class StreamAnalyticsManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/StreamingJob']
+                        'items' => ['$ref' => '#/definitions/StreamingJob'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1663,9 +1731,18 @@ final class StreamAnalyticsManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -1812,9 +1889,15 @@ final class StreamAnalyticsManagementClient
             ],
             'SubResource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -2085,25 +2168,41 @@ final class StreamAnalyticsManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/Input']
+                        'items' => ['$ref' => '#/definitions/Input'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorResponse' => [
                 'properties' => [
-                    'code' => ['type' => 'string'],
-                    'message' => ['type' => 'string']
+                    'code' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceTestStatus' => [
                 'properties' => [
-                    'status' => ['type' => 'string'],
-                    'error' => ['$ref' => '#/definitions/ErrorResponse']
+                    'status' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'error' => [
+                        '$ref' => '#/definitions/ErrorResponse',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -2112,9 +2211,13 @@ final class StreamAnalyticsManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/Output']
+                        'items' => ['$ref' => '#/definitions/Output'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -2123,9 +2226,13 @@ final class StreamAnalyticsManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/Function']
+                        'items' => ['$ref' => '#/definitions/Function'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -2134,25 +2241,31 @@ final class StreamAnalyticsManagementClient
                 'properties' => [
                     'maxCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'currentCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubscriptionQuota' => [
-                'properties' => ['properties' => ['$ref' => '#/definitions/SubscriptionQuota_properties']],
+                'properties' => ['properties' => [
+                    '$ref' => '#/definitions/SubscriptionQuota_properties',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'SubscriptionQuotasListResult' => [
                 'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/SubscriptionQuota']
+                    'items' => ['$ref' => '#/definitions/SubscriptionQuota'],
+                    'readOnly' => TRUE
                 ]],
                 'additionalProperties' => FALSE,
                 'required' => []

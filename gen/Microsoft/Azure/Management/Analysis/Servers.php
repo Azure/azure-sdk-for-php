@@ -17,6 +17,7 @@ final class Servers
         $this->_List_operation = $_client->createOperation('Servers_List');
         $this->_ListSkusForNew_operation = $_client->createOperation('Servers_ListSkusForNew');
         $this->_ListSkusForExisting_operation = $_client->createOperation('Servers_ListSkusForExisting');
+        $this->_ListGatewayStatus_operation = $_client->createOperation('Servers_ListGatewayStatus');
     }
     /**
      * Gets details about the specified Analysis Services server.
@@ -159,6 +160,22 @@ final class Servers
         ]);
     }
     /**
+     * Return the gateway status of the specified Analysis Services server instance.
+     * @param string $resourceGroupName
+     * @param string $serverName
+     * @return array
+     */
+    public function listGatewayStatus(
+        $resourceGroupName,
+        $serverName
+    )
+    {
+        return $this->_ListGatewayStatus_operation->call([
+            'resourceGroupName' => $resourceGroupName,
+            'serverName' => $serverName
+        ]);
+    }
+    /**
      * @var \Microsoft\Rest\OperationInterface
      */
     private $_GetDetails_operation;
@@ -198,4 +215,8 @@ final class Servers
      * @var \Microsoft\Rest\OperationInterface
      */
     private $_ListSkusForExisting_operation;
+    /**
+     * @var \Microsoft\Rest\OperationInterface
+     */
+    private $_ListGatewayStatus_operation;
 }

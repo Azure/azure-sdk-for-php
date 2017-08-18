@@ -107,12 +107,30 @@ final class SubscriptionClient
         'definitions' => [
             'Location' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'subscriptionId' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'displayName' => ['type' => 'string'],
-                    'latitude' => ['type' => 'string'],
-                    'longitude' => ['type' => 'string']
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'subscriptionId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'displayName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'latitude' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'longitude' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -127,15 +145,22 @@ final class SubscriptionClient
             ],
             'SubscriptionPolicies' => [
                 'properties' => [
-                    'locationPlacementId' => ['type' => 'string'],
-                    'quotaId' => ['type' => 'string'],
+                    'locationPlacementId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'quotaId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'spendingLimit' => [
                         'type' => 'string',
                         'enum' => [
                             'On',
                             'Off',
                             'CurrentPeriodOff'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -143,9 +168,18 @@ final class SubscriptionClient
             ],
             'Subscription' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'subscriptionId' => ['type' => 'string'],
-                    'displayName' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'subscriptionId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'displayName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'state' => [
                         'type' => 'string',
                         'enum' => [
@@ -154,7 +188,8 @@ final class SubscriptionClient
                             'PastDue',
                             'Disabled',
                             'Deleted'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'subscriptionPolicies' => ['$ref' => '#/definitions/SubscriptionPolicies'],
                     'authorizationSource' => ['type' => 'string']
@@ -175,8 +210,14 @@ final class SubscriptionClient
             ],
             'TenantIdDescription' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'tenantId' => ['type' => 'string']
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []

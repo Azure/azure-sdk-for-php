@@ -1409,9 +1409,18 @@ final class IntuneResourceManagementClient
         'definitions' => [
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'tags' => [
                         'type' => 'object',
                         'additionalProperties' => ['type' => 'string']
@@ -1448,7 +1457,10 @@ final class IntuneResourceManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/Location']
                     ],
-                    'nextlink' => ['type' => 'string']
+                    'nextlink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['value']
@@ -1469,7 +1481,10 @@ final class IntuneResourceManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/GroupItem']
                     ],
-                    'nextlink' => ['type' => 'string']
+                    'nextlink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['value']
@@ -1504,7 +1519,10 @@ final class IntuneResourceManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/Application']
                     ],
-                    'nextlink' => ['type' => 'string']
+                    'nextlink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['value']
@@ -1542,7 +1560,10 @@ final class IntuneResourceManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/iOSMAMPolicy']
                     ],
-                    'nextlink' => ['type' => 'string']
+                    'nextlink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['value']
@@ -1578,7 +1599,10 @@ final class IntuneResourceManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/AndroidMAMPolicy']
                     ],
-                    'nextlink' => ['type' => 'string']
+                    'nextlink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['value']
@@ -1682,18 +1706,21 @@ final class IntuneResourceManagementClient
                     ],
                     'numOfApps' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'groupStatus' => [
                         'type' => 'string',
                         'enum' => [
                             'notTargeted',
                             'targeted'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'lastModifiedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1727,7 +1754,10 @@ final class IntuneResourceManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/Device']
                     ],
-                    'nextlink' => ['type' => 'string']
+                    'nextlink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['value']
@@ -1781,7 +1811,10 @@ final class IntuneResourceManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/OperationResult']
                     ],
-                    'nextlink' => ['type' => 'string']
+                    'nextlink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['value']
@@ -1790,36 +1823,47 @@ final class IntuneResourceManagementClient
                 'properties' => [
                     'deployedPolicies' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'enrolledUsers' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'flaggedUsers' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'lastModifiedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'policyAppliedUsers' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'status' => ['type' => 'string'],
+                    'status' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'wipeFailedApps' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'wipePendingApps' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'wipeSucceededApps' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1828,7 +1872,10 @@ final class IntuneResourceManagementClient
             'StatusesDefault' => [
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/StatusesProperties'],
-                    'nextlink' => ['type' => 'string']
+                    'nextlink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1837,9 +1884,13 @@ final class IntuneResourceManagementClient
                 'properties' => [
                     'errorCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'friendlyName' => ['type' => 'string']
+                    'friendlyName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1855,25 +1906,46 @@ final class IntuneResourceManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/FlaggedUser']
                     ],
-                    'nextlink' => ['type' => 'string']
+                    'nextlink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['value']
             ],
             'FlaggedEnrolledAppError' => [
                 'properties' => [
-                    'errorCode' => ['type' => 'string'],
-                    'severity' => ['type' => 'string']
+                    'errorCode' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'severity' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'FlaggedEnrolledAppProperties' => [
                 'properties' => [
-                    'deviceType' => ['type' => 'string'],
-                    'friendlyName' => ['type' => 'string'],
-                    'lastModifiedTime' => ['type' => 'string'],
-                    'platform' => ['type' => 'string'],
+                    'deviceType' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'friendlyName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'lastModifiedTime' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'platform' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'errors' => [
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/FlaggedEnrolledAppError']
@@ -1893,7 +1965,10 @@ final class IntuneResourceManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/FlaggedEnrolledApp']
                     ],
-                    'nextlink' => ['type' => 'string']
+                    'nextlink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['value']

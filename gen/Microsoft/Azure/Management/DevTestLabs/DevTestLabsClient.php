@@ -5184,7 +5184,8 @@ final class DevTestLabsClient
                     'notificationSettings' => ['$ref' => '#/definitions/NotificationSettings'],
                     'createdDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'targetResourceId' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string'],
@@ -5337,18 +5338,35 @@ final class DevTestLabsClient
             ],
             'ArmTemplateProperties' => [
                 'properties' => [
-                    'displayName' => ['type' => 'string'],
-                    'description' => ['type' => 'string'],
-                    'publisher' => ['type' => 'string'],
-                    'icon' => ['type' => 'string'],
-                    'contents' => ['type' => 'object'],
+                    'displayName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'description' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'publisher' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'icon' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'contents' => [
+                        'type' => 'object',
+                        'readOnly' => TRUE
+                    ],
                     'createdDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'parametersValueFilesInfo' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ParametersValueFileInfo']
+                        'items' => ['$ref' => '#/definitions/ParametersValueFileInfo'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -5377,16 +5395,38 @@ final class DevTestLabsClient
             ],
             'ArtifactProperties' => [
                 'properties' => [
-                    'title' => ['type' => 'string'],
-                    'description' => ['type' => 'string'],
-                    'publisher' => ['type' => 'string'],
-                    'filePath' => ['type' => 'string'],
-                    'icon' => ['type' => 'string'],
-                    'targetOsType' => ['type' => 'string'],
-                    'parameters' => ['type' => 'object'],
+                    'title' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'description' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'publisher' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'filePath' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'icon' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'targetOsType' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'parameters' => [
+                        'type' => 'object',
+                        'readOnly' => TRUE
+                    ],
                     'createdDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -5477,7 +5517,8 @@ final class DevTestLabsClient
                     ],
                     'createdDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
@@ -5748,7 +5789,8 @@ final class DevTestLabsClient
                     'author' => ['type' => 'string'],
                     'creationDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'managedImageId' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string'],
@@ -5806,7 +5848,8 @@ final class DevTestLabsClient
                     'diskUri' => ['type' => 'string'],
                     'createdDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'hostCaching' => ['type' => 'string'],
                     'managedDiskId' => ['type' => 'string'],
@@ -5836,8 +5879,14 @@ final class DevTestLabsClient
                 'properties' => [
                     'deploymentProperties' => ['$ref' => '#/definitions/EnvironmentDeploymentProperties'],
                     'armTemplateDisplayName' => ['type' => 'string'],
-                    'resourceGroupId' => ['type' => 'string'],
-                    'createdByUser' => ['type' => 'string'],
+                    'resourceGroupId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'createdByUser' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
                 ],
@@ -6074,7 +6123,8 @@ final class DevTestLabsClient
                     'osType' => ['type' => 'string'],
                     'creationDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'formulaContent' => ['$ref' => '#/definitions/LabVirtualMachineCreationParameter'],
                     'vm' => ['$ref' => '#/definitions/FormulaPropertiesFromVm'],
@@ -6094,7 +6144,8 @@ final class DevTestLabsClient
                     'author' => ['type' => 'string'],
                     'createdDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'description' => ['type' => 'string'],
                     'imageReference' => ['$ref' => '#/definitions/GalleryImageReference'],
@@ -6190,11 +6241,26 @@ final class DevTestLabsClient
             ],
             'LabProperties' => [
                 'properties' => [
-                    'defaultStorageAccount' => ['type' => 'string'],
-                    'defaultPremiumStorageAccount' => ['type' => 'string'],
-                    'artifactsStorageAccount' => ['type' => 'string'],
-                    'premiumDataDiskStorageAccount' => ['type' => 'string'],
-                    'vaultName' => ['type' => 'string'],
+                    'defaultStorageAccount' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'defaultPremiumStorageAccount' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'artifactsStorageAccount' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'premiumDataDiskStorageAccount' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'vaultName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'labStorageType' => [
                         'type' => 'string',
                         'enum' => [
@@ -6204,7 +6270,8 @@ final class DevTestLabsClient
                     ],
                     'createdDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'premiumDataDisks' => [
                         'type' => 'string',
@@ -6311,14 +6378,19 @@ final class DevTestLabsClient
             'LabCostProperties' => [
                 'properties' => [
                     'targetCost' => ['$ref' => '#/definitions/TargetCostProperties'],
-                    'labCostSummary' => ['$ref' => '#/definitions/LabCostSummaryProperties'],
+                    'labCostSummary' => [
+                        '$ref' => '#/definitions/LabCostSummaryProperties',
+                        'readOnly' => TRUE
+                    ],
                     'labCostDetails' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/LabCostDetailsProperties']
+                        'items' => ['$ref' => '#/definitions/LabCostDetailsProperties'],
+                        'readOnly' => TRUE
                     ],
                     'resourceCosts' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/LabResourceCostProperties']
+                        'items' => ['$ref' => '#/definitions/LabResourceCostProperties'],
+                        'readOnly' => TRUE
                     ],
                     'currencyCode' => ['type' => 'string'],
                     'startDateTime' => [
@@ -6387,7 +6459,10 @@ final class DevTestLabsClient
                         'type' => 'string',
                         'format' => 'date-time'
                     ],
-                    'computeId' => ['type' => 'string'],
+                    'computeId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'customImageId' => ['type' => 'string'],
                     'osType' => ['type' => 'string'],
                     'size' => ['type' => 'string'],
@@ -6522,7 +6597,8 @@ final class DevTestLabsClient
                     ],
                     'createdDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
@@ -6602,7 +6678,8 @@ final class DevTestLabsClient
                     ],
                     'createdDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
@@ -6694,9 +6771,18 @@ final class DevTestLabsClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -6926,7 +7012,8 @@ final class DevTestLabsClient
                     'secretStore' => ['$ref' => '#/definitions/UserSecretStore'],
                     'createdDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']
@@ -7018,7 +7105,8 @@ final class DevTestLabsClient
                     ],
                     'createdDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'provisioningState' => ['type' => 'string'],
                     'uniqueIdentifier' => ['type' => 'string']

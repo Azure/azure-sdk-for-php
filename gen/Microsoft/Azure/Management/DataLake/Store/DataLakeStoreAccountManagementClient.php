@@ -801,9 +801,13 @@ final class DataLakeStoreAccountManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/TrustedIdProvider']
+                        'items' => ['$ref' => '#/definitions/TrustedIdProvider'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -812,9 +816,13 @@ final class DataLakeStoreAccountManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/FirewallRule']
+                        'items' => ['$ref' => '#/definitions/FirewallRule'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -824,11 +832,13 @@ final class DataLakeStoreAccountManagementClient
                     'type' => ['type' => 'string'],
                     'principalId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
                     'tenantId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -885,7 +895,8 @@ final class DataLakeStoreAccountManagementClient
                         'enum' => [
                             'Creating',
                             'Succeeded'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'encryptionConfig' => ['$ref' => '#/definitions/EncryptionConfig'],
                     'firewallState' => [
@@ -933,7 +944,8 @@ final class DataLakeStoreAccountManagementClient
                             'Commitment_500TB',
                             'Commitment_1PB',
                             'Commitment_5PB'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'firewallAllowAzureIps' => [
                         'type' => 'string',
@@ -1020,27 +1032,35 @@ final class DataLakeStoreAccountManagementClient
                             'Resuming',
                             'Deleting',
                             'Deleted'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'state' => [
                         'type' => 'string',
                         'enum' => [
                             'Active',
                             'Suspended'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'creationTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'lastModifiedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'endpoint' => ['type' => 'string'],
+                    'endpoint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'accountId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1055,27 +1075,49 @@ final class DataLakeStoreAccountManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/DataLakeStoreAccountBasic']
+                        'items' => ['$ref' => '#/definitions/DataLakeStoreAccountBasic'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorDetails' => [
                 'properties' => [
-                    'code' => ['type' => 'string'],
-                    'message' => ['type' => 'string'],
-                    'target' => ['type' => 'string']
+                    'code' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'target' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -1087,9 +1129,15 @@ final class DataLakeStoreAccountManagementClient
             ],
             'SubResource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []

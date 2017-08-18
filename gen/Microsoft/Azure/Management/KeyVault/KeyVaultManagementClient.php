@@ -441,19 +441,28 @@ final class KeyVaultManagementClient
             ],
             'DeletedVaultProperties' => [
                 'properties' => [
-                    'vaultId' => ['type' => 'string'],
-                    'location' => ['type' => 'string'],
+                    'vaultId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'deletionDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'scheduledPurgeDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'tags' => [
                         'type' => 'object',
-                        'additionalProperties' => ['type' => 'string']
+                        'additionalProperties' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -481,9 +490,18 @@ final class KeyVaultManagementClient
             ],
             'DeletedVault' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/DeletedVaultProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -513,9 +531,15 @@ final class KeyVaultManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',

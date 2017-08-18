@@ -1020,10 +1020,22 @@ final class ServerManagement
         'definitions' => [
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'location' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'tags' => [
                         'type' => 'object',
                         'additionalProperties' => ['type' => 'string']
@@ -1128,8 +1140,14 @@ final class ServerManagement
                         'type' => 'string',
                         'format' => 'date-time'
                     ],
-                    'installerDownload' => ['type' => 'string'],
-                    'minimumVersion' => ['type' => 'string']
+                    'installerDownload' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'minimumVersion' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []

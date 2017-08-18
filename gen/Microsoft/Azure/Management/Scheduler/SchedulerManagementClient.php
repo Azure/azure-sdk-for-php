@@ -678,8 +678,14 @@ final class SchedulerManagementClient
             ],
             'JobCollectionDefinition' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'name' => ['type' => 'string'],
                     'location' => ['type' => 'string'],
                     'tags' => [
@@ -695,7 +701,8 @@ final class SchedulerManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/JobCollectionDefinition']
+                        'items' => ['$ref' => '#/definitions/JobCollectionDefinition'],
+                        'readOnly' => TRUE
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
@@ -914,23 +921,28 @@ final class SchedulerManagementClient
                 'properties' => [
                     'executionCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'failureCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'faultedCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'lastExecutionTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'nextExecutionTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -953,16 +965,28 @@ final class SchedulerManagementClient
                             'Completed'
                         ]
                     ],
-                    'status' => ['$ref' => '#/definitions/JobStatus']
+                    'status' => [
+                        '$ref' => '#/definitions/JobStatus',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'JobDefinition' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/JobProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -983,22 +1007,26 @@ final class SchedulerManagementClient
                 'properties' => [
                     'startTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'endTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'expectedExecutionTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'actionName' => [
                         'type' => 'string',
                         'enum' => [
                             'MainAction',
                             'ErrorAction'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'status' => [
                         'type' => 'string',
@@ -1006,16 +1034,22 @@ final class SchedulerManagementClient
                             'Completed',
                             'Failed',
                             'Postponed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'message' => ['type' => 'string'],
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'retryCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'repeatCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1023,10 +1057,22 @@ final class SchedulerManagementClient
             ],
             'JobHistoryDefinition' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'properties' => ['$ref' => '#/definitions/JobHistoryDefinitionProperties']
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'properties' => [
+                        '$ref' => '#/definitions/JobHistoryDefinitionProperties',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []

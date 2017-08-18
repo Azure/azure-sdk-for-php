@@ -1902,9 +1902,18 @@ final class ServiceBusManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1948,17 +1957,28 @@ final class ServiceBusManagementClient
             ],
             'SBNamespaceProperties' => [
                 'properties' => [
-                    'provisioningState' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'createdAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'updatedAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'serviceBusEndpoint' => ['type' => 'string'],
-                    'metricId' => ['type' => 'string']
+                    'serviceBusEndpoint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'metricId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -2038,11 +2058,26 @@ final class ServiceBusManagementClient
             ],
             'AccessKeys' => [
                 'properties' => [
-                    'primaryConnectionString' => ['type' => 'string'],
-                    'secondaryConnectionString' => ['type' => 'string'],
-                    'primaryKey' => ['type' => 'string'],
-                    'secondaryKey' => ['type' => 'string'],
-                    'keyName' => ['type' => 'string']
+                    'primaryConnectionString' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'secondaryConnectionString' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'primaryKey' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'secondaryKey' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'keyName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -2065,23 +2100,28 @@ final class ServiceBusManagementClient
                 'properties' => [
                     'activeMessageCount' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'deadLetterMessageCount' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'scheduledMessageCount' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'transferMessageCount' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'transferDeadLetterMessageCount' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -2089,26 +2129,34 @@ final class ServiceBusManagementClient
             ],
             'SBQueueProperties' => [
                 'properties' => [
-                    'countDetails' => ['$ref' => '#/definitions/MessageCountDetails'],
+                    'countDetails' => [
+                        '$ref' => '#/definitions/MessageCountDetails',
+                        'readOnly' => TRUE
+                    ],
                     'createdAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'updatedAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'accessedAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'sizeInBytes' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'messageCount' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'lockDuration' => [
                         'type' => 'string',
@@ -2177,25 +2225,33 @@ final class ServiceBusManagementClient
                 'properties' => [
                     'sizeInBytes' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'createdAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'updatedAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'accessedAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'subscriptionCount' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'countDetails' => ['$ref' => '#/definitions/MessageCountDetails'],
+                    'countDetails' => [
+                        '$ref' => '#/definitions/MessageCountDetails',
+                        'readOnly' => TRUE
+                    ],
                     'defaultMessageTimeToLive' => [
                         'type' => 'string',
                         'format' => 'duration'
@@ -2255,21 +2311,28 @@ final class ServiceBusManagementClient
                 'properties' => [
                     'messageCount' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'createdAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'accessedAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'updatedAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'countDetails' => ['$ref' => '#/definitions/MessageCountDetails'],
+                    'countDetails' => [
+                        '$ref' => '#/definitions/MessageCountDetails',
+                        'readOnly' => TRUE
+                    ],
                     'lockDuration' => [
                         'type' => 'string',
                         'format' => 'duration'
@@ -2334,7 +2397,10 @@ final class ServiceBusManagementClient
             ],
             'CheckNameAvailabilityResult' => [
                 'properties' => [
-                    'message' => ['type' => 'string'],
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'nameAvailable' => ['type' => 'boolean'],
                     'reason' => [
                         'type' => 'string',
@@ -2353,16 +2419,28 @@ final class ServiceBusManagementClient
             ],
             'Operation_display' => [
                 'properties' => [
-                    'provider' => ['type' => 'string'],
-                    'resource' => ['type' => 'string'],
-                    'operation' => ['type' => 'string']
+                    'provider' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'resource' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'operation' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
                 'additionalProperties' => FALSE,
@@ -2372,9 +2450,13 @@ final class ServiceBusManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/Operation']
+                        'items' => ['$ref' => '#/definitions/Operation'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -2404,7 +2486,8 @@ final class ServiceBusManagementClient
                     'sqlExpression' => ['type' => 'string'],
                     'compatibilityLevel' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'requiresPreprocessing' => ['type' => 'boolean']
                 ],
@@ -2465,8 +2548,14 @@ final class ServiceBusManagementClient
             ],
             'PremiumMessagingRegions_properties' => [
                 'properties' => [
-                    'code' => ['type' => 'string'],
-                    'fullName' => ['type' => 'string']
+                    'code' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'fullName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -2482,7 +2571,10 @@ final class ServiceBusManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/PremiumMessagingRegions']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -2531,15 +2623,18 @@ final class ServiceBusManagementClient
                 'properties' => [
                     'partitionIds' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
                     'createdAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'updatedAt' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'messageRetentionInDays' => [
                         'type' => 'integer',
@@ -2579,7 +2674,10 @@ final class ServiceBusManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/Eventhub']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []

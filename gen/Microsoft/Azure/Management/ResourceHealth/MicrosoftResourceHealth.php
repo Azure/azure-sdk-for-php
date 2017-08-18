@@ -347,9 +347,18 @@ final class MicrosoftResourceHealth
             ],
             'ErrorResponse' => [
                 'properties' => [
-                    'code' => ['type' => 'string'],
-                    'message' => ['type' => 'string'],
-                    'details' => ['type' => 'string']
+                    'code' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'details' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []

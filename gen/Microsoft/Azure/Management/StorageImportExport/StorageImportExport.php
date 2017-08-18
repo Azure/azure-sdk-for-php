@@ -470,9 +470,18 @@ final class StorageImportExport
         'definitions' => [
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => ['type' => 'object']
                 ],
@@ -740,9 +749,15 @@ final class StorageImportExport
                     ],
                     'returnAddress' => ['$ref' => '#/definitions/ReturnAddress'],
                     'returnShipping' => ['$ref' => '#/definitions/ReturnShipping'],
-                    'shippingInformation' => ['$ref' => '#/definitions/ShippingInformation'],
+                    'shippingInformation' => [
+                        '$ref' => '#/definitions/ShippingInformation',
+                        'readOnly' => TRUE
+                    ],
                     'deliveryPackage' => ['$ref' => '#/definitions/PackageInfomation'],
-                    'returnPackage' => ['$ref' => '#/definitions/PackageInfomation'],
+                    'returnPackage' => [
+                        '$ref' => '#/definitions/PackageInfomation',
+                        'readOnly' => TRUE
+                    ],
                     'diagnosticsPath' => ['type' => 'string'],
                     'logLevel' => [
                         'type' => 'string',
@@ -762,20 +777,28 @@ final class StorageImportExport
                             'Packaging',
                             'Closed',
                             'Completed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'cancelRequested' => ['type' => 'boolean'],
                     'percentComplete' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'incompleteBlobListUri' => ['type' => 'string'],
+                    'incompleteBlobListUri' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'driveList' => [
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/DriveStatus']
                     ],
                     'export' => ['$ref' => '#/definitions/Export'],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => [

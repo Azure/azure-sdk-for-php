@@ -760,9 +760,18 @@ final class RedisManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -784,14 +793,23 @@ final class RedisManagementClient
             ],
             'RedisAccessKeys' => [
                 'properties' => [
-                    'primaryKey' => ['type' => 'string'],
-                    'secondaryKey' => ['type' => 'string']
+                    'primaryKey' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'secondaryKey' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RedisLinkedServer' => [
-                'properties' => ['id' => ['type' => 'string']],
+                'properties' => ['id' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -806,19 +824,36 @@ final class RedisManagementClient
             'RedisResourceProperties' => [
                 'properties' => [
                     'sku' => ['$ref' => '#/definitions/Sku'],
-                    'redisVersion' => ['type' => 'string'],
-                    'provisioningState' => ['type' => 'string'],
-                    'hostName' => ['type' => 'string'],
+                    'redisVersion' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'hostName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'port' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'sslPort' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'accessKeys' => ['$ref' => '#/definitions/RedisAccessKeys'],
-                    'linkedServers' => ['$ref' => '#/definitions/RedisLinkedServerList']
+                    'accessKeys' => [
+                        '$ref' => '#/definitions/RedisAccessKeys',
+                        'readOnly' => TRUE
+                    ],
+                    'linkedServers' => [
+                        '$ref' => '#/definitions/RedisLinkedServerList',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -932,30 +967,57 @@ final class RedisManagementClient
             ],
             'RedisPatchSchedule' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
-                    'location' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/ScheduleEntries']
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['properties']
             ],
             'RedisForceRebootResponse' => [
-                'properties' => ['Message' => ['type' => 'string']],
+                'properties' => ['Message' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RedisLinkedServerProperties' => [
-                'properties' => ['provisioningState' => ['type' => 'string']],
+                'properties' => ['provisioningState' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'RedisLinkedServerWithProperties' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/RedisLinkedServerProperties']
                 ],
                 'additionalProperties' => FALSE,

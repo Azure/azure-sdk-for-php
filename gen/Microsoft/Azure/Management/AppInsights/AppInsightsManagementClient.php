@@ -476,9 +476,18 @@ final class AppInsightsManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -498,8 +507,14 @@ final class AppInsightsManagementClient
             ],
             'ApplicationInsightsComponentProperties' => [
                 'properties' => [
-                    'ApplicationId' => ['type' => 'string'],
-                    'AppId' => ['type' => 'string'],
+                    'ApplicationId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'AppId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'Application_Type' => [
                         'type' => 'string',
                         'enum' => [
@@ -515,15 +530,28 @@ final class AppInsightsManagementClient
                         'type' => 'string',
                         'enum' => ['rest']
                     ],
-                    'InstrumentationKey' => ['type' => 'string'],
+                    'InstrumentationKey' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'CreationDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'TenantId' => ['type' => 'string'],
+                    'TenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'HockeyAppId' => ['type' => 'string'],
-                    'HockeyAppToken' => ['type' => 'string'],
-                    'provisioningState' => ['type' => 'string'],
+                    'HockeyAppToken' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'SamplingPercentage' => [
                         'type' => 'number',
                         'format' => 'double'
@@ -588,7 +616,10 @@ final class AppInsightsManagementClient
                         'items' => ['$ref' => '#/definitions/WebTestGeolocation']
                     ],
                     'Configuration' => ['$ref' => '#/definitions/WebTestProperties_Configuration'],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => [

@@ -1350,9 +1350,18 @@ final class ServiceMap
         'definitions' => [
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
-                    'name' => ['type' => 'string']
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1360,8 +1369,14 @@ final class ServiceMap
             'ResourceReference' => [
                 'properties' => [
                     'id' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
-                    'name' => ['type' => 'string']
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['id']
@@ -1372,7 +1387,10 @@ final class ServiceMap
                 'required' => []
             ],
             'ProcessReference_properties' => [
-                'properties' => ['machine' => ['$ref' => '#/definitions/ref:machine']],
+                'properties' => ['machine' => [
+                    '$ref' => '#/definitions/ref:machine',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -1383,8 +1401,14 @@ final class ServiceMap
             ],
             'PortReference_properties' => [
                 'properties' => [
-                    'machine' => ['$ref' => '#/definitions/ref:machine'],
-                    'ipAddress' => ['type' => 'string'],
+                    'machine' => [
+                        '$ref' => '#/definitions/ref:machine',
+                        'readOnly' => TRUE
+                    ],
+                    'ipAddress' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'portNumber' => [
                         'type' => 'integer',
                         'format' => 'int32'
@@ -1400,7 +1424,10 @@ final class ServiceMap
             ],
             'MachineReferenceWithHints_properties' => [
                 'properties' => [
-                    'displayNameHint' => ['type' => 'string'],
+                    'displayNameHint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'osFamilyHint' => [
                         'type' => 'string',
                         'enum' => [
@@ -1409,7 +1436,8 @@ final class ServiceMap
                             'linux',
                             'solaris',
                             'aix'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,

@@ -223,15 +223,18 @@ final class BillingManagementClient
                 'properties' => [
                     'billingPeriodStartDate' => [
                         'type' => 'string',
-                        'format' => 'date'
+                        'format' => 'date',
+                        'readOnly' => TRUE
                     ],
                     'billingPeriodEndDate' => [
                         'type' => 'string',
-                        'format' => 'date'
+                        'format' => 'date',
+                        'readOnly' => TRUE
                     ],
                     'invoiceIds' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -246,9 +249,13 @@ final class BillingManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/BillingPeriod']
+                        'items' => ['$ref' => '#/definitions/BillingPeriod'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -257,18 +264,31 @@ final class BillingManagementClient
                 'properties' => [
                     'expiryTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'url' => ['type' => 'string']
+                    'url' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ErrorDetails' => [
                 'properties' => [
-                    'code' => ['type' => 'string'],
-                    'message' => ['type' => 'string'],
-                    'target' => ['type' => 'string']
+                    'code' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'target' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -283,15 +303,18 @@ final class BillingManagementClient
                     'downloadUrl' => ['$ref' => '#/definitions/DownloadUrl'],
                     'invoicePeriodStartDate' => [
                         'type' => 'string',
-                        'format' => 'date'
+                        'format' => 'date',
+                        'readOnly' => TRUE
                     ],
                     'invoicePeriodEndDate' => [
                         'type' => 'string',
-                        'format' => 'date'
+                        'format' => 'date',
+                        'readOnly' => TRUE
                     ],
                     'billingPeriodIds' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -306,25 +329,41 @@ final class BillingManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/Invoice']
+                        'items' => ['$ref' => '#/definitions/Invoice'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation_display' => [
                 'properties' => [
-                    'provider' => ['type' => 'string'],
-                    'resource' => ['type' => 'string'],
-                    'operation' => ['type' => 'string']
+                    'provider' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'resource' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'operation' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Operation' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'display' => ['$ref' => '#/definitions/Operation_display']
                 ],
                 'additionalProperties' => FALSE,
@@ -334,18 +373,31 @@ final class BillingManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/Operation']
+                        'items' => ['$ref' => '#/definitions/Operation'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []

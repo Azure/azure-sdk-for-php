@@ -468,7 +468,10 @@ final class TrafficManagerManagementClient
         ],
         'definitions' => [
             'DeleteOperationResult' => [
-                'properties' => ['boolean' => ['type' => 'boolean']],
+                'properties' => ['boolean' => [
+                    'type' => 'boolean',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -531,7 +534,10 @@ final class TrafficManagerManagementClient
             'DnsConfig' => [
                 'properties' => [
                     'relativeName' => ['type' => 'string'],
-                    'fqdn' => ['type' => 'string'],
+                    'fqdn' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'ttl' => [
                         'type' => 'integer',
                         'format' => 'int64'
@@ -657,9 +663,18 @@ final class TrafficManagerManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string']
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []

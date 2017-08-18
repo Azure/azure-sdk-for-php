@@ -312,10 +312,19 @@ final class AzureMLWebServicesManagementClient
         'definitions' => [
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'tags' => [
                         'type' => 'object',
                         'additionalProperties' => ['type' => 'string']
@@ -566,11 +575,13 @@ final class AzureMLWebServicesManagementClient
                     'description' => ['type' => 'string'],
                     'createdOn' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'modifiedOn' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'provisioningState' => [
                         'type' => 'string',
@@ -579,11 +590,15 @@ final class AzureMLWebServicesManagementClient
                             'Provisioning',
                             'Succeeded',
                             'Failed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'keys' => ['$ref' => '#/definitions/WebServiceKeys'],
                     'readOnly' => ['type' => 'boolean'],
-                    'swaggerLocation' => ['type' => 'string'],
+                    'swaggerLocation' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'exposeSampleData' => ['type' => 'boolean'],
                     'realtimeConfiguration' => ['$ref' => '#/definitions/RealtimeConfiguration'],
                     'diagnostics' => ['$ref' => '#/definitions/DiagnosticsConfiguration'],
@@ -735,15 +750,18 @@ final class AzureMLWebServicesManagementClient
                             'Provisioning',
                             'Succeeded',
                             'Failed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'startTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'endTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'percentComplete' => [
                         'type' => 'number',

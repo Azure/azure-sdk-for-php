@@ -1466,12 +1466,22 @@ final class ResourceManagementClient
             ],
             'ResourceManagementErrorWithDetails' => [
                 'properties' => [
-                    'code' => ['type' => 'string'],
-                    'message' => ['type' => 'string'],
-                    'target' => ['type' => 'string'],
+                    'code' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'target' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'details' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ResourceManagementErrorWithDetails']
+                        'items' => ['$ref' => '#/definitions/ResourceManagementErrorWithDetails'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1524,12 +1534,19 @@ final class ResourceManagementClient
             ],
             'Provider' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'namespace' => ['type' => 'string'],
-                    'registrationState' => ['type' => 'string'],
+                    'registrationState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'resourceTypes' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ProviderResourceType']
+                        'items' => ['$ref' => '#/definitions/ProviderResourceType'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1559,11 +1576,18 @@ final class ResourceManagementClient
             ],
             'DeploymentPropertiesExtended' => [
                 'properties' => [
-                    'provisioningState' => ['type' => 'string'],
-                    'correlationId' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'correlationId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'timestamp' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'outputs' => ['type' => 'object'],
                     'providers' => [
@@ -1613,7 +1637,10 @@ final class ResourceManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/DeploymentExtended']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1624,7 +1651,10 @@ final class ResourceManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/Provider']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1656,8 +1686,14 @@ final class ResourceManagementClient
             ],
             'Identity' => [
                 'properties' => [
-                    'principalId' => ['type' => 'string'],
-                    'tenantId' => ['type' => 'string'],
+                    'principalId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'type' => [
                         'type' => 'string',
                         'enum' => ['SystemAssigned']
@@ -1684,19 +1720,28 @@ final class ResourceManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/GenericResource']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceGroupProperties' => [
-                'properties' => ['provisioningState' => ['type' => 'string']],
+                'properties' => ['provisioningState' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceGroup' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/ResourceGroupProperties'],
                     'location' => ['type' => 'string'],
@@ -1728,7 +1773,10 @@ final class ResourceManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/ResourceGroup']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1794,7 +1842,10 @@ final class ResourceManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/TagDetails']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1815,25 +1866,53 @@ final class ResourceManagementClient
             ],
             'DeploymentOperationProperties' => [
                 'properties' => [
-                    'provisioningState' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'timestamp' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'serviceRequestId' => ['type' => 'string'],
-                    'statusCode' => ['type' => 'string'],
-                    'statusMessage' => ['type' => 'object'],
-                    'targetResource' => ['$ref' => '#/definitions/TargetResource'],
-                    'request' => ['$ref' => '#/definitions/HttpMessage'],
-                    'response' => ['$ref' => '#/definitions/HttpMessage']
+                    'serviceRequestId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'statusCode' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'statusMessage' => [
+                        'type' => 'object',
+                        'readOnly' => TRUE
+                    ],
+                    'targetResource' => [
+                        '$ref' => '#/definitions/TargetResource',
+                        'readOnly' => TRUE
+                    ],
+                    'request' => [
+                        '$ref' => '#/definitions/HttpMessage',
+                        'readOnly' => TRUE
+                    ],
+                    'response' => [
+                        '$ref' => '#/definitions/HttpMessage',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DeploymentOperation' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'operationId' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'operationId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/DeploymentOperationProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -1845,7 +1924,10 @@ final class ResourceManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/DeploymentOperation']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1863,9 +1945,18 @@ final class ResourceManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',

@@ -600,7 +600,10 @@ final class ManagedApplicationClient
                     'managedResourceGroupId' => ['type' => 'string'],
                     'applianceDefinitionId' => ['type' => 'string'],
                     'parameters' => ['type' => 'object'],
-                    'outputs' => ['type' => 'object'],
+                    'outputs' => [
+                        'type' => 'object',
+                        'readOnly' => TRUE
+                    ],
                     'provisioningState' => [
                         'type' => 'string',
                         'enum' => [
@@ -615,7 +618,8 @@ final class ManagedApplicationClient
                             'Failed',
                             'Succeeded',
                             'Updating'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'uiDefinitionUri' => ['type' => 'string']
                 ],
@@ -655,7 +659,10 @@ final class ManagedApplicationClient
                     'managedResourceGroupId' => ['type' => 'string'],
                     'applianceDefinitionId' => ['type' => 'string'],
                     'parameters' => ['type' => 'object'],
-                    'outputs' => ['type' => 'object'],
+                    'outputs' => [
+                        'type' => 'object',
+                        'readOnly' => TRUE
+                    ],
                     'provisioningState' => [
                         'type' => 'string',
                         'enum' => [
@@ -670,7 +677,8 @@ final class ManagedApplicationClient
                             'Failed',
                             'Succeeded',
                             'Updating'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'uiDefinitionUri' => ['type' => 'string']
                 ],
@@ -774,8 +782,14 @@ final class ManagedApplicationClient
             ],
             'Identity' => [
                 'properties' => [
-                    'principalId' => ['type' => 'string'],
-                    'tenantId' => ['type' => 'string'],
+                    'principalId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'type' => [
                         'type' => 'string',
                         'enum' => ['SystemAssigned']
@@ -795,9 +809,18 @@ final class ManagedApplicationClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',

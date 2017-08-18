@@ -422,7 +422,8 @@ final class CognitiveServicesManagementClient
                             'Free',
                             'Standard',
                             'Premium'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -489,7 +490,8 @@ final class CognitiveServicesManagementClient
                             'ResolvingDNS',
                             'Succeeded',
                             'Failed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'endpoint' => ['type' => 'string'],
                     'internalId' => ['type' => 'string']
@@ -520,7 +522,8 @@ final class CognitiveServicesManagementClient
                     'nextLink' => ['type' => 'string'],
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/CognitiveServicesAccount']
+                        'items' => ['$ref' => '#/definitions/CognitiveServicesAccount'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -556,7 +559,8 @@ final class CognitiveServicesManagementClient
             'CognitiveServicesAccountEnumerateSkusResult' => [
                 'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/CognitiveServicesResourceAndSku']
+                    'items' => ['$ref' => '#/definitions/CognitiveServicesResourceAndSku'],
+                    'readOnly' => TRUE
                 ]],
                 'additionalProperties' => FALSE,
                 'required' => []

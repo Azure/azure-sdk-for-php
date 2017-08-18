@@ -3508,7 +3508,8 @@ final class ComputeManagementClient
                     ],
                     'statuses' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/InstanceViewStatus']
+                        'items' => ['$ref' => '#/definitions/InstanceViewStatus'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -3638,7 +3639,10 @@ final class ComputeManagementClient
                     'autoUpgradeMinorVersion' => ['type' => 'boolean'],
                     'settings' => ['type' => 'object'],
                     'protectedSettings' => ['type' => 'object'],
-                    'provisioningState' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'instanceView' => ['$ref' => '#/definitions/VirtualMachineExtensionInstanceView']
                 ],
                 'additionalProperties' => FALSE,
@@ -3676,7 +3680,8 @@ final class ComputeManagementClient
             'DataDiskImage' => [
                 'properties' => ['lun' => [
                     'type' => 'integer',
-                    'format' => 'int32'
+                    'format' => 'int32',
+                    'readOnly' => TRUE
                 ]],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -4218,8 +4223,14 @@ final class ComputeManagementClient
             ],
             'VirtualMachineIdentity' => [
                 'properties' => [
-                    'principalId' => ['type' => 'string'],
-                    'tenantId' => ['type' => 'string'],
+                    'principalId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'type' => [
                         'type' => 'string',
                         'enum' => ['SystemAssigned']
@@ -4299,10 +4310,19 @@ final class ComputeManagementClient
                     'networkProfile' => ['$ref' => '#/definitions/NetworkProfile'],
                     'diagnosticsProfile' => ['$ref' => '#/definitions/DiagnosticsProfile'],
                     'availabilitySet' => ['$ref' => '#/definitions/SubResource'],
-                    'provisioningState' => ['type' => 'string'],
-                    'instanceView' => ['$ref' => '#/definitions/VirtualMachineInstanceView'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'instanceView' => [
+                        '$ref' => '#/definitions/VirtualMachineInstanceView',
+                        'readOnly' => TRUE
+                    ],
                     'licenseType' => ['type' => 'string'],
-                    'vmId' => ['type' => 'string']
+                    'vmId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -4313,7 +4333,8 @@ final class ComputeManagementClient
                     'properties' => ['$ref' => '#/definitions/VirtualMachineProperties'],
                     'resources' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/VirtualMachineExtension']
+                        'items' => ['$ref' => '#/definitions/VirtualMachineExtension'],
+                        'readOnly' => TRUE
                     ],
                     'identity' => ['$ref' => '#/definitions/VirtualMachineIdentity']
                 ],
@@ -4446,7 +4467,10 @@ final class ComputeManagementClient
                 'properties' => [
                     'sourceVirtualMachine' => ['$ref' => '#/definitions/SubResource'],
                     'storageProfile' => ['$ref' => '#/definitions/ImageStorageProfile'],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -4469,8 +4493,14 @@ final class ComputeManagementClient
             ],
             'VirtualMachineScaleSetIdentity' => [
                 'properties' => [
-                    'principalId' => ['type' => 'string'],
-                    'tenantId' => ['type' => 'string'],
+                    'principalId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'tenantId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'type' => [
                         'type' => 'string',
                         'enum' => ['SystemAssigned']
@@ -4483,15 +4513,18 @@ final class ComputeManagementClient
                 'properties' => [
                     'minimum' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'maximum' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'default' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'scaleType' => [
                         'type' => 'string',
@@ -4499,7 +4532,8 @@ final class ComputeManagementClient
                             'Automatic',
                             'Manual',
                             'None'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -4507,20 +4541,33 @@ final class ComputeManagementClient
             ],
             'ResourceSkuCosts' => [
                 'properties' => [
-                    'meterID' => ['type' => 'string'],
+                    'meterID' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'quantity' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
-                    'extendedUnit' => ['type' => 'string']
+                    'extendedUnit' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ResourceSkuCapabilities' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
-                    'value' => ['type' => 'string']
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'value' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -4529,18 +4576,21 @@ final class ComputeManagementClient
                 'properties' => [
                     'type' => [
                         'type' => 'string',
-                        'enum' => ['location']
+                        'enum' => ['location'],
+                        'readOnly' => TRUE
                     ],
                     'values' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
                     'reasonCode' => [
                         'type' => 'string',
                         'enum' => [
                             'QuotaId',
                             'NotAvailableForSubscription'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -4548,32 +4598,58 @@ final class ComputeManagementClient
             ],
             'ResourceSku' => [
                 'properties' => [
-                    'resourceType' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'tier' => ['type' => 'string'],
-                    'size' => ['type' => 'string'],
-                    'family' => ['type' => 'string'],
-                    'kind' => ['type' => 'string'],
-                    'capacity' => ['$ref' => '#/definitions/ResourceSkuCapacity'],
+                    'resourceType' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'tier' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'size' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'family' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'kind' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'capacity' => [
+                        '$ref' => '#/definitions/ResourceSkuCapacity',
+                        'readOnly' => TRUE
+                    ],
                     'locations' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
                     'apiVersions' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
                     'costs' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ResourceSkuCosts']
+                        'items' => ['$ref' => '#/definitions/ResourceSkuCosts'],
+                        'readOnly' => TRUE
                     ],
                     'capabilities' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ResourceSkuCapabilities']
+                        'items' => ['$ref' => '#/definitions/ResourceSkuCapabilities'],
+                        'readOnly' => TRUE
                     ],
                     'restrictions' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ResourceSkuRestrictions']
+                        'items' => ['$ref' => '#/definitions/ResourceSkuRestrictions'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -4812,7 +4888,10 @@ final class ComputeManagementClient
                     'autoUpgradeMinorVersion' => ['type' => 'boolean'],
                     'settings' => ['type' => 'object'],
                     'protectedSettings' => ['type' => 'object'],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -4861,9 +4940,15 @@ final class ComputeManagementClient
                     'upgradePolicy' => ['$ref' => '#/definitions/UpgradePolicy'],
                     'recoveryPolicy' => ['$ref' => '#/definitions/RecoveryPolicy'],
                     'virtualMachineProfile' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMProfile'],
-                    'provisioningState' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'overprovision' => ['type' => 'boolean'],
-                    'uniqueId' => ['type' => 'string'],
+                    'uniqueId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'singlePlacementGroup' => ['type' => 'boolean']
                 ],
                 'additionalProperties' => FALSE,
@@ -4897,10 +4982,14 @@ final class ComputeManagementClient
             ],
             'VirtualMachineStatusCodeCount' => [
                 'properties' => [
-                    'code' => ['type' => 'string'],
+                    'code' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'count' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -4909,17 +4998,22 @@ final class ComputeManagementClient
             'VirtualMachineScaleSetInstanceViewStatusesSummary' => [
                 'properties' => ['statusesSummary' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/VirtualMachineStatusCodeCount']
+                    'items' => ['$ref' => '#/definitions/VirtualMachineStatusCodeCount'],
+                    'readOnly' => TRUE
                 ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VirtualMachineScaleSetVMExtensionsSummary' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'statusesSummary' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/VirtualMachineStatusCodeCount']
+                        'items' => ['$ref' => '#/definitions/VirtualMachineStatusCodeCount'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -4927,10 +5021,14 @@ final class ComputeManagementClient
             ],
             'VirtualMachineScaleSetInstanceView' => [
                 'properties' => [
-                    'virtualMachine' => ['$ref' => '#/definitions/VirtualMachineScaleSetInstanceViewStatusesSummary'],
+                    'virtualMachine' => [
+                        '$ref' => '#/definitions/VirtualMachineScaleSetInstanceViewStatusesSummary',
+                        'readOnly' => TRUE
+                    ],
                     'extensions' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMExtensionsSummary']
+                        'items' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMExtensionsSummary'],
+                        'readOnly' => TRUE
                     ],
                     'statuses' => [
                         'type' => 'array',
@@ -4966,22 +5064,26 @@ final class ComputeManagementClient
                 'properties' => [
                     'minimum' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'maximum' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'defaultCapacity' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'scaleType' => [
                         'type' => 'string',
                         'enum' => [
                             'Automatic',
                             'None'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -4989,9 +5091,18 @@ final class ComputeManagementClient
             ],
             'VirtualMachineScaleSetSku' => [
                 'properties' => [
-                    'resourceType' => ['type' => 'string'],
-                    'sku' => ['$ref' => '#/definitions/Sku'],
-                    'capacity' => ['$ref' => '#/definitions/VirtualMachineScaleSetSkuCapacity']
+                    'resourceType' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'sku' => [
+                        '$ref' => '#/definitions/Sku',
+                        'readOnly' => TRUE
+                    ],
+                    'capacity' => [
+                        '$ref' => '#/definitions/VirtualMachineScaleSetSkuCapacity',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -5009,16 +5120,28 @@ final class ComputeManagementClient
             ],
             'VirtualMachineScaleSetVMProperties' => [
                 'properties' => [
-                    'latestModelApplied' => ['type' => 'boolean'],
-                    'vmId' => ['type' => 'string'],
-                    'instanceView' => ['$ref' => '#/definitions/VirtualMachineInstanceView'],
+                    'latestModelApplied' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'vmId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'instanceView' => [
+                        '$ref' => '#/definitions/VirtualMachineInstanceView',
+                        'readOnly' => TRUE
+                    ],
                     'hardwareProfile' => ['$ref' => '#/definitions/HardwareProfile'],
                     'storageProfile' => ['$ref' => '#/definitions/StorageProfile'],
                     'osProfile' => ['$ref' => '#/definitions/OSProfile'],
                     'networkProfile' => ['$ref' => '#/definitions/NetworkProfile'],
                     'diagnosticsProfile' => ['$ref' => '#/definitions/DiagnosticsProfile'],
                     'availabilitySet' => ['$ref' => '#/definitions/SubResource'],
-                    'provisioningState' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'licenseType' => ['type' => 'string']
                 ],
                 'additionalProperties' => FALSE,
@@ -5026,13 +5149,20 @@ final class ComputeManagementClient
             ],
             'VirtualMachineScaleSetVM' => [
                 'properties' => [
-                    'instanceId' => ['type' => 'string'],
-                    'sku' => ['$ref' => '#/definitions/Sku'],
+                    'instanceId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'sku' => [
+                        '$ref' => '#/definitions/Sku',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/VirtualMachineScaleSetVMProperties'],
                     'plan' => ['$ref' => '#/definitions/Plan'],
                     'resources' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/VirtualMachineExtension']
+                        'items' => ['$ref' => '#/definitions/VirtualMachineExtension'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -5117,9 +5247,18 @@ final class ComputeManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -5130,23 +5269,37 @@ final class ComputeManagementClient
                 'required' => ['location']
             ],
             'SubResourceReadOnly' => [
-                'properties' => ['id' => ['type' => 'string']],
+                'properties' => ['id' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'OperationStatusResponse' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
-                    'status' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'status' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'startTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'endTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'error' => ['$ref' => '#/definitions/ApiError']
+                    'error' => [
+                        '$ref' => '#/definitions/ApiError',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -5160,7 +5313,10 @@ final class ComputeManagementClient
                             'Premium_LRS'
                         ]
                     ],
-                    'tier' => ['type' => 'string']
+                    'tier' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -5247,7 +5403,8 @@ final class ComputeManagementClient
                 'properties' => [
                     'timeCreated' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'osType' => [
                         'type' => 'string',
@@ -5262,14 +5419,20 @@ final class ComputeManagementClient
                         'format' => 'int32'
                     ],
                     'encryptionSettings' => ['$ref' => '#/definitions/EncryptionSettings'],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['creationData']
             ],
             'Disk' => [
                 'properties' => [
-                    'managedBy' => ['type' => 'string'],
+                    'managedBy' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'sku' => ['$ref' => '#/definitions/DiskSku'],
                     'properties' => ['$ref' => '#/definitions/DiskProperties']
                 ],
@@ -5331,7 +5494,10 @@ final class ComputeManagementClient
                 ]
             ],
             'AccessUriRaw' => [
-                'properties' => ['accessSAS' => ['type' => 'string']],
+                'properties' => ['accessSAS' => [
+                    'type' => 'string',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -5347,7 +5513,10 @@ final class ComputeManagementClient
             ],
             'Snapshot' => [
                 'properties' => [
-                    'managedBy' => ['type' => 'string'],
+                    'managedBy' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'sku' => ['$ref' => '#/definitions/DiskSku'],
                     'properties' => ['$ref' => '#/definitions/DiskProperties']
                 ],
@@ -5503,7 +5672,10 @@ final class ComputeManagementClient
                         'format' => 'int32'
                     ],
                     'dnsPrefix' => ['type' => 'string'],
-                    'fqdn' => ['type' => 'string']
+                    'fqdn' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['dnsPrefix']
@@ -5568,7 +5740,10 @@ final class ComputeManagementClient
                         ]
                     ],
                     'dnsPrefix' => ['type' => 'string'],
-                    'fqdn' => ['type' => 'string']
+                    'fqdn' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => [
@@ -5616,7 +5791,10 @@ final class ComputeManagementClient
             'ContainerServiceVMDiagnostics' => [
                 'properties' => [
                     'enabled' => ['type' => 'boolean'],
-                    'storageUri' => ['type' => 'string']
+                    'storageUri' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['enabled']
@@ -5628,7 +5806,10 @@ final class ComputeManagementClient
             ],
             'ContainerServiceProperties' => [
                 'properties' => [
-                    'provisioningState' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'orchestratorProfile' => ['$ref' => '#/definitions/ContainerServiceOrchestratorProfile'],
                     'customProfile' => ['$ref' => '#/definitions/ContainerServiceCustomProfile'],
                     'servicePrincipalProfile' => ['$ref' => '#/definitions/ContainerServiceServicePrincipalProfile'],

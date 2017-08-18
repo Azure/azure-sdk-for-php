@@ -874,7 +874,10 @@ final class BatchManagementClient
             ],
             'BatchAccountProperties' => [
                 'properties' => [
-                    'accountEndpoint' => ['type' => 'string'],
+                    'accountEndpoint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'provisioningState' => [
                         'type' => 'string',
                         'enum' => [
@@ -884,32 +887,44 @@ final class BatchManagementClient
                             'Succeeded',
                             'Failed',
                             'Cancelled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'poolAllocationMode' => [
                         'type' => 'string',
                         'enum' => [
                             'BatchService',
                             'UserSubscription'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'keyVaultReference' => ['$ref' => '#/definitions/KeyVaultReference'],
-                    'autoStorage' => ['$ref' => '#/definitions/AutoStorageProperties'],
+                    'keyVaultReference' => [
+                        '$ref' => '#/definitions/KeyVaultReference',
+                        'readOnly' => TRUE
+                    ],
+                    'autoStorage' => [
+                        '$ref' => '#/definitions/AutoStorageProperties',
+                        'readOnly' => TRUE
+                    ],
                     'dedicatedCoreQuota' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'lowPriorityCoreQuota' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'poolQuota' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'activeJobAndJobScheduleQuota' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -955,9 +970,18 @@ final class BatchManagementClient
             ],
             'BatchAccountKeys' => [
                 'properties' => [
-                    'accountName' => ['type' => 'string'],
-                    'primary' => ['type' => 'string'],
-                    'secondary' => ['type' => 'string']
+                    'accountName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'primary' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'secondary' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -977,25 +1001,40 @@ final class BatchManagementClient
             ],
             'ApplicationPackage' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'version' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'version' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'state' => [
                         'type' => 'string',
                         'enum' => [
                             'pending',
                             'active',
                             'unmapped'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'format' => ['type' => 'string'],
-                    'storageUrl' => ['type' => 'string'],
+                    'format' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'storageUrl' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'storageUrlExpiry' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'lastActivationTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1038,20 +1077,34 @@ final class BatchManagementClient
             'BatchLocationQuota' => [
                 'properties' => ['accountQuota' => [
                     'type' => 'integer',
-                    'format' => 'int32'
+                    'format' => 'int32',
+                    'readOnly' => TRUE
                 ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
-                    'location' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'location' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'tags' => [
                         'type' => 'object',
-                        'additionalProperties' => ['type' => 'string']
+                        'additionalProperties' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1119,15 +1172,22 @@ final class BatchManagementClient
             ],
             'CheckNameAvailabilityResult' => [
                 'properties' => [
-                    'nameAvailable' => ['type' => 'boolean'],
+                    'nameAvailable' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'reason' => [
                         'type' => 'string',
                         'enum' => [
                             'Invalid',
                             'AlreadyExists'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'message' => ['type' => 'string']
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []

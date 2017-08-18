@@ -929,7 +929,8 @@ final class ContainerRegistryManagementClient
                         'enum' => [
                             'Basic',
                             'Managed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -937,11 +938,18 @@ final class ContainerRegistryManagementClient
             ],
             'Status' => [
                 'properties' => [
-                    'displayStatus' => ['type' => 'string'],
-                    'message' => ['type' => 'string'],
+                    'displayStatus' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'timestamp' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -954,10 +962,14 @@ final class ContainerRegistryManagementClient
             ],
             'RegistryProperties' => [
                 'properties' => [
-                    'loginServer' => ['type' => 'string'],
+                    'loginServer' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'creationDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'provisioningState' => [
                         'type' => 'string',
@@ -968,9 +980,13 @@ final class ContainerRegistryManagementClient
                             'Succeeded',
                             'Failed',
                             'Canceled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'status' => ['$ref' => '#/definitions/Status'],
+                    'status' => [
+                        '$ref' => '#/definitions/Status',
+                        'readOnly' => TRUE
+                    ],
                     'adminUserEnabled' => ['type' => 'boolean'],
                     'storageAccount' => ['$ref' => '#/definitions/StorageAccountProperties']
                 ],
@@ -1093,9 +1109,13 @@ final class ContainerRegistryManagementClient
                             'Succeeded',
                             'Failed',
                             'Canceled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'status' => ['$ref' => '#/definitions/Status']
+                    'status' => [
+                        '$ref' => '#/definitions/Status',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1145,7 +1165,8 @@ final class ContainerRegistryManagementClient
                             'Succeeded',
                             'Failed',
                             'Canceled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1375,9 +1396,18 @@ final class ContainerRegistryManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',

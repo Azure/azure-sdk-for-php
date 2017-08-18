@@ -693,9 +693,13 @@ final class ServiceFabricManagementClient
                 'properties' => [
                     'availableClusterVersions' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ClusterVersionDetails']
+                        'items' => ['$ref' => '#/definitions/ClusterVersionDetails'],
+                        'readOnly' => TRUE
                     ],
-                    'clusterId' => ['type' => 'string'],
+                    'clusterId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'clusterState' => [
                         'type' => 'string',
                         'enum' => [
@@ -709,9 +713,13 @@ final class ServiceFabricManagementClient
                             'UpgradeServiceUnreachable',
                             'AutoScale',
                             'Ready'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'clusterEndpoint' => ['type' => 'string'],
+                    'clusterEndpoint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'clusterCodeVersion' => ['type' => 'string'],
                     'certificate' => ['$ref' => '#/definitions/CertificateDescription'],
                     'reliabilityLevel' => [
@@ -756,7 +764,8 @@ final class ServiceFabricManagementClient
                             'Succeeded',
                             'Failed',
                             'Canceled'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'vmImage' => ['type' => 'string'],
                     'diagnosticsStorageAccountConfig' => ['$ref' => '#/definitions/DiagnosticsStorageAccountConfig'],
@@ -819,9 +828,13 @@ final class ServiceFabricManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/OperationResult']
+                        'items' => ['$ref' => '#/definitions/OperationResult'],
+                        'readOnly' => TRUE
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -841,9 +854,18 @@ final class ServiceFabricManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',

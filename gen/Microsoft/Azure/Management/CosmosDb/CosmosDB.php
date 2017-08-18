@@ -439,9 +439,15 @@ final class CosmosDB
             ],
             'Location' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'locationName' => ['type' => 'string'],
-                    'documentEndpoint' => ['type' => 'string'],
+                    'documentEndpoint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'provisioningState' => ['type' => 'string'],
                     'failoverPriority' => [
                         'type' => 'integer',
@@ -453,7 +459,10 @@ final class CosmosDB
             ],
             'FailoverPolicy' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'locationName' => ['type' => 'string'],
                     'failoverPriority' => [
                         'type' => 'integer',
@@ -466,25 +475,32 @@ final class CosmosDB
             'DatabaseAccountProperties' => [
                 'properties' => [
                     'provisioningState' => ['type' => 'string'],
-                    'documentEndpoint' => ['type' => 'string'],
+                    'documentEndpoint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'databaseAccountOfferType' => [
                         'type' => 'string',
-                        'enum' => ['Standard']
+                        'enum' => ['Standard'],
+                        'readOnly' => TRUE
                     ],
                     'ipRangeFilter' => ['type' => 'string'],
                     'enableAutomaticFailover' => ['type' => 'boolean'],
                     'consistencyPolicy' => ['$ref' => '#/definitions/ConsistencyPolicy'],
                     'writeLocations' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/Location']
+                        'items' => ['$ref' => '#/definitions/Location'],
+                        'readOnly' => TRUE
                     ],
                     'readLocations' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/Location']
+                        'items' => ['$ref' => '#/definitions/Location'],
+                        'readOnly' => TRUE
                     ],
                     'failoverPolicies' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/FailoverPolicy']
+                        'items' => ['$ref' => '#/definitions/FailoverPolicy'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -508,7 +524,8 @@ final class CosmosDB
             'DatabaseAccountsListResult' => [
                 'properties' => ['value' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/DatabaseAccount']
+                    'items' => ['$ref' => '#/definitions/DatabaseAccount'],
+                    'readOnly' => TRUE
                 ]],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -523,9 +540,18 @@ final class CosmosDB
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -577,16 +603,28 @@ final class CosmosDB
             ],
             'DatabaseAccountListReadOnlyKeysResult' => [
                 'properties' => [
-                    'primaryReadonlyMasterKey' => ['type' => 'string'],
-                    'secondaryReadonlyMasterKey' => ['type' => 'string']
+                    'primaryReadonlyMasterKey' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'secondaryReadonlyMasterKey' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'DatabaseAccountListKeysResult' => [
                 'properties' => [
-                    'primaryMasterKey' => ['type' => 'string'],
-                    'secondaryMasterKey' => ['type' => 'string'],
+                    'primaryMasterKey' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'secondaryMasterKey' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/DatabaseAccountListReadOnlyKeysResult']
                 ],
                 'additionalProperties' => FALSE,
@@ -594,8 +632,14 @@ final class CosmosDB
             ],
             'DatabaseAccountConnectionString' => [
                 'properties' => [
-                    'connectionString' => ['type' => 'string'],
-                    'description' => ['type' => 'string']
+                    'connectionString' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'description' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []

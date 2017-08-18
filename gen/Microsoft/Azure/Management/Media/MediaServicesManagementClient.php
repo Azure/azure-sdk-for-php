@@ -387,7 +387,8 @@ final class MediaServicesManagementClient
                 'properties' => [
                     'apiEndpoints' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ApiEndpoint']
+                        'items' => ['$ref' => '#/definitions/ApiEndpoint'],
+                        'readOnly' => TRUE
                     ],
                     'storageAccounts' => [
                         'type' => 'array',
@@ -428,9 +429,18 @@ final class MediaServicesManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',

@@ -829,18 +829,24 @@ final class RecoveryServicesClient
             ],
             'UpgradeDetails' => [
                 'properties' => [
-                    'operationId' => ['type' => 'string'],
+                    'operationId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'startTimeUtc' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'lastUpdatedTimeUtc' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'endTimeUtc' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'status' => [
                         'type' => 'string',
@@ -849,25 +855,39 @@ final class RecoveryServicesClient
                             'InProgress',
                             'Upgraded',
                             'Failed'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'message' => ['type' => 'string'],
+                    'message' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'triggerType' => [
                         'type' => 'string',
                         'enum' => [
                             'UserTriggered',
                             'ForcedUpgrade'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'upgradedResourceId' => ['type' => 'string'],
-                    'previousResourceId' => ['type' => 'string']
+                    'upgradedResourceId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'previousResourceId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'VaultProperties' => [
                 'properties' => [
-                    'provisioningState' => ['type' => 'string'],
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'upgradeDetails' => ['$ref' => '#/definitions/UpgradeDetails']
                 ],
                 'additionalProperties' => FALSE,
@@ -894,9 +914,18 @@ final class RecoveryServicesClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'eTag' => ['type' => 'string']
                 ],
                 'additionalProperties' => FALSE,
@@ -1075,21 +1104,40 @@ final class RecoveryServicesClient
             ],
             'ClientDiscoveryDisplay' => [
                 'properties' => [
-                    'Provider' => ['type' => 'string'],
-                    'Resource' => ['type' => 'string'],
-                    'Operation' => ['type' => 'string'],
-                    'Description' => ['type' => 'string']
+                    'Provider' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'Resource' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'Operation' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'Description' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientDiscoveryForLogSpecification' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
-                    'displayName' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'displayName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'blobDuration' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -1098,22 +1146,38 @@ final class RecoveryServicesClient
             'ClientDiscoveryForServiceSpecification' => [
                 'properties' => ['logSpecifications' => [
                     'type' => 'array',
-                    'items' => ['$ref' => '#/definitions/ClientDiscoveryForLogSpecification']
+                    'items' => ['$ref' => '#/definitions/ClientDiscoveryForLogSpecification'],
+                    'readOnly' => TRUE
                 ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientDiscoveryProperties' => [
-                'properties' => ['serviceSpecification' => ['$ref' => '#/definitions/ClientDiscoveryForServiceSpecification']],
+                'properties' => ['serviceSpecification' => [
+                    '$ref' => '#/definitions/ClientDiscoveryForServiceSpecification',
+                    'readOnly' => TRUE
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'ClientDiscoveryValueForSingleApi' => [
                 'properties' => [
-                    'Name' => ['type' => 'string'],
-                    'Display' => ['$ref' => '#/definitions/ClientDiscoveryDisplay'],
-                    'Origin' => ['type' => 'string'],
-                    'Properties' => ['$ref' => '#/definitions/ClientDiscoveryProperties']
+                    'Name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'Display' => [
+                        '$ref' => '#/definitions/ClientDiscoveryDisplay',
+                        'readOnly' => TRUE
+                    ],
+                    'Origin' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'Properties' => [
+                        '$ref' => '#/definitions/ClientDiscoveryProperties',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1122,9 +1186,13 @@ final class RecoveryServicesClient
                 'properties' => [
                     'Value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ClientDiscoveryValueForSingleApi']
+                        'items' => ['$ref' => '#/definitions/ClientDiscoveryValueForSingleApi'],
+                        'readOnly' => TRUE
                     ],
-                    'NextLink' => ['type' => 'string']
+                    'NextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -1135,7 +1203,10 @@ final class RecoveryServicesClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/Vault']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []

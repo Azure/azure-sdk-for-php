@@ -4734,20 +4734,29 @@ final class AutomationClient
             ],
             'Statistics' => [
                 'properties' => [
-                    'counterProperty' => ['type' => 'string'],
+                    'counterProperty' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'counterValue' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'startTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'endTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'id' => ['type' => 'string']
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -5075,15 +5084,18 @@ final class AutomationClient
                             'Ok',
                             'Unavailable',
                             'Suspended'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'creationTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'lastModifiedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'description' => ['type' => 'string']
                 ],
@@ -5100,9 +5112,18 @@ final class AutomationClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -5186,19 +5207,28 @@ final class AutomationClient
             ],
             'CertificateProperties' => [
                 'properties' => [
-                    'thumbprint' => ['type' => 'string'],
+                    'thumbprint' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'expiryTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'isExportable' => ['type' => 'boolean'],
+                    'isExportable' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'creationTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'lastModifiedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'description' => ['type' => 'string']
                 ],
@@ -5207,8 +5237,14 @@ final class AutomationClient
             ],
             'Certificate' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/CertificateProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -5269,15 +5305,18 @@ final class AutomationClient
                     'connectionType' => ['$ref' => '#/definitions/ConnectionTypeAssociationProperty'],
                     'fieldDefinitionValues' => [
                         'type' => 'object',
-                        'additionalProperties' => ['type' => 'string']
+                        'additionalProperties' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
                     'creationTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'lastModifiedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'description' => ['type' => 'string']
                 ],
@@ -5286,8 +5325,14 @@ final class AutomationClient
             ],
             'Connection' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/ConnectionProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -5360,11 +5405,13 @@ final class AutomationClient
                     'isGlobal' => ['type' => 'boolean'],
                     'fieldDefinitions' => [
                         'type' => 'object',
-                        'additionalProperties' => ['$ref' => '#/definitions/FieldDefinition']
+                        'additionalProperties' => ['$ref' => '#/definitions/FieldDefinition'],
+                        'readOnly' => TRUE
                     ],
                     'creationTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'lastModifiedTime' => [
                         'type' => 'string',
@@ -5377,8 +5424,14 @@ final class AutomationClient
             ],
             'ConnectionType' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/ConnectionTypeProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -5419,14 +5472,19 @@ final class AutomationClient
             ],
             'CredentialProperties' => [
                 'properties' => [
-                    'userName' => ['type' => 'string'],
+                    'userName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'creationTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'lastModifiedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'description' => ['type' => 'string']
                 ],
@@ -5435,7 +5493,10 @@ final class AutomationClient
             ],
             'Credential' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'name' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/CredentialProperties']
                 ],
@@ -5553,7 +5614,10 @@ final class AutomationClient
             'Activity' => [
                 'properties' => [
                     'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/ActivityProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -5682,14 +5746,19 @@ final class AutomationClient
             'DscCompilationJobProperties' => [
                 'properties' => [
                     'configuration' => ['$ref' => '#/definitions/DscConfigurationAssociationProperty'],
-                    'startedBy' => ['type' => 'string'],
+                    'startedBy' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'jobId' => [
                         'type' => 'string',
-                        'format' => 'uuid'
+                        'format' => 'uuid',
+                        'readOnly' => TRUE
                     ],
                     'creationTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'status' => [
                         'type' => 'string',
@@ -5712,20 +5781,27 @@ final class AutomationClient
                     'statusDetails' => ['type' => 'string'],
                     'startTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'endTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
-                    'exception' => ['type' => 'string'],
+                    'exception' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'lastModifiedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'lastStatusModifiedTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'parameters' => [
                         'type' => 'object',
@@ -5737,7 +5813,10 @@ final class AutomationClient
             ],
             'DscCompilationJob' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/DscCompilationJobProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -6497,7 +6576,8 @@ final class AutomationClient
                     ],
                     'startTimeOffsetMinutes' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'expiryTime' => [
                         'type' => 'string',

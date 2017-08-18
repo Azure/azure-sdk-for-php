@@ -166,7 +166,10 @@ final class ManagementLinkClient
             ],
             'ResourceLinkProperties' => [
                 'properties' => [
-                    'sourceId' => ['type' => 'string'],
+                    'sourceId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'targetId' => ['type' => 'string'],
                     'notes' => ['type' => 'string']
                 ],
@@ -175,8 +178,14 @@ final class ManagementLinkClient
             ],
             'ResourceLink' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'properties' => ['$ref' => '#/definitions/ResourceLinkProperties']
                 ],
                 'additionalProperties' => FALSE,
@@ -188,7 +197,10 @@ final class ManagementLinkClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/ResourceLink']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['value']

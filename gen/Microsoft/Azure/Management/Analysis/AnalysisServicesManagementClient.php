@@ -52,7 +52,7 @@ final class AnalysisServicesManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2016-05-16']
+                            'enum' => ['2017-08-01-beta']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -89,7 +89,7 @@ final class AnalysisServicesManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2016-05-16']
+                            'enum' => ['2017-08-01-beta']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -123,7 +123,7 @@ final class AnalysisServicesManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2016-05-16']
+                            'enum' => ['2017-08-01-beta']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -164,7 +164,7 @@ final class AnalysisServicesManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2016-05-16']
+                            'enum' => ['2017-08-01-beta']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -199,7 +199,7 @@ final class AnalysisServicesManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2016-05-16']
+                        'enum' => ['2017-08-01-beta']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -233,7 +233,7 @@ final class AnalysisServicesManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2016-05-16']
+                        'enum' => ['2017-08-01-beta']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -261,7 +261,7 @@ final class AnalysisServicesManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2016-05-16']
+                        'enum' => ['2017-08-01-beta']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -280,7 +280,7 @@ final class AnalysisServicesManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2016-05-16']
+                        'enum' => ['2017-08-01-beta']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -299,7 +299,7 @@ final class AnalysisServicesManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2016-05-16']
+                        'enum' => ['2017-08-01-beta']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -330,7 +330,7 @@ final class AnalysisServicesManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2016-05-16']
+                        'enum' => ['2017-08-01-beta']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -340,6 +340,37 @@ final class AnalysisServicesManagementClient
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/SkuEnumerationForExistingResourceResult']]]
+            ]],
+            '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/listGatewayStatus' => ['post' => [
+                'operationId' => 'Servers_ListGatewayStatus',
+                'parameters' => [
+                    [
+                        'name' => 'resourceGroupName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'serverName',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2017-08-01-beta']
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ]
+                ],
+                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/GatewayListStatusLive']]]
             ]]
         ],
         'definitions' => [
@@ -353,6 +384,10 @@ final class AnalysisServicesManagementClient
                             'Basic',
                             'Standard'
                         ]
+                    ],
+                    'capacity' => [
+                        'type' => 'integer',
+                        'format' => 'int32'
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -360,9 +395,18 @@ final class AnalysisServicesManagementClient
             ],
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'sku' => ['$ref' => '#/definitions/ResourceSku'],
                     'tags' => [
@@ -393,7 +437,8 @@ final class AnalysisServicesManagementClient
                             'Resuming',
                             'Preparing',
                             'Scaling'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'provisioningState' => [
                         'type' => 'string',
@@ -410,9 +455,13 @@ final class AnalysisServicesManagementClient
                             'Resuming',
                             'Preparing',
                             'Scaling'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'serverFullName' => ['type' => 'string']
+                    'serverFullName' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -438,10 +487,33 @@ final class AnalysisServicesManagementClient
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
+            'GatewayDetails' => [
+                'properties' => [
+                    'gatewayResourceId' => ['type' => 'string'],
+                    'gatewayObjectId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'dmtsClusterUri' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
+                ],
+                'additionalProperties' => FALSE,
+                'required' => []
+            ],
             'AnalysisServicesServerMutableProperties' => [
                 'properties' => [
                     'asAdministrators' => ['$ref' => '#/definitions/ServerAdministrators'],
-                    'backupBlobContainerUri' => ['type' => 'string']
+                    'backupBlobContainerUri' => ['type' => 'string'],
+                    'gatewayDetails' => ['$ref' => '#/definitions/GatewayDetails'],
+                    'querypoolConnectionMode' => [
+                        'type' => 'string',
+                        'enum' => [
+                            'All',
+                            'ReadOnly'
+                        ]
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -455,6 +527,27 @@ final class AnalysisServicesManagementClient
                     ],
                     'properties' => ['$ref' => '#/definitions/AnalysisServicesServerMutableProperties']
                 ],
+                'additionalProperties' => FALSE,
+                'required' => []
+            ],
+            'GatewayListStatusLive' => [
+                'properties' => ['status' => [
+                    'type' => 'string',
+                    'enum' => ['Live']
+                ]],
+                'additionalProperties' => FALSE,
+                'required' => []
+            ],
+            'GatewayError' => [
+                'properties' => [
+                    'code' => ['type' => 'string'],
+                    'message' => ['type' => 'string']
+                ],
+                'additionalProperties' => FALSE,
+                'required' => []
+            ],
+            'GatewayListStatusError' => [
+                'properties' => ['error' => ['$ref' => '#/definitions/GatewayError']],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],

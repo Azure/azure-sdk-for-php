@@ -16,6 +16,7 @@ final class NetworkManagementClient
             ['subscriptionId' => $subscriptionId]
         );
         $this->_ApplicationGateways_group = new \Microsoft\Azure\Management\Network\ApplicationGateways($_client);
+        $this->_AvailableEndpointServices_group = new \Microsoft\Azure\Management\Network\AvailableEndpointServices($_client);
         $this->_ExpressRouteCircuitAuthorizations_group = new \Microsoft\Azure\Management\Network\ExpressRouteCircuitAuthorizations($_client);
         $this->_ExpressRouteCircuitPeerings_group = new \Microsoft\Azure\Management\Network\ExpressRouteCircuitPeerings($_client);
         $this->_ExpressRouteCircuits_group = new \Microsoft\Azure\Management\Network\ExpressRouteCircuits($_client);
@@ -56,6 +57,13 @@ final class NetworkManagementClient
     public function getApplicationGateways()
     {
         return $this->_ApplicationGateways_group;
+    }
+    /**
+     * @return \Microsoft\Azure\Management\Network\AvailableEndpointServices
+     */
+    public function getAvailableEndpointServices()
+    {
+        return $this->_AvailableEndpointServices_group;
     }
     /**
      * @return \Microsoft\Azure\Management\Network\ExpressRouteCircuitAuthorizations
@@ -302,6 +310,10 @@ final class NetworkManagementClient
      */
     private $_ApplicationGateways_group;
     /**
+     * @var \Microsoft\Azure\Management\Network\AvailableEndpointServices
+     */
+    private $_AvailableEndpointServices_group;
+    /**
      * @var \Microsoft\Azure\Management\Network\ExpressRouteCircuitAuthorizations
      */
     private $_ExpressRouteCircuitAuthorizations_group;
@@ -457,7 +469,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -492,7 +504,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -529,7 +541,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -558,7 +570,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -577,7 +589,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -608,7 +620,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -642,7 +654,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -676,7 +688,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -704,7 +716,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -723,7 +735,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -742,7 +754,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -761,7 +773,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -798,7 +810,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -808,6 +820,31 @@ final class NetworkManagementClient
                     ]
                 ],
                 'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/DnsNameAvailabilityResult']]]
+            ]],
+            '/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/virtualNetworkAvailableEndpointServices' => ['get' => [
+                'operationId' => 'AvailableEndpointServices_List',
+                'parameters' => [
+                    [
+                        'name' => 'location',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ],
+                    [
+                        'name' => 'api-version',
+                        'in' => 'query',
+                        'required' => TRUE,
+                        'type' => 'string',
+                        'enum' => ['2017-08-01']
+                    ],
+                    [
+                        'name' => 'subscriptionId',
+                        'in' => 'path',
+                        'required' => TRUE,
+                        'type' => 'string'
+                    ]
+                ],
+                'responses' => ['200' => ['schema' => ['$ref' => '#/definitions/EndpointServicesListResult']]]
             ]],
             '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}' => [
                 'delete' => [
@@ -836,7 +873,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -877,7 +914,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -920,7 +957,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -955,7 +992,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -993,7 +1030,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1034,7 +1071,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1077,7 +1114,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1112,7 +1149,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1144,7 +1181,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1179,7 +1216,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1216,7 +1253,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1263,7 +1300,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1309,7 +1346,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1355,7 +1392,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1389,7 +1426,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1426,7 +1463,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1451,7 +1488,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1470,7 +1507,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1489,7 +1526,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1521,7 +1558,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1556,7 +1593,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1599,7 +1636,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1622,7 +1659,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1647,7 +1684,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1678,7 +1715,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1715,7 +1752,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1746,7 +1783,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1783,7 +1820,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1814,7 +1851,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -1852,7 +1889,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1893,7 +1930,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1942,7 +1979,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -1977,7 +2014,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2014,7 +2051,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2045,7 +2082,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2076,7 +2113,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2113,7 +2150,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2145,7 +2182,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2180,7 +2217,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2223,7 +2260,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2246,7 +2283,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2271,7 +2308,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2302,7 +2339,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2336,7 +2373,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2487,7 +2524,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2524,7 +2561,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2555,7 +2592,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2587,7 +2624,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2622,7 +2659,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2665,7 +2702,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2688,7 +2725,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2713,7 +2750,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2751,7 +2788,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2792,7 +2829,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2835,7 +2872,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -2870,7 +2907,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2901,7 +2938,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2938,7 +2975,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -2976,7 +3013,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3010,7 +3047,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3041,7 +3078,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3070,7 +3107,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3089,7 +3126,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3126,7 +3163,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3163,7 +3200,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3203,7 +3240,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3243,7 +3280,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3283,7 +3320,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3323,7 +3360,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3363,7 +3400,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3403,7 +3440,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3443,7 +3480,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3490,7 +3527,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3527,7 +3564,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3564,7 +3601,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3605,7 +3642,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3645,7 +3682,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3679,7 +3716,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3711,7 +3748,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3746,7 +3783,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3789,7 +3826,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -3812,7 +3849,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -3837,7 +3874,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -4010,7 +4047,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4045,7 +4082,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4088,7 +4125,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4128,7 +4165,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4154,7 +4191,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -4173,7 +4210,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -4211,7 +4248,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4252,7 +4289,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4295,7 +4332,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4341,7 +4378,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4373,7 +4410,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -4405,7 +4442,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4440,7 +4477,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4483,7 +4520,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4512,7 +4549,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -4531,7 +4568,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -4569,7 +4606,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4610,7 +4647,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4653,7 +4690,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4688,7 +4725,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -4707,7 +4744,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -4732,7 +4769,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -4764,7 +4801,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4799,7 +4836,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4842,7 +4879,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -4865,7 +4902,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -4890,7 +4927,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -4927,7 +4964,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -4958,7 +4995,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -4996,7 +5033,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5037,7 +5074,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5086,7 +5123,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5121,7 +5158,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -5159,7 +5196,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5200,7 +5237,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5243,7 +5280,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5278,7 +5315,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -5316,7 +5353,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5350,7 +5387,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5381,7 +5418,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5411,7 +5448,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -5442,7 +5479,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -5479,7 +5516,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -5519,7 +5556,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -5556,7 +5593,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -5593,7 +5630,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -5627,7 +5664,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -5667,7 +5704,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -5708,7 +5745,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5742,7 +5779,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5773,7 +5810,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5816,7 +5853,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5850,7 +5887,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5876,7 +5913,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -5913,7 +5950,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -5954,7 +5991,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -5988,7 +6025,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -6019,7 +6056,7 @@ final class NetworkManagementClient
                             'in' => 'query',
                             'required' => TRUE,
                             'type' => 'string',
-                            'enum' => ['2017-06-01']
+                            'enum' => ['2017-08-01']
                         ],
                         [
                             'name' => 'subscriptionId',
@@ -6049,7 +6086,7 @@ final class NetworkManagementClient
                         'in' => 'query',
                         'required' => TRUE,
                         'type' => 'string',
-                        'enum' => ['2017-06-01']
+                        'enum' => ['2017-08-01']
                     ],
                     [
                         'name' => 'subscriptionId',
@@ -6071,13 +6108,18 @@ final class NetworkManagementClient
                 'properties' => [
                     'backendIPConfigurations' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/NetworkInterfaceIPConfiguration']
+                        'items' => ['$ref' => '#/definitions/NetworkInterfaceIPConfiguration'],
+                        'readOnly' => TRUE
                     ],
                     'loadBalancingRules' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SubResource']
+                        'items' => ['$ref' => '#/definitions/SubResource'],
+                        'readOnly' => TRUE
                     ],
-                    'outboundNatRule' => ['$ref' => '#/definitions/SubResource'],
+                    'outboundNatRule' => [
+                        '$ref' => '#/definitions/SubResource',
+                        'readOnly' => TRUE
+                    ],
                     'provisioningState' => ['type' => 'string']
                 ],
                 'additionalProperties' => FALSE,
@@ -6095,7 +6137,10 @@ final class NetworkManagementClient
             'InboundNatRulePropertiesFormat' => [
                 'properties' => [
                     'frontendIPConfiguration' => ['$ref' => '#/definitions/SubResource'],
-                    'backendIPConfiguration' => ['$ref' => '#/definitions/NetworkInterfaceIPConfiguration'],
+                    'backendIPConfiguration' => [
+                        '$ref' => '#/definitions/NetworkInterfaceIPConfiguration',
+                        'readOnly' => TRUE
+                    ],
                     'protocol' => [
                         'type' => 'string',
                         'enum' => [
@@ -6255,11 +6300,13 @@ final class NetworkManagementClient
                     ],
                     'networkInterfaces' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/NetworkInterface']
+                        'items' => ['$ref' => '#/definitions/NetworkInterface'],
+                        'readOnly' => TRUE
                     ],
                     'subnets' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/Subnet']
+                        'items' => ['$ref' => '#/definitions/Subnet'],
+                        'readOnly' => TRUE
                     ],
                     'resourceGuid' => ['type' => 'string'],
                     'provisioningState' => ['type' => 'string']
@@ -6311,7 +6358,8 @@ final class NetworkManagementClient
                     ],
                     'subnets' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/Subnet']
+                        'items' => ['$ref' => '#/definitions/Subnet'],
+                        'readOnly' => TRUE
                     ],
                     'provisioningState' => ['type' => 'string']
                 ],
@@ -6323,6 +6371,29 @@ final class NetworkManagementClient
                     'properties' => ['$ref' => '#/definitions/RouteTablePropertiesFormat'],
                     'etag' => ['type' => 'string']
                 ],
+                'additionalProperties' => FALSE,
+                'required' => []
+            ],
+            'ServiceEndpointPropertiesFormat' => [
+                'properties' => [
+                    'service' => ['type' => 'string'],
+                    'locations' => [
+                        'type' => 'array',
+                        'items' => ['type' => 'string']
+                    ],
+                    'provisioningState' => ['type' => 'string']
+                ],
+                'additionalProperties' => FALSE,
+                'required' => []
+            ],
+            'PublicIPAddressSku' => [
+                'properties' => ['name' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'Basic',
+                        'Standard'
+                    ]
+                ]],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -6351,7 +6422,10 @@ final class NetworkManagementClient
                             'IPv6'
                         ]
                     ],
-                    'ipConfiguration' => ['$ref' => '#/definitions/IPConfiguration'],
+                    'ipConfiguration' => [
+                        '$ref' => '#/definitions/IPConfiguration',
+                        'readOnly' => TRUE
+                    ],
                     'dnsSettings' => ['$ref' => '#/definitions/PublicIPAddressDnsSettings'],
                     'ipAddress' => ['type' => 'string'],
                     'idleTimeoutInMinutes' => [
@@ -6366,6 +6440,7 @@ final class NetworkManagementClient
             ],
             'PublicIPAddress' => [
                 'properties' => [
+                    'sku' => ['$ref' => '#/definitions/PublicIPAddressSku'],
                     'properties' => ['$ref' => '#/definitions/PublicIPAddressPropertiesFormat'],
                     'etag' => ['type' => 'string']
                 ],
@@ -6402,7 +6477,10 @@ final class NetworkManagementClient
                 'properties' => [
                     'linkedResourceType' => ['type' => 'string'],
                     'link' => ['type' => 'string'],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -6411,7 +6489,10 @@ final class NetworkManagementClient
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/ResourceNavigationLinkFormat'],
                     'name' => ['type' => 'string'],
-                    'etag' => ['type' => 'string']
+                    'etag' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -6421,9 +6502,14 @@ final class NetworkManagementClient
                     'addressPrefix' => ['type' => 'string'],
                     'networkSecurityGroup' => ['$ref' => '#/definitions/NetworkSecurityGroup'],
                     'routeTable' => ['$ref' => '#/definitions/RouteTable'],
+                    'serviceEndpoints' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/ServiceEndpointPropertiesFormat']
+                    ],
                     'ipConfigurations' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/IPConfiguration']
+                        'items' => ['$ref' => '#/definitions/IPConfiguration'],
+                        'readOnly' => TRUE
                     ],
                     'resourceNavigationLinks' => [
                         'type' => 'array',
@@ -7090,7 +7176,8 @@ final class NetworkManagementClient
                             'Starting',
                             'Running',
                             'Stopping'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'gatewayIPConfigurations' => [
                         'type' => 'array',
@@ -7358,8 +7445,14 @@ final class NetworkManagementClient
             'Resource' => [
                 'properties' => [
                     'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
                     'tags' => [
                         'type' => 'object',
@@ -7371,6 +7464,31 @@ final class NetworkManagementClient
             ],
             'DnsNameAvailabilityResult' => [
                 'properties' => ['available' => ['type' => 'boolean']],
+                'additionalProperties' => FALSE,
+                'required' => []
+            ],
+            'EndpointServiceResult' => [
+                'properties' => [
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
+                ],
+                'additionalProperties' => FALSE,
+                'required' => []
+            ],
+            'EndpointServicesListResult' => [
+                'properties' => [
+                    'value' => [
+                        'type' => 'array',
+                        'items' => ['$ref' => '#/definitions/EndpointServiceResult']
+                    ],
+                    'nextLink' => ['type' => 'string']
+                ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
@@ -7393,7 +7511,10 @@ final class NetworkManagementClient
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/AuthorizationPropertiesFormat'],
                     'name' => ['type' => 'string'],
-                    'etag' => ['type' => 'string']
+                    'etag' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7455,7 +7576,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['type' => 'string']
                     ],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => [
@@ -7469,7 +7593,10 @@ final class NetworkManagementClient
                     'properties' => ['$ref' => '#/definitions/RouteFilterRulePropertiesFormat'],
                     'name' => ['type' => 'string'],
                     'location' => ['type' => 'string'],
-                    'etag' => ['type' => 'string'],
+                    'etag' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'tags' => [
                         'type' => 'object',
                         'additionalProperties' => ['type' => 'string']
@@ -7549,7 +7676,10 @@ final class NetworkManagementClient
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/ExpressRouteCircuitPeeringPropertiesFormat'],
                     'name' => ['type' => 'string'],
-                    'etag' => ['type' => 'string']
+                    'etag' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7564,7 +7694,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/ExpressRouteCircuitPeering']
                     ],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7572,7 +7705,10 @@ final class NetworkManagementClient
             'RouteFilter' => [
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/RouteFilterPropertiesFormat'],
-                    'etag' => ['type' => 'string']
+                    'etag' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7672,7 +7808,10 @@ final class NetworkManagementClient
                 'properties' => [
                     'sku' => ['$ref' => '#/definitions/ExpressRouteCircuitSku'],
                     'properties' => ['$ref' => '#/definitions/ExpressRouteCircuitPropertiesFormat'],
-                    'etag' => ['type' => 'string']
+                    'etag' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -7807,23 +7946,38 @@ final class NetworkManagementClient
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
+            'LoadBalancerSku' => [
+                'properties' => ['name' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'Basic',
+                        'Standard'
+                    ]
+                ]],
+                'additionalProperties' => FALSE,
+                'required' => []
+            ],
             'FrontendIPConfigurationPropertiesFormat' => [
                 'properties' => [
                     'inboundNatRules' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SubResource']
+                        'items' => ['$ref' => '#/definitions/SubResource'],
+                        'readOnly' => TRUE
                     ],
                     'inboundNatPools' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SubResource']
+                        'items' => ['$ref' => '#/definitions/SubResource'],
+                        'readOnly' => TRUE
                     ],
                     'outboundNatRules' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SubResource']
+                        'items' => ['$ref' => '#/definitions/SubResource'],
+                        'readOnly' => TRUE
                     ],
                     'loadBalancingRules' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SubResource']
+                        'items' => ['$ref' => '#/definitions/SubResource'],
+                        'readOnly' => TRUE
                     ],
                     'privateIPAddress' => ['type' => 'string'],
                     'privateIPAllocationMethod' => [
@@ -7882,6 +8036,7 @@ final class NetworkManagementClient
                         'format' => 'int32'
                     ],
                     'enableFloatingIP' => ['type' => 'boolean'],
+                    'disableOutboundSnat' => ['type' => 'boolean'],
                     'provisioningState' => ['type' => 'string']
                 ],
                 'additionalProperties' => FALSE,
@@ -7903,7 +8058,8 @@ final class NetworkManagementClient
                 'properties' => [
                     'loadBalancingRules' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/SubResource']
+                        'items' => ['$ref' => '#/definitions/SubResource'],
+                        'readOnly' => TRUE
                     ],
                     'protocol' => [
                         'type' => 'string',
@@ -8046,6 +8202,7 @@ final class NetworkManagementClient
             ],
             'LoadBalancer' => [
                 'properties' => [
+                    'sku' => ['$ref' => '#/definitions/LoadBalancerSku'],
                     'properties' => ['$ref' => '#/definitions/LoadBalancerPropertiesFormat'],
                     'etag' => ['type' => 'string']
                 ],
@@ -8058,7 +8215,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/LoadBalancer']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -8069,7 +8229,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/InboundNatRule']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -8080,7 +8243,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/BackendAddressPool']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -8091,7 +8257,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/FrontendIPConfiguration']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -8102,7 +8271,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/LoadBalancingRule']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -8113,7 +8285,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/Probe']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -8124,7 +8299,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/NetworkInterface']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -8173,7 +8351,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/NetworkInterfaceIPConfiguration']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -8184,7 +8365,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/LoadBalancer']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -8283,7 +8467,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/EffectiveNetworkSecurityGroup']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -8335,7 +8522,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/EffectiveRoute']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -8370,7 +8560,8 @@ final class NetworkManagementClient
                         'Updating',
                         'Deleting',
                         'Failed'
-                    ]
+                    ],
+                    'readOnly' => TRUE
                 ]],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -8426,14 +8617,19 @@ final class NetworkManagementClient
             ],
             'Topology' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'createdDateTime' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'lastModified' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'resources' => [
                         'type' => 'array',
@@ -8531,7 +8727,10 @@ final class NetworkManagementClient
             ],
             'NetworkInterfaceAssociation' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'securityRules' => [
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/SecurityRule']
@@ -8542,7 +8741,10 @@ final class NetworkManagementClient
             ],
             'SubnetAssociation' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'securityRules' => [
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/SecurityRule']
@@ -8657,8 +8859,14 @@ final class NetworkManagementClient
             ],
             'PacketCaptureResult' => [
                 'properties' => [
-                    'name' => ['type' => 'string'],
-                    'id' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'etag' => ['type' => 'string'],
                     'properties' => ['$ref' => '#/definitions/PacketCaptureResultProperties']
                 ],
@@ -8860,14 +9068,16 @@ final class NetworkManagementClient
                             'Local',
                             'Inbound',
                             'Outbound'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'severity' => [
                         'type' => 'string',
                         'enum' => [
                             'Error',
                             'Warning'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'type' => [
                         'type' => 'string',
@@ -8881,14 +9091,16 @@ final class NetworkManagementClient
                             'UserDefinedRoute',
                             'PortThrottled',
                             'Platform'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'context' => [
                         'type' => 'array',
                         'items' => [
                             'type' => 'object',
                             'additionalProperties' => ['type' => 'string']
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -8896,17 +9108,31 @@ final class NetworkManagementClient
             ],
             'ConnectivityHop' => [
                 'properties' => [
-                    'type' => ['type' => 'string'],
-                    'id' => ['type' => 'string'],
-                    'address' => ['type' => 'string'],
-                    'resourceId' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'address' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'resourceId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'nextHopIds' => [
                         'type' => 'array',
-                        'items' => ['type' => 'string']
+                        'items' => ['type' => 'string'],
+                        'readOnly' => TRUE
                     ],
                     'issues' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ConnectivityIssue']
+                        'items' => ['$ref' => '#/definitions/ConnectivityIssue'],
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -8916,7 +9142,8 @@ final class NetworkManagementClient
                 'properties' => [
                     'hops' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/ConnectivityHop']
+                        'items' => ['$ref' => '#/definitions/ConnectivityHop'],
+                        'readOnly' => TRUE
                     ],
                     'connectionStatus' => [
                         'type' => 'string',
@@ -8925,27 +9152,33 @@ final class NetworkManagementClient
                             'Connected',
                             'Disconnected',
                             'Degraded'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'avgLatencyInMs' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'minLatencyInMs' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'maxLatencyInMs' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'probesSent' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'probesFailed' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -8965,8 +9198,14 @@ final class NetworkManagementClient
             'PatchRouteFilterRule' => [
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/RouteFilterRulePropertiesFormat'],
-                    'name' => ['type' => 'string'],
-                    'etag' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'etag' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'tags' => [
                         'type' => 'object',
                         'additionalProperties' => ['type' => 'string']
@@ -8978,9 +9217,18 @@ final class NetworkManagementClient
             'PatchRouteFilter' => [
                 'properties' => [
                     'properties' => ['$ref' => '#/definitions/RouteFilterPropertiesFormat'],
-                    'name' => ['type' => 'string'],
-                    'etag' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'etag' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'tags' => [
                         'type' => 'object',
                         'additionalProperties' => ['type' => 'string']
@@ -9232,8 +9480,14 @@ final class NetworkManagementClient
             ],
             'VirtualNetworkUsageName' => [
                 'properties' => [
-                    'localizedValue' => ['type' => 'string'],
-                    'value' => ['type' => 'string']
+                    'localizedValue' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'value' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -9242,15 +9496,26 @@ final class NetworkManagementClient
                 'properties' => [
                     'currentValue' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
-                    'id' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'limit' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
-                    'name' => ['$ref' => '#/definitions/VirtualNetworkUsageName'],
-                    'unit' => ['type' => 'string']
+                    'name' => [
+                        '$ref' => '#/definitions/VirtualNetworkUsageName',
+                        'readOnly' => TRUE
+                    ],
+                    'unit' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -9259,7 +9524,8 @@ final class NetworkManagementClient
                 'properties' => [
                     'value' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/VirtualNetworkUsage']
+                        'items' => ['$ref' => '#/definitions/VirtualNetworkUsage'],
+                        'readOnly' => TRUE
                     ],
                     'nextLink' => ['type' => 'string']
                 ],
@@ -9277,7 +9543,10 @@ final class NetworkManagementClient
                     ],
                     'subnet' => ['$ref' => '#/definitions/SubResource'],
                     'publicIPAddress' => ['$ref' => '#/definitions/SubResource'],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -9328,7 +9597,10 @@ final class NetworkManagementClient
             'VpnClientRootCertificatePropertiesFormat' => [
                 'properties' => [
                     'publicCertData' => ['type' => 'string'],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => ['publicCertData']
@@ -9345,7 +9617,10 @@ final class NetworkManagementClient
             'VpnClientRevokedCertificatePropertiesFormat' => [
                 'properties' => [
                     'thumbprint' => ['type' => 'string'],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -9428,18 +9703,28 @@ final class NetworkManagementClient
                     'vpnClientConfiguration' => ['$ref' => '#/definitions/VpnClientConfiguration'],
                     'bgpSettings' => ['$ref' => '#/definitions/BgpSettings'],
                     'resourceGuid' => ['type' => 'string'],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'BgpPeerStatus' => [
                 'properties' => [
-                    'localAddress' => ['type' => 'string'],
-                    'neighbor' => ['type' => 'string'],
+                    'localAddress' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'neighbor' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'asn' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'state' => [
                         'type' => 'string',
@@ -9449,20 +9734,27 @@ final class NetworkManagementClient
                             'Idle',
                             'Connecting',
                             'Connected'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
-                    'connectedDuration' => ['type' => 'string'],
+                    'connectedDuration' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'routesReceived' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'messagesSent' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'messagesReceived' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -9470,15 +9762,34 @@ final class NetworkManagementClient
             ],
             'GatewayRoute' => [
                 'properties' => [
-                    'localAddress' => ['type' => 'string'],
-                    'network' => ['type' => 'string'],
-                    'nextHop' => ['type' => 'string'],
-                    'sourcePeer' => ['type' => 'string'],
-                    'origin' => ['type' => 'string'],
-                    'asPath' => ['type' => 'string'],
+                    'localAddress' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'network' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'nextHop' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'sourcePeer' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'origin' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'asPath' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'weight' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -9523,7 +9834,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/VirtualNetworkGateway']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -9546,7 +9860,10 @@ final class NetworkManagementClient
             ],
             'TunnelConnectionHealth' => [
                 'properties' => [
-                    'tunnel' => ['type' => 'string'],
+                    'tunnel' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'connectionStatus' => [
                         'type' => 'string',
                         'enum' => [
@@ -9554,17 +9871,23 @@ final class NetworkManagementClient
                             'Connecting',
                             'Connected',
                             'NotConnected'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'ingressBytesTransferred' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'egressBytesTransferred' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
-                    'lastConnectionEstablishedUtcTime' => ['type' => 'string']
+                    'lastConnectionEstablishedUtcTime' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -9575,7 +9898,10 @@ final class NetworkManagementClient
                     'gatewayIpAddress' => ['type' => 'string'],
                     'bgpSettings' => ['$ref' => '#/definitions/BgpSettings'],
                     'resourceGuid' => ['type' => 'string'],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -9707,19 +10033,23 @@ final class NetworkManagementClient
                             'Connecting',
                             'Connected',
                             'NotConnected'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'tunnelConnectionStatus' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/TunnelConnectionHealth']
+                        'items' => ['$ref' => '#/definitions/TunnelConnectionHealth'],
+                        'readOnly' => TRUE
                     ],
                     'egressBytesTransferred' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'ingressBytesTransferred' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'peer' => ['$ref' => '#/definitions/SubResource'],
                     'enableBgp' => ['type' => 'boolean'],
@@ -9729,7 +10059,10 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/IpsecPolicy']
                     ],
                     'resourceGuid' => ['type' => 'string'],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => [
@@ -9751,7 +10084,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/VirtualNetworkGatewayConnection']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -9775,7 +10111,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/LocalNetworkGateway']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -9812,19 +10151,23 @@ final class NetworkManagementClient
                             'Connecting',
                             'Connected',
                             'NotConnected'
-                        ]
+                        ],
+                        'readOnly' => TRUE
                     ],
                     'tunnelConnectionStatus' => [
                         'type' => 'array',
-                        'items' => ['$ref' => '#/definitions/TunnelConnectionHealth']
+                        'items' => ['$ref' => '#/definitions/TunnelConnectionHealth'],
+                        'readOnly' => TRUE
                     ],
                     'egressBytesTransferred' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'ingressBytesTransferred' => [
                         'type' => 'integer',
-                        'format' => 'int64'
+                        'format' => 'int64',
+                        'readOnly' => TRUE
                     ],
                     'peer' => ['$ref' => '#/definitions/SubResource'],
                     'enableBgp' => ['type' => 'boolean'],
@@ -9834,7 +10177,10 @@ final class NetworkManagementClient
                         'items' => ['$ref' => '#/definitions/IpsecPolicy']
                     ],
                     'resourceGuid' => ['type' => 'string'],
-                    'provisioningState' => ['type' => 'string']
+                    'provisioningState' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => [
@@ -9856,7 +10202,10 @@ final class NetworkManagementClient
                         'type' => 'array',
                         'items' => ['$ref' => '#/definitions/VirtualNetworkGatewayConnectionListEntity']
                     ],
-                    'nextLink' => ['type' => 'string']
+                    'nextLink' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []

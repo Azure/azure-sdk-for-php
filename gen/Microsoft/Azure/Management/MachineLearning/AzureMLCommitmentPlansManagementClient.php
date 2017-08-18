@@ -410,10 +410,19 @@ final class AzureMLCommitmentPlansManagementClient
         'definitions' => [
             'Resource' => [
                 'properties' => [
-                    'id' => ['type' => 'string'],
-                    'name' => ['type' => 'string'],
+                    'id' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'name' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'location' => ['type' => 'string'],
-                    'type' => ['type' => 'string'],
+                    'type' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'tags' => [
                         'type' => 'object',
                         'additionalProperties' => ['type' => 'string']
@@ -424,11 +433,18 @@ final class AzureMLCommitmentPlansManagementClient
             ],
             'CommitmentAssociationProperties' => [
                 'properties' => [
-                    'associatedResourceId' => ['type' => 'string'],
-                    'commitmentPlanId' => ['type' => 'string'],
+                    'associatedResourceId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'commitmentPlanId' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'creationDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ]
                 ],
                 'additionalProperties' => FALSE,
@@ -485,48 +501,74 @@ final class AzureMLCommitmentPlansManagementClient
                 'properties' => [
                     'allowance' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
                     'amount' => [
                         'type' => 'number',
-                        'format' => 'double'
+                        'format' => 'double',
+                        'readOnly' => TRUE
                     ],
-                    'includedQuantityMeter' => ['type' => 'string'],
-                    'overageMeter' => ['type' => 'string']
+                    'includedQuantityMeter' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
+                    'overageMeter' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
             ],
             'CommitmentPlanProperties' => [
                 'properties' => [
-                    'chargeForOverage' => ['type' => 'boolean'],
-                    'chargeForPlan' => ['type' => 'boolean'],
+                    'chargeForOverage' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
+                    'chargeForPlan' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ],
                     'creationDate' => [
                         'type' => 'string',
-                        'format' => 'date-time'
+                        'format' => 'date-time',
+                        'readOnly' => TRUE
                     ],
                     'includedQuantities' => [
                         'type' => 'object',
-                        'additionalProperties' => ['$ref' => '#/definitions/PlanQuantity']
+                        'additionalProperties' => ['$ref' => '#/definitions/PlanQuantity'],
+                        'readOnly' => TRUE
                     ],
                     'maxAssociationLimit' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'maxCapacityLimit' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
                     'minCapacityLimit' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'planMeter' => ['type' => 'string'],
+                    'planMeter' => [
+                        'type' => 'string',
+                        'readOnly' => TRUE
+                    ],
                     'refillFrequencyInDays' => [
                         'type' => 'integer',
-                        'format' => 'int32'
+                        'format' => 'int32',
+                        'readOnly' => TRUE
                     ],
-                    'suspendPlanOnOverage' => ['type' => 'boolean']
+                    'suspendPlanOnOverage' => [
+                        'type' => 'boolean',
+                        'readOnly' => TRUE
+                    ]
                 ],
                 'additionalProperties' => FALSE,
                 'required' => []
@@ -534,7 +576,10 @@ final class AzureMLCommitmentPlansManagementClient
             'CommitmentPlan' => [
                 'properties' => [
                     'etag' => ['type' => 'string'],
-                    'properties' => ['$ref' => '#/definitions/CommitmentPlanProperties'],
+                    'properties' => [
+                        '$ref' => '#/definitions/CommitmentPlanProperties',
+                        'readOnly' => TRUE
+                    ],
                     'sku' => ['$ref' => '#/definitions/ResourceSku']
                 ],
                 'additionalProperties' => FALSE,
