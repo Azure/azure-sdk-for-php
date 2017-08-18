@@ -8,3 +8,4 @@ obj/
 *.pdb
 bin/
 .vs/
+.vscode/
