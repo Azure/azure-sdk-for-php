@@ -28,6 +28,7 @@ https://packagist.org/packages/microsoft/windowsazure#dev-arm2
    - PHP 7.0
    - PHP 7.1
    - Hack
+   - http://www.peachpie.io/
 1. CI (Travis-CI, Appveyor?)
 1. Profile support.
 1. Descriptive code generation (instead of imperative).
