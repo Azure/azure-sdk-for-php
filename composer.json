@@ -14,7 +14,7 @@
         "pear/net_url2": "^2.2",
         "pear/mail_mime": "^1.10",
         "firebase/php-jwt": "^4.0",
-        "microsoft/azure-storage": "^0.18",
+        "microsoft/azure-storage": "^0.19.1",
         "guzzlehttp/guzzle": "^6.2",
         "zendframework/zend-mime": "^2.6",
         "zendframework/zend-mail": "^2.7"
