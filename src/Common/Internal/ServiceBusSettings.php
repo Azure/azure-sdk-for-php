@@ -25,6 +25,10 @@
 
 namespace WindowsAzure\Common\Internal;
 
+use WindowsAzure\Common\Internal\Http\HttpClient;
+use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
+use WindowsAzure\Common\Internal\Filters\WrapFilter;
+use WindowsAzure\Common\Internal\Filters\SASFilter;
 /**
  * Represents the settings used to sign and access a request against the service
  * bus.
@@ -39,8 +43,7 @@ namespace WindowsAzure\Common\Internal;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServiceBusSettings extends ServiceSettings
-{
+class ServiceBusSettings extends ServiceSettings {
     /**
      * @var string
      */
@@ -95,6 +98,16 @@ class ServiceBusSettings extends ServiceSettings
     private static $_wrapEndpointUriSetting;
 
     /**
+     * @var string
+     */
+    private static $_sasKeyNameSetting;
+
+    /**
+     * @var string
+     */
+    private static $_sasKeySetting;
+
+    /**
      * @var bool
      */
     protected static $isInitialized = false;
@@ -109,8 +122,7 @@ class ServiceBusSettings extends ServiceSettings
     /**
      * Initializes static members of the class.
      */
-    protected static function init()
-    {
+    protected static function init() {
         self::$_serviceBusEndpointSetting = self::settingWithFunc(
             Resources::SERVICE_BUS_ENDPOINT_NAME,
             Validate::getIsValidUri()
@@ -124,6 +136,14 @@ class ServiceBusSettings extends ServiceSettings
             Resources::SHARED_SECRET_VALUE_NAME
         );
 
+        self::$_sasKeyNameSetting = self::setting(
+            Resources::SHARED_SHARED_ACCESS_KEY_NAME
+        );
+
+        self::$_sasKeySetting = self::setting(
+            Resources::SHARED_SHARED_ACCESS_KEY
+        );
+
         self::$_wrapEndpointUriSetting = self::settingWithFunc(
             Resources::STS_ENDPOINT_NAME,
             Validate::getIsValidUri()
@@ -132,6 +152,8 @@ class ServiceBusSettings extends ServiceSettings
         self::$validSettingKeys[] = Resources::SERVICE_BUS_ENDPOINT_NAME;
         self::$validSettingKeys[] = Resources::SHARED_SECRET_ISSUER_NAME;
         self::$validSettingKeys[] = Resources::SHARED_SECRET_VALUE_NAME;
+        self::$validSettingKeys[] = Resources::SHARED_SHARED_ACCESS_KEY_NAME;
+        self::$validSettingKeys[] = Resources::SHARED_SHARED_ACCESS_KEY;
         self::$validSettingKeys[] = Resources::STS_ENDPOINT_NAME;
     }
 
@@ -146,18 +168,120 @@ class ServiceBusSettings extends ServiceSettings
      */
     public function __construct(
         $serviceBusEndpoint,
-        $namespace,
-        $wrapEndpointUri,
-        $wrapName,
-        $wrapPassword
+        $filter
     ) {
-        $this->_namespace = $namespace;
         $this->_serviceBusEndpointUri = $serviceBusEndpoint;
-        $this->_wrapEndpointUri = $wrapEndpointUri;
-        $this->_wrapName = $wrapName;
-        $this->_wrapPassword = $wrapPassword;
+        $this->_filter = $filter;
+
     }
 
+    /**
+     * @param array $tokenizedSettings
+     */
+    private static function createServiceBusWithWrapAuthentication(array $tokenizedSettings) {
+
+        $required = [
+            self::$_serviceBusEndpointSetting,
+            self::$_wrapNameSetting,
+            self::$_wrapPasswordSetting,
+        ];
+        $optional = [
+            self::$_wrapEndpointUriSetting,
+        ];
+
+        $matchedSpecs = self::getMatchedSpecs($tokenizedSettings, $required, $optional);
+
+        $endpoint = Utilities::tryGetValueInsensitive(
+            Resources::SERVICE_BUS_ENDPOINT_NAME,
+            $tokenizedSettings
+        );
+
+        // Parse the namespace part from the URI
+        $namespace = explode('.', parse_url($endpoint, PHP_URL_HOST));
+        $namespace = $namespace[0];
+        $wrapEndpointUri = Utilities::tryGetValueInsensitive(
+            Resources::STS_ENDPOINT_NAME,
+            $tokenizedSettings,
+            sprintf(Resources::WRAP_ENDPOINT_URI_FORMAT, $namespace)
+        );
+        $issuerName = Utilities::tryGetValueInsensitive(
+            Resources::SHARED_SECRET_ISSUER_NAME,
+            $tokenizedSettings
+        );
+        $issuerValue = Utilities::tryGetValueInsensitive(
+            Resources::SHARED_SECRET_VALUE_NAME,
+            $tokenizedSettings
+        );
+
+        return new self($endpoint, new WrapFilter(
+            $wrapEndpointUri,
+            $issuerName,
+            $issureValue,
+            $this->createWrapService($wrapEndpointUri)
+        ));
+    }
+    /**
+     * @param array $tokenizedSettings
+     */
+    private static function createServiceBusWithSasAuthentication(array $tokenizedSettings) {
+        $required = [
+            self::$_serviceBusEndpointSetting,
+            self::$_sasKeyNameSetting,
+            self::$_sasKeySetting,
+        ];
+        $optional = [
+            self::$_wrapEndpointUriSetting,
+        ];
+        $matchedSpecs = self::getMatchedSpecs($tokenizedSettings, $required, $optional);
+
+        $endpoint = Utilities::tryGetValueInsensitive(
+            Resources::SERVICE_BUS_ENDPOINT_NAME,
+            $tokenizedSettings
+        );
+
+        $sharedAccessKeyName = Utilities::tryGetValueInsensitive(
+            Resources::SHARED_SHARED_ACCESS_KEY_NAME,
+            $tokenizedSettings
+        );
+        $sharedAccessKey = Utilities::tryGetValueInsensitive(
+            Resources::SHARED_SHARED_ACCESS_KEY,
+            $tokenizedSettings
+        );
+
+        return new self($endpoint, new SASFilter(
+            sharedAccessValue,
+            sharedAccessKey
+        ));
+    }
+    /**
+     * @param $wrapEndpointUri
+     * @return mixed
+     */
+    protected function createWrapService($wrapEndpointUri) {
+        $httpClient = new HttpClient();
+        $wrapWrapper = new WrapRestProxy($httpClient, $wrapEndpointUri);
+
+        return $wrapWrapper;
+    }
+    /**
+     * @param $tokenizedSettings
+     * @param $required
+     * @param array $optional
+     * @return mixed
+     */
+    private static function getMatchedSpecs($tokenizedSettings, $required, $optional = []) {
+
+        $matchedSpecs = self::matchedSpecification(
+            $tokenizedSettings,
+            self::allRequired(...$required),
+            self::optional(...$optional)
+        );
+        if (!$matchedSpecs) {
+            self::noMatch($connectionString);
+
+        }
+        return $matchedSpecs;
+    }
     /**
      * Creates a ServiceBusSettings object from the given connection string.
      *
@@ -165,54 +289,13 @@ class ServiceBusSettings extends ServiceSettings
      *
      * @return ServiceBusSettings|void
      */
-    public static function createFromConnectionString($connectionString)
-    {
+    public static function createFromConnectionString($connectionString) {
         $tokenizedSettings = self::parseAndValidateKeys($connectionString);
-
-        $matchedSpecs = self::matchedSpecification(
-            $tokenizedSettings,
-            self::allRequired(
-                self::$_serviceBusEndpointSetting,
-                self::$_wrapNameSetting,
-                self::$_wrapPasswordSetting
-            ),
-            self::optional(self::$_wrapEndpointUriSetting)
-        );
-
-        if ($matchedSpecs) {
-            $endpoint = Utilities::tryGetValueInsensitive(
-                Resources::SERVICE_BUS_ENDPOINT_NAME,
-                $tokenizedSettings
-            );
-
-            // Parse the namespace part from the URI
-            $namespace = explode('.', parse_url($endpoint, PHP_URL_HOST));
-            $namespace = $namespace[0];
-            $wrapEndpointUri = Utilities::tryGetValueInsensitive(
-                Resources::STS_ENDPOINT_NAME,
-                $tokenizedSettings,
-                sprintf(Resources::WRAP_ENDPOINT_URI_FORMAT, $namespace)
-            );
-            $issuerName = Utilities::tryGetValueInsensitive(
-                Resources::SHARED_SECRET_ISSUER_NAME,
-                $tokenizedSettings
-            );
-            $issuerValue = Utilities::tryGetValueInsensitive(
-                Resources::SHARED_SECRET_VALUE_NAME,
-                $tokenizedSettings
-            );
-
-            return new self(
-                $endpoint,
-                $namespace,
-                $wrapEndpointUri,
-                $issuerName,
-                $issuerValue
-            );
+        if (array_key_exists(Resource::SHARED_SHARED_ACCESS_KEY_NAME, $tokenizedSettings)) {
+            return self::createServiceBusWithSasAuthentication($tokenizedSettings);
         }
+        return self::createServiceBusWithWrapAuthentication($tokenizedSettings);
 
-        self::noMatch($connectionString);
-        return null;
     }
 
     /**
@@ -220,8 +303,7 @@ class ServiceBusSettings extends ServiceSettings
      *
      * @return string
      */
-    public function getServiceBusEndpointUri()
-    {
+    public function getServiceBusEndpointUri() {
         return $this->_serviceBusEndpointUri;
     }
 
@@ -230,8 +312,7 @@ class ServiceBusSettings extends ServiceSettings
      *
      * @return string
      */
-    public function getWrapEndpointUri()
-    {
+    public function getWrapEndpointUri() {
         return $this->_wrapEndpointUri;
     }
 
@@ -240,8 +321,7 @@ class ServiceBusSettings extends ServiceSettings
      *
      * @return string
      */
-    public function getWrapName()
-    {
+    public function getWrapName() {
         return $this->_wrapName;
     }
 
@@ -250,8 +330,7 @@ class ServiceBusSettings extends ServiceSettings
      *
      * @return string
      */
-    public function getWrapPassword()
-    {
+    public function getWrapPassword() {
         return $this->_wrapPassword;
     }
 
@@ -260,8 +339,7 @@ class ServiceBusSettings extends ServiceSettings
      *
      * @return string
      */
-    public function getNamespace()
-    {
-        return $this->_namespace;
+    public function getFilter() {
+        return $this->_filter;
     }
 }

@@ -52,7 +52,7 @@ class WrapTokenManagerTest extends ServiceRestProxyTestBase
 
     public function setUp()
     {
-        $this->skipIfEmulated();
+        // $this->skipIfEmulated();
 
         $builder = new ServicesBuilder();
         $settings = ServiceBusSettings::createFromConnectionString(
@@ -79,7 +79,7 @@ class WrapTokenManagerTest extends ServiceRestProxyTestBase
         $wrapPassword = $settings->getWrapPassword();
         $scope = $settings->getServiceBusEndpointUri();
 
-        // Execute 
+        // Execute
         $wrapTokenManager = new WrapTokenManager(
             $wrapUri,
             $wrapUserName,
