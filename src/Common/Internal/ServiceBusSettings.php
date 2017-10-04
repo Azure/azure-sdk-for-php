@@ -216,7 +216,7 @@ class ServiceBusSettings extends ServiceSettings {
         return new self($endpoint, new WrapFilter(
             $wrapEndpointUri,
             $issuerName,
-            $issureValue,
+            $issuerValue,
             $this->createWrapService($wrapEndpointUri)
         ));
     }
@@ -249,8 +249,8 @@ class ServiceBusSettings extends ServiceSettings {
         );
 
         return new self($endpoint, new SASFilter(
-            sharedAccessValue,
-            sharedAccessKey
+            $sharedAccessValue,
+            $sharedAccessKey
         ));
     }
     /**
@@ -291,7 +291,7 @@ class ServiceBusSettings extends ServiceSettings {
      */
     public static function createFromConnectionString($connectionString) {
         $tokenizedSettings = self::parseAndValidateKeys($connectionString);
-        if (array_key_exists(Resource::SHARED_SHARED_ACCESS_KEY_NAME, $tokenizedSettings)) {
+        if (array_key_exists(Resources::SHARED_SHARED_ACCESS_KEY_NAME, $tokenizedSettings)) {
             return self::createServiceBusWithSasAuthentication($tokenizedSettings);
         }
         return self::createServiceBusWithWrapAuthentication($tokenizedSettings);
