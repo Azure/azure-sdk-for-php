@@ -249,7 +249,7 @@ class ServiceBusSettings extends ServiceSettings {
         );
 
         return new self($endpoint, new SASFilter(
-            $sharedAccessValue,
+            $sharedAccessKeyName,
             $sharedAccessKey
         ));
     }
