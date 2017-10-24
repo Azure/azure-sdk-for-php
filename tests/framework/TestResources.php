@@ -75,7 +75,7 @@ class TestResources
     const MEDIA_SERVICES_JOB_TEMPLATE_NAME = 'TestJobTemplate';
     const MEDIA_SERVICES_JOB_TEMPLATE_ID_PREFIX = 'nb:jtid:UUID:';
     const MEDIA_SERVICES_TASK_CONFIGURATION = 'H.264 HD 720p VBR';
-    const MEDIA_SERVICES_PROCESSOR_NAME = 'Windows Azure Media Encoder';
+    const MEDIA_SERVICES_PROCESSOR_NAME = 'Media Encoder Standard';
     const MEDIA_SERVICES_DECODE_PROCESSOR_NAME = 'Storage Decryption';
     const MEDIA_SERVICES_PROCESSOR_ID_PREFIX = 'nb:mpid:UUID:';
     const MEDIA_SERVICES_DUMMY_FILE_NAME = 'simple.avi';

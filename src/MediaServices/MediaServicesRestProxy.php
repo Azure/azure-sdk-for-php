@@ -893,9 +893,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return Locator[]
      */
-    public function getLocatorList()
+    public function getLocatorList(array $queryParams = [])
     {
-        $propertyList = $this->_getEntityList('Locators');
+        $propertyList = $this->_getEntityList('Locators', $queryParams);
         $result = [];
 
         foreach ($propertyList as $properties) {
@@ -1668,9 +1668,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return JobTemplate[]
      */
-    public function getJobTemplateList()
+    public function getJobTemplateList(array $queryParams = [])
     {
-        $propertyList = $this->_getEntityList('JobTemplates');
+        $propertyList = $this->_getEntityList('JobTemplates', $queryParams);
         $result = [];
 
         foreach ($propertyList as $properties) {
@@ -1726,9 +1726,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return TaskTemplate[]
      */
-    public function getTaskTemplateList()
+    public function getTaskTemplateList(array $queryParams = [])
     {
-        $propertyList = $this->_getEntityList('TaskTemplates');
+        $propertyList = $this->_getEntityList('TaskTemplates', $queryParams);
         $result = [];
 
         foreach ($propertyList as $properties) {
@@ -2129,9 +2129,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return ContentKey[]
      */
-    public function getContentKeyList()
+    public function getContentKeyList(array $queryParams = [])
     {
-        $propertyList = $this->_getEntityList('ContentKeys');
+        $propertyList = $this->_getEntityList('ContentKeys', $queryParams);
         $result = [];
 
         foreach ($propertyList as $properties) {
