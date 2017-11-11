@@ -37,6 +37,7 @@ use WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction;
 use WindowsAzure\MediaServices\Templates\PlayReadyLicenseType;
 use WindowsAzure\MediaServices\Templates\UnknownOutputPassingOption;
 use WindowsAzure\MediaServices\Templates\ErrorMessages;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for MediaServicesLicenseTemplateSerializer.
@@ -51,7 +52,7 @@ use WindowsAzure\MediaServices\Templates\ErrorMessages;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class MediaServicesLicenseTemplateSerializerTest extends \PHPUnit_Framework_TestCase
+class MediaServicesLicenseTemplateSerializerTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Templates\MediaServicesLicenseTemplateSerializer::deserialize

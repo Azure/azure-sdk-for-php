@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\Common\Internal;
 
 use WindowsAzure\Common\Internal\ConnectionStringSource;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class ConnectionStringSource.
@@ -40,7 +41,7 @@ use WindowsAzure\Common\Internal\ConnectionStringSource;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ConnectionStringSourceTest extends \PHPUnit_Framework_TestCase
+class ConnectionStringSourceTest extends TestCase
 {
     public function setUp()
     {

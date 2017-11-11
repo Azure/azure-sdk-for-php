@@ -25,6 +25,7 @@
 namespace Tests\unit\WindowsAzure\MediaServices\Models;
 
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for ContentKeyAuthorizationPolicyRestriction.
@@ -39,7 +40,7 @@ use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ContentKeyAuthorizationRestrictionsTest extends \PHPUnit_Framework_TestCase
+class ContentKeyAuthorizationRestrictionsTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction::createFromOptions

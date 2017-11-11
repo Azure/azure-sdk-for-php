@@ -29,6 +29,7 @@ namespace Tests\framework;
 use WindowsAzure\Common\Internal\Logger;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Common\ServicesBuilder;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test base for all REST proxy tests.
@@ -43,7 +44,7 @@ use WindowsAzure\Common\ServicesBuilder;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class RestProxyTestBase extends \PHPUnit_Framework_TestCase
+class RestProxyTestBase extends TestCase
 {
     protected $restProxy;
     protected $xmlSerializer;

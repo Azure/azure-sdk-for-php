@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\Common;
 
 use WindowsAzure\Common\CloudConfigurationManager;
 use WindowsAzure\Common\Internal\ConnectionStringSource;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class CloudConfigurationManager.
@@ -41,7 +42,7 @@ use WindowsAzure\Common\Internal\ConnectionStringSource;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class CloudConfigurationManagerTest extends \PHPUnit_Framework_TestCase
+class CloudConfigurationManagerTest extends TestCase
 {
     private $_key = 'my_connection_string';
     private $_value = 'connection string value';

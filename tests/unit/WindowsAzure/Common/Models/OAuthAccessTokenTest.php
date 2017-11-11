@@ -28,6 +28,7 @@ namespace Tests\unit\WindowsAzure\Common\Models;
 use WindowsAzure\Common\Models\OAuthAccessToken;
 use WindowsAzure\Common\Internal\Resources;
 use Tests\Framework\TestResources;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class OAuthAccessToken.
@@ -42,7 +43,7 @@ use Tests\Framework\TestResources;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class OAuthAccessTokenTest extends \PHPUnit_Framework_TestCase
+class OAuthAccessTokenTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Models\OAuthAccessToken::create

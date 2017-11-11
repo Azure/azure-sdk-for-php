@@ -28,6 +28,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal\Filters;
 use WindowsAzure\Common\Internal\Filters\HeadersFilter;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Resources;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class HeadersFilter.
@@ -42,7 +43,7 @@ use WindowsAzure\Common\Internal\Resources;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class HeadersFilterTest extends \PHPUnit_Framework_TestCase
+class HeadersFilterTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Filters\HeadersFilter::handleRequest

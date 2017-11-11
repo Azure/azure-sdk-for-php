@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\MediaServices\Models;
 use WindowsAzure\MediaServices\Models\ContentKey;
 use WindowsAzure\MediaServices\Models\ContentKeyTypes;
 use WindowsAzure\MediaServices\Models\ProtectionKeyTypes;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Represents access policy object used in media services.
@@ -41,7 +42,7 @@ use WindowsAzure\MediaServices\Models\ProtectionKeyTypes;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ContentKeyTest extends \PHPUnit_Framework_TestCase
+class ContentKeyTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Models\ContentKey::createFromOptions

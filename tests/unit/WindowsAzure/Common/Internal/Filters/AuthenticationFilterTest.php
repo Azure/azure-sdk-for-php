@@ -31,6 +31,7 @@ use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme;
 use WindowsAzure\MediaServices\Authentication\AccessToken;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class AuthenticationFilterTest.
@@ -45,7 +46,7 @@ use WindowsAzure\MediaServices\Authentication\AccessToken;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class AuthenticationFilterTest extends \PHPUnit_Framework_TestCase
+class AuthenticationFilterTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Filters\AuthenticationFilter::handleRequest

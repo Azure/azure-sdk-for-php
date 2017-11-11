@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceRuntime\Internal;
 
 use WindowsAzure\ServiceRuntime\Internal\RuntimeKernel;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class RuntimeKernel.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceRuntime\Internal\RuntimeKernel;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class RuntimeKernelTest extends \PHPUnit_Framework_TestCase
+class RuntimeKernelTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeKernel::__construct

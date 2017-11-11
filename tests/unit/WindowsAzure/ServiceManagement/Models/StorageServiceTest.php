@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\StorageService;
 use WindowsAzure\Common\Internal\Resources;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class StorageService.
@@ -41,7 +42,7 @@ use WindowsAzure\Common\Internal\Resources;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class StorageServiceTest extends \PHPUnit_Framework_TestCase
+class StorageServiceTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\StorageService::__construct

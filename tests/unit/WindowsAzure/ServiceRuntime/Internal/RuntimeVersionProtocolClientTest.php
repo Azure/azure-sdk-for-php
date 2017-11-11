@@ -30,6 +30,7 @@ use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamWrapper;
 use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
 use WindowsAzure\ServiceRuntime\Internal\RuntimeVersionProtocolClient;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class RuntimeVersionProtocolClient.
@@ -44,7 +45,7 @@ use WindowsAzure\ServiceRuntime\Internal\RuntimeVersionProtocolClient;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class RuntimeVersionProtocolClientTest extends \PHPUnit_Framework_TestCase
+class RuntimeVersionProtocolClientTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeVersionProtocolClient::__construct

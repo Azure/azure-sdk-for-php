@@ -30,6 +30,7 @@ use WindowsAzure\MediaServices\Templates\AllowedTrackTypes;
 use WindowsAzure\MediaServices\Templates\ContentKeySpecs;
 use WindowsAzure\MediaServices\Templates\Hdcp;
 use WindowsAzure\MediaServices\Templates\RequiredOutputProtection;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for WidevineMessage.
@@ -44,7 +45,7 @@ use WindowsAzure\MediaServices\Templates\RequiredOutputProtection;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class WidevineMessageTest extends \PHPUnit_Framework_TestCase
+class WidevineMessageTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Templates\WidevineMessageSerializer::serialize

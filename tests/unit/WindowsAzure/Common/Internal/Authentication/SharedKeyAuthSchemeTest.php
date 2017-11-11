@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -28,6 +28,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal\Authentication;
 use Tests\mock\WindowsAzure\Common\Internal\Authentication\SharedKeyAuthSchemeMock;
 use WindowsAzure\Common\Internal\Resources;
 use Tests\framework\TestResources;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for SharedKeyAuthScheme class.
@@ -40,7 +41,7 @@ use Tests\framework\TestResources;
  *
  * @link       https://github.com/windowsazure/azure-sdk-for-php
  */
-class SharedKeyAuthSchemeTest extends \PHPUnit_Framework_TestCase
+class SharedKeyAuthSchemeTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Authentication\SharedKeyAuthScheme::__construct

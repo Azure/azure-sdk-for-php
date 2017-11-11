@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal\Atom;
 
 
 use WindowsAzure\Common\Internal\Atom\AtomLink;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class AtomLink.
@@ -41,7 +42,7 @@ use WindowsAzure\Common\Internal\Atom\AtomLink;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class AtomLinkTest extends \PHPUnit_Framework_TestCase
+class AtomLinkTest extends TestCase
 {
     /**
      */

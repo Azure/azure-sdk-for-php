@@ -32,6 +32,7 @@ use WindowsAzure\MediaServices\Templates\TokenClaim;
 use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
 use WindowsAzure\MediaServices\Templates\TokenVerificationKey;
 use WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for TokenRestrictionTemplateSerializer.
@@ -46,7 +47,7 @@ use WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class TokenRestrictionTemplateSerializerTest extends \PHPUnit_Framework_TestCase
+class TokenRestrictionTemplateSerializerTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Templates\TokenRestrictionTemplateSerializer::deserialize

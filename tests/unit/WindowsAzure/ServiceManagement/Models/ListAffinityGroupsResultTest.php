@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class ListAffinityGroupsResult.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ListAffinityGroupsResultTest extends \PHPUnit_Framework_TestCase
+class ListAffinityGroupsResultTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\ListAffinityGroupsResult::setAffinityGroups

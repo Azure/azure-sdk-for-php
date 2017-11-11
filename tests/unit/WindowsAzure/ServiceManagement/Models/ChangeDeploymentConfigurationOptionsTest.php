@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class ChangeDeploymentConfigurationOptions.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ChangeDeploymentConfigurationOptionsTest extends \PHPUnit_Framework_TestCase
+class ChangeDeploymentConfigurationOptionsTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\ChangeDeploymentConfigurationOptions::setTreatWarningsAsErrors

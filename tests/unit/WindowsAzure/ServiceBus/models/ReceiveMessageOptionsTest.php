@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
 use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class WrapAccessTokenResult.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceBus\Models\ReceiveMessageOptions;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class ReceiveMessageOptionsTest extends \PHPUnit_Framework_TestCase
+class ReceiveMessageOptionsTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::__construct

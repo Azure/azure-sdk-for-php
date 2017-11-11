@@ -1,5 +1,4 @@
 <?php
-
 /**
  * LICENSE: Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +10,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -22,11 +21,11 @@
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-
 namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
 use WindowsAzure\Common\Internal\Resources;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class BrokerProperties.
@@ -41,8 +40,9 @@ use WindowsAzure\Common\Internal\Resources;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
+class BrokerPropertiesTest extends TestCase
 {
+
     /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::__construct
      */
@@ -68,18 +68,15 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals(
-            1,
-            $brokerProperties->getMessageId()
+                1, $brokerProperties->getMessageId()
         );
 
         $this->assertEquals(
-            'label1',
-            $brokerProperties->getLabel()
+                'label1', $brokerProperties->getLabel()
         );
 
         $this->assertEquals(
-            '1@1.com',
-            $brokerProperties->getReplyTo()
+                '1@1.com', $brokerProperties->getReplyTo()
         );
     }
 
@@ -94,7 +91,7 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         $expectedSessionId = 'testSessionId';
         $expectedDeliveryCount = 38;
         $expectedLockedUntilUtc = \DateTime::createFromFormat(
-            Resources::AZURE_DATE_FORMAT, 'Sun, 06 Nov 2011 01:00:00 GMT'
+                        Resources::AZURE_DATE_FORMAT, 'Sun, 06 Nov 2011 01:00:00 GMT'
         );
         $expectedLockToken = 'testLockToken';
         $expectedMessageId = 'testMessageId';
@@ -113,78 +110,63 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals(
-            $expectedCorrelationId,
-            $brokerProperties->getCorrelationId()
+                $expectedCorrelationId, $brokerProperties->getCorrelationId()
         );
 
         $this->assertEquals(
-            $expectedSessionId,
-            $brokerProperties->getSessionId()
+                $expectedSessionId, $brokerProperties->getSessionId()
         );
 
         $this->assertEquals(
-            $expectedDeliveryCount,
-            $brokerProperties->getDeliveryCount()
+                $expectedDeliveryCount, $brokerProperties->getDeliveryCount()
         );
 
         $this->assertEquals(
-            $expectedLockedUntilUtc->format(Resources::AZURE_DATE_FORMAT),
-            $brokerProperties->getLockedUntilUtc()->format(Resources::AZURE_DATE_FORMAT)
+                $expectedLockedUntilUtc->format(Resources::AZURE_DATE_FORMAT), $brokerProperties->getLockedUntilUtc()->format(Resources::AZURE_DATE_FORMAT)
         );
 
         $this->assertEquals(
-            $expectedLockToken,
-            $brokerProperties->getLockToken()
+                $expectedLockToken, $brokerProperties->getLockToken()
         );
 
         $this->assertEquals(
-            $expectedMessageId,
-            $brokerProperties->getMessageId()
+                $expectedMessageId, $brokerProperties->getMessageId()
         );
 
         $this->assertEquals(
-            $expectedLabel,
-            $brokerProperties->getLabel()
+                $expectedLabel, $brokerProperties->getLabel()
         );
 
         $this->assertEquals(
-            $expectedReplyTo,
-            $brokerProperties->getReplyTo()
+                $expectedReplyTo, $brokerProperties->getReplyTo()
         );
 
         $this->assertEquals(
-            $expectedSequenceNumber,
-            $brokerProperties->getSequenceNumber()
+                $expectedSequenceNumber, $brokerProperties->getSequenceNumber()
         );
 
         $this->assertEquals(
-            $expectedTimeToLive,
-            $brokerProperties->getTimeToLive()
+                $expectedTimeToLive, $brokerProperties->getTimeToLive()
         );
 
         $this->assertEquals(
-            $expectedTo,
-            $brokerProperties->getTo()
+                $expectedTo, $brokerProperties->getTo()
         );
 
         $this->assertEquals(
-            $expectedScheduledEnqueueTimeUtc,
-            $brokerProperties->getScheduledEnqueueTimeUtc()
+                $expectedScheduledEnqueueTimeUtc, $brokerProperties->getScheduledEnqueueTimeUtc()
         );
 
         $this->assertEquals(
-            $expectedReplyToSessionId,
-            $brokerProperties->getReplyToSessionId()
+                $expectedReplyToSessionId, $brokerProperties->getReplyToSessionId()
         );
 
         $this->assertEquals(
-            $expectedMessageLocation,
-            $brokerProperties->getMessageLocation()
+                $expectedMessageLocation, $brokerProperties->getMessageLocation()
         );
 
         $this->assertEquals(
-            $expectedLockLocation,
-            $brokerProperties->getLockLocation()
+                $expectedLockLocation, $brokerProperties->getLockLocation()
         );
     }
 
@@ -204,8 +186,7 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals(
-            $expected,
-            $brokerProperties->toString()
+                $expected, $brokerProperties->toString()
         );
     }
 
@@ -217,7 +198,7 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         // Setup
         $expected = '{"CorrelationId":"testCorrelationId","SessionId":"testSessionId","DeliveryCount":38,"LockedUntilUtc":"Sun, 06 Nov 2011 01:00:00 GMT","LockToken":"testLockToken","MessageId":"testMessageId","Label":"testLabel","ReplyTo":"testReplyTo","SequenceNumber":88,"TimeToLive":123.456,"To":"testTo","ScheduledEnqueueTimeUtc":"Sun, 06 Nov 2011 01:00:00 GMT","ReplyToSessionId":"testReplyToSessionId","MessageLocation":"testMessageLocation","LockLocation":"testLockLocation"}';
         $lockedUntilUtc = \DateTime::createFromFormat(
-            'Y-m-d H:i:s', '2011-11-06 01:00:00', new \DateTimeZone('UTC'));
+                        'Y-m-d H:i:s', '2011-11-06 01:00:00', new \DateTimeZone('UTC'));
         $timeToLive = '123.456';
         $scheduledEnqueueTimeUtc = $lockedUntilUtc;
 
@@ -241,12 +222,11 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals(
-            $expected,
-            $brokerProperties->toString()
+                $expected, $brokerProperties->toString()
         );
     }
 
-    /** 
+    /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getCorrelationId
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setCorrelationId
      */
@@ -260,14 +240,13 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         $brokerProperties->setCorrelationId($expected);
         $actual = $brokerProperties->getCorrelationId();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+                $expected, $actual
         );
     }
 
-    /** 
+    /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getSessionId
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setSessionId
      */
@@ -281,14 +260,13 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         $brokerProperties->setSessionId($expected);
         $actual = $brokerProperties->getSessionId();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+                $expected, $actual
         );
     }
 
-    /** 
+    /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getDeliveryCount
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setDeliveryCount
      */
@@ -302,14 +280,13 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         $brokerProperties->setDeliveryCount($expected);
         $actual = $brokerProperties->getDeliveryCount();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+                $expected, $actual
         );
     }
 
-    /** 
+    /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getLockedUntilUtc
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setLockedUntilUtc
      */
@@ -325,12 +302,11 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+                $expected, $actual
         );
     }
 
-    /** 
+    /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getLockToken
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setLockToken
      */
@@ -344,14 +320,13 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         $brokerProperties->setLockToken($expected);
         $actual = $brokerProperties->getLockToken();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+                $expected, $actual
         );
     }
 
-    /** 
+    /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getMessageId
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setMessageId
      */
@@ -365,14 +340,13 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         $brokerProperties->setMessageId($expected);
         $actual = $brokerProperties->getMessageId();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+                $expected, $actual
         );
     }
 
-    /** 
+    /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getLabel
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setLabel
      */
@@ -386,14 +360,13 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         $brokerProperties->setLabel($expected);
         $actual = $brokerProperties->getLabel();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+                $expected, $actual
         );
     }
 
-    /** 
+    /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getReplyTo
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setReplyTo
      */
@@ -407,14 +380,13 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         $brokerProperties->setReplyTo($expected);
         $actual = $brokerProperties->getReplyTo();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+                $expected, $actual
         );
     }
 
-    /** 
+    /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getSequenceNumber
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setSequenceNumber
      */
@@ -428,14 +400,13 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         $brokerProperties->setSequenceNumber($expected);
         $actual = $brokerProperties->getSequenceNumber();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+                $expected, $actual
         );
     }
 
-    /** 
+    /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getTimeToLive
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setTimeToLive
      */
@@ -449,14 +420,13 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         $brokerProperties->setTimeToLive($expected);
         $actual = $brokerProperties->getTimeToLive();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+                $expected, $actual
         );
     }
 
-    /** 
+    /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getTo
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setTo
      */
@@ -470,14 +440,13 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         $brokerProperties->setTo($expected);
         $actual = $brokerProperties->getTo();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+                $expected, $actual
         );
     }
 
-    /** 
+    /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getScheduledEnqueueTimeUtc
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setScheduledEnqueueTimeUtc
      */
@@ -491,14 +460,13 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         $brokerProperties->setScheduledEnqueueTimeUtc($expected);
         $actual = $brokerProperties->getScheduledEnqueueTimeUtc();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+                $expected, $actual
         );
     }
 
-    /** 
+    /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getReplyToSessionId
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setReplyToSessionId
      */
@@ -512,14 +480,13 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         $brokerProperties->setReplyToSessionId($expected);
         $actual = $brokerProperties->getReplyToSessionId();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+                $expected, $actual
         );
     }
 
-    /** 
+    /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getMessageLocation
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setMessageLocation
      */
@@ -533,14 +500,13 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         $brokerProperties->setMessageLocation($expected);
         $actual = $brokerProperties->getMessageLocation();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+                $expected, $actual
         );
     }
 
-    /** 
+    /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::getLockLocation
      * @covers \WindowsAzure\ServiceBus\Models\BrokerProperties::setLockLocation
      */
@@ -554,10 +520,10 @@ class BrokerPropertiesTest extends \PHPUnit_Framework_TestCase
         $brokerProperties->setLockLocation($expected);
         $actual = $brokerProperties->getLockLocation();
 
-        // Assert 
+        // Assert
         $this->assertEquals(
-            $expected,
-            $actual
+                $expected, $actual
         );
     }
+
 }

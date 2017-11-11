@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class GetHostedServicePropertiesOptions.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class GetHostedServicePropertiesOptionsTest extends \PHPUnit_Framework_TestCase
+class GetHostedServicePropertiesOptionsTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesOptions::setEmbedDetail

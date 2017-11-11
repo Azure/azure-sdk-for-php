@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\GetDeploymentResult;
 use WindowsAzure\ServiceManagement\Models\Deployment;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class GetDeploymentResult.
@@ -41,7 +42,7 @@ use WindowsAzure\ServiceManagement\Models\Deployment;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class GetDeploymentResultTest extends \PHPUnit_Framework_TestCase
+class GetDeploymentResultTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\GetDeploymentResult::setDeployment

@@ -27,7 +27,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal\Serialization;
 
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Serialization\JsonSerializer;
-
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class XmlSerializer.
@@ -42,7 +42,7 @@ use WindowsAzure\Common\Internal\Serialization\JsonSerializer;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class JsonSerializerTest extends \PHPUnit_Framework_TestCase
+class JsonSerializerTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Serialization\JsonSerializer::objectSerialize

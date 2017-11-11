@@ -28,6 +28,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal;
 use WindowsAzure\Common\Internal\Logger;
 use WindowsAzure\Common\Internal\Resources;
 use Tests\framework\VirtualFileSystem;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Logger.
@@ -42,7 +43,7 @@ use Tests\framework\VirtualFileSystem;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class LoggerTest extends \PHPUnit_Framework_TestCase
+class LoggerTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Logger::log

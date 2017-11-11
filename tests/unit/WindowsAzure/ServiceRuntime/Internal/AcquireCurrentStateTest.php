@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\ServiceRuntime\Internal;
 
 use WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState;
 use WindowsAzure\ServiceRuntime\Internal\CurrentStatus;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class AcquireCurrentState.
@@ -41,7 +42,7 @@ use WindowsAzure\ServiceRuntime\Internal\CurrentStatus;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class AcquireCurrentStateTest extends \PHPUnit_Framework_TestCase
+class AcquireCurrentStateTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\AcquireCurrentState::__construct

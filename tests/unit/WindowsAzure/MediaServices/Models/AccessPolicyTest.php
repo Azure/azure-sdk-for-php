@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\MediaServices\Models;
 
 use WindowsAzure\MediaServices\Models\AccessPolicy;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Represents access policy object used in media services.
@@ -40,7 +41,7 @@ use WindowsAzure\MediaServices\Models\AccessPolicy;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class AccessPolicyTest extends \PHPUnit_Framework_TestCase
+class AccessPolicyTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Models\AccessPolicy::__construct

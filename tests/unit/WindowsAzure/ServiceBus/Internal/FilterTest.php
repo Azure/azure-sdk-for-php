@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -26,6 +26,7 @@
 namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
 
 use WindowsAzure\ServiceBus\Internal\Filter;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Filter.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceBus\Internal\Filter;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class FilterTest extends \PHPUnit_Framework_TestCase
+class FilterTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceBus\Internal\Filter::__construct

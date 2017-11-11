@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\Mode;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Mode.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\Mode;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ModeTest extends \PHPUnit_Framework_TestCase
+class ModeTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\Mode::isValid

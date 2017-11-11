@@ -33,6 +33,7 @@ use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
 use WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeCurrentStateClient;
 use WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient;
 use WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Protocol1RuntimeGoalStateClient.
@@ -47,7 +48,7 @@ use WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class Protocol1RuntimeGoalStateClientTest extends \PHPUnit_Framework_TestCase
+class Protocol1RuntimeGoalStateClientTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient::__construct

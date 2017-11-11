@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\UpdateServiceOptions;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class UpdateServiceOptions.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\UpdateServiceOptions;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class UpdateServiceOptionsTest extends \PHPUnit_Framework_TestCase
+class UpdateServiceOptionsTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\UpdateServiceOptions::setDescription

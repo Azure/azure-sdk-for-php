@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\Common\Internal;
 
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class InvalidArgumentTypeException.
@@ -40,7 +41,7 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class InvalidArgumentTypeExceptionTest extends \PHPUnit_Framework_TestCase
+class InvalidArgumentTypeExceptionTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\InvalidArgumentTypeException::__construct

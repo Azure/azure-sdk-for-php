@@ -25,6 +25,7 @@
 namespace Tests\unit\WindowsAzure\MediaServices\Models;
 
 use WindowsAzure\MediaServices\Models\TaskHistoricalEvent;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Represents access policy object used in media services.
@@ -39,7 +40,7 @@ use WindowsAzure\MediaServices\Models\TaskHistoricalEvent;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class TaskHistoricalEventTest extends \PHPUnit_Framework_TestCase
+class TaskHistoricalEventTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Models\TaskHistoricalEvent::createFromOptions

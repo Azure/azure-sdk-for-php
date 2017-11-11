@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\Common;
 
 use WindowsAzure\Common\ServiceException;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class ServiceException.
@@ -40,7 +41,7 @@ use WindowsAzure\Common\ServiceException;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServiceExceptionTest extends \PHPUnit_Framework_TestCase
+class ServiceExceptionTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\ServiceException::__construct
