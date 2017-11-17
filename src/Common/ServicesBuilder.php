@@ -55,6 +55,7 @@ use WindowsAzure\ServiceBus\Internal\WrapRestProxy;
 use WindowsAzure\ServiceManagement\Internal\IServiceManagement;
 use WindowsAzure\ServiceManagement\ServiceManagementRestProxy;
 use WindowsAzure\MediaServices\MediaServicesRestProxy;
+use WindowsAzure\MediaServices\Authentication\AzureAdClient;
 use WindowsAzure\Common\Internal\OAuthRestProxy;
 use WindowsAzure\Common\Internal\Authentication\OAuthScheme;
 
@@ -305,7 +306,7 @@ class ServicesBuilder
         $mediaServicesWrapper = new MediaServicesRestProxy(
             $httpClient,
             $uri,
-            $settings->getAccountName(),
+            Resources::EMPTY_STRING,
             $serializer
         );
 
@@ -327,19 +328,8 @@ class ServicesBuilder
         $headersFilter = new HeadersFilter($headers);
         $mediaServicesWrapper = $mediaServicesWrapper->withFilter($headersFilter);
 
-        // Adding OAuth filter
-        $oauthService = new OAuthRestProxy(
-            new HttpClient(),
-            $settings->getOAuthEndpointUri()
-        );
-        $authentication = new OAuthScheme(
-            $settings->getAccountName(),
-            $settings->getAccessKey(),
-            Resources::OAUTH_GT_CLIENT_CREDENTIALS,
-            Resources::MEDIA_SERVICES_OAUTH_SCOPE,
-            $oauthService
-        );
-        $authenticationFilter = new AuthenticationFilter($authentication);
+        // Adding Azure Active Directory Authentication filter
+        $authenticationFilter = new AuthenticationFilter($settings->getTokenProvider());
         $mediaServicesWrapper = $mediaServicesWrapper->withFilter(
             $authenticationFilter
         );
