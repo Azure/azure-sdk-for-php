@@ -159,12 +159,8 @@ class ServiceBusSettings extends ServiceSettings {
 
     /**
      * Creates new Service Bus settings instance.
-     *
-     * @param string $serviceBusEndpoint The Service Bus endpoint uri
-     * @param string $namespace          The service namespace
-     * @param $wrapEndpointUri
-     * @param string $wrapName     The wrap name
-     * @param string $wrapPassword The wrap password
+     * @param type $serviceBusEndpoint The Service Bus endpoint uri
+     * @param type $filter
      */
     public function __construct(
         $serviceBusEndpoint,
@@ -335,11 +331,20 @@ class ServiceBusSettings extends ServiceSettings {
     }
 
     /**
-     * Gets the namespace name.
+     * Gets the filter.
      *
      * @return string
      */
     public function getFilter() {
         return $this->_filter;
+    }
+
+    /**
+     * Depricated!
+     * Namespace is now included in the uri.
+     * @return string
+     */
+    public function getNamespace() {
+        return $this->_namespace;
     }
 }
