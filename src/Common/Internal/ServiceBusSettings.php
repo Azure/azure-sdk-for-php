@@ -217,7 +217,7 @@ class ServiceBusSettings extends ServiceSettings {
             $wrapEndpointUri,
             $issuerName,
             $issuerValue,
-            $this->createWrapService($wrapEndpointUri)
+            self::createWrapService($wrapEndpointUri)
         ));
     }
     /**
@@ -257,7 +257,7 @@ class ServiceBusSettings extends ServiceSettings {
      * @param $wrapEndpointUri
      * @return mixed
      */
-    protected function createWrapService($wrapEndpointUri) {
+    protected static function createWrapService($wrapEndpointUri) {
         $httpClient = new HttpClient();
         $wrapWrapper = new WrapRestProxy($httpClient, $wrapEndpointUri);
 
