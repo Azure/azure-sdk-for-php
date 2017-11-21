@@ -173,9 +173,9 @@ class ServiceBusSettings extends ServiceSettings {
 
     /**
      * @param array $tokenizedSettings
+     * @param string $connectionString
      */
-    private static function createServiceBusWithWrapAuthentication(array $tokenizedSettings) {
-
+    private static function createServiceBusWithWrapAuthentication(array $tokenizedSettings, $connectionString = '') {
         $required = [
             self::$_serviceBusEndpointSetting,
             self::$_wrapNameSetting,
@@ -185,7 +185,7 @@ class ServiceBusSettings extends ServiceSettings {
             self::$_wrapEndpointUriSetting,
         ];
 
-        $matchedSpecs = self::getMatchedSpecs($tokenizedSettings, $required, $optional);
+        $matchedSpecs = self::getMatchedSpecs($tokenizedSettings, $required, $optional, $connectionString);
 
         $endpoint = Utilities::tryGetValueInsensitive(
             Resources::SERVICE_BUS_ENDPOINT_NAME,
@@ -218,8 +218,9 @@ class ServiceBusSettings extends ServiceSettings {
     }
     /**
      * @param array $tokenizedSettings
+     * @param string $connectionString
      */
-    private static function createServiceBusWithSasAuthentication(array $tokenizedSettings) {
+    private static function createServiceBusWithSasAuthentication(array $tokenizedSettings, $connectionString = '') {
         $required = [
             self::$_serviceBusEndpointSetting,
             self::$_sasKeyNameSetting,
@@ -228,7 +229,7 @@ class ServiceBusSettings extends ServiceSettings {
         $optional = [
             self::$_wrapEndpointUriSetting,
         ];
-        $matchedSpecs = self::getMatchedSpecs($tokenizedSettings, $required, $optional);
+        $matchedSpecs = self::getMatchedSpecs($tokenizedSettings, $required, $optional, $connectionString);
 
         $endpoint = Utilities::tryGetValueInsensitive(
             Resources::SERVICE_BUS_ENDPOINT_NAME,
@@ -263,19 +264,20 @@ class ServiceBusSettings extends ServiceSettings {
      * @param $tokenizedSettings
      * @param $required
      * @param array $optional
+     * @param string $connectionString
      * @return mixed
      */
-    private static function getMatchedSpecs($tokenizedSettings, $required, $optional = []) {
-
+    private static function getMatchedSpecs($tokenizedSettings, $required, $optional = [], $connectionString = '') {
         $matchedSpecs = self::matchedSpecification(
             $tokenizedSettings,
             self::allRequired(...$required),
             self::optional(...$optional)
         );
+
         if (!$matchedSpecs) {
             self::noMatch($connectionString);
-
         }
+
         return $matchedSpecs;
     }
     /**
@@ -288,10 +290,10 @@ class ServiceBusSettings extends ServiceSettings {
     public static function createFromConnectionString($connectionString) {
         $tokenizedSettings = self::parseAndValidateKeys($connectionString);
         if (array_key_exists(Resources::SHARED_SHARED_ACCESS_KEY_NAME, $tokenizedSettings)) {
-            return self::createServiceBusWithSasAuthentication($tokenizedSettings);
+            return self::createServiceBusWithSasAuthentication($tokenizedSettings, $connectionString);
         }
-        return self::createServiceBusWithWrapAuthentication($tokenizedSettings);
 
+        return self::createServiceBusWithWrapAuthentication($tokenizedSettings, $connectionString);
     }
 
     /**
