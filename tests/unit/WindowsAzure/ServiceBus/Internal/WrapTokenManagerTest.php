@@ -52,7 +52,7 @@ class WrapTokenManagerTest extends ServiceRestProxyTestBase
 
     public function setUp()
     {
-        // $this->skipIfEmulated();
+        $this->skipIfEmulated();
 
         $builder = new ServicesBuilder();
         $settings = ServiceBusSettings::createFromConnectionString(
