@@ -37,14 +37,7 @@ use WindowsAzure\MediaServices\Models\Asset;
 // read user settings from config
 include_once 'userconfig.php';
 
-echo "Azure SDK for PHP - AzureAD Asymmetric Key Authentication Sample".PHP_EOL;
-
-// 0 - Open the certificate file
-if ((!$cert_store = file_get_contents($pfxFileName)) ||
-    (!openssl_pkcs12_read($cert_store, $cert_info, $pfxPassword))) {
-    echo "Error: Unable to read the cert file\n";
-    exit;
-}
+echo "Azure SDK for PHP - AzureAD Symmetric Key Authentication Sample".PHP_EOL;
 
 // 1 - Instantiate the credentials
 $credentials = new AzureAdTokenCredentials(

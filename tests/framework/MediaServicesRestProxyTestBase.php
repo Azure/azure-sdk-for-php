@@ -27,7 +27,10 @@ namespace Tests\framework;
 
 use Exception;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
-
+use WindowsAzure\MediaServices\Authentication\AzureAdTokenCredentials;
+use WindowsAzure\MediaServices\Authentication\AzureAdClientSymmetricKey;
+use WindowsAzure\MediaServices\Authentication\AzureAdTokenProvider;
+use WindowsAzure\MediaServices\Authentication\AzureEnvironments;
 use WindowsAzure\MediaServices\MediaServicesRestProxy;
 use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
@@ -86,7 +89,12 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $this->skipIfEmulated();
         parent::setUp();
         $connection = TestResources::getMediaServicesConnectionParameters();
-        $settings = new MediaServicesSettings($connection['accountName'], $connection['accessKey'], $connection['endpointUri'], $connection['oauthEndpointUri']);
+        $credentials = new AzureAdTokenCredentials(
+            $connection['tenant'],
+            new AzureAdClientSymmetricKey($connection['clientId'], $connection['clientKey']),
+            call_user_func('WindowsAzure\\MediaServices\\Authentication\\AzureEnvironments::' . $connection['environment']));
+        $provider = new AzureAdTokenProvider($credentials);
+        $settings = new MediaServicesSettings($connection['restApiEndpoint'], $provider);
         $this->mediaServicesWrapper = $this->builder->createMediaServicesService($settings);
         parent::setProxy($this->mediaServicesWrapper);
     }
@@ -510,12 +518,12 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
         $access->setDurationInMinutes(30);
         $access->setPermissions(AccessPolicy::PERMISSIONS_WRITE);
         $access = $this->createAccessPolicy($access);
-        
+
         $locator = new Locator($asset, $access, Locator::TYPE_SAS);
         $locator->setName(TestResources::MEDIA_SERVICES_LOCATOR_NAME.$this->createSuffix());
         $locator->setStartTime(new \DateTime('now -5 minutes'));
         $locator = $this->createLocator($locator);
-        
+
         $this->mediaServicesWrapper->uploadAssetFile($locator, $fileName, $fileContent);
         $this->mediaServicesWrapper->createFileInfos($asset);
 

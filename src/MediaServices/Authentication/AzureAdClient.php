@@ -143,7 +143,7 @@ class AzureAdClient extends ServiceRestProxy
     }
 
     /**
-     * Get OAuth access token.
+     * Get access token using an asymmetric key
      *
      * @param string $grantType    OAuth request grant_type field value
      * @param string $credentials  Asymmetrict Credentials

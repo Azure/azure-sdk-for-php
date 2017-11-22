@@ -201,10 +201,11 @@ class TestResources
     public static function getMediaServicesConnectionParameters()
     {
         return [
-            'accountName' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ACCOUNT_NAME'),
-            'accessKey' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ACCESS_KEY'),
-            'endpointUri' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ENDPOINT_URI', false),
-            'oauthEndpointUri' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_OAUTH_ENDPOINT_URI', false),
+            'tenant' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_TENANT'),
+            'clientId' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_CLIENT_ID'),
+            'clientKey' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_CLIENT_KEY'),
+            'restApiEndpoint' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_REST_API_ENDPOINT'),
+            'environment' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ENVIRONMENT'),
         ];
     }
 
