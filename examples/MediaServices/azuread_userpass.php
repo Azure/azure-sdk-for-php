@@ -37,7 +37,7 @@ use WindowsAzure\MediaServices\Models\Asset;
 // read user settings from config
 include_once 'userconfig.php';
 
-echo "Azure SDK for PHP - AzureAD Symmetric Key Authentication Sample".PHP_EOL;
+echo "Azure SDK for PHP - AzureAD User/Password Authentication Sample".PHP_EOL;
 
 // 1 - Instantiate the credentials
 $credentials = new AzureAdTokenCredentials(
