@@ -27,7 +27,6 @@ require_once __DIR__.'/../../vendor/autoload.php';
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\MediaServices\Authentication\AzureAdTokenCredentials;
-use WindowsAzure\MediaServices\Authentication\AzureAdClientUsernamePassword;
 use WindowsAzure\MediaServices\Authentication\AzureAdClientSymmetricKey;
 use WindowsAzure\MediaServices\Authentication\AzureAdTokenProvider;
 use WindowsAzure\MediaServices\Authentication\AzureEnvironments;

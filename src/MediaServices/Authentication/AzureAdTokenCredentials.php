@@ -29,6 +29,7 @@ use WindowsAzure\MediaServices\Authentication\AzureEnvironment;
 use WindowsAzure\MediaServices\Authentication\AzureAdClientUsernamePassword;
 use WindowsAzure\MediaServices\Authentication\AzureAdClientAsymmetricKey;
 use WindowsAzure\MediaServices\Authentication\AzureAdClientSymmetricKey;
+use WindowsAzure\MediaServices\Authentication\AzureAdClientUserCredentials;
 
 /**
  * Represents an Azure AD Credential for Azure Media Services
@@ -89,7 +90,7 @@ class AzureAdTokenCredentials {
             throw new \InvalidArgumentException("azureEnvironment");
         }
 
-        if ($credential instanceof AzureAdClientUsernamePassword) {
+        if ($credential instanceof AzureAdClientUserCredentials) {
             $this->_credentialType = AzureAdTokenCredentialType::USER_SECRET_CREDENTIAL;
         } else if ($credential instanceof AzureAdClientSymmetricKey) {
             $this->_credentialType = AzureAdTokenCredentialType::SERVICE_PRINCIPAL_WITH_CLIENT_SYMMETRIC_KEY;

@@ -207,6 +207,8 @@ class Resources
     const OAUTH_GRANT_TYPE = 'grant_type';
     const OAUTH_CLIENT_ID = 'client_id';
     const OAUTH_CLIENT_SECRET = 'client_secret';
+    const OAUTH_USERNAME = 'username';
+    const OAUTH_PASSWORD = 'password';
     const OAUTH_SCOPE = 'scope';
     const OAUTH_GT_CLIENT_CREDENTIALS = 'client_credentials';
     const OAUTH_ACCESS_TOKEN = 'access_token';

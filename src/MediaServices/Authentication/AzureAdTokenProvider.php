@@ -25,10 +25,12 @@
 
 namespace WindowsAzure\MediaServices\Authentication;
 
+use Firebase\JWT\JWT;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\MediaServices\Authentication\AccessToken;
 use WindowsAzure\MediaServices\Authentication\ITokenProvider;
+use WindowsAzure\MediaServices\Authentication\AzureAdClient;
 use WindowsAzure\MediaServices\Authentication\AzureAdTokenCredentials;
 
 /**
@@ -57,6 +59,11 @@ class AzureAdTokenProvider implements ITokenProvider {
     private $_azureAdClient;
 
     /**
+     * @var string
+     */
+    private $_cachedAccessToken;
+
+    /**
      * Initializes a new instance of the AzureAdTokenProvider class.
      *
      * @param AzureAdTokenCredentials $credentials The AzureAdTokenCredentials
@@ -76,6 +83,8 @@ class AzureAdTokenProvider implements ITokenProvider {
             new HttpClient(),
             $authority
         );
+
+        $this->_cachedAccessToken = null;
     }
 
     /**
@@ -83,6 +92,20 @@ class AzureAdTokenProvider implements ITokenProvider {
      * @return AccessToken the access token object
      */
     public function getAccessToken() {
+        if (!is_null($this->_cachedAccessToken) &&
+            $this->_cachedAccessToken->isValid()) {
+            return $this->_cachedAccessToken;
+        }
+
+        $this->_cachedAccessToken = $this->acquireAccessToken();
+        return $this->_cachedAccessToken;
+    }
+
+    /**
+     * Gets a valid access Token
+     * @return AccessToken the access token object
+     */
+    public function acquireAccessToken() {
 
         switch ($this->_credentials->getCredentialType()) {
             case AzureAdTokenCredentialType::USER_SECRET_CREDENTIAL:
@@ -122,5 +145,22 @@ class AzureAdTokenProvider implements ITokenProvider {
         }
 
         return $uri;
+    }
+
+    private function isJWTValid($jwt) {
+        $tks = explode('.', $jwt->getAccessToken());
+        if (count($tks) != 3) {
+            throw new UnexpectedValueException('Wrong number of segments');
+        }
+        list($headb64, $bodyb64, $cryptob64) = $tks;
+        if (null === ($header = static::jsonDecode(static::urlsafeB64Decode($headb64)))) {
+            throw new UnexpectedValueException('Invalid header encoding');
+        }
+        if (null === $payload = static::jsonDecode(static::urlsafeB64Decode($bodyb64))) {
+            throw new UnexpectedValueException('Invalid claims encoding');
+        }
+
+        // Check if this token has expired.
+        return !(isset($payload->exp) && time() >= $payload->exp);
     }
 }

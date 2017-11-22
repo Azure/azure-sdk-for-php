@@ -85,4 +85,13 @@ class AccessToken
     {
         return $this->_expiration_time;
     }
+
+    /**
+     * Verify if the access token is still valid.
+     *
+     * @return int $margin seconds of margin after while to get a new access token
+     */
+    public function isValid($margin = 120) {
+        return ($this->_expiration_time - $margin) > time();
+    }
 }

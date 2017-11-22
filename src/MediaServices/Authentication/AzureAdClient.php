@@ -64,21 +64,6 @@ class AzureAdClient extends ServiceRestProxy
     }
 
     /**
-     * Acquire an Azure AD access token given the username and password
-     *
-     * @param string $resource     AzureAD resource asking for access to
-     * @param string $clientId     AzureAD client Id
-     * @param string $clientSecret OAuth request client_secret field value
-     * @param string $scope        OAuth request scope field value
-     *
-     * @return OAuthAccessToken
-     */
-    public function acquireTokenWithUserCredentials($resource, $clientId, $username, $password)
-    {
-        throw new Exception("Not yet implemented");
-    }
-
-    /**
      * Acquire an Azure AD access token given the Client ID and Client Secret
      *
      * @param string $resource     AzureAD resource asking for access to
@@ -137,8 +122,7 @@ class AzureAdClient extends ServiceRestProxy
         $data = $this->dataSerializer->unserialize($response->getBody());
 
         $accessToken = $data['access_token'];
-        $expirationTime = new \DateTime("now");
-        $expirationTime->add(new \DateInterval('PT' . $data['expires_in'] . 'S'));
+        $expirationTime = time() + intval($data['expires_in']);
         return new AccessToken($accessToken, $expirationTime);
     }
 
@@ -200,8 +184,77 @@ class AzureAdClient extends ServiceRestProxy
         $data = $this->dataSerializer->unserialize($response->getBody());
 
         $accessToken = $data['access_token'];
-        $expirationTime = new \DateTime("now");
-        $expirationTime->add(new \DateInterval('PT' . $data['expires_in'] . 'S'));
+        $expirationTime = time() + intval($data['expires_in']);
+        return new AccessToken($accessToken, $expirationTime);
+    }
+
+    /**
+     * Acquire an Azure AD access token given the username and password
+     *
+     * @param string $resource     AzureAD resource asking for access to
+     * @param string $clientId     AzureAD client Id
+     * @param string $username     Username
+     * @param string $password     Password
+     *
+     * @return OAuthAccessToken
+     */
+    public function acquireTokenWithUserCredentials($resource, $clientId, $username, $password)
+    {
+        $method = Resources::HTTP_POST;
+        $headers = [];
+        $queryParams = [];
+        $postParameters = [];
+        $statusCode = Resources::STATUS_OK;
+
+        $postParameters = $this->addPostParameter(
+            $postParameters,
+            Resources::OAUTH_RESOURCE,
+            $resource
+        );
+
+        $postParameters = $this->addPostParameter(
+            $postParameters,
+            Resources::OAUTH_GRANT_TYPE,
+            'password'
+        );
+
+        $postParameters = $this->addPostParameter(
+            $postParameters,
+            Resources::OAUTH_SCOPE,
+            'openid'
+        );
+
+        $postParameters = $this->addPostParameter(
+            $postParameters,
+            Resources::OAUTH_USERNAME,
+            $username
+        );
+
+        $postParameters = $this->addPostParameter(
+            $postParameters,
+            Resources::OAUTH_PASSWORD,
+            $password
+        );
+
+        $postParameters = $this->addPostParameter(
+            $postParameters,
+            Resources::OAUTH_CLIENT_ID,
+            $clientId
+        );
+
+        $response = $this->sendHttp(
+            $method,
+            $headers,
+            $queryParams,
+            $postParameters,
+            Resources::EMPTY_STRING,
+            $statusCode
+        );
+
+        $data = $this->dataSerializer->unserialize($response->getBody());
+
+        $accessToken = $data['access_token'];
+        $expirationTime = time() + intval($data['expires_in']);
         return new AccessToken($accessToken, $expirationTime);
     }
 

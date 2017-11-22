@@ -38,7 +38,7 @@ namespace WindowsAzure\MediaServices\Authentication;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class AzureAdClientUsernamePassword
+class AzureAdClientUserCredentials
 {
     /**
      * Username
@@ -55,7 +55,7 @@ class AzureAdClientUsernamePassword
     private $_password;
 
     /**
-     * Create an AzureAdClientUsernamePassword
+     * Create an AzureAdClientUserCredentials
      *
      * @param string $username The username
      * @param string $password The password
