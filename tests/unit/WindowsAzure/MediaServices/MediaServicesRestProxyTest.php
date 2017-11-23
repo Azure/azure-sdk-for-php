@@ -1051,9 +1051,6 @@ class MediaServicesRestProxyTest extends MediaServicesRestProxyTestBase
         $ingestManifest->setName($name);
         $ingestManifest = $this->createIngestManifest($ingestManifest);
 
-        $connectionParameters = TestResources::getMediaServicesConnectionParameters();
-        $storageAccountName = $connectionParameters['accountName'];
-
         // Test
         $result = $this->mediaServicesWrapper->getIngestManifestStorageAccount($ingestManifest);
 
