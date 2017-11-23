@@ -172,8 +172,8 @@ There are four basic steps that have to be performed before you can make a call 
     ```PHP
     // 1 - Instantiate the credentials
     $credentials = new AzureAdTokenCredentials(
-        '<tenand domain name>',
-        new AzureAdClientAymmetricKey('<service principal client id>', '<service princiapl client key>'),
+        '<tenant domain name>',
+        new AzureAdClientSymmetricKey('<service principal client id>', '<service principal client key>'),
         AzureEnvironments::AZURE_CLOUD_ENVIRONMENT());
 
     // 2 - Instantiate a token provider
