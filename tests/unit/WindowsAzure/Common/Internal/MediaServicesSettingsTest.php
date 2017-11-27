@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal;
 
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\MediaServices\Authentication\ITokenProvider;
 
 /**
  * Unit tests for class MediaServicesSettings.
@@ -45,101 +46,53 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
+     * @group abc
      */
-    public function testCreateDefaults()
+    public function testConstructorSuccess()
     {
         // Setup
-        $accountName = 'testAccount';
-        $accessKey = 'testKey';
-        $endpointUri = Resources::MEDIA_SERVICES_URL;
-        $oauthEndpointUri = Resources::MEDIA_SERVICES_OAUTH_URL;
+        $endpointUri = 'http://valid.url/';
+        $tokenProvider = $this->getMock('\WindowsAzure\MediaServices\Authentication\ITokenProvider');
 
         // Test
-        $settings = new MediaServicesSettings($accountName,  $accessKey);
+        $settings = new MediaServicesSettings($endpointUri, $tokenProvider);
 
         // Assert
-        $this->assertEquals($accountName, $settings->getAccountName());
-        $this->assertEquals($accessKey, $settings->getAccessKey());
         $this->assertEquals($endpointUri, $settings->getEndpointUri());
-        $this->assertEquals($oauthEndpointUri, $settings->getOAuthEndpointUri());
+        $this->assertEquals($tokenProvider, $settings->getTokenProvider());
     }
 
     /**
      * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
+     * @group abc
      */
-    public function testCreateCustom()
+    public function testConstructorShouldFail()
     {
         // Setup
-        $accountName = 'testAccount';
-        $accessKey = 'testKey';
-        $endpointUri = 'http://test.com';
-        $oauthEndpointUri = 'http://test.com';
-
-        // Test
-        $settings = new MediaServicesSettings($accountName, $accessKey, $endpointUri, $oauthEndpointUri);
+        $endpointUri = 'http://valid.url/';
+        $tokenProvider = null;
 
         // Assert
-        $this->assertEquals($accountName, $settings->getAccountName());
-        $this->assertEquals($accessKey, $settings->getAccessKey());
-        $this->assertEquals($endpointUri, $settings->getEndpointUri());
-        $this->assertEquals($oauthEndpointUri, $settings->getOAuthEndpointUri());
+        $this->setExpectedException(\InvalidArgumentException::class);
+
+        // Test
+        $settings = new MediaServicesSettings($endpointUri, $tokenProvider);
     }
 
     /**
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::getAccountName
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
+     * @group abc
      */
-    public function testGetAccountName()
+    public function testConstructorShouldFail2()
     {
         // Setup
-        $data = 'test';
-
-        // Test
-        $settings = new MediaServicesSettings($data, 'test');
+        $endpointUri = null;
+        $tokenProvider = null;
 
         // Assert
-        $this->assertEquals($data, $settings->getAccountName());
-    }
-
-    /**
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::getAccessKey
-     */
-    public function testGetAccessKey()
-    {
-        // Setup
-        $data = 'test';
+        $this->setExpectedException(\RuntimeException::class);
 
         // Test
-        $settings = new MediaServicesSettings('test', $data);
-
-        // Assert
-        $this->assertEquals($data, $settings->getAccessKey());
-    }
-    /**
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::getEndpointUri
-     */
-    public function testGetEndpointUri()
-    {
-        // Setup
-        $data = 'http://test.com';
-
-        // Test
-        $settings = new MediaServicesSettings('test', 'test', $data);
-
-        // Assert
-        $this->assertEquals($data, $settings->getEndpointUri());
-    }
-    /**
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::getOAuthEndpointUri
-     */
-    public function testGetOAuthEndpointUri()
-    {
-        // Setup
-        $data = 'http://test.com';
-
-        // Test
-        $settings = new MediaServicesSettings('test', 'test', null, $data);
-
-        // Assert
-        $this->assertEquals($data, $settings->getOAuthEndpointUri());
+        $settings = new MediaServicesSettings($endpointUri, $tokenProvider);
     }
 }
