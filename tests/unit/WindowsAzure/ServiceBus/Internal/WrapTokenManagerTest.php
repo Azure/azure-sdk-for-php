@@ -79,7 +79,7 @@ class WrapTokenManagerTest extends ServiceRestProxyTestBase
         $wrapPassword = $settings->getWrapPassword();
         $scope = $settings->getServiceBusEndpointUri();
 
-        // Execute 
+        // Execute
         $wrapTokenManager = new WrapTokenManager(
             $wrapUri,
             $wrapUserName,

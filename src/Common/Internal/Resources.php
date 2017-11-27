@@ -38,8 +38,7 @@ namespace WindowsAzure\Common\Internal;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class Resources
-{
+class Resources {
     // @codingStandardsIgnoreStart
 
     // Connection strings
@@ -64,6 +63,8 @@ class Resources
     const SERVICE_BUS_ENDPOINT_NAME = 'Endpoint';
     const SHARED_SECRET_ISSUER_NAME = 'SharedSecretIssuer';
     const SHARED_SECRET_VALUE_NAME = 'SharedSecretValue';
+    const SHARED_SHARED_ACCESS_KEY_NAME = 'SharedAccessKeyName';
+    const SHARED_SHARED_ACCESS_KEY = 'SharedAccessKey';
     const STS_ENDPOINT_NAME = 'StsEndpoint';
 
     // Messages
@@ -165,6 +166,7 @@ class Resources
     const DATE = 'date';
     const AUTHENTICATION = 'authorization';
     const WRAP_AUTHORIZATION = 'WRAP access_token="%s"';
+    const SAS_AUTHORIZATION = 'SharedAccessSignature sig=%s&se=%s&skn=%s&sr=%s';
     const CONTENT_ENCODING = 'content-encoding';
     const CONTENT_LANGUAGE = 'content-language';
     const CONTENT_LENGTH = 'content-length';

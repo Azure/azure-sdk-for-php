@@ -719,4 +719,12 @@ class Utilities
 
         return $result;
     }
+
+    public static function lowerUrlencode($str)
+    {
+        return preg_replace_callback('/%[0-9A-F]{2}/',
+            function (array $matches) {
+				return strtolower($matches[0]);
+        }, urlencode($str));
+    }
 }
