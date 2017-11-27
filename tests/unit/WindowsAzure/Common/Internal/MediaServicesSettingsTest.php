@@ -46,7 +46,6 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
-     * @group abc
      */
     public function testConstructorSuccess()
     {
@@ -64,7 +63,6 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
-     * @group abc
      */
     public function testConstructorShouldFail()
     {
@@ -81,7 +79,6 @@ class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
-     * @group abc
      */
     public function testConstructorShouldFail2()
     {
