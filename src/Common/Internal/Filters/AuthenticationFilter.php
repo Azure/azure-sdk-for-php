@@ -28,7 +28,7 @@ namespace WindowsAzure\Common\Internal\Filters;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\IServiceFilter;
 use WindowsAzure\Common\Internal\Http\IHttpClient;
-use WindowsAzure\Common\Internal\Authentication\IAuthScheme;
+use WindowsAzure\MediaServices\Authentication\ITokenProvider;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -49,16 +49,16 @@ class AuthenticationFilter implements IServiceFilter
     /**
      * @var IAuthScheme
      */
-    private $_authenticationScheme;
+    private $_azureAdTokenProvider;
 
     /**
      * Creates AuthenticationFilter with the passed scheme.
      *
-     * @param IAuthScheme $authenticationScheme The authentication scheme
+     * @param ITokenProvider $authenticationScheme The authentication scheme
      */
-    public function __construct(IAuthScheme $authenticationScheme)
+    public function __construct(ITokenProvider $azureAdTokenProvider)
     {
-        $this->_authenticationScheme = $authenticationScheme;
+        $this->_azureAdTokenProvider = $azureAdTokenProvider;
     }
 
     /**
@@ -70,11 +70,8 @@ class AuthenticationFilter implements IServiceFilter
      */
     public function handleRequest(IHttpClient $request)
     {
-        $signedKey = $this->_authenticationScheme->getAuthorizationHeader(
-            $request->getHeaders(), $request->getUrl(),
-            $request->getUrl()->getQueryVariables(), $request->getMethod()
-        );
-        $request->setHeader(Resources::AUTHENTICATION, $signedKey);
+        $signedKey = $this->_azureAdTokenProvider->getAccessToken();
+        $request->setHeader(Resources::AUTHENTICATION, "Bearer " . $signedKey->getAccessToken());
 
         return $request;
     }

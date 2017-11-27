@@ -139,24 +139,6 @@ class ServicesBuilderTest extends ServiceRestProxyTestBase
     }
 
     /**
-     * @covers \WindowsAzure\Common\ServicesBuilder::createMediaServicesService
-     */
-    public function testBuildForMediaServices()
-    {
-        $this->skipIfEmulated();
-        // Setup
-        $builder = new ServicesBuilder();
-        $connection = TestResources::getMediaServicesConnectionParameters();
-        $settings = new MediaServicesSettings($connection['accountName'], $connection['accessKey']);
-
-        // Test
-        $mediaServicesRestProxy = $builder->createMediaServicesService($settings);
-
-        // Assert
-        $this->assertInstanceOf('WindowsAzure\MediaServices\Internal\IMediaServices', $mediaServicesRestProxy);
-    }
-
-    /**
      * @covers \WindowsAzure\Common\ServicesBuilder::getInstance
      */
     public function testGetInstance()

@@ -28,6 +28,10 @@ use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\MediaServices\MediaServicesRestProxy;
+use WindowsAzure\MediaServices\Authentication\AzureAdTokenCredentials;
+use WindowsAzure\MediaServices\Authentication\AzureAdClientSymmetricKey;
+use WindowsAzure\MediaServices\Authentication\AzureAdTokenProvider;
+use WindowsAzure\MediaServices\Authentication\AzureEnvironments;
 use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
@@ -60,7 +64,7 @@ $mezzanineFileName = __DIR__.'/resources/Azure-Video.wmv';
 $tokenRestriction = true;
 $tokenType = TokenType::JWT;
 
-// FairPlay 
+// FairPlay
 $fairPlayASK = '<your apple ASK>';
 $fairPlayPFXFile = '<path to the pfx file>';
 $fairPlayPFXPassword = '<password of the pfx file>';
@@ -68,8 +72,12 @@ $fairPlayIV = bin2hex(openssl_random_pseudo_bytes(16));
 
 echo "Azure SDK for PHP - FairPlay Dynamic Encryption Sample".PHP_EOL;
 
-// 0 - set up the MediaServicesService object to call into the Media Services REST API.
-$restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($account, $secret));
+// 0 - Instantiate the credentials, the token provider and connect to Azure Media Services
+$credentials = new AzureAdTokenCredentials(
+    $tenant, new AzureAdClientSymmetricKey($clientId, $clientKey),
+    AzureEnvironments::AZURE_CLOUD_ENVIRONMENT());
+$provider = new AzureAdTokenProvider($credentials);
+$restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($restApiEndpoint, $provider));
 
 // 1 - Upload the mezzanine
 $sourceAsset = uploadFileAndCreateAsset($restProxy, $mezzanineFileName);
@@ -307,7 +315,7 @@ function createAssetDeliveryPolicy(MediaServicesRestProxy $restProxy, $encodedAs
 {
     // 5.1 Get the acquisition URL
     $acquisitionUrl = $restProxy->getKeyDeliveryUrl($contentKey, ContentKeyDeliveryType::FAIRPLAY);
-    
+
     $acquisitionUrl = str_replace_first("https", "skd", $acquisitionUrl);
 
     // remove query string
@@ -371,7 +379,7 @@ function publishEncodedAsset(MediaServicesRestProxy $restProxy, $encodedAsset)
 
 function configureFairPlayPolicyOptions($restProxy, $fairPlayASK, $fairPlayPfxPassword, $fairPlayPfxFile, $fairPlayIV)
 {
-    
+
     $askContentKey = createFairPlayAskTypeContentKey($restProxy, $fairPlayASK);
 
     $pfxPasswordContentKey = createFairPlayPfxPasswordTypeContentKey($restProxy, $fairPlayPfxPassword);
@@ -379,7 +387,7 @@ function configureFairPlayPolicyOptions($restProxy, $fairPlayASK, $fairPlayPfxPa
     // open the pfx file
 
     $strAskContentKey = substr($askContentKey->getId(), strlen("nb:kid:UUID:"));
-    $strPassContentKey = substr($pfxPasswordContentKey->getId(), strlen("nb:kid:UUID:")); 
+    $strPassContentKey = substr($pfxPasswordContentKey->getId(), strlen("nb:kid:UUID:"));
 
     $certData = file_get_contents($fairPlayPfxFile);
     openssl_pkcs12_read($certData, $certsOut, $fairPlayPfxPassword);
@@ -390,7 +398,7 @@ function configureFairPlayPolicyOptions($restProxy, $fairPlayASK, $fairPlayPfxPa
 
 function createFairPlayAskTypeContentKey(MediaServicesRestProxy $restProxy, $fairPlayASK)
 {
-    // 3.1 Convert the ASK to binary representation 
+    // 3.1 Convert the ASK to binary representation
     $askKey = hex2bin($fairPlayASK);
 
     // 3.2 Get the protection key id for ContentKey

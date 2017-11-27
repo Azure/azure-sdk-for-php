@@ -28,6 +28,10 @@ use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\MediaServices\MediaServicesRestProxy;
+use WindowsAzure\MediaServices\Authentication\AzureAdTokenCredentials;
+use WindowsAzure\MediaServices\Authentication\AzureAdClientSymmetricKey;
+use WindowsAzure\MediaServices\Authentication\AzureAdTokenProvider;
+use WindowsAzure\MediaServices\Authentication\AzureEnvironments;
 use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
@@ -81,22 +85,25 @@ $options->programName = 'program-sample';
 $options->encodingType = EncodingType::None;
 $options->ingestProtocol = StreamingProtocol::RTMP;
 
-// Encoding Standard Options 
+// Encoding Standard Options
 $options->archiveWindowLenght = new \DateInterval("PT1H");
 
-// AES Dynamic Encription Options 
+// AES Dynamic Encription Options
 $options->aesDynamicEncription = true;
 $options->tokenRestriction = true;
 $options->tokenType = TokenType::JWT;
 
 // Archive options
-$options->deleteArchiveAsset = true; // change this to false to keep the asset archive 
+$options->deleteArchiveAsset = true; // change this to false to keep the asset archive
 
 echo "Azure SDK for PHP - Live Features".PHP_EOL;
 
-// 0 - set up the MediaServicesService object to call into the Media Services REST API.
-$restProxy = ServicesBuilder::getInstance()->createMediaServicesService(
-    new MediaServicesSettings($account, $secret));
+// 0 - Instantiate the credentials, the token provider and connect to Azure Media Services
+$credentials = new AzureAdTokenCredentials(
+    $tenant, new AzureAdClientSymmetricKey($clientId, $clientKey),
+    AzureEnvironments::AZURE_CLOUD_ENVIRONMENT());
+$provider = new AzureAdTokenProvider($credentials);
+$restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($restApiEndpoint, $provider));
 
 // 1 - Create and Start new Channel.
 $channel = createAndStartChannel($restProxy, $options);
@@ -139,7 +146,7 @@ exit(0);
  */
 function createAndStartChannel(MediaServicesRestProxy $restProxy, $options)
 {
-    // 1 - prepare the channel template 
+    // 1 - prepare the channel template
     $channelData = createChannelData($options);
 
     // 2 - create the channel
@@ -159,7 +166,7 @@ function createAsset(MediaServicesRestProxy $restProxy, $options)
 {
     $result = new stdClass();
 
-    // 1 - prepare the program asset 
+    // 1 - prepare the program asset
     $result->asset = new Asset(Asset::OPTIONS_NONE);
     $result->asset->setName($options->programName);
     $result->asset = $restProxy->createAsset($result->asset);
@@ -199,7 +206,7 @@ function createAndStartProgram(
     // 2 - start the program
     echo "Done!".PHP_EOL."Starting program... ";
     $restProxy->startProgram($program);
-    
+
     echo "Done!".PHP_EOL;
     return $restProxy->getProgram($program);
 }
@@ -209,17 +216,17 @@ function cleanup(MediaServicesRestProxy $restProxy, $channel, Program $program, 
     // cleanup program
     echo "Stopping program... ";
     $restProxy->stopProgram($program);
-    
+
     echo "Done!".PHP_EOL."Deleting program... ";
     $restProxy->deleteProgram($program);
 
     // cleanup channel
     echo "Done!".PHP_EOL."Stopping channel... ";
     $restProxy->stopChannel($channel);
-    
+
     echo "Done!".PHP_EOL."Deleting channel... ";
     $restProxy->deleteChannel($channel);
-     
+
     echo "Done!".PHP_EOL;
 
     // cleanup asset
@@ -247,9 +254,9 @@ function cleanup(MediaServicesRestProxy $restProxy, $channel, Program $program, 
             $authPolicyId = $key->getAuthorizationPolicyId();
             $restProxy->deleteContentKeyAuthorizationPolicy($authPolicyId);
         }
-        
+
         $restProxy->deleteAsset($asset);
-        
+
         echo "Done!".PHP_EOL;
     } else {
         echo "Archive asset was not removed.";
@@ -271,7 +278,7 @@ function applyAesDynamicEncryption (MediaServicesRestProxy $restProxy, $asset, $
     if ($options->tokenRestriction) {
         // 2.1 - Apply Token restriction
         $template = addTokenRestrictedAuthorizationPolicy($restProxy, $contentKey, $options->tokenType);
-        
+
         // 2.2 - Generate Test Token
         $testToken = generateTestToken($template, $contentKey);
     } else {
@@ -293,11 +300,11 @@ function applyNonDynamicEncription(MediaServicesRestProxy  $restProxy, $asset)
     $policy->setAssetDeliveryPolicyType(AssetDeliveryPolicyType::NO_DYNAMIC_ENCRYPTION);
 
     $policy = $restProxy->createAssetDeliveryPolicy($policy);
-    $restProxy->linkDeliveryPolicyToAsset($asset, $policy);    
+    $restProxy->linkDeliveryPolicyToAsset($asset, $policy);
 }
 
 function createChannelData($options)
-{ 
+{
 
     $channel = new Channel();
     $channel->setName($options->channelName);
@@ -323,7 +330,7 @@ function createChannelData($options)
         $channelEncoding = new ChannelEncoding();
         $channelEncoding->setSystemPreset(ChannelEncodingPresets::Default720p);
         $channel->setEncoding($channelEncoding);
-    }  else { 
+    }  else {
         $channel->setEncodingType(EncodingType::None);
     }
 

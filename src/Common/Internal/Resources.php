@@ -66,10 +66,6 @@ class Resources {
     const SHARED_SHARED_ACCESS_KEY_NAME = 'SharedAccessKeyName';
     const SHARED_SHARED_ACCESS_KEY = 'SharedAccessKey';
     const STS_ENDPOINT_NAME = 'StsEndpoint';
-    const MEDIA_SERVICES_ENDPOINT_URI_NAME = 'MediaServicesEndpoint';
-    const MEDIA_SERVICES_ACCOUNT_NAME = 'AccountName';
-    const MEDIA_SERVICES_ACCESS_KEY = 'AccessKey';
-    const MEDIA_SERVICES_OAUTH_ENDPOINT_URI_NAME = 'OAuthEndpoint';
 
     // Messages
     const INVALID_TYPE_MSG = 'The provided variable should be of type: ';
@@ -207,14 +203,20 @@ class Resources {
     const WRAP_SCOPE = 'wrap_scope';
 
     // OAuth
+    const OAUTH_CLIENT_ASSERTION_TYPE = 'client_assertion_type';
+    const OAUTH_CLIENT_ASSERTION = 'client_assertion';
+    const OAUTH_RESOURCE = 'resource';
     const OAUTH_GRANT_TYPE = 'grant_type';
     const OAUTH_CLIENT_ID = 'client_id';
     const OAUTH_CLIENT_SECRET = 'client_secret';
+    const OAUTH_USERNAME = 'username';
+    const OAUTH_PASSWORD = 'password';
     const OAUTH_SCOPE = 'scope';
     const OAUTH_GT_CLIENT_CREDENTIALS = 'client_credentials';
     const OAUTH_ACCESS_TOKEN = 'access_token';
     const OAUTH_EXPIRES_IN = 'expires_in';
     const OAUTH_ACCESS_TOKEN_PREFIX = 'Bearer ';
+    const OAUTH_V1_ENDPOINT = '/oauth2/token';
 
     // HTTP Methods
     const HTTP_GET = 'GET';
@@ -263,7 +265,7 @@ class Resources {
     const ATOM_FEED_CONTENT_TYPE = 'application/atom+xml;type=feed;charset=utf-8';
     const ACCEPT_CHARSET_VALUE = 'utf-8';
     const INT32_MAX = 2147483647;
-    const MEDIA_SERVICES_API_LATEST_VERSION = '2.13';
+    const MEDIA_SERVICES_API_LATEST_VERSION = '2.17';
     const MEDIA_SERVICES_DATA_SERVICE_VERSION_VALUE = '3.0;NetFx';
     const MEDIA_SERVICES_MAX_DATA_SERVICE_VERSION_VALUE = '3.0;NetFx';
 

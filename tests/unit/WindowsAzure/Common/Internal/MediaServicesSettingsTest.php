@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal;
 
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\MediaServices\Authentication\ITokenProvider;
 
 /**
  * Unit tests for class MediaServicesSettings.
@@ -44,228 +45,51 @@ use WindowsAzure\Common\Internal\Resources;
 class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::init
      * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
      */
-    public function testCreateFromConnectionStringWithAutomaticCase()
+    public function testConstructorSuccess()
     {
         // Setup
-        $accountName = 'testAccount';
-        $accessKey = 'testKey';
-        $endpointUri = Resources::MEDIA_SERVICES_URL;
-        $oauthEndpointUri = Resources::MEDIA_SERVICES_OAUTH_URL;
-        $connectionString = "AccountName={$accountName};AccessKey={$accessKey}";
+        $endpointUri = 'http://valid.url/';
+        $tokenProvider = $this->getMock('\WindowsAzure\MediaServices\Authentication\ITokenProvider');
 
         // Test
-        $actual = MediaServicesSettings::createFromConnectionString($connectionString);
+        $settings = new MediaServicesSettings($endpointUri, $tokenProvider);
 
         // Assert
-        $this->assertEquals($accountName, $actual->getAccountName());
-        $this->assertEquals($accessKey, $actual->getAccessKey());
-        $this->assertEquals($endpointUri, $actual->getEndpointUri());
-        $this->assertEquals($oauthEndpointUri, $actual->getOAuthEndpointUri());
-    }
-
-    /**
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::init
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
-     */
-    public function testCreateFromConnectionStringWithExplicitCase()
-    {
-        // Setup
-        $accountName = 'testAccount';
-        $accessKey = 'testKey';
-        $endpointUri = 'https://custom.endpoint';
-        $endpointUriSetting = Resources::MEDIA_SERVICES_ENDPOINT_URI_NAME;
-        $oauthEndpointUri = 'https://custom.oauth.endpoint';
-        $oauthEndpointUriSetting = Resources::MEDIA_SERVICES_OAUTH_ENDPOINT_URI_NAME;
-        $connectionString = "AccountName={$accountName};AccessKey={$accessKey};{$endpointUriSetting}={$endpointUri};{$oauthEndpointUriSetting}={$oauthEndpointUri}";
-
-        // Test
-        $actual = MediaServicesSettings::createFromConnectionString($connectionString);
-
-        // Assert
-        $this->assertEquals($accountName, $actual->getAccountName());
-        $this->assertEquals($accessKey, $actual->getAccessKey());
-        $this->assertEquals($endpointUri, $actual->getEndpointUri());
-        $this->assertEquals($oauthEndpointUri, $actual->getOAuthEndpointUri());
-    }
-
-    /**
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::init
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
-     */
-    public function testCreateFromConnectionStringWithMissingKeyFail()
-    {
-        // Setup
-        $connectionString = 'AccountName=test';
-        $expectedMsg = sprintf(Resources::MISSING_CONNECTION_STRING_SETTINGS, $connectionString);
-        $this->setExpectedException('\RuntimeException', $expectedMsg);
-
-        // Test
-        MediaServicesSettings::createFromConnectionString($connectionString);
-    }
-
-    /**
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::init
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
-     */
-    public function testCreateFromConnectionStringWithInvalidServiceManagementKeyFail()
-    {
-        // Setup
-        $invalidKey = 'InvalidKey';
-        $endpointUriSetting = Resources::MEDIA_SERVICES_ENDPOINT_URI_NAME;
-        $accountNameSetting = Resources::MEDIA_SERVICES_ACCOUNT_NAME;
-        $accessKeySetting = Resources::MEDIA_SERVICES_ACCESS_KEY;
-        $oauthEndpointSetting = Resources::MEDIA_SERVICES_OAUTH_ENDPOINT_URI_NAME;
-
-        $connectionString = "$invalidKey=value;{$endpointUriSetting}=12345;{$accountNameSetting}=test;{$accessKeySetting}=testkey;"
-            ."{$endpointUriSetting}=https://custom.endpoint;{$oauthEndpointSetting}=https://custom.oauth.endpoint";
-        $expectedMsg = sprintf(
-            Resources::INVALID_CONNECTION_STRING_SETTING_KEY,
-            $invalidKey,
-            implode("\n", [
-                Resources::MEDIA_SERVICES_ENDPOINT_URI_NAME,
-                Resources::MEDIA_SERVICES_OAUTH_ENDPOINT_URI_NAME,
-                Resources::MEDIA_SERVICES_ACCOUNT_NAME,
-                Resources::MEDIA_SERVICES_ACCESS_KEY,
-            ])
-        );
-        $this->setExpectedException('\RuntimeException', $expectedMsg);
-
-        // Test
-        MediaServicesSettings::createFromConnectionString($connectionString);
-    }
-
-    /**
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::createFromConnectionString
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::init
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
-     */
-    public function testCreateFromConnectionStringWithCaseInsensitive()
-    {
-        // Setup
-        $accountName = 'testAccount';
-        $accessKey = 'testKey';
-        $endpointUri = 'https://custom.endpoint';
-        $oauthEndpointUri = 'https://custom.oauth.endpoint';
-        $endpointUriSetting = Resources::MEDIA_SERVICES_ENDPOINT_URI_NAME;
-        $accountNameSetting = Resources::MEDIA_SERVICES_ACCOUNT_NAME;
-        $accessKeySetting = Resources::MEDIA_SERVICES_ACCESS_KEY;
-        $oauthEndpointUriSetting = Resources::MEDIA_SERVICES_OAUTH_ENDPOINT_URI_NAME;
-        $connectionString = "{$accountNameSetting}={$accountName};{$accessKeySetting}={$accessKey};{$endpointUriSetting}={$endpointUri};{$oauthEndpointUriSetting}={$oauthEndpointUri}";
-
-        // Test
-        $actual = MediaServicesSettings::createFromConnectionString($connectionString);
-
-        // Assert
-        $this->assertEquals($accountName, $actual->getAccountName());
-        $this->assertEquals($accessKey, $actual->getAccessKey());
-        $this->assertEquals($endpointUri, $actual->getEndpointUri());
-        $this->assertEquals($oauthEndpointUri, $actual->getOAuthEndpointUri());
-    }
-
-    /**
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
-     */
-    public function testCreateDefaults()
-    {
-        // Setup
-        $accountName = 'testAccount';
-        $accessKey = 'testKey';
-        $endpointUri = Resources::MEDIA_SERVICES_URL;
-        $oauthEndpointUri = Resources::MEDIA_SERVICES_OAUTH_URL;
-
-        // Test
-        $settings = new MediaServicesSettings($accountName,  $accessKey);
-
-        // Assert
-        $this->assertEquals($accountName, $settings->getAccountName());
-        $this->assertEquals($accessKey, $settings->getAccessKey());
         $this->assertEquals($endpointUri, $settings->getEndpointUri());
-        $this->assertEquals($oauthEndpointUri, $settings->getOAuthEndpointUri());
+        $this->assertEquals($tokenProvider, $settings->getTokenProvider());
     }
 
     /**
      * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
      */
-    public function testCreateCustom()
+    public function testConstructorShouldFail()
     {
         // Setup
-        $accountName = 'testAccount';
-        $accessKey = 'testKey';
-        $endpointUri = 'http://test.com';
-        $oauthEndpointUri = 'http://test.com';
-
-        // Test
-        $settings = new MediaServicesSettings($accountName, $accessKey, $endpointUri, $oauthEndpointUri);
+        $endpointUri = 'http://valid.url/';
+        $tokenProvider = null;
 
         // Assert
-        $this->assertEquals($accountName, $settings->getAccountName());
-        $this->assertEquals($accessKey, $settings->getAccessKey());
-        $this->assertEquals($endpointUri, $settings->getEndpointUri());
-        $this->assertEquals($oauthEndpointUri, $settings->getOAuthEndpointUri());
+        $this->setExpectedException(\InvalidArgumentException::class);
+
+        // Test
+        $settings = new MediaServicesSettings($endpointUri, $tokenProvider);
     }
 
     /**
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::getAccountName
+     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct
      */
-    public function testGetAccountName()
+    public function testConstructorShouldFail2()
     {
         // Setup
-        $data = 'test';
-
-        // Test
-        $settings = new MediaServicesSettings($data, 'test');
+        $endpointUri = null;
+        $tokenProvider = null;
 
         // Assert
-        $this->assertEquals($data, $settings->getAccountName());
-    }
-
-    /**
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::getAccessKey
-     */
-    public function testGetAccessKey()
-    {
-        // Setup
-        $data = 'test';
+        $this->setExpectedException(\RuntimeException::class);
 
         // Test
-        $settings = new MediaServicesSettings('test', $data);
-
-        // Assert
-        $this->assertEquals($data, $settings->getAccessKey());
-    }
-    /**
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::getEndpointUri
-     */
-    public function testGetEndpointUri()
-    {
-        // Setup
-        $data = 'http://test.com';
-
-        // Test
-        $settings = new MediaServicesSettings('test', 'test', $data);
-
-        // Assert
-        $this->assertEquals($data, $settings->getEndpointUri());
-    }
-    /**
-     * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::getOAuthEndpointUri
-     */
-    public function testGetOAuthEndpointUri()
-    {
-        // Setup
-        $data = 'http://test.com';
-
-        // Test
-        $settings = new MediaServicesSettings('test', 'test', null, $data);
-
-        // Assert
-        $this->assertEquals($data, $settings->getOAuthEndpointUri());
+        $settings = new MediaServicesSettings($endpointUri, $tokenProvider);
     }
 }

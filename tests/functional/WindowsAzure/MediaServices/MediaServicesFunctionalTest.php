@@ -469,7 +469,7 @@ class MediaServicesFunctionalTest extends MediaServicesRestProxyTestBase
         $outputAssetName2 = $this->getOutputAssetName();
 
         $taskBody1 = '<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetCreationOptions="0" assetName="'.$outputAssetName1.'">JobOutputAsset(0)</outputAsset></taskBody>';
-        $mediaProcessorId = 'nb:mpid:UUID:2e7aa8f3-4961-4e0c-b4db-0e0439e524f5';
+        $mediaProcessorId = 'nb:mpid:UUID:ff4df607-d419-42f0-bc17-a481b1331e56';
         $task1 = new Task($taskBody1, $mediaProcessorId, TaskOptions::NONE);
         $task1->setConfiguration('H.264 HD 720p VBR');
 

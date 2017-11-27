@@ -28,6 +28,10 @@ use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\MediaServices\MediaServicesRestProxy;
+use WindowsAzure\MediaServices\Authentication\AzureAdTokenCredentials;
+use WindowsAzure\MediaServices\Authentication\AzureAdClientSymmetricKey;
+use WindowsAzure\MediaServices\Authentication\AzureAdTokenProvider;
+use WindowsAzure\MediaServices\Authentication\AzureEnvironments;
 use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\AccessPolicy;
 use WindowsAzure\MediaServices\Models\Locator;
@@ -61,8 +65,12 @@ $tokenType = TokenType::JWT;
 
 echo "Azure SDK for PHP - AES Dynamic Encryption Sample".PHP_EOL;
 
-// 0 - set up the MediaServicesService object to call into the Media Services REST API.
-$restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($account, $secret));
+// 0 - Instantiate the credentials, the token provider and connect to Azure Media Services
+$credentials = new AzureAdTokenCredentials(
+    $tenant, new AzureAdClientSymmetricKey($clientId, $clientKey),
+    AzureEnvironments::AZURE_CLOUD_ENVIRONMENT());
+$provider = new AzureAdTokenProvider($credentials);
+$restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($restApiEndpoint, $provider));
 
 // 1 - Upload the mezzanine
 $sourceAsset = uploadFileAndCreateAsset($restProxy, $mezzanineFileName);

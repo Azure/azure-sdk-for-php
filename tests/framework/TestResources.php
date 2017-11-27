@@ -75,7 +75,7 @@ class TestResources
     const MEDIA_SERVICES_JOB_TEMPLATE_NAME = 'TestJobTemplate';
     const MEDIA_SERVICES_JOB_TEMPLATE_ID_PREFIX = 'nb:jtid:UUID:';
     const MEDIA_SERVICES_TASK_CONFIGURATION = 'H.264 HD 720p VBR';
-    const MEDIA_SERVICES_PROCESSOR_NAME = 'Windows Azure Media Encoder';
+    const MEDIA_SERVICES_PROCESSOR_NAME = 'Media Encoder Standard';
     const MEDIA_SERVICES_DECODE_PROCESSOR_NAME = 'Storage Decryption';
     const MEDIA_SERVICES_PROCESSOR_ID_PREFIX = 'nb:mpid:UUID:';
     const MEDIA_SERVICES_DUMMY_FILE_NAME = 'simple.avi';
@@ -201,10 +201,11 @@ class TestResources
     public static function getMediaServicesConnectionParameters()
     {
         return [
-            'accountName' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ACCOUNT_NAME'),
-            'accessKey' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ACCESS_KEY'),
-            'endpointUri' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ENDPOINT_URI', false),
-            'oauthEndpointUri' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_OAUTH_ENDPOINT_URI', false),
+            'tenant' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_TENANT'),
+            'clientId' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_CLIENT_ID'),
+            'clientKey' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_CLIENT_KEY'),
+            'restApiEndpoint' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_REST_API_ENDPOINT'),
+            'environment' => self::getEnvironmentVariable('AZURE_MEDIA_SERVICES_ENVIRONMENT'),
         ];
     }
 

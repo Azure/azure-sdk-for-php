@@ -26,6 +26,10 @@ require_once __DIR__.'/../../vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
+use WindowsAzure\MediaServices\Authentication\AzureAdTokenCredentials;
+use WindowsAzure\MediaServices\Authentication\AzureAdClientSymmetricKey;
+use WindowsAzure\MediaServices\Authentication\AzureAdTokenProvider;
+use WindowsAzure\MediaServices\Authentication\AzureEnvironments;
 use WindowsAzure\MediaServices\Models\EncodingReservedUnitType;
 
 // read user settings from config
@@ -37,8 +41,12 @@ $types = array('S1', 'S2', 'S3');
 
 echo "Azure SDK for PHP - Scale Encoding Units Sample".PHP_EOL;
 
-// 1. set up the MediaServicesService object to call into the Media Services REST API
-$restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($account, $secret));
+// 1. Instantiate the credentials, the token provider and connect to Azure Media Services
+$credentials = new AzureAdTokenCredentials(
+    $tenant, new AzureAdClientSymmetricKey($clientId, $clientKey),
+    AzureEnvironments::AZURE_CLOUD_ENVIRONMENT());
+$provider = new AzureAdTokenProvider($credentials);
+$restProxy = ServicesBuilder::getInstance()->createMediaServicesService(new MediaServicesSettings($restApiEndpoint, $provider));
 
 // 2. retrieve the current configuration of Encoding Units
 $encodingUnits = $restProxy->getEncodingReservedUnit();
