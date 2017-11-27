@@ -235,14 +235,9 @@ class ServicesBuilder
         $headersFilter = new HeadersFilter($headers);
         $serviceBusWrapper = $serviceBusWrapper->withFilter($headersFilter);
 
-        $wrapFilter = new WrapFilter(
-            $settings->getWrapEndpointUri(),
-            $settings->getWrapName(),
-            $settings->getWrapPassword(),
-            $this->createWrapService($settings->getWrapEndpointUri())
-        );
+        $filter = $settings->getFilter();
 
-        return $serviceBusWrapper->withFilter($wrapFilter);
+        return $serviceBusWrapper->withFilter($filter);
     }
 
     /**
