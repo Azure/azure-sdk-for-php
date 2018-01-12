@@ -31,6 +31,7 @@ use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\ServiceException;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class HttpClient.
@@ -45,7 +46,7 @@ use WindowsAzure\Common\ServiceException;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class HttpClientTest extends \PHPUnit_Framework_TestCase
+class HttpClientTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Http\HttpClient::__construct

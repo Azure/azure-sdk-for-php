@@ -28,6 +28,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal;
 use WindowsAzure\Common\Internal\ServiceBusSettings;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Filters\WrapFilter;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class ServiceBusSettings.
@@ -42,7 +43,7 @@ use WindowsAzure\Common\Internal\Filters\WrapFilter;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServiceBusSettingsTest extends \PHPUnit_Framework_TestCase
+class ServiceBusSettingsTest extends TestCase
 {
     public function setUp()
     {

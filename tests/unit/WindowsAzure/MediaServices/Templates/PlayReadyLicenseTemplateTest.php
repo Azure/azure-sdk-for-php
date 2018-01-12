@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\MediaServices\Templates;
 use WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate;
 use WindowsAzure\MediaServices\Templates\PlayReadyPlayRight;
 use WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for PlayReadyLicenseTemplate.
@@ -41,7 +42,7 @@ use WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class PlayReadyLicenseTemplateTest extends \PHPUnit_Framework_TestCase
+class PlayReadyLicenseTemplateTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseTemplate::getAllowTestDevices

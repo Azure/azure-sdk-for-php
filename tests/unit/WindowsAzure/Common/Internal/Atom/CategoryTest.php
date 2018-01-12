@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal\Atom;
 
 use WindowsAzure\Common\Internal\Atom\Category;
 
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Category.
@@ -41,7 +42,7 @@ use WindowsAzure\Common\Internal\Atom\Category;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class CategoryTest extends \PHPUnit_Framework_TestCase
+class CategoryTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Atom\Category::__construct

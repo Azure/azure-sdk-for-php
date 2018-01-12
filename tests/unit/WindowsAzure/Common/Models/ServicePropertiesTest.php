@@ -32,6 +32,7 @@ use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Common\Models\GetServicePropertiesResult;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class ServiceProperties.
@@ -46,7 +47,7 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServicePropertiesTest extends \PHPUnit_Framework_TestCase
+class ServicePropertiesTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Models\ServiceProperties::create

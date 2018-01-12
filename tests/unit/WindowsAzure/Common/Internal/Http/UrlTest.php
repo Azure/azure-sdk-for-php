@@ -29,6 +29,7 @@ use WindowsAzure\Common\Internal\Http\Url;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Url.
@@ -43,7 +44,7 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class UrlTest extends \PHPUnit_Framework_TestCase
+class UrlTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Http\Url::__construct

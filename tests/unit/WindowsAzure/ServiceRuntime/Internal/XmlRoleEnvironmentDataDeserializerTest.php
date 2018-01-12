@@ -30,6 +30,7 @@ use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamWrapper;
 use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
 use WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class XmlRoleEnvironmentDataDeserializer.
@@ -44,7 +45,7 @@ use WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class XmlRoleEnvironmentDataDeserializerTest extends \PHPUnit_Framework_TestCase
+class XmlRoleEnvironmentDataDeserializerTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer::deserialize

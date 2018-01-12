@@ -29,6 +29,7 @@ use WindowsAzure\Common\Internal\Serialization\JsonSerializer;
 use WindowsAzure\ServiceManagement\Internal\Service;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\Common\Internal\Resources;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Service.
@@ -43,7 +44,7 @@ use WindowsAzure\Common\Internal\Resources;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServiceTest extends \PHPUnit_Framework_TestCase
+class ServiceTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Internal\Service::setName

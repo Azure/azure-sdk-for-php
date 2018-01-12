@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceRuntime\Internal;
 
 use WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClientFactory;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Protocol1RuntimeClientFactory.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClientFactory;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class Protocol1RuntimeClientFactoryTest extends \PHPUnit_Framework_TestCase
+class Protocol1RuntimeClientFactoryTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClientFactory::getVersion

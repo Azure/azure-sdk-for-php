@@ -29,6 +29,7 @@ use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
 use WindowsAzure\MediaServices\Templates\TokenClaim;
 use WindowsAzure\MediaServices\Templates\TokenType;
 use WindowsAzure\MediaServices\Templates\OpenIdConnectDiscoveryDocument;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for TokenRestrictionTemplate.
@@ -43,7 +44,7 @@ use WindowsAzure\MediaServices\Templates\OpenIdConnectDiscoveryDocument;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class TokenRestrictionTemplateTest extends \PHPUnit_Framework_TestCase
+class TokenRestrictionTemplateTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Templates\TokenRestrictionTemplate::getAlternateVerificationKeys

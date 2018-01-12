@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class GetDeploymentOptions.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\GetDeploymentOptions;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class GetDeploymentOptionsTest extends \PHPUnit_Framework_TestCase
+class GetDeploymentOptionsTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\GetDeploymentOptions::setSlot

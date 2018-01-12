@@ -25,6 +25,7 @@
 namespace Tests\unit\WindowsAzure\MediaServices\Models;
 
 use WindowsAzure\MediaServices\Models\TaskTemplate;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Represents access policy object used in media services.
@@ -39,7 +40,7 @@ use WindowsAzure\MediaServices\Models\TaskTemplate;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class TaskTemplateTest extends \PHPUnit_Framework_TestCase
+class TaskTemplateTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Models\TaskTemplate::__construct

@@ -29,6 +29,7 @@ use WindowsAzure\ServiceBus\Internal\Action;
 use WindowsAzure\ServiceBus\Internal\Filter;
 use WindowsAzure\ServiceBus\Models\RuleDescription;
 
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class WrapAccessTokenResult.
@@ -43,7 +44,7 @@ use WindowsAzure\ServiceBus\Models\RuleDescription;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class RuleDescriptionTest extends \PHPUnit_Framework_TestCase
+class RuleDescriptionTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceBus\Models\RuleDescription::__construct

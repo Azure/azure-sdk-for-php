@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -27,6 +27,7 @@ namespace Tests\Unit\WindowsAzure\ServiceBus\Models;
 
 use WindowsAzure\ServiceBus\Internal\ActiveToken;
 use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class ActiveToken.
@@ -41,7 +42,7 @@ use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class ActiveTokenTest extends \PHPUnit_Framework_TestCase
+class ActiveTokenTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceBus\Internal\ActiveToken::__construct

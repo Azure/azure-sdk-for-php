@@ -29,6 +29,7 @@ use WindowsAzure\Common\Models\Logging;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Models\RetentionPolicy;
 use WindowsAzure\Common\Internal\Utilities;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Logging.
@@ -43,7 +44,7 @@ use WindowsAzure\Common\Internal\Utilities;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class LoggingTest extends \PHPUnit_Framework_TestCase
+class LoggingTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Models\Logging::create

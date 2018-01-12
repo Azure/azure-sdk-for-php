@@ -32,6 +32,7 @@ use WindowsAzure\Common\Internal\Atom\Category;
 use WindowsAzure\Common\Internal\Atom\Person;
 use WindowsAzure\Common\Internal\Atom\Generator;
 use WindowsAzure\Common\Internal\Atom\AtomLink;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Feed.
@@ -46,7 +47,7 @@ use WindowsAzure\Common\Internal\Atom\AtomLink;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class FeedTest extends \PHPUnit_Framework_TestCase
+class FeedTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Atom\Feed::__construct

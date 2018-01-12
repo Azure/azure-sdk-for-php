@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceRuntime\Internal;
 
 use WindowsAzure\ServiceRuntime\Internal\ReleaseCurrentState;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class ReleaseCurrentState.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceRuntime\Internal\ReleaseCurrentState;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ReleaseCurrentStateTest extends \PHPUnit_Framework_TestCase
+class ReleaseCurrentStateTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\ReleaseCurrentState::__construct

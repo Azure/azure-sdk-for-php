@@ -28,6 +28,7 @@ namespace Tests\unit\WindowsAzure\Common\Models;
 use WindowsAzure\Common\Models\GetServicePropertiesResult;
 use WindowsAzure\Common\Models\ServiceProperties;
 use Tests\Framework\TestResources;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class GetServicePropertiesResult.
@@ -42,7 +43,7 @@ use Tests\Framework\TestResources;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class GetServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
+class GetServicePropertiesResultTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Models\GetServicePropertiesResult::create

@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
 use WindowsAzure\ServiceBus\Models\SqlRuleAction;
 
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class WrapAccessTokenResult.
@@ -41,7 +42,7 @@ use WindowsAzure\ServiceBus\Models\SqlRuleAction;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class SqlRuleActionTest extends \PHPUnit_Framework_TestCase
+class SqlRuleActionTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceBus\Models\SqlRuleAction::__construct

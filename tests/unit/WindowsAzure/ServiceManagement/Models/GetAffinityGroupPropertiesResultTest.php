@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult;
 use WindowsAzure\ServiceManagement\Models\AffinityGroup;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class GetAffinityGroupPropertiesResult.
@@ -41,7 +42,7 @@ use WindowsAzure\ServiceManagement\Models\AffinityGroup;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class GetAffinityGroupPropertiesResultTest extends \PHPUnit_Framework_TestCase
+class GetAffinityGroupPropertiesResultTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\GetAffinityGroupPropertiesResult::create

@@ -25,6 +25,7 @@
 namespace Tests\unit\WindowsAzure\MediaServices\Templates;
 
 use WindowsAzure\MediaServices\Templates\OpenIdConnectDiscoveryDocument;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for OpenIdConnectDiscoveryDocument.
@@ -39,7 +40,7 @@ use WindowsAzure\MediaServices\Templates\OpenIdConnectDiscoveryDocument;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class OpenIdConnectDiscoveryDocumentTest extends \PHPUnit_Framework_TestCase
+class OpenIdConnectDiscoveryDocumentTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Templates\OpenIdConnectDiscoveryDocument::getOpenIdDiscoveryUri

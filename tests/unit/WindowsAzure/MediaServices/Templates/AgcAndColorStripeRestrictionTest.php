@@ -26,6 +26,7 @@ namespace Tests\unit\WindowsAzure\MediaServices\Templates;
 
 use WindowsAzure\MediaServices\Templates\AgcAndColorStripeRestriction;
 use WindowsAzure\MediaServices\Templates\ErrorMessages;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for AgcAndColorStripeRestriction.
@@ -40,7 +41,7 @@ use WindowsAzure\MediaServices\Templates\ErrorMessages;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class AgcAndColorStripeRestrictionTest extends \PHPUnit_Framework_TestCase
+class AgcAndColorStripeRestrictionTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Templates\AgcAndColorStripeRestriction::__construct

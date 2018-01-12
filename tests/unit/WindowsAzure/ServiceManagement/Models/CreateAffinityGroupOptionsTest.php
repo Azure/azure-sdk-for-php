@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\CreateAffinityGroupOptions;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class CreateAffinityGroupOptions.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\CreateAffinityGroupOptions;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class CreateAffinityGroupOptionsTest extends \PHPUnit_Framework_TestCase
+class CreateAffinityGroupOptionsTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\CreateAffinityGroupOptions::setDescription

@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult;
 use WindowsAzure\ServiceManagement\Models\HostedService;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class GetHostedServicePropertiesResult.
@@ -41,7 +42,7 @@ use WindowsAzure\ServiceManagement\Models\HostedService;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class GetHostedServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
+class GetHostedServicePropertiesResultTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\GetHostedServicePropertiesResult::getHostedService 

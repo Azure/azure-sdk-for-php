@@ -34,6 +34,7 @@ use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
 use WindowsAzure\ServiceRuntime\Internal\FileOutputChannel;
 use WindowsAzure\ServiceRuntime\Internal\ReleaseCurrentState;
 use WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class XmlCurrentStateSerializer.
@@ -48,7 +49,7 @@ use WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class XmlCurrentStateSerializerTest extends \PHPUnit_Framework_TestCase
+class XmlCurrentStateSerializerTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer::serialize

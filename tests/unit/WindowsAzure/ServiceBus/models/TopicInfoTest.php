@@ -28,6 +28,7 @@ namespace Tests\unit\WindowsAzure\ServiceBus\models;
 use WindowsAzure\ServiceBus\Models\TopicDescription;
 use WindowsAzure\ServiceBus\Models\TopicInfo;
 
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class WrapAccessTokenResult.
@@ -42,7 +43,7 @@ use WindowsAzure\ServiceBus\Models\TopicInfo;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class TopicInfoTest extends \PHPUnit_Framework_TestCase
+class TopicInfoTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceBus\Models\TopicInfo::__construct

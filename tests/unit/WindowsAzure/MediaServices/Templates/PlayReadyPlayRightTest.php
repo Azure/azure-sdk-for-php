@@ -30,6 +30,7 @@ use WindowsAzure\MediaServices\Templates\AgcAndColorStripeRestriction;
 use WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction;
 use WindowsAzure\MediaServices\Templates\UnknownOutputPassingOption;
 use WindowsAzure\MediaServices\Templates\ErrorMessages;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for PlayReadyPlayRight.
@@ -44,7 +45,7 @@ use WindowsAzure\MediaServices\Templates\ErrorMessages;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class PlayReadyPlayRightTest extends \PHPUnit_Framework_TestCase
+class PlayReadyPlayRightTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Templates\PlayReadyPlayRight::getFirstPlayExpiration

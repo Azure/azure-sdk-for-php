@@ -38,6 +38,7 @@ use WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeCurrentStateClient;
 use WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeGoalStateClient;
 use WindowsAzure\ServiceRuntime\Internal\XmlCurrentStateSerializer;
 use WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Protocol1RuntimeClient.
@@ -52,7 +53,7 @@ use WindowsAzure\ServiceRuntime\Internal\XmlRoleEnvironmentDataDeserializer;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class Protocol1RuntimeClientTest extends \PHPUnit_Framework_TestCase
+class Protocol1RuntimeClientTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\Protocol1RuntimeClient::__construct

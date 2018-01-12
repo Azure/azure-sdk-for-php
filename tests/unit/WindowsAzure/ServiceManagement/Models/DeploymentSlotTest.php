@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class DeploymentSlot.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class DeploymentSlotTest extends \PHPUnit_Framework_TestCase
+class DeploymentSlotTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\DeploymentSlot::isValid
