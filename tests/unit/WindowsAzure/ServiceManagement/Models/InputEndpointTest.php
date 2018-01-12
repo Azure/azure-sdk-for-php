@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\InputEndpoint;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class InputEndpoint.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\InputEndpoint;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class InputEndpointTest extends \PHPUnit_Framework_TestCase
+class InputEndpointTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\InputEndpoint::setRoleName

@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Internal;
 
 use WindowsAzure\ServiceManagement\Internal\WindowsAzureService;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class WindowsAzureService.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Internal\WindowsAzureService;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class WindowsAzureServiceTest extends \PHPUnit_Framework_TestCase
+class WindowsAzureServiceTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Internal\WindowsAzureService::setAffinityGroup

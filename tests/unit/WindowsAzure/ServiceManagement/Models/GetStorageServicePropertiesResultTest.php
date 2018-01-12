@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult;
 use WindowsAzure\ServiceManagement\Models\StorageService;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class GetStorageServicePropertiesResult.
@@ -41,7 +42,7 @@ use WindowsAzure\ServiceManagement\Models\StorageService;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class GetStorageServicePropertiesResultTest extends \PHPUnit_Framework_TestCase
+class GetStorageServicePropertiesResultTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\GetStorageServicePropertiesResult::setStorageService

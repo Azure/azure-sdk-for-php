@@ -28,6 +28,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal;
 use WindowsAzure\Common\Internal\MediaServicesSettings;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\MediaServices\Authentication\ITokenProvider;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class MediaServicesSettings.
@@ -42,7 +43,7 @@ use WindowsAzure\MediaServices\Authentication\ITokenProvider;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class MediaServicesSettingsTest extends \PHPUnit_Framework_TestCase
+class MediaServicesSettingsTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\MediaServicesSettings::__construct

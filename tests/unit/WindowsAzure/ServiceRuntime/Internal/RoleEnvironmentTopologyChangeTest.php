@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceRuntime\Internal;
 
 use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class RoleEnvironmentTopologyChange.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class RoleEnvironmentTopologyChangeTest extends \PHPUnit_Framework_TestCase
+class RoleEnvironmentTopologyChangeTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentTopologyChange::__construct

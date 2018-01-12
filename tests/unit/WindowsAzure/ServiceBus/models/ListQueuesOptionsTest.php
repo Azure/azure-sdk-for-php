@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
 use WindowsAzure\ServiceBus\Models\ListQueuesOptions;
 
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class WrapAccessTokenResult.
@@ -41,7 +42,7 @@ use WindowsAzure\ServiceBus\Models\ListQueuesOptions;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class ListQueuesOptionsTest extends \PHPUnit_Framework_TestCase
+class ListQueuesOptionsTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceBus\Models\ListQueuesOptions::__construct

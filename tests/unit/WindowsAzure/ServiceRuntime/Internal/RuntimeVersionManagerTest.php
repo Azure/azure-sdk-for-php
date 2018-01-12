@@ -31,6 +31,7 @@ use org\bovigo\vfs\vfsStreamWrapper;
 use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
 use WindowsAzure\ServiceRuntime\Internal\RuntimeVersionProtocolClient;
 use WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class RuntimeVersionManager.
@@ -45,7 +46,7 @@ use WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class RuntimeVersionManagerTest extends \PHPUnit_Framework_TestCase
+class RuntimeVersionManagerTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\RuntimeVersionManager::__construct

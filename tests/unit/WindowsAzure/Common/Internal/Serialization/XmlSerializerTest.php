@@ -28,6 +28,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal\Serialization;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class XmlSerializer.
@@ -42,7 +43,7 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class XmlSerializerTest extends \PHPUnit_Framework_TestCase
+class XmlSerializerTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Serialization\XmlSerializer::unserialize

@@ -25,6 +25,7 @@
 namespace Tests\unit\WindowsAzure\MediaServices\Models;
 
 use WindowsAzure\MediaServices\Models\IngestManifestFile;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Represents access policy object used in media services.
@@ -39,7 +40,7 @@ use WindowsAzure\MediaServices\Models\IngestManifestFile;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class IngestManifestFileTest extends \PHPUnit_Framework_TestCase
+class IngestManifestFileTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Models\IngestManifestFile::createFromOptions

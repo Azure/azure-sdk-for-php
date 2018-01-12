@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
 use WindowsAzure\ServiceBus\Models\ListSubscriptionsResult;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class WrapAccessTokenResult.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceBus\Models\ListSubscriptionsResult;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class ListSubscriptionsResultTest extends \PHPUnit_Framework_TestCase
+class ListSubscriptionsResultTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceBus\Models\ListSubscriptionsResult::__construct

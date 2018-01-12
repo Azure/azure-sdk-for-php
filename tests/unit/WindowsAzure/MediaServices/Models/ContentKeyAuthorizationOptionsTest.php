@@ -29,6 +29,7 @@ use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption;
 use WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyRestriction;
 use WindowsAzure\MediaServices\Models\ContentKeyDeliveryType;
 use WindowsAzure\MediaServices\Models\ContentKeyRestrictionType;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for ContentKeyAuthorizationPolicyOption.
@@ -43,7 +44,7 @@ use WindowsAzure\MediaServices\Models\ContentKeyRestrictionType;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ContentKeyAuthorizationOptionsTest extends \PHPUnit_Framework_TestCase
+class ContentKeyAuthorizationOptionsTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Models\ContentKeyAuthorizationPolicyOption::createFromOptions

@@ -25,6 +25,7 @@
 namespace Tests\unit\WindowsAzure\MediaServices\Templates;
 
 use WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for X509CertTokenVerificationKey.
@@ -39,7 +40,7 @@ use WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class X509CertTokenVerificationKeyTest extends \PHPUnit_Framework_TestCase
+class X509CertTokenVerificationKeyTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Templates\X509CertTokenVerificationKey::getRawBody

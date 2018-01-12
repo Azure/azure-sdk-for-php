@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\ServiceRuntime\Internal;
 
 use WindowsAzure\ServiceRuntime\Internal\RoleInstance;
 use WindowsAzure\ServiceRuntime\Internal\RoleInstanceEndpoint;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class RoleInstanceEndpoint.
@@ -41,7 +42,7 @@ use WindowsAzure\ServiceRuntime\Internal\RoleInstanceEndpoint;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class RoleInstanceEndpointTest extends \PHPUnit_Framework_TestCase
+class RoleInstanceEndpointTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\RoleInstanceEndpoint::__construct

@@ -28,6 +28,7 @@ namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
 use WindowsAzure\ServiceBus\Models\BrokeredMessage;
 use WindowsAzure\ServiceBus\Models\BrokerProperties;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class brokered message. 
@@ -42,7 +43,7 @@ use WindowsAzure\ServiceBus\Models\BrokerProperties;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class BrokeredMessageTest extends \PHPUnit_Framework_TestCase
+class BrokeredMessageTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceBus\Models\BrokeredMessage::__construct

@@ -28,6 +28,7 @@ use GuzzleHttp\Psr7\Response;
 use WindowsAzure\Common\Internal\Http\BatchResponse;
 use WindowsAzure\Common\Internal\Http\BatchRequest;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class HttpCallContext.
@@ -42,7 +43,7 @@ use WindowsAzure\Common\Internal\Http\HttpCallContext;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class BatchResponseTest extends \PHPUnit_Framework_TestCase
+class BatchResponseTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Http\BatchResponse::__construct

@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceRuntime\Internal;
 
 use WindowsAzure\ServiceRuntime\Internal\CurrentState;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class CurrentState.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceRuntime\Internal\CurrentState;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class CurrentStateTest extends \PHPUnit_Framework_TestCase
+class CurrentStateTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\CurrentState::getClientId

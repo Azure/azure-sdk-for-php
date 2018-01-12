@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\Role;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Role.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\Role;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class RoleTest extends \PHPUnit_Framework_TestCase
+class RoleTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\Role::setRoleName

@@ -28,6 +28,7 @@ namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\ServiceManagement\Models\GetOperationStatusResult;
 use WindowsAzure\Common\ServiceException;
 use WindowsAzure\ServiceManagement\Models\OperationStatus;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class GetOperationStatusResult.
@@ -42,7 +43,7 @@ use WindowsAzure\ServiceManagement\Models\OperationStatus;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class GetOperationStatusResultTest extends \PHPUnit_Framework_TestCase
+class GetOperationStatusResultTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\GetOperationStatusResult::create

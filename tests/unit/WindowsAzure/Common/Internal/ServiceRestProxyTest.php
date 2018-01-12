@@ -32,6 +32,7 @@ use WindowsAzure\Common\Internal\ServiceRestProxy;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class ServiceRestProxy.
@@ -46,7 +47,7 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServiceRestProxyTest extends \PHPUnit_Framework_TestCase
+class ServiceRestProxyTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\ServiceRestProxy::generateMetadataHeaders

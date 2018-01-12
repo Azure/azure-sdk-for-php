@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -34,6 +34,7 @@ use WindowsAzure\ServiceRuntime\RoleEnvironment;
 use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentNotAvailableException;
 use WindowsAzure\ServiceRuntime\Internal\RoleInstanceStatus;
 use WindowsAzure\ServiceRuntime\Internal\RuntimeKernel;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class RoleEnvironment.
@@ -48,7 +49,7 @@ use WindowsAzure\ServiceRuntime\Internal\RuntimeKernel;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class RoleEnvironmentTest extends \PHPUnit_Framework_TestCase
+class RoleEnvironmentTest extends TestCase
 {
     public function testRoleNotAvailable()
     {

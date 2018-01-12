@@ -25,7 +25,7 @@
 namespace Tests\unit\WindowsAzure\MediaServices\Templates;
 
 use WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate;
-
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for PlayReadyLicenseTemplate.
@@ -40,7 +40,7 @@ use WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class PlayReadyLicenseResponseTemplateTest extends \PHPUnit_Framework_TestCase
+class PlayReadyLicenseResponseTemplateTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Templates\PlayReadyLicenseResponseTemplate::getLicenseTemplates

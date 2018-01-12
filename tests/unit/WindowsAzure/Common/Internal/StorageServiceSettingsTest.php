@@ -28,6 +28,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal;
 use WindowsAzure\Common\Internal\StorageServiceSettings;
 use WindowsAzure\Common\Internal\Resources;
 use Tests\Framework\TestResources;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class StorageServiceSettings.
@@ -42,7 +43,7 @@ use Tests\Framework\TestResources;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class StorageServiceSettingsTest extends \PHPUnit_Framework_TestCase
+class StorageServiceSettingsTest extends TestCase
 {
     private $_accountName = 'mytestaccount';
 

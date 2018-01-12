@@ -30,6 +30,7 @@ use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamWrapper;
 use WindowsAzure\ServiceRuntime\Internal\ChannelNotAvailableException;
 use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class FileInputChannel.
@@ -44,7 +45,7 @@ use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class FileInputChannelTest extends \PHPUnit_Framework_TestCase
+class FileInputChannelTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\FileInputChannel::getInputStream

@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal;
 
 use WindowsAzure\Common\Internal\ServiceManagementSettings;
 use WindowsAzure\Common\Internal\Resources;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class ServiceManagementSettings.
@@ -41,7 +42,7 @@ use WindowsAzure\Common\Internal\Resources;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ServiceManagementSettingsTest extends \PHPUnit_Framework_TestCase
+class ServiceManagementSettingsTest extends TestCase
 {
     public function setUp()
     {

@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\Common\Internal\Atom;
 
 use WindowsAzure\Common\Internal\Atom\Generator;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Generator.
@@ -40,7 +41,7 @@ use WindowsAzure\Common\Internal\Atom\Generator;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class GeneratorTest extends \PHPUnit_Framework_TestCase
+class GeneratorTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Atom\Generator::__construct

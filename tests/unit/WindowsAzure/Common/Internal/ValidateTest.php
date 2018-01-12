@@ -30,6 +30,7 @@ use WindowsAzure\Common\Internal\InvalidArgumentTypeException;
 use WindowsAzure\Common\Internal\Resources;
 use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\MediaServices\Models\Asset;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class ValidateTest.
@@ -44,7 +45,7 @@ use WindowsAzure\MediaServices\Models\Asset;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ValidateTest extends \PHPUnit_Framework_TestCase
+class ValidateTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Validate::isArray

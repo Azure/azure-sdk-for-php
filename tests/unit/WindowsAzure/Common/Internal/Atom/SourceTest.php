@@ -30,6 +30,7 @@ use WindowsAzure\Common\Internal\Atom\Source;
 use WindowsAzure\Common\Internal\Atom\Person;
 use WindowsAzure\Common\Internal\Atom\Generator;
 use WindowsAzure\Common\Internal\Atom\Category;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Source.
@@ -44,7 +45,7 @@ use WindowsAzure\Common\Internal\Atom\Category;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class SourceTest extends \PHPUnit_Framework_TestCase
+class SourceTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Atom\Source::__construct

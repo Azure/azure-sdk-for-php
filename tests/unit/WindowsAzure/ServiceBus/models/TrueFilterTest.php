@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
 use WindowsAzure\ServiceBus\Models\TrueFilter;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class TrueFilter.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceBus\Models\TrueFilter;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class TrueFilterTest extends \PHPUnit_Framework_TestCase
+class TrueFilterTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceBus\Models\TrueFilter::__construct

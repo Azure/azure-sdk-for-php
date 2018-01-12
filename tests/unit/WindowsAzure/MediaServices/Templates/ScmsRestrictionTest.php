@@ -26,6 +26,7 @@ namespace Tests\unit\WindowsAzure\MediaServices\Templates;
 
 use WindowsAzure\MediaServices\Templates\ScmsRestriction;
 use WindowsAzure\MediaServices\Templates\ErrorMessages;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for ScmsRestriction.
@@ -40,7 +41,7 @@ use WindowsAzure\MediaServices\Templates\ErrorMessages;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ScmsRestrictionTest extends \PHPUnit_Framework_TestCase
+class ScmsRestrictionTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Templates\ScmsRestriction::__construct

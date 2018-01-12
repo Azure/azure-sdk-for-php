@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * PHP version 5
  *
  * @category  Microsoft
@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceBus\Internal;
 
 use WindowsAzure\ServiceBus\Internal\Action;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Action.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceBus\Internal\Action;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class ActionTest extends \PHPUnit_Framework_TestCase
+class ActionTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceBus\Internal\Action::__construct

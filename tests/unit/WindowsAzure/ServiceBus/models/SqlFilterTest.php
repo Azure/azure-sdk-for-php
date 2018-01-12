@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
 use WindowsAzure\ServiceBus\Models\SqlFilter;
 
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class WrapAccessTokenResult.
@@ -41,7 +42,7 @@ use WindowsAzure\ServiceBus\Models\SqlFilter;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class SqlFilterTest extends \PHPUnit_Framework_TestCase
+class SqlFilterTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceBus\Models\SqlFilter::__construct

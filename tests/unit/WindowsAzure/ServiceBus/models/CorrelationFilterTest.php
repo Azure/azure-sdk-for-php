@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
 use WindowsAzure\ServiceBus\Models\CorrelationFilter;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class CorrelationFilter.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceBus\Models\CorrelationFilter;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class CorrelationFilterTest extends \PHPUnit_Framework_TestCase
+class CorrelationFilterTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceBus\Models\CorrelationFilter::__construct

@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class CreateDeploymentOptions.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class CreateDeploymentOptionsTest extends \PHPUnit_Framework_TestCase
+class CreateDeploymentOptionsTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\CreateDeploymentOptions::setStartDeployment

@@ -28,6 +28,7 @@ namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 use WindowsAzure\ServiceManagement\Models\Deployment;
 use WindowsAzure\ServiceManagement\Models\DeploymentSlot;
 use WindowsAzure\ServiceManagement\Models\UpgradeStatus;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Deployment.
@@ -42,7 +43,7 @@ use WindowsAzure\ServiceManagement\Models\UpgradeStatus;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class DeploymentTest extends \PHPUnit_Framework_TestCase
+class DeploymentTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\Deployment::setName

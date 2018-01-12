@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
 use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class WrapAccessTokenResult.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class WrapAccessTokenResultTest extends \PHPUnit_Framework_TestCase
+class WrapAccessTokenResultTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceBus\Internal\WrapAccessTokenResult::create
