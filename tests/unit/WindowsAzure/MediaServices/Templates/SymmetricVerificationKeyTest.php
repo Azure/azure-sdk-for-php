@@ -25,6 +25,7 @@
 namespace Tests\unit\WindowsAzure\MediaServices\Templates;
 
 use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for SymmetricVerificationKey.
@@ -39,7 +40,7 @@ use WindowsAzure\MediaServices\Templates\SymmetricVerificationKey;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class SymmetricVerificationKeyTest extends \PHPUnit_Framework_TestCase
+class SymmetricVerificationKeyTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Templates\SymmetricVerificationKey::getKeyValue

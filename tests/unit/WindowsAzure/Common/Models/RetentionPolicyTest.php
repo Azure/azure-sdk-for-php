@@ -28,6 +28,7 @@ namespace Tests\unit\WindowsAzure\Common\Models;
 use WindowsAzure\Common\Models\RetentionPolicy;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Internal\Utilities;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class RetentionPolicy.
@@ -42,7 +43,7 @@ use WindowsAzure\Common\Internal\Utilities;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class RetentionPolicyTest extends \PHPUnit_Framework_TestCase
+class RetentionPolicyTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Models\RetentionPolicy::create

@@ -26,6 +26,7 @@ namespace Tests\unit\WindowsAzure\MediaServices\Templates;
 
 use WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction;
 use WindowsAzure\MediaServices\Templates\ErrorMessages;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for ExplicitAnalogTelevisionRestriction.
@@ -40,7 +41,7 @@ use WindowsAzure\MediaServices\Templates\ErrorMessages;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ExplicitAnalogTelevisionRestrictionTest extends \PHPUnit_Framework_TestCase
+class ExplicitAnalogTelevisionRestrictionTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Templates\ExplicitAnalogTelevisionRestriction::__construct

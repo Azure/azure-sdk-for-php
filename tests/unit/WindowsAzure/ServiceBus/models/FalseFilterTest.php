@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceBus\models;
 
 use WindowsAzure\ServiceBus\Models\FalseFilter;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class FalseFilter.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceBus\Models\FalseFilter;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class FalseFilterTest extends \PHPUnit_Framework_TestCase
+class FalseFilterTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceBus\Models\FalseFilter::__construct

@@ -25,6 +25,7 @@
 namespace Tests\unit\WindowsAzure\MediaServices\Templates;
 
 use WindowsAzure\MediaServices\Templates\TokenClaim;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for TokenClaim.
@@ -39,7 +40,7 @@ use WindowsAzure\MediaServices\Templates\TokenClaim;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class TokenClaimsTest extends \PHPUnit_Framework_TestCase
+class TokenClaimsTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Templates\TokenClaim::__construct

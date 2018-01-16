@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\UpgradeDeploymentOptions;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class UpgradeDeploymentOptions.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\UpgradeDeploymentOptions;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class UpgradeDeploymentOptionsTest extends \PHPUnit_Framework_TestCase
+class UpgradeDeploymentOptionsTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\UpgradeDeploymentOptions::setRoleToUpgrade

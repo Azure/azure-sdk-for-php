@@ -31,6 +31,7 @@ use WindowsAzure\Common\Internal\Atom\Entry;
 use WindowsAzure\Common\Internal\Atom\Category;
 use WindowsAzure\Common\Internal\Atom\Person;
 use WindowsAzure\Common\Internal\Atom\Source;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class WrapAccessTokenResult.
@@ -45,7 +46,7 @@ use WindowsAzure\Common\Internal\Atom\Source;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class EntryTest extends \PHPUnit_Framework_TestCase
+class EntryTest extends TestCase
 {
     /**
      */

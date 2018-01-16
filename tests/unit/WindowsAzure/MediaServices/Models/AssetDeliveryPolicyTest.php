@@ -28,6 +28,7 @@ use WindowsAzure\MediaServices\Models\AssetDeliveryPolicy;
 use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyType;
 use WindowsAzure\MediaServices\Models\AssetDeliveryProtocol;
 use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for AssetDeliveryPolicy.
@@ -42,7 +43,7 @@ use WindowsAzure\MediaServices\Models\AssetDeliveryPolicyConfigurationKey;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class AssetDeliveryPolicyTest extends \PHPUnit_Framework_TestCase
+class AssetDeliveryPolicyTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Models\AssetDeliveryPolicy::createFromOptions

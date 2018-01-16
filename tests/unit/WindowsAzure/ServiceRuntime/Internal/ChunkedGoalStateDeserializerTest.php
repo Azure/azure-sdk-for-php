@@ -30,6 +30,7 @@ use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamWrapper;
 use WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer;
 use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class ChunkedGoalStateDeserializer.
@@ -44,7 +45,7 @@ use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ChunkedGoalStateDeserializerTest extends \PHPUnit_Framework_TestCase
+class ChunkedGoalStateDeserializerTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\ChunkedGoalStateDeserializer::__construct

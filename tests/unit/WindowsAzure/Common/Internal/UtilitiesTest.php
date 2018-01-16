@@ -31,6 +31,7 @@ use Tests\Framework\TestResources;
 use WindowsAzure\Common\Models\ServiceProperties;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
 use WindowsAzure\MediaServices\Models\Asset;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Utilities.
@@ -45,7 +46,7 @@ use WindowsAzure\MediaServices\Models\Asset;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class UtilitiesTest extends \PHPUnit_Framework_TestCase
+class UtilitiesTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Utilities::tryGetValue

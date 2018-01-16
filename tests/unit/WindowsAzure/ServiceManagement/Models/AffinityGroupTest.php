@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\AffinityGroup;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class AffinityGroup.
@@ -41,7 +42,7 @@ use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class AffinityGroupTest extends \PHPUnit_Framework_TestCase
+class AffinityGroupTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\AffinityGroup::toArray

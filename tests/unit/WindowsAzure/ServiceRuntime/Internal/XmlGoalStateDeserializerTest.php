@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\ServiceRuntime\Internal;
 
 
 use WindowsAzure\ServiceRuntime\Internal\XmlGoalStateDeserializer;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class XmlGoalStateDeserializer.
@@ -41,7 +42,7 @@ use WindowsAzure\ServiceRuntime\Internal\XmlGoalStateDeserializer;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class XmlGoalStateDeserializerTest extends \PHPUnit_Framework_TestCase
+class XmlGoalStateDeserializerTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\XmlGoalStateDeserializer::deserialize

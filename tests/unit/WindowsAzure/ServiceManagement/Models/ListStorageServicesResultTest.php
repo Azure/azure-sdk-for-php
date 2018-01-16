@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\ListStorageServicesResult;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class ListStorageServicesResult.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\ListStorageServicesResult;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ListStorageServicesResultTest extends \PHPUnit_Framework_TestCase
+class ListStorageServicesResultTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\ListStorageServicesResult::setStorageServices

@@ -26,6 +26,7 @@
 namespace Tests\Unit\WindowsAzure\CreateServiceOptionsManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class CreateServiceOptions.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\CreateServiceOptions;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class CreateStorageServiceOptionsTest extends \PHPUnit_Framework_TestCase
+class CreateStorageServiceOptionsTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\CreateServiceOptions::setDescription

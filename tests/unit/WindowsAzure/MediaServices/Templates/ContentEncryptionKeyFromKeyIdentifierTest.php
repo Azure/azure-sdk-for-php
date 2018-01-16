@@ -25,6 +25,7 @@
 namespace Tests\unit\WindowsAzure\MediaServices\Templates;
 
 use WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for ContentEncryptionKeyFromKeyIdentifier.
@@ -39,7 +40,7 @@ use WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ContentEncryptionKeyFromKeyIdentifierTest extends \PHPUnit_Framework_TestCase
+class ContentEncryptionKeyFromKeyIdentifierTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Templates\ContentEncryptionKeyFromKeyIdentifier::__construct

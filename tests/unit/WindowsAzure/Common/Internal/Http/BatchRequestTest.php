@@ -26,6 +26,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal\Http;
 
 use WindowsAzure\Common\Internal\Http\BatchRequest;
 use WindowsAzure\Common\Internal\Http\HttpCallContext;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class HttpCallContext.
@@ -40,7 +41,7 @@ use WindowsAzure\Common\Internal\Http\HttpCallContext;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class BatchRequestTest extends \PHPUnit_Framework_TestCase
+class BatchRequestTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Http\batchRequest::appendContext

@@ -30,6 +30,7 @@ use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamWrapper;
 use WindowsAzure\ServiceRuntime\Internal\FileInputChannel;
 use WindowsAzure\ServiceRuntime\Internal\FileOutputChannel;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class FileOutputChannel.
@@ -44,7 +45,7 @@ use WindowsAzure\ServiceRuntime\Internal\FileOutputChannel;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class FileOutputChannelTest extends \PHPUnit_Framework_TestCase
+class FileOutputChannelTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\FileOutputChannel::getOutputStream

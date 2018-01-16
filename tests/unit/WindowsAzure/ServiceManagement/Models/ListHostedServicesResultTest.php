@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\ListHostedServicesResult;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class ListHostedServicesResult.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\ListHostedServicesResult;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ListHostedServicesResultTest extends \PHPUnit_Framework_TestCase
+class ListHostedServicesResultTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\ListHostedServicesResult::setHostedServices

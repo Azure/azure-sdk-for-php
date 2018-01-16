@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceRuntime\Internal;
 
 use WindowsAzure\ServiceRuntime\Internal\LocalResource;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class LocalResource.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceRuntime\Internal\LocalResource;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class LocalResourceTest extends \PHPUnit_Framework_TestCase
+class LocalResourceTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\LocalResource::__construct

@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceRuntime\Internal;
 
 use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentConfigurationSettingChange;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class RoleEnvironmentConfigurationSettingChange.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentConfigurationSettingChan
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class RoleEnvironmentConfigurationSettingChangeTest extends \PHPUnit_Framework_TestCase
+class RoleEnvironmentConfigurationSettingChangeTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceRuntime\Internal\RoleEnvironmentConfigurationSettingChange::__construct

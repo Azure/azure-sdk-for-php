@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\UpgradeStatus;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class UpgradeStatus.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\UpgradeStatus;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class UpgradeStatusTest extends \PHPUnit_Framework_TestCase
+class UpgradeStatusTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\UpgradeStatus::setUpgradeType

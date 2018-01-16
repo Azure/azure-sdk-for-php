@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\ServiceManagement\Models;
 
 use WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class AsynchronousOperationResult.
@@ -40,7 +41,7 @@ use WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class AsynchronousOperationResultTest extends \PHPUnit_Framework_TestCase
+class AsynchronousOperationResultTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\ServiceManagement\Models\AsynchronousOperationResult::create

@@ -27,6 +27,7 @@ namespace Tests\unit\WindowsAzure\Common\Internal\Atom;
 
 use WindowsAzure\Common\Internal\Atom\Content;
 
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class WrapAccessTokenResult.
@@ -41,7 +42,7 @@ use WindowsAzure\Common\Internal\Atom\Content;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class ContentTest extends \PHPUnit_Framework_TestCase
+class ContentTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Internal\Atom\Content::__construct

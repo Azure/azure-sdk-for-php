@@ -29,6 +29,7 @@ use WindowsAzure\Common\Models\Metrics;
 use WindowsAzure\Common\Internal\Utilities;
 use Tests\Framework\TestResources;
 use WindowsAzure\Common\Models\RetentionPolicy;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class Metrics.
@@ -43,7 +44,7 @@ use WindowsAzure\Common\Models\RetentionPolicy;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class MetricsTest extends \PHPUnit_Framework_TestCase
+class MetricsTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\Common\Models\Metrics::create

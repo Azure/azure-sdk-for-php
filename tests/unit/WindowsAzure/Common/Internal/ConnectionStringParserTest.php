@@ -26,6 +26,7 @@
 namespace Tests\unit\WindowsAzure\Common\Internal;
 
 use WindowsAzure\Common\Internal\ConnectionStringParser;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class ConnectionStringParser.
@@ -40,7 +41,7 @@ use WindowsAzure\Common\Internal\ConnectionStringParser;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class ConnectionStringParserTest extends \PHPUnit_Framework_TestCase
+class ConnectionStringParserTest extends TestCase
 {
     private function _parseTest($connectionString)
     {

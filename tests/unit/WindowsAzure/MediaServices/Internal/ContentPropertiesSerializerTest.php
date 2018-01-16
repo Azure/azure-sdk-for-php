@@ -30,6 +30,7 @@ use WindowsAzure\MediaServices\Models\Asset;
 use WindowsAzure\MediaServices\Models\IngestManifest;
 use WindowsAzure\MediaServices\Models\Task;
 use WindowsAzure\MediaServices\Models\TaskOptions;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit tests for class ContentPropertiesSerializer.
@@ -44,7 +45,7 @@ use WindowsAzure\MediaServices\Models\TaskOptions;
  *
  * @link      https://github.com/WindowsAzure/azure-sdk-for-php
  */
-class ContentPropertiesSerializerTest extends \PHPUnit_Framework_TestCase
+class ContentPropertiesSerializerTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Internal\ContentPropertiesSerializer::unserialize

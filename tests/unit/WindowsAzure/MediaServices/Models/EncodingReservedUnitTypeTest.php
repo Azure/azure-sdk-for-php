@@ -26,6 +26,7 @@ namespace Tests\unit\WindowsAzure\MediaServices\Models;
 
 use WindowsAzure\MediaServices\Models\EncodingReservedUnitType;
 use WindowsAzure\MediaServices\Models\EncodingReservedUnit;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit Tests for EncodingReservedUnitType.
@@ -40,7 +41,7 @@ use WindowsAzure\MediaServices\Models\EncodingReservedUnit;
  *
  * @link      https://github.com/windowsazure/azure-sdk-for-php
  */
-class EncodingReservedUnitTypeTest extends \PHPUnit_Framework_TestCase
+class EncodingReservedUnitTypeTest extends TestCase
 {
     /**
      * @covers \WindowsAzure\MediaServices\Models\EncodingReservedUnit::createFromOptions
