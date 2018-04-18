@@ -186,7 +186,7 @@ There are four basic steps that have to be performed before you can make a call 
 
 ## Table Storage
 
-The following are examples of common operations performed with the Table serivce. For more please read [How-to use the Table service](http://www.windowsazure.com/en-us/develop/php/how-to-guides/table-service/).
+The following are examples of common operations performed with the Table service. For more please read [How-to use the Table service](http://www.windowsazure.com/en-us/develop/php/how-to-guides/table-service/).
 
 ### Create a table
 
