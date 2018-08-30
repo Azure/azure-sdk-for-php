@@ -5,10 +5,16 @@
     "license": "Apache-2.0",
     "minimum-stability": "stable",
     "autoload": {
-        "psr-4": { "": [ "src/", "gen/" ] }
+        "psr-4": {
+            "Microsoft\\Rest\\": "src/Microsoft/Rest/",
+            "Microsoft\\Azure\\": "gen/Microsoft/Azure/"
+        }
     },
     "autoload-dev": {
-        "psr-4": { "": "tests" }
+        "psr-4": {
+            "Microsoft\\Azure\\": "tests/Microsoft/Azure/",
+            "Microsoft\\Rest\\": "tests/Microsoft/Rest/"
+        }
     },
     "require": {
         "php": ">=5.6",
