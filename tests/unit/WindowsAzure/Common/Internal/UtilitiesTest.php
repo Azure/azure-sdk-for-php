@@ -522,6 +522,34 @@ class UtilitiesTest extends TestCase
     }
 
     /**
+     * Testing the max & min of the range (by providing our own rand function)
+     * helps ensure that the function behaves accurately across the whole range.
+     * @covers \WindowsAzure\Common\Internal\Utilities::getGuid
+     */
+    public function testGetGuid_Min()
+    {
+        $func_min = function($min, $max) {
+            return $min;
+        };
+        $actual = Utilities::getGuid($func_min);
+        $this->assertEquals('00000000-0000-4000-8000-000000000000', $actual);
+    }
+
+    /**
+     * Testing the max & min of the range (by providing our own rand function)
+     * helps ensure that the function behaves accurately across the whole range.
+     * @covers \WindowsAzure\Common\Internal\Utilities::getGuid
+     */
+    public function testGetGuid_Max()
+    {
+        $func_max = function($min, $max) {
+            return $max;
+        };
+        $actual = Utilities::getGuid($func_max);
+        $this->assertEquals('ffffffff-ffff-4fff-bfff-ffffffffffff', $actual);
+    }
+
+    /**
      * @covers \WindowsAzure\Common\Internal\Utilities::endsWith
      */
     public function testEndsWith()

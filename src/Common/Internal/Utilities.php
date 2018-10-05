@@ -537,27 +537,28 @@ class Utilities
      *
      * @static
      *
+     * @param string|function $rand  The random function to use.
      * @return string A new GUID
      */
-    public static function getGuid()
+    public static function getGuid($rand = 'mt_rand')
     {
         // @codingStandardsIgnoreStart
 
         return sprintf(
             '%04x%04x-%04x-%04x-%02x%02x-%04x%04x%04x',
-            mt_rand(0, 65535),
-            mt_rand(0, 65535),          // 32 bits for "time_low"
-            mt_rand(0, 65535),          // 16 bits for "time_mid"
-            mt_rand(0, 4095) + 16384,   // 16 bits for "time_hi_and_version", with
+            $rand(0, 65535),
+            $rand(0, 65535),            // 32 bits for "time_low"
+            $rand(0, 65535),            // 16 bits for "time_mid"
+            $rand(0, 4095) + 16384,     // 16 bits for "time_hi_and_version", with
                                         // the most significant 4 bits being 0100
                                         // to indicate randomly generated version
-            mt_rand(0, 63) + 128,       // 8 bits  for "clock_seq_hi", with
+            $rand(0, 63) + 128,         // 8 bits  for "clock_seq_hi", with
                                         // the most significant 2 bits being 10,
                                         // required by version 4 GUIDs.
-            mt_rand(0, 255),            // 8 bits  for "clock_seq_low"
-            mt_rand(0, 65535),          // 16 bits for "node 0" and "node 1"
-            mt_rand(0, 65535),          // 16 bits for "node 2" and "node 3"
-            mt_rand(0, 65535)           // 16 bits for "node 4" and "node 5"
+            $rand(0, 255),              // 8 bits  for "clock_seq_low"
+            $rand(0, 65535),            // 16 bits for "node 0" and "node 1"
+            $rand(0, 65535),            // 16 bits for "node 2" and "node 3"
+            $rand(0, 65535)             // 16 bits for "node 4" and "node 5"
         );
 
         // @codingStandardsIgnoreEnd
