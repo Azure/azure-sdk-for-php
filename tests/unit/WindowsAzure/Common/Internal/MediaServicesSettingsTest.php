@@ -52,7 +52,7 @@ class MediaServicesSettingsTest extends TestCase
     {
         // Setup
         $endpointUri = 'http://valid.url/';
-        $tokenProvider = $this->getMock('\WindowsAzure\MediaServices\Authentication\ITokenProvider');
+        $tokenProvider = $this->getMockBuilder('\WindowsAzure\MediaServices\Authentication\ITokenProvider')->getMock();
 
         // Test
         $settings = new MediaServicesSettings($endpointUri, $tokenProvider);

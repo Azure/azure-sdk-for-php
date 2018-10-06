@@ -21,7 +21,7 @@
     },
     "require-dev": {
         "mikey179/vfsStream": "^1.6",
-        "phpunit/phpunit": "^4.8.35",
+        "phpunit/phpunit": "^5.7.27",
         "phpdocumentor/phpdocumentor": "^2.8",
         "sebastian/phpcpd": "^2.0",
         "phploc/phploc": "^2.1",

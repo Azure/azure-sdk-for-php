@@ -59,7 +59,7 @@ class AuthenticationFilterTest extends TestCase
         $token = 'testToken';
         $expiration = new \DateTime('now');
         $accessToken = new AccessToken($token, $expiration);
-        $tokenProvider = $this->getMock('\WindowsAzure\MediaServices\Authentication\ITokenProvider');
+        $tokenProvider = $this->getMockBuilder('\WindowsAzure\MediaServices\Authentication\ITokenProvider')->getMock();
         $tokenProvider->expects($this->any())->method('getAccessToken')->will($this->returnValue($accessToken));
         $filter = new AuthenticationFilter($tokenProvider);
 
