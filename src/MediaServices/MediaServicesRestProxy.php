@@ -1371,9 +1371,9 @@ class MediaServicesRestProxy extends ServiceRestProxy implements IMediaServices
      *
      * @return array of Models\Job
      */
-    public function getJobList()
+    public function getJobList(array $queryParams = [])
     {
-        $propertyList = $this->_getEntityList('Jobs');
+        $propertyList = $this->_getEntityList('Jobs', $queryParams);
         $result = [];
 
         foreach ($propertyList as $properties) {
