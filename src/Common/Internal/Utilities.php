@@ -645,7 +645,12 @@ class Utilities
      */
     public static function generateCryptoKey($length)
     {
-        return openssl_random_pseudo_bytes($length);
+        if (function_exists('random_bytes'))
+        {
+            return random_bytes($length);
+        }
+        
+        openssl_random_pseudo_bytes($length);
     }
 
     /**
@@ -720,6 +725,12 @@ class Utilities
         return $result;
     }
 
+    /**
+     * Replace all hex characters in a string with lowercase
+     * and URL encode the resulting string.
+     * @param  string $str input string
+     * @return string URL Encoded string with 00-FF replaced with 00-ff
+     */
     public static function lowerUrlencode($str)
     {
         return preg_replace_callback('/%[0-9A-F]{2}/',
