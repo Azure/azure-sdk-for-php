@@ -45,6 +45,7 @@ use WindowsAzure\MediaServices\Models\ProgramState;
 use WindowsAzure\Common\Internal\Http\Url;
 use WindowsAzure\Common\Internal\Http\HttpClient;
 use WindowsAzure\Common\Internal\Resources;
+use WindowsAzure\Common\Internal\Utilities;
 
 /**
  * TestBase class for each unit test class.
@@ -419,7 +420,7 @@ class MediaServicesRestProxyTestBase extends ServiceRestProxyTestBase
 
     protected function createSuffix()
     {
-        return sprintf('-%04x', mt_rand(0, 65535));
+        return sprintf('-%04x', Utilities::generateRandomInt(0, 65535));
     }
 
     protected function createLargeFile()

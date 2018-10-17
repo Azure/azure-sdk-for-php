@@ -641,12 +641,59 @@ class Utilities
      */
     public static function generateCryptoKey($length)
     {
-        if (function_exists('random_bytes'))
-        {
+        // PHP>=7.0
+        if (function_exists('random_bytes')) {
             return random_bytes($length);
         }
         
-        openssl_random_pseudo_bytes($length);
+        $buf = openssl_random_pseudo_bytes($length, $secure);
+
+        if ($buf !== false) {
+            return $buf;
+        }
+
+        throw new \Exception('PRNG failure');
+    }
+
+    /**
+     * Fetch a random integer between $min and $max inclusive
+     * @param  int $min
+     * @param  int $max
+     * @return int
+     */
+    public static function generateRandomInt($min, $max)
+    {
+        $range = $max - $min;
+        $bits = $bytes = $mask = $val = 0;
+        while ($range > 0) {
+            if ($bits % 8 === 0) {
+               ++$bytes;
+            }
+            ++$bits;
+            $range >>= 1;
+            $mask = $mask << 1 | 1;
+        }
+        $valueShift = $min;
+
+        do {
+            if ($attempts > 128) {
+                throw new \Exception('Could not generate valid random integer');
+            }
+            $randomByteString = self::generateCryptoKey($bytes);
+
+            $val = 0;
+            for ($i = 0; $i < $bytes; ++$i) {
+                $val |= ord($randomByteString[$i]) << ($i * 8);
+            }
+
+            $val &= $mask;
+            $val += $valueShift;
+
+            ++$attempts;
+
+        } while (!is_int($val) || $val > $max || $val < $min);
+
+        return (int) $val;
     }
 
     /**

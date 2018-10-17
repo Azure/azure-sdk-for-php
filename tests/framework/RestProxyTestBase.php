@@ -28,6 +28,7 @@ namespace Tests\framework;
 
 use WindowsAzure\Common\Internal\Logger;
 use WindowsAzure\Common\Internal\Serialization\XmlSerializer;
+use WindowsAzure\Common\Internal\Utilities;
 use WindowsAzure\Common\ServicesBuilder;
 use PHPUnit\Framework\TestCase;
 
@@ -52,7 +53,7 @@ class RestProxyTestBase extends TestCase
 
     protected function getTestName()
     {
-        return sprintf('onesdkphp%04x', mt_rand(0, 65535));
+        return sprintf('onesdkphp%04x', Utilities::generateRandomInt(0, 65535));
     }
 
     public static function assertHandler($file, $line, $code)
