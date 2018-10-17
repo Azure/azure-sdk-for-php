@@ -532,8 +532,7 @@ class Utilities
      *
      * See http://tools.ietf.org/html/rfc4122 for more information.
      *
-     * Note: This function is available on all platforms, while the
-     * com_create_guid() is only available for Windows.
+     * Note: See https://stackoverflow.com/a/15875555
      *
      * @static
      *
@@ -541,26 +540,23 @@ class Utilities
      */
     public static function getGuid()
     {
-        // @codingStandardsIgnoreStart
+        $data = self::generateCryptoKey(16);
 
-        return sprintf(
-            '%04x%04x-%04x-%04x-%02x%02x-%04x%04x%04x',
-            mt_rand(0, 65535),
-            mt_rand(0, 65535),          // 32 bits for "time_low"
-            mt_rand(0, 65535),          // 16 bits for "time_mid"
-            mt_rand(0, 4096) + 16384,   // 16 bits for "time_hi_and_version", with
-                                        // the most significant 4 bits being 0100
-                                        // to indicate randomly generated version
-            mt_rand(0, 64) + 128,       // 8 bits  for "clock_seq_hi", with
-                                        // the most significant 2 bits being 10,
-                                        // required by version 4 GUIDs.
-            mt_rand(0, 256),            // 8 bits  for "clock_seq_low"
-            mt_rand(0, 65535),          // 16 bits for "node 0" and "node 1"
-            mt_rand(0, 65535),          // 16 bits for "node 2" and "node 3"
-            mt_rand(0, 65535)           // 16 bits for "node 4" and "node 5"
-        );
+        $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // set version to 0100b = 4
+        $data[8] = chr(ord($data[8]) & 0x3f | 0x80); // set bits 6-7 to 10
 
-        // @codingStandardsIgnoreEnd
+        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+    }
+
+
+    /**
+     * Generates a GUID provided a 16 byte pseudo random string
+     * @param  string $data 16 bytes long data string
+     * @return string A new GUID
+     */
+    private static function generateGuid($data)
+    {
+        return $guid;
     }
 
     /**
