@@ -402,12 +402,7 @@ class ContentKey
             $aesKey = $this->pkcs5_pad($aesKey, 16);
         }
 
-        $encrypted = mcrypt_encrypt(
-            MCRYPT_RIJNDAEL_128, // AES
-            $aesKey,
-            $this->_id,
-            MCRYPT_MODE_ECB
-        );
+        $encrypted = openssl_encrypt($this->_id, 'aes-256-ecb', $aesKey, OPENSSL_RAW_DATA);
 
         $this->_checksum = base64_encode(substr($encrypted, 0, 8));
     }

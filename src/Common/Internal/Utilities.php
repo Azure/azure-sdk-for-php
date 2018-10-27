@@ -721,30 +721,13 @@ class Utilities
             sprintf(Resources::INVALID_STRING_LENGTH, 'initializationVector', '16')
         );
 
-        $blockCount = ceil(strlen($data) / 16);
-
-        $ctrData = '';
-        for ($i = 0; $i < $blockCount; ++$i) {
-            $ctrData .= $initializationVector;
-
-            // increment Initialization Vector
-            $j = 15;
-            do {
-                $digit = ord($initializationVector[$j]) + 1;
-                $initializationVector[$j] = chr($digit & 0xFF);
-
-                --$j;
-            } while (($digit == 0x100) && ($j >= 0));
-        }
-
-        $encryptCtrData = mcrypt_encrypt(
-            MCRYPT_RIJNDAEL_128,
+        return openssl_encrypt(
+            $data,
+            'aes-256-ctr',
             $key,
-            $ctrData,
-            MCRYPT_MODE_ECB
+            OPENSSL_RAW_DATA,
+            $initializationVector
         );
-
-        return $data ^ $encryptCtrData;
     }
 
     /**
