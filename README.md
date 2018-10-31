@@ -82,7 +82,7 @@ that your project requires and it will install and update them for you.
   php composer.phar require microsoft/windowsazure ^0.5
   ```
 
-### New to Compoer
+### New to Composer
 
 * Install Composer
   
@@ -276,7 +276,7 @@ foreach($entities as $entity){
 
 To get started using the Blob service you must include the `BlobService` and `BlobSettings` namespaces and set the `ACCOUNT_NAME` and `ACCOUNT_KEY` configuration settings for your credentials. Then you instantiate the wrapper using the `BlobService` factory.
 
-The following are examples of common operations performed with the Blob serivce. For more please read [How-to use the Blob service](http://www.windowsazure.com/en-us/develop/php/how-to-guides/blob-service/).
+The following are examples of common operations performed with the Blob service. For more please read [How-to use the Blob service](http://www.windowsazure.com/en-us/develop/php/how-to-guides/blob-service/).
 
 
 ### Create a container
@@ -357,7 +357,7 @@ try {
 
 To get started using the Queue service you must include the `QueueService` and `QueueSettings` namespaces and set the `ACCOUNT_NAME` and `ACCOUNT_KEY` configuration settings for your credentials. Then you instantiate the wrapper using the `QueueService` factory.
 
-The following are examples of common operations performed with the Queue serivce. For more please read [How-to use the Queue service](http://www.windowsazure.com/en-us/develop/php/how-to-guides/queue-service/).
+The following are examples of common operations performed with the Queue service. For more please read [How-to use the Queue service](http://www.windowsazure.com/en-us/develop/php/how-to-guides/queue-service/).
 
 
 ### Create a queue
@@ -646,7 +646,7 @@ $result = $serviceManagementRestProxy->createStorageService($name, $label, $opti
 
 ### Create a Cloud Service
 
-A cloud service is also known as a hosted service (from earlier versions of Microsoft Azure).  The **createHostedServices** method allows you to create a new hosted service by providing a hosted service name (which must be unique in Microsoft Azure), a label (the base 64-endcoded hosted service name), and a **CreateServiceOptions** object which allows you to set the location *or* the affinity group for your service.
+A cloud service is also known as a hosted service (from earlier versions of Microsoft Azure).  The **createHostedServices** method allows you to create a new hosted service by providing a hosted service name (which must be unique in Microsoft Azure), a label (the base 64-encoded hosted service name), and a **CreateServiceOptions** object which allows you to set the location *or* the affinity group for your service.
 
 ```PHP
 $name = "myhostedservice";
