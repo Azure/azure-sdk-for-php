@@ -98,7 +98,7 @@ that your project requires and it will install and update them for you.
   
   If you are new to Composer, its worth having a look at the [Basic Usage Guide](https://getcomposer.org/doc/01-basic-usage.md) to get 
   started. When you are ready, skip ahead to creating a `composer.json` config file interactively by running the following in a command prompt in 
-  the root of your project directory:
+  the root directory of your project:
   
   ```
   php composer.phar init
@@ -111,7 +111,7 @@ that your project requires and it will install and update them for you.
   ```
   php composer.phar install
   ```
-  Composer will download the correct version of this library to a `vendor` directory in the root of your project 
+  Composer will download the correct version of this library to a `vendor` in the root directory of your project 
 
 # Usage
 
