@@ -119,7 +119,7 @@ that your project requires and it will install and update them for you.
 
 There are four basic steps that have to be performed before you can make a call to any Microsoft Azure API when using the libraries.
 
-* First, include the autoloader script:
+* First, include the composer autoloader script:
 
   ```PHP
   require_once "vendor/autoload.php";
