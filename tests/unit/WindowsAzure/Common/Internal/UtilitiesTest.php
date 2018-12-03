@@ -605,8 +605,8 @@ class UtilitiesTest extends TestCase
         $initializationVector = str_pad($efectiveInitializationVector, 16, chr(255));
 
         // Test
-        $ecnrypted = Utilities::ctrCrypt($data, $key, $initializationVector);
-        $decrypted = Utilities::ctrCrypt($ecnrypted, $key, $initializationVector);
+        $encrypted = Utilities::ctrCrypt($data, $key, $initializationVector);
+        $decrypted = Utilities::ctrCrypt($encrypted, $key, $initializationVector);
 
         // Assert
         $this->assertEquals($data, $decrypted);

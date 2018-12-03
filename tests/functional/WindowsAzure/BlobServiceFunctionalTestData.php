@@ -47,6 +47,7 @@ use MicrosoftAzure\Storage\Common\Models\Logging;
 use MicrosoftAzure\Storage\Common\Models\Metrics;
 use MicrosoftAzure\Storage\Common\Models\RetentionPolicy;
 use MicrosoftAzure\Storage\Common\Models\ServiceProperties;
+use WindowsAzure\Common\Internal\Utilities;
 
 class BlobServiceFunctionalTestData
 {
@@ -61,7 +62,7 @@ class BlobServiceFunctionalTestData
 
     public static function setupData($accountName)
     {
-        $rInt = mt_rand(0, 1000000);
+        $rInt = Utilities::generateRandomInt(0, 1000000);
         self::$_accountName = $accountName;
         self::$testUniqueId = 'qa-'.$rInt.'-';
         self::$nonExistContainerPrefix = 'qa-'.($rInt. 1).'-';

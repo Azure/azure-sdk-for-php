@@ -532,8 +532,7 @@ class Utilities
      *
      * See http://tools.ietf.org/html/rfc4122 for more information.
      *
-     * Note: This function is available on all platforms, while the
-     * com_create_guid() is only available for Windows.
+     * Note: See https://stackoverflow.com/a/15875555
      *
      * @static
      *
@@ -541,26 +540,23 @@ class Utilities
      */
     public static function getGuid()
     {
-        // @codingStandardsIgnoreStart
+        $data = self::generateCryptoKey(16);
 
-        return sprintf(
-            '%04x%04x-%04x-%04x-%02x%02x-%04x%04x%04x',
-            mt_rand(0, 65535),
-            mt_rand(0, 65535),          // 32 bits for "time_low"
-            mt_rand(0, 65535),          // 16 bits for "time_mid"
-            mt_rand(0, 4096) + 16384,   // 16 bits for "time_hi_and_version", with
-                                        // the most significant 4 bits being 0100
-                                        // to indicate randomly generated version
-            mt_rand(0, 64) + 128,       // 8 bits  for "clock_seq_hi", with
-                                        // the most significant 2 bits being 10,
-                                        // required by version 4 GUIDs.
-            mt_rand(0, 256),            // 8 bits  for "clock_seq_low"
-            mt_rand(0, 65535),          // 16 bits for "node 0" and "node 1"
-            mt_rand(0, 65535),          // 16 bits for "node 2" and "node 3"
-            mt_rand(0, 65535)           // 16 bits for "node 4" and "node 5"
-        );
+        $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // set version to 0100b = 4
+        $data[8] = chr(ord($data[8]) & 0x3f | 0x80); // set bits 6-7 to 10
 
-        // @codingStandardsIgnoreEnd
+        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+    }
+
+
+    /**
+     * Generates a GUID provided a 16 byte pseudo random string
+     * @param  string $data 16 bytes long data string
+     * @return string A new GUID
+     */
+    private static function generateGuid($data)
+    {
+        return $guid;
     }
 
     /**
@@ -645,7 +641,59 @@ class Utilities
      */
     public static function generateCryptoKey($length)
     {
-        return openssl_random_pseudo_bytes($length);
+        // PHP>=7.0
+        if (function_exists('random_bytes')) {
+            return random_bytes($length);
+        }
+        
+        $buf = openssl_random_pseudo_bytes($length, $secure);
+
+        if ($buf !== false) {
+            return $buf;
+        }
+
+        throw new \Exception('PRNG failure');
+    }
+
+    /**
+     * Fetch a random integer between $min and $max inclusive
+     * @param  int $min
+     * @param  int $max
+     * @return int
+     */
+    public static function generateRandomInt($min, $max)
+    {
+        $range = $max - $min;
+        $bits = $bytes = $mask = $val = 0;
+        while ($range > 0) {
+            if ($bits % 8 === 0) {
+               ++$bytes;
+            }
+            ++$bits;
+            $range >>= 1;
+            $mask = $mask << 1 | 1;
+        }
+        $valueShift = $min;
+
+        do {
+            if ($attempts > 128) {
+                throw new \Exception('Could not generate valid random integer');
+            }
+            $randomByteString = self::generateCryptoKey($bytes);
+
+            $val = 0;
+            for ($i = 0; $i < $bytes; ++$i) {
+                $val |= ord($randomByteString[$i]) << ($i * 8);
+            }
+
+            $val &= $mask;
+            $val += $valueShift;
+
+            ++$attempts;
+
+        } while (!is_int($val) || $val > $max || $val < $min);
+
+        return (int) $val;
     }
 
     /**
@@ -673,30 +721,13 @@ class Utilities
             sprintf(Resources::INVALID_STRING_LENGTH, 'initializationVector', '16')
         );
 
-        $blockCount = ceil(strlen($data) / 16);
-
-        $ctrData = '';
-        for ($i = 0; $i < $blockCount; ++$i) {
-            $ctrData .= $initializationVector;
-
-            // increment Initialization Vector
-            $j = 15;
-            do {
-                $digit = ord($initializationVector[$j]) + 1;
-                $initializationVector[$j] = chr($digit & 0xFF);
-
-                --$j;
-            } while (($digit == 0x100) && ($j >= 0));
-        }
-
-        $encryptCtrData = mcrypt_encrypt(
-            MCRYPT_RIJNDAEL_128,
+        return openssl_encrypt(
+            $data,
+            'aes-256-ctr',
             $key,
-            $ctrData,
-            MCRYPT_MODE_ECB
+            OPENSSL_RAW_DATA,
+            $initializationVector
         );
-
-        return $data ^ $encryptCtrData;
     }
 
     /**
@@ -720,6 +751,12 @@ class Utilities
         return $result;
     }
 
+    /**
+     * Replace all hex characters in a string with lowercase
+     * and URL encode the resulting string.
+     * @param  string $str input string
+     * @return string URL Encoded string with 00-FF replaced with 00-ff
+     */
     public static function lowerUrlencode($str)
     {
         return preg_replace_callback('/%[0-9A-F]{2}/',
