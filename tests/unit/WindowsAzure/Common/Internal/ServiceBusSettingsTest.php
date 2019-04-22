@@ -129,7 +129,7 @@ class ServiceBusSettingsTest extends TestCase
         $expectedMsg = sprintf(
             Resources::INVALID_CONNECTION_STRING_SETTING_KEY,
             $invalidKey,
-            implode("\n", ['Endpoint', 'SharedSecretIssuer', 'SharedSecretValue'])
+            implode("\n", ['Endpoint', 'EntityPath', 'SharedSecretIssuer', 'SharedSecretValue'])
         );
         $this->setExpectedException('\RuntimeException', $expectedMsg);
 
@@ -182,15 +182,16 @@ class ServiceBusSettingsTest extends TestCase
      * @covers \WindowsAzure\Common\Internal\ServiceSettings::parseAndValidateKeys
      * @covers \WindowsAzure\Common\Internal\ServiceSettings::noMatch
      */
-    public function testCreateFromConnectionStringWithCaseInvesitive()
+    public function testCreateFromConnectionStringWithCaseInsensitive()
     {
         // Setup
-        $namepspace = 'mynamespace';
-        $expectedServiceBusEndpoint = "https://$namepspace.servicebus.windows.net";
+        $namespace = 'mynamespace';
+        $expectedServiceBusEndpoint = "https://$namespace.servicebus.windows.net";
+        $expectedServiceBusEntityPath = 'myqueue';
         $expectedWrapName = 'myname';
         $expectedWrapPassword = 'mypassword';
-        $expectedWrapEndpointUri = "https://$namepspace-sb.accesscontrol.windows.net/WRAPv0.9";
-        $connectionString = "eNdPoinT=$expectedServiceBusEndpoint;sHarEdsecRetiSsuer=$expectedWrapName;shArEdsecrEtvAluE=$expectedWrapPassword";
+        $expectedWrapEndpointUri = "https://$namespace-sb.accesscontrol.windows.net/WRAPv0.9";
+        $connectionString = "eNdPoinT=$expectedServiceBusEndpoint;sHarEdsecRetiSsuer=$expectedWrapName;shArEdsecrEtvAluE=$expectedWrapPassword;eNtItYpAtH=$expectedServiceBusEntityPath";
 
         // Test
         $actual = ServiceBusSettings::createFromConnectionString($connectionString);
@@ -198,6 +199,7 @@ class ServiceBusSettingsTest extends TestCase
         // Assert
         $this->assertInstanceOf('WindowsAzure\Common\Internal\IServiceFilter', $actual->getFilter());
         $this->assertEquals($expectedServiceBusEndpoint, $actual->getServiceBusEndpointUri());
+        $this->assertEquals($expectedServiceBusEntityPath, $actual->getServiceBusEntityPath());
     }
 
     /**

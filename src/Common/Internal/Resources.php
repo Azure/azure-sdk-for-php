@@ -61,6 +61,7 @@ class Resources {
     const CERTIFICATE_PATH_NAME = 'CertificatePath';
     const SERVICE_MANAGEMENT_ENDPOINT_NAME = 'ServiceManagementEndpoint';
     const SERVICE_BUS_ENDPOINT_NAME = 'Endpoint';
+    const SERVICE_BUS_ENTITY_PATH = 'EntityPath';
     const SHARED_SECRET_ISSUER_NAME = 'SharedSecretIssuer';
     const SHARED_SECRET_VALUE_NAME = 'SharedSecretValue';
     const SHARED_SHARED_ACCESS_KEY_NAME = 'SharedAccessKeyName';
