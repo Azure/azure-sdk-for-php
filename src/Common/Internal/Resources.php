@@ -408,7 +408,9 @@ class Resources {
     const LIST_RULES_PATH = '%s/subscriptions/%s/rules';
     const LIST_SUBSCRIPTIONS_PATH = '%s/subscriptions';
     const RECEIVE_MESSAGE_PATH = '%s/messages/head';
+    const RECEIVE_MESSAGE_DEADLETTER_PATH = '%s/$DeadLetterQueue/messages/head';
     const RECEIVE_SUBSCRIPTION_MESSAGE_PATH = '%s/subscriptions/%s/messages/head';
+    const RECEIVE_SUBSCRIPTION_MESSAGE_DEADLETTER_PATH = '%s/subscriptions/%s/$DeadLetterQueue/messages/head';
     const SEND_MESSAGE_PATH = '%s/messages';
     const RULE_PATH = '%s/subscriptions/%s/rules/%s';
     const SUBSCRIPTION_PATH = '%s/subscriptions/%s';

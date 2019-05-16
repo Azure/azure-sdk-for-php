@@ -54,6 +54,13 @@ class ReceiveMessageOptions
     private $_receiveMode;
 
     /**
+     * Flag to receive from deadletter instead
+     *
+     * @var bool
+     */
+    private $deadLetter = false;
+
+    /**
      * Creates a receive message option instance with default parameters.
      */
     public function __construct()
@@ -134,5 +141,23 @@ class ReceiveMessageOptions
     public function setPeekLock()
     {
         $this->_receiveMode = ReceiveMode::PEEK_LOCK;
+    }
+
+    /**
+     * Enable deadletter flag
+     */
+    public function setDeadLetter()
+    {
+        $this->deadLetter = true;
+    }
+
+    /**
+     * Get deadletter flag
+     *
+     * @return bool
+     */
+    public function getDeadLetter()
+    {
+        return $this->deadLetter;
     }
 }
