@@ -88,7 +88,7 @@ interface IServiceBus extends FilterableService
      *
      * @throws Exception
      *
-     * @return BrokeredMessage
+     * @return BrokeredMessage|null
      */
     public function receiveQueueMessage($queueName, ReceiveMessageOptions $receivedMessageOptions = null);
 
