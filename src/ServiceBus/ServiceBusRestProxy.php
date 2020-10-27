@@ -160,7 +160,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @param ReceiveMessageOptions|null $receiveMessageOptions The options to
      *                                                          receive the message
      *
-     * @return BrokeredMessage
+     * @return BrokeredMessage|null
      */
     public function receiveQueueMessage(
         $queueName,
@@ -193,7 +193,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @param ReceiveMessageOptions $receiveMessageOptions The options to
      *                                                     receive the message
      *
-     * @return BrokeredMessage
+     * @return BrokeredMessage|null
      */
     public function receiveMessage($path, ReceiveMessageOptions $receiveMessageOptions = null)
     {
@@ -293,7 +293,7 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
      * @param ReceiveMessageOptions|null $receiveMessageOptions The options to
      *                                                          receive the subscription message
      *
-     * @return BrokeredMessage
+     * @return BrokeredMessage|null
      */
     public function receiveSubscriptionMessage(
         $topicName,
