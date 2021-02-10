@@ -7,6 +7,14 @@ This project provides a set of PHP client libraries that make it easy to access
 Microsoft Azure tables, blobs, queues, service bus (queues and topics), service runtime and service management APIs. For documentation on how to host PHP applications on Microsoft Azure, please see the
 [Microsoft Azure PHP Developer Center](http://www.windowsazure.com/en-us/develop/php/).
 
+## Important Annoucement
+
+As of February 2021, the Azure SDK for PHP has entered a retirement phase and is no longer officially supported by Microsoft. This repository will no longer be maintained.  
+
+If you prefer to work in PHP, you can also directly [call the Azure REST API in PHP](https://docs.microsoft.com/en-us/rest/api/azure/) 
+
+Thank you for your support so far. Should you have any question, please feel free to open an Issue on GitHub.
+
 # Features
 
 * Tables
