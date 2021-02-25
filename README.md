@@ -11,7 +11,10 @@ Microsoft Azure tables, blobs, queues, service bus (queues and topics), service 
 
 As of February 2021, the Azure SDK for PHP has entered a retirement phase and is no longer officially supported by Microsoft. This repository will no longer be maintained.  
 
+If you prefer to work in PHP, you can directly call the [Azure REST API in PHP](https://docs.microsoft.com/en-us/rest/api/azure/)
+
 >NOTE: Please note that the Azure Storage SDK for PHP will be separately maintained in [its own repo](https://github.com/Azure/azure-storage-php)
+
 For more details, please refer to our [support policy here](SUPPORT.md) 
 
 # Features
