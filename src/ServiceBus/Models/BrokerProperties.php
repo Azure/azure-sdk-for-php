@@ -45,105 +45,105 @@ class BrokerProperties
     /**
      * The correlation ID.
      *
-     * @var string
+     * @var string|null
      */
     private $_correlationId;
 
     /**
      * The session ID.
      *
-     * @var string
+     * @var string|null
      */
     private $_sessionId;
 
     /**
      * The delivery count.
      *
-     * @var int
+     * @var int|null
      */
     private $_deliveryCount;
 
     /**
      * The locked until time.
      *
-     * @var \DateTime
+     * @var \DateTime|null
      */
     private $_lockedUntilUtc;
 
     /**
      * The lock token.
      *
-     * @var string
+     * @var string|null
      */
     private $_lockToken;
 
     /**
      * The message Id.
      *
-     * @var string
+     * @var string|null
      */
     private $_messageId;
 
     /**
      * The label.
      *
-     * @var string
+     * @var string|null
      */
     private $_label;
 
     /**
      * The reply to.
      *
-     * @var string
+     * @var string|null
      */
     private $_replyTo;
 
     /**
      * The sequence number.
      *
-     * @var string
+     * @var int|null
      */
     private $_sequenceNumber;
 
     /**
      * The time to live.
      *
-     * @var float
+     * @var float|null
      */
     private $_timeToLive;
 
     /**
      * The to.
      *
-     * @var string
+     * @var string|null
      */
     private $_to;
 
     /**
      * The scheduled enqueue time.
      *
-     * @var \DateTime
+     * @var \DateTime|null
      */
     private $_scheduledEnqueueTimeUtc;
 
     /**
      * The reply to session ID.
      *
-     * @var string
+     * @var string|null
      */
     private $_replyToSessionId;
 
     /**
      * The location of the message.
      *
-     * @var string
+     * @var string|null
      */
     private $_messageLocation;
 
     /**
      * The location of the lock.
      *
-     * @var string
+     * @var string|null
      */
     private $_lockLocation;
 
@@ -274,7 +274,7 @@ class BrokerProperties
     /**
      * Gets the correlation ID.
      *
-     * @return string
+     * @return string|null
      */
     public function getCorrelationId()
     {
@@ -284,7 +284,7 @@ class BrokerProperties
     /**
      * Sets the correlation ID.
      *
-     * @param string $correlationId The correlation ID
+     * @param string|null $correlationId The correlation ID
      */
     public function setCorrelationId($correlationId)
     {
@@ -294,7 +294,7 @@ class BrokerProperties
     /**
      * Gets the session ID.
      *
-     * @return string
+     * @return string|null
      */
     public function getSessionId()
     {
@@ -304,7 +304,7 @@ class BrokerProperties
     /**
      * Sets the session ID.
      *
-     * @param string $sessionId The ID of the session
+     * @param string|null $sessionId The ID of the session
      */
     public function setSessionId($sessionId)
     {
@@ -314,7 +314,7 @@ class BrokerProperties
     /**
      * Gets the delivery count.
      *
-     * @return int
+     * @return int|null
      */
     public function getDeliveryCount()
     {
@@ -324,7 +324,7 @@ class BrokerProperties
     /**
      * Sets the delivery count.
      *
-     * @param int $deliveryCount The count of the delivery
+     * @param int|null $deliveryCount The count of the delivery
      */
     public function setDeliveryCount($deliveryCount)
     {
@@ -334,7 +334,7 @@ class BrokerProperties
     /**
      * Gets the locked until time.
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getLockedUntilUtc()
     {
@@ -344,7 +344,7 @@ class BrokerProperties
     /**
      * Sets the locked until time.
      *
-     * @param \DateTime $lockedUntilUtc The locked until time
+     * @param \DateTime|null $lockedUntilUtc The locked until time
      */
     public function setLockedUntilUtc(\DateTime $lockedUntilUtc)
     {
@@ -354,7 +354,7 @@ class BrokerProperties
     /**
      * Gets lock token.
      *
-     * @return string
+     * @return string|null
      */
     public function getLockToken()
     {
@@ -364,7 +364,7 @@ class BrokerProperties
     /**
      * Sets the lock token.
      *
-     * @param string $lockToken The lock token
+     * @param string|null $lockToken The lock token
      */
     public function setLockToken($lockToken)
     {
@@ -374,7 +374,7 @@ class BrokerProperties
     /**
      * Gets the message ID.
      *
-     * @return string
+     * @return string|null
      */
     public function getMessageId()
     {
@@ -384,7 +384,7 @@ class BrokerProperties
     /**
      * Sets the message ID.
      *
-     * @param string $messageId The ID of the message
+     * @param string|null $messageId The ID of the message
      */
     public function setMessageId($messageId)
     {
@@ -394,7 +394,7 @@ class BrokerProperties
     /**
      * Gets the label.
      *
-     * @return string
+     * @return string|null
      */
     public function getLabel()
     {
@@ -404,7 +404,7 @@ class BrokerProperties
     /**
      * Sets the label.
      *
-     * @param string $label The label of the broker property
+     * @param string|null $label The label of the broker property
      */
     public function setLabel($label)
     {
@@ -414,7 +414,7 @@ class BrokerProperties
     /**
      * Gets the reply to.
      *
-     * @return string
+     * @return string|null
      */
     public function getReplyTo()
     {
@@ -424,7 +424,7 @@ class BrokerProperties
     /**
      * Sets the reply to.
      *
-     * @param string $replyTo The reply to
+     * @param string|null $replyTo The reply to
      */
     public function setReplyTo($replyTo)
     {
@@ -434,7 +434,7 @@ class BrokerProperties
     /**
      * Gets the sequence number.
      *
-     * @return int
+     * @return int|null
      */
     public function getSequenceNumber()
     {
@@ -444,7 +444,7 @@ class BrokerProperties
     /**
      * Sets the sequence number.
      *
-     * @param int $sequenceNumber The sequence number
+     * @param int|null $sequenceNumber The sequence number
      */
     public function setSequenceNumber($sequenceNumber)
     {
@@ -454,7 +454,7 @@ class BrokerProperties
     /**
      * Gets time to live.
      *
-     * @return string
+     * @return float|null
      */
     public function getTimeToLive()
     {
@@ -464,7 +464,7 @@ class BrokerProperties
     /**
      * Sets time to live.
      *
-     * @param string $timeToLive The time to live
+     * @param float|null $timeToLive The time to live
      */
     public function setTimeToLive($timeToLive)
     {
@@ -474,7 +474,7 @@ class BrokerProperties
     /**
      * Gets to.
      *
-     * @return string
+     * @return string|null
      */
     public function getTo()
     {
@@ -484,7 +484,7 @@ class BrokerProperties
     /**
      * Sets to.
      *
-     * @param string $to To
+     * @param string|null $to To
      */
     public function setTo($to)
     {
@@ -494,7 +494,7 @@ class BrokerProperties
     /**
      * Gets scheduled enqueue time UTC.
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getScheduledEnqueueTimeUtc()
     {
@@ -504,7 +504,7 @@ class BrokerProperties
     /**
      * Sets scheduled enqueue time UTC.
      *
-     * @param \DateTime $scheduledEnqueueTimeUtc The scheduled enqueue time
+     * @param \DateTime|null $scheduledEnqueueTimeUtc The scheduled enqueue time
      */
     public function setScheduledEnqueueTimeUtc(\DateTime $scheduledEnqueueTimeUtc)
     {
@@ -514,7 +514,7 @@ class BrokerProperties
     /**
      * Gets reply to session ID.
      *
-     * @return string
+     * @return string|null
      */
     public function getReplyToSessionId()
     {
@@ -524,7 +524,7 @@ class BrokerProperties
     /**
      * Sets reply to session.
      *
-     * @param string $replyToSessionId reply to session
+     * @param string|null $replyToSessionId reply to session
      */
     public function setReplyToSessionId($replyToSessionId)
     {
@@ -534,7 +534,7 @@ class BrokerProperties
     /**
      * Gets message location.
      *
-     * @return string
+     * @return string|null
      */
     public function getMessageLocation()
     {
@@ -544,7 +544,7 @@ class BrokerProperties
     /**
      * Sets the location of the message.
      *
-     * @param string $messageLocation The location of the message
+     * @param string|null $messageLocation The location of the message
      */
     public function setMessageLocation($messageLocation)
     {
@@ -554,7 +554,7 @@ class BrokerProperties
     /**
      * Gets the location of the lock.
      *
-     * @return string
+     * @return string|null
      */
     public function getLockLocation()
     {
@@ -564,7 +564,7 @@ class BrokerProperties
     /**
      * Sets the location of the lock.
      *
-     * @param string $lockLocation The location of the lock
+     * @param string|null $lockLocation The location of the lock
      */
     public function setLockLocation($lockLocation)
     {
