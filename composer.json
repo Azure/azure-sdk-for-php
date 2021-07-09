@@ -1,5 +1,5 @@
 {
-    "name": "microsoft/windowsazure",
+    "name": "myqaa/azure-sdk-for-php",
     "description": "This project provides a set of PHP client libraries that make it easy to access Windows Azure tables, blobs, queues, service runtime and service management APIs.",
     "keywords": [ "php", "azure", "sdk" ],
     "license": "Apache-2.0",
