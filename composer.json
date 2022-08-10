@@ -10,14 +10,17 @@
         }
     ],
     "require": {
-        "php": ">=5.6",
+        "php": ">=7.2",
         "pear/net_url2": "^2.2",
         "pear/mail_mime": "^1.10",
         "firebase/php-jwt": "^4.0 || ^5.0",
-        "microsoft/azure-storage": "^0.19.1",
-        "guzzlehttp/guzzle": "^6.2",
-        "zendframework/zend-mime": "^2.6",
-        "zendframework/zend-mail": "^2.7"
+        "microsoft/azure-storage-blob": "^1.0",
+        "microsoft/azure-storage-file": "^1.0",
+        "microsoft/azure-storage-queue": "^1.0",
+        "microsoft/azure-storage-table": "^1.0",
+        "guzzlehttp/guzzle": "^6.2 || ^7.0.1",
+        "laminas/laminas-mime": "^2.6",
+        "laminas/laminas-mail": "^2.7"
     },
     "require-dev": {
         "mikey179/vfsStream": "^1.6",
