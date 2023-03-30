@@ -88,7 +88,7 @@ interface IServiceBus extends FilterableService
      *
      * @throws Exception
      *
-     * @return BrokeredMessage
+     * @return BrokeredMessage|null
      */
     public function receiveQueueMessage($queueName, ReceiveMessageOptions $receivedMessageOptions = null);
 
@@ -102,7 +102,7 @@ interface IServiceBus extends FilterableService
      *
      * @throws Exception
      *
-     * @return BrokeredMessage
+     * @return BrokeredMessage|null
      */
     public function receiveMessage($path, ReceiveMessageOptions $receiveMessageOptions);
 
@@ -128,7 +128,7 @@ interface IServiceBus extends FilterableService
      *
      * @throws Exception
      *
-     * @return BrokeredMessage
+     * @return BrokeredMessage|null
      */
     public function receiveSubscriptionMessage(
         $topicName,

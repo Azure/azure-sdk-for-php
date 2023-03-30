@@ -58,14 +58,14 @@ class BrokeredMessage
     /**
      * The content type of the brokered message.
      *
-     * @var string
+     * @var string|null
      */
     private $_contentType;
 
     /**
      * The date of the brokered message.
      *
-     * @var string
+     * @var string|null
      */
     private $_date;
 
@@ -132,7 +132,7 @@ class BrokeredMessage
     /**
      * Gets the content type of the brokered message.
      *
-     * @return string
+     * @return string|null
      */
     public function getContentType()
     {
@@ -142,7 +142,7 @@ class BrokeredMessage
     /**
      * Sets the content type of the brokered message.
      *
-     * @param string $contentType The content type of
+     * @param string|null $contentType The content type of
      *                            the brokered message
      */
     public function setContentType($contentType)
@@ -153,7 +153,7 @@ class BrokeredMessage
     /**
      * Gets the date of the brokered message.
      *
-     * @return string
+     * @return string|null
      */
     public function getDate()
     {
@@ -163,7 +163,7 @@ class BrokeredMessage
     /**
      * Sets the date of the brokered message.
      *
-     * @param string $date Sets the date of the brokered message
+     * @param string|null $date Sets the date of the brokered message
      */
     public function setDate($date)
     {
@@ -211,7 +211,7 @@ class BrokeredMessage
     /**
      * Gets the delivery count.
      *
-     * @return int
+     * @return int|null
      */
     public function getDeliveryCount()
     {
@@ -221,7 +221,7 @@ class BrokeredMessage
     /**
      * Sets the delivery count.
      *
-     * @param int $deliveryCount The times that the message has been delivered
+     * @param int|null $deliveryCount The times that the message has been delivered
      */
     public function setDeliveryCount($deliveryCount)
     {
@@ -231,7 +231,7 @@ class BrokeredMessage
     /**
      * Gets the ID of the message.
      *
-     * @return string
+     * @return string|null
      */
     public function getMessageId()
     {
@@ -241,7 +241,7 @@ class BrokeredMessage
     /**
      * Sets the ID of the message.
      *
-     * @param string $messageId The ID of the message
+     * @param string|null $messageId The ID of the message
      */
     public function setMessageId($messageId)
     {
@@ -251,7 +251,7 @@ class BrokeredMessage
     /**
      * Gets the sequence number.
      *
-     * @return int
+     * @return int|null
      */
     public function getSequenceNumber()
     {
@@ -261,7 +261,7 @@ class BrokeredMessage
     /**
      * Sets the sequence number.
      *
-     * @param int $sequenceNumber The sequence number
+     * @param int|null $sequenceNumber The sequence number
      */
     public function setSequenceNumber($sequenceNumber)
     {
@@ -271,7 +271,7 @@ class BrokeredMessage
     /**
      * Gets the time to live.
      *
-     * @return string
+     * @return float|null
      */
     public function getTimeToLive()
     {
@@ -281,7 +281,7 @@ class BrokeredMessage
     /**
      * Sets the time to live.
      *
-     * @param string $timeToLive The time to live
+     * @param float|null $timeToLive The time to live
      */
     public function setTimeToLive($timeToLive)
     {
@@ -291,7 +291,7 @@ class BrokeredMessage
     /**
      * Gets the lock token.
      *
-     * @return string
+     * @return string|null
      */
     public function getLockToken()
     {
@@ -301,7 +301,7 @@ class BrokeredMessage
     /**
      * Sets the lock token.
      *
-     * @param string $lockToken The token of the lock
+     * @param string|null $lockToken The token of the lock
      */
     public function setLockToken($lockToken)
     {
@@ -311,7 +311,7 @@ class BrokeredMessage
     /**
      * Gets the time of locked until UTC.
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getLockedUntilUtc()
     {
@@ -331,7 +331,7 @@ class BrokeredMessage
     /**
      * Gets the correlation ID.
      *
-     * @return string
+     * @return string|null
      */
     public function getCorrelationId()
     {
@@ -341,7 +341,7 @@ class BrokeredMessage
     /**
      * Sets the correlation ID.
      *
-     * @param string $correlationId The ID of the correlation
+     * @param string|null $correlationId The ID of the correlation
      */
     public function setCorrelationId($correlationId)
     {
@@ -351,7 +351,7 @@ class BrokeredMessage
     /**
      * Gets the session ID.
      *
-     * @return string
+     * @return string|null
      */
     public function getSessionId()
     {
@@ -361,7 +361,7 @@ class BrokeredMessage
     /**
      * Sets the session ID.
      *
-     * @param string $sessionId The ID of the session
+     * @param string|null $sessionId The ID of the session
      */
     public function setSessionId($sessionId)
     {
@@ -371,7 +371,7 @@ class BrokeredMessage
     /**
      * Gets the label.
      *
-     * @return string
+     * @return string|null
      */
     public function getLabel()
     {
@@ -381,7 +381,7 @@ class BrokeredMessage
     /**
      * Sets the label.
      *
-     * @param string $label The label of the broker properties
+     * @param string|null $label The label of the broker properties
      */
     public function setLabel($label)
     {
@@ -391,7 +391,7 @@ class BrokeredMessage
     /**
      * Gets reply to.
      *
-     * @return string
+     * @return string|null
      */
     public function getReplyTo()
     {
@@ -401,7 +401,7 @@ class BrokeredMessage
     /**
      * Sets the reply to.
      *
-     * @param string $replyTo The reply to value
+     * @param string|null $replyTo The reply to value
      */
     public function setReplyTo($replyTo)
     {
@@ -411,7 +411,7 @@ class BrokeredMessage
     /**
      * Gets to.
      *
-     * @return string
+     * @return string|null
      */
     public function getTo()
     {
@@ -421,7 +421,7 @@ class BrokeredMessage
     /**
      * Sets the to.
      *
-     * @param string $to to
+     * @param string|null $to to
      */
     public function setTo($to)
     {
@@ -431,7 +431,7 @@ class BrokeredMessage
     /**
      * Gets the scheduled enqueue time.
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getScheduledEnqueueTimeUtc()
     {
@@ -451,7 +451,7 @@ class BrokeredMessage
     /**
      * Gets the reply to session ID.
      *
-     * @return string
+     * @return string|null
      */
     public function getReplyToSessionId()
     {
@@ -461,7 +461,7 @@ class BrokeredMessage
     /**
      * Sets the reply to session ID.
      *
-     * @param string $replyToSessionId The session ID of the reply to recipient
+     * @param string|null $replyToSessionId The session ID of the reply to recipient
      */
     public function setReplyToSessionId($replyToSessionId)
     {
@@ -471,7 +471,7 @@ class BrokeredMessage
     /**
      * Gets the message location.
      *
-     * @return string
+     * @return string|null
      */
     public function getMessageLocation()
     {
@@ -481,7 +481,7 @@ class BrokeredMessage
     /**
      * Sets the message location.
      *
-     * @param string $messageLocation The location of the message
+     * @param string|null $messageLocation The location of the message
      */
     public function setMessageLocation($messageLocation)
     {
@@ -491,7 +491,7 @@ class BrokeredMessage
     /**
      * Gets the location of the lock.
      *
-     * @return string
+     * @return string|null
      */
     public function getLockLocation()
     {
@@ -501,7 +501,7 @@ class BrokeredMessage
     /**
      * Sets the location of the lock.
      *
-     * @param string $lockLocation The location of the lock
+     * @param string|null $lockLocation The location of the lock
      */
     public function setLockLocation($lockLocation)
     {
