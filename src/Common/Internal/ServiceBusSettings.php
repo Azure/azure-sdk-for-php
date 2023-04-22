@@ -50,6 +50,11 @@ class ServiceBusSettings extends ServiceSettings {
     private $_serviceBusEndpointUri;
 
     /**
+     * @var string|null
+     */
+    private $_serviceBusEntityPath;
+
+    /**
      * @var string
      */
     private $_wrapEndpointUri;
@@ -91,6 +96,13 @@ class ServiceBusSettings extends ServiceSettings {
     private static $_serviceBusEndpointSetting;
 
     /**
+     * Validator for the EntityPath setting.
+     *
+     * @var array
+     */
+    private static $_serviceBusEntityPathSetting;
+
+    /**
      * Validator for the StsEndpoint setting. Must be a valid Uri.
      *
      * @var array
@@ -128,6 +140,10 @@ class ServiceBusSettings extends ServiceSettings {
             Validate::getIsValidUri()
         );
 
+        self::$_serviceBusEntityPathSetting = self::setting(
+            Resources::SERVICE_BUS_ENTITY_PATH
+        );
+
         self::$_wrapNameSetting = self::setting(
             Resources::SHARED_SECRET_ISSUER_NAME
         );
@@ -150,6 +166,7 @@ class ServiceBusSettings extends ServiceSettings {
         );
 
         self::$validSettingKeys[] = Resources::SERVICE_BUS_ENDPOINT_NAME;
+        self::$validSettingKeys[] = Resources::SERVICE_BUS_ENTITY_PATH;
         self::$validSettingKeys[] = Resources::SHARED_SECRET_ISSUER_NAME;
         self::$validSettingKeys[] = Resources::SHARED_SECRET_VALUE_NAME;
         self::$validSettingKeys[] = Resources::SHARED_SHARED_ACCESS_KEY_NAME;
@@ -161,14 +178,16 @@ class ServiceBusSettings extends ServiceSettings {
      * Creates new Service Bus settings instance.
      * @param type $serviceBusEndpoint The Service Bus endpoint uri
      * @param type $filter
+     * @param string $serviceBusEntityPath
      */
     public function __construct(
         $serviceBusEndpoint,
-        $filter
+        $filter,
+        $serviceBusEntityPath = null
     ) {
         $this->_serviceBusEndpointUri = $serviceBusEndpoint;
         $this->_filter = $filter;
-
+        $this->_serviceBusEntityPath = $serviceBusEntityPath;
     }
 
     /**
@@ -182,6 +201,7 @@ class ServiceBusSettings extends ServiceSettings {
             self::$_wrapPasswordSetting,
         ];
         $optional = [
+            self::$_serviceBusEntityPathSetting,
             self::$_wrapEndpointUriSetting,
         ];
 
@@ -189,6 +209,10 @@ class ServiceBusSettings extends ServiceSettings {
 
         $endpoint = Utilities::tryGetValueInsensitive(
             Resources::SERVICE_BUS_ENDPOINT_NAME,
+            $tokenizedSettings
+        );
+        $entityPath = Utilities::tryGetValueInsensitive(
+            Resources::SERVICE_BUS_ENTITY_PATH,
             $tokenizedSettings
         );
 
@@ -214,7 +238,7 @@ class ServiceBusSettings extends ServiceSettings {
             $issuerName,
             $issuerValue,
             self::createWrapService($wrapEndpointUri)
-        ));
+        ), $entityPath);
     }
     /**
      * @param array $tokenizedSettings
@@ -227,12 +251,17 @@ class ServiceBusSettings extends ServiceSettings {
             self::$_sasKeySetting,
         ];
         $optional = [
+            self::$_serviceBusEntityPathSetting,
             self::$_wrapEndpointUriSetting,
         ];
         $matchedSpecs = self::getMatchedSpecs($tokenizedSettings, $required, $optional, $connectionString);
 
         $endpoint = Utilities::tryGetValueInsensitive(
             Resources::SERVICE_BUS_ENDPOINT_NAME,
+            $tokenizedSettings
+        );
+        $entityPath = Utilities::tryGetValueInsensitive(
+            Resources::SERVICE_BUS_ENTITY_PATH,
             $tokenizedSettings
         );
 
@@ -248,7 +277,7 @@ class ServiceBusSettings extends ServiceSettings {
         return new self($endpoint, new SASFilter(
             $sharedAccessKeyName,
             $sharedAccessKey
-        ));
+        ), $entityPath);
     }
     /**
      * @param $wrapEndpointUri
@@ -303,6 +332,15 @@ class ServiceBusSettings extends ServiceSettings {
      */
     public function getServiceBusEndpointUri() {
         return $this->_serviceBusEndpointUri;
+    }
+
+    /**
+     * Gets the Service Bus entity path.
+     *
+     * @return string|null
+     */
+    public function getServiceBusEntityPath() {
+        return $this->_serviceBusEntityPath;
     }
 
     /**
