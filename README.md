@@ -78,27 +78,50 @@ cd ./azure-sdk-for-php
 
 ## Install via Composer
 
-* Create a file named **composer.json** in the root of your project and add the following code to it:
+[Composer](https://getcomposer.org/) is a dependency management tool for PHP. It allows you to specify libraries (like this one)
+that your project requires and it will install and update them for you.
 
-  ```json
-  {
-      "require": {
-          "microsoft/windowsazure": "^0.5"
-      }
-  }
+### Already using Composer
+
+* Require Package
+
+  If you would to added this package to an existing project that already has a `composer.json`, you can do so by running 
+  the following in a command prompt in the root of your project directory:
+  
+  ```
+  php composer.phar require microsoft/windowsazure ^0.5
   ```
 
-* Download **[composer.phar](http://getcomposer.org/composer.phar)** in your project root.
+### New to Composer
 
-* Open a command prompt and execute this in your project root
-
-  ```
-  php composer.phar install
-  ```
+* Install Composer
+  
+   If you do not yet have Composer, you can download a copy for your project using [these instructions](https://getcomposer.org/download/).
+   You can also install it globally [on linux](https://getcomposer.org/doc/00-intro.md#globally) or on Windows using the 
+[Windows Installer](https://getcomposer.org/doc/00-intro.md#installation-windows)
 
   > **Note**
   >
   > On Windows, you will also need to add the Git executable to your PATH environment variable.
+  
+* Create *composer.json*
+  
+  If you are new to Composer, its worth having a look at the [Basic Usage Guide](https://getcomposer.org/doc/01-basic-usage.md) to get 
+  started. When you are ready, skip ahead to creating a `composer.json` config file interactively by running the following in a command prompt in 
+  the root directory of your project:
+  
+  ```
+  php composer.phar init
+  ```
+  When asked if you would like to define your dependencies, select *yes* and search for the *microsoft/windowsazure* package.
+
+* Install Package
+
+  Lastly, still in a command prompt in your project root, execute the following: 
+  ```
+  php composer.phar install
+  ```
+  Composer will download the correct version of this library to a `vendor` in the root directory of your project 
 
 # Usage
 
@@ -106,7 +129,7 @@ cd ./azure-sdk-for-php
 
 There are four basic steps that have to be performed before you can make a call to any Microsoft Azure API when using the libraries.
 
-* First, include the autoloader script:
+* First, include the composer autoloader script:
 
   ```PHP
   require_once "vendor/autoload.php";
@@ -263,7 +286,7 @@ foreach($entities as $entity){
 
 To get started using the Blob service you must include the `BlobService` and `BlobSettings` namespaces and set the `ACCOUNT_NAME` and `ACCOUNT_KEY` configuration settings for your credentials. Then you instantiate the wrapper using the `BlobService` factory.
 
-The following are examples of common operations performed with the Blob serivce. For more please read [How-to use the Blob service](http://www.windowsazure.com/en-us/develop/php/how-to-guides/blob-service/).
+The following are examples of common operations performed with the Blob service. For more please read [How-to use the Blob service](http://www.windowsazure.com/en-us/develop/php/how-to-guides/blob-service/).
 
 
 ### Create a container
@@ -344,7 +367,7 @@ try {
 
 To get started using the Queue service you must include the `QueueService` and `QueueSettings` namespaces and set the `ACCOUNT_NAME` and `ACCOUNT_KEY` configuration settings for your credentials. Then you instantiate the wrapper using the `QueueService` factory.
 
-The following are examples of common operations performed with the Queue serivce. For more please read [How-to use the Queue service](http://www.windowsazure.com/en-us/develop/php/how-to-guides/queue-service/).
+The following are examples of common operations performed with the Queue service. For more please read [How-to use the Queue service](http://www.windowsazure.com/en-us/develop/php/how-to-guides/queue-service/).
 
 
 ### Create a queue
@@ -633,7 +656,7 @@ $result = $serviceManagementRestProxy->createStorageService($name, $label, $opti
 
 ### Create a Cloud Service
 
-A cloud service is also known as a hosted service (from earlier versions of Microsoft Azure).  The **createHostedServices** method allows you to create a new hosted service by providing a hosted service name (which must be unique in Microsoft Azure), a label (the base 64-endcoded hosted service name), and a **CreateServiceOptions** object which allows you to set the location *or* the affinity group for your service.
+A cloud service is also known as a hosted service (from earlier versions of Microsoft Azure).  The **createHostedServices** method allows you to create a new hosted service by providing a hosted service name (which must be unique in Microsoft Azure), a label (the base 64-encoded hosted service name), and a **CreateServiceOptions** object which allows you to set the location *or* the affinity group for your service.
 
 ```PHP
 $name = "myhostedservice";
