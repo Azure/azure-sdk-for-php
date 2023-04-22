@@ -98,4 +98,32 @@ class ReceiveMessageOptionsTest extends TestCase
             $actual
         );
     }
+
+    /**
+     * @covers \WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::getDeadLetter
+     * @covers \WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::setDeadLetter
+     */
+    public function testGetSetDeadLetter()
+    {
+        // Setup
+        $receiveMessageOptions = new ReceiveMessageOptions();
+
+        // Test
+        $receiveMessageOptions->setDeadLetter();
+
+        // Assert
+        $this->assertTrue($receiveMessageOptions->getDeadLetter());
+    }
+
+    /**
+     * @covers \WindowsAzure\ServiceBus\Models\ReceiveMessageOptions::getDeadLetter
+     */
+    public function testGetDeadLetterByDefault()
+    {
+        // Setup
+        $receiveMessageOptions = new ReceiveMessageOptions();
+
+        // Assert
+        $this->assertFalse($receiveMessageOptions->getDeadLetter());
+    }
 }

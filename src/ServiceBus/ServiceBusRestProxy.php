@@ -166,7 +166,12 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $queueName,
         ReceiveMessageOptions $receiveMessageOptions = null
     ) {
-        $queueMessagePath = sprintf(Resources::RECEIVE_MESSAGE_PATH, $queueName);
+        $pathFormat = Resources::RECEIVE_MESSAGE_PATH;
+        if ($receiveMessageOptions->getDeadLetter()) {
+            $pathFormat = Resources::RECEIVE_MESSAGE_DEADLETTER_PATH;
+        }
+
+        $queueMessagePath = sprintf($pathFormat, $queueName);
 
         return $this->receiveMessage(
             $queueMessagePath,
@@ -300,8 +305,13 @@ class ServiceBusRestProxy extends ServiceRestProxy implements IServiceBus
         $subscriptionName,
         ReceiveMessageOptions $receiveMessageOptions = null
     ) {
+        $pathFormat = Resources::RECEIVE_SUBSCRIPTION_MESSAGE_PATH;
+        if ($receiveMessageOptions->getDeadLetter()) {
+            $pathFormat = Resources::RECEIVE_SUBSCRIPTION_MESSAGE_DEADLETTER_PATH;
+        }
+
         $messagePath = sprintf(
-            Resources::RECEIVE_SUBSCRIPTION_MESSAGE_PATH,
+            $pathFormat,
             $topicName,
             $subscriptionName
         );
