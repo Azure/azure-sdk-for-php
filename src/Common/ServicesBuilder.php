@@ -82,11 +82,13 @@ class ServicesBuilder
     /**
      * Gets the HTTP client used in the REST services construction.
      *
+     * @param array $options Array of options for guzzle
+     *
      * @return IHttpClient
      */
-    protected function httpClient()
+    protected function httpClient($options = array())
     {
-        return new HttpClient();
+        return new HttpClient(Resources::EMPTY_STRING, Resources::EMPTY_STRING, $options);
     }
 
     /**
@@ -216,13 +218,13 @@ class ServicesBuilder
      *
      * @return IServiceBus
      */
-    public function createServiceBusService($connectionString)
+    public function createServiceBusService($connectionString, $options = array())
     {
         $settings = ServiceBusSettings::createFromConnectionString(
             $connectionString
         );
 
-        $httpClient = $this->httpClient();
+        $httpClient = $this->httpClient($options);
         $serializer = $this->serializer();
         $serviceBusWrapper = new ServiceBusRestProxy(
             $httpClient,

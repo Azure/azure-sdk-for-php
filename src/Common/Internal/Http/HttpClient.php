@@ -99,10 +99,12 @@ class HttpClient implements IHttpClient
      *
      * @param string $certificatePath          The certificate path
      * @param string $certificateAuthorityPath The path of the certificate authority
+     * @param array  $options                   Array of options for guzzle
      */
     public function __construct(
         $certificatePath = Resources::EMPTY_STRING,
-        $certificateAuthorityPath = Resources::EMPTY_STRING
+        $certificateAuthorityPath = Resources::EMPTY_STRING,
+        $options = array()
     ) {
         $this->_config = [
             Resources::USE_BRACKETS => true,
@@ -127,6 +129,8 @@ class HttpClient implements IHttpClient
 
         $this->_requestUrl = null;
         $this->_expectedStatusCodes = [];
+
+        $this->_config = array_merge($this->_config, $options);
     }
 
     /**
