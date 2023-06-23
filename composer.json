@@ -15,9 +15,9 @@
         "pear/mail_mime": "^1.10",
         "firebase/php-jwt": "^4.0 || ^5.0",
         "microsoft/azure-storage": "^0.19.1",
-        "guzzlehttp/guzzle": "^6.2",
-        "zendframework/zend-mime": "^2.6",
-        "zendframework/zend-mail": "^2.7"
+        "guzzlehttp/guzzle": "^7.0",
+        "laminas/laminas-mime": "^2.11",
+        "laminas/laminas-mail": "^2.23"
     },
     "require-dev": {
         "mikey179/vfsStream": "^1.6",
